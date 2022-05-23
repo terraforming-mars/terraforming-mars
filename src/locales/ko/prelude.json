@@ -1,106 +1,105 @@
 {
-    "Allied Banks": "",
-    "Increase your M€ production 4 steps. Gain 3 M€.": "",
+    "Allied Banks": "연합 은행",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "메가크레딧 생산력 4 증가. 3 M€ 획득.",
 
-    "Aquifer Turbines": "",
-    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "",
+    "Aquifer Turbines": "대수층 수력터빈",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "해양 타일 1장 배치. 에너지 생산력 2 증가. 3 M€ 제거.",
 
-    "Biofuels": "",
-    "Increase your energy and plant production 1 step. Gain 2 plants.": "",
+    "Biofuels": "바이오 연료",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "식물 생산력 1 증가. 에너지 생산력 1 증가. 식물 자원 2개 획득.",
 
-    "Biolab": "",
-    "Increase your plant production 1 step. Draw 3 cards.": "",
+    "Biolab": "생명공학실험실",
+    "Increase your plant production 1 step. Draw 3 cards.": "식물 생산력 1 증가. 카드 3장 획득.",
 
-    "Biosphere Support": "",
-    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "",
+    "Biosphere Support": "생물권 유지시설",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "메가크레딧 생산력 1 감소. 식물 생산력 2 증가.",
 
-    "Business Empire": "",
-    "Increase your M€ production 6 steps. Pay 6 M€.": "",
+    "Business Empire": "재벌",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "메가크레딧 생산력 6 증가. 6 M€ 제거.",
 
-    "Dome Farming": "",
-    "Increase your M€ production 2 steps and plant production 1 step.": "",
+    "Dome Farming": "돔 농장",
+    "Increase your M€ production 2 steps and plant production 1 step.": "식물 생산력 1 증가. 메가크레딧 생산력 2 증가.",
 
-    "Donation": "",
-    "Gain 21 M€.": "",
+    "Donation": "기부금",
+    "Gain 21 M€.": "21 M€ 획득.",
 
-    "Early Settlement": "",
-    "Increase your plant production 1 step. Place a city tile.": "",
+    "Early Settlement": "초기 정착지",
+    "Increase your plant production 1 step. Place a city tile.": "도시 타일 1장 배치. 식물 생산력 1 증가.",
 
-    "Ecology Experts": "",
-    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "",
+    "Ecology Experts": "생태학 전문가 그룹",
+    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "식물 생산력 1 증가. 추진 조건 중 행성 지표 무시하고, 카드 1장 사용(추진비용 지불).",
 
-    "Eccentric Sponsor": "",
-    "Play a card from hand, reducing its cost by 25 M€": "",
+    "Eccentric Sponsor": "괴짜 후원자",
+    "Play a card from hand, reducing its cost by 25 M€": "추진 비용을 25 M€ 할인해서, 즉시 손에 카드 1장 사용.",
 
-    "Experimental Forest": "",
-    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "",
+    "Experimental Forest": "시험림",
+    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "녹지 타일 1개 배치. 프로젝트 덱 공개 후, 식물 카드 2장 획득. 나머지 카드는 버림.",
 
-    "Galilean Mining": "",
-    "Increase your titanium production 2 steps. Pay 5 M€.": "",
+    "Galilean Mining": "갈릴레이 위성 채굴시설",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "티타늄 생산력 2 증가. 5 M€ 제거.",
 
-    "Great Aquifer": "",
-    "Place 2 Ocean tiles.": "",
+    "Great Aquifer": "대규모 대수층",
+    "Place 2 Ocean tiles.": "해양 타일 2장 배치.",
 
-    "Huge Asteroid": "",
-    "Increase Temperature 3 steps. Pay 5 M€.": "",
+    "Huge Asteroid": "초대형 소행성",
+    "Increase Temperature 3 steps. Pay 5 M€.": "기온 3단계 상승. 5 M€ 제거.",
 
-    "Io Research Outpost": "",
-    "Increase your titanium production 1 step. Draw a card.": "",
+    "Io Research Outpost": "이오 연구 전진기지",
+    "Increase your titanium production 1 step. Draw a card.": "티타늄 생산력 1 증가. 카드 1장 획득.",
 
-    "Loan": "",
-    "Gain 30 M€. Decrease your M€ production 2 steps.": "",
+    "Loan": "대출",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "메가크레딧 생산력 2 감소. 30 M€ 획득.",
 
-    "Martian Industries": "",
-    "Increase your energy and steel production 1 step. Gain 6 M€.": "",
+    "Martian Industries": "화성 공업단지",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "에너지 생산력 1 증가. 강철 생산력 1 증가. 6 M€ 획득.",
 
-    "Metal-Rich Asteroid": "",
-    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "",
+    "Metal-Rich Asteroid": "다금속 소행성",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "기온 1단계 상승. 티타늄 자원 4개 획득. 강철 자원 4개 획득.",
 
-    "Metals Company": "",
-    "Increase your M€, steel and titanium production 1 step.": "",
+    "Metals Company": "철강 회사",
+    "Increase your M€, steel and titanium production 1 step.": "메가크레딧 생산력 1 증가. 강철 생산력 1 증가. 티타늄 생산력 1 증가.",
 
-    "Mining Operations": "",
-    "Increase your steel production 2 steps. Gain 4 steel.": "",
+    "Mining Operations": "채굴 시설",
+    "Increase your steel production 2 steps. Gain 4 steel.": "강철 생산력 2 증가. 강철 자원 4개 획득.",
 
-    "Mohole": "",
-    "Increase your heat production 3 steps. Gain 3 heat.": "",
+    "Mohole": "모홀 프로젝트",
+    "Increase your heat production 3 steps. Gain 3 heat.": "열 생산력 3 증가. 열 자원 3개 획득.",
 
-    "Mohole Excavation": "",
-    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "",
+    "Mohole Excavation": "모홀 시추 시설",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "강철 생산력 1 증가. 열 생산력 2 증가. 열 자원 2개 획득.",
 
-    "Nitrogen Shipment": "",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "",
+    "Nitrogen Shipment": "질소 수송",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "테라포밍 등급 1TR 상승. 식물 생산력 1 증가. 5 M€ 획득.",
 
-    "Orbital Construction Yard": "",
-    "Increase your titanium production 1 step. Gain 4 titanium.": "",
+    "Orbital Construction Yard": "궤도 조선소",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "티타늄 생산력 1 증가. 티타늄 자원 4개 획득.",
 
-    "Polar Industries": "",
-    "Increase your heat production 2 steps. Place an Ocean tile.": "",
+    "Polar Industries": "극지 공업단지",
+    "Increase your heat production 2 steps. Place an Ocean tile.": "해양 타일 1장 배치. 열 생산력 2 증가.",
 
-    "Power Generation": "",
-    "Increase your energy production 3 steps.": "",
+    "Power Generation": "발전 시설",
 
-    "Research Network": "",
-    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "",
+    "Research Network": "연구 네트워크",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "메가크레딧 생산력 1 증가. 카드 3장 획득.",
 
-    "Self-Sufficient Settlement": "",
-    "Increase your money production 2 steps. Place a City tile.": "",
+    "Self-Sufficient Settlement": "자급자족형 정착지",
+    "Increase your money production 2 steps. Place a City tile.": "도시 타일 1장 배치. 메가크레딧 생산력 2 증가.",
 
-    "Smelting Plant": "",
-    "Raise oxygen 2 steps. Gain 5 steel.": "",
+    "Smelting Plant": "제련 시설",
+    "Raise oxygen 2 steps. Gain 5 steel.": "산소 농도 2% 상승. 강철 자원 5개 획득.",
 
-    "Society Support": "",
-    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "",
+    "Society Support": "사회적 지원",
+    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "메가크레딧 생산력 1 감소. 식물 생산력과 에너지 생산력과 열 생산력 1씩 증가.",
 
-    "Supplier": "",
-    "Increase your energy production 2 steps. Gain 4 steel.": "",
+    "Supplier": "납품업체",
+    "Increase your energy production 2 steps. Gain 4 steel.": "에너지 생산력 2 증가. 강철 자원 4개 획득.",
 
-    "Supply Drop": "",
-    "Gain 3 titanium, 8 steel and 3 plants.": "",
+    "Supply Drop": "보급품 투하",
+    "Gain 3 titanium, 8 steel and 3 plants.": "티타늄 자원 3개 획득. 강철 자원 8개 획득. 식물 자원 3개 획득.",
 
-    "UNMI Contractor": "",
-    "Increase your TR 3 steps. Draw a card.": "",
+    "UNMI Contractor": "UNMI 도급 계약",
+    "Increase your TR 3 steps. Draw a card.": "테라포밍 등급 3TR 상승. 카드 1장 획득.",
 
-    "Acquired Space Agency": "",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": ""
+    "Acquired Space Agency": "항공우주국 합병",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "티타늄 자원 6개 획득. 프로젝트 덱 공개후, 우주 태그 카드 2장 획득."
 }

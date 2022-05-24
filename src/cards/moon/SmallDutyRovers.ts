@@ -9,10 +9,10 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {Units} from '../../common/Units';
 import {Size} from '../../common/cards/render/Size';
-import {Card} from '../Card';
 import {all} from '../Options';
+import {MoonCard} from './MoonCard';
 
-export class SmallDutyRovers extends Card implements IProjectCard {
+export class SmallDutyRovers extends MoonCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.SMALL_DUTY_ROVERS,
@@ -36,8 +36,8 @@ export class SmallDutyRovers extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.deductUnits(this.reserveUnits);
+  public override play(player: Player) {
+    super.play(player);
     MoonExpansion.raiseLogisticRate(player);
     const moonData = MoonExpansion.moonData(player.game);
     const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;

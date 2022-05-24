@@ -1,5 +1,6 @@
 {
-  "Game Id:${0}": "Spiel-ID: ${0}",
+  "game id: ": "Spiel-ID: ",
+  "Terraforming Mars": "Terraforming Mars",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Anleitung: Um das Spiel zu starten, kopiere und teile die Links mit allen Mitspielern und klicke dann auf deinen Namen.",
   "Save this page in case you or one of your opponents loses a link.": "Speichere diese Seite für denn Fall dass du oder einer deiner Mitspieler den Link verliert.",
   "copy": "kopieren",
@@ -9,7 +10,8 @@
   "4th": "4.",
   "5th": "5.",
   "6th": "6.",
-  "Game setting": "Spieleinstellung",
+  "Spectator": "Zuschauer",
+  "Game settings": "Spieleinstellungen",
   "Expansion:": "Erweiterung: ",
   "Fanmade expansion:": "Fan-Erweiterung: ",
   "Board:": "Spielbrett: ",
@@ -29,5 +31,5 @@
   "fast mode": "Schneller Modus",
   "Banned cards:": "Ausgeschlossene Karten: ",
   "Game Setup Details": "Spieleinstellungen",
-  "Board-defined": ""
+  "Board-defined": "definiert durch Spielbrett"
 }

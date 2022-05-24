@@ -4,7 +4,7 @@ import {Luna} from '../../../src/colonies/Luna';
 import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('ProductiveOutpost', function() {
   it('Should play', function() {
@@ -22,7 +22,7 @@ describe('ProductiveOutpost', function() {
     player.game.colonies.push(colony2);
 
     card.play(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.megaCredits).to.eq(2);
     expect(player.titanium).to.eq(1);
   });

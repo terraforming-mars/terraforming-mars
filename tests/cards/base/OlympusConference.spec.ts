@@ -9,7 +9,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
   let card : OlympusConference; let player : TestPlayer; let game : Game;
@@ -57,7 +57,7 @@ describe('OlympusConference', function() {
     player.cardsInHand = [card];
     player.playCard(card, undefined);
     expect(card.resourceCount).to.eq(0);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 

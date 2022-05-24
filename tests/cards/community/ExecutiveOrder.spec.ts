@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Game, GameOptions} from '../../../src/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -16,7 +16,7 @@ describe('ExecutiveOrder', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions() as GameOptions;
+    const gameOptions = setCustomGameOptions() as GameOptions;
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

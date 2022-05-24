@@ -3,7 +3,7 @@ import {WavePower} from '../../../src/cards/base/WavePower';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('WavePower', function() {
@@ -17,12 +17,12 @@ describe('WavePower', function() {
   });
 
   it('Can\'t play', function() {
-    TestingUtils.maxOutOceans(player, 2);
+    maxOutOceans(player, 2);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    TestingUtils.maxOutOceans(player, 3);
+    maxOutOceans(player, 3);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

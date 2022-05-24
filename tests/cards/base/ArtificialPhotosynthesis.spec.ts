@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 
 describe('ArtificialPhotosynthesis', () => {
   it('Should play', () => {
@@ -14,8 +14,8 @@ describe('ArtificialPhotosynthesis', () => {
     player.popWaitingFor(); // Remove SelectInitialCards.
     const action = card.play(player);
     expect(action).is.undefined;
-    TestingUtils.runAllActions(game);
-    const options = TestingUtils.cast(player.popWaitingFor(), OrOptions);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), OrOptions);
     expect(options.options).has.lengthOf(2);
     options.options[0].cb();
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);

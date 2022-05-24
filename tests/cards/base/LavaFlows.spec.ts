@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {TestingUtils} from '../../TestingUtils';
+import {resetBoard} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {newTestGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
@@ -20,7 +20,7 @@ describe('LavaFlows', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
-    TestingUtils.resetBoard(game);
+    resetBoard(game);
   });
 
   it('Cannot play if no available spaces', function() {

@@ -36,7 +36,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.getPlayers().forEach((p) => p.deductResource(Resources.MEGACREDITS, Math.min(p.megaCredits, 2), {log: true}));
+    player.game.getPlayers().forEach((p) => p.deductResource(Resources.MEGACREDITS, Math.min(p.megaCredits, 2), {log: true, from: player}));
 
     // TODO(kberg): Add a test that fails when a new tag is added.
     const tags = [

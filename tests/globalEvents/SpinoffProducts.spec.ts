@@ -55,6 +55,6 @@ describe('SpinoffProducts', function() {
     card.resolve(game, turmoil);
 
     // This includes Habitat Marte itself, which has a Mars tag.
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(8);
+    expect(player.getResource(Resources.MEGACREDITS)).to.eq(10);
   });
 });

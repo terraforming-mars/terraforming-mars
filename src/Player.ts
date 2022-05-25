@@ -719,7 +719,8 @@ export class Player {
     return requirementsBonus;
   }
 
-  public removeResourceFrom(card: ICard, count: number = 1, removingPlayer? : Player): void {
+  public removeResourceFrom(card: ICard, count: number = 1, options?: {removingPlayer? : Player, log?: boolean}): void {
+    const removingPlayer = options?.removingPlayer;
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
       if (amountRemoved === 0) return;
@@ -727,11 +728,13 @@ export class Player {
 
       if (removingPlayer !== undefined && removingPlayer !== this) MonsInsurance.resolveInsurance(this);
 
-      this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
-        b.player(removingPlayer ?? this)
-          .number(amountRemoved)
-          .player(this)
-          .card(card));
+      if (options?.log ?? true === true) {
+        this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
+          b.player(options?.removingPlayer ?? this)
+            .number(amountRemoved)
+            .player(this)
+            .card(card));
+      }
 
       // Lawsuit hook
       if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {

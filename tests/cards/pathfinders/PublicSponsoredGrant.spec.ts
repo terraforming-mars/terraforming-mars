@@ -11,6 +11,7 @@ import {Unity} from '../../../src/turmoil/parties/Unity';
 import {Scientists} from '../../../src/turmoil/parties/Scientists';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardName} from '../../../src/common/cards/CardName';
+import {MonsInsurance} from '../../../src/cards/promo/MonsInsurance';
 
 describe('PublicSponsoredGrant', function() {
   let card: PublicSponsoredGrant;
@@ -60,5 +61,22 @@ describe('PublicSponsoredGrant', function() {
 
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.BIOMASS_COMBUSTORS, CardName.COLONIZER_TRAINING_CAMP]);
     expect(game.dealer.discarded.map((c) => c.name)).deep.eq([CardName.SEARCH_FOR_LIFE]);
+  });
+
+  it('compatible with Mons Insurance', function() {
+    player2.corporationCard = new MonsInsurance();
+    // This isn't very clean but it's necessary for the test.
+    game.monsInsuranceOwner = player2.id;
+    player.megaCredits = 10;
+    player2.megaCredits = 10;
+    player3.megaCredits = 10;
+
+    card.play(player);
+
+    // This is a great test, because player1 instigated the loss, so does not get an insurance
+    // payout. Player 2 loses the payout and player 3 gets it.
+    expect(player.megaCredits).eq(8);
+    expect(player2.megaCredits).eq(5);
+    expect(player3.megaCredits).eq(11);
   });
 });

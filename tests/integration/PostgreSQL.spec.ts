@@ -109,28 +109,27 @@ describe('PostgreSQL', () => {
     expect(saveIds).has.members([0, 3]);
   });
 
-  it('gets cloneable game by id', async () => {
+  it('gets player count by id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getClonableGameByGameId(game.id, (err, gameData) => {
+    db.getPlayerCount(game.id, (err, playerCount) => {
       expect(err).to.be.undefined;
-      expect(gameData?.gameId).to.eq(game.id);
-      expect(gameData?.playerCount).to.eq(1);
+      expect(playerCount).to.eq(1);
     });
   });
 
-  it('does not find cloneable game by id', async () => {
+  it('does not find player count for game by id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getClonableGameByGameId('notfound', (err, gameData) => {
+    db.getPlayerCount('notfound', (err, playerCount) => {
       expect(err).to.be.undefined;
-      expect(gameData).to.be.undefined;
+      expect(playerCount).to.be.undefined;
     });
   });
 

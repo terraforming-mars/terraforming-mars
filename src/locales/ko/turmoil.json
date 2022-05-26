@@ -23,19 +23,19 @@
   "Party leader": "당대표",
   "2 Party leaders": "당대표 2인",
 
-  "Mars First - (All players receive 1 M€ for each Building tag they have.)": "화성중심당 - ()",
-  "Scientists - (All players receive 1 M€ for each Science tag they have.)": "",
-  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "",
-  "Kelvinists - (All players receive 1 M€ for each Heat production they have.)": "",
-  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "",
-  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "",
+  "Mars First - (All players receive 1 M€ for each Building tag they have.)": "화성중심당 - (모든 플레이어는 자신의 건물 태그 수만큼 메가크레딧 획득.)",
+  "Scientists - (All players receive 1 M€ for each Science tag they have.)": "과학당 - (모든 플레이어는 자신의 과학 태그 수만큼 메가크레딧 획득.)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "통합당 - (모든 플레이어는 자신의 금성 · 지구 · 목성 태그 수만큼 메가크레딧 획득.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "녹색당 - (모든 플레이어는 자신의 식물 · 미생물 · 동물 태그 수만큼 메가크레딧 획득.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "적색당 - (테라포밍 등급이 가장 낮은 플레이어(들)의 테라포밍 등급 1 TR 상승.)",
+  "Kelvinists - (All players receive 1 M€ for each Heat production they have.)": "켈빈당 - (모든 플레이어는 자신의 열 생산력 1마다 1 M€ 획득.)",
 
 
-  "Mars First (Focused on Martian development and independence.)": "",
-  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "",
-  "Unity (Wants to see humanity prosper in the whole solar system.)": "",
-  "Greens (Want to see a new Earth as soon as possible.)": "",
-  "Reds (Wishes to preserve the red planet.)": "",
-  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": ""
+  "Mars First (Focused on Martian development and independence.)": "화성중심당 (화성 발전과 화성 독립에 최고 우선순위를 두는 정당입니다.)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "과학당 (기술은 미래의 문입니다. 과학당은 그 문을 열 수 있다면 무엇이든 할 것입니다.)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "통합당 (인류의 번영이 태양계 전체를 아우르길 추구하는 정당입니다.)",
+  "Greens (Want to see a new Earth as soon as possible.)": "녹색당 (새로운 지구의 탄생을 가능한 빨리 목도하려는 정당입니다.)",
+  "Reds (Wishes to preserve the red planet.)": "적색당 (붉은 행성을 그대로 보존하는 것이 목표인 정당입니다. 다만, 최근 이 목표 달성에 어려움을 겪고 있습니다.)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "켈빈당 (급진적인 테라포밍의 중요성을 부르짖으며, 열 생산으로 그 첫 발걸음을 떼야 한다고 주장하는 정당입니다.)"
 
 }

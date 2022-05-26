@@ -22,8 +22,8 @@ export class PostgreSQL implements IDatabase {
     this.client = new Pool(config);
   }
 
-  public async initialize(): Promise<void> {
-    await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
+  public async initialize(): Promise<QueryResult<any>> {
+    return this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
       .then(() => this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))'))
       .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)'))
       .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)'))
@@ -177,11 +177,12 @@ export class PostgreSQL implements IDatabase {
   }
 
   private async getMaxSaveId(game_id: GameId): Promise<number> {
-    return this.client.query('SELECT MAX(save_id) as save_id FROM games WHERE game_id = $1', [game_id])
-      .then((res) => res.rows[0].save_id)
-      .catch((e) => {
-        throw e;
-      });
+    try {
+      const res = await this.client.query('SELECT MAX(save_id) as save_id FROM games WHERE game_id = $1', [game_id]);
+      return res.rows[0].save_id;
+    } catch (e) {
+      throw e;
+    }
   }
 
   async cleanSaves(game_id: GameId): Promise<void> {
@@ -202,9 +203,12 @@ export class PostgreSQL implements IDatabase {
   async purgeUnfinishedGames(): Promise<void> {
     const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
     const days = Number.isInteger(envDays) ? envDays : 10;
-    return this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days])
-      .then((res) => console.log(`Purged ${res.rowCount} rows`))
-      .catch((err) => console.warn(err.message));
+    try {
+      const res = await this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days]);
+      return console.log(`Purged ${res.rowCount} rows`);
+    } catch (err) {
+      return console.warn(err instanceof Error ? err.message : err);
+    }
   }
 
   restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {

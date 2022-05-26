@@ -42,7 +42,7 @@ export interface IDatabase {
     /**
      * Creates any tables needed
      */
-    initialize(): Promise<void>;
+    initialize(): Promise<any>;
 
     /**
      * Pulls most recent version of game

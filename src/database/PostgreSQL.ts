@@ -22,8 +22,8 @@ export class PostgreSQL implements IDatabase {
     this.client = new Pool(config);
   }
 
-  public async initialize(): Promise<void> {
-    await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
+  public initialize(): Promise<void> {
+    return this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
       .then(() => {
         this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
       })
@@ -216,8 +216,8 @@ export class PostgreSQL implements IDatabase {
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
-  purgeUnfinishedGames(): void {
-    const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
+  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): void {
+    const envDays = parseInt(maxGameDays || '');
     const days = Number.isInteger(envDays) ? envDays : 10;
     this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
       if (res) {

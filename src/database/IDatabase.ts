@@ -163,4 +163,11 @@ export interface IDatabase {
      * * This whole method is ignored in LocalFilesystem.
      */
     purgeUnfinishedGames(): void;
+
+    /**
+     * Generate database statistics for admin purposes.
+     *
+     * Key/value responses will vary between databases.
+     */
+    stats(): Promise<{[key: string]: string | number}>;
 }

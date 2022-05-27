@@ -216,11 +216,11 @@ export class Game {
 
   // Card-specific data
   // Mons Insurance promo corp
-  public monsInsuranceOwner: PlayerId | undefined = undefined;
+  public monsInsuranceOwner?: PlayerId;
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // Syndicate Pirate Raids
-  public syndicatePirateRaider: PlayerId | undefined = undefined;
+  public syndicatePirateRaider?: PlayerId;
 
   private constructor(
     public id: GameId,

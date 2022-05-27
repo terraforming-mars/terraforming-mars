@@ -145,4 +145,13 @@ describe('SQLite', () => {
     // await db.purgeUnfinishedGames('0'); This doesn't work! I wonder if it's just too precise a clock problem.
     expect(await db.getSaveIds(game.id)).is.empty;
   });
+
+  it('stats', async () => {
+    const stats = await db.stats();
+    expect(stats).deep.eq({
+      type: 'SQLite',
+      path: ':memory:',
+      size_bytes: -1,
+    });
+  });
 });

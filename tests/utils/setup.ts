@@ -16,6 +16,7 @@ const FAKE_DATABASE: IDatabase = {
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
   purgeUnfinishedGames: () => {},
+  stats: () => Promise.resolve({}),
 };
 
 let databaseUnderTest: IDatabase = FAKE_DATABASE;

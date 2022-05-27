@@ -35,17 +35,11 @@ export class PostgreSQL implements IDatabase {
     this.client = new Pool(config);
   }
 
-  public async initialize(): Promise<void> {
-    await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
-      .then(() => {
-        this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
-      })
-      .then(() => {
-        this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
-      })
-      .then(() => {
-        this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )');
-      })
+  public initialize(): Promise<QueryResult<any>> {
+    return this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
+      .then(() => this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))'))
+      .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)'))
+      .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)'))
       .catch((err) => {
         throw err;
       });
@@ -299,7 +293,7 @@ export class PostgreSQL implements IDatabase {
     };
 
     // TODO(kberg): return row counts
-    await this.client.query(`
+    return this.client.query(`
     SELECT
       pg_size_pretty(pg_total_relation_size(\'games\')) as game_size,
       pg_size_pretty(pg_total_relation_size(\'game_results\')) as game_result_size,
@@ -309,10 +303,10 @@ export class PostgreSQL implements IDatabase {
         map['size-bytes-games'] = result.rows[0].game_size;
         map['size-bytes-game-results'] = result.rows[0].game_result_size;
         map['size-bytes-database'] = result.rows[0].db_size;
+        return map;
       })
       .catch((err) => {
         throw err;
       });
-    return Promise.resolve(map);
   }
 }

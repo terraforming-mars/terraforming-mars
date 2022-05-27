@@ -223,8 +223,8 @@ export class PostgreSQL implements IDatabase {
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
-  purgeUnfinishedGames(): void {
-    const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
+  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): void {
+    const envDays = parseInt(maxGameDays || '');
     const days = Number.isInteger(envDays) ? envDays : 10;
     this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
       if (res) {

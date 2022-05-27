@@ -103,6 +103,50 @@ describe('PostgreSQL', () => {
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
     db.cleanSaves(game.id);
+
+    await sleep(1000);
+
+    const saveIds = await db.getSaveIds(game.id);
+    expect(saveIds).has.members([0, 3]);
+  });
+
+  it('gets player count by id', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    db.getPlayerCount(game.id, (err, playerCount) => {
+      expect(err).to.be.undefined;
+      expect(playerCount).to.eq(1);
+    });
+  });
+
+  it('does not find player count for game by id', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    db.getPlayerCount('notfound', (err, playerCount) => {
+      expect(err).to.be.undefined;
+      expect(playerCount).to.be.undefined;
+    });
+  });
+
+  it('cleanSaves', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    await db.saveGame(game);
+    await db.saveGame(game);
+    await db.saveGame(game);
+
+    expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+
+    db.cleanSaves(game.id);
     await sleep(500);
     const saveIds = await db.getSaveIds(game.id);
     expect(saveIds).has.members([0, 3]);

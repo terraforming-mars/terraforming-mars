@@ -11,7 +11,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {TestingUtils} from '../../TestingUtils';
+import {addGreenery, runAllActions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
@@ -30,13 +30,13 @@ describe('EcologicalSurvey', () => {
   });
 
   it('Can play', () => {
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
@@ -79,7 +79,7 @@ describe('EcologicalSurvey', () => {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(1);
@@ -114,7 +114,7 @@ describe('EcologicalSurvey', () => {
     player.playedCards = [card];
     game.addTile(player, SpaceType.LAND, space, {tileType: TileType.RESTRICTED_AREA});
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.titanium).eq(1);
     expect(player.steel).eq(1);
@@ -149,7 +149,7 @@ describe('EcologicalSurvey', () => {
 
     player.plants = 0;
     game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.plants).eq(3);
   });
 
@@ -165,7 +165,7 @@ describe('EcologicalSurvey', () => {
     game.phase = Phase.SOLAR;
     player.plants = 0;
     game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.plants).eq(2);
   });
 
@@ -177,7 +177,7 @@ describe('EcologicalSurvey', () => {
     space.bonus = [SpaceBonus.MICROBE],
 
     game.addTile(player, SpaceType.LAND, space, {tileType: TileType.RESTRICTED_AREA});
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     const msg = game.gameLog.pop()!;
     expect(msg.data.length).to.eq(3);

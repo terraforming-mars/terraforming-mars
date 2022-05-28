@@ -63,7 +63,7 @@ export class Localfilesystem implements IDatabase {
     throw new Error('Not implemented');
   }
 
-  getGameVersion(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
+  getGameVersion(_game_id: GameId, _save_id: number): Promise<SerializedGame> {
     throw new Error('Not implemented');
   }
 

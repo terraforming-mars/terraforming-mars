@@ -150,4 +150,35 @@ describe('PostgreSQL', () => {
     const saveIds = await db.getSaveIds(game.id);
     expect(saveIds).has.members([0, 3]);
   });
+
+  it('getGameVersion', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    player.megaCredits = 200;
+    await db.saveGame(game);
+
+    player.megaCredits = 300;
+    await db.saveGame(game);
+
+    player.megaCredits = 400;
+    await db.saveGame(game);
+
+    const allSaveIds = await db.getSaveIds(game.id);
+    expect(allSaveIds).has.members([0, 1, 2, 3]);
+
+    const serialized0 = await db.getGameVersion(game.id, 0);
+    expect(serialized0.players[0].megaCredits).eq(0);
+
+    const serialized1 = await db.getGameVersion(game.id, 1);
+    expect(serialized1.players[0].megaCredits).eq(200);
+
+    const serialized2 = await db.getGameVersion(game.id, 2);
+    expect(serialized2.players[0].megaCredits).eq(300);
+
+    const serialized3 = await db.getGameVersion(game.id, 3);
+    expect(serialized3.players[0].megaCredits).eq(400);
+  });
 });

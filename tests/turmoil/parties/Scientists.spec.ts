@@ -43,7 +43,7 @@ describe('Scientists', function() {
     bonus.grant(game);
 
     // This includes Habitat Marte itself, which has a Mars tag.
-    expect(player.megaCredits).to.eq(3);
+    expect(player.megaCredits).to.eq(4);
   });
 
   it('Ruling bonus 2: Gain 1 M€ for every 3 cards in hand', function() {

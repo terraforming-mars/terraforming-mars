@@ -17,12 +17,12 @@ export class DesignedOrganisms extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.DESIGNED_ORGANISMS,
       cost: 12,
-      tags: [Tags.MARS, Tags.ENERGY, Tags.BUILDING],
+      tags: [Tags.SCIENCE, Tags.PLANT, Tags.MARS],
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
       productionBox: Units.of({plants: 2}),
 
       metadata: {
-        cardNumber: 'Pf21',
+        cardNumber: 'Pf23',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(2)).plants(3).br;
           b.microbes(3).asterix().animals(1).asterix();

@@ -841,9 +841,9 @@ export default (Vue as WithRefs<Refs>).extend({
       component.players.forEach((player) => {
         if (player.name === '') {
           if (isSoloMode) {
-            player.name = 'You';
+            player.name = this.$t('You');
           } else {
-            const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
+            const defaultPlayerName = this.$t(player.color.charAt(0).toUpperCase() + player.color.slice(1));
             player.name = defaultPlayerName;
           }
         }

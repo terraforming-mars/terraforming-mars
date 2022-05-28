@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Units} from '../../common/Units';
@@ -36,12 +35,8 @@ export class LunarIndustryComplex extends MoonCard implements IProjectCard {
   }
 
   public override play(player: Player) {
-    player.deductUnits(this.reserveUnits);
+    super.play(player);
     player.game.defer(new PlaceMoonMineTile(player));
-    player.addProduction(Resources.STEEL, 1);
-    player.addProduction(Resources.TITANIUM, 1);
-    player.addProduction(Resources.ENERGY, 2);
-    player.addProduction(Resources.HEAT, 1);
     return undefined;
   }
 }

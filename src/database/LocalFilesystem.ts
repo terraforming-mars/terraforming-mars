@@ -68,27 +68,27 @@ export class Localfilesystem implements IDatabase {
   }
 
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
-    this.getGames((err, gameIds) => {
+    this.getGames().then((gameIds) => {
       const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
       const gameData = filtered.map((gameId) => {
         const text = fs.readFileSync(this._historyFilename(gameId, 0));
         const serializedGame = JSON.parse(text) as SerializedGame;
         return {gameId: gameId, playerCount: serializedGame.players.length};
       });
-      cb(err, gameData);
+      cb(undefined, gameData);
     });
   }
 
   getPlayerCount(gameId: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
-    this.getGames((err, gameIds) => {
+    this.getGames().then((gameIds) => {
       const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
       if (found === undefined) {
-        cb(err, undefined);
+        cb(new Error('not found'), undefined);
         return;
       }
       const text = fs.readFileSync(this._historyFilename(gameId, 0));
       const serializedGame = JSON.parse(text) as SerializedGame;
-      cb(err, serializedGame.players.length);
+      cb(new Error('not found'), serializedGame.players.length);
     });
   }
 
@@ -104,7 +104,7 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
+  getGames(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 
     // TODO(kberg): use readdir since this is expected to be async anyway.
@@ -119,7 +119,7 @@ export class Localfilesystem implements IDatabase {
       }
       gameIds.push(result[1]);
     });
-    cb(undefined, gameIds);
+    return Promise.resolve(gameIds);
   }
 
   restoreReferenceGame(_gameId: GameId, cb: DbLoadCallback<Game>) {

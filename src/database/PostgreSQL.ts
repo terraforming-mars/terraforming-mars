@@ -78,20 +78,15 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
-    const allGames: Array<GameId> = [];
+  getGames(): Promise<Array<GameId>> {
     const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
-    this.client.query(sql, (err, res) => {
-      if (err) {
+    return this.client.query(sql)
+      .then((res) => {
+        return res.rows.map((row) => row.game_id);
+      }).catch((err) => {
         console.error('PostgreSQL:getGames', err);
-        cb(err, []);
-        return;
-      }
-      for (const row of res.rows) {
-        allGames.push(row.game_id);
-      }
-      cb(undefined, allGames);
-    });
+        throw err;
+      });
   }
 
   loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {

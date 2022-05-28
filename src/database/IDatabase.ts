@@ -68,13 +68,8 @@ export interface IDatabase {
 
     /**
      * Return a list of all `game_id`s.
-     *
-     * @param cb a callback containing either a failure to load, or a list of
-     * references to cloneable games.
-     *
-     * @param cb a callback either returning either an error or a list of all `game_id`s.
      */
-    getGames(cb:(err: Error | undefined, allGames:Array<GameId>) => void): void;
+    getGames(): Promise<Array<GameId>>;
 
     /**
      * Load references to all games that can be cloned. Every game is cloneable,

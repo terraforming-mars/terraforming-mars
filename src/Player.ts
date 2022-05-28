@@ -80,12 +80,12 @@ export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
-  private _game: Game | undefined = undefined;
+  private _game?: Game;
 
   // Corporate identity
-  public corporationCard: ICorporationCard | undefined = undefined;
+  public corporationCard?: ICorporationCard;
   // Used only during set-up
-  public pickedCorporationCard: ICorporationCard | undefined = undefined;
+  public pickedCorporationCard?: ICorporationCard;
 
   // Terraforming Rating
   private terraformRating: number = 20;
@@ -127,7 +127,7 @@ export class Player {
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
-  public needsToDraft: boolean | undefined = undefined;
+  public needsToDraft?: boolean;
 
   public timer: Timer = Timer.newInstance();
 

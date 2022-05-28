@@ -13,7 +13,7 @@ export class ApiSpectator extends Handler {
   public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const id = ctx.url.searchParams.get('id');
     const spectatorId = String(id);
-    ctx.gameLoader.getBySpectatorId(spectatorId, (game) => {
+    ctx.gameLoader.getByParticipantId(spectatorId, (game) => {
       if (game === undefined) {
         ctx.route.notFound(req, res);
         return;

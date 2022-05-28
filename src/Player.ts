@@ -1045,19 +1045,7 @@ export class Player {
     } else if (pi instanceof OrOptions) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectHowToPayForProjectCard) {
-      this.checkInputLength(input, 1, 2);
-      const cardName = input[0][0];
-      const _data = PlayerInput.getCard(pi.cards, cardName);
-      const foundCard: IProjectCard = _data.card;
-      const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
-      const reserveUnits = pi.reserveUnits[_data.idx];
-      if (reserveUnits.steel + howToPay.steel > this.steel) {
-        throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
-      }
-      if (reserveUnits.titanium + howToPay.titanium > this.titanium) {
-        throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
-      }
-      this.deferInputCb(pi.cb(foundCard, howToPay));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectCard) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectSpace) {

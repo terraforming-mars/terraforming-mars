@@ -86,8 +86,8 @@ export abstract class Board {
       const spaces: Array<ISpace> = [];
       for (const [x, y] of coords) {
         const adj = this.spaces.find((adj) =>
-          space !== adj && adj.spaceType !== SpaceType.COLONY &&
-            adj.x === x && adj.y === y,
+          adj.x === x && adj.y === y &&
+          space !== adj && adj.spaceType !== SpaceType.COLONY,
         );
         if (adj !== undefined) {
           spaces.push(adj);
@@ -99,13 +99,12 @@ export abstract class Board {
   }
 
   // Returns adjacent spaces in clockwise order starting from the top left.
-  public getAdjacentSpaces(space: ISpace): Array<ISpace> {
+  public getAdjacentSpaces(space: ISpace): ReadonlyArray<ISpace> {
     const spaces = this.adjacentSpaces.get(space.id);
     if (spaces === undefined) {
       throw new Error(`Unexpected space ID ${space.id}`);
     }
-    // Clone so that callers can't mutate our arrays
-    return [...spaces];
+    return spaces;
   }
 
   public getSpaceByTileCard(cardName: CardName): ISpace | undefined {

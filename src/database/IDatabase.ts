@@ -42,7 +42,7 @@ export interface IDatabase {
     /**
      * Creates any tables needed
      */
-    initialize(): Promise<void>;
+    initialize(): Promise<unknown>;
 
     /**
      * Pulls most recent version of game
@@ -90,18 +90,13 @@ export interface IDatabase {
     getClonableGames(cb:(err: Error | undefined, allGames:Array<IGameData>)=> void) : void;
 
     /**
-     * Load reference to game that can be cloned. Every game is cloneable,
-     * this just returns the original save of the game. However, if a game's
-     * original save is pruned, say, due to {@link deleteGameNbrSaves}, it won't
-     * exist.
-     *
-     * Cloneable games are those with a save_id 0.
+     * Get the player count for a game.
      *
      * @param game_id the game id to search for
-     * @param cb a callback either returning either an error or a reference to a cloneable game.
+     * @param cb a callback either returning either an error or the game's player count.
      * if the game is not found then undefined.
      */
-    getClonableGameByGameId(game_id: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void): void;
+    getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void): void;
 
     /**
      * Saves the current state of the game. at a supplied save point. Used for

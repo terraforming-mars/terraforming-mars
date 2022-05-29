@@ -46,7 +46,7 @@ export class RemoveResourcesFromCard extends DeferredAction {
       (foundCards: Array<ICard>) => {
         const card = foundCards[0];
         const owner = this.player.game.getCardPlayer(card.name);
-        owner?.removeResourceFrom(card, this.count, this.player);
+        owner?.removeResourceFrom(card, this.count, {removingPlayer: this.player});
         return undefined;
       },
       {
@@ -58,7 +58,7 @@ export class RemoveResourcesFromCard extends DeferredAction {
       if (resourceCards.length === 1) {
         const card = resourceCards[0];
         const owner = this.player.game.getCardPlayer(card.name);
-        owner?.removeResourceFrom(card, this.count, this.player);
+        owner?.removeResourceFrom(card, this.count, {removingPlayer: this.player});
         return undefined;
       }
       return selectCard;

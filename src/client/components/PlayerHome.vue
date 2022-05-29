@@ -105,7 +105,7 @@
                       <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
                     </div>
                   </div>
-                  <div class="text-overview">[ toggle cards filters ]</div>
+                  <div class="text-overview" v-i18n>[ toggle cards filters ]</div>
               </div>
               <div v-if="thisPlayer.corporationCard !== undefined" class="cardbox">
                   <Card :card="thisPlayer.corporationCard" :actionUsed="isCardActivated(thisPlayer.corporationCard, thisPlayer)"/>

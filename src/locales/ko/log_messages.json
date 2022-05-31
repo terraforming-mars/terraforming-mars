@@ -1,7 +1,12 @@
 {
     "You": "당신",
     "The id of this game is ${0}": "이 게임의 고유 번호는 ${0} 입니다.",
-    "Good luck ": "행운을 빕니다, ",
+    "Good luck ${0}!": "${0} 플레이어의 행운을 빕니다!",
+    "of 10": " / 10세대",
+    "of 12": " / 12세대",
+    "of 14": " / 14세대",
+    "You discarded ${0}": "${0} 카드를 버렸습니다.",
+    "${0} gained ${1} TR": "${0} 플레이어는 ${1} TR을 획득하였습니다.",
 
     "${0} increased Venus scale ${1} step(s)": "${0} 플레이어가 금성개척률을 ${1}단계 상승시켰습니다.",
 
@@ -46,9 +51,6 @@
 
     "Power Plant:SP": "발전소",
     "Asteroid:SP": "소행성",
-    "Industrial Center tile": "공업 중심지 타일",
-    "Mining Rights tile": "광산 지대 타일",
-    "Nuclear Zone tile": "핵무기 기폭지대 타일",
 
     "${0} drew no cards": "${0} 플레이어가 카드를 뽑지 않았습니다.",
     "Final greenery placement": "최종 녹지 타일 배치",

@@ -16,20 +16,15 @@ export class FakeGameLoader implements IGameLoader {
   getByGameId(gameId: string, _bypassCache: boolean, cb: (game: Game | undefined) => void): void {
     cb(this.games.get(gameId));
   }
-  getByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
+  getByParticipantId(id: PlayerId | SpectatorId, cb: (game: Game | undefined) => void): void {
     for (const game of Array.from(this.games.values())) {
       for (const player of game.getPlayersInGenerationOrder()) {
-        if (player.id === playerId) {
+        if (player.id === id) {
           cb(game);
           return;
         }
       }
-    }
-    cb(undefined);
-  }
-  getBySpectatorId(spectatorId: string, cb: (game: Game | undefined) => void): void {
-    for (const game of Array.from(this.games.values())) {
-      if (game.spectatorId === spectatorId) {
+      if (game.spectatorId === id) {
         cb(game);
         return;
       }

@@ -12,7 +12,7 @@ export class ApiPlayer extends Handler {
 
   public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const playerId = String(ctx.url.searchParams.get('id'));
-    ctx.gameLoader.getByPlayerId(playerId, (game) => {
+    ctx.gameLoader.getByParticipantId(playerId, (game) => {
       if (game === undefined) {
         ctx.route.notFound(req, res);
         return;

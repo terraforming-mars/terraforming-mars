@@ -162,6 +162,25 @@ export class SQLite implements IDatabase {
     });
   }
 
+  public getSaveIds(gameId: GameId): Promise<Array<number>> {
+    return new Promise((resolve, reject) => {
+      const allSaveIds: Array<number> = [];
+      const sql: string = 'SELECT distinct save_id FROM games WHERE game_id = ?';
+      this.db.all(sql, [gameId], (err, rows) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        if (rows) {
+          rows.forEach((row) => {
+            allSaveIds.push(row.save_id);
+          });
+        }
+        resolve(allSaveIds);
+      });
+    });
+  }
+
   getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
     this.db.get('SELECT game game FROM games WHERE game_id = ? and save_id = ?', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
       if (err) {

@@ -62,6 +62,11 @@ export interface IDatabase {
     getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void;
 
     /**
+     * Get all the save ids assocaited with a game.
+     */
+    getSaveIds(gameId: GameId): Promise<Array<number>>
+
+    /**
      * Load a game at a specific save point.
      */
     getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;

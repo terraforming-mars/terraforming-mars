@@ -51,25 +51,26 @@ function load(gameId: string) {
     let errors = 0;
     let writes = 0;
 
-    // The output might not be returned in order, because the
-    // inner call is async, but it is faster than forcing the
-    // results to come in order.
-    for (let version = 0; version <= game.lastSaveId; version++) {
-      db.getGameVersion(gameId, version, (err, serialized) => {
-        if (serialized === undefined) {
-          console.log(`failed to read version ${version}: ${err}`);
-          errors++;
-        } else {
-          console.log(`Storing version ${version}`);
-          localDb.saveSerializedGame(serialized!);
-          writes++;
-        }
-        if (errors + writes === game.lastSaveId + 1) {
-          // This is the last one.
-          console.log(`Wrote ${writes} records and had ${errors} failures.`);
-        }
+    db.getSaveIds(gameId).then((saveIds) => {
+      saveIds.forEach((saveId) => {
+        // The output might not be returned in order, because the
+        // inner call is async, but it is faster than forcing the
+        // results to come in order.
+        db.getGameVersion(gameId, saveId, (err, serialized) => {
+          if (serialized === undefined) {
+            console.log(`failed to read version ${saveId}: ${err}`);
+            errors++;
+          } else {
+            console.log(`Storing version ${saveId}`);
+            localDb.saveSerializedGame(serialized!);
+            writes++;
+          }
+          if (errors + writes === saveIds.length) {
+            // This is the last one.
+            console.log(`Wrote ${writes} records and had ${errors} failures.`);
+          }
+        });
       });
-    }
+    });
   });
 }
-

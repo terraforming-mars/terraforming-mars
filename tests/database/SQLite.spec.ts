@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/Game';
-import {GameId} from '../../src/common/Types';
 import {TestPlayers} from '../TestPlayers';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
 import {Database} from '../../src/database/Database';
@@ -21,25 +20,6 @@ class TestSQLite extends SQLite {
   public override saveGame(game: Game): Promise<void> {
     this.saveGamePromise = super.saveGame(game);
     return this.saveGamePromise;
-  }
-
-  public getSaveIds(gameId: GameId): Promise<Array<number>> {
-    return new Promise((resolve, reject) => {
-      const allSaveIds: Array<number> = [];
-      const sql: string = 'SELECT distinct save_id FROM games WHERE game_id = ?';
-      this.db.all(sql, [gameId], (err, rows) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (rows) {
-          rows.forEach((row) => {
-            allSaveIds.push(row.save_id);
-          });
-        }
-        resolve(allSaveIds);
-      });
-    });
   }
 }
 

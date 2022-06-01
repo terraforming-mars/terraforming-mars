@@ -174,8 +174,6 @@ export class PostgreSQL implements IDatabase {
           throw new Error(`Game ${game_id} not found at save_id ${save_id}`);
         }
         return JSON.parse(res.rows[0].game);
-      }).catch((err) => {
-        throw err;
       });
   }
 
@@ -303,9 +301,6 @@ export class PostgreSQL implements IDatabase {
         map['size-bytes-game-results'] = result.rows[0].game_result_size;
         map['size-bytes-database'] = result.rows[0].db_size;
         return map;
-      })
-      .catch((err) => {
-        throw err;
       });
   }
 }

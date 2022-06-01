@@ -42,6 +42,7 @@ const names = [
   CardName.BOTANICAL_EXPERIENCE,
   CardName.MARS_DIRECT,
   CardName.LUNA_ECUMENOPOLIS,
+  CardName.ROBOTIC_WORKFORCE,
 ];
 
 export default Vue.extend({

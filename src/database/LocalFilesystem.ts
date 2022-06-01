@@ -145,4 +145,12 @@ export class Localfilesystem implements IDatabase {
   deleteGameNbrSaves(_gameId: GameId, _rollbackCount: number): void {
     throw new Error('Rollback not yet implemented');
   }
+
+  public stats(): Promise<{[key: string]: string | number}> {
+    return Promise.resolve({
+      type: 'Local Filesystem',
+      path: dbFolder.toString(),
+      history_path: historyFolder.toString(),
+    });
+  }
 }

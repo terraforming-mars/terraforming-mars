@@ -16,7 +16,7 @@ export const IN_MEMORY_SQLITE_PATH = ':memory:';
 export class SQLite implements IDatabase {
   protected db: sqlite3.Database;
 
-  constructor(filename: string = dbPath, private throwQuietFailures: boolean = false) {
+  constructor(private filename: string = dbPath, private throwQuietFailures: boolean = false) {
     if (filename !== IN_MEMORY_SQLITE_PATH) {
       if (!fs.existsSync(dbFolder)) {
         fs.mkdirSync(dbFolder);
@@ -251,6 +251,16 @@ export class SQLite implements IDatabase {
     if (rollbackCount > 0) {
       this.runQuietly('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount]);
     }
+  }
+
+  public stats(): Promise<{[key: string]: string | number}> {
+    const size = this.filename === IN_MEMORY_SQLITE_PATH ? -1 : fs.statSync(this.filename).size;
+
+    return Promise.resolve({
+      type: 'SQLite',
+      path: this.filename,
+      size_bytes: size,
+    });
   }
 
   // Run the given SQL but do not return errors.

@@ -80,12 +80,12 @@ export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
-  private _game: Game | undefined = undefined;
+  private _game?: Game;
 
   // Corporate identity
-  public corporationCard: ICorporationCard | undefined = undefined;
+  public corporationCard?: ICorporationCard;
   // Used only during set-up
-  public pickedCorporationCard: ICorporationCard | undefined = undefined;
+  public pickedCorporationCard?: ICorporationCard;
 
   // Terraforming Rating
   private terraformRating: number = 20;
@@ -127,7 +127,7 @@ export class Player {
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
-  public needsToDraft: boolean | undefined = undefined;
+  public needsToDraft?: boolean;
 
   public timer: Timer = Timer.newInstance();
 
@@ -1045,19 +1045,7 @@ export class Player {
     } else if (pi instanceof OrOptions) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectHowToPayForProjectCard) {
-      this.checkInputLength(input, 1, 2);
-      const cardName = input[0][0];
-      const _data = PlayerInput.getCard(pi.cards, cardName);
-      const foundCard: IProjectCard = _data.card;
-      const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
-      const reserveUnits = pi.reserveUnits[_data.idx];
-      if (reserveUnits.steel + howToPay.steel > this.steel) {
-        throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
-      }
-      if (reserveUnits.titanium + howToPay.titanium > this.titanium) {
-        throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
-      }
-      this.deferInputCb(pi.cb(foundCard, howToPay));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectCard) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectSpace) {

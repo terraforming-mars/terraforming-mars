@@ -176,4 +176,13 @@ describe('SQLite', () => {
     const serialized3 = await db.getGameVersion(game.id, 3);
     expect(serialized3.players[0].megaCredits).eq(400);
   });
+
+  it('stats', async () => {
+    const stats = await db.stats();
+    expect(stats).deep.eq({
+      type: 'SQLite',
+      path: ':memory:',
+      size_bytes: -1,
+    });
+  });
 });

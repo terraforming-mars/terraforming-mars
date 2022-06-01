@@ -51,10 +51,11 @@ class TestPostgreSQL extends PostgreSQL {
 
 describe('PostgreSQL', () => {
   let db: TestPostgreSQL;
-  beforeEach(() => {
+
+  beforeEach(async () => {
     db = new TestPostgreSQL();
     Database.getInstance = () => db;
-    return db.initialize();
+    await db.initialize();
   });
 
   afterEach(() => {
@@ -180,5 +181,21 @@ describe('PostgreSQL', () => {
 
     const serialized3 = await db.getGameVersion(game.id, 3);
     expect(serialized3.players[0].megaCredits).eq(400);
+  });
+
+  it('stats', async () => {
+    const stats = await db.stats();
+    stats['size-bytes-games'] = 'any';
+    stats['size-bytes-game-results'] = 'any';
+    stats['size-bytes-database'] = 'any';
+    expect(stats).deep.eq({
+      'type': 'POSTGRESQL',
+      'pool-total-count': 1,
+      'pool-idle-count': 1,
+      'pool-waiting-count': 0,
+      'size-bytes-games': 'any',
+      'size-bytes-game-results': 'any',
+      'size-bytes-database': 'any',
+    });
   });
 });

@@ -132,7 +132,7 @@ import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {Tags} from '@/common/cards/Tags';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
-import { IClientCard } from '@/common/cards/IClientCard';
+import {IClientCard} from '@/common/cards/IClientCard';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',

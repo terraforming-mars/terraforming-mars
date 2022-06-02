@@ -70,7 +70,7 @@ export class SQLite implements IDatabase {
 
   getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
     const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
+    const sql: string = 'SELECT distinct game_id FROM games';
     this.db.all(sql, [], (err, rows) => {
       if (rows) {
         rows.forEach((row) => {

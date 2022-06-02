@@ -9,10 +9,9 @@ import {GameId} from '../../src/common/Types';
 import {sleep} from '../TestingUtils';
 
 /*
- How to set up this integration test.
-
- This test only works manually.
-*/
+ * This test can be run with `npm run test:integration` as long as the test is set up
+ * correctly.
+ */
 class TestPostgreSQL extends PostgreSQL {
   public saveGamePromise: Promise<void> = Promise.resolve();
 
@@ -71,6 +70,40 @@ describe('PostgreSQL', () => {
       db.getGames((err, allGames) => {
         expect(err).eq(undefined);
         expect(allGames).deep.eq(['game-id-1212']);
+        resolve();
+      });
+    });
+  });
+
+  it('getGames - removes duplicates', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    await db.saveGame(game);
+
+    await new Promise<void>((resolve) => {
+      db.getGames((err, allGames) => {
+        expect(err).eq(undefined);
+        expect(allGames).deep.eq(['game-id-1212']);
+        resolve();
+      });
+    });
+  });
+
+  it('getGames - includes finished games', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    Game.newInstance('game-id-2323', [player], player);
+    await db.saveGamePromise;
+
+    db.cleanSaves(game.id);
+    sleep(500);
+
+    await new Promise<void>((resolve) => {
+      db.getGames((err, allGames) => {
+        expect(err).eq(undefined);
+        expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
         resolve();
       });
     });

@@ -63,7 +63,7 @@ export class PostgreSQL implements IDatabase {
 
   getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
     const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
+    const sql: string = 'SELECT distinct game_id FROM games';
     this.client.query(sql, (err, res) => {
       if (err) {
         console.error('PostgreSQL:getGames', err);
@@ -199,14 +199,22 @@ export class PostgreSQL implements IDatabase {
   purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): void {
     const envDays = parseInt(maxGameDays || '');
     const days = Number.isInteger(envDays) ? envDays : 10;
-    this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
-      if (res) {
-        console.log(`Purged ${res.rowCount} rows`);
-      }
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
+    this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days])
+      .then((result) => {
+        result.rows.forEach((row) => {
+          console.log(row.game_id);
+        });
+      })
+      .then(() => {
+        this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
+          if (res) {
+            console.log(`Purged ${res.rowCount} rows`);
+          }
+          if (err) {
+            return console.warn(err.message);
+          }
+        });
+      });
   }
 
   restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {

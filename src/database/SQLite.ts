@@ -1,7 +1,6 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
@@ -52,26 +51,6 @@ export class SQLite implements IDatabase {
           });
         });
       });
-    });
-  }
-
-  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
-    const allGames: Array<IGameData> = [];
-    const sql = 'SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc';
-
-    this.db.all(sql, [], (err, rows) => {
-      if (rows) {
-        rows.forEach((row) => {
-          const gameId: GameId = row.game_id;
-          const playerCount: number = row.players;
-          const gameData: IGameData = {
-            gameId,
-            playerCount,
-          };
-          allGames.push(gameData);
-        });
-        return cb(err ?? undefined, allGames);
-      }
     });
   }
 

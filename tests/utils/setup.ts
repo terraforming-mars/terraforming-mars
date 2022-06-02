@@ -5,7 +5,6 @@ import {SerializedGame} from '../../src/SerializedGame';
 const FAKE_DATABASE: IDatabase = {
   cleanSaves: () => {},
   deleteGameNbrSaves: () => {},
-  getClonableGames: () => {},
   getPlayerCount: () => {},
   getGame: () => {},
   getGameId: () => {},

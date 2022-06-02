@@ -67,13 +67,7 @@ describe('PostgreSQL', () => {
     const player = TestPlayers.BLACK.newPlayer();
     Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;
-    await new Promise<void>((resolve) => {
-      db.getGames((err, allGames) => {
-        expect(err).eq(undefined);
-        expect(allGames).deep.eq(['game-id-1212']);
-        resolve();
-      });
-    });
+    await db.getGames().then((allGames) => expect(allGames).deep.eq(['game-id-1212']));
   });
 
   it('saveIds', async () => {

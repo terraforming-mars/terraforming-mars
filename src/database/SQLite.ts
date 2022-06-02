@@ -68,16 +68,21 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
-    const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
-    this.db.all(sql, [], (err, rows) => {
-      if (rows) {
-        rows.forEach((row) => {
-          allGames.push(row.game_id);
-        });
-      }
-      return cb(err ?? undefined, allGames);
+  getGames(): Promise<Array<GameId>> {
+    return new Promise((resolve, reject) => {
+      const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
+
+      this.db.all(sql, [], (err, rows) => {
+        if (err) {
+          reject(new Error('Error in getGames: ' + err.message));
+        } else {
+          const allGames: Array<GameId> = [];
+          rows.forEach((row) => {
+            allGames.push(row.game_id);
+          });
+          resolve(allGames);
+        }
+      });
     });
   }
 

@@ -4,7 +4,7 @@ import {LobbyHalls} from '../../src/cards/pathfinders/LobbyHalls';
 import {Tags} from '../../src/common/cards/Tags';
 import {deserializeProjectCard, serializeProjectCard} from '../../src/cards/CardSerialization';
 import {CardFinder} from '../../src/CardFinder';
-import {TestingUtils} from '../TestingUtils';
+import {cast} from '../TestingUtils';
 
 describe('CardSerialization', function() {
   let cardFinder = new CardFinder();
@@ -20,7 +20,7 @@ describe('CardSerialization', function() {
 
     expect(serializedCard.cloneTag).eq(Tags.CLONE);
     const deserialized = deserializeProjectCard(serializedCard, cardFinder);
-    const lobbyHalls = TestingUtils.cast(deserialized, LobbyHalls);
+    const lobbyHalls = cast(deserialized, LobbyHalls);
     expect(lobbyHalls.cloneTag).eq(Tags.CLONE);
     expect(lobbyHalls.tags).deep.eq([Tags.CLONE, Tags.BUILDING]);
   });
@@ -33,7 +33,7 @@ describe('CardSerialization', function() {
     expect(serializedCard.cloneTag).eq(Tags.SCIENCE);
 
     const deserialized = deserializeProjectCard(serializedCard, cardFinder);
-    const lobbyHalls = TestingUtils.cast(deserialized, LobbyHalls);
+    const lobbyHalls = cast(deserialized, LobbyHalls);
     expect(lobbyHalls.cloneTag).eq(Tags.SCIENCE);
     expect(lobbyHalls.tags).deep.eq([Tags.SCIENCE, Tags.BUILDING]);
   });

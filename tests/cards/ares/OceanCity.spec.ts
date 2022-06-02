@@ -9,7 +9,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 import {Capital} from '../../../src/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {TestingUtils} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 
 describe('OceanCity', function() {
   let card: OceanCity; let player: Player; let game: Game;
@@ -22,22 +22,22 @@ describe('OceanCity', function() {
   });
 
   it('Can play', function() {
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
     player.addProduction(Resources.ENERGY, 1);
@@ -45,7 +45,7 @@ describe('OceanCity', function() {
   });
 
   it('play', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     player.addProduction(Resources.ENERGY, 1);
 
     const action = card.play(player);
@@ -65,7 +65,7 @@ describe('OceanCity', function() {
   });
 
   it('Cannot place a city next to Ocean City', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     player.addProduction(Resources.ENERGY, 1);
 
     const action = card.play(player);
@@ -83,7 +83,7 @@ describe('OceanCity', function() {
   });
 
   it('Can place Ocean City next to a city', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     player.addProduction(Resources.ENERGY, 1);
 
     const citySpace = game.board
@@ -102,7 +102,7 @@ describe('OceanCity', function() {
   it('', function() {});
 
   it('Ocean City counts as ocean for adjacency', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board
@@ -117,7 +117,7 @@ describe('OceanCity', function() {
   });
 
   it('Ocean City counts for city-related VP', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board

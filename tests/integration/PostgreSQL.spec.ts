@@ -51,10 +51,11 @@ class TestPostgreSQL extends PostgreSQL {
 
 describe('PostgreSQL', () => {
   let db: TestPostgreSQL;
-  beforeEach(() => {
+
+  beforeEach(async () => {
     db = new TestPostgreSQL();
     Database.getInstance = () => db;
-    return db.initialize();
+    await db.initialize();
   });
 
   afterEach(() => {
@@ -149,5 +150,52 @@ describe('PostgreSQL', () => {
     await sleep(500);
     const saveIds = await db.getSaveIds(game.id);
     expect(saveIds).has.members([0, 3]);
+  });
+
+  it('getGameVersion', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    player.megaCredits = 200;
+    await db.saveGame(game);
+
+    player.megaCredits = 300;
+    await db.saveGame(game);
+
+    player.megaCredits = 400;
+    await db.saveGame(game);
+
+    const allSaveIds = await db.getSaveIds(game.id);
+    expect(allSaveIds).has.members([0, 1, 2, 3]);
+
+    const serialized0 = await db.getGameVersion(game.id, 0);
+    expect(serialized0.players[0].megaCredits).eq(0);
+
+    const serialized1 = await db.getGameVersion(game.id, 1);
+    expect(serialized1.players[0].megaCredits).eq(200);
+
+    const serialized2 = await db.getGameVersion(game.id, 2);
+    expect(serialized2.players[0].megaCredits).eq(300);
+
+    const serialized3 = await db.getGameVersion(game.id, 3);
+    expect(serialized3.players[0].megaCredits).eq(400);
+  });
+
+  it('stats', async () => {
+    const stats = await db.stats();
+    stats['size-bytes-games'] = 'any';
+    stats['size-bytes-game-results'] = 'any';
+    stats['size-bytes-database'] = 'any';
+    expect(stats).deep.eq({
+      'type': 'POSTGRESQL',
+      'pool-total-count': 1,
+      'pool-idle-count': 1,
+      'pool-waiting-count': 0,
+      'size-bytes-games': 'any',
+      'size-bytes-game-results': 'any',
+      'size-bytes-database': 'any',
+    });
   });
 });

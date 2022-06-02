@@ -8,7 +8,7 @@ import * as constants from '../src/common/constants';
 import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {TestingUtils} from './TestingUtils';
+import * as TestingUtils from './TestingUtils';
 import {TestPlayers} from './TestPlayers';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/common/Resources';

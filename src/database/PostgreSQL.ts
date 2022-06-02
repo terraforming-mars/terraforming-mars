@@ -7,6 +7,7 @@ import {Pool, ClientConfig, QueryResult} from 'pg';
 
 export class PostgreSQL implements IDatabase {
   protected client: Pool;
+  private databaseName: string | undefined = undefined; // Use this only for stats.
 
   constructor(
     config: ClientConfig = {
@@ -18,20 +19,26 @@ export class PostgreSQL implements IDatabase {
         rejectUnauthorized: false,
       };
     }
+
+    if (config.database) {
+      this.databaseName = config.database;
+    } else if (config.connectionString) {
+      try {
+        // Remove leading / from pathname.
+        this.databaseName = new URL(config.connectionString).pathname.replace(/^\//, '');
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    // Configuration stats saved for
     this.client = new Pool(config);
   }
 
-  public initialize(): Promise<void> {
+  public initialize(): Promise<QueryResult<any>> {
     return this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
-      .then(() => {
-        this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
-      })
-      .then(() => {
-        this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
-      })
-      .then(() => {
-        this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )');
-      })
+      .then(() => this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))'))
+      .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)'))
+      .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)'))
       .catch((err) => {
         throw err;
       });
@@ -136,17 +143,14 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
-    this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        console.error('PostgreSQL:getGameVersion', err);
-        return cb(err, undefined);
-      }
-      if (res.rowCount === 0) {
-        return cb(new Error(`Game ${game_id} not found at save_id ${save_id}`), undefined);
-      }
-      cb(undefined, JSON.parse(res.rows[0].game));
-    });
+  getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
+    return this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id])
+      .then((res) => {
+        if (res.rowCount === 0) {
+          throw new Error(`Game ${game_id} not found at save_id ${save_id}`);
+        }
+        return JSON.parse(res.rows[0].game);
+      });
   }
 
   saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
@@ -251,5 +255,28 @@ export class PostgreSQL implements IDatabase {
         }
       });
     }
+  }
+
+  public async stats(): Promise<{[key: string]: string | number}> {
+    const map: {[key: string]: string | number}= {
+      'type': 'POSTGRESQL',
+      'pool-total-count': this.client.totalCount,
+      'pool-idle-count': this.client.idleCount,
+      'pool-waiting-count': this.client.waitingCount,
+    };
+
+    // TODO(kberg): return row counts
+    return this.client.query(`
+    SELECT
+      pg_size_pretty(pg_total_relation_size(\'games\')) as game_size,
+      pg_size_pretty(pg_total_relation_size(\'game_results\')) as game_result_size,
+      pg_size_pretty(pg_database_size($1)) as db_size
+    `, [this.databaseName])
+      .then((result) => {
+        map['size-bytes-games'] = result.rows[0].game_size;
+        map['size-bytes-game-results'] = result.rows[0].game_result_size;
+        map['size-bytes-database'] = result.rows[0].db_size;
+        return map;
+      });
   }
 }

@@ -62,9 +62,10 @@
     "Show real-time VP": "Zeige Echtzeit-Siegpunkte",
     "Allow undo": "Zug rückgängig machen erlauben",
     "7 Heat Into Temperature": "7 Wärme in Temperatur",
-    "BreakThrough": "BreakThrough",
+    "BreakThrough": "Durchbruch",
     "NEXT CARD:": "NÄCHSTE KARTE: ",
     "GENERATION 1 OF 12": "GENERATION ${0} von ${1}",
+    "of 14": "von 14",
     "You": "Du",
     "you": "du",
     "researching": "erforschen",
@@ -156,8 +157,8 @@
     "(click on player name to see details)": "(klicke auf den Spielernamen, um Details zu sehen)",
     "Go to game results": "Zum Spielergebnis",
     "Save": "Speichern",
-    "show tiles": "Zeige Felder",
-    "hide tiles": "Verstecke Felder",
+    "show tiles": "Plätt. an",
+    "hide tiles": "Plätt. aus",
     "toggle tags view:": "",
     "concise": "kompakt",
     "CONCISE": "KOMPAKT",
@@ -214,6 +215,7 @@
     "Increase oxygen": "Erhöhe Sauerstoffgehalt",
     "Add an ocean": "Platziere einen Ozean",
     "Increase Venus scale": "Erhöhe Venuswertung",
+    "[ toggle tags view ]": "[ Symbolanzeige ]",
 
     "Login": "Einloggen",
     "Register": "Registrieren",
@@ -264,7 +266,7 @@
      "Remove 2 floaters to raise Venus scale 1 step": "Entferne 2 Schweber, um die Venuswertung um 1 zu erhöhen",
      "Show timers": "Zeitanzeige",
      "You cannot pay for this card": "Du kannst diese Karte nicht bezahlen",
-     "Select card(s) to buy": "Wähle zu kaufende Karte(n)",
+     "Select card(s) to buy": "Wähle zu kaufende Karten",
 
     "Starting Megacredits:": "Startkapital:",
     "After Preludes:": "Nach Präludium:",
@@ -290,6 +292,11 @@
     "Confirm": "Bestätige",
     "Increase": "Erhöhe",
     "Buy": "Kaufe",
+    "Buy 0" : "Kaufe 0",
+    "Buy 1" : "Kaufe 1",
+    "Buy 2" : "Kaufe 2",
+    "Buy 3" : "Kaufe 3",
+    "Buy 4" : "Kaufe 4",
     "Skip this action": "Überspringe diese Aktion",
     "Keep": "Behalte",
     "Start": "Start",
@@ -304,6 +311,7 @@
     "Hide": "Verberge",
     "Show": "Anzeigen",
     "Your selected cards:": "Deine ausgewählten Karten",
+    "Place a city tile": "Platziere ein Stadtplättchen",
 
     "All": "Alle",
     "Corporate Era": "Zeitalter der Konzerne",
@@ -379,5 +387,11 @@
     "14 Gens": "14 Gen.",
     "TR all": "alle TW",
     "63 TR": "63 TW",
-    "Ok": "OK"
+    "Ok": "OK",
+
+    "The number of available actions on active cards": "Anzahl verfügbarer Aktionen auf aktiven Karten",
+    "Escape Velocity penalty": "Fluchtgeschwindigkeits-Strafe",
+    "Actions taken this game": "Durchgeführte Aktionen in diesem Spiel",
+    "Show information that can be helpful to players who are still learning the games": "Zeige Informationen, die für neue\nSpieler nützlich sein könnten",
+    "Test out any possible new experimental UI features for feedback.": "Teste neue experimentelle Funktionen der\nBenutzeroberfläche, um Feedback zu geben."
 }

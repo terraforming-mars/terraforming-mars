@@ -63,7 +63,7 @@ export interface IDatabase {
     /**
      * Load a game at a specific save point.
      */
-    getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;
+    getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame>;
 
     /**
      * Return a list of all `game_id`s.
@@ -149,4 +149,11 @@ export interface IDatabase {
      * * This whole method is ignored in LocalFilesystem.
      */
     purgeUnfinishedGames(): void;
+
+    /**
+     * Generate database statistics for admin purposes.
+     *
+     * Key/value responses will vary between databases.
+     */
+    stats(): Promise<{[key: string]: string | number}>;
 }

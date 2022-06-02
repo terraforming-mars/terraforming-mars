@@ -1,8 +1,7 @@
 <template>
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
-          <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button">
-            <!-- TODO - Add i18n for this button -->
+          <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button" v-i18n>
             {{ hideTiles ? 'show' : 'hide' }} tiles
           </div>
         </div>

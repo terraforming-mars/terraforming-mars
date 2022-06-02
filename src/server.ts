@@ -126,7 +126,16 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
 }
 
 Database.getInstance().initialize()
-  .then(() => {
+  .catch((err) => {
+    console.error('Cannot connect to database:', err);
+    throw err;
+  }).then(async () => {
+    const stats = await Database.getInstance().stats();
+    console.log(JSON.stringify(stats, undefined, 2));
+  }).catch((err) => {
+    console.error('Cannot generate stats:', err);
+    // Do not fail.
+  }).then(() => {
     Database.getInstance().purgeUnfinishedGames();
 
     const port = process.env.PORT || 8080;
@@ -144,8 +153,8 @@ Database.getInstance().initialize()
       '* Overview of existing games: /games-overview?serverId=' + serverId,
     );
     console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
-  })
-  .catch((err) => {
-    console.error('Cannot connect to database:', err);
+  }).catch((err) => {
+    console.error('Cannot start server:', err);
     throw err;
   });
+

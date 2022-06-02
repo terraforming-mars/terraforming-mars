@@ -136,7 +136,7 @@ export default (Vue as WithRefs<Refs>).extend({
           <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.learner_mode" data-test="learner_mode">
           <i class="form-icon"></i>
           <span v-i18n>Learner Mode (req. refresh)</span>
-          <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
+          <span class="tooltip tooltip-left" :data-tooltip="$t('Show information that can be helpful\n to players who are still learning the games')">&#9432;</span>
         </label>
       </div>
       <div class="preferences_panel_item">
@@ -144,7 +144,7 @@ export default (Vue as WithRefs<Refs>).extend({
           <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.experimental_ui" data-test="experimental_ui">
           <i class="form-icon"></i>
           <span v-i18n>Experimental UI</span>
-          <span class="tooltip tooltip-left" data-tooltip="Test out any possible new experimental UI features for feedback.">&#9432;</span>
+          <span class="tooltip tooltip-left" :data-tooltip="$t('Test out any possible new experimental UI features for feedback.')">&#9432;</span>
         </label>
       </div>
       <div class="preferences_panel_item form-group">

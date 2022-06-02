@@ -94,6 +94,7 @@
     "City in space.": "太空城市",
     "${0} gained 2 ${1} from ${2}": "${0} 从 ${2} 获得 2 个${1}",
     "${0}'s ${1} amount ${2} by ${3} stolen by ${4}": "${4} ${2} 了 ${0} 的 ${1} ${3} 点",
+    "${0}'s ${1} production ${2} by ${3} stolen by ${4}": "${4} ${2} 了 ${0} 的 ${1} 产量 ${3} 点",
 
     "Power Plant:SP": "发电厂",
     "Asteroid:SP": "小行星",

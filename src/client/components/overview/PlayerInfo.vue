@@ -139,7 +139,7 @@ export default Vue.extend({
             </div>
             <Button class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel()" />
           </div>
-          <div class="tag-display player-board-blue-action-counter" :class="tooltipCss" data-tooltip="The number of available actions on active cards">
+          <div class="tag-display player-board-blue-action-counter" :class="tooltipCss" :data-tooltip="$t('The number of available actions on active cards')">
             <div class="tag-count tag-action-card">
               <div class="blue-stripe"></div>
               <div class="red-arrow"></div>

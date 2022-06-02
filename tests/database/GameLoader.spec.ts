@@ -54,7 +54,7 @@ describe('GameLoader', function() {
   });
 
   it('gets undefined when player does not exist', function(done) {
-    GameLoader.getInstance().getByPlayerId('foobar', (game) => {
+    GameLoader.getInstance().getByParticipantId('foobar', (game) => {
       try {
         expect(game).is.undefined;
         done();
@@ -113,7 +113,7 @@ describe('GameLoader', function() {
     const workingGetGames = Database.getInstance().getGames;
     Database.getInstance().getGames = () => Promise.resolve(['foobar']);
     (GameLoader.getInstance() as GameLoader).reset();
-    GameLoader.getInstance().getByPlayerId(game.getPlayersInGenerationOrder()[0].id, (game1) => {
+    GameLoader.getInstance().getByParticipantId(game.getPlayersInGenerationOrder()[0].id, (game1) => {
       try {
         expect(game1).is.not.undefined;
         done();
@@ -152,7 +152,7 @@ describe('GameLoader', function() {
 
   it('gets player when it exists in database', function(done) {
     const players = game.getPlayersInGenerationOrder();
-    GameLoader.getInstance().getByPlayerId(players[Math.floor(Math.random() * players.length)].id, (game1) => {
+    GameLoader.getInstance().getByParticipantId(players[Math.floor(Math.random() * players.length)].id, (game1) => {
       try {
         expect(game1!.id).to.eq(game.id);
         done();
@@ -180,7 +180,7 @@ describe('GameLoader', function() {
   it('gets player when added and not in database', function(done) {
     const players = game.getPlayersInGenerationOrder();
     GameLoader.getInstance().add(game);
-    GameLoader.getInstance().getByPlayerId(players[Math.floor(Math.random() * players.length)]!.id, (game1) => {
+    GameLoader.getInstance().getByParticipantId(players[Math.floor(Math.random() * players.length)]!.id, (game1) => {
       try {
         expect(game1).is.not.undefined;
         GameLoader.getInstance().getLoadedGameIds((list) => {
@@ -235,7 +235,7 @@ describe('GameLoader', function() {
     const workingGetGames = Database.getInstance().getGames;
     Database.getInstance().getGames = () => Promise.resolve([]);
     (GameLoader.getInstance() as GameLoader).reset();
-    GameLoader.getInstance().getByPlayerId('foobar', (game1) => {
+    GameLoader.getInstance().getByParticipantId('foobar', (game1) => {
       try {
         expect(game1).is.undefined;
         done();
@@ -255,7 +255,7 @@ describe('GameLoader', function() {
       try {
         expect(game1).is.not.undefined;
         expect(game1!.id).to.eq('foobar');
-        GameLoader.getInstance().getByPlayerId(game.getPlayersInGenerationOrder()[0].id, (game1) => {
+        GameLoader.getInstance().getByParticipantId(game.getPlayersInGenerationOrder()[0].id, (game1) => {
           try {
             expect(game1!.id).to.eq('foobar');
             done();

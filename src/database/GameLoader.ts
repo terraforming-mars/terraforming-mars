@@ -66,7 +66,7 @@ export class GameLoader implements IGameLoader {
     });
   }
 
-  private getByParticipantId(id: PlayerId | SpectatorId, cb: LoadCallback): void {
+  public getByParticipantId(id: PlayerId | SpectatorId, cb: LoadCallback): void {
     this.idsContainer.getGames().then( (d) => {
       const gameId = d.participantIds.get(id);
       if (gameId !== undefined && d.games.get(gameId) !== undefined) {
@@ -77,14 +77,6 @@ export class GameLoader implements IGameLoader {
         cb(undefined);
       }
     });
-  }
-
-  public getByPlayerId(playerId: PlayerId, cb: LoadCallback): void {
-    this.getByParticipantId(playerId, cb);
-  }
-
-  public getBySpectatorId(spectatorId: SpectatorId, cb: LoadCallback): void {
-    this.getByParticipantId(spectatorId, cb);
   }
 
   public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {

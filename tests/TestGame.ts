@@ -1,6 +1,6 @@
 import {Game, GameOptions} from '../src/Game';
 import {TestPlayers} from './TestPlayers';
-import {TestingUtils} from './TestingUtils';
+import {setCustomGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 
 export function newTestGame(count: number, customOptions?: Partial<GameOptions>): Game {
@@ -17,7 +17,7 @@ export function newTestGame(count: number, customOptions?: Partial<GameOptions>)
 
   const options: GameOptions | undefined = customOptions === undefined ?
     undefined :
-    TestingUtils.setCustomGameOptions(customOptions);
+    setCustomGameOptions(customOptions);
   return Game.newInstance('game-id', players, players[0], options);
 }
 

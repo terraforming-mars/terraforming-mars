@@ -63,7 +63,7 @@ export class Localfilesystem implements IDatabase {
     throw new Error('Not implemented');
   }
 
-  getGameVersion(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
+  getGameVersion(_game_id: GameId, _save_id: number): Promise<SerializedGame> {
     throw new Error('Not implemented');
   }
 
@@ -144,5 +144,13 @@ export class Localfilesystem implements IDatabase {
 
   deleteGameNbrSaves(_gameId: GameId, _rollbackCount: number): void {
     throw new Error('Rollback not yet implemented');
+  }
+
+  public stats(): Promise<{[key: string]: string | number}> {
+    return Promise.resolve({
+      type: 'Local Filesystem',
+      path: dbFolder.toString(),
+      history_path: historyFolder.toString(),
+    });
   }
 }

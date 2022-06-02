@@ -167,17 +167,14 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
-    this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        console.error('PostgreSQL:getGameVersion', err);
-        return cb(err, undefined);
-      }
-      if (res.rowCount === 0) {
-        return cb(new Error(`Game ${game_id} not found at save_id ${save_id}`), undefined);
-      }
-      cb(undefined, JSON.parse(res.rows[0].game));
-    });
+  getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
+    return this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id])
+      .then((res) => {
+        if (res.rowCount === 0) {
+          throw new Error(`Game ${game_id} not found at save_id ${save_id}`);
+        }
+        return JSON.parse(res.rows[0].game);
+      });
   }
 
   saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
@@ -304,9 +301,6 @@ export class PostgreSQL implements IDatabase {
         map['size-bytes-game-results'] = result.rows[0].game_result_size;
         map['size-bytes-database'] = result.rows[0].db_size;
         return map;
-      })
-      .catch((err) => {
-        throw err;
       });
   }
 }

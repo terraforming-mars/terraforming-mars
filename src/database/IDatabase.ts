@@ -64,7 +64,7 @@ export interface IDatabase {
     /**
      * Load a game at a specific save point.
      */
-    getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;
+    getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame>;
 
     /**
      * Return a list of all `game_id`s.

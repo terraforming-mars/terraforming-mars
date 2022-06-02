@@ -2,7 +2,6 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
-import {IGameData} from '@/common/game/IGameData';
 
 export class ApiCloneableGame extends Handler {
   public static readonly INSTANCE = new ApiCloneableGame();
@@ -26,11 +25,7 @@ export class ApiCloneableGame extends Handler {
         ctx.route.notFound(req, res);
         return;
       }
-      const response: IGameData = {
-        gameId,
-        playerCount,
-      };
-      ctx.route.writeJson(res, response);
+      ctx.route.writeJson(res, {gameId, playerCount});
     });
   }
 }

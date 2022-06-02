@@ -1,7 +1,6 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 
 import {Pool, ClientConfig, QueryResult} from 'pg';
@@ -43,29 +42,6 @@ export class PostgreSQL implements IDatabase {
       .catch((err) => {
         throw err;
       });
-  }
-
-  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
-    const allGames: Array<IGameData> = [];
-    const sql = 'SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc';
-
-    this.client.query(sql, (err, res) => {
-      if (err) {
-        console.error('PostgreSQL:getClonableGames', err);
-        cb(err, []);
-        return;
-      }
-      for (const row of res.rows) {
-        const gameId: GameId = row.game_id;
-        const playerCount: number = row.players;
-        const gameData: IGameData = {
-          gameId,
-          playerCount,
-        };
-        allGames.push(gameData);
-      }
-      cb(undefined, allGames);
-    });
   }
 
   getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {

@@ -1,7 +1,6 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent} from 'fs';
 
@@ -65,18 +64,6 @@ export class Localfilesystem implements IDatabase {
 
   getGameVersion(_game_id: GameId, _save_id: number): Promise<SerializedGame> {
     throw new Error('Not implemented');
-  }
-
-  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
-    this.getGames().then((gameIds) => {
-      const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
-      const gameData = filtered.map((gameId) => {
-        const text = fs.readFileSync(this._historyFilename(gameId, 0));
-        const serializedGame = JSON.parse(text) as SerializedGame;
-        return {gameId: gameId, playerCount: serializedGame.players.length};
-      });
-      cb(undefined, gameData);
-    });
   }
 
   getPlayerCount(gameId: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {

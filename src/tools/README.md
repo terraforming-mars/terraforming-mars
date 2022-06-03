@@ -40,7 +40,14 @@ as result you will see the warnings for Chinese and Russian languages only.
 ### Usage
 
 ```
-heroku pg:credentials:url --app <your-app-name>
+npm run build
+sh src/tools/export_game.sh <heroku-app-name>  <game id | player id | spectator id>
+```
+
+or
+
+```
+heroku pg:credentials:url --app <heroku-app-name>
 POSTGRES_HOST=<postges:...> node build/src/tools/export_game.js <game id | player id | spectator id>
 ```
 

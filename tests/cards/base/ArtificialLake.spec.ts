@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {
   let card : ArtificialLake; let player : TestPlayer; let game : Game;
@@ -82,7 +82,7 @@ describe('ArtificialLake', function() {
 
   it('Can still play if oceans are maxed but no land spaces are available', function() {
     (game as any).temperature = -6;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
 
     // Take all land spaces
     const spaces = game.board.getAvailableSpacesOnLand(player);

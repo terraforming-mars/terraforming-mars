@@ -125,12 +125,20 @@ export class Localfilesystem implements IDatabase {
     // Not implemented.
   }
 
-  restoreGame(_gameId: GameId, _save_id: number, _cb: DbLoadCallback<Game>): void {
-    throw new Error('Undo not yet implemented');
+  restoreGame(gameId: GameId, saveId: number, cb: DbLoadCallback<Game>): void {
+    fs.copyFileSync(this._historyFilename(gameId, saveId), this._filename(gameId));
+    this.getGame(gameId, (err, serializedGame) => {
+      if (err) {
+        cb(err, undefined);
+      } else {
+        const game = Game.deserialize(serializedGame!);
+        cb(err, game);
+      }
+    });
   }
 
   deleteGameNbrSaves(_gameId: GameId, _rollbackCount: number): void {
-    throw new Error('Rollback not yet implemented');
+    console.error('deleting old saves not implemented.');
   }
 
   public stats(): Promise<{[key: string]: string | number}> {

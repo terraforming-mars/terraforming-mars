@@ -12,6 +12,7 @@ import {ApiCloneableGame} from './routes/ApiCloneableGame';
 import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
+import {ApiGameHistory} from './routes/ApiGameHistory';
 import {ApiPlayer} from './routes/ApiPlayer';
 import {ApiSpectator} from './routes/ApiSpectator';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
@@ -40,6 +41,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['/', ServeApp.INSTANCE],
     ['/api/cloneablegame', ApiCloneableGame.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
+    ['/api/game/history', ApiGameHistory.INSTANCE],
     ['/api/game/logs', ApiGameLogs.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
     ['/api/player', ApiPlayer.INSTANCE],

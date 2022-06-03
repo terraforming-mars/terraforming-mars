@@ -10,7 +10,7 @@ import {CardResource} from '../../common/CardResource';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {played} from '../Options';
+import {all, played} from '../Options';
 import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
@@ -31,7 +31,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).br;
           b.effect('When any player plays an animal tag (including this), add 1 animal on this card.', (eb) => {
-            eb.animals(1, {played}).startEffect.animals(1);
+            eb.animals(1, {played, all}).startEffect.animals(1);
           }).br;
         }),
       },

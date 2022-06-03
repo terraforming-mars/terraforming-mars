@@ -1663,7 +1663,7 @@ export class Game {
       game.colonies = ColonyDeserializer.deserializeAndFilter(d.colonies);
       const dealer = new ColonyDealer(rng, gameOptions);
       dealer.restore(game.colonies);
-      game.discardedColonies = game.discardedColonies;
+      game.discardedColonies = dealer.discardedColonies;
     }
 
     // Reload turmoil elements if needed

@@ -1,7 +1,6 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 
 import {Pool, ClientConfig, QueryResult} from 'pg';
@@ -45,29 +44,6 @@ export class PostgreSQL implements IDatabase {
       });
   }
 
-  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
-    const allGames: Array<IGameData> = [];
-    const sql = 'SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc';
-
-    this.client.query(sql, (err, res) => {
-      if (err) {
-        console.error('PostgreSQL:getClonableGames', err);
-        cb(err, []);
-        return;
-      }
-      for (const row of res.rows) {
-        const gameId: GameId = row.game_id;
-        const playerCount: number = row.players;
-        const gameData: IGameData = {
-          gameId,
-          playerCount,
-        };
-        allGames.push(gameData);
-      }
-      cb(undefined, allGames);
-    });
-  }
-
   getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = $1 LIMIT 1';
 
@@ -85,20 +61,15 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
-    const allGames: Array<GameId> = [];
+  getGames(): Promise<Array<GameId>> {
     const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
-    this.client.query(sql, (err, res) => {
-      if (err) {
+    return this.client.query(sql)
+      .then((res) => {
+        return res.rows.map((row) => row.game_id);
+      }).catch((err) => {
         console.error('PostgreSQL:getGames', err);
-        cb(err, []);
-        return;
-      }
-      for (const row of res.rows) {
-        allGames.push(row.game_id);
-      }
-      cb(undefined, allGames);
-    });
+        throw err;
+      });
   }
 
   loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
@@ -167,17 +138,23 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
-    this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        console.error('PostgreSQL:getGameVersion', err);
-        return cb(err, undefined);
-      }
-      if (res.rowCount === 0) {
-        return cb(new Error(`Game ${game_id} not found at save_id ${save_id}`), undefined);
-      }
-      cb(undefined, JSON.parse(res.rows[0].game));
+  public async getSaveIds(gameId: GameId): Promise<Array<number>> {
+    const res = await this.client.query('SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]);
+    const allSaveIds: Array<number> = [];
+    res.rows.forEach((row) => {
+      allSaveIds.push(row.save_id);
     });
+    return Promise.resolve(allSaveIds);
+  }
+
+  getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
+    return this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id])
+      .then((res) => {
+        if (res.rowCount === 0) {
+          throw new Error(`Game ${game_id} not found at save_id ${save_id}`);
+        }
+        return JSON.parse(res.rows[0].game);
+      });
   }
 
   saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
@@ -304,9 +281,6 @@ export class PostgreSQL implements IDatabase {
         map['size-bytes-game-results'] = result.rows[0].game_result_size;
         map['size-bytes-database'] = result.rows[0].db_size;
         return map;
-      })
-      .catch((err) => {
-        throw err;
       });
   }
 }

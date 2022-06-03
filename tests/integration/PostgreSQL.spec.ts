@@ -5,7 +5,6 @@ import {TestPlayers} from '../TestPlayers';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
 import {Database} from '../../src/database/Database';
 import {restoreTestDatabase} from '../utils/setup';
-import {GameId} from '../../src/common/Types';
 import {sleep} from '../TestingUtils';
 
 /*
@@ -29,15 +28,6 @@ class TestPostgreSQL extends PostgreSQL {
   public override saveGame(game: Game): Promise<void> {
     this.saveGamePromise = super.saveGame(game);
     return this.saveGamePromise;
-  }
-
-  public async getSaveIds(gameId: GameId): Promise<Array<number>> {
-    const res = await this.client.query('SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]);
-    const allSaveIds: Array<number> = [];
-    res.rows.forEach((row) => {
-      allSaveIds.push(row.save_id);
-    });
-    return Promise.resolve(allSaveIds);
   }
 
   public async tearDown() {

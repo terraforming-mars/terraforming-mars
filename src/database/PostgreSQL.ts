@@ -138,6 +138,15 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
+  public async getSaveIds(gameId: GameId): Promise<Array<number>> {
+    const res = await this.client.query('SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]);
+    const allSaveIds: Array<number> = [];
+    res.rows.forEach((row) => {
+      allSaveIds.push(row.save_id);
+    });
+    return Promise.resolve(allSaveIds);
+  }
+
   getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
     return this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id])
       .then((res) => {

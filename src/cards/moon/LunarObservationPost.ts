@@ -27,7 +27,7 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
         cardNumber: 'M22',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 data resource to ANY card', (ab) => {
-            ab.data().startAction.asterix();
+            ab.empty().startAction.data().asterix();
           });
           b.br;
           b.minus().titanium(1);

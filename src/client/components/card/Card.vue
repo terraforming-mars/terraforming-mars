@@ -3,6 +3,7 @@
       <div class="card-content-wrapper" v-i18n>
           <div v-if="!isStandardProject()" class="card-cost-and-tags">
               <CardCost :amount="getCost()" :newCost="getReducedCost()" />
+              <card-help v-show="hasHelp" :name="card.name" />
               <CardTags :tags="getTags()" />
           </div>
           <CardTitle :title="card.name" :type="getCardType()"/>
@@ -28,17 +29,27 @@ import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
 import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
+import CardHelp from './CardHelp.vue';
 import {ICardMetadata} from '@/common/cards/ICardMetadata';
 import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import {Tags} from '@/common/cards/Tags';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {CardResource} from '@/common/CardResource';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
+import {CardName} from '@/common/cards/CardName';
+
+const names = [
+  CardName.BOTANICAL_EXPERIENCE,
+  CardName.MARS_DIRECT,
+  CardName.LUNA_ECUMENOPOLIS,
+  CardName.ROBOTIC_WORKFORCE,
+];
 
 export default Vue.extend({
   name: 'Card',
   components: {
     CardTitle,
+    CardHelp,
     CardResourceCounter,
     CardCost,
     CardExtraContent,
@@ -145,6 +156,9 @@ export default Vue.extend({
       if (this.card.resourceType !== undefined) return this.card.resourceType;
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
       return CardResource.RESOURCE_CUBE;
+    },
+    hasHelp(): boolean {
+      return names.includes(this.card.name) && getPreferences().experimental_ui;
     },
   },
 });

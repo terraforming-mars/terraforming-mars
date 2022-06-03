@@ -63,7 +63,7 @@ function getWaitingForTimeout() {
   if (process.env.WAITING_FOR_TIMEOUT) {
     return Number(process.env.WAITING_FOR_TIMEOUT);
   }
-  return 2500;
+  return 1000;
 }
 
 function getLogLength() {

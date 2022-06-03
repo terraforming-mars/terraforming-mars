@@ -1,7 +1,6 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
@@ -55,26 +54,6 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
-    const allGames: Array<IGameData> = [];
-    const sql = 'SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc';
-
-    this.db.all(sql, [], (err, rows) => {
-      if (rows) {
-        rows.forEach((row) => {
-          const gameId: GameId = row.game_id;
-          const playerCount: number = row.players;
-          const gameData: IGameData = {
-            gameId,
-            playerCount,
-          };
-          allGames.push(gameData);
-        });
-        return cb(err ?? undefined, allGames);
-      }
-    });
-  }
-
   getPlayerCount(gameId: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
 
@@ -89,16 +68,21 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
-    const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
-    this.db.all(sql, [], (err, rows) => {
-      if (rows) {
-        rows.forEach((row) => {
-          allGames.push(row.game_id);
-        });
-      }
-      return cb(err ?? undefined, allGames);
+  getGames(): Promise<Array<GameId>> {
+    return new Promise((resolve, reject) => {
+      const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
+
+      this.db.all(sql, [], (err, rows) => {
+        if (err) {
+          reject(new Error('Error in getGames: ' + err.message));
+        } else {
+          const allGames: Array<GameId> = [];
+          rows.forEach((row) => {
+            allGames.push(row.game_id);
+          });
+          resolve(allGames);
+        }
+      });
     });
   }
 
@@ -181,12 +165,18 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
-    this.db.get('SELECT game game FROM games WHERE game_id = ? and save_id = ?', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
-      if (err) {
-        return cb(err ?? undefined, undefined);
-      }
-      cb(undefined, JSON.parse(row.game));
+  getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
+    return new Promise((resolve, reject) => {
+      this.db.get(
+        'SELECT game game FROM games WHERE game_id = ? and save_id = ?',
+        [game_id, save_id],
+        (err: Error | null, row: { game: any; }) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(JSON.parse(row.game));
+          }
+        });
     });
   }
 

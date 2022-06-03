@@ -1,4 +1,7 @@
-import {expect} from 'chai';
+import {use, expect} from 'chai';
+import chaiAsPromised = require('chai-as-promised');
+use(chaiAsPromised);
+
 import {Game} from '../../src/Game';
 import {GameId} from '../../src/common/Types';
 import {TestPlayers} from '../TestPlayers';
@@ -170,6 +173,17 @@ describe('SQLite', () => {
 
     const serialized3 = await db.getGameVersion(game.id, 3);
     expect(serialized3.players[0].megaCredits).eq(400);
+  });
+
+  it('loadCloneableGame', async () => {
+    await expect(db.loadCloneableGame('123')).to.be.rejectedWith(/Game 123 not found/);
+
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-123', [player], player);
+    await db.saveGamePromise;
+    const serialized = await db.loadCloneableGame('game-id-123');
+
+    expect(game.id).eq(serialized.id);
   });
 
   it('stats', async () => {

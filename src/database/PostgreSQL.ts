@@ -72,26 +72,16 @@ export class PostgreSQL implements IDatabase {
       });
   }
 
-  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
+  loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
     // Retrieve first save from database
-    this.client.query('SELECT game_id game_id, game game FROM games WHERE game_id = $1 AND save_id = 0', [game_id], (err: Error | undefined, res) => {
-      if (err) {
-        console.error('PostgreSQL:restoreReferenceGame', err);
-        return cb(err, undefined);
-      }
-      if (res.rows.length === 0) {
-        return cb(new Error(`Game ${game_id} not found`), undefined);
-      }
-      try {
+    return this.client.query('SELECT game_id, game FROM games WHERE game_id = $1 AND save_id = 0', [game_id])
+      .then((res) => {
+        if (res.rows.length === 0) {
+          throw new Error(`Game ${game_id} not found`);
+        }
         const json = JSON.parse(res.rows[0].game);
-        return cb(undefined, json);
-      } catch (exception) {
-        const error = exception instanceof Error ? exception : new Error(String(exception));
-        console.error(`Unable to restore game ${game_id}`, error);
-        cb(error, undefined);
-        return;
-      }
-    });
+        return json;
+      });
   }
 
   getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {

@@ -7,6 +7,7 @@ require('console-stamp')(
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
+import * as raw_settings from './genfiles/settings.json';
 
 import {ApiCloneableGame} from './routes/ApiCloneableGame';
 import {ApiGameLogs} from './routes/ApiGameLogs';
@@ -14,6 +15,7 @@ import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
 import {ApiGameHistory} from './routes/ApiGameHistory';
 import {ApiPlayer} from './routes/ApiPlayer';
+import {ApiStats} from './routes/ApiStats';
 import {ApiSpectator} from './routes/ApiSpectator';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
 import {Database} from './database/Database';
@@ -27,7 +29,6 @@ import {Route} from './routes/Route';
 import {PlayerInput} from './routes/PlayerInput';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
-import * as raw_settings from './genfiles/settings.json';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -45,6 +46,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['/api/game/logs', ApiGameLogs.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
     ['/api/player', ApiPlayer.INSTANCE],
+    ['/api/stats', ApiStats.INSTANCE],
     ['/api/spectator', ApiSpectator.INSTANCE],
     ['/api/waitingfor', ApiWaitingFor.INSTANCE],
     ['/cards', ServeApp.INSTANCE],

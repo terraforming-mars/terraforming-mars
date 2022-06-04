@@ -62,8 +62,15 @@ export class Localfilesystem implements IDatabase {
     throw new Error('Not implemented');
   }
 
-  getSaveIds(_gameId: GameId): Promise<Array<number>> {
-    throw new Error('Not implemented');
+  getSaveIds(gameId: GameId): Promise<Array<number>> {
+    const re = /(.*)-(.*).json/;
+    const results = fs.readdirSync(historyFolder, {withFileTypes: true})
+      .filter((dirent: Dirent) => dirent.name.startsWith(gameId + '-'))
+      .filter((dirent: Dirent) => dirent.isFile())
+      .map((dirent: Dirent) => dirent.name.match(re))
+      .filter((result: RegExpMatchArray) => result !== null)
+      .map((result: RegExpMatchArray) => result[2]);
+    return Promise.resolve(results);
   }
 
   getGameVersion(_game_id: GameId, _save_id: number): Promise<SerializedGame> {

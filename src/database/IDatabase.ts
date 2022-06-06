@@ -113,7 +113,7 @@ export interface IDatabase {
     /**
      * Load a game at save point 0, and provide it in the callback.
      */
-    loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>): void;
+    loadCloneableGame(game_id: GameId): Promise<SerializedGame>;
 
     /**
      * Deletes the last `rollbackCount` saves of the specified game.

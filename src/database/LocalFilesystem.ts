@@ -90,15 +90,15 @@ export class Localfilesystem implements IDatabase {
     });
   }
 
-  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
+  loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
     try {
       console.log(`Loading ${game_id} at save point 0`);
       const text = fs.readFileSync(this._historyFilename(game_id, 0));
       const serializedGame = JSON.parse(text);
-      cb(undefined, serializedGame);
+      return Promise.resolve(serializedGame);
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
-      cb(error, undefined);
+      return Promise.reject(error);
     }
   }
 

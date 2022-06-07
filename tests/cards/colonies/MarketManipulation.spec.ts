@@ -1,44 +1,55 @@
+import {SelectColony} from './../../../src/inputs/SelectColony';
 import {expect} from 'chai';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Pets} from '../../../src/cards/base/Pets';
 import {MarketManipulation} from '../../../src/cards/colonies/MarketManipulation';
 import {Enceladus} from '../../../src/colonies/Enceladus';
 import {Luna} from '../../../src/colonies/Luna';
 import {Miranda} from '../../../src/colonies/Miranda';
-import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 describe('MarketManipulation', function() {
-  let card : MarketManipulation; let player : Player; let player2: Player; let luna: Luna;
+  let card : MarketManipulation;
+  let player : Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MarketManipulation();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
-    luna = new Luna();
+    game = newTestGame(2, {
+      coloniesExtension: true,
+      customColoniesList: [
+        ColonyName.GANYMEDE,
+        ColonyName.LUNA,
+        ColonyName.PLUTO,
+        ColonyName.CALLISTO,
+        ColonyName.EUROPA],
+    });
+    player = getTestPlayer(game, 0);
   });
 
   it('Should play', function() {
-    const triton = new Triton();
-    player.game.colonies.push(luna, triton);
+    card.play(player);
+    const increaseColonyAction = game.deferredActions.pop()!.execute() as SelectColony;
+    increaseColonyAction.cb(increaseColonyAction.colonies[0]);
+    expect(game.colonies[0].trackPosition).to.eq(2);
+    expect(game.colonies[1].trackPosition).to.eq(1);
+    expect(game.colonies[2].trackPosition).to.eq(1);
 
-    const action = card.play(player) as OrOptions;
-    expect(action).is.not.undefined;
-    expect(action.options[0].title).to.eq('Increase Luna (MegaCredits) and decrease Triton (Titanium)');
-    action.options[0].cb();
-
-    expect(luna.trackPosition).to.eq(2);
-    expect(triton.trackPosition).to.eq(0);
+    const decreaseColonyAction = game.deferredActions.pop()!.execute() as SelectColony;
+    decreaseColonyAction.cb(increaseColonyAction.colonies[1]);
+    expect(game.colonies[0].trackPosition).to.eq(2);
+    expect(game.colonies[1].trackPosition).to.eq(0);
+    expect(game.colonies[2].trackPosition).to.eq(1);
   });
 
   it('Can\'t play', function() {
     const enceladus = new Enceladus();
     const miranda = new Miranda();
+    const luna = new Luna();
 
-    player.game.colonies.push(enceladus, miranda, luna);
+    player.game.colonies = [enceladus, miranda, luna];
     player.game.gameOptions.coloniesExtension = true;
     expect(card.canPlay(player)).is.not.true;
 

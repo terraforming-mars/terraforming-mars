@@ -61,42 +61,27 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
-    const allGames: Array<GameId> = [];
+  getGames(): Promise<Array<GameId>> {
     const sql: string = 'SELECT distinct game_id FROM games';
-    this.client.query(sql, (err, res) => {
-      if (err) {
+    return this.client.query(sql)
+      .then((res) => {
+        return res.rows.map((row) => row.game_id);
+      }).catch((err) => {
         console.error('PostgreSQL:getGames', err);
-        cb(err, []);
-        return;
-      }
-      for (const row of res.rows) {
-        allGames.push(row.game_id);
-      }
-      cb(undefined, allGames);
-    });
+        throw err;
+      });
   }
 
-  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
+  loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
     // Retrieve first save from database
-    this.client.query('SELECT game_id game_id, game game FROM games WHERE game_id = $1 AND save_id = 0', [game_id], (err: Error | undefined, res) => {
-      if (err) {
-        console.error('PostgreSQL:restoreReferenceGame', err);
-        return cb(err, undefined);
-      }
-      if (res.rows.length === 0) {
-        return cb(new Error(`Game ${game_id} not found`), undefined);
-      }
-      try {
+    return this.client.query('SELECT game_id, game FROM games WHERE game_id = $1 AND save_id = 0', [game_id])
+      .then((res) => {
+        if (res.rows.length === 0) {
+          throw new Error(`Game ${game_id} not found`);
+        }
         const json = JSON.parse(res.rows[0].game);
-        return cb(undefined, json);
-      } catch (exception) {
-        const error = exception instanceof Error ? exception : new Error(String(exception));
-        console.error(`Unable to restore game ${game_id}`, error);
-        cb(error, undefined);
-        return;
-      }
-    });
+        return json;
+      });
   }
 
   getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
@@ -141,6 +126,15 @@ export class PostgreSQL implements IDatabase {
       const gameId = res.rows[0].game_id;
       cb(undefined, gameId);
     });
+  }
+
+  public async getSaveIds(gameId: GameId): Promise<Array<number>> {
+    const res = await this.client.query('SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]);
+    const allSaveIds: Array<number> = [];
+    res.rows.forEach((row) => {
+      allSaveIds.push(row.save_id);
+    });
+    return Promise.resolve(allSaveIds);
   }
 
   getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {

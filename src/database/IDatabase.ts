@@ -61,19 +61,19 @@ export interface IDatabase {
     getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void;
 
     /**
+     * Get all the save ids assocaited with a game.
+     */
+    getSaveIds(gameId: GameId): Promise<Array<number>>
+
+    /**
      * Load a game at a specific save point.
      */
     getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame>;
 
     /**
      * Return a list of all `game_id`s.
-     *
-     * @param cb a callback containing either a failure to load, or a list of
-     * references to cloneable games.
-     *
-     * @param cb a callback either returning either an error or a list of all `game_id`s.
      */
-    getGames(cb:(err: Error | undefined, allGames:Array<GameId>) => void): void;
+    getGames(): Promise<Array<GameId>>;
 
     /**
      * Get the player count for a game.
@@ -113,7 +113,7 @@ export interface IDatabase {
     /**
      * Load a game at save point 0, and provide it in the callback.
      */
-    loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>): void;
+    loadCloneableGame(game_id: GameId): Promise<SerializedGame>;
 
     /**
      * Deletes the last `rollbackCount` saves of the specified game.

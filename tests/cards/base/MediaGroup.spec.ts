@@ -3,7 +3,7 @@ import {MediaGroup} from '../../../src/cards/base/MediaGroup';
 import {Virus} from '../../../src/cards/base/Virus';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('MediaGroup', function() {
   it('Should play', function() {
@@ -16,12 +16,12 @@ describe('MediaGroup', function() {
 
     card.onCardPlayed(player, new Virus());
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).to.eq(3);
 
     card.onCardPlayed(player, card);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).to.eq(3);
   });

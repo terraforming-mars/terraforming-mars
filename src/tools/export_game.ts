@@ -54,20 +54,23 @@ function load(gameId: string) {
     // The output might not be returned in order, because the
     // inner call is async, but it is faster than forcing the
     // results to come in order.
-    for (let version = 0; version <= game.lastSaveId; version++) {
-      await db.getGameVersion(gameId, version).then((serialized) => {
-        console.log(`Storing version ${version}`);
-        localDb.saveSerializedGame(serialized!);
-        writes++;
-      }).catch((err) => {
-        console.log(`failed to process version ${version}: ${err}`);
-        errors++;
+    db.getSaveIds(gameId)
+      .then((saveIds) => {
+        saveIds.forEach((saveId) => {
+          db.getGameVersion(gameId, saveId)
+            .then((serialized) => {
+              console.log(`Storing version ${saveId}`);
+              localDb.saveSerializedGame(serialized!);
+              writes++;
+            }).catch((err) => {
+              console.log(`failed to process saveId ${saveId}: ${err}`);
+              errors++;
+            });
+          if (errors + writes === saveIds.length) {
+            // This is the last one.
+            console.log(`Wrote ${writes} records and had ${errors} failures.`);
+          }
+        });
       });
-      if (errors + writes === game.lastSaveId + 1) {
-        // This is the last one.
-        console.log(`Wrote ${writes} records and had ${errors} failures.`);
-      }
-    }
   });
 }
-

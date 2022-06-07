@@ -5,7 +5,7 @@ import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LargeConvoy', function() {
@@ -60,7 +60,7 @@ describe('LargeConvoy', function() {
   it('Should play without oceans', function() {
     const pets = new Pets();
     player.playedCards.push(pets);
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     const plantsCount = player.plants;
     const cardsInHand = player.cardsInHand.length;
 

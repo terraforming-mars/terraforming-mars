@@ -68,35 +68,46 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
-    const allGames: Array<GameId> = [];
-    const sql: string = 'SELECT distinct game_id FROM games';
-    this.db.all(sql, [], (err, rows) => {
-      if (rows) {
-        rows.forEach((row) => {
-          allGames.push(row.game_id);
-        });
-      }
-      return cb(err ?? undefined, allGames);
+  getGames(): Promise<Array<GameId>> {
+    return new Promise((resolve, reject) => {
+      const sql: string = 'SELECT distinct game_id game_id FROM games';
+
+      this.db.all(sql, [], (err, rows) => {
+        if (err) {
+          reject(new Error('Error in getGames: ' + err.message));
+        } else {
+          const allGames: Array<GameId> = [];
+          rows.forEach((row) => {
+            allGames.push(row.game_id);
+          });
+          resolve(allGames);
+        }
+      });
     });
   }
 
-  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
+  loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
+    return new Promise((resolve, reject) => {
     // Retrieve first save from database
-    this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: Error | null, row: { game_id: GameId, game: any; }) => {
-      if (row.game_id === undefined) {
-        return cb(new Error('Game not found'), undefined);
-      }
+      this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: Error | null, row: { game_id: GameId, game: any; }) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        if (row?.game_id === undefined) {
+          reject(new Error(`Game ${game_id} not found`));
+          return;
+        }
 
-      try {
-        const json = JSON.parse(row.game);
-        return cb(err ?? undefined, json);
-      } catch (exception) {
-        console.error(`unable to load game ${game_id} at save point 0`, exception);
-        const error = exception instanceof Error ? exception : new Error(String(exception));
-        cb(error, undefined);
-        return;
-      }
+        try {
+          const json = JSON.parse(row.game);
+          resolve(json);
+        } catch (exception) {
+          console.error(`unable to load game ${game_id} at save point 0`, exception);
+          const error = exception instanceof Error ? exception : new Error(String(exception));
+          reject(error);
+        }
+      });
     });
   }
 
@@ -138,6 +149,25 @@ export class SQLite implements IDatabase {
         return cb(err ?? undefined);
       }
       cb(undefined, row.gameId);
+    });
+  }
+
+  public getSaveIds(gameId: GameId): Promise<Array<number>> {
+    return new Promise((resolve, reject) => {
+      const allSaveIds: Array<number> = [];
+      const sql: string = 'SELECT distinct save_id FROM games WHERE game_id = ?';
+      this.db.all(sql, [gameId], (err, rows) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        if (rows) {
+          rows.forEach((row) => {
+            allSaveIds.push(row.save_id);
+          });
+        }
+        resolve(allSaveIds);
+      });
     });
   }
 

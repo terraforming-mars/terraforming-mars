@@ -6,7 +6,7 @@ import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('Airliners', function() {
   let card: Airliners;
@@ -55,7 +55,7 @@ describe('Airliners', function() {
 
     const action = card.play(player);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).eq(2);

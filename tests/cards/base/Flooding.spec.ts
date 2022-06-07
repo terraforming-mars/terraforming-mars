@@ -7,7 +7,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Flooding', function() {
@@ -81,7 +81,7 @@ describe('Flooding', function() {
   });
 
   it('Does not suggest to remove money if oceans are already maxed', function() {
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);

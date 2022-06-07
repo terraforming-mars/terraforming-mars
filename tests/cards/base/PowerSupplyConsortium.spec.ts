@@ -5,7 +5,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 
 describe('PowerSupplyConsortium', function() {
   let card : PowerSupplyConsortium; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -28,7 +28,7 @@ describe('PowerSupplyConsortium', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
@@ -40,7 +40,7 @@ describe('PowerSupplyConsortium', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
@@ -53,10 +53,10 @@ describe('PowerSupplyConsortium', function() {
 
     card.play(player);
 
-    TestingUtils.runAllActions(game);
-    const selectPlayer = TestingUtils.cast(player.popWaitingFor(), SelectPlayer);
+    runAllActions(game);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
     selectPlayer.cb(player2);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(player2.getProduction(Resources.ENERGY)).to.eq(2);
   });
@@ -67,7 +67,7 @@ describe('PowerSupplyConsortium', function() {
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1); // incremented
   });
 });

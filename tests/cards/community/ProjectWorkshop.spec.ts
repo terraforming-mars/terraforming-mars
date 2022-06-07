@@ -12,7 +12,7 @@ import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
@@ -82,7 +82,7 @@ describe('ProjectWorkshop', function() {
     const originalTR = player.getTerraformRating();
     player.playedCards.push(smallAnimals, extremophiles);
 
-    const selectOption = TestingUtils.cast(card.action(player), SelectOption);
+    const selectOption = cast(card.action(player), SelectOption);
 
     const selectCard = selectOption.cb() as SelectCard<ICard>;
 
@@ -99,7 +99,7 @@ describe('ProjectWorkshop', function() {
     player.playedCards.push(advancedAlloys);
     player.megaCredits = 3;
     // That the response is OrOptions is the test.
-    TestingUtils.cast(card.action(player), OrOptions);
+    cast(card.action(player), OrOptions);
   });
 
   it('Project Workshop removes TR when flipping Ancient Shipyards', () => {
@@ -109,7 +109,7 @@ describe('ProjectWorkshop', function() {
     const originalTR = player.getTerraformRating();
     player.playedCards.push(ancientShipyards);
 
-    const selectOption = TestingUtils.cast(card.action(player), SelectOption);
+    const selectOption = cast(card.action(player), SelectOption);
 
     expect(selectOption.cb()).is.undefined;
     expect(player.playedCards).is.empty;
@@ -145,8 +145,8 @@ describe('ProjectWorkshop', function() {
     player.playedCards.push(smallAnimals, extremophiles, birds);
 
     const selectCard = function() {
-      const orOptions = TestingUtils.cast(card.action(player), OrOptions);
-      return TestingUtils.cast(orOptions.options[1].cb(), SelectCard);
+      const orOptions = cast(card.action(player), OrOptions);
+      return cast(orOptions.options[1].cb(), SelectCard);
     };
 
     player.megaCredits = 9;
@@ -161,9 +161,9 @@ describe('ProjectWorkshop', function() {
     const originalTR = player.getTerraformRating();
     player.megaCredits = 5;
 
-    const orOptions = TestingUtils.cast(card.action(player), OrOptions);
+    const orOptions = cast(card.action(player), OrOptions);
     expect(orOptions.options[1].cb()).is.undefined;
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.playedCards).has.members([smallAnimals, extremophiles]);
     expect(game.dealer.discarded).contains(birds);

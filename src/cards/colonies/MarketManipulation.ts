@@ -70,7 +70,7 @@ export class MarketManipulation extends Card implements IProjectCard {
       'Increase',
       increasableColonies,
       (colony: IColony) => {
-        console.log(colony);
+        player.game.log('${0} increased ${1} track', (b) => b.player(player).string(colony.name));
         colony.increaseTrack();
         return undefined;
       },
@@ -80,7 +80,7 @@ export class MarketManipulation extends Card implements IProjectCard {
       'Decrease',
       decreasableColonies,
       (colony: IColony) => {
-        console.log(colony);
+        player.game.log('${0} increased ${1} track', (b) => b.player(player).string(colony.name));
         colony.decreaseTrack();
         return undefined;
       },

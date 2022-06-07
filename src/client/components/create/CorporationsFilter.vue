@@ -12,7 +12,7 @@
         <template v-for="module in GAME_MODULES">
           <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
             <div class="corporations-filter-toolbox-cont">
-                <div>{{moduleName(module)}}&nbsp;<div :class="icon(module)"></div></div><br>
+                <div><span v-i18n>{{moduleName(module)}}</span>&nbsp;<div :class="icon(module)"></div></div><br>
                 <div class="corporations-filter-toolbox">
                     <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
                     <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |

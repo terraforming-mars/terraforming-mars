@@ -80,7 +80,7 @@ export class MarketManipulation extends Card implements IProjectCard {
       'Decrease',
       decreasableColonies,
       (colony: IColony) => {
-        player.game.log('${0} increased ${1} track', (b) => b.player(player).string(colony.name));
+        player.game.log('${0} decreased ${1} track', (b) => b.player(player).string(colony.name));
         colony.decreaseTrack();
         return undefined;
       },

@@ -8,7 +8,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {ISpace} from '../../../src/boards/ISpace';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Units} from '../../../src/common/Units';
@@ -42,7 +42,7 @@ describe('MiningRights', () => {
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
     action.cb(titaniumSpace!);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
@@ -59,7 +59,7 @@ describe('MiningRights', () => {
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
 
     action.cb(steelSpace!);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
@@ -103,10 +103,10 @@ describe('MiningRights', () => {
     player.playedCards = [card];
 
     const roboticWorkforce = new RoboticWorkforce();
-    const selectCard = TestingUtils.cast(roboticWorkforce.play(player), SelectCard);
+    const selectCard = cast(roboticWorkforce.play(player), SelectCard);
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([selectCard.cards[0]]);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getProductionForTest()).deep.eq(Units.of({steel: 2}));
   });
 });

@@ -5,7 +5,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 
 describe('GreatEscarpmentConsortium', function() {
   let card : GreatEscarpmentConsortium; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -31,7 +31,7 @@ describe('GreatEscarpmentConsortium', function() {
     player2.addProduction(Resources.STEEL, 1);
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
@@ -43,10 +43,10 @@ describe('GreatEscarpmentConsortium', function() {
     player2.addProduction(Resources.STEEL, 1);
     card.play(player);
 
-    TestingUtils.runAllActions(game);
-    const selectPlayer = TestingUtils.cast(player.popWaitingFor(), SelectPlayer);
+    runAllActions(game);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
     selectPlayer.cb(player2);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
     expect(player2.getProduction(Resources.STEEL)).to.eq(0);
@@ -59,7 +59,7 @@ describe('GreatEscarpmentConsortium', function() {
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.STEEL)).to.eq(2); // should increase

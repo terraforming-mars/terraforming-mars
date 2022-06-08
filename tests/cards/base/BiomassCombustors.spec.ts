@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('BiomassCombustors', function() {
   let card : BiomassCombustors; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -39,7 +39,7 @@ describe('BiomassCombustors', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);

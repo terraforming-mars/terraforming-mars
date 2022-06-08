@@ -1,21 +1,22 @@
 import {Database} from '../../src/database/Database';
 import {IDatabase} from '../../src/database/IDatabase';
+import {SerializedGame} from '../../src/SerializedGame';
 
 const FAKE_DATABASE: IDatabase = {
   cleanSaves: () => {},
   deleteGameNbrSaves: () => {},
-  getClonableGames: () => {},
   getPlayerCount: () => {},
   getGame: () => {},
   getGameId: () => {},
-  getGameVersion: () => {},
-  getGames: () => {},
+  getGameVersion: () => Promise.resolve({} as SerializedGame),
+  getGames: () => Promise.resolve([]),
   initialize: () => Promise.resolve(),
   restoreGame: () => {},
   loadCloneableGame: () => {},
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
   purgeUnfinishedGames: () => {},
+  stats: () => Promise.resolve({}),
 };
 
 let databaseUnderTest: IDatabase = FAKE_DATABASE;

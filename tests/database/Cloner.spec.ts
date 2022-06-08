@@ -12,12 +12,7 @@ describe('Cloner', function() {
       'old-game-id', [player], player, TestingUtils.setCustomGameOptions({}), -5179823149812374);
 
     const newPlayer = new Player('new-player1', Color.RED, false, 3, 'new-player1-id');
-    let newGame: Game | undefined = undefined;
-    Cloner.clone('new-id', [newPlayer], 0, undefined, game.serialize(), (err, deserialized) => {
-      expect(err).is.undefined;
-      expect(deserialized).is.not.undefined;
-      newGame = deserialized;
-    });
+    const newGame = Cloner.clone('new-id', [newPlayer], 0, game.serialize());
 
     expect(newGame!.id).eq('new-id');
     expect(game.getPlayerById('old-player1-id')).is.not.undefined;

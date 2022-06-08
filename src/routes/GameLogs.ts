@@ -33,7 +33,7 @@ export class GameLogs {
 
     const generation = ctx.url.searchParams.get('generation');
 
-    ctx.gameLoader.getByPlayerId(playerId, (game) => {
+    ctx.gameLoader.getByParticipantId(playerId, (game) => {
       if (game === undefined) {
         ctx.route.notFound(req, res, 'game not found');
         return;

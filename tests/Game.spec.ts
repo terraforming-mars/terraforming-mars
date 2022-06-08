@@ -8,7 +8,7 @@ import * as constants from '../src/common/constants';
 import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {TestingUtils} from './TestingUtils';
+import * as TestingUtils from './TestingUtils';
 import {TestPlayers} from './TestPlayers';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/common/Resources';
@@ -27,6 +27,8 @@ import {Color} from '../src/common/Color';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
+import {ColonyName} from '../src/common/colonies/ColonyName';
+import {IColony} from '../src/colonies/IColony';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -666,5 +668,20 @@ describe('Game', () => {
     const serialized = game.serialize();
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.milestones).deep.eq(game.milestones);
+  });
+
+  it('deserializing a colonies game includes discarded colonies #4522', () => {
+    const toName = (x: IColony) => x.name;
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({coloniesExtension: false}));
+
+    const colonyNames = game.colonies.map(toName);
+    const discardedColonyNames = game.discardedColonies.map(toName);
+
+    const serialized = game.serialize();
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.colonies.map(toName)).has.members(colonyNames);
+    expect(deserialized.discardedColonies.map(toName)).has.members(discardedColonyNames);
   });
 });

@@ -1,6 +1,8 @@
-import {expect} from 'chai';
+import {use, expect} from 'chai';
+import chaiAsPromised = require('chai-as-promised');
+use(chaiAsPromised);
+
 import {Game} from '../../src/Game';
-import {GameId} from '../../src/common/Types';
 import {TestPlayers} from '../TestPlayers';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
 import {Database} from '../../src/database/Database';
@@ -22,25 +24,6 @@ class TestSQLite extends SQLite {
     this.saveGamePromise = super.saveGame(game);
     return this.saveGamePromise;
   }
-
-  public getSaveIds(gameId: GameId): Promise<Array<number>> {
-    return new Promise((resolve, reject) => {
-      const allSaveIds: Array<number> = [];
-      const sql: string = 'SELECT distinct save_id FROM games WHERE game_id = ?';
-      this.db.all(sql, [gameId], (err, rows) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (rows) {
-          rows.forEach((row) => {
-            allSaveIds.push(row.save_id);
-          });
-        }
-        resolve(allSaveIds);
-      });
-    });
-  }
 }
 
 describe('SQLite', () => {
@@ -58,14 +41,9 @@ describe('SQLite', () => {
   it('game is saved', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     Game.newInstance('game-id-1212', [player], player);
-    await db.saveGamePromise;
-    await new Promise<void>((resolve) => {
-      db.getGames((err, allGames) => {
-        expect(err).eq(undefined);
-        expect(allGames).deep.eq(['game-id-1212']);
-        resolve();
-      });
-    });
+    await db.saveGamePromise
+      .then(() => db.getGames())
+      .then((allGames) => expect(allGames).deep.eq(['game-id-1212']));
   });
 
   it('saveIds', async () => {
@@ -144,5 +122,56 @@ describe('SQLite', () => {
     await db.purgeUnfinishedGames('-1');
     // await db.purgeUnfinishedGames('0'); This doesn't work! I wonder if it's just too precise a clock problem.
     expect(await db.getSaveIds(game.id)).is.empty;
+  });
+
+  it('getGameVersion', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    player.megaCredits = 200;
+    await db.saveGame(game);
+
+    player.megaCredits = 300;
+    await db.saveGame(game);
+
+    player.megaCredits = 400;
+    await db.saveGame(game);
+
+    const allSaveIds = await db.getSaveIds(game.id);
+    expect(allSaveIds).has.members([0, 1, 2, 3]);
+
+    const serialized0 = await db.getGameVersion(game.id, 0);
+    expect(serialized0.players[0].megaCredits).eq(0);
+
+    const serialized1 = await db.getGameVersion(game.id, 1);
+    expect(serialized1.players[0].megaCredits).eq(200);
+
+    const serialized2 = await db.getGameVersion(game.id, 2);
+    expect(serialized2.players[0].megaCredits).eq(300);
+
+    const serialized3 = await db.getGameVersion(game.id, 3);
+    expect(serialized3.players[0].megaCredits).eq(400);
+  });
+
+  it('loadCloneableGame', async () => {
+    await expect(db.loadCloneableGame('123')).to.be.rejectedWith(/Game 123 not found/);
+
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-123', [player], player);
+    await db.saveGamePromise;
+    const serialized = await db.loadCloneableGame('game-id-123');
+
+    expect(game.id).eq(serialized.id);
+  });
+
+  it('stats', async () => {
+    const stats = await db.stats();
+    expect(stats).deep.eq({
+      type: 'SQLite',
+      path: ':memory:',
+      size_bytes: -1,
+    });
   });
 });

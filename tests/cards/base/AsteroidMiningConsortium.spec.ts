@@ -5,7 +5,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 
 describe('AsteroidMiningConsortium', function() {
   let card : AsteroidMiningConsortium; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -34,7 +34,7 @@ describe('AsteroidMiningConsortium', function() {
     expect(player2.getProduction(Resources.TITANIUM)).to.eq(1);
 
     card.play(player); // can decrease own production
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     const input = player.popWaitingFor();
 
     expect(input).is.undefined;
@@ -46,8 +46,8 @@ describe('AsteroidMiningConsortium', function() {
     player.addProduction(Resources.TITANIUM, 1);
     card.play(player); // can decrease own production
 
-    TestingUtils.runAllActions(game);
-    const selectPlayer = TestingUtils.cast(player.popWaitingFor(), SelectPlayer);
+    runAllActions(game);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
 
     expect(selectPlayer.players).deep.eq([player]);
 
@@ -56,7 +56,7 @@ describe('AsteroidMiningConsortium', function() {
     // Demonstrates correct play order: removed from self before adding to self.
     expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
 
@@ -68,11 +68,11 @@ describe('AsteroidMiningConsortium', function() {
     player2.addProduction(Resources.TITANIUM, 1);
     card.play(player);
 
-    TestingUtils.runAllActions(game);
-    const selectPlayer = TestingUtils.cast(player.getWaitingFor(), SelectPlayer);
+    runAllActions(game);
+    const selectPlayer = cast(player.getWaitingFor(), SelectPlayer);
     selectPlayer.cb(player2);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player2.getProduction(Resources.TITANIUM)).to.eq(0);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(2);

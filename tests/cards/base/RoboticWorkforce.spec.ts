@@ -16,7 +16,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestingUtils} from '../../TestingUtils';
+import {resetBoard, setCustomGameOptions, runNextAction} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/cards/ICard';
@@ -39,7 +39,7 @@ describe('RoboticWorkforce', () => {
     card = new RoboticWorkforce();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    game = Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
   });
 
   it('Cannot play if no building cards to copy', () => {
@@ -193,7 +193,7 @@ describe('RoboticWorkforce', () => {
 
     const testCard = function(card: ICard) {
       const researchCoordination = new ResearchCoordination();
-      const gameOptions = TestingUtils.setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
+      const gameOptions = setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
 
       let include = false;
       if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILD)) && card.play !== undefined) {
@@ -215,7 +215,7 @@ describe('RoboticWorkforce', () => {
         game.moonData!.logisticRate = 3;
 
         // place some tiles
-        TestingUtils.resetBoard(game);
+        resetBoard(game);
         game.addCityTile(player, '17');
         game.addCityTile(player, '19');
         game.addOceanTile(player, '32');
@@ -244,7 +244,7 @@ describe('RoboticWorkforce', () => {
 
         // SelectSpace will trigger production changes in the right cards (e.g. Mining Rights)
         while (game.deferredActions.length) {
-          TestingUtils.runNextAction(game);
+          runNextAction(game);
           const waitingFor = player.popWaitingFor();
           if (waitingFor instanceof SelectSpace) {
             waitingFor.cb(waitingFor.availableSpaces[0]);

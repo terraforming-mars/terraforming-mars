@@ -206,7 +206,7 @@ export class PostgreSQL implements IDatabase {
   restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
     // Retrieve last save from database
     logForUndo(game_id, 'restore to', save_id);
-    this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2', [game_id, save_id], (err, res) => {
+    this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err, res) => {
       if (err) {
         console.error('PostgreSQL:restoreGame', err);
         cb(err, undefined);

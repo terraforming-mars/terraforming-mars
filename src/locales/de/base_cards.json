@@ -340,6 +340,7 @@
 
     "Nuclear Zone": "Atomares Sperrgebiet",
     "Place this tile and raise temperature 2 steps.": "Platziere dieses Plättchen. Erhöhe die Temperatur um 4 °C.",
+    "Nuclear Zone tile": "Atomares-Sperrgebiet-Plättchen",
 
     "Tropical Resort": "Tropischer Urlaubsort",
     "Reduce your heat production 2 steps anxd increase your M€ production 3 steps.": "Senke deine Wärme-Produktion um 2. Erhöhe deine M€-Produktion um 3.",
@@ -422,6 +423,7 @@
 
     "Hired Raiders": "Bezahlte Plünderer",
     "Steal up to 2 steel, or 3 M€ from any player.": "Klaue 2 Stahl ODER 3 M€ von einem Spieler und lege sie auf dein Tableau.",
+    "Do not steal": "Klaue nichts",
 
     "Hackers": "Hacker",
     "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.": "Senke deine Energie-Produktion um 1 und eine beliebige M€-Produktion um 2. Erhöhe deine M€-Produktion um 2.",
@@ -533,6 +535,10 @@
     "Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu ODER entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.",
     "(Action: Remove 3 Microbes to increase your TR 1 step.)": "(AKTION: Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen.)",
     "Add 3 Microbes to this card.": "Füge dieser Karte 3 Mikroben hinzu.",
+    "Remove 3 microbes to increase your terraform rating 1 step": "Entferne 3 Mikroben, um deinen Terraformwert um 1 zu erhöhen",
+    "Remove microbes": "Entferne Mikroben",
+    "Add 1 microbe to this card": "Füge dieser Karte 1 Mikrobe hinzu.",
+    "Add microbe":"Mikrobe hinzufügen",
 
     "Industrial Microbes": "Industriemikroben",
     "Increase your Energy production and your steel production 1 step each.": "Erhöhe deine Energie- und deine Stahl-Produktion um je 1.",
@@ -609,6 +615,8 @@
 
     "Ice Cap Melting": "Polare Eiskappen abschmelzen",
     "Requires +2 C or warmer. Place 1 ocean tile.": "Benötigt eine Temperatur von +2 °C oder wärmer. Platziere 1 Ozeanplättchen.",
+    "Gain 5 plants": "Erhalte 5 Pflanzen",
+    "Add 4 animals to Fish": "Füge der Karte Raubfische 4 Tiere hinzu",
 
     "Corporate Stronghold": "Konzernhochburg",
     "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 3. Platziere ein Stadtplättchen.",
@@ -722,5 +730,13 @@
   "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Wenn du eine Aktion ausführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "Senke deine Energieproduktion um 1 Schritt und erhöhe deine M€-Produktion um 2 Schritte. Platziere ein Stadtplättchen auf einem VULKANFELD, ungeachtet eventuell angrenzender Städte.",
   "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von hier für je 2 M€ verwenden.",
-  "Temperature must be -20 C or lower.": "Temperatur muss bei -20 °C oder niedriger sein."
+  "Temperature must be -20 C or lower.": "Temperatur muss bei -20 °C oder niedriger sein.",
+  "Increase your energy production 1 step": "Erhöhe deine Energie-Produktion um 1 Schritt",
+  "Increase your energy production 2 steps": "Erhöhe deine Energie-Produktion um 2 Schritte",
+  "Increase your energy production 3 steps": "Erhöhe deine Energie-Produktion um 3 Schritte",
+  "Increase your plant production 1 step": "Erhöhe deine Pflanzen-Produktion um 1 Schritt",
+  "Remove 2 microbes to raise temperature 1 step": "Entferne 2 Mikroben, um die Temperatur um 2°C zu erhöhen",
+  "Select card to add 2 microbes": "Wähle Karte, der 2 Mikroben hinzugefügt werden sollen",
+  "Add microbes": "Mikroben hinzufügen",
+  "Select a space with a steel or titanium bonus adjacent to one of your tiles": "Wähle ein Feld mit Stahl- oder Titanbonus, das an eines deiner Plättchen angrenzt"
 }

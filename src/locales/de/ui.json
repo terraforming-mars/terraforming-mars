@@ -267,6 +267,7 @@
      "Show timers": "Zeitanzeige",
      "You cannot pay for this card": "Du kannst diese Karte nicht bezahlen",
      "Select card(s) to buy": "Wähle zu kaufende Karten",
+     "Select space for special tile": "Wähle ein Feld für das Spezialplättchen",
 
     "Starting Megacredits:": "Startkapital:",
     "After Preludes:": "Nach Präludium:",
@@ -314,6 +315,7 @@
     "Place a city tile": "Platziere ein Stadtplättchen",
 
     "All": "Alle",
+    "None": "Keine",
     "Corporate Era": "Zeitalter der Konzerne",
     "Randomize board tiles": "Spielbrett randomisieren",
     "Set Predefined Game": "Vordefiniertes Spiel",
@@ -393,5 +395,18 @@
     "Escape Velocity penalty": "Fluchtgeschwindigkeits-Strafe",
     "Actions taken this game": "Durchgeführte Aktionen in diesem Spiel",
     "Show information that can be helpful to players who are still learning the games": "Zeige Informationen, die für neue\nSpieler nützlich sein könnten",
-    "Test out any possible new experimental UI features for feedback.": "Teste neue experimentelle Funktionen der\nBenutzeroberfläche, um Feedback zu geben."
+    "Test out any possible new experimental UI features for feedback.": "Teste neue experimentelle Funktionen der\nBenutzeroberfläche, um Feedback zu geben.",
+
+    "Select how to pay for Power Plant standard project": "Wähle aus, wie du für das Standardprojekt Kraftwerk bezahlen möchtest",
+    "Select how to pay for Asteroid standard project": "Wähle aus, wie du für das Standardprojekt Asteroid bezahlen möchtest",
+    "Select how to pay for Aquifer standard project": "Wähle aus, wie du für das Standardprojekt Ozean bezahlen möchtest",
+    "Select how to pay for Greenery standard project": "Wähle aus, wie du für das Standardprojekt Grünfläche bezahlen möchtest",
+    "Select how to pay for City standard project": "Wähle aus, wie du für das Standardprojekt Stadt bezahlen möchtest",
+    "Select space for ocean from temperature increase": "Wähle ein Feld für einen Ozean, der aufgrund des Temperaturanstiegs platziert wird",
+
+    "Increase steel production 1 step": "Erhöhe Stahl-Produktion um 1",
+    "Increase titanium production 1 step": "Erhöhe Titan-Produktion um 1",
+    "Increase plants production 1 step": "Erhöhe Pflanzen-Produktion um 1",
+    "Increase energy production 1 step": "Erhöhe Energie-Produktion um 1",
+    "Increase heat production 1 step": "Erhöhe Wärme-Produktion um 1"
 }

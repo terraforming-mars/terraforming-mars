@@ -108,6 +108,8 @@
   "Deuterium Export": "Deuterium-Export",
   "Action: Add 1 Floater to this card.": "AKTION: Füge dieser Karte 1 Schweber hinzu.",
   "Action: Spend 1 Floater here to increase your energy production 1 step.": "AKTION: Entferne 1 Schweber von dieser Karte, um deine Energie-Produktion um 1 zu erhöhen.",
+  "Remove 1 floater to raise energy production 1 step": "Entferne 1 Schweber, um deine Energie-Produktion um 1 zu erhöhen",
+  "Remove floater": "Entferne Schweber",
 
   "Extractor Balloons": "Extraktionsballons",
   "Action: Remove 2 Floaters here to raise Venus 1 step.": "AKTION: Entferne 2 Schweber von dieser Karte, um die Venuswertung um 2% zu erhöhen.",

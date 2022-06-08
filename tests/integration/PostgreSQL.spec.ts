@@ -59,7 +59,7 @@ describe('PostgreSQL', () => {
   it('game is saved', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     Game.newInstance('game-id-1212', [player], player);
-    await db.saveGamePromise;
+    await db.saveGamePromise;1
     await db.getGames().then((allGames) => expect(allGames).deep.eq(['game-id-1212']));
   });
 
@@ -181,6 +181,36 @@ describe('PostgreSQL', () => {
     expect(game.id).eq(serialized.id);
   });
 
+  it('saveGame with the same saveID', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+
+    await db.saveGame(game);
+    await db.saveGame(game);
+    player.megaCredits = 105;
+    await db.saveGame(game);
+
+    expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+    const serializedv3 = await db.getGameVersion(game.id, 3);
+    expect(serializedv3.players[0].megaCredits).eq(105);
+    expect(game.lastSaveId).eq(4);
+
+    player.megaCredits = 77;
+    game.lastSaveId = 3;
+    await db.saveGame(game);
+    expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+    expect(db.statistics.saveCount).eq(5);
+
+    // Resaving #3 results in a save conflict. It was updated.
+    expect(db.statistics.saveConflictNormalCount).eq(1);
+
+    // Loading v3 shows that it has the revised value of megacredits.
+    const newSerializedv3 = await db.getGameVersion(game.id, 3);
+    expect(newSerializedv3.players[0].megaCredits).eq(77);
+    expect(game.lastSaveId).eq(4);
+  });
+
   it('stats', async () => {
     const stats = await db.stats();
     stats['size-bytes-games'] = 'any';
@@ -194,6 +224,10 @@ describe('PostgreSQL', () => {
       'size-bytes-games': 'any',
       'size-bytes-game-results': 'any',
       'size-bytes-database': 'any',
+      'save-confict-normal-count': 0,
+      'save-confict-undo-count': 0,
+      'save-count': 0,
+      'save-error-count': 0,
     });
   });
 });

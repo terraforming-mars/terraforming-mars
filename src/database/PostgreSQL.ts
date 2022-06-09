@@ -9,8 +9,7 @@ export class PostgreSQL implements IDatabase {
   protected client: Pool;
   private databaseName: string | undefined = undefined; // Use this only for stats.
 
-  // I don't want this public; it's for testing. :/
-  public statistics = {
+  protected statistics = {
     saveCount: 0,
     saveErrorCount: 0,
     saveConflictUndoCount: 0,

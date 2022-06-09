@@ -40,6 +40,10 @@ class TestPostgreSQL extends PostgreSQL {
       throw err;
     });
   }
+
+  public getStatistics() {
+    return this.statistics;
+  }
 }
 
 describe('PostgreSQL', () => {
@@ -200,10 +204,10 @@ describe('PostgreSQL', () => {
     game.lastSaveId = 3;
     await db.saveGame(game);
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
-    expect(db.statistics.saveCount).eq(5);
+    expect(db.getStatistics().saveCount).eq(5);
 
     // Resaving #3 results in a save conflict. It was updated.
-    expect(db.statistics.saveConflictNormalCount).eq(1);
+    expect(db.getStatistics().saveConflictNormalCount).eq(1);
 
     // Loading v3 shows that it has the revised value of megacredits.
     const newSerializedv3 = await db.getGameVersion(game.id, 3);

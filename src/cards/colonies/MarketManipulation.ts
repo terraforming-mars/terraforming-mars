@@ -63,33 +63,38 @@ export class MarketManipulation extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const increasableColonies = this.getIncreasableColonies(player.game);
+    let increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
+    // if there is only one decreaseable colony and it is an increaseable colony, don't allow increase of that colony.
+    if (decreasableColonies.length === 1 && increasableColonies.some((colony) => colony.name === decreasableColonies[0].name)) {
+      increasableColonies = increasableColonies.filter((colony) => colony.name !== decreasableColonies[0].name);
+    }
     const increaseColonyTrack = new SelectColony(
       'Select which colony tile track to increase',
       'Increase',
       increasableColonies,
-      (colony: IColony) => {
-        player.game.log('${0} increased ${1} track', (b) => b.player(player).string(colony.name));
-        colony.increaseTrack();
+      (increasedColony: IColony) => {
+        increasedColony.increaseTrack();
+        player.game.log('${0} increased ${1} track', (b) => b.player(player).string(increasedColony.name));
+        const decreaseColonyTrack = new SelectColony(
+          'Select which colony tile track to decrease',
+          'Decrease',
+          decreasableColonies.filter((decreaseableColony) => decreaseableColony.name !== increasedColony.name),
+          (colony: IColony) => {
+            player.game.log('${0} decreased ${1} track', (b) => b.player(player).string(colony.name));
+            colony.decreaseTrack();
+            return undefined;
+          },
+        );
+        player.game.defer(
+          new SimpleDeferredAction(player, () => decreaseColonyTrack),
+        );
         return undefined;
       },
     );
-    const decreaseColonyTrack = new SelectColony(
-      'Select which colony tile track to decrease',
-      'Decrease',
-      decreasableColonies,
-      (colony: IColony) => {
-        player.game.log('${0} decreased ${1} track', (b) => b.player(player).string(colony.name));
-        colony.decreaseTrack();
-        return undefined;
-      },
-    );
+
     player.game.defer(
       new SimpleDeferredAction(player, () => increaseColonyTrack),
-    );
-    player.game.defer(
-      new SimpleDeferredAction(player, () => decreaseColonyTrack),
     );
     return undefined;
   }

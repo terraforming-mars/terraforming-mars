@@ -9,6 +9,13 @@ export class PostgreSQL implements IDatabase {
   protected client: Pool;
   private databaseName: string | undefined = undefined; // Use this only for stats.
 
+  protected statistics = {
+    saveCount: 0,
+    saveErrorCount: 0,
+    saveConflictUndoCount: 0,
+    saveConflictNormalCount: 0,
+  };
+
   constructor(
     config: ClientConfig = {
       connectionString: process.env.POSTGRES_HOST,
@@ -232,15 +239,35 @@ export class PostgreSQL implements IDatabase {
 
   async saveGame(game: Game): Promise<void> {
     const gameJSON = game.toJSON();
+    this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
+    // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
     return this.client.query(
-      'INSERT INTO games (game_id, save_id, game, players) VALUES ($1, $2, $3, $4) ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3',
+      `INSERT INTO games (game_id, save_id, game, players)
+      VALUES ($1, $2, $3, $4)
+      ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
+      RETURNING (xmax = 0) AS inserted`,
       [game.id, game.lastSaveId, gameJSON, game.getPlayers().length])
-      .then(() => {
+      .then((res) => {
+        let inserted: boolean = true;
+        try {
+          inserted = res.rows[0].inserted;
+        } catch (err) {
+          console.error(err);
+        }
+        if (inserted === false) {
+          if (game.gameOptions.undoOption) {
+            this.statistics.saveConflictUndoCount++;
+          } else {
+            this.statistics.saveConflictNormalCount++;
+          }
+        }
+
         game.lastSaveId++;
         if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
       })
       .catch((err) => {
+        this.statistics.saveErrorCount++;
         console.error('PostgreSQL:saveGame', err);
       });
   }
@@ -274,6 +301,10 @@ export class PostgreSQL implements IDatabase {
       'pool-total-count': this.client.totalCount,
       'pool-idle-count': this.client.idleCount,
       'pool-waiting-count': this.client.waitingCount,
+      'save-count': this.statistics.saveCount,
+      'save-error-count': this.statistics.saveErrorCount,
+      'save-confict-normal-count': this.statistics.saveConflictNormalCount,
+      'save-confict-undo-count': this.statistics.saveConflictUndoCount,
     };
 
     // TODO(kberg): return row counts

@@ -352,6 +352,17 @@
     "Remove plants": "移除植物",
     "Select player to decrease heat production by 1 step(s)": "选择需要减少热量产能 1 级的玩家",
     "Decrease": "减少",
+    "[ toggle tags view ]": "切换标志视图",
+    "[ toggle cards filters ]": "切换卡牌过滤",
+    "raise oxygen 1 step": "提升氧气 1 级",
+    "Perform an action from a played card again": "选择 1 张已经执行过的行动牌再次行动",
+    "Select amount of heat to spend": "选择消费的热量资源数量",
+    "Select amount of floaters on corporation to spend": "选择需要消费的公司牌上云资源的数量",
+    "You cannot overspend heat": "你不能支付过多的热量",
+    "Select colony for Mining Colony": "为 采矿殖民地 选择殖民地",
+    "Select card to add 1 Floater(s)": "选择 1 张牌添加 1 个云资源",
+    "Add resource": "添加资源",
+    "Select card to add 4 Floater(s)": "选择 1 张牌添加 4 个云资源",
 
     "How to pay?":"如何支付？",
     

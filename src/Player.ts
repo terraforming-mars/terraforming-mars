@@ -1067,11 +1067,7 @@ export class Player {
     }
   }
 
-  public getAvailableBlueActionCount(): number {
-    return this.getPlayableActionCards().length;
-  }
-
-  private getPlayableActionCards(): Array<ICard & IActionCard> {
+  public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
     if (isIActionCard(this.corporationCard) &&
           !this.actionsThisGeneration.has(this.corporationCard.name) &&

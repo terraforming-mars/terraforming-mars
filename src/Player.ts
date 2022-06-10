@@ -1,7 +1,6 @@
 import * as constants from './common/constants';
 import {PlayerId} from './common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './common/constants';
-import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Aurorai} from './cards/pathfinders/Aurorai';
 import {Board} from './boards/Board';
@@ -27,19 +26,13 @@ import {Phase} from './common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resources} from './common/Resources';
 import {CardResource} from './common/CardResource';
-import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
-import {SelectColony} from './inputs/SelectColony';
-import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
-import {SelectDelegate} from './inputs/SelectDelegate';
-import {SelectHowToPay} from './inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
 import {SelectOption} from './inputs/SelectOption';
-import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
@@ -49,8 +42,6 @@ import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './common/cards/Tags';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
-import {SelectProductionToLose} from './inputs/SelectProductionToLose';
-import {ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {CardLoader} from './CardLoader';
@@ -1034,37 +1025,7 @@ export class Player {
   }
 
   public runInput(input: InputResponse, pi: PlayerInput): void {
-    if (pi instanceof AndOptions) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectAmount) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectOption) {
-      this.deferInputCb(pi.cb());
-    } else if (pi instanceof SelectColony) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof OrOptions) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectHowToPayForProjectCard) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectCard) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectSpace) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectPlayer) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectDelegate) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectHowToPay) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectProductionToLose) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof ShiftAresGlobalParameters) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectPartyToSendDelegate) {
-      this.deferInputCb(pi.process(input, this));
-    } else {
-      throw new Error('Unsupported waitingFor');
-    }
+    this.deferInputCb(pi.process(input, this));
   }
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {

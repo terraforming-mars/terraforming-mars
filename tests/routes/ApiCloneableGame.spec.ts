@@ -7,15 +7,16 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 describe('ApiCloneableGame', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
-  const origgetPlayerCount = Database.getInstance().getPlayerCount;
+  let originalGetPlayerCount: (gameId: string) => Promise<number>;
 
   beforeEach(() => {
     scaffolding = new RouteTestScaffolding();
     res = new MockResponse();
+    originalGetPlayerCount = Database.getInstance().getPlayerCount;
   });
 
   afterEach(() => {
-    Database.getInstance().getPlayerCount = origgetPlayerCount;
+    Database.getInstance().getPlayerCount = originalGetPlayerCount;
   });
 
   it('no parameter', () => {
@@ -25,34 +26,22 @@ describe('ApiCloneableGame', () => {
     expect(res.content).eq('Bad request: id parameter missing');
   });
 
-  it('has error while loading', () => {
-    Database.getInstance().getPlayerCount = (gameId, cb) => {
-      expect(gameId).eq('invalidId');
-      cb(new Error('Segmentation fault'), undefined);
+  it('has error while loading', async () => {
+    Database.getInstance().getPlayerCount = (_gameId) => {
+      return new Promise((_resolve, reject) => {
+        reject(new Error('Segmentation fault'));
+      });
     };
     scaffolding.url = '/api/cloneablegames?id=invalidId';
-    scaffolding.get(ApiCloneableGame.INSTANCE, res);
-    expect(res.statusCode).eq(500);
-    expect(res.content).eq('Internal server error: Segmentation fault');
-  });
-
-  it('does not find game', () => {
-    Database.getInstance().getPlayerCount = (gameId, cb) => {
-      expect(gameId).eq('notfound');
-      cb(undefined, undefined);
-    };
-    scaffolding.url = '/api/cloneablegames?id=notfound';
-    scaffolding.get(ApiCloneableGame.INSTANCE, res);
+    await scaffolding.asyncGet(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found');
   });
 
-  it('finds game', () => {
-    Database.getInstance().getPlayerCount = (_gameId, cb) => {
-      cb(undefined, 2);
-    };
+  it('finds game', async () => {
+    Database.getInstance().getPlayerCount = (_gameId) => Promise.resolve(2);
     scaffolding.url = '/api/cloneablegames?id=g456';
-    scaffolding.get(ApiCloneableGame.INSTANCE, res);
+    await scaffolding.asyncGet(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(200);
     expect(res.content).eq(JSON.stringify({
       gameId: 'g456',

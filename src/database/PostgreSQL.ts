@@ -51,21 +51,16 @@ export class PostgreSQL implements IDatabase {
       });
   }
 
-  getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
+  getPlayerCount(game_id: GameId): Promise<number> {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = $1 LIMIT 1';
 
-    this.client.query(sql, [game_id], (err, res) => {
-      if (err) {
-        console.error('PostgreSQL:getPlayerCount', err);
-        cb(err, undefined);
-        return;
-      }
-      if (res.rows.length === 0) {
-        cb(undefined, undefined);
-        return;
-      }
-      cb(undefined, res.rows[0].players);
-    });
+    return this.client.query(sql, [game_id])
+      .then((res) => {
+        if (res.rows.length === 0) {
+          throw new Error(`no rows found for game id ${game_id}`);
+        }
+        return res.rows[0].players;
+      });
   }
 
   getGames(): Promise<Array<GameId>> {

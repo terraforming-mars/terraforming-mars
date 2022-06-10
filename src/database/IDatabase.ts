@@ -79,10 +79,8 @@ export interface IDatabase {
      * Get the player count for a game.
      *
      * @param game_id the game id to search for
-     * @param cb a callback either returning either an error or the game's player count.
-     * if the game is not found then undefined.
      */
-    getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void): void;
+    getPlayerCount(game_id: GameId): Promise<number>;
 
     /**
      * Saves the current state of the game. at a supplied save point. Used for

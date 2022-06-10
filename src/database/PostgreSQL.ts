@@ -105,8 +105,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
-  getGameId(id: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
+  getGameId(id: string): Promise<GameId> {
     let sql = undefined;
     if (id.charAt(0) === 'p') {
       sql =
@@ -122,17 +121,18 @@ export class PostgreSQL implements IDatabase {
       throw new Error(`id ${id} is neither a player id or spectator id`);
     }
 
-    this.client.query(sql, [id], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        console.error('PostgreSQL:getGameId', err);
-        return cb(err ?? undefined);
-      }
-      if (res.rowCount === 0) {
-        return cb(new Error(`Game for player id ${id} not found`));
-      }
-      const gameId = res.rows[0].game_id;
-      cb(undefined, gameId);
-    });
+    return this.client.query(sql, [id])
+      .then((res: QueryResult<any>) => {
+        if (res.rowCount === 0) {
+          throw new Error(`Game for player id ${id} not found`);
+        }
+        return res.rows[0].game_id;
+      }).catch((err) => {
+        if (err) {
+          console.error('PostgreSQL:getGameId', err);
+          throw err;
+        }
+      });
   }
 
   public async getSaveIds(gameId: GameId): Promise<Array<number>> {

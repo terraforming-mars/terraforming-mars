@@ -8,31 +8,8 @@
             <div class="create-game-form create-game-panel create-game--block">
 
                 <div class="create-game-options">
-
-                    <div v-if="isSoloModePage">
-                      <div class="create-game-solo-player form-group" v-for="newPlayer in getPlayers()" v-bind:key="newPlayer.index">
-                          <div>
-                              <input class="form-input form-inline create-game-player-name" :placeholder="$t('Your name')" v-model="newPlayer.name" />
-                          </div>
-                          <div class="create-game-colors-wrapper">
-                              <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
-                              <span class="create-game-colors-cont">
-                              <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']" v-bind:key="color">
-                                  <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
-                                  <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
-                              </label>
-                              </span>
-                          </div>
-                          <div>
-                              <label class="form-switch form-inline">
-                                  <input type="checkbox" v-model="newPlayer.beginner">
-                                  <i class="form-icon"></i> <span v-i18n>Beginner?</span>
-                              </label>
-                          </div>
-                      </div>
-                    </div>
                     <div class="create-game-page-container">
-                        <div class="create-game-page-column" v-if="! isSoloModePage">
+                        <div class="create-game-page-column">
                             <h4 v-i18n>№ of Players</h4>
                             <template v-for="pCount in [1,2,3,4,5,6]">
                               <div v-bind:key="pCount">
@@ -482,7 +459,6 @@ export interface CreateGameModel {
     showCorporationList: boolean;
     showColoniesList: boolean;
     showCardsBlackList: boolean;
-    isSoloModePage: boolean;
     board: BoardNameType;
     boards: Array<BoardNameType>;
     seed: number;
@@ -563,7 +539,6 @@ export default (Vue as WithRefs<Refs>).extend({
       customCorporationsList: [],
       customColoniesList: [],
       cardsBlackList: [],
-      isSoloModePage: false,
       board: BoardName.ORIGINAL,
       boards: [
         BoardName.ORIGINAL,
@@ -609,11 +584,6 @@ export default (Vue as WithRefs<Refs>).extend({
     ColoniesFilter,
     CorporationsFilter,
     PreferencesIcon,
-  },
-  mounted() {
-    if (window.location.pathname === '/solo') {
-      this.isSoloModePage = true;
-    }
   },
   watch: {
     allOfficialExpansions(value: boolean) {

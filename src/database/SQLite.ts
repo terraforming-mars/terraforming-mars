@@ -216,7 +216,7 @@ export class SQLite implements IDatabase {
     }));
   }
 
-  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  purgeUnfinishedGames(maxGameDays: string | undefined = undefined): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);

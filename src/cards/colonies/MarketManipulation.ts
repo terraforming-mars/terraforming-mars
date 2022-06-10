@@ -10,7 +10,7 @@ import {Size} from '../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectColony} from '../..//inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
-import {LogHelper} from '@/LogHelper';
+import {LogHelper} from '../../LogHelper';
 
 export class MarketManipulation extends Card implements IProjectCard {
   constructor() {

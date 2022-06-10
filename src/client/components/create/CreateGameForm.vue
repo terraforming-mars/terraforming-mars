@@ -241,7 +241,6 @@
 
                         </div>
 
-
                         <div class="create-game-page-column" v-if="playersCount > 1">
                             <h4 v-i18n>Multiplayer Options</h4>
 
@@ -307,14 +306,14 @@
                             <label for="fastMode-checkbox">
                                 <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+                        </div>
 
+                        <div class="create-game-players-cont">
                             <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
                             <label for="beginnerOption-checkbox">
                                 <span v-i18n>Beginner Options</span>
                             </label>
-                        </div>
 
-                        <div class="create-game-players-cont" v-if="playersCount > 1">
                             <div class="container">
                                 <div class="columns">
                                   <template v-for="newPlayer in getPlayers()">

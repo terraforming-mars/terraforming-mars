@@ -77,16 +77,15 @@ export class Localfilesystem implements IDatabase {
     throw new Error('Not implemented');
   }
 
-  getPlayerCount(gameId: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
-    this.getGames().then((gameIds) => {
+  getPlayerCount(gameId: GameId): Promise<number> {
+    return this.getGames().then((gameIds) => {
       const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
       if (found === undefined) {
-        cb(new Error('not found'), undefined);
-        return;
+        throw new Error(`${gameId} not found`);
       }
       const text = fs.readFileSync(this._historyFilename(gameId, 0));
       const serializedGame = JSON.parse(text) as SerializedGame;
-      cb(new Error('not found'), serializedGame.players.length);
+      return serializedGame.players.length;
     });
   }
 

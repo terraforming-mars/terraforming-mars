@@ -5,8 +5,7 @@ use(chaiAsPromised);
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
-import {Database} from '../../src/database/Database';
-import {restoreTestDatabase} from '../utils/setup';
+import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {sleep} from '../TestingUtils';
 
 class TestSQLite extends SQLite {
@@ -30,7 +29,7 @@ describe('SQLite', () => {
   let db: TestSQLite;
   beforeEach(() => {
     db = new TestSQLite();
-    Database.getInstance = () => db;
+    setTestDatabase(db);
     return db.initialize();
   });
 
@@ -80,28 +79,22 @@ describe('SQLite', () => {
     expect(saveIds).has.members([0, 3]);
   });
 
-  it('gets player count', async () => {
+  it('gets player count by id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getPlayerCount(game.id, (err, playerCount) => {
-      expect(err).to.be.undefined;
-      expect(playerCount).to.eq(1);
-    });
+    expect(db.getPlayerCount(game.id)).become(1);
   });
 
-  it('does not find player count by id', async () => {
+  it('does not find player count for game by id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getPlayerCount('notfound', (err, gameData) => {
-      expect(err).to.be.undefined;
-      expect(gameData).to.be.undefined;
-    });
+    expect(db.getPlayerCount('notfound')).is.rejected;
   });
 
   it('purgeUnfinishedGames', async () => {

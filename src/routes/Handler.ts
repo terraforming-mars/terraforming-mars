@@ -44,13 +44,28 @@ export abstract class Handler implements IHandler {
     }
   }
 
-  get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void | Promise<void> {
     ctx.route.notFound(req, res);
   }
-  put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void | Promise<void> {
     ctx.route.notFound(req, res);
   }
-  post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void | Promise<void> {
     ctx.route.notFound(req, res);
+  }
+}
+
+export abstract class AsyncHandler extends Handler {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+    ctx.route.notFound(req, res);
+    return Promise.resolve();
+  }
+  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+    ctx.route.notFound(req, res);
+    return Promise.resolve();
+  }
+  public override post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+    ctx.route.notFound(req, res);
+    return Promise.resolve();
   }
 }

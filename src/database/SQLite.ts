@@ -54,17 +54,19 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getPlayerCount(gameId: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
-    const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
+  getPlayerCount(gameId: GameId): Promise<number> {
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
 
-    this.db.get(sql, [gameId], (err, row) => {
-      if (err) {
-        cb(err, undefined);
-      } else if (row) {
-        cb(undefined, row.players);
-      } else {
-        cb(undefined, undefined);
-      }
+      this.db.get(sql, [gameId], (err, row) => {
+        if (err) {
+          reject(err);
+        } else if (row) {
+          resolve(row.players);
+        } else {
+          reject(new Error(`unknown error loadign player count for ${gameId}`));
+        }
+      });
     });
   }
 

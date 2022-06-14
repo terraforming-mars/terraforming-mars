@@ -6,8 +6,7 @@ use(chaiAsPromised);
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
-import {Database} from '../../src/database/Database';
-import {restoreTestDatabase} from '../utils/setup';
+import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {sleep} from '../TestingUtils';
 
 /*
@@ -50,7 +49,7 @@ describe('PostgreSQL', () => {
 
   beforeEach(async () => {
     db = new TestPostgreSQL();
-    Database.getInstance = () => db;
+    setTestDatabase(db);
     await db.initialize();
   });
 
@@ -140,10 +139,7 @@ describe('PostgreSQL', () => {
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getPlayerCount(game.id, (err, playerCount) => {
-      expect(err).to.be.undefined;
-      expect(playerCount).to.eq(1);
-    });
+    expect(db.getPlayerCount(game.id)).become(1);
   });
 
   it('does not find player count for game by id', async () => {
@@ -152,10 +148,7 @@ describe('PostgreSQL', () => {
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getPlayerCount('notfound', (err, playerCount) => {
-      expect(err).to.be.undefined;
-      expect(playerCount).to.be.undefined;
-    });
+    expect(db.getPlayerCount('notfound')).is.rejected;
   });
 
   it('cleanSaves', async () => {

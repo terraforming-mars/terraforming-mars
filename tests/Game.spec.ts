@@ -27,7 +27,6 @@ import {Color} from '../src/common/Color';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
-import {ColonyName} from '../src/common/colonies/ColonyName';
 import {IColony} from '../src/colonies/IColony';
 
 describe('Game', () => {

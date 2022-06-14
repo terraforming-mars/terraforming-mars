@@ -72,13 +72,8 @@ describe('PostgreSQL', () => {
     await db.saveGamePromise;
     await db.saveGame(game);
 
-    await new Promise<void>((resolve) => {
-      db.getGames((err, allGames) => {
-        expect(err).eq(undefined);
-        expect(allGames).deep.eq(['game-id-1212']);
-        resolve();
-      });
-    });
+    const allGames = await db.getGames();
+    expect(allGames).deep.eq(['game-id-1212']);
   });
 
   it('getGames - includes finished games', async () => {
@@ -91,13 +86,8 @@ describe('PostgreSQL', () => {
     db.cleanSaves(game.id);
     sleep(500);
 
-    await new Promise<void>((resolve) => {
-      db.getGames((err, allGames) => {
-        expect(err).eq(undefined);
-        expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
-        resolve();
-      });
-    });
+    const allGames = await db.getGames();
+    expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
   });
 
   it('saveIds', async () => {

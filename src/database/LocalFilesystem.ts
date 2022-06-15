@@ -58,7 +58,7 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  getGameId(_playerId: string, _cb: (err: Error | undefined, gameId?: GameId) => void): void {
+  getGameId(_playerId: string): Promise<GameId> {
     throw new Error('Not implemented');
   }
 

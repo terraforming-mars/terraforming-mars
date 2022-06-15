@@ -1,5 +1,5 @@
 import {Game, GameOptions, Score} from '../Game';
-import {GameId} from '../common/Types';
+import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
 /**
@@ -55,10 +55,9 @@ export interface IDatabase {
      *
      * This is not yet written efficiently in Postgres, so use sparingly.
      *
-     * @param playerId the playerID assocaited with a game
-     * @param cb called with the gameid if it exists. If it does not err will be truthy.
+     * @param id the `PlayerId` or `SpectatorId` assocaited with a game
      */
-    getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void;
+     getGameId(id: PlayerId | SpectatorId): Promise<GameId>;
 
     /**
      * Get all the save ids assocaited with a game.

@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
-import {fakeCard, TestingUtils} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
@@ -179,7 +179,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     dealer.deck.push(slug, noTags);
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(lunarObservationPost.resourceCount).eq(2);
   });

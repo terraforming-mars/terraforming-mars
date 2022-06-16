@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/cards/pathfinders/CommunicationCenter';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {fakeCard, TestingUtils} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Resources} from '../../../src/common/Resources';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -35,7 +35,7 @@ describe('CommunicationCenter', function() {
 
     expect(card.play(player));
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(card.resourceCount).eq(2);
     expect(player.getProduction(Resources.ENERGY)).eq(1);

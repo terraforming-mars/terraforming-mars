@@ -3,7 +3,7 @@ import {HabitatMarte} from '../../../src/cards/pathfinders/HabitatMarte';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {fakeCard, TestingUtils} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {ValleyTrust} from '../../../src/cards/prelude/ValleyTrust';
 import {OlympusConference} from '../../../src/cards/base/OlympusConference';
@@ -76,13 +76,13 @@ describe('HabitatMarte', () => {
     expect(olympusConference.resourceCount).eq(0);
 
     olympusConference.onCardPlayed(player, marsCard);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getWaitingFor()).is.undefined;
     expect(olympusConference.resourceCount).eq(0);
 
     player.corporationCard = card;
     olympusConference.onCardPlayed(player, marsCard);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getWaitingFor()).is.undefined;
     expect(olympusConference.resourceCount).eq(1);
   });

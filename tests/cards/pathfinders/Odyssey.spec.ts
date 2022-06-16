@@ -3,7 +3,7 @@ import {Odyssey} from '../../../src/cards/pathfinders/Odyssey';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {fakeCard, TestingUtils} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/cards/base/ImportOfAdvancedGHG';
@@ -47,14 +47,14 @@ describe('Odyssey', function() {
     // Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two.
     const inventionContest = new InventionContest();
     player.playedCards = [importOfAdvancedGHG, inventionContest];
-    const selectCard = TestingUtils.cast(card.action(player), SelectCard);
+    const selectCard = cast(card.action(player), SelectCard);
 
     expect(selectCard.cards).has.members([importOfAdvancedGHG, inventionContest]);
     expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
     expect(player.getProduction(Resources.HEAT)).eq(0);
 
     selectCard.cb([importOfAdvancedGHG]);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.HEAT)).eq(2);
     expect(game.dealer.discarded.pop()).eq(importOfAdvancedGHG);

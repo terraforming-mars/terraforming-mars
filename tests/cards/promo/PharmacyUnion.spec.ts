@@ -16,7 +16,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 import {Virus} from '../../../src/cards/base/Virus';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
   let card : PharmacyUnion; let player : Player; let player2 : Player;
@@ -182,7 +182,7 @@ describe('PharmacyUnion', function() {
     player.megaCredits = 0;
     player.playedCards = [new MediaGroup()];
     player.playCard(new Virus());
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.megaCredits).eq(3);
   });
 });

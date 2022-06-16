@@ -7,7 +7,7 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 import {ISpace} from '../../../src/boards/ISpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {fakeCard, TestingUtils} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
 import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -99,7 +99,7 @@ describe('GeologicalExpedition', function() {
   it('card resource', () => {
     space.bonus = [SpaceBonus.SCIENCE];
     game.addCityTile(player, space.id);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
@@ -112,25 +112,25 @@ describe('GeologicalExpedition', function() {
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1, heat: 1}));
 
-    TestingUtils.runAllActions(game);
-    const orOptions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(player.getWaitingFor(), OrOptions);
     expect(orOptions.options).has.length(3);
     orOptions.options[0].cb();
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1, heat: 1}));
     expect(microbeCard.resourceCount).eq(2);
     expect(scienceCard.resourceCount).eq(0);
 
     orOptions.options[1].cb();
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 2, heat: 1}));
     expect(microbeCard.resourceCount).eq(2);
     expect(scienceCard.resourceCount).eq(0);
 
     orOptions.options[2].cb();
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 2, heat: 2}));
     expect(microbeCard.resourceCount).eq(2);

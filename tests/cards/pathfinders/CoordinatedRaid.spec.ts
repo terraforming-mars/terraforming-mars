@@ -8,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Colony} from '../../../src/colonies/Colony';
 import {ColonyBenefit} from '../../../src/common/colonies/ColonyBenefit';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {ShouldIncreaseTrack} from '../../../src/common/colonies/ShouldIncreaseTrack';
 
@@ -59,13 +59,13 @@ describe('CoordinatedRaid', function() {
     colony.addColony(player2);
     colony.addColony(player2);
     const action = card.play(player);
-    const selectColony = TestingUtils.cast(action, SelectColony);
+    const selectColony = cast(action, SelectColony);
 
     expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
     expect(player2.getResourcesForTest()).deep.eq(Units.of({titanium: 6}));
 
     selectColony.cb(colony);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 0, steel: 14, megacredits: 6}));
     expect(player2.getResourcesForTest()).deep.eq(Units.of({titanium: 6}));
@@ -75,12 +75,12 @@ describe('CoordinatedRaid', function() {
     player.colonyTradeOffset += 2;
     const colony = game.colonies[1];
     colony.addColony(player2);
-    const selectColony = TestingUtils.cast(card.play(player), SelectColony);
+    const selectColony = cast(card.play(player), SelectColony);
 
     expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
 
     selectColony.cb(colony);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 0, steel: 7, megacredits: 5}));
   });

@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
@@ -45,14 +45,14 @@ describe('SecretLabs', function() {
     const placeOcean = options.options[0];
 
     placeOcean.cb();
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
     const selectSpace = player.getWaitingFor() as SelectSpace;
     expect(selectSpace.availableSpaces[0].tile).is.undefined;
 
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
     expect(selectSpace.availableSpaces[0].tile!.tileType).eq(TileType.OCEAN);
     expect(microbeCard.resourceCount).eq(2);
@@ -65,7 +65,7 @@ describe('SecretLabs', function() {
     expect(player.game.getTemperature()).eq(-30);
 
     raiseTemperature.cb();
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
     expect(player.game.getTemperature()).eq(-28);
     expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 3}));
@@ -78,7 +78,7 @@ describe('SecretLabs', function() {
     expect(player.game.getOxygenLevel()).eq(0);
 
     raiseOxygen.cb();
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
     expect(player.game.getOxygenLevel()).eq(1);
     expect(floaterCard.resourceCount).eq(2);

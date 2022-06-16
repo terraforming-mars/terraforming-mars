@@ -1,6 +1,6 @@
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {expect} from 'chai';
-import {TestingUtils} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {Ants} from '../../../src/cards/base/Ants';
 import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {Research} from '../../../src/cards/base/Research';
@@ -34,7 +34,7 @@ describe('ValleyTrust', function() {
   });
 
   it('initial action', () => {
-    const selectCard = TestingUtils.cast(card.initialAction(player), SelectCard);
+    const selectCard = cast(card.initialAction(player), SelectCard);
     expect(selectCard.cards).has.length(3);
     expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);
   });
@@ -42,7 +42,7 @@ describe('ValleyTrust', function() {
   it('Card works even without prelude', () => {
     const game = newTestGame(1, {preludeExtension: false});
     const player = getTestPlayer(game, 0);
-    const selectCard = TestingUtils.cast(card.initialAction(player), SelectCard);
+    const selectCard = cast(card.initialAction(player), SelectCard);
     expect(selectCard.cards).has.length(3);
     expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);
   });

@@ -3,7 +3,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {SurveyMission} from '../../../src/cards/pathfinders/SurveyMission';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -72,11 +72,11 @@ describe('SurveyMission', () => {
     expect(selectSpace.availableSpaces.map(toSpaceIdDigit)).has.members([4, 5, 10, 11, 16, 17]);
 
     // So if I pick space 4, only 5 and 10 will be avialable.
-    const nextSpace = TestingUtils.cast(selectSpace.cb(board.getSpace('04')), SelectSpace);
+    const nextSpace = cast(selectSpace.cb(board.getSpace('04')), SelectSpace);
     expect(board.getSpace('04').player?.id).eq(player.id);
     expect(nextSpace.availableSpaces.map(toSpaceIdDigit)).has.members([5, 10]);
 
-    const lastSpace = TestingUtils.cast(nextSpace.cb(board.getSpace('10')), SelectSpace);
+    const lastSpace = cast(nextSpace.cb(board.getSpace('10')), SelectSpace);
     expect(board.getSpace('10').player?.id).eq(player.id);
 
     expect(lastSpace.availableSpaces.map(toSpaceIdDigit)).has.members([5]);
@@ -109,7 +109,7 @@ describe('SurveyMission', () => {
     const space = board.getSpace('04');
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.PLANT];
     selectSpace.cb(space);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.steel).eq(6);
     expect(player.plants).eq(1);

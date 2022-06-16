@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {Units} from '../../../src/common/Units';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 
 describe('EarlyExpedition', function() {
@@ -40,7 +40,7 @@ describe('EarlyExpedition', function() {
     player.playedCards = [lunarObservationPost];
 
     const selectSpace = card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProductionForTest()).eql(Units.of({megacredits: 3}));
     expect(lunarObservationPost.resourceCount).eq(1);

@@ -8,10 +8,10 @@ import {TestPlayers} from '../TestPlayers';
 import {Color} from '../../src/common/Color';
 import {IDatabase} from '../../src/database/IDatabase';
 import {GameId} from '../../src/common/Types';
+import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 
 describe('GameLoader', function() {
   const expectedGameIds: Array<GameId> = ['alpha', 'foobar'];
-  const originalGetInstance = (Database as any).getInstance;
   const player = TestPlayers.BLUE.newPlayer();
   const player2 = TestPlayers.RED.newPlayer();
   const game = Game.newInstance('foobar', [player, player2], player);
@@ -32,15 +32,13 @@ describe('GameLoader', function() {
         return Promise.resolve();
       },
     };
-    (Database as any).getInstance = function() {
-      return database;
-    };
+    setTestDatabase(database as IDatabase);
   });
   beforeEach(function() {
     (GameLoader.getInstance() as GameLoader).reset();
   });
   after(function() {
-    (Database as any).getInstance = originalGetInstance;
+    restoreTestDatabase();
   });
 
   it('uses shared instance', function() {

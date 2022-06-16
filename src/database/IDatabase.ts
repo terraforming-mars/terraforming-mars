@@ -57,12 +57,12 @@ export interface IDatabase {
      *
      * @param id the `PlayerId` or `SpectatorId` assocaited with a game
      */
-     getGameId(id: PlayerId | SpectatorId): Promise<GameId>;
+    getGameId(id: PlayerId | SpectatorId): Promise<GameId>;
 
     /**
      * Get all the save ids assocaited with a game.
      */
-    getSaveIds(gameId: GameId): Promise<Array<number>>
+    getSaveIds(gameId: GameId): Promise<Array<number>>;
 
     /**
      * Load a game at a specific save point.
@@ -105,7 +105,7 @@ export interface IDatabase {
      */
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
-    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void;
+    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;
 
     /**
      * Load a game at save point 0, and provide it in the callback.

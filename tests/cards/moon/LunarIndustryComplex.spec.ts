@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {LunarIndustryComplex} from '../../../src/cards/moon/LunarIndustryComplex';
@@ -10,7 +10,7 @@ import {Units} from '../../../src/common/Units';
 import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunarIndustryComplex', () => {
   let player: TestPlayer;

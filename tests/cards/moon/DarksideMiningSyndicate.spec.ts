@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {DarksideMiningSyndicate} from '../../../src/cards/moon/DarksideMiningSyndicate';
 import {expect} from 'chai';
@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {Resources} from '../../../src/common/Resources';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('DarksideMiningSyndicate', () => {
   let player: Player;

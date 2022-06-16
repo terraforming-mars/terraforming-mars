@@ -3,7 +3,7 @@ import {Odyssey} from '../../../src/cards/pathfinders/Odyssey';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/cards/base/ImportOfAdvancedGHG';
@@ -24,7 +24,7 @@ describe('Odyssey', function() {
   });
 
   it('events count for tags', function() {
-    const event = TestingUtils.fakeCard({cardType: CardType.EVENT, tags: [Tags.JOVIAN]});
+    const event = fakeCard({cardType: CardType.EVENT, tags: [Tags.JOVIAN]});
     player.playedCards.push(event);
     expect(player.getTagCount(Tags.JOVIAN)).eq(1);
     player.corporationCard = undefined;
@@ -33,8 +33,8 @@ describe('Odyssey', function() {
 
   it('can act', function() {
     expect(card.canAct(player)).is.false;
-    const expensiveEvent = TestingUtils.fakeCard({cardType: CardType.EVENT, cost: 17});
-    const nonEvent = TestingUtils.fakeCard({cardType: CardType.ACTIVE, cost: 2});
+    const expensiveEvent = fakeCard({cardType: CardType.EVENT, cost: 17});
+    const nonEvent = fakeCard({cardType: CardType.ACTIVE, cost: 2});
     player.playedCards = [expensiveEvent, nonEvent];
     expect(card.canAct(player)).is.false;
     expensiveEvent.cost = 16;

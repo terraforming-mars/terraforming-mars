@@ -4,7 +4,6 @@ import {Vitor} from '../../../src/cards/prelude/Vitor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
-// import {maxOutOceans, addGreenery, addOcean, addCity, resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, runAllActions, runNextAction, executeNextAction, forceGenerationEnd, formatLogMessage, testRedsCosts, fakeCard, cast, sleep} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Leavitt', function() {

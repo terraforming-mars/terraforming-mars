@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {TestingUtils, testRedsCosts} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {MoonColonyStandardProject} from '../../../src/cards/moon/MoonColonyStandardProject';
 import {expect} from 'chai';
@@ -85,9 +85,9 @@ describe('MoonColonyStandardProject', () => {
     // Card requirements
     player.titanium = 1;
 
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 3);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
     moonData.colonyRate = 8;
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 0);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 

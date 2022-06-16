@@ -7,7 +7,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
 import {AndOptions} from '../../../src/inputs/AndOptions';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, TestingUtils} from '../../TestingUtils';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {Enceladus} from '../../../src/colonies/Enceladus';
 import {Europa} from '../../../src/colonies/Europa';
@@ -113,7 +113,7 @@ describe('CollegiumCopernicus', function() {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({tags: [Tags.SCIENCE]}));
+    card.onCardPlayed(player, fakeCard({tags: [Tags.SCIENCE]}));
     TestingUtils.runAllActions(game);
     const selectCard = TestingUtils.cast(player.getWaitingFor(), SelectCard);
 

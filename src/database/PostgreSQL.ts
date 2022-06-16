@@ -213,31 +213,23 @@ export class PostgreSQL implements IDatabase {
       });
   }
 
-  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
+  async restoreGame(game_id: GameId, save_id: number): Promise<Game> {
     // Retrieve last save from database
     logForUndo(game_id, 'restore to', save_id);
-    this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err, res) => {
-      if (err) {
-        console.error('PostgreSQL:restoreGame', err);
-        cb(err, undefined);
-        return;
-      }
-      if (res.rows.length === 0) {
-        console.error('PostgreSQL:restoreGame', `Game ${game_id} not found`);
-        cb(err, undefined);
-        return;
-      }
-      try {
-        // Transform string to json
-        const json = JSON.parse(res.rows[0].game);
-        const game = Game.deserialize(json);
-        logForUndo(game.id, 'restored to', game.lastSaveId, 'from', save_id);
-        cb(undefined, game);
-      } catch (e) {
-        const error = e instanceof Error ? e : new Error(String(e));
-        cb(error, undefined);
-      }
-    });
+    const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id]);
+    if (res.rows.length === 0) {
+      throw new Error(`Game ${game_id} not found`);
+    }
+    try {
+      // Transform string to json
+      const json = JSON.parse(res.rows[0].game);
+      const game = Game.deserialize(json);
+      logForUndo(game.id, 'restored to', game.lastSaveId, 'from', save_id);
+      return Promise.resolve(game);
+    } catch (e) {
+      const error = e instanceof Error ? e : new Error(String(e));
+      throw error;
+    }
   }
 
   async saveGame(game: Game): Promise<void> {

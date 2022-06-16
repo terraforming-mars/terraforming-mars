@@ -3,7 +3,7 @@ import {Ambient} from '../../../src/cards/pathfinders/Ambient';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
@@ -37,17 +37,17 @@ describe('Ambient', function() {
   it('onCardPlayed', function() {
     expect(player.getProduction(Resources.HEAT)).eq(0);
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({tags: []}));
+    card.onCardPlayed(player, fakeCard({tags: []}));
     expect(player.getProduction(Resources.HEAT)).eq(0);
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({tags: [Tags.EARTH]}));
+    card.onCardPlayed(player, fakeCard({tags: [Tags.EARTH]}));
     expect(player.getProduction(Resources.HEAT)).eq(0);
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({tags: [Tags.VENUS]}));
+    card.onCardPlayed(player, fakeCard({tags: [Tags.VENUS]}));
     expect(player.getProduction(Resources.HEAT)).eq(1);
     expect(player2.getProduction(Resources.HEAT)).eq(0);
 
-    card.onCardPlayed(player2, TestingUtils.fakeCard({tags: [Tags.VENUS]}));
+    card.onCardPlayed(player2, fakeCard({tags: [Tags.VENUS]}));
     expect(player.getProduction(Resources.HEAT)).eq(1);
     expect(player2.getProduction(Resources.HEAT)).eq(0);
   });

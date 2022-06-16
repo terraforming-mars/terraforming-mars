@@ -3,7 +3,7 @@ import {RobinHaulings} from '../../../src/cards/pathfinders/RobinHaulings';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
@@ -30,11 +30,11 @@ describe('RobinHaulings', function() {
   it('onCardPlayed', () => {
     expect(card.resourceCount).eq(0);
 
-    player.playCard(TestingUtils.fakeCard({tags: [Tags.EARTH]}));
+    player.playCard(fakeCard({tags: [Tags.EARTH]}));
 
     expect(card.resourceCount).eq(0);
 
-    player.playCard(TestingUtils.fakeCard({tags: [Tags.VENUS, Tags.VENUS]}));
+    player.playCard(fakeCard({tags: [Tags.VENUS, Tags.VENUS]}));
 
     expect(card.resourceCount).eq(0);
   });
@@ -42,11 +42,11 @@ describe('RobinHaulings', function() {
   it('onCardPlayed, other player', () => {
     expect(card.resourceCount).eq(0);
 
-    player2.playCard(TestingUtils.fakeCard({tags: [Tags.EARTH]}));
+    player2.playCard(fakeCard({tags: [Tags.EARTH]}));
 
     expect(card.resourceCount).eq(0);
 
-    player2.playCard(TestingUtils.fakeCard({tags: [Tags.VENUS, Tags.VENUS]}));
+    player2.playCard(fakeCard({tags: [Tags.VENUS, Tags.VENUS]}));
 
     expect(card.resourceCount).eq(0);
   });

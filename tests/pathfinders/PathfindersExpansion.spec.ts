@@ -3,7 +3,7 @@ import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/pathfinders/PathfindersExpansion';
 import {Tags} from '../../src/common/cards/Tags';
-import {TestingUtils} from '../TestingUtils';
+import {fakeCard, TestingUtils} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
 import {Game} from '../../src/Game';
 import {IPathfindersData} from '../../src/pathfinders/IPathfindersData';
@@ -46,10 +46,10 @@ describe('PathfindersExpansion', function() {
   });
 
   it('Venus track', () => {
-    const floaterCard = TestingUtils.fakeCard({
+    const floaterCard = fakeCard({
       resourceType: CardResource.FLOATER,
     });
-    const floaterCard2 = TestingUtils.fakeCard({
+    const floaterCard2 = fakeCard({
       resourceType: CardResource.FLOATER,
     });
     player1.playedCards.push(floaterCard);
@@ -94,7 +94,7 @@ describe('PathfindersExpansion', function() {
 
   it('played card', () => {
     expect(pathfindersData.earth).eq(0);
-    player1.playCard(TestingUtils.fakeCard({name: 'A' as CardName, tags: [Tags.EARTH]}));
+    player1.playCard(fakeCard({name: 'A' as CardName, tags: [Tags.EARTH]}));
     expect(pathfindersData.earth).eq(1);
   });
   // TODO(kberg): not all rewards are tested.

@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, TestingUtils} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -131,12 +131,12 @@ describe('Wetlands', function() {
   });
 
   it('Wetlands counts toward ocean requirements', () => {
-    const fakeCard = TestingUtils.fakeCard({requirements: CardRequirements.builder((b) => b.oceans(3))});
+    const fake = fakeCard({requirements: CardRequirements.builder((b) => b.oceans(3))});
     game.addOceanTile(player, '15');
     game.addOceanTile(player, '16');
-    expect(player.canPlay(fakeCard)).is.false;
+    expect(player.canPlay(fake)).is.false;
     game.simpleAddTile(player, game.board.getSpace('09'), {tileType: TileType.WETLANDS});
-    expect(player.canPlay(fakeCard)).is.true;
+    expect(player.canPlay(fake)).is.true;
   });
 
   it('Wetlands counts as ocean for adjacency', function() {

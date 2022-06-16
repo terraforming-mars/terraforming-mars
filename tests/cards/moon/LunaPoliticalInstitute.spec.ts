@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {fakeCard, TestingUtils} from '../../TestingUtils';
+import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaPoliticalInstitute} from '../../../src/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
@@ -9,7 +9,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {Tags} from '../../../src/common/cards/Tags';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaPoliticalInstitute', () => {
   let player: Player;

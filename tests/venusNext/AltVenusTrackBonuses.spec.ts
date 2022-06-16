@@ -4,7 +4,7 @@
 import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/venusNext/GrantVenusAltTrackBonusDeferred';
 
@@ -14,7 +14,7 @@ describe('AltVenusTrackBonuses', function() {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('x', [player], player, TestingUtils.setCustomGameOptions({altVenusBoard: true}));
+    game = Game.newInstance('x', [player], player, setCustomGameOptions({altVenusBoard: true}));
   });
 
   function getAction(game: Game) {

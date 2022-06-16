@@ -16,20 +16,6 @@ import {IProjectCard} from '../src/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 
-export class TestingUtils {
-  public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
-    return setCustomGameOptions(options);
-  }
-
-  public static runAllActions(game: Game) {
-    runAllActions(game);
-  }
-
-  public static cast<T>(obj: any, klass: new (...args: any[]) => T): T {
-    return cast(obj, klass);
-  }
-}
-
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
   const oceans = [];

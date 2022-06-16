@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PublicCelebrations} from '../../../src/cards/turmoil/PublicCelebrations';
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('PublicCelebrations', function() {
@@ -9,7 +9,7 @@ describe('PublicCelebrations', function() {
     const card = new PublicCelebrations();
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 

@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
-import {fakeCard, TestingUtils} from '../../TestingUtils';
+import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {MoonTether} from '../../../src/cards/moon/MoonTether';
 import {Tags} from '../../../src/common/cards/Tags';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonTether', () => {
   let player: TestPlayer;

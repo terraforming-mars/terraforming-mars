@@ -3,7 +3,7 @@ import {Aurorai} from '../../../src/cards/pathfinders/Aurorai';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
 
 describe('Aurorai', function() {
@@ -21,11 +21,11 @@ describe('Aurorai', function() {
   it('on TR bump', () => {
     expect(card.resourceCount).eq(0);
     player.increaseTerraformRating();
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(card.resourceCount).eq(1);
 
     player.increaseTerraformRatingSteps(3);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(card.resourceCount).eq(4);
   });
 

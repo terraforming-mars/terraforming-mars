@@ -135,14 +135,13 @@ export class Localfilesystem implements IDatabase {
     // Not implemented.
   }
 
-  restoreGame(gameId: GameId, saveId: number, cb: DbLoadCallback<Game>): void {
+  restoreGame(gameId: GameId, saveId: number, cb: DbLoadCallback<SerializedGame>): void {
     fs.copyFileSync(this._historyFilename(gameId, saveId), this._filename(gameId));
     this.getGame(gameId, (err, serializedGame) => {
       if (err) {
         cb(err, undefined);
       } else {
-        const game = Game.deserialize(serializedGame!);
-        cb(err, game);
+        cb(err, serializedGame!);
       }
     });
   }

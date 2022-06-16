@@ -228,7 +228,7 @@ export class SQLite implements IDatabase {
     }
   }
 
-  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
+  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
     // Retrieve last save from database
     this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
       if (err) {
@@ -237,8 +237,7 @@ export class SQLite implements IDatabase {
         return;
       }
       try {
-        const json = JSON.parse(row.game);
-        const game = Game.deserialize(json);
+        const game = JSON.parse(row.game);
         cb(undefined, game);
       } catch (e) {
         const error = e instanceof Error ? e : new Error(String(e));

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {fakeCard, TestingUtils} from '../TestingUtils';
+import {fakeCard, runAllActions} from '../TestingUtils';
 import {Game} from '../../src/Game';
 import {CommunicationBoom} from '../../src/turmoil/globalEvents/CommunicationBoom';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
@@ -56,7 +56,7 @@ describe('CommunicationBoom', function() {
     (player2 as any).waitingFor = undefined;
     (player2 as any).waitingForCb = undefined;
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     // This doesn't test that the deferred action limits counts. Does it need it? Possibly. _possibly._
     // Or replace AndOptions with some subclass.
@@ -71,7 +71,7 @@ describe('CommunicationBoom', function() {
     playerOptions.cb();
     expect(b.resourceCount).eq(3);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getWaitingFor()).instanceOf(AndOptions);
     const playerOptions2 = player2.getWaitingFor() as AndOptions;

@@ -139,10 +139,10 @@ describe('LunaEcumenopolis', () => {
   //   // Card requirements
   //   player.setProductionForTest({plants: 1});
 
-  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
+  //   testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
   //   moonData.colonyRate = 8;
-  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+  //   testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
   //   (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
-  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
+  //   testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   // });
 });

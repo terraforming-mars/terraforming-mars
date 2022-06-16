@@ -8,7 +8,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {CardRequirements} from '../../../src/cards/CardRequirements';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
@@ -33,7 +33,7 @@ describe('Chimera', function() {
   });
 
   it('as action', function() {
-    const a = TestingUtils.fakeCard({name: 'A' as CardName, requirements: CardRequirements.builder((f) => f.tag(Tags.EARTH, 4))});
+    const a = fakeCard({name: 'A' as CardName, requirements: CardRequirements.builder((f) => f.tag(Tags.EARTH, 4))});
     player.megaCredits = card.cost;
     player.playedCards = [new BusinessNetwork()];
     expect(player.canPlay(a)).is.false;

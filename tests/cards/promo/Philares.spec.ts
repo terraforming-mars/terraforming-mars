@@ -165,7 +165,7 @@ describe('Philares', () => {
     // Max out all global parameters
     (game as any).temperature = MAX_TEMPERATURE;
     (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
-    // TestingUtils.maxOutOceans(player);
+    // maxOutOceans(player);
 
     // Setup plants for endgame
     philaresPlayer.plants = 7;

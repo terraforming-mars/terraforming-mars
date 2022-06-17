@@ -12,7 +12,9 @@ const FAKE_DATABASE: IDatabase = {
   getGames: () => Promise.resolve([]),
   getSaveIds: () => Promise.resolve([]),
   initialize: () => Promise.resolve(),
-  restoreGame: () => {},
+  restoreGame: () => {
+    throw new Error('game not found');
+  },
   loadCloneableGame: () => Promise.resolve({} as SerializedGame),
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),

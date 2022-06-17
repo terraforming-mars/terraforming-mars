@@ -228,22 +228,23 @@ export class SQLite implements IDatabase {
     }
   }
 
-  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
-    // Retrieve last save from database
-    this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
-      if (err) {
-        console.error(err.message);
-        cb(err, undefined);
-        return;
-      }
-      try {
-        const json = JSON.parse(row.game);
-        const game = Game.deserialize(json);
-        cb(undefined, game);
-      } catch (e) {
-        const error = e instanceof Error ? e : new Error(String(e));
-        cb(error, undefined);
-      }
+  async restoreGame(game_id: GameId, save_id: number): Promise<Game> {
+    return new Promise((resolve, reject) => {
+      // Retrieve last save from database
+      this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
+        if (err) {
+          console.error(err.message);
+          reject(err);
+        }
+        try {
+          const json = JSON.parse(row.game);
+          const game = Game.deserialize(json);
+          resolve(game);
+        } catch (e) {
+          const error = e instanceof Error ? e : new Error(String(e));
+          reject(error);
+        }
+      });
     });
   }
 

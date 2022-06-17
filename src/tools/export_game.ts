@@ -20,24 +20,22 @@ const localDb = new Localfilesystem();
 
 if (isPlayerId(id) || isSpectatorId(id)) {
   console.log(`Finding game for player/spectator ${id}`);
-  db.getGameId(id, (err, gameId) => {
-    if (err) {
+  db.getGameId(id)
+    .then((gameId) => {
+      if (gameId === undefined) {
+        console.log('Game is undefined');
+        process.exit(1);
+      }
+      load(gameId);
+    }).catch((err) => {
       console.log(err);
       process.exit(1);
-    }
-    if (gameId === undefined) {
-      console.log('Game is undefined');
-      process.exit(1);
-    }
-    load(gameId);
-  });
-} else {
-  load(id);
+    });
 }
 
 function load(gameId: string) {
   console.log(`Loading game ${gameId}`);
-  db.getGame(gameId, (err: Error | undefined, game?: SerializedGame) => {
+  db.getGame(gameId, async (err: Error | undefined, game?: SerializedGame) => {
     if (err) {
       console.log(err);
       process.exit(1);
@@ -54,22 +52,23 @@ function load(gameId: string) {
     // The output might not be returned in order, because the
     // inner call is async, but it is faster than forcing the
     // results to come in order.
-    for (let version = 0; version <= game.lastSaveId; version++) {
-      db.getGameVersion(gameId, version, (err, serialized) => {
-        if (serialized === undefined) {
-          console.log(`failed to read version ${version}: ${err}`);
-          errors++;
-        } else {
-          console.log(`Storing version ${version}`);
-          localDb.saveSerializedGame(serialized!);
-          writes++;
-        }
-        if (errors + writes === game.lastSaveId + 1) {
-          // This is the last one.
-          console.log(`Wrote ${writes} records and had ${errors} failures.`);
-        }
+    db.getSaveIds(gameId)
+      .then((saveIds) => {
+        saveIds.forEach((saveId) => {
+          db.getGameVersion(gameId, saveId)
+            .then((serialized) => {
+              console.log(`Storing version ${saveId}`);
+              localDb.saveSerializedGame(serialized!);
+              writes++;
+            }).catch((err) => {
+              console.log(`failed to process saveId ${saveId}: ${err}`);
+              errors++;
+            });
+          if (errors + writes === saveIds.length) {
+            // This is the last one.
+            console.log(`Wrote ${writes} records and had ${errors} failures.`);
+          }
+        });
       });
-    }
   });
 }
-

@@ -27,7 +27,7 @@
   "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.":"行动：花费2点电能来获得2植物或向其他卡片增加1动物。",
 
   "Comet Aiming":"彗星瞄准",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.":"行动：花费1个钛在本卡上增加1小行星资源",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.":"行动：花费1个钛在任意卡上增加1小行星资源",
   "Action: Remove 1 asteroid here to place an ocean.":"行动：移除1小行星资源来放置一个海洋板块。",
 
   "Crash Site Cleanup":"陨石坑清洁",
@@ -37,6 +37,8 @@
   "Effect: When playing a card with a requirement, you pay 2 M€ less for it.":"效果：有打出限制的卡牌打出费用减2。",
 
   "Deimos Down": "火卫二陨落",
+  "Deimos Down:promo": "火卫二陨落",
+  "Deimos Down tile": "火卫二陨落板块",
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.":"提升3点温度并获得4个钢铁。在不与任何城市相邻的位置放置一个板块。",
   
   "Directed Impactors":"定向冲撞器",

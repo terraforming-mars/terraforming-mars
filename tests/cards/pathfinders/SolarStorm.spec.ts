@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {SolarStorm} from '../../../src/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Cryptocurrency} from '../../../src/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/cards/pathfinders/CommunicationCenter';
@@ -54,7 +54,7 @@ describe('SolarStorm', function() {
     player2.playedCards = [communicationCenter];
     card.play(player);
 
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
   });
 
@@ -66,10 +66,10 @@ describe('SolarStorm', function() {
 
     card.play(player);
 
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
-    const orOptions = TestingUtils.cast(player.popWaitingFor(), OrOptions);
-    const selectCard = TestingUtils.cast(orOptions.options[0], SelectCard);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const selectCard = cast(orOptions.options[0], SelectCard);
     expect(selectCard.cards).has.members([cryptocurrency]);
     selectCard.cb([cryptocurrency]);
     expect(cryptocurrency.resourceCount).eq(0);
@@ -84,10 +84,10 @@ describe('SolarStorm', function() {
 
     card.play(player);
 
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
-    const orOptions = TestingUtils.cast(player.popWaitingFor(), OrOptions);
-    const selectCard = TestingUtils.cast(orOptions.options[0], SelectCard);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const selectCard = cast(orOptions.options[0], SelectCard);
     expect(selectCard.cards).has.members([cryptocurrency, communicationCenter]);
     selectCard.cb([communicationCenter]);
     expect(communicationCenter.resourceCount).eq(3);

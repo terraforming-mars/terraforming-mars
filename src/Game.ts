@@ -216,11 +216,11 @@ export class Game {
 
   // Card-specific data
   // Mons Insurance promo corp
-  public monsInsuranceOwner: PlayerId | undefined = undefined;
+  public monsInsuranceOwner?: PlayerId;
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // Syndicate Pirate Raids
-  public syndicatePirateRaider: PlayerId | undefined = undefined;
+  public syndicatePirateRaider?: PlayerId;
 
   private constructor(
     public id: GameId,
@@ -1072,7 +1072,7 @@ export class Game {
             this.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
-  // Called when a player has chosen not to place any more greeneries.
+  // Called when a player cannot or chose not to place any more greeneries.
   public playerIsDoneWithGame(player: Player): void {
     this.donePlayers.add(player.id);
     this.gotoFinalGreeneryPlacement();
@@ -1083,7 +1083,6 @@ export class Game {
   // Rename to takeNextFinalGreeneryAction?
 
   public /* for testing */ gotoFinalGreeneryPlacement(): void {
-    // this.getPlayers returns in turn order -- a necessary rule for final greenery placement.
     for (const player of this.getPlayersInGenerationOrder()) {
       if (this.donePlayers.has(player.id)) {
         continue;
@@ -1664,7 +1663,7 @@ export class Game {
       game.colonies = ColonyDeserializer.deserializeAndFilter(d.colonies);
       const dealer = new ColonyDealer(rng, gameOptions);
       dealer.restore(game.colonies);
-      game.discardedColonies = game.discardedColonies;
+      game.discardedColonies = dealer.discardedColonies;
     }
 
     // Reload turmoil elements if needed

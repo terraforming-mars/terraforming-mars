@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {DysonScreens} from '../../../src/cards/pathfinders/DysonScreens';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,7 +14,7 @@ describe('DysonScreens', function() {
   beforeEach(function() {
     card = new DysonScreens();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: true}));
+    Game.newInstance('foobar', [player], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 
   it('play', () => {

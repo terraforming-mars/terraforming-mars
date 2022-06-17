@@ -5,7 +5,7 @@ import {Game} from '../../src/Game';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
-import {TestingUtils} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 
 describe('Pluto', function() {
   let pluto: Pluto; let player: Player; let player2: Player; let game: Game;
@@ -21,13 +21,13 @@ describe('Pluto', function() {
 
   it('Should build', function() {
     pluto.addColony(player);
-    TestingUtils.runAllActions(game); // Draw cards
+    runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(2);
   });
 
   it('Should trade', function() {
     pluto.trade(player);
-    TestingUtils.runAllActions(game); // Draw cards
+    runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
@@ -36,7 +36,7 @@ describe('Pluto', function() {
 
     pluto.trade(player2);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     const input = player.getWaitingFor()! as SelectCard<IProjectCard>;
     expect(input).to.be.an.instanceof(SelectCard);

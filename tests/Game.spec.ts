@@ -8,7 +8,7 @@ import * as constants from '../src/common/constants';
 import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {TestingUtils} from './TestingUtils';
+import {cast, maxOutOceans, setCustomGameOptions} from './TestingUtils';
 import {TestPlayers} from './TestPlayers';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/common/Resources';
@@ -27,6 +27,7 @@ import {Color} from '../src/common/Color';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
+import {IColony} from '../src/colonies/IColony';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -40,7 +41,7 @@ describe('Game', () => {
   it('sets starting production if corporate era not selected', () => {
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions({corporateEra: false});
+    const gameOptions = setCustomGameOptions({corporateEra: false});
 
     Game.newInstance('foobar', [player], player, gameOptions);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -192,7 +193,7 @@ describe('Game', () => {
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
     // (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
     (game as any).venusScaleLevel = 6;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -213,7 +214,7 @@ describe('Game', () => {
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
     (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -240,7 +241,7 @@ describe('Game', () => {
     (game as any).temperature = 2;
     (game as any).oxygenLevel = 2;
     (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     // Skip final greenery Phase
     player.plants = 0;
     player2.plants = 0;
@@ -272,7 +273,7 @@ describe('Game', () => {
     // Terraform
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
 
     player.plants = 0; // Skip final greenery Phase
 
@@ -293,7 +294,7 @@ describe('Game', () => {
     // Terraform
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL - 2;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
 
     // Must remove waitingFor or playerIsFinishedTakingActions
     // will pre-emptively exit -- you can't end the game
@@ -307,13 +308,13 @@ describe('Game', () => {
     player.takeActionForFinalGreenery();
 
     // Place first greenery to get 2 plants
-    const placeFirstGreenery = TestingUtils.cast(player.getWaitingFor(), OrOptions);
+    const placeFirstGreenery = cast(player.getWaitingFor(), OrOptions);
     const arsiaMons = game.board.getSpace(SpaceName.ARSIA_MONS);
     placeFirstGreenery.options[0].cb(arsiaMons);
     expect(player.plants).to.eq(8);
 
     // Place second greenery
-    const placeSecondGreenery = TestingUtils.cast(player.getWaitingFor(), OrOptions);
+    const placeSecondGreenery = cast(player.getWaitingFor(), OrOptions);
     const otherSpace = game.board.getSpace('30');
     placeSecondGreenery.options[0].cb(otherSpace);
 
@@ -488,7 +489,7 @@ describe('Game', () => {
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
     const secondPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.HELLAS});
+    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
     const game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
@@ -515,7 +516,7 @@ describe('Game', () => {
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
     const secondPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.HELLAS});
+    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
     const game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
     player.corporationCard = new Helion();
     player.canUseHeatAsMegaCredits = true;
@@ -542,7 +543,7 @@ describe('Game', () => {
   it('Generates random milestones and awards', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED});
+    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED});
     const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
 
     const prevMilestones = game.milestones.map((m) => m.name).sort();
@@ -566,7 +567,7 @@ describe('Game', () => {
       CardName.TERRALABS_RESEARCH,
       CardName.UTOPIA_INVEST,
     ];
-    const gameOptions = TestingUtils.setCustomGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false});
+    const gameOptions = setCustomGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false});
     Game.newInstance('foobar', [player, player2], player, gameOptions);
 
     const corpsAssignedToPlayers =
@@ -622,19 +623,21 @@ describe('Game', () => {
   it('serializes properties', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
+    game.monsInsuranceOwner = undefined;
+    game.syndicatePirateRaider = undefined;
+    game.moonData = undefined;
+    game.pathfindersData = undefined;
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
     expect(serializedKeys).not.include('rng');
     const gameKeys = Object.keys(game);
-    expect(gameKeys).not.include('moonData');
-    expect(gameKeys).not.include('pathfindersData');
     expect(serializedKeys.concat('rng', 'discardedColonies').sort())
-      .deep.eq(gameKeys.concat('moonData', 'pathfindersData', 'seed', 'currentSeed').sort());
+      .deep.eq(gameKeys.concat('seed', 'currentSeed').sort());
   });
 
   it('deserializing a game without moon data still loads', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: false}));
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: false}));
     const serialized = game.serialize();
     delete serialized['moonData'];
     const deserialized = Game.deserialize(serialized);
@@ -643,7 +646,7 @@ describe('Game', () => {
 
   it('deserializing a game without pathfinders still loads', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
     (serialized.gameOptions as any).pathfindersData = undefined;
     const deserialized = Game.deserialize(serialized);
@@ -652,7 +655,7 @@ describe('Game', () => {
 
   it('deserializing a game with awards', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.awards).deep.eq(game.awards);
@@ -660,9 +663,24 @@ describe('Game', () => {
 
   it('deserializing a game with milestones', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.milestones).deep.eq(game.milestones);
+  });
+
+  it('deserializing a colonies game includes discarded colonies #4522', () => {
+    const toName = (x: IColony) => x.name;
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({coloniesExtension: false}));
+
+    const colonyNames = game.colonies.map(toName);
+    const discardedColonyNames = game.discardedColonies.map(toName);
+
+    const serialized = game.serialize();
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.colonies.map(toName)).has.members(colonyNames);
+    expect(deserialized.discardedColonies.map(toName)).has.members(discardedColonyNames);
   });
 });

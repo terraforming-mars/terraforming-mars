@@ -23,7 +23,7 @@ export class PlayerInput extends Handler {
     }
 
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
-    ctx.gameLoader.getByPlayerId(playerId, (game) => {
+    ctx.gameLoader.getByParticipantId(playerId, (game) => {
       if (game === undefined) {
         ctx.route.notFound(req, res);
         return;

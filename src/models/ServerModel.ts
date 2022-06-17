@@ -129,15 +129,18 @@ export class Server {
   }
 
   public static getSelfReplicatingRobotsTargetCards(player: Player): Array<CardModel> {
-    return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => ({
-      resources: targetCard.resourceCount,
-      resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
-      name: targetCard.card.name,
-      calculatedCost: player.getCardCost(targetCard.card),
-      cardType: CardType.ACTIVE,
-      isDisabled: false,
-      reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
-    }));
+    return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
+      const model: CardModel = {
+        resources: targetCard.resourceCount,
+        resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
+        name: targetCard.card.name,
+        calculatedCost: player.getCardCost(targetCard.card),
+        cardType: CardType.ACTIVE,
+        isDisabled: false,
+        reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
+      };
+      return model;
+    });
   }
 
   public static getMilestones(game: Game): Array<ClaimedMilestoneModel> {
@@ -208,15 +211,20 @@ export class Server {
     if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
       discount = [{tag: Tags.MOON, amount: player.getTagCount(Tags.MOON)}];
     }
+    if (card.name === CardName.MARS_DIRECT) {
+      discount = [{tag: Tags.MARS, amount: player.getTagCount(Tags.MARS)}];
+    }
 
     return {
       name: card.name,
       resources: card.resourceCount,
       cardType: CardType.CORPORATION,
-      isDisabled: card.isDisabled,
+      isDisabled: card.isDisabled || false,
       warning: card.warning,
       discount: discount,
-    } as CardModel;
+      resourceType: card.resourceType,
+      reserveUnits: Units.EMPTY,
+    };
   }
 
   public static getWaitingFor(
@@ -371,19 +379,22 @@ export class Server {
     enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   } = {},
   ): Array<CardModel> {
-    return cards.map((card, index) => ({
-      resources: options.showResources ? card.resourceCount : undefined,
-      resourceType: card.resourceType,
-      name: card.name,
-      calculatedCost: options.showCalculatedCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
-      cardType: card.cardType,
-      isDisabled: options.enabled?.[index] === false,
-      warning: card.warning,
-      reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
-      bonusResource: (card as IProjectCard).bonusResource,
-      discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
-      cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
-    }));
+    return cards.map((card, index) => {
+      const model: CardModel = {
+        resources: options.showResources ? card.resourceCount : undefined,
+        resourceType: card.resourceType,
+        name: card.name,
+        calculatedCost: options.showCalculatedCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
+        cardType: card.cardType,
+        isDisabled: options.enabled?.[index] === false,
+        warning: card.warning,
+        reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
+        bonusResource: (card as IProjectCard).bonusResource,
+        discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
+        cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
+      };
+      return model;
+    });
   }
 
   public static getPlayer(player: Player): PublicPlayerModel {
@@ -392,7 +403,7 @@ export class Server {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
-      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
+      availableBlueCardActionCount: player.getPlayableActionCards().length,
       cardCost: player.cardCost,
       cardDiscount: player.cardDiscount,
       cardsInHandNbr: player.cardsInHand.length,

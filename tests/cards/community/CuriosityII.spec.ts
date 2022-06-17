@@ -6,7 +6,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions, runAllActions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('CuriosityII', function() {
@@ -16,7 +16,7 @@ describe('CuriosityII', function() {
     card = new CuriosityII();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({aresExtension: true, aresHazards: false}));
+    game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({aresExtension: true, aresHazards: false}));
     game.phase = Phase.ACTION;
 
     player.corporationCard = card;
@@ -36,7 +36,7 @@ describe('CuriosityII', function() {
     expect(player.megaCredits).to.eq(2);
 
     orOptions.options[0].cb(); // Pay 2 M€ to draw a card
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(0);
   });
@@ -44,7 +44,7 @@ describe('CuriosityII', function() {
   it('Does not trigger when placing a tile on an empty space', function() {
     const emptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length === 0)!;
     game.addCityTile(player, emptySpace.id);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.cardsInHand).is.empty;
     expect(player.megaCredits).to.eq(2);
@@ -53,7 +53,7 @@ describe('CuriosityII', function() {
   it('Does not trigger when opponent places a tile', function() {
     const nonEmptySpace = game.board.getAvailableSpacesOnLand(player2).find((space) => space.bonus.length > 0)!;
     game.addCityTile(player2, nonEmptySpace.id);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.cardsInHand).is.empty;
     expect(player.megaCredits).to.eq(2);
@@ -70,7 +70,7 @@ describe('CuriosityII', function() {
 
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb(); // Pay 2 M€ to draw a card
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(0);

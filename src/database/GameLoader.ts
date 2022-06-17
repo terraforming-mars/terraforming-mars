@@ -66,7 +66,7 @@ export class GameLoader implements IGameLoader {
     });
   }
 
-  private getByParticipantId(id: PlayerId | SpectatorId, cb: LoadCallback): void {
+  public getByParticipantId(id: PlayerId | SpectatorId, cb: LoadCallback): void {
     this.idsContainer.getGames().then( (d) => {
       const gameId = d.participantIds.get(id);
       if (gameId !== undefined && d.games.get(gameId) !== undefined) {
@@ -79,21 +79,14 @@ export class GameLoader implements IGameLoader {
     });
   }
 
-  public getByPlayerId(playerId: PlayerId, cb: LoadCallback): void {
-    this.getByParticipantId(playerId, cb);
-  }
-
-  public getBySpectatorId(spectatorId: SpectatorId, cb: LoadCallback): void {
-    this.getByParticipantId(spectatorId, cb);
-  }
-
   public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {
     try {
-      Database.getInstance().restoreGame(gameId, saveId, (err, game) => {
+      Database.getInstance().restoreGame(gameId, saveId, (err, serializedGame) => {
         if (err) {
           console.error('error while restoring game', err);
           cb(undefined);
-        } else if (game !== undefined) {
+        } else if (serializedGame !== undefined) {
+          const game = Game.deserialize(serializedGame);
           Database.getInstance().deleteGameNbrSaves(gameId, 1);
           this.add(game);
           game.undoCount++;

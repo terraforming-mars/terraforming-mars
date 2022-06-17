@@ -1,7 +1,6 @@
 import * as constants from './common/constants';
 import {PlayerId} from './common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './common/constants';
-import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Aurorai} from './cards/pathfinders/Aurorai';
 import {Board} from './boards/Board';
@@ -27,19 +26,13 @@ import {Phase} from './common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resources} from './common/Resources';
 import {CardResource} from './common/CardResource';
-import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
-import {SelectColony} from './inputs/SelectColony';
-import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
-import {SelectDelegate} from './inputs/SelectDelegate';
-import {SelectHowToPay} from './inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
 import {SelectOption} from './inputs/SelectOption';
-import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
@@ -49,8 +42,6 @@ import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './common/cards/Tags';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
-import {SelectProductionToLose} from './inputs/SelectProductionToLose';
-import {ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {CardLoader} from './CardLoader';
@@ -80,12 +71,12 @@ export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
-  private _game: Game | undefined = undefined;
+  private _game?: Game;
 
   // Corporate identity
-  public corporationCard: ICorporationCard | undefined = undefined;
+  public corporationCard?: ICorporationCard;
   // Used only during set-up
-  public pickedCorporationCard: ICorporationCard | undefined = undefined;
+  public pickedCorporationCard?: ICorporationCard;
 
   // Terraforming Rating
   private terraformRating: number = 20;
@@ -127,7 +118,7 @@ export class Player {
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
-  public needsToDraft: boolean | undefined = undefined;
+  public needsToDraft?: boolean;
 
   public timer: Timer = Timer.newInstance();
 
@@ -719,7 +710,8 @@ export class Player {
     return requirementsBonus;
   }
 
-  public removeResourceFrom(card: ICard, count: number = 1, removingPlayer? : Player): void {
+  public removeResourceFrom(card: ICard, count: number = 1, options?: {removingPlayer? : Player, log?: boolean}): void {
+    const removingPlayer = options?.removingPlayer;
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
       if (amountRemoved === 0) return;
@@ -727,11 +719,13 @@ export class Player {
 
       if (removingPlayer !== undefined && removingPlayer !== this) MonsInsurance.resolveInsurance(this);
 
-      this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
-        b.player(removingPlayer ?? this)
-          .number(amountRemoved)
-          .player(this)
-          .card(card));
+      if (options?.log ?? true === true) {
+        this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
+          b.player(options?.removingPlayer ?? this)
+            .number(amountRemoved)
+            .player(this)
+            .card(card));
+      }
 
       // Lawsuit hook
       if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
@@ -1031,69 +1025,10 @@ export class Player {
   }
 
   public runInput(input: InputResponse, pi: PlayerInput): void {
-    if (pi instanceof AndOptions) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectAmount) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectOption) {
-      this.deferInputCb(pi.cb());
-    } else if (pi instanceof SelectColony) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof OrOptions) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectHowToPayForProjectCard) {
-      this.checkInputLength(input, 1, 2);
-      const cardName = input[0][0];
-      const _data = PlayerInput.getCard(pi.cards, cardName);
-      const foundCard: IProjectCard = _data.card;
-      const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
-      const reserveUnits = pi.reserveUnits[_data.idx];
-      if (reserveUnits.steel + howToPay.steel > this.steel) {
-        throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
-      }
-      if (reserveUnits.titanium + howToPay.titanium > this.titanium) {
-        throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
-      }
-      this.deferInputCb(pi.cb(foundCard, howToPay));
-    } else if (pi instanceof SelectCard) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectSpace) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectPlayer) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectDelegate) {
-      this.checkInputLength(input, 1, 1);
-      const foundPlayer = pi.players.find((player) =>
-        player === input[0][0] ||
-        (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])),
-      );
-      if (foundPlayer === undefined) {
-        throw new Error('Player not available');
-      }
-      this.deferInputCb(pi.cb(foundPlayer));
-    } else if (pi instanceof SelectHowToPay) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectProductionToLose) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof ShiftAresGlobalParameters) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectPartyToSendDelegate) {
-      this.checkInputLength(input, 1, 1);
-      const party: PartyName = (input[0][0]) as PartyName;
-      if (party === undefined) {
-        throw new Error('No party selected');
-      }
-      this.deferInputCb(pi.cb(party));
-    } else {
-      throw new Error('Unsupported waitingFor');
-    }
+    this.deferInputCb(pi.process(input, this));
   }
 
-  public getAvailableBlueActionCount(): number {
-    return this.getPlayableActionCards().length;
-  }
-
-  private getPlayableActionCards(): Array<ICard & IActionCard> {
+  public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
     if (isIActionCard(this.corporationCard) &&
           !this.actionsThisGeneration.has(this.corporationCard.name) &&

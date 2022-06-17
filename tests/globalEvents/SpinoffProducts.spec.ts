@@ -9,7 +9,7 @@ import {getTestPlayer, newTestGame} from '../TestGame';
 import {TestPlayer} from '../TestPlayer';
 import {HabitatMarte} from '../../src/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../src/cards/pathfinders/DesignedOrganisms';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 
 describe('SpinoffProducts', function() {
   let card: SpinoffProducts;
@@ -20,7 +20,7 @@ describe('SpinoffProducts', function() {
 
   beforeEach(() => {
     card = new SpinoffProducts();
-    game = newTestGame(2, TestingUtils.setCustomGameOptions());
+    game = newTestGame(2, setCustomGameOptions());
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
     turmoil = game.turmoil!;
@@ -55,6 +55,6 @@ describe('SpinoffProducts', function() {
     card.resolve(game, turmoil);
 
     // This includes Habitat Marte itself, which has a Mars tag.
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(8);
+    expect(player.getResource(Resources.MEGACREDITS)).to.eq(10);
   });
 });

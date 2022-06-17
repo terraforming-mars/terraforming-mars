@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Herbivores', () => {
@@ -36,7 +36,7 @@ describe('Herbivores', () => {
     card.play(player);
     expect(card.resourceCount).to.eq(1);
 
-    const input = TestingUtils.executeNextAction(game);
+    const input = runNextAction(game);
     expect(input).is.undefined;
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });
@@ -49,7 +49,7 @@ describe('Herbivores', () => {
     expect(card.resourceCount).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = TestingUtils.executeNextAction(game) as SelectPlayer;
+    const selectPlayer = runNextAction(game) as SelectPlayer;
     selectPlayer.cb(player2);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });
@@ -60,11 +60,11 @@ describe('Herbivores', () => {
 
     game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(2);
 
     game.addGreenery(player2, game.board.getAvailableSpacesOnLand(player2)[0].id);
-    TestingUtils.runNextAction(game);
+    runNextAction(game);
     expect(card.resourceCount).to.eq(2); // i.e. not changed
 
     expect(card.getVictoryPoints()).to.eq(1);

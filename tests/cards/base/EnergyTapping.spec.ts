@@ -5,7 +5,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 
 describe('EnergyTapping', function() {
   let card : EnergyTapping; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -21,7 +21,7 @@ describe('EnergyTapping', function() {
   it('Should play - auto select if single target', function() {
     card.play(player);
     player2.setProductionForTest({energy: 1});
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player2.getProduction(Resources.ENERGY)).to.eq(0);
@@ -33,11 +33,11 @@ describe('EnergyTapping', function() {
 
     card.play(player);
 
-    TestingUtils.runAllActions(game);
-    const selectPlayer = TestingUtils.cast(player.popWaitingFor(), SelectPlayer);
+    runAllActions(game);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
     selectPlayer.cb(player2);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(3);
     expect(player2.getProduction(Resources.ENERGY)).to.eq(2);
@@ -48,7 +48,7 @@ describe('EnergyTapping', function() {
     player.popWaitingFor(); // Eliminate SelectInitialCards
     card.play(player);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

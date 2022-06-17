@@ -3,7 +3,7 @@ import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('MartianCulture', function() {
   let card: MartianCulture;
@@ -37,7 +37,7 @@ describe('MartianCulture', function() {
 
   it('action', function() {
     card.action(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(card.resourceCount).eq(1);
   });
 

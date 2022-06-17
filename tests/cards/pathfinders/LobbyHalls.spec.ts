@@ -11,7 +11,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src//deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src//inputs/SelectPartyToSendDelegate';
-import {TestingUtils} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 
 describe('LobbyHalls', function() {
   let card: LobbyHalls;
@@ -61,7 +61,7 @@ describe('LobbyHalls', function() {
   });
 
   function assertCloneTagAction(action: DeferredAction) {
-    const options = TestingUtils.cast(action, DeclareCloneTag).execute();
+    const options = cast(action, DeclareCloneTag).execute();
     options.options[0].cb();
     expect(card.tags).deep.eq([Tags.EARTH, Tags.BUILDING]);
   }

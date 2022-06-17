@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestingUtils} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 
 describe('Cryptocurrency', function() {
   let card: Cryptocurrency;
@@ -51,7 +51,7 @@ describe('Cryptocurrency', function() {
     card.resourceCount = 6;
     const options = card.action(player);
 
-    const orOptions = TestingUtils.cast(options, OrOptions);
+    const orOptions = cast(options, OrOptions);
 
     orOptions.options[0].cb();
 

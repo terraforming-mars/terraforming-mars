@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayers} from '../../TestPlayers';
 import {DiscardCards} from '../../../src/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/deferredActions/DrawCards';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('SponsoredAcademies', function() {
   it('Should play', function() {
@@ -31,7 +31,7 @@ describe('SponsoredAcademies', function() {
     expect(discardCard.cards.filter((c) => c.name === card.name)).has.lengthOf(0);
 
     discardCard.cb([card2]);
-    TestingUtils.runAllActions(game); // Draw cards
+    runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(4);
     expect(player2.cardsInHand).has.lengthOf(1);
   });

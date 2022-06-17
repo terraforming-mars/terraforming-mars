@@ -9,25 +9,25 @@
             </div>
         </div>
         <br/>
-          <template v-for="module in GAME_MODULES">
-            <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
-              <div class="corporations-filter-toolbox-cont">
-                  <div>{{moduleName(module)}}&nbsp;<div :class="icon(module)"></div></div><br>
-                  <div class="corporations-filter-toolbox">
-                      <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
-                      <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
-                      <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
-                  </div>
-              </div>
-              <div v-for="corporation in cardsByModule[module]" v-bind:key="corporation">
-                  <label class="form-checkbox">
-                      <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
-                      <i class="form-icon"></i><span v-i18n>{{ corporation }}</span>
-                      <div v-for="expansion in expansions(corporation)" :key="expansion" :class="icon(expansion)"></div>
-                  </label>
-              </div>
-          <template>
-        </div>
+        <template v-for="module in GAME_MODULES">
+          <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
+            <div class="corporations-filter-toolbox-cont">
+                <div><span v-i18n>{{moduleName(module)}}</span>&nbsp;<div :class="icon(module)"></div></div><br>
+                <div class="corporations-filter-toolbox">
+                    <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
+                    <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
+                    <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
+                </div>
+            </div>
+            <div v-for="corporation in cardsByModule[module]" v-bind:key="corporation">
+                <label class="form-checkbox">
+                    <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
+                    <i class="form-icon"></i><span v-i18n>{{ corporation }}</span>
+                    <div v-for="expansion in expansions(corporation)" :key="expansion" :class="icon(expansion)"></div>
+                </label>
+            </div>
+          </div>
+        </template>
     </div>
 </template>
 

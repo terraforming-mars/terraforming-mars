@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('DataLeak', function() {
   let card: DataLeak;
@@ -22,7 +22,7 @@ describe('DataLeak', function() {
     player.playedCards = [lunarObservationPost];
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(lunarObservationPost.resourceCount).eq(5);
   });

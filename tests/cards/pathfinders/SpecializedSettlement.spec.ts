@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpecializedSettlement} from '../../../src/cards/pathfinders/SpecializedSettlement';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -107,7 +107,7 @@ describe('SpecializedSettlement', function() {
       [SpaceBonus.HEAT, SpaceBonus.STEEL, SpaceBonus.TITANIUM],
       {heat: 1, steel: 1, titanium: 1},
       {energy: 0, megacredits: 3});
-    const orOptions = TestingUtils.cast(player.popWaitingFor(), OrOptions);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     expect(orOptions.options.map((option) => option.title)).deep.eq(['heat', 'steel', 'titanium']);
     orOptions.options[0].cb();
     expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
@@ -120,7 +120,7 @@ describe('SpecializedSettlement', function() {
       [SpaceBonus.HEAT, SpaceBonus.STEEL, SpaceBonus.TITANIUM],
       {heat: 1, steel: 1, titanium: 1},
       {energy: 0, megacredits: 3});
-    const orOptions = TestingUtils.cast(player.popWaitingFor(), OrOptions);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
     expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
     expect(player.popWaitingFor()).is.undefined;
@@ -130,7 +130,7 @@ describe('SpecializedSettlement', function() {
     const roboticWorkforce = new RoboticWorkforce();
     expect(roboticWorkforce.play(player)).is.undefined;
     player.setProductionForTest(Units.of({energy: 1}));
-    const selectCard = TestingUtils.cast(roboticWorkforce.play(player), SelectCard);
+    const selectCard = cast(roboticWorkforce.play(player), SelectCard);
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([selectCard.cards[0]]);
     expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
@@ -146,14 +146,14 @@ describe('SpecializedSettlement', function() {
 
     const action = card.play(player);
 
-    const selectSpace = TestingUtils.cast(action, SelectSpace);
+    const selectSpace = cast(action, SelectSpace);
     expect(selectSpace.availableSpaces).contains(hazardSpace);
     selectSpace.cb(hazardSpace);
 
     expect(hazardSpace.tile?.tileType).eq(TileType.CITY);
     expect(hazardSpace.player).eq(player);
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getResourcesForTest()).deep.eq(Units.of({}));
     expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
   });
@@ -164,7 +164,7 @@ describe('SpecializedSettlement', function() {
 
     expect(player.getProductionForTest()).deep.eq(Units.of({energy: 0, megacredits: 3}));
 
-    const selectSpace = TestingUtils.cast(action, SelectSpace);
+    const selectSpace = cast(action, SelectSpace);
     const space = selectSpace.availableSpaces[0];
     space.bonus = spaceBonus instanceof Array ? spaceBonus : [spaceBonus];
     selectSpace.cb(space);
@@ -173,7 +173,7 @@ describe('SpecializedSettlement', function() {
     expect(space.player).eq(player);
     expect(player.getResourcesForTest()).deep.eq(Units.of(resources));
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProductionForTest()).deep.eq(Units.of(production));
   }

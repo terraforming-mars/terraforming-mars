@@ -10,7 +10,7 @@ import {PhobosSpaceHaven} from '../../../src/cards/base/PhobosSpaceHaven';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {BuildColonyStandardProject} from '../../../src/cards/colonies/BuildColonyStandardProject';
 import {ColoniesHandler} from '../../../src/colonies/ColoniesHandler';
-import {TestingUtils} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('AdhaiHighOrbitConstructions', function() {
@@ -88,7 +88,7 @@ describe('AdhaiHighOrbitConstructions', function() {
     card.resourceCount = 2;
     expect(ColoniesHandler.coloniesTradeAction(player)).is.not.undefined;
     const tradeAction = ColoniesHandler.coloniesTradeAction(player);
-    const orOptions = TestingUtils.cast(tradeAction!.options[0], OrOptions);
+    const orOptions = cast(tradeAction!.options[0], OrOptions);
     expect(orOptions.options).has.length(1);
     expect(orOptions.options[0].title).eq('Pay 8 M€');
 

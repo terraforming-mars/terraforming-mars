@@ -6,7 +6,7 @@ import {SelectDelegate} from '../../../src/inputs/SelectDelegate';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Banned Delegate', function() {
@@ -17,7 +17,7 @@ describe('Banned Delegate', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    const gameOptions = setCustomGameOptions();
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
   });

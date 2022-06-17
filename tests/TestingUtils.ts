@@ -16,68 +16,6 @@ import {IProjectCard} from '../src/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 
-export class TestingUtils {
-  public static maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
-    return maxOutOceans(player, toValue);
-  }
-
-  public static addGreenery(player: Player): ISpace {
-    return addGreenery(player);
-  }
-
-  public static addOcean(player: Player): ISpace {
-    return addOcean(player);
-  }
-
-  public static addCity(player: Player): ISpace {
-    return addCity(player);
-  }
-
-  public static resetBoard(game: Game): void {
-    resetBoard(game);
-  }
-
-  public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
-    return setCustomGameOptions(options);
-  }
-
-  public static setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
-    setRulingPartyAndRulingPolicy(game, turmoil, party, policyId);
-  }
-
-  public static runAllActions(game: Game) {
-    runAllActions(game);
-  }
-
-  public static runNextAction(game: Game) {
-    runNextAction(game);
-  }
-
-  public static executeNextAction(game: Game) {
-    return executeNextAction(game);
-  }
-
-  public static forceGenerationEnd(game: Game) {
-    forceGenerationEnd(game);
-  }
-
-  public static formatLogMessage(message: LogMessage): string {
-    return formatLogMessage(message);
-  }
-
-  public static testRedsCosts(cb: () => boolean, player: Player, initialMegacredits: number, passingDelta: number) {
-    testRedsCosts(cb, player, initialMegacredits, passingDelta);
-  }
-
-  public static fakeCard(card: Partial<IProjectCard>): IProjectCard {
-    return fakeCard(card);
-  }
-
-  public static cast<T>(obj: any, klass: new (...args: any[]) => T): T {
-    return cast(obj, klass);
-  }
-}
-
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
   const oceans = [];
@@ -143,15 +81,8 @@ export function runAllActions(game: Game) {
 
 export function runNextAction(game: Game) {
   const action = game.deferredActions.pop();
-  if (action !== undefined) {
-    game.deferredActions.run(action, () => {});
-  }
-}
-// This could be replaced with runNextAction()
-export function executeNextAction(game: Game) {
-  const action = game.deferredActions.pop();
   if (action === undefined) {
-    throw new Error('No action in queue.');
+    return undefined;
   }
   return action.execute();
 }

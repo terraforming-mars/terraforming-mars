@@ -7,7 +7,7 @@ import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('TerraformingRobots', function() {
@@ -40,21 +40,21 @@ describe('TerraformingRobots', function() {
   it('onCardPlayed', () => {
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({}));
+    card.onCardPlayed(player, fakeCard({}));
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({
+    card.onCardPlayed(player, fakeCard({
       tags: [Tags.VENUS],
     }));
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({
+    card.onCardPlayed(player, fakeCard({
       tags: [Tags.MARS],
     }));
     expect(card.resourceCount).eq(1);
 
     card.resourceCount = 0;
-    card.onCardPlayed(player, TestingUtils.fakeCard({
+    card.onCardPlayed(player, fakeCard({
       tags: [Tags.MARS, Tags.SCIENCE, Tags.MARS],
     }));
     expect(card.resourceCount).eq(2);

@@ -7,7 +7,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {Tags} from '../../../src/common/cards/Tags';
 import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
@@ -42,13 +42,13 @@ describe('HighTempSuperconductors', function() {
     player.playedCards.push(card);
 
     // Not power tag
-    const cost10 = TestingUtils.fakeCard({cost: 10, tags: [Tags.CITY]});
+    const cost10 = fakeCard({cost: 10, tags: [Tags.CITY]});
     player.megaCredits = 9;
     expect(player.canPlay(cost10)).is.false;
     player.megaCredits = 10;
     expect(player.canPlay(cost10)).is.true;
 
-    const cost10WithTag = TestingUtils.fakeCard({cost: 10, tags: [Tags.ENERGY]});
+    const cost10WithTag = fakeCard({cost: 10, tags: [Tags.ENERGY]});
     player.megaCredits = 6;
     expect(player.canPlay(cost10WithTag)).is.false;
     player.megaCredits = 7;
@@ -78,7 +78,7 @@ describe('HighTempSuperconductors', function() {
   });
 
   it('discount Kelvinists ruling bonus', function() {
-    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, new Kelvinists(), 'kp01');
+    setRulingPartyAndRulingPolicy(game, turmoil, new Kelvinists(), 'kp01');
 
     player.megaCredits = 9;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;

@@ -100,8 +100,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
-  getGameId(id: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
+  getGameId(id: string): Promise<GameId> {
     let sql = undefined;
     if (id.charAt(0) === 'p') {
       sql =
@@ -117,17 +116,18 @@ export class PostgreSQL implements IDatabase {
       throw new Error(`id ${id} is neither a player id or spectator id`);
     }
 
-    this.client.query(sql, [id], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        console.error('PostgreSQL:getGameId', err);
-        return cb(err ?? undefined);
-      }
-      if (res.rowCount === 0) {
-        return cb(new Error(`Game for player id ${id} not found`));
-      }
-      const gameId = res.rows[0].game_id;
-      cb(undefined, gameId);
-    });
+    return this.client.query(sql, [id])
+      .then((res: QueryResult<any>) => {
+        if (res.rowCount === 0) {
+          throw new Error(`Game for player id ${id} not found`);
+        }
+        return res.rows[0].game_id;
+      }).catch((err) => {
+        if (err) {
+          console.error('PostgreSQL:getGameId', err);
+          throw err;
+        }
+      });
   }
 
   public async getSaveIds(gameId: GameId): Promise<Array<number>> {
@@ -213,7 +213,7 @@ export class PostgreSQL implements IDatabase {
       });
   }
 
-  async restoreGame(game_id: GameId, save_id: number): Promise<Game> {
+  async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {
     // Retrieve last save from database
     logForUndo(game_id, 'restore to', save_id);
     const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id]);
@@ -223,9 +223,8 @@ export class PostgreSQL implements IDatabase {
     try {
       // Transform string to json
       const json = JSON.parse(res.rows[0].game);
-      const game = Game.deserialize(json);
-      logForUndo(game.id, 'restored to', game.lastSaveId, 'from', save_id);
-      return Promise.resolve(game);
+      logForUndo(json.id, 'restored to', json.lastSaveId, 'from', save_id);
+      return Promise.resolve(json);
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
       throw error;

@@ -1,6 +1,6 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
-import {GameId} from '../common/Types';
+import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
@@ -136,21 +136,21 @@ export class SQLite implements IDatabase {
   }
 
   // TODO(kberg): throw an error if two game ids exist.
-  getGameId(id: string, cb: (err:Error | undefined, gameId?: GameId) => void): void {
-    let sql = undefined;
-    if (id.charAt(0) === 'p') {
-      sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
-    } else if (id.charAt(0) === 's') {
+  getGameId(id: PlayerId | SpectatorId): Promise<GameId> {
+    // Default sql is for player id;
+    let sql: string = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
+    if (id.charAt(0) === 's') {
       sql = 'SELECT game_id from games where json_extract(games.game, \'$.spectatorId\') = ?';
-    } else {
+    } else if (id.charAt(0) === 'p') {
       throw new Error(`id ${id} is neither a player id or spectator id`);
     }
-    console.log(sql);
-    this.db.get(sql, [id], (err: Error | null, row: { gameId: any; }) => {
-      if (err) {
-        return cb(err ?? undefined);
-      }
-      cb(undefined, row.gameId);
+    return new Promise((resolve, reject) => {
+      this.db.get(sql, [id], (err: Error | null, row: { gameId: any; }) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(row.gameId);
+      });
     });
   }
 
@@ -228,7 +228,7 @@ export class SQLite implements IDatabase {
     }
   }
 
-  async restoreGame(game_id: GameId, save_id: number): Promise<Game> {
+  async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {
     return new Promise((resolve, reject) => {
       // Retrieve last save from database
       this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
@@ -238,8 +238,7 @@ export class SQLite implements IDatabase {
         }
         try {
           const json = JSON.parse(row.game);
-          const game = Game.deserialize(json);
-          resolve(game);
+          resolve(json);
         } catch (e) {
           const error = e instanceof Error ? e : new Error(String(e));
           reject(error);

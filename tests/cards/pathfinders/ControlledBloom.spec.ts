@@ -5,7 +5,7 @@ import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {TestingUtils} from '../../TestingUtils';
+import {addOcean, fakeCard} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {CardResource} from '../../../src/common/CardResource';
 
@@ -22,18 +22,18 @@ describe('ControlledBloom', function() {
 
   it('canPlay', function() {
     player.megaCredits = card.cost;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.true;
   });
 
   it('play', function() {
-    const a = TestingUtils.fakeCard({name: 'A' as CardName, resourceType: CardResource.MICROBE});
-    const b = TestingUtils.fakeCard({name: 'B' as CardName, resourceType: CardResource.DATA});
-    const c = TestingUtils.fakeCard({name: 'C' as CardName, resourceType: CardResource.MICROBE});
+    const a = fakeCard({name: 'A' as CardName, resourceType: CardResource.MICROBE});
+    const b = fakeCard({name: 'B' as CardName, resourceType: CardResource.DATA});
+    const c = fakeCard({name: 'C' as CardName, resourceType: CardResource.MICROBE});
     player.playedCards = [a, b, c];
 
     card.play(player);

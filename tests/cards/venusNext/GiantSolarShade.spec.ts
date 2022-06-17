@@ -6,7 +6,7 @@ import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 let card: GiantSolarShade;
 let player: Player;
@@ -19,7 +19,7 @@ describe('GiantSolarShade', function() {
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    const gameOptions = setCustomGameOptions();
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

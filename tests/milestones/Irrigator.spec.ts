@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {Irrigator} from '../../src/milestones/Irrigator';
 import {Player} from '../../src/Player';
-import {TestingUtils} from '../TestingUtils';
+import {maxOutOceans} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 
 describe('Irrigator', () => {
@@ -14,7 +14,7 @@ describe('Irrigator', () => {
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('test', [player, player2], player);
 
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
   });
 
   it('Can claim with 4 tiles adjacent to oceans', () => {

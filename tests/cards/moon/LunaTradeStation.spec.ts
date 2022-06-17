@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaTradeStation} from '../../../src/cards/moon/LunaTradeStation';
 import {expect} from 'chai';
@@ -10,7 +10,7 @@ import {Resources} from '../../../src/common/Resources';
 import {MoonSpaces} from '../../../src/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaTradeStation', () => {
   let game: Game;

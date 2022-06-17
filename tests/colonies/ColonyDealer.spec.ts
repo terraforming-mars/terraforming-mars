@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {ColonyDealer} from '../../src/colonies/ColonyDealer';
 import {Random} from '../../src/Random';
 
 describe('ColonyDealer', function() {
-  const options = TestingUtils.setCustomGameOptions({venusNextExtension: false, coloniesExtension: false, turmoilExtension: false, communityCardsOption: false});
+  const options = setCustomGameOptions({venusNextExtension: false, coloniesExtension: false, turmoilExtension: false, communityCardsOption: false});
 
   it('draw', () => {
     const dealer = new ColonyDealer(new Random(1), options);

@@ -94,7 +94,8 @@ export class GameLoader implements IGameLoader {
   }
 
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<Game> {
-    const game = await Database.getInstance().restoreGame(gameId, saveId);
+    const serializedGame = await Database.getInstance().restoreGame(gameId, saveId);
+    const game = Game.deserialize(serializedGame);
     // TODO(kberg): make deleteGameNbrSaves a promise.
     await Database.getInstance().deleteGameNbrSaves(gameId, 1);
     this.add(game);

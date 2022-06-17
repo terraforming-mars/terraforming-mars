@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {MoonMineStandardProject} from '../../../src/cards/moon/MoonMineStandardProject';
 import {expect} from 'chai';
@@ -12,7 +12,7 @@ import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonMineStandardProject', () => {
   let game: Game;
@@ -83,9 +83,9 @@ describe('MoonMineStandardProject', () => {
     // Card requirements
     player.titanium = 1;
 
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 3);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
     moonData.miningRate = 8;
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 0);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 

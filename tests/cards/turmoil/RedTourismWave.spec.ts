@@ -5,7 +5,7 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('RedTourismWave', function() {
@@ -13,7 +13,7 @@ describe('RedTourismWave', function() {
     const card = new RedTourismWave();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 

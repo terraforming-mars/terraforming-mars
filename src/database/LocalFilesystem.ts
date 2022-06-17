@@ -58,7 +58,7 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  getGameId(_playerId: string, _cb: (err: Error | undefined, gameId?: GameId) => void): void {
+  getGameId(_playerId: string): Promise<GameId> {
     throw new Error('Not implemented');
   }
 
@@ -135,15 +135,14 @@ export class Localfilesystem implements IDatabase {
     // Not implemented.
   }
 
-  async restoreGame(gameId: GameId, saveId: number): Promise<Game> {
+  async restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
     await fs.copyFile(this._historyFilename(gameId, saveId), this._filename(gameId));
     return new Promise((resolve, reject) => {
       this.getGame(gameId, (err, serializedGame) => {
         if (err) {
           reject(err);
         } else {
-          const game = Game.deserialize(serializedGame!);
-          resolve(game);
+          resolve(serializedGame!);
         }
       });
     });

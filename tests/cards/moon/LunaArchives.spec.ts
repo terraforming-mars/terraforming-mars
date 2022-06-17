@@ -1,12 +1,12 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaArchives} from '../../../src/cards/moon/LunaArchives';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaArchives', () => {
   let player: TestPlayer;

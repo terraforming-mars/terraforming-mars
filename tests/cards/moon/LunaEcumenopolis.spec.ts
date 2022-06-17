@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaEcumenopolis} from '../../../src/cards/moon/LunaEcumenopolis';
 import {expect} from 'chai';
@@ -10,7 +10,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 // import {Phase} from '../../../src/Phase';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaEcumenopolis', () => {
   let game: Game;
@@ -87,7 +87,7 @@ describe('LunaEcumenopolis', () => {
     expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.colonyRate).eq(4);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getTerraformRating()).eq(18);
   });
 
@@ -125,7 +125,7 @@ describe('LunaEcumenopolis', () => {
     expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.colonyRate).eq(4);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getTerraformRating()).eq(18);
   });
 
@@ -139,10 +139,10 @@ describe('LunaEcumenopolis', () => {
   //   // Card requirements
   //   player.setProductionForTest({plants: 1});
 
-  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
+  //   testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
   //   moonData.colonyRate = 8;
-  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+  //   testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
   //   (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
-  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
+  //   testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   // });
 });

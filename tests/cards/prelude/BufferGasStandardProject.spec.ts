@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {BufferGasStandardProject} from '../../../src/cards/prelude/BufferGasStandardProject';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
@@ -31,7 +31,7 @@ describe('BufferGasStandardProject', function() {
     player.setTerraformRating(20);
 
     card.action(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(0);
     expect(player.getTerraformRating()).eq(21);
@@ -39,7 +39,7 @@ describe('BufferGasStandardProject', function() {
 
   it('Can not act with reds', () => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('foobar', [player], player, setCustomGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;
     player.setTerraformRating(20);

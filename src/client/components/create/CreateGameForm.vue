@@ -169,6 +169,11 @@
                             </label>
                             </template>
 
+                            <!-- <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
+                            <label for="beginnerOption-checkbox">
+                                <span v-i18n>Beginner Options</span>
+                            </label> -->
+
                             <input type="checkbox" v-model="undoOption" id="undo-checkbox">
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
@@ -309,11 +314,6 @@
                         </div>
 
                         <div class="create-game-players-cont">
-                            <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
-                            <label for="beginnerOption-checkbox">
-                                <span v-i18n>Beginner Options</span>
-                            </label>
-
                             <div class="container">
                                 <div class="columns">
                                   <template v-for="newPlayer in getPlayers()">
@@ -333,7 +333,7 @@
                                               </template>
                                           </div>
                                           <div>
-                                              <template v-if="beginnerOption">
+                                              <!-- <template v-if="beginnerOption"> -->
                                                   <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
                                                       <input type="checkbox" v-model="newPlayer.beginner">
                                                       <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
@@ -343,7 +343,7 @@
                                                       <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
                                                       <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
                                                   </label>
-                                              </template>
+                                              <!-- </template> -->
 
                                               <label class="form-radio form-inline" v-if="!randomFirstPlayer">
                                                   <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
@@ -448,7 +448,7 @@ export interface CreateGameModel {
     randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
-    beginnerOption: boolean;
+    // beginnerOption: boolean;
     venusNext: boolean;
     colonies: boolean;
     turmoil: boolean;
@@ -528,7 +528,7 @@ export default (Vue as WithRefs<Refs>).extend({
       randomMA: RandomMAOptionType.NONE,
       randomFirstPlayer: true,
       showOtherPlayersVP: false,
-      beginnerOption: false,
+      // beginnerOption: false,
       venusNext: false,
       colonies: false,
       showColoniesList: false,
@@ -852,7 +852,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const includeVenusMA = component.includeVenusMA;
       const startingCorporations = component.startingCorporations;
       const soloTR = component.soloTR;
-      const beginnerOption = component.beginnerOption;
+      // const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
       const escapeVelocityMode = component.escapeVelocityMode;
@@ -970,7 +970,7 @@ export default (Vue as WithRefs<Refs>).extend({
         initialDraft,
         randomMA,
         shuffleMapOption,
-        beginnerOption,
+        // beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,
         requiresMoonTrackCompletion: component.requiresMoonTrackCompletion,
@@ -981,6 +981,7 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityPeriod,
         escapeVelocityPenalty,
       }, undefined, 4);
+      console.log(dataToSend);
       return dataToSend;
     },
     async createGame() {

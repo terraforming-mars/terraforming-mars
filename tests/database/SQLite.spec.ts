@@ -6,7 +6,6 @@ import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
-import {sleep} from '../TestingUtils';
 
 class TestSQLite extends SQLite {
   public saveGamePromise: Promise<void> = Promise.resolve();
@@ -71,9 +70,7 @@ describe('SQLite', () => {
 
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-    db.cleanSaves(game.id);
-
-    await sleep(400);
+    await db.cleanSaves(game.id);
 
     const saveIds = await db.getSaveIds(game.id);
     expect(saveIds).has.members([0, 3]);

@@ -127,8 +127,9 @@ export class Localfilesystem implements IDatabase {
     // Not implemented
   }
 
-  cleanSaves(_gameId: GameId): void {
+  cleanSaves(_gameId: GameId): Promise<void> {
     // Not implemented here.
+    return Promise.resolve();
   }
 
   purgeUnfinishedGames(): void {

@@ -197,28 +197,30 @@ export class SQLite implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: GameId): void {
-    this.getMaxSaveId(game_id, ((err, save_id) => {
-      if (err) {
-        console.warn('SQLite: cleansaves0:', err.message);
-        return;
-      }
-      if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
-      // Purges isn't used yet
-      this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
-      // DELETE all saves except initial and last one
-      this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], (err) => {
-        if (err) console.warn('SQLite: cleansaves1: ', err.message);
-        // Flag game as finished
-        this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], (err) => {
-          if (err) console.warn('SQLite: cleansaves2: ', err.message);
-          this.purgeUnfinishedGames();
+  async cleanSaves(game_id: GameId): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.getMaxSaveId(game_id, ((err, save_id) => {
+        if (err) {
+          reject(new Error('SQLite: cleansaves0:' + err.message));
+        }
+        if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
+        // Purges isn't used yet
+        this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
+        // DELETE all saves except initial and last one
+        this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], (err) => {
+          if (err) console.warn('SQLite: cleansaves1: ', err.message);
+          // Flag game as finished
+          this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], async (err) => {
+            if (err) console.warn('SQLite: cleansaves2: ', err.message);
+            await this.purgeUnfinishedGames();
+            resolve();
+          });
         });
-      });
-    }));
+      }));
+    });
   }
 
-  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);

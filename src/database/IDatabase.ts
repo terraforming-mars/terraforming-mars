@@ -132,7 +132,7 @@ export interface IDatabase {
     // TODO(kberg): rename to represent that it's closing out
     // this game. Also consider not needing the save_id, and
     // also to make the maintenance behavior a first-class method.
-    cleanSaves(game_id: GameId): void;
+    cleanSaves(game_id: GameId): Promise<void>;
 
     /**
      * A maintenance task that purges abandoned solo games older

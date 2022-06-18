@@ -12,13 +12,13 @@ import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Resources} from '../../src/common/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/common/TileType';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 import {Phase} from '../../src/common/Phase';
 import {VictoryPointsBreakdown} from '../../src/VictoryPointsBreakdown';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonExpansion', () => {
   let game: Game;

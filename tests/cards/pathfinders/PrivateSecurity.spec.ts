@@ -5,7 +5,7 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PrivateSecurity', function() {
   let card: PrivateSecurity;
@@ -67,9 +67,9 @@ describe('PrivateSecurity', function() {
     expect(fish.canPlay(player)).is.true;
     expect(fish.play(player)).is.undefined;
 
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
-    const selectPlayer = TestingUtils.cast(player.popWaitingFor(), SelectPlayer);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
     expect(selectPlayer.players).includes(player);
   });
 });

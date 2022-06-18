@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {AnOfferYouCantRefuse} from '../../../src/cards/moon/AnOfferYouCantRefuse';
 import {expect} from 'chai';
@@ -10,7 +10,7 @@ import {PlayerId} from '../../../src/common/Types';
 import {IParty} from '../../../src/turmoil/parties/IParty';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
-const GAME_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true, turmoilExtension: true});
+const GAME_OPTIONS = setCustomGameOptions({moonExpansion: true, turmoilExtension: true});
 
 describe('AnOfferYouCantRefuse', () => {
   let player: TestPlayer;

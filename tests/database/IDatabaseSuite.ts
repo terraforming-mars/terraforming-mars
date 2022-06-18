@@ -1,15 +1,17 @@
 import {expect} from 'chai';
+import {use} from 'chai';
+import chaiAsPromised = require('chai-as-promised');
+use(chaiAsPromised);
 
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
-import {Database} from '../../src/database/Database';
-import {restoreTestDatabase} from '../utils/setup';
+import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {sleep} from '../TestingUtils';
 import {IDatabase} from '../../src/database/IDatabase';
 
 export interface ITestDatabase extends IDatabase {
   saveGamePromise: Promise<void>;
-  afterEach: () => void;
+  afterEach?: () => void;
 }
 
 export type DatabaseTestDescriptor = {
@@ -17,6 +19,7 @@ export type DatabaseTestDescriptor = {
   constructor: () => ITestDatabase,
   stats: any,
   omitPurgeUnfinishedGames?: boolean,
+  otherTests?: (dbFunction: () => ITestDatabase) => void,
 };
 
 export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
@@ -24,21 +27,45 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     let db: ITestDatabase;
     beforeEach(() => {
       db = dtor.constructor();
-      Database.getInstance = () => db;
+      setTestDatabase(db);
       return db.initialize();
     });
 
     afterEach(() => {
       restoreTestDatabase();
-      return db.afterEach();
+      return db.afterEach?.();
     });
 
     it('game is saved', async () => {
       const player = TestPlayers.BLACK.newPlayer();
       Game.newInstance('game-id-1212', [player], player);
-      await db.saveGamePromise
-        .then(() => db.getGames())
-        .then((allGames) => expect(allGames).deep.eq(['game-id-1212']));
+      await db.saveGamePromise;
+      const allGames = await db.getGames();
+      expect(allGames).deep.eq(['game-id-1212']);
+    });
+
+    it('getGames - removes duplicates', async () => {
+      const player = TestPlayers.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.saveGamePromise;
+      await db.saveGame(game);
+
+      const allGames = await db.getGames();
+      expect(allGames).deep.eq(['game-id-1212']);
+    });
+
+    it('getGames - includes finished games', async () => {
+      const player = TestPlayers.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.saveGamePromise;
+      Game.newInstance('game-id-2323', [player], player);
+      await db.saveGamePromise;
+
+      db.cleanSaves(game.id);
+      sleep(500);
+
+      const allGames = await db.getGames();
+      expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
     });
 
     it('saveIds', async () => {
@@ -55,7 +82,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(allSaveIds).has.members([0, 1, 2, 3]);
     });
 
-    it('purge', async () => {
+    it('cleanSaves', async () => {
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.saveGamePromise;
@@ -81,10 +108,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.saveGamePromise;
       expect(game.lastSaveId).eq(1);
 
-      db.getPlayerCount(game.id, (err, playerCount) => {
-        expect(err).to.be.undefined;
-        expect(playerCount).to.eq(1);
-      });
+      expect(db.getPlayerCount(game.id)).become(1);
     });
 
     it('does not find player count by id', async () => {
@@ -93,10 +117,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.saveGamePromise;
       expect(game.lastSaveId).eq(1);
 
-      db.getPlayerCount('notfound', (err, gameData) => {
-        expect(err).to.be.undefined;
-        expect(gameData).to.be.undefined;
-      });
+      expect(db.getPlayerCount('notfound')).is.rejected;
     });
 
     if (dtor.omitPurgeUnfinishedGames !== true) {
@@ -167,5 +188,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       const result = await db.stats();
       expect(result).deep.eq(dtor.stats);
     });
+
+    dtor.otherTests?.(() => db);
   });
 }

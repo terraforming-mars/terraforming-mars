@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
 import {TestPlayers} from '../TestPlayers';
-import {TestingUtils} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 
 describe('Io', function() {
   let io: Io; let player: Player; let player2: Player; let game: Game;
@@ -34,7 +34,7 @@ describe('Io', function() {
     io.addColony(player);
 
     io.trade(player2);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.HEAT)).to.eq(1);
     expect(player2.getProduction(Resources.HEAT)).to.eq(0);

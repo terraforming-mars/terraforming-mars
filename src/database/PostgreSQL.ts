@@ -51,25 +51,20 @@ export class PostgreSQL implements IDatabase {
       });
   }
 
-  getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
+  getPlayerCount(game_id: GameId): Promise<number> {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = $1 LIMIT 1';
 
-    this.client.query(sql, [game_id], (err, res) => {
-      if (err) {
-        console.error('PostgreSQL:getPlayerCount', err);
-        cb(err, undefined);
-        return;
-      }
-      if (res.rows.length === 0) {
-        cb(undefined, undefined);
-        return;
-      }
-      cb(undefined, res.rows[0].players);
-    });
+    return this.client.query(sql, [game_id])
+      .then((res) => {
+        if (res.rows.length === 0) {
+          throw new Error(`no rows found for game id ${game_id}`);
+        }
+        return res.rows[0].players;
+      });
   }
 
   getGames(): Promise<Array<GameId>> {
-    const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';
+    const sql: string = 'SELECT distinct game_id FROM games';
     return this.client.query(sql)
       .then((res) => {
         return res.rows.map((row) => row.game_id);
@@ -105,8 +100,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
-  getGameId(id: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
+  getGameId(id: string): Promise<GameId> {
     let sql = undefined;
     if (id.charAt(0) === 'p') {
       sql =
@@ -122,17 +116,18 @@ export class PostgreSQL implements IDatabase {
       throw new Error(`id ${id} is neither a player id or spectator id`);
     }
 
-    this.client.query(sql, [id], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        console.error('PostgreSQL:getGameId', err);
-        return cb(err ?? undefined);
-      }
-      if (res.rowCount === 0) {
-        return cb(new Error(`Game for player id ${id} not found`));
-      }
-      const gameId = res.rows[0].game_id;
-      cb(undefined, gameId);
-    });
+    return this.client.query(sql, [id])
+      .then((res: QueryResult<any>) => {
+        if (res.rowCount === 0) {
+          throw new Error(`Game for player id ${id} not found`);
+        }
+        return res.rows[0].game_id;
+      }).catch((err) => {
+        if (err) {
+          console.error('PostgreSQL:getGameId', err);
+          throw err;
+        }
+      });
   }
 
   public async getSaveIds(gameId: GameId): Promise<Array<number>> {
@@ -200,17 +195,25 @@ export class PostgreSQL implements IDatabase {
   purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): void {
     const envDays = parseInt(maxGameDays || '');
     const days = Number.isInteger(envDays) ? envDays : 10;
-    this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
-      if (res) {
-        console.log(`Purged ${res.rowCount} rows`);
-      }
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
+    this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days])
+      .then((result) => {
+        result.rows.forEach((row) => {
+          console.log(row.game_id);
+        });
+      })
+      .then(() => {
+        this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
+          if (res) {
+            console.log(`Purged ${res.rowCount} rows`);
+          }
+          if (err) {
+            return console.warn(err.message);
+          }
+        });
+      });
   }
 
-  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
+  restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
     // Retrieve last save from database
     logForUndo(game_id, 'restore to', save_id);
     this.client.query('SELECT game game FROM games WHERE game_id = $1 AND save_id = $2 ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err, res) => {
@@ -226,8 +229,7 @@ export class PostgreSQL implements IDatabase {
       }
       try {
         // Transform string to json
-        const json = JSON.parse(res.rows[0].game);
-        const game = Game.deserialize(json);
+        const game = JSON.parse(res.rows[0].game);
         logForUndo(game.id, 'restored to', game.lastSaveId, 'from', save_id);
         cb(undefined, game);
       } catch (e) {

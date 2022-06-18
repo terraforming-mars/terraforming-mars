@@ -61,7 +61,6 @@ const handlers: Map<string, IHandler> = new Map(
     ['/new-game', ServeApp.INSTANCE],
     ['/player', ServeApp.INSTANCE],
     ['/player/input', PlayerInput.INSTANCE],
-    ['/solo', ServeApp.INSTANCE],
     ['/spectator', ServeApp.INSTANCE],
     ['/styles.css', ServeAsset.INSTANCE],
     ['/sw.js', ServeAsset.INSTANCE],

@@ -13,7 +13,7 @@ import {Resources} from '../../../src/common/Resources';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('MonsInsurance', () => {
   let card: MonsInsurance; let player: TestPlayer; let player2: TestPlayer; let player3: TestPlayer;
@@ -147,7 +147,7 @@ describe('MonsInsurance - Solo', () => {
     // AirRaid steals 5 resources from any player.
     const airRaid = new AirRaid();
     airRaid.play(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     // 10 + 5 - 3 = 12
@@ -160,7 +160,7 @@ describe('MonsInsurance - Solo', () => {
     // Birds removes 2 plant production
     const birds = new Birds();
     birds.play(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     expect(player.megaCredits).eq(7);
@@ -173,7 +173,7 @@ describe('MonsInsurance - Solo', () => {
     const comet = new DeimosDown();
 
     comet.play(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     expect(player.megaCredits).eq(7);
@@ -188,7 +188,7 @@ describe('MonsInsurance - Solo', () => {
     expect(predators.resourceCount).eq(0);
 
     predators.action(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     expect(predators.resourceCount).eq(1);

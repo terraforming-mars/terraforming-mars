@@ -10,8 +10,13 @@ export interface PlayerInput {
     options?: Array<PlayerInput>;
     title: string | Message;
     cb: (...item: any) => PlayerInput | undefined;
+    /**
+     * Processes and validates `response` for this PlayerInput which is meant for the given `player`.
+     *
+     * This is another mechainsm for calling cb() with a client-side response.
+     */
+    process: (response: InputResponse, player: Player) => PlayerInput | undefined;
     maxByDefault?: boolean;
-    process?: (response: InputResponse, player: Player) => PlayerInput | undefined;
 }
 
 export namespace PlayerInput {

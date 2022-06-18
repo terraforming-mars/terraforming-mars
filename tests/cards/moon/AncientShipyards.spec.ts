@@ -1,13 +1,13 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('AncientShipyards', () => {
   let game: Game;

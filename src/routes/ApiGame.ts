@@ -17,7 +17,7 @@ export class ApiGame extends Handler {
       return;
     }
 
-    ctx.gameLoader.getByGameId(gameId, false, (game: Game | undefined) => {
+    ctx.gameLoader.getByGameId(gameId, /* bypassCache */ false, (game: Game | undefined) => {
       if (game === undefined) {
         ctx.route.notFound(req, res, 'game not found');
         return;

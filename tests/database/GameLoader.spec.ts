@@ -8,20 +8,15 @@ import {TestPlayers} from '../TestPlayers';
 import {Color} from '../../src/common/Color';
 import {IDatabase} from '../../src/database/IDatabase';
 import {GameId} from '../../src/common/Types';
+import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 
 describe('GameLoader', function() {
   const expectedGameIds: Array<GameId> = ['alpha', 'foobar'];
-  const originalGenerateId = (Player as any).prototype.generateId;
-  const originalGetInstance = (Database as any).getInstance;
   const player = TestPlayers.BLUE.newPlayer();
   const player2 = TestPlayers.RED.newPlayer();
   const game = Game.newInstance('foobar', [player, player2], player);
-  let playerIdIndex = 0;
 
   before(function() {
-    (Player as any).prototype.generateId = function() {
-      return 'bar-' + (playerIdIndex++);
-    };
     const database: Partial<IDatabase> = {
       getGame: function(gameId: string, cb: (err: Error | undefined, serializedGame?: SerializedGame) => void) {
         if (gameId === 'foobar') {
@@ -37,16 +32,13 @@ describe('GameLoader', function() {
         return Promise.resolve();
       },
     };
-    (Database as any).getInstance = function() {
-      return database;
-    };
+    setTestDatabase(database as IDatabase);
   });
   beforeEach(function() {
     (GameLoader.getInstance() as GameLoader).reset();
   });
   after(function() {
-    (Player as any).prototype.generateId = originalGenerateId;
-    (Database as any).getInstance = originalGetInstance;
+    restoreTestDatabase();
   });
 
   it('uses shared instance', function() {

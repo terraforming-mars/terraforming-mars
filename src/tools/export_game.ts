@@ -20,19 +20,17 @@ const localDb = new Localfilesystem();
 
 if (isPlayerId(id) || isSpectatorId(id)) {
   console.log(`Finding game for player/spectator ${id}`);
-  db.getGameId(id, (err, gameId) => {
-    if (err) {
+  db.getGameId(id)
+    .then((gameId) => {
+      if (gameId === undefined) {
+        console.log('Game is undefined');
+        process.exit(1);
+      }
+      load(gameId);
+    }).catch((err) => {
       console.log(err);
       process.exit(1);
-    }
-    if (gameId === undefined) {
-      console.log('Game is undefined');
-      process.exit(1);
-    }
-    load(gameId);
-  });
-} else {
-  load(id);
+    });
 }
 
 function load(gameId: string) {

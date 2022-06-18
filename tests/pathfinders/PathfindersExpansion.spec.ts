@@ -3,7 +3,7 @@ import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/pathfinders/PathfindersExpansion';
 import {Tags} from '../../src/common/cards/Tags';
-import {TestingUtils} from '../TestingUtils';
+import {fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
 import {Game} from '../../src/Game';
 import {IPathfindersData} from '../../src/pathfinders/IPathfindersData';
@@ -28,7 +28,7 @@ describe('PathfindersExpansion', function() {
 
   it('Earth track', () => {
     PathfindersExpansion.raiseTrack(Tags.EARTH, player1, 3);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(pathfindersData.earth).eq(3);
     expect(player1.plants).eq(2);
@@ -38,7 +38,7 @@ describe('PathfindersExpansion', function() {
     expect(player2.megaCredits).eq(0);
 
     PathfindersExpansion.raiseTrack(Tags.EARTH, player1, 3);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(pathfindersData.earth).eq(6);
     expect(player1.megaCredits).eq(3);
@@ -46,17 +46,17 @@ describe('PathfindersExpansion', function() {
   });
 
   it('Venus track', () => {
-    const floaterCard = TestingUtils.fakeCard({
+    const floaterCard = fakeCard({
       resourceType: CardResource.FLOATER,
     });
-    const floaterCard2 = TestingUtils.fakeCard({
+    const floaterCard2 = fakeCard({
       resourceType: CardResource.FLOATER,
     });
     player1.playedCards.push(floaterCard);
     player2.playedCards.push(floaterCard2);
 
     PathfindersExpansion.raiseTrack(Tags.VENUS, player1, 3);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(pathfindersData.venus).eq(3);
     expect(player1.heat).eq(2);
@@ -94,7 +94,7 @@ describe('PathfindersExpansion', function() {
 
   it('played card', () => {
     expect(pathfindersData.earth).eq(0);
-    player1.playCard(TestingUtils.fakeCard({name: 'A' as CardName, tags: [Tags.EARTH]}));
+    player1.playCard(fakeCard({name: 'A' as CardName, tags: [Tags.EARTH]}));
     expect(pathfindersData.earth).eq(1);
   });
   // TODO(kberg): not all rewards are tested.

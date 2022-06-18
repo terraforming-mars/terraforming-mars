@@ -7,7 +7,7 @@ import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
 import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/cards/colonies/AirRaid';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectHowToPayForProjectCard} from '../../../src/inputs/SelectHowToPayForProjectCard';
 
 describe('ValuableGases', function() {
@@ -42,11 +42,11 @@ describe('ValuableGases', function() {
     // Using playCard instead because playCard impacts lastCardPlayed.
     player.playCard(card, undefined, true);
 
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
     const input = player.popWaitingFor();
 
-    const selectHowToPay = TestingUtils.cast(input, SelectHowToPayForProjectCard);
+    const selectHowToPay = cast(input, SelectHowToPayForProjectCard);
     expect(selectHowToPay.cards).has.members([localShading]);
     expect(player.megaCredits).eq(10);
 

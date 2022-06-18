@@ -1,5 +1,5 @@
 import {Game, GameOptions, Score} from '../Game';
-import {GameId} from '../common/Types';
+import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
 /**
@@ -55,15 +55,14 @@ export interface IDatabase {
      *
      * This is not yet written efficiently in Postgres, so use sparingly.
      *
-     * @param playerId the playerID assocaited with a game
-     * @param cb called with the gameid if it exists. If it does not err will be truthy.
+     * @param id the `PlayerId` or `SpectatorId` assocaited with a game
      */
-    getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void;
+    getGameId(id: PlayerId | SpectatorId): Promise<GameId>;
 
     /**
      * Get all the save ids assocaited with a game.
      */
-    getSaveIds(gameId: GameId): Promise<Array<number>>
+    getSaveIds(gameId: GameId): Promise<Array<number>>;
 
     /**
      * Load a game at a specific save point.
@@ -79,10 +78,8 @@ export interface IDatabase {
      * Get the player count for a game.
      *
      * @param game_id the game id to search for
-     * @param cb a callback either returning either an error or the game's player count.
-     * if the game is not found then undefined.
      */
-    getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void): void;
+    getPlayerCount(game_id: GameId): Promise<number>;
 
     /**
      * Saves the current state of the game. at a supplied save point. Used for
@@ -108,7 +105,7 @@ export interface IDatabase {
      */
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
-    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void;
+    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;
 
     /**
      * Load a game at save point 0, and provide it in the callback.

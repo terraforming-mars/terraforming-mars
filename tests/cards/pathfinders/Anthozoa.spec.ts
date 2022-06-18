@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 // import {Units} from '../../../src/Units';
-import {TestingUtils} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 
 describe('Anthozoa', function() {
   let card: Anthozoa;
@@ -19,11 +19,11 @@ describe('Anthozoa', function() {
   it('canPlay', function() {
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.true;
   });
 

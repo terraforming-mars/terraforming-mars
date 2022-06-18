@@ -28,7 +28,7 @@ export class LoadGame extends Handler {
         if (rollbackCount > 0) {
           Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
         }
-        GameLoader.getInstance().getByGameId(game_id, true, (game) => {
+        GameLoader.getInstance().getByGameId(game_id, /* bypassCache */ true, (game) => {
           if (game === undefined) {
             console.warn(`unable to find ${game_id} in database`);
             ctx.route.notFound(req, res, 'game_id not found');

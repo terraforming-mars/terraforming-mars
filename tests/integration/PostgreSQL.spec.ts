@@ -6,15 +6,13 @@ use(chaiAsPromised);
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
-import {Database} from '../../src/database/Database';
-import {restoreTestDatabase} from '../utils/setup';
+import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {sleep} from '../TestingUtils';
 
 /*
- How to set up this integration test.
-
- This test only works manually.
-*/
+ * This test can be run with `npm run test:integration` as long as the test is set up
+ * correctly.
+ */
 class TestPostgreSQL extends PostgreSQL {
   public saveGamePromise: Promise<void> = Promise.resolve();
 
@@ -51,7 +49,7 @@ describe('PostgreSQL', () => {
 
   beforeEach(async () => {
     db = new TestPostgreSQL();
-    Database.getInstance = () => db;
+    setTestDatabase(db);
     await db.initialize();
   });
 
@@ -65,6 +63,30 @@ describe('PostgreSQL', () => {
     Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;
     await db.getGames().then((allGames) => expect(allGames).deep.eq(['game-id-1212']));
+  });
+
+  it('getGames - removes duplicates', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    await db.saveGame(game);
+
+    const allGames = await db.getGames();
+    expect(allGames).deep.eq(['game-id-1212']);
+  });
+
+  it('getGames - includes finished games', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    Game.newInstance('game-id-2323', [player], player);
+    await db.saveGamePromise;
+
+    db.cleanSaves(game.id);
+    sleep(500);
+
+    const allGames = await db.getGames();
+    expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
   });
 
   it('saveIds', async () => {
@@ -107,10 +129,7 @@ describe('PostgreSQL', () => {
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getPlayerCount(game.id, (err, playerCount) => {
-      expect(err).to.be.undefined;
-      expect(playerCount).to.eq(1);
-    });
+    expect(db.getPlayerCount(game.id)).become(1);
   });
 
   it('does not find player count for game by id', async () => {
@@ -119,10 +138,7 @@ describe('PostgreSQL', () => {
     await db.saveGamePromise;
     expect(game.lastSaveId).eq(1);
 
-    db.getPlayerCount('notfound', (err, playerCount) => {
-      expect(err).to.be.undefined;
-      expect(playerCount).to.be.undefined;
-    });
+    expect(db.getPlayerCount('notfound')).is.rejected;
   });
 
   it('cleanSaves', async () => {

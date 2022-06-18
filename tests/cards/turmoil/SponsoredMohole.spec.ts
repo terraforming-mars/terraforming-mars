@@ -3,7 +3,7 @@ import {SponsoredMohole} from '../../../src/cards/turmoil/SponsoredMohole';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('SponsoredMohole', function() {
@@ -11,7 +11,7 @@ describe('SponsoredMohole', function() {
     const card = new SponsoredMohole();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 

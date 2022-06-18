@@ -4,10 +4,10 @@ import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {TileType} from '../../src/common/TileType';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunarMagnate', function() {
   let player: TestPlayer;

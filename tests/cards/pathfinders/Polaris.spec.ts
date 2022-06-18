@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Polaris} from '../../../src/cards/pathfinders/Polaris';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -24,7 +24,7 @@ describe('Polaris', function() {
 
   it('initial action', function() {
     card.initialAction(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     const input = player.getWaitingFor();
 
     expect(input).instanceOf(SelectSpace);
@@ -35,7 +35,7 @@ describe('Polaris', function() {
     expect(selectSpace.availableSpaces).includes(space);
 
     selectSpace.cb(space);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(space.tile?.tileType === TileType.OCEAN);
 
@@ -47,7 +47,7 @@ describe('Polaris', function() {
 
   it('When anyone plays ocean tile', function() {
     game.addOceanTile(player2, '06');
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.megaCredits).to.eq(0);
@@ -57,7 +57,7 @@ describe('Polaris', function() {
 
   it('When you play ocean tile', function() {
     game.addOceanTile(player, '06');
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.megaCredits).to.eq(4);

@@ -10,6 +10,7 @@ import {Size} from '../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectColony} from '../..//inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
+import {LogHelper} from '../../LogHelper';
 
 export class MarketManipulation extends Card implements IProjectCard {
   constructor() {
@@ -75,13 +76,13 @@ export class MarketManipulation extends Card implements IProjectCard {
       increasableColonies,
       (increasedColony: IColony) => {
         increasedColony.increaseTrack();
-        player.game.log('${0} increased ${1} track', (b) => b.player(player).string(increasedColony.name));
+        LogHelper.logColonyTrackIncrease(player, increasedColony, 1);
         const decreaseColonyTrack = new SelectColony(
           'Select which colony tile track to decrease',
           'Decrease',
           decreasableColonies.filter((decreaseableColony) => decreaseableColony.name !== increasedColony.name),
           (colony: IColony) => {
-            player.game.log('${0} decreased ${1} track', (b) => b.player(player).string(colony.name));
+            LogHelper.logColonyTrackDecrease(player, increasedColony);
             colony.decreaseTrack();
             return undefined;
           },

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/cards/pathfinders/CommunicationCenter';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Resources} from '../../../src/common/Resources';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -35,7 +35,7 @@ describe('CommunicationCenter', function() {
 
     expect(card.play(player));
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(card.resourceCount).eq(2);
     expect(player.getProduction(Resources.ENERGY)).eq(1);
@@ -45,25 +45,25 @@ describe('CommunicationCenter', function() {
     player.playedCards = [card];
     expect(card.resourceCount).eq(0);
 
-    player.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.ACTIVE}));
+    player.onCardPlayed(fakeCard({cardType: CardType.ACTIVE}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.AUTOMATED}));
+    player.onCardPlayed(fakeCard({cardType: CardType.AUTOMATED}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.CORPORATION}));
+    player.onCardPlayed(fakeCard({cardType: CardType.CORPORATION}));
     expect(card.resourceCount).eq(0);
-    player.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.PRELUDE}));
+    player.onCardPlayed(fakeCard({cardType: CardType.PRELUDE}));
     expect(card.resourceCount).eq(0);
 
-    player.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.EVENT}));
+    player.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
     expect(card.resourceCount).eq(1);
 
-    otherPlayer.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.EVENT}));
+    otherPlayer.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
     expect(card.resourceCount).eq(2);
 
     expect(player.cardsInHand).is.length(0);
     expect(otherPlayer.cardsInHand).is.length(0);
 
-    otherPlayer.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.EVENT}));
+    otherPlayer.onCardPlayed(fakeCard({cardType: CardType.EVENT}));
 
     expect(card.resourceCount).eq(0);
     expect(player.cardsInHand).is.length(1);

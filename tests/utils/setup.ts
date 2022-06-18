@@ -5,14 +5,15 @@ import {SerializedGame} from '../../src/SerializedGame';
 const FAKE_DATABASE: IDatabase = {
   cleanSaves: () => {},
   deleteGameNbrSaves: () => {},
-  getPlayerCount: () => {},
+  getPlayerCount: () => Promise.resolve(0),
   getGame: () => {},
-  getGameId: () => {},
+  getGameId: () => Promise.resolve(''),
   getGameVersion: () => Promise.resolve({} as SerializedGame),
   getGames: () => Promise.resolve([]),
+  getSaveIds: () => Promise.resolve([]),
   initialize: () => Promise.resolve(),
   restoreGame: () => {},
-  loadCloneableGame: () => {},
+  loadCloneableGame: () => Promise.resolve({} as SerializedGame),
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
   purgeUnfinishedGames: () => {},
@@ -22,11 +23,11 @@ const FAKE_DATABASE: IDatabase = {
 let databaseUnderTest: IDatabase = FAKE_DATABASE;
 
 export function restoreTestDatabase() {
-  databaseUnderTest = FAKE_DATABASE;
+  setTestDatabase(FAKE_DATABASE);
 }
 
-Database.getInstance = function() {
-  // don't save to database during tests
-  return databaseUnderTest;
-};
+export function setTestDatabase(db: IDatabase) {
+  databaseUnderTest = db;
+}
 
+Database.getInstance = () => databaseUnderTest;

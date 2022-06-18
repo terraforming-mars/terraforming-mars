@@ -81,11 +81,12 @@ export class GameLoader implements IGameLoader {
 
   public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {
     try {
-      Database.getInstance().restoreGame(gameId, saveId, (err, game) => {
+      Database.getInstance().restoreGame(gameId, saveId, (err, serializedGame) => {
         if (err) {
           console.error('error while restoring game', err);
           cb(undefined);
-        } else if (game !== undefined) {
+        } else if (serializedGame !== undefined) {
+          const game = Game.deserialize(serializedGame);
           Database.getInstance().deleteGameNbrSaves(gameId, 1);
           this.add(game);
           game.undoCount++;

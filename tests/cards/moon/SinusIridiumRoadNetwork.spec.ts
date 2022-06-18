@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {SinusIridiumRoadNetwork} from '../../../src/cards/moon/SinusIridiumRoadNetwork';
@@ -7,7 +7,7 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('SinusIridiumRoadNetwork', () => {
   let player: TestPlayer;

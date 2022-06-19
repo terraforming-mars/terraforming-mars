@@ -432,8 +432,7 @@ import {getCard} from '@/client/cards/ClientCardManifest';
 import {GameModule} from '@/common/cards/GameModule';
 
 import * as constants from '@/common/constants';
-
-type BoardNameType = BoardName | RandomBoardOption;
+import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 
 export interface CreateGameModel {
     constants: typeof constants;
@@ -486,15 +485,6 @@ export interface CreateGameModel {
     escapeVelocityThreshold: number;
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
-}
-
-export interface NewPlayerModel {
-    index: number;
-    name: string;
-    color: Color;
-    beginner: boolean;
-    handicap: number;
-    first: boolean;
 }
 
 type Refs = {
@@ -938,7 +928,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clonedGamedId = undefined;
       }
 
-      const dataToSend = JSON.stringify({
+      const dataToSend: NewGameConfig = {
         players,
         corporateEra,
         prelude,
@@ -980,9 +970,8 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityThreshold,
         escapeVelocityPeriod,
         escapeVelocityPenalty,
-      }, undefined, 4);
-      console.log(dataToSend);
-      return dataToSend;
+      };
+      return JSON.stringify(dataToSend, undefined, 4);
     },
     async createGame() {
       const dataToSend = await this.serializeSettings();

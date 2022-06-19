@@ -4,7 +4,6 @@ import {ITestDatabase, describeDatabaseSuite} from '../database/IDatabaseSuite';
 import {Game} from '../../src/Game';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
 import {TestPlayers} from '../TestPlayers';
-import {IDatabase} from '../../src/database/IDatabase';
 
 /*
  * This test can be run with `npm run test:integration` as long as the test is set up
@@ -69,7 +68,7 @@ describeDatabaseSuite({
 
   otherTests: (dbFunction: () => ITestDatabase) => {
     it('saveGame with the same saveID', async () => {
-      const db = dbFunction();
+      const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.saveGamePromise;

@@ -66,7 +66,23 @@ export const MOON_MILESTONES: Array<IMilestone> = [
   new Lunarchitect(),
 ];
 
+export const AMAZONIS_PLANITIA_MILESTONES = [
+  new Economizer(),
+  new Pioneer(),
+  new LandSpecialist(),
+  new Martian(),
+  new Businessperson(),
+];
+
 export const ARABIA_TERRA_MILESTONES = [
+  new Economizer(),
+  new Pioneer(),
+  new LandSpecialist(),
+  new Martian(),
+  new Businessperson(),
+];
+
+export const TERRA_CIMMERIA_MILESTONES = [
   new Economizer(),
   new Pioneer(),
   new LandSpecialist(),
@@ -89,7 +105,9 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
+  ...AMAZONIS_PLANITIA_MILESTONES,
   ...ARABIA_TERRA_MILESTONES,
+  ...TERRA_CIMMERIA_MILESTONES,
   ...VASTITAS_BOREALIS_MILESTONES,
 ];
 

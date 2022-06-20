@@ -6,6 +6,7 @@ import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, O
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../common/cards/CardName';
+import {SpaceBonus} from '../common/boards/SpaceBonus';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -208,7 +209,9 @@ export abstract class Board {
       const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space);
       // If it does have a hazard tile, make sure it's not a protected one.
       const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-      return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+      // tiles are not placeable on restricted spaces at all
+      const isRestricted = space.bonus.includes(SpaceBonus.RESTRICTED);
+      return !isRestricted && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
     });
 
     return landSpaces;
@@ -249,7 +252,7 @@ export abstract class Board {
   }
 
   public canPlaceTile(space: ISpace): boolean {
-    return space.tile === undefined && space.spaceType === SpaceType.LAND;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;
   }
 
   public static isCitySpace(space: ISpace): boolean {

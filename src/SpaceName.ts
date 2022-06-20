@@ -34,4 +34,17 @@ export enum SpaceName {
     LUNAR_EMBASSY = '77',
     VENERA_BASE = '78',
     // MARTIAN_TRANSHIPMENT_STATION = '79',
+
+    // Amazonis
+    MEDUSAE_FOSSAE = '33',
+    ALBOR_THOLUS = '09',
+    ANSERIS_MONS = '35',
+    PINDUS_MONS = '43',
+    ULYSSES_THOLUS = '49',
+
+    // Terra Cimmeria
+    ALBOR_THOLUS_TERRACIMMERIA = '05',
+    APOLLINARIS_MONS = '27',
+    HADRIACUS_MONS = '38',
+    TYRRHENUS_MONS = '21',
 }

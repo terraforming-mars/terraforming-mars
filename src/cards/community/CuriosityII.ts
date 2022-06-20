@@ -48,7 +48,7 @@ export class CuriosityII extends Card implements ICorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-    const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE];
+    const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE, SpaceBonus.ENERGY];
 
     if (cardOwner.id !== activePlayer.id) return;
     if (cardOwner.game.phase === Phase.SOLAR) return;

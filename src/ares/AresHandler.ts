@@ -29,11 +29,7 @@ export class AresHandler {
 
   public static ifAres(game: Game, cb: (aresData: IAresData) => void) {
     if (game.gameOptions.aresExtension) {
-      if (game.aresData === undefined) {
-        console.log('Assertion failure: game.aresData is undefined');
-        // TODO(kberg): switch to throw.
-        return;
-      }
+      if (game.aresData === undefined) throw new Error('Assertion failure: game.aresData is undefined');
       cb(game.aresData);
     }
   }

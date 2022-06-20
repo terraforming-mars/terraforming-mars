@@ -41,49 +41,37 @@ export class PostgreSQL implements IDatabase {
     this.client = new Pool(config);
   }
 
-  public initialize(): Promise<QueryResult<any>> {
-    return this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
-      .then(() => this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))'))
-      .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)'))
-      .then(() => this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)'))
-      .catch((err) => {
-        throw err;
-      });
+  public async initialize(): Promise<void> {
+    await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
+    await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+    await this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
+    await this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)');
   }
 
-  getPlayerCount(game_id: GameId): Promise<number> {
+  public async getPlayerCount(game_id: GameId): Promise<number> {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = $1 LIMIT 1';
 
-    return this.client.query(sql, [game_id])
-      .then((res) => {
-        if (res.rows.length === 0) {
-          throw new Error(`no rows found for game id ${game_id}`);
-        }
-        return res.rows[0].players;
-      });
+    const res = await this.client.query(sql, [game_id]);
+    if (res.rows.length === 0) {
+      throw new Error(`no rows found for game id ${game_id}`);
+    }
+    return res.rows[0].players;
   }
 
-  getGames(): Promise<Array<GameId>> {
+  public async getGames(): Promise<Array<GameId>> {
     const sql: string = 'SELECT distinct game_id FROM games';
-    return this.client.query(sql)
-      .then((res) => {
-        return res.rows.map((row) => row.game_id);
-      }).catch((err) => {
-        console.error('PostgreSQL:getGames', err);
-        throw err;
-      });
+    const res = await this.client.query(sql);
+    return res.rows.map((row) => row.game_id);
   }
 
-  loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
+  public async loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
     // Retrieve first save from database
-    return this.client.query('SELECT game_id, game FROM games WHERE game_id = $1 AND save_id = 0', [game_id])
-      .then((res) => {
-        if (res.rows.length === 0) {
-          throw new Error(`Game ${game_id} not found`);
-        }
-        const json = JSON.parse(res.rows[0].game);
-        return json;
-      });
+    const res = await this.client.query('SELECT game_id, game FROM games WHERE game_id = $1 AND save_id = 0', [game_id]);
+    if (res.rows.length === 0) {
+      throw new Error(`Game ${game_id} not found`);
+    }
+    const json = JSON.parse(res.rows[0].game);
+    return json;
   }
 
   getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
@@ -100,7 +88,7 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getGameId(id: string): Promise<GameId> {
+  public async getGameId(id: string): Promise<GameId> {
     let sql = undefined;
     if (id.charAt(0) === 'p') {
       sql =
@@ -113,21 +101,19 @@ export class PostgreSQL implements IDatabase {
         FROM games
         WHERE save_id = 0 AND CAST(game AS JSON)->>'spectatorId' = $1`;
     } else {
-      throw new Error(`id ${id} is neither a player id or spectator id`);
+      throw new Error(`id ${id} is neither a player id nor spectator id`);
     }
 
-    return this.client.query(sql, [id])
-      .then((res: QueryResult<any>) => {
-        if (res.rowCount === 0) {
-          throw new Error(`Game for player id ${id} not found`);
-        }
-        return res.rows[0].game_id;
-      }).catch((err) => {
-        if (err) {
-          console.error('PostgreSQL:getGameId', err);
-          throw err;
-        }
-      });
+    try {
+      const res = await this.client.query(sql, [id]);
+      if (res.rowCount === 0) {
+        throw new Error(`Game for player id ${id} not found`);
+      }
+      return res.rows[0].game_id;
+    } catch (err) {
+      console.error('PostgreSQL:getGameId', err);
+      throw err;
+    }
   }
 
   public async getSaveIds(gameId: GameId): Promise<Array<number>> {
@@ -139,14 +125,12 @@ export class PostgreSQL implements IDatabase {
     return Promise.resolve(allSaveIds);
   }
 
-  getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
-    return this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id])
-      .then((res) => {
-        if (res.rowCount === 0) {
-          throw new Error(`Game ${game_id} not found at save_id ${save_id}`);
-        }
-        return JSON.parse(res.rows[0].game);
-      });
+  async getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
+    const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id]);
+    if (res.rowCount === 0) {
+      throw new Error(`Game ${game_id} not found at save_id ${save_id}`);
+    }
+    return JSON.parse(res.rows[0].game);
   }
 
   saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
@@ -243,35 +227,36 @@ export class PostgreSQL implements IDatabase {
     const gameJSON = game.toJSON();
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
-    // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
-    return this.client.query(
-      `INSERT INTO games (game_id, save_id, game, players)
-      VALUES ($1, $2, $3, $4)
-      ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
-      RETURNING (xmax = 0) AS inserted`,
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length])
-      .then((res) => {
-        let inserted: boolean = true;
-        try {
-          inserted = res.rows[0].inserted;
-        } catch (err) {
-          console.error(err);
-        }
-        if (inserted === false) {
-          if (game.gameOptions.undoOption) {
-            this.statistics.saveConflictUndoCount++;
-          } else {
-            this.statistics.saveConflictNormalCount++;
-          }
-        }
+    try {
+      // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
+      const res = await this.client.query(
+        `INSERT INTO games (game_id, save_id, game, players)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
+        RETURNING (xmax = 0) AS inserted`,
+        [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
 
-        game.lastSaveId++;
-        if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
-      })
-      .catch((err) => {
-        this.statistics.saveErrorCount++;
-        console.error('PostgreSQL:saveGame', err);
-      });
+      game.lastSaveId++;
+
+      let inserted: boolean = true;
+      try {
+        inserted = res.rows[0].inserted;
+      } catch (err) {
+        console.error(err);
+      }
+      if (inserted === false) {
+        if (game.gameOptions.undoOption) {
+          this.statistics.saveConflictUndoCount++;
+        } else {
+          this.statistics.saveConflictNormalCount++;
+        }
+      }
+
+      if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
+    } catch (err) {
+      this.statistics.saveErrorCount++;
+      console.error('PostgreSQL:saveGame', err);
+    }
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {
@@ -310,18 +295,17 @@ export class PostgreSQL implements IDatabase {
     };
 
     // TODO(kberg): return row counts
-    return this.client.query(`
+    const result = await this.client.query(`
     SELECT
       pg_size_pretty(pg_total_relation_size(\'games\')) as game_size,
       pg_size_pretty(pg_total_relation_size(\'game_results\')) as game_result_size,
       pg_size_pretty(pg_database_size($1)) as db_size
-    `, [this.databaseName])
-      .then((result) => {
-        map['size-bytes-games'] = result.rows[0].game_size;
-        map['size-bytes-game-results'] = result.rows[0].game_result_size;
-        map['size-bytes-database'] = result.rows[0].db_size;
-        return map;
-      });
+    `, [this.databaseName]);
+
+    map['size-bytes-games'] = result.rows[0].game_size;
+    map['size-bytes-game-results'] = result.rows[0].game_result_size;
+    map['size-bytes-database'] = result.rows[0].db_size;
+    return map;
   }
 }
 

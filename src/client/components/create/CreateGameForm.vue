@@ -627,7 +627,7 @@ export default (Vue as WithRefs<Refs>).extend({
           component.showCardsBlackList = results['cardsBlackList'].length > 0;
 
           for (const k in results) {
-            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players'].includes(k)) continue;
+            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players', 'solarPhaseOption'].includes(k)) continue;
             (component as any)[k] = results[k];
           }
 
@@ -651,6 +651,9 @@ export default (Vue as WithRefs<Refs>).extend({
             if ( ! component.seededGame) {
               component.seed = Math.random();
             }
+
+            // set to alter after any watched properties
+            component.solarPhaseOption = Boolean(results.solarPhaseOption);
           });
         }
       }, false);

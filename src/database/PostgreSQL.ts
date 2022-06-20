@@ -46,7 +46,6 @@ export class PostgreSQL implements IDatabase {
     await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)');
-    return Promise.resolve();
   }
 
   public async getPlayerCount(game_id: GameId): Promise<number> {

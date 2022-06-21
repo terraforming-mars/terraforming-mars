@@ -18,7 +18,7 @@ export class PlayerInput extends AsyncHandler {
 
     if (playerId === null) {
       ctx.route.badRequest(req, res, 'must provide player id');
-      return Promise.resolve();
+      return;
     }
 
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.

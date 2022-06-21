@@ -49,7 +49,7 @@ export default Vue.extend({
   },
   computed: {
     maAwardClass(): string {
-      return 'ma-name--' + this.award.name.replace(/ /g, '-').toLowerCase();
+      return 'ma-name--' + this.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },
     sortedScores(): IAwardScore[] {
       return [...this.award.scores].sort((s1, s2) => s2.playerScore - s1.playerScore);

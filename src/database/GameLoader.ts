@@ -138,7 +138,7 @@ export class GameLoader implements IGameLoader {
     if (bypassCache === false && game !== undefined) {
       return game;
     } else if (game === undefined) {
-      return Promise.reject(new Error(`GameLoader:game id not found ${gameId}`));
+      throw new Error(`GameLoader:game id not found ${gameId}`);
     }
     return new Promise((resolve, reject) => {
       Database.getInstance().getGame(gameId, (err: any, serializedGame?) => {

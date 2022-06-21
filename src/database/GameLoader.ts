@@ -184,7 +184,7 @@ export class GameLoader implements IGameLoader {
     const d = await this.idsContainer.getGames();
     const gameId = d.participantIds.get(id);
     if (gameId === undefined) {
-      return Promise.reject(new Error(`GameLoader:id not found ${id}`));
+      throw new Error(`GameLoader:id not found ${id}`);
     }
     const game = d.games.get(gameId);
     if (game !== undefined) {

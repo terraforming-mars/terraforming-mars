@@ -5,7 +5,7 @@ import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
 import {TestPlayers} from '../TestPlayers';
 import {Color} from '../../src/common/Color';
-import {DbLoadCallback, IDatabase} from '../../src/database/IDatabase';
+import {IDatabase} from '../../src/database/IDatabase';
 import {GameId} from '../../src/common/Types';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 
@@ -75,7 +75,7 @@ class InMemoryDatabase implements IDatabase {
   saveGameResults(_game_id: string, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Score[]): void {
     throw new Error('Method not implemented.');
   }
-  restoreGame(_game_id: string, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
+  restoreGame(_game_id: string, _save_id: number): Promise<SerializedGame> {
     throw new Error('Method not implemented.');
   }
   loadCloneableGame(_game_id: string): Promise<SerializedGame> {

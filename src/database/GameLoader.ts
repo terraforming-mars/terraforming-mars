@@ -66,8 +66,22 @@ export class GameLoader implements IGameLoader {
     });
   }
 
+  public async getByParticipantIdAsync(id: PlayerId | SpectatorId): Promise<Game> {
+    const d = await this.idsContainer.getGames();
+    const gameId = d.participantIds.get(id);
+    if (gameId === undefined) {
+      throw new Error('Not found');
+    }
+    const game = d.games.get(gameId);
+    if (game !== undefined) {
+      return game;
+    } else {
+      return this.loadParticipantAsync(id);
+    }
+  }
+
   public getByParticipantId(id: PlayerId | SpectatorId, cb: LoadCallback): void {
-    this.idsContainer.getGames().then( (d) => {
+    this.idsContainer.getGames().then((d) => {
       const gameId = d.participantIds.get(id);
       if (gameId !== undefined && d.games.get(gameId) !== undefined) {
         cb(d.games.get(gameId));
@@ -79,27 +93,14 @@ export class GameLoader implements IGameLoader {
     });
   }
 
-  public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {
-    try {
-      Database.getInstance().restoreGame(gameId, saveId, (err, serializedGame) => {
-        if (err) {
-          console.error('error while restoring game', err);
-          cb(undefined);
-        } else if (serializedGame !== undefined) {
-          const game = Game.deserialize(serializedGame);
-          Database.getInstance().deleteGameNbrSaves(gameId, 1);
-          this.add(game);
-          game.undoCount++;
-          cb(game);
-        } else {
-          console.error('game not found while restoring game', err);
-          cb(undefined);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-      cb(undefined);
-    }
+  public async restoreGameAt(gameId: GameId, saveId: number): Promise<Game> {
+    const serializedGame = await Database.getInstance().restoreGame(gameId, saveId);
+    const game = Game.deserialize(serializedGame);
+    // TODO(kberg): make deleteGameNbrSaves a promise.
+    await Database.getInstance().deleteGameNbrSaves(gameId, 1);
+    this.add(game);
+    game.undoCount++;
+    return game;
   }
 
   private loadGame(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
@@ -131,6 +132,38 @@ export class GameLoader implements IGameLoader {
     });
   }
 
+  private async loadGameAsync(gameId: GameId, bypassCache: boolean): Promise<Game> {
+    const d = await this.idsContainer.getGames();
+    const game = d.games.get(gameId);
+    if (bypassCache === false && game !== undefined) {
+      return game;
+    } else if (game === undefined) {
+      throw new Error(`GameLoader:game id not found ${gameId}`);
+    }
+    return new Promise((resolve, reject) => {
+      Database.getInstance().getGame(gameId, (err: any, serializedGame?) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        if (serializedGame === undefined) {
+          reject(new Error('game not defined'));
+          return;
+        }
+        try {
+          const game = Game.deserialize(serializedGame);
+          this.add(game);
+          console.log(`GameLoader loaded game ${gameId} into memory from database`);
+          resolve(game);
+        } catch (e) {
+          console.error('GameLoader:loadGame', e);
+          reject(e);
+          return;
+        }
+      });
+    });
+  }
+
   private loadParticipant(id: PlayerId | SpectatorId, cb: LoadCallback): void {
     this.idsContainer.getGames().then( (d) => {
       const gameId = d.participantIds.get(id);
@@ -145,5 +178,18 @@ export class GameLoader implements IGameLoader {
       }
       this.loadGame(gameId, false, cb);
     });
+  }
+
+  private async loadParticipantAsync(id: PlayerId | SpectatorId): Promise<Game> {
+    const d = await this.idsContainer.getGames();
+    const gameId = d.participantIds.get(id);
+    if (gameId === undefined) {
+      throw new Error(`GameLoader:id not found ${id}`);
+    }
+    const game = d.games.get(gameId);
+    if (game !== undefined) {
+      return game;
+    }
+    return this.loadGameAsync(gameId, false);
   }
 }

@@ -11,20 +11,22 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 
 describe('PlayerInput', function() {
   let scaffolding: RouteTestScaffolding;
+  let req: EventEmitter;
   let res: MockResponse;
 
   beforeEach(() => {
-    scaffolding = new RouteTestScaffolding(new EventEmitter() as http.IncomingMessage);
+    req = new EventEmitter();
     res = new MockResponse();
+    scaffolding = new RouteTestScaffolding(req as http.IncomingMessage);
   });
 
-  it('fails when id not provided', () => {
+  it('fails when id not provided', async () => {
     scaffolding.url = '/player/input';
-    scaffolding.post(PlayerInput.INSTANCE, res);
+    await scaffolding.asyncPost(PlayerInput.INSTANCE, res);
     expect(res.content).eq('Bad request: must provide player id');
   });
 
-  it('performs undo action', () => {
+  it('performs undo action', async () => {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = '/player/input?id=' + player.id;
     player.beginner = true;
@@ -35,18 +37,21 @@ describe('PlayerInput', function() {
     player.process([['1'], ['Power Plant:SP']]);
     const options = player.getWaitingFor() as OrOptions;
     options.options.push(new UndoActionOption());
-    scaffolding.ctx.gameLoader.restoreGameAt = function(_gameId: string, _lastSaveId: number, cb: (game: Game | undefined) => void) {
-      cb(undo);
-    };
-    scaffolding.post(PlayerInput.INSTANCE, res);
-    scaffolding.req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
-    scaffolding.req.emit('end');
+    scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.resolve(undo);
+
+    const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);
+    const emit = Promise.resolve().then(() => {
+      req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
+      req.emit('end');
+    });
+    await Promise.all(([emit, post]));
+
     const model = JSON.parse(res.content);
     expect(game.gameAge).not.eq(undo.gameAge);
     expect(model.game.gameAge).eq(undo.gameAge);
   });
 
-  it('reverts to current game instance if undo fails', () => {
+  it('reverts to current game instance if undo fails', async () => {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = '/player/input?id=' + player.id;
     player.beginner = true;
@@ -57,25 +62,33 @@ describe('PlayerInput', function() {
     player.process([['1'], ['Power Plant:SP']]);
     const options = player.getWaitingFor() as OrOptions;
     options.options.push(new UndoActionOption());
-    scaffolding.ctx.gameLoader.restoreGameAt = function(_gameId: string, _lastSaveId: number, cb: (game: Game | undefined) => void) {
-      cb(undefined);
-    };
-    scaffolding.post(PlayerInput.INSTANCE, res);
-    scaffolding.req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
-    scaffolding.req.emit('end');
+    scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.reject(new Error('error'));
+
+    const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);
+    const emit = Promise.resolve().then(() => {
+      scaffolding.req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
+      scaffolding.req.emit('end');
+    });
+    await Promise.all(([emit, post]));
+
     const model = JSON.parse(res.content);
     expect(game.gameAge).not.eq(undo.gameAge);
     expect(model.game.gameAge).eq(model.game.gameAge);
   });
 
-  it('sends 400 on server error', () => {
+  it('sends 400 on server error', async () => {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
     const game = Game.newInstance('foo', [player], player);
     scaffolding.ctx.gameLoader.add(game);
-    scaffolding.post(PlayerInput.INSTANCE, res);
-    scaffolding.req.emit('data', '}{');
-    scaffolding.req.emit('end');
+
+    const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);
+    const emit = Promise.resolve().then(() => {
+      scaffolding.req.emit('data', '}{');
+      scaffolding.req.emit('end');
+    });
+    await Promise.all(([emit, post]));
+
     expect(res.content).eq('{"message":"Unexpected token } in JSON at position 0"}');
   });
 });

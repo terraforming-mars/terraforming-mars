@@ -33,7 +33,6 @@ import {SerializedGame} from '../SerializedGame';
  * Finally, `players` as a number merely represents the number of players
  * in the game. Why, I have no idea, says kberg.
  */
-
 export type DbLoadCallback<T> = (err: Error | undefined, game: T | undefined) => void
 
 export interface IDatabase {
@@ -105,7 +104,7 @@ export interface IDatabase {
      */
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
-    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;
+    restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame>;
 
     /**
      * Load a game at save point 0, and provide it in the callback.

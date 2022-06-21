@@ -224,7 +224,7 @@ export class PostgreSQL implements IDatabase {
       // Transform string to json
       const json = JSON.parse(res.rows[0].game);
       logForUndo(json.id, 'restored to', json.lastSaveId, 'from', save_id);
-      return Promise.resolve(json);
+      return json;
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
       throw error;

@@ -217,9 +217,7 @@ export const mainAppSettings = {
       xhr.send();
     } else if (currentPathname === '/games-overview') {
       app.screen = 'games-overview';
-    } else if (
-      currentPathname === '/new-game' || currentPathname === '/solo'
-    ) {
+    } else if (currentPathname === '/new-game') {
       app.screen = 'create-game-form';
     } else if (currentPathname === '/load') {
       app.screen = 'load';

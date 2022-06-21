@@ -10,6 +10,7 @@ import {Game, GameOptions} from '../Game';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {ServeAsset} from './ServeAsset';
+import {NewGameConfig} from '../common/game/NewGameConfig';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 
@@ -26,7 +27,7 @@ export class GameHandler extends Handler {
     return prefix + Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
   }
 
-  public static boardOptions(board: string) {
+  public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
     const allBoards = Object.values(BoardName);
 
     if (board === RandomBoardOption.ALL) return allBoards;
@@ -52,7 +53,7 @@ export class GameHandler extends Handler {
     });
     req.once('end', () => {
       try {
-        const gameReq = JSON.parse(body);
+        const gameReq: NewGameConfig = JSON.parse(body);
         const gameId = this.generateRandomId('g');
         const spectatorId = this.generateRandomId('s');
         const players = gameReq.players.map((obj: any) => {

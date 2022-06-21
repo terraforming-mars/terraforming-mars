@@ -31,7 +31,7 @@ export class PlayerInput extends AsyncHandler {
     }
     if (player === undefined) {
       ctx.route.notFound(req, res);
-      return Promise.resolve();
+      return;
     }
     return this.processInput(req, res, ctx, player);
   }

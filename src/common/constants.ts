@@ -66,3 +66,4 @@ export const LANGUAGES = [
 ];
 
 export const APP_NAME = 'Terraforming Mars';
+export const DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';

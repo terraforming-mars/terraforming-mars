@@ -175,22 +175,15 @@ describe('GameLoader', function() {
     }
   });
 
-  it('gets player when added and not in database', function(done) {
+  it('gets player when added and not in database', async function() {
     const players = foobarGame.getPlayersInGenerationOrder();
     instance.add(foobarGame);
-    instance.getByParticipantId(players[Math.floor(Math.random() * players.length)]!.id).then((game1) => {
-      expect(game1).is.not.undefined;
-      instance.getLoadedGameIds((list) => {
-        try {
-          expect(list).to.deep.eq(
-            [{'id': 'foobar', 'participants': ['p-blue-id', 'p-red-id']}],
-          );
-          done();
-        } catch (error) {
-          done(error);
-        }
-      });
-    });
+    const game1 = await instance.getByParticipantId(players[Math.floor(Math.random() * players.length)]!.id);
+    expect(game1).is.not.undefined;
+    const list = await instance.getLoadedGameIds();
+    expect(list).to.deep.eq(
+      [{'id': 'foobar', 'participants': ['p-blue-id', 'p-red-id']}],
+    );
   });
 
   it('loads values after error pulling game ids', async function() {
@@ -225,7 +218,7 @@ describe('GameLoader', function() {
     });
   });
 
-  it('waits for games to finish loading', function(done) {
+  it('waits for games to finish loading', async function() {
     // Set up a clean number of games;
     database.data.delete('foobar');
     const numberOfGames : number = 10;
@@ -235,16 +228,10 @@ describe('GameLoader', function() {
     }
     database.getGameSleep = 500;
     instance.reset();
-    instance.getLoadedGameIds((list) => {
-      try {
-        expect(list?.map((e) => e.id)).to.have.members([
-          'game-0', 'game-1', 'game-2', 'game-3', 'game-4',
-          'game-5', 'game-6', 'game-7', 'game-8', 'game-9',
-        ]);
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+    const list = await instance.getLoadedGameIds();
+    expect(list?.map((e) => e.id)).to.have.members([
+      'game-0', 'game-1', 'game-2', 'game-3', 'game-4',
+      'game-5', 'game-6', 'game-7', 'game-8', 'game-9',
+    ]);
   });
 });

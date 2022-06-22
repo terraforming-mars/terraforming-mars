@@ -13,8 +13,8 @@ export class FakeGameLoader implements IGameLoader {
         return {id: id, participants: []};
       }));
   }
-  getByGameId(gameId: string, _bypassCache: boolean, cb: (game: Game | undefined) => void): void {
-    cb(this.games.get(gameId));
+  async getByGameId(gameId: string, _bypassCache: boolean): Promise<Game | undefined> {
+    return this.games.get(gameId);
   }
   async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {
     for (const game of Array.from(this.games.values())) {

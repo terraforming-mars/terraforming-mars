@@ -1,0 +1,100 @@
+.game-home-container {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  height: 860px;
+  >h4 {
+    margin-left: 20px;
+  }
+  .turn-order {
+    display: inline-block;
+    width: 40px;
+    text-align: right;
+  }
+  >ul {
+    list-style: none;
+    >li {
+      font-size: @font_size_big;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+    }
+  }
+  .color-square {
+    display: block;
+    width: 23px;
+    height: 23px;
+    border-radius: 3px;
+    margin: 0px 12px;
+  }
+  .player-name {
+    text-decoration: underline;
+    margin-right: 18px;
+    cursor: pointer;
+  }
+  .copied-notice {
+    margin-left: 12px;
+    font-size: @font_size_normal;
+    .dismissed {
+      font-size: @font_size_small;
+      padding: 1px 3px;
+      border-radius: 2px;
+      color: black;
+      background: #e8e8e8;
+    }
+  }
+  .spacing-setup{
+    padding-bottom: 64px;
+  }
+}
+
+.game-setup-detail-container{
+  >ul {
+    list-style: none;
+    >li {
+      font-size: @font_size_big;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+    }
+  }
+  .setup-item{
+    margin-right: 10px;
+  }
+
+  .game-config{
+    border-radius: 4px;
+    margin: 0px 5px;
+    padding: 0px 10px;
+
+    &.map{
+      text-transform: uppercase;
+    }
+    &.fastmode{
+      background-color: #69962e;
+    }
+    &.timer{
+      background-color: #43419c;
+    }
+    &.realtime-vp{
+      background-color: #8d4321;
+    }
+    &.undo{
+      background-color: #757575;
+    }
+    &.generic{
+      background-color: #49597a;
+    }
+    &.board-tharsis{
+      background-color: rgb(202, 117, 64);
+    }
+    &.board-hellas{
+      background-color: rgb(55,111,156);
+    }
+    &.board-elysium{
+      background-color: rgb(31,121,32);
+    }
+    &.board-other{
+      background-color: rgb(106,106,106);
+    }
+  }
+}

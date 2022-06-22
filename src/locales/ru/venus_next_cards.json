@@ -1,0 +1,186 @@
+{
+    "Aerial Mappers": "Карта ветров ",
+    "Action: Add floater to ANY card.": "Действие: добавьте один аэростат на любую карту или уберите один аэростат с этой карты , чтобы взять карту из колоды ",
+    "Action: Spend one floater here to draw 1 card.": "Действие: Уберите один аэростат с этой карты , чтобы взять карту из колоды ",
+
+    "Aerosport Tournament": "Чемпионат по аэроспорту",
+    "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.": "Требование: У вас есть хотя бы 5 аэростатов. Получите 1  МС за каждый жетон города на игровом поле",
+
+    "Air-Scrapping Expedition": "Операция по очистке",
+    "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.": "Увеличьте шкалу Венеры на 1. Добавьте 3 аэростата на любую карту Венеры",
+
+    "Atalanta Planitia Lab": "Лаборатория в Аталанте",
+    "Requires 3 science tags. Draw 2 cards.": "Требование: У вас есть хотя бы 3 метки Науки. Возьмите две карты из колоды",
+
+    "Atmoscoop": "Забор водорода",
+    "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.": "Требование: У вас есть хотя бы 3 метки Науки. Увеличьте температуру на 2 или шкалу Венеры на 2. Добавьте 2 аэростата на любую карту",
+
+    "Comet for Venus": "Комета на Венеру",
+    "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.": "Увеличьте шкалу Венеры на 1. Уберите до 4 МС у игрока с хотя бы одной меткой Венеры",
+
+    "Corroder Suits": "Сверхпрочные скафандры",
+    "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.": "Увеличьте своё производство МС на 2. Добавьте один ресурс на любую карту Венеры",
+
+    "Dawn City": "Город рассвета",
+    "Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.": "Требование: У вас есть хотя бы 4 метки Науки. Уменьшите своё производство энергии на 1 и увеличьте своё производство титана на 1. Выложите жетон города на область Город рассвета",
+
+    "Deuterium Export": "Экспорт дейтерия",
+    "Action: Add 1 Floater to this card.": "Действие: добавьте 1 аэростат на эту карту",
+    "Action: Spend 1 Floater here to increase your energy production 1 step.": "Действие: Потратьте 1 аэростат отсюда, чтобы увеличить своё производство энергии на 1",
+
+    "Dirigibles": "Дирижабли",
+    "Action: Add 1 Floater to ANY card": "Действие: добавьте 1 аэростат на любую карту",
+    "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "Эффект: Разыгрывая метку Венеры, можете убрать 1 или несколько аэростатов с этой карты, чтобы заплатить за нее на 3 МС меньше за каждый убранный аэростат",
+
+    "Extractor Balloons": "Газоcборники",
+    "Action: Remove 2 Floaters here to raise Venus 1 step.": "Действие: добавьте 1 аэростат на эту карту или уберите 2 аэростат с этой карты, чтобы увеличить шкалу Венеры на 1",
+    "Add 3 Floaters to this card": "Добавьте 3 аэростата на эту карту",
+
+    "Extremophiles": "Экстремофилы",
+    "Action: Add 1 microbe to ANY card.": "Действие: добавьте 1 микроб на любую карту",
+    "Requires 2 Science tags.": "Требование: у вас есть хотя бы две метки Науки",
+    "1 VP for every 3rd Microbe on this card.": "1 ПО за каждые 3 микроба на этой карте",
+
+    "Floating Habs": "Аэростанции",
+    "Action: Spend 2 M€ to add 1 Floater to ANY card": "Действие: потратьте 2 МС, чтобы добавить 1 аэростат на любую карту",
+    "1 VP for every 2nd Floater on this card.": "1 ПО за каждые 2-й аэростат на этой карте",
+    "Requires 2 Science tags. 1 VP for every 2nd Floater on this card": "Требование: у вас есть хотя бы 2 метки Науки",
+
+    "Forced Precipitation": "Вызов осадков",
+    "Action: Spend 2 M€ to add 1 Floater to THIS card.": "Действие: Потратьте 2 МС, чтобы добавить 1 аэростат на эту карту",
+    "Action: Spend 2 Floaters here to increase Venus 1 step.": "Действие: Потратьте 2 аэростата, чтобы увеличить шкалу Венеры на 1",
+
+    "Freyja Biodomes": "Биокуполы Фрейя",
+    "Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, M€ +2.": "Требование: 10% на шкале Венеры или выше. Добавьте 2 микроба или 2 животных на другую карту Венеры. Уменьшите своё производство энергии на 1 и увеличьте свое производсто МС на 2",
+
+    "GHG Import From Venus": "Углекислый газ с Венеры",
+    "Raise Venus 1 step. Increase your heat production 3 steps.": "Увеличьте шкалу Венеры на 1. Увеличьте своё производство тепла на 3",
+
+    "Giant Solar Shade": "Затенение планеты",
+    "Raise Venus 3 steps.": "Увеличьте шкалу Венеры на 3",
+
+    "Gyropolis": "Гирополис",
+    "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a City tile.": "Уменьшите свое производство энергии на 2. Увеличьте свое производство МС на 1 за каждую вашу метку Венеры и Земли. Выложите жетон города",
+
+    "Hydrogen to Venus": "Водород на Венеру",
+    "Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have.": "Увеличьте шкалу Венеры на 1. Добавьте 1 аэростат на любую карту Венеры за каждую вашу метку Юпитера",
+
+    "Io Sulphur Research": "Изучение серы на Ио",
+    "Draw 1 card, or draw 3 if you have at least 3 Venus tags.": "Возьмите 1 карту из колоды или возьмите 3 карты из колоды, если у вас есть хотя бы 3 метки Венеры",
+
+    "Ishtar Mining": "Раскопки Иштар",
+    "Requires Venus 8%. Increase your titanium production 1 step.": "Требование: 8% на шкале Венеры или выше. Увеличьте свое производство титана на 1",
+
+    "Jet Stream Microscrappers": "Микроочистители",
+    "Action: Spend 1 titanium to add 2 Floaters here": "Действие: Потратьте 1 титан, чтобы добавить 2 аэростата на эту карту",
+    "Action: Spend 2 Floaters here to raise Venus 1 step": "Действие: Потратье 2 аэростата с этой карты, чтобы увеличить шкалу Венеры на 1",
+
+    "Local Shading": "Локальное затенение",
+    "Action: add 1 Floater to this card, or spend 1 Floater here to raise your M€ production 1 step": "Действие: добавьте 1 аэростат на эту карту или потратьте 1 аэростат с этой карты, чтобы увеличить свое производство МС на 1",
+
+    "Luna Metropolis": "Лунный мегаполис",
+    "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA": "Увеличьте свое производство МС на 1 за каждую вашу метку Земли, включая эту. Выложите жетон города на область Лунный мегаполис",
+
+    "Luxury Foods": "Деликатесы",
+    "Venus Earth Jovian": "Венера, Земля, Юпитер",
+
+    "Maxwell Base": "База Максвелла",
+    "Action: Add 1 resource to ANOTHER VENUS CARD": "Действие: добавьте 1 любой ресурс на другую карту Венеры",
+    "Requires Venus 12%. Decrease your energy production 1 step.": "Требование: 12% Венеры. Уменьшите свое производство энергии на 1.",
+    "Place a City tile ON THE RESERVED AREA.": "Выложите жетон города на область база Максвелла",
+
+    "Mining Quota": "Контракт на добычу",
+    "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps": "Требование: у вас есть хотя бы по одной метке Венеры, Земли и Юпитера. Увеличьте свое производство стали на 2",
+
+    "Neutralizer Factory": "Завод по нейтрализации",
+    "Requires Venus 10%. Increase the Venus track 1 step": "Требование: 10% на шкале Венеры или выше. Увеличьте шкалу Венеры на 1",
+
+    "Omnicourt": "Мировой парламент",
+    "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Требование: у вас есть хотя бы по одной метке Венеры, Земли и Юпитера. Увеличьте свой РТ на 2",
+
+    "Orbital Reflectors": "Орбитальные отражатели",
+    "Raise Venus 2 steps. Increase your heat production 2 steps": "Увеличьте шкалу Венеры на 2. Увеличьте свое производство тепла на 2",
+
+    "Rotator Impacts": "Вращательные удары",
+    "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Действие: потратьте 6 МС, чтобы добавить астероид на эту карту. Можете использовать титан",
+    "Action: Spend 1 resource from this card to increase Venus 1 step.": "Действие: потратье ресурс с этой карты, чтобы увеличить шкалу Венеры на 1",
+    "Venus must be 14% or lower": "Требование: 14% на шкале Венеры или ниже",
+
+    "Sister Planet Support": "Помощь планеты близнеца",
+    "Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Требование: у вас есть хотя бы по одной метке Венеры и Земли. Увеличьте свое производство МС на 3",
+
+    "Solarnet": "Планетарная сеть",
+    "Requires Venus, Earth and Jovian tags. Draw 2 cards": "Требование: у вас есть хотя бы по одной метке Венеры, Земли и Юпитера. Возьмите 2 карты из колоды",
+
+    "Spin-Inducing Asteroid": "Направленный удар",
+    "Venus must be 10% or lower. Raise Venus 2 steps": "Требование: 10% на шкале Венеры или ниже. Увеличьте шкалу Венеры на 2",
+
+    "Sponsored Academies": "Спонсирование науки",
+    "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card": "Сбросьте 1 карту с руки, затем возьмите 3 карты из кколоды. Все соперники берут 1 карту из колоды",
+
+    "Stratopolis": "Стратополис",
+    "Action: Add 2 floaters to ANY VENUS CARD.": "Действие: добавьте 2 аэростата на любую карту Венеры",
+    "Requires 2 science tags. Increase your M€ production 2 steps.": "Требование: у вас есть хотя бы 2 метки Науки. Увеличьте свое пр-во МС на 2.",
+    "Place a City tile ON THE RESERVED AREA. 1 VP for every 3rd Floater on this card.": "Выложите жетон города на область Стратополис. 1ПО за каждые 3 аэростата на этой карте",
+
+    "Stratospheric Birds": "Птицы в стратосфере",
+    "Action: Add 1 animal to this card.": "Действие: добавьте 1 животное на эту карту",
+    "Requires Venus 12% and that you spend 1 Floater from any card. 1 VP for each Animal on this card.": "Требование: 12% на шкале Венеры или выше. Потратьте 1 аэростат с любой своей карты. 1 ПО за каждое животное на этой карте",
+
+    "Sulphur Exports": "Экспорт серы",
+    "Increase Venus 1 step. Increase your M€ production1 step for each Venus tag you have, including this.": "Увеличьте шкалу Венеры на 1. Увеличьте свое производство МС на 1 за каждую вашу метку Венеры, включая эту",
+
+    "Sulphur-Eating Bacteria": "СФ-бактерии",
+    "Action: Spend any number of Microbes here to gain triple amount of MC.": "Действие: потратьте любое количество микробов с этой карты, чтобы получить втрое больше МС",
+    "Requires Venus 6%": "Требование: 6% на шкале Венеры или выше",
+
+    "Terraforming Contract": "Работа по контракту",
+    "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Требование: ваш РТ должен быть не меньше 25. Увеличьте свое производство МС на 4",
+
+    "Thermophiles": "Термофилы",
+    "Action: Add 1 Microbe to ANY Venus CARD.": "Действие: добавьте 1 микроба на любую карту Венеры",
+    "Action: Spend 2 Microbes here to raise Venus 1 step.": "Действие: потратьте 2 микробов с этой карты, чтобы увеличить шкалу Венеры на 1",
+
+    "Water to Venus": "Поставки воды на Венеру",
+    "Raise Venus 1 step.": "Увеличьте шкалу Венеры на 1",
+
+    "Venus Governor": "Президент Венеры",
+    "Requires 2 Venus tags. Increase your M€ production 2 steps.": "Требование: у вас есть хотя бы 2 метки Венеры. Увеличьте свое производство МС на 2",
+
+    "Venus Magnetizer": "Намагничивание Венеры",
+    "Action: Decrease your Energy production 1 step to raise Venus 1 step.": "Действие: уменьшите свое производство энергии на 1, чтобы увеличить шкалу Венеры на 1",
+    "Requires Venus 10%.": "Требование: 10% на шкале Венеры или выше",
+
+    "Venus Soils": "Почва Венеры",
+    "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card": "Увеличьте шкалу Венеры на 1. Увеличьте свое производство растений на 1. Добавьте 2 микробов на другую карту",
+
+    "Venus Waystation": "Венерианская станция",
+    "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Эффект: разыгрывая карту с меткой Венеры, платите за нее на 2 МС меньше",
+
+    "Venusian Animals": "Животные на Венере",
+    "Effect: When you play a Science tag, including this, add 1 Animal to this card.": "Эффект: разыгрывая метку открытия, включая эту, добавляйте 1 животное на эту карту",
+    "1 VP per Animal on this card.": "1 ПО за каждое животное на этой карте",
+    "Requires Venus 18%": "Требование: 18% на шкале Венеры или выше",
+
+    "Venusian Insects": "Насекомые на Венере",
+    "Action: add 1 Microbe to this card.": "Действие: добавьте 1 микроба на эту карту",
+    "1 VP for every 2nd Microbe on this card.": "1 ПО за каждые 2 микроба на этой карте",
+    "Requires Venus 12%.": "Требование: 12% на шкале Венеры или выше",
+
+    "Venusian Plants": "Растения на Венере",
+    "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD": "Требование: 16% на шкале Венеры или выше. Увеличьте шкалу Венеры на 1. Добавьте 1 микроба или животное на другую карту Венеры",
+
+    "5 Floaters": "5 Аэростатов",
+    "Venus Venus": "2 метки Венеры",
+    "Venus Earth": "Венера, Земля",
+    "18% Venus": "18% Венеры",
+    "16% Venus": "16% Венеры",
+    "12% Venus": "12% Венеры",
+    "10% Venus": "10% Венеры",
+    "8% Venus": "8% Венеры",
+    "6% Venus": "6% Венеры",
+    "max 14% Venus": "ДО 14% Venus",
+    "max 10% Venus": "ДО 10% Venus",
+    "25 TR": "25 РТ",
+    "Select card to remove 1 floater from": "Выберите карту, чтобы убрать с нее 1 дирижабль"
+}

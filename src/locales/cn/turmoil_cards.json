@@ -1,0 +1,57 @@
+{
+  "Aerial Lenses": "对空透镜",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "需要开尔文主义党为执政党，或你在该党有至少2个代表。提升2点热能产量。减少任意一位玩家两点植物。",
+
+  "Banned Delegate": "违法代表",
+  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "需要你是主席。移除1个非领导者代表",
+
+  "Cultural Metropolis": "多元化都市",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "需要联合党为执政党，或你在该党有至少2个代表。减少1点电力产量，增加3点M€产量。放置一个城市。放置2个代表到1个政党。",
+
+  "Diaspora Movement": "大流散运动",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "需要红党为执政党，或你在该党有至少2个代表。场上每有1个木星标志，你获得1点M€,包括此牌",
+
+  "Event Analysts": "事件分析",
+  "Effect: You have +1 influence.": "效果：你的影响力+1。",
+  "Requires that Scientists are ruling or that you have 2 delegates there.": "需要科学家党为执政党，或你在该党有至少2个代表",
+
+  "GMO Contract": "转基因生物合约",
+  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "效果：每当你打出1个植物、动物、微生物标志，包括本卡，获得2点M€。",
+  "Requires that Greens are ruling or that you have 2 delegates there.": "需要绿党为执政党，或你在该党有至少2个代表。",
+
+  "Martian Media Center": "火星媒体中心",
+  "Action: Pay 3 M€ to add a delegate to any party.": "行动：花费3点M€增加一名代表。",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "需要火星之首党为执政党，或你在该党有至少2个代表。提升2点M€产量。",
+
+  "Parliament Hall": "议会大厅",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.": "需要火星之首为执政党，或你在该党有至少2个代表。你每有3个建筑标志标志，包括这张，获得1点M€产量。",
+
+  "PR Office": "公关办公室",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "需要联合党为执政党，或你在该党有至少2个代表。提升1点改造度。你每有1个地球标志，获得1点M€，包含本卡。",
+
+  "Political Alliance" :"政治联盟",
+  "2 Party leaders":"两个政党领袖",
+  "Requires that you have 2 party leaders. Gain 1 TR.":"需要你是2个政党的领导者，获得1TR",
+
+  "Public Celebrations": "公开庆典",
+  "Requires that you are Chairman.": "需要你是主席。",
+
+  "Recruitment": "雇佣",
+  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "将场上的一个中立非领导者代表替换为你储备区的代表。",
+
+  "Red Tourism Wave": "红色旅游风潮",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "需要红党为执政党，或你在该党有至少2个代表。每有一个空白板块与你的板块相邻，你获得1点M€。",
+
+  "Sponsored Mohole": "莫霍计划赞助",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "需要开尔文主义党为执政党，或你在该党有至少2个代表。提升2点热能产量。",
+
+  "Supported Research": "受扶持的研究",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "需要科学家党为执政党，或你在该党有至少2个代表。抽两张牌。",
+
+  "Wildlife Dome": "野生生物穹顶",
+  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "需要绿党为执政党，或你在该党有至少2个代表。放置一片森林板块。",
+
+  "Vote Of No Confidence": "不信任票",
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "需要你是一个政党的领导者且当前主席是中立代表。将中立主席替换为你储备区的一名代表。提升1点改造度。"
+
+}

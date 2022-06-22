@@ -1,0 +1,18 @@
+{
+    "Lakefront Resorts": "Lakefront Resorts",
+    "You start with 54 M€.": "Vous commencez avec 54 M€",
+    "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Effet: Lorsqu'une tuile Océan est placée, votre production de M€ augmente de 1. Lorsque vous placez une tuile adjacente à un Océan, votre bonus de placement est de 3 M€ au lieu de 2 M€.",
+    "Terralabs Research": "Terralab Research",
+    "You start with 14 M€. Lower your TR 1 step.": "Vous commencez avaec 14 M€. Diminuez votre NTde 1.",
+    "Effect: Buying cards to hand costs 1 M€.": "Effet: Le coût d'achat des cartes que vous gardez en mains est de 1 M€, y compris vos cartes de départ.",
+    "Utopia Invest": "Utopia Invest",
+    "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Vous commencez avec 40 M€. Augmentez votre production d'acier de titane de 1 chacune.",
+    "Action: Decrease any production to gain 4 resources of that kind.": "Action: Diminuez de 1 la production de votre choix pour gagner 4 ressources de ce type.",
+    "Pristar": "Pristar",
+    "You start with 53 M€. Decrease your TR 2 steps.": "Vous commencez avec 53 M€. Diminuez votre NT de 2.",
+    "1 VP per preservation resource here.": "1 PV par ressource de sauvegarde sur cette carte.",
+    "Effect: During production phase, if you did not get TR so far this": "Durant la phase de production, si vous n'avez pas augmenté votre NT pendant cette",
+    "generation, add one": "génération, ajoutez 1",
+    "preservation resource": "ressource de sauvegarde",
+    "here and gain 6 M€.": "sur cette carte et gagnez 6 M€."
+}

@@ -1,89 +1,72 @@
-import { IColony } from './Colony';
-import { Europa } from './Europa';
-import { Ganymede } from './Ganymede';
-import { Titan } from './Titan';
-import { Callisto } from './Callisto';
-import { Triton } from './Triton';
-import { Ceres } from './Ceres';
-import { Luna } from './Luna';
-import { Io } from './Io';
-import { Miranda } from './Miranda';
-import { Pluto } from './Pluto';
-import { Enceladus } from './Enceladus';
-import { ColonyName } from './ColonyName';
+import {IColony} from './IColony';
+import {ColonyName} from '../common/colonies/ColonyName';
+import {Random} from '../Random';
+import {BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES} from './ColonyManifest';
+import {GameOptions} from '../Game';
 
-export interface IColonyFactory<T> {
-    colonyName: ColonyName;
-    factory: new () => T
-}
-
-// ALL COLONIES TILES is now a const not and attribute of Colony Dealer
-export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
-    { colonyName: ColonyName.CERES, factory: Ceres },
-    { colonyName: ColonyName.ENCELADUS, factory: Enceladus },
-    { colonyName: ColonyName.EUROPA, factory: Europa },
-    { colonyName: ColonyName.GANYMEDE, factory: Ganymede },
-    { colonyName: ColonyName.IO, factory: Io },
-    { colonyName: ColonyName.LUNA, factory: Luna },
-    { colonyName: ColonyName.MIRANDA, factory: Miranda },
-    { colonyName: ColonyName.TITAN, factory: Titan },
-    { colonyName: ColonyName.CALLISTO, factory: Callisto },
-    { colonyName: ColonyName.PLUTO, factory: Pluto },
-    { colonyName: ColonyName.TRITON, factory: Triton },
-];
-
-// Function to return a card object by its name
-export function getColonyByName(colonyName: string): IColony | undefined {
-    let colonyFactory = ALL_COLONIES_TILES.find((colonyFactory) => colonyFactory.colonyName === colonyName);
-    if (colonyFactory !== undefined) {
-        return new colonyFactory.factory();
-    }
-    return undefined;
-}
+// TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
+// forced to rely on the RNG.
+// TODO(kberg): Add ability to disable initial action that removes a colony in the solo game. (Or come up with
+// a simple line of code to deal with solo games.)
 
 export class ColonyDealer {
-    //private seed: number = 0;
-    public coloniesDeck: Array<IColony> = [];
-    public discardedColonies: Array<IColony> = [];
-    /*
-    constructor(seed?: number) {
-        if (seed !== undefined) {
-            this.seed = seed;
-        } else {
-            this.seed = Math.random();
-        }
-    }
-    */
+  private readonly gameColonies: ReadonlyArray<IColony>;
+  public colonies: Array<IColony> = [];
+  public discardedColonies: Array<IColony> = [];
 
-    public shuffle(cards: Array<any>): Array<any> {
-        const deck: Array<any> = [];
-        const copy = cards.slice();
-        while (copy.length) {
-            // not working, disable for now
-            //deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
-            deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
-        }
-        return deck;
-    }
-    public discard(card: IColony): void {
-        this.discardedColonies.push(card);
-    }
-    public drawColonies(players: number): Array<IColony> {
-        let count: number = players + 2;
-        if (players === 1) {
-            count = 4;
-        } else if (players === 2) {
-            count = 5;
-        }
-        let tempDeck = this.shuffle(ALL_COLONIES_TILES.map((cf) => new cf.factory()));
-        for (let i = 0; i < count; i++) {
-            this.coloniesDeck.push(tempDeck.pop());
-        }    
-        this.discardedColonies.push(...tempDeck);
-        this.discardedColonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
-        this.coloniesDeck.sort((a,b) => (a.name > b.name) ? 1 : -1);
+  constructor(private rng: Random, private gameOptions: GameOptions) {
+    let colonyTiles = BASE_COLONIES_TILES;
 
-        return this.coloniesDeck;
+    if (ColonyDealer.includesCommunityColonies(this.gameOptions)) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
+    if (!this.gameOptions.venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
+    if (!this.gameOptions.turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
+    this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
+  }
+
+  private static includesCommunityColonies(gameOptions: GameOptions) : boolean {
+    if (gameOptions.communityCardsOption) return true;
+    const communityColonyNames = COMMUNITY_COLONIES_TILES.map((cf) => cf.colonyName);
+    return gameOptions.customColoniesList.some((colonyName) => communityColonyNames.includes(colonyName));
+  }
+
+  private shuffle(cards: Array<IColony> | ReadonlyArray<IColony>): Array<IColony> {
+    const deck: Array<IColony> = [];
+    const copy = cards.slice();
+    while (copy.length) {
+      deck.push(copy.splice(Math.floor(this.rng.nextInt(copy.length)), 1)[0]);
+    }
+    return deck;
+  }
+
+  public drawColonies(players: number): void {
+    const customColonies = this.gameOptions.customColoniesList;
+    const colonies = customColonies.length === 0 ? this.gameColonies : this.gameColonies.filter((c) => customColonies.includes(c.name));
+
+    const count: number = (players + 2) +
+      (players <= 2 ? 1 : 0); // Two-player games and solo games get one more colony.
+
+    if (colonies.length < count) {
+      throw new Error(`Not enough valid colonies to choose from (want ${count}, has ${colonies.length}.) Remember that colonies like Venus and Pallas are invalid without Venus or Turmoil.`);
     }
 
-}    
+    const tempDeck = this.shuffle(colonies);
+    for (let i = 0; i < count; i++) {
+      const colony = tempDeck.pop();
+      if (colony === undefined) {
+        throw new Error('Not enough colonies');
+      }
+      this.colonies.push(colony);
+    }
+
+    this.discardedColonies.push(...tempDeck);
+    this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    this.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  }
+
+  public restore(activeColonies: Array<IColony>): void {
+    this.colonies = [...activeColonies];
+    this.discardedColonies = this.gameColonies.filter((c) => {
+      return !activeColonies.some((ac) => ac.name === c.name);
+    });
+  }
+}

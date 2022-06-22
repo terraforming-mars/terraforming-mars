@@ -1,35 +1,20 @@
-import { expect } from "chai";
-import { PublicCelebrations } from "../../../src/cards/turmoil/PublicCelebrations";
-import { Player } from "../../../src/Player";
-import { Color } from "../../../src/Color";
-import { BoardName } from '../../../src/BoardName';
-import { GameOptions, Game } from '../../../src/Game';
+import {expect} from 'chai';
+import {PublicCelebrations} from '../../../src/cards/turmoil/PublicCelebrations';
+import {Game} from '../../../src/Game';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
-describe("PublicCelebrations", function () {
-    it("Should play", function () {
-        const card = new PublicCelebrations();
-        const player = new Player("test", Color.BLUE, false);
-        const gameOptions = {
-            draftVariant: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            promoCardsOption: false,
-            startingCorporations: 2,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
-        const game = new Game("foobar", [player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            game.turmoil.chairman = player;
-            expect(card.canPlay(player, game)).to.eq(true); 
-        } 
+describe('PublicCelebrations', function() {
+  it('Should play', function() {
+    const card = new PublicCelebrations();
+    const player = TestPlayers.BLUE.newPlayer();
+
+    const gameOptions = setCustomGameOptions();
+    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+
+        game.turmoil!.chairman = player.id;
+        expect(player.canPlayIgnoringCost(card)).is.true;
         card.play();
-    });
+  });
 });

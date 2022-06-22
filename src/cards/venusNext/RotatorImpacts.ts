@@ -1,72 +1,86 @@
-import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { SelectHowToPay } from '../../inputs/SelectHowToPay';
-import { OrOptions } from '../../inputs/OrOptions';
-import { SelectOption } from '../../inputs/SelectOption';
-import { Game } from '../../Game';
-import { MAX_VENUS_SCALE } from '../../constants';
-import { CardName } from '../../CardName';
+import {IActionCard, IResourceCard} from '../ICard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardResource} from '../../common/CardResource';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {MAX_VENUS_SCALE} from '../../common/constants';
+import {CardName} from '../../common/cards/CardName';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {max} from '../Options';
 
-export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 6;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.ROTATOR_IMPACTS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.ASTEROID;
-    public resourceCount: number = 0;
-    public canPlay(player: Player, game: Game): boolean {
-        return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 14;
+export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.ROTATOR_IMPACTS,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.SPACE],
+      cost: 6,
+      resourceType: CardResource.ASTEROID,
+
+      requirements: CardRequirements.builder((b) => b.venus(14, {max})),
+      metadata: {
+        cardNumber: '243',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].', (eb) => {
+            eb.megacredits(6).openBrackets.titanium(1).closeBrackets.startAction.asteroids(1);
+          }).br;
+          b.action('Spend 1 resource from this card to increase Venus 1 step.', (eb) => {
+            eb.or().asteroids(1).startAction.venus(1);
+          });
+        }),
+        description: 'Venus must be 14% or lower',
+      },
+    });
+  }
+  public override resourceCount: number = 0;
+
+  public play() {
+    return undefined;
+  }
+
+  public canAct(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    const canSpendResource = this.resourceCount > 0 && !venusMaxed;
+
+    return player.canAfford(6, {titanium: true}) || (canSpendResource && player.canAfford(0, {tr: {venus: 1}}));
+  }
+
+  public action(player: Player) {
+    const opts: Array<SelectOption> = [];
+
+    const addResource = new SelectOption('Pay 6 to add 1 asteroid to this card', 'Pay', () => this.addResource(player));
+    const spendResource = new SelectOption('Remove 1 asteroid to raise Venus 1 step', 'Remove asteroid', () => this.spendResource(player));
+
+    if (this.resourceCount > 0 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+      opts.push(spendResource);
+    } else {
+      return this.addResource(player);
     }
-    public play() {
-        return undefined;
+
+    if (player.canAfford(6, {titanium: true})) {
+      opts.push(addResource);
+    } else {
+      return this.spendResource(player);
     }
-    public canAct(player: Player, game: Game): boolean {
-        return player.canAfford(6, game, false, true) || 
-          (this.resourceCount > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE);
-    }  
-    
-    public action(player: Player, game: Game) {
-        var opts: Array<SelectOption> = []; 
-        const addResource = new SelectOption("Pay 6 to add 1 asteroid to this card", () => {
-            return new SelectHowToPay(
-                'Select how to pay ', false, true,
-                player.canUseHeatAsMegaCredits,
-                6,
-                (htp) => {
-                    if (htp.heat + htp.megaCredits + htp.titanium * player.getTitaniumValue(game) < 6) {
-                        throw new Error('Not enough for action');
-                    }
-                    player.megaCredits -= htp.megaCredits;
-                    player.heat -= htp.heat;
-                    player.titanium -= htp.titanium;
-                    this.resourceCount++;
-                    return undefined;
-                }
-            );
-        });
 
-        const spendResource = new SelectOption("Remove 1 asteroid to raise Venus 1 step", () => {
-            player.removeResourceFrom(this);
-            game.increaseVenusScaleLevel(player, 1);
-            return undefined;
-        });
+    return new OrOptions(...opts);
+  }
 
-        if (player.canAfford(6, game, false, true)) {
-            opts.push(addResource);
-        };
+  private addResource(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
+    player.addResourceTo(this, {log: true});
+    return undefined;
+  }
 
-        if (this.resourceCount > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
-            opts.push(spendResource);
-        };
-
-        if (opts.length === 0) return undefined;
-
-        if (opts.length === 1) return opts[0];
-
-        return new OrOptions(...opts);
-    }
+  private spendResource(player: Player) {
+    player.removeResourceFrom(this);
+    player.game.increaseVenusScaleLevel(player, 1);
+    player.game.log('${0} removed an asteroid resource to increase Venus scale 1 step', (b) => b.player(player));
+    return undefined;
+  }
 }

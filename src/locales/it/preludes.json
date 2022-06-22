@@ -1,0 +1,161 @@
+{
+  "Cheung Shing MARS":"Cheung Shing MARS",
+  "You start with 3 M€ production and 44 M€.":"Inizi con 44 M€ e una Produzione di M€ pari a 3.",
+  "Effect: When you play a building tag, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Edificio, la paghi 2 M€ in meno.",
+    
+  "Point Luna":"Point Luna",
+  "Effect: When you play an Earth tag, including this, draw a card.":"Effetto: quando giochi una carta con un simbolo Terra, inclusa questa, pesca 1 carta.",
+  "You start with 1 titanium production and 38 M€.":"Inizi con 38 M€ e 1 Produzione di Titanio.",
+    
+  "Robinson Industries":"Robinson Industries", 
+  "You start with 47 M€.":"Inizi con 47 M€.",
+  "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.":"Azione: spendi 4 M€ per incrementare di 1 livello la tua PRODUZIONE PIÙ BASSA (una sola).",
+
+  "Valley Trust":"Valley Trust",
+  "Effect: When you play a Science tag, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Scienza, la paghi 2 M€ in meno.",
+  "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"Inizi con 37 M€. Come prima azione, pesca 3 carte Prelude, giocane una e scarta le altre due.",
+
+  "Vitor":"Vitor",
+  "You start with 45 M€. As your first action, fund an award for free.":"Inizi con 45 M€. Come prima azione, finanzia un Riconoscimento senza spendere M€.",
+  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.":"Effetto: quando giochi una carta contenente una qualunque icona PV NON NEGATIVA, inclusa questa, guadagni 3 M€.",
+    
+    
+    
+    
+    
+    "max":"al massimo",
+    "Global requirements":"Parametri Globali",
+    
+    "House Printing":"Stampaggio di Abitazioni",
+    "Increase your steel production 1 step.":"Incrementa la tua Produzione di Acciaio di 1 livello.",
+    
+    "Lava Tube Settlement":"Colonia del Tunnel nella Lava",
+    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 2 livelli. Colloca 1 tessera Città SU UN'AREA VULCANICA, indipendentemente dal fatto che ci siano altre Città adiacenti.",
+    
+    "Martian Survey":"Rilevamento Marziano",
+    "Oxygen must be 4% or lower. Draw two cards.":"Il livello di Ossigeno deve essere minore o uguale al 4%. Pesca 2 carte.",
+    
+    "Psychrophiles":"Psicrofili",
+    "Add 1 microbe to this card.":"Azione: aggiungi 1 Microbo a questa carta.",
+    "When paying for a plant card, microbes here may be used as 2 M€ each.":"Effetto: quando giochi una carta con un simbolo Pianta, i Microbi collocati qui possono essere utilizzati come se valessero 2 M€ ciascuno.",
+    "Temperature must be -20 C or lower.":"Richiede che la Temperatura sia minore o uguale a -20°C.",
+    
+    "Research Coordination":"Coordinamento della Ricerca",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"Dopo che questa carta è stata giocata, quando compi un'azione, il simbolo Jolly conta come un qualunque simbolo a tua scelta.",
+    
+    "SF Memorial":"Memoriale Sci-Fi",
+    "Draw 1 card.":"Pesca 1 carta.",
+    
+    "Space Hotels":"Hotel Spaziali",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.":"Richiede 2 simboli Terra. Incrementa la tua Produzione di M€ di 4 livelli.",
+    
+  
+   
+  
+  
+    
+    "Allied Banks": "Banca Alleata",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "Incrementa la tua Produzione di M€ di 4 livelli. Ottieni 3 M€.",
+
+    "Aquifer Turbines": "Turbine Idrauliche della Falda",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Colloca una tessera Oceano. Incrementa la tua Produzione di Energia di 2 livelli. Spendi 3 M€.",
+
+    "Biofuels": "Biocarburanti",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "Incrementa le tue produzioni di Piante e di Energia di 1 livello ciascuna. Ottieni 2 Piante.",
+
+    "Biolab": "Biolab",
+    "Increase your plant production 1 step. Draw 3 cards.": "Incrementa la tua Produzione di Piante di 1 livello. Pesca 3 carte.",
+
+    "Biosphere Support": "Supporto alla Biosfera",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Diminuisci la tua Produzione di M€ di 1 livello. Aumenta la tua Produzione di Piante di 2 livelli.",
+
+    "Business Empire": "Impero del Business",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "Incrementa la tua Produzione di M€ di 6 livelli. Spendi 6 M€.",
+
+    "Dome Farming": "Coltivazione Sotto la Cupola",
+    "Increase your M€ production 2 steps and plant production 1 step.": "Incrementa la tua Produzione di Piante di 1 livello. Incrementa la tua Produzione di M€ di 2 livelli.",
+
+    "Donation": "Donazione",
+    "Gain 21 M€.": "Ottieni 21 M€.",
+
+    "Early Settlement": "Insediamento Iniziale",
+    "Increase your plant production 1 step. Place a city tile.": "Colloca 1 tessera Città. Incrementa la tua Produzione di Piante di 1 livello.",
+
+    "Ecology Experts": "Esperti di Ecologia",
+    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Incrementa la tua Produzione di Piante di 1 livello. Gioca una carta dalla tua mano, ignorando i requisiti sui Parametri Globali.",
+
+    "Eccentric Sponsor": "Sponsor Eccentrico",
+    "Play a card from hand, reducing its cost by 25 M€": "Gioca una carta dalla tua mano, riducendone il costo di 25 M€.",
+
+    "Experimental Forest": "Foresta Sperimentale",
+    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Colloca 1 tessera Vegetazione e incrementa l'Ossigeno di 1 livello. Rivela carte dal mazzo dei Progetti fino a che non trovi 2 carte con simboli Pianta: tieni tali carte nella tua mano e scarta tutte le altre.",
+
+    "Galilean Mining": "Estrazione Mineraria Galileiana",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "Incrementa la tua Produzione di Titanio di 2 livelli. Spendi 5 M€.",
+
+    "Great Aquifer": "Grande Falda Acquifera",
+    "Place 2 Ocean tiles.": "Colloca 2 tessere Oceano.",
+
+    "Huge Asteroid": "Asteroide Enorme",
+    "Increase Temperature 3 steps. Pay 5 M€.": "Incrementa la Temperatura di 3 livelli. Spendi 5 M€.",
+
+    "Io Research Outpost": "Avamposto di Ricerca su Io",
+    "Increase your titanium production 1 step. Draw a card.": "Incrementa la tua Produzione di Titanio di 1 livello. Pesca 1 carta.",
+
+    "Loan": "Prestito",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "Diminuisci la tua Produzione di M€ di 2 livelli. Ottieni 30 M€.",
+
+    "Martian Industries": "Industrie Marziane",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "Incrementa le tue Produzioni di Energia e di Acciaio di 1 livello ciascuna. Ottieni 6 M€.",
+
+    "Metal-Rich Asteroid": "Asteroide Ricco di Metalli",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Incrementa la Temperatura di 1 livello. Ottieni 4 risorse Titanio e 4 risorse Acciaio.",
+
+    "Metals Company": "Azienda Metallurgica",
+    "Increase your M€, steel and titanium production 1 step.": "Incrementa le tue Produzioni di M€, Acciaio e Titanio di 1 livello ciascuna.",
+
+    "Mining Operations": "Operazioni di Estrazione Mineraria",
+    "Increase your steel production 2 steps. Gain 4 steel.": "Incrementa la tua Produzione di Acciaio di 2 livelli. Ottieni 4 risorse Acciaio.",
+
+    "Mohole": "Mohole",
+    "Increase your heat production 3 steps. Gain 3 heat.": "Incrementa la tua Produzione di Calore di 3 livelli. Ottieni 3 risorse Calore.",
+
+    "Mohole Excavation": "Scavo Mohole",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Incrementa la tua Produzione di Acciaio di 1 livello, e la tua Produzione di Calore di 2 livelli. Ottieni 2 risorse Calore.",
+
+    "Nitrogen Shipment": "Spedizione di Azoto",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Incrementa il tuo Tasso di Terraformazione di 1 livello. Incrementa la tua Produzione di Piante di 1 livello. Ottieni 5 M€.",
+
+    "Orbital Construction Yard": "Deposito per la Costruzione Orbitale",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "Incrementa la tua Produzione di Titanio di 1 livello. Ottieni 4 risorse Titanio.",
+
+    "Polar Industries": "Industrie Polari",
+    "Increase your heat production 2 steps. Place an Ocean tile.": "Colloca 1 tessera Oceano. Incrementa la tua Produzione di Calore di 2 livelli.",
+
+    "Power Generation": "Creazione di Potenza",
+    "Increase your energy production 3 steps.": "Incrementa la tua Produzione di Energia di 3 livelli.",
+
+    "Research Network": "Rete di Ricerca",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Incrementa la tua Produzione di M€ di 1 livello. Pesca 3 carte. Dopo che questa carta è stata giocata, quando compi un'azione, il simbolo Jolly conta come un qualunque simbolo a tua scelta.",
+
+    "Self-Sufficient Settlement": "Insediamento Autosufficiente",
+    "Increase your money production 2 steps. Place a City tile.": "Colloca 1 tessera Città. Incrementa la tua Produzione di M€ di 2 livelli.",
+
+    "Smelting Plant": "Fonderia",
+    "Raise oxygen 2 steps. Gain 5 steel.": "Incrementa l'Ossigeno di 2 livelli. Ottieni 5 risorse Acciaio.",
+
+    "Society Support": "Supporto Sociale",
+    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "Diminuisci la tua Produzione di M€ di 1 livello. Incrementa le tue Produzioni di Piante, Energia e Calore di 1 livello ciascuna.",
+
+    "Supplier": "Fornitore",
+    "Increase your energy production 2 steps. Gain 4 steel.": "Incrementa la tua Produzione di Energia di 2 livelli. Ottieni 4 risorse Acciaio.",
+
+    "Supply Drop": "Consegna di Rifornimenti",
+    "Gain 3 titanium, 8 steel and 3 plants.": "Ottieni 3 risorse Titanio, 8 risorse Acciaio e 3 risorse Pianta.",
+
+    "UNMI Contractor": "Fornitore della UNMI",
+    "Increase your TR 3 steps. Draw a card.": "Incrementa il tuo Tasso di Terraformazione di 3 livelli. Pesca 1 carta.",
+
+    "Acquired Space Agency": "Agenzia Spaziale Acquisita",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Ottieni 6 risorse Titanio. Rivela carte dal mazzo dei Progetti fino a che non trovi due carte con il simbolo Spazio. Tieni tali carte nella tua mano e scarta tutte le altre."
+}

@@ -1,0 +1,2156 @@
+@import "./variables.less";
+.card-corporation-expansion {
+    position: absolute;
+    top: 75px;
+    right: 33px;
+}
+
+.card-container {
+    .project-icon:after,
+    .preludeCard-icon:after {
+        bottom: 8px;
+        left: 8px;
+        margin: 0px;
+    }
+    .card-content-wrapper {
+        position: relative;
+        .card-requirements {
+            width: 70%;
+            height: 24px;
+            line-height: 24px;
+            font-weight: normal;
+            font-size: 15px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(
+                90deg,
+                rgba(243, 161, 14, 1) 0%,
+                rgba(253, 234, 37, 1) 45%,
+                rgba(253, 234, 37, 1) 55%,
+                rgba(243, 161, 14, 1) 100%
+            );
+            font-family: Ubuntu;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            flex-flow: row;
+            align-items: center;
+        }
+        .card-requirements-max {
+            background-image: url(./assets/requisites/max_big.png);
+            background-size: 174px 34px;
+            background-position: -12px -4px;
+            filter: grayscale(0.2);
+        }
+
+        .card-corporation-logo {
+            position: absolute;
+            width: 100%;
+            top: 8px;
+            left: 8px;
+            text-transform: none;
+            .card-aphrodite-logo {
+                font-size: 25px;
+                position: absolute;
+                top: 11px;
+                left: 0px;
+                color: orange;
+                font-weight: bold;
+                text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333, 0px -1px #333333, 6px 3px 5px grey;
+            }
+            .card-arklight-logo {
+                font-size: 19px;
+                font-family: Prototype;
+                letter-spacing: 1px;
+                background: linear-gradient(to right, #000089, dodgerblue, deepskyblue);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                -webkit-transform: scale(2, 1);
+                -moz-transform: scale(2, 1);
+                -ms-transform: scale(2, 1);
+                -o-transform: scale(2, 1);
+                transform: scale(2, 1);
+                position: absolute;
+                left: 47px;
+                top: 9px;
+            }
+            .card-poseidon-logo {
+                display: inline-block;
+                font-family: "Times New Roman", Arial;
+                background: linear-gradient(rgba(0, 0, 0, 0) 0%, #3633ff 20%, rgba(0, 0, 0, 0) 22%, #3633ff 50%, rgba(0, 0, 0, 0) 78%, #3633ff 80%, rgba(0, 0, 0, 0) 100%);
+                line-height: 50px;
+                color: #aaa;
+                text-shadow: 0 0 1px black, 0 0 3px black;
+                width: 180px;
+                font-weight: normal;
+                letter-spacing: 2px;
+                text-align: center;
+                font-size: 30px;
+                position: absolute;
+                top: 13px;
+                left: 18px;
+                border-radius: 0% 100% 0% 75%;
+                box-shadow: 0 4px 10px 0px black;
+            }
+            .card-saturn-logo {
+                position: absolute;
+                top: 10px;
+                left: 8px;
+                font-size: 14px;
+                color: white;
+                line-height: 33px;
+                background: #32004d;
+                padding-left: 24px;
+                padding-right: 20px;
+                border-radius: 50%;
+                font-weight: normal;
+                border: 2px solid white;
+                box-shadow: 6px 6px 5px grey;
+            }
+            .card-celestic-logo {
+                position: absolute;
+                font-size: 24px;
+                box-shadow: 6px 6px 6px grey;
+                top: 14px;
+                left: 16px;
+            }
+            .card-morning-star-logo {
+                position: absolute;
+                top: 11px;
+                left: 4px;
+                font-size: 18px;
+                color: white;
+                text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 6px 3px 5px grey;
+            }
+            .card-pristar-logo {
+                position: absolute;
+                top: 20px;
+                left: -5px;
+                color: #ff5d21;
+                text-shadow: 3px 3px 3px black;
+                font-size: 38px;
+                transform: scaleX(0.8);
+                letter-spacing: 3px;
+            }
+            .card-cheung-shing-logo {
+                margin-top: 30px;
+                margin-left: -55px;
+                display: inline-block;
+                font-family: 'Prototype';
+            }
+            .card-credicor-logo {
+                font-size: 26px;
+                top: 15px;
+                left: 8px;
+                padding: 4px;
+                color: white;
+                display: inline;
+                font-family: 'Times New Roman';
+                font-weight: normal;
+                line-height: 34px;
+                border: 2px solid purple;
+                position: absolute;
+                text-shadow: -1px 0 purple, 0 1px purple, 1px 0 purple, 0 -1px purple, 6px 6px 10px grey;
+            }
+            .card-ecoline-logo {
+                position: absolute;
+                text-transform: none;
+                top: 16px;
+                left: 8px;
+                font-size: 45px;
+                font-weight: normal;
+                color: #00b400;
+                letter-spacing: 2px;
+                font-family: Arial, Helvetica, sans-serif;
+                text-shadow: -1px 0 #404040, 0 1px #404040, 1px 0 #404040, 0 -1px #404040, 4px 3px 3px grey;
+            }
+            .card-helion-logo {
+                font-size: 34px;
+                text-transform: none;
+                position: absolute;
+                top: 8px;
+                padding: 4px 8px;
+                text-align: center;
+                color: #020202;
+                margin-top: 5px;
+                border: 2px solid black;
+                margin-left: 8px;
+                background: #e6e600;
+                box-shadow: 6px 6px 6px grey;
+                border-radius: 2px;
+            }
+            .card-inventrix-logo {
+                top: 16px;
+                left: 8px;
+                color: #020202;
+                font-size: 24px;
+                text-shadow: 6px 6px 5px grey;
+                position: absolute;
+                position: absolute;
+            }
+            .card-phobolog-logo {
+                font-size:24px;
+                position: absolute;
+                top: 12px;
+                left: 16px;
+                color:white;
+                line-height:40px;
+                background: #32004d;
+                padding-left:5px;
+                padding-right:5px;
+                border:1px solid #444;
+                border-radius:10px;
+                font-family: 'Times New Roman';
+                display:inline-block;
+                -webkit-transform:scale(1.2,1); /* Safari and Chrome */
+                -moz-transform:scale(1.2,1); /* Firefox */
+                -ms-transform:scale(1.2,1); /* IE 9 */
+                -o-transform:scale(1.2,1); /* Opera */
+                transform:scale(1.2,1); /* W3C */
+                box-shadow:  6px 6px 5px  grey;
+            }
+            .card-luna-logo {
+                position: absolute;
+                top: 8px;
+                left: 21px;
+                font-size: 18px;
+                font-family: Prototype;
+                font-weight: normal;
+                display: inline-block;
+                text-decoration: underline;
+                -webkit-transform: scale(1.5, 1);
+                -moz-transform: scale(1.5, 1);
+                -ms-transform: scale(1.5, 1);
+                -o-transform: scale(1.5, 1);
+                transform: scale(1.5, 1);
+            }
+            .card-polyphemos-logo {
+                position: absolute;
+                top: 17px;
+                left: 8px;
+                font-family: Prototype;
+                font-weight: normal;
+                letter-spacing: 1px;
+                text-align: center;
+                font-size: 26px;
+                border-bottom: 3px solid #cc3333;
+                border-top: 3px solid #cc3333;
+            }
+            .card-septem-tribus-logo {
+                position: absolute;
+                top: 8px;
+                left: 0px;
+                text-transform: none;
+                color: white;
+                font-family: Times;
+                text-shadow: 0 0 1px black, 0 2px 2px black;
+                font-size: 30px;
+            }
+            .card-thorgate-logo {
+                position: absolute;
+                top: 17px;
+                left: 8px;
+                color: #020202;
+                font-size:32px;
+                font-family: 'Arial Narrow','Verdana';
+                font-weight:normal;
+                text-shadow: 6px 3px 5px  grey;
+            }
+            .card-viron-logo {
+                position: absolute;
+                top: 24px;
+                left: 0px;
+                font-size:50px;
+                font-family: Prototype;
+                margin-left: 15px;
+                text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 6px 3px 5px  grey;
+            }
+            .card-aridor-logo {
+                position: absolute;
+                top: 17px;
+                left: 3px;
+                padding: 4px;
+                font-weight: normal;
+                color: #c5c553;
+                letter-spacing: 4px;
+                background: #cc3333;
+                border: 2px solid #c5c553;
+                box-shadow: 1px 1px 5px 1px black;
+                text-align: center;
+                font-size: 30px;
+            }
+            .card-astrodril-logo {
+                position: absolute;
+                text-transform: none;
+                top: 10px;
+                left: 3px;
+                color: rgb(32, 32, 32);
+                font-family: Prototype;
+                letter-spacing: 2px;
+                text-align: center;
+                text-shadow: orange 0px 0px 1px, darkorange 0px 2px 2px;
+                font-size: 32px;
+            }
+            .card-factorum-logo {
+                position: absolute;
+                top: 15px;
+                left: -20px;
+                color: #ee792b;
+                text-shadow: 0 0 1px black, 0 1px black, 1px 0px black, -1px 0px black, 0 -1px black;
+                letter-spacing: 5px;
+                font-size: 28px;
+                transform: scaleX(0.7);
+                text-transform: none;
+            }
+            .card-manutech-logo {
+                position: absolute;
+                top: 17px;
+                left: 4px;
+                font-size:30px;
+                color: #e63900;
+                text-shadow:  6px 3px 5px  grey;
+            }
+            .card-agricola-logo {
+                position: absolute;
+                top: 17px;
+                left: 4px;
+                color: seagreen;
+                font-family: "Trebuchet MS", Arial, sans-serif;
+                letter-spacing: 2px;
+                text-align: center;
+                text-shadow: 0 0 1px limegreen, 0 2px 2px greenyellow;
+                font-size: 26px;
+            }
+            .card-arcadian-logo {
+                position: absolute;
+                top: 11px;
+                left: 4px;
+                font-size: 16px;
+                padding: 2px 5px;
+                background: #eeeeee;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 3px 3px 3px grey;
+                border-radius: 5px;
+                border-top: 2px solid #dddddd;
+                border-left: 2px solid #dddddd;
+                border-bottom: 2px solid #898989;
+                border-right: 2px solid #898989;
+                font-family: Arial;
+                text-align: center;
+                line-height: 19px;
+                text-transform: uppercase;
+            }
+            .card-incite-logo {
+                position: absolute;
+                top: 17px;
+                left: 4px;
+                color: ghostwhite;
+                font-family: Impact, sans-serif;
+                letter-spacing: 6px;
+                text-align: center;
+                text-shadow: 0 0 1px black, 0 2px 2px #3d3636;
+                font-size: 36px;
+                text-transform: uppercase;
+            }
+            .card-lakefront-logo {
+                position: absolute;
+                top: 17px;
+                left: 4px;
+                font-size: 22px;
+                font-family: Times;
+                color: white;
+                text-shadow: 0 1px 0px #444, 0px -1px 0px #444, -1px 0px 0px #444, 1px 0px 0px #444;letter-spacing: 4px;
+            }
+            .card-mining-guild-logo {
+                font-size: 24px;
+                position: absolute;
+                top: 14px;
+                left: 23px;
+                color:#c9380e;
+                text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333, 0 -1px #333333, 2px 2px 2px  black;
+                display: inline-block;
+                -webkit-transform: scale(1.5,1); /* Safari and Chrome */
+                -moz-transform: scale(1.5,1); /* Firefox */
+                -ms-transform: scale(1.5,1); /* IE 9 */
+                -o-transform: scale(1.5,1); /* Opera */
+                transform: scale(1.5,1); /* W3C */
+            }
+            .card-philares-logo {
+                position: absolute;
+                top: 17px;
+                left: 33px;
+                color: #444;
+                text-shadow: 0 1px 1px white, 0 -1px 1px white, -1px 0px 1px white, 1px 0px 1px white;
+                filter: drop-shadow(0 0 1px black);
+                letter-spacing: 4px;
+                font-size: 20px;
+                transform: scaleX(1.5);
+            }
+            .card-recyclon-logo {
+                position: absolute;
+                top: 12px;
+                left: 0px;
+                font-size: 20px;
+                border-radius: 25px;
+                padding: 8px;
+                font-weight: bold;
+                background: red;
+                color: white;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3), 3px 3px 3px #444;
+                font-family: Prototype;
+                font-weight: normal;
+                text-shadow: 0 0 1px black;
+                text-transform: uppercase;
+            }
+            .card-robinson-logo {
+                position: absolute;
+                top: 6px;
+                left: 1px;
+                font-size: 14px;
+                width: 140px;
+                line-height: 20px;
+            }
+            .card-pharmacy-union-logo {
+                position: absolute;
+                top: 0px;
+                left: -1px;
+                color: white;
+                text-align: left;
+                letter-spacing: 2px;
+                margin: 3px 0 8px 0;
+                text-shadow: 0 0 1px black, 0 2px 2px green;
+                font-size: 23px;
+                width: 140px;
+            }
+            .card-splice-logo {
+                position: absolute;
+                top: 11px;
+                left: 1px;
+                font-size: 29px;
+                font-weight: bold;
+                width: 109px;
+                background: #eeeeee;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 3px 3px 3px grey;
+            }
+            .card-stormcraft-logo {
+                position: absolute;
+                top: 11px;
+                left: 1px;
+                .stormcraft1 {
+                    display: inline-block;
+                    color: white;
+                    background: #ff9900;
+                    line-height: 50px;
+                    width: 83px;
+                    text-align: center;
+                    font-size: 24px;
+                    margin-top: 10px;
+                    margin-left: 0px;
+                    margin-bottom: 10px;
+                    border-radius: 100% 0 50% 0;
+                    text-shadow: 0 0 6px black;
+                    box-shadow: 0 3px 10px 0px black;
+                }
+                .stormcraft2 {
+                    display: inline-block;
+                    line-height: 50px;
+                    width: 100px;
+                    text-align: center;
+                    font-size: 24px;
+                    margin-top: 10px;
+                    margin-left: -5px;
+                    margin-bottom: 10px;
+                    text-shadow: 0 5px 10px black;
+                }
+                .stormcraft3 {
+                    position: absolute;
+                    font-size: 10px;
+                    letter-spacing: 2px;
+                    text-shadow: 0 0 6px black;
+                    color: white;
+                    font-weight: normal;
+                    margin-top: -23px;
+                    margin-left: 20px;
+                    transform: scaleX(1.7);
+                }
+                .stormcraft4 {
+                    position: absolute;
+                    transform: scaleX(1.7);
+                    letter-spacing: 2px;
+                    font-size: 10px;
+                    font-weight: normal;
+                    text-shadow: 0 5px 10px black;
+                    margin-top: -23px;
+                    margin-left: 90px;
+                }
+            }
+            .card-teractor-logo {
+                position: absolute;
+                top: 15px;
+                left: 1px;
+                font-size: 34px;
+                color: orangered;
+                font-family: 'Times New Roman';
+                font-weight: normal;
+                text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;
+            }
+            .card-tharsis-logo {
+                color: #020202;
+                font-size: 24px;
+                text-shadow: 6px 6px 6px grey;
+                margin: 15px 0 0 -26px;
+
+                .card-tharsis-logo-image {
+                    text-shadow: none;
+                    box-shadow: 3px 3px 6px grey;
+                    margin: 0 0 0 -108px;
+                    border: 1px solid red;
+                    display:inline-block;
+                    background-color:#ff5f00;
+                    position: absolute;
+                    width: 32px;
+                    height: 33px;
+
+                    &::before {
+                        content: "▲";
+                        text-shadow: none;
+                        margin-right: 2px;
+                        position: absolute;
+                        margin: -2px 0 0 -12px;
+                    }
+
+                    &::after {
+                        content: "▲";
+                        color: #020202;
+                        font-size: 14px;
+                        position: absolute;
+                        margin: 3px 0 0 3px;
+                    }
+                }
+
+                .card-tharsis-logo-text {
+                    text-transform: uppercase;
+                    width: 135px;
+                    white-space: normal;
+                    text-indent: 45px;
+                    line-height: 30px;
+                    padding: 4px 0 0 20px;
+                }
+            }
+            .card-unmi-logo {
+                position: absolute;
+                top: 14px;
+                left: 1px;
+                font-size: 15px;
+                width: 90px;
+                color: white;
+                line-height: 23px;
+                padding: 5px;
+                text-align: center;
+                font-weight: normal;
+                box-shadow: 3px 3px 6px grey;
+                background: linear-gradient(-60deg, #208cdf 10%, #4da3e6, #208cdf 90%);
+            }
+            .card-utopia-logo {
+                position: absolute;
+                top: 9px;
+                left: 1px;
+                background: green;
+                color: white;
+                box-shadow: 3px 3px 3px 0px #444;
+                text-align: center;
+                padding: 2px 8px;
+                border-top: 3px solid #09aa09;
+                border-left: 3px solid #09aa09;
+                border-right: 3px solid #005100;
+                border-bottom: 3px solid #005100;
+                .utopia-corp-name-1 {
+                    font-size: 20px;
+                    transform: scaleX(1.5);
+                    letter-spacing: 5px;
+                    margin-left: 5px;
+                    line-height: 23px;
+                }
+                .utopia-corp-name-2 {
+                    font-size: 10px;
+                    letter-spacing: 16px;
+                    margin-left: 13px;
+                    line-height: 16px;
+                }
+            }
+            .card-valley-trust-logo {
+                position: absolute;
+                top: 10px;
+                left: 1px;
+                color: rgb(2,125,195);
+                background: linear-gradient(to right,rgb(2,125,195) 10%,white,white,white, white,white,white, white);
+                box-shadow: 3px 3px 10px 1px rgb(58,58,58);
+                width: 135px;
+                line-height: 24px;
+                border-radius: 10px 0px 0px 10px;
+            }
+            .card-vitor-logo {
+                position: absolute;
+                top: 17px;
+                left: 47px;
+                font-size: 24px;
+                display: inline-block;
+                box-shadow: 6px 6px 6px grey;
+                -webkit-transform: scale(2, 1);
+                -moz-transform: scale(2, 1);
+                -ms-transform: scale(2, 1);
+                -o-transform: scale(2, 1);
+                transform: scale(2, 1);
+            }
+            .card-playwrights-logo {
+                position: absolute;
+                top: 15px;
+                left: 1px;
+                color: brown;
+                font-family: Geneva, Verdana, sans-serif;
+                font-weight: bold;
+                letter-spacing: 2px;
+                text-align: center;
+                text-shadow: 0 0 1px orchid, 0 2px 2px purple;
+                font-size: 30px;
+            }
+            .card-midas-logo {
+                position: absolute;
+                left: 25px;
+                color: goldenrod;
+                text-shadow: 0 2px 2px brown;
+                -webkit-text-stroke: 2px black;
+                text-transform: uppercase;
+                font-family: "Lucida Sans", "Lucida Sans Unicode", "Lucida Grande", Arial;
+                font-weight: bold;
+                letter-spacing: 6px;
+                text-align: center;
+                font-size: 45px;
+                top: 20px;
+            }
+            .card-project-workshop-logo {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                color: navy;
+                font-family: Tahoma, sans-serif;
+                font-weight: bold;
+                letter-spacing: 1px;
+                line-height: 20px;
+                text-align: left;
+                text-shadow: 0 0 1px skyblue, 0 2px 2px white;
+                font-size: 20px;
+            }
+            .card-curiosity-ii-logo {
+                position: absolute;
+                top: 24px;
+                left: -4px;
+                color: #65310d;
+                font-family: 'Ubuntu';
+                letter-spacing: 1px;
+                text-shadow: 0 1px 1px sienna;
+                font-size: 28px;
+            }
+            .card-mons-logo {
+                position: absolute;
+                top: 10px;
+                padding: 0px 4px;
+                left: 1px;
+                background: #c86e23;
+                color: white;
+                text-align: center;
+                box-shadow: 3px 3px 6px #444;
+                .mons0 {
+                    font-size: 26px;
+                    position: relative;
+                    transform: scaleX(2.5);
+                    line-height: 15px;
+                }
+                .mons1 {
+                    letter-spacing: 5px;
+                    font-size: 16px;
+                    line-height: 16px;
+                    margin-left: 5px;
+                }
+                .mons2 {
+                    letter-spacing: 3px;
+                    line-height: 18px;
+                    font-size: 7px;
+                }
+            }
+            .card-nanotech-industries-logo {
+                background-image: url(./assets/moon/corp-logo-nanotech.png);
+                height: 50px;
+                width: 150px;
+                background-size: 150px 50px;
+                margin-top: 10px;
+            }
+            .card-tempest-consultancy-logo {
+                background-image: url(./assets/moon/corp-logo-tempest.png);
+                height: 50px;
+                width: 150px;
+                background-size: 150px 50px;
+                margin-top: 10px;
+            }
+            .card-the-darkside-of-the-moon-syndicate-logo {
+                background-image: url(./assets/moon/corp-logo-darkside.png);
+                height: 50px;
+                width: 187px;
+                background-size: 187px;
+                margin-top: 10px;
+            }
+            .card-luna-hyperloop-corporation-logo {
+                background-image: url(./assets/moon/corp-logo-luna-hyperloop.png);
+                height: 50px;
+                width: 150px;
+                background-size: 150px 50px;
+                margin-top: 10px;
+            }
+            .card-crescent-research-association-logo {
+                background-image: url(./assets/moon/corp-logo-crescent-research.png);
+                height: 50px;
+                width: 150px;
+                background-size: 150px 50px;
+                margin-top: 10px;
+            }
+            .card-luna-first-incorporated-logo {
+                background-image: url(./assets/moon/corp-logo-luna-first.png);
+                height: 50px;
+                width: 150px;
+                background-size: 150px 50px;
+                margin-top: 10px;
+            }
+            .card-the-grand-luna-capital-group-logo {
+                background-image: url(./assets/moon/corp-logo-grand-luna.png);
+                height: 50px;
+                width: 143px;
+                background-size: 143px 50px;
+                margin-top: 10px;
+                border-radius: 5px;
+            }
+            .card-intragen-sanctuary-headquarters-logo {
+                background-image: url(./assets/moon/corp-logo-intragen.png);
+                height: 45px;
+                width: 142px;
+                background-size: 142px 45px;
+                margin-top: 10px;
+            }
+            .card-the-archaic-foundation-institute-logo {
+                background-image: url(./assets/moon/corp-logo-archaic-foundation.png);
+                height: 50px;
+                width: 180px;
+                background-size: 180px 50px;
+                margin-top: 10px;
+            }
+            .card-polaris-logo {
+                background-image: url(./assets/pathfinders/corp-logo-polaris.png);
+                height: 54px;
+                width: 180px;
+                background-size: 180px 54px;
+                margin-top: 10px;
+            }
+            .card-ringcom-logo {
+                background-image: url(./assets/pathfinders/corp-logo-ringcom.png);
+                height: 35px;
+                width: 180px;
+                background-size: 180px 35px;
+                margin-top: 10px;
+            }
+            .card-chimera-logo {
+                background-image: url(./assets/pathfinders/corp-logo-chimera.png);
+                height: 39px;
+                width: 66px;
+                background-size: 66px 39px;
+                margin-top: 10px;
+                margin-left: 79px;
+            }
+            .card-steelaris-logo {
+                background-image: url(./assets/pathfinders/corp-logo-steelaris.png);
+                height: 35px;
+                width: 180px;
+                background-size: 180px 35px;
+                margin-top: 10px;
+            }
+            .card-martian-insurance-group-logo {
+                background-image: url(./assets/pathfinders/corp-logo-martian-insurance-group.png);
+                height: 45px;
+                width: 170px;
+                background-size: 170px 45px;
+                margin-top: 10px;
+            }
+            .card-robin-haulings-logo {
+                background-image: url(./assets/pathfinders/corp-logo-robin-haulings.png);
+                height: 41px;
+                width: 140px;
+                background-size: 140px 41px;
+                margin-top: 10px;
+            }
+            .card-mars-direct-logo {
+                background-image: url(./assets/pathfinders/corp-logo-mars-direct.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-ambient-logo {
+                background-image: url(./assets/pathfinders/corp-logo-ambient.png);
+                height: 45px;
+                width: 173px;
+                background-size: 173px 45px;
+                margin-top: 10px;
+                margin-left: 16px;
+            }
+            .card-collegium-copernicus-logo {
+                background-image: url(./assets/pathfinders/corp-logo-colleguim-copernicus.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-soylent-logo {
+                background-image: url(./assets/pathfinders/corp-logo-soylent.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-bio-sol-logo {
+                background-image: url(./assets/pathfinders/corp-logo-bio-sol.png);
+                height: 45px;
+                width: 175px;
+                background-size: 175px 45px;
+                margin-top: 10px;
+            }
+            .card-adhai-high-orbit-constructions-logo {
+                background-image: url(./assets/pathfinders/corp-logo-adhai-high-orbit-constructions.png);
+                height: 45px;
+                width: 184px;
+                background-size: 184px 45px;
+                margin-top: 10px;
+            }
+            .card-mind-set-mars-logo {
+                background-image: url(./assets/pathfinders/corp-logo-mind-set-mars.png);
+                height: 45px;
+                width: 125px;
+                background-size: 125px 45px;
+                margin-top: 10px;
+            }
+            .card-habitat-marte-logo {
+                background-image: url(./assets/pathfinders/corp-logo-habitat-marte.png);
+                height: 101px;
+                width: 115px;
+                background-size: 115px 101px;
+                margin-top: 10px;
+            }
+            .card-odyssey-logo {
+                background-image: url(./assets/pathfinders/corp-logo-odyssey.png);
+                height: 90px;
+                width: 125px;
+                background-size: 125px 90px;
+                margin-top: 10px;
+            }
+        }
+        .card-content-corporation {
+            top: -30px;
+            height: 256px !important;
+        }
+        .card-content {
+            // background: grey;
+            color: black;
+            position: relative;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            width: 220px;
+            height: 226px;
+            padding: 10px;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: bold;
+            text-align: center;
+            .card-corporation-box {
+                position: absolute;
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                min-height: 130px;
+                border-radius: 10px;
+                background: linear-gradient(to bottom right, #cccccc, #aaaaaa, #dddddd, #cccccc, #aaaaaa, #cacaca, #aaaaaa, #cccccc);
+                box-shadow: 0 0 0px 1px rgba(0, 0, 0.5);
+                bottom: 8px;
+                left: 8px;
+                width: 216px;
+                padding: 0 4px;
+                /* hide points on hover by poppig the overlay on top of them*/
+                &:hover {
+                    box-shadow: 0px 0px 4px 1px #353594;
+                    z-index: 4;
+                }
+                .card-corporation-label {
+                    background-color: #2c84c4;
+                    background: linear-gradient(#6eafde, #2c84c4, #2c84c4);
+                    width: 100px;
+                    height: 12px;
+                    line-height: 12px;
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 10px;
+                    padding-top: 2px;
+                    border-radius: 0 0 20px 20px;
+                    text-transform: uppercase;
+                    position: absolute;
+                    top: 0px;
+                    left: 63px;
+                }
+            }
+            .card-effect-box {
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                .card-item-container {
+                    margin: 0;
+                }
+                .card-effect-box-row {
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    .card-effect-box-content {
+                        display: flex;
+                        flex-flow: row;
+                        align-items: center;
+                        margin: 0 4px;
+                        .card-effect-box-item {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+
+            .card-item-container {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                margin: 0 4px;
+            }
+
+            /*requirements*/
+            .card-global-requirement {
+                position: relative;
+                vertical-align: middle;
+                display: inline-block;
+                width: 40px;
+                height: 46px;
+                margin-right: 4px;
+                margin-left: 4px;
+                background-size: 40px 46px;
+                line-height: 16px;
+                text-align: center;
+                filter: drop-shadow(0px 0px 1px black);
+                background-image: url(./assets/tiles/empty.png);
+            }
+            .card-temperature-global-requirement {
+                background-image: url(./assets/global-parameters/temperature.png);
+                width: 14px;
+                background-size: 14px 46px;
+            }
+            .card-temperature--req {
+                background-image: url(./assets/global-parameters/temperature.png);
+                width: 10px;
+                height: 34px;
+                background-size: 10px 34px;
+            }
+            .card-ocean-global-requirement {
+                background-image: url(./assets/tiles/ocean.png);
+            }
+            .card-ocean--req {
+                background-image: url(./assets/tiles/ocean.png);
+                width: 30px;
+                height: 34px;
+                background-size: 30px 34px;
+            }
+            .card-oxygen-global-requirement {
+                background-image: url(./assets/global-parameters/oxygen.png);
+                width: 46px;
+                background-size: 46px;
+            }
+            .card-oxygen--req {
+                background-image: url(./assets/global-parameters/oxygen.png);
+                width: 34px;
+                background-size: 34px;
+                height: 34px;
+            }
+            .card-venus-global-requirement {
+                background-image: url(./assets/global-parameters/venus.png);
+                width: 60px;
+                height: 40px;
+                background-size: 60px 40px;
+                color: #0000;
+            }
+            .card-venus--req {
+                background-image: url(./assets/global-parameters/venus.png);
+                width: 50px;
+                height: 34px;
+                background-size: 50px 34px;
+                color: #0000;
+            }
+            /*resources*/
+            .card-resource {
+                font-family: Prototype;
+                position: relative;
+                display: inline-block;
+                margin-left: 3px;
+                margin-right: 3px;
+                width: 30px;
+                height: 30px;
+                font-size: 22px;
+                line-height: 30px;
+                background-size: 30px;
+                filter: drop-shadow(0px 0px 1px black);
+                vertical-align: middle;
+            }
+            .card-resource-trade-discount {
+                background: white;
+            }
+            .card-resource-money {
+                font-family: Prototype;
+                color: black;
+                background-image: url(./assets/resources/megacredit.png);
+                font-weight: normal;
+                font-size: 18px;
+                text-align: center;
+            }
+            .card-money--L {
+                width: 46px;
+                height: 46px;
+                background-size: 46px;
+                font-size: 24px;
+                line-height: 46px;
+            }
+
+            // TODO(kberg): this is a duplicate of .card-resources-counter / .card-resource@{value})
+            // Not only can this be reduced using the same construct, but let's get rid of the CSS duplication.
+            .card-resource-steel {
+                background-image: url(./assets/resources/steel.png);
+            }
+            .card-resource-titanium {
+                background-image: url(./assets/resources/titanium.png);
+            }
+            .card-resource-plant {
+                background-image: url(./assets/resources/plant.png);
+            }
+            .card-resource-energy {
+                background-image: url(./assets/resources/power.png);
+            }
+            .card-resource-heat {
+                background-image: url(./assets/resources/heat.png);
+            }
+            .card-resource-microbe {
+                background-image: url(./assets/resources/microbe.png);
+            }
+            .card-resource-animal {
+                background-image: url(./assets/resources/animal.png);
+            }
+            .card-resource-science {
+                background-image: url(./assets/resources/science.png);
+            }
+            .card-resource-floater {
+                background-image: url(./assets/resources/floater.png);
+            }
+            .card-resource-wild {
+                background-image: url(./assets/resources/wild.png);
+            }
+            .card-resource-fighter {
+                background-image: url(./assets/resources/fighter.png);
+            }
+            .card-resource-camp {
+                background-image: url(./assets/resources/camp.png);
+            }
+            .card-resource-asteroid {
+                color: #0000 !important;
+                background-image: url(./assets/resources/asteroid.png);
+            }
+            .card-resource-disease {
+                color: #0000 !important;
+                background-image: url(./assets/resources/disease.png);
+            }
+            .card-resource-preservation {
+                background-image: url(./assets/resources/preservation.png);
+            }
+            .card-resource-data {
+                color: #0000 !important;
+                background-image: url(./assets/resources/data.png);
+            }
+            .card-resource-syndicate-fleet {
+                color: #0000 !important;
+                background-image: url(./assets/resources/syndicate-fleet.png);
+            }
+            .card-resource-venusian-habitat {
+                color: #0000 !important;
+                background-image: url(./assets/resources/venusian-habitat.png);
+            }
+            .card-resource-specialized-robot {
+                color: #0000 !important;
+                background-image: url(./assets/resources/specialized-robot.png);
+            }
+            .card-resource-seed {
+                color: #0000 !important;
+                background-image: url(./assets/resources/seed.png);
+            }
+            .card-resource-agenda {
+                color: #0000 !important;
+                background-image: url(./assets/resources/agenda.png);
+            }
+            .card-resource-orbital {
+                color: #0000 !important;
+                background-image: url(./assets/resources/orbital.png);
+            }
+            .card-resource-cube {
+                color: #0000 !important;
+                background-image: url(./assets/cube.png);
+            }
+            .card-resource-diverse {
+                background: linear-gradient(to bottom right, green, yellow, red);
+            }
+            .card-resource-community {
+                background: linear-gradient(orange, orangered);
+            }
+            /*special*/
+            .card-special {
+                font-size: @font_size_big;
+            }
+            .card-asterix {
+                position: relative;
+                top: 3px;
+            }
+            .card-minus {
+                background-image: url(/assets/misc/minus.png);
+                background-size: 12px;
+                margin: 0;
+                width: 12px;
+                height: 8px;
+                background-repeat: no-repeat;
+                margin-right: 2px;
+                position: relative;
+                top: -2px;
+            }
+            .card-minus--S {
+                .card-minus();
+                background-size: 9px;
+                width: 9px;
+                height: 6px;
+            }
+            .card-plus {
+                background-image: url(/assets/misc/plus.png);
+                background-size: 12px;
+                min-height: 12px;
+                width: 12px;
+                vertical-align: middle;
+                display: inline-block;
+                margin: 0;
+                margin-right: 2px;
+                background-repeat: no-repeat;
+            }
+            .card-plus--small {
+                background-size: 10px;
+                min-height: 10px;
+                width: 10px;
+            }
+            .card-or,
+            .card-colon {
+                font-size: @font_size_normal;
+                line-height: normal;
+            }
+            .card-slash, .card-equals {
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+            .card-or--small, .card-slash--small {
+                font-size: @font_size_small;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+            .card-or--tiny, .card-slash--tiny {
+                font-size: @font_size_tiny;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+
+            .card-res-amount {
+                font-size: 21px;
+                margin-right: 1px;
+            }
+            .card-card {
+                background: url("./assets/resources/card.png");
+                height: 40px;
+                width: 30px;
+                background-size: 30px 40px;
+                vertical-align: middle;
+                .cards-count {
+                    position: absolute;
+                    background: #ffffffb3;
+                    color: black;
+                    margin-left: 3px;
+                    width: 24px;
+                    height: 20px;
+                    line-height: 20px;
+                    margin-top: 16px;
+                    border-radius: 5px;
+                    font-size: 17px;
+                }
+                .card-icon-space {
+                    background: black;
+                    color: yellow;
+                    font-size: 14px;
+                }
+                .card-icon-building {
+                    background: linear-gradient(#a27147, #593e27);
+                    color: #493628;
+                    font-size: 12px;
+                    left: -3px;
+                    text-shadow: 0 0 1px black;
+                }
+            }
+            .card-icon {
+                position: absolute;
+                right: -4px;
+                top: -8px;
+                margin: 0;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                border-radius: 10px;
+                background-size: 24px 24px;
+                background-position: center;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+            }
+            .card-red-arrow {
+                background-image: url(./assets/misc/arrow.png);
+                background-size: 30px;
+                width: 30px;
+                height: 30px;
+                vertical-align: middle;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: 0px;
+            }
+            .card-red-arrow--small {
+                background-image: url(./assets/misc/short-arrow.png);
+                background-size: 15px;
+                width: 15px;
+                height: 15px;
+                vertical-align: middle;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: 0px;
+            }
+
+
+            /*colony special*/
+            .card-resource-trade {
+                background-image: url(./assets/tiles/trade.png);
+                height: 40px;
+                width: 48px;
+                background-size: 48px;
+            }
+            .card-resource-trade--S {
+                height: 30px !important;
+                width: 36px !important;
+                background-size: 36px !important;
+            }
+            .card-resource-trade-fleet {
+                background-image: url(./assets/tiles/trade.png);
+                height: 40px;
+                width: 48px;
+                background-size: 48px;
+                filter: invert(1) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0px 1px 0px rgba(0, 0, 0, 0.5));
+            }
+            .card-resource-colony {
+                background-image: url(./assets/tiles/colony.png);
+                height: 40px;
+                width: 46px;
+                background-size: 46px;
+            }
+            .card-resource-colony--S {
+                height: 30px !important;
+                width: 36px !important;
+                background-size: 36px !important;
+            }
+            .card-resource-colony--req {
+                height: 34px;
+                width: 40px;
+                background-size: 40px 34px;
+                margin-left: 3px;
+                margin-right: 3px;
+            }
+            /*turmoil special*/
+            .card-influence {
+                display: inline-block;
+                background-image: url(./assets/misc/influence.png);
+                width: 40px;
+                height: 40px;
+                background-size: 40px 40px;
+                vertical-align: middle;
+            }
+            .card-influence--size-S {
+                height: 25px;
+                width: 25px;
+                background-size: 25px;
+                position: relative;
+                top: -10px;
+                left: -7px;
+            }
+            .turmoil-global-event {
+                display: inline-block;
+                background-image: url(./assets/parties/globalEvent.png);
+                width: 40px;
+                height: 56px;
+                background-size: 40px 56px;
+                background-repeat: no-repeat;
+                margin-right: 10px;
+            }
+            /*tags*/
+            .card-resource-tag {
+                position: relative;
+                display: inline-block;
+                text-align: center;
+                border-radius: 50%;
+                margin-left: 3px;
+                margin-right: 3px;
+                width: 30px;
+                height: 30px;
+                background-size: 34px 34px;
+                background-position: -2px -2px;
+                line-height: 28px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                vertical-align: middle;
+                filter: brightness(0.9);
+                &--S:extend(.card-container .card-content-wrapper .card-content .card-resource-tag) {
+                    width: 30px;
+                    height: 30px;
+                    background-size: 34px;
+                    margin-left: 2px;
+                }
+            }
+            // TODO(kberg) This set of tags looks like a duplicate of cards.less.
+            .card-tag-wild {
+                background-image: url("../assets/tags/wild.png");
+            }
+            .card-tag-building {
+                background-image: url("./assets/tags/building.png");
+            }
+            .card-tag-space {
+                background-image: url("./assets/tags/space.png");
+            }
+            .card-tag-power {
+                background-image: url("./assets/tags/power.png");
+            }
+            .card-tag-jovian {
+                background-image: url("./assets/tags/jovian.png");
+            }
+            .card-tag-venus {
+                background-image: url("./assets/tags/venus.png");
+            }
+            .card-tag-earth {
+                background-image: url("./assets/tags/earth.png");
+            }
+            .card-tag-city {
+                background-image: url("./assets/tags/city.png");
+            }
+            .card-tag-microbe {
+                background-image: url("./assets/tags/microbe.png");
+            }
+            .card-tag-plant {
+                background-image: url("./assets/tags/plant.png");
+            }
+            .card-tag-animal {
+                background-image: url("./assets/tags/animal.png");
+            }
+            .card-tag-event {
+                background-image: url("./assets/tags/event.png");
+            }
+            .card-tag-science {
+                background-image: url("./assets/tags/science.png");
+            }
+            .card-tag-none {
+                background-image: url("./assets/tags/tag-none.png");
+            }
+            .card-tag-floater {
+                background-image: url("./assets/resources/floater.png");
+                border-radius: 0px;
+            }
+            .card-tag-moon {
+                background-image: url("./assets/tags/moon.png")
+            }
+            .card-tag-mars {
+                background-image: url("./assets/tags/mars.png");
+            }
+            .card-community-services {
+                font-size: 42px;
+                vertical-align: middle;
+                background:white;
+            }
+            /* secondary tags */
+            .card-tag-req {
+                border-radius: 0px;
+                height: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
+            }
+            .card-tag-blue {
+                opacity: 0.8;
+                margin-left: 17px;
+                background: #176fe4;
+                width: 16px;
+                top: -7px;
+                height: 16px;
+                border-radius: 50%;
+            }
+            .card-tag-no_planetary_tag {
+                .tag-clone();
+            }
+            .card-tag-no_planetary_tag:after {
+                content: '';
+                height: 20px;
+                border-left: 2px dashed #f00;
+                position: absolute;
+                transform: rotate(45deg);
+                margin-left: -1px;
+            }
+            .card-tag-no_planetary_tag:before {
+                content: '';
+                height: 20px;
+                border-left: 2px dashed #f00;
+                position: absolute;
+                transform: rotate(-45deg);
+                margin-left: -1px;
+            }
+            .card-tag-turmoil:after {
+                position: absolute;
+                color: #222;
+                border: 1px solid black;
+                left: -1px;
+                background: darkorange;
+                font-weight: bold;
+                font-size: 16px;
+                line-height: 16px;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                border-radius: 50%;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+                content: "\25b2";
+                transform: rotate(180deg);
+            }
+            /* special case Project requirements */
+            .card-project-requirements {
+                position: relative;
+                align-self: center;
+                justify-content: center;
+                .card-x {
+                    position: absolute;
+                    color: rgb(0, 0, 0);
+                    font-size: 63px;
+                    left: 61px;
+                    top: -2px;
+                }
+                .card-requirements {
+                    width: 95%;
+                    padding: 0px 4px;
+                }
+            }
+            .card-place-colony {
+                text-transform: uppercase;
+                background: #444;
+                color: #eee;
+                padding: 4px;
+                padding-left: 8px;
+                padding-right: 8px;
+                border-radius: 20px;
+                font-weight: normal;
+                box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+                border: 1px solid #eee;
+            }
+            .card-prelude-container {
+                background-color: #2c2c2c;
+                background: linear-gradient(to right bottom, black, #3c3c3c, #969696, #3c3c3c, #3c3c3c, black);
+                color: black;
+                font-size: 12px;
+                padding: 4px 7px 1px;
+                border-radius: 3px;
+                box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.8);
+                .card-prelude-icon {
+                    text-transform: uppercase;
+                    background: linear-gradient(to right, rgb(235,118,171), #e64d91);
+                    padding-left: 4px;
+                    padding-right: 4px;
+                    border-radius: 2px;
+                }
+            }
+            .card-award-icon {
+                text-transform: uppercase;
+                background: orange;
+                padding: 2px 10px;
+                font-size: 14px;
+                font-weight: bold;
+                border-radius: 3px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+            }
+            .card-vp-questionmark {
+                background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
+                width: 40px;
+                height: 34px;
+                font-weight: normal;
+                line-height: 31px;
+                font-size: 28px;
+                text-align: center;
+                border-radius: 12px;
+                border-style: outset;
+                background-color: rgb(205,162,130);
+                background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
+                box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+            }
+            /*production*/
+            .card-production-box {
+                font-family: Prototype;
+                font-weight: normal;
+                text-shadow: none;
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                padding: 4px;
+                margin: 0 4px;
+                border-top: 2px solid #dddddd;
+                border-left: 2px solid #dddddd;
+                border-bottom: 2px solid #898989;
+                border-right: 2px solid #898989;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background-image: url(./assets/misc/production.png);
+                background-size: cover;
+                .card-production-box-row {
+                    display: flex;
+                    flex-flow: row;
+                    margin-top: 2px;
+                    margin-bottom: 2px;
+                    .card-production-box-row-item {
+                        align-self: center;
+                        .card-item-container {
+                            margin: 0 !important;
+                        }
+                    }
+                }
+            }
+            .card-production-box--req {
+                transform: scale(0.8);
+                padding: 0px;
+            }
+            .card-rows {
+                display: flex;
+                flex-flow: column;
+                margin-top: 8px;
+                align-items: center;
+                .card-row {
+                    // background: gold;
+                    margin: 4px 0px;
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                }
+            }
+            .card-description {
+                margin-top: 8px;
+                color: #020202;
+                font-size: 11px;
+                line-height: 12px;
+                font-weight: normal;
+            }
+            .card-description-aligned {
+                width: 60%;
+            }
+            .card-description-align--left {
+                align-self: flex-start;
+            }
+            .card-description-align--rigth {
+                align-self: flex-end;
+            }
+            .card-points {
+                position: absolute;
+                font-family: Prototype;
+                font-weight: normal;
+                bottom: 8px;
+                right: 8px;
+                width: 80px;
+                height: 42px;
+                line-height: 42px;
+                text-align: center;
+                border-radius: 12px;
+                border-top: 2px solid #dddddd;
+                border-left: 2px solid #dddddd;
+                border-bottom: 2px solid #898989;
+                border-right: 2px solid #898989;
+                background-color: #cda282;
+                background: linear-gradient(#cc8b00, #805700, #805700);
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                .card-item-container{
+                    margin: 0px;
+                }
+                .card-points-item-first {
+                    display: flex;
+                }
+            }
+            .card-points-big {
+                font-size: 36px;
+                text-shadow: 0 0 5px darkorange;
+            }
+            .card-points-normal {
+                display: flex;
+                justify-content: center;
+                font-size: 28px;
+                text-shadow: 0 0 2px darkorange;
+                >div{
+                    margin-left: 4px;
+                }
+            }
+            .card-plate {
+                width: 130px;
+                text-shadow: none;
+                font-size: 14px;
+                text-transform: uppercase;
+                font-weight: bold;
+                line-height: 17px;
+                display: inline-block;
+                vertical-align: middle;
+                padding: 4px 0px;
+                margin-right: 5px;
+                border-radius: 14px;
+                background: linear-gradient(90deg, #f3a10e 0%, #fdea25 45%, #fdea25 55%, #f3a10e 100%);
+                filter: drop-shadow(0px 0px 1px black);
+                box-shadow: 2px 2px 1px;
+            }
+            .card-text-size--XS {
+                font-size: @font_size_tiny;
+            }
+            .card-text-size--S {
+                font-size: @font_size_small;
+            }
+            .card-text-size--M {
+                font-size: @font_size_normal;
+            }
+            .card-text-size--L {
+                font-size: @font_size_big;
+            }
+            .card-text-uppercase {
+                text-transform: uppercase;
+                line-height: normal;
+            }
+            .card-text-bold {
+                font-weight: bold;
+            }
+            .card-text-normal {
+                font-size: 11px;
+                line-height: 12px;
+                font-weight: normal;
+            }
+            .card-nbsp {
+                visibility: hidden;
+                width: 10px;
+            }
+            .card-vspace {
+                visibility: hidden;
+                width: 100%;
+            }
+            .card-vspace--small {
+                height: 8px;
+            }
+            .card-vspace--medium {
+                height: 16px;
+            }
+            .card-vspace--large {
+                height: 24px;
+            }
+            .card-survey-mission {
+                background-image: url(./assets/pathfinders/survey-mission.png);
+                width: 65px;
+                height: 52px;
+                background-size: 65px 52px;
+                background-repeat: no-repeat;
+            }
+            /* tiles */
+            .card-tile {
+                margin-left: 4px;
+                margin-right: 4px;
+                background-repeat: no-repeat;
+            }
+            .card-tile-canvas {
+                background-image: url(./assets/tiles/special.png);
+                width: 40px;
+                height: 47px;
+                background-size: 40px;
+                background-repeat: no-repeat;
+            }
+            .card-tile-capital {
+                background-image: url(./assets/tiles/city.png);
+                filter: none;
+                width: 40px;
+                height: 47px;
+                background-size: 40px 47px;
+            }
+            /* symbols for tiles */
+            .card-tile-symbol {
+                background-size: 44px;
+                width: 40px;
+                height: 47px;
+            }
+            .card-tile-symbol-commercial-district {
+                background-image: url(./assets/tiles/special_tile_icons/commerical_district.png);
+                position: relative;
+                left: -2px;
+            }
+            .card-tile-symbol-deimos-down {
+                background-image: url(./assets/tiles/special_tile_icons/deimos.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-great-dam {
+                background-image: url(./assets/tiles/special_tile_icons/great_dam.png);
+                position: relative;
+                left: -2px;
+                top: -1px;
+            }
+            .card-tile-symbol-ecological-zone {
+                background-image: url(./assets/tiles/special_tile_icons/ecological_zone.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-industrial-center {
+                background-image: url(./assets/tiles/special_tile_icons/industrial_center.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-magnetic-field-generators {
+                background-image: url(./assets/tiles/special_tile_icons/magnetic_field_gen.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-mining {
+                background-image: url(./assets/tiles/special_tile_icons/mining_area.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-mohole-area {
+                background-image: url(./assets/tiles/special_tile_icons/mohole_area.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-lava-flows{
+                background-image: url(./assets/tiles/special_tile_icons/lava_flows.png);
+                position: relative;
+                left: -2px;
+                top: 1px;
+            }
+            .card-tile-symbol-restricted-area{
+                background-image: url(./assets/tiles/special_tile_icons/restricted_area.png);
+                position: relative;
+                left: -2px;
+                top: 0px;
+            }
+            .card-tile-symbol-natural-preserve {
+                background-image: url(./assets/tiles/special_tile_icons/natural_preserve.png);
+                position: relative;
+                left: -3px;
+                top: 0px;
+            }
+            .card-tile-symbol-nuclear-zone {
+                background-image: url(./assets/tiles/special_tile_icons/nuclear_zone.png);
+                position: relative;
+                left: -2px;
+                top: 0px;
+            }
+            .city-tile--M {
+                background-image: url(./assets/tiles/city.png);
+                filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+                background-size: 40px;
+                width: 40px;
+                height: 47px;
+            }
+            .city-tile--S {
+                background-image: url(./assets/tiles/city.png);
+                filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
+            }
+            .greenery-tile--M {
+                background-image: url(./assets/tiles/greenery_no_O2.png);
+                background-size: 40px;
+                width: 40px;
+                height: 47px;
+            }
+            .greenery-tile--S {
+                background-image: url(./assets/tiles/greenery_no_O2.png);
+                background-size: 30px 32px;
+                width: 30px;
+                height: 32px;
+            }
+            .greenery-tile-oxygen--M {
+                background-image: url(./assets/tiles/greenery.png);
+                background-size: 47px;
+                width: 47px;
+                height: 46px;
+            }
+            .tile--req {
+                width: 30px;
+                height: 34px;
+                background-size: 30px 34px;
+                margin-left: 4px;
+                margin-right: 4px;
+            }
+            .card-ocean--S {
+                width: 30px !important;
+                height: 32px !important;
+                background-size: 30px 32px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
+            }
+            .card-venus--S {
+                width: 48px !important;
+                height: 32px !important;
+                background-size: 48px 32px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
+            }
+            .card-tr {
+                background-image: url(./assets/resources/tr.png);
+                width: 55px;
+                height: 40px;
+                background-size: 55px 40px;
+                position: relative;
+            }
+            .card-tr--S {
+                width: 42px !important;
+                height: 32px !important;
+                background-size: 42px 32px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
+                .card-x {
+                    position: absolute;
+                    color: #000000;
+                    font-size: 57px;
+                    left: 5px;
+                    top: 2px;
+                }
+            }
+            .card-tr--XS {
+                .card-tr--req();
+            }
+            .card-tr--req {
+                width: 45px !important;
+                height: 34px !important;
+                background-size: 45px 34px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
+            }
+            .card-delegate {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+            .card-delegate-red {
+                filter: drop-shadow(0px 1px 1px darkred) drop-shadow(0px -1px 1px red) drop-shadow(0px 0px 2px black);
+            }
+            .card-party-leader {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 3px;
+                background-repeat: no-repeat;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
+            }
+            .card-party-leader--req {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 3px;
+                background-repeat: no-repeat;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman {
+                display: inline-block;
+                background-image: url(./assets/misc/chairman.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 3px;
+                background-repeat: no-repeat;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman--req {
+                display: inline-block;
+                background-image: url(./assets/misc/chairman.png);
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 3px;
+                background-repeat: no-repeat;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman-red {
+                filter: drop-shadow(1px 0px 1px #c33) drop-shadow(-1px 0px 1px #c33) drop-shadow(0px 1px 1px #c33) drop-shadow(0px -1px 1px #c33) !important;
+            }
+        }
+        .temporary-content-wrapper {
+            position: relative;
+            top: -25px;
+            /* .corporation-icon {
+                position: absolute;
+                top: 9px;
+                right: 26px;
+            } */
+        }
+        .card-cost-and-tags {
+            display: flex;
+            align-items: center;
+            margin-left: -10px;
+            margin-top: -10px;
+            justify-content: space-between;
+            .card-cost, .card-old-cost {
+                float: left;
+                font-family: Prototype;
+                font-size: 26px;
+                width: 50px;
+                height: 50px;
+                line-height: 48px;
+                border-radius: 10px;
+                text-align: center;
+                background-image: url(./assets/resources/megacredit.png);
+                background-size: 50px;
+                filter: drop-shadow(0px 0px 1px black);
+                color: #000;
+            }
+            .card-cost-transition {
+                position: absolute;
+                background-image: url(./assets/misc/cost-transition-arrow.png);
+                width: 14px;
+                height: 21px;
+                left: 9px;
+                top: 40px;
+                z-index: 2;
+            }
+            .card-old-cost {
+                transform: scale(0.6);
+                filter: grayscale(60%);
+                left: -8px;
+                top: 45px;
+                position: absolute;
+            }
+            .card-tags {
+                display: flex;
+                flex-flow: row;
+                justify-content: flex-end;
+                margin-right: -6px;
+                .card-tag {
+                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                    margin-left: 4px;
+                    width: 40px;
+                    height: 40px;
+                    background-size: 50px;
+                    background-position: -5px;
+                    text-align: center;
+                    border-radius: 50%;
+                    border-top: 2px solid rgb(221, 221, 221);
+                    border-left: 2px solid rgb(221, 221, 221);
+                    border-bottom: 2px solid rgb(137, 137, 137);
+                    border-right: 2px solid rgb(137, 137, 137);
+                    background-color: white;
+                    /* margin-top: -6px; */
+                    filter: brightness(0.9);
+                }
+            }
+        }
+        .card-title {
+            font-family: "Ubuntu";
+            color: #020202;
+            text-transform: uppercase;
+            width: 100%;
+            border-radius: 0 0 30% 30%;
+            line-height: 27px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            height: 27px;
+            .corporation-label {
+                text-transform: uppercase;
+                float: left;
+                top: 8px;
+                position: absolute;
+                color: #020202;
+                width: 115px;
+                height: 14px;
+                line-height: 15px;
+                text-align: center;
+                font-size: 13px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: #cccccc;
+                background-color: rgb(255, 204, 100);
+                background: linear-gradient(
+                    to right,
+                    #e28c22,
+                    rgb(255, 204, 100),
+                    rgb(255, 204, 100),
+                    #e28c22
+                );
+                border-radius: 7px 7px 2px 2px;
+                text-transform: uppercase;
+            }
+            .prelude-label {
+                position: absolute;
+                text-transform: uppercase;
+                top: 15px;
+                left: 4px;
+                margin: 0px;
+                width: 80px;
+                height: 20px;
+                line-height: 22px;
+                text-align: center;
+                font-size: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+                background-color: rgb(235, 118, 171);
+                border-radius: 14px 2px 2px 2px;
+                border-top: 2px solid rgb(221, 221, 221);
+                border-left: 2px solid rgb(221, 221, 221);
+                border-bottom: 2px solid rgb(137, 137, 137);
+                border-right: 2px solid rgb(137, 137, 137);
+            }
+        }
+        .card-expansion {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 10px;
+            background-size: 24px 24px;
+            background-position: center;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+        }
+        .contentCorporation {
+            color: #020202;
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            padding: 8px;
+            top: -40px;
+            color: #020202;
+        }
+    }
+}
+/* fixes */
+.card-mons-insurance {
+    .card-content-corporation > .card-description {
+        position: relative;
+        top: -16px;
+    }
+}
+
+.card-party {
+  display: inherit;
+}
+
+.card-party--revealed {
+  display: inherit;
+  position: absolute;
+  margin: -7px 0 0 -285px;
+  transform: scale(1.4);
+}
+
+.card-party--current {
+  display: inherit;
+  position: absolute;
+  margin: 129px 0 0 280px;
+  transform: scale(1.4);
+}
+
+@parties: greens, kelvinists, mars-first, reds, scientists, unity;
+each(@parties, {
+  .card-party--@{value} {
+    background-image: url("./assets/parties/@{value}.png");
+    background-size: 41px 30px;
+    width: 41px;
+    height: 30px;
+  }
+})
+
+@parties: greens, kelvinists, mars-first, reds, scientists, unity;
+each(@parties, {
+  .card-party--@{value}-req {
+    background-image: url("./assets/parties/@{value}.png");
+    background-size: 48px 34px;
+    width: 48px;
+    height: 34px;
+  }
+})
+
+.card-over {
+   margin: 0px 0 -59px -59px;
+}
+
+.card-resources-counter {
+    .card-resource {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 4px;
+        width: 22px;
+        height: 22px;
+        background-size: 22px;
+        vertical-align: middle;
+    }
+
+    // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
+    // the stuff above wasn't contained inside card-content.
+    @resource_types: microbe, animal, science, floater, fighter, camp,
+      asteroid, disease, preservation, data, syndicate-fleet, cube,
+      venusian-habitat, specialized-robot, seed, orbital, agenda;
+    each(@resource_types, {
+      .card-resource-@{value} {
+        background-image: url("./assets/resources/@{value}.png");
+      }
+    })
+    .card-resource-cube {
+      background-image: url("./assets/cube.png");
+    }
+}

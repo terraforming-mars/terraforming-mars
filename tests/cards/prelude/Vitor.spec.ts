@@ -1,43 +1,60 @@
+import {expect} from 'chai';
+import {Ants} from '../../../src/cards/base/Ants';
+import {LavaFlows} from '../../../src/cards/base/LavaFlows';
+import {DustSeals} from '../../../src/cards/base/DustSeals';
+import {Vitor} from '../../../src/cards/prelude/Vitor';
+import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-import { expect } from "chai";
-import { Ants } from "../../../src/cards/Ants";
-import { LavaFlows } from "../../../src/cards/LavaFlows";
-import { Vitor } from "../../../src/cards/prelude/Vitor";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Game } from "../../../src/Game";
-import { OrOptions } from "../../../src/inputs/OrOptions";
+describe('Vitor', function() {
+  let card : Vitor; let player : Player; let game : Game;
 
-describe("Vitor", function () {
-    it("Should play", function () {
-        const card = new Vitor();
-        const player = new Player("test", Color.BLUE, false);
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
-        expect(player.megaCredits).to.eq(0);
-    });
-    it("Has initial action", function () {
-        const card = new Vitor();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.initialAction(player, game);
-        expect(action).to.eq(undefined);
-        const game2 = new Game("goobar", [player, player], player);
-        const action2 = card.initialAction(player, game2);
-        expect(action2 instanceof OrOptions).to.eq(true);
-        (action2 as OrOptions).options[0].cb();
-        expect(game2.hasBeenFunded(game.awards[0])).to.eq(true);
-    });
-    it("Give mega credits when card played", function () {
-        const lava = new LavaFlows();
-        const ants = new Ants();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const card = new Vitor();
-        player.corporationCard = card;
-        card.onCardPlayed(player, game, ants);
-        expect(player.megaCredits).to.eq(3);
-        card.onCardPlayed(player, game, lava);
-        expect(player.megaCredits).to.eq(3);
-    });
+  beforeEach(function() {
+    card = new Vitor();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, redPlayer], player);
+  });
+
+  it('Should play', function() {
+    const action = card.play(player);
+    expect(action).is.undefined;
+    expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Has initial action', function() {
+    const action = card.initialAction(player);
+    expect(action).instanceOf(OrOptions);
+    (action as OrOptions).options[0].cb();
+    expect(game.hasBeenFunded(game.awards[0])).is.true;
+  });
+
+  it('No initial action for solo games', function() {
+    Game.newInstance('foobar', [player], player);
+    const action = card.initialAction(player);
+    expect(action).is.undefined;
+  });
+
+  it('Give megacredits when card played', function() {
+    player.corporationCard = card;
+
+    // Dust Seals has victory points
+    card.onCardPlayed(player, new DustSeals());
+    expect(player.megaCredits).to.eq(3);
+
+    // Lava flows has none
+    card.onCardPlayed(player, new LavaFlows());
+    expect(player.megaCredits).to.eq(3);
+
+    // Ants has dynamic victory points
+    card.onCardPlayed(player, new Ants());
+    expect(player.megaCredits).to.eq(6);
+
+    // This card has negative dynamic victory points
+    card.onCardPlayed(player, new AncientShipyards());
+    expect(player.megaCredits).to.eq(6);
+  });
 });

@@ -1,34 +1,43 @@
 import {ICard} from '../ICard';
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
-import { Game } from "../../Game";
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardResource} from '../../common/CardResource';
+import {SelectCard} from '../../inputs/SelectCard';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class AirScrappingExpedition implements IProjectCard {
-    public cost: number = 13;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.AIR_SCRAPPING_EXPEDITION;
-    public cardType: CardType = CardType.EVENT;
+export class AirScrappingExpedition extends Card {
+  constructor() {
+    super({
+      name: CardName.AIR_SCRAPPING_EXPEDITION,
+      cardType: CardType.EVENT,
+      tags: [Tags.VENUS],
+      cost: 13,
+      tr: {venus: 1},
 
-    public play(player: Player, game: Game) {
-        game.increaseVenusScaleLevel(player,1);
-        let floaterCards = player.getResourceCards(ResourceType.FLOATER);
-        floaterCards = floaterCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0 );
-        if (floaterCards.length === 0) {
-            return undefined;
-        }   
+      metadata: {
+        cardNumber: '215',
+        description: 'Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.',
+        renderData: CardRenderer.builder((b) => {
+          b.venus(1).floaters(3, {secondaryTag: Tags.VENUS});
+        }),
+      },
+    });
+  }
 
-        return new SelectCard(
-            'Select card to add 3 floaters',
-            floaterCards,
-            (foundCards: Array<ICard>) => {
-                player.addResourceTo(foundCards[0], 3);
-            return undefined;
-            }
-        );
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 1);
+    let floaterCards = player.getResourceCards(CardResource.FLOATER);
+    floaterCards = floaterCards.filter((card) => card.tags.some((cardTag) => cardTag === Tags.VENUS));
+    if (floaterCards.length === 0) {
+      return undefined;
     }
+
+    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, (foundCards: Array<ICard>) => {
+      player.addResourceTo(foundCards[0], 3);
+      return undefined;
+    });
+  }
 }

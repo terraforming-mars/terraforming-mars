@@ -1,19 +1,31 @@
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { PreludeCard } from "./PreludeCard";
-import { IProjectCard } from "../IProjectCard";
-import { Resources } from "../../Resources";
-import { CardName } from '../../CardName';
+import {Player} from '../../Player';
+import {PreludeCard} from './PreludeCard';
+import {Resources} from '../../common/Resources';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
 
-export class SocietySupport extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.SOCIETY_SUPPORT;
-    public play(player: Player) {     
-        player.setProduction(Resources.MEGACREDITS,-1);
-        player.setProduction(Resources.PLANTS);
-        player.setProduction(Resources.ENERGY);
-        player.setProduction(Resources.HEAT);			
-        return undefined;
-    }
+export class SocietySupport extends PreludeCard {
+  constructor() {
+    super({
+      name: CardName.SOCIETY_SUPPORT,
+
+      metadata: {
+        cardNumber: 'P31',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => {
+            pb.megacredits(-1).plants(1).br;
+            pb.energy(1).heat(1);
+          });
+        }),
+        description: 'Increase your plant, energy and heat production 1 step. Decrease money production 1 step.',
+      },
+    });
+  }
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, -1);
+    player.addProduction(Resources.PLANTS, 1);
+    player.addProduction(Resources.ENERGY, 1);
+    player.addProduction(Resources.HEAT, 1);
+    return undefined;
+  }
 }
-

@@ -1,26 +1,46 @@
-import { expect } from "chai";
-import { SulphurEatingBacteria } from "../../../src/cards/venusNext/SulphurEatingBacteria";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { OrOptions } from '../../../src/inputs/OrOptions';
-import { Game } from '../../../src/Game';
+import {expect} from 'chai';
+import {SulphurEatingBacteria} from '../../../src/cards/venusNext/SulphurEatingBacteria';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-describe("SulphurEatingBacteria", function () {
-    it("Should play", function () {
-        const card = new SulphurEatingBacteria();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay(player, game)).to.eq(false);
-        expect(card.play()).to.eq(undefined);
-    });
-    it("Should act", function () {
-        const card = new SulphurEatingBacteria();
-        const player = new Player("test", Color.BLUE, false);
-        player.playedCards.push(card);
-        player.addResourceTo(card,5);
-        const action = card.action(player) as OrOptions;
-        action.options[1].cb(3);
-        expect(player.megaCredits).to.eq(9);
-        expect(card.resourceCount).to.eq(2);
-    });
+describe('SulphurEatingBacteria', function() {
+  let card : SulphurEatingBacteria; let player : Player; let game : Game;
+
+  beforeEach(function() {
+    card = new SulphurEatingBacteria();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, redPlayer], player);
+  });
+
+  it('Can\'t play', function() {
+    (game as any).venusScaleLevel = 4;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+  });
+
+  it('Should play', function() {
+    (game as any).venusScaleLevel = 6;
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.play()).is.undefined;
+  });
+
+  it('Should act - both actions available', function() {
+    player.playedCards.push(card);
+    player.addResourceTo(card, 5);
+
+    const action = card.action(player) as OrOptions;
+    action.options[1].cb(3);
+    expect(player.megaCredits).to.eq(9);
+    expect(card.resourceCount).to.eq(2);
+  });
+
+  it('Should act - only one action available', function() {
+    player.playedCards.push(card);
+    expect(card.resourceCount).to.eq(0);
+
+    card.action(player);
+    expect(card.resourceCount).to.eq(1);
+  });
 });

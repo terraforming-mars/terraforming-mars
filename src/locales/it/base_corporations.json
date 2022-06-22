@@ -1,0 +1,92 @@
+{
+  "Beginner Corporation":"Beginner Corporation",
+  
+  
+  "Thorgate":"Thorgate",
+  "You start with 1 energy production and 48 M€.":"Inizi con 1 Produzione di Energia e 48 M€.",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.":"Effetto: quando giochi un simbolo Potenza O IL PROGETTO STANDARD CENTRALE ELETTRICA paghi 3 M€ in meno.",
+
+  
+
+  "EcoLine":"Ecoline",
+  "You start with 2 plant production, 3 plants, and 36 M€.":"Inizi con una Produzione di 2 Piante, 3 Piante e 36 M€.",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.":"Effetto: puoi sempre pagare 7 Piante invece di 8 per posizionare una tessera Vegetazione.",
+  
+  "Helion":"Helion",
+  "You start with 3 heat production and 42 M€.":"Inizi con una Produzione di Calore pari a 3 e 42 M€.",
+  "Effect: You may use heat as M€. You may not use M€ as heat.":"Effetto: puoi usare il calore al posto dei M€. Non puoi usare i M€ al posto del Calore.",
+
+
+
+ "Mining Guild":"Mining Guild",
+  "You start with 30 M€, 5 steel and 1 steel production.":"Cominci con 30 M€, 5 risorse Acciaio e 1 Produzione di Acciaio.",
+  "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.":"Effetto: ogni volta che ottieni Acciaio o Titanio come bonus di posizionamento sulla mappa, incrementa la tua produzione di Acciaio di 1 livello.",
+
+  "You start with 40 M€. As your first action add a colony tile.":"Inizi con 40 M€. Come tua prima azione, colloca una tessera Colonia aggiuntiva a tua scelta in gioco.",
+  "Effect: When you get a new type of tag in play (event cards do not count), increase your M€ production 1 step.":"Effetto: quando metti in gioco un simbolo nuovo (gli eventi non contano) incrementi la tua Produzione di M€ di 1 livello.",
+
+  
+  "Tharsis Republic":"Tharsis Republic",
+  "You start with 40 M€. As your first action in the game,place a city tile.":"Inizi con 40 M€. Come prima azione nel gioco, posiziona una tessera Città.",
+  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.":"Effetto: quando una qualunque tessera Città viene collocata SU MARTE incrementa la tua Produzione di M€ di 1 livello. Quando tu posizioni una tessera Città, guadagni 3 M€.",
+
+
+  "You start with 1 titanium production, and 38 M€.":"Inizi con 1 Produzione di Titanio e 38 M€.",
+
+ 
+  "Inventrix":"Inventrix",
+  "As your first action in the game, draw 3 cards. Start with 45 M€.":"Come prima azione nel gioco, pesca 3 carte. Inizi con 45 M€.",
+  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.":"Effetto: a tua discrezione in ogni caso, i requisiti su Temperatura, Ossigeno, Oceani e Venere valgono +2 livelli o -2 livelli.",
+
+  "Interplanetary Cinematics":"Interplanetary Cinematics",
+  "You start with 20 steel and 30 M€.":"Inizi con 20 risorse Acciaio e 30 M€.",
+  "Effect: Each time you play an event, you gain 2 M€.":"Effetto: ogni volta che giochi un Evento, guadagni 2 M€.",
+
+  "PhoboLog":"PhoboLog",
+  "You start with 10 titanium and 23 M€.":"Inizi con 10 risorse Titanio e 23 M€.",
+  "Effect: Your titanium resources are each worth 1 M€ extra.":"Effetto: le tue risorse Titanio valgono 1 M€ in più.",
+
+  "CrediCor":"CrediCor",
+  "You start with 57 M€.":"Inizi con 57 M€.",
+  "Effect: After you pay for a card or standard project with a basic cost of 20 M€ or more, you gain 4 M€.":"Effetto: dopo aver pagato per una carta o per un progetto Standard con un costo base maggiore o uguale a 20 M€, guadagni 4 M€.",
+
+  "Action: Use a blue card action that has already been used this generation":"Azione: usa l'azione di una carta blu che è già stata utilizzata durante la generazione in corso." ,
+
+ "United Nations Mars Initiative":"United Nations Mars Initiative",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.":"Azione: se il tuo TT è stato incrementato durante la generazione in corso, puoi pagare 3 M€ per innalzarlo di 1 ulteriore livello.",
+  "You start with 40 M€.":"Inizi con 40 M€.",
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  "Saturn Systems":"Saturn Systems",
+  "You start with 1 titanium production and 42 M€.":"Inizi con 1 Produzione di Titanio e 42 M€.",
+  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.":"Effetto: ogni volta che un simbolo Gioviano entra in gioco, incluso questo, incrementa la tua Produzione di M€ di 1 1ivello.",
+
+  "Teractor":"Teractor",
+  "You start with 60 M€.":"Inizi con 60 M€.",
+  "Effect: When you play an Earth tag, you pay 3 M€ less for it.":"Effetto: quando giochi una carta Terra, paghi 3 M€ in meno.",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  "You start with 1 plant production and 47 M€":"Inizi con 47 M€ e con una produzione di Piante pari a 1."
+ 
+
+
+}

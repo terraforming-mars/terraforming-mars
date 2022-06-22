@@ -1,0 +1,24 @@
+{
+    "Psychrophiles": "Psychrofile",
+    "Action: Add 1 microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Efekt trwały: Gdy zagrywasz kartę z symbolem roślinności, do pokrycia kosztu tej karty możesz użyć znajdujące się na karcie Psychrofile jednostki mikrobów. Każda jednostka mikrobów warta jest 2 M€.",
+    "Temperature must be -20 C or lower.": "Temperatura musi być równa albo niższa niż -20°C.",
+
+    "Research Coordination": "Badania Interdyscyplinarne",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Gdy wykonujesz akcję, traktujesz uniwersalny symbol jak dowolny wybrany symbol.",
+
+    "SF Memorial": "Pomnik Twórców Science Fiction",
+    "Draw 1 card.": "Dobierz 1 kartę.",
+
+    "Martian Survey": "Misja Badawcza",
+    "Oxygen must be 4% or lower. Draw two cards.": "Poziom Tlenu musi być równy albo niższy niż 4%. Dobierz 2 karty.",
+
+    "House Printing": "Drukowane Domy",
+    "Increase your steel production 1 step.": "Podnieś swoją produkcję stali o 1 poziom.",
+
+    "Space Hotels": "Hotele Kosmiczne",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Musisz posiadać przynajmniej 2 symbole Ziemi. Podnieś swoją produkcję M€ o 4 poziomy.",
+
+    "Lava Tube Settlement": "Osadnictwo Jaskiń Lawowych",
+    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy. Umieść obszar miasta na OBSZARZE WULKANICZNYM bez względu na występowanie sąsiadujących miast."
+}

@@ -1,22 +1,35 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {Size} from '../../common/cards/render/Size';
 
-export class ProductiveOutpost implements IProjectCard {
-    public cost: number = 0;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.PRODUCTIVE_OUTPOST;
-    public cardType: CardType = CardType.AUTOMATED;
+export class ProductiveOutpost extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 0,
+      name: CardName.PRODUCTIVE_OUTPOST,
+      cardType: CardType.AUTOMATED,
 
-    public play(player: Player, game: Game) {
-      game.colonies.forEach(colony => {
-          colony.colonies.filter(owner => owner === player).forEach(owner => {
-            colony.giveTradeBonus(owner, game);
-          });
-      }); 
-      return undefined;
-    }
+      metadata: {
+        cardNumber: 'C30',
+        renderData: CardRenderer.builder((b) => {
+          b.text('Gain all your colony bonuses.', Size.SMALL, true);
+        }),
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.game.colonies.forEach((colony) => {
+      colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
+        // Not using GiveColonyBonus deferred action because it's only for the active player
+        player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
+      });
+    });
+    return undefined;
+  }
 }

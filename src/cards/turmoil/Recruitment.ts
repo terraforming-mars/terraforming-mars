@@ -1,35 +1,44 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { SelectParty } from "../../interrupts/SelectParty";
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
+import {CardRenderer} from '../render/CardRenderer';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {all} from '../Options';
 
-export class Recruitment implements IProjectCard {
-    public cost: number = 2;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.RECRUITMENT;
-    public cardType: CardType = CardType.EVENT;
+export class Recruitment extends Card implements IProjectCard {
+  constructor() {
+    super({
+      name: CardName.RECRUITMENT,
+      cost: 2,
+      cardType: CardType.EVENT,
 
-    public canPlay(_player: Player, game: Game): boolean {
-        if (game.turmoil !== undefined) {
-            let parties = game.turmoil!.parties.filter(party => {
-                if (party.delegates.length > 1) {
-                  let delegates = party.delegates.slice();
-                  delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
-                  return delegates.indexOf("NEUTRAL") != -1;
-                } else {
-                  return false;
-                }
-            });
-            return parties.length > 0
-        }
-        return false;
+      metadata: {
+        cardNumber: 'T11',
+        renderData: CardRenderer.builder((b) => {
+          b.minus().delegates(1, {all}).asterix().nbsp.plus().delegates(1);
+        }),
+        description: 'Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.',
+      },
+    });
+  }
+
+  public override canPlay(player: Player): boolean {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    if (turmoil.hasDelegatesInReserve(player.id) === false) {
+      return false;
     }
 
-    public play(player: Player, game: Game) {
-        game.addInterrupt(new SelectParty(player, game, "Select which Neutral delegate to remove", 1, "NEUTRAL"));
-        return undefined;
-    }
+    return turmoil.parties.some((party) => {
+      const neutralDelegates = party.getDelegates('NEUTRAL');
+      return neutralDelegates > 1 || (neutralDelegates === 1 && party.partyLeader !== 'NEUTRAL');
+    });
+  }
+
+  public play(player: Player) {
+    player.game.defer(new SendDelegateToArea(player, 'Select which Neutral delegate to remove', {replace: 'NEUTRAL', source: 'reserve'}));
+    return undefined;
+  }
 }

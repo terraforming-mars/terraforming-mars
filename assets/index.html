@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link
+            href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+        <meta name="viewport" content='width=1260, user-scalable=1' />
+        <meta name="description" content="Terraforming Mars Open Source Web Application" />
+    </head>
+    <body id="ts-preferences-target">
+        <div id="app" :class="'topmost-'+screen">
+            <section>
+                <dialog id="alert-dialog" class="alert-dialog">
+                    <form method="dialog">
+                        <p class="title" v-i18n>Error with input</p>
+                        <p id="alert-dialog-message"></p>
+                        <menu class="dialog-menu centered-content">
+                            <button id="alert-dialog-button" class="btn btn-lg btn-primary">OK</button>
+                        </menu>
+                    </form>
+                </dialog>
+            </section>
+            <div class="main-container">
+                <start-screen v-if="screen === 'start-screen'" :version="settings.version"></start-screen>
+                <create-game-form
+                    v-else-if="screen === 'create-game-form'"
+                ></create-game-form>
+                <load-game-form v-else-if="screen === 'load'"></load-game-form>
+                <game-home
+                    v-else-if="screen === 'game-home'"
+                    :game="game"
+                ></game-home>
+                <player-home
+                    v-else-if="screen === 'player-home' && playerView !== undefined"
+                    :player-view="playerView"
+                    :key="playerkey"
+                    :settings="settings"
+                ></player-home>
+                <spectator-home
+                    v-else-if="screen === 'spectator-home' && spectator !== undefined"
+                    :spectator="spectator"
+                    :key="playerkey"
+                    :settings="settings"
+                ></spectator-home>
+                <game-end
+                    v-else-if="screen === 'the-end'"
+                    :player-view="playerView"
+                    :spectator="spectator"
+                ></game-end>
+                <games-overview
+                    v-else-if="screen === 'games-overview'"
+                ></games-overview>
+                <debug-ui v-else-if="screen === 'cards'"></debug-ui>
+                <Help v-else-if="screen === 'help'"></Help>
+            </div>
+            <div class="notice" v-i18n>
+                Not affiliated with FryxGames, Asmodee Digital or Steam in any way.
+            </div>
+        </div>
+        <script src="/main.js"></script>
+    </body>
+</html>

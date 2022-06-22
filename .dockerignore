@@ -1,2 +1,12 @@
-.git
 .github
+.dockerignore
+Dockerfile
+*.md
+.nvmrc
+LICENSE
+tests
+.gitignore
+.gitattributes
+.env.sample
+.eslintrc.js
+docker-compose.yml

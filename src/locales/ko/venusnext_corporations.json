@@ -1,0 +1,29 @@
+{
+    "APHRODITE": "아프로디테",
+    "Aphrodite": "아프로디테",
+    "You start with 1 plant production and 47 M€.": "47 M€ 및 식물 생산력 1을 가지고 게임 시작.",
+    "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "지속 효과: 언제든 금성 개척률이 한 단계 상승할 때마다, 자신이 2 M€ 획득.",
+
+    "CEL": "셀",
+    "ES": "레",
+    "TIC": "스틱",
+    "Celestic": "셀레스틱",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "42 M€을 가지고 게임 시작. 게임 첫 행동으로서 부양체 자원이 그려진 카드 두 장이 나올 때까지 프로젝트 덱에서 카드를 한 장씩 공개. 그 뒤 공개한 카드 중 부양체 자원이 그려진 카드 2장만 획득하고 나머지 카드는 버림.",
+    "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "행동: 자신의 아무 카드에 부양체 자원 1개 추가. 이 카드에 있는 부양체 자원 3개당 승점 1점.",
+
+    "MA": "매",
+    "NUTECH": "뉴테크",
+    "Manutech": "매뉴테크",
+    "You start with 1 steel production, and 35 M€.": "강철 생산력 1 및 35 M€을 가지고 게임 시작.",
+    "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "지속 효과: 이 카드의 효과도 포함해서, 자신의 어떤 자원 생산력이 1 증가할 때마다 해당 자원 1개 획득.",
+
+    "MORNING STAR INC.": "모닝스타 인코퍼레이션",
+    "Morning Star Inc.": "모닝스타 인코퍼레이션",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "50 M€을 가지고 게임 시작. 게임 첫 행동으로서 금성 카드 세 장이 나올 때까지 프로젝트 덱에서 카드를 한 장씩 공개. 그 뒤 공개된 카드 중 금성 카드 세 장만 획득하고 나머지 카드는 버림.",
+    "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "지속 효과: 카드 사용시, 그 카드의 추진 조건 중 금성 개척률에는 +2단계 또는 -2단계 중 원하는 것을 적용.",
+
+    "VIRON": "바이론",
+    "Viron": "바이론",
+    "You start with 48 M€.": "48 M€을 가지고 게임 시작.",
+    "Action: Use a blue card action that has already been used this generation.": "행동: 자신의 파란색 카드 중 이번 라운드에 이미 행동을 수행한 카드 1장을 선택해, 해당 행동을 다시 한 번 수행."
+}

@@ -1,0 +1,168 @@
+{
+    "Airliners": "Dryfowce Pasażerskie",
+    "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Musisz posiadać przynajmniej 3 jednostki dryfowców. Podnieś swoją produkcję M€ o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie.",
+
+    "Air Raid": "Podniebny Rajd",
+    "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Odrzuć 1 jednostkę dryfowców. Ukradnij dowolnemu graczowi 5 M€.",
+
+    "Atmo Collectors": "Zagarniacze Atmosfery",
+    "Action: Add one floater here.": "Akcja: Umieść 1 jednostkę dryfowców na tej karcie.",
+    "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Akcja: Wydaj z tej karty 1 jednostkę dryfowców, aby otrzymać 2 jednostki tytanu, 3 jednostki energii albo 4 jednostki ciepła.",
+    "Add 2 floaters to ANY card.": "Umieść 2 jednostki dryfowców na dowolnej karcie.",
+
+    "Community Services": "Usługi Społeczne",
+    "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Podnieś swoją produkcję M€ o 1 poziom za każdą posiadaną kartę bez symboli (z tą włącznie).",
+
+    "Conscription": "Pobór",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Musisz posiadać przynajmniej 2 symbole ziemi. Następna zagrana przez Ciebie podczas tego pokolenia karta będzie kosztować o 16 M€ mniej.",
+
+    "Corona Extractor": "Ekstraktor Korony",
+    "Requires 4 science tags. Increase your energy production 4 steps.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję energii o 4 poziomy.",
+
+    "Cryo Sleep": "Hibernacja",
+    "Effect: When you trade, you pay 1 less resource for it.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, płacisz o 1 jednostkę zasobów mniej.",
+
+    "Earth Elevator": "Winda Orbitalna",
+    "Increase your titanium production 3 steps.": "Podnieś swoją produkcję tytanu o 3 poziomy.",
+
+    "Ecology Research": "Badania nad Ekologią",
+    "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "Podnieś swoją produkcję roślinności o 1 poziom za każdą posiadaną kolonię. Umieść 1 jednostkę zwierząt na dowolnej karcie. Umieść 2 jednostki mikrobów na dowolnej karcie.",
+
+    "Floater Leasing": "Leasing Dryfowców",
+    "Increase your M€ production 1 step PER 3 floaters you have.": "Podnieś swoją produkcję M€ o 1 poziom za każde 3 posiadane jednostki dryfowców.",
+
+    "Floater Prototypes": "Prototypy Dryfowców",
+    "Add two floaters to ANOTHER card.": "Umieść na innej karcie do 2 jednostek dryfowców.",
+
+    "Floater Technology": "Technologia Dryfowców",
+    "Action: Add 1 floater to ANOTHER card.": "Akcja: Umieść na innej karcie 1 jednostkę dryfowców.",
+
+    "Galilean Waystation": "Stacja Tranzytowa na Galileuszu",
+    "Increase your M€ production 1 step for every Jovian tag in play.": "Podnieś swoją produkcję M€ o 1 poziom za każdy symbol Jowisza w grze.",
+
+    "Heavy Taxation": "Podniesienie Podatków",
+    "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Musisz posiadać przynajmniej 2 symbole Ziemi. Podnieś swoją produkcję M€ o 2 poziomy. Otrzymujesz 4 M€.",
+
+    "Ice Moon Colony": "Kolonia na Księżycu Lodowym",
+    "Place 1 colony and 1 ocean tile.": "Umieść 1 kolonię na kaflu obiektu oraz obszar oceanu na planszy.",
+
+    "Impactor Swarm": "Rój Planetoid",
+    "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "Musisz posiadać przynajmniej 2 symbole Jowisza. Otrzymujesz 12 jednostek ciepła. Usuń do 2 jednostek roślinności dowolnego gracza.",
+
+    "Interplanetary Colony Ship": "Międzyplanetarny Statek Kolonizacyjny",
+    "Place a colony.": "Umieść 1 kolonię na kaflu obiektu.",
+
+    "Jovian Lanterns": "Reflektory Atmosferyczne",
+    "Action: Spend 1 titanium to add 2 floaters here.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
+    "1 VP per 2 floaters here.": "1 PZ za każde 2 jednostki dryfowców na tej karcie.",
+    "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Musisz posiadać przynajmniej 1 symbol Jowisza. Podnieś swój WT o 1 poziom. Umieść 2 jednostki dryfowców na dowolnej karcie.",
+
+    "Jupiter Floating Station": "Stacja Dryfowa na Jowiszu",
+    "Action: Add 1 floater to a JOVIAN CARD.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza.",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "Akcja: Otrzymaj 1 M€ za każdą znajdującą się na tej karcie jednostkę dryfowców (max 4).",
+    "Requires 3 Science tags.": "Musisz posiadać przynajmniej 3 symbole nauki.",
+
+    "Luna Governor": "Gubernator Księżyca",
+    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Musisz posiadać przynajmniej 3 symbole Ziemi. Podnieś swoją produkcję M€ o 2 poziomy.",
+
+    "Lunar Exports": "Księżycowe Towary Eksportowe",
+    "Increase your plant production 2 steps, or your M€ production 5 steps.": "Podnieś swoją produkcję roślinności o 2 poziomy albo produkcję M€ o 5 poziomów.",
+
+    "Lunar Mining": "Górnictwo Księżycowe",
+    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Podnieś swoją produkcję tytanu o 1 poziom za każde 2 posiadane symbole Ziemi (z tym włącznie).",
+
+    "Market Manipulation": "Manipulacja Rynkiem",
+    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "PRZESUŃ BIAŁY ZNACZNIK DOWOLNEGO OBIEKTU O 1 POLE W PRAWO NA TORZE KOLONII. PRZESUŃ BIAŁY ZNACZNIK DOWOLNEGO OBIEKTU O 1 POLE W LEWO NA TORZE KOLONII.",
+
+    "Martian Zoo": "Marsjańskie Zoo",
+    "Effect: When you play an Earth tag, place an animal here.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, umieść na tej karcie 1 jednostkę zwierząt.",
+    "Action: Gain 1M€ per animal here.": "Akcja: Otrzymujesz 1 M€ za każdą znajdującą się na tej karcie jednostkę zwierząt.",
+    "Requires 2 city tiles in play.": "W grze muszą się znajdować przynajmniej 2 obszary miast.",
+
+    "Mining Colony": "Kolonia Górnicza",
+    "Increase your titanium production 1 step. Place a colony.": "Podnieś swoją produkcję tytanu o 1 poziom i umieść 1 kolonię na kaflu obiektu.",
+
+    "Minority Refuge": "Azyl",
+    "Decrease your M€ production 2 steps. Place a colony.": "Obniż swoją produkcję M€ o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
+
+    "Molecular Printing": "Druk Molekularny",
+    "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Otrzymujesz 1 M€ za każdy obszar miasta w grze. Otrzymujesz 1 M€ za każdą kolonię w grze.",
+
+    "Nitrogen from Titan": "Azot z Tytana",
+    "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Podnieś swój WT o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
+
+    "Pioneer Settlement": "Osada Pionierów",
+    "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Wymagania: Możesz mieć maksymalnie 1 kolonię. Obniż swoją produkcję M€ o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
+
+    "Productive Outpost": "Wydajna Placówka",
+    "Gain all your colony bonuses.": "OTRZYMUJESZ PREMIĘ KOLONIALNĄ ZA WSZYSTKIE SWOJE KOLONIE.",
+
+    "Quantum Communications": "Komunikacja Kwantowa",
+    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję M€ o 1 poziom za każdą kolonię w grze.",
+
+    "Red Spot Observatory": "Obserwatorium Wielkiej Czerwonej Plamy",
+    "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Akcja: Umieść na tej karcie 1 jednostkę dryfowców albo wydaj 1 jednostkę dryfowców z tej karty, aby dobrać 1 kartę.",
+    "Requires 3 Science tags. Draw 2 cards.": "Musisz posiadać przynajmniej 3 symbole nauki. Dobierz 2 karty.",
+
+    "Refugee Camp": "Obozy Uchodźców",
+    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Akcja: Obniż swoją produkcję M€ o 1 poziom aby umieścić na tej karcie 1 jednostkę obozów.",
+    "1 VP for each camp resource on this card.": "Otrzymujesz 1 PZ za każdą jednostkę obozów znajdującą się na tej karcie.",
+
+    "Research Colony": "Kolonia Badawcza",
+    "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Umieść 1 kolonię na kaflu obiektu. Możesz ją umieścić na obiekcie, na którym masz już kolonię. Dobierz 2 karty.",
+
+    "Rim Freighters": "Przewoźnicy Rubieży",
+    "Effect: When you trade, you pay 1 less resource for it.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, płacisz o 1 jednostkę zasobów mniej.",
+
+    "Sky Docks": "Podniebna Stacja Przeładunkowa",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę, płacisz za nią o 1 M€ mniej.",
+    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 2 symbole Ziemi. Otrzymujesz 1 flotę handlową.",
+
+    "Solar Probe": "Sonda Słoneczna",
+    "Draw 1 card for every 3 science tags you have, including this.": "Dobierz 1 kartę za każde 3 posiadane symbole nauki (z tym włącznie).",
+
+    "Solar Reflectors": "Reflektory Słoneczne",
+    "Increase your heat production 5 steps.": "Podnieś swoją produkcję ciepła o 5 poziomów.",
+
+    "Space Port": "Kosmoport",
+    "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Otrzymujesz 1 flotę handlową. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 4 poziomy.",
+
+    "Space Port Colony": "Kolonia z Kosmoportem",
+    "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Umieść 1 kolonię na kaflu obiektu. Możesz ją umieścić na obiekcie, na którym masz już kolonię. Otrzymujesz 1 flotę handlową.",
+    "1VP per 2 colonies in play.": "Otrzymujesz 1 PZ za każde 2 kolonie w grze.",
+
+    "Spin-off Department": "Spółka Spin Off",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, dobierz kartę.",
+    "Increase your M€ production 2 steps.": "Podnieś swoją produkcję M€ o 2 poziomy.",
+
+    "Sub-zero Salt Fish": "Słonowodne Ryby Zimnolubne",
+    "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
+    "1 VP per 2 Animals on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
+    "Requires -6 C. Decrease any Plant production 1 step.": "Temperatura musi być równa albo wyższa niż -6°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
+
+    "Titan Air-scrapping": "Zagarnianie Atmosfery na Tytanie",
+    "Action: Spend 1 titanium to add 2 floaters here.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
+    "Action: Spend 2 floaters here to increase your TR 1 step.": "Akcja: Wydaj 2 jednostki dryfowców z tej karty, aby podnieść swój WT o 1 poziom.",
+
+    "Titan Floating Launch-pad": "Dryfujące Lądowisko na Tytanie",
+    "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza albo wydaj 1 jednostkę dryfowców z tej karty, aby wykonać akcję handlu z obiektem za darmo.",
+    "Add two floaters to ANY JOVIAN CARD.": "Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
+
+    "Titan Shuttles": "Wahadłowce na Tytanie",
+    "Action: Add 2 floaters to ANY JOVIAN CARD.": "Akcja: Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
+    "Action: Spend any number of floaters here to gain the same number of titanium.": "Akcja: Wydaj dowolną liczbę jednostek dryfowców z tej karty, aby otrzymać tyle samo jednostek tytanu.",
+
+    "Trade Envoys": "Przedstawiciele Handlowi",
+    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, możesz najpierw przesunąć biały znacznik obiektu o 1 pole w prawo na torze kolonii.",
+
+    "Trading Colony": "Kolonia Handlowa",
+    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, możesz najpierw przesunąć biały znacznik obiektu o 1 pole w prawo na torze kolonii.",
+    "Place a colony": "Umieść 1 kolonię na kaflu obiektu.",
+
+    "Urban Decomposers": "Miejscy Reducenci",
+    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Musisz posiadać przynajmniej 1 obszar miasta i 1 kolonię. Podnieś swoją produkcję roślinności o 1 poziom i umieść 2 jednostki mikrobów na dowolnej karcie.",
+
+    "Warp Drive": "Napęd Warp",
+    "Effect: When you play a Space card, you pay 4 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 4 M€ mniej.",
+    "Requires 5 Science tags.": "Musisz posiadać przynajmniej 5 symboli nauki."
+}

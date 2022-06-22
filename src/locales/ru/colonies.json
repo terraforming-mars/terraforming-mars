@@ -1,0 +1,34 @@
+{
+    "Callisto": "Каллисто",
+    "Ceres": "Церера",
+    "Enceladus": "Энцелад",
+    "Europa": "Европа",
+    "Ganymede": "Ганимед",
+    "Io": "Ио",
+    "Luna": "Луна",
+    "Miranda": "Миранда",
+    "Pluto": "Плутон",
+    "Titan": "Титан",
+    "Triton": "Тритон",
+
+    "Select colony tile to remove": "Выберите колонию, которая будет убрана из игры",
+    "Colony Bonus": "Бонус колонии",
+    "Trade Income": "Торговый доход",
+    "Select colony": "Выберите колонию",
+
+    "Trade Income: Gain the indicated production": "Торговый доход: получите данное пр-во",
+
+    "Select one option": "Выберите вариант",
+    "Callisto - (Energy)": "Каллисто - (Энергия)",
+    "Ceres - (Steel)": "Церера - (Сталь)",
+    "Enceladus - (Microbes)": "Энцелад - (Микробы)",
+    "Europa - (Production)": "Европа - (Производство)",
+    "Ganymede - (Plants)": "Ганимед - (Растения)",
+    "Io - (Heat)": "Ио - (Тепло)",
+    "Luna - (MegaCredits)": "Луна - (Доход)",
+    "Miranda - (Animals)": "Миранда - (Животные)",
+    "Pluto - (Cards)": "Плутон - (Карты)",
+    "Titan - (Floaters)": "Титан - (Аэростаты)",
+    "Triton - (Titanium)": "Тритон - (Титан)"
+
+}

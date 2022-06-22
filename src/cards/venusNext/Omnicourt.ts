@@ -1,22 +1,33 @@
-import { IProjectCard } from '../IProjectCard';
-import { Tags } from '../Tags';
-import { CardType } from '../CardType';
-import { Player } from '../../Player';
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class Omnicourt implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.OMNICOURT;
-    public cardType: CardType = CardType.AUTOMATED;
+export class Omnicourt extends Card {
+  constructor() {
+    super({
+      name: CardName.OMNICOURT,
+      cardType: CardType.AUTOMATED,
+      tags: [Tags.BUILDING],
+      cost: 11,
+      tr: {tr: 2},
 
-    public canPlay(player: Player): boolean {
-      return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
-    }
-    
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRatingSteps(2, game);
-      return undefined;
-    }
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      metadata: {
+        cardNumber: '241',
+        renderData: CardRenderer.builder((b) => {
+          b.tr(2);
+        }),
+        description: 'Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.',
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.increaseTerraformRatingSteps(2);
+    return undefined;
+  }
 }

@@ -1,0 +1,304 @@
+.pathfinders_cont {
+	margin: 20px;
+	display: inline-block;
+
+	.table {
+		border-collapse: collapse;
+		border-spacing: 0px;
+	}
+
+	.track {
+		display: flex;
+		padding-left: 50px;
+		width: fit-content;
+		position: relative;
+		background: #ccc;
+		margin-bottom: 10px;
+	}
+
+	.track-numbers {
+		margin-left: 50px;
+		font-family: 'Prototype';
+		letter-spacing: 1px;
+		color: #707070;
+		font-size: 22px;
+	}
+
+	.track-tag {
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+		background-size: 70px;
+		border: 2px solid #000;
+		position: absolute;
+		top: -25px;
+		left: -25px;
+		background-position: -2px;
+	}
+	.track-tag-venus {background-image: url(./assets/tags/venus.png);}
+	.track-tag-earth {background-image: url(./assets/tags/earth.png);}
+	.track-tag-mars {background-image: url(./assets/tags/mars.png);}
+	.track-tag-jovian {background-image: url(./assets/tags/jovian.png);}
+	.track-tag-moon {background-image: url(./assets/tags/moon.png);}
+
+	.track-background-venus {
+		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet8.png");
+	}
+	.track-background-earth {
+		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet3.png");
+	}
+	.track-background-mars {
+		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet4.png");
+	}
+	.track-background-jovian {
+		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet5.png");
+	}
+	.track-background-moon {
+		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet9.png");
+	}
+
+	.highlight {
+    font-weight: bold;
+		background: linear-gradient(transparent,#fff8);
+ 	}
+	td {
+		padding: 0;
+		text-align: center;
+		background: linear-gradient(transparent, #0008);
+	}
+	tr {
+		height: 50px;
+		border: none;
+	}
+
+	table td:nth-child(1) { min-width: 20px; }
+  table td:nth-child(2) { min-width: 20px; } // 0 space
+  table td:nth-child(3) { min-width: 20px; }
+  table td:nth-child(4) { min-width: 45px; }
+  table td:nth-child(5) { min-width: 80px; }
+  table td:nth-child(6) { min-width: 20px; }
+  table td:nth-child(7) { min-width: 100px; } // 5
+  table td:nth-child(8) { min-width: 45px; }
+  table td:nth-child(9) { min-width: 20px; }
+  table td:nth-child(10) { min-width: 80px; }
+  table td:nth-child(11) { min-width: 45px; }
+  table td:nth-child(12) { min-width: 20px; } // 10
+  table td:nth-child(13) { min-width: 80px; }
+  table td:nth-child(14) { min-width: 45px; }
+  table td:nth-child(15) { min-width: 20px; }
+  table td:nth-child(16) { min-width: 80px; }
+  table td:nth-child(17) { min-width: 20px; } // 15
+  table td:nth-child(18) { min-width: 60px; }
+  table td:nth-child(19) { min-width: 45px; }
+  table td:nth-child(20) { min-width: 20px; }
+  table td:nth-child(21) { min-width: 80px; }
+  table td:nth-child(22) { min-width: 45px; } // 20
+  table td:nth-child(23) { min-width: 20px; }
+  table td:nth-child(24) { min-width: 45px; } // 22
+
+.rewards_cont	{
+		display: flex;
+		justify-content: center;
+	}
+
+	.reward {
+		line-height: 20px;
+		float: right;
+	}
+
+	// copied from .greenery-tile-oxygen--M {
+	.greenery {
+			background-image: url(./assets/tiles/greenery.png);
+			background-size: 36px;
+			width: 36px;
+			height: 36px;
+	}
+
+	// copied from .greenery-tile-oxygen--M {
+		.ocean {
+			background-image: url(./assets/tiles/ocean.png);
+			background-size: 36px;
+			width: 36px;
+			height: 42px;
+	}
+
+	// Copied from card-resource-money
+	.reward-3mc {
+		font-family: Prototype;
+		color: black;
+		background-image: url(./assets/resources/megacredit.png);
+		font-weight: normal;
+		font-size: 18px;
+		text-align: center;
+
+		background-size: 36px 36px;
+		height: 36px;
+		width: 36px;
+		line-height: 36px;
+
+		:after {
+			content: "3";
+		}
+	}
+
+	.floater {
+		// copied from card-resource-floater
+		background-image: url(./assets/resources/floater.png);
+		background-size: 36px 36px;
+		height: 36px;
+		width: 36px;
+	}
+
+	// Also copied from cards_v2.less
+	.wild-resource {
+		background-image: url(./assets/resources/wild.png);
+		background-size: 36px 36px;
+		height: 36px;
+		width: 36px;
+	}
+
+	.std-wild-resource {
+		background: url(./assets/resources/wild-std.png) no-repeat;
+		height: 36px;
+		width: 36px;
+		background-size: 36px 36px;
+	}
+	// Also copied from cards_v2.less
+	.card-production-box {
+		font-family: Prototype;
+		font-weight: normal;
+		text-shadow: none;
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		padding: 4px;
+		margin: 0 4px;
+		border-top: 2px solid #dddddd;
+		border-left: 2px solid #dddddd;
+		border-bottom: 2px solid #898989;
+		border-right: 2px solid #898989;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+		background-image: url(./assets/misc/production.png);
+		background-size: cover;
+		.card-production-box-row {
+				display: flex;
+				flex-flow: row;
+				margin-top: 2px;
+				margin-bottom: 2px;
+				.card-production-box-row-item {
+						align-self: center;
+						.card-item-container {
+								margin: 0 !important;
+						}
+				}
+		}
+}
+
+	.delegate {
+		// copied from card-delegate
+		display: inline-block;
+		background-image: url(./assets/misc/delegate.png);
+		width: 24px;
+		height: 30px;
+		background-size: 24px 30px;
+		vertical-align: middle;
+		filter: drop-shadow(0px 0px 1px black);
+		margin-left: 2px;
+		margin-right: 2px;
+	}
+	// Copied from card-resource-money
+	.reward-6mc {
+		font-family: Prototype;
+		color: black;
+		background-image: url(./assets/resources/megacredit.png);
+		font-weight: normal;
+		font-size: 18px;
+		text-align: center;
+
+		background-size: 36px 36px;
+		height: 36px;
+		width: 36px;
+		line-height: 36px;
+
+		:after {
+			content: "6";
+		}
+	}
+
+	// A copy of card-venus-global-requirement
+	.venus-scale {
+		background-image: url(./assets/global-parameters/venus.png);
+		width: 60px;
+		height: 40px;
+		background-size: 60px 40px;
+		color: #0000;
+  }
+
+	// Copied from somewhere, I don't know.
+	.card {
+		background: url(./assets/resources/card.png);
+		height: 40px;
+		width: 30px;
+		background-size: 30px 40px;
+		vertical-align: middle;
+	}
+
+	.card-points {
+			font-family: Prototype;
+			font-size: 18px;
+			font-weight: normal;
+			justify-content: center;
+			text-shadow: 0 0 2px darkorange;
+			width: 34px;
+			height: 34px;
+			line-height: 34px;
+			text-align: center;
+			border-radius: 6px;
+			border-top: 2px solid #dddddd;
+			border-left: 2px solid #dddddd;
+			border-bottom: 2px solid #898989;
+			border-right: 2px solid #898989;
+			background-color: #cda282;
+			background: linear-gradient(#cc8b00, #805700, #805700);
+			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+	}
+}
+
+.vp1 {
+	:after {
+		content: "1";
+	}
+}
+
+.vp2 {
+	:after {
+		content: "2";
+	}
+}
+
+.card-tile-wetlands {
+	background: url("./assets/pathfinders/wetlands-tile.png");
+	width: 40px;
+	height: 47px;
+	background-size: 40px;
+	background-repeat: no-repeat;
+}
+
+.board-space-tile--wetlands {
+	background: url("./assets/pathfinders/wetlands-board-tile.png");
+}
+
+.board-space-tile--red-city {
+	background: url("./assets/pathfinders/red-city-board-tile.png");
+}
+
+.board-space-tile--martian-nature-wonders {
+	background: url("./assets/pathfinders/martian-nature-wonders.png");
+}
+
+.card-planetary-track {
+	background: url("./assets/pathfinders/planetary-track.png");
+	width: 50px;
+	height: 50px;
+	background-size: 50px, 50px;
+}

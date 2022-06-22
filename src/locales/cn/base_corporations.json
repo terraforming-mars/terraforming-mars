@@ -1,0 +1,82 @@
+{
+  "Beginner Corporation": "新手公司",
+  "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "开始游戏时拥有42 M€。在初始设置时，你无须选择，而是免费保留这10张牌。",
+
+  "credicor": "信誉债权",
+  "CrediCor": "信誉债权",
+  "CREDICOR": "信誉债权",
+  "You start with 57 M€.": "起始获得57 M€。",
+  "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "效果：当你打出一张20 M€以上的卡,或执行一个20 M€以上的标准行动时，你获得4 M€。",
+  "Action: Use a blue card action that has already been used this generation": "行动：执行一次本时代已经使用过的蓝卡行动。",
+
+  "ECOLINE": "生态路线",
+  "ecoline": "生态路线",
+  "EcoLine": "生态路线",
+  "You start with 2 plant production, 3 plants, and 36 M€.": "起始获得36 M€,提升植物产量2级，获得3个植物资源。",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "效果：你可以用7个植物资源(而不是8)来放置一个森林板块。",
+
+  "HELION": "海利昂",
+  "Helion": "海利昂",
+  "helion": "海利昂",
+  "You start with 3 heat production and 42 M€.": "起始获得42 M€，提升热能产量3级。",
+  "Effect: You may use heat as M€. You may not use M€ as heat.": "效果：你可以用热能资源代替M€使用，但不用用M€代替热能资源使用。",
+
+  "INTERPLANETARY": "星际",
+  "CINEMATICS": "影音",
+  "Interplanetary Cinematics": "星际影音",
+  "You start with 20 steel and 30 M€.": "起始获得30 M€和20个钢铁资源。",
+  "Effect: Each time you play an event, you gain 2 M€.": "效果：每次你打出事件卡时，获得2 M€。",
+
+  "INVENTRIX": "发明矩阵",
+  "Inventrix": "发明矩阵",
+  "As your first action in the game, draw 3 cards. Start with 45 M€.": "起始获得45 M€。作为你的第一个行动，抽3张牌。",
+  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "效果：你打牌时的 温度/氧气浓度/海洋 要求 +2级或-2级。",
+  "Draw 3 cards":"抽三张牌",
+
+  "PhoboLog": "火卫一日志",
+  "Phobolog": "火卫一日志",
+  "PHOBOLOG": "火卫一日志",
+  "You start with 10 titanium and 23 M€.": "起始获得23 M€和10个钛资源。",
+  "Effect: Your titanium resources are each worth 1 M€ extra.": "效果：你的钛资源价值额外+1。",
+
+  "THARSIS": "塔西斯",
+  "REPUBLIC": "共和国",
+  "Tharsis Republic": "塔西斯共和国",
+  "You start with 40 M€. As your first action in the game, place a city tile.": "起始获得40 M€。作为你的第一个行动，放置一个城市板块。",
+  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "效果：每当一个城市板块放置到火星上,提升你的M€产量1级。每当你放置一个城市板块，获得3 M€。",
+  "You start with 1 titanium production, and 38 M€.": "起始获得38 M€，提升钛产量1级。",
+
+  "THORGATE": "雷神之门",
+  "Thorgate": "雷神之门",
+  "You start with 1 energy production and 48 M€.": "起始获得48 M€，提升电力产量1级。",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "效果：每当你打出带有电力标志,或执行标准行动中建立发电厂行动时，均可少支付3 M€。",
+
+  "UNITED": "联合",
+  "NATIONS": "国",
+  "MARS": "火星",
+  "INITIATIVE": "计划",
+  "UNITED NATIONS MARS INITIATIVE": "联合国火星计划",
+  "United Nations Mars Initiative": "联合国火星计划",
+  "UNMI": "联合国火星计划",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "行动：如果你的改造度在本时代有过提升，你可以支付3 M€来提升一点改造度。",
+  "You start with 40 M€.": "起始获得40 M€。",
+
+  "MINING": "矿业",
+  "GUILD": "协会",
+  "Mining Guild": "矿业协会",
+  "You start with 30 M€, 5 steel and 1 steel production.": "起始获得30 M€,5个钢铁资源，提升钢铁产量1级。",
+  "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "效果：每当你因放置一个板块而获得钢铁资源或钛资源时，提升你的钢铁产量1级。",
+  "You start with 40 M€. As your first action add a colony tile.": "起始获得40 M€。作为你的第一个行动，将一个殖民地板块加入游戏。",
+  "Effect: When you get a new type of tag in play (event cards do not count), increase your M€ production 1 step.": "当你获得一个新的标志时(不计算事件卡)，提升你的M€产量1级。",
+
+  "TERACTOR": "泰拉引力",
+  "Teractor": "泰拉引力",
+  "You start with 60 M€.": "起始获得60 M€。",
+  "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "效果：当你打出带有地球标志的牌时，你少支付3 M€。",
+
+  "SATURN": "木星",
+  "SYSTEMS": "系统",
+  "Saturn Systems": "木星系统",
+  "You start with 1 titanium production and 42 M€.": "你起始获得42 M€和提升钛产量1级。",
+  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "效果：每次当有木星标志牌被打出时(包括本牌)，提升你的M€产量1级。"
+}

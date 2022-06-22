@@ -1,20 +1,38 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {Resources} from '../../common/Resources';
+import {BuildColony} from '../../deferredActions/BuildColony';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
 
-export class MiningColony implements IProjectCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.MINING_COLONY;
-    public cardType: CardType = CardType.AUTOMATED;
+export class MiningColony extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 20,
+      tags: [Tags.SPACE],
+      name: CardName.MINING_COLONY,
+      cardType: CardType.AUTOMATED,
 
-    public play(player: Player, game: Game) {
-      game.addColonyInterrupt(player, false, "Select colony for Mining Colony");
-      player.setProduction(Resources.TITANIUM); 
-      return undefined;
-    }
+      metadata: {
+        cardNumber: 'C25',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.titanium(1)).colonies(1);
+        }),
+        description: 'Increase your titanium production 1 step. Place a colony.',
+      },
+    });
+  }
+
+  public override canPlay(player: Player): boolean {
+    return player.hasAvailableColonyTileToBuildOn();
+  }
+
+  public play(player: Player) {
+    player.game.defer(new BuildColony(player, false, 'Select colony for Mining Colony'));
+    player.addProduction(Resources.TITANIUM, 1);
+    return undefined;
+  }
 }

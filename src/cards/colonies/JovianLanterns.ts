@@ -1,41 +1,61 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { IResourceCard } from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardResource} from '../../common/CardResource';
+import {IResourceCard} from '../ICard';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
+import {CardRenderer} from '../render/CardRenderer';
 
-export class JovianLanterns implements IProjectCard, IResourceCard {
-    public cost: number = 20;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: CardName = CardName.JOVIAN_LANTERNS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public resourceCount: number = 0;
+export class JovianLanterns extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cost: 20,
+      tags: [Tags.JOVIAN],
+      name: CardName.JOVIAN_LANTERNS,
+      cardType: CardType.ACTIVE,
 
-    public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.JOVIAN) >= 1;
-    }
+      resourceType: CardResource.FLOATER,
+      victoryPoints: VictoryPoints.resource(1, 2),
+      tr: {tr: 1},
+      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
 
-    public canAct(player: Player): boolean {
-        return player.titanium > 0;
-    }
+      metadata: {
+        cardNumber: 'C18',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
+            eb.titanium(1).startAction.floaters(2);
+          }).br;
+          b.tr(1).floaters(2).asterix().br;
+          b.vpText('1 VP per 2 floaters here.');
+        }),
+        description: {
+          text: 'Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.',
+          align: 'left',
+        },
+      },
+    });
+  }
 
-    public action(player: Player) {
-        player.titanium--;
-        this.resourceCount += 2;
-        return undefined;
-    }
+  public override resourceCount: number = 0;
 
-    public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, this);
-      player.increaseTerraformRating(game);
-      return undefined;
-    }
+  public canAct(player: Player): boolean {
+    return player.titanium > 0;
+  }
 
-    public getVictoryPoints(): number {
-        return Math.floor(this.resourceCount / 2);
-    }
+  public action(player: Player) {
+    player.titanium--;
+    player.addResourceTo(this, 2);
+    return undefined;
+  }
+
+  public play(player: Player) {
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
+    player.increaseTerraformRating();
+    return undefined;
+  }
 }

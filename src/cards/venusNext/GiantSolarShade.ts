@@ -1,17 +1,30 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class GiantSolarShade implements IProjectCard {
-    public cost: number = 27;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.VENUS];
-    public name: CardName = CardName.GIANT_SOLAR_SHADE;
-    public cardType: CardType = CardType.AUTOMATED;
+export class GiantSolarShade extends Card {
+  constructor() {
+    super({
+      name: CardName.GIANT_SOLAR_SHADE,
+      cardType: CardType.AUTOMATED,
+      tags: [Tags.SPACE, Tags.VENUS],
+      cost: 27,
+      tr: {venus: 3},
 
-    public play(player: Player, game: Game) {
-        return game.increaseVenusScaleLevel(player, 3);
-    }
+      metadata: {
+        cardNumber: '229',
+        renderData: CardRenderer.builder((b) => b.venus(3)),
+        description: 'Raise Venus 3 steps.',
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 3);
+    return undefined;
+  }
 }
+

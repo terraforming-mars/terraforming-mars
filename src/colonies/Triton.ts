@@ -1,22 +1,20 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { Game } from '../Game';
+import {Colony} from './Colony';
+import {ColonyName} from '../common/colonies/ColonyName';
+import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
+import {Resources} from '../common/Resources';
 
-export class Triton extends Colony implements IColony {
-    public name = ColonyName.TRITON;
-    public description: string = "Titanium";
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
-        player.titanium += Math.max(this.trackPosition - 1, 1);
-        this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player, game);
-        player.titanium += 3;
-        return undefined;
-    }
-    public giveTradeBonus(player: Player): void {
-        player.titanium++;
-    }    
+export class Triton extends Colony {
+  constructor() {
+    super({
+      name: ColonyName.TRITON,
+      buildType: ColonyBenefit.GAIN_RESOURCES,
+      buildQuantity: [3, 3, 3],
+      buildResource: Resources.TITANIUM,
+      tradeType: ColonyBenefit.GAIN_RESOURCES,
+      tradeQuantity: [0, 1, 1, 2, 3, 4, 5],
+      tradeResource: Resources.TITANIUM,
+      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
+      colonyBonusResource: Resources.TITANIUM,
+    });
+  }
 }

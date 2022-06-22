@@ -1,0 +1,15 @@
+{
+    "You start with 1 plant production, 1 M€ production and 40 M€.": "Rozpoczynasz grę z 40 M€ oraz 1 dodatkowym poziomem produkcji M€ i roślinności",
+    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Efekt trwały: Na koniec gry otrzymujesz -2 / 0 / 1 / 2 PZ za następującą liczbę RODZAJÓW SYMBOLI: 0 / 1-2 / 3-4 / 5+.",
+
+    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Rozpoczynasz grę z 39 M€. Otrzymujesz 1 jednostkę stali i tytanu. Podczas pierwszej akcji dobierz niebieską kartę.",
+    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Akcja: Odwróć i odrzuć zagraną aktywną (niebieską) kartę, żeby otrzymać tyle WT, ile PZ miała odrzucona karta. Dobierz 2 karty albo wydaj 3 M€, żeby dobrać niebieską kartę.",
+
+    "You start with 32 M€. As your first action, place two delegates in one party.": "Rozpoczynasz grę z 32 M€. Podczas pierwszej akcji umieść dwóch delegatów w wybranej partii.",
+    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Efekt trwały: Otrzymujesz 1 punkt wpływów. Gdy korzystasz z akcji Lobbingu, żeby przesunąć znacznik delegata z rezerwy delegatów, płacisz za to 2 M€ mniej.",
+
+    "You start with 38 M€ and 1 Energy production.": "Rozpoczynasz grę z 38 M€ i 1 dodatkowym poziomem produkcji energii.",
+    "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Akcja: Ponownie zagraj wykorzystaną kartę wydarzenia dowolnego gracza, płacąc za nią wyłącznie za pomocą M€ (wliczając wszelkie zniżki), a następnie usuń ją z gry.",
+
+    "You start with 120 M€. Lower your TR 7 steps.": "Rozpoczynasz grę z 120 M€. Obniż swój WT o 7 poziomów."
+}

@@ -1,56 +1,94 @@
-import { IProjectCard } from "../IProjectCard";
-import { IActionCard, ICard, IResourceCard } from '../ICard';
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { OrOptions } from "../../inputs/OrOptions";
-import { SelectOption } from '../../inputs/SelectOption';
-import { Game } from '../../Game';
-import { MAX_VENUS_SCALE } from '../../constants';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardResource} from '../../common/CardResource';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {MAX_VENUS_SCALE} from '../../common/constants';
+import {SelectCard} from '../../inputs/SelectCard';
+import {CardName} from '../../common/cards/CardName';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: CardName = CardName.THERMOPHILES;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.MICROBE;
-    public resourceCount: number = 0;
-    public canPlay(player: Player, game: Game): boolean {
-        return game.getVenusScaleLevel() >= 6 - (2 * player.getRequirementsBonus(game, true));
+export class Thermophiles extends Card implements IActionCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.THERMOPHILES,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.VENUS, Tags.MICROBE],
+      cost: 9,
+      resourceType: CardResource.MICROBE,
+
+      requirements: CardRequirements.builder((b) => b.venus(6)),
+      metadata: {
+        cardNumber: '253',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 Microbe to ANY Venus CARD.', (eb) => {
+            eb.empty().startAction.microbes(1, {secondaryTag: Tags.VENUS});
+          }).br;
+          b.or().br;
+          b.action('Spend 2 Microbes here to raise Venus 1 step.', (eb) => {
+            eb.microbes(2).startAction.venus(1);
+          });
+        }),
+        description: 'Requires Venus 6%',
+      },
+    });
+  }
+  public override resourceCount: number = 0;
+
+  public play() {
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    const venusMicrobeCards = player.getResourceCards(CardResource.MICROBE).filter((card) => card.tags.includes(Tags.VENUS));
+    const canRaiseVenus = this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
+
+    // only 1 valid target and cannot remove 2 microbes - add to itself
+    if (venusMicrobeCards.length === 1 && !canRaiseVenus) {
+      player.addResourceTo(this, {log: true});
+      return undefined;
     }
-    public play() {
+
+    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+
+    const spendResource = new SelectOption('Remove 2 microbes to raise Venus 1 step', 'Remove microbes', () => {
+      player.removeResourceFrom(this, 2);
+      player.game.increaseVenusScaleLevel(player, 1);
+      return undefined;
+    });
+
+    const addResource = new SelectCard(
+      'Select a Venus card to add 1 microbe',
+      'Add microbe',
+      venusMicrobeCards,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
+      },
+    );
+
+    const addResourceToSelf = new SelectOption('Add a microbe to this card', 'Add microbe', () => {
+      player.addResourceTo(venusMicrobeCards[0], {log: true});
+      return undefined;
+    });
+
+    if (canRaiseVenus) {
+      if (player.canAfford(0, {tr: {venus: 1}})) {
+        opts.push(spendResource);
+      }
+    } else {
+      if (venusMicrobeCards.length === 1) return addResourceToSelf;
+      return addResource;
     }
-    public canAct(): boolean {
-        return true;
-    }   
-    public action(player: Player, game: Game) {
-        const microbeCards = player.getResourceCards(ResourceType.MICROBE).filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
-        var opts: Array<SelectOption | SelectCard<ICard>> = [];
-        const addResource = new SelectCard(
-            'Select a Venus card to add 1 microbe',
-            microbeCards,
-            (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 1);
-              return undefined;
-            }
-        );
 
-        const spendResource = new SelectOption("Remove 2 microbes to raise Venus 1 step", () => {
-            player.removeResourceFrom(this, 2);
-            game.increaseVenusScaleLevel(player, 1);
-            return undefined;
-        });
+    venusMicrobeCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
 
-        opts.push(addResource);
-
-        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
-            opts.push(spendResource);
-        } else return addResource;
-
-        return new OrOptions(...opts);
-    }
+    return new OrOptions(...opts);
+  }
 }

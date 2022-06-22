@@ -1,24 +1,37 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardResource} from '../../common/CardResource';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class NitrogenFromTitan implements IProjectCard {
-    public cost: number = 25;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: CardName = CardName.NITROGEN_FROM_TITAN;
-    public cardType: CardType = CardType.AUTOMATED;
+export class NitrogenFromTitan extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 25,
+      tags: [Tags.JOVIAN, Tags.SPACE],
+      name: CardName.NITROGEN_FROM_TITAN,
+      cardType: CardType.AUTOMATED,
+      tr: {tr: 2},
+      victoryPoints: 1,
 
-    public play(player: Player, game: Game) {
-      player.increaseTerraformRatingSteps(2, game);
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
-      return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
-    }
+      metadata: {
+        cardNumber: 'C28',
+        renderData: CardRenderer.builder((b) => {
+          b.tr(2).floaters(2, {secondaryTag: Tags.JOVIAN});
+        }),
+        description: 'Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.',
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.increaseTerraformRatingSteps(2);
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+    return undefined;
+  }
 }
 

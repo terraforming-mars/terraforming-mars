@@ -1,42 +1,48 @@
-import { expect } from "chai";
-import { AerialLenses } from "../../../src/cards/turmoil/AerialLenses";
-import { Player } from "../../../src/Player";
-import { Color } from "../../../src/Color";
-import { Resources } from "../../../src/Resources";
-import { BoardName } from '../../../src/BoardName';
-import { GameOptions, Game } from '../../../src/Game';
-import { PartyName } from "../../../src/turmoil/parties/PartyName";
+import {expect} from 'chai';
+import {AerialLenses} from '../../../src/cards/turmoil/AerialLenses';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/common/Resources';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
-describe("AerialLenses", function () {
-    it("Should play", function () {
-        const card = new AerialLenses();
-        const player = new Player("test", Color.BLUE, false);
-        const gameOptions = {
-            draftVariant: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            promoCardsOption: false,
-            startingCorporations: 2,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
-        const game = new Game("foobar", [player,player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let kelvinists = game.turmoil.getPartyByName(PartyName.KELVINISTS);
-            if (kelvinists !== undefined) {
-                kelvinists.delegates.push(player, player);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-        } 
+describe('AerialLenses', function() {
+  let card : AerialLenses; let player : Player; let player2 : Player; let game : Game;
 
-        card.play(player, game);
-        expect(player.getProduction(Resources.HEAT)).to.eq(2);
-    });
+  beforeEach(function() {
+    card = new AerialLenses();
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
+
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+  });
+
+  it('Can play', function() {
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+
+    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;
+    kelvinists.delegates.push(player.id, player.id);
+    expect(player.canPlayIgnoringCost(card)).is.true;
+  });
+
+  it('Should play without plants', function() {
+    card.play(player);
+    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    const input = game.deferredActions.peek()!.execute();
+    expect(input).is.undefined;
+  });
+
+  it('Should play with plants', function() {
+    player2.plants = 5;
+    card.play(player);
+    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(game.deferredActions).has.lengthOf(1);
+
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    orOptions.options[0].cb();
+    expect(player2.plants).to.eq(3);
+  });
 });

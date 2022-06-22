@@ -1,0 +1,84 @@
+{
+    "Desperate Measures": "Verzweifelte Maßnahmen",
+    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "EFFEKT: Platziere einen bronzenen Würfel auf einem Staubsturm und erhöhe Sauerstoff um 1 Schritt, oder platziere einen bronzenen Würfel auf ein Erosionsplättchen und erhöhe Temperatur um 1 Schritt. Das Gefahrenplättchen darf nicht entfernt werden.",
+
+    "Mining Area": "Bergbaugebiet",
+    "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Platziere eines dieser Plättchen auf einem Gebiet mit Stahl- oder Titan-Platzierungsbonus, welches an ein eigenes Plättchen angrenzt. Dieses Plättchen gewährt einen Nachbarschaftsbonus derselben Ressource, wie des Gebiets. Erhöhe deine Produktion dieser Ressource dann um 1.",
+    
+    "Industrial Center": "Industriezentrum",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "AKTION: Bezahle 7 M€, um deine Stahl-Produktion um 1 zu erhöhen.",
+    "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "Platziere dieses Plättchen angrenzend an ein Stadtplättchen. Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 Stahl.",
+
+    "Marketing Experts": "Marketing-Experten",
+    "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "EFFEKT: Wenn ein Nachbarschaftsbonus von einem deiner Plättchen eingesammelt wird, erhälst Du 1 M€.",
+    "Increase your M€ production 1 step.": "Erhöhe deine M€-Produktion um 1 Schritt.",
+
+    "Bioengineering Enclosure": "Bioengineering-Gehäuse",
+    "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "AKTION: Entferne 1 Tier von DIESER Karte, um 1 Tier einer ANDEREN Karte hinzuzufügen.",
+    "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Erfordert 1 Wissenschaftssymbol. Füge dieser Karte 2 Tiere hinzu. Andere Spieler können keine Tiere von dieser Karte entfernen.",
+
+    "Butterfly Effect": "Schmetterlings-Effekt",
+    "Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "Erhalte 1 TW. Bewege jeden individuellen Gefahrenmarker 1 Schritt nach oben oder unten.",
+    "All hazard markers": "Alle Gefahrenmarker",
+
+    "Geological Survey": "Geologische Erhebung",
+    "Any max 5 Greeneries": "Max. 5 Grünflächen",
+    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "EFFEKT: Wenn die Platzierung eines Plättchens AUF DEM MARS dir Stahl, Titan oder Wärme gewährt, erhalte eine zusätzliche Ressource desselben Typs.",
+    "Requires 5 or fewer greeneries on Mars.": "Erfordert 5 oder weniger Grünflächen auf dem Mars.",
+
+    "Ecological Survey": "Ökologische Erhebung",
+    "Any 3 Greeneries": " 3 Grünflächen",
+    "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "EFFEKT: Wenn die Platzierung eines Plättchens dir Pflanzen, Tiere oder Mikroben gewährt, erhalte eine zusätzliche Ressource desselben Typs.",
+    "Requires 3 greeneries on Mars.": "Erfordert 3 Grünflächen auf dem Mars.",
+
+    "Mining Rights": "Schürfrechte",
+    "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Platziere eines dieser Plättchen auf einem Gebiet mit Stahl- oder Titan-Platzierungsbonus. Dieses Plättchen gewährt einen Nachbarschaftsbonus derselben Ressource. Erhöhe deine Produktion dieser Ressource dann um 1.",
+
+    "Natural Preserve": "Naturpark",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "Sauerstoffgehalt muss 4% oder weniger sein. Platziere das Plättchen NICHT neben ein anderes Plättchen. Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 M€. Erhöhe deine M€-Produktion um 1.",
+
+    "Ocean Sanctuary": "Ozean-Zuflucht",
+    "1 VP per animal on this card.": "1 SP pro Tier auf dieser Karte.",
+    "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "Benötigt 5 Ozeane. Platziere dieses Plättchen auf einem bereits platzierten Ozeanplättchen. Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 Tier. Füge dieser Karte 1 Tier hinzu.",
+
+    "Nuclear Zone": "Nukleare Zone",
+    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "Erhöhe die Temperatur um 2 Schritte. Platziere dieses Plättchen. Spieler müssen zusätzlich 2 M€ zahlen, wenn sie ein Plättchen mit ihrer Markierung neben die Nukleare Zone platzieren.",
+
+    "Restricted Area": "Sperrgebiet",
+    "Action: Spend 2 M€ to draw a card.": "AKTION: Bezahle 2 M€, um 1 Karte zu ziehen.",
+    "Place this tile which grants an ADJACENCY BONUS of 1 card.": "Platziere dieses Plättchen, welches einen Nachbarschaftsbonus von 1 Karte gewährt.",
+
+    "Solar Farm": "Solarpark",
+    "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.": "Platziere dieses Plättchen mit einem Nachbarschaftsbonus von 2 Energie. Erhöhe Deine Energieproduktion um 1 Schritt für jedes Pflanzensymbol auf dem Feld, auf das du dieses Plättchen legst.",
+
+    "Ecological Zone": "Naturschutzgebiet",
+    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "EFFEKT: Wenn du ein Tier- oder Pflanzensymbol spielst (inklusive diesem), füge dieser Karte ein Tier hinzu.",
+    "the tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "Das Plättchen gewährt einen Nachbarschaftsbonus von 1 Tier. 1 SP für jedes zweite Tier auf dieser Karte.",
+    "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Erfordert, dass DU im Besitz eines Grünflächenplättchens bist. Platziere dieses Plättchen neben einer BELIEBIGEN Grünfläche.",
+
+    "Bio-Fertilizer Facility": "Bio-Dünger-Anlage",
+    "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "Erfordert 1 Wissenschaftssymbol. Erhöhe deine Pflanzenproduktion um 1. Füge einer beliebigen Karte bis zu 2 Mikroben hinzu. Platziere dieses Plättchen, welches einen Nachbarschaftsbonus von 1 Pflanze und 1 Mikrobe gewährt.",
+
+    "Metallic Asteroid": "Metallischer Asteroid",
+    "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "Erhöhe die Temperatur um 2 °C und erhalte 1 Titan. Entferne bis zu 4 Pflanzen eines beliebigen Spielers. Platziere dieses Plättchen, welches einen Nachbarschaftsbonus von 1 Titan gewährt.",
+
+    "Ocean Farm": "Ozeanfarm",
+    "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "Erforder 4 Ozeanplättchen. Erhöhe deine Wärme- und Pflanzen-Produktion um 1. Platziere dieses Plättchen auf ein bereits platziertes Ozeanplättchen. Dieses Plättchen gewährt einen Nachbarschaftsbonus von 1 Pflanze.",
+
+    "Commercial District": "Geschäftsviertel",
+    "1 VP per adjacent city tile.": "1 SP pro angrenzendem Stadtplättchen.",
+    "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Platziere dieses Plättchen, welches einen Nachbarschaftsbonus von 2 M€ gewährt. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 4.",
+
+    "Ocean City": "Ozean-Stadt",
+    "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Erfordert 6 Ozeanplättchen. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3. Platziere dieses Plättchen auf einem bereites platzierten Ozeanplättchen. IGNORIERE DIE NORMALEN PLATZIERUNGSBEDINGUNGEN. Dieses Plättchen zählt sowohl als Stadt als auch als Ozean.",
+
+    "Lava Flows": "Lavaflüsse",
+    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "Erhöhe die Temperatur um 4 °C. Platziere dieses Plättchen entweder auf Tharsis Tholus oder Ascraeus Mons oder Pavonis Mons oder Arsia Mons. Dieses Plättchen gewährt einen Nachbarschaftsbonus von 2 Wärme.",
+
+    "Mohole Area": "Mohole-Bohrung",
+    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "Erhöhe deine Wärme-Produktion um 4. Platziere dieses Plättchen auf einem für Ozeane reserviertem Gebiet. Dieses Plättchen gewährt einen Nachbarschaftsbonus von 2 Wärme.",
+
+    "Capital": "Hauptstadt",
+    "1 additional VP for each ocean tile adjacent to this city tile.": "1 SP je Ozeanplättchen, das an dieses Stadtplättchen angrenzt.",
+    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "Erfordert 4 Ozeanplättchen. Platziere dieses Plättchen mit einem Nachbarschaftsbonus von 2M€. Senke deine Energie-Produktion um 2 und erhöhe deine M€-Produktion um 5."
+}

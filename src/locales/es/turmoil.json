@@ -1,0 +1,41 @@
+{
+  "Turmoil": "Conflictos",
+  "Send a delegate in an area (from lobby)": "Enviar delegado a 1 partido (desde el Cabildo)",
+  "Send a delegate in an area (5 M€)": "Enviar delegado a un partido (5 M€)",
+  "Policies": "Políticas de Gobierno",
+  "No ruling Policy": "Sin política de Gobierno",
+
+  "Mars First": "Marte Primero",
+  "Scientists": "Científicos",
+  "Unity": "Unidad",
+  "Kelvinists": "Kelvinistas",
+  "Reds": "Los Rojos",
+  "Greens": "Los Verdes",
+
+  "mars first": "Marte Primero",
+  "scientists": "Científicos",
+  "unity": "Unidad",
+  "kelvinists": "Kelvinistas",
+  "reds": "Los Rojos",
+  "greens": "Los Verdes",
+
+  "Chairman": "Presidente",
+  "Party leader": "Líder dle partido",
+  "2 Party leaders": "2 líderes del partido",
+
+  "Mars First - (All players receive 1 M€ for each Building tag they have.)": "Marte Primero - (Cada jugador recibe 1 M€ por cada símbolo de edificio que posean.)",
+  "Scientists - (All players receive 1 M€ for each Science tag they have.)": "Científicos - (Cada jugador recibe 1 M€ por cada símbolo de ciencia que tenga.)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "Unidad - (Cada jugador recibe 1 M€ por cada símbolo de Venus, Tierra y Joviano que tenga.)",
+  "Kelvinists - (All players receive 1 M€ for each Heat production they have.)": "Kelvinistas - (Cada jugador recibe 1 M€ por cada nivel de producción de calor que tenga.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "Los Rojos - (El jugador con menos VT gana 1 VT. Los empates favorecen a todos. En solitario, recibes 1 VT si tienes un VT de 20 o menos.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "Los Verdes - (Todos los jugadores reciben  1 M€ por cada símbolo de planta, microbio y animal que tengan.)",
+
+
+  "Mars First (Focused on Martian development and independence.)":"Marte Primero (Centrados en el desarrollo marciano y la independencia.)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "Científicos (La tecnología es la puerta hacia el futuro y los científicos harán lo necesario para abrirla.)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "Unidad (Quiere ver propsperar la humanidad en todo el Sistema Solar.)",
+  "Greens (Want to see a new Earth as soon as possible.)": "Los Verdes (Quieren ver un nuevo planeta Tierra tan pronto como sea posible.)",
+  "Reds (Wishes to preserve the red planet.)": "Los Rojos (Desean preservar el planeta rojo. Lo están pasando mal intentándolo.)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "Kelvinistas (Luchan por una rápida terraformación, a menudo con una estrategia agresiva de calor.)"
+
+}

@@ -1,18 +1,33 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {Resources} from '../../common/Resources';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {digit} from '../Options';
 
-export class SolarReflectors implements IProjectCard {
-    public cost: number = 23;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.SOLAR_REFLECTORS;
-    public cardType: CardType = CardType.AUTOMATED;
+export class SolarReflectors extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 23,
+      tags: [Tags.SPACE],
+      name: CardName.SOLAR_REFLECTORS,
+      cardType: CardType.AUTOMATED,
 
-    public play(player: Player) {
-      player.setProduction(Resources.HEAT, 5);  
-      return undefined;
-    }
+      metadata: {
+        cardNumber: 'C38',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.heat(5, {digit}));
+        }),
+        description: 'Increase your heat production 5 steps.',
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.addProduction(Resources.HEAT, 5);
+    return undefined;
+  }
 }

@@ -1,34 +1,18 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { Game } from '../Game';
-import { ResourceType } from '../ResourceType';
+import {Colony} from './Colony';
+import {ColonyName} from '../common/colonies/ColonyName';
+import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
+import {CardResource} from '../common/CardResource';
 
-export class Miranda extends Colony implements IColony {
-    public name = ColonyName.MIRANDA;
-    public description: string = "Animals";
-    public isActive = false;
-    public resourceType = ResourceType.ANIMAL;
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
-        let animals: number = 0;
-        if (this.trackPosition < 3) {
-            animals = 1;
-        } else if (this.trackPosition < 5) {
-            animals = 2;
-        } else {
-            animals = 3;
-        }
-        game.addResourceInterrupt(player, ResourceType.ANIMAL, animals, undefined);
-        this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player, game);
-        game.addResourceInterrupt(player, ResourceType.ANIMAL, 1, undefined);
-        return undefined;
-    }
-    public giveTradeBonus(player: Player, game: Game): void {
-        player.cardsInHand.push(
-            game.dealer.dealCard());
-    }    
+export class Miranda extends Colony {
+  public override isActive = false;
+  constructor() {
+    super({
+      name: ColonyName.MIRANDA,
+      resourceType: CardResource.ANIMAL,
+      buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
+      tradeType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
+      tradeQuantity: [0, 1, 1, 2, 2, 3, 3],
+      colonyBonusType: ColonyBenefit.DRAW_CARDS,
+    });
+  }
 }

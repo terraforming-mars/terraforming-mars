@@ -1,0 +1,21 @@
+{
+    "Aphrodite": "Aphrodite",
+    "You start with 1 plant production and 47 M€.": "Comienza con 47 M€ y 1 en producción de plantas.",
+    "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "Efecto: cada vez que la escala de Venus aumente 1 nivel, obtienes 2 M€.",
+
+    "Celestic": "Celestic",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Comienza con 42 M€. Como primera acción, muestra cartas del mazo hasta que hayas revelado 2 cartas con un icono de flotador. Añade esas dos cartas a tu mano y descarta el resto. 1 PV por cada 3 flotadores en esta carta.",
+    "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Acción: añade 1 flotador a CUALQUIER carta.",
+
+    "Manutech": "Manutech",
+    "You start with 1 steel production, and 35 M€.": "Comienza con 1 en producción de acero y 35 M€.",
+    "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "Efecto: por cada nivel que aumentes la producción de un recurso, incluyendo este, también obtienes ese recurso.",
+
+    "Morning Star Inc": "Morning Star Inc",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Comienza con 50 M€. Como primera acción, muestra cartas del mazo hasta que hayas revelado 3 cartas con el símbolo de Venus. Añádelas a tu mano y descarta el resto.",
+    "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "Efecto: tus requisitos en la escala de Venus son +/- 2 niveles, a tu elección en cada caso.",
+
+    "Viron": "Viron",
+    "You start with 48 M€.": "Comienza con 48 M€.",
+    "Action: Use a blue card action that has already been used this generation.": "Acción: usa la acción de una carta azul que ya hayas usado en esta generación."
+}

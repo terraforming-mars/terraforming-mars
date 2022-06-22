@@ -1,0 +1,23 @@
+{
+    "Buffer Gas": "Gaz buforowy",
+    "(Spend 16 M€ to increase your TR 1 step. Solo games only.)": "Wydaj 16 M€, aby podnieść WT o 1 poziom. Tylko w grach solo.",
+    "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)": "Wydaj 25 M€, aby umieścić na planszy obszar miasta oraz podnieść swoją produkcję M€ o 1 poziom.",
+    "(Spend 17 M€ to place a colony.)": "Wydaj 17 M€, aby umieścić kolonię.",
+    "(Spend 23 M€ to place a greenery tile and raise oxygen 1 step.)": "Wydaj 23 M€, aby umieścić na planszy obszar zieleni oraz podnieść Poziom Tlenu o 1 poziom.",
+    "(Spend 11 M€ to increase your Energy production 1 step.)": "Wydaj 11 M€, aby podnieść swoją produkcję energii o 1 poziom.",
+    "Sell Patents": "Sprzedaj patenty",
+    "Sell patents": "Sprzedaj patenty",
+    "(Discard any number of cards to gain that amount of M€.)": "Odrzuć z ręki dowolną liczbę kart, aby uzyskać taką samą liczbę M€",
+    "asteroid": "asteroida",
+    "(Spend 14 M€ to raise temperature 1 step.)": "Wydaj 14 M€, aby podnieść Temperaturę o 1 poziom.",
+    "Air Scrapping": "Uzdatnianie powietrza",
+    "(Spend 15 M€ to raise Venus 1 step.)": "Wydaj 14 M€, aby podnieść terraformację Wenus o 1 poziom",
+    "(Spend 18 M€ to place an ocean tile.)": "Wydaj 18 M€, aby położyć obszar oceanu na planszy.",
+
+    "Build Moon Colony": "Zbuduj kolonię na Księżycu",
+    "(Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "(Wydaj 22 M€ i 1 Tytan, aby wybudować kolonię na Księżycu i podnieść produkcję M€ o 1 poziom.)",
+    "Build Moon Mine": "Zbuduj kopalnię na Księżycu",
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "(Wydaj 20 M€ i 1 Tytan, aby wybudować kopalnię na Księżycu i podnieść produkcję Tytanu o 1 poziom.)",
+    "Build Moon Road": "Zbuduj drogę na Księżycu",
+    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "(Wydaj 18 M€ i 1 Stal, aby wybudować drogę na Księżycu i podnieść Współczynnik Logistyki 1 poziom.)"
+}

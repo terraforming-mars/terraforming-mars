@@ -1,0 +1,25 @@
+{
+    "Buffer Gas": "Colchón de Gas",
+    "(Spend 16 M€ to increase your TR 1 step. Solo games only.)": "Incrementa un VT por 16 М€. Únicamente en modo solitario.",
+    "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)":"Coloca 1 loseta de vegetación por 25 М€.",
+    "(Spend 17 M€ to place a colony.)":"Coloca 1 colonia por 17 М€.",
+    "(Spend 23 M€ to place a greenery tile and raise oxygen 1 step.)":"Coloca 1 loseta de vegetación por 23 М€.",
+    "(Spend 11 M€ to increase your Energy production 1 step.)": "Incrementa la producción de energía 1 nivel por 11 М€.",
+    "Sell Patents": "Vender Patentes",
+    "Sell patents": "Vender patentes",
+    "(Discard any number of cards to gain that amount of M€.)": "Descarta un número de cartas para ganar dicho número de М€.",
+    "Asteroid": "Asteroide",
+    "asteroid": "asteroide",
+    "(Spend 14 M€ to raise temperature 1 step.)":"Incrementa la temperatura 1 nivel por 14 М€.",
+    "Air Scrapping": "Aire excedente",
+    "(Spend 15 M€ to raise Venus 1 step.)": "Incrementa en 1 nivel la terraformación de Venus por 15 М€.",
+    "(Spend 18 M€ to place an ocean tile.)":"Coloca 1 loseta de océano por 18 М€.",
+
+
+    "Build Moon Colony": "Construir Colonia Lunar",
+    "(Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "Gasta 22 M€ y 1 de titanio para situar una colonia en la Luna y aumenta tu producción de M€ 1 nivel.",
+    "Build Moon Mine": "Construir Mina Lunar",
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "Gasta 20 M€ y 1 de titanio para situar una mina en la Luna y aumenta tu producción de acero 1 nivel.",
+    "Build Moon Road": "Construir Carretera Lunar",
+    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "Gasta 18 M€ y 1 de acero para situar una carretera en la Luna y aumenta tu valor de logística 1 nivel."
+}

@@ -1,0 +1,24 @@
+{
+    "Psychrophiles": "Psicrófilo",
+    "Action: Add 1 microbe to this card.": "Ação: adicione 1 micróbio a esta carta.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Efeito: quando pagar por uma carta com ícone de planta, você pode usar cada micróbio sobre esta carta como 2 M€.",
+    "Temperature must be -20 C or lower.": "Requer temperatura -20°C ou mais baixa.",
+
+    "Research Coordination": "Coordenação de Pesquisa",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Depois de posta em jogo, quando você realizar uma ação, o ícone curinga passa a ser um ícone qualquer de sua escolha.",
+
+    "SF Memorial": "Memorial de Ficção Científica",
+    "Draw 1 card.": "Pegue 1 carta do topo do deck.",
+
+    "Martian Survey": "Levantamento de Marte",
+    "Oxygen must be 4% or lower. Draw two cards.": "O nível de oxigênio deve estar em 4% ou menos. Pegue 2 cartas do topo do deck.",
+
+    "House Printing": "Impressão de Residências",
+    "Increase your steel production 1 step.": "Aumente em 1 nível sua produção de aço.",
+
+    "Space Hotels": "Hotéis Espaciais",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Requer 2 ícones de Terra. Aumente em 4 níveis sua produção de M€",
+
+    "Lava Tube Settlement": "Colônia em Canal de Lava",
+    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "Diminua em 1 nível sua produção de energia. Aumente em 2 níveis sua produção de M€. Coloque um tile de cidade EM UMA ÁREA VULCÂNICA, da mesma forma que Fluxos de Lava (THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS ou ARSIA MONS) no jogo básico (veja regras especiais para outras expansões), indepentende de existir cidades adjacentes."
+}

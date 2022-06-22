@@ -1,29 +1,40 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {Resources} from '../../common/Resources';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
-export class PROffice implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.PR_OFFICE;
-    public cardType: CardType = CardType.AUTOMATED;
+export class PROffice extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.PR_OFFICE,
+      tags: [Tags.EARTH],
+      cost: 7,
+      tr: {tr: 1},
 
-    public canPlay(player: Player, game: Game): boolean {
-        if (game.turmoil !== undefined) {
-            return game.turmoil.canPlay(player, PartyName.UNITY);
-        }
-        return false;
-    }
+      requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
+      metadata: {
+        cardNumber: 'T09',
+        renderData: CardRenderer.builder((b) => {
+          b.tr(1).br;
+          b.megacredits(1).slash().earth(1, {played});
+        }),
+        description: 'Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.',
+      },
+    });
+  }
 
-    public play(player: Player, game: Game) {
-        player.increaseTerraformRating(game);
-        let amount = player.getTagCount(Tags.EARTH) + 1;
-        player.setResource(Resources.MEGACREDITS, amount);
-        return undefined;
-    }
+  public play(player: Player) {
+    player.increaseTerraformRating();
+    const amount = player.getTagCount(Tags.EARTH) + 1;
+    player.addResource(Resources.MEGACREDITS, amount);
+    return undefined;
+  }
 }

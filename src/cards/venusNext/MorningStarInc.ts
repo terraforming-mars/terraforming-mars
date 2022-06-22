@@ -1,28 +1,46 @@
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Player} from '../../Player';
+import {Tags} from '../../common/cards/Tags';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
-import { CorporationCard } from "../corporation/CorporationCard";
-import { Player } from "../../Player";
-import { Tags } from "../Tags";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+export class MorningStarInc extends Card implements ICorporationCard {
+  constructor() {
+    super({
+      name: CardName.MORNING_STAR_INC,
+      tags: [Tags.VENUS],
+      startingMegaCredits: 50,
+      cardType: CardType.CORPORATION,
+      initialActionText: 'Draw 3 Venus-tag cards',
 
-export class MorningStarInc implements CorporationCard {
-    public name: CardName = CardName.MORNING_STAR_INC;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public startingMegaCredits: number = 50;
+      metadata: {
+        cardNumber: 'R06',
+        description: 'You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(50).nbsp.cards(3, {secondaryTag: Tags.VENUS});
+          b.corpBox('effect', (ce) => {
+            ce.effect('Your Venus requirements are +/- 2 steps, your choice in each case.', (eb) => {
+              eb.plate('Venus requirements').startEffect.text('+/- 2');
+            });
+          });
+        }),
+      },
+    });
+  }
 
-    public initialAction(player: Player, game: Game) {
-        for (let foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
-            player.cardsInHand.push(foundCard);
-        }
-        return undefined;
-    }
+  public initialAction(player: Player) {
+    player.drawCard(3, {tag: Tags.VENUS});
+    return undefined;
+  }
 
-    public getRequirementBonus(_player: Player, _game: Game, venusOnly?: boolean): number {
-        if (venusOnly !== undefined && venusOnly) return 2;
-        return 0;
-    }
+  public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
+    return parameter === GlobalParameter.VENUS ? 2 : 0;
+  }
 
-    public play() {
-        return undefined;
-    }
+  public play() {
+    return undefined;
+  }
 }

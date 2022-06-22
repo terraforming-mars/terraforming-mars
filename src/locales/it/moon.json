@@ -1,0 +1,24 @@
+{
+   "Place a colony tile on the Moon":"Colloca una tessera Colonia sulla Luna",
+   "Place a mine tile on the Moon":"Colloca una tessera Miniera sulla Luna",
+   "Place a road tile on the Moon":"Colloca una tessera Strada sulla Luna", 
+    "Select a space on the Moon for a colony tile.":"Scegli una posizione sulla Luna per la tessera Colonia",
+    "Select a space on the Moon for a mining tile.":"Scegli una posizione sulla Luna per la tessera Miniera",
+    "Select a space on the Moon for a road tile.":"Scegli una posizione sulla Luna per la tessera Strada",
+   
+
+    
+    "Lunar Habitat": "Habitat Lunare",
+    "(Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "(Spendi 22 M€ e 1 risorsa Titanio per collocare 1 tessera Colonia sulla Luna. Incrementa la tua Produzione di M€ di 1 livello.)",
+    
+    "Lunar Mine": "Miniera Lunare",
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "(Spendi 20 M€ e 1 risorsa Titanio per collocare 1 tessera Miniera sulla Luna. Incrementa la tua Produzione di Acciaio di 1 livello.)",
+    
+    "Road Infrastructure": "Infrastruttura Stradale",
+    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "(Spendi 18 M€ e 1 risorsa Acciaio per collocare 1 tessera Strada sulla Luna. Incrementa la Traccia Logistica di 1 livello.)"
+
+
+
+
+}
+

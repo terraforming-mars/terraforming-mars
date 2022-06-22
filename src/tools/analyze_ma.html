@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <head>
+    <script src="https://d3js.org/d3.v4.js"></script>
+  </head>
+  <body>
+    <form>
+      <label for="runs">Runs: </label><input type="text" id="runs" value="10000" name="runs"><br/>
+      <label for="venus">Venus: </label><input type="checkbox" id="venus" name="venus"><br/>
+      <label for="ares">Ares: </label><input type="checkbox" id="ares" name="ares"><br/>
+      <label for="moon">The Moon: </label><input type="checkbox" id="moon" name="moon"><br/>
+
+      <input type="radio" id="none" name="type" value="NONE"><label for="none">None</label>&nbsp;
+      <input type="radio" id="limited" name="type" value="LIMITED" checked><label for="limited">Limited</label>&nbsp;
+      <input type="radio" id="full" name="type" value="FULL"><label for="full">Full</label></br>
+
+    </form>
+    <button onclick="submit()">Submit</button>
+    <div id="viz"></div>
+    <div id="raw"></div>
+
+    <script type="text/javascript">
+      // set the dimensions and margins of the graph
+      var margin = {top: 30, right: 30, bottom: 70, left: 60};
+      var width = 800 - margin.left - margin.right;
+      var height = 400 - margin.top - margin.bottom;
+
+      function submit() {
+        var svg = d3.select("#viz")
+          .html("")
+          .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+        var url = "http://localhost:8081/data";
+        url = url + "?runs=" + d3.select("#runs").property("value");
+        url = url + "&venus=" + d3.select("#venus").property("checked");
+        url = url + "&ares=" + d3.select("#ares").property("checked");
+        url = url + "&moon=" + d3.select("#moon").property("checked");
+        url = url + "&type=" + d3.select('input[name="type"]:checked').node().value
+
+        d3.csv(url, (data) => process(svg, data));
+      }
+
+      function process(svg, data) {
+        // X axis
+        var x = d3.scaleBand()
+          .range([0, width])
+          .domain(data.map((d) => d.name))
+          .padding(0.2);
+        svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
+
+        // Add Y axis
+        var y = d3.scaleLinear()
+          .domain([0, d3.max(data.map((d) => d.count))])
+          .range([height, 0]);
+        svg.append("g")
+          .call(d3.axisLeft(y));
+
+        // Bars
+        svg.selectAll("mybar")
+          .data(data)
+          .enter()
+          .append("rect")
+            .attr("x", (d) => x(d.name))
+            .attr("y", (d) => y(d.count))
+            .attr("width", x.bandwidth())
+            .attr("height", (d) => height - y(d.count))
+            .attr("fill", "#69b3a2");
+
+          d3.select("#raw").html("").append("code").text(data.map((e) => `${e.name}: ${e.count}`).join('\n'));
+        }
+    </script>
+  </body>
+</html>

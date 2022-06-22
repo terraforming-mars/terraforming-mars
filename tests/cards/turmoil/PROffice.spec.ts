@@ -1,47 +1,31 @@
-import { expect } from "chai";
-import { PROffice } from "../../../src/cards/turmoil/PROffice";
-import { Player } from "../../../src/Player";
-import { Color } from "../../../src/Color";
-import { Resources } from "../../../src/Resources";
-import { BoardName } from '../../../src/BoardName';
-import { GameOptions, Game } from '../../../src/Game';
-import { PartyName } from "../../../src/turmoil/parties/PartyName";
-import { Sponsors } from "../../../src/cards/Sponsors";
-import { AcquiredCompany } from "../../../src/cards/AcquiredCompany";
+import {expect} from 'chai';
+import {AcquiredCompany} from '../../../src/cards/base/AcquiredCompany';
+import {Sponsors} from '../../../src/cards/base/Sponsors';
+import {PROffice} from '../../../src/cards/turmoil/PROffice';
+import {Game} from '../../../src/Game';
+import {Resources} from '../../../src/common/Resources';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
-describe("PROffice", function () {
-    it("Should play", function () {
-        const card = new PROffice();
-        const card2 = new Sponsors();
-        const card3 = new AcquiredCompany();
-        const player = new Player("test", Color.BLUE, false);
-        const gameOptions = {
-            draftVariant: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            promoCardsOption: false,
-            startingCorporations: 2,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
-        const game = new Game("foobar", [player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let unity = game.turmoil.getPartyByName(PartyName.UNITY);
-            if (unity !== undefined) {
-                unity.delegates.push(player, player);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-        } 
-        player.playedCards.push(card2, card3);
-        card.play(player, game);
-        expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
-        expect(player.getTerraformRating()).to.eq(15);
-    });
+describe('PROffice', function() {
+  it('Should play', function() {
+    const card = new PROffice();
+    const card2 = new Sponsors();
+    const card3 = new AcquiredCompany();
+    const player = TestPlayers.BLUE.newPlayer();
+
+    const gameOptions = setCustomGameOptions();
+    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+
+    const unity = game.turmoil!.getPartyByName(PartyName.UNITY)!;
+    unity.delegates.push(player.id, player.id);
+    expect(player.canPlayIgnoringCost(card)).is.true;
+
+    player.playedCards.push(card2, card3);
+    card.play(player);
+    expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.getTerraformRating()).to.eq(15);
+  });
 });

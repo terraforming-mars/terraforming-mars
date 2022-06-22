@@ -1,0 +1,55 @@
+{
+    "Aerial Lenses": "Soczewki powietrzne",
+    "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "Wymagania: Kelwiniści muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Usuń do 2 jednostek roślinności dowolnego gracza. Podnieś swoją produkcję ciepła o 2 poziomy.",
+
+    "Banned Delegate": "Wykluczony delegat",
+    "Requires that you are Chairman. Remove any NON-LEADER delegate.": "Wymagania: Twój delegat musi być przewodniczącym. Przenieś do rezerwy dowolnego delegata niebędącego liderem partii.",
+
+    "Cultural Metropolis": "Metropolia kultury",
+    "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Wymagania: Jedność musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Efekt natychmiastowy: Obniż swoją produkcję energii 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść na planszy obszar miasta. Umieść 2 znaczniki swoich delegatów w 1 partii.",
+
+    "Diaspora Movement": "Migracje diasporyczne",
+    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "Wymagania: Czerwoni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Otrzymujesz 1 M€ za każdy symbol Jowisza w grze (z tym włącznie)",
+
+    "Event Analysts": "Analitycy wydarzeń",
+    "Effect: You have +1 influence.": "Efekt trwały: Masz 1 dodatkowy punkt wpływów.",
+    "Requires that Scientists are ruling or that you have 2 delegates there.": "Wymagania: Naukowcy muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii.",
+
+    "GMO Contract": "Kontrakt na GMO",
+    "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "Efekt trwały: Gdy zagrywasz kartę z symbolem roślinności, mikrobów lub zwierząt (z tą włącznie), otrzymujesz 2 M€ za każdy z tych symboli na zagranej karcie.",
+    "Requires that Greens are ruling or that you have 2 delegates there.": "Wymagania: Zieloni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii.",
+
+    "Martian Media Center": "Marsjańskie centrum informacyjne",
+    "Action: Pay 3 M€ to add a delegate to any party.": "Akcja: Zapłać 3 M€, aby dodać znacznik swojego delegata do dowolnej partii.",
+    "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "Wymagania: Teraz Mars musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję M€ o 2 poziomy.",
+
+    "Parliament Hall": "Sala komitetu",
+    "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.": "Wymagania: Teraz Mars musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję M€ o 1 poziom za każde 3 posiadane symbole budowli (z tym włącznie).",
+
+    "PR Office": "Biuro PR",
+    "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "Wymagania: Jedność musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swój WT o 1 poziom. Otrzymujesz 1 M€ za każdy posiadany symbol Ziemi (z tym włącznie).",
+
+    "Public Celebrations": "Uroczystości publiczne",
+    "Requires that you are Chairman.": "Wymagania: Twój delegat musi być przewodniczącym.",
+
+    "Recruitment": "Rekrutacja",
+    "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Zamień 1 znacznik neutralnego delegata niebędącego liderem na znacznik Twojego delegata z rezerwy.",
+
+    "Red Tourism Wave": "Turyści na Marsie",
+    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "Wymagania: Czerwoni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Otrzymujesz 1 M€ za każdy PUSTY OBSZAR SĄDIADUJĄCY Z TWOIMI OBSZARAMI",
+
+    "Sponsored Mohole": "Sponsorowany Mohole",
+    "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "Wymagania: Kelwiniści muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję ciepła o 2 poziomy.",
+
+    "Supported Research": "Wsparcie badań",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "Wymagania: Naukowcy muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Dobierz 2 karty.",
+
+    "Wildlife Dome": "Natura pod kopułą",
+    "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "Wymagania: Zieloni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Umieść na planszy obszar zieleni i podnieś Poziom Tlenu o 1%.",
+
+    "Vote Of No Confidence": "Wotum nieufności",
+    "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Wymagania: Twój delegat musi być liderem dowolnej partii, a obecny przewodniczący musi być neutralny. Usuń znacznik neutralnego przewodniczącego i umieść na jego miejsce znacznik swojego delegata z rezerwy. Podnieś swój WT o 1 poziom.",
+
+    "Political Alliance": "Polityczne Przymierze",
+    "Requires that you have 2 party leaders. Gain 1 TR.":"Wymagania: Twoi delegaci muszą być liderami przynajmniej 2 partii. Podnieś swój WT o 1 poziom."
+}

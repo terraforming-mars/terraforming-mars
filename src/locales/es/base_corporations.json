@@ -1,0 +1,54 @@
+{
+    "Beginner Corporation": "Corporación Novel",
+    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Comienza con 42 M€. EN LUGAR DE PARTICIPAR EN LA PRIMERA FASE DE INVESTIGACIÓN, ROBA 10 CARTAS SIN COSTE ALGUNO.",
+
+    "Credicor": "Credicor",
+    "You start with 57 M€.":"Comienza con 57 M€.",
+    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.":"Efecto: tras pagar por una carta o un proyecto estándar cuyo coste básico sea 20 M€ o más, obtienes 4 M€.",
+
+    "Ecoline": "Ecoline",
+    "You start with 2 plant production, 3 plants, and 36 M€.":"Comienza con 2 en producción de plantas, 3 plantas y 36 M€.",
+    "Effect: You may always pay 7 plants, instead of 8, to place greenery.":"Efecto: siempre pagas 7 plantas, en lugar de 8, para colocar 1 loseta de vegetación.",
+
+    "Helion": "Helion",
+    "You start with 3 heat production and 42 M€.":"Comienza con 3 en producción de calor y 42 M€.",
+    "Effect: You may use heat as M€. You may not use M€ as heat.":"Efecto: puedes usar calor como M€. No puedes usar M€ como calor.",
+
+    "Interplanetary Сinematics": "Producciones Interplanetarias",
+    "You start with 20 steel and 30 M€.":"Comienza con 20 de acero y 30 M€.",
+    "Effect: Each time you play an event, you gain 2 M€.":"Efecto: cada vez que uses un evento, obtienes 2 M€.",
+
+    "Inventrix": "Inventrix",
+    "As your first action in the game, draw 3 cards. Start with 45 M€.":"Como primera acción en el juego roba 3 cartas. Comienza con 45 M€.",
+    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.":"Efecto: tus requisitos de temperatura, oxígeno y océano son +2 o -2, a tu elección en cada caso.",
+
+    "Phobolog": "Phobolog",
+    "You start with 10 titanium and 23 M€.":"Comienza con 10 de titanio y 23 M€.",
+    "Effect: Your titanium resources are each worth 1 M€ extra.":"Efecto: cada recurso de titanio te proporciona 1 M€ adicional.",
+
+    "THARSIS": "THARSIS",
+    "REPUBLIC": "REPÚBLICA",
+    "Tharsis Republic": "República Tharsis",
+    "You start with 40 M€. As your first action in the game, place a city tile.":"Comienza con 40 M€. Como primera acción en el juego, coloca una loseta de ciudad.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.":"Efecto: al colocar cualquier loseta de ciudad sobre MARTE, aumenta tu producción de M€ en 1. Al colocar una loseta de ciudad, obtén 3 M€.",
+
+    "Thorgate": "Thorgate",
+    "You start with 1 energy production and 48 M€.":"Comienza con 1 en producción de energía y 48 M€.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.":"Efecto: al jugar una carta de energía O EL PROYECTO ESTÁNDAR DE PLANTA ENERGÉTICA, paga 3 M€ menos por ella.",
+
+    "UNMI": "UNMI",
+    "You start with 40 M€.":"Comienza con 40 M€.",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.":"Acción: si tu valor de terraformación aumentó en esta generación, puedes pagar 3 M€ para incrementarlo en 1 más.",
+
+    "Mining Guild": "Mining Guild",
+    "You start with 30 M€, 5 steel and 1 steel production.":"Comienza con 30 M€, 5 de acero y 1 en producción de acero.",
+    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.":"Efecto: cada vez que obtengas acero o titanio como bonificación por colocación, aumenta tu producción de acero en 1.",
+
+    "Terractor": "Terractor",
+    "You start with 60 M€.":"Comienza con 60 M€.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.":"Efecto: al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
+
+    "Saturn Systems": "Saturn Systems",
+    "You start with 1 titanium production and 42 M€.":"Comienza con 1 en producción de titanio y 42 M€.",
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.":"Efecto: cada vez que se juegue una carta Joviana, incluyendo esta, aumenta tu producción de M€ en 1."
+}

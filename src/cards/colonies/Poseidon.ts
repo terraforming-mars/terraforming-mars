@@ -1,44 +1,47 @@
-import { CorporationCard } from "../corporation/CorporationCard";
-import { Player } from "../../Player";
-import { Tags } from "../Tags";
-import { Game } from '../../Game';
-import { SelectOption } from '../../inputs/SelectOption';
-import { OrOptions } from '../../inputs/OrOptions';
-import { CardName } from '../../CardName';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Player} from '../../Player';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {BuildColony} from '../../deferredActions/BuildColony';
+import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
-export class Poseidon implements CorporationCard {
-    public name: CardName =  CardName.POSEIDON;
-    public tags: Array<Tags> = [];
-    public startingMegaCredits: number = 45;
+export class Poseidon extends Card implements ICorporationCard {
+  constructor() {
+    super({
+      name: CardName.POSEIDON,
+      startingMegaCredits: 45,
+      cardType: CardType.CORPORATION,
+      initialActionText: 'Place a colony',
 
-    public initialAction(player: Player, game: Game) {
-        if (game.coloniesExtension) {
-          let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
-            && colony.colonies.indexOf(player) === -1 
-            && colony.isActive);
-          let buildColony = new OrOptions();
-          buildColony.title = "Poseidon first action - Select where to build colony";
-          openColonies.forEach(colony => {
-            const colonySelect =  new SelectOption(
-              colony.name + " - (" + colony.description + ")", 
-              () => {
-                  colony.onColonyPlaced(player, game);
-                  return undefined;
-              }
-            );
-            buildColony.options.push(colonySelect);
+      metadata: {
+        cardNumber: 'R02',
+        description: 'You start with 45 M€. As your first action, place a colony.',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br;
+          b.megacredits(45).nbsp.colonies(1);
+          b.corpBox('effect', (ce) => {
+            ce.effect('When any colony is placed, including this, raise your M€ production 1 step.', (eb) => {
+              eb.colonies(1, {all}).startEffect.production((pb) => pb.megacredits(1));
+            });
           });
-          return buildColony;
-        }
-        else {
-          console.warn("Colonie extension isn't selected.");
-          return;
-        }
+        }),
+      },
+    });
+  }
+
+  public initialAction(player: Player) {
+    if (player.game.gameOptions.coloniesExtension) {
+      player.game.defer(new BuildColony(player, false, 'Poseidon first action - Select where to build colony'));
+      return undefined;
+    } else {
+      console.warn('Colonies extension isn\'t selected.');
+      return undefined;
     }
+  }
 
-    public play() {
-        return undefined;
-    }
-
-
+  public play() {
+    return undefined;
+  }
 }

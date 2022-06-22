@@ -1,23 +1,21 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { Resources } from '../Resources';
-import { Game } from '../Game';
+import {Colony} from './Colony';
+import {ColonyName} from '../common/colonies/ColonyName';
+import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
+import {Resources} from '../common/Resources';
 
-export class Luna extends Colony implements IColony {
-    public name = ColonyName.LUNA;
-    public description: string = "MegaCredits";
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
-        player.megaCredits += this.trackPosition * 2 + Math.max(this.trackPosition - 2, 0) + Math.max(this.trackPosition - 5, 0); 
-        this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player, game);
-        player.setProduction(Resources.MEGACREDITS, 2);
-        return undefined;
-    }
-    public giveTradeBonus(player: Player): void {
-        player.megaCredits += 2;
-    }    
+export class Luna extends Colony {
+  constructor() {
+    super({
+      name: ColonyName.LUNA,
+      buildType: ColonyBenefit.GAIN_PRODUCTION,
+      buildQuantity: [2, 2, 2],
+      buildResource: Resources.MEGACREDITS,
+      tradeType: ColonyBenefit.GAIN_RESOURCES,
+      tradeQuantity: [1, 2, 4, 7, 10, 13, 17],
+      tradeResource: Resources.MEGACREDITS,
+      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
+      colonyBonusQuantity: 2,
+      colonyBonusResource: Resources.MEGACREDITS,
+    });
+  }
 }

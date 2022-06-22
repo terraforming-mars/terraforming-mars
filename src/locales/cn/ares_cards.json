@@ -1,0 +1,97 @@
+{
+
+    "Bio-Fertilizer Facility": "肥料工厂",
+    "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "需要你有1个科学标志。提升你的植物产量1级。添加2个微生物资源到任意卡牌。放置此板块，此板块的相邻收益为1个植物和1个微生物",
+
+    "Bioengineering Enclosure": "生物工程组件",
+    "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "行动：从此卡移除1个动物资源并添加1个动物资源到一张其他卡牌上",
+    "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "需要你有1个科学标志。添加2个动物资源到此卡。此卡上的动物资源不能被其他玩家移除",
+
+    "Butterfly Effect": "蝴蝶效应",
+    "Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "效果：获得1TR。移动每个危机标志往上1格或往下1格",
+    "All hazard markers": "所有危机标志",
+
+    "Desperate Measures": "绝望措施",
+    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "效果：放置一个资源方块在一个沙尘暴板块上并提升氧气1级，或放置一个资源方块在一个腐蚀板块上并提升温度1级。有资源方块的的危机板块不能被移除",
+
+    "Ecological Survey": "生态调查",
+    "Any 3 Greeneries": "任意 3 森林",
+    "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "效果：当你因为放置一个板块获得植物，动物，微生物资源时，你额外获得一个同种类型的资源",
+    "Requires 3 greeneries on Mars.": "需要火星上有3片森林板块",
+
+    "Ecological Zone": "生态保护区",
+    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "效果： 当你打出1个动物标志或植物标志(包括本牌2个)时,增加1个动物资源到本卡",
+    "the tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "此板块的相邻收益为1个动物资源。本卡上每有2个动物资源获得1分",
+    "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "需要你至少拥有一个森林板块。放置这个板块到任意的森林板块旁边。本卡上每有2个动物资源,获得1分",
+    "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 Animals on this card.":"此板块的相邻收益为1个动物资源。本卡上每有2个动物资源获得1分",
+
+    "Geological Survey": "地质调查",
+    "Any max 5 Greeneries": "至多 5 森林",
+    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "效果：当你因为放在火星上置一个板块获得钢铁，钛，热能资源时，你额外获得一个同种类型的资源",
+
+    "Requires 5 or fewer greeneries on Mars.": "需要火星上不能有超过5片森林板块",
+
+    "Industrial Center": "工业中心",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "行动： 花费7 M€,提升你的钢铁产量1级",
+    "Place this tile adjacent to a city tile.":"放置此板块到一个城市板块旁边。",
+    "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "放置此板块到一个城市板块旁边。此板块的相邻收益为1个钢铁资源",
+
+    "Lava Flows": "熔岩流",
+    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "提升温度2级并放置这个板块到以下几个地方之一:'THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS。此板块的相邻收益为2个热能资源",
+    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.":"提升温度2级并放置这个板块到以下几个地方之一:'THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS。",
+
+    "Marketing Experts": "营销专家",
+    "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "效果：当你的板块提供一次相邻收益时，你获得1 M€",
+    "Increase your M€ production 1 step.": "提升你的M€产量1级.",
+
+    "Metallic Asteroid": "金属陨石",
+    "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "提升温度1级并获得1个钛资源。移除任一玩家至多4个植物资源。放置此板块，此板块的相邻收益为1个钛资源",
+
+    "Mining Area": "采矿区",
+    "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "放置此板块到一个有钢铁资源或钛资源的格子上且与你的板块相邻。此板块的相邻收益为1个对应资源。提升你的对应资源产量1级",
+    "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.":"放置此板块到一个有钢铁资源或钛资源的格子上且与你的板块相邻。提升你的对应资源产量1级",
+
+    "Mining Rights": "采矿权",
+    "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "放置此板块到一个有钢铁资源或钛资源的格子上。此板块的相邻收益为1个对应资源。提升你的对应资源产量1级",
+    "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.":"放置此板块到一个有钢铁资源或钛资源的格子上。提升你的对应资源产量1级",
+
+    "Mohole Area": "超深钻区域",
+    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "提升你的热能产量4级。放置此板块到一个海洋保留区。此板块的相邻收益为2个热能资源",
+    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.":"提升你的热能产量4级。放置此板块到一个海洋保留区。",
+    "Select an ocean space for special tile":"为特殊板块选择一个海洋保留区",
+
+    "Natural Preserve": "自然保护区",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "氧气浓度不能高于4%。放置此板块到不与已有板块相邻的格子。此板块的相邻收益为1 M€。提升你的M€产量1级",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.":"氧气浓度不能高于4%。放置此板块到不与已有板块相邻的格子。提升你的M€产量1级",
+
+    "Nuclear Zone": "核爆辐射区",
+    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "提升温度2级，放置此板块。当玩家在此板块相邻格放置带有自己玩家标志的板块时，必须先花费2 M€",
+    "Place this tile and raise temperature 2 steps.":"提升温度2级，放置此板块。",
+
+    "Ocean City": "海洋城市",
+    "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "需求有6块海洋。降低你的电力产量1级，提升你的M€产量3级。放置此板块到一个已有的海洋板块上，无视通常的城市放置限制。此板块即视为城市也视为海洋",
+
+    "Ocean Farm": "海洋农场",
+    "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "需求有4块海洋。提升你的热能产量1级，提升你的植物产量1级。放置此板块到一个已有的海洋板块上，此板块的相邻收益为1个植物资源",
+
+    "Ocean Sanctuary": "海洋保护区",
+    "1 VP per animal on this card.": "此卡每有1个动物资源获得1分",
+    "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "需求有5块海洋。放置此板块到一个已有的海洋板块上，此板块的相邻收益为1个动物资源。添加1个动物资源到此卡",
+
+    "Restricted Area": "管制区",
+    "Action: Spend 2 M€ to draw a card.": "行动：花费两枚M€资源 抽取一张牌",
+    "Place this tile which grants an ADJACENCY BONUS of 1 card.": "放置此板块，此板块的相邻收益为1张牌",
+
+    "Solar Farm": "太阳能农场",
+    "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.": "放置此板块，此板块的相邻收益为2个电力资源。你放置此板块的格子每有1个植物资源，提升你的电力产量1级",
+
+
+    "2 Oceans": "2 海洋",
+    "3 Oceans": "3 海洋",
+    "4 Oceans": "4 海洋",
+    "5 Oceans": "5 海洋",
+    "6 Oceans": "6 海洋"
+
+
+
+}

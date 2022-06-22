@@ -1,30 +1,33 @@
+import {expect} from 'chai';
+import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/common/Resources';
+import {TestPlayers} from '../../TestPlayers';
 
-import { expect } from "chai";
-import { DeuteriumExport } from "../../../src/cards/venusNext/DeuteriumExport";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Resources } from '../../../src/Resources';
+describe('DeuteriumExport', function() {
+  let card : DeuteriumExport; let player : Player;
 
-describe("DeuteriumExport", function () {
-    it("Should play", function () {
-        const card = new DeuteriumExport();
-        const action = card.play();
-        expect(action).to.eq(undefined);
-    });
-    it("Should act", function () {
-        const card = new DeuteriumExport();
-        const player = new Player("test", Color.BLUE, false);
-        player.playedCards.push(card);
-        const action = card.action(player);
-        expect(action).to.eq(undefined);
-        expect(card.resourceCount).to.eq(1);
+  beforeEach(function() {
+    card = new DeuteriumExport();
+    player = TestPlayers.BLUE.newPlayer();
+  });
 
-        const orOptions = card.action(player) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
-        expect(orOptions instanceof OrOptions).to.eq(true);
-        orOptions.options[1].cb();
+  it('Should play', function() {
+    const action = card.play();
+    expect(action).is.undefined;
+  });
+
+  it('Should act', function() {
+    player.playedCards.push(card);
+    const action = card.action(player);
+    expect(action).is.undefined;
+    expect(card.resourceCount).to.eq(1);
+
+    const orOptions = card.action(player) as OrOptions;
+    expect(orOptions instanceof OrOptions).is.true;
+        orOptions!.options[0].cb();
         expect(card.resourceCount).to.eq(0);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    });
+  });
 });

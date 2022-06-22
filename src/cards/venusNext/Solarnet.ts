@@ -1,24 +1,33 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class Solarnet implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.SOLARNET;
-    public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(player: Player): boolean {
-        return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
-      }
-    public play(player: Player, game: Game) {
-        player.cardsInHand.push(game.dealer.dealCard());
-        player.cardsInHand.push(game.dealer.dealCard());
-        return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
-    } 
+export class Solarnet extends Card {
+  constructor() {
+    super({
+      name: CardName.SOLARNET,
+      cardType: CardType.AUTOMATED,
+      cost: 7,
+
+      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      victoryPoints: 1,
+
+      metadata: {
+        cardNumber: '245',
+        renderData: CardRenderer.builder((b) => {
+          b.cards(2);
+        }),
+        description: 'Requires Venus, Earth and Jovian tags. Draw 2 cards.',
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.drawCard(2);
+    return undefined;
+  }
 }

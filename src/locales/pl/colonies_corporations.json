@@ -1,0 +1,23 @@
+{
+    "Polyphemos": "Polyphemos",
+    "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Rozpoczynasz grę z 50 M€ i 5 dodatkowymi poziomami produkcji M€. Otrzymujesz 5 jednostek tytanu.",
+    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Efekt trwały: Gdy kupujesz karty na rękę, płacisz 5 M€ (zamiast 3 M€). Dotyczy to również zakupu kart na początku rozgrywki.",
+
+    "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
+    "You start with 48 M€.": "Rozpoczynasz grę z 48 M€.",
+    "Action: Add a floater to ANY card.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie.",
+    "Effect: Floaters on this card may be used as 2 heat each.": "Efekt trwały: Każda jednostka dryfowców z tej karty może być użyta jako 2 jednostki ciepła.",
+
+    "Arklight": "Arklight",
+    "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "Rozpoczynasz grę z 45 M€ i 2 dodatkowymi poziomami produkcji M€. Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
+    "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem roślinności lub zwierząt (z tą włącznie), za każdy z tych symboli umieść tu 1 jednostkę zwierząt.",
+
+    "Aridor": "Aridor",
+    "COLONY": "KOLONIA",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Rozpoczynasz grę z 40 M€. W ramach swojej pierwszej akcji umieść w grze wybrany przez siebie dodatkowy kafel obiektu.",
+    "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "Efekt trwały: Gdy zagrywasz kartę z symbolem, którego jeszcze nie posiadasz, podnieś swoją produkcję M€ o 1 poziom (nie dotyczy zagrywania kart wydarzeń).",
+
+    "Poseidon": "Poseidon",
+    "You start with 45 M€. As your first action, place a colony.": "Rozpoczynasz grę z 45 M€. W ramach swojej pierwszej akcji umieść kolonię na dowolnym kaflu obiektu.",
+    "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "Efekt trwały: Gdy na dowolnym kaflu obiektu zostanie umieszczona nowa kolonia (z tą włącznie), podnieś swoją produkcję M€ o 1 poziom."
+}

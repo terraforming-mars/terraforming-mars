@@ -1,24 +1,37 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
+import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {all, digit} from '../Options';
 
-export class ImpactorSwarm implements IProjectCard {
-    public cost: number = 11;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.IMPACTOR_SWARM;
-    public cardType: CardType = CardType.EVENT;
+export class ImpactorSwarm extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 11,
+      tags: [Tags.SPACE],
+      name: CardName.IMPACTOR_SWARM,
+      cardType: CardType.EVENT,
 
-    public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.JOVIAN) >= 2;
-    }
+      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN, 2)),
+      metadata: {
+        cardNumber: 'C16',
+        renderData: CardRenderer.builder((b) => {
+          b.heat(12, {digit}).br;
+          b.minus().plants(2, {all});
+        }),
+        description: 'Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.',
+      },
+    });
+  }
 
-    public play(player: Player, game: Game) {
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
-        player.heat += 12;
-        return undefined;
-    }
+  public play(player: Player) {
+    player.game.defer(new RemoveAnyPlants(player, 2));
+    player.heat += 12;
+    return undefined;
+  }
 }

@@ -1,0 +1,131 @@
+{
+    "Allied Banks": "Banque Partenaire",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "Augmentez votre production de M€ de 4. Gagnez 3 M€.",
+
+    "Aquifer Turbines": "Turbines Aquifères",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Placez 1 tuile Océan. Augmentez votre production d'énergie de 2. Perdez 3 M€.",
+
+    "Biofuels": "Biocarburants",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "Augmentez vos productions de plantes et d'énergie de 1 chacune. Gagnez 2 plantes.",
+
+    "Biolab": "Laboratoire de Biologie",
+    "Increase your plant production 1 step. Draw 3 cards.": "Augmentez votre production de plantes de 1. Piochez 3 cartes.",
+
+    "Biosphere Support": "Soutien de la Biosphère",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Diminuez votre production de M€ de 1. Augmentez votre production de plantes de 2.",
+
+    "Business Empire": "Empire Financier",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "Augmentez votre production de M€ de 6. Perdez 6 M€.",
+
+    "Dome Farming": "Culture en Dôme",
+    "Increase your M€ production 2 steps and plant production 1 step.": "Augmentez votre production de plantes de 1. Augmentez votre production de M€ de 2.",
+
+    "Donation": "Don",
+    "Gain 21 M€.": "Gagnez 21 M€.",
+
+    "Early Settlement": "Premiers Colons",
+    "Increase your plant production 1 step. Place a city tile.": "Placez 1 tuile Cité. Augmentez votre production de plantes de 1.",
+
+    "Ecology Experts": "Experts en Écologie.",
+    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Augmentez votre production de plantes de 1. JOUEZ UNE CARTE DE VOTRE MAIN, EN IGNORANT LES PRÉREQUIS GLOBAUX.",
+
+    "Eccentric Sponsor": "Mécène Excentrique",
+    "Play 1 card from hand with a 25 M€ reduction.": "JOUEZ 1 CARTE DE VOTRE MAIN, SON COÛT EST RÉDUIT DE 25 M€.",
+
+    "Experimental Forest": "Forêt Expérimentale",
+    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Placez 1 tuile Forêt et augmentez l'oxygène de 1. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Plante : ajoutez ces cartes à votre main et défaussez les autres.",
+
+    "Galilean Mining": "Mine Galiléenne",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "Augmentez votre production de titane de 2. Perdez 5 M€.",
+
+    "Great Aquifer": "Aquifère Géant",
+    "Place 2 Ocean tiles.": "Placez 2 tuiles Océan.",
+
+    "Huge Asteroid": "Gigantesque Astéroïde",
+    "Increase Temperature 3 steps. Pay 5 M€.": "Augmentez la température de 3. Perdez 5 M€.",
+
+    "IO Research Outpost": "Centre de Recherche sur Io",
+    "Increase your titanium production 1 step. Draw a card.": "Augmentez votre production de titane de 1. Piochez 1 carte.",
+
+    "Loan": "Prêt",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "Diminuez votre production de M€ de 2. Gagnez 30 M€.",
+
+    "Martian Industries": "Industries Martiennes",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "Augmentez vos productions d'énergie et d'acier de 1. Gagnez 6 M€.",
+
+    "Metal-Rich Asteroid": "Astéroïde Riche en Métaux",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Augmentez la température de 1. Gagnez 4 titanes et 4 aciers.",
+
+    "Metals Company": "Entreprise Métallurgique",
+    "Increase your M€, steel and titanium production 1 step.": "Augmentez vos productions de M€, d'acier et de titane de 1.",
+
+    "Mining Operations": "Opérations Minières",
+    "Increase your steel production 2 steps. Gain 4 steel.": "Augmentez votre production d'acier de 2. Gagnez 4 aciers.",
+
+    "Mohole": "Mohole",
+    "Increase your heat production 3 steps. Gain 3 heat.": "Augmentez votre production de chaleur de 3. Gagnez 3 chaleurs.",
+
+    "Mohole Excavation": "Fouilles de Mohole",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Augmentez votre production d'acier de 1 et votre production de chaleur de 2. Gagnez 2 chaleurs.",
+
+    "Nitrogen Shipment": "Cargaison d'Azote",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Augmentez votre NT de 1. Augmentez votre production de plantes de 1. Gagnez 5 M€.",
+
+    "Orbital Construction Yard": "Chantier Orbital",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "Augmentez votre production de titane de 1. Gagnez 4 titanes.",
+
+    "Polar Industries": "Industries Polaires",
+    "Increase your heat production 2 steps. Place an Ocean tile.": "Placez 1 tuile Océan. Augmentez votre production de chaleur de 2.",
+
+    "Power Generation": "Production d'Énergie",
+    "Increase your energy production 3 steps.": "Augmentez votre production d'énergie de 3.",
+
+    "Research Network": "Réseau de Recherche",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Piochez 3 cartes et augmentez votre production de M€ de 1.",
+
+    "Self-Sufficient Settlement": "Campement Autonome",
+    "Increase your money production 2 steps. Place a City tile.": "Placez 1 tuile Cité. Augmentez votre production de M€ de 2.",
+
+    "Smelting Plant": "Fonderie",
+    "Raise oxygen 2 steps. Gain 5 steel.": "Augmentez l'oxygène de 2. Gagnez 5 aciers.",
+
+    "Society Support": "Soutien à la Société",
+    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "Diminuez votre production de M€ de 1. Augmentez vos productions de plantes, d'énergie et de chaleur de 1.",
+
+    "Supplier": "Fournisseur",
+    "Increase your energy production 2 steps. Gain 4 steel.": "Augmentez votre production d'énergie de 2. Gagnez 4 aciers.",
+
+    "Supply Drop": "Larguage de Ravitaillement",
+    "Gain 3 titanium, 8 steel and 3 plants.": "Gagnez 3 titanes, 8 aciers et 3 plantes.",
+
+    "UNMI Contractor": "Sous-Traitant pour l'UNMI",
+    "Increase your TR 3 steps. Draw a card.": "Augmentez votre NT de 3. Piochez 1 carte.",
+
+    "Acquired Space Agency": "Rachat d'une Agence Spatiale",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Gagnez 6 titanes. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Espace : ajoutez ces cartes à votre main et défaussez les autres.",
+
+    "House Printing": "Impression d'Habitations",
+    "Increase your steel production 1 step.": "Augmentez votre production d'acier de 1.",
+
+    "Lava Tube Settlement": "Camp du Tunnel de Lave",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 2. Placez une tuile Cité SUR UNE ZONE VOLCANIQUE, quelles que soient les Cités adjacentes.",
+
+    "Martian Survey": "Relevé Martien",
+    "Oxygen must be 4% or lower. Draw two cards.": "Le niveau d'oxygène doit être de 4% ou moins. Piochez 2 cartes.",
+
+    "PSYCHROPHILES": "Psychrophiles",
+    "Psychrophiles": "Psychrophiles",
+    "Action: Add 1 microbe to this card.": "Action: Ajoutez un microbe sur cette carte.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Effet: Vous pouvez réduire de 2 M€ le coût de vos cartes Plantes pour chaque microbe de cette carte dépensé.",
+    "Action: Add 1 microbe to this card.) (Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Action: Ajoutez un microbe sur cette carte.) (Effet: Vous pouvez réduire de 2 M€ le coût de vos cartes Plantes pour chaque microbe de cette carte dépensé.",
+    "Temperature must be -20 C or lower.": "La température doit être de -20°C ou moins.",
+
+    "RESEARCH COORDINATION": "Coordination de la Recherche",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Une fois joué, lorsque vous réalisez une action, le badge Joker compte comme un badge de votre choix.",
+
+    "SF MEMORIAL": "Mémorial SF",
+    "Draw 1 card.": "Piochez 1 carte.",
+
+    "Space hotels": "Hôtels Spatiaux",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Nécessite 2 badges Terre. Augmentez votre production de M€ de 4."
+}

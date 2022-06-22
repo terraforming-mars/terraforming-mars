@@ -1,10 +1,8 @@
-import { IProjectCard } from "./cards/IProjectCard";
+import {CardName} from './common/cards/CardName';
 
 export interface SerializedDealer {
-    deck: Array<IProjectCard>;
-    preludeDeck: Array<IProjectCard>;
-    discarded: Array<IProjectCard>;
-    usePreludeExtension: boolean;
-    useVenusNextExtension: boolean;   
-    useColoniesNextExtension: boolean;
+    corporationCards: Array<CardName>;
+    deck: Array<CardName>;
+    discarded: Array<CardName>;
+    preludeDeck: Array<CardName>;
 }

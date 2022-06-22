@@ -1,0 +1,149 @@
+{
+  "Pharmacy Union": "Pharmacy Union",
+  "You start with 54 M€ . Draw a Science card.": "Rozpoczynasz grę z 54 M€. Odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz karty z symbolem nauki. Weź tę kartę na rękę, a resztę odrzuć.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem mikrobów (z tą włącznie), umieść na tej karcie 1 jednostkę chorób i zapłać 4 M€ (lub tyle, ile możesz). Gdy zagrywasz kartę z symbolem nauki, usuń 1 jednostkę chorób z tej karty i podnieś swój WT o 1 poziom, albo, jeśli na tej karcie nie ma jednostek chorób, możesz podnieść swój WT o 3 poziomy i obrócić tę kartę wierzchem na dół (tracąc symbole i efekty tej karty).",
+
+  "Comet Aiming": "Comet Aiming",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Akcja: Wydaj 1 jednostkę tytanu, żeby umieścić 1 jednostkę asteroid na dowolnej karcie.",
+  "Action: Remove 1 asteroid here to place an ocean.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i umieść na planszy obszar oceanu.",
+
+  "Cutting Edge Technology": "Cutting Edge Technology",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z wymaganiami, płacisz za nią o 2 M€ mniej.",
+
+  "Crash Site Cleanup": "Crash Site Cleanup",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Wymagania: Jakiś gracz spowodował, że inny gracz musiał stracić jednostki roślinności w tym pokoleniu. Otrzymujesz 1 jednostkę tytanu lub 2 jednostki stali.",
+
+  "Directed Impactors": "Sterowanie Uderzeniami",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Akcja: Wydaj 6 M€ (możesz użyć tytanu), żeby umieścić 1 jednostkę asteroid na dowolnej karcie.",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś temperaturę o 2°C.",
+
+  "Field-Capped City": "Field-Capped City",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Podnieś swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta.",
+
+  "Magnetic Shield": "Magnetic Shield",
+  "Requires 2 power tags. Raise your TR 4 steps.": "Wymagania: Musisz posiadać przynajmniej 2 symbole energii. Podnieś swój współczynnik terraformacji o 4.",
+
+  "Meltworks": "Meltworks",
+  "Action: Spend 5 heat to gain 3 steel.": "Akcja: Wydaj 5 jednostek ciepła, żeby otrzymać 3 jednostki stali.",
+
+  "Mohole Lake": "Mohole Lake",
+  "Action: Add a microbe or animal to ANOTHER card.": "Akcja: Umieść na innej karcie 1 jednostkę mikrobów lub 1 jednostkę zwierząt.",
+  "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Otrzymujesz 3 jednostki roślinności. Podnieś temperaturę o 2°C. Umieść na planszy obszar oceanu.",
+
+  "Diversity Support": "Diversity Support",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "Wymagania: Musisz posiadać przynajmniej 9 różnych typów zasobów. Podnieś swój współczynnik terraformacji o 1.",
+
+  "Topsoil Contract": "Topsoil Contract",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Efekt trwały: Gdy umieszczasz jednostkę mikrobów na dowolnej karcie, otrzymujesz 1 M€. Otrzymujesz 3 jednostki roślinności.",
+
+  "Imported Nutrients": "Imported Nutrients",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Otrzymujesz 4 jednostki roślinności. Umieść na innej karcie do 4 jednostek mikrobów.",
+
+  "Asteroid Deflection System": "Asteroid Deflection System",
+  "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Akcja: Odkryj i odrzuć wierzchnią kartę z talii. Jeśli odkryjesz kartę z symbolem przestrzeni kosmicznej, umieść tu 1 jednostkę asteroid.\n",
+  "opponents may not remove your plants": "Przeciwnicy nie mogą usuwać twoich roślin.",
+  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Obniż swoją produkcję energii o 1 poziom. Otrzymujesz 1 PZ za każdą jednostkę asteroid na tej karcie.",
+
+  "Jovian Embassy": "Jovian Embassy",
+  "Raise your TR 1 step.": "Podnieś swój współczynnik terraformacji o 1.",
+
+  "Sub-Crust Measurements": "Sub-Crust Measurements",
+  "Action: Draw a card.": "Akcja: Dobierz 1 kartę.",
+  "Requires 2 science tags.": "Musisz posiadać przynajmniej 2 symbole nauki.",
+
+  "Potatoes": "Potatoes",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Tracisz 2 jednostki roślinności. Podnieś swoją produkcję M€ o 2 poziomy.",
+
+  "Meat Industry": "Meat Industry",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Efekt trwały: Gdy umieszczasz jednostkę zwierząt na dowolnej karcie, otrzymujesz 2 M€.",
+
+  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "",
+
+  "Orbital Cleanup": "Sprzątanie Orbitalne",
+  "Action: Gain 1 M€ per Science tag you have.": "Akcja: Otrzymujesz 1 M€ za każdy posiadany symbol nauki.",
+  "Decrease your M€ production 2 steps.": "Obniż swoją produkcję M€ o 2 poziomy.",
+
+  "Law Suit": "Pozew",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Ukradnij 3 M€ graczowi, który podczas tego pokolenia OBNIŻYŁ TWOJĄ PRODUKCJĘ LUB USUNĄŁ TWOJE ZASOBY. Umieść tę kartę zakrytą na STOSIE WYDARZEŃ TEGO GRACZA.",
+
+  "Small Asteroid": "Mała asteroida",
+  "Increase temperature 1 step. Remove up to 2 plants from any player.": "Podnieś temperaturę o 2°C. Usuń do 2 jednostek roślinności dowolnego gracza.",
+
+  "Asteroid Hollowing": "Asteroid Hollowing",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Akcja: Wydaj 1 jednostkę tytanu, żeby umieścić tu 1 jednostkę asteroid i podnieść swoją produkcję M€ o 1 poziom.",
+  "1VP for each 2 asteroids on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki asteroid na tej karcie.",
+
+  "Project Inspection": "Kontrola projektu",
+  "Use a card action that has been used this generation.": "Wykonaj akcję z karty aktywnej, z której skorzystałeś już podczas tego pokolenia.",
+
+  "Advertising": "Advertising",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, podnieś swoją produkcję M€ o 1 poziom.",
+
+  "Rego Plastics": "Regoplastik",
+  "Effect: Your steel resources are worth 1 M€ extra.": "Efekt trwały: Twoje jednostki stali są warte o 1 M€ więcej.",
+
+  "Interplanetary Trade": "Handel międzyplanetarny",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Podnieś swoją produkcję M€ o tyle poziomów, ile różnych symboli posiadasz (włącznie z tym).",
+
+  "Penguins": "Pingwiny",
+  "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
+  "Requires 8 oceans.": "Wymagania: Na planszy musi znajdować się przynajmniej 8 obszarów oceanów.",
+
+  "Snow Algae": "Zawłotnia śnieżna",
+  "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.": "Wymagania: Na planszy muszą się znajdować przynajmniej 2 obszary oceanów. Podnieś swoją produkcję roślinności i ciepła o 1 poziom.",
+
+  "Self-replicating Robots": "Maszyny samoreplikujące",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Akcja: Odkryj i umieść na tej karcie kartę z symbolem przestrzeni kosmicznej lub budowli ze swojej ręki i umieść na niej 2 surowce, albo podwój liczbę zasobów na tej karcie.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Efekt trwały: Karty umieszczone na tej karcie mogą być zagrywane jak z ręki z kosztem zagrania obniżonym o umieszczoną na niej liczbę zasobów.",
+
+  "Dusk Laser Mining": "Nocne górnictwo laserowe",
+  "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Wymagania: Musisz posiadać przynajmniej 2 symbole nauki. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom. Otrzymujesz 4 jednostki tytanu.",
+
+  "Hi-Tech Lab": "Laboratorium hi-tech",
+  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Akcja: Wydaj dowolną liczbę jednostek energii, aby dobrać tyle samo kart. WEŹ 1 Z NICH NA RĘKĘ, ODRZUĆ RESZTĘ.",
+
+  "Mercurian Alloys": "Merkuriańskie stopy",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "Efekt trwały: Twoje jednostki tytanu są warte o 1 M€ więcej.",
+
+  "Energy Market": "Rynek energetyczny",
+  "Action: Spend 2X M€ to gain X energy.": "Akcja: Wydaj 2*X M€, aby otrzymać X jednostek energii.",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "Akcja: Obniż swoją produkcję energii o 1 poziom, aby otrzymać 8 M€.",
+
+  "Asteroid Rights": "Asteroid Rights",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Akcja: Wydaj 1 M€, żeby umieścić 1 jednostkę asteroid na dowolnej karcie.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś swoją produkcję M€ o 1 poziom lub otrzymaj 2 jednostki tytanu.",
+  "Add 2 asteroids to this card.": "Umieść na tej karcie 2 jednostki asteroid.",
+
+  "Stanford Torus": "Torus Stanforda",
+  "Place a city tile IN SPACE, outside and separate from the planet.": "Umieść obszar miasta w PRZESTRZENI KOSMICZNEJ, poza planetą, bez sąsiedztwa z innymi obszarami.",
+
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Rozpoczynasz grę z 48 M€ i 4 dodatkowymi poziomami produkcji M€. KAŻDY PRZECIWNIK OBNIŻA SWOJĄ PRODUKCJĘ M€ O 2 POZIOMY. NIE WYWOŁUJE TO PONIŻSZEGO EFEKTU.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Efekt trwały: Gdy jakiś gracz spowoduje, że inny gracz musi obniżyć produkcję lub stracić zasoby, zapłać poszkodowanemu graczowi 3M€ (lub tyle, ile możesz).",
+
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Rozpoczynasz grę z 47 M€. W ramach swojej pierwszej akcji w grze umieść obszar zieleni na planszy i podnieś poziom tlenu o 1%.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Efekt trwały: Za każde nowe sąsiedztwo pomiędzy Twoim obszarem a obszarem innego gracza otrzymujesz 1 jednostkę wybranego przez siebie zasobu standardowego (bez względu na to, kto umieścił nowy obszar).",
+
+  "Arcadian": "Wspólnota",
+  "Communities": "Arkadyjska",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Rozpoczynasz grę z 10 M€ i 10 jednostkami stali. W ramach swojej pierwszej akcji w grze umieść na niezarezerwowanym polu na planszy znacznik wspólnoty (Twój znacznik gracza).",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "Akcja: Umieść znacznik wspólnoty (Twój znacznik gracza) na niezarezerwowanym polu na planszy sąsiadującym z Twoim obszarem albo innym znacznikiem wspólnoty.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "Pola ze znacznikami wspólnoty są dla Ciebie zarezerwowane. Gdy umieszczasz na nich dowolny obszar, otrzymujesz 3 M€.",
+
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Warunki początkowe: Rozpoczynasz grę z 44 M€. W ramach swojej pierwszej akcji odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz karty z symbolem mikrobów. Weź tę kartę do ręki, resztę odrzuć.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem mikrobów (z tą włącznie), ten gracz otrzymuje 2 M€ albo umieszcza 1 jednostkę mikrobów na zagranej karcie, a Ty dodatkowo otrzymujesz 2 M€ za każdy symbol mikrobów na zagranej karcie.",
+
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "Podnieś temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 6 jednostek roślinności dowolnego gracza. Umieść ten obszar na planszy na polu, które nie sąsiaduje z żadnym obszarem miasta.",
+
+  "You start with 38 M€ and 3 asteroid resources.": "Rozpoczynasz grę z 3 jednostkami asteroid i 38 M€.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Akcja: Umieść 1 jednostkę asteroid na dowolnej karcie, albo otrzymaj 1 dowolną jednostkę zasobów, albo wydaj 1 jednostkę asteroid z tej karty, aby otrzymać 3 jednostki tytanu.",
+
+  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Wymagania: Na planszy muszą się znajdować przynajmniej 4 obszary oceanów. Podnieś swoją produkcję energii o 2 poziomy. Umieść ten obszar na planszy na polu sąsiadującym z obszarem oceanu.",
+
+  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3. Umieść ten obszar na planszy.",
+
+  "You start with 37 M€. Increase your steel production 1 step.": "Rozpoczynasz grę z 37 M€ i dodatkowym poziomem produkcji stali.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "JEŚLI NIE POSIADASZ JEDNOSTEK ENERGII, podnieś swoją produkcję energii o 1 poziom ALBO wydaj 3 M€, aby dobrać pierwszą z odkrywanych kart z symbolem budowli z talii projektów (pozostałe odrzuć).",
+
+  "You start with 38 M€ and 1 steel production.": "Rozpoczynasz grę z 38 M€ i 1 dodatkowym poziomem produkcji stali.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Efekt trwały: Gdy zagrywasz kartę z symbolem budowli (z tą włącznie), umieść na tej karcie 1 jednostkę mikrobów albo usuń z tej karty 2 jednostki mikrobów i podnieś swoją produkcję zieleni o 1 poziom za każdy symbol budowli na zagranej karcie."
+}

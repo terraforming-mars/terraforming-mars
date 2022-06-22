@@ -1,49 +1,42 @@
+// A base configuration for src and tests, and also the config
+// Visual Studio Code reads
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["dom"], 
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "dist",
-    "strict": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "target": "es5",
-    "types": [
-      "node",
-      "mocha",
-      "chai"
+    // Compiler options are mostly for the sub-configurations
+    "compilerOptions": {
+        // ES2019 support is pretty broad for Browsers, except for Function.prototype.toString, which is just not
+        // likely to be a problem
+        // ES2020 is very well supported in modern browsers.
+        // ES 2021 has a couple of features not supported in Opera, but they're WeakRef and Promise.any.
+        // It is safe to assume those features won't be run on a browser.
+        // "lib": ["dom", "es2021"],
+        "lib": ["dom", "es2019"],
+        "incremental": true,
+        "module": "commonjs",
+        "strict": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "skipLibCheck": true,
+        "target": "es6",
+        "types": ["node"],
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "allowUnreachableCode": false,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "plugins": [
+            { "transform": "transformer-module" },
+        ]
+
+    },
+    // This gives the VS Code IDE its magic.
+    "include": [
+        "**/*.ts",
     ],
-    "moduleResolution": "node",
-    
-  },
-  "include": [
-    "src/*.ts",
-    "src/components/*.ts",
-    "src/directives/*.ts",
-    "src/cards/*.ts",
-    "src/cards/corporation/*.ts",
-    "src/cards/prelude/*.ts",
-    "src/cards/venusNext/*.ts",    
-    "src/cards/turmoil/*.ts",  
-    "src/cards/promo/*.ts",  
-    "src/cards/colonies/*.ts",           
-    "src/inputs/*.ts",
-    "src/models/*.ts",
-    "src/colonies/*.ts",
-    "script.ts",
-    "server.ts",
-    "src/interrupts/*.ts",
-    "src/database/*.ts",
-    "src/turmoil/*.ts",
-    "src/turmoil/globalEvents*.ts",    
-  ],
-  "files": [
-    "script.ts",
-    "server.ts"
-  ]
 }

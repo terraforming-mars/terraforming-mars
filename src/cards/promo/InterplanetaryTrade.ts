@@ -1,28 +1,36 @@
-import { IProjectCard } from "../IProjectCard";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Tags} from '../../common/cards/Tags';
+import {Player} from '../../Player';
+import {Resources} from '../../common/Resources';
+import {CardRenderer} from '../../cards/render/CardRenderer';
 
-export class InterplanetaryTrade implements IProjectCard {
+export class InterplanetaryTrade extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.INTERPLANETARY_TRADE,
+      tags: [Tags.SPACE],
+      cost: 27,
+      victoryPoints: 1,
 
-    public name: CardName = CardName.INTERPLANETARY_TRADE;
-    public cost: number = 27;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.AUTOMATED;
+      metadata: {
+        cardNumber: 'X05',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(1));
+          b.slash().diverseTag();
+        }),
+        description: 'Increase your M€ production 1 step per different tag you have in play, including this.',
+      },
+    });
+  }
 
-    public play(player: Player) {
-        // This card tag is counting as well
-        const availableTags = player.getDistinctTagCount(true, Tags.SPACE);
-        // Only count wildcards up to the max amount of tag types existing (minus events and wildcards)
-        const existingTags = Object.keys(Tags).length - 2;
-        player.setProduction(Resources.MEGACREDITS, Math.min(availableTags, existingTags));
-        return undefined;
-    }
-
-    public getVictoryPoints() {
-        return 1;
-    }
-
+  public play(player: Player) {
+    // This card's tag also counts.
+    const availableTags = player.getDistinctTagCount('default', Tags.SPACE);
+    player.addProduction(Resources.MEGACREDITS, availableTags, {log: true});
+    return undefined;
+  }
 }

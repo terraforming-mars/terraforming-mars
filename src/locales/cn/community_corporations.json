@@ -1,0 +1,24 @@
+{
+    "Agricola Inc": "阿格里科拉公司",
+    "You start with 1 plant production, 1 M€ production and 40 M€.": "起始1点植物产量、1 M€产量和40 M€。",
+    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "效果：终局计分时，若你拥有每种标志0/1-2/3-4/5+个，得到-2/0/1/2 VP。",
+
+    "Curiosity II": "求知II型公司",
+    "You start with 40 M€ and 2 steel production.":"起始拥有40 M€和2钢铁产量",
+    "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.":"效果：当你在一个有资源放置奖励的区域上放置一个板块，或将板块放置在另一个板块上，你可以支付2 M€来抽一张牌。",
+
+    "Incite": "煽动公司",
+    "You start with 32 M€. As your first action, place two delegates in one party.": "起始拥有32 M€，作为第一个行动，放置2个代表到1个党派上。",
+    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "影响力始终+1，当你从储备区派遣代表时，少支付2 M€。",
+
+    "Midas": "迈达斯",
+    "You start with 120 M€. Lower your TR 7 steps.": "起始获得120 M€，降低7点改造度。",
+
+    "Playwrights": "剧作家",
+    "You start with 38 M€ and 1 Energy production.": "起始拥有38 M€和1点电力产量。",
+    "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "行动：仅适用M€支付费用来重复一个任意玩家已经打出的事件效果（适用减费与回钱），然后将其从游戏中移除。",
+
+   "Project Workshop": "项目探讨公司",
+    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "起始获得39 M€，一个铁和一个钛。第一个行动时抽一张蓝色牌。",
+    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "行动：翻面并弃掉一张蓝色卡牌，将卡牌上的分数转化为改造度并抽2张牌，或者花3 M€抽取一张蓝色卡牌。"
+}

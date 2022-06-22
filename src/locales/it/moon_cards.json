@@ -1,0 +1,103 @@
+{
+
+ "Basic Infrastructure":"Infrastruttura Base",
+ "Place a road tile on the Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.":"Colloca 1 tessera Strada sulla Luna e incrementa la Traccia Logistica di 1 livello. Ottieni 1 Flotta Commerciale.",
+
+ "Core Mine":"Miniera nel Nucleo",
+ "Place a mine tile on the Moon and raise the Mining Rate 1 step. Increase your titanium production 1 step.":"Colloca 1 tessera Miniera sulla Luna e incrementa la Traccia Scavi di 1 livello. Incrementa la tua Produzione di Titianio di 1 livello.",
+
+ "First Lunar Settlement":"Primo Insediamento Lunare",
+ "Place a colony tile on the Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.":"Colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. Incrementa la tua Produzione di M€ di 1 livello.",
+
+ "Lunar Planning Office":"Ufficio di Progettazione Lunare",
+ "Draw 2 cards with Moon tag. Gain 6 steel.":"Pesca 2 carte con il simbolo Luna. Ottieni 6 risorse Acciaio.",
+
+ "Mining Complex":"Complesso Minerario",
+ "Place a mine tile on the Moon and raise the Mining Rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.":"Colloca 1 tessera Miniera sulla Luna e incrementa la Traccia Scavi di 1 livello. Colloca 1 tessera Strada accanto a una tessera Miniera e incrementa la Traccia Logistica di 1 livello. Paga 7 M€.",
+
+
+
+
+
+ "AI Controlled Mine Network":"Rete Mineraria Controllata da IA",
+  "Requires Logistic Rate to be 2 or higher. Raise the Logistic Rate 1 step":"Richiede che la Traccia Logistica sia almeno a livello 2. Incrementa la Traccia Logistica di 1 livello.",
+
+
+  "Algae Bioreactors":"Bioreattori ad Alghe",
+  "Decrease your plant production 1 step. Raise the Colony Rate 1 step and oxygen 1%.":"Diminuisci la tua Produzione di Piante di 1 livello. Incrementa la Traccia Colonie di 1 livello e l'Ossigeno di 1 livello.",
+
+  "Ancient Shipyards":"Antico Cantiere Navale",
+  "Action: Steal 8 M€ from any player and add a resource cube here.":"Azione: ruba 8 M€ da un altro giocatore e aggiungi 1 cubo risorsa a questa carta.",
+  "Spend 3 titanium. -1 VP for every resource here.":"Spendi 3 risorse Titanio. -1 PV per ogni risorsa su questa carta.",
+
+ "Archimedes Hydroponics Station":"Stazione Idroponica Archimede",
+  "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.":"Diminuisci la tua Produzione di Energia di 1 livello e la tua Produzione di M€ di 1 livello. Incrementa la tua Produzione di Piante di 2 livelli.",
+
+  "Aristarchus Road Network":"Rete Stradale Aristarco",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on the Moon and raise the Logistics Rate 1 step.":"Spendi 2 risorse Acciao. Incrementa la tua Produzione di M€ di 2 livelli. Colloca 1 tessera Strada sulla Luna e incrementa la Traccia Logistica di 1 livello.",
+
+  "Colonist Shuttles":"Shuttle Coloniali",
+  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2 M€ for each colony tile on the Moon.":"Spendi 1 risorsa Titanio. Incrementa la Traccia Colonie di 1 livello. Ottieni 2 M€ per ogni tessera Colonia sulla Luna.",
+
+  "Copernicus Solar Arrays":"Pannelli Solari Copernico",
+  "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.":"Spendi 1 risorsa Titanio. Ottieni 2 risorse Calore. Incrementa la tua Produzione di Energia di 1 livello.",
+
+  "Copernicus Tower":"Torre Copernico",
+  "Requires you have 2 titanium production.":"Richiede la Produzione di almeno 2 risorse Titanio.",
+  "Action: Add 1 Science resource here, or spend 1 Science resource here to raise your TR 1 step.":"Azione: aggiungi 1 risorsa Scienza a questa carta, oppure rimuovi 1 risorsa Scienza da questa carta per incrementare il tuo TT di 1 livello.",
+  "1 VP PER MOON TAG YOU HAVE.":"1 PV per ogni simbolo Luna posseduto.",
+
+  "Cosmic Radiation":"Radiazione Cosmica",
+  "4 Mining rate":"Traccia Scavi livello 4",
+  "Requires 4 Mining Rate. All players pay 4 M€ for each mining tile they own.":"Richiede che la Traccia Scavi sia almeno a livello 4. Tutti i giocatori pagano 4 M€ per ciascuna tessera Miniera posseduta.",
+
+  "Darkside Incubation Plant":"Fabbrica di Incubazione sul Lato Oscuro",
+  "Action: Add 1 microbe here.":"Azione: aggiungi 1 Microbo a questa carta.",
+  "Action: Spend 2 microbes to raise the Colony Rate 1 step.":"Azione: rimuovi 2 Microbi da questa carta per incrementare la Traccia Colonie di 1 livello.",
+  "Spend 1 titanium. 1 VP for every 2 microbes here.":"Spendi 1 risorsa Titanio. 1 PV ogni 2 Microbi su questa carta.",
+
+  "Darkside Meteor Bombardment":"Bombardamento Meteore sul Lato Oscuro",
+  "Gain 2 steel and 2 titanium. Raise the Mining Rate 2 steps.":"Ottieni 2 risorse Acciaio e 2 risorse Titanio. Incrementa la Traccia Scavi di 2 livelli.",
+
+  "Darkside Mining Syndicate":"Unione Mineraria del Lato Oscuro",
+  "Increase your Titanium production 2 steps, or 1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.":"Incrementa la tua Produzione di Titanio di 2 livelli, o di 1 livello se la Traccia Scavi è almeno al livello 2. Dopodiché incrementa la Traccia Scavi di 1 livello.",
+
+  "Darkside Observatory":"Osservatorio sul Lato Oscuro",
+  "Action: Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]":"Azione: aggiungi 1 risorsa Scienza a una qualunque carta [tranne a quelle che danno 2 o più PV per risorsa].",
+  "Action: Add 2 Data to ANY card.":"Azione: aggiungi 2 risorse Dati a una qualunque carta.",
+
+  "Deep Lunar Mining":"Scavi Lunari Profondi",
+  "Spend 1 titanium. Increase your titanium production 2 steps. Raise the Mining Rate 1 step.":"Spendi 1 risorsa Titanio. Incrementa la tua Produzione di Titanio di 2 livelli. Incrementa la Traccia Scavi di 1 livello.",
+
+  "Earth Embassy":"Ambasciata Terrestre",
+  "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.":"Effetto: dopo essere stata giocata, ogni volta che esegui un'azione, i tuoi simboli Luna contano come simboli Terra (non vale il viceversa).",
+
+
+
+
+
+
+
+
+ "Mare Imbrium Mine": "Miniera Mare Imbrium",
+  "Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.": "Spendi 1 risorsa Titanio. Incrementa la tua Produzione di Acciaio di 1 livello e la tua Produzione di Titanio di 1 livello. Colloca 1 tessera Miniera sull'AREA RISERVATA e incrementa la Traccia Scavi di 1 livello.",
+
+  "Mare Nectaris Mine": "Miniera Mare Nectaris",
+  "Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.":"Spendi 1 risorsa Titanio. Incrementa la tua Produzione di Acciaio di 1 livello. Colloca 1 tessera Miniera sull'AREA RISERVATA e incrementa la Traccia Scavi di 1 livello.",
+
+  "Mare Nubium Mine": "Miniera Mare Nubium",
+    "Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.": "Spendi 1 risorsa Titanio. Incrementa la tua Produzione di Titanio di 1 livello. Colloca 1 tessera Miniera sull'AREA RISERVATA e incrementa la Traccia Scavi di 1 livello.",
+
+  "Mare Serenitatis Mine": "Miniera Mare Serenitatis",
+   "Spend 2 titanium and 1 steel. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the Mining Rate 1 step and the Logistic Rate 1 step.": "Spendi 2 risorse Titanio e 1 risorsa Acciaio. Incrementa la tua Produzione di Acciaio di 1 livello e la tua Produzione di Titanio di 1 livello. Colloca 1 tessera Miniera sull'AREA RISERVATA e 1 tessera Strada accanto ad essa. Incrementa la Traccia Scavi di 1 livello e la Traccia Logistica di 1 livello.",
+
+     "Steal":"Ruba",
+     "Colony rate":"Traccia Colonie",
+     "Mining rate":"Traccia Scavi",
+     "Logistic rate":"Traccia Logistica",
+      "Colony tiles":"tessere Colonia",
+      "Mine tiles":"tessere Miniera",
+      "Road tiles":"tessere Strada"
+
+
+}

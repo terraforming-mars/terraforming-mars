@@ -1,0 +1,27 @@
+{
+    "Agricola Inc": "Agricola Inc",
+    "You start with 1 plant production, 1 M€ production and 40 M€.": "Inizi con una Produzione di Piante di 1, una Produzione di M€ di 1 e 40 M€.",
+    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Effetto: a fine partita, ottieni -2 / 0 / 1 / 2 PV PER TIPO DI SIMBOLO con 0 / 1-2 / 3-4 / 5+ simboli.",
+
+    "Curiosity II": "Curiosity II", 
+    "You start with 40 M€ and 2 steel production.":"Inizi con 40 M€ e una Produzione di Acciaio di 2.",
+    "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.":"Effetto: quando collochi una tessera su un'area che ha un bonus di piazzamento in RISORSE, o sopra un'altra tessera, puoi pagare 2 M€ per pescare una carta.",
+  
+    "Incite": "Incite",
+    "You start with 32 M€. As your first action, place two delegates in one party.": "Inizi con 32 M€. Come prima azione colloca 2 Delegati in un partito.",
+    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Effetto: hai +1 punti Influenza. Quando mandi un Delegato utilizzando l'azione di Lobby, paghi 2 M€ in meno.",
+
+    "Midas": "Midas",
+    "You start with 120 M€. Lower your TR 7 steps.": "Inizi con 120 M€. Diminuisci il tuo TT di 7 livelli.",
+  
+    "Playwrights": "Playwrights",
+    "You start with 38 M€ and 1 Energy production.": "Inizi con 38 M€ e una Produzione di Energia di 1 livello.",
+    "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Azione: rigioca un evento giocato da un giocatore qualunque pagando il suo costo SOLO in M€ (si applicano gli sconti e i rimborsi), quindi RIMUOVILO DAL GIOCO.",
+  
+   "Project Workshop": "Project Workshop",
+    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Inizi con 39 M€, 1 risorsa Acciaio e 1 risorsa Titanio. Come prima azione, pesca una carta blu.",
+    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Azione: gira e scarta una carta blu giocata per convertire ogni PV su di essa in TT e pescare 2 carte, oppure spendi 3 M€ per pescare una carta blu."
+  
+  
+  
+}

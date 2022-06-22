@@ -1,32 +1,47 @@
-import { expect } from "chai";
-import { TitanAirScrapping } from "../../../src/cards/colonies/TitanAirScrapping";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { OrOptions } from "../../../src/inputs/OrOptions";
-import { Game } from '../../../src/Game';
+import {expect} from 'chai';
+import {TitanAirScrapping} from '../../../src/cards/colonies/TitanAirScrapping';
+import {Game} from '../../../src/Game';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-describe("TitanAirScrapping", function () {
-    it("Should play", function () {
-        const card = new TitanAirScrapping();
-        const action = card.play();
-        expect(action).to.eq(undefined);
-    });
-    it("Should act", function () {
-        const card = new TitanAirScrapping();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        player.playedCards.push(card);
-        expect(card.canAct(player)).to.eq(false);
-        player.titanium = 3;
-        expect(card.canAct(player)).to.eq(true);
-        player.addResourceTo(card, 7);
-        const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
-        expect(orOptions instanceof OrOptions).to.eq(true);
-        orOptions.options[1].cb();
+describe('TitanAirScrapping', function() {
+  let card : TitanAirScrapping; let player : Player;
+
+  beforeEach(function() {
+    card = new TitanAirScrapping();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, redPlayer], player);
+  });
+
+  it('Can\'t act', function() {
+    player.playedCards.push(card);
+    expect(card.canAct(player)).is.not.true;
+  });
+
+  it('Should act - both actions possible', function() {
+    player.playedCards.push(card);
+    player.titanium = 3;
+    player.addResourceTo(card, 7);
+    expect(card.canAct(player)).is.true;
+
+    const orOptions = card.action(player) as OrOptions;
+    expect(orOptions instanceof OrOptions).is.true;
+        orOptions!.options[0].cb();
+
         expect(player.getTerraformRating()).to.eq(21);
-        expect(player.getResourcesOnCard(card)).to.eq(5);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
-    });
+        expect(card.resourceCount).to.eq(5);
+        expect(card.getVictoryPoints()).to.eq(2);
+  });
+
+  it('Should act automatically when only one action possible', function() {
+    player.playedCards.push(card);
+    player.addResourceTo(card, 2);
+    expect(card.canAct(player)).is.true;
+
+    card.action(player);
+    expect(player.getTerraformRating()).to.eq(21);
+    expect(card.resourceCount).to.eq(0);
+  });
 });

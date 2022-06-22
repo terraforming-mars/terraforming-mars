@@ -1,22 +1,31 @@
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { PreludeCard } from "./PreludeCard";
-import { IProjectCard } from "../IProjectCard";
-import { SelectSpace } from "../../inputs/SelectSpace";
-import { ISpace } from "../../ISpace";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import {Tags} from '../../common/cards/Tags';
+import {Player} from '../../Player';
+import {PreludeCard} from './PreludeCard';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../common/cards/CardName';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
+import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../common/Units';
 
 export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
-    public name: CardName = CardName.SELF_SUFFICIENT_SETTLEMENT;
-    public play(player: Player, game: Game) {     
-        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-            game.addCityTile(player, space.id);
-            player.setProduction(Resources.MEGACREDITS,2);
-            return undefined;
-        }); 
-    }
-}
+  constructor() {
+    super({
+      name: CardName.SELF_SUFFICIENT_SETTLEMENT,
+      tags: [Tags.BUILDING, Tags.CITY],
+      productionBox: Units.of({megacredits: 2}),
 
+      metadata: {
+        cardNumber: 'P29',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(2)).city();
+        }),
+        description: 'Increase your money production 2 steps. Place a City tile.',
+      },
+    });
+  }
+  public play(player: Player) {
+    player.adjustProduction(this.productionBox);
+    player.game.defer(new PlaceCityTile(player));
+    return undefined;
+  }
+}

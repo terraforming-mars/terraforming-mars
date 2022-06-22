@@ -1,12 +1,14 @@
-import { IMilestone } from "./IMilestone";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { Resources } from "../Resources";
+import {IMilestone} from './IMilestone';
+import {Player} from '../Player';
+import {Resources} from '../common/Resources';
 
 export class Energizer implements IMilestone {
-    public name: string = "Energizer";
-    public description: string = "Requires that you have 6 energy production"
-    public canClaim(player: Player, _game: Game): boolean {
-        return player.getProduction(Resources.ENERGY) >= 6;
-    }   
+  public name: string = 'Energizer';
+  public description: string = 'Requires that you have 6 energy production';
+  public getScore(player: Player): number {
+    return player.getProduction(Resources.ENERGY);
+  }
+  public canClaim(player: Player): boolean {
+    return this.getScore(player) >= 6;
+  }
 }

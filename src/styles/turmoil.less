@@ -1,22 +1,13 @@
-.empty-tile-small {
-    background-color: rgb(190,190,190);
-    color: rgb(50,50,50);
-    font-weight: normal;
-    vertical-align: middle;
-    width: 20px;
-    height: 15px;
-    padding: 5px;
-}
 
 .delegate {
     display: inline-block;
-    background-image: url("./assets/delegate.png");
-    width: 30px;
+    background-image: url(./assets/misc/delegate.png);
+    width: 24px;
     height: 30px;
-    margin-bottom: 6px;
-    background-repeat: no-repeat;
+    background-size: 24px 30px;
     vertical-align: middle;
-    filter: drop-shadow(0px 1px 1px #222) drop-shadow(0px -1px 1px #222);
+    filter: drop-shadow(0px 0px 1px black);
+    margin-bottom: 6px;
 }
 
 .delegate-red {
@@ -33,33 +24,45 @@
 
 .influence {
     display: inline-block;
-    background-image: url("./assets/delegate.png");
-    width: 28px;
-    height: 28px;
-    background-size: 20px 19px;
-    background-position: 4px 4px;
-    background-repeat: no-repeat;
+    background-image: url(./assets/misc/influence.png);
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
     vertical-align: middle;
-    background-color: #222;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
-    border: 1px solid rgb(221,221,221);
+    margin-bottom: 5px;
 }
 
 .chairman {
     display: inline-block;
-    background-image: url("./assets/delegate.png");
-    width: 30px;
+    background-image: url(./assets/misc/chairman.png);
+    width: 24px;
     height: 30px;
-    background-position: -1px 0px;
-    background-color: #222;
-    border-radius: 10px 10px 2px 2px;
-    margin-bottom: 6px;
-    background-repeat: no-repeat;
+    background-size: 24px 30px;
     vertical-align: middle;
-    filter: drop-shadow(0px 1px 1px #222) drop-shadow(0px -1px 1px #222);
+    filter: drop-shadow(0px 0px 1px black);
+    background-color: #222;
+    padding: 3px;
+    background-repeat: no-repeat;
+    background-position: 3px;
+    border-radius: 15px 15px 2px 2px;
+    margin-bottom: 6px;
 }
 
+.leader {
+    display: inline-block;
+    background-image: url(./assets/misc/delegate.png);
+    width: 24px;
+    height: 30px;
+    background-size: 24px 30px;
+    vertical-align: middle;
+    filter: drop-shadow(0px 0px 1px black);
+    background-color: #222;
+    padding: 3px;
+    background-repeat: no-repeat;
+    background-position: 3px;
+    border-radius: 15px 15px 2px 2px;
+    margin-bottom: 6px;
+}
 
 .turmoil {
     color: #000000;
@@ -70,6 +73,8 @@
     width: 1010px;
     display: inline-block;
     vertical-align: top;
+    transform: scale(0.88);
+    margin: -50px 0 -45px -60px;
 }
 
 .events-board {
@@ -78,9 +83,9 @@
     width: 1025px;
     box-sizing: initial;
     text-align: left;
-    margin: 0 0 0 10px;
+    margin: -10px 0 -10px 10px;
 }
-  
+
 .global-event {
     display: inline-block;
     vertical-align: top;
@@ -89,23 +94,36 @@
     background: url(assets/turmoil_ui.png);
     background-position: -21px -172px;
     margin: 20px 0 0 -13px;
+    color: #000000;
+    font-size: medium;
 }
-  
+
 .global-event--current {
     background-position: -727px -172px;
 }
 
-.global-event--comming {
+.global-event--coming {
     background-position: -375px -172px;
 }
-  
+
+.global-event-card-content {
+  width: 330px !important;
+  margin-left: 10px;
+}
+
+.global-event-name--narrow {
+  letter-spacing: -0.05em;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
 .event-title {
     display: none;
 }
 .event-parties {
     margin-bottom: 10px;
 }
-  
+
 .event-party {
     position: absolute;
     width: 200px;
@@ -117,14 +135,14 @@
     background: #000;
     text-transform: uppercase;
 
-    &.event-party--top {
+    &.event-party--revealed {
         clip-path: polygon(5% 0, 95% 0, 100% 30%, 100% 80%, 100% 100%, 6% 100%, 0% 70%, 0 0);
         margin: 0px 0 0 69px;
     }
 
-    &.event-party--bottom {
-        margin: 136px 0 0 127px;
+    &.event-party--current {
         clip-path: polygon(5% 0%, 100% 0, 100% 40%, 89% 102%, 0% 100%, 0% 35%);
+        margin: 136px 0 0 127px;
     }
 
     &.event-party--greens {
@@ -153,7 +171,7 @@
     }
 }
 
-.global-event--comming .event-party--bottom {
+.global-event--coming .event-party--bottom {
     margin-left: 123px
 }
 
@@ -178,34 +196,65 @@
 .turmoil-header {
     min-height: 180px;
 }
-  
+
 .grid-parties {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
     gap:10px;
 }
-  
+
 .board-party {
     width: 160px;
     height: 160px;
     border-radius: 0 0 10px 10px;
 }
-  
+
 .grid-delegates {
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 10px 7px 7px 9px;
     gap:0px;
     min-height: 118px;
+
+    &.grid-in-send-delegate {
+        padding-top: 15px;
+    }
 }
-  
+
 .delegate-spot {
     width: 40px;
     height:40px;
-    /*background: linear-gradient(transparent, rgba(0,0,0,.1));*/
-
 }
-  
+
+.party-container {
+    display: inline-block;
+    width: 164px;
+    height: 307px;
+    margin: 15px 10px 10px 0px;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+    background: url(assets/turmoil_ui.png);
+    &.party-background--mars_first {
+        background-position: -23px 316px;
+    }
+    &.party-background--scientists {
+        background-position: -193px 316px;
+    }
+    &.party-background--unity {
+        background-position: -363px 316px;
+    }
+    &.party-background--greens {
+        background-position: -533px 316px;
+    }
+    &.party-background--reds {
+        background-position: -703px 316px;
+    }
+    &.party-background--kelvinists {
+        background-position: -873px 316px;
+    }
+}
+
 .party-name {
     height: 31px;
     line-height: 32px;
@@ -215,6 +264,15 @@
     color: #fff;
     text-transform: uppercase;
     margin: 0 0 6px -3px;
+
+    &.party-name-indicator{
+        height: 20px;
+        line-height: 22px;
+        width: 50px;
+        margin: 10px 0 0px 3px;
+        font-size: 11px;
+        text-align: center;
+    }
 
     &.party-name--greens {
         background: #16b215;
@@ -241,19 +299,19 @@
         background: #5d4d4d;
     }
 }
-  
+
 .grid-leaders {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
     gap:10px;
     margin: 11px 0 0 2px;
 }
-  
+
 .party-bonus {
     line-height: 18px;
     transform: scale(0.8);
 }
-  
+
 .leader-spot {
     width: 40px;
     padding: 7px 55px 0 55px;
@@ -265,22 +323,27 @@
         margin-top: 5px;
     }
 }
-  
-  
+
+.send-delegate-leader-spot {
+    transform: scale(0.8);
+    padding-top: 12px;
+    padding-left: 58px;
+}
+
 .turmoil-lobby {
     position: absolute;
     width: 320px;
     margin: 59px 0 0 52px;
     text-align: left;
 }
-  
+
 .turmoil-reserve {
     position: absolute;
-    width: 320px;
-    margin: 48px 0 0 651px;
+    width: 355px;
+    margin: 59px 0 0 651px;
     text-align: left;
 }
-  
+
 .lobby-spot {
     width: 52px;
     height: 63px;
@@ -296,7 +359,7 @@
     padding: 17px 0 0 42px;
     transform: scale(0.8);
 }
-  
+
 .label-lobby {
     width:115px;
     margin: auto;
@@ -306,10 +369,14 @@
     width: 110px;
     margin: auto;
 }
-  
+
+.count-in-send-delegate {
+    font-size: 22px;
+}
+
 .player-token {
     width: 50px;
-    height: 60px;
+    height: 32px;
     background: url(assets/turmoil_ui.png);
     background-position: -25px -383px;
     font-size: 27px;
@@ -338,25 +405,77 @@
         background-position: -865px 850px;
     }
 
+    &.purple {
+        background-position: -973px 850px;
+    }
+
+    &.orange {
+        background-position: -644px 780px;
+    }
+
+    &.pink {
+        background-position: -699px 780px;
+    }
+
     &.neutral {
         background-position: -919px 850px;
         color: #7b7b7b;
     }
 }
-  
+
 .player-token-new-leader {
     background: url(assets/turmoil_ui.png);
     background-position: -486px 861px;
 }
 
+.select-party-leader-spot {
+    width: 125px;
+    height: 85px;
+    margin-left: 5px;
+    margin-top: 5px;
+    &.dominance-marker {
+        background: url(assets/turmoil_ui.png);
+        background-position: -486px 861px;
+    }
+}
+
 .dominant-party-bonus {
     position: absolute;
-    margin: 69px 0px 0 322px;
+    margin: 76px 0px 0 322px;
     width: 200px;
+    color: white;
 
     p {
         max-width: 182px;
     }
+}
+
+.policy-user-cubes {
+    position: absolute;
+    margin: 132px 0px 0 336px;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 180px;
+    justify-content: center;
+
+    .policy-use-marker {
+        display: inline-block;
+        width: 21px;
+        height: 21px;
+        filter: drop-shadow(2px 2px 3px black);
+        margin: 5px;
+
+        font-size: 14px;
+        color: white;
+        line-height: 21px;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+}
+
+.dominant-party-name {
+    position: absolute;
+    margin: 35px 0 0 340px;
+    transform: scale(0.85);
 }
 
 
@@ -374,16 +493,19 @@
 }
 
 .party-production-box {
-    width: 33px;
+    width: 44px;
     padding-top: 0px;
     padding-bottom: 0px;
     font-size: 20px;
     line-height: 20px;
-    margin-top: 3px;
+    margin-top: 0;
+    transform: scale(0.8);
+    height: 37px;
+    vertical-align: top;
 }
 
 .party-resource-tag {
-    font-size: 20px;  
+    font-size: 20px;
 }
 
 .party-resource {
@@ -397,6 +519,7 @@
     padding-left: 5px;
     height: 16px;
     line-height: 11px;
+    background-size: 40px 26px !important;
 }
 
 .party-inferior-rating {
@@ -409,13 +532,14 @@
     height: 16px;
     line-height: 11px;
     vertical-align: middle;
+    margin-top: 7px !important;
 }
 
 .party-tile {
     width: 30px;
     margin-left: 5px;
     margin-right: 5px;
-    margin-top: 2px;
+    margin-top: 8px;
     padding: 4px;
     padding-top: 6px;
     padding-left: 6px;
@@ -427,27 +551,29 @@
     font-size: 16px;
     color: #303030;
     text-transform: uppercase;
-    background: lightblue;
     padding: 3px 26px 3px 26px;
     border-radius: 0 0 20px 20px;
     text-decoration: none;
     cursor: pointer;
+    position: absolute;
+    margin: 138px 0 0 370px;
+    font-weight: bold;
 }
 
 .policies-clickable:link {
     color: #303030;
 }
-    
+
 .policies-clickable:visited {
     color: #303030;
 }
-    
+
 
 .policy-block {
     background-color: #313131;
     display: inline-block;
     vertical-align: top;
-    padding: 20px;
+    padding: 5px;
     min-width: 233px;
     min-height: 104px;
     margin: 10px;
@@ -458,9 +584,124 @@
 }
 
 .policies-global {
-    margin-top:5px;
+    margin-top: 175px;
+    position: absolute;
+    z-index: 3;
+    background-color: #303030;
+    border-radius: 10px;
 }
 
 .policy-bonus {
     margin-left: 20px;
+    color: white;
+}
+
+.card-small {
+    transform: scale(0.8);
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.greenery-tile-small {
+    transform: scale(0.8);
+    margin-left: 0px;
+    margin-top: -5px;
+    margin-bottom: 0px;
+}
+
+.policy-card-with-tag {
+    margin-top: 10px;
+}
+
+.req-tile-small {
+    transform: scale(0.8);
+    margin: 10px 0px;
+}
+
+.policy-top-margin {
+    margin-top: 10px;
+}
+
+.scientists-requisite {
+    background-image: url(./assets/requisites/min_small.png);
+    width: 60px;
+    height: 30px;
+    background-size: 60px 30px;
+    margin-top: 15px;
+    margin-left: 75px;
+}
+
+.standard-projects {
+    background-image: url(./assets/misc/standard_projects.png);
+    width: 84px;
+    height: 30px;
+    background-size: 84px 30px;
+    display: inline-block;
+    margin-bottom: -10px;
+}
+
+.turmoil-party-transition-arrow-grid {
+    position: absolute;
+    left: 130px;
+    top: 400px;
+
+    .turmoil-party-transition-arrow {
+        display: inline-block;
+        width: 70px;
+        height: 15px;
+        background-color: #444;
+        clip-path: polygon(30% 15%, 30% 40%, 100% 40%, 100% 60%, 30% 60%, 30% 85%, 0% 50%);
+        margin-right: 96px;
+    }
+}
+
+.red-arrow-3x {
+    background-image: url(./assets/misc/arrow_3x.png);
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-bottom: 15px;
+    background-repeat: no-repeat;
+    background-position: 0px;
+}
+
+.red-arrow-infinity {
+    background-image: url(./assets/misc/arrow_infinity.png);
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-bottom: 15px;
+    background-repeat: no-repeat;
+    background-position: 0px;
+}
+
+.selectable-party-name {
+    position: absolute;
+    top: 220px;
+    left: 3px;
+    transform: scale(0.9);
+    text-align: center;
+}
+
+input[type="radio"]:checked + .party-container.filterDiv {
+    box-shadow: none;
+}
+
+input[type="radio"]:checked + .party-container::after {
+    top: 253px;
+    left: 8px;
+    width: 149px;
+    background: #e28c22;
+    height: 47px;
+    border-bottom: none;
+}
+
+.unavailable-party {
+    filter: brightness(0.4);
+    cursor: default;
 }

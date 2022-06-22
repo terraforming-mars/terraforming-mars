@@ -1,0 +1,230 @@
+{
+  "Aridor":"Aridor",
+  "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play":"Inizi con 40 M€. Come tua prima azione, colloca una tessera Colonia aggiuntiva a tua scelta in gioco.",
+  "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.":"Effetto: quando metti in gioco un simbolo nuovo (le carte Evento non contano), incrementi la tua Produzione di M€ di 1 livello.",
+  
+  "Arklight":"Arklight",
+  "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"Inizi con 45 M€. Incrementa la tua Produzione di M€ di 2 livelli. 1 PV per ogni coppia di Animali su questa carta.",
+  "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 Animale a questa carta.",
+  
+  "Polyphemos":"Polyphemos",
+  "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.":"Inizi con 50 M€. Incrementa la tua Produzione di M€ di 5 livelli. Ottieni 5 risorse Titanio.",
+  "Effect: When you buy a card to hand, pay 5 M€ instead of 3, including the starting hand.":"Effetto: quando acquisti una carta da aggiungere alla tua mano, inclusa la mano iniziale, la paghi 5 M€ invece di 3 M€.",
+    
+  "Poseidon":"Poseidon",
+  "You start with 45 M€. As your first action, place a colony.":"Inizi con 45 M€. Come prima azione, colloca una Colonia.",
+  "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"Effetto: quando viene collocata una qualunque Colonia, inclusa quella associata a questa carta, incrementa la tua Produzione di M€ di 1 livello.",
+  
+  "StorM€raft Incorporated":"StorM€raft Incorporated",
+  "You start with 48 M€.":"Inizi con 48 M€.",
+  "Action: Add a floater to ANY card.":"Azione: aggiungi 1 Galleggiante ad una carta QUALUNQUE.",
+  "Effect: Floaters on this card may be used as 2 heat each.":"Effetto: i Galleggianti su questa carta possono essere utilizzati come 2 risorse Calore ciascuno.",
+  
+  
+  
+  
+  
+
+  "Impactor Swarm": "Sciame di Dispositivi d'Urto",
+  "Jovian Jovian": "Gioviano Gioviano",
+  "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "Richiede 2 simboli Gioviani. Ottieni 12 risorse Calore. Rimuovi fino a 2 Piante da un qualunque giocatore.",
+
+  "Market Manipulation": "Manipolazione del Mercato",
+  "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.":"Incrementa di 1 livello il tracciato di una delle tessere Colonia. Diminuisci di 1 livello il tracciato di un'altra tessera Colonia.",
+
+
+  "Research Colony": "Colonia di Ricerca",
+  "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA CHE GIÀ CONTENGA UN'ALTRA TUA COLONIA. Pesca 2 carte.",
+
+  "Urban Decomposers": "Decompositori Urbani",
+  "City": "Città",
+  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Richiede che tu abbia in gioco almeno 1 tessera Città e 1 Colonia. Incrementa la tua Produzione di Piante di 1 livello e aggiungi 2 Microbi ad una carta QUALUNQUE.",
+
+  "Trading Colony": "Colonia Commerciale",
+  "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Effetto: quando commerci con una Colonia, prima di compiere l'azione puoi incrementare di 1 livello il tracciato della tessera Colonia.",
+  "Place a colony.": "Colloca una Colonia",
+
+  "Lunar Mining": "Attività Mineraria Lunare",
+  "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Incrementa la tua Produzione di Titanio di 1 livello per ogni coppia di simboli Terra che possiedi in gioco, incluso questo.",
+
+  "Floater Leasing": "Galleggianti in Leasing",
+  "Increase your M€ production 1 step PER 3 floaters you have.": "Incrementa la tua Produzione di M€ di 1 livello per ogni terna di Galleggianti in tuo possesso.",
+
+  "Martian Zoo": "Zoo Marziano",
+  "Effect: When you play an Earth tag, place an animal here.": "Effetto: quando metti in gioco un simbolo Terra, aggiungi 1 Animale a questa carta.",
+  "Action: Gain 1 M€ per animal here.": "Azione: ottieni 1 M€ per ogni Animale su questa carta.",
+  "(Requires 2 city)":"Richiede che ci siano",
+  "(tiles in play.)":"2 tessere Città in gioco",
+  "Any 2 Cities":"Richiede che ci siano 2 Città in gioco.",
+  
+  "Luna Governor":"Governatore della Luna",
+  "3 Earth":"3 Terra",
+  "Requires 3 Earth tags. Increase your M€ production 2 steps.":"Richiede 3 simboli Terra. Incrementa la tua produzione di M€ di 2 livelli.",
+
+  "Minority Refuge":"Rifugio per le Minoranze",
+  "Decrease your M€ production 2 steps. Place a colony.":"Diminuisci la tua Produzione di M€ di 2 livelli. Colloca 1 Colonia.",
+
+  "Floater Technology":"Tecnologia dei Galleggianti",
+  "Action: Add 1 floater to ANOTHER card.":"Azione: aggiungi 1 Galleggiante AD UN'ALTRA carta.",
+
+  "Productive Outpost":"Avamposto Produttivo",
+  "Gain all your colony bonuses.":"Ottieni tutti i bonus relativi alle tue Colonie.",
+
+  "Space Port Colony":"Colonia dello Spazioporto",
+  "Colony":"Colonia",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale.",
+  "1VP per 2 colonies in play.":"1 PV per ogni coppia di Colonie in gioco.",
+
+  "Trade Envoys":"Inviati Commerciali",
+
+  "Earth Elevator": "Ascensore Terrestre",
+  "Increase your titanium production 3 steps.": "Aumenta la tua Produzione di Titanio di 3 livelli.",
+
+  "Titan Floating Launch-pad": "Piattaforma di Lancio",
+  "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Azione: aggiungi 1 Galleggiante ad UNA QUALUNQUE CARTA GIOVIANA, oppure spendi 1 Galleggiante su questa carta per poter commerciare con una Colonia senza spendere risorse.",
+  "Add two floaters to ANY JOVIAN CARD.": "Aggiungi 2 Galleggianti ad UNA QUALUNQUE CARTA GIOVIANA.",
+
+  "Heavy Taxation": "Tassazione Pesante",
+  "2 Earth": "2 Terra",
+  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Richiede 2 simboli Terra. Incrementa la tua Produzione di M€ di 2 livelli e ottieni 4 M€.",
+
+  "Refugee Camp": "Campi dei Rifugiati",
+  "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Azione: diminuisci la tua Produzione di M€ di 1 livello per aggiungere una risorsa Campo a questa carta.",
+  "1 VP for each camp resource on this card.": "1 PV per ogni risorsa Campo su questa carta.",
+
+  "Solar Reflectors": "Riflettori Solari",
+  "Increase your heat production 5 steps.": "Incrementa la tua Produzione di Calore di 5 livelli.",
+
+  "Red Spot Observatory": "Osservatorio Macchia Rossa",
+  "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Azione: aggiungi 1 Galleggiante a questa carta, oppure scarta 1 Galleggiante presente su questa carta per pescare una carta.",
+  "Draw 2 cards.": "Pesca 2 carte.",
+
+  "Titan Air-scrapping": "Frammentazione dell'Aria",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "Azione: spendi 1 risorsa Titanio per aggiungere 2 Galleggianti a questa carta, oppure spendi 2 Galleggianti su questa carta per incrementare il tuo TT di 1 livello.",
+  "Action: Spend 2 floaters here to increase your TR 1 step.":"Azione: spendi 2 Galleggianti da qui per incrementare il tuo TT di 1 livello.",
+  "Action: Spend 1 titanium to add 2 floaters here.":"Azione: spendi 1 risorsa Titanio per aggiungere qui 2 Galleggianti.",
+  
+  "Titan Shuttles": "Shuttle da Titano",
+  "Action: Add 2 floaters to ANY JOVIAN CARD.":"Azione: aggiungi 2 Galleggianti AD UNA QUALUNQUE CARTA GIOVIANA.",
+  "Action: Spend any number of floaters here to gain the same number of titanium.": "Spendi un qualunque numero di Galleggianti su questa carta per ottenere un numero equivalente di risorse Titanio.",
+
+  "Floater Prototypes":"Prototipi di Galleggianti",
+  "Add two floaters to ANOTHER card.":"Aggiungi 2 Galleggianti AD UN'ALTRA CARTA.",
+
+  "Airliners":"Aerei di Linea",
+  "3 Floaters":"3 Galleggianti",
+  "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.":"Richiede che tu abbia in gioco 3 Galleggianti. Incrementa la tua Produzione di M€ di 2 livelli. Aggiungi 2 Galleggianti ad una QUALUNQUE carta.",
+
+  "Air Raid":"Raid Aereo",
+  "STEAL":"RUBA",
+  "Requires that you lose 1 floater. Steal 5 M€ from any player.":"Richiede che tu scarti 1 dei tuoi Galleggianti. Ruba 5 M€ ad un giocatore qualunque.",
+
+  "Atmo Collectors":"Collettori Atmosferici",
+  "Action: Add one floater here.":"Azione: aggiungi 1 Galleggiante a questa carta.",
+  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.":"Azione: spendi 1 Galleggiante da questa carta per ottenere 2 risorse Titanio, o 3 risorse Energia, o 4 risorse Calore.",
+  "Add 2 floaters to ANY card.":"Aggiungi 2 Galleggianti ad una QUALUNQUE carta.",
+
+  "Community Services":"Servizi Comunitari",
+  "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.":"Incrementa la tua Produzione di M€ di 1 livello PER OGNI TUA CARTA IN GIOCO PRIVA DI SIMBOLI, inclusa questa.",
+
+  "Conscription":"Coscrizione",
+  "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.":"Richiede 2 simboli Terra. La prossima carta che giochi durante la Generazione attuale costa 16 M€ in meno.",
+
+  "Corona Extractor":"Estrattore della Corona",
+  "4 Science":"4 Scienza",
+
+  "Cryo Sleep":"Crio-Sonno",
+  "Effect: When you trade, you pay 1 less resource for it.":"Effetto: quando commerci, paghi 1 risorsa in meno.",
+
+  "Ecology Research":"Ricerca Ecologica",
+  "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.":"Incrementa la tua Produzione di Piante di 1 livello per ogni Colonia in tuo possesso. Aggiungi 1 Animale AD UNA QUALUNQUE CARTA e 2 Microbi AD UNA QUALUNQUE CARTA.",
+
+  "Galilean Waystation":"Stazione Galileiana Secondaria",
+  "Increase your M€ production 1 step for every Jovian tag in play.":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Gioviano in gioco.",
+
+  "Ice Moon Colony":"Colonia sulla Luna Ghiacciata",
+  "Place 1 colony and 1 ocean tile.":"Colloca 1 Colonia ed 1 tessera Oceano.",
+
+  "2 Jovian":"2 Gioviani",
+  "Jovian Lanterns":"Lanterne Gioviane",
+  "Jovian":"Gioviano",
+ 
+  "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.":"Richiede 1 simbolo Gioviano. Incrementa il tuo TT di 1 livello. Aggiungi 2 Galleggianti ad una carta QUALUNQUE.",
+  "1 VP per 2 floaters here.":"1 PV per ogni coppia di Galleggianti su questa carta.",
+  
+  
+  "Jupiter Floating Station":"Stazione Galleggiante di Giove",
+  "Action: Add 1 floater to a JOVIAN CARD.":"Azione: aggiungi 1 Galleggiante ad una CARTA GIOVIANA.",
+  "Action: Gain 1 M€ for every floater here [MAX 4].":"Azione: ottieni 1 M€ per ogni Galleggiante su questa carta [AL MASSIMO 4].",
+  "Requires 3 Science tags.":"Richiede 3 simboli Scienza.",
+  
+  "Lunar Exports":"Esportazioni Lunari",
+  "Increase your plant production 2 steps, or your M€ production 5 steps.":"Incrementa la tua Produzione di Piante di 2 livelli, oppure incrementa la tua Produzione di M€ di 5 livelli.",
+  "2 Cities":"2 Città",
+  "Requires 2 city tiles in play.":"Richiede 2 tessere Città in gioco.",
+  "Mining Colony":"Colonia Mineraria",
+  "Increase your titanium production 1 step. Place a colony.":"Incrementa la tua Produzione di Titanio di 1 livello. Colloca 1 Colonia.",
+  
+  "Molecular Printing":"Stampa Molecolare",
+  "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.":"Ottieni 1 M€ per ogni tessera Città in gioco. Ottieni 1 M€ per ogni Colonia in gioco.",
+  
+  "Nitrogen from Titan":"Azoto da Titano",
+  "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.":"Incrementa il tuo TT di 2 livelli. Aggiungi 2 Galleggianti ad una qualunque CARTA GIOVIANA.",
+  
+  "Pioneer Settlement":"Insediamento Pioneristico",
+  "max 1 Colony":"AL MASSIMO 1 Colonia",
+  "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.":"Richiede che tu possieda al massimo 1 Colonia. Diminuisci la tua Produzione di M€ di 2 livelli. Colloca 1 Colonia.",
+  "Quantum Communications":"Comunicazioni Quantistiche",
+  "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.":"Richiede 4 simboli Scienza. Incrementa la tua Produzione di M€ di 1 livello per ogni Colonia in gioco.",
+  "Requires 3 Science tags. Draw 2 cards.":"Richiede 3 simboli Scienza. Pesca 2 carte.",
+  "Rim Freighters":"Mercantili del Margine",
+  "Refugee Camps":"Campi dei Rifugiati",
+  "Solar Probe":"Sonda Solare",
+  "Draw 1 card for every 3 science tags you have, including this.":"Pesca una carta per ogni terna di simboli Scienza che possiedi in gioco, incluso questo.",
+  "Space Port":"Spazioporto",
+  "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Ottieni 1 Flotta Commerciale. Colloca 1 tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale. 1 PV per ogni coppia di Colonie in gioco.",
+  "Spin-off Department":"Dipartimento Spin-Off",
+  "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20 M€ OR MORE, draw a card.":"Effetto: QUANDO GIOCHI UNA CARTA CON UN COSTO DI PARTENZA MAGGIORE O UGUALE A 20 M€, pesca una carta.",
+  
+  
+  "Sub-zero Salt Fish":"Pesce d'Acqua Salata Sotto Zero",
+  "Requires -6 C. Decrease any Plant production 1 step.":"Richiede una Temperatura maggiore o uguale a -6°C. Diminuisci una qualunque Produzione di Piante di 1 livello. 1 PV per ogni coppia di Animali su questa carta.",
+  
+  "Titan Floating Launch-Pad":"Piattaforma di Lancio",
+  "Colony City":"Colonia Città",
+  "Warp Drive":"Motore a Curvatura",
+  "Effect: When you play a Space card, you pay 4 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Spazio, la paghi 4 M€ in meno.",
+  "Requires 5 Science tags.":"Richiede 5 simboli Scienza.",
+
+  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 Animale a questa carta.",
+  
+      "Callisto":"Callisto",
+    "Ceres":"Ceres",
+    "Enceladus":"Enceladus",
+    "Europa":"Europa",
+    "Ganymede":"Ganymede",
+    "Io":"Io",
+    "Luna":"Luna",
+    "Miranda":"Miranda",
+    "Pluto":"Plutone",
+    "Titan":"Titano",
+    "Triton":"Tritone",
+    "Colony Bonus":"Bonus di Colonia",
+    "Trade Income":"Entrate del Commercio",
+    "Select colony":"Seleziona Colonia",
+    "Trade Income: Gain the indicated production":"Entrate del Commercio: ottieni la Produzione indicata",
+    "Callisto - (Energy)":"Callisto - (Energia)",
+    "Ceres - (Steel)":"Ceres - (Acciaio)",
+    "Enceladus - (Microbes)":"Enceladus - (Microbi)",
+    "Europa - (Production)":"Europa - (Produzione)",
+    "Ganymede - (Plants)":"Ganymede - (Piante)",
+    "Io - (Heat)":"Io - (Calore)",
+    "Luna - (MegaCredits)":"Luna - (MegaCrediti)",
+    "Miranda - (Animals)":"Miranda - (Animali)",
+    "Pluto - (Cards)":"Plutone - (Carte)",
+    "Titan - (Floaters)":"Titano - (Galleggianti)",
+    "Triton - (Titanium)":"Tritone - (Titanio)"
+  
+  
+}

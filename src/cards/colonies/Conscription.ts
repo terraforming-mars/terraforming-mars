@@ -1,31 +1,40 @@
-import { IProjectCard } from "../IProjectCard";
-import { CardType } from "../CardType";
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../common/cards/CardType';
+import {Tags} from '../../common/cards/Tags';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../common/cards/render/Size';
 
+export class Conscription extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.EVENT,
+      cost: 5,
+      tags: [Tags.EARTH],
+      name: CardName.CONSCRIPTION,
+      victoryPoints: -1,
 
-export class Conscription implements IProjectCard {
-    public cardType: CardType = CardType.EVENT;
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.CONSCRIPTION;
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
+      metadata: {
+        cardNumber: 'C05',
+        renderData: CardRenderer.builder((b) => {
+          b.text('next card', Size.SMALL, true).colon().megacredits(-16);
+        }),
+        description: 'Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.',
+      },
+    });
+  }
 
-    public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.EARTH) >= 2;
+  public override getCardDiscount(player: Player) {
+    if (player.lastCardPlayed === this.name) {
+      return 16;
     }
-
-    public getCardDiscount(player: Player, _game: Game) {
-        if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
-            return 16;
-        }
-        return 0;
-    }
-    public play() {
-        return undefined;
-    } 
-    public getVictoryPoints() {
-        return -1;
-    }
+    return 0;
+  }
+  public play() {
+    return undefined;
+  }
 }

@@ -1,23 +1,32 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {played} from '../Options';
 
-export class VenusWaystation implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: CardName = CardName.VENUS_WAYSTATION;
-    public cardType: CardType = CardType.ACTIVE;
+export class VenusWaystation extends Card {
+  constructor() {
+    super({
+      name: CardName.VENUS_WAYSTATION,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.VENUS, Tags.SPACE],
+      cost: 9,
+      victoryPoints: 1,
 
-    public play() {
-        return undefined;
-    }
-    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-        return card.tags.filter(tag => tag === Tags.VENUS).length * 2;
-    }
-    public getVictoryPoints() {
-        return 1;
-    }
-}    
+      cardDiscount: {tag: Tags.VENUS, amount: 2},
+      metadata: {
+        cardNumber: '258',
+        renderData: CardRenderer.builder((b) => {
+          b.effect('When you play a Venus tag, you pay 2 M€ less for it.', (eb)=> {
+            eb.venus(1, {played}).startEffect.megacredits(-2);
+          });
+        }),
+      },
+    });
+  }
+
+  public play() {
+    return undefined;
+  }
+}

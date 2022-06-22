@@ -1,0 +1,36 @@
+{
+  "Turmoil": "动荡",
+  "Send a delegate in an area (from lobby)": "派遣代表(从大厅)",
+  "Send a delegate in an area (5 M€)": "派遣代表(花费5 M€)",
+  "Policies": "政策",
+  "No ruling Policy": "暂无执政党政策",
+  "Mars First": "火星之首党",
+  "mars first": "火星之首党",
+  "Scientists": "科学家党",
+  "scientists": "科学家党",
+  "Unity": "联合党",
+  "unity": "联合党",
+  "Kelvinists": "开尔文主义党",
+  "kelvinists": "开尔文主义党",
+  "Reds": "红党",
+  "reds": "红党",
+  "Greens": "绿党",
+  "greens": "绿党",
+  "Chairman": "主席",
+  "Party leader": "政党领袖",
+  "Mars First - (All players receive 1 M€ for each Building tag they have.)": "火星之首党 - (所有玩家每有一个建筑标志,获得1 M€)",
+  "Scientists - (All players receive 1 M€ for each Science tag they have.)": "科学家党 - (所有玩家每有1个科学标志,获得1 M€)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "联合党 - (所有玩家每有一个木星、金星及地球标志,获得1 M€)",
+  "Kelvinists - (All players receive 1 M€ for each Heat production they have.)": "开尔文主义党 - (所有玩家每有1点热能产量,获得1 M€)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "红党 - (改造度最低的玩家获得1点改造度，如有平手均可增加)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "绿党 - (所有玩家每有一个植物、微生物及动物标志,获得1 M€)",
+
+
+  "Mars First (Focused on Martian development and independence.)":"星之首党 (专注于火星的发展和独立)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "科学家党 (技术是通向未来的门，科学家会尽一切努力打开它。)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "联合党 (希望看到整个太阳系的人类繁荣)。",
+  "Greens (Want to see a new Earth as soon as possible.)": "绿党(想尽快看到一个新的地球。)",
+  "Reds (Wishes to preserve the red planet.)": "红党 (希望保护这个红色星球。)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "开尔文主义党 (推动快速地球化，通常采用热优先策略。)"
+
+}

@@ -1,27 +1,27 @@
+import {expect} from 'chai';
+import {Inventrix} from '../../../src/cards/corporation/Inventrix';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-import { expect } from "chai";
-import { Inventrix } from "../../../src/cards/corporation/Inventrix";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Game } from "../../../src/Game";
+describe('Inventrix', function() {
+  let card : Inventrix; let player : Player;
 
-describe("Inventrix", function () {
-    it("Should play", function () {
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const card = new Inventrix();
-        const action = card.play();
-        expect(action).to.eq(undefined);
-        expect(card.getRequirementBonus(player, game)).to.eq(2);
-    });
-    it("Should take initial action", function () {
-        const card = new Inventrix();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const action = card.initialAction(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(player.cardsInHand.length).to.eq(0);
-        action.cb();
-        expect(player.cardsInHand.length).to.eq(3);
-    });
+  beforeEach(function() {
+    card = new Inventrix();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, redPlayer], player);
+  });
+
+  it('Should play', function() {
+    card.play();
+    expect(card.getRequirementBonus()).to.eq(2);
+  });
+
+  it('Should take initial action', function() {
+    const action = card.initialAction(player);
+    expect(action).is.undefined;
+    expect(player.cardsInHand).has.lengthOf(3);
+  });
 });

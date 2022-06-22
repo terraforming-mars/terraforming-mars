@@ -1,48 +1,72 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { OrOptions } from "../../inputs/OrOptions";
-import { SelectOption } from "../../inputs/SelectOption";
-import { IResourceCard } from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardResource} from '../../common/CardResource';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {IResourceCard} from '../ICard';
+import {Resources} from '../../common/Resources';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../common/cards/render/Size';
 
-export class JupiterFloatingStation implements IProjectCard, IResourceCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: CardName = CardName.JUPITER_FLOATING_STATION;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public resourceCount: number = 0;
+export class JupiterFloatingStation extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cost: 9,
+      tags: [Tags.JOVIAN],
+      name: CardName.JUPITER_FLOATING_STATION,
+      cardType: CardType.ACTIVE,
+      resourceType: CardResource.FLOATER,
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
+      victoryPoints: 1,
 
-    public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.SCIENCE) >= 3;
-    }
+      metadata: {
+        cardNumber: 'C19',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 floater to a JOVIAN CARD.', (eb) => {
+            eb.empty().startAction.floaters(1, {secondaryTag: Tags.JOVIAN});
+          }).br;
+          b.or().br;
+          b.action('Gain 1 M€ for every floater here [MAX 4].', (eb) => {
+            eb.empty().startAction;
+            eb.megacredits(1).slash().floaters(1).text('[max 4]', Size.SMALL);
+          });
+        }),
+        description: {
+          text: 'Requires 3 Science tags.',
+          align: 'left',
+        },
+      },
+    });
+  }
 
-    public canAct(): boolean {
-        return true;
-    }
+  public override resourceCount: number = 0;
 
-    public action(player: Player, game: Game) {
-        return new OrOptions(
-            new SelectOption("Add 1 floater to a Jovian card", () => {
-                game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined, Tags.JOVIAN, );
-                return undefined;
-            }),
-            new SelectOption("Get 1 MC per floater here (max 4) ", () => {
-                player.megaCredits += Math.min(this.resourceCount, 4);
-                return undefined;
-            })
-        );
-    }
+  public canAct(): boolean {
+    return true;
+  }
 
-    public play() {
-      return undefined;
-    }
+  public action(player: Player) {
+    return new OrOptions(
+      new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
+        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {
+          restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card',
+        }));
+        return undefined;
+      }),
+      new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
+        player.addResource(Resources.MEGACREDITS, Math.min(this.resourceCount, 4), {log: true});
+        return undefined;
+      }),
+    );
+  }
 
-    public getVictoryPoints(): number {
-        return 1;
-    }
+  public play() {
+    return undefined;
+  }
 }

@@ -1,0 +1,49 @@
+{
+  "Arcadian": "Arkadische",
+  "Communities": "Gemeinden",
+  "Arcadian Communities": "Arkadische Gemeinden",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Du beginnst mit 40 M€ und 10 Stahl. ALS DEINE ERSTE AKTION, PLATZIERE EINE GEMEINDE [SPIELER-MARKER] AUF EIN NICHT-RESERVIERTES FELD.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "AKTION: Platziere eine Gemeinde (Spieler-Marker) auf einem unbesetzten Feld neben einem deiner Plättchen oder markierten Felder",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "EFFEKT: Markierte Felder sind für dich reserviert. Wenn du dort ein Plättchen platzierst, erhalte 3 M€",
+
+  "Astrodrill": "Astrodrill",
+  "Astrodrill ENT": "Astrodrill",
+  "You start with 35 M€ and 3 asteroid resources.": "Du beginnst mit 35 M€ und 3 Asteroiden-Ressourcen.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "AKTION: Füge einer BELIEBIGEN Karte eine Asteroid-Ressource hinzu ODER erhalte eine Standard-Ressource ODER entferne eine Asteroiden-Ressource von dieser Karte, um 3 Titan zu erhalten.",
+
+  "FACTORUM": "FACTORUM",
+  "Factorum": "Factorum",
+  "You start with 37 M€. Increase your steel production 1 step.": "Du beginnst mit 37 M€. Erhöhe deine Stahl-Produktion um 1.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "AKTION: Erhöhe deine Energie-Produktion um 1 WENN DU KEINE ENERGIE-RESSOURCE BESITZT oder bezahle 3 M€, um eine Gebäude-Karte zu ziehen.",
+
+  "mons": "Mons",
+  "INSURANCE": "VERSICHERUNG",
+  "Mons Insurance": "Mons Versicherung",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Du beginnst mit 48 M€. Erhöhe deine M€-Produktion um 4. Alle Mitspieler senken ihre M€-Produktion um 2. Dies löst nicht den unten beschriebenen Effekt aus.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "EFFEKT: Wenn einem Mitspieler durch einen anderen Spieler eine Produktion gesenkt wird oder verliert ein Mitspieler durch einen anderen Spieler Ressourcen zahle 3 M€ (oder so viel, wie möglich) an den Geschädigten.",
+
+  "Pharmacy": "Pharmazie",
+  "Union": "Verband",
+  "Pharmacy Union": "Pharmazie-Verband",
+  "You start with 54 M€ . Draw a Science card.": "Du beginnst mit 54 M€. Ziehe eine Wissenschafts-Karte.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "EFFEKT: Wann immer ein Mikrobensymbol gespielt wird, füge dieser Karte eine Krankheit hinzu und verliere 4 M€ (oder so viel wie möglich). Wenn du ein Wissenschaftssymbol spielst, entferne eine Krankheit von dieser Karte und erhalte 1 TW ODER sollten keine Krankheiten auf dieser Karte sein, DARFST du diese Karte umgedreht in deinen Ereignisstapel legen und 3 TW erhalten.",
+
+  "PHIL": "PHIL",
+  "A": "A",
+  "RES": "RES",
+  "Philares": "Philares",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Du beginnst mit 47 M€. Als deine erste Aktion, platziere ein Grünflächenplättchen und erhöhe den Sauerstoffgehalt um 1%.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "EFFEKT: Sobald eines deiner Plättchen an ein Plättchen eines Mitspielers angrenzt, erhalte eine Standard-Ressource deiner Wahl (unabhängig davon, wer das Plätcchen gelegt hat).",
+
+  "Recyclon": "Recyclon",
+  "You start with 38 M€ and 1 steel production.": "Du beginnst mit 38 M€ und 1 Stahl-Produktion.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "EFFEKT: Wenn du ein Gebäudesymbol spielst (inklusive diesem), füge dieser Karte 1 Mikrobe hinzu oder entferne 2 Mikroben von dieser Karte, um deine Pflanzen-Produktiom um 1 zu erhöhen.",
+
+  "SPLI": "SPLIC",
+  "C": "C",
+  "E": "E",
+  "TACTICAL GENOMICS": "TAKTISCHE GENTECHNIK",
+  "Splice": "Splice",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Du beginnst mit 44 M€. Als deine erste Aktion, decke solange Karten auf, bis du ein Mikrobensymbol gefunden hast. Nehme diese Karte und wirf die anderen Karten ab.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "EFFEKT: Wenn ein Mikrobensymbol von einem beliebigen Spieler gespielt wird (inklusive disem), enthält DIESER SPIELER 2 M€ oder fügt eine Mikrobe zu DER GESPIELTEN Karte hinzu. Du erhältst 2 M€."
+}

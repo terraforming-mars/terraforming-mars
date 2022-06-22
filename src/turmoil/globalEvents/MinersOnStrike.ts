@@ -1,22 +1,34 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
-import { Tags } from '../../cards/Tags';
-import { Turmoil } from '../Turmoil';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {Game} from '../../Game';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
+import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../common/cards/render/Size';
+import {played} from '../../cards/Options';
 
-export class MinersOnStrike implements IGlobalEvent {
-    public name = GlobalEventName.MINERS_ON_STRIKE;
-    public description = "Lose 1 titanium for each Jovian tag (max 5, then reduced by influence).";
-    public revealedDelegate = PartyName.MARS;
-    public currentDelegate = PartyName.GREENS;
-    public resolve(game: Game, turmoil: Turmoil) {
-        game.getPlayers().forEach(player => {
-            let amount = Math.min(5, player.getTagCount(Tags.JOVIAN, false, false)) - turmoil.getPlayerInfluence(player);
-            if (amount > 0) {
-                player.setResource(Resources.TITANIUM, -amount, undefined, undefined, true);
-            }
-        });    
-    }
-}    
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.minus().titanium(1).slash().jovian({played}).influence({size: Size.SMALL});
+});
+
+export class MinersOnStrike extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.MINERS_ON_STRIKE,
+      description: 'Lose 1 titanium for each Jovian tag (max 5, then reduced by influence).',
+      revealedDelegate: PartyName.MARS,
+      currentDelegate: PartyName.GREENS,
+      renderData: RENDER_DATA,
+    });
+  }
+  public resolve(game: Game, turmoil: Turmoil) {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      const amount = Math.min(5, player.getTagCount(Tags.JOVIAN, 'raw')) - turmoil.getPlayerInfluence(player);
+      if (amount > 0) {
+        player.deductResource(Resources.TITANIUM, amount, {log: true, from: this.name});
+      }
+    });
+  }
+}

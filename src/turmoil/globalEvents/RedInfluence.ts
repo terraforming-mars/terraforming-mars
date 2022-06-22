@@ -1,22 +1,35 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
-import { Turmoil } from '../Turmoil';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {Game} from '../../Game';
+import {Resources} from '../../common/Resources';
+import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {digit} from '../../cards/Options';
 
-export class RedInfluence implements IGlobalEvent {
-    public name = GlobalEventName.RED_INFLUENCE;
-    public description = "Lose 3 M$ for each set of 5 TR over 10 (max 5 sets). Increase M$ production 1 step per influence.";
-    public revealedDelegate = PartyName.KELVINISTS;
-    public currentDelegate = PartyName.REDS;
-    public resolve(game: Game, turmoil: Turmoil) {
-        game.getPlayers().forEach(player => {
-            const amount = Math.floor((player.getTerraformRating() - 10)/5);
-            if (amount > 0) {
-                player.setResource(Resources.MEGACREDITS, amount * -3, undefined, undefined, true);
-            }
-            player.setProduction(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), undefined, undefined);
-        });    
-    }
-}    
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.br.br.megacredits(-3).slash().tr(5, {digit, over: 10}).nbsp.production((pb) => pb.megacredits(1)).slash().influence();
+});
+
+
+export class RedInfluence extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.RED_INFLUENCE,
+      description: 'Lose 3 M€ for each set of 5 TR over 10 (max 5 sets). Increase M€ production 1 step per influence.',
+      revealedDelegate: PartyName.KELVINISTS,
+      currentDelegate: PartyName.REDS,
+      renderData: RENDER_DATA,
+    });
+  }
+  public resolve(game: Game, turmoil: Turmoil) {
+    game.getPlayersInGenerationOrder().forEach((player) => {
+      const sets = Math.floor((player.getTerraformRating() - 10)/5);
+      if (sets > 0) {
+        const amount = Math.min(sets, 5);
+        player.deductResource(Resources.MEGACREDITS, amount * 3, {log: true, from: this.name});
+      }
+      player.addProduction(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+    });
+  }
+}

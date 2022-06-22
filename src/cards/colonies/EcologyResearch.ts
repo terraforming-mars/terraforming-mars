@@ -1,30 +1,49 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Resources } from "../../Resources";
-import { Game } from '../../Game';
-import { ResourceType } from '../../ResourceType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {Resources} from '../../common/Resources';
+import {CardResource} from '../../common/CardResource';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {Size} from '../../common/cards/render/Size';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
 
-export class EcologyResearch implements IProjectCard {
-    public cost: number = 21;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.PLANT, Tags.ANIMAL, Tags.MICROBES];
-    public name: CardName = CardName.ECOLOGY_RESEARCH;
-    public cardType: CardType = CardType.AUTOMATED;
+export class EcologyResearch extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 21,
+      tags: [Tags.SCIENCE, Tags.PLANT, Tags.ANIMAL, Tags.MICROBE],
+      name: CardName.ECOLOGY_RESEARCH,
+      cardType: CardType.AUTOMATED,
+      victoryPoints: 1,
 
-    public play(player: Player, game: Game) {
-        let coloniesCount: number = 0;
-        game.colonies.forEach(colony => { 
-          coloniesCount += colony.colonies.filter(owner => owner === player).length;
-        });  
-        player.setProduction(Resources.PLANTS, coloniesCount);
-        game.addResourceInterrupt(player, ResourceType.ANIMAL, 1, undefined);
-        game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
-        return undefined;
+      metadata: {
+        description: 'Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.',
+        cardNumber: 'C09',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.plants(1).slash().colonies(1, {size: Size.SMALL})).br;
+          b.animals(1).asterix().nbsp.nbsp.microbes(2).asterix();
+        }),
+      },
+    });
+  }
+
+  public play(player: Player) {
+    const coloniesCount = player.getColoniesCount();
+    player.addProduction(Resources.PLANTS, coloniesCount, {log: true});
+
+    const animalCards = player.getResourceCards(CardResource.ANIMAL);
+    if (animalCards.length) {
+      player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 1}));
     }
 
-    public getVictoryPoints() {
-        return 1;
+    const microbeCards = player.getResourceCards(CardResource.MICROBE);
+    if (microbeCards.length) {
+      player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
     }
+
+    return undefined;
+  }
 }

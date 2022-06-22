@@ -1,0 +1,21 @@
+{
+    "Aphrodite": "Aphrodite",
+    "You start with 1 plant production and 47 M€.": "Rozpoczynasz grę z 1 dodatkowym poziomem produkcji roślinności i 47 M€.",
+    "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "Efekt trwały: Za każdym razem, gdy Współczynnik Terraformacji Wenus jest podnoszony o 1 poziom, otrzymujesz 2 M€.",
+
+    "Celestic": "Celestic",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Rozpoczynasz grę z 42 M€. W ramach swojej pierwszej akcji w grze odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz 2 kart z symbolem dryfowców. Weź te karty na rękę, a resztę odrzuć.",
+    "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie. Otrzymujesz po 1 PZ za każde 3 jednostki dryfowców znajdujących się na tej karcie.",
+
+    "Manutech": "Manutech",
+    "You start with 1 steel production, and 35 M€.": "Rozpoczynasz grę z 1 dodatkowym poziomem produkcji stali i 35 M€.",
+    "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "Efekt trwały: Za każdy zwiększony przez ciebie poziom produkcji dowolnego zasobu (włącznie z tym), otrzymujesz 1 jednostkę tego zasobu.",
+
+    "Morning Star Inc": "Morning Star Inc",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Rozpoczynasz grę z 50 M€. W ramach swojej pierwszej akcji w grze odkrywaj karty z wierzchu talii, dopóki nie odkryjesz 3 kart z symbolem Wenus. Weź te karty na rękę, a resztę odrzuć.",
+    "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "Efekt trwały: Zagrywając karty, możesz każdorazowo traktować Współczynnik Terraformacji Wenus tak, jakby był o 2 poziomy wyższy albo niższy.",
+
+    "Viron": "Viron",
+    "You start with 48 M€.": "Rozpoczynasz grę z 48 M€.",
+    "Action: Use a blue card action that has already been used this generation.": "Akcja: Wykonaj ponownie akcję z wykorzystanej już w tym pokoleniu karty aktywnej (niebieskiej)."
+}

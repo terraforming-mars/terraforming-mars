@@ -1,0 +1,45 @@
+{
+ "Crescent Research Association":"新月研究协会",
+ "Effect: When you play a moon tag, you pay 1 M€ less for each Moon tag you have.":"效果：当你打出月亮标签卡牌时，你每打出一个月亮标签卡牌少支付1 M€。",
+ "You start with 50 M€. 1 VP for every 3 Moon tags you have.":"游戏开始拥有50M€ 每3个月球标签获得 1 VP。",
+
+  "Intragen Sanctuary Headquarters":"内在屁胡所总部",
+ "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)":"效果：当任何玩家使用动物标签(包括此牌)时，在此卡上加1只动物。",
+ "You start with 38 M€. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step. 1 VP for every 2 animals on this card.":" 你起始拥有38元。作为你的第一个行动，在月球上放置一个殖民地板块，并提高殖民地速度1级。这张牌上每2只动物获得1分 ",
+
+ "Luna First Incorporated":"第一月球公司",
+ "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.":"效果：当你提高任何月亮效率时，每增加1你的M€产量提高1。",
+ "Effect: When any player raises any Moon Rate, gain 1M€ per step.":"效果：当任何玩家提升任何月亮率时，每级增加1 M€。",
+ "You start with 40 M€, 2 steel, and 2 Titanium.":"一开始是40 M€, 2钢和2钛。",
+
+ "Luna Hyperloop Corporation":"月球超级高铁公司",
+ "Action: Gain 1 M€ for each road tile on the Moon.":"行动：月球上的每条道板块路获得1 M€。",
+ "1 VP for each road tile on the Moon.":"月球上的每个道路板块算1个VP",
+ "You start with 38 M€ and 4 steel.":"你用38 M€和4钢开始。",
+
+  "Nanotech Industries":"纳米技术产业公司",
+ "Action: Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]":"行动：在任意一张卡上添加1个科学资源[除了每1个科学资源给予2个或更多VP的卡片]",
+ "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.":"你从42 M€开始，作为你的第一个动作，抽3张牌。把其中的2个拿在手上，把剩下的丢掉。每2个科学资源对应1个VP。",
+
+  "Tempest Consultancy":"暴风雨咨询公司",
+ "Action: Place 1 delegate in any party for every 5 moon tags you have [max 3.]":"行动：每5个月球标签放置1个代表在任意政党中[最多3个]",
+ "Effect: When your delegate becomes the chairman, increase your TR 1 step.":"效果：当你的代表成为主席时，增加你的TR 1级骤。",
+ "You start with 37 M€. As your first action, place 2 delegates in one party.":"你以37 M€开始。作为你的第一个行动，在一个政党中安排2名代表。",
+
+  "The Archaic Foundation Institute":"古代基金会研究所",
+ "Effect: When you play a Moon tag, add a bronze resource cube on this card.":"效果：当你打出月球标签卡牌时，在这张卡上添加一个青铜方块资源。",
+ "Effect: Automatically remove every 3 bronze resource cubes collected here and increase your TR 1 step.":"效果：自动移除这里收集的每3个青铜方块资源，增加你的TR 1级骤。",
+ "You start with 55 M€.":"从55 M€开始。",
+
+ "The Darkside of The Moon Syndicate":"月球暗黑联盟",
+ "Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.":"行动：在这张卡上花费1个钛来增加1个辛迪加舰队，或者从这张卡中移除1个辛迪加舰队来窃取对手的8 M€。",
+ "You start with 40 M€ and 2 syndicate fleets on this card.":"你开始获得40 M€和2个辛迪加舰队。",
+ "Effect: When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.":"效果：当你在月亮上放置一个板块时，每位对手每和你相邻有一个板块，偷取2 M€。",
+
+  "The Grand Luna Capital Group":"大月神资本集团",
+ "Effect: When you place a colony tile, gain 2 M€ for each adjacent colony tile.":"效果：当你放置一个殖民地板块，每个相邻的殖民地板块获得2 M€。",
+ "1 VP for each colony tile adjacent to your colony tiles.":"每与殖民地板块相邻的殖民地板块算1VP。",
+  "You start with 32 M€ and 1 titanium. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.":"一开始有32 M€和1个钛。作为你的第一个行动，在月球上放置一个殖民地瓷砖，并提高殖民地率1级。"
+
+
+}

@@ -1,27 +1,20 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { Resources } from '../Resources';
-import { Game } from '../Game';
+import {Colony} from './Colony';
+import {ColonyName} from '../common/colonies/ColonyName';
+import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
+import {Resources} from '../common/Resources';
 
-export class Io extends Colony implements IColony {
-    public name = ColonyName.IO;
-    public description: string = "Heat";
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
-        if (this.trackPosition === 1 || this.trackPosition === 6) {
-            player.heat += (this.trackPosition * 2) + 1;
-        } else {
-            player.heat += (this.trackPosition * 2);
-        }    
-        this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player, game);
-        player.setProduction(Resources.HEAT);
-        return undefined;
-    }
-    public giveTradeBonus(player: Player): void {
-        player.heat += 2;
-    }    
+export class Io extends Colony {
+  constructor() {
+    super({
+      name: ColonyName.IO,
+      buildType: ColonyBenefit.GAIN_PRODUCTION,
+      buildResource: Resources.HEAT,
+      tradeType: ColonyBenefit.GAIN_RESOURCES,
+      tradeQuantity: [2, 3, 4, 6, 8, 10, 13],
+      tradeResource: Resources.HEAT,
+      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
+      colonyBonusQuantity: 2,
+      colonyBonusResource: Resources.HEAT,
+    });
+  }
 }

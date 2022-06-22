@@ -1,0 +1,9 @@
+export enum GlobalParameter {
+  OCEANS,
+  OXYGEN,
+  TEMPERATURE,
+  VENUS,
+  MOON_COLONY_RATE,
+  MOON_MINING_RATE,
+  MOON_LOGISTICS_RATE,
+}

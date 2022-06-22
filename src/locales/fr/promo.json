@@ -1,0 +1,120 @@
+{
+  "Pharmacy Union": "Pharmacy Union",
+  "You start with 54 M€. When this corporation is revealed, draw a Science card.": "Vous commencez avec 54 M€. Quand cette corporation est jouée, piochez une carte Science.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR": "Effet: Dès qu'un badge Microbe est mis en jeu, ajoutez une ressource maladie ici et perdez 4 M€. Quand vous jouez un badge Science, retirez une ressource maladie et gagnez 1 NT OU s'il n'y a plus de ressource maladie ici, vous pouvez retourner cette carte et gagner 3 NT.",
+
+  "Comet Aiming": "Comète Orientée",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Action: Dépensez 1 titane pour ajouter 1 ressource astéroïde sur N'IMPORTE QUELLE CARTE.",
+  "Action: Remove 1 asteroid here to place an ocean.": "Action: Retirez un 1 astéroïde de cette carte pour placer un Océan.",
+
+  "Cutting Edge Technology": "Technologie de Pointe",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Effet: Lorsque vous jouez une carte avec un prérequis, vous pouvez payer 2 M€ de moins pour la jouer.",
+
+  "Crash Site Cleanup": "Nettoyage d'un Site de Crash ",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Nécessite qu'un joueur ait enlevé les plantes d'UN AUTRE JOUEUR à cette génération. Gagnez 1 titane ou 2 acier.",
+
+  "Directed Impactors": "Impacteurs Directs",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Action: Dépensez 6 M€ pour ajouter 1 astéroïde sur N'IMPORTE QUELLE CARTE (vous pouvez utiliser sur titane pour payer).",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "Action: Enlevez 1 astéroïde pour augmenter la température.",
+
+  "Field-Capped City": "Cité aux toits cultivés",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Augmentez votre production de M€ de 2, augmentez votre production d'Energie de 1, gagnez 3 plantes et placez une tuile Cité.",
+
+  "Magnetic Shield": "Bouclier Magnétique",
+  "Requires 2 power tags. Raise your TR 4 steps.": "Nécessite 2 badges Energie. Augmentez votre NT de 4.",
+
+  "Meltworks": "Fontes",
+  "Action: Spend 5 heat to gain 3 steel.": "Action: Dépensez 5 chaleur pour gagnez 3 acier.",
+
+  "Mohole Lake": "Lac de Mohole",
+  "Action: Add a microbe or animal to ANOTHER card.": "Action: Ajoutez un microbe ou un animal à UNE AUTRE carte.",
+  "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Gagnez 3 plantes. Augmentez la température de 1, placez une tuile Océan.",
+
+  "Diversity Support": "Support de la Diversité",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "Nécessite que vous possédiez 9 types de ressources différentes. Gagnez 1 NT",
+
+  "Topsoil Contract": "Contrat des Terres Arables",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Effet: Quand vous ajoutez un microbe sur N'IMPORTE QUELLE CARTE, gagnez également 1 M€.",
+
+  "Imported Nutrients": "Nutriments Importés",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Gagnez 4 plantes et ajoutez 4 microbes à une AUTRE CARTE.",
+
+  "Asteroid Deflection System": "Système de Déflection des Astéroïdes.",
+  "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Action: REVELEZ ET DEFAUSSEZ la première carte de la pioche. Si elle comporte un badge Espace, placez un astéroïde sur cette carte.",
+  "opponents may not remove your plants": "Les adversaires ne peuvent plus vous retirer de plantes.",
+  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Diminuez votre production d'énergie de 1. 1 PV par astéroïde sur cette carte.",
+
+  "Jovian Embassy": "Embassade Jovian",
+  "Raise your TR 1 step.": "Augmentez votre NT de 1.",
+
+  "Sub-Crust Measurements": "Mesure de la Sous-croute",
+  "Action: Draw a card.": "Action: Piochez une carte.",
+  "Requires 2 science tags.": "Nécessite 2 badges Science.",
+
+  "Potatoes": "Patates",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Perdez 2 plates. Augmentez votre production de M€ de 2.",
+
+  "Meat Industry": "Industrie de la Viande",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Effet: Quand vous ajoutez une animal sur N'IMPORTE QUELLE CARTE, gagnez 2 M€.",
+
+  "Magnétic Field Generators": "Générateurs de Champ Magnétique",
+  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "Diminuez votre production d'énergie de 4, augmentez votre production de plantes de 2. Augmentez votre NT de 3 et placez cette tuile. ",
+
+  "Orbital Cleanup": "Nettoyage Orbital",
+  "Action: Gain 1 M€ per Science tag you have.": "Action: Gagnez 1 M€ par badge Science en votre possession.",
+  "Decrease your M€ production 2 steps.": "Diminuez votre production de M€ de 2.",
+
+  "Law Suit": "Attaque en Justice",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Volez 3 M€ à un joueur qui a RETIRE VOS RESSOURCES OU DIMINUE VOTRE PRODUCTION lors de cette génération. Placez cette carte face cachée dans la pile des EVENEMENTS DE CE JOUEUR.",
+
+  "Small Asteroid": "Petit Asteroïde",
+  "Increase temperature 1 step. Remove up to 2 plants from any player.": "Augmentez la température de 1. Enlevez jusqu'à 2 plantes à n'importe quel joueur.",
+
+  "Asteroid Hollowing": "Asteroïde Creux",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Action: Dépensez 1 titane pour ajouter 1 ressource astéroïde sur cette carte et augmenter votre production de M€ de 1.",
+  "1VP for each 2 asteroids on this card.": "1 PV tous les 2 astéroïdes sur cette carte.",
+
+  "Project Inspection": "Inspection de Projet",
+  "Use a card action that has been used this generation.": "Utilisez l'action d'une carte qui a déjà été utilisée cette génération.",
+
+  "Advertising": "Publicité",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Effet: Lorsque vous jouez une carte ayant un coût de 20 M€ ou plus, augmentez votre production de M€ de 1.",
+
+  "Rego Plastics": "Régoplastiques",
+  "Effect: Your steel resources are worth 1 M€ extra.": "Effet: Vos ressources d'acier valent 1 M€ supplémentaire.",
+
+  "Interplanetary Trade": "Commerce Interplanétaire",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Augmentez votre production de M€ de 1 pour chaque badge différent que vous avez en jeu.",
+
+  "Penguins": "Pingouins",
+  "Action: Add 1 Animal to this card.": "Action: Ajoutez 1 animal sur cette carte.",
+  "Requires 8 oceans.": "Nécessite 8 Océans.",
+
+  "Snow Algae": "Algue des Neiges",
+  "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.": "Nécessite 2 Océans. Augmentez votre production de plantes et de chaleur de 1 chacune.",
+
+  "Self-replicating Robots": "Robots Auto-réplicants",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Action: Révélez et placez ici une carte ayant un badge Construction ou Espace depuis votre main et placez 2 ressources dessus ou doublez le nombre de ressources sur cette carte.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.Requires 2 Science tags.": "Effet: Les cartes placées ici peuvent être jouées comme si elles venaient de votre main en réduisant leur coût du nombre de ressources présentes sur cette carte. Nécessite 2 badges Science.",
+
+  "Dusk Laser Mining": "Forage Crépusculaire au Laser",
+  "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Nécessite 2 badges Science. Diminuez votre production d'énergie de 1 et augmentez votre production de titane de 1. Gagnez 4 titanes.",
+
+  "Hi-Tech Lab": "Labo Hi-Tech",
+  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Action: Dépensez n'importe quelle quantité d'énergiepour piocher un même nombre de cartes. GARDEZ 1 DE CES CARTES EN MAIN ET DEFAUSSEZ LES AUTRES.",
+
+  "Mercurian Alloys": "Alliages Mercuriens",
+  "Effect: Your titanium resources are worth 1 M€ extra. Requires 2 Science tags.": "Effet: vos ressources titane valent 1 M€ supplémentaires.Nécessite 2 badges Science.",
+
+  "Energy Market": "Marché de l'Energie",
+  "Action: Spend 2X M€ to gain X energy.": "Action: Dépensez 2 X M€ pour gagner X énergie.",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "Action: Diminuez votre production d'énergie de 1 pour gagnez 8 M€.",
+
+  "Asteroid Rights": "Droits d'Asteroïdes",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Action: Dépensez 1 M€ pour ajouter 1 astéroïde sur N'IMPORTE QUELLE carte.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Action: Dépensez 1 astéroïde pour augmenter votre production de M€ de 1 ou gagner 2 titanes.",
+  "Add 2 asteroids to this card.": "*Ajouez 2 astéroïdes sur cette carte.",
+
+  "Stanford Torus": "Tore de Stanford",
+  "Place a city tile IN SPACE, outside and separate from the planet.": "Placez une tuile Cité DANS L'ESPACE, en dehors et détachée de la planète."
+}

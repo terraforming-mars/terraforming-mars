@@ -1,22 +1,28 @@
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { PreludeCard } from "./PreludeCard";
-import { IProjectCard } from "../IProjectCard";
-import { SelectSpace } from "../../inputs/SelectSpace";
-import { ISpace } from "../../ISpace";
-import { CardName } from '../../CardName';
+import {Tags} from '../../common/cards/Tags';
+import {Player} from '../../Player';
+import {PreludeCard} from './PreludeCard';
+import {CardName} from '../../common/cards/CardName';
+import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
+import {CardRenderer} from '../render/CardRenderer';
 
-export class ExperimentalForest extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.PLANT];
-    public name: CardName = CardName.EXPERIMENTAL_FOREST
-    public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for greenery tile", game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-	        for (let foundCard of game.drawCardsByTag(Tags.PLANT, 2)) {
-                player.cardsInHand.push(foundCard);
-            }
-            return game.addGreenery(player, space.id);
-        });
-    }
+export class ExperimentalForest extends PreludeCard {
+  constructor() {
+    super({
+      name: CardName.EXPERIMENTAL_FOREST,
+      tags: [Tags.PLANT],
+      metadata: {
+        cardNumber: 'P12',
+        renderData: CardRenderer.builder((b) => {
+          b.greenery().cards(2, {secondaryTag: Tags.PLANT});
+        }),
+        description: 'Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.',
+      },
+    });
+  }
+  public play(player: Player) {
+    player.drawCard(2, {tag: Tags.PLANT});
+    player.game.defer(new PlaceGreeneryTile(player));
+    return undefined;
+  }
 }
 

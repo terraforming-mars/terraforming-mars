@@ -1,0 +1,24 @@
+import {Game} from '../Game';
+import {PlayerId, GameId, SpectatorId} from '../common/Types';
+
+type LoadCallback = (game: Game | undefined) => void;
+type ListLoadCallback = (list: Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> | undefined) => void;
+
+/**
+ * Loads games from javascript memory or database
+ * Loads games from database sequentially as needed
+ */
+export interface IGameLoader {
+  add(game: Game): void;
+  getLoadedGameIds(cb: ListLoadCallback): void;
+  /**
+   * Gets a game from javascript memory or pulls from database if needed.
+   * @param {GameId} gameId the id of the game to retrieve
+   * @param {boolean} bypassCache always pull from database
+   * @param {LoadCallback} cb called with game when available
+   */
+  getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void;
+  getByParticipantId(playerId: PlayerId | SpectatorId, cb: LoadCallback): void;
+  getByParticipantIdAsync(playerId: PlayerId | SpectatorId): Promise<Game>;
+  restoreGameAt(gameId: GameId, saveId: number): Promise<Game>;
+}

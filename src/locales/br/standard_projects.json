@@ -1,0 +1,25 @@
+{
+    "Buffer Gas": "Depósito de Gás",
+    "(Spend 16 M€ to increase your TR 1 step. Solo games only.)": "Gaste 16 M€ para aumentar 1 IT. Apenas en modo solo.",
+    "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)": "Gaste 25 M€ para colocar um tile cidade e aumentar sua produção de M€ em 1.",
+    "(Spend 17 M€ to place a colony.)": "Gaste 17 M€ para colocar um colônia.",
+    "(Spend 23 M€ to place a greenery tile and raise oxygen 1 step.)": "Gaste 23 M€ para colocar um tile de vegetacão.",
+    "(Spend 11 M€ to increase your Energy production 1 step.)": "Gaste 11 M€ para aumentar a produção de energia 1 nível.",
+    "Sell Patents": "Vender Patentes",
+    "Sell patents": "Vender patentes",
+    "(Discard any number of cards to gain that amount of M€.)": "Descarte qualquer quantidade de cartas para ganhar a mesma quantidade de M€.",
+    "Asteroid": "Asteroide",
+    "asteroid": "asteroide",
+    "(Spend 14 M€ to raise temperature 1 step.)": "Gaste 14 M€ para aumentar a temperatura 1 nível.",
+    "Air Scrapping": "Aire excedente",
+    "(Spend 15 M€ to raise Venus 1 step.)": "Gaste 15 M€ para aumentar em 1 nível a escala de terraformação de Vênus.",
+    "(Spend 18 M€ to place an ocean tile.)": "Gaste 18 M€ para colocar 1 tile de oceano.",
+
+
+    "Build Moon Colony": "Construir Colônia Lunar",
+    "(Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "Gaste 22 M€ e 1 de titânio para colocar uma colônia na Lua e aumentar sua produção de M€ 1 nível.",
+    "Build Moon Mine": "Construir Mina Lunar",
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "Gaste 20 M€ e 1 de titânio para colocar uma mina na Lua e aumentar sua produção de aço 1 nível.",
+    "Build Moon Road": "Construir Carretera Lunar",
+    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "Gaste 18 M€ e 1 de aço para colocar uma carretera na Lua e aumentar sua valor de logística 1 nível."
+}

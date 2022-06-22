@@ -1,61 +1,80 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { SelectOption } from "../../inputs/SelectOption";
-import { OrOptions } from "../../inputs/OrOptions";
-import { Game } from '../../Game';
-import { IResourceCard } from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardResource} from '../../common/CardResource';
+import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/OrOptions';
+import {IResourceCard} from '../ICard';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
 
-export class RedSpotObservatory implements IProjectCard, IResourceCard {
-    public cost: number = 17;
-    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SCIENCE];
-    public name: CardName = CardName.RED_SPOT_OBSERVATORY;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public resourceCount: number = 0;
+export class RedSpotObservatory extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cost: 17,
+      tags: [Tags.JOVIAN, Tags.SCIENCE],
+      name: CardName.RED_SPOT_OBSERVATORY,
+      cardType: CardType.ACTIVE,
+      resourceType: CardResource.FLOATER,
+      victoryPoints: 2,
 
-    public canAct(): boolean {
-        return true;
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
+      metadata: {
+        cardNumber: 'C32',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 floater to this card, or spend 1 floater here to draw a card.', (eb) => {
+            eb.empty().arrow().floaters(1).or();
+            eb.floaters(1).startAction.cards(1);
+          }).br;
+          b.cards(2);
+        }),
+        description: {
+          text: 'Requires 3 Science tags. Draw 2 cards.',
+          align: 'left',
+        },
+      },
+    });
+  }
+
+  public override resourceCount: number = 0;
+
+  public canAct(): boolean {
+    return true;
+  }
+
+  public action(player: Player) {
+    if (this.resourceCount < 1) {
+      player.addResourceTo(this, 1);
+      return undefined;
     }
 
-    public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.SCIENCE) >= 3;
-    }
+    const opts: Array<SelectOption> = [];
 
-    public action(player: Player, game: Game) {
-        var opts: Array<SelectOption> = [];
-        const addResource = new SelectOption("Add 1 floater on this card", () => {
-            this.resourceCount++;
-            return undefined;
-        });
+    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater', () => this.addResource(player));
+    const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater', () => this.spendResource(player));
 
-        const spendResource = new SelectOption("Remove 1 floater on this card to draw a card", () => {
-            this.resourceCount--;
-            player.cardsInHand.push(game.dealer.dealCard());
-            return undefined;
-        });
+    opts.push(spendResource);
+    opts.push(addResource);
 
-        opts.push(addResource);
+    return new OrOptions(...opts);
+  }
 
-        if (this.resourceCount > 0 ) {
-            opts.push(spendResource);
-        } else {
-            return addResource;
-        }
+  private addResource(player: Player) {
+    player.addResourceTo(this, 1);
+    return undefined;
+  }
 
-        return new OrOptions(...opts);
-    }
+  private spendResource(player: Player) {
+    this.resourceCount--;
+    player.drawCard();
+    return undefined;
+  }
 
-    public play(player: Player, game: Game) {
-        player.cardsInHand.push(game.dealer.dealCard());
-        player.cardsInHand.push(game.dealer.dealCard());  
-        return undefined;
-    }
-
-    public getVictoryPoints(): number {
-        return 2;
-    }
+  public play(player: Player) {
+    player.drawCard(2);
+    return undefined;
+  }
 }

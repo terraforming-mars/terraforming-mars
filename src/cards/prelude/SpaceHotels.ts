@@ -1,21 +1,36 @@
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {Card} from '../Card';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {Resources} from '../../common/Resources';
+import {CardName} from '../../common/cards/CardName';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
 
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+export class SpaceHotels extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.SPACE_HOTELS,
+      tags: [Tags.SPACE, Tags.EARTH],
+      cost: 12,
 
-export class SpaceHotels implements IProjectCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH];
-    public name: CardName = CardName.SPACE_HOTELS;
-    public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(player: Player): boolean {
-       return player.getTagCount(Tags.EARTH) >= 2; 
-    }
-    public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,4);
-        return undefined;
-    }
+      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
+      metadata: {
+        cardNumber: 'P42',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => {
+            pb.megacredits(4);
+          });
+        }),
+        description: 'Requires 2 Earth tags. Increase M€ production 4 steps.',
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, 4);
+    return undefined;
+  }
 }

@@ -1,21 +1,28 @@
-import { expect } from "chai";
-import { MercurianAlloys } from "../../../src/cards/promo/MercurianAlloys";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Game } from '../../../src/Game';
+import {expect} from 'chai';
+import {Research} from '../../../src/cards/base/Research';
+import {MercurianAlloys} from '../../../src/cards/promo/MercurianAlloys';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-describe("MercurianAlloys", function () {
-    it("Can't play if not enough science tags available", function () {
-        const card = new MercurianAlloys();
-        const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay(player)).to.eq(false);
-    });
-    it("Should play", function () {
-        const card = new MercurianAlloys();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const play = card.play(player);
-        expect(play).to.eq(undefined);
-        expect(player.getTitaniumValue(game)).to.eq(4);
-    });
+describe('MercurianAlloys', function() {
+  let card : MercurianAlloys; let player : Player;
+
+  beforeEach(function() {
+    card = new MercurianAlloys();
+    player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
+  });
+
+  it('Can\'t play if not enough science tags available', function() {
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+  });
+
+  it('Should play', function() {
+    player.playedCards.push(new Research());
+    expect(player.canPlayIgnoringCost(card)).is.true;
+
+    card.play(player);
+    expect(player.getTitaniumValue()).to.eq(4);
+  });
 });

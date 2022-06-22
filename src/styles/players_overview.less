@@ -1,0 +1,287 @@
+.icon-first-player {
+    text-align: center;
+    font-size: 18px;
+    font-family: Prototype;
+    padding: 1px 4px;
+    border-radius: 0 5px 5px 0;
+    position: absolute;
+    width: 40px;
+    padding-left: 10px;
+    line-height: 24px;
+    height: 26px;
+    letter-spacing: 0px;
+    margin-top: 34px;
+    left: -17px;
+    background: linear-gradient(to right, black, #aaa,#aaa, #aaa);
+    color: black;
+    clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 0% 0%);
+    z-index: 1;
+}
+
+.player-played-cards {
+    margin: 7px 15px 0 15px;
+    width: 90px;
+
+    .player-played-cards-top {
+        display: flex;
+        background: #0008;
+        border-radius: 5px;
+        font-family: 'Prototype';
+        height: 36px;
+        line-height: 36px;
+        padding-left: 2px;
+    }
+    .played-cards-elements {
+        display: flex;
+        .played-cards-icon {
+            width: 12px;
+            height: 20px;
+            border-radius: 2px;
+            margin:8px 0 0 5px;
+            padding: 0px;
+        }
+        .played-cards-count {
+            width: 36px;
+            text-align: center;
+            color: #fff8;
+        }
+    }
+
+    .played-cards-button {
+        width: 100%;
+        border-radius: 5px;
+        margin-top: 7px;
+        &:hover {
+            filter: brightness(120%);
+        }
+    }
+}
+
+.players-overview {
+    position: relative;
+    display: table-caption;
+    margin-top: 40px;
+    .player-divider {
+        height: 1px;
+        width: 100%;
+        border: 1px dashed #444;
+    }
+    .players-overview-settings {
+        display: flex;
+        flex-flow: row;
+        position: absolute;
+        top: -35px;
+        left: 0;
+        font-size: 16px;
+        align-items: center;
+        .setting-label {
+            text-transform: uppercase;
+            margin-left: 5px;
+            color: #303030;
+            font-weight: bold;
+        }
+        .setting-button {
+            font-family: Ubuntu, Sans;
+            letter-spacing: 1px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #e6e1e1;
+            text-transform: uppercase;
+            background: #303030;
+            padding: 1px 5px 1px 10px;
+            border-radius: 2px;
+            text-decoration: none;
+            width: 140px;
+            margin-left: 5px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+    }
+}
+
+
+.player-info-details {
+    white-space: nowrap;
+    line-height: 18px;
+    width: 136px;
+    color: #e6e1e1;
+    .player-info-name {
+        text-shadow: 0px 1px 1px #000;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 20px;
+        line-height: 24px;
+        margin-top: -4px;
+        cursor: pointer;
+    }
+    .player-info-corp {
+        font-size: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 26px;
+        cursor: pointer;
+    }
+}
+
+.player-info {
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 8px;
+    display: flex;
+    padding-right: 0px;
+    .player-tags {
+        display: flex;
+        flex-flow: row;
+        .player-tag-discount {
+            position: relative;
+            .megacredits-container {
+                position: absolute;
+                right: -6px;
+                top: -18px;
+                z-index: 10;
+                border-radius: 8px 8px 0px 1px;
+                padding: 8px 8px 0px 8px;
+                .megacredits {
+                    background-image: url(assets/resources/megacredit.png);
+                    background-size: 20px 20px;
+                    width: 20px;
+                    height: 20px;
+                    color: black;
+                    font-size: 15px;
+                    font-style: normal;
+                    font-family: Prototype;
+                    line-height: 20px;
+                    text-align: center;
+                }
+            }
+        }
+        .points-per-tag {
+            position: absolute;
+            background: url(/assets/board/mars.png);
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            box-shadow: 0 1px 1px 1px black;
+            font-family: Prototype;
+            text-align: center;
+            line-height: 23px;
+            color: black;
+            background-size: 100px;
+            background-position: -26px -20px;
+            font-size: 18px;
+            top: 13px;
+            left: 14px;
+            z-index: 10;
+        }
+        .points-per-tag--S {
+          font-size: 16px;
+        }
+        .player-tags-main {
+            display: flex;
+            align-items: center;
+            margin-left: 0;
+        }
+        .player-tags-secondary {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            position: relative;
+            margin-left: 5px;
+        }
+        .tag-separator {
+            width: 2px;
+            height: 70px;
+            margin-right: 6px;
+            background:rgba(170, 170, 170, 0.2);
+        }
+    }
+    .player-status-and-res {
+        display: flex;
+        .player-status {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+
+            .player-status-bottom {
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                .player-action-status-container.no-timer {
+                    .player-action-status {
+                        padding-bottom: 6px !important;
+                    }
+                }
+                .player-action-status-container {
+                    border-radius: 4px;
+                    display: inline-block;
+                    text-align: center;
+                    font-family: Prototype;
+                    width: 136px;
+                    background: rgba(0,0,0,.3);
+                    .player-action-status {
+                        font-size: 16px;
+                        line-height: 8px;
+                        padding-top: 6px;
+                        padding-bottom: 2px;
+                    }
+                    .player-status-timer {
+                        font-size: 18px;
+                        width: 100%;
+                        .player-timer {
+                            display: flex;
+                            flex-flow: row;
+                            width: 100%;
+                            justify-content: center;
+                            >div{
+                                display: inline-block;
+                            }
+                            .time-part {
+                                width: 23px;
+                                text-align: left;
+                            }
+                            .timer-delimiter {
+                                margin-left: 1px;
+                                margin-right: 1px;
+                            }
+                            .player-timer-minutes {
+                                text-align: center;
+                            }
+                            .player-timer-hours {
+                                width: 27px;
+                                text-align: right;
+                                align-self: flex-end;
+                                padding-right: 1px;
+                            }
+                        }
+                    }
+                }
+                .player-action-status-container--active {
+                    background: #e6e1e1;
+                    color: #000;
+                }
+                .player-action-status-container--passed {
+                    background: #000;
+                    color: #e6e1e1;
+                    opacity: 0.3;
+                }
+            }
+        }
+    }
+}
+.tag-and-discount {
+    position: relative;
+}
+
+@media only screen and (max-width: 1740px)  {
+    .players-overview {
+        .player-info {
+            flex-flow: column !important;
+            width: fit-content;
+        }
+        .player-status-and-res {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+        }
+    }
+}

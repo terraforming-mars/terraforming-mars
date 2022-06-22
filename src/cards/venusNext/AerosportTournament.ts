@@ -1,26 +1,36 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { ResourceType } from "../../ResourceType";
-import { CardName } from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {Resources} from '../../common/Resources';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../common/cards/render/Size';
+import {Card} from '../Card';
+import {all} from '../Options';
 
 
-export class AerosportTournament implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [];
-    public name: CardName = CardName.AEROSPORT_TOURNAMENT;
-    public cardType: CardType = CardType.EVENT;
-    public canPlay(player: Player): boolean {
-        return player.getResourceCount(ResourceType.FLOATER) >= 5;
-    }
-    public play(player: Player, game: Game) {
-        player.megaCredits += game.getCitiesInPlay();
-        return undefined;
-    }
-    
-    public getVictoryPoints() {
-        return 1;
-    } 
+export class AerosportTournament extends Card {
+  constructor() {
+    super({
+      name: CardName.AEROSPORT_TOURNAMENT,
+      cardType: CardType.EVENT,
+      cost: 7,
+
+      requirements: CardRequirements.builder((b) => b.floaters(5)),
+      victoryPoints: 1,
+
+      metadata: {
+        cardNumber: '214',
+        description: 'Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(1).slash().city({size: Size.SMALL, all});
+        }),
+      },
+    });
+  }
+
+  public play(player: Player) {
+    player.addResource(Resources.MEGACREDITS, player.game.getCitiesCount(), {log: true});
+    return undefined;
+  }
 }

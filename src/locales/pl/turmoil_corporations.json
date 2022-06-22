@@ -1,0 +1,16 @@
+{
+    "You start with 54 M€.": "Rozpoczynasz grę z 54 M€.",
+    "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Efekt trwały: Za każdym razem, gdy na planszy zostanie umieszczony obszar oceanu, podnieś swoją produkcję M€ o 1 poziom. Twoja premia za umieszczenie obszaru obok obszaru oceanu wynosi 3 M€ (a nie 2 M€).",
+
+    "You start with 14 M€. Lower your TR 1 step.": "Rozpoczynasz grę z 14 M€. Obniż swój WT o 1 poziom.",
+    "Effect: Buying cards to hand costs 1 M€.": "Efekt trwały: Kupowanie kart na rękę (w tym kart startowych) kosztuje Cię 1 M€",
+
+    "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Rozpoczynasz grę z 40 M€ i dodatkowym poziomem produkcji stali i tytanu.",
+    "Action: Decrease any production to gain 4 resources of that kind.": "Akcja: Obniż produkcję dowolnego zasobu o 1 poziom, aby otrzymać 4 jednostki tego zasobu.",
+
+    "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Rozpoczynasz grę z 53 M€. Obniż swój WT o 2 poziomy. Koniec gry: Otrzymujesz 1 PZ za każdą jednostkę rezerwatów znajdującą się na tej karcie.",
+    "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "Efekt trwały: W pokoleniu, w którym nie podniosłeś swojego poziomu WT przed fazą produkcji, podczas fazy produkcji umieszczasz na tej karcie 1 jednostkę rezerwatów i otrzymujesz 6 M€.",
+
+    "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "Rozpoczynasz grę z 36 M€. Efekt trwały: Gdy wykonujesz akcję, traktujesz uniwersalny symbol jak dowolny wybrany symbol.",
+    "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Akcja: Otrzymujesz 2 M€ za każdą partię, w której masz przynajmniej 1 delegata."
+}

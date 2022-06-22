@@ -1,32 +1,47 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {Resources} from '../../common/Resources';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
-export class ParliamentHall implements IProjectCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.PARLIAMENT_HALL;
-    public cardType: CardType = CardType.AUTOMATED;
+export class ParliamentHall extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.PARLIAMENT_HALL,
+      tags: [Tags.BUILDING],
+      cost: 8,
+      requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
+      victoryPoints: 1,
 
-    public canPlay(player: Player, game: Game): boolean {
-        if (game.turmoil !== undefined) {
-            return game.turmoil.canPlay(player, PartyName.MARS);
-        }
-        return false;
-    }
+      metadata: {
+        cardNumber: 'T08',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => {
+            pb.megacredits(1).slash().building(3, {played});
+          });
+        }),
+        description: 'Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.',
+      },
+    });
+  }
 
-    public play(player: Player) {
-        let amount = Math.floor((player.getTagCount(Tags.STEEL) + 1) / 3);
-        player.setProduction(Resources.MEGACREDITS, amount);
-        return undefined;
-    }
+  public produce(player: Player) {
+    // Include this when the card is first played, and not when it is called by Robotic Workforce.
+    const includeThis = !player.cardIsInEffect(this.name);
+    const tagCount = player.getTagCount(Tags.BUILDING) + (includeThis ? 1 : 0);
+    const amount = Math.floor(tagCount / 3);
+    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
+  }
 
-    public getVictoryPoints() {
-        return 1;
-    }
+  public play(player: Player) {
+    this.produce(player);
+    return undefined;
+  }
 }

@@ -1,105 +1,238 @@
-
-
 @import (inline) "../../node_modules/spectre.css/dist/spectre.min.css";
 @import (inline) "../../node_modules/spectre.css/dist/spectre-exp.min.css";
 @import (inline) "../../node_modules//spectre.css/dist/spectre-icons.min.css";
 @import (inline) "../../node_modules/dialog-polyfill/dialog-polyfill.css";
+@import "./variables.less";
+@import "./mixins.less";
 
-html, body {
-  height: 100%;
-  margin: 0px;
+html,
+body {
+    height: 100%;
+    margin: 0px;
+}
+.btn {
+    color: @text_action !important;
+    background: @bg_action !important;
+    border-color: @boder_action !important;
+}
+.btn-tiny {
+    background: #5755d9;
+    border-color: #4b48d6;
+    color: #fff;
+    cursor: pointer;
+    height: 1.5rem;
+    line-height: 0.5rem;
+}
+.btn-max {
+    margin-left: 10px;
+}
+.btn-submit {
+    min-width: 183px;
+    height: 50px;
+    font-size: 20px;
+    margin: 10px 0 30px 0;
+}
+.btn-rounded {
+    border-radius: 8px;
+}
+.flex {
+    display: flex;
+}
+.float-left {
+    float: left !important;
+}
+.float-right {
+    float: right !important;
+}
+.centered-content {
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+}
+.centered-content button {
+    margin-right: 20px;
+}
+.dynamic-title {
+    font-size: @font_size_huge;
+    margin-bottom: 16px;
 }
 
 .capitalized {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 .main-container {
-    margin: 0 60px;
+    margin: 0 0 0 60px;
 }
 
 .hidden {
-  display: none !important;
+    display: none !important;
+}
+.visibility-hidden {
+    visibility: hidden !important;
 }
 
 a:link {
-color: #ddd;
+    color: #ddd;
 }
 
 a:visited {
-color: #ccc;
+    color: #ccc;
 }
 
 a:hover {
-color: #fff;
+    color: #fff;
 }
 
 a:active {
-color: #ddd;
+    color: #ddd;
 }
 
 @font-face {
-  font-family: Prototype;
-  src: url(./assets/Prototype.ttf);
+    font-family: Prototype;
+    src: url(./assets/Prototype.ttf);
 }
 
 body {
-  background: #303030;
-  color: #dddddd;
-  font-family: Ubuntu, Sans;
-  font-size: 23px;
+    background: @bg_main;
+    color: @text_main;
+    font-family: @font_family_main;
+    font-size: @font_size_big;
 }
 
-
 h1 {
-    color: #ddd;
-    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
-    text-shadow: -1px -1px 1px #aaaa,1px 1px 1px #333a;
+    text-shadow: -1px -1px 1px #aaaa, 1px 1px 1px #333a;
     padding: 1px 15px;
     border-radius: 8px;
 }
 
 h2 {
-    color: #ddd;
-    font-family: Ubuntu, Sans;
+    font-size: @font_size_huge;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 6px #aaa4;
 }
 
-input[type=radio]:checked + label {
-  border: 2px solid rgb(137,137,137);
-  box-shadow: inset 0 0 0 3px rgb(68,68,68);
-  filter: brightness(120%)  drop-shadow(0 0 5px white);
-  transform: translate(0,2px);
-}
 .filterDiv {
-  font-size: 17px !important;
+    font-size: 17px !important;
 }
 
 .is-action {
-  color: #5755d9;
-  cursor: pointer;
+    color: lightblue;
+    cursor: pointer;
 }
 
-@import "./language_switcher.less";
+.nowrap {
+    white-space: nowrap;
+}
+.newlines {
+    white-space: pre;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+// normal backgrounds
+.player_bg_color_red {
+    background-color: @player_red;
+}
+
+.player_bg_color_yellow {
+    background-color: @player_yellow;
+}
+
+.player_bg_color_green {
+    background-color: @player_green;
+}
+
+.player_bg_color_black {
+    background-color: @player_black;
+}
+
+.player_bg_color_blue {
+    background-color: @player_blue;
+}
+
+.player_bg_color_purple {
+    background-color: @player_purple;
+}
+
+.player_bg_color_orange {
+    background-color: @player_orange;
+}
+
+.player_bg_color_pink {
+    background-color: @player_pink;
+}
+
+// backgroungs with opacity
+.player_translucent_bg_color_red {
+    .player_red_bg_translucent();
+}
+
+.player_translucent_bg_color_yellow {
+    .player_yellow_bg_translucent();
+}
+
+.player_translucent_bg_color_green {
+    .player_green_bg_translucent();
+}
+
+.player_translucent_bg_color_black {
+    .player_black_bg_translucent();
+}
+
+.player_translucent_bg_color_blue {
+    .player_blue_bg_translucent();
+}
+
+.player_translucent_bg_color_purple {
+    .player_purple_bg_translucent();
+}
+
+.player_translucent_bg_color_orange {
+    .player_orange_bg_translucent();
+}
+
+.player_translucent_bg_color_pink {
+    .player_pink_bg_translucent();
+}
+
+.alert-dialog {
+    position: fixed;
+}
+
 @import "./cards.less";
+@import "./cards_v2.less";
 @import "./language_hacks.less";
 @import "./board.less";
 @import "./board_items_positions.less";
 @import "./globs.less";
+@import "./game_home.less";
 @import "./game_end.less";
 @import "./resources.less";
 @import "./start_screen.less";
 @import "./create_game_form.less";
 @import "./corporations_filter.less";
+@import "./colonies_filter.less";
+@import "./cards_filter.less";
 @import "./player_home.less";
+@import "./players_overview.less";
 @import "./preferences.less";
 @import "./waiting_for.less";
 @import "./payments.less";
 @import "./other_player.less";
-@import "./venus.less";
 @import "./colonies.less";
 @import "./log.less";
 @import "./load_game_form.less";
 @import "./turmoil.less";
+@import "./ares.less";
+@import "./help.less";
+@import "./debug_ui.less";
+@import "./moon.less";
+@import "./pathfinders.less";

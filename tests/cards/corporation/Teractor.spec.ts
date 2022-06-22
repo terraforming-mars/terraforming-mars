@@ -1,20 +1,32 @@
+import {expect} from 'chai';
+import {Birds} from '../../../src/cards/base/Birds';
+import {Cartel} from '../../../src/cards/base/Cartel';
+import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
+import {Teractor} from '../../../src/cards/corporation/Teractor';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-import { expect } from "chai";
-import { Teractor } from "../../../src/cards/corporation/Teractor";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Game } from "../../../src/Game";
-import { Cartel } from "../../../src/cards/Cartel";
-import { Birds } from "../../../src/cards/Birds";
+describe('Teractor', function() {
+  let card : Teractor; let player : Player;
 
-describe("Teractor", function () {
-    it("Should play", function () {
-        const card = new Teractor();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const action = card.play();
-        expect(action).to.eq(undefined);
-        expect(card.getCardDiscount(player, game, new Cartel())).to.eq(3);
-        expect(card.getCardDiscount(player, game, new Birds())).to.eq(0);
-    });
+  beforeEach(function() {
+    card = new Teractor();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, redPlayer], player);
+
+    const action = card.play();
+    expect(action).is.undefined;
+  });
+
+
+  it('Should play', function() {
+    expect(card.getCardDiscount(player, new Cartel())).to.eq(3);
+    expect(card.getCardDiscount(player, new Birds())).to.eq(0);
+  });
+
+  it('Discounts Luna Governor correctly', function() {
+    expect(card.getCardDiscount(player, new LunaGovernor())).to.eq(6);
+  });
 });

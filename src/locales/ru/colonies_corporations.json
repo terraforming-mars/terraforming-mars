@@ -1,0 +1,29 @@
+{
+    "Polyphemos": "Polyphemos",
+    "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Вы начинаете с 50МС. Увеличьте своё производство МС на 5. Получите 5 титана",
+    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Эффект: Покупка карт в руку, включая стартовые, стоит не 3 MС, а 5 МС",
+
+    "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
+    "Action: Add a floater to ANY card.": "Действие: добавьте аэростат на любую карту",
+    "Effect: Floaters on this card may be used as 2 heat each.": "Эффект: Аэростаты отсюда могут быть использованы как 2 тепла каждый",
+
+    "Arklight": "Arklight",
+    "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "Вы начинаете с 45 МС. Увеличьте своё производство МС на 2. 1 ПО за каждых 2 животных на этой карте",
+    "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "Эффект: Разыгрывая метки животных или растений, включая эту, добавляйте 1 животное на эту карту",
+
+    "Aridor": "Aridor",
+    "COLONY": "КОЛОНИЯ",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Вы начинаете с 40МС. Первым действием добавьте в игру еще один тайл колонии",
+    "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "Каждый раз разыгрывая метку, которую еще не разыгрывали [но не событие], увеличивайте своё производство МС на 1",
+
+    "Poseidon": "Poseidon",
+    "You start with 45 M€. As your first action, place a colony.": "Вы начинаете с 45МС. Первым действием постройте колонию",
+    "Effect: When any colony is placed, including this, raise your M€ production 1 step.":
+    "Эффект: Увеличивайте своё производство МС на 1 каждый раз когда строится колония",
+
+    "Point Luna": "Point Luna",
+    "You start with 1 titanium production and 38 M€.": "Вы начинаете с 1 доп. производством титана и 38 M€",
+    "Effect: When you play an Earth tag, including this, draw a card.": "Разыгрывая карту с меткой Земли, включая эту, доберите карту",
+    "": ""
+
+}

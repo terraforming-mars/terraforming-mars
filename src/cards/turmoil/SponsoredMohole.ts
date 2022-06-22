@@ -1,28 +1,37 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Resources } from "../../Resources";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {Resources} from '../../common/Resources';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {Units} from '../../common/Units';
 
+export class SponsoredMohole extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 5,
+      tags: [Tags.BUILDING],
+      name: CardName.SPONSORED_MOHOLE,
+      cardType: CardType.AUTOMATED,
+      productionBox: Units.of({heat: 2}),
 
-export class SponsoredMohole implements IProjectCard {
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.SPONSORED_MOHOLE;
-    public cardType: CardType = CardType.AUTOMATED;
+      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
+      metadata: {
+        cardNumber: 'T13',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.heat(2));
+        }),
+        description: 'Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.',
+      },
+    });
+  }
 
-    public canPlay(player: Player, game: Game): boolean {
-        if (game.turmoil !== undefined) {
-            return game.turmoil.canPlay(player, PartyName.KELVINISTS);
-        }
-        return false;
-    }
-
-    public play(player: Player) {
-        player.setProduction(Resources.HEAT,2);
-        return undefined;
-    }
+  public play(player: Player) {
+    player.addProduction(Resources.HEAT, 2);
+    return undefined;
+  }
 }

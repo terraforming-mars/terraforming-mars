@@ -1,36 +1,52 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Resources } from "../../Resources";
-import { IResourceCard } from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {Resources} from '../../common/Resources';
+import {CardResource} from '../../common/CardResource';
+import {IResourceCard} from '../ICard';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 
-export class RefugeeCamps implements IProjectCard, IResourceCard {
-    public cost: number = 10;
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.REFUGEE_CAMP;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.CAMP;
-    public resourceCount: number = 0;
+export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cost: 10,
+      tags: [Tags.EARTH],
+      name: CardName.REFUGEE_CAMP,
+      cardType: CardType.ACTIVE,
+      resourceType: CardResource.CAMP,
+      victoryPoints: VictoryPoints.resource(1, 1),
 
-    public canAct(player: Player): boolean {
-        return player.getProduction(Resources.MEGACREDITS) >= -4;
-    } 
+      metadata: {
+        cardNumber: 'C33',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Decrease your M€ production 1 step to add a camp resource to this card.', (eb) => {
+            eb.production((pb) => pb.megacredits(1));
+            eb.startAction.camps();
+          }).br;
+          b.vpText('1 VP for each camp resource on this card.');
+        }),
+      },
+    });
+  }
 
-    public action(player: Player) {
-        player.setProduction(Resources.MEGACREDITS, -1);
-        this.resourceCount++;
-        return undefined;
-    } 
+  public override resourceCount: number = 0;
 
-    public play() {
-      return undefined;
-    }
+  public canAct(player: Player): boolean {
+    return player.getProduction(Resources.MEGACREDITS) >= -4;
+  }
 
-    public getVictoryPoints(): number {
-        return this.resourceCount;
-    }
+  public action(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, -1);
+    player.addResourceTo(this, 1);
+    return undefined;
+  }
+
+  public play() {
+    return undefined;
+  }
 }
 

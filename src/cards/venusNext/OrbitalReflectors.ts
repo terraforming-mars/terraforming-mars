@@ -1,23 +1,36 @@
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {Resources} from '../../common/Resources';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+export class OrbitalReflectors extends Card {
+  constructor() {
+    super({
+      name: CardName.ORBITAL_REFLECTORS,
+      cardType: CardType.AUTOMATED,
+      tags: [Tags.VENUS, Tags.SPACE],
+      cost: 26,
+      tr: {venus: 2},
 
-export class OrbitalReflectors  implements IProjectCard {
-    public cost: number = 26;
-    public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: CardName = CardName.ORBITAL_REFLECTORS;
-    public cardType: CardType = CardType.AUTOMATED;
+      metadata: {
+        cardNumber: '242',
+        renderData: CardRenderer.builder((b) => {
+          b.venus(2).br;
+          b.production((pb) => {
+            pb.heat(2);
+          });
+        }),
+        description: 'Raise Venus 2 steps. Increase your heat production 2 steps.',
+      },
+    });
+  }
 
-
-
-    public play(player: Player, game: Game) {
-        game.increaseVenusScaleLevel(player,2);
-        player.setProduction(Resources.HEAT, 2);
-        return undefined;
-    }
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 2);
+    player.addProduction(Resources.HEAT, 2);
+    return undefined;
+  }
 }

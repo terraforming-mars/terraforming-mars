@@ -1,0 +1,54 @@
+{
+    "Beginner Corporation": "Corporação para Iniciante",
+    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Você começa com 42 M€. Ao invés de escolher das 10 cartas durante a fase inicial, você ganha 10 cartas de graça.",
+
+    "Credicor": "Credicor",
+    "You start with 57 M€.": "Você começa com 57 M€.",
+    "Effect: After you pay for a card or standard project with a basic cost of 20 M€ or more, you gain 4 M€.": "Efeito: ao pagar por uma carta ou projeto-padrão com custo de 20 M€ ou mais, você ganha 4 M€.",
+
+    "Ecoline": "Ecoline",
+    "You start with 2 plant production, 3 plants, and 36 M€.": "Você começa com 2 níveis de produção de plantas, 3 plantas e 36 M€.",
+    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Efeito: você sempre pode pagar 7 recursos de plantas, em vez de 8, para colocar 1 tile de vegetação.",
+
+    "Helion": "Helion",
+    "You start with 3 heat production and 42 M€.": "Você começa com 3 níveis de produção de calor e 42 M€.",
+    "Effect: You may use heat as M€. You may not use M€ as heat.": "Efeito: você pode usar calor como M€, mas não pode usar M€ como calor.",
+
+    "Interplanetary Сinematics": "Interplanetary Сinematics",
+    "You start with 20 steel and 30 M€.": "Você começa com 20 de aço e 30 M€.",
+    "Effect: Each time you play an event, you gain 2 M€.": "Efeito: cada vez que você joga um evento, você ganha 2 M€.",
+
+    "Inventrix": "Inventrix",
+    "As your first action in the game, draw 3 cards. Start with 45 M€.": "Como sua primeira ação no jogo saque 3 cartas. Você começa com 45 M€.",
+    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Efeito: Os requisitos de temperatura, oxígeno e oceano, para você, têm flexibilidade de +2 a -2 níveis, à sua escolha em cada caso.",
+
+    "Phobolog": "Phobolog",
+    "You start with 10 titanium and 23 M€.": "Você começa com 10 de titânio e 23 M€.",
+    "Effect: Your titanium resources are each worth 1 M€ extra.": "Efeito: cada recurso de titânio que você possui vale 1 M€ a mais.",
+
+    "THARSIS": "THARSIS",
+    "REPUBLIC": "REPÚBLICA",
+    "Tharsis Republic": "República de Tharsis",
+    "You start with 40 M€. As your first action in the game, place a city tile.": "Você começa com 40 M€. Como sua primeira ação no jogo, coloque um tile de cidade.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Efeito: Sempre que qualquer tile de cidade for colocado sobre MARTE, aumente em 1 nível sua produção de M€. Quando você colocar um tile de cidade, ganhe 3 M€.",
+
+    "Thorgate": "Thorgate",
+    "You start with 1 energy production and 48 M€.": "Você começa com 1 nível de produção de energia e com 48 M€.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Efeito: quando jogar um ícone energia OU O PROJETO-PADRÃO DE USINA ELÉTRICA, você paga 3 M€ a menos.",
+
+    "UNMI": "UNMI",
+    "You start with 40 M€.": "Você começa com 40 M€.",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Ação: se o seu IT subiu nesta generação, você pode pagar 3 M€ para aumentá-lo em mais 1 nível.",
+
+    "Mining Guild": "Mining Guild",
+    "You start with 30 M€, 5 steel and 1 steel production.": "Você começa com 30 M€, 5 de aço e 1 nível de produção de aço.",
+    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Efeito: cada vez que você obtém qualquer quantia de aço ou titânio como bônus por colocação no mapa, aumente em 1 nível sua produção de aço.",
+
+    "Terractor": "Terractor",
+    "You start with 60 M€.": "Você começa com 60 M€.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Efeito: quando jogar um ícone de Terra, você paga 3 M€ a menos.",
+
+    "Saturn Systems": "Saturn Systems",
+    "You start with 1 titanium production and 42 M€.": "Você começa com 1 nível de produção de titânio e 42 M€.",
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Efeito: cada vez que um ícone joviano é posto em jogo, incluíndo este, aumente sua produção de M€ em 1 nível."
+}

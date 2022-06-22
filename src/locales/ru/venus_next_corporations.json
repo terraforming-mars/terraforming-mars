@@ -1,0 +1,21 @@
+{
+    "Aphrodite": "Aphrodite",
+    "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "Эффект: Получайте по 2 МС за каждое изменение шкалы Венеры",
+    "You start with 1 plant production and 47 M€.": "Вы начинаете с 47МС. Увеличьте на 1 своё производство растений",
+
+    "Celestic": "Celestic",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Вы начинаете с 42 МС. В качестве первого действия получите 2 карты с аэростатми из колоды",
+    "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Действие: Добавьте 1 аэростат на любую карту. 1 ПО за каждые 3 аэростата здесь",
+
+    "Manutech": "Manutech",
+    "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "Каждый раз увеличивая производство какого-либо ресурса, включая увеличение по этой карте, получайте 1 ресурс за каждый шаг увеличения производства",
+    "You start with 1 steel production, and 35 M€.": "Вы начинаете с 35МС. Увеличьте на 1 своё производство стали",
+
+    "Morning Star Inc": "Morning Star Inc",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Вы начинаете с 50 МС. Первым действием получите из колоды 3 карты с меткой Венеры",
+    "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "Эффект: Требования по Венере +/- 2 на ваш выбор",
+
+    "Viron": "Viron",
+    "You start with 48 M€.": "Вы начинаете с 48МС",
+    "Action: Use a blue card action that has already been used this generation.": "Действие: Выполните действие синей карты, которую вы уже использовали в этом поколении"
+}

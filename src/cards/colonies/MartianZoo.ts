@@ -1,44 +1,63 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { IResourceCard } from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardResource} from '../../common/CardResource';
+import {IResourceCard} from '../ICard';
+import {CardRequirements} from '../CardRequirements';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {Resources} from '../../common/Resources';
+import {all, played} from '../Options';
 
-export class MartianZoo implements IProjectCard, IResourceCard {
-    public cost: number = 12;
-    public tags: Array<Tags> = [Tags.ANIMAL, Tags.STEEL];
-    public name: CardName = CardName.MARTIAN_ZOO;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.ANIMAL;
-    public resourceCount: number = 0;
+export class MartianZoo extends Card implements IProjectCard, IResourceCard {
+  constructor() {
+    super({
+      cost: 12,
+      tags: [Tags.ANIMAL, Tags.BUILDING],
+      name: CardName.MARTIAN_ZOO,
+      cardType: CardType.ACTIVE,
+      resourceType: CardResource.ANIMAL,
+      requirements: CardRequirements.builder((b) => b.cities(2, {all})),
+      victoryPoints: 1,
 
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        if (card.tags.indexOf(Tags.EARTH) !== -1) {
-            player.addResourceTo(this, card.tags.filter(tag => tag === Tags.EARTH).length);
-        }
+      metadata: {
+        cardNumber: 'C24',
+        renderData: CardRenderer.builder((b) => {
+          b.effect('When you play an Earth tag, place an animal here.', (eb) => {
+            eb.earth(1, {played}).startEffect.animals(1);
+          }).br;
+          b.action('Gain 1M€ per animal here.', (eb) => {
+            eb.empty().startAction.megacredits(1).slash().animals(1);
+          });
+        }),
+        description: {
+          text: 'Requires 2 city tiles in play.',
+          align: 'left',
+        },
+      },
+    });
+  }
+
+  public override resourceCount: number = 0;
+
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    if (card.tags.includes(Tags.EARTH)) {
+      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.EARTH).length);
     }
+  }
 
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getCitiesInPlay() >= 2;
-    }
+  public canAct(): boolean {
+    return this.resourceCount > 0;
+  }
 
-    public canAct(): boolean {
-        return this.resourceCount > 0;
-    }
+  public action(player: Player) {
+    player.addResource(Resources.MEGACREDITS, this.resourceCount, {log: true});
+    return undefined;
+  }
 
-    public action(player: Player, _game: Game) {
-        player.megaCredits += this.resourceCount;
-        return undefined;
-    }
-
-    public play() {
-      return undefined;
-    }
-
-    public getVictoryPoints(): number {
-        return 1;
-    }
+  public play() {
+    return undefined;
+  }
 }

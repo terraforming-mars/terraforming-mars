@@ -1,30 +1,49 @@
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
+import {Ants} from '../../../src/cards/base/Ants';
+import {MedicalLab} from '../../../src/cards/base/MedicalLab';
+import {Research} from '../../../src/cards/base/Research';
+import {ValleyTrust} from '../../../src/cards/prelude/ValleyTrust';
+import {TestPlayer} from '../../TestPlayer';
+import {CardType} from '../../../src/common/cards/CardType';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
-import { expect } from "chai";
-import { Ants } from "../../../src/cards/Ants";
-import { Color } from "../../../src/Color";
-import { Game } from "../../../src/Game";
-import { MedicalLab } from "../../../src/cards/MedicalLab";
-import { Player } from "../../../src/Player";
-import { ValleyTrust } from "../../../src/cards/prelude/ValleyTrust";
-import { Research } from '../../../src/cards/Research';
+describe('ValleyTrust', function() {
+  let card : ValleyTrust;
+  let player : TestPlayer;
 
-describe("ValleyTrust", function () {
-    it("Doesn't get card discount", function () {
-        const player = new Player("foo", Color.BLUE, false);
-        const game = new Game("bar", [player], player);
-        const card = new ValleyTrust();
-        expect(card.getCardDiscount(player, game, new Ants())).to.eq(0);
-    });
-    it("Gets card discount", function () {
-        const player = new Player("foo", Color.BLUE, false);
-        const game = new Game("bar", [player], player);
-        const card = new ValleyTrust();
-        expect(card.getCardDiscount(player, game, new MedicalLab())).to.eq(2);
-        expect(card.getCardDiscount(player, game, new Research())).to.eq(4);
-    });
-    it("Should play", function () {
-        const card = new ValleyTrust();
-        const action = card.play();
-        expect(action).to.eq(undefined);
-    });
+  beforeEach(function() {
+    card = new ValleyTrust();
+    const game = newTestGame(1, {preludeExtension: true});
+    player = getTestPlayer(game, 0);
+  });
+
+  it('Does not get card discount for other tags', function() {
+    expect(card.getCardDiscount(player, new Ants())).to.eq(0);
+  });
+
+  it('Gets card discount for science tags', function() {
+    expect(card.getCardDiscount(player, new MedicalLab())).to.eq(2);
+    expect(card.getCardDiscount(player, new Research())).to.eq(4);
+  });
+
+  it('Should play', function() {
+    const action = card.play();
+    expect(action).is.undefined;
+  });
+
+  it('initial action', () => {
+    const selectCard = cast(card.initialAction(player), SelectCard);
+    expect(selectCard.cards).has.length(3);
+    expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);
+  });
+
+  it('Card works even without prelude', () => {
+    const game = newTestGame(1, {preludeExtension: false});
+    const player = getTestPlayer(game, 0);
+    const selectCard = cast(card.initialAction(player), SelectCard);
+    expect(selectCard.cards).has.length(3);
+    expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);
+  });
 });

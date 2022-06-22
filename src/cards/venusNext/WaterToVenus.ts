@@ -1,19 +1,29 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class WaterToVenus implements IProjectCard {
-    public cost: number = 9;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public name: CardName = CardName.WATER_TO_VENUS;
-    public cardType: CardType = CardType.EVENT;
+export class WaterToVenus extends Card {
+  constructor() {
+    super({
+      name: CardName.WATER_TO_VENUS,
+      cardType: CardType.EVENT,
+      tags: [Tags.SPACE],
+      cost: 9,
+      tr: {venus: 1},
 
-    public play(player: Player, game: Game) {
-        game.increaseVenusScaleLevel(player,1);
-        return undefined;
-    }
+      metadata: {
+        cardNumber: '254',
+        renderData: CardRenderer.builder((b) => b.venus(1)),
+        description: 'Raise Venus 1 step.',
+      },
+    });
+  }
 
+  public play(player: Player) {
+    player.game.increaseVenusScaleLevel(player, 1);
+    return undefined;
+  }
 }

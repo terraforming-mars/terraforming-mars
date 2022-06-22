@@ -1,22 +1,30 @@
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {Card} from '../Card';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
 
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+export class SFMemorial extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.SF_MEMORIAL,
+      tags: [Tags.BUILDING],
+      cost: 7,
+      victoryPoints: 1,
 
-export class SFMemorial implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.STEEL];
-    public name: CardName = CardName.SF_MEMORIAL;
-    public cardType: CardType = CardType.AUTOMATED;
+      metadata: {
+        cardNumber: 'P41',
+        renderData: CardRenderer.builder((b) => b.cards(1)),
+        description: 'Draw 1 card.',
+      },
+    });
+  }
 
-    public play(player: Player, game: Game) {
-        player.cardsInHand.push(game.dealer.dealCard());
-        return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
-    }
+  public play(player: Player) {
+    player.drawCard();
+    return undefined;
+  }
 }

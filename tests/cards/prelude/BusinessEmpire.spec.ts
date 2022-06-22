@@ -1,24 +1,33 @@
+import {expect} from 'chai';
+import {BusinessEmpire} from '../../../src/cards/prelude/BusinessEmpire';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/common/Resources';
+import {TestPlayers} from '../../TestPlayers';
 
-import { expect } from "chai";
-import { BusinessEmpire } from "../../../src/cards/prelude/BusinessEmpire";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Resources } from '../../../src/Resources';
+describe('BusinessEmpire', function() {
+  let card : BusinessEmpire; let player : Player; let game : Game;
 
-describe("BusinessEmpire", function () {
-    it("Can play", function () {
-        const card = new BusinessEmpire();
-        const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay(player)).to.eq(false);
-        player.megaCredits = 6;
-        expect(card.canPlay(player)).to.eq(true);
-    });
-    it("Should play", function () {
-        const card = new BusinessEmpire();
-        const player = new Player("test", Color.BLUE, false);
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
-        expect(player.megaCredits).to.eq(-6);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);
-    });
+  beforeEach(function() {
+    card = new BusinessEmpire();
+    player = TestPlayers.BLUE.newPlayer();
+    game = Game.newInstance('foobar', [player], player);
+  });
+
+  it('Can\'t play', function() {
+    player.megaCredits = 5;
+    expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('Should play', function() {
+    player.megaCredits = 6;
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
+
+    // SelectHowToPayDeferred
+    game.deferredActions.runNext();
+
+    expect(player.megaCredits).to.eq(0);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);
+  });
 });

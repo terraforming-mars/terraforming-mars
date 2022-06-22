@@ -1,0 +1,57 @@
+{
+   "Select a Mars First bonus.":"选择火星之首党主席上台后的奖励.",
+   "Gain 1 M€ for each Building tag you have":"每个你拥有建筑标志使你获得 1 M€",
+   "Gain 1 M€ for each tile you have ON MARS":"火星上每有一个你拥有的板块，使你获得 1 M€",
+   "Select a Mars First policy.":"选择火星之首党主席上台后的政策.",
+   "When you place a tile ON MARS, gain 1 steel":"每在火星上放置1板块，获得 1 钢铁",
+   "When you play a Building tag, gain 2 M€":"当你打出一张建筑标志牌，获得 2 M€",
+   "Your steel resources are worth 1 M€ extra":"你的每个铁价值 +1 M€",
+   "Spend 4 M€ to draw a Building card (Turmoil Mars First)":"花费 4 M€ 抽1张建筑标志牌",
+
+   "Select a Scientists bonus.":"选择科学家党主席上台后的奖励.",
+   "Gain 1 M€ for each Science tag you have":"每个你拥有的科学标志，使你获得 1 M€",
+   "Gain 1 M€ for every 3 cards in hand":"你每有三张手牌获 1 M€",
+   "Select a Scientists policy.":"选择科学家党主席上台后的政策.",
+   "Your global requirements are +/- 2 steps":"你的全球参数需求 +/- 2",
+   "When you raise a global parameter, draw a card per step raised":"当你提升一点全球参数，抽1张卡.",
+   "Cards with Science tag requirements may be played with 1 less Science tag":"对科学标志有需求的卡，需要的科学标志 -1 ",
+
+   "Select a Unity bonus.":"选择联合党主席上台后的奖励.",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have":"每有1 金星/地球/木星，获得 1 M€",
+   "Gain 1 M€ for each Space tag you have":"每有一个太空标志获得 1 M€",
+   "Select a Unity policy.":"选择联合党主席上台后的政策.",
+   "Your titanium resources are worth 1 M€ extra":"钛价值 +1 M€",
+   "Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)":"花 4 M€获得 2 钛 或加 2 云资源",
+   "Spend 4 M€ to draw a Space card (Turmoil Unity)":"花 4 M€ 抽 1 张钛牌",
+   "Cards with Space tags cost 2 M€ less to play":"太空标志卡-2 费用",
+
+   "Select a Greens bonus.":"选择绿党主席上台后的奖励.",
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have":"每种植物，微生物和动物图标获得 1 M€",
+   "Gain 2 M€ for each greenery tile you have":"每有 1 棵树，获得 2 M€",
+   "Select a Greens policy.":"选择绿党主席上台后的政策.",
+   "When you place a greenery tile, gain 4 M€":"每放置 1 森林板块，获得 4 M€",
+   "When you place a tile, gain 1 plant":"每放置 1 板块，获得 1 叶子",
+   "When you play an animal, plant or microbe tag, gain 2 M€":"每打出 1 生态标志，获得 2 M€",
+   "Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)":"花 5 M€ 获得 3 叶子 或 2 微生物",
+
+   "Select a Reds bonus.":"选择红党主席上台后的奖励.",
+   "The player(s) with the lowest TR gains 1 TR":"最低TR的玩家TR +1",
+   "The player(s) with the highest TR loses 1 TR":"最高TR的玩家TR -1",
+   "Select a Reds policy.":"选择红党主席上台后的政策.",
+   "When you take an action that raises TR, you MUST pay 3 M€ per step raised":"当你提升TR时，必须花 3 M€",
+   "When you place a tile, pay 3 M€ or as much as possible":"当你放置 1 板块，花 3 M€或花光你的钱",
+   "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)":"花 4 M€降低 1 级未满的全球参数（不能获得参数奖励）",
+   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible":"当你提升 1 全球参数，降低你的金钱产量 1 级（-5不用）",
+
+   "Select a Kelvinists bonus.":"选择开尔文主义党主席上台后的奖励.",
+   "Gain 1 M€ for each Heat production you have":"你每 1 热产，获得 1 M€",
+   "Gain 1 heat for each Heat production you have":"你每 1 热产，获得 1 热资源",
+   "Select a Kelvinists policy.":"选择开尔文主义党主席上台后的政策.",
+   "Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)":"花 10 M€提升 1 电产和 1 热产",
+   "When you raise temperature, gain 3 M€ per step raised":"每提升 1 温度，获得 3 M€",
+   "Convert 6 heat into temperature (Turmoil Kelvinists)":"变为每 6 热资源 提高温度",
+   "When you place a tile, gain 2 heat":"每当你放置 1 板块，获得 2 热资源"
+
+
+
+  }

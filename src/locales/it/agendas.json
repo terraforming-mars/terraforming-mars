@@ -1,0 +1,57 @@
+{
+   "Select a Mars First bonus.":"Seleziona un bonus Prima Marte!.",
+   "Gain 1 M€ for each Building tag you have":"Guadagna 1 M€ per ogni simbolo Edificio posseduto",
+   "Gain 1 M€ for each tile you have ON MARS":"Guadagna 1 M€ per ogni tessera che hai SU MARTE",
+   "Select a Mars First policy.":"Seleziona una linea di governo Prima Marte!.",
+   "When you place a tile ON MARS, gain 1 steel":"Quando piazzi una tessera SU MARTE guadagni 1 Acciaio",
+   "When you play a Building tag, gain 2 M€":"Quando giochi un simbolo Edificio guadagni 2 M€",
+   "Your steel resources are worth 1 M€ extra":"Le tue risorse Acciaio valgono 1 M€ extra",
+   "Spend 4 M€ to draw a Building card (Turmoil Mars First)":"Spendi 4 M€ per pescare una carta Edificio",
+ 
+   "Select a Scientists bonus.":"Seleziona un bonus Scienziati.",
+   "Gain 1 M€ for each Science tag you have":"Guadagna 1 M€ per ogni simbolo Scienza posseduto",
+   "Gain 1 M€ for every 3 cards in hand":"Guadagna 1 M€ per ogni 3 carte in mano",
+   "Select a Scientists policy.":"Seleziona una linea di governo Scienziati.",
+   "Your global requirements are +/- 2 steps":"I tuoi Parametri Globali hanno +2 oppure -2 livelli a tua scelta",
+   "When you raise a global parameter, draw a card per step raised":"Quando aumenti un Parametro Globale pesca una carta per ogni livello che alzi",
+   "Cards with Science tag requirements may be played with 1 less Science tag":"Le carte che hanno prerequisiti di simboli Scienza possono essere giocate con 1 simbolo Scienza in meno",
+
+   "Select a Unity bonus.":"Seleziona un bonus Unità.",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have":"Guadagna 1 M€ per ogni simbolo Venere, Terra o Gioviano posseduto",
+   "Gain 1 M€ for each Space tag you have":"Guadagna 1 M€ per ogni simbolo Spazio posseduto",
+   "Select a Unity policy.":"Seleziona una linea di governo Unità.",
+   "Your titanium resources are worth 1 M€ extra":"Le tue risorse Titanio valgono 1 M€ extra",
+   "Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)":"Spendi 4 M€ per guadagnare 2 Titanio o per aggiungere 2 Galleggianti ad una carta qualsiasi",
+   "Spend 4 M€ to draw a Space card (Turmoil Unity)":"Spendi 4 M€ per pescare una carta Spazio",
+   "Cards with Space tags cost 2 M€ less to play":"Giocare carte con simbolo Spazio costa 2 M€ in meno",
+
+   "Select a Greens bonus.":"Seleziona un bonus Verdi.",
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have":"Guadagna 1 M€ per ogni simbolo Pianta, Microbo o Animale posseduto",
+   "Gain 2 M€ for each greenery tile you have":"Guadagna 2 M€ per ogni tessera Vegetazione posseduta",
+   "Select a Greens policy.":"Seleziona una linea di governo Verdi.",
+   "When you place a greenery tile, gain 4 M€":"Quando piazzi una tessera Vegetazione guadagni 4 M€",
+   "When you place a tile, gain 1 plant":"Quando piazzi una tessera guadagni 1 Pianta",
+   "When you play an animal, plant or microbe tag, gain 2 M€":"Quando giochi un simbolo Pianta, Animale o Microbo guadagni 2 M€",
+   "Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)":"Spendi 5 M€ per guadagnare 3 Piante o aggiungere 2 Microbi ad una carta qualsiasi",
+  
+   "Select a Reds bonus.":"Seleziona un bonus Rossi.",
+   "The player(s) with the lowest TR gains 1 TR":"Il giocatore con il TT più basso ottiene 1 TT",
+   "The player(s) with the highest TR loses 1 TR":"Il giocatore con il TT più alto perde 1 TT",
+   "Select a Reds policy.":"Seleziona una linea di governo Rossi.",
+   "When you take an action that raises TR, you MUST pay 3 M€ per step raised":"Perdi 3 M€ ogni volta che incrementi il tuo TT. Se possiedi meno di 3 M€ non puoi aumentare il tuo TT",
+   "When you place a tile, pay 3 M€ or as much as possible":"Quando piazzi una tessera paga 3 M€ o quanto puoi permetterti se non hai 3 M€",
+   "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)":"Paga 4 M€ per ridurre di 1 livello un Parametro Globale non massimizzato (non guadagni alcun bonus)",
+   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible":"Quando alzi un Parametro Globale diminuisci la tua Produzione di M€ di 1 livello per ogni livello alzato, se possibile",
+
+   "Select a Kelvinists bonus.":"Seleziona un bonus Kelvinisti.",
+   "Gain 1 M€ for each Heat production you have":"Guadagna 1 M€ per ogni livello di Produzione di Calore posseduto",
+   "Gain 1 heat for each Heat production you have":"Guadagna 1 Calore per ogni livello di Produzione di Calore posseduto",
+   "Select a Kelvinists policy.":"Seleziona una linea di governo Kelvinisti.",
+   "Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)":"Paga 10 M€ per aumentare di 1 livello le tue Produzioni di Energia e Calore",
+   "When you raise temperature, gain 3 M€ per step raised":"Quando alzi la Temperatura guadagni 3 M€ per ogni livello alzato",
+   "Convert 6 heat into temperature (Turmoil Kelvinists)":"Converti 6 Calore in un livello di Temperatura",
+   "When you place a tile, gain 2 heat":"Quando piazzi una tessera guadagni 2 Calore"
+  
+  
+  
+  }

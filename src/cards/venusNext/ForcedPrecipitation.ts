@@ -1,70 +1,83 @@
-import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { SelectHowToPay } from '../../inputs/SelectHowToPay';
-import { OrOptions } from '../../inputs/OrOptions';
-import { SelectOption } from '../../inputs/SelectOption';
-import { Game } from '../../Game';
-import { MAX_VENUS_SCALE } from '../../constants';
-import { CardName } from '../../CardName';
+import {IActionCard, IResourceCard} from '../ICard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardResource} from '../../common/CardResource';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {MAX_VENUS_SCALE} from '../../common/constants';
+import {CardName} from '../../common/cards/CardName';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {LogHelper} from '../../LogHelper';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
 
-export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 8;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.FORCED_PRECIPITATION;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public resourceCount: number = 0;
+export class ForcedPrecipitation extends Card implements IActionCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.FORCED_PRECIPITATION,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.VENUS],
+      cost: 8,
+      resourceType: CardResource.FLOATER,
 
-    public play() {
-        return undefined;
+      metadata: {
+        cardNumber: '226',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 2 M€ to add 1 Floater to THIS card.', (eb) => {
+            eb.megacredits(2).startAction.floaters(1);
+          }).br;
+          b.or().br;
+          b.action('Spend 2 Floaters here to increase Venus 1 step.', (eb) => {
+            eb.floaters(2).startAction.venus(1);
+          });
+        }),
+      },
+    });
+  }
+  public override resourceCount: number = 0;
+
+  public play() {
+    return undefined;
+  }
+
+  public canAct(player: Player): boolean {
+    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+    const canSpendResource = this.resourceCount > 1 && !venusMaxed;
+
+    return player.canAfford(2) || (canSpendResource && player.canAfford(0, {tr: {venus: 1}}));
+  }
+
+  public action(player: Player) {
+    const opts: Array<SelectOption> = [];
+
+    const addResource = new SelectOption('Pay 2 M€ to add 1 floater to this card', 'Pay', () => this.addResource(player));
+    const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters', () => this.spendResource(player));
+    if (this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford(0, {tr: {venus: 1}})) {
+      opts.push(spendResource);
+    } else {
+      return this.addResource(player);
     }
-    public canAct(player: Player, game: Game): boolean {
-        return player.canAfford(2) || 
-          (this.resourceCount > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
-    }  
-    
-    public action(player: Player, game: Game) {
-        var opts: Array<SelectOption> = []; 
-        const addResource = new SelectOption("Pay 2 to add 1 floater to this card", () => {
-            if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-                return new SelectHowToPay(
-                    'Select how to pay ', false, false,
-                    player.canUseHeatAsMegaCredits,
-                    2,
-                    (htp) => {
-                        if (htp.heat + htp.megaCredits < 2) {
-                            throw new Error('Not enough for action');
-                        }
-                        player.megaCredits -= htp.megaCredits;
-                        player.heat -= htp.heat;
-                        this.resourceCount++;
-                        return undefined;
-                    }
-                );
-            }
-            player.megaCredits -= 2;
-            this.resourceCount++;
-            return undefined;
-        });
 
-        const spendResource = new SelectOption("Remove 2 floaters to raise Venus 1 step", () => {
-            player.removeResourceFrom(this,2);
-            game.increaseVenusScaleLevel(player, 1);
-            return undefined;
-        });
-
-        if (player.canAfford(2)) {
-            opts.push(addResource);
-        } else return spendResource;
-
-        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
-            opts.push(spendResource);
-        } else return addResource;
-
-        return new OrOptions(...opts);
+    if (player.canAfford(2)) {
+      opts.push(addResource);
+    } else {
+      return this.spendResource(player);
     }
+
+    return new OrOptions(...opts);
+  }
+
+  private addResource(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
+    player.addResourceTo(this, {log: true});
+    return undefined;
+  }
+
+  private spendResource(player: Player) {
+    player.removeResourceFrom(this, 2);
+    player.game.increaseVenusScaleLevel(player, 1);
+    LogHelper.logVenusIncrease( player, 1);
+    return undefined;
+  }
 }

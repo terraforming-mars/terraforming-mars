@@ -1,0 +1,20 @@
+{
+    "Agricola Inc": "Agricola Inc",
+    "You start with 1 plant production, 1 M€ production and 40 M€.": "Comienza con 1 nivel de producción de plantas, 1 de producción de M€ y 40 M€.",
+    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Efecto: Al terminar terminar la partida gana por cada 0/1-2/3-4/5+ tipos de símbolos -2/0/1/2 PV.",
+
+    "Project Workshop": "Project Workshop",
+    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Comienza con 39 M€, 1 de acero y titanio. Como primera acción roba un proyecto azul.",
+    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Acción: Da la vuelta y descarta un proyecto azul jugado para convertir cualquier PV en ella en VT y roba 2 cartas o paga 3 M€ para robar un proyecto azul.",
+
+    "Incite": "Incite",
+    "You start with 32 M€. As your first action, place two delegates in one party.": "Comienza con 32 M€. Como primera acción coloca 2 delegados en un partido.",
+    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Efecto: Posees +1 de influencia. Al envíar un delegado usando la acción del cabildo, pagas 2 M€ menos.",
+
+    "Playwrights": "Playwrights",
+    "You start with 38 M€ and 1 Energy production.": "Comienza con 38 M€ y 1 de producción de energía.",
+    "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Acción: Vuelve a jugar un evento ya jugado por cualquier jugador pagando su coste SÓLO en M€ (descuentos o reembolsos sí cuentan), después QUITA EL EVENTO DE LA PARTIDA.",
+
+    "Midas": "Midas",
+    "You start with 120 M€. Lower your TR 7 steps.": "Comienza con 120 M€. Reduce tu VT 7 niveles."
+}

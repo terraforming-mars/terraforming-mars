@@ -1,60 +1,68 @@
-import { IProjectCard } from "../IProjectCard";
-import { ICard, IActionCard, IResourceCard } from '../ICard';
-import { Tags } from "../Tags";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
-import { SelectCard } from '../../inputs/SelectCard';
-import { SelectHowToPay } from '../../inputs/SelectHowToPay';
-import { CardName } from '../../CardName';
+import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardResource} from '../../common/CardResource';
+import {SelectCard} from '../../inputs/SelectCard';
+import {CardName} from '../../common/cards/CardName';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {CardRequirements} from '../CardRequirements';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 
-export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.VENUS];
-    public name: CardName = CardName.FLOATING_HABS;
-    public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public resourceCount: number = 0;
-    public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.SCIENCE) >= 2 ;
+export class FloatingHabs extends Card implements IActionCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.FLOATING_HABS,
+      cardType: CardType.ACTIVE,
+      tags: [Tags.VENUS],
+      cost: 5,
+
+      resourceType: CardResource.FLOATER,
+      victoryPoints: VictoryPoints.resource(1, 2),
+
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+      metadata: {
+        cardNumber: '225',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Spend 2 M€ to add 1 Floater to ANY card', (eb) => {
+            eb.megacredits(2).startAction.floaters(1).asterix();
+          }).br;
+          b.vpText('1 VP for every 2nd Floater on this card.');
+        }),
+        description: 'Requires 2 Science tags.',
+      },
+    });
+  }
+  public override resourceCount: number = 0;
+
+  public play() {
+    return undefined;
+  }
+  public canAct(player: Player): boolean {
+    return player.canAfford(2);
+  }
+
+  public action(player: Player) {
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
+
+    // add to itself if no other available target
+    if (floaterCards.length === 1) {
+      player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
+      player.addResourceTo(floaterCards[0], {log: true});
+      return undefined;
     }
-    public play() {
+
+    return new SelectCard(
+      'Spend 2 M€ and select card to add 1 floater',
+      'Add floater',
+      floaterCards,
+      (foundCards: Array<ICard>) => {
+        player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
-    }
-    public canAct(player: Player): boolean {
-        return player.canAfford(2);
-    }  
-
-    public getVictoryPoints(): number {
-        return Math.floor(this.resourceCount / 2);
-    }
-    
-    public action(player: Player) {
-      const floaterCards = player.getResourceCards(ResourceType.FLOATER);
-      return new SelectCard(
-          "Spend 2 MC and select card to add 1 floater",
-          floaterCards,
-          (foundCards: Array<ICard>) => {
-            if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-              return new SelectHowToPay(
-                'Select how to pay ', false, false,
-                true,
-                2,
-                (htp) => {
-                  if (htp.heat + htp.megaCredits < 2) {
-                      throw new Error('Not enough spent to buy card');
-                  }
-                  player.megaCredits -= htp.megaCredits;
-                  player.heat -= htp.heat;
-                  player.addResourceTo(foundCards[0], 1);
-                  return undefined;
-                }
-              );
-            }
-            player.addResourceTo(foundCards[0], 1);
-            player.megaCredits -= 2;
-            return undefined;
-          }
-      );
+      },
+    );
   }
 }

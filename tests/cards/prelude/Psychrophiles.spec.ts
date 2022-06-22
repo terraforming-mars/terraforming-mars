@@ -1,33 +1,44 @@
+import {expect} from 'chai';
+import {Psychrophiles} from '../../../src/cards/prelude/Psychrophiles';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-import { expect } from "chai";
-import { Psychrophiles } from "../../../src/cards/prelude/Psychrophiles";
-import { Color } from "../../../src/Color";
-import { Game } from "../../../src/Game";
-import { Player } from "../../../src/Player";
+describe('Psychrophiles', () => {
+  let card : Psychrophiles; let player : Player; let game : Game;
 
-describe("Psychrophiles", function () {
-    it("Can play", function () {
-        const card = new Psychrophiles();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(card.canPlay(player, game)).to.eq(true);
-    });
-    it("Should play", function () {
-        const card = new Psychrophiles();
-        const action = card.play();
-        expect(action).to.eq(undefined);
-    });
-    it("Can act", function () {
-        const card = new Psychrophiles();
-        expect(card.canAct()).to.eq(true);
-    });
-    it("Should act", function () {
-        const card = new Psychrophiles();
-        const player = new Player("test", Color.BLUE, false);
-        expect(player.getMicrobesCanSpend()).to.eq(0);
-        player.playedCards.push(card);
-        expect(card.action()).to.eq(undefined);
-        expect(player.getCardsWithResources().length).to.eq(1);
-        expect(player.getMicrobesCanSpend()).to.eq(1);
-    });
+  beforeEach(() => {
+    card = new Psychrophiles();
+    player = TestPlayers.BLUE.newPlayer();
+    game = Game.newInstance('foobar', [player], player);
+  });
+
+  it('Cannot play', () => {
+    (game as any).temperature = -18;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+  });
+
+  it('Can play', () => {
+    (game as any).temperature = -20;
+    expect(player.canPlayIgnoringCost(card)).is.true;
+  });
+
+  it('Should play', () => {
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    const action = card.play();
+    expect(action).is.undefined;
+  });
+
+  it('Can act', () => {
+    expect(card.canAct()).is.true;
+  });
+
+  it('Should act', () => {
+    expect(player.getMicrobesCanSpend()).to.eq(0);
+    player.playedCards.push(card);
+
+    card.action(player);
+    expect(player.getCardsWithResources()).has.lengthOf(1);
+    expect(player.getMicrobesCanSpend()).to.eq(1);
+  });
 });

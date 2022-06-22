@@ -1,33 +1,40 @@
+import {expect} from 'chai';
+import {Bushes} from '../../../src/cards/base/Bushes';
+import {GiantIceAsteroid} from '../../../src/cards/base/GiantIceAsteroid';
+import {AsteroidStandardProject} from '../../../src/cards/base/standardProjects/AsteroidStandardProject';
+import {CityStandardProject} from '../../../src/cards/base/standardProjects/CityStandardProject';
+import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
+import {CrediCor} from '../../../src/cards/corporation/CrediCor';
+import {Game} from '../../../src/Game';
+import {Player} from '../../../src/Player';
+import {TestPlayers} from '../../TestPlayers';
 
-import { expect } from "chai";
-import { CrediCor } from "../../../src/cards/corporation/CrediCor";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Game } from "../../../src/Game";
-import { StandardProjectType } from "../../../src/StandardProjectType";
-import { Bushes } from "../../../src/cards/Bushes";
-import { GiantIceAsteroid } from "../../../src/cards/GiantIceAsteroid";
+describe('CrediCor', function() {
+  let card : CrediCor; let player : Player;
 
-describe("CrediCor", function () {
-    it("Should play", function () {
-        const card = new CrediCor();
-        const player = new Player("test", Color.BLUE, false);
-        const action = card.play();
-        expect(action).to.eq(undefined);
-        card.onStandardProject(player, StandardProjectType.SELLING_PATENTS);
-        card.onStandardProject(player, StandardProjectType.GREENERY);
-        card.onStandardProject(player, StandardProjectType.CITY);
-        expect(player.megaCredits).to.eq(8);
-    });
-    it("Runs onCardPlayed", function () {
-        const card = new CrediCor();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        player.corporationCard = card;
-        expect(player.megaCredits).to.eq(0);
-        card.onCardPlayed(player, game, new GiantIceAsteroid());
-        expect(player.megaCredits).to.eq(4);
-        card.onCardPlayed(player, game, new Bushes());
-        expect(player.megaCredits).to.eq(4);
-    });
+  beforeEach(function() {
+    card = new CrediCor();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, redPlayer], player);
+  });
+
+  it('Should play', function() {
+    const action = card.play();
+    expect(action).is.undefined;
+    player.corporationCard = card;
+    card.onStandardProject(player, new AsteroidStandardProject());
+    card.onStandardProject(player, new CityStandardProject());
+    card.onStandardProject(player, new GreeneryStandardProject());
+    expect(player.megaCredits).to.eq(8);
+  });
+
+  it('Runs onCardPlayed', function() {
+    player.corporationCard = card;
+    expect(player.megaCredits).to.eq(0);
+    card.onCardPlayed(player, new GiantIceAsteroid());
+    expect(player.megaCredits).to.eq(4);
+    card.onCardPlayed(player, new Bushes());
+    expect(player.megaCredits).to.eq(4);
+  });
 });

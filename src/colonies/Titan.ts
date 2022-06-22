@@ -1,31 +1,19 @@
-import { Colony, IColony } from './Colony';
-import { Player } from '../Player';
-import { ColonyName } from './ColonyName';
-import { ResourceType } from '../ResourceType';
-import { Game } from '../Game';
+import {Colony} from './Colony';
+import {ColonyName} from '../common/colonies/ColonyName';
+import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
+import {CardResource} from '../common/CardResource';
 
-export class Titan extends Colony implements IColony {
-    public name = ColonyName.TITAN;
-    public description: string = "Floaters";
-    public isActive = false;
-    public resourceType: ResourceType = ResourceType.FLOATER;
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
-        let floaters: number = 0;
-        if (this.trackPosition < 5) {
-            floaters = Math.max(this.trackPosition - 1, 1);
-        } else {
-            floaters = this.trackPosition - 2;
-        }
-        game.addResourceInterrupt(player, ResourceType.FLOATER, floaters, undefined);
-        this.afterTrade(this, player, game);
-    }
-    public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player, game);
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 3, undefined);
-        return undefined;
-    }
-    public giveTradeBonus(player: Player, game: Game): void {
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined);
-    }    
+export class Titan extends Colony {
+  public override isActive = false;
+  constructor() {
+    super({
+      name: ColonyName.TITAN,
+      resourceType: CardResource.FLOATER,
+      buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
+      buildQuantity: [3, 3, 3],
+      tradeType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
+      tradeQuantity: [0, 1, 1, 2, 3, 3, 4],
+      colonyBonusType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
+    });
+  }
 }

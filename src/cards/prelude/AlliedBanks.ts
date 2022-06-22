@@ -1,17 +1,33 @@
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { PreludeCard } from "./PreludeCard";
-import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import {Tags} from '../../common/cards/Tags';
+import {Player} from '../../Player';
+import {PreludeCard} from './PreludeCard';
+import {CardName} from '../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../common/Units';
 
-export class AlliedBanks extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.EARTH];
-    public name: CardName = CardName.ALLIED_BANKS;
-    public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,4);
-	    player.megaCredits += 3; 
-	    return undefined;   
-    }
+export class AlliedBanks extends PreludeCard {
+  constructor() {
+    super({
+      name: CardName.ALLIED_BANKS,
+      tags: [Tags.EARTH],
+
+      productionBox: Units.of({megacredits: 4}),
+      startingMegacredits: 3,
+
+      metadata: {
+        cardNumber: 'P01',
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.megacredits(4)).br;
+          b.megacredits(3);
+        }),
+        description: 'Increase your M€ production 4 steps. Gain 3 M€.',
+      },
+    });
+  }
+  public play(player: Player) {
+    player.adjustProduction(this.productionBox);
+    player.megaCredits += this.startingMegaCredits;
+    return undefined;
+  }
 }
 

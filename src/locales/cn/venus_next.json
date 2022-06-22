@@ -1,0 +1,274 @@
+{
+  "APHRODITE":"阿佛洛狄忒",
+  "Aphrodite":"阿佛洛狄忒",
+  "You start with 1 plant production and 47 M€.":"起始获得47 M€,提升植物产量1级",
+  "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.":"效果：每当金星改造度提升1级,你都获得2 M€",
+
+  "CEL":"天",
+  "ES":"体",
+  "TIC":"公司",
+  "Celestic":"天体公司",
+  "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":"起始获得42 M€。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云图标的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
+  "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.":"行动：放置1个云资源到任意卡牌，本牌上每3个云资源获得1分",
+
+  "MA": "马",
+  "NUTECH": "努科技",
+  "Manutech":"马努科技",
+  "You start with 1 steel production, and 35 M€.":"你起始时拥有35 M€及1点钢铁产量。",
+  "Effect: For each step you increase the production of a resource, including this, you also gain that resource.":"效果：包括本牌在内，每当你提升1点标准资源产量，获得1个对应资源。",
+
+  "Morning Star Inc.":"晨星公司",
+  "MORNING STAR INC." : "晨星公司",
+  "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"起始获得50 M€。作为你的第一个行动,展示牌库的牌直到展示出3张带有金星标志的牌。把这3张牌加入手中,并弃掉剩余的牌。",
+  "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.":"效果：你打出的牌中,受到金星改造度条件限制时 +/- 2级",
+  "Venus requirements":"金星改造需求",
+
+  "Viron":"病毒研究",
+  "VIRON":"病毒研究",
+  "Action: Use a blue card action that has already been used this generation.":"行动：选择一张本世代已执行行动的蓝色卡牌，再次执行该行动。",
+  "You start with 48 M€.":"起始获得48 M€",
+
+  "% Venus":"% 金星改造度",
+
+  "Stratospheric Birds":"平流层的鸟类",
+  "Action: Add 1 animal to this card.":"行动：放置1个动物资源到本牌",
+  "Requires Venus 12% and that you spend 1 Floater from any card.":"需要金星改造度达到12%且你花费1个云资源。",
+
+  "Venusian Plants":"金星植物",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD).":"需要金星改造度达到16%,提升金星改造度1级。放置1个微生物资源或1个动物资源到其它金星卡牌",
+
+  "Extremophiles":"极端微生物",
+  "Action: Add 1 microbe to ANY card.":"行动：放置1个微生物到任意卡牌",
+  "Requires 2 Science tags.":"需要至少2个科学标志",
+  "1 VP for every 3rd Microbe on this card.":"每有3个微生物资源,获得1分",
+
+
+  "Mining Quota":"采矿配额",
+  "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.":"需要有金星、木星、地球标志各1个。提升你的钢铁产量2级",
+
+  "Corroder Suits":"防护服",
+  "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.":"提升你的M€产量2级。放置1个资源到任意的金星卡牌",
+
+  "Venusian Insects":"金星昆虫",
+  "Action: add 1 Microbe to this card.":"行动：放置1个微生物资源到本牌",
+  "1 VP for every 2nd Microbe on this card.":"本牌上每有2个微生物资源,获得1分",
+  "Requires Venus 12%.":"需要金星改造度大于等于12%",
+
+  "Sulphur-Eating Bacteria":"硫磺吞噬菌",
+  "Action: Spend any number of Microbes here to gain triple amount of MC.":"行动：花费本牌上任意数量的微生物换取3倍数量的M€",
+  "Requires Venus 6%).":"需要金星改造度达到6%",
+
+  "Venus Waystation":"金星中转站",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"效果： 当你打出一个带有金星标志的牌,你可以少花费2 M€",
+
+
+  "Action: Add 1 resource to ANOTHER VENUS CARD).":"行动：放置1个资源到其它金星卡牌",
+  "Requires Venus 12%. Decrease your energy production 1 step.)":"需要金星改造度至少12%。降低你的电力产量1级",
+  "Place a City tile ON THE":"放置一个城市板块",
+  "(RESERVED AREA.)":"在保留区",
+
+  "Thermophiles":"嗜热菌",
+  "Action: Add 1 Microbe to ANY Venus CARD.":"行动： 放置1个微生物资源到任意的金星卡",
+  "Action: Spend 2 Microbes here to raise Venus 1 step.":"行动：花费本牌上的2个微生物资源来提升金星改造度1级",
+
+  "Sponsored Academies":"学术赞助",
+  "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.":"丢弃1张手牌,然后抽3张牌。所有对手抽1张牌",
+
+  "Sulphur Exports":"硫磺出口贸易",
+  "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.":"提升金星改造度1级。你每有1个金星标志,提升你的M€产量1级",
+
+  "Venus Soils":"金星土壤",
+  "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card).":"提升金星改造度1级。提升植物产量1级。在任意一张卡牌上添加2个微生物",
+
+  "Terraforming Contract":"改造合同",
+  "Requires that you have at least 25 TR. Increase your M€ production 4 steps.":"需要你至少有25点TR。提升你的M€产量4级",
+
+  "Solarnet":"太阳系网络",
+  "Venus Earth Jovian":"金星标 地球标 木星标",
+  "Requires Venus, Earth and Jovian tags. Draw 2 cards.":"需要你有金星、地球及木星标志。抽2张牌。",
+
+  "Atalanta Planitia Lab":"亚特兰大实验室",
+  "Requires 3 science tags. Draw 2 cards.":"需要你有3个科学标志。抽2张牌。",
+
+  "Rotator Impacts":"回旋冲撞",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].":"行动：花费6 M€在本牌上增加一个陨石资源（可以使用钛）",
+  "Action: Spend 1 resource from this card to increase Venus 1 step.":"行动：从本牌移除一个资源提升金星改造度一级。",
+  "Venus must be 14% or lower).":"金星改造度需要小于等于14%",
+
+  "Omnicourt":"通用法庭",
+  "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.":"需要你有金星、地球及木星标志。提升TR2级。",
+
+  "Jet Stream Microscrappers":"急流采集器",
+  "Action: Spend 1 titanium to add 2 Floaters here":"行动：花费1个钛金属在本牌上增加2个云资源",
+  "Action: Spend 2 Floaters here to raise Venus 1 step":"行动：从本牌移除2个资源提升金星改造度一级。",
+
+  "Spin-Inducing Asteroid":"自旋牵引陨石",
+  "Venus must be 10% or lower. Raise Venus 2 steps.":"金星改造度需要小于等于10%。提升金星改造度2级。",
+
+  "Dirigibles":"悬浮艇",
+  "Action: Add 1 Floater to ANY card":"行动：在任意一张牌上增加一个云资源。",
+  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.":"效果：当你打出一张带有金星标志的卡牌，你可以移除本卡上任意个云资源来支付费用，每个云资源价值3 M€。",
+
+  "Floating Habs":"漂浮舱",
+  "Action: Spend 2 M€ to add 1 Floater to ANY card":"行动：花费2 M€并在任意一张牌上增加一个云资源",
+  "Requires 2 Science tags. 1 VP for every 2nd Floater on this card).":"需要你至少有2个科学标志。",
+  "Requires 2 Science tags.":"需要你至少有2个科学标志。",
+  "1 VP for every 2nd Floater on this card.":"本牌每2个云资源价值1分。",
+
+
+  "Hydrogen to Venus":"输送氢气到金星",
+  "Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have.":"提升金星改造度1级。你每有1个木星标志,放置1个云资源到一张带有金星标志的牌",
+
+  "Water to Venus":"输送水源到金星",
+  "Raise Venus 1 step.":"提升金星改造度1级",
+
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA).":"你每有1个地球标志，包括本卡，提升你的M€产量1级。在保留区放置一片城市。",
+
+  "Sky Docks":"太空码头",
+  "Requires 2 Earth tags. Gain 1 Trade Fleet.":"需要你有2个地球标志。获得一艘交易飞船。",
+
+  "Penguins":"企鹅",
+  "Requires 8 oceans. 1 VP for each animal on this card":"需要场上已有8片海洋。本牌每个动物价值1分",
+
+  "Interplanetary Colony Ship":"星际殖民船",
+
+  "GHG Import From Venus":"从金星导入温室气体",
+  "Raise Venus 1 step. Increase your heat production 3 steps.":"提升金星改造度1级。提升你的热能产量3级",
+
+
+  "Aerial Mappers":"航空制图器",
+  "Action: Add floater to ANY card.":"行动：放置1个云资源到任意卡牌上",
+  "Action: Spend one floater here to draw 1 card.":"行动：移除本卡上1个云资源以抽1张卡。",
+
+  "Aerosport Tournament":"航空运动锦标赛",
+  "5 Floaters":"5 云资源",
+  "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.":"需要你拥有5个云资源才能打出，游戏中的每个城市使你获得1 M€。",
+
+  "Air-Scrapping Expedition":"金星改造远征队",
+  "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.":"提升1级金星改造度。放置3个云资源到任意带有金星标志的卡牌上。",
+
+  "Atmoscoop":"大气束缚场",
+  "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.":"需要你拥有3个科学标志才能打出。提升温度或金星改造度2级。放置2个云资源到任意卡牌上。",
+
+  "Comet for Venus":"飞向金星的彗星",
+  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.":"提升1级金星改造度。移除任意一位有金星标志的玩家4 M€。",
+
+  "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD":"提升2点M€产量。在任意金星卡上添加一个资源",
+
+  "Dawn City":"拂晓之城",
+  "4 Science":"4 科学标志",
+  "Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.":"需要你拥有4个科学标志才能打出。减少1点电力产量，提升1点钛产量。放置一个城市板块到保留区。",
+
+  "Deuterium Export":"输出氘",
+  "Action: Add 1 Floater to this card.":"行动：放置1个云资源到本卡上",
+  "Action: Spend 1 Floater here to increase your energy production 1 step.":"行动：移除本卡上1个云资源以提升1点电力产量。",
+
+  "Extractor Balloons":"热气球提取器",
+  "Action: Add 1 Floater to this card.":"行动：放置1个云资源到本卡上",
+  "OR":"或",
+  "Action: Remove 2 Floaters here to raise Venus 1 step.":"行动：移除本卡上2个云资源以提升金星改造度1级。",
+  "Add 3 Floaters to this card":"打出时，放置3个云资源到本卡上。",
+
+  "Requires 2 Science tags. 1 VP for every 3rd Microbe on this card":"需要你拥有2个科学标志才能打出。本卡上每3个微生物资源为你提供1VP。",
+
+  "Action: spend 2 M€ to add 1 Floater to ANY card":"行动：支付2 M€以放置1个云资源到任意卡牌上。",
+
+  "Requires 2 Science tags. 1 VP for every 2nd Floater on this card":"需要你拥有2个科学标志才能打出。本卡上每2个云资源为你提供1VP。",
+
+  "Forced Precipitation":"强制降水",
+  "Action: Spend 2 M€ to add 1 Floater to THIS card.":"行动：支付2 M€以放置1个云资源到本卡上",
+  "Action: Spend 2 Floaters here to increase Venus 1 step.":"行动：移除本卡上2个云资源以提升金星改造度1级。",
+
+  "Freyja Biodomes":"弗雷雅生态馆",
+
+  "10% Venus":"金星改造度 10%",
+  "Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, M€ +2.":"需要金星改造度达到10%才能打出。放置2个微生物或动物资源到任意带有金星标志的卡牌上。减少1点电力产量，提升2点金钱产量。",
+
+  "Giant Solar Shade":"巨型日光遮蔽器",
+  "Raise Venus 3 steps.":"提升金星改造度3级。",
+
+  "Raise Venus 1 step. Increase your heat production 3 steps":"提升金星改造度1级。提升3点热产量。",
+
+  "Gyropolis":"旋转都会",
+  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a City tile.":"减少2点电力产量，你拥有的每个金星或地球标志为你增加1点金钱产量。放置一个城市板块。",
+
+  "Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have":"提升金星改造度1级。放置云资源到一张带有金星标志的卡牌上，数量等于你拥有的木星标志个数。",
+  "Io Sulphur Research":"木卫一的硫磺研究",
+  "Draw 1 card, or draw 3 if you have at least 3 Venus tags.":"抽1张卡；或若你拥有3个金星标志，抽3张卡。",
+
+  "Ishtar Mining":"伊什塔尔矿业",
+  "8% Venus":"金星改造度 8%",
+  "Requires Venus 8%. Increase your titanium production 1 step.":"需要金星改造度达到8%才能打出。提升1点钛产量。",
+
+  "Action: Spend 1 titanium to add 2 Floaters here, OR spend 2 Floaters here to raise Venus 1 step":"行动：支付1个钛资源以放置2个云资源到本卡上，或移除本卡上2个云资源以提升金星改造度1级。",
+
+  "Luna Metropolis":"月神都会",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA":"包括本牌上的地球标志，你拥有的每个地球标志为你提升1点金钱产量。放置一个城市板块到保留区。",
+
+  "Local Shading":"局部遮蔽",
+  "Action: Add 1 Floater to this card.":"行动：放置1个云资源到本卡上",
+  "Action: Spend 1 Floater here to raise your M€ production 1 step.":"行动：移除本卡上1个云资源以提升1点金钱产量。",
+
+  "Maxwell Base":"麦克斯韦基地",
+  "Action: Add 1 resource to ANOTHER VENUS CARD.":"行动：放置1个资源到任意带有金星标志的卡牌上",
+  "Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.":"需要金星改造度达到12%才能打出。减少1点电力产量。放置一个城市板块到保留区。",
+
+
+  "max 14% Venus":"金星改造度≤14%",
+  "Action: spend 6 M€ to add an asteroid resource to this card (TITANIUM MAY BE USED), or spend 1 resource from this card to increase Venus 1 step":"行动：支付6 M€以放置1个小行星资源到本卡上（可以使用钛资源支付），或移除本卡上1个小行星资源以提升金星改造度1级。",
+  "Venus must be 14% or lower":"金星改造度≤14%",
+
+  "Sister Planet Support":"姊妹星球支持",
+  "Venus Earth":"金星 地球标志",
+  "Requires Venus and Earth tags. Increase your M€ production 3 steps.":"需要你拥有金星标志和地球标志才能打出。提升3点金钱产量。",
+
+  "Requires Venus, Earth and Jovian tags. Draw 2 cards":"需要你拥有金星、地球和木星标志才能打出。抽2张卡。",
+  "max 10% Venus":"金星改造度≤10%",
+  "Venus must be 10% or lower. Raise Venus 2 steps":"需要金星改造度小于或等于10%才能打出。提升金星改造度2级。",
+  "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card":"丢弃1张手牌，之后抽3张牌。所有对手各抽1张牌。",
+
+  "Stratopolis":"凌云之城",
+  "Action: Add 2 floaters to ANY VENUS CARD.":"行动：放置2个云资源到任意带有金星标志的卡牌上。",
+  "Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA":"需要你拥有2个科学标志才能打出。提升2点金钱产量。放置一个城市板块到(保留区)。",
+  "1 VP for every 3rd Floater on this card.":"本卡上每3个云资源为你提供1VP。",
+
+  "12% Venus":"金星改造度 12%",
+
+  "6% Venus":"金星改造度 6%",
+
+  "Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of M€":"行动：放置1个微生物资源到本卡上，或移除本卡上任意数量的微生物资源以获得3倍数量的金钱",
+  "Requires Venus 6%":"需要金星改造度达到6%才能打出。",
+  "Action: add 1 Microbe to ANY Venus CARD or spend 2 Microbes here to raise Venus 1 step":"行动：放置1个微生物资源到任意带有金星标志的卡牌上，或移除本卡上2个微生物资源以提升金星改造度1级。",
+
+  "Venus Governor":"金星总督",
+  "2 Venus":"2 金星标志",
+  "Requires 2 Venus tags. Increase your M€ production 2 steps.":"需要你拥有2个金星标志才能打出。提升2点金钱产量。",
+
+  "Venusian Animals":"金星动物",
+  "18% Venus":"金星改造度 18%",
+  "Effect: When you play a Science tag, including this, add 1 Animal to this card.":"效果：包括本牌上的科学标志，当你打出1个科学标志，放置1个动物资源到本卡上。",
+  "Requires Venus 18%":"需要金星改造度大于等于18%",
+
+  "16% Venus":"金星改造度 16%",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD":"需要金星改造度达到16%才能打出。提升金星改造度1级，放置1个微生物或动物资源到任意带有金星标志的卡牌上。",
+
+  "Venus Magnetizer":"金星磁化器",
+  "Action: Decrease your Energy production 1 step to raise Venus 1 step.":"行动：减少1点电力产量以提升金星改造度1级。",
+  "Requires Venus 10%.":"需要金星改造度达到10%才能打出。",
+  "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card":"提升金星改造度1级。提升1点植物产量。放置2个微生物资源到任意卡牌上。",
+
+  "Luxury Foods":"奢靡大餐",
+  "Requires that you have a Venus tag, an Earth tag and a Jovian tag.":"要求你有一个金星标签，一个地球标签和一个木星标签。",
+
+
+  "Neutralizer Factory":"中和剂工厂",
+  "Requires Venus 10%. Increase the Venus track 1 step.":"需要金星改造度达到10%才能打出。提升金星改造度1级。",
+
+  "Orbital Reflectors":"轨道反射镜",
+  "Raise Venus 2 steps. Increase your heat production 2 steps.":"提升金星改造度2级。提升2点热产量。",
+
+  "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps":"需要你拥有金星、地球和木星标志才能打出。提升2点钢铁产量。"
+
+
+
+}

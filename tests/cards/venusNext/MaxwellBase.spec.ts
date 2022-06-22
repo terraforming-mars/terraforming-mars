@@ -1,54 +1,101 @@
+import {expect} from 'chai';
+import {Birds} from '../../../src/cards/base/Birds';
+import {ICard} from '../../../src/cards/ICard';
+import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
+import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
+import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBirds';
+import {Game} from '../../../src/Game';
+import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/common/Resources';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
+import {CardName} from '../../../src/common/cards/CardName';
+import {Tags} from '../../../src/common/cards/Tags';
+import {CardType} from '../../../src/common/cards/CardType';
+import {CardResource} from '../../../src/common/CardResource';
+import {IProjectCard} from '../../../src/cards/IProjectCard';
 
-import { expect } from "chai";
-import { MaxwellBase } from "../../../src/cards/venusNext/MaxwellBase";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Game, GameOptions } from '../../../src/Game';
-import { Resources } from "../../../src/Resources";
-import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
-import { SelectCard } from '../../../src/inputs/SelectCard';
-import { Birds } from '../../../src/cards/Birds';
-import { BoardName } from '../../../src/BoardName';
+describe('MaxwellBase', function() {
+  let card : MaxwellBase; let player : Player; let game : Game;
 
-describe("MaxwellBase", function () {
-    it("Should play", function () {
-        const card = new MaxwellBase();
-        const player = new Player("test", Color.BLUE, false);
-        const gameOptions = {
-            draftVariant: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: false,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            promoCardsOption: false,
-            startingCorporations: 2,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
-        const game = new Game("foobar", [player,player], player, gameOptions);
-        player.setProduction(Resources.ENERGY);
-        expect(card.canPlay(player, game)).to.eq(false);
-        const action = card.play(player,game);
-        expect(action).to.eq(undefined);
-        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    });
-    it("Should act", function () {
-        const card = new MaxwellBase();
-        const card2 = new Birds();
-        const card3 = new AerialMappers()
-        const player = new Player("test", Color.BLUE, false);
-        player.playedCards.push(card);
-        player.playedCards.push(card2);
-        expect(card.canAct(player)).to.eq(false);
-        player.playedCards.push(card3);
-        expect(card.canAct(player)).to.eq(true);        
-        const action = card.action(player);
-        expect(action instanceof SelectCard).to.eq(true);
-        action.cb([card3]);
-        expect(player.getResourcesOnCard(card3)).to.eq(1);
-    });
+  beforeEach(function() {
+    card = new MaxwellBase();
+    player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+  });
+
+  it('Can\'t play without energy production', function() {
+    (game as any).venusScaleLevel = 12;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+  });
+
+  it('Can\'t play if Venus requirement not met', function() {
+    player.addProduction(Resources.ENERGY, 1);
+    (game as any).venusScaleLevel = 10;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+  });
+
+  it('Should play', function() {
+    player.addProduction(Resources.ENERGY, 1);
+    (game as any).venusScaleLevel = 12;
+    expect(player.canPlayIgnoringCost(card)).is.true;
+
+    const action = card.play(player);
+    expect(action).is.undefined;
+    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+  });
+
+  it('Should act - single target', function() {
+    const card2 = new Birds();
+    const card3 = new AerialMappers();
+
+    player.playedCards.push(card, card2);
+    expect(card.canAct(player)).is.not.true;
+
+    player.playedCards.push(card3);
+    expect(card.canAct(player)).is.true;
+    card.action(player);
+    expect(card3.resourceCount).to.eq(1);
+  });
+
+  it('Should act - multiple targets', function() {
+    const card2 = new StratosphericBirds();
+    const card3 = new AerialMappers();
+    player.playedCards.push(card, card2, card3);
+    expect(card.canAct(player)).is.true;
+
+    const action = card.action(player);
+    expect(action).instanceOf(SelectCard);
+    (action as SelectCard<ICard>).cb([card2]);
+    expect(card2.resourceCount).to.eq(1);
+  });
+
+  // This may seem like a weird test, but it's just verifying that a change
+  // removing legacy code works correctly.
+  //
+  // TODO(kberg): Replace this hand-made card with Floater Urbanism.
+  it('can Play - for a Venus card with an unusual resource', function() {
+    expect(card.canAct(player)).is.false;
+
+    const fakeCard: IProjectCard = {
+      name: 'HELLO' as CardName,
+      cost: 1,
+      tags: [Tags.VENUS],
+      canPlay: () => true,
+      play: () => undefined,
+      getVictoryPoints: () => 0,
+      cardType: CardType.ACTIVE,
+      metadata: {
+        cardNumber: '1',
+      },
+      resourceType: CardResource.SYNDICATE_FLEET,
+      resourceCount: 0,
+    };
+    player.playedCards.push(fakeCard);
+
+    expect(card.canAct(player)).is.true;
+  });
 });

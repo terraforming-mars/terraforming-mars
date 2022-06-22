@@ -1,29 +1,35 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardRequirements} from '../CardRequirements';
+import {Turmoil} from '../../turmoil/Turmoil';
 
+export class EventAnalysts extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.ACTIVE,
+      name: CardName.EVENT_ANALYSTS,
+      tags: [Tags.SCIENCE],
+      cost: 5,
 
-export class EventAnalysts implements IProjectCard {
-    public cost: number = 5;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.EVENT_ANALYSTS;
-    public cardType: CardType = CardType.ACTIVE;
+      requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
+      metadata: {
+        description: 'Requires that Scientists are ruling or that you have 2 delegates there.',
+        cardNumber: 'T05',
+        renderData: CardRenderer.builder((b) => b.effect('You have +1 influence.', (be) => {
+          be.startEffect.influence();
+        })),
+      },
+    });
+  }
 
-    public canPlay(player: Player, game: Game): boolean {
-        if (game.turmoil !== undefined) {
-            return game.turmoil.canPlay(player, PartyName.SCIENTISTS);
-        }
-        return false;
-    }
-
-    public play(player: Player, game: Game) {
-        if (game.turmoil) {
-            game.turmoil.addInfluenceBonus(player);
-        }
-        return undefined;
-    }
+  public play(player: Player) {
+    Turmoil.getTurmoil(player.game).addInfluenceBonus(player);
+    return undefined;
+  }
 }

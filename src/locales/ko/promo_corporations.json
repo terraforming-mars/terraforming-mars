@@ -1,0 +1,49 @@
+{
+  "Arcadian": "아카디아",
+  "Communities": "공동체",
+  "Arcadian Communities": "아카디아 공동체",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "40 M€ 및 강철 자원 10개를 가지고 게임 시작. 게임 첫 행동으로서, 공동체(자기 색깔 마커) 1개를 게임판의 빈칸에 배치. 전용 구역에는 배치 불가.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "행동: 공동체(자기 색깔 마커) 1개를 자신의 공동체 또는 자신의 타일에 인접한 빈 구역(전용 구역 제외)에 배치.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "지속 효과: 자신의 공동체가 있는 구역에는 자신만이 타일을 배치할 수 있음. 그 구역에 타일을 놓을 때마다 3 M€ 획득.",
+
+  "Astrodrill": "아스트로드릴",
+  "Astrodrill ENT": "아스트로드릴 엔터프라이즈",
+  "You start with 35 M€ and 3 asteroid resources.": "35 M€과 소행성 자원 3개를 가지고 게임 시작. 소행성 자원은 이 카드 위에 놓음.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "행동: 아무 카드 위에 소행성 자원 1개를 추가하거나 원하는 기본 자원 1개를 획득. 또는, 이 카드의 소행성 자원 1개를 소비해서 티타늄 자원 3개 획득.",
+
+  "FACTORUM": "　팩 토 럼　",
+  "Factorum": "팩토럼",
+  "You start with 37 M€. Increase your steel production 1 step.": "37 M€과 강철 생산력 1을 가지고 게임 시작.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "행동: 만약 현재 보유한 에너지 자원이 없을 경우 에너지 생산력 1 증가, 또는 3 M€ 소비해서 건물 카드 1장 획득.",
+
+  "mons": "몬스",
+  "INSURANCE": "손해보험",
+  "Mons Insurance": "몬스 손해보험",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "48 M€과 메가크레딧 생산력 4를 가지고 게임 시작. 다른 플레이어들의 메가크레딧 생산력이 각각 2씩 감소, 이때는 아래의 지속 효과가 적용되지 않음.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "지속 효과: 누군가가 타인의 생산력을 감소시키거나 자원을 제거할 때마다 피해자에게 자신이 3 M€을 지급(만약 모자라면 남아있는 만큼만).",
+
+  "Pharmacy": "파머시",
+  "Union": "유니온",
+  "Pharmacy Union": "파머시 유니온",
+  "You start with 54 M€ . Draw a Science card.": "54 M€을 가지고 게임 시작. 게임 첫 행동으로서 과학 카드 1장 획득.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "지속 효과: 이 카드 포함, 아무나 사용한 카드의 미생물 태그 당 이 카드에 질병 자원 1개 추가 및 자신의 4 M€를 가능한 제거. / 지속 효과: 자신이 사용한 카드의 과학 태그 당 다음 중 하나 수행. [이 카드에서 질병 자원 1개 제거 및 1 TR 상승.] [만약 이 카드에 질병 자원이 없다면, 3 TR 상승 및 이 카드를 ‘사용한 사건형 카드’로서 해당 더미에 엎어둠.]",
+
+  "PHIL": "필",
+  "A": "레",
+  "RES": "어스",
+  "Philares": "필레어스",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "47 M€을 가지고 게임 시작. 게임 첫 행동으로서, 녹지 타일 1장 배치 및 그에 따른 산소 농도 1% 상승.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "지속 효과: 자기 타일과 다른 플레이어의 타일 사이에 ‘인접한 면’이 새롭게 하나 생길 때마다, 자신은 원하는 기본 자원 1개를 획득. 이때 누가 타일을 놓았는지는 상관 없음.",
+
+  "Recyclon": "리사이클론",
+  "You start with 38 M€ and 1 steel production.": "38 M€ 및 강철 생산력 1을 가지고 게임 시작.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 건물 태그 1개마다, 이 카드에 미생물 자원 1개 추가 또는 이 카드의 미생물 자원 2개 제거해서 식물 생산력 1 증가 중 하나를 수행.",
+
+  "SPLI": "스플라",
+  "C": "이",
+  "E": "스",
+  "TACTICAL GENOMICS": "택틱스 제노믹스",
+  "Splice": "스플라이스",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "44 M€을 가지고 게임 시작. 게임 첫 행동으로서, 카드 1장씩 공개하면서 미생물 카드가 나오면 그 카드 1장만 획득. 나머지는 버림.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "지속 효과: 이 카드 포함, 미생물 태그 당 ‘카드 사용자는 [+2 M€ / 그 카드에 미생물 자원 +1개] 택일 그리고 자신은 +2 M€’을 적용."
+}

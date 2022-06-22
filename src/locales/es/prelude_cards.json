@@ -1,0 +1,24 @@
+{
+    "Psychrophiles": "Psicrófilos",
+    "Action: Add 1 microbe to this card.": "Acción: añade 1 microbio a esta carta.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Efecto: Al pagar por una carta tipo planta, los microbios de esta carta pueden ser usados a razón de 2 М€ cada uno.",
+    "Temperature must be -20 C or lower.": "Requiere que la temperatura sea -20°C o inferior.",
+
+    "Research Coordination": "Investigación coordinada",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Tras haber jugado esta carta, al realizar una acciñon, el símbolo sin definir contabiliza como cualquier símbolo que desees.",
+
+    "SF Memorial": "Monumento a SF",
+    "Draw 1 card.": "Roba 1 carta.",
+
+    "Martian Survey": "Reconocimiento marciano",
+    "Oxygen must be 4% or lower. Draw two cards.": "El oxígeno debe ser 4% o inferior. Roba 2 cartas.",
+
+    "House Printing": "Impresión de viviendas",
+    "Increase your steel production 1 step.": "Incrementa tu producción de acero 1 nivel.",
+
+    "Space Hotels": "Hoteles espaciales",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Requiere 2 símbolos de Tierra. Aumenta tu producción de М€ 4 niveles.",
+
+    "Lava Tube Settlement": "Asentamiento en tubo de lava",
+    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "Reduce tu producción de energía 1 nivel. Aumenta tu producción de М€ 2 niveles. Coloca una loseta de ciudad en un ÁREA VOLCÁNICA, al iguel que la carta Ríos de Lava (THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS O ARSIA MONS), sin tener en cuenta las ciudades adjacentes."
+}

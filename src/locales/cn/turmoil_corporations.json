@@ -1,0 +1,28 @@
+{
+  "Lakefront Resorts": "湖畔度假区",
+  "LAKEFRONT": "湖畔",
+  "RESORTS": "度假区",
+  "You start with 54 M€.": "起始获得 54 МС",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "效果：每当有海洋板块被放置到版图时,增加1点你的M€产量。你放置板块在海洋板块旁时的奖励从2 M€变为3 M€",
+
+  "Septem Tribus":"七星聚落",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.":"您从36 M€开始游戏。执行'动作'时，通配符标志'？'可以计算为任何标志。",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.":"行动：你至少有1个代表的派系每有一个，获得2 M€。",
+
+  "Terralabs Research": "地球化研究所",
+  "TERRALABS": "地球化",
+  "RESEARCH": "研究所",
+  "You start with 14 M€. Lower your TR 1 step.": "起始获得14 M€,降低你的改造度(TR)1级",
+  "Effect: Buying cards to hand costs 1 M€.": "效果：购买卡牌到手牌的价格变为1 M€",
+
+  "Utopia Invest": "乌托邦投资",
+  "UTOPIA": "UTOPIA",
+  "INVEST": "INVEST",
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "起始40 M€,提升你的钢铁和钛产量各1级",
+  "Action: Decrease any production to gain 4 resources of that kind.": "行动：降低任意产量1级,获得对应的4个资源",
+
+  "Pristar": "星际预防所",
+  "PRISTAR": "星际预防所",
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "起始获得53 M€,降低你的改造度(TR)2级这张牌上每有1个保卫资源,获得1分",
+  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "效果： 生产阶段时,如果你本时代没提升过改造度,则放置1个保卫资源到这张牌并获得6 M€"
+}

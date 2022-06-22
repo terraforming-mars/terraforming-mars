@@ -1,26 +1,57 @@
+import {Card} from '../Card';
+import {Tags} from '../../common/cards/Tags';
+import {Player} from '../../Player';
+import {ICorporationCard} from './ICorporationCard';
+import {IProjectCard} from '../IProjectCard';
+import {Resources} from '../../common/Resources';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {all, played} from '../Options';
 
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { CorporationCard } from "./CorporationCard";
-import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+export class SaturnSystems extends Card implements ICorporationCard {
+  constructor() {
+    super({
+      cardType: CardType.CORPORATION,
+      name: CardName.SATURN_SYSTEMS,
+      tags: [Tags.JOVIAN],
+      startingMegaCredits: 42,
 
-export class SaturnSystems implements CorporationCard {
-    public name: CardName = CardName.SATURN_SYSTEMS;
-    public tags: Array<Tags> = [Tags.JOVIAN];
-    public startingMegaCredits: number = 42; 
-    public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
-        for (const tag of card.tags) {
-            if (tag === Tags.JOVIAN) {
-                game.getCardPlayer(this.name).setProduction(Resources.MEGACREDITS);
-            }
-        }
+      metadata: {
+        cardNumber: 'R03',
+        description: 'You start with 1 titanium production and 42 M€.',
+        renderData: CardRenderer.builder((b) => {
+          b.br;
+          b.production((pb) => pb.titanium(1)).nbsp.megacredits(42);
+          b.corpBox('effect', (ce) => {
+            ce.effect('Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.', (eb) => {
+              eb.jovian({played, all}).startEffect.production((pb) => pb.megacredits(1));
+            });
+          });
+        }),
+      },
+    });
+  }
+
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    this._onCardPlayed(player, card);
+  }
+
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+    return this._onCardPlayed(player, card);
+  }
+
+  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
+    for (const tag of card.tags) {
+      if (tag === Tags.JOVIAN) {
+        player.game.getCardPlayer(this.name)?.addProduction(Resources.MEGACREDITS, 1, {log: true});
+      }
     }
-    public play(player: Player) {
-        player.setProduction(Resources.TITANIUM);
-        player.setProduction(Resources.MEGACREDITS);
-        return undefined;
-    }
+  }
+
+  public play(player: Player) {
+    player.addProduction(Resources.TITANIUM, 1);
+    player.addProduction(Resources.MEGACREDITS, 1);
+    return undefined;
+  }
 }

@@ -1,0 +1,34 @@
+{
+    "Callisto": "Callisto",
+    "Ceres": "Ceres",
+    "Enceladus": "Encelade",
+    "Europa": "Europe",
+    "Ganymede": "Ganymede",
+    "Io": "Io",
+    "Luna": "Lune",
+    "Miranda": "Miranda",
+    "Pluto": "Pluton",
+    "Titan": "Titan",
+    "Triton": "Triton",
+
+    "Select colony tile to remove": "Sélectionner une tuile colonie à défausser",
+    "Colony Bonus": "Bonus de colonie",
+    "Trade Income": "Revenu commercial",
+    "Select colony": "Sélectionner une colonie",
+
+    "Trade Income: Gain the indicated production": "Revenu commercial: gagnez la production indiquée",
+
+    "Select one option": "Sélectionnez une option",
+    "Callisto - (Energy)": "Callisto - (Energie)",
+    "Ceres - (Steel)": "Ceres - (Acier)",
+    "Enceladus - (Microbes)": "Encelade - (Microbes)",
+    "Europa - (Production)": "Еurope - (Production)",
+    "Ganymede - (Plants)": "Ganymede - (Plantes)",
+    "Io - (Heat)": "Io - (Chaleur)",
+    "Luna - (MegaCredits)": "Lune - (MegaCredits)",
+    "Miranda - (Animals)": "Miranda - (Animaux)",
+    "Pluto - (Cards)": "Pluton - (Cartes)",
+    "Titan - (Floaters)": "Titan - (Flotteurs)",
+    "Triton - (Titanium)": "Triton - (Titane)"
+
+}

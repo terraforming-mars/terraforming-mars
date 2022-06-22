@@ -1,0 +1,86 @@
+{
+
+    "Desperate Measures": "Desperackie Środki",
+    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "Umieść brązową kostkę na kaflu burzy pyłowej i podnieś Poziom Tlenu o 1% albo umieść brązową kostkę na kaflu erozji i podnieś Temperaturę o 2°C. Kafel zagrożenia z brązową kostką nie może zostać usunięty.",
+
+    "Mining Area": "Obszar Górniczy",
+    "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Umieść ten obszar obok innych swoich obszarów, na polu zawierającym premię stali albo tytanu. Wybierz kafel z premią sąsiedztwa taką samą jak premia na wybranym polu. Podnieś swoją produkcję tego zasobu o 1 poziom. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje oznaczoną premię.",
+
+    "Industrial Center": "Ośrodek Przemysłowy",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "Akcja: Wydaj 7 M€, żeby podnieś swoją produkcję stali o 1 poziom.",
+    "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "Umieść ten obszar na polu sąsiadującym z obszarem miasta. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę stali.",
+
+    "Marketing Experts": "Eksperci od Marketingu",
+    "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "Efekt trwały: Gdy którykolwiek z graczy otrzymuje premię zasobów za sąsiedztwo z twoim obszarem, otrzymujesz 1 M€.",
+    "Increase your M€ production 1 step.": "Podnieś swoją produkcję M€ o 1 poziom.",
+
+    "Bioengineering Enclosure": "Sektor Bioinżynierii",
+    "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "Akcja: Usuń 1 jednostkę zwierząt z tej karty, aby umieścić 1 jednostkę zwierząt na dowolnej karcie.",
+    "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Musisz posiadać przynajmniej 1 symbol nauki. Umieść na tej karcie 2 jednostki zwierząt. PRZECIWNICY NIE MOGĄ USUWAĆ JEDNOSTEK ZWIERZĄT Z TEJ KARTY.",
+
+    "Butterfly Effect": "Efekt Motyla",
+    "Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "Przesuń każdy ze znaczników zagrożenia maksymalnie o 1 poziom w górę lub w dół. Podnieś swój WT o 1 poziom.",
+    "All hazard markers": "Znaczniki zagrożenia",
+
+    "Geological Survey": "Geologiczne Pomiary",
+    "Any max 5 Greeneries": "Max 5 obszarów zieleni",
+    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "Efekt trwały: Gdy umieszczasz dowolny obszar NA MARSIE i otrzymujesz zasoby stali, tytanu lub ciepła, zyskujesz 1 dodatkową jednostkę z każdego zdobytego rodzaju zasobów.",
+    "Requires 5 or fewer greeneries on Mars.": "Na planszy musi się znajdować co najwyżej 5 obszarów zieleni.",
+
+    "Ecological Survey": "Badania Ekologiczne",
+    "Any 3 Greeneries": "3 obszary zieleni",
+    "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "Efekt trwały: Gdy umieszczasz dowolny obszar na planszy i otrzymujesz zasoby roślinności, zwierząt lub mikrobów, zyskujesz 1 dodatkową jednostkę z każdego zdobytego rodzaju zasobów.",
+    "Requires 3 greeneries on Mars.": "Na planszy muszą znajdować się przynajmniej 3 obszary zieleni.",
+
+    "Mining Rights": "Prawa Górnicze",
+    "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Umieść ten obszar na polu zawierającym premię stali albo tytanu. Wybierz kafel z premią sąsiedztwa taką samą jak premia na wybranym polu. Podnieś swoją produkcję tego zasobu o 1 poziom. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje oznaczoną premię.",
+
+    "Natural Preserve": "Rezerwat Naturalny",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 4%. Umieść ten obszar na polu niesąsiadującym z innymi obszarami. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 M€. Podnieś swoją produkcję M€ o 1 poziom.",
+
+    "Ocean Sanctuary": "Sanktuarium Oceaniczne",
+    "1 VP per animal on this card.": "1 PZ za każdą jednostkę zwierząt na karcie.",
+    "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "Umieść ten obszar na istniejącym obszarze oceanu. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę zwierząt. Umieść 1 jednostkę zwierząt na tej karcie.",
+
+    "Nuclear Zone": "Strefa Nuklearna",
+    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "Podnieś Temperaturę o 4°C. Umieść ten obszar na planszy. Gracze, stawiając swoje obszary ze znacznikiem gracza obok tego obszaru, muszą zapłacić 2 M€.",
+
+    "Restricted Area": "Obszar Zastrzeżony",
+    "Action: Spend 2 M€ to draw a card.": "Akcja: Wydaj 2 M€, żeby dobrać 1 kartę.",
+    "Place this tile which grants an ADJACENCY BONUS of 1 card.": "Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, dobiera 1 kartę.",
+
+    "Solar Farm": "Farma Solarna",
+    "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.": "Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 jednostki energii. Podnieś swoją produkcję energii o 1 poziom za każdą jednostkę roślinności znajdującą się na polu, na którym umieściłeś ten obszar.",
+
+    "Ecological Zone": "Strefa Ekologiczna",
+    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "Efekt trwały: Za każdy zagrywany przez Ciebie symbol zwierząt lub roślinności (z tymi włącznie), umieść tu 1 jednostkę zwierząt.",
+    "the tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "GDY DOWOLNY GRACZ UMIEŚCI OBSZAR OBOK TEGO OBSZARU, OTRZYMUJE 1 JEDNOSTKĘ ZWIERZĄT. 1 PZ ZA KAŻDE 2 JEDNOSTKI ZWIERZĄT NA TEJ KARCIE.",
+    "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Musisz posiadać min. 1 obszar zieleni. Umieść ten obszar obok obszaru zieleni.",
+
+    "Bio-Fertilizer Facility": "Ośrodek Eko Nawożenia",
+    "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "Musisz posiadać przynajmniej 1 symbol nauki. Podnieś swoją produkcję roślinności o 1 poziom. Umieść 2 jednostki mikrobów na dowolnej karcie. Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje po 1 jednostce roślinności i mikrobów.",
+
+    "Metallic Asteroid": "Metaliczna Asteroida",
+    "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "Podnieś Temperaturę o 2°C. Otrzymujesz 1 jednostkę tytanu. Usuń do 4 jednostek roślinności dowolnego gracza. Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę tytanu.",
+
+    "Ocean Farm": "Farma Morska",
+    "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "Na planszy muszą znajdować się przynajmniej 4 obszary oceanów. Podnieś swoją produkcję roślinności i ciepła o 1 poziom. Umieść ten obszar na istniejącym obszarze oceanu. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę roślinności.",
+
+    "Commercial District": "Dystrykt Handlowy",
+    "1 VP per adjacent city tile.": "1 PZ ZA KAŻDY OBSZAR MIASTA OBOK TEGO OBSZARU.",
+    "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 4 poziomy. Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 M€.",
+
+    "Ocean City": "Miasto na Oceanie",
+    "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Na planszy musi znajdować się przynajmniej 6 obszarów oceanów. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść ten specjalny obszar miasta na istniejącym obszarze oceanu, ignorując normalne ograniczenia umieszczania miast. Ten obszar liczy się jako obszar miasta i obszar oceanu.",
+
+    "Lava Flows": "Strumienie Lawy",
+    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "Podnieś Temperaturę o 4°C. Umieść ten obszar na jednym z wymienionych obszarów: THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS, ARSIA MONS. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 jednostki ciepła.",
+
+    "Mohole Area": "Obszar Mohole",
+    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "Umieść ten obszar na polu zarezerwowanym dla oceanu. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 jednostki ciepła. Podnieś swoją produkcję ciepła o 4 poziomy.",
+
+    "Capital": "Stolica",
+    "1 additional VP for each ocean tile adjacent to this city tile.": "OTRZYMUJESZ PO 1 PZ ZA KAŻDY OBSZAR OCEANU SĄSIADUJĄCY Z TYM OBSZAREM.",
+    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 M€."
+
+}

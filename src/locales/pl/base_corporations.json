@@ -1,0 +1,52 @@
+{
+    "Beginner": "Korporacja dla początkujących",
+    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Rozpoczynasz grę z 42 M€. Nie bierzesz udziału w pierwszej fazie badań, zamiast tego dobierasz za darmo 10 kart.",
+
+    "Credicor": "Credicor",
+    "You start with 57 M€.": "Rozpoczynasz grę z 57 M€.",
+    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "Efekt trwały: Za każdym razem, gdy zapłacisz za kartę albo projekt standardowy o bazowym koszcie 20 lub więcej M€, otrzymujesz 4 M€.",
+
+    "Ecoline": "Ecoline",
+    "You start with 2 plant production, 3 plants, and 36 M€.": "Rozpoczynasz grę z 2 dodatkowymi poziomami produkcji roślinności, 3 jednostkami roślinności i 36 M€.",
+    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Efekt trwały: Za każdym razem, gdy chcesz umieścić na planszy obszar zieleni, możesz za niego zapłacić 7 jednostkami roślinności (zamiast 8).",
+
+    "Helion": "Helion",
+    "You start with 3 heat production and 42 M€.": "Rozpoczynasz grę z 3 dodatkowymi poziomami produkcji ciepła i 42 M€.",
+    "Effect: You may use heat as M€. You may not use M€ as heat.": "Efekt trwały: Możesz używać jednostek ciepła zamiast M€. Nie możesz używać jednostek M€ zamiast ciepła.",
+
+    "Interplanetary Сinematics": "Interplanetary Сinematics",
+    "You start with 20 steel and 30 M€.": "Rozpoczynasz grę z 20 jednostkami stali i 30 M€.",
+    "Effect: Each time you play an event, you gain 2 M€.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia, otrzymujesz 2 M€.",
+
+    "Inventrix": "Inventrix",
+    "As your first action in the game, draw 3 cards. Start with 45 M€.": "Rozpoczynasz grę z 45 M€. W ramach swojej pierwszej akcji w grze dobierz za darmo 3 karty.",
+    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Efekt trwały: Zagrywając karty, możesz każdorazowo traktować wybrane Wskaźniki Globalne tak, jakby były o 2 poziomy (2 obszary oceanów/2% Tlenu/4°C) wyższe albo niższe.",
+
+    "Phobolog": "Phobolog",
+    "You start with 10 titanium and 23 M€.": "Rozpoczynasz grę z 10 jednostkami tytanu i 23 M€.",
+    "Effect: Your titanium resources are each worth 1 M€ extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka tytanu jest warta o 1 M€ więcej.",
+
+    "Tharsis Republic": "Republika Tharsis",
+    "You start with 40 M€. As your first action in the game, place a city tile.": "Rozpoczynasz grę z 40 M€. W ramach swojej pierwszej akcji w grze umieść na planszy obszar miasta.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Za każdym razem, gdy któryś z graczy umieści NA MARSIE obszar miasta, podnieś swoją produkcję M€ o 1 poziom. Jeśli to Ty umieściłeś obszar miasta, otrzymujesz dodatkowo 3 M€.",
+
+    "Thorgate": "Thorgate",
+    "You start with 1 energy production and 48 M€.": "Rozpoczynasz grę z 1 dodatkowym poziomem produkcji energii i 48 M€.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem energii albo wykorzystujesz projekt standardowy, fundując Elektrownię, to płacisz o 3 M€ mniej.",
+
+    "UNMI": "UNMI",
+    "You start with 40 M€.": "Rozpoczynasz grę z 40 M€.",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Akcja: Jeśli podczas tego pokolenia podniosłeś swój współczynnik terraformacji, zapłać 3 M€, żeby podnieść go o dodatkowy punkt.",
+
+    "Mining Guild": "Mining Guild",
+    "You start with 30 M€, 5 steel and 1 steel production.": "Rozpoczynasz grę z 30 M€, 5 jednostkami stali i 1 dodatkowym poziomem produkcji stali.",
+    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Efekt trwały: Za każdym razem, gdy otrzymujesz premię w dowolnej ilości jednostek stali lub tytanu z pola na planszy, podnieś swoją produkcję stali o 1 poziom.",
+
+    "Terractor": "Terractor",
+    "You start with 60 M€.": "Rozpoczynasz grę z 60 M€",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 M€ mniej.",
+
+    "Saturn Systems": "Saturn Systems",
+    "You start with 1 titanium production and 42 M€.": "Rozpoczynasz grę z 1 dodatkowym poziomem produkcji tytanu i 42 M€.",
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem Jowisza (z tą włącznie), podnieś swoją produkcję M€ o 1 poziom."
+}

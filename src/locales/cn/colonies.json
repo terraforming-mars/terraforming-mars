@@ -1,0 +1,234 @@
+{
+  "Aridor":"阿里多尔",
+  "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play":"您从40 M€开始游戏。 作为您的第一个动作，请选择一个额外的殖民地板块加入游戏",
+  "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.":"效果：当您在玩耍中获得新的卡牌标签时[事件卡不计入]，请增加M€产量1级。",
+
+  "ARKLIGHT":"弧光",
+  "Arklight":"弧光",
+  "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"你起始获得45 M€。提升你的M€产量2级。牌上每2个动物资源1分",
+  "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"效果：当你打出动物或植物标志时(包括本牌),在此牌上放置1个动物资源",
+
+  "POLYPHEMOS":"波呂斐摩斯",
+  "Polyphemos":"波呂斐摩斯",
+  "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.":"起始获得50 M€。提升你的M€产量5级,获得5个钛",
+  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.":"效果：当你购买手牌时,你需要支付5 M€而非原本的3 M€,包括起始的手牌",
+
+  "Poseidon":"波塞頓",
+  "You start with 45 M€. As your first action, place a colony.":"起始获得45 M€。作为你的第一个行动,放置一个殖民地",
+  "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"任何殖民地放置时，包括这个，增加你的M€产量1级。",
+
+  "STORM":"暴风",
+  "CRAFT":"舰",  
+  "Stormcraft Incorporated":"暴风舰公司",
+  "You start with 48 M€.":"起始获得48 M€",
+  "Action: Add a floater to ANY card.":"行动：增加云资源到任意卡牌",
+  "Effect: Floaters on this card may be used as 2 heat each.":"效果：本卡上的云资源能当做2个热能资源使用",
+
+
+
+
+
+
+  "Impactor Swarm": "冲击虫群",
+  "Jovian Jovian": "木星  木星",
+  "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "（需要两个木星图标 ）增加12点热能 移除任一玩家两点植物",
+
+  "Market Manipulation": "操控市场",
+  "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.":"提升一个殖民地标志一级,降低另一个殖民地标志一级",
+
+
+  "Research Colony": "研究殖民地",
+  "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "放置1个殖民地，可以放置在你已经放置过的殖民地板块 抽取2张牌",
+
+  "Urban Decomposers": "都市分解者",
+  "City": "城市",
+  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "（需要你有1个殖民地和1个城市）增加1点自身植物产量 增加2个微生物标志到其他卡上",
+
+  "Trading Colony": "交易殖民地",
+  "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "效果：当你进行交易时，可先提升1级殖民地标志",
+  "Place a colony.": "放置1个殖民地",
+
+  "Lunar Mining": "月球挖掘",
+  "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "每拥有2个地球图标，增加自身1点钛产量包括此卡",
+
+  "Floater Leasing": "漂浮物租贷",
+  "Increase your M€ production 1 step PER 3 floaters you have.": "每有3个云资源，增加自身1点M€产量",
+
+  "Martian Zoo": "火星动物园",
+  "Effect: When you play an Earth tag, place an animal here.": "效果：每当你打出地球标时，在此卡上放1个动物标志",
+  "Action: Gain 1M€ per animal here.": "行动：此卡上每有1点动物，获得1块钱",
+  "(Requires 2 city)":"需要2个城市",
+  "(tiles in play.)":"",
+  "Any 2 Cities":"任何两个城市",
+
+  "Luna Governor":"月球政府",
+  "3 Earth":"3 地球",
+  "Requires 3 Earth tags. Increase your M€ production 2 steps.":"（需要：三个地球图标）增加自身2点M€产量",
+
+  "Minority Refuge":"少数民族难民",
+  "Decrease your M€ production 2 steps. Place a colony.":"降低自身2点M€产量，放置1个殖民地",
+
+  "Floater Technology":"漂浮物科技",
+  "Action: Add 1 floater to ANOTHER card.":"行动：增加1点云资源到任意卡上",
+
+  "Productive Outpost":"生产前哨站",
+  "Gain all your colony bonuses.":"获得你所有殖民地奖励",
+
+  "Space Port Colony":"太空港殖民地",
+  "Colony":"殖民地",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.":"需要1个殖民地，放置1个殖民地,可以放置在你已经放置过的殖民地版图上,获得1支交易舰队",
+  "1VP per 2 colonies in play.":"每2个殖民地获得1VP",
+
+  "Trade Envoys":"贸易特使",
+
+  "Earth Elevator": "地球太空梯",
+  "Increase your titanium production 3 steps.": "增加自身3点钛产量",
+
+  "Titan Floating Launch-pad": "泰坦漂浮物起飞平台",
+  "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "行动：增加1点云资源到任意木星卡上或消耗此卡上的1点云资源来免费交易一次",
+  "Add two floaters to ANY JOVIAN CARD.": "增加2点云资源到任意木星卡上",
+
+  "Heavy Taxation": "重税",
+  "2 Earth": "2 地球",
+  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点M€产量 获得4块钱",
+
+  "Refugee Camp": "难民营",
+  "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "行动：降低自身1点M€产量，增加1点营地资源到此卡上",
+  "1 VP for each camp resource on this card.": "每1点营地资源，获得1VP",
+
+  "Solar Reflectors": "太阳反射器",
+  "Increase your heat production 5 steps.": "增加自身5点热能产量",
+
+  "Red Spot Observatory": "红斑实验室",
+  "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "行动：增加一点云资源到此卡，或者消耗1点此卡的云资源来抽1张卡",
+  "Draw 2 cards.": "抽2张牌",
+
+  "Titan Air-scrapping": "处理泰坦空气",
+  "Action: Spend 1 titanium to add 2 floaters here, or spend 2 floaters here to increase your TR 1 step.": "行动：花费1点钛来增加2个云资源到此卡上或消耗此卡上的2个云资源增加一点改造度",
+  "Action: Spend 2 floaters here to increase your TR 1 step.":"行动：消耗此卡上的2个云资源增加一点改造度",
+  "Action: Spend 1 titanium to add 2 floaters here.":"行动：花费1个钛资源在此卡上+2云资源",
+
+  "Titan Shuttles": "泰坦穿梭机",
+  "Action: Add 2 floaters to ANY JOVIAN CARD.":"行动：增加2点云资源到任意木星卡上",
+  "Action: Spend any number of floaters here to gain the same number of titanium.": "行动：消耗此卡上的任意数量云资源来换取等量的钛",
+
+  "Floater Prototypes":"造云原型机",
+  "Add two floaters to ANOTHER card.":"放置2个云资源到另一张牌",
+
+  "Airliners":"航空公司",
+  "3 Floaters":"3个云资源",
+  "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.":"需求：你有3个云资源。你的金钱产量+2，在任意卡牌上增加2个云资源。",
+
+  "Air Raid":"空袭",
+  "STEAL":"偷窃",
+  "Requires that you lose 1 floater. Steal 5 M€ from any player.":"失去1个云资源。从任意玩家处偷5块钱。",
+
+  "Atmo Collectors":"大气收藏家",
+  "Action: Add one floater here.":"行动：在此牌上增加1个云资源",
+  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.":"行动：花费此牌上一个云资源获得2个钛资源、或3个电力资源、或4个热力资源。",
+  "Add 2 floaters to ANY card.":"打牌时在任意卡牌上+2云资源",
+
+  "Community Services":"社区服务",
+  "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.":"每有一张无标志的卡牌（包括此卡），你的金钱产量+1。",
+
+  "Conscription":"征兵",
+  "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.":"需求：2个地球标志。本时代你打出的下一张牌费用-16。",
+
+  "Corona Extractor":"日冕提取器",
+  "4 Science":"4个科技标志",
+
+  "Cryo Sleep":"低温睡眠",
+  "Effect: When you trade, you pay 1 less resource for it.":"效果：当你交易时，你少支付1个资源。",
+
+  "Ecology Research":"生态学研究",
+  "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.":"你每有1块殖民地，你的植物产量便+1。在一张其他牌上+1动物资源；在一张其他牌上+2微生物资源。",
+
+  "Galilean Waystation":"伽利略中转站",
+  "Increase your M€ production 1 step for every Jovian tag in play.":"场上每有1个木星标志，你的金钱产量便+1。",
+
+  "Ice Moon Colony":"冰月殖民地",
+  "Place 1 colony and 1 ocean tile.":"放置1块殖民地和1片海洋",
+
+  "2 Jovian":"2个木星标志",
+  "Jovian Lanterns":"木星灯",
+  "Jovian":"木星",
+
+  "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.":"需求：1个木星标志。提高1点改造度。在任意卡上+2云资源。",
+  "1 VP per 2 floaters here.":"此牌2个云资源算1分",
+
+
+  "Jupiter Floating Station":"木星浮动站",
+  "Action: Add 1 floater to a JOVIAN CARD.":"行动：在一张木星卡上+1云资源",
+  "Action: Gain 1 M€ for every floater here [MAX 4].":"行动：获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
+  "Requires 3 Science tags.":"需求：3个科技标志。",
+
+  "Lunar Exports":"月球出口",
+  "Increase your plant production 2 steps, or your M€ production 5 steps.":"你的植物产量+2，或你的金钱产量+5。",
+  "2 Cities":"2个城市",
+  "Requires 2 city tiles in play.":"需求：2个城市被放置。",
+  "Mining Colony":"采矿殖民地",
+  "Increase your titanium production 1 step. Place a colony.":"你的钛产量+1。放置1块殖民地。",
+
+  "Molecular Printing":"分子打印",
+  "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.":"每有1座城市，你便获得1块钱。每有1块殖民地，你便获得1块钱。",
+
+  "Nitrogen from Titan":"土卫六氮气",
+  "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.":"提升2点改造度。在1张木星牌上+2云资源。",
+
+  "Pioneer Settlement":"定居点",
+  "max 1 Colony":"最多1块殖民地",
+  "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.":"需求：你拥有不超过1块殖民地。金钱产量-2。放置1块殖民地。",
+  "Quantum Communications":"量子通信",
+  "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.":"需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",
+  "Requires 3 Science tags. Draw 2 cards.":"需求：3个科技标志。抽2张牌。",
+  "Rim Freighters":"里姆货船",
+  "Refugee Camps":"难民营",
+  "Solar Probe":"太阳探测器",
+  "Draw 1 card for every 3 science tags you have, including this.":"每有3个科技标志（包括此牌），便摸1张牌。",
+  "Space Port":"太空港",
+  "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.":"需求：1块殖民地。你的电力产量-1，金钱产量+4。放置1座城市。获得1艘贸易飞船。",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"需求：1块殖民地。放置1块殖民地。可以放在你已经拥有殖民地的那块殖民地板块上。获得1艘贸易飞船。每有2块殖民地算1分。",
+  "Spin-off Department":"副产品部门",
+  "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.":"效果：打出1张原始费用为20或更多的牌时，摸1张牌。",
+
+
+  "Sub-zero Salt Fish":"零下咸鱼",
+  "Requires -6 C. Decrease any Plant production 1 step.":"需求：-6℃。任何植物产量-1。",
+
+  "Titan Floating Launch-Pad":"土卫六漂浮发射台",
+  "Colony City":"殖民地城市",
+  "Warp Drive":"曲率引擎",
+  "Effect: When you play a Space card, you pay 4 M€ less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
+  "Requires 5 Science tags.":"需求：5个科技标志。",
+
+  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果： 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡",
+
+      "Callisto":"木卫四",
+    "Ceres":"谷神星",
+    "Enceladus":"土卫二",
+    "Europa":"木卫二",
+    "Ganymede":"木卫三",
+    "Io":"木卫一",
+    "Luna":"月球",
+    "Miranda":"天卫五",
+    "Pluto":"冥王星",
+    "Titan":"土卫六",
+    "Triton":"海卫一",
+    "Colony Bonus":"殖民地奖励",
+    "Trade Income":"贸易收入",
+    "Select colony":"选择殖民地",
+    "Trade Income: Gain the indicated production":"贸易收入：获得指定的产量",
+    "Callisto - (Energy)":"木卫四-（能量）",
+    "Ceres - (Steel)":"谷神星-（钢铁）",
+    "Enceladus - (Microbes)":"土卫二-（微生物）",
+    "Europa - (Production)":"木卫二-（产量）",
+    "Ganymede - (Plants)":"木卫三-（植物）",
+    "Io - (Heat)":"木卫一-（热能）",
+    "Luna - (MegaCredits)":"月球-（超级积分）",
+    "Miranda - (Animals)":"天卫五-（动物）",
+    "Pluto - (Cards)":"冥王星-（卡牌）",
+    "Titan - (Floaters)":"土卫六-（云）",
+    "Triton - (Titanium)":"海卫一-（钛）"
+
+
+}

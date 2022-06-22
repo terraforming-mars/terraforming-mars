@@ -1,16 +1,15 @@
-import { expect } from "chai";
-import { VenusGovernor } from "../../../src/cards/venusNext/VenusGovernor";
-import { Color } from "../../../src/Color";
-import { Player } from "../../../src/Player";
-import { Resources } from "../../../src/Resources";
+import {expect} from 'chai';
+import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
+import {Resources} from '../../../src/common/Resources';
+import {TestPlayers} from '../../TestPlayers';
 
-describe("VenusGovernor", function () {
-    it("Should play", function () {
-        const card = new VenusGovernor();
-        const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay(player)).to.eq(false);
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-    });
+describe('VenusGovernor', function() {
+  it('Should play', function() {
+    const card = new VenusGovernor();
+    const player = TestPlayers.BLUE.newPlayer();
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    const action = card.play(player);
+    expect(action).is.undefined;
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+  });
 });

@@ -1,28 +1,47 @@
-import { IProjectCard } from "../IProjectCard";
-import { Tags } from "../Tags";
-import { CardType } from '../CardType';
-import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {Player} from '../../Player';
+import {CardName} from '../../common/cards/CardName';
+import {CardResource} from '../../common/CardResource';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
 
-export class FloaterTechnology implements IProjectCard {
-    public cost: number = 7;
-    public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: CardName = CardName.FLOATER_TECHNOLOGY;
-    public cardType: CardType = CardType.ACTIVE;
+export class FloaterTechnology extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cost: 7,
+      tags: [Tags.SCIENCE],
+      name: CardName.FLOATER_TECHNOLOGY,
+      cardType: CardType.ACTIVE,
 
-    public canAct(player: Player): boolean {
-        return player.getResourceCards(ResourceType.FLOATER).length > 0;
-    } 
+      metadata: {
+        cardNumber: 'C12',
+        renderData: CardRenderer.builder((b) => {
+          b.action('Add 1 floater to ANOTHER card.', (eb) => {
+            eb.empty().startAction.floaters(1).asterix();
+          });
+        }),
+      },
+    });
+  }
 
-    public action(player: Player, game: Game) {
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined);
-        return undefined;
-    } 
+  public canAct(): boolean {
+    return true;
+  }
 
-    public play() {
-      return undefined;
-    }
+  public action(player: Player) {
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
+    if (floaterCards.length === 0) return undefined;
+
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 1}));
+
+    return undefined;
+  }
+
+  public play() {
+    return undefined;
+  }
 }
 

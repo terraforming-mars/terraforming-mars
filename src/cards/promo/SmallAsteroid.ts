@@ -1,22 +1,36 @@
-import { IProjectCard } from "../IProjectCard";
-import { CardName } from "../../CardName";
-import { CardType } from "../CardType";
-import { Tags } from "../Tags";
-import { Player } from "../../Player";
-import { Game } from "../../Game";
-import { Resources } from "../../Resources";
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Tags} from '../../common/cards/Tags';
+import {Player} from '../../Player';
+import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
+import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
-export class SmallAsteroid implements IProjectCard {
+export class SmallAsteroid extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.EVENT,
+      name: CardName.SMALL_ASTEROID,
+      tags: [Tags.SPACE],
+      cost: 10,
+      tr: {temperature: 1},
 
-    public cost: number = 10;
-    public name: CardName = CardName.SMALL_ASTEROID;
-    public tags: Array<Tags> = [Tags.SPACE];
-    public cardType: CardType = CardType.EVENT;
+      metadata: {
+        cardNumber: '209',
+        renderData: CardRenderer.builder((b) => {
+          b.temperature(1).br;
+          b.minus().plants(2, {all});
+        }),
+        description: 'Increase temperature 1 step. Remove up to 2 plants from any player.',
+      },
+    });
+  }
 
-    public play(player: Player, game: Game) {
-        game.increaseTemperature(player, 1);
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
-        return undefined;
-    }
-
+  public play(player: Player) {
+    player.game.increaseTemperature(player, 1);
+    player.game.defer(new RemoveAnyPlants(player, 2));
+    return undefined;
+  }
 }

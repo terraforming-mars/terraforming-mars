@@ -1,21 +1,22 @@
 import * as http from 'http';
-import {Handler} from './Handler';
+import {AsyncHandler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
 
 
-export class ApiStats extends Handler {
+export class ApiStats extends AsyncHandler {
   public static readonly INSTANCE = new ApiStats();
   private constructor() {
     super({validateServerId: true});
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    Database.getInstance().stats().then((stats) => {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+    try {
+      const stats = await Database.getInstance().stats();
       ctx.route.writeJson(res, stats);
-    }).catch((err) => {
+    } catch (err) {
       console.error(err);
       ctx.route.badRequest(req, res, 'could not load admin stats');
-    });
+    }
   }
 }

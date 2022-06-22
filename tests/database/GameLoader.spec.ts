@@ -122,43 +122,27 @@ describe('GameLoader', function() {
     expect(game).is.undefined;
   });
 
-  it('gets game when it exists in database', function(done) {
-    instance.getByGameId('foobar', false, (game1) => {
-      try {
-        expect(game1!.id).to.eq(foobarGame.id);
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+  it('gets game when it exists in database', async function() {
+    const game1 = await instance.getByGameId('foobar', false);
+    expect(game1!.id).to.eq(foobarGame.id);
   });
 
-  it('gets no game when fails to deserialize from database', function(done) {
+  it('gets no game when fails to deserialize from database', async function() {
     const originalDeserialize = Game.deserialize;
     Game.deserialize = function() {
       throw new Error('could not parse this');
     };
-    instance.getByGameId('foobar', false, (game1) => {
-      try {
-        expect(game1).is.undefined;
-        done();
-      } catch (error) {
-        done(error);
-      } finally {
-        Game.deserialize = originalDeserialize;
-      }
-    });
+    try {
+      const game1 = await instance.getByGameId('foobar', false);
+      expect(game1).is.undefined;
+    } finally {
+      Game.deserialize = originalDeserialize;
+    }
   });
 
-  it('gets game when requested before database loaded', function(done) {
-    instance.getByGameId('foobar', false, (game1) => {
-      try {
-        expect(game1).is.not.undefined;
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+  it('gets game when requested before database loaded', async function() {
+    const game1 = instance.getByGameId('foobar', false);
+    expect(game1).is.not.undefined;
   });
 
   it('gets player when requested before database loaded', async function() {
@@ -166,23 +150,12 @@ describe('GameLoader', function() {
     expect(game1).is.not.undefined;
   });
 
-  it('gets no game when game goes missing from database', function(done) {
-    instance.getByGameId('never', false, (game1) => {
-      try {
-        expect(game1).is.undefined;
-        database.data.delete('foobar');
-        instance.getByGameId('foobar', false, (game1) => {
-          try {
-            expect(game1).is.undefined;
-            done();
-          } catch (error) {
-            done(error);
-          }
-        });
-      } catch (error) {
-        done(error);
-      }
-    });
+  it('gets no game when game goes missing from database', async function() {
+    const game1 = await instance.getByGameId('never', false);
+    expect(game1).is.undefined;
+    database.data.delete('foobar');
+    const game2 = await instance.getByGameId('foobar', false);
+    expect(game2).is.undefined;
   });
 
   it('gets player when it exists in database', async function() {
@@ -191,19 +164,15 @@ describe('GameLoader', function() {
     expect(game1!.id).to.eq(foobarGame.id);
   });
 
-  it('gets game when added and not in database', function(done) {
+  it('gets game when added and not in database', async function() {
     foobarGame.id = 'alpha';
     instance.add(foobarGame);
-    instance.getByGameId('alpha', false, (game1) => {
-      try {
-        expect(game1!.id).to.eq('alpha');
-        done();
-      } catch (error) {
-        done(error);
-      } finally {
-        foobarGame.id = 'foobar';
-      }
-    });
+    const game1 = await instance.getByGameId('alpha', false);
+    try {
+      expect(game1!.id).to.eq('alpha');
+    } finally {
+      foobarGame.id = 'foobar';
+    }
   });
 
   it('gets player when added and not in database', function(done) {
@@ -224,29 +193,17 @@ describe('GameLoader', function() {
     });
   });
 
-  it('loads values after error pulling game ids', function(done) {
+  it('loads values after error pulling game ids', async function() {
     database.failure = 'getGames';
     instance.reset();
-    instance.getByGameId('foobar', false, (game1) => {
-      try {
-        expect(game1).is.undefined;
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+    const game1 = await instance.getByGameId('foobar', false);
+    expect(game1).is.undefined;
   });
 
-  it('loads values when no game ids', function(done) {
+  it('loads values when no game ids', async function() {
     database.data.delete('foobar');
-    instance.getByGameId('foobar', false, (game1) => {
-      try {
-        expect(game1).is.undefined;
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+    const game1 = await instance.getByGameId('foobar', false);
+    expect(game1).is.undefined;
   });
 
   it('loads players that will never exist', async function() {
@@ -255,7 +212,7 @@ describe('GameLoader', function() {
   });
 
   it('loads players available later', function(done) {
-    instance.getByGameId('foobar', false, (game1) => {
+    instance.getByGameId('foobar', false).then((game1) => {
       try {
         expect(game1!.id).to.eq('foobar');
         GameLoader.getInstance().getByParticipantId(foobarGame.getPlayersInGenerationOrder()[0].id).then((game2) => {

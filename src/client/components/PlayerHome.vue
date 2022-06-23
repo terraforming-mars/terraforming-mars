@@ -132,7 +132,22 @@
       </div>
 
       <div class="player_home_block player_home_block--setup nofloat"  v-if="!thisPlayer.corporationCard">
-
+          <template v-if="isCorporationDraftingPhase()">
+            <div>
+              <dynamic-title title="Corporations To Draft" :color="thisPlayer.color"/>
+              <div v-for="card in game.corporationsToDraft" :key="card.name" class="cardbox">
+                <Card :card="card"/>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <div>
+              <dynamic-title title="Your Picked Corporations" :color="thisPlayer.color"/>
+              <div v-for="card in playerView.draftedCorporations" :key="card.name" class="cardbox">
+                <Card :card="card"/>
+              </div>
+            </div>
+          </template>
           <template v-if="isInitialDraftingPhase()">
             <div v-for="card in playerView.dealtCorporationCards" :key="card.name" class="cardbox">
               <Card :card="card"/>
@@ -415,6 +430,9 @@ export default Vue.extend({
     },
     isInitialDraftingPhase(): boolean {
       return (this.game.phase === Phase.INITIALDRAFTING) && this.game.gameOptions.initialDraftVariant;
+    },
+    isCorporationDraftingPhase(): boolean {
+      return (this.game.phase === Phase.CORPORATIONDRAFTING) && this.game.gameOptions.corporationsDraft;
     },
     getToggleLabel(hideType: string): string {
       if (hideType === 'ACTIVE') {

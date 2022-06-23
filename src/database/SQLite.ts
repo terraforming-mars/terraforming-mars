@@ -197,7 +197,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  async cleanSaves(game_id: GameId): Promise<void> {
+  cleanSaves(game_id: GameId): Promise<void> {
     return new Promise((resolve, reject) => {
       this.getMaxSaveId(game_id, ((err, save_id) => {
         if (err) {

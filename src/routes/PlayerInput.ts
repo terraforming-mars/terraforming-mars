@@ -22,7 +22,11 @@ export class PlayerInput extends AsyncHandler {
     }
 
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
-    const game = await ctx.gameLoader.getByParticipantIdAsync(playerId);
+    const game = await ctx.gameLoader.getByParticipantId(playerId);
+    if (game === undefined) {
+      ctx.route.notFound(req, res);
+      return;
+    }
     let player: Player | undefined;
     try {
       player = game.getPlayerById(playerId);

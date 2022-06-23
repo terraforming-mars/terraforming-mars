@@ -16,31 +16,18 @@ export class FakeGameLoader implements IGameLoader {
   getByGameId(gameId: string, _bypassCache: boolean, cb: (game: Game | undefined) => void): void {
     cb(this.games.get(gameId));
   }
-  getByParticipantIdAsync(id: PlayerId | SpectatorId): Promise<Game> {
-    return new Promise((resolve, reject) => {
-      this.getByParticipantId(id, (game) => {
-        if (game !== undefined) {
-          resolve(game);
-        } else {
-          reject(new Error('not found'));
-        }
-      });
-    });
-  }
-  getByParticipantId(id: PlayerId | SpectatorId, cb: (game: Game | undefined) => void): void {
+  async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {
     for (const game of Array.from(this.games.values())) {
       for (const player of game.getPlayersInGenerationOrder()) {
         if (player.id === id) {
-          cb(game);
-          return;
+          return game;
         }
       }
       if (game.spectatorId === id) {
-        cb(game);
-        return;
+        return game;
       }
     }
-    cb(undefined);
+    return undefined;
   }
   restoreGameAt(_gameId: string, _saveId: number): Promise<Game> {
     throw new Error('Method not implemented.');

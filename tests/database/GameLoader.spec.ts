@@ -117,15 +117,9 @@ describe('GameLoader', function() {
     expect(instance).to.eq(GameLoader.getInstance());
   });
 
-  it('gets undefined when player does not exist', function(done) {
-    instance.getByParticipantId('foobar', (game) => {
-      try {
-        expect(game).is.undefined;
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+  it('gets undefined when player does not exist', async function() {
+    const game = await instance.getByParticipantId('foobar');
+    expect(game).is.undefined;
   });
 
   it('gets game when it exists in database', function(done) {
@@ -167,15 +161,9 @@ describe('GameLoader', function() {
     });
   });
 
-  it('gets player when requested before database loaded', function(done) {
-    instance.getByParticipantId(foobarGame.getPlayersInGenerationOrder()[0].id, (game1) => {
-      try {
-        expect(game1).is.not.undefined;
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+  it('gets player when requested before database loaded', async function() {
+    const game1 = await instance.getByParticipantId(foobarGame.getPlayersInGenerationOrder()[0].id);
+    expect(game1).is.not.undefined;
   });
 
   it('gets no game when game goes missing from database', function(done) {
@@ -197,16 +185,10 @@ describe('GameLoader', function() {
     });
   });
 
-  it('gets player when it exists in database', function(done) {
+  it('gets player when it exists in database', async function() {
     const players = foobarGame.getPlayersInGenerationOrder();
-    instance.getByParticipantId(players[Math.floor(Math.random() * players.length)].id, (game1) => {
-      try {
-        expect(game1!.id).to.eq(foobarGame.id);
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+    const game1 = await instance.getByParticipantId(players[Math.floor(Math.random() * players.length)].id);
+    expect(game1!.id).to.eq(foobarGame.id);
   });
 
   it('gets game when added and not in database', function(done) {
@@ -227,22 +209,18 @@ describe('GameLoader', function() {
   it('gets player when added and not in database', function(done) {
     const players = foobarGame.getPlayersInGenerationOrder();
     instance.add(foobarGame);
-    instance.getByParticipantId(players[Math.floor(Math.random() * players.length)]!.id, (game1) => {
-      try {
-        expect(game1).is.not.undefined;
-        instance.getLoadedGameIds((list) => {
-          try {
-            expect(list).to.deep.eq(
-              [{'id': 'foobar', 'participants': ['p-blue-id', 'p-red-id']}],
-            );
-            done();
-          } catch (error) {
-            done(error);
-          }
-        });
-      } catch (error) {
-        done(error);
-      }
+    instance.getByParticipantId(players[Math.floor(Math.random() * players.length)]!.id).then((game1) => {
+      expect(game1).is.not.undefined;
+      instance.getLoadedGameIds((list) => {
+        try {
+          expect(list).to.deep.eq(
+            [{'id': 'foobar', 'participants': ['p-blue-id', 'p-red-id']}],
+          );
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
     });
   });
 
@@ -271,28 +249,18 @@ describe('GameLoader', function() {
     });
   });
 
-  it('loads players that will never exist', function(done) {
-    instance.getByParticipantId('foobar', (game1) => {
-      try {
-        expect(game1).is.undefined;
-        done();
-      } catch (error) {
-        done(error);
-      }
-    });
+  it('loads players that will never exist', async function() {
+    const game1 = await instance.getByParticipantId('non-existent-player-id');
+    expect(game1).is.undefined;
   });
 
   it('loads players available later', function(done) {
     instance.getByGameId('foobar', false, (game1) => {
       try {
         expect(game1!.id).to.eq('foobar');
-        GameLoader.getInstance().getByParticipantId(foobarGame.getPlayersInGenerationOrder()[0].id, (game1) => {
-          try {
-            expect(game1!.id).to.eq('foobar');
-            done();
-          } catch (error) {
-            done(error);
-          }
+        GameLoader.getInstance().getByParticipantId(foobarGame.getPlayersInGenerationOrder()[0].id).then((game2) => {
+          expect(game2!.id).to.eq('foobar');
+          done();
         });
       } catch (error) {
         done(error);

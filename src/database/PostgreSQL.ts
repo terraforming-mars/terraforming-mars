@@ -164,7 +164,6 @@ export class PostgreSQL implements IDatabase {
     // Purge after setting the status as finished so it does not delete the game.
     const delete3 = this.purgeUnfinishedGames();
     await Promise.all([delete1, delete2, delete3]);
-    return Promise.resolve();
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.

@@ -487,6 +487,8 @@ export class Game {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
+      corporationDraftToNext: this.corporationDraftToNext,
+      corporationsToDraft: this.corporationsToDraft.map((c) => c.name)
     };
     if (this.aresData !== undefined) {
       result.aresData = this.aresData;
@@ -1749,6 +1751,9 @@ export class Game {
     d.unDraftedCards.forEach((unDraftedCard) => {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
+
+   game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft);
+   game.corporationDraftToNext = d.corporationDraftToNext;
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

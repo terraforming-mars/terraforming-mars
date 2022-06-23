@@ -58,5 +58,7 @@ export interface SerializedGame {
     undoCount: number;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
+    corporationDraftToNext: boolean;
+    corporationsToDraft: Array<CardName>;
 }
 

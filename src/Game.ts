@@ -403,15 +403,15 @@ export class Game {
 
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
 
-    // Test launch big draft corp
+    // Do we draft corporations or do we start the game?
     if (gameOptions.corporationsDraft) {
       game.phase = Phase.CORPORATIONDRAFTING;
       for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
         game.corporationsToDraft.push(corporationCards.pop()!);
       }
       // First player should be the last player
-      let playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
-      if (playerStartingCorporationsDraft != undefined) {
+      const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
+      if (playerStartingCorporationsDraft !== undefined) {
         playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
       } else {
         // If for any reason, we don't have player before the first one.
@@ -423,7 +423,8 @@ export class Game {
 
     return game;
   }
-  
+
+  // Function use to properly start the game: with project draft or with research phase 
   public startGame(): void {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
@@ -981,13 +982,14 @@ export class Game {
     }
   }
 
+  // Function use to manage corporation draft way
   public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<ICorporationCard>): void {
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (cards.length > 1) {
-      if (this.draftRound % this.players.length === 0){
+      if (this.draftRound % this.players.length === 0) {
         player.runDraftCorporationPhase(player.name, cards);
         this.corporationDraftToNext = !this.corporationDraftToNext;
-      } else if (this.corporationDraftToNext){
+      } else if (this.corporationDraftToNext) {
         this.getPlayerAfter(player)!.runDraftCorporationPhase(this.getPlayerAfter(player)!.name, cards);
       } else {
         this.getPlayerBefore(player)!.runDraftCorporationPhase(this.getPlayerBefore(player)!.name, cards);
@@ -996,16 +998,16 @@ export class Game {
       return;
     }
 
-    // Push last card to last player
-    if (this.corporationDraftToNext){ 
-      this.getPlayerAfter(player)!.draftedCorporations.push(...cards)
+    // Push last card to last player depending of the way we are drafting
+    if (this.corporationDraftToNext) { 
+      this.getPlayerAfter(player)!.draftedCorporations.push(...cards);
     } else {
-      this.getPlayerBefore(player)!.draftedCorporations.push(...cards)
+      this.getPlayerBefore(player)!.draftedCorporations.push(...cards);
     }
     this.players.forEach((player) => {
       player.dealtCorporationCards = player.draftedCorporations;
     });
-    // Reset value to guarantee no impact on the rest of the draft if needed
+    // Reset value to guarantee no impact on eventual futur drafts (projects or preludes)
     this.initialDraftIteration = 1;
     this.draftRound = 1;
     this.startGame();

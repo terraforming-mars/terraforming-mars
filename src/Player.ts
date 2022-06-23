@@ -1220,16 +1220,12 @@ export class Player {
 
   /*
    * @param playerName  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player. 
+   * @param passedCards The cards received from the draw, or from the prior player.
    */
   public runDraftCorporationPhase(playerName: string, passedCards: Array<ICorporationCard>): void {
-    let cardsToKeep = 1;
-
     let cards: Array<ICorporationCard> = passedCards;
 
-    const message = cardsToKeep === 1 ?
-      'Select a corporation to keep and pass the rest to ${0}' :
-      'Select two corporations to keep and pass the rest to ${0}';
+    const message = 'Select a corporation to keep and pass the rest to ${0}';
 
     this.setWaitingFor(
       new SelectCard({
@@ -1248,7 +1244,7 @@ export class Player {
         });
         this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
         return undefined;
-      }, {min: cardsToKeep, max: cardsToKeep, played: false}),
+      }, {min: 1, max: 1, played: false}),
     );
   }
 

@@ -424,7 +424,7 @@ export class Game {
     return game;
   }
 
-  // Function use to properly start the game: with project draft or with research phase 
+  // Function use to properly start the game: with project draft or with research phase
   public startGame(): void {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
@@ -999,7 +999,7 @@ export class Game {
     }
 
     // Push last card to last player depending of the way we are drafting
-    if (this.corporationDraftToNext) { 
+    if (this.corporationDraftToNext) {
       this.getPlayerAfter(player)!.draftedCorporations.push(...cards);
     } else {
       this.getPlayerBefore(player)!.draftedCorporations.push(...cards);

@@ -626,6 +626,10 @@ export default (Vue as WithRefs<Refs>).extend({
           component.showColoniesList = results['customColoniesList'].length > 0;
           component.showCardsBlackList = results['cardsBlackList'].length > 0;
 
+          // Capture the solar phase option since several of the other results will change
+          // it via the watch mechanism.
+          const capturedSolarPhaseOption = results.solarPhaseOption;
+
           for (const k in results) {
             if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players', 'solarPhaseOption'].includes(k)) continue;
             (component as any)[k] = results[k];
@@ -653,7 +657,7 @@ export default (Vue as WithRefs<Refs>).extend({
             }
 
             // set to alter after any watched properties
-            component.solarPhaseOption = Boolean(results.solarPhaseOption);
+            component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
           });
         }
       }, false);

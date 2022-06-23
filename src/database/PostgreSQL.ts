@@ -175,7 +175,6 @@ export class PostgreSQL implements IDatabase {
       const deleteResult = await this.client.query('DELETE FROM games WHERE game_id in ANY($1)', [gameIds]);
       console.log(`Purged ${deleteResult.rowCount} rows`);
     }
-    return Promise.resolve();
   }
 
   async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {

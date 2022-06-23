@@ -3,7 +3,7 @@ import {IDatabase} from '../../src/database/IDatabase';
 import {SerializedGame} from '../../src/SerializedGame';
 
 const FAKE_DATABASE: IDatabase = {
-  cleanSaves: () => {},
+  cleanSaves: () => Promise.resolve(),
   deleteGameNbrSaves: () => {},
   getPlayerCount: () => Promise.resolve(0),
   getGame: () => {},

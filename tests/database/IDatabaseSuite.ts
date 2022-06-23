@@ -6,7 +6,6 @@ use(chaiAsPromised);
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
-import {sleep} from '../TestingUtils';
 import {IDatabase} from '../../src/database/IDatabase';
 
 export interface ITestDatabase extends IDatabase {
@@ -61,8 +60,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       Game.newInstance('game-id-2323', [player], player);
       await db.saveGamePromise;
 
-      db.cleanSaves(game.id);
-      sleep(500);
+      await db.cleanSaves(game.id);
 
       const allGames = await db.getGames();
       expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
@@ -94,9 +92,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
       expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-      db.cleanSaves(game.id);
-
-      await sleep(400);
+      await db.cleanSaves(game.id);
 
       const saveIds = await db.getSaveIds(game.id);
       expect(saveIds).has.members([0, 3]);

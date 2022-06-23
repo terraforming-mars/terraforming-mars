@@ -84,7 +84,7 @@ class InMemoryDatabase implements IDatabase {
   deleteGameNbrSaves(_game_id: string, _rollbackCount: number): void {
     throw new Error('Method not implemented.');
   }
-  cleanSaves(_game_id: string): void {
+  cleanSaves(_game_id: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
   purgeUnfinishedGames(): void {

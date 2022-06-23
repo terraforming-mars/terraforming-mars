@@ -1,9 +1,10 @@
-import {DbLoadCallback, IDatabase} from './IDatabase';
+import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
-import {Pool, ClientConfig, QueryResult} from 'pg';
+import {Pool, ClientConfig} from 'pg';
+import {daysAgoToSeconds} from './utils.ts';
 
 export class PostgreSQL implements IDatabase {
   protected client: Pool;
@@ -142,13 +143,9 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getMaxSaveId(game_id: GameId, cb: DbLoadCallback<number>): void {
-    this.client.query('SELECT MAX(save_id) as save_id FROM games WHERE game_id = $1', [game_id], (err: Error | null, res: QueryResult<any>) => {
-      if (err) {
-        return cb(err ?? undefined, undefined);
-      }
-      cb(undefined, res.rows[0].save_id);
-    });
+  async getMaxSaveId(game_id: GameId): Promise<number> {
+    const res = await this.client.query('SELECT MAX(save_id) as save_id FROM games WHERE game_id = $1', [game_id]);
+    return res.rows[0].save_id;
   }
 
   throwIf(err: any, condition: string) {
@@ -158,43 +155,26 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  cleanSaves(game_id: GameId): void {
-    this.getMaxSaveId(game_id, ((err, save_id) => {
-      this.throwIf(err, 'cleanSaves0');
-      if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
-      // DELETE all saves except initial and last one
-      this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id], (err) => {
-        this.throwIf(err, 'cleanSaves1');
-        // Flag game as finished
-        this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [game_id], (err2) => {
-          this.throwIf(err2, 'cleanSaves2');
-          // Purge after setting the status as finished so it does not delete the game.
-          this.purgeUnfinishedGames();
-        });
-      });
-    }));
+  async cleanSaves(game_id: GameId): Promise<void> {
+    const maxSaveId = await this.getMaxSaveId(game_id);
+    // DELETE all saves except initial and last one
+    const delete1 = this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, maxSaveId]);
+    // Flag game as finished
+    const delete2 = this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [game_id]);
+    // Purge after setting the status as finished so it does not delete the game.
+    const delete3 = this.purgeUnfinishedGames();
+    await Promise.all([delete1, delete2, delete3]);
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
-  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): void {
-    const envDays = parseInt(maxGameDays || '');
-    const days = Number.isInteger(envDays) ? envDays : 10;
-    this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days])
-      .then((result) => {
-        result.rows.forEach((row) => {
-          console.log(row.game_id);
-        });
-      })
-      .then(() => {
-        this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
-          if (res) {
-            console.log(`Purged ${res.rowCount} rows`);
-          }
-          if (err) {
-            return console.warn(err.message);
-          }
-        });
-      });
+  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+    if (maxGameDays) {
+      const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
+      const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < $1', [dateToSeconds]);
+      const gameIds = selectResult.rows.map((row) => row.game_id);
+      const deleteResult = await this.client.query('DELETE FROM games WHERE game_id in ANY($1)', [gameIds]);
+      console.log(`Purged ${deleteResult.rowCount} rows`);
+    }
   }
 
   async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {

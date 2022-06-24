@@ -66,12 +66,28 @@ export const MOON_AWARDS: Array<IAward> = [
   new LunarMagnate(),
 ];
 
+export const AMAZONIS_PLANITIA_AWARDS: Array<IAward> = [
+  // new Curator(),
+  // new Engineer(),
+  // new Historian(),
+  // new Tourist(),
+  // new Zoologist(),
+];
+
 export const ARABIA_TERRA_AWARDS = [
   new CosmicSettler(),
   new Botanist(),
   new Coordinator(),
   new Zoologist(),
   new Manufacturer(),
+];
+
+export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
+  // new Biologist(),
+  // new Economizer(),
+  // new Politician(),
+  // new Urbanist(),
+  // new Warmonger(),
 ];
 
 export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
@@ -89,7 +105,9 @@ export const ALL_AWARDS: Array<IAward> = [
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
   ...MOON_AWARDS,
+  ...AMAZONIS_PLANITIA_AWARDS,
   ...ARABIA_TERRA_AWARDS,
+  ...TERRA_CIMMERIA_AWARDS,
   ...VASTITAS_BOREALIS_AWARDS,
 ];
 

@@ -535,6 +535,8 @@ export default (Vue as WithRefs<Refs>).extend({
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
         BoardName.ARABIA_TERRA,
+        BoardName.AMAZONIS,
+        BoardName.TERRA_CIMMERIA,
         BoardName.VASTITAS_BOREALIS,
         RandomBoardOption.ALL,
       ],
@@ -745,8 +747,12 @@ export default (Vue as WithRefs<Refs>).extend({
         return 'create-game-board-hexagon create-game-hellas';
       } else if (boardName === BoardName.ELYSIUM) {
         return 'create-game-board-hexagon create-game-elysium';
+      } else if (boardName === BoardName.AMAZONIS) {
+        return 'create-game-board-hexagon create-game-amazonis';
       } else if (boardName === BoardName.ARABIA_TERRA) {
         return 'create-game-board-hexagon create-game-arabia-terra';
+      } else if (boardName === BoardName.TERRA_CIMMERIA) {
+        return 'create-game-board-hexagon create-game-terra-cimmeria';
       } else if (boardName === BoardName.VASTITAS_BOREALIS) {
         return 'create-game-board-hexagon create-game-vastitas-borealis';
       } else {

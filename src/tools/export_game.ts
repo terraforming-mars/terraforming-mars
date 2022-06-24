@@ -58,7 +58,7 @@ function load(gameId: string) {
           db.getGameVersion(gameId, saveId)
             .then((serialized) => {
               console.log(`Storing version ${saveId}`);
-              localDb.saveSerializedGame(serialized!);
+              localDb.saveSerializedGame(serialized);
               writes++;
             }).catch((err) => {
               console.log(`failed to process saveId ${saveId}: ${err}`);

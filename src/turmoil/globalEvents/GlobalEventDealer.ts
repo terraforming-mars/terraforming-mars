@@ -145,7 +145,7 @@ export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalE
   const Factory = ALL_EVENTS.get(globalEventName);
 
   if (Factory !== undefined) return new Factory();
-  console.warn(`unable to find global event ${element}`);
+  console.warn(`unable to find global event ${globalEventName}`);
   return undefined;
 }
 

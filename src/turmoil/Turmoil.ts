@@ -252,7 +252,7 @@ export class Turmoil {
     this.setRulingParty(game);
 
     // 3.b - New dominant party
-    this.setNextPartyAsDominant(this.rulingParty!);
+    this.setNextPartyAsDominant(this.rulingParty);
 
     // 3.c - Fill the lobby
     this.lobby.forEach((playerId) => {
@@ -304,9 +304,11 @@ export class Turmoil {
 
     this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
 
-    const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
-    // Remove the party leader from the delegates array
-    this.rulingParty.delegates.splice(index, 1);
+    if (this.rulingParty.partyLeader !== undefined) {
+      const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader);
+      // Remove the party leader from the delegates array
+      this.rulingParty.delegates.splice(index, 1);
+    }
     // Fill the delegate reserve
     this.delegateReserve = this.delegateReserve.concat(this.rulingParty.delegates);
 

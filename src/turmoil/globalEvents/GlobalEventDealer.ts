@@ -214,12 +214,23 @@ export class GlobalEventDealer {
   }
 
   public static deserialize(d: SerializedGlobalEventDealer): GlobalEventDealer {
-    const deck = d.deck.map((element: GlobalEventName) => {
-      return getGlobalEventByName(element)!;
+    const deck: Array<IGlobalEvent> = [];
+    d.deck.forEach((element: GlobalEventName) => {
+      const globalEvent = getGlobalEventByName(element);
+      if (globalEvent !== undefined) {
+        deck.push(globalEvent);
+      } else {
+        console.warn(`unable to find global event ${element} for deck while deserializing`);
+      }
     });
-
-    const discardPile = d.discarded.map((element: GlobalEventName) => {
-      return getGlobalEventByName(element)!;
+    const discardPile: Array<IGlobalEvent> = [];
+    d.discarded.forEach((element: GlobalEventName) => {
+      const globalEvent = getGlobalEventByName(element);
+      if (globalEvent !== undefined) {
+        discardPile.push(globalEvent);
+      } else {
+        console.warn(`unable to find global event ${element} for discarded while deserializing`);
+      }
     });
     return new GlobalEventDealer(deck, discardPile);
   }

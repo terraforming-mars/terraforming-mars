@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
-import {ICard, isIActionCard} from '../ICard';
+import {IActionCard, ICard, isIActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
@@ -58,9 +58,9 @@ export class Viron extends Card implements ICard, ICorporationCard {
       'Take action',
       this.getActionCards(player),
       (foundCards: Array<ICard>) => {
-        const foundCard = foundCards[0];
-        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
-        return foundCard.action!(player);
+        const foundCard = foundCards[0] as IActionCard;
+        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard as ICard).card(this));
+        return foundCard.action(player);
       },
     );
   }

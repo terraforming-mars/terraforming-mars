@@ -603,10 +603,17 @@ export class Game {
 
   private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard) {
     player.pickedCorporationCard = corporationCard;
+    const pickedCorporationCards: Array<ICorporationCard> = [];
+    const players = this.getPlayersInGenerationOrder();
+    for (const p of players) {
+      if (p.pickedCorporationCard !== undefined) {
+        pickedCorporationCards.push(p.pickedCorporationCard);
+      }
+    }
     // if all players picked corporationCard
-    if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
-      for (const somePlayer of this.getPlayersInGenerationOrder()) {
-        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
+    if (players.length === pickedCorporationCards.length) {
+      for (let i = 0; i < players.length; i++) {
+        this.playCorporationCard(players[i], pickedCorporationCards[i]);
       }
     }
   }

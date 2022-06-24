@@ -2261,7 +2261,13 @@ export class Player {
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
-    player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
+    player.playedCards = [];
+    d.playedCards.forEach((element: SerializedCard) => {
+      const card = deserializeProjectCard(element, cardFinder);
+      if (card !== undefined) {
+        player.playedCards.push(card);
+      }
+    });
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
     player.timer = Timer.deserialize(d.timer);

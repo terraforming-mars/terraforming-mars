@@ -29,8 +29,11 @@ export function serializeProjectCard(c: IProjectCard): SerializedCard {
   return result;
 }
 
-export function deserializeProjectCard(element: SerializedCard, cardFinder: CardFinder): IProjectCard {
-  const card = cardFinder.getProjectCardByName(element.name)!;
+export function deserializeProjectCard(element: SerializedCard, cardFinder: CardFinder): IProjectCard | undefined {
+  const card = cardFinder.getProjectCardByName(element.name);
+  if (card === undefined) {
+    return;
+  }
   if (element.resourceCount !== undefined) {
     card.resourceCount = element.resourceCount;
   }

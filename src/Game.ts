@@ -1752,8 +1752,9 @@ export class Game {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
 
-    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft);
-    game.corporationDraftToNext = d.corporationDraftToNext;
+    // TODO(kberg): remove by 2022-09-01
+    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
+    game.corporationDraftToNext = d.corporationDraftToNext ?? false;
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

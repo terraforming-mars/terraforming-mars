@@ -145,6 +145,7 @@ export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalE
   const Factory = ALL_EVENTS.get(globalEventName);
 
   if (Factory !== undefined) return new Factory();
+  console.warn(`unable to find global event ${globalEventName}`);
   return undefined;
 }
 
@@ -214,12 +215,15 @@ export class GlobalEventDealer {
   }
 
   public static deserialize(d: SerializedGlobalEventDealer): GlobalEventDealer {
-    const deck = d.deck.map((element: GlobalEventName) => {
-      return getGlobalEventByName(element)!;
+    const deck: Array<IGlobalEvent> = [];
+    d.deck.forEach((element: GlobalEventName) => {
+      const globalEvent = getGlobalEventByName(element);
+      if (globalEvent !== undefined) deck.push(globalEvent);
     });
-
-    const discardPile = d.discarded.map((element: GlobalEventName) => {
-      return getGlobalEventByName(element)!;
+    const discardPile: Array<IGlobalEvent> = [];
+    d.discarded.forEach((element: GlobalEventName) => {
+      const globalEvent = getGlobalEventByName(element);
+      if (globalEvent !== undefined) discardPile.push(globalEvent);
     });
     return new GlobalEventDealer(deck, discardPile);
   }

@@ -276,6 +276,7 @@ describe('Player', function() {
         afterFirstAction: false,
         lastStoppedAt: 0,
       } as SerializedTimer,
+      totalDelegatesPlaced: 0,
       victoryPointsByGeneration: [],
     };
 

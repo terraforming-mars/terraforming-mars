@@ -6,6 +6,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('CupolaCity', function() {
   let card : CupolaCity; let player : Player; let game : Game;
@@ -31,8 +32,7 @@ describe('CupolaCity', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);

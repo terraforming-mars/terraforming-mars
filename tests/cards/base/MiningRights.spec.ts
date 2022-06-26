@@ -34,8 +34,7 @@ describe('MiningRights', () => {
   });
 
   it('Should play - titanium', () => {
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
@@ -51,8 +50,7 @@ describe('MiningRights', () => {
   });
 
   it('Should play - steel', () => {
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     const steelSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
     expect(steelSpace).is.not.undefined;
@@ -68,8 +66,7 @@ describe('MiningRights', () => {
   });
 
   it('Should play when space bonus is both steel and titanium', () => {
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces.find((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false) as ISpace;
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.TITANIUM];
 
@@ -88,8 +85,7 @@ describe('MiningRights', () => {
   });
 
   it('Should play when space bonus is both steel and titanium, plus Robotic Workforce works correctly', () => {
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces.find((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false) as ISpace;
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.TITANIUM];
 

@@ -7,7 +7,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Flooding', function() {
@@ -22,8 +22,7 @@ describe('Flooding', function() {
 
   it('Should play', function() {
     const oceans = game.board.getAvailableSpacesForOcean(player);
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     expect(action!.cb(oceans[0])).is.undefined;
     const adjacentSpaces = game.board.getAdjacentSpaces(oceans[0]);

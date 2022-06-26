@@ -950,6 +950,9 @@ export class Player {
         allTags.push(tag);
       });
     });
+    // Leavitt Station hook
+    if (this.scienceTagCount > 0) allTags.push(Tags.SCIENCE);
+
     for (const tags of allTags) {
       if (tags === Tags.WILD) {
         wildTagCount++;

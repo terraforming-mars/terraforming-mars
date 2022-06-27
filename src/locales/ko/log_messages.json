@@ -171,5 +171,16 @@
     "mars": "화성",
     "jovian": "목성",
 
-    "${0} card(s) were discarded": "${0}장의 카드가 버려짐"
+    "${0} card(s) were discarded": "${0}장의 카드가 버려짐",
+    "${0} drew ${1}, ${2}, ${3} and ${4}": "${0} 플레이어는 ${1}, ${2}, ${3}, ${4} 카드를 뽑음",
+
+    "${0} gained ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 획득",
+    "${0} spent ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 소비",
+
+    "${0} doubled resources on ${1} from ${2} to ${3}": "${0} 플레이어는 ${1} 카드 위의 자원을 ${2}개에서 ${3}개로 두 배 증가시킴",
+    "${0} linked ${1} with ${2}": "${0} 플레이어는 ${1} 카드를 ${2} 카드에 연결",
+
+    "${0} used Turmoil Scientists action": "${0} 플레이어는 과학당 행동을 수행",
+    "${0} used Turmoil Kelvinists action": "${0} 플레이어는 켈빈당 행동을 수행",
+    "${0} increased heat and energy production 1 step": "${0} 플레이어는 에너지 생산력과 열 생산력이 1만큼씩 상승"
 }

@@ -26,6 +26,8 @@ export interface SerializedGame {
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
+    corporationsDraftToNextPlayer: boolean;
+    corporationsToDraft: Array<CardName>;
     dealer: SerializedDealer;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
@@ -58,7 +60,5 @@ export interface SerializedGame {
     undoCount: number;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
-    corporationDraftToNext: boolean;
-    corporationsToDraft: Array<CardName>;
 }
 

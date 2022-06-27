@@ -16,6 +16,7 @@ export interface GameModel {
   aresData: IAresData | undefined;
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;
+  corporationsToDraft: Array<CardModel>;
   deckSize: number;
   gameAge: number;
   gameOptions: GameOptionsModel;
@@ -37,5 +38,4 @@ export interface GameModel {
   turmoil: TurmoilModel | undefined;
   undoCount: number;
   venusScaleLevel: number;
-  corporationsToDraft: Array<CardModel>;
 }

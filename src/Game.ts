@@ -136,10 +136,10 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   coloniesExtension: false,
   communityCardsOption: false,
   corporateEra: true,
+  corporationsDraft: false,
   customColoniesList: [],
   customCorporationsList: [],
   draftVariant: false,
-  corporationsDraft: false,
   escapeVelocityMode: false, // When true, escape velocity is enabled.
   escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
   escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
@@ -201,8 +201,8 @@ export class Game {
   // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
-  // Used for corporation global draft
-  private corporationDraftToNext: boolean = false;
+  // Used for corporation global draft: do we draft to next player or to player before
+  private corporationsDraftToNextPlayer: boolean = false;
   public corporationsToDraft: Array<ICorporationCard> = [];
 
   // Milestones and awards
@@ -418,14 +418,14 @@ export class Game {
         firstPlayer.runDraftCorporationPhase(firstPlayer.name, game.corporationsToDraft);
       }
     } else {
-      game.startGame();
+      game.gotoInitialPhase();
     }
 
     return game;
   }
 
   // Function use to properly start the game: with project draft or with research phase
-  public startGame(): void {
+  public gotoInitialPhase(): void {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
@@ -487,7 +487,7 @@ export class Game {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
-      corporationDraftToNext: this.corporationDraftToNext,
+      corporationsDraftToNextPlayer: this.corporationsDraftToNextPlayer,
       corporationsToDraft: this.corporationsToDraft.map((c) => c.name),
     };
     if (this.aresData !== undefined) {
@@ -990,8 +990,8 @@ export class Game {
     if (cards.length > 1) {
       if (this.draftRound % this.players.length === 0) {
         player.runDraftCorporationPhase(player.name, cards);
-        this.corporationDraftToNext = !this.corporationDraftToNext;
-      } else if (this.corporationDraftToNext) {
+        this.corporationsDraftToNextPlayer = !this.corporationsDraftToNextPlayer;
+      } else if (this.corporationsDraftToNextPlayer) {
         this.getPlayerAfter(player)!.runDraftCorporationPhase(this.getPlayerAfter(player)!.name, cards);
       } else {
         this.getPlayerBefore(player)!.runDraftCorporationPhase(this.getPlayerBefore(player)!.name, cards);
@@ -1001,7 +1001,7 @@ export class Game {
     }
 
     // Push last card to last player depending of the way we are drafting
-    if (this.corporationDraftToNext) {
+    if (this.corporationsDraftToNextPlayer) {
       this.getPlayerAfter(player)!.draftedCorporations.push(...cards);
     } else {
       this.getPlayerBefore(player)!.draftedCorporations.push(...cards);
@@ -1012,7 +1012,7 @@ export class Game {
     // Reset value to guarantee no impact on eventual futur drafts (projects or preludes)
     this.initialDraftIteration = 1;
     this.draftRound = 1;
-    this.startGame();
+    this.gotoInitialPhase();
   }
 
   private getDraftCardsFrom(player: Player): PlayerId {
@@ -1754,7 +1754,7 @@ export class Game {
 
     // TODO(kberg): remove by 2022-09-01
     game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
-    game.corporationDraftToNext = d.corporationDraftToNext ?? false;
+    game.corporationsDraftToNextPlayer = d.corporationsDraftToNextPlayer ?? false;
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

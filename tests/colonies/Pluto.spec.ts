@@ -38,7 +38,7 @@ describe('Pluto', function() {
 
     runAllActions(game);
 
-    const input = player.getWaitingFor()! as SelectCard<IProjectCard>;
+    const input = player.getWaitingFor() as SelectCard<IProjectCard>;
     expect(input).to.be.an.instanceof(SelectCard);
     input.cb([input.cards[0]]); // Discard a card
 

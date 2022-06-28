@@ -9,7 +9,7 @@ import {Board} from '../../src/boards/Board';
 import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {Random} from '../../src/Random';
+import {SeededRandom} from '../../src/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/Game';
 import {MultiSet} from 'mnemonist';
 
@@ -17,7 +17,7 @@ describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
 
   beforeEach(function() {
-    board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
+    board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
@@ -305,7 +305,7 @@ describe('Board', function() {
         ...DEFAULT_GAME_OPTIONS,
         shuffleMapOption: true,
       },
-      new Random(seed));
+      new SeededRandom(seed));
       for (const space of board.spaces) {
         if (space.spaceType === undefined) {
           console.log(`Bad seed ${seed}`);

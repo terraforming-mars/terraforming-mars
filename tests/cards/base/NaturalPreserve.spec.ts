@@ -6,6 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('NaturalPreserve', () => {
   let card : NaturalPreserve; let player : TestPlayer; let game : Game;
@@ -38,10 +39,7 @@ describe('NaturalPreserve', () => {
 
   it('Should play', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = card.play(player);
-    expect(action).is.not.undefined;
-    expect(action).instanceOf(SelectSpace);
-
+    const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

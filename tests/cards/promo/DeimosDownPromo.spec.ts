@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {DeimosDownPromo} from '../../../src/cards/promo/DeimosDownPromo';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -36,7 +37,7 @@ describe('DeimosDownPromo', function() {
     expect(player.game.deferredActions).has.lengthOf(1);
 
     // Choose Remove 5 plants option
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb([player2]);
 
     expect(player2.plants).to.eq(0);

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {fakeCard, runAllActions} from '../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../TestingUtils';
 import {Game} from '../../src/Game';
 import {CommunicationBoom} from '../../src/turmoil/globalEvents/CommunicationBoom';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
@@ -63,8 +63,7 @@ describe('CommunicationBoom', function() {
     //
     // In the meantime, it also works because the AndOptions in AddResourcesToCards will reject
     // the wrong amount.
-    expect(player.getWaitingFor()).instanceOf(AndOptions);
-    const playerOptions = player.getWaitingFor() as AndOptions;
+    const playerOptions = cast(player.getWaitingFor(), AndOptions);
     expect(playerOptions.options).has.length(2);
     expect(playerOptions.options[0].title).contains(b.name);
     playerOptions.options[0].cb(1);
@@ -74,7 +73,7 @@ describe('CommunicationBoom', function() {
     runAllActions(game);
 
     expect(player.getWaitingFor()).instanceOf(AndOptions);
-    const playerOptions2 = player2.getWaitingFor() as AndOptions;
+    const playerOptions2 = cast(player2.getWaitingFor(), AndOptions);
     expect(playerOptions2.options).has.length(2);
     expect(playerOptions2.options[0].title).contains(e.name);
     playerOptions2.options[0].cb(3);

@@ -26,8 +26,7 @@ describe('DeclareCloneTag', function() {
   it('sanity', function() {
     const action = new DeclareCloneTag(player, card, (t) => tag = t);
 
-    const options = action.execute();
-    expect(options).instanceOf(OrOptions);
+    const options = cast(action.execute(), OrOptions);
     const orOptions = options.options as Array<SelectOption>;
 
     expect(orOptions).has.length(3);

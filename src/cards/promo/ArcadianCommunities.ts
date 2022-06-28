@@ -48,14 +48,27 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     );
   }
 
+  public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
+    const board = player.game.board;
+    const candidateSpaces = board.getAvailableSpacesOnLand(player);
+    const spaces = candidateSpaces.filter((space) => {
+      // Exclude spaces that already have a player marker.
+      if (space.player !== undefined) return false;
+      const adjacentSpaces = board.getAdjacentSpaces(space);
+      return adjacentSpaces.find((adj) => adj.player === player) !== undefined;
+    });
+      // Remove duplicates
+    return spaces.filter((space, index) => spaces.indexOf(space) === index);
+  }
+
   public canAct(player: Player): boolean {
-    return player.game.board.getAvailableSpacesForMarker(player).length > 0;
+    return this.getAvailableSpacesForMarker(player).length > 0;
   }
 
   public action(player: Player) {
     return new SelectSpace(
       'Select space for claim',
-      player.game.board.getAvailableSpacesForMarker(player),
+      this.getAvailableSpacesForMarker(player),
       (foundSpace: ISpace) => {
         foundSpace.player = player;
         return undefined;

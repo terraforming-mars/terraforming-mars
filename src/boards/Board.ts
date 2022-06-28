@@ -161,17 +161,6 @@ export abstract class Board {
     );
   }
 
-  public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
-    const spaces = this.getAvailableSpacesOnLand(player)
-      .filter(
-        (space) => this.getAdjacentSpaces(space).find(
-          (adj) => adj.player === player,
-        ) !== undefined,
-      );
-      // Remove duplicates
-    return spaces.filter((space, index) => spaces.indexOf(space) === index);
-  }
-
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
     let spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Spaces next to Red City are always unavialable.
@@ -217,6 +206,15 @@ export abstract class Board {
     return landSpaces;
   }
 
+  // What's the difference between this and getAvailableSpacesOnLand?
+  public getNonReservedLandSpaces(): Array<ISpace> {
+    return this.spaces.filter((space) => {
+      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
+        (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
+        space.player === undefined;
+    });
+  }
+
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.
   // If |direction| is 1, count from the top left. If -1, count from the other end of the map.
@@ -241,14 +239,6 @@ export abstract class Board {
       idx -= spaces.length;
     }
     return spaces[idx];
-  }
-
-  public getNonReservedLandSpaces(): Array<ISpace> {
-    return this.spaces.filter((space) => {
-      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
-        (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
-        space.player === undefined;
-    });
   }
 
   public canPlaceTile(space: ISpace): boolean {

@@ -8,6 +8,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('Vitor', function() {
   let card : Vitor; let player : Player; let game : Game;
@@ -26,9 +27,8 @@ describe('Vitor', function() {
   });
 
   it('Has initial action', function() {
-    const action = card.initialAction(player);
-    expect(action).instanceOf(OrOptions);
-    (action as OrOptions).options[0].cb();
+    const action = cast(card.initialAction(player), OrOptions);
+    action.options[0].cb();
     expect(game.hasBeenFunded(game.awards[0])).is.true;
   });
 

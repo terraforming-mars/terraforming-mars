@@ -76,9 +76,8 @@ describe('MiningRights', () => {
 
     const deferredAction = game.deferredActions.pop();
 
-    const orOptions = deferredAction?.execute() as OrOptions;
+    const orOptions = cast(deferredAction?.execute(), OrOptions);
 
-    expect(orOptions instanceof OrOptions).is.true;
     orOptions.options[0].cb();
     expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
     expect(card.bonusResource).deep.eq([Resources.STEEL]);
@@ -92,7 +91,7 @@ describe('MiningRights', () => {
     action.cb(space);
 
     const deferredAction = game.deferredActions.pop();
-    const orOptions = deferredAction?.execute() as OrOptions;
+    const orOptions = cast(deferredAction?.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
 

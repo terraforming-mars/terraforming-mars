@@ -3,7 +3,7 @@ import {RobinHaulings} from '../../../src/cards/pathfinders/RobinHaulings';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {fakeCard} from '../../TestingUtils';
+import {cast, fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
@@ -60,11 +60,7 @@ describe('RobinHaulings', function() {
   });
 
   it('action, venus', () => {
-    const action = card.action(player);
-
-    expect(action).instanceOf(OrOptions);
-
-    const orOptions = action as OrOptions;
+    const orOptions = cast(card.action(player), OrOptions);
 
     expect(orOptions.options).has.length(2);
     expect(game.getVenusScaleLevel()).eq(0);
@@ -77,11 +73,7 @@ describe('RobinHaulings', function() {
   });
 
   it('action, oxygen', () => {
-    const action = card.action(player);
-
-    expect(action).instanceOf(OrOptions);
-
-    const orOptions = action as OrOptions;
+    const orOptions = cast(card.action(player), OrOptions);
 
     expect(orOptions.options).has.length(2);
     expect(game.getOxygenLevel()).eq(0);

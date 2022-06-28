@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {DeimosDown} from '../../../src/cards/base/DeimosDown';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -20,7 +21,7 @@ describe('DeimosDown', function() {
     card.play(player);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
 
     expect(game.getTemperature()).to.eq(-24);

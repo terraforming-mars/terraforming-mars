@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {RedSpotObservatory} from '../../../src/cards/colonies/RedSpotObservatory';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -32,12 +33,11 @@ describe('RedSpotObservatory', function() {
     expect(card.canAct()).is.true;
 
     player.addResourceTo(card, 3);
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
-        orOptions!.options[0].cb();
+    const orOptions = cast(card.action(player), OrOptions);
+    orOptions.options[0].cb();
 
-        expect(player.cardsInHand).has.lengthOf(1);
-        expect(card.resourceCount).to.eq(2);
-        expect(card.getVictoryPoints()).to.eq(2);
+    expect(player.cardsInHand).has.lengthOf(1);
+    expect(card.resourceCount).to.eq(2);
+    expect(card.getVictoryPoints()).to.eq(2);
   });
 });

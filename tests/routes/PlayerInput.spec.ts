@@ -8,6 +8,7 @@ import {TestPlayers} from '../TestPlayers';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {UndoActionOption} from '../../src/inputs/UndoActionOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {cast} from '../TestingUtils';
 
 describe('PlayerInput', function() {
   let scaffolding: RouteTestScaffolding;
@@ -35,7 +36,7 @@ describe('PlayerInput', function() {
     scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
-    const options = player.getWaitingFor() as OrOptions;
+    const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.resolve(undo);
 
@@ -60,7 +61,7 @@ describe('PlayerInput', function() {
     scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
-    const options = player.getWaitingFor() as OrOptions;
+    const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.reject(new Error('error'));
 

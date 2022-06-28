@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {TestPlayer} from 'tests/TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {setCustomGameOptions} from '../../TestingUtils';
 

@@ -9,6 +9,7 @@ import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
   let card : AsteroidRights; let player : Player;
@@ -35,7 +36,7 @@ describe('AsteroidRights', function() {
 
   it('Should act - can auto spend asteroid resource', function() {
     player.megaCredits = 0;
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
 
     // Gain 1 M€ prod
     action.options[1].cb();
@@ -72,7 +73,7 @@ describe('AsteroidRights', function() {
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
     expect(action).instanceOf(OrOptions);
     expect(action.options[0] instanceof SelectOption).is.true;
     expect(action.options[1] instanceof SelectOption).is.true;

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Birds} from '../../../src/cards/base/Birds';
 import {Predators} from '../../../src/cards/base/Predators';
 import {Virus} from '../../../src/cards/base/Virus';
@@ -25,8 +26,7 @@ describe('Virus', function() {
     player.addResourceTo(predators);
     player.plants = 5;
 
-    const orOptions = card.play(player2) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.play(player2), OrOptions);
 
     orOptions.options[0].cb([player.playedCards[0]]);
     expect(birds.resourceCount).to.eq(0);

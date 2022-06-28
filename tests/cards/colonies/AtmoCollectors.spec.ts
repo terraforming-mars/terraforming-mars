@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {AtmoCollectors} from '../../../src/cards/colonies/AtmoCollectors';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -26,9 +27,7 @@ describe('AtmoCollectors', function() {
     expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions).is.not.undefined;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
 
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);

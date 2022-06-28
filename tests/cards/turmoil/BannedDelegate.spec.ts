@@ -6,7 +6,7 @@ import {SelectDelegate} from '../../../src/inputs/SelectDelegate';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Banned Delegate', function() {
@@ -38,11 +38,12 @@ describe('Banned Delegate', function() {
 
     const result = card.play(player);
 
+    // TODO(kberg): this shouldn't possibly return both. Does it?
     if (result instanceof SelectDelegate) {
-      const selectDelegate = result as SelectDelegate;
+      const selectDelegate = cast(result, SelectDelegate);
       selectDelegate.cb(result.players[0]);
     } else {
-      const orOptions = result as OrOptions;
+      const orOptions = cast(result, OrOptions);
       orOptions.options.forEach((option) => option.cb((option as SelectDelegate).players[0]));
     }
 

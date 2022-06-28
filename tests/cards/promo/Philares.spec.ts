@@ -12,6 +12,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {cast} from '../../TestingUtils';
 
 describe('Philares', () => {
   let card : Philares;
@@ -173,7 +174,7 @@ describe('Philares', () => {
 
     // First player final greenery placement, done adjacent to one of Philares' tiles
     game.gotoFinalGreeneryPlacement();
-    const firstPlayerGreeneryPlacement = otherPlayer.getWaitingFor() as OrOptions;
+    const firstPlayerGreeneryPlacement = cast(otherPlayer.getWaitingFor(), OrOptions);
 
     // Option 1 is 'Don't place a greenery'
     // Don't place a greenery using the callback; add it directly via game.addGreenery() instead
@@ -192,7 +193,7 @@ describe('Philares', () => {
     (philaresPlayer as any).waitingFor = undefined;
     (philaresPlayer as any).waitingForCb = undefined;
     game.gotoFinalGreeneryPlacement();
-    const finalGreeneryPlacement = philaresPlayer.getWaitingFor() as OrOptions;
+    const finalGreeneryPlacement = cast(philaresPlayer.getWaitingFor(), OrOptions);
     expect(game.phase).eq(Phase.RESEARCH);
     finalGreeneryPlacement.options[1].cb();
     expect(game.phase).eq(Phase.END);

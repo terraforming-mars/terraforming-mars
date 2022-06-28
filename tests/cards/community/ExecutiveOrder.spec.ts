@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Game, GameOptions} from '../../../src/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -26,7 +26,7 @@ describe('ExecutiveOrder', function() {
     expect(game.deferredActions).has.lengthOf(2);
 
     const turmoil = game.turmoil!;
-    const selectGlobalEvent = game.deferredActions.pop()!.execute() as OrOptions;
+    const selectGlobalEvent = cast(game.deferredActions.pop()!.execute(), OrOptions);
     selectGlobalEvent.options[0].cb();
     expect(turmoil.currentGlobalEvent).is.not.undefined;
 

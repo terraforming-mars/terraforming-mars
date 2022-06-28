@@ -8,7 +8,7 @@ import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {maxOutOceans, runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setCustomGameOptions} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/turmoil/parties/Reds';
@@ -177,7 +177,7 @@ describe('Turmoil', function() {
     game.phase = Phase.SOLAR;
 
     player.worldGovernmentTerraforming();
-    const action = player.getWaitingFor() as OrOptions;
+    const action = cast(player.getWaitingFor(), OrOptions);
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
     const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 

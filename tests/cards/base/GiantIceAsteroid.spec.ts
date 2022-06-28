@@ -5,6 +5,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('GiantIceAsteroid', function() {
   let card : GiantIceAsteroid; let player : Player; let player2 : Player; let player3 : Player; let game : Game;
@@ -28,7 +29,7 @@ describe('GiantIceAsteroid', function() {
     const secondOcean = game.deferredActions.pop()!.execute() as SelectSpace;
     secondOcean.cb(secondOcean.availableSpaces[1]);
 
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[0].cb();

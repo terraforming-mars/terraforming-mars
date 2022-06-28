@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ImpactorSwarm} from '../../../src/cards/colonies/ImpactorSwarm';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -26,7 +27,7 @@ describe('ImpactorSwarm', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(0);
     expect(player.heat).to.eq(12);

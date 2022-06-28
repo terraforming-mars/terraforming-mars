@@ -22,7 +22,7 @@ describe('Banned Delegate', function() {
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     turmoil.chairman = player2.id;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
@@ -38,7 +38,7 @@ describe('Banned Delegate', function() {
 
     const result = card.play(player);
 
-    // TODO(kberg): this shouldn't possibly return both. Does it?
+    // TODO(kberg): This returns both because the Global Event deck is always randomized.
     if (result instanceof SelectDelegate) {
       const selectDelegate = cast(result, SelectDelegate);
       selectDelegate.cb(result.players[0]);

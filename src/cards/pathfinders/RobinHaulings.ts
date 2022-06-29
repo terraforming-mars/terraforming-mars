@@ -27,7 +27,7 @@ export class RobinHaulings extends Card implements ICorporationCard {
         description: 'You start with 39 M€',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(39).br;
-          b.effect('Whenever you play a card with a Venus tag add 1 floater to any card.', (eb) => {
+          b.effect('Whenever you play a card with a Venus tag add 1 floater to ANY card.', (eb) => {
             eb.venus(1, {played}).startEffect.floaters(1).asterix();
           });
           b.br;

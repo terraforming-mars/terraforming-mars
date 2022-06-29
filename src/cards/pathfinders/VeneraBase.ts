@@ -28,7 +28,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: 'Pf67',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 floater to any Venus card', (ab) => ab.empty().startAction.floaters(1, {secondaryTag: Tags.VENUS}));
+          b.action('Add 1 floater to ANY Venus card', (ab) => ab.empty().startAction.floaters(1, {secondaryTag: Tags.VENUS}).asterix());
           b.br;
           b.production((pb) => pb.megacredits(3)).nbsp.city({secondaryTag: Tags.SPACE}).asterix();
           b.br;

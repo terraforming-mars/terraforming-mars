@@ -28,7 +28,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
       metadata: {
         description: 'Requires 1 science tag. Increase your plant production 1 step. ' +
-                  'Add up to 2 microbes to any card. ' +
+                  'Add up to 2 microbes to ANY card. ' +
                   'Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.',
         cardNumber: 'A02',
         renderData: CardRenderer.builder((b) => {

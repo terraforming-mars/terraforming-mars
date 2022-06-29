@@ -28,13 +28,13 @@ export class SecretLabs extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf26',
         renderData: CardRenderer.builder((b) => {
-          b.oceans(1).microbes(2).or().temperature(1).br;
-          b.plants(3, {digit}).or().oxygen(1).floaters(2).br;
+          b.oceans(1).microbes(2, {digit}).asterix().or().temperature(1).br;
+          b.plants(3, {digit}).or().oxygen(1).floaters(2, {digit}).asterix().br;
         }),
         description: 'Requires 1 Science tag and 1 Jovian tag. ' +
-          'Place an ocean tile. Add 2 microbes on any card. ' +
+          'Place an ocean tile. Add 2 microbes to ANY card. ' +
           'OR Raise temperature 1 step. Gain 3 plants. ' +
-          'OR Raise oxygen level 1 step. Add 2 floaters on any card.',
+          'OR Raise oxygen level 1 step. Add 2 floaters to ANY card.',
       },
     });
   }
@@ -51,7 +51,7 @@ export class SecretLabs extends Card implements IProjectCard {
     const options = new OrOptions();
 
     if (this.canAfford(player, {oceans: 1}, 0)) {
-      options.options.push(new SelectOption('Place an ocean tile. Add 2 microbes on any card.', 'select', () => {
+      options.options.push(new SelectOption('Place an ocean tile. Add 2 microbes to ANY card.', 'select', () => {
         player.game.defer(new PlaceOceanTile(player));
         player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
         return undefined;
@@ -65,7 +65,7 @@ export class SecretLabs extends Card implements IProjectCard {
       }));
     }
     if (this.canAfford(player, {oxygen: 1}, 0)) {
-      options.options.push(new SelectOption('Raise oxygen level 1 step. Add 2 floaters on any card.', 'select', () => {
+      options.options.push(new SelectOption('Raise oxygen level 1 step. Add 2 floaters to ANY card.', 'select', () => {
         player.game.increaseOxygenLevel(player, 1);
         player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
         return undefined;

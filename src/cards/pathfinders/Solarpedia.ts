@@ -24,12 +24,12 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: 'Pf54',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 2 data to any card.', (ab) => {
+          b.action('Add 2 data to ANY card.', (ab) => {
             ab.empty().startAction.data({amount: 2}).asterix();
           }).br;
           b.data({amount: 2}).asterix();
         }),
-        description: 'Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to any card. 1 VP for every 6 data resources here.',
+        description: 'Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.',
       },
     });
   }

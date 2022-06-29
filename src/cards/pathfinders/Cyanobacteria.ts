@@ -23,7 +23,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
           b.oxygen(1).br;
           b.microbes(1).asterix().slash().oceans(1).br;
         }),
-        description: 'Raise the oxygen level 1%. For every ocean tile, place a microbe on any card.',
+        description: 'Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.',
       },
     });
   }

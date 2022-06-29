@@ -1,4 +1,4 @@
-!#/bin/sh
+#!/bin/sh
 
 [ "$#" -eq 2 ] || die "parameters required: [app] [player id | spectator id | game id]"
 APP=$1

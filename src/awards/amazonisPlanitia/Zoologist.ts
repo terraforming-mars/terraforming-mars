@@ -10,7 +10,7 @@ export class Zoologist2 implements IAward {
     const resourceTypes = [CardResource.ANIMAL, CardResource.MICROBE];
     let score: number = 0;
 
-    player.getCardsWithResources().filter((card) => resourceTypes.includes(card.resourceType!)).forEach((card) => {
+    player.getCardsWithResources().filter((card) => card.resourceType !== undefined && resourceTypes.includes(card.resourceType)).forEach((card) => {
       score += card.resourceCount;
     });
 

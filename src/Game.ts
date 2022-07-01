@@ -601,19 +601,14 @@ export class Game {
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
-  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard) {
+  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard): void {
     player.pickedCorporationCard = corporationCard;
-    const pickedCorporationCards: Array<ICorporationCard> = [];
-    const players = this.getPlayersInGenerationOrder();
-    for (const p of players) {
-      if (p.pickedCorporationCard !== undefined) {
-        pickedCorporationCards.push(p.pickedCorporationCard);
-      }
-    }
-    // if all players picked corporationCard
-    if (players.length === pickedCorporationCards.length) {
-      for (let i = 0; i < players.length; i++) {
-        this.playCorporationCard(players[i], pickedCorporationCards[i]);
+    if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
+      for (const somePlayer of this.getPlayersInGenerationOrder()) {
+        if (somePlayer.pickedCorporationCard === undefined) {
+          throw new Error(`pickedCorporationCard is not defined for ${somePlayer.id}`);
+        }
+        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard);
       }
     }
   }

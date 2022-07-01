@@ -32,8 +32,8 @@ export class Viron extends Card implements ICard, ICorporationCard {
     });
   }
 
-  private getActionCards(player: Player):Array<ICard> {
-    const result: Array<ICard> = [];
+  private getActionCards(player: Player): Array<IActionCard & ICard> {
+    const result: Array<IActionCard & ICard> = [];
     for (const playedCard of player.playedCards) {
       if (isIActionCard(playedCard) &&
                     player.getActionsThisGeneration().has(playedCard.name) &&
@@ -57,9 +57,9 @@ export class Viron extends Card implements ICard, ICorporationCard {
       'Perform again an action from a played card',
       'Take action',
       this.getActionCards(player),
-      (foundCards: Array<ICard>) => {
-        const foundCard = foundCards[0] as IActionCard;
-        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard as ICard).card(this));
+      (foundCards: Array<IActionCard & ICard>) => {
+        const foundCard = foundCards[0];
+        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
         return foundCard.action(player);
       },
     );

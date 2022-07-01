@@ -24,8 +24,8 @@ export class ProjectInspection extends Card implements IProjectCard {
       },
     });
   }
-  private getActionCards(player: Player): Array<ICard> {
-    const result: Array<ICard> = [];
+  private getActionCards(player: Player): Array<IActionCard & ICard> {
+    const result: Array<IActionCard & ICard> = [];
 
     if (player.corporationCard !== undefined && player.getActionsThisGeneration().has(player.corporationCard.name)) {
       if (player.corporationCard.name !== CardName.PLAYWRIGHTS || (player.corporationCard as Playwrights).getCheckLoops() < 2) {
@@ -52,13 +52,13 @@ export class ProjectInspection extends Card implements IProjectCard {
     if (actionCards.length === 0 ) {
       return undefined;
     }
-    return new SelectCard(
+    return new SelectCard<IActionCard & ICard>(
       'Perform an action from a played card again',
       'Take action',
       actionCards,
-      (foundCards: Array<ICard>) => {
-        const foundCard = foundCards[0] as IActionCard;
-        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard as ICard).card(this));
+      (foundCards: Array<IActionCard & ICard>) => {
+        const foundCard = foundCards[0];
+        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
         return foundCard.action(player);
       },
     );

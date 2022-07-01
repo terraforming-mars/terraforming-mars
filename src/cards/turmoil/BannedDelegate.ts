@@ -40,6 +40,8 @@ export class BannedDelegate extends Card implements IProjectCard {
         const delegates = party.delegates.slice();
         if (party.partyLeader !== undefined) {
           delegates.splice(party.delegates.indexOf(party.partyLeader), 1);
+        } else {
+          throw new Error(`partyLeader not defined for ${player.game.id}`);
         }
         const playersId = Array.from(new Set<PlayerId | NeutralPlayer>(delegates));
         const players: Array<Player | NeutralPlayer> = [];

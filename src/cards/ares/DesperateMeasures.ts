@@ -41,7 +41,7 @@ export class DesperateMeasures extends Card implements IProjectCard {
   public play(player: Player) {
     return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: ISpace) => {
       if (space.tile === undefined) {
-        throw new Error('selected space without tile for DesperateMeasures');
+        throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);
       }
       space.tile.protectedHazard = true;
       const tileType = space.tile.tileType;

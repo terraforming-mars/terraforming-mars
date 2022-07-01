@@ -25,7 +25,7 @@ import {ICardDiscount} from '../common/cards/Types';
 import {IVictoryPoints} from '../common/cards/IVictoryPoints';
 
 export interface IActionCard {
-    action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
+    action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<IActionCard & ICard> | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct: (player: Player) => boolean;
 }
 

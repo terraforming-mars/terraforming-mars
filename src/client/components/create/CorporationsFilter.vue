@@ -96,7 +96,7 @@ export default Vue.extend({
       customCorporationsList: false,
       selectedCorporations: [
         // A bit sloppy since map is just above, but it will do.
-        ...corpCardNames('base')!,
+        ...corpCardNames('base'),
         ...this.corporateEra ? corpCardNames('corpera') : [],
         ...this.prelude ? corpCardNames('prelude') : [],
         ...this.venusNext ? corpCardNames('venus') : [],

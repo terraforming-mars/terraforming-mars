@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {SulphurEatingBacteria} from '../../../src/cards/venusNext/SulphurEatingBacteria';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -30,7 +31,7 @@ describe('SulphurEatingBacteria', function() {
     player.playedCards.push(card);
     player.addResourceTo(card, 5);
 
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
     action.options[1].cb(3);
     expect(player.megaCredits).to.eq(9);
     expect(card.resourceCount).to.eq(2);

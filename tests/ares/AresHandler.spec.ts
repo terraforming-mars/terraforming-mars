@@ -17,7 +17,7 @@ import {Phase} from '../../src/common/Phase';
 import {TestPlayers} from '../TestPlayers';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
-import {Random} from '../../src/Random';
+import {SeededRandom} from '../../src/Random';
 import {Units} from '../../src/common/Units';
 import {addOcean, cast, runAllActions} from '../TestingUtils';
 import {Ants} from '../../src/cards/base/Ants';
@@ -383,7 +383,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
+    game.board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

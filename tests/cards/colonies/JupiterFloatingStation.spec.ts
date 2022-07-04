@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {JupiterFloatingStation} from '../../../src/cards/colonies/JupiterFloatingStation';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -25,9 +26,8 @@ describe('JupiterFloatingStation', function() {
     expect(card.canAct()).is.true;
 
     player.addResourceTo(card, 7);
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
-        orOptions!.options[1].cb();
-        expect(player.megaCredits).to.eq(4);
+    const orOptions = cast(card.action(player), OrOptions);
+    orOptions.options[1].cb();
+    expect(player.megaCredits).to.eq(4);
   });
 });

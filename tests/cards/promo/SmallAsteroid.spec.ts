@@ -5,6 +5,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('SmallAsteroid', function() {
   let card : SmallAsteroid; let player : Player; let player2 : Player;
@@ -21,7 +22,7 @@ describe('SmallAsteroid', function() {
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[1].cb(); // do nothing
     expect(player2.plants).to.eq(3);
 
@@ -46,7 +47,7 @@ describe('SmallAsteroid', function() {
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[2].cb(); // do nothing

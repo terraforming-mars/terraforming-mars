@@ -142,8 +142,10 @@ export class Localfilesystem implements IDatabase {
       this.getGame(gameId, (err, serializedGame) => {
         if (err) {
           reject(err);
+        } else if (serializedGame === undefined) {
+          reject(new Error('game not found'));
         } else {
-          resolve(serializedGame!);
+          resolve(serializedGame);
         }
       });
     });

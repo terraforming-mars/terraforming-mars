@@ -5,6 +5,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('CometForVenus', function() {
   it('Should play', function() {
@@ -17,11 +18,11 @@ describe('CometForVenus', function() {
     player2.megaCredits = 10;
     player2.playedCards.push(card2);
 
-    const action = card.play(player) as OrOptions;
+    const action = cast(card.play(player), OrOptions);
 
     expect(action.options).has.lengthOf(2);
 
-    const subActionSelectPlayer: SelectPlayer = action!.options[0] as SelectPlayer;
+    const subActionSelectPlayer= cast(action.options[0], SelectPlayer);
 
     expect(subActionSelectPlayer.players).has.lengthOf(1);
     expect(subActionSelectPlayer.players[0]).to.eq(player2);

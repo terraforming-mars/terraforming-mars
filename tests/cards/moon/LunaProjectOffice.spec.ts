@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {finishGeneration, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaProjectOffice} from '../../../src/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
@@ -178,18 +178,6 @@ describe('LunaProjectOffice', () => {
     expect(getWaitingFor(redPlayer).cards).has.length(4);
   });
 });
-
-function finishGeneration(game: Game): void {
-  const priorGeneration = game.generation;
-  game.getPlayersInGenerationOrder().forEach((player) => {
-    game.playerHasPassed(player);
-    game.playerIsFinishedTakingActions();
-  });
-  const currentGeneration = game.generation;
-  if (currentGeneration !== priorGeneration + 1) {
-    console.log('uh oh');
-  }
-}
 
 function getWaitingFor(player: Player): SelectCard<IProjectCard> {
   const action = player.getWaitingFor();

@@ -63,7 +63,7 @@ import {MindSetMars} from './MindSetMars';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
 import {NobelLabs} from './NobelLabs';
-// import {Odyssey} from './Odyssey';
+import {Odyssey} from './Odyssey';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
 import {OumuamuaTypeObjectSurvey} from './OumuamuaTypeObjectSurvey';
 import {OzoneGenerators} from './OzoneGenerators';
@@ -201,7 +201,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.AURORAI, Factory: Aurorai, compatibility: 'pathfinders'},
     {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus, compatibility: 'colonies'},
     {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: ['venus', 'pathfinders']},
-    // {cardName: CardName.ODYSSEY, Factory: Odyssey},
+    {cardName: CardName.ODYSSEY, Factory: Odyssey},
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
     {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: 'turmoil'},

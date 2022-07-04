@@ -6,6 +6,7 @@ import {SelectColony} from '../../../src/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
+import {cast} from '../../TestingUtils';
 
 describe('VitalColony', function() {
   let card: VitalColony;
@@ -31,11 +32,7 @@ describe('VitalColony', function() {
   it('Should play', function() {
     card.play(player);
 
-    const buildColonyAction = game.deferredActions.pop()!.execute();
-
-    expect(buildColonyAction).is.instanceOf(SelectColony);
-
-    const selectColony = buildColonyAction as SelectColony;
+    const selectColony = cast(game.deferredActions.pop()!.execute(), SelectColony);
     const colonyName = selectColony.colonies[0].name as ColonyName;
 
     expect(colonyName).eq(ColonyName.GANYMEDE);

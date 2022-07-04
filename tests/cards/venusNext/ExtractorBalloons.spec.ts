@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ExtractorBalloons} from '../../../src/cards/venusNext/ExtractorBalloons';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -24,11 +25,10 @@ describe('ExtractorBalloons', function() {
     card.play(player);
     expect(card.resourceCount).to.eq(3);
 
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
 
-        orOptions!.options[0].cb();
-        expect(card.resourceCount).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    orOptions!.options[0].cb();
+    expect(card.resourceCount).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

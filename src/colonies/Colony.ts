@@ -161,7 +161,7 @@ export abstract class Colony implements IColony {
     }
 
     public giveColonyBonus(player: Player, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-      return this.giveBonus(player, this.metadata.colonyBonusType!, this.metadata.colonyBonusQuantity!, this.metadata.colonyBonusResource, isGiveColonyBonus);
+      return this.giveBonus(player, this.metadata.colonyBonusType, this.metadata.colonyBonusQuantity, this.metadata.colonyBonusResource, isGiveColonyBonus);
     }
 
 
@@ -171,7 +171,7 @@ export abstract class Colony implements IColony {
       let action: undefined | DeferredAction = undefined;
       switch (bonusType) {
       case ColonyBenefit.ADD_RESOURCES_TO_CARD:
-        const resourceType = this.metadata.resourceType!;
+        const resourceType = this.metadata.resourceType;
         action = new AddResourcesToCard(player, resourceType, {count: quantity});
         break;
 

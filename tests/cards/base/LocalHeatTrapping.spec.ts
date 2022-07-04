@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Fish} from '../../../src/cards/base/Fish';
 import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
 import {Pets} from '../../../src/cards/base/Pets';
@@ -40,9 +41,7 @@ describe('LocalHeatTrapping', () => {
     const pets = new Pets();
     player.playedCards.push(card, pets);
 
-    const orOptions = card.play(player) as OrOptions;
-    expect(orOptions).is.not.undefined;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.play(player), OrOptions);
 
     orOptions.options[0].cb();
     expect(player.plants).to.eq(4);
@@ -58,7 +57,7 @@ describe('LocalHeatTrapping', () => {
     const fish = new Fish();
     player.playedCards.push(card, pets, fish);
 
-    const orOptions = card.play(player) as OrOptions;
+    const orOptions = cast(card.play(player), OrOptions);
     expect(player.heat).to.eq(0);
     orOptions.options[1].cb([fish]);
     expect(fish.resourceCount).to.eq(2);

@@ -4,6 +4,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('GHGProducingBacteria', () => {
   let card : GHGProducingBacteria; let player : Player; let game : Game;
@@ -37,14 +38,13 @@ describe('GHGProducingBacteria', () => {
     card.action(player);
     expect(card.resourceCount).to.eq(2);
 
-    const orAction = card.action(player) as OrOptions;
-    expect(orAction instanceof OrOptions).is.true;
+    const orAction = cast(card.action(player), OrOptions);
 
-        orAction!.options[1].cb();
-        expect(card.resourceCount).to.eq(3);
+    orAction.options[1].cb();
+    expect(card.resourceCount).to.eq(3);
 
-        orAction!.options[0].cb();
-        expect(card.resourceCount).to.eq(1);
-        expect(game.getTemperature()).to.eq(-28);
+    orAction.options[0].cb();
+    expect(card.resourceCount).to.eq(1);
+    expect(game.getTemperature()).to.eq(-28);
   });
 });

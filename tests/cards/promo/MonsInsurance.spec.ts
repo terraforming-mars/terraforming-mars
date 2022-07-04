@@ -13,7 +13,7 @@ import {Resources} from '../../../src/common/Resources';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MonsInsurance', () => {
   let card: MonsInsurance; let player: TestPlayer; let player2: TestPlayer; let player3: TestPlayer;
@@ -40,7 +40,7 @@ describe('MonsInsurance', () => {
     player2.titanium = 3;
 
     const card2 = new Sabotage();
-    const action = card2.play(player3) as OrOptions;
+    const action = cast(card2.play(player3), OrOptions);
 
     action.options[1].cb();
     expect(player2.titanium).to.eq(0);

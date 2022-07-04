@@ -13,9 +13,7 @@ import {Color} from './common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
-import {ElysiumBoard} from './boards/ElysiumBoard';
 import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
-import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
@@ -26,7 +24,6 @@ import {LogHelper} from './LogHelper';
 import {LogMessage} from './common/logs/LogMessage';
 import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
-import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './common/Phase';
 import {Player} from './Player';
@@ -60,17 +57,15 @@ import {AresSetup} from './ares/AresSetup';
 import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {Random} from './Random';
+import {SeededRandom} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {IPathfindersData} from './pathfinders/IPathfindersData';
-import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
-import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 
 export interface Score {
@@ -170,7 +165,7 @@ export class Game {
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
-  public rng: Random;
+  public rng: SeededRandom;
   public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public gameAge: number = 0; // Each log event increases it
@@ -228,7 +223,7 @@ export class Game {
     private first: Player,
     activePlayer: PlayerId,
     public gameOptions: GameOptions,
-    rng: Random,
+    rng: SeededRandom,
     board: Board,
     dealer: Dealer) {
     const playerIds = players.map((p) => p.id);
@@ -266,7 +261,7 @@ export class Game {
       throw new Error('Cloning should not come through this execution path.');
     }
 
-    const rng = new Random(seed);
+    const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
@@ -606,12 +601,14 @@ export class Game {
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
-  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard) {
+  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard): void {
     player.pickedCorporationCard = corporationCard;
-    // if all players picked corporationCard
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
       for (const somePlayer of this.getPlayersInGenerationOrder()) {
-        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
+        if (somePlayer.pickedCorporationCard === undefined) {
+          throw new Error(`pickedCorporationCard is not defined for ${somePlayer.id}`);
+        }
+        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard);
       }
     }
   }
@@ -1442,6 +1439,9 @@ export class Game {
           {title: 'Select how to pay for placement bonus temperature'}));
       }
       break;
+    case SpaceBonus.ENERGY:
+      player.addResource(Resources.ENERGY, count, {log: true});
+      break;
     default:
       // TODO(kberg): Remove the isProduction condition after 2022-01-01.
       // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
@@ -1613,23 +1613,11 @@ export class Game {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
     }
 
-    const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
-    let board;
-    if (gameOptions.boardName === BoardName.ELYSIUM) {
-      board = ElysiumBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.HELLAS) {
-      board = HellasBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
-      board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
-      board = VastitasBorealisBoard.deserialize(d.board, playersForBoard);
-    } else {
-      board = OriginalBoard.deserialize(d.board, playersForBoard);
-    }
+    const board = GameSetup.deserializeBoard(players, gameOptions, d);
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
-    const rng = new Random(d.seed, d.currentSeed);
+    const rng = new SeededRandom(d.seed, d.currentSeed);
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, dealer);
     game.spectatorId = d.spectatorId;
 

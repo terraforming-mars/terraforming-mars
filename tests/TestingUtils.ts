@@ -129,8 +129,6 @@ export function fakeCard(card: Partial<IProjectCard>): IProjectCard {
   return Object.assign(template, card);
 }
 
-// type Class<T> = new (...args: any[]) => T;
-// export function cast<T>(klass: Class<T>, obj: any): T {
 export function cast<T>(obj: any, klass: new (...args: any[]) => T): T {
   if (!(obj instanceof klass)) {
     throw new Error(`Not an instance of ${klass.name}: ${obj.constructor.name}`);
@@ -142,4 +140,16 @@ export function sleep(ms: number) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
+}
+
+export function finishGeneration(game: Game): void {
+  const priorGeneration = game.generation;
+  game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playerHasPassed(player);
+    game.playerIsFinishedTakingActions();
+  });
+  const currentGeneration = game.generation;
+  if (currentGeneration !== priorGeneration + 1) {
+    throw new Error('expected new generation');
+  }
 }

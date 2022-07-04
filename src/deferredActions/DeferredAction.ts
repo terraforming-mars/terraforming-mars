@@ -21,7 +21,7 @@ export enum Priority {
 }
 
 export abstract class DeferredAction {
-  public queueId?: number;
+  public queueId: number = -1;
   constructor(
     public player: Player,
     public priority: Priority = Priority.DEFAULT,

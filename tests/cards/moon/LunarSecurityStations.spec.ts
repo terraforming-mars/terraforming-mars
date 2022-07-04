@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {LunarSecurityStations} from '../../../src/cards/moon/LunarSecurityStations';
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -51,12 +51,12 @@ describe('LunarSecurityStations', () => {
     const hiredRaiders = new HiredRaiders();
 
     opponent2.playedCards = [];
-    let action = hiredRaiders.play(player) as OrOptions;
+    let action = cast(hiredRaiders.play(player), OrOptions);
     // Options for both opponents.
     expect(action.options).has.lengthOf(3);
 
     opponent2.playedCards = [card];
-    action = hiredRaiders.play(player) as OrOptions;
+    action = cast(hiredRaiders.play(player), OrOptions);
     // Options for only one opponent.
     expect(action.options).has.lengthOf(2);
     action.options[0].cb();

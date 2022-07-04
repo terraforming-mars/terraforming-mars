@@ -34,7 +34,7 @@ export class DeferredActionsQueue {
   }
 
   private hasHigherPriority(a: DeferredAction, b: DeferredAction) {
-    return a.priority < b.priority || (a.priority === b.priority && a.queueId! < b.queueId!);
+    return a.priority < b.priority || (a.priority === b.priority && a.queueId < b.queueId);
   }
 
   private nextItemIndex(): number {

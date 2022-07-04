@@ -1,11 +1,9 @@
 import {Database} from './Database';
 import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
-import {IGameLoader} from './IGameLoader';
+import {GameIdLedger, IGameLoader} from './IGameLoader';
 import {GameIds} from './GameIds';
 import {MultiMap} from 'mnemonist';
-
-type ListLoadCallback = (list: Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> | undefined) => void;
 
 /**
  * Loads games from javascript memory or database
@@ -44,13 +42,12 @@ export class GameLoader implements IGameLoader {
     });
   }
 
-  public getLoadedGameIds(cb: ListLoadCallback): void {
-    this.idsContainer.getGames().then( (d) => {
-      const map = new MultiMap<GameId, SpectatorId | PlayerId>();
-      d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
-      const arry: Array<[string, Array<string>]> = Array.from(map.associations());
-      cb(arry.map(([id, participants]) => ({id: id, participants: participants})));
-    });
+  public async getLoadedGameIds(): Promise<Array<GameIdLedger>> {
+    const d = await this.idsContainer.getGames();
+    const map = new MultiMap<GameId, SpectatorId | PlayerId>();
+    d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
+    const arry: Array<[string, Array<string>]> = Array.from(map.associations());
+    return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 
   public async getByGameId(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {

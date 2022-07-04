@@ -4,7 +4,7 @@ import {IAward} from '../IAward';
 
 export class Curator implements IAward {
   public name: string = 'Curator';
-  public description: string = 'Most played tags of any one type';
+  public description: string = 'Having the most played tags of any one type';
 
   public getScore(player: Player): number {
     const scores = [];

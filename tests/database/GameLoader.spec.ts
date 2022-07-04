@@ -8,9 +8,10 @@ import {Color} from '../../src/common/Color';
 import {IDatabase} from '../../src/database/IDatabase';
 import {GameId} from '../../src/common/Types';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
+import {sleep} from '../TestingUtils';
 
 class InMemoryDatabase implements IDatabase {
-  public data: Map<GameId, Array<SerializedGame | undefined>> = new Map();
+  public data: Map<GameId, Array<SerializedGame>> = new Map();
 
   public failure: 'getGames' | undefined = undefined;
   public getGameSleep: number = 0;
@@ -19,17 +20,14 @@ class InMemoryDatabase implements IDatabase {
     throw new Error('Method not implemented.');
   }
 
-  getGame(gameId: string, cb: (err: Error | undefined, game?: SerializedGame | undefined) => void): void {
+  async getGame(gameId: string): Promise<SerializedGame> {
     const row = this.data.get(gameId);
     if (row === undefined || row.length === 0) {
-      cb(new Error('not found'), undefined);
+      throw new Error('not found');
     } else {
       const game = row[row.length -1];
-      if (this.getGameSleep === 0) {
-        cb(undefined, game);
-      } else {
-        setTimeout(() => cb(undefined, game), this.getGameSleep);
-      }
+      await sleep(this.getGameSleep);
+      return game;
     }
   }
   getGameId(_id: string): Promise<string> {
@@ -166,9 +164,9 @@ describe('GameLoader', function() {
 
   it('gets game when added and not in database', async function() {
     foobarGame.id = 'alpha';
-    instance.add(foobarGame);
-    const game1 = await instance.getByGameId('alpha', false);
     try {
+      instance.add(foobarGame);
+      const game1 = await instance.getByGameId('alpha', false);
       expect(game1!.id).to.eq('alpha');
     } finally {
       foobarGame.id = 'foobar';
@@ -204,18 +202,11 @@ describe('GameLoader', function() {
     expect(game1).is.undefined;
   });
 
-  it('loads players available later', function(done) {
-    instance.getByGameId('foobar', false).then((game1) => {
-      try {
-        expect(game1!.id).to.eq('foobar');
-        GameLoader.getInstance().getByParticipantId(foobarGame.getPlayersInGenerationOrder()[0].id).then((game2) => {
-          expect(game2!.id).to.eq('foobar');
-          done();
-        });
-      } catch (error) {
-        done(error);
-      }
-    });
+  it('loads players available later', async function() {
+    const game1 = await instance.getByGameId('foobar', false);
+    expect(game1!.id).to.eq('foobar');
+    const game2 = await GameLoader.getInstance().getByParticipantId(foobarGame.getPlayersInGenerationOrder()[0].id);
+    expect(game2!.id).to.eq('foobar');
   });
 
   it('waits for games to finish loading', async function() {

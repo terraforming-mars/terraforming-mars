@@ -33,7 +33,7 @@ describe('PlayerInput', function() {
     player.beginner = true;
     const game = Game.newInstance('foo', [player], player);
     const undo = Game.newInstance('old', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
     const options = cast(player.getWaitingFor(), OrOptions);
@@ -58,7 +58,7 @@ describe('PlayerInput', function() {
     player.beginner = true;
     const game = Game.newInstance('foo', [player], player);
     const undo = Game.newInstance('old', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
     const options = cast(player.getWaitingFor(), OrOptions);
@@ -81,7 +81,7 @@ describe('PlayerInput', function() {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
     const game = Game.newInstance('foo', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
 
     const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {

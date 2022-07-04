@@ -1,4 +1,4 @@
-import {DbLoadCallback, IDatabase} from './IDatabase';
+import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
@@ -125,13 +125,16 @@ export class SQLite implements IDatabase {
     );
   }
 
-  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
-    // Retrieve last save from database
-    this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: Error | null, row: { game: any; }) => {
-      if (err) {
-        return cb(err ?? undefined);
-      }
-      cb(undefined, JSON.parse(row.game));
+  getGame(game_id: GameId): Promise<SerializedGame> {
+    return new Promise((resolve, reject) => {
+      // Retrieve last save from database
+      this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: Error | null, row: { game: any; }) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(JSON.parse(row.game));
+        }
+      });
     });
   }
 
@@ -188,7 +191,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getMaxSaveId(game_id: GameId, cb: DbLoadCallback<number>): void {
+  getMaxSaveId(game_id: GameId, cb: (err: Error | undefined, id: number | undefined) => void): void {
     this.db.get('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [game_id], (err: Error | null, row: { save_id: number; }) => {
       if (err) {
         return cb(err ?? undefined, undefined);

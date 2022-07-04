@@ -25,7 +25,7 @@ describe('ApiPlayer', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/player?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.asyncGet(ApiPlayer.INSTANCE, res);
     const response: PlayerViewModel = JSON.parse(res.content);
     expect(response.id).eq(player.id);

@@ -1,7 +1,17 @@
-export class Random {
+export abstract class Random {
+  public abstract next(): number;
+
+  public nextInt(range: number): number {
+    return Math.floor(this.next() * range);
+  }
+}
+export class SeededRandom extends Random {
+  public readonly seed;
   private currentSeed: number;
 
-  constructor(public readonly seed = 0, currentSeed?: number) {
+  constructor(seed = 0, currentSeed?: number) {
+    super();
+    this.seed = seed;
     this.currentSeed = currentSeed ?? Math.floor(seed * 4294967296);
   }
 
@@ -17,8 +27,16 @@ export class Random {
     t ^= t + Math.imul(t ^ t >>> 7, t | 61);
     return ((t ^ t >>> 14) >>> 0) / 4294967296;
   }
+}
 
-  public nextInt(range: number): number {
-    return Math.floor(this.next() * range);
+export class UnseededRandom extends Random {
+  public static INSTANCE = new UnseededRandom();
+
+  private constructor() {
+    super();
+  }
+
+  public next(): number {
+    return Math.random();
   }
 }

@@ -57,7 +57,7 @@ import {AresSetup} from './ares/AresSetup';
 import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {Random} from './Random';
+import {SeededRandom} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
@@ -165,7 +165,7 @@ export class Game {
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
-  public rng: Random;
+  public rng: SeededRandom;
   public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public gameAge: number = 0; // Each log event increases it
@@ -223,7 +223,7 @@ export class Game {
     private first: Player,
     activePlayer: PlayerId,
     public gameOptions: GameOptions,
-    rng: Random,
+    rng: SeededRandom,
     board: Board,
     dealer: Dealer) {
     const playerIds = players.map((p) => p.id);
@@ -261,7 +261,7 @@ export class Game {
       throw new Error('Cloning should not come through this execution path.');
     }
 
-    const rng = new Random(seed);
+    const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
@@ -1617,7 +1617,7 @@ export class Game {
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
-    const rng = new Random(d.seed, d.currentSeed);
+    const rng = new SeededRandom(d.seed, d.currentSeed);
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, dealer);
     game.spectatorId = d.spectatorId;
 

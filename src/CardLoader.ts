@@ -64,11 +64,12 @@ export class CardLoader {
   }
 
   private addDeck<T extends ICard>(cards: Array<T>, deck: Deck<T>): void {
-    deck.factories.forEach((cf) => {
+    for (const cf of deck.factories.values()) {
+      if (cf.Factory === undefined) continue;
       if (CardLoader.include(this.gameOptions, cf)) {
         cards.push(new cf.Factory());
       }
-    });
+    }
   }
 
   public getProjectCards() {

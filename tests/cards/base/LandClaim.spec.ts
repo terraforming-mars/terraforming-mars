@@ -13,7 +13,7 @@ describe('LandClaim', function() {
     const card = new LandClaim();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.not.undefined;
     const landSpace = player.game.board.getAvailableSpacesOnLand(player)[0];
@@ -25,7 +25,7 @@ describe('LandClaim', function() {
     const card = new LandClaim();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({
+    Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({
       boardName: BoardName.HELLAS,
     }));
     const action = card.play(player) as SelectSpace;

@@ -9,7 +9,7 @@ describe('MediaArchives', function() {
     const card = new MediaArchives();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card, new Virus());
     const action = card.play(player);
     expect(action).is.undefined;

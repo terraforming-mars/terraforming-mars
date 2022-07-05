@@ -8,7 +8,7 @@ describe('Research', function() {
     const card = new Research();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(card.getVictoryPoints()).to.eq(1);

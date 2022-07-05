@@ -18,7 +18,7 @@ describe('Generalist', function() {
   });
 
   it('Can claim with +1 of each production in game with corp era', function() {
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     resources.forEach((resource) => player.addProduction(resource, 1));
 
     expect(milestone.canClaim(player)).is.true;
@@ -26,7 +26,7 @@ describe('Generalist', function() {
 
   it('Cannot claim with +1 of each production in game without corp era', function() {
     const gameOptions = setCustomGameOptions({corporateEra: false});
-    Game.newInstance('foobar', [player, player2], player, gameOptions);
+    Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     resources.forEach((resource) => expect(player.getProduction(resource)).to.eq(1));
     expect(milestone.canClaim(player)).is.not.true;
@@ -34,7 +34,7 @@ describe('Generalist', function() {
 
   it('Can claim with +2 of each production in game without corp era', function() {
     const gameOptions = setCustomGameOptions({corporateEra: false});
-    Game.newInstance('foobar', [player, player2], player, gameOptions);
+    Game.newInstance('gameid', [player, player2], player, gameOptions);
     resources.forEach((resource) => player.addProduction(resource, 1));
 
     resources.forEach((resource) => expect(player.getProduction(resource)).to.eq(2));

@@ -46,7 +46,7 @@ export class GameLoader implements IGameLoader {
     const d = await this.idsContainer.getGames();
     const map = new MultiMap<GameId, SpectatorId | PlayerId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
-    const arry: Array<[string, Array<string>]> = Array.from(map.associations());
+    const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
     return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 

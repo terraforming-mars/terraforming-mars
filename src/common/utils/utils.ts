@@ -35,8 +35,8 @@ export type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
 
-export function isPlayerId(id: string): boolean {
-  return id.charAt(0) === 'p';
+export function isPlayerId(id: string | undefined): boolean {
+  return id?.charAt(0) === 'p';
 }
 
 export function isSpectatorId(id: string): boolean {

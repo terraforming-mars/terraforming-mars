@@ -15,7 +15,7 @@ describe('Comet', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
-    game = Game.newInstance('foobar', [player, player2, player3], player);
+    game = Game.newInstance('gameid', [player, player2, player3], player);
   });
 
   it('Should play', function() {
@@ -48,7 +48,7 @@ describe('Comet', function() {
   });
 
   it('Works fine in solo mode', function() {
-    Game.newInstance('solo_game', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.plants = 8;
 
     const action = card.play(player);

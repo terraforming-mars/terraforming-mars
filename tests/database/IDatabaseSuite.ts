@@ -113,7 +113,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.saveGamePromise;
       expect(game.lastSaveId).eq(1);
 
-      expect(db.getPlayerCount('notfound')).is.rejected;
+      expect(db.getPlayerCount('g-notfound')).is.rejected;
     });
 
     if (dtor.omitPurgeUnfinishedGames !== true) {
@@ -170,7 +170,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('loadCloneableGame', async () => {
-      await expect(db.loadCloneableGame('123')).to.be.rejectedWith(/Game 123 not found/);
+      await expect(db.loadCloneableGame('game-id-123')).to.be.rejectedWith(/Game game-id-123 not found/);
 
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-123', [player], player);

@@ -64,7 +64,7 @@ describe('Colony', function() {
         ColonyName.CALLISTO,
       ],
     });
-    game = Game.newInstance('foobar', [player, player2, player3, player4], player, gameOptions, /* seed */ .1);
+    game = Game.newInstance('gameid', [player, player2, player3, player4], player, gameOptions, /* seed */ .1);
     luna = game.colonies.find((c) => c.name === ColonyName.LUNA)!;
   });
 

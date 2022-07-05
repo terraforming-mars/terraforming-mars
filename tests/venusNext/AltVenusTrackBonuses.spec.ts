@@ -14,7 +14,7 @@ describe('AltVenusTrackBonuses', function() {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('x', [player], player, setCustomGameOptions({altVenusBoard: true}));
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({altVenusBoard: true}));
   });
 
   function getAction(game: Game) {

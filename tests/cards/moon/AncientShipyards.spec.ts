@@ -18,7 +18,7 @@ describe('AncientShipyards', () => {
   beforeEach(() => {
     bluePlayer = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
     card = new AncientShipyards();
   });
 
@@ -57,7 +57,7 @@ describe('AncientShipyards', () => {
 
   it('act solo', () => {
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [redPlayer], redPlayer, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [redPlayer], redPlayer, MOON_OPTIONS);
 
     expect(card.resourceCount).eq(0);
     redPlayer.megaCredits = 10;

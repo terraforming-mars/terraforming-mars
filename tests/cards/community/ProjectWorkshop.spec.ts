@@ -26,7 +26,7 @@ describe('ProjectWorkshop', function() {
     card = new ProjectWorkshop();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
     advancedAlloys = new AdvancedAlloys();
 
     card.play(player);

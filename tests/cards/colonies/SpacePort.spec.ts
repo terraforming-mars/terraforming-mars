@@ -15,7 +15,7 @@ describe('SpacePort', function() {
     card = new SpacePort();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t play without colony', function() {

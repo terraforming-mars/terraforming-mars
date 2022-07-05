@@ -41,7 +41,7 @@ describe('RoboticWorkforce', () => {
     card = new RoboticWorkforce();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
   });
 
   it('Cannot play if no building cards to copy', () => {
@@ -105,7 +105,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Capital (Ares expansion)', () => {
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
@@ -120,7 +120,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Solar Farm (Ares expansion)', () => {
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     const solarFarm = new SolarFarm();
 
     // This space should have 2 plants bonus on default map
@@ -211,7 +211,7 @@ describe('RoboticWorkforce', () => {
         // Create new players, set all productions to 2
         player = TestPlayers.BLUE.newPlayer();
         redPlayer = TestPlayers.RED.newPlayer();
-        game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+        game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
         player.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
         redPlayer.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
 

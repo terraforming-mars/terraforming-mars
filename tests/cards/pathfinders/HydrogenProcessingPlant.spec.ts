@@ -3,7 +3,7 @@ import {HydrogenProcessingPlant} from '../../../src/cards/pathfinders/HydrogenPr
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 
 describe('HydrogenProcessingPlant', function() {
@@ -14,7 +14,7 @@ describe('HydrogenProcessingPlant', function() {
   beforeEach(function() {
     card = new HydrogenProcessingPlant();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 
@@ -31,12 +31,12 @@ describe('HydrogenProcessingPlant', function() {
     game.increaseOxygenLevel(player, 1);
     game.increaseOxygenLevel(player, 1);
     expect(game.getOxygenLevel()).eq(3);
-    TestingUtils.addOcean(player);
-    TestingUtils.addOcean(player);
-    TestingUtils.addOcean(player);
-    TestingUtils.addOcean(player);
-    TestingUtils.addOcean(player);
-    TestingUtils.addOcean(player);
+    addOcean(player);
+    addOcean(player);
+    addOcean(player);
+    addOcean(player);
+    addOcean(player);
+    addOcean(player);
     expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
 
     card.play(player);

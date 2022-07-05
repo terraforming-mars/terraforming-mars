@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunarPlanningOffice} from '../../../src/cards/moon/LunarPlanningOffice';
 import {expect} from 'chai';
@@ -10,7 +10,7 @@ import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
 import {CardName} from '../../../src/common/cards/CardName';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunarPlanningOffice', () => {
   let game: Game;
@@ -19,7 +19,7 @@ describe('LunarPlanningOffice', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunarPlanningOffice();
   });
 

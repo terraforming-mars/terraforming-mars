@@ -209,7 +209,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   ],
   corporationCards: [
     {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries, compatibility: 'moon'},
-    {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: 'turmoil'},
+    {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: ['turmoil', 'moon']},
     {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate, compatibility: 'moon'},
     {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation, compatibility: 'moon'},
     {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation, compatibility: 'moon'},

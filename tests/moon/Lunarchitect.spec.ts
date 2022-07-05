@@ -4,10 +4,10 @@ import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {TileType} from '../../src/common/TileType';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('Lunarchitect', function() {
   let player: TestPlayer;
@@ -16,7 +16,7 @@ describe('Lunarchitect', function() {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.PINK.newPlayer();
-    Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
   });
 
   it('Basic test', function() {

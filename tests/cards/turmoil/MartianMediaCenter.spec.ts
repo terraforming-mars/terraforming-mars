@@ -3,7 +3,7 @@ import {MartianMediaCenter} from '../../../src/cards/turmoil/MartianMediaCenter'
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MartianMediaCenter', function() {
@@ -11,8 +11,8 @@ describe('MartianMediaCenter', function() {
     const card = new MartianMediaCenter();
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const mars = game.turmoil!.getPartyByName(PartyName.MARS)!;

@@ -8,6 +8,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('Vitor', function() {
   let card : Vitor; let player : Player; let game : Game;
@@ -16,7 +17,7 @@ describe('Vitor', function() {
     card = new Vitor();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -26,14 +27,13 @@ describe('Vitor', function() {
   });
 
   it('Has initial action', function() {
-    const action = card.initialAction(player);
-    expect(action).instanceOf(OrOptions);
-    (action as OrOptions).options[0].cb();
+    const action = cast(card.initialAction(player), OrOptions);
+    action.options[0].cb();
     expect(game.hasBeenFunded(game.awards[0])).is.true;
   });
 
   it('No initial action for solo games', function() {
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     const action = card.initialAction(player);
     expect(action).is.undefined;
   });

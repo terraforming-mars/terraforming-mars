@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -24,7 +24,7 @@ describe('Wetlands', function() {
     card = new Wetlands();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({pathfindersExpansion: true}));
     game.board = EmptyBoard.newInstance();
     game.board.getSpace('15').spaceType = SpaceType.OCEAN;
     game.board.getSpace('16').spaceType = SpaceType.OCEAN;
@@ -104,7 +104,7 @@ describe('Wetlands', function() {
     const action = card.play(player);
     expect(player.plants).eq(3);
 
-    const selectSpace = TestingUtils.cast(action, SelectSpace);
+    const selectSpace = cast(action, SelectSpace);
     expect(selectSpace.availableSpaces.map(toSpaceId)).deep.eq(['09', '23']);
 
     expect(game.getOxygenLevel()).eq(0);
@@ -112,7 +112,7 @@ describe('Wetlands', function() {
     const space = selectSpace.availableSpaces[0];
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(game.getOxygenLevel()).eq(1);
   });
@@ -131,12 +131,12 @@ describe('Wetlands', function() {
   });
 
   it('Wetlands counts toward ocean requirements', () => {
-    const fakeCard = TestingUtils.fakeCard({requirements: CardRequirements.builder((b) => b.oceans(3))});
+    const fake = fakeCard({requirements: CardRequirements.builder((b) => b.oceans(3))});
     game.addOceanTile(player, '15');
     game.addOceanTile(player, '16');
-    expect(player.canPlay(fakeCard)).is.false;
+    expect(player.canPlay(fake)).is.false;
     game.simpleAddTile(player, game.board.getSpace('09'), {tileType: TileType.WETLANDS});
-    expect(player.canPlay(fakeCard)).is.true;
+    expect(player.canPlay(fake)).is.true;
   });
 
   it('Wetlands counts as ocean for adjacency', function() {

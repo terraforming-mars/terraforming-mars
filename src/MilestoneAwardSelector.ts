@@ -1,4 +1,4 @@
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -289,6 +289,11 @@ export namespace MilestoneAwardSelector {
       awards: [],
     };
 
+    function push(milestones: Array<IMilestone>, awards: Array<IAward>) {
+      drawnMilestonesAndAwards.milestones.push(...milestones);
+      drawnMilestonesAndAwards.awards.push(...awards);
+    }
+
     const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
     const requiredQty = includeVenus ? 6 : 5;
 
@@ -296,42 +301,39 @@ export namespace MilestoneAwardSelector {
     case RandomMAOptionType.NONE:
       switch (gameOptions.boardName) {
       case BoardName.ORIGINAL:
-        drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
+        push(ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
         break;
       case BoardName.HELLAS:
-        drawnMilestonesAndAwards.milestones.push(...HELLAS_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...HELLAS_AWARDS);
+        push(HELLAS_MILESTONES, HELLAS_AWARDS);
         break;
       case BoardName.ELYSIUM:
-        drawnMilestonesAndAwards.milestones.push(...ELYSIUM_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...ELYSIUM_AWARDS);
+        push(ELYSIUM_MILESTONES, ELYSIUM_AWARDS);
         break;
       case BoardName.ARABIA_TERRA:
-        drawnMilestonesAndAwards.milestones.push(...ARABIA_TERRA_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...ARABIA_TERRA_AWARDS);
+        push(ARABIA_TERRA_MILESTONES, ARABIA_TERRA_AWARDS);
+        break;
+      case BoardName.AMAZONIS:
+        push(AMAZONIS_PLANITIA_MILESTONES, AMAZONIS_PLANITIA_AWARDS);
+        break;
+      case BoardName.TERRA_CIMMERIA:
+        push(TERRA_CIMMERIA_MILESTONES, TERRA_CIMMERIA_AWARDS);
         break;
       case BoardName.VASTITAS_BOREALIS:
-        drawnMilestonesAndAwards.milestones.push(...VASTITAS_BOREALIS_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...VASTITAS_BOREALIS_AWARDS);
+        push(VASTITAS_BOREALIS_MILESTONES, VASTITAS_BOREALIS_AWARDS);
         break;
       }
       if (includeVenus) {
-        drawnMilestonesAndAwards.milestones.push(...VENUS_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...VENUS_AWARDS);
+        push(VENUS_MILESTONES, VENUS_AWARDS);
       }
       if (gameOptions.aresExtension) {
-        drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
-        drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
+        push(ARES_MILESTONES, ARES_AWARDS);
       }
       if (gameOptions.moonExpansion) {
         // One MA will reward moon tags, the other will reward moon tiles.
         if (Math.random() > 0.5) {
-          drawnMilestonesAndAwards.milestones.push(new OneGiantStep());
-          drawnMilestonesAndAwards.awards.push(new LunarMagnate());
+          push([new OneGiantStep], [new LunarMagnate()]);
         } else {
-          drawnMilestonesAndAwards.milestones.push(new Lunarchitect());
-          drawnMilestonesAndAwards.awards.push(new FullMoon());
+          push([new Lunarchitect], [new FullMoon()]);
         }
       }
       break;

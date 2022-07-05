@@ -1,16 +1,18 @@
 import {expect} from 'chai';
+import * as constants from '../../../src/common/constants';
 import {Research} from '../../../src/cards/base/Research';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {ICard} from '../../../src/cards/ICard';
 import {Atmoscoop} from '../../../src/cards/venusNext/Atmoscoop';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Atmoscoop', function() {
   let card : Atmoscoop; let player : Player; let game : Game; let dirigibles: Dirigibles; let floatingHabs: FloatingHabs;
@@ -19,12 +21,12 @@ describe('Atmoscoop', function() {
     card = new Atmoscoop();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({venusNextExtension: true}));
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     player.playedCards.push(new Research());
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
@@ -33,11 +35,10 @@ describe('Atmoscoop', function() {
     player.playedCards.push(new Research(), new SearchForLife());
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const action = card.play(player) as OrOptions;
-    expect(action).instanceOf(OrOptions);
+    const action = cast(card.play(player), OrOptions);
 
     expect(action.options).has.lengthOf(2);
-    const orOptions = action.options[1] as OrOptions;
+    const orOptions = cast(action.options[1], SelectOption);
 
     orOptions.cb();
     expect(game.getVenusScaleLevel()).to.eq(4);
@@ -46,10 +47,9 @@ describe('Atmoscoop', function() {
   it('Should play - single target', function() {
     player.playedCards.push(dirigibles);
 
-    const action = card.play(player) as OrOptions;
-    expect(action).instanceOf(OrOptions);
+    const action = cast(card.play(player), OrOptions);
 
-    const orOptions = action.options[1] as OrOptions;
+    const orOptions = cast(action.options[1], SelectOption);
     orOptions.cb();
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(dirigibles.resourceCount).to.eq(2);
@@ -58,7 +58,7 @@ describe('Atmoscoop', function() {
   it('Should play - multiple targets', function() {
     player.playedCards.push(dirigibles, floatingHabs);
 
-    const orOptions = card.play(player) as OrOptions;
+    const orOptions = cast(card.play(player), OrOptions);
 
     // First the global parameter
     orOptions.options[0].cb();

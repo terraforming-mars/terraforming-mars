@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
@@ -8,7 +8,7 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('EarthEmbassy', () => {
   let player: TestPlayer;
@@ -16,14 +16,14 @@ describe('EarthEmbassy', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     earthEmbassy = new EarthEmbassy();
   });
 
   it('play', () => {
-    const fakeCard = TestingUtils.fakeCard({tags: [Tags.EARTH, Tags.MOON, Tags.MOON]});
+    const fake = fakeCard({tags: [Tags.EARTH, Tags.MOON, Tags.MOON]});
 
-    player.playedCards = [fakeCard];
+    player.playedCards = [fake];
     expect(player.getTagCount(Tags.EARTH, 'raw')).eq(1);
     expect(player.getTagCount(Tags.EARTH, 'default')).eq(1);
 

@@ -3,7 +3,7 @@ import {KelpFarming} from '../../../src/cards/base/KelpFarming';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('KelpFarming', function() {
@@ -13,7 +13,7 @@ describe('KelpFarming', function() {
     card = new KelpFarming();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -21,7 +21,7 @@ describe('KelpFarming', function() {
   });
 
   it('Should play', function() {
-    TestingUtils.maxOutOceans(player, 6);
+    maxOutOceans(player, 6);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const plantsCount = player.plants;

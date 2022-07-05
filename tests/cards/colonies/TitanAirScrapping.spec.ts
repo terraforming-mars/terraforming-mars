@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {TitanAirScrapping} from '../../../src/cards/colonies/TitanAirScrapping';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -12,7 +13,7 @@ describe('TitanAirScrapping', function() {
     card = new TitanAirScrapping();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t act', function() {
@@ -26,13 +27,12 @@ describe('TitanAirScrapping', function() {
     player.addResourceTo(card, 7);
     expect(card.canAct(player)).is.true;
 
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
-        orOptions!.options[0].cb();
+    const orOptions = cast(card.action(player), OrOptions);
+    orOptions.options[0].cb();
 
-        expect(player.getTerraformRating()).to.eq(21);
-        expect(card.resourceCount).to.eq(5);
-        expect(card.getVictoryPoints()).to.eq(2);
+    expect(player.getTerraformRating()).to.eq(21);
+    expect(card.resourceCount).to.eq(5);
+    expect(card.getVictoryPoints()).to.eq(2);
   });
 
   it('Should act automatically when only one action possible', function() {

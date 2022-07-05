@@ -6,7 +6,7 @@ import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayers} from '../TestPlayers';
 import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
-import {TestingUtils} from '../TestingUtils';
+import {addOcean} from '../TestingUtils';
 
 describe('OtherAresTests', function() {
   let player : Player;
@@ -16,12 +16,12 @@ describe('OtherAresTests', function() {
   it('Desert settler counts upgraded oceans', function() {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];
     game.addOceanTile(player, oceanSpace.id);
     for (let n = 0; n < 8; n++) {
-      TestingUtils.addOcean(player);
+      addOcean(player);
     }
 
     const award = new DesertSettler();

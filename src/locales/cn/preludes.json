@@ -5,6 +5,7 @@
   "You start with 3 M€ production and 44 M€.":"起始获得44 M€,提升M€产量3级",
   "Effect: When you play a building tag, you pay 2 M€ less for it.":"效果：当你打出带有建筑标志的牌时,你可以少支付2 M€",
 
+  "POINT LUNA":"接月点",
   "Point Luna":"接月点",
   "Effect: When you play an Earth tag, including this, draw a card.":"效果：你打出的牌上每有一个地球符号，包括此卡，抽一张牌。",
   "You start with 1 titanium production and 38 M€.":"你起始拥有1点钛产量和38 M€。",
@@ -16,10 +17,14 @@
   "You start with 47 M€.":"起始获得47 M€",
   "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.":"行动：花费4 M€,提升你1项产量最低的产量1级",
 
+  "VALLEY":"莱瓦",
+  "TRUST":"信托",
   "Valley Trust":"莱瓦信托",
+  "prel":"前序",
   "Effect: When you play a Science tag, you pay 2M€ less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2 M€。",
   "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37 M€，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
 
+  "VIT":"维特尔",
   "Vitor":"维特尔",
   "You start with 45 M€. As your first action, fund an award for free.":"起始获得45 M€。作为你的起始行动,你可以免费资助一个奖项",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.":"效果：当你打出一张有非负分图标的牌(包括本牌)时,获得3 M€",

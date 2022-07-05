@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
 import {TestPlayers} from '../TestPlayers';
-import {TestingUtils} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 
 describe('Ceres', function() {
   let ceres: Ceres; let player: Player; let player2: Player; let game: Game;
@@ -13,7 +13,7 @@ describe('Ceres', function() {
     ceres = new Ceres();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(ceres);
   });
@@ -34,7 +34,7 @@ describe('Ceres', function() {
     ceres.addColony(player);
 
     ceres.trade(player2);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
     expect(player2.getProduction(Resources.STEEL)).to.eq(0);

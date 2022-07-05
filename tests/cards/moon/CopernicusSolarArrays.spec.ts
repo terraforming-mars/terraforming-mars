@@ -1,12 +1,12 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {CopernicusSolarArrays} from '../../../src/cards/moon/CopernicusSolarArrays';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('CopernicusSolarArrays', () => {
   let player: Player;
@@ -14,7 +14,7 @@ describe('CopernicusSolarArrays', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new CopernicusSolarArrays();
   });
 

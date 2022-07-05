@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Birds} from '../../../src/cards/base/Birds';
 import {EcologicalZone} from '../../../src/cards/base/EcologicalZone';
@@ -16,7 +17,7 @@ describe('ViralEnhancers', function() {
     card = new ViralEnhancers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -30,7 +31,7 @@ describe('ViralEnhancers', function() {
     card.onCardPlayed(player, birds);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(birds.resourceCount).to.eq(1);
     orOptions.options[1].cb();
@@ -39,7 +40,7 @@ describe('ViralEnhancers', function() {
     card.onCardPlayed(player, ants);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions2 = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions2 = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions2.options[0].cb();
     expect(ants.resourceCount).to.eq(1);
     orOptions2.options[1].cb();
@@ -53,12 +54,12 @@ describe('ViralEnhancers', function() {
     card.onCardPlayed(player, ecologicalZone);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(ecologicalZone.resourceCount).to.eq(1);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions2 = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions2 = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions2.options[1].cb();
     expect(player.plants).to.eq(1);
     expect(game.deferredActions).has.lengthOf(0);

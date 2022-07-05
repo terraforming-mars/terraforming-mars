@@ -38,19 +38,19 @@ export class GameIds extends EventEmitter {
     }));
   }
 
-  public load() : void {
-    Database.getInstance().getGames((err, allGameIds) => {
-      if (err) {
+  public load(): void {
+    Database.getInstance().getGames()
+      .then((allGameIds) => this.getAllInstances(allGameIds))
+      .then(() => {
+        this.loaded = true;
+        this.emit('loaded');
+      })
+      .catch((err) => {
         console.error('error loading all games', err);
         this.loaded = true;
         this.emit('loaded');
         return;
-      }
-      this.getAllInstances(allGameIds).then(() =>{
-        this.loaded = true;
-        this.emit('loaded');
       });
-    });
   }
 
   public async getGames(): Promise<{games:Map<GameId, Game | undefined>, participantIds:Map<SpectatorId | PlayerId, GameId>}> {

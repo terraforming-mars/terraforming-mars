@@ -6,7 +6,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {Units} from '../../../src/common/Units';
 import {Penguins} from '../../../src/cards/promo/Penguins';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('DesignedOrganisms', function() {
   let card: DesignedOrganisms;
@@ -16,7 +16,7 @@ describe('DesignedOrganisms', function() {
   beforeEach(function() {
     card = new DesignedOrganisms();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 
@@ -34,7 +34,7 @@ describe('DesignedOrganisms', function() {
     player.playedCards = [tardigrades, penguins];
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.plants).eq(3);
     expect(player.getProductionForTest()).eql(Units.of({plants: 2}));

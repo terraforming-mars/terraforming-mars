@@ -5,7 +5,7 @@ import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('WildlifeDome', function() {
@@ -18,8 +18,8 @@ describe('WildlifeDome', function() {
     card = new WildlifeDome();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play: reds', function() {

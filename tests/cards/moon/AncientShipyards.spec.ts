@@ -1,13 +1,13 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('AncientShipyards', () => {
   let game: Game;
@@ -18,7 +18,7 @@ describe('AncientShipyards', () => {
   beforeEach(() => {
     bluePlayer = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
     card = new AncientShipyards();
   });
 
@@ -46,7 +46,7 @@ describe('AncientShipyards', () => {
     redPlayer.megaCredits = 10;
 
     card.action(bluePlayer);
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     // Steal from red.
     orOptions.options[0].cb();
 
@@ -57,7 +57,7 @@ describe('AncientShipyards', () => {
 
   it('act solo', () => {
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [redPlayer], redPlayer, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [redPlayer], redPlayer, MOON_OPTIONS);
 
     expect(card.resourceCount).eq(0);
     redPlayer.megaCredits = 10;

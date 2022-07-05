@@ -8,7 +8,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 
 describe('OceanFarm', () => {
   let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;
@@ -17,20 +17,20 @@ describe('OceanFarm', () => {
     card = new OceanFarm();
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can play', () => {
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
@@ -38,7 +38,7 @@ describe('OceanFarm', () => {
     expect(player.getProduction(Resources.HEAT)).eq(0);
     expect(player.getProduction(Resources.PLANTS)).eq(0);
 
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
 
     expect(player.getProduction(Resources.HEAT)).eq(1);
@@ -52,7 +52,7 @@ describe('OceanFarm', () => {
   });
 
   it('Ocean Farm counts as ocean for adjacency', () => {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];

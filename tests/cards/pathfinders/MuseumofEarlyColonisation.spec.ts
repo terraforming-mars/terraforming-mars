@@ -3,7 +3,7 @@ import {MuseumofEarlyColonisation} from '../../../src/cards/pathfinders/Museumof
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {addCity, addGreenery, addOcean} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {Units} from '../../../src/common/Units';
 
@@ -16,13 +16,13 @@ describe('MuseumofEarlyColonisation', function() {
     card = new MuseumofEarlyColonisation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
   });
 
   it('canPlay', function() {
-    const ocean = TestingUtils.addOcean(player2);
-    const greenery = TestingUtils.addGreenery(player2);
-    const city = TestingUtils.addCity(player2);
+    const ocean = addOcean(player2);
+    const greenery = addGreenery(player2);
+    const city = addCity(player2);
     player.setProductionForTest({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
 

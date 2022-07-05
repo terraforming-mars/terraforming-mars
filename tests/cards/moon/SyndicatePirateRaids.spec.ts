@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
@@ -14,7 +14,7 @@ describe('SyndicatePirateRaids', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, TestingUtils.setCustomGameOptions({coloniesExtension: true}));
+    game = Game.newInstance('gameid', [player, otherPlayer], player, setCustomGameOptions({coloniesExtension: true}));
     card = new SyndicatePirateRaids();
   });
 
@@ -29,7 +29,7 @@ describe('SyndicatePirateRaids', () => {
     expect(game.colonies[0].visitor).eq(player.id);
     expect(game.colonies[1].visitor).eq(otherPlayer.id);
 
-    TestingUtils.forceGenerationEnd(game);
+    forceGenerationEnd(game);
 
     expect(player.tradesThisGeneration).eq(0);
     expect(otherPlayer.tradesThisGeneration).eq(0);
@@ -50,7 +50,7 @@ describe('SyndicatePirateRaids', () => {
 
     card.play(player);
 
-    TestingUtils.forceGenerationEnd(game);
+    forceGenerationEnd(game);
 
     expect(player.tradesThisGeneration).eq(0);
     expect(otherPlayer.tradesThisGeneration).eq(1);
@@ -71,7 +71,7 @@ describe('SyndicatePirateRaids', () => {
 
     card.play(player);
 
-    TestingUtils.forceGenerationEnd(game);
+    forceGenerationEnd(game);
 
     expect(player.tradesThisGeneration).eq(0);
     expect(otherPlayer.tradesThisGeneration).eq(1);
@@ -79,7 +79,7 @@ describe('SyndicatePirateRaids', () => {
     expect(game.colonies[0].visitor).is.undefined;
     expect(game.colonies[1].visitor).eq(otherPlayer.id);
 
-    TestingUtils.forceGenerationEnd(game);
+    forceGenerationEnd(game);
 
     expect(player.tradesThisGeneration).eq(0);
     expect(otherPlayer.tradesThisGeneration).eq(0);

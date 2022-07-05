@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {DarksideObservatory} from '../../../src/cards/moon/DarksideObservatory';
 import {expect} from 'chai';
@@ -11,7 +11,7 @@ import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArk
 import {ProcessorFactory} from '../../../src/cards/moon/ProcessorFactory';
 import {NanotechIndustries} from '../../../src/cards/moon/NanotechIndustries';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('DarksideObservatory', () => {
   let player: Player;
@@ -32,7 +32,7 @@ describe('DarksideObservatory', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new DarksideObservatory();
   });
 

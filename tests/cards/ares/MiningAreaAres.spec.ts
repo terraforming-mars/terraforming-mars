@@ -8,7 +8,7 @@ import {TileType} from '../../../src/common/TileType';
 import {MiningAreaAres} from '../../../src/cards/ares/MiningAreaAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MiningAreaAres', function() {
   let card : MiningAreaAres; let player : Player; let game : Game;
@@ -17,7 +17,7 @@ describe('MiningAreaAres', function() {
     card = new MiningAreaAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {
@@ -33,15 +33,14 @@ describe('MiningAreaAres', function() {
       }
     }
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
     expect(titaniumSpace!.bonus[0]).equal(SpaceBonus.TITANIUM);
 
     action.cb(titaniumSpace!);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_TITANIUM_BONUS);
@@ -53,7 +52,7 @@ describe('MiningAreaAres', function() {
     expect(steelSpace!.bonus[0]).equal(SpaceBonus.STEEL);
 
     action.cb(steelSpace!);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_STEEL_BONUS);

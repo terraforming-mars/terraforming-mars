@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MassConverter', function() {
@@ -15,7 +15,7 @@ describe('MassConverter', function() {
     card = new MassConverter();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -31,7 +31,7 @@ describe('MassConverter', function() {
     expect(card.getCardDiscount(player, card)).to.eq(0);
     expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
 
-    const fakeCard = TestingUtils.fakeCard({tags: [Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE]});
-    expect(card.getCardDiscount(player, fakeCard)).eq(2);
+    const fake = fakeCard({tags: [Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE]});
+    expect(card.getCardDiscount(player, fake)).eq(2);
   });
 });

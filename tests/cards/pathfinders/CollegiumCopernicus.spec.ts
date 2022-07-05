@@ -7,7 +7,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
 import {AndOptions} from '../../../src/inputs/AndOptions';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {Enceladus} from '../../../src/colonies/Enceladus';
 import {Europa} from '../../../src/colonies/Europa';
@@ -84,9 +84,9 @@ describe('CollegiumCopernicus', function() {
 
     card.resourceCount = 3;
 
-    const tradeAction = TestingUtils.cast(getTradeAction(), AndOptions);
+    const tradeAction = cast(getTradeAction(), AndOptions);
 
-    const payAction = TestingUtils.cast(tradeAction.options[0], OrOptions);
+    const payAction = cast(tradeAction.options[0], OrOptions);
     expect(payAction.title).eq('Pay trade fee');
     expect(payAction.options).has.length(1);
 
@@ -105,7 +105,7 @@ describe('CollegiumCopernicus', function() {
   it('play', function() {
     expect(card.resourceCount).eq(0);
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(card.resourceCount).eq(1);
   });
 
@@ -113,9 +113,9 @@ describe('CollegiumCopernicus', function() {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
 
-    card.onCardPlayed(player, TestingUtils.fakeCard({tags: [Tags.SCIENCE]}));
-    TestingUtils.runAllActions(game);
-    const selectCard = TestingUtils.cast(player.getWaitingFor(), SelectCard);
+    card.onCardPlayed(player, fakeCard({tags: [Tags.SCIENCE]}));
+    runAllActions(game);
+    const selectCard = cast(player.getWaitingFor(), SelectCard);
 
     expect(selectCard.cards).has.members([card, lunarObservationPost]);
     expect(lunarObservationPost.resourceCount).eq(0);

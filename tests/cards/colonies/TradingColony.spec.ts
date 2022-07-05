@@ -7,7 +7,7 @@ import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('TradingColony', function() {
@@ -18,8 +18,8 @@ describe('TradingColony', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });
 

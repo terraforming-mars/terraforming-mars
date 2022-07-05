@@ -3,7 +3,7 @@ import {SnowAlgae} from '../../../src/cards/promo/SnowAlgae';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('SnowAlgae', function() {
@@ -12,16 +12,16 @@ describe('SnowAlgae', function() {
   beforeEach(function() {
     card = new SnowAlgae();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Can\'t play', function() {
-    TestingUtils.maxOutOceans(player, 1);
+    maxOutOceans(player, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    TestingUtils.maxOutOceans(player, 2);
+    maxOutOceans(player, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

@@ -4,8 +4,8 @@ import {VastitasBorealisBoard} from '../../src/boards/VastitasBorealisBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayers} from '../TestPlayers';
-import {Random} from '../../src/Random';
-import {TestingUtils} from '../TestingUtils';
+import {SeededRandom} from '../../src/Random';
+import {setCustomGameOptions, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/SpaceName';
 
@@ -16,10 +16,10 @@ describe('VastitasBorealisBoard', function() {
   let player2 : Player;
 
   beforeEach(function() {
-    board = VastitasBorealisBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
+    board = VastitasBorealisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('x', [player, player2], player, TestingUtils.setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
   });
 
   it('Grants temperature bonus', () => {
@@ -33,7 +33,7 @@ describe('VastitasBorealisBoard', function() {
     expect(game.getTemperature()).eq(-30);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.CITY});
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(0);
     expect(game.getTemperature()).eq(-28);

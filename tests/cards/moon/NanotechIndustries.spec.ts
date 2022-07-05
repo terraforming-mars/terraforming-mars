@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {NanotechIndustries} from '../../../src/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
@@ -11,7 +11,7 @@ import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArk
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('NanotechIndustries', () => {
   let player: Player;
@@ -28,7 +28,7 @@ describe('NanotechIndustries', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     nanotechIndustries = new NanotechIndustries();
   });
 

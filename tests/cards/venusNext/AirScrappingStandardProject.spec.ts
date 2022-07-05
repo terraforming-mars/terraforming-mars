@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/cards/venusNext/AirScrappingStandardProject';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
@@ -17,7 +17,7 @@ describe('AirScrappingStandardProject', function() {
   beforeEach(function() {
     card = new AirScrappingStandardProject();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({altVenusBoard: false}));
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({altVenusBoard: false}));
   });
 
   it('Can act', function() {
@@ -33,7 +33,7 @@ describe('AirScrappingStandardProject', function() {
     expect(game.getVenusScaleLevel()).eq(0);
 
     card.action(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(0);
     expect(player.getTerraformRating()).eq(21);

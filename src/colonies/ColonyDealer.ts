@@ -63,11 +63,10 @@ export class ColonyDealer {
     this.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
   }
 
-  public restore(activeColonies: Array<IColony>) {
+  public restore(activeColonies: Array<IColony>): void {
     this.colonies = [...activeColonies];
-    this.discardedColonies.push();
     this.discardedColonies = this.gameColonies.filter((c) => {
-      activeColonies.some((ac) => ac.name === c.name);
+      return !activeColonies.some((ac) => ac.name === c.name);
     });
   }
 }

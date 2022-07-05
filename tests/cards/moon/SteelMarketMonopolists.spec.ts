@@ -2,13 +2,13 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {SteelMarketMonopolists} from '../../../src/cards/moon/SteelMarketMonopolists';
 import {expect} from 'chai';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('SteelMarketMonopolists', () => {
   let game: Game;
@@ -18,7 +18,7 @@ describe('SteelMarketMonopolists', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new SteelMarketMonopolists();
   });
@@ -52,9 +52,7 @@ describe('SteelMarketMonopolists', () => {
   it('sell steel', () => {
     player.megaCredits = 1;
     player.steel = 2;
-    const action = card.action(player);
-    expect(action).is.instanceof(SelectAmount);
-    const selectAmount = action as SelectAmount;
+    const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(2);
     selectAmount.cb(2);
@@ -65,9 +63,7 @@ describe('SteelMarketMonopolists', () => {
   it('sell steel - limited', () => {
     player.megaCredits = 0;
     player.steel = 100;
-    const action = card.action(player);
-    expect(action).is.instanceof(SelectAmount);
-    const selectAmount = action as SelectAmount;
+    const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(3);
   });
@@ -75,9 +71,7 @@ describe('SteelMarketMonopolists', () => {
   it('buy steel', () => {
     player.megaCredits = 7;
     player.steel = 0;
-    const action = card.action(player);
-    expect(action).is.instanceof(SelectAmount);
-    const selectAmount = action as SelectAmount;
+    const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(2);
     selectAmount.cb(2);
@@ -88,9 +82,7 @@ describe('SteelMarketMonopolists', () => {
   it('buy steel - limited', () => {
     player.megaCredits = 100;
     player.steel = 0;
-    const action = card.action(player);
-    expect(action).is.instanceof(SelectAmount);
-    const selectAmount = action as SelectAmount;
+    const selectAmount = cast(card.action(player), SelectAmount);
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(3);
   });

@@ -4,7 +4,7 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('BreedingFarms', function() {
   let card: BreedingFarms;
@@ -14,7 +14,7 @@ describe('BreedingFarms', function() {
   beforeEach(function() {
     card = new BreedingFarms();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
     fish = new Fish();
   });
@@ -71,7 +71,7 @@ describe('BreedingFarms', function() {
     player.playedCards = [fish];
 
     player.defer(card.action(player));
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     player.getWaitingFor()?.cb([fish]);
 
     expect(player.plants).eq(0);

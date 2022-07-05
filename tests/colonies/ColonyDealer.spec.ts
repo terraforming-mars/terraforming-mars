@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {ColonyDealer} from '../../src/colonies/ColonyDealer';
-import {Random} from '../../src/Random';
+import {SeededRandom} from '../../src/Random';
 
 describe('ColonyDealer', function() {
-  const options = TestingUtils.setCustomGameOptions({venusNextExtension: false, coloniesExtension: false, turmoilExtension: false, communityCardsOption: false});
+  const options = setCustomGameOptions({venusNextExtension: false, coloniesExtension: false, turmoilExtension: false, communityCardsOption: false});
 
   it('draw', () => {
-    const dealer = new ColonyDealer(new Random(1), options);
+    const dealer = new ColonyDealer(new SeededRandom(1), options);
     dealer.drawColonies(2);
     expect(dealer.colonies.map((c) => c.name)).deep.eq([
       'Enceladus',
@@ -27,7 +27,7 @@ describe('ColonyDealer', function() {
   });
 
   it('colonies dealt by player count', () => {
-    const rng = new Random(1);
+    const rng = new SeededRandom(1);
     let dealer = new ColonyDealer(rng, options);
     dealer.drawColonies(1);
     expect(dealer.colonies).has.length(4);

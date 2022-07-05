@@ -8,7 +8,7 @@ describe('SpecialDesign', function() {
     const card = new SpecialDesign();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play();
     expect(action).is.undefined;
     expect(card.getRequirementBonus(player)).to.eq(0);

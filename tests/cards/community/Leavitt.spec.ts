@@ -4,7 +4,6 @@ import {Vitor} from '../../../src/cards/prelude/Vitor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
-// import {TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Leavitt', function() {
@@ -17,7 +16,7 @@ describe('Leavitt', function() {
     leavitt = new Leavitt();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(leavitt);
   });
@@ -41,7 +40,7 @@ describe('Leavitt', function() {
   //   leavitt.addColony(player);
 
   //   leavitt.trade(player2);
-  //   TestingUtils.runAllActions(game);
+  //   runAllActions(game);
 
   //   expect(player.titanium).to.eq(4);
   //   expect(player2.titanium).to.eq(1);

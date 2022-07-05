@@ -1,4 +1,4 @@
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {UndermoonDrugLordsNetwork} from '../../../src/cards/moon/UndermoonDrugLordsNetwork';
 import {expect} from 'chai';
@@ -7,7 +7,7 @@ import {Game} from '../../../src/Game';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Resources} from '../../../src/common/Resources';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('UndermoonDrugLordsNetwork', () => {
   let player: TestPlayer;
@@ -15,7 +15,7 @@ describe('UndermoonDrugLordsNetwork', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new UndermoonDrugLordsNetwork();
   });
 

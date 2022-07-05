@@ -218,7 +218,7 @@ describe('SelectHowToPay', () => {
     }, playerFields);
     const playerView: Partial<PlayerViewModel> = {
       thisPlayer: thisPlayer as PublicPlayerModel,
-      id: 'foo',
+      id: 'playerid-foo',
     };
 
     const playerInput: Partial<PlayerInputModel> = Object.assign({

@@ -100,7 +100,7 @@ class GreensPolicy03 implements Policy {
 
 class GreensPolicy04 implements Policy {
   id = 'gp04' as const;
-  description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
+  description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
   isDefault = false;
 
   canAct(player: Player) {

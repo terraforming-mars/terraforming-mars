@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/cards/CardRequirements';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
@@ -23,9 +23,9 @@ describe('CardRequirements', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    const gameOptions = setCustomGameOptions();
 
-    Game.newInstance('foobar', [player, player2], player, gameOptions);
+    Game.newInstance('gameid', [player, player2], player, gameOptions);
   });
 
   it('satisfies properly for oceans', function() {
@@ -109,13 +109,13 @@ describe('CardRequirements', function() {
   it('satisfies properly for greeneries', function() {
     const requirements = CardRequirements.builder((b) => b.greeneries(2, {max: true}));
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player2);
+    addGreenery(player2);
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(requirements.satisfies(player)).eq(false);
   });
 
@@ -233,8 +233,8 @@ describe('CardRequirements', function() {
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
     // Choose Remove 1 plant option
-    TestingUtils.runAllActions(player.game);
-    const orOptions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
+    runAllActions(player.game);
+    const orOptions = cast(player.getWaitingFor(), OrOptions);
     orOptions.options[0].cb([player2]);
 
     expect(requirements.satisfies(player)).eq(true);

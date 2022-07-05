@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {finishGeneration, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaProjectOffice} from '../../../src/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
@@ -7,12 +7,12 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Player} from '../../../src/Player';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const card = new LunaProjectOffice();
 
     player.cardsInHand = [card];
@@ -28,10 +28,10 @@ describe('LunaProjectOffice', () => {
   it('play - solo', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance(
-      'id',
+      'gameid',
       [player],
       player,
-      TestingUtils.setCustomGameOptions({
+      setCustomGameOptions({
         moonExpansion: true,
         turmoilExtension: false,
       }));
@@ -76,10 +76,10 @@ describe('LunaProjectOffice', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance(
-      'id',
+      'gameid',
       [player, redPlayer],
       player,
-      TestingUtils.setCustomGameOptions({
+      setCustomGameOptions({
         moonExpansion: true,
         draftVariant: true,
         turmoilExtension: false,
@@ -132,10 +132,10 @@ describe('LunaProjectOffice', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance(
-      'id',
+      'gameid',
       [player, redPlayer],
       player,
-      TestingUtils.setCustomGameOptions({
+      setCustomGameOptions({
         moonExpansion: true,
         draftVariant: false,
         turmoilExtension: false,
@@ -178,18 +178,6 @@ describe('LunaProjectOffice', () => {
     expect(getWaitingFor(redPlayer).cards).has.length(4);
   });
 });
-
-function finishGeneration(game: Game): void {
-  const priorGeneration = game.generation;
-  game.getPlayersInGenerationOrder().forEach((player) => {
-    game.playerHasPassed(player);
-    game.playerIsFinishedTakingActions();
-  });
-  const currentGeneration = game.generation;
-  if (currentGeneration !== priorGeneration + 1) {
-    console.log('uh oh');
-  }
-}
 
 function getWaitingFor(player: Player): SelectCard<IProjectCard> {
   const action = player.getWaitingFor();

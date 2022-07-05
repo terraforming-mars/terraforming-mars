@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {HypersensitiveSiliconChipFactory} from '../../../src/cards/moon/HypersensitiveSiliconChipFactory';
 import {expect} from 'chai';
@@ -9,7 +9,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('HypersensitiveSiliconChipFactory', () => {
   let player: TestPlayer;
@@ -18,7 +18,7 @@ describe('HypersensitiveSiliconChipFactory', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HypersensitiveSiliconChipFactory();
     moonData = MoonExpansion.moonData(game);
   });

@@ -51,6 +51,8 @@
 
               <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :hideTiles="hideTiles"/>
 
+              <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+
               <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
                   <Milestone :milestones_list="game.milestones" />
                   <Awards :awards="game.awards" show-scores/>
@@ -105,7 +107,7 @@
                       <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
                     </div>
                   </div>
-                  <div class="text-overview">[ toggle cards filters ]</div>
+                  <div class="text-overview" v-i18n>[ toggle cards filters ]</div>
               </div>
               <div v-if="thisPlayer.corporationCard !== undefined" class="cardbox">
                   <Card :card="thisPlayer.corporationCard" :actionUsed="isCardActivated(thisPlayer.corporationCard, thisPlayer)"/>
@@ -233,7 +235,6 @@
               </div>
           </div>
       </div>
-      <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
       <div v-if="game.spectatorId">
         <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
       </div>

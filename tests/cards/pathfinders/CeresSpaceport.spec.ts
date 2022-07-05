@@ -6,7 +6,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
 import {SpaceName} from '../../../src/SpaceName';
 import {Units} from '../../../src/common/Units';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('CeresSpaceport', function() {
   let card: CeresSpaceport;
@@ -15,7 +15,7 @@ describe('CeresSpaceport', function() {
   beforeEach(function() {
     card = new CeresSpaceport();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: true}));
+    Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 
   it('play', function() {

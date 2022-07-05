@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {CosmicRadiation} from '../../../src/cards/moon/CosmicRadiation';
 import {expect} from 'chai';
@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('CosmicRadiation', () => {
   let player1: Player;
@@ -21,7 +21,7 @@ describe('CosmicRadiation', () => {
     player1 = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
-    const game = Game.newInstance('id', [player1, player2, player3], player1, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player1, player2, player3], player1, MOON_OPTIONS);
     card = new CosmicRadiation();
     moonData = MoonExpansion.moonData(game);
   });

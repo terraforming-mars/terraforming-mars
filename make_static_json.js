@@ -20,15 +20,19 @@ function getAllTranslations() {
       files.forEach((file) => {
         if ( file === undefined || ! file.endsWith('.json')) return;
 
-        const dataJson = JSON.parse(fs.readFileSync(path.join(translationDir, file), 'utf8'));
+        try {
+          const dataJson = JSON.parse(fs.readFileSync(path.join(translationDir, file), 'utf8'));
 
-        for (const phrase in dataJson) {
-          if (dataJson.hasOwnProperty(phrase)) {
-            if (translations[phrase] === undefined) {
-              translations[phrase] = {};
+          for (const phrase in dataJson) {
+            if (dataJson.hasOwnProperty(phrase)) {
+              if (translations[phrase] === undefined) {
+                translations[phrase] = {};
+              }
+              translations[phrase][lang] = dataJson[phrase];
             }
-            translations[phrase][lang] = dataJson[phrase];
           }
+        } catch (e) {
+          throw new Error(`While parsing ${file}:` + e);
         }
       });
     }
@@ -59,7 +63,7 @@ function getWaitingForTimeout() {
   if (process.env.WAITING_FOR_TIMEOUT) {
     return Number(process.env.WAITING_FOR_TIMEOUT);
   }
-  return 2500;
+  return 1000;
 }
 
 function getLogLength() {

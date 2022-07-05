@@ -24,7 +24,7 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: 'Pf01',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 plant to add 1 animal to any card.', (eb) => {
+          b.action('Spend 1 plant to add 1 animal to ANY card.', (eb) => {
             eb.plants(1).startAction.animals(1);
           });
           b.br;

@@ -11,6 +11,7 @@ import {SelectColony} from '../../../src/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {newTestGame, getTestPlayer} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('TitanFloatingLaunchPad', function() {
   let card : TitanFloatingLaunchPad; let player : TestPlayer; let game : Game;
@@ -72,7 +73,7 @@ describe('TitanFloatingLaunchPad', function() {
     player.playedCards.push(card2);
     player.addResourceTo(card, 7);
 
-    const orOptions = card.action(player) as OrOptions;
+    const orOptions = cast(card.action(player), OrOptions);
 
     orOptions.options[1].cb(); // Add resource
     expect(game.deferredActions).has.lengthOf(1);
@@ -103,15 +104,13 @@ describe('TitanFloatingLaunchPad', function() {
     expect(getTradeAction()).is.undefined;
 
     card.resourceCount = 1;
-    const tradeAction = getTradeAction();
-    expect(tradeAction).instanceOf(AndOptions);
+    const tradeAction = cast(getTradeAction(), AndOptions);
 
-    const payAction = (tradeAction as AndOptions).options[0];
-    expect(payAction).instanceOf(OrOptions);
+    const payAction = cast(tradeAction.options[0], OrOptions);
     expect(payAction.title).eq('Pay trade fee');
     expect(payAction.options).has.length(1);
 
-    const floaterOption = (payAction as OrOptions).options[0];
+    const floaterOption = cast(payAction, OrOptions).options[0];
     expect(floaterOption.title).to.match(/Pay 1 Floater/);
 
     floaterOption.cb();

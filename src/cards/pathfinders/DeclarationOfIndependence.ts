@@ -23,7 +23,7 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
         cardNumber: 'Pf34',
         renderData: CardRenderer.builder((b) => b.delegates(2).asterix),
         // TODO(kberg): remove "in reserve" to work like Cultural Metropolis.
-        description: 'Have at least 6 Mars tags in play. Place 2 delegates from the reserve in 1 party.',
+        description: 'Requires that you have at least 6 Mars tags in play. Place 2 delegates from the reserve in 1 party.',
       },
     });
   }

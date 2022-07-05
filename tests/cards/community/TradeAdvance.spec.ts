@@ -3,7 +3,7 @@ import {TradeAdvance} from '../../../src/cards/community/TradeAdvance';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions, runAllActions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('TradeAdvance', function() {
@@ -13,17 +13,17 @@ describe('TradeAdvance', function() {
     card = new TradeAdvance();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({
+    const gameOptions = setCustomGameOptions({
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {
     card.play(player);
 
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
     expect(player.megaCredits).to.eq(6); // 2 from card + 4 from Luna
     expect(player.energy).to.eq(3);

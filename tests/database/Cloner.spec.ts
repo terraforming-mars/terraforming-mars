@@ -2,30 +2,25 @@ import {expect} from 'chai';
 import {Cloner} from '../../src/database/Cloner';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {Color} from '../../src/common/Color';
 
 describe('Cloner', function() {
   it('solo game preserved', () => {
-    const player = new Player('old-player1', Color.YELLOW, true, 9, 'old-player1-id');
+    const player = new Player('old-player1', Color.YELLOW, true, 9, 'p-old-player1-id');
     const game = Game.newInstance(
-      'old-game-id', [player], player, TestingUtils.setCustomGameOptions({}), -5179823149812374);
+      'g-old-game-id', [player], player, setCustomGameOptions({}), -5179823149812374);
 
-    const newPlayer = new Player('new-player1', Color.RED, false, 3, 'new-player1-id');
-    let newGame: Game | undefined = undefined;
-    Cloner.clone('new-id', [newPlayer], 0, undefined, game.serialize(), (err, deserialized) => {
-      expect(err).is.undefined;
-      expect(deserialized).is.not.undefined;
-      newGame = deserialized;
-    });
+    const newPlayer = new Player('new-player1', Color.RED, false, 3, 'p-new-player1-id');
+    const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
 
-    expect(newGame!.id).eq('new-id');
-    expect(game.getPlayerById('old-player1-id')).is.not.undefined;
-    expect(() => game.getPlayerById('new-player1-id')).to.throw();
-    expect(() => newGame!.getPlayerById('old-player1-id')).to.throw();
-    expect(newGame!.getPlayerById('new-player1-id')).is.not.undefined;
+    expect(newGame.id).eq('g-new-id');
+    expect(game.getPlayerById('p-old-player1-id')).is.not.undefined;
+    expect(() => game.getPlayerById('p-new-player1-id')).to.throw();
+    expect(() => newGame.getPlayerById('p-old-player1-id')).to.throw();
+    expect(newGame.getPlayerById('p-new-player1-id')).is.not.undefined;
 
-    const newPlayerZero = newGame!.getPlayersInGenerationOrder()[0];
+    const newPlayerZero = newGame.getPlayersInGenerationOrder()[0];
     expect(newPlayerZero.color).eq(Color.RED);
     expect(newPlayerZero.beginner).is.true;
 
@@ -45,19 +40,19 @@ describe('Cloner', function() {
     expect(player.playedCards, 'playedCards').deep.eq(newPlayerZero.playedCards);
     expect(player.draftedCards, 'draftedCards').deep.eq(newPlayerZero.draftedCards);
 
-    expect(game.rng.seed).eq(newGame!.rng.seed);
-    expect(game.gameAge).eq(newGame!.gameAge);
-    expect(game.undoCount).eq(newGame!.undoCount);
-    expect(game.dealer, 'dealer').to.deep.eq(newGame!.dealer);
-    expect(game.milestones, 'milestones').to.deep.eq(newGame!.milestones);
-    expect(game.awards, 'awards').to.deep.eq(newGame!.awards);
+    expect(game.rng.seed).eq(newGame.rng.seed);
+    expect(game.gameAge).eq(newGame.gameAge);
+    expect(game.undoCount).eq(newGame.undoCount);
+    expect(game.dealer, 'dealer').to.deep.eq(newGame.dealer);
+    expect(game.milestones, 'milestones').to.deep.eq(newGame.milestones);
+    expect(game.awards, 'awards').to.deep.eq(newGame.awards);
 
 
     // validating two boards across two games as equal is a little tricky because player IDs have changed, so
     // doing a test in this manner instead.
     for (let idx = 0; idx < game.board.spaces.length; idx++) {
       const oldSpace = game.board.spaces[idx];
-      const newSpace = newGame!.board.spaces[idx];
+      const newSpace = newGame.board.spaces[idx];
       if (oldSpace.player !== undefined) {
         expect(oldSpace.player.color, `for idx ${idx}`).eq(Color.NEUTRAL);
         expect(newSpace.player!.color, `for idx ${idx}`).eq(Color.NEUTRAL);
@@ -70,6 +65,6 @@ describe('Cloner', function() {
       }
     }
     // This test will pass now that space players have been separately verified.
-    expect(game.board).to.deep.eq(newGame!.board);
+    expect(game.board).to.deep.eq(newGame.board);
   });
 });

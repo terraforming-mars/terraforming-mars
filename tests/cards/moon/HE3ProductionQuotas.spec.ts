@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {HE3ProductionQuotas} from '../../../src/cards/moon/HE3ProductionQuotas';
 import {expect} from 'chai';
@@ -10,7 +10,7 @@ import {TileType} from '../../../src/common/TileType';
 import {Kelvinists} from '../../../src/turmoil/parties/Kelvinists';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('HE3ProductionQuotas', () => {
   let player: Player;
@@ -20,7 +20,7 @@ describe('HE3ProductionQuotas', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HE3ProductionQuotas();
     moonData = MoonExpansion.moonData(game);
   });

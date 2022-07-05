@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('WaterSplittingPlant', function() {
@@ -12,7 +12,7 @@ describe('WaterSplittingPlant', function() {
     card = new WaterSplittingPlant();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -20,7 +20,7 @@ describe('WaterSplittingPlant', function() {
   });
 
   it('Can play', function() {
-    TestingUtils.maxOutOceans(player, 2);
+    maxOutOceans(player, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 

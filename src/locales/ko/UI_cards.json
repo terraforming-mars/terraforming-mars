@@ -180,13 +180,18 @@
     "Gain 3 plants.": "식물 자원 3개 획득",
     "Venus Milestone/Award": "금성 업적 및 기업상",
     "colony": "위성 타일",
+    "Colony Tiles": "위성 타일",
+    "Global Events": "행성계 사건",
     "awards": "기업상",
     "corporation": "기업",
+    "max": "최대",
+    "[max 4]": "[최대 4개]",
 
     "Colony City": "개척기지 도시",
     "max 1 Colony": "최대 개척기지 1개",
     "play": "추진",
     "replay": "재추진",
+    "Invert": "반전",
     
     "1 VP for each Animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
     "1 VP for each animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",

@@ -7,7 +7,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 
 describe('EosChasmaNationalPark', () => {
   let card : EosChasmaNationalPark; let player : TestPlayer; let game : Game;
@@ -16,7 +16,7 @@ describe('EosChasmaNationalPark', () => {
     card = new EosChasmaNationalPark();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can play', () => {
@@ -33,7 +33,7 @@ describe('EosChasmaNationalPark', () => {
     player.playedCards.push(birds, fish);
 
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = TestingUtils.cast(card.play(player), SelectCard);
+    const action = cast(card.play(player), SelectCard);
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
     player.playedCards.push(card);
     expect(player.getVictoryPoints().victoryPoints).to.eq(1);

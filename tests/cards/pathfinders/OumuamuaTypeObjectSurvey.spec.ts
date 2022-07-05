@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
@@ -18,43 +18,43 @@ describe('OumuamuaTypeObjectSurvey', function() {
   let game: Game;
   let dealer: Dealer;
 
-  const noTags = TestingUtils.fakeCard({
+  const noTags = fakeCard({
     name: 'none' as CardName,
     tags: [],
   });
-  const earthTag = TestingUtils.fakeCard({
+  const earthTag = fakeCard({
     name: 'earth' as CardName,
     tags: [Tags.EARTH],
   });
-  const scienceTag: IProjectCard = TestingUtils.fakeCard({
+  const scienceTag: IProjectCard = fakeCard({
     name: 'sci' as CardName,
     tags: [Tags.SCIENCE],
   });
-  const microbeTag: IProjectCard = TestingUtils.fakeCard({
+  const microbeTag: IProjectCard = fakeCard({
     name: 'mi' as CardName,
     tags: [Tags.MICROBE],
   });
-  const spaceTag = TestingUtils.fakeCard({
+  const spaceTag = fakeCard({
     name: 'space' as CardName,
     tags: [Tags.SPACE],
   });
-  const scienceMicrobeTag = TestingUtils.fakeCard({
+  const scienceMicrobeTag = fakeCard({
     name: 'sci/mi' as CardName,
     tags: [Tags.SCIENCE, Tags.MICROBE],
   });
-  const spaceScienceTag = TestingUtils.fakeCard({
+  const spaceScienceTag = fakeCard({
     cost: 20,
     name: 'space/sci' as CardName,
     tags: [Tags.SPACE, Tags.SCIENCE],
   });
-  const requirementsCard = TestingUtils.fakeCard({
+  const requirementsCard = fakeCard({
     cost: 10,
     name: 'req' as CardName,
     tags: [Tags.SCIENCE],
     requirements: CardRequirements.builder((b) => b.temperature(-28, {max: true})),
   });
   // The slug is the card at the bottom of the deck. If it were drawn, the deck would be empty and refilled from the discard pile.
-  const slug = TestingUtils.fakeCard({
+  const slug = fakeCard({
     name: 'slug' as CardName,
     tags: [],
   });
@@ -62,7 +62,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
   beforeEach(function() {
     card = new OumuamuaTypeObjectSurvey();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     dealer = game.dealer;
     dealer.discarded = [];
     player.megaCredits = 100;
@@ -179,7 +179,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     dealer.deck.push(slug, noTags);
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(lunarObservationPost.resourceCount).eq(2);
   });

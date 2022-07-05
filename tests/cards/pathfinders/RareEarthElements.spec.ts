@@ -16,7 +16,7 @@ describe('RareEarthElements', function() {
     card = new RareEarthElements();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('play', function() {

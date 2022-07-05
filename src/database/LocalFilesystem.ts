@@ -1,7 +1,6 @@
-import {DbLoadCallback, IDatabase} from './IDatabase';
+import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent} from 'fs';
 
@@ -59,52 +58,50 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  getGameId(_playerId: string, _cb: (err: Error | undefined, gameId?: GameId) => void): void {
+  getGameId(_playerId: string): Promise<GameId> {
     throw new Error('Not implemented');
   }
 
-  getGameVersion(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
+  getSaveIds(gameId: GameId): Promise<Array<number>> {
+    const re = /(.*)-(.*).json/;
+    const results = fs.readdirSync(historyFolder, {withFileTypes: true})
+      .filter((dirent: Dirent) => dirent.name.startsWith(gameId + '-'))
+      .filter((dirent: Dirent) => dirent.isFile())
+      .map((dirent: Dirent) => dirent.name.match(re))
+      .filter((result: RegExpMatchArray) => result !== null)
+      .map((result: RegExpMatchArray) => result[2]);
+    return Promise.resolve(results);
+  }
+
+  getGameVersion(_game_id: GameId, _save_id: number): Promise<SerializedGame> {
     throw new Error('Not implemented');
   }
 
-  getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
-    this.getGames((err, gameIds) => {
-      const filtered = gameIds.filter((gameId) => fs.existsSync(this._historyFilename(gameId, 0)));
-      const gameData = filtered.map((gameId) => {
-        const text = fs.readFileSync(this._historyFilename(gameId, 0));
-        const serializedGame = JSON.parse(text) as SerializedGame;
-        return {gameId: gameId, playerCount: serializedGame.players.length};
-      });
-      cb(err, gameData);
-    });
-  }
-
-  getClonableGameByGameId(gameId: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void) {
-    this.getGames((err, gameIds) => {
+  getPlayerCount(gameId: GameId): Promise<number> {
+    return this.getGames().then((gameIds) => {
       const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
       if (found === undefined) {
-        cb(err, undefined);
-        return;
+        throw new Error(`${gameId} not found`);
       }
       const text = fs.readFileSync(this._historyFilename(gameId, 0));
       const serializedGame = JSON.parse(text) as SerializedGame;
-      cb(err, {gameId: gameId, playerCount: serializedGame.players.length});
+      return serializedGame.players.length;
     });
   }
 
-  loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
+  loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
     try {
       console.log(`Loading ${game_id} at save point 0`);
       const text = fs.readFileSync(this._historyFilename(game_id, 0));
       const serializedGame = JSON.parse(text);
-      cb(undefined, serializedGame);
+      return Promise.resolve(serializedGame);
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
-      cb(error, undefined);
+      return Promise.reject(error);
     }
   }
 
-  getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
+  getGames(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 
     // TODO(kberg): use readdir since this is expected to be async anyway.
@@ -119,30 +116,50 @@ export class Localfilesystem implements IDatabase {
       }
       gameIds.push(result[1]);
     });
-    cb(undefined, gameIds);
+    return Promise.resolve(gameIds);
   }
 
-  restoreReferenceGame(_gameId: GameId, cb: DbLoadCallback<Game>) {
-    cb(new Error('Does not work'), undefined);
+  restoreReferenceGame(_gameId: GameId): Promise<Game> {
+    throw new Error('Does not work');
   }
 
   saveGameResults(_gameId: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
     // Not implemented
   }
 
-  cleanGame(_gameId: GameId): void {
+  cleanGame(_gameId: GameId): Promise<void> {
     // Not implemented here.
+    return Promise.resolve();
   }
 
   purgeUnfinishedGames(): void {
     // Not implemented.
   }
 
-  restoreGame(_gameId: GameId, _save_id: number, _cb: DbLoadCallback<Game>): void {
-    throw new Error('Undo not yet implemented');
+  async restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
+    await fs.copyFile(this._historyFilename(gameId, saveId), this._filename(gameId));
+    return new Promise((resolve, reject) => {
+      this.getGame(gameId, (err, serializedGame) => {
+        if (err) {
+          reject(err);
+        } else if (serializedGame === undefined) {
+          reject(new Error('game not found'));
+        } else {
+          resolve(serializedGame);
+        }
+      });
+    });
   }
 
   deleteGameNbrSaves(_gameId: GameId, _rollbackCount: number): void {
-    throw new Error('Rollback not yet implemented');
+    console.error('deleting old saves not implemented.');
+  }
+
+  public stats(): Promise<{[key: string]: string | number}> {
+    return Promise.resolve({
+      type: 'Local Filesystem',
+      path: dbFolder.toString(),
+      history_path: historyFolder.toString(),
+    });
   }
 }

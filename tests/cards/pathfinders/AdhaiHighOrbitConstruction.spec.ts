@@ -10,8 +10,9 @@ import {PhobosSpaceHaven} from '../../../src/cards/base/PhobosSpaceHaven';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {BuildColonyStandardProject} from '../../../src/cards/colonies/BuildColonyStandardProject';
 import {ColoniesHandler} from '../../../src/colonies/ColoniesHandler';
-import {TestingUtils} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {AndOptions} from '../../../src/inputs/AndOptions';
 
 describe('AdhaiHighOrbitConstructions', function() {
   let game: Game;
@@ -87,16 +88,18 @@ describe('AdhaiHighOrbitConstructions', function() {
 
     card.resourceCount = 2;
     expect(ColoniesHandler.coloniesTradeAction(player)).is.not.undefined;
-    const tradeAction = ColoniesHandler.coloniesTradeAction(player);
-    const orOptions = TestingUtils.cast(tradeAction!.options[0], OrOptions);
+    const tradeAction = cast(ColoniesHandler.coloniesTradeAction(player), AndOptions);
+    const orOptions = cast(tradeAction.options[0], OrOptions);
     expect(orOptions.options).has.length(1);
     expect(orOptions.options[0].title).eq('Pay 8 M€');
 
     card.resourceCount = 4;
-    expect((ColoniesHandler.coloniesTradeAction(player)!.options[0] as OrOptions).options[0].title).eq('Pay 7 M€');
+    const tradeAction2 = cast(ColoniesHandler.coloniesTradeAction(player), AndOptions);
+    expect(cast(tradeAction2.options[0], OrOptions).options[0].title).eq('Pay 7 M€');
 
     card.resourceCount = 30;
-    expect((ColoniesHandler.coloniesTradeAction(player)!.options[0] as OrOptions).options[0].title).eq('Pay 0 M€');
+    const tradeAction3 = cast(ColoniesHandler.coloniesTradeAction(player), AndOptions);
+    expect(cast(tradeAction3.options[0], OrOptions).options[0].title).eq('Pay 0 M€');
 
     // This doesn't work with titanium
     card.resourceCount = 2;

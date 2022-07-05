@@ -23,51 +23,49 @@ export abstract class Party {
   public checkPartyLeader(newPlayer: PlayerId | NeutralPlayer, game: Game): void {
     // If there is a party leader
     if (this.partyLeader) {
-      if (game) {
-        const sortedPlayers = [...this.getPresentPlayers()].sort(
-          (p1, p2) => this.getDelegates(p2) - this.getDelegates(p1),
-        );
-        const max = this.getDelegates(sortedPlayers[0]);
+      const sortedPlayers = [...this.getPresentPlayers()].sort(
+        (p1, p2) => this.getDelegates(p2) - this.getDelegates(p1),
+      );
+      const max = this.getDelegates(sortedPlayers[0]);
 
-        if (this.getDelegates(this.partyLeader) !== max) {
-          let currentIndex = 0;
-          if (this.partyLeader === 'NEUTRAL') {
-            currentIndex = game.getPlayersInGenerationOrder().indexOf(game.getPlayerById(game.activePlayer));
-          } else {
-            currentIndex = game.getPlayersInGenerationOrder().indexOf(game.getPlayerById(this.partyLeader));
-          }
-
-          let playersToCheck: Array<Player | NeutralPlayer> = [];
-
-          // Manage if it's the first player or the last
-          if (game.getPlayersInGenerationOrder().length === 1 || currentIndex === 0) {
-            playersToCheck = game.getPlayersInGenerationOrder();
-          } else if (currentIndex === game.getPlayersInGenerationOrder().length - 1) {
-            playersToCheck = game.getPlayersInGenerationOrder().slice(0, currentIndex);
-            playersToCheck.unshift(game.getPlayersInGenerationOrder()[currentIndex]);
-          } else {
-            const left = game.getPlayersInGenerationOrder().slice(0, currentIndex);
-            const right = game.getPlayersInGenerationOrder().slice(currentIndex);
-            playersToCheck = right.concat(left);
-          }
-
-          // Add NEUTRAL in the list
-          playersToCheck.push('NEUTRAL');
-
-          playersToCheck.some((nextPlayer) => {
-            let nextPlayerId = '';
-            if (nextPlayer === 'NEUTRAL') {
-              nextPlayerId = 'NEUTRAL';
-            } else {
-              nextPlayerId = nextPlayer.id;
-            }
-            if (this.getDelegates(nextPlayerId) === max) {
-              this.partyLeader = nextPlayerId;
-              return true;
-            }
-            return false;
-          });
+      if (this.getDelegates(this.partyLeader) !== max) {
+        let currentIndex = 0;
+        if (this.partyLeader === 'NEUTRAL') {
+          currentIndex = game.getPlayersInGenerationOrder().indexOf(game.getPlayerById(game.activePlayer));
+        } else {
+          currentIndex = game.getPlayersInGenerationOrder().indexOf(game.getPlayerById(this.partyLeader));
         }
+
+        let playersToCheck: Array<Player | NeutralPlayer> = [];
+
+        // Manage if it's the first player or the last
+        if (game.getPlayersInGenerationOrder().length === 1 || currentIndex === 0) {
+          playersToCheck = game.getPlayersInGenerationOrder();
+        } else if (currentIndex === game.getPlayersInGenerationOrder().length - 1) {
+          playersToCheck = game.getPlayersInGenerationOrder().slice(0, currentIndex);
+          playersToCheck.unshift(game.getPlayersInGenerationOrder()[currentIndex]);
+        } else {
+          const left = game.getPlayersInGenerationOrder().slice(0, currentIndex);
+          const right = game.getPlayersInGenerationOrder().slice(currentIndex);
+          playersToCheck = right.concat(left);
+        }
+
+        // Add NEUTRAL in the list
+        playersToCheck.push('NEUTRAL');
+
+        playersToCheck.some((nextPlayer) => {
+          let nextPlayerId: PlayerId | 'NEUTRAL';
+          if (nextPlayer === 'NEUTRAL') {
+            nextPlayerId = 'NEUTRAL';
+          } else {
+            nextPlayerId = nextPlayer.id;
+          }
+          if (this.getDelegates(nextPlayerId) === max) {
+            this.partyLeader = nextPlayerId;
+            return true;
+          }
+          return false;
+        });
       }
     } else {
       this.partyLeader = newPlayer;

@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {MicrosingularityPlant} from '../../../src/cards/moon/MicrosingularityPlant';
 import {expect} from 'chai';
@@ -9,7 +9,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MicrosingularityPlant', () => {
   let player: Player;
@@ -18,7 +18,7 @@ describe('MicrosingularityPlant', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new MicrosingularityPlant();
     moonData = MoonExpansion.moonData(game);
   });

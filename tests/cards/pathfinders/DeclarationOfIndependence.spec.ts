@@ -3,7 +3,7 @@ import {DeclarationOfIndependence} from '../../../src/cards/pathfinders/Declarat
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
@@ -16,7 +16,7 @@ describe('DeclarationOfIndependence', function() {
   beforeEach(function() {
     card = new DeclarationOfIndependence();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    Game.newInstance('gameid', [player], player, setCustomGameOptions());
     turmoil = player.game.turmoil!;
   });
 
@@ -40,8 +40,8 @@ describe('DeclarationOfIndependence', function() {
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
     expect(marsFirst.getDelegates(player.id)).eq(0);
     card.play(player);
-    TestingUtils.runAllActions(player.game);
-    const action = TestingUtils.cast(player.getWaitingFor(), SelectPartyToSendDelegate);
+    runAllActions(player.game);
+    const action = cast(player.getWaitingFor(), SelectPartyToSendDelegate);
     action.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(4);

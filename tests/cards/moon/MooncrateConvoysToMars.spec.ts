@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {MooncrateConvoysToMars} from '../../../src/cards/moon/MooncrateConvoysToMars';
 import {expect} from 'chai';
@@ -10,7 +10,7 @@ import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MooncrateConvoysToMars', () => {
   let game: Game;
@@ -24,7 +24,7 @@ describe('MooncrateConvoysToMars', () => {
     player1 = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('id', [player1, player2, player3], player1, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player1, player2, player3], player1, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new MooncrateConvoysToMars();
   });

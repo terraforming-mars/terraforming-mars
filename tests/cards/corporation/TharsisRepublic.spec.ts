@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('TharsisRepublic', function() {
@@ -15,7 +15,7 @@ describe('TharsisRepublic', function() {
     card = new TharsisRepublic();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
 
     player.corporationCard = card;
   });
@@ -24,7 +24,7 @@ describe('TharsisRepublic', function() {
     const action = card.initialAction(player);
     expect(action).is.not.undefined;
     action.cb(action.availableSpaces[0]);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(game.getCitiesOnMarsCount()).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -33,7 +33,7 @@ describe('TharsisRepublic', function() {
 
   it('Gives 3 M€ and MC production for own city on Mars', function() {
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).to.eq(3);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -41,7 +41,7 @@ describe('TharsisRepublic', function() {
 
   it('Gives MC production only for other player\'s city on Mars', function() {
     game.addCityTile(player2, game.board.getAvailableSpacesOnLand(player)[0].id);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -51,15 +51,15 @@ describe('TharsisRepublic', function() {
     game.addTile(player, SpaceType.COLONY, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
       tileType: TileType.CITY,
     });
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
   });
 
   it('Gives 2 M€ production in solo mode', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });

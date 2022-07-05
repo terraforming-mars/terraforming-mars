@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ForcedPrecipitation} from '../../../src/cards/venusNext/ForcedPrecipitation';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -12,7 +13,7 @@ describe('ForcedPrecipitation', function() {
     card = new ForcedPrecipitation();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -33,7 +34,7 @@ describe('ForcedPrecipitation', function() {
     player.addResourceTo(card);
     expect(card.resourceCount).to.eq(2);
 
-    const orOptions2 = card.action(player) as OrOptions;
+    const orOptions2 = cast(card.action(player), OrOptions);
     expect(orOptions2 instanceof OrOptions).is.true;
     orOptions2.options[0].cb();
     expect(card.resourceCount).to.eq(0);

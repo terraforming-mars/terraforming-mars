@@ -6,6 +6,7 @@ import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, O
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../common/cards/CardName';
+import {SpaceBonus} from '../common/boards/SpaceBonus';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -86,8 +87,8 @@ export abstract class Board {
       const spaces: Array<ISpace> = [];
       for (const [x, y] of coords) {
         const adj = this.spaces.find((adj) =>
-          space !== adj && adj.spaceType !== SpaceType.COLONY &&
-            adj.x === x && adj.y === y,
+          adj.x === x && adj.y === y &&
+          space !== adj && adj.spaceType !== SpaceType.COLONY,
         );
         if (adj !== undefined) {
           spaces.push(adj);
@@ -99,13 +100,12 @@ export abstract class Board {
   }
 
   // Returns adjacent spaces in clockwise order starting from the top left.
-  public getAdjacentSpaces(space: ISpace): Array<ISpace> {
+  public getAdjacentSpaces(space: ISpace): ReadonlyArray<ISpace> {
     const spaces = this.adjacentSpaces.get(space.id);
     if (spaces === undefined) {
       throw new Error(`Unexpected space ID ${space.id}`);
     }
-    // Clone so that callers can't mutate our arrays
-    return [...spaces];
+    return spaces;
   }
 
   public getSpaceByTileCard(cardName: CardName): ISpace | undefined {
@@ -161,17 +161,6 @@ export abstract class Board {
     );
   }
 
-  public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
-    const spaces = this.getAvailableSpacesOnLand(player)
-      .filter(
-        (space) => this.getAdjacentSpaces(space).find(
-          (adj) => adj.player === player,
-        ) !== undefined,
-      );
-      // Remove duplicates
-    return spaces.filter((space, index) => spaces.indexOf(space) === index);
-  }
-
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
     let spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Spaces next to Red City are always unavialable.
@@ -209,10 +198,21 @@ export abstract class Board {
       const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space);
       // If it does have a hazard tile, make sure it's not a protected one.
       const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-      return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+      // tiles are not placeable on restricted spaces at all
+      const isRestricted = space.bonus.includes(SpaceBonus.RESTRICTED);
+      return !isRestricted && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
     });
 
     return landSpaces;
+  }
+
+  // What's the difference between this and getAvailableSpacesOnLand?
+  public getNonReservedLandSpaces(): Array<ISpace> {
+    return this.spaces.filter((space) => {
+      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
+        (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
+        space.player === undefined;
+    });
   }
 
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
@@ -241,16 +241,8 @@ export abstract class Board {
     return spaces[idx];
   }
 
-  public getNonReservedLandSpaces(): Array<ISpace> {
-    return this.spaces.filter((space) => {
-      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
-        (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
-        space.player === undefined;
-    });
-  }
-
   public canPlaceTile(space: ISpace): boolean {
-    return space.tile === undefined && space.spaceType === SpaceType.LAND;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;
   }
 
   public static isCitySpace(space: ISpace): boolean {

@@ -9,7 +9,7 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions, cast} from '../../TestingUtils';
 
 describe('Ants', function() {
   let card : Ants; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -18,7 +18,7 @@ describe('Ants', function() {
     card = new Ants();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     player.popWaitingFor();
   });
 
@@ -50,11 +50,11 @@ describe('Ants', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    TestingUtils.runAllActions(game);
-    const selectCard = TestingUtils.cast(player.getWaitingFor(), SelectCard);
+    runAllActions(game);
+    const selectCard = cast(player.getWaitingFor(), SelectCard);
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(card.resourceCount).to.eq(1);
     expect(tardigrades.resourceCount).to.eq(0);
@@ -85,7 +85,7 @@ describe('Ants', function() {
     player2.addResourceTo(securityFleet);
 
     card.action(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getWaitingFor()).is.undefined;
 
     expect(card.resourceCount).to.eq(1);

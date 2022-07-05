@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {WeGrowAsOne} from '../../../src/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
@@ -15,10 +15,10 @@ describe('WeGrowAsOne', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance(
-      'id',
+      'gameid',
       [player],
       player,
-      TestingUtils.setCustomGameOptions({
+      setCustomGameOptions({
         moonExpansion: true,
         coloniesExtension: true,
       }));

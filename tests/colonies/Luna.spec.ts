@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
 import {TestPlayers} from '../TestPlayers';
-import {TestingUtils} from '../TestingUtils';
+import {runAllActions} from '../TestingUtils';
 
 describe('Luna', function() {
   let luna: Luna; let player: Player; let player2: Player; let game: Game;
@@ -13,7 +13,7 @@ describe('Luna', function() {
     luna = new Luna();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(luna);
   });
@@ -34,7 +34,7 @@ describe('Luna', function() {
     luna.addColony(player);
 
     luna.trade(player2);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);

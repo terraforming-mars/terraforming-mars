@@ -1,23 +1,20 @@
 import * as http from 'http';
-import {Handler} from './Handler';
+import {AsyncHandler} from './Handler';
 import {IContext} from './IHandler';
-import {GameId, SpectatorId} from '../common/Types';
-import {PlayerId} from '../common/Types';
 
 
-export class ApiGames extends Handler {
+export class ApiGames extends AsyncHandler {
   public static readonly INSTANCE = new ApiGames();
   private constructor() {
     super({validateServerId: true});
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    ctx.gameLoader.getLoadedGameIds((list: Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> | undefined) => {
-      if (list === undefined) {
-        ctx.route.notFound(req, res, 'could not load game list');
-        return;
-      }
-      ctx.route.writeJson(res, list);
-    });
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+    const list = await ctx.gameLoader.getLoadedGameIds();
+    if (list === undefined) {
+      ctx.route.notFound(req, res, 'could not load game list');
+      return;
+    }
+    ctx.route.writeJson(res, list);
   }
 }

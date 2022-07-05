@@ -1,54 +1,52 @@
 {
-  "Aerial Lenses": "",
-  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "",
+  "Aerial Lenses": "공중 렌즈",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "조건: 캘빈당이 집권, 또는 캘빈당에 자기 의원이 2명 이상.) (열 생산력 2 증가. 아무 1명의 식물 자원 2개까지 제거.",
 
-  "Banned Delegate": "",
-  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "",
+  "Banned Delegate": "제명",
+  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "조건: 의장을 보유.) (당대표가 아닌 아무 의원 1명 제거.",
 
-  "Cultural Metropolis": "",
-  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "",
+  "Cultural Metropolis": "문화 수도",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "조건: 통합당이 집권, 또는 통합당에 자기 의원이 2명 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 정당 한 곳에 의원 2명 배치. 도시 타일 1장 배치.",
 
-  "Diaspora Movement": "",
-  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "",
+  "Diaspora Movement": "디아스포라 운동",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "조건: 적색당이 집권, 또는 적색당에 자기 의원이 2명 이상.) (모든 플레이어들의 목성 태그 수만큼 자신이 메가크레딧 획득.",
 
-  "Event Analysts": "",
-  "Effect: You have +1 influence.": "",
-  "Requires that Scientists are ruling or that you have 2 delegates there.": "",
+  "Event Analysts": "사건 분석가",
+  "Effect: You have +1 influence.": "지속효과: 영향력 1 보유.",
+  "Requires that Scientists are ruling or that you have 2 delegates there.": "조건: 과학당이 집권, 또는 과학당에 자기 의원이 2명 이상.",
 
-  "GMO Contract": "",
-  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "",
-  "Requires that Greens are ruling or that you have 2 delegates there.": "",
+  "GMO Contract": "GMO 계약",
+  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 식물/미생물/동물 태그 수의 2배만큼 메가크레딧 획득.",
+  "Requires that Greens are ruling or that you have 2 delegates there.": "조건: 녹색당이 집권, 또는 녹색당에 자기 의원이 2명 이상.",
 
-  "Martian Media Center": "",
-  "Action: Pay 3 M€ to add a delegate to any party.": "",
-  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "",
+  "Martian Media Center": "화성 미디어 센터",
+  "Action: Pay 3 M€ to add a delegate to any party.": "행동: 3M€ 소비해서 아무 정당 한 곳에 의원 1명 배치.",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "조건: 화성중심당이 집권, 또는 화성중심당에 자기 의원이 2명 이상.) (메가크레딧 생산력 2 증가.",
 
-  "Parliament Hall": "",
-  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.": "",
+  "Parliament Hall": "타르시스 국회의사당",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.": "조건: 화성중심당이 집권, 또는 화성중심당에 자기 의원이 2명 이상.) (이 카드도 포함해서, 보유한 건물 태그 3개당 메가크레딧 생산력 1 증가.",
 
-  "PR Office": "",
-  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "",
+  "PR Office": "홍보처",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "조건: 통합당이 집권, 또는 통합당에 자기 의원이 2명 이상.) (테라포밍 등급 1TR 상승. 이 카드도 포함해서, 보유한 지구 태그 수만큼 메가크레딧 획득.",
 
-  "Public Celebrations": "",
-  "Requires that you are Chairman.": "",
+  "Public Celebrations": "공개 축하연",
+  "Requires that you are Chairman.": "조건: 의장을 보유.",
 
-  "Recruitment": "",
-  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "",
+  "Recruitment": "인재 영입",
+  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "당대표가 아닌 중립 의원 1명을 의원 대기실에서 가져온 자기 의원으로 교체.",
 
-  "Red Tourism Wave": "",
-  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "",
+  "Red Tourism Wave": "붉은행성 투어 열풍",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "조건: 적색당이 집권, 또는 적색당에 자기 의원이 2명 이상.) (빈 구역 중에서 자기 타일에 한 면이라도 인접한 구역마다 1M€씩 획득.",
 
-  "Sponsored Mohole": "",
-  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "",
+  "Sponsored Mohole": "모홀 프로젝트 후원",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "조건: 캘빈당이 집권, 또는 캘빈당에 자기 의원이 2명 이상.) (열 생산력 2 증가.",
 
-  "Supported Research": "",
-  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "",
+  "Supported Research": "연구 지원",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "조건: 과학당이 집권, 또는 과학당에 자기 의원이 2명 이상.) (카드 2장 획득.",
 
-  "Wildlife Dome": "",
-  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "",
+  "Wildlife Dome": "인공생태계 돔",
+  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "조건: 녹색당이 집권, 또는 녹색당에 자기 의원이 2명 이상.) (녹지 타일 1장 배치.",
 
-  "Vote Of No Confidence": "",
-  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "",
-
-  "Requires that you have 2 party leaders. Gain 1 TR.": ""
+  "Vote Of No Confidence": "불신임 투표",
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "조건:아무 정당의 당대표를 보유, 그리고 의장이 중립 의원.) (중립 의장을 제거하고, 의원 대기실에서 가져온 자기 의원을 의장석에 배치, 테라포밍 등급 1TR 상승."
 }

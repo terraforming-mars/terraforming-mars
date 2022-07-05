@@ -11,7 +11,7 @@ describe('QuantumCommunications', function() {
     const card = new QuantumCommunications();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     const colony1 = new Luna();
     const colony2 = new Triton();
 

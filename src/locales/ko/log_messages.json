@@ -1,8 +1,65 @@
 {
-    "${0} revealed and discarded ${1}": "${0} 공개하고 ${1} ",
-    "${0} used ${1} standard action": "${0} 플레이어가 ${1} 일반 프로젝트 사용",
+    "You": "당신",
+    "The id of this game is ${0}": "이 게임의 고유 번호는 ${0} 입니다.",
+    "Good luck ${0}!": "${0} 플레이어의 행운을 빕니다!",
+    "of 10": " / 10세대",
+    "of 12": " / 12세대",
+    "of 14": " / 14세대",
+    "You discarded ${0}": "${0} 카드를 버렸습니다.",
+    "${0} gained ${1} TR": "${0} 플레이어는 ${1} TR을 획득하였습니다.",
+
+    "${0} increased Venus scale ${1} step(s)": "${0} 플레이어가 금성개척률을 ${1}단계 상승시켰습니다.",
+
+    "${0} spent ${1} M€ to trade with ${2}": "${0} 플레이어가 ${1} M€를 소비하여 ${2} 위성에서 무역사업 수행",
+    "${0} spent ${1} energy to trade with ${2}": "${0} 플레이어가 에너지 자원을 ${1} 만큼 소비하여 ${2} 위성에서 무역사업 수행",
+    "${0} spent ${1} titanium to trade with ${2}": "${0} 플레이어가 티타늄 자원을 ${1} 만큼 소비하여 ${2} 위성에서 무역사업 수행",
+    "${0} spent 1 floater to trade with ${1}": "${0} 플레이어가 부양체 자원을 하나 소비하여 ${2} 위성에서 무역사업 수행",
+
+    "${0} gained ${1} ${2}": "${0} 플레이어가 ${1} ${2} 획득",
+
+    "${0}'s ${1} amount ${2} by ${3}": "${0} 플레이어의 ${1} 보유량이 ${3}만큼 ${2}.",
+    "${0}'s ${1} production ${2} by ${3}": "${0} 플레이어의 ${1} 생산력이 ${3}만큼 ${2}.",
+    "${0}'s ${1} amount ${2} by ${3} by ${4}": "${0} 플레이어의 ${1} 보유량은 ${4} 효과에 의해 ${3}만큼 ${2}.",
+    "${0}'s ${1} production ${2} by ${3} by ${4}": "${0} 플레이어의 ${1} 생산력은 ${4} 효과에 의해 ${3}만큼 ${2}.",
+    "${0} spent 1 ${1} to gain 7 M€": "${0} 플레이어가 1 ${1} 자원으로 7 M€ 획득",
+
+    "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} 플레이어가 ${2}의 ${3} 카드 위의 특수 자원을 ${1}개 제거했습니다.",
+
+    "gain 1 TR": "1TR 획득",
+    "draw a card": "카드 뽑기",
+
+    "A neutral delegate is the new chairman.": "중립 의원이 새로운 의장이 되었습니다.",
+    "A neutral delegate was added to the ${0} party": "중립 의원이 ${0} 당원으로 추가되었습니다.",
+    "Greens are in power in the first generation.": "녹색당이 첫 번째 세대의 집권당이 됩니다.",
+    "The ruling bonus is: ${0}": "집권당 보너스: ${0}",
+    "The ruling policy is: ${0}": "집권당 정책: ${0}",
+    "${0} sent ${1} delegate(s) in ${2} area": "${0} 플레이어는 의원 ${1}명을 ${2} 구역에 보냈습니다.",
+    "${0} placed a City tile": "${0} 플레이어는 도시 타일을 배치하였습니다.",
+    "${0} removed ${1} ${2} from ${3} to ${4}": "${0} 플레이어가 ${3}에서 ${4} 효과로 ${1} ${2} 만큼을 제거했습니다.",
+    "${0} is using their ${1} effect to draw a card by discarding a card.": "${0} 플레이어는 ${1} 효과를 사용하여 카드를 버리고 카드를 뽑습니다.",
+    "${0} increased ${1} colony track ${2} step(s)": "${0} 플레이어는 ${1} 개척기지의 무역 수입을 ${2} 만큼 증가시켰습니다.",
+    "${0} decreased ${1} colony track 1 step": "",
+
+    "${0} kept ${1} project cards": "${0} 플레이어는 ${1}장의 카드를 보유하고 있습니다.",
+    "${0} removed ${1} floaters to gain ${2} titanium": "${0} 플레이어는 ${1} 부양체를 소비하고 ${2} 만큼의 티타늄 자원을 획득했습니다.",
+    "${0} removed an asteroid resource to increase Venus scale 1 step": "${0} 플레이어가 소행성 자원 1개를 소비하여 금성개척률 1단계 상승",
+
+    "asteroid(s)": "소행성",
+    "raise temperature 1 step": "기온 1단계 상승",
+    "Completed!": "완료!",
+    "City in space.": "배치된 도시",
+    "${0} gained 2 ${1} from ${2}": "${0} 플레이어는 ${2} 카드로 ${1} 2 획득",
+
+    "Power Plant:SP": "발전소",
+    "Asteroid:SP": "소행성",
+
+    "${0} drew no cards": "${0} 플레이어가 카드를 뽑지 않았습니다.",
+    "Final greenery placement": "최종 녹지 타일 배치",
+
+    "${0} revealed and discarded ${1}": "${0} 플레이어가 ${1} 카드를 공개하고 버렸습니다.",
+    "${0} used ${1} standard action": "${0} 플레이어가 ${1} 일반 프로젝트 사용하였습니다.",
     "Generation ${0}": "${0} 세대",
-    "${0} added ${1} ${2} to ${3}": "${0} 플레이어가 ${1} ${2} 만큼 ${3}에 추가",
+    "${0} added ${1} ${2} to ${3}": "${0} 플레이어가 ${3} 카드에 ${2} 자원을 ${1}개 추가",
     "Convert Heat": "열 자원 교환",
     "Convert Plants": "식물 자원 교환",
     "Convert": "교환",
@@ -23,20 +80,19 @@
     "decreased": "감소됨",
     "${0}\u2019s ${1} production ${2} by ${3} by ${4}": "${0} 플레이어의 ${1} 생산량 ${2} by ${3} by ${4}",
     "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${2} 플레이어의 ${3} 효과로부터 ${0} 플레이어가 ${1} 자원을 제거",
-    "Card not found" : "카드를 찾을 수 없음",
-    "Incorrect options provided" : "잘못 제공된 선택사항",
+    "Card not found": "카드를 찾을 수 없음",
+    "Incorrect options provided": "잘못 제공된 선택사항",
     "Input contains unauthorized keys": "입력에 승인되지 않은 키가 포함됨",
-    "Number not provided for amount": "수량 설정에 숫자가 입력되지 않음",
     "Amount provided too high (max ": "입력된 값이 너무 큼 (최대 ",
     "Amount provided too low (min ": "입력된 값이 너무 작음 (최소 ",
     "No colony selected": "선택된 개척기지가 없음",
     "Not enough cards selected": "카드가 충분히 선택되지 않음",
     "Too many cards selected": "너무 많은 카드가 선택됨",
     "Selected unavailable card": "유요하지 않은 카드가 선택됨",
-    "Amount is not a number": "수량 설정에 숫자가 입력되지 않음",
+    "Number not provided for amount": "보유량 설정에 숫자가 입력되지 않음",
     "Space not available": "유효하지 않은 위치",
     "Player not available": "유효하지 않은 플레이어",
-    "No party selected": "No party selected",
+    "No party selected": "선택된 정당이 없음",
     "Select action for World Government Terraforming": "세계정부 테라포밍 행동 선택",
     "Confirm": "확인",
     "Increase temperature": "기온 상승",
@@ -51,7 +107,7 @@
     "All awards already funded": "모든 기업상이 이미 제정되었음",
     "Didn\u2019t even find player": "플레이어를 찾을 수 없음",
     "No player has played requested card": "요청한 카드를 플레이한 플레이어가 없음",
-    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "${2} 배치를 위해 ${0} 카드를 뽑고 버림 1(비용 ${1})",
+    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "${2} 배치를 위해 비용이 ${1} M€인 ${0} 카드를 뽑고 버림",
 
 
 
@@ -62,7 +118,7 @@
 
 
 
-    "${0} played ${1}": "${0} 플레이어는 ${1} 프로젝트 카드 추진",
+    "${0} played ${1}": "${0} 플레이어는 ${1} 카드를 추진",
     "${0} used ${1} action": "${0} 플레이어는 ${1} 행동 수행",
     "${0} funded ${1} award": "${0} 플레이어는 ${1} 기업상 제정",
     "${0} claimed ${1} milestone": "${0} 플레이어는 ${1} 업적 달성",
@@ -87,6 +143,9 @@
     "${0} used ${1} action with ${2}": "${0} 플레이어가 ${2} 카드에서 ${1} 행동을 사용했습니다.",
     "${0} is the new chairman and gains ${1} TR": "${0} 플레이어는 새 의장이 되며 ${1} TR을 얻습니다. ",
     "Turmoil phase has been resolved": "격동 단계 처리됨",
+    "Resolving global event ${0}": "${0} 카드에 의한 행성계 사건을 처리하였습니다.",
+
+    "${0} raised the ${1} planetary track ${2} ${3}": "${0} 플레이어는 행성 영향력 중 ${1} 트랙을 ${2} ${3} 증가시켰습니다.",
 
 
     "${0} drew ${1}": "${0} 플레이어가 ${1} 카드를 뽑음",
@@ -94,15 +153,34 @@
     "${0} drew ${1}, ${2} and ${3}": "${0} 플레이어가 ${1}, ${2} 및 ${3} 카드를 뽑음",
     "${0} sold ${1} patents": "${0} 플레이어가 ${1} 특허권 판매",
     "${0}'s ${1} production increased by ${2}": "${0} 플레이어의 ${1} 생산력이 ${2}만큼 증가",
-    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} 행의 ${3} 위치 ${4}",
-    "placed": "배치됨",
+    "${0} ${1} ${2} on row ${3} position ${4}": "${0} 플레이어가 ${3}번째 행의 ${4}번째 칸에 ${2} ${1}",
+    "placed": "배치",
     "greenery tile": "녹지 타일",
     "ocean tile": "해양 타일",
     "city tile": "도시 타일",
     "special tile": "특수 타일",
-    "${0} ${1} ${2} card(s)": "${0} ${1} ${2} 카드",
+    "${0} ${1} ${2} card(s)": "${0} 플레이어의 ${1}: 카드 ${2}장",
     "drew": "카드 뽑기",
     "bought": "구매",
     "sold": "판매",
-    "${0} card(s) were discarded": "${0}장의 카드가 버려짐"
+    "step": "단계",
+
+    "venus": "금성",
+    "earth": "지구",
+    "moon": "달",
+    "mars": "화성",
+    "jovian": "목성",
+
+    "${0} card(s) were discarded": "${0}장의 카드가 버려짐",
+    "${0} drew ${1}, ${2}, ${3} and ${4}": "${0} 플레이어는 ${1}, ${2}, ${3}, ${4} 카드를 뽑음",
+
+    "${0} gained ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 획득",
+    "${0} spent ${1} energy": "${0} 플레이어는 에너지 자원을 ${1}만큼 소비",
+
+    "${0} doubled resources on ${1} from ${2} to ${3}": "${0} 플레이어는 ${1} 카드 위의 자원을 ${2}개에서 ${3}개로 두 배 증가시킴",
+    "${0} linked ${1} with ${2}": "${0} 플레이어는 ${1} 카드를 ${2} 카드에 연결",
+
+    "${0} used Turmoil Scientists action": "${0} 플레이어는 과학당 행동을 수행",
+    "${0} used Turmoil Kelvinists action": "${0} 플레이어는 켈빈당 행동을 수행",
+    "${0} increased heat and energy production 1 step": "${0} 플레이어는 에너지 생산력과 열 생산력이 1만큼씩 상승"
 }

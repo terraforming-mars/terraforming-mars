@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
 import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
-import {TestingUtils} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 import {PATHFINDERS_CARD_MANIFEST} from '../../../src/cards/pathfinders/PathfindersCardManifest';
 import {Tags} from '../../../src/common/cards/Tags';
 
@@ -17,7 +17,7 @@ describe('MarsDirect', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('id', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     card = new MarsDirect();
   });
 
@@ -28,9 +28,9 @@ describe('MarsDirect', () => {
     const controlledBloom = new ControlledBloom();
 
     // Controlled Bloom requires 3 oceans. Let player2 place them so player can't gain bonus.
-    TestingUtils.addOcean(player2);
-    TestingUtils.addOcean(player2);
-    TestingUtils.addOcean(player2);
+    addOcean(player2);
+    addOcean(player2);
+    addOcean(player2);
 
     player.cardsInHand = [powerPlant, controlledBloom];
     player.corporationCard = card;

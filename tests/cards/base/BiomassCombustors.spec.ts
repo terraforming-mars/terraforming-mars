@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('BiomassCombustors', function() {
   let card : BiomassCombustors; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -13,7 +13,7 @@ describe('BiomassCombustors', function() {
     card = new BiomassCombustors();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     player.popWaitingFor();
   });
 
@@ -28,7 +28,7 @@ describe('BiomassCombustors', function() {
   });
 
   it('Can play in solo mode if oxygen requirement is met', function() {
-    const game = Game.newInstance('foobar', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
     (game as any).oxygenLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
@@ -39,7 +39,7 @@ describe('BiomassCombustors', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);

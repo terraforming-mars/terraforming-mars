@@ -161,7 +161,7 @@ export class Turmoil {
       }
     }
     party.sendDelegate(playerId, game);
-    this.checkDominantParty(party);
+    this.checkDominantParty();
   }
 
   // Use to remove a delegate from a specific party
@@ -169,7 +169,7 @@ export class Turmoil {
     const party = this.getPartyByName(partyName);
     this.delegateReserve.push(playerId);
     party.removeDelegate(playerId, game);
-    this.checkDominantParty(party);
+    this.checkDominantParty();
   }
 
   // Use to replace a delegate from a specific party with another delegate with NO DOMINANCE CHANGE
@@ -186,18 +186,14 @@ export class Turmoil {
   }
 
   // Check dominant party
-  public checkDominantParty(party:IParty): void {
+  public checkDominantParty(): void {
     // If there is a dominant party
-    if (this.dominantParty) {
-      const sortParties = [...this.parties].sort(
-        (p1, p2) => p2.delegates.length - p1.delegates.length,
-      );
-      const max = sortParties[0].delegates.length;
-      if (this.dominantParty.delegates.length !== max) {
-        this.setNextPartyAsDominant(this.dominantParty);
-      }
-    } else {
-      this.dominantParty = party;
+    const sortParties = [...this.parties].sort(
+      (p1, p2) => p2.delegates.length - p1.delegates.length,
+    );
+    const max = sortParties[0].delegates.length;
+    if (this.dominantParty.delegates.length !== max) {
+      this.setNextPartyAsDominant(this.dominantParty);
     }
   }
 
@@ -253,18 +249,16 @@ export class Turmoil {
     this.rulingParty = this.dominantParty;
 
     // 3.a - Ruling Policy change
-    if (this.rulingParty) {
-      this.setRulingParty(game);
-    }
+    this.setRulingParty(game);
 
     // 3.b - New dominant party
-    this.setNextPartyAsDominant(this.rulingParty!);
+    this.setNextPartyAsDominant(this.rulingParty);
 
     // 3.c - Fill the lobby
     this.lobby.forEach((playerId) => {
       this.delegateReserve.push(playerId);
     });
-    this.lobby = new Set<string>();
+    this.lobby = new Set<PlayerId>();
 
     game.getPlayersInGenerationOrder().forEach((player) => {
       if (this.hasDelegatesInReserve(player.id)) {
@@ -300,44 +294,44 @@ export class Turmoil {
 
   // Ruling Party changes
   public setRulingParty(game: Game): void {
-    if (this.rulingParty !== undefined) {
-      // Cleanup previous party effects
-      game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
+    // Cleanup previous party effects
+    game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
-      // Change the chairman
-      if (this.chairman) {
-        this.delegateReserve.push(this.chairman);
-      }
+    // Change the chairman
+    if (this.chairman) {
+      this.delegateReserve.push(this.chairman);
+    }
 
-      this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
+    this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
 
-      const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
+    if (this.rulingParty.partyLeader !== undefined) {
+      const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader);
       // Remove the party leader from the delegates array
       this.rulingParty.delegates.splice(index, 1);
-      // Fill the delegate reserve
-      this.delegateReserve = this.delegateReserve.concat(this.rulingParty.delegates);
+    }
+    // Fill the delegate reserve
+    this.delegateReserve = this.delegateReserve.concat(this.rulingParty.delegates);
 
-      // Clean the party
-      this.rulingParty.partyLeader = undefined;
-      this.rulingParty.delegates = [];
+    // Clean the party
+    this.rulingParty.partyLeader = undefined;
+    this.rulingParty.delegates = [];
 
-      PoliticalAgendas.setNextAgenda(this, game);
+    PoliticalAgendas.setNextAgenda(this, game);
 
-      // Finally, award Chairman TR
-      if (this.chairman !== 'NEUTRAL') {
-        const player = game.getPlayerById(this.chairman);
-        // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-        const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
+    // Finally, award Chairman TR
+    if (this.chairman !== 'NEUTRAL') {
+      const player = game.getPlayerById(this.chairman);
+      // Tempest Consultancy Hook (gains an additional TR when they become chairman)
+      const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
 
-        // Raise TR but after resolving the new policy
-        game.defer(new SimpleDeferredAction(player, () => {
-          player.increaseTerraformRatingSteps(steps);
-          game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
-          return undefined;
-        }));
-      } else {
-        game.log('A neutral delegate is the new chairman.');
-      }
+      // Raise TR but after resolving the new policy
+      game.defer(new SimpleDeferredAction(player, () => {
+        player.increaseTerraformRatingSteps(steps);
+        game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
+        return undefined;
+      }));
+    } else {
+      game.log('A neutral delegate is the new chairman.');
     }
   }
 
@@ -422,7 +416,7 @@ export class Turmoil {
   // TODO(kberg): Find a way to remove the default value for source.
   public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer, source: 'lobby' | 'reserve' | 'both'): number {
     const delegatesInReserve = this.delegateReserve.filter((p) => p === playerId).length;
-    const delegatesInLobby = this.lobby.has(playerId) ? 1: 0;
+    const delegatesInLobby = (playerId !== 'NEUTRAL' && this.lobby.has(playerId)) ? 1: 0;
 
     switch (source) {
     case 'lobby':
@@ -489,9 +483,6 @@ export class Turmoil {
 
     d.parties.forEach((sp) => {
       const tp = turmoil.getPartyByName(sp.name);
-      if (tp === undefined) {
-        throw new Error('huh? unknown party: ' + sp.name);
-      }
       tp.delegates = sp.delegates;
       tp.partyLeader = sp.partyLeader;
     });

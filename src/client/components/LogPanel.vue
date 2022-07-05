@@ -10,7 +10,7 @@
               {{ n }}
             </div>
           </div>
-          <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass">of {{this.lastSoloGeneration}}</span></span>
+          <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{this.lastSoloGeneration}}</span></span>
         </div>
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">
@@ -55,6 +55,7 @@ import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
+import {PlayerId, SpectatorId} from '@/common/Types';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -62,7 +63,7 @@ export default Vue.extend({
   name: 'log-panel',
   props: {
     id: {
-      type: String,
+      type: String as () => PlayerId | SpectatorId,
     },
     generation: {
       type: Number,
@@ -213,7 +214,7 @@ export default Vue.extend({
           const icon = message.playerId === undefined ? '&#x1f551;' : '&#x1f4ac;';
           logEntryBullet = `<span title="${when}">${icon}</span>`;
         }
-        if (message.type !== undefined && message.message !== undefined) {
+        if (message.message !== undefined) {
           message.message = this.$t(message.message);
           return logEntryBullet + Log.applyData(message, this.messageDataToHTML);
         }

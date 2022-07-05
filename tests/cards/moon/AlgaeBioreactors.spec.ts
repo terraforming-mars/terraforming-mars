@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/cards/moon/AlgaeBioreactors';
@@ -10,7 +10,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Phase} from '../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('AlgaeBioreactors', () => {
   let player: TestPlayer;
@@ -20,7 +20,7 @@ describe('AlgaeBioreactors', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new AlgaeBioreactors();
     moonData = MoonExpansion.moonData(game);
   });
@@ -52,18 +52,18 @@ describe('AlgaeBioreactors', () => {
 
   it('canPlay when Reds are in power', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 
     // Card requirements
     player.setProductionForTest({plants: 1});
 
-    TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
     moonData.colonyRate = 8;
-    TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
     (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
-    TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   });
 });
 

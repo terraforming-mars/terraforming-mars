@@ -6,6 +6,7 @@ import {Game} from '../../../src/Game';
 import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Tags} from '../../../src/common/cards/Tags';
+import {cast} from '../../TestingUtils';
 
 describe('Kickstarter', function() {
   let card: Kickstarter;
@@ -25,9 +26,8 @@ describe('Kickstarter', function() {
 
     expect(game.deferredActions.length).eq(1);
 
-    const action = game.deferredActions.pop();
-    expect(action).instanceOf(DeclareCloneTag);
-    const options = action!.execute() as OrOptions;
+    const action = cast(game.deferredActions.pop(), DeclareCloneTag);
+    const options = cast(action.execute(), OrOptions);
 
     expect(options.options[2].title).to.match(/mars/);
     expect(game.pathfindersData).deep.eq({

@@ -5,6 +5,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
+import {InputResponse} from '../common/inputs/InputResponse';
 
 export class SelectHowToPayForProjectCard implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD;
@@ -31,5 +32,21 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     this.reserveUnits = this.cards.map((card) => {
       return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
     });
+  }
+
+  public process(input: InputResponse, player: Player) {
+    player.checkInputLength(input, 1, 2);
+    const cardName = input[0][0];
+    const cardData = PlayerInput.getCard(this.cards, cardName);
+    const foundCard: IProjectCard = cardData.card;
+    const howToPay: HowToPay = player.parseHowToPayJSON(input[0][1]);
+    const reserveUnits = this.reserveUnits[cardData.idx];
+    if (reserveUnits.steel + howToPay.steel > player.steel) {
+      throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
+    }
+    if (reserveUnits.titanium + howToPay.titanium > player.titanium) {
+      throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
+    }
+    return this.cb(foundCard, howToPay);
   }
 }

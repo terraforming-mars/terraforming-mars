@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ConvertPlants} from '../../../../src/cards/base/standardActions/ConvertPlants';
 import {Phase} from '../../../../src/common/Phase';
 import {Player} from '../../../../src/Player';
-import {TestingUtils} from '../../../TestingUtils';
+import {setCustomGameOptions} from '../../../TestingUtils';
 import {TestPlayers} from '../../../TestPlayers';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
@@ -16,7 +16,7 @@ describe('ConvertPlants', function() {
     card = new ConvertPlants();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions());
+    Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 
   it('Can not act without plants', function() {

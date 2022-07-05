@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BlackPolarDust} from '../../../src/cards/base/BlackPolarDust';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -14,7 +14,7 @@ describe('BlackPolarDust', function() {
     card = new BlackPolarDust();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {
@@ -34,7 +34,7 @@ describe('BlackPolarDust', function() {
   });
 
   it('Cannot place ocean if no oceans left', function() {
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     card.play(player);
   });
 });

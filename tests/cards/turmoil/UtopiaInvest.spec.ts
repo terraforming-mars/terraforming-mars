@@ -3,7 +3,7 @@ import {UtopiaInvest} from '../../../src/cards/turmoil/UtopiaInvest';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('UtopiaInvest', function() {
@@ -11,7 +11,7 @@ describe('UtopiaInvest', function() {
     const card = new UtopiaInvest();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('id', [player, redPlayer], player, TestingUtils.setCustomGameOptions());
+    Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions());
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

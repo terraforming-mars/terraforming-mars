@@ -3,7 +3,7 @@ import {EconomicEspionage} from '../../../src/cards/pathfinders/EconomicEspionag
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('EconomicEspionage', function() {
   let card: EconomicEspionage;
@@ -13,7 +13,7 @@ describe('EconomicEspionage', function() {
     card = new EconomicEspionage();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     player.playedCards.push(card);
   });
 
@@ -31,7 +31,7 @@ describe('EconomicEspionage', function() {
     player.megaCredits = 2;
 
     card.action(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.megaCredits).eq(0);
     expect(card.resourceCount).eq(1);
   });

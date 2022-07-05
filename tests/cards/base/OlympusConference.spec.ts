@@ -9,7 +9,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
   let card : OlympusConference; let player : TestPlayer; let game : Game;
@@ -18,7 +18,7 @@ describe('OlympusConference', function() {
     card = new OlympusConference();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -42,7 +42,7 @@ describe('OlympusConference', function() {
     card.onCardPlayed(player, card);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     game.deferredActions.pop();
     orOptions.options[1].cb();
     expect(card.resourceCount).to.eq(2);
@@ -57,7 +57,7 @@ describe('OlympusConference', function() {
     player.cardsInHand = [card];
     player.playCard(card, undefined);
     expect(card.resourceCount).to.eq(0);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 
@@ -73,7 +73,7 @@ describe('OlympusConference', function() {
     expect(card.resourceCount).to.eq(1);
 
     // Resource on card, can draw
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     game.deferredActions.pop();
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
@@ -98,7 +98,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(2);
 
     // OC's trigger should be the first one
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     game.deferredActions.pop();
     orOptions.options[1].cb();
     expect(card.resourceCount).to.eq(2);
@@ -121,7 +121,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(2);
 
     // OC's trigger should be the first one
-    const orOptions2 = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions2 = cast(game.deferredActions.peek()!.execute(), OrOptions);
     game.deferredActions.pop();
     orOptions2.options[1].cb();
     expect(card.resourceCount).to.eq(2);

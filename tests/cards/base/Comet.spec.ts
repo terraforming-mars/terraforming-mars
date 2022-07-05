@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Comet} from '../../../src/cards/base/Comet';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayers} from '../../TestPlayers';
@@ -15,7 +15,7 @@ describe('Comet', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
-    game = Game.newInstance('foobar', [player, player2, player3], player);
+    game = Game.newInstance('gameid', [player, player2, player3], player);
   });
 
   it('Should play', function() {
@@ -26,17 +26,17 @@ describe('Comet', function() {
     expect(game.getTemperature()).to.eq(-28);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const selectSpace = game.deferredActions.pop()!.execute() as SelectSpace;
+    const selectSpace = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(22);
 
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(0);
   });
 
   it('Provides no options if there is nothing to confirm', function() {
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     player.plants = 8;
 
     card.play(player);
@@ -48,7 +48,7 @@ describe('Comet', function() {
   });
 
   it('Works fine in solo mode', function() {
-    Game.newInstance('solo_game', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.plants = 8;
 
     const action = card.play(player);

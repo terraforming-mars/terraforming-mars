@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
 import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
 import {ICard} from '../../../src/cards/ICard';
@@ -15,7 +16,7 @@ describe('TitanShuttles', function() {
     card = new TitanShuttles();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
 
     player.playedCards.push(card);
   });
@@ -58,8 +59,7 @@ describe('TitanShuttles', function() {
     player.playedCards.push(card2);
     player.addResourceTo(card, 7);
 
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
 
     // spend floaters to gain titanium

@@ -13,7 +13,7 @@ import {Resources} from '../../../src/common/Resources';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MonsInsurance', () => {
   let card: MonsInsurance; let player: TestPlayer; let player2: TestPlayer; let player3: TestPlayer;
@@ -24,7 +24,7 @@ describe('MonsInsurance', () => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.GREEN.newPlayer();
-    Game.newInstance('foobar', [player, player2, player3], player);
+    Game.newInstance('gameid', [player, player2, player3], player);
     card.play(player);
     player.corporationCard = card;
   });
@@ -40,7 +40,7 @@ describe('MonsInsurance', () => {
     player2.titanium = 3;
 
     const card2 = new Sabotage();
-    const action = card2.play(player3) as OrOptions;
+    const action = cast(card2.play(player3), OrOptions);
 
     action.options[1].cb();
     expect(player2.titanium).to.eq(0);
@@ -129,7 +129,7 @@ describe('MonsInsurance - Solo', () => {
     card = new MonsInsurance();
 
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     card.play(player);
     player.corporationCard = card;
 
@@ -147,7 +147,7 @@ describe('MonsInsurance - Solo', () => {
     // AirRaid steals 5 resources from any player.
     const airRaid = new AirRaid();
     airRaid.play(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     // 10 + 5 - 3 = 12
@@ -160,7 +160,7 @@ describe('MonsInsurance - Solo', () => {
     // Birds removes 2 plant production
     const birds = new Birds();
     birds.play(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     expect(player.megaCredits).eq(7);
@@ -173,7 +173,7 @@ describe('MonsInsurance - Solo', () => {
     const comet = new DeimosDown();
 
     comet.play(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     expect(player.megaCredits).eq(7);
@@ -188,7 +188,7 @@ describe('MonsInsurance - Solo', () => {
     expect(predators.resourceCount).eq(0);
 
     predators.action(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(player.getWaitingFor()).is.undefined;
 
     expect(predators.resourceCount).eq(1);

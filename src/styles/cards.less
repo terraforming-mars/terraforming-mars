@@ -115,9 +115,8 @@ input[type="radio"]:checked + .filterDiv::after {
     text-align: center;
     font-weight: bold;
     font-size: 36px;
-    background: linear-gradient(to right, #c97e23, #e28c22, #c97e23);
+    background: linear-gradient(to right, #c97e23bb, #e28c22bb, #c97e23bb);
     color: black;
-    border-bottom: 1px solid #222;
 }
 
 .filterDiv3 {
@@ -2672,8 +2671,24 @@ input[type="radio"]:checked + .filterDiv::after {
                 background-image: url(./assets/resources/megacredit.png);
                 background-size: 50px;
                 filter: drop-shadow(0px 0px 1px black);
-                font-family: Prototype;
                 color: #000;
+            }
+            .card-help {
+                float: left;
+                font-family: Prototype;
+                font-size: 26px;
+                width: 30px;
+                height: 50px;
+                margin-left: -20px;
+                line-height: 48px;
+                border-radius: 20px;
+
+                background-color: black;
+                color: white;
+                text-align: center;
+            }
+            .card-help-inner a:visited {
+                color: #FFF;
             }
             .card-tags {
                 display: flex;

@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayers} from '../../TestPlayers';
 import {DiscardCards} from '../../../src/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/deferredActions/DrawCards';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('SponsoredAcademies', function() {
   it('Should play', function() {
@@ -17,7 +17,7 @@ describe('SponsoredAcademies', function() {
     const card3 = new Tardigrades();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const game = Game.newInstance('gameid', [player, player2], player);
     player.cardsInHand.push(card);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     player.cardsInHand.push(card2, card3);
@@ -31,7 +31,7 @@ describe('SponsoredAcademies', function() {
     expect(discardCard.cards.filter((c) => c.name === card.name)).has.lengthOf(0);
 
     discardCard.cb([card2]);
-    TestingUtils.runAllActions(game); // Draw cards
+    runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(4);
     expect(player2.cardsInHand).has.lengthOf(1);
   });
@@ -43,7 +43,7 @@ describe('SponsoredAcademies', function() {
     const player2 = TestPlayers.RED.newPlayer();
     const player3 = TestPlayers.BLACK.newPlayer();
     const player4 = TestPlayers.GREEN.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2, player3, player4], player);
+    const game = Game.newInstance('gameid', [player, player2, player3, player4], player);
 
     player.cardsInHand.push(card, new HousePrinting(), new Tardigrades());
     player.playCard(card);

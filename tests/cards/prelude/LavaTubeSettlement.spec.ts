@@ -7,7 +7,7 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {TestingUtils} from '../../TestingUtils';
+import {resetBoard} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LavaTubeSettlement', function() {
@@ -16,19 +16,15 @@ describe('LavaTubeSettlement', function() {
   beforeEach(function() {
     card = new LavaTubeSettlement();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
-    TestingUtils.resetBoard(game);
+    game = Game.newInstance('gameid', [player], player);
+    resetBoard(game);
   });
 
-  after(function() {
-    TestingUtils.resetBoard(game);
-  });
-
-  it('Can\'t play without energy production', function() {
+  it('Cannot play without energy production', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if no volcanic spaces left', function() {
+  it('Cannot play if no volcanic spaces left', function() {
     player.addProduction(Resources.ENERGY, 1);
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});

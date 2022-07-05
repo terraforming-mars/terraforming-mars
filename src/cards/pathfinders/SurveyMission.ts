@@ -4,6 +4,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Board} from '../../boards/Board';
+import {BoardType} from '../../boards/BoardType';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {LogHelper} from '../../LogHelper';
@@ -78,6 +79,7 @@ export class SurveyMission extends PreludeCard {
       space.player = player;
       player.game.grantSpaceBonuses(player, space);
       LogHelper.logBoardTileAction(player, space, 'claimed');
+      if (player.corporationCard?.name === CardName.MINING_GUILD) player.corporationCard.onTilePlaced?.(player, player, space, BoardType.MARS);
 
       if (iteration === 2) return undefined;
 

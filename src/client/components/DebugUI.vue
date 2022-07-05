@@ -1,14 +1,14 @@
 <template>
   <div class="debug-ui-container" :class="getLanguageCssClass()">
-      <h1>Cards List</h1>
+      <h1 v-i18n>Cards List</h1>
       <div class="legacy-anchor">
-        <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
+        <a href="https://ssimeonoff.github.io/cards-list" target="_blank"><span v-i18n>legacy card UI</span></a>
       </div>
 
       <!-- start filters -->
 
       <div class="form-group">
-        <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
+        <input class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
       </div>
 
       <!-- expansions -->
@@ -60,35 +60,35 @@
       <!-- start cards -->
 
       <section class="debug-ui-cards-list">
-          <h2>Project Cards</h2>
+          <h2 v-i18n>Project Cards</h2>
           <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
       <section class="debug-ui-cards-list">
-          <h2>Corporations</h2>
+          <h2 v-i18n>Corporations</h2>
           <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
       <section class="debug-ui-cards-list">
-          <h2>Preludes</h2>
+          <h2 v-i18n>Preludes</h2>
           <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
       <section class="debug-ui-cards-list">
-        <h2>Standard Projects</h2>
+        <h2 v-i18n>Standard Projects</h2>
         <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
             <Card v-if="showCard(card)" :card="{'name': card}" />
         </div>
       </section>
 
       <section class="debug-ui-cards-list">
-        <h2>Global Events</h2>
+        <h2 v-i18n>Global Events</h2>
         <template v-if="types.globalEvents">
           <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
             <global-event v-if="showGlobalEvent(globalEventName)" :globalEvent="getGlobalEventModel(globalEventName)" type="prior"></global-event>
@@ -97,7 +97,7 @@
       </section>
 
       <section>
-        <h2>Colonies</h2>
+        <h2 v-i18n>Colonies</h2>
         <template v-if="types.colonyTiles">
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="colonyName in getAllColonyNames()" :key="colonyName">
@@ -132,6 +132,7 @@ import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {Tags} from '@/common/cards/Tags';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
+import {IClientCard} from '@/common/cards/IClientCard';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -349,6 +350,17 @@ export default Vue.extend({
       case 'pathfinders': return 'Pathfinders';
       }
     },
+    filterByTags(card: IClientCard): boolean {
+      if (card.tags.length === 0) {
+        return this.tags['none'] === true;
+      }
+
+      let matches = false;
+      for (const tag of card.tags) {
+        if (this.tags[tag]) matches = true;
+      }
+      return matches;
+    },
     showCard(cardName: CardName): boolean {
       if (!this.filterByName(cardName)) return false;
 
@@ -357,13 +369,8 @@ export default Vue.extend({
         return false;
       }
 
+      if (!this.filterByTags(card)) return false;
       if (!this.types[card.cardType]) return false;
-      if (card.tags.length === 0 && this.tags['none'] === false) return false;
-      let matchAnyTag = false;
-      for (const tag of card.tags) {
-        if (this.tags[tag]) matchAnyTag = true;
-      }
-      if (matchAnyTag === false) return false;
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {

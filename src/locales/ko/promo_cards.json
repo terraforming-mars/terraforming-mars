@@ -2,130 +2,145 @@
   "New Partner": "새로운 파트너",
   "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "메가크레딧 생산력 1 증가. 서곡 카드 2장 확인 후 1장을 골라 사용하고 다른 카드는 버림.",
   
-  "Comet Aiming": "",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "",
-  "Action: Remove 1 asteroid here to place an ocean.": "",
+  "Small Asteroid": "소형 소행성",
+  "Increase temperature 1 step. Remove up to 2 plants from any player.": "기온 1단계 상승. 아무 1명의 식물 자원 2개까지 제거.",
 
-  "Cutting Edge Technology": "",
-  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "",
+  "Self-replicating Robots": "자가복제 로봇",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "행동: 손에 든 우주 또는 건물 카드 1장을 이 카드 위에 앞면으로 얹고 그 위에 자원 2개를 추가하거나, 또는 이 카드에 얹힌 카드 중 1장의 자원을 2배로 불림.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "지속효과: 여기 얹힌 카드들의 추진 비용은 각 카드 위에 놓인 자원 개수만큼 할인됨.",
+  
+  "Snow Algae": "눈 조류",
+  "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.": "조건: 해양 타일 2장 이상.) (식물 생산력 1증가. 열 생산력 1증가.",
 
-  "Crash Site Cleanup": "",
-  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "",
+  "Penguins": "펭귄",
+  "Requires 8 oceans.": "조건: 해양 타일 8장 이상.",
+  "Requires 8 oceans. 1 VP for each animal on this card.": "조건: 해양 타일 8장 이상.) (이 카드의 동물 자원 1개당 승점 1점.",
 
-  "Directed Impactors": "",
-  "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)": "",
-  "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "",
+  "Dusk Laser Mining": "저물녘 레이저 채굴",
+  "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "조건: 보유한 과학 태그 2개 이상.) (에너지 생산력 1감소. 티타늄 생산력 1증가. 티타늄 자원 4개 획득.",
 
-  "Field-Capped City": "",
-  "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": "",
+  "Project Inspection": "프로젝트 감독",
+  "Use a card action that has been used this generation.": "자신의 카드 행동 중, 이번 세대에 이미 수행 된 것 하나를 다시 한 번 수행.",
 
-  "Magnetic Shield": "",
-  "2 Power": "",
-  "(Requires 2 power tags. Raise your TR 4 steps.)": "",
+  "Energy Market": "에너지 시장",
+  "Action: Spend 2X M€ to gain X energy.": "행동: 2X MC을 소비해서 에너지 자원 X개 획득.",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "행동: 에너지 생산력 1감소해서 8MC 획득.",
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "행동: 2X MC을 소비해서 에너지 자원 X개 획득 또는 에너지 생산력 1감소해서 8MC 획득.",
 
-  "Meltworks": "",
-  "Action: Spend 5 heat to gain 3 steel.": "",
+  "Hi-Tech Lab": "첨단기술 연구소",
+  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "행동: 원하는 수만큼 에너지 자원을 소비해 같은 수만큼 카드를 가져와 확인. 그중 1장만 획득하고 나머지는 버림.",
 
-  "Mohole Lake": "",
-  "Action: Add a microbe or animal to ANOTHER card.": "",
-  "(Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.)": "",
+  "Interplanetary Trade": "행성간 무역",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "이 카드도 포함해서 보유한 태그 종류 하나당 메가크레딧 생산력 1증가.",
 
-  "Diversity Support": "",
-  "9 Resource types": "",
-  "(Requires that you have 9 different types of resources. Gain 1 TR.)": "",
+  "Law Suit": "고소",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "이번 세대에 자신의 자원을 제거했거나 생산력을 감소시킨 다른 플레이어 1명에게서 3MC까지 강탈 이 카드를 그 플레이어의 사건형 카드 무더기에 엎어둠.",
 
-  "Topsoil Contract": "",
-  "(Effect: When you gain a microbe to ANY CARD, also gain 1 M€.)": "",
-  "Gain 3 plants.": "",
+  "Mercurian Alloys": "수성합금",
+  "Requires 2 Science tags.": "조건: 보유한 과학 태그 2개 이상.",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "지속효과: 보유한 각 티타늄 자원의 가치 1MC 상승.",
 
-  "Imported Nutrients": "",
-  "(Gain 4 plants and add 4 microbes to ANOTHER CARD.)": "",
+  "Orbital Cleanup": "궤도청소",
+  "Action: Gain 1 M€ per Science tag you have.": "행동: 보유한 과학 태그 수만큼 MC 획득.",
+  "Decrease your M€ production 2 steps.": "메가크레딧 생산력 2감소.",
 
-  "Asteroid Deflection System": "",
-  "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)": "",
-  "opponents may not remove your plants": "",
-  "(Decrease your energy production 1 step. 1VP per asteroid on this card.)": "",
+  "Political Alliance": "정치 동맹",
+  "Requires that you have 2 party leaders. Gain 1 TR.": "조건: 보유한 당대표 2명 이상) (테라포밍 등급 1TR 상승.",
 
-  "Jovian Embassy": "",
-  "(Raise your TR 1 step.)": "",
+  "Rego Plastics": "표토 플라스틱",
+  "Effect: Your steel resources are worth 1 M€ extra.": "지속효과: 보유한 각 강철 자원의 가치 1MC 상승.",
 
-  "Sub-Crust Measurements": "",
-  "Action: Draw a card.": "",
-  "Requires 2 science tags.": "",
+  "Saturn Surfing": "토성 서핑",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "행동: 이 카드에 부양체 자원 1개 소비해서, 이 카드에 부양체 자원 수만큼 MC 획득. 소비한 부양체도 포함(최대 5MC까지).",
+  "Add 1 floater here for every Earth tag you have, including this.": "이 카드도 포함해서, 보유한 지구 태그 수만큼 이 카드에 부양체 자원 추가.",
 
-  "Potatoes": "",
-  "Lose 2 plants. Increase your M€ production 2 steps.": "",
+  "Stanford Torus": "스탠포드 토러스",
+  "Place a city tile IN SPACE, outside and separate from the planet.": "화성 바깥의 텅 빈 우주공간에 도시 타일 1장 배치.",
 
-  "Meat Industry": "",
-  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "",
+  "Asteroid Hollowing": "소행성 내부 공동화 사업",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "행동: 티타늄 자원 1개 소비해서 이 카드에 소행성 자원 1개 추가 및 메가크레딧 생산력 1 증가.",
+  "1VP for each 2 asteroids on this card.": "이 카드의 소행성 자원 2개당 승점 1점.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "",
+  "Advertising": "광고",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "지속효과: 추진 비용의 기본값이 20MC 이상인 카드를 사용할 때마다, 메가크레딧 생산력 1증가.",
 
-  "Orbital Cleanup": "",
-  "Action: Gain 1 M€ per Science tag you have.": "",
-  "Decrease your M€ production 2 steps.": "",
+  "Comet Aiming": "혜성 조준발사",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "행동: 티타늄 자원 1개 소비해서 자신의 아무 카드 1장에 소행성 자원 1개 추가.",
+  "Action: Remove 1 asteroid here to place an ocean.": "행동: 이 카드에 소행성 자원 1개 소비해서 해양 타일 1장 배치.",
 
-  "Law Suit": "",
-  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "",
+  "Crash Site Cleanup": "충돌지점 재개발 사업",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "조건: 이번 세대에 한 플레이어가 다른 플레이어의 식물 자원 1개 이상 제거.) (티타늄 자원 1개 또는 강철 자원 2개 획득.",
 
-  "Small Asteroid": "",
-  "Increase temperature 1 step. Remove up to 2 plants from any player.": "",
+  "Cutting Edge Technology": "최첨단 기술",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "지속효과: 추진 조건을 포함한 카드를 추진 시 2MC 할인.",
 
-  "Asteroid Hollowing": "",
-  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "",
-  "1VP for each 2 asteroids on this card.": "",
+  "Directed Impactors": "소행성 유도 추력기",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "행동: 6MC 소비해서 자신의 아무 카드 1장에 소행성 자원 1개 추가. (티타늄 자원 소비 가능)",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "행동: 이 카드에서 소행성 자원 1개 소비해서 기온 1단계 상승.",
 
-  "Advertising": "",
-  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "",
+  "Field-Capped City": "자기장 방호탑 도시",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "에너지 생산력 1증가. 메가크레딧 생산력 2증가. 식물 자원 3개 획득. 도시 타일 1장 배치.",
 
-  "Project Inspection": "",
-  "Use a card action that has been used this generation.": "",
+  "Magnetic Shield": "자기장 방호막",
+  "Requires 3 power tags. Raise your TR 4 steps.": "조건: 보유한 에너지 태그 3개 이상.) (테라포밍 등급 4TR 상승.",
 
-  "Rego Plastics": "",
-  "Effect: Your steel resources are worth 1 M€ extra.": "",
+  "Meltworks": "용광로",
+  "Action: Spend 5 heat to gain 3 steel.": "행동: 열 자원 5개 소비해서, 강철 자원 3개 획득.",
 
-  "Interplanetary Trade": "",
-  "Increase your M€ production 1 step per different tag you have in play, including this.": "",
+  "Mohole Lake": "모홀 호수",
+  "Action: Add a microbe or animal to ANOTHER card.": "행동: 자신의 아무 카드 1장에 미생물 자원 1개 또는 동물 자원 1개 추가.",
+  "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "식물 자원 3개 획득. 기온 1단계 상승. 해양 타일 1장 배치.",
 
-  "Penguins": "",
-  "Action: Add 1 Animal to this card.": "",
-  "Requires 8 oceans.": "",
+  "Diversity Support": "다양성 지원",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "조건: 보유한 기본, 특수 자원 총 9종류 이상.) (테라포밍 등급 1TR 상승.",
 
-  "Snow Algae": "",
-  "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.": "",
+  "Jovian Embassy": "목성 대사관",
+  "Raise your TR 1 step.": "테라포밍 등급 1TR 상승.",
 
-  "Self-replicating Robots": "",
-  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "",
-  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "",
+  "Topsoil Contract": "표토 공급 계약",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "지속효과: 자신의 아무 카드 1장에 미생물 자원을 추가할 때마다, 추가한 미생물 자원 1개당 1MC 획득.",
+  "Gain 3 plants.": "식물 자원 3개 획득.",
 
-  "Dusk Laser Mining": "",
-  "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "",
+  "Imported Nutrients": "영양분 수입",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "식물 자원 4개 획득. 자신의 아무 카드 1장에 미생물 자원 4개 추가.",
 
-  "Hi-Tech Lab": "",
-  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "",
+  "Asteroid Deflection System": "소행성 궤도 굴절 방어체계",
+  "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "행동: 카드 1장 공개, 우주 태그 있으면 이 카드에 소행성 자원 1개 추가.",
+  "opponents may not remove your plants": "자신의 식물 자원을 다른 플레이어가 제거 불가.",
+  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "에너지 생산력 1감소. 이 카드의 소행성 자원 1개당 승점 1점.",
 
-  "Mercurian Alloys": "",
-  "Effect: Your titanium resources are worth 1 M€ extra.": "",
+  "Sub-Crust Measurements": "지각 하부 영역 측정",
+  "Action: Draw a card.": "행동: 카드 1장 획득.",
 
-  "Energy Market": "",
-  "Action: Spend 2X M€ to gain X energy.": "",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "",
+  "Potatoes": "감자",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "식물 자원 2개 제거. 메가크레딧 생산력 2증가.",
 
-  "Asteroid Rights": "",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "",
-  "Add 2 asteroids to this card.": "",
+  "Meat Industry": "육류 가공 공장",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "지속효과: 자신의 아무 카드 1장에 동물 자원을 추가할 때마다, 추가한 동물 자원 1개당 2MC 획득.",
 
-  "Stanford Torus": "",
-  "Place a city tile IN SPACE, outside and separate from the planet.": "",
+  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "에너지 생산력 4감소. 식물 생산력 2증가. 테라포밍 등급 3TR 상승. 빈 구역 한 곳에 타일 배치.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 6개까지 제거. 도시 타일과 인접하지 않은 빈 구역 한 곳에 타일 배치.",
 
-  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "",
+  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2증가. 해양 타일과 인접한 빈 구역 한 곳에 타일 배치.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "",
+  "Asteroid Rights": "소행성 사용수익권",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "행동: 1MC 소비해서 자신의 아무 카드 1장에 소행성 자원 1개 추가.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "행동: 이 카드에 소행성 자원 1개 소비해서 MC 생산력 1 증가 혹은 티타늄 자원 2개 획득.",
+  "Add 2 asteroids to this card.": "이 카드에 소행성 자원 2개 획득.",
 
-  "Requires 8 oceans. 1 VP for each animal on this card.": "",
-  "Requires 2 Science tags.": "",
-  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": ""
+  "Bactoviral Research": "세균 및 바이러스 연구",
+  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "카드 1장 획득. 자신의 아무 카드 1장에 이 카드도 포함하여 보유한 과학 태그 수만큼 미생물 자원 추가.",
+
+  "Bio Printing Facility": "바이오프린팅 시설",
+  "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "행동: 에너지 자원 2개 소비해서, 식물 자원 2개 획득 또는 자신의 다른 카드 1장에 동물 자원 1개 추가.",
+
+  "Harvest": "수확",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "조건: 보유한 녹지 타일 3장 이상.) (12 M€ 획득.",
+
+  "Outdoor Sports": "실외 운동",
+  "Requires any city adjacent to ocean. Increase your M€ production 2 steps.": "조건: 해양 타일에 인접한 아무 도시 타일 1장 이상.) (메가크레딧 생산력 2 증가.",
+
+  "Merger": "합병 회사",
+  "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "기업 카드 4장을 뽑아, 그 중 1장을 추진하고 나머지 3장을 버림. 그런 다음 42 M€ 지불."
 }

@@ -8,6 +8,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
 import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
+import {cast} from '../../TestingUtils';
 
 describe('SmallOpenPitMine', function() {
   let card: SmallOpenPitMine;
@@ -18,7 +19,7 @@ describe('SmallOpenPitMine', function() {
   beforeEach(function() {
     card = new SmallOpenPitMine();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
     player.playedCards = [microbeCard, floaterCard];
@@ -26,7 +27,7 @@ describe('SmallOpenPitMine', function() {
 
   it('play - steel', function() {
     card.play(player);
-    const options = player.game.deferredActions.pop()?.execute() as OrOptions;
+    const options = cast(player.game.deferredActions.pop()?.execute(), OrOptions);
     const twoSteel = options.options[0];
 
     twoSteel.cb();
@@ -36,7 +37,7 @@ describe('SmallOpenPitMine', function() {
 
   it('play - titanium', function() {
     card.play(player);
-    const options = player.game.deferredActions.pop()?.execute() as OrOptions;
+    const options = cast(player.game.deferredActions.pop()?.execute(), OrOptions);
     const oneTitanium = options.options[1];
 
     oneTitanium.cb();

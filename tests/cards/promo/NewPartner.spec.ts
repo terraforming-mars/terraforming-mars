@@ -10,7 +10,7 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('NewPartner', function() {
@@ -21,14 +21,14 @@ describe('NewPartner', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions({preludeExtension: true});
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    const gameOptions = setCustomGameOptions({preludeExtension: true});
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play with at least 1 playable prelude', function() {
     game.dealer.preludeDeck.push(new SmeltingPlant(), new Donation());
 
-    const selectCard = TestingUtils.cast(card.play(player), SelectCard);
+    const selectCard = cast(card.play(player), SelectCard);
     expect(selectCard.cards).has.length(2);
     selectCard.cb([selectCard.cards[0]]);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -40,7 +40,7 @@ describe('NewPartner', function() {
     // the one card, so the player sees their option.
     game.dealer.preludeDeck.push(new HugeAsteroid(), new Donation());
 
-    const selectCard = TestingUtils.cast(card.play(player), SelectCard);
+    const selectCard = cast(card.play(player), SelectCard);
     expect(selectCard.cards).has.length(1);
     expect(selectCard.cards[0].name).eq(CardName.DONATION);
   });

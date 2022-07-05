@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {ISpace} from '../../../src/boards/ISpace';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/turmoil/parties/Greens';
 import {Lichen} from '../../../src/cards/base/Lichen';
@@ -18,12 +18,11 @@ describe('Greens', function() {
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    const otherPlayer = TestPlayers.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player, otherPlayer], player, gameOptions);
     turmoil = game.turmoil!;
     greens = new Greens();
-
-    TestingUtils.resetBoard(game);
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each Plant, Microbe and Animal tag you have', function() {
@@ -46,14 +45,14 @@ describe('Greens', function() {
   });
 
   it('Ruling policy 1: When you place a greenery tile, gain 4 MC', function() {
-    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[0].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[0].id);
 
     game.addGreenery(player, '10');
     expect(player.megaCredits).to.eq(4);
   });
 
   it('Ruling policy 2: When you place a tile, gain 1 plant', function() {
-    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[1].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[1].id);
 
     const emptySpace: ISpace = game.board.spaces.find((space) => space.spaceType === SpaceType.LAND && space.bonus.length === 0) as ISpace;
     game.addTile(player, emptySpace.spaceType, emptySpace, {tileType: TileType.NATURAL_PRESERVE});
@@ -61,7 +60,7 @@ describe('Greens', function() {
   });
 
   it('Ruling policy 3: When you play an animal, plant or microbe tag, gain 2 MC', function() {
-    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[2].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[2].id);
 
     const lichen = new Lichen();
     player.playCard(lichen);
@@ -69,7 +68,7 @@ describe('Greens', function() {
   });
 
   it('Ruling policy 4: Spend 5 M€ to gain 3 plants or add 2 microbes to any card', function() {
-    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[3].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[3].id);
 
     const greensPolicy = GREENS_POLICY_4;
     player.megaCredits = 10;
@@ -85,7 +84,7 @@ describe('Greens', function() {
     player.playedCards.push(tardigrades);
     greensPolicy.action(player);
     game.deferredActions.runNext();
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
 
     orOptions.options[0].cb();
     expect(tardigrades.resourceCount).to.eq(2);

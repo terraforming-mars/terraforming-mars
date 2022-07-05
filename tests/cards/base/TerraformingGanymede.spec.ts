@@ -4,9 +4,9 @@ import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {TestPlayer} from 'tests/TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/turmoil/parties/Reds';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('TerraformingGanymede', function() {
   let card: TerraformingGanymede;
@@ -18,7 +18,7 @@ describe('TerraformingGanymede', function() {
     card = new TerraformingGanymede();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions());
+    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 
   it('Should play', function() {

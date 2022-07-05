@@ -2,37 +2,14 @@
         <div id="create-game">
             <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
             <div class="create-game-discord-invite" v-if="playersCount===1">
-              (<span v-i18n>Looking for people to play with</span>? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u v-i18n>Join us on Discord</u></a>.)
+              (<span v-i18n>Looking for people to play with</span>? <a :href="constants.DISCORD_INVITE" class="tooltip" target="_blank"><u v-i18n>Join us on Discord</u></a>.)
             </div>
 
             <div class="create-game-form create-game-panel create-game--block">
 
                 <div class="create-game-options">
-
-                    <div v-if="isSoloModePage">
-                      <div class="create-game-solo-player form-group" v-for="newPlayer in getPlayers()" v-bind:key="newPlayer.index">
-                          <div>
-                              <input class="form-input form-inline create-game-player-name" placeholder="Your name" v-model="newPlayer.name" />
-                          </div>
-                          <div class="create-game-colors-wrapper">
-                              <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
-                              <span class="create-game-colors-cont">
-                              <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']" v-bind:key="color">
-                                  <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
-                                  <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
-                              </label>
-                              </span>
-                          </div>
-                          <div>
-                              <label class="form-switch form-inline">
-                                  <input type="checkbox" v-model="newPlayer.beginner">
-                                  <i class="form-icon"></i> <span v-i18n>Beginner?</span>
-                              </label>
-                          </div>
-                      </div>
-                    </div>
                     <div class="create-game-page-container">
-                        <div class="create-game-page-column" v-if="! isSoloModePage">
+                        <div class="create-game-page-column">
                             <h4 v-i18n>№ of Players</h4>
                             <template v-for="pCount in [1,2,3,4,5,6]">
                               <div v-bind:key="pCount">
@@ -192,6 +169,11 @@
                             </label>
                             </template>
 
+                            <!-- <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
+                            <label for="beginnerOption-checkbox">
+                                <span v-i18n>Beginner Options</span>
+                            </label> -->
+
                             <input type="checkbox" v-model="undoOption" id="undo-checkbox">
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
@@ -264,7 +246,6 @@
 
                         </div>
 
-
                         <div class="create-game-page-column" v-if="playersCount > 1">
                             <h4 v-i18n>Multiplayer Options</h4>
 
@@ -330,14 +311,9 @@
                             <label for="fastMode-checkbox">
                                 <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-
-                            <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
-                            <label for="beginnerOption-checkbox">
-                                <span v-i18n>Beginner Options</span>
-                            </label>
                         </div>
 
-                        <div class="create-game-players-cont" v-if="playersCount > 1">
+                        <div class="create-game-players-cont">
                             <div class="container">
                                 <div class="columns">
                                   <template v-for="newPlayer in getPlayers()">
@@ -357,7 +333,7 @@
                                               </template>
                                           </div>
                                           <div>
-                                              <template v-if="beginnerOption">
+                                              <!-- <template v-if="beginnerOption"> -->
                                                   <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
                                                       <input type="checkbox" v-model="newPlayer.beginner">
                                                       <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
@@ -367,7 +343,7 @@
                                                       <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
                                                       <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
                                                   </label>
-                                              </template>
+                                              <!-- </template> -->
 
                                               <label class="form-radio form-inline" v-if="!randomFirstPlayer">
                                                   <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
@@ -456,8 +432,7 @@ import {getCard} from '@/client/cards/ClientCardManifest';
 import {GameModule} from '@/common/cards/GameModule';
 
 import * as constants from '@/common/constants';
-
-type BoardNameType = BoardName | RandomBoardOption;
+import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 
 export interface CreateGameModel {
     constants: typeof constants;
@@ -472,7 +447,7 @@ export interface CreateGameModel {
     randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
-    beginnerOption: boolean;
+    // beginnerOption: boolean;
     venusNext: boolean;
     colonies: boolean;
     turmoil: boolean;
@@ -482,7 +457,6 @@ export interface CreateGameModel {
     showCorporationList: boolean;
     showColoniesList: boolean;
     showCardsBlackList: boolean;
-    isSoloModePage: boolean;
     board: BoardNameType;
     boards: Array<BoardNameType>;
     seed: number;
@@ -501,7 +475,7 @@ export interface CreateGameModel {
     includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
-    clonedGameId: string | undefined;
+    clonedGameId: GameId | undefined;
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
     moonStandardProjectVariant: boolean;
@@ -511,15 +485,6 @@ export interface CreateGameModel {
     escapeVelocityThreshold: number;
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
-}
-
-export interface NewPlayerModel {
-    index: number;
-    name: string;
-    color: Color;
-    beginner: boolean;
-    handicap: number;
-    first: boolean;
 }
 
 type Refs = {
@@ -553,7 +518,7 @@ export default (Vue as WithRefs<Refs>).extend({
       randomMA: RandomMAOptionType.NONE,
       randomFirstPlayer: true,
       showOtherPlayersVP: false,
-      beginnerOption: false,
+      // beginnerOption: false,
       venusNext: false,
       colonies: false,
       showColoniesList: false,
@@ -563,7 +528,6 @@ export default (Vue as WithRefs<Refs>).extend({
       customCorporationsList: [],
       customColoniesList: [],
       cardsBlackList: [],
-      isSoloModePage: false,
       board: BoardName.ORIGINAL,
       boards: [
         BoardName.ORIGINAL,
@@ -571,6 +535,8 @@ export default (Vue as WithRefs<Refs>).extend({
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
         BoardName.ARABIA_TERRA,
+        BoardName.AMAZONIS,
+        BoardName.TERRA_CIMMERIA,
         BoardName.VASTITAS_BOREALIS,
         RandomBoardOption.ALL,
       ],
@@ -609,11 +575,6 @@ export default (Vue as WithRefs<Refs>).extend({
     ColoniesFilter,
     CorporationsFilter,
     PreferencesIcon,
-  },
-  mounted() {
-    if (window.location.pathname === '/solo') {
-      this.isSoloModePage = true;
-    }
   },
   watch: {
     allOfficialExpansions(value: boolean) {
@@ -667,8 +628,12 @@ export default (Vue as WithRefs<Refs>).extend({
           component.showColoniesList = results['customColoniesList'].length > 0;
           component.showCardsBlackList = results['cardsBlackList'].length > 0;
 
+          // Capture the solar phase option since several of the other results will change
+          // it via the watch mechanism.
+          const capturedSolarPhaseOption = results.solarPhaseOption;
+
           for (const k in results) {
-            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players'].includes(k)) continue;
+            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players', 'solarPhaseOption'].includes(k)) continue;
             (component as any)[k] = results[k];
           }
 
@@ -692,6 +657,9 @@ export default (Vue as WithRefs<Refs>).extend({
             if ( ! component.seededGame) {
               component.seed = Math.random();
             }
+
+            // set to alter after any watched properties
+            component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
           });
         }
       }, false);
@@ -779,8 +747,12 @@ export default (Vue as WithRefs<Refs>).extend({
         return 'create-game-board-hexagon create-game-hellas';
       } else if (boardName === BoardName.ELYSIUM) {
         return 'create-game-board-hexagon create-game-elysium';
+      } else if (boardName === BoardName.AMAZONIS) {
+        return 'create-game-board-hexagon create-game-amazonis';
       } else if (boardName === BoardName.ARABIA_TERRA) {
         return 'create-game-board-hexagon create-game-arabia-terra';
+      } else if (boardName === BoardName.TERRA_CIMMERIA) {
+        return 'create-game-board-hexagon create-game-terra-cimmeria';
       } else if (boardName === BoardName.VASTITAS_BOREALIS) {
         return 'create-game-board-hexagon create-game-vastitas-borealis';
       } else {
@@ -841,9 +813,9 @@ export default (Vue as WithRefs<Refs>).extend({
       component.players.forEach((player) => {
         if (player.name === '') {
           if (isSoloMode) {
-            player.name = 'You';
+            player.name = this.$t('You');
           } else {
-            const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
+            const defaultPlayerName = this.$t(player.color.charAt(0).toUpperCase() + player.color.slice(1));
             player.name = defaultPlayerName;
           }
         }
@@ -883,7 +855,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const includeVenusMA = component.includeVenusMA;
       const startingCorporations = component.startingCorporations;
       const soloTR = component.soloTR;
-      const beginnerOption = component.beginnerOption;
+      // const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
       const escapeVelocityMode = component.escapeVelocityMode;
@@ -969,7 +941,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clonedGamedId = undefined;
       }
 
-      const dataToSend = JSON.stringify({
+      const dataToSend: NewGameConfig = {
         players,
         corporateEra,
         prelude,
@@ -1001,7 +973,7 @@ export default (Vue as WithRefs<Refs>).extend({
         initialDraft,
         randomMA,
         shuffleMapOption,
-        beginnerOption,
+        // beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,
         requiresMoonTrackCompletion: component.requiresMoonTrackCompletion,
@@ -1011,8 +983,8 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityThreshold,
         escapeVelocityPeriod,
         escapeVelocityPenalty,
-      }, undefined, 4);
-      return dataToSend;
+      };
+      return JSON.stringify(dataToSend, undefined, 4);
     },
     async createGame() {
       const dataToSend = await this.serializeSettings();

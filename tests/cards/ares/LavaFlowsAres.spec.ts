@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/common/TileType';
-import {TestingUtils} from '../../TestingUtils';
+import {resetBoard} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LavaFlowsAres} from '../../../src/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -15,8 +15,8 @@ describe('LavaFlowsAres', function() {
     card = new LavaFlowsAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    TestingUtils.resetBoard(game);
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    resetBoard(game);
   });
 
   it('Should play', function() {

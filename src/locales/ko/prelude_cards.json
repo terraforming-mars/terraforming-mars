@@ -1,24 +1,22 @@
 {
-    "Psychrophiles": "",
-    "Action: Add 1 microbe to this card.": "",
-    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "",
-    "Temperature must be -20 C or lower.": "",
+    "Psychrophiles": "호냉성 미생물",
+    "Action: Add 1 microbe to this card.": "행동: 이 카드에 미생물 자원 1개 추가.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "지속효과: 식물 태그 카드 사용시, 이 카드에 있는 미생물 자원 1개당 2 M€ 가치로 지불.",
+    "Temperature must be -20 C or lower.": "조건: 기온 -20℃ 이하.",
 
-    "Research Coordination": "",
-    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "",
+    "Research Coordination": "연구 조직화",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "이 카드를 사용한 뒤부터, 자신이 행동을 수행할 때마다, 이 카드의 만능 태그를 자신이 원하는 태그로 취급.",
 
-    "SF Memorial": "",
-    "Draw 1 card.": "",
+    "SF Memorial": "SF 거장 기념비",
 
-    "Martian Survey": "",
-    "Oxygen must be 4% or lower. Draw two cards.": "",
+    "Martian Survey": "화성 측량",
+    "Oxygen must be 4% or lower. Draw two cards.": "조건: 산소 농도 4% 이하.) (카드 2장 획득.",
 
-    "House Printing": "",
-    "Increase your steel production 1 step.": "",
+    "House Printing": "주택 3D 프린팅",
 
-    "Space Hotels": "",
-    "Requires 2 Earth tags. Increase M€ production 4 steps.": "",
+    "Space Hotels": "우주 호텔",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "메가크레딧 생산력 4 증가.",
 
-    "Lava Tube Settlement": "",
-    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": ""
+    "Lava Tube Settlement": "용암동굴 정착지",
+    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 주변의 다른 도시 타일을 무시하고, 화산 구역에 도시 타일 1장 배치."
 }

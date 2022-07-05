@@ -1,6 +1,6 @@
 import * as http from 'http';
 import {IContext} from '../../src/routes/IHandler';
-import {Handler} from '../../src/routes/Handler';
+import {AsyncHandler, Handler} from '../../src/routes/Handler';
 import {Route} from '../../src/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
@@ -32,7 +32,15 @@ export class RouteTestScaffolding {
   public get(handler: Handler, res: MockResponse) {
     handler.get(this.req, res.hide(), this.ctx);
   }
+  public async asyncGet(handler: AsyncHandler, res: MockResponse): Promise<void> {
+    return handler.get(this.req, res.hide(), this.ctx);
+  }
+
   public post(handler: Handler, res: MockResponse) {
     handler.post(this.req, res.hide(), this.ctx);
+  }
+
+  public async asyncPost(handler: AsyncHandler, res: MockResponse) {
+    return handler.post(this.req, res.hide(), this.ctx);
   }
 }

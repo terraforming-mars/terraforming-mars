@@ -64,7 +64,7 @@ class UnityPolicy01 implements Policy {
 
 class UnityPolicy02 implements Policy {
   id = 'up02' as const;
-  description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
+  description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {

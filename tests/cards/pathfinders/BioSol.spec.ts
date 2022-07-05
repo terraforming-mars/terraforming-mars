@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {Tags} from '../../../src/common/cards/Tags';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('BioSol', function() {
   let card: BioSol;
@@ -27,7 +27,7 @@ describe('BioSol', function() {
 
   it('action', function() {
     card.action(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
   });
 

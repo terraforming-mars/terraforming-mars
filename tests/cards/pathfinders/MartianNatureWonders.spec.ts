@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MartianNatureWonders', function() {
@@ -18,7 +18,7 @@ describe('MartianNatureWonders', function() {
     card = new MartianNatureWonders();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('play', function() {
@@ -26,7 +26,7 @@ describe('MartianNatureWonders', function() {
     player.playedCards.push(dataCard);
     expect(dataCard.resourceCount).eq(0);
 
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
 
     // Pick a tile next to an ocean to show that the player does not gain the 2MC bonus.
     const space = player.game.board.getAvailableSpacesOnLand(player)
@@ -39,7 +39,7 @@ describe('MartianNatureWonders', function() {
 
     const selectSpace = card.play(player);
     selectSpace.cb(space);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
 
     expect(player.steel).eq(2);
     expect(player.megaCredits).eq(0);

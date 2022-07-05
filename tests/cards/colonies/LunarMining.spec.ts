@@ -12,7 +12,7 @@ describe('LunarMining', function() {
     const card2 = new SpaceHotels();
     const card3 = new LunaGovernor();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(card2, card3);
     const action = card.play(player);
     expect(action).is.undefined;

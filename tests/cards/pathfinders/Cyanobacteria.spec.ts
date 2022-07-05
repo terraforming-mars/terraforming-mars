@@ -3,7 +3,7 @@ import {Cyanobacteria} from '../../../src/cards/pathfinders/Cyanobacteria';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
@@ -20,11 +20,11 @@ describe('Cyanobacteria', function() {
   beforeEach(function() {
     card = new Cyanobacteria();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();
     ants = new Ants();
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
   });
 
   it('play -- the simple part', function() {
@@ -41,7 +41,7 @@ describe('Cyanobacteria', function() {
     const options = card.play(player);
     expect(options).is.undefined;
     // 9 oceans, so, maxed out.
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(ghgProducingBacteria.resourceCount).eq(9);
   });
 
@@ -54,7 +54,7 @@ describe('Cyanobacteria', function() {
 
     const options = card.play(player);
     expect(options).is.undefined;
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     // 9 oceans plus wetlands, so 10.
     expect(ghgProducingBacteria.resourceCount).eq(10);
   });

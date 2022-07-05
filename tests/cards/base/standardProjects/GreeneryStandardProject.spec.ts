@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {GreeneryStandardProject} from '../../../../src/cards/base/standardProjects/GreeneryStandardProject';
-import {TestingUtils} from '../../../TestingUtils';
+import {setCustomGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
 import {TestPlayers} from '../../../TestPlayers';
@@ -20,7 +20,7 @@ describe('GreeneryStandardProject', function() {
   beforeEach(function() {
     card = new GreeneryStandardProject();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Can act', function() {
@@ -36,7 +36,7 @@ describe('GreeneryStandardProject', function() {
     expect(game.getOxygenLevel()).eq(0);
 
     card.action(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     const selectSpace = player.getWaitingFor() as SelectSpace;
     const availableSpace = selectSpace.availableSpaces[0];
@@ -62,7 +62,7 @@ describe('GreeneryStandardProject', function() {
 
   it('Can not act with reds', () => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

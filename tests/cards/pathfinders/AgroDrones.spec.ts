@@ -12,7 +12,7 @@ describe('AgroDrones', function() {
   beforeEach(function() {
     card = new AgroDrones();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 

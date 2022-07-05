@@ -1,5 +1,5 @@
 import {Game} from '../Game';
-import {GameId} from '../common/Types';
+import {GameId, isPlayerId} from '../common/Types';
 import {GameSetup} from '../GameSetup';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
@@ -45,7 +45,7 @@ export class Cloner {
     const keys = Object.entries(obj);
     keys.forEach(([key, val]) => {
       if (obj.hasOwnProperty(key)) {
-        if (typeof val === 'string') {
+        if (isPlayerId(val)) {
           const idx = oldPlayerIds.indexOf(val);
           if (idx > -1) {
             obj[key] = newPlayerIds[idx];

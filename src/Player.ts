@@ -1552,6 +1552,18 @@ export class Player {
     return DrawCards.keepSome(this, count, options).execute();
   }
 
+  public discardPlayedCard(card: IProjectCard) {
+    const cardIndex = this.playedCards.findIndex((c) => c.name === card.name);
+    if (cardIndex === -1) {
+      console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
+      return;
+    }
+    this.playedCards.splice(cardIndex, 1);
+    this.game.dealer.discard(card);
+    card.onDiscard?.(this);
+    this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
+  }
+
   public get availableHeat(): number {
     return this.heat + (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? this.getResourcesOnCorporation() * 2 : 0);
   }

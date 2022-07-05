@@ -8,7 +8,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Priority} from '../../deferredActions/DeferredAction';
-import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
 import {Size} from '../../common/cards/render/Size';
 
@@ -56,22 +55,9 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
         const card = cards[0];
         player.game.log('${0} is replaying ${1}', (b) => b.player(player).card(card));
         player.defer(card.play(player), Priority.DEFAULT);
-        this.discard(player, card);
+        player.discardPlayedCard(card);
         return undefined;
       },
     );
-  }
-
-  private discard(player: Player, card: IProjectCard) {
-    // This is copied straight out of Project Workshop.
-    const cardIndex = player.playedCards.findIndex((c) => c.name === card.name);
-    player.playedCards.splice(cardIndex, 1);
-    player.game.dealer.discard(card);
-
-    if (card.onDiscard) {
-      card.onDiscard(player);
-    }
-
-    player.game.log('${0} discarded ${1}', (b) => b.player(player).card(card));
   }
 }

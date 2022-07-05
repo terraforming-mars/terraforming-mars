@@ -1,10 +1,10 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
 
 
-export class ApiGameHistory extends AsyncHandler {
+export class ApiGameHistory extends Handler {
   public static readonly INSTANCE = new ApiGameHistory();
   private constructor() {
     super({validateServerId: true});

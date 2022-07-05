@@ -1,9 +1,9 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Server} from '../models/ServerModel';
 
-export class ApiGame extends AsyncHandler {
+export class ApiGame extends Handler {
   public static readonly INSTANCE = new ApiGame();
   private constructor() {
     super();

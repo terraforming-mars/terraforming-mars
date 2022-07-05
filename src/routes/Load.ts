@@ -9,8 +9,8 @@ export class Load extends Handler {
     super();
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     req.url = '/assets/index.html';
-    ServeApp.INSTANCE.get(req, res, ctx);
+    return ServeApp.INSTANCE.get(req, res, ctx);
   }
 }

@@ -2,11 +2,11 @@ import * as http from 'http';
 import {Database} from '../database/Database';
 import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {LoadGameFormModel} from '../common/models/LoadGameFormModel';
 
-export class LoadGame extends AsyncHandler {
+export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
   private constructor() {
     super();

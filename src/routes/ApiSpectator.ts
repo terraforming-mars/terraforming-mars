@@ -1,9 +1,9 @@
 import * as http from 'http';
 import {Server} from '../models/ServerModel';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 
-export class ApiSpectator extends AsyncHandler {
+export class ApiSpectator extends Handler {
   public static readonly INSTANCE = new ApiSpectator();
 
   private constructor() {

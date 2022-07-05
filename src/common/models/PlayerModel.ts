@@ -11,7 +11,7 @@ import {CardName} from '../cards/CardName';
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id: PlayerId | SpectatorId;
+  id?: PlayerId | SpectatorId;
   thisPlayer: PublicPlayerModel | undefined;
 }
 

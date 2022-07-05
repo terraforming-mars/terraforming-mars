@@ -14,7 +14,7 @@ describe('LogHelper', function() {
     const card1 = new Algae();
     const card2 = new Ants();
     const card3 = new Birds();
-    const game = Game.newInstance('foobar', [player1, player2], player1);
+    const game = Game.newInstance('gameid', [player1, player2], player1);
     LogHelper.logDrawnCards(player1, []);
     let msg = game.gameLog.pop();
     expect(msg!.message).to.eq('${0} drew no cards');
@@ -47,7 +47,7 @@ describe('LogHelper', function() {
     const card1 = new Algae();
     const card2 = new Ants();
     const card3 = new Birds();
-    const game = Game.newInstance('foobar', [player1, player2], player1);
+    const game = Game.newInstance('gameid', [player1, player2], player1);
     LogHelper.logDrawnCards(player1, []);
     let msg = game.gameLog.pop();
     expect(msg!.message).to.eq('${0} drew no cards');
@@ -78,7 +78,7 @@ describe('LogHelper', function() {
     const player1 = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const card1 = new Algae();
-    const game = Game.newInstance('foobar', [player1, player2], player1);
+    const game = Game.newInstance('gameid', [player1, player2], player1);
     LogHelper.logDrawnCards(player1, [card1.name], true);
     const msg = game.gameLog.pop()!;
     expect(msg.data.length).to.eq(2);

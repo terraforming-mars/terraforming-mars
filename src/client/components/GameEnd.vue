@@ -154,7 +154,7 @@
                   </div>
                 </div>
                 <div class="game_end_block--log game-end-column">
-                  <log-panel :color="color" :generation="game.generation" :id="viewModel.id" :lastSoloGeneration="game.lastSoloGeneration" :players="players"></log-panel>
+                  <log-panel :color="color" :generation="game.generation" v-if="viewModel.id !== undefined" :id="viewModel.id" :lastSoloGeneration="game.lastSoloGeneration" :players="players"></log-panel>
                 </div>
               </div>
             </div>

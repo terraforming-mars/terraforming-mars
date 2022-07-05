@@ -475,7 +475,7 @@ export interface CreateGameModel {
     includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
-    clonedGameId: string | undefined;
+    clonedGameId: GameId | undefined;
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
     moonStandardProjectVariant: boolean;

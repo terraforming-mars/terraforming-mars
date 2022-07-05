@@ -14,7 +14,7 @@ describe('SolarPanelFoundry', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new SolarPanelFoundry();
   });
 

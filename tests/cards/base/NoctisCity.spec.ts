@@ -16,7 +16,7 @@ describe('NoctisCity', function() {
     card = new NoctisCity();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play without energy production', function() {

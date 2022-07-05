@@ -16,7 +16,7 @@ describe('DesignedOrganisms', function() {
   beforeEach(function() {
     card = new DesignedOrganisms();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 

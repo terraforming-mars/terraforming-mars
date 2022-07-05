@@ -21,7 +21,7 @@ describe('SecretLabs', function() {
   beforeEach(function() {
     card = new SecretLabs();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
     player.playedCards = [microbeCard, floaterCard];

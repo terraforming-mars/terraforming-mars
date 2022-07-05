@@ -15,7 +15,7 @@ describe('LargeConvoy', function() {
     card = new LargeConvoy();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play without animal cards', function() {

@@ -20,7 +20,7 @@ describe('Cyanobacteria', function() {
   beforeEach(function() {
     card = new Cyanobacteria();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();
     ants = new Ants();

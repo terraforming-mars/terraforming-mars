@@ -15,7 +15,7 @@ describe('TharsisRepublic', function() {
     card = new TharsisRepublic();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
 
     player.corporationCard = card;
   });
@@ -57,7 +57,7 @@ describe('TharsisRepublic', function() {
 
   it('Gives 2 M€ production in solo mode', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
     card.play(player);
     runAllActions(game);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);

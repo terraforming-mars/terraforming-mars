@@ -16,7 +16,7 @@ describe('Incite', function() {
     player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('gameid', [player], player, gameOptions);
 
     card.play(player);
     player.corporationCard = card;

@@ -12,7 +12,6 @@ import {AntiGravityTechnology} from '../../src/cards/base/AntiGravityTechnology'
 describe('Diversifier', function() {
   let milestone : Diversifier;
   let player : Player;
-  let game: Game;
 
   beforeEach(() => {
     milestone = new Diversifier();

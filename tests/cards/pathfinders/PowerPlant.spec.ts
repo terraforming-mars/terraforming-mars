@@ -12,7 +12,7 @@ describe('PowerPlant', function() {
   beforeEach(function() {
     card = new PowerPlant();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 

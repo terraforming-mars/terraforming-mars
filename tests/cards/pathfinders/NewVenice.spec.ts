@@ -20,7 +20,7 @@ describe('NewVenice', function() {
     card = new NewVenice();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({pathfindersExpansion: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 
   it('Can play', function() {

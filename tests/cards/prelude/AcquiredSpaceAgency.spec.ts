@@ -8,7 +8,7 @@ describe('AcquiredSpaceAgency', function() {
   it('Should play', function() {
     const card = new AcquiredSpaceAgency();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     card.play(player);
 
     expect(player.titanium).to.eq(6);

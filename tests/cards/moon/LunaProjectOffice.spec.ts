@@ -12,7 +12,7 @@ const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 describe('LunaProjectOffice', () => {
   it('can play', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const card = new LunaProjectOffice();
 
     player.cardsInHand = [card];
@@ -28,7 +28,7 @@ describe('LunaProjectOffice', () => {
   it('play - solo', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance(
-      'id',
+      'gameid',
       [player],
       player,
       setCustomGameOptions({
@@ -76,7 +76,7 @@ describe('LunaProjectOffice', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance(
-      'id',
+      'gameid',
       [player, redPlayer],
       player,
       setCustomGameOptions({
@@ -132,7 +132,7 @@ describe('LunaProjectOffice', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance(
-      'id',
+      'gameid',
       [player, redPlayer],
       player,
       setCustomGameOptions({

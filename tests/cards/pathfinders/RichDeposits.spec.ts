@@ -11,7 +11,7 @@ describe('RichDeposits', function() {
   beforeEach(function() {
     card = new RichDeposits();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
   it('canPlay', function() {
     player.megaCredits = card.cost;

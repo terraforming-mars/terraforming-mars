@@ -13,7 +13,7 @@ describe('Anthozoa', function() {
   beforeEach(function() {
     card = new Anthozoa();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('canPlay', function() {

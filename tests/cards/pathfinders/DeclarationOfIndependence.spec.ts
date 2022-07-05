@@ -16,7 +16,7 @@ describe('DeclarationOfIndependence', function() {
   beforeEach(function() {
     card = new DeclarationOfIndependence();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    Game.newInstance('gameid', [player], player, setCustomGameOptions());
     turmoil = player.game.turmoil!;
   });
 

@@ -21,7 +21,7 @@ describe('MoonRoadStandardProject', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new MoonRoadStandardProject();
   });
@@ -74,7 +74,7 @@ describe('MoonRoadStandardProject', () => {
 
   it('can act when Reds are in power.', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 

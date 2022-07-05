@@ -24,7 +24,7 @@ describe('LunarSecurityStations', () => {
     player = TestPlayers.BLUE.newPlayer();
     opponent1 = TestPlayers.RED.newPlayer();
     opponent2 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('id', [player, opponent1, opponent2], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player, opponent1, opponent2], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new LunarSecurityStations();
   });

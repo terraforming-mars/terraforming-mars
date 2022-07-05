@@ -24,7 +24,7 @@ describe('MooncrateConvoysToMars', () => {
     player1 = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('id', [player1, player2, player3], player1, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player1, player2, player3], player1, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new MooncrateConvoysToMars();
   });

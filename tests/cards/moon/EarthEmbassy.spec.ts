@@ -16,7 +16,7 @@ describe('EarthEmbassy', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     earthEmbassy = new EarthEmbassy();
   });
 

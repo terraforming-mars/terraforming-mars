@@ -14,7 +14,7 @@ describe('CommunicationBoom', function() {
     const card = new CommunicationBoom();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
     const a = fakeCard({name: 'A' as CardName, resourceType: CardResource.MICROBE});

@@ -15,7 +15,7 @@ describe('Electrician', () => {
   beforeEach(() => {
     milestone = new Electrician();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('test', [player], player);
+    Game.newInstance('gameid', [player], player);
 
     player.playedCards.push(new SolarPower(), new PowerPlant(), new SpaceMirrors());
   });

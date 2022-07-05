@@ -18,7 +18,7 @@ describe('Kelvinists', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('gameid', [player], player, gameOptions);
     turmoil = game.turmoil!;
     kelvinists = new Kelvinists();
   });

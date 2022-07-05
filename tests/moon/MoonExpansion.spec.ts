@@ -29,7 +29,7 @@ describe('MoonExpansion', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.PINK.newPlayer();
-    game = Game.newInstance('id', [player, player2], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
   });
 

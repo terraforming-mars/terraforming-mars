@@ -20,7 +20,7 @@ describe('DiasporaMovement', function() {
     player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
     reds = turmoil.getPartyByName(PartyName.REDS)!;
   });

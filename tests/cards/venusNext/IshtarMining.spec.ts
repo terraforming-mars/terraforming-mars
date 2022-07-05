@@ -9,7 +9,7 @@ describe('IshtarMining', function() {
     const card = new IshtarMining();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('gameid', [player, redPlayer], player);
     game.increaseVenusScaleLevel(player, 3);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     game.increaseVenusScaleLevel(player, 3);

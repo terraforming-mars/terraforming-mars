@@ -10,7 +10,7 @@ describe('RegoPlastics', function() {
   beforeEach(function() {
     card = new RegoPlastics();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Should play', function() {

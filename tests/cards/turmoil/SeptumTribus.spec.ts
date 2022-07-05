@@ -12,7 +12,7 @@ describe('SeptumTribus', function() {
     const player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     card.play();
 
     player.corporationCard = card;

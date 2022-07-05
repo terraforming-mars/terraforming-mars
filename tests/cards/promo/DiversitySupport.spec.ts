@@ -14,7 +14,7 @@ describe('DiversitySupport', function() {
     card = new DiversitySupport();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t play', function() {

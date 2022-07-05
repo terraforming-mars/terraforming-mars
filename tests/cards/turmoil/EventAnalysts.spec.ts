@@ -11,7 +11,7 @@ describe('EventAnalysts', function() {
     const player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
         game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);

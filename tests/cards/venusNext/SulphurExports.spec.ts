@@ -9,7 +9,7 @@ describe('SulphurExports', function() {
     const card = new SulphurExports();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('gameid', [player, redPlayer], player);
 
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

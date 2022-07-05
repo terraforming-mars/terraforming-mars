@@ -10,7 +10,7 @@ describe('Viron', function() {
     const card = new Viron();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     const action = card.play();
     expect(action).is.undefined;
     player.corporationCard = card;

@@ -13,7 +13,7 @@ describe('EnergyMarket', function() {
   beforeEach(function() {
     card = new EnergyMarket();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Can\'t act', function() {

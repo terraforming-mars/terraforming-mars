@@ -25,7 +25,7 @@ describe('GeologicalSurvey', () => {
     card = new GeologicalSurvey();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });
 
@@ -135,7 +135,7 @@ describe('GeologicalSurvey', () => {
   it('Works with Mars First policy', () => {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('gameid', [player], player, gameOptions);
     const turmoil = game.turmoil!;
     const marsFirst = new MarsFirst();
 

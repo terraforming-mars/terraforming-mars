@@ -20,7 +20,7 @@ describe('Entrepreneur', function() {
     const award = new Entrepreneur();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const game = Game.newInstance('gameid', [player, player2], player);
 
     expect(award.getScore(player)).to.eq(0);
 

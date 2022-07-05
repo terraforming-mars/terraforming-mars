@@ -18,7 +18,7 @@ describe('CosmicSettler', function() {
     award = new CosmicSettler();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     board = game.board;
   });
 

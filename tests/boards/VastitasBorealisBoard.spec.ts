@@ -19,7 +19,7 @@ describe('VastitasBorealisBoard', function() {
     board = VastitasBorealisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('x', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
   });
 
   it('Grants temperature bonus', () => {

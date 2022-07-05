@@ -25,7 +25,7 @@ describe('CardRequirements', function() {
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
 
-    Game.newInstance('foobar', [player, player2], player, gameOptions);
+    Game.newInstance('gameid', [player, player2], player, gameOptions);
   });
 
   it('satisfies properly for oceans', function() {

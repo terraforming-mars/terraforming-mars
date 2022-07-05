@@ -22,7 +22,7 @@ describe('NewPartner', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions({preludeExtension: true});
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play with at least 1 playable prelude', function() {

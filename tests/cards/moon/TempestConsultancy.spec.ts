@@ -19,7 +19,7 @@ describe('TempestConsultancy', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, setCustomGameOptions());
+    game = Game.newInstance('gameid', [player, otherPlayer], player, setCustomGameOptions());
     card = new TempestConsultancy();
     turmoil = game.turmoil!;
   });

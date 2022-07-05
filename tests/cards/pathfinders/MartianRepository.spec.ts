@@ -14,7 +14,7 @@ describe('MartianRepository', function() {
   beforeEach(function() {
     card = new MartianRepository();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('can play', function() {

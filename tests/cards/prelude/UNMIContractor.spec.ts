@@ -6,7 +6,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('UNMIContractor', function() {
   it('Should play', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('bar', [player], player);
+    Game.newInstance('gameid', [player], player);
     const card = new UNMIContractor();
     card.play(player);
 

@@ -24,7 +24,7 @@ describe('MonsInsurance', () => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.GREEN.newPlayer();
-    Game.newInstance('foobar', [player, player2, player3], player);
+    Game.newInstance('gameid', [player, player2, player3], player);
     card.play(player);
     player.corporationCard = card;
   });
@@ -129,7 +129,7 @@ describe('MonsInsurance - Solo', () => {
     card = new MonsInsurance();
 
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     card.play(player);
     player.corporationCard = card;
 

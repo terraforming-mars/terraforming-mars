@@ -14,7 +14,7 @@ describe('DysonScreens', function() {
   beforeEach(function() {
     card = new DysonScreens();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player, setCustomGameOptions({pathfindersExpansion: true}));
+    Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 
   it('play', () => {

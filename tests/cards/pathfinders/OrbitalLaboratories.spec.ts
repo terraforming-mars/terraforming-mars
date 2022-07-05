@@ -12,7 +12,7 @@ describe('OrbitalLaboratories', function() {
   beforeEach(function() {
     card = new OrbitalLaboratories();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('play', function() {

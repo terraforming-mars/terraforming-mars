@@ -11,7 +11,7 @@ describe('LunaMetropolis', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
 
     const action = card.play(player);
     expect(action).is.undefined;

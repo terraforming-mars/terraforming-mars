@@ -14,7 +14,7 @@ describe('TopsoilContract', function() {
     card = new TopsoilContract();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Can play', function() {

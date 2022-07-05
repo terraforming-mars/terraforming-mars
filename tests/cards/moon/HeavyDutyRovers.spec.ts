@@ -17,7 +17,7 @@ describe('HeavyDutyRovers', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HeavyDutyRovers();
     moonData = MoonExpansion.moonData(game);
   });

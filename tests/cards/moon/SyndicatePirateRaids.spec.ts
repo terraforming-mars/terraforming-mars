@@ -14,7 +14,7 @@ describe('SyndicatePirateRaids', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, setCustomGameOptions({coloniesExtension: true}));
+    game = Game.newInstance('gameid', [player, otherPlayer], player, setCustomGameOptions({coloniesExtension: true}));
     card = new SyndicatePirateRaids();
   });
 

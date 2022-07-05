@@ -16,7 +16,7 @@ describe('SelfReplicatingRobots', function() {
   beforeEach(function() {
     card = new SelfReplicatingRobots();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Can\'t play', function() {

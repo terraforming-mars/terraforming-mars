@@ -47,7 +47,7 @@ describe('PlayerTags', function() {
     };
     const playerView: RecursivePartial<PlayerViewModel> = {
       thisPlayer: player,
-      id: 'foobar',
+      id: 'playerid-foo',
       game: {
         gameOptions: {
           showTimers: false,

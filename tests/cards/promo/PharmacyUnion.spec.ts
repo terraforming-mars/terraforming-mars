@@ -25,13 +25,13 @@ describe('PharmacyUnion', function() {
     card = new PharmacyUnion();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
 
     player.corporationCard = card;
   });
 
   it('Should play', function() {
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);
     pi.options[1].cb([]);

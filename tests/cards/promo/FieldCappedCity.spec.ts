@@ -12,7 +12,7 @@ describe('FieldCappedCity', function() {
     const card = new FieldCappedCity();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);

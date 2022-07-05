@@ -17,7 +17,7 @@ describe('Astrodrill', function() {
     card = new Astrodrill();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
 
     card.play();
     player.corporationCard = card;

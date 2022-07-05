@@ -28,7 +28,7 @@ describe('Philares', () => {
     philaresPlayer = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
     // redPlayer is first for the final placement test.
-    game = Game.newInstance('foobar', [otherPlayer, philaresPlayer], otherPlayer);
+    game = Game.newInstance('gameid', [otherPlayer, philaresPlayer], otherPlayer);
     game.board = EmptyBoard.newInstance();
     space = game.board.spaces[4];
     adjacentSpace = game.board.getAdjacentSpaces(space)[0];

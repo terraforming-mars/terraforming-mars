@@ -506,7 +506,7 @@ describe('SelectHowToPayForProjectCard', () => {
     }, playerFields);
 
     const playerView: Partial<PlayerViewModel>= {
-      id: 'foo',
+      id: 'playerid-foo',
       thisPlayer: thisPlayer as PublicPlayerModel,
     };
     const playerInput: Partial<PlayerInputModel> = {

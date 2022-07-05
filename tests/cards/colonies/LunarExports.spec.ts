@@ -10,7 +10,7 @@ describe('LunarExports', function() {
   it('Should play', function() {
     const card = new LunarExports();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     const orOptions = cast(card.play(player), OrOptions);
 
     orOptions.options[1].cb();

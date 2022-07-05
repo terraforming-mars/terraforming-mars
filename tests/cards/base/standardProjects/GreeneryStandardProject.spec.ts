@@ -20,7 +20,7 @@ describe('GreeneryStandardProject', function() {
   beforeEach(function() {
     card = new GreeneryStandardProject();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Can act', function() {
@@ -62,7 +62,7 @@ describe('GreeneryStandardProject', function() {
 
   it('Can not act with reds', () => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, setCustomGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

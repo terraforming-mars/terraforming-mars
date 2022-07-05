@@ -17,7 +17,7 @@ describe('AirRaid', function() {
     card = new AirRaid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
 
     corpo = new StormCraftIncorporated();
     player.corporationCard = corpo;
@@ -29,7 +29,7 @@ describe('AirRaid', function() {
 
   it('Should play - multiple targets', function() {
     const player3 = TestPlayers.YELLOW.newPlayer();
-    Game.newInstance('foobar', [player, player2, player3], player);
+    Game.newInstance('gameid', [player, player2, player3], player);
     player.addResourceTo(corpo);
     expect(card.canPlay(player)).is.true;
 

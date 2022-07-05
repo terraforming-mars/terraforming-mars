@@ -24,15 +24,15 @@ describe('PlayerInput', function() {
   it('fails when id not provided', async () => {
     scaffolding.url = '/player/input';
     await scaffolding.asyncPost(PlayerInput.INSTANCE, res);
-    expect(res.content).eq('Bad request: must provide player id');
+    expect(res.content).eq('Bad request: missing id parameter');
   });
 
   it('performs undo action', async () => {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = '/player/input?id=' + player.id;
     player.beginner = true;
-    const game = Game.newInstance('foo', [player], player);
-    const undo = Game.newInstance('old', [player], player);
+    const game = Game.newInstance('gameid-foo', [player], player);
+    const undo = Game.newInstance('gameid-old', [player], player);
     scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
@@ -56,8 +56,8 @@ describe('PlayerInput', function() {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = '/player/input?id=' + player.id;
     player.beginner = true;
-    const game = Game.newInstance('foo', [player], player);
-    const undo = Game.newInstance('old', [player], player);
+    const game = Game.newInstance('gameid-foo', [player], player);
+    const undo = Game.newInstance('gameid-old', [player], player);
     scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
@@ -80,7 +80,7 @@ describe('PlayerInput', function() {
   it('sends 400 on server error', async () => {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('foo', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
     scaffolding.ctx.gameLoader.add(game);
 
     const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);

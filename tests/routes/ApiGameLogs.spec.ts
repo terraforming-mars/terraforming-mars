@@ -17,11 +17,17 @@ describe('ApiGameLogs', function() {
   it('fails when id not provided', async () => {
     scaffolding.url = '/api/game/logs';
     await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
-    expect(res.content).eq('Bad request: must provide player id as the id parameter');
+    expect(res.content).eq('Bad request: missing id parameter');
+  });
+
+  it('fails with invalid id', async () => {
+    scaffolding.url = '/api/game/logs?id=game-id';
+    await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
+    expect(res.content).eq('Bad request: invalid player id');
   });
 
   it('fails when game not found', async () => {
-    scaffolding.url = '/api/game/logs?id=game-id';
+    scaffolding.url = '/api/game/logs?id=player-invalid-id';
     await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
     expect(res.content).eq('Not found: game not found');
   });

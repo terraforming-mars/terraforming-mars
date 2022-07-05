@@ -4,6 +4,7 @@ import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {GameId} from '../../src/common/Types';
 
 describe('ApiWaitingFor', function() {
   let scaffolding: RouteTestScaffolding;
@@ -23,7 +24,7 @@ describe('ApiWaitingFor', function() {
 
   it('fails when player not found', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    const game = Game.newInstance(player.id, [player], player);
+    const game = Game.newInstance('g' + player.id as GameId, [player], player);
     scaffolding.ctx.gameLoader.add(game);
     (game as any).getPlayerById = function() {
       throw new Error('player does not exist');

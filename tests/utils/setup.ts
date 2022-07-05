@@ -18,7 +18,7 @@ const FAKE_DATABASE: IDatabase = {
   loadCloneableGame: () => Promise.resolve({} as SerializedGame),
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
-  purgeUnfinishedGames: () => {},
+  purgeUnfinishedGames: () => Promise.resolve(),
   stats: () => Promise.resolve({}),
 };
 

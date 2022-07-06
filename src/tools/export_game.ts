@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {GameId, isPlayerId, isSpectatorId} from '../common/Types';
+import {GameId, isGameId, isPlayerId, isSpectatorId} from '../common/Types';
 import {Database} from '../database/Database';
 import {Localfilesystem} from '../database/LocalFilesystem';
 import {SerializedGame} from '../SerializedGame';
@@ -31,6 +31,9 @@ if (isPlayerId(id) || isSpectatorId(id)) {
       console.log(err);
       process.exit(1);
     });
+}
+if (isGameId(id)) {
+  load(id);
 }
 
 function load(gameId: GameId) {

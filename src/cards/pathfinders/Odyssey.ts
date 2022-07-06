@@ -7,7 +7,6 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Priority} from '../../deferredActions/DeferredAction';
 import {IActionCard} from '../ICard';
 import {Size} from '../../common/cards/render/Size';
 
@@ -54,7 +53,7 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
       (cards) => {
         const card = cards[0];
         player.game.log('${0} is replaying ${1}', (b) => b.player(player).card(card));
-        player.defer(card.play(player), Priority.DEFAULT);
+        player.playCard(card, undefined, false);
         player.discardPlayedCard(card);
         return undefined;
       },

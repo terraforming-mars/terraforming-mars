@@ -198,8 +198,9 @@ export class PostgreSQL implements IDatabase {
   async saveGame(game: Game): Promise<void> {
     const gameJSON = game.toJSON();
     this.statistics.saveCount++;
-    if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
+      if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
+      const nextSaveId = game.lastSaveId + 1;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, players)
@@ -208,7 +209,7 @@ export class PostgreSQL implements IDatabase {
         RETURNING (xmax = 0) AS inserted`,
         [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
 
-      game.lastSaveId++;
+      game.lastSaveId = nextSaveId;
 
       let inserted: boolean = true;
       try {
@@ -224,7 +225,7 @@ export class PostgreSQL implements IDatabase {
         }
       }
 
-      if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
+      if (game.gameOptions.undoOption) logForUndo(game.id, 'new save id: ', game.lastSaveId, 'inserted: ' + inserted);
     } catch (err) {
       this.statistics.saveErrorCount++;
       console.error('PostgreSQL:saveGame', err);

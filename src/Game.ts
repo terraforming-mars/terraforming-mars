@@ -403,8 +403,8 @@ export class Game {
     return game;
   }
 
-  public save(): void {
-    Database.getInstance().saveGame(this);
+  public async save(): Promise<void> {
+    return Database.getInstance().saveGame(this);
   }
 
   public toJSON(): string {

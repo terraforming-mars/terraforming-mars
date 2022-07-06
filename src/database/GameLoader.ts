@@ -83,6 +83,24 @@ export class GameLoader implements IGameLoader {
     return game;
   }
 
+  public async rollbackOnce(gameId: GameId, lastSaveId: number): Promise<Game> {
+    const database = Database.getInstance();
+    const saveIds = await database.getSaveIds(gameId);
+    saveIds.sort();
+    console.log(saveIds.toString());
+    let maxStoredSaveId = saveIds.pop();
+    if (maxStoredSaveId === undefined) {
+      // The -1 is because what's on disk is always 1 behind.
+      // This can't happen. Just use the last id.
+      maxStoredSaveId = lastSaveId - 1;
+    }
+    const serializedGame = await database.getGameVersion(gameId, maxStoredSaveId - 1);
+    const game = Game.deserialize(serializedGame);
+    this.add(game);
+    game.undoCount++;
+    return game;
+  }
+
   private async loadGameAsync(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
     if (bypassCache === false) {

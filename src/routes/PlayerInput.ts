@@ -6,6 +6,7 @@ import {IContext} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../common/inputs/InputResponse';
+import {Game} from '../Game';
 
 export class PlayerInput extends AsyncHandler {
   public static readonly INSTANCE = new PlayerInput();
@@ -52,9 +53,14 @@ export class PlayerInput extends AsyncHandler {
      * The first save being decremented is the increment during `takeAction` call
      * The second save being decremented is the action that was taken
      */
-    const lastSaveId = player.game.lastSaveId - 2;
     try {
-      const game = await ctx.gameLoader.restoreGameAt(player.game.id, lastSaveId);
+      let game: Game | undefined;
+      if (process.env.OLD_SAVE_BEHAVIOR) {
+        const lastSaveId = player.game.lastSaveId - 2;
+        game = await ctx.gameLoader.restoreGameAt(player.game.id, lastSaveId);
+      } else {
+        game = await ctx.gameLoader.rollbackOnce(player.game.id, player.game.lastSaveId);
+      }
       if (game === undefined) {
         player.game.log('Unable to perform undo operation. Error retrieving game from database. Please try again.', () => {}, {reservedFor: player});
       } else {

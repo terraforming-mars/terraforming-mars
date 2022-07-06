@@ -18,4 +18,11 @@ export interface IGameLoader {
   getByGameId(gameId: GameId, bypassCache: boolean): Promise<Game | undefined>;
   getByParticipantId(playerId: PlayerId | SpectatorId): Promise<Game | undefined>;
   restoreGameAt(gameId: GameId, saveId: number): Promise<Game>;
+  /**
+   * Roll back one step in the database and load the most recent version.
+   * @param gameId the game to roll back one step.
+   * @param lastSaveId the active last saved id. This is generally used for
+   * validation.
+   */
+  rollbackOnce(gameId: GameId, lastSaveId: number): Promise<Game>;
 }

@@ -1852,7 +1852,7 @@ export class Player {
    * words, don't set this value unless you know what you're doing.
    */
   // @ts-ignore saveBeforeTakingAction is unused at the moment.
-  public takeAction(saveBeforeTakingAction: boolean = true): void {
+  public async takeAction(saveBeforeTakingAction: boolean = true): Promise<void> {
     const game = this.game;
 
     if (game.deferredActions.length > 0) {
@@ -1863,7 +1863,7 @@ export class Player {
     const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed();
 
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
-    // if (saveBeforeTakingAction) game.save();
+    // if (saveBeforeTakingAction) await game.save();
 
     // Prelude cards have to be played first
     if (this.preludeCardsInHand.length > 0) {

@@ -62,7 +62,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
   beforeEach(function() {
     card = new OumuamuaTypeObjectSurvey();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     dealer = game.dealer;
     dealer.discarded = [];
     player.megaCredits = 100;

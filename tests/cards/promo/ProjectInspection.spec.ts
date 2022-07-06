@@ -17,7 +17,7 @@ describe('ProjectInspection', function() {
   beforeEach(function() {
     card = new ProjectInspection();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     restrictedArea = new RestrictedArea();
   });
 

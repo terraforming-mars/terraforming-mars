@@ -14,13 +14,13 @@ describe('AirScrappingStandardProjectVariant', function() {
   beforeEach(function() {
     card = new AirScrappingStandardProjectVariant();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, setCustomGameOptions({altVenusBoard: true}));
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({altVenusBoard: true}));
   });
 
   it('option not available for regular board', function() {
     // Building another game without the alt venus board.
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player, setCustomGameOptions({altVenusBoard: false}));
+    Game.newInstance('gameid', [player], player, setCustomGameOptions({altVenusBoard: false}));
     const cards = player.getStandardProjectOption().cards;
     const names = cards.map((card) => card.name);
     expect(names).to.include(CardName.AIR_SCRAPPING_STANDARD_PROJECT);

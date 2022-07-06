@@ -17,7 +17,7 @@ describe('ExecutiveOrder', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {

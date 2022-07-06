@@ -150,7 +150,7 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  async cleanSaves(game_id: GameId): Promise<void> {
+  async cleanGame(game_id: GameId): Promise<void> {
     const maxSaveId = await this.getMaxSaveId(game_id);
     // DELETE all saves except initial and last one
     const delete1 = this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, maxSaveId]);

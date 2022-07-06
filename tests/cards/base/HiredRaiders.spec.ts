@@ -13,7 +13,7 @@ describe('HiredRaiders', function() {
     card = new HiredRaiders();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -33,7 +33,7 @@ describe('HiredRaiders', function() {
   });
 
   it('Works in solo', function() {
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
 
     const action = cast(card.play(player), OrOptions);
     expect(action.options).has.lengthOf(2);

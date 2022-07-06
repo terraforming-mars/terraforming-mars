@@ -258,7 +258,7 @@ export class Turmoil {
     this.lobby.forEach((playerId) => {
       this.delegateReserve.push(playerId);
     });
-    this.lobby = new Set<string>();
+    this.lobby = new Set<PlayerId>();
 
     game.getPlayersInGenerationOrder().forEach((player) => {
       if (this.hasDelegatesInReserve(player.id)) {
@@ -416,7 +416,7 @@ export class Turmoil {
   // TODO(kberg): Find a way to remove the default value for source.
   public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer, source: 'lobby' | 'reserve' | 'both'): number {
     const delegatesInReserve = this.delegateReserve.filter((p) => p === playerId).length;
-    const delegatesInLobby = this.lobby.has(playerId) ? 1: 0;
+    const delegatesInLobby = (playerId !== 'NEUTRAL' && this.lobby.has(playerId)) ? 1: 0;
 
     switch (source) {
     case 'lobby':

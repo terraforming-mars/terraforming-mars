@@ -12,7 +12,7 @@ describe('MartianMediaCenter', function() {
     const player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const mars = game.turmoil!.getPartyByName(PartyName.MARS)!;

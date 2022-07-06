@@ -24,7 +24,7 @@ describe('MaxwellBase', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Can\'t play without energy production', function() {

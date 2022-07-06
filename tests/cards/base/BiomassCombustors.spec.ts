@@ -13,7 +13,7 @@ describe('BiomassCombustors', function() {
     card = new BiomassCombustors();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     player.popWaitingFor();
   });
 
@@ -28,7 +28,7 @@ describe('BiomassCombustors', function() {
   });
 
   it('Can play in solo mode if oxygen requirement is met', function() {
-    const game = Game.newInstance('foobar', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
     (game as any).oxygenLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.true;
   });

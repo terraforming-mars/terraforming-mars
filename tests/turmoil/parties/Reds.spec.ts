@@ -16,7 +16,7 @@ describe('Reds', function() {
     player = TestPlayers.BLUE.newPlayer();
     secondPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
     turmoil = game.turmoil!;
     reds = new Reds();
   });
@@ -95,7 +95,7 @@ describe('Reds', function() {
   it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step: Moon', function() {
     // Reset the whole game infrastructure to include the Moon
     const gameOptions = setCustomGameOptions({moonExpansion: true});
-    game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
     turmoil = game.turmoil!;
     player.popWaitingFor(); // Remove SelectInitialCards
 

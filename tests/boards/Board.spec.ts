@@ -267,13 +267,13 @@ describe('Board', function() {
         {
           'id': '01',
           'spaceType': 'colony', 'bonus': [],
-          'x': -1, 'y': -1, 'player': 'name-1-id',
+          'x': -1, 'y': -1, 'player': 'p-name-1-id',
           'tile': {'tileType': 2},
         },
         {
           'id': '03',
           'spaceType': 'land', 'bonus': [1, 1],
-          'x': 4, 'y': 0, 'player': 'name-2-id',
+          'x': 4, 'y': 0, 'player': 'p-name-2-id',
           'tile': {'tileType': 0},
         },
         {
@@ -289,8 +289,8 @@ describe('Board', function() {
         },
       ],
     };
-    const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
-    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
+    const player1 = new Player('name-1', Color.RED, false, 0, 'p-name-1-id');
+    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'p-name-2-id');
 
     const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
     expect(board.getSpace('01').player).eq(player1);

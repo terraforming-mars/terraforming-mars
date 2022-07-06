@@ -60,7 +60,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       Game.newInstance('game-id-2323', [player], player);
       await db.saveGamePromise;
 
-      await db.cleanSaves(game.id);
+      await db.cleanGame(game.id);
 
       const allGames = await db.getGames();
       expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
@@ -80,7 +80,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(allSaveIds).has.members([0, 1, 2, 3]);
     });
 
-    it('cleanSaves', async () => {
+    it('cleanGame', async () => {
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.saveGamePromise;
@@ -92,7 +92,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
       expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-      await db.cleanSaves(game.id);
+      await db.cleanGame(game.id);
 
       const saveIds = await db.getSaveIds(game.id);
       expect(saveIds).has.members([0, 3]);
@@ -113,7 +113,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.saveGamePromise;
       expect(game.lastSaveId).eq(1);
 
-      expect(db.getPlayerCount('notfound')).is.rejected;
+      expect(db.getPlayerCount('g-notfound')).is.rejected;
     });
 
     if (dtor.omitPurgeUnfinishedGames !== true) {
@@ -170,7 +170,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('loadCloneableGame', async () => {
-      await expect(db.loadCloneableGame('123')).to.be.rejectedWith(/Game 123 not found/);
+      await expect(db.loadCloneableGame('game-id-123')).to.be.rejectedWith(/Game game-id-123 not found/);
 
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-123', [player], player);

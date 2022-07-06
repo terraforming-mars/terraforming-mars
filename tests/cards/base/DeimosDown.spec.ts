@@ -13,7 +13,7 @@ describe('DeimosDown', function() {
     card = new DeimosDown();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -30,7 +30,7 @@ describe('DeimosDown', function() {
   });
 
   it('Works fine in solo mode', function() {
-    const game = Game.newInstance('foobar', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
 
     player.plants = 15;
     card.play(player);

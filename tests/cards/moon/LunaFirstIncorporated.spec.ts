@@ -17,7 +17,7 @@ describe('LunaFirstIncorporated', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
     card = new LunaFirstIncorporated();
   });
 

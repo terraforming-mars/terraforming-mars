@@ -17,7 +17,7 @@ describe('SponsoredAcademies', function() {
     const card3 = new Tardigrades();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const game = Game.newInstance('gameid', [player, player2], player);
     player.cardsInHand.push(card);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     player.cardsInHand.push(card2, card3);
@@ -43,7 +43,7 @@ describe('SponsoredAcademies', function() {
     const player2 = TestPlayers.RED.newPlayer();
     const player3 = TestPlayers.BLACK.newPlayer();
     const player4 = TestPlayers.GREEN.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2, player3, player4], player);
+    const game = Game.newInstance('gameid', [player, player2, player3, player4], player);
 
     player.cardsInHand.push(card, new HousePrinting(), new Tardigrades());
     player.playCard(card);

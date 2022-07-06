@@ -25,7 +25,7 @@ describe('AnOfferYouCantRefuse', () => {
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
     greenPlayer = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('id', [player, redPlayer, greenPlayer], player, GAME_OPTIONS);
+    game = Game.newInstance('gameid', [player, redPlayer, greenPlayer], player, GAME_OPTIONS);
     turmoil = game.turmoil!;
     parties = new Parties(turmoil);
     clearParties();

@@ -54,7 +54,7 @@ export abstract class Party {
         playersToCheck.push('NEUTRAL');
 
         playersToCheck.some((nextPlayer) => {
-          let nextPlayerId = '';
+          let nextPlayerId: PlayerId | 'NEUTRAL';
           if (nextPlayer === 'NEUTRAL') {
             nextPlayerId = 'NEUTRAL';
           } else {

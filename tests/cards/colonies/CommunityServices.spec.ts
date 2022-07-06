@@ -15,7 +15,7 @@ describe('CommunityServices', function() {
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
     player.corporationCard = corpo;
     const action = card.play(player);
@@ -29,7 +29,7 @@ describe('CommunityServices', function() {
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
     player.corporationCard = corpo;
     const action = card.play(player);

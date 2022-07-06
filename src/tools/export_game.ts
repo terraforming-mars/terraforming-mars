@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {isPlayerId, isSpectatorId} from '../common/utils/utils';
+import {GameId, isGameId, isPlayerId, isSpectatorId} from '../common/Types';
 import {Database} from '../database/Database';
 import {Localfilesystem} from '../database/LocalFilesystem';
 
@@ -29,8 +29,11 @@ async function main() {
     await load(gameId);
   }
 }
+if (isGameId(id)) {
+  load(id);
+}
 
-async function load(gameId: string) {
+async function load(gameId: GameId) {
   console.log(`Loading game ${gameId}`);
   const game = await db.getGame(gameId);
 

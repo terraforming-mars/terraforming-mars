@@ -24,7 +24,7 @@ describe('CorrosiveRain', function() {
     card = new CorrosiveRain();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     player.popWaitingFor(); // To clear out the SelectInitialCards input.
   });

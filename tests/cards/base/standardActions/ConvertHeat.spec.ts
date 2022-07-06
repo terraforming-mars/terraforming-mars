@@ -16,7 +16,7 @@ describe('ConvertHeat', function() {
     card = new ConvertHeat();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, setCustomGameOptions());
+    Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 
   it('Can not act without heat', function() {

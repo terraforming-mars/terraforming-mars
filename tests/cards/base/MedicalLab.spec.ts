@@ -9,7 +9,7 @@ describe('MedicalLab', function() {
   it('Should play', function() {
     const card = new MedicalLab();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);

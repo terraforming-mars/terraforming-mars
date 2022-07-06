@@ -22,7 +22,7 @@ describe('Playwrights', () => {
     card = new Playwrights();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
 
     card.play(player);
     player.corporationCard = card;

@@ -121,7 +121,7 @@ export class Server {
   public static getSpectatorModel(game: Game): SpectatorModel {
     return {
       color: Color.NEUTRAL,
-      id: game.spectatorId ?? '',
+      id: game.spectatorId,
       game: this.getGameModel(game),
       players: game.getPlayersInGenerationOrder().map(this.getPlayer),
       thisPlayer: undefined,

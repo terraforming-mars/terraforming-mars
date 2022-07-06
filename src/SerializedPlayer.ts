@@ -31,7 +31,7 @@ export interface SerializedPlayer {
     hasTurmoilScienceTagBonus: boolean;
     heat: number;
     heatProduction: number;
-    id: string;
+    id: PlayerId;
     lastCardPlayed?: CardName;
     megaCreditProduction: number;
     megaCredits: number;

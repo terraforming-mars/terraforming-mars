@@ -9,7 +9,7 @@ describe('IndustrialMicrobes', function() {
     const card = new IndustrialMicrobes();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

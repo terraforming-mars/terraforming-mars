@@ -8,6 +8,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('AirRaid', function() {
   let card : AirRaid; let player : Player; let player2 : Player; let corpo: StormCraftIncorporated;
@@ -16,7 +17,7 @@ describe('AirRaid', function() {
     card = new AirRaid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
 
     corpo = new StormCraftIncorporated();
     player.corporationCard = corpo;
@@ -28,7 +29,7 @@ describe('AirRaid', function() {
 
   it('Should play - multiple targets', function() {
     const player3 = TestPlayers.YELLOW.newPlayer();
-    Game.newInstance('foobar', [player, player2, player3], player);
+    Game.newInstance('gameid', [player, player2, player3], player);
     player.addResourceTo(corpo);
     expect(card.canPlay(player)).is.true;
 
@@ -38,7 +39,7 @@ describe('AirRaid', function() {
     player2.megaCredits = 4;
 
     card.play(player);
-    const option1 = player.game.deferredActions.pop()!.execute() as OrOptions;
+    const option1 = cast(player.game.deferredActions.pop()!.execute(), OrOptions);
     const option2 = player.game.deferredActions.pop()!.execute() as SelectCard<ICard>;
 
     option1.options[0].cb();
@@ -56,7 +57,7 @@ describe('AirRaid', function() {
     player2.megaCredits = 4;
     card.play(player);
 
-    const option = player.game.deferredActions.pop()!.execute() as OrOptions; // Steal money
+    const option = cast(player.game.deferredActions.pop()!.execute(), OrOptions); // Steal money
     expect(option.options).has.lengthOf(2);
     option.options[0].cb();
     player.game.deferredActions.pop()!.execute(); // Remove floater

@@ -7,6 +7,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
+import {cast} from '../../TestingUtils';
 
 describe('StrategicBasePlanning', function() {
   let card: StrategicBasePlanning;
@@ -37,10 +38,7 @@ describe('StrategicBasePlanning', function() {
     expect(player.megaCredits).to.eq(92);
 
     // Expecting build colony before place city
-    const buildColonyAction = game.deferredActions.pop()!.execute();
-
-    expect(buildColonyAction).is.instanceOf(SelectColony);
-    const selectColony = buildColonyAction as SelectColony;
+    const selectColony = cast(game.deferredActions.pop()!.execute(), SelectColony);
     const colony = selectColony.colonies[0];
     expect(colony.colonies).is.empty;
 
@@ -49,10 +47,7 @@ describe('StrategicBasePlanning', function() {
     expect(colony.colonies).deep.eq([player.id]);
 
     // Place city comes next
-    const placeCityAction = game.deferredActions.pop()!.execute();
-
-    expect(placeCityAction).is.instanceOf(SelectSpace);
-    const selectSpace = placeCityAction as SelectSpace;
+    const selectSpace = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     const space = selectSpace.availableSpaces[0];
     expect(space.tile).is.undefined;
 

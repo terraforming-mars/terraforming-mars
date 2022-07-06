@@ -34,7 +34,10 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
     const globalEvents: IGlobalEvent[] = [];
 
     for (let i = 0; i < 4; i++) {
-      globalEvents.push(turmoil.globalEventDealer.draw()!);
+      const event = turmoil.globalEventDealer.draw();
+      if (event !== undefined) {
+        globalEvents.push(event);
+      }
     }
 
     player.game.defer(new SimpleDeferredAction(player, () => {

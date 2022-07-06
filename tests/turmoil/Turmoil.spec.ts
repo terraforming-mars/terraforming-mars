@@ -8,7 +8,7 @@ import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {maxOutOceans, runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setCustomGameOptions} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/turmoil/parties/Reds';
@@ -37,6 +37,7 @@ import {DarksideMeteorBombardment} from '../../src/cards/moon/DarksideMeteorBomb
 import {LunaStagingStation} from '../../src/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
+import {PlayerId} from '../../src/common/Types';
 
 describe('Turmoil', function() {
   let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
@@ -46,7 +47,7 @@ describe('Turmoil', function() {
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
 
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
   });
@@ -65,7 +66,7 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
 
     expect(greens.delegates).has.lengthOf(1);
-    expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
+    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
     expect(turmoil.lobby).does.not.contain(player.id);
   });
 
@@ -77,7 +78,7 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
 
     expect(greens.delegates).has.lengthOf(1);
-    expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
+    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
     expect(turmoil.lobby).contains(player.id);
   });
 
@@ -99,7 +100,8 @@ describe('Turmoil', function() {
     expect(greens.delegates).has.lengthOf(1);
 
     // 1 influence: Leader of dominant party
-    const greensPartyLeader = game.getPlayerById(greens.partyLeader!);
+    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
+    const greensPartyLeader = game.getPlayerById(greens.partyLeader as PlayerId);
     expect(greensPartyLeader).to.eq(player);
     expect(turmoil.getPlayerInfluence(player)).to.eq(1);
 
@@ -136,10 +138,11 @@ describe('Turmoil', function() {
   });
 
   it('Correctly set party leader', function() {
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    expect(game.getPlayerById(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader!)).to.eq(player);
+    const party = turmoil.getPartyByName(PartyName.GREENS)!;
+    turmoil.sendDelegateToParty(player.id, party.name, game);
+    turmoil.sendDelegateToParty(player.id, party.name, game);
+    turmoil.sendDelegateToParty(player.id, party.name, game);
+    expect(game.getPlayerById(party.partyLeader as PlayerId)).to.eq(player);
   });
 
   it('Correctly run end of generation', function() {
@@ -162,7 +165,7 @@ describe('Turmoil', function() {
     turmoil.endGeneration(game);
     runAllActions(game);
 
-    expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
+    expect(game.getPlayerById(turmoil.chairman! as PlayerId)).to.eq(player);
     // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman
     expect(player.getTerraformRating()).to.eq(21);
     expect(player2.getTerraformRating()).to.eq(20);
@@ -177,7 +180,7 @@ describe('Turmoil', function() {
     game.phase = Phase.SOLAR;
 
     player.worldGovernmentTerraforming();
-    const action = player.getWaitingFor() as OrOptions;
+    const action = cast(player.getWaitingFor(), OrOptions);
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
     const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 
@@ -255,7 +258,7 @@ describe('Turmoil', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.setProductionForTest({energy: 2}); // Card requirement.
@@ -291,7 +294,7 @@ describe('Turmoil', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.setProductionForTest({energy: 2}); // Card requirement.
@@ -312,7 +315,7 @@ describe('Turmoil', function() {
     // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.setProductionForTest({energy: 2}); // Card requirement.
@@ -335,7 +338,7 @@ describe('Turmoil', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -372,7 +375,7 @@ describe('Turmoil', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -392,7 +395,7 @@ describe('Turmoil', function() {
     // ArtificialLake uses trSource.
     const card = new ArtificialLake();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     (game as any).temperature = -6; // minimum requirement for the card.
     game.phase = Phase.ACTION;
@@ -421,7 +424,7 @@ describe('Turmoil', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -458,7 +461,7 @@ describe('Turmoil', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -478,7 +481,7 @@ describe('Turmoil', function() {
     // Raises the colony rate two steps.
     const card = new WaterTreatmentComplex();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -518,7 +521,7 @@ describe('Turmoil', function() {
     // Raises the mining rate two steps.
     const card = new DarksideMeteorBombardment();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -554,7 +557,7 @@ describe('Turmoil', function() {
     // Raises the logistic rate two steps.
     const card = new LunaStagingStation();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -592,7 +595,7 @@ describe('Turmoil', function() {
 
   it('Reds: Cannot raise TR directly without the money to back it up', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -651,10 +654,10 @@ describe('Turmoil', function() {
   it('serializes and deserializes keeping players', function() {
     // Party delegates have to be explicitly set since game set-up draws a global event which
     // adds delegates to a party. So parties[0] can be empty or not depending on the draw.
-    turmoil.parties[0].delegates = ['NEUTRAL', 'NEUTRAL', 'fancy-pants'];
+    turmoil.parties[0].delegates = ['NEUTRAL', 'NEUTRAL', 'p-fancy-pants'];
     const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
     const deserialized = Turmoil.deserialize(serialized);
-    expect(deserialized.parties[0].getPresentPlayers()).to.have.members(['NEUTRAL', 'fancy-pants']);
+    expect(deserialized.parties[0].getPresentPlayers()).to.have.members(['NEUTRAL', 'p-fancy-pants']);
   });
 
   it('deserialization', () => {

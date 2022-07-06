@@ -12,7 +12,7 @@ describe('SpaceElevator', function() {
     card = new SpaceElevator();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t act if no steel', function() {

@@ -16,7 +16,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 import {Virus} from '../../../src/cards/base/Virus';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
   let card : PharmacyUnion; let player : Player; let player2 : Player;
@@ -25,13 +25,13 @@ describe('PharmacyUnion', function() {
     card = new PharmacyUnion();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
 
     player.corporationCard = card;
   });
 
   it('Should play', function() {
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);
     pi.options[1].cb([]);
@@ -112,7 +112,7 @@ describe('PharmacyUnion', function() {
     expect(player.game.deferredActions).has.lengthOf(1);
     expect(player.getPlayedEventsCount()).to.eq(0);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     player.game.deferredActions.pop();
     orOptions.options[0].cb();
 
@@ -136,7 +136,7 @@ describe('PharmacyUnion', function() {
     card.resourceCount = 0;
     card.onCardPlayed(player, new SearchForLife());
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(card.isDisabled).is.true;
     expect(player.getTagCount(Tags.MICROBE)).to.eq(0);
@@ -166,7 +166,7 @@ describe('PharmacyUnion', function() {
     card.onCardPlayed(player, viralEnhancers);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[1].cb(); // Add disease then remove it
     expect(card.resourceCount).to.eq(0);
     expect(player.megaCredits).to.eq(4);

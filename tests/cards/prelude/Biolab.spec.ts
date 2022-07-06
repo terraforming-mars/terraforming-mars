@@ -8,7 +8,7 @@ describe('Biolab', function() {
   it('Should play', function() {
     const card = new Biolab();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     card.play(player);
 
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);

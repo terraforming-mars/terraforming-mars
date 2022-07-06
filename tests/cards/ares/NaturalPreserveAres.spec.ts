@@ -7,6 +7,7 @@ import {NaturalPreserveAres} from '../../../src/cards/ares/NaturalPreserveAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('NaturalPreserveAres', function() {
   let card : NaturalPreserveAres; let player : Player;
@@ -15,15 +16,12 @@ describe('NaturalPreserveAres', function() {
     card = new NaturalPreserveAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {
     expect(card.canPlay(player)).is.true;
-    const action = card.play(player);
-    expect(action).is.not.undefined;
-    expect(action).instanceOf(SelectSpace);
-
+    const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
     expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);

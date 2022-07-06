@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
 import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
@@ -14,7 +15,7 @@ describe('RotatorImpacts', () => {
     card = new RotatorImpacts();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play', () => {
@@ -55,8 +56,7 @@ describe('RotatorImpacts', () => {
     expect(card.resourceCount).to.eq(1);
 
     // two possible actions: add resource or spend titanium
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

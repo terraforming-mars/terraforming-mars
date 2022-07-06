@@ -17,7 +17,7 @@ import {Phase} from '../../src/common/Phase';
 import {TestPlayers} from '../TestPlayers';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
-import {Random} from '../../src/Random';
+import {SeededRandom} from '../../src/Random';
 import {Units} from '../../src/common/Units';
 import {addOcean, cast, runAllActions} from '../TestingUtils';
 import {Ants} from '../../src/cards/base/Ants';
@@ -31,7 +31,7 @@ describe('AresHandler', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });
 
@@ -241,7 +241,7 @@ describe('AresHandler', function() {
   });
 
   it('erosion appears after the third ocean', function() {
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     addOcean(player);
     addOcean(player);
 
@@ -255,7 +255,7 @@ describe('AresHandler', function() {
   });
 
   it('dust storms disappear after the sixth ocean', function() {
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     addOcean(player);
     addOcean(player);
     addOcean(player);
@@ -276,7 +276,7 @@ describe('AresHandler', function() {
   });
 
   it('dust storms disappear after the sixth ocean, desperate measures changes that', function() {
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     addOcean(player);
     addOcean(player);
     addOcean(player);
@@ -302,7 +302,7 @@ describe('AresHandler', function() {
   });
 
   it('dust storms amplify at 5% oxygen', function() {
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     while (game.getOxygenLevel() < 4) {
       game.increaseOxygenLevel(player, 1);
     }
@@ -319,7 +319,7 @@ describe('AresHandler', function() {
   });
 
   it('amplifying dust storms does not change desperate measures', function() {
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     while (game.getOxygenLevel() < 4) {
       game.increaseOxygenLevel(player, 1);
     }
@@ -339,7 +339,7 @@ describe('AresHandler', function() {
   });
 
   it('erosions amplify at -4C', function() {
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     while (game.getTemperature() < -6) {
       game.increaseTemperature(player, 1);
     }
@@ -359,7 +359,7 @@ describe('AresHandler', function() {
   });
 
   it('severe erosions appear at third ocean when temperature passes -4C', function() {
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     while (game.getTemperature() < -6) {
       game.increaseTemperature(player, 1);
     }
@@ -383,7 +383,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
+    game.board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

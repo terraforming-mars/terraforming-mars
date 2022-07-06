@@ -9,6 +9,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('SolarFarm', function() {
   let card: SolarFarm; let player: Player; let game: Game;
@@ -17,7 +18,7 @@ describe('SolarFarm', function() {
     card = new SolarFarm();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
   });
 
   it('Play', function() {
@@ -35,10 +36,7 @@ describe('SolarFarm', function() {
       SpaceBonus.PLANT,
     ];
 
-    const action = card.play(player);
-
-    expect(action).instanceOf(SelectSpace);
-
+    const action = cast(card.play(player), SelectSpace);
     expect(player.getProduction(Resources.ENERGY)).eq(0);
     const citySpace = game.board.getAvailableSpacesOnLand(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
     action.cb(citySpace);

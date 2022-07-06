@@ -24,7 +24,7 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
         cardNumber: 'Pf55',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 microbes OR 2 data OR 2 floaters to ANY card.', (eb) => {
-            eb.empty().startAction.microbes(2, {digit}).slash().data({amount: 2, digit}).slash().floaters(2, {digit});
+            eb.empty().startAction.microbes(2, {digit}).slash().data({amount: 2, digit}).slash().floaters(2, {digit}).asterix();
           });
         }),
         description: 'Requires 4 Science tags.',

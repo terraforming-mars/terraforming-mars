@@ -14,7 +14,7 @@ describe('Pluto', function() {
     pluto = new Pluto();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(pluto);
   });
@@ -38,7 +38,7 @@ describe('Pluto', function() {
 
     runAllActions(game);
 
-    const input = player.getWaitingFor()! as SelectCard<IProjectCard>;
+    const input = player.getWaitingFor() as SelectCard<IProjectCard>;
     expect(input).to.be.an.instanceof(SelectCard);
     input.cb([input.cards[0]]); // Discard a card
 

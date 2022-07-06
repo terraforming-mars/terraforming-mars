@@ -9,7 +9,7 @@ import {Board} from '../../src/boards/Board';
 import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {Random} from '../../src/Random';
+import {SeededRandom} from '../../src/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/Game';
 import {MultiSet} from 'mnemonist';
 
@@ -17,7 +17,7 @@ describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
 
   beforeEach(function() {
-    board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
+    board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
@@ -267,13 +267,13 @@ describe('Board', function() {
         {
           'id': '01',
           'spaceType': 'colony', 'bonus': [],
-          'x': -1, 'y': -1, 'player': 'name-1-id',
+          'x': -1, 'y': -1, 'player': 'p-name-1-id',
           'tile': {'tileType': 2},
         },
         {
           'id': '03',
           'spaceType': 'land', 'bonus': [1, 1],
-          'x': 4, 'y': 0, 'player': 'name-2-id',
+          'x': 4, 'y': 0, 'player': 'p-name-2-id',
           'tile': {'tileType': 0},
         },
         {
@@ -289,8 +289,8 @@ describe('Board', function() {
         },
       ],
     };
-    const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
-    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
+    const player1 = new Player('name-1', Color.RED, false, 0, 'p-name-1-id');
+    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'p-name-2-id');
 
     const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
     expect(board.getSpace('01').player).eq(player1);
@@ -305,7 +305,7 @@ describe('Board', function() {
         ...DEFAULT_GAME_OPTIONS,
         shuffleMapOption: true,
       },
-      new Random(seed));
+      new SeededRandom(seed));
       for (const space of board.spaces) {
         if (space.spaceType === undefined) {
           console.log(`Bad seed ${seed}`);

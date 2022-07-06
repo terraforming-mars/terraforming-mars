@@ -2,7 +2,7 @@ import {Board} from './boards/Board';
 import {BoardName} from './common/boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
 import {Game, GameOptions} from './Game';
-import {GameId} from './common/Types';
+import {GameId, PlayerId} from './common/Types';
 import {HellasBoard} from './boards/HellasBoard';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {Player} from './Player';
@@ -52,7 +52,8 @@ export class GameSetup {
   }
 
   public static neutralPlayerFor(gameId: GameId): Player {
-    return new Player('neutral', Color.NEUTRAL, true, 0, gameId + '-neutral');
+    const playerId = 'p-' + gameId + '-neutral' as PlayerId;
+    return new Player('neutral', Color.NEUTRAL, true, 0, playerId);
   }
 
   public static setupNeutralPlayer(game: Game) {

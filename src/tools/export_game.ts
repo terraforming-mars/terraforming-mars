@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {isPlayerId, isSpectatorId} from '../common/utils/utils';
+import {GameId, isPlayerId, isSpectatorId} from '../common/Types';
 import {Database} from '../database/Database';
 import {Localfilesystem} from '../database/LocalFilesystem';
 import {SerializedGame} from '../SerializedGame';
@@ -33,7 +33,7 @@ if (isPlayerId(id) || isSpectatorId(id)) {
     });
 }
 
-function load(gameId: string) {
+function load(gameId: GameId) {
   console.log(`Loading game ${gameId}`);
   db.getGame(gameId, async (err: Error | undefined, game?: SerializedGame) => {
     if (err) {

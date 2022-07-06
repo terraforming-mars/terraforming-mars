@@ -20,7 +20,7 @@ describe('GiantSolarShade', function() {
     redPlayer = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {

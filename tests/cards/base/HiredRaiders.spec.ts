@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -12,7 +13,7 @@ describe('HiredRaiders', function() {
     card = new HiredRaiders();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -20,7 +21,7 @@ describe('HiredRaiders', function() {
     player2.steel = 2;
     player2.megaCredits = 2;
 
-    const action = card.play(player) as OrOptions;
+    const action = cast(card.play(player), OrOptions);
     expect(action.options).has.lengthOf(3);
     action.options[1].cb();
     expect(player2.megaCredits).to.eq(0);
@@ -32,9 +33,9 @@ describe('HiredRaiders', function() {
   });
 
   it('Works in solo', function() {
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
 
-    const action = card.play(player) as OrOptions;
+    const action = cast(card.play(player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb();

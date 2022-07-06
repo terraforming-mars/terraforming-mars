@@ -7,7 +7,7 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MiningArea', function() {
   let card : MiningArea; let player : TestPlayer; let game : Game;
@@ -16,7 +16,7 @@ describe('MiningArea', function() {
     card = new MiningArea();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play', function() {
@@ -36,8 +36,7 @@ describe('MiningArea', function() {
       }
     }
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;

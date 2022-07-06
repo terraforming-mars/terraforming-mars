@@ -12,7 +12,7 @@ describe('Conscription', function() {
   beforeEach(() => {
     card = new Conscription();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player, TestPlayers.RED.newPlayer()], player);
+    Game.newInstance('gameid', [player, TestPlayers.RED.newPlayer()], player);
   });
 
   it('play', () => {

@@ -5,7 +5,7 @@ import {Phase} from '../common/Phase';
 import {Player} from '../Player';
 import {WaitingForModel} from '../common/models/WaitingForModel';
 import {Game} from '../Game';
-import {isPlayerId, isSpectatorId} from '../common/utils/utils';
+import {isPlayerId, isSpectatorId} from '../common/Types';
 
 export class ApiWaitingFor extends AsyncHandler {
   public static readonly INSTANCE = new ApiWaitingFor();

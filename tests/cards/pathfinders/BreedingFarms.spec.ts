@@ -14,7 +14,7 @@ describe('BreedingFarms', function() {
   beforeEach(function() {
     card = new BreedingFarms();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
     fish = new Fish();
   });

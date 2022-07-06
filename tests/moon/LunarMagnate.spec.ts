@@ -16,7 +16,7 @@ describe('LunarMagnate', function() {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.PINK.newPlayer();
-    Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
   });
 
   it('Basic test', function() {

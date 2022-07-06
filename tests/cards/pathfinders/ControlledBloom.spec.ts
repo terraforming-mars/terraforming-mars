@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
 import {Game} from '../../../src/Game';
-import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {addOcean, fakeCard} from '../../TestingUtils';
+import {addOcean, cast, fakeCard} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {CardResource} from '../../../src/common/CardResource';
 
@@ -40,9 +39,7 @@ describe('ControlledBloom', function() {
 
     expect(player.plants).eq(3);
 
-    const action = game.deferredActions.pop()!.execute()!;
-    expect(action).is.instanceOf(SelectCard);
-    const addResourcesToCard = action as SelectCard<ICard>;
+    const addResourcesToCard = cast(game.deferredActions.pop()!.execute()!, SelectCard);
     expect(addResourcesToCard.cards.map((c) => c.name)).has.members(['A', 'C']);
     addResourcesToCard.cb([a]);
     expect(a.resourceCount).eq(3);

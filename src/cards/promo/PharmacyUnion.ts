@@ -110,7 +110,6 @@ export class PharmacyUnion extends Card implements ICorporationCard {
       }
     }
 
-
     if (isPharmacyUnion && hasScienceTag) {
       const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
       for (let i = 0; i < scienceTags; i++) {
@@ -159,7 +158,10 @@ export class PharmacyUnion extends Card implements ICorporationCard {
         player,
         () => {
           const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBE).length;
-          const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
+          const player = game.getPlayers().find((p) => p.isCorporation(this.name));
+          if (player === undefined) {
+            throw new Error(`PharmacyUnion: did not find player for ${game.id}`);
+          }
           const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
           player.addResourceTo(this, microbeTagCount);
           player.megaCredits -= megaCreditsLost;

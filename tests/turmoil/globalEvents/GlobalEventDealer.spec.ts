@@ -54,7 +54,7 @@ describe('GlobalEventDealer', () => {
       removeNegativeGlobalEventsOption: false,
     });
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
     const dealer = GlobalEventDealer.newInstance(game);
     for (const card of dealer.globalEventsDeck) {
       expect(getGlobalEventByName(card.name), card.name + ' cannot be retrieved, card is probably missing from ALL_EVENTS').to.deep.eq(card);

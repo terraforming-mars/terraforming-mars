@@ -15,7 +15,7 @@ describe('DustStorm', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.GREEN.newPlayer();
-    Game.newInstance('foobar', [player, player2, player3], player);
+    Game.newInstance('gameid', [player, player2, player3], player);
   });
 
   it('play', function() {

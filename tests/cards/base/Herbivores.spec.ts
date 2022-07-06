@@ -14,7 +14,7 @@ describe('Herbivores', () => {
     card = new Herbivores();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Can\'t play if nobody has plant production', () => {
@@ -71,7 +71,7 @@ describe('Herbivores', () => {
   });
 
   it('Should be playable in solo mode', () => {
-    const game = Game.newInstance('foobar_solo', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
     (game as any).oxygenLevel = 8;
     player.addProduction(Resources.PLANTS, 1);
 

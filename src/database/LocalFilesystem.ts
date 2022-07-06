@@ -1,6 +1,6 @@
 import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
-import {GameId} from '../common/Types';
+import {GameId, isGameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent} from 'fs';
 
@@ -114,7 +114,9 @@ export class Localfilesystem implements IDatabase {
       if (result === null) {
         return;
       }
-      gameIds.push(result[1]);
+      if (isGameId(result[1])) {
+        gameIds.push(result[1]);
+      }
     });
     return Promise.resolve(gameIds);
   }

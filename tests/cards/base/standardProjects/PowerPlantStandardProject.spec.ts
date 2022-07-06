@@ -15,7 +15,7 @@ describe('PowerPlantStandardProjects', function() {
     card = new PowerPlantStandardProject();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions());
+    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 
   it('Should act', function() {

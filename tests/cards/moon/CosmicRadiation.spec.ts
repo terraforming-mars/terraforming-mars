@@ -21,7 +21,7 @@ describe('CosmicRadiation', () => {
     player1 = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
-    const game = Game.newInstance('id', [player1, player2, player3], player1, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player1, player2, player3], player1, MOON_OPTIONS);
     card = new CosmicRadiation();
     moonData = MoonExpansion.moonData(game);
   });

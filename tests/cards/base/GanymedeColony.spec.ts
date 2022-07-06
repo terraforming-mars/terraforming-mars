@@ -8,7 +8,7 @@ describe('GanymedeColony', function() {
     const card = new GanymedeColony();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
     player.playedCards.push(card);

@@ -16,7 +16,7 @@ describe('GalileanWaystation', function() {
     card = new GalileanWaystation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should play', function() {

@@ -17,7 +17,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('id', [player, player2], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
     card = new IntragenSanctuaryHeadquarters();
   });
 

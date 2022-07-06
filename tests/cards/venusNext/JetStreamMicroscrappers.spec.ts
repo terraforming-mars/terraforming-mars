@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {JetStreamMicroscrappers} from '../../../src/cards/venusNext/JetStreamMicroscrappers';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -12,7 +13,7 @@ describe('JetStreamMicroscrappers', function() {
     card = new JetStreamMicroscrappers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -32,9 +33,7 @@ describe('JetStreamMicroscrappers', function() {
     expect(player.titanium).to.eq(1);
 
     // both actions possible
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions).is.not.undefined;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

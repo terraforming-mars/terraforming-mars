@@ -14,7 +14,7 @@ describe('OrbitalCleanup', function() {
   beforeEach(function() {
     card = new OrbitalCleanup();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Can\'t play if cannot decrease MC production', function() {

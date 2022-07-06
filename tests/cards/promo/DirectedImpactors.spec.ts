@@ -8,6 +8,8 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
+import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('DirectedImpactors', function() {
   let card : DirectedImpactors; let player : Player; let game : Game;
@@ -16,7 +18,7 @@ describe('DirectedImpactors', function() {
     card = new DirectedImpactors();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -56,7 +58,7 @@ describe('DirectedImpactors', function() {
     player.titanium = 1;
     card.resourceCount = 1;
 
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
 
     // can remove resource to raise temperature
     action.options[0].cb();
@@ -65,15 +67,15 @@ describe('DirectedImpactors', function() {
     expect(card.resourceCount).to.eq(0);
 
     // can add resource to any card
-    const selectCard = action.options[1].cb();
+    const selectCard = cast(action.options[1].cb(), SelectCard);
     expect(game.deferredActions).has.lengthOf(1);
-    const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
+    const selectHowToPay = cast(game.deferredActions.peek()!.execute(), SelectHowToPay);
     selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
 
-        selectCard!.cb([card2]);
-        expect(card2.resourceCount).to.eq(1);
-        expect(player.megaCredits).to.eq(0);
-        expect(player.titanium).to.eq(0);
+    selectCard!.cb([card2]);
+    expect(card2.resourceCount).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
+    expect(player.titanium).to.eq(0);
   });
 
   it('Can still spend resource even if temperature is max', function() {

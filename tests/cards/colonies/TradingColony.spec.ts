@@ -19,7 +19,7 @@ describe('TradingColony', function() {
     player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions({coloniesExtension: true});
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });
 

@@ -5,7 +5,7 @@ import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayers} from '../TestPlayers';
-import {Random} from '../../src/Random';
+import {SeededRandom} from '../../src/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {setCustomGameOptions, runAllActions, cast} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
@@ -23,10 +23,10 @@ describe('ArabiaTerraBoard', function() {
   let player2 : Player;
 
   beforeEach(function() {
-    board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
+    board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('x', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    game = Game.newInstance('gameId', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
   });
 
   it('Can place an ocean in a cove', () => {

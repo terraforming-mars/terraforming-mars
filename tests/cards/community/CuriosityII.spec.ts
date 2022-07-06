@@ -6,7 +6,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
-import {setCustomGameOptions, runAllActions} from '../../TestingUtils';
+import {setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('CuriosityII', function() {
@@ -16,7 +16,7 @@ describe('CuriosityII', function() {
     card = new CuriosityII();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({aresExtension: true, aresHazards: false}));
+    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({aresExtension: true, aresHazards: false}));
     game.phase = Phase.ACTION;
 
     player.corporationCard = card;
@@ -29,7 +29,7 @@ describe('CuriosityII', function() {
     player.cardsInHand = [];
 
     expect(game.deferredActions.length).to.eq(1);
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
 
     orOptions.options[1].cb(); // Do nothing
     expect(player.cardsInHand).is.empty;
@@ -68,7 +68,7 @@ describe('CuriosityII', function() {
     const action = oceanCity.play(player);
     action.cb(oceanSpace);
 
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
     orOptions.options[0].cb(); // Pay 2 M€ to draw a card
     runAllActions(game);
 

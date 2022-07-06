@@ -12,7 +12,7 @@ describe('AdvancedPowerGrid', function() {
   beforeEach(function() {
     card = new AdvancedPowerGrid();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('play', function() {

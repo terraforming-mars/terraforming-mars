@@ -13,7 +13,7 @@ describe('Cryptocurrency', function() {
   beforeEach(function() {
     card = new Cryptocurrency();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('canAct with energy', function() {

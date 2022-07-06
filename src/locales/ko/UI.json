@@ -20,7 +20,7 @@
     "Your name": "당신의 이름",
     "The number of available actions on active cards": "활동형 카드의 사용 가능한 행동 수",
     "active": "플레이 시간",
-    
+
     "victoryPoints": "승점",
     "terraformRating": "테라포밍 등급",
     "milestones": "업적",
@@ -120,11 +120,11 @@
     "Magnate": "거대기업상",
     "Most automated cards in play (green cards)": "사용한 유지형(녹색) 카드가 제일 많은 플레이어.",
     "Space Baron": "우주기업상",
-    "Most space tags (event cards do not count)": "자기 소유의 우주 태그가 제일 많은 플레이어(사건형 카드 제외).",
+    "Having the most space tags in play": "자기 소유의 우주 태그가 제일 많은 플레이어.",
     "Excentric": "특수기업상",
     "Most resources on cards": "자기 소유의 카드 위에 특수자원이 제일 많은 플레이어.",
     "Contractor": "건설기업상",
-    "Most building tags (event cards do not count)": "자기 소유의 건물 태그가 제일 많은 플레이어(사건형 카드 제외).",
+    "Having the most building tags in play": "자기 소유의 건물 태그가 제일 많은 플레이어.",
     "Celebrity": "명문기업상",
     "Most cards in play (not events) with a cost of at least 20 megacredits": "자기 소유의 추진 비용이 20 메가크레딧(M€) 이상인 카드가 제일 많은 플레이어.",
     "Industrialist": "공업기업상",
@@ -325,6 +325,8 @@
     "Alternate Venus Board": "금성 보드판 대체",
     "arabia terra": "아라비아 테라",
     "vastitas borealis": "바스티타스 보레알리스",
+    "amazonis p.": "아마조니스 평원",
+    "t. cimmeria": "테라 치메리아",
     "Escape Velocity": "탈주 페널티 부여",
     "After ${0} min": "${0}분 이후부터 적용",
     "Reduce ${0} VP every ${1} min": "매 ${1}분마다 승점 ${0}점 차감",
@@ -421,7 +423,7 @@
     "Spend one titanium to add 2 floaters to this card": "티타늄 자원 1개를 소비하여 이 카드에 부양체 자원 2개 추가",
     "Spend titanium": "티타늄 자원 소비",
     "Select space for ocean from placement bonus": "점유 보너스",
-    "Select colony for Space Port Colony": "‘우주항구형 개척기지’ 카드로 건설할 개척기지의 위성 선택",    
+    "Select colony for Space Port Colony": "‘우주항구형 개척기지’ 카드로 건설할 개척기지의 위성 선택",
     "place an ocean": "해양 타일 1개 배치",
     "Pay by Microbes": "미생물 자원으로 지불",
     "Remove 1 floater to raise energy production 1 step": "부양체 자원 1개를 소비하여 에너지 생산력 1 증가",
@@ -482,5 +484,38 @@
     "Spectator link": "관전용 링크",
     "[ toggle tags view ]": "[ 카드 태그 보기 전환 ]",
     "[ toggle cards filters ]": "[ 카드 필터 전환 ]",
-    "/ party": "정당"
+    "/ party": "정당",
+
+    "Spend 2X M€ to gain X energy": "2X M€을 소비하여 에너지 자원 X개 얻기",
+    "Decrease energy production 1 step to gain 8 M€": "에너지 생산력 1을 지불하여 8 M€ 획득하기",
+    "Spend M€": "M€ 소비하기",
+    "Decrease energy": "에너지 생산력 감소시키기",
+
+    "Select amount of energy to gain": "얻을 에너지 자원의 양을 선택",
+    "Gain energy": "에너지 자원 얻기",
+
+    "Add 2 animals to a card": "이 카드에 동물 자원 2개 추가",
+    "Add animals": "동물 자원 추가",
+
+    "Choose global parameter to raise": "상승시킬 행성 지표 고르기",
+    "Raise temperature 2 steps": "기온 2단계 올리기",
+    "Raise Venus 2 steps": "금성개척률 2단계 올리기",
+    "Raise temperature": "기온 올리기",
+    "Raise venus": "금성개척률 올리기",
+
+    "Select card to double robots resource": "로봇 자원을 두 배로 만들 카드 선택",
+    "Select card to link with Self-Replicating Robots": "자가 복제 로봇에 연결할 카드 선택",
+    "Double resource": "자원 두 배로 만들기",
+    "Link card": "카드 연결하기",
+
+    "Gain 1 M€ per floater here (max 4)": "이 카드의 부양체 하나당 1 M€ 획득 (최대 4)",
+    "Gain M€": "M€ 얻기",
+
+    "Select 1 card(s) to keep": "다음 중 보관할 카드 1장 선택",
+    "Not all options selected": "선택된 것이 없습니다.",
+
+    "Spend 2 M€ and select card to add 1 floater": "2 M€을 소비하여 부양체 자원 하나를 추가할 카드 선택",
+
+    "Increase your energy production 2 steps": "에너지 생산력 2 상승",
+    "Increase your plant production 1 step": "식물 생산력 1 상승"
 }

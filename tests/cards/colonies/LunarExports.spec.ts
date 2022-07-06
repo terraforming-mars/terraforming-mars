@@ -4,16 +4,15 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('LunarExports', function() {
   it('Should play', function() {
     const card = new LunarExports();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
-    const orOptions = card.play(player) as OrOptions;
+    Game.newInstance('gameid', [player], player);
+    const orOptions = cast(card.play(player), OrOptions);
 
-    expect(orOptions).is.not.undefined;
-    expect(orOptions instanceof OrOptions).is.true;
     orOptions.options[1].cb();
     expect(player.getProduction(Resources.PLANTS)).to.eq(2);
   });

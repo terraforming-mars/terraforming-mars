@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ICard} from '../../../src/cards/ICard';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
@@ -15,7 +16,7 @@ describe('AerialMappers', function() {
     card = new AerialMappers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     player.playedCards.push(card);
   });
 
@@ -33,8 +34,7 @@ describe('AerialMappers', function() {
     action.cb([card]);
     expect(card.resourceCount).to.eq(1);
 
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
 
     orOptions.options[0].cb([card]);
     expect(card.resourceCount).to.eq(0);
@@ -45,8 +45,7 @@ describe('AerialMappers', function() {
     card.action(player);
     expect(card.resourceCount).to.eq(1);
 
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb([card]);
     expect(card.resourceCount).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);

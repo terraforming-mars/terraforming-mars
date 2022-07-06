@@ -10,7 +10,7 @@ describe('MartianSurvey', function() {
   beforeEach(function() {
     card = new MartianSurvey();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Cannot play', () => {

@@ -252,13 +252,13 @@ export class Turmoil {
     this.setRulingParty(game);
 
     // 3.b - New dominant party
-    this.setNextPartyAsDominant(this.rulingParty!);
+    this.setNextPartyAsDominant(this.rulingParty);
 
     // 3.c - Fill the lobby
     this.lobby.forEach((playerId) => {
       this.delegateReserve.push(playerId);
     });
-    this.lobby = new Set<string>();
+    this.lobby = new Set<PlayerId>();
 
     game.getPlayersInGenerationOrder().forEach((player) => {
       if (this.hasDelegatesInReserve(player.id)) {
@@ -304,9 +304,11 @@ export class Turmoil {
 
     this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
 
-    const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
-    // Remove the party leader from the delegates array
-    this.rulingParty.delegates.splice(index, 1);
+    if (this.rulingParty.partyLeader !== undefined) {
+      const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader);
+      // Remove the party leader from the delegates array
+      this.rulingParty.delegates.splice(index, 1);
+    }
     // Fill the delegate reserve
     this.delegateReserve = this.delegateReserve.concat(this.rulingParty.delegates);
 
@@ -414,7 +416,7 @@ export class Turmoil {
   // TODO(kberg): Find a way to remove the default value for source.
   public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer, source: 'lobby' | 'reserve' | 'both'): number {
     const delegatesInReserve = this.delegateReserve.filter((p) => p === playerId).length;
-    const delegatesInLobby = this.lobby.has(playerId) ? 1: 0;
+    const delegatesInLobby = (playerId !== 'NEUTRAL' && this.lobby.has(playerId)) ? 1: 0;
 
     switch (source) {
     case 'lobby':

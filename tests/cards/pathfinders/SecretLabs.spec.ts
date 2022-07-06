@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
@@ -21,7 +21,7 @@ describe('SecretLabs', function() {
   beforeEach(function() {
     card = new SecretLabs();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
     player.playedCards = [microbeCard, floaterCard];
@@ -41,7 +41,7 @@ describe('SecretLabs', function() {
   });
 
   it('play - place an ocean tile', function() {
-    const options = card.play(player) as OrOptions;
+    const options = cast(card.play(player), OrOptions);
     const placeOcean = options.options[0];
 
     placeOcean.cb();
@@ -59,7 +59,7 @@ describe('SecretLabs', function() {
   });
 
   it('play - raise temperature', function() {
-    const options = card.play(player) as OrOptions;
+    const options = cast(card.play(player), OrOptions);
     const raiseTemperature = options.options[1];
 
     expect(player.game.getTemperature()).eq(-30);
@@ -72,7 +72,7 @@ describe('SecretLabs', function() {
   });
 
   it('play - raise oxygen', function() {
-    const options = card.play(player) as OrOptions;
+    const options = cast(card.play(player), OrOptions);
     const raiseOxygen = options.options[2];
 
     expect(player.game.getOxygenLevel()).eq(0);

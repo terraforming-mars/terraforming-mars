@@ -11,7 +11,7 @@ describe('CardMetadata', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
   });
 
   it('should have a VP icon', function() {

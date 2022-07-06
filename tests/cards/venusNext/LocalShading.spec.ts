@@ -4,6 +4,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 
 describe('LocalShading', function() {
   let card: LocalShading;
@@ -26,7 +27,7 @@ describe('LocalShading', function() {
     card.action(player);
     expect(card.resourceCount).to.eq(1);
 
-    const orOptions = card.action(player) as OrOptions;
+    const orOptions = cast(card.action(player), OrOptions);
     expect(orOptions).is.not.undefined;
     expect(orOptions instanceof OrOptions).is.true;
     orOptions.options[0].cb();

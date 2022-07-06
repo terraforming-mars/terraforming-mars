@@ -17,7 +17,7 @@ describe('WaterTreatmentComplex', () => {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new WaterTreatmentComplex();
     moonData = MoonExpansion.moonData(game);
   });

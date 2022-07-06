@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/Game';
-import {runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
 import {AgendaStyle} from '../../src/common/turmoil/Types';
@@ -28,7 +28,7 @@ describe('PoliticalAgendas', function() {
   deserialized.forEach((deserialize) => {
     const suffix = deserialize ? ', but deserialized' : '';
     it('Standard' + suffix, () => {
-      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.STANDARD}));
+      let game = Game.newInstance('gameid', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.STANDARD}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -51,7 +51,7 @@ describe('PoliticalAgendas', function() {
       // For the neutral chairman to always pick the second item in the list.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let game = Game.newInstance('gameid', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
         // Get a new copy of player2 who will have a different set of waitingFor.
@@ -71,14 +71,14 @@ describe('PoliticalAgendas', function() {
       // The new ruling party is lined up.
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb02', policyId: 'kp02'});
 
-      const waitingFor = player2.getWaitingFor() as OrOptions;
-      const bonusOptions = waitingFor.options[0] as OrOptions;
+      const waitingFor = cast(player2.getWaitingFor(), OrOptions);
+      const bonusOptions = cast(waitingFor.options[0], OrOptions);
       bonusOptions.options[0].cb();
 
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb01', policyId: 'kp02'});
 
       // In the real world only one of these two is selectable, but to keep the test simple, invoke both.
-      const policyOptions = waitingFor.options[1] as OrOptions;
+      const policyOptions = cast(waitingFor.options[1], OrOptions);
       policyOptions.options[3].cb();
 
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb01', policyId: 'kp04'});
@@ -88,7 +88,7 @@ describe('PoliticalAgendas', function() {
       // For the neutral chairperson to always pick the second item.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let game = Game.newInstance('gameid', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }

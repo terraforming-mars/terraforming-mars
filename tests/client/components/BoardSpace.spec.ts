@@ -8,7 +8,7 @@ describe('BoardSpace', () => {
     const wrapper = mount(BoardSpace, {
       localVue: getLocalVue(),
       propsData: {
-        space: {id: 'm1'},
+        space: {id: 'm1', bonus: []},
       },
     });
 
@@ -19,7 +19,7 @@ describe('BoardSpace', () => {
     const wrapper = mount(BoardSpace, {
       localVue: getLocalVue(),
       propsData: {
-        space: {id: 'm1'},
+        space: {id: 'm1', bonus: []},
         hideTiles: true,
       },
     });

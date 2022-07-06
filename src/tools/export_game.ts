@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {isPlayerId, isSpectatorId} from '../common/utils/utils';
+import {GameId, isGameId, isPlayerId, isSpectatorId} from '../common/Types';
 import {Database} from '../database/Database';
 import {Localfilesystem} from '../database/LocalFilesystem';
 import {SerializedGame} from '../SerializedGame';
@@ -32,8 +32,11 @@ if (isPlayerId(id) || isSpectatorId(id)) {
       process.exit(1);
     });
 }
+if (isGameId(id)) {
+  load(id);
+}
 
-function load(gameId: string) {
+function load(gameId: GameId) {
   console.log(`Loading game ${gameId}`);
   db.getGame(gameId, async (err: Error | undefined, game?: SerializedGame) => {
     if (err) {
@@ -58,7 +61,7 @@ function load(gameId: string) {
           db.getGameVersion(gameId, saveId)
             .then((serialized) => {
               console.log(`Storing version ${saveId}`);
-              localDb.saveSerializedGame(serialized!);
+              localDb.saveSerializedGame(serialized);
               writes++;
             }).catch((err) => {
               console.log(`failed to process saveId ${saveId}: ${err}`);

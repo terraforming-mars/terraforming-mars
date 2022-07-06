@@ -31,7 +31,7 @@ export interface SerializedPlayer {
     hasTurmoilScienceTagBonus: boolean;
     heat: number;
     heatProduction: number;
-    id: string;
+    id: PlayerId;
     lastCardPlayed?: CardName;
     megaCreditProduction: number;
     megaCredits: number;
@@ -57,6 +57,7 @@ export interface SerializedPlayer {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
+    totalDelegatesPlaced: number;
     // TODO(kberg): change tradesThisTurn to tradeThisGeneration later
     tradesThisTurn: number;
     turmoilPolicyActionUsed: boolean;

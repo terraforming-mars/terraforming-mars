@@ -9,6 +9,7 @@ import {Resources} from '../../../src/common/Resources';
 import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
+import {cast} from '../../TestingUtils';
 
 describe('AsteroidResources', function() {
   let card: AsteroidResources;
@@ -31,7 +32,7 @@ describe('AsteroidResources', function() {
   it('play, gain production', function() {
     player.energy = 3;
 
-    const options = card.play(player) as OrOptions;
+    const options = cast(card.play(player), OrOptions);
     options.options[0].cb();
     expect(player.energy).eq(0);
     expect(player.getProduction(Resources.TITANIUM)).eq(1);
@@ -43,7 +44,7 @@ describe('AsteroidResources', function() {
   it('play, place ocean', function() {
     player.energy = 3;
 
-    const options = card.play(player) as OrOptions;
+    const options = cast(card.play(player), OrOptions);
     options.options[1].cb();
     expect(player.energy).eq(0);
     expect(player.getProduction(Resources.TITANIUM)).eq(0);

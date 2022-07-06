@@ -15,7 +15,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('x', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('grant single bonus', () => {

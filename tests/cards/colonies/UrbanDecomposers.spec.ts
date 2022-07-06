@@ -18,7 +18,7 @@ describe('UrbanDecomposers', function() {
     card = new UrbanDecomposers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can\'t play if player has no city', function() {

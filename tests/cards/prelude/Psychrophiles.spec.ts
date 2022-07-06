@@ -10,7 +10,7 @@ describe('Psychrophiles', () => {
   beforeEach(() => {
     card = new Psychrophiles();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Cannot play', () => {

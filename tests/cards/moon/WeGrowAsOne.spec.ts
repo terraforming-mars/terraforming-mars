@@ -15,7 +15,7 @@ describe('WeGrowAsOne', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance(
-      'id',
+      'gameid',
       [player],
       player,
       setCustomGameOptions({

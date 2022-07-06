@@ -12,7 +12,7 @@ describe('SnowAlgae', function() {
   beforeEach(function() {
     card = new SnowAlgae();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Can\'t play', function() {

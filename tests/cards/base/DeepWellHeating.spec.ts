@@ -9,7 +9,7 @@ describe('DeepWellHeating', function() {
     const card = new DeepWellHeating();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

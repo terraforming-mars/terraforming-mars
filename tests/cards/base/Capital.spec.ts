@@ -6,7 +6,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
 
@@ -17,7 +17,7 @@ describe('Capital', () => {
     card = new Capital();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play without 2 energy production', () => {
@@ -46,8 +46,7 @@ describe('Capital', () => {
     player.addProduction(Resources.ENERGY, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 

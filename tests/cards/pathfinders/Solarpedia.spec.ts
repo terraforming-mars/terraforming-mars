@@ -16,7 +16,7 @@ describe('Solarpedia', function() {
   beforeEach(function() {
     card = new Solarpedia();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     lunarObservationPost = new LunarObservationPost();
   });
 

@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {ISpace} from '../../../src/boards/ISpace';
-import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/turmoil/parties/Greens';
 import {Lichen} from '../../../src/cards/base/Lichen';
@@ -20,7 +20,7 @@ describe('Greens', function() {
     player = TestPlayers.BLUE.newPlayer();
     const otherPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, otherPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, gameOptions);
     turmoil = game.turmoil!;
     greens = new Greens();
   });
@@ -84,7 +84,7 @@ describe('Greens', function() {
     player.playedCards.push(tardigrades);
     greensPolicy.action(player);
     game.deferredActions.runNext();
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
 
     orOptions.options[0].cb();
     expect(tardigrades.resourceCount).to.eq(2);

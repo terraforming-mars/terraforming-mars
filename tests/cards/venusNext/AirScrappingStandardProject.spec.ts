@@ -17,7 +17,7 @@ describe('AirScrappingStandardProject', function() {
   beforeEach(function() {
     card = new AirScrappingStandardProject();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, setCustomGameOptions({altVenusBoard: false}));
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({altVenusBoard: false}));
   });
 
   it('Can act', function() {

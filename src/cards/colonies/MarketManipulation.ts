@@ -81,9 +81,9 @@ export class MarketManipulation extends Card implements IProjectCard {
           'Select which colony tile track to decrease',
           'Decrease',
           decreasableColonies.filter((decreaseableColony) => decreaseableColony.name !== increasedColony.name),
-          (colony: IColony) => {
-            LogHelper.logColonyTrackDecrease(player, increasedColony);
-            colony.decreaseTrack();
+          (decreasedColony: IColony) => {
+            decreasedColony.decreaseTrack();
+            LogHelper.logColonyTrackDecrease(player, decreasedColony);
             return undefined;
           },
         );

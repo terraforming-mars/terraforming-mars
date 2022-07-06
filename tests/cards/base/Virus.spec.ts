@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Birds} from '../../../src/cards/base/Birds';
 import {Predators} from '../../../src/cards/base/Predators';
 import {Virus} from '../../../src/cards/base/Virus';
@@ -14,7 +15,7 @@ describe('Virus', function() {
     card = new Virus();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -25,8 +26,7 @@ describe('Virus', function() {
     player.addResourceTo(predators);
     player.plants = 5;
 
-    const orOptions = card.play(player2) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.play(player2), OrOptions);
 
     orOptions.options[0].cb([player.playedCards[0]]);
     expect(birds.resourceCount).to.eq(0);
@@ -42,7 +42,7 @@ describe('Virus', function() {
   });
 
   it('Works in solo mode', function() {
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
     expect(card.canPlay(player)).is.true;
     expect(card.play(player)).is.undefined;
     expect(game.someoneHasRemovedOtherPlayersPlants).is.true;

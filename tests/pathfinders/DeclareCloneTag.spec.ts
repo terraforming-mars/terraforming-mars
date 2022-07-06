@@ -4,8 +4,8 @@ import {DeclareCloneTag} from '../../src/pathfinders/DeclareCloneTag';
 import {Tags} from '../../src/common/cards/Tags';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectOption} from '../../src/inputs/SelectOption';
-import {TestPlayer} from '../../tests/TestPlayer';
-import {getTestPlayer, newTestGame} from '../../tests/TestGame';
+import {TestPlayer} from '../TestPlayer';
+import {getTestPlayer, newTestGame} from '../TestGame';
 import {cast, runAllActions} from '../TestingUtils';
 import {Game} from '../../src/Game';
 import {CrewTraining} from '../../src/cards/pathfinders/CrewTraining';
@@ -26,8 +26,7 @@ describe('DeclareCloneTag', function() {
   it('sanity', function() {
     const action = new DeclareCloneTag(player, card, (t) => tag = t);
 
-    const options = action.execute();
-    expect(options).instanceOf(OrOptions);
+    const options = cast(action.execute(), OrOptions);
     const orOptions = options.options as Array<SelectOption>;
 
     expect(orOptions).has.length(3);

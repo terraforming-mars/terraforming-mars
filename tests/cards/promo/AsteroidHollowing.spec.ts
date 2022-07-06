@@ -12,7 +12,7 @@ describe('AsteroidHollowing', function() {
     card = new AsteroidHollowing();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {

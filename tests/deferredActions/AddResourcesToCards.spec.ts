@@ -8,6 +8,7 @@ import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
 import {CardResource} from '../../src/common/CardResource';
 import {AndOptions} from '../../src/inputs/AndOptions';
+import {cast} from '../TestingUtils';
 
 describe('AddResourcesToCards', function() {
   let player: TestPlayer;
@@ -17,7 +18,7 @@ describe('AddResourcesToCards', function() {
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();
     ants = new Ants();
@@ -44,38 +45,32 @@ describe('AddResourcesToCards', function() {
   it('many microbe cards', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    const options = new AddResourcesToCards(player, CardResource.MICROBE, 9).execute();
-    expect(options).instanceOf(AndOptions);
+    const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);
 
-    if (options instanceof AndOptions) {
-      expect(options.options.length).eq(3);
-      options?.options[0].cb(1);
-      options?.options[1].cb(3);
-      options?.options[2].cb(5);
-      options?.cb();
+    expect(options.options.length).eq(3);
+    options.options[0].cb(1);
+    options.options[1].cb(3);
+    options.options[2].cb(5);
+    options.cb();
 
-      expect(ghgProducingBacteria.resourceCount).eq(1);
-      expect(tardigrades.resourceCount).eq(3);
-      expect(ants.resourceCount).eq(5);
-    }
+    expect(ghgProducingBacteria.resourceCount).eq(1);
+    expect(tardigrades.resourceCount).eq(3);
+    expect(ants.resourceCount).eq(5);
   });
 
   it('many microbe cards, wrong input', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    const options = new AddResourcesToCards(player, CardResource.MICROBE, 9).execute();
-    expect(options).instanceOf(AndOptions);
+    const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);
 
-    if (options instanceof AndOptions) {
-      expect(options?.options.length).eq(3);
+    expect(options.options.length).eq(3);
 
-      options?.options[0].cb(1);
-      options?.options[1].cb(3);
-      options?.options[2].cb(6);
-      expect(() => options?.cb()).to.throw(/Expecting 9 .*, got 10/);
+    options.options[0].cb(1);
+    options.options[1].cb(3);
+    options.options[2].cb(6);
+    expect(() => options.cb()).to.throw(/Expecting 9 .*, got 10/);
 
-      options?.options[2].cb(4);
-      expect(() => options?.cb()).to.throw(/Expecting 9 .*, got 8/);
-    }
+    options?.options[2].cb(4);
+    expect(() => options.cb()).to.throw(/Expecting 9 .*, got 8/);
   });
 });

@@ -13,7 +13,7 @@ describe('LawSuit', () => {
     card = new LawSuit();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Cannot play if no resources or production reduced this turn', () => {

@@ -33,7 +33,9 @@ export class GameHandler extends Handler {
     if (board === RandomBoardOption.ALL) return allBoards;
     if (board === RandomBoardOption.OFFICIAL) {
       return allBoards.filter((name) => {
-        return name !== BoardName.ARABIA_TERRA && name !== BoardName.VASTITAS_BOREALIS;
+        return name === BoardName.ORIGINAL ||
+          name === BoardName.HELLAS ||
+          name === BoardName.ELYSIUM;
       });
     }
     return [board];

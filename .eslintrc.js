@@ -28,6 +28,7 @@ module.exports = {
     'require-jsdoc': 'off',
     'no-throw-literal': 'error',
     'no-extra-semi': 'error',
+    '@typescript-eslint/no-non-null-assertion': 'error',
     // Old modules prior to the linting rule being enabled
     // Avoid adding tags to this list
     // Help remove tags from this list

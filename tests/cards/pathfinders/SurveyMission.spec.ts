@@ -116,4 +116,5 @@ describe('SurveyMission', () => {
     expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
   });
   // TODO Hazards are playable, but you won't get anything.
+  // TODO Arcadian communities should not interfere with Survey Mission.
 });

@@ -84,7 +84,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
       () => {
         if (activeCards.length === 1) {
           this.convertCardPointsToTR(player, activeCards[0]);
-          this.discardPlayedCard(player, activeCards[0]);
+          player.discardPlayedCard(activeCards[0]);
           player.drawCard(2);
           return undefined;
         }
@@ -95,7 +95,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
           activeCards,
           (foundCards) => {
             this.convertCardPointsToTR(player, foundCards[0]);
-            this.discardPlayedCard(player, foundCards[0]);
+            player.discardPlayedCard(foundCards[0]);
             player.drawCard(2);
             return undefined;
           },
@@ -124,17 +124,5 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     } else if (steps < 0) {
       player.decreaseTerraformRatingSteps(-steps, {log: true});
     }
-  }
-
-  private discardPlayedCard(player: Player, card: IProjectCard) {
-    const cardIndex = player.playedCards.findIndex((c) => c.name === card.name);
-    player.playedCards.splice(cardIndex, 1);
-    player.game.dealer.discard(card);
-
-    if (card.onDiscard) {
-      card.onDiscard(player);
-    }
-
-    player.game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
   }
 }

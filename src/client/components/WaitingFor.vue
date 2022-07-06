@@ -23,7 +23,7 @@ import {WaitingForModel} from '@/common/models/WaitingForModel';
 
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
-import {isPlayerId} from '@/common/utils/utils';
+import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 let ui_update_timeout_id: number | undefined;

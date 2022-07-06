@@ -10,7 +10,7 @@ describe('GMOContract', function() {
     const card = new GMOContract();
     const player = TestPlayers.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
 
     if (game.turmoil !== undefined) {
       game.turmoil.rulingParty = game.turmoil.getPartyByName(PartyName.REDS);

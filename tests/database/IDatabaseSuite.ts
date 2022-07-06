@@ -6,7 +6,6 @@ use(chaiAsPromised);
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
-import {sleep} from '../TestingUtils';
 import {IDatabase} from '../../src/database/IDatabase';
 
 export interface ITestDatabase extends IDatabase {
@@ -61,8 +60,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       Game.newInstance('game-id-2323', [player], player);
       await db.saveGamePromise;
 
-      db.cleanSaves(game.id);
-      sleep(500);
+      await db.cleanGame(game.id);
 
       const allGames = await db.getGames();
       expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
@@ -82,7 +80,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(allSaveIds).has.members([0, 1, 2, 3]);
     });
 
-    it('cleanSaves', async () => {
+    it('cleanGame', async () => {
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.saveGamePromise;
@@ -94,9 +92,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
       expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-      db.cleanSaves(game.id);
-
-      await sleep(400);
+      await db.cleanGame(game.id);
 
       const saveIds = await db.getSaveIds(game.id);
       expect(saveIds).has.members([0, 3]);
@@ -117,7 +113,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.saveGamePromise;
       expect(game.lastSaveId).eq(1);
 
-      expect(db.getPlayerCount('notfound')).is.rejected;
+      expect(db.getPlayerCount('g-notfound')).is.rejected;
     });
 
     if (dtor.omitPurgeUnfinishedGames !== true) {
@@ -174,7 +170,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('loadCloneableGame', async () => {
-      await expect(db.loadCloneableGame('123')).to.be.rejectedWith(/Game 123 not found/);
+      await expect(db.loadCloneableGame('game-id-123')).to.be.rejectedWith(/Game game-id-123 not found/);
 
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-123', [player], player);

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {ImportedHydrogen} from '../../../src/cards/base/ImportedHydrogen';
 import {Pets} from '../../../src/cards/base/Pets';
@@ -17,7 +18,7 @@ describe('ImportedHydrogen', function() {
     card = new ImportedHydrogen();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -26,15 +27,14 @@ describe('ImportedHydrogen', function() {
     const decomposers = new Decomposers();
     player.playedCards.push(pets, tardigrades, decomposers);
 
-    const action = card.play(player);
-    expect(action).instanceOf(OrOptions);
-    expect((action as OrOptions).options).has.lengthOf(3);
+    const action = cast(card.play(player), OrOptions);
+    expect(action.options).has.lengthOf(3);
 
-    (action as OrOptions).options[0].cb();
+    action.options[0].cb();
     expect(player.plants).to.eq(3);
 
-    const selectAnimal = (action as OrOptions).options[2] as SelectOption;
-    const selectMicrobe = (action as OrOptions).options[1] as SelectCard<any>;
+    const selectAnimal = action.options[2] as SelectOption;
+    const selectMicrobe = action.options[1] as SelectCard<any>;
 
     expect(selectMicrobe.cards).has.lengthOf(2);
     expect(selectMicrobe.cards[0]).to.eq(tardigrades);

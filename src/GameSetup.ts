@@ -2,7 +2,7 @@ import {Board} from './boards/Board';
 import {BoardName} from './common/boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
 import {Game, GameOptions} from './Game';
-import {GameId} from './common/Types';
+import {GameId, PlayerId} from './common/Types';
 import {HellasBoard} from './boards/HellasBoard';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {Player} from './Player';
@@ -12,22 +12,34 @@ import {TileType} from './common/TileType';
 import {Random} from './Random';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
+import {SerializedBoard} from './boards/SerializedBoard';
+import {SerializedGame} from './SerializedGame';
+import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
+import {AmazonisBoard} from './boards/AmazonisBoard';
 
+type BoardFactory = {
+  newInstance: (gameOptions: GameOptions, rng: Random) => Board;
+  deserialize: (board: SerializedBoard, players: Array<Player>) => Board;
+}
+const boards: Map<BoardName, BoardFactory> = new Map(
+  [[BoardName.ORIGINAL, OriginalBoard],
+    [BoardName.HELLAS, HellasBoard],
+    [BoardName.ELYSIUM, ElysiumBoard],
+    [BoardName.AMAZONIS, AmazonisBoard],
+    [BoardName.ARABIA_TERRA, ArabiaTerraBoard],
+    [BoardName.TERRA_CIMMERIA, TerraCimmeriaBoard],
+    [BoardName.VASTITAS_BOREALIS, VastitasBorealisBoard]],
+);
 export class GameSetup {
-  // Function to construct the board and milestones/awards list
   public static newBoard(gameOptions: GameOptions, rng: Random): Board {
-    switch (gameOptions.boardName) {
-    case BoardName.ELYSIUM:
-      return ElysiumBoard.newInstance(gameOptions, rng);
-    case BoardName.HELLAS:
-      return HellasBoard.newInstance(gameOptions, rng);
-    case BoardName.ARABIA_TERRA:
-      return ArabiaTerraBoard.newInstance(gameOptions, rng);
-    case BoardName.VASTITAS_BOREALIS:
-      return VastitasBorealisBoard.newInstance(gameOptions, rng);
-    default:
-      return OriginalBoard.newInstance(gameOptions, rng);
-    }
+    const factory = boards.get(gameOptions.boardName) ?? OriginalBoard;
+    return factory.newInstance(gameOptions, rng);
+  }
+
+  public static deserializeBoard(players: Array<Player>, gameOptions: GameOptions, d: SerializedGame) {
+    const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
+    const factory = boards.get(gameOptions.boardName) ?? OriginalBoard;
+    return factory.deserialize(d.board, playersForBoard);
   }
 
   public static setStartingProductions(player: Player) {
@@ -40,7 +52,8 @@ export class GameSetup {
   }
 
   public static neutralPlayerFor(gameId: GameId): Player {
-    return new Player('neutral', Color.NEUTRAL, true, 0, gameId + '-neutral');
+    const playerId = 'p-' + gameId + '-neutral' as PlayerId;
+    return new Player('neutral', Color.NEUTRAL, true, 0, playerId);
   }
 
   public static setupNeutralPlayer(game: Game) {

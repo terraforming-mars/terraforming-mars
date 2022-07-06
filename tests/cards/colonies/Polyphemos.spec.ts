@@ -15,7 +15,7 @@ describe('Polyphemos', function() {
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);
     pi.options[1].cb([card2, card2]);

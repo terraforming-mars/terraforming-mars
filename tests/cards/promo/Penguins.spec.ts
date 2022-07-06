@@ -11,7 +11,7 @@ describe('Penguins', function() {
   beforeEach(function() {
     card = new Penguins();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Cannot play', function() {

@@ -11,7 +11,7 @@ describe('MolecularPrinting', function() {
     const card = new MolecularPrinting();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     const colonyTile1 = new Luna();
     const colonyTile2 = new Triton();
 

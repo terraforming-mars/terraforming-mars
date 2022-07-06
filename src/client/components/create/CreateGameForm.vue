@@ -2,7 +2,7 @@
         <div id="create-game">
             <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
             <div class="create-game-discord-invite" v-if="playersCount===1">
-              (<span v-i18n>Looking for people to play with</span>? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u v-i18n>Join us on Discord</u></a>.)
+              (<span v-i18n>Looking for people to play with</span>? <a :href="constants.DISCORD_INVITE" class="tooltip" target="_blank"><u v-i18n>Join us on Discord</u></a>.)
             </div>
 
             <div class="create-game-form create-game-panel create-game--block">
@@ -479,7 +479,7 @@ export interface CreateGameModel {
     includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
-    clonedGameId: string | undefined;
+    clonedGameId: GameId | undefined;
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
     moonStandardProjectVariant: boolean;
@@ -540,6 +540,8 @@ export default (Vue as WithRefs<Refs>).extend({
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
         BoardName.ARABIA_TERRA,
+        BoardName.AMAZONIS,
+        BoardName.TERRA_CIMMERIA,
         BoardName.VASTITAS_BOREALIS,
         RandomBoardOption.ALL,
       ],
@@ -631,6 +633,10 @@ export default (Vue as WithRefs<Refs>).extend({
           component.showColoniesList = results['customColoniesList'].length > 0;
           component.showCardsBlackList = results['cardsBlackList'].length > 0;
 
+          // Capture the solar phase option since several of the other results will change
+          // it via the watch mechanism.
+          const capturedSolarPhaseOption = results.solarPhaseOption;
+
           for (const k in results) {
             if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players', 'solarPhaseOption'].includes(k)) continue;
             (component as any)[k] = results[k];
@@ -658,7 +664,7 @@ export default (Vue as WithRefs<Refs>).extend({
             }
 
             // set to alter after any watched properties
-            component.solarPhaseOption = Boolean(results.solarPhaseOption);
+            component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
           });
         }
       }, false);
@@ -746,8 +752,12 @@ export default (Vue as WithRefs<Refs>).extend({
         return 'create-game-board-hexagon create-game-hellas';
       } else if (boardName === BoardName.ELYSIUM) {
         return 'create-game-board-hexagon create-game-elysium';
+      } else if (boardName === BoardName.AMAZONIS) {
+        return 'create-game-board-hexagon create-game-amazonis';
       } else if (boardName === BoardName.ARABIA_TERRA) {
         return 'create-game-board-hexagon create-game-arabia-terra';
+      } else if (boardName === BoardName.TERRA_CIMMERIA) {
+        return 'create-game-board-hexagon create-game-terra-cimmeria';
       } else if (boardName === BoardName.VASTITAS_BOREALIS) {
         return 'create-game-board-hexagon create-game-vastitas-borealis';
       } else {

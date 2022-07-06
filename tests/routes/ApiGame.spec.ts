@@ -14,27 +14,27 @@ describe('ApiGame', () => {
     res = new MockResponse();
   });
 
-  it('no parameter', () => {
+  it('no parameter', async () => {
     scaffolding.url = '/api/game';
-    scaffolding.get(ApiGame.INSTANCE, res);
+    await scaffolding.asyncGet(ApiGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found: id parameter missing');
   });
 
-  it('invalid id', () => {
+  it('invalid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
     scaffolding.url = '/api/game?id=invalidId';
-    scaffolding.get(ApiGame.INSTANCE, res);
+    await scaffolding.asyncGet(ApiGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found: game not found');
   });
 
-  it('valid id', () => {
+  it('valid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
     scaffolding.url = '/api/game?id=validId';
-    scaffolding.get(ApiGame.INSTANCE, res);
+    await scaffolding.asyncGet(ApiGame.INSTANCE, res);
     // This test is probably brittle.
     expect(JSON.parse(res.content)).deep.eq(
       {

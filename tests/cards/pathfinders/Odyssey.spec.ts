@@ -10,6 +10,7 @@ import {ImportOfAdvancedGHG} from '../../../src/cards/base/ImportOfAdvancedGHG';
 import {InventionContest} from '../../../src/cards/base/InventionContest';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
+import {MediaGroup} from '../../../src/cards/base/MediaGroup';
 
 describe('Odyssey', function() {
   let card: Odyssey;
@@ -59,5 +60,26 @@ describe('Odyssey', function() {
     expect(player.getProduction(Resources.HEAT)).eq(2);
     expect(game.dealer.discarded.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([inventionContest]);
+  });
+
+  it('action triggers related effects', () => {
+    // Raise heat 2 steps
+    const importOfAdvancedGHG = new ImportOfAdvancedGHG();
+    // When you play an event card gain 2MC.
+    const mediaGroup = new MediaGroup();
+
+    player.playedCards = [importOfAdvancedGHG, mediaGroup];
+    const selectCard = cast(card.action(player), SelectCard);
+
+    expect(player.getProduction(Resources.HEAT)).eq(0);
+    expect(player.megaCredits).eq(0);
+
+    selectCard.cb([importOfAdvancedGHG]);
+    runAllActions(game);
+
+    expect(player.getProduction(Resources.HEAT)).eq(2);
+    expect(player.megaCredits).eq(3);
+    expect(game.dealer.discarded.pop()).eq(importOfAdvancedGHG);
+    expect(player.playedCards).has.members([mediaGroup]);
   });
 });

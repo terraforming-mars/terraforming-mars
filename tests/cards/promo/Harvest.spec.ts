@@ -11,7 +11,7 @@ describe('Harvest', function() {
     card = new Harvest();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
 
     const landSpaces = game.board.getAvailableSpacesOnLand(player).slice(0, 2);
     landSpaces.forEach((space) => game.addGreenery(player, space.id));

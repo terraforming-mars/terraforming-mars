@@ -12,7 +12,7 @@ describe('LastResortIngenuity', function() {
   beforeEach(function() {
     card = new LastResortIngenuity();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
   });
 
   it('play', function() {

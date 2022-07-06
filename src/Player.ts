@@ -154,6 +154,7 @@ export class Player {
   // Stats
   public actionsTakenThisGame: number = 0;
   public victoryPointsByGeneration: Array<number> = [];
+  public totalDelegatesPlaced: number = 0;
 
   constructor(
     public name: string,
@@ -933,30 +934,28 @@ export class Player {
 
   // Counts the number of distinct tags
   public getDistinctTagCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tags): number {
-    const allTags: Tags[] = [];
     let wildTagCount: number = 0;
-    if (extraTag !== undefined) {
-      allTags.push(extraTag);
-    }
-    const uniqueTags: Set<Tags> = new Set();
-    if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
-      this.corporationCard.tags.forEach((tag) => allTags.push(tag));
-    }
-    this.playedCards.forEach((card) => {
-      if (card.cardType === CardType.EVENT) {
-        return;
-      }
-      card.tags.forEach((tag) => {
-        allTags.push(tag);
-      });
-    });
-    for (const tags of allTags) {
-      if (tags === Tags.WILD) {
+    const uniqueTags = new Set<Tags>();
+    const addTag = (tag: Tags) => {
+      if (tag === Tags.WILD) {
         wildTagCount++;
       } else {
-        uniqueTags.add(tags);
+        uniqueTags.add(tag);
+      }
+    };
+    if (extraTag !== undefined) {
+      uniqueTags.add(extraTag);
+    }
+    if (this.corporationCard !== undefined && !this.corporationCard?.isDisabled) {
+      this.corporationCard.tags.forEach(addTag);
+    }
+    for (const card of this.playedCards) {
+      if (card.cardType !== CardType.EVENT) {
+        card.tags.forEach(addTag);
       }
     }
+    // Leavitt Station hook
+    if (this.scienceTagCount > 0) uniqueTags.add(Tags.SCIENCE);
 
     if (mode === 'globalEvent') return uniqueTags.size;
 
@@ -1584,6 +1583,18 @@ export class Player {
     return DrawCards.keepSome(this, count, options).execute();
   }
 
+  public discardPlayedCard(card: IProjectCard) {
+    const cardIndex = this.playedCards.findIndex((c) => c.name === card.name);
+    if (cardIndex === -1) {
+      console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
+      return;
+    }
+    this.playedCards.splice(cardIndex, 1);
+    this.game.dealer.discard(card);
+    card.onDiscard?.(this);
+    this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
+  }
+
   public get availableHeat(): number {
     return this.heat + (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? this.getResourcesOnCorporation() * 2 : 0);
   }
@@ -2199,6 +2210,7 @@ export class Player {
       // Stats
       actionsTakenThisGame: this.actionsTakenThisGame,
       victoryPointsByGeneration: this.victoryPointsByGeneration,
+      totalDelegatesPlaced: this.totalDelegatesPlaced,
     };
 
     if (this.lastCardPlayed !== undefined) {
@@ -2249,6 +2261,7 @@ export class Player {
     player.titanium = d.titanium;
     player.titaniumProduction = d.titaniumProduction;
     player.titaniumValue = d.titaniumValue;
+    player.totalDelegatesPlaced = d.totalDelegatesPlaced;
     player.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;

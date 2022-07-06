@@ -7,6 +7,7 @@ import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('EcologicalZone', function() {
   let card : EcologicalZone; let player : Player; let game : Game;
@@ -15,7 +16,7 @@ describe('EcologicalZone', function() {
     card = new EcologicalZone();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play', function() {
@@ -27,8 +28,7 @@ describe('EcologicalZone', function() {
     game.addGreenery(player, landSpace.id);
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     const adjacentSpace = action.availableSpaces[0];
     action.cb(adjacentSpace);

@@ -88,7 +88,7 @@ export interface IDatabase {
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
-     * games. Called at a game's conclusion along with {@link cleanSaves}.
+     * games. Called at a game's conclusion along with {@link cleanGame}.
      *
      * This is not impliemented in {@link SQLite}.
      *
@@ -128,16 +128,14 @@ export interface IDatabase {
      *   than a given date range, regardless of the supplied `game_id`.
      *   Constraints for this purge vary by database.
      */
-    // TODO(kberg): rename to represent that it's closing out
-    // this game. Also consider not needing the save_id, and
-    // also to make the maintenance behavior a first-class method.
-    cleanSaves(game_id: GameId): Promise<void>;
+    // TODO(kberg): Make the extra maintenance behavior a first-class method.
+    cleanGame(game_id: GameId): Promise<void>;
 
     /**
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
      *
-     * This is currently also part of cleanSaves().
+     * This is currently also part of cleanGame().
      *
      * Behavior when the environment variable is absent is system-dependent:
      * * In PostgreSQL, it uses a default of 10 days

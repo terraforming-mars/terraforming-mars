@@ -2,7 +2,6 @@ import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
-
 import {Pool, ClientConfig} from 'pg';
 import {daysAgoToSeconds} from './utils.ts';
 
@@ -75,18 +74,14 @@ export class PostgreSQL implements IDatabase {
     return json;
   }
 
-  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
+  public async getGame(game_id: GameId): Promise<SerializedGame> {
     // Retrieve last save from database
-    this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [game_id], (err, res) => {
-      if (err) {
-        console.error('PostgreSQL:getGame', err);
-        return cb(err);
-      }
-      if (res.rows.length === 0 || res.rows[0] === undefined) {
-        return cb(new Error('Game not found'));
-      }
-      cb(undefined, JSON.parse(res.rows[0].game));
-    });
+    const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [game_id]);
+    if (res.rows.length === 0 || res.rows[0] === undefined) {
+      throw new Error(`Game ${game_id} not found`);
+    }
+    const json = JSON.parse(res.rows[0].game);
+    return json;
   }
 
   public async getGameId(id: string): Promise<GameId> {

@@ -23,7 +23,7 @@ describe('ApiGame', () => {
 
   it('invalid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
+    await scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
     scaffolding.url = '/api/game?id=invalidId';
     await scaffolding.asyncGet(ApiGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
@@ -32,7 +32,7 @@ describe('ApiGame', () => {
 
   it('valid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
+    await scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
     scaffolding.url = '/api/game?id=validId';
     await scaffolding.asyncGet(ApiGame.INSTANCE, res);
     // This test is probably brittle.

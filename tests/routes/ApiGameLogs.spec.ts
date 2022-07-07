@@ -30,7 +30,7 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
     await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
@@ -43,7 +43,7 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=50';
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
     await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
@@ -56,7 +56,7 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).gt(1);
@@ -68,7 +68,7 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=2';
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).eq(0);
@@ -84,7 +84,7 @@ describe('ApiGameLogs', function() {
       const playerUnderTest = players[entry.idx];
 
       const game = Game.newInstance('game-id', players, yellowPlayer);
-      scaffolding.ctx.gameLoader.add(game);
+      await scaffolding.ctx.gameLoader.add(game);
 
       // Remove logs to-date to simplify the test
       game.gameLog.length = 0;

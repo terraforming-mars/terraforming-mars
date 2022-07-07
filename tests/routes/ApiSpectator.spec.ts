@@ -25,7 +25,7 @@ describe('ApiSpectator', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/player?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player, undefined, undefined, 'spectator-id');
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.asyncGet(ApiSpectator.INSTANCE, res);
     const response: PlayerViewModel = JSON.parse(res.content);
     expect(response.id).eq('spectator-id');

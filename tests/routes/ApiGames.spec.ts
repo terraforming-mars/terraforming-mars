@@ -30,7 +30,7 @@ describe('ApiGames', function() {
 
   it('a game', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    scaffolding.ctx.gameLoader.add(Game.newInstance('game-id', [player], player));
+    await scaffolding.ctx.gameLoader.add(Game.newInstance('game-id', [player], player));
     await ApiGames.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
     // Player ids aren't exactly available in the fake game loader.
     // A base class shared between GameLoader and FakeGameLoader would fix that.

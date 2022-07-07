@@ -46,15 +46,15 @@ export class Localfilesystem implements IDatabase {
     fs.writeFileSync(this._historyFilename(serializedGame.id, serializedGame.lastSaveId), text);
   }
 
-  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
+  getGame(game_id: GameId): Promise<SerializedGame> {
     try {
       console.log(`Loading ${game_id}`);
       const text = fs.readFileSync(this._filename(game_id));
       const serializedGame = JSON.parse(text);
-      cb(undefined, serializedGame);
+      return Promise.resolve(serializedGame);
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
-      cb(error, undefined);
+      throw error;
     }
   }
 
@@ -77,16 +77,15 @@ export class Localfilesystem implements IDatabase {
     throw new Error('Not implemented');
   }
 
-  getPlayerCount(gameId: GameId): Promise<number> {
-    return this.getGames().then((gameIds) => {
-      const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
-      if (found === undefined) {
-        throw new Error(`${gameId} not found`);
-      }
-      const text = fs.readFileSync(this._historyFilename(gameId, 0));
-      const serializedGame = JSON.parse(text) as SerializedGame;
-      return serializedGame.players.length;
-    });
+  async getPlayerCount(gameId: GameId): Promise<number> {
+    const gameIds = await this.getGames();
+    const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
+    if (found === undefined) {
+      throw new Error(`${gameId} not found`);
+    }
+    const text = fs.readFileSync(this._historyFilename(gameId, 0));
+    const serializedGame = JSON.parse(text) as SerializedGame;
+    return serializedGame.players.length;
   }
 
   loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
@@ -140,17 +139,7 @@ export class Localfilesystem implements IDatabase {
 
   async restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
     await fs.copyFile(this._historyFilename(gameId, saveId), this._filename(gameId));
-    return new Promise((resolve, reject) => {
-      this.getGame(gameId, (err, serializedGame) => {
-        if (err) {
-          reject(err);
-        } else if (serializedGame === undefined) {
-          reject(new Error('game not found'));
-        } else {
-          resolve(serializedGame);
-        }
-      });
-    });
+    return this.getGame(gameId);
   }
 
   deleteGameNbrSaves(_gameId: GameId, _rollbackCount: number): void {

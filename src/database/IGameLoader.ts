@@ -8,7 +8,7 @@ export type GameIdLedger = {id: GameId, participants: Array<SpectatorId | Player
  * Loads games from database sequentially as needed
  */
 export interface IGameLoader {
-  add(game: Game): void;
+  add(game: Game): Promise<void>;
   getLoadedGameIds(): Promise<Array<GameIdLedger>>;
   /**
    * Gets a game from javascript memory or pulls from database if needed.

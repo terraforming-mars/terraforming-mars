@@ -7,8 +7,8 @@ import {InputResponse} from '../src/common/inputs/InputResponse';
 import {PlayerId} from '../src/common/Types';
 
 export class TestPlayer extends Player {
-  constructor(color: Color) {
-    super('player-' + color, color, false, 0, 'p-' + color + '-id' as PlayerId);
+  constructor(color: Color, beginner: boolean = false) {
+    super('player-' + color, color, beginner, 0, 'p-' + color + '-id' as PlayerId);
   }
 
   public setProductionForTest(units: Partial<Units>) {

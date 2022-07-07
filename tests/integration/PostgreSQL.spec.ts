@@ -105,23 +105,27 @@ describeDatabaseSuite({
     });
 
     it('test save id count with undo', async () => {
+      // These methods are useful because they're reduce a lot of repetition.
       async function awaitAllSaves() {
         await Promise.all(db.promises);
         db.promises.length = 0;
       }
+      async function getStat(field: string): Promise<string | number> {
+        return (await db.stats())[field];
+      }
 
+      // Set up a simple game.
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayers.BLACK.newPlayer(/** beginner */ true);
       const player2 = TestPlayers.RED.newPlayer(/** beginner */ true);
       const game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({draftVariant: false, undoOption: true}));
       await awaitAllSaves();
 
-      async function getStat(field: string): Promise<string | number> {
-        return (await db.stats())[field];
-      }
       expect(await getStat('save-count')).eq(1);
       expect(await db.getSaveIds(game.id)).deep.eq([0]);
 
+      // Move into the action phase by having both players complete their research.
+      // This triggers another save.
       game.playerIsFinishedWithResearchPhase(player);
       game.playerIsFinishedWithResearchPhase(player2);
       expect(game.phase).eq(Phase.ACTION);
@@ -130,48 +134,54 @@ describeDatabaseSuite({
       expect(await getStat('save-count')).eq(2);
       expect(await db.getSaveIds(game.id)).deep.eq([0, 1]);
 
-      // Creating a very simple waitingFor that does nothing.
-      const simpleOption = new SelectOption('', '', () => undefined);
-
+      // Player.takeAction sets waitingFor and waitingForCb. This overrides it
+      // with our own simple option, and then mimics the waitingForCb behavior at
+      // the end of Player.takeAction
       function takeAction(p: Player) {
-        // Player.takeAction sets waitingFor and waitingForCb. This overrides it
-        // with our own simple option, and then mimics the waitingForCb behavior at
-        // the end of Player.takeAction
+        // A do-nothing player input
+        const simpleOption = new SelectOption('', '', () => undefined);
         p.setWaitingFor(simpleOption, () => {
           (p as any).incrementActionsTaken();
           p.takeAction();
         });
       }
 
+      // Player's first action
       expect(game.activePlayer).eq(player.id);
       expect(player.actionsTakenThisRound).eq(0);
 
-      // Player's first action
+      // Taking an action triggers a save (when undo is enabled.)
       takeAction(player);
       player.process([]);
       await awaitAllSaves();
 
       expect(await getStat('save-count')).eq(3);
       expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2]);
-      expect(game.activePlayer).eq(player.id);
-      expect(player.actionsTakenThisRound).eq(1);
-
       // This stat reports whether a game with undo enabled updates instead of inserts.
+      // None are expected at this point.
       expect(await getStat('save-confict-undo-count')).eq(0);
 
       // Player's second action
+      expect(game.activePlayer).eq(player.id);
+      expect(player.actionsTakenThisRound).eq(1);
+
       takeAction(player);
       player.process([]);
       await awaitAllSaves();
 
-      // Notice how save-count went from 3 to 5. It saved twice.
-      expect(await getStat('save-count')).eq(5);
-      // That's because one of them is an update instead of an insert.
-      expect(await getStat('save-confict-undo-count')).eq(1);
-
-      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
+      // It is now the second player's turn. This test doesn't care about what the
+      // second player does, but it is just a cue that the server has done a few things.
+      // This test cares about the database things it does.
       expect(game.activePlayer).eq(player2.id);
       expect(player.actionsTakenThisRound).eq(0);
+
+      // Notice how save-count was 3 and is now 5. It saved twice.
+      expect(await getStat('save-count')).eq(5);
+      // If save count is 5, why are only four versions saved?
+      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
+      // That's because one of those saves was an update instead of an insert.
+      // Version 3 was saved twice.
+      expect(await getStat('save-confict-undo-count')).eq(1);
 
       // Of all the steps in this test, this is the one which will verify the broken undo
       // is repaired correctly. When it was broken, this was 5.

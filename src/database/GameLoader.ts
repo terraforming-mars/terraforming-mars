@@ -4,6 +4,7 @@ import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {GameIdLedger, IGameLoader} from './IGameLoader';
 import {GameIds} from './GameIds';
 import {MultiMap} from 'mnemonist';
+import {Metrics} from '../server/metrics';
 
 /**
  * Loads games from javascript memory or database
@@ -15,7 +16,9 @@ export class GameLoader implements IGameLoader {
   private idsContainer = new GameIds();
 
   private constructor() {
-    this.idsContainer.load();
+    Metrics.INSTANCE.time('gameloader-initialize', () => {
+      this.idsContainer.load();
+    });
   }
 
   public reset(): void {

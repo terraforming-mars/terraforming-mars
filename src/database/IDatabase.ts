@@ -67,6 +67,10 @@ export interface IDatabase {
 
     /**
      * Return a list of all `game_id`s.
+     *
+     * When the server starts games will be loaded from first to last. The postgres implmentation
+     * speeds up loading by sorting game ids so games most recently updated are loaded first, thereby
+     * being available sooner than other games.
      */
     getGames(): Promise<Array<GameId>>;
 

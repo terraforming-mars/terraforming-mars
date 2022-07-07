@@ -59,7 +59,15 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async getGames(): Promise<Array<GameId>> {
-    const sql: string = 'SELECT distinct game_id FROM games';
+    const sql: string =
+    `SELECT games.game_id
+    FROM games, (
+      SELECT max(save_id) save_id, game_id
+      FROM games
+      GROUP BY game_id) a
+    WHERE games.game_id = a.game_id
+    AND games.save_id = a.save_id
+    ORDER BY created_time DESC`;
     const res = await this.client.query(sql);
     return res.rows.map((row) => row.game_id);
   }

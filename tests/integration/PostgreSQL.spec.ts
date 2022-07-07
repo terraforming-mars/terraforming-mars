@@ -42,11 +42,8 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   }
 
   public async afterEach() {
-    return this.client.query('DROP TABLE games').then(() => {
-      this.client.query('DROP TABLE game_results');
-    }).catch((err) => {
-      throw err;
-    });
+    await this.client.query('DROP TABLE games');
+    await this.client.query('DROP TABLE game_results');
   }
 
   public getStatistics() {
@@ -102,6 +99,35 @@ describeDatabaseSuite({
       const newSerializedv3 = await db.getGameVersion(game.id, 3);
       expect(newSerializedv3.players[0].megaCredits).eq(77);
       expect(game.lastSaveId).eq(4);
+    });
+
+    // When sqlite does the same thing this can go into the suite.
+    it('getGames - returns in order of last saved', async () => {
+      const db = dbFunction() as TestPostgreSQL;
+      const player = TestPlayers.BLACK.newPlayer();
+      const game1 = Game.newInstance('game-id-1111', [player], player);
+      await db.lastSaveGamePromise;
+      const game2 = Game.newInstance('game-id-2222', [player], player);
+      await db.lastSaveGamePromise;
+      const game3 = Game.newInstance('game-id-3333', [player], player);
+      await db.lastSaveGamePromise;
+
+      expect(await db.getGames()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
+
+      game1.save();
+      await db.lastSaveGamePromise;
+
+      expect(await db.getGames()).deep.eq(['game-id-1111', 'game-id-3333', 'game-id-2222']);
+
+      game2.save();
+      await db.lastSaveGamePromise;
+
+      expect(await db.getGames()).deep.eq(['game-id-2222', 'game-id-1111', 'game-id-3333']);
+
+      game3.save();
+      await db.lastSaveGamePromise;
+
+      expect(await db.getGames()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
     });
 
     it('test save id count with undo', async () => {

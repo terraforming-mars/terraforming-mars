@@ -200,6 +200,9 @@ export class PostgreSQL implements IDatabase {
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
+      // By pre-computing the next game ID we avoid certain race conditions where
+      // saveGame is called twice in a row.
+      const nextSaveId = game.lastSaveId + 1;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, players)
@@ -208,7 +211,7 @@ export class PostgreSQL implements IDatabase {
         RETURNING (xmax = 0) AS inserted`,
         [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
 
-      game.lastSaveId++;
+      game.lastSaveId = nextSaveId;
 
       let inserted: boolean = true;
       try {

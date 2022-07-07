@@ -4,13 +4,18 @@ import {ITestDatabase, describeDatabaseSuite} from '../database/IDatabaseSuite';
 import {Game} from '../../src/Game';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
 import {TestPlayers} from '../TestPlayers';
+import {SelectOption} from '../../src/inputs/SelectOption';
+import {Phase} from '../../src/common/Phase';
+import {setCustomGameOptions} from '../TestingUtils';
+import {Player} from '../../src/Player';
 
 /*
  * This test can be run with `npm run test:integration` as long as the test is set up
  * correctly.
  */
 class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
-  public saveGamePromise: Promise<void> = Promise.resolve();
+  public lastSaveGamePromise: Promise<void> = Promise.resolve();
+  public readonly promises: Array<Promise<void>> = [];
 
   constructor() {
     super({
@@ -22,12 +27,13 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   }
 
   // Tests can wait for saveGamePromise since save() is called inside other methods.
-  public override saveGame(game: Game): Promise<void> {
-    this.saveGamePromise = super.saveGame(game);
-    return this.saveGamePromise;
+  public override async saveGame(game: Game): Promise<void> {
+    this.lastSaveGamePromise = super.saveGame(game);
+    this.promises.push(this.lastSaveGamePromise);
+    return this.lastSaveGamePromise;
   }
 
-  public override async stats() {
+  public override async stats(): Promise<{[key: string]: string | number}> {
     const response = await super.stats();
     response['size-bytes-games'] = 'any';
     response['size-bytes-game-results'] = 'any';
@@ -71,7 +77,7 @@ describeDatabaseSuite({
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayers.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
-      await db.saveGamePromise;
+      await db.lastSaveGamePromise;
 
       await db.saveGame(game);
       await db.saveGame(game);
@@ -95,6 +101,80 @@ describeDatabaseSuite({
       // Loading v3 shows that it has the revised value of megacredits.
       const newSerializedv3 = await db.getGameVersion(game.id, 3);
       expect(newSerializedv3.players[0].megaCredits).eq(77);
+      expect(game.lastSaveId).eq(4);
+    });
+
+    it('test save id count with undo', async () => {
+      async function awaitAllSaves() {
+        await Promise.all(db.promises);
+        db.promises.length = 0;
+      }
+
+      const db = dbFunction() as TestPostgreSQL;
+      const player = TestPlayers.BLACK.newPlayer(/** beginner */ true);
+      const player2 = TestPlayers.RED.newPlayer(/** beginner */ true);
+      const game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({draftVariant: false, undoOption: true}));
+      await awaitAllSaves();
+
+      async function getStat(field: string): Promise<string | number> {
+        return (await db.stats())[field];
+      }
+      expect(await getStat('save-count')).eq(1);
+      expect(await db.getSaveIds(game.id)).deep.eq([0]);
+
+      game.playerIsFinishedWithResearchPhase(player);
+      game.playerIsFinishedWithResearchPhase(player2);
+      expect(game.phase).eq(Phase.ACTION);
+
+      await awaitAllSaves();
+      expect(await getStat('save-count')).eq(2);
+      expect(await db.getSaveIds(game.id)).deep.eq([0, 1]);
+
+      // Creating a very simple waitingFor that does nothing.
+      const simpleOption = new SelectOption('', '', () => undefined);
+
+      function takeAction(p: Player) {
+        // Player.takeAction sets waitingFor and waitingForCb. This overrides it
+        // with our own simple option, and then mimics the waitingForCb behavior at
+        // the end of Player.takeAction
+        p.setWaitingFor(simpleOption, () => {
+          (p as any).incrementActionsTaken();
+          p.takeAction();
+        });
+      }
+
+      expect(game.activePlayer).eq(player.id);
+      expect(player.actionsTakenThisRound).eq(0);
+
+      // Player's first action
+      takeAction(player);
+      player.process([]);
+      await awaitAllSaves();
+
+      expect(await getStat('save-count')).eq(3);
+      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2]);
+      expect(game.activePlayer).eq(player.id);
+      expect(player.actionsTakenThisRound).eq(1);
+
+      // This stat reports whether a game with undo enabled updates instead of inserts.
+      expect(await getStat('save-confict-undo-count')).eq(0);
+
+      // Player's second action
+      takeAction(player);
+      player.process([]);
+      await awaitAllSaves();
+
+      // Notice how save-count went from 3 to 5. It saved twice.
+      expect(await getStat('save-count')).eq(5);
+      // That's because one of them is an update instead of an insert.
+      expect(await getStat('save-confict-undo-count')).eq(1);
+
+      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
+      expect(game.activePlayer).eq(player2.id);
+      expect(player.actionsTakenThisRound).eq(0);
+
+      // Of all the steps in this test, this is the one which will verify the broken undo
+      // is repaired correctly. When it was broken, this was 5.
       expect(game.lastSaveId).eq(4);
     });
   },

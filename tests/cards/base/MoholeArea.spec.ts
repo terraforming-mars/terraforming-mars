@@ -12,7 +12,7 @@ describe('MoholeArea', function() {
     const card = new MoholeArea();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);

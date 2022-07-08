@@ -10,7 +10,7 @@ describe('MirandaResort', function() {
     const card = new MirandaResort();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('gameid', [player, redPlayer], player);
     player.game = game;
 
     player.playedCards.push(new BusinessNetwork());

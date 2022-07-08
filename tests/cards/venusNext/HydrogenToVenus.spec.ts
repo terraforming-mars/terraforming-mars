@@ -16,7 +16,7 @@ describe('HydrogenToVenus', function() {
     card = new HydrogenToVenus();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play with multiple venus cards', function() {

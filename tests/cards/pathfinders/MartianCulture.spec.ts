@@ -14,7 +14,7 @@ describe('MartianCulture', function() {
     card = new MartianCulture();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card);
   });
 

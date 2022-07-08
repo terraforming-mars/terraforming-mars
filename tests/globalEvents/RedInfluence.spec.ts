@@ -11,7 +11,7 @@ describe('RedInfluence', function() {
     const card = new RedInfluence();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
     player.setTerraformRating(23);
@@ -34,7 +34,7 @@ describe('RedInfluence', function() {
   it('Max 5', function() {
     const card = new RedInfluence();
     const player = TestPlayers.BLACK.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const game = Game.newInstance('gameid', [player], player);
     const turmoil = Turmoil.newInstance(game);
 
     player.setTerraformRating(59);

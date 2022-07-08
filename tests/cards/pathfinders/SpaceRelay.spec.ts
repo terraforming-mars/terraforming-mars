@@ -14,7 +14,7 @@ describe('SpaceRelay', function() {
   beforeEach(function() {
     card = new SpaceRelay();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 

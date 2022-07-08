@@ -23,7 +23,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
     card = new TheDarksideofTheMoonSyndicate();
     moonData = MoonExpansion.moonData(game);
   });

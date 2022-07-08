@@ -8,7 +8,7 @@ describe('Solarnet', function() {
     const card = new Solarnet();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     player.tagsForTest = {venus: 1};

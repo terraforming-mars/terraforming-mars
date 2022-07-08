@@ -21,7 +21,7 @@ describe('InterplanetaryTrade', function() {
   beforeEach(function() {
     card = new InterplanetaryTrade();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foo', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Should play', function() {

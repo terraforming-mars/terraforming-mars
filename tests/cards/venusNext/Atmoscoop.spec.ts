@@ -21,7 +21,7 @@ describe('Atmoscoop', function() {
     card = new Atmoscoop();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({venusNextExtension: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({venusNextExtension: true}));
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();
   });

@@ -13,7 +13,7 @@ describe('MagneticFieldStimulationDelays', function() {
   beforeEach(function() {
     card = new MagneticFieldStimulationDelays();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('resolve play', function() {

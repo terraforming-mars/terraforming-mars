@@ -827,7 +827,7 @@ export class Player {
    * 'raw-pf': Same as raw, but includes Mars Tags when tag is Science  (Habitat Marte)
    */
   public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
-    const includeEvents = mode === 'vps' || this.corporationCard?.name === CardName.ODYSSEY;
+    const includeEvents = this.corporationCard?.name === CardName.ODYSSEY;
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.getRawTagCount(tag, includeEvents);
@@ -1550,6 +1550,18 @@ export class Player {
 
   public drawCardKeepSome(count: number, options: DrawCards.AllOptions): SelectCard<IProjectCard> {
     return DrawCards.keepSome(this, count, options).execute();
+  }
+
+  public discardPlayedCard(card: IProjectCard) {
+    const cardIndex = this.playedCards.findIndex((c) => c.name === card.name);
+    if (cardIndex === -1) {
+      console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
+      return;
+    }
+    this.playedCards.splice(cardIndex, 1);
+    this.game.dealer.discard(card);
+    card.onDiscard?.(this);
+    this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
   }
 
   public get availableHeat(): number {

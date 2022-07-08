@@ -11,7 +11,7 @@ describe('Recruitment', function() {
     const player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
 
         game.turmoil!.parties.forEach((party) => {
           party.delegates = [];

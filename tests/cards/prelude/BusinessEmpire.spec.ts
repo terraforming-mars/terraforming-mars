@@ -11,7 +11,7 @@ describe('BusinessEmpire', function() {
   beforeEach(function() {
     card = new BusinessEmpire();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Can\'t play', function() {

@@ -29,7 +29,7 @@ to foster. Note that any new features you see on this repo made available on tha
 The board game is great and this repository highly recommends [purchasing it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
 
 ## ⬤ I want to join the community!
-[Join us over on Discord!](https://discord.gg/VR8TbrD).
+[Join us over on Discord!](https://discord.gg/afeyggbN6Y).
 
 ## ⬤ I want to play!
 There's a instance available at https://terraforming-mars.herokuapp.com/. It's generally reliable, but read more below.

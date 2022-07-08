@@ -14,7 +14,7 @@ describe('PowerSupplyConsortium', function() {
     card = new PowerSupplyConsortium();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
     player.popWaitingFor(); // Remove SelectInitialCards
   });
 
@@ -62,12 +62,14 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Can play in solo mode if have enough power tags', function() {
-    const game = Game.newInstance('foobar2', [player], player);
-    player.playedCards.push(card, card);
-    expect(card.canPlay(player)).is.true;
+    const soloPlayer = TestPlayers.BLUE.newPlayer();
+    const soloGame = Game.newInstance('gameid2', [soloPlayer], soloPlayer);
+    soloPlayer.popWaitingFor(); // Remove SelectInitialCards
+    soloPlayer.playedCards.push(card, card);
+    expect(card.canPlay(soloPlayer)).is.true;
 
-    card.play(player);
-    runAllActions(game);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1); // incremented
+    card.play(soloPlayer);
+    runAllActions(soloGame);
+    expect(soloPlayer.getProduction(Resources.ENERGY)).to.eq(1); // incremented
   });
 });

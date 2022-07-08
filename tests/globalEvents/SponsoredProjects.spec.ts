@@ -13,7 +13,7 @@ describe('SponsoredProjects', function() {
     const card = new SponsoredProjects();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
     player.playedCards.push(new Ants());

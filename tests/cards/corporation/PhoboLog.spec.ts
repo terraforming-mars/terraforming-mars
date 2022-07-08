@@ -8,7 +8,7 @@ describe('PhoboLog', function() {
     const card = new PhoboLog();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.titanium).to.eq(10);

@@ -1,4 +1,4 @@
-import {DbLoadCallback, IDatabase} from './IDatabase';
+import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
@@ -125,13 +125,16 @@ export class SQLite implements IDatabase {
     );
   }
 
-  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
-    // Retrieve last save from database
-    this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: Error | null, row: { game: any; }) => {
-      if (err) {
-        return cb(err ?? undefined);
-      }
-      cb(undefined, JSON.parse(row.game));
+  getGame(game_id: GameId): Promise<SerializedGame> {
+    return new Promise((resolve, reject) => {
+      // Retrieve last save from database
+      this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: Error | null, row: { game: any; }) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(JSON.parse(row.game));
+        }
+      });
     });
   }
 
@@ -188,7 +191,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getMaxSaveId(game_id: GameId, cb: DbLoadCallback<number>): void {
+  getMaxSaveId(game_id: GameId, cb: (err: Error | undefined, id: number | undefined) => void): void {
     this.db.get('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [game_id], (err: Error | null, row: { save_id: number; }) => {
       if (err) {
         return cb(err ?? undefined, undefined);
@@ -197,21 +200,21 @@ export class SQLite implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: GameId): Promise<void> {
+  cleanGame(game_id: GameId): Promise<void> {
     return new Promise((resolve, reject) => {
       this.getMaxSaveId(game_id, ((err, save_id) => {
         if (err) {
-          reject(new Error('SQLite: cleansaves0:' + err.message));
+          reject(new Error('SQLite: cleanGame:' + err.message));
         }
         if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
         // Purges isn't used yet
         this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
         // DELETE all saves except initial and last one
         this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], (err) => {
-          if (err) console.warn('SQLite: cleansaves1: ', err.message);
+          if (err) console.warn('SQLite: cleanGame1: ', err.message);
           // Flag game as finished
           this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], async (err) => {
-            if (err) console.warn('SQLite: cleansaves2: ', err.message);
+            if (err) console.warn('SQLite: cleanGame2: ', err.message);
             await this.purgeUnfinishedGames();
             resolve();
           });

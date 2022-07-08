@@ -55,6 +55,7 @@ import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
+import {PlayerId, SpectatorId} from '@/common/Types';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -62,7 +63,7 @@ export default Vue.extend({
   name: 'log-panel',
   props: {
     id: {
-      type: String,
+      type: String as () => PlayerId | SpectatorId,
     },
     generation: {
       type: Number,

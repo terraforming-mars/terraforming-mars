@@ -473,7 +473,7 @@ export class Game {
   }
 
   // Function to retrieve a player by it's id
-  public getPlayerById(id: string): Player {
+  public getPlayerById(id: PlayerId): Player {
     const player = this.players.find((p) => p.id === id);
     if (player === undefined) {
       throw new Error(`player ${id} does not exist on game ${this.id}`);
@@ -482,7 +482,7 @@ export class Game {
   }
 
   // Function to return an array of players from an array of player ids
-  public getPlayersById(ids: Array<string>): Array<Player> {
+  public getPlayersById(ids: Array<PlayerId>): Array<Player> {
     return ids.map((id) => this.getPlayerById(id));
   }
 
@@ -1047,9 +1047,6 @@ export class Game {
       this.log('This game id was ' + this.id);
     }
 
-    Database.getInstance().cleanSaves(this.id).catch((err) => {
-      console.error(err);
-    });
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
       let corponame: string = '';
@@ -1062,6 +1059,11 @@ export class Game {
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
     this.phase = Phase.END;
+    Database.getInstance().saveGame(this).then(() => {
+      return Database.getInstance().cleanGame(this.id);
+    }).catch((err) => {
+      console.error(err);
+    });
   }
 
   // Part of final greenery placement.
@@ -1714,6 +1716,8 @@ export class Game {
       game.runDraftRound();
     } else if (game.phase === Phase.RESEARCH) {
       game.gotoResearchPhase();
+    } else if (game.phase === Phase.END) {
+      // There's nowhere that we need to go for end game.
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
       game.getPlayerById(game.activePlayer).takeAction(/* saveBeforeTakingAction */ false);

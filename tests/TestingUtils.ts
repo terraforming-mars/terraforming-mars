@@ -136,7 +136,7 @@ export function cast<T>(obj: any, klass: new (...args: any[]) => T): T {
   return obj;
 }
 
-export function sleep(ms: number) {
+export async function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });

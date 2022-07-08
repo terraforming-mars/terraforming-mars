@@ -20,7 +20,7 @@ describe('OffWorldCityLiving', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     // Adding a vestigial player to avoid the two starting cities.
-    const game = Game.newInstance('id', [player, TestPlayers.RED.newPlayer()], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player, TestPlayers.RED.newPlayer()], player, MOON_OPTIONS);
     card = new OffWorldCityLiving();
     moonData = MoonExpansion.moonData(game);
   });

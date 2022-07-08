@@ -17,7 +17,7 @@ describe('MarsDirect', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('id', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
     card = new MarsDirect();
   });
 

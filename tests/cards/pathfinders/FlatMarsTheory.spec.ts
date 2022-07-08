@@ -13,7 +13,7 @@ describe('FlatMarsTheory', function() {
   beforeEach(function() {
     card = new FlatMarsTheory();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('canPlay', function() {

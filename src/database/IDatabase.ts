@@ -33,8 +33,6 @@ import {SerializedGame} from '../SerializedGame';
  * Finally, `players` as a number merely represents the number of players
  * in the game. Why, I have no idea, says kberg.
  */
-export type DbLoadCallback<T> = (err: Error | undefined, game: T | undefined) => void
-
 export interface IDatabase {
 
     /**
@@ -45,9 +43,8 @@ export interface IDatabase {
     /**
      * Pulls most recent version of game
      * @param game_id the game id to load
-     * @param cb called with game if exists. If game is undefined err will be truthy.
      */
-    getGame(game_id: string, cb: (err: Error | undefined, game?: SerializedGame) => void): void;
+    getGame(game_id: string): Promise<SerializedGame>;
 
     /**
      * Finds the game id associated with the given player.
@@ -70,6 +67,10 @@ export interface IDatabase {
 
     /**
      * Return a list of all `game_id`s.
+     *
+     * When the server starts games will be loaded from first to last. The postgres implmentation
+     * speeds up loading by sorting game ids so games most recently updated are loaded first, thereby
+     * being available sooner than other games.
      */
     getGames(): Promise<Array<GameId>>;
 
@@ -88,7 +89,7 @@ export interface IDatabase {
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
-     * games. Called at a game's conclusion along with {@link cleanSaves}.
+     * games. Called at a game's conclusion along with {@link cleanGame}.
      *
      * This is not impliemented in {@link SQLite}.
      *
@@ -128,16 +129,14 @@ export interface IDatabase {
      *   than a given date range, regardless of the supplied `game_id`.
      *   Constraints for this purge vary by database.
      */
-    // TODO(kberg): rename to represent that it's closing out
-    // this game. Also consider not needing the save_id, and
-    // also to make the maintenance behavior a first-class method.
-    cleanSaves(game_id: GameId): Promise<void>;
+    // TODO(kberg): Make the extra maintenance behavior a first-class method.
+    cleanGame(game_id: GameId): Promise<void>;
 
     /**
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
      *
-     * This is currently also part of cleanSaves().
+     * This is currently also part of cleanGame().
      *
      * Behavior when the environment variable is absent is system-dependent:
      * * In PostgreSQL, it uses a default of 10 days

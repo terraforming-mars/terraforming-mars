@@ -20,7 +20,7 @@ describe('EcologyResearch', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = setCustomGameOptions({coloniesExtension: true});
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);

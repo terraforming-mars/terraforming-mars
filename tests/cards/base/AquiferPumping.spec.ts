@@ -16,7 +16,7 @@ describe('AquiferPumping', function() {
     card = new AquiferPumping();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -44,7 +44,7 @@ describe('AquiferPumping', function() {
 
   it('Cannot act if cannot afford reds tax', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -66,7 +66,7 @@ describe('AquiferPumping', function() {
 
   it('Steel does not satisfy the reds tax', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 

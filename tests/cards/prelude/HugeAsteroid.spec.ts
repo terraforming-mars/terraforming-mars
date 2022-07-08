@@ -11,7 +11,7 @@ describe('HugeAsteroid', function() {
   beforeEach(function() {
     card = new HugeAsteroid();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Can\'t play', function() {

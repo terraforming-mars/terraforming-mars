@@ -8,7 +8,7 @@ describe('BribedCommittee', function() {
     const card = new BribedCommittee();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
     card.play(player);
     expect(card.getVictoryPoints()).to.eq(-2);
     expect(player.getTerraformRating()).to.eq(22);

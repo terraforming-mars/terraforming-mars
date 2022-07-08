@@ -10,7 +10,7 @@ import {IDatabase} from '../../src/database/IDatabase';
 
 export interface ITestDatabase extends IDatabase {
   lastSaveGamePromise: Promise<void>;
-  afterEach?: () => void;
+  afterEach?: () => Promise<void>;
 }
 
 export type DatabaseTestDescriptor = {
@@ -30,9 +30,9 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       return db.initialize();
     });
 
-    afterEach(() => {
+    afterEach(async () => {
       restoreTestDatabase();
-      return db.afterEach?.();
+      await db.afterEach?.();
     });
 
     it('game is saved', async () => {
@@ -62,8 +62,8 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
       await db.cleanGame(game.id);
 
-      const allGames = await db.getGames();
-      expect(allGames).deep.eq(['game-id-1212', 'game-id-2323']);
+      const allGameIds = await db.getGames();
+      expect(allGameIds).has.members(['game-id-1212', 'game-id-2323']);
     });
 
     it('saveIds', async () => {

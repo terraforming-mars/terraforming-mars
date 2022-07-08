@@ -75,7 +75,7 @@ export class PlayerInput extends AsyncHandler {
   ): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
-      req.on('data', async (data) => {
+      req.on('data', (data) => {
         body += data.toString();
       });
       req.once('end', async () => {

@@ -223,7 +223,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
@@ -233,7 +233,7 @@ export class SQLite implements IDatabase {
     }
   }
 
-  async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {
+  restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {
     return new Promise((resolve, reject) => {
       // Retrieve last save from database
       this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {

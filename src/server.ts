@@ -14,10 +14,27 @@ import {GameHandler} from './routes/Game';
 import {Route} from './routes/Route';
 import {processRequest} from './server/requestProcessor';
 import {Metrics} from './server/metrics';
+import {getHeapStatistics, HeapInfo} from 'v8';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
 });
+
+const heapStatistics: HeapInfo = getHeapStatistics();
+const fields: Array<keyof HeapInfo> = [
+  'total_heap_size',
+  'total_heap_size_executable',
+  'total_physical_size',
+  'total_available_size',
+  'used_heap_size',
+  'heap_size_limit',
+  'malloced_memory',
+  'peak_malloced_memory'];
+
+for (const field of fields) {
+  const val = heapStatistics[field];
+  console.log(`HeapInfo.${field} = ${val.toLocaleString('EN-US')}`);
+}
 
 const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();

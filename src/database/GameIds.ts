@@ -3,6 +3,7 @@ import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {once} from 'events';
 import {EventEmitter} from 'events';
+import {Metrics} from '../server/metrics';
 
 export class GameIds extends EventEmitter {
   private loaded = false;
@@ -11,7 +12,6 @@ export class GameIds extends EventEmitter {
 
   private async getInstance(gameId: GameId) : Promise<void> {
     const game = await Database.getInstance().getGame(gameId);
-    console.log(`load game ${gameId} with ${game.spectatorId}`);
     if (this.games.get(gameId) === undefined) {
       this.games.set(gameId, undefined);
       if (game.spectatorId !== undefined) {
@@ -23,10 +23,16 @@ export class GameIds extends EventEmitter {
     }
   }
 
-  private getAllInstances(allGameIds: Array<GameId>) : Promise<void[]> {
-    return Promise.all(allGameIds.map((x) => {
-      return this.getInstance(x);
-    }));
+  private async getAllInstances(allGameIds: Array<GameId>): Promise<void> {
+    Metrics.INSTANCE.mark('game-ids-get-all-instances-started');
+    const sliceSize = 1000;
+    for (let i = 0; i < allGameIds.length; i += sliceSize) {
+      const slice = allGameIds.slice(i, i + sliceSize);
+      await Promise.all(slice.map((x) => this.getInstance(x))).then(() => {
+        console.log(`Loaded ${i} to ${i + slice.length} of ${allGameIds.length}`);
+      });
+    }
+    Metrics.INSTANCE.mark('game-ids-get-all-instances-finished');
   }
 
   public async load(): Promise<void> {

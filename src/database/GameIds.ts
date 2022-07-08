@@ -23,7 +23,7 @@ export class GameIds extends EventEmitter {
     }
   }
 
-  private async getAllInstances(allGameIds: Array<GameId>) : Promise<void[]> {
+  private getAllInstances(allGameIds: Array<GameId>) : Promise<void[]> {
     return Promise.all(allGameIds.map((x) => {
       return this.getInstance(x);
     }));

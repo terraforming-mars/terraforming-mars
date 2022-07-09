@@ -133,8 +133,9 @@ export class Localfilesystem implements IDatabase {
     return Promise.resolve();
   }
 
-  purgeUnfinishedGames(): void {
+  purgeUnfinishedGames(): Promise<void> {
     // Not implemented.
+    return Promise.resolve();
   }
 
   async restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {

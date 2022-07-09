@@ -143,7 +143,7 @@ export interface IDatabase {
      * * In Sqlite, it doesn't purge
      * * This whole method is ignored in LocalFilesystem.
      */
-    purgeUnfinishedGames(maxGameDays?: string): void;
+    purgeUnfinishedGames(maxGameDays?: string): Promise<void>;
 
     /**
      * Generate database statistics for admin purposes.

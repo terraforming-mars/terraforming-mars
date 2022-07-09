@@ -304,7 +304,7 @@ export class MoonExpansion {
           }
 
           if (include && options?.ownedBy !== undefined) {
-            include = space.player === options?.ownedBy;
+            include = space.player === options.ownedBy;
           }
 
           return include;

@@ -945,7 +945,7 @@ export class Player {
     if (extraTag !== undefined) {
       uniqueTags.add(extraTag);
     }
-    if (this.corporationCard !== undefined && !this.corporationCard?.isDisabled) {
+    if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
       this.corporationCard.tags.forEach(addTag);
     }
     for (const card of this.playedCards) {

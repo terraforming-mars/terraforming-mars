@@ -39,7 +39,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       const player = TestPlayers.BLACK.newPlayer();
       Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
-      const allGames = await db.getGames();
+      const allGames = await db.getGameIds();
       expect(allGames).deep.eq(['game-id-1212']);
     });
 
@@ -49,7 +49,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       await db.lastSaveGamePromise;
       await db.saveGame(game);
 
-      const allGames = await db.getGames();
+      const allGames = await db.getGameIds();
       expect(allGames).deep.eq(['game-id-1212']);
     });
 
@@ -62,7 +62,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
       await db.cleanGame(game.id);
 
-      const allGameIds = await db.getGames();
+      const allGameIds = await db.getGameIds();
       expect(allGameIds).has.members(['game-id-1212', 'game-id-2323']);
     });
 

@@ -58,7 +58,7 @@ export class PostgreSQL implements IDatabase {
     return res.rows[0].players;
   }
 
-  public async getGames(): Promise<Array<GameId>> {
+  public async getGameIds(): Promise<Array<GameId>> {
     // To only load incomplete games add `WHERE status=\'running\'`
     // above "GROUP BY game_id) a"
     const sql: string =

@@ -72,7 +72,7 @@ export interface IDatabase {
      * speeds up loading by sorting game ids so games most recently updated are loaded first, thereby
      * being available sooner than other games.
      */
-    getGames(): Promise<Array<GameId>>;
+    getGameIds(): Promise<Array<GameId>>;
 
     /**
      * Get the player count for a game.

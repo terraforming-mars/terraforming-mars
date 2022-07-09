@@ -44,7 +44,7 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  public async getLoadedGameIds(): Promise<Array<GameIdLedger>> {
+  public async getIds(): Promise<Array<GameIdLedger>> {
     const d = await this.idsContainer.getGames();
     const map = new MultiMap<GameId, SpectatorId | PlayerId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
@@ -52,12 +52,12 @@ export class GameLoader implements IGameLoader {
     return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 
-  public async getByGameId(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {
+  public async getByGameId(gameId: GameId, forceLoad: boolean): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
-    if (bypassCache === false && d.games.get(gameId) !== undefined) {
+    if (forceLoad === false && d.games.get(gameId) !== undefined) {
       return d.games.get(gameId);
     } else if (d.games.has(gameId)) {
-      return this.loadGameAsync(gameId, bypassCache);
+      return this.loadGame(gameId, forceLoad);
     } else {
       return undefined;
     }
@@ -66,12 +66,12 @@ export class GameLoader implements IGameLoader {
   public async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
     const gameId = d.participantIds.get(id);
-    if (gameId !== undefined && d.games.get(gameId) !== undefined) {
-      return d.games.get(gameId);
-    } else if (gameId !== undefined) {
-      return this.loadParticipant(id);
+    if (gameId === undefined) return undefined;
+    const game = d.games.get(gameId);
+    if (game !== undefined) {
+      return game;
     } else {
-      return undefined;
+      return this.loadGame(gameId, false);
     }
   }
 
@@ -85,9 +85,9 @@ export class GameLoader implements IGameLoader {
     return game;
   }
 
-  private async loadGameAsync(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {
+  private async loadGame(gameId: GameId, forceLoad: boolean): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
-    if (bypassCache === false) {
+    if (forceLoad === false) {
       const game = d.games.get(gameId);
       if (game !== undefined) {
         return game;
@@ -107,18 +107,5 @@ export class GameLoader implements IGameLoader {
       console.error('GameLoader:loadGame', e);
       return undefined;
     }
-  }
-
-  private async loadParticipant(id: PlayerId | SpectatorId): Promise<Game | undefined> {
-    const d = await this.idsContainer.getGames();
-    const gameId = d.participantIds.get(id);
-    if (gameId === undefined) {
-      return undefined;
-    }
-    const game = d.games.get(gameId);
-    if (game !== undefined) {
-      return game;
-    }
-    return this.loadGameAsync(gameId, false);
   }
 }

@@ -52,7 +52,7 @@ export class GameLoader implements IGameLoader {
     return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 
-  public async getByGameId(gameId: GameId, forceLoad: boolean): Promise<Game | undefined> {
+  public async getByGameId(gameId: GameId, forceLoad: boolean = false): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
     if (forceLoad === false && d.games.get(gameId) !== undefined) {
       return d.games.get(gameId);

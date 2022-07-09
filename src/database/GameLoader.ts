@@ -52,12 +52,12 @@ export class GameLoader implements IGameLoader {
     return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 
-  public async getByGameId(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {
+  public async getByGameId(gameId: GameId, forceLoad: boolean): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
-    if (bypassCache === false && d.games.get(gameId) !== undefined) {
+    if (forceLoad === false && d.games.get(gameId) !== undefined) {
       return d.games.get(gameId);
     } else if (d.games.has(gameId)) {
-      return this.loadGame(gameId, bypassCache);
+      return this.loadGame(gameId, forceLoad);
     } else {
       return undefined;
     }
@@ -85,9 +85,9 @@ export class GameLoader implements IGameLoader {
     return game;
   }
 
-  private async loadGame(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {
+  private async loadGame(gameId: GameId, forceLoad: boolean): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
-    if (bypassCache === false) {
+    if (forceLoad === false) {
       const game = d.games.get(gameId);
       if (game !== undefined) {
         return game;

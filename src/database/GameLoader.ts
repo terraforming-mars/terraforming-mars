@@ -71,7 +71,16 @@ export class GameLoader implements IGameLoader {
     if (game !== undefined) {
       return game;
     } else {
-      return this.loadParticipant(id);
+      const d = await this.idsContainer.getGames();
+      const gameId = d.participantIds.get(id);
+      if (gameId === undefined) {
+        return undefined;
+      }
+      const game = d.games.get(gameId);
+      if (game !== undefined) {
+        return game;
+      }
+      return this.loadGameAsync(gameId, false);
     }
   }
 
@@ -107,18 +116,5 @@ export class GameLoader implements IGameLoader {
       console.error('GameLoader:loadGame', e);
       return undefined;
     }
-  }
-
-  private async loadParticipant(id: PlayerId | SpectatorId): Promise<Game | undefined> {
-    const d = await this.idsContainer.getGames();
-    const gameId = d.participantIds.get(id);
-    if (gameId === undefined) {
-      return undefined;
-    }
-    const game = d.games.get(gameId);
-    if (game !== undefined) {
-      return game;
-    }
-    return this.loadGameAsync(gameId, false);
   }
 }

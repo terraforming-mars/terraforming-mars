@@ -49,7 +49,7 @@ export class MiningGuild extends Card implements ICorporationCard {
       return;
     }
     // Don't grant a bonus if the card is overplaced (like Ares Ocean City)
-    if (space?.tile?.covers !== undefined) {
+    if (space.tile?.covers !== undefined) {
       return;
     }
     if (space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM)) {

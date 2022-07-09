@@ -17,7 +17,7 @@ describe('ApiSpectator', function() {
 
   it('fails game not found', async () => {
     scaffolding.url = '/api/player?id=googoo';
-    await scaffolding.asyncGet(ApiSpectator.INSTANCE, res);
+    await scaffolding.get(ApiSpectator.INSTANCE, res);
     expect(res.content).eq('Not found');
   });
 
@@ -26,7 +26,7 @@ describe('ApiSpectator', function() {
     scaffolding.url = '/api/player?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player, undefined, undefined, 'spectator-id');
     await scaffolding.ctx.gameLoader.add(game);
-    await scaffolding.asyncGet(ApiSpectator.INSTANCE, res);
+    await scaffolding.get(ApiSpectator.INSTANCE, res);
     const response: PlayerViewModel = JSON.parse(res.content);
     expect(response.id).eq('spectator-id');
   });

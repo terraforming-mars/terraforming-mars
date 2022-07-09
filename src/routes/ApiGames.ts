@@ -1,9 +1,9 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 
 
-export class ApiGames extends AsyncHandler {
+export class ApiGames extends Handler {
   public static readonly INSTANCE = new ApiGames();
   private constructor() {
     super({validateServerId: true});

@@ -1,9 +1,9 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {GameLogs} from './GameLogs';
 
-export class ApiGameLogs extends AsyncHandler {
+export class ApiGameLogs extends Handler {
   public static readonly INSTANCE = new ApiGameLogs();
   private constructor(private gameLogs = new GameLogs()) {
     super();

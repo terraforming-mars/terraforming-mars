@@ -25,7 +25,7 @@ export abstract class Handler implements IHandler {
     return true;
   }
 
-  processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  async processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     if (this.validateServerId && !this.isServerIdValid(ctx)) {
       ctx.route.notAuthorized(req, res);
       return;
@@ -33,38 +33,25 @@ export abstract class Handler implements IHandler {
 
     switch (req.method) {
     case 'GET':
-      this.get(req, res, ctx);
-      break;
+      return this.get(req, res, ctx);
     case 'PUT':
-      this.put(req, res, ctx);
-      break;
+      return this.put(req, res, ctx);
     case 'POST':
-      this.post(req, res, ctx);
-      break;
+      return this.post(req, res, ctx);
+    default:
+      ctx.route.badRequest(req, res, 'Bad method');
     }
   }
 
-  get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void | Promise<void> {
-    ctx.route.notFound(req, res);
-  }
-  put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void | Promise<void> {
-    ctx.route.notFound(req, res);
-  }
-  post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void | Promise<void> {
-    ctx.route.notFound(req, res);
-  }
-}
-
-export abstract class AsyncHandler extends Handler {
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public async put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }
-  public override post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }

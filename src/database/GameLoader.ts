@@ -66,12 +66,11 @@ export class GameLoader implements IGameLoader {
   public async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
     const gameId = d.participantIds.get(id);
-    if (gameId !== undefined && d.games.get(gameId) !== undefined) {
+    if (gameId === undefined) return undefined;
+    if (d.games.get(gameId) !== undefined) {
       return d.games.get(gameId);
-    } else if (gameId !== undefined) {
-      return this.loadParticipant(id);
     } else {
-      return undefined;
+      return this.loadParticipant(id);
     }
   }
 

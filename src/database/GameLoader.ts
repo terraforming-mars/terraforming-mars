@@ -57,7 +57,7 @@ export class GameLoader implements IGameLoader {
     if (bypassCache === false && d.games.get(gameId) !== undefined) {
       return d.games.get(gameId);
     } else if (d.games.has(gameId)) {
-      return this.loadGameAsync(gameId, bypassCache);
+      return this.loadGame(gameId, bypassCache);
     } else {
       return undefined;
     }
@@ -71,7 +71,7 @@ export class GameLoader implements IGameLoader {
     if (game !== undefined) {
       return game;
     } else {
-      return this.loadGameAsync(gameId, false);
+      return this.loadGame(gameId, false);
     }
   }
 
@@ -85,7 +85,7 @@ export class GameLoader implements IGameLoader {
     return game;
   }
 
-  private async loadGameAsync(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {
+  private async loadGame(gameId: GameId, bypassCache: boolean): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
     if (bypassCache === false) {
       const game = d.games.get(gameId);

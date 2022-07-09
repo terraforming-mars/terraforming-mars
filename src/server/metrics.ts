@@ -12,6 +12,7 @@ export class Metrics {
     this.metrics[key] = value;
   }
 
+  // Marks duration of time since startup.
   public mark(key: string) {
     const nowMs = new Date().getTime();
     this.add(key, nowMs - this.startTimeMs);

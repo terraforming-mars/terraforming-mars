@@ -23,7 +23,7 @@ describe('ApiGame', () => {
 
   it('invalid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    await scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
+    await scaffolding.ctx.gameLoader.add(Game.newInstance('g-validId', [player], player));
     scaffolding.url = '/api/game?id=invalidId';
     await scaffolding.get(ApiGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
@@ -32,14 +32,14 @@ describe('ApiGame', () => {
 
   it('valid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    await scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
-    scaffolding.url = '/api/game?id=validId';
+    await scaffolding.ctx.gameLoader.add(Game.newInstance('g-validId', [player], player));
+    scaffolding.url = '/api/game?id=g-validId';
     await scaffolding.get(ApiGame.INSTANCE, res);
     // This test is probably brittle.
     expect(JSON.parse(res.content)).deep.eq(
       {
         'activePlayer': 'black',
-        'id': 'validId',
+        'id': 'g-validId',
         'lastSoloGeneration': 14,
         'phase': 'research',
         'players': [

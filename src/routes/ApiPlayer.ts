@@ -12,7 +12,7 @@ export class ApiPlayer extends Handler {
 
   public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const playerId = String(ctx.url.searchParams.get('id'));
-    const game = await ctx.gameLoader.getByParticipantId(playerId);
+    const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
       ctx.route.notFound(req, res);
       return;

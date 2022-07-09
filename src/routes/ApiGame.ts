@@ -16,7 +16,7 @@ export class ApiGame extends Handler {
       return;
     }
 
-    const game = await ctx.gameLoader.getByGameId(gameId);
+    const game = await ctx.gameLoader.getGame(gameId);
     if (game === undefined) {
       ctx.route.notFound(req, res, 'game not found');
       return;

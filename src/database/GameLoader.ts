@@ -1,6 +1,6 @@
 import {Database} from './Database';
 import {Game} from '../Game';
-import {PlayerId, GameId, SpectatorId} from '../common/Types';
+import {PlayerId, GameId, SpectatorId, isGameId} from '../common/Types';
 import {GameIdLedger, IGameLoader} from './IGameLoader';
 import {GameIds} from './GameIds';
 import {MultiMap} from 'mnemonist';
@@ -52,26 +52,16 @@ export class GameLoader implements IGameLoader {
     return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 
-  public async getByGameId(gameId: GameId, forceLoad: boolean = false): Promise<Game | undefined> {
+  public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {
     const d = await this.idsContainer.getGames();
+    const gameId = isGameId(id) ? id : d.participantIds.get(id);
+    if (gameId === undefined) return undefined;
     if (forceLoad === false && d.games.get(gameId) !== undefined) {
       return d.games.get(gameId);
     } else if (d.games.has(gameId)) {
       return this.loadGame(gameId, forceLoad);
     } else {
       return undefined;
-    }
-  }
-
-  public async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {
-    const d = await this.idsContainer.getGames();
-    const gameId = d.participantIds.get(id);
-    if (gameId === undefined) return undefined;
-    const game = d.games.get(gameId);
-    if (game !== undefined) {
-      return game;
-    } else {
-      return this.loadGame(gameId, false);
     }
   }
 

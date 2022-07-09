@@ -8,7 +8,7 @@ export class FakeGameLoader implements IGameLoader {
     this.games.set(game.id, game);
     return Promise.resolve();
   }
-  async getLoadedGameIds(): Promise<Array<GameIdLedger>> {
+  async getIds(): Promise<Array<GameIdLedger>> {
     return Array.from(this.games.keys())
       .map((id) => {
         return {id: id, participants: []};

@@ -10,7 +10,7 @@ export class ApiGames extends Handler {
   }
 
   public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
-    const list = await ctx.gameLoader.getLoadedGameIds();
+    const list = await ctx.gameLoader.getIds();
     if (list === undefined) {
       ctx.route.notFound(req, res, 'could not load game list');
       return;

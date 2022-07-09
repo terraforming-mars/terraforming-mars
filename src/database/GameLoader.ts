@@ -44,7 +44,7 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  public async getLoadedGameIds(): Promise<Array<GameIdLedger>> {
+  public async getIds(): Promise<Array<GameIdLedger>> {
     const d = await this.idsContainer.getGames();
     const map = new MultiMap<GameId, SpectatorId | PlayerId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));

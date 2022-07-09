@@ -178,7 +178,7 @@ describe('GameLoader', function() {
     instance.add(game);
     const game1 = await instance.getByParticipantId(players[Math.floor(Math.random() * players.length)]!.id);
     expect(game1).is.not.undefined;
-    const list = await instance.getLoadedGameIds();
+    const list = await instance.getIds();
     expect(list).to.deep.eq(
       [{'id': 'gameid', 'participants': ['p-blue-id', 'p-red-id']}],
     );
@@ -219,7 +219,7 @@ describe('GameLoader', function() {
     }
     database.getGameSleep = 500;
     instance.reset();
-    const list = await instance.getLoadedGameIds();
+    const list = await instance.getIds();
     expect(list?.map((e) => e.id)).to.have.members([
       'game-0', 'game-1', 'game-2', 'game-3', 'game-4',
       'game-5', 'game-6', 'game-7', 'game-8', 'game-9',

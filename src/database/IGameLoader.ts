@@ -9,7 +9,7 @@ export type GameIdLedger = {id: GameId, participants: Array<SpectatorId | Player
  */
 export interface IGameLoader {
   add(game: Game): Promise<void>;
-  getLoadedGameIds(): Promise<Array<GameIdLedger>>;
+  getIds(): Promise<Array<GameIdLedger>>;
   /**
    * Fetches a game from the GameLoader cache.
    *

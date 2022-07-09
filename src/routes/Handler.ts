@@ -25,10 +25,10 @@ export abstract class Handler implements IHandler {
     return true;
   }
 
-  async processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     if (this.validateServerId && !this.isServerIdValid(ctx)) {
       ctx.route.notAuthorized(req, res);
-      return;
+      return Promise.resolve();
     }
 
     switch (req.method) {
@@ -40,18 +40,19 @@ export abstract class Handler implements IHandler {
       return this.post(req, res, ctx);
     default:
       ctx.route.badRequest(req, res, 'Bad method');
+      return Promise.resolve();
     }
   }
 
-  public async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }
-  public async put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }
-  public async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     ctx.route.notFound(req, res);
     return Promise.resolve();
   }

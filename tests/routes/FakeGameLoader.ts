@@ -14,7 +14,7 @@ export class FakeGameLoader implements IGameLoader {
         return {id: id, participants: []};
       });
   }
-  async getByGameId(gameId: string, _bypassCache: boolean): Promise<Game | undefined> {
+  async getByGameId(gameId: string): Promise<Game | undefined> {
     return this.games.get(gameId);
   }
   async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {

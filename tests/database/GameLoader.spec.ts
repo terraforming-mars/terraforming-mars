@@ -121,7 +121,7 @@ describe('GameLoader', function() {
   });
 
   it('gets game when it exists in database', async function() {
-    const game1 = await instance.getByGameId('gameid', false);
+    const game1 = await instance.getByGameId('gameid');
     expect(game1!.id).to.eq(game.id);
   });
 
@@ -131,7 +131,7 @@ describe('GameLoader', function() {
       throw new Error('could not parse this');
     };
     try {
-      const game1 = await instance.getByGameId('gameid', false);
+      const game1 = await instance.getByGameId('gameid');
       expect(game1).is.undefined;
     } finally {
       Game.deserialize = originalDeserialize;
@@ -139,7 +139,7 @@ describe('GameLoader', function() {
   });
 
   it('gets game when requested before database loaded', async function() {
-    const game1 = instance.getByGameId('gameid', false);
+    const game1 = instance.getByGameId('gameid');
     expect(game1).is.not.undefined;
   });
 
@@ -149,10 +149,10 @@ describe('GameLoader', function() {
   });
 
   it('gets no game when game goes missing from database', async function() {
-    const game1 = await instance.getByGameId('game-never', false);
+    const game1 = await instance.getByGameId('game-never');
     expect(game1).is.undefined;
     database.data.delete('gameid');
-    const game2 = await instance.getByGameId('gameid', false);
+    const game2 = await instance.getByGameId('gameid');
     expect(game2).is.undefined;
   });
 
@@ -166,7 +166,7 @@ describe('GameLoader', function() {
     game.id = 'gameid-alpha';
     try {
       instance.add(game);
-      const game1 = await instance.getByGameId('gameid-alpha', false);
+      const game1 = await instance.getByGameId('gameid-alpha');
       expect(game1!.id).to.eq('gameid-alpha');
     } finally {
       game.id = 'gameid';
@@ -187,13 +187,13 @@ describe('GameLoader', function() {
   it('loads values after error pulling game ids', async function() {
     database.failure = 'getGames';
     instance.reset();
-    const game1 = await instance.getByGameId('gameid', false);
+    const game1 = await instance.getByGameId('gameid');
     expect(game1).is.undefined;
   });
 
   it('loads values when no game ids', async function() {
     database.data.delete('gameid');
-    const game1 = await instance.getByGameId('gameid', false);
+    const game1 = await instance.getByGameId('gameid');
     expect(game1).is.undefined;
   });
 
@@ -203,7 +203,7 @@ describe('GameLoader', function() {
   });
 
   it('loads players available later', async function() {
-    const game1 = await instance.getByGameId('gameid', false);
+    const game1 = await instance.getByGameId('gameid');
     expect(game1!.id).to.eq('gameid');
     const game2 = await GameLoader.getInstance().getByParticipantId(game.getPlayersInGenerationOrder()[0].id);
     expect(game2!.id).to.eq('gameid');

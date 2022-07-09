@@ -58,7 +58,7 @@ export class PostgreSQL implements IDatabase {
     return res.rows[0].players;
   }
 
-  public async getGames(): Promise<Array<GameId>> {
+  public async getGameIds(): Promise<Array<GameId>> {
     const sql: string =
     `SELECT games.game_id
     FROM games, (

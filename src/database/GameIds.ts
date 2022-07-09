@@ -31,7 +31,7 @@ export class GameIds extends EventEmitter {
 
   public async load(): Promise<void> {
     try {
-      const allGameIds = await Database.getInstance().getGames();
+      const allGameIds = await Database.getInstance().getGameIds();
       await this.getAllInstances(allGameIds);
     } catch (err) {
       console.error('error loading all games', err);

@@ -78,7 +78,7 @@ export class Localfilesystem implements IDatabase {
   }
 
   async getPlayerCount(gameId: GameId): Promise<number> {
-    const gameIds = await this.getGames();
+    const gameIds = await this.getGameIds();
     const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
     if (found === undefined) {
       throw new Error(`${gameId} not found`);
@@ -100,7 +100,7 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
-  getGames(): Promise<Array<GameId>> {
+  getGameIds(): Promise<Array<GameId>> {
     const gameIds: Array<GameId> = [];
 
     // TODO(kberg): use readdir since this is expected to be async anyway.

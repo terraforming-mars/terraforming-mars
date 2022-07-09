@@ -52,7 +52,7 @@ class InMemoryDatabase implements IDatabase {
     }
     return Promise.resolve(serializedGame);
   }
-  getGames(): Promise<GameId[]> {
+  getGameIds(): Promise<GameId[]> {
     if (this.failure === 'getGames') return Promise.reject(new Error('error'));
     return Promise.resolve(Array.from(this.data.keys()));
   }

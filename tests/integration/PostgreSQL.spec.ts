@@ -112,22 +112,22 @@ describeDatabaseSuite({
       const game3 = Game.newInstance('game-id-3333', [player], player);
       await db.lastSaveGamePromise;
 
-      expect(await db.getGames()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
+      expect(await db.getGameIds()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
 
       game1.save();
       await db.lastSaveGamePromise;
 
-      expect(await db.getGames()).deep.eq(['game-id-1111', 'game-id-3333', 'game-id-2222']);
+      expect(await db.getGameIds()).deep.eq(['game-id-1111', 'game-id-3333', 'game-id-2222']);
 
       game2.save();
       await db.lastSaveGamePromise;
 
-      expect(await db.getGames()).deep.eq(['game-id-2222', 'game-id-1111', 'game-id-3333']);
+      expect(await db.getGameIds()).deep.eq(['game-id-2222', 'game-id-1111', 'game-id-3333']);
 
       game3.save();
       await db.lastSaveGamePromise;
 
-      expect(await db.getGames()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
+      expect(await db.getGameIds()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
     });
 
     it('test save id count with undo', async () => {

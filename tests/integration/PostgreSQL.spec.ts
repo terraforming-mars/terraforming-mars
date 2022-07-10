@@ -1,6 +1,6 @@
 require('dotenv').config();
 import {expect} from 'chai';
-import {ITestDatabase, describeDatabaseSuite} from '../database/IDatabaseSuite';
+import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
 import {Game} from '../../src/Game';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
 import {TestPlayers} from '../TestPlayers';

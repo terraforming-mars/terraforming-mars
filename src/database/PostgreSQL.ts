@@ -74,14 +74,8 @@ export class PostgreSQL implements IDatabase {
     return res.rows.map((row) => row.game_id);
   }
 
-  public async loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
-    // Retrieve first save from database
-    const res = await this.client.query('SELECT game_id, game FROM games WHERE game_id = $1 AND save_id = 0', [game_id]);
-    if (res.rows.length === 0) {
-      throw new Error(`Game ${game_id} not found`);
-    }
-    const json = JSON.parse(res.rows[0].game);
-    return json;
+  public loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
+    return this.getGameVersion(game_id, 0);
   }
 
   public async getGame(game_id: GameId): Promise<SerializedGame> {

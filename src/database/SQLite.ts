@@ -88,6 +88,9 @@ export class SQLite implements IDatabase {
     });
   }
 
+  // TODO(kberg): Remove repetition between this and getGameVersion.
+  // this is basically getGameVersion with save ID 0.
+  // This method has more content, so that has to be reconciled.
   loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
     return new Promise((resolve, reject) => {
     // Retrieve first save from database

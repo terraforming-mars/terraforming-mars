@@ -1,4 +1,4 @@
-import {ITestDatabase, describeDatabaseSuite} from './IDatabaseSuite';
+import {ITestDatabase, describeDatabaseSuite} from './databaseSuite';
 import {Game} from '../../src/Game';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
 

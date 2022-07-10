@@ -5,6 +5,7 @@ import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {LoadGameFormModel} from '../common/models/LoadGameFormModel';
+import {GameId} from '../common/Types';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
@@ -22,7 +23,7 @@ export class LoadGame extends Handler {
         try {
           const gameReq: LoadGameFormModel = JSON.parse(body);
 
-          const game_id = gameReq.game_id;
+          const game_id = gameReq.game_id as GameId;
           // This should probably be behind some kind of verification that prevents just
           // anyone from rolling back a large number of steps.
           const rollbackCount = gameReq.rollbackCount;

@@ -11,6 +11,7 @@ import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {ServeAsset} from './ServeAsset';
 import {NewGameConfig} from '../common/game/NewGameConfig';
+import {GameId, PlayerId, SpectatorId} from '../common/Types';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 
@@ -57,15 +58,15 @@ export class GameHandler extends Handler {
       req.once('end', async () => {
         try {
           const gameReq: NewGameConfig = JSON.parse(body);
-          const gameId = this.generateRandomId('g');
-          const spectatorId = this.generateRandomId('s');
+          const gameId = this.generateRandomId('g') as GameId;
+          const spectatorId = this.generateRandomId('s') as SpectatorId;
           const players = gameReq.players.map((obj: any) => {
             return new Player(
               obj.name,
               obj.color,
               obj.beginner,
               Number(obj.handicap), // For some reason handicap is coming up a string.
-              this.generateRandomId('p'),
+              this.generateRandomId('p') as PlayerId,
             );
           });
           let firstPlayerIdx: number = 0;

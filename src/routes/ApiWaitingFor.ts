@@ -39,7 +39,10 @@ export class ApiWaitingFor extends Handler {
     const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));
 
-    const game = await ctx.gameLoader.getByParticipantId(id);
+    let game: Game | undefined;
+    if (isSpectatorId(id) || isPlayerId(id)) {
+      game = await ctx.gameLoader.getByParticipantId(id);
+    }
     if (game === undefined) {
       ctx.route.notFound(req, res, 'cannot find game for that player');
       return;

@@ -13,7 +13,7 @@ export class LocalFilesystem implements IDatabase {
   private readonly historyFolder: string;
   constructor(dbFolder: string = defaultDbFolder) {
     this.dbFolder = dbFolder;
-    this.historyFolder = path.resolve(defaultDbFolder, 'history');
+    this.historyFolder = path.resolve(dbFolder, 'history');
   }
 
   public initialize(): Promise<void> {

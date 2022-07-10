@@ -1,9 +1,9 @@
 import {GameIdLedger, IGameLoader} from '../../src/database/IGameLoader';
 import {Game} from '../../src/Game';
-import {PlayerId, SpectatorId} from '../../src/common/Types';
+import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
 
 export class FakeGameLoader implements IGameLoader {
-  private games: Map<string, Game> = new Map();
+  private games: Map<GameId, Game> = new Map();
   add(game: Game): Promise<void> {
     this.games.set(game.id, game);
     return Promise.resolve();
@@ -14,7 +14,7 @@ export class FakeGameLoader implements IGameLoader {
         return {id: id, participants: []};
       });
   }
-  async getByGameId(gameId: string): Promise<Game | undefined> {
+  async getByGameId(gameId: GameId): Promise<Game | undefined> {
     return this.games.get(gameId);
   }
   async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {

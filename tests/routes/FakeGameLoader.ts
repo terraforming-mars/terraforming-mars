@@ -3,7 +3,7 @@ import {Game} from '../../src/Game';
 import {GameId, isGameId, PlayerId, SpectatorId} from '../../src/common/Types';
 
 export class FakeGameLoader implements IGameLoader {
-  private games: Map<string, Game> = new Map();
+  private games: Map<GameId, Game> = new Map();
   add(game: Game): Promise<void> {
     this.games.set(game.id, game);
     return Promise.resolve();

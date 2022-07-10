@@ -15,8 +15,20 @@ describe('ApiPlayer', function() {
     res = new MockResponse();
   });
 
-  it('fails game not found', async () => {
+  it('no parameter', async () => {
+    scaffolding.url = '/api/player';
+    await scaffolding.get(ApiPlayer.INSTANCE, res);
+    expect(res.content).eq('Bad request: missing id parameter');
+  });
+
+  it('fails invalid player id', async () => {
     scaffolding.url = '/api/player?id=googoo';
+    await scaffolding.get(ApiPlayer.INSTANCE, res);
+    expect(res.content).eq('Bad request: invalid player id');
+  });
+
+  it('fails game not found', async () => {
+    scaffolding.url = '/api/player?id=p123';
     await scaffolding.get(ApiPlayer.INSTANCE, res);
     expect(res.content).eq('Not found');
   });

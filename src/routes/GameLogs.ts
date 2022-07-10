@@ -3,6 +3,7 @@ import * as http from 'http';
 import {IContext} from './IHandler';
 import {LogMessage} from '../common/logs/LogMessage';
 import {LogMessageType} from '../common/logs/LogMessageType';
+import {isPlayerId} from '../common/Types';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
@@ -26,11 +27,14 @@ export class GameLogs {
 
   public async handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
-    if (playerId === null) {
-      ctx.route.badRequest(req, res, 'must provide player id as the id parameter');
+    if (!playerId) {
+      ctx.route.badRequest(req, res, 'missing id parameter');
       return;
     }
-
+    if (!isPlayerId(playerId)) {
+      ctx.route.badRequest(req, res, 'invalid player id');
+      return;
+    }
     const generation = ctx.url.searchParams.get('generation');
 
     const game = await ctx.gameLoader.getGame(playerId);
@@ -49,7 +53,6 @@ export class GameLogs {
       logs = this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
     }
 
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(logs));
+    ctx.route.writeJson(res, logs);
   }
 }

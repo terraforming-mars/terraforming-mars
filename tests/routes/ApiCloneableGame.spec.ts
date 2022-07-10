@@ -3,11 +3,12 @@ import {ApiCloneableGame} from '../../src/routes/ApiCloneableGame';
 import {MockResponse} from './HttpMocks';
 import {Database} from '../../src/database/Database';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {GameId} from '../../src/common/Types';
 
 describe('ApiCloneableGame', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
-  let originalGetPlayerCount: (gameId: string) => Promise<number>;
+  let originalGetPlayerCount: (gameId: GameId) => Promise<number>;
 
   beforeEach(() => {
     scaffolding = new RouteTestScaffolding();
@@ -23,7 +24,14 @@ describe('ApiCloneableGame', () => {
     scaffolding.url = '/api/cloneablegames';
     await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(400);
-    expect(res.content).eq('Bad request: id parameter missing');
+    expect(res.content).eq('Bad request: missing id parameter');
+  });
+
+  it('invalid id', async () => {
+    scaffolding.url = '/api/cloneablegames?id=invalidId';
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
+    expect(res.statusCode).eq(400);
+    expect(res.content).eq('Bad request: invalid game id');
   });
 
   it('has error while loading', async () => {
@@ -32,7 +40,7 @@ describe('ApiCloneableGame', () => {
         reject(new Error('Segmentation fault'));
       });
     };
-    scaffolding.url = '/api/cloneablegames?id=invalidId';
+    scaffolding.url = '/api/cloneablegames?id=gameIdInvalid';
     await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found');

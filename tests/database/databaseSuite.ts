@@ -17,7 +17,10 @@ export type DatabaseTestDescriptor = {
   name: string,
   constructor: () => ITestDatabase,
   stats: any,
-  omitPurgeUnfinishedGames?: boolean,
+  omit?: {
+    purgeUnfinishedGames?: boolean,
+    cleanGame?: boolean,
+  },
   otherTests?: (dbFunction: () => ITestDatabase) => void,
 };
 
@@ -80,23 +83,25 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(allSaveIds).has.members([0, 1, 2, 3]);
     });
 
-    it('cleanGame', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-1212', [player], player);
-      await db.lastSaveGamePromise;
-      expect(game.lastSaveId).eq(1);
+    if (dtor.omit?.cleanGame !== true) {
+      it('cleanGame', async () => {
+        const player = TestPlayers.BLACK.newPlayer();
+        const game = Game.newInstance('game-id-1212', [player], player);
+        await db.lastSaveGamePromise;
+        expect(game.lastSaveId).eq(1);
 
-      await db.saveGame(game);
-      await db.saveGame(game);
-      await db.saveGame(game);
+        await db.saveGame(game);
+        await db.saveGame(game);
+        await db.saveGame(game);
 
-      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+        expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-      await db.cleanGame(game.id);
+        await db.cleanGame(game.id);
 
-      const saveIds = await db.getSaveIds(game.id);
-      expect(saveIds).has.members([0, 3]);
-    });
+        const saveIds = await db.getSaveIds(game.id);
+        expect(saveIds).has.members([0, 3]);
+      });
+    }
 
     it('gets player count', async () => {
       const player = TestPlayers.BLACK.newPlayer();
@@ -116,7 +121,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(db.getPlayerCount('g-notfound')).is.rejected;
     });
 
-    if (dtor.omitPurgeUnfinishedGames !== true) {
+    if (dtor.omit?.purgeUnfinishedGames !== true) {
       it('purgeUnfinishedGames', async () => {
         const player = TestPlayers.BLACK.newPlayer();
         const game = Game.newInstance('game-id-1212', [player], player);

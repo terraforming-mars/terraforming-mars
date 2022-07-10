@@ -6,6 +6,7 @@ import {IContext} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../common/inputs/InputResponse';
+import {isPlayerId} from '../common/Types';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -15,9 +16,13 @@ export class PlayerInput extends Handler {
 
   public override async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
-
     if (playerId === null) {
-      ctx.route.badRequest(req, res, 'must provide player id');
+      ctx.route.badRequest(req, res, 'missing id parameter');
+      return;
+    }
+
+    if (!isPlayerId(playerId)) {
+      ctx.route.badRequest(req, res, 'invalid player id');
       return;
     }
 
@@ -89,6 +94,7 @@ export class PlayerInput extends Handler {
           }
           resolve();
         } catch (e) {
+          // TODO(kberg): use standard Route API, though that changes the output.
           res.writeHead(400, {
             'Content-Type': 'application/json',
           });

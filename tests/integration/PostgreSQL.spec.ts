@@ -54,7 +54,9 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
 describeDatabaseSuite({
   name: 'PostgreSQL',
   constructor: () => new TestPostgreSQL(),
-  omitPurgeUnfinishedGames: true,
+  omit: {
+    purgeUnfinishedGames: true,
+  },
   stats: {
     'type': 'POSTGRESQL',
     'pool-total-count': 1,

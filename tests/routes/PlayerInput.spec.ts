@@ -23,7 +23,7 @@ describe('PlayerInput', function() {
 
   it('fails when id not provided', async () => {
     scaffolding.url = '/player/input';
-    await scaffolding.asyncPost(PlayerInput.INSTANCE, res);
+    await scaffolding.post(PlayerInput.INSTANCE, res);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
@@ -33,14 +33,14 @@ describe('PlayerInput', function() {
     player.beginner = true;
     const game = Game.newInstance('gameid-foo', [player], player);
     const undo = Game.newInstance('gameid-old', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.resolve(undo);
 
-    const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);
+    const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
       req.emit('end');
@@ -58,14 +58,14 @@ describe('PlayerInput', function() {
     player.beginner = true;
     const game = Game.newInstance('gameid-foo', [player], player);
     const undo = Game.newInstance('gameid-old', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.gameOptions.undoOption = true;
     player.process([['1'], ['Power Plant:SP']]);
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.reject(new Error('error'));
 
-    const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);
+    const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       scaffolding.req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
       scaffolding.req.emit('end');
@@ -81,9 +81,9 @@ describe('PlayerInput', function() {
     const player = TestPlayers.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
     const game = Game.newInstance('gameid', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
 
-    const post = scaffolding.asyncPost(PlayerInput.INSTANCE, res);
+    const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
       scaffolding.req.emit('data', '}{');
       scaffolding.req.emit('end');

@@ -3,7 +3,7 @@ import {IGameLoader} from '../database/IGameLoader';
 import {Route} from './Route';
 
 export interface IHandler {
-  processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void;
+  processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void>;
 }
 
 export interface IContext {

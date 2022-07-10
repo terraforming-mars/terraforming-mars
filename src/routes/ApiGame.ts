@@ -1,11 +1,11 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Server} from '../models/ServerModel';
 import {isGameId} from '../common/Types';
 import {Game} from '../Game';
 
-export class ApiGame extends AsyncHandler {
+export class ApiGame extends Handler {
   public static readonly INSTANCE = new ApiGame();
   private constructor() {
     super();
@@ -20,7 +20,7 @@ export class ApiGame extends AsyncHandler {
 
     let game: Game | undefined;
     if (isGameId(gameId)) {
-      game = await ctx.gameLoader.getByGameId(gameId, /* bypassCache */ false);
+      game = await ctx.gameLoader.getByGameId(gameId);
     }
     if (game === undefined) {
       ctx.route.notFound(req, res, 'game not found');

@@ -1,6 +1,6 @@
 import * as http from 'http';
 import {IContext} from '../../src/routes/IHandler';
-import {AsyncHandler, Handler} from '../../src/routes/Handler';
+import {Handler} from '../../src/routes/Handler';
 import {Route} from '../../src/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
@@ -29,18 +29,11 @@ export class RouteTestScaffolding {
     this.ctx.url = new URL('http://boo.com' + headlessUri);
   }
 
-  public get(handler: Handler, res: MockResponse) {
-    handler.get(this.req, res.hide(), this.ctx);
-  }
-  public async asyncGet(handler: AsyncHandler, res: MockResponse): Promise<void> {
+  public async get(handler: Handler, res: MockResponse): Promise<void> {
     return handler.get(this.req, res.hide(), this.ctx);
   }
 
-  public post(handler: Handler, res: MockResponse) {
-    handler.post(this.req, res.hide(), this.ctx);
-  }
-
-  public async asyncPost(handler: AsyncHandler, res: MockResponse) {
+  public async post(handler: Handler, res: MockResponse) {
     return handler.post(this.req, res.hide(), this.ctx);
   }
 }

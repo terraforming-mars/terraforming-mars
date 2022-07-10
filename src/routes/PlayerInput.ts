@@ -1,14 +1,14 @@
 import * as http from 'http';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {isPlayerId} from '../common/Types';
 
-export class PlayerInput extends AsyncHandler {
+export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
   private constructor() {
     super();
@@ -80,7 +80,7 @@ export class PlayerInput extends AsyncHandler {
   ): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
-      req.on('data', async (data) => {
+      req.on('data', (data) => {
         body += data.toString();
       });
       req.once('end', async () => {

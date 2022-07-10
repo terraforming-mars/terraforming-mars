@@ -1,10 +1,10 @@
 import {isPlayerId} from '../common/Types';
 import * as http from 'http';
 import {Server} from '../models/ServerModel';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 
-export class ApiPlayer extends AsyncHandler {
+export class ApiPlayer extends Handler {
   public static readonly INSTANCE = new ApiPlayer();
 
   private constructor() {

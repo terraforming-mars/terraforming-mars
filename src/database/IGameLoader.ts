@@ -8,14 +8,18 @@ export type GameIdLedger = {id: GameId, participants: Array<SpectatorId | Player
  * Loads games from database sequentially as needed
  */
 export interface IGameLoader {
-  add(game: Game): void;
-  getLoadedGameIds(): Promise<Array<GameIdLedger>>;
+  add(game: Game): Promise<void>;
+  getIds(): Promise<Array<GameIdLedger>>;
   /**
-   * Gets a game from javascript memory or pulls from database if needed.
+   * Fetches a game from the GameLoader cache.
+   *
    * @param {GameId} gameId the id of the game to retrieve
-   * @param {boolean} bypassCache always pull from database
+   * @param {boolean} forceLoad (default is false.) When true always load from the database,
+   * which refreshes the cache. This should never be true during an active game except when
+   * doing an adminstrative rollback. Don't even make this true for normal game undos.
+   * That's what `restoreGameAt` is for.
    */
-  getByGameId(gameId: GameId, bypassCache: boolean): Promise<Game | undefined>;
+  getByGameId(gameId: GameId, forceLoad?: boolean): Promise<Game | undefined>;
   getByParticipantId(playerId: PlayerId | SpectatorId): Promise<Game | undefined>;
   restoreGameAt(gameId: GameId, saveId: number): Promise<Game>;
 }

@@ -29,7 +29,7 @@ describe('ApiCloneableGame', () => {
 
   it('invalid id', async () => {
     scaffolding.url = '/api/cloneablegames?id=invalidId';
-    await scaffolding.asyncGet(ApiCloneableGame.INSTANCE, res);
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(400);
     expect(res.content).eq('Bad request: invalid game id');
   });
@@ -41,7 +41,7 @@ describe('ApiCloneableGame', () => {
       });
     };
     scaffolding.url = '/api/cloneablegames?id=gameIdInvalid';
-    await scaffolding.asyncGet(ApiCloneableGame.INSTANCE, res);
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found');
   });
@@ -49,7 +49,7 @@ describe('ApiCloneableGame', () => {
   it('finds game', async () => {
     Database.getInstance().getPlayerCount = (_gameId) => Promise.resolve(2);
     scaffolding.url = '/api/cloneablegames?id=g456';
-    await scaffolding.asyncGet(ApiCloneableGame.INSTANCE, res);
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(200);
     expect(res.content).eq(JSON.stringify({
       gameId: 'g456',

@@ -2,7 +2,6 @@ import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
-
 import {Pool, ClientConfig} from 'pg';
 import {daysAgoToSeconds} from './utils.ts';
 
@@ -59,34 +58,34 @@ export class PostgreSQL implements IDatabase {
     return res.rows[0].players;
   }
 
-  public async getGames(): Promise<Array<GameId>> {
-    const sql: string = 'SELECT distinct game_id FROM games';
+  public async getGameIds(): Promise<Array<GameId>> {
+    // To only load incomplete games add `WHERE status=\'running\'`
+    // above "GROUP BY game_id) a"
+    const sql: string =
+    `SELECT games.game_id
+    FROM games, (
+      SELECT max(save_id) save_id, game_id
+      FROM games
+      GROUP BY game_id) a
+    WHERE games.game_id = a.game_id
+    AND games.save_id = a.save_id
+    ORDER BY created_time DESC`;
     const res = await this.client.query(sql);
     return res.rows.map((row) => row.game_id);
   }
 
-  public async loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
-    // Retrieve first save from database
-    const res = await this.client.query('SELECT game_id, game FROM games WHERE game_id = $1 AND save_id = 0', [game_id]);
-    if (res.rows.length === 0) {
+  public loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
+    return this.getGameVersion(game_id, 0);
+  }
+
+  public async getGame(game_id: GameId): Promise<SerializedGame> {
+    // Retrieve last save from database
+    const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [game_id]);
+    if (res.rows.length === 0 || res.rows[0] === undefined) {
       throw new Error(`Game ${game_id} not found`);
     }
     const json = JSON.parse(res.rows[0].game);
     return json;
-  }
-
-  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
-    // Retrieve last save from database
-    this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [game_id], (err, res) => {
-      if (err) {
-        console.error('PostgreSQL:getGame', err);
-        return cb(err);
-      }
-      if (res.rows.length === 0 || res.rows[0] === undefined) {
-        return cb(new Error('Game not found'));
-      }
-      cb(undefined, JSON.parse(res.rows[0].game));
-    });
   }
 
   public async getGameId(id: string): Promise<GameId> {
@@ -155,7 +154,7 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  async cleanSaves(game_id: GameId): Promise<void> {
+  async cleanGame(game_id: GameId): Promise<void> {
     const maxSaveId = await this.getMaxSaveId(game_id);
     // DELETE all saves except initial and last one
     const delete1 = this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, maxSaveId]);
@@ -200,6 +199,9 @@ export class PostgreSQL implements IDatabase {
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
+      // By pre-computing the next game ID we avoid certain race conditions where
+      // saveGame is called twice in a row.
+      const nextSaveId = game.lastSaveId + 1;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, players)
@@ -208,7 +210,7 @@ export class PostgreSQL implements IDatabase {
         RETURNING (xmax = 0) AS inserted`,
         [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
 
-      game.lastSaveId++;
+      game.lastSaveId = nextSaveId;
 
       let inserted: boolean = true;
       try {

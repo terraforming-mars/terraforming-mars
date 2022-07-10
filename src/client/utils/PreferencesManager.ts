@@ -81,9 +81,9 @@ export class PreferencesManager {
     this._set(name, val);
     if (this.localStorageSupported()) {
       if (name === 'lang') {
-        localStorage?.setItem(name, this._values.lang);
+        localStorage.setItem(name, this._values.lang);
       } else {
-        localStorage?.setItem(name, val ? '1' : '0');
+        localStorage.setItem(name, val ? '1' : '0');
       }
     }
   }

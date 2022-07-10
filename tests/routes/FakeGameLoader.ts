@@ -4,16 +4,17 @@ import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
 
 export class FakeGameLoader implements IGameLoader {
   private games: Map<GameId, Game> = new Map();
-  add(game: Game): void {
+  add(game: Game): Promise<void> {
     this.games.set(game.id, game);
+    return Promise.resolve();
   }
-  async getLoadedGameIds(): Promise<Array<GameIdLedger>> {
+  async getIds(): Promise<Array<GameIdLedger>> {
     return Array.from(this.games.keys())
       .map((id) => {
         return {id: id, participants: []};
       });
   }
-  async getByGameId(gameId: GameId, _bypassCache: boolean): Promise<Game | undefined> {
+  async getByGameId(gameId: GameId): Promise<Game | undefined> {
     return this.games.get(gameId);
   }
   async getByParticipantId(id: PlayerId | SpectatorId): Promise<Game | undefined> {

@@ -17,19 +17,19 @@ describe('ApiPlayer', function() {
 
   it('no parameter', async () => {
     scaffolding.url = '/api/player';
-    await scaffolding.asyncGet(ApiPlayer.INSTANCE, res);
+    await scaffolding.get(ApiPlayer.INSTANCE, res);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
   it('fails invalid player id', async () => {
     scaffolding.url = '/api/player?id=googoo';
-    await scaffolding.asyncGet(ApiPlayer.INSTANCE, res);
+    await scaffolding.get(ApiPlayer.INSTANCE, res);
     expect(res.content).eq('Bad request: invalid player id');
   });
 
   it('fails game not found', async () => {
     scaffolding.url = '/api/player?id=p123';
-    await scaffolding.asyncGet(ApiPlayer.INSTANCE, res);
+    await scaffolding.get(ApiPlayer.INSTANCE, res);
     expect(res.content).eq('Not found');
   });
 
@@ -37,8 +37,8 @@ describe('ApiPlayer', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/player?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
-    await scaffolding.asyncGet(ApiPlayer.INSTANCE, res);
+    await scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.get(ApiPlayer.INSTANCE, res);
     const response: PlayerViewModel = JSON.parse(res.content);
     expect(response.id).eq(player.id);
   });

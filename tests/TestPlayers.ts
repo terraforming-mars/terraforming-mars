@@ -3,8 +3,8 @@ import {TestPlayer} from './TestPlayer';
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
-  newPlayer(): TestPlayer {
-    return new TestPlayer(this.color);
+  newPlayer(beginner: boolean = false): TestPlayer {
+    return new TestPlayer(this.color, beginner);
   }
 }
 

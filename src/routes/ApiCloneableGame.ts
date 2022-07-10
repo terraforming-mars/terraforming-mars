@@ -1,10 +1,10 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
 import {isGameId} from '../common/Types';
 
-export class ApiCloneableGame extends AsyncHandler {
+export class ApiCloneableGame extends Handler {
   public static readonly INSTANCE = new ApiCloneableGame();
   private constructor() {
     super();

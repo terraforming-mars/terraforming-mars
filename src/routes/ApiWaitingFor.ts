@@ -1,5 +1,5 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Phase} from '../common/Phase';
 import {Player} from '../Player';
@@ -7,7 +7,7 @@ import {WaitingForModel} from '../common/models/WaitingForModel';
 import {Game} from '../Game';
 import {isPlayerId, isSpectatorId} from '../common/Types';
 
-export class ApiWaitingFor extends AsyncHandler {
+export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();
   private constructor() {
     super();

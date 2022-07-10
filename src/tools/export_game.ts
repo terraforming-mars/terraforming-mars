@@ -3,7 +3,7 @@
 
 import {GameId, isGameId, isPlayerId, isSpectatorId} from '../common/Types';
 import {Database} from '../database/Database';
-import {Localfilesystem} from '../database/LocalFilesystem';
+import {LocalFilesystem} from '../database/LocalFilesystem';
 
 const args = process.argv.slice(2);
 const id = args[0];
@@ -16,7 +16,7 @@ if (process.env.LOCAL_FS_DB !== undefined) {
 }
 
 const db = Database.getInstance();
-const localDb = new Localfilesystem();
+const localDb = new LocalFilesystem();
 
 async function main() {
   if (isPlayerId(id) || isSpectatorId(id)) {

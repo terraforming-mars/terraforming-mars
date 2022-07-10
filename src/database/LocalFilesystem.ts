@@ -9,7 +9,7 @@ const fs = require('fs');
 const dbFolder = path.resolve(process.cwd(), './db/files');
 const historyFolder = path.resolve(dbFolder, 'history');
 
-export class Localfilesystem implements IDatabase {
+export class LocalFilesystem implements IDatabase {
   constructor() {
     console.log(`Starting local database at ${dbFolder}`);
     if (!fs.existsSync(dbFolder)) {

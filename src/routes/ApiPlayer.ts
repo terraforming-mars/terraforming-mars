@@ -21,7 +21,7 @@ export class ApiPlayer extends Handler {
       ctx.route.badRequest(req, res, 'invalid player id');
       return;
     }
-    const game = await ctx.gameLoader.getByParticipantId(playerId);
+    const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
       ctx.route.notFound(req, res);
       return;

@@ -20,7 +20,7 @@ export class ApiGame extends Handler {
 
     let game: Game | undefined;
     if (isGameId(gameId)) {
-      game = await ctx.gameLoader.getByGameId(gameId);
+      game = await ctx.gameLoader.getGame(gameId);
     }
     if (game === undefined) {
       ctx.route.notFound(req, res, 'game not found');

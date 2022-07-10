@@ -116,12 +116,12 @@ describe('GameLoader', function() {
   });
 
   it('gets undefined when player does not exist', async function() {
-    const game = await instance.getByParticipantId('player-doesnotexist');
+    const game = await instance.getGame('player-doesnotexist');
     expect(game).is.undefined;
   });
 
   it('gets game when it exists in database', async function() {
-    const game1 = await instance.getByGameId('gameid');
+    const game1 = await instance.getGame('gameid');
     expect(game1!.id).to.eq(game.id);
   });
 
@@ -131,7 +131,7 @@ describe('GameLoader', function() {
       throw new Error('could not parse this');
     };
     try {
-      const game1 = await instance.getByGameId('gameid');
+      const game1 = await instance.getGame('gameid');
       expect(game1).is.undefined;
     } finally {
       Game.deserialize = originalDeserialize;
@@ -139,26 +139,26 @@ describe('GameLoader', function() {
   });
 
   it('gets game when requested before database loaded', async function() {
-    const game1 = instance.getByGameId('gameid');
+    const game1 = instance.getGame('gameid');
     expect(game1).is.not.undefined;
   });
 
   it('gets player when requested before database loaded', async function() {
-    const game1 = await instance.getByParticipantId(game.getPlayersInGenerationOrder()[0].id);
+    const game1 = await instance.getGame(game.getPlayersInGenerationOrder()[0].id);
     expect(game1).is.not.undefined;
   });
 
   it('gets no game when game goes missing from database', async function() {
-    const game1 = await instance.getByGameId('game-never');
+    const game1 = await instance.getGame('game-never');
     expect(game1).is.undefined;
     database.data.delete('gameid');
-    const game2 = await instance.getByGameId('gameid');
+    const game2 = await instance.getGame('gameid');
     expect(game2).is.undefined;
   });
 
   it('gets player when it exists in database', async function() {
     const players = game.getPlayersInGenerationOrder();
-    const game1 = await instance.getByParticipantId(players[Math.floor(Math.random() * players.length)].id);
+    const game1 = await instance.getGame(players[Math.floor(Math.random() * players.length)].id);
     expect(game1!.id).to.eq(game.id);
   });
 
@@ -166,7 +166,7 @@ describe('GameLoader', function() {
     game.id = 'gameid-alpha';
     try {
       instance.add(game);
-      const game1 = await instance.getByGameId('gameid-alpha');
+      const game1 = await instance.getGame('gameid-alpha');
       expect(game1!.id).to.eq('gameid-alpha');
     } finally {
       game.id = 'gameid';
@@ -176,7 +176,7 @@ describe('GameLoader', function() {
   it('gets player when added and not in database', async function() {
     const players = game.getPlayersInGenerationOrder();
     instance.add(game);
-    const game1 = await instance.getByParticipantId(players[Math.floor(Math.random() * players.length)]!.id);
+    const game1 = await instance.getGame(players[Math.floor(Math.random() * players.length)]!.id);
     expect(game1).is.not.undefined;
     const list = await instance.getIds();
     expect(list).to.deep.eq(
@@ -187,25 +187,25 @@ describe('GameLoader', function() {
   it('loads values after error pulling game ids', async function() {
     database.failure = 'getGames';
     instance.reset();
-    const game1 = await instance.getByGameId('gameid');
+    const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
   });
 
   it('loads values when no game ids', async function() {
     database.data.delete('gameid');
-    const game1 = await instance.getByGameId('gameid');
+    const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
   });
 
   it('loads players that will never exist', async function() {
-    const game1 = await instance.getByParticipantId('p-non-existent-id');
+    const game1 = await instance.getGame('p-non-existent-id');
     expect(game1).is.undefined;
   });
 
   it('loads players available later', async function() {
-    const game1 = await instance.getByGameId('gameid');
+    const game1 = await instance.getGame('gameid');
     expect(game1!.id).to.eq('gameid');
-    const game2 = await GameLoader.getInstance().getByParticipantId(game.getPlayersInGenerationOrder()[0].id);
+    const game2 = await GameLoader.getInstance().getGame(game.getPlayersInGenerationOrder()[0].id);
     expect(game2!.id).to.eq('gameid');
   });
 

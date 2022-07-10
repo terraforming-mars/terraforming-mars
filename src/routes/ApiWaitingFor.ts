@@ -41,7 +41,7 @@ export class ApiWaitingFor extends Handler {
 
     let game: Game | undefined;
     if (isSpectatorId(id) || isPlayerId(id)) {
-      game = await ctx.gameLoader.getByParticipantId(id);
+      game = await ctx.gameLoader.getGame(id);
     }
     if (game === undefined) {
       ctx.route.notFound(req, res, 'cannot find game for that player');

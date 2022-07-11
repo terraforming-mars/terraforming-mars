@@ -19,6 +19,5 @@ export class ApiMetrics extends Handler {
       console.error(err);
       ctx.route.badRequest(req, res, 'could not load metrics');
     }
-    return Promise.resolve();
   }
 }

@@ -1,4 +1,4 @@
-import {IDatabase} from './IDatabase';
+import {GameIdLedger, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId, isGameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
@@ -157,5 +157,13 @@ export class LocalFilesystem implements IDatabase {
       path: this.dbFolder.toString(),
       history_path: this.historyFolder.toString(),
     });
+  }
+
+  public storeParticipants(_entry: GameIdLedger): Promise<void> {
+    throw new Error('Not implemented');
+  }
+
+  public getParticipants(): Promise<Array<GameIdLedger>> {
+    throw new Error('Not implemented');
   }
 }

@@ -44,6 +44,7 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   public async afterEach() {
     await this.client.query('DROP TABLE games');
     await this.client.query('DROP TABLE game_results');
+    await this.client.query('DROP TABLE game_ids');
   }
 
   public getStatistics() {

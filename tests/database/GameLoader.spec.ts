@@ -5,7 +5,7 @@ import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
 import {TestPlayers} from '../TestPlayers';
 import {Color} from '../../src/common/Color';
-import {IDatabase} from '../../src/database/IDatabase';
+import {GameIdLedger, IDatabase} from '../../src/database/IDatabase';
 import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {sleep} from '../TestingUtils';
@@ -13,7 +13,7 @@ import {sleep} from '../TestingUtils';
 class InMemoryDatabase implements IDatabase {
   public data: Map<GameId, Array<SerializedGame>> = new Map();
 
-  public failure: 'getGames' | undefined = undefined;
+  public failure: 'getGameIds' | 'getParticipants' | undefined = undefined;
   public getGameSleep: number = 0;
 
   initialize(): Promise<unknown> {
@@ -53,7 +53,7 @@ class InMemoryDatabase implements IDatabase {
     return Promise.resolve(serializedGame);
   }
   getGameIds(): Promise<GameId[]> {
-    if (this.failure === 'getGames') return Promise.reject(new Error('error'));
+    if (this.failure === 'getGameIds') return Promise.reject(new Error('error'));
     return Promise.resolve(Array.from(this.data.keys()));
   }
   getPlayerCount(_game_id: string): Promise<number> {
@@ -66,7 +66,7 @@ class InMemoryDatabase implements IDatabase {
     while (row.length < game.lastSaveId) {
       row.push();
     }
-    row[game.lastSaveId + 1] = game.serialize();
+    row[game.lastSaveId] = game.serialize();
     game.lastSaveId++;
     return Promise.resolve();
   }
@@ -90,6 +90,21 @@ class InMemoryDatabase implements IDatabase {
   }
   stats(): Promise<{[ key: string ]: string | number;}> {
     throw new Error('Method not implemented.');
+  }
+  storeParticipants() {
+    return Promise.resolve();
+  }
+  async getParticipants(): Promise<Array<GameIdLedger>> {
+    if (this.failure === 'getParticipants') return Promise.reject(new Error('error'));
+
+    const entries: Array<GameIdLedger> = [];
+    this.data.forEach((games, gameId) => {
+      const firstSave = games[0];
+      const participants: Array<PlayerId | SpectatorId> = firstSave.players.map((p) => p.id);
+      if (firstSave.spectatorId) participants.push(firstSave.spectatorId);
+      entries.push({gameId, participants});
+    });
+    return entries;
   }
 }
 
@@ -180,12 +195,13 @@ describe('GameLoader', function() {
     expect(game1).is.not.undefined;
     const list = await instance.getIds();
     expect(list).to.deep.eq(
-      [{'id': 'gameid', 'participants': ['p-blue-id', 'p-red-id']}],
+      [{'gameId': 'gameid', 'participants': ['p-blue-id', 'p-red-id']}],
     );
   });
 
   it('loads values after error pulling game ids', async function() {
-    database.failure = 'getGames';
+    // database.failure = 'getParticipants';
+    database.failure = 'getGameIds';
     instance.reset();
     const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
@@ -220,7 +236,7 @@ describe('GameLoader', function() {
     database.getGameSleep = 500;
     instance.reset();
     const list = await instance.getIds();
-    expect(list?.map((e) => e.id)).to.have.members([
+    expect(list?.map((e) => e.gameId)).to.have.members([
       'game-0', 'game-1', 'game-2', 'game-3', 'game-4',
       'game-5', 'game-6', 'game-7', 'game-8', 'game-9',
     ]);

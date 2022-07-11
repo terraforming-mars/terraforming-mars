@@ -2,6 +2,8 @@ import {Game, GameOptions, Score} from '../Game';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
+export type GameIdLedger = {gameId: GameId, participants: Array<PlayerId | SpectatorId>}
+
 /**
  * A game store. Load, save, you know the drill.
  *
@@ -32,7 +34,7 @@ import {SerializedGame} from '../SerializedGame';
  *
  * Finally, `players` as a number merely represents the number of players
  * in the game. Why, I have no idea, says kberg.
- */
+*/
 export interface IDatabase {
 
     /**
@@ -151,4 +153,7 @@ export interface IDatabase {
      * Key/value responses will vary between databases.
      */
     stats(): Promise<{[key: string]: string | number}>;
+
+    storeParticipants(entry: GameIdLedger): Promise<void>;
+    getParticipants(): Promise<Array<GameIdLedger>>;
 }

@@ -1,4 +1,4 @@
-import {IDatabase} from './IDatabase';
+import {GameIdLedger, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
@@ -280,6 +280,14 @@ export class SQLite implements IDatabase {
       path: this.filename,
       size_bytes: size,
     });
+  }
+
+  public storeParticipants(_entry: GameIdLedger): Promise<void> {
+    throw new Error('Not implemented');
+  }
+
+  public getParticipants(): Promise<Array<GameIdLedger>> {
+    throw new Error('Not implemented');
   }
 
   // Run the given SQL but do not return errors.

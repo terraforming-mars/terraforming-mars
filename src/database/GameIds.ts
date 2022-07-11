@@ -35,10 +35,23 @@ export class GameIds extends EventEmitter {
     Metrics.INSTANCE.mark('game-ids-get-all-instances-finished');
   }
 
-  public async load(): Promise<void> {
+  public async load(oldLoad: boolean = true): Promise<void> {
     try {
-      const allGameIds = await Database.getInstance().getGameIds();
-      await this.getAllInstances(allGameIds);
+      if (oldLoad) {
+        const allGameIds = await Database.getInstance().getGameIds();
+        await this.getAllInstances(allGameIds);
+      } else {
+        console.log('Preloading IDs.');
+        const entries = await Database.getInstance().getParticipants();
+        for (const entry of entries) {
+          const gameId = entry.gameId;
+          if (this.games.get(gameId) === undefined) {
+            this.games.set(gameId, undefined);
+            entry.participants.forEach((participant) => this.participantIds.set(participant, gameId));
+          }
+        }
+        console.log('Done preloading IDs.');
+      }
     } catch (err) {
       console.error('error loading all games', err);
     }

@@ -1,10 +1,17 @@
+import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId, isGameId} from '../common/Types';
 import {GameIdLedger, IGameLoader} from './IGameLoader';
 import {GameIds} from './GameIds';
 import {MultiMap} from 'mnemonist';
-import {Metrics} from '../server/metrics';
+import {timeAsync} from '../utils/timer';
+
+const initialize = new prometheus.Gauge({
+  name: 'gameloader_initialize',
+  help: 'Time to load all games',
+  registers: [prometheus.register],
+});
 
 /**
  * Loads games from javascript memory or database
@@ -16,9 +23,10 @@ export class GameLoader implements IGameLoader {
   private idsContainer = new GameIds();
 
   private constructor() {
-    Metrics.INSTANCE.time('gameloader-initialize', () => {
-      this.idsContainer.load();
-    });
+    timeAsync(this.idsContainer.load())
+      .then((v) => {
+        initialize.set(v.duration);
+      });
   }
 
   public reset(): void {

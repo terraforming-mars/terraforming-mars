@@ -43,11 +43,13 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async initialize(): Promise<void> {
-    await this.client.query('CREATE TABLE IF NOT EXISTS game_ids(game_id varchar, ids varchar[], PRIMARY KEY (game_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
+    await this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)');
+    await this.client.query('CREATE INDEX IF NOT EXISTS participants_idx_ids on participants USING GIN (participants)');
   }
 
   public async getPlayerCount(game_id: GameId): Promise<number> {
@@ -92,8 +94,7 @@ export class PostgreSQL implements IDatabase {
 
   public async getGameId(id: string): Promise<GameId> {
     try {
-      // TODO(kberg): Add a Postgres GIN index on ids.
-      const res = await this.client.query('select game_id from game_ids where $1 in ids', [id]);
+      const res = await this.client.query('select game_id from participants where $1 in ids', [id]);
       if (res.rowCount === 0) {
         throw new Error(`Game for player id ${id} not found`);
       }
@@ -161,8 +162,8 @@ export class PostgreSQL implements IDatabase {
       const gameIds = selectResult.rows.map((row) => row.game_id);
       const deleteResult = await this.client.query('DELETE FROM games WHERE game_id in ANY($1)', [gameIds]);
       console.log(`Purged ${deleteResult.rowCount} rows from games`);
-      const idsResult = await this.client.query('DELETE FROM game_ids WHERE game_id in ANY($1)', [gameIds]);
-      console.log(`Purged ${idsResult.rowCount} rows from game_ids`);
+      const idsResult = await this.client.query('DELETE FROM participants WHERE game_id in ANY($1)', [gameIds]);
+      console.log(`Purged ${idsResult.rowCount} rows from participants`);
     }
   }
 
@@ -255,13 +256,13 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {
-    await this.client.query('INSERT INTO game_ids (game_id, ids) VALUES($1, $2)', [entry.gameId, entry.participants]);
+    await this.client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2)', [entry.gameId, entry.participants]);
   }
 
   public async getParticipants(): Promise<Array<{gameId: GameId, participants: Array<PlayerId | SpectatorId>}>> {
-    const res = await this.client.query('select game_id, ids from game_ids');
+    const res = await this.client.query('select game_id, participants from participants');
     return res.rows.map((row) => {
-      return {gameId: row.game_id as GameId, participants: row.ids as Array<PlayerId | SpectatorId>};
+      return {gameId: row.game_id as GameId, participants: row.participants as Array<PlayerId | SpectatorId>};
     });
   }
 

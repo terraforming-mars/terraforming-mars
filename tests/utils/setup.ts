@@ -12,14 +12,15 @@ const FAKE_DATABASE: IDatabase = {
   getGameIds: () => Promise.resolve([]),
   getSaveIds: () => Promise.resolve([]),
   initialize: () => Promise.resolve(),
-  restoreGame: () => {
-    throw new Error('game not found');
-  },
+  restoreGame: () => Promise.reject(new Error('game not found')),
   loadCloneableGame: () => Promise.resolve({} as SerializedGame),
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
   purgeUnfinishedGames: () => Promise.resolve(),
   stats: () => Promise.resolve({}),
+
+  storeParticipants: () => Promise.resolve(),
+  getParticipants: () => Promise.reject(new Error('Not used')),
 };
 
 let databaseUnderTest: IDatabase = FAKE_DATABASE;

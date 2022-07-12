@@ -2,7 +2,8 @@ import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId, isGameId} from '../common/Types';
-import {GameIdLedger, IGameLoader} from './IGameLoader';
+import {IGameLoader} from './IGameLoader';
+import {GameIdLedger} from './IDatabase';
 import {GameIds} from './GameIds';
 import {MultiMap} from 'mnemonist';
 import {timeAsync} from '../utils/timer';
@@ -57,7 +58,7 @@ export class GameLoader implements IGameLoader {
     const map = new MultiMap<GameId, SpectatorId | PlayerId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
     const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
-    return arry.map(([id, participants]) => ({id: id, participants: participants}));
+    return arry.map(([gameId, participantIds]) => ({gameId, participantIds}));
   }
 
   public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {

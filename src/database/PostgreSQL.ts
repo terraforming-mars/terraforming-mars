@@ -1,9 +1,10 @@
 import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
-import {GameId} from '../common/Types';
+import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Pool, ClientConfig} from 'pg';
 import {daysAgoToSeconds} from './utils.ts';
+import {GameIdLedger} from './IDatabase';
 
 export class PostgreSQL implements IDatabase {
   protected client: Pool;
@@ -43,9 +44,12 @@ export class PostgreSQL implements IDatabase {
 
   public async initialize(): Promise<void> {
     await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
+    await this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
     await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
     await this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)');
+    await this.client.query('CREATE INDEX IF NOT EXISTS participants_idx_ids on participants USING GIN (participants)');
   }
 
   public async getPlayerCount(game_id: GameId): Promise<number> {
@@ -89,23 +93,8 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async getGameId(id: string): Promise<GameId> {
-    let sql = undefined;
-    if (id.charAt(0) === 'p') {
-      sql =
-        `SELECT game_id
-          FROM games, json_array_elements(CAST(game AS JSON)->'players') AS e
-          WHERE save_id = 0 AND e->>'id' = $1`;
-    } else if (id.charAt(0) === 's') {
-      sql =
-        `SELECT game_id
-        FROM games
-        WHERE save_id = 0 AND CAST(game AS JSON)->>'spectatorId' = $1`;
-    } else {
-      throw new Error(`id ${id} is neither a player id nor spectator id`);
-    }
-
     try {
-      const res = await this.client.query(sql, [id]);
+      const res = await this.client.query('select game_id from participants where $1 in ids', [id]);
       if (res.rowCount === 0) {
         throw new Error(`Game for player id ${id} not found`);
       }
@@ -172,7 +161,9 @@ export class PostgreSQL implements IDatabase {
       const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < $1', [dateToSeconds]);
       const gameIds = selectResult.rows.map((row) => row.game_id);
       const deleteResult = await this.client.query('DELETE FROM games WHERE game_id in ANY($1)', [gameIds]);
-      console.log(`Purged ${deleteResult.rowCount} rows`);
+      console.log(`Purged ${deleteResult.rowCount} rows from games`);
+      const idsResult = await this.client.query('DELETE FROM participants WHERE game_id in ANY($1)', [gameIds]);
+      console.log(`Purged ${idsResult.rowCount} rows from participants`);
     }
   }
 
@@ -199,9 +190,8 @@ export class PostgreSQL implements IDatabase {
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
-      // By pre-computing the next game ID we avoid certain race conditions where
-      // saveGame is called twice in a row.
-      const nextSaveId = game.lastSaveId + 1;
+      // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
+      const thisSaveId = game.lastSaveId;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, players)
@@ -210,7 +200,7 @@ export class PostgreSQL implements IDatabase {
         RETURNING (xmax = 0) AS inserted`,
         [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
 
-      game.lastSaveId = nextSaveId;
+      game.lastSaveId = thisSaveId + 1;
 
       let inserted: boolean = true;
       try {
@@ -224,6 +214,15 @@ export class PostgreSQL implements IDatabase {
         } else {
           this.statistics.saveConflictNormalCount++;
         }
+      }
+
+      // Save IDs on the very first save for this game. That's when the incoming saveId is 0, and also
+      // when the database operation was an insert. (We should figure out why multiple saves occur and
+      // try to stop them. But that's for another day.)
+      if (inserted === true && thisSaveId === 0) {
+        const participantIds: Array<PlayerId | SpectatorId> = game.getPlayers().map((p) => p.id);
+        if (game.spectatorId) participantIds.push(game.spectatorId);
+        await this.storeParticipants({gameId: game.id, participantIds: participantIds});
       }
 
       if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
@@ -254,6 +253,17 @@ export class PostgreSQL implements IDatabase {
             });
         });
       });
+  }
+
+  public async storeParticipants(entry: GameIdLedger): Promise<void> {
+    await this.client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2)', [entry.gameId, entry.participantIds]);
+  }
+
+  public async getParticipants(): Promise<Array<{gameId: GameId, participantIds: Array<PlayerId | SpectatorId>}>> {
+    const res = await this.client.query('select game_id, participants from participants');
+    return res.rows.map((row) => {
+      return {gameId: row.game_id as GameId, participantIds: row.participants as Array<PlayerId | SpectatorId>};
+    });
   }
 
   public async stats(): Promise<{[key: string]: string | number}> {

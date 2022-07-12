@@ -1,7 +1,6 @@
 import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
-
-export type GameIdLedger = {id: GameId, participants: Array<SpectatorId | PlayerId>};
+import {GameIdLedger} from './IDatabase';
 
 /**
  * Loads games from javascript memory or database

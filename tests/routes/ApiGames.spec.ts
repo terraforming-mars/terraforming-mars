@@ -34,6 +34,6 @@ describe('ApiGames', function() {
     await ApiGames.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
     // Player ids aren't exactly available in the fake game loader.
     // A base class shared between GameLoader and FakeGameLoader would fix that.
-    expect(res.content).eq('[{"id":"game-id","participants":[]}]');
+    expect(res.content).eq('[{"gameId":"game-id","participantIds":[]}]');
   });
 });

@@ -7,6 +7,7 @@ import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {IDatabase} from '../../src/database/IDatabase';
+import {newTestGame} from '../TestGame';
 
 export interface ITestDatabase extends IDatabase {
   lastSaveGamePromise: Promise<void>;
@@ -183,6 +184,40 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       const serialized = await db.loadCloneableGame('game-id-123');
 
       expect(game.id).eq(serialized.id);
+    });
+
+    it('participantIds', async () => {
+      expect(await db.getParticipants()).is.empty;
+      newTestGame(2, {}, '1');
+      await db.lastSaveGamePromise;
+      expect(await db.getParticipants()).deep.eq([
+        {
+          'gameId': 'game-id1',
+          'participantIds': [
+            'p-blue-id1',
+            'p-red-id1',
+          ],
+        },
+      ]);
+      newTestGame(3, {}, '2');
+      await db.lastSaveGamePromise;
+      expect(await db.getParticipants()).deep.eq([
+        {
+          'gameId': 'game-id1',
+          'participantIds': [
+            'p-blue-id1',
+            'p-red-id1',
+          ],
+        },
+        {
+          'gameId': 'game-id2',
+          'participantIds': [
+            'p-blue-id2',
+            'p-red-id2',
+            'p-yellow-id2',
+          ],
+        },
+      ]);
     });
 
     it('stats', async () => {

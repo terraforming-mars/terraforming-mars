@@ -8,33 +8,17 @@ import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
 import * as raw_settings from './genfiles/settings.json';
+import * as prometheus from 'prom-client';
 
 import {Database} from './database/Database';
 import {GameHandler} from './routes/Game';
 import {Route} from './routes/Route';
 import {processRequest} from './server/requestProcessor';
-import {Metrics} from './server/metrics';
-import {getHeapStatistics, HeapInfo} from 'v8';
+import {timeAsync} from './utils/timer';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
 });
-
-const heapStatistics: HeapInfo = getHeapStatistics();
-const fields: Array<keyof HeapInfo> = [
-  'total_heap_size',
-  'total_heap_size_executable',
-  'total_physical_size',
-  'total_available_size',
-  'used_heap_size',
-  'heap_size_limit',
-  'malloced_memory',
-  'peak_malloced_memory'];
-
-for (const field of fields) {
-  const val = heapStatistics[field];
-  console.log(`HeapInfo.${field} = ${val.toLocaleString('EN-US')}`);
-}
 
 const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();
@@ -47,6 +31,19 @@ function requestHandler(req: http.IncomingMessage, res: http.ServerResponse): vo
   }
 }
 
+const metrics = {
+  startServer: new prometheus.Gauge({
+    name: 'server_start_server',
+    help: 'Time to initialize the server',
+    registers: [prometheus.register],
+  }),
+  startDatabase: new prometheus.Gauge({
+    name: 'server_start_database',
+    help: 'Time to initialize the database',
+    registers: [prometheus.register],
+  }),
+
+};
 
 function createServer(): http.Server | https.Server {
 // If they've set up https
@@ -74,17 +71,18 @@ function createServer(): http.Server | https.Server {
   }
 }
 
-let server: http.Server | https.Server;
 async function start() {
-  const metrics = Metrics.INSTANCE;
+  prometheus.register.setDefaultLabels({
+    app: 'terraforming-mars-app',
+  });
+  prometheus.collectDefaultMetrics();
 
-  server = createServer();
+  const server = createServer();
 
-  metrics.mark('startup-initialzeServer');
-
-  await Database.getInstance().initialize();
-
-  metrics.mark('startup-initialzeDatabase');
+  await timeAsync(Database.getInstance().initialize())
+    .then((v) => {
+      metrics.startDatabase.set(v.duration);
+    });
 
   try {
     const stats = await Database.getInstance().stats();
@@ -110,8 +108,6 @@ async function start() {
     '* Overview of existing games: /games-overview?serverId=' + serverId,
   );
   console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
-
-  metrics.mark('startup-ready');
 }
 
 try {

@@ -3,7 +3,18 @@ import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {once} from 'events';
 import {EventEmitter} from 'events';
-import {Metrics} from '../server/metrics';
+import * as prometheus from 'prom-client';
+
+const start = new prometheus.Gauge({
+  name: 'game_ids_get_all_instances_started',
+  help: 'Time getAllInstances started',
+  registers: [prometheus.register],
+});
+const end = new prometheus.Gauge({
+  name: 'game_ids_get_all_instances_finished',
+  help: 'Time getAllInstances finished',
+  registers: [prometheus.register],
+});
 
 export class GameIds extends EventEmitter {
   private loaded = false;
@@ -33,7 +44,8 @@ export class GameIds extends EventEmitter {
   }
 
   private async getAllInstances(allGameIds: Array<GameId>): Promise<void> {
-    Metrics.INSTANCE.mark('game-ids-get-all-instances-started');
+    start.set(Date.now());
+
     const sliceSize = 1000;
     for (let i = 0; i < allGameIds.length; i += sliceSize) {
       const slice = allGameIds.slice(i, i + sliceSize);
@@ -41,7 +53,7 @@ export class GameIds extends EventEmitter {
         console.log(`Loaded ${i} to ${i + slice.length} of ${allGameIds.length}`);
       });
     }
-    Metrics.INSTANCE.mark('game-ids-get-all-instances-finished');
+    end.set(Date.now());
   }
 
   public async load(): Promise<void> {

@@ -12,7 +12,7 @@ export class FakeGameLoader implements IGameLoader {
   async getIds(): Promise<Array<GameIdLedger>> {
     return Array.from(this.games.keys())
       .map((gameId) => {
-        return {gameId: gameId, participants: []};
+        return {gameId: gameId, participantIds: []};
       });
   }
   public getGame(id: GameId | PlayerId | SpectatorId): Promise<Game | undefined> {

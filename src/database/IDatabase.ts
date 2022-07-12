@@ -2,7 +2,7 @@ import {Game, GameOptions, Score} from '../Game';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
-export type GameIdLedger = {gameId: GameId, participants: Array<PlayerId | SpectatorId>}
+export type GameIdLedger = {gameId: GameId, participantIds: Array<PlayerId | SpectatorId>}
 
 /**
  * A game store. Load, save, you know the drill.

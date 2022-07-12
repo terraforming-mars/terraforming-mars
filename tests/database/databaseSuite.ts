@@ -186,14 +186,14 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(game.id).eq(serialized.id);
     });
 
-    it('participants', async () => {
+    it('participantIds', async () => {
       expect(await db.getParticipants()).is.empty;
       newTestGame(2, {}, '1');
       await db.lastSaveGamePromise;
       expect(await db.getParticipants()).deep.eq([
         {
           'gameId': 'game-id1',
-          'participants': [
+          'participantIds': [
             'p-blue-id1',
             'p-red-id1',
           ],
@@ -204,14 +204,14 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(await db.getParticipants()).deep.eq([
         {
           'gameId': 'game-id1',
-          'participants': [
+          'participantIds': [
             'p-blue-id1',
             'p-red-id1',
           ],
         },
         {
           'gameId': 'game-id2',
-          'participants': [
+          'participantIds': [
             'p-blue-id2',
             'p-red-id2',
             'p-yellow-id2',

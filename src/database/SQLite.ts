@@ -250,10 +250,10 @@ export class SQLite implements IDatabase {
     // when the database operation was an insert. (We should figure out why multiple saves occur and
     // try to stop them. But that's for another day.)
     if (game.lastSaveId === 0) {
-      const participants: Array<PlayerId | SpectatorId> = game.getPlayers().map((p) => p.id);
-      if (game.spectatorId) participants.push(game.spectatorId);
+      const participantIds: Array<PlayerId | SpectatorId> = game.getPlayers().map((p) => p.id);
+      if (game.spectatorId) participantIds.push(game.spectatorId);
       try {
-        await this.storeParticipants({gameId: game.id, participants: participants});
+        await this.storeParticipants({gameId: game.id, participantIds: participantIds});
       } catch (e) {
         console.error(e);
       }
@@ -281,9 +281,9 @@ export class SQLite implements IDatabase {
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {
     // Sequence of '(?, ?)' pairs.
-    const placeholders: string = entry.participants.map(() => '(?, ?)').join(', ');
+    const placeholders: string = entry.participantIds.map(() => '(?, ?)').join(', ');
     // Sequence of [game_id, id] pairs.
-    const values: Array<GameId | PlayerId | SpectatorId> = entry.participants.map((participant) => [entry.gameId, participant]).flat();
+    const values: Array<GameId | PlayerId | SpectatorId> = entry.participantIds.map((participant) => [entry.gameId, participant]).flat();
 
     await this.asyncRun('INSERT INTO participants (game_id, participant) VALUES ' + placeholders, values);
   }
@@ -293,8 +293,8 @@ export class SQLite implements IDatabase {
     const multimap = new MultiMap<GameId, PlayerId | SpectatorId>();
     rows.forEach((row) => multimap.set(row.game_id, row.participant));
     const result: Array<GameIdLedger> = [];
-    multimap.forEachAssociation((value, key) => {
-      result.push({gameId: key, participants: value});
+    multimap.forEachAssociation((participantIds, gameId) => {
+      result.push({gameId, participantIds});
     });
     return result;
   }

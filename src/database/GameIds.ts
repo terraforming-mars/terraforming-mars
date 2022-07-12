@@ -9,16 +9,25 @@ export class GameIds extends EventEmitter {
   private loaded = false;
   private readonly games = new Map<GameId, Game | undefined>();
   private readonly participantIds = new Map<SpectatorId | PlayerId, GameId>();
+  private readonly db = Database.getInstance();
 
   private async getInstance(gameId: GameId) : Promise<void> {
-    const game = await Database.getInstance().getGame(gameId);
+    const game = await this.db.getGame(gameId);
     if (this.games.get(gameId) === undefined) {
       this.games.set(gameId, undefined);
+      const participantIds: Array<SpectatorId | PlayerId> = [];
       if (game.spectatorId !== undefined) {
         this.participantIds.set(game.spectatorId, gameId);
+        participantIds.push(game.spectatorId);
       }
       for (const player of game.players) {
         this.participantIds.set(player.id, gameId);
+        participantIds.push(player.id);
+      }
+      try {
+        this.db.storeParticipants({gameId, participantIds});
+      } catch (e) {
+        console.log(`Failed to store ${gameId}`);
       }
     }
   }
@@ -35,23 +44,24 @@ export class GameIds extends EventEmitter {
     Metrics.INSTANCE.mark('game-ids-get-all-instances-finished');
   }
 
-  public async load(oldLoad: boolean = true): Promise<void> {
+  public async load(): Promise<void> {
     try {
-      if (oldLoad) {
-        const allGameIds = await Database.getInstance().getGameIds();
-        await this.getAllInstances(allGameIds);
-      } else {
-        console.log('Preloading IDs.');
-        const entries = await Database.getInstance().getParticipants();
-        for (const entry of entries) {
-          const gameId = entry.gameId;
-          if (this.games.get(gameId) === undefined) {
-            this.games.set(gameId, undefined);
-            entry.participants.forEach((participant) => this.participantIds.set(participant, gameId));
-          }
+      console.log('Preloading IDs.');
+      const entries = await this.db.getParticipants();
+      for (const entry of entries) {
+        const gameId = entry.gameId;
+        if (this.games.get(gameId) === undefined) {
+          this.games.set(gameId, undefined);
+          entry.participantIds.forEach((participant) => this.participantIds.set(participant, gameId));
         }
-        console.log('Done preloading IDs.');
       }
+      console.log(`Preloaded ${entries.length} IDs.`);
+
+      // TODO(kberg): Eventually these three lines will be unnecessary. They're actually
+      // unnecessary after the first run.
+      const allGameIds = await this.db.getGameIds();
+      const filtered = allGameIds.filter((id) => !this.games.has(id));
+      await this.getAllInstances(filtered);
     } catch (err) {
       console.error('error loading all games', err);
     }

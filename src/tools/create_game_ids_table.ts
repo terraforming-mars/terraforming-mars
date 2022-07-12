@@ -10,7 +10,7 @@ async function main() {
   const ledger = await loader.getIds();
   let count = 0;
   for (const entry of ledger) {
-    db.storeParticipants({gameId: entry.gameId, participants: entry.participants})
+    db.storeParticipants({gameId: entry.gameId, participantIds: entry.participantIds})
       .catch((err) => {
         console.error(`Could not save ${entry.gameId}: ${err}`);
       }).then(() => {

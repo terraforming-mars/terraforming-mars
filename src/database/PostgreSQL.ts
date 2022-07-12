@@ -220,9 +220,9 @@ export class PostgreSQL implements IDatabase {
       // when the database operation was an insert. (We should figure out why multiple saves occur and
       // try to stop them. But that's for another day.)
       if (inserted === true && thisSaveId === 0) {
-        const participants: Array<PlayerId | SpectatorId> = game.getPlayers().map((p) => p.id);
-        if (game.spectatorId) participants.push(game.spectatorId);
-        await this.storeParticipants({gameId: game.id, participants: participants});
+        const participantIds: Array<PlayerId | SpectatorId> = game.getPlayers().map((p) => p.id);
+        if (game.spectatorId) participantIds.push(game.spectatorId);
+        await this.storeParticipants({gameId: game.id, participantIds: participantIds});
       }
 
       if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
@@ -256,13 +256,13 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {
-    await this.client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2)', [entry.gameId, entry.participants]);
+    await this.client.query('INSERT INTO participants (game_id, participants) VALUES($1, $2)', [entry.gameId, entry.participantIds]);
   }
 
-  public async getParticipants(): Promise<Array<{gameId: GameId, participants: Array<PlayerId | SpectatorId>}>> {
+  public async getParticipants(): Promise<Array<{gameId: GameId, participantIds: Array<PlayerId | SpectatorId>}>> {
     const res = await this.client.query('select game_id, participants from participants');
     return res.rows.map((row) => {
-      return {gameId: row.game_id as GameId, participants: row.participants as Array<PlayerId | SpectatorId>};
+      return {gameId: row.game_id as GameId, participantIds: row.participants as Array<PlayerId | SpectatorId>};
     });
   }
 

@@ -174,9 +174,9 @@ export class LocalFilesystem implements IDatabase {
       if (gameId !== undefined) {
         const text = fs.readFileSync(this.#filename(gameId));
         const game: SerializedGame = JSON.parse(text);
-        const participants: Array<PlayerId | SpectatorId> = game.players.map((p) => p.id);
-        if (game.spectatorId) participants.push(game.spectatorId);
-        gameIds.push({gameId, participants});
+        const participantIds: Array<PlayerId | SpectatorId> = game.players.map((p) => p.id);
+        if (game.spectatorId) participantIds.push(game.spectatorId);
+        gameIds.push({gameId, participantIds});
       }
     });
     return Promise.resolve(gameIds);

@@ -100,9 +100,9 @@ class InMemoryDatabase implements IDatabase {
     const entries: Array<GameIdLedger> = [];
     this.data.forEach((games, gameId) => {
       const firstSave = games[0];
-      const participants: Array<PlayerId | SpectatorId> = firstSave.players.map((p) => p.id);
-      if (firstSave.spectatorId) participants.push(firstSave.spectatorId);
-      entries.push({gameId, participants});
+      const participantIds: Array<PlayerId | SpectatorId> = firstSave.players.map((p) => p.id);
+      if (firstSave.spectatorId) participantIds.push(firstSave.spectatorId);
+      entries.push({gameId, participantIds});
     });
     return entries;
   }
@@ -195,13 +195,12 @@ describe('GameLoader', function() {
     expect(game1).is.not.undefined;
     const list = await instance.getIds();
     expect(list).to.deep.eq(
-      [{'gameId': 'gameid', 'participants': ['p-blue-id', 'p-red-id']}],
+      [{'gameId': 'gameid', 'participantIds': ['p-blue-id', 'p-red-id']}],
     );
   });
 
   it('loads values after error pulling game ids', async function() {
-    // database.failure = 'getParticipants';
-    database.failure = 'getGameIds';
+    database.failure = 'getParticipants';
     instance.reset();
     const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;

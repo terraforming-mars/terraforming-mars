@@ -50,7 +50,7 @@ export class GameLoader implements IGameLoader {
     const map = new MultiMap<GameId, SpectatorId | PlayerId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
     const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
-    return arry.map(([gameId, participants]) => ({gameId, participants}));
+    return arry.map(([gameId, participantIds]) => ({gameId, participantIds}));
   }
 
   public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {

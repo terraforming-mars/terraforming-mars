@@ -15,7 +15,7 @@
             <span class="turn-order"></span>
             <span class="color-square"></span>
             <span class="player-name"><a :href="getHref(game.spectatorId)" v-i18n>Spectator</a></span>
-            <Button title="copy" size="tiny" @click="copyUrl(game.spectatorId || 'unreachable')"/>
+            <Button title="copy" size="tiny" @click="copyUrl(game.spectatorId)"/>
           </li>
         </ul>
 
@@ -99,7 +99,8 @@ export default Vue.extend({
       }
       return `/player?id=${playerId}`;
     },
-    copyUrl(playerId: PlayerId | SpectatorId): void {
+    copyUrl(playerId: PlayerId | SpectatorId | undefined): void {
+      if (playerId === undefined) return;
       copyToClipboard(window.location.origin + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
     },

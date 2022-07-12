@@ -15,7 +15,7 @@ describe('Curator', () => {
     award = new Curator();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('gameid', [player, player2], player);
   });
   it('Counts tags', () => {
     expect(award.getScore(player)).to.eq(0);

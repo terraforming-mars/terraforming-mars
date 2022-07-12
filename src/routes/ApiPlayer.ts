@@ -1,9 +1,10 @@
+import {isPlayerId} from '../common/Types';
 import * as http from 'http';
 import {Server} from '../models/ServerModel';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 
-export class ApiPlayer extends AsyncHandler {
+export class ApiPlayer extends Handler {
   public static readonly INSTANCE = new ApiPlayer();
 
   private constructor() {
@@ -11,8 +12,16 @@ export class ApiPlayer extends AsyncHandler {
   }
 
   public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
-    const playerId = String(ctx.url.searchParams.get('id'));
-    const game = await ctx.gameLoader.getByParticipantId(playerId);
+    const playerId = ctx.url.searchParams.get('id');
+    if (playerId === null) {
+      ctx.route.badRequest(req, res, 'missing id parameter');
+      return;
+    }
+    if (!isPlayerId(playerId)) {
+      ctx.route.badRequest(req, res, 'invalid player id');
+      return;
+    }
+    const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
       ctx.route.notFound(req, res);
       return;

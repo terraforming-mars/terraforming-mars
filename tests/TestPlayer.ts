@@ -4,11 +4,10 @@ import {Color} from '../src/common/Color';
 import {Units} from '../src/common/Units';
 import {Tags} from '../src/common/cards/Tags';
 import {InputResponse} from '../src/common/inputs/InputResponse';
-import {PlayerId} from '../src/common/Types';
 
 export class TestPlayer extends Player {
-  constructor(color: Color) {
-    super('player-' + color, color, false, 0, 'p-' + color + '-id' as PlayerId);
+  constructor(color: Color, beginner: boolean = false, idSuffix = '') {
+    super('player-' + color, color, beginner, 0, `p-${color}-id${idSuffix}`);
   }
 
   public setProductionForTest(units: Partial<Units>) {

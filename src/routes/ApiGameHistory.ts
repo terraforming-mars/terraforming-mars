@@ -1,10 +1,11 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
+import {isGameId} from '../common/Types';
 
 
-export class ApiGameHistory extends AsyncHandler {
+export class ApiGameHistory extends Handler {
   public static readonly INSTANCE = new ApiGameHistory();
   private constructor() {
     super({validateServerId: true});
@@ -13,10 +14,14 @@ export class ApiGameHistory extends AsyncHandler {
   public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const gameId = ctx.url.searchParams.get('id');
     if (!gameId) {
-      ctx.route.notFound(req, res, 'id parameter missing');
+      ctx.route.badRequest(req, res, 'missing id parameter');
       return;
     }
 
+    if (!isGameId(gameId)) {
+      ctx.route.badRequest(req, res, 'Invalid game id');
+      return;
+    }
     try {
       const saveIds = await Database.getInstance().getSaveIds(gameId);
       ctx.route.writeJson(res, [...saveIds].sort());

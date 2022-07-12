@@ -16,13 +16,19 @@ describe('ApiGameLogs', function() {
 
   it('fails when id not provided', async () => {
     scaffolding.url = '/api/game/logs';
-    await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
-    expect(res.content).eq('Bad request: must provide player id as the id parameter');
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    expect(res.content).eq('Bad request: missing id parameter');
+  });
+
+  it('fails with invalid id', async () => {
+    scaffolding.url = '/api/game/logs?id=game-id';
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    expect(res.content).eq('Bad request: invalid player id');
   });
 
   it('fails when game not found', async () => {
-    scaffolding.url = '/api/game/logs?id=game-id';
-    await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
+    scaffolding.url = '/api/game/logs?id=player-invalid-id';
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
     expect(res.content).eq('Not found: game not found');
   });
 
@@ -30,9 +36,9 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
-    await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).gt(1);
     expect(messages[messages.length - 1].message).eq('Generation ${0}');
@@ -43,9 +49,9 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=50';
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
-    await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).eq(1);
     expect(messages[messages.length - 1].message).eq('Generation ${0}');
@@ -56,8 +62,8 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
-    await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
+    await scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).gt(1);
     expect(messages[messages.length - 1].message).eq('Generation ${0}');
@@ -68,8 +74,8 @@ describe('ApiGameLogs', function() {
     const player = TestPlayers.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=2';
     const game = Game.newInstance('game-id', [player], player);
-    scaffolding.ctx.gameLoader.add(game);
-    await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
+    await scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).eq(0);
   });
@@ -84,7 +90,7 @@ describe('ApiGameLogs', function() {
       const playerUnderTest = players[entry.idx];
 
       const game = Game.newInstance('game-id', players, yellowPlayer);
-      scaffolding.ctx.gameLoader.add(game);
+      await scaffolding.ctx.gameLoader.add(game);
 
       // Remove logs to-date to simplify the test
       game.gameLog.length = 0;
@@ -94,7 +100,7 @@ describe('ApiGameLogs', function() {
       game.log('Blue player sees this.', (_b) => {}, {reservedFor: bluePlayer});
 
       scaffolding.url = '/api/game/logs?id=' + playerUnderTest.id;
-      await scaffolding.asyncGet(ApiGameLogs.INSTANCE, res);
+      await scaffolding.get(ApiGameLogs.INSTANCE, res);
       const messages = JSON.parse(res.content);
 
       expect(messages.length).eq(2);

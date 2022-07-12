@@ -1,4 +1,4 @@
-import {DbLoadCallback, IDatabase} from './IDatabase';
+import {IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
@@ -70,7 +70,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getGames(): Promise<Array<GameId>> {
+  getGameIds(): Promise<Array<GameId>> {
     return new Promise((resolve, reject) => {
       const sql: string = 'SELECT distinct game_id game_id FROM games';
 
@@ -88,6 +88,9 @@ export class SQLite implements IDatabase {
     });
   }
 
+  // TODO(kberg): Remove repetition between this and getGameVersion.
+  // this is basically getGameVersion with save ID 0.
+  // This method has more content, so that has to be reconciled.
   loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
     return new Promise((resolve, reject) => {
     // Retrieve first save from database
@@ -125,13 +128,16 @@ export class SQLite implements IDatabase {
     );
   }
 
-  getGame(game_id: GameId, cb: (err: Error | undefined, game?: SerializedGame) => void): void {
-    // Retrieve last save from database
-    this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: Error | null, row: { game: any; }) => {
-      if (err) {
-        return cb(err ?? undefined);
-      }
-      cb(undefined, JSON.parse(row.game));
+  getGame(game_id: GameId): Promise<SerializedGame> {
+    return new Promise((resolve, reject) => {
+      // Retrieve last save from database
+      this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: Error | null, row: { game: any; }) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(JSON.parse(row.game));
+        }
+      });
     });
   }
 
@@ -188,7 +194,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getMaxSaveId(game_id: GameId, cb: DbLoadCallback<number>): void {
+  getMaxSaveId(game_id: GameId, cb: (err: Error | undefined, id: number | undefined) => void): void {
     this.db.get('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [game_id], (err: Error | null, row: { save_id: number; }) => {
       if (err) {
         return cb(err ?? undefined, undefined);
@@ -220,7 +226,7 @@ export class SQLite implements IDatabase {
     });
   }
 
-  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
@@ -230,7 +236,7 @@ export class SQLite implements IDatabase {
     }
   }
 
-  async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {
+  restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {
     return new Promise((resolve, reject) => {
       // Retrieve last save from database
       this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {

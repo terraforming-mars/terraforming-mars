@@ -55,7 +55,7 @@ export class Turmoil {
 
   private constructor(
     rulingPartyName: PartyName,
-    chairman: PlayerId | 'NEUTRAL',
+    chairman: PlayerId | NeutralPlayer,
     dominantPartyName: PartyName,
     globalEventDealer: GlobalEventDealer) {
     this.rulingParty = this.getPartyByName(rulingPartyName);

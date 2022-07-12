@@ -33,8 +33,6 @@ import {SerializedGame} from '../SerializedGame';
  * Finally, `players` as a number merely represents the number of players
  * in the game. Why, I have no idea, says kberg.
  */
-export type DbLoadCallback<T> = (err: Error | undefined, game: T | undefined) => void
-
 export interface IDatabase {
 
     /**
@@ -45,9 +43,8 @@ export interface IDatabase {
     /**
      * Pulls most recent version of game
      * @param game_id the game id to load
-     * @param cb called with game if exists. If game is undefined err will be truthy.
      */
-    getGame(game_id: string, cb: (err: Error | undefined, game?: SerializedGame) => void): void;
+    getGame(game_id: string): Promise<SerializedGame>;
 
     /**
      * Finds the game id associated with the given player.
@@ -70,8 +67,12 @@ export interface IDatabase {
 
     /**
      * Return a list of all `game_id`s.
+     *
+     * When the server starts games will be loaded from first to last. The postgres implmentation
+     * speeds up loading by sorting game ids so games most recently updated are loaded first, thereby
+     * being available sooner than other games.
      */
-    getGames(): Promise<Array<GameId>>;
+    getGameIds(): Promise<Array<GameId>>;
 
     /**
      * Get the player count for a game.
@@ -142,7 +143,7 @@ export interface IDatabase {
      * * In Sqlite, it doesn't purge
      * * This whole method is ignored in LocalFilesystem.
      */
-    purgeUnfinishedGames(maxGameDays?: string): void;
+    purgeUnfinishedGames(maxGameDays?: string): Promise<void>;
 
     /**
      * Generate database statistics for admin purposes.

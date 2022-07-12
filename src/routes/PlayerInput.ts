@@ -1,13 +1,14 @@
 import * as http from 'http';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../common/inputs/InputResponse';
+import {isPlayerId} from '../common/Types';
 
-export class PlayerInput extends AsyncHandler {
+export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
   private constructor() {
     super();
@@ -15,14 +16,18 @@ export class PlayerInput extends AsyncHandler {
 
   public override async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
-
     if (playerId === null) {
-      ctx.route.badRequest(req, res, 'must provide player id');
+      ctx.route.badRequest(req, res, 'missing id parameter');
+      return;
+    }
+
+    if (!isPlayerId(playerId)) {
+      ctx.route.badRequest(req, res, 'invalid player id');
       return;
     }
 
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
-    const game = await ctx.gameLoader.getByParticipantId(playerId);
+    const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
       ctx.route.notFound(req, res);
       return;
@@ -75,7 +80,7 @@ export class PlayerInput extends AsyncHandler {
   ): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
-      req.on('data', async (data) => {
+      req.on('data', (data) => {
         body += data.toString();
       });
       req.once('end', async () => {
@@ -89,6 +94,7 @@ export class PlayerInput extends AsyncHandler {
           }
           resolve();
         } catch (e) {
+          // TODO(kberg): use standard Route API, though that changes the output.
           res.writeHead(400, {
             'Content-Type': 'application/json',
           });

@@ -16,30 +16,30 @@ describe('ApiGame', () => {
 
   it('no parameter', async () => {
     scaffolding.url = '/api/game';
-    await scaffolding.asyncGet(ApiGame.INSTANCE, res);
-    expect(res.statusCode).eq(404);
-    expect(res.content).eq('Not found: id parameter missing');
+    await scaffolding.get(ApiGame.INSTANCE, res);
+    expect(res.statusCode).eq(400);
+    expect(res.content).eq('Bad request: missing id parameter');
   });
 
   it('invalid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
+    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
     scaffolding.url = '/api/game?id=invalidId';
-    await scaffolding.asyncGet(ApiGame.INSTANCE, res);
+    await scaffolding.get(ApiGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found: game not found');
   });
 
   it('valid id', async () => {
     const player = TestPlayers.BLACK.newPlayer();
-    scaffolding.ctx.gameLoader.add(Game.newInstance('validId', [player], player));
-    scaffolding.url = '/api/game?id=validId';
-    await scaffolding.asyncGet(ApiGame.INSTANCE, res);
+    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
+    scaffolding.url = '/api/game?id=game-valid-id';
+    await scaffolding.get(ApiGame.INSTANCE, res);
     // This test is probably brittle.
     expect(JSON.parse(res.content)).deep.eq(
       {
         'activePlayer': 'black',
-        'id': 'validId',
+        'id': 'game-valid-id',
         'lastSoloGeneration': 14,
         'phase': 'research',
         'players': [

@@ -1,9 +1,11 @@
 import * as http from 'http';
-import {AsyncHandler} from './Handler';
+import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Server} from '../models/ServerModel';
+import {isGameId} from '../common/Types';
+import {Game} from '../Game';
 
-export class ApiGame extends AsyncHandler {
+export class ApiGame extends Handler {
   public static readonly INSTANCE = new ApiGame();
   private constructor() {
     super();
@@ -12,11 +14,14 @@ export class ApiGame extends AsyncHandler {
   public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const gameId = ctx.url.searchParams.get('id');
     if (!gameId) {
-      ctx.route.notFound(req, res, 'id parameter missing');
+      ctx.route.badRequest(req, res, 'missing id parameter');
       return;
     }
 
-    const game = await ctx.gameLoader.getByGameId(gameId, /* bypassCache */ false);
+    let game: Game | undefined;
+    if (isGameId(gameId)) {
+      game = await ctx.gameLoader.getGame(gameId);
+    }
     if (game === undefined) {
       ctx.route.notFound(req, res, 'game not found');
       return;

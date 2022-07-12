@@ -112,7 +112,7 @@ export class AresHandler {
     });
 
     const bonusText = bonuses.entries().map((elem) => `${elem[1]} ${SpaceBonus.toString(elem[0])}`).join(', ');
-    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile?.tileType) : 'no tile';
+    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile.tileType) : 'no tile';
     player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 
     let ownerBonus = 1;

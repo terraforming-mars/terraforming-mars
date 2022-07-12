@@ -1,3 +1,4 @@
+require('dotenv').config();
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -36,13 +37,17 @@ export class FileAPI {
 export class ServeAsset extends Handler {
   public static readonly INSTANCE: ServeAsset = new ServeAsset();
   private readonly cache = new BufferCache();
+  private readonly cacheAgeSeconds: number | string;
+  private readonly cacheAssets: boolean;
+  private readonly fileApi: FileAPI;
 
   // Public for tests
-  public constructor(private cacheAgeSeconds: string | number = process.env.ASSET_CACHE_MAX_AGE || 0,
-    // only production caches resources
-    private cacheAssets: boolean = isProduction(),
-    private fileApi: FileAPI = FileAPI.INSTANCE) {
+  public constructor(cacheAgeSeconds?: number, cacheAssets?: boolean, fileApi: FileAPI = FileAPI.INSTANCE) {
     super();
+    this.cacheAgeSeconds = cacheAgeSeconds ?? process.env.ASSET_CACHE_MAX_AGE ?? 60_000; // 1 hour default
+    this.cacheAssets = cacheAssets ?? process.env.ASSET_CACHE === 'on' ?? isProduction();
+    this.fileApi = fileApi;
+
     // prime the cache with styles.css and a compressed copy of it styles.css
     const styles = fileApi.readFileSync('build/styles.css');
     this.cache.set('build/styles.css', styles);

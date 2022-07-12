@@ -52,5 +52,6 @@ module.exports = {
         'Help',
       ],
     }],
+    'vue/no-reserved-component-names': 'warn',
   },
 };

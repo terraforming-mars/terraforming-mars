@@ -64,13 +64,31 @@ export class GameLoader implements IGameLoader {
     const d = await this.idsContainer.getGames();
     const gameId = isGameId(id) ? id : d.participantIds.get(id);
     if (gameId === undefined) return undefined;
-    if (forceLoad === false && d.games.get(gameId) !== undefined) {
-      return d.games.get(gameId);
-    } else if (d.games.has(gameId)) {
-      return this.loadGame(gameId, forceLoad);
-    } else {
-      return undefined;
+
+    // 1. Check the cache as long as forceLoad isn't true.
+    if (forceLoad === false && d.games.get(gameId) !== undefined) return d.games.get(gameId);
+
+    // 2. The game isn't cached. If it's in the database, there will still be an entry
+    // for it in the cache.
+    if (d.games.has(gameId)) {
+      try {
+        const serializedGame = await Database.getInstance().getGame(gameId);
+        if (serializedGame === undefined) {
+          console.error(`GameLoader:loadGame: game ${gameId} not found`);
+          return undefined;
+        }
+        const game = Game.deserialize(serializedGame);
+        await this.add(game);
+        console.log(`GameLoader loaded game ${gameId} into memory from database`);
+        return game;
+      } catch (e) {
+        console.error('GameLoader:loadGame', e);
+        return undefined;
+      }
     }
+
+    // Otherwise the game ID isn't valid.
+    return undefined;
   }
 
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<Game> {
@@ -81,29 +99,5 @@ export class GameLoader implements IGameLoader {
     await this.add(game);
     game.undoCount++;
     return game;
-  }
-
-  private async loadGame(gameId: GameId, forceLoad: boolean): Promise<Game | undefined> {
-    const d = await this.idsContainer.getGames();
-    if (forceLoad === false) {
-      const game = d.games.get(gameId);
-      if (game !== undefined) {
-        return game;
-      }
-    }
-    try {
-      const serializedGame = await Database.getInstance().getGame(gameId);
-      if (serializedGame === undefined) {
-        console.error(`loadGameAsync: game ${gameId} not found`);
-        return undefined;
-      }
-      const game = Game.deserialize(serializedGame);
-      await this.add(game);
-      console.log(`GameLoader loaded game ${gameId} into memory from database`);
-      return game;
-    } catch (e) {
-      console.error('GameLoader:loadGame', e);
-      return undefined;
-    }
   }
 }

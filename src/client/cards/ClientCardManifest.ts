@@ -3,7 +3,7 @@ import {CardType} from '@/common/cards/CardType';
 import {GameModule} from '@/common/cards/GameModule';
 import {IClientCard} from '@/common/cards/IClientCard';
 // @ts-ignore cards.json doesn't exist during npm run build
-import * as cardJson from '@/genfiles/cards.json';
+import * as cardJson from '@/genfiles/cards.json' assert {type: 'json'};
 
 const cards: Map<CardName, IClientCard> = new Map();
 const cardArray: Array<IClientCard> = [];

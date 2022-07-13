@@ -283,11 +283,13 @@ export class PostgreSQL implements IDatabase {
     SELECT
       pg_size_pretty(pg_total_relation_size(\'games\')) as game_size,
       pg_size_pretty(pg_total_relation_size(\'game_results\')) as game_result_size,
+      pg_size_pretty(pg_total_relation_size(\'participants\')) as participants_size,
       pg_size_pretty(pg_database_size($1)) as db_size
     `, [this.databaseName]);
 
     map['size-bytes-games'] = result.rows[0].game_size;
     map['size-bytes-game-results'] = result.rows[0].game_result_size;
+    map['size-bytes-participants'] = result.rows[0].participants;
     map['size-bytes-database'] = result.rows[0].db_size;
     return map;
   }

@@ -1,26 +1,38 @@
-import {Database} from './Database';
 import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {once} from 'events';
 import {EventEmitter} from 'events';
 import * as prometheus from 'prom-client';
+import {Database} from './Database';
+import {CacheConfig} from './CacheConfig';
 
-const start = new prometheus.Gauge({
-  name: 'game_ids_get_all_instances_started',
-  help: 'Time getAllInstances started',
-  registers: [prometheus.register],
-});
-const end = new prometheus.Gauge({
-  name: 'game_ids_get_all_instances_finished',
-  help: 'Time getAllInstances finished',
-  registers: [prometheus.register],
-});
+const metrics = {
+  start: new prometheus.Gauge({
+    name: 'game_ids_get_all_instances_started',
+    help: 'Time getAllInstances started',
+    registers: [prometheus.register],
+  }),
+  end: new prometheus.Gauge({
+    name: 'game_ids_get_all_instances_finished',
+    help: 'Time getAllInstances finished',
+    registers: [prometheus.register],
+  }),
+};
 
 export class GameIds extends EventEmitter {
   private loaded = false;
   private readonly games = new Map<GameId, Game | undefined>();
   private readonly participantIds = new Map<SpectatorId | PlayerId, GameId>();
   private readonly db = Database.getInstance();
+
+  /** Map of game IDs and the time they were scheduled for eviction */
+  private readonly evictionSchedule: Map<GameId, number> = new Map();
+  private config: CacheConfig;
+
+  constructor(config: CacheConfig) {
+    super();
+    this.config = config;
+  }
 
   private async getInstance(gameId: GameId) : Promise<void> {
     const game = await this.db.getGame(gameId);
@@ -44,7 +56,7 @@ export class GameIds extends EventEmitter {
   }
 
   private async getAllInstances(allGameIds: Array<GameId>): Promise<void> {
-    start.set(Date.now());
+    metrics.start.set(Date.now());
 
     const sliceSize = 1000;
     for (let i = 0; i < allGameIds.length; i += sliceSize) {
@@ -53,7 +65,7 @@ export class GameIds extends EventEmitter {
         console.log(`Loaded ${i} to ${i + slice.length} of ${allGameIds.length}`);
       });
     }
-    end.set(Date.now());
+    metrics.end.set(Date.now());
   }
 
   public async load(): Promise<void> {
@@ -79,6 +91,9 @@ export class GameIds extends EventEmitter {
     }
     this.loaded = true;
     this.emit('loaded');
+    if (this.config.sweep === 'auto') {
+      scheduleSweep(this, this.config.sleepMillis);
+    }
   }
 
   public async getGames(): Promise<{games:Map<GameId, Game | undefined>, participantIds:Map<SpectatorId | PlayerId, GameId>}> {
@@ -87,4 +102,42 @@ export class GameIds extends EventEmitter {
     }
     return {games: this.games, participantIds: this.participantIds};
   }
+
+  public mark(gameId: GameId) {
+    console.log(`Marking ${gameId} to be evited in ${this.config.evictMillis}ms`);
+    this.evictionSchedule.set(gameId, Date.now() + this.config.evictMillis);
+  }
+
+  public sweep() {
+    console.log('Starting sweep');
+    const now = Date.now();
+    for (const entry of this.evictionSchedule.entries()) {
+      if (entry[1] < now) {
+        const gameId = entry[0];
+        console.log(`evicting ${gameId}`);
+        this.evict(gameId);
+        this.evictionSchedule.delete(gameId);
+      }
+    }
+    console.log('Finished sweep');
+  }
+
+  private evict(gameId: GameId) {
+    const game = this.games.get(gameId);
+    if (game === undefined) return;
+    game.getPlayers().forEach((p) => (p as any)._game = undefined);
+    this.games.set(gameId, undefined); // Setting to undefied is the same as "not yet loaded."
+  }
+}
+
+function scheduleSweep(cache: GameIds, sleepMillis: number) {
+  console.log(`Sweeper sleeping for ${sleepMillis}ms`);
+  setTimeout(() => {
+    try {
+      cache.sweep();
+    } catch (err) {
+      console.error(err);
+    }
+    scheduleSweep(cache, sleepMillis);
+  }, sleepMillis);
 }

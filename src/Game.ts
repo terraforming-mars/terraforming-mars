@@ -67,6 +67,7 @@ import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
+import {GameLoader} from './database/GameLoader';
 
 export interface Score {
   corporation: String;
@@ -1060,6 +1061,7 @@ export class Game {
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
     this.phase = Phase.END;
     Database.getInstance().saveGame(this).then(() => {
+      GameLoader.getInstance().mark(this.id);
       return Database.getInstance().cleanGame(this.id);
     }).catch((err) => {
       console.error(err);
@@ -1723,6 +1725,7 @@ export class Game {
       game.getPlayerById(game.activePlayer).takeAction(/* saveBeforeTakingAction */ false);
     }
 
+    if (game.phase === Phase.END) GameLoader.getInstance().mark(game.id);
     return game;
   }
 

@@ -1847,23 +1847,23 @@ export class Player {
    *
    * This method indicates the avalilable actions by setting the `waitingFor` attribute of this player.
    *
-   * @param {boolean} saveBeforeTakingAction when true, the game state is saved. Default is `true`. This
+   * @param {boolean} saveFirst when true, the game state is saved. Default is `true`. This
    * should only be false in testing and when this method is called during game deserialization. In other
    * words, don't set this value unless you know what you're doing.
    */
-  // @ts-ignore saveBeforeTakingAction is unused at the moment.
-  public takeAction(saveBeforeTakingAction: boolean = true): void {
+  public takeAction(saveFirst: boolean = true): void {
     const game = this.game;
 
     if (game.deferredActions.length > 0) {
-      game.deferredActions.runAll(() => this.takeAction());
+      game.deferredActions.runAll(() => this.takeAction(saveFirst));
       return;
     }
 
     const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed();
 
-    if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
-    // if (saveBeforeTakingAction) game.save();
+    if (saveFirst) {
+      if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
+    }
 
     // Prelude cards have to be played first
     if (this.preludeCardsInHand.length > 0) {

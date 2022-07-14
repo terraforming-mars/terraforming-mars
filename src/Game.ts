@@ -704,8 +704,8 @@ export class Game {
     this.first = this.players[firstIndex];
   }
 
-  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false): void {
-    this.save();
+  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false, preSave = true): void {
+    if (preSave) this.save();
     this.draftedPlayers.clear();
     this.players.forEach((player) => {
       player.needsToDraft = true;
@@ -721,9 +721,9 @@ export class Game {
     });
   }
 
-  private gotoInitialResearchPhase(): void {
+  private gotoInitialResearchPhase(preSave = true): void {
     this.phase = Phase.RESEARCH;
-    this.save();
+    if (preSave) this.save();
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
         player.setWaitingFor(this.pickCorporationCard(player));
@@ -735,10 +735,10 @@ export class Game {
     }
   }
 
-  private gotoResearchPhase(): void {
+  private gotoResearchPhase(saveGame = true): void {
     this.phase = Phase.RESEARCH;
     this.researchedPlayers.clear();
-    this.save();
+    if (saveGame) this.save();
     this.players.forEach((player) => {
       player.runResearchPhase(this.gameOptions.draftVariant);
     });
@@ -1705,22 +1705,22 @@ export class Game {
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
-          game.runDraftRound(true, true);
+          game.runDraftRound(/* initialDraft= */ true, /* preludeDraft= */ true, /* preSave= */ false);
         } else {
-          game.runDraftRound(true);
+          game.runDraftRound(/* initialDraft= */ true, /* preludeDraft= */ false, /* preSave= */ false);
         }
       } else {
-        game.gotoInitialResearchPhase();
+        game.gotoInitialResearchPhase(/* preSave= */false);
       }
     } else if (game.phase === Phase.DRAFTING) {
-      game.runDraftRound();
+      game.runDraftRound(/* initialDraft= */ false, /* preludeDraft= */ false, /* preSave= */ false);
     } else if (game.phase === Phase.RESEARCH) {
-      game.gotoResearchPhase();
+      game.gotoResearchPhase(/* preSave=*/false);
     } else if (game.phase === Phase.END) {
       // There's nowhere that we need to go for end game.
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
-      game.getPlayerById(game.activePlayer).takeAction(/* saveBeforeTakingAction */ false);
+      game.getPlayerById(game.activePlayer).takeAction(/* preSave= */ false);
     }
 
     return game;

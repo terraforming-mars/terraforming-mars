@@ -1,3 +1,6 @@
+/**
+ * @deprecated Use mnemonist
+ */
 export class Multiset<T> {
   private map: Map<T, number> = new Map();
 

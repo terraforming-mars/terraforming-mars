@@ -149,6 +149,15 @@
                 <Card :card="card"/>
               </div>
             </div>
+            <div>
+              <dynamic-title title="Your cards" :color="thisPlayer.color" v-if="isCorporationDraftingPhase()"/>
+              <div v-for="card in playerView.dealtPreludeCards" :key="card.name" class="cardbox">
+                <Card :card="card"/>
+              </div>
+              <div v-for="card in playerView.dealtProjectCards" :key="card.name" class="cardbox">
+                <Card :card="card"/>
+              </div>
+            </div>
           </template>
           <template v-if="isInitialDraftingPhase()">
             <div v-for="card in playerView.dealtCorporationCards" :key="card.name" class="cardbox">

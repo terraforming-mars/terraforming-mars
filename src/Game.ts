@@ -985,25 +985,32 @@ export class Game {
 
   // Function use to manage corporation draft way
   public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<ICorporationCard>): void {
-    const passTo = this.corporationsDraftToNextPlayer ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-    if (passTo === undefined) {
+    const nextPlayer = this.corporationsDraftToNextPlayer ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
+    if (nextPlayer === undefined) {
       throw new Error(`Cannot find player to pass for player ${player.id} in game ${this.id}`);
+    }
+
+    const passTo = this.corporationsDraftToNextPlayer ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
+    if (passTo === undefined) {
+      throw new Error(`Cannot find player to pass for player ${nextPlayer.id} in game ${this.id}`);
     }
 
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (cards.length > 1) {
-      if (this.draftRound % this.players.length === 0) {
-        player.runDraftCorporationPhase(player.name, cards);
+      if ((this.draftRound + 1) % this.players.length === 0) {
+        nextPlayer.runDraftCorporationPhase(nextPlayer.name, cards);
+      } else if (this.draftRound % this.players.length === 0) {
+        player.runDraftCorporationPhase(nextPlayer.name, cards);
         this.corporationsDraftToNextPlayer = !this.corporationsDraftToNextPlayer;
       } else {
-        passTo.runDraftCorporationPhase(passTo.name, cards);
+        nextPlayer.runDraftCorporationPhase(passTo.name, cards);
       }
       this.draftRound++;
       return;
     }
 
     // Push last card to next player
-    passTo.draftedCorporations.push(...cards);
+    nextPlayer.draftedCorporations.push(...cards);
 
     this.players.forEach((player) => {
       player.dealtCorporationCards = player.draftedCorporations;

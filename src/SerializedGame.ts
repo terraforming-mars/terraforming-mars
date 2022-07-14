@@ -26,7 +26,7 @@ export interface SerializedGame {
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
-    corporationsDraftDirection: 'next' | 'previous';
+    corporationsDraftDirection: 'before' | 'after';
     corporationsToDraft: Array<CardName>;
     dealer: SerializedDealer;
     deferredActions: Array<DeferredAction>;

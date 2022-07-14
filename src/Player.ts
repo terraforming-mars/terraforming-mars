@@ -1239,6 +1239,7 @@ export class Player {
       (foundCards: Array<ICorporationCard>) => {
         foundCards.forEach((card) => {
           this.draftedCorporations.push(card);
+          this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
           cards = cards.filter((c) => c !== card);
         });
         this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);

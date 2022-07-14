@@ -197,7 +197,7 @@ export class Game {
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
   // Used for corporation global draft: do we draft to next player or to player before
-  private corporationsDraftDirection: 'before' | 'after' = 'after';
+  private corporationsDraftDirection: 'before' | 'after' = 'before';
   public corporationsToDraft: Array<ICorporationCard> = [];
 
   // Milestones and awards

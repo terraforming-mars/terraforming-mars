@@ -48,7 +48,7 @@ psql -U tfmtest --host=localhost --dbname=tfmtest -W
 
 ## Set the environment variable for the password
 
-Add this line to your `.env` file, still assuming the password is "diablo"
+Add this line to `tests/integration/.env`, still assuming the password is "diablo"
 
 ```
 POSTGRES_INTEGRATION_TEST_PASSWORD=diablo

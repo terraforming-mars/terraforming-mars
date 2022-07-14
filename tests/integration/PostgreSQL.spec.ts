@@ -1,4 +1,4 @@
-require('dotenv').config();
+import * as dotenv from 'dotenv';
 import {expect} from 'chai';
 import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
 import {Game} from '../../src/Game';
@@ -8,6 +8,8 @@ import {SelectOption} from '../../src/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
 import {setCustomGameOptions} from '../TestingUtils';
 import {Player} from '../../src/Player';
+
+dotenv.config({path: 'tests/integration/.env', debug: true});
 
 /*
  * This test can be run with `npm run test:integration` as long as the test is set up

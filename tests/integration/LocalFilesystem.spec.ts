@@ -1,4 +1,3 @@
-require('dotenv').config();
 import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
 import {Game} from '../../src/Game';
 import {LocalFilesystem} from '../../src/database/LocalFilesystem';

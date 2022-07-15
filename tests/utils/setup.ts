@@ -1,6 +1,8 @@
 import {Database} from '../../src/database/Database';
 import {IDatabase} from '../../src/database/IDatabase';
 import {SerializedGame} from '../../src/SerializedGame';
+import {IGameLoader} from '../../src/database/IGameLoader';
+import {GameLoader} from '../../src/database/GameLoader';
 
 const FAKE_DATABASE: IDatabase = {
   cleanGame: () => Promise.resolve(),
@@ -24,13 +26,21 @@ const FAKE_DATABASE: IDatabase = {
 };
 
 let databaseUnderTest: IDatabase = FAKE_DATABASE;
-
 export function restoreTestDatabase() {
   setTestDatabase(FAKE_DATABASE);
 }
-
 export function setTestDatabase(db: IDatabase) {
   databaseUnderTest = db;
 }
-
 Database.getInstance = () => databaseUnderTest;
+
+const defaultGameLoader = GameLoader.getInstance();``
+let gameLoaderUnderTest: IGameLoader = GameLoader.getInstance();
+export function restoreTestGameLoader() {
+  setTestGameLoader(defaultGameLoader);
+}
+export function setTestGameLoader(gameLoader: IGameLoader) {
+  gameLoaderUnderTest = gameLoader;
+}
+GameLoader.getInstance = () => gameLoaderUnderTest;
+

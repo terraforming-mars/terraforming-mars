@@ -5,6 +5,7 @@ import {EventEmitter} from 'events';
 import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {CacheConfig} from './CacheConfig';
+import {Clock} from '../common/Timer';
 
 const metrics = {
   start: new prometheus.Gauge({
@@ -27,11 +28,13 @@ export class GameIds extends EventEmitter {
 
   /** Map of game IDs and the time they were scheduled for eviction */
   private readonly evictionSchedule: Map<GameId, number> = new Map();
-  private config: CacheConfig;
+  private readonly config: CacheConfig;
+  private readonly clock: Clock;
 
-  constructor(config: CacheConfig) {
+  constructor(config: CacheConfig, clock: Clock) {
     super();
     this.config = config;
+    this.clock = clock;
   }
 
   private async getInstance(gameId: GameId) : Promise<void> {
@@ -56,7 +59,7 @@ export class GameIds extends EventEmitter {
   }
 
   private async getAllInstances(allGameIds: Array<GameId>): Promise<void> {
-    metrics.start.set(Date.now());
+    metrics.start.set(this.clock.now());
 
     const sliceSize = 1000;
     for (let i = 0; i < allGameIds.length; i += sliceSize) {
@@ -65,7 +68,7 @@ export class GameIds extends EventEmitter {
         console.log(`Loaded ${i} to ${i + slice.length} of ${allGameIds.length}`);
       });
     }
-    metrics.end.set(Date.now());
+    metrics.end.set(this.clock.now());
   }
 
   public async load(): Promise<void> {
@@ -105,14 +108,14 @@ export class GameIds extends EventEmitter {
 
   public mark(gameId: GameId) {
     console.log(`Marking ${gameId} to be evited in ${this.config.evictMillis}ms`);
-    this.evictionSchedule.set(gameId, Date.now() + this.config.evictMillis);
+    this.evictionSchedule.set(gameId, this.clock.now() + this.config.evictMillis);
   }
 
   public sweep() {
     console.log('Starting sweep');
-    const now = Date.now();
+    const now = this.clock.now();
     for (const entry of this.evictionSchedule.entries()) {
-      if (entry[1] < now) {
+      if (entry[1] <= now) {
         const gameId = entry[0];
         console.log(`evicting ${gameId}`);
         this.evict(gameId);

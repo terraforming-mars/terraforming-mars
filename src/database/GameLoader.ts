@@ -9,6 +9,7 @@ import {MultiMap} from 'mnemonist';
 import {timeAsync} from '../utils/timer';
 import {durationToMilliseconds} from '../utils/durations';
 import {CacheConfig} from './CacheConfig';
+import {Clock} from '../common/Timer';
 
 const metrics = {
   initialize: new prometheus.Gauge({
@@ -29,29 +30,36 @@ const metrics = {
  */
 export class GameLoader implements IGameLoader {
   private static instance?: GameLoader;
-  private idsContainer: GameIds;
-  private config: CacheConfig;
 
-  private constructor(config: CacheConfig) {
+  private idsContainer: GameIds;
+  private readonly config: CacheConfig;
+  private readonly clock: Clock;
+
+  private constructor(config: CacheConfig, clock: Clock) {
     this.config = config;
-    this.idsContainer = new GameIds(config);
+    this.clock = clock;
+    this.idsContainer = new GameIds(config, clock);
     timeAsync(this.idsContainer.load())
       .then((v) => {
         metrics.initialize.set(v.duration);
       });
   }
 
-  public reset(): void {
-    this.idsContainer = new GameIds(this.config);
-    this.idsContainer.load();
-  }
-
   public static getInstance(): IGameLoader {
     if (GameLoader.instance === undefined) {
       const config = parseConfigString(process.env.GAME_CACHE ?? '');
-      GameLoader.instance = new GameLoader(config);
+      GameLoader.instance = new GameLoader(config, new Clock());
     }
     return GameLoader.instance;
+  }
+
+  public static newTestInstance(config: CacheConfig, clock: Clock): GameLoader {
+    return new GameLoader(config, clock);
+  }
+
+  public resetForTesting(): void {
+    this.idsContainer = new GameIds(this.config, this.clock);
+    this.idsContainer.load();
   }
 
   public async add(game: Game): Promise<void> {
@@ -71,6 +79,11 @@ export class GameLoader implements IGameLoader {
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
     const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
     return arry.map(([gameId, participantIds]) => ({gameId, participantIds}));
+  }
+
+  public async isCached(gameId: GameId): Promise<boolean> {
+    const d = await this.idsContainer.getGames();
+    return d.games.get(gameId) !== undefined;
   }
 
   public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {
@@ -116,6 +129,10 @@ export class GameLoader implements IGameLoader {
 
   public mark(gameId: GameId) {
     this.idsContainer.mark(gameId);
+  }
+
+  public sweep() {
+    this.idsContainer.sweep();
   }
 }
 

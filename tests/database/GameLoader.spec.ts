@@ -7,8 +7,9 @@ import {TestPlayers} from '../TestPlayers';
 import {Color} from '../../src/common/Color';
 import {GameIdLedger, IDatabase} from '../../src/database/IDatabase';
 import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
-import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
+import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../utils/setup';
 import {sleep} from '../TestingUtils';
+import {FakeClock} from '../common/FakeClock';
 
 class InMemoryDatabase implements IDatabase {
   public data: Map<GameId, Array<SerializedGame>> = new Map();
@@ -112,18 +113,22 @@ describe('GameLoader', function() {
   let instance: GameLoader;
   let database: InMemoryDatabase;
   let game: Game;
+  let clock: FakeClock;
 
   beforeEach(function() {
+    clock = new FakeClock();
+    instance = GameLoader.newTestInstance({sleepMillis: 0, evictMillis: 100, sweep: 'manual'}, clock);
+    setTestGameLoader(instance);
     database = new InMemoryDatabase();
     setTestDatabase(database);
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
-    instance = (GameLoader.getInstance() as GameLoader);
-    instance.reset();
+    instance.resetForTesting();
   });
   afterEach(function() {
     restoreTestDatabase();
+    restoreTestGameLoader();
   });
 
   it('uses shared instance', function() {
@@ -201,7 +206,7 @@ describe('GameLoader', function() {
 
   it('loads values after error pulling game ids', async function() {
     database.failure = 'getParticipants';
-    instance.reset();
+    instance.resetForTesting();
     const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
   });
@@ -233,11 +238,43 @@ describe('GameLoader', function() {
       Game.newInstance('game-' + i as GameId, [player], player);
     }
     database.getGameSleep = 500;
-    instance.reset();
+    instance.resetForTesting();
     const list = await instance.getIds();
     expect(list?.map((e) => e.gameId)).to.have.members([
       'game-0', 'game-1', 'game-2', 'game-3', 'game-4',
       'game-5', 'game-6', 'game-7', 'game-8', 'game-9',
     ]);
+  });
+
+  it('evicts finished game', async () => {
+    const ids = await instance.getIds();
+    expect(ids).deep.eq(
+      [{
+        'gameId': 'gameid',
+        'participantIds': [
+          'p-blue-id',
+          'p-red-id',
+        ],
+      }],
+    );
+    instance.resetForTesting();
+    expect(await instance.isCached('gameid')).is.false;
+    await instance.getGame('gameid');
+    expect(await instance.isCached('gameid')).is.true;
+
+    // In beforeEach, eviction time is 100ms.
+
+    clock.millis = 5;
+    instance.mark('gameid');
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.true;
+
+    clock.millis = 104;
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.true;
+
+    clock.millis = 105;
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.false;
   });
 });

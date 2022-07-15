@@ -11,6 +11,7 @@ import LoadGameForm from '@/client/components/LoadGameForm.vue';
 import DebugUI from '@/client/components/DebugUI.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
+import AdminHome from '@/client/components/admin/AdminHome.vue';
 
 import {$t} from '@/client/directives/i18n';
 
@@ -23,7 +24,8 @@ import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogE
 const dialogPolyfill = require('dialog-polyfill');
 
 export interface MainAppData {
-    screen: 'create-game-form' |
+    screen: 'admin' |
+            'create-game-form' |
             'cards' |
             'empty' |
             'game-home' |
@@ -88,6 +90,7 @@ export const mainAppSettings = {
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
     'help': Help,
+    'admin-home': AdminHome,
   },
   'methods': {
     showAlert(message: string, cb: () => void = () => {}): void {
@@ -227,6 +230,8 @@ export const mainAppSettings = {
       app.screen = 'help';
     } else if (currentPathname === '/spectator') {
       app.updateSpectator();
+    } else if (currentPathname === '/admin') {
+      app.screen = 'admin';
     } else {
       app.screen = 'start-screen';
     }

@@ -28,7 +28,7 @@ type DataModel = {
 };
 
 // Copied from routes/Game.ts and probably IDatabase. Should be centralized I suppose
-type Response = {id: GameId, participants: Array<SpectatorId | PlayerId>};
+type Response = {gameId: GameId, participants: Array<SpectatorId | PlayerId>};
 
 export default Vue.extend({
   name: 'games-overview',
@@ -57,7 +57,7 @@ export default Vue.extend({
           if (result instanceof Array) {
             result.forEach(function(response: Response) {
               vueApp.entries.push({
-                id: response.id,
+                id: response.gameId,
                 game: undefined,
                 status: 'loading'});
             });

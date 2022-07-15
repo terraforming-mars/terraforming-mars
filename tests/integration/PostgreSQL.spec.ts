@@ -40,6 +40,8 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     response['size-bytes-games'] = 'any';
     response['size-bytes-game-results'] = 'any';
     response['size-bytes-database'] = 'any';
+    response['size-bytes-participants'] = 'any';
+
     return response;
   }
 
@@ -72,6 +74,7 @@ describeDatabaseSuite({
     'save-confict-undo-count': 0,
     'save-count': 0,
     'save-error-count': 0,
+    'size-bytes-participants': 'any',
   },
 
   otherTests: (dbFunction: () => ITestDatabase) => {

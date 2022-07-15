@@ -34,7 +34,7 @@ export function setTestDatabase(db: IDatabase) {
 }
 Database.getInstance = () => databaseUnderTest;
 
-const defaultGameLoader = GameLoader.getInstance();``
+const defaultGameLoader = GameLoader.getInstance();
 let gameLoaderUnderTest: IGameLoader = GameLoader.getInstance();
 export function restoreTestGameLoader() {
   setTestGameLoader(defaultGameLoader);

@@ -44,7 +44,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
     return true;
   }
   public action(player: Player) {
-    if (this.resourceCount < 2) {
+    if (this.resourceCount < 2 || !player.game.canIncreaseOxygenLevel()) {
       player.addResourceTo(this, {log: true});
       return undefined;
     }

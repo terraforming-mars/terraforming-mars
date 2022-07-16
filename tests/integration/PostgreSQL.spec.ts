@@ -222,6 +222,93 @@ describeDatabaseSuite({
       expect(game.lastSaveId).eq(4);
     });
 
+    it('undo works in multiplayer, other players have passed', async () => {
+      const db = dbFunction() as TestPostgreSQL;
+      const player = TestPlayers.BLACK.newPlayer(/** beginner */ true);
+      const player2 = TestPlayers.RED.newPlayer(/** beginner */ true);
+      const game = Game.newInstance('gameid', [player, player2], player2, setCustomGameOptions({draftVariant: false, undoOption: true}));
+      await db.awaitAllSaves();
+
+      // Move into the action phase by having both players complete their research.
+      // This triggers another save.
+      game.playerIsFinishedWithResearchPhase(player);
+      game.playerIsFinishedWithResearchPhase(player2);
+      runAllActions(game);
+      expect(game.phase).eq(Phase.ACTION);
+      expect(game.activePlayer).eq(player2.id);
+
+      await db.awaitAllSaves();
+
+      player2.pass();
+      game.playerIsFinishedTakingActions();
+      runAllActions(game);
+      expect(game.activePlayer).eq(player.id);
+
+      // Player.takeAction sets waitingFor and waitingForCb. This overrides it
+      // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
+      // the end of Player.takeAction
+      function takeAction(p: Player) {
+        // A do-nothing player input
+        const simpleOption = new SelectOption('', '', () => {
+          player.megaCredits++;
+          return undefined;
+        });
+        p.setWaitingFor(simpleOption, () => {
+          (p as any).incrementActionsTaken();
+          p.takeAction();
+        });
+      }
+
+      expect(game.activePlayer).eq(player.id);
+      expect(player.actionsTakenThisRound).eq(0);
+
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(1);
+      expect(player.actionsTakenThisRound).eq(1);
+
+      // Player's second action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(2);
+      expect(player.actionsTakenThisRound).eq(2);
+
+
+      // Player's third action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(3);
+      expect(player.actionsTakenThisRound).eq(3);
+
+
+      // Player's fourth action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(4);
+      expect(player.actionsTakenThisRound).eq(4);
+
+
+      // Player's fifth action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(5);
+      expect(player.actionsTakenThisRound).eq(5);
+
+      // Trigger an undo
+      // This is embedded in routes/PlayerInput, and should be moved out of there.
+      const lastSaveId = game.lastSaveId - 2;
+      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
+      await db.awaitAllSaves();
+      const revisedPlayer = newGame.getPlayerById(player.id);
+      expect(revisedPlayer.megaCredits).eq(4);
+      expect(revisedPlayer.actionsTakenThisRound).eq(4);
+    });
+
     it('undo works in solo', async () => {
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayers.BLACK.newPlayer(/** beginner */ true);
@@ -289,6 +376,8 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(5);
 
       // Trigger an undo
+      // Trigger an undo
+      // This is embedded in routes/PlayerInput, and should be moved out of there.
       const lastSaveId = game.lastSaveId - 2;
       const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
       await db.awaitAllSaves();

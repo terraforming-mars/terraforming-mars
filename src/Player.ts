@@ -71,7 +71,7 @@ export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
-  private _game?: Game;
+  public game: Game;
 
   // Corporate identity
   public corporationCard?: ICorporationCard;
@@ -162,6 +162,13 @@ export class Player {
     public handicap: number = 0,
     id: PlayerId) {
     this.id = id;
+    // This seems pretty bad. The game will be set before the Player is actually
+    // used, and if that doesn't happen, well, it's a worthy error.
+    // The alterantive, to make game type Game | undefined, will cause compilation
+    // issues throughout the app.
+    // Ideally the right thing is to invert how players and games get created.
+    // But one thing at a time.
+    this.game = undefined as unknown as Game;
   }
 
   public static initialize(
@@ -174,19 +181,8 @@ export class Player {
     return player;
   }
 
-  public set game(game: Game) {
-    if (this._game !== undefined) {
-      // TODO(kberg): Replace this with an Error.
-      console.warn(`Reinitializing game ${game.id} for player ${this.color}`);
-    }
-    this._game = game;
-  }
-
-  public get game(): Game {
-    if (this._game === undefined) {
-      throw new Error(`Fetching game for player ${this.color} too soon.`);
-    }
-    return this._game;
+  public tearDown() {
+    this.game = undefined as unknown as Game;
   }
 
   public isCorporation(corporationName: CardName): boolean {

@@ -128,7 +128,7 @@ export class GameIds extends EventEmitter {
   private evict(gameId: GameId) {
     const game = this.games.get(gameId);
     if (game === undefined) return;
-    game.getPlayers().forEach((p) => (p as any)._game = undefined);
+    game.getPlayers().forEach((p) => p.tearDown());
     this.games.set(gameId, undefined); // Setting to undefied is the same as "not yet loaded."
   }
 }

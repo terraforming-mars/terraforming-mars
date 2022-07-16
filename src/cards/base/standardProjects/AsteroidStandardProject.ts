@@ -2,7 +2,6 @@ import {Player} from '../../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
-import * as constants from '../../../common/constants';
 
 export class AsteroidStandardProject extends StandardProjectCard {
   constructor() {
@@ -22,7 +21,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: Player): boolean {
-    if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
+    if (!player.game.canIncreaseTemperature()) {
       return false;
     }
     return super.canAct(player);

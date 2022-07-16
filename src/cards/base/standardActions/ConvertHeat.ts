@@ -2,7 +2,7 @@ import {StandardActionCard} from '../../StandardActionCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Player} from '../../../Player';
-import {HEAT_FOR_TEMPERATURE, MAX_TEMPERATURE} from '../../../common/constants';
+import {HEAT_FOR_TEMPERATURE} from '../../../common/constants';
 import {Units} from '../../../common/Units';
 
 
@@ -22,7 +22,7 @@ export class ConvertHeat extends StandardActionCard {
   }
 
   public canAct(player: Player): boolean {
-    if (player.game.getTemperature() === MAX_TEMPERATURE) {
+    if (!player.game.canIncreaseTemperature()) {
       return false;
     }
 

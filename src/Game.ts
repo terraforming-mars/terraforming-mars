@@ -500,8 +500,8 @@ export class Game {
   }
 
   public marsIsTerraformed(): boolean {
-    const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
-    const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
+    const oxygenMaxed = !this.canIncreaseOxygenLevel();
+    const temperatureMaxed = !this.canIncreaseTemperature();
     const oceansMaxed = !this.canAddOcean();
     let globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
     const venusMaxed = this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
@@ -1113,8 +1113,12 @@ export class Game {
     player.takeAction();
   }
 
+  public canIncreaseOxygenLevel(): boolean {
+    return this.oxygenLevel < constants.MAX_OXYGEN_LEVEL;
+  }
+
   public increaseOxygenLevel(player: Player, increments: -2 | -1 | 1 | 2): undefined {
-    if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
+    if (!this.canIncreaseOxygenLevel()) {
       return undefined;
     }
 
@@ -1198,8 +1202,12 @@ export class Game {
     return this.venusScaleLevel;
   }
 
+  public canIncreaseTemperature(): boolean {
+    return this.temperature < constants.MAX_TEMPERATURE;
+  }
+
   public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
-    if (this.temperature >= constants.MAX_TEMPERATURE) {
+    if (!this.canIncreaseTemperature()) {
       return undefined;
     }
 

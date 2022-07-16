@@ -1085,7 +1085,7 @@ export class Player {
     action.title = 'Select action for World Government Terraforming';
     action.buttonLabel = 'Confirm';
     const game = this.game;
-    if (game.getTemperature() < constants.MAX_TEMPERATURE) {
+    if (game.canIncreaseTemperature()) {
       action.options.push(
         new SelectOption('Increase temperature', 'Increase', () => {
           game.increaseTemperature(this, 1);
@@ -1094,7 +1094,7 @@ export class Player {
         }),
       );
     }
-    if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
+    if (game.canIncreaseOxygenLevel()) {
       action.options.push(
         new SelectOption('Increase oxygen', 'Increase', () => {
           game.increaseOxygenLevel(this, 1);

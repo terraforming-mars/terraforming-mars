@@ -27,4 +27,6 @@ export class FakeGameLoader implements IGameLoader {
   restoreGameAt(_gameId: string, _saveId: number): Promise<Game> {
     throw new Error('Method not implemented.');
   }
+  public mark() {
+  }
 }

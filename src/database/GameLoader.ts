@@ -7,12 +7,22 @@ import {GameIdLedger} from './IDatabase';
 import {GameIds} from './GameIds';
 import {MultiMap} from 'mnemonist';
 import {timeAsync} from '../utils/timer';
+import {durationToMilliseconds} from '../utils/durations';
+import {CacheConfig} from './CacheConfig';
+import {Clock} from '../common/Timer';
 
-const initialize = new prometheus.Gauge({
-  name: 'gameloader_initialize',
-  help: 'Time to load all games',
-  registers: [prometheus.register],
-});
+const metrics = {
+  initialize: new prometheus.Gauge({
+    name: 'gameloader_initialize',
+    help: 'Time to load all games',
+    registers: [prometheus.register],
+  }),
+  evictions: new prometheus.Counter({
+    name: 'gameloader_evictions',
+    help: 'Game evictions count',
+    registers: [prometheus.register],
+  }),
+};
 
 /**
  * Loads games from javascript memory or database
@@ -21,25 +31,35 @@ const initialize = new prometheus.Gauge({
 export class GameLoader implements IGameLoader {
   private static instance?: GameLoader;
 
-  private idsContainer = new GameIds();
+  private idsContainer: GameIds;
+  private readonly config: CacheConfig;
+  private readonly clock: Clock;
 
-  private constructor() {
+  private constructor(config: CacheConfig, clock: Clock) {
+    this.config = config;
+    this.clock = clock;
+    this.idsContainer = new GameIds(config, clock);
     timeAsync(this.idsContainer.load())
       .then((v) => {
-        initialize.set(v.duration);
+        metrics.initialize.set(v.duration);
       });
-  }
-
-  public reset(): void {
-    this.idsContainer = new GameIds();
-    this.idsContainer.load();
   }
 
   public static getInstance(): IGameLoader {
     if (GameLoader.instance === undefined) {
-      GameLoader.instance = new GameLoader();
+      const config = parseConfigString(process.env.GAME_CACHE ?? '');
+      GameLoader.instance = new GameLoader(config, new Clock());
     }
     return GameLoader.instance;
+  }
+
+  public static newTestInstance(config: CacheConfig, clock: Clock): GameLoader {
+    return new GameLoader(config, clock);
+  }
+
+  public resetForTesting(): void {
+    this.idsContainer = new GameIds(this.config, this.clock);
+    this.idsContainer.load();
   }
 
   public async add(game: Game): Promise<void> {
@@ -59,6 +79,11 @@ export class GameLoader implements IGameLoader {
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
     const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
     return arry.map(([gameId, participantIds]) => ({gameId, participantIds}));
+  }
+
+  public async isCached(gameId: GameId): Promise<boolean> {
+    const d = await this.idsContainer.getGames();
+    return d.games.get(gameId) !== undefined;
   }
 
   public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {
@@ -101,4 +126,31 @@ export class GameLoader implements IGameLoader {
     game.undoCount++;
     return game;
   }
+
+  public mark(gameId: GameId) {
+    this.idsContainer.mark(gameId);
+  }
+
+  public sweep() {
+    this.idsContainer.sweep();
+  }
+}
+
+function parseConfigString(stringValue: string): CacheConfig {
+  const options: CacheConfig = {
+    sweep: 'manual', // default is manual
+    evictMillis: durationToMilliseconds('15m'),
+    sleepMillis: durationToMilliseconds('5m'),
+  };
+  const parsed = Object.fromEntries((stringValue ?? '').split(';').map((s) => s.split('=', 2)));
+  if (parsed.sweep === 'auto' || parsed.sweep === 'manual') {
+    options.sweep = parsed.sweep;
+  } else if (parsed.sweep !== undefined) {
+    throw new Error('invalid sweep option from GAME_CACHE: ' + parsed.sweep);
+  }
+  const evictMillis = durationToMilliseconds(parsed.eviction_age);
+  if (!isNaN(evictMillis)) options.evictMillis = evictMillis;
+  const sleepMillis = durationToMilliseconds(parsed.sweep_freq);
+  if (isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
+  return options;
 }

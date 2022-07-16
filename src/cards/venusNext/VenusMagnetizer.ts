@@ -7,6 +7,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {MAX_VENUS_SCALE} from '../../common/constants';
 
 export class VenusMagnetizer extends Card implements IActionCard {
   constructor() {
@@ -33,7 +34,9 @@ export class VenusMagnetizer extends Card implements IActionCard {
     return undefined;
   }
   public canAct(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) > 0 && player.canAfford(0, {tr: {venus: 1}});
+    return player.getProduction(Resources.ENERGY) > 0 &&
+     player.canAfford(0, {tr: {venus: 1}}) &&
+     player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
   }
   public action(player: Player) {
     player.addProduction(Resources.ENERGY, -1);

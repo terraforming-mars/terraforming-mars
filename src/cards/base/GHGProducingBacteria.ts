@@ -47,7 +47,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
     return true;
   }
   public action(player: Player) {
-    if (this.resourceCount < 2) {
+    if (this.resourceCount < 2 || !player.game.canIncreaseTemperature()) {
       player.addResourceTo(this, {log: true});
       return undefined;
     }

@@ -373,11 +373,11 @@ export class Server {
     player: Player,
     cards: Array<ICard>,
     options: {
-    showResources?: boolean,
-    showCalculatedCost?: boolean,
-    reserveUnits?: Array<Units>,
-    enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
-  } = {},
+      showResources?: boolean,
+      showCalculatedCost?: boolean,
+      reserveUnits?: Array<Units>,
+      enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
+    } = {},
   ): Array<CardModel> {
     return cards.map((card, index) => {
       const model: CardModel = {

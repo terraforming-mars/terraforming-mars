@@ -376,7 +376,6 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(5);
 
       // Trigger an undo
-      // Trigger an undo
       // This is embedded in routes/PlayerInput, and should be moved out of there.
       const lastSaveId = game.lastSaveId - 2;
       const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);

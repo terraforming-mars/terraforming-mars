@@ -98,7 +98,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
       new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
         floaterAmount = amount;
         return undefined;
-      }, 0, Math.min(player.getResourcesOnCorporation(), Math.ceil(targetAmount / 2))),
+      }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),
     );
   }
 }

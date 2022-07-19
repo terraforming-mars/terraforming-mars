@@ -23,7 +23,7 @@ describe('BusinessNetwork', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });

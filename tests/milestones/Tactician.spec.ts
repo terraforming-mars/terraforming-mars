@@ -34,7 +34,7 @@ describe('Tactician', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t claim without 5 cards with requirements', function() {
+  it('Can not claim without 5 cards with requirements', function() {
     for (let i = 0; i < 5; i++) {
       player.playedCards.push(new Virus());
       player.playedCards.push(new RoboticWorkforce());

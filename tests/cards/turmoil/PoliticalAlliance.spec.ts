@@ -19,7 +19,7 @@ describe('PoliticalAlliance', function() {
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     greens.partyLeader = player.id;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

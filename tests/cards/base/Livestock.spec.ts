@@ -15,12 +15,12 @@ describe('Livestock', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without plant production', function() {
+  it('Can not play without plant production', function() {
     (game as any).oxygenLevel = 9;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', function() {
     (game as any).oxygenLevel = 8;
     player.addProduction(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;

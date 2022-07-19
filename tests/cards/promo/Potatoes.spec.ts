@@ -13,7 +13,7 @@ describe('Potatoes', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.plants = 1;
     expect(card.canPlay(player)).is.not.true;
   });

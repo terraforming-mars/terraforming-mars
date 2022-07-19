@@ -12,7 +12,7 @@ describe('SpaceHotels', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.playedCards.push(card);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

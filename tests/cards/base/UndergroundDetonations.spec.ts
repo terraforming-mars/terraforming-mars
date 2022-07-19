@@ -15,7 +15,7 @@ describe('UndergroundDetonations', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 9;
     expect(card.canAct(player)).is.not.true;
   });

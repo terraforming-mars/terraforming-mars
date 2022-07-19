@@ -13,12 +13,12 @@ describe('DuskLaserMining', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play if not enough science tags', function() {
+  it('Can not play if not enough science tags', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if no energy production', function() {
+  it('Can not play if no energy production', function() {
     player.playedCards.push(new Research());
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

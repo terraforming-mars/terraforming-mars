@@ -18,13 +18,13 @@ describe('NitrophilicMoss', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without enough oceans', function() {
+  it('Can not play without enough oceans', function() {
     maxOutOceans(player, 2);
     player.plants = 2;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if not enough plants', function() {
+  it('Can not play if not enough plants', function() {
     maxOutOceans(player, 3);
     player.plants = 1;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

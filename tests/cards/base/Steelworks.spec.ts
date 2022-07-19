@@ -14,7 +14,7 @@ describe('Steelworks', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.energy = 3;
     expect(card.canAct(player)).is.not.true;
   });

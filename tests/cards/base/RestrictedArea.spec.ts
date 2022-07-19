@@ -15,7 +15,7 @@ describe('RestrictedArea', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act if not enough MC', function() {
+  it('Can not act if not enough MC', function() {
     player.megaCredits = 1;
     expect(card.canAct(player)).is.not.true;
   });

@@ -15,11 +15,11 @@ describe('SearchForLife', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act if no MC', function() {
+  it('Can not act if no MC', function() {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too high', function() {
+  it('Can not play if oxygen level too high', function() {
     (game as any).oxygenLevel = 7;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

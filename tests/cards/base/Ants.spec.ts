@@ -22,7 +22,7 @@ describe('Ants', function() {
     player.popWaitingFor();
   });
 
-  it('Can\'t play without oxygen', function() {
+  it('Can not play without oxygen', function() {
     (game as any).oxygenLevel = 3;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

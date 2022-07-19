@@ -24,7 +24,7 @@ describe('BioPrintingFacility', function() {
   });
 
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.energy = 1;
     expect(card.canAct(player)).is.not.true;
   });

@@ -17,7 +17,7 @@ describe('RobinsonIndustries', function() {
     player.corporationCard = card;
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 3;
     expect(card.canAct(player)).is.not.true;
   });

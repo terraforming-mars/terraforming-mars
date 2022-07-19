@@ -31,7 +31,7 @@ describe('SmallAsteroid', function() {
     expect(player.game.getTemperature()).to.eq(-28);
   });
 
-  it('Doesn\'t remove plants in solo mode', function() {
+  it('Doesn not remove plants in solo mode', function() {
     player.addResource(Resources.PLANTS, 3);
     Game.newInstance('gameid', [player], player);
     card.play(player);

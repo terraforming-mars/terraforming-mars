@@ -23,19 +23,19 @@ describe('Cultural Metropolis', function() {
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
 
-  it('Can\'t play without two delegate in unity or unity ruling', function() {
+  it('Can not play without two delegate in unity or unity ruling', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play without 2 delegates available', function() {
+  it('Can not play without 2 delegates available', function() {
     player.addProduction(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');

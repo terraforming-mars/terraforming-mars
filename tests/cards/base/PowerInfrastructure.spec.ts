@@ -14,7 +14,7 @@ describe('PowerInfrastructure', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     card.play(player);
     expect(card.canAct(player)).is.not.true;
   });

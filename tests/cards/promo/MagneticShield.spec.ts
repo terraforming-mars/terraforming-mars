@@ -15,7 +15,7 @@ describe('MagneticShield', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play if not enough power tags available', function() {
+  it('Can not play if not enough power tags available', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

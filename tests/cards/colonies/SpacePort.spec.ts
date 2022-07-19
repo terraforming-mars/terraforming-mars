@@ -18,12 +18,12 @@ describe('SpacePort', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without colony', function() {
+  it('Can not play without colony', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     const colony = new Ceres();
     colony.colonies.push(player.id);
     player.game.colonies.push(colony);

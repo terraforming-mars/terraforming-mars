@@ -17,12 +17,12 @@ describe('Shuttles', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     (game as any).oxygenLevel = 5;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', function() {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 4;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

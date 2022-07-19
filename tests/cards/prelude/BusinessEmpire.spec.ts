@@ -14,7 +14,7 @@ describe('BusinessEmpire', function() {
     game = Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.not.true;
   });

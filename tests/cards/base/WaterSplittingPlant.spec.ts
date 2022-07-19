@@ -15,7 +15,7 @@ describe('WaterSplittingPlant', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -24,7 +24,7 @@ describe('WaterSplittingPlant', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.energy = 2;
     expect(card.canAct(player)).is.not.true;
   });

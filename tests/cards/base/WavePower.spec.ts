@@ -16,7 +16,7 @@ describe('WavePower', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     maxOutOceans(player, 2);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

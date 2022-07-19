@@ -15,7 +15,7 @@ describe('HiTechLab', function() {
     Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t act if no energy resources available', function() {
+  it('Can not act if no energy resources available', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

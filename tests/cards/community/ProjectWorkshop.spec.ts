@@ -42,7 +42,7 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 2;
     expect(card.canAct(player)).is.not.true;
   });

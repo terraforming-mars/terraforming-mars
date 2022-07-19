@@ -16,7 +16,7 @@ describe('Fish', function() {
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

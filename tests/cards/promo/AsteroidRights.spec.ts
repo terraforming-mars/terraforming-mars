@@ -28,7 +28,7 @@ describe('AsteroidRights', function() {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 0;
     card.resourceCount = 0;
     expect(card.canAct(player)).is.not.true;

@@ -17,12 +17,12 @@ describe('Herbivores', () => {
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play if nobody has plant production', () => {
+  it('Can not play if nobody has plant production', () => {
     (game as any).oxygenLevel = 8;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', () => {
+  it('Can not play if oxygen level too low', () => {
     (game as any).oxygenLevel = 7;
     player2.addProduction(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;

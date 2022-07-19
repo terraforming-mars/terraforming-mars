@@ -17,7 +17,7 @@ describe('OrbitalCleanup', function() {
     Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t play if cannot decrease MC production', function() {
+  it('Can not play if cannot decrease MC production', function() {
     player.addProduction(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });

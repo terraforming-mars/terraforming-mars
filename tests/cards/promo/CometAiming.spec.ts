@@ -22,7 +22,7 @@ describe('CometAiming', function() {
     expect(card.play()).is.undefined;
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });

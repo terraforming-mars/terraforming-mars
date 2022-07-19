@@ -15,7 +15,7 @@ describe('SubCrustMeasurements', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play if not enough science tags', function() {
+  it('Can not play if not enough science tags', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

@@ -52,7 +52,7 @@ describe('HeatTrappers', function() {
     expect(player2.getProduction(Resources.HEAT)).to.eq(5);
   });
 
-  it('Can\'t play if nobody has heat production', function() {
+  it('Can not play if nobody has heat production', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

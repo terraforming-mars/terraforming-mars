@@ -50,8 +50,7 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
       'Select an event card to replay, and then discard',
       'Play',
       this.availableEventCards(player),
-      (cards) => {
-        const card = cards[0];
+      ([card]) => {
         player.game.log('${0} is replaying ${1}', (b) => b.player(player).card(card));
         player.playCard(card, undefined, false);
         player.discardPlayedCard(card);

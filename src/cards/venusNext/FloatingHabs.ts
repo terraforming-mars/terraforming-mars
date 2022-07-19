@@ -1,4 +1,4 @@
-import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -58,9 +58,9 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
       'Spend 2 M€ and select card to add 1 floater',
       'Add floater',
       floaterCards,
-      (foundCards: Array<ICard>) => {
+      ([card]) => {
         player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
-        player.addResourceTo(foundCards[0], {log: true});
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

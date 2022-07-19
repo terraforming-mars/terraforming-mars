@@ -44,9 +44,9 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       'Select a card to gain an animal resource',
       'Spend 1 plant',
       player.getResourceCards(CardResource.ANIMAL),
-      (cards) => {
+      ([card]) => {
         player.deductResource(Resources.PLANTS, 1);
-        player.addResourceTo(cards[0], {log: true});
+        player.addResourceTo(card, {log: true});
         return undefined;
       });
   }

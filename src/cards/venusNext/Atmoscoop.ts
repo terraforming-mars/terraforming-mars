@@ -7,7 +7,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import * as constants from '../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -74,8 +73,8 @@ export class Atmoscoop extends Card implements IProjectCard {
       'Select card to add 2 floaters',
       'Add floaters',
       floaterCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {qty: 2, log: true});
+      ([card]) => {
+        player.addResourceTo(card, {qty: 2, log: true});
         return undefined;
       },
     );

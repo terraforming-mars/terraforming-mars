@@ -1194,8 +1194,8 @@ export class Player {
       },
       'Keep',
       cards,
-      (foundCards: Array<IProjectCard>) => {
-        foundCards.forEach((card) => {
+      (selected) => {
+        selected.forEach((card) => {
           this.draftedCards.push(card);
           cards = cards.filter((c) => c !== card);
         });
@@ -1289,8 +1289,8 @@ export class Player {
       'Select prelude card to play',
       'Play',
       this.getPlayablePreludeCards(),
-      (foundCards: Array<IProjectCard>) => {
-        return this.playCard(foundCards[0]);
+      ([card]) => {
+        return this.playCard(card);
       },
     );
   }
@@ -1520,17 +1520,16 @@ export class Player {
       'Perform an action from a played card',
       'Take action',
       this.getPlayableActionCards(),
-      (foundCards) => {
-        const foundCard = foundCards[0];
-        this.game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
-        const action = foundCard.action(this);
+      ([card]) => {
+        this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
+        const action = card.action(this);
         if (action !== undefined) {
           this.game.defer(new SimpleDeferredAction(
             this,
             () => action,
           ));
         }
-        this.actionsThisGeneration.add(foundCard.name);
+        this.actionsThisGeneration.add(card.name);
         return undefined;
       }, {selectBlueCardAction: true},
     );

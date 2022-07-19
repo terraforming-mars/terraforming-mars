@@ -66,9 +66,9 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       'Select card to add 1 asteroid',
       'Add asteroid',
       asteroidCards,
-      (foundCards: Array<ICard>) => {
+      ([card]) => {
         player.titanium--;
-        player.addResourceTo(foundCards[0], {log: true});
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

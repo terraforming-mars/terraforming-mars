@@ -51,8 +51,8 @@ export class VenusianPlants extends Card implements IProjectCard {
       'Select card to add 1 resource',
       'Add resource',
       cards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -35,8 +34,8 @@ export class AirScrappingExpedition extends Card {
       return undefined;
     }
 
-    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], 3);
+    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, ([card]) => {
+      player.addResourceTo(card, 3);
       return undefined;
     });
   }

@@ -15,7 +15,7 @@ describe('ArcticAlgae', function() {
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     (game as any).temperature = -10;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

@@ -16,7 +16,7 @@ describe('IndustrialCenter', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play or act', function() {
+  it('Can not play or act', function() {
     expect(card.canAct(player)).is.not.true;
     expect(card.canPlay(player)).is.not.true;
   });

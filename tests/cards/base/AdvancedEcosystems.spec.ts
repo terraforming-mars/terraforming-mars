@@ -16,7 +16,7 @@ describe('AdvancedEcosystems', function() {
     player.playedCards.push(new TundraFarming(), new ResearchNetwork());
   });
 
-  it('Can\'t play if tag requirements is unmet', function() {
+  it('Can not play if tag requirements is unmet', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

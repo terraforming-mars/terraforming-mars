@@ -20,7 +20,7 @@ describe('RefugeeCamps', function() {
     expect(card.getVictoryPoints()).to.eq(5);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canAct(player)).is.not.true;
   });

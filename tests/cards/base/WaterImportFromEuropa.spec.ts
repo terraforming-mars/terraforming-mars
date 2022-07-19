@@ -16,7 +16,7 @@ describe('WaterImportFromEuropa', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

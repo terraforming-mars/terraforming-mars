@@ -15,13 +15,13 @@ describe('SmallAnimals', function() {
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', function() {
     player2.addProduction(Resources.PLANTS, 1);
     (game as any).oxygenLevel = 5;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if no one has plant production', function() {
+  it('Can not play if no one has plant production', function() {
     (game as any).oxygenLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

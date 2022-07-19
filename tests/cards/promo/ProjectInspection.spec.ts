@@ -21,12 +21,12 @@ describe('ProjectInspection', function() {
     restrictedArea = new RestrictedArea();
   });
 
-  it('Can\'t play if no actions played this turn', function() {
+  it('Can not play if no actions played this turn', function() {
     player.playedCards.push(restrictedArea);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if available actions can\'t act', function() {
+  it('Can not play if available actions can not act', function() {
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
     player.megaCredits = 1;
@@ -44,7 +44,7 @@ describe('ProjectInspection', function() {
     expect(play instanceof SelectCard).is.true;
   });
 
-  it('Can\'t play with Playwrights if there\'s no other card to chain', function() {
+  it('Can not play with Playwrights if there\'s no other card to chain', function() {
     const playwrights = new Playwrights();
     player.corporationCard = playwrights;
 

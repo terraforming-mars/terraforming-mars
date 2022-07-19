@@ -25,7 +25,7 @@ describe('DiasporaMovement', function() {
     reds = turmoil.getPartyByName(PartyName.REDS)!;
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     reds.sendDelegate(player.id, game);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

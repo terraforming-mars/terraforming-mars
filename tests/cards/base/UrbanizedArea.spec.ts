@@ -21,11 +21,11 @@ describe('UrbanizedArea', function() {
     lands = game.board.getAdjacentSpaces(tharsisTholus).filter((space) => space.spaceType === SpaceType.LAND);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play without available space between two cities', function() {
+  it('Can not play without available space between two cities', function() {
     game.addCityTile(player, lands[0].id);
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;

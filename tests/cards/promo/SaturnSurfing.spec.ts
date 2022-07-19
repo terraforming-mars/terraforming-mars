@@ -21,7 +21,7 @@ describe('SaturnSurfing', function() {
     expect(card.resourceCount).to.eq(3);
   });
 
-  it('Can\'t act if no floaters on the card', function() {
+  it('Can not act if no floaters on the card', function() {
     card.play(player);
     expect(card.resourceCount).to.eq(1);
 

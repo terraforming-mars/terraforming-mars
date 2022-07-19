@@ -21,7 +21,7 @@ describe('Predators', function() {
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

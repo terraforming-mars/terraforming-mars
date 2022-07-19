@@ -14,12 +14,12 @@ describe('UnitedNationsMarsInitiative', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act if TR was not raised', function() {
+  it('Can not act if TR was not raised', function() {
     player.megaCredits = 10;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can\'t act if not enough MC', function() {
+  it('Can not act if not enough MC', function() {
     player.setTerraformRating(21);
     player.megaCredits = 2;
     expect(card.canAct(player)).is.not.true;

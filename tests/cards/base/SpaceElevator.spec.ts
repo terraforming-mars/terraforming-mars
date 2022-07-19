@@ -15,7 +15,7 @@ describe('SpaceElevator', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act if no steel', function() {
+  it('Can not act if no steel', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

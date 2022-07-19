@@ -46,7 +46,7 @@ describe('MiningRightsAres', function() {
     expect(steelSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
   });
 
-  it('Candidate spaces can\'t include hazards', function() {
+  it('Candidate spaces can not include hazards', function() {
     const land = game.board.getAvailableSpacesOnLand(player)
       .find((land) => land.bonus.includes(SpaceBonus.STEEL))!;
 

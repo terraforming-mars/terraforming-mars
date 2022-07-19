@@ -17,7 +17,7 @@ describe('ImmigrantCity', function() {
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

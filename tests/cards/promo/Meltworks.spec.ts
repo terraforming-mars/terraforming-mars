@@ -11,7 +11,7 @@ describe('Meltworks', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.heat = 4;
     expect(card.canAct(player)).is.not.true;
   });

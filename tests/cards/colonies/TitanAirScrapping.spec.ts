@@ -16,7 +16,7 @@ describe('TitanAirScrapping', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });

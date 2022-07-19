@@ -14,7 +14,7 @@ describe('Ironworks', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act without enough energy', function() {
+  it('Can not act without enough energy', function() {
     player.energy = 3;
     expect(card.canAct(player)).is.not.true;
   });

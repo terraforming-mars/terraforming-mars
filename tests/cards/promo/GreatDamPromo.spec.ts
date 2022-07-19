@@ -18,7 +18,7 @@ describe('GreatDamPromo', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without meeting requirements', function() {
+  it('Can not play without meeting requirements', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

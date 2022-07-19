@@ -18,7 +18,7 @@ describe('MassConverter', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

@@ -11,7 +11,7 @@ describe('PhysicsComplex', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     card.play();
     player.energy = 5;
     expect(card.canAct(player)).is.not.true;

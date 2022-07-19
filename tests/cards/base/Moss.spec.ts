@@ -17,13 +17,13 @@ describe('Moss', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without enough oceans', function() {
+  it('Can not play without enough oceans', function() {
     maxOutOceans(player, 2);
     player.plants = 1;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if have no plants', function() {
+  it('Can not play if have no plants', function() {
     maxOutOceans(player, 3);
     player.plants = 0;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

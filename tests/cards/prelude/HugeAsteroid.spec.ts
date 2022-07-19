@@ -14,7 +14,7 @@ describe('HugeAsteroid', function() {
     game = Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.megaCredits = 4;
     expect(card.canPlay(player)).is.not.true;
   });

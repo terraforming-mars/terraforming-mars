@@ -24,7 +24,7 @@ describe('ResearchOutpost', function() {
     expect(card.getCardDiscount()).to.eq(1);
   });
 
-  it('Can\'t play if no spaces available', function() {
+  it('Can not play if no spaces available', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
     for (let i = 0; i < lands.length; i++) {
       game.addGreenery(player, lands[i].id);

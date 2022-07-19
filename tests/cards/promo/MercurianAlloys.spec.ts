@@ -14,7 +14,7 @@ describe('MercurianAlloys', function() {
     Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t play if not enough science tags available', function() {
+  it('Can not play if not enough science tags available', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

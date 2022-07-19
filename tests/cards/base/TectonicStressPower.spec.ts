@@ -13,7 +13,7 @@ describe('TectonicStressPower', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

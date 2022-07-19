@@ -18,11 +18,11 @@ describe('CupolaCity', function() {
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too high', function() {
+  it('Can not play if oxygen level too high', function() {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 10;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

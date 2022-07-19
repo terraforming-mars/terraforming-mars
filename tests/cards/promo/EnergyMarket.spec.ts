@@ -16,7 +16,7 @@ describe('EnergyMarket', function() {
     Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.addResource(Resources.MEGACREDITS, 1);
     expect(card.canAct(player)).is.not.true;
   });

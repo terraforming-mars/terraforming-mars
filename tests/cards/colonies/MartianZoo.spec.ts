@@ -15,7 +15,7 @@ describe('MartianZoo', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -29,7 +29,7 @@ describe('MartianZoo', function() {
     expect(action).is.undefined;
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.playedCards.push(card);
     expect(card.canAct()).is.not.true;
   });

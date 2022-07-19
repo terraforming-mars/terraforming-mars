@@ -11,7 +11,7 @@ describe('SecurityFleet', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t act if no titanium', function() {
+  it('Can not act if no titanium', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

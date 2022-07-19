@@ -197,7 +197,7 @@ export class Game {
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
   // Used for corporation global draft: do we draft to next player or to player before
-  private corporationsDraftToNextPlayer: boolean = false;
+  private corporationsDraftDirection: 'before' | 'after' = 'before';
   public corporationsToDraft: Array<ICorporationCard> = [];
 
   // Milestones and awards
@@ -484,7 +484,7 @@ export class Game {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
-      corporationsDraftToNextPlayer: this.corporationsDraftToNextPlayer,
+      corporationsDraftDirection: this.corporationsDraftDirection,
       corporationsToDraft: this.corporationsToDraft.map((c) => c.name),
     };
     if (this.aresData !== undefined) {
@@ -985,12 +985,12 @@ export class Game {
 
   // Function use to manage corporation draft way
   public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<ICorporationCard>): void {
-    const nextPlayer = this.corporationsDraftToNextPlayer ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
+    const nextPlayer = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
     if (nextPlayer === undefined) {
       throw new Error(`Cannot find player to pass for player ${player.id} in game ${this.id}`);
     }
 
-    const passTo = this.corporationsDraftToNextPlayer ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
+    const passTo = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
     if (passTo === undefined) {
       throw new Error(`Cannot find player to pass for player ${nextPlayer.id} in game ${this.id}`);
     }
@@ -1001,7 +1001,7 @@ export class Game {
         nextPlayer.runDraftCorporationPhase(nextPlayer.name, cards);
       } else if (this.draftRound % this.players.length === 0) {
         player.runDraftCorporationPhase(nextPlayer.name, cards);
-        this.corporationsDraftToNextPlayer = !this.corporationsDraftToNextPlayer;
+        this.corporationsDraftDirection = this.corporationsDraftDirection === 'after' ? 'before' : 'after';
       } else {
         nextPlayer.runDraftCorporationPhase(passTo.name, cards);
       }
@@ -1753,9 +1753,9 @@ export class Game {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
 
-    // TODO(kberg): remove by 2022-09-01
+    // TODO(kberg): remove `?? []` by 2022-09-01
     game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
-    game.corporationsDraftToNextPlayer = d.corporationsDraftToNextPlayer ?? false;
+    game.corporationsDraftDirection = d.corporationsDraftDirection ?? false;
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

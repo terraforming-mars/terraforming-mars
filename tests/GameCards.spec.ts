@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {COMMUNITY_CARD_MANIFEST} from '../src/cards/community/CommunityCardManifest';
 import {CardFinder} from '../src/CardFinder';
 import {setCustomGameOptions} from './TestingUtils';
-import {CardLoader} from '../src/CardLoader';
+import {GameCards} from '../src/GameCards';
 import {CardName} from '../src/common/cards/CardName';
 
-describe('CardLoader', function() {
+describe('GameCards', function() {
   it('correctly removes projectCardsToRemove', function() {
     // include corporate era
     const gameOptions = setCustomGameOptions({
@@ -18,7 +18,7 @@ describe('CardLoader', function() {
       communityCardsOption: false,
       aresExtension: true,
     });
-    const names = new CardLoader(gameOptions).getProjectCards().map((c) => c.name);
+    const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
     expect(names).to.contain(CardName.SOLAR_FARM);
     expect(names).to.not.contain(CardName.CAPITAL);
   });
@@ -35,12 +35,12 @@ describe('CardLoader', function() {
       communityCardsOption: false,
       aresExtension: false,
     });
-    expect(new CardLoader(gameOptions).getProjectCards().length)
+    expect(new GameCards(gameOptions).getProjectCards().length)
       .to.eq(208);
 
     // exclude corporate era
     gameOptions.corporateEra = false;
-    expect(new CardLoader(gameOptions).getProjectCards().length)
+    expect(new GameCards(gameOptions).getProjectCards().length)
       .to.eq(137);
   });
 
@@ -56,7 +56,7 @@ describe('CardLoader', function() {
       aresExtension: false,
     });
 
-    const preludeDeck = new CardLoader(gameOptions).getPreludeCards();
+    const preludeDeck = new GameCards(gameOptions).getPreludeCards();
 
     const turmoilPreludes: Array<CardName> = [];
     COMMUNITY_CARD_MANIFEST.preludeCards.factories.forEach((cf) => turmoilPreludes.push(cf.cardName));

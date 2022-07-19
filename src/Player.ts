@@ -44,7 +44,7 @@ import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 import {Timer} from './common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {CardLoader} from './CardLoader';
+import {GameCards} from './GameCards';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './common/Units';
 import {MoonExpansion} from './moon/MoonExpansion';
@@ -1794,7 +1794,7 @@ export class Player {
 
   private getStandardProjects(): Array<StandardProjectCard> {
     const gameOptions = this.game.gameOptions;
-    return new CardLoader(gameOptions)
+    return new GameCards(gameOptions)
       .getStandardProjects()
       .filter((card) => {
         switch (card.name) {

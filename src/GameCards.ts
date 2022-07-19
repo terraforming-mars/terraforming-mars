@@ -16,7 +16,20 @@ import {Deck} from './Deck';
 import {GameModule} from './common/cards/GameModule';
 import {GameOptions} from './Game';
 
-export class CardLoader {
+/**
+ * Returns the cards available to a game based on its `GameOptions`.
+ *
+ * It only includes manifests appropriate to the modules for the game,
+ * and considers the denylist, and extra-module compatibility
+ * (e.g. cards in one module that can't be played without another one.)
+ *
+ * Therefore, this is only used when constructing a brand new instance.
+ *
+ * ... and one other place. When trying to determine the available standard
+ * projects for a game. This is just done on the fly all the time, rather
+ * that store them. (We should do that.)
+ */
+export class GameCards {
   private readonly gameOptions: GameOptions;
   private readonly manifests: Array<CardManifest>;
 
@@ -66,7 +79,7 @@ export class CardLoader {
   private addDeck<T extends ICard>(cards: Array<T>, deck: Deck<T>): void {
     for (const cf of deck.factories.values()) {
       if (cf.Factory === undefined) continue;
-      if (CardLoader.include(this.gameOptions, cf)) {
+      if (GameCards.include(this.gameOptions, cf)) {
         cards.push(new cf.Factory());
       }
     }

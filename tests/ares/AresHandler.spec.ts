@@ -1,7 +1,9 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Player} from '../../src/Player';
-import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
+import {Game} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
+
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';

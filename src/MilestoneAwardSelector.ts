@@ -18,7 +18,7 @@ import {SpaceBaron} from './awards/SpaceBaron';
 import {Thermalist} from './awards/Thermalist';
 import {Venuphile} from './awards/Venuphile';
 import {BoardName} from './common/boards/BoardName';
-import {GameOptions} from './Game';
+import {GameOptions} from './GameOptions';
 import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
 import {Builder} from './milestones/Builder';
 import {Diversifier} from './milestones/Diversifier';

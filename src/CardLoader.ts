@@ -14,7 +14,7 @@ import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 import {Deck} from './Deck';
 import {GameModule} from './common/cards/GameModule';
-import {GameOptions} from './Game';
+import {GameOptions} from './GameOptions';
 
 export class CardLoader {
   private readonly gameOptions: GameOptions;

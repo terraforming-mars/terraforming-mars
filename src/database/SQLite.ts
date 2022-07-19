@@ -1,5 +1,6 @@
 import {GameIdLedger, IDatabase} from './IDatabase';
-import {Game, GameOptions, Score} from '../Game';
+import {Game, Score} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 

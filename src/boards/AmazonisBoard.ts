@@ -6,7 +6,7 @@ import {Player} from '../Player';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {ISpace} from './ISpace';
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 
 export class AmazonisBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisBoard {

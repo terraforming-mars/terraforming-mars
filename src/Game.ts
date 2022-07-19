@@ -1540,7 +1540,7 @@ export class Game {
         }
       }
       // Check player corporation
-      if (player.corporationCard !== undefined && player.corporationCard.name === name) {
+      if (player.isCorporation(name)) {
         return player;
       }
     }

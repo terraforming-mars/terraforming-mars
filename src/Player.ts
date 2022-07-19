@@ -244,7 +244,7 @@ export class Player {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
       }
       // Aurori hook
-      if (this.corporationCard?.name === CardName.AURORAI) {
+      if (this.isCorporation(CardName.AURORAI)) {
         (this.corporationCard as Aurorai).onIncreaseTerraformRating(this, steps);
       }
     };
@@ -816,7 +816,7 @@ export class Player {
    * 'raw-pf': Same as raw, but includes Mars Tags when tag is Science  (Habitat Marte)
    */
   public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
-    const includeEvents = this.corporationCard?.name === CardName.ODYSSEY;
+    const includeEvents = this.isCorporation(CardName.ODYSSEY);
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.getRawTagCount(tag, includeEvents);
@@ -840,13 +840,13 @@ export class Player {
 
     // Habitat Marte hook
     if (mode !== 'raw') {
-      if (tag === Tags.SCIENCE && this.corporationCard?.name === CardName.HABITAT_MARTE) {
+      if (tag === Tags.SCIENCE && this.isCorporation(CardName.HABITAT_MARTE)) {
         tagCount += this.getRawTagCount(Tags.MARS, includeEvents);
       }
     }
 
     // Chimera hook
-    if (this.corporationCard?.name === CardName.CHIMERA) {
+    if (this.isCorporation(CardName.CHIMERA)) {
       // Milestones don't count wild tags, so in this case one will be added.
       if (mode === 'award') {
         tagCount++;
@@ -864,7 +864,7 @@ export class Player {
       if (tag === target) return true;
       if (tag === Tags.MARS &&
         target === Tags.SCIENCE &&
-        this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        this.isCorporation(CardName.HABITAT_MARTE)) {
         return true;
       }
     }
@@ -875,7 +875,7 @@ export class Player {
     for (const tag of card.tags) {
       if (tag === target) count++;
       if (tag === Tags.MARS && target === Tags.SCIENCE &&
-        this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        this.isCorporation(CardName.HABITAT_MARTE)) {
         count++;
       }
     }
@@ -915,7 +915,7 @@ export class Player {
     tagCount += this.getRawTagCount(Tags.WILD, false);
 
     // Chimera has 2 wild tags but should only count as one for milestones.
-    if (this.corporationCard?.name === CardName.CHIMERA && mode === 'milestones') tagCount--;
+    if (this.isCorporation(CardName.CHIMERA) && mode === 'milestones') tagCount--;
 
     return tagCount;
   }
@@ -947,7 +947,7 @@ export class Player {
 
     if (mode === 'globalEvent') return uniqueTags.size;
 
-    if (mode === 'milestone' && this.corporationCard?.name === CardName.CHIMERA) wildTagCount--;
+    if (mode === 'milestone' && this.isCorporation(CardName.CHIMERA)) wildTagCount--;
 
     // TODO(kberg): it might be more correct to count all the tags
     // in a game regardless of expansion? But if that happens it needs
@@ -1389,7 +1389,10 @@ export class Player {
   }
 
   public getSpendableData(): number {
-    return this.corporationCard?.name === CardName.AURORAI ? this.corporationCard.resourceCount : 0;
+    if (this.isCorporation(CardName.AURORAI)) {
+      return this.corporationCard?.resourceCount ?? 0;
+    }
+    return 0;
   }
 
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {

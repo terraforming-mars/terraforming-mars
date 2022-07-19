@@ -22,7 +22,7 @@ const FAKE_DATABASE: IDatabase = {
   stats: () => Promise.resolve({}),
 
   storeParticipants: () => Promise.resolve(),
-  getParticipants: () => Promise.reject(new Error('Not used')),
+  getParticipants: () => Promise.resolve([]),
 };
 
 let databaseUnderTest: IDatabase = FAKE_DATABASE;

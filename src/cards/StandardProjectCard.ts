@@ -44,14 +44,12 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   protected abstract actionEssence(player: Player): void
 
   public onStandardProject(player: Player): void {
-    if (player.corporationCard?.onStandardProject !== undefined) {
-      player.corporationCard.onStandardProject(player, this);
+    for (const card of player.corporations) {
+      card.onStandardProject?.(player, this);
     }
 
     for (const playedCard of player.playedCards) {
-      if (playedCard.onStandardProject !== undefined) {
-        playedCard.onStandardProject(player, this);
-      }
+      playedCard.onStandardProject?.(player, this);
     }
   }
 

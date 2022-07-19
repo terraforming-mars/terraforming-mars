@@ -614,9 +614,7 @@ export class Game {
     }
   }
 
-  private playCorporationCard(
-    player: Player, corporationCard: ICorporationCard,
-  ): void {
+  private playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
     player.corporationCard = corporationCard;
     player.megaCredits = corporationCard.startingMegaCredits;
     if (corporationCard.cardCost !== undefined) {

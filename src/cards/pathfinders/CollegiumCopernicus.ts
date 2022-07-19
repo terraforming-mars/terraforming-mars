@@ -98,8 +98,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   private collegiumCopernicus: ICorporationCard | undefined;
 
   constructor(private player: Player) {
-    this.collegiumCopernicus = player.isCorporation(CardName.COLLEGIUM_COPERNICUS) ?
-      player.corporationCard : undefined;
+    this.collegiumCopernicus = player.getCorporation(CardName.COLLEGIUM_COPERNICUS);
   }
 
   public canUse() {

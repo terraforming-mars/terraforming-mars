@@ -51,7 +51,7 @@ import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './common/ares/IAresData';
 import {AgendaStyle} from './common/turmoil/Types';
 import {GameSetup} from './GameSetup';
-import {CardLoader} from './CardLoader';
+import {GameCards} from './GameCards';
 import {GlobalParameter} from './common/GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
 import {IMoonData} from './moon/IMoonData';
@@ -264,8 +264,8 @@ export class Game {
     const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
     const cardFinder = new CardFinder();
-    const cardLoader = new CardLoader(gameOptions);
-    const dealer = Dealer.newInstance(cardLoader);
+    const cardsForGame = new GameCards(gameOptions);
+    const dealer = Dealer.newInstance(cardsForGame);
 
     const activePlayer = firstPlayer.id;
 

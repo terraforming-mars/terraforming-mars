@@ -30,7 +30,7 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
     return undefined;
   }
   public canAct(player: Player): boolean {
-    return player.availableHeat >= 8 && player.canAfford(0, {
+    return player.availableHeat() >= 8 && player.canAfford(0, {
       reserveUnits: Units.of({heat: 8}),
       tr: {tr: 1},
     });

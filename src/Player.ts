@@ -453,7 +453,7 @@ export class Player {
       this.plants - units.plants >= 0 &&
       this.energy - units.energy >= 0 &&
       // Stormcraft Incorporated can supply heat, so use `availableHeat`
-      this.availableHeat - units.heat >= 0;
+      this.availableHeat() - units.heat >= 0;
   }
 
   public addUnits(units: Partial<Units>, options? : {
@@ -1557,7 +1557,7 @@ export class Player {
     this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
   }
 
-  public get availableHeat(): number {
+  public availableHeat(): number {
     const floaters = this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? (this.corporationCard?.resourceCount ?? 0) : 0;
     return this.heat + (floaters * 2);
   }

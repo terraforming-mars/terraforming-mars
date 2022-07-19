@@ -31,7 +31,7 @@ export class Meltworks extends Card implements IActionCard, IProjectCard {
     return undefined;
   }
   public canAct(player: Player): boolean {
-    return player.availableHeat >= 5;
+    return player.availableHeat() >= 5;
   }
   public action(player: Player) {
     return player.spendHeat(5, () => {

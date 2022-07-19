@@ -96,7 +96,7 @@ class KelvinistsPolicy03 implements Policy {
   isDefault = false;
 
   canAct(player: Player) {
-    return player.availableHeat >= 6 && player.game.getTemperature() < MAX_TEMPERATURE;
+    return player.availableHeat() >= 6 && player.game.getTemperature() < MAX_TEMPERATURE;
   }
 
   action(player: Player) {

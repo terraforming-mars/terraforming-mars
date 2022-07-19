@@ -449,7 +449,7 @@ export class Player {
       this.plants - units.plants >= 0 &&
       this.energy - units.energy >= 0 &&
       // Stormcraft Incorporated can supply heat, so use `availableHeat`
-      this.availableHeat - units.heat >= 0;
+      this.availableHeat() - units.heat >= 0;
   }
 
   public addUnits(units: Partial<Units>, options? : {
@@ -676,13 +676,6 @@ export class Player {
     if (this.isCorporation(CardName.PHARMACY_UNION) && this.corporationCard?.isDisabled) count++;
 
     return count;
-  }
-
-  public getResourcesOnCorporation():number {
-    if (this.corporationCard !== undefined &&
-      this.corporationCard.resourceCount !== undefined) {
-      return this.corporationCard.resourceCount;
-    } else return 0;
   }
 
   public getRequirementsBonus(parameter: GlobalParameter): number {
@@ -1560,12 +1553,13 @@ export class Player {
     this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
   }
 
-  public get availableHeat(): number {
-    return this.heat + (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? this.getResourcesOnCorporation() * 2 : 0);
+  public availableHeat(): number {
+    const floaters = this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? (this.corporationCard?.resourceCount ?? 0) : 0;
+    return this.heat + (floaters * 2);
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
-    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
+    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (this.corporationCard?.resourceCount ?? 0) > 0) {
       return (<StormCraftIncorporated> this.corporationCard).spendHeat(this, amount, cb);
     }
     this.deductResource(Resources.HEAT, amount);

@@ -212,7 +212,7 @@ export class Game {
 
   // Card-specific data
   // Mons Insurance promo corp
-  public monsInsuranceOwner?: PlayerId;
+  public monsInsuranceOwner?: PlayerId; // Not serialized
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // Syndicate Pirate Raids
@@ -249,6 +249,7 @@ export class Game {
 
     this.players.forEach((player) => {
       player.game = this;
+      if (player.isCorporation(CardName.MONS_INSURANCE)) this.monsInsuranceOwner = player.id;
     });
   }
 
@@ -435,7 +436,6 @@ export class Game {
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
       milestones: this.milestones.map((m) => m.name),
-      monsInsuranceOwner: this.monsInsuranceOwner,
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
@@ -1699,7 +1699,6 @@ export class Game {
     game.activePlayer = d.activePlayer;
     game.draftRound = d.draftRound;
     game.initialDraftIteration = d.initialDraftIteration;
-    game.monsInsuranceOwner = d.monsInsuranceOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
 

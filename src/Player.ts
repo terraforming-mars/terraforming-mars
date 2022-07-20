@@ -671,6 +671,11 @@ export class Player {
     return coloniesCount;
   }
 
+  /*
+   * When playing Pharmacy Union, if the card is discarded, then it sits in the event pile.
+   * That's why it's included below. The FAQ describes how this applies to things like the
+   * Legend Milestone, Media Archives, and NOT Media Group.
+   */
   public getPlayedEventsCount(): number {
     let count = this.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
     if (this.isCorporation(CardName.PHARMACY_UNION) && this.corporationCard?.isDisabled) count++;

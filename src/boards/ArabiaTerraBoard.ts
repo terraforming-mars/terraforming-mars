@@ -1,4 +1,4 @@
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {Player} from '../Player';
 import {Random} from '../Random';
 import {SpaceBonus} from '../common/boards/SpaceBonus';

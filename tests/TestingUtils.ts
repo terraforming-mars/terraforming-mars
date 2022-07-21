@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Player} from '../src/Player';
-import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
+import {Game} from '../src/Game';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../src/GameOptions';
 import * as constants from '../src/common/constants';
 import {ISpace} from '../src/boards/ISpace';
 import {Phase} from '../src/common/Phase';

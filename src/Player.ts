@@ -67,6 +67,11 @@ import {SerializedGame} from './SerializedGame';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from './common/inputs/InputResponse';
 
+// Behavior when playing a card.
+// add it to the tableau
+// discard it from the tableau
+// do nothing.
+export type CardAction ='add' | 'discard' | 'nothing';
 export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
@@ -1286,6 +1291,7 @@ export class Player {
   }
 
   private canUseData(card: ICard): boolean {
+    // TODO(kberg): add this.corporation.name === CardName.AURORAI
     return card.cardType === CardType.STANDARD_PROJECT;
   }
 
@@ -1300,7 +1306,7 @@ export class Player {
     );
   }
 
-  public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay) {
+  public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay, cardAction: CardAction = 'add') {
     const cardCost: number = this.getCardCost(selectedCard);
     let totalToPay: number = 0;
 
@@ -1360,14 +1366,14 @@ export class Player {
     if (totalToPay < cardCost) {
       throw new Error('Did not spend enough to pay for card');
     }
-    return this.playCard(selectedCard, howToPay);
+    return this.playCard(selectedCard, howToPay, cardAction);
   }
 
-  public playProjectCard(): PlayerInput {
+  public getPlayProjectCardInput(cards: Array<IProjectCard> = this.getPlayableCards(), cardAction: CardAction = 'add') {
     return new SelectHowToPayForProjectCard(
       this,
-      this.getPlayableCards(),
-      (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay),
+      cards,
+      (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, cardAction),
     );
   }
 
@@ -1400,7 +1406,7 @@ export class Player {
     return 0;
   }
 
-  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {
+  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
     // Pay for card
     if (howToPay !== undefined) {
       this.deductResource(Resources.STEEL, howToPay.steel);
@@ -1455,28 +1461,42 @@ export class Player {
     const action = selectedCard.play(this);
     this.defer(action, Priority.DEFAULT);
 
-    // Remove card from hand
-    const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
-    const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
-    if (projectCardIndex !== -1) {
-      this.cardsInHand.splice(projectCardIndex, 1);
-    } else if (preludeCardIndex !== -1) {
-      this.preludeCardsInHand.splice(preludeCardIndex, 1);
-    }
+    // This could probably include 'nothing' but for now this will work.
+    if (cardAction !== 'discard') {
+      // Remove card from hand
+      const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
+      const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
+      if (projectCardIndex !== -1) {
+        this.cardsInHand.splice(projectCardIndex, 1);
+      } else if (preludeCardIndex !== -1) {
+        this.preludeCardsInHand.splice(preludeCardIndex, 1);
+      }
 
-    // Remove card from Self Replicating Robots
-    const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
-    if (card instanceof SelfReplicatingRobots) {
-      for (const targetCard of card.targetCards) {
-        if (targetCard.card.name === selectedCard.name) {
-          const index = card.targetCards.indexOf(targetCard);
-          card.targetCards.splice(index, 1);
+      // Remove card from Self Replicating Robots
+      const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      if (card instanceof SelfReplicatingRobots) {
+        for (const targetCard of card.targetCards) {
+          if (targetCard.card.name === selectedCard.name) {
+            const index = card.targetCards.indexOf(targetCard);
+            card.targetCards.splice(index, 1);
+          }
         }
       }
     }
 
-    if (addToPlayedCards && selectedCard.name !== CardName.LAW_SUIT) {
-      this.playedCards.push(selectedCard);
+    switch (cardAction) {
+    case 'add':
+      if (selectedCard.name !== CardName.LAW_SUIT) {
+        this.playedCards.push(selectedCard);
+      }
+      break;
+    // Card is already played. Discard it.
+    case 'discard':
+      this.discardPlayedCard(selectedCard);
+      break;
+    // Do nothing. Good for fake cards.
+    case 'nothing':
+      break;
     }
 
     // See DeclareCloneTag for why.
@@ -1725,11 +1745,9 @@ export class Player {
     return candidateCards.filter((card) => this.canPlay(card));
   }
 
-  public canPlay(card: IProjectCard): boolean {
-    const baseCost = this.getCardCost(card);
-
-    const canAfford = this.canAfford(
-      baseCost,
+  public canAffordCard(card: IProjectCard): boolean {
+    return this.canAfford(
+      this.getCardCost(card),
       {
         steel: this.canUseSteel(card),
         titanium: this.canUseTitanium(card),
@@ -1741,12 +1759,10 @@ export class Player {
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
         tr: card.tr,
       });
+  }
 
-    if (!canAfford) {
-      return false;
-    }
-
-    return this.canPlayIgnoringCost(card);
+  public canPlay(card: IProjectCard): boolean {
+    return this.canAffordCard(card) && this.canPlayIgnoringCost(card);
   }
 
   // Verify if requirements for the card can be met, ignoring the project cost.
@@ -1993,10 +2009,9 @@ export class Player {
       );
     }
 
-    if (this.getPlayableCards().length > 0) {
-      action.options.push(
-        this.playProjectCard(),
-      );
+    const playableCards = this.getPlayableCards();
+    if (playableCards.length !== 0) {
+      action.options.push(this.getPlayProjectCardInput(playableCards));
     }
 
     const coloniesTradeAction = ColoniesHandler.coloniesTradeAction(this);

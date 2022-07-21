@@ -77,7 +77,7 @@ export class Playwrights extends Card implements ICorporationCard {
           {
             title: 'Select how to pay to replay the event',
             afterPay: () => {
-              player.playCard(selectedCard, undefined, false); // Play the card but don't add it to played cards
+              player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
               player.removedFromPlayCards.push(selectedCard); // Remove card from the game
               if (selectedCard.name === CardName.LAW_SUIT) {
                 /*

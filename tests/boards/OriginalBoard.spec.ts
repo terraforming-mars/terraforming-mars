@@ -1,4 +1,4 @@
-import {DEFAULT_GAME_OPTIONS} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
 import {expect} from 'chai';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {SeededRandom} from '../../src/Random';

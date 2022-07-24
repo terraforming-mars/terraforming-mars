@@ -7,9 +7,10 @@ export class PlayProjectCard extends DeferredAction {
   }
 
   public execute() {
-    if (this.player.getPlayableCards().length === 0) {
+    const playableCards = this.player.getPlayableCards();
+    if (playableCards.length === 0) {
       return undefined;
     }
-    return this.player.playProjectCard();
+    return this.player.getPlayProjectCardInput(playableCards);
   }
 }

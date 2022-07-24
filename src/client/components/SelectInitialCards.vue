@@ -121,6 +121,7 @@ export default (Vue as WithRefs<Refs>).extend({
             result += 2;
             break;
           }
+          break;
 
         // When any player raises any Moon Rate, gain 1M€ per step.
         case CardName.LUNA_FIRST_INCORPORATED:
@@ -134,6 +135,7 @@ export default (Vue as WithRefs<Refs>).extend({
             result += 2;
             break;
           }
+          break;
 
         // When you place an ocean tile, gain 4MC
         case CardName.POLARIS:

@@ -89,7 +89,8 @@ export class RemoveResourcesFromCard extends DeferredAction {
           break;
         case CardResource.MICROBE:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;
-        default:
+          // This fallthrough is intentional
+        default: // eslint-disable-line no-fallthrough
           resourceCards.push(...p.getCardsWithResources(resourceType));
         }
       });

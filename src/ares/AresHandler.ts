@@ -66,6 +66,7 @@ export class AresHandler {
     const addResourceToCard = function(player: Player, resourceType: CardResource, resourceAsText: string) {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
+        return;
       } else if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {

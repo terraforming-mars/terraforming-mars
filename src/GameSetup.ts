@@ -1,7 +1,8 @@
 import {Board} from './boards/Board';
 import {BoardName} from './common/boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
-import {Game, GameOptions} from './Game';
+import {Game} from './Game';
+import {GameOptions} from './GameOptions';
 import {GameId, PlayerId} from './common/Types';
 import {HellasBoard} from './boards/HellasBoard';
 import {OriginalBoard} from './boards/OriginalBoard';

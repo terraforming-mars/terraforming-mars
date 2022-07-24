@@ -43,8 +43,7 @@ export class RemoveResourcesFromCard extends DeferredAction {
       this.title,
       'Remove resource(s)',
       resourceCards,
-      (foundCards: Array<ICard>) => {
-        const card = foundCards[0];
+      ([card]) => {
         const owner = this.player.game.getCardPlayer(card.name);
         owner.removeResourceFrom(card, this.count, {removingPlayer: this.player});
         return undefined;
@@ -90,7 +89,8 @@ export class RemoveResourcesFromCard extends DeferredAction {
           break;
         case CardResource.MICROBE:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;
-        default:
+          // This fallthrough is intentional
+        default: // eslint-disable-line no-fallthrough
           resourceCards.push(...p.getCardsWithResources(resourceType));
         }
       });

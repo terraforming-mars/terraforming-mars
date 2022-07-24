@@ -21,8 +21,8 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
     this.options.push(
       new SelectCard<ICorporationCard>(
         'Select corporation', undefined, player.dealtCorporationCards,
-        (foundCards: Array<ICorporationCard>) => {
-          corporation = foundCards[0];
+        ([card]) => {
+          corporation = card;
           return undefined;
         },
       ),
@@ -43,8 +43,8 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
     this.options.push(
       new SelectCard(
         'Select initial cards to buy', undefined, player.dealtProjectCards,
-        (foundCards: Array<IProjectCard>) => {
-          player.cardsInHand.push(...foundCards);
+        (cards) => {
+          player.cardsInHand.push(...cards);
           return undefined;
         }, {min: 0, max: 10},
       ),

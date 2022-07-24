@@ -40,7 +40,7 @@ describe('ValuableGases', function() {
     expect(player.getPlayableCards()).is.empty;
 
     // Using playCard instead because playCard impacts lastCardPlayed.
-    player.playCard(card, undefined, true);
+    player.playCard(card);
 
     runAllActions(player.game);
 
@@ -64,7 +64,7 @@ describe('ValuableGases', function() {
 
     expect(localShading.resourceCount).eq(5);
 
-    player.playCard(jovianLanters, undefined, true);
+    player.playCard(jovianLanters);
     expect(airRaid.resourceCount).eq(0);
   });
 });

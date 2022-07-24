@@ -1,4 +1,4 @@
-import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -51,8 +51,8 @@ export class Dirigibles extends Card implements IActionCard, IResourceCard {
       'Select card to add 1 floater',
       'Add floater',
       floaterCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

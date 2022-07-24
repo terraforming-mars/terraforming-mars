@@ -8,13 +8,13 @@ export function durationToMilliseconds(input: string): number {
   const parsed = re.exec(input);
   if (parsed === null) return NaN;
   let total = 0;
-  const [hours, minutes, seconds] = parsed?.slice(1, 4);
+  const [hours, minutes, seconds] = parsed.slice(1, 4);
 
   let valid = false;
   for (const entry of [hours, minutes, seconds]) {
     if (entry === undefined) continue;
     const [value, unit] = [parseFloat(entry.slice(0, -1)), entry.slice(-1)];
-    if (value === NaN) return NaN;
+    if (isNaN(value)) return NaN;
 
     switch (unit) {
     case 'h':

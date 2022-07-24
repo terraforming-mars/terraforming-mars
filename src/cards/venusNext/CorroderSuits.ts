@@ -43,8 +43,8 @@ export class CorroderSuits extends Card {
       'Select card to add 1 resource',
       'Add resource',
       CorroderSuits.getVenusResCards(player),
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

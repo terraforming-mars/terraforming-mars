@@ -64,8 +64,8 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
       'Select card to add 1 floater',
       'Add floater',
       floaterCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {qty: 1, log: true});
+      ([card]) => {
+        player.addResourceTo(card, {qty: 1, log: true});
         return undefined;
       },
     );

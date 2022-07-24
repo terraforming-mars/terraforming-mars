@@ -4,7 +4,7 @@ import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId, isGameId} from '../common/Types';
 import {IGameLoader} from './IGameLoader';
 import {GameIdLedger} from './IDatabase';
-import {GameIds} from './GameIds';
+import {Cache} from './Cache';
 import {MultiMap} from 'mnemonist';
 import {timeAsync} from '../utils/timer';
 import {durationToMilliseconds} from '../utils/durations';
@@ -31,15 +31,15 @@ const metrics = {
 export class GameLoader implements IGameLoader {
   private static instance?: GameLoader;
 
-  private idsContainer: GameIds;
+  private cache: Cache;
   private readonly config: CacheConfig;
   private readonly clock: Clock;
 
   private constructor(config: CacheConfig, clock: Clock) {
     this.config = config;
     this.clock = clock;
-    this.idsContainer = new GameIds(config, clock);
-    timeAsync(this.idsContainer.load())
+    this.cache = new Cache(config, clock);
+    timeAsync(this.cache.load())
       .then((v) => {
         metrics.initialize.set(v.duration);
       });
@@ -58,12 +58,12 @@ export class GameLoader implements IGameLoader {
   }
 
   public resetForTesting(): void {
-    this.idsContainer = new GameIds(this.config, this.clock);
-    this.idsContainer.load();
+    this.cache = new Cache(this.config, this.clock);
+    this.cache.load();
   }
 
   public async add(game: Game): Promise<void> {
-    const d = await this.idsContainer.getGames();
+    const d = await this.cache.getGames();
     d.games.set(game.id, game);
     if (game.spectatorId !== undefined) {
       d.participantIds.set(game.spectatorId, game.id);
@@ -74,7 +74,7 @@ export class GameLoader implements IGameLoader {
   }
 
   public async getIds(): Promise<Array<GameIdLedger>> {
-    const d = await this.idsContainer.getGames();
+    const d = await this.cache.getGames();
     const map = new MultiMap<GameId, SpectatorId | PlayerId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
     const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
@@ -82,12 +82,12 @@ export class GameLoader implements IGameLoader {
   }
 
   public async isCached(gameId: GameId): Promise<boolean> {
-    const d = await this.idsContainer.getGames();
+    const d = await this.cache.getGames();
     return d.games.get(gameId) !== undefined;
   }
 
   public async getGame(id: GameId | PlayerId | SpectatorId, forceLoad: boolean = false): Promise<Game | undefined> {
-    const d = await this.idsContainer.getGames();
+    const d = await this.cache.getGames();
     const gameId = isGameId(id) ? id : d.participantIds.get(id);
     if (gameId === undefined) return undefined;
 
@@ -128,11 +128,11 @@ export class GameLoader implements IGameLoader {
   }
 
   public mark(gameId: GameId) {
-    this.idsContainer.mark(gameId);
+    this.cache.mark(gameId);
   }
 
   public sweep() {
-    this.idsContainer.sweep();
+    this.cache.sweep();
   }
 }
 

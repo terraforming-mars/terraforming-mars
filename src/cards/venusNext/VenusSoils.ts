@@ -4,7 +4,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -46,8 +45,8 @@ export class VenusSoils extends Card {
       'Select card to add 2 microbes',
       'Add microbe(s)',
       microbeCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {qty: 2, log: true});
+      ([card]) => {
+        player.addResourceTo(card, {qty: 2, log: true});
         return undefined;
       },
     );

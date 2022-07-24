@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -41,8 +40,8 @@ export class HydrogenToVenus extends Card {
           'Select card to add ' + jovianTags + ' floater(s)',
           'Add floater(s)',
           floatersCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], {qty: jovianTags, log: true});
+          ([card]) => {
+            player.addResourceTo(card, {qty: jovianTags, log: true});
             player.game.increaseVenusScaleLevel(player, 1);
             return undefined;
           },

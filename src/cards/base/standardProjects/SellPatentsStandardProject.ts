@@ -35,9 +35,9 @@ export class SellPatentsStandardProject extends StandardProjectCard {
       'Sell patents',
       'Sell',
       player.cardsInHand,
-      (foundCards: Array<IProjectCard>) => {
-        player.megaCredits += foundCards.length;
-        foundCards.forEach((card) => {
+      (cards) => {
+        player.megaCredits += cards.length;
+        cards.forEach((card) => {
           for (let i = 0; i < player.cardsInHand.length; i++) {
             if (player.cardsInHand[i].name === card.name) {
               player.cardsInHand.splice(i, 1);
@@ -47,7 +47,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
           player.game.dealer.discard(card);
         });
         this.projectPlayed(player);
-        player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
+        player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(cards.length));
         return undefined;
       }, {max: player.cardsInHand.length, played: false},
     );

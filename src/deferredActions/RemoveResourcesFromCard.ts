@@ -43,8 +43,7 @@ export class RemoveResourcesFromCard extends DeferredAction {
       this.title,
       'Remove resource(s)',
       resourceCards,
-      (foundCards: Array<ICard>) => {
-        const card = foundCards[0];
+      ([card]) => {
         const owner = this.player.game.getCardPlayer(card.name);
         owner.removeResourceFrom(card, this.count, {removingPlayer: this.player});
         return undefined;

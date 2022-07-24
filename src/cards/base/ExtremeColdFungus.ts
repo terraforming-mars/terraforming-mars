@@ -1,4 +1,4 @@
-import {ICard, IActionCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
@@ -74,8 +74,8 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
         'Select card to add 2 microbes',
         'Add microbes',
         otherMicrobeCards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {qty: 2, log: true});
+        ([card]) => {
+          player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
         },
       ),

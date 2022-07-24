@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -44,8 +43,8 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add 2 microbes', 'Add microbes', cardsToPick, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {qty: 2, log: true});
+    return new SelectCard('Select card to add 2 microbes', 'Add microbes', cardsToPick, ([card]) => {
+      player.addResourceTo(card, {qty: 2, log: true});
       return undefined;
     });
   }

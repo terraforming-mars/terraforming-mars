@@ -67,8 +67,8 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       'Select a Venus card to add 1 microbe',
       'Add microbe',
       venusMicrobeCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

@@ -1,6 +1,5 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
-import {ICard} from '../cards/ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {Resources} from '../common/Resources';
 import {CardResource} from '../common/CardResource';
@@ -26,8 +25,8 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
     });
     const removeFloaters = new SelectCard(
       'Select card to remove 2 floaters from', 'Remove floaters', floaterCards,
-      (foundCards: Array<ICard>) => {
-        this.player.removeResourceFrom(foundCards[0], 2);
+      ([card]) => {
+        this.player.removeResourceFrom(card, 2);
         return undefined;
       },
     );

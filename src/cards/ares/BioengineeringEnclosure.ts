@@ -5,7 +5,6 @@ import {CardType} from '../../common/cards/CardType';
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {ICard} from '../../cards/ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRequirements} from '../CardRequirements';
@@ -68,10 +67,10 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
           'Select card to add 1 animal',
           'Add animal',
           resourceCards,
-          (foundCards: Array<ICard>) => {
+          ([card]) => {
             this.resourceCount--;
-            player.addResourceTo(foundCards[0], 1);
-            player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(foundCards[0]));
+            player.addResourceTo(card, 1);
+            player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
             return undefined;
           },
         );

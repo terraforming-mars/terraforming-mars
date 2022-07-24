@@ -93,9 +93,9 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
           'Select active card to discard',
           'Discard',
           activeCards,
-          (foundCards) => {
-            this.convertCardPointsToTR(player, foundCards[0]);
-            player.discardPlayedCard(foundCards[0]);
+          ([card]) => {
+            this.convertCardPointsToTR(player, card);
+            player.discardPlayedCard(card);
             player.drawCard(2);
             return undefined;
           },

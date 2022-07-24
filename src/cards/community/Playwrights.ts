@@ -60,8 +60,8 @@ export class Playwrights extends Card implements ICorporationCard {
 
     return new SelectCard<IProjectCard>(
       'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
-      (foundCards: Array<IProjectCard>) => {
-        const selectedCard: IProjectCard = foundCards[0];
+      ([card]) => {
+        const selectedCard: IProjectCard = card;
 
         players.forEach((p) => {
           const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);

@@ -57,8 +57,8 @@ export class Viron extends Card implements ICard, ICorporationCard {
       'Perform again an action from a played card',
       'Take action',
       this.getActionCards(player),
-      (foundCards: Array<IActionCard & ICard>) => {
-        const foundCard = foundCards[0];
+      ([card]) => {
+        const foundCard = card;
         player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
         return foundCard.action(player);
       },

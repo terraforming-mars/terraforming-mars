@@ -77,7 +77,9 @@ export class MonsInsurance extends Card implements ICorporationCard {
     const game = claimant.game;
     if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== claimant.id) {
       const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
-      (monsInsuranceOwner.corporationCard as MonsInsurance).payDebt(monsInsuranceOwner, claimant);
+      // TODO(kberg): replace with "getCorporationOrThrow"?
+      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporation(CardName.MONS_INSURANCE);
+      monsInsurance?.payDebt(monsInsuranceOwner, claimant);
     }
   }
 
@@ -92,7 +94,9 @@ export class MonsInsurance extends Card implements ICorporationCard {
    */
   public static resolveInsuranceInSoloGame(potentialInsurer: Player) {
     if (potentialInsurer.game.monsInsuranceOwner === potentialInsurer.id) {
-      (potentialInsurer.corporationCard as MonsInsurance).payDebt(potentialInsurer, undefined);
+      // TODO(kberg): replace with "getCorporationOrThrow"?
+      const monsInsurance = <MonsInsurance> potentialInsurer.getCorporation(CardName.MONS_INSURANCE);
+      monsInsurance?.payDebt(potentialInsurer, undefined);
     }
   }
 }

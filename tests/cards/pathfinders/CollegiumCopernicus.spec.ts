@@ -77,7 +77,6 @@ describe('CollegiumCopernicus', function() {
 
     expect(getTradeAction()).is.undefined;
 
-    player.corporationCard = card;
     card.resourceCount = 2;
 
     expect(getTradeAction()).is.undefined;

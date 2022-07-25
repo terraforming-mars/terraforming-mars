@@ -17,7 +17,8 @@ export interface SerializedPlayer {
     colonyTradeOffset: number;
     colonyVictoryPoints: number;
     color: Color;
-    corporationCard: SerializedCard | undefined;
+    corporationCard?: SerializedCard | undefined;
+    corporations: Array<SerializedCard> | undefined; // TODO(kberg): remove undefined once it's applied across the board.
     corporationInitialActionDone: boolean;
     dealtCorporationCards: Array<CardName>;
     dealtPreludeCards: Array<CardName>;

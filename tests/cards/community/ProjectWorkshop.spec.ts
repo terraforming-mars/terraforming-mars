@@ -10,7 +10,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
@@ -24,8 +24,8 @@ describe('ProjectWorkshop', function() {
 
   beforeEach(function() {
     card = new ProjectWorkshop();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
     advancedAlloys = new AdvancedAlloys();
 

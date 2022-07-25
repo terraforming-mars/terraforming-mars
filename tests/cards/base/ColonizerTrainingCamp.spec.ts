@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ColonizerTrainingCamp', function() {
   let card : ColonizerTrainingCamp; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new ColonizerTrainingCamp();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

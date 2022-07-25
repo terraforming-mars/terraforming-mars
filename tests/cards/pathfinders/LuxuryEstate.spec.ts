@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LuxuryEstate} from '../../../src/cards/pathfinders/LuxuryEstate';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {addGreenery, addCity} from '../../TestingUtils';
 
 describe('LuxuryEstate', function() {
@@ -12,8 +12,8 @@ describe('LuxuryEstate', function() {
 
   beforeEach(function() {
     card = new LuxuryEstate();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card);
   });

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SoilFactory} from '../../../src/cards/base/SoilFactory';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('SoilFactory', function() {
@@ -8,7 +8,7 @@ describe('SoilFactory', function() {
 
   beforeEach(function() {
     card = new SoilFactory();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play', function() {

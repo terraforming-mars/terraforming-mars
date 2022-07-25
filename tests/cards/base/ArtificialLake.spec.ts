@@ -3,7 +3,7 @@ import {ArtificialLake} from '../../../src/cards/base/ArtificialLake';
 import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans} from '../../TestingUtils';
@@ -13,8 +13,8 @@ describe('ArtificialLake', function() {
 
   beforeEach(function() {
     card = new ArtificialLake();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('GeneRepair', function() {
@@ -9,8 +9,8 @@ describe('GeneRepair', function() {
 
   beforeEach(function() {
     card = new GeneRepair();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -3,14 +3,14 @@ import {HugeAsteroid} from '../../../src/cards/prelude/HugeAsteroid';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('HugeAsteroid', function() {
   let card : HugeAsteroid; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new HugeAsteroid();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

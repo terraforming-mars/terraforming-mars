@@ -13,7 +13,7 @@ import {Resources} from '../../src/common/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {setCustomGameOptions} from '../TestingUtils';
-import {TestPlayer, TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
 import {VictoryPointsBreakdown} from '../../src/VictoryPointsBreakdown';
 
@@ -26,8 +26,8 @@ describe('MoonExpansion', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.PINK.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.PINK.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
   });

@@ -5,7 +5,7 @@ import {LunarMineUrbanization} from '../../../src/cards/moon/LunarMineUrbanizati
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {VictoryPointsBreakdown} from '../../../src/VictoryPointsBreakdown';
 
@@ -17,7 +17,7 @@ describe('LunarMineUrbanization', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunarMineUrbanization();
     moonData = MoonExpansion.moonData(game);

@@ -6,7 +6,7 @@ import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {TheWomb} from '../../../src/cards/moon/TheWomb';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {MoonColonyStandardProject} from '../../../src/cards/moon/MoonColonyStandardProject';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -18,7 +18,7 @@ describe('SubterraneanHabitats', () => {
   let card: SubterraneanHabitats;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new SubterraneanHabitats();

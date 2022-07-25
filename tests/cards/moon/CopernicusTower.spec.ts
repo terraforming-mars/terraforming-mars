@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {CopernicusTower} from '../../../src/cards/moon/CopernicusTower';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
@@ -12,7 +12,7 @@ describe('CopernicusTower', () => {
   let card: CopernicusTower;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new CopernicusTower();
   });

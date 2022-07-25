@@ -4,7 +4,7 @@ import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 
@@ -13,8 +13,8 @@ describe('MassConverter', function() {
 
   beforeEach(function() {
     card = new MassConverter();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -14,7 +14,7 @@ import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
 
@@ -23,8 +23,8 @@ describe('PharmacyUnion', function() {
 
   beforeEach(function() {
     card = new PharmacyUnion();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
 
     player.corporationCard = card;

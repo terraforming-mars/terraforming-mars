@@ -3,15 +3,15 @@ import {Factorum} from '../../../src/cards/promo/Factorum';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Factorum', function() {
   it('Should play', function() {
     const card = new Factorum();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
     const play = card.play(player);
     expect(play).is.undefined;

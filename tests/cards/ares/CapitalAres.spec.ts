@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CapitalAres} from '../../../src/cards/ares/CapitalAres';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -15,8 +15,8 @@ describe('CapitalAres', function() {
 
   beforeEach(function() {
     card = new CapitalAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

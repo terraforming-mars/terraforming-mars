@@ -2,7 +2,7 @@ import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost
 import {expect} from 'chai';
 import {SpaceDebrisCleaningOperation} from '../../../src/cards/pathfinders/SpaceDebrisCleaningOperation';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {Penguins} from '../../../src/cards/promo/Penguins';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
@@ -15,7 +15,7 @@ describe('SpaceDebrisCleaningOperation', function() {
 
   beforeEach(function() {
     card = new SpaceDebrisCleaningOperation();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });

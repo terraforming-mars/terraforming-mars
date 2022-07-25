@@ -19,7 +19,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {resetBoard, setCustomGameOptions, runNextAction, cast} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/cards/ICard';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {fail} from 'assert';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
@@ -38,8 +38,8 @@ describe('RoboticWorkforce', () => {
 
   beforeEach(() => {
     card = new RoboticWorkforce();
-    player = TestPlayers.BLUE.newPlayer();
-    redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
   });
 
@@ -208,8 +208,8 @@ describe('RoboticWorkforce', () => {
         }
 
         // Create new players, set all productions to 2
-        player = TestPlayers.BLUE.newPlayer();
-        redPlayer = TestPlayers.RED.newPlayer();
+        player = TestPlayer.BLUE.newPlayer();
+        redPlayer = TestPlayer.RED.newPlayer();
         game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
         player.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
         redPlayer.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});

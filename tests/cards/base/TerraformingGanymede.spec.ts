@@ -3,7 +3,7 @@ import {TerraformingGanymede} from '../../../src/cards/base/TerraformingGanymede
 import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {setCustomGameOptions} from '../../TestingUtils';
 
@@ -15,8 +15,8 @@ describe('TerraformingGanymede', function() {
 
   beforeEach(() => {
     card = new TerraformingGanymede();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 

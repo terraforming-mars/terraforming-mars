@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {FoodFactory} from '../../../src/cards/base/FoodFactory';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('FoodFactory', function() {
@@ -8,7 +8,7 @@ describe('FoodFactory', function() {
 
   beforeEach(function() {
     card = new FoodFactory();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play', function() {

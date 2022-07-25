@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MuseumofEarlyColonisation} from '../../../src/cards/pathfinders/MuseumofEarlyColonisation';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {addCity, addGreenery, addOcean} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {Units} from '../../../src/common/Units';
@@ -13,8 +13,8 @@ describe('MuseumofEarlyColonisation', function() {
 
   beforeEach(function() {
     card = new MuseumofEarlyColonisation();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

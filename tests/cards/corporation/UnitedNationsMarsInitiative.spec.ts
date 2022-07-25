@@ -2,15 +2,15 @@ import {expect} from 'chai';
 import {UnitedNationsMarsInitiative} from '../../../src/cards/corporation/UnitedNationsMarsInitiative';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('UnitedNationsMarsInitiative', function() {
   let card : UnitedNationsMarsInitiative; let player : Player;
 
   beforeEach(function() {
     card = new UnitedNationsMarsInitiative();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {HE3Lobbyists} from '../../../src/cards/moon/HE3Lobbyists';
 import {Resources} from '../../../src/common/Resources';
 
@@ -12,7 +12,7 @@ describe('HE3Lobbyists', () => {
   let card: HE3Lobbyists;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HE3Lobbyists();
   });

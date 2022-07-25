@@ -3,14 +3,14 @@ import {Research} from '../../../src/cards/base/Research';
 import {DuskLaserMining} from '../../../src/cards/promo/DuskLaserMining';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('DuskLaserMining', function() {
   let card : DuskLaserMining; let player : Player;
 
   beforeEach(function() {
     card = new DuskLaserMining();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play if not enough science tags', function() {

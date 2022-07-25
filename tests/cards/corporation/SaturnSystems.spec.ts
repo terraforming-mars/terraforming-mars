@@ -4,15 +4,15 @@ import {SaturnSystems} from '../../../src/cards/corporation/SaturnSystems';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SaturnSystems', function() {
   let card : SaturnSystems; let player : Player;
 
   beforeEach(function() {
     card = new SaturnSystems();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
@@ -29,7 +29,7 @@ describe('SaturnSystems', function() {
   });
 
   it('Runs onCardPlayed when other player plays card', function() {
-    const player2 = TestPlayers.RED.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     player.corporationCard = card;
 

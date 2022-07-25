@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PowerPlantStandardProject} from '../../../../src/cards/base/standardProjects/PowerPlantStandardProject';
 import {Player} from '../../../../src/Player';
 import {setCustomGameOptions} from '../../../TestingUtils';
-import {TestPlayers} from '../../../TestPlayer';
+import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
 import {StandardTechnology} from '../../../../src/cards/base/StandardTechnology';
 import {Resources} from '../../../../src/common/Resources';
@@ -13,8 +13,8 @@ describe('PowerPlantStandardProjects', function() {
 
   beforeEach(function() {
     card = new PowerPlantStandardProject();
-    player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 

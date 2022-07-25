@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('SpaceElevator', function() {
@@ -9,8 +9,8 @@ describe('SpaceElevator', function() {
 
   beforeEach(function() {
     card = new SpaceElevator();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

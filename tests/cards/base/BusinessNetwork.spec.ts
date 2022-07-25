@@ -5,15 +5,15 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessNetwork', function() {
   let card : BusinessNetwork; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new BusinessNetwork();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

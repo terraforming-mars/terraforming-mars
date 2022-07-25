@@ -3,7 +3,7 @@ import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {ArchimedesHydroponicsStation} from '../../../src/cards/moon/ArchimedesHydroponicsStation';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -12,7 +12,7 @@ describe('ArchimedesHydroponicsStation', () => {
   let card: ArchimedesHydroponicsStation;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new ArchimedesHydroponicsStation();
   });

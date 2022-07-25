@@ -9,7 +9,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -21,8 +21,8 @@ describe('MaxwellBase', function() {
 
   beforeEach(function() {
     card = new MaxwellBase();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });

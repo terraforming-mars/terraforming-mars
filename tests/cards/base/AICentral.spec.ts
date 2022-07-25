@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AICentral} from '../../../src/cards/base/AICentral';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 
@@ -9,8 +9,8 @@ describe('AICentral', function() {
 
   beforeEach(function() {
     card = new AICentral();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

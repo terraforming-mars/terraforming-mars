@@ -4,7 +4,7 @@ import {GHGProducingBacteria} from '../../src/cards/base/GHGProducingBacteria';
 import {Tardigrades} from '../../src/cards/base/Tardigrades';
 import {AddResourcesToCards} from '../../src/deferredActions/AddResourcesToCards';
 import {Game} from '../../src/Game';
-import {TestPlayer, TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {CardResource} from '../../src/common/CardResource';
 import {AndOptions} from '../../src/inputs/AndOptions';
 import {cast} from '../TestingUtils';
@@ -16,7 +16,7 @@ describe('AddResourcesToCards', function() {
   let ants: Ants;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();

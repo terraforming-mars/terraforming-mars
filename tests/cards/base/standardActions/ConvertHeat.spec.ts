@@ -3,7 +3,7 @@ import {ConvertHeat} from '../../../../src/cards/base/standardActions/ConvertHea
 import {Phase} from '../../../../src/common/Phase';
 import {Player} from '../../../../src/Player';
 import {setCustomGameOptions} from '../../../TestingUtils';
-import {TestPlayers} from '../../../TestPlayer';
+import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
@@ -14,8 +14,8 @@ describe('ConvertHeat', function() {
 
   beforeEach(function() {
     card = new ConvertHeat();
-    player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 

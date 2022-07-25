@@ -9,15 +9,15 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('UrbanDecomposers', function() {
   let card : UrbanDecomposers; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new UrbanDecomposers();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TerraformingControlStation} from '../../../src/cards/pathfinders/TerraformingControlStation';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Ants} from '../../../src/cards/base/Ants';
 import {AgroDrones} from '../../../src/cards/pathfinders/AgroDrones';
 import {CorroderSuits} from '../../../src/cards/venusNext/CorroderSuits';
@@ -13,8 +13,8 @@ describe('TerraformingControlStation', function() {
 
   beforeEach(function() {
     card = new TerraformingControlStation();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

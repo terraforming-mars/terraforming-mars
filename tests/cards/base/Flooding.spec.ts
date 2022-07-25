@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
@@ -14,8 +14,8 @@ describe('Flooding', function() {
 
   beforeEach(function() {
     card = new Flooding();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AquiferStandardProject} from '../../../../src/cards/base/standardProjects/AquiferStandardProject';
 import {maxOutOceans, setCustomGameOptions, runAllActions} from '../../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../../TestPlayer';
+import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
@@ -17,7 +17,7 @@ describe('AquiferStandardProject', function() {
 
   beforeEach(function() {
     card = new AquiferStandardProject();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 
@@ -56,7 +56,7 @@ describe('AquiferStandardProject', function() {
   });
 
   it('Can not act with reds', () => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, setCustomGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;

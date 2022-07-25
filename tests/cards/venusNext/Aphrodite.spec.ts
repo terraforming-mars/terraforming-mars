@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {Aphrodite} from '../../../src/cards/venusNext/Aphrodite';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Aphrodite', function() {
   it('Should play', function() {
     const card = new Aphrodite();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;

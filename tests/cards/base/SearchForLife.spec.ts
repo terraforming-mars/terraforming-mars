@@ -3,15 +3,15 @@ import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SearchForLife', function() {
   let card : SearchForLife; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new SearchForLife();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

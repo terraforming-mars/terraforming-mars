@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SmallOpenPitMine} from '../../../src/cards/pathfinders/SmallOpenPitMine';
 import {Game} from '../../../src/Game';
 import {Units} from '../../../src/common/Units';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
@@ -17,7 +17,7 @@ describe('SmallOpenPitMine', function() {
 
   beforeEach(function() {
     card = new SmallOpenPitMine();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();

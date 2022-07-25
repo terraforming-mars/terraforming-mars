@@ -3,15 +3,15 @@ import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('WaterSplittingPlant', function() {
   let card : WaterSplittingPlant; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new WaterSplittingPlant();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -3,15 +3,15 @@ import {Worms} from '../../../src/cards/base/Worms';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Worms', function() {
   let card : Worms; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Worms();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

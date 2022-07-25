@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MiningArea} from '../../../src/cards/base/MiningArea';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
@@ -13,8 +13,8 @@ describe('MiningArea', function() {
 
   beforeEach(function() {
     card = new MiningArea();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

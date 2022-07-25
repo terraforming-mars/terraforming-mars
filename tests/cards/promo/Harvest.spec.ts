@@ -2,15 +2,15 @@ import {expect} from 'chai';
 import {Harvest} from '../../../src/cards/promo/Harvest';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Harvest', function() {
   let card : Harvest; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Harvest();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
 
     const landSpaces = game.board.getAvailableSpacesOnLand(player).slice(0, 2);

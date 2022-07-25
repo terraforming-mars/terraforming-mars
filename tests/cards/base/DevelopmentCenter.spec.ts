@@ -2,15 +2,15 @@ import {expect} from 'chai';
 import {DevelopmentCenter} from '../../../src/cards/base/DevelopmentCenter';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('DevelopmentCenter', function() {
   let card : DevelopmentCenter; let player : Player;
 
   beforeEach(function() {
     card = new DevelopmentCenter();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

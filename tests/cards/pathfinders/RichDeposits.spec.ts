@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {RichDeposits} from '../../../src/cards/pathfinders/RichDeposits';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RichDeposits', function() {
   let card: RichDeposits;
@@ -9,7 +9,7 @@ describe('RichDeposits', function() {
 
   beforeEach(function() {
     card = new RichDeposits();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
   it('canPlay', function() {

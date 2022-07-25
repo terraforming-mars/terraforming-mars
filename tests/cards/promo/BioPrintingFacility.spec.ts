@@ -5,15 +5,15 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('BioPrintingFacility', function() {
   let card : BioPrintingFacility; let player : Player; let player2 : Player;
 
   beforeEach(function() {
     card = new BioPrintingFacility();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card);
   });

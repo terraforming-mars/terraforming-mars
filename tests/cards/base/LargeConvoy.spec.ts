@@ -4,7 +4,7 @@ import {LargeConvoy} from '../../../src/cards/base/LargeConvoy';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('LargeConvoy', function() {
@@ -12,8 +12,8 @@ describe('LargeConvoy', function() {
 
   beforeEach(function() {
     card = new LargeConvoy();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

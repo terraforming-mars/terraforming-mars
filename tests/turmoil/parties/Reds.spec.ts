@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {cast, runAllActions, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
@@ -12,8 +12,8 @@ describe('Reds', function() {
   let player : TestPlayer; let secondPlayer : TestPlayer; let game : Game; let turmoil: Turmoil; let reds: Reds;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    secondPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    secondPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
     turmoil = game.turmoil!;

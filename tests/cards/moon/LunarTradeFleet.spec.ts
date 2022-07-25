@@ -4,7 +4,7 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {LunarTradeFleet} from '../../../src/cards/moon/LunarTradeFleet';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -14,7 +14,7 @@ describe('LunarTradeFleet', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunarTradeFleet();
     moonData = MoonExpansion.moonData(game);

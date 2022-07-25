@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
@@ -16,8 +16,8 @@ describe('AsteroidRights', function() {
 
   beforeEach(function() {
     card = new AsteroidRights();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
     player.playedCards.push(card);

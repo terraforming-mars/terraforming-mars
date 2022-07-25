@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArkship';
 import {expect} from 'chai';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -11,7 +11,7 @@ describe('PrideoftheEarthArkship', () => {
   let card: PrideoftheEarthArkship;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new PrideoftheEarthArkship();
   });

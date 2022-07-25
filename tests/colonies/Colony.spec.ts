@@ -12,7 +12,7 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
 import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
-import {TestPlayer, TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/cards/community/Pallas';
 import {Io} from '../../src/colonies/Io';
@@ -48,10 +48,10 @@ describe('Colony', function() {
   let game: Game;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    player3 = TestPlayers.YELLOW.newPlayer();
-    player4 = TestPlayers.GREEN.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    player3 = TestPlayer.YELLOW.newPlayer();
+    player4 = TestPlayer.GREEN.newPlayer();
     const gameOptions = setCustomGameOptions({
       coloniesExtension: true,
       customColoniesList: [

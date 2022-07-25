@@ -3,15 +3,15 @@ import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {MartianZoo} from '../../../src/cards/colonies/MartianZoo';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianZoo', function() {
   let card : MartianZoo; let player : Player;
 
   beforeEach(function() {
     card = new MartianZoo();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

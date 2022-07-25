@@ -11,7 +11,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MonsInsurance', () => {
@@ -20,9 +20,9 @@ describe('MonsInsurance', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    player3 = TestPlayers.GREEN.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    player3 = TestPlayer.GREEN.newPlayer();
     Game.newInstance('gameid', [player, player2, player3], player);
     card.play(player);
     player.corporationCard = card;
@@ -127,7 +127,7 @@ describe('MonsInsurance - Solo', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     card.play(player);
     player.corporationCard = card;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Mangrove} from '../../../src/cards/base/Mangrove';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 
 describe('Mangrove', function() {
@@ -9,8 +9,8 @@ describe('Mangrove', function() {
 
   beforeEach(function() {
     card = new Mangrove();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

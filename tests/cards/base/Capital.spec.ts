@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Capital} from '../../../src/cards/base/Capital';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -14,8 +14,8 @@ describe('Capital', () => {
 
   beforeEach(() => {
     card = new Capital();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

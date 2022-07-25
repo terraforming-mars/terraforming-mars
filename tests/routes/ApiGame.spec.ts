@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ApiGame} from '../../src/routes/ApiGame';
 import {Game} from '../../src/Game';
 import {MockResponse} from './HttpMocks';
-import {TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 
 describe('ApiGame', () => {
@@ -22,7 +22,7 @@ describe('ApiGame', () => {
   });
 
   it('invalid id', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
     scaffolding.url = '/api/game?id=invalidId';
     await scaffolding.get(ApiGame.INSTANCE, res);
@@ -31,7 +31,7 @@ describe('ApiGame', () => {
   });
 
   it('valid id', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
     scaffolding.url = '/api/game?id=game-valid-id';
     await scaffolding.get(ApiGame.INSTANCE, res);

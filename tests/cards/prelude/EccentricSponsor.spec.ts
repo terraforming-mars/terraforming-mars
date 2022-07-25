@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {EccentricSponsor} from '../../../src/cards/prelude/EccentricSponsor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('EccentricSponsor', function() {
   let card : EccentricSponsor; let player : Player;
 
   beforeEach(function() {
     card = new EccentricSponsor();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

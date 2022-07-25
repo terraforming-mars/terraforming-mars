@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/cards/moon/LunaSenate';
 import {Resources} from '../../../src/common/Resources';
 
@@ -13,8 +13,8 @@ describe('LunaSenate', () => {
   let card: LunaSenate;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.PURPLE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.PURPLE.newPlayer();
     Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
     card = new LunaSenate();
   });

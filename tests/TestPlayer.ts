@@ -5,7 +5,24 @@ import {Units} from '../src/common/Units';
 import {Tags} from '../src/common/cards/Tags';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 
+class TestPlayerFactory {
+  constructor(private color: Color) {}
+  newPlayer(beginner: boolean = false, idSuffix = ''): TestPlayer {
+    return new TestPlayer(this.color, beginner, idSuffix);
+  }
+}
+
 export class TestPlayer extends Player {
+  // Prefer these players when testing, as their IDs are easy to recognize in output. Plus TestPlayer instances have useful support methods.
+  public static BLUE: TestPlayerFactory = new TestPlayerFactory(Color.BLUE);
+  public static RED: TestPlayerFactory = new TestPlayerFactory(Color.RED);
+  public static YELLOW: TestPlayerFactory = new TestPlayerFactory(Color.YELLOW);
+  public static GREEN: TestPlayerFactory = new TestPlayerFactory(Color.GREEN);
+  public static BLACK: TestPlayerFactory = new TestPlayerFactory(Color.BLACK);
+  public static PURPLE: TestPlayerFactory = new TestPlayerFactory(Color.PURPLE);
+  public static ORANGE: TestPlayerFactory = new TestPlayerFactory(Color.ORANGE);
+  public static PINK: TestPlayerFactory = new TestPlayerFactory(Color.PINK);
+
   constructor(color: Color, beginner: boolean = false, idSuffix = '') {
     super('player-' + color, color, beginner, 0, `p-${color}-id${idSuffix}`);
   }
@@ -106,23 +123,4 @@ export interface TagsForTest {
   event: number;
   mars: number;
   clone: number;
-}
-
-class TestPlayerFactory {
-  constructor(private color: Color) {}
-  newPlayer(beginner: boolean = false, idSuffix = ''): TestPlayer {
-    return new TestPlayer(this.color, beginner, idSuffix);
-  }
-}
-
-// Prefer these players when testing, as their IDs are easy to recognize in output.
-export class TestPlayers {
-  public static BLUE: TestPlayerFactory = new TestPlayerFactory(Color.BLUE);
-  public static RED: TestPlayerFactory = new TestPlayerFactory(Color.RED);
-  public static YELLOW: TestPlayerFactory = new TestPlayerFactory(Color.YELLOW);
-  public static GREEN: TestPlayerFactory = new TestPlayerFactory(Color.GREEN);
-  public static BLACK: TestPlayerFactory = new TestPlayerFactory(Color.BLACK);
-  public static PURPLE: TestPlayerFactory = new TestPlayerFactory(Color.PURPLE);
-  public static ORANGE: TestPlayerFactory = new TestPlayerFactory(Color.ORANGE);
-  public static PINK: TestPlayerFactory = new TestPlayerFactory(Color.PINK);
 }

@@ -3,13 +3,13 @@ import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {Viron} from '../../../src/cards/venusNext/Viron';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Viron', function() {
   it('Should act', function() {
     const card = new Viron();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     const action = card.play();
     expect(action).is.undefined;

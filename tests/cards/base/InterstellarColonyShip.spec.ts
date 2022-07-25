@@ -3,15 +3,15 @@ import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColonyShip';
 import {Research} from '../../../src/cards/base/Research';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('InterstellarColonyShip', function() {
   let card : InterstellarColonyShip; let player : TestPlayer;
 
   beforeEach(function() {
     card = new InterstellarColonyShip();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

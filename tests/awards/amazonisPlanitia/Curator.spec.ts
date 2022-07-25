@@ -3,7 +3,7 @@ import {Game} from '../../../src/Game';
 import {Curator} from '../../../src/awards/amazonisPlanitia/Curator';
 import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 
 describe('Curator', () => {
@@ -12,8 +12,8 @@ describe('Curator', () => {
 
   beforeEach(() => {
     award = new Curator();
-    player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
   it('Counts tags', () => {

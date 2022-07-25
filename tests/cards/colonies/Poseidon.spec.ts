@@ -3,15 +3,15 @@ import {Poseidon} from '../../../src/cards/colonies/Poseidon';
 import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 // TODO: add a test for Posideon's initial action.
 
 describe('Poseidon', function() {
   it('Should play', function() {
     const card = new Poseidon();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     const play = card.play();
     expect(play).is.undefined;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MartianNatureWonders} from '../../../src/cards/pathfinders/MartianNatureWonders';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {maxOutOceans, runAllActions} from '../../TestingUtils';
@@ -15,8 +15,8 @@ describe('MartianNatureWonders', function() {
 
   beforeEach(function() {
     card = new MartianNatureWonders();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

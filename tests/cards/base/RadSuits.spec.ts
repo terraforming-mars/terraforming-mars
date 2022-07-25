@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {RadSuits} from '../../../src/cards/base/RadSuits';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('RadSuits', function() {
@@ -9,8 +9,8 @@ describe('RadSuits', function() {
 
   beforeEach(function() {
     card = new RadSuits();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

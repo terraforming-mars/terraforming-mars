@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Lunarchitect} from '../../src/moon/Lunarchitect';
 import {Game} from '../../src/Game';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
-import {TestPlayer, TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {setCustomGameOptions} from '../TestingUtils';
 import {TileType} from '../../src/common/TileType';
 
@@ -13,8 +13,8 @@ describe('Lunarchitect', function() {
   let otherPlayer: TestPlayer;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.PINK.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.PINK.newPlayer();
     Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
   });
 

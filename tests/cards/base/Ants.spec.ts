@@ -7,7 +7,7 @@ import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('Ants', function() {
@@ -15,8 +15,8 @@ describe('Ants', function() {
 
   beforeEach(function() {
     card = new Ants();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     player.popWaitingFor();
   });

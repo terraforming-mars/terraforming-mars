@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {PlayerInput} from '../../src/routes/PlayerInput';
 import {MockResponse} from './HttpMocks';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {UndoActionOption} from '../../src/inputs/UndoActionOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
@@ -28,7 +28,7 @@ describe('PlayerInput', function() {
   });
 
   it('performs undo action', async () => {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     scaffolding.url = '/player/input?id=' + player.id;
     player.beginner = true;
     const game = Game.newInstance('gameid-foo', [player], player);
@@ -53,7 +53,7 @@ describe('PlayerInput', function() {
   });
 
   it('reverts to current game instance if undo fails', async () => {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     scaffolding.url = '/player/input?id=' + player.id;
     player.beginner = true;
     const game = Game.newInstance('gameid-foo', [player], player);
@@ -78,7 +78,7 @@ describe('PlayerInput', function() {
   });
 
   it('sends 400 on server error', async () => {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
     const game = Game.newInstance('gameid', [player], player);
     await scaffolding.ctx.gameLoader.add(game);

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ALL_CARD_MANIFESTS} from '../../../src/cards/AllCards';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
 import {RequirementType} from '../../../src/common/cards/RequirementType';
@@ -10,8 +10,8 @@ import {RequirementType} from '../../../src/common/cards/RequirementType';
 describe('Celestic', function() {
   it('Should play', function() {
     const card = new Celestic();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
     const play = card.play();
     expect(play).is.undefined;

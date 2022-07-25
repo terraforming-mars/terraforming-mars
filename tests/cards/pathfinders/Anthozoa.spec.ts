@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Anthozoa} from '../../../src/cards/pathfinders/Anthozoa';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 
 describe('Anthozoa', function() {
@@ -10,7 +10,7 @@ describe('Anthozoa', function() {
 
   beforeEach(function() {
     card = new Anthozoa();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

@@ -7,7 +7,7 @@ import {ISpace} from '../../../src/boards/ISpace';
 import {expect} from 'chai';
 import {Phase} from '../../../src/common/Phase';
 import {AndOptions} from '../../../src/inputs/AndOptions';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -24,8 +24,8 @@ describe('Philares', () => {
 
   beforeEach(() => {
     card = new Philares();
-    philaresPlayer = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    philaresPlayer = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     // redPlayer is first for the final placement test.
     game = Game.newInstance('gameid', [otherPlayer, philaresPlayer], otherPlayer);
     game.board = EmptyBoard.newInstance();

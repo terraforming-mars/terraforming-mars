@@ -8,15 +8,15 @@ import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Cultural Metropolis', function() {
   let card : CulturalMetropolis; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new CulturalMetropolis();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);

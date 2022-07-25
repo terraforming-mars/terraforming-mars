@@ -6,7 +6,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 
 describe('OceanSanctuary', function() {
@@ -14,8 +14,8 @@ describe('OceanSanctuary', function() {
 
   beforeEach(function() {
     card = new OceanSanctuary();
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

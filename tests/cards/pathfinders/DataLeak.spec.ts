@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DataLeak} from '../../../src/cards/pathfinders/DataLeak';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {runAllActions} from '../../TestingUtils';
 
@@ -12,7 +12,7 @@ describe('DataLeak', function() {
 
   beforeEach(function() {
     card = new DataLeak();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

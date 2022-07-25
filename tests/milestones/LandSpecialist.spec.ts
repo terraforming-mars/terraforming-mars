@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {LandSpecialist} from '../../src/milestones/LandSpecialist';
 import {setCustomGameOptions} from '../TestingUtils';
-import {TestPlayer, TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {Board} from '../../src/boards/Board';
 import {ISpace} from '../../src/boards/ISpace';
@@ -19,8 +19,8 @@ describe('LandSpecialist', function() {
 
   beforeEach(function() {
     milestone = new LandSpecialist();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA, moonExpansion: true}));
     board = game.board;
     spaces = board.getAvailableSpacesOnLand(player);

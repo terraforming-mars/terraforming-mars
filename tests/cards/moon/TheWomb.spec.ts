@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {TheWomb} from '../../../src/cards/moon/TheWomb';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
@@ -13,7 +13,7 @@ describe('TheWomb', () => {
   let card: TheWomb;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new TheWomb();
   });

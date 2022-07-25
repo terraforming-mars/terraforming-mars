@@ -7,7 +7,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', function() {
@@ -17,8 +17,8 @@ describe('NewVenice', function() {
 
   beforeEach(function() {
     card = new NewVenice();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 

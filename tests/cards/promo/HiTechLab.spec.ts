@@ -4,14 +4,14 @@ import {Game} from '../../../src/Game';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('HiTechLab', function() {
   let card : HiTechLab; let player : Player;
 
   beforeEach(function() {
     card = new HiTechLab();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

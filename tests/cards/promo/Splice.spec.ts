@@ -8,7 +8,7 @@ import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Splice', function() {
@@ -16,8 +16,8 @@ describe('Splice', function() {
 
   beforeEach(function() {
     card = new Splice();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

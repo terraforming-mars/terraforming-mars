@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {Meltworks} from '../../../src/cards/promo/Meltworks';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Meltworks', function() {
   let card : Meltworks; let player : Player;
 
   beforeEach(function() {
     card = new Meltworks();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not act', function() {

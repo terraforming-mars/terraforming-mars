@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/cards/base/CorporateStronghold';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';
@@ -12,8 +12,8 @@ describe('CorporateStronghold', function() {
 
   beforeEach(function() {
     card = new CorporateStronghold();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

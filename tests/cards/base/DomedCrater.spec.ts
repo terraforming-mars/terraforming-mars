@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DomedCrater} from '../../../src/cards/base/DomedCrater';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';
@@ -12,8 +12,8 @@ describe('DomedCrater', function() {
 
   beforeEach(function() {
     card = new DomedCrater();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

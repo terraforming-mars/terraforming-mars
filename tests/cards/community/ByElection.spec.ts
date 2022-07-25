@@ -5,7 +5,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('ByElection', function() {
@@ -13,8 +13,8 @@ describe('ByElection', function() {
 
   beforeEach(function() {
     card = new ByElection();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });

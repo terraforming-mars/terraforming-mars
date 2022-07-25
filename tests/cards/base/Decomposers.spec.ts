@@ -6,15 +6,15 @@ import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Decomposers', function() {
   let card : Decomposers; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Decomposers();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

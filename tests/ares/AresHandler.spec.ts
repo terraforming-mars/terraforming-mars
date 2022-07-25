@@ -16,7 +16,7 @@ import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {Decomposers} from '../../src/cards/base/Decomposers';
 import {EnergyTapping} from '../../src/cards/base/EnergyTapping';
 import {Phase} from '../../src/common/Phase';
-import {TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
 import {SeededRandom} from '../../src/Random';
@@ -31,8 +31,8 @@ describe('AresHandler', function() {
   let player : Player; let otherPlayer: Player; let game : Game;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });

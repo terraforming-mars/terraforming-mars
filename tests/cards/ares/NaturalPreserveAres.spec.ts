@@ -6,7 +6,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../../src/cards/ares/NaturalPreserveAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('NaturalPreserveAres', function() {
@@ -14,8 +14,8 @@ describe('NaturalPreserveAres', function() {
 
   beforeEach(function() {
     card = new NaturalPreserveAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

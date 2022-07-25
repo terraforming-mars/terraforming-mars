@@ -6,7 +6,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EcologicalZoneAres} from '../../../src/cards/ares/EcologicalZoneAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('EcologicalZoneAres', function() {
@@ -14,8 +14,8 @@ describe('EcologicalZoneAres', function() {
 
   beforeEach(function() {
     card = new EcologicalZoneAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

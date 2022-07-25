@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AdvancedPowerGrid} from '../../../src/cards/pathfinders/AdvancedPowerGrid';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 
 describe('AdvancedPowerGrid', function() {
@@ -10,7 +10,7 @@ describe('AdvancedPowerGrid', function() {
 
   beforeEach(function() {
     card = new AdvancedPowerGrid();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

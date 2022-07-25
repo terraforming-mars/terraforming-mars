@@ -4,7 +4,7 @@ import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
 
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {IDatabase} from '../../src/database/IDatabase';
 import {newTestGame} from '../TestGame';
@@ -40,7 +40,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('game is saved', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       const allGames = await db.getGameIds();
@@ -48,7 +48,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('getGames - removes duplicates', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       await db.saveGame(game);
@@ -58,7 +58,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('getGames - includes finished games', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       Game.newInstance('game-id-2323', [player], player);
@@ -71,7 +71,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('saveIds', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
@@ -86,7 +86,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
     if (dtor.omit?.cleanGame !== true) {
       it('cleanGame', async () => {
-        const player = TestPlayers.BLACK.newPlayer();
+        const player = TestPlayer.BLACK.newPlayer();
         const game = Game.newInstance('game-id-1212', [player], player);
         await db.lastSaveGamePromise;
         expect(game.lastSaveId).eq(1);
@@ -105,7 +105,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     }
 
     it('gets player count', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
@@ -114,7 +114,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     });
 
     it('does not find player count by id', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
@@ -124,7 +124,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
     if (dtor.omit?.purgeUnfinishedGames !== true) {
       it('purgeUnfinishedGames', async () => {
-        const player = TestPlayers.BLACK.newPlayer();
+        const player = TestPlayer.BLACK.newPlayer();
         const game = Game.newInstance('game-id-1212', [player], player);
         await db.lastSaveGamePromise;
         expect(game.lastSaveId).eq(1);
@@ -145,7 +145,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     }
 
     it('getGameVersion', async () => {
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
       expect(game.lastSaveId).eq(1);
@@ -178,7 +178,7 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
     it('loadCloneableGame', async () => {
       await expect(db.loadCloneableGame('game-id-123')).to.be.rejectedWith(/Game game-id-123 not found/);
 
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-123', [player], player);
       await db.lastSaveGamePromise;
       const serialized = await db.loadCloneableGame('game-id-123');

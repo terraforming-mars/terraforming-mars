@@ -3,15 +3,15 @@ import {Research} from '../../../src/cards/base/Research';
 import {SubCrustMeasurements} from '../../../src/cards/promo/SubCrustMeasurements';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SubCrustMeasurements', function() {
   let card : SubCrustMeasurements; let player : Player;
 
   beforeEach(function() {
     card = new SubCrustMeasurements();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

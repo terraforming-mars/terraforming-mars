@@ -12,7 +12,7 @@ import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
 import {addGreenery, runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('EcologicalSurvey', () => {
@@ -23,8 +23,8 @@ describe('EcologicalSurvey', () => {
 
   beforeEach(() => {
     card = new EcologicalSurvey();
-    player = TestPlayers.BLUE.newPlayer();
-    redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });

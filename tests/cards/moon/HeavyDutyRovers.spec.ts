@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {HeavyDutyRovers} from '../../../src/cards/moon/HeavyDutyRovers';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -15,7 +15,7 @@ describe('HeavyDutyRovers', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HeavyDutyRovers();
     moonData = MoonExpansion.moonData(game);

@@ -13,15 +13,15 @@ import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination
 import {Resources} from '../../src/common/Resources';
 import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../src/inputs/OrOptions';
-import {TestPlayer, TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 
 describe('CardRequirements', function() {
   let player: TestPlayer; let player2: TestPlayer;
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
 
     Game.newInstance('gameid', [player, player2], player, gameOptions);

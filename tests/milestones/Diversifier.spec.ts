@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {Diversifier} from '../../src/milestones/Diversifier';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
-import {TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Leavitt} from '../../src/cards/community/Leavitt';
@@ -15,7 +15,7 @@ describe('Diversifier', function() {
 
   beforeEach(() => {
     milestone = new Diversifier();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

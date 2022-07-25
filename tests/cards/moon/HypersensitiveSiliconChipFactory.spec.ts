@@ -6,7 +6,7 @@ import {Resources} from '../../../src/common/Resources';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -16,7 +16,7 @@ describe('HypersensitiveSiliconChipFactory', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HypersensitiveSiliconChipFactory();
     moonData = MoonExpansion.moonData(game);

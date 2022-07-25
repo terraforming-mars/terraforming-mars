@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/cards/base/LightningHarvest';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('LightningHarvest', function() {
@@ -10,8 +10,8 @@ describe('LightningHarvest', function() {
 
   beforeEach(function() {
     card = new LightningHarvest();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

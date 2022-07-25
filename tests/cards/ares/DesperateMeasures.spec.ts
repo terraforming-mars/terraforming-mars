@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
 import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 
 describe('DesperateMeasures', function() {
@@ -12,8 +12,8 @@ describe('DesperateMeasures', function() {
 
   beforeEach(function() {
     card = new DesperateMeasures();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
   });
 

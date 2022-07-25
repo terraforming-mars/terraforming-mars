@@ -7,7 +7,7 @@ import {AdaptationTechnology} from '../../../src//cards/base/AdaptationTechnolog
 import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActionsQueue';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
@@ -15,8 +15,8 @@ describe('OlympusConference', function() {
 
   beforeEach(function() {
     card = new OlympusConference();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

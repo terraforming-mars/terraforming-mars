@@ -6,15 +6,15 @@ import {AgricolaInc} from '../../../src/cards/community/AgricolaInc';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AgricolaInc', function() {
   let card : AgricolaInc; let player : Player;
 
   beforeEach(function() {
     card = new AgricolaInc();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
     card.play(player);

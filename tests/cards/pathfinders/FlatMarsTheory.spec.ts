@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {FlatMarsTheory} from '../../../src/cards/pathfinders/FlatMarsTheory';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 
 describe('FlatMarsTheory', function() {
@@ -11,7 +11,7 @@ describe('FlatMarsTheory', function() {
 
   beforeEach(function() {
     card = new FlatMarsTheory();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

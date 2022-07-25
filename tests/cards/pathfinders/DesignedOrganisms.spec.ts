@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganisms';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {Penguins} from '../../../src/cards/promo/Penguins';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
@@ -14,7 +14,7 @@ describe('DesignedOrganisms', function() {
 
   beforeEach(function() {
     card = new DesignedOrganisms();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
 import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('HeatTrappers', function() {
@@ -10,8 +10,8 @@ describe('HeatTrappers', function() {
 
   beforeEach(function() {
     card = new HeatTrappers();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Cryptocurrency} from '../../../src/cards/pathfinders/Cryptocurrency';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 
@@ -11,7 +11,7 @@ describe('Cryptocurrency', function() {
 
   beforeEach(function() {
     card = new Cryptocurrency();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

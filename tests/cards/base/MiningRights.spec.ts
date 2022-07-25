@@ -3,7 +3,7 @@ import {MiningRights} from '../../../src/cards/base/MiningRights';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ISpace} from '../../../src/boards/ISpace';
@@ -18,8 +18,8 @@ describe('MiningRights', () => {
 
   beforeEach(() => {
     card = new MiningRights();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

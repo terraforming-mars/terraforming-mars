@@ -4,15 +4,15 @@ import {NitriteReducingBacteria} from '../../../src/cards/base/NitriteReducingBa
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('NitriteReducingBacteria', function() {
   let card : NitriteReducingBacteria; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new NitriteReducingBacteria();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

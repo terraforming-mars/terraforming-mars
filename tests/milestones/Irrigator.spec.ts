@@ -3,15 +3,15 @@ import {Game} from '../../src/Game';
 import {Irrigator} from '../../src/milestones/Irrigator';
 import {Player} from '../../src/Player';
 import {maxOutOceans} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Irrigator', () => {
   let milestone : Irrigator; let player : Player; let player2 : Player; let game: Game;
 
   beforeEach(() => {
     milestone = new Irrigator();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
 
     maxOutOceans(player);

@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {Pristar} from '../../../src/cards/turmoil/Pristar';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Pristar', function() {
   it('Should play', function() {
     const card = new Pristar();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
     const play = card.play(player);
     player.corporationCard = card;

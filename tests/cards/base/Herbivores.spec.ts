@@ -5,15 +5,15 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, runNextAction} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Herbivores', () => {
   let card : Herbivores; let player : Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
     card = new Herbivores();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

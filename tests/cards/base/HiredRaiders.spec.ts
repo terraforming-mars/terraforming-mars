@@ -4,15 +4,15 @@ import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('HiredRaiders', function() {
   let card : HiredRaiders; let player : Player; let player2: Player;
 
   beforeEach(function() {
     card = new HiredRaiders();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

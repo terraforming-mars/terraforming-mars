@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {MoonTether} from '../../../src/cards/moon/MoonTether';
 import {Tags} from '../../../src/common/cards/Tags';
 
@@ -12,7 +12,7 @@ describe('MoonTether', () => {
   let card: MoonTether;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new MoonTether();
   });

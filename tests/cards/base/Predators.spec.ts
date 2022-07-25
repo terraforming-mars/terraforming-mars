@@ -9,15 +9,15 @@ import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Predators', function() {
   let card : Predators; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new Predators();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

@@ -6,15 +6,15 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('UrbanizedArea', function() {
   let card : UrbanizedArea; let player : Player; let game : Game; let lands: ISpace[];
 
   beforeEach(function() {
     card = new UrbanizedArea();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
 
     const tharsisTholus = game.board.getSpace(SpaceName.THARSIS_THOLUS);

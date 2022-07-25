@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {TheGrandLunaCapitalGroup} from '../../../src/cards/moon/TheGrandLunaCapitalGroup';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -16,8 +16,8 @@ describe('TheGrandLunaCapitalGroup', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
     card = new TheGrandLunaCapitalGroup();
     moonData = MoonExpansion.moonData(game);

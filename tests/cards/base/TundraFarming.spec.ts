@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TundraFarming} from '../../../src/cards/base/TundraFarming';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('TundraFarming', function() {
@@ -9,8 +9,8 @@ describe('TundraFarming', function() {
 
   beforeEach(function() {
     card = new TundraFarming();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

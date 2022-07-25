@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {AerosportTournament} from '../../../src/cards/venusNext/AerosportTournament';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AerosportTournament', function() {
   it('Should play', function() {
     const card = new AerosportTournament();
     const corp = new Celestic();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
     player.corporationCard = corp;
     corp.action(player);

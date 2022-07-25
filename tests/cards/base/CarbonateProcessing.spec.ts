@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {CarbonateProcessing} from '../../../src/cards/base/CarbonateProcessing';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CarbonateProcessing', function() {
   let card : CarbonateProcessing; let player : Player;
 
   beforeEach(function() {
     card = new CarbonateProcessing();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play', function() {

@@ -5,7 +5,7 @@ import {Miranda} from '../../src/colonies/Miranda';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayer';
+import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 
 describe('Miranda', function() {
@@ -14,8 +14,8 @@ describe('Miranda', function() {
   beforeEach(function() {
     miranda = new Miranda();
     pets = new Pets();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(miranda);

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {GrandLunaAcademy} from '../../../src/cards/moon/GrandLunaAcademy';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -11,7 +11,7 @@ describe('GrandLunaAcademy', () => {
   let card: GrandLunaAcademy;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new GrandLunaAcademy();
   });

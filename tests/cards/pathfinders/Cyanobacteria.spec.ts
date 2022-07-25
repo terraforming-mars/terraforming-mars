@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Cyanobacteria} from '../../../src/cards/pathfinders/Cyanobacteria';
 import {Game} from '../../../src/Game';
-import {TestPlayer, TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
@@ -18,7 +18,7 @@ describe('Cyanobacteria', function() {
 
   beforeEach(function() {
     card = new Cyanobacteria();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();

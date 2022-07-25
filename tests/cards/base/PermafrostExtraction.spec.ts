@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PermafrostExtraction} from '../../../src/cards/base/PermafrostExtraction';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {runAllActions, cast} from '../../TestingUtils';
 
@@ -11,8 +11,8 @@ describe('PermafrostExtraction', function() {
 
   beforeEach(function() {
     card = new PermafrostExtraction();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

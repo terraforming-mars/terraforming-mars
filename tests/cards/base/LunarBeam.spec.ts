@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {LunarBeam} from '../../../src/cards/base/LunarBeam';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarBeam', function() {
   let card : LunarBeam; let player : Player;
 
   beforeEach(function() {
     card = new LunarBeam();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can play', function() {

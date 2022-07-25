@@ -4,15 +4,15 @@ import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('WaterImportFromEuropa', function() {
   let card : WaterImportFromEuropa; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new WaterImportFromEuropa();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

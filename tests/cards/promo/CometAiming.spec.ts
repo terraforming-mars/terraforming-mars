@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('CometAiming', function() {
@@ -13,8 +13,8 @@ describe('CometAiming', function() {
 
   beforeEach(function() {
     card = new CometAiming();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

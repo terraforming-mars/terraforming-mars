@@ -70,11 +70,6 @@ export class TestPlayer extends Player {
     };
   }
 
-  // Just makes it public, and therefore callable for testing.
-  public override getStandardProjectOption() {
-    return super.getStandardProjectOption();
-  }
-
   public tagsForTest: Partial<TagsForTest> | undefined = undefined;
 
   public override getRawTagCount(tag: Tags, includeEventsTags:boolean = false): number {

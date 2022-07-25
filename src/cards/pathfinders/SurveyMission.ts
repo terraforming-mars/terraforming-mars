@@ -79,7 +79,7 @@ export class SurveyMission extends PreludeCard {
       space.player = player;
       player.game.grantSpaceBonuses(player, space);
       LogHelper.logBoardTileAction(player, space, 'claimed');
-      if (player.isCorporation(CardName.MINING_GUILD)) player.corporationCard?.onTilePlaced?.(player, player, space, BoardType.MARS);
+      player.getCorporation(CardName.MINING_GUILD)?.onTilePlaced?.(player, player, space, BoardType.MARS);
 
       if (iteration === 2) return undefined;
 

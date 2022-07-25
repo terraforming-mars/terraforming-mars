@@ -190,8 +190,16 @@ export class Player {
     this.game = undefined as unknown as Game;
   }
 
+  public get corporations(): Array<ICorporationCard> {
+    return this.corporationCard !== undefined ? [this.corporationCard] : [];
+  }
+
   public isCorporation(corporationName: CardName): boolean {
-    return this.corporationCard?.name === corporationName;
+    return this.getCorporation(corporationName) !== undefined;
+  }
+
+  public getCorporation(corporationName: CardName): ICorporationCard | undefined {
+    return this.corporations.find((c) => c.name === corporationName);
   }
 
   public getTitaniumValue(): number {
@@ -249,9 +257,8 @@ export class Player {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
       }
       // Aurori hook
-      if (this.isCorporation(CardName.AURORAI)) {
-        (this.corporationCard as Aurorai).onIncreaseTerraformRating(this, steps);
-      }
+      const aurorai = <Aurorai> this.getCorporation(CardName.AURORAI);
+      aurorai?.onIncreaseTerraformRating(this, steps);
     };
 
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
@@ -526,8 +533,10 @@ export class Player {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
     // Victory points from corporations
-    if (this.corporationCard !== undefined && this.corporationCard.victoryPoints !== undefined) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this), this.corporationCard.name);
+    for (const card of this.corporations) {
+      if (card.victoryPoints !== undefined) {
+        victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(this), card.name);
+      }
     }
 
     // Victory points from cards
@@ -655,10 +664,7 @@ export class Player {
   public getNoTagsCount() {
     let noTagsCount: number = 0;
 
-    if (this.corporationCard !== undefined && this.corporationCard.tags.every((tag) => tag === Tags.WILD)) {
-      noTagsCount++;
-    }
-
+    noTagsCount += this.corporations.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILD)).length;
     noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILD)).length;
 
     return noTagsCount;
@@ -683,23 +689,18 @@ export class Player {
    */
   public getPlayedEventsCount(): number {
     let count = this.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
-    if (this.isCorporation(CardName.PHARMACY_UNION) && this.corporationCard?.isDisabled) count++;
+    if (this.getCorporation(CardName.PHARMACY_UNION)?.isDisabled) count++;
 
     return count;
   }
 
   public getRequirementsBonus(parameter: GlobalParameter): number {
     let requirementsBonus: number = 0;
-    if (
-      this.corporationCard !== undefined &&
-          this.corporationCard.getRequirementBonus !== undefined) {
-      requirementsBonus += this.corporationCard.getRequirementBonus(this, parameter);
+    for (const card of this.corporations) {
+      if (card.getRequirementBonus !== undefined) requirementsBonus += card.getRequirementBonus(this, parameter);
     }
     for (const playedCard of this.playedCards) {
-      if (playedCard.getRequirementBonus !== undefined &&
-          playedCard.getRequirementBonus(this, parameter)) {
-        requirementsBonus += playedCard.getRequirementBonus(this, parameter);
-      }
+      if (playedCard.getRequirementBonus !== undefined) requirementsBonus += playedCard.getRequirementBonus(this, parameter);
     }
 
     // PoliticalAgendas Scientists P2 hook
@@ -750,17 +751,16 @@ export class Player {
     for (const playedCard of this.playedCards) {
       playedCard.onResourceAdded?.(this, card, count);
     }
-    this.corporationCard?.onResourceAdded?.(this, card, count);
+    for (const playedCard of this.corporations) {
+      playedCard.onResourceAdded?.(this, card, count);
+    }
   }
 
   public getCardsWithResources(resource?: CardResource): Array<ICard & IResourceCard> {
-    let result: Array<ICard & IResourceCard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
-    if (this.corporationCard !== undefined &&
-          this.corporationCard.resourceType !== undefined &&
-          this.corporationCard.resourceCount !== undefined &&
-          this.corporationCard.resourceCount > 0) {
-      result.push(this.corporationCard);
-    }
+    let result: Array<ICard & IResourceCard> = [
+      ...this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
+      ...this.corporations.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
+    ];
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
@@ -770,11 +770,10 @@ export class Player {
   }
 
   public getResourceCards(resource?: CardResource): Array<ICard> {
-    let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined);
-
-    if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined) {
-      result.push(this.corporationCard);
-    }
+    let result: Array<ICard> = [
+      ...this.playedCards.filter((card) => card.resourceType !== undefined),
+      ...this.corporations.filter((card) => card.resourceType !== undefined),
+    ];
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
@@ -901,11 +900,11 @@ export class Player {
       tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
     });
 
-    if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
-      tagCount += this.corporationCard.tags.filter(
-        (cardTag) => cardTag === tag,
-      ).length;
-    }
+    this.corporations.forEach((card: ICorporationCard) => {
+      if (!card.isDisabled) {
+        tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
+      }
+    });
     return tagCount;
   }
 
@@ -944,8 +943,11 @@ export class Player {
     if (extraTag !== undefined) {
       uniqueTags.add(extraTag);
     }
-    if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
-      this.corporationCard.tags.forEach(addTag);
+
+    for (const card of this.corporations) {
+      if (!card.isDisabled) {
+        card.tags.forEach(addTag);
+      }
     }
     for (const card of this.playedCards) {
       if (card.cardType !== CardType.EVENT) {
@@ -1028,21 +1030,16 @@ export class Player {
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
-    if (isIActionCard(this.corporationCard) &&
-          !this.actionsThisGeneration.has(this.corporationCard.name) &&
-          isIActionCard(this.corporationCard) &&
-          this.corporationCard.canAct(this)) {
-      result.push(this.corporationCard);
+    for (const card of this.corporations) {
+      if (isIActionCard(card) && !this.actionsThisGeneration.has(card.name) && card.canAct(this)) {
+        result.push(card);
+      }
     }
     for (const playedCard of this.playedCards) {
-      if (
-        isIActionCard(playedCard) &&
-              !this.actionsThisGeneration.has(playedCard.name) &&
-              playedCard.canAct(this)) {
+      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
         result.push(playedCard);
       }
     }
-
     return result;
   }
 
@@ -1060,9 +1057,7 @@ export class Player {
     this.steel += this.steelProduction;
     this.plants += this.plantProduction;
 
-    if (this.corporationCard !== undefined && this.corporationCard.onProductionPhase !== undefined) {
-      this.corporationCard.onProductionPhase(this);
-    }
+    this.corporations.forEach((card) => card.onProductionPhase?.(this));
   }
 
   public returnTradeFleets(): void {
@@ -1241,15 +1236,13 @@ export class Player {
     cost -= this.cardDiscount;
 
     this.playedCards.forEach((playedCard) => {
-      if (playedCard.getCardDiscount !== undefined) {
-        cost -= playedCard.getCardDiscount(this, card);
-      }
+      cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
     });
 
     // Check corporation too
-    if (this.corporationCard !== undefined && this.corporationCard.getCardDiscount !== undefined) {
-      cost -= this.corporationCard.getCardDiscount(this, card);
-    }
+    this.corporations.forEach((playedCard) => {
+      cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
+    });
 
     // Playwrights hook
     this.removedFromPlayCards.forEach((removedFromPlayCard) => {
@@ -1393,17 +1386,11 @@ export class Player {
   }
 
   public getSpendableSeedResources(): number {
-    if (this.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
-      return this.corporationCard?.resourceCount ?? 0;
-    }
-    return 0;
+    return this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)?.resourceCount ?? 0;
   }
 
   public getSpendableData(): number {
-    if (this.isCorporation(CardName.AURORAI)) {
-      return this.corporationCard?.resourceCount ?? 0;
-    }
-    return 0;
+    return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
   }
 
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
@@ -1427,12 +1414,14 @@ export class Player {
           this.removeResourceFrom(playedCard, howToPay.science);
         }
 
-        if (this.corporationCard?.name === CardName.SOYLENT_SEEDLING_SYSTEMS) {
-          this.removeResourceFrom(this.corporationCard, howToPay.seeds);
+        const soylent = this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
+        if (soylent !== undefined) {
+          this.removeResourceFrom(soylent, howToPay.seeds);
         }
 
-        if (this.corporationCard?.name === CardName.AURORAI) {
-          this.removeResourceFrom(this.corporationCard, howToPay.data);
+        const aurorai = this.getCorporation(CardName.AURORAI);
+        if (aurorai !== undefined) {
+          this.removeResourceFrom(aurorai, howToPay.data);
         }
       }
     }
@@ -1513,7 +1502,7 @@ export class Player {
     }
     for (const playedCard of this.playedCards) {
       if (playedCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, card);
+        const actionFromPlayedCard = playedCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
           this.game.defer(new SimpleDeferredAction(
             this,
@@ -1526,13 +1515,15 @@ export class Player {
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
 
     for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
-      if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, card);
-        if (actionFromPlayedCard !== undefined) {
-          this.game.defer(new SimpleDeferredAction(
-            this,
-            () => actionFromPlayedCard,
-          ));
+      for (const corporationCard of somePlayer.corporations) {
+        if (corporationCard.onCardPlayed !== undefined) {
+          const actionFromPlayedCard: OrOptions | void = corporationCard.onCardPlayed(this, card);
+          if (actionFromPlayedCard !== undefined) {
+            this.game.defer(new SimpleDeferredAction(
+              this,
+              () => actionFromPlayedCard,
+            ));
+          }
         }
       }
     }
@@ -1581,13 +1572,14 @@ export class Player {
   }
 
   public availableHeat(): number {
-    const floaters = this.isCorporation(CardName.STORMCRAFT_INCORPORATED) ? (this.corporationCard?.resourceCount ?? 0) : 0;
+    const floaters = this.getCorporation(CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
     return this.heat + (floaters * 2);
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
-    if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (this.corporationCard?.resourceCount ?? 0) > 0) {
-      return (<StormCraftIncorporated> this.corporationCard).spendHeat(this, amount, cb);
+    const stormcraft = <StormCraftIncorporated> this.getCorporation(CardName.STORMCRAFT_INCORPORATED);
+    if (stormcraft !== undefined && stormcraft.resourceCount > 0) {
+      return stormcraft.spendHeat(this, amount, cb);
     }
     this.deductResource(Resources.HEAT, amount);
     return cb();

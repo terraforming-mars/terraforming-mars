@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {PrefabricationofHumanHabitats} from '../../../src/cards/pathfinders/PrefabricationofHumanHabitats';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {ImmigrantCity} from '../../../src/cards/base/ImmigrantCity';
 import {CityStandardProject} from '../../../src/cards/base/standardProjects/CityStandardProject';
 

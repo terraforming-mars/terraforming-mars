@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/common/TileType';
 import {resetBoard} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {LavaFlowsAres} from '../../../src/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';

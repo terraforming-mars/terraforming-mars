@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {BeamFromAThoriumAsteroid} from '../../../src/cards/base/BeamFromAThoriumAsteroid';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('BeamFromAThoriumAsteroid', function() {
   let card : BeamFromAThoriumAsteroid; let player : TestPlayer;

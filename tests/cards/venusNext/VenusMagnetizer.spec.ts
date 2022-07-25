@@ -3,7 +3,7 @@ import {VenusMagnetizer} from '../../../src/cards/venusNext/VenusMagnetizer';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('VenusMagnetizer', function() {
   let card : VenusMagnetizer; let player : Player; let game : Game;

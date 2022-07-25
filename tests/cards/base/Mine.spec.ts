@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Mine} from '../../../src/cards/base/Mine';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Mine', function() {
   it('Should play', function() {

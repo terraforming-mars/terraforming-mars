@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/cards/CardRequirements';
 import {setCustomGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/common/TileType';
@@ -14,7 +13,7 @@ import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination
 import {Resources} from '../../src/common/Resources';
 import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../src/inputs/OrOptions';
-import {TestPlayer} from '../TestPlayer';
+import {TestPlayer, TestPlayers} from '../TestPlayer';
 
 describe('CardRequirements', function() {
   let player: TestPlayer; let player2: TestPlayer;

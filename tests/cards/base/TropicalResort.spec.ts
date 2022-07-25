@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {TropicalResort} from '../../../src/cards/base/TropicalResort';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('TropicalResort', function() {
   it('Should play', function() {

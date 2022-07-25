@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {AICentral} from '../../../src/cards/base/AICentral';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('AICentral', function() {
   let card : AICentral; let player : TestPlayer;

@@ -6,7 +6,7 @@ import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('RotatorImpacts', () => {
   let card : RotatorImpacts; let player : Player; let game : Game;

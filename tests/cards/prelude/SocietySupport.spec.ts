@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SocietySupport} from '../../../src/cards/prelude/SocietySupport';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SocietySupport', function() {
   it('Should play', function() {

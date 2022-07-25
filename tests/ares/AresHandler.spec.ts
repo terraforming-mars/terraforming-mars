@@ -16,7 +16,7 @@ import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {Decomposers} from '../../src/cards/base/Decomposers';
 import {EnergyTapping} from '../../src/cards/base/EnergyTapping';
 import {Phase} from '../../src/common/Phase';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
 import {SeededRandom} from '../../src/Random';

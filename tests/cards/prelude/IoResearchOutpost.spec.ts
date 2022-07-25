@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IoResearchOutpost} from '../../../src/cards/prelude/IoResearchOutpost';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('IoResearchOutpost', function() {
   it('Should play', function() {

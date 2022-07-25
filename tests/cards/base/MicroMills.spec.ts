@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MicroMills', function() {
   it('Should play', function() {

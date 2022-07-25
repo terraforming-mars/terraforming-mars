@@ -3,7 +3,7 @@ import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence'
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {isPlayerId, PlayerId} from '../../../src/common/Types';
 
 describe('VoteOfNoConfidence', function() {

@@ -10,7 +10,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';

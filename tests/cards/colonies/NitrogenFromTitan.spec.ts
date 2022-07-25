@@ -6,7 +6,7 @@ import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('NitrogenFromTitan', function() {
   let card : NitrogenFromTitan; let player : Player; let game : Game;

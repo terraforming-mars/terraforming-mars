@@ -5,7 +5,7 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('BioPrintingFacility', function() {
   let card : BioPrintingFacility; let player : Player; let player2 : Player;

@@ -4,7 +4,7 @@ import {Resources} from '../../src/common/Resources';
 import {Productivity} from '../../src/turmoil/globalEvents/Productivity';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Productivity', function() {
   it('resolve play', function() {

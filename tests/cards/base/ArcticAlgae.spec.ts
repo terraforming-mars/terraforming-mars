@@ -3,7 +3,7 @@ import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {runNextAction} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('ArcticAlgae', function() {
   let card : ArcticAlgae; let player : Player; let player2 : Player; let game : Game;

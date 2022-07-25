@@ -7,7 +7,7 @@ import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Banned Delegate', function() {
   let card : BannedDelegate; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;

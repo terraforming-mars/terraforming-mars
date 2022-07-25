@@ -3,7 +3,7 @@ import {CaretakerContract} from '../../../src/cards/base/CaretakerContract';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 import {Reds} from '../../../src/turmoil/parties/Reds';

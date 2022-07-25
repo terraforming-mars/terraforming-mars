@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
 import {addOcean} from '../TestingUtils';
 

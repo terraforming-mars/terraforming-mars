@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {EcoLine} from '../../../src/cards/corporation/EcoLine';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
 import {Game} from '../../../src/Game';
 

@@ -3,7 +3,7 @@ import {PowerPlant} from '../../src/cards/pathfinders/PowerPlant';
 import {Game} from '../../src/Game';
 import {BalancedDevelopment} from '../../src/turmoil/globalEvents/BalancedDevelopment';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('BalancedDevelopment', function() {
   it('resolve play', function() {

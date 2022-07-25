@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {DustStorm} from '../../../src/cards/pathfinders/DustStorm';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('DustStorm', function() {
   let card: DustStorm;

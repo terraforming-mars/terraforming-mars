@@ -3,7 +3,7 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {AquiferPumping} from '../../src/cards/base/AquiferPumping';
 import {RoboticWorkforce} from '../../src/cards/base/RoboticWorkforce';
 import {IoMiningIndustries} from '../../src/cards/base/IoMiningIndustries';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {ICard} from '../../src/cards/ICard';
 
 describe('SelectCard', function() {

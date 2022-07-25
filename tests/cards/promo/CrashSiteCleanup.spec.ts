@@ -5,7 +5,7 @@ import {SmallAsteroid} from '../../../src/cards/promo/SmallAsteroid';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('CrashSiteCleanup', function() {
   let card : CrashSiteCleanup; let player : Player;

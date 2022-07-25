@@ -5,10 +5,9 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Flooding', function() {
   let card : Flooding; let player : TestPlayer; let player2 : TestPlayer; let game : Game;

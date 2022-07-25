@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {MoonTether} from '../../../src/cards/moon/MoonTether';
 import {Tags} from '../../../src/common/cards/Tags';
 

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PhobosSpaceHaven} from '../../../src/cards/base/PhobosSpaceHaven';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('PhobosSpaceHaven', function() {
   it('Should play', function() {

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {TerraformingControlStation} from '../../../src/cards/pathfinders/TerraformingControlStation';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Ants} from '../../../src/cards/base/Ants';
 import {AgroDrones} from '../../../src/cards/pathfinders/AgroDrones';
 import {CorroderSuits} from '../../../src/cards/venusNext/CorroderSuits';

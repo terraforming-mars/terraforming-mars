@@ -3,7 +3,7 @@ import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/cards/promo/Potatoes';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Potatoes', function() {
   let card : Potatoes; let player : Player;

@@ -9,7 +9,7 @@ import {ICard} from '../../../src/cards/ICard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('ProjectInspection', function() {
   let card : ProjectInspection; let player : Player; let restrictedArea: RestrictedArea;

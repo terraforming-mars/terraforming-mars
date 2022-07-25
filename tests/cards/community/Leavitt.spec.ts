@@ -3,7 +3,7 @@ import {Leavitt} from '../../../src/cards/community/Leavitt';
 import {Vitor} from '../../../src/cards/prelude/Vitor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Leavitt', function() {

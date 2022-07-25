@@ -3,7 +3,7 @@ import {BigAsteroid} from '../../../src/cards/base/BigAsteroid';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('BigAsteroid', function() {

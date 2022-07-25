@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TitaniumMine} from '../../../src/cards/base/TitaniumMine';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('TitaniumMine', function() {
   it('Should play', function() {

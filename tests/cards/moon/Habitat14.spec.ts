@@ -1,9 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Habitat14} from '../../../src/cards/moon/Habitat14';
-import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
 

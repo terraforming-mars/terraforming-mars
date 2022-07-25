@@ -8,7 +8,7 @@ import {SelfReplicatingRobots} from '../../../src/cards/promo/SelfReplicatingRob
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('CEOsFavoriteProject', function() {
   let card : CEOsFavoriteProject; let player : Player;

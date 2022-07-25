@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
 import {MirandaResort} from '../../../src/cards/base/MirandaResort';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 
 describe('MirandaResort', function() {

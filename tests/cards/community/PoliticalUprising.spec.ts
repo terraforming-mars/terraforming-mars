@@ -5,7 +5,7 @@ import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDe
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('PoliticalUprising', function() {
   let card : PoliticalUprising; let player : Player; let game : Game;

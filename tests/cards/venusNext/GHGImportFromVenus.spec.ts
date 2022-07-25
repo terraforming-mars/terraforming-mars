@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GHGImportFromVenus} from '../../../src/cards/venusNext/GHGImportFromVenus';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('GHGImportFromVenus', function() {
   it('Should play', function() {

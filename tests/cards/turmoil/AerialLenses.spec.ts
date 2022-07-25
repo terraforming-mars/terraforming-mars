@@ -6,7 +6,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('AerialLenses', function() {
   let card : AerialLenses; let player : Player; let player2 : Player; let game : Game;

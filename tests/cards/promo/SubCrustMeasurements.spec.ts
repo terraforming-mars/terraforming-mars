@@ -3,7 +3,7 @@ import {Research} from '../../../src/cards/base/Research';
 import {SubCrustMeasurements} from '../../../src/cards/promo/SubCrustMeasurements';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SubCrustMeasurements', function() {
   let card : SubCrustMeasurements; let player : Player;

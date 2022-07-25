@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SmeltingPlant} from '../../../src/cards/prelude/SmeltingPlant';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SmeltingPlant', function() {
   it('Should play', function() {

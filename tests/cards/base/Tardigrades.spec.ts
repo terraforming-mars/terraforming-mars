@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Tardigrades', function() {
   let card : Tardigrades; let player : Player;

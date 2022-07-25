@@ -3,7 +3,7 @@ import {ConvertPlants} from '../../../../src/cards/base/standardActions/ConvertP
 import {Phase} from '../../../../src/common/Phase';
 import {Player} from '../../../../src/Player';
 import {setCustomGameOptions} from '../../../TestingUtils';
-import {TestPlayers} from '../../../TestPlayers';
+import {TestPlayers} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';

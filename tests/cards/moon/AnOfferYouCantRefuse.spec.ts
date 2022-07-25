@@ -1,9 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {AnOfferYouCantRefuse} from '../../../src/cards/moon/AnOfferYouCantRefuse';
-import {expect} from 'chai';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {NeutralPlayer, Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PlayerId} from '../../../src/common/Types';

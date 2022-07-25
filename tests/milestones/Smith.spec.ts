@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Resources} from '../../src/common/Resources';
 import {Smith} from '../../src/milestones/Smith';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Smith', () => {
   let milestone : Smith; let player : Player;

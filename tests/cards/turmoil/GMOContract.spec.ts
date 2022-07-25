@@ -3,7 +3,7 @@ import {GMOContract} from '../../../src/cards/turmoil/GMOContract';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('GMOContract', function() {
   it('Should play', function() {

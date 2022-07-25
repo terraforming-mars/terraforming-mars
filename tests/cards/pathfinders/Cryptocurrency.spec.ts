@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Cryptocurrency} from '../../../src/cards/pathfinders/Cryptocurrency';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 

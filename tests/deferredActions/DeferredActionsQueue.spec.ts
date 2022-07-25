@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SimpleDeferredAction} from '../../src/deferredActions/DeferredAction';
 import {DeferredActionsQueue} from '../../src/deferredActions/DeferredActionsQueue';
 import {PlayerInputTypes} from '../../src/common/input/PlayerInputTypes';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {SelectOption} from '../../src/inputs/SelectOption';
 
 describe('DeferredActionsQueue', () => {

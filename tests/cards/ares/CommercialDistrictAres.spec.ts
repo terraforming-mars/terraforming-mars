@@ -6,7 +6,7 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {CommercialDistrictAres} from '../../../src/cards/ares/CommercialDistrictAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('CommercialDistrictAres', function() {
   let card : CommercialDistrictAres; let player : Player;

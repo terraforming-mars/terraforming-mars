@@ -1,7 +1,6 @@
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {SinusIridiumRoadNetwork} from '../../../src/cards/moon/SinusIridiumRoadNetwork';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';

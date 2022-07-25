@@ -8,7 +8,7 @@ import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {resetBoard} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('LavaTubeSettlement', function() {
   let card : LavaTubeSettlement; let player : Player; let game : Game;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SolarReflectors} from '../../../src/cards/colonies/SolarReflectors';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SolarReflectors', function() {
   it('Should play', function() {

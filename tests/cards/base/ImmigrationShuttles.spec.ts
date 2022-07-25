@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ImmigrationShuttles} from '../../../src/cards/base/ImmigrationShuttles';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('ImmigrationShuttles', function() {
   it('Should play', function() {

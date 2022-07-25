@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('VestaShipyard', function() {
   it('Should play', function() {

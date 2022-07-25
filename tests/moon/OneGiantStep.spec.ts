@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CoreMine} from '../../src/cards/moon/CoreMine';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
 import {OneGiantStep} from '../../src/moon/OneGiantStep';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('OneGiantStep', () => {
   it('Standard test', () => {

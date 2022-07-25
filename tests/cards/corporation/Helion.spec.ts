@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Helion} from '../../../src/cards/corporation/Helion';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Helion', function() {
   it('Should play', function() {

@@ -3,7 +3,7 @@ import {BlackPolarDust} from '../../../src/cards/base/BlackPolarDust';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 

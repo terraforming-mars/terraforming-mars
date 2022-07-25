@@ -8,7 +8,7 @@ import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('StripMine', function() {
   let card : StripMine; let player : Player; let game : Game; let turmoil: Turmoil;

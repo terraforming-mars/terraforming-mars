@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {CometForVenus} from '../../../src/cards/venusNext/CometForVenus';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {cast} from '../../TestingUtils';

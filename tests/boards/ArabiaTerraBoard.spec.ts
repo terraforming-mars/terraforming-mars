@@ -5,7 +5,7 @@ import {ArabiaTerraBoard} from '../../src/boards/ArabiaTerraBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {SeededRandom} from '../../src/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {setCustomGameOptions, runAllActions, cast} from '../TestingUtils';

@@ -3,7 +3,7 @@ import {ProtectedValley} from '../../../src/cards/base/ProtectedValley';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('ProtectedValley', function() {
   it('Should play', function() {

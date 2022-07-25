@@ -1,9 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {CrescentResearchAssociation} from '../../../src/cards/moon/CrescentResearchAssociation';
-import {expect} from 'chai';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
 import {Predators} from '../../../src/cards/base/Predators';
 

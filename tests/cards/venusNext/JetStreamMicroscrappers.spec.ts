@@ -4,7 +4,7 @@ import {JetStreamMicroscrappers} from '../../../src/cards/venusNext/JetStreamMic
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('JetStreamMicroscrappers', function() {
   let card : JetStreamMicroscrappers; let player : Player; let game : Game;

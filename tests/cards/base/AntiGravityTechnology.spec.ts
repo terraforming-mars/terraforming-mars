@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {AntiGravityTechnology} from '../../../src/cards/base/AntiGravityTechnology';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('AntiGravityTechnology', function() {
   let card : AntiGravityTechnology; let player : TestPlayer;

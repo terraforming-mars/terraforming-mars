@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {InvestmentLoan} from '../../../src/cards/base/InvestmentLoan';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('InvestmentLoan', function() {
   it('Should play', function() {

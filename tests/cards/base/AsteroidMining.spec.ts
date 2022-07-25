@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {AsteroidMining} from '../../../src/cards/base/AsteroidMining';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('AsteroidMining', function() {
   it('Should play', function() {

@@ -3,7 +3,7 @@ import {Game} from '../../src/Game';
 import {Irrigator} from '../../src/milestones/Irrigator';
 import {Player} from '../../src/Player';
 import {maxOutOceans} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Irrigator', () => {
   let milestone : Irrigator; let player : Player; let player2 : Player; let game: Game;

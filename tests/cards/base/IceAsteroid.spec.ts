@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IceAsteroid} from '../../../src/cards/base/IceAsteroid';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('IceAsteroid', function() {
   it('Should play', function() {

@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {newTestGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 

@@ -7,8 +7,7 @@ import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('Ants', function() {

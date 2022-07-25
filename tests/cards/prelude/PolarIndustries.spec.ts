@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PolarIndustries} from '../../../src/cards/prelude/PolarIndustries';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 
 describe('PolarIndustries', function() {

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Cyanobacteria} from '../../../src/cards/pathfinders/Cyanobacteria';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';

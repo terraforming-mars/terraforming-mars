@@ -5,7 +5,7 @@ import {Resources} from '../../src/common/Resources';
 import {AsteroidMining} from '../../src/turmoil/globalEvents/AsteroidMining';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('AsteroidMining', function() {
   it('resolve play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PermafrostExtraction} from '../../../src/cards/base/PermafrostExtraction';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {runAllActions, cast} from '../../TestingUtils';
 

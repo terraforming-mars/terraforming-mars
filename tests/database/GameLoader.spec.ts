@@ -4,7 +4,7 @@ import {GameLoader} from '../../src/database/GameLoader';
 import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
 
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {Color} from '../../src/common/Color';
 import {GameIdLedger} from '../../src/database/IDatabase';
 import {GameId, PlayerId} from '../../src/common/Types';

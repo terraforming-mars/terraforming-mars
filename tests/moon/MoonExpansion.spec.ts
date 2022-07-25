@@ -13,8 +13,7 @@ import {Resources} from '../../src/common/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {setCustomGameOptions} from '../TestingUtils';
-import {TestPlayer} from '../TestPlayer';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer, TestPlayers} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
 import {VictoryPointsBreakdown} from '../../src/VictoryPointsBreakdown';
 

@@ -4,7 +4,7 @@ import {Resources} from '../../src/common/Resources';
 import {RedInfluence} from '../../src/turmoil/globalEvents/RedInfluence';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('RedInfluence', function() {
   it('resolve play', function() {

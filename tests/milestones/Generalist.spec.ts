@@ -4,7 +4,7 @@ import {Generalist} from '../../src/milestones/Generalist';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
 import {setCustomGameOptions} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Generalist', function() {
   let milestone : Generalist; let player : Player; let player2: Player; let resources: Resources[];

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MiningQuota} from '../../../src/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MiningQuota', function() {
   it('Should play', function() {

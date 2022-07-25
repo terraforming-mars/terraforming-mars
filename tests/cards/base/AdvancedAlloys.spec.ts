@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('AdvancedAlloys', function() {
   it('Should play', function() {

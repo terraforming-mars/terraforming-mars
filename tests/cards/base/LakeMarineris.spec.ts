@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {LakeMarineris} from '../../../src/cards/base/LakeMarineris';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('LakeMarineris', function() {
   let card : LakeMarineris; let player : TestPlayer; let game : Game;

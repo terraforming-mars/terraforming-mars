@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Builder} from '../../src/milestones/Builder';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Builder', () => {
   it('Standard test', () => {

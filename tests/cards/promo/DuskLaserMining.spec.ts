@@ -3,7 +3,7 @@ import {Research} from '../../../src/cards/base/Research';
 import {DuskLaserMining} from '../../../src/cards/promo/DuskLaserMining';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('DuskLaserMining', function() {
   let card : DuskLaserMining; let player : Player;

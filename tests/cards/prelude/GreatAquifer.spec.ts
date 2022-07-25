@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GreatAquifer} from '../../../src/cards/prelude/GreatAquifer';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('GreatAquifer', function() {
   it('Should play', function() {

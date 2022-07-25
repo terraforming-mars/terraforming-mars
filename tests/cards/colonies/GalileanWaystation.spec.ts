@@ -7,7 +7,7 @@ import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('GalileanWaystation', function() {
   let card : GalileanWaystation; let player : Player; let player2: Player;

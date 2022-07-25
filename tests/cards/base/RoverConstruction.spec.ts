@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RoverConstruction} from '../../../src/cards/base/RoverConstruction';
 import {Game} from '../../../src/Game';
 import {runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('RoverConstruction', function() {
   it('Should play', function() {

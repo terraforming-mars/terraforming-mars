@@ -10,7 +10,7 @@ import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('AerospaceMission', function() {
   let card : AerospaceMission; let player : Player; let game : Game;

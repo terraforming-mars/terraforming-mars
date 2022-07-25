@@ -4,11 +4,10 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestPlayers} from '../../TestPlayers';
 import {Capital} from '../../../src/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', function() {

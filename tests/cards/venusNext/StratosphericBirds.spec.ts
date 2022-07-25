@@ -8,7 +8,7 @@ import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBird
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {EMPTY_HOWTOPAY} from '../../../src/common/inputs/HowToPay';
 
 describe('StratosphericBirds', () => {

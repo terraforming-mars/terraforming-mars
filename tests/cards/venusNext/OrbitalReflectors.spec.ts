@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {OrbitalReflectors} from '../../../src/cards/venusNext/OrbitalReflectors';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('OrbitalReflectors', function() {
   it('Should play', function() {

@@ -5,7 +5,7 @@ import {Resources} from '../../src/common/Resources';
 import {CelebrityLeaders} from '../../src/turmoil/globalEvents/CelebrityLeaders';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('CelebrityLeaders', function() {
   it('resolve play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IshtarMining} from '../../../src/cards/venusNext/IshtarMining';
 import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MorningStarInc', function() {
   it('Should play', function() {

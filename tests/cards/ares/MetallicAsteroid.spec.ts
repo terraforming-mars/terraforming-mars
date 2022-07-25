@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MetallicAsteroid', function() {
   let card: MetallicAsteroid; let player: Player; let otherPlayer: Player; let game: Game;

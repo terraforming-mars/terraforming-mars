@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {LuxuryEstate} from '../../../src/cards/pathfinders/LuxuryEstate';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {addGreenery, addCity} from '../../TestingUtils';
 
 describe('LuxuryEstate', function() {

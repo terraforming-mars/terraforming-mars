@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {FoodFactory} from '../../../src/cards/base/FoodFactory';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('FoodFactory', function() {
   let card : FoodFactory; let player : TestPlayer;

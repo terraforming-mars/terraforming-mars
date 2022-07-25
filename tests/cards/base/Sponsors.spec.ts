@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Sponsors', function() {
   it('Should play', function() {

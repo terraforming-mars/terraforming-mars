@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {MethaneFromTitan} from '../../../src/cards/base/MethaneFromTitan';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('MethaneFromTitan', function() {
   let card : MethaneFromTitan; let player : TestPlayer; let game : Game;

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {MartianRepository} from '../../../src/cards/pathfinders/MartianRepository';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Tags} from '../../../src/common/cards/Tags';

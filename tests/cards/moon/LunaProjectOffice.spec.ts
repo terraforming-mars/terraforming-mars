@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {finishGeneration, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {LunaProjectOffice} from '../../../src/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
 import {SelectCard} from '../../../src/inputs/SelectCard';

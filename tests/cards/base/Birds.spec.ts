@@ -4,7 +4,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Birds', function() {
   let card : Birds; let player : Player; let player2 : Player;

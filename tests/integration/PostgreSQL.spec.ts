@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
 import {Game} from '../../src/Game';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {SelectOption} from '../../src/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
 import {runAllActions, setCustomGameOptions} from '../TestingUtils';

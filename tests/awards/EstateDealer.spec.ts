@@ -3,7 +3,7 @@ import {Game} from '../../src/Game';
 import {EstateDealer} from '../../src/awards/EstateDealer';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('EstateDealer', function() {
   it('Correctly counts ocean tiles', function() {

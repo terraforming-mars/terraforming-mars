@@ -1,9 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {DarksideIncubationPlant} from '../../../src/cards/moon/DarksideIncubationPlant';
-import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 

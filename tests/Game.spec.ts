@@ -9,7 +9,7 @@ import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
 import {cast, maxOutOceans, setCustomGameOptions} from './TestingUtils';
-import {TestPlayers} from './TestPlayers';
+import {TestPlayers} from './TestPlayer';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {Resources} from '../src/common/Resources';
 import {ISpace} from '../src/boards/ISpace';

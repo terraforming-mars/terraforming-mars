@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PowerInfrastructure} from '../../../src/cards/base/PowerInfrastructure';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('PowerInfrastructure', function() {
   let card : PowerInfrastructure; let player : Player;

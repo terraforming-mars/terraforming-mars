@@ -4,7 +4,7 @@ import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
 import {VastitasBorealisBoard} from '../../src/boards/VastitasBorealisBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {SeededRandom} from '../../src/Random';
 import {setCustomGameOptions, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';

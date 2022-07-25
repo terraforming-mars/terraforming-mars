@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PublicCelebrations} from '../../../src/cards/turmoil/PublicCelebrations';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('PublicCelebrations', function() {
   it('Should play', function() {

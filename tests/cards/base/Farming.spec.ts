@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {Farming} from '../../../src/cards/base/Farming';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Farming', function() {
   let card : Farming; let player : TestPlayer; let game : Game;

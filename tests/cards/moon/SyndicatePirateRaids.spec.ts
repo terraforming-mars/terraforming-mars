@@ -1,8 +1,7 @@
 import {Game} from '../../../src/Game';
 import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {expect} from 'chai';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {SyndicatePirateRaids} from '../../../src/cards/moon/SyndicatePirateRaids';
 
 describe('SyndicatePirateRaids', () => {

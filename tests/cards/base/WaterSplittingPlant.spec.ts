@@ -3,7 +3,7 @@ import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('WaterSplittingPlant', function() {
   let card : WaterSplittingPlant; let player : Player; let game : Game;

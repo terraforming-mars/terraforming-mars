@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
 describe('MartianCulture', function() {

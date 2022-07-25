@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('PowerPlant', function() {
   it('Should play', function() {

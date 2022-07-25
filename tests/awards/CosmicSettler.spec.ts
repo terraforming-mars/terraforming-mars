@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {CosmicSettler} from '../../src/awards/CosmicSettler';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {TestPlayers} from '../TestPlayers';
-import {TestPlayer} from '../TestPlayer';
+import {TestPlayer, TestPlayers} from '../TestPlayer';
 import {Board} from '../../src/boards/Board';
 import {TileType} from '../../src/common/TileType';
 

@@ -2,10 +2,9 @@ import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/cards/base/CorporateStronghold';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 import {cast} from '../../TestingUtils';
 
 describe('CorporateStronghold', function() {

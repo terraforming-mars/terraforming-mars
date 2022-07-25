@@ -4,7 +4,7 @@ import {MiningExpedition} from '../../../src/cards/base/MiningExpedition';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MiningExpedition', function() {
   let card : MiningExpedition; let player : Player; let player2 : Player; let game : Game;

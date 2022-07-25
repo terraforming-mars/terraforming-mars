@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {SolarPower} from '../../../src/cards/base/SolarPower';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SolarPower', function() {
   it('Should play', function() {

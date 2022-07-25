@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {LunarMagnate} from '../../src/moon/LunarMagnate';
-import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
-import {TestPlayer} from '../TestPlayer';
+import {TestPlayer, TestPlayers} from '../TestPlayer';
 import {setCustomGameOptions} from '../TestingUtils';
 import {TileType} from '../../src/common/TileType';
 

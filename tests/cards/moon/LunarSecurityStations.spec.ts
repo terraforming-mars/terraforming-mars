@@ -8,7 +8,7 @@ import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

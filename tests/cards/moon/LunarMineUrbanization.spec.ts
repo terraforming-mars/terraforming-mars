@@ -1,12 +1,11 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {LunarMineUrbanization} from '../../../src/cards/moon/LunarMineUrbanization';
-import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {VictoryPointsBreakdown} from '../../../src/VictoryPointsBreakdown';
 

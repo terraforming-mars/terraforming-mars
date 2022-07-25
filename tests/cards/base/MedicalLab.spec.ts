@@ -3,7 +3,7 @@ import {Capital} from '../../../src/cards/base/Capital';
 import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MedicalLab', function() {
   it('Should play', function() {

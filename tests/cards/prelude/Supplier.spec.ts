@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Supplier} from '../../../src/cards/prelude/Supplier';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Supplier', function() {
   it('Should play', function() {

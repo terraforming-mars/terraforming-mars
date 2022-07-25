@@ -4,9 +4,8 @@ import {LargeConvoy} from '../../../src/cards/base/LargeConvoy';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('LargeConvoy', function() {
   let card : LargeConvoy; let player : TestPlayer;

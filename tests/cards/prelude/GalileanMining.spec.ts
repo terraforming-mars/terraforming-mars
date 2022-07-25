@@ -3,7 +3,7 @@ import {GalileanMining} from '../../../src/cards/prelude/GalileanMining';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('GalileanMining', function() {
   let card : GalileanMining; let player : Player; let game : Game;

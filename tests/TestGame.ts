@@ -1,8 +1,7 @@
 import {Game} from '../src/Game';
 import {GameOptions} from '../src/GameOptions';
-import {TestPlayers} from './TestPlayers';
 import {setCustomGameOptions} from './TestingUtils';
-import {TestPlayer} from './TestPlayer';
+import {TestPlayer, TestPlayers} from './TestPlayer';
 
 export function newTestGame(count: number, customOptions?: Partial<GameOptions>, idSuffix = ''): Game {
   const players = [

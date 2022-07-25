@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MoholeExcavation} from '../../../src/cards/prelude/MoholeExcavation';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MoholeExcavation', function() {
   it('Should play', function() {

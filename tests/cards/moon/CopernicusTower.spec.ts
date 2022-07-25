@@ -1,9 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {CopernicusTower} from '../../../src/cards/moon/CopernicusTower';
-import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

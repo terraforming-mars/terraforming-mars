@@ -6,7 +6,7 @@ import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Decomposers', function() {
   let card : Decomposers; let player : Player; let game : Game;

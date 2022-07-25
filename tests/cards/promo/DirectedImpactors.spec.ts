@@ -7,7 +7,7 @@ import {HowToPay} from '../../../src/common/inputs/HowToPay';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 

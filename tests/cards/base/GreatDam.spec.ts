@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {GreatDam} from '../../../src/cards/base/GreatDam';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('GreatDam', () => {
   let card : GreatDam; let player : TestPlayer;

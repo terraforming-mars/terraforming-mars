@@ -6,7 +6,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('EcologicalZone', function() {

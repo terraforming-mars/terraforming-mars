@@ -6,8 +6,7 @@ import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {TheWomb} from '../../../src/cards/moon/TheWomb';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {MoonColonyStandardProject} from '../../../src/cards/moon/MoonColonyStandardProject';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

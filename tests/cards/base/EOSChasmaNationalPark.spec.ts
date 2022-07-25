@@ -4,9 +4,8 @@ import {EosChasmaNationalPark} from '../../../src/cards/base/EOSChasmaNationalPa
 import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 import {cast} from '../../TestingUtils';
 
 describe('EosChasmaNationalPark', () => {

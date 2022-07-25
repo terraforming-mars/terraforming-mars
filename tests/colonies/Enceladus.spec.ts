@@ -5,7 +5,7 @@ import {Enceladus} from '../../src/colonies/Enceladus';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 
 describe('Enceladus', function() {

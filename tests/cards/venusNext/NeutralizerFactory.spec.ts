@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {NeutralizerFactory} from '../../../src/cards/venusNext/NeutralizerFactory';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('NeutralizerFactory', function() {
   it('Should play', function() {

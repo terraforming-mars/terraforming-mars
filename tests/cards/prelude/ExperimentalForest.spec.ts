@@ -3,7 +3,7 @@ import {ExperimentalForest} from '../../../src/cards/prelude/ExperimentalForest'
 import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('ExperimentalForest', function() {
   it('Should play', function() {

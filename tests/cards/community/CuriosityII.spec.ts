@@ -7,7 +7,7 @@ import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
 import {setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('CuriosityII', function() {
   let card : CuriosityII; let player : Player; let player2 : Player; let game : Game;

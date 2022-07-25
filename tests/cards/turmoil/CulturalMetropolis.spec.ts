@@ -8,7 +8,7 @@ import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Cultural Metropolis', function() {
   let card : CulturalMetropolis; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;

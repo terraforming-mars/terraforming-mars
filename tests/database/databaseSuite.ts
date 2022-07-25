@@ -4,7 +4,7 @@ import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
 
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {IDatabase} from '../../src/database/IDatabase';
 import {newTestGame} from '../TestGame';

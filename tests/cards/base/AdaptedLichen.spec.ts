@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {AdaptedLichen} from '../../../src/cards/base/AdaptedLichen';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('AdaptedLichen', function() {
   it('Should play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ApiGame} from '../../src/routes/ApiGame';
 import {Game} from '../../src/Game';
 import {MockResponse} from './HttpMocks';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 
 describe('ApiGame', () => {

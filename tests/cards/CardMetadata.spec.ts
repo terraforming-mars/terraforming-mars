@@ -3,7 +3,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {ALL_CARD_MANIFESTS} from '../../src/cards/AllCards';
 import {setCustomGameOptions} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('CardMetadata', function() {
   let player : Player;

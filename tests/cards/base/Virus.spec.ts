@@ -6,7 +6,7 @@ import {Virus} from '../../../src/cards/base/Virus';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Virus', function() {
   let card : Virus; let player : Player; let player2 : Player; let game : Game;

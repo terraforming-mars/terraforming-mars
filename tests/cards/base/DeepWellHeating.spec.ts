@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DeepWellHeating} from '../../../src/cards/base/DeepWellHeating';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('DeepWellHeating', function() {
   it('Should play', function() {

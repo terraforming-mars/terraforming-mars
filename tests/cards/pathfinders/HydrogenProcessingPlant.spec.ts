@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {HydrogenProcessingPlant} from '../../../src/cards/pathfinders/HydrogenProcessingPlant';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 

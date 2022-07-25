@@ -5,8 +5,7 @@ import {Pets} from '../../../src/cards/base/Pets';
 import {Research} from '../../../src/cards/base/Research';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('MarsUniversity', function() {
   let card : MarsUniversity; let player : TestPlayer; let game : Game;

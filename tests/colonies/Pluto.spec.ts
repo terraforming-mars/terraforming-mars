@@ -4,7 +4,7 @@ import {Pluto} from '../../src/colonies/Pluto';
 import {Game} from '../../src/Game';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Pluto', function() {

@@ -3,8 +3,7 @@ import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColonyShip';
 import {Research} from '../../../src/cards/base/Research';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('InterstellarColonyShip', function() {
   let card : InterstellarColonyShip; let player : TestPlayer;

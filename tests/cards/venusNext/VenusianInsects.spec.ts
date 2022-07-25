@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {VenusianInsects} from '../../../src/cards/venusNext/VenusianInsects';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('VenusianInsects', () => {
   let card : VenusianInsects; let player : Player; let game : Game;

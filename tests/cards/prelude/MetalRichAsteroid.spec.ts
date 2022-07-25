@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MetalRichAsteroid} from '../../../src/cards/prelude/MetalRichAsteroid';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Metal-RichAsteroid', function() {
   it('Should play', function() {

@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('PoliticalAlliance', function() {
   let card : PoliticalAlliance; let player : Player; let game : Game; let turmoil: Turmoil;

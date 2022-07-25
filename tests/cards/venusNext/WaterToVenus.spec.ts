@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {WaterToVenus} from '../../../src/cards/venusNext/WaterToVenus';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('WaterToVenus', function() {
   it('Should play', function() {

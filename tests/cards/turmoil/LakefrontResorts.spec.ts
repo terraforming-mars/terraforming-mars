@@ -3,7 +3,7 @@ import {LakefrontResorts} from '../../../src/cards/turmoil/LakefrontResorts';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('LakefrontResorts', function() {
   it('Should play', function() {

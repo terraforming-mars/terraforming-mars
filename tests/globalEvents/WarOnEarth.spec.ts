@@ -3,7 +3,7 @@ import {Game} from '../../src/Game';
 import {WarOnEarth} from '../../src/turmoil/globalEvents/WarOnEarth';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('WarOnEarth', function() {
   it('resolve play', function() {

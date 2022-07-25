@@ -3,8 +3,7 @@ import {ElectroCatapult} from '../../../src/cards/base/ElectroCatapult';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('ElectroCatapult', () => {
   let card : ElectroCatapult; let player : TestPlayer; let game : Game;

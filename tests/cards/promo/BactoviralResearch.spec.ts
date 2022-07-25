@@ -7,7 +7,7 @@ import {BactoviralResearch} from '../../../src/cards/promo/BactoviralResearch';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('BactoviralResearch', function() {
   let card : BactoviralResearch; let player : Player;

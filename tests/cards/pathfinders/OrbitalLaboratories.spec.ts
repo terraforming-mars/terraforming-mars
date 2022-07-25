@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {OrbitalLaboratories} from '../../../src/cards/pathfinders/OrbitalLaboratories';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('OrbitalLaboratories', function() {

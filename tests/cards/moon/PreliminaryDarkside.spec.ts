@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {PreliminaryDarkside} from '../../../src/cards/moon/PreliminaryDarkside';
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';

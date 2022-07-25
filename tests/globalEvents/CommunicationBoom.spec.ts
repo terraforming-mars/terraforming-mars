@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {CommunicationBoom} from '../../src/turmoil/globalEvents/CommunicationBoom';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {CardResource} from '../../src/common/CardResource';
 import {AndOptions} from '../../src/inputs/AndOptions';

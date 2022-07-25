@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, runNextAction} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('ImmigrantCity', function() {
   let card : ImmigrantCity; let player : Player; let player2 : Player; let game : Game;

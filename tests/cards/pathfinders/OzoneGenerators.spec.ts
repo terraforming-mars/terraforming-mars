@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {OzoneGenerators} from '../../../src/cards/pathfinders/OzoneGenerators';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('OzoneGenerators', function() {
   let card: OzoneGenerators;

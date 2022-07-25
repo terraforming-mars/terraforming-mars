@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TradeEnvoys} from '../../../src/cards/colonies/TradeEnvoys';
 import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('TradeEnvoys', function() {
   it('Should play', function() {

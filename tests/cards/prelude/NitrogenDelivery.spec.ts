@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {NitrogenDelivery} from '../../../src/cards/prelude/NitrogenDelivery';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('NitrogenDelivery', function() {
   it('Should play', function() {

@@ -3,10 +3,9 @@ import {ArtificialLake} from '../../../src/cards/base/ArtificialLake';
 import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {

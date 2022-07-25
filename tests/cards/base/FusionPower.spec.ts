@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {FusionPower} from '../../../src/cards/base/FusionPower';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('FusionPower', function() {
   let card : FusionPower; let player : Player;

@@ -7,7 +7,7 @@ import {Resources} from '../../src/common/Resources';
 import {Diversity} from '../../src/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Diversity', function() {
   it('resolve play', function() {

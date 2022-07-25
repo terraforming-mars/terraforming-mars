@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {EconomicEspionage} from '../../../src/cards/pathfinders/EconomicEspionage';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
 describe('EconomicEspionage', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ApiGames} from '../../src/routes/ApiGames';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('MartianSurvey', function() {
   let card : MartianSurvey; let player : Player; let game : Game;

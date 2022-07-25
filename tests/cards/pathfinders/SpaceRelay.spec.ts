@@ -4,8 +4,7 @@ import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('SpaceRelay', function() {
   let card: SpaceRelay;

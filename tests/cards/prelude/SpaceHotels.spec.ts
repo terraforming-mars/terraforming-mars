@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SpaceHotels', function() {
   let card : SpaceHotels; let player : Player;

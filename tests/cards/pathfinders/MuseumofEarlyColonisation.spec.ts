@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {MuseumofEarlyColonisation} from '../../../src/cards/pathfinders/MuseumofEarlyColonisation';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {addCity, addGreenery, addOcean} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {Units} from '../../../src/common/Units';

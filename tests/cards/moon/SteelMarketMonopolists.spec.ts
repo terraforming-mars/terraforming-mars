@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {SteelMarketMonopolists} from '../../../src/cards/moon/SteelMarketMonopolists';
 import {expect} from 'chai';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';

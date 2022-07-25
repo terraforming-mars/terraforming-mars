@@ -1,8 +1,7 @@
 import {Game} from '../../../src/Game';
 import {MarsDirect} from '../../../src/cards/pathfinders/MarsDirect';
 import {expect} from 'chai';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
 import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
 import {addOcean} from '../../TestingUtils';

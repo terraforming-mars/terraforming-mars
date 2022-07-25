@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {PlayerInput} from '../../src/routes/PlayerInput';
 import {MockResponse} from './HttpMocks';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {UndoActionOption} from '../../src/inputs/UndoActionOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';

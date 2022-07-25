@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {EnergySaving} from '../../../src/cards/base/EnergySaving';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('EnergySaving', function() {
   it('Should play', function() {

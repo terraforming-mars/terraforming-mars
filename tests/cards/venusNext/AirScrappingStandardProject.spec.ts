@@ -3,7 +3,7 @@ import {AirScrappingStandardProject} from '../../../src/cards/venusNext/AirScrap
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../src/common/Phase';

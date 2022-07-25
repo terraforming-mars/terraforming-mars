@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('LunaGovernor', function() {
   it('Should play', function() {

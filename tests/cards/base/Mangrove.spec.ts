@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {Mangrove} from '../../../src/cards/base/Mangrove';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Mangrove', function() {
   let card : Mangrove; let player : TestPlayer;

@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {SubterraneanReservoir} from '../../../src/cards/base/SubterraneanReservoir';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SubterraneanReservoir', function() {
   it('Should play', function() {

@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Comet', function() {
   let card : Comet; let player : Player; let player2 : Player; let player3: Player; let game : Game;

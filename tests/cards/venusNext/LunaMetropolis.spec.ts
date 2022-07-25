@@ -3,7 +3,7 @@ import {LunaMetropolis} from '../../../src/cards/venusNext/LunaMetropolis';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('LunaMetropolis', function() {
   it('Should play', function() {

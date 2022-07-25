@@ -4,7 +4,7 @@ import {Resources} from '../../src/common/Resources';
 import {AquiferReleasedByPublicCouncil} from '../../src/turmoil/globalEvents/AquiferReleasedByPublicCouncil';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('AquiferReleasedByPublicCouncil', function() {
   it('resolve play', function() {

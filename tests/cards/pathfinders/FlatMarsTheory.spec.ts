@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {FlatMarsTheory} from '../../../src/cards/pathfinders/FlatMarsTheory';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 
 describe('FlatMarsTheory', function() {

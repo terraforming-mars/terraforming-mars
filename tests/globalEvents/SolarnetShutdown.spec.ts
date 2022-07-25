@@ -6,7 +6,7 @@ import {Resources} from '../../src/common/Resources';
 import {SolarnetShutdown} from '../../src/turmoil/globalEvents/SolarnetShutdown';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('SolarnetShutdown', function() {
   it('resolve play', function() {

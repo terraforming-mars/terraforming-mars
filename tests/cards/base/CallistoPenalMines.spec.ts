@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {CallistoPenalMines} from '../../../src/cards/base/CallistoPenalMines';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('CallistoPenalMines', function() {
   it('Should play', function() {

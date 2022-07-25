@@ -1,10 +1,9 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {LunaFirstIncorporated} from '../../../src/cards/moon/LunaFirstIncorporated';
-import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

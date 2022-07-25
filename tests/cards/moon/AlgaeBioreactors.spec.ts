@@ -1,7 +1,6 @@
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/cards/moon/AlgaeBioreactors';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';

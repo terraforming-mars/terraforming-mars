@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {MartianNatureWonders} from '../../../src/cards/pathfinders/MartianNatureWonders';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {maxOutOceans, runAllActions} from '../../TestingUtils';

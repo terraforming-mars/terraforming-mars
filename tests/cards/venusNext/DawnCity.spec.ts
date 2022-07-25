@@ -3,7 +3,7 @@ import {DawnCity} from '../../../src/cards/venusNext/DawnCity';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('DawnCity', function() {
   it('Should play', function() {

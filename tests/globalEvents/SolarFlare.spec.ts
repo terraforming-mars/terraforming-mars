@@ -5,7 +5,7 @@ import {Resources} from '../../src/common/Resources';
 import {SolarFlare} from '../../src/turmoil/globalEvents/SolarFlare';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('SolarFlare', function() {
   it('resolve play', function() {

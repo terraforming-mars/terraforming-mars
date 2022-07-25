@@ -1,6 +1,5 @@
 import {Philares} from '../../../src/cards/promo/Philares';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
@@ -8,7 +7,7 @@ import {ISpace} from '../../../src/boards/ISpace';
 import {expect} from 'chai';
 import {Phase} from '../../../src/common/Phase';
 import {AndOptions} from '../../../src/inputs/AndOptions';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/inputs/OrOptions';

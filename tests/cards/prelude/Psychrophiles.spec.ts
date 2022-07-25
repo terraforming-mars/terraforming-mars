@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/cards/prelude/Psychrophiles';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Psychrophiles', () => {
   let card : Psychrophiles; let player : Player; let game : Game;

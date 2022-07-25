@@ -6,7 +6,7 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {Capital} from '../../../src/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean} from '../../TestingUtils';

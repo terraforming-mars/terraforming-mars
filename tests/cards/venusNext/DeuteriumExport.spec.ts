@@ -3,7 +3,7 @@ import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('DeuteriumExport', function() {

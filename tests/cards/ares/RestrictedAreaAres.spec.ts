@@ -5,7 +5,7 @@ import {TileType} from '../../../src/common/TileType';
 import {RestrictedAreaAres} from '../../../src/cards/ares/RestrictedAreaAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('RestrictedAreaAres', function() {
   let card : RestrictedAreaAres; let player : Player;

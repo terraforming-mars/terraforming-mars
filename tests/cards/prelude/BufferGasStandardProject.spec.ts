@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {BufferGasStandardProject} from '../../../src/cards/prelude/BufferGasStandardProject';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../src/common/Phase';

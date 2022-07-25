@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Harvest} from '../../../src/cards/promo/Harvest';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Harvest', function() {
   let card : Harvest; let player : Player; let game : Game;

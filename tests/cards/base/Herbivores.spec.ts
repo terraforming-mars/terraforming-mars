@@ -5,7 +5,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, runNextAction} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Herbivores', () => {
   let card : Herbivores; let player : Player; let player2: Player; let game: Game;

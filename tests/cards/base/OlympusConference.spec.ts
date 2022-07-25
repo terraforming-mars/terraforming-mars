@@ -7,8 +7,7 @@ import {AdaptationTechnology} from '../../../src//cards/base/AdaptationTechnolog
 import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActionsQueue';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OlympusConference', function() {

@@ -5,7 +5,7 @@ import {Resources} from '../../src/common/Resources';
 import {MinersOnStrike} from '../../src/turmoil/globalEvents/MinersOnStrike';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('MinersOnStrike', function() {
   it('resolve play', function() {

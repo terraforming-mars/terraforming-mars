@@ -3,7 +3,7 @@ import {AcquiredCompany} from '../../src/cards/base/AcquiredCompany';
 import {Game} from '../../src/Game';
 import {TiredEarth} from '../../src/turmoil/globalEvents/TiredEarth';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('TiredEarth', function() {
   it('resolve play', function() {

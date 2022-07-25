@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {BreedingFarms} from '../../../src/cards/pathfinders/BreedingFarms';
 import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
 describe('BreedingFarms', function() {

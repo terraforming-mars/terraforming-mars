@@ -1,7 +1,7 @@
 import {Capitalist} from '../../src/milestones/Capitalist';
 import {Player} from '../../src/Player';
 import {expect} from 'chai';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Capitalist', () => {
   let milestone : Capitalist; let player : Player;

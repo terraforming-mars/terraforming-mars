@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PhoboLog} from '../../../src/cards/corporation/PhoboLog';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('PhoboLog', function() {
   it('Should play', function() {

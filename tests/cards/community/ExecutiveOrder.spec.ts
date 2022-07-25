@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {GameOptions} from '../../../src/GameOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';

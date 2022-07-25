@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {DeclarationOfIndependence} from '../../../src/cards/pathfinders/DeclarationOfIndependence';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';

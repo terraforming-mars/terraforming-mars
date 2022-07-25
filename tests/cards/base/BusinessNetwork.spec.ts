@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('BusinessNetwork', function() {
   let card : BusinessNetwork; let player : Player; let game : Game;

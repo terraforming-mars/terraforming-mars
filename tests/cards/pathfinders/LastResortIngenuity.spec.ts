@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {LastResortIngenuity} from '../../../src/cards/pathfinders/LastResortIngenuity';
 import {AsteroidMiningConsortium} from '../../../src/cards/base/AsteroidMiningConsortium';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('LastResortIngenuity', function() {
   let card: LastResortIngenuity;

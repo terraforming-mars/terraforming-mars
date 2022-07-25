@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {DataLeak} from '../../../src/cards/pathfinders/DataLeak';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {runAllActions} from '../../TestingUtils';
 

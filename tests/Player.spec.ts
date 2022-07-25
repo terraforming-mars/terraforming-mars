@@ -7,7 +7,7 @@ import {PowerSupplyConsortium} from '../src/cards/base/PowerSupplyConsortium';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
 import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/common/Resources';
-import {TestPlayers} from './TestPlayers';
+import {TestPlayers} from './TestPlayer';
 import {SerializedPlayer} from '../src/SerializedPlayer';
 import {SerializedTimer} from '../src/common/SerializedTimer';
 import {SerializedGame} from '../src/SerializedGame';

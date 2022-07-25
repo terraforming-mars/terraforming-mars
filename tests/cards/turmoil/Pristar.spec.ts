@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Pristar} from '../../../src/cards/turmoil/Pristar';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Pristar', function() {
   it('Should play', function() {

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Solarpedia} from '../../../src/cards/pathfinders/Solarpedia';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard, IResourceCard} from '../../../src/cards/ICard';

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {OumuamuaTypeObjectSurvey} from '../../../src/cards/pathfinders/OumuamuaTypeObjectSurvey';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/cards/IProjectCard';

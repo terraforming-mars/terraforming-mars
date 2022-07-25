@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {InventionContest} from '../../../src/cards/base/InventionContest';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('InventionContest', function() {
   it('Should play', function() {

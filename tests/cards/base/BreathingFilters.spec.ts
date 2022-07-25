@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {BreathingFilters} from '../../../src/cards/base/BreathingFilters';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('BreathingFilters', function() {
   let card : BreathingFilters; let player : TestPlayer; let game : Game;

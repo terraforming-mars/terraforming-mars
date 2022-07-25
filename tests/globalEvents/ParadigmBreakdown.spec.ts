@@ -8,7 +8,7 @@ import {Resources} from '../../src/common/Resources';
 import {ParadigmBreakdown} from '../../src/turmoil/globalEvents/ParadigmBreakdown';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('ParadigmBreakdown', function() {
   it('resolve play', function() {

@@ -7,7 +7,7 @@ import {Player} from '../../../src/Player';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 let card: GiantSolarShade;
 let player: Player;
 let redPlayer: Player;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AerosportTournament} from '../../../src/cards/venusNext/AerosportTournament';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('AerosportTournament', function() {
   it('Should play', function() {

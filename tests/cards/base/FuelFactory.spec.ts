@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {FuelFactory} from '../../../src/cards/base/FuelFactory';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('FuelFactory', function() {
   let card : FuelFactory; let player : Player;

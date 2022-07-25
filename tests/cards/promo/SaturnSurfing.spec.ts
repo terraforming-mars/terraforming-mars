@@ -4,7 +4,7 @@ import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('SaturnSurfing', function() {
   let card : SaturnSurfing; let player : Player;

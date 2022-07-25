@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GHGFactories} from '../../../src/cards/base/GHGFactories';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('GHGFactories', function() {
   let card : GHGFactories; let player : Player;

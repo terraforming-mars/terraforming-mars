@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {RareEarthElements} from '../../../src/cards/pathfinders/RareEarthElements';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 

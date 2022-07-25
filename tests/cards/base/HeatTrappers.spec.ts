@@ -2,9 +2,8 @@ import {expect} from 'chai';
 import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
 import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('HeatTrappers', function() {
   let card : HeatTrappers; let player : TestPlayer; let player2: TestPlayer; let game: Game;

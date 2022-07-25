@@ -7,7 +7,7 @@ import {Helion} from '../../../src/cards/corporation/Helion';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('LocalHeatTrapping', () => {
   let card : LocalHeatTrapping; let player : Player;

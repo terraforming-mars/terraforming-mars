@@ -6,7 +6,7 @@ import {Resources} from '../../src/common/Resources';
 import {ScientificCommunity} from '../../src/turmoil/globalEvents/ScientificCommunity';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('ScientificCommunity', function() {
   it('resolve play', function() {

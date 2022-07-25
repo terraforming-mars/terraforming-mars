@@ -7,7 +7,7 @@ import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {MiningAreaAres} from '../../../src/cards/ares/MiningAreaAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MiningAreaAres', function() {

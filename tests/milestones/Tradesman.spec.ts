@@ -4,7 +4,7 @@ import {CometAiming} from '../../src/cards/promo/CometAiming';
 import {Dirigibles} from '../../src/cards/venusNext/Dirigibles';
 import {Tradesman} from '../../src/milestones/Tradesman';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Tradesman', () => {
   let milestone : Tradesman; let player : Player;

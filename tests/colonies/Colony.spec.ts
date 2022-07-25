@@ -1,4 +1,3 @@
-import {TestPlayers} from '../TestPlayers';
 import {expect} from 'chai';
 import {IColony} from '../../src/colonies/IColony';
 import {Pluto} from '../../src/colonies/Pluto';
@@ -13,7 +12,7 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
 import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
-import {TestPlayer} from '../TestPlayer';
+import {TestPlayer, TestPlayers} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/cards/community/Pallas';
 import {Io} from '../../src/colonies/Io';

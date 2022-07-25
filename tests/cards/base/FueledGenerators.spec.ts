@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {FueledGenerators} from '../../../src/cards/base/FueledGenerators';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('FueledGenerators', function() {
   it('Should play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Hackers} from '../../../src/cards/base/Hackers';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayers} from '../../TestPlayer';
 
 describe('Hackers', function() {
   let card : Hackers; let player : Player;

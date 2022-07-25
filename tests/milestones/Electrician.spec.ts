@@ -7,7 +7,7 @@ import {FieldCappedCity} from '../../src/cards/promo/FieldCappedCity';
 import {Game} from '../../src/Game';
 import {Electrician} from '../../src/milestones/Electrician';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('Electrician', () => {
   let milestone : Electrician; let player : Player;

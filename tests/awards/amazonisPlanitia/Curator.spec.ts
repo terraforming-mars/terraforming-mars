@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {Curator} from '../../../src/awards/amazonisPlanitia/Curator';
-import {TestPlayers} from '../../TestPlayers';
 import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
-import {TestPlayer} from '../../TestPlayer';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 
 describe('Curator', () => {

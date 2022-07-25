@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {RichDeposits} from '../../../src/cards/pathfinders/RichDeposits';
 import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer, TestPlayers} from '../../TestPlayer';
 
 describe('RichDeposits', function() {
   let card: RichDeposits;

@@ -3,7 +3,7 @@ import {Luna} from '../../src/colonies/Luna';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Luna', function() {

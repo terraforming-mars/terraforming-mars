@@ -4,7 +4,7 @@ import {Resources} from '../../src/common/Resources';
 import {VolcanicEruptions} from '../../src/turmoil/globalEvents/VolcanicEruptions';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayers} from '../TestPlayer';
 
 describe('VolcanicEruptions', function() {
   it('resolve play', function() {

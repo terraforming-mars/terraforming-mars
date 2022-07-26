@@ -1,4 +1,5 @@
-import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
+import {PlayerInput} from '../../PlayerInput';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -46,7 +47,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
   }
   public action(player: Player) {
     const floaterCards = player.getResourceCards(CardResource.FLOATER);
-    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+    const opts: Array<PlayerInput> = [];
 
     // only one valid target - itself
     if (floaterCards.length === 1 && this.resourceCount === 0) {

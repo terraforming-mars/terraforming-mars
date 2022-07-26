@@ -9,7 +9,8 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CommercialDistrictAres', function() {
-  let card : CommercialDistrictAres; let player : Player;
+  let card: CommercialDistrictAres;
+  let player: Player;
 
   beforeEach(function() {
     card = new CommercialDistrictAres();

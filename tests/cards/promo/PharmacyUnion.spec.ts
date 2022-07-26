@@ -19,7 +19,9 @@ import {Virus} from '../../../src/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
-  let card : PharmacyUnion; let player : Player; let player2 : Player;
+  let card: PharmacyUnion;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new PharmacyUnion();

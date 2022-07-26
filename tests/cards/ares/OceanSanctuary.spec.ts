@@ -10,7 +10,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 
 describe('OceanSanctuary', function() {
-  let card : OceanSanctuary; let player : Player; let otherPlayer: Player; let game : Game;
+  let card: OceanSanctuary;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new OceanSanctuary();

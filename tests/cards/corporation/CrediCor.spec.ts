@@ -10,7 +10,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CrediCor', function() {
-  let card : CrediCor; let player : Player;
+  let card: CrediCor;
+  let player: Player;
 
   beforeEach(function() {
     card = new CrediCor();

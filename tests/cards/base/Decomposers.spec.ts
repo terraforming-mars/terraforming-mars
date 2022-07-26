@@ -9,7 +9,9 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Decomposers', function() {
-  let card : Decomposers; let player : Player; let game : Game;
+  let card: Decomposers;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Decomposers();

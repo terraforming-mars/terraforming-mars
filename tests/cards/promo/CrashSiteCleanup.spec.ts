@@ -8,7 +8,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CrashSiteCleanup', function() {
-  let card : CrashSiteCleanup; let player : Player;
+  let card: CrashSiteCleanup;
+  let player: Player;
 
   beforeEach(function() {
     card = new CrashSiteCleanup();

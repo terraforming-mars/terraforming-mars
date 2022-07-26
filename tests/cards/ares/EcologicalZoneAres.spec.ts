@@ -10,7 +10,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('EcologicalZoneAres', function() {
-  let card : EcologicalZoneAres; let player : Player; let game : Game;
+  let card: EcologicalZoneAres;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new EcologicalZoneAres();

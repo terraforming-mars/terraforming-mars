@@ -9,7 +9,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 
 describe('BioengineeringEnclosure', function() {
-  let card : BioengineeringEnclosure;
+  let card: BioengineeringEnclosure;
   let player: TestPlayer;
   let game: Game;
   let animalHost: IProjectCard;

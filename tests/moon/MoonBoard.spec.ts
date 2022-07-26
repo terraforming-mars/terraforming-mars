@@ -4,7 +4,7 @@ import {MoonBoard} from '../../src/moon/MoonBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 
 describe('MoonBoard', function() {
-  let board : MoonBoard;
+  let board: MoonBoard;
 
   beforeEach(function() {
     board = MoonBoard.newInstance();

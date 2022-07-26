@@ -5,7 +5,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('SpaceElevator', function() {
-  let card : SpaceElevator; let player : TestPlayer;
+  let card: SpaceElevator;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SpaceElevator();

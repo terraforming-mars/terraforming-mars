@@ -9,7 +9,10 @@ import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TharsisRepublic', function() {
-  let card : TharsisRepublic; let player : Player; let player2 : Player; let game : Game;
+  let card: TharsisRepublic;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new TharsisRepublic();

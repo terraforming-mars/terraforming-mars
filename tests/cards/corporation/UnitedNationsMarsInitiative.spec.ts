@@ -5,7 +5,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('UnitedNationsMarsInitiative', function() {
-  let card : UnitedNationsMarsInitiative; let player : Player;
+  let card: UnitedNationsMarsInitiative;
+  let player: Player;
 
   beforeEach(function() {
     card = new UnitedNationsMarsInitiative();

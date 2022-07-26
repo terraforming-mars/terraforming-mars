@@ -13,7 +13,10 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EcologyResearch', function() {
-  let card : EcologyResearch; let player : Player; let game : Game; let colony1: Luna;
+  let card: EcologyResearch;
+  let player: Player;
+  let game: Game;
+  let colony1: Luna;
 
   beforeEach(function() {
     card = new EcologyResearch();

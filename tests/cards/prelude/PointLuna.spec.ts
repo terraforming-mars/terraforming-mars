@@ -8,7 +8,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PointLuna', function() {
-  let card : PointLuna; let player : Player;
+  let card: PointLuna;
+  let player: Player;
 
   beforeEach(function() {
     card = new PointLuna();

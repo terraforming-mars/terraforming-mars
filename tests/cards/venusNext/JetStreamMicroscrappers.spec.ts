@@ -7,7 +7,9 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('JetStreamMicroscrappers', function() {
-  let card : JetStreamMicroscrappers; let player : Player; let game : Game;
+  let card: JetStreamMicroscrappers;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new JetStreamMicroscrappers();

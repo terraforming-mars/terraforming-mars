@@ -5,7 +5,9 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LakeMarineris', function() {
-  let card : LakeMarineris; let player : TestPlayer; let game : Game;
+  let card: LakeMarineris;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new LakeMarineris();

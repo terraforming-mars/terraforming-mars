@@ -8,7 +8,9 @@ import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessNetwork', function() {
-  let card : BusinessNetwork; let player : Player; let game : Game;
+  let card: BusinessNetwork;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new BusinessNetwork();

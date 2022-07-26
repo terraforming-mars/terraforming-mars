@@ -7,7 +7,10 @@ import {Resources} from '../../../src/common/Resources';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('EnergyTapping', function() {
-  let card : EnergyTapping; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+  let card: EnergyTapping;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new EnergyTapping();

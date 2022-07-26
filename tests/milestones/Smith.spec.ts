@@ -5,7 +5,8 @@ import {Player} from '../../src/Player';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Smith', () => {
-  let milestone : Smith; let player : Player;
+  let milestone: Smith;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Smith();

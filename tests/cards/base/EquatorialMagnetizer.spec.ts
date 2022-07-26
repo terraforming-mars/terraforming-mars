@@ -6,7 +6,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EquatorialMagnetizer', function() {
-  let card : EquatorialMagnetizer; let player : Player;
+  let card: EquatorialMagnetizer;
+  let player: Player;
 
   beforeEach(function() {
     card = new EquatorialMagnetizer();

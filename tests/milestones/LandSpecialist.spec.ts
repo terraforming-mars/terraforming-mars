@@ -10,7 +10,7 @@ import {TileType} from '../../src/common/TileType';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 
 describe('LandSpecialist', function() {
-  let milestone : LandSpecialist;
+  let milestone: LandSpecialist;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: Game;

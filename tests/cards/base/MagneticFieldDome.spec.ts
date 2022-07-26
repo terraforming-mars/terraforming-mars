@@ -6,7 +6,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MagneticFieldDome', function() {
-  let card : MagneticFieldDome; let player : Player;
+  let card: MagneticFieldDome;
+  let player: Player;
 
   beforeEach(function() {
     card = new MagneticFieldDome();

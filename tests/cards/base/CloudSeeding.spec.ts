@@ -8,7 +8,10 @@ import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CloudSeeding', () => {
-  let card : CloudSeeding; let player : Player; let player2 : Player; let game : Game;
+  let card: CloudSeeding;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new CloudSeeding();

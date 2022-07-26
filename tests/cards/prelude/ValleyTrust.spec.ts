@@ -10,8 +10,8 @@ import {CardType} from '../../../src/common/cards/CardType';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('ValleyTrust', function() {
-  let card : ValleyTrust;
-  let player : TestPlayer;
+  let card: ValleyTrust;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new ValleyTrust();

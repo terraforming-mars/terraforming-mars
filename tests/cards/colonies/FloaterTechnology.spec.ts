@@ -9,7 +9,9 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('FloaterTechnology', function() {
-  let card : FloaterTechnology; let player : Player; let game : Game;
+  let card: FloaterTechnology;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new FloaterTechnology();

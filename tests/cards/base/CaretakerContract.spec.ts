@@ -12,7 +12,9 @@ import {Helion} from '../../../src/cards/corporation/Helion';
 import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
 
 describe('CaretakerContract', function() {
-  let card : CaretakerContract; let player : Player; let game : Game;
+  let card: CaretakerContract;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new CaretakerContract();

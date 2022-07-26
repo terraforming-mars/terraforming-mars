@@ -8,7 +8,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('LargeConvoy', function() {
-  let card : LargeConvoy; let player : TestPlayer;
+  let card: LargeConvoy;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new LargeConvoy();

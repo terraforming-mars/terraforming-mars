@@ -12,7 +12,12 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DiasporaMovement', function() {
-  let card : DiasporaMovement; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil; let reds: IParty;
+  let card: DiasporaMovement;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
+  let reds: IParty;
 
   beforeEach(function() {
     card = new DiasporaMovement();

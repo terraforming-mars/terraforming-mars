@@ -8,7 +8,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DiversitySupport', function() {
-  let card : DiversitySupport; let player : Player;
+  let card: DiversitySupport;
+  let player: Player;
 
   beforeEach(function() {
     card = new DiversitySupport();

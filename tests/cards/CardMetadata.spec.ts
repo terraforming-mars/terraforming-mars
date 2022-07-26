@@ -6,7 +6,7 @@ import {setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 
 describe('CardMetadata', function() {
-  let player : Player;
+  let player: Player;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

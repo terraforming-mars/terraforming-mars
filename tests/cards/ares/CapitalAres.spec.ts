@@ -11,7 +11,9 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {cast} from '../../TestingUtils';
 
 describe('CapitalAres', function() {
-  let card : CapitalAres; let player : TestPlayer; let game : Game;
+  let card: CapitalAres;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new CapitalAres();

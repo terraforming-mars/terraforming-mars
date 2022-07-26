@@ -8,7 +8,9 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('IndustrialCenterAres', function() {
-  let card : IndustrialCenterAres; let player : Player; let game : Game;
+  let card: IndustrialCenterAres;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new IndustrialCenterAres();

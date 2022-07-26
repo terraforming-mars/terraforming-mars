@@ -9,7 +9,9 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrogenFromTitan', function() {
-  let card : NitrogenFromTitan; let player : Player; let game : Game;
+  let card: NitrogenFromTitan;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new NitrogenFromTitan();

@@ -7,7 +7,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Dirigibles', function() {
-  let card : Dirigibles; let player : Player;
+  let card: Dirigibles;
+  let player: Player;
 
   beforeEach(function() {
     card = new Dirigibles();

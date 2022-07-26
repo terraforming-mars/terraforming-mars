@@ -8,7 +8,9 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalUprising', function() {
-  let card : PoliticalUprising; let player : Player; let game : Game;
+  let card: PoliticalUprising;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new PoliticalUprising();

@@ -10,7 +10,8 @@ import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 
 describe('ConvertPlants', function() {
-  let card: ConvertPlants; let player: Player;
+  let card: ConvertPlants;
+  let player: Player;
 
   beforeEach(function() {
     card = new ConvertPlants();

@@ -15,7 +15,10 @@ import {HabitatMarte} from '../../../src/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganisms';
 
 describe('Scientists', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil; let scientists: Scientists;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
+  let scientists: Scientists;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

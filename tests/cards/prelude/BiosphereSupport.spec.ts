@@ -5,7 +5,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BiosphereSupport', function() {
-  let card : BiosphereSupport; let player : Player;
+  let card: BiosphereSupport;
+  let player: Player;
 
   beforeEach(function() {
     card = new BiosphereSupport();

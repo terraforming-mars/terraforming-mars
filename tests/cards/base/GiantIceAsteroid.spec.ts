@@ -8,7 +8,11 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('GiantIceAsteroid', function() {
-  let card : GiantIceAsteroid; let player : Player; let player2 : Player; let player3 : Player; let game : Game;
+  let card: GiantIceAsteroid;
+  let player: Player;
+  let player2: Player;
+  let player3:Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new GiantIceAsteroid();

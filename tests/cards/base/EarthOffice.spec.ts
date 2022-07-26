@@ -7,7 +7,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EarthOffice', function() {
-  let card : EarthOffice; let player : Player;
+  let card: EarthOffice;
+  let player: Player;
 
   beforeEach(function() {
     card = new EarthOffice();

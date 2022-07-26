@@ -9,7 +9,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('OrbitalCleanup', function() {
-  let card : OrbitalCleanup; let player : Player;
+  let card: OrbitalCleanup;
+  let player: Player;
 
   beforeEach(function() {
     card = new OrbitalCleanup();

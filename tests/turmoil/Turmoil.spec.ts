@@ -39,7 +39,10 @@ import {TileType} from '../../src/common/TileType';
 import {PlayerId} from '../../src/common/Types';
 
 describe('Turmoil', function() {
-  let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let player: TestPlayer;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

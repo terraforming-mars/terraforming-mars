@@ -7,7 +7,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('DeuteriumExport', function() {
-  let card : DeuteriumExport; let player : Player;
+  let card: DeuteriumExport;
+  let player: Player;
 
   beforeEach(function() {
     card = new DeuteriumExport();

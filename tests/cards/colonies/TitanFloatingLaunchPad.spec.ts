@@ -14,7 +14,9 @@ import {newTestGame, getTestPlayer} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
 describe('TitanFloatingLaunchPad', function() {
-  let card : TitanFloatingLaunchPad; let player : TestPlayer; let game : Game;
+  let card: TitanFloatingLaunchPad;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();

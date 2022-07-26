@@ -11,7 +11,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('AirRaid', function() {
-  let card : AirRaid; let player : Player; let player2 : Player; let corpo: StormCraftIncorporated;
+  let card: AirRaid;
+  let player: Player;
+  let player2: Player;
+  let corpo: StormCraftIncorporated;
 
   beforeEach(function() {
     card = new AirRaid();

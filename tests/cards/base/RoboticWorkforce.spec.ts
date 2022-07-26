@@ -33,7 +33,9 @@ import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('RoboticWorkforce', () => {
-  let card : RoboticWorkforce; let player : TestPlayer; let game : Game;
+  let card: RoboticWorkforce;
+  let player: TestPlayer;
+  let game: Game;
   let redPlayer: TestPlayer;
 
   beforeEach(() => {

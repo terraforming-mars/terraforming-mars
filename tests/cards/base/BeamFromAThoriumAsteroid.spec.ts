@@ -4,7 +4,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('BeamFromAThoriumAsteroid', function() {
-  let card : BeamFromAThoriumAsteroid; let player : TestPlayer;
+  let card: BeamFromAThoriumAsteroid;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new BeamFromAThoriumAsteroid();

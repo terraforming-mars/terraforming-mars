@@ -10,7 +10,9 @@ import {cast, maxOutOceans} from '../../TestingUtils';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', () => {
-  let card : Capital; let player : TestPlayer; let game : Game;
+  let card: Capital;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Capital();

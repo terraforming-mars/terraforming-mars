@@ -9,7 +9,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('CometAiming', function() {
-  let card : CometAiming; let player : Player;
+  let card: CometAiming;
+  let player: Player;
 
   beforeEach(function() {
     card = new CometAiming();

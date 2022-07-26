@@ -7,7 +7,10 @@ import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Callisto', function() {
-  let callisto: Callisto; let player: Player; let player2: Player; let game: Game;
+  let callisto: Callisto;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     callisto = new Callisto();

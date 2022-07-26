@@ -8,7 +8,9 @@ import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';
 
 describe('NaturalPreserve', () => {
-  let card : NaturalPreserve; let player : TestPlayer; let game : Game;
+  let card: NaturalPreserve;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new NaturalPreserve();

@@ -10,7 +10,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('NaturalPreserveAres', function() {
-  let card : NaturalPreserveAres; let player : Player;
+  let card: NaturalPreserveAres;
+  let player: Player;
 
   beforeEach(function() {
     card = new NaturalPreserveAres();

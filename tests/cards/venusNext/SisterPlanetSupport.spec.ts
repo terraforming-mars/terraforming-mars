@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SisterPlanetSupport', function() {
   it('Should play', function() {
     const card = new SisterPlanetSupport();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     player.tagsForTest = {venus: 1};

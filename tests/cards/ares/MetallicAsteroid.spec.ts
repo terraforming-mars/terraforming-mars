@@ -5,15 +5,18 @@ import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('MetallicAsteroid', function() {
-  let card: MetallicAsteroid; let player: Player; let otherPlayer: Player; let game: Game;
+  let card: MetallicAsteroid;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MetallicAsteroid();
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

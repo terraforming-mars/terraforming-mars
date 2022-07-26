@@ -1,4 +1,3 @@
-import {TestPlayers} from '../TestPlayers';
 import {expect} from 'chai';
 import {IColony} from '../../src/colonies/IColony';
 import {Pluto} from '../../src/colonies/Pluto';
@@ -49,10 +48,10 @@ describe('Colony', function() {
   let game: Game;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    player3 = TestPlayers.YELLOW.newPlayer();
-    player4 = TestPlayers.GREEN.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    player3 = TestPlayer.YELLOW.newPlayer();
+    player4 = TestPlayer.GREEN.newPlayer();
     const gameOptions = setCustomGameOptions({
       coloniesExtension: true,
       customColoniesList: [

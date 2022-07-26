@@ -4,19 +4,21 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('IndustrialCenter', function() {
-  let card : IndustrialCenter; let player : Player; let game : Game;
+  let card: IndustrialCenter;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new IndustrialCenter();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play or act', function() {
+  it('Can not play or act', function() {
     expect(card.canAct(player)).is.not.true;
     expect(card.canPlay(player)).is.not.true;
   });

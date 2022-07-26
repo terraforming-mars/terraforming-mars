@@ -4,15 +4,17 @@ import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('HeatTrappers', function() {
-  let card : HeatTrappers; let player : TestPlayer; let player2: TestPlayer; let game: Game;
+  let card: HeatTrappers;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new HeatTrappers();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
@@ -52,7 +54,7 @@ describe('HeatTrappers', function() {
     expect(player2.getProduction(Resources.HEAT)).to.eq(5);
   });
 
-  it('Can\'t play if nobody has heat production', function() {
+  it('Can not play if nobody has heat production', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

@@ -3,19 +3,20 @@ import {Research} from '../../../src/cards/base/Research';
 import {SubCrustMeasurements} from '../../../src/cards/promo/SubCrustMeasurements';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SubCrustMeasurements', function() {
-  let card : SubCrustMeasurements; let player : Player;
+  let card: SubCrustMeasurements;
+  let player: Player;
 
   beforeEach(function() {
     card = new SubCrustMeasurements();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play if not enough science tags', function() {
+  it('Can not play if not enough science tags', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

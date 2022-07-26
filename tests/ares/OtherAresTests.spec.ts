@@ -4,18 +4,18 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
 import {addOcean} from '../TestingUtils';
 
 describe('OtherAresTests', function() {
-  let player : Player;
+  let player: Player;
   let otherPlayer: Player;
-  let game : Game;
+  let game: Game;
 
   it('Desert settler counts upgraded oceans', function() {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];

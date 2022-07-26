@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -50,7 +49,7 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     if (animalCards.length === 0 ) return gainPlants();
 
-    const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
+    const availableActions: Array<PlayerInput> = [];
 
     const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
     availableActions.push(gainPlantsOption);
@@ -68,8 +67,8 @@ export class LargeConvoy extends Card implements IProjectCard {
           'Select card to add 4 animals',
           'Add animals',
           animalCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], {qty: 4, log: true});
+          ([card]) => {
+            player.addResourceTo(card, {qty: 4, log: true});
             player.game.defer(new PlaceOceanTile(player));
             return undefined;
           },

@@ -2,14 +2,15 @@ import {expect} from 'chai';
 import {Resources} from '../../src/common/Resources';
 import {Smith} from '../../src/milestones/Smith';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Smith', () => {
-  let milestone : Smith; let player : Player;
+  let milestone: Smith;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Smith();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can claim with 7 steel and titanium production', () => {

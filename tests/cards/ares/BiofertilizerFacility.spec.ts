@@ -12,7 +12,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 
 describe('BiofertilizerFacility', function() {
-  let card : BiofertilizerFacility;
+  let card: BiofertilizerFacility;
   let player: TestPlayer;
   let game: Game;
 

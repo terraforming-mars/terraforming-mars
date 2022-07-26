@@ -3,15 +3,15 @@ import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {VenusWaystation} from '../../../src/cards/venusNext/VenusWaystation';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusWaystation', function() {
   it('Should play', function() {
     const card = new VenusWaystation();
     const card2 = new LocalShading();
     const card3 = new VenusGovernor();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
     const action = card.play();

@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {RustEatingBacteria} from '../../../src/cards/moon/RustEatingBacteria';
 import {expect} from 'chai';
 
@@ -12,7 +12,7 @@ describe('RustEatingBacteria', () => {
   let card: RustEatingBacteria;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new RustEatingBacteria();
   });

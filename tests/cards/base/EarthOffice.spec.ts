@@ -4,15 +4,16 @@ import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('EarthOffice', function() {
-  let card : EarthOffice; let player : Player;
+  let card: EarthOffice;
+  let player: Player;
 
   beforeEach(function() {
     card = new EarthOffice();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
     const action = card.play();

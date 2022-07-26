@@ -13,14 +13,16 @@ import {DeclarationOfIndependence} from '../../../src/cards/pathfinders/Declarat
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryTrade', function() {
-  let card : InterplanetaryTrade; let player : Player; let game: Game;
+  let card: InterplanetaryTrade;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new InterplanetaryTrade();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

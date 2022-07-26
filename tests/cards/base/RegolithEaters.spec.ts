@@ -4,15 +4,17 @@ import {RegolithEaters} from '../../../src/cards/base/RegolithEaters';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RegolithEaters', function() {
-  let card : RegolithEaters; let player : Player; let game : Game;
+  let card: RegolithEaters;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new RegolithEaters();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

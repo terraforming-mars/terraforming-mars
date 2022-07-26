@@ -3,19 +3,21 @@ import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RestrictedArea', function() {
-  let card : RestrictedArea; let player : Player; let game : Game;
+  let card: RestrictedArea;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new RestrictedArea();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act if not enough MC', function() {
+  it('Can not act if not enough MC', function() {
     player.megaCredits = 1;
     expect(card.canAct(player)).is.not.true;
   });

@@ -1,114 +1,58 @@
 import {expect} from 'chai';
-import {Game, GameOptions, Score} from '../../src/Game';
+import {Game} from '../../src/Game';
 import {GameLoader} from '../../src/database/GameLoader';
 import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
-import {TestPlayers} from '../TestPlayers';
+
+import {TestPlayer} from '../TestPlayer';
 import {Color} from '../../src/common/Color';
-import {IDatabase} from '../../src/database/IDatabase';
-import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
-import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
+import {GameIdLedger} from '../../src/database/IDatabase';
+import {GameId, PlayerId} from '../../src/common/Types';
+import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../utils/setup';
 import {sleep} from '../TestingUtils';
+import {InMemoryDatabase} from '../testing/InMemoryDatabase';
+import {FakeClock} from '../common/FakeClock';
 
-class InMemoryDatabase implements IDatabase {
-  public data: Map<GameId, Array<SerializedGame>> = new Map();
-
-  public failure: 'getGames' | undefined = undefined;
+class TestDatabase extends InMemoryDatabase {
+  public failure: 'getGameIds' | 'getParticipants' | undefined = undefined;
   public getGameSleep: number = 0;
 
-  initialize(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+  override async getGame(gameId: GameId): Promise<SerializedGame> {
+    const game = await super.getGame(gameId);
+    await sleep(this.getGameSleep);
+    return game;
   }
 
-  async getGame(gameId: GameId): Promise<SerializedGame> {
-    const row = this.data.get(gameId);
-    if (row === undefined || row.length === 0) {
-      throw new Error('not found');
-    } else {
-      const game = row[row.length -1];
-      await sleep(this.getGameSleep);
-      return game;
-    }
+  override getGameIds(): Promise<GameId[]> {
+    if (this.failure === 'getGameIds') return Promise.reject(new Error('error'));
+    return super.getGameIds();
   }
-  getGameId(_id: PlayerId | SpectatorId): Promise<GameId> {
-    throw new Error('Method not implemented.');
-  }
-  getSaveIds(gameId: GameId): Promise<number[]> {
-    const row = this.data.get(gameId);
-    if (row === undefined || row.length === 0) {
-      return Promise.reject(new Error('not found'));
-    } else {
-      return Promise.resolve([...Array(row?.length).keys()]);
-    }
-  }
-  getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    const row = this.data.get(gameId);
-    if (row === undefined || row.length === 0) {
-      return Promise.reject(new Error('not found'));
-    }
-    const serializedGame = row[saveId];
-    if (serializedGame === undefined) {
-      return Promise.reject(new Error('not found'));
-    }
-    return Promise.resolve(serializedGame);
-  }
-  getGameIds(): Promise<GameId[]> {
-    if (this.failure === 'getGames') return Promise.reject(new Error('error'));
-    return Promise.resolve(Array.from(this.data.keys()));
-  }
-  getPlayerCount(_game_id: string): Promise<number> {
-    throw new Error('Method not implemented.');
-  }
-  saveGame(game: Game): Promise<void> {
-    const gameId = game.id;
-    const row = this.data.get(gameId) || [];
-    this.data.set(gameId, row);
-    while (row.length < game.lastSaveId) {
-      row.push();
-    }
-    row[game.lastSaveId + 1] = game.serialize();
-    game.lastSaveId++;
-    return Promise.resolve();
-  }
-  saveGameResults(_game_id: string, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Score[]): void {
-    throw new Error('Method not implemented.');
-  }
-  restoreGame(_game_id: string, _save_id: number): Promise<SerializedGame> {
-    throw new Error('Method not implemented.');
-  }
-  loadCloneableGame(_game_id: string): Promise<SerializedGame> {
-    throw new Error('Method not implemented.');
-  }
-  deleteGameNbrSaves(_game_id: string, _rollbackCount: number): void {
-    throw new Error('Method not implemented.');
-  }
-  cleanGame(_game_id: string): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-  purgeUnfinishedGames(): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-  stats(): Promise<{[ key: string ]: string | number;}> {
-    throw new Error('Method not implemented.');
+  override getParticipants(): Promise<Array<GameIdLedger>> {
+    if (this.failure === 'getParticipants') return Promise.reject(new Error('error'));
+    return super.getParticipants();
   }
 }
 
 describe('GameLoader', function() {
   let instance: GameLoader;
-  let database: InMemoryDatabase;
+  let database: TestDatabase;
   let game: Game;
+  let clock: FakeClock;
 
   beforeEach(function() {
-    database = new InMemoryDatabase();
+    clock = new FakeClock();
+    instance = GameLoader.newTestInstance({sleepMillis: 0, evictMillis: 100, sweep: 'manual'}, clock);
+    setTestGameLoader(instance);
+    database = new TestDatabase();
     setTestDatabase(database);
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
-    instance = (GameLoader.getInstance() as GameLoader);
-    instance.reset();
+    instance.resetForTesting();
   });
   afterEach(function() {
     restoreTestDatabase();
+    restoreTestGameLoader();
   });
 
   it('uses shared instance', function() {
@@ -180,13 +124,13 @@ describe('GameLoader', function() {
     expect(game1).is.not.undefined;
     const list = await instance.getIds();
     expect(list).to.deep.eq(
-      [{'id': 'gameid', 'participants': ['p-blue-id', 'p-red-id']}],
+      [{'gameId': 'gameid', 'participantIds': ['p-blue-id', 'p-red-id']}],
     );
   });
 
   it('loads values after error pulling game ids', async function() {
-    database.failure = 'getGames';
-    instance.reset();
+    database.failure = 'getParticipants';
+    instance.resetForTesting();
     const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
   });
@@ -218,11 +162,43 @@ describe('GameLoader', function() {
       Game.newInstance('game-' + i as GameId, [player], player);
     }
     database.getGameSleep = 500;
-    instance.reset();
+    instance.resetForTesting();
     const list = await instance.getIds();
-    expect(list?.map((e) => e.id)).to.have.members([
+    expect(list?.map((e) => e.gameId)).to.have.members([
       'game-0', 'game-1', 'game-2', 'game-3', 'game-4',
       'game-5', 'game-6', 'game-7', 'game-8', 'game-9',
     ]);
+  });
+
+  it('evicts finished game', async () => {
+    const ids = await instance.getIds();
+    expect(ids).deep.eq(
+      [{
+        'gameId': 'gameid',
+        'participantIds': [
+          'p-blue-id',
+          'p-red-id',
+        ],
+      }],
+    );
+    instance.resetForTesting();
+    expect(await instance.isCached('gameid')).is.false;
+    await instance.getGame('gameid');
+    expect(await instance.isCached('gameid')).is.true;
+
+    // In beforeEach, eviction time is 100ms.
+
+    clock.millis = 5;
+    instance.mark('gameid');
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.true;
+
+    clock.millis = 104;
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.true;
+
+    clock.millis = 105;
+    instance.sweep();
+    expect(await instance.isCached('gameid')).is.false;
   });
 });

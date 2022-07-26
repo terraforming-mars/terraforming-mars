@@ -6,25 +6,26 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrophilicMoss', function() {
-  let card : NitrophilicMoss; let player : Player;
+  let card: NitrophilicMoss;
+  let player: Player;
 
   beforeEach(function() {
     card = new NitrophilicMoss();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without enough oceans', function() {
+  it('Can not play without enough oceans', function() {
     maxOutOceans(player, 2);
     player.plants = 2;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if not enough plants', function() {
+  it('Can not play if not enough plants', function() {
     maxOutOceans(player, 3);
     player.plants = 1;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

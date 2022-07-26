@@ -4,15 +4,16 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('ElectroCatapult', () => {
-  let card : ElectroCatapult; let player : TestPlayer; let game : Game;
+  let card: ElectroCatapult;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new ElectroCatapult();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

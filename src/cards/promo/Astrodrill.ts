@@ -2,7 +2,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -14,6 +14,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {digit} from '../Options';
+import {PlayerInput} from '../../PlayerInput';
 
 export class Astrodrill extends Card implements IActionCard, ICorporationCard {
   constructor() {
@@ -52,7 +53,7 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
 
   public action(player: Player) {
     const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
-    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+    const opts: Array<PlayerInput> = [];
 
     const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain', () => {
       return new OrOptions(
@@ -93,8 +94,8 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
       'Select card to add 1 asteroid',
       'Add asteroid',
       asteroidCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
 
         return undefined;
       },

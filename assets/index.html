@@ -53,6 +53,7 @@
                     v-else-if="screen === 'games-overview'"
                 ></games-overview>
                 <debug-ui v-else-if="screen === 'cards'"></debug-ui>
+                <admin-home v-else-if="screen === 'admin'"></admin-home>
                 <Help v-else-if="screen === 'help'"></Help>
             </div>
             <div class="notice" v-i18n>

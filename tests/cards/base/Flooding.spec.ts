@@ -8,15 +8,17 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Flooding', function() {
-  let card : Flooding; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+  let card: Flooding;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Flooding();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

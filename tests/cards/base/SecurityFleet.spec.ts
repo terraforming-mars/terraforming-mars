@@ -1,17 +1,18 @@
 import {expect} from 'chai';
 import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SecurityFleet', function() {
-  let card : SecurityFleet; let player : Player;
+  let card: SecurityFleet;
+  let player: Player;
 
   beforeEach(function() {
     card = new SecurityFleet();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Can\'t act if no titanium', function() {
+  it('Can not act if no titanium', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

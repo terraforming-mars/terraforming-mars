@@ -2,17 +2,18 @@ import {expect} from 'chai';
 import {BuildingIndustries} from '../../../src/cards/base/BuildingIndustries';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('BuildingIndustries', function() {
-  let card : BuildingIndustries; let player : Player;
+  let card: BuildingIndustries;
+  let player: Player;
 
   beforeEach(function() {
     card = new BuildingIndustries();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

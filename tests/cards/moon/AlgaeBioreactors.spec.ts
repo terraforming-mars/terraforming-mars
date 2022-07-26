@@ -1,6 +1,5 @@
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/cards/moon/AlgaeBioreactors';
 import {expect} from 'chai';
@@ -19,7 +18,7 @@ describe('AlgaeBioreactors', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new AlgaeBioreactors();
     moonData = MoonExpansion.moonData(game);
@@ -51,7 +50,7 @@ describe('AlgaeBioreactors', () => {
   });
 
   it('canPlay when Reds are in power', () => {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;

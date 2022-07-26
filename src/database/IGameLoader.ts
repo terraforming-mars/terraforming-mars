@@ -1,7 +1,6 @@
 import {Game} from '../Game';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
-
-export type GameIdLedger = {id: GameId, participants: Array<SpectatorId | PlayerId>};
+import {GameIdLedger} from './IDatabase';
 
 /**
  * Loads games from javascript memory or database
@@ -22,4 +21,11 @@ export interface IGameLoader {
    */
   getGame(id: GameId | PlayerId | SpectatorId, forceLoad?: boolean): Promise<Game | undefined>;
   restoreGameAt(gameId: GameId, saveId: number): Promise<Game>;
+  /**
+   * Mark a game to be purged from the cache. It will be
+   * purged a a future call to `sweep`.
+   *
+   * @param {GameId} gameId the game to be removed from the cache. Only call this for completed games.
+   */
+  mark(gameId: GameId): void;
 }

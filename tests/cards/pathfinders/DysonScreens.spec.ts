@@ -3,7 +3,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {DysonScreens} from '../../../src/cards/pathfinders/DysonScreens';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {SpaceName} from '../../../src/SpaceName';
 import {Units} from '../../../src/common/Units';
 
@@ -13,7 +12,7 @@ describe('DysonScreens', function() {
 
   beforeEach(function() {
     card = new DysonScreens();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 

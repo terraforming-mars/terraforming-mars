@@ -4,27 +4,29 @@ import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/boards/ISpace';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {Board} from '../../src/boards/Board';
 import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {SeededRandom} from '../../src/Random';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/GameOptions';
 import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {
-  let board : OriginalBoard; let player : Player; let player2 : Player;
+  let board: OriginalBoard;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
 
     // Rather than create a whole game around this test, I'm mocking data to make the tests pass.
     const gameOptions: Partial<GameOptions> = {pathfindersExpansion: false};
-    (player as any)._game = {gameOptions};
-    (player2 as any)._game = {gameOptions};
+    (player as any).game = {gameOptions};
+    (player2 as any).game = {gameOptions};
   });
 
   it('getSpace', () => {

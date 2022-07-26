@@ -2,7 +2,6 @@ import {Game} from '../../../src/Game';
 import {MarsDirect} from '../../../src/cards/pathfinders/MarsDirect';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
 import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
 import {addOcean} from '../../TestingUtils';
@@ -15,8 +14,8 @@ describe('MarsDirect', () => {
   let card: MarsDirect;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     card = new MarsDirect();
   });

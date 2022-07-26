@@ -1,6 +1,5 @@
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {RoverDriversUnion} from '../../../src/cards/moon/RoverDriversUnion';
 import {expect} from 'chai';
@@ -16,7 +15,7 @@ describe('RoverDriversUnion', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new RoverDriversUnion();
     moonData = MoonExpansion.moonData(game);

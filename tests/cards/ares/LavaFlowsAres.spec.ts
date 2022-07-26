@@ -3,18 +3,20 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/common/TileType';
 import {resetBoard} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LavaFlowsAres} from '../../../src/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 
 describe('LavaFlowsAres', function() {
-  let card : LavaFlowsAres; let player : Player; let game : Game;
+  let card: LavaFlowsAres;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new LavaFlowsAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     resetBoard(game);
   });

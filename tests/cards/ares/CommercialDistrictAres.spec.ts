@@ -6,15 +6,16 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {CommercialDistrictAres} from '../../../src/cards/ares/CommercialDistrictAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CommercialDistrictAres', function() {
-  let card : CommercialDistrictAres; let player : Player;
+  let card: CommercialDistrictAres;
+  let player: Player;
 
   beforeEach(function() {
     card = new CommercialDistrictAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

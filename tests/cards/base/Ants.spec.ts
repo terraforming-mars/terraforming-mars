@@ -8,21 +8,23 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('Ants', function() {
-  let card : Ants; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+  let card: Ants;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Ants();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     player.popWaitingFor();
   });
 
-  it('Can\'t play without oxygen', function() {
+  it('Can not play without oxygen', function() {
     (game as any).oxygenLevel = 3;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

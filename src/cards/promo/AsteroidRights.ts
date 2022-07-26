@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
@@ -8,6 +8,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {LogHelper} from '../../LogHelper';
+import {PlayerInput} from '../../PlayerInput';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -78,9 +79,9 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       return undefined;
     });
 
-    const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, (foundCards: Array<ICard>) => {
+    const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
       player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
-      player.addResourceTo(foundCards[0], {log: true});
+      player.addResourceTo(card, {log: true});
 
       return undefined;
     });
@@ -94,7 +95,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       return addAsteroidOption;
     }
 
-    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+    const opts: Array<PlayerInput> = [];
     opts.push(gainTitaniumOption);
     opts.push(increaseMcProdOption);
     asteroidCards.length === 1 ? opts.push(addAsteroidToSelf) : opts.push(addAsteroidOption);

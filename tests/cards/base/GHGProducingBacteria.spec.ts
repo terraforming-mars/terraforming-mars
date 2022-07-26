@@ -3,16 +3,18 @@ import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('GHGProducingBacteria', () => {
-  let card : GHGProducingBacteria; let player : Player; let game : Game;
+  let card: GHGProducingBacteria;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new GHGProducingBacteria();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

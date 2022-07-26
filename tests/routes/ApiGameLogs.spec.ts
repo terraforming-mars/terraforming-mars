@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ApiGameLogs} from '../../src/routes/ApiGameLogs';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 
@@ -33,7 +33,7 @@ describe('ApiGameLogs', function() {
   });
 
   it('pulls logs when no generation provided', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
     await scaffolding.ctx.gameLoader.add(game);
@@ -46,7 +46,7 @@ describe('ApiGameLogs', function() {
   });
 
   it('pulls logs for most recent generation', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=50';
     const game = Game.newInstance('game-id', [player], player);
     await scaffolding.ctx.gameLoader.add(game);
@@ -59,7 +59,7 @@ describe('ApiGameLogs', function() {
   });
 
   it('pulls logs for first generation', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
     await scaffolding.ctx.gameLoader.add(game);
@@ -71,7 +71,7 @@ describe('ApiGameLogs', function() {
   });
 
   it('pulls logs for missing generation', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=2';
     const game = Game.newInstance('game-id', [player], player);
     await scaffolding.ctx.gameLoader.add(game);
@@ -82,9 +82,9 @@ describe('ApiGameLogs', function() {
 
   [{idx: 0, color: 'Yellow'}, {idx: 1, color: 'Orange'}, {idx: 2, color: 'Blue'}].forEach((entry) => {
     it('omits private logs for other players: ' + entry.color, async () => {
-      const yellowPlayer = TestPlayers.YELLOW.newPlayer();
-      const orangePlayer = TestPlayers.ORANGE.newPlayer();
-      const bluePlayer = TestPlayers.BLUE.newPlayer();
+      const yellowPlayer = TestPlayer.YELLOW.newPlayer();
+      const orangePlayer = TestPlayer.ORANGE.newPlayer();
+      const bluePlayer = TestPlayer.BLUE.newPlayer();
 
       const players = [yellowPlayer, orangePlayer, bluePlayer];
       const playerUnderTest = players[entry.idx];

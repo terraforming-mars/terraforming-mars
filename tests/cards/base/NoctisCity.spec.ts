@@ -5,17 +5,19 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {newTestGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 
 describe('NoctisCity', function() {
-  let card : NoctisCity; let player : Player; let game : Game;
+  let card: NoctisCity;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new NoctisCity();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

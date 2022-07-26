@@ -1,18 +1,10 @@
 import {CardType} from '../common/cards/CardType';
-import {AndOptions} from '../inputs/AndOptions';
 import {IProjectCard} from './IProjectCard';
 import {ISpace} from '../boards/ISpace';
 import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
 import {Tags} from '../common/cards/Tags';
-import {SelectAmount} from '../inputs/SelectAmount';
-import {SelectCard} from '../inputs/SelectCard';
-import {SelectHowToPay} from '../inputs/SelectHowToPay';
-import {SelectPlayer} from '../inputs/SelectPlayer';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
 import {CardResource} from '../common/CardResource';
 import {CardName} from '../common/cards/CardName';
 import {ICardMetadata} from '../common/cards/ICardMetadata';
@@ -25,7 +17,7 @@ import {ICardDiscount} from '../common/cards/Types';
 import {IVictoryPoints} from '../common/cards/IVictoryPoints';
 
 export interface IActionCard {
-    action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<IActionCard & ICard> | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
+    action: (player: Player) => PlayerInput | undefined;
     canAct: (player: Player) => boolean;
 }
 
@@ -70,7 +62,7 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: Player) => number;
-    onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
+    onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
     onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;

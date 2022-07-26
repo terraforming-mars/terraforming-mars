@@ -5,15 +5,19 @@ import {Player} from '../../src/Player';
 import {SnowCover} from '../../src/turmoil/globalEvents/SnowCover';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('SnowCover', function() {
-  let card : SnowCover; let player : Player; let player2: Player; let game : Game; let turmoil: Turmoil;
+  let card: SnowCover;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new SnowCover();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
 
     turmoil = Turmoil.newInstance(game);

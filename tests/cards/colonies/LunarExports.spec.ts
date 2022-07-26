@@ -3,13 +3,13 @@ import {LunarExports} from '../../../src/cards/colonies/LunarExports';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('LunarExports', function() {
   it('Should play', function() {
     const card = new LunarExports();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     const orOptions = cast(card.play(player), OrOptions);
 

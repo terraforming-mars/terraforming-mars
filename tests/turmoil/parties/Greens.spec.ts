@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {ISpace} from '../../../src/boards/ISpace';
 import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/turmoil/parties/Greens';
 import {Lichen} from '../../../src/cards/base/Lichen';
 import {Fish} from '../../../src/cards/base/Fish';
@@ -14,11 +14,14 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('Greens', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil; let greens: Greens;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
+  let greens: Greens;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    const otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const otherPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, otherPlayer], player, gameOptions);
     turmoil = game.turmoil!;

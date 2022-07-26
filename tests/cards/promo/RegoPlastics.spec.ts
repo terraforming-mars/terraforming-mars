@@ -1,15 +1,16 @@
 import {expect} from 'chai';
 import {RegoPlastics} from '../../../src/cards/promo/RegoPlastics';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 
 describe('RegoPlastics', function() {
-  let card : RegoPlastics; let player : Player;
+  let card: RegoPlastics;
+  let player: Player;
 
   beforeEach(function() {
     card = new RegoPlastics();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

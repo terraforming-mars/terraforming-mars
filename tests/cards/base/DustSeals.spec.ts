@@ -3,19 +3,19 @@ import {DustSeals} from '../../../src/cards/base/DustSeals';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('DustSeals', function() {
-  let card : DustSeals; let player : TestPlayer;
+  let card: DustSeals;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new DustSeals();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     maxOutOceans(player, 4);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

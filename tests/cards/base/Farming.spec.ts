@@ -3,19 +3,20 @@ import {Farming} from '../../../src/cards/base/Farming';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Farming', function() {
-  let card : Farming; let player : TestPlayer; let game : Game;
+  let card: Farming;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Farming();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

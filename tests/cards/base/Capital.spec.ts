@@ -7,16 +7,17 @@ import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', () => {
-  let card : Capital; let player : TestPlayer; let game : Game;
+  let card: Capital;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Capital();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

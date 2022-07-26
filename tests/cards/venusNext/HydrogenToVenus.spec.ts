@@ -7,15 +7,17 @@ import {HydrogenToVenus} from '../../../src/cards/venusNext/HydrogenToVenus';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('HydrogenToVenus', function() {
-  let card : HydrogenToVenus; let player : Player; let game : Game;
+  let card: HydrogenToVenus;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new HydrogenToVenus();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

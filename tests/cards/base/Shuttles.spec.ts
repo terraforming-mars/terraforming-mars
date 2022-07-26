@@ -5,24 +5,25 @@ import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Shuttles', function() {
-  let card : Shuttles; let player : TestPlayer; let game : Game;
+  let card: Shuttles;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Shuttles();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     (game as any).oxygenLevel = 5;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', function() {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 4;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

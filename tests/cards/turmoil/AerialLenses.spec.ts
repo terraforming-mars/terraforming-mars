@@ -6,15 +6,18 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AerialLenses', function() {
-  let card : AerialLenses; let player : Player; let player2 : Player; let game : Game;
+  let card: AerialLenses;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new AerialLenses();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);

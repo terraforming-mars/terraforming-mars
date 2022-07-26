@@ -3,16 +3,19 @@ import {Callisto} from '../../src/colonies/Callisto';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Callisto', function() {
-  let callisto: Callisto; let player: Player; let player2: Player; let game: Game;
+  let callisto: Callisto;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     callisto = new Callisto();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(callisto);

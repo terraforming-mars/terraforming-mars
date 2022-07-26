@@ -5,14 +5,15 @@ import {CheungShingMARS} from '../../../src/cards/prelude/CheungShingMARS';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CheungShingMARS', function() {
-  let card : CheungShingMARS; let player : Player;
+  let card: CheungShingMARS;
+  let player: Player;
 
   beforeEach(function() {
     card = new CheungShingMARS();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

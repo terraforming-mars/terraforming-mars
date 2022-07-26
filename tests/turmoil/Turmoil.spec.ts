@@ -9,7 +9,6 @@ import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {cast, maxOutOceans, runAllActions, setCustomGameOptions} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/turmoil/parties/Reds';
 import {Greens} from '../../src/turmoil/parties/Greens';
@@ -40,11 +39,14 @@ import {TileType} from '../../src/common/TileType';
 import {PlayerId} from '../../src/common/Types';
 
 describe('Turmoil', function() {
-  let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let player: TestPlayer;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
 
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);
@@ -257,7 +259,7 @@ describe('Turmoil', function() {
   it('canPlay: Reds tax applies by default when raising oxygen', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -293,7 +295,7 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for oxygen, include the cost for the 8% temperature bump.', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -314,7 +316,7 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for oxygen, include the cost for the 8% temperature bump, which triggers 0° ocean bump.', function() {
     // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -337,7 +339,7 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising temperature', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -374,7 +376,7 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for temperature, include the cost for the 0° ocean bump.', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -394,7 +396,7 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when placing oceans', function() {
     // ArtificialLake uses trSource.
     const card = new ArtificialLake();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     (game as any).temperature = -6; // minimum requirement for the card.
@@ -423,7 +425,7 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising the venus scale.', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -460,7 +462,7 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for venus, include the cost for the 16% TR', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -480,7 +482,7 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising moon colony rate', function() {
     // Raises the colony rate two steps.
     const card = new WaterTreatmentComplex();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
@@ -520,7 +522,7 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising moon mining rate', function() {
     // Raises the mining rate two steps.
     const card = new DarksideMeteorBombardment();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
@@ -556,7 +558,7 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising moon logistic rate', function() {
     // Raises the logistic rate two steps.
     const card = new LunaStagingStation();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
@@ -594,7 +596,7 @@ describe('Turmoil', function() {
   });
 
   it('Reds: Cannot raise TR directly without the money to back it up', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;

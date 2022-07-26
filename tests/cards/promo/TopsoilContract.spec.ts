@@ -5,15 +5,17 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Game} from '../../../src/Game';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmoniaAsteroid';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('TopsoilContract', function() {
-  let card : TopsoilContract; let player : Player; let player2 : Player;
+  let card: TopsoilContract;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new TopsoilContract();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

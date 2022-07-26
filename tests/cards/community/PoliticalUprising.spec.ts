@@ -5,15 +5,17 @@ import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDe
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalUprising', function() {
-  let card : PoliticalUprising; let player : Player; let game : Game;
+  let card: PoliticalUprising;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new PoliticalUprising();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });

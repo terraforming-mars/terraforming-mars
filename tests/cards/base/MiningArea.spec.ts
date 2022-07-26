@@ -6,16 +6,17 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MiningArea', function() {
-  let card : MiningArea; let player : TestPlayer; let game : Game;
+  let card: MiningArea;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new MiningArea();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

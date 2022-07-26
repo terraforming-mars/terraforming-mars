@@ -6,16 +6,17 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 import {cast} from '../../TestingUtils';
 
 describe('EosChasmaNationalPark', () => {
-  let card : EosChasmaNationalPark; let player : TestPlayer; let game : Game;
+  let card: EosChasmaNationalPark;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new EosChasmaNationalPark();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

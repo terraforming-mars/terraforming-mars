@@ -3,7 +3,6 @@ import {AsteroidStandardProject} from '../../../../src/cards/base/standardProjec
 import {setCustomGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
-import {TestPlayers} from '../../../TestPlayers';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../../src/common/Phase';
@@ -16,7 +15,7 @@ describe('AsteroidStandardProject', function() {
 
   beforeEach(function() {
     card = new AsteroidStandardProject();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 
@@ -48,7 +47,7 @@ describe('AsteroidStandardProject', function() {
   });
 
   it('Can not act with reds', () => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, setCustomGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;

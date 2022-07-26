@@ -5,24 +5,25 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 import {cast} from '../../TestingUtils';
 
 describe('DomedCrater', function() {
-  let card : DomedCrater; let player : TestPlayer; let game : Game;
+  let card: DomedCrater;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new DomedCrater();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too high', function() {
+  it('Can not play if oxygen level too high', function() {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 8;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

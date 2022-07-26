@@ -1,20 +1,23 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
-import {Game, GameOptions} from '../../../src/Game';
+import {TestPlayer} from '../../TestPlayer';
+import {Game} from '../../../src/Game';
+import {GameOptions} from '../../../src/GameOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {ExecutiveOrder} from '../../../src/cards/community/ExecutiveOrder';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('ExecutiveOrder', function() {
-  let card : ExecutiveOrder; let player : Player; let game : Game;
+  let card: ExecutiveOrder;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new ExecutiveOrder();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);

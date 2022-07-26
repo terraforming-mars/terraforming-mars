@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {SkyDocks} from '../../../src/cards/colonies/SkyDocks';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SkyDocks', function() {
   it('Should play', function() {
     const card = new SkyDocks();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;

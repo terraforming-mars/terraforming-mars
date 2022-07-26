@@ -3,13 +3,13 @@ import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/common/TileType';
 import {NuclearZoneAres} from '../../../src/cards/ares/NuclearZoneAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('NuclearZoneAres', function() {
   it('Should play', function() {
     const card = new NuclearZoneAres();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
 
     const game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
 

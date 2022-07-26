@@ -1,6 +1,5 @@
 import {Philares} from '../../../src/cards/promo/Philares';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
@@ -15,7 +14,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 
 describe('Philares', () => {
-  let card : Philares;
+  let card: Philares;
   let philaresPlayer : TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;
@@ -25,8 +24,8 @@ describe('Philares', () => {
 
   beforeEach(() => {
     card = new Philares();
-    philaresPlayer = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    philaresPlayer = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     // redPlayer is first for the final placement test.
     game = Game.newInstance('gameid', [otherPlayer, philaresPlayer], otherPlayer);
     game.board = EmptyBoard.newInstance();

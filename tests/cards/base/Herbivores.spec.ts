@@ -5,24 +5,27 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, runNextAction} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Herbivores', () => {
-  let card : Herbivores; let player : Player; let player2: Player; let game: Game;
+  let card: Herbivores;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new Herbivores();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play if nobody has plant production', () => {
+  it('Can not play if nobody has plant production', () => {
     (game as any).oxygenLevel = 8;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', () => {
+  it('Can not play if oxygen level too low', () => {
     (game as any).oxygenLevel = 7;
     player2.addProduction(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;

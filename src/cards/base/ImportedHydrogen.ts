@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -52,7 +51,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       return gainPlants();
     }
 
-    const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
+    const availableActions: Array<PlayerInput> = [];
 
     const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants', gainPlants);
     availableActions.push(gainPlantsOption);
@@ -67,8 +66,8 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     } else if (availableMicrobeCards.length > 1) {
       availableActions.push(new SelectCard('Add 3 microbes to a card',
         'Add microbes',
-        availableMicrobeCards, (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {qty: 3, log: true});
+        availableMicrobeCards, ([card]) => {
+          player.addResourceTo(card, {qty: 3, log: true});
           player.game.defer(new PlaceOceanTile(player));
           return undefined;
         }));
@@ -82,8 +81,8 @@ export class ImportedHydrogen extends Card implements IProjectCard {
         return undefined;
       }));
     } else if (availableAnimalCards.length > 1) {
-      availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {qty: 2, log: true});
+      availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, ([card]) => {
+        player.addResourceTo(card, {qty: 2, log: true});
         player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));

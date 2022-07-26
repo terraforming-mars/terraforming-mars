@@ -6,15 +6,16 @@ import {Research} from '../../../src/cards/base/Research';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('MarsUniversity', function() {
-  let card : MarsUniversity; let player : TestPlayer; let game : Game;
+  let card: MarsUniversity;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new MarsUniversity();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

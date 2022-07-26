@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
 import {finishGeneration, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunaProjectOffice} from '../../../src/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
 import {SelectCard} from '../../../src/inputs/SelectCard';
@@ -11,7 +11,7 @@ const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const card = new LunaProjectOffice();
 
@@ -26,7 +26,7 @@ describe('LunaProjectOffice', () => {
   });
 
   it('play - solo', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance(
       'gameid',
       [player],
@@ -73,8 +73,8 @@ describe('LunaProjectOffice', () => {
   // This test is almost exactly the same as the solo test, but they take
   // different paths in the code.
   it('play - 2 player - draft', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance(
       'gameid',
       [player, redPlayer],
@@ -129,8 +129,8 @@ describe('LunaProjectOffice', () => {
   // This test is almost exactly the same as the solo test, but it takes
   // different paths in the code.
   it('play - 2 player - no draft', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance(
       'gameid',
       [player, redPlayer],

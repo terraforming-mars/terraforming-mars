@@ -14,8 +14,8 @@ import {Player} from '../../../src/Player';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 describe('MarketManipulation', function() {
-  let card : MarketManipulation;
-  let player : Player;
+  let card: MarketManipulation;
+  let player: Player;
   let game: Game;
 
   beforeEach(function() {
@@ -74,7 +74,7 @@ describe('MarketManipulation', function() {
     expect(game.colonies[2].trackPosition).to.eq(0);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     const enceladus = new Enceladus();
     const miranda = new Miranda();
     const luna = new Luna();

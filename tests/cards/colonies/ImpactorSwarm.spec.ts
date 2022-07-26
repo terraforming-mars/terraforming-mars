@@ -4,15 +4,18 @@ import {ImpactorSwarm} from '../../../src/cards/colonies/ImpactorSwarm';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ImpactorSwarm', function() {
-  let card : ImpactorSwarm; let player : Player; let player2 : Player; let game : Game;
+  let card: ImpactorSwarm;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new ImpactorSwarm();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

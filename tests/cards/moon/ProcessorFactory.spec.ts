@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {runNextAction, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {ProcessorFactory} from '../../../src/cards/moon/ProcessorFactory';
 import {expect} from 'chai';
 
@@ -12,7 +12,7 @@ describe('ProcessorFactory', () => {
   let card: ProcessorFactory;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new ProcessorFactory();
   });

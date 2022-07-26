@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {Curator} from '../../../src/awards/amazonisPlanitia/Curator';
-import {TestPlayers} from '../../TestPlayers';
 import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,8 +12,8 @@ describe('Curator', () => {
 
   beforeEach(() => {
     award = new Curator();
-    player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
   it('Counts tags', () => {

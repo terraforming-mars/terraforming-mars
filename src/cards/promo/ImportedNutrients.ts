@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -36,8 +35,8 @@ export class ImportedNutrients extends Card implements IProjectCard {
       player.addResourceTo(microbeCards[0], 4);
       return undefined;
     } else if (microbeCards.length > 1) {
-      return new SelectCard('Select card to add 4 microbes', 'Add microbes', microbeCards, (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 4);
+      return new SelectCard('Select card to add 4 microbes', 'Add microbes', microbeCards, ([card]) => {
+        player.addResourceTo(card, 4);
         return undefined;
       });
     }

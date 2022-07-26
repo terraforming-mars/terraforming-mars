@@ -9,7 +9,7 @@ import {DelegatesModel, GlobalEventModel, PartyModel, PolicyUser, PoliticalAgend
 export function getTurmoilModel(game: Game): TurmoilModel | undefined {
   return Turmoil.ifTurmoilElse(game, (turmoil) => {
     const parties = getParties(game);
-    let chairman; let dominant; let ruling;
+    let chairman: Color | undefined;
 
     if (turmoil.chairman) {
       if (turmoil.chairman === 'NEUTRAL') {
@@ -18,12 +18,8 @@ export function getTurmoilModel(game: Game): TurmoilModel | undefined {
         chairman = game.getPlayerById(turmoil.chairman).color;
       }
     }
-    if (turmoil.dominantParty) {
-      dominant = turmoil.dominantParty.name;
-    }
-    if (turmoil.rulingParty) {
-      ruling = turmoil.rulingParty.name;
-    }
+    const dominant = turmoil.dominantParty.name;
+    const ruling = turmoil.rulingParty.name;
 
     const lobby = Array.from(
       turmoil.lobby,

@@ -24,6 +24,7 @@ import {ServeAsset} from '../routes/ServeAsset';
 const handlers: Map<string, IHandler> = new Map(
   [
     ['/', ServeApp.INSTANCE],
+    ['/admin', ServeApp.INSTANCE],
     ['/api/cloneablegame', ApiCloneableGame.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
     ['/api/game/history', ApiGameHistory.INSTANCE],

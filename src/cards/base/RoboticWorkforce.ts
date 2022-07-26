@@ -55,12 +55,10 @@ export class RoboticWorkforce extends Card implements IProjectCard {
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
-    const availableCards: Array<ICard> = player.playedCards.filter((card) => this.isCardApplicable(card, player));
-    if (player.corporationCard !== undefined && this.isCardApplicable(player.corporationCard, player)) {
-      availableCards.push(player.corporationCard);
-    }
-
-    return availableCards;
+    return [
+      ...player.playedCards.filter((card) => this.isCardApplicable(card, player)),
+      ...player.corporations.filter((card) => this.isCardApplicable(card, player)),
+    ];
   }
 
   public play(player: Player) {
@@ -70,9 +68,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select builder card to copy', 'Copy', availableCards, (selectedCards: Array<ICard>) => {
-      const card: ICard = selectedCards[0];
-
+    return new SelectCard('Select builder card to copy', 'Copy', availableCards, ([card]) => {
       player.game.log('${0} copied ${1} production with ${2}', (b) =>
         b.player(player).card(card).card(this));
 

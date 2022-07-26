@@ -10,15 +10,17 @@ import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AerospaceMission', function() {
-  let card : AerospaceMission; let player : Player; let game : Game;
+  let card: AerospaceMission;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new AerospaceMission();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions({coloniesExtension: true});
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
     // Ignore randomly generated colonies, and add some colonies that can be built independently of cards

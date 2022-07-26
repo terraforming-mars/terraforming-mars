@@ -2,14 +2,16 @@ import {expect} from 'chai';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianSurvey', function() {
-  let card : MartianSurvey; let player : Player; let game : Game;
+  let card: MartianSurvey;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MartianSurvey();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

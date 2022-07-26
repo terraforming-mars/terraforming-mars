@@ -3,19 +3,22 @@ import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {runNextAction} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ArcticAlgae', function() {
-  let card : ArcticAlgae; let player : Player; let player2 : Player; let game : Game;
+  let card: ArcticAlgae;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new ArcticAlgae();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     (game as any).temperature = -10;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

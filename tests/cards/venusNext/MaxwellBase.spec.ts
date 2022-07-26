@@ -9,7 +9,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -17,22 +17,24 @@ import {CardResource} from '../../../src/common/CardResource';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('MaxwellBase', function() {
-  let card : MaxwellBase; let player : Player; let game : Game;
+  let card: MaxwellBase;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MaxwellBase();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     (game as any).venusScaleLevel = 12;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if Venus requirement not met', function() {
+  it('Can not play if Venus requirement not met', function() {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 10;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

@@ -7,14 +7,15 @@ import {FieldCappedCity} from '../../src/cards/promo/FieldCappedCity';
 import {Game} from '../../src/Game';
 import {Electrician} from '../../src/milestones/Electrician';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Electrician', () => {
-  let milestone : Electrician; let player : Player;
+  let milestone: Electrician;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Electrician();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
 
     player.playedCards.push(new SolarPower(), new PowerPlant(), new SpaceMirrors());

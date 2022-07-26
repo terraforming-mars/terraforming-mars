@@ -1,8 +1,7 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {HeliostatMirrorArray} from '../../../src/cards/moon/HeliostatMirrorArray';
-import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -13,7 +12,7 @@ describe('HeliostatMirrorArray', () => {
   let card: HeliostatMirrorArray;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HeliostatMirrorArray();
   });

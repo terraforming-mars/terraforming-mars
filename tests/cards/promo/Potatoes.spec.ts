@@ -3,17 +3,18 @@ import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/cards/promo/Potatoes';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Potatoes', function() {
-  let card : Potatoes; let player : Player;
+  let card: Potatoes;
+  let player: Player;
 
   beforeEach(function() {
     card = new Potatoes();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.plants = 1;
     expect(card.canPlay(player)).is.not.true;
   });

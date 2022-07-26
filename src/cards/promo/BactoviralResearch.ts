@@ -7,7 +7,6 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
 import {played} from '../Options';
 
 export class BactoviralResearch extends Card implements IProjectCard {
@@ -43,8 +42,8 @@ export class BactoviralResearch extends Card implements IProjectCard {
         'Select card to add ' + scienceTags + ' microbe(s)',
         'Add microbe(s)',
         microbeCards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {qty: scienceTags, log: true});
+        ([card]) => {
+          player.addResourceTo(card, {qty: scienceTags, log: true});
           return undefined;
         },
       );

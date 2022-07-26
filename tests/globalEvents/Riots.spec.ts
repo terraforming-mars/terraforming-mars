@@ -3,12 +3,12 @@ import {Game} from '../../src/Game';
 import {Resources} from '../../src/common/Resources';
 import {Riots} from '../../src/turmoil/globalEvents/Riots';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Riots', function() {
   it('resolve play', function() {
     const card = new Riots();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player);
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);

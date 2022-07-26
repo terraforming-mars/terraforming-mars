@@ -1,6 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard, ICard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {Card} from '../Card';
+import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardResource} from '../../common/CardResource';
@@ -66,9 +67,9 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       'Select card to add 1 asteroid',
       'Add asteroid',
       asteroidCards,
-      (foundCards: Array<ICard>) => {
+      ([card]) => {
         player.titanium--;
-        player.addResourceTo(foundCards[0], {log: true});
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );
@@ -87,7 +88,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
 
     if (player.titanium === 0) return spendAsteroidResource();
 
-    const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
+    const availableActions: Array<PlayerInput> = [];
 
     if (this.canPlaceOcean(player)) {
       availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid', spendAsteroidResource));

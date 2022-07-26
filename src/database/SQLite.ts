@@ -1,10 +1,13 @@
-import {IDatabase} from './IDatabase';
-import {Game, GameOptions, Score} from '../Game';
+import {GameIdLedger, IDatabase} from './IDatabase';
+import {Game, Score} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
+import {RunResult} from 'sqlite3';
 import {daysAgoToSeconds} from './utils.ts';
+import {MultiMap} from 'mnemonist';
 const path = require('path');
 const fs = require('fs');
 const dbFolder = path.resolve(process.cwd(), './db');
@@ -24,34 +27,16 @@ export class SQLite implements IDatabase {
     this.db = new sqlite3.Database(filename);
   }
 
-  initialize(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))', (err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))', (err2) => {
-          if (err2) {
-            reject(err2);
-            return;
-          }
-          this.db.run(`
-          CREATE TABLE IF NOT EXISTS purges(
-            game_id varchar not null,
-            last_save_id number not null,
-            completed_time timestamp not null default (strftime('%s', 'now')),
-            PRIMARY KEY (game_id)
-          )`, (err3) => {
-            if (err3) {
-              reject(err3);
-              return;
-            }
-            resolve();
-          });
-        });
-      });
-    });
+  async initialize(): Promise<void> {
+    await this.asyncRun('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
+    await this.asyncRun('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participant varchar, PRIMARY KEY (game_id, participant))');
+    await this.asyncRun('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+    await this.asyncRun(
+      `CREATE TABLE IF NOT EXISTS purges(
+        game_id varchar not null,
+        last_save_id number not null,
+        completed_time timestamp not null default (strftime('%s', 'now')),
+        PRIMARY KEY (game_id)`);
   }
 
   getPlayerCount(gameId: GameId): Promise<number> {
@@ -262,6 +247,19 @@ export class SQLite implements IDatabase {
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
       [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
 
+    // Save IDs on the very first save for this game. That's when the incoming saveId is 0, and also
+    // when the database operation was an insert. (We should figure out why multiple saves occur and
+    // try to stop them. But that's for another day.)
+    if (game.lastSaveId === 0) {
+      const participantIds: Array<PlayerId | SpectatorId> = game.getPlayers().map((p) => p.id);
+      if (game.spectatorId) participantIds.push(game.spectatorId);
+      try {
+        await this.storeParticipants({gameId: game.id, participantIds: participantIds});
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     // This must occur after the save.
     game.lastSaveId++;
   }
@@ -282,24 +280,78 @@ export class SQLite implements IDatabase {
     });
   }
 
-  // Run the given SQL but do not return errors.
-  runQuietly(sql: string, params: any): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.db.run(
-        sql, params,
-        (err: Error | null) => {
-          if (err) {
-            console.error(err);
-            console.error('for sql: ' + sql);
-            if (this.throwQuietFailures) {
-              reject(err);
-              return;
-            }
-          } else {
-            resolve();
-          }
-        },
-      );
+  public async storeParticipants(entry: GameIdLedger): Promise<void> {
+    // Sequence of '(?, ?)' pairs.
+    const placeholders: string = entry.participantIds.map(() => '(?, ?)').join(', ');
+    // Sequence of [game_id, id] pairs.
+    const values: Array<GameId | PlayerId | SpectatorId> = entry.participantIds.map((participant) => [entry.gameId, participant]).flat();
+
+    await this.asyncRun('INSERT INTO participants (game_id, participant) VALUES ' + placeholders, values);
+  }
+
+  public async getParticipants(): Promise<Array<GameIdLedger>> {
+    const rows = await this.asyncAll('SELECT game_id, participant FROM participants');
+    const multimap = new MultiMap<GameId, PlayerId | SpectatorId>();
+    rows.forEach((row) => multimap.set(row.game_id, row.participant));
+    const result: Array<GameIdLedger> = [];
+    multimap.forEachAssociation((participantIds, gameId) => {
+      result.push({gameId, participantIds});
     });
+    return result;
+  }
+
+  private asyncRun(sql: string, params?: any): Promise<RunResult> {
+    return new Promise((resolve, reject) => {
+      const cb = (result: RunResult, err: Error | null) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      };
+
+      if (params !== undefined) {
+        this.db.run(sql, params, cb);
+      } else {
+        this.db.run(sql, cb);
+      }
+    });
+  }
+
+  // private asyncGet(sql: string, params?: any): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this.db.get(sql, params, (err: Error | null, result: any) => {
+  //       if (err) {
+  //         reject(err);
+  //       } else {
+  //         resolve(result);
+  //       }
+  //     });
+  //   });
+  // }
+
+  private asyncAll(sql: string, params?: any): Promise<Array<any>> {
+    return new Promise((resolve, reject) => {
+      this.db.all(sql, params, (err, rows: Array<any>) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      });
+    });
+  }
+
+  // Run the given SQL but do not return errors.
+  private async runQuietly(sql: string, params: any): Promise<void> {
+    try {
+      await this.asyncRun(sql, params);
+    } catch (err) {
+      console.error(err);
+      console.error('for sql: ' + sql);
+      if (this.throwQuietFailures) {
+        throw err;
+      }
+    }
   }
 }

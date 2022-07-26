@@ -6,15 +6,15 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('LargeConvoy', function() {
-  let card : LargeConvoy; let player : TestPlayer;
+  let card: LargeConvoy;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new LargeConvoy();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

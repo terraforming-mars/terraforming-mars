@@ -7,16 +7,19 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 
 describe('OceanFarm', () => {
-  let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;
+  let card: OceanFarm;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new OceanFarm();
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

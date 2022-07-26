@@ -1,14 +1,15 @@
 import {expect} from 'chai';
 import {Midas} from '../../../src/cards/community/Midas';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Midas', function() {
-  let card : Midas; let player : Player;
+  let card: Midas;
+  let player: Player;
 
   beforeEach(function() {
     card = new Midas();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Starts with correct TR', function() {

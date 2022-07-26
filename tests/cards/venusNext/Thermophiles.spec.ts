@@ -6,19 +6,21 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Thermophiles', function() {
-  let card : Thermophiles; let player : Player; let game : Game;
+  let card: Thermophiles;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Thermophiles();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     (game as any).venusScaleLevel = 4;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

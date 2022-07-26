@@ -2,17 +2,18 @@ import {expect} from 'chai';
 import {BiosphereSupport} from '../../../src/cards/prelude/BiosphereSupport';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('BiosphereSupport', function() {
-  let card : BiosphereSupport; let player : Player;
+  let card: BiosphereSupport;
+  let player: Player;
 
   beforeEach(function() {
     card = new BiosphereSupport();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });

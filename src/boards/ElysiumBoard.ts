@@ -5,7 +5,7 @@ import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Player} from '../Player';
 import {Random} from '../Random';
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 
 export class ElysiumBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {

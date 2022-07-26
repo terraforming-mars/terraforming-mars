@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {MiningComplex} from '../../../src/cards/moon/MiningComplex';
 import {expect} from 'chai';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
@@ -19,7 +19,7 @@ describe('MiningComplex', () => {
   let card: MiningComplex;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new MiningComplex();

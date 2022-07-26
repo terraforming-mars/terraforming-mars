@@ -8,15 +8,18 @@ import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('MarketingExperts', function() {
-  let card : MarketingExperts; let player : Player; let otherPlayer: Player; let game : Game;
+  let card: MarketingExperts;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MarketingExperts();
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });

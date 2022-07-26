@@ -7,15 +7,17 @@ import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('GalileanWaystation', function() {
-  let card : GalileanWaystation; let player : Player; let player2: Player;
+  let card: GalileanWaystation;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new GalileanWaystation();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

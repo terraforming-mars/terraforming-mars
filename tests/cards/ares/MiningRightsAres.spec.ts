@@ -7,16 +7,18 @@ import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {MiningRightsAres} from '../../../src/cards/ares/MiningRightsAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('MiningRightsAres', function() {
-  let card : MiningRightsAres; let player : Player; let game : Game;
+  let card: MiningRightsAres;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MiningRightsAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
@@ -46,7 +48,7 @@ describe('MiningRightsAres', function() {
     expect(steelSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
   });
 
-  it('Candidate spaces can\'t include hazards', function() {
+  it('Candidate spaces can not include hazards', function() {
     const land = game.board.getAvailableSpacesOnLand(player)
       .find((land) => land.bonus.includes(SpaceBonus.STEEL))!;
 

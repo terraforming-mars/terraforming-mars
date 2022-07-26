@@ -39,7 +39,7 @@ export class MartianInsuranceGroup extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    if (player.corporationCard?.name === this.name && card.cardType === CardType.EVENT) {
+    if (player.isCorporation(this.name) && card.cardType === CardType.EVENT) {
       player.addProduction(Resources.MEGACREDITS, 1, {log: true});
     }
   }

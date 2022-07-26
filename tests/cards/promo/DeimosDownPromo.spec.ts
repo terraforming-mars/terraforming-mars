@@ -5,15 +5,17 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('DeimosDownPromo', function() {
-  let card : DeimosDownPromo; let player : Player; let player2 : Player;
+  let card: DeimosDownPromo;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new DeimosDownPromo();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

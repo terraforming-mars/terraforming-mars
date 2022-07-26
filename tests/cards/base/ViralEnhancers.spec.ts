@@ -8,15 +8,17 @@ import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ViralEnhancers', function() {
-  let card : ViralEnhancers; let player : Player; let game : Game;
+  let card: ViralEnhancers;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new ViralEnhancers();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

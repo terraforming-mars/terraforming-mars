@@ -5,25 +5,26 @@ import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('SpacePort', function() {
-  let card : SpacePort; let player : Player;
+  let card: SpacePort;
+  let player: Player;
 
   beforeEach(function() {
     card = new SpacePort();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without colony', function() {
+  it('Can not play without colony', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     const colony = new Ceres();
     colony.colonies.push(player.id);
     player.game.colonies.push(colony);

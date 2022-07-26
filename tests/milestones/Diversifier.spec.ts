@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {Diversifier} from '../../src/milestones/Diversifier';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Leavitt} from '../../src/cards/community/Leavitt';
@@ -10,12 +10,12 @@ import {setCustomGameOptions} from '../TestingUtils';
 import {AntiGravityTechnology} from '../../src/cards/base/AntiGravityTechnology';
 
 describe('Diversifier', function() {
-  let milestone : Diversifier;
-  let player : Player;
+  let milestone: Diversifier;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Diversifier();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

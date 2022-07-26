@@ -50,9 +50,8 @@ export class SelectCharityDonationCard extends DeferredAction {
       'Select a card to keep',
       'Choose',
       this.cards,
-      (cards) => {
+      ([card]) => {
         const game = this.player.game;
-        const card = cards[0];
 
         const cardIdx = this.cards.indexOf(card);
         if (cardIdx > -1) {

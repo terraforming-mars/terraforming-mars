@@ -8,16 +8,17 @@ import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActions
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
-  let card : OlympusConference; let player : TestPlayer; let game : Game;
+  let card: OlympusConference;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new OlympusConference();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

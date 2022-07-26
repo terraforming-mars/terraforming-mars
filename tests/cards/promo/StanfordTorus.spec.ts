@@ -2,15 +2,16 @@ import {expect} from 'chai';
 import {StanfordTorus} from '../../../src/cards/promo/StanfordTorus';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('StanfordTorus', function() {
-  let card : StanfordTorus; let player : Player;
+  let card: StanfordTorus;
+  let player: Player;
 
   beforeEach(function() {
     card = new StanfordTorus();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

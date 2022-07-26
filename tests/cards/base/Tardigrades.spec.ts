@@ -1,14 +1,15 @@
 import {expect} from 'chai';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Tardigrades', function() {
-  let card : Tardigrades; let player : Player;
+  let card: Tardigrades;
+  let player: Player;
 
   beforeEach(function() {
     card = new Tardigrades();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Should play', function() {

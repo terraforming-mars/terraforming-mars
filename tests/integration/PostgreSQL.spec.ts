@@ -1,13 +1,16 @@
-require('dotenv').config();
+import * as dotenv from 'dotenv';
 import {expect} from 'chai';
 import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
 import {Game} from '../../src/Game';
 import {PostgreSQL} from '../../src/database/PostgreSQL';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
-import {setCustomGameOptions} from '../TestingUtils';
+import {runAllActions, setCustomGameOptions} from '../TestingUtils';
 import {Player} from '../../src/Player';
+import {GameLoader} from '../../src/database/GameLoader';
+
+dotenv.config({path: 'tests/integration/.env', debug: true});
 
 /*
  * This test can be run with `npm run test:integration` as long as the test is set up
@@ -38,16 +41,27 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     response['size-bytes-games'] = 'any';
     response['size-bytes-game-results'] = 'any';
     response['size-bytes-database'] = 'any';
+    response['size-bytes-participants'] = 'any';
+
     return response;
   }
 
   public async afterEach() {
     await this.client.query('DROP TABLE games');
     await this.client.query('DROP TABLE game_results');
+    await this.client.query('DROP TABLE participants');
   }
 
   public getStatistics() {
     return this.statistics;
+  }
+
+  public async awaitAllSaves() {
+    await Promise.all(this.promises);
+    this.promises.length = 0;
+  }
+  public async getStat(field: string): Promise<string | number> {
+    return (await this.stats())[field];
   }
 }
 
@@ -69,12 +83,13 @@ describeDatabaseSuite({
     'save-confict-undo-count': 0,
     'save-count': 0,
     'save-error-count': 0,
+    'size-bytes-participants': 'any',
   },
 
   otherTests: (dbFunction: () => ITestDatabase) => {
     it('saveGame with the same saveID', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
 
@@ -106,7 +121,7 @@ describeDatabaseSuite({
     // When sqlite does the same thing this can go into the suite.
     it('getGames - returns in order of last saved', async () => {
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayers.BLACK.newPlayer();
+      const player = TestPlayer.BLACK.newPlayer();
       const game1 = Game.newInstance('game-id-1111', [player], player);
       await db.lastSaveGamePromise;
       const game2 = Game.newInstance('game-id-2222', [player], player);
@@ -133,23 +148,14 @@ describeDatabaseSuite({
     });
 
     it('test save id count with undo', async () => {
-      // These methods are useful because they're reduce a lot of repetition.
-      async function awaitAllSaves() {
-        await Promise.all(db.promises);
-        db.promises.length = 0;
-      }
-      async function getStat(field: string): Promise<string | number> {
-        return (await db.stats())[field];
-      }
-
       // Set up a simple game.
       const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayers.BLACK.newPlayer(/** beginner */ true);
-      const player2 = TestPlayers.RED.newPlayer(/** beginner */ true);
+      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
+      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
       const game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({draftVariant: false, undoOption: true}));
-      await awaitAllSaves();
+      await db.awaitAllSaves();
 
-      expect(await getStat('save-count')).eq(1);
+      expect(await db.getStat('save-count')).eq(1);
       expect(await db.getSaveIds(game.id)).deep.eq([0]);
 
       // Move into the action phase by having both players complete their research.
@@ -158,8 +164,8 @@ describeDatabaseSuite({
       game.playerIsFinishedWithResearchPhase(player2);
       expect(game.phase).eq(Phase.ACTION);
 
-      await awaitAllSaves();
-      expect(await getStat('save-count')).eq(2);
+      await db.awaitAllSaves();
+      expect(await db.getStat('save-count')).eq(2);
       expect(await db.getSaveIds(game.id)).deep.eq([0, 1]);
 
       // Player.takeAction sets waitingFor and waitingForCb. This overrides it
@@ -181,13 +187,13 @@ describeDatabaseSuite({
       // Taking an action triggers a save (when undo is enabled.)
       takeAction(player);
       player.process([]);
-      await awaitAllSaves();
+      await db.awaitAllSaves();
 
-      expect(await getStat('save-count')).eq(3);
+      expect(await db.getStat('save-count')).eq(3);
       expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2]);
       // This stat reports whether a game with undo enabled updates instead of inserts.
       // None are expected at this point.
-      expect(await getStat('save-confict-undo-count')).eq(0);
+      expect(await db.getStat('save-confict-undo-count')).eq(0);
 
       // Player's second action
       expect(game.activePlayer).eq(player.id);
@@ -195,7 +201,7 @@ describeDatabaseSuite({
 
       takeAction(player);
       player.process([]);
-      await awaitAllSaves();
+      await db.awaitAllSaves();
 
       // It is now the second player's turn. This test doesn't care about what the
       // second player does, but it is just a cue that the server has done a few things.
@@ -204,16 +210,179 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(0);
 
       // Notice how save-count was 3 and is now 5. It saved twice.
-      expect(await getStat('save-count')).eq(5);
+      expect(await db.getStat('save-count')).eq(5);
       // If save count is 5, why are only four versions saved?
       expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
       // That's because one of those saves was an update instead of an insert.
       // Version 3 was saved twice.
-      expect(await getStat('save-confict-undo-count')).eq(1);
+      expect(await db.getStat('save-confict-undo-count')).eq(1);
 
       // Of all the steps in this test, this is the one which will verify the broken undo
       // is repaired correctly. When it was broken, this was 5.
       expect(game.lastSaveId).eq(4);
+    });
+
+    it('undo works in multiplayer, other players have passed', async () => {
+      const db = dbFunction() as TestPostgreSQL;
+      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
+      const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
+      const game = Game.newInstance('gameid', [player, player2], player2, setCustomGameOptions({draftVariant: false, undoOption: true}));
+      await db.awaitAllSaves();
+
+      // Move into the action phase by having both players complete their research.
+      // This triggers another save.
+      game.playerIsFinishedWithResearchPhase(player);
+      game.playerIsFinishedWithResearchPhase(player2);
+      runAllActions(game);
+      expect(game.phase).eq(Phase.ACTION);
+      expect(game.activePlayer).eq(player2.id);
+
+      await db.awaitAllSaves();
+
+      player2.pass();
+      game.playerIsFinishedTakingActions();
+      runAllActions(game);
+      expect(game.activePlayer).eq(player.id);
+
+      // Player.takeAction sets waitingFor and waitingForCb. This overrides it
+      // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
+      // the end of Player.takeAction
+      function takeAction(p: Player) {
+        // A do-nothing player input
+        const simpleOption = new SelectOption('', '', () => {
+          player.megaCredits++;
+          return undefined;
+        });
+        p.setWaitingFor(simpleOption, () => {
+          (p as any).incrementActionsTaken();
+          p.takeAction();
+        });
+      }
+
+      expect(game.activePlayer).eq(player.id);
+      expect(player.actionsTakenThisRound).eq(0);
+
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(1);
+      expect(player.actionsTakenThisRound).eq(1);
+
+      // Player's second action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(2);
+      expect(player.actionsTakenThisRound).eq(2);
+
+
+      // Player's third action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(3);
+      expect(player.actionsTakenThisRound).eq(3);
+
+
+      // Player's fourth action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(4);
+      expect(player.actionsTakenThisRound).eq(4);
+
+
+      // Player's fifth action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(5);
+      expect(player.actionsTakenThisRound).eq(5);
+
+      // Trigger an undo
+      // This is embedded in routes/PlayerInput, and should be moved out of there.
+      const lastSaveId = game.lastSaveId - 2;
+      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
+      await db.awaitAllSaves();
+      const revisedPlayer = newGame.getPlayerById(player.id);
+      expect(revisedPlayer.megaCredits).eq(4);
+      expect(revisedPlayer.actionsTakenThisRound).eq(4);
+    });
+
+    it('undo works in solo', async () => {
+      const db = dbFunction() as TestPostgreSQL;
+      const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
+      const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({undoOption: true}));
+      await db.awaitAllSaves();
+
+      // Move into the action phase. This triggers a save.
+      game.playerIsFinishedWithResearchPhase(player);
+      expect(game.phase).eq(Phase.ACTION);
+      await db.awaitAllSaves();
+
+      // Player.takeAction sets waitingFor and waitingForCb. This overrides it
+      // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
+      // the end of Player.takeAction
+      function takeAction(p: Player) {
+        // A do-nothing player input
+        const simpleOption = new SelectOption('', '', () => {
+          player.megaCredits++;
+          return undefined;
+        });
+        p.setWaitingFor(simpleOption, () => {
+          (p as any).incrementActionsTaken();
+          p.takeAction();
+        });
+      }
+
+      expect(game.activePlayer).eq(player.id);
+      expect(player.actionsTakenThisRound).eq(0);
+
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(1);
+      expect(player.actionsTakenThisRound).eq(1);
+
+      // Player's second action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(2);
+      expect(player.actionsTakenThisRound).eq(2);
+
+
+      // Player's third action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(3);
+      expect(player.actionsTakenThisRound).eq(3);
+
+
+      // Player's fourth action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(4);
+      expect(player.actionsTakenThisRound).eq(4);
+
+
+      // Player's fifth action
+      takeAction(player);
+      player.process([]);
+      await db.awaitAllSaves();
+      expect(player.megaCredits).eq(5);
+      expect(player.actionsTakenThisRound).eq(5);
+
+      // Trigger an undo
+      // This is embedded in routes/PlayerInput, and should be moved out of there.
+      const lastSaveId = game.lastSaveId - 2;
+      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
+      await db.awaitAllSaves();
+      const revisedPlayer = newGame.getPlayerById(player.id);
+      expect(revisedPlayer.megaCredits).eq(4);
+      expect(revisedPlayer.actionsTakenThisRound).eq(4);
     });
   },
 });

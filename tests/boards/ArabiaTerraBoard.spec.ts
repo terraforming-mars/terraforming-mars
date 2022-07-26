@@ -1,10 +1,11 @@
 import {expect} from 'chai';
-import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
+import {Game} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
 import {ArabiaTerraBoard} from '../../src/boards/ArabiaTerraBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {SeededRandom} from '../../src/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {setCustomGameOptions, runAllActions, cast} from '../TestingUtils';
@@ -17,15 +18,15 @@ import {LandClaim} from '../../src/cards/base/LandClaim';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 
 describe('ArabiaTerraBoard', function() {
-  let board : ArabiaTerraBoard;
+  let board: ArabiaTerraBoard;
   let game: Game;
-  let player : Player;
-  let player2 : Player;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameId', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
   });
 

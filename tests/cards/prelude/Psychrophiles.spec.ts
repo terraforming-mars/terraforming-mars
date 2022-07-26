@@ -2,14 +2,16 @@ import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/cards/prelude/Psychrophiles';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Psychrophiles', () => {
-  let card : Psychrophiles; let player : Player; let game : Game;
+  let card: Psychrophiles;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new Psychrophiles();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

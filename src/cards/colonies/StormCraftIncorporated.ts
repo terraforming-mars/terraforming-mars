@@ -64,8 +64,8 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
       'Select card to add 1 floater',
       'Add floater',
       floaterCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {qty: 1, log: true});
+      ([card]) => {
+        player.addResourceTo(card, {qty: 1, log: true});
         return undefined;
       },
     );
@@ -98,7 +98,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
       new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
         floaterAmount = amount;
         return undefined;
-      }, 0, Math.min(player.getResourcesOnCorporation(), Math.ceil(targetAmount / 2))),
+      }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),
     );
   }
 }

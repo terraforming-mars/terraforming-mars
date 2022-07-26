@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {Landlord} from '../../src/awards/Landlord';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {SpaceName} from '../../src/SpaceName';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
@@ -14,12 +14,14 @@ import {LandClaim} from '../../src/cards/base/LandClaim';
 import {setCustomGameOptions} from '../TestingUtils';
 
 describe('Landlord', () => {
-  let player: Player; let otherPlayer: Player; let game : Game;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
   const award = new Landlord();
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });

@@ -4,15 +4,16 @@ import {AtmoCollectors} from '../../../src/cards/colonies/AtmoCollectors';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AtmoCollectors', function() {
-  let card : AtmoCollectors; let player : Player;
+  let card: AtmoCollectors;
+  let player: Player;
 
   beforeEach(function() {
     card = new AtmoCollectors();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

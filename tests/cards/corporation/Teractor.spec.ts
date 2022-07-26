@@ -5,15 +5,16 @@ import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {Teractor} from '../../../src/cards/corporation/Teractor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Teractor', function() {
-  let card : Teractor; let player : Player;
+  let card: Teractor;
+  let player: Player;
 
   beforeEach(function() {
     card = new Teractor();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
     const action = card.play();

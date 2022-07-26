@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {DrawCards} from '../../src/deferredActions/DrawCards';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {AICentral} from '../../src/cards/base/AICentral';
@@ -13,12 +13,13 @@ import {Dealer} from '../../src/Dealer';
 import {cast} from '../TestingUtils';
 
 describe('DrawCards', function() {
-  let player: Player; let dealer: Dealer;
+  let player: Player;
+  let dealer: Dealer;
   const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
     dealer = player.game.dealer;
   });

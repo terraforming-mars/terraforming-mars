@@ -8,14 +8,16 @@ import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {resetBoard} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LavaTubeSettlement', function() {
-  let card : LavaTubeSettlement; let player : Player; let game : Game;
+  let card: LavaTubeSettlement;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new LavaTubeSettlement();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
     resetBoard(game);
   });
@@ -30,7 +32,7 @@ describe('LavaTubeSettlement', function() {
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
-    const anotherPlayer = TestPlayers.RED.newPlayer();
+    const anotherPlayer = TestPlayer.RED.newPlayer();
     game.board.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
 
     expect(card.canPlay(player)).is.not.true;

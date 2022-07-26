@@ -3,6 +3,7 @@ import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {HowToPay} from '../common/inputs/HowToPay';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Resources} from '../common/Resources';
+import {CardName} from '../common/cards/CardName';
 
 export class SelectHowToPayDeferred extends DeferredAction {
   constructor(
@@ -23,10 +24,10 @@ export class SelectHowToPayDeferred extends DeferredAction {
     if (this.options.canUseTitanium && this.player.titanium > 0) {
       return false;
     }
-    if (this.options.canUseSeeds && (this.player.corporationCard?.resourceCount ?? 0 > 0)) {
+    if (this.options.canUseSeeds && (this.player.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)?.resourceCount ?? 0) > 0) {
       return false;
     }
-    if (this.options.canUseData && (this.player.corporationCard?.resourceCount ?? 0 > 0)) {
+    if (this.options.canUseSeeds && (this.player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS)?.resourceCount ?? 0) > 0) {
       return false;
     }
     return true;
@@ -52,11 +53,15 @@ export class SelectHowToPayDeferred extends DeferredAction {
         this.player.deductResource(Resources.TITANIUM, howToPay.titanium);
         this.player.deductResource(Resources.MEGACREDITS, howToPay.megaCredits);
         this.player.deductResource(Resources.HEAT, howToPay.heat);
-        if (howToPay.seeds > 0 && this.player.corporationCard !== undefined) {
-          this.player.removeResourceFrom(this.player.corporationCard, howToPay.seeds);
+        if (howToPay.seeds > 0) {
+          const soylent = this.player.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
+          if (soylent === undefined) throw new Error('Cannot pay with seeds without ' + CardName.SOYLENT_SEEDLING_SYSTEMS);
+          this.player.removeResourceFrom(soylent, howToPay.seeds);
         }
-        if (howToPay.data > 0 && this.player.corporationCard !== undefined) {
-          this.player.removeResourceFrom(this.player.corporationCard, howToPay.data);
+        if (howToPay.data > 0) {
+          const aurorai = this.player.getCorporation(CardName.AURORAI);
+          if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
+          this.player.removeResourceFrom(aurorai, howToPay.seeds);
         }
         this.options.afterPay?.();
         return undefined;

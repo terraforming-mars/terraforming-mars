@@ -6,15 +6,17 @@ import {LunarBeam} from '../../../src/cards/base/LunarBeam';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Cartel', function() {
-  let card : Cartel; let player : Player; let game : Game;
+  let card: Cartel;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Cartel();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
     player.game = game;
   });

@@ -5,15 +5,17 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessNetwork', function() {
-  let card : BusinessNetwork; let player : Player; let game : Game;
+  let card: BusinessNetwork;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new BusinessNetwork();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
@@ -23,7 +25,7 @@ describe('BusinessNetwork', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });

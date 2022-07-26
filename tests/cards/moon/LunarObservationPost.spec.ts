@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {expect} from 'chai';
 
@@ -13,7 +13,7 @@ describe('LunarObservationPost', () => {
   let card: LunarObservationPost;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunarObservationPost();
   });

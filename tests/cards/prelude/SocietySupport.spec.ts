@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {SocietySupport} from '../../../src/cards/prelude/SocietySupport';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SocietySupport', function() {
   it('Should play', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const card = new SocietySupport();
     const action = card.play(player);
     expect(action).is.undefined;

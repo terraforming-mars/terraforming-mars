@@ -1,4 +1,4 @@
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -56,8 +56,8 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {log: true});
+    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, ([card]) => {
+      player.addResourceTo(card, {log: true});
       return undefined;
     });
   }

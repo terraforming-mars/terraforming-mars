@@ -4,15 +4,17 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusFirst', function() {
-  let card : VenusFirst; let player : Player; let game : Game;
+  let card: VenusFirst;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new VenusFirst();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });

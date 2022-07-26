@@ -3,7 +3,7 @@ import {CaretakerContract} from '../../../src/cards/base/CaretakerContract';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 import {Reds} from '../../../src/turmoil/parties/Reds';
@@ -12,12 +12,14 @@ import {Helion} from '../../../src/cards/corporation/Helion';
 import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
 
 describe('CaretakerContract', function() {
-  let card : CaretakerContract; let player : Player; let game : Game;
+  let card: CaretakerContract;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new CaretakerContract();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
@@ -45,7 +47,7 @@ describe('CaretakerContract', function() {
   });
 
   it('Cannot act if cannot afford reds tax', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -66,7 +68,7 @@ describe('CaretakerContract', function() {
   });
 
   it('Do not double-account heat with Helion using Reds tax', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     player.corporationCard = new Helion();
     player.corporationCard.play(player);
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());

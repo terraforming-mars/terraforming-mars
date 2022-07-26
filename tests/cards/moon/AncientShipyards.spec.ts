@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
@@ -16,8 +16,8 @@ describe('AncientShipyards', () => {
   let card: AncientShipyards;
 
   beforeEach(() => {
-    bluePlayer = TestPlayers.BLUE.newPlayer();
-    redPlayer = TestPlayers.RED.newPlayer();
+    bluePlayer = TestPlayer.BLUE.newPlayer();
+    redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
     card = new AncientShipyards();
   });
@@ -56,7 +56,7 @@ describe('AncientShipyards', () => {
   });
 
   it('act solo', () => {
-    redPlayer = TestPlayers.RED.newPlayer();
+    redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [redPlayer], redPlayer, MOON_OPTIONS);
 
     expect(card.resourceCount).eq(0);

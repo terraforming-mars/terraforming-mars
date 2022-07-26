@@ -3,19 +3,20 @@ import {ConvertPlants} from '../../../../src/cards/base/standardActions/ConvertP
 import {Phase} from '../../../../src/common/Phase';
 import {Player} from '../../../../src/Player';
 import {setCustomGameOptions} from '../../../TestingUtils';
-import {TestPlayers} from '../../../TestPlayers';
+import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 
 describe('ConvertPlants', function() {
-  let card: ConvertPlants; let player: Player;
+  let card: ConvertPlants;
+  let player: Player;
 
   beforeEach(function() {
     card = new ConvertPlants();
-    player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 

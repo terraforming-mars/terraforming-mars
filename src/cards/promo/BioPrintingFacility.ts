@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
@@ -73,8 +73,8 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
         'Select card to add 1 animal',
         'Add animal',
         availableAnimalCards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {log: true});
+        ([card]) => {
+          player.addResourceTo(card, {log: true});
           return undefined;
         },
       ),

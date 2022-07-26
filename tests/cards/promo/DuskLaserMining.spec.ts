@@ -3,22 +3,23 @@ import {Research} from '../../../src/cards/base/Research';
 import {DuskLaserMining} from '../../../src/cards/promo/DuskLaserMining';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('DuskLaserMining', function() {
-  let card : DuskLaserMining; let player : Player;
+  let card: DuskLaserMining;
+  let player: Player;
 
   beforeEach(function() {
     card = new DuskLaserMining();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Can\'t play if not enough science tags', function() {
+  it('Can not play if not enough science tags', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if no energy production', function() {
+  it('Can not play if no energy production', function() {
     player.playedCards.push(new Research());
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

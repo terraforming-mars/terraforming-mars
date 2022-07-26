@@ -1,6 +1,5 @@
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {SolarPanelFoundry} from '../../../src/cards/moon/SolarPanelFoundry';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
@@ -13,7 +12,7 @@ describe('SolarPanelFoundry', () => {
   let card: SolarPanelFoundry;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new SolarPanelFoundry();
   });

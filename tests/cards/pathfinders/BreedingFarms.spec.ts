@@ -3,7 +3,6 @@ import {BreedingFarms} from '../../../src/cards/pathfinders/BreedingFarms';
 import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {runAllActions} from '../../TestingUtils';
 
 describe('BreedingFarms', function() {
@@ -13,7 +12,7 @@ describe('BreedingFarms', function() {
 
   beforeEach(function() {
     card = new BreedingFarms();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
     fish = new Fish();

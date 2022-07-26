@@ -4,15 +4,17 @@ import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('TradeAdvance', function() {
-  let card : TradeAdvance; let player : Player; let game : Game;
+  let card: TradeAdvance;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new TradeAdvance();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions({
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],

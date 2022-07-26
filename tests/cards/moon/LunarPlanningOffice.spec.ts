@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/cards/moon/LunarPlanningOffice';
 import {expect} from 'chai';
 import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
@@ -18,7 +18,7 @@ describe('LunarPlanningOffice', () => {
   let card: LunarPlanningOffice;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunarPlanningOffice();
   });

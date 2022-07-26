@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {WeGrowAsOne} from '../../../src/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
 import {Unity} from '../../../src/turmoil/parties/Unity';
@@ -13,7 +13,7 @@ describe('WeGrowAsOne', () => {
   let card: WeGrowAsOne;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance(
       'gameid',
       [player],

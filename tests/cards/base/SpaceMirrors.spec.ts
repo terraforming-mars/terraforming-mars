@@ -3,19 +3,21 @@ import {SpaceMirrors} from '../../../src/cards/base/SpaceMirrors';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SpaceMirrors', function() {
-  let card : SpaceMirrors; let player : Player; let game : Game;
+  let card: SpaceMirrors;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new SpaceMirrors();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 6;
     expect(card.canAct(player)).is.not.true;
   });

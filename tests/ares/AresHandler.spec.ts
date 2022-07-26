@@ -1,7 +1,9 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Player} from '../../src/Player';
-import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
+import {Game} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
+
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
@@ -14,7 +16,7 @@ import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {Decomposers} from '../../src/cards/base/Decomposers';
 import {EnergyTapping} from '../../src/cards/base/EnergyTapping';
 import {Phase} from '../../src/common/Phase';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
 import {SeededRandom} from '../../src/Random';
@@ -26,11 +28,13 @@ import {Birds} from '../../src/cards/base/Birds';
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
 describe('AresHandler', function() {
-  let player : Player; let otherPlayer: Player; let game : Game;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });

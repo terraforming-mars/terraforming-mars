@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -46,8 +45,8 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Add 1 animal to a card', 'Add animal', cards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {log: true});
+    return new SelectCard('Add 1 animal to a card', 'Add animal', cards, ([card]) => {
+      player.addResourceTo(card, {log: true});
       return undefined;
     });
   }

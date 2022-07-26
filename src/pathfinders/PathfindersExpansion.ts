@@ -1,7 +1,8 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
-import {Game, GameOptions} from '../Game';
+import {Game} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
 import {IPathfindersData} from './IPathfindersData';

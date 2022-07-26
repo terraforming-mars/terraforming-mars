@@ -6,16 +6,18 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('EcologicalZone', function() {
-  let card : EcologicalZone; let player : Player; let game : Game;
+  let card: EcologicalZone;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new EcologicalZone();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

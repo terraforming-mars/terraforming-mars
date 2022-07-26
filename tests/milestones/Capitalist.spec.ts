@@ -1,14 +1,15 @@
 import {Capitalist} from '../../src/milestones/Capitalist';
 import {Player} from '../../src/Player';
 import {expect} from 'chai';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Capitalist', () => {
-  let milestone : Capitalist; let player : Player;
+  let milestone: Capitalist;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Capitalist();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can claim with 64 M€', () => {

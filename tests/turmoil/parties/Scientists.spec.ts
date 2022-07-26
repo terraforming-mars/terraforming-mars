@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4} from '../../../src/turmoil/parties/Scientists';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Research} from '../../../src/cards/base/Research';
@@ -15,10 +15,13 @@ import {HabitatMarte} from '../../../src/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganisms';
 
 describe('Scientists', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil; let scientists: Scientists;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
+  let scientists: Scientists;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player], player, gameOptions);
     turmoil = game.turmoil!;

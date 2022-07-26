@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
@@ -12,10 +12,13 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Unity', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil; let unity: Unity;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
+  let unity: Unity;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player], player, gameOptions);
     turmoil = game.turmoil!;

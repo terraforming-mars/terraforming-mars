@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import {Biolab} from '../../../src/cards/prelude/Biolab';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Biolab', function() {
   it('Should play', function() {
     const card = new Biolab();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     card.play(player);
 

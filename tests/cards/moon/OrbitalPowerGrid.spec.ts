@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {OrbitalPowerGrid} from '../../../src/cards/moon/OrbitalPowerGrid';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
@@ -15,7 +15,7 @@ describe('OrbitalPowerGrid', () => {
   let card: OrbitalPowerGrid;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new OrbitalPowerGrid();
   });

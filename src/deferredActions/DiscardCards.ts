@@ -1,6 +1,5 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
-import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class DiscardCards extends DeferredAction {
@@ -22,8 +21,8 @@ export class DiscardCards extends DeferredAction {
       this.title,
       'Discard',
       this.player.cardsInHand,
-      (foundCards: Array<IProjectCard>) => {
-        for (const card of foundCards) {
+      (cards) => {
+        for (const card of cards) {
           this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
           this.player.game.dealer.discard(card);
         }

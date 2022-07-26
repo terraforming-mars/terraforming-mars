@@ -3,7 +3,7 @@ import {Leavitt} from '../../../src/cards/community/Leavitt';
 import {Vitor} from '../../../src/cards/prelude/Vitor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Leavitt', function() {
@@ -14,8 +14,8 @@ describe('Leavitt', function() {
 
   beforeEach(function() {
     leavitt = new Leavitt();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(leavitt);

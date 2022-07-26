@@ -4,20 +4,21 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('RobinsonIndustries', function() {
-  let card : RobinsonIndustries; let player : Player;
+  let card: RobinsonIndustries;
+  let player: Player;
 
   beforeEach(function() {
     card = new RobinsonIndustries();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     player.corporationCard = card;
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 3;
     expect(card.canAct(player)).is.not.true;
   });

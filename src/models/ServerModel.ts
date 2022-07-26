@@ -1,7 +1,8 @@
 import {CardModel} from '../common/models/CardModel';
 import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
-import {Game, GameOptions} from '../Game';
+import {Game} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {SimpleGameModel} from '../common/models/SimpleGameModel';
 import {GameOptionsModel} from '../common/models/GameOptionsModel';
 import {ICard} from '../cards/ICard';
@@ -375,11 +376,11 @@ export class Server {
     player: Player,
     cards: Array<ICard>,
     options: {
-    showResources?: boolean,
-    showCalculatedCost?: boolean,
-    reserveUnits?: Array<Units>,
-    enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
-  } = {},
+      showResources?: boolean,
+      showCalculatedCost?: boolean,
+      reserveUnits?: Array<Units>,
+      enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
+    } = {},
   ): Array<CardModel> {
     return cards.map((card, index) => {
       const model: CardModel = {

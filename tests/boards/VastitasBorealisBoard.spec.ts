@@ -1,24 +1,25 @@
 import {expect} from 'chai';
-import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
+import {Game} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
 import {VastitasBorealisBoard} from '../../src/boards/VastitasBorealisBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {SeededRandom} from '../../src/Random';
 import {setCustomGameOptions, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/SpaceName';
 
 describe('VastitasBorealisBoard', function() {
-  let board : VastitasBorealisBoard;
+  let board: VastitasBorealisBoard;
   let game: Game;
-  let player : Player;
-  let player2 : Player;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     board = VastitasBorealisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
   });
 

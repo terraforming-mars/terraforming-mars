@@ -4,15 +4,17 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Birds', function() {
-  let card : Birds; let player : Player; let player2 : Player;
+  let card: Birds;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new Birds();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 
@@ -21,7 +23,7 @@ describe('Birds', function() {
   });
 
   it('Should play', function() {
-    const player3 = TestPlayers.GREEN.newPlayer();
+    const player3 = TestPlayer.GREEN.newPlayer();
     const game = Game.newInstance('gameid', [player, player2, player3], player);
 
     player2.addProduction(Resources.PLANTS, 2);

@@ -5,17 +5,21 @@ import {Enceladus} from '../../src/colonies/Enceladus';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 
 describe('Enceladus', function() {
-  let enceladus: Enceladus; let tardigrades: Tardigrades; let player: Player; let player2: Player; let game: Game;
+  let enceladus: Enceladus;
+  let tardigrades: Tardigrades;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     enceladus = new Enceladus();
     tardigrades = new Tardigrades();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(enceladus);

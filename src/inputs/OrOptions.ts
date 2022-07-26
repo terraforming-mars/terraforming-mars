@@ -1,14 +1,5 @@
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
-import {SelectAmount} from './SelectAmount';
-import {SelectCard} from './SelectCard';
-import {SelectPlayer} from './SelectPlayer';
-import {SelectOption} from './SelectOption';
-import {SelectHowToPay} from './SelectHowToPay';
-import {ICard} from '../cards/ICard';
-import {IProjectCard} from '../cards/IProjectCard';
-import {SelectDelegate} from './SelectDelegate';
-import {SelectColony} from './SelectColony';
 import {Message} from '../common/logs/Message';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Player} from '../Player';
@@ -22,7 +13,7 @@ export class OrOptions implements PlayerInput {
   public options: Array<PlayerInput>;
   public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;
   constructor(
-    ...options: Array<SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard>| SelectPlayer | SelectOption | SelectHowToPay | SelectDelegate | SelectColony>
+    ...options: Array<PlayerInput>
   ) {
     this.options = options;
   }

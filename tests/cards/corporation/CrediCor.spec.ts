@@ -7,15 +7,16 @@ import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/
 import {CrediCor} from '../../../src/cards/corporation/CrediCor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CrediCor', function() {
-  let card : CrediCor; let player : Player;
+  let card: CrediCor;
+  let player: Player;
 
   beforeEach(function() {
     card = new CrediCor();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

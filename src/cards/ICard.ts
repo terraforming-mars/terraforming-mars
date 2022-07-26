@@ -5,7 +5,6 @@ import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
 import {Tags} from '../common/cards/Tags';
-import {OrOptions} from '../inputs/OrOptions';
 import {CardResource} from '../common/CardResource';
 import {CardName} from '../common/cards/CardName';
 import {ICardMetadata} from '../common/cards/ICardMetadata';
@@ -63,7 +62,7 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: Player) => number;
-    onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
+    onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
     onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;

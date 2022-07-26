@@ -1529,7 +1529,7 @@ export class Player {
     for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       for (const corporationCard of somePlayer.corporations) {
         if (corporationCard.onCardPlayed !== undefined) {
-          const actionFromPlayedCard: OrOptions | void = corporationCard.onCardPlayed(this, card);
+          const actionFromPlayedCard = corporationCard.onCardPlayed(this, card);
           if (actionFromPlayedCard !== undefined) {
             this.game.defer(new SimpleDeferredAction(
               this,

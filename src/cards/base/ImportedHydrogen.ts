@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -52,7 +51,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       return gainPlants();
     }
 
-    const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
+    const availableActions: Array<PlayerInput> = [];
 
     const gainPlantsOption = new SelectOption('Gain 3 plants', 'Gain plants', gainPlants);
     availableActions.push(gainPlantsOption);

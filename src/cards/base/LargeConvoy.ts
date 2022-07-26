@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -50,7 +49,7 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     if (animalCards.length === 0 ) return gainPlants();
 
-    const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
+    const availableActions: Array<PlayerInput> = [];
 
     const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
     availableActions.push(gainPlantsOption);

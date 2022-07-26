@@ -65,16 +65,16 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
       const robotCards = this.targetCards.map((targetCard) => targetCard.card);
       orOptions.options.push(new SelectCard(
         'Select card to double robots resource', 'Double resource', robotCards,
-        (foundCards: Array<IProjectCard>) => {
+        ([card]) => {
           let resourceCount = 0;
           for (const targetCard of this.targetCards) {
-            if (targetCard.card.name === foundCards[0].name) {
+            if (targetCard.card.name === card.name) {
               resourceCount = targetCard.resourceCount;
               targetCard.resourceCount *= 2;
             }
           }
           player.game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
-            b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2);
+            b.player(player).card(card).number(resourceCount).number(resourceCount * 2);
           });
           return undefined;
         },
@@ -86,16 +86,16 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
       orOptions.options.push(new SelectCard(
         'Select card to link with Self-Replicating Robots',
         'Link card', selectableCards,
-        (foundCards: Array<IProjectCard>) => {
-          const projectCardIndex = player.cardsInHand.findIndex((card) => card.name === foundCards[0].name);
+        ([card]) => {
+          const projectCardIndex = player.cardsInHand.findIndex((card) => card.name === card.name);
           player.cardsInHand.splice(projectCardIndex, 1);
           this.targetCards.push(
             {
-              card: foundCards[0],
+              card: card,
               resourceCount: 2,
             },
           );
-          player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(foundCards[0]).card(this));
+          player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(card).card(this));
           return undefined;
         },
         {played: CardName.SELF_REPLICATING_ROBOTS},

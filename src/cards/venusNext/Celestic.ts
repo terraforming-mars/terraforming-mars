@@ -2,7 +2,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {CardResource} from '../../common/CardResource';
-import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
@@ -91,8 +91,8 @@ export class Celestic extends Card implements IActionCard, ICorporationCard, IRe
       'Select card to add 1 floater',
       'Add floater',
       floaterCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

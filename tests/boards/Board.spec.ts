@@ -10,7 +10,7 @@ import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {SeededRandom} from '../../src/Random';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/GameOptions';
 import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {

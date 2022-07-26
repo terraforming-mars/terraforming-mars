@@ -78,9 +78,9 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       return undefined;
     });
 
-    const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, (foundCards: Array<ICard>) => {
+    const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
       player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
-      player.addResourceTo(foundCards[0], {log: true});
+      player.addResourceTo(card, {log: true});
 
       return undefined;
     });

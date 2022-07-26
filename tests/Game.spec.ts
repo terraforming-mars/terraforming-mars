@@ -631,7 +631,7 @@ describe('Game', () => {
     const serializedKeys = Object.keys(serialized);
     expect(serializedKeys).not.include('rng');
     const gameKeys = Object.keys(game);
-    expect(serializedKeys.concat('rng', 'discardedColonies').sort())
+    expect(serializedKeys.concat('rng', 'discardedColonies', 'monsInsuranceOwner').sort())
       .deep.eq(gameKeys.concat('seed', 'currentSeed').sort());
   });
 

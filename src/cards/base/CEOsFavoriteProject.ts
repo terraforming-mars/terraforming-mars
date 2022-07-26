@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
@@ -34,14 +33,14 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
       'Select card to add resource',
       'Add resource',
       player.getCardsWithResources().concat(robotCards.map((c) => c.card)),
-      (foundCards: Array<ICard>) => {
+      ([card]) => {
         // if the user selected a robot card, handle it here:
-        const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === foundCards[0].name);
+        const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === card.name);
         if (robotCard) {
           robotCard.resourceCount++;
           LogHelper.logAddResource(player, robotCard.card);
         } else {
-          player.addResourceTo(foundCards[0], {log: true});
+          player.addResourceTo(card, {log: true});
         }
         return undefined;
       },

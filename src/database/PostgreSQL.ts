@@ -1,5 +1,6 @@
 import {IDatabase} from './IDatabase';
-import {Game, GameOptions, Score} from '../Game';
+import {Game, Score} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Pool, ClientConfig} from 'pg';
@@ -281,9 +282,9 @@ export class PostgreSQL implements IDatabase {
     // TODO(kberg): return row counts
     const result = await this.client.query(`
     SELECT
-      pg_size_pretty(pg_total_relation_size(\'games\')) as game_size,
-      pg_size_pretty(pg_total_relation_size(\'game_results\')) as game_result_size,
-      pg_size_pretty(pg_total_relation_size(\'participants\')) as participants_size,
+      pg_size_pretty(pg_total_relation_size('games')) as game_size,
+      pg_size_pretty(pg_total_relation_size('game_results')) as game_result_size,
+      pg_size_pretty(pg_total_relation_size('participants')) as participants_size,
       pg_size_pretty(pg_database_size($1)) as db_size
     `, [this.databaseName]);
 

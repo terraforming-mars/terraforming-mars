@@ -60,8 +60,8 @@ export class Playwrights extends Card implements ICorporationCard {
 
     return new SelectCard<IProjectCard>(
       'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
-      (foundCards: Array<IProjectCard>) => {
-        const selectedCard: IProjectCard = foundCards[0];
+      ([card]) => {
+        const selectedCard: IProjectCard = card;
 
         players.forEach((p) => {
           const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
@@ -77,7 +77,7 @@ export class Playwrights extends Card implements ICorporationCard {
           {
             title: 'Select how to pay to replay the event',
             afterPay: () => {
-              player.playCard(selectedCard, undefined, false); // Play the card but don't add it to played cards
+              player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
               player.removedFromPlayCards.push(selectedCard); // Remove card from the game
               if (selectedCard.name === CardName.LAW_SUIT) {
                 /*

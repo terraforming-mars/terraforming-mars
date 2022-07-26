@@ -20,7 +20,7 @@ const metrics = {
   }),
 };
 
-export class GameIds extends EventEmitter {
+export class Cache extends EventEmitter {
   private loaded = false;
   private readonly games = new Map<GameId, Game | undefined>();
   private readonly participantIds = new Map<SpectatorId | PlayerId, GameId>();
@@ -133,7 +133,7 @@ export class GameIds extends EventEmitter {
   }
 }
 
-function scheduleSweep(cache: GameIds, sleepMillis: number) {
+function scheduleSweep(cache: Cache, sleepMillis: number) {
   console.log(`Sweeper sleeping for ${sleepMillis}ms`);
   setTimeout(() => {
     try {

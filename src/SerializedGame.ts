@@ -8,7 +8,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId} from './common/Types';
-import {GameOptions} from './Game';
+import {GameOptions} from './GameOptions';
 import {IAresData} from './common/ares/IAresData';
 import {LogMessage} from './common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
@@ -41,7 +41,6 @@ export interface SerializedGame {
     initialDraftIteration: number;
     lastSaveId: number;
     milestones: Array<string>;
-    monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;

@@ -8,7 +8,7 @@ import {SpaceType} from '../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 
 export class HellasBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {

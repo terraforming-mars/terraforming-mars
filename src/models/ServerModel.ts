@@ -47,7 +47,7 @@ import {MoonModel} from '../common/models/MoonModel';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../common/cards/CardName';
 import {Tags} from '../common/cards/Tags';
-import {ICorporationCard} from '@/cards/corporation/ICorporationCard';
+import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {

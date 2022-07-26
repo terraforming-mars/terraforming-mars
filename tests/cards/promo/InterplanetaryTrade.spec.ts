@@ -16,7 +16,9 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryTrade', function() {
-  let card : InterplanetaryTrade; let player : Player; let game: Game;
+  let card: InterplanetaryTrade;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new InterplanetaryTrade();

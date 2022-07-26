@@ -14,8 +14,8 @@ import {Player} from '../../../src/Player';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 describe('MarketManipulation', function() {
-  let card : MarketManipulation;
-  let player : Player;
+  let card: MarketManipulation;
+  let player: Player;
   let game: Game;
 
   beforeEach(function() {

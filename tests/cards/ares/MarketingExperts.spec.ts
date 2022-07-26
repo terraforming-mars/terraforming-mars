@@ -11,7 +11,9 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MarketingExperts', function() {
-  let card : MarketingExperts; let player : Player; let otherPlayer: Player; let game : Game;
+  let card: MarketingExperts;
+  let player: Player; let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MarketingExperts();

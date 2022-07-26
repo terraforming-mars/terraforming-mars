@@ -10,7 +10,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CorroderSuits', function() {
-  let card : CorroderSuits; let player : Player;
+  let card: CorroderSuits;
+  let player: Player;
 
   beforeEach(function() {
     card = new CorroderSuits();

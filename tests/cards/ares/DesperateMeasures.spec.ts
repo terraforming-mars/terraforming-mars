@@ -8,7 +8,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 
 describe('DesperateMeasures', function() {
-  let card : DesperateMeasures; let player : Player; let game : Game;
+  let card: DesperateMeasures;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new DesperateMeasures();

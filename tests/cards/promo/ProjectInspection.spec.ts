@@ -12,7 +12,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ProjectInspection', function() {
-  let card : ProjectInspection; let player : Player; let restrictedArea: RestrictedArea;
+  let card: ProjectInspection;
+  let player: Player; let restrictedArea: RestrictedArea;
 
   beforeEach(function() {
     card = new ProjectInspection();

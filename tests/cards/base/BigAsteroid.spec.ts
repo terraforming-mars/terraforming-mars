@@ -7,7 +7,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('BigAsteroid', function() {
-  let card : BigAsteroid; let player : Player; let player2 : Player; let game : Game;
+  let card: BigAsteroid;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new BigAsteroid();

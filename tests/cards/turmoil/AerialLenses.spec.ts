@@ -9,7 +9,10 @@ import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerialLenses', function() {
-  let card : AerialLenses; let player : Player; let player2 : Player; let game : Game;
+  let card: AerialLenses;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new AerialLenses();

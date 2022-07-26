@@ -11,7 +11,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CEOsFavoriteProject', function() {
-  let card : CEOsFavoriteProject; let player : Player;
+  let card: CEOsFavoriteProject;
+  let player: Player;
 
   beforeEach(function() {
     card = new CEOsFavoriteProject();

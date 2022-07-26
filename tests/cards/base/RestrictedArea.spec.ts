@@ -6,7 +6,9 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RestrictedArea', function() {
-  let card : RestrictedArea; let player : Player; let game : Game;
+  let card: RestrictedArea;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new RestrictedArea();

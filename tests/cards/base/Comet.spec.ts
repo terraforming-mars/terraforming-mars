@@ -8,7 +8,11 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Comet', function() {
-  let card : Comet; let player : Player; let player2 : Player; let player3: Player; let game : Game;
+  let card: Comet;
+  let player: Player;
+  let player2: Player;
+  let player3: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Comet();

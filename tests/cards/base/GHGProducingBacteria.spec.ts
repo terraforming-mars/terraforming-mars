@@ -7,7 +7,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('GHGProducingBacteria', () => {
-  let card : GHGProducingBacteria; let player : Player; let game : Game;
+  let card: GHGProducingBacteria;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new GHGProducingBacteria();

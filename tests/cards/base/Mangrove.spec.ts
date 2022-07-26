@@ -5,7 +5,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 
 describe('Mangrove', function() {
-  let card : Mangrove; let player : TestPlayer;
+  let card: Mangrove;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Mangrove();

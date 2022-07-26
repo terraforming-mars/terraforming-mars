@@ -9,7 +9,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('CupolaCity', function() {
-  let card : CupolaCity; let player : Player; let game : Game;
+  let card: CupolaCity;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new CupolaCity();

@@ -7,7 +7,8 @@ import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordinat
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 
 describe('AdvancedEcosystems', function() {
-  let card : AdvancedEcosystems; let player : TestPlayer;
+  let card: AdvancedEcosystems;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AdvancedEcosystems();

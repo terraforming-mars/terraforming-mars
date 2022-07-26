@@ -11,7 +11,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Astrodrill', function() {
-  let card : Astrodrill; let player : Player;
+  let card: Astrodrill;
+  let player: Player;
 
   beforeEach(function() {
     card = new Astrodrill();

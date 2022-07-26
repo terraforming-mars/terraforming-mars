@@ -14,7 +14,9 @@ import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NewPartner', function() {
-  let card : NewPartner; let player : Player; let game : Game;
+  let card: NewPartner;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new NewPartner();

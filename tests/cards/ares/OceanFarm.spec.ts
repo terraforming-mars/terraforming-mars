@@ -11,7 +11,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 
 describe('OceanFarm', () => {
-  let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;
+  let card: OceanFarm;
+  let player: Player; let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new OceanFarm();

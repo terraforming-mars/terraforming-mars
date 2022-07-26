@@ -5,7 +5,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarBeam', function() {
-  let card : LunarBeam; let player : Player;
+  let card: LunarBeam;
+  let player: Player;
 
   beforeEach(function() {
     card = new LunarBeam();

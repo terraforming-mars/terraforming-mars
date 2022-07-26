@@ -6,7 +6,10 @@ import {maxOutOceans} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Irrigator', () => {
-  let milestone : Irrigator; let player : Player; let player2 : Player; let game: Game;
+  let milestone: Irrigator;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     milestone = new Irrigator();

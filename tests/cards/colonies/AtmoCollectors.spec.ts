@@ -7,7 +7,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AtmoCollectors', function() {
-  let card : AtmoCollectors; let player : Player;
+  let card: AtmoCollectors;
+  let player: Player;
 
   beforeEach(function() {
     card = new AtmoCollectors();

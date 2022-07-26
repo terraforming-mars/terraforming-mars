@@ -11,7 +11,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
-  let card : OlympusConference; let player : TestPlayer; let game : Game;
+  let card: OlympusConference;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new OlympusConference();

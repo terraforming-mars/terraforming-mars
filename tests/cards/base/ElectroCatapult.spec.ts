@@ -6,7 +6,9 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ElectroCatapult', () => {
-  let card : ElectroCatapult; let player : TestPlayer; let game : Game;
+  let card: ElectroCatapult;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new ElectroCatapult();

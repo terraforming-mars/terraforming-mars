@@ -9,7 +9,8 @@ import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GreatDamPromo', function() {
-  let card : GreatDamPromo; let player : Player;
+  let card: GreatDamPromo;
+  let player: Player;
 
   beforeEach(function() {
     card = new GreatDamPromo();

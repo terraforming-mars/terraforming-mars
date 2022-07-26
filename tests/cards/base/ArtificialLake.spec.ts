@@ -9,7 +9,9 @@ import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {
-  let card : ArtificialLake; let player : TestPlayer; let game : Game;
+  let card: ArtificialLake;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new ArtificialLake();

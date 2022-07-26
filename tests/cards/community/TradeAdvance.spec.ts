@@ -7,7 +7,9 @@ import {setCustomGameOptions, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TradeAdvance', function() {
-  let card : TradeAdvance; let player : Player; let game : Game;
+  let card: TradeAdvance;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new TradeAdvance();

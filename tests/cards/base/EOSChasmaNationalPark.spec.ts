@@ -9,7 +9,9 @@ import {Resources} from '../../../src/common/Resources';
 import {cast} from '../../TestingUtils';
 
 describe('EosChasmaNationalPark', () => {
-  let card : EosChasmaNationalPark; let player : TestPlayer; let game : Game;
+  let card: EosChasmaNationalPark;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new EosChasmaNationalPark();

@@ -8,7 +8,11 @@ import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Revolution', function() {
-  let card : Revolution; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let card: Revolution;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new Revolution();

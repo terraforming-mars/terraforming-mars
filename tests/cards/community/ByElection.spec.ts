@@ -9,7 +9,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('ByElection', function() {
-  let card : ByElection; let player : Player; let game : Game;
+  let card: ByElection;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new ByElection();

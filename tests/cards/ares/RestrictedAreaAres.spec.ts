@@ -8,7 +8,8 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RestrictedAreaAres', function() {
-  let card : RestrictedAreaAres; let player : Player;
+  let card: RestrictedAreaAres;
+  let player: Player;
 
   beforeEach(function() {
     card = new RestrictedAreaAres();

@@ -7,7 +7,10 @@ import {Resources} from '../../../src/common/Resources';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('GreatEscarpmentConsortium', function() {
-  let card : GreatEscarpmentConsortium; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+  let card: GreatEscarpmentConsortium;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new GreatEscarpmentConsortium();

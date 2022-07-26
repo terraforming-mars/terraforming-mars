@@ -6,7 +6,9 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SpinInducingAsteroid', function() {
-  let card : SpinInducingAsteroid; let player : Player; let game : Game;
+  let card: SpinInducingAsteroid;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new SpinInducingAsteroid();

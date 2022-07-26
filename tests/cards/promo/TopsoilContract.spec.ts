@@ -8,7 +8,9 @@ import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmon
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TopsoilContract', function() {
-  let card : TopsoilContract; let player : Player; let player2 : Player;
+  let card: TopsoilContract;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new TopsoilContract();

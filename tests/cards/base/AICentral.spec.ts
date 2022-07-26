@@ -5,7 +5,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 
 describe('AICentral', function() {
-  let card : AICentral; let player : TestPlayer;
+  let card: AICentral;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AICentral();

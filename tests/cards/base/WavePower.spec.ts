@@ -6,7 +6,8 @@ import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 
 describe('WavePower', function() {
-  let card : WavePower; let player : TestPlayer;
+  let card: WavePower;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new WavePower();

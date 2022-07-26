@@ -8,7 +8,9 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CommercialDistrict', function() {
-  let card : CommercialDistrict; let player : Player; let game : Game;
+  let card: CommercialDistrict;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new CommercialDistrict();

@@ -8,7 +8,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('RobinsonIndustries', function() {
-  let card : RobinsonIndustries; let player : Player;
+  let card: RobinsonIndustries;
+  let player: Player;
 
   beforeEach(function() {
     card = new RobinsonIndustries();

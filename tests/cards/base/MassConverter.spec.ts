@@ -9,7 +9,8 @@ import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MassConverter', function() {
-  let card : MassConverter; let player : Player;
+  let card: MassConverter;
+  let player: Player;
 
   beforeEach(function() {
     card = new MassConverter();

@@ -6,7 +6,10 @@ import {runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ArcticAlgae', function() {
-  let card : ArcticAlgae; let player : Player; let player2 : Player; let game : Game;
+  let card: ArcticAlgae;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new ArcticAlgae();

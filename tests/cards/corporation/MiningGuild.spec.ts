@@ -13,7 +13,10 @@ import {TileType} from '../../../src/common/TileType';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('MiningGuild', () => {
-  let card : MiningGuild; let player : Player; let player2 : Player; let game: Game;
+  let card: MiningGuild;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new MiningGuild();

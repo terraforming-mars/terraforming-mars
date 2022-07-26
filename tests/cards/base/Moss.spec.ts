@@ -8,7 +8,8 @@ import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Moss', function() {
-  let card : Moss; let player : Player;
+  let card: Moss;
+  let player: Player;
 
   beforeEach(function() {
     card = new Moss();

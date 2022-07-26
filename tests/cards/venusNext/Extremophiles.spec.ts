@@ -8,7 +8,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Extremophiles', function() {
-  let card : Extremophiles; let player : Player;
+  let card: Extremophiles;
+  let player: Player;
 
   beforeEach(function() {
     card = new Extremophiles();

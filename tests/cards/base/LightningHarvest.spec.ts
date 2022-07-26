@@ -6,7 +6,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('LightningHarvest', function() {
-  let card : LightningHarvest; let player : TestPlayer;
+  let card: LightningHarvest;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new LightningHarvest();

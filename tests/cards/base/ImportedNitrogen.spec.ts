@@ -11,7 +11,9 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImportedNitrogen', function() {
-  let card : ImportedNitrogen; let player : Player; let game : Game;
+  let card: ImportedNitrogen;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new ImportedNitrogen();

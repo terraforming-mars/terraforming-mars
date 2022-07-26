@@ -8,7 +8,9 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BioPrintingFacility', function() {
-  let card : BioPrintingFacility; let player : Player; let player2 : Player;
+  let card: BioPrintingFacility;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new BioPrintingFacility();

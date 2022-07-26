@@ -27,7 +27,8 @@ import {Algae} from '../../src/cards/base/Algae';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Tactician', function() {
-  let milestone : Tactician; let player : Player;
+  let milestone: Tactician;
+  let player: Player;
 
   beforeEach(function() {
     milestone = new Tactician();

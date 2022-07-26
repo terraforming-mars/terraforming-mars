@@ -8,7 +8,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EnergyMarket', function() {
-  let card : EnergyMarket; let player : Player;
+  let card: EnergyMarket;
+  let player: Player;
 
   beforeEach(function() {
     card = new EnergyMarket();

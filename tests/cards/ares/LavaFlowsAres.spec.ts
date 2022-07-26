@@ -9,7 +9,9 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 
 describe('LavaFlowsAres', function() {
-  let card : LavaFlowsAres; let player : Player; let game : Game;
+  let card: LavaFlowsAres;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new LavaFlowsAres();

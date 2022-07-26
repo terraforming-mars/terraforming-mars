@@ -10,7 +10,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BactoviralResearch', function() {
-  let card : BactoviralResearch; let player : Player;
+  let card: BactoviralResearch;
+  let player: Player;
 
   beforeEach(function() {
     card = new BactoviralResearch();

@@ -4,7 +4,8 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Capitalist', () => {
-  let milestone : Capitalist; let player : Player;
+  let milestone: Capitalist;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Capitalist();

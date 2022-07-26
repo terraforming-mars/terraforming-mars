@@ -5,7 +5,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('GeneRepair', function() {
-  let card : GeneRepair; let player : TestPlayer;
+  let card: GeneRepair;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new GeneRepair();

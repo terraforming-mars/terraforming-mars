@@ -11,10 +11,10 @@ import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/SpaceName';
 
 describe('VastitasBorealisBoard', function() {
-  let board : VastitasBorealisBoard;
+  let board: VastitasBorealisBoard;
   let game: Game;
-  let player : Player;
-  let player2 : Player;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     board = VastitasBorealisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));

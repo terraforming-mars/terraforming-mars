@@ -10,7 +10,9 @@ import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 
 describe('AquiferPumping', function() {
-  let card : AquiferPumping; let player : Player; let game : Game;
+  let card: AquiferPumping;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new AquiferPumping();

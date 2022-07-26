@@ -5,7 +5,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
 
 describe('DustSeals', function() {
-  let card : DustSeals; let player : TestPlayer;
+  let card: DustSeals;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new DustSeals();

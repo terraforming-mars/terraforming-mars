@@ -7,7 +7,9 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusFirst', function() {
-  let card : VenusFirst; let player : Player; let game : Game;
+  let card: VenusFirst;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new VenusFirst();

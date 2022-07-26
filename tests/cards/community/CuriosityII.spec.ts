@@ -10,7 +10,10 @@ import {setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CuriosityII', function() {
-  let card : CuriosityII; let player : Player; let player2 : Player; let game : Game;
+  let card: CuriosityII;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new CuriosityII();

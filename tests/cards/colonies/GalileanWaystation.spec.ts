@@ -10,7 +10,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GalileanWaystation', function() {
-  let card : GalileanWaystation; let player : Player; let player2: Player;
+  let card: GalileanWaystation;
+  let player: Player; let player2: Player;
 
   beforeEach(function() {
     card = new GalileanWaystation();

@@ -12,7 +12,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Splice', function() {
-  let card : Splice; let player : Player; let player2 : Player;
+  let card: Splice;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     card = new Splice();

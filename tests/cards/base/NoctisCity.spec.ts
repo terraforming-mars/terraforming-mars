@@ -10,7 +10,9 @@ import {newTestGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 
 describe('NoctisCity', function() {
-  let card : NoctisCity; let player : Player; let game : Game;
+  let card: NoctisCity;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new NoctisCity();

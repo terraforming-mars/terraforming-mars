@@ -79,7 +79,8 @@ export class Player {
   public game: Game;
 
   // Corporate identity
-  public corporationCard?: ICorporationCard;
+  public corporations: Array<ICorporationCard> = [];
+
   // Used only during set-up
   public pickedCorporationCard?: ICorporationCard;
 
@@ -190,8 +191,19 @@ export class Player {
     this.game = undefined as unknown as Game;
   }
 
-  public get corporations(): Array<ICorporationCard> {
-    return this.corporationCard !== undefined ? [this.corporationCard] : [];
+  public get corporationCard(): ICorporationCard | undefined {
+    if (this.corporations.length > 1) throw new Error('Multiple corporations not supported');
+    return this.corporations[0];
+  }
+
+  public set corporationCard(card: ICorporationCard | undefined) {
+    if (card === undefined) {
+      this.corporations.length = 0;
+    } else if (this.corporations.length > 0) {
+      throw new Error('Multiple corporations not supported');
+    } else {
+      this.corporations.push(card);
+    }
   }
 
   public isCorporation(corporationName: CardName): boolean {
@@ -1899,7 +1911,10 @@ export class Player {
       return;
     }
 
-    const corporationCard = this.corporationCard;
+    if (this.corporations.length > 1) {
+      throw new Error('Not supporting multiple corporations yet.');
+    }
+    const corporationCard = this.corporations[0];
 
     // Terraforming Mars FAQ says:
     //   If for any reason you are not able to perform your mandatory first action (e.g. if
@@ -2110,12 +2125,14 @@ export class Player {
   public serialize(): SerializedPlayer {
     const result: SerializedPlayer = {
       id: this.id,
-      corporationCard: this.corporationCard === undefined ? undefined : {
-        name: this.corporationCard.name,
-        resourceCount: this.corporationCard.resourceCount,
-        allTags: this.corporationCard instanceof Aridor ? Array.from(this.corporationCard.allTags) : [],
-        isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
-      },
+      corporations: this.corporations.map((corporation) => {
+        return {
+          name: corporation.name,
+          resourceCount: corporation.resourceCount,
+          allTags: corporation instanceof Aridor ? Array.from(corporation.allTags) : [],
+          isDisabled: corporation instanceof PharmacyUnion && corporation.isDisabled,
+        };
+      }),
       // Used only during set-up
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
@@ -2250,26 +2267,32 @@ export class Player {
       player.pickedCorporationCard = cardFinder.getCorporationCardByName(d.pickedCorporationCard);
     }
 
-    // Rebuild corporation card
-    if (d.corporationCard !== undefined) {
-      player.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
-      if (player.corporationCard !== undefined) {
-        if (d.corporationCard.resourceCount !== undefined) {
-          player.corporationCard.resourceCount = d.corporationCard.resourceCount;
+    // Rebuild corporation cards
+    let corporations = d.corporations;
+    if (corporations === undefined && d.corporationCard !== undefined) corporations = [d.corporationCard];
+
+    // This shouldn't happen
+    if (corporations !== undefined) {
+      for (const corporation of corporations) {
+        const card = cardFinder.getCorporationCardByName(corporation.name);
+        if (card === undefined) {
+          continue;
         }
-      }
-      if (player.corporationCard instanceof Aridor) {
-        if (d.corporationCard.allTags !== undefined) {
-          player.corporationCard.allTags = new Set(d.corporationCard.allTags);
-        } else {
-          console.warn('did not find allTags for ARIDOR');
+        if (corporation.resourceCount !== undefined) {
+          card.resourceCount = corporation.resourceCount;
         }
+        if (card instanceof Aridor) {
+          if (corporation.allTags !== undefined) {
+            card.allTags = new Set(corporation.allTags);
+          } else {
+            console.warn('did not find allTags for ARIDOR');
+          }
+        }
+        if (card instanceof PharmacyUnion) {
+          card.isDisabled = Boolean(corporation.isDisabled);
+        }
+        player.corporations.push(card);
       }
-      if (player.corporationCard instanceof PharmacyUnion) {
-        player.corporationCard.isDisabled = Boolean(d.corporationCard.isDisabled);
-      }
-    } else {
-      player.corporationCard = undefined;
     }
 
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);

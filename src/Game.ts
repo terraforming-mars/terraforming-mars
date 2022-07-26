@@ -527,7 +527,11 @@ export class Game {
   }
 
   private playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
-    player.corporationCard = corporationCard;
+    if (player.corporations.length === 0) {
+      player.corporations.push(corporationCard);
+    } else {
+      throw new Error('Not supporting multiple corporations yet');
+    }
     player.megaCredits = corporationCard.startingMegaCredits;
     if (corporationCard.cardCost !== undefined) {
       player.cardCost = corporationCard.cardCost;

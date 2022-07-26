@@ -47,6 +47,7 @@ import {MoonModel} from '../common/models/MoonModel';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../common/cards/CardName';
 import {Tags} from '../common/cards/Tags';
+import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -202,10 +203,7 @@ export class Server {
     return awardModels;
   }
 
-  public static getCorporationCard(player: Player): CardModel | undefined {
-    if (player.corporationCard === undefined) return undefined;
-
-    const card = player.corporationCard;
+  private static getCorporationCard(player: Player, card: ICorporationCard): CardModel {
     let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
 
     // Too bad this is hard-coded
@@ -411,7 +409,7 @@ export class Server {
       citiesCount: player.game.getCitiesCount(player),
       coloniesCount: player.getColoniesCount(),
       color: player.color,
-      corporationCard: Server.getCorporationCard(player),
+      corporationCard: player.corporationCard !== undefined ? Server.getCorporationCard(player, player.corporationCard) : undefined,
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       fleetSize: player.getFleetSize(),

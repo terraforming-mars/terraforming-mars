@@ -33,6 +33,7 @@ describe('PharmacyUnion', function() {
   });
 
   it('Should play', function() {
+    player.corporations.length = 0; // Resetting so when setting the corproation it doesn't do anything flaky.
     Game.newInstance('gameid', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);

@@ -17,7 +17,8 @@ import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganism
 describe('Scientists', function() {
   let player: Player;
   let game: Game;
-  let turmoil: Turmoil; let scientists: Scientists;
+  let turmoil: Turmoil;
+  let scientists: Scientists;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

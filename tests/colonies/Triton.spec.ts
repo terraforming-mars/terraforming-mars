@@ -6,7 +6,9 @@ import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Triton', function() {
-  let triton: Triton; let player: Player; let player2: Player;
+  let triton: Triton;
+  let player: Player;
+  let player2: Player;
   let game: Game;
 
   beforeEach(function() {

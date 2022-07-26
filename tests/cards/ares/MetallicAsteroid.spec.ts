@@ -8,7 +8,9 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MetallicAsteroid', function() {
-  let card: MetallicAsteroid; let player: Player; let otherPlayer: Player;
+  let card: MetallicAsteroid;
+  let player: Player;
+  let otherPlayer: Player;
   let game: Game;
 
   beforeEach(function() {

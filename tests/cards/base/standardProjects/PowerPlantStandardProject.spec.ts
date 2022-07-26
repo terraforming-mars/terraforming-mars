@@ -8,7 +8,8 @@ import {StandardTechnology} from '../../../../src/cards/base/StandardTechnology'
 import {Resources} from '../../../../src/common/Resources';
 
 describe('PowerPlantStandardProjects', function() {
-  let card: PowerPlantStandardProject; let player: Player;
+  let card: PowerPlantStandardProject;
+  let player: Player;
   let game: Game;
 
   beforeEach(function() {

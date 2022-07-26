@@ -12,7 +12,8 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('TradingColony', function() {
   let card: TradingColony;
-  let player: Player; let player2: Player;
+  let player: Player;
+  let player2: Player;
   let game: Game;
 
   beforeEach(function() {

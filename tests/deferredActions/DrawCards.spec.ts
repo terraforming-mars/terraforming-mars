@@ -13,7 +13,8 @@ import {Dealer} from '../../src/Dealer';
 import {cast} from '../TestingUtils';
 
 describe('DrawCards', function() {
-  let player: Player; let dealer: Dealer;
+  let player: Player;
+  let dealer: Dealer;
   const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
   beforeEach(function() {

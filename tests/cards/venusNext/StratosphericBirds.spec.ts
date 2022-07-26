@@ -14,7 +14,8 @@ import {EMPTY_HOWTOPAY} from '../../../src/common/inputs/HowToPay';
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
   let player: Player;
-  let game: Game; let deuteriumExport: DeuteriumExport;
+  let game: Game;
+  let deuteriumExport: DeuteriumExport;
 
   beforeEach(() => {
     card = new StratosphericBirds();

@@ -12,7 +12,8 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean} from '../../TestingUtils';
 
 describe('OceanCity', function() {
-  let card: OceanCity; let player: Player;
+  let card: OceanCity;
+  let player: Player;
   let game: Game;
 
   beforeEach(function() {

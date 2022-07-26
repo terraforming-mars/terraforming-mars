@@ -8,7 +8,9 @@ import {TestPlayer} from '../TestPlayer';
 
 describe('Generalist', function() {
   let milestone: Generalist;
-  let player: Player; let player2: Player; let resources: Resources[];
+  let player: Player;
+  let player2: Player;
+  let resources: Resources[];
 
   beforeEach(function() {
     milestone = new Generalist();

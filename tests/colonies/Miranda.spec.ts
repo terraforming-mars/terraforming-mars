@@ -9,7 +9,10 @@ import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 
 describe('Miranda', function() {
-  let miranda: Miranda; let pets: Pets; let player: Player; let player2: Player;
+  let miranda: Miranda;
+  let pets: Pets;
+  let player: Player;
+  let player2: Player;
   let game: Game;
 
   beforeEach(function() {

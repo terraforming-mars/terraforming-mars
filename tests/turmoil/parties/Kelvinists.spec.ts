@@ -15,7 +15,8 @@ import {SelectAmount} from '../../../src/inputs/SelectAmount';
 describe('Kelvinists', function() {
   let player: Player;
   let game: Game;
-  let turmoil: Turmoil; let kelvinists: Kelvinists;
+  let turmoil: Turmoil;
+  let kelvinists: Kelvinists;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

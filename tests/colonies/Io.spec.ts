@@ -7,7 +7,9 @@ import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Io', function() {
-  let io: Io; let player: Player; let player2: Player;
+  let io: Io;
+  let player: Player;
+  let player2: Player;
   let game: Game;
 
   beforeEach(function() {

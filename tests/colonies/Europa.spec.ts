@@ -8,7 +8,9 @@ import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Europa', function() {
-  let europa: Europa; let player: Player; let player2: Player;
+  let europa: Europa;
+  let player: Player;
+  let player2: Player;
   let game: Game;
 
   beforeEach(function() {

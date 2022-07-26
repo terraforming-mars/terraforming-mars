@@ -17,7 +17,8 @@ import {cast, runAllActions} from '../../TestingUtils';
 describe('MonsInsurance', () => {
   let card: MonsInsurance;
   let player: TestPlayer;
-  let player2: TestPlayer; let player3: TestPlayer;
+  let player2: TestPlayer;
+  let player3: TestPlayer;
 
   beforeEach(() => {
     card = new MonsInsurance();

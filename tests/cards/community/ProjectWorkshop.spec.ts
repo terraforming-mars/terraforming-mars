@@ -22,7 +22,8 @@ import {Birds} from '../../../src/cards/base/Birds';
 describe('ProjectWorkshop', function() {
   let card: ProjectWorkshop;
   let player: Player;
-  let game: Game; let advancedAlloys : AdvancedAlloys;
+  let game: Game;
+  let advancedAlloys : AdvancedAlloys;
 
   beforeEach(function() {
     card = new ProjectWorkshop();

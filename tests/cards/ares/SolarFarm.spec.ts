@@ -12,7 +12,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('SolarFarm', function() {
-  let card: SolarFarm; let player: Player;
+  let card: SolarFarm;
+  let player: Player;
   let game: Game;
 
   beforeEach(function() {

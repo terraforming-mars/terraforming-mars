@@ -10,7 +10,8 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
-  let card: Stratopolis; let player: Player;
+  let card: Stratopolis;
+  let player: Player;
 
   beforeEach(function() {
     card = new Stratopolis();

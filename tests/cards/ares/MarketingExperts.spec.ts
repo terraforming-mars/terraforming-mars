@@ -12,7 +12,8 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('MarketingExperts', function() {
   let card: MarketingExperts;
-  let player: Player; let otherPlayer: Player;
+  let player: Player;
+  let otherPlayer: Player;
   let game: Game;
 
   beforeEach(function() {

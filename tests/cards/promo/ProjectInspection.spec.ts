@@ -13,7 +13,8 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('ProjectInspection', function() {
   let card: ProjectInspection;
-  let player: Player; let restrictedArea: RestrictedArea;
+  let player: Player;
+  let restrictedArea: RestrictedArea;
 
   beforeEach(function() {
     card = new ProjectInspection();

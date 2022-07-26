@@ -12,7 +12,8 @@ import {addOcean} from '../../TestingUtils';
 
 describe('OceanFarm', () => {
   let card: OceanFarm;
-  let player: Player; let otherPlayer: Player;
+  let player: Player;
+  let otherPlayer: Player;
   let game: Game;
 
   beforeEach(() => {

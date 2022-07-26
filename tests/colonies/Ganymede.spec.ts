@@ -7,7 +7,9 @@ import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Ganymede', function() {
-  let ganymede: Ganymede; let player: Player; let player2: Player;
+  let ganymede: Ganymede;
+  let player: Player;
+  let player2: Player;
   let game: Game;
 
   beforeEach(function() {

@@ -16,7 +16,8 @@ describe('DiasporaMovement', function() {
   let player: Player;
   let player2: Player;
   let game: Game;
-  let turmoil: Turmoil; let reds: IParty;
+  let turmoil: Turmoil;
+  let reds: IParty;
 
   beforeEach(function() {
     card = new DiasporaMovement();

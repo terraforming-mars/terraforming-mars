@@ -10,7 +10,8 @@ import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 
 describe('ConvertHeat', function() {
-  let card: ConvertHeat; let player: Player;
+  let card: ConvertHeat;
+  let player: Player;
 
   beforeEach(function() {
     card = new ConvertHeat();

@@ -11,7 +11,8 @@ import {TestPlayer} from '../../TestPlayer';
 describe('UrbanizedArea', function() {
   let card: UrbanizedArea;
   let player: Player;
-  let game: Game; let lands: ISpace[];
+  let game: Game;
+  let lands: ISpace[];
 
   beforeEach(function() {
     card = new UrbanizedArea();

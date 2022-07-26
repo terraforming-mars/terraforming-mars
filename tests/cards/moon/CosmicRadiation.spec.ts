@@ -13,7 +13,7 @@ const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 describe('CosmicRadiation', () => {
   let player1: Player;
   let player2: Player;
-  let player3: Player;
+  let player3: TestPlayer;
   let card: CosmicRadiation;
   let moonData: IMoonData;
 

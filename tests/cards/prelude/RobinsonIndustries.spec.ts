@@ -2,20 +2,19 @@ import {expect} from 'chai';
 import {RobinsonIndustries} from '../../../src/cards/prelude/RobinsonIndustries';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('RobinsonIndustries', function() {
   let card: RobinsonIndustries;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new RobinsonIndustries();
     player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Can not act', function() {

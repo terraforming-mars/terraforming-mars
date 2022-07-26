@@ -18,7 +18,7 @@ describe('Ringcom', function() {
     game = newTestGame(2);
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('initialAction', function() {

@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
@@ -15,7 +14,7 @@ import {HabitatMarte} from '../../../src/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganisms';
 
 describe('Scientists', function() {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let scientists: Scientists;
@@ -37,7 +36,7 @@ describe('Scientists', function() {
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each Science tag you have, with Habitat Marte', function() {
-    player.corporationCard = new HabitatMarte();
+    player.setCorporationForTest(new HabitatMarte());
     player.playedCards.push(new SearchForLife(), new DesignedOrganisms());
 
     const bonus = SCIENTISTS_BONUS_1;

@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {Leavitt} from '../../../src/cards/community/Leavitt';
 import {Vitor} from '../../../src/cards/prelude/Vitor';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Leavitt', function() {
   let leavitt: Leavitt;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -50,7 +49,7 @@ describe('Leavitt', function() {
     // This test verifies that a regression doesn't reoccur.
     // Merely completing these is sufficient because
     // it doesn't throw an Error.
-    player.corporationCard = new Vitor();
+    player.setCorporationForTest(new Vitor());
     expect(player.getTagCount(Tags.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
     expect(player.getTagCount(Tags.SCIENCE)).to.eq(1);

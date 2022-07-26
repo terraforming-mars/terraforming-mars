@@ -2,15 +2,14 @@ import {expect} from 'chai';
 import {ImmigrantCity} from '../../../src/cards/base/ImmigrantCity';
 import {TharsisRepublic} from '../../../src/cards/corporation/TharsisRepublic';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImmigrantCity', function() {
   let card: ImmigrantCity;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -59,7 +58,7 @@ describe('ImmigrantCity', function() {
   });
 
   it('Tharsis can play at -5 M€ production', function() {
-    player.corporationCard = new TharsisRepublic();
+    player.setCorporationForTest(new TharsisRepublic());
     player.addProduction(Resources.ENERGY, 1);
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.true;

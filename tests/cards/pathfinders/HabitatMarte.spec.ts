@@ -21,26 +21,26 @@ describe('HabitatMarte', () => {
   });
 
   it('tag count', () => {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(player.getTagCount(Tags.SCIENCE, 'raw')).eq(0);
     expect(player.getTagCount(Tags.SCIENCE)).eq(1);
   });
 
   it('card cost', () => {
     player.playedCards.push(new ValleyTrust()); // -2 per science tag (This is hilarious because Valley Trust is actually a corp card.)
-    player.corporationCard = undefined;
+    player.setCorporationForTest(undefined);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS]}))).eq(10);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.SCIENCE]}))).eq(8);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS, Tags.MARS]}))).eq(10);
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS]}))).eq(8);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.SCIENCE]}))).eq(8);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS, Tags.MARS]}))).eq(6);
   });
 
   it('card requirements', () => {
-    player.corporationCard = undefined;
+    player.setCorporationForTest(undefined);
     const fourScienceTags = fakeCard({tags: [Tags.SCIENCE, Tags.SCIENCE, Tags.SCIENCE, Tags.SCIENCE]});
     const oneMarsTag = fakeCard({tags: [Tags.MARS]});
     const fiveMarsTags = fakeCard({tags: [Tags.MARS, Tags.MARS, Tags.MARS, Tags.MARS, Tags.MARS]});
@@ -56,14 +56,14 @@ describe('HabitatMarte', () => {
 
     expect(player.canPlay(interstellar)).is.false;
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(player.canPlay(interstellar)).is.true;
 
     player.playedCards = [fiveMarsTags];
 
     expect(player.canPlay(interstellar)).is.true;
 
-    player.corporationCard = undefined;
+    player.setCorporationForTest(undefined);
 
     expect(player.canPlay(interstellar)).is.false;
   });
@@ -80,7 +80,7 @@ describe('HabitatMarte', () => {
     expect(player.getWaitingFor()).is.undefined;
     expect(olympusConference.resourceCount).eq(0);
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     olympusConference.onCardPlayed(player, marsCard);
     runAllActions(game);
     expect(player.getWaitingFor()).is.undefined;

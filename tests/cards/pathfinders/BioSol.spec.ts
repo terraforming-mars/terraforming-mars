@@ -1,21 +1,21 @@
 import {expect} from 'chai';
 import {BioSol} from '../../../src/cards/pathfinders/BioSol';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {Tags} from '../../../src/common/cards/Tags';
 import {runAllActions} from '../../TestingUtils';
 
 describe('BioSol', function() {
   let card: BioSol;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new BioSol();
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('initialAction', function() {

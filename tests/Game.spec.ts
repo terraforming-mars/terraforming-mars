@@ -455,7 +455,7 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gto', [player], player);
     const card = new SaturnSystems();
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(game.getCardPlayer(card.name)).to.eq(player);
   });
 
@@ -518,7 +518,7 @@ describe('Game', () => {
     const secondPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
     const game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
-    player.corporationCard = new Helion();
+    player.setCorporationForTest(new Helion());
     player.canUseHeatAsMegaCredits = true;
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.

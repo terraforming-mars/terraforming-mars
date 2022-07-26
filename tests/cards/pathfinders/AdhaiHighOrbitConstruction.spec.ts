@@ -23,7 +23,7 @@ describe('AdhaiHighOrbitConstructions', function() {
     card = new AdhaiHighOrbitConstructions();
     game = newTestGame(1, {coloniesExtension: true});
     player = getTestPlayer(game, 0);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('onCardPlayed', function() {

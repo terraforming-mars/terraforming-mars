@@ -1,4 +1,5 @@
-import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
+import {PlayerInput} from '../../PlayerInput';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -55,7 +56,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       return undefined;
     }
 
-    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+    const opts: Array<PlayerInput> = [];
 
     const spendResource = new SelectOption('Remove 2 microbes to raise Venus 1 step', 'Remove microbes', () => {
       player.removeResourceFrom(this, 2);

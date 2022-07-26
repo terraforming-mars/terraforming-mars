@@ -7,7 +7,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryCinematics', function() {
-  let card : InterplanetaryCinematics; let player : Player;
+  let card: InterplanetaryCinematics;
+  let player: Player;
 
   beforeEach(function() {
     card = new InterplanetaryCinematics();

@@ -7,7 +7,9 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianRails', () => {
-  let card : MartianRails; let player : Player; let game : Game;
+  let card: MartianRails;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new MartianRails();

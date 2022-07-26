@@ -10,7 +10,11 @@ import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Banned Delegate', function() {
-  let card : BannedDelegate; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let card: BannedDelegate;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new BannedDelegate();

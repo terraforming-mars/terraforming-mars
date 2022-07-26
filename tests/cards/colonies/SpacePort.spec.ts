@@ -9,7 +9,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('SpacePort', function() {
-  let card : SpacePort; let player : Player;
+  let card: SpacePort;
+  let player: Player;
 
   beforeEach(function() {
     card = new SpacePort();

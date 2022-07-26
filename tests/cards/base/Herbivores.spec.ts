@@ -8,7 +8,9 @@ import {runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Herbivores', () => {
-  let card : Herbivores; let player : Player; let player2: Player; let game: Game;
+  let card: Herbivores;
+  let player: Player; let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new Herbivores();

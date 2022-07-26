@@ -9,7 +9,8 @@ import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 
 describe('Titan', function() {
-  let titan: Titan; let aerialMappers: AerialMappers; let player: Player; let player2: Player; let game: Game;
+  let titan: Titan; let aerialMappers: AerialMappers; let player: Player; let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     titan = new Titan();

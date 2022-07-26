@@ -6,7 +6,8 @@ import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 
 describe('GreatDam', () => {
-  let card : GreatDam; let player : TestPlayer;
+  let card: GreatDam;
+  let player: TestPlayer;
 
   beforeEach(() => {
     card = new GreatDam();

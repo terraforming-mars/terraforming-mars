@@ -16,7 +16,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
 describe('Playwrights', () => {
-  let card : Playwrights; let player : Player; let player2: Player; let game : Game;
+  let card: Playwrights;
+  let player: Player; let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new Playwrights();

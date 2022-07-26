@@ -9,7 +9,9 @@ import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MiningArea', function() {
-  let card : MiningArea; let player : TestPlayer; let game : Game;
+  let card: MiningArea;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new MiningArea();

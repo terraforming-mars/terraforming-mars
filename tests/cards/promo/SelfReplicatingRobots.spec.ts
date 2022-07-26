@@ -11,7 +11,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SelfReplicatingRobots', function() {
-  let card : SelfReplicatingRobots; let player : Player;
+  let card: SelfReplicatingRobots;
+  let player: Player;
 
   beforeEach(function() {
     card = new SelfReplicatingRobots();

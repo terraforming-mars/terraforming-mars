@@ -7,7 +7,10 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Fish', function() {
-  let card : Fish; let player : Player; let player2 : Player; let game : Game;
+  let card: Fish;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Fish();

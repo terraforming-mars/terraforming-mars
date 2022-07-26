@@ -18,10 +18,10 @@ import {LandClaim} from '../../src/cards/base/LandClaim';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 
 describe('ArabiaTerraBoard', function() {
-  let board : ArabiaTerraBoard;
+  let board: ArabiaTerraBoard;
   let game: Game;
-  let player : Player;
-  let player2 : Player;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
     board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));

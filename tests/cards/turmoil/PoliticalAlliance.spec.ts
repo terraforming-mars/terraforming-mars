@@ -8,7 +8,10 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalAlliance', function() {
-  let card : PoliticalAlliance; let player : Player; let game : Game; let turmoil: Turmoil;
+  let card: PoliticalAlliance;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new PoliticalAlliance();

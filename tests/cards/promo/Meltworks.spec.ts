@@ -4,7 +4,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Meltworks', function() {
-  let card : Meltworks; let player : Player;
+  let card: Meltworks;
+  let player: Player;
 
   beforeEach(function() {
     card = new Meltworks();

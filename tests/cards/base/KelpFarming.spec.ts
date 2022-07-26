@@ -6,7 +6,8 @@ import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 
 describe('KelpFarming', function() {
-  let card : KelpFarming; let player : TestPlayer;
+  let card: KelpFarming;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new KelpFarming();

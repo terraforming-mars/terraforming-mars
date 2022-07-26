@@ -12,7 +12,9 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Unity', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil; let unity: Unity;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil; let unity: Unity;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

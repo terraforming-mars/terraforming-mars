@@ -12,7 +12,9 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('UrbanDecomposers', function() {
-  let card : UrbanDecomposers; let player : Player; let game : Game;
+  let card: UrbanDecomposers;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new UrbanDecomposers();

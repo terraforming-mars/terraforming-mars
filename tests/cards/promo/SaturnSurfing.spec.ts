@@ -7,7 +7,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SaturnSurfing', function() {
-  let card : SaturnSurfing; let player : Player;
+  let card: SaturnSurfing;
+  let player: Player;
 
   beforeEach(function() {
     card = new SaturnSurfing();

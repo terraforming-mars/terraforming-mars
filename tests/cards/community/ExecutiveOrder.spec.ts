@@ -10,7 +10,9 @@ import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDe
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('ExecutiveOrder', function() {
-  let card : ExecutiveOrder; let player : Player; let game : Game;
+  let card: ExecutiveOrder;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new ExecutiveOrder();

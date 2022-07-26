@@ -16,10 +16,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('EcologicalSurvey', () => {
-  let card : EcologicalSurvey;
-  let player : Player;
+  let card: EcologicalSurvey;
+  let player: Player;
   let redPlayer : Player;
-  let game : Game;
+  let game: Game;
 
   beforeEach(() => {
     card = new EcologicalSurvey();

@@ -8,7 +8,8 @@ import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';
 
 describe('CorporateStronghold', function() {
-  let card : CorporateStronghold; let player : TestPlayer;
+  let card: CorporateStronghold;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CorporateStronghold();

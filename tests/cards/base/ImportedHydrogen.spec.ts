@@ -12,7 +12,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImportedHydrogen', function() {
-  let card : ImportedHydrogen; let player : Player;
+  let card: ImportedHydrogen;
+  let player: Player;
 
   beforeEach(function() {
     card = new ImportedHydrogen();

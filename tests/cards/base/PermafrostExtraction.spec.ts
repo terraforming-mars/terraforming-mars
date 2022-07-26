@@ -7,7 +7,9 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('PermafrostExtraction', function() {
-  let card : PermafrostExtraction; let player : Player; let game : Game;
+  let card: PermafrostExtraction;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new PermafrostExtraction();

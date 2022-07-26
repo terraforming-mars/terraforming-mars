@@ -5,7 +5,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('TectonicStressPower', function() {
-  let card : TectonicStressPower; let player : TestPlayer;
+  let card: TectonicStressPower;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new TectonicStressPower();

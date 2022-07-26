@@ -17,7 +17,9 @@ import {CardResource} from '../../../src/common/CardResource';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('MaxwellBase', function() {
-  let card : MaxwellBase; let player : Player; let game : Game;
+  let card: MaxwellBase;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MaxwellBase();

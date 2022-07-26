@@ -14,7 +14,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 
 describe('Philares', () => {
-  let card : Philares;
+  let card: Philares;
   let philaresPlayer : TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;

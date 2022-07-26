@@ -11,7 +11,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('MiningRightsAres', function() {
-  let card : MiningRightsAres; let player : Player; let game : Game;
+  let card: MiningRightsAres;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new MiningRightsAres();

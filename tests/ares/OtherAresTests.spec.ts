@@ -9,9 +9,9 @@ import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
 import {addOcean} from '../TestingUtils';
 
 describe('OtherAresTests', function() {
-  let player : Player;
+  let player: Player;
   let otherPlayer: Player;
-  let game : Game;
+  let game: Game;
 
   it('Desert settler counts upgraded oceans', function() {
     player = TestPlayer.BLUE.newPlayer();

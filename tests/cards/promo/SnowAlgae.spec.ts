@@ -7,7 +7,8 @@ import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SnowAlgae', function() {
-  let card : SnowAlgae; let player : Player;
+  let card: SnowAlgae;
+  let player: Player;
 
   beforeEach(function() {
     card = new SnowAlgae();

@@ -10,7 +10,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LocalHeatTrapping', () => {
-  let card : LocalHeatTrapping; let player : Player;
+  let card: LocalHeatTrapping;
+  let player: Player;
 
   beforeEach(() => {
     card = new LocalHeatTrapping();

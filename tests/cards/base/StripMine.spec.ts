@@ -11,7 +11,10 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('StripMine', function() {
-  let card : StripMine; let player : Player; let game : Game; let turmoil: Turmoil;
+  let card: StripMine;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new StripMine();

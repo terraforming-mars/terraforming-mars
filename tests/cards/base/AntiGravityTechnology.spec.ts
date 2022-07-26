@@ -3,7 +3,8 @@ import {AntiGravityTechnology} from '../../../src/cards/base/AntiGravityTechnolo
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AntiGravityTechnology', function() {
-  let card : AntiGravityTechnology; let player : TestPlayer;
+  let card: AntiGravityTechnology;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AntiGravityTechnology();

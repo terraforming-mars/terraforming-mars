@@ -10,7 +10,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerialMappers', function() {
-  let card : AerialMappers; let player : Player;
+  let card: AerialMappers;
+  let player: Player;
 
   beforeEach(function() {
     card = new AerialMappers();

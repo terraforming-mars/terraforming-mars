@@ -14,7 +14,9 @@ import {Units} from '../../../src/common/Units';
 import {Resources} from '../../../src/common/Resources';
 
 describe('MiningRights', () => {
-  let card : MiningRights; let player : TestPlayer; let game : Game;
+  let card: MiningRights;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new MiningRights();

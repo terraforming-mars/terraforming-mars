@@ -7,7 +7,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MagneticFieldGeneratorsPromo', function() {
-  let card : MagneticFieldGeneratorsPromo; let player : Player;
+  let card: MagneticFieldGeneratorsPromo;
+  let player: Player;
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsPromo();

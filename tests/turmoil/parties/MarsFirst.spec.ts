@@ -9,7 +9,9 @@ import {Mine} from '../../../src/cards/base/Mine';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MarsFirst', function() {
-  let player : Player; let game : Game; let turmoil: Turmoil; let marsFirst: MarsFirst;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil; let marsFirst: MarsFirst;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

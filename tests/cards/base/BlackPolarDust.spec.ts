@@ -8,7 +8,9 @@ import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 
 describe('BlackPolarDust', function() {
-  let card : BlackPolarDust; let player : Player; let game : Game;
+  let card: BlackPolarDust;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new BlackPolarDust();

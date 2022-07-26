@@ -5,7 +5,8 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GHGFactories', function() {
-  let card : GHGFactories; let player : Player;
+  let card: GHGFactories;
+  let player: Player;
 
   beforeEach(function() {
     card = new GHGFactories();

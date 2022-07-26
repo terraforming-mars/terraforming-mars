@@ -10,7 +10,8 @@ import {Player} from '../../src/Player';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Electrician', () => {
-  let milestone : Electrician; let player : Player;
+  let milestone: Electrician;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Electrician();

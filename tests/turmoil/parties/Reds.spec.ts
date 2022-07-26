@@ -9,7 +9,9 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('Reds', function() {
-  let player : TestPlayer; let secondPlayer : TestPlayer; let game : Game; let turmoil: Turmoil; let reds: Reds;
+  let player: TestPlayer; let secondPlayer : TestPlayer;
+  let game: Game;
+  let turmoil: Turmoil; let reds: Reds;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

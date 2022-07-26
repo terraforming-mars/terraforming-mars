@@ -28,7 +28,8 @@ import {Birds} from '../../src/cards/base/Birds';
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
 describe('AresHandler', function() {
-  let player : Player; let otherPlayer: Player; let game : Game;
+  let player: Player; let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

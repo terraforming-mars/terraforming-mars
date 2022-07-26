@@ -12,7 +12,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
-  let card : AsteroidRights; let player : Player;
+  let card: AsteroidRights;
+  let player: Player;
 
   beforeEach(function() {
     card = new AsteroidRights();

@@ -11,7 +11,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('Ants', function() {
-  let card : Ants; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+  let card: Ants;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Ants();

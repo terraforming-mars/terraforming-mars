@@ -9,7 +9,9 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusSoils', function() {
-  let card : VenusSoils; let player : Player; let game : Game;
+  let card: VenusSoils;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new VenusSoils();

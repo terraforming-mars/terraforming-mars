@@ -11,7 +11,9 @@ import {resetBoard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LavaTubeSettlement', function() {
-  let card : LavaTubeSettlement; let player : Player; let game : Game;
+  let card: LavaTubeSettlement;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new LavaTubeSettlement();

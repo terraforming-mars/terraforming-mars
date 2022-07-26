@@ -9,7 +9,9 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Incite', function() {
-  let card : Incite; let player : Player; let game : Game;
+  let card: Incite;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Incite();

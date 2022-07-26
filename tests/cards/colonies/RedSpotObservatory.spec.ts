@@ -7,7 +7,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RedSpotObservatory', function() {
-  let card : RedSpotObservatory; let player : Player;
+  let card: RedSpotObservatory;
+  let player: Player;
 
   beforeEach(function() {
     card = new RedSpotObservatory();

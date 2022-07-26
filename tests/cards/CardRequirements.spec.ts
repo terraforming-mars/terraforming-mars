@@ -16,7 +16,8 @@ import {OrOptions} from '../../src/inputs/OrOptions';
 import {TestPlayer} from '../TestPlayer';
 
 describe('CardRequirements', function() {
-  let player: TestPlayer; let player2: TestPlayer;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {

@@ -11,7 +11,11 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Cultural Metropolis', function() {
-  let card : CulturalMetropolis; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let card: CulturalMetropolis;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new CulturalMetropolis();

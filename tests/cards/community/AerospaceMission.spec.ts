@@ -13,7 +13,9 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerospaceMission', function() {
-  let card : AerospaceMission; let player : Player; let game : Game;
+  let card: AerospaceMission;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new AerospaceMission();

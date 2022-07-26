@@ -8,7 +8,9 @@ import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';
 
 describe('DomedCrater', function() {
-  let card : DomedCrater; let player : TestPlayer; let game : Game;
+  let card: DomedCrater;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new DomedCrater();

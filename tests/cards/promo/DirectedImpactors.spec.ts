@@ -12,7 +12,9 @@ import {cast} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('DirectedImpactors', function() {
-  let card : DirectedImpactors; let player : Player; let game : Game;
+  let card: DirectedImpactors;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new DirectedImpactors();

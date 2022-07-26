@@ -10,8 +10,8 @@ import {setCustomGameOptions} from '../TestingUtils';
 import {AntiGravityTechnology} from '../../src/cards/base/AntiGravityTechnology';
 
 describe('Diversifier', function() {
-  let milestone : Diversifier;
-  let player : Player;
+  let milestone: Diversifier;
+  let player: Player;
 
   beforeEach(() => {
     milestone = new Diversifier();

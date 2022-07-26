@@ -7,7 +7,8 @@ import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('QuantumExtractor', function() {
-  let card : QuantumExtractor; let player : Player;
+  let card: QuantumExtractor;
+  let player: Player;
 
   beforeEach(function() {
     card = new QuantumExtractor();

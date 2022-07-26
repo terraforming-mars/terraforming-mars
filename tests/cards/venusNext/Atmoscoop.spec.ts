@@ -15,7 +15,9 @@ import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Atmoscoop', function() {
-  let card : Atmoscoop; let player : Player; let game : Game; let dirigibles: Dirigibles; let floatingHabs: FloatingHabs;
+  let card: Atmoscoop;
+  let player: Player;
+  let game: Game; let dirigibles: Dirigibles; let floatingHabs: FloatingHabs;
 
   beforeEach(function() {
     card = new Atmoscoop();

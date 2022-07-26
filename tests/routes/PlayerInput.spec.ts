@@ -32,7 +32,7 @@ describe('PlayerInput', function() {
     scaffolding.url = '/player/input?id=' + player.id;
     const game = Game.newInstance('gameid-foo', [player], player);
 
-    const undoVersionOfPlayer = TestPlayers.BLUE.newPlayer(/* beginner= */ true);
+    const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer(/* beginner= */ true);
     const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
 
     await scaffolding.ctx.gameLoader.add(game);
@@ -59,7 +59,7 @@ describe('PlayerInput', function() {
     scaffolding.url = '/player/input?id=' + player.id;
     const game = Game.newInstance('gameid-foo', [player], player);
 
-    const undoVersionOfPlayer = TestPlayers.BLUE.newPlayer(/* beginner= */ true);
+    const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer(/* beginner= */ true);
     const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer);
 
     await scaffolding.ctx.gameLoader.add(game);

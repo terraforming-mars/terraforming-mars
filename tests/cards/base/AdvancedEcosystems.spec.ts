@@ -5,14 +5,13 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {TundraFarming} from '../../../src/cards/base/TundraFarming';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('AdvancedEcosystems', function() {
   let card : AdvancedEcosystems; let player : TestPlayer;
 
   beforeEach(function() {
     card = new AdvancedEcosystems();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     player.playedCards.push(new TundraFarming(), new ResearchNetwork());
   });
 

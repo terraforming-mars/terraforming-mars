@@ -6,14 +6,14 @@ import {OrbitalCleanup} from '../../../src/cards/promo/OrbitalCleanup';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('OrbitalCleanup', function() {
   let card : OrbitalCleanup; let player : Player;
 
   beforeEach(function() {
     card = new OrbitalCleanup();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

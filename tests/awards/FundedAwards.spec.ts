@@ -3,12 +3,12 @@ import {deserializeFundedAwards, serializeFundedAwards} from '../../src/awards/F
 import {FundedAward} from '../../src/awards/FundedAward';
 import {Cultivator} from '../../src/awards/Cultivator';
 import {Industrialist} from '../../src/awards/Industrialist';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('FundedAwards', function() {
   it('test serialization', () => {
-    const bluePlayer = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const bluePlayer = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const FundedAwards: Array<FundedAward> = [
       {
         award: new Cultivator(),

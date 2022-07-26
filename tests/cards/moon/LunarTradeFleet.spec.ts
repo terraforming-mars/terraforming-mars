@@ -1,8 +1,7 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {LunarTradeFleet} from '../../../src/cards/moon/LunarTradeFleet';
-import {expect} from 'chai';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
@@ -15,7 +14,7 @@ describe('LunarTradeFleet', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunarTradeFleet();
     moonData = MoonExpansion.moonData(game);

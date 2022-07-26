@@ -7,7 +7,6 @@ import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', () => {
@@ -15,8 +14,8 @@ describe('Capital', () => {
 
   beforeEach(() => {
     card = new Capital();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

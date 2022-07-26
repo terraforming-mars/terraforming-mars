@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {EarlyExpedition} from '../../../src/cards/pathfinders/EarlyExpedition';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Units} from '../../../src/common/Units';
 import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -15,7 +14,7 @@ describe('EarlyExpedition', function() {
 
   beforeEach(function() {
     card = new EarlyExpedition();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });

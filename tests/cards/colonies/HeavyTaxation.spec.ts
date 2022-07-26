@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {HeavyTaxation} from '../../../src/cards/colonies/HeavyTaxation';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('HeavyTaxation', function() {
   it('Should play', function() {
     const card = new HeavyTaxation();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;

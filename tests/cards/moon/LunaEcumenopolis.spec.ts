@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunaEcumenopolis} from '../../../src/cards/moon/LunaEcumenopolis';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
@@ -19,7 +19,7 @@ describe('LunaEcumenopolis', () => {
   let card: LunaEcumenopolis;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new LunaEcumenopolis();
@@ -131,7 +131,7 @@ describe('LunaEcumenopolis', () => {
 
 
   // it('canPlay when Reds are in power', () => {
-  //   const player = TestPlayers.BLUE.newPlayer();
+  //   const player = TestPlayer.BLUE.newPlayer();
   //   const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
   //   const moonData = MoonExpansion.moonData(game);
   //   game.phase = Phase.ACTION;

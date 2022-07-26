@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {Loan} from '../../../src/cards/prelude/Loan';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Loan', function() {
   let card : Loan; let player : Player;
 
   beforeEach(function() {
     card = new Loan();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play', function() {

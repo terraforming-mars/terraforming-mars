@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ApiPlayer} from '../../src/routes/ApiPlayer';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {PlayerViewModel} from '../../src/common/models/PlayerModel';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
@@ -34,7 +34,7 @@ describe('ApiPlayer', function() {
   });
 
   it('pulls player', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     scaffolding.url = '/api/player?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
     await scaffolding.ctx.gameLoader.add(game);

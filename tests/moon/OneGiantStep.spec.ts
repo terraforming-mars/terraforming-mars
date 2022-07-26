@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import {CoreMine} from '../../src/cards/moon/CoreMine';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
 import {OneGiantStep} from '../../src/moon/OneGiantStep';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('OneGiantStep', () => {
   it('Standard test', () => {
     const milestone = new OneGiantStep();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     expect(milestone.canClaim(player)).is.not.true;
     player.playedCards = [
       new CoreMine(),
@@ -30,7 +30,7 @@ describe('OneGiantStep', () => {
 
   it('Wild tag counts', () => {
     const milestone = new OneGiantStep();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     player.playedCards = [
       new CoreMine(),
       new CoreMine(),

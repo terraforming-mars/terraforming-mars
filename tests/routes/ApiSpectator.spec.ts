@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ApiSpectator} from '../../src/routes/ApiSpectator';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {SpectatorModel} from '../../src/common/models/SpectatorModel';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
@@ -22,7 +22,7 @@ describe('ApiSpectator', function() {
   });
 
   it('fails invalid id', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     const game = Game.newInstance('game-id', [player], player, undefined, undefined, 'spectator-id');
     scaffolding.url = '/api/spectator?id=' + player.id;
     scaffolding.ctx.gameLoader.add(game);
@@ -31,7 +31,7 @@ describe('ApiSpectator', function() {
   });
 
   it('pulls spectator', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     const game = Game.newInstance('game-id', [player], player, undefined, undefined, 'spectator-id');
     scaffolding.url = '/api/spectator?id=' + game.spectatorId;
     scaffolding.ctx.gameLoader.add(game);

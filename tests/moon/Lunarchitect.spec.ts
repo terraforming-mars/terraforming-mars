@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Lunarchitect} from '../../src/moon/Lunarchitect';
-import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
@@ -14,8 +13,8 @@ describe('Lunarchitect', function() {
   let otherPlayer: TestPlayer;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.PINK.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.PINK.newPlayer();
     Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
   });
 

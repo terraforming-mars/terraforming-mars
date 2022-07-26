@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {RoverConstruction} from '../../../src/cards/base/RoverConstruction';
 import {Game} from '../../../src/Game';
 import {runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RoverConstruction', function() {
   it('Should play', function() {
     const card = new RoverConstruction();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
     const action = card.play();
     expect(action).is.undefined;

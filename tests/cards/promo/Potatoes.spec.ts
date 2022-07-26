@@ -3,14 +3,14 @@ import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/cards/promo/Potatoes';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Potatoes', function() {
   let card : Potatoes; let player : Player;
 
   beforeEach(function() {
     card = new Potatoes();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play', function() {

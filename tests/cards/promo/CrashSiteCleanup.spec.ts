@@ -5,15 +5,15 @@ import {SmallAsteroid} from '../../../src/cards/promo/SmallAsteroid';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CrashSiteCleanup', function() {
   let card : CrashSiteCleanup; let player : Player;
 
   beforeEach(function() {
     card = new CrashSiteCleanup();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 
@@ -22,7 +22,7 @@ describe('CrashSiteCleanup', function() {
   });
 
   it('Can play if removed plants from another player this generation', function() {
-    const player2 = TestPlayers.RED.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     player2.plants = 1;
 

@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {PowerGrid} from '../../../src/cards/base/PowerGrid';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 
 describe('PowerGrid', function() {
   it('Should play', function() {
     const card = new PowerGrid();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
     player.game = game;
     const action = card.play(player);

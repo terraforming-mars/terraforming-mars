@@ -7,15 +7,15 @@ import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
 import {setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CuriosityII', function() {
   let card : CuriosityII; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new CuriosityII();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({aresExtension: true, aresHazards: false}));
     game.phase = Phase.ACTION;
 

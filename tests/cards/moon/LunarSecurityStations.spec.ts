@@ -8,7 +8,7 @@ import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -21,9 +21,9 @@ describe('LunarSecurityStations', () => {
   let card: LunarSecurityStations;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    opponent1 = TestPlayers.RED.newPlayer();
-    opponent2 = TestPlayers.GREEN.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    opponent1 = TestPlayer.RED.newPlayer();
+    opponent2 = TestPlayer.GREEN.newPlayer();
     game = Game.newInstance('gameid', [player, opponent1, opponent2], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new LunarSecurityStations();

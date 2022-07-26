@@ -3,15 +3,14 @@ import {Windmills} from '../../../src/cards/base/Windmills';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Windmills', function() {
   let card : Windmills; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new Windmills();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
 import {runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Pets', function() {
   it('Should play', function() {
     const card = new Pets();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     player.playedCards.push(card);
     const game = Game.newInstance('gameid', [player, player2], player);
     const action = card.play(player);

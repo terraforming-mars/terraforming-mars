@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {MoonRoadStandardProject} from '../../../src/cards/moon/MoonRoadStandardProject';
 import {expect} from 'chai';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
@@ -20,7 +20,7 @@ describe('MoonRoadStandardProject', () => {
   let card: MoonRoadStandardProject;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new MoonRoadStandardProject();
@@ -73,7 +73,7 @@ describe('MoonRoadStandardProject', () => {
 
 
   it('can act when Reds are in power.', () => {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;

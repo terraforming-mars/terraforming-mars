@@ -7,7 +7,7 @@ import {HowToPay} from '../../../src/common/inputs/HowToPay';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 
@@ -16,8 +16,8 @@ describe('DirectedImpactors', function() {
 
   beforeEach(function() {
     card = new DirectedImpactors();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

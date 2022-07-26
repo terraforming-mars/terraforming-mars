@@ -9,14 +9,14 @@ import {ICard} from '../../../src/cards/ICard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ProjectInspection', function() {
   let card : ProjectInspection; let player : Player; let restrictedArea: RestrictedArea;
 
   beforeEach(function() {
     card = new ProjectInspection();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     restrictedArea = new RestrictedArea();
   });

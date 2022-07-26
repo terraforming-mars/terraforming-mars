@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {SphereHabitats} from '../../../src/cards/moon/SphereHabitats';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
@@ -14,7 +14,7 @@ describe('SphereHabitats', () => {
   let card: SphereHabitats;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new SphereHabitats();
   });

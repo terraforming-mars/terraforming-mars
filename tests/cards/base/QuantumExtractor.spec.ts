@@ -4,15 +4,15 @@ import {QuantumExtractor} from '../../../src/cards/base/QuantumExtractor';
 import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('QuantumExtractor', function() {
   let card : QuantumExtractor; let player : Player;
 
   beforeEach(function() {
     card = new QuantumExtractor();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

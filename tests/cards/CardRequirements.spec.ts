@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/cards/CardRequirements';
 import {setCustomGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/common/TileType';
@@ -21,8 +20,8 @@ describe('CardRequirements', function() {
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
 
     Game.newInstance('gameid', [player, player2], player, gameOptions);

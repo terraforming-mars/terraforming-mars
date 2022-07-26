@@ -3,7 +3,7 @@ import {BlackPolarDust} from '../../../src/cards/base/BlackPolarDust';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {maxOutOceans} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 
@@ -12,8 +12,8 @@ describe('BlackPolarDust', function() {
 
   beforeEach(function() {
     card = new BlackPolarDust();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

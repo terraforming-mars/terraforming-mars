@@ -1,9 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {Habitat14} from '../../../src/cards/moon/Habitat14';
-import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
 
@@ -14,7 +13,7 @@ describe('Habitat14', () => {
   let card: Habitat14;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new Habitat14();
   });

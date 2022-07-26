@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/cards/colonies/RefugeeCamps';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RefugeeCamps', function() {
   let card : RefugeeCamps; let player : Player;
 
   beforeEach(function() {
     card = new RefugeeCamps();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Should play', function() {

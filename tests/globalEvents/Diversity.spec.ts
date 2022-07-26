@@ -7,13 +7,13 @@ import {Resources} from '../../src/common/Resources';
 import {Diversity} from '../../src/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Diversity', function() {
   it('resolve play', function() {
     const card = new Diversity();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);

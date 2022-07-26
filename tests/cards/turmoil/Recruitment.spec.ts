@@ -3,12 +3,12 @@ import {Recruitment} from '../../../src/cards/turmoil/Recruitment';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Recruitment', function() {
   it('Should play', function() {
     const card = new Recruitment();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('gameid', [player], player, gameOptions);

@@ -4,12 +4,12 @@ import {Game} from '../../src/Game';
 import {CloudSocieties} from '../../src/turmoil/globalEvents/CloudSocieties';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('CloudSocieties', function() {
   it('resolve play', function() {
     const card = new CloudSocieties();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player);
     const turmoil = Turmoil.newInstance(game);
     player.playedCards.push(new FloatingHabs());

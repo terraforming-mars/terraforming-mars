@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ApiGames} from '../../src/routes/ApiGames';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 
@@ -29,7 +29,7 @@ describe('ApiGames', function() {
   });
 
   it('a game', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     await scaffolding.ctx.gameLoader.add(Game.newInstance('game-id', [player], player));
     await ApiGames.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
     // Player ids aren't exactly available in the fake game loader.

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {SupplyDrop} from '../../../src/cards/prelude/SupplyDrop';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SupplyDrop', function() {
   it('Should play', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const card = new SupplyDrop();
     const action = card.play(player);
     expect(action).is.undefined;

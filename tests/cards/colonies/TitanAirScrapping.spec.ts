@@ -4,15 +4,15 @@ import {TitanAirScrapping} from '../../../src/cards/colonies/TitanAirScrapping';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('TitanAirScrapping', function() {
   let card : TitanAirScrapping; let player : Player;
 
   beforeEach(function() {
     card = new TitanAirScrapping();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

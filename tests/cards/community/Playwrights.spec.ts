@@ -12,7 +12,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
 describe('Playwrights', () => {
@@ -20,8 +20,8 @@ describe('Playwrights', () => {
 
   beforeEach(() => {
     card = new Playwrights();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
 
     card.play(player);

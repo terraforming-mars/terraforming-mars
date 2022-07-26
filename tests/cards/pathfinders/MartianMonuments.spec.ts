@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {MartianMonuments} from '../../../src/cards/pathfinders/MartianMonuments';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {addCity} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
@@ -15,8 +14,8 @@ describe('MartianMonuments', function() {
 
   beforeEach(function() {
     card = new MartianMonuments();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
   });
 

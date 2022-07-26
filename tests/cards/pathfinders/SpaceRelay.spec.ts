@@ -5,7 +5,6 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('SpaceRelay', function() {
   let card: SpaceRelay;
@@ -13,7 +12,7 @@ describe('SpaceRelay', function() {
 
   beforeEach(function() {
     card = new SpaceRelay();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });

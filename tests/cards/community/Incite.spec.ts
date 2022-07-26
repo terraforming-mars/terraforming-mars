@@ -6,14 +6,14 @@ import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDe
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Incite', function() {
   let card : Incite; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new Incite();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player], player, gameOptions);

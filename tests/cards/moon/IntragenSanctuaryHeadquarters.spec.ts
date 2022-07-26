@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {IntragenSanctuaryHeadquarters} from '../../../src/cards/moon/IntragenSanctuaryHeadquarters';
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
@@ -15,8 +15,8 @@ describe('IntragenSanctuaryHeadquarters', () => {
   let card: IntragenSanctuaryHeadquarters;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
     card = new IntragenSanctuaryHeadquarters();
   });

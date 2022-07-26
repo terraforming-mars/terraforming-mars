@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {SmallComet} from '../../../src/cards/pathfinders/SmallComet';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 
@@ -14,9 +13,9 @@ describe('SmallComet', function() {
 
   beforeEach(function() {
     card = new SmallComet();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    player3 = TestPlayers.GREEN.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    player3 = TestPlayer.GREEN.newPlayer();
     Game.newInstance('gameid', [player, player2, player3], player);
   });
 

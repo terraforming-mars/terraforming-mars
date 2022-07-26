@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('RobinsonIndustries', function() {
@@ -12,7 +12,7 @@ describe('RobinsonIndustries', function() {
 
   beforeEach(function() {
     card = new RobinsonIndustries();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     player.corporationCard = card;
   });

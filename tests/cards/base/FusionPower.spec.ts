@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {FusionPower} from '../../../src/cards/base/FusionPower';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('FusionPower', function() {
   let card : FusionPower; let player : Player;
 
   beforeEach(function() {
     card = new FusionPower();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play', function() {

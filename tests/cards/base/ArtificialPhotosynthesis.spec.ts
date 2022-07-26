@@ -3,13 +3,13 @@ import {ArtificialPhotosynthesis} from '../../../src/cards/base/ArtificialPhotos
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('ArtificialPhotosynthesis', () => {
   it('Should play', () => {
     const card = new ArtificialPhotosynthesis();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player);
     player.popWaitingFor(); // Remove SelectInitialCards.
     const action = card.play(player);

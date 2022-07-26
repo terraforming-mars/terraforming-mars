@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {AtalantaPlanitiaLab} from '../../../src/cards/venusNext/AtalantaPlanitiaLab';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AtalantaPlanitiaLab', function() {
   it('Should play', function() {
     const card = new AtalantaPlanitiaLab();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);

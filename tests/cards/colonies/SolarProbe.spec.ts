@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {Research} from '../../../src/cards/base/Research';
 import {SolarProbe} from '../../../src/cards/colonies/SolarProbe';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SolarProbe', function() {
   it('Should play', function() {
     const card = new SolarProbe();
     const card2 = new Research();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card2);
     const action = card.play(player);

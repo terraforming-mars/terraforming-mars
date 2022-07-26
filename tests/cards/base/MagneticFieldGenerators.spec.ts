@@ -3,15 +3,15 @@ import {MagneticFieldGenerators} from '../../../src/cards/base/MagneticFieldGene
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('MagneticFieldGenerators', function() {
   let card : MagneticFieldGenerators; let player : Player;
 
   beforeEach(function() {
     card = new MagneticFieldGenerators();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -3,7 +3,6 @@ import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('IndenturedWorkers', function() {
   let card: IndenturedWorkers;
@@ -11,8 +10,8 @@ describe('IndenturedWorkers', function() {
 
   beforeEach(() => {
     card = new IndenturedWorkers();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('gameid', [player, TestPlayers.RED.newPlayer()], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player, TestPlayer.RED.newPlayer()], player);
   });
 
   it('play', () => {

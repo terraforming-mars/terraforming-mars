@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {EcoLine} from '../../../src/cards/corporation/EcoLine';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
 import {Game} from '../../../src/Game';
 
 describe('EcoLine', function() {
   it('Should play', function() {
     const card = new EcoLine();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     const action = card.play(player);
     expect(action).is.undefined;

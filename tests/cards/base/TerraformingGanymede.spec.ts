@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {TerraformingGanymede} from '../../../src/cards/base/TerraformingGanymede';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
 import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
@@ -16,8 +15,8 @@ describe('TerraformingGanymede', function() {
 
   beforeEach(() => {
     card = new TerraformingGanymede();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
   });
 

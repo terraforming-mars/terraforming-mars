@@ -4,7 +4,6 @@ import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('PowerSupplyConsortium', function() {
@@ -12,8 +11,8 @@ describe('PowerSupplyConsortium', function() {
 
   beforeEach(function() {
     card = new PowerSupplyConsortium();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     player.popWaitingFor(); // Remove SelectInitialCards
   });
@@ -62,7 +61,7 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Can play in solo mode if have enough power tags', function() {
-    const soloPlayer = TestPlayers.BLUE.newPlayer();
+    const soloPlayer = TestPlayer.BLUE.newPlayer();
     const soloGame = Game.newInstance('gameid2', [soloPlayer], soloPlayer);
     soloPlayer.popWaitingFor(); // Remove SelectInitialCards
     soloPlayer.playedCards.push(card, card);

@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LTFPrivileges} from '../../../src/cards/moon/LTFPrivileges';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -14,7 +14,7 @@ describe('LTFPrivileges', () => {
   let card: LTFPrivileges;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LTFPrivileges();
   });

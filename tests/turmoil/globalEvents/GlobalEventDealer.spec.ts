@@ -10,7 +10,7 @@ import {SponsoredProjects} from '../../../src/turmoil/globalEvents/SponsoredProj
 import {SuccessfulOrganisms} from '../../../src/turmoil/globalEvents/SuccessfulOrganisms';
 import {WarOnEarth} from '../../../src/turmoil/globalEvents/WarOnEarth';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('GlobalEventDealer', () => {
   it('serialize/deserialize - empty', () => {
@@ -53,7 +53,7 @@ describe('GlobalEventDealer', () => {
       communityCardsOption: true,
       removeNegativeGlobalEventsOption: false,
     });
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, gameOptions);
     const dealer = GlobalEventDealer.newInstance(game);
     for (const card of dealer.globalEventsDeck) {

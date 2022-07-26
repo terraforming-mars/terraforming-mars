@@ -3,13 +3,13 @@ import {LeadershipSummit} from '../../src/turmoil/globalEvents/LeadershipSummit'
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {PartyName} from '../../src/common/turmoil/PartyName';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('LeadershipSummit', function() {
   it('resolve play', function() {
     const card = new LeadershipSummit();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 

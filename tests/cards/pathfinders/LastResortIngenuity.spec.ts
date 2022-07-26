@@ -3,7 +3,6 @@ import {LastResortIngenuity} from '../../../src/cards/pathfinders/LastResortInge
 import {AsteroidMiningConsortium} from '../../../src/cards/base/AsteroidMiningConsortium';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('LastResortIngenuity', function() {
   let card: LastResortIngenuity;
@@ -11,7 +10,7 @@ describe('LastResortIngenuity', function() {
 
   beforeEach(function() {
     card = new LastResortIngenuity();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

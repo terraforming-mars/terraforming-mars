@@ -3,7 +3,6 @@ import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Conscription} from '../../../src/cards/colonies/Conscription';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Conscription', function() {
   let card: Conscription;
@@ -11,8 +10,8 @@ describe('Conscription', function() {
 
   beforeEach(() => {
     card = new Conscription();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('gameid', [player, TestPlayers.RED.newPlayer()], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player, TestPlayer.RED.newPlayer()], player);
   });
 
   it('play', () => {

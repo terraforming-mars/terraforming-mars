@@ -6,7 +6,7 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Capital} from '../../../src/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean} from '../../TestingUtils';
@@ -16,8 +16,8 @@ describe('OceanCity', function() {
 
   beforeEach(function() {
     card = new OceanCity();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

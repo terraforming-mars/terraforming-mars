@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {InventionContest} from '../../../src/cards/base/InventionContest';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('InventionContest', function() {
   it('Should play', function() {
     const card = new InventionContest();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player)!;
     expect(action).is.not.undefined;

@@ -3,15 +3,15 @@ import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ResearchOutpost', function() {
   let card : ResearchOutpost; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new ResearchOutpost();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

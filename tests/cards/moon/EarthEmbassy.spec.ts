@@ -1,9 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
-import {expect} from 'chai';
 import {Tags} from '../../../src/common/cards/Tags';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
@@ -15,7 +14,7 @@ describe('EarthEmbassy', () => {
   let earthEmbassy: EarthEmbassy;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     earthEmbassy = new EarthEmbassy();
   });

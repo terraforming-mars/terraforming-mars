@@ -5,12 +5,12 @@ import {Ants} from '../src/cards/base/Ants';
 import {Birds} from '../src/cards/base/Birds';
 import {Game} from '../src/Game';
 import {LogHelper} from '../src/LogHelper';
-import {TestPlayers} from './TestPlayers';
+import {TestPlayer} from './TestPlayer';
 
 describe('LogHelper', function() {
   it('logs drawn cards by card', function() {
-    const player1 = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player1 = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();
     const card2 = new Ants();
     const card3 = new Birds();
@@ -42,8 +42,8 @@ describe('LogHelper', function() {
   });
 
   it('logs drawn cards by card name', function() {
-    const player1 = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player1 = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();
     const card2 = new Ants();
     const card3 = new Birds();
@@ -75,8 +75,8 @@ describe('LogHelper', function() {
   });
 
   it('logs drawn cards privately', function() {
-    const player1 = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player1 = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();
     const game = Game.newInstance('gameid', [player1, player2], player1);
     LogHelper.logDrawnCards(player1, [card1.name], true);

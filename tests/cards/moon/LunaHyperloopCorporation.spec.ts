@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunaHyperloopCorporation} from '../../../src/cards/moon/LunaHyperloopCorporation';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -15,7 +15,7 @@ describe('LunaHyperloopCorporation', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunaHyperloopCorporation();
     moonData = MoonExpansion.moonData(game);

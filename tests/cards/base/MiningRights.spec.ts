@@ -6,7 +6,6 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 import {ISpace} from '../../../src/boards/ISpace';
 import {runAllActions, cast} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
@@ -19,8 +18,8 @@ describe('MiningRights', () => {
 
   beforeEach(() => {
     card = new MiningRights();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

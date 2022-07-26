@@ -5,14 +5,14 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('EnergyMarket', function() {
   let card : EnergyMarket; let player : Player;
 
   beforeEach(function() {
     card = new EnergyMarket();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

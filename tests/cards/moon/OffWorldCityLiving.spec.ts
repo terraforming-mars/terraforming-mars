@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {OffWorldCityLiving} from '../../../src/cards/moon/OffWorldCityLiving';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -18,9 +18,9 @@ describe('OffWorldCityLiving', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     // Adding a vestigial player to avoid the two starting cities.
-    const game = Game.newInstance('gameid', [player, TestPlayers.RED.newPlayer()], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player, TestPlayer.RED.newPlayer()], player, MOON_OPTIONS);
     card = new OffWorldCityLiving();
     moonData = MoonExpansion.moonData(game);
   });

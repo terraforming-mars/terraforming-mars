@@ -6,7 +6,6 @@ import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
 import {DeepLunarMining} from '../../../src/cards/moon/DeepLunarMining';
@@ -17,8 +16,8 @@ describe('Gyropolis', function() {
 
   beforeEach(function() {
     card = new Gyropolis();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

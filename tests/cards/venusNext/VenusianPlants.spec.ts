@@ -5,15 +5,15 @@ import {VenusianPlants} from '../../../src/cards/venusNext/VenusianPlants';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusianPlants', function() {
   let card : VenusianPlants; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new VenusianPlants();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -4,7 +4,7 @@ import {GameLoader} from '../../src/database/GameLoader';
 import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
 
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {Color} from '../../src/common/Color';
 import {GameIdLedger} from '../../src/database/IDatabase';
 import {GameId, PlayerId} from '../../src/common/Types';
@@ -45,8 +45,8 @@ describe('GameLoader', function() {
     setTestGameLoader(instance);
     database = new TestDatabase();
     setTestDatabase(database);
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     instance.resetForTesting();
   });

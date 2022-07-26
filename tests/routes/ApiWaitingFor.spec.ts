@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ApiWaitingFor} from '../../src/routes/ApiWaitingFor';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {GameId} from '../../src/common/Types';
@@ -23,7 +23,7 @@ describe('ApiWaitingFor', function() {
   });
 
   it('fails when player not found', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     const game = Game.newInstance('g' + player.id as GameId, [player], player);
     await scaffolding.ctx.gameLoader.add(game);
     (game as any).getPlayerById = function() {
@@ -37,7 +37,7 @@ describe('ApiWaitingFor', function() {
   });
 
   it('sends model for player', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
     const game = Game.newInstance('game-id', [player], player);
     await scaffolding.ctx.gameLoader.add(game);
 
@@ -48,8 +48,8 @@ describe('ApiWaitingFor', function() {
   });
 
   it('fails when spectator not found', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-id', [player, player2], player);
     await scaffolding.ctx.gameLoader.add(game);
     (game as any).getBySpectatorId = function() {
@@ -63,8 +63,8 @@ describe('ApiWaitingFor', function() {
   });
 
   it('sends model for spectator', async () => {
-    const player = TestPlayers.BLACK.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLACK.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-id', [player, player2], player, undefined, undefined, 's-spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 

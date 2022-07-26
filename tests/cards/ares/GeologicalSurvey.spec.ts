@@ -12,7 +12,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
 import {addGreenery, resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('GeologicalSurvey', () => {
@@ -23,8 +23,8 @@ describe('GeologicalSurvey', () => {
 
   beforeEach(() => {
     card = new GeologicalSurvey();
-    player = TestPlayers.BLUE.newPlayer();
-    redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });
@@ -133,7 +133,7 @@ describe('GeologicalSurvey', () => {
   });
 
   it('Works with Mars First policy', () => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('gameid', [player], player, gameOptions);
     const turmoil = game.turmoil!;

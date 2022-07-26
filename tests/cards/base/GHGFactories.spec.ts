@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {GHGFactories} from '../../../src/cards/base/GHGFactories';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('GHGFactories', function() {
   let card : GHGFactories; let player : Player;
 
   beforeEach(function() {
     card = new GHGFactories();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not play', function() {

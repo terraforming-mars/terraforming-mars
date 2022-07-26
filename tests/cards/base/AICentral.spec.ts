@@ -3,15 +3,14 @@ import {AICentral} from '../../../src/cards/base/AICentral';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('AICentral', function() {
   let card : AICentral; let player : TestPlayer;
 
   beforeEach(function() {
     card = new AICentral();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

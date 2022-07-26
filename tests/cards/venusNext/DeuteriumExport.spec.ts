@@ -3,7 +3,7 @@ import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('DeuteriumExport', function() {
@@ -11,7 +11,7 @@ describe('DeuteriumExport', function() {
 
   beforeEach(function() {
     card = new DeuteriumExport();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Should play', function() {

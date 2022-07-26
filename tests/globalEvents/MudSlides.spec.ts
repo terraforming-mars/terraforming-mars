@@ -3,7 +3,6 @@ import {Game} from '../../src/Game';
 import {Resources} from '../../src/common/Resources';
 import {MudSlides} from '../../src/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {setCustomGameOptions} from '../TestingUtils';
@@ -19,8 +18,8 @@ describe('MudSlides', function() {
 
   beforeEach(() => {
     card = new MudSlides();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
     turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);

@@ -3,7 +3,7 @@ import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../src/common/constants';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {MagneticFieldStimulationDelays} from '../../src/turmoil/globalEvents/MagneticFieldStimulationDelays';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('MagneticFieldStimulationDelays', function() {
   let card: MagneticFieldStimulationDelays;
@@ -12,7 +12,7 @@ describe('MagneticFieldStimulationDelays', function() {
 
   beforeEach(function() {
     card = new MagneticFieldStimulationDelays();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

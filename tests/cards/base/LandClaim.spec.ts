@@ -6,13 +6,13 @@ import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {SpaceName} from '../../../src/SpaceName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LandClaim', function() {
   it('Should play', function() {
     const card = new LandClaim();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.not.undefined;
@@ -23,8 +23,8 @@ describe('LandClaim', function() {
   });
   it('can claim south pole on hellas board', function() {
     const card = new LandClaim();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({
       boardName: BoardName.HELLAS,
     }));

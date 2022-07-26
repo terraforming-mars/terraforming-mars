@@ -1,6 +1,5 @@
 import {Game} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {SinusIridiumRoadNetwork} from '../../../src/cards/moon/SinusIridiumRoadNetwork';
 import {expect} from 'chai';
@@ -14,7 +13,7 @@ describe('SinusIridiumRoadNetwork', () => {
   let card: SinusIridiumRoadNetwork;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new SinusIridiumRoadNetwork();
   });

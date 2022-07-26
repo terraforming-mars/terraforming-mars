@@ -3,14 +3,14 @@ import {BusinessEmpire} from '../../../src/cards/prelude/BusinessEmpire';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessEmpire', function() {
   let card : BusinessEmpire; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new BusinessEmpire();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

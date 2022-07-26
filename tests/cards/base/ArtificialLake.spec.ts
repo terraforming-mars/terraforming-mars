@@ -6,7 +6,6 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {
@@ -14,8 +13,8 @@ describe('ArtificialLake', function() {
 
   beforeEach(function() {
     card = new ArtificialLake();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 

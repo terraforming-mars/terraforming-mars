@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {HydrogenProcessingPlant} from '../../../src/cards/pathfinders/HydrogenProcessingPlant';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {addOcean} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 
@@ -13,7 +12,7 @@ describe('HydrogenProcessingPlant', function() {
 
   beforeEach(function() {
     card = new HydrogenProcessingPlant();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });

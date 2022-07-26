@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunarDustProcessingPlant} from '../../../src/cards/moon/LunarDustProcessingPlant';
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
@@ -19,7 +19,7 @@ describe('LunarDustProcessingPlant', () => {
   let card: LunarDustProcessingPlant;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new LunarDustProcessingPlant();

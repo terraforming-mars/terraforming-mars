@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeStation} from '../../../src/cards/moon/LunaTradeStation';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
@@ -19,7 +19,7 @@ describe('LunaTradeStation', () => {
   let card: LunaTradeStation;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new LunaTradeStation();

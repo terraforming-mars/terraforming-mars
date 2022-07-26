@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/cards/base/PhysicsComplex';
@@ -27,7 +27,7 @@ describe('NanotechIndustries', () => {
   const prideoftheEarthArkship = new PrideoftheEarthArkship();
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     nanotechIndustries = new NanotechIndustries();
   });

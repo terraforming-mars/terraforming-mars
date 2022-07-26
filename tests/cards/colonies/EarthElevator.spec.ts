@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {EarthElevator} from '../../../src/cards/colonies/EarthElevator';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('EarthElevator', function() {
   it('Should play', function() {
     const card = new EarthElevator();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.TITANIUM)).to.eq(3);

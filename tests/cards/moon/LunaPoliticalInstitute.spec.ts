@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
@@ -18,7 +18,7 @@ describe('LunaPoliticalInstitute', () => {
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunaPoliticalInstitute();
     turmoil = game.turmoil!;

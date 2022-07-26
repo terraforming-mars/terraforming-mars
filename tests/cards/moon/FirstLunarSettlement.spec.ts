@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {FirstLunarSettlement} from '../../../src/cards/moon/FirstLunarSettlement';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
@@ -18,7 +18,7 @@ describe('FirstLunarSettlement', () => {
   let card: FirstLunarSettlement;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new FirstLunarSettlement();

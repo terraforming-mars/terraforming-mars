@@ -3,15 +3,14 @@ import {Mangrove} from '../../../src/cards/base/Mangrove';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Mangrove', function() {
   let card : Mangrove; let player : TestPlayer;
 
   beforeEach(function() {
     card = new Mangrove();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

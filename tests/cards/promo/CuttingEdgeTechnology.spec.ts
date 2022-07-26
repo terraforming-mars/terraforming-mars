@@ -4,13 +4,13 @@ import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
 import {CuttingEdgeTechnology} from '../../../src/cards/promo/CuttingEdgeTechnology';
 import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CuttingEdgeTechnology', function() {
   it('Should play', function() {
     const card = new CuttingEdgeTechnology();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
     card.play();
 

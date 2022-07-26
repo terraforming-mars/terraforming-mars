@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {GameOptions} from '../../../src/GameOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -14,8 +14,8 @@ describe('ExecutiveOrder', function() {
 
   beforeEach(() => {
     card = new ExecutiveOrder();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);

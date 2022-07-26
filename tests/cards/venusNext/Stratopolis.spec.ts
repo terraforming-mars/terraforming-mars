@@ -7,15 +7,15 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
   let card: Stratopolis; let player: Player;
 
   beforeEach(function() {
     card = new Stratopolis();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });

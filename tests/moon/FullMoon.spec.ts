@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import {CoreMine} from '../../src/cards/moon/CoreMine';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
 import {FullMoon} from '../../src/moon/FullMoon';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('FullMoon', () => {
   it('Standard test', () => {
     const award = new FullMoon();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     expect(award.getScore(player)).eq(0);
     player.playedCards = [
       new CoreMine(),
@@ -22,7 +22,7 @@ describe('FullMoon', () => {
 
   it('Wild tag does not count', () => {
     const award = new FullMoon();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     player.playedCards = [
       new CoreMine(),
       new CoreMine(),

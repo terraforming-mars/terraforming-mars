@@ -3,7 +3,6 @@ import {SecretLabs} from '../../../src/cards/pathfinders/SecretLabs';
 import {Game} from '../../../src/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {cast, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
@@ -20,7 +19,7 @@ describe('SecretLabs', function() {
 
   beforeEach(function() {
     card = new SecretLabs();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();

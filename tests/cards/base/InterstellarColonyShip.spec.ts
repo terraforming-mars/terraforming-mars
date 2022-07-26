@@ -4,15 +4,14 @@ import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColony
 import {Research} from '../../../src/cards/base/Research';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('InterstellarColonyShip', function() {
   let card : InterstellarColonyShip; let player : TestPlayer;
 
   beforeEach(function() {
     card = new InterstellarColonyShip();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
   });
 

@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/Game';
 import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
 import {AgendaStyle} from '../../src/common/turmoil/Types';
 import {OrOptions} from '../../src/inputs/OrOptions';
@@ -14,8 +14,8 @@ describe('PoliticalAgendas', function() {
   let randomElement: (list: Array<any>) => any;
 
   beforeEach(() => {
-    player1 = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player1 = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     randomElement = PoliticalAgendas.randomElement;
   });
 

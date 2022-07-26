@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {SulphurExports} from '../../../src/cards/venusNext/SulphurExports';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SulphurExports', function() {
   it('Should play', function() {
     const card = new SulphurExports();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
 
     card.play(player);

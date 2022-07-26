@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('TollStation', function() {
   it('Should play', function() {
     const card = new TollStation();
-    const player = TestPlayers.BLUE.newPlayer();
-    const anotherPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const anotherPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, anotherPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;

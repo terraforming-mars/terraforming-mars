@@ -3,13 +3,13 @@ import {LakefrontResorts} from '../../../src/cards/turmoil/LakefrontResorts';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LakefrontResorts', function() {
   it('Should play', function() {
     const card2 = new LakefrontResorts();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
     const play = card2.play(player);
     expect(play).is.undefined;

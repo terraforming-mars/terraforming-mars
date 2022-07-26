@@ -8,7 +8,6 @@ import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
 import {cast} from '../../TestingUtils';
 
 describe('CapitalAres', function() {
@@ -16,8 +15,8 @@ describe('CapitalAres', function() {
 
   beforeEach(function() {
     card = new CapitalAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 

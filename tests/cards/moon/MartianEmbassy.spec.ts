@@ -1,8 +1,8 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MartianEmbassy} from '../../../src/cards/moon/MartianEmbassy';
-import {expect} from 'chai';
 
 describe('MartianEmbassy', () => {
   let player: TestPlayer;

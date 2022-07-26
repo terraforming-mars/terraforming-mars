@@ -3,7 +3,7 @@ import {BigAsteroid} from '../../../src/cards/base/BigAsteroid';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('BigAsteroid', function() {
@@ -11,8 +11,8 @@ describe('BigAsteroid', function() {
 
   beforeEach(function() {
     card = new BigAsteroid();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
   });
 

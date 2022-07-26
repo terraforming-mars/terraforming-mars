@@ -7,7 +7,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
 import {maxOutOceans, setCustomGameOptions, runAllActions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {BoardType} from '../../../src/boards/BoardType';
 import {TileType} from '../../../src/common/TileType';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
@@ -17,8 +17,8 @@ describe('MiningGuild', () => {
 
   beforeEach(() => {
     card = new MiningGuild();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({
       aresExtension: true,
       aresHazards: false,

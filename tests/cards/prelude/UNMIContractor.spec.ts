@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {UNMIContractor} from '../../../src/cards/prelude/UNMIContractor';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('UNMIContractor', function() {
   it('Should play', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     const card = new UNMIContractor();
     card.play(player);

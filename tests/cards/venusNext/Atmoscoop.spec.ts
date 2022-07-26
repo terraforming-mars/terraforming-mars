@@ -10,7 +10,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
@@ -19,8 +19,8 @@ describe('Atmoscoop', function() {
 
   beforeEach(function() {
     card = new Atmoscoop();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({venusNextExtension: true}));
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();

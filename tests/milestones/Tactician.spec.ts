@@ -24,14 +24,14 @@ import {SpaceHotels} from '../../src/cards/prelude/SpaceHotels';
 import {GMOContract} from '../../src/cards/turmoil/GMOContract';
 import {PioneerSettlement} from '../../src/cards/colonies/PioneerSettlement';
 import {Algae} from '../../src/cards/base/Algae';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Tactician', function() {
   let milestone : Tactician; let player : Player;
 
   beforeEach(function() {
     milestone = new Tactician();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Can not claim without 5 cards with requirements', function() {

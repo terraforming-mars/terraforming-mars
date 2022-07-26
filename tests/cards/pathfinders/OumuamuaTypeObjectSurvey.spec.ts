@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {OumuamuaTypeObjectSurvey} from '../../../src/cards/pathfinders/OumuamuaTypeObjectSurvey';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
@@ -61,7 +60,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
 
   beforeEach(function() {
     card = new OumuamuaTypeObjectSurvey();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
     dealer = game.dealer;
     dealer.discarded = [];

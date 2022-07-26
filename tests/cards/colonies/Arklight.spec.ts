@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {Predators} from '../../../src/cards/base/Predators';
 import {Arklight} from '../../../src/cards/colonies/Arklight';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Arklight', function() {
   it('Should play', function() {
     const card = new Arklight();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
     const play = card.play(player);
     expect(play).is.undefined;

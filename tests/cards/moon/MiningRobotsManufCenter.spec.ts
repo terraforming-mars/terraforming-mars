@@ -3,7 +3,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {MiningRobotsManufCenter} from '../../../src/cards/moon/MiningRobotsManufCenter';
 import {expect} from 'chai';
 
@@ -16,7 +16,7 @@ describe('MiningRobotsManufCenter', () => {
   let card: MiningRobotsManufCenter;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new MiningRobotsManufCenter();

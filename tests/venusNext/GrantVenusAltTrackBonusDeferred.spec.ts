@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/venusNext/GrantVenusAltTrackBonusDeferred';
 import {AndOptions} from '../../src/inputs/AndOptions';
 import {cast} from '../TestingUtils';
@@ -14,7 +14,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
   let player: Player;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
   });
 

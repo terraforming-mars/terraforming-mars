@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {OzoneGenerators} from '../../../src/cards/pathfinders/OzoneGenerators';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('OzoneGenerators', function() {
   let card: OzoneGenerators;
@@ -11,7 +10,7 @@ describe('OzoneGenerators', function() {
 
   beforeEach(function() {
     card = new OzoneGenerators();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
   });
 

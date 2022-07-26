@@ -52,10 +52,11 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
+    this.onCardPlayed(player, card as ICard as IProjectCard);
+    return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: Player, card: IProjectCard) {
     const count = card.tags.filter((tag) => tag === Tags.ANIMAL).length;
     player.addResourceTo(this, count);
     return undefined;

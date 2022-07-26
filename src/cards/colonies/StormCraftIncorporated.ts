@@ -2,7 +2,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {CardResource} from '../../common/CardResource';
-import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -87,7 +87,8 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
         if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
           throw new Error(`You cannot overspend floaters`);
         }
-        player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
+        const stormcraft = player.getCorporationOrThrow(this.name);
+        player.removeResourceFrom(stormcraft, floaterAmount);
         player.deductResource(Resources.HEAT, heatAmount);
         return cb();
       },

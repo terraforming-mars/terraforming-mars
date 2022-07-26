@@ -23,7 +23,7 @@ import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventNam
 describe('Player', function() {
   it('should initialize with right defaults', function() {
     const player = new Player('name', Color.BLUE, false, 0, 'p-blue');
-    expect(player.corporationCard).is.undefined;
+    expect(player.corporations).is.empty;
   });
   it('Should throw error if nothing to process', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
@@ -105,7 +105,7 @@ describe('Player', function() {
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(0);
-    player1.corporationCard = corporationCard;
+    player1.corporations = [corporationCard];
     player2.playCard(card, undefined);
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });

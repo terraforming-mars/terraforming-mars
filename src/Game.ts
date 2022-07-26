@@ -545,18 +545,12 @@ export class Game {
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
     player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));
 
-    // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
+    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
     for (const somePlayer of this.getPlayersInGenerationOrder()) {
-      if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-        this.defer(new SimpleDeferredAction(
-          player,
-          () => {
-            if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-              return somePlayer.corporationCard.onCorpCardPlayed(player, corporationCard) || undefined;
-            }
-            return undefined;
-          },
-        ));
+      for (const corporation of somePlayer.corporations) {
+        if (corporation.name === corporationCard.name) continue;
+        if (!corporation.onCorpCardPlayed) continue;
+        this.defer(new SimpleDeferredAction(player, () => corporation.onCorpCardPlayed?.(player, corporationCard)));
       }
     }
 
@@ -964,12 +958,9 @@ export class Game {
 
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
-      let corponame: string = '';
+      const corpname = player.corporations.length > 0 ? player.corporations[0].name : '';
       const vpb = player.getVictoryPoints();
-      if (player.corporationCard !== undefined) {
-        corponame = player.corporationCard.name;
-      }
-      scores.push({corporation: corponame, playerScore: vpb.total});
+      scores.push({corporation: corpname, playerScore: vpb.total});
     });
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
@@ -1289,8 +1280,7 @@ export class Game {
     }
 
     this.players.forEach((p) => {
-      p.corporationCard?.onTilePlaced?.(p, player, space, BoardType.MARS);
-      p.playedCards.forEach((playedCard) => {
+      p.tableau.forEach((playedCard) => {
         playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
       });
     });
@@ -1617,7 +1607,7 @@ export class Game {
     game.syndicatePirateRaider = d.syndicatePirateRaider;
 
     // Still in Draft or Research of generation 1
-    if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
+    if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
           game.runDraftRound(true, true);

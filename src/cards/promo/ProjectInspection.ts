@@ -27,15 +27,8 @@ export class ProjectInspection extends Card implements IProjectCard {
   private getActionCards(player: Player): Array<IActionCard & ICard> {
     const result: Array<IActionCard & ICard> = [];
 
-    if (player.corporationCard !== undefined && player.getActionsThisGeneration().has(player.corporationCard.name)) {
-      if (!player.isCorporation(CardName.PLAYWRIGHTS) || (player.corporationCard as Playwrights).getCheckLoops() < 2) {
-        if (isIActionCard(player.corporationCard) && player.corporationCard.canAct(player)) {
-          result.push(player.corporationCard);
-        }
-      }
-    }
-
-    for (const playedCard of player.playedCards) {
+    for (const playedCard of player.tableau) {
+      if (playedCard.name === CardName.PLAYWRIGHTS && (<Playwrights> playedCard).getCheckLoops() >= 2) continue;
       if (isIActionCard(playedCard) && playedCard.canAct(player) && player.getActionsThisGeneration().has(playedCard.name)) {
         result.push(playedCard);
       }

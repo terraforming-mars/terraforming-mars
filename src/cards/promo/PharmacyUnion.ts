@@ -65,7 +65,8 @@ export class PharmacyUnion extends Card implements ICorporationCard {
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {
-    return this._onCardPlayed(player, card);
+    this._onCardPlayed(player, card);
+    return undefined;
   }
 
   private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {

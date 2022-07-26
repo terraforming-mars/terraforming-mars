@@ -9,7 +9,7 @@ import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './common/inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -191,19 +191,8 @@ export class Player {
     this.game = undefined as unknown as Game;
   }
 
-  public get corporationCard(): ICorporationCard | undefined {
-    if (this.corporations.length > 1) throw new Error('Multiple corporations not supported');
-    return this.corporations[0];
-  }
-
-  public set corporationCard(card: ICorporationCard | undefined) {
-    if (card === undefined) {
-      this.corporations.length = 0;
-    } else if (this.corporations.length > 0) {
-      throw new Error('Multiple corporations not supported');
-    } else {
-      this.corporations.push(card);
-    }
+  public get tableau(): Array<ICorporationCard | IProjectCard> {
+    return [...this.corporations, ...this.playedCards];
   }
 
   public isCorporation(corporationName: CardName): boolean {
@@ -212,6 +201,14 @@ export class Player {
 
   public getCorporation(corporationName: CardName): ICorporationCard | undefined {
     return this.corporations.find((c) => c.name === corporationName);
+  }
+
+  public getCorporationOrThrow(corporationName: CardName): ICorporationCard {
+    const corporation = this.getCorporation(corporationName);
+    if (corporation === undefined) {
+      throw new Error(`player ${this.name} does not have corporation ${corporationName}`);
+    }
+    return corporation;
   }
 
   public getTitaniumValue(): number {
@@ -230,7 +227,7 @@ export class Player {
   }
 
   public getSelfReplicatingRobotsTargetCards(): Array<RobotCard> {
-    return (this.playedCards.find((card) => card instanceof SelfReplicatingRobots) as (SelfReplicatingRobots | undefined))?.targetCards ?? [];
+    return (<SelfReplicatingRobots> this.playedCards.find((card) => card instanceof SelfReplicatingRobots))?.targetCards ?? [];
   }
 
   public getSteelValue(): number {
@@ -544,15 +541,8 @@ export class Player {
   public getVictoryPoints(): IVictoryPointsBreakdown {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
-    // Victory points from corporations
-    for (const card of this.corporations) {
-      if (card.victoryPoints !== undefined) {
-        victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(this), card.name);
-      }
-    }
-
     // Victory points from cards
-    for (const playedCard of this.playedCards) {
+    for (const playedCard of this.tableau) {
       if (playedCard.victoryPoints !== undefined) {
         victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
       }
@@ -708,10 +698,7 @@ export class Player {
 
   public getRequirementsBonus(parameter: GlobalParameter): number {
     let requirementsBonus: number = 0;
-    for (const card of this.corporations) {
-      if (card.getRequirementBonus !== undefined) requirementsBonus += card.getRequirementBonus(this, parameter);
-    }
-    for (const playedCard of this.playedCards) {
+    for (const playedCard of this.tableau) {
       if (playedCard.getRequirementBonus !== undefined) requirementsBonus += playedCard.getRequirementBonus(this, parameter);
     }
 
@@ -760,10 +747,7 @@ export class Player {
       }
     }
 
-    for (const playedCard of this.playedCards) {
-      playedCard.onResourceAdded?.(this, card, count);
-    }
-    for (const playedCard of this.corporations) {
+    for (const playedCard of this.tableau) {
       playedCard.onResourceAdded?.(this, card, count);
     }
   }
@@ -907,16 +891,12 @@ export class Player {
   public getRawTagCount(tag: Tags, includeEventsTags: boolean) {
     let tagCount = 0;
 
-    this.playedCards.forEach((card: IProjectCard) => {
-      if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
+    this.tableau.forEach((card: IProjectCard | ICorporationCard) => {
+      if (!includeEventsTags && card.cardType === CardType.EVENT) return;
+      if (isICorporationCard(card) && card.isDisabled) return;
       tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
     });
 
-    this.corporations.forEach((card: ICorporationCard) => {
-      if (!card.isDisabled) {
-        tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-      }
-    });
     return tagCount;
   }
 
@@ -1042,12 +1022,7 @@ export class Player {
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
-    for (const card of this.corporations) {
-      if (isIActionCard(card) && !this.actionsThisGeneration.has(card.name) && card.canAct(this)) {
-        result.push(card);
-      }
-    }
-    for (const playedCard of this.playedCards) {
+    for (const playedCard of this.tableau) {
       if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
         result.push(playedCard);
       }
@@ -1247,12 +1222,7 @@ export class Player {
     let cost: number = card.cost;
     cost -= this.cardDiscount;
 
-    this.playedCards.forEach((playedCard) => {
-      cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
-    });
-
-    // Check corporation too
-    this.corporations.forEach((playedCard) => {
+    this.tableau.forEach((playedCard) => {
       cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
     });
 
@@ -1513,14 +1483,12 @@ export class Player {
       return;
     }
     for (const playedCard of this.playedCards) {
-      if (playedCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard = playedCard.onCardPlayed(this, card);
-        if (actionFromPlayedCard !== undefined) {
-          this.game.defer(new SimpleDeferredAction(
-            this,
-            () => actionFromPlayedCard,
-          ));
-        }
+      const actionFromPlayedCard = playedCard.onCardPlayed?.(this, card);
+      if (actionFromPlayedCard !== undefined) {
+        this.game.defer(new SimpleDeferredAction(
+          this,
+          () => actionFromPlayedCard,
+        ));
       }
     }
 
@@ -1528,14 +1496,12 @@ export class Player {
 
     for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       for (const corporationCard of somePlayer.corporations) {
-        if (corporationCard.onCardPlayed !== undefined) {
-          const actionFromPlayedCard = corporationCard.onCardPlayed(this, card);
-          if (actionFromPlayedCard !== undefined) {
-            this.game.defer(new SimpleDeferredAction(
-              this,
-              () => actionFromPlayedCard,
-            ));
-          }
+        const actionFromPlayedCard = corporationCard.onCardPlayed?.(this, card);
+        if (actionFromPlayedCard !== undefined) {
+          this.game.defer(new SimpleDeferredAction(
+            this,
+            () => actionFromPlayedCard,
+          ));
         }
       }
     }

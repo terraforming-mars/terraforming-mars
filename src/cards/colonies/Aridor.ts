@@ -10,6 +10,7 @@ import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class Aridor extends Card implements ICorporationCard {
   constructor() {
@@ -55,14 +56,15 @@ export class Aridor extends Card implements ICorporationCard {
   }
 
   private checkActivation(colony: IColony, game: Game): void {
-    if (colony.metadata.resourceType === undefined) return;
-    game.getPlayers().forEach((player) => {
-      const resourceCard = player.tableau.some((card) => card.resourceType === colony.metadata.resourceType);
-      if (resourceCard) {
-        colony.isActive = true;
-        return;
+    if (colony.isActive) return;
+    for (const player of game.getPlayers()) {
+      for (const card of player.tableau) {
+        const active = ColoniesHandler.maybeActivateColony(colony, card);
+        if (active) {
+          return;
+        }
       }
-    });
+    }
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {

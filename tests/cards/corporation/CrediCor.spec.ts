@@ -6,12 +6,11 @@ import {CityStandardProject} from '../../../src/cards/base/standardProjects/City
 import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
 import {CrediCor} from '../../../src/cards/corporation/CrediCor';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CrediCor', function() {
   let card: CrediCor;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CrediCor();
@@ -23,7 +22,7 @@ describe('CrediCor', function() {
   it('Should play', function() {
     const action = card.play();
     expect(action).is.undefined;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     card.onStandardProject(player, new AsteroidStandardProject());
     card.onStandardProject(player, new CityStandardProject());
     card.onStandardProject(player, new GreeneryStandardProject());
@@ -31,7 +30,7 @@ describe('CrediCor', function() {
   });
 
   it('Runs onCardPlayed', function() {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(player.megaCredits).to.eq(0);
     card.onCardPlayed(player, new GiantIceAsteroid());
     expect(player.megaCredits).to.eq(4);

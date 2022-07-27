@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {Midas} from '../../../src/cards/community/Midas';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Midas', function() {
   let card: Midas;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Midas();
@@ -16,7 +15,7 @@ describe('Midas', function() {
     const initialTR = player.getTerraformRating();
 
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(player.getTerraformRating()).to.eq(initialTR - 7);
   });
 });

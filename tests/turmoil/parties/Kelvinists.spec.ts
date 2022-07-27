@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {ISpace} from '../../../src/boards/ISpace';
@@ -13,7 +12,7 @@ import {AndOptions} from '../../../src/inputs/AndOptions';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 
 describe('Kelvinists', function() {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let kelvinists: Kelvinists;
@@ -81,7 +80,7 @@ describe('Kelvinists', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, KELVINISTS_POLICY_3.id);
 
     const stormcraft = new StormCraftIncorporated();
-    player.corporationCard = stormcraft;
+    player.setCorporationForTest(stormcraft);
     stormcraft.resourceCount = 2;
     player.addResource(Resources.HEAT, 8);
 

@@ -88,7 +88,7 @@ describe('TempestConsultancy', () => {
   });
 
   it('new chairman', () => {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     turmoil.rulingParty = new Greens();
     turmoil.rulingParty.partyLeader = player.id;
     expect(player.getTerraformRating()).eq(20);

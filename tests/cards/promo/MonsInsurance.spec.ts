@@ -28,7 +28,7 @@ describe('MonsInsurance', () => {
     player3 = TestPlayer.GREEN.newPlayer();
     Game.newInstance('gameid', [player, player2, player3], player);
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Should play', () => {
@@ -133,7 +133,7 @@ describe('MonsInsurance - Solo', () => {
     player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     // Get rid of selectInitialCards
     player.popWaitingFor();

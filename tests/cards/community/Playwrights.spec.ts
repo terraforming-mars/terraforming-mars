@@ -10,15 +10,14 @@ import {LawSuit} from '../../../src/cards/promo/LawSuit';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
 describe('Playwrights', () => {
   let card: Playwrights;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
@@ -28,7 +27,7 @@ describe('Playwrights', () => {
     game = Game.newInstance('gameid', [player, player2], player);
 
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Cannot act without any played events', () => {

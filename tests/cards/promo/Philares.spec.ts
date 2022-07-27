@@ -33,7 +33,7 @@ describe('Philares', () => {
     adjacentSpace = game.board.getAdjacentSpaces(space)[0];
     adjacentSpace2 = game.board.getAdjacentSpaces(space)[2];
 
-    philaresPlayer.corporationCard = card;
+    philaresPlayer.setCorporationForTest(card);
   });
 
   it('No bonus when placing next to self', () => {

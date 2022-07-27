@@ -3,13 +3,12 @@ import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmon
 import {Ants} from '../../../src/cards/base/Ants';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {Resources} from '../../../src/common/Resources';
 
 describe('AerobrakedAmmoniaAsteroid', function() {
   let card: AerobrakedAmmoniaAsteroid;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AerobrakedAmmoniaAsteroid();

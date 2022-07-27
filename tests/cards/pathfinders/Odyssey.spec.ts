@@ -23,14 +23,14 @@ describe('Odyssey', () => {
     card = new Odyssey();
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('events count for tags', () => {
     const event = fakeCard({cardType: CardType.EVENT, tags: [Tags.JOVIAN]});
     player.playedCards.push(event);
     expect(player.getTagCount(Tags.JOVIAN)).eq(1);
-    player.corporationCard = undefined;
+    player.setCorporationForTest(undefined);
     expect(player.getTagCount(Tags.JOVIAN)).eq(0);
   });
 

@@ -3,12 +3,11 @@ import {Bushes} from '../../../src/cards/base/Bushes';
 import {Virus} from '../../../src/cards/base/Virus';
 import {InterplanetaryCinematics} from '../../../src/cards/corporation/InterplanetaryCinematics';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryCinematics', function() {
   let card: InterplanetaryCinematics;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new InterplanetaryCinematics();
@@ -23,7 +22,7 @@ describe('InterplanetaryCinematics', function() {
   });
 
   it('Has onCardPlayed', function() {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     card.onCardPlayed(player, new Bushes());
     expect(player.megaCredits).to.eq(0);
     card.onCardPlayed(player, new Virus());

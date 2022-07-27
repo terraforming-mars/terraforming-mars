@@ -6,13 +6,12 @@ import {Vitor} from '../../../src/cards/prelude/Vitor';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('Vitor', function() {
   let card: Vitor;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -41,7 +40,7 @@ describe('Vitor', function() {
   });
 
   it('Give megacredits when card played', function() {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     // Dust Seals has victory points
     card.onCardPlayed(player, new DustSeals());

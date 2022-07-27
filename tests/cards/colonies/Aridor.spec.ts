@@ -24,7 +24,7 @@ describe('Aridor', function() {
   it('Should play', function() {
     const play = card.play();
     expect(play).is.undefined;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     card.onCardPlayed(player, new Predators());
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     card.onCardPlayed(player2, new ResearchOutpost());
@@ -36,7 +36,7 @@ describe('Aridor', function() {
   // A test that directly calls initialAction is also good, but this
   // is extra due to a bug #3882
   it('initialAction from input', () => {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     const playerInput = card.initialAction(player);
 
     expect(playerInput).is.not.undefined;

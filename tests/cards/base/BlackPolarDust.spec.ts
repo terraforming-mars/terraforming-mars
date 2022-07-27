@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {BlackPolarDust} from '../../../src/cards/base/BlackPolarDust';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -9,7 +8,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 
 describe('BlackPolarDust', function() {
   let card: BlackPolarDust;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

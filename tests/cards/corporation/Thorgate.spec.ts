@@ -15,7 +15,7 @@ describe('Thorgate', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(card.getCardDiscount(player, new EnergySaving())).to.eq(3);
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);

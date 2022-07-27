@@ -1,5 +1,4 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheGrandLunaCapitalGroup} from '../../../src/cards/moon/TheGrandLunaCapitalGroup';
@@ -10,8 +9,8 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('TheGrandLunaCapitalGroup', () => {
-  let player: Player;
-  let otherPlayer: Player;
+  let player: TestPlayer;
+  let otherPlayer: TestPlayer;
   let card: TheGrandLunaCapitalGroup;
   let moonData: IMoonData;
 
@@ -35,7 +34,7 @@ describe('TheGrandLunaCapitalGroup', () => {
 
     // Test 1: place non-colony
     player.megaCredits = 0;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player.megaCredits).eq(0);

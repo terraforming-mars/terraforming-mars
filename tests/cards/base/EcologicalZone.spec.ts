@@ -4,14 +4,13 @@ import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('EcologicalZone', function() {
   let card: EcologicalZone;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

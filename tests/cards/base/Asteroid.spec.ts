@@ -2,15 +2,14 @@ import {expect} from 'chai';
 import {Asteroid} from '../../../src/cards/base/Asteroid';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('Asteroid', function() {
   let card: Asteroid;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

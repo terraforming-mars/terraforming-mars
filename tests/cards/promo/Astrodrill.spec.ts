@@ -6,13 +6,12 @@ import {CometAiming} from '../../../src/cards/promo/CometAiming';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Astrodrill', function() {
   let card: Astrodrill;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Astrodrill();
@@ -21,7 +20,7 @@ describe('Astrodrill', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
 
     card.play();
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Starts with 3 asteroid resources', function() {

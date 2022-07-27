@@ -13,7 +13,7 @@ describe('AirScrappingExpedition', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
-    player.corporationCard = corp;
+    player.setCorporationForTest(corp);
 
 
     const selectCard = card.play(player) as SelectCard<ICard>;

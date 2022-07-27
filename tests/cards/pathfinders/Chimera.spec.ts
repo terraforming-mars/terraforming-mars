@@ -29,7 +29,7 @@ describe('Chimera', function() {
     card = new Chimera();
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('as action', function() {

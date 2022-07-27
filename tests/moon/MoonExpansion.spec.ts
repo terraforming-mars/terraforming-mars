@@ -62,7 +62,7 @@ describe('MoonExpansion', () => {
   // changing these tests, but I would be surprised if that were the case.
   it('Adding a tile while someone has cards with onTilePlaced behavior does not trigger them.', () => {
     player.cardsInHand = [new EcologicalSurvey(), new GeologicalSurvey()];
-    player.corporationCard = new Philares();
+    player.setCorporationForTest(new Philares());
     player.steel = 0;
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
     expect(player.steel).eq(1);

@@ -11,7 +11,7 @@ describe('AerosportTournament', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
-    player.corporationCard = corp;
+    player.setCorporationForTest(corp);
     corp.action(player);
     corp.action(player);
     corp.action(player);

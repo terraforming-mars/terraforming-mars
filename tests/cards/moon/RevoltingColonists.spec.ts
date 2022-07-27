@@ -11,9 +11,9 @@ import {TileType} from '../../../src/common/TileType';
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('RevoltingColonists', () => {
-  let player1: Player;
-  let player2: Player;
-  let player3: Player;
+  let player1: TestPlayer;
+  let player2: TestPlayer;
+  let player3: TestPlayer;
   let card: RevoltingColonists;
   let moonData: IMoonData;
 

@@ -99,7 +99,7 @@ describe('SurveyMission', () => {
   });
 
   it('Compatible with Mining Guild', () => {
-    player.corporationCard = new MiningGuild();
+    player.setCorporationForTest(new MiningGuild());
     const selectSpace = card.play(player);
 
     expect(player.steel).eq(5); // Comes from playing the Prelude

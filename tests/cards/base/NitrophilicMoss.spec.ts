@@ -3,14 +3,13 @@ import {NitrophilicMoss} from '../../../src/cards/base/NitrophilicMoss';
 import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Manutech} from '../../../src/cards/venusNext/Manutech';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrophilicMoss', function() {
   let card: NitrophilicMoss;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new NitrophilicMoss();
@@ -59,7 +58,7 @@ describe('NitrophilicMoss', function() {
 
   it('Should play', function() {
     maxOutOceans(player, 3);
-    player.corporationCard = new Manutech();
+    player.setCorporationForTest(new Manutech());
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 });

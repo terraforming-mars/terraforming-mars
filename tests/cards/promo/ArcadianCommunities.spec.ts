@@ -1,5 +1,5 @@
-import {Player} from '@/Player';
 import {expect} from 'chai';
+import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ArcadianCommunities} from '../../../src/cards/promo/ArcadianCommunities';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -9,14 +9,14 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('ArcadianCommunities', function() {
   let card: ArcadianCommunities;
-  let player: Player;
+  let player: TestPlayer;
   let board: Board;
 
   beforeEach(() => {
     card = new ArcadianCommunities();
     const game = newTestGame(2);
     player = getTestPlayer(game, 0);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     board = game.board;
   });
 

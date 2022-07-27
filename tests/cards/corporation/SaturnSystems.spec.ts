@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {MirandaResort} from '../../../src/cards/base/MirandaResort';
 import {SaturnSystems} from '../../../src/cards/corporation/SaturnSystems';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SaturnSystems', function() {
   let card: SaturnSystems;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SaturnSystems();
@@ -24,7 +23,7 @@ describe('SaturnSystems', function() {
   });
 
   it('Runs onCardPlayed', function() {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     card.onCardPlayed(player, new MirandaResort());
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
@@ -32,7 +31,7 @@ describe('SaturnSystems', function() {
   it('Runs onCardPlayed when other player plays card', function() {
     const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     card.onCardPlayed(player2, new MirandaResort());
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

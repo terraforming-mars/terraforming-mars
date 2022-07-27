@@ -7,7 +7,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {CardResource} from '../../common/CardResource';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -58,10 +58,11 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
+    this.onCardPlayed(player, card);
+    return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (player.cardHasTag(card, Tags.SCIENCE) && player.isCorporation(this.name)) {
       this.addResource(player);
     }

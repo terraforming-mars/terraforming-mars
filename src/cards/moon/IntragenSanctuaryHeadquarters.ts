@@ -5,7 +5,6 @@ import {Tags} from '../../common/cards/Tags';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
-import {ICard} from '../ICard';
 import {CardResource} from '../../common/CardResource';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Card} from '../Card';
@@ -52,10 +51,11 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
+    this.onCardPlayed(player, card);
+    return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
     const count = card.tags.filter((tag) => tag === Tags.ANIMAL).length;
     player.addResourceTo(this, count);
     return undefined;

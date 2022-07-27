@@ -4,6 +4,7 @@ import {Color} from '../src/common/Color';
 import {Units} from '../src/common/Units';
 import {Tags} from '../src/common/cards/Tags';
 import {InputResponse} from '../src/common/inputs/InputResponse';
+import {ICorporationCard} from '@/cards/corporation/ICorporationCard';
 
 class TestPlayerFactory {
   constructor(private color: Color) {}
@@ -98,6 +99,14 @@ export class TestPlayer extends Player {
     this.waitingFor = undefined;
     this.waitingForCb = undefined;
     return waitingFor;
+  }
+
+  public setCorporationForTest(card: ICorporationCard | undefined) {
+    if (card === undefined) {
+      this.corporations = [];
+    } else {
+      this.corporations = [card];
+    }
   }
 }
 

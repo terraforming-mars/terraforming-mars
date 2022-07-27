@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {MiningGuild} from '../../../src/cards/corporation/MiningGuild';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
@@ -14,8 +13,8 @@ import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('MiningGuild', () => {
   let card: MiningGuild;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
@@ -27,7 +26,7 @@ describe('MiningGuild', () => {
       aresHazards: false,
     }));
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Should play', () => {

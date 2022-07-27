@@ -16,7 +16,7 @@ describe('MooncrateConvoysToMars', () => {
   let game: Game;
   let player1: Player;
   let player2: Player;
-  let player3: Player;
+  let player3: TestPlayer;
   let moonData: IMoonData;
   let card: MooncrateConvoysToMars;
 

@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Heather} from '../../../src/cards/base/Heather';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Heather', function() {
   let card: Heather;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

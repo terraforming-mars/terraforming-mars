@@ -1,5 +1,4 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheArchaicFoundationInstitute} from '../../../src/cards/moon/TheArchaicFoundationInstitute';
@@ -15,7 +14,7 @@ import {Habitat14} from '../../../src/cards/moon/Habitat14';
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('TheArchaicFoundationInstitute', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: TheArchaicFoundationInstitute;
 
   beforeEach(() => {
@@ -25,7 +24,7 @@ describe('TheArchaicFoundationInstitute', () => {
   });
 
   it('effect', () => {
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     card.resourceCount = 0;
     expect(player.getTerraformRating()).eq(14);
 

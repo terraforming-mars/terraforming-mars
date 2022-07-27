@@ -13,7 +13,7 @@ describe('Viron', function() {
     Game.newInstance('gameid', [player, player2], player);
     const action = card.play();
     expect(action).is.undefined;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     player.playedCards.push(new RestrictedArea());
     player.addActionThisGeneration(new RestrictedArea().name);
     expect(card.canAct(player)).is.not.true;

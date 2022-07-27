@@ -1,5 +1,4 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/cards/moon/TheDarksideofTheMoonSyndicate';
@@ -14,9 +13,9 @@ import {Phase} from '../../../src/common/Phase';
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('TheDarksideofTheMoonSyndicate', () => {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
-  let otherPlayer: Player;
+  let otherPlayer: TestPlayer;
   let card: TheDarksideofTheMoonSyndicate;
   let moonData: IMoonData;
 
@@ -98,7 +97,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     otherPlayer.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(otherPlayer.megaCredits).eq(4);
@@ -132,7 +131,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     otherPlayer.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     player.game.phase = Phase.SOLAR;
 

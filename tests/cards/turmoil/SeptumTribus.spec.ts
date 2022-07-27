@@ -15,7 +15,7 @@ describe('SeptumTribus', function() {
     const game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     card.play();
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     player.megaCredits = 0;
 
     const turmoil = game.turmoil;

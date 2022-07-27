@@ -10,14 +10,12 @@ describe('Pristar', function() {
     const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
     const play = card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(play).is.undefined;
     player.megaCredits = 10;
     game.increaseTemperature(player, 1);
-    if (player.corporationCard.onProductionPhase !== undefined) {
-      player.corporationCard.onProductionPhase(player);
-      expect(player.megaCredits).to.eq(10);
-      expect(card.resourceCount).to.eq(0);
-    }
+    card.onProductionPhase(player);
+    expect(player.megaCredits).to.eq(10);
+    expect(card.resourceCount).to.eq(0);
   });
 });

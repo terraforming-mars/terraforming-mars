@@ -7,14 +7,13 @@ import {Splice} from '../../../src/cards/promo/Splice';
 import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 
 describe('Splice', function() {
   let card: Splice;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new Splice();
@@ -28,7 +27,7 @@ describe('Splice', function() {
     const play = card.play();
     expect(play).is.undefined;
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     player2.playedCards.push(card2);
     const action = cast(card.onCardPlayed(player2, card2), OrOptions);
@@ -44,9 +43,9 @@ describe('Splice', function() {
   it('Should play with multiple microbe tags', function() {
     const card2 = new PharmacyUnion();
     const play = card.play();
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     const play2 = card2.play(player);
-    player2.corporationCard = card2;
+    player2.setCorporationForTest(card2);
     expect(play).is.undefined;
     expect(play2).is.undefined;
 

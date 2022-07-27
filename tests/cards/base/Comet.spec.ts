@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Comet} from '../../../src/cards/base/Comet';
-import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -9,9 +8,9 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('Comet', function() {
   let card: Comet;
-  let player: Player;
-  let player2: Player;
-  let player3: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let player3: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

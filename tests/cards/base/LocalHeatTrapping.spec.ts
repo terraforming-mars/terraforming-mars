@@ -6,12 +6,11 @@ import {Pets} from '../../../src/cards/base/Pets';
 import {Helion} from '../../../src/cards/corporation/Helion';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LocalHeatTrapping', () => {
   let card: LocalHeatTrapping;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(() => {
     card = new LocalHeatTrapping();
@@ -67,7 +66,7 @@ describe('LocalHeatTrapping', () => {
   it('Cannot play as Helion if not enough heat left after paying for card', () => {
     const corp = new Helion();
     corp.play(player);
-    player.corporationCard = corp;
+    player.setCorporationForTest(corp);
 
     player.megaCredits = 0;
     player.heat = 5; // have to pay for card with 1 heat

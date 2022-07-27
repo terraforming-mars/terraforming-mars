@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {AirRaid} from '../../../src/cards/colonies/AirRaid';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {Player} from '../../../src/Player';
 import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
@@ -12,8 +11,8 @@ import {cast} from '../../TestingUtils';
 
 describe('AirRaid', function() {
   let card: AirRaid;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let corpo: StormCraftIncorporated;
 
   beforeEach(function() {
@@ -23,7 +22,7 @@ describe('AirRaid', function() {
     Game.newInstance('gameid', [player, player2], player);
 
     corpo = new StormCraftIncorporated();
-    player.corporationCard = corpo;
+    player.setCorporationForTest(corpo);
   });
 
   it('Can not play', function() {

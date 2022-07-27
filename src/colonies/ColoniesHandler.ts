@@ -13,6 +13,8 @@ import {AndOptions} from '../inputs/AndOptions';
 import {IColonyTrader} from './IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
 import {CardName} from '../common/cards/CardName';
+import {ICard} from '../cards/ICard';
+import {Tags} from '../common/cards/Tags';
 
 export class ColoniesHandler {
   public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
@@ -42,6 +44,22 @@ export class ColoniesHandler {
       }
     }
     return undefined;
+  }
+
+  public static onCardPlayed(game: Game, card: ICard) {
+    if (game.gameOptions.coloniesExtension && card.resourceType !== undefined) {
+      game.colonies.forEach((colony) => {
+        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
+          colony.isActive = true;
+        }
+      });
+
+      // Check for Venus colony
+      if (card.tags.includes(Tags.VENUS)) {
+        const venusColony = game.colonies.find((colony) => colony.name === ColonyName.VENUS);
+        if (venusColony) venusColony.isActive = true;
+      }
+    }
   }
 
   private static tradeWithColony(player: Player, openColonies: Array<IColony>): AndOptions | undefined {

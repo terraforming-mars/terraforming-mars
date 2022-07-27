@@ -7,7 +7,6 @@ import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
-import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
@@ -1438,20 +1437,7 @@ export class Player {
       }
     }
 
-    // Activate some colonies
-    if (this.game.gameOptions.coloniesExtension && selectedCard.resourceType !== undefined) {
-      this.game.colonies.forEach((colony) => {
-        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === selectedCard.resourceType) {
-          colony.isActive = true;
-        }
-      });
-
-      // Check for Venus colony
-      if (selectedCard.tags.includes(Tags.VENUS)) {
-        const venusColony = this.game.colonies.find((colony) => colony.name === ColonyName.VENUS);
-        if (venusColony) venusColony.isActive = true;
-      }
-    }
+    ColoniesHandler.onCardPlayed(this.game, selectedCard);
 
     if (selectedCard.cardType !== CardType.PROXY) {
       this.lastCardPlayed = selectedCard.name;

@@ -8,7 +8,6 @@ import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {ColonyDealer} from './colonies/ColonyDealer';
 import {IColony} from './colonies/IColony';
-import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Database} from './database/Database';
@@ -43,7 +42,6 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceBonus} from './common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './common/boards/SpaceType';
-import {Tags} from './common/cards/Tags';
 import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './common/ma/RandomMAOptionType';
@@ -68,6 +66,7 @@ import {isProduction} from './utils/server';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
+import {ColoniesHandler} from './colonies/ColoniesHandler';
 
 export interface Score {
   corporation: String;
@@ -560,21 +559,7 @@ export class Game {
       }
     }
 
-    // Activate some colonies
-    if (this.gameOptions.coloniesExtension && corporationCard.resourceType !== undefined) {
-      this.colonies.forEach((colony) => {
-        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === corporationCard.resourceType) {
-          colony.isActive = true;
-        }
-      });
-
-      // Check for Venus colony
-      if (corporationCard.tags.includes(Tags.VENUS)) {
-        const venusColony = this.colonies.find((colony) => colony.name === ColonyName.VENUS);
-        if (venusColony) venusColony.isActive = true;
-      }
-    }
-
+    ColoniesHandler.onCardPlayed(this, corporationCard);
     PathfindersExpansion.onCardPlayed(player, corporationCard);
 
     this.playerIsFinishedWithResearchPhase(player);

@@ -47,19 +47,32 @@ export class ColoniesHandler {
   }
 
   public static onCardPlayed(game: Game, card: ICard) {
-    if (game.gameOptions.coloniesExtension && card.resourceType !== undefined) {
-      game.colonies.forEach((colony) => {
-        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
-          colony.isActive = true;
-        }
-      });
+    if (!game.gameOptions.coloniesExtension) return;
+    game.colonies.forEach((colony) => {
+      ColoniesHandler.maybeActivateColony(colony, card);
+    });
+  }
 
-      // Check for Venus colony
-      if (card.tags.includes(Tags.VENUS)) {
-        const venusColony = game.colonies.find((colony) => colony.name === ColonyName.VENUS);
-        if (venusColony) venusColony.isActive = true;
-      }
+  /*
+   * Conditionally activate the incoming colony based on the played card.
+   *
+   * Returns `true` if the colony is already active, or becomes active from this
+   * method.
+   */
+  public static maybeActivateColony(colony: IColony, card: ICard): boolean {
+    if (colony.isActive === true) {
+      return true;
     }
+    if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
+      colony.isActive = true;
+      return true;
+    }
+
+    if (colony.name === ColonyName.VENUS && card.tags.includes(Tags.VENUS)) {
+      colony.isActive = true;
+      return true;
+    }
+    return false;
   }
 
   private static tradeWithColony(player: Player, openColonies: Array<IColony>): AndOptions | undefined {

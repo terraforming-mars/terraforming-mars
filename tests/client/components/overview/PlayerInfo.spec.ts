@@ -10,17 +10,11 @@ import {RecursivePartial} from '@/common/utils/utils';
 describe('PlayerInfo', function() {
   it('Played card count test', function() {
     const thisPlayer: RecursivePartial<PublicPlayerModel> = {
-      corporationCard: {
-        name: CardName.HELION,
-      },
       color: Color.BLUE,
-      playedCards: [
-        {
-          name: CardName.ACQUIRED_COMPANY,
-        },
-        {
-          name: CardName.BACTOVIRAL_RESEARCH,
-        },
+      tableau: [
+        {name: CardName.HELION},
+        {name: CardName.ACQUIRED_COMPANY},
+        {name: CardName.BACTOVIRAL_RESEARCH},
       ],
       victoryPointsBreakdown: {
         total: 1,
@@ -51,6 +45,6 @@ describe('PlayerInfo', function() {
       },
     });
     const test = playerStatus.find('div[class*="played-cards-count"]');
-    expect(test.text()).to.eq('2');
+    expect(test.text()).to.eq('3');
   });
 });

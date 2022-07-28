@@ -14,11 +14,11 @@ describe('PlayerTags', function() {
 
   beforeEach(() => {
     const player: RecursivePartial<PublicPlayerModel> = {
-      corporationCard: {
-        name: CardName.CRESCENT_RESEARCH_ASSOCIATION, // 1/3 VP per moon tag
-      },
       color: Color.BLUE,
-      playedCards: [
+      tableau: [
+        {
+          name: CardName.CRESCENT_RESEARCH_ASSOCIATION, // 1/3 VP per moon tag
+        },
         {
           name: CardName.ACQUIRED_COMPANY,
           discount: [{tag: Tags.MICROBE, amount: 1}],

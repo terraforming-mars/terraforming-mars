@@ -26,7 +26,7 @@
           <div class="deck-size">{{ game.deckSize }}</div>
       </sidebar>
 
-      <div v-if="thisPlayer.corporationCard">
+      <div v-if="thisPlayer.tableau.length > 0">
 
           <div class="player_home_block">
               <a name="board" class="player_home_anchor"></a>
@@ -95,37 +95,37 @@
                   <dynamic-title title="Played Cards" :color="thisPlayer.color" />
                   <div class="played-cards-filters">
                     <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggle('ACTIVE')">
-                      <div class="played-cards-count">{{getCardsByType(thisPlayer.playedCards, [getActiveCardType()]).length.toString()}}</div>
+                      <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]).length.toString()}}</div>
                       <div class="played-cards-selection" v-i18n>{{ getToggleLabel('ACTIVE')}}</div>
                     </div>
                     <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggle('AUTOMATED')">
-                      <div class="played-cards-count">{{getCardsByType(thisPlayer.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()}}</div>
+                      <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).length.toString()}}</div>
                       <div class="played-cards-selection" v-i18n>{{ getToggleLabel('AUTOMATED')}}</div>
                     </div>
                     <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggle('EVENT')">
-                      <div class="played-cards-count">{{getCardsByType(thisPlayer.playedCards, [getEventCardType()]).length.toString()}}</div>
+                      <div class="played-cards-count">{{getCardsByType(thisPlayer.tableau, [CardType.EVENT]).length.toString()}}</div>
                       <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
                     </div>
                   </div>
                   <div class="text-overview" v-i18n>[ toggle cards filters ]</div>
               </div>
-              <div v-if="thisPlayer.corporationCard !== undefined" class="cardbox">
-                  <Card :card="thisPlayer.corporationCard" :actionUsed="isCardActivated(thisPlayer.corporationCard, thisPlayer)"/>
+              <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
+                  <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
               </div>
-              <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
+              <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
               </div>
 
-              <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+              <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" ></stacked-cards>
 
-              <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(thisPlayer.playedCards, [getEventCardType()])" ></stacked-cards>
+              <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(thisPlayer.tableau, [CardType.EVENT])" ></stacked-cards>
 
           </div>
 
           <div v-if="thisPlayer.selfReplicatingRobotsCards.length > 0" class="player_home_block">
               <dynamic-title title="Self-Replicating Robots cards" :color="thisPlayer.color"/>
               <div>
-                  <div v-for="card in getCardsByType(thisPlayer.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                  <div v-for="card in getCardsByType(thisPlayer.selfReplicatingRobotsCards, [CardType.ACTIVE])" :key="card.name" class="cardbox">
                       <Card :card="card"/>
                   </div>
               </div>
@@ -133,7 +133,7 @@
 
       </div>
 
-      <div class="player_home_block player_home_block--setup nofloat"  v-if="!thisPlayer.corporationCard">
+      <div class="player_home_block player_home_block--setup nofloat"  v-if="thisPlayer.tableau.length === 0">
 
           <template v-if="isInitialDraftingPhase()">
             <div v-for="card in playerView.dealtCorporationCards" :key="card.name" class="cardbox">
@@ -224,7 +224,7 @@
       <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
           <a name="colonies" class="player_home_anchor"></a>
           <dynamic-title title="Colonies" :color="thisPlayer.color"/>
-          <div class="colonies-fleets-cont" v-if="thisPlayer.corporationCard">
+          <div class="colonies-fleets-cont">
               <div class="colonies-player-fleets" v-for="colonyPlayer in playerView.players" :key="colonyPlayer.color">
                   <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)" :key="idx"></div>
               </div>
@@ -267,6 +267,7 @@ import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {CardType} from '@/common/cards/CardType';
 
 import * as raw_settings from '@/genfiles/settings.json';
 
@@ -318,7 +319,11 @@ export default Vue.extend({
     game(): GameModel {
       return this.playerView.game;
     },
+    CardType(): typeof CardType {
+      return CardType;
+    },
   },
+
   components: {
     'board': Board,
     DynamicTitle,

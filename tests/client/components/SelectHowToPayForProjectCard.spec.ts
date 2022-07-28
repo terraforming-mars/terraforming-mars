@@ -179,14 +179,14 @@ describe('SelectHowToPayForProjectCard', () => {
   });
 
   it('Paying for Stratospheric Birds with Dirigibles while another card has floaters (#4052)', async () => {
-    const playedCards: Array<Partial<CardModel>> = [
+    const tableau: Array<Partial<CardModel>> = [
       {name: CardName.DIRIGIBLES, resourceType: CardResource.FLOATER, resources: 3},
       {name: CardName.AERIAL_MAPPERS, resourceType: CardResource.FLOATER, resources: 1},
     ];
     const wrapper = setupCardForPurchase(
       CardName.STRATOSPHERIC_BIRDS, 12, {
         megaCredits: 9,
-        playedCards: playedCards as Array<CardModel>,
+        tableau: tableau as Array<CardModel>,
       },
       {floaters: 3});
 
@@ -502,7 +502,7 @@ describe('SelectHowToPayForProjectCard', () => {
       titanium: 0,
       steelValue: 2,
       titaniumValue: 3,
-      playedCards: [],
+      tableau: [],
     }, playerFields);
 
     const playerView: Partial<PlayerViewModel>= {

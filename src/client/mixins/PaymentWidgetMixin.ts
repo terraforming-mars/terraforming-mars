@@ -182,7 +182,7 @@ export const PaymentWidgetMixin = {
       if (target === 'floaters' && this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
-        if (!thisPlayer.playedCards.some((card) => {
+        if (!thisPlayer.tableau.some((card) => {
           return card.name !== CardName.DIRIGIBLES && card.resourceType === CardResource.FLOATER && (card.resources ?? 0) > 0;
         })) {
           amount = Math.max(amount - 1, 0);

@@ -58,7 +58,8 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
+    this.onCardPlayed(player, card as ICard as IProjectCard);
+    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {

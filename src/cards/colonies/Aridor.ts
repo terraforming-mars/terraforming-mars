@@ -58,7 +58,7 @@ export class Aridor extends Card implements ICorporationCard {
   private checkActivation(colony: IColony, game: Game): void {
     if (colony.isActive) return;
     for (const player of game.getPlayers()) {
-      for (const card of [...player.corporations, ...player.playedCards]) {
+      for (const card of player.tableau) {
         const active = ColoniesHandler.maybeActivateColony(colony, card);
         if (active) {
           return;

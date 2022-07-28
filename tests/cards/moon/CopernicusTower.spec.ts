@@ -37,14 +37,14 @@ describe('CopernicusTower', () => {
     // Now that there's 1 resource, player will be presented with 2 options.
     input = cast(card.action(player), OrOptions);
 
-    // The first option of which is the same: increase the resource count.
-    input.options[0].cb();
+    // The second option is the same: increase the resource count.
+    input.options[1].cb();
     expect(card.resourceCount).eq(2);
 
-    // The second option decreases resource count by 1 and raise the TR 1 step.
+    // The first option decreases resource count by 1 and raise the TR 1 step.
     input = cast(card.action(player), OrOptions);
     expect(player.getTerraformRating()).eq(14);
-    input.options[1].cb();
+    input.options[0].cb();
     expect(card.resourceCount).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });

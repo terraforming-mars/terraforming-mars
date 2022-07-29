@@ -525,12 +525,14 @@ export class Game {
     }
   }
 
-  private playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
+  // public for testing
+  public playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
     if (player.corporations.length === 0) {
       player.corporations.push(corporationCard);
     } else {
       throw new Error('Do not use playCorporationCard for more than one corporation card.');
     }
+
     player.megaCredits = corporationCard.startingMegaCredits;
     if (corporationCard.cardCost !== undefined) {
       player.cardCost = corporationCard.cardCost;
@@ -541,6 +543,7 @@ export class Game {
       player.deductResource(Resources.MEGACREDITS, diff);
     }
     corporationCard.play(player);
+    if (corporationCard.initialAction !== undefined) player.pendingInitialActions.push(corporationCard);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
     player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));
 

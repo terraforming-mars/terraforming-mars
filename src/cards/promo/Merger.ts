@@ -62,22 +62,19 @@ export class Merger extends PreludeCard {
     while (cards.length < 4) {
       const card = candidateCards.pop();
       if (card === undefined) break;
-      // TODO(kberg): Make it possible to support second initial actions.
-      if (card.initialAction !== undefined) break;
       cards.push(card);
     }
     LogHelper.logDrawnCards(player, cards, true);
     return cards;
   }
 
-  private static playSecondCorporationCard(player: Player, corporationCard: ICorporationCard) {
+  public static playSecondCorporationCard(player: Player, corporationCard: ICorporationCard) {
     player.corporations.push(corporationCard);
     player.megaCredits += corporationCard.startingMegaCredits;
     Merger.setCardCostIfNeeded(player, corporationCard);
     corporationCard.play(player);
     if (corporationCard.initialAction !== undefined) {
-      throw new Error('Multiple initial actions not supported');
-      // player.pendingInitialActions.push(corporationCard);
+      player.pendingInitialActions.push(corporationCard);
     }
     player.game.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
     player.game.triggerOtherCorpEffects(player, corporationCard);

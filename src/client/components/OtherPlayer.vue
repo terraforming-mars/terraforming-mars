@@ -50,8 +50,6 @@ export default Vue.extend({
       <div v-if="player.tableau.length > 0" class="player_home_block">
           <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
           <div>
-              <stacked-cards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player"></stacked-cards>
-
               <div v-for="card in getCardsByType(player.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
               </div>

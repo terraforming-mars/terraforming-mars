@@ -129,12 +129,8 @@ export default Vue.extend({
     // Initialize all's card discount.
     details['all'] = {name: 'all', discount: this.player?.cardDiscount ?? 0, points: 0, count: 0};
 
-    const cards = this.player.corporationCard !== undefined ?
-      [...this.player.playedCards, this.player.corporationCard] :
-      this.player.playedCards;
-
     // For each card
-    for (const card of cards) {
+    for (const card of this.player.tableau) {
       // Calculate discount
       for (const discount of card.discount ?? []) {
         const tag = discount.tag ?? 'all';

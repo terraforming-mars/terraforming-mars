@@ -27,7 +27,6 @@ export interface PublicPlayerModel {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
-  corporationCard: CardModel | undefined;
   energy: number;
   energyProduction: number;
   fleetSize: number;
@@ -47,7 +46,7 @@ export interface PublicPlayerModel {
   plants: number;
   plantProduction: number;
   plantsAreProtected: boolean;
-  playedCards: Array<CardModel>;
+  tableau: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;

@@ -8,6 +8,7 @@ import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {mainAppSettings} from '@/client/components/App';
 import Card from '@/client/components/card/Card.vue';
 import Button from '@/client/components/common/Button.vue';
+import {CardType} from '@/common/cards/CardType';
 
 export default Vue.extend({
   name: 'OtherPlayer',
@@ -36,28 +37,34 @@ export default Vue.extend({
       );
     },
   },
+  computed: {
+    CardType(): typeof CardType {
+      return CardType;
+    },
+  },
 });
 </script>
 <template>
   <div v-show="isVisible()" class="other_player_cont menu">
       <Button size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
-      <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
+      <div v-if="player.tableau.length > 0" class="player_home_block">
           <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
           <div>
-              <div v-if="player.corporationCard !== undefined" class="cardbox">
-                  <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
-              </div>
-              <div v-for="card in sortActiveCards(getCardsByType(player.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
+              <div v-for="card in getCardsByType(player.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
               </div>
-              <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" :player="player"></stacked-cards>
-              <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" :player="player"></stacked-cards>
+
+              <div v-for="card in sortActiveCards(getCardsByType(player.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
+                  <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
+              </div>
+              <stacked-cards :cards="getCardsByType(player.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" :player="player"></stacked-cards>
+              <stacked-cards :cards="getCardsByType(player.tableau, [CardType.EVENT])" :player="player"></stacked-cards>
           </div>
       </div>
       <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
           <span> Self-Replicating Robots cards </span>
           <div>
-              <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+              <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [CardType.ACTIVE])" :key="card.name" class="cardbox">
                   <Card :card="card" />
               </div>
           </div>

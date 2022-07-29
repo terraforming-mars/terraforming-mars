@@ -152,14 +152,6 @@ export default Vue.extend({
 
       case LogMessageDataType.CARD:
         const cardName = data.value as CardName;
-        for (const player of this.players) {
-          const robotCards = player.playedCards.concat(player.selfReplicatingRobotsCards);
-          for (const robotCard of robotCards) {
-            if (cardName === robotCard.name && robotCard.cardType) {
-              return this.cardToHtml(robotCard.cardType, cardName);
-            }
-          }
-        }
         const card = getCard(cardName);
         if (card !== undefined) {
           return this.cardToHtml(card.cardType, cardName);
@@ -319,9 +311,8 @@ export default Vue.extend({
     },
     getResourcesOnCard(cardName: CardName) {
       for (const player of this.players) {
-        const foundCard = player.playedCards.find((card) => card.name === cardName);
+        const foundCard = player.tableau.find((card) => card.name === cardName);
         if (foundCard !== undefined) return foundCard.resources;
-        if (cardName === player.corporationCard?.name) return player.corporationCard.resources;
       }
 
       return undefined;

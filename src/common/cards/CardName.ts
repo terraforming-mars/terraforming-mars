@@ -469,6 +469,7 @@ export enum CardName {
     HARVEST = 'Harvest',
     OUTDOOR_SPORTS = 'Outdoor Sports',
     NEW_PARTNER = 'New Partner',
+    MERGER = 'Merger',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

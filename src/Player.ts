@@ -1863,9 +1863,7 @@ export class Player {
       return;
     }
 
-    if (this.corporations.length > 1) {
-      throw new Error('Not supporting multiple corporations yet.');
-    }
+    // TODO(kberg): support multiple initial actions.
     const corporationCard = this.corporations[0];
 
     // Terraforming Mars FAQ says:

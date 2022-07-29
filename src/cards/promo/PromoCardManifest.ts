@@ -30,6 +30,7 @@ import {MagneticShield} from './MagneticShield';
 import {MeatIndustry} from './MeatIndustry';
 import {Meltworks} from './Meltworks';
 import {MercurianAlloys} from './MercurianAlloys';
+import {Merger} from './Merger';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
 import {NewPartner} from './NewPartner';
@@ -98,6 +99,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
   ],
   preludeCards: [
     {cardName: CardName.NEW_PARTNER, Factory: NewPartner},
+    {cardName: CardName.MERGER, Factory: Merger},
   ],
 
   cardsToRemove: [

@@ -112,7 +112,8 @@ export class Player {
   public actionsTakenThisRound: number = 0;
   private actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: CardName | undefined;
-  private corporationInitialActionDone: boolean = false;
+  public pendingInitialActions: Array<ICorporationCard> = [];
+
 
   // Cards
   public dealtCorporationCards: Array<ICorporationCard> = [];
@@ -1863,49 +1864,51 @@ export class Player {
       return;
     }
 
-    // TODO(kberg): support multiple initial actions.
-    const corporationCard = this.corporations[0];
-
     // Terraforming Mars FAQ says:
     //   If for any reason you are not able to perform your mandatory first action (e.g. if
     //   all 3 Awards are claimed before starting your turn as Vitor), you can skip this and
     //   proceed with other actions instead.
     // This code just uses "must skip" instead of "can skip".
-    if (this.isCorporation(CardName.VITOR) && this.game.allAwardsFunded()) {
-      this.corporationInitialActionDone = true;
+    const vitor = this.getCorporation(CardName.VITOR);
+    if (vitor !== undefined && this.game.allAwardsFunded()) {
+      this.pendingInitialActions = this.pendingInitialActions.filter((card) => card !== vitor);
     }
 
-    if (corporationCard !== undefined &&
-          corporationCard.initialAction !== undefined &&
-          corporationCard.initialActionText !== undefined &&
-          this.corporationInitialActionDone === false
-    ) {
-      const initialActionOption = new SelectOption(
-        {
-          message: 'Take first action of ${0} corporation',
-          data: [{
-            type: LogMessageDataType.RAW_STRING,
-            value: corporationCard.name,
-          }],
-        },
-        corporationCard.initialActionText, () => {
-          game.defer(new SimpleDeferredAction(this, () => {
-            if (corporationCard.initialAction) {
-              return corporationCard.initialAction(this);
-            } else {
-              return undefined;
-            }
-          }));
-          this.corporationInitialActionDone = true;
-          return undefined;
-        },
-      );
-      const initialActionOrPass = new OrOptions(
-        initialActionOption,
-        this.passOption(),
-      );
-      this.setWaitingFor(initialActionOrPass, () => {
-        this.incrementActionsTaken();
+
+    if (this.pendingInitialActions.length > 0) {
+      const orOptions = new OrOptions();
+
+      this.pendingInitialActions.forEach((corp) => {
+        const option = new SelectOption(
+          {
+            message: 'Take first action of ${0} corporation',
+            data: [{
+              type: LogMessageDataType.RAW_STRING,
+              value: corp.name,
+            }],
+          },
+          corp.initialActionText, () => {
+            game.defer(new SimpleDeferredAction(this, () => {
+              if (corp.initialAction) {
+                return corp.initialAction(this);
+              } else {
+                return undefined;
+              }
+            }));
+
+            this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
+            return undefined;
+          });
+        orOptions.options.push(option);
+      });
+
+      orOptions.options.push(this.passOption());
+
+      this.setWaitingFor(orOptions, () => {
+        this.actionsTakenThisRound++;
+        this.actionsTakenThisGame++;
+        // TODO(kberg): implement this?
+        // this.timer.rebateTime(constants.BONUS_SECONDS_PER_ACTION);
         this.takeAction();
       });
       return;
@@ -2110,7 +2113,8 @@ export class Player {
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
-      corporationInitialActionDone: this.corporationInitialActionDone,
+      pendingInitialActions: this.pendingInitialActions.map((c) => c.name),
+      corporationInitialActionDone: undefined,
       // Cards
       dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
       dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
@@ -2171,7 +2175,6 @@ export class Player {
     player.colonyTradeDiscount = d.colonyTradeDiscount;
     player.colonyTradeOffset = d.colonyTradeOffset;
     player.colonyVictoryPoints = d.colonyVictoryPoints;
-    player.corporationInitialActionDone = d.corporationInitialActionDone;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     // TODO(kberg): delete this conditional by 2022-06-01
     if (!player.victoryPointsByGeneration) {
@@ -2243,6 +2246,11 @@ export class Player {
         }
         player.corporations.push(card);
       }
+    }
+
+    player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
+    if (d.corporationInitialActionDone !== undefined) {
+      player.pendingInitialActions = [player.corporations[0]];
     }
 
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);

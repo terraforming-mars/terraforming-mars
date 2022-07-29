@@ -409,7 +409,7 @@ export class Server {
       citiesCount: player.game.getCitiesCount(player),
       coloniesCount: player.getColoniesCount(),
       color: player.color,
-      corporationCard: player.corporationCard !== undefined ? Server.getCorporationCard(player, player.corporationCard) : undefined,
+      corporationCard: player.corporations.length > 0 ? Server.getCorporationCard(player, player.corporations[0]) : undefined,
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       fleetSize: player.getFleetSize(),

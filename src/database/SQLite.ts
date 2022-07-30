@@ -120,6 +120,9 @@ export class SQLite implements IDatabase {
         if (err) {
           reject(err);
         } else {
+          if (row === undefined) {
+            reject(new Error(`Game ${game_id} not found`));
+          }
           resolve(JSON.parse(row.game));
         }
       });

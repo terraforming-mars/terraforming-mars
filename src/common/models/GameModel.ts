@@ -9,6 +9,7 @@ import {IAresData} from '../ares/IAresData';
 import {SpaceModel} from './SpaceModel';
 import {MoonModel} from './MoonModel';
 import {PathfindersModel} from './PathfindersModel';
+import {CardModel} from './CardModel';
 import {SpectatorId} from '../Types';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
@@ -16,6 +17,7 @@ export interface GameModel {
   aresData: IAresData | undefined;
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;
+  corporationsToDraft: Array<CardModel>;
   deckSize: number;
   gameAge: number;
   gameOptions: GameOptionsModel;

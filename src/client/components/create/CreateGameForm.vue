@@ -264,7 +264,10 @@
                                 </label>
                                 </div>
                             </div>
-
+                            <input type="checkbox" v-model="corporationsDraft" id="corporationsDraft-checkbox">
+                            <label for="corporationsDraft-checkbox">
+                                <span v-i18n>Corporations Draft</span>
+                            </label>
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
                             <label for="randomFirstPlayer-checkbox">
                                 <span v-i18n>Random first player</span>
@@ -444,6 +447,7 @@ export interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
+    corporationsDraft: boolean;
     randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
@@ -515,6 +519,7 @@ export default (Vue as WithRefs<Refs>).extend({
       prelude: false,
       draftVariant: true,
       initialDraft: false,
+      corporationsDraft: false,
       randomMA: RandomMAOptionType.NONE,
       randomFirstPlayer: true,
       showOtherPlayersVP: false,
@@ -830,6 +835,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const prelude = component.prelude;
       const draftVariant = component.draftVariant;
       const initialDraft = component.initialDraft;
+      const corporationsDraft = component.corporationsDraft;
       const randomMA = component.randomMA;
       const showOtherPlayersVP = component.showOtherPlayersVP;
       const venusNext = component.venusNext;
@@ -971,6 +977,7 @@ export default (Vue as WithRefs<Refs>).extend({
         soloTR,
         clonedGamedId,
         initialDraft,
+        corporationsDraft,
         randomMA,
         shuffleMapOption,
         // beginnerOption,

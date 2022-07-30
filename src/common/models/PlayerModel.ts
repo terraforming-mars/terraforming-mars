@@ -68,6 +68,7 @@ export interface PlayerViewModel extends ViewModel {
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
+  draftedCorporations: Array<CardModel>;
   draftedCards: Array<CardModel>;
   id: PlayerId;
   pickedCorporationCard: Array<CardModel>; // Why Array?

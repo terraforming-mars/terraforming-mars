@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
@@ -21,7 +21,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
       tags: [Tags.JOVIAN],
       name: CardName.JUPITER_FLOATING_STATION,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       victoryPoints: 1,
 
@@ -54,7 +54,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
   public action(player: Player) {
     return new OrOptions(
       new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {
+        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {
           restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card',
         }));
         return undefined;

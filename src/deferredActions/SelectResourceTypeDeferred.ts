@@ -4,14 +4,15 @@ import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class SelectResourceTypeDeferred implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class SelectResourceTypeDeferred extends DeferredAction {
   constructor(
-        public player: Player,
-        public resources: Array<Resources>,
-        public title: string,
-        public cb: (resource: Resources) => void,
-  ) {}
+    player: Player,
+    public resources: Array<Resources>,
+    public title: string,
+    public cb: (resource: Resources) => void,
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     const orOptions = new OrOptions();

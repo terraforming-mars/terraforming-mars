@@ -4,18 +4,19 @@ import {Game} from '../../../src/Game';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('HiTechLab', function() {
-  let card : HiTechLab; let player : Player;
+  let card: HiTechLab;
+  let player: Player;
 
   beforeEach(function() {
     card = new HiTechLab();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t act if no energy resources available', function() {
+  it('Can not act if no energy resources available', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

@@ -25,7 +25,7 @@ export default Vue.extend({
   },
   methods: {
     switchLanguageTo(langId: string) {
-      this.PreferencesManager.save('lang', langId);
+      this.PreferencesManager.INSTANCE.set('lang', langId);
       window.location.reload();
     },
   },
@@ -86,6 +86,10 @@ export default Vue.extend({
 
   &--it {
     background-position: 0 42.975207%;
+  }
+
+  &--ko {
+    background-position: 0 47.52%;
   }
 }
 </style>

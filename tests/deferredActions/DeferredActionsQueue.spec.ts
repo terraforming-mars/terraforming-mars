@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {DeferredAction} from '../../src/deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../src/deferredActions/DeferredAction';
 import {DeferredActionsQueue} from '../../src/deferredActions/DeferredActionsQueue';
 import {PlayerInputTypes} from '../../src/common/input/PlayerInputTypes';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/inputs/SelectOption';
 
 describe('DeferredActionsQueue', () => {
   it('runs actions for player', () => {
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const bluePlayer = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const bluePlayer = TestPlayer.BLUE.newPlayer();
     const queue = new DeferredActionsQueue();
     const expectedInput = new SelectOption('foo', 'bar', () => undefined);
-    queue.push(new DeferredAction(redPlayer, () => expectedInput));
-    queue.push(new DeferredAction(bluePlayer, () => undefined));
+    queue.push(new SimpleDeferredAction(redPlayer, () => expectedInput));
+    queue.push(new SimpleDeferredAction(bluePlayer, () => undefined));
     let finished = false;
     expect(queue.length).eq(2);
     queue.runAllFor(redPlayer, () => {

@@ -1,19 +1,19 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {runNextAction, setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {ProcessorFactory} from '../../../src/cards/moon/ProcessorFactory';
 import {expect} from 'chai';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('ProcessorFactory', () => {
   let player: Player;
   let card: ProcessorFactory;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new ProcessorFactory();
   });
 
@@ -31,7 +31,7 @@ describe('ProcessorFactory', () => {
     card.action(player);
     player.playedCards.push(card);
     expect(player.steel).eq(0);
-    TestingUtils.runNextAction(player.game);
+    runNextAction(player.game);
 
     expect(card.resourceCount).eq(2);
   });

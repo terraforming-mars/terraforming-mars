@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
@@ -13,7 +13,7 @@ import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 
-export class LakefrontResorts extends Card implements CorporationCard {
+export class LakefrontResorts extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

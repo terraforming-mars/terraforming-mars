@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderTile} from '@/cards/render/CardRenderer';
+import {ICardRenderTile} from '@/common/cards/render/Types';
 import {generateClassString} from '@/common/utils/utils';
 import {TileType} from '@/common/TileType';
 
@@ -126,7 +126,7 @@ export default Vue.extend({
   name: 'CardRenderTileComponent',
   props: {
     item: {
-      type: Object as () => CardRenderTile,
+      type: Object as () => ICardRenderTile,
       required: true,
     },
   },

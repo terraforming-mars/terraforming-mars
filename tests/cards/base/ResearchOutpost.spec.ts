@@ -3,16 +3,18 @@ import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ResearchOutpost', function() {
-  let card : ResearchOutpost; let player : Player; let game : Game;
+  let card: ResearchOutpost;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new ResearchOutpost();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -24,7 +26,7 @@ describe('ResearchOutpost', function() {
     expect(card.getCardDiscount()).to.eq(1);
   });
 
-  it('Can\'t play if no spaces available', function() {
+  it('Can not play if no spaces available', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
     for (let i = 0; i < lands.length; i++) {
       game.addGreenery(player, lands[i].id);

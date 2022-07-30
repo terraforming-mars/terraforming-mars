@@ -1,13 +1,12 @@
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardType} from '../../common/cards/CardType';
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {ICard} from '../../cards/ICard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
@@ -19,7 +18,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
       name: CardName.BIOENGINEERING_ENCLOSURE,
       tags: [Tags.ANIMAL],
       cost: 7,
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
       metadata: {
@@ -48,7 +47,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
   }
 
   public action(player: Player) {
-    player.game.defer(new DeferredAction(
+    player.game.defer(new SimpleDeferredAction(
       player,
       () => {
         const resourceCards = player.getResourceCards(this.resourceType).filter((card) => card.name !== CardName.BIOENGINEERING_ENCLOSURE);
@@ -68,10 +67,10 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
           'Select card to add 1 animal',
           'Add animal',
           resourceCards,
-          (foundCards: Array<ICard>) => {
+          ([card]) => {
             this.resourceCount--;
-            player.addResourceTo(foundCards[0], 1);
-            player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(foundCards[0]));
+            player.addResourceTo(card, 1);
+            player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
             return undefined;
           },
         );

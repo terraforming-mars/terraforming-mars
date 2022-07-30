@@ -1,8 +1,8 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
-import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {CardResource} from '../../common/CardResource';
+import {IActionCard, IResourceCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -14,13 +14,13 @@ import {Size} from '../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resources} from '../../common/Resources';
 
-export class StormCraftIncorporated extends Card implements IActionCard, CorporationCard, IResourceCard {
+export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,
       tags: [Tags.JOVIAN],
       startingMegaCredits: 48,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,
       metadata: {
         cardNumber: 'R29',
@@ -54,7 +54,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
   }
 
   public action(player: Player) {
-    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
     if (floaterCards.length === 1) {
       player.addResourceTo(this, {log: true});
       return undefined;
@@ -64,8 +64,8 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
       'Select card to add 1 floater',
       'Add floater',
       floaterCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {qty: 1, log: true});
+      ([card]) => {
+        player.addResourceTo(card, {qty: 1, log: true});
         return undefined;
       },
     );
@@ -87,7 +87,8 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
         if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
           throw new Error(`You cannot overspend floaters`);
         }
-        player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
+        const stormcraft = player.getCorporationOrThrow(this.name);
+        player.removeResourceFrom(stormcraft, floaterAmount);
         player.deductResource(Resources.HEAT, heatAmount);
         return cb();
       },
@@ -98,7 +99,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
       new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
         floaterAmount = amount;
         return undefined;
-      }, 0, Math.min(player.getResourcesOnCorporation(), Math.ceil(targetAmount / 2))),
+      }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),
     );
   }
 }

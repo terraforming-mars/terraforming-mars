@@ -3,19 +3,21 @@ import {Worms} from '../../../src/cards/base/Worms';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Worms', function() {
-  let card : Worms; let player : Player; let game : Game;
+  let card: Worms;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Worms();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     (game as any).oxygenLevel = 3;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

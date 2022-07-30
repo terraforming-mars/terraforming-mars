@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {Biofuels} from '../../../src/cards/prelude/Biofuels';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Biofuels', function() {
   it('Should play', function() {
     const card = new Biofuels();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

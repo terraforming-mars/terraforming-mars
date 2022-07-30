@@ -3,24 +3,26 @@ import {Livestock} from '../../../src/cards/base/Livestock';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Livestock', function() {
-  let card : Livestock; let player : Player; let game : Game;
+  let card: Livestock;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Livestock();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play without plant production', function() {
+  it('Can not play without plant production', function() {
     (game as any).oxygenLevel = 9;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', function() {
     (game as any).oxygenLevel = 8;
     player.addProduction(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;

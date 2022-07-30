@@ -4,14 +4,15 @@ import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SaturnSurfing', function() {
-  let card : SaturnSurfing; let player : Player;
+  let card: SaturnSurfing;
+  let player: Player;
 
   beforeEach(function() {
     card = new SaturnSurfing();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Should play', function() {
@@ -21,7 +22,7 @@ describe('SaturnSurfing', function() {
     expect(card.resourceCount).to.eq(3);
   });
 
-  it('Can\'t act if no floaters on the card', function() {
+  it('Can not act if no floaters on the card', function() {
     card.play(player);
     expect(card.resourceCount).to.eq(1);
 

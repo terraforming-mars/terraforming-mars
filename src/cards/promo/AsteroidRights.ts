@@ -1,13 +1,14 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {LogHelper} from '../../LogHelper';
+import {PlayerInput} from '../../PlayerInput';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -21,7 +22,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       name: CardName.ASTEROID_RIGHTS,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 10,
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
 
       metadata: {
         cardNumber: 'X31',
@@ -55,7 +56,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
   public action(player: Player) {
     const canAddAsteroid = player.canAfford(1);
     const hasAsteroids = this.resourceCount > 0;
-    const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
+    const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
 
     const gainTitaniumOption = new SelectOption('Remove 1 asteroid on this card to gain 2 titanium', 'Remove asteroid', () => {
       this.resourceCount--;
@@ -78,9 +79,9 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       return undefined;
     });
 
-    const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, (foundCards: Array<ICard>) => {
+    const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
       player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
-      player.addResourceTo(foundCards[0], {log: true});
+      player.addResourceTo(card, {log: true});
 
       return undefined;
     });
@@ -94,7 +95,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       return addAsteroidOption;
     }
 
-    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+    const opts: Array<PlayerInput> = [];
     opts.push(gainTitaniumOption);
     opts.push(increaseMcProdOption);
     asteroidCards.length === 1 ? opts.push(addAsteroidToSelf) : opts.push(addAsteroidOption);

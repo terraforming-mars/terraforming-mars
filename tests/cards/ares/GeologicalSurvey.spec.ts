@@ -11,41 +11,41 @@ import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {addGreenery, resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, runAllActions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('GeologicalSurvey', () => {
-  let card : GeologicalSurvey;
-  let player : Player;
+  let card: GeologicalSurvey;
+  let player: Player;
   let redPlayer : Player;
-  let game : Game;
+  let game: Game;
 
   beforeEach(() => {
     card = new GeologicalSurvey();
-    player = TestPlayers.BLUE.newPlayer();
-    redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    player = TestPlayer.BLUE.newPlayer();
+    redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });
 
   it('Can play', () => {
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
   });
 
@@ -65,7 +65,7 @@ describe('GeologicalSurvey', () => {
       SpaceBonus.MEGACREDITS,
       SpaceBonus.ANIMAL,
       SpaceBonus.MICROBE,
-      SpaceBonus.POWER,
+      SpaceBonus.ENERGY,
     ],
     };
     game.addTile(player, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
@@ -88,7 +88,7 @@ describe('GeologicalSurvey', () => {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(2);
     expect(player.titanium).eq(2);
@@ -123,7 +123,7 @@ describe('GeologicalSurvey', () => {
     player.playedCards = [card];
     game.addTile(player, SpaceType.LAND, space, {tileType: TileType.RESTRICTED_AREA});
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.titanium).eq(2);
     expect(player.steel).eq(2);
@@ -133,26 +133,26 @@ describe('GeologicalSurvey', () => {
   });
 
   it('Works with Mars First policy', () => {
-    player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    player = TestPlayer.BLUE.newPlayer();
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player], player, gameOptions);
     const turmoil = game.turmoil!;
     const marsFirst = new MarsFirst();
 
     player.playedCards.push(card);
     game.phase = Phase.ACTION; // Policies are only active in the ACTION phase
 
-    TestingUtils.resetBoard(game);
+    resetBoard(game);
 
     game.addGreenery(player, '11');
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.steel).eq(0);
 
-    TestingUtils.resetBoard(game);
+    resetBoard(game);
 
-    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
+    setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
     game.addGreenery(player, '11');
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.steel).eq(2);
   });
 
@@ -168,7 +168,7 @@ describe('GeologicalSurvey', () => {
     player.heat = 0;
     const selectSpace = new OceanCity().play(player);
     selectSpace.cb(space);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.heat).eq(0);
   });
 });

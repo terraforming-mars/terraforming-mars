@@ -84,11 +84,11 @@
     "Magnate": "Magnate",
     "Most automated cards in play (green cards)": "Possiedi il maggior numero di carte verdi",
     "Space Baron": "Barone dello Spazio",
-    "Most space tags (event cards do not count)": "Possiedi il maggior numero di simboli Spazio (le carte Evento non contano)",
+    "Having the most space tags in play": "Possiedi il maggior numero di simboli Spazio",
     "Excentric": "Eccentrico",
     "Most resources on cards": "Possiedi il maggior numero di risorse sulle carte",
     "Contractor": "Impresario",
-    "Most building tags (event cards do not count)": "Possiedi il maggior numero di simboli Edificio (le carte Evento non contano)",
+    "Having the most building tags in play": "Possiedi il maggior numero di simboli Edificio",
     "Celebrity": "Celebrità",
     "Most cards in play (not events) with a cost of at least 20 megacredits": "Possiedi il maggior numero di carte in gioco (non Eventi) con un costo di almeno 20 M€",
     "Industrialist": "Industriale",
@@ -178,8 +178,8 @@
     "Donate": "Dona",
     "LoginOut": "Scollegati",
     "Help Translation": "Aiuta con la Traduzione",
-    
-        
+
+
     "Toggle all": "Spunta tutti",
     "Base": "Base",
     "Agendas": "Politiche",
@@ -196,7 +196,7 @@
     "Filter description": "filtra descrizione",
     "Sort by ID": "ordina per ID",
 
- 
+
 
      "Remove colony": "Rimuovi Colonia",
      "Select colony tile to remove":  "Seleziona la tessera Colonia da rimuovere",
@@ -224,11 +224,11 @@
      "Show timers": "Mostra i timer",
      "You cannot pay for this card": "Non puoi pagare questa carta",
      "Select card(s) to buy":"Seleziona carta/e da comprare",
-   
+
     "Starting Megacredits:":"MegaCrediti Iniziali：",
     "After Preludes:":"Dopo i Prelude：",
-    
-    
+
+
     "Air Scrapping": "Frammentazione dell'Aria",
     "Buffer Gas": "Gas Tampone",
     "(Spend 16 M€ to increase your TR 1 step. Solo games only.)": "(Spendi 16 M€ per incrementare il tuo TT di 1 livello. Soltanto per partite in solitario.)",
@@ -242,8 +242,8 @@
     "(Spend 23 M€ to place a greenery tile and raise oxygen 1 step.)":"(Spendi 23 M€ per piazzare una tessera Vegetazione ed incrementare l'Ossigeno di 1 livello.)",
     "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)":"(Spendi 25 M€ per collocare una tessera Città ed incrementare la tua produzione di M€ di 1 livello.)",
 
-    
-    
+
+
     "Select a card to keep and pass the rest to ${0}": "Scegli una carta da tenere e passa le altre a ${0}",
     "Game Home": "Home Partita",
     "Send players their links below. As game administrator pick your link to use.": "Manda ai giocatori i loro link sottostanti. Come amministratore di gioco scegli il tuo link da usare",
@@ -274,8 +274,8 @@
     "End": "Termina",
     "Sell": "Vendi",
     "Undo": "Annulla",
-        
-    "All": "Tutto",   
+
+    "All": "Tutto",
     "Corporate Era": "Corporate Era",
     "Randomize board tiles": "Randomizza tessere della plancia",
     "Set Predefined Game": "Imposta Gioco Predefinito",
@@ -300,9 +300,9 @@
     "Player ${0} name": "Nome del Giocatore ${0}",
     "Multiplayer Options": "Opzioni Multigiocatore",
     "Community": "Community"
-    
-    
-    
-      
-    
+
+
+
+
+
 }

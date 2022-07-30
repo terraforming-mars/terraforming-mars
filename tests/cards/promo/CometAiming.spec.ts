@@ -5,24 +5,25 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
+import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('CometAiming', function() {
-  let card : CometAiming; let player : Player;
+  let card: CometAiming;
+  let player: Player;
 
   beforeEach(function() {
     card = new CometAiming();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
     expect(card.play()).is.undefined;
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });
@@ -50,7 +51,7 @@ describe('CometAiming', function() {
     player.titanium = 1;
     card.resourceCount = 1;
 
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
     action.options[1].cb([card2]);
     expect(card2.resourceCount).to.eq(1);
     expect(player.titanium).to.eq(0);
@@ -59,7 +60,7 @@ describe('CometAiming', function() {
   it('Cannot spend resource to place ocean if oceans are maxed', function() {
     player.playedCards.push(card);
     card.resourceCount = 1;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     expect(card.canAct(player)).is.not.true;
 
     player.titanium = 1;

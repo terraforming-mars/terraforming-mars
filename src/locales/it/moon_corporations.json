@@ -1,42 +1,41 @@
-{  
+{
  "Crescent Research Association":"Crescent Research Association",
  "Effect: When you play a moon tag, you pay 1 M€ less for each Moon tag you have.":"Effetto: quando giochi una carta con un simbolo Luna, paghi 1 M€ in meno per ciascun simbolo Luna posseduto.",
  "You start with 50 M€. 1 VP for every 3 Moon tags you have.":"Inizi con 50 M€. 1 PV ogni 3 simboli Luna posseduti.",
- 
+
   "Intragen Sanctuary Headquarters":"Intragen Sanctuary Headquarters",
  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)":"Effetto: quando un giocatore gioca una carta con un simbolo Animale (inclusa questa), aggiungi 1 Animale a questa carta.",
- "1 VP for every 2 animals on this card.":"1 PV ogni 2 Animali su questa carta.",
- "You start with 38 M€. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.":"Inizi con 38 M€. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello.",
- 
+ "You start with 38 M€. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step. 1 VP for every 2 animals on this card.":"Inizi con 38 M€. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. 1 PV ogni 2 Animali su questa carta.",
+
  "Luna First Incorporated":"Luna First Incorporated",
  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.":"Effetto: quando tu incrementi una qualsiasi Traccia Lunare, incrementa la tua Produzione di M€ di 1 livello.",
  "Effect: When any player raises any Moon Rate, gain 1 M€ per step.":"Effetto: quando un qualunque giocatore incrementa una qualsiasi Traccia Lunare, ottieni 1 M€ per ciascun livello.",
  "You start with 40 M€, 2 steel, and 2 Titanium.":"Inizi con 40 M€, 2 risorse Acciaio e 2 risorse Titanio.",
- 
+
  "Luna Hyperloop Corporation":"Luna Hyperloop Corporation",
  "Action: Gain 1 M€ for each road tile on the Moon.":"Azione: ottieni 1 M€ per ogni tessera Strada sulla Luna.",
  "1 VP for each road tile on the Moon.":"1 PV per ogni tessera Strada sulla Luna.",
  "You start with 38 M€ and 4 steel.":"Inizi con 38 M€ e 4 risorse Acciaio.",
- 
+
   "Nanotech Industries":"Nanotech Industries",
  "Action: Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]":"Azione: aggiungi 1 risorsa Scienza a una qualunque carta [tranne a quelle che danno 2 o più PV per risorsa].",
  "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.":"Inizi con 42 M€. Come prima azione, pesca 3 carte: scegline 2 da tenere in mano e scarta la terza. 1 PV ogni 2 risorse Scienza su questa carta.",
- 
+
   "Tempest Consultancy":"Tempest Consultancy",
  "Action: Place 1 delegate in any party for every 5 moon tags you have [max 3.]":"Azione: colloca 1 Delegato su un qualunque Partito per ogni 5 simboli Luna posseduti [massimo 3].",
  "Effect: When your delegate becomes the chairman, increase your TR 1 step.":"Effetto: quando un tuo Delegato diventa Presidente, incrementa il tuo TT di 1 livello.",
  "You start with 37 M€. As your first action, place 2 delegates in one party.":"Inizi con 37 M€. Come prima azione, colloca 2 Delegati su un Partito.",
- 
+
   "The Archaic Foundation Institute":"The Archaic Foundation Institute",
  "Effect: When you play a Moon tag, add a bronze resource cube on this card.":"Effetto: quando giochi una carta con un simbolo Luna, aggiungi 1 cubo risorsa su questa carta.",
  "Effect: Automatically remove every 3 bronze resource cubes collected here and increase your TR 1 step.":"Effetto: raggiunti 3 cubi risorsa, li rimuove automaticamente e incrementa il tuo TT di 1 livello.",
  "You start with 55 M€.":"Inizi con 55 M€.",
- 
+
  "The Darkside of The Moon Syndicate":"The Darkside of The Moon Syndicate",
  "Action: Spend 1 titanium to add 1 syndicate fleet on this card":"Azione: spendi 1 risorsa Titanio per aggiungere 1 Flotta Unione a questa carta.",
  "Action: Remove 1 syndicate fleet from this card to steal 8 M€ from any opponent.":"Azione: rimuovi 1 Flotta Unione da questa carta per rubare 8 M€ a un giocatore avversario.",
  "You start with 40 M€ and 2 syndicate fleets on this card.":"Inizi con 40 M€ e 2 Flotte Unione su questa carta.",
- 
+
   "The Grand Luna Capital Group":"The Grand Luna Capital Group",
  "Effect: When you place a colony tile, gain 2 M€ for each adjacent colony tile.":"Effetto: quando collochi una tessera Colonia, ottieni 2 M€ per ogni tessera Colonia adiacente.",
  "1 VP for each colony tile adjacent to your colony tiles.":"1 PV per ogni tessera Colonia adiacente alle tue tessere Colonia.",

@@ -2,27 +2,30 @@ import {expect} from 'chai';
 import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
+import {isPlayerId, PlayerId} from '../../../src/common/Types';
 
 describe('VoteOfNoConfidence', function() {
   it('Should play', function() {
     const card = new VoteOfNoConfidence();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
+    const turmoil = game.turmoil!;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-        game.turmoil!.chairman = 'NEUTRAL';
-        expect(player.canPlayIgnoringCost(card)).is.not.true;
+    turmoil.chairman = 'NEUTRAL';
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-        const greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
-        greens.partyLeader = player.id;
-        expect(player.canPlayIgnoringCost(card)).is.true;
+    const greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
+    greens.partyLeader = player.id;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
-        card.play(player);
-        expect(game.getPlayerById(game.turmoil!.chairman)).to.eq(player);
-        expect(player.getTerraformRating()).to.eq(15);
+    card.play(player);
+    expect(isPlayerId(turmoil.chairman)).is.true;
+    expect(game.getPlayerById(turmoil.chairman as PlayerId)).to.eq(player);
+    expect(player.getTerraformRating()).to.eq(15);
   });
 });

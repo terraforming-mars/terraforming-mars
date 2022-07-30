@@ -2,14 +2,14 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {BasicInfrastructure} from '../../../src/cards/moon/BasicInfrastructure';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('BasicInfrastructure', () => {
   let game: Game;
@@ -18,8 +18,8 @@ describe('BasicInfrastructure', () => {
   let card: BasicInfrastructure;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new BasicInfrastructure();
   });

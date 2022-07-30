@@ -3,28 +3,28 @@ import {GreatDam} from '../../../src/cards/base/GreatDam';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {maxOutOceans} from '../../TestingUtils';
 
 describe('GreatDam', () => {
-  let card : GreatDam; let player : TestPlayer;
+  let card: GreatDam;
+  let player: TestPlayer;
 
   beforeEach(() => {
     card = new GreatDam();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can play', () => {
-    TestingUtils.maxOutOceans(player, 3);
+    maxOutOceans(player, 3);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
-    TestingUtils.maxOutOceans(player, 4);
+    maxOutOceans(player, 4);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', () => {
-    TestingUtils.maxOutOceans(player, 4);
+    maxOutOceans(player, 4);
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 

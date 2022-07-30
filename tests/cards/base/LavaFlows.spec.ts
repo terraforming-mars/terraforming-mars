@@ -5,8 +5,8 @@ import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {resetBoard} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {newTestGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
 
@@ -17,10 +17,10 @@ describe('LavaFlows', function() {
 
   beforeEach(function() {
     card = new LavaFlows();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
-    TestingUtils.resetBoard(game);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
+    resetBoard(game);
   });
 
   it('Cannot play if no available spaces', function() {
@@ -30,7 +30,7 @@ describe('LavaFlows', function() {
 
     expect(card.canPlay(player)).is.true;
 
-    const anotherPlayer = TestPlayers.RED.newPlayer();
+    const anotherPlayer = TestPlayer.RED.newPlayer();
     game.board.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
     expect(card.canPlay(player)).is.not.true;
   });

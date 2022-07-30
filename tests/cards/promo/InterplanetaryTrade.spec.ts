@@ -13,15 +13,17 @@ import {DeclarationOfIndependence} from '../../../src/cards/pathfinders/Declarat
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryTrade', function() {
-  let card : InterplanetaryTrade; let player : Player; let game: Game;
+  let card: InterplanetaryTrade;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new InterplanetaryTrade();
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foo', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Should play', function() {
@@ -34,7 +36,7 @@ describe('InterplanetaryTrade', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
   });
 
-  it('Should only count wildcards up to the max amount of tag types existing (10 at base)', function() {
+  it('Should only count wild tags up to the max amount of tag types existing (10 at base)', function() {
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -47,7 +49,7 @@ describe('InterplanetaryTrade', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(10);
   });
 
-  it('Should only count wildcards up to the max amount of tag types existing (11 with venus)', function() {
+  it('Should only count wild tags up to the max amount of tag types existing (11 with venus)', function() {
     game.gameOptions.venusNextExtension = true;
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
@@ -61,7 +63,7 @@ describe('InterplanetaryTrade', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(11);
   });
 
-  it('Should only count wildcards up to the max amount of tag types existing (12 with venus and moon)', function() {
+  it('Should only count wild tags up to the max amount of tag types existing (12 with venus and moon)', function() {
     game.gameOptions.venusNextExtension = true;
     game.gameOptions.moonExpansion = true;
     player.playedCards.push(new AdvancedAlloys());
@@ -76,7 +78,7 @@ describe('InterplanetaryTrade', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(12);
   });
 
-  it('Should only count wildcards up to the max amount of tag types existing (13 with venus, moon, and Mars)', function() {
+  it('Should only count wild tags up to the max amount of tag types existing (13 with venus, moon, and Mars)', function() {
     game.gameOptions.venusNextExtension = true;
     game.gameOptions.moonExpansion = true;
     player.playedCards.push(new AdvancedAlloys());

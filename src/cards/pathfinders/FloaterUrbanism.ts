@@ -6,7 +6,7 @@ import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -18,7 +18,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
       name: CardName.FLOATER_URBANISM,
       cost: 7,
       tags: [Tags.VENUS],
-      resourceType: ResourceType.VENUSIAN_HABITAT,
+      resourceType: CardResource.VENUSIAN_HABITAT,
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS, 4)),
       victoryPoints: VictoryPoints.resource(1, 1),
 
@@ -38,11 +38,11 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
   public override resourceCount = 0;
 
   public canAct(player: Player) {
-    return player.getResourceCount(ResourceType.FLOATER) > 0;
+    return player.getResourceCount(CardResource.FLOATER) > 0;
   }
 
   public action(player: Player) {
-    const cards = player.getCardsWithResources(ResourceType.FLOATER);
+    const cards = player.getCardsWithResources(CardResource.FLOATER);
     const input = new SelectCard(
       'Choose a card to move a floater to a Venusian habitat.',
       'Choose',

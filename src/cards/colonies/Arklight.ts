@@ -1,7 +1,7 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
@@ -12,13 +12,13 @@ import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Arklight extends Card implements CorporationCard, IResourceCard {
+export class Arklight extends Card implements ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,
       tags: [Tags.ANIMAL],
       startingMegaCredits: 45,
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       cardType: CardType.CORPORATION,
       victoryPoints: VictoryPoints.resource(1, 2),
 
@@ -42,13 +42,13 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
-    player.addResourceTo(this);
+    player.addResourceTo(this, {log: true});
     return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
     if (player.isCorporation(CardName.ARKLIGHT)) {
-      player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length);
+      player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length, log: true});
     }
   }
 }

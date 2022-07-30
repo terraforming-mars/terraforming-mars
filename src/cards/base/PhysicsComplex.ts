@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
@@ -18,7 +18,7 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard, I
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 12,
 
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
       victoryPoints: VictoryPoints.resource(2, 1),
 
       metadata: {

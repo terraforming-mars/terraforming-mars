@@ -1,10 +1,10 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {isPlayerId} from '../common/utils/utils';
+import {GameId, isGameId, isPlayerId, isSpectatorId} from '../common/Types';
 import {Database} from '../database/Database';
-import {Localfilesystem} from '../database/LocalFilesystem';
-import {SerializedGame} from '../SerializedGame';
+import {LocalFilesystem} from '../database/LocalFilesystem';
+
 const args = process.argv.slice(2);
 const id = args[0];
 
@@ -16,60 +16,47 @@ if (process.env.LOCAL_FS_DB !== undefined) {
 }
 
 const db = Database.getInstance();
-const localDb = new Localfilesystem();
+const localDb = new LocalFilesystem();
 
-if (isPlayerId(id)) {
-  console.log(`Finding game for player ${id}`);
-  db.getGameId(id, (err, gameId) => {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
+async function main() {
+  if (isPlayerId(id) || isSpectatorId(id)) {
+    console.log(`Finding game for player/spectator ${id}`);
+    const gameId = await db.getGameId(id);
     if (gameId === undefined) {
       console.log('Game is undefined');
       process.exit(1);
     }
-    load(gameId);
-  });
-} else {
+    await load(gameId);
+  }
+}
+if (isGameId(id)) {
   load(id);
 }
 
-function load(gameId: string) {
+async function load(gameId: GameId) {
   console.log(`Loading game ${gameId}`);
-  db.getGame(gameId, (err: Error | undefined, game?: SerializedGame) => {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
-    if (game === undefined) {
-      console.log('Game is undefined');
-      process.exit(1);
-    }
+  const game = await db.getGame(gameId);
 
-    console.log(`Last version is ${game.lastSaveId}`);
-    let errors = 0;
-    let writes = 0;
+  console.log(`Last version is ${game.lastSaveId}`);
+  let errors = 0;
+  let writes = 0;
 
-    // The output might not be returned in order, because the
-    // inner call is async, but it is faster than forcing the
-    // results to come in order.
-    for (let version = 0; version <= game.lastSaveId; version++) {
-      db.getGameVersion(gameId, version, (err, serialized) => {
-        if (serialized === undefined) {
-          console.log(`failed to read version ${version}: ${err}`);
-          errors++;
-        } else {
-          console.log(`Storing version ${version}`);
-          localDb.saveSerializedGame(serialized!);
-          writes++;
-        }
-        if (errors + writes === game.lastSaveId + 1) {
-          // This is the last one.
-          console.log(`Wrote ${writes} records and had ${errors} failures.`);
-        }
-      });
+  // The output might not be returned in order, because the
+  // inner call is async, but it is faster than forcing the
+  // results to come in order.
+  const saveIds = await db.getSaveIds(gameId);
+  for (const saveId of saveIds) {
+    try {
+      const serialized = await db.getGameVersion(gameId, saveId);
+      console.log(`Storing version ${saveId}`);
+      localDb.saveSerializedGame(serialized);
+      writes++;
+    } catch (err) {
+      console.log(`failed to process saveId ${saveId}: ${err}`);
+      errors++;
     }
-  });
+  }
+  console.log(`Wrote ${writes} records and had ${errors} failures.`);
 }
 
+main();

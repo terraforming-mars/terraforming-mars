@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
@@ -9,7 +9,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
 
-export class SaturnSystems extends Card implements CorporationCard {
+export class SaturnSystems extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -37,11 +37,12 @@ export class SaturnSystems extends Card implements CorporationCard {
     this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
-    return this._onCardPlayed(player, card);
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+    this._onCardPlayed(player, card);
+    return undefined;
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard) {
+  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
     for (const tag of card.tags) {
       if (tag === Tags.JOVIAN) {
         player.game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS, 1, {log: true});

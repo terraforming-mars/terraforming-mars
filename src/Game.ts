@@ -6,18 +6,14 @@ import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
-import {Colony, serializeColonies} from './colonies/Colony';
-import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
-import {ColonyName} from './common/colonies/ColonyName';
+import {ColonyDealer} from './colonies/ColonyDealer';
+import {IColony} from './colonies/IColony';
 import {Color} from './common/Color';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
-import {ElysiumBoard} from './boards/ElysiumBoard';
 import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
-import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
-import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
@@ -27,15 +23,14 @@ import {LogHelper} from './LogHelper';
 import {LogMessage} from './common/logs/LogMessage';
 import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
-import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './common/Phase';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
-import {ResourceType} from './common/ResourceType';
+import {CardResource} from './common/CardResource';
 import {Resources} from './common/Resources';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -47,129 +42,41 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceBonus} from './common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './common/boards/SpaceType';
-import {Tags} from './common/cards/Tags';
 import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './common/ma/RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './common/ares/IAresData';
-import {AgendaStyle} from './common/turmoil/Types';
 import {GameSetup} from './GameSetup';
-import {CardLoader} from './CardLoader';
+import {GameCards} from './GameCards';
 import {GlobalParameter} from './common/GlobalParameter';
 import {AresSetup} from './ares/AresSetup';
 import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {Random} from './Random';
+import {SeededRandom} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {IPathfindersData} from './pathfinders/IPathfindersData';
-import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
+import {ColonyDeserializer} from './colonies/ColonyDeserializer';
+import {GameLoader} from './database/GameLoader';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
+import {ColoniesHandler} from './colonies/ColoniesHandler';
 
 export interface Score {
   corporation: String;
   playerScore: number;
 }
-
-export interface GameOptions {
-  boardName: BoardName;
-  clonedGamedId: GameId | undefined;
-
-  // Configuration
-  undoOption: boolean;
-  showTimers: boolean;
-  fastModeOption: boolean;
-  showOtherPlayersVP: boolean;
-
-  // Extensions
-  corporateEra: boolean;
-  venusNextExtension: boolean;
-  coloniesExtension: boolean;
-  preludeExtension: boolean;
-  turmoilExtension: boolean;
-  promoCardsOption: boolean;
-  communityCardsOption: boolean;
-  aresExtension: boolean;
-  aresHazards: boolean;
-  politicalAgendasExtension: AgendaStyle;
-  solarPhaseOption: boolean;
-  removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
-  moonExpansion: boolean;
-  pathfindersExpansion: boolean;
-
-  // Variants
-  draftVariant: boolean;
-  initialDraftVariant: boolean;
-  startingCorporations: number;
-  shuffleMapOption: boolean;
-  randomMA: RandomMAOptionType;
-  soloTR: boolean; // Solo victory by getting TR 63 by game end
-  customCorporationsList: Array<CardName>;
-  cardsBlackList: Array<CardName>;
-  customColoniesList: Array<ColonyName>;
-  requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
-  requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
-  moonStandardProjectVariant: boolean;
-  altVenusBoard: boolean;
-  escapeVelocityMode: boolean;
-  escapeVelocityThreshold?: number;
-  escapeVelocityPeriod?: number;
-  escapeVelocityPenalty?: number;
-}
-
-export const DEFAULT_GAME_OPTIONS: GameOptions = {
-  altVenusBoard: false,
-  aresExtension: false,
-  aresHazards: true,
-  boardName: BoardName.ORIGINAL,
-  cardsBlackList: [],
-  clonedGamedId: undefined,
-  coloniesExtension: false,
-  communityCardsOption: false,
-  corporateEra: true,
-  customColoniesList: [],
-  customCorporationsList: [],
-  draftVariant: false,
-  escapeVelocityMode: false, // When true, escape velocity is enabled.
-  escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
-  escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
-  escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
-  fastModeOption: false,
-  includeVenusMA: true,
-  initialDraftVariant: false,
-  moonExpansion: false,
-  moonStandardProjectVariant: false,
-  pathfindersExpansion: false,
-  politicalAgendasExtension: AgendaStyle.STANDARD,
-  preludeExtension: false,
-  promoCardsOption: false,
-  randomMA: RandomMAOptionType.NONE,
-  requiresMoonTrackCompletion: false,
-  removeNegativeGlobalEventsOption: false,
-  requiresVenusTrackCompletion: false,
-  showOtherPlayersVP: false,
-  showTimers: true,
-  shuffleMapOption: false,
-  solarPhaseOption: false,
-  soloTR: false,
-  startingCorporations: 2,
-  turmoilExtension: false,
-  undoOption: false,
-  venusNextExtension: false,
-};
-
-export class Game implements ISerializable<SerializedGame> {
+export class Game {
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
-  public seed: number;
+  public rng: SeededRandom;
   public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public gameAge: number = 0; // Each log event increases it
@@ -198,6 +105,9 @@ export class Game implements ISerializable<SerializedGame> {
   // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
+  // Used for corporation global draft: do we draft to next player or to player before
+  private corporationsDraftDirection: 'before' | 'after' = 'before';
+  public corporationsToDraft: Array<ICorporationCard> = [];
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -206,8 +116,8 @@ export class Game implements ISerializable<SerializedGame> {
   public awards: Array<IAward> = [];
 
   // Expansion-specific data
-  public colonies: Array<Colony> = [];
-  public colonyDealer: ColonyDealer | undefined = undefined;
+  public colonies: Array<IColony> = [];
+  public discardedColonies: Array<IColony> = []; // Not serialized
   public turmoil: Turmoil | undefined;
   public aresData: IAresData | undefined;
   public moonData: IMoonData | undefined;
@@ -215,11 +125,11 @@ export class Game implements ISerializable<SerializedGame> {
 
   // Card-specific data
   // Mons Insurance promo corp
-  public monsInsuranceOwner: PlayerId | undefined = undefined;
+  public monsInsuranceOwner?: PlayerId; // Not serialized
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // Syndicate Pirate Raids
-  public syndicatePirateRaider: PlayerId | undefined = undefined;
+  public syndicatePirateRaider?: PlayerId;
 
   private constructor(
     public id: GameId,
@@ -227,7 +137,7 @@ export class Game implements ISerializable<SerializedGame> {
     private first: Player,
     activePlayer: PlayerId,
     public gameOptions: GameOptions,
-    seed: number,
+    rng: SeededRandom,
     board: Board,
     dealer: Dealer) {
     const playerIds = players.map((p) => p.id);
@@ -246,12 +156,13 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.activePlayer = activePlayer;
-    this.seed = seed;
+    this.rng = rng;
     this.dealer = dealer;
     this.board = board;
 
     this.players.forEach((player) => {
       player.game = this;
+      if (player.isCorporation(CardName.MONS_INSURANCE)) this.monsInsuranceOwner = player.id;
     });
   }
 
@@ -265,11 +176,11 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error('Cloning should not come through this execution path.');
     }
 
-    const rng = new Random(seed);
+    const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
     const cardFinder = new CardFinder();
-    const cardLoader = new CardLoader(gameOptions);
-    const dealer = Dealer.newInstance(cardLoader);
+    const cardsForGame = new GameCards(gameOptions);
+    const dealer = Dealer.newInstance(cardsForGame);
 
     const activePlayer = firstPlayer.id;
 
@@ -277,13 +188,14 @@ export class Game implements ISerializable<SerializedGame> {
     if (players.length === 1) {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
+      gameOptions.corporationsDraft = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
 
       players[0].setTerraformRating(14);
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, dealer);
     game.spectatorId = spectatorId;
     // Initialize Ares data
     if (gameOptions.aresExtension) {
@@ -296,11 +208,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
-      const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
-      const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
-
-      game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions.customColoniesList, gameOptions.venusNextExtension, gameOptions.turmoilExtension, allowCommunityColonies);
+      const dealer = new ColonyDealer(rng, gameOptions);
+      dealer.drawColonies(players.length);
+      game.colonies = dealer.colonies;
+      game.discardedColonies = dealer.discardedColonies;
     }
 
     // Add Turmoil stuff
@@ -332,7 +243,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     const minCorpsRequired = players.length * gameOptions.startingCorporations;
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-      const customCorporationCards: CorporationCard[] = [];
+      const customCorporationCards: ICorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
         const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
@@ -397,15 +308,38 @@ export class Game implements ISerializable<SerializedGame> {
 
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
 
-    // Initial Draft
-    if (gameOptions.initialDraftVariant) {
-      game.phase = Phase.INITIALDRAFTING;
-      game.runDraftRound(true);
+    // Do we draft corporations or do we start the game?
+    if (gameOptions.corporationsDraft) {
+      game.phase = Phase.CORPORATIONDRAFTING;
+      for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
+        const card = corporationCards.pop();
+        if (card === undefined) throw new Error('No more corporation cards for game ' + id);
+        game.corporationsToDraft.push(card);
+      }
+      // First player should be the last player
+      const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
+      if (playerStartingCorporationsDraft !== undefined) {
+        playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
+      } else {
+        // If for any reason, we don't have player before the first one.
+        firstPlayer.runDraftCorporationPhase(firstPlayer.name, game.corporationsToDraft);
+      }
     } else {
-      game.gotoInitialResearchPhase();
+      game.gotoInitialPhase();
     }
 
     return game;
+  }
+
+  // Function use to properly start the game: with project draft or with research phase
+  public gotoInitialPhase(): void {
+    // Initial Draft
+    if (this.gameOptions.initialDraftVariant) {
+      this.phase = Phase.INITIALDRAFTING;
+      this.runDraftRound(true, false);
+    } else {
+      this.gotoInitialResearchPhase();
+    }
   }
 
   public save(): void {
@@ -422,8 +356,8 @@ export class Game implements ISerializable<SerializedGame> {
       awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
-      colonies: serializeColonies(this.colonies),
-      colonyDealer: this.colonyDealer,
+      colonies: this.colonies.map((colony) => colony.serialize()),
+      currentSeed: this.rng.current,
       dealer: this.dealer.serialize(),
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
@@ -439,7 +373,6 @@ export class Game implements ISerializable<SerializedGame> {
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
       milestones: this.milestones.map((m) => m.name),
-      monsInsuranceOwner: this.monsInsuranceOwner,
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
@@ -447,7 +380,7 @@ export class Game implements ISerializable<SerializedGame> {
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
       researchedPlayers: Array.from(this.researchedPlayers),
-      seed: this.seed,
+      seed: this.rng.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
       spectatorId: this.spectatorId,
       syndicatePirateRaider: this.syndicatePirateRaider,
@@ -460,6 +393,8 @@ export class Game implements ISerializable<SerializedGame> {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
+      corporationsDraftDirection: this.corporationsDraftDirection,
+      corporationsToDraft: this.corporationsToDraft.map((c) => c.name),
     };
     if (this.aresData !== undefined) {
       result.aresData = this.aresData;
@@ -478,7 +413,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   // Function to retrieve a player by it's id
-  public getPlayerById(id: string): Player {
+  public getPlayerById(id: PlayerId): Player {
     const player = this.players.find((p) => p.id === id);
     if (player === undefined) {
       throw new Error(`player ${id} does not exist on game ${this.id}`);
@@ -487,7 +422,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   // Function to return an array of players from an array of player ids
-  public getPlayersById(ids: Array<string>): Array<Player> {
+  public getPlayersById(ids: Array<PlayerId>): Array<Player> {
     return ids.map((id) => this.getPlayerById(id));
   }
 
@@ -606,20 +541,26 @@ export class Game implements ISerializable<SerializedGame> {
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
-  private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {
+  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard): void {
     player.pickedCorporationCard = corporationCard;
-    // if all players picked corporationCard
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
       for (const somePlayer of this.getPlayersInGenerationOrder()) {
-        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
+        if (somePlayer.pickedCorporationCard === undefined) {
+          throw new Error(`pickedCorporationCard is not defined for ${somePlayer.id}`);
+        }
+        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard);
       }
     }
   }
 
-  private playCorporationCard(
-    player: Player, corporationCard: CorporationCard,
-  ): void {
-    player.corporationCard = corporationCard;
+  // public for testing
+  public playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
+    if (player.corporations.length === 0) {
+      player.corporations.push(corporationCard);
+    } else {
+      throw new Error('Do not use playCorporationCard for more than one corporation card.');
+    }
+
     player.megaCredits = corporationCard.startingMegaCredits;
     if (corporationCard.cardCost !== undefined) {
       player.cardCost = corporationCard.cardCost;
@@ -630,45 +571,30 @@ export class Game implements ISerializable<SerializedGame> {
       player.deductResource(Resources.MEGACREDITS, diff);
     }
     corporationCard.play(player);
+    if (corporationCard.initialAction !== undefined) player.pendingInitialActions.push(corporationCard);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
+    player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));
 
-    // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
-    for (const somePlayer of this.getPlayersInGenerationOrder()) {
-      if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-        this.defer(new DeferredAction(
-          player,
-          () => {
-            if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-              return somePlayer.corporationCard.onCorpCardPlayed(player, corporationCard) || undefined;
-            }
-            return undefined;
-          },
-        ));
-      }
-    }
-
-    // Activate some colonies
-    if (this.gameOptions.coloniesExtension && corporationCard.resourceType !== undefined) {
-      this.colonies.forEach((colony) => {
-        if (colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType) {
-          colony.isActive = true;
-        }
-      });
-
-      // Check for Venus colony
-      if (corporationCard.tags.includes(Tags.VENUS)) {
-        const venusColony = this.colonies.find((colony) => colony.name === ColonyName.VENUS);
-        if (venusColony) venusColony.isActive = true;
-      }
-    }
-
+    this.triggerOtherCorpEffects(player, corporationCard);
+    ColoniesHandler.onCardPlayed(this, corporationCard);
     PathfindersExpansion.onCardPlayed(player, corporationCard);
 
     this.playerIsFinishedWithResearchPhase(player);
   }
 
+  public triggerOtherCorpEffects(player: Player, playedCorporationCard: ICorporationCard) {
+    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
+    for (const somePlayer of player.game.getPlayers()) {
+      for (const corporation of somePlayer.corporations) {
+        if (somePlayer === player && corporation.name === playedCorporationCard.name) continue;
+        if (corporation.onCorpCardPlayed === undefined) continue;
+        this.defer(new SimpleDeferredAction(player, () => corporation.onCorpCardPlayed?.(player, playedCorporationCard)));
+      }
+    }
+  }
+
   private pickCorporationCard(player: Player): PlayerInput {
-    return new SelectInitialCards(player, (corporation: CorporationCard) => {
+    return new SelectInitialCards(player, (corporation: ICorporationCard) => {
       // Check for negative M€
       const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
       if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
@@ -777,6 +703,10 @@ export class Game implements ISerializable<SerializedGame> {
       this.log('Final greenery placement', (b) => b.forNewGeneration());
       this.gotoFinalGreeneryPlacement();
       return;
+    } else {
+      this.players.forEach((player) => {
+        player.returnTradeFleets();
+      });
     }
 
     // solar Phase Option
@@ -788,7 +718,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.gotoEndGeneration();
   }
 
-  private gotoEndGeneration() {
+  private endGenerationForColonies() {
     if (this.gameOptions.coloniesExtension) {
       this.colonies.forEach((colony) => {
         colony.endGeneration(this);
@@ -796,26 +726,32 @@ export class Game implements ISerializable<SerializedGame> {
       // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
       this.syndicatePirateRaider = undefined;
     }
+  }
+
+  private gotoEndGeneration() {
+    this.endGenerationForColonies();
 
     Turmoil.ifTurmoil(this, (turmoil) => {
       turmoil.endGeneration(this);
     });
 
-    // Resolve Turmoil deferred actions
+    // turmoil.endGeneration might have added actions.
     if (this.deferredActions.length > 0) {
-      this.resolveTurmoilDeferredActions();
-      return;
+      this.deferredActions.runAll(() => this.goToDraftOrResearch());
+    } else {
+      this.phase = Phase.INTERGENERATION;
+      this.goToDraftOrResearch();
     }
-
-    this.phase = Phase.INTERGENERATION;
-    this.goToDraftOrResearch();
   }
 
-  private resolveTurmoilDeferredActions() {
-    this.deferredActions.runAll(() => this.goToDraftOrResearch());
+  private updateVPbyGeneration(): void {
+    this.getPlayers().forEach((player) => {
+      player.victoryPointsByGeneration.push(player.getVictoryPoints().total);
+    });
   }
 
   private goToDraftOrResearch() {
+    this.updateVPbyGeneration();
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
     this.incrementFirstPlayer();
@@ -944,6 +880,44 @@ export class Game implements ISerializable<SerializedGame> {
     }
   }
 
+  // Function use to manage corporation draft way
+  public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<ICorporationCard>): void {
+    const nextPlayer = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
+    if (nextPlayer === undefined) {
+      throw new Error(`Cannot find player to pass for player ${player.id} in game ${this.id}`);
+    }
+
+    const passTo = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
+    if (passTo === undefined) {
+      throw new Error(`Cannot find player to pass for player ${nextPlayer.id} in game ${this.id}`);
+    }
+
+    // If more than 1 card are to be passed to the next player, that means we're still drafting
+    if (cards.length > 1) {
+      if ((this.draftRound + 1) % this.players.length === 0) {
+        nextPlayer.runDraftCorporationPhase(nextPlayer.name, cards);
+      } else if (this.draftRound % this.players.length === 0) {
+        player.runDraftCorporationPhase(nextPlayer.name, cards);
+        this.corporationsDraftDirection = this.corporationsDraftDirection === 'after' ? 'before' : 'after';
+      } else {
+        nextPlayer.runDraftCorporationPhase(passTo.name, cards);
+      }
+      this.draftRound++;
+      return;
+    }
+
+    // Push last card to next player
+    nextPlayer.draftedCorporations.push(...cards);
+
+    this.players.forEach((player) => {
+      player.dealtCorporationCards = player.draftedCorporations;
+    });
+    // Reset value to guarantee no impact on eventual futur drafts (projects or preludes)
+    this.initialDraftIteration = 1;
+    this.draftRound = 1;
+    this.gotoInitialPhase();
+  }
+
   private getDraftCardsFrom(player: Player): PlayerId {
     let nextPlayer: Player | undefined;
 
@@ -1039,19 +1013,21 @@ export class Game implements ISerializable<SerializedGame> {
       this.log('This game id was ' + this.id);
     }
 
-    Database.getInstance().cleanSaves(this.id);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
-      let corponame: string = '';
+      const corpname = player.corporations.length > 0 ? player.corporations[0].name : '';
       const vpb = player.getVictoryPoints();
-      if (player.corporationCard !== undefined) {
-        corponame = player.corporationCard.name;
-      }
-      scores.push({corporation: corponame, playerScore: vpb.total});
+      scores.push({corporation: corpname, playerScore: vpb.total});
     });
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
     this.phase = Phase.END;
+    Database.getInstance().saveGame(this).then(() => {
+      GameLoader.getInstance().mark(this.id);
+      return Database.getInstance().cleanGame(this.id);
+    }).catch((err) => {
+      console.error(err);
+    });
   }
 
   // Part of final greenery placement.
@@ -1061,7 +1037,7 @@ export class Game implements ISerializable<SerializedGame> {
             this.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
-  // Called when a player has chosen not to place any more greeneries.
+  // Called when a player cannot or chose not to place any more greeneries.
   public playerIsDoneWithGame(player: Player): void {
     this.donePlayers.add(player.id);
     this.gotoFinalGreeneryPlacement();
@@ -1072,7 +1048,6 @@ export class Game implements ISerializable<SerializedGame> {
   // Rename to takeNextFinalGreeneryAction?
 
   public /* for testing */ gotoFinalGreeneryPlacement(): void {
-    // this.getPlayers returns in turn order -- a necessary rule for final greenery placement.
     for (const player of this.getPlayersInGenerationOrder()) {
       if (this.donePlayers.has(player.id)) {
         continue;
@@ -1086,6 +1061,7 @@ export class Game implements ISerializable<SerializedGame> {
         this.donePlayers.add(player.id);
       }
     }
+    this.updateVPbyGeneration();
     this.gotoEndGame();
   }
 
@@ -1158,14 +1134,13 @@ export class Game implements ISerializable<SerializedGame> {
         player.increaseTerraformRating();
       }
       if (this.gameOptions.altVenusBoard) {
-        // The second half of this equation removes any increases earler than 16-to-18.
-
         const newValue = this.venusScaleLevel + steps * 2;
         const minimalBaseline = Math.max(this.venusScaleLevel, 16);
         const maximumBaseline = Math.min(newValue, 30);
         const standardResourcesGranted = Math.max((maximumBaseline - minimalBaseline) / 2, 0);
 
         const grantWildResource = this.venusScaleLevel + (steps * 2) >= 30;
+        // The second half of this expression removes any increases earler than 16-to-18.
         if (grantWildResource || standardResourcesGranted > 0) {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
         }
@@ -1257,7 +1232,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getCitiesCount(player?: Player): number {
-    let cities = this.board.spaces.filter((space) => Board.isCitySpace(space));
+    let cities = this.board.spaces.filter(Board.isCitySpace);
     if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
     return cities.length;
   }
@@ -1322,7 +1297,7 @@ export class Game implements ISerializable<SerializedGame> {
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
+        this.defer(new SelectHowToPayDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 
@@ -1362,8 +1337,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.players.forEach((p) => {
-      p.corporationCard?.onTilePlaced?.(p, player, space, BoardType.MARS);
-      p.playedCards.forEach((playedCard) => {
+      p.tableau.forEach((playedCard) => {
         playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
       });
     });
@@ -1390,27 +1364,50 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
-    if (spaceBonus === SpaceBonus.DRAW_CARD) {
+    switch (spaceBonus) {
+    case SpaceBonus.DRAW_CARD:
       player.drawCard(count);
-    } else if (spaceBonus === SpaceBonus.PLANT) {
+      break;
+    case SpaceBonus.PLANT:
       player.addResource(Resources.PLANTS, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.STEEL) {
+      break;
+    case SpaceBonus.STEEL:
       player.addResource(Resources.STEEL, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.TITANIUM) {
+      break;
+    case SpaceBonus.TITANIUM:
       player.addResource(Resources.TITANIUM, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.HEAT) {
+      break;
+    case SpaceBonus.HEAT:
       player.addResource(Resources.HEAT, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.OCEAN) {
+      break;
+    case SpaceBonus.OCEAN:
       // ignore
-    } else if (spaceBonus === SpaceBonus.MICROBE) {
-      this.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: count}));
-    } else if (spaceBonus === SpaceBonus.DATA) {
-      this.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: count}));
-    } else if (spaceBonus === SpaceBonus.ENERGY_PRODUCTION) {
-      player.addProduction(Resources.ENERGY, count);
-    } else if (spaceBonus === SpaceBonus.SCIENCE) {
-      this.defer(new AddResourcesToCard(player, ResourceType.SCIENCE, {count: count}));
-    } else {
+      break;
+    case SpaceBonus.MICROBE:
+      this.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: count}));
+      break;
+    case SpaceBonus.DATA:
+      this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
+      break;
+    case SpaceBonus.ENERGY_PRODUCTION:
+      player.addProduction(Resources.ENERGY, count, {log: true});
+      break;
+    case SpaceBonus.SCIENCE:
+      this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
+      break;
+    case SpaceBonus.TEMPERATURE:
+      if (this.getTemperature() < constants.MAX_TEMPERATURE) {
+        this.defer(new SimpleDeferredAction(player, () => this.increaseTemperature(player, 1)));
+        this.defer(new SelectHowToPayDeferred(
+          player,
+          constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
+          {title: 'Select how to pay for placement bonus temperature'}));
+      }
+      break;
+    case SpaceBonus.ENERGY:
+      player.addResource(Resources.ENERGY, count, {log: true});
+      break;
+    default:
       // TODO(kberg): Remove the isProduction condition after 2022-01-01.
       // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
       if (!isProduction()) {
@@ -1475,6 +1472,10 @@ export class Game implements ISerializable<SerializedGame> {
     space.player = undefined;
   }
 
+  public getPlayers(): ReadonlyArray<Player> {
+    return this.players;
+  }
+
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): Array<Player> {
     // We always return them in turn order
@@ -1491,7 +1492,7 @@ export class Game implements ISerializable<SerializedGame> {
     return ret;
   }
 
-  public getCardPlayer(name: string): Player {
+  public getCardPlayer(name: CardName): Player {
     for (const player of this.players) {
       // Check cards player has played
       for (const card of player.playedCards) {
@@ -1500,14 +1501,14 @@ export class Game implements ISerializable<SerializedGame> {
         }
       }
       // Check player corporation
-      if (player.corporationCard !== undefined && player.corporationCard.name === name) {
+      if (player.isCorporation(name)) {
         return player;
       }
     }
-    throw new Error('No player has played requested card');
+    throw new Error(`No player has played ${name}`);
   }
 
-  public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
+  public getCardsInHandByResource(player: Player, resourceType: CardResource) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);
   }
 
@@ -1529,7 +1530,7 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
-    return this.getPlayersInGenerationOrder().some((p) => {
+    return this.getPlayers().some((p) => {
       if (p.getProduction(resource) < minQuantity) return false;
       // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
       if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
@@ -1537,15 +1538,24 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
 
-  public discardForCost(toPlace: TileType) {
-    const card = this.dealer.dealCard(this);
-    this.dealer.discard(card);
-    this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
-    return card.cost;
+  public discardForCost(cardCount: 1 | 2, toPlace: TileType) {
+    if (cardCount === 1) {
+      const card = this.dealer.dealCard(this);
+      this.dealer.discard(card);
+      this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
+      return card.cost;
+    } else {
+      const card1 = this.dealer.dealCard(this);
+      this.dealer.discard(card1);
+      const card2 = this.dealer.dealCard(this);
+      this.dealer.discard(card2);
+      this.log('Drew and discarded ${0} (cost ${1}) and ${2} (cost ${3}) to place a ${4}', (b) => b.card(card1).number(card1.cost).card(card2).number(card2.cost).tileType(toPlace));
+      return card1.cost + card2.cost;
+    }
   }
 
-  public getSpaceByOffset(direction: -1 | 1, toPlace: TileType) {
-    const cost = this.discardForCost(toPlace);
+  public getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount: 1 | 2 = 1) {
+    const cost = this.discardForCost(cardCount, toPlace);
 
     const distance = Math.max(cost-1, 0); // Some cards cost zero.
     const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
@@ -1562,27 +1572,18 @@ export class Game implements ISerializable<SerializedGame> {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
-    const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
+    const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element, d));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
     }
 
-    const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
-    let board;
-    if (gameOptions.boardName === BoardName.ELYSIUM) {
-      board = ElysiumBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.HELLAS) {
-      board = HellasBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
-      board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
-    } else {
-      board = OriginalBoard.deserialize(d.board, playersForBoard);
-    }
+    const board = GameSetup.deserializeBoard(players, gameOptions, d);
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+    const rng = new SeededRandom(d.seed, d.currentSeed);
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, dealer);
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
@@ -1614,13 +1615,10 @@ export class Game implements ISerializable<SerializedGame> {
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
-
-      if (d.colonyDealer !== undefined) {
-        game.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);
-      }
-
-      game.colonies = loadColoniesFromJSON(d.colonies);
+      game.colonies = ColonyDeserializer.deserializeAndFilter(d.colonies);
+      const dealer = new ColonyDealer(rng, gameOptions);
+      dealer.restore(game.colonies);
+      game.discardedColonies = dealer.discardedColonies;
     }
 
     // Reload turmoil elements if needed
@@ -1649,6 +1647,10 @@ export class Game implements ISerializable<SerializedGame> {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
 
+    // TODO(kberg): remove `?? []` by 2022-09-01
+    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
+    game.corporationsDraftDirection = d.corporationsDraftDirection ?? false;
+
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;
     game.gameAge = d.gameAge;
@@ -1662,12 +1664,11 @@ export class Game implements ISerializable<SerializedGame> {
     game.activePlayer = d.activePlayer;
     game.draftRound = d.draftRound;
     game.initialDraftIteration = d.initialDraftIteration;
-    game.monsInsuranceOwner = d.monsInsuranceOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
 
     // Still in Draft or Research of generation 1
-    if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
+    if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
           game.runDraftRound(true, true);
@@ -1681,11 +1682,14 @@ export class Game implements ISerializable<SerializedGame> {
       game.runDraftRound();
     } else if (game.phase === Phase.RESEARCH) {
       game.gotoResearchPhase();
+    } else if (game.phase === Phase.END) {
+      // There's nowhere that we need to go for end game.
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
-      game.getPlayerById(game.activePlayer).takeAction();
+      game.getPlayerById(game.activePlayer).takeAction(/* saveBeforeTakingAction */ false);
     }
 
+    if (game.phase === Phase.END) GameLoader.getInstance().mark(game.id);
     return game;
   }
 

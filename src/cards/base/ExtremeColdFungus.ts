@@ -1,4 +1,4 @@
-import {ICard, IActionCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
@@ -7,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
@@ -45,7 +45,7 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
     return true;
   }
   public action(player: Player) {
-    const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
+    const otherMicrobeCards = player.getResourceCards(CardResource.MICROBE);
 
     if (otherMicrobeCards.length === 0) {
       player.addResource(Resources.PLANTS, 1, {log: true});
@@ -74,8 +74,8 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
         'Select card to add 2 microbes',
         'Add microbes',
         otherMicrobeCards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {qty: 2, log: true});
+        ([card]) => {
+          player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
         },
       ),

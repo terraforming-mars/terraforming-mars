@@ -2,16 +2,16 @@ import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {ALL_CARD_MANIFESTS} from '../../src/cards/AllCards';
-import {TestingUtils} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
+import {setCustomGameOptions} from '../TestingUtils';
+import {TestPlayer} from '../TestPlayer';
 
 describe('CardMetadata', function() {
-  let player : Player;
+  let player: Player;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
   });
 
   it('should have a VP icon', function() {

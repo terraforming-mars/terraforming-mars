@@ -2,19 +2,20 @@ import {expect} from 'chai';
 import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
 import {Manutech} from '../../../src/cards/venusNext/Manutech';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Manutech', function() {
-  let card : Manutech; let player : Player; let game : Game;
+  let card: Manutech;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Manutech();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
-    player.corporationCard = card;
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
+    player.setCorporationForTest(card);
   });
 
   it('Should play', function() {

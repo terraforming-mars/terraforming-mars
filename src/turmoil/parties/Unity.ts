@@ -9,12 +9,11 @@ import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
-import {ICard} from '../../cards/ICard';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -64,7 +63,7 @@ class UnityPolicy01 implements Policy {
 
 class UnityPolicy02 implements Policy {
   id = 'up02' as const;
-  description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
+  description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -82,7 +81,7 @@ class UnityPolicy02 implements Policy {
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          const availableFloaterCards = player.getResourceCards(ResourceType.FLOATER);
+          const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
           const orOptions = new OrOptions();
 
           if (availableFloaterCards.length === 1) {
@@ -96,8 +95,8 @@ class UnityPolicy02 implements Policy {
           } else if (availableFloaterCards.length > 1) {
             orOptions.options.push(
               new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
-                return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, (foundCards: Array<ICard>) => {
-                  player.addResourceTo(foundCards[0], {qty: 2, log: true});
+                return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, ([card]) => {
+                  player.addResourceTo(card, {qty: 2, log: true});
                   return undefined;
                 });
               }),
@@ -112,7 +111,7 @@ class UnityPolicy02 implements Policy {
 
           if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-          game.defer(new DeferredAction(player, () => orOptions));
+          game.defer(new SimpleDeferredAction(player, () => orOptions));
           return undefined;
         },
       },

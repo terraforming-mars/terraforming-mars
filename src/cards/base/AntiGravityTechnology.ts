@@ -27,9 +27,6 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
     });
   }
 
-  public getCardDiscount() {
-    return 2;
-  }
   public play() {
     return undefined;
   }

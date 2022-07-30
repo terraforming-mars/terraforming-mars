@@ -1,8 +1,8 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -14,14 +14,14 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 import {digit, played} from '../Options';
 
-export class Recyclon extends Card implements CorporationCard, IResourceCard {
+export class Recyclon extends Card implements ICorporationCard, IResourceCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.RECYCLON,
       tags: [Tags.MICROBE, Tags.BUILDING],
       startingMegaCredits: 38,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
       productionBox: Units.of({steel: 1}),
 
       metadata: {

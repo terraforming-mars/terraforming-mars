@@ -1,4 +1,3 @@
-import {ICard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -8,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlayerInput} from '../../PlayerInput';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -40,7 +39,7 @@ export class LargeConvoy extends Card implements IProjectCard {
   public play(player: Player): PlayerInput | undefined {
     player.drawCard(2);
 
-    const animalCards = player.getResourceCards(ResourceType.ANIMAL);
+    const animalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
       player.addResource(Resources.PLANTS, 5, {log: true});
@@ -50,7 +49,7 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     if (animalCards.length === 0 ) return gainPlants();
 
-    const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
+    const availableActions: Array<PlayerInput> = [];
 
     const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
     availableActions.push(gainPlantsOption);
@@ -68,8 +67,8 @@ export class LargeConvoy extends Card implements IProjectCard {
           'Select card to add 4 animals',
           'Add animals',
           animalCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], {qty: 4, log: true});
+          ([card]) => {
+            player.addResourceTo(card, {qty: 4, log: true});
             player.game.defer(new PlaceOceanTile(player));
             return undefined;
           },

@@ -9,18 +9,21 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('EcologyResearch', function() {
-  let card : EcologyResearch; let player : Player; let game : Game; let colony1: Luna;
+  let card: EcologyResearch;
+  let player: Player;
+  let game: Game;
+  let colony1: Luna;
 
   beforeEach(function() {
     card = new EcologyResearch();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);

@@ -337,7 +337,7 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Akcja: Wydaj 4 jednostki energii, żeby otrzymać 1 jednostkę tytanu i podnieść Poziom Tlenu o 1%.",
 
     "Earth Office": "Biuro na Ziemi",
-    "Effect: When you play an Earth card, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 M€ mniej.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 M€ mniej.",
 
     "Acquired Company": "Przejęcie Firmy",
     "Increase your M€ production 3 steps.": "Podnieś swoją produkcję M€ o 3 poziomy.",
@@ -473,7 +473,7 @@
     "Requires 2 Science tags. Increase your Energy production 3 steps.": "Musisz posiadać przynajmniej 2 symbole nauki.",
 
     "Nitrophilic Moss": "Mech Nitrofilny",
-    "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Na planszy musza znajdować się przynajmniej 3 obszary oceanów.",
+    "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Na planszy muszą znajdować się przynajmniej 3 obszary oceanów.",
 
     "Herbivores": "Roślinożercy",
     "Effect: When you place a greenery tile, add an Animal to this card.": "Efekt trwały: Za każdym razem, gdy umieścisz na planszy obszar zieleni, umieść na tej karcie 1 jednostkę zwierząt.",
@@ -488,7 +488,7 @@
 
     "Anti-Gravity Technology": "Technologia Antygrawitacji",
     "Effect: When you play a card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 2 M€ mniej.",
-    "Requires 7 science tags.": "Musisz posiadać przynajmniej 2 symbole nauki.",
+    "Requires 7 science tags.": "Musisz posiadać przynajmniej 7 symboli nauki.",
 
     "Investment Loan": "Kredyt Inwestycyjny",
     "Decrease your M€ production 1 step. Gain 10 M€.": "Obniż swoją produkcję M€ o 1 poziom. Otrzymujesz 10 M€.",

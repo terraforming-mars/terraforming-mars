@@ -3,19 +3,19 @@ import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftInco
 import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
-import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('StormCraftIncorporated', function() {
-  let card : StormCraftIncorporated; let player : Player;
+  let card: StormCraftIncorporated;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new StormCraftIncorporated();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Should play', function() {

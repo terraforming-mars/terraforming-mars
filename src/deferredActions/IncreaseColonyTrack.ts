@@ -1,19 +1,20 @@
 import {Player} from '../Player';
-import {Colony} from '../colonies/Colony';
+import {IColony} from '../colonies/IColony';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 
-export class IncreaseColonyTrack implements DeferredAction {
-  public priority = Priority.INCREASE_COLONY_TRACK;
+export class IncreaseColonyTrack extends DeferredAction {
   constructor(
-        public player: Player,
-        public colony: Colony,
-        public steps: number,
-        public cb: () => void,
-        public title: string = 'Increase ' + colony.name + ' colony track before trade',
-  ) {}
+    player: Player,
+    public colony: IColony,
+    public steps: number,
+    public cb: () => void,
+    public title: string = 'Increase ' + colony.name + ' colony track before trade',
+  ) {
+    super(player, Priority.INCREASE_COLONY_TRACK);
+  }
 
   public execute() {
     if (this.steps === 0) {

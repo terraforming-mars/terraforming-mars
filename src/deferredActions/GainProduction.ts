@@ -11,13 +11,14 @@ export namespace GainProduction {
   }
 }
 
-export class GainProduction implements DeferredAction {
-  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
+export class GainProduction extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public resource: Resources,
     public options: GainProduction.Options = {},
-  ) {}
+  ) {
+    super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  }
 
   public execute() {
     if (this.options.count === undefined) {

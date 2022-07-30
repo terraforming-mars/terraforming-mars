@@ -1,21 +1,21 @@
 import {expect} from 'chai';
 import {Midas} from '../../../src/cards/community/Midas';
-import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Midas', function() {
-  let card : Midas; let player : Player;
+  let card: Midas;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Midas();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Starts with correct TR', function() {
     const initialTR = player.getTerraformRating();
 
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     expect(player.getTerraformRating()).to.eq(initialTR - 7);
   });
 });

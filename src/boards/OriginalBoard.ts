@@ -6,7 +6,7 @@ import {ISpace} from './ISpace';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 
 export class OriginalBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): OriginalBoard {
@@ -61,7 +61,7 @@ export class OriginalBoard extends Board {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }
 
-  public getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): Array<string> {
     return [
       SpaceName.ASCRAEUS_MONS,
       SpaceName.ARSIA_MONS,
@@ -70,7 +70,7 @@ export class OriginalBoard extends Board {
     ];
   }
 
-  public getNoctisCitySpaceIds(): Array<string> {
-    return [SpaceName.NOCTIS_CITY];
+  public override getNoctisCitySpaceId() {
+    return SpaceName.NOCTIS_CITY;
   }
 }

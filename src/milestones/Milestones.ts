@@ -23,6 +23,21 @@ import {Pioneer} from './Pioneer';
 import {LandSpecialist} from './LandSpecialist';
 import {Martian} from './Martian';
 import {Businessperson} from './Businessperson';
+import {Capitalist} from './Capitalist';
+import {Electrician} from './Electrician';
+import {Irrigator} from './Irrigator';
+import {Smith} from './Smith';
+import {Tradesman} from './Tradesman';
+import {Colonizer} from './amazonisPlanitia/Colonizer';
+import {Farmer} from './amazonisPlanitia/Farmer';
+import {Minimalist} from './amazonisPlanitia/Minimalist';
+import {Terran} from './amazonisPlanitia/Terran';
+import {Tropicalist} from './amazonisPlanitia/Tropicalist';
+import {Collector} from './terraCimmeria/Collector';
+import {Firestarter} from './terraCimmeria/Firestarter';
+import {Gambler} from './terraCimmeria/Gambler';
+import {Spacefarer} from './terraCimmeria/Spacefarer';
+import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -61,12 +76,36 @@ export const MOON_MILESTONES: Array<IMilestone> = [
   new Lunarchitect(),
 ];
 
+export const AMAZONIS_PLANITIA_MILESTONES = [
+  new Colonizer(),
+  new Farmer(),
+  new Minimalist(),
+  new Terran(),
+  new Tropicalist(),
+];
+
 export const ARABIA_TERRA_MILESTONES = [
   new Economizer(),
   new Pioneer(),
   new LandSpecialist(),
   new Martian(),
   new Businessperson(),
+];
+
+export const TERRA_CIMMERIA_MILESTONES = [
+  new Collector(),
+  new Firestarter(),
+  new TerraPioneer(),
+  new Spacefarer(),
+  new Gambler(),
+];
+
+export const VASTITAS_BOREALIS_MILESTONES: Array<IMilestone> = [
+  new Electrician(),
+  new Smith(),
+  new Tradesman(),
+  new Irrigator(),
+  new Capitalist(),
 ];
 
 export const ALL_MILESTONES: Array<IMilestone> = [
@@ -76,7 +115,11 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
-  ...ARABIA_TERRA_MILESTONES];
+  ...AMAZONIS_PLANITIA_MILESTONES,
+  ...ARABIA_TERRA_MILESTONES,
+  ...TERRA_CIMMERIA_MILESTONES,
+  ...VASTITAS_BOREALIS_MILESTONES,
+];
 
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;

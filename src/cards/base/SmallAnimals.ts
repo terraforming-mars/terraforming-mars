@@ -6,7 +6,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
@@ -21,7 +21,7 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
       tags: [Tags.ANIMAL],
       cost: 6,
 
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
 
@@ -43,7 +43,7 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
   }
   public override resourceCount = 0;
   public override canPlay(player: Player): boolean {
-    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+    return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
   public play(player: Player) {
     player.game.defer(

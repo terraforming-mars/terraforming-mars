@@ -5,6 +5,7 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PrivateSecurity', function() {
   let card: PrivateSecurity;
@@ -52,5 +53,23 @@ describe('PrivateSecurity', function() {
     expect(fish.canPlay(player)).is.true;
     opponent1.playedCards = [card];
     expect(fish.canPlay(player)).is.false;
+  });
+
+  it('Card applies to you if you have production and Private Security', () => {
+    // https://github.com/terraforming-mars/terraforming-mars/issues/4318
+    player.setProductionForTest({plants: 1});
+    opponent1.setProductionForTest({plants: 1});
+    opponent2.setProductionForTest({plants: 1});
+
+    const fish = new Fish();
+
+    player.playedCards = [card];
+    expect(fish.canPlay(player)).is.true;
+    expect(fish.play(player)).is.undefined;
+
+    runAllActions(player.game);
+
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
+    expect(selectPlayer.players).includes(player);
   });
 });

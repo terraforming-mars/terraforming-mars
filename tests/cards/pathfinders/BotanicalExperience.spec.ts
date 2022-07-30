@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BotanicalExperience} from '../../../src/cards/pathfinders/BotanicalExperience';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ISpace} from '../../../src/boards/ISpace';
 import {TileType} from '../../../src/common/TileType';
@@ -70,8 +70,8 @@ describe('BotanicalExperience', function() {
     player.plants = 7;
     player.playedCards = [card];
     game.defer(new RemoveAnyPlants(otherPlayer, 5));
-    TestingUtils.runAllActions(game);
-    const orOptions = TestingUtils.cast(otherPlayer.getWaitingFor(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
 
     expect(otherPlayer.plants).eq(0);
 
@@ -84,8 +84,8 @@ describe('BotanicalExperience', function() {
     player.plants = 7;
     player.playedCards = [card];
     game.defer(new StealResources(otherPlayer, Resources.PLANTS, 5));
-    TestingUtils.runAllActions(game);
-    const orOptions = TestingUtils.cast(otherPlayer.getWaitingFor(), OrOptions);
+    runAllActions(game);
+    const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
 
     expect(otherPlayer.plants).eq(0);
 
@@ -93,5 +93,20 @@ describe('BotanicalExperience', function() {
 
     expect(player.plants).eq(4);
     expect(otherPlayer.plants).eq(3);
+  });
+
+  it('does not imapct other resource types', () => {
+    player.megaCredits = 7;
+    player.playedCards = [card];
+    game.defer(new StealResources(otherPlayer, Resources.MEGACREDITS, 5));
+    runAllActions(game);
+    const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
+
+    expect(otherPlayer.megaCredits).eq(0);
+
+    orOptions.options[0].cb();
+
+    expect(player.megaCredits).eq(2);
+    expect(otherPlayer.megaCredits).eq(5);
   });
 });

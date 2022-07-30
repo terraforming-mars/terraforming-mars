@@ -7,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -32,12 +32,12 @@ export class Virus extends Card implements IProjectCard {
     });
   }
   public play(player: Player): PlayerInput | undefined {
-    if (player.game.getPlayersInGenerationOrder().length === 1) {
+    if (player.game.isSoloMode()) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;
     }
 
-    const orOptionsAnimals = (new RemoveResourcesFromCard(player, ResourceType.ANIMAL, 2, false, false)).execute() as OrOptions;
+    const orOptionsAnimals = (new RemoveResourcesFromCard(player, CardResource.ANIMAL, 2, false, false)).execute() as OrOptions;
     const removeAnimals = orOptionsAnimals !== undefined ?
       orOptionsAnimals.options[0] :
       undefined;

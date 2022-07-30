@@ -2,29 +2,31 @@ import {expect} from 'chai';
 import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {maxOutOceans} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('WaterSplittingPlant', function() {
-  let card : WaterSplittingPlant; let player : Player; let game : Game;
+  let card: WaterSplittingPlant;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new WaterSplittingPlant();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play', function() {
-    TestingUtils.maxOutOceans(player, 2);
+    maxOutOceans(player, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.energy = 2;
     expect(card.canAct(player)).is.not.true;
   });

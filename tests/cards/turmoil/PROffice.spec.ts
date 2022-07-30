@@ -5,18 +5,18 @@ import {PROffice} from '../../../src/cards/turmoil/PROffice';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('PROffice', function() {
   it('Should play', function() {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    const game = Game.newInstance('gameid', [player], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const unity = game.turmoil!.getPartyByName(PartyName.UNITY)!;

@@ -1,16 +1,17 @@
 import {RequirementType} from '../common/cards/RequirementType';
 import {Tags} from '../common/cards/Tags';
+import {ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement} from '../common/cards/ICardRequirement';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Resources} from '../common/Resources';
 import {Player} from '../Player';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {TileType} from '../common/TileType';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
 import {Options} from './CardRequirements';
 
-export class CardRequirement {
+export class CardRequirement implements ICardRequirement {
   public readonly isMax: boolean = false;
   public readonly isAny: boolean = false;
   public readonly text: string | undefined = undefined;
@@ -42,7 +43,7 @@ export class CardRequirement {
       return this.satisfiesInequality(coloniesCount);
 
     case RequirementType.FLOATERS:
-      return this.satisfiesInequality(player.getResourceCount(ResourceType.FLOATER));
+      return this.satisfiesInequality(player.getResourceCount(CardResource.FLOATER));
 
     case RequirementType.GREENERIES:
       return this.satisfiesInequality(player.game.getGreeneriesCount(this.isAny ? undefined : player));
@@ -148,7 +149,7 @@ export class CardRequirement {
   }
 }
 
-export class TagCardRequirement extends CardRequirement {
+export class TagCardRequirement extends CardRequirement implements ITagCardRequirement {
   constructor(public tag: Tags, amount: number, options?: Options) {
     super(RequirementType.TAG, amount, options);
   }
@@ -158,7 +159,7 @@ export class TagCardRequirement extends CardRequirement {
     let tagCount = player.getTagCount(this.tag, mode);
 
     if (this.isAny) {
-      player.game.getPlayersInGenerationOrder().forEach((p) => {
+      player.game.getPlayers().forEach((p) => {
         if (p.id !== player.id) {
           // Don't include opponents' wild tags because they are not performing the action.
           tagCount += p.getTagCount(this.tag, 'raw');
@@ -172,7 +173,7 @@ export class TagCardRequirement extends CardRequirement {
   }
 }
 
-export class ProductionCardRequirement extends CardRequirement {
+export class ProductionCardRequirement extends CardRequirement implements IProductionCardRequirement {
   constructor(public resource: Resources, amount: number, options?: Options) {
     super(RequirementType.PRODUCTION, amount, options);
   }
@@ -181,7 +182,7 @@ export class ProductionCardRequirement extends CardRequirement {
   }
 }
 
-export class PartyCardRequirement extends CardRequirement {
+export class PartyCardRequirement extends CardRequirement implements IPartyCardRequirement {
   constructor(public readonly party: PartyName) {
     super(RequirementType.PARTY);
   }

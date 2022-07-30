@@ -3,16 +3,16 @@ import {SponsoredMohole} from '../../../src/cards/turmoil/SponsoredMohole';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SponsoredMohole', function() {
   it('Should play', function() {
     const card = new SponsoredMohole();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
+    const game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;

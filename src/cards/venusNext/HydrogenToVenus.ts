@@ -1,8 +1,7 @@
-import {ICard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -31,7 +30,7 @@ export class HydrogenToVenus extends Card {
 
   public play(player: Player) {
     const jovianTags: number = player.getTagCount(Tags.JOVIAN);
-    const floatersCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => card.tags.includes(Tags.VENUS));
+    const floatersCards = player.getResourceCards(CardResource.FLOATER).filter((card) => card.tags.includes(Tags.VENUS));
     if (jovianTags > 0) {
       if (floatersCards.length === 1) {
         player.addResourceTo(floatersCards[0], {qty: jovianTags, log: true});
@@ -41,8 +40,8 @@ export class HydrogenToVenus extends Card {
           'Select card to add ' + jovianTags + ' floater(s)',
           'Add floater(s)',
           floatersCards,
-          (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], {qty: jovianTags, log: true});
+          ([card]) => {
+            player.addResourceTo(card, {qty: jovianTags, log: true});
             player.game.increaseVenusScaleLevel(player, 1);
             return undefined;
           },

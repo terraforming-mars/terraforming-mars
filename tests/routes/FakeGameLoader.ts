@@ -1,42 +1,32 @@
 import {IGameLoader} from '../../src/database/IGameLoader';
+import {GameIdLedger} from '../../src/database/IDatabase';
 import {Game} from '../../src/Game';
-import {PlayerId, GameId, SpectatorId} from '../../src/common/Types';
+import {GameId, isGameId, PlayerId, SpectatorId} from '../../src/common/Types';
 
 export class FakeGameLoader implements IGameLoader {
-  private games: Map<string, Game> = new Map();
-  add(game: Game): void {
+  private games: Map<GameId, Game> = new Map();
+  add(game: Game): Promise<void> {
     this.games.set(game.id, game);
+    return Promise.resolve();
   }
-  getLoadedGameIds(cb: (list: Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> | undefined) => void) {
-    cb(Array.from(this.games.keys())
-      .map((id) => {
-        return {id: id, participants: []};
-      }));
+  async getIds(): Promise<Array<GameIdLedger>> {
+    return Array.from(this.games.keys())
+      .map((gameId) => {
+        return {gameId: gameId, participantIds: []};
+      });
   }
-  getByGameId(gameId: string, _bypassCache: boolean, cb: (game: Game | undefined) => void): void {
-    cb(this.games.get(gameId));
-  }
-  getByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
+  public getGame(id: GameId | PlayerId | SpectatorId): Promise<Game | undefined> {
+    if (isGameId(id)) return Promise.resolve(this.games.get(id));
+
     for (const game of Array.from(this.games.values())) {
-      for (const player of game.getPlayersInGenerationOrder()) {
-        if (player.id === playerId) {
-          cb(game);
-          return;
-        }
-      }
+      const matches = game.getPlayersInGenerationOrder().some((player) => player.id === id) || game.spectatorId === id;
+      if (matches) return Promise.resolve(game);
     }
-    cb(undefined);
+    return Promise.resolve(undefined);
   }
-  getBySpectatorId(spectatorId: string, cb: (game: Game | undefined) => void): void {
-    for (const game of Array.from(this.games.values())) {
-      if (game.spectatorId === spectatorId) {
-        cb(game);
-        return;
-      }
-    }
-    cb(undefined);
-  }
-  restoreGameAt(_gameId: string, _saveId: number, _cb: (game: Game | undefined) => void): void {
+  restoreGameAt(_gameId: string, _saveId: number): Promise<Game> {
     throw new Error('Method not implemented.');
+  }
+  public mark() {
   }
 }

@@ -8,12 +8,17 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {CardRequirements} from '../../../src/cards/CardRequirements';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
 import {Businessperson} from '../../../src/milestones/Businessperson';
 import {Scientist} from '../../../src/awards/Scientist';
+import {Ecologist} from '../../../src/milestones/Ecologist';
+import {Algae} from '../../../src/cards/base/Algae';
+import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
+import {Diversifier} from '../../../src/milestones/Diversifier';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 
 describe('Chimera', function() {
   let card: Chimera;
@@ -24,11 +29,11 @@ describe('Chimera', function() {
     card = new Chimera();
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('as action', function() {
-    const a = TestingUtils.fakeCard({name: 'A' as CardName, requirements: CardRequirements.builder((f) => f.tag(Tags.EARTH, 4))});
+    const a = fakeCard({name: 'A' as CardName, requirements: CardRequirements.builder((f) => f.tag(Tags.EARTH, 4))});
     player.megaCredits = card.cost;
     player.playedCards = [new BusinessNetwork()];
     expect(player.canPlay(a)).is.false;
@@ -54,10 +59,25 @@ describe('Chimera', function() {
     expect(award.getScore(player)).eq(2);
   });
 
-  it('as milestone', function() {
+  it('as milestone, single tag count', function() {
     // Businessperson: Requires that you have 6 Earth tags in play
     const milestone = new Businessperson();
     player.playedCards = [new BusinessNetwork(), new EarthCatapult(), new Cartel()];
+    expect(milestone.getScore(player)).eq(4);
+  });
+
+  it('as milestone - sum of multiple tags', function() {
+    // Requires 4 plant tags in play
+    const milestone = new Ecologist();
+    player.playedCards = [new Algae(), new ArcticAlgae()];
+    expect(milestone.getScore(player)).eq(3);
+    expect(milestone.canClaim(player)).is.false;
+  });
+
+  it('as a milestone - counting unique tags', function() {
+    // Requires 8 distinct tags.
+    const milestone = new Diversifier();
+    player.playedCards = [new Algae(), new Tardigrades(), new EarthCatapult()];
     expect(milestone.getScore(player)).eq(4);
   });
 });

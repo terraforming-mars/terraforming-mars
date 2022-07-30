@@ -3,16 +3,19 @@ import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('GHGProducingBacteria', () => {
-  let card : GHGProducingBacteria; let player : Player; let game : Game;
+  let card: GHGProducingBacteria;
+  let player: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new GHGProducingBacteria();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can play', () => {
@@ -37,14 +40,13 @@ describe('GHGProducingBacteria', () => {
     card.action(player);
     expect(card.resourceCount).to.eq(2);
 
-    const orAction = card.action(player) as OrOptions;
-    expect(orAction instanceof OrOptions).is.true;
+    const orAction = cast(card.action(player), OrOptions);
 
-        orAction!.options[1].cb();
-        expect(card.resourceCount).to.eq(3);
+    orAction.options[1].cb();
+    expect(card.resourceCount).to.eq(3);
 
-        orAction!.options[0].cb();
-        expect(card.resourceCount).to.eq(1);
-        expect(game.getTemperature()).to.eq(-28);
+    orAction.options[0].cb();
+    expect(card.resourceCount).to.eq(1);
+    expect(game.getTemperature()).to.eq(-28);
   });
 });

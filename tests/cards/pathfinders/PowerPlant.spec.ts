@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Units} from '../../../src/common/Units';
 
 describe('PowerPlant', function() {
@@ -11,8 +10,8 @@ describe('PowerPlant', function() {
 
   beforeEach(function() {
     card = new PowerPlant();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 

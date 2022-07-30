@@ -2,9 +2,8 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -33,7 +32,7 @@ export class VenusSoils extends Card {
     player.addProduction(Resources.PLANTS, 1);
     player.game.increaseVenusScaleLevel(player, 1);
 
-    const microbeCards = player.getResourceCards(ResourceType.MICROBE);
+    const microbeCards = player.getResourceCards(CardResource.MICROBE);
 
     if (microbeCards.length === 0) return undefined;
 
@@ -46,8 +45,8 @@ export class VenusSoils extends Card {
       'Select card to add 2 microbes',
       'Add microbe(s)',
       microbeCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {qty: 2, log: true});
+      ([card]) => {
+        player.addResourceTo(card, {qty: 2, log: true});
         return undefined;
       },
     );

@@ -9,6 +9,7 @@ import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {cast} from '../../TestingUtils';
 
 describe('NobelLabs', function() {
   let card: NobelLabs;
@@ -55,9 +56,7 @@ describe('NobelLabs', function() {
 
     card.action(player);
 
-    const action = game.deferredActions.pop()?.execute();
-    expect(action).is.instanceOf(SelectCard);
-    const selectCard = action as SelectCard<IProjectCard>;
+    const selectCard = cast(game.deferredActions.pop()?.execute(), SelectCard);
     expect(selectCard.cards).to.have.members([floater, microbe, data]);
 
     selectCard.cb([floater]);

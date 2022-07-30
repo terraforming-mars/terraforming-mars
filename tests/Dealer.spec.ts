@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {Dealer} from '../src/Dealer';
-import {TestingUtils} from './TestingUtils';
-import {CardLoader} from '../src/CardLoader';
+import {setCustomGameOptions} from './TestingUtils';
+import {GameCards} from '../src/GameCards';
 
 describe('Dealer', function() {
   it('deserializes from serialized', function() {
-    const gameOptions = TestingUtils.setCustomGameOptions({
+    const gameOptions = setCustomGameOptions({
       corporateEra: false,
       preludeExtension: true,
       venusNextExtension: false,
@@ -15,7 +15,7 @@ describe('Dealer', function() {
       communityCardsOption: false,
       aresExtension: true,
     });
-    const dealer = Dealer.newInstance(new CardLoader(gameOptions));
+    const dealer = Dealer.newInstance(new GameCards(gameOptions));
     expect(dealer).to.deep.eq(Dealer.deserialize(dealer.serialize()));
   });
 });

@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
@@ -21,7 +21,7 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       tags: [Tags.ANIMAL],
       cost: 9,
 
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.temperature(2)),
 
@@ -44,7 +44,7 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
   public override resourceCount: number = 0;
 
   public override canPlay(player: Player): boolean {
-    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+    return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
   public play(player: Player) {
     player.game.defer(

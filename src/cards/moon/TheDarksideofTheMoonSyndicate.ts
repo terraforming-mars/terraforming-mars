@@ -1,9 +1,9 @@
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -17,14 +17,14 @@ import {Phase} from '../../common/Phase';
 import {Card} from '../Card';
 import {all} from '../Options';
 
-export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCard {
+export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
       tags: [Tags.MOON],
       startingMegaCredits: 40,
-      resourceType: ResourceType.SYNDICATE_FLEET,
+      resourceType: CardResource.SYNDICATE_FLEET,
 
       metadata: {
         cardNumber: '',

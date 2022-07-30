@@ -4,11 +4,10 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestPlayers} from '../../TestPlayers';
 import {Capital} from '../../../src/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayer} from 'tests/TestPlayer';
+import {addOcean, setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', function() {
@@ -18,19 +17,19 @@ describe('NewVenice', function() {
 
   beforeEach(function() {
     card = new NewVenice();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: true}));
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 
   it('Can play', function() {
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(card.canPlay(player)).is.false;
 
     player.plants = 1;
@@ -41,7 +40,7 @@ describe('NewVenice', function() {
   });
 
   it('play', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     player.plants = 2;
     player.setProductionForTest({energy: 0, megacredits: 0});
 
@@ -63,7 +62,7 @@ describe('NewVenice', function() {
   });
 
   it('Cannot place a city next to New Venice', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
 
     const action = card.play(player);
 
@@ -80,7 +79,7 @@ describe('NewVenice', function() {
   });
 
   it('Can place New Venice next to a city', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     player.addProduction(Resources.ENERGY, 1);
 
     const citySpace = game.board
@@ -96,7 +95,7 @@ describe('NewVenice', function() {
   });
 
   it('New Venice counts as ocean for adjacency', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board
@@ -111,7 +110,7 @@ describe('NewVenice', function() {
   });
 
   it('New Venice counts for city-related VP', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board

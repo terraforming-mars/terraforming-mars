@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {DustStorm} from '../../../src/cards/pathfinders/DustStorm';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('DustStorm', function() {
   let card: DustStorm;
@@ -12,10 +11,10 @@ describe('DustStorm', function() {
 
   beforeEach(function() {
     card = new DustStorm();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    player3 = TestPlayers.GREEN.newPlayer();
-    Game.newInstance('foobar', [player, player2, player3], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    player3 = TestPlayer.GREEN.newPlayer();
+    Game.newInstance('gameid', [player, player2, player3], player);
   });
 
   it('play', function() {

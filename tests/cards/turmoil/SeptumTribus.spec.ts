@@ -2,20 +2,20 @@ import {expect} from 'chai';
 import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SeptumTribus', function() {
   it('Should play', function() {
     const card = new SeptumTribus();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    const game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     card.play();
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     player.megaCredits = 0;
 
     const turmoil = game.turmoil;

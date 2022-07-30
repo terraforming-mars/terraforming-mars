@@ -28,7 +28,7 @@ export class Conscription extends Card implements IProjectCard {
     });
   }
 
-  public getCardDiscount(player: Player) {
+  public override getCardDiscount(player: Player) {
     if (player.lastCardPlayed === this.name) {
       return 16;
     }

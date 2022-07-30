@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {TestingUtils} from '../../TestingUtils';
+import {fakeCard} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
 import {Resources} from '../../../src/common/Resources';
 
@@ -19,11 +19,11 @@ describe('MartianInsuranceGroup', function() {
     game = newTestGame(2);
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('when you play an event', function() {
-    const event = TestingUtils.fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
+    const event = fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
     expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
     expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
     player.playCard(event);
@@ -32,7 +32,7 @@ describe('MartianInsuranceGroup', function() {
   });
 
   it('when opponent plays an event', function() {
-    const event = TestingUtils.fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
+    const event = fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
     expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
     expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
     player2.playCard(event);

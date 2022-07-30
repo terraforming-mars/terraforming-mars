@@ -1,10 +1,11 @@
 {
+    "Terraforming Mars - Game finished!": "Terraforming Mars - Spiel beendet!",
     "Sorry, you lose.": "Du hast verloren.",
-    "Next time you will get more luck!": "Beim nächsten mal hast du bestimmt mehr Glück!",
-    "Also, take into account these small hints to win:": "Berücksichtige vielelicht auch diese Tips, um zu gewinnen:",
+    "Next time you will get more luck!": "Beim nächsten Mal hast du bestimmt mehr Glück!",
+    "Also, take into account these small hints to win:": "Berücksichtige vielleicht auch diese Tips, um zu gewinnen:",
     "Concentrate more on Global parameters, not on Victory Points": "Konzentriere dich auf Globale Parameter, nicht Siegpunkte",
     "Don't be greedy on cards selection": "Sei nicht gierig bei der Kartenwahl",
-    "Try to increase Heat production, not Megacredits": "Versuche die HitzeWärme-Produktion zu steigern, nicht die M€-Produktion",
+    "Try to increase Heat production, not Megacredits": "Versuche die Wärme-Produktion zu steigern, nicht die M€-Produktion",
     "Try to start with Beginner corporation": "Versuche es zu Beginn mit dem Anfänger-Konzern",
     
     "You win!": "Du hast gewonnen!",
@@ -14,7 +15,8 @@
     "Can you get": "Schaffst du es",
     "+ Victory Points?": " oder mehr Siegpunkte zu erreichen?",
 
-    "Victory points breakdown after": "Siegpunkteaufschlüsselung nach",
+    "Victory points breakdown after": "Siegpunkteaufschlüsselung nach ",
+    "Victory points details": "Siegpunkte-Details",
     "generations": "Generationen",
     "Player": "Spieler",
     "Corporation": "Konzern",
@@ -22,6 +24,7 @@
     "VP": "SP",
     "Total": "Gesamt",
     "Victory points details for": "Siegpunktedetails für",
-    "Final situation on the board": "Abschließende Situation auf dem Spielbrett",
-    "Final game log": "Abschließendes Spiel-Log"
+    "Final situation on the board": "Finales Spielbrett",
+    "Final game log": "Abschließendes Spiel-Log",
+    "Go to main page": "Zurück zum Hauptmenü"
 }

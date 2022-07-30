@@ -1,42 +1,28 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
-import {expect} from 'chai';
 import {Tags} from '../../../src/common/cards/Tags';
-import {CardType} from '../../../src/common/cards/CardType';
-import {CardName} from '../../../src/common/cards/CardName';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {ICardMetadata} from '../../../src/cards/ICardMetadata';
+import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
+import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('EarthEmbassy', () => {
   let player: TestPlayer;
   let earthEmbassy: EarthEmbassy;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     earthEmbassy = new EarthEmbassy();
   });
 
   it('play', () => {
-    const tags: Array<Tags> = [Tags.EARTH, Tags.MOON, Tags.MOON];
-    const fakeCard: IProjectCard = {
-      cost: 0,
-      cardType: CardType.AUTOMATED,
-      name: CardName.ZEPPELINS,
-      tags: tags,
-      metadata: {} as ICardMetadata,
-      canPlay: () => true,
-      play: () => undefined,
-      getVictoryPoints: () => 0,
-      resourceCount: 0,
-    };
+    const fake = fakeCard({tags: [Tags.EARTH, Tags.MOON, Tags.MOON]});
 
-    player.playedCards = [fakeCard];
+    player.playedCards = [fake];
     expect(player.getTagCount(Tags.EARTH, 'raw')).eq(1);
     expect(player.getTagCount(Tags.EARTH, 'default')).eq(1);
 
@@ -45,6 +31,15 @@ describe('EarthEmbassy', () => {
     player.playedCards.push(earthEmbassy);
     expect(player.getTagCount(Tags.EARTH, 'raw')).eq(2);
     expect(player.getTagCount(Tags.EARTH, 'default')).eq(5);
+  });
+
+  it('Works for Luna Governor', () => {
+    // Luna Governor requires 3 earth tags.
+    const lunaGovernor = new LunaGovernor();
+    // Earth Embassy has an earth tag and a moon tag.
+    // Business Contacts has an earth tag.
+    player.playedCards.push(earthEmbassy, new BusinessNetwork());
+    expect(player.canPlayIgnoringCost(lunaGovernor)).is.true;
   });
 });
 

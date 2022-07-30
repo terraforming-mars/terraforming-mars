@@ -10,7 +10,7 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.RESEARCH_NETWORK,
-      tags: [Tags.WILDCARD],
+      tags: [Tags.WILD],
       productionBox: Units.of({megacredits: 1}),
 
       metadata: {

@@ -24,17 +24,14 @@
               <div v-if="gameOptions.solarPhaseOption" class="game-config generic" v-i18n>On</div>
               <div v-else class="game-config generic" v-i18n>Off</div>
             </li>
-            <li v-if="gameOptions.requiresVenusTrackCompletion">Require Terraforming Venus to end the game</li>
-            <li v-if="gameOptions.requiresMoonTrackCompletion">Require Terraforming The Moon to end the game</li>
+            <li v-if="gameOptions.requiresVenusTrackCompletion">Require terraforming Venus to end the game</li>
+            <li v-if="gameOptions.requiresMoonTrackCompletion">Require terraforming The Moon to end the game</li>
 
             <li v-if="playerNumber > 1">
               <div class="setup-item" v-i18n>Milestones and Awards:</div>
               <div v-if="isRandomMANone()" class="game-config generic" v-i18n>Board-defined</div>
               <div v-if="isRandomMALimited()" class="game-config generic" v-i18n>Randomized with limited synergy</div>
               <div v-if="isRandomMAUnlimited()" class="game-config generic" v-i18n>Full randomized</div>
-              <div v-if="isRandomMANone() && gameOptions.venusNextExtension" class="game-config generic" v-i18n>HoverLord & Venuphile</div>
-              <div v-if="!isRandomMANone() && !gameOptions.includeVenusMA" class="game-config generic" v-i18n>(5 each)</div>
-              <div v-if="!isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>(6 each)</div>
             </li>
 
             <li v-if="playerNumber > 1">
@@ -98,14 +95,23 @@ export default Vue.extend({
     isPoliticalAgendasOn(): boolean {
       return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
     },
-    getBoardColorClass(boardName: string): string {
-      if (boardName === BoardName.ORIGINAL) {
+    getBoardColorClass(boardName: BoardName): string {
+      switch (boardName) {
+      case BoardName.ORIGINAL:
         return 'game-config board-tharsis map';
-      } else if (boardName === BoardName.HELLAS) {
+      case BoardName.HELLAS:
         return 'game-config board-hellas map';
-      } else if (boardName === BoardName.ELYSIUM) {
+      case BoardName.ELYSIUM:
         return 'game-config board-elysium map';
-      } else {
+      case BoardName.AMAZONIS:
+        return 'game-config board-amazonis map';
+      case BoardName.ARABIA_TERRA:
+        return 'game-config board-arabia_terra map';
+      case BoardName.VASTITAS_BOREALIS:
+        return 'game-config board-vastitas_borealis map';
+      case BoardName.TERRA_CIMMERIA:
+        return 'game-config board-terra_cimmeria map';
+      default:
         return 'game-config board-other map';
       }
     },

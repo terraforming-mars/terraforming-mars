@@ -5,16 +5,18 @@ import {TileType} from '../../../src/common/TileType';
 import {IndustrialCenterAres} from '../../../src/cards/ares/IndustrialCenterAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('IndustrialCenterAres', function() {
-  let card : IndustrialCenterAres; let player : Player; let game : Game;
+  let card: IndustrialCenterAres;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new IndustrialCenterAres();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Should play', function() {

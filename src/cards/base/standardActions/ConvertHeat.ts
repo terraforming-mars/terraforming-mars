@@ -27,7 +27,7 @@ export class ConvertHeat extends StandardActionCard {
     }
 
     // Strictly speaking, this conditional is not necessary, because canAfford manages reserveUnits.
-    if (player.availableHeat < HEAT_FOR_TEMPERATURE) {
+    if (player.availableHeat() < HEAT_FOR_TEMPERATURE) {
       return false;
     }
 

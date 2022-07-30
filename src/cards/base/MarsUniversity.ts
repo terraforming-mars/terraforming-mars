@@ -7,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -32,9 +32,9 @@ export class MarsUniversity extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+    const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
     for (let i = 0; i < scienceTags; i++) {
-      player.game.defer(new DeferredAction(
+      player.game.defer(new SimpleDeferredAction(
         player,
         () => {
           // No card to discard
@@ -42,11 +42,11 @@ export class MarsUniversity extends Card implements IProjectCard {
             return undefined;
           }
           return new OrOptions(
-            new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
-              player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
-              player.game.dealer.discard(foundCards[0]);
+            new SelectCard('Select a card to discard', 'Discard', player.cardsInHand, ([card]) => {
+              player.cardsInHand.splice(player.cardsInHand.indexOf(card), 1);
+              player.game.dealer.discard(card);
               player.game.log('${0} is using their ${1} effect to draw a card by discarding a card.', (b) => b.player(player).card(this));
-              player.game.log('You discarded ${0}', (b) => b.card(foundCards[0]), {reservedFor: player});
+              player.game.log('You discarded ${0}', (b) => b.card(card), {reservedFor: player});
               player.drawCard();
               return undefined;
             }),
@@ -55,7 +55,8 @@ export class MarsUniversity extends Card implements IProjectCard {
             }),
           );
         },
-      ));
+      ),
+      Priority.DISCARD_BEFORE_DRAW);
     }
     return undefined;
   }

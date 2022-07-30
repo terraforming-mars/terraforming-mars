@@ -1,80 +1,59 @@
-import * as http from 'http';
 import {expect} from 'chai';
 import {ApiCloneableGame} from '../../src/routes/ApiCloneableGame';
-import {Route} from '../../src/routes/Route';
-import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
-import {IContext} from '../../src/routes/IHandler';
 import {Database} from '../../src/database/Database';
+import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {GameId} from '../../src/common/Types';
 
 describe('ApiCloneableGame', () => {
-  let req: http.IncomingMessage;
+  let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
-  let ctx: IContext;
-  const origGetClonableGameByGameId = Database.getInstance().getClonableGameByGameId;
-
-  // Strictly speaking |parameters| can also accept a fragment.
-  const setRequest = function(parameters: string) {
-    req.url = parameters;
-    ctx.url = new URL('http://boo.com' + parameters);
-  };
+  let originalGetPlayerCount: (gameId: GameId) => Promise<number>;
 
   beforeEach(() => {
-    req = {} as http.IncomingMessage;
+    scaffolding = new RouteTestScaffolding();
     res = new MockResponse();
-    ctx = {
-      route: new Route(),
-      serverId: '1',
-      url: new URL('http://boo.com'),
-      gameLoader: new FakeGameLoader(),
-    };
+    originalGetPlayerCount = Database.getInstance().getPlayerCount;
   });
 
   afterEach(() => {
-    Database.getInstance().getClonableGameByGameId = origGetClonableGameByGameId;
+    Database.getInstance().getPlayerCount = originalGetPlayerCount;
   });
 
-  it('no parameter', () => {
-    setRequest('/api/cloneablegames');
-    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
+  it('no parameter', async () => {
+    scaffolding.url = '/api/cloneablegames';
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(400);
-    expect(res.content).eq('Bad request: id parameter missing');
+    expect(res.content).eq('Bad request: missing id parameter');
   });
 
-  it('has error while loading', () => {
-    Database.getInstance().getClonableGameByGameId = (gameId, cb) => {
-      expect(gameId).eq('invalidId');
-      cb(new Error('Segmentation fault'), undefined);
-    };
-    setRequest('/api/cloneablegames?id=invalidId');
-    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.statusCode).eq(500);
-    expect(res.content).eq('Internal server error: Segmentation fault');
+  it('invalid id', async () => {
+    scaffolding.url = '/api/cloneablegames?id=invalidId';
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
+    expect(res.statusCode).eq(400);
+    expect(res.content).eq('Bad request: invalid game id');
   });
 
-  it('does not find game', () => {
-    Database.getInstance().getClonableGameByGameId = (gameId, cb) => {
-      expect(gameId).eq('notfound');
-      cb(undefined, undefined);
+  it('has error while loading', async () => {
+    Database.getInstance().getPlayerCount = (_gameId) => {
+      return new Promise((_resolve, reject) => {
+        reject(new Error('Segmentation fault'));
+      });
     };
-    setRequest('/api/cloneablegames?id=notfound');
-    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.url = '/api/cloneablegames?id=gameIdInvalid';
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found');
   });
 
-  it('finds game', () => {
-    const expected = {
-      gameId: 'found',
-      playerCount: 1,
-    };
-    Database.getInstance().getClonableGameByGameId = (gameId, cb) => {
-      expect(gameId).eq(expected.gameId);
-      cb(undefined, expected);
-    };
-    setRequest('/api/cloneablegames?id=' + expected.gameId);
-    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
+  it('finds game', async () => {
+    Database.getInstance().getPlayerCount = (_gameId) => Promise.resolve(2);
+    scaffolding.url = '/api/cloneablegames?id=g456';
+    await scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(200);
-    expect(res.content).eq(JSON.stringify(expected));
+    expect(res.content).eq(JSON.stringify({
+      gameId: 'g456',
+      playerCount: 2,
+    }));
   });
 });

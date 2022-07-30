@@ -1,64 +1,52 @@
 {
-    "Beginner": "Beginner",
-    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Вы начинаете с 42 M€. Вместо выбора и покупки стартовых 10 карты, получите 10 карт бесплатно",
+     "Beginner": "Beginner",
+     "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Вы начинаете с 42 M€. Вместо участия в самой первой фазе исследования возьмите бесплтано 10 карт из колоды.",
 
-    "Credicor": "Credicor",
-    "You start with 57 M€.": "Вы начинаете с 57 M€",
-    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "Эффект: Заплатив за карту или стандартный проект 20 M€ или больше, получите 4 M€",
+     "Credicor": "Credicor",
+     "You start with 57 M€.": "Вы начинаете с 57 M€.",
+     "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "Эффект: Заплатив за карту или стандартный проект 20 M€ или больше, получите 4 M€",
 
-    "Ecoline": "Ecoline",
-    "You start with 2 plant production, 3 plants, and 36 M€.": "Вы начинаете c 2 уровнями производства растений, 3 растениями и 36 M€",
-    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Эффект: Вы всегда можете потратить 7 растений вместо 8, чтобы выложить жетон озеленения",
+     "Ecoline": "Ecoline",
+     "You start with 2 plant production, 3 plants, and 36 M€.": "Вы начинаете c 2 дополнительными уровнями производства растений, 3 растениями и 36 M€.",
+     "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Эффект: Вы всегда можете потратить 7 растений вместо 8, чтобы выложить жетон озеленения.",
 
+     "Helion": "Helion",
+     "You start with 3 heat production and 42 M€.": "Вы начинаете c 3 дополнительными уровнями производства тепла и 42 M€.",
+     "Effect: You may use heat as M€. You may not use M€ as heat.": "Эффект: Вы можете использовать тепло как M€, но не можете использовать M€ как тепло.",
 
-    "Helion": "Helion",
-    "You start with 3 heat production and 42 M€.": "Вы начинаете c 3 дополнительными уровнями производства тепла и 42 M€",
-    "Effect: You may use heat as M€. You may not use M€ as heat.": "Эффект: Вы можете использовать тепло как M€, но не можете использовать M€ как тепло",
+     "Interplanetary Сinematics": "Interplanetary Сinematics",
+     "You start with 20 steel and 30 M€.": "Вы начинаете с 20 стали и 30 M€.",
+     "Effect: Each time you play an event, you gain 2 M€.": "Эффект: Каждый раз, разыгрывая событие, получайте 2 M€.",
 
+     "Inventrix": "Inventrix",
+     "As your first action in the game, draw 3 cards. Start with 45 M€.": "В качестве своего первого действия возьмите 3 карты из колоды. Вы начинаете c 45 M€.",
+     "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Эффект: Каждый раз требования по температуре, кислороду и океану для вас больше или меньше на 2 по вашему выбору.",
 
-    "Interplanetary Сinematics": "Interplanetary Сinematics",
-    "You start with 20 steel and 30 M€.": "Вы начинаете с 20 стали и 30 M€",
-    "Effect: Each time you play an event, you gain 2 M€.": "Эффект: Каждый раз, разыгрывая событие, получайте 2 M€",
+     "Phobolog": "Phobolog",
+     "You start with 10 titanium and 23 M€.": "Вы начинаете с 10 титана и 23 M€.",
+     "Effect: Your titanium resources are each worth 1 M€ extra.": "Эффект: Каждый ваш титан стоит на 1 M€ больше.",
 
+     "Tharsis Republic": "Фарсидская республика",
+     "You start with 40 M€. As your first action in the game, place a city tile.": "Вы начинаете с 40 M€. В качестве своего первого действия выложите жетон города.",
+     "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Эффект: Когда на Марс выкладывается жетон города, ваше производство M€ увеличивается на 1. Выкладывая жетон города, получайте 3 M€.",
 
-    "Inventrix": "Inventrix",
-    "As your first action in the game, draw 3 cards. Start with 45 M€.": "В качестве своего первого действия возьмите 3 карты из колоды. Вы начинаете c 45 M€",
-    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Эффект: Каждый раз требования по температуре, кислороду, океану и Венере для вас больше или меньше на 2 по вашему выбору",
+     "Thorgate": "Thorgate",
+     "You start with 1 energy production and 48 M€.": "Вы начинаете c 1 дополнительным уровнем производства энергии и 48 M€.",
+     "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Эффект: Разыгрывая карту с меткой энергии или выполняя стандарный проект «Электростанция», платите на 3 M€ меньше.",
 
-    "Phobolog": "Phobolog",
-    "You start with 10 titanium and 23 M€.": "Вы начинаете с 10 титана и 23 M€",
-    "Effect: Your titanium resources are each worth 1 M€ extra.": "Эффект: Каждый ваш титан стоит на 1 M€ больше",
+     "UNMI": "UNMI",
+     "You start with 40 M€.": "Вы начинаете с 40 M€.",
+     "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Действие: Если в текущем поколении у вас увеличивался РТ, можете заплатить 3 M€, чтобы увеличить РТ еще на 1.",
 
-    "Tharsis Republic": "Tharsis Republic",
-    "You start with 40 M€. As your first action in the game, place a city tile.": "Вы начинаете с 40 M€. В качестве своего первого действия постройте город",
-    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Эффект: Когда на Марс выкладывается жетон города, ваше производство M€ увеличивается на 1. Выкладывая жетон города, получайте 3 M€",
+     "Mining Guild": "Mining Guild",
+     "You start with 30 M€, 5 steel and 1 steel production.": "Вы начинаете c 30 M€, 5 стали, и 1 дополнительным уровнем производства стали.",
+     "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Эффект: Всякий раз, получая сталь или титан по территориальному бонусу, увеличивайте своё производство стали на 1.",
 
-    "Thorgate": "Thorgate",
-    "You start with 1 energy production and 48 M€.": "Вы начинаете c 1 дополнительным уровнем производства энергии и 48 M€",
-    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Эффект: Разыгрывая карту с меткой энергии или выполняя стандарный проект Электростанция, платите на 3 M€ меньше",
+     "Terractor": "Terractor",
+     "You start with 60 M€.": "Вы начинаете с 60 M€.",
+     "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Эффект: Разыгрывая карту с меткой Земли, платите на 3 M€ меньше.",
 
-    "UNMI": "UNMI",
-    "You start with 40 M€.": "Вы начинаете с 40 M€",
-    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Действие: Если в текущем поколении у вас увеличивался РТ, можете заплатить 3 M€, чтобы увеличить РТ еще на 1",
-
-    "Mining Guild": "Mining Guild",
-    "You start with 30 M€, 5 steel and 1 steel production.": "Вы начинаете c 30 M€, 5 стали, и 1 дополнительным уровнем производства стали",
-    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Эффект: Всякий раз, получая сталь или титан по территориальному бонусу увеличивайте своё производство стали на 1",
-
-    "Terractor": "Terractor",
-    "You start with 60 M€.": "Вы начинаете с 60 M€",
-    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Эффект: Разыгрывая карту с меткой Земли, платите на 3 M€ меньше",
-
-    "Saturn Systems": "Saturn Systems",
-    "You start with 1 titanium production and 42 M€.": "Вы начинаете 1 дополнительным производством титана и 42 M€",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство M€ увеличивается на 1",
-
-    "Vitor": "Vitor",
-    "You start with 45 M€. As your first action, fund an award for free.": "Вы начинаете c 45 M€. Первым действием бесплатно учредите награду",
-    "awards": "Награда",
-    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "Эффект: Каждый раз, разыгрывая карту с не отрицательными ПО, включая эту, получайте 3 M€",
-
-    "Valley Trust": "Valley Trust",
-    "Effect: When you play a Science tag, you pay 2M€ less for it.": "Эффект: Платите на 2 M€ меньше за каждую метку науки на разыгрываемых картах",
-    "": ""
+     "Saturn Systems": "Saturn Systems",
+     "You start with 1 titanium production and 42 M€.": "Вы начинаете с 42 M€ и 1 дополнительным уровнем производства титана.",
+     "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство M€ увеличивается на 1."
 }

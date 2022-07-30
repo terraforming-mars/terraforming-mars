@@ -2,8 +2,8 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {MoonRoadStandardProject} from '../../../src/cards/moon/MoonRoadStandardProject';
 import {expect} from 'chai';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
@@ -11,7 +11,7 @@ import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonRoadStandardProject', () => {
   let game: Game;
@@ -20,8 +20,8 @@ describe('MoonRoadStandardProject', () => {
   let card: MoonRoadStandardProject;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
     card = new MoonRoadStandardProject();
   });
@@ -73,17 +73,17 @@ describe('MoonRoadStandardProject', () => {
 
 
   it('can act when Reds are in power.', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 
     // Card requirements
     player.steel = 1;
 
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 3);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
     moonData.logisticRate = 8;
-    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 0);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 

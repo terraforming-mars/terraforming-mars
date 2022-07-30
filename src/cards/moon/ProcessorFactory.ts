@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -17,13 +17,13 @@ export class ProcessorFactory extends Card implements IProjectCard {
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 8,
 
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
       victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
         cardNumber: 'M86',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 Steel to add 2 Data resources to any card.', (eb) => eb.startAction.steel(1).arrow().data().data());
+          b.action('Spend 1 Steel to add 2 Data resources to ANY card.', (eb) => eb.startAction.steel(1).arrow().data({amount: 2}).asterix());
           b.br;
           b.vpText('1 VP for every 3 data resources here.');
         }),
@@ -42,7 +42,7 @@ export class ProcessorFactory extends Card implements IProjectCard {
 
   public action(player: Player) {
     player.steel--;
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return undefined;
   }
 }

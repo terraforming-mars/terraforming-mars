@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard, ICard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {digit} from '../Options';
 
@@ -24,7 +24,7 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
         cardNumber: 'Pf55',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 microbes OR 2 data OR 2 floaters to ANY card.', (eb) => {
-            eb.empty().startAction.microbes(2, {digit}).slash().data({amount: 2, digit}).slash().floaters(2, {digit});
+            eb.empty().startAction.microbes(2, {digit}).slash().data({amount: 2, digit}).slash().floaters(2, {digit}).asterix();
           });
         }),
         description: 'Requires 4 Science tags.',
@@ -32,7 +32,7 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  private static RESOURCE_TYPES: Array<ResourceType> = [ResourceType.MICROBE, ResourceType.DATA, ResourceType.FLOATER];
+  private static RESOURCE_TYPES: Array<CardResource> = [CardResource.MICROBE, CardResource.DATA, CardResource.FLOATER];
   private static PREDICATE = (card: ICard) => card.resourceType !== undefined && NobelLabs.RESOURCE_TYPES.includes(card.resourceType);
 
   public canAct(player: Player) {

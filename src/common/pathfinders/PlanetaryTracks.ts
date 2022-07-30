@@ -2,11 +2,11 @@ import {PlanetaryTrack, TrackBuilder} from './PlanetaryTrack';
 
 export class PlanetaryTracks {
   private constructor(
-    public venus: PlanetaryTrack,
-    public earth: PlanetaryTrack,
-    public mars: PlanetaryTrack,
-    public jovian: PlanetaryTrack,
-    public moon: PlanetaryTrack) {
+    public readonly venus: PlanetaryTrack,
+    public readonly earth: PlanetaryTrack,
+    public readonly mars: PlanetaryTrack,
+    public readonly jovian: PlanetaryTrack,
+    public readonly moon: PlanetaryTrack) {
   }
 
   public static initialize() {

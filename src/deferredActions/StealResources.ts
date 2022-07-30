@@ -4,15 +4,17 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../common/cards/CardName';
+import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
-export class StealResources implements DeferredAction {
-  public priority = Priority.ATTACK_OPPONENT;
+export class StealResources extends DeferredAction {
   constructor(
-        public player: Player,
-        public resource: Resources,
-        public count: number = 1,
-        public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
-  ) {}
+    player: Player,
+    public resource: Resources,
+    public count: number = 1,
+    public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
+  ) {
+    super(player, Priority.ATTACK_OPPONENT);
+  }
 
   // Set this when you want to get a callback when the steal is completed.
   public stealComplete: () => void = () => {};
@@ -20,11 +22,12 @@ export class StealResources implements DeferredAction {
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.addResource(this.resource, this.count);
+      MonsInsurance.resolveInsuranceInSoloGame(this.player);
       this.stealComplete();
       return undefined;
     }
 
-    let candidates: Array<Player> = this.player.game.getPlayersInGenerationOrder().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
+    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
     if (this.resource === Resources.PLANTS) {
       candidates = candidates.filter((p) => !p.plantsAreProtected());
     }
@@ -40,7 +43,7 @@ export class StealResources implements DeferredAction {
       let qtyToSteal = Math.min(candidate.getResource(this.resource), this.count);
 
       // Botanical Experience hook.
-      if (candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (this.resource === Resources.PLANTS && candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToSteal = Math.ceil(qtyToSteal / 2);
       }
 

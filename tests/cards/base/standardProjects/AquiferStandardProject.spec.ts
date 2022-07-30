@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {AquiferStandardProject} from '../../../../src/cards/base/standardProjects/AquiferStandardProject';
-import {TestingUtils} from '../../../TestingUtils';
+import {maxOutOceans, setCustomGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
-import {TestPlayers} from '../../../TestPlayers';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../../src/common/Phase';
@@ -18,8 +17,8 @@ describe('AquiferStandardProject', function() {
 
   beforeEach(function() {
     card = new AquiferStandardProject();
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Can act', function() {
@@ -35,7 +34,7 @@ describe('AquiferStandardProject', function() {
     expect(game.board.getOceanCount()).eq(0);
 
     card.action(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     const selectSpace = player.getWaitingFor() as SelectSpace;
     const availableSpace = selectSpace.availableSpaces[0];
@@ -52,13 +51,13 @@ describe('AquiferStandardProject', function() {
   it('cannnot act when maximized', () => {
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     expect(card.canAct(player)).is.false;
   });
 
   it('Can not act with reds', () => {
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({turmoilExtension: true}));
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

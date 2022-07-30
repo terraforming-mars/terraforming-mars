@@ -5,19 +5,22 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AerialLenses', function() {
-  let card : AerialLenses; let player : Player; let player2 : Player; let game : Game;
+  let card: AerialLenses;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new AerialLenses();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
   });
 
   it('Can play', function() {
@@ -41,7 +44,7 @@ describe('AerialLenses', function() {
     expect(player.getProduction(Resources.HEAT)).to.eq(2);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(player2.plants).to.eq(3);
   });

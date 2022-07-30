@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {Helion} from '../../../src/cards/corporation/Helion';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Helion', function() {
   it('Should play', function() {
     const card = new Helion();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.HEAT)).to.eq(3);

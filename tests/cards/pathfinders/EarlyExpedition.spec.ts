@@ -3,9 +3,8 @@ import {expect} from 'chai';
 import {EarlyExpedition} from '../../../src/cards/pathfinders/EarlyExpedition';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Units} from '../../../src/common/Units';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 
 describe('EarlyExpedition', function() {
@@ -15,8 +14,8 @@ describe('EarlyExpedition', function() {
 
   beforeEach(function() {
     card = new EarlyExpedition();
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 
@@ -40,7 +39,7 @@ describe('EarlyExpedition', function() {
     player.playedCards = [lunarObservationPost];
 
     const selectSpace = card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProductionForTest()).eql(Units.of({megacredits: 3}));
     expect(lunarObservationPost.resourceCount).eq(1);

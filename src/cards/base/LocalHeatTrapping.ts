@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
@@ -33,7 +33,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    const animalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
+    const animalCards: Array<ICard> = player.getResourceCards(CardResource.ANIMAL);
     const availableActions = new OrOptions();
 
     const gain4Plants = function() {
@@ -53,8 +53,8 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
     } else {
       availableActions.options.push(
         new SelectOption('Gain 4 plants', 'Gain plants', gain4Plants),
-        new SelectCard('Select card to add 2 animals', 'Add animals', animalCards, (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {qty: 2, log: true});
+        new SelectCard('Select card to add 2 animals', 'Add animals', animalCards, ([card]) => {
+          player.addResourceTo(card, {qty: 2, log: true});
           return undefined;
         }));
     }

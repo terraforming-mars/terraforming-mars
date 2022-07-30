@@ -1,7 +1,7 @@
 import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../common/constants';
 import {Game} from '../Game';
 import {Player} from '../Player';
-import {Colony} from './Colony';
+import {IColony} from './IColony';
 import {ColonyName} from '../common/colonies/ColonyName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Resources} from '../common/Resources';
@@ -13,13 +13,15 @@ import {AndOptions} from '../inputs/AndOptions';
 import {IColonyTrader} from './IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
 import {CardName} from '../common/cards/CardName';
+import {ICard} from '../cards/ICard';
+import {Tags} from '../common/cards/Tags';
 
 export class ColoniesHandler {
-  public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): Colony {
-    let colony = game.colonies.find((c) => c.name === colonyName);
+  public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
+    let colony: IColony | undefined = game.colonies.find((c) => c.name === colonyName);
     if (colony !== undefined) return colony;
-    if (includeDiscardedColonies === true && game.colonyDealer !== undefined) {
-      colony = game.colonyDealer.discardedColonies.find((c) => c.name === colonyName);
+    if (includeDiscardedColonies === true) {
+      colony = game.discardedColonies.find((c) => c.name === colonyName);
       if (colony !== undefined) return colony;
     }
     throw new Error(`Unknown colony '${colonyName}'`);
@@ -44,7 +46,36 @@ export class ColoniesHandler {
     return undefined;
   }
 
-  private static tradeWithColony(player: Player, openColonies: Array<Colony>): AndOptions | undefined {
+  public static onCardPlayed(game: Game, card: ICard) {
+    if (!game.gameOptions.coloniesExtension) return;
+    game.colonies.forEach((colony) => {
+      ColoniesHandler.maybeActivateColony(colony, card);
+    });
+  }
+
+  /*
+   * Conditionally activate the incoming colony based on the played card.
+   *
+   * Returns `true` if the colony is already active, or becomes active from this
+   * method.
+   */
+  public static maybeActivateColony(colony: IColony, card: ICard): boolean {
+    if (colony.isActive === true) {
+      return true;
+    }
+    if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
+      colony.isActive = true;
+      return true;
+    }
+
+    if (colony.name === ColonyName.VENUS && card.tags.includes(Tags.VENUS)) {
+      colony.isActive = true;
+      return true;
+    }
+    return false;
+  }
+
+  private static tradeWithColony(player: Player, openColonies: Array<IColony>): AndOptions | undefined {
     const handlers = [
       new TradeWithTitanFloatingLaunchPad(player),
       new TradeWithCollegiumCopernicus(player),
@@ -72,7 +103,7 @@ export class ColoniesHandler {
       return undefined;
     }
 
-    const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies, (colony: Colony) => {
+    const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies, (colony: IColony) => {
       if (selected === undefined) {
         throw new Error(`Unexpected condition: no trade funding source selected when trading with ${colony.name}.`);
       }
@@ -109,7 +140,7 @@ export class TradeWithEnergy implements IColonyTrader {
     return 'Pay ' + this.tradeCost +' Energy';
   }
 
-  public trade(colony: Colony) {
+  public trade(colony: IColony) {
     this.player.deductResource(Resources.ENERGY, this.tradeCost);
     this.player.game.log('${0} spent ${1} energy to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
@@ -130,7 +161,7 @@ export class TradeWithTitanium implements IColonyTrader {
     return 'Pay ' + this.tradeCost +' Titanium';
   }
 
-  public trade(colony: Colony) {
+  public trade(colony: IColony) {
     this.player.deductResource(Resources.TITANIUM, this.tradeCost);
     this.player.game.log('${0} spent ${1} titanium to trade with ${2}', (b) => b.player(this.player).number(this.tradeCost).colony(colony));
     colony.trade(this.player);
@@ -143,8 +174,9 @@ export class TradeWithMegacredits implements IColonyTrader {
 
   constructor(private player: Player) {
     this.tradeCost = MC_TRADE_COST- player.colonyTradeDiscount;
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS)) {
-      const adhaiDiscount = Math.floor((player.corporationCard?.resourceCount || 0) / 2);
+    const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
+    if (adhai !== undefined) {
+      const adhaiDiscount = Math.floor(adhai.resourceCount / 2);
       this.tradeCost = Math.max(0, this.tradeCost - adhaiDiscount);
     }
   }
@@ -156,7 +188,7 @@ export class TradeWithMegacredits implements IColonyTrader {
     return 'Pay ' + this.tradeCost +' M€';
   }
 
-  public trade(colony: Colony) {
+  public trade(colony: IColony) {
     this.player.game.defer(new SelectHowToPayDeferred(
       this.player,
       this.tradeCost,

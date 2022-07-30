@@ -3,19 +3,19 @@ import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('SpaceElevator', function() {
-  let card : SpaceElevator; let player : TestPlayer;
+  let card: SpaceElevator;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SpaceElevator();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act if no steel', function() {
+  it('Can not act if no steel', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

@@ -7,6 +7,7 @@ import {CardName} from '../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {GainProduction} from '../../deferredActions/GainProduction';
 
 export class Hackers extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +37,7 @@ export class Hackers extends Card implements IProjectCard {
   public play(player: Player) {
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.MEGACREDITS, {count: 2, stealing: true}));
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.game.defer(new GainProduction(player, Resources.MEGACREDITS, {count: 2}));
     player.addProduction(Resources.ENERGY, -1);
     return undefined;
   }

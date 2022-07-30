@@ -2,9 +2,7 @@ import {expect} from 'chai';
 import {Anthozoa} from '../../../src/cards/pathfinders/Anthozoa';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
-// import {Units} from '../../../src/Units';
-import {TestingUtils} from '../../TestingUtils';
+import {addOcean} from '../../TestingUtils';
 
 describe('Anthozoa', function() {
   let card: Anthozoa;
@@ -12,18 +10,18 @@ describe('Anthozoa', function() {
 
   beforeEach(function() {
     card = new Anthozoa();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
   });
 
   it('canPlay', function() {
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.false;
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlay(card)).is.true;
   });
 

@@ -1,8 +1,9 @@
 import {IActionCard, IResourceCard} from '../ICard';
+import {PlayerInput} from '../../PlayerInput';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -20,7 +21,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS, Tags.MICROBE],
       cost: 6,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
 
       requirements: CardRequirements.builder((b) => b.venus(6)),
       metadata: {
@@ -47,7 +48,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
     return true;
   }
   public action(player: Player) {
-    const opts: Array<SelectOption | SelectAmount> = [];
+    const opts: Array<PlayerInput> = [];
 
     const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
       player.addResourceTo(this, {log: true});

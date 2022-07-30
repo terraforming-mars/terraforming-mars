@@ -2,10 +2,9 @@ import {expect} from 'chai';
 import {LunarEmbassy} from '../../../src/cards/pathfinders/LunarEmbassy';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Units} from '../../../src/common/Units';
 import {SpaceName} from '../../../src/SpaceName';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('LunarEmbassy', function() {
   let card: LunarEmbassy;
@@ -13,8 +12,8 @@ describe('LunarEmbassy', function() {
 
   beforeEach(function() {
     card = new LunarEmbassy();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: true}));
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: true}));
   });
 
   it('play', function() {

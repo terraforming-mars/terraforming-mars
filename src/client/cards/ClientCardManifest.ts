@@ -1,43 +1,44 @@
 import {CardName} from '@/common/cards/CardName';
-import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
 import {CardType} from '@/common/cards/CardType';
-import {ICard} from '@/cards/ICard';
-import {ICardFactory} from '@/cards/ICardFactory';
 import {GameModule} from '@/common/cards/GameModule';
+import {IClientCard} from '@/common/cards/IClientCard';
+// @ts-ignore cards.json doesn't exist during npm run build
+import * as cardJson from '@/genfiles/cards.json' assert {type: 'json'};
 
-export type CardAndModule = {card: ICard, module: GameModule};
-const cards: Map<CardName, CardAndModule> = new Map();
-const cardArray: Array<CardAndModule> = [];
-ALL_CARD_MANIFESTS.forEach((manifest) => {
-  const module = manifest.module;
-  [
-    manifest.projectCards,
-    manifest.corporationCards,
-    manifest.preludeCards,
-    manifest.standardProjects].forEach((deck) => {
-    deck.factories.forEach((cf: ICardFactory<ICard>) => {
-      const card: ICard = new cf.Factory();
-      const cam = {card, module};
-      cards.set(card.name, cam);
-      cardArray.push(cam);
-    });
-  });
-});
+const cards: Map<CardName, IClientCard> = new Map();
+const cardArray: Array<IClientCard> = [];
 
-export function getCard(cardName: CardName): CardAndModule | undefined {
+export function getCard(cardName: CardName): IClientCard | undefined {
   return cards.get(cardName);
 }
 
-export function getCards(filter: (card: CardAndModule) => boolean): Array<CardAndModule> {
+export function getCardOrThrow(cardName: CardName): IClientCard {
+  const card = getCard(cardName);
+  if (card === undefined) {
+    throw new Error(`card not found ${cardName}`);
+  }
+  return card;
+}
+
+export function getCards(filter: (card: IClientCard) => boolean): Array<IClientCard> {
   return cardArray.filter(filter);
 }
 
-export function byType(cardType: CardType): (cam: CardAndModule) => boolean {
-  return (cam) => cam.card.cardType === cardType;
+export function byType(cardType: CardType): (card: IClientCard) => boolean {
+  return (card) => card.cardType === cardType;
 }
 
-export function byModule(module: GameModule): (cam: CardAndModule) => boolean {
-  return (cam) => cam.module === module;
+export function byModule(module: GameModule): (card: IClientCard) => boolean {
+  return (card) => card.module === module;
 }
 
-export const toName = (cam: CardAndModule) => cam.card.name;
+export const toName = (card: IClientCard) => card.name;
+
+function initialize() {
+  (cardJson as any as Array<IClientCard>).forEach((card) => {
+    cards.set(card.name, card);
+    cardArray.push(card);
+  });
+}
+
+initialize();

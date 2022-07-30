@@ -1,21 +1,24 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {SulphurEatingBacteria} from '../../../src/cards/venusNext/SulphurEatingBacteria';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('SulphurEatingBacteria', function() {
-  let card : SulphurEatingBacteria; let player : Player; let game : Game;
+  let card: SulphurEatingBacteria;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new SulphurEatingBacteria();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     (game as any).venusScaleLevel = 4;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
@@ -30,7 +33,7 @@ describe('SulphurEatingBacteria', function() {
     player.playedCards.push(card);
     player.addResourceTo(card, 5);
 
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
     action.options[1].cb(3);
     expect(player.megaCredits).to.eq(9);
     expect(card.resourceCount).to.eq(2);

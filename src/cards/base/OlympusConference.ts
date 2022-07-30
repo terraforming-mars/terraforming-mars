@@ -5,10 +5,10 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -19,7 +19,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
       name: CardName.OLYMPUS_CONFERENCE,
       tags: [Tags.SCIENCE, Tags.EARTH, Tags.BUILDING],
       cost: 10,
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
       victoryPoints: 1,
 
       metadata: {
@@ -37,9 +37,9 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
   public override resourceCount: number = 0;
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+    const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
     for (let i = 0; i < scienceTags; i++) {
-      player.game.defer(new DeferredAction(
+      player.game.defer(new SimpleDeferredAction(
         player,
         () => {
           // Can't remove a resource
@@ -47,7 +47,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
             player.addResourceTo(this, 1);
             return undefined;
           }
-          return new OrOptions(
+          const options = new OrOptions(
             new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
               player.removeResourceFrom(this);
               player.drawCard();
@@ -58,6 +58,8 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
               return undefined;
             }),
           );
+          options.title = 'Select an option for Olympus Conference';
+          return options;
         },
       ), -1); // Unshift that deferred action
     }

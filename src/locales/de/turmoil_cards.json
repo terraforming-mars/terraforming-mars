@@ -1,0 +1,55 @@
+{
+  "Aerial Lenses": "Luftlinsen",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Entferne bis zu 2 Pflanzen von einem beliebigen Spieler. Erhöhe deine Wärme-Produktion um 2.",
+
+  "Banned Delegate": "Verbannter Delegierter",
+  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "Benötigt eigenen Vorsitzenden. Entferne 1 Delegierten (KEINEN PARTEICHEF)",
+
+  "Cultural Metropolis": "Kulturelle Metropole",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Senke deine Energie-Produktion um 1 und erhöhe deine M€ um 3. Platziere ein Stadtplättchen. Platziere 2 Delegierte in einer Partei.",
+
+  "Diaspora Movement": "Diaspora",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort. Erhalte 1 M€ für jedes Jupitersymbol im Spiel, inklusive diesem.",
+
+  "Event Analysts": "Ereignis-Analysten",
+  "Effect: You have +1 influence.": "EFFEKT: Du erhältst 1 Einfluss.",
+  "Requires that Scientists are ruling or that you have 2 delegates there.": "Benötigt Regierungspartei: FORSCHUNG oder 2+ eigene Delegierte dort.",
+
+  "GMO Contract": "GMO-Vertrag",
+  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "EFFEKT: Jedes Mal, wenn du ein Pflanzen-, Tier- oder Mikrobensymbol ausspielst (inklusive diesem), erhalte 2 M€.",
+  "Requires that Greens are ruling or that you have 2 delegates there.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort.",
+
+  "Martian Media Center": "Marsianisches Medienzentrum",
+  "Action: Pay 3 M€ to add a delegate to any party.": "AKTION: Bezahle 3 M€, um einer beliebigen Partei einen Delegierten hinzuzufügen.",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Erhöhe deine M€-Produktion um 2.",
+
+  "Parliament Hall": "Parlamentssaal",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Erhöhe deine M€-Produktion um 1 für jedes dritte Gebäudesymbol, das du besitzt (inklusive diesem).",
+
+  "PR Office": "PR-Büro",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Erhöhe deinen TW um 1. Erhalte 1 M€ für jedes Erdsymbol, das du besitzt (inklusive diesem).",
+
+  "Public Celebrations": "Feierlichkeiten",
+  "Requires that you are Chairman.": "Benötigt eigenen Vorsitzenden.",
+
+  "Recruitment": "Anwerbung",
+  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Tausche 1 NEUTRALEN Delegierten (KEINEN PARTEICHEF) gegen 1 eigenen aus der Reserve.",
+
+  "Red Tourism Wave": "Rote Tourismuswelle",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort. Erhalte 1 M€ für JEDES LEERE FELD, DAS AN DEINE PLÄTTCHEN ANGRENZT.",
+
+  "Sponsored Mohole": "Gesponserte Mohole",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Wärme-Produktion um 2.",
+
+  "Supported Research": "Unterstützte Forschung",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "Benötigt Regierungspartei: FORSCHUNG oder 2+ eigene Delegierte dort. Ziehe 2 Karten.",
+
+  "Wildlife Dome": "Wildtier-Kuppel",
+  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Platziere ein Grünflächenplättchen und erhöhe den Sauerstoffgehalt um 2%.",
+
+  "Vote Of No Confidence": "Misstrauensvotum",
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Benötigt neutralen Vorsitzenden und eigenen beliebigen Parteichef. Setze den NEUTRALEN Vorsitzenden ab und ersetze ihn durch einen eigenen Delegierten aus der Reserve. Erhalte 1 TW.",
+
+  "Political Alliance": "Politisches Bündnis",
+  "Requires that you have 2 party leaders. Gain 1 TR.": "Benötigt 2 eigene Parteichefs. Erhalte 1 TW."
+}

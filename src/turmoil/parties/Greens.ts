@@ -9,14 +9,13 @@ import {Policy} from '../Policy';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {IProjectCard} from '../../cards/IProjectCard';
-import {ICard} from '../../cards/ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Phase} from '../../common/Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
 import {Board} from '../../boards/Board';
 
@@ -100,7 +99,7 @@ class GreensPolicy03 implements Policy {
 
 class GreensPolicy04 implements Policy {
   id = 'gp04' as const;
-  description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
+  description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -118,7 +117,7 @@ class GreensPolicy04 implements Policy {
       {
         title: 'Select how to pay for Turmoil Greens action',
         afterPay: () => {
-          const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
+          const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
           const orOptions = new OrOptions();
 
           if (availableMicrobeCards.length === 1) {
@@ -132,8 +131,8 @@ class GreensPolicy04 implements Policy {
           } else if (availableMicrobeCards.length > 1) {
             orOptions.options.push(
               new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
-                return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, (foundCards: Array<ICard>) => {
-                  player.addResourceTo(foundCards[0], {qty: 2, log: true});
+                return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, ([card]) => {
+                  player.addResourceTo(card, {qty: 2, log: true});
                   return undefined;
                 });
               }),
@@ -148,7 +147,7 @@ class GreensPolicy04 implements Policy {
 
           if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-          game.defer(new DeferredAction(player, () => orOptions));
+          game.defer(new SimpleDeferredAction(player, () => orOptions));
           return undefined;
         },
       },

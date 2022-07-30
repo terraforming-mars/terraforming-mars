@@ -5,18 +5,18 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {TundraFarming} from '../../../src/cards/base/TundraFarming';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('AdvancedEcosystems', function() {
-  let card : AdvancedEcosystems; let player : TestPlayer;
+  let card: AdvancedEcosystems;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AdvancedEcosystems();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     player.playedCards.push(new TundraFarming(), new ResearchNetwork());
   });
 
-  it('Can\'t play if tag requirements is unmet', function() {
+  it('Can not play if tag requirements is unmet', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -30,7 +30,7 @@ describe('AdvancedEcosystems', function() {
     expect(card.getVictoryPoints()).to.eq(3);
   });
 
-  it('Can play with two wildcards', function() {
+  it('Can play with two wild tags', function() {
     player.playedCards.push(new ResearchCoordination());
     expect(player.canPlayIgnoringCost(card)).is.true;
   });

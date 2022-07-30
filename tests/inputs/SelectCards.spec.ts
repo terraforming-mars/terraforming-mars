@@ -3,12 +3,12 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {AquiferPumping} from '../../src/cards/base/AquiferPumping';
 import {RoboticWorkforce} from '../../src/cards/base/RoboticWorkforce';
 import {IoMiningIndustries} from '../../src/cards/base/IoMiningIndustries';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {ICard} from '../../src/cards/ICard';
 
 describe('SelectCard', function() {
   it('Throws error when selected card was not enabled', function() {
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const cbArray: ICard[][] = [];
 
     const cards = [new AquiferPumping(), new RoboticWorkforce(), new IoMiningIndustries()];
@@ -20,8 +20,7 @@ describe('SelectCard', function() {
         cbArray.push(_cards);
         return undefined;
       },
-      1, 1, false,
-      [true, false, true],
+      {enabled: [true, false, true]},
     );
 
     player.runInput([[cards[0].name]], selectCards);

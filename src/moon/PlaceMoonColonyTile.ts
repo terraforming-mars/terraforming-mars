@@ -3,13 +3,13 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {Player} from '../Player';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonColonyTile implements DeferredAction {
-  public priority = Priority.DEFAULT;
-
+export class PlaceMoonColonyTile extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public title: string = 'Select a space on the Moon for a colony tile.',
-  ) {}
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   protected getSpaces() {
     const moonData = MoonExpansion.moonData(this.player.game);

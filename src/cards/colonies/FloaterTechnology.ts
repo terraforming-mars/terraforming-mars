@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -27,16 +27,15 @@ export class FloaterTechnology extends Card implements IProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
-    return player.getResourceCards(ResourceType.FLOATER).length > 0;
+  public canAct(): boolean {
+    return true;
   }
 
   public action(player: Player) {
-    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
+    if (floaterCards.length === 0) return undefined;
 
-    if (floaterCards.length) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 1}));
-    }
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 1}));
 
     return undefined;
   }

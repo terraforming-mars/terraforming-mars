@@ -12,4 +12,5 @@ export enum CardRenderSymbolType {
   NBSP = 'nbsp',
   VSPACE = 'vspace',
   EQUALS = '=',
+  SURVEY_MISSION = 'survey-mission',
 }

@@ -2,6 +2,7 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
+import {isGameId} from '../common/Types';
 
 export class ApiCloneableGame extends Handler {
   public static readonly INSTANCE = new ApiCloneableGame();
@@ -9,23 +10,23 @@ export class ApiCloneableGame extends Handler {
     super();
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const gameId = ctx.url.searchParams.get('id');
-    if (!gameId) {
-      ctx.route.badRequest(req, res, 'id parameter missing');
+    if (gameId === null) {
+      ctx.route.badRequest(req, res, 'missing id parameter');
       return;
     }
-    Database.getInstance().getClonableGameByGameId(gameId, function(err, gameData) {
-      if (err) {
+    if (!isGameId(gameId)) {
+      ctx.route.badRequest(req, res, 'invalid game id');
+      return;
+    }
+    await Database.getInstance().getPlayerCount(gameId)
+      .then((playerCount) => {
+        ctx.route.writeJson(res, {gameId, playerCount});
+      })
+      .catch((err) => {
         console.warn('Could not load cloneable game: ', err);
-        ctx.route.internalServerError(req, res, err);
-        return;
-      }
-      if (gameData === undefined) {
         ctx.route.notFound(req, res);
-        return;
-      }
-      ctx.route.writeJson(res, gameData);
-    });
+      });
   }
 }

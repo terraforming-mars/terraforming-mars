@@ -5,7 +5,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {ITile} from '../ITile';
@@ -13,7 +13,7 @@ import {IAresData, IMilestoneCount} from '../common/ares/IAresData';
 import {IAdjacencyCost} from './IAdjacencyCost';
 import {Multiset} from '../utils/Multiset';
 import {Phase} from '../common/Phase';
-import {DeferredAction} from '../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
@@ -29,11 +29,7 @@ export class AresHandler {
 
   public static ifAres(game: Game, cb: (aresData: IAresData) => void) {
     if (game.gameOptions.aresExtension) {
-      if (game.aresData === undefined) {
-        console.log('Assertion failure: game.aresData is undefined');
-        // TODO(kberg): switch to throw.
-        return;
-      }
+      if (game.aresData === undefined) throw new Error('Assertion failure: game.aresData is undefined');
       cb(game.aresData);
     }
   }
@@ -67,13 +63,14 @@ export class AresHandler {
       throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
     }
 
-    const addResourceToCard = function(player: Player, resourceType: ResourceType, resourceAsText: string) {
+    const addResourceToCard = function(player: Player, resourceType: CardResource, resourceAsText: string) {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
+        return;
       } else if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {
-        player.game.defer(new DeferredAction(
+        player.game.defer(new SimpleDeferredAction(
           player,
           () => new SelectCard(
             'Select a card to add an ' + resourceAsText,
@@ -94,19 +91,19 @@ export class AresHandler {
       bonuses.add(bonus);
       switch (bonus) {
       case SpaceBonus.ANIMAL:
-        addResourceToCard(player, ResourceType.ANIMAL, 'animal');
+        addResourceToCard(player, CardResource.ANIMAL, 'animal');
         break;
 
       case SpaceBonus.MEGACREDITS:
         player.megaCredits++;
         break;
 
-      case SpaceBonus.POWER:
+      case SpaceBonus.ENERGY:
         player.energy++;
         break;
 
       case SpaceBonus.MICROBE:
-        addResourceToCard(player, ResourceType.MICROBE, 'microbe');
+        addResourceToCard(player, CardResource.MICROBE, 'microbe');
         break;
 
       default:
@@ -116,7 +113,7 @@ export class AresHandler {
     });
 
     const bonusText = bonuses.entries().map((elem) => `${elem[1]} ${SpaceBonus.toString(elem[0])}`).join(', ');
-    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile?.tileType) : 'no tile';
+    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile.tileType) : 'no tile';
     player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 
     let ownerBonus = 1;

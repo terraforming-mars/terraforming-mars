@@ -6,9 +6,10 @@ import {Player} from '../Player';
 import {SelectResources} from '../inputs/SelectResources';
 
 // TODO(kberg): Copied from GrantVenusAltTrackBonusDeferred, get these together.
-export class GrantResourceDeferred implements DeferredAction {
-  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
-  constructor(public player: Player, public wild: boolean = true) { }
+export class GrantResourceDeferred extends DeferredAction {
+  constructor(player: Player, public wild: boolean = true) {
+    super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  }
 
   public execute() {
     const options = new OrOptions();

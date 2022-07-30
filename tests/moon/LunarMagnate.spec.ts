@@ -1,22 +1,21 @@
 import {expect} from 'chai';
 import {LunarMagnate} from '../../src/moon/LunarMagnate';
-import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {TileType} from '../../src/common/TileType';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunarMagnate', function() {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.PINK.newPlayer();
-    Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.PINK.newPlayer();
+    Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
   });
 
   it('Basic test', function() {

@@ -4,7 +4,7 @@ import {CardName} from '../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';
 import {CardType} from '../../common/cards/CardType';
@@ -20,7 +20,7 @@ export class OceanSanctuary extends Card implements IResourceCard {
       name: CardName.OCEAN_SANCTUARY,
       tags: [Tags.ANIMAL],
       cost: 9,
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.oceans(5)),
 

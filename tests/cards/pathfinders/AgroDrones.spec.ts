@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {AgroDrones} from '../../../src/cards/pathfinders/AgroDrones';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('AgroDrones', function() {
   let card: AgroDrones;
@@ -11,8 +10,8 @@ describe('AgroDrones', function() {
 
   beforeEach(function() {
     card = new AgroDrones();
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 

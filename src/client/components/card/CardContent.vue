@@ -1,21 +1,21 @@
 <template>
   <div :class="getClasses()">
-    <CardRequirementsComponent v-if="requirements !== undefined" :requirements="requirements"/>
-    <CardRenderData v-if="metadata.renderData !== undefined" :renderData="metadata.renderData" />
-    <CardDescription v-if="metadata.description !== undefined" :item="metadata.description" />
-    <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :victoryPoints="metadata.victoryPoints" />
+    <CardRequirementsComponent v-if="requirements" :requirements="requirements"/>
+    <CardRenderData v-if="metadata.renderData" :renderData="metadata.renderData" />
+    <CardDescription v-if="metadata.description" :item="metadata.description" />
+    <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
   </div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardMetadata} from '@/cards/ICardMetadata';
+import {ICardMetadata} from '@/common/cards/ICardMetadata';
+import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';
-import {CardRequirements} from '@/cards/CardRequirements';
 
 export default Vue.extend({
   name: 'CardContent',
@@ -25,7 +25,7 @@ export default Vue.extend({
       required: true,
     },
     requirements: {
-      type: Object as () => CardRequirements,
+      type: Object as () => ICardRequirements,
     },
     isCorporation: {
       type: Boolean,

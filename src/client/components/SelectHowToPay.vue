@@ -1,14 +1,12 @@
 <script lang="ts">
 import Vue from 'vue';
-import {HowToPay} from '@/inputs/HowToPay';
+import {HowToPay} from '@/common/inputs/HowToPay';
 import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
-
-// TODO(kberg): delete by 2022-03-01
-const useNewVersion = true;
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectHowToPay',
@@ -20,7 +18,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -47,6 +45,7 @@ export default Vue.extend({
       microbes: 0,
       floaters: 0,
       seeds: 0,
+      data: 0,
       warning: undefined,
     };
     return model;
@@ -54,15 +53,8 @@ export default Vue.extend({
   mounted() {
     Vue.nextTick(() => {
       this.setInitialCost();
-      this.$data.megaCredits = (this as any).getMegaCreditsMax();
-
-      if (useNewVersion) {
-        this.setDefaultValues();
-      } else {
-        this.setDefaultSteelValue();
-        this.setDefaultTitaniumValue();
-        this.setDefaultHeatValue();
-      }
+      this.$data.megaCredits = this.getMegaCreditsMax();
+      this.setDefaultValues();
     });
   },
   methods: {
@@ -79,6 +71,7 @@ export default Vue.extend({
       case 'titanium': return this.canUseTitanium();
       case 'heat': return this.canUseHeat();
       case 'seeds': return this.canUseSeeds();
+      case 'data': return this.canUseData();
       }
       return false;
     },
@@ -108,74 +101,23 @@ export default Vue.extend({
       this.$data[target] = qty;
       return contributingValue;
     },
-    setDefaultValues() {
+    setDefaultValues(reserveMegacredits: boolean = false) {
       const cost = this.$data.cost;
 
-      const targets: Array<Unit> = ['seeds', 'steel', 'titanium', 'heat'];
       const megaCredits = this.getAmount('megaCredits');
-      let amountCovered = 0;
+
+      const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat'];
+      let amountCovered = reserveMegacredits ? megaCredits : 0;
       for (const target of targets) {
         amountCovered += this.setDefaultValue(amountCovered, target);
       }
-      this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
-    },
-    setDefaultSteelValue() {
-      // automatically use available steel to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-        let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.thisPlayer.megaCredits, 0) / this.thisPlayer.steelValue);
-
-        if (requiredSteelQty > this.thisPlayer.steel) {
-          this.$data.steel = this.thisPlayer.steel;
-        } else {
-          // use as much steel as possible without overpaying by default
-          let currentSteelValue = requiredSteelQty * this.thisPlayer.steelValue;
-          while (currentSteelValue <= this.$data.cost - this.thisPlayer.steelValue && requiredSteelQty < this.thisPlayer.steel) {
-            requiredSteelQty++;
-            currentSteelValue = requiredSteelQty * this.thisPlayer.steelValue;
-          }
-
-          this.$data.steel = requiredSteelQty;
-        }
-
-        const discountedCost = this.$data.cost - (this.$data.steel * this.thisPlayer.steelValue);
-        this.$data.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.$data.steel = 0;
+      if (!reserveMegacredits) {
+        this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
       }
     },
-    setDefaultTitaniumValue() {
-      // automatically use available titanium to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-        let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.thisPlayer.megaCredits - (this.$data.steel * this.thisPlayer.steelValue), 0) / this.thisPlayer.titaniumValue);
-
-        if (requiredTitaniumQty > this.thisPlayer.titanium) {
-          this.$data.titanium = this.thisPlayer.titanium;
-        } else {
-          // use as much titanium as possible without overpaying by default
-          let currentTitaniumValue = requiredTitaniumQty * this.thisPlayer.titaniumValue;
-          while (currentTitaniumValue <= this.$data.cost - this.thisPlayer.titaniumValue && requiredTitaniumQty < this.thisPlayer.titanium) {
-            requiredTitaniumQty++;
-            currentTitaniumValue = requiredTitaniumQty * this.thisPlayer.titaniumValue;
-          }
-
-          this.$data.titanium = requiredTitaniumQty;
-        }
-
-        const discountedCost = this.$data.cost - (this.$data.steel * this.thisPlayer.steelValue) - (this.$data.titanium * this.thisPlayer.titaniumValue);
-        this.$data.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.$data.titanium = 0;
-      }
-    },
-    setDefaultHeatValue() {
-      // automatically use available heat for Helion if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-        this.$data.heat = Math.max(this.$data.cost - this.thisPlayer.megaCredits - (this.$data.steel * this.thisPlayer.steelValue) - (this.$data.titanium * this.thisPlayer.titaniumValue), 0);
-      } else {
-        this.$data.heat = 0;
-      }
-      const discountedCost = this.$data.cost - (this.$data.steel * this.thisPlayer.steelValue) - (this.$data.titanium * this.thisPlayer.titaniumValue) - this.$data.heat;
-      this.$data.megaCredits = Math.max(discountedCost, 0);
+    setMaxMCValue() {
+      this.setMaxValue('megaCredits');
+      this.setDefaultValues(/* reserveMegacredits */ true);
     },
     canAffordWithMcOnly() {
       return this.thisPlayer.megaCredits >= this.$data.cost;
@@ -192,9 +134,12 @@ export default Vue.extend({
     canUseSeeds() {
       return this.playerinput.canUseSeeds && (this.playerinput.seeds ?? 0 > 0);
     },
+    canUseData() {
+      return this.playerinput.canUseData && (this.playerinput.data ?? 0 > 0);
+    },
 
     saveData() {
-      const targets: Array<Unit> = ['seeds', 'steel', 'titanium', 'heat', 'megaCredits'];
+      const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat', 'megaCredits'];
 
       const htp: HowToPay = {
         heat: this.$data.heat,
@@ -202,6 +147,7 @@ export default Vue.extend({
         steel: this.$data.steel,
         titanium: this.$data.titanium,
         seeds: this.$data.seeds,
+        data: this.$data.data,
         microbes: 0,
         floaters: 0,
         science: 0,
@@ -223,6 +169,11 @@ export default Vue.extend({
         return;
       }
 
+      // This following line was introduced in https://github.com/terraforming-mars/terraforming-mars/pull/2353
+      //
+      // According to bafolts@: I think this is an attempt to fix user error. This was added when the UI was
+      // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
+      // from user when nothing is required. Can probably remove this if server only removes what is required.
       if (requiredAmt === 0) {
         htp.heat = 0;
         htp.megaCredits = 0;
@@ -237,7 +188,7 @@ export default Vue.extend({
           }
         }
       }
-      const showAlert = PreferencesManager.load('show_alerts') === '1';
+      const showAlert = getPreferences().show_alerts;
 
       if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
         const diff = totalSpent - requiredAmt;
@@ -284,12 +235,20 @@ export default Vue.extend({
       <Button type="max" @click="setMaxValue('heat')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group"  v-if="playerinput.canUseSeeds">
-      <i class="resource_icon resource_icon--seeds payments_type_icon" :title="$t('Pay by Seeds')"></i>
+    <div class="payments_type input-group" v-if="playerinput.canUseSeeds">
+      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
       <Button type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
       <Button type="plus" @click="addValue('seeds', 1)" />
       <Button type="max" @click="setMaxValue('seeds')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group" v-if="playerinput.canUseData">
+      <i class="resource_icon resource_icon--data payments_type_icon" :title="$t('Pay by Data')"></i>
+      <Button type="minus" @click="reduceValue('data', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="data" />
+      <Button type="plus" @click="addValue('data', 1)" />
+      <Button type="max" @click="setMaxValue('data')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">
@@ -297,6 +256,7 @@ export default Vue.extend({
       <Button type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <Button type="plus" @click="addValue('megaCredits', 1)" />
+      <Button type="max" @click="setMaxMCValue()" title="MAX" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">

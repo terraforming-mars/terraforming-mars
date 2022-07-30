@@ -6,7 +6,7 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../../turmoil/Turmoil';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
@@ -34,10 +34,13 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
     const globalEvents: IGlobalEvent[] = [];
 
     for (let i = 0; i < 4; i++) {
-      globalEvents.push(turmoil.globalEventDealer.draw()!);
+      const event = turmoil.globalEventDealer.draw();
+      if (event !== undefined) {
+        globalEvents.push(event);
+      }
     }
 
-    player.game.defer(new DeferredAction(player, () => {
+    player.game.defer(new SimpleDeferredAction(player, () => {
       return new OrOptions(
         ...globalEvents.map((event) => {
           // TODO: Render as SelectGlobalEvent

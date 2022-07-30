@@ -1,15 +1,14 @@
-import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
-import {HypersensitiveSiliconChipFactory} from '../../../src/cards/moon/HypersensitiveSiliconChipFactory';
 import {expect} from 'chai';
+import {Game} from '../../../src/Game';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {HypersensitiveSiliconChipFactory} from '../../../src/cards/moon/HypersensitiveSiliconChipFactory';
 import {Resources} from '../../../src/common/Resources';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('HypersensitiveSiliconChipFactory', () => {
   let player: TestPlayer;
@@ -17,8 +16,8 @@ describe('HypersensitiveSiliconChipFactory', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new HypersensitiveSiliconChipFactory();
     moonData = MoonExpansion.moonData(game);
   });

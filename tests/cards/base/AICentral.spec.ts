@@ -3,23 +3,23 @@ import {AICentral} from '../../../src/cards/base/AICentral';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('AICentral', function() {
-  let card : AICentral; let player : TestPlayer;
+  let card: AICentral;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AICentral();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play if not enough science tags to play', function() {
+  it('Can not play if not enough science tags to play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if no energy production', function() {
+  it('Can not play if no energy production', function() {
     player.playedCards.push(card, card, card);
     expect(card.canPlay(player)).is.not.true;
   });

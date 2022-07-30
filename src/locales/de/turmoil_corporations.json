@@ -1,0 +1,28 @@
+{
+  "LAKEFRONT": "MEERESBLICK",
+  "RESORTS": "RESORTS",
+  "Lakefront Resorts": "Meeresblick Resorts",
+  "You start with 54 M€.": "Du beginnst mit 54 M€.",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "EFFEKT: Wenn ein Ozeanplättchen platziert wird, erhöhe deine M€-Produktion um 1. Dein Platzierungsbonus für an Ozeane angrenzende Plättchen beträgt 3 M€ anstatt 2 M€.",
+
+  "TERRALABS": "TERRALABS",
+  "RESEARCH": "FORSCHUNG",
+  "Terralabs Research": "Terralabs Forschung",
+  "You start with 14 M€. Lower your TR 1 step.": "Du beginnst mit 14 M€. Senke deine TW um 1.",
+  "Effect: Buying cards to hand costs 1 M€.": "EFFEKT: Karten kosten 1 M€, um sie auf die Hand aufzunehmen.",
+
+  "UTOPIA": "UTOPIA",
+  "INVEST": "INVEST",
+  "Utopia Invest": "Utopia Invest",
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Du beginnst mit 40 M€. Erhöhe deine Stahl-Produktion sowie deine Titan-Produktion um 1.",
+  "Action: Decrease any production to gain 4 resources of that kind.": "AKTION: Senke eine beliebige Produktion, um 4 Ressourcen desselben Typs zu erhalten.",
+
+  "PRISTAR": "PRISTAR",
+  "Pristar": "Pristar",
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Du beginnst mit 53 M€. Senke deine TW um 2. 1 SP pro Erhaltungs-Ressource auf dieser Karte.",
+  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "EFFEKT: Falls du in einer Generation deinen TW nicht erhöht hat, füge dieser Karte in der Produktionsphase eine Erhaltungs-Ressource hinzu.",
+
+  "Septem Tribus": "Septem Tribus",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "Du beginnst mit 36 M€. Wenn du eine Aktion ausführst, zählt das Joker-Symbol als Symbol deiner Wahl.",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "AKTION: Erhalte 2 M€ für jede Partei, in der du mindestens einen Delegierten hast."
+}

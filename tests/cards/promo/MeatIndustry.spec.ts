@@ -4,14 +4,14 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {Predators} from '../../../src/cards/base/Predators';
 import {MeatIndustry} from '../../../src/cards/promo/MeatIndustry';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('MeatIndustry', function() {
   it('Gives 2 M€ whenever player gains an animal', function() {
     const card = new MeatIndustry();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card);
 
     // Get 2 M€ when player gains animals

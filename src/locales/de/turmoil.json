@@ -1,0 +1,41 @@
+{
+  "Turmoil": "Aufruhr",
+  "Send a delegate in an area (from lobby)": "Schicke einen Delegierten in ein Gebiet (aus der Lobby)",
+  "Send a delegate in an area (5 M€)": "Schicke einen Delegierten in ein Gebiet (5 M€)",
+  "Policies": "Gesetze",
+  "No ruling Policy": "Keine herrschende Politik",
+
+  "Mars First": "MARS FIRST",
+  "Scientists": "FORSCHUNG",
+  "Unity": "EINIGKEIT",
+  "Kelvinists": "KELVINISTEN",
+  "Reds": "DIE ROTEN",
+  "Greens": "DIE GRÜNEN",
+
+  "mars first": "MARS FIRST",
+  "scientists": "FORSCHUNG",
+  "unity": "EINIGKEIT",
+  "kelvinists": "KELVINISTEN",
+  "reds": "DIE ROTEN",
+  "greens": "DIE GRÜNEN",
+
+  "Chairman": "Vorsitzender",
+  "Party leader": "Parteichef",
+  "2 Party leaders": "2 Parteichefs",
+
+  "Mars First - (All players receive 1 M€ for each Building tag they have.)": "MARS FIRST - (Alle Spieler erhalten 1 M€ für jedes Gebäudesymbol, das sie besitzen.)",
+  "Scientists - (All players receive 1 M€ for each Science tag they have.)": "FORSCHUNG - (Alle Spieler erhalten 1 M€ für jedes Wissenschafts-Symbol, das sie besitzen.)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "EINIGKEIT - (Alle Spieler erhalten 1 M€ für jedes Venus-, Erd- und Jupitersymbol, das sie besitzen.)",
+  "Kelvinists - (All players receive 1 M€ for each Heat production they have.)": "KELVINISTEN - (Alle Spieler erhalten 1 M€ für jede Wärme-Produktion, die sie besitzen.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "DIE ROTEN - (Die Spieler mit dem niedrigsten TW erhalten 1 TW.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "DIE GRÜNEN - (Alle Spieler erhalten 1 M€ für jedes Pflanzen-, Mikroben- und Tier-Symbol, das sie besitzen.)",
+
+
+  "Mars First (Focused on Martian development and independence.)": "MARS FIRST (Fokussiert auf Marsianische Entwicklung und Unabhängigkeit.)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "FORSCHUNG (Technologie ist die Tür zur Zukunft, und Forschung tut alles, um sie zu öffnen.)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "EINIGKEIT (Wollen die Menschheit im gesamten Sonnensystem florieren sehen.)",
+  "Greens (Want to see a new Earth as soon as possible.)": "DIE GRÜNEN (Wollen so schnell wie möglich eine neue Erde erschaffen.)",
+  "Reds (Wishes to preserve the red planet.)": "DIE ROTEN (Wollen den Roten Planeten erhalten.)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "KELVINISTEN (Drängen auf rapides Terraforming mittels wärmezentrierter Strategie.)"
+
+}

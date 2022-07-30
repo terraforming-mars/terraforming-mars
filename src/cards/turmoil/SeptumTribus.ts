@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
@@ -9,11 +9,11 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class SeptumTribus extends Card implements IActionCard, CorporationCard {
+export class SeptumTribus extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.SEPTUM_TRIBUS,
-      tags: [Tags.WILDCARD],
+      tags: [Tags.WILD],
       startingMegaCredits: 36,
       cardType: CardType.CORPORATION,
 

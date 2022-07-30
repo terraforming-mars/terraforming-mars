@@ -3,19 +3,21 @@ import {UndergroundDetonations} from '../../../src/cards/base/UndergroundDetonat
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('UndergroundDetonations', function() {
-  let card : UndergroundDetonations; let player : Player; let game : Game;
+  let card: UndergroundDetonations;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new UndergroundDetonations();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 9;
     expect(card.canAct(player)).is.not.true;
   });

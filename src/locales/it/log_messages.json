@@ -55,7 +55,7 @@
 "The ruling bonus is ${0}":"Il bonus di governo è ${0}",
 "The ruling policy is ${0}":"La politica di governo è ${0}",
 "${0} sent ${1} delegate(s) in ${2} area":"${0} ha inviato ${1} Delegato/i nell'area ${2}",
-"${0}'s ${1} production ${2} by ${3} by Global Event":"La Produzione di ${1} di ${0} ${2} di ${3} a causa di un Evento Globale",
+"${0}'s ${1} production ${2} by ${3} by ${4}":"La Produzione di ${1} di ${0} ${2} di ${3} a causa di ${4}",
 "${0} used ${1} standard action":"${0} ha usato l'azione standard ${1}",
 "${0} placed a City tile":"${0} ha posizionato una tessera Città",
 "${0} added ${1} ${2} to ${3}":"${0} ha aggiunto ${1} ${2} a ${3}",

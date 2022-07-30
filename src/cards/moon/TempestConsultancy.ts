@@ -3,13 +3,13 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {Tags} from '../../common/cards/Tags';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class TempestConsultancy extends Card implements CorporationCard {
+export class TempestConsultancy extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

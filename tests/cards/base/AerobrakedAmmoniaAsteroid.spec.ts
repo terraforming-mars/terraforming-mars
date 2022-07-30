@@ -3,18 +3,18 @@ import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmon
 import {Ants} from '../../../src/cards/base/Ants';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('AerobrakedAmmoniaAsteroid', function() {
-  let card : AerobrakedAmmoniaAsteroid; let player : Player;
+  let card: AerobrakedAmmoniaAsteroid;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AerobrakedAmmoniaAsteroid();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play without microbe cards', function() {

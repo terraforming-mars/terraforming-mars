@@ -6,15 +6,16 @@ import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer, Turmoil} from '../turmoil/Turmoil';
 import {PartyName} from '../common/turmoil/PartyName';
 
-export class SendDelegateToArea implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class SendDelegateToArea extends DeferredAction {
   private turmoil: Turmoil;
+
   constructor(
-        public player: Player,
-        public title: string = 'Select where to send a delegate',
-        public options: SendDelegateToArea.Options = {},
+    player: Player,
+    public title: string = 'Select where to send a delegate',
+    public options: SendDelegateToArea.Options = {},
   ) {
-    this.turmoil = Turmoil.getTurmoil(this.player.game);
+    super(player, Priority.DEFAULT);
+    this.turmoil = Turmoil.getTurmoil(player.game);
   }
 
   private getAvailableParties() {
@@ -67,6 +68,7 @@ export class SendDelegateToArea implements DeferredAction {
         }
       }
 
+      this.player.totalDelegatesPlaced += numDelegateToSend;
       this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(numDelegateToSend).partyName(partyName));
       return undefined;
     });

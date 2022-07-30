@@ -4,22 +4,25 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalAlliance', function() {
-  let card : PoliticalAlliance; let player : Player; let game : Game; let turmoil: Turmoil;
+  let card: PoliticalAlliance;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new PoliticalAlliance();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     greens.partyLeader = player.id;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

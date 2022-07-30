@@ -47,8 +47,13 @@ export class Wetlands extends Card implements IProjectCard {
       return adjacentSpaces.filter(Board.isOceanSpace).length;
     };
 
-    const spaces = board.getNonReservedLandSpaces();
-    return spaces.filter((space) => adjacentOceans(space) >= 2);
+    const redCity = board.getSpaceByTileCard(CardName.RED_CITY);
+    const spacesNextToRedCity = redCity ?
+      board.getAdjacentSpaces(redCity) :
+      [];
+    return board.getNonReservedLandSpaces()
+      .filter((space) => adjacentOceans(space) >= 2)
+      .filter((space) => !spacesNextToRedCity.includes(space));
   }
 
   public override canPlay(player: Player) {
@@ -71,6 +76,7 @@ export class Wetlands extends Card implements IProjectCard {
           covers: space.tile,
         };
         player.game.addTile(player, space.spaceType, space, tile);
+        player.game.increaseOxygenLevel(player, 1);
         return undefined;
       },
     );

@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
@@ -17,7 +17,7 @@ export class TerraformingRobots extends Card implements IProjectCard, IResourceC
       name: CardName.TERRAFORMING_ROBOTS,
       cost: 7,
       tags: [Tags.SCIENCE],
-      resourceType: ResourceType.SPECIALIZED_ROBOT,
+      resourceType: CardResource.SPECIALIZED_ROBOT,
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
       victoryPoints: VictoryPoints.resource(1, 1),
 

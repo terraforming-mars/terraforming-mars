@@ -1,14 +1,15 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Tags} from '../../../src/common/cards/Tags';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaPoliticalInstitute', () => {
   let player: Player;
@@ -17,8 +18,8 @@ describe('LunaPoliticalInstitute', () => {
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LunaPoliticalInstitute();
     turmoil = game.turmoil!;
   });
@@ -27,8 +28,13 @@ describe('LunaPoliticalInstitute', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    // TODO(kberg): Add test when M70 is merged.
     expect(player.getPlayableCards()).does.not.include(card);
+
+    player.playedCards = [fakeCard({tags: [Tags.MOON]})];
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    player.playedCards = [fakeCard({tags: [Tags.MOON, Tags.MOON]})];
+    expect(player.getPlayableCards()).includes(card);
   });
 
   it('can act', () => {

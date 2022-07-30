@@ -6,34 +6,35 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', () => {
-  let card : Capital; let player : TestPlayer; let game : Game;
+  let card: Capital;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Capital();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play without 2 energy production', () => {
-    TestingUtils.maxOutOceans(player, 4);
+    maxOutOceans(player, 4);
     player.addProduction(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Cannot play if oceans requirement not met', () => {
-    TestingUtils.maxOutOceans(player, 3);
+    maxOutOceans(player, 3);
     player.addProduction(Resources.ENERGY, 2);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play', () => {
-    TestingUtils.maxOutOceans(player, 4);
+    maxOutOceans(player, 4);
     player.addProduction(Resources.ENERGY, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
@@ -46,8 +47,7 @@ describe('Capital', () => {
     player.addProduction(Resources.ENERGY, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 

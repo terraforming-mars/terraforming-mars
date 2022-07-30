@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../common/cards/CardName';
@@ -7,7 +7,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 
-export class CrediCor extends Card implements CorporationCard {
+export class CrediCor extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -30,7 +30,7 @@ export class CrediCor extends Card implements CorporationCard {
     });
   }
   private effect(player: Player, card: IProjectCard | StandardProjectCard): void {
-    if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cost >= 20) {
+    if (player.isCorporation(this.name) && card.cost >= 20) {
       player.megaCredits += 4;
     }
   }

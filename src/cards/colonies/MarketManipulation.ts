@@ -1,15 +1,16 @@
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {Game} from '../../Game';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {Size} from '../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
-import {COLONY_DESCRIPTIONS} from '../../common/colonies/ColonyDescription';
+import {SelectColony} from '../..//inputs/SelectColony';
+import {IColony} from '../../colonies/IColony';
+import {LogHelper} from '../../LogHelper';
 
 export class MarketManipulation extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,11 @@ export class MarketManipulation extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C23',
         renderData: CardRenderer.builder((b) => {
-          b.text('Increase one colony tile track 1 step. Decrease another colony tile track 1 step.', Size.SMALL, true);
+          b.text(
+            'Increase one colony tile track 1 step. Decrease another colony tile track 1 step.',
+            Size.SMALL,
+            true,
+          );
         }),
       },
     });
@@ -34,7 +39,11 @@ export class MarketManipulation extends Card implements IProjectCard {
 
     if (increasableColonies.length === 0) return false;
     if (decreasableColonies.length === 0) return false;
-    if (increasableColonies.length === 1 && decreasableColonies.length === 1 && increasableColonies[0] === decreasableColonies[0]) {
+    if (
+      increasableColonies.length === 1 &&
+      decreasableColonies.length === 1 &&
+      increasableColonies[0] === decreasableColonies[0]
+    ) {
       return false;
     }
 
@@ -42,42 +51,52 @@ export class MarketManipulation extends Card implements IProjectCard {
   }
 
   private getIncreasableColonies(game: Game) {
-    return game.colonies.filter((colony) => colony.trackPosition < 6 && colony.isActive);
+    return game.colonies.filter(
+      (colony) => colony.trackPosition < 6 && colony.isActive,
+    );
   }
 
   private getDecreasableColonies(game: Game) {
-    return game.colonies.filter((colony) => colony.trackPosition > colony.colonies.length && colony.isActive);
+    return game.colonies.filter(
+      (colony) =>
+        colony.trackPosition > colony.colonies.length && colony.isActive,
+    );
   }
 
   public play(player: Player) {
-    const selectColonies = new OrOptions();
-    selectColonies.title = 'Select colonies to increase and decrease tile track';
-
-    const increasableColonies = this.getIncreasableColonies(player.game);
+    let increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
+    // if there is only one decreaseable colony and it is an increaseable colony, don't allow increase of that colony.
+    if (decreasableColonies.length === 1 && increasableColonies.some((colony) => colony.name === decreasableColonies[0].name)) {
+      increasableColonies = increasableColonies.filter((colony) => colony.name !== decreasableColonies[0].name);
+    }
+    const increaseColonyTrack = new SelectColony(
+      'Select which colony tile track to increase',
+      'Increase',
+      increasableColonies,
+      (increasedColony: IColony) => {
+        increasedColony.increaseTrack();
+        LogHelper.logColonyTrackIncrease(player, increasedColony, 1);
+        const decreaseColonyTrack = new SelectColony(
+          'Select which colony tile track to decrease',
+          'Decrease',
+          decreasableColonies.filter((decreaseableColony) => decreaseableColony.name !== increasedColony.name),
+          (decreasedColony: IColony) => {
+            decreasedColony.decreaseTrack();
+            LogHelper.logColonyTrackDecrease(player, decreasedColony);
+            return undefined;
+          },
+        );
+        player.game.defer(
+          new SimpleDeferredAction(player, () => decreaseColonyTrack),
+        );
+        return undefined;
+      },
+    );
 
-    increasableColonies.forEach(function(c1) {
-      decreasableColonies.forEach(function(c2) {
-        if (c1.name !== c2.name) {
-          const c1Description = COLONY_DESCRIPTIONS.get(c1.name) ?? 'unknown';
-          const c2Description = COLONY_DESCRIPTIONS.get(c2.name) ?? 'unknown';
-          const description = 'Increase ' + c1.name + ' (' + c1Description + ') and decrease ' + c2.name + ' (' + c2Description + ')';
-          const colonySelect = new SelectOption(
-            description,
-            'Select',
-            () => {
-              c1.increaseTrack();
-              c2.decreaseTrack();
-              player.game.log('${0} increased ${1} track and decreased ${2} track', (b) => b.player(player).string(c1.name).string(c2.name));
-              return undefined;
-            },
-          );
-
-          selectColonies.options.push(colonySelect);
-        }
-      });
-    });
-
-    return selectColonies;
+    player.game.defer(
+      new SimpleDeferredAction(player, () => increaseColonyTrack),
+    );
+    return undefined;
   }
 }

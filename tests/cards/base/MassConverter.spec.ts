@@ -4,19 +4,22 @@ import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
+import {fakeCard} from '../../TestingUtils';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MassConverter', function() {
-  let card : MassConverter; let player : Player;
+  let card: MassConverter;
+  let player: Player;
 
   beforeEach(function() {
     card = new MassConverter();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -28,5 +31,8 @@ describe('MassConverter', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(6);
     expect(card.getCardDiscount(player, card)).to.eq(0);
     expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
+
+    const fake = fakeCard({tags: [Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE]});
+    expect(card.getCardDiscount(player, fake)).eq(2);
   });
 });

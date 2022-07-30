@@ -18,7 +18,7 @@
     </sidebar>
 
     <div class="player_home_block nofloat">
-        <log-panel :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
+        <log-panel v-if="spectator.id !== undefined" :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
     </div>
 
     <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
@@ -82,14 +82,14 @@ import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import Awards from '@/client/components/Awards.vue';
 import Board from '@/client/components/Board.vue';
-import Colony from '@/client/components/Colony.vue';
+import Colony from '@/client/components/colonies/Colony.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
-import Turmoil from '@/client/components/Turmoil.vue';
+import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import {range} from '@/common/utils/utils';

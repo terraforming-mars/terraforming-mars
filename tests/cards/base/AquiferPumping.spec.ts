@@ -2,21 +2,23 @@ import {expect} from 'chai';
 import {AquiferPumping, OCEAN_COST} from '../../../src/cards/base/AquiferPumping';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {maxOutOceans, setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 
 describe('AquiferPumping', function() {
-  let card : AquiferPumping; let player : Player; let game : Game;
+  let card: AquiferPumping;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new AquiferPumping();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -43,8 +45,8 @@ describe('AquiferPumping', function() {
   });
 
   it('Cannot act if cannot afford reds tax', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -65,8 +67,8 @@ describe('AquiferPumping', function() {
   });
 
   it('Steel does not satisfy the reds tax', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -85,7 +87,7 @@ describe('AquiferPumping', function() {
   });
 
   it('Can act if can pay even after oceans are maxed', function() {
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     player.megaCredits = 8;
 
     expect(card.canAct(player)).is.true;

@@ -11,13 +11,14 @@ export namespace LoseProduction {
   }
 }
 
-export class LoseProduction implements DeferredAction {
-  public priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
+export class LoseProduction extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public resource: Resources,
     public options: LoseProduction.Options = {},
-  ) {}
+  ) {
+    super(player, Priority.LOSE_RESOURCE_OR_PRODUCTION);
+  }
 
   public execute() {
     if (this.options.count === undefined) {

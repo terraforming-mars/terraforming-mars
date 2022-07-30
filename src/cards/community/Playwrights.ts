@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -8,13 +8,13 @@ import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../common/Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
 
-export class Playwrights extends Card implements CorporationCard {
+export class Playwrights extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,
@@ -55,13 +55,13 @@ export class Playwrights extends Card implements CorporationCard {
   }
 
   public action(player: Player): SelectCard<IProjectCard> | undefined {
-    const players = player.game.getPlayersInGenerationOrder();
+    const players = player.game.getPlayers();
     const replayableEvents = this.getReplayableEvents(player);
 
     return new SelectCard<IProjectCard>(
       'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
-      (foundCards: Array<IProjectCard>) => {
-        const selectedCard: IProjectCard = foundCards[0];
+      ([card]) => {
+        const selectedCard: IProjectCard = card;
 
         players.forEach((p) => {
           const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
@@ -77,15 +77,15 @@ export class Playwrights extends Card implements CorporationCard {
           {
             title: 'Select how to pay to replay the event',
             afterPay: () => {
-              player.playCard(selectedCard, undefined, false); // Play the card but don't add it to played cards
+              player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
               player.removedFromPlayCards.push(selectedCard); // Remove card from the game
               if (selectedCard.name === CardName.LAW_SUIT) {
                 /*
                    * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
                    * Needs to be deferred to happen after Law Suit's `play()` method.
                    */
-                player.game.defer(new DeferredAction(player, () => {
-                  player.game.getPlayersInGenerationOrder().some((p) => {
+                player.game.defer(new SimpleDeferredAction(player, () => {
+                  player.game.getPlayers().some((p) => {
                     const card = p.playedCards[p.playedCards.length - 1];
                     if (card?.name === selectedCard.name) {
                       p.playedCards.pop();
@@ -112,7 +112,7 @@ export class Playwrights extends Card implements CorporationCard {
     const playedEvents : IProjectCard[] = [];
 
     this.checkLoops++;
-    player.game.getPlayersInGenerationOrder().forEach((p) => {
+    player.game.getPlayers().forEach((p) => {
       playedEvents.push(...p.playedCards.filter((card) => {
         return card.cardType === CardType.EVENT &&
             // Can player.canPlay(card) replace this?

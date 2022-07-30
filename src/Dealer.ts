@@ -1,27 +1,26 @@
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
-import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';
 import {CardFinder} from './CardFinder';
-import {CardLoader} from './CardLoader';
+import {GameCards} from './GameCards';
 import {CardName} from './common/cards/CardName';
 import {LogHelper} from './LogHelper';
 import {Game} from './Game';
 
-export class Dealer implements ISerializable<SerializedDealer> {
+export class Dealer {
   public deck: Array<IProjectCard> = [];
   public preludeDeck: Array<IProjectCard> = [];
   public discarded: Array<IProjectCard> = [];
-  public corporationCards: Array<CorporationCard> = [];
+  public corporationCards: Array<ICorporationCard> = [];
 
   private constructor() { }
 
-  public static newInstance(loader: CardLoader): Dealer {
+  public static newInstance(cardsForGame: GameCards): Dealer {
     const dealer = new Dealer();
 
-    dealer.deck = Dealer.shuffle(loader.getProjectCards());
-    dealer.preludeDeck = Dealer.shuffle(loader.getPreludeCards());
-    dealer.corporationCards = loader.getCorporationCards();
+    dealer.deck = Dealer.shuffle(cardsForGame.getProjectCards());
+    dealer.preludeDeck = Dealer.shuffle(cardsForGame.getPreludeCards());
+    dealer.corporationCards = cardsForGame.getCorporationCards();
     return dealer;
   }
 

@@ -11,8 +11,8 @@ export class GamesOverview extends Handler {
   private constructor() {
     super({validateServerId: true});
   }
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     req.url = '/assets/index.html';
-    ServeAsset.INSTANCE.get(req, res, ctx);
+    return ServeAsset.INSTANCE.get(req, res, ctx);
   }
 }

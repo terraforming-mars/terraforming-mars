@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/cards/CardRequirements';
-import {TestingUtils} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
+import {setCustomGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
 import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/common/TileType';
@@ -17,15 +16,16 @@ import {OrOptions} from '../../src/inputs/OrOptions';
 import {TestPlayer} from '../TestPlayer';
 
 describe('CardRequirements', function() {
-  let player: TestPlayer; let player2: TestPlayer;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
 
-    Game.newInstance('foobar', [player, player2], player, gameOptions);
+    Game.newInstance('gameid', [player, player2], player, gameOptions);
   });
 
   it('satisfies properly for oceans', function() {
@@ -109,13 +109,13 @@ describe('CardRequirements', function() {
   it('satisfies properly for greeneries', function() {
     const requirements = CardRequirements.builder((b) => b.greeneries(2, {max: true}));
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player2);
+    addGreenery(player2);
     expect(requirements.satisfies(player)).eq(true);
-    TestingUtils.addGreenery(player);
+    addGreenery(player);
     expect(requirements.satisfies(player)).eq(false);
   });
 
@@ -142,7 +142,7 @@ describe('CardRequirements', function() {
   it('satisfies properly for floaters', function() {
     const requirements = CardRequirements.builder((b) => b.floaters(2));
     const corp = new Celestic();
-    player.corporationCard = corp;
+    player.setCorporationForTest(corp);
     corp.action(player);
     expect(requirements.satisfies(player)).eq(false);
     corp.action(player);
@@ -233,8 +233,8 @@ describe('CardRequirements', function() {
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
     // Choose Remove 1 plant option
-    TestingUtils.runAllActions(player.game);
-    const orOptions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
+    runAllActions(player.game);
+    const orOptions = cast(player.getWaitingFor(), OrOptions);
     orOptions.options[0].cb([player2]);
 
     expect(requirements.satisfies(player)).eq(true);

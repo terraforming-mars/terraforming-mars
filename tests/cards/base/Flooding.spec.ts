@@ -7,25 +7,26 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('Flooding', function() {
-  let card : Flooding; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+  let card: Flooding;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Flooding();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should play', function() {
     const oceans = game.board.getAvailableSpacesForOcean(player);
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
-    expect(action!.cb(oceans[0])).is.undefined;
+    expect(action.cb(oceans[0])).is.undefined;
     const adjacentSpaces = game.board.getAdjacentSpaces(oceans[0]);
     oceans[0].tile = undefined;
     for (let i = 0; i < adjacentSpaces.length; i++) {
@@ -35,11 +36,10 @@ describe('Flooding', function() {
       }
     }
 
-    const subAction: OrOptions = action!.cb(oceans[0]) as OrOptions;
-    expect(subAction instanceof OrOptions).is.true;
+    const subAction = cast(action!.cb(oceans[0]), OrOptions);
     expect(subAction!.options).has.lengthOf(2);
     expect(subAction!.options[1].cb()).is.undefined;
-    const subActionSelectPlayer: SelectPlayer = subAction!.options[0] as SelectPlayer;
+    const subActionSelectPlayer = cast(subAction.options[0], SelectPlayer);
     expect(subActionSelectPlayer.players).has.lengthOf(1);
     expect(subActionSelectPlayer.players[0]).to.eq(player2);
 
@@ -52,16 +52,15 @@ describe('Flooding', function() {
 
   it('Does not suggest to remove money from yourself', function() {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     game.addGreenery(player, '03');
     game.addGreenery(player2, '05');
 
-    expect(action).instanceOf(SelectSpace);
-    const subActions: OrOptions = action!.cb(oceanSpaces[0]) as OrOptions;
-    expect(subActions.options).has.lengthOf(2);
+    const subAction = cast(action.cb(oceanSpaces[0]), OrOptions);
+    expect(subAction.options).has.lengthOf(2);
 
-    const subActionSelectPlayer: SelectPlayer = subActions.options[0] as SelectPlayer;
+    const subActionSelectPlayer = cast(subAction.options[0], SelectPlayer);
     expect(subActionSelectPlayer.players).has.lengthOf(1);
     expect(subActionSelectPlayer.players[0]).to.eq(player2);
   });
@@ -81,7 +80,7 @@ describe('Flooding', function() {
   });
 
   it('Does not suggest to remove money if oceans are already maxed', function() {
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);

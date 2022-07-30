@@ -5,15 +5,15 @@ import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {SpaceName} from '../../../src/SpaceName';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LandClaim', function() {
   it('Should play', function() {
     const card = new LandClaim();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.not.undefined;
     const landSpace = player.game.board.getAvailableSpacesOnLand(player)[0];
@@ -23,9 +23,9 @@ describe('LandClaim', function() {
   });
   it('can claim south pole on hellas board', function() {
     const card = new LandClaim();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({
       boardName: BoardName.HELLAS,
     }));
     const action = card.play(player) as SelectSpace;

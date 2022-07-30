@@ -13,15 +13,14 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new PharmacyUnion();
@@ -29,10 +28,11 @@ describe('PharmacyUnion', function() {
     player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Should play', function() {
+    player.corporations.length = 0; // Resetting so when setting the corproation it doesn't do anything flaky.
     Game.newInstance('gameid', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);

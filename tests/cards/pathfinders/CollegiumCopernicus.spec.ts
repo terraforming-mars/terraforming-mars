@@ -5,10 +5,10 @@ import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectColony} from '../../../src/inputs/SelectColony';
-import {Player} from '../../../src/Player';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {newTestGame, getTestPlayer} from '../../TestGame';
+import {TestPlayer} from '../../TestPlayer';
 import {Enceladus} from '../../../src/colonies/Enceladus';
 import {Europa} from '../../../src/colonies/Europa';
 import {Io} from '../../../src/colonies/Io';
@@ -19,14 +19,14 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('CollegiumCopernicus', function() {
   let card: CollegiumCopernicus;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
     card = new CollegiumCopernicus();
     game = newTestGame(2, {coloniesExtension: true, pathfindersExpansion: true});
     player = getTestPlayer(game, 0);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [
       new Europa(),
@@ -77,7 +77,6 @@ describe('CollegiumCopernicus', function() {
 
     expect(getTradeAction()).is.undefined;
 
-    player.corporationCard = card;
     card.resourceCount = 2;
 
     expect(getTradeAction()).is.undefined;

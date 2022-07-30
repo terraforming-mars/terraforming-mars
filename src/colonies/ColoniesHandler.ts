@@ -13,6 +13,8 @@ import {AndOptions} from '../inputs/AndOptions';
 import {IColonyTrader} from './IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
 import {CardName} from '../common/cards/CardName';
+import {ICard} from '../cards/ICard';
+import {Tags} from '../common/cards/Tags';
 
 export class ColoniesHandler {
   public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
@@ -42,6 +44,35 @@ export class ColoniesHandler {
       }
     }
     return undefined;
+  }
+
+  public static onCardPlayed(game: Game, card: ICard) {
+    if (!game.gameOptions.coloniesExtension) return;
+    game.colonies.forEach((colony) => {
+      ColoniesHandler.maybeActivateColony(colony, card);
+    });
+  }
+
+  /*
+   * Conditionally activate the incoming colony based on the played card.
+   *
+   * Returns `true` if the colony is already active, or becomes active from this
+   * method.
+   */
+  public static maybeActivateColony(colony: IColony, card: ICard): boolean {
+    if (colony.isActive === true) {
+      return true;
+    }
+    if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
+      colony.isActive = true;
+      return true;
+    }
+
+    if (colony.name === ColonyName.VENUS && card.tags.includes(Tags.VENUS)) {
+      colony.isActive = true;
+      return true;
+    }
+    return false;
   }
 
   private static tradeWithColony(player: Player, openColonies: Array<IColony>): AndOptions | undefined {

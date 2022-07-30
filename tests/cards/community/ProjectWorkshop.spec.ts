@@ -9,7 +9,6 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
-import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -21,7 +20,7 @@ import {Birds} from '../../../src/cards/base/Birds';
 
 describe('ProjectWorkshop', function() {
   let card: ProjectWorkshop;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let advancedAlloys : AdvancedAlloys;
 
@@ -33,7 +32,7 @@ describe('ProjectWorkshop', function() {
     advancedAlloys = new AdvancedAlloys();
 
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Starts with correct resources', function() {
@@ -126,7 +125,7 @@ describe('ProjectWorkshop', function() {
     game = newTestGame(1, {turmoilExtension: true});
     const player = getTestPlayer(game, 0);
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     player.game.phase = Phase.ACTION;
 
     const turmoil = game.turmoil!;

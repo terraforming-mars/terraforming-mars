@@ -8,13 +8,18 @@ export class Engineer implements IAward {
   public description: string = 'Most cards that directly alter your own production';
 
   public getScore(player: Player): number {
-    let score = player.playedCards.filter((card) => card.produce !== undefined || (card.productionBox !== undefined && card.productionBox !== Units.EMPTY)).length;
-    score += player.playedCards.filter((card) => Engineer.productionCards.includes(card.name)).length;
-    if (player.corporationCard !== undefined && Engineer.productionCards.includes(player.corporationCard.name)) score += 1;
+    // TODO(kberg): should Engineer include events?
+    const score = player.tableau.filter((card) => {
+      if (card.produce !== undefined) return true;
+      if (card.productionBox !== undefined && card.productionBox !== Units.EMPTY) return true;
+      if (Engineer.productionCards.includes(card.name)) return true;
+      return false;
+    }).length;
 
     return score;
   }
 
+  // TODO(kberg)
   private static productionCards = [
     // Base + Corp Era
     CardName.ACQUIRED_COMPANY,

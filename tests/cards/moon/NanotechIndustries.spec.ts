@@ -1,5 +1,4 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/cards/moon/NanotechIndustries';
@@ -14,7 +13,7 @@ import {IProjectCard} from '../../../src/cards/IProjectCard';
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('NanotechIndustries', () => {
-  let player: Player;
+  let player: TestPlayer;
   let nanotechIndustries: NanotechIndustries;
 
   // Physics Complex: 2 points per resource.
@@ -33,7 +32,7 @@ describe('NanotechIndustries', () => {
   });
 
   it('act', () => {
-    player.corporationCard = nanotechIndustries;
+    player.setCorporationForTest(nanotechIndustries);
     player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
     nanotechIndustries.action(player);
 

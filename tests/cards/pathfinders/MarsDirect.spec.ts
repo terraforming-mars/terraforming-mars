@@ -32,7 +32,7 @@ describe('MarsDirect', () => {
     addOcean(player2);
 
     player.cardsInHand = [powerPlant, controlledBloom];
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     player.tagsForTest = {mars: 0};
     player.megaCredits = 13;

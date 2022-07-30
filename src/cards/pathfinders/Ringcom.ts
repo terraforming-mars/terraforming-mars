@@ -8,7 +8,6 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
-import {ICard} from '../ICard';
 
 export class Ringcom extends Card implements ICorporationCard {
   constructor() {
@@ -49,10 +48,11 @@ export class Ringcom extends Card implements ICorporationCard {
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
+    this.onCardPlayed(player, card);
+    return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (card.tags.includes(Tags.JOVIAN)) {
       player.game.getPlayers().forEach((p) => {
         if (p.isCorporation(this.name)) {

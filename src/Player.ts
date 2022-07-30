@@ -7,9 +7,8 @@ import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
-import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './common/inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -79,7 +78,8 @@ export class Player {
   public game: Game;
 
   // Corporate identity
-  public corporationCard?: ICorporationCard;
+  public corporations: Array<ICorporationCard> = [];
+
   // Used only during set-up
   public pickedCorporationCard?: ICorporationCard;
 
@@ -191,8 +191,8 @@ export class Player {
     this.game = undefined as unknown as Game;
   }
 
-  public get corporations(): Array<ICorporationCard> {
-    return this.corporationCard !== undefined ? [this.corporationCard] : [];
+  public get tableau(): Array<ICorporationCard | IProjectCard> {
+    return [...this.corporations, ...this.playedCards];
   }
 
   public isCorporation(corporationName: CardName): boolean {
@@ -201,6 +201,14 @@ export class Player {
 
   public getCorporation(corporationName: CardName): ICorporationCard | undefined {
     return this.corporations.find((c) => c.name === corporationName);
+  }
+
+  public getCorporationOrThrow(corporationName: CardName): ICorporationCard {
+    const corporation = this.getCorporation(corporationName);
+    if (corporation === undefined) {
+      throw new Error(`player ${this.name} does not have corporation ${corporationName}`);
+    }
+    return corporation;
   }
 
   public getTitaniumValue(): number {
@@ -219,7 +227,7 @@ export class Player {
   }
 
   public getSelfReplicatingRobotsTargetCards(): Array<RobotCard> {
-    return (this.playedCards.find((card) => card instanceof SelfReplicatingRobots) as (SelfReplicatingRobots | undefined))?.targetCards ?? [];
+    return (<SelfReplicatingRobots> this.playedCards.find((card) => card instanceof SelfReplicatingRobots))?.targetCards ?? [];
   }
 
   public getSteelValue(): number {
@@ -533,15 +541,8 @@ export class Player {
   public getVictoryPoints(): IVictoryPointsBreakdown {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
-    // Victory points from corporations
-    for (const card of this.corporations) {
-      if (card.victoryPoints !== undefined) {
-        victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(this), card.name);
-      }
-    }
-
     // Victory points from cards
-    for (const playedCard of this.playedCards) {
+    for (const playedCard of this.tableau) {
       if (playedCard.victoryPoints !== undefined) {
         victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
       }
@@ -697,10 +698,7 @@ export class Player {
 
   public getRequirementsBonus(parameter: GlobalParameter): number {
     let requirementsBonus: number = 0;
-    for (const card of this.corporations) {
-      if (card.getRequirementBonus !== undefined) requirementsBonus += card.getRequirementBonus(this, parameter);
-    }
-    for (const playedCard of this.playedCards) {
+    for (const playedCard of this.tableau) {
       if (playedCard.getRequirementBonus !== undefined) requirementsBonus += playedCard.getRequirementBonus(this, parameter);
     }
 
@@ -749,10 +747,7 @@ export class Player {
       }
     }
 
-    for (const playedCard of this.playedCards) {
-      playedCard.onResourceAdded?.(this, card, count);
-    }
-    for (const playedCard of this.corporations) {
+    for (const playedCard of this.tableau) {
       playedCard.onResourceAdded?.(this, card, count);
     }
   }
@@ -896,16 +891,12 @@ export class Player {
   public getRawTagCount(tag: Tags, includeEventsTags: boolean) {
     let tagCount = 0;
 
-    this.playedCards.forEach((card: IProjectCard) => {
-      if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
+    this.tableau.forEach((card: IProjectCard | ICorporationCard) => {
+      if (!includeEventsTags && card.cardType === CardType.EVENT) return;
+      if (isICorporationCard(card) && card.isDisabled) return;
       tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
     });
 
-    this.corporations.forEach((card: ICorporationCard) => {
-      if (!card.isDisabled) {
-        tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-      }
-    });
     return tagCount;
   }
 
@@ -1031,12 +1022,7 @@ export class Player {
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
-    for (const card of this.corporations) {
-      if (isIActionCard(card) && !this.actionsThisGeneration.has(card.name) && card.canAct(this)) {
-        result.push(card);
-      }
-    }
-    for (const playedCard of this.playedCards) {
+    for (const playedCard of this.tableau) {
       if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
         result.push(playedCard);
       }
@@ -1267,12 +1253,7 @@ export class Player {
     let cost: number = card.cost;
     cost -= this.cardDiscount;
 
-    this.playedCards.forEach((playedCard) => {
-      cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
-    });
-
-    // Check corporation too
-    this.corporations.forEach((playedCard) => {
+    this.tableau.forEach((playedCard) => {
       cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
     });
 
@@ -1458,20 +1439,7 @@ export class Player {
       }
     }
 
-    // Activate some colonies
-    if (this.game.gameOptions.coloniesExtension && selectedCard.resourceType !== undefined) {
-      this.game.colonies.forEach((colony) => {
-        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === selectedCard.resourceType) {
-          colony.isActive = true;
-        }
-      });
-
-      // Check for Venus colony
-      if (selectedCard.tags.includes(Tags.VENUS)) {
-        const venusColony = this.game.colonies.find((colony) => colony.name === ColonyName.VENUS);
-        if (venusColony) venusColony.isActive = true;
-      }
-    }
+    ColoniesHandler.onCardPlayed(this.game, selectedCard);
 
     if (selectedCard.cardType !== CardType.PROXY) {
       this.lastCardPlayed = selectedCard.name;
@@ -1533,14 +1501,12 @@ export class Player {
       return;
     }
     for (const playedCard of this.playedCards) {
-      if (playedCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard = playedCard.onCardPlayed(this, card);
-        if (actionFromPlayedCard !== undefined) {
-          this.game.defer(new SimpleDeferredAction(
-            this,
-            () => actionFromPlayedCard,
-          ));
-        }
+      const actionFromPlayedCard = playedCard.onCardPlayed?.(this, card);
+      if (actionFromPlayedCard !== undefined) {
+        this.game.defer(new SimpleDeferredAction(
+          this,
+          () => actionFromPlayedCard,
+        ));
       }
     }
 
@@ -1548,14 +1514,12 @@ export class Player {
 
     for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       for (const corporationCard of somePlayer.corporations) {
-        if (corporationCard.onCardPlayed !== undefined) {
-          const actionFromPlayedCard = corporationCard.onCardPlayed(this, card);
-          if (actionFromPlayedCard !== undefined) {
-            this.game.defer(new SimpleDeferredAction(
-              this,
-              () => actionFromPlayedCard,
-            ));
-          }
+        const actionFromPlayedCard = corporationCard.onCardPlayed?.(this, card);
+        if (actionFromPlayedCard !== undefined) {
+          this.game.defer(new SimpleDeferredAction(
+            this,
+            () => actionFromPlayedCard,
+          ));
         }
       }
     }
@@ -1931,7 +1895,10 @@ export class Player {
       return;
     }
 
-    const corporationCard = this.corporationCard;
+    if (this.corporations.length > 1) {
+      throw new Error('Not supporting multiple corporations yet.');
+    }
+    const corporationCard = this.corporations[0];
 
     // Terraforming Mars FAQ says:
     //   If for any reason you are not able to perform your mandatory first action (e.g. if
@@ -2142,12 +2109,14 @@ export class Player {
   public serialize(): SerializedPlayer {
     const result: SerializedPlayer = {
       id: this.id,
-      corporationCard: this.corporationCard === undefined ? undefined : {
-        name: this.corporationCard.name,
-        resourceCount: this.corporationCard.resourceCount,
-        allTags: this.corporationCard instanceof Aridor ? Array.from(this.corporationCard.allTags) : [],
-        isDisabled: this.corporationCard instanceof PharmacyUnion && this.corporationCard.isDisabled,
-      },
+      corporations: this.corporations.map((corporation) => {
+        return {
+          name: corporation.name,
+          resourceCount: corporation.resourceCount,
+          allTags: corporation instanceof Aridor ? Array.from(corporation.allTags) : [],
+          isDisabled: corporation instanceof PharmacyUnion && corporation.isDisabled,
+        };
+      }),
       // Used only during set-up
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
@@ -2282,26 +2251,32 @@ export class Player {
       player.pickedCorporationCard = cardFinder.getCorporationCardByName(d.pickedCorporationCard);
     }
 
-    // Rebuild corporation card
-    if (d.corporationCard !== undefined) {
-      player.corporationCard = cardFinder.getCorporationCardByName(d.corporationCard.name);
-      if (player.corporationCard !== undefined) {
-        if (d.corporationCard.resourceCount !== undefined) {
-          player.corporationCard.resourceCount = d.corporationCard.resourceCount;
+    // Rebuild corporation cards
+    let corporations = d.corporations;
+    if (corporations === undefined && d.corporationCard !== undefined) corporations = [d.corporationCard];
+
+    // This shouldn't happen
+    if (corporations !== undefined) {
+      for (const corporation of corporations) {
+        const card = cardFinder.getCorporationCardByName(corporation.name);
+        if (card === undefined) {
+          continue;
         }
-      }
-      if (player.corporationCard instanceof Aridor) {
-        if (d.corporationCard.allTags !== undefined) {
-          player.corporationCard.allTags = new Set(d.corporationCard.allTags);
-        } else {
-          console.warn('did not find allTags for ARIDOR');
+        if (corporation.resourceCount !== undefined) {
+          card.resourceCount = corporation.resourceCount;
         }
+        if (card instanceof Aridor) {
+          if (corporation.allTags !== undefined) {
+            card.allTags = new Set(corporation.allTags);
+          } else {
+            console.warn('did not find allTags for ARIDOR');
+          }
+        }
+        if (card instanceof PharmacyUnion) {
+          card.isDisabled = Boolean(corporation.isDisabled);
+        }
+        player.corporations.push(card);
       }
-      if (player.corporationCard instanceof PharmacyUnion) {
-        player.corporationCard.isDisabled = Boolean(d.corporationCard.isDisabled);
-      }
-    } else {
-      player.corporationCard = undefined;
     }
 
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);

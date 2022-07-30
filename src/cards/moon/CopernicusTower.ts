@@ -60,8 +60,8 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
     }
 
     return new OrOptions(
-      new SelectOption('Add 1 science resource to this card', 'Add resource', () => this.addResource(player)),
       new SelectOption('Remove 1 science resource to increase TR 1 step', 'Remove resource', () => this.spendResource(player)),
+      new SelectOption('Add 1 science resource to this card', 'Add resource', () => this.addResource(player)),
     );
   }
 

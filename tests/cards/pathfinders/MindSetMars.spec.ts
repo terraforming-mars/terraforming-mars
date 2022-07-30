@@ -23,7 +23,7 @@ describe('MindSetMars', function() {
     game = newTestGame(2, {turmoilExtension: true});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     turmoil = game.turmoil!;
   });
 

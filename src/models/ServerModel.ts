@@ -47,6 +47,7 @@ import {MoonModel} from '../common/models/MoonModel';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../common/cards/CardName';
 import {Tags} from '../common/cards/Tags';
+import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -204,32 +205,6 @@ export class Server {
     return awardModels;
   }
 
-  public static getCorporationCard(player: Player): CardModel | undefined {
-    if (player.corporationCard === undefined) return undefined;
-
-    const card = player.corporationCard;
-    let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
-
-    // Too bad this is hard-coded
-    if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
-      discount = [{tag: Tags.MOON, amount: player.getTagCount(Tags.MOON)}];
-    }
-    if (card.name === CardName.MARS_DIRECT) {
-      discount = [{tag: Tags.MARS, amount: player.getTagCount(Tags.MARS)}];
-    }
-
-    return {
-      name: card.name,
-      resources: card.resourceCount,
-      cardType: CardType.CORPORATION,
-      isDisabled: card.isDisabled || false,
-      warning: card.warning,
-      discount: discount,
-      resourceType: card.resourceType,
-      reserveUnits: Units.EMPTY,
-    };
-  }
-
   public static getWaitingFor(
     player: Player,
     waitingFor: PlayerInput | undefined,
@@ -383,17 +358,29 @@ export class Server {
     } = {},
   ): Array<CardModel> {
     return cards.map((card, index) => {
+      let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
+
+      // Too bad this is hard-coded
+      if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
+        discount = [{tag: Tags.MOON, amount: player.getTagCount(Tags.MOON)}];
+      }
+      if (card.name === CardName.MARS_DIRECT) {
+        discount = [{tag: Tags.MARS, amount: player.getTagCount(Tags.MARS)}];
+      }
+
+      const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
+
       const model: CardModel = {
         resources: options.showResources ? card.resourceCount : undefined,
         resourceType: card.resourceType,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
         cardType: card.cardType,
-        isDisabled: options.enabled?.[index] === false,
+        isDisabled: isDisabled,
         warning: card.warning,
         reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
         bonusResource: (card as IProjectCard).bonusResource,
-        discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
+        discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
       };
       return model;
@@ -413,7 +400,6 @@ export class Server {
       citiesCount: player.game.getCitiesCount(player),
       coloniesCount: player.getColoniesCount(),
       color: player.color,
-      corporationCard: Server.getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       fleetSize: player.getFleetSize(),
@@ -432,7 +418,7 @@ export class Server {
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
-      playedCards: Server.getCards(player, player.playedCards, {showResources: true}),
+      tableau: Server.getCards(player, player.tableau, {showResources: true}),
       selfReplicatingRobotsCards: Server.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),

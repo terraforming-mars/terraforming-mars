@@ -12,7 +12,6 @@ import {SerializedTimer} from '../src/common/SerializedTimer';
 import {SerializedGame} from '../src/SerializedGame';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
-import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {formatLogMessage, setCustomGameOptions} from './TestingUtils';
@@ -24,7 +23,7 @@ import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventNam
 describe('Player', function() {
   it('should initialize with right defaults', function() {
     const player = new Player('name', Color.BLUE, false, 0, 'p-blue');
-    expect(player.corporationCard).is.undefined;
+    expect(player.corporations).is.empty;
   });
   it('Should throw error if nothing to process', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
@@ -106,7 +105,7 @@ describe('Player', function() {
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(0);
-    player1.corporationCard = corporationCard;
+    player1.corporations = [corporationCard];
     player2.playCard(card, undefined);
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
@@ -202,11 +201,11 @@ describe('Player', function() {
     expect(json.pickedCorporationCard).eq('Saturn Systems');
   });
   it('serialization test', () => {
-    const json = {
+    const json: SerializedPlayer = {
       id: 'p-blue',
-      pickedCorporationCard: 'Tharsis Republic',
+      pickedCorporationCard: 'Tharsis Republic' as CardName,
       terraformRating: 20,
-      corporationCard: undefined,
+      corporations: [],
       hasIncreasedTerraformRatingThisGeneration: false,
       terraformRatingAtGenerationStart: 20,
       megaCredits: 1,
@@ -246,18 +245,6 @@ describe('Player', function() {
       turmoilPolicyActionUsed: false,
       politicalAgendasActionUsedCount: 0,
       hasTurmoilScienceTagBonus: false,
-      victoryPointsBreakdown: {
-        terraformRating: 1,
-        milestones: 2,
-        awards: 3,
-        greenery: 4,
-        city: 5,
-        victoryPoints: 6,
-        total: 7,
-        detailsCards: [],
-        detailsMilestones: [],
-        detailsAwards: [],
-      } as unknown as VictoryPointsBreakdown, // needs double-conversion as it expects the VPB methods.
       oceanBonus: 86,
       scienceTagCount: 97,
       plantsNeededForGreenery: 5,
@@ -278,7 +265,7 @@ describe('Player', function() {
       victoryPointsByGeneration: [],
     };
 
-    const newPlayer = Player.deserialize(json as SerializedPlayer, {generation: 1} as SerializedGame);
+    const newPlayer = Player.deserialize(json, {generation: 1} as SerializedGame);
 
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.tradesThisGeneration).eq(100);

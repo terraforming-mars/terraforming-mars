@@ -8,7 +8,6 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
-import {ICard} from '../ICard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../common/constants';
 import {Size} from '../../common/cards/render/Size';
@@ -51,10 +50,11 @@ export class Ambient extends Card implements ICorporationCard {
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
+    this.onCardPlayed(player, card);
+    return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (player.isCorporation(this.name) && card.tags.includes(Tags.VENUS)) {
       player.addProduction(Resources.HEAT, 1, {log: true});
     }

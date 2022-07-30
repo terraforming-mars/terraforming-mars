@@ -70,7 +70,7 @@
                             <tr v-for="p in getSortedPlayers()" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
                                 <td>
                                   <a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a>
-                                  <div class="column-corporation">{{ p.corporationCard === undefined ? "" : p.corporationCard.name }}</div>
+                                  <div class="column-corporation">{{ getCorporationName(p) }}</div>
                                 </td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>
@@ -164,6 +164,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
+import * as constants from '@/common/constants';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
@@ -174,11 +175,9 @@ import Button from '@/client/components/common/Button.vue';
 import VictoryPointChart from '@/client/components/gameend/VictoryPointChart.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/common/Timer';
-
-
-import * as constants from '@/common/constants';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {Color} from '@/common/Color';
+import {CardType} from '@/common/cards/CardType';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;
@@ -232,7 +231,7 @@ export default Vue.extend({
     getTimer(p: PublicPlayerModel): string {
       return Timer.toString(p.timer);
     },
-    getSortedPlayers() {
+    getSortedPlayers(): Array<PublicPlayerModel> {
       const copy = [...this.viewModel.players];
       copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
@@ -257,6 +256,10 @@ export default Vue.extend({
     },
     isSoloGame(): boolean {
       return this.players.length === 1;
+    },
+    getCorporationName(p: PublicPlayerModel): string {
+      const firstCard = p.tableau[0];
+      return firstCard.cardType === CardType.CORPORATION ? firstCard.name : '';
     },
   },
 });

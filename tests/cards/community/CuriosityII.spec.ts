@@ -4,15 +4,14 @@ import {CuriosityII} from '../../../src/cards/community/CuriosityII';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
 import {setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CuriosityII', function() {
   let card: CuriosityII;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -22,7 +21,7 @@ describe('CuriosityII', function() {
     game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({aresExtension: true, aresHazards: false}));
     game.phase = Phase.ACTION;
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     player.megaCredits = 2;
   });
 

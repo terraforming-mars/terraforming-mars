@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {TharsisRepublic} from '../../../src/cards/corporation/TharsisRepublic';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -10,8 +9,8 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('TharsisRepublic', function() {
   let card: TharsisRepublic;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -20,7 +19,7 @@ describe('TharsisRepublic', function() {
     player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Should take initial action', function() {

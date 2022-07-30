@@ -59,6 +59,27 @@ import {PlayerId, SpectatorId} from '@/common/Types';
 
 let logRequest: XMLHttpRequest | undefined;
 
+const cardTypeToCss: Record<CardType, string | undefined> = {
+  event: 'background-color-events',
+  corporation: 'background-color-global-event',
+  active: 'background-color-active',
+  automated: 'background-color-automated',
+  prelude: 'background-color-prelude',
+  standard_project: 'background-color-standard-project',
+  standard_action: 'background-color-standard-project',
+  proxy: undefined,
+};
+
+const translatableMessageDataTypes = new Set([
+  LogMessageDataType.STRING,
+  LogMessageDataType.STANDARD_PROJECT,
+  LogMessageDataType.MILESTONE,
+  LogMessageDataType.AWARD,
+  LogMessageDataType.COLONY,
+  LogMessageDataType.PARTY,
+  LogMessageDataType.TILE_TYPE,
+  LogMessageDataType.GLOBAL_EVENT]);
+
 export default Vue.extend({
   name: 'log-panel',
   props: {
@@ -108,18 +129,7 @@ export default Vue.extend({
     cardToHtml(cardType: CardType, cardName: string) {
       const cardNameString = this.$t(cardName);
       const suffixFreeCardName = cardNameString.split(':')[0];
-      let className: string | undefined;
-      if (cardType === CardType.EVENT) {
-        className = 'background-color-events';
-      } else if (cardType === CardType.ACTIVE) {
-        className = 'background-color-active';
-      } else if (cardType === CardType.AUTOMATED) {
-        className = 'background-color-automated';
-      } else if (cardType === CardType.PRELUDE) {
-        className = 'background-color-prelude';
-      } else if (cardType === CardType.STANDARD_PROJECT || cardType === CardType.STANDARD_ACTION) {
-        className = 'background-color-standard-project';
-      }
+      const className = cardTypeToCss[cardType];
 
       if (className === undefined) {
         return suffixFreeCardName;
@@ -127,16 +137,6 @@ export default Vue.extend({
       return '<span class="log-card '+ className + '">' + suffixFreeCardName + '</span>';
     },
     messageDataToHTML(data: LogMessageData): string {
-      const translatableMessageDataTypes = [
-        LogMessageDataType.STRING,
-        LogMessageDataType.STANDARD_PROJECT,
-        LogMessageDataType.MILESTONE,
-        LogMessageDataType.AWARD,
-        LogMessageDataType.COLONY,
-        LogMessageDataType.PARTY,
-        LogMessageDataType.TILE_TYPE,
-        LogMessageDataType.GLOBAL_EVENT,
-      ];
       if (data.type === undefined || data.value === undefined) {
         return '';
       }
@@ -152,21 +152,11 @@ export default Vue.extend({
 
       case LogMessageDataType.CARD:
         const cardName = data.value as CardName;
-        for (const player of this.players) {
-          if (player.corporationCard !== undefined && cardName === player.corporationCard.name) {
-            return '<span class="log-card background-color-global-event">' + this.$t(cardName) + '</span>';
-          } else {
-            const robotCards = player.playedCards.concat(player.selfReplicatingRobotsCards);
-            for (const robotCard of robotCards) {
-              if (cardName === robotCard.name && robotCard.cardType !== undefined) {
-                return this.cardToHtml(robotCard.cardType, cardName);
-              }
-            }
-          }
-        }
         const card = getCard(cardName);
-        if (card?.cardType) {
-          return this.cardToHtml(card.cardType, data.value);
+        if (card !== undefined) {
+          return this.cardToHtml(card.cardType, cardName);
+        } else {
+          console.log(`Cannot render ${cardName}`);
         }
         break;
 
@@ -179,7 +169,7 @@ export default Vue.extend({
         return this.$t(TileType.toString(tileType));
 
       default:
-        if (translatableMessageDataTypes.includes(data.type)) {
+        if (translatableMessageDataTypes.has(data.type)) {
           return this.$t(data.value);
         }
       }
@@ -321,9 +311,8 @@ export default Vue.extend({
     },
     getResourcesOnCard(cardName: CardName) {
       for (const player of this.players) {
-        const foundCard = player.playedCards.find((card) => card.name === cardName);
+        const foundCard = player.tableau.find((card) => card.name === cardName);
         if (foundCard !== undefined) return foundCard.resources;
-        if (cardName === player.corporationCard?.name) return player.corporationCard.resources;
       }
 
       return undefined;

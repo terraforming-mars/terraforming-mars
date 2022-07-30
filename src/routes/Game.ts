@@ -107,6 +107,7 @@ export class GameHandler extends Handler {
             includeVenusMA: gameReq.includeVenusMA,
 
             draftVariant: gameReq.draftVariant,
+            corporationsDraft: gameReq.corporationsDraft,
             initialDraftVariant: gameReq.initialDraft,
             startingCorporations: gameReq.startingCorporations,
             shuffleMapOption: gameReq.shuffleMapOption,

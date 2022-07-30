@@ -27,6 +27,7 @@ export interface NewGameConfig {
   board: BoardNameType;
   seed: number;
   initialDraft: boolean;
+  corporationsDraft: boolean;
   randomFirstPlayer: boolean;
 
   // boardName: BoardName;

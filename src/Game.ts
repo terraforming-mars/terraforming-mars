@@ -72,7 +72,6 @@ export interface Score {
   corporation: String;
   playerScore: number;
 }
-
 export class Game {
   // Game-level data
   public lastSaveId: number = 0;
@@ -106,6 +105,9 @@ export class Game {
   // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
+  // Used for corporation global draft: do we draft to next player or to player before
+  private corporationsDraftDirection: 'before' | 'after' = 'before';
+  public corporationsToDraft: Array<ICorporationCard> = [];
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -186,6 +188,7 @@ export class Game {
     if (players.length === 1) {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
+      gameOptions.corporationsDraft = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
 
       players[0].setTerraformRating(14);
@@ -305,15 +308,38 @@ export class Game {
 
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
 
-    // Initial Draft
-    if (gameOptions.initialDraftVariant) {
-      game.phase = Phase.INITIALDRAFTING;
-      game.runDraftRound(true);
+    // Do we draft corporations or do we start the game?
+    if (gameOptions.corporationsDraft) {
+      game.phase = Phase.CORPORATIONDRAFTING;
+      for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
+        const card = corporationCards.pop();
+        if (card === undefined) throw new Error('No more corporation cards for game ' + id);
+        game.corporationsToDraft.push(card);
+      }
+      // First player should be the last player
+      const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
+      if (playerStartingCorporationsDraft !== undefined) {
+        playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
+      } else {
+        // If for any reason, we don't have player before the first one.
+        firstPlayer.runDraftCorporationPhase(firstPlayer.name, game.corporationsToDraft);
+      }
     } else {
-      game.gotoInitialResearchPhase();
+      game.gotoInitialPhase();
     }
 
     return game;
+  }
+
+  // Function use to properly start the game: with project draft or with research phase
+  public gotoInitialPhase(): void {
+    // Initial Draft
+    if (this.gameOptions.initialDraftVariant) {
+      this.phase = Phase.INITIALDRAFTING;
+      this.runDraftRound(true, false);
+    } else {
+      this.gotoInitialResearchPhase();
+    }
   }
 
   public save(): void {
@@ -367,6 +393,8 @@ export class Game {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
+      corporationsDraftDirection: this.corporationsDraftDirection,
+      corporationsToDraft: this.corporationsToDraft.map((c) => c.name),
     };
     if (this.aresData !== undefined) {
       result.aresData = this.aresData;
@@ -850,6 +878,44 @@ export class Game {
     } else {
       this.gotoInitialResearchPhase();
     }
+  }
+
+  // Function use to manage corporation draft way
+  public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<ICorporationCard>): void {
+    const nextPlayer = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
+    if (nextPlayer === undefined) {
+      throw new Error(`Cannot find player to pass for player ${player.id} in game ${this.id}`);
+    }
+
+    const passTo = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
+    if (passTo === undefined) {
+      throw new Error(`Cannot find player to pass for player ${nextPlayer.id} in game ${this.id}`);
+    }
+
+    // If more than 1 card are to be passed to the next player, that means we're still drafting
+    if (cards.length > 1) {
+      if ((this.draftRound + 1) % this.players.length === 0) {
+        nextPlayer.runDraftCorporationPhase(nextPlayer.name, cards);
+      } else if (this.draftRound % this.players.length === 0) {
+        player.runDraftCorporationPhase(nextPlayer.name, cards);
+        this.corporationsDraftDirection = this.corporationsDraftDirection === 'after' ? 'before' : 'after';
+      } else {
+        nextPlayer.runDraftCorporationPhase(passTo.name, cards);
+      }
+      this.draftRound++;
+      return;
+    }
+
+    // Push last card to next player
+    nextPlayer.draftedCorporations.push(...cards);
+
+    this.players.forEach((player) => {
+      player.dealtCorporationCards = player.draftedCorporations;
+    });
+    // Reset value to guarantee no impact on eventual futur drafts (projects or preludes)
+    this.initialDraftIteration = 1;
+    this.draftRound = 1;
+    this.gotoInitialPhase();
   }
 
   private getDraftCardsFrom(player: Player): PlayerId {
@@ -1580,6 +1646,10 @@ export class Game {
     d.unDraftedCards.forEach((unDraftedCard) => {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
+
+    // TODO(kberg): remove `?? []` by 2022-09-01
+    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
+    game.corporationsDraftDirection = d.corporationsDraftDirection ?? false;
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

@@ -123,6 +123,7 @@ export class Player {
   public preludeCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
+  public draftedCorporations: Array<ICorporationCard> = [];
   public cardCost: number = constants.CARD_COST;
   public needsToDraft?: boolean;
 
@@ -1194,6 +1195,37 @@ export class Player {
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, {min: cardsToKeep, max: cardsToKeep, played: false}),
+    );
+  }
+
+  /*
+   * @param playerName  The player _this_ player passes remaining cards to.
+   * @param passedCards The cards received from the draw, or from the prior player.
+   */
+  public runDraftCorporationPhase(playerName: string, passedCards: Array<ICorporationCard>): void {
+    let cards: Array<ICorporationCard> = passedCards;
+
+    const message = 'Select a corporation to keep and pass the rest to ${0}';
+
+    this.setWaitingFor(
+      new SelectCard({
+        message: message,
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: playerName,
+        }],
+      },
+      'Keep',
+      cards,
+      (foundCards: Array<ICorporationCard>) => {
+        foundCards.forEach((card) => {
+          this.draftedCorporations.push(card);
+          this.game.log('${0} kept ${1}', (b) => b.player(this).card(card));
+          cards = cards.filter((c) => c !== card);
+        });
+        this.game.playerIsFinishedWithDraftingCorporationPhase(this, cards);
+        return undefined;
+      }, {min: 1, max: 1, played: false}),
     );
   }
 

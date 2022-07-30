@@ -68,7 +68,7 @@ export class InMemoryDatabase implements IDatabase {
   loadCloneableGame(_game_id: string): Promise<SerializedGame> {
     throw new Error('Method not implemented.');
   }
-  deleteGameNbrSaves(_game_id: string, _rollbackCount: number): void {
+  deleteGameNbrSaves(_game_id: string, _rollbackCount: number): Promise<void> {
     throw new Error('Method not implemented.');
   }
   cleanGame(_game_id: string): Promise<void> {

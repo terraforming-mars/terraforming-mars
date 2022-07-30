@@ -231,6 +231,26 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(db.getGameId('p-unknown')).to.be.rejected;
     });
 
+    it('deleteGameNbrSaves', async () => {
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5]);
+
+      await db.deleteGameNbrSaves(game.id, 2);
+
+      const saveIds = await db.getSaveIds(game.id);
+      expect(saveIds).has.members([0, 1, 2, 3]);
+    });
+
     it('stats', async () => {
       const result = await db.stats();
       expect(result).deep.eq(dtor.stats);

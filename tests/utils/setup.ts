@@ -6,7 +6,7 @@ import {GameLoader} from '../../src/database/GameLoader';
 
 const FAKE_DATABASE: IDatabase = {
   cleanGame: () => Promise.resolve(),
-  deleteGameNbrSaves: () => {},
+  deleteGameNbrSaves: () => Promise.resolve(),
   getPlayerCount: () => Promise.resolve(0),
   getGame: () => Promise.resolve({} as SerializedGame),
   getGameId: () => Promise.resolve('g'),

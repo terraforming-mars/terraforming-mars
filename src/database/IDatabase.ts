@@ -120,7 +120,7 @@ export interface IDatabase {
      *
      * Accessible by the administrative API to roll back a broken game.
      */
-    deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void;
+    deleteGameNbrSaves(game_id: GameId, rollbackCount: number): Promise<void>;
 
     /**
      * A maintenance task on a single game to close it out upon its completion.

@@ -95,7 +95,7 @@ export class PostgreSQL implements IDatabase {
 
   public async getGameId(id: string): Promise<GameId> {
     try {
-      const res = await this.client.query('select game_id from participants where $1 in ids', [id]);
+      const res = await this.client.query('select game_id from participants where $1 = ANY(participants)', [id]);
       if (res.rowCount === 0) {
         throw new Error(`Game for player id ${id} not found`);
       }

@@ -135,15 +135,20 @@ export class SQLite implements IDatabase {
     let sql: string = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
     if (id.charAt(0) === 's') {
       sql = 'SELECT game_id from games where json_extract(games.game, \'$.spectatorId\') = ?';
-    } else if (id.charAt(0) === 'p') {
+    } else if (id.charAt(0) !== 'p') {
       throw new Error(`id ${id} is neither a player id or spectator id`);
     }
     return new Promise((resolve, reject) => {
-      this.db.get(sql, [id], (err: Error | null, row: { gameId: any; }) => {
+      this.db.get(sql, [id], (err: Error | null, row: { game_id: any; }) => {
         if (err) {
           reject(err);
+          return;
         }
-        resolve(row.gameId);
+        if (row === undefined) {
+          reject(new Error(`No game id found for participant id ${id}`));
+          return;
+        }
+        resolve(row.game_id);
       });
     });
   }

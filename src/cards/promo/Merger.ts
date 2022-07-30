@@ -20,7 +20,7 @@ export class Merger extends PreludeCard {
       metadata: {
         cardNumber: 'X41',
         renderData: CardRenderer.builder((b) => {
-          b.text('corporation')/* corporation()*/.asterix().nbsp.megacredits(-42, {size: Size.SMALL});
+          b.corporation().asterix().nbsp.megacredits(-42, {size: Size.SMALL});
           b.br.br;
         }),
         description: 'Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.',

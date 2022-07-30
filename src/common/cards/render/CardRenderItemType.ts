@@ -49,6 +49,7 @@ export enum CardRenderItemType {
   PROJECT_REQUIREMENTS = 'project_requirements',
   PRELUDE = 'prelude',
   AWARD = 'award',
+  CORPORATION = 'corporation',
   VP = 'vp',
   COMMUNITY = 'community',
   DISEASE = 'disease',

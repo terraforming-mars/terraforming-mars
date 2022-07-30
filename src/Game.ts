@@ -553,12 +553,14 @@ export class Game {
     }
   }
 
-  private playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
+  // public for testing
+  public playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
     if (player.corporations.length === 0) {
       player.corporations.push(corporationCard);
     } else {
-      throw new Error('Not supporting multiple corporations yet');
+      throw new Error('Do not use playCorporationCard for more than one corporation card.');
     }
+
     player.megaCredits = corporationCard.startingMegaCredits;
     if (corporationCard.cardCost !== undefined) {
       player.cardCost = corporationCard.cardCost;
@@ -569,22 +571,26 @@ export class Game {
       player.deductResource(Resources.MEGACREDITS, diff);
     }
     corporationCard.play(player);
+    if (corporationCard.initialAction !== undefined) player.pendingInitialActions.push(corporationCard);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
     player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));
 
-    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
-    for (const somePlayer of this.getPlayersInGenerationOrder()) {
-      for (const corporation of somePlayer.corporations) {
-        if (corporation.name === corporationCard.name) continue;
-        if (!corporation.onCorpCardPlayed) continue;
-        this.defer(new SimpleDeferredAction(player, () => corporation.onCorpCardPlayed?.(player, corporationCard)));
-      }
-    }
-
+    this.triggerOtherCorpEffects(player, corporationCard);
     ColoniesHandler.onCardPlayed(this, corporationCard);
     PathfindersExpansion.onCardPlayed(player, corporationCard);
 
     this.playerIsFinishedWithResearchPhase(player);
+  }
+
+  public triggerOtherCorpEffects(player: Player, playedCorporationCard: ICorporationCard) {
+    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
+    for (const somePlayer of player.game.getPlayers()) {
+      for (const corporation of somePlayer.corporations) {
+        if (somePlayer === player && corporation.name === playedCorporationCard.name) continue;
+        if (corporation.onCorpCardPlayed === undefined) continue;
+        this.defer(new SimpleDeferredAction(player, () => corporation.onCorpCardPlayed?.(player, playedCorporationCard)));
+      }
+    }
   }
 
   private pickCorporationCard(player: Player): PlayerInput {

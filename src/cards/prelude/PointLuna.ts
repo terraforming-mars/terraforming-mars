@@ -32,11 +32,16 @@ export class PointLuna extends Card implements ICorporationCard {
       },
     });
   }
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+    return this.onCardPlayed(player, card);
+  }
+
+  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
     const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
     if (player.isCorporation(this.name) && card.tags.includes(Tags.EARTH)) {
       player.drawCard(tagCount);
     }
+    return undefined;
   }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM, 1);

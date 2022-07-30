@@ -310,6 +310,12 @@ describe('CardRenderer', function() {
     expect(item.type).to.equal(CardRenderItemType.PRELUDE);
     expect(item.amount).to.equal(-1);
   });
+  it('corporation: success', () => {
+    const renderer = CardRenderer.builder((b) => b.corporation());
+    const item = renderer.rows[0][0] as CardRenderItem;
+    expect(item.type).to.equal(CardRenderItemType.CORPORATION);
+    expect(item.amount).to.equal(-1);
+  });
   it('award: success', () => {
     const renderer = CardRenderer.builder((b) => b.award());
     const item = renderer.rows[0][0] as CardRenderItem;

@@ -299,6 +299,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.AWARD));
   }
 
+  public corporation() {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CORPORATION));
+  }
+
   public vpIcon() {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.VP));
   }

@@ -62,8 +62,14 @@ export class LocalFilesystem implements IDatabase {
     }
   }
 
-  getGameId(_playerId: string): Promise<GameId> {
-    throw new Error('Not implemented');
+  async getGameId(id: PlayerId | SpectatorId): Promise<GameId> {
+    const participants = await this.getParticipants();
+    for (const entry of participants) {
+      if (entry.participantIds.includes(id)) {
+        return entry.gameId;
+      }
+    }
+    throw new Error(`participant id ${id} not found`);
   }
 
   getSaveIds(gameId: GameId): Promise<Array<number>> {

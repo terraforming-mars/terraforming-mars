@@ -42,6 +42,9 @@ export class SQLite implements IDatabase {
   public async getPlayerCount(gameId: GameId): Promise<number> {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
     const row = await this.asyncGet(sql, [gameId]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${gameId}`);
+    }
     return row.players;
   }
 
@@ -80,6 +83,9 @@ export class SQLite implements IDatabase {
   public async getGame(game_id: GameId): Promise<SerializedGame> {
     // Retrieve last save from database
     const row: { game: any; } = await this.asyncGet('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${game_id}`);
+    }
     return JSON.parse(row.game);
   }
 
@@ -89,11 +95,14 @@ export class SQLite implements IDatabase {
     let sql: string = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
     if (id.charAt(0) === 's') {
       sql = 'SELECT game_id from games where json_extract(games.game, \'$.spectatorId\') = ?';
-    } else if (id.charAt(0) === 'p') {
+    } else if (id.charAt(0) !== 'p') {
       throw new Error(`id ${id} is neither a player id or spectator id`);
     }
 
     const row: { game_id: any; } = await this.asyncGet(sql, [id]);
+    if (row === undefined) {
+      throw new Error(`No game id found for participant id ${id}`);
+    }
     return row.game_id;
   }
 
@@ -106,11 +115,17 @@ export class SQLite implements IDatabase {
     const row: { game: any; } = await this.asyncGet(
       'SELECT game FROM games WHERE game_id = ? and save_id = ?',
       [game_id, save_id]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${game_id}`);
+    }
     return JSON.parse(row.game);
   }
 
   async getMaxSaveId(game_id: GameId): Promise<number> {
     const row: { save_id: any; } = await this.asyncGet('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [game_id]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${game_id}`);
+    }
     return row.save_id;
   }
 
@@ -238,11 +253,11 @@ export class SQLite implements IDatabase {
 
   private asyncGet(sql: string, params?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.db.get(sql, params, (err: Error | null, result: any) => {
+      this.db.get(sql, params, (err: Error | null, row: any) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result);
+          resolve(row);
         }
       });
     });

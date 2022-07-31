@@ -220,6 +220,17 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       ]);
     });
 
+    it('getGameId', async () => {
+      // TODO(kberg): this does not test spectator ids.
+      newTestGame(2, {}, '1');
+      await db.lastSaveGamePromise;
+      newTestGame(3, {}, '2');
+      await db.lastSaveGamePromise;
+      expect(await db.getGameId('p-blue-id1')).eq('game-id1');
+      expect(await db.getGameId('p-yellow-id2')).eq('game-id2');
+      expect(db.getGameId('p-unknown')).to.be.rejected;
+    });
+
     it('stats', async () => {
       const result = await db.stats();
       expect(result).deep.eq(dtor.stats);

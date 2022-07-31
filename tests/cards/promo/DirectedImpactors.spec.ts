@@ -39,7 +39,7 @@ describe('DirectedImpactors', function() {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
-    selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
+    selectHowToPay.cb({...HowToPay.EMPTY, titanium: 1, megaCredits: 3});
 
     expect(player.megaCredits).to.eq(0);
     expect(player.titanium).to.eq(0);
@@ -72,7 +72,7 @@ describe('DirectedImpactors', function() {
     const selectCard = cast(action.options[1].cb(), SelectCard);
     expect(game.deferredActions).has.lengthOf(1);
     const selectHowToPay = cast(game.deferredActions.peek()!.execute(), SelectHowToPay);
-    selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
+    selectHowToPay.cb({...HowToPay.EMPTY, titanium: 1, megaCredits: 3});
 
     selectCard!.cb([card2]);
     expect(card2.resourceCount).to.eq(1);

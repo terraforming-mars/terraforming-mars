@@ -12,7 +12,7 @@ import {SelectHowToPayForProjectCard} from '../../../src/inputs/SelectHowToPayFo
 import {Resources} from '../../../src/common/Resources';
 import {MediaGroup} from '../../../src/cards/base/MediaGroup';
 import {IceCapMelting} from '../../../src/cards/base/IceCapMelting';
-import {EMPTY_HOWTOPAY} from '../../../src/common/inputs/HowToPay';
+import {HowToPay} from '../../../src/common/inputs/HowToPay';
 
 describe('Odyssey', () => {
   let card: Odyssey;
@@ -89,7 +89,7 @@ describe('Odyssey', () => {
     expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
     expect(player.getProduction(Resources.HEAT)).eq(0);
 
-    selectCard.cb(importOfAdvancedGHG, {...EMPTY_HOWTOPAY, megaCredits: importOfAdvancedGHG.cost});
+    selectCard.cb(importOfAdvancedGHG, {...HowToPay.EMPTY, megaCredits: importOfAdvancedGHG.cost});
     runAllActions(game);
 
     expect(player.getProduction(Resources.HEAT)).eq(2);
@@ -109,7 +109,7 @@ describe('Odyssey', () => {
     expect(player.getProduction(Resources.HEAT)).eq(0);
     expect(player.megaCredits).eq(50);
 
-    selectCard.cb(importOfAdvancedGHG, {...EMPTY_HOWTOPAY, megaCredits: 9});
+    selectCard.cb(importOfAdvancedGHG, {...HowToPay.EMPTY, megaCredits: 9});
     runAllActions(game);
 
     expect(player.getProduction(Resources.HEAT)).eq(2);

@@ -1,10 +1,10 @@
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Player} from '../../Player';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
@@ -12,14 +12,14 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class NanotechIndustries extends Card implements IActionCard, CorporationCard {
+export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.NANOTECH_INDUSTRIES,
       tags: [Tags.SCIENCE, Tags.MOON],
       startingMegaCredits: 42,
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
       initialActionText: 'Draw 3 cards and keep 2.',
 
       victoryPoints: VictoryPoints.resource(1, 2),
@@ -55,7 +55,7 @@ export class NanotechIndustries extends Card implements IActionCard, Corporation
   public action(player: Player) {
     player.game.defer(new AddResourcesToCard(
       player,
-      ResourceType.SCIENCE,
+      CardResource.SCIENCE,
       {filter: (card): boolean => MoonCards.scienceCardsWithLessThan2VP.has(card.name)},
     ));
     return undefined;

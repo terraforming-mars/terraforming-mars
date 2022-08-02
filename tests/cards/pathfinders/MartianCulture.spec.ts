@@ -2,8 +2,7 @@ import {expect} from 'chai';
 import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 describe('MartianCulture', function() {
   let card: MartianCulture;
@@ -12,9 +11,9 @@ describe('MartianCulture', function() {
 
   beforeEach(function() {
     card = new MartianCulture();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, player2], player);
     player.playedCards.push(card);
   });
 
@@ -37,7 +36,7 @@ describe('MartianCulture', function() {
 
   it('action', function() {
     card.action(player);
-    TestingUtils.runAllActions(player.game);
+    runAllActions(player.game);
     expect(card.resourceCount).eq(1);
   });
 

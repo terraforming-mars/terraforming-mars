@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {Builder} from '../../src/milestones/Builder';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('Builder', () => {
   it('Standard test', () => {
     const milestone = new Builder();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     expect(milestone.canClaim(player)).is.not.true;
 
     player.tagsForTest = {building: 7};

@@ -6,16 +6,18 @@ import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('FloaterTechnology', function() {
-  let card : FloaterTechnology; let player : Player; let game : Game;
+  let card: FloaterTechnology;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new FloaterTechnology();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can play', function() {
@@ -23,8 +25,9 @@ describe('FloaterTechnology', function() {
     expect(result).is.undefined;
   });
 
-  it('Cannot act without targets', function() {
-    expect(card.canAct(player)).is.not.true;
+  it('Can act without targets', function() {
+    expect(card.canAct()).is.true;
+    expect(card.action(player)).is.undefined;
   });
 
   it('Acts automatically with single targets', function() {

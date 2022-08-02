@@ -3,16 +3,20 @@ import {Ganymede} from '../../src/colonies/Ganymede';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
+import {runAllActions} from '../TestingUtils';
 
 describe('Ganymede', function() {
-  let ganymede: Ganymede; let player: Player; let player2: Player; let game: Game;
+  let ganymede: Ganymede;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     ganymede = new Ganymede();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(ganymede);
   });
@@ -33,7 +37,7 @@ describe('Ganymede', function() {
     ganymede.addColony(player);
 
     ganymede.trade(player2);
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
 
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);

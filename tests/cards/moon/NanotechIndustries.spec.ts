@@ -1,7 +1,6 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/cards/base/PhysicsComplex';
@@ -11,10 +10,10 @@ import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArk
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('NanotechIndustries', () => {
-  let player: Player;
+  let player: TestPlayer;
   let nanotechIndustries: NanotechIndustries;
 
   // Physics Complex: 2 points per resource.
@@ -27,13 +26,13 @@ describe('NanotechIndustries', () => {
   const prideoftheEarthArkship = new PrideoftheEarthArkship();
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     nanotechIndustries = new NanotechIndustries();
   });
 
   it('act', () => {
-    player.corporationCard = nanotechIndustries;
+    player.setCorporationForTest(nanotechIndustries);
     player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
     nanotechIndustries.action(player);
 

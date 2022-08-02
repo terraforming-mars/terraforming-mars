@@ -7,19 +7,22 @@ import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('TradingColony', function() {
-  let card : TradingColony; let player : Player; let player2: Player; let game: Game;
+  let card: TradingColony;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new TradingColony();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });
 

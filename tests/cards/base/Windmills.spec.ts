@@ -3,19 +3,20 @@ import {Windmills} from '../../../src/cards/base/Windmills';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('Windmills', function() {
-  let card : Windmills; let player : TestPlayer; let game : Game;
+  let card: Windmills;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Windmills();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     (game as any).oxygenLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

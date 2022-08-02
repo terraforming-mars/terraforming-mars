@@ -1,8 +1,8 @@
-import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -19,7 +19,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
       tags: [Tags.VENUS],
       cost: 5,
 
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: VictoryPoints.resource(1, 2),
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
@@ -45,7 +45,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
   }
 
   public action(player: Player) {
-    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
 
     // add to itself if no other available target
     if (floaterCards.length === 1) {
@@ -58,9 +58,9 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
       'Spend 2 M€ and select card to add 1 floater',
       'Add floater',
       floaterCards,
-      (foundCards: Array<ICard>) => {
+      ([card]) => {
         player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
-        player.addResourceTo(foundCards[0], {log: true});
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

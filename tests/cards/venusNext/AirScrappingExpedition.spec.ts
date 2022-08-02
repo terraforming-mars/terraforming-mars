@@ -4,16 +4,16 @@ import {AirScrappingExpedition} from '../../../src/cards/venusNext/AirScrappingE
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AirScrappingExpedition', function() {
   it('Should play', function() {
     const card = new AirScrappingExpedition();
     const corp = new Celestic();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
-    player.corporationCard = corp;
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    player.setCorporationForTest(corp);
 
 
     const selectCard = card.play(player) as SelectCard<ICard>;

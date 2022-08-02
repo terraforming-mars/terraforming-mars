@@ -1,11 +1,11 @@
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
@@ -45,7 +45,7 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
   }
 
   public action(player: Player) {
-    const availableCards = player.getResourceCards(ResourceType.MICROBE).concat(player.getResourceCards(ResourceType.ANIMAL));
+    const availableCards = player.getResourceCards(CardResource.MICROBE).concat(player.getResourceCards(CardResource.ANIMAL));
 
     if (availableCards.length === 0) {
       return undefined;
@@ -56,8 +56,8 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {log: true});
+    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, ([card]) => {
+      player.addResourceTo(card, {log: true});
       return undefined;
     });
   }

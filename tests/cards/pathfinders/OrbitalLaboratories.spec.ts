@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {OrbitalLaboratories} from '../../../src/cards/pathfinders/OrbitalLaboratories';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/common/Resources';
 
 describe('OrbitalLaboratories', function() {
@@ -11,8 +10,8 @@ describe('OrbitalLaboratories', function() {
 
   beforeEach(function() {
     card = new OrbitalLaboratories();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
   });
 
   it('play', function() {

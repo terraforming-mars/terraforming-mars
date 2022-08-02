@@ -1,20 +1,22 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
 import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RotatorImpacts', () => {
-  let card : RotatorImpacts; let player : Player; let game : Game;
+  let card: RotatorImpacts;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new RotatorImpacts();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play', () => {
@@ -36,7 +38,7 @@ describe('RotatorImpacts', () => {
   it('Works with MSI corporation', () => {
     const corp = new MorningStarInc();
     corp.play();
-    player.corporationCard = corp;
+    player.setCorporationForTest(corp);
 
     (game as any).venusScaleLevel = 18;
     expect(player.canPlayIgnoringCost(card)).is.true;
@@ -55,8 +57,7 @@ describe('RotatorImpacts', () => {
     expect(card.resourceCount).to.eq(1);
 
     // two possible actions: add resource or spend titanium
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

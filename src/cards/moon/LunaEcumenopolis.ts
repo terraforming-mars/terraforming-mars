@@ -4,12 +4,12 @@ import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {MoonCard} from './MoonCard';
 import {TileType} from '../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {ISpace} from '../../boards/ISpace';
 
 export class LunaEcumenopolis extends MoonCard {
@@ -107,7 +107,7 @@ export class LunaEcumenopolis extends MoonCard {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));
-    player.game.defer(new DeferredAction(player, () => {
+    player.game.defer(new SimpleDeferredAction(player, () => {
       const colonyRate = MoonExpansion.moonData(player.game).colonyRate;
       player.increaseTerraformRatingSteps(Math.floor(colonyRate / 2));
       return undefined;

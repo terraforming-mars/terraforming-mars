@@ -36,7 +36,8 @@
 import Vue from 'vue';
 import {MILESTONE_COST, MAX_MILESTONES} from '@/common/constants';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+
 
 export default Vue.extend({
   name: 'Milestone',
@@ -75,7 +76,7 @@ export default Vue.extend({
       return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
     isLearnerModeOn(): boolean {
-      return PreferencesManager.load('learner_mode') === '1';
+      return getPreferences().learner_mode;
     },
   },
 });

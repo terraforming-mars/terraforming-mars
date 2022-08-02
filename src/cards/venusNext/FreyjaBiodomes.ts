@@ -2,7 +2,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
@@ -38,8 +38,8 @@ export class FreyjaBiodomes extends Card {
     return player.getProduction(Resources.ENERGY) >= 1;
   }
   public getResCards(player: Player): ICard[] {
-    let resourceCards = player.getResourceCards(ResourceType.ANIMAL);
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
+    let resourceCards = player.getResourceCards(CardResource.ANIMAL);
+    resourceCards = resourceCards.concat(player.getResourceCards(CardResource.MICROBE));
     return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 
@@ -51,8 +51,8 @@ export class FreyjaBiodomes extends Card {
         'Select card to add 2 resources',
         'Add resources',
         cards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {qty: 2, log: true});
+        ([card]) => {
+          player.addResourceTo(card, {qty: 2, log: true});
           player.addProduction(Resources.ENERGY, -1);
           player.addProduction(Resources.MEGACREDITS, 2);
           return undefined;

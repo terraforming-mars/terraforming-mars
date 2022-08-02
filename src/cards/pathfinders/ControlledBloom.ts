@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../common/Resources';
@@ -28,14 +28,14 @@ export class ControlledBloom extends Card implements IProjectCard {
           b.microbes(3).asterix().br;
           b.plants(3);
         }),
-        description: 'Requires 3 oceans. Add 3 microbes to any card. Gain 3 plants.',
+        description: 'Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.',
       },
     });
   }
 
   public play(player: Player) {
     player.addResource(Resources.PLANTS, 3);
-    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
     return undefined;
   }
 }

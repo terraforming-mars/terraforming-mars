@@ -1,8 +1,8 @@
+/* eslint-disable indent */ // TODO(kberg): Reformat separately
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../common/cards/CardName';
-import {ColonyBenefit} from './ColonyBenefit';
-import {ColonyName} from '../common/colonies/ColonyName';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
+import {DeferredAction, Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
@@ -14,7 +14,6 @@ import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../common/Resources';
-import {ResourceType} from '../common/ResourceType';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
@@ -24,35 +23,28 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
-import {SerializedColony} from '@/SerializedColony';
+import {SerializedColony} from '../SerializedColony';
+import {IColony, TradeOptions} from './IColony';
+import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../common/colonies/IColonyMetadata';
+import {ColonyName} from '../common/colonies/ColonyName';
 
-type TradeOptions = {
-  usesTradeFleet?: boolean;
-  decreaseTrackAfterTrade?: boolean;
-  giveColonyBonuses?: boolean;
-  selfishTrade?: boolean;
-};
-export abstract class Colony {
-    public abstract readonly name: ColonyName;
-
-    // isActive represents when the colony is part of the game, or "back in the box", as it were.
+export abstract class Colony implements IColony {
+    // Players can't build colonies on Miranda until someone has played an Animal card.
+    // isActive is the gateway for that action and any other card with that type of constraint
     public isActive: boolean = true;
     public visitor: undefined | PlayerId = undefined;
     public colonies: Array<PlayerId> = [];
     public trackPosition: number = 1;
-    public readonly resourceType?: ResourceType;
 
-    public abstract readonly buildType: ColonyBenefit;
-    public readonly buildQuantity: Array<number> = [1, 1, 1];
-    public readonly buildResource?: Resources;
-    public abstract readonly tradeType: ColonyBenefit;
-    public readonly tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
-    public readonly tradeResource?: Resources | Array<Resources>;
-    public abstract readonly colonyBonusType: ColonyBenefit;
-    public readonly colonyBonusQuantity: number = 1;
-    public readonly colonyBonusResource?: Resources;
-    public readonly shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
+    public metadata: IColonyMetadata;
 
+    protected constructor(metadata: IInputColonyMetadata) {
+      this.metadata = colonyMetadata(metadata);
+    }
+
+    public get name(): ColonyName {
+      return this.metadata.name;
+    }
 
     public endGeneration(game: Game): void {
       if (this.isActive) {
@@ -85,9 +77,9 @@ export abstract class Colony {
     public addColony(player: Player, options?: {giveBonusTwice: boolean}): void {
       player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
-      this.giveBonus(player, this.buildType, this.buildQuantity[this.colonies.length], this.buildResource);
+      this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
       if (options?.giveBonusTwice === true) { // Vital Colony hook.
-        this.giveBonus(player, this.buildType, this.buildQuantity[this.colonies.length], this.buildResource);
+        this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
       }
 
       this.colonies.push(player.id);
@@ -96,7 +88,7 @@ export abstract class Colony {
       }
 
       // Poseidon hook
-      const poseidon = player.game.getPlayersInGenerationOrder().find((player) => player.isCorporation(CardName.POSEIDON));
+      const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
         poseidon.addProduction(Resources.MEGACREDITS, 1);
       }
@@ -118,13 +110,15 @@ export abstract class Colony {
       const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
       const steps = maxTrackPosition - this.trackPosition;
 
-      if (steps === 0 || this.shouldIncreaseTrack === ShouldIncreaseTrack.NO) {
+      if (steps === 0 ||
+        this.metadata.shouldIncreaseTrack === ShouldIncreaseTrack.NO ||
+        tradeOptions.selfishTrade === true) {
         // Don't increase
         this.handleTrade(player, tradeOptions);
         return;
       }
 
-      if (this.shouldIncreaseTrack === ShouldIncreaseTrack.YES || (this.tradeResource !== undefined && this.tradeResource[this.trackPosition] === this.tradeResource[maxTrackPosition])) {
+      if (this.metadata.shouldIncreaseTrack === ShouldIncreaseTrack.YES || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
         // No point in asking the player, just increase it
         this.increaseTrack(steps);
         LogHelper.logColonyTrackIncrease(player, this, steps);
@@ -142,9 +136,9 @@ export abstract class Colony {
     }
 
     private handleTrade(player: Player, options: TradeOptions) {
-      const resource = Array.isArray(this.tradeResource) ? this.tradeResource[this.trackPosition] : this.tradeResource;
+      const resource = Array.isArray(this.metadata.tradeResource) ? this.metadata.tradeResource[this.trackPosition] : this.metadata.tradeResource;
 
-      this.giveBonus(player, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
+      this.giveBonus(player, this.metadata.tradeType, this.metadata.tradeQuantity[this.trackPosition], resource);
 
       // !== false because default is true.
       if (options.giveColonyBonuses !== false) {
@@ -159,7 +153,7 @@ export abstract class Colony {
 
       // !== false because default is true.
       if (options.decreaseTrackAfterTrade !== false) {
-        player.game.defer(new DeferredAction(player, () => {
+        player.game.defer(new SimpleDeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;
         }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
@@ -167,7 +161,7 @@ export abstract class Colony {
     }
 
     public giveColonyBonus(player: Player, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-      return this.giveBonus(player, this.colonyBonusType!, this.colonyBonusQuantity!, this.colonyBonusResource, isGiveColonyBonus);
+      return this.giveBonus(player, this.metadata.colonyBonusType, this.metadata.colonyBonusQuantity, this.metadata.colonyBonusResource, isGiveColonyBonus);
     }
 
 
@@ -177,7 +171,7 @@ export abstract class Colony {
       let action: undefined | DeferredAction = undefined;
       switch (bonusType) {
       case ColonyBenefit.ADD_RESOURCES_TO_CARD:
-        const resourceType = this.resourceType!;
+        const resourceType = this.metadata.resourceType;
         action = new AddResourcesToCard(player, resourceType, {count: quantity});
         break;
 
@@ -187,11 +181,11 @@ export abstract class Colony {
 
       case ColonyBenefit.COPY_TRADE:
         const openColonies = game.colonies.filter((colony) => colony.isActive);
-        action = new DeferredAction(
+        action = new SimpleDeferredAction(
           player,
-          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: Colony) => {
+          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: IColony) => {
             game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-            colony.handleTrade(player, {
+            (colony as Colony).handleTrade(player, {
               usesTradeFleet: false,
               decreaseTrackAfterTrade: false,
               giveColonyBonuses: false,
@@ -235,7 +229,7 @@ export abstract class Colony {
 
       case ColonyBenefit.GAIN_SCIENCE_TAG:
         player.scienceTagCount += 1;
-        player.playCard(new ScienceTagCard(), undefined, false);
+        player.playCard(new ScienceTagCard(), undefined, 'nothing');
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;
 
@@ -296,10 +290,10 @@ export abstract class Colony {
 
       case ColonyBenefit.OPPONENT_DISCARD:
         if (game.isSoloMode()) break;
-        action = new DeferredAction(
+        action = new SimpleDeferredAction(
           player,
           () => {
-            const playersWithCards = game.getPlayersInGenerationOrder().filter((p) => p.cardsInHand.length > 0);
+            const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
             if (playersWithCards.length === 0) return undefined;
             return new SelectPlayer(
               playersWithCards,
@@ -342,17 +336,14 @@ export abstract class Colony {
         return undefined;
       }
     }
-}
 
-export function serializeColonies(colonies: Array<Colony>): Array<SerializedColony> {
-  return colonies.map((colony) => {
-    return {
-      colonies: colony.colonies,
-      name: colony.name,
-      isActive: colony.isActive,
-      resourceType: colony.resourceType,
-      trackPosition: colony.trackPosition,
-      visitor: colony.visitor,
-    };
-  });
+    public serialize(): SerializedColony {
+      return {
+        name: this.name,
+        colonies: this.colonies,
+        isActive: this.isActive,
+        trackPosition: this.trackPosition,
+        visitor: this.visitor,
+      };
+    }
 }

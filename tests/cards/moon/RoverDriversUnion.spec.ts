@@ -1,6 +1,5 @@
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RoverDriversUnion} from '../../../src/cards/moon/RoverDriversUnion';
 import {expect} from 'chai';
@@ -8,7 +7,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {Resources} from '../../../src/common/Resources';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('RoverDriversUnion', () => {
   let player: TestPlayer;
@@ -16,8 +15,8 @@ describe('RoverDriversUnion', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new RoverDriversUnion();
     moonData = MoonExpansion.moonData(game);
   });

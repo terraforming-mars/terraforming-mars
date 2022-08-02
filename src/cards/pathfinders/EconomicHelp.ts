@@ -5,10 +5,11 @@ import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
+import {PathfindersExpansion, PlanetaryTag, TRACKS} from '../../pathfinders/PathfindersExpansion';
 import {Tags} from '../../common/cards/Tags';
 import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
+import {IPathfindersData} from '../../pathfinders/IPathfindersData';
 
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {
@@ -28,20 +29,29 @@ export class EconomicHelp extends Card implements IProjectCard {
             .moon(1, {played}).br;
           b.production((pb) => pb.megacredits(1));
         }),
-        description: 'Raise the lowest planetary influence track by 3. When tied, raise all lowest tracks by 2. ' +
+        description: 'Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. ' +
          'Increase your M€ production 1 step',
       },
     });
   }
 
+  private trackOffset(tag: PlanetaryTag, data: IPathfindersData): number {
+    const value = data[tag];
+    return TRACKS[tag].spaces.length === value ? -1 : value;
+  }
   public play(player: Player) {
     const data = player.game.pathfindersData;
     if (data === undefined) {
       return undefined;
     }
-    const values = [data.earth, data.jovian, data.mars];
-    if (player.game.gameOptions.moonExpansion === true) values.push(data.moon);
-    if (player.game.gameOptions.venusNextExtension === true) values.push(data.venus);
+    const values = [
+      this.trackOffset(Tags.EARTH, data),
+      this.trackOffset(Tags.JOVIAN, data),
+      this.trackOffset(Tags.MARS, data),
+    ];
+    if (player.game.gameOptions.moonExpansion === true) values.push(this.trackOffset(Tags.MOON, data));
+    if (player.game.gameOptions.venusNextExtension === true) values.push(this.trackOffset(Tags.VENUS, data));
+    // Filter any maximized track.
     // Filter out -1.
     const lowest = Math.min(...(values.filter((v) => v >= 0)));
     const count = values.filter((v) => v === lowest).length;

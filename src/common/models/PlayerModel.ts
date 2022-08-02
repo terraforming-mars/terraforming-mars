@@ -11,7 +11,7 @@ import {CardName} from '../cards/CardName';
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id: PlayerId | SpectatorId;
+  id?: PlayerId | SpectatorId;
   thisPlayer: PublicPlayerModel | undefined;
 }
 
@@ -27,7 +27,6 @@ export interface PublicPlayerModel {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
-  corporationCard: CardModel | undefined;
   energy: number;
   energyProduction: number;
   fleetSize: number;
@@ -47,7 +46,7 @@ export interface PublicPlayerModel {
   plants: number;
   plantProduction: number;
   plantsAreProtected: boolean;
-  playedCards: Array<CardModel>;
+  tableau: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
@@ -60,6 +59,7 @@ export interface PublicPlayerModel {
   titaniumValue: number;
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
+  victoryPointsByGeneration: Array<number>
 }
 
 /** A player's view of the game, including their secret information. */
@@ -68,6 +68,7 @@ export interface PlayerViewModel extends ViewModel {
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
+  draftedCorporations: Array<CardModel>;
   draftedCards: Array<CardModel>;
   id: PlayerId;
   pickedCorporationCard: Array<CardModel>; // Why Array?

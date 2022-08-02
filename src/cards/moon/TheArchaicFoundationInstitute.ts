@@ -2,21 +2,21 @@ import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {ICard} from '../ICard';
 
-export class TheArchaicFoundationInstitute extends Card implements CorporationCard {
+export class TheArchaicFoundationInstitute extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
       tags: [Tags.MOON, Tags.MOON],
       startingMegaCredits: 55,
-      resourceType: ResourceType.RESOURCE_CUBE,
+      resourceType: CardResource.RESOURCE_CUBE,
 
       metadata: {
         description: 'You start with 55 M€.',
@@ -42,15 +42,13 @@ export class TheArchaicFoundationInstitute extends Card implements CorporationCa
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    if (player.corporationCard?.name !== this.name) {
-      return undefined;
+    if (player.isCorporation(this.name)) {
+      const moonTags = card.tags.filter((t) => t === Tags.MOON);
+      const count = moonTags.length;
+      if (count > 0) {
+        player.addResourceTo(this, count);
+      }
     }
-    const moonTags = card.tags.filter((t) => t === Tags.MOON);
-    const count = moonTags.length;
-    if (count > 0) {
-      player.addResourceTo(this, count);
-    }
-    return undefined;
   }
 
   public onResourceAdded(player: Player, playedCard: ICard): void {

@@ -1,61 +1,45 @@
-import * as http from 'http';
 import {expect} from 'chai';
 import {ApiGame} from '../../src/routes/ApiGame';
-import {Route} from '../../src/routes/Route';
 import {Game} from '../../src/Game';
-import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
-import {IContext} from '../../src/routes/IHandler';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
+import {RouteTestScaffolding} from './RouteTestScaffolding';
 
 describe('ApiGame', () => {
-  let req: http.IncomingMessage;
+  let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
-  let ctx: IContext;
-
-  // Strictly speaking |parameters| can also accept a fragment.
-  const setRequest = function(parameters: string) {
-    req.url = parameters;
-    ctx.url = new URL('http://boo.com' + parameters);
-  };
 
   beforeEach(() => {
-    req = {} as http.IncomingMessage;
+    scaffolding = new RouteTestScaffolding();
     res = new MockResponse();
-    ctx = {
-      route: new Route(),
-      serverId: '1',
-      url: new URL('http://boo.com'),
-      gameLoader: new FakeGameLoader(),
-    };
   });
 
-  it('no parameter', () => {
-    setRequest('/api/game');
-    ApiGame.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.statusCode).eq(404);
-    expect(res.content).eq('Not found: id parameter missing');
+  it('no parameter', async () => {
+    scaffolding.url = '/api/game';
+    await scaffolding.get(ApiGame.INSTANCE, res);
+    expect(res.statusCode).eq(400);
+    expect(res.content).eq('Bad request: missing id parameter');
   });
 
-  it('invalid id', () => {
-    const player = TestPlayers.BLACK.newPlayer();
-    ctx.gameLoader.add(Game.newInstance('validId', [player], player));
-    setRequest('/api/game?id=invalidId');
-    ApiGame.INSTANCE.get(req, res.hide(), ctx);
+  it('invalid id', async () => {
+    const player = TestPlayer.BLACK.newPlayer();
+    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
+    scaffolding.url = '/api/game?id=invalidId';
+    await scaffolding.get(ApiGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found: game not found');
   });
 
-  it('valid id', () => {
-    const player = TestPlayers.BLACK.newPlayer();
-    ctx.gameLoader.add(Game.newInstance('validId', [player], player));
-    setRequest('/api/game?id=validId');
-    ApiGame.INSTANCE.get(req, res.hide(), ctx);
+  it('valid id', async () => {
+    const player = TestPlayer.BLACK.newPlayer();
+    scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
+    scaffolding.url = '/api/game?id=game-valid-id';
+    await scaffolding.get(ApiGame.INSTANCE, res);
     // This test is probably brittle.
     expect(JSON.parse(res.content)).deep.eq(
       {
         'activePlayer': 'black',
-        'id': 'validId',
+        'id': 'game-valid-id',
         'lastSoloGeneration': 14,
         'phase': 'research',
         'players': [
@@ -74,6 +58,7 @@ describe('ApiGame', () => {
           'communityCardsOption': false,
           'corporateEra': true,
           'draftVariant': false,
+          'corporationsDraft': false,
           'escapeVelocityMode': false,
           'escapeVelocityPenalty': 1,
           'escapeVelocityPeriod': 2,

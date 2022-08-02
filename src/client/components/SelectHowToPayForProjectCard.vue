@@ -2,18 +2,19 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 
-import {HowToPay} from '@/inputs/HowToPay';
+import {HowToPay} from '@/common/inputs/HowToPay';
 import Card from '@/client/components/card/Card.vue';
-import {getCard} from '@/client/cards/ClientCardManifest';
+import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectHowToPayForProjectCard',
@@ -25,7 +26,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -67,6 +68,7 @@ export default Vue.extend({
       microbes: 0,
       science: 0,
       seeds: 0,
+      data: 0,
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
@@ -96,11 +98,7 @@ export default Vue.extend({
       return card;
     },
     getCardTags() {
-      const cam = getCard(this.cardName);
-      if (cam === undefined) {
-        throw new Error(`card not found ${this.cardName}`);
-      }
-      return cam.card.tags;
+      return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
       this.microbes = 0;
@@ -288,6 +286,7 @@ export default Vue.extend({
         floaters: this.floaters,
         science: this.science,
         seeds: this.seeds,
+        data: 0,
       };
       let totalSpent = 0;
       for (const target of unit) {
@@ -313,7 +312,7 @@ export default Vue.extend({
         }
       }
 
-      const showAlert = PreferencesManager.load('show_alerts') === '1';
+      const showAlert = getPreferences().show_alerts;
 
       if (totalSpent > this.cost && showAlert) {
         const diff = totalSpent - this.cost;

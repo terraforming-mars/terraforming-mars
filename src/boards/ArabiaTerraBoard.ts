@@ -1,4 +1,4 @@
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {Player} from '../Player';
 import {Random} from '../Random';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
@@ -49,10 +49,7 @@ export class ArabiaTerraBoard extends Board {
     return new ArabiaTerraBoard(spaces);
   }
 
-  public getNoctisCitySpaceIds() {
-    return [];
-  }
-  public getVolcanicSpaceIds() {
+  public override getVolcanicSpaceIds() {
     return [
       SpaceName.TIKHONAROV,
       SpaceName.LADON,

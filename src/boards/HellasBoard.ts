@@ -8,7 +8,7 @@ import {SpaceType} from '../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 
 export class HellasBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {
@@ -53,7 +53,7 @@ export class HellasBoard extends Board {
   }
 
   private filterHellas(player: Player, spaces: Array<ISpace>) {
-    return player.canAfford(HELLAS_BONUS_OCEAN_COST) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    return player.canAfford(HELLAS_BONUS_OCEAN_COST, {tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
   public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
@@ -70,13 +70,5 @@ export class HellasBoard extends Board {
 
   public override getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
     return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
-  }
-
-  public getVolcanicSpaceIds(): Array<string> {
-    return [];
-  }
-
-  public getNoctisCitySpaceIds(): Array<string> {
-    return [];
   }
 }

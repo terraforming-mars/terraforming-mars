@@ -7,23 +7,26 @@ import {Resources} from '../../../src/common/Resources';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('StripMine', function() {
-  let card : StripMine; let player : Player; let game : Game; let turmoil: Turmoil;
+  let card: StripMine;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new StripMine();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
 
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });

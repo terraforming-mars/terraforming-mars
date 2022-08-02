@@ -1,21 +1,20 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GeodesicTents} from '../../../src/cards/moon/GeodesicTents';
-import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('GeodesicTents', () => {
   let player: TestPlayer;
   let card: GeodesicTents;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new GeodesicTents();
   });
 

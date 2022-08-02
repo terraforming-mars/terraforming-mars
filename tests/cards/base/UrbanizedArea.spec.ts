@@ -6,26 +6,29 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('UrbanizedArea', function() {
-  let card : UrbanizedArea; let player : Player; let game : Game; let lands: ISpace[];
+  let card: UrbanizedArea;
+  let player: Player;
+  let game: Game;
+  let lands: ISpace[];
 
   beforeEach(function() {
     card = new UrbanizedArea();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
 
     const tharsisTholus = game.board.getSpace(SpaceName.THARSIS_THOLUS);
     lands = game.board.getAdjacentSpaces(tharsisTholus).filter((space) => space.spaceType === SpaceType.LAND);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play without available space between two cities', function() {
+  it('Can not play without available space between two cities', function() {
     game.addCityTile(player, lands[0].id);
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;

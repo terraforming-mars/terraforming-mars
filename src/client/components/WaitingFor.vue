@@ -17,13 +17,14 @@ import Vue from 'vue';
 import {mainAppSettings} from '@/client/components/App';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {WaitingForModel} from '@/common/models/WaitingForModel';
 
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
-import {isPlayerId} from '@/common/utils/utils';
+import {isPlayerId} from '@/common/Types';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -60,7 +61,7 @@ export default Vue.extend({
       }
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
-    onsave(out: Array<Array<string>>) {
+    onsave(out: InputResponse) {
       const xhr = new XMLHttpRequest();
       const root = this.$root as unknown as typeof mainAppSettings.data;
       const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
@@ -79,7 +80,7 @@ export default Vue.extend({
           root.playerkey++;
           root.screen = 'player-home';
           if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
-            (window).location = (window).location;
+            (window).location = (window).location; // eslint-disable-line no-self-assign
           }
         } else if (xhr.status === 400 && xhr.responseType === 'json') {
           showAlert(xhr.response.message);
@@ -135,7 +136,7 @@ export default Vue.extend({
                 }
               }
 
-              const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
+              const soundsEnabled = getPreferences().enable_sounds;
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn

@@ -18,8 +18,16 @@ export class FileAPI {
   public readFileSync(path: string): Buffer {
     return fs.readFileSync(path);
   }
-  public readFile(path: string, cb: (err: NodeJS.ErrnoException | null, data: Buffer) => void): void {
-    fs.readFile(path, cb);
+  public readFile(path: string): Promise<Buffer> {
+    return new Promise((resolve, reject) => {
+      fs.readFile(path, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    });
   }
   public existsSync(path: string): boolean {
     return fs.existsSync(path);
@@ -44,7 +52,7 @@ export class ServeAsset extends Handler {
     this.cache.set('build/styles.css.br', brotli);
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     if (req.url === undefined) {
       ctx.route.internalServerError(req, res, new Error('no url on request'));
       return;
@@ -90,17 +98,17 @@ export class ServeAsset extends Handler {
       return;
     }
 
-    this.fileApi.readFile(file, (err, data) => {
-      if (err) {
-        console.log(err);
-        return ctx.route.internalServerError(req, res, 'Cannot serve ' + path);
-      }
+    try {
+      const data = await this.fileApi.readFile(file);
       res.setHeader('Content-Length', data.length);
       res.end(data);
       if (this.cacheAssets === true) {
         this.cache.set(file, data);
       }
-    });
+    } catch (err) {
+      console.log(err);
+      ctx.route.internalServerError(req, res, 'Cannot serve ' + path);
+    }
   }
 
   private toMainFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {

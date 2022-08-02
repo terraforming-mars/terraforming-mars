@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
@@ -12,11 +12,11 @@ import {SpaceId} from '../../common/Types';
 import {Resources} from '../../common/Resources';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../../common/cards/render/Size';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {Card} from '../Card';
 import {all} from '../Options';
 
-export class TheGrandLunaCapitalGroup extends Card implements CorporationCard {
+export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

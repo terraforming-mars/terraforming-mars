@@ -8,8 +8,7 @@ import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestingUtils} from '../TestingUtils';
-import {TestPlayers} from '../TestPlayers';
+import {cast, maxOutOceans, runAllActions, setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/turmoil/parties/Reds';
 import {Greens} from '../../src/turmoil/parties/Greens';
@@ -37,19 +36,22 @@ import {DarksideMeteorBombardment} from '../../src/cards/moon/DarksideMeteorBomb
 import {LunaStagingStation} from '../../src/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
+import {PlayerId} from '../../src/common/Types';
 
 describe('Turmoil', function() {
-  let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let player: TestPlayer;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
 
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
-    TestingUtils.resetBoard(game);
   });
 
   it('Should initialize with right defaults', function() {
@@ -66,7 +68,7 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
 
     expect(greens.delegates).has.lengthOf(1);
-    expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
+    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
     expect(turmoil.lobby).does.not.contain(player.id);
   });
 
@@ -78,7 +80,7 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
 
     expect(greens.delegates).has.lengthOf(1);
-    expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
+    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
     expect(turmoil.lobby).contains(player.id);
   });
 
@@ -100,7 +102,8 @@ describe('Turmoil', function() {
     expect(greens.delegates).has.lengthOf(1);
 
     // 1 influence: Leader of dominant party
-    const greensPartyLeader = game.getPlayerById(greens.partyLeader!);
+    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
+    const greensPartyLeader = game.getPlayerById(greens.partyLeader as PlayerId);
     expect(greensPartyLeader).to.eq(player);
     expect(turmoil.getPlayerInfluence(player)).to.eq(1);
 
@@ -137,10 +140,11 @@ describe('Turmoil', function() {
   });
 
   it('Correctly set party leader', function() {
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    expect(game.getPlayerById(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader!)).to.eq(player);
+    const party = turmoil.getPartyByName(PartyName.GREENS)!;
+    turmoil.sendDelegateToParty(player.id, party.name, game);
+    turmoil.sendDelegateToParty(player.id, party.name, game);
+    turmoil.sendDelegateToParty(player.id, party.name, game);
+    expect(game.getPlayerById(party.partyLeader as PlayerId)).to.eq(player);
   });
 
   it('Correctly run end of generation', function() {
@@ -161,9 +165,9 @@ describe('Turmoil', function() {
 
     game.phase = Phase.SOLAR;
     turmoil.endGeneration(game);
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
 
-    expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
+    expect(game.getPlayerById(turmoil.chairman! as PlayerId)).to.eq(player);
     // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman
     expect(player.getTerraformRating()).to.eq(21);
     expect(player2.getTerraformRating()).to.eq(20);
@@ -178,7 +182,7 @@ describe('Turmoil', function() {
     game.phase = Phase.SOLAR;
 
     player.worldGovernmentTerraforming();
-    const action = player.getWaitingFor() as OrOptions;
+    const action = cast(player.getWaitingFor(), OrOptions);
     const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
     const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 
@@ -186,14 +190,14 @@ describe('Turmoil', function() {
     expect(player.steel).to.eq(0); // should not give ruling policy bonus
   });
 
-  it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
+  it('Cannot raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
     const standardProjects = player.getStandardProjectOption();
 
     // can only use Power Plant as cannot pay 3 for Reds ruling policy
-    expect(standardProjects.enabled![0]).to.eq(true);
-    expect(standardProjects.enabled!.slice(1)).to.not.contain(true);
+    expect(standardProjects.config.enabled![0]).to.eq(true);
+    expect(standardProjects.config.enabled!.slice(1)).to.not.contain(true);
   });
 
   it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
@@ -205,7 +209,7 @@ describe('Turmoil', function() {
     expect(new GreeneryStandardProject().canAct(player)).equal(true);
   });
 
-  it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
+  it('Cannot play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 16;
     const releaseOfInertGases = new ReleaseOfInertGases();
@@ -220,7 +224,7 @@ describe('Turmoil', function() {
     expect(player.canPlay(magneticFieldGeneratorsPromo)).is.not.true; // needs 31 MC
   });
 
-  it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
+  it('Cannot play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     // Both of these cards cost 23MC.
     const iceAsteroid = new IceAsteroid();
@@ -231,7 +235,7 @@ describe('Turmoil', function() {
     expect(player.canPlay(protectedValley)).is.not.true; // needs 26 MC
 
     // can play if won't gain TR from raising global parameter
-    TestingUtils.maxOutOceans(player, 9);
+    maxOutOceans(player, 9);
     expect(player.canPlay(protectedValley)).is.true;
     expect(player.canPlay(iceAsteroid)).is.true;
   });
@@ -252,11 +256,11 @@ describe('Turmoil', function() {
   });
 
 
-  it('canPlay: reds tax applies by default when raising oxygen', function() {
+  it('canPlay: Reds tax applies by default when raising oxygen', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.setProductionForTest({energy: 2}); // Card requirement.
@@ -291,8 +295,8 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for oxygen, include the cost for the 8% temperature bump.', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.setProductionForTest({energy: 2}); // Card requirement.
@@ -312,8 +316,8 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for oxygen, include the cost for the 8% temperature bump, which triggers 0° ocean bump.', function() {
     // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.setProductionForTest({energy: 2}); // Card requirement.
@@ -335,8 +339,8 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising temperature', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -372,8 +376,8 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for temperature, include the cost for the 0° ocean bump.', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -392,8 +396,8 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when placing oceans', function() {
     // ArtificialLake uses trSource.
     const card = new ArtificialLake();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     (game as any).temperature = -6; // minimum requirement for the card.
     game.phase = Phase.ACTION;
@@ -411,7 +415,7 @@ describe('Turmoil', function() {
     player.megaCredits = card.cost + 3;
     expect(player.canPlay(card)).is.true;
 
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.true;
   });
@@ -421,8 +425,8 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising the venus scale.', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -458,8 +462,8 @@ describe('Turmoil', function() {
   it('canPlay: when paying reds tax for venus, include the cost for the 16% TR', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -478,8 +482,8 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising moon colony rate', function() {
     // Raises the colony rate two steps.
     const card = new WaterTreatmentComplex();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -518,8 +522,8 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising moon mining rate', function() {
     // Raises the mining rate two steps.
     const card = new DarksideMeteorBombardment();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -554,8 +558,8 @@ describe('Turmoil', function() {
   it('canPlay: reds tax applies by default when raising moon logistic rate', function() {
     // Raises the logistic rate two steps.
     const card = new LunaStagingStation();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -591,13 +595,71 @@ describe('Turmoil', function() {
     expect(player.canPlay(card)).is.true;
   });
 
+  it('Reds: Cannot raise TR directly without the money to back it up', function() {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const turmoil = game.turmoil!;
+    game.phase = Phase.ACTION;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+
+    expect(player.getTerraformRating()).eq(14);
+
+    player.megaCredits = 2;
+    player.increaseTerraformRating();
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(2); // No change
+    expect(player.getTerraformRating()).eq(14);
+
+    player.megaCredits = 3;
+    player.increaseTerraformRating();
+    // Possibly remove the requirement to runAllActions if the play is only paying with MC
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(0);
+    expect(player.getTerraformRating()).eq(15);
+
+    player.megaCredits = 3;
+    player.increaseTerraformRatingSteps(2);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(3); // No change
+    expect(player.getTerraformRating()).eq(15);
+
+    player.megaCredits = 5;
+    player.increaseTerraformRatingSteps(2);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(5); // No change
+    expect(player.getTerraformRating()).eq(15);
+
+    player.megaCredits = 6;
+    player.increaseTerraformRatingSteps(2);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(0);
+    expect(player.getTerraformRating()).eq(17);
+
+    // This doesn't apply outside of the ACTION phase
+    game.phase = Phase.SOLAR;
+
+    player.megaCredits = 6;
+    player.increaseTerraformRatingSteps(2);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(6);
+    expect(player.getTerraformRating()).eq(19);
+  });
+
   it('serializes and deserializes keeping players', function() {
     // Party delegates have to be explicitly set since game set-up draws a global event which
     // adds delegates to a party. So parties[0] can be empty or not depending on the draw.
-    turmoil.parties[0].delegates = ['NEUTRAL', 'NEUTRAL', 'fancy-pants'];
+    turmoil.parties[0].delegates = ['NEUTRAL', 'NEUTRAL', 'p-fancy-pants'];
     const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
     const deserialized = Turmoil.deserialize(serialized);
-    expect(deserialized.parties[0].getPresentPlayers()).to.have.members(['NEUTRAL', 'fancy-pants']);
+    expect(deserialized.parties[0].getPresentPlayers()).to.have.members(['NEUTRAL', 'p-fancy-pants']);
   });
 
   it('deserialization', () => {

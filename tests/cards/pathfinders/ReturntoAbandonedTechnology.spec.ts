@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {ReturntoAbandonedTechnology} from '../../../src/cards/pathfinders/ReturntoAbandonedTechnology';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Birds} from '../../../src/cards/base/Birds';
 import {Capital} from '../../../src/cards/base/Capital';
@@ -17,8 +16,8 @@ describe('ReturntoAbandonedTechnology', function() {
 
   beforeEach(function() {
     card = new ReturntoAbandonedTechnology();
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player);
     player.playedCards.push(card);
   });
 

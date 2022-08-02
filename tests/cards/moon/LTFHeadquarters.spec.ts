@@ -1,14 +1,14 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
+import {setCustomGameOptions} from '../../TestingUtils';
 import {LTFHeadquarters} from '../../../src/cards/moon/LTFHeadquarters';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {BuildColony} from '../../../src/deferredActions/BuildColony';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LTFHeadquarters', () => {
   let player: Player;
@@ -16,8 +16,8 @@ describe('LTFHeadquarters', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
     card = new LTFHeadquarters();
     moonData = MoonExpansion.moonData(game);
   });

@@ -14,12 +14,17 @@ export enum SpaceBonus {
     MEGACREDITS, // 6
     ANIMAL, // 7
     MICROBE, // 8 (Also used in Arabia Terra)
-    POWER, // 9 // TODO(kberg): Rename to ENERGY
+    ENERGY, // 9 // Ares and Terra Cimmeria
 
-        // Arabia Terra-specific
+    // Arabia Terra-specific
     DATA, // 10
     SCIENCE, // 11
     ENERGY_PRODUCTION, // 12
+
+    // Vastitas Borealis-specific
+    TEMPERATURE, // 13
+    // Amazonis-specific
+    RESTRICTED, // 14
 }
 
 const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
@@ -32,10 +37,12 @@ const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
   [SpaceBonus.MEGACREDITS, 'M€'],
   [SpaceBonus.ANIMAL, 'Animal'],
   [SpaceBonus.MICROBE, 'Microbe'],
-  [SpaceBonus.POWER, 'Power'],
+  [SpaceBonus.ENERGY, 'Energy'],
   [SpaceBonus.DATA, 'Data'],
   [SpaceBonus.SCIENCE, 'Science'],
   [SpaceBonus.ENERGY_PRODUCTION, 'Energy Production'],
+  [SpaceBonus.TEMPERATURE, 'Temperature'],
+  [SpaceBonus.RESTRICTED, 'Restricted'],
 ]);
 
 export namespace SpaceBonus {

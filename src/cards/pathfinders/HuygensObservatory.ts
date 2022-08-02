@@ -9,8 +9,8 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectColony} from '../../inputs/SelectColony';
-import {Colony} from '../../colonies/Colony';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {IColony} from '../../colonies/IColony';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 
 export class HuygensObservatory extends Card implements IProjectCard {
   constructor() {
@@ -32,8 +32,8 @@ export class HuygensObservatory extends Card implements IProjectCard {
     });
   }
 
-  private trade(player: Player, colonies: Array<Colony>) {
-    return new SelectColony('Select colony tile to trade with for free', 'Select', colonies, (colony: Colony) => {
+  private trade(player: Player, colonies: Array<IColony>) {
+    return new SelectColony('Select colony tile to trade with for free', 'Select', colonies, (colony: IColony) => {
       colony.trade(player);
       return undefined;
     });
@@ -65,32 +65,32 @@ export class HuygensObservatory extends Card implements IProjectCard {
           'Select a colony tile to recall a trade fleet from',
           'OK',
           visitedColonies,
-          (colony: Colony) => {
+          (colony: IColony) => {
             game.log(
               '${0} is reusing a trade fleet from ${1}',
               (b) => b.player(player).colony(colony));
             colony.visitor = undefined;
             // TODO(kberg): counting the trades in a generation is not the same as using trade fleets. :[
             player.tradesThisGeneration--;
-            game.defer(new DeferredAction(player, () => tradeInput));
+            game.defer(new SimpleDeferredAction(player, () => tradeInput));
             return undefined;
           }));
     }
     if (hasFreeTradeFleet) {
       if (orOptions.options.length === 1) {
         orOptions.options.push(new SelectOption('Use an available trade fleet', 'OK', () => {
-          game.defer(new DeferredAction(player, () => tradeInput));
+          game.defer(new SimpleDeferredAction(player, () => tradeInput));
           return undefined;
         }));
       } else {
-        game.defer(new DeferredAction(player, () => tradeInput));
+        game.defer(new SimpleDeferredAction(player, () => tradeInput));
       }
     }
     if (orOptions.options.length === 1) {
-      game.defer(new DeferredAction(player, () => orOptions.options[0]));
+      game.defer(new SimpleDeferredAction(player, () => orOptions.options[0]));
     }
     if (orOptions.options.length > 1) {
-      game.defer(new DeferredAction(player, () => orOptions));
+      game.defer(new SimpleDeferredAction(player, () => orOptions));
     }
   }
   public override canPlay(player: Player): boolean {
@@ -106,7 +106,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
         cb: () => this.tryToTrade(player),
       }));
     } else {
-      game.defer(new DeferredAction(player, () => {
+      game.defer(new SimpleDeferredAction(player, () => {
         this.tryToTrade(player);
         return undefined;
       }));

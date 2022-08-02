@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/cards/base/standardProjects/AsteroidStandardProject';
-import {TestingUtils} from '../../../TestingUtils';
+import {setCustomGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/Game';
-import {TestPlayers} from '../../../TestPlayers';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../../src/common/Phase';
@@ -16,8 +15,8 @@ describe('AsteroidStandardProject', function() {
 
   beforeEach(function() {
     card = new AsteroidStandardProject();
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player);
   });
 
   it('Can act', function() {
@@ -33,7 +32,7 @@ describe('AsteroidStandardProject', function() {
     expect(game.getTemperature()).eq(-30);
 
     card.action(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.megaCredits).eq(0);
     expect(player.getTerraformRating()).eq(21);
@@ -48,8 +47,8 @@ describe('AsteroidStandardProject', function() {
   });
 
   it('Can not act with reds', () => {
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({turmoilExtension: true}));
+    player = TestPlayer.BLUE.newPlayer();
+    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

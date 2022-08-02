@@ -5,19 +5,20 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {cast} from '../../TestingUtils';
 
 describe('CorporateStronghold', function() {
-  let card : CorporateStronghold; let player : TestPlayer;
+  let card: CorporateStronghold;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CorporateStronghold();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -25,8 +26,7 @@ describe('CorporateStronghold', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
 
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);

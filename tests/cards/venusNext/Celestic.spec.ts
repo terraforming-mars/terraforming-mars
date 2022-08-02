@@ -2,21 +2,21 @@ import {expect} from 'chai';
 import {ALL_CARD_MANIFESTS} from '../../../src/cards/AllCards';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
-import {ResourceType} from '../../../src/common/ResourceType';
+import {CardResource} from '../../../src/common/CardResource';
 import {RequirementType} from '../../../src/common/cards/RequirementType';
 
 describe('Celestic', function() {
   it('Should play', function() {
     const card = new Celestic();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
     const play = card.play();
     expect(play).is.undefined;
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     const action = card.action(player);
     expect(action).is.undefined;
@@ -33,7 +33,7 @@ describe('Celestic', function() {
 
         // Only looking for cards that mention floaters in the metadata
         // or requirements. Cards with floater resources don't need to be hand-verified.
-        if (card.resourceType === ResourceType.FLOATER) return;
+        if (card.resourceType === CardResource.FLOATER) return;
 
         const renderData = card.metadata.renderData;
         if (renderData === undefined) return;

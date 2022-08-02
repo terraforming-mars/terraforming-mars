@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Game} from '../../Game';
@@ -6,12 +6,13 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
-import {Colony} from '../../colonies/Colony';
+import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
-export class Aridor extends Card implements CorporationCard {
+export class Aridor extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARIDOR,
@@ -37,17 +38,15 @@ export class Aridor extends Card implements CorporationCard {
   public allTags = new Set<Tags>();
   public initialAction(player: Player) {
     const game = player.game;
-    if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
+    if (game.discardedColonies.length === 0) return undefined;
 
-    const availableColonies: Colony[] = game.colonyDealer.discardedColonies;
-    if (availableColonies.length === 0) return undefined;
-
-    const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', availableColonies, (colony: Colony) => {
-      if (availableColonies.includes(colony)) {
+    const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', game.discardedColonies, (colony: IColony) => {
+      if (game.discardedColonies.includes(colony)) {
         game.colonies.push(colony);
         game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
         game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
         this.checkActivation(colony, game);
+        // TODO(kberg): remove this colony from discarded?
       } else {
         throw new Error(`Colony ${colony.name} is not a discarded colony`);
       }
@@ -56,30 +55,27 @@ export class Aridor extends Card implements CorporationCard {
     return selectColony;
   }
 
-  private checkActivation(colony: Colony, game: Game): void {
-    if (colony.resourceType === undefined) return;
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      if (player.corporationCard !== undefined && player.corporationCard.resourceType === colony.resourceType) {
-        colony.isActive = true;
-        return;
+  private checkActivation(colony: IColony, game: Game): void {
+    if (colony.isActive) return;
+    for (const player of game.getPlayers()) {
+      for (const card of player.tableau) {
+        const active = ColoniesHandler.maybeActivateColony(colony, card);
+        if (active) {
+          return;
+        }
       }
-      const resourceCard = player.playedCards.find((card) => card.resourceType === colony.resourceType);
-      if (resourceCard !== undefined) {
-        colony.isActive = true;
-        return;
-      }
-    });
+    }
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (
       card.cardType === CardType.EVENT ||
-        card.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0 ||
+        card.tags.filter((tag) => tag !== Tags.WILD).length === 0 ||
         !player.isCorporation(this.name)) {
       return undefined;
     }
 
-    for (const tag of card.tags.filter((tag) => tag !== Tags.WILDCARD)) {
+    for (const tag of card.tags.filter((tag) => tag !== Tags.WILD)) {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {

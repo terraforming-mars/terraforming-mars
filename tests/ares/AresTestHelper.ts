@@ -5,15 +5,15 @@ import {Resources} from '../../src/common/Resources';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/boards/ISpace';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {AresHandler} from '../../src/ares/AresHandler';
 
-export const ARES_OPTIONS_NO_HAZARDS = TestingUtils.setCustomGameOptions({
+export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
   aresExtension: true,
   aresHazards: false,
 });
 
-export const ARES_OPTIONS_WITH_HAZARDS = TestingUtils.setCustomGameOptions({
+export const ARES_OPTIONS_WITH_HAZARDS = setCustomGameOptions({
   aresExtension: true,
   aresHazards: true,
 });
@@ -27,7 +27,7 @@ export const ALL_ADJACENCY_BONUSES = [
   SpaceBonus.ANIMAL,
   SpaceBonus.MEGACREDITS,
   SpaceBonus.MICROBE,
-  SpaceBonus.POWER,
+  SpaceBonus.ENERGY,
 ];
 
 export class AresTestHelper {

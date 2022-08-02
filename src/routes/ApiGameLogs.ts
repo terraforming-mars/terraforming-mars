@@ -9,7 +9,7 @@ export class ApiGameLogs extends Handler {
     super();
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    this.gameLogs.handle(req, res, ctx);
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+    await this.gameLogs.handle(req, res, ctx);
   }
 }

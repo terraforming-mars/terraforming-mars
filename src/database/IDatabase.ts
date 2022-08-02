@@ -1,7 +1,9 @@
-import {Game, GameOptions, Score} from '../Game';
-import {GameId} from '../common/Types';
+import {Game, Score} from '../Game';
+import {GameOptions} from '../GameOptions';
+import {GameId, PlayerId, SpectatorId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
-import {IGameData} from '../common/game/IGameData';
+
+export type GameIdLedger = {gameId: GameId, participantIds: Array<PlayerId | SpectatorId>}
 
 /**
  * A game store. Load, save, you know the drill.
@@ -33,61 +35,54 @@ import {IGameData} from '../common/game/IGameData';
  *
  * Finally, `players` as a number merely represents the number of players
  * in the game. Why, I have no idea, says kberg.
- */
-
-export type DbLoadCallback<T> = (err: Error | undefined, game: T | undefined) => void
-
+*/
 export interface IDatabase {
 
     /**
      * Creates any tables needed
      */
-    initialize(): Promise<void>;
+    initialize(): Promise<unknown>;
 
     /**
      * Pulls most recent version of game
      * @param game_id the game id to load
-     * @param cb called with game if exists. If game is undefined err will be truthy.
      */
-    getGame(game_id: string, cb: (err: Error | undefined, game?: SerializedGame) => void): void;
+    getGame(game_id: string): Promise<SerializedGame>;
 
     /**
      * Finds the game id associated with the given player.
      *
      * This is not yet written efficiently in Postgres, so use sparingly.
      *
-     * @param playerId the playerID assocaited with a game
-     * @param cb called with the gameid if it exists. If it does not err will be truthy.
+     * @param id the `PlayerId` or `SpectatorId` assocaited with a game
      */
-    getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void;
+    getGameId(id: PlayerId | SpectatorId): Promise<GameId>;
+
+    /**
+     * Get all the save ids assocaited with a game.
+     */
+    getSaveIds(gameId: GameId): Promise<Array<number>>;
 
     /**
      * Load a game at a specific save point.
      */
-    getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;
+    getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame>;
 
     /**
      * Return a list of all `game_id`s.
      *
-     * @param cb a callback containing either a failure to load, or a list of
-     * references to cloneable games.
-     *
-     * @param cb a callback either returning either an error or a list of all `game_id`s.
+     * When the server starts games will be loaded from first to last. The postgres implmentation
+     * speeds up loading by sorting game ids so games most recently updated are loaded first, thereby
+     * being available sooner than other games.
      */
-    getGames(cb:(err: Error | undefined, allGames:Array<GameId>) => void): void;
+    getGameIds(): Promise<Array<GameId>>;
 
     /**
-     * Load references to all games that can be cloned. Every game is cloneable,
-     * this just returns the original save of the game. However, if a game's
-     * original save is pruned, say, due to {@link deleteGameNbrSaves}, it won't
-     * appear in this list.
+     * Get the player count for a game.
      *
-     * Cloneable games are those with a save_id 0.
-     *
-     * @param cb a callback either returning either an error or a list of references
-     * to cloneable games.
+     * @param game_id the game id to search for
      */
-    getClonableGames(cb:(err: Error | undefined, allGames:Array<IGameData>)=> void) : void;
+    getPlayerCount(game_id: GameId): Promise<number>;
 
     /**
      * Saves the current state of the game. at a supplied save point. Used for
@@ -97,7 +92,7 @@ export interface IDatabase {
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal
-     * games. Called at a game's conclusion along with {@link cleanSaves}.
+     * games. Called at a game's conclusion along with {@link cleanGame}.
      *
      * This is not impliemented in {@link SQLite}.
      *
@@ -113,12 +108,12 @@ export interface IDatabase {
      */
     // TODO(kberg): it's not clear to me how this save_id is known to
     // be the absolute prior game id, so that could use some clarification.
-    restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void;
+    restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame>;
 
     /**
      * Load a game at save point 0, and provide it in the callback.
      */
-    loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>): void;
+    loadCloneableGame(game_id: GameId): Promise<SerializedGame>;
 
     /**
      * Deletes the last `rollbackCount` saves of the specified game.
@@ -137,21 +132,29 @@ export interface IDatabase {
      *   than a given date range, regardless of the supplied `game_id`.
      *   Constraints for this purge vary by database.
      */
-    // TODO(kberg): rename to represent that it's closing out
-    // this game. Also consider not needing the save_id, and
-    // also to make the maintenance behavior a first-class method.
-    cleanSaves(game_id: GameId): void;
+    // TODO(kberg): Make the extra maintenance behavior a first-class method.
+    cleanGame(game_id: GameId): Promise<void>;
 
     /**
      * A maintenance task that purges abandoned solo games older
      * than a given date range.
      *
-     * This is currently also part of cleanSaves().
+     * This is currently also part of cleanGame().
      *
      * Behavior when the environment variable is absent is system-dependent:
      * * In PostgreSQL, it uses a default of 10 days
      * * In Sqlite, it doesn't purge
      * * This whole method is ignored in LocalFilesystem.
      */
-    purgeUnfinishedGames(): void;
+    purgeUnfinishedGames(maxGameDays?: string): Promise<void>;
+
+    /**
+     * Generate database statistics for admin purposes.
+     *
+     * Key/value responses will vary between databases.
+     */
+    stats(): Promise<{[key: string]: string | number}>;
+
+    storeParticipants(entry: GameIdLedger): Promise<void>;
+    getParticipants(): Promise<Array<GameIdLedger>>;
 }

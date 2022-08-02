@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {DomeFarming} from '../../../src/cards/prelude/DomeFarming';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('DomeFarming', function() {
   it('Should play', function() {
     const card = new DomeFarming();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);

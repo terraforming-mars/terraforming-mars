@@ -6,7 +6,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {all} from '../Options';
 import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -23,10 +23,10 @@ export class CassiniStation extends Card implements IProjectCard {
         cardNumber: 'Pf62',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1).slash().colonies(1, {all})).br;
-          b.floaters(2).or().data({amount: 3});
+          b.floaters(2).asterix().or().data({amount: 3}).asterix();
         }),
         description: 'Increase your energy production 1 step for every colony in play. ' +
-          'Add 2 floaters on any card OR add 3 data on any card.',
+          'Add 2 floaters to ANY card OR add 3 data to ANY card.',
       },
     });
   }
@@ -40,8 +40,8 @@ export class CassiniStation extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, coloniesCount, {log: true});
 
     const cards = [
-      ...player.getResourceCards(ResourceType.FLOATER),
-      ...player.getResourceCards(ResourceType.DATA),
+      ...player.getResourceCards(CardResource.FLOATER),
+      ...player.getResourceCards(CardResource.DATA),
     ];
 
     if (cards.length === 0) {
@@ -53,7 +53,7 @@ export class CassiniStation extends Card implements IProjectCard {
       cards,
       (selected: Array<ICard>) => {
         const card = selected[0];
-        if (card.resourceType === ResourceType.FLOATER) {
+        if (card.resourceType === CardResource.FLOATER) {
           player.addResourceTo(card, {qty: 2, log: true});
         } else {
           player.addResourceTo(card, {qty: 3, log: true});

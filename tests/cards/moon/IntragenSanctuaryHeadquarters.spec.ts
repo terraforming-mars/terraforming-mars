@@ -1,13 +1,13 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {IntragenSanctuaryHeadquarters} from '../../../src/cards/moon/IntragenSanctuaryHeadquarters';
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {MartianZoo} from '../../../src/cards/colonies/MartianZoo';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('IntragenSanctuaryHeadquarters', () => {
   let player: Player;
@@ -15,9 +15,9 @@ describe('IntragenSanctuaryHeadquarters', () => {
   let card: IntragenSanctuaryHeadquarters;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('id', [player, player2], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
     card = new IntragenSanctuaryHeadquarters();
   });
 

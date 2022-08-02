@@ -1,6 +1,6 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
@@ -9,7 +9,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class ValleyTrust extends Card implements CorporationCard {
+export class ValleyTrust extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -36,30 +36,25 @@ export class ValleyTrust extends Card implements CorporationCard {
   }
 
 
-  public getCardDiscount(_player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: Player, card: IProjectCard) {
     // TODO(chosta) -> improve once the discounts property is given a go
-    return card.tags.filter((tag) => tag === Tags.SCIENCE).length * 2;
+    return player.cardTagCount(card, Tags.SCIENCE) * 2;
   }
 
   public initialAction(player: Player) {
-    if (player.game.gameOptions.preludeExtension) {
-      const cardsDrawn: Array<IProjectCard> = [
-        player.game.dealer.dealPreludeCard(),
-        player.game.dealer.dealPreludeCard(),
-        player.game.dealer.dealPreludeCard(),
-      ];
+    const cardsDrawn: Array<IProjectCard> = [
+      player.game.dealer.dealPreludeCard(),
+      player.game.dealer.dealPreludeCard(),
+      player.game.dealer.dealPreludeCard(),
+    ];
 
-      return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
-        if (foundCards[0].canPlay === undefined || foundCards[0].canPlay(player)) {
-          return player.playCard(foundCards[0]);
-        } else {
-          throw new Error('You cannot pay for this card');
-        }
-      }, 1, 1);
-    } else {
-      console.warn('Prelude extension isn\'t selected.');
-      return undefined;
-    }
+    return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
+      if (card.canPlay === undefined || card.canPlay(player)) {
+        return player.playCard(card);
+      } else {
+        throw new Error('You cannot pay for this card');
+      }
+    });
   }
 
   public play() {

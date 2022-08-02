@@ -3,7 +3,7 @@ import {ICardFactory} from './cards/ICardFactory';
 import {IProjectCard} from './cards/IProjectCard';
 import {CardManifest} from './cards/CardManifest';
 import {CardName} from './common/cards/CardName';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Deck} from './Deck';
 import {PreludeCard} from './cards/prelude/PreludeCard';
 import {ALL_CARD_MANIFESTS} from './cards/AllCards';
@@ -25,7 +25,7 @@ export class CardFinder {
     return undefined;
   }
 
-  public getCorporationCardByName(cardName: CardName): CorporationCard | undefined {
+  public getCorporationCardByName(cardName: CardName): ICorporationCard | undefined {
     return this.getCardByName(cardName, (manifest) => [manifest.corporationCards]);
   }
 
@@ -58,12 +58,12 @@ export class CardFinder {
     return result;
   }
 
-  public corporationCardsFromJSON(cards: Array<CardName>): Array<CorporationCard> {
+  public corporationCardsFromJSON(cards: Array<CardName>): Array<ICorporationCard> {
     if (cards === undefined) {
       console.warn('missing cards calling corporationCardsFromJSON');
       return [];
     }
-    const result: Array<CorporationCard> = [];
+    const result: Array<ICorporationCard> = [];
     cards.forEach((element: CardName) => {
       const card = this.getCorporationCardByName(element);
       if (card !== undefined) {

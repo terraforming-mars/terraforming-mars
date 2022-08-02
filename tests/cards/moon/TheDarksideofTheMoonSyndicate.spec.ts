@@ -1,7 +1,6 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -11,19 +10,19 @@ import {StealResources} from '../../../src/deferredActions/StealResources';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('TheDarksideofTheMoonSyndicate', () => {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
-  let otherPlayer: Player;
+  let otherPlayer: TestPlayer;
   let card: TheDarksideofTheMoonSyndicate;
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
     card = new TheDarksideofTheMoonSyndicate();
     moonData = MoonExpansion.moonData(game);
   });
@@ -61,9 +60,8 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     const options = card.action(player);
     expect(options).is.undefined;
 
-    const stealResource = player.game.deferredActions.pop();
-    expect(stealResource).is.instanceof(StealResources);
-    expect((stealResource as StealResources).count).eq(8);
+    const stealResource = cast(player.game.deferredActions.pop(), StealResources);
+    expect(stealResource.count).eq(8);
 
     expect(card.resourceCount).eq(2);
   });
@@ -72,15 +70,14 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     player.titanium = 1;
     card.resourceCount = 1;
 
-    const options = card.action(player);
-    expect(options).instanceof(OrOptions);
+    const options = cast(card.action(player), OrOptions);
 
-    (options as OrOptions).options[0].cb();
+    options.options[0].cb();
     expect(player.titanium).eq(0);
     expect(card.resourceCount).eq(2);
 
-    (options as OrOptions).options[1].cb();
-    expect(game.deferredActions.pop()).is.instanceof(StealResources);
+    options.options[1].cb();
+    cast(player.game.deferredActions.pop(), StealResources);
   });
 
   it('effect', () => {
@@ -100,7 +97,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     otherPlayer.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(otherPlayer.megaCredits).eq(4);
@@ -134,7 +131,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     otherPlayer.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
 
     player.game.phase = Phase.SOLAR;
 

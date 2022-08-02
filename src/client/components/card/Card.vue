@@ -1,29 +1,27 @@
 <template>
-        <div :class="getCardClasses(card)">
-            <div class="card-content-wrapper" v-i18n>
-                <div v-if="!isStandardProject()" class="card-cost-and-tags">
-                    <CardCost :amount="getCost()" :newCost="getReducedCost()" />
-                    <CardTags :tags="getTags()" />
-                </div>
-                <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
-                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
-            </div>
-            <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
-            <CardExtraContent :card="card" />
-            <slot/>
-        </div>
+  <div :class="getCardClasses(card)">
+      <div class="card-content-wrapper" v-i18n>
+          <div v-if="!isStandardProject()" class="card-cost-and-tags">
+              <CardCost :amount="getCost()" :newCost="getReducedCost()" />
+              <card-help v-show="hasHelp" :name="card.name" />
+              <CardTags :tags="getTags()" />
+          </div>
+          <CardTitle :title="card.name" :type="getCardType()"/>
+          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
+      </div>
+      <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
+      <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount()" :type="resourceType" />
+      <CardExtraContent :card="card" />
+      <slot/>
+  </div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
 
-import {ICard} from '@/cards/ICard';
 import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
-import CardNumber from './CardNumber.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
 import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
@@ -31,58 +29,64 @@ import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
 import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
-import {ICardMetadata} from '@/cards/ICardMetadata';
+import CardHelp from './CardHelp.vue';
+import {ICardMetadata} from '@/common/cards/ICardMetadata';
+import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import {Tags} from '@/common/cards/Tags';
-import {CardRequirements} from '@/cards/CardRequirements';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {ResourceType} from '@/common/ResourceType';
-import {getCard} from '@/client/cards/ClientCardManifest';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+import {CardResource} from '@/common/CardResource';
+import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
+import {CardName} from '@/common/cards/CardName';
+
+const names = [
+  CardName.BOTANICAL_EXPERIENCE,
+  CardName.MARS_DIRECT,
+  CardName.LUNA_ECUMENOPOLIS,
+  CardName.ROBOTIC_WORKFORCE,
+];
 
 export default Vue.extend({
   name: 'Card',
   components: {
     CardTitle,
+    CardHelp,
     CardResourceCounter,
     CardCost,
     CardExtraContent,
     CardExpansion,
     CardTags,
     CardContent,
-    CardNumber,
   },
   props: {
-    'card': {
+    card: {
       type: Object as () => CardModel,
       required: true,
     },
-    'actionUsed': {
+    actionUsed: {
       type: Boolean,
       required: false,
       default: false,
     },
+    robotCard: {
+      type: Object as () => CardModel | undefined,
+      required: false,
+    },
   },
   data() {
     const cardName = this.card.name;
-    const cam = getCard(cardName);
-    if (cam === undefined) {
-      throw new Error(`Can't find card ${cardName}`);
-    }
+    const card = getCardOrThrow(cardName);
 
     return {
-      cardInstance: cam.card,
-      expansion: cam.module,
+      cardInstance: card,
     };
   },
   methods: {
     getCardExpansion(): string {
-      return this.expansion;
-    },
-    getCard(): ICard | undefined {
-      return this.cardInstance;
+      return this.cardInstance.module;
     },
     getTags(): Array<string> {
       const type = this.getCardType();
-      const tags = [...this.getCard()?.tags || []];
+      const tags = [...this.cardInstance.tags || []];
       tags.forEach((tag, idx) => {
         // Clone are changed on card implementations but that's not passed down directly through the
         // model, however, it sends down the `cloneTag` field. So this function does the substitution.
@@ -96,7 +100,7 @@ export default Vue.extend({
       return tags;
     },
     getCost(): number | undefined {
-      const cost = this.getCard()?.cost;
+      const cost = this.cardInstance.cost;
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
@@ -105,11 +109,8 @@ export default Vue.extend({
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
-    getCardType(): CardType | undefined {
-      return this.getCard()?.cardType;
-    },
-    getCardNumber(): string {
-      return String(this.getCardMetadata()?.cardNumber);
+    getCardType(): CardType {
+      return this.cardInstance.cardType;
     },
     getCardClasses(card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
@@ -121,20 +122,21 @@ export default Vue.extend({
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
       }
-      const learnerModeOff = PreferencesManager.load('learner_mode') === '0';
+      const learnerModeOff = !getPreferences().learner_mode;
       if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
         classes.push('card-hide');
       }
       return classes.join(' ');
     },
     getCardMetadata(): ICardMetadata | undefined {
-      return this.getCard()?.metadata;
+      // TODO(kberg): This doesn't return undefined anymore.
+      return this.cardInstance.metadata;
     },
-    getCardRequirements(): CardRequirements | undefined {
-      return this.getCard()?.requirements;
+    getCardRequirements(): ICardRequirements | undefined {
+      return this.cardInstance.requirements;
     },
-    getResourceAmount(card: CardModel): number {
-      return card.resources !== undefined ? card.resources : 0;
+    getResourceAmount(): number {
+      return this.card.resources || this.robotCard?.resources || 0;
     },
     isCorporationCard() : boolean {
       return this.getCardType() === CardType.CORPORATION;
@@ -145,12 +147,18 @@ export default Vue.extend({
   },
   computed: {
     hasResourceType(): boolean {
-      return this.card.resourceType !== undefined || this.cardInstance.resourceType !== undefined;
+      return this.card.resourceType !== undefined ||
+        this.cardInstance.resourceType !== undefined ||
+        this.robotCard !== undefined;
     },
-    resourceType(): ResourceType {
+    resourceType(): CardResource {
+      if (this.robotCard !== undefined) return CardResource.RESOURCE_CUBE;
       if (this.card.resourceType !== undefined) return this.card.resourceType;
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
-      return ResourceType.RESOURCE_CUBE;
+      return CardResource.RESOURCE_CUBE;
+    },
+    hasHelp(): boolean {
+      return names.includes(this.card.name) && getPreferences().experimental_ui;
     },
   },
 });

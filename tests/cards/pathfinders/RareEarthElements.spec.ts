@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {RareEarthElements} from '../../../src/cards/pathfinders/RareEarthElements';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 
@@ -14,9 +13,9 @@ describe('RareEarthElements', function() {
 
   beforeEach(function() {
     card = new RareEarthElements();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('play', function() {

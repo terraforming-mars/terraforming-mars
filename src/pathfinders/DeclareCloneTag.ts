@@ -7,6 +7,7 @@ import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {ICard} from '../cards/ICard';
 import {CardType} from '../common/cards/CardType';
 import {IProjectCard} from '../cards/IProjectCard';
+import {PlanetaryTag} from './PathfindersExpansion';
 
 /**
  * Declare what tag a new card has. Must occur before anything else, including
@@ -16,21 +17,20 @@ import {IProjectCard} from '../cards/IProjectCard';
  * when the card has a clone tag, and instead defers that call.
  * That's why it calls onCardPlayed here.
  */
-export class DeclareCloneTag implements DeferredAction {
-  public priority = Priority.DECLARE_CLONE_TAG;
-
+export class DeclareCloneTag extends DeferredAction {
   public constructor(
-    public player: Player,
+    player: Player,
     public card: ICard & ICloneTagCard,
-    public cb: (tag: Tags) => void = () => {},
+    public cb: (tag: PlanetaryTag) => void = () => {},
     public title: string = '') {
+    super(player, Priority.DECLARE_CLONE_TAG);
     if (this.title === '') {
       this.title = `Assign the clone tag for ${card.name}`;
     }
   }
 
   public execute() {
-    const tags = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];
+    const tags: Array<PlanetaryTag> = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];
     if (this.player.game.gameOptions.venusNextExtension === true) {
       tags.push(Tags.VENUS);
     }

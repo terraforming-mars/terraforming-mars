@@ -3,9 +3,12 @@
   e.g. plus and minus sign, asterix, arrow, dash, slash, etc.
  */
 import {CardRenderSymbolType} from '../../common/cards/render/CardRenderSymbolType';
+import {ICardRenderSymbol} from '../../common/cards/render/Types';
 import {Size} from '../../common/cards/render/Size';
 
-export class CardRenderSymbol {
+export class CardRenderSymbol implements ICardRenderSymbol {
+  public readonly is = 'symbol';
+
   private constructor(public type: CardRenderSymbolType, public size: Size, public isIcon: boolean = false) {}
 
   public static asterix(size: Size = Size.MEDIUM): CardRenderSymbol {
@@ -46,5 +49,8 @@ export class CardRenderSymbol {
   }
   public static equals(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.EQUALS, size);
+  }
+  public static surveyMission(): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.SURVEY_MISSION, Size.MEDIUM, true);
   }
 }

@@ -30,7 +30,10 @@ export function serializeProjectCard(c: IProjectCard): SerializedCard {
 }
 
 export function deserializeProjectCard(element: SerializedCard, cardFinder: CardFinder): IProjectCard {
-  const card = cardFinder.getProjectCardByName(element.name)!;
+  const card = cardFinder.getProjectCardByName(element.name);
+  if (card === undefined) {
+    throw new Error(`Card ${element.name} not found`);
+  }
   if (element.resourceCount !== undefined) {
     card.resourceCount = element.resourceCount;
   }

@@ -26,11 +26,4 @@ export class EmptyBoard extends Board {
 
     return new EmptyBoard(builder.build());
   }
-  public getVolcanicSpaceIds(): Array<string> {
-    return [];
-  }
-
-  public getNoctisCitySpaceIds(): Array<string> {
-    return [];
-  }
 }

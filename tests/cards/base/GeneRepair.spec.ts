@@ -3,19 +3,19 @@ import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('GeneRepair', function() {
-  let card : GeneRepair; let player : TestPlayer;
+  let card: GeneRepair;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new GeneRepair();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

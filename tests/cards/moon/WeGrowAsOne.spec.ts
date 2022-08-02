@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {WeGrowAsOne} from '../../../src/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
 import {Unity} from '../../../src/turmoil/parties/Unity';
@@ -13,12 +13,12 @@ describe('WeGrowAsOne', () => {
   let card: WeGrowAsOne;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance(
-      'id',
+      'gameid',
       [player],
       player,
-      TestingUtils.setCustomGameOptions({
+      setCustomGameOptions({
         moonExpansion: true,
         coloniesExtension: true,
       }));

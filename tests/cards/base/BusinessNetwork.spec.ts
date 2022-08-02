@@ -5,16 +5,18 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessNetwork', function() {
-  let card : BusinessNetwork; let player : Player; let game : Game;
+  let card: BusinessNetwork;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new BusinessNetwork();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -23,7 +25,7 @@ describe('BusinessNetwork', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });
@@ -36,7 +38,7 @@ describe('BusinessNetwork', function() {
     player.megaCredits = 2;
     const action = card.action(player);
     expect(action).instanceOf(SelectCard);
-    expect(action!.maxCardsToSelect).to.eq(0);
+    expect(action!.config.max).to.eq(0);
 
     (action! as SelectCard<IProjectCard>).cb([]);
     expect(game.dealer.discarded).has.lengthOf(1);

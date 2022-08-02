@@ -2,6 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
+import {Size} from '../../common/cards/render/Size';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
@@ -27,9 +28,10 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
           b.action(
             'Pay 2 titanium to raise your heat and energy production 1 step each.',
             (ab) => ab.titanium(2, {digit}).startAction.production((pb) => pb.heat(1).energy(1))).br;
-          b.temperature(1).cards(1).city().asterix().br;
+          b.temperature(1).cards(1, {size: Size.SMALL}).city({size: Size.SMALL}).asterix();
+          b.production((pb) => pb.heat(2, {digit}).energy(2, {digit}));
         }),
-        description: 'Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA.',
+        description: 'Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.',
       },
     });
   }
@@ -50,6 +52,8 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     game.increaseTemperature(player, 1);
     player.drawCard();
     player.game.addCityTile(player, SpaceName.DYSON_SCREENS, SpaceType.COLONY);
+    player.addProduction(Resources.ENERGY, 2);
+    player.addProduction(Resources.HEAT, 2);
     return undefined;
   }
 }

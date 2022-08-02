@@ -1,6 +1,6 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {Card} from '../Card';
@@ -9,12 +9,12 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 
-export class Pristar extends Card implements CorporationCard, IResourceCard {
+export class Pristar extends Card implements ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.PRISTAR,
       startingMegaCredits: 53,
-      resourceType: ResourceType.PRESERVATION,
+      resourceType: CardResource.PRESERVATION,
       cardType: CardType.CORPORATION,
 
       victoryPoints: VictoryPoints.resource(1, 1),

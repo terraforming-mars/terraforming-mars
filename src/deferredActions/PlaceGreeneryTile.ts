@@ -3,12 +3,13 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class PlaceGreeneryTile implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class PlaceGreeneryTile extends DeferredAction {
   constructor(
-        public player: Player,
-        public title: string = 'Select space for greenery tile',
-  ) {}
+    player: Player,
+    public title: string = 'Select space for greenery tile',
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     const availableSpaces = this.player.game.board.getAvailableSpacesForGreenery(this.player);

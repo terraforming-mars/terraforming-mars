@@ -6,21 +6,22 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
-  let card: Stratopolis; let player: Player;
+  let card: Stratopolis;
+  let player: Player;
 
   beforeEach(function() {
     card = new Stratopolis();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
+    Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

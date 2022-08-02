@@ -3,23 +3,24 @@ import {Incite} from '../../../src/cards/community/Incite';
 import {EventAnalysts} from '../../../src/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/Game';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
-import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Incite', function() {
-  let card : Incite; let player : Player; let game : Game;
+  let card: Incite;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new Incite();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player], player, gameOptions);
 
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Starts with +1 influence', function() {

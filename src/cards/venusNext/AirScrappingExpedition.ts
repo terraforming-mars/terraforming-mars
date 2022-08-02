@@ -1,8 +1,7 @@
-import {ICard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -29,14 +28,14 @@ export class AirScrappingExpedition extends Card {
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 1);
-    let floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    let floaterCards = player.getResourceCards(CardResource.FLOATER);
     floaterCards = floaterCards.filter((card) => card.tags.some((cardTag) => cardTag === Tags.VENUS));
     if (floaterCards.length === 0) {
       return undefined;
     }
 
-    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], 3);
+    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, ([card]) => {
+      player.addResourceTo(card, 3);
       return undefined;
     });
   }

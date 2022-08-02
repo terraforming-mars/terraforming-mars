@@ -5,20 +5,17 @@ import {TileType} from '../../../src/common/TileType';
 import {MoholeAreaAres} from '../../../src/cards/ares/MoholeAreaAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('MoholeAreaAres', function() {
   it('Should play', function() {
     const card = new MoholeAreaAres();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
 
-    Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    const action = card.play(player);
-
-    expect(action).is.not.undefined;
-    expect(action).instanceOf(SelectSpace);
-
+    Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
 

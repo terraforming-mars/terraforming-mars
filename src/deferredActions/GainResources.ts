@@ -10,13 +10,13 @@ export namespace GainResources {
   }
 }
 
-export class GainResources implements DeferredAction {
-  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
+export class GainResources extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public resource: Resources,
     public options: GainResources.Options = {},
   ) {
+    super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
     if ((options.count ?? 0) < 0) {
       throw new Error('GainResources count option must be >= 0');
     }

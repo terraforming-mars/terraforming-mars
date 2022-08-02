@@ -3,15 +3,16 @@ import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('EcologyExperts', function() {
-  let card : EcologyExperts; let player : Player;
+  let card: EcologyExperts;
+  let player: Player;
 
   beforeEach(function() {
     card = new EcologyExperts();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
   });
 
   it('Gets requirement bonus', function() {

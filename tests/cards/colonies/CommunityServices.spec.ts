@@ -6,7 +6,7 @@ import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordinat
 import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CommunityServices', function() {
   it('Should play', function() {
@@ -14,10 +14,10 @@ describe('CommunityServices', function() {
     const corpo = new Aridor();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
-    const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
-    player.corporationCard = corpo;
+    player.setCorporationForTest(corpo);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(card.getVictoryPoints()).to.eq(1);
@@ -28,10 +28,10 @@ describe('CommunityServices', function() {
     const corpo = new SeptumTribus();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
-    const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
     player.playedCards.push(prelude, researchCoordination);
-    player.corporationCard = corpo;
+    player.setCorporationForTest(corpo);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(card.getVictoryPoints()).to.eq(1);

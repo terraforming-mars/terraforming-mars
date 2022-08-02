@@ -8,6 +8,7 @@ import {getTestPlayer, newTestGame} from '../TestGame';
 import {Ants} from '../../src/cards/base/Ants';
 import {Tardigrades} from '../../src/cards/base/Tardigrades';
 import {IProjectCard} from '../../src/cards/IProjectCard';
+import {cast} from '../TestingUtils';
 
 describe('GrantResourceDeferred', function() {
   let player: TestPlayer;
@@ -24,7 +25,7 @@ describe('GrantResourceDeferred', function() {
   });
 
   it('grant single bonus', () => {
-    const input = new GrantResourceDeferred(player, false).execute() as OrOptions;
+    const input = cast(new GrantResourceDeferred(player, false).execute(), OrOptions);
     expect(input.options).has.length(1);
     expect(input.options[0]).instanceOf(SelectResources);
     const selectOptions = input.options[0] as SelectResources;
@@ -46,7 +47,7 @@ describe('GrantResourceDeferred', function() {
   });
 
   it('grant single bonus or wild bonus', () => {
-    const input = new GrantResourceDeferred(player, true).execute() as OrOptions;
+    const input = cast(new GrantResourceDeferred(player, true).execute(), OrOptions);
     expect(input.options).has.length(2);
     expect(input.options[0]).instanceOf(SelectResources);
     expect(input.options[1]).instanceOf(SelectCard);

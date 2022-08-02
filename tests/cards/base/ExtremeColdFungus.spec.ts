@@ -5,16 +5,19 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ExtremeColdFungus', () => {
-  let card : ExtremeColdFungus; let player : Player; let player2 : Player; let game : Game;
+  let card: ExtremeColdFungus;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new ExtremeColdFungus();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Cannot play', () => {

@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -8,12 +8,11 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
-import {ICard} from '../ICard';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../common/constants';
 import {Size} from '../../common/cards/render/Size';
 
-export class Ambient extends Card implements CorporationCard {
+export class Ambient extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -50,11 +49,12 @@ export class Ambient extends Card implements CorporationCard {
     return undefined;
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
-    return this.onCardPlayed(player, card as ICard as IProjectCard);
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+    this.onCardPlayed(player, card);
+    return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (player.isCorporation(this.name) && card.tags.includes(Tags.VENUS)) {
       player.addProduction(Resources.HEAT, 1, {log: true});
     }
@@ -68,7 +68,7 @@ export class Ambient extends Card implements CorporationCard {
     player.heat -= 8;
     player.increaseTerraformRating();
     // A hack that allows this action to be replayable.
-    player.game.defer(new DeferredAction(player, () => {
+    player.game.defer(new SimpleDeferredAction(player, () => {
       player.getActionsThisGeneration().delete(this.name);
       return undefined;
     }));

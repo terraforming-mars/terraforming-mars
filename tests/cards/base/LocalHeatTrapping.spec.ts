@@ -1,21 +1,22 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Fish} from '../../../src/cards/base/Fish';
 import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Helion} from '../../../src/cards/corporation/Helion';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LocalHeatTrapping', () => {
-  let card : LocalHeatTrapping; let player : Player;
+  let card: LocalHeatTrapping;
+  let player: TestPlayer;
 
   beforeEach(() => {
     card = new LocalHeatTrapping();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play without 5 heat', () => {
@@ -40,9 +41,7 @@ describe('LocalHeatTrapping', () => {
     const pets = new Pets();
     player.playedCards.push(card, pets);
 
-    const orOptions = card.play(player) as OrOptions;
-    expect(orOptions).is.not.undefined;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.play(player), OrOptions);
 
     orOptions.options[0].cb();
     expect(player.plants).to.eq(4);
@@ -58,7 +57,7 @@ describe('LocalHeatTrapping', () => {
     const fish = new Fish();
     player.playedCards.push(card, pets, fish);
 
-    const orOptions = card.play(player) as OrOptions;
+    const orOptions = cast(card.play(player), OrOptions);
     expect(player.heat).to.eq(0);
     orOptions.options[1].cb([fish]);
     expect(fish.resourceCount).to.eq(2);
@@ -67,7 +66,7 @@ describe('LocalHeatTrapping', () => {
   it('Cannot play as Helion if not enough heat left after paying for card', () => {
     const corp = new Helion();
     corp.play(player);
-    player.corporationCard = corp;
+    player.setCorporationForTest(corp);
 
     player.megaCredits = 0;
     player.heat = 5; // have to pay for card with 1 heat

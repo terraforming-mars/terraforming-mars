@@ -4,9 +4,9 @@ import {DeclareCloneTag} from '../../src/pathfinders/DeclareCloneTag';
 import {Tags} from '../../src/common/cards/Tags';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectOption} from '../../src/inputs/SelectOption';
-import {TestPlayer} from '../../tests/TestPlayer';
-import {getTestPlayer, newTestGame} from '../../tests/TestGame';
-import {TestingUtils} from '../TestingUtils';
+import {TestPlayer} from '../TestPlayer';
+import {getTestPlayer, newTestGame} from '../TestGame';
+import {cast, runAllActions} from '../TestingUtils';
 import {Game} from '../../src/Game';
 import {CrewTraining} from '../../src/cards/pathfinders/CrewTraining';
 import {MartianZoo} from '../../src/cards/colonies/MartianZoo';
@@ -26,8 +26,7 @@ describe('DeclareCloneTag', function() {
   it('sanity', function() {
     const action = new DeclareCloneTag(player, card, (t) => tag = t);
 
-    const options = action.execute();
-    expect(options).instanceOf(OrOptions);
+    const options = cast(action.execute(), OrOptions);
     const orOptions = options.options as Array<SelectOption>;
 
     expect(orOptions).has.length(3);
@@ -78,14 +77,14 @@ describe('DeclareCloneTag', function() {
     expect(martianZoo.resourceCount).eq(0);
 
 
-    const action = TestingUtils.cast(game.deferredActions.pop(), DeclareCloneTag);
-    const options = TestingUtils.cast(action!.execute(), OrOptions);
+    const action = cast(game.deferredActions.pop(), DeclareCloneTag);
+    const options = cast(action!.execute(), OrOptions);
 
     expect(options.options[0].title).to.match(/earth/);
 
     options.options[0].cb();
 
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(crewTraining.tags).deep.eq([Tags.EARTH, Tags.EARTH]);
     expect(martianZoo.resourceCount).eq(2);

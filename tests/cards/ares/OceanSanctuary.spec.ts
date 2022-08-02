@@ -6,38 +6,41 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
+import {addOcean} from '../../TestingUtils';
 
 describe('OceanSanctuary', function() {
-  let card : OceanSanctuary; let player : Player; let otherPlayer: Player; let game : Game;
+  let card: OceanSanctuary;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new OceanSanctuary();
-    player = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    player = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it('Can play', function() {
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    TestingUtils.addOcean(player);
+    addOcean(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Play', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     expect(oceanSpace.player).to.eq(player);
@@ -47,7 +50,7 @@ describe('OceanSanctuary', function() {
   });
 
   it('Ocean Sanctuary counts as ocean for adjacency', function() {
-    const oceanSpace = TestingUtils.addOcean(player);
+    const oceanSpace = addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];

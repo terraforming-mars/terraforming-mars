@@ -7,35 +7,39 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Cultural Metropolis', function() {
-  let card : CulturalMetropolis; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let card: CulturalMetropolis;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new CulturalMetropolis();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Can not play without energy production', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
 
-  it('Can\'t play without two delegate in unity or unity ruling', function() {
+  it('Can not play without two delegate in unity or unity ruling', function() {
     player.addProduction(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
-  it('Can\'t play without 2 delegates available', function() {
+  it('Can not play without 2 delegates available', function() {
     player.addProduction(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');

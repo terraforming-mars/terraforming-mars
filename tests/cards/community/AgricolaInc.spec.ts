@@ -4,21 +4,21 @@ import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
 import {AgricolaInc} from '../../../src/cards/community/AgricolaInc';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('AgricolaInc', function() {
-  let card : AgricolaInc; let player : Player;
+  let card: AgricolaInc;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AgricolaInc();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
 
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Starts with correct production', function() {

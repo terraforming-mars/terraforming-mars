@@ -1,17 +1,17 @@
 <template>
       <div :class="getClasses()">
         <div class="card-effect-box-row">
-            <div v-if="effectData.delimiter !== undefined && effectData.cause !== undefined" class="card-effect-box-content">
-                <div v-for="(rowItem, rowIndex) in effectData.cause" class="card-effect-box-item" :key="rowIndex">
+            <div v-if="delimiter !== undefined && cause !== undefined" class="card-effect-box-content">
+                <div v-for="(rowItem, rowIndex) in cause" class="card-effect-box-item" :key="rowIndex">
                   <CardRenderItemComponent v-if="isItem(rowItem)" :item="rowItem"/>
                   <CardRenderSymbolComponent v-else-if="isSymbol(rowItem)" :item="rowItem" />
                   <CardProductionBoxComponent v-else-if="isProductionBox(rowItem)" :rows="rowItem.rows" />
                   <CardRenderTileComponent v-if="isTile(rowItem)" :item="rowItem"/>
                 </div>
             </div>
-            <CardRenderSymbolComponent v-if="effectData.delimiter !== undefined" :item="effectData.delimiter" />
+            <CardRenderSymbolComponent v-if="delimiter !== undefined" :item="delimiter" />
             <div class="card-effect-box-content">
-                <div v-for="(rowItem, rowIndex) in effectData.effect" class="card-effect-box-item" :key="rowIndex">
+                <div v-for="(rowItem, rowIndex) in effect" class="card-effect-box-item" :key="rowIndex">
                     <CardRenderItemComponent v-if="isItem(rowItem)" :item="rowItem"/>
                     <CardRenderSymbolComponent v-else-if="isSymbol(rowItem)" :item="rowItem" />
                     <CardProductionBoxComponent v-else-if="isProductionBox(rowItem)" :rows="rowItem.rows" />
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <CardDescription v-if="hasDescription()" :item="effectData.description" />
+        <CardDescription v-if="description" :item="description" />
       </div>
 </template>
 
@@ -28,11 +28,10 @@
 import Vue from 'vue';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
-import {ItemType, CardRenderEffect, CardRenderProductionBox, CardRenderTile} from '@/cards/render/CardRenderer';
+import {ICardRenderEffect, isICardRenderItem, isICardRenderProductionBox} from '@/common/cards/render/Types';
 import CardProductionBoxComponent from '@/client/components/card/CardProductionBoxComponent.vue';
 import CardRenderTileComponent from '@/client/components/card/CardRenderTileComponent.vue';
-import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
-import {CardRenderItem} from '@/cards/render/CardRenderItem';
+import {isICardRenderSymbol, isICardRenderTile, ItemType} from '@/common/cards/render/Types';
 
 import CardDescription from '@/client/components/card/CardDescription.vue';
 
@@ -40,7 +39,7 @@ export default Vue.extend({
   name: 'CardRenderEffectBoxComponent',
   props: {
     effectData: {
-      type: Object as () => CardRenderEffect,
+      type: Object as () => ICardRenderEffect,
       required: true,
     },
   },
@@ -55,23 +54,28 @@ export default Vue.extend({
     getClasses(): string {
       return 'card-effect-box';
     },
-    isItem(rowItem: ItemType): rowItem is CardRenderItem {
-      return rowItem instanceof CardRenderItem;
+    isItem: isICardRenderItem,
+    isSymbol: isICardRenderSymbol,
+    isProductionBox: isICardRenderProductionBox,
+    isTile: isICardRenderTile,
+  },
+  computed: {
+    cause(): Array<ItemType> | undefined {
+      return this.effectData.rows[0];
     },
-    isSymbol(rowItem: ItemType): rowItem is CardRenderSymbol {
-      return rowItem instanceof CardRenderSymbol;
+    delimiter(): ItemType {
+      if (this.cause?.length === 0) {
+        return undefined;
+      }
+      return this.effectData.rows[1][0];
     },
-    isProductionBox(rowItem: ItemType): rowItem is CardRenderProductionBox {
-      return rowItem instanceof CardRenderProductionBox;
+    effect(): Array<ItemType> {
+      return this.effectData.rows[2];
     },
-    isTile(rowItem: ItemType): rowItem is CardRenderTile {
-      return rowItem instanceof CardRenderTile;
-    },
-    hasDescription(): boolean {
-      return this.effectData.description !== undefined;
+    description(): ItemType {
+      return this.effectData.rows[2].slice(-1)[0];
     },
   },
 });
-
 </script>
 

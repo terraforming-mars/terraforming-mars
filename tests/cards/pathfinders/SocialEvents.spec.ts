@@ -7,7 +7,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 
 // This card is only difficult when Reds are in power, so these tests set up for that.
 
@@ -68,19 +68,19 @@ describe('SocialEvents', function() {
     player.megaCredits = 10;
     player.tagsForTest = {mars: 0};
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getTerraformRating()).eq(14);
     expect(player.megaCredits).eq(10);
 
     player.tagsForTest = {mars: 1};
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getTerraformRating()).eq(15);
     expect(player.megaCredits).eq(7); // -3 MC
 
     player.tagsForTest = {mars: 3};
     card.play(player);
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
     expect(player.getTerraformRating()).eq(17);
     expect(player.megaCredits).eq(1); // -6 MC
   });

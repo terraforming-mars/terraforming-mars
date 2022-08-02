@@ -1,18 +1,21 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {JetStreamMicroscrappers} from '../../../src/cards/venusNext/JetStreamMicroscrappers';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('JetStreamMicroscrappers', function() {
-  let card : JetStreamMicroscrappers; let player : Player; let game : Game;
+  let card: JetStreamMicroscrappers;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new JetStreamMicroscrappers();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play', function() {
@@ -32,9 +35,7 @@ describe('JetStreamMicroscrappers', function() {
     expect(player.titanium).to.eq(1);
 
     // both actions possible
-    const orOptions = card.action(player) as OrOptions;
-    expect(orOptions).is.not.undefined;
-    expect(orOptions instanceof OrOptions).is.true;
+    const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

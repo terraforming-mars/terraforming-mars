@@ -8,24 +8,30 @@
         v-on:dismiss="cancelPlacement"
         v-on:hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">{{ $t(playerinput.title) }}</div>
-    <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning">{{ warning }}</span></div>
+    <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning" v-i18n>{{ warning }}</span></div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
-export default Vue.extend({
+type Refs = {
+  confirmation: InstanceType<typeof ConfirmDialog>,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'SelectSpace',
   props: {
     playerinput: {
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -109,18 +115,18 @@ export default Vue.extend({
       return spaces;
     },
     hideDialog(hide: boolean) {
-      PreferencesManager.save('hide_tile_confirmation', hide);
+      PreferencesManager.INSTANCE.set('hide_tile_confirmation', hide);
     },
     onTileSelected(tile: HTMLElement) {
       this.selectedTile = tile;
       this.disableAvailableSpaceAnimation();
       this.animateSpace(tile, true);
       tile.classList.remove('board-space--available');
-      const hideTileConfirmation = PreferencesManager.loadBoolean('hide_tile_confirmation');
+      const hideTileConfirmation = getPreferences().hide_tile_confirmation;
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {
-        (this.$refs['confirmation'] as any).show();
+        this.$refs.confirmation.show();
       }
     },
     saveData() {

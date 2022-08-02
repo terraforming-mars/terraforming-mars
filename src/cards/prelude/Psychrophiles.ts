@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,7 +17,7 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
       name: CardName.PSYCHROPHILES,
       tags: [Tags.MICROBE],
       cost: 2,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
 
       requirements: CardRequirements.builder((b) => b.temperature(-20, {max})),
       metadata: {

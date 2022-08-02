@@ -468,6 +468,8 @@ export enum CardName {
     BACTOVIRAL_RESEARCH = 'Bactoviral Research',
     HARVEST = 'Harvest',
     OUTDOOR_SPORTS = 'Outdoor Sports',
+    NEW_PARTNER = 'New Partner',
+    MERGER = 'Merger',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -740,10 +742,10 @@ export enum CardName {
     AURORAI = 'Aurorai',
     COLLEGIUM_COPERNICUS = 'Collegium Copernicus',
     ROBIN_HAULINGS = 'Robin Haulings',
-    ODYSSEY_EFFECT = 'Odyssey Effect',
+    ODYSSEY = 'Odyssey',
     GAGARIN_MOBILE_BASE = 'Gagarin Mobile Base',
     MARS_FRONTIER_ALLIANCE = 'Mars Frontier Alliance',
     MIND_SET_MARS = 'Mind Set Mars',
-    HABITAT_MARTAE = 'Habitat Martae',
+    HABITAT_MARTE = 'Habitat Marte',
     ADHAI_HIGH_ORBIT_CONSTRUCTIONS = 'Adhai High Orbit Constructions',
 }

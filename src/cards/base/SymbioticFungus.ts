@@ -1,11 +1,11 @@
 import {Tags} from '../../common/cards/Tags';
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -37,7 +37,7 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
     return true;
   }
   public action(player: Player) {
-    const availableCards = player.getResourceCards(ResourceType.MICROBE);
+    const availableCards = player.getResourceCards(CardResource.MICROBE);
     if (availableCards.length === 0) return undefined;
 
     if (availableCards.length === 1) {
@@ -45,8 +45,8 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add microbe', 'Add microbe', availableCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {log: true});
+    return new SelectCard('Select card to add microbe', 'Add microbe', availableCards, ([card]) => {
+      player.addResourceTo(card, {log: true});
       return undefined;
     });
   }

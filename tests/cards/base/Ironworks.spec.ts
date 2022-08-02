@@ -2,19 +2,21 @@ import {expect} from 'chai';
 import {Ironworks} from '../../../src/cards/base/Ironworks';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Ironworks', function() {
-  let card : Ironworks; let player : Player; let game : Game;
+  let card: Ironworks;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Ironworks();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t act without enough energy', function() {
+  it('Can not act without enough energy', function() {
     player.energy = 3;
     expect(card.canAct(player)).is.not.true;
   });

@@ -83,4 +83,26 @@ describe('EconomicHelp', function() {
       vps: [],
     });
   });
+
+  it('Play - ignore maximized tracks', function() {
+    game.pathfindersData = {
+      venus: 18,
+      earth: 18,
+      mars: 18,
+      jovian: 15,
+      moon: -1,
+      vps: [],
+    };
+
+    card.play(player);
+
+    expect(game.pathfindersData).deep.eq({
+      venus: 18,
+      earth: 21,
+      mars: 18,
+      jovian: 15,
+      moon: -1,
+      vps: [],
+    });
+  });
 });

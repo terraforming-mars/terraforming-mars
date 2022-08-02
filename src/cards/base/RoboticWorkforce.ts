@@ -34,13 +34,13 @@ export class RoboticWorkforce extends Card implements IProjectCard {
   }
 
   private isCardApplicable(card: ICard, player: Player): boolean {
-    if (!card.tags.includes(Tags.BUILDING)) {
+    if (!card.tags.includes(Tags.BUILDING) && !card.tags.includes(Tags.WILD)) {
       return false;
     }
     if (card.name === CardName.BIOMASS_COMBUSTORS) {
-      return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+      return player.canReduceAnyProduction(Resources.PLANTS, 1);
     } else if (card.name === CardName.HEAT_TRAPPERS) {
-      return player.game.someoneCanHaveProductionReduced(Resources.HEAT, 2);
+      return player.canReduceAnyProduction(Resources.HEAT, 2);
     } else if (card.name === CardName.GYROPOLIS) {
       return player.getProduction(Resources.ENERGY) >= 2;
     } else if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
@@ -55,12 +55,10 @@ export class RoboticWorkforce extends Card implements IProjectCard {
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
-    const availableCards: Array<ICard> = player.playedCards.filter((card) => this.isCardApplicable(card, player));
-    if (player.corporationCard !== undefined && this.isCardApplicable(player.corporationCard, player)) {
-      availableCards.push(player.corporationCard);
-    }
-
-    return availableCards;
+    return [
+      ...player.playedCards.filter((card) => this.isCardApplicable(card, player)),
+      ...player.corporations.filter((card) => this.isCardApplicable(card, player)),
+    ];
   }
 
   public play(player: Player) {
@@ -70,9 +68,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select builder card to copy', 'Copy', availableCards, (selectedCards: Array<ICard>) => {
-      const card: ICard = selectedCards[0];
-
+    return new SelectCard('Select builder card to copy', 'Copy', availableCards, ([card]) => {
       player.game.log('${0} copied ${1} production with ${2}', (b) =>
         b.player(player).card(card).card(this));
 

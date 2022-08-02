@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusGovernor', function() {
   it('Should play', function() {
     const card = new VenusGovernor();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;

@@ -23,6 +23,21 @@ import {Botanist} from './Botanist';
 import {Coordinator} from './Coordinator';
 import {Zoologist} from './Zoologist';
 import {Manufacturer} from './Manufacturer';
+import {Adapter} from './Adapter';
+import {Edgedancer} from './Edgedancer';
+import {Hoarder} from './Hoarder';
+import {Naturalist} from './Naturalist';
+import {Voyager} from './Voyager';
+import {Curator} from './amazonisPlanitia/Curator';
+import {Engineer} from './amazonisPlanitia/Engineer';
+import {Historian} from './amazonisPlanitia/Historian';
+import {Tourist} from './amazonisPlanitia/Tourist';
+import {Biologist} from './terraCimmeria/Biologist';
+import {Economizer} from './terraCimmeria/Economizer';
+import {Politician} from './terraCimmeria/Politician';
+import {Urbanist} from './terraCimmeria/Urbanist';
+import {Warmonger} from './terraCimmeria/Warmonger';
+import {Zoologist2} from './amazonisPlanitia/Zoologist';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -61,12 +76,36 @@ export const MOON_AWARDS: Array<IAward> = [
   new LunarMagnate(),
 ];
 
+export const AMAZONIS_PLANITIA_AWARDS: Array<IAward> = [
+  new Curator(),
+  new Engineer(),
+  new Historian(),
+  new Tourist(),
+  new Zoologist2(),
+];
+
 export const ARABIA_TERRA_AWARDS = [
   new CosmicSettler(),
   new Botanist(),
   new Coordinator(),
   new Zoologist(),
   new Manufacturer(),
+];
+
+export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
+  new Biologist(),
+  new Economizer(),
+  new Politician(),
+  new Urbanist(),
+  new Warmonger(),
+];
+
+export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
+  new Adapter(),
+  new Edgedancer(),
+  new Hoarder(),
+  new Naturalist(),
+  new Voyager(),
 ];
 
 export const ALL_AWARDS: Array<IAward> = [
@@ -76,7 +115,11 @@ export const ALL_AWARDS: Array<IAward> = [
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
   ...MOON_AWARDS,
-  ...ARABIA_TERRA_AWARDS];
+  ...AMAZONIS_PLANITIA_AWARDS,
+  ...ARABIA_TERRA_AWARDS,
+  ...TERRA_CIMMERIA_AWARDS,
+  ...VASTITAS_BOREALIS_AWARDS,
+];
 
 export namespace Awards {
   export const ALL = ALL_AWARDS;

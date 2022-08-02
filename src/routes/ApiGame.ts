@@ -1,8 +1,9 @@
 import * as http from 'http';
-import {Game} from '../Game';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Server} from '../models/ServerModel';
+import {isGameId} from '../common/Types';
+import {Game} from '../Game';
 
 export class ApiGame extends Handler {
   public static readonly INSTANCE = new ApiGame();
@@ -10,20 +11,22 @@ export class ApiGame extends Handler {
     super();
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const gameId = ctx.url.searchParams.get('id');
     if (!gameId) {
-      ctx.route.notFound(req, res, 'id parameter missing');
+      ctx.route.badRequest(req, res, 'missing id parameter');
       return;
     }
 
-    ctx.gameLoader.getByGameId(gameId, false, (game: Game | undefined) => {
-      if (game === undefined) {
-        ctx.route.notFound(req, res, 'game not found');
-        return;
-      }
-      const model = Server.getSimpleGameModel(game);
-      ctx.route.writeJson(res, model);
-    });
+    let game: Game | undefined;
+    if (isGameId(gameId)) {
+      game = await ctx.gameLoader.getGame(gameId);
+    }
+    if (game === undefined) {
+      ctx.route.notFound(req, res, 'game not found');
+      return;
+    }
+    const model = Server.getSimpleGameModel(game);
+    ctx.route.writeJson(res, model);
   }
 }

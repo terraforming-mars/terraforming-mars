@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
@@ -24,7 +24,7 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: 'Pf01',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 plant to add 1 animal to any card.', (eb) => {
+          b.action('Spend 1 plant to add 1 animal to ANY card.', (eb) => {
             eb.plants(1).startAction.animals(1);
           });
           b.br;
@@ -36,17 +36,17 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
   }
 
   public canAct(player: Player) {
-    return player.plants > 0 && player.getResourceCards(ResourceType.ANIMAL).length > 0;
+    return player.plants > 0 && player.getResourceCards(CardResource.ANIMAL).length > 0;
   }
 
   public action(player: Player) {
     return new SelectCard(
       'Select a card to gain an animal resource',
       'Spend 1 plant',
-      player.getResourceCards(ResourceType.ANIMAL),
-      (cards) => {
-        player.addResource(Resources.PLANTS, -1);
-        player.addResourceTo(cards[0], {log: true});
+      player.getResourceCards(CardResource.ANIMAL),
+      ([card]) => {
+        player.deductResource(Resources.PLANTS, 1);
+        player.addResourceTo(card, {log: true});
         return undefined;
       });
   }

@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {AcquiredSpaceAgency} from './AcquiredSpaceAgency';
 import {AlliedBanks} from './AlliedBanks';
@@ -50,7 +49,7 @@ import {ValleyTrust} from './ValleyTrust';
 import {Vitor} from './Vitor';
 
 export const PRELUDE_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Prelude,
+  module: 'prelude',
   projectCards: [
     {cardName: CardName.SF_MEMORIAL, Factory: SFMemorial},
     {cardName: CardName.HOUSE_PRINTING, Factory: HousePrinting},

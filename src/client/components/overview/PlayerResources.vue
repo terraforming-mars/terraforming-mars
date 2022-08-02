@@ -30,7 +30,7 @@ export default Vue.extend({
   },
   methods: {
     canUseHeatAsMegaCredits(): boolean {
-      return this.player.corporationCard?.name === CardName.HELION;
+      return this.player.tableau.some((card) => card.name === CardName.HELION);
     },
   },
   components: {

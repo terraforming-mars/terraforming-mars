@@ -1,42 +1,31 @@
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
+import {ICardRenderDynamicVictoryPoints} from '../../common/cards/render/ICardRenderDynamicVictoryPoints';
 import {CardRenderItem} from './CardRenderItem';
 import {Size} from '../../common/cards/render/Size';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 
 const RESOURCE_TO_ITEM_TYPE = new Map([
-  [ResourceType.MICROBE, CardRenderItemType.MICROBES],
-  [ResourceType.ANIMAL, CardRenderItemType.ANIMALS],
-  [ResourceType.CAMP, CardRenderItemType.CAMPS],
-  [ResourceType.DATA, CardRenderItemType.DATA_RESOURCE],
-  [ResourceType.SCIENCE, CardRenderItemType.SCIENCE],
-  [ResourceType.RESOURCE_CUBE, CardRenderItemType.RESOURCE_CUBE],
-  [ResourceType.PRESERVATION, CardRenderItemType.PRESERVATION],
-  [ResourceType.ASTEROID, CardRenderItemType.ASTEROIDS],
-  [ResourceType.FIGHTER, CardRenderItemType.FIGHTER],
-  [ResourceType.FLOATER, CardRenderItemType.FLOATERS],
-  [ResourceType.VENUSIAN_HABITAT, CardRenderItemType.VENUSIAN_HABITAT],
-  [ResourceType.SPECIALIZED_ROBOT, CardRenderItemType.SPECIALIZED_ROBOT],
+  [CardResource.MICROBE, CardRenderItemType.MICROBES],
+  [CardResource.ANIMAL, CardRenderItemType.ANIMALS],
+  [CardResource.CAMP, CardRenderItemType.CAMPS],
+  [CardResource.DATA, CardRenderItemType.DATA_RESOURCE],
+  [CardResource.SCIENCE, CardRenderItemType.SCIENCE],
+  [CardResource.RESOURCE_CUBE, CardRenderItemType.RESOURCE_CUBE],
+  [CardResource.PRESERVATION, CardRenderItemType.PRESERVATION],
+  [CardResource.ASTEROID, CardRenderItemType.ASTEROIDS],
+  [CardResource.FIGHTER, CardRenderItemType.FIGHTER],
+  [CardResource.FLOATER, CardRenderItemType.FLOATERS],
+  [CardResource.VENUSIAN_HABITAT, CardRenderItemType.VENUSIAN_HABITAT],
+  [CardResource.SPECIALIZED_ROBOT, CardRenderItemType.SPECIALIZED_ROBOT],
 ]);
 
-export class CardRenderDynamicVictoryPoints {
+export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
   public anyPlayer: boolean = false; // Law Suit
   constructor(public item: CardRenderItem | undefined, public points: number, public target: number) {}
 
-  public getPointsHtml(): string {
-    if (this.item === undefined && this.points === 0 && this.target === 0) return '?';
-    if (this.item === undefined) return `${this.points}`;
-    if (this.target === this.points || this.target === 1) return `${this.points}/`;
-    return `${this.points}/${this.target}`;
-  }
-  public static asteroids(points: number, target: number): CardRenderDynamicVictoryPoints {
-    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), points, target);
-  }
-
-  // Remove all of the builder methods; they're no longer necessary. Keep some
-  // version of the tests, though.
-  public static resource(type: ResourceType, points: number, target: number): CardRenderDynamicVictoryPoints {
+  public static resource(type: CardResource, points: number, target: number): CardRenderDynamicVictoryPoints {
     const itemType = RESOURCE_TO_ITEM_TYPE.get(type);
     if (itemType === undefined) {
       throw new Error('Unknown item type ' + type);

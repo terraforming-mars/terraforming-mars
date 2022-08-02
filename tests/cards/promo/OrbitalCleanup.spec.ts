@@ -6,18 +6,19 @@ import {OrbitalCleanup} from '../../../src/cards/promo/OrbitalCleanup';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('OrbitalCleanup', function() {
-  let card : OrbitalCleanup; let player : Player;
+  let card: OrbitalCleanup;
+  let player: Player;
 
   beforeEach(function() {
     card = new OrbitalCleanup();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
   });
 
-  it('Can\'t play if cannot decrease MC production', function() {
+  it('Can not play if cannot decrease MC production', function() {
     player.addProduction(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });

@@ -3,26 +3,26 @@ import {WavePower} from '../../../src/cards/base/WavePower';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {maxOutOceans} from '../../TestingUtils';
 
 describe('WavePower', function() {
-  let card : WavePower; let player : TestPlayer;
+  let card: WavePower;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new WavePower();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
-    TestingUtils.maxOutOceans(player, 2);
+  it('Can not play', function() {
+    maxOutOceans(player, 2);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    TestingUtils.maxOutOceans(player, 3);
+    maxOutOceans(player, 3);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

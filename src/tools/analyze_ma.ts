@@ -3,7 +3,7 @@ require('dotenv').config();
 import * as http from 'http';
 import * as fs from 'fs';
 import {MilestoneAwardSelector} from '../MilestoneAwardSelector';
-import {GameOptions} from '../Game';
+import {GameOptions} from '../GameOptions';
 import {BoardName} from '../common/boards/BoardName';
 import {AgendaStyle} from '../common/turmoil/Types';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
@@ -107,6 +107,7 @@ function simpleGameOptions(): GameOptions {
     solarPhaseOption: false,
     removeNegativeGlobalEventsOption: false,
     draftVariant: false,
+    corporationsDraft: false,
     initialDraftVariant: false,
     startingCorporations: 0,
     shuffleMapOption: false,

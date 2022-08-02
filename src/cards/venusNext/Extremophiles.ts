@@ -1,8 +1,8 @@
-import {ICard, IActionCard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -17,7 +17,7 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS, Tags.MICROBE],
       cost: 3,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 3),
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
@@ -44,7 +44,7 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
   }
 
   public action(player: Player) {
-    const microbeCards = player.getResourceCards(ResourceType.MICROBE);
+    const microbeCards = player.getResourceCards(CardResource.MICROBE);
     if (microbeCards.length === 1) {
       player.addResourceTo(this, {log: true});
       return undefined;
@@ -54,8 +54,8 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
       'Select card to add 1 microbe',
       'Add microbe',
       microbeCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

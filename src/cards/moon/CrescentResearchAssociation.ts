@@ -3,12 +3,12 @@ import {Player} from '../../Player';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 
-export class CrescentResearchAssociation extends Card implements CorporationCard {
+export class CrescentResearchAssociation extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -35,7 +35,7 @@ export class CrescentResearchAssociation extends Card implements CorporationCard
     return undefined;
   }
 
-  public getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: Player, card: IProjectCard) {
     if (card.tags.indexOf(Tags.MOON) === -1) {
       return 0;
     }

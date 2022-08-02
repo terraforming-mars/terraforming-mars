@@ -29,7 +29,7 @@ export class CloudSeeding extends Card implements IProjectCard {
   }
   public override canPlay(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) > -5 &&
-        player.game.someoneCanHaveProductionReduced(Resources.HEAT, 1);
+    player.canReduceAnyProduction(Resources.HEAT, 1);
   }
 
   public play(player: Player) {

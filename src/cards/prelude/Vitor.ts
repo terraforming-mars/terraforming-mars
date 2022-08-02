@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -10,7 +10,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Vitor extends Card implements CorporationCard {
+export class Vitor extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

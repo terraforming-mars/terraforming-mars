@@ -131,9 +131,7 @@ export class MoonExpansion {
       // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
       // it's not a problem until it is.
-      if (player.corporationCard !== undefined && player.corporationCard.onTilePlaced !== undefined) {
-        player.corporationCard.onTilePlaced(player, player, space, BoardType.MOON);
-      }
+      player.corporations.forEach((card) => card.onTilePlaced?.(player, player, space, BoardType.MOON));
     });
   }
 
@@ -237,6 +235,30 @@ export class MoonExpansion {
     }
   }
 
+  public static lowerMiningRate(player: Player, count: number) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      const increment = Math.min(moonData.miningRate, count);
+      moonData.miningRate -= increment;
+      player.game.log('${0} lowered the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+    });
+  }
+
+  public static lowerColonyRate(player: Player, count: number) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      const increment = Math.min(moonData.colonyRate, count);
+      moonData.colonyRate -= increment;
+      player.game.log('${0} lowered the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+    });
+  }
+
+  public static lowerLogisticRate(player: Player, count: number) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      const increment = Math.min(moonData.logisticRate, count);
+      moonData.logisticRate -= increment;
+      player.game.log('${0} lowered the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
+    });
+  }
+
   // Use this to test whether a space has a given moon tile type rather than
   // testing tiletype directly. It takes into account Lunar Mine Urbanization.
   public static spaceHasType(space: ISpace, type: TileType): boolean {
@@ -280,7 +302,7 @@ export class MoonExpansion {
           }
 
           if (include && options?.ownedBy !== undefined) {
-            include = space.player === options?.ownedBy;
+            include = space.player === options.ownedBy;
           }
 
           return include;

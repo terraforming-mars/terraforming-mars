@@ -6,12 +6,12 @@ import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {Game} from '../../../src/Game';
 import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Tags} from '../../../src/common/cards/Tags';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src//deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src//inputs/SelectPartyToSendDelegate';
+import {cast} from '../../TestingUtils';
 
 describe('LobbyHalls', function() {
   let card: LobbyHalls;
@@ -61,8 +61,7 @@ describe('LobbyHalls', function() {
   });
 
   function assertCloneTagAction(action: DeferredAction) {
-    expect(action).instanceOf(DeclareCloneTag);
-    const options = action!.execute() as OrOptions;
+    const options = cast(action, DeclareCloneTag).execute();
     options.options[0].cb();
     expect(card.tags).deep.eq([Tags.EARTH, Tags.BUILDING]);
   }

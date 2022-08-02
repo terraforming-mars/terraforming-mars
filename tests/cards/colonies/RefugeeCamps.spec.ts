@@ -2,14 +2,15 @@ import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/cards/colonies/RefugeeCamps';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RefugeeCamps', function() {
-  let card : RefugeeCamps; let player : Player;
+  let card: RefugeeCamps;
+  let player: Player;
 
   beforeEach(function() {
     card = new RefugeeCamps();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
   it('Should play', function() {
@@ -20,7 +21,7 @@ describe('RefugeeCamps', function() {
     expect(card.getVictoryPoints()).to.eq(5);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canAct(player)).is.not.true;
   });

@@ -2,17 +2,18 @@ import {expect} from 'chai';
 import {Loan} from '../../../src/cards/prelude/Loan';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Loan', function() {
-  let card : Loan; let player : Player;
+  let card: Loan;
+  let player: Player;
 
   beforeEach(function() {
     card = new Loan();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     player.addProduction(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });

@@ -3,13 +3,13 @@ import {ExperimentalForest} from '../../../src/cards/prelude/ExperimentalForest'
 import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ExperimentalForest', function() {
   it('Should play', function() {
     const card = new ExperimentalForest();
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player);
     card.play(player);
 
     // Select Greenery space

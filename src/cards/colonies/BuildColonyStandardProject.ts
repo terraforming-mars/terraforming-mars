@@ -22,11 +22,9 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   }
 
   protected override discount(player: Player): number {
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS)) {
-      const adhaiDiscount = Math.floor((player.corporationCard?.resourceCount ?? 0) / 2);
-      return adhaiDiscount + super.discount(player);
-    }
-    return super.discount(player);
+    const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
+    const adhaiDiscount = Math.floor((adhai?.resourceCount ?? 0) / 2);
+    return adhaiDiscount + super.discount(player);
   }
 
   private getOpenColonies(player: Player) {

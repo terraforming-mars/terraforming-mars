@@ -2,16 +2,16 @@ import {expect} from 'chai';
 import {LunaMetropolis} from '../../../src/cards/venusNext/LunaMetropolis';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LunaMetropolis', function() {
   it('Should play', function() {
     const card = new LunaMetropolis();
-    const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    const player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    const gameOptions = setCustomGameOptions();
+    Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
 
     const action = card.play(player);
     expect(action).is.undefined;

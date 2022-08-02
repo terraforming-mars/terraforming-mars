@@ -15,6 +15,7 @@ import Bonus from '@/client/components/Bonus.vue';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType} from '@/common/TileType';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],
@@ -118,7 +119,7 @@ export default Vue.extend({
         return 'Deimos Down';
       case TileType.CITY:
         if (this.space.spaceType === SpaceType.COLONY) {
-          return 'City in space. No VP.';
+          return 'City in space.';
         } else {
           return 'City: 1 VP per adjacent greenery';
         }
@@ -206,7 +207,7 @@ export default Vue.extend({
           css += ' board-space-type-ocean';
         } else if (this.space.spaceType === SpaceType.COVE) {
           css += ' board-space-type-cove';
-        } else {
+        } else if (!this.space.bonus.includes(SpaceBonus.RESTRICTED)) {
           css += ` board-space-type-land`;
 
           const highlight = this.space.highlight;

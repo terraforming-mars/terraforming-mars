@@ -8,7 +8,7 @@ import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {ICard} from '../ICard';
 
 export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
@@ -24,12 +24,12 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
         cardNumber: 'Pf24',
         renderData: CardRenderer.builder((b) => {
           b.titanium(3).br;
-          b.wild(1).asterix().data().cards(1);
+          b.wild(1).asterix().data().asterix().cards(1);
         }),
         // Nerfed by disallowing science resources (rather than the one The Moon does just to keep the text smaller.)
         description: 'Requires 4 space tags. Gain 3 titanium. ' +
-          'Add 1 resource to any card (not cards that take ANIMAL or SCIENCE resources.) ' +
-          'Add 1 data to any card. Draw 1 card.',
+          'Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) ' +
+          'Add 1 data to ANY card. Draw 1 card.',
       },
     });
   }
@@ -43,11 +43,11 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
         {
           count: 1,
           filter: (card: ICard) => {
-            return card.resourceType !== undefined && card.resourceType !== ResourceType.SCIENCE && !card.tags.includes(Tags.ANIMAL);
+            return card.resourceType !== undefined && card.resourceType !== CardResource.SCIENCE && !card.tags.includes(Tags.ANIMAL);
           },
         },
       ));
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 1}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     player.drawCard();
     return undefined;
   }

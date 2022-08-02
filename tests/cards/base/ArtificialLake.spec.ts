@@ -6,26 +6,26 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {
-  let card : ArtificialLake; let player : TestPlayer; let game : Game;
+  let card: ArtificialLake;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new ArtificialLake();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
         action!.availableSpaces.forEach((space) => {
           expect(space.spaceType).to.eq(SpaceType.LAND);
@@ -82,7 +82,7 @@ describe('ArtificialLake', function() {
 
   it('Can still play if oceans are maxed but no land spaces are available', function() {
     (game as any).temperature = -6;
-    TestingUtils.maxOutOceans(player);
+    maxOutOceans(player);
 
     // Take all land spaces
     const spaces = game.board.getAvailableSpacesOnLand(player);

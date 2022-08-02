@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -42,7 +42,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
   }
 
   public action(player: Player) {
-    const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
+    const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
     player.deductResource(Resources.ENERGY, 2);
 
 
@@ -73,8 +73,8 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
         'Select card to add 1 animal',
         'Add animal',
         availableAnimalCards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {log: true});
+        ([card]) => {
+          player.addResourceTo(card, {log: true});
           return undefined;
         },
       ),

@@ -29,7 +29,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
     });
   }
 
-  private isReplaceableDelegate(delegate: PlayerId | NeutralPlayer, player: Player, party: IParty) {
+  private isReplaceableDelegate(delegate: PlayerId | NeutralPlayer, player: Player, party: IParty): delegate is PlayerId {
     return delegate !== player.id && delegate !== 'NEUTRAL' && delegate !== party.partyLeader;
   }
 
@@ -78,7 +78,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
           const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
             const source = turmoil.hasDelegatesInReserve(player.id) ? 'reserve' : 'lobby';
             turmoil.replaceDelegateFromParty(delegate, player.id, source, party.name, game);
-            turmoil.checkDominantParty(party); // Check dominance right after replacement (replace doesn't check dominance.)
+            turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
             return this.moveToAnotherParty(game, party.name, player.id);
           });
           orOptions.options.push(option);

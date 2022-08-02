@@ -3,14 +3,14 @@ import {Game} from '../../src/Game';
 import {EstateDealer} from '../../src/awards/EstateDealer';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 
 describe('EstateDealer', function() {
   it('Correctly counts ocean tiles', function() {
     const award = new EstateDealer();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player);
 
     game.addOceanTile(player2, '34'); // Normal ocean tile
     expect(award.getScore(player)).to.eq(0);
@@ -29,9 +29,9 @@ describe('EstateDealer', function() {
 
   it('Correctly counts Ares upgraded oceans', function() {
     const award = new EstateDealer();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player);
 
     game.addOceanTile(player2, '34');
     game.board.getSpace('34').tile!.tileType = TileType.OCEAN_CITY; // Upgraded ocean tile

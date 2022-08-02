@@ -4,27 +4,29 @@ import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/boards/ISpace';
 import {SpaceType} from '../../src/common/boards/SpaceType';
-import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {Board} from '../../src/boards/Board';
 import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {Random} from '../../src/Random';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/Game';
+import {SeededRandom} from '../../src/Random';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/GameOptions';
 import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {
-  let board : OriginalBoard; let player : Player; let player2 : Player;
+  let board: OriginalBoard;
+  let player: Player;
+  let player2: Player;
 
   beforeEach(function() {
-    board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
+    board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
 
     // Rather than create a whole game around this test, I'm mocking data to make the tests pass.
     const gameOptions: Partial<GameOptions> = {pathfindersExpansion: false};
-    (player as any)._game = {gameOptions};
-    (player2 as any)._game = {gameOptions};
+    (player as any).game = {gameOptions};
+    (player2 as any).game = {gameOptions};
   });
 
   it('getSpace', () => {
@@ -126,7 +128,7 @@ describe('Board', function() {
       ['69', []],
     ]);
     board.spaces.forEach((space) => {
-      const expected = expectedAdjacentSpaces.get(space.id)!;
+      const expected = expectedAdjacentSpaces.get(space.id);
       const actual = board.getAdjacentSpaces(space).map((s) => s.id);
       expect(expected).to.eql(actual);
     });
@@ -144,19 +146,19 @@ describe('Board', function() {
     // Filter changes available spaces.
     expect(board.getNthAvailableLandSpace(3, 1, undefined /* player */, (s) => s.id !== '09').id).eq('10');
 
-        // Filter player tokens (I'm looking at you, Land Claim)
-        board.spaces.find((s) => s.id === '05')!.player = player;
-        expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
-        expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
+    // Filter player tokens (I'm looking at you, Land Claim)
+    board.getSpace('05').player = player;
+    expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
+    expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
 
-        // bottom ends at 63 and looks like this
-        //
-        //  l l l l l l
-        //   l l l l o
-        expect(board.getNthAvailableLandSpace(0, -1).id).eq('62');
-        expect(board.getNthAvailableLandSpace(1, -1).id).eq('61');
-        expect(board.getNthAvailableLandSpace(2, -1).id).eq('60');
-        expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
+    // bottom ends at 63 and looks like this
+    //
+    //  l l l l l l
+    //   l l l l o
+    expect(board.getNthAvailableLandSpace(0, -1).id).eq('62');
+    expect(board.getNthAvailableLandSpace(1, -1).id).eq('61');
+    expect(board.getNthAvailableLandSpace(2, -1).id).eq('60');
+    expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
   });
 
   it('getNthAvailableLandSpace throws if no spaces available', function() {
@@ -259,18 +261,6 @@ describe('Board', function() {
     public constructor(spaces: Array<ISpace>) {
       super(spaces);
     }
-
-    public getSpaceById(id: string): ISpace | undefined {
-      return this.spaces.find((space) => space.id === id);
-    }
-
-    public getVolcanicSpaceIds(): Array<string> {
-      return [];
-    }
-
-    public getNoctisCitySpaceIds(): Array<string> {
-      return [];
-    }
   }
 
   it('deserialize', () => {
@@ -279,13 +269,13 @@ describe('Board', function() {
         {
           'id': '01',
           'spaceType': 'colony', 'bonus': [],
-          'x': -1, 'y': -1, 'player': 'name-1-id',
+          'x': -1, 'y': -1, 'player': 'p-name-1-id',
           'tile': {'tileType': 2},
         },
         {
           'id': '03',
           'spaceType': 'land', 'bonus': [1, 1],
-          'x': 4, 'y': 0, 'player': 'name-2-id',
+          'x': 4, 'y': 0, 'player': 'p-name-2-id',
           'tile': {'tileType': 0},
         },
         {
@@ -301,58 +291,23 @@ describe('Board', function() {
         },
       ],
     };
-    const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
-    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
+    const player1 = new Player('name-1', Color.RED, false, 0, 'p-name-1-id');
+    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'p-name-2-id');
 
     const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
-    expect(board.getSpaceById('01')!.player).eq(player1);
-    expect(board.getSpaceById('03')!.player).eq(player2);
-  });
-
-  it('Deserializing Noctis City without a space type gives it a space type.', () => {
-    const boardJson = {
-      'spaces': [
-        {
-          'id': '01',
-          'spaceType': 'colony', 'bonus': [],
-          'x': -1, 'y': -1, 'player': 'name-1-id',
-          'tile': {'tileType': 2},
-        },
-        {
-          'id': '03',
-          'spaceType': 'land', 'bonus': [1, 1],
-          'x': 4, 'y': 0, 'player': 'name-2-id',
-          'tile': {'tileType': 0},
-        },
-        {
-          'id': '04',
-          'spaceType': 'ocean', 'bonus': [1, 1],
-          'x': 5, 'y': 0,
-          'tile': {'tileType': 1},
-        },
-        {
-          'id': '31',
-          'spaceType': undefined, 'bonus': [],
-          'x': 6, 'y': 0,
-        },
-      ],
-    };
-    const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
-    const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
-
-    const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
-    expect(board.getSpaceById('31')!.spaceType).eq(SpaceType.LAND);
+    expect(board.getSpace('01').player).eq(player1);
+    expect(board.getSpace('03').player).eq(player2);
   });
 
   it('Randomized maps have space types on all spaces, #4056', () => {
     const spaces = new MultiSet<string>();
-    for (let idx = 0; idx < 5_000; idx++) {
+    for (let idx = 0; idx < 4_000; idx++) {
       const seed = Math.random();
       board = OriginalBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,
         shuffleMapOption: true,
       },
-      new Random(seed));
+      new SeededRandom(seed));
       for (const space of board.spaces) {
         if (space.spaceType === undefined) {
           console.log(`Bad seed ${seed}`);

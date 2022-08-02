@@ -8,7 +8,7 @@ import {IActionCard, VictoryPoints} from '../ICard';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 
 export class Anthozoa extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -18,7 +18,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
       cost: 9,
       tags: [Tags.PLANT, Tags.ANIMAL, Tags.MARS],
       requirements: CardRequirements.builder((b) => b.oceans(3)),
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),
 
       metadata: {
@@ -40,7 +40,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.PLANTS, -1);
+    player.deductResource(Resources.PLANTS, 1);
     player.addResourceTo(this);
     player.game.log('${0} spent 1 plant to place an animal on ${1}.', (b) => b.player(player).card(this));
     return undefined;

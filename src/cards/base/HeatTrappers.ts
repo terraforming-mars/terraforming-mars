@@ -32,7 +32,7 @@ export class HeatTrappers extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.game.someoneCanHaveProductionReduced(Resources.HEAT, 2);
+    return player.canReduceAnyProduction(Resources.HEAT, 2);
   }
 
   public produce(player: Player) {

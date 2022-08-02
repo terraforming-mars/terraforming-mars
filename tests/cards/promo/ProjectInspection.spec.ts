@@ -7,26 +7,27 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('ProjectInspection', function() {
-  let card : ProjectInspection; let player : Player; let restrictedArea: RestrictedArea;
+  let card: ProjectInspection;
+  let player: TestPlayer;
+  let restrictedArea: RestrictedArea;
 
   beforeEach(function() {
     card = new ProjectInspection();
-    player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
     restrictedArea = new RestrictedArea();
   });
 
-  it('Can\'t play if no actions played this turn', function() {
+  it('Can not play if no actions played this turn', function() {
     player.playedCards.push(restrictedArea);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if available actions can\'t act', function() {
+  it('Can not play if available actions can not act', function() {
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
     player.megaCredits = 1;
@@ -44,9 +45,9 @@ describe('ProjectInspection', function() {
     expect(play instanceof SelectCard).is.true;
   });
 
-  it('Can\'t play with Playwrights if there\'s no other card to chain', function() {
+  it('Can not play with Playwrights if there\'s no other card to chain', function() {
     const playwrights = new Playwrights();
-    player.corporationCard = playwrights;
+    player.setCorporationForTest(playwrights);
 
     player.addActionThisGeneration(playwrights.name);
     expect(card.canPlay(player)).is.false; // PI -> PW -> ???
@@ -55,7 +56,7 @@ describe('ProjectInspection', function() {
   it('Can be used to play Playwrights into another available event card', function() {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
-    player.corporationCard = playwrights;
+    player.setCorporationForTest(playwrights);
     player.playedCards.push(indenturedWorkers);
     player.addActionThisGeneration(playwrights.name);
     expect(card.canPlay(player)).is.true; // PI -> PW -> PI -> PW -> IW
@@ -87,7 +88,7 @@ describe('ProjectInspection', function() {
 
   it('Can be played by Playwrights into different blue card', function() {
     const playwrights = new Playwrights();
-    player.corporationCard = playwrights;
+    player.setCorporationForTest(playwrights);
     player.playedCards.push(card);
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
@@ -111,7 +112,7 @@ describe('ProjectInspection', function() {
   it('Can be played by Playwrights into Playwrights into another available event card', function() {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
-    player.corporationCard = playwrights;
+    player.setCorporationForTest(playwrights);
     player.playedCards.push(card);
     player.playedCards.push(indenturedWorkers);
     player.addActionThisGeneration(playwrights.name);

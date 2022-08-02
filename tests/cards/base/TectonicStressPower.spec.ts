@@ -3,17 +3,17 @@ import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {TectonicStressPower} from '../../../src/cards/base/TectonicStressPower';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('TectonicStressPower', function() {
-  let card : TectonicStressPower; let player : TestPlayer;
+  let card: TectonicStressPower;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new TectonicStressPower();
-    player = TestPlayers.BLUE.newPlayer();
+    player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

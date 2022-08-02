@@ -3,6 +3,7 @@ import * as http from 'http';
 import {IContext} from './IHandler';
 import {LogMessage} from '../common/logs/LogMessage';
 import {LogMessageType} from '../common/logs/LogMessageType';
+import {isPlayerId} from '../common/Types';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
@@ -24,33 +25,34 @@ export class GameLogs {
     return newMessages;
   }
 
-  public handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public async handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
-    if (playerId === null) {
-      ctx.route.badRequest(req, res, 'must provide player id as the id parameter');
+    if (!playerId) {
+      ctx.route.badRequest(req, res, 'missing id parameter');
       return;
     }
-
+    if (!isPlayerId(playerId)) {
+      ctx.route.badRequest(req, res, 'invalid player id');
+      return;
+    }
     const generation = ctx.url.searchParams.get('generation');
 
-    ctx.gameLoader.getByPlayerId(playerId, (game) => {
-      if (game === undefined) {
-        ctx.route.notFound(req, res, 'game not found');
-        return;
-      }
-      let logs: Array<LogMessage> | undefined;
+    const game = await ctx.gameLoader.getGame(playerId);
+    if (game === undefined) {
+      ctx.route.notFound(req, res, 'game not found');
+      return;
+    }
+    let logs: Array<LogMessage> | undefined;
 
-      const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
+    const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
 
-      // for most recent generation pull last 50 log messages
-      if (generation === null || Number(generation) === game.generation) {
-        logs = game.gameLog.filter(messagesForPlayer).slice(-50);
-      } else { // pull all logs for generation
-        logs = this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
-      }
+    // for most recent generation pull last 50 log messages
+    if (generation === null || Number(generation) === game.generation) {
+      logs = game.gameLog.filter(messagesForPlayer).slice(-50);
+    } else { // pull all logs for generation
+      logs = this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
+    }
 
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify(logs));
-    });
+    ctx.route.writeJson(res, logs);
   }
 }

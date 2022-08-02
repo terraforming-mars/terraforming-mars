@@ -9,19 +9,22 @@ import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Predators', function() {
-  let card : Predators; let player : Player; let player2 : Player; let game : Game;
+  let card: Predators;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Predators();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(card.canAct(player)).is.not.true;
   });
 

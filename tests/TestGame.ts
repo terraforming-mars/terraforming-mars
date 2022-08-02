@@ -1,24 +1,24 @@
-import {Game, GameOptions} from '../src/Game';
-import {TestPlayers} from './TestPlayers';
-import {TestingUtils} from './TestingUtils';
+import {Game} from '../src/Game';
+import {GameOptions} from '../src/GameOptions';
+import {setCustomGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 
-export function newTestGame(count: number, customOptions?: Partial<GameOptions>): Game {
+export function newTestGame(count: number, customOptions?: Partial<GameOptions>, idSuffix = ''): Game {
   const players = [
-    TestPlayers.BLUE.newPlayer(),
-    TestPlayers.RED.newPlayer(),
-    TestPlayers.YELLOW.newPlayer(),
-    TestPlayers.GREEN.newPlayer(),
-    TestPlayers.BLACK.newPlayer(),
-    TestPlayers.PURPLE.newPlayer(),
-    TestPlayers.ORANGE.newPlayer(),
-    TestPlayers.PINK.newPlayer(),
+    TestPlayer.BLUE.newPlayer(false, idSuffix),
+    TestPlayer.RED.newPlayer(false, idSuffix),
+    TestPlayer.YELLOW.newPlayer(false, idSuffix),
+    TestPlayer.GREEN.newPlayer(false, idSuffix),
+    TestPlayer.BLACK.newPlayer(false, idSuffix),
+    TestPlayer.PURPLE.newPlayer(false, idSuffix),
+    TestPlayer.ORANGE.newPlayer(false, idSuffix),
+    TestPlayer.PINK.newPlayer(false, idSuffix),
   ].slice(0, count);
 
   const options: GameOptions | undefined = customOptions === undefined ?
     undefined :
-    TestingUtils.setCustomGameOptions(customOptions);
-  return Game.newInstance('game-id', players, players[0], options);
+    setCustomGameOptions(customOptions);
+  return Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
 }
 
 export function getTestPlayer(game: Game, idx: number): TestPlayer {

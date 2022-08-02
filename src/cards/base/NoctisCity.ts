@@ -36,7 +36,7 @@ export class NoctisCity extends Card implements IProjectCard {
     if (player.getProduction(Resources.ENERGY) < 1) {
       return false;
     }
-    if (player.game.board.getNoctisCitySpaceIds().length > 0) {
+    if (player.game.board.getNoctisCitySpaceId !== undefined) {
       return true;
     } else {
       return player.game.board.getAvailableSpacesForCity(player).length > 0;
@@ -45,10 +45,9 @@ export class NoctisCity extends Card implements IProjectCard {
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 3);
-    const noctisCitySpaceIds = player.game.board.getNoctisCitySpaceIds();
-    if (noctisCitySpaceIds.length !== 0) {
-      // It doesn't have more than one space.
-      player.game.addCityTile(player, noctisCitySpaceIds[0]);
+    const noctisCitySpaceId = player.game.board.getNoctisCitySpaceId();
+    if (noctisCitySpaceId !== undefined) {
+      player.game.addCityTile(player, noctisCitySpaceId);
       return undefined;
     }
     return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {

@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {all} from '../Options';
 
@@ -18,14 +18,14 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
       name: CardName.MARTIAN_CULTURE,
       cost: 11,
       tags: [Tags.MARS, Tags.MARS],
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
       requirements: CardRequirements.builder((b) => b.tag(Tags.MARS, 2, {all})),
       victoryPoints: VictoryPoints.resource(1, 2),
 
       metadata: {
         cardNumber: 'Pf35',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Data resource to any card.', (eb) => eb.empty().startAction.data({amount: 1}));
+          b.action('Add 1 data to ANY card.', (eb) => eb.empty().startAction.data({amount: 1}).asterix());
         }),
         description: 'Requires any 2 Mars tags in play.  1 VP for every 2 data here.',
       },
@@ -39,7 +39,7 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
     return undefined;
   }
 

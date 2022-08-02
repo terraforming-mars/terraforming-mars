@@ -1,8 +1,9 @@
-import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {IActionCard, IResourceCard} from '../ICard';
+import {PlayerInput} from '../../PlayerInput';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../common/constants';
@@ -19,7 +20,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS, Tags.MICROBE],
       cost: 9,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
 
       requirements: CardRequirements.builder((b) => b.venus(6)),
       metadata: {
@@ -46,7 +47,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
     return true;
   }
   public action(player: Player) {
-    const venusMicrobeCards = player.getResourceCards(ResourceType.MICROBE).filter((card) => card.tags.includes(Tags.VENUS));
+    const venusMicrobeCards = player.getResourceCards(CardResource.MICROBE).filter((card) => card.tags.includes(Tags.VENUS));
     const canRaiseVenus = this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
 
     // only 1 valid target and cannot remove 2 microbes - add to itself
@@ -55,7 +56,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       return undefined;
     }
 
-    const opts: Array<SelectOption | SelectCard<ICard>> = [];
+    const opts: Array<PlayerInput> = [];
 
     const spendResource = new SelectOption('Remove 2 microbes to raise Venus 1 step', 'Remove microbes', () => {
       player.removeResourceFrom(this, 2);
@@ -67,8 +68,8 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       'Select a Venus card to add 1 microbe',
       'Add microbe',
       venusMicrobeCards,
-      (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], {log: true});
+      ([card]) => {
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

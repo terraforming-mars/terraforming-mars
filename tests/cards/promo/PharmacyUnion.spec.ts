@@ -1,3 +1,4 @@
+import {MediaGroup} from '../../../src/cards/base/MediaGroup';
 import {expect} from 'chai';
 import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
 import {Ants} from '../../../src/cards/base/Ants';
@@ -12,23 +13,27 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
+import {Virus} from '../../../src/cards/base/Virus';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
-  let card : PharmacyUnion; let player : Player; let player2 : Player;
+  let card: PharmacyUnion;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new PharmacyUnion();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, player2], player);
 
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Should play', function() {
-    Game.newInstance('foobar', [player], player);
+    player.corporations.length = 0; // Resetting so when setting the corproation it doesn't do anything flaky.
+    Game.newInstance('gameid', [player], player);
     const pi = player.getWaitingFor() as AndOptions;
     pi.options[0].cb([card]);
     pi.options[1].cb([]);
@@ -109,7 +114,7 @@ describe('PharmacyUnion', function() {
     expect(player.game.deferredActions).has.lengthOf(1);
     expect(player.getPlayedEventsCount()).to.eq(0);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     player.game.deferredActions.pop();
     orOptions.options[0].cb();
 
@@ -133,7 +138,7 @@ describe('PharmacyUnion', function() {
     card.resourceCount = 0;
     card.onCardPlayed(player, new SearchForLife());
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(card.isDisabled).is.true;
     expect(player.getTagCount(Tags.MICROBE)).to.eq(0);
@@ -163,7 +168,7 @@ describe('PharmacyUnion', function() {
     card.onCardPlayed(player, viralEnhancers);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[1].cb(); // Add disease then remove it
     expect(card.resourceCount).to.eq(0);
     expect(player.megaCredits).to.eq(4);
@@ -172,5 +177,14 @@ describe('PharmacyUnion', function() {
     expect(card.isDisabled).is.true;
     expect(card.resourceCount).to.eq(0);
     expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Edge case, lose MC before gaining', () => {
+    // See https://github.com/terraforming-mars/terraforming-mars/issues/2191
+    player.megaCredits = 0;
+    player.playedCards = [new MediaGroup()];
+    player.playCard(new Virus());
+    runAllActions(player.game);
+    expect(player.megaCredits).eq(3);
   });
 });

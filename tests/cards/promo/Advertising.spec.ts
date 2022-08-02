@@ -3,13 +3,13 @@ import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {Advertising} from '../../../src/cards/promo/Advertising';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Advertising', function() {
   it('Should play', function() {
     const advertising = new Advertising();
-    const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    Game.newInstance('gameid', [player], player);
 
     player.playedCards.push(advertising);
     advertising.play();

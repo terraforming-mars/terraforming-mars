@@ -2,6 +2,7 @@ import {Resources} from '../common/Resources';
 import {PartyName} from '../common/turmoil/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
 import {RequirementType} from '../common/cards/RequirementType';
+import {ICardRequirements} from '../common/cards/ICardRequirements';
 import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {
@@ -13,16 +14,13 @@ import {
   MIN_VENUS_SCALE,
 } from '../common/constants';
 
-export class CardRequirements {
+export class CardRequirements implements ICardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
 
   public static builder(f: (builder: Builder) => void): CardRequirements {
     const builder = new Builder();
     f(builder);
     return builder.build();
-  }
-  public hasMax(): boolean {
-    return this.requirements.some((req) => req.isMax);
   }
   public satisfies(player: Player): boolean {
     // Process tags separately, though max & any tag criteria will be processed later.
@@ -34,7 +32,7 @@ export class CardRequirements {
         tags.push((requirement as TagCardRequirement).tag);
       }
     });
-    if (!player.checkMultipleTagPresence(tags)) {
+    if (tags.length > 1 && !player.checkMultipleTagPresence(tags)) {
       return false;
     }
     return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));

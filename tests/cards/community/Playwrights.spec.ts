@@ -10,21 +10,24 @@ import {LawSuit} from '../../../src/cards/promo/LawSuit';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
+import {runAllActions} from '../../TestingUtils';
 
 describe('Playwrights', () => {
-  let card : Playwrights; let player : Player; let player2: Player; let game : Game;
+  let card: Playwrights;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Playwrights();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player);
 
     card.play(player);
-    player.corporationCard = card;
+    player.setCorporationForTest(card);
   });
 
   it('Cannot act without any played events', () => {
@@ -48,7 +51,7 @@ describe('Playwrights', () => {
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 4);
     expect(player.megaCredits).eq(0);
@@ -68,7 +71,7 @@ describe('Playwrights', () => {
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 2);
     expect(player.megaCredits).eq(0);
@@ -116,7 +119,7 @@ describe('Playwrights', () => {
     const selectPlayer = game.deferredActions.pop()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
 
-    player.game.deferredActions.runAll(() => {});
+    runAllActions(player.game);
 
     expect(player.playedCards).has.lengthOf(0);
     expect(player2.playedCards).has.lengthOf(0); // Card is removed from play for sued player

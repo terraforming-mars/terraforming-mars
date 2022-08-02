@@ -12,13 +12,12 @@ import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Resources} from '../../src/common/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/common/TileType';
-import {TestingUtils} from '../TestingUtils';
+import {setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
-import {TestPlayers} from '../TestPlayers';
 import {Phase} from '../../src/common/Phase';
 import {VictoryPointsBreakdown} from '../../src/VictoryPointsBreakdown';
 
-const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonExpansion', () => {
   let game: Game;
@@ -27,9 +26,9 @@ describe('MoonExpansion', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.PINK.newPlayer();
-    game = Game.newInstance('id', [player, player2], player, MOON_OPTIONS);
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.PINK.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
     moonData = MoonExpansion.moonData(game);
   });
 
@@ -63,7 +62,7 @@ describe('MoonExpansion', () => {
   // changing these tests, but I would be surprised if that were the case.
   it('Adding a tile while someone has cards with onTilePlaced behavior does not trigger them.', () => {
     player.cardsInHand = [new EcologicalSurvey(), new GeologicalSurvey()];
-    player.corporationCard = new Philares();
+    player.setCorporationForTest(new Philares());
     player.steel = 0;
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
     expect(player.steel).eq(1);

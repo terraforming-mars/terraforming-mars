@@ -1,6 +1,5 @@
 import {Philares} from '../../../src/cards/promo/Philares';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestPlayers';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
@@ -12,9 +11,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {cast} from '../../TestingUtils';
 
 describe('Philares', () => {
-  let card : Philares;
+  let card: Philares;
   let philaresPlayer : TestPlayer;
   let otherPlayer: TestPlayer;
   let game: Game;
@@ -24,16 +24,16 @@ describe('Philares', () => {
 
   beforeEach(() => {
     card = new Philares();
-    philaresPlayer = TestPlayers.BLUE.newPlayer();
-    otherPlayer = TestPlayers.RED.newPlayer();
+    philaresPlayer = TestPlayer.BLUE.newPlayer();
+    otherPlayer = TestPlayer.RED.newPlayer();
     // redPlayer is first for the final placement test.
-    game = Game.newInstance('foobar', [otherPlayer, philaresPlayer], otherPlayer);
+    game = Game.newInstance('gameid', [otherPlayer, philaresPlayer], otherPlayer);
     game.board = EmptyBoard.newInstance();
     space = game.board.spaces[4];
     adjacentSpace = game.board.getAdjacentSpaces(space)[0];
     adjacentSpace2 = game.board.getAdjacentSpaces(space)[2];
 
-    philaresPlayer.corporationCard = card;
+    philaresPlayer.setCorporationForTest(card);
   });
 
   it('No bonus when placing next to self', () => {
@@ -165,7 +165,7 @@ describe('Philares', () => {
     // Max out all global parameters
     (game as any).temperature = MAX_TEMPERATURE;
     (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
-    // TestingUtils.maxOutOceans(player);
+    // maxOutOceans(player);
 
     // Setup plants for endgame
     philaresPlayer.plants = 7;
@@ -173,7 +173,7 @@ describe('Philares', () => {
 
     // First player final greenery placement, done adjacent to one of Philares' tiles
     game.gotoFinalGreeneryPlacement();
-    const firstPlayerGreeneryPlacement = otherPlayer.getWaitingFor() as OrOptions;
+    const firstPlayerGreeneryPlacement = cast(otherPlayer.getWaitingFor(), OrOptions);
 
     // Option 1 is 'Don't place a greenery'
     // Don't place a greenery using the callback; add it directly via game.addGreenery() instead
@@ -192,7 +192,7 @@ describe('Philares', () => {
     (philaresPlayer as any).waitingFor = undefined;
     (philaresPlayer as any).waitingForCb = undefined;
     game.gotoFinalGreeneryPlacement();
-    const finalGreeneryPlacement = philaresPlayer.getWaitingFor() as OrOptions;
+    const finalGreeneryPlacement = cast(philaresPlayer.getWaitingFor(), OrOptions);
     expect(game.phase).eq(Phase.RESEARCH);
     finalGreeneryPlacement.options[1].cb();
     expect(game.phase).eq(Phase.END);

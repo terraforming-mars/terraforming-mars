@@ -8,16 +8,18 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
-  let card : AsteroidRights; let player : Player;
+  let card: AsteroidRights;
+  let player: Player;
 
   beforeEach(function() {
     card = new AsteroidRights();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
 
     player.playedCards.push(card);
     card.play();
@@ -27,7 +29,7 @@ describe('AsteroidRights', function() {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Can\'t act', function() {
+  it('Can not act', function() {
     player.megaCredits = 0;
     card.resourceCount = 0;
     expect(card.canAct(player)).is.not.true;
@@ -35,7 +37,7 @@ describe('AsteroidRights', function() {
 
   it('Should act - can auto spend asteroid resource', function() {
     player.megaCredits = 0;
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
 
     // Gain 1 M€ prod
     action.options[1].cb();
@@ -72,7 +74,7 @@ describe('AsteroidRights', function() {
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 
-    const action = card.action(player) as OrOptions;
+    const action = cast(card.action(player), OrOptions);
     expect(action).instanceOf(OrOptions);
     expect(action.options[0] instanceof SelectOption).is.true;
     expect(action.options[1] instanceof SelectOption).is.true;

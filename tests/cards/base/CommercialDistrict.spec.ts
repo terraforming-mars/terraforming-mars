@@ -2,22 +2,23 @@ import {expect} from 'chai';
 import {CommercialDistrict} from '../../../src/cards/base/CommercialDistrict';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('CommercialDistrict', function() {
-  let card : CommercialDistrict; let player : Player; let game : Game;
+  let card: CommercialDistrict;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new CommercialDistrict();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

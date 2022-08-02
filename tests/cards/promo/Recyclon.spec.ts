@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {Recyclon} from '../../../src/cards/promo/Recyclon';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Recyclon', function() {
   it('Should play', function() {
     const card = new Recyclon();
-    const player = TestPlayers.BLUE.newPlayer();
+    const player = TestPlayer.BLUE.newPlayer();
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.getProduction(Resources.STEEL)).to.eq(1);

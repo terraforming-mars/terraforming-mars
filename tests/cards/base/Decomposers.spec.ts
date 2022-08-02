@@ -6,19 +6,21 @@ import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('Decomposers', function() {
-  let card : Decomposers; let player : Player; let game : Game;
+  let card: Decomposers;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new Decomposers();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

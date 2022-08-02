@@ -3,19 +3,20 @@ import {MagneticFieldDome} from '../../../src/cards/base/MagneticFieldDome';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayers} from '../../TestPlayers';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('MagneticFieldDome', function() {
-  let card : MagneticFieldDome; let player : Player;
+  let card: MagneticFieldDome;
+  let player: Player;
 
   beforeEach(function() {
     card = new MagneticFieldDome();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player = TestPlayer.BLUE.newPlayer();
+    const redPlayer = TestPlayer.RED.newPlayer();
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can not play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

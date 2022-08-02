@@ -2,9 +2,13 @@ import {PlayerId} from './common/Types';
 import {CardName} from './common/cards/CardName';
 import {Color} from './common/Color';
 import {SerializedCard} from './SerializedCard';
-import {SerializedTimer} from './SerializedTimer';
+import {SerializedTimer} from './common/SerializedTimer';
 
-export interface SerializedPlayer {
+interface DeprecatedFields {
+    corporationCard?: SerializedCard | undefined; // TODO(kberg): remove after 2022-09-01
+    corporationInitialActionDone?: boolean; // TODO(kberg): remove field after 2022-09-01
+}
+export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisGame: number;
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
@@ -17,8 +21,7 @@ export interface SerializedPlayer {
     colonyTradeOffset: number;
     colonyVictoryPoints: number;
     color: Color;
-    corporationCard: SerializedCard | undefined;
-    corporationInitialActionDone: boolean;
+    corporations: Array<SerializedCard> | undefined; // TODO(kberg): remove undefined once it's applied across the board.
     dealtCorporationCards: Array<CardName>;
     dealtPreludeCards: Array<CardName>;
     dealtProjectCards: Array<CardName>;
@@ -31,13 +34,14 @@ export interface SerializedPlayer {
     hasTurmoilScienceTagBonus: boolean;
     heat: number;
     heatProduction: number;
-    id: string;
+    id: PlayerId;
     lastCardPlayed?: CardName;
     megaCreditProduction: number;
     megaCredits: number;
     name: string;
     needsToDraft: boolean | undefined;
     oceanBonus: number;
+    pendingInitialActions: Array<CardName> | undefined;
     pickedCorporationCard: CardName | undefined;
     plantProduction: number;
     plants: number;
@@ -57,7 +61,9 @@ export interface SerializedPlayer {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
+    totalDelegatesPlaced: number;
     // TODO(kberg): change tradesThisTurn to tradeThisGeneration later
     tradesThisTurn: number;
     turmoilPolicyActionUsed: boolean;
+    victoryPointsByGeneration: Array<number>;
 }

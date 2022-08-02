@@ -1,0 +1,165 @@
+{
+    "Airliners": "Passagierschiffe",
+    "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Benötigt 3 eigene Schweber. Erhöhe deine M€-Produktion um 2 Schritte. Füge einer BELIEBIGEN Karte 2 Schweber hinzu.",
+
+    "Air Raid": "Überfall aus der Luft",
+    "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Benötigt Abgabe eines 1 eigenen Schwebers. Klaue 5 M€ von einem anderen Spieler.",
+
+    "Atmo Collectors": "Atmo-Kollektoren",
+    "Action: Add one floater here.": "AKTION: Füge dieser Karte einen Schweber hinzu",
+    "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "AKTION: Entferne einen Schweber von dieser Karte, um entweder 2 Titan, 3 Energie oder 4 Wärme zu erhalten.",
+    "Add 2 floaters to ANY card.": "Füge einer BELIEBIGEN Karte 2 Schweber hinzu.",
+
+    "Community Services": "Gemeinschaftsdienste",
+    "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Erhöhe deine M€-Produktion um 1 pro KARTE OHNE SYMBOL, diese inbegriffen.",
+
+    "Conscription": "Einberufung",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Erfordert 2 Erdsymbole. Die nächste Karte, die du in dieser Generation spielst, kostet 16 M€ weniger.",
+
+    "Corona Extractor": "Corona-Extraktor",
+    "Requires 4 science tags. Increase your energy production 4 steps.": "Erfordert 4 Wissenschaftssymbole. Erhöhe deine Energie-Produktion um 4.",
+
+    "Cryo Sleep": "Kryo-Schlaf",
+    "Effect: When you trade, you pay 1 less resource for it.": "EFFEKT: Wenn du handelst, bezahlst du 1 Ressource weniger.",
+
+    "Earth Elevator": "Weltraumlift",
+    "Increase your titanium production 3 steps.": "Erhöhe deine Titan-Produktion um 1.",
+
+    "Ecology Research": "Ökologie-Forschung",
+    "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "Erhöhe deine Pflanzen-Produktion um 1 für jede Kolonie, die du besitzt. Füge ein Tier EINER ANDEREN Karte hinzu, füge außerdem 2 Mikroben EINER ANDEREN Karte hinzu.",
+
+    "Floater Leasing": "Schweber-Leasing",
+    "Increase your M€ production 1 step PER 3 floaters you have.": "Erhöhe deine M€-Produktion um 1 für jeden 3. Schweber, den du besitzt.",
+
+    "Floater Prototypes": "Schweber-Prototypen",
+    "Add two floaters to ANOTHER card.": "Füge einer ANDEREN Karte 2 Schweber hinzu.",
+
+    "Floater Technology": "Schweber-Technologie",
+    "Action: Add 1 floater to ANOTHER card.": "AKTION: Füge einer ANDEREN Karte 1 Schweber hinzu.",
+
+    "Galilean Waystation": "Galileische Haltestelle",
+    "Increase your M€ production 1 step for every Jovian tag in play.": "Erhöhe deine M€-Produktion um 1 für jedes Jupitersymbol im Spiel",
+
+    "Heavy Taxation": "Hohe Besteuerung",
+    "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Erfordert 2 Erdsymbole. Erhöhe deine M€-Produktion um 2 und erhalte 4 M€.",
+
+    "Ice Moon Colony": "Eismond-Kolonie",
+    "Place 1 colony and 1 ocean tile.": "Platziere 1 Kolonie- und 1 Ozeanplättchen",
+
+    "Impactor Swarm": "Impaktoren-Schwarm",
+    "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "Erfordert 2 Jupitersymbole. Erhalte 12 Wärme. Entferne bis zu 2 Pflanzen eines beliebigen Spielers.",
+
+    "Interplanetary Colony Ship": "Interplanetares Kolonieschiff",
+    "Place a colony.": "Platziere ein Kolonieplättchen.",
+
+    "Jovian Lanterns": "Jupiter-Lichter",
+    "1 VP per 2 floaters here.": "1 SP für jeden zweiten Schweber auf dieser Karte.",
+    "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Erfordert 1 Jupitersymbol. Erhöhe deinen TW um 1. Füge 2 Schweber einer BELIEBIGEN Karte hinzu.",
+
+    "Jupiter Floating Station": "Jupiter-Schweber-Station",
+    "Action: Add 1 floater to a JOVIAN CARD.": "AKTION: Füge einer JUPITER-KARTE einen Schweber hinzu.",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "AKTION: Erhalte 1 M€ für jeden Schweber auf dieser Karte [max. 4].",
+    "Requires 3 Science tags.": "Erfordert 3 Wissenschaftssymbole.",
+
+    "Luna Governor": "Gouverneur des Mondes",
+    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Erfordert 3 Erdsymbole. Erhöhe deine M€-Produktion um 2.",
+
+    "Lunar Exports": "Lunare Export",
+    "Increase your plant production 2 steps, or your M€ production 5 steps.": "Erhöhe deine Pflanzen-Produktion um 2 oder deine M€-Produktion um 5.",
+
+    "Lunar Mining": "Lunarer Bergbau",
+    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "",
+
+    "Market Manipulation": "Marktmanipulation",
+    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Erhöhe deine Koloniewertung um 1. Senke eine andere Koloniewertung um 1.",
+
+    "Martian Zoo": "Mars-Zoo",
+    "Effect: When you play an Earth tag, place an animal here.": "EFFEKT: Wenn du ein Erdsymbol spielst, füge dieser Karte 1 Tier hinzu.",
+    "Action: Gain 1M€ per animal here.": "Action: Erhalte 1 M€ je Tier auf dieser Karte.",
+    "Requires 2 city tiles in play.": "Erfordert 2 Stadtplättchen im Spiel.",
+
+    "Mining Colony": "Bergbaukolonie",
+    "Increase your titanium production 1 step. Place a colony.": "Erhöhe deine Titan-Produktion um 1. Platziere eine Kolonie.",
+
+    "Minority Refuge": "Minderheiten-Zuflucht",
+    "Decrease your M€ production 2 steps. Place a colony.": "Senke deine M€-Produktion um 2. Platziere eine Kolonie.",
+
+    "Molecular Printing": "Molekulardruck",
+    "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Erhalte 1 M€ für jedes Stadtplättchen im Spiel. Erhalte 1 M€ für jede Kolonie im Spiel.",
+
+    "Nitrogen from Titan": "Stickstoff vom Titan",
+    "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Erhöhe deine TW um 2. Füge einer JUPITER-KARTE 2 Schweber hinzu.",
+
+    "Pioneer Settlement": "Pionier-Siedlung",
+    "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Erfordert, dass du höchstens 1 Kolonie besitzt. Senke deine M€-Produktion um 2. Platziere eine Kolonie.",
+
+    "Productive Outpost": "Produktiver Vorposten",
+    "Gain all your colony bonuses.": "Erhalte alle deine Kolonie-Boni.",
+
+    "Quantum Communications": "Quantenkommunikation",
+    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Erfordert 4 Wissenschaftssymbole. Erhöhe deine M€-Produktion um 1 für jede Kolonie im Spiel.",
+
+    "Red Spot Observatory": "Roter-Fleck-Observatorium",
+    "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "AKTION: Füge dieser Karte einen Schweber hinzu oder entferne einen Schweber von dieser Karte, um eine Karte zu ziehen.",
+    "Requires 3 Science tags. Draw 2 cards.": "Erfordert 3 Wissenschaftssymbole. Ziehe 2 Karten.",
+
+    "Refugee Camp": "Flüchtlingslager",
+    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "AKTION: Senke deine M€-Produktion um 1, um dieser Karte eine Lager-Ressource hinzuzufügen",
+    "1 VP for each camp resource on this card.": "1 SP für jede Lager-Ressource auf dieser Karte.",
+
+    "Research Colony": "Forschungskolonie",
+    "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Platziere eine Kolonie. DARF AUCH AUF EINER EIGENEN KOLONIE PLATZIERT WERDEN. Ziehe 2 Karten.",
+
+    "Rim Freighters": "Randzonen-Frachter",
+
+    "Sky Docks": "Himmelshäfen",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "EFFEKT: Wenn du eine Karte spielst, zahle 1 M€ weniger für sie.",
+    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Erfodert 2 Erdsymbole. Erhalte 1 Handelsflotte.",
+
+    "Solar Probe": "Solarsonde",
+    "Draw 1 card for every 3 science tags you have, including this.": "Ziehe 1 Karte für jedes 3. Wissenschaftssymbol, das du besitzt (inklusive diesem).",
+
+    "Solar Reflectors": "Solarreflektoren",
+    "Increase your heat production 5 steps.": "Erhöhe deine Wärmeproduktion um 5.",
+
+    "Space Port": "Raumhafen",
+    "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.": "Erfordert 1 Kolonie. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 4. Platziere ein Stadtplättchen. Erhalte 1 Handelsflotte.",
+
+    "Space Port Colony": "Raumhafen-Kolonie",
+    "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Erfordert 1 Kolonie. Platziere 1 Kolonie. DARF AUCH AUF EINER EIGENEN KOLONIE PLATZIERT WERDEN. Erhalte 1 Handelsflotte.",
+    "1VP per 2 colonies in play.": "1 SP für jede zweite Kolonie im Spiel.",
+
+    "Spin-off Department": "Zweigstelle",
+    "(Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.)": "(EFFEKT: Wenn du eine Karte mit Basiskosten von 20 M€ oder mehr spielst, ziehe eine Karte.",
+    "Increase your M€ production 2 steps.": "Erhöhe deine M€-Produktion um 2.",
+
+    "Sub-zero Salt Fish": "Eis-Salzwasserfisch",
+    "Action: Add 1 Animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
+    "1 VP per 2 Animals on this card.": "1 SP für jedes zweite Tier auf dieser Karte.",
+    "Requires -6 C. Decrease any Plant production 1 step.": "Erfordert -6 °C. Senke eine beliebige Pflanzen-Produktion um 1.",
+
+    "Titan Air-scrapping": "Titan-Luft-Recycling",
+    "Action: Spend 1 titanium to add 2 floaters here.": "AKTION: Bezahle 1 Titan, um dieser Karte 2 Schweber hinzuzufügen.",
+    "Action: Spend 2 floaters here to increase your TR 1 step.": "AKTION: Entferne 2 Schweber von dieser Karte, um deine TW um 1 zu erhöhen.",
+
+    "Titan Floating Launch-pad": "Titan-Schweber-Startplattform",
+    "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "AKTION: Füge einer BELIEBIGEN JUPITER-KARTE einen Schweber hinzu oder entferne einen Schweber von dieser Karte, um kostenlos zu handeln.",
+    "Add two floaters to ANY JOVIAN CARD.": "Füge 2 Schweber einer BELIEBIGEN JUPITER-KARTE hinzu.",
+
+    "Titan Shuttles": "Titan-Shuttles",
+    "Action: Add 2 floaters to ANY JOVIAN CARD.": "AKTION: Füge 2 Schweber einer BELIEBIGEN JUPITER-KARTE hinzu.",
+    "Action: Spend any number of floaters here to gain the same number of titanium.": "AKTION: Entferne eine beliebige Anzahl an Schwebern von dieser Karte, um dieselbe Menge Titan zu erhalten.",
+
+    "Trade Envoys": "Handelsvertreter",
+
+    "Trading Colony": "Handelskolonie",
+    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "EFFEKT: Wenn du handelst, darfst du zuerst die Kolonie um 1 Schritt erhöhen.",
+    "Place a colony": "Platziere eine Kolonie.",
+
+    "Urban Decomposers": "Urbane Zersetzer",
+    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Erfordert, dass du 1 Stadtplättchen und ein Kolonieplättchen besitzt. Erhöhe deine Pflanzen-Produktion um 1 und füge einer ANDEREN Karte 2 Mikroben hinzu.",
+
+    "Warp Drive": "Warp-Antrieb",
+    "Effect: When you play a Space card, you pay 4 M€ less for it.": "EFFEKT: Wenn du eine Weltraumkarte spielst, zahle 4 M€ weniger für sie.",
+    "Requires 5 Science tags.": "Erfordert 5 Wissenschaftssymbole."
+}

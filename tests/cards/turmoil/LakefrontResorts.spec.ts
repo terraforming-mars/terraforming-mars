@@ -2,21 +2,21 @@ import {expect} from 'chai';
 import {LakefrontResorts} from '../../../src/cards/turmoil/LakefrontResorts';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/common/Resources';
-import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestPlayers';
+import {runAllActions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('LakefrontResorts', function() {
   it('Should play', function() {
     const card2 = new LakefrontResorts();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player);
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player);
     const play = card2.play(player);
     expect(play).is.undefined;
-    player.corporationCard = card2;
+    player.setCorporationForTest(card2);
     game.addOceanTile(player, '06');
     game.addOceanTile(player, '07');
-    TestingUtils.runAllActions(game);
+    runAllActions(game);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     // The 2 oceans are adjacent

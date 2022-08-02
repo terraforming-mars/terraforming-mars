@@ -2,14 +2,13 @@ import {Phase} from './common/Phase';
 import {CardName} from './common/cards/CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
-import {ColonyDealer} from './colonies/ColonyDealer';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId} from './common/Types';
-import {GameOptions} from './Game';
+import {GameOptions} from './GameOptions';
 import {IAresData} from './common/ares/IAresData';
 import {LogMessage} from './common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
@@ -21,10 +20,14 @@ export interface SerializedGame {
     aresData?: IAresData;
     awards: Array<string>;
     board: SerializedBoard;
+    // game.rng changes over the course of a game but isn't saved and serialized
+    // for instance, in the face of a redeal.
+    currentSeed: number | undefined; // TODO(kberg): Remove '|undefined' by 2022-06-01
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
-    colonyDealer: ColonyDealer | undefined;
+    corporationsDraftDirection: 'before' | 'after';
+    corporationsToDraft: Array<CardName>;
     dealer: SerializedDealer;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
@@ -40,7 +43,6 @@ export interface SerializedGame {
     initialDraftIteration: number;
     lastSaveId: number;
     milestones: Array<string>;
-    monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
     pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;

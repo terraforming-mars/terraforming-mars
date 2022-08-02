@@ -1,26 +1,26 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../common/cards/CardType';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
 import {all, digit, played} from '../Options';
 
-export class PharmacyUnion extends Card implements CorporationCard {
+export class PharmacyUnion extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.PHARMACY_UNION,
       startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
-      resourceType: ResourceType.DISEASE,
+      resourceType: CardResource.DISEASE,
 
       metadata: {
         cardNumber: 'R39',
@@ -64,16 +64,17 @@ export class PharmacyUnion extends Card implements CorporationCard {
     this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
-    return this._onCardPlayed(player, card);
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+    this._onCardPlayed(player, card);
+    return undefined;
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): void {
+  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (this.isDisabled) return undefined;
 
     const game = player.game;
 
-    const hasScienceTag = card.tags.includes(Tags.SCIENCE);
+    const hasScienceTag = player.cardHasTag(card, Tags.SCIENCE);
     const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
     const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
 
@@ -81,7 +82,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
     if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
       // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
       if (player.canAfford(0, {tr: {tr: 3}})) {
-        game.defer(new DeferredAction(
+        game.defer(new SimpleDeferredAction(
           player,
           () => {
             const orOptions = new OrOptions(
@@ -110,11 +111,10 @@ export class PharmacyUnion extends Card implements CorporationCard {
       }
     }
 
-
     if (isPharmacyUnion && hasScienceTag) {
-      const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+      const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
       for (let i = 0; i < scienceTags; i++) {
-        game.defer(new DeferredAction(
+        game.defer(new SimpleDeferredAction(
           player,
           () => {
             if (this.isDisabled) return undefined;
@@ -155,18 +155,21 @@ export class PharmacyUnion extends Card implements CorporationCard {
 
 
     if (hasMicrobesTag) {
-      game.defer(new DeferredAction(
+      game.defer(new SimpleDeferredAction(
         player,
         () => {
           const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBE).length;
-          const player = game.getPlayersInGenerationOrder().find((p) => p.isCorporation(this.name))!;
+          const player = game.getPlayers().find((p) => p.isCorporation(this.name));
+          if (player === undefined) {
+            throw new Error(`PharmacyUnion: did not find player for ${game.id}`);
+          }
           const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
           player.addResourceTo(this, microbeTagCount);
           player.megaCredits -= megaCreditsLost;
           game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
           return undefined;
         },
-      ), -1); // Make it a priority
+      ), Priority.SUPERPOWER);
     }
 
     return undefined;

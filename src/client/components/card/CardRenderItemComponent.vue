@@ -302,7 +302,7 @@ export default Vue.extend({
     },
     getAmountAbs(): number {
       if (this.item.amountInside) return 1;
-      return Math.abs(this.item.amount || 1);
+      return Math.abs(this.item.amount);
     },
     itemsToShow(): number {
       if (this.item.showDigit) return 1;

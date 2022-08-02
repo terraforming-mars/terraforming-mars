@@ -17,6 +17,8 @@ import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../common/turmoil/Types';
 import {CardName} from '../common/cards/CardName';
 import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {SelectOption} from '../inputs/SelectOption';
+import {OrOptions} from '../inputs/OrOptions';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -335,6 +337,25 @@ export class Turmoil {
     }
   }
 
+  public chooseRulingParty(player: Player): void {
+    const setRulingParty = new OrOptions();
+
+    setRulingParty.title = 'Select new ruling party';
+    setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
+      p.partyName, 'Select', () => {
+        this.rulingParty = this.getPartyByName(p.partyName);
+        PoliticalAgendas.setNextAgenda(this, player.game);
+
+        return undefined;
+      }),
+    )];
+
+    player.game.defer(new SimpleDeferredAction(
+      player,
+      () => setRulingParty,
+    ));
+  }
+
   // Called either directly during generation change, or after asking chairperson player
   // to choose an agenda.
   public onAgendaSelected(game: Game): void {
@@ -413,7 +434,6 @@ export class Turmoil {
   }
 
   // Return number of delegates
-  // TODO(kberg): Find a way to remove the default value for source.
   public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer, source: 'lobby' | 'reserve' | 'both'): number {
     const delegatesInReserve = this.delegateReserve.filter((p) => p === playerId).length;
     const delegatesInLobby = (playerId !== 'NEUTRAL' && this.lobby.has(playerId)) ? 1: 0;

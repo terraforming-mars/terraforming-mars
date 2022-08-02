@@ -387,7 +387,7 @@ describe('Game', () => {
     const player3 = new Player('p3', Color.YELLOW, false, 0, 'p3-id');
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player2);
-    (game as any).incrementFirstPlayer();
+    game.incrementFirstPlayer();
 
     game.getPlayersInGenerationOrder().forEach((p) => {
       (p as any).waitingFor = undefined;
@@ -429,26 +429,19 @@ describe('Game', () => {
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
-    let players = game.getPlayersInGenerationOrder();
-    expect(players[0].name).to.eq('p3');
-    expect(players[1].name).to.eq('p4');
-    expect(players[2].name).to.eq('p1');
-    expect(players[3].name).to.eq('p2');
+    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p3', 'p4', 'p1', 'p2']);
 
+    game.incrementFirstPlayer();
+    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p4', 'p1', 'p2', 'p3']);
 
-    (game as any).incrementFirstPlayer();
-    players = game.getPlayersInGenerationOrder();
-    expect(players[0].name).to.eq('p4');
-    expect(players[1].name).to.eq('p1');
-    expect(players[2].name).to.eq('p2');
-    expect(players[3].name).to.eq('p3');
+    game.incrementFirstPlayer();
+    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p1', 'p2', 'p3', 'p4']);
 
-    (game as any).incrementFirstPlayer();
-    players = game.getPlayersInGenerationOrder();
-    expect(players[0].name).to.eq('p1');
-    expect(players[1].name).to.eq('p2');
-    expect(players[2].name).to.eq('p3');
-    expect(players[3].name).to.eq('p4');
+    game.incrementFirstPlayer();
+    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p2', 'p3', 'p4', 'p1']);
+
+    game.incrementFirstPlayer();
+    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p3', 'p4', 'p1', 'p2']);
   });
 
   it('Gets card player for corporation card', () => {

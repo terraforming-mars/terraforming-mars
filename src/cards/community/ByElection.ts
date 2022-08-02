@@ -5,7 +5,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../common/cards/CardName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../common/cards/render/Size';
 
 export class ByElection extends PreludeCard implements IProjectCard {
   constructor() {
@@ -16,8 +15,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       metadata: {
         cardNumber: 'Y02',
         renderData: CardRenderer.builder((b) => {
-          b.text('set ruling party', Size.SMALL, true).br;
-          b.plus().influence();
+          b.rulingParty().plus().influence();
         }),
         description: 'Set the ruling party to one of your choice. Gain 1 influence.',
       },

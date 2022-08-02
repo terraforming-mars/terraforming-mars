@@ -4,7 +4,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Resources} from '../../common/Resources';
-import {Size} from '../../common/cards/render/Size';
 import {Tags} from '../../common/cards/Tags';
 import {Game} from '../../Game';
 import {Turmoil} from '../../turmoil/Turmoil';
@@ -18,9 +17,7 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.text('1P').br;
-          b.text('set ruling party', Size.SMALL, true).br;
-          b.megacredits(12).br;
+          b.firstPlayer().rulingParty().megacredits(12).br;
         }),
         description: 'REVEALED BEFORE ANY OTHER PRELUDE. You become starting player for the game. Choose and set a ruling policy for the first generation. Gain 12 M€.',
       },

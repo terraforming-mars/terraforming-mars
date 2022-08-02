@@ -356,6 +356,12 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.CORPORATION) {
         result = '<div class="card-corporation-icon"></div>';
       }
+      if (this.item.type === CardRenderItemType.FIRST_PLAYER) {
+        result = '<div class="card-first-player-icon"></div>';
+      }
+      if (this.item.type === CardRenderItemType.RULING_PARTY) {
+        result = '<div class="card-party-icon"></div>';
+      }
       if (this.item.type === CardRenderItemType.AWARD) {
         // iconography on card shows plural (awards)
         result = '<span class="card-award-icon">awards</span>';

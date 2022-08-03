@@ -1514,7 +1514,7 @@ export class Game {
   // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
   public getCardHolder(name: CardName): [Player | undefined, IProjectCard | undefined] {
     for (const player of this.players) {
-      // Check cards player has played
+      // Check cards player has in hand
       for (const card of [...player.preludeCardsInHand, ...player.cardsInHand]) {
         if (card.name === name) {
           return [player, card];

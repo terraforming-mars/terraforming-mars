@@ -147,8 +147,20 @@ export class LocalFilesystem implements IDatabase {
     return this.getGame(gameId);
   }
 
-  deleteGameNbrSaves(_gameId: GameId, _rollbackCount: number): void {
-    console.error('deleting old saves not implemented.');
+  deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {
+    if (rollbackCount <= 0) {
+      console.error(`invalid rollback count for ${gameId}: ${rollbackCount}`);
+      // Should this be an error?
+      return Promise.resolve();
+    }
+
+    return this.getSaveIds(gameId).then((saveIds) => {
+      const versionsToDelete = saveIds.slice(-rollbackCount);
+      for (const version of versionsToDelete) {
+        this.deleteVersion(gameId, version);
+      }
+      return undefined;
+    });
   }
 
   public stats(): Promise<{[key: string]: string | number}> {
@@ -187,5 +199,9 @@ export class LocalFilesystem implements IDatabase {
       }
     });
     return Promise.resolve(gameIds);
+  }
+
+  private deleteVersion(gameId: GameId, version: number) {
+    fs.unlinkSync(this.historyFilename(gameId, version));
   }
 }

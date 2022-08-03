@@ -17,13 +17,10 @@ export class MarsDirect extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.MARS_DIRECT,
       tags: [Tags.MARS],
-      startingMegaCredits: 56,
-      // For every new Mars card added reduce by 2, then 1 (aka reduce by 1.5)
-      // 55, 53, 52
-      // Also change the value in description and renderData.
+      startingMegaCredits: 52,
 
       metadata: {
-        description: 'You start with 56 M€. (This is a temporary buff from 52M€ as 3 Mars tag cards are unimplemented)',
+        description: 'You start with 52 M€.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(56).br;

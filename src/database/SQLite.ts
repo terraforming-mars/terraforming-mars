@@ -197,10 +197,13 @@ export class SQLite implements IDatabase {
     game.lastSaveId++;
   }
 
-  deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {
-    if (rollbackCount > 0) {
-      this.runQuietly('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount]);
+  deleteGameNbrSaves(game_id: GameId, rollbackCount: number): Promise<void> {
+    if (rollbackCount <= 0) {
+      console.error(`invalid rollback count for ${game_id}: ${rollbackCount}`);
+      // Should this be an error?
+      return Promise.resolve();
     }
+    return this.runQuietly('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount]);
   }
 
   public stats(): Promise<{[key: string]: string | number}> {

@@ -41,6 +41,8 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     const foundCard: IProjectCard = cardData.card;
     const howToPay: HowToPay = player.parseHowToPayJSON(input[0][1]);
     const reserveUnits = this.reserveUnits[cardData.idx];
+    // These are not used for safety but do help give a better error message
+    // to the user
     if (reserveUnits.steel + howToPay.steel > player.steel) {
       throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
     }

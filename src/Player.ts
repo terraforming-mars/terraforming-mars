@@ -994,22 +994,19 @@ export class Player {
     }
   }
 
+  public isHowToPay(u: unknown): u is HowToPay {
+    if (typeof u !== 'object') return false;
+    if (!u) return false;
+    const h = u as {[key in keyof HowToPay]?: any};
+    return HowToPay.keys.every((key) =>
+      h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
+  }
+
   public parseHowToPayJSON(json: string): HowToPay {
-    const defaults: HowToPay = {
-      steel: 0,
-      heat: 0,
-      titanium: 0,
-      megaCredits: 0,
-      microbes: 0,
-      floaters: 0,
-      science: 0,
-      seeds: 0,
-      data: 0,
-    };
     try {
-      const howToPay: HowToPay = JSON.parse(json);
-      if (Object.keys(howToPay).every((key) => key in defaults) === false) {
-        throw new Error('Input contains unauthorized keys');
+      const howToPay: unknown = JSON.parse(json);
+      if (!this.isHowToPay(howToPay)) {
+        throw new Error('does not match interface');
       }
       return howToPay;
     } catch (err) {
@@ -1019,6 +1016,10 @@ export class Player {
 
   public runInput(input: InputResponse, pi: PlayerInput): void {
     this.deferInputCb(pi.process(input, this));
+  }
+
+  public getAvailableBlueActionCount(): number {
+    return this.getPlayableActionCards().length;
   }
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {
@@ -1313,62 +1314,34 @@ export class Player {
     );
   }
 
+  private howToPayOptionsForCard(selectedCard: IProjectCard): HowToPay.Options {
+    return {
+      steel: this.canUseSteel(selectedCard),
+      titanium: this.canUseTitanium(selectedCard),
+      seeds: this.canUseSeeds(selectedCard),
+      floaters: this.canUseFloaters(selectedCard),
+      microbes: this.canUseMicrobes(selectedCard),
+      science: this.canUseScience(selectedCard),
+      data: this.canUseData(selectedCard),
+    };
+  }
   public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay, cardAction: CardAction = 'add') {
     const cardCost: number = this.getCardCost(selectedCard);
-    let totalToPay: number = 0;
 
-    const canUseSteel = this.canUseSteel(selectedCard);
-    const canUseTitanium = this.canUseTitanium(selectedCard);
+    const reserved = MoonExpansion.adjustedReserveCosts(this, selectedCard);
 
-    if (canUseSteel && howToPay.steel > 0) {
-      if (howToPay.steel > this.steel) {
-        throw new Error('Do not have enough steel');
+    if (!this.canSpend(howToPay, reserved)) {
+      throw new Error('You do not have that many resources to spend');
+    }
+
+    if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
+      const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
+      if (cardsWithFloater.length === 1) {
+        throw new Error('Cannot spend all floaters to play Stratospheric Birds');
       }
-      totalToPay += howToPay.steel * this.getSteelValue();
     }
 
-    if (canUseTitanium && howToPay.titanium > 0) {
-      if (howToPay.titanium > this.titanium) {
-        throw new Error('Do not have enough titanium');
-      }
-      totalToPay += howToPay.titanium * this.getTitaniumValue();
-    }
-
-    if (this.canUseHeatAsMegaCredits && howToPay.heat !== undefined) {
-      totalToPay += howToPay.heat;
-    }
-
-    if (howToPay.microbes !== undefined) {
-      totalToPay += howToPay.microbes * DEFAULT_MICROBES_VALUE;
-    }
-
-    if (howToPay.floaters !== undefined && howToPay.floaters > 0) {
-      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
-        const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
-        if (cardsWithFloater.length === 1) {
-          throw new Error('Cannot spend all floaters to play Stratospheric Birds');
-        }
-      }
-      totalToPay += howToPay.floaters * DEFAULT_FLOATERS_VALUE;
-    }
-
-    if (howToPay.science ?? 0 > 0) {
-      totalToPay += howToPay.science;
-    }
-
-    if (howToPay.seeds ?? 0 > 0) {
-      totalToPay += howToPay.seeds * constants.SEED_VALUE;
-    }
-
-    if (howToPay.megaCredits > this.megaCredits) {
-      throw new Error('Do not have enough M€');
-    }
-
-    if (howToPay.science !== undefined) {
-      totalToPay += howToPay.science;
-    }
-
-    totalToPay += howToPay.megaCredits;
+    const totalToPay = this.payingAmount(howToPay, this.howToPayOptionsForCard(selectedCard));
 
     if (totalToPay < cardCost) {
       throw new Error('Did not spend enough to pay for card');
@@ -1407,37 +1380,41 @@ export class Player {
     return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
   }
 
-  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
-    // Pay for card
-    if (howToPay !== undefined) {
-      this.deductResource(Resources.STEEL, howToPay.steel);
-      this.deductResource(Resources.TITANIUM, howToPay.titanium);
-      this.deductResource(Resources.MEGACREDITS, howToPay.megaCredits);
-      this.deductResource(Resources.HEAT, howToPay.heat);
+  public pay(howToPay: HowToPay) {
+    this.deductResource(Resources.STEEL, howToPay.steel);
+    this.deductResource(Resources.TITANIUM, howToPay.titanium);
+    this.deductResource(Resources.MEGACREDITS, howToPay.megaCredits);
+    this.deductResource(Resources.HEAT, howToPay.heat);
 
-      for (const playedCard of this.playedCards) {
-        if (playedCard.name === CardName.PSYCHROPHILES) {
-          this.removeResourceFrom(playedCard, howToPay.microbes);
-        }
-
-        if (playedCard.name === CardName.DIRIGIBLES) {
-          this.removeResourceFrom(playedCard, howToPay.floaters);
-        }
-
-        if (playedCard.name === CardName.LUNA_ARCHIVES) {
-          this.removeResourceFrom(playedCard, howToPay.science);
-        }
-
-        const soylent = this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
-        if (soylent !== undefined) {
-          this.removeResourceFrom(soylent, howToPay.seeds);
-        }
-
-        const aurorai = this.getCorporation(CardName.AURORAI);
-        if (aurorai !== undefined) {
-          this.removeResourceFrom(aurorai, howToPay.data);
-        }
+    for (const playedCard of this.playedCards) {
+      if (playedCard.name === CardName.PSYCHROPHILES) {
+        this.removeResourceFrom(playedCard, howToPay.microbes);
       }
+
+      if (playedCard.name === CardName.DIRIGIBLES) {
+        this.removeResourceFrom(playedCard, howToPay.floaters);
+      }
+
+      if (playedCard.name === CardName.LUNA_ARCHIVES) {
+        this.removeResourceFrom(playedCard, howToPay.science);
+      }
+    }
+
+    if (howToPay.seeds > 0) {
+      const soylent = this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
+      if (soylent === undefined) throw new Error('Cannot pay with seeds without ' + CardName.SOYLENT_SEEDLING_SYSTEMS);
+      this.removeResourceFrom(soylent, howToPay.seeds);
+    }
+    if (howToPay.data > 0) {
+      const aurorai = this.getCorporation(CardName.AURORAI);
+      if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
+      this.removeResourceFrom(aurorai, howToPay.seeds);
+    }
+  }
+
+  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
+    if (howToPay !== undefined) {
+      this.pay(howToPay);
     }
 
     ColoniesHandler.onCardPlayed(this.game, selectedCard);
@@ -1737,13 +1714,7 @@ export class Player {
     return this.canAfford(
       this.getCardCost(card),
       {
-        steel: this.canUseSteel(card),
-        titanium: this.canUseTitanium(card),
-        floaters: this.canUseFloaters(card),
-        microbes: this.canUseMicrobes(card),
-        science: this.canUseScience(card),
-        seeds: this.canUseSeeds(card),
-        data: this.canUseData(card),
+        ...this.howToPayOptionsForCard(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
         tr: card.tr,
       });
@@ -1762,46 +1733,80 @@ export class Player {
     return card.canPlay(this);
   }
 
+  private maxSpendable(reserveUnits: Units = Units.EMPTY): HowToPay {
+    return {
+      megaCredits: this.megaCredits - reserveUnits.megacredits,
+      steel: this.steel - reserveUnits.steel,
+      titanium: this.titanium - reserveUnits.titanium,
+      heat: this.heat - reserveUnits.heat,
+      floaters: this.getFloatersCanSpend(),
+      microbes: this.getMicrobesCanSpend(),
+      science: this.getSpendableScienceResources(),
+      seeds: this.getSpendableSeedResources(),
+      data: this.getSpendableData(),
+    };
+  }
+
+  public canSpend(howToPay: HowToPay, reserveUnits?: Units): boolean {
+    const maxPayable = this.maxSpendable(reserveUnits);
+
+    return HowToPay.keys.every((key: keyof HowToPay) =>
+      0 <= howToPay[key] && howToPay[key] <= maxPayable[key]);
+  }
+
+  private payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
+    const mult: {[key in keyof HowToPay]: number} = {
+      megaCredits: 1,
+      steel: this.getSteelValue(),
+      titanium: this.getTitaniumValue(),
+      heat: 1,
+      microbes: DEFAULT_MICROBES_VALUE,
+      floaters: DEFAULT_FLOATERS_VALUE,
+      science: 1,
+      seeds: constants.SEED_VALUE,
+      data: constants.DATA_VALUE,
+    };
+
+    const usable: {[key in keyof HowToPay]: boolean} = {
+      megaCredits: true,
+      steel: options?.steel ?? false,
+      titanium: options?.titanium ?? false,
+      heat: this.canUseHeatAsMegaCredits,
+      microbes: options?.microbes ?? false,
+      floaters: options?.floaters ?? false,
+      science: options?.science ?? false,
+      seeds: options?.seeds ?? false,
+      data: options?.data ?? false,
+    };
+
+    let totalToPay = 0;
+    for (const key of HowToPay.keys) {
+      if (usable[key]) totalToPay += howToPay[key] * mult[key];
+    }
+
+    return totalToPay;
+  }
+
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
   // and additionally pay the reserveUnits (no replaces here)
-  public canAfford(cost: number, options?: {
-    steel?: boolean,
-    titanium?: boolean,
-    floaters?: boolean,
-    microbes?: boolean,
-    science?: boolean,
-    seeds?: boolean,
-    data?: boolean,
-    reserveUnits?: Units,
-    tr?: TRSource,
-  }) {
+  public canAfford(cost: number, options?: CanAffordOptions) {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (!this.hasUnits(reserveUnits)) {
       return false;
     }
 
+    const maxPayable = this.maxSpendable(reserveUnits);
     const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
-
-    let availableMegacredits = this.megaCredits;
-    if (this.canUseHeatAsMegaCredits) {
-      availableMegacredits += this.heat;
-      availableMegacredits -= reserveUnits.heat;
-    }
-    availableMegacredits -= reserveUnits.megacredits;
-    availableMegacredits -= redsCost;
-
-    if (availableMegacredits < 0) {
-      return false;
+    if (redsCost > 0) {
+      const usableForRedsCost = this.payingAmount(maxPayable, {});
+      if (usableForRedsCost < redsCost) {
+        return false;
+      }
     }
 
-    if (options?.steel) availableMegacredits += (this.steel - reserveUnits.steel) * this.getSteelValue();
-    if (options?.titanium) availableMegacredits += (this.titanium - reserveUnits.titanium) * this.getTitaniumValue();
-    if (options?.floaters) availableMegacredits += this.getFloatersCanSpend() * 3;
-    if (options?.microbes) availableMegacredits += this.getMicrobesCanSpend() * 2;
-    if (options?.science) availableMegacredits += this.getSpendableScienceResources();
-    if (options?.seeds) availableMegacredits += this.getSpendableSeedResources() * constants.SEED_VALUE;
-    if (options?.data) availableMegacredits += this.getSpendableData() * constants.DATA_VALUE;
-    return cost <= availableMegacredits;
+    const usable = this.payingAmount(maxPayable, options);
+
+    return cost + redsCost <= usable;
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {
@@ -2333,4 +2338,9 @@ export class Player {
     const action = new SimpleDeferredAction(this, () => input, priority);
     this.game.defer(action);
   }
+}
+
+export interface CanAffordOptions extends Partial<HowToPay.Options> {
+  reserveUnits?: Units,
+  tr?: TRSource,
 }

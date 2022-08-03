@@ -245,7 +245,7 @@ export class PostgreSQL implements IDatabase {
           if (err) {
             console.error(err.message);
           }
-          logForUndo(game_id, 'deleted', res.rowCount, 'rows');
+          logForUndo(game_id, 'deleted', res?.rowCount, 'rows');
           this.getSaveIds(game_id)
             .then((second) => {
               const difference = first.filter((x) => !second.includes(x));

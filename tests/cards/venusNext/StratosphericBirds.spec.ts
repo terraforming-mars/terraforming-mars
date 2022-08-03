@@ -9,7 +9,7 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
-import {EMPTY_HOWTOPAY} from '../../../src/common/inputs/HowToPay';
+import {HowToPay} from '../../../src/common/inputs/HowToPay';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
@@ -102,11 +102,11 @@ describe('StratosphericBirds', () => {
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
-      selectHowToPayForProjectCard!.cb(card, {...EMPTY_HOWTOPAY, megaCredits: 9, floaters: 1});
+      selectHowToPayForProjectCard!.cb(card, {...HowToPay.EMPTY, megaCredits: 9, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
-    selectHowToPayForProjectCard!.cb(card, {...EMPTY_HOWTOPAY, megaCredits: 12});
+    selectHowToPayForProjectCard!.cb(card, {...HowToPay.EMPTY, megaCredits: 12});
         game.deferredActions.pop()!.execute(); // Remove floater
         expect(dirigibles.resourceCount).to.eq(0);
   });
@@ -124,7 +124,7 @@ describe('StratosphericBirds', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
-    selectHowToPayForCard!.cb(card, {...EMPTY_HOWTOPAY, megaCredits: 3, floaters: 3});
+    selectHowToPayForCard!.cb(card, {...HowToPay.EMPTY, megaCredits: 3, floaters: 3});
         game.deferredActions.pop()!.execute(); // Remove floater
         expect(dirigibles.resourceCount).to.eq(0);
         expect(deuteriumExport.resourceCount).to.eq(0);

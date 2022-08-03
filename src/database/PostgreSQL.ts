@@ -242,7 +242,7 @@ export class PostgreSQL implements IDatabase {
     logForUndo(game_id, 'deleting', rollbackCount, 'saves');
     const first = await this.getSaveIds(game_id);
     const res = await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [game_id, rollbackCount]);
-    logForUndo(game_id, 'deleted', res.rowCount, 'rows');
+    logForUndo(game_id, 'deleted', res?.rowCount, 'rows');
     const second = await this.getSaveIds(game_id);
     const difference = first.filter((x) => !second.includes(x));
     logForUndo(game_id, 'second', second);

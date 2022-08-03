@@ -237,7 +237,7 @@ export class PostgreSQL implements IDatabase {
     if (rollbackCount <= 0) {
       console.error(`invalid rollback count for ${game_id}: ${rollbackCount}`);
       // Should this be an error?
-      return Promise.resolve();
+      return;
     }
     logForUndo(game_id, 'deleting', rollbackCount, 'saves');
     const first = await this.getSaveIds(game_id);

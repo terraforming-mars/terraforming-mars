@@ -1,6 +1,11 @@
 export abstract class Random {
   public abstract next(): number;
 
+  /**
+   * Returns a random number between 0 and `range - 1`
+   * @param {number} range upper bound random number, exclusive.
+   * @return {number} a random number between 0 and `range - 1`
+   */
   public nextInt(range: number): number {
     return Math.floor(this.next() * range);
   }
@@ -30,13 +35,23 @@ export class SeededRandom extends Random {
 }
 
 export class UnseededRandom extends Random {
-  public static INSTANCE = new UnseededRandom();
-
-  private constructor() {
-    super();
-  }
+  public static readonly INSTANCE = new UnseededRandom();
 
   public next(): number {
     return Math.random();
+  }
+}
+
+export class ConstRandom extends Random {
+  private readonly float: number;
+  constructor(float: number) {
+    super();
+    if (float < 0 || float > 1) {
+      throw new Error('Supply a value between 0 and 1.');
+    }
+    this.float = float;
+  }
+  public next(): number {
+    return this.float;
   }
 }

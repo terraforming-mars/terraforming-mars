@@ -97,6 +97,7 @@ import {Steelaris} from './Steelaris';
 import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
+import {TheNewSpaceRace} from './TheNewSpaceRace';
 import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
@@ -224,7 +225,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
     {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},
     {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: 'turmoil'},
-    // {cardName: CardName.THE_NEW_SPACE_RACE, Factory: TheNewSpaceRace},
+    {cardName: CardName.THE_NEW_SPACE_RACE, Factory: TheNewSpaceRace, compatibility: 'turmoil'},
   ],
 
   // Perhaps these community cards should just move to this manifest, but only if it becomes

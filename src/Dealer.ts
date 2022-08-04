@@ -6,29 +6,45 @@ import {GameCards} from './GameCards';
 import {CardName} from './common/cards/CardName';
 import {LogHelper} from './LogHelper';
 import {Game} from './Game';
+import {Random, UnseededRandom} from './Random';
+
+const INCOMPATIBLE_PRELUDES = [CardName.BY_ELECTION, CardName.THE_NEW_SPACE_RACE] as const;
 
 export class Dealer {
   public deck: Array<IProjectCard> = [];
   public preludeDeck: Array<IProjectCard> = [];
   public discarded: Array<IProjectCard> = [];
   public corporationCards: Array<ICorporationCard> = [];
+  private random: Random;
 
-  private constructor() { }
+  private constructor(random: Random) {
+    this.random = random;
+  }
 
-  public static newInstance(cardsForGame: GameCards): Dealer {
-    const dealer = new Dealer();
+  public static newInstance(cardsForGame: GameCards, random: Random = UnseededRandom.INSTANCE): Dealer {
+    const dealer = new Dealer(random);
 
-    dealer.deck = Dealer.shuffle(cardsForGame.getProjectCards());
-    dealer.preludeDeck = Dealer.shuffle(cardsForGame.getPreludeCards());
+    dealer.deck = Dealer.shuffle(cardsForGame.getProjectCards(), random);
     dealer.corporationCards = cardsForGame.getCorporationCards();
+
+    dealer.preludeDeck = Dealer.shuffle(cardsForGame.getPreludeCards(), random);
+    // Special-case prelude deck: both The New Space Race and By-Election cannot
+    // be used in the same game.
+    const indexes = INCOMPATIBLE_PRELUDES.map((name) => dealer.preludeDeck.findIndex((c) => c.name === name));
+    if (indexes[0] >= 0 && indexes[1] >= 0) {
+      // Remove one from the game, randomly
+      const target = random.nextInt(2);
+      const indexToRemove = indexes[target];
+      dealer.preludeDeck.splice(indexToRemove, 1);
+    }
     return dealer;
   }
 
-  public static shuffle<T>(cards: Array<T>): Array<T> {
+  public static shuffle<T>(cards: Array<T>, random: Random = UnseededRandom.INSTANCE): Array<T> {
     const deck: Array<T> = [];
     const copy = cards.slice();
     while (copy.length) {
-      deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+      deck.push(copy.splice(random.nextInt(copy.length), 1)[0]);
     }
     return deck;
   }
@@ -49,7 +65,7 @@ export class Dealer {
 
     if (this.deck.length === 0) {
       game.log('The discard pile has been shuffled to form a new deck.');
-      this.deck = Dealer.shuffle(this.discarded);
+      this.deck = Dealer.shuffle(this.discarded, this.random);
       this.discarded = [];
     }
 
@@ -99,7 +115,8 @@ export class Dealer {
   }
 
   public static deserialize(d: SerializedDealer): Dealer {
-    const dealer = new Dealer();
+    // TODO(kberg): serializing the randomizer would help when using a seeded game that reshuffles.
+    const dealer = new Dealer(UnseededRandom.INSTANCE);
     const cardFinder = new CardFinder();
 
     dealer.corporationCards = cardFinder.corporationCardsFromJSON(d.corporationCards);

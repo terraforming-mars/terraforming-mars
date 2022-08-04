@@ -71,4 +71,6 @@ export enum CardRenderItemType {
   SEED = 'seed',
   ORBITAL = 'orbital',
   GLOBAL_EVENT = 'global-event',
+  FIRST_PLAYER = '1p',
+  RULING_PARTY = 'ruling-party',
 }

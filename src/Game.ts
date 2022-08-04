@@ -67,6 +67,7 @@ import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
+import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 
 export interface Score {
   corporation: String;
@@ -99,6 +100,8 @@ export class Game {
   private passedPlayers = new Set<PlayerId>();
   private researchedPlayers = new Set<PlayerId>();
   private draftedPlayers = new Set<PlayerId>();
+  // The first player of this generation.
+  private first: Player;
 
   // Drafting
   private draftRound: number = 1;
@@ -134,7 +137,7 @@ export class Game {
   private constructor(
     public id: GameId,
     private players: Array<Player>,
-    private first: Player,
+    first: Player,
     activePlayer: PlayerId,
     public gameOptions: GameOptions,
     rng: SeededRandom,
@@ -156,6 +159,7 @@ export class Game {
     }
 
     this.activePlayer = activePlayer;
+    this.first = first;
     this.rng = rng;
     this.dealer = dealer;
     this.board = board;
@@ -617,19 +621,22 @@ export class Game {
     return this.passedPlayers.has(player.id);
   }
 
-  private incrementFirstPlayer(): void {
-    let firstIndex: number = this.players.map(function(x) {
-      return x.id;
-    }).indexOf(this.first.id);
+  // Public for testing.
+  public incrementFirstPlayer(): void {
+    let firstIndex: number = this.players.map((x) => x.id).indexOf(this.first.id);
     if (firstIndex === -1) {
       throw new Error('Didn\'t even find player');
     }
-    if (firstIndex === this.players.length - 1) {
-      firstIndex = 0;
-    } else {
-      firstIndex++;
-    }
+    firstIndex = (firstIndex + 1) % this.players.length;
     this.first = this.players[firstIndex];
+  }
+
+  // Only used in the prelude The New Space Race.
+  public overrideFirstPlayer(newFirstPlayer: Player): void {
+    if (newFirstPlayer.game.id !== this.id) {
+      throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
+    }
+    this.first = newFirstPlayer;
   }
 
   private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false): void {
@@ -822,6 +829,7 @@ export class Game {
       if (this.allPlayersHaveFinishedResearch()) {
         this.phase = Phase.ACTION;
         this.passedPlayers.clear();
+        TheNewSpaceRace.potentiallyChangeFirstPlayer(this);
         this.startActionsForPlayer(this.first);
       }
     });
@@ -1478,7 +1486,6 @@ export class Game {
 
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): Array<Player> {
-    // We always return them in turn order
     const ret: Array<Player> = [];
     let insertIdx: number = 0;
     for (const p of this.players) {
@@ -1495,17 +1502,26 @@ export class Game {
   public getCardPlayer(name: CardName): Player {
     for (const player of this.players) {
       // Check cards player has played
-      for (const card of player.playedCards) {
+      for (const card of player.tableau) {
         if (card.name === name) {
           return player;
         }
       }
-      // Check player corporation
-      if (player.isCorporation(name)) {
-        return player;
-      }
     }
     throw new Error(`No player has played ${name}`);
+  }
+
+  // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
+  public getCardHolder(name: CardName): [Player | undefined, IProjectCard | undefined] {
+    for (const player of this.players) {
+      // Check cards player has in hand
+      for (const card of [...player.preludeCardsInHand, ...player.cardsInHand]) {
+        if (card.name === name) {
+          return [player, card];
+        }
+      }
+    }
+    return [undefined, undefined];
   }
 
   public getCardsInHandByResource(player: Player, resourceType: CardResource) {

@@ -1432,7 +1432,7 @@ export class Game {
 
   public addCityTile(
     player: Player, spaceId: SpaceId, spaceType: SpaceType = SpaceType.LAND,
-    cardName: string | undefined = undefined): void {
+    cardName: CardName | undefined = undefined): void {
     const space = this.board.getSpace(spaceId);
     this.addTile(player, spaceType, space, {
       tileType: TileType.CITY,

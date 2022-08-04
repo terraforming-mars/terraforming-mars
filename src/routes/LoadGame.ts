@@ -3,7 +3,7 @@ import {Database} from '../database/Database';
 import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {LoadGameFormModel} from '../common/models/LoadGameFormModel';
 import {GameId} from '../common/Types';
 
@@ -13,7 +13,7 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {

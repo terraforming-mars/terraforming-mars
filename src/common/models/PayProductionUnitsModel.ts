@@ -1,5 +1,5 @@
 import {Units} from '../Units';
-export interface IPayProductionModel {
+export type PayProductionModel = {
     cost: number;
     units: Units;
 }

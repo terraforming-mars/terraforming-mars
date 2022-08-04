@@ -7,13 +7,13 @@ import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CardName} from '../../common/cards/CardName';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class LavaFlows extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.LAVA_FLOWS,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '140',
       renderData: CardRenderer.builder((b) => {

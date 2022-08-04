@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -34,7 +34,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     return this.name === CardName.MINING_AREA_ARES ||
                this.name === CardName.MINING_RIGHTS_ARES;
   }
-  private getAdjacencyBonus(bonusType: SpaceBonus): IAdjacencyBonus | undefined {
+  private getAdjacencyBonus(bonusType: SpaceBonus): AdjacencyBonus | undefined {
     if (this.isAres()) {
       return {bonus: [bonusType]};
     }

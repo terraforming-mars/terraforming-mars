@@ -5,10 +5,10 @@ import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
 import {Player} from '../../src/Player';
 import {SpaceId} from '../../src/common/Types';
-import {IAdjacencyBonus} from '../../src/ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../src/ares/AdjacencyBonus';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 
-function addAdjacencyBonus(player: Player, spaceId: SpaceId, adjacency: IAdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {
+function addAdjacencyBonus(player: Player, spaceId: SpaceId, adjacency: AdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {
   const space = player.game.board.getSpace(spaceId);
   space.tile = {tileType: TileType.GREENERY};
   space.player = player;

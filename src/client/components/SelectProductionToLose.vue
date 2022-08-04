@@ -1,4 +1,4 @@
-  // TODO(chosta): consolidate repetition into a reusable component.
+PayProductionModel  // TODO(chosta): consolidate repetition into a reusable component.
 <template>
   <div class="wf-component wf-component--select-production-to-lose">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
@@ -55,7 +55,7 @@
 import Vue from 'vue';
 
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {IPayProductionModel} from '@/common/models/IPayProductionUnitsModel';
+import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
@@ -119,7 +119,7 @@ export default Vue.extend({
       return this.$data.warning !== undefined;
     },
     delta(type: string, direction: number) {
-      const expendableProductionQuantity = function(type: string, model: IPayProductionModel): number {
+      const expendableProductionQuantity = function(type: string, model: PayProductionModel): number {
         switch (type) {
         case 'megacredits':
           return model.units.megacredits + 5;
@@ -139,7 +139,7 @@ export default Vue.extend({
       const current = this.$data[type];
       let newValue = current + direction;
       const lowestValue = (type === 'megacredit') ? -5 : 0;
-      const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction as IPayProductionModel);
+      const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction as PayProductionModel);
       newValue = Math.min(Math.max(newValue, lowestValue), expendableQuantity);
       this.$data[type] = newValue;
     },

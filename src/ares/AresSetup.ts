@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {IAresData} from '../common/ares/IAresData';
+import {AresData} from '../common/ares/AresData';
 import {Game} from '../Game';
 import {TileType} from '../common/TileType';
 import {_AresHazardPlacement} from './AresHazards';
@@ -7,7 +7,7 @@ import {_AresHazardPlacement} from './AresHazards';
 export class AresSetup {
   private constructor() {}
 
-  public static initialData(active: boolean, includeHazards: boolean, players: Player[]): IAresData {
+  public static initialData(active: boolean, includeHazards: boolean, players: Player[]): AresData {
     return {
       active: active,
       includeHazards: includeHazards,

@@ -1,6 +1,6 @@
 import * as http from 'http';
 import {Handler} from './Handler';
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {Database} from '../database/Database';
 import {isGameId} from '../common/Types';
 
@@ -10,7 +10,7 @@ export class ApiCloneableGame extends Handler {
     super();
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     const gameId = ctx.url.searchParams.get('id');
     if (gameId === null) {
       ctx.route.badRequest(req, res, 'missing id parameter');

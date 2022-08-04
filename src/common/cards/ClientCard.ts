@@ -8,13 +8,13 @@ import {ICardMetadata} from './ICardMetadata';
 import {ICardRequirements} from './ICardRequirements';
 import {IVictoryPoints} from './IVictoryPoints';
 import {Tags} from './Tags';
-import {ICardDiscount} from './Types';
+import {CardDiscount} from './Types';
 
-export interface IClientCard {
+export type ClientCard = {
   name: CardName;
   module: GameModule;
   tags: Array<Tags>;
-  cardDiscount?: ICardDiscount | Array<ICardDiscount>;
+  cardDiscount?: CardDiscount | Array<CardDiscount>;
   victoryPoints?: number | 'special' | IVictoryPoints,
   cost?: number;
   cardType: CardType;

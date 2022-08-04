@@ -9,13 +9,13 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class RestrictedArea extends Card implements IActionCard, IProjectCard {
   constructor(
     name: CardName = CardName.RESTRICTED_AREA,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '199',
       renderData: CardRenderer.builder((b) => {

@@ -1,6 +1,6 @@
 import * as http from 'http';
 import {Handler} from './Handler';
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {Database} from '../database/Database';
 import {BoardName} from '../common/boards/BoardName';
 import {RandomBoardOption} from '../common/boards/RandomBoardOption';
@@ -43,14 +43,14 @@ export class GameHandler extends Handler {
     return [board];
   }
 
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     req.url = '/assets/index.html';
     return ServeAsset.INSTANCE.get(req, res, ctx);
   }
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {

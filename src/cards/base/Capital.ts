@@ -9,7 +9,7 @@ import {SpaceType} from '../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -20,7 +20,7 @@ import {Units} from '../../common/Units';
 export class Capital extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.CAPITAL,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata: ICardMetadata = {
       cardNumber: '008',
       description: {

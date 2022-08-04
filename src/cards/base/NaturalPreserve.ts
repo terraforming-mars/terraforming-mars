@@ -8,7 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
@@ -18,7 +18,7 @@ import {max} from '../Options';
 export class NaturalPreserve extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.NATURAL_PRESERVE,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '044',
       renderData: CardRenderer.builder((b) => {

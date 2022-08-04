@@ -1,4 +1,4 @@
-import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {Tile} from '../Tile';
 import {PlayerId} from '../common/Types';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
@@ -15,7 +15,7 @@ export interface SerializedSpace {
   tile?: Tile;
   player?: PlayerId;
   bonus: Array<SpaceBonus>;
-  adjacency?: IAdjacencyBonus,
+  adjacency?: AdjacencyBonus,
   x: number;
   y: number;
 }

@@ -1,6 +1,6 @@
 import * as http from 'http';
 
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {LogMessage} from '../common/logs/LogMessage';
 import {LogMessageType} from '../common/logs/LogMessageType';
 import {isPlayerId} from '../common/Types';
@@ -25,7 +25,7 @@ export class GameLogs {
     return newMessages;
   }
 
-  public async handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public async handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
     if (!playerId) {
       ctx.route.badRequest(req, res, 'missing id parameter');

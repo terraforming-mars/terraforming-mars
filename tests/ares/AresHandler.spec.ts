@@ -7,7 +7,7 @@ import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
-import {ITile} from '../../src/ITile';
+import {Tile} from '../../src/Tile';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {Resources} from '../../src/common/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
@@ -64,7 +64,7 @@ describe('AresHandler', function() {
 
   describe('setupHazards', function() {
     interface SpaceToTest {
-      tile: ITile;
+      tile: Tile;
       x: number;
       y: number;
     }

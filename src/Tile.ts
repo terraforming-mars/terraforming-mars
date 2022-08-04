@@ -2,9 +2,9 @@
 import {CardName} from './common/cards/CardName';
 import {TileType} from './common/TileType';
 
-export interface ITile {
+export type Tile = {
   card?: CardName;
   tileType: TileType;
   protectedHazard?: boolean;
-  covers?: ITile;
+  covers?: Tile;
 }

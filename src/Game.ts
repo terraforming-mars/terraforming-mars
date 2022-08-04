@@ -17,7 +17,7 @@ import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
-import {ITile} from './ITile';
+import {Tile} from './Tile';
 import {LogBuilder} from './LogBuilder';
 import {LogHelper} from './LogHelper';
 import {LogMessage} from './common/logs/LogMessage';
@@ -1253,7 +1253,7 @@ export class Game {
   // a tile on The Moon.
   public addTile(
     player: Player, spaceType: SpaceType,
-    space: ISpace, tile: ITile): void {
+    space: ISpace, tile: Tile): void {
     // Part 1, basic validation checks.
 
     if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion)) {
@@ -1347,7 +1347,7 @@ export class Game {
     });
   }
 
-  public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
+  public simpleAddTile(player: Player, space: ISpace, tile: Tile) {
     space.tile = tile;
     space.player = player;
     if (tile.tileType === TileType.OCEAN || tile.tileType === TileType.MARTIAN_NATURE_WONDERS) {

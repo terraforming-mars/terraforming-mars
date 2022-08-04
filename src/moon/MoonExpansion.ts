@@ -1,5 +1,5 @@
 import {Game} from '../Game';
-import {ITile} from '../ITile';
+import {Tile} from '../Tile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
 import {TileType} from '../common/TileType';
@@ -98,7 +98,7 @@ export class MoonExpansion {
   // isn't.
 
   // Update: I think this is going to have to merge with addTile. It won't be bad.
-  public static addTile(player: Player, spaceId: string, tile: ITile): void {
+  public static addTile(player: Player, spaceId: string, tile: Tile): void {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
       const space = moonData.moon.getSpace(spaceId);

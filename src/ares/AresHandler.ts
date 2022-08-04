@@ -8,7 +8,7 @@ import {Resources} from '../common/Resources';
 import {CardResource} from '../common/CardResource';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
-import {ITile} from '../ITile';
+import {Tile} from '../Tile';
 import {IAresData, IMilestoneCount} from '../common/ares/IAresData';
 import {IAdjacencyCost} from './IAdjacencyCost';
 import {Multiset} from '../utils/Multiset';
@@ -220,7 +220,7 @@ export class AresHandler {
   }
 
   // Returns true if |newTile| can cover |boardTile|.
-  public static canCover(space: ISpace, newTile: ITile): boolean {
+  public static canCover(space: ISpace, newTile: Tile): boolean {
     if (space.tile === undefined) {
       return true;
     }

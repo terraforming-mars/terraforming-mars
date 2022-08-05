@@ -1,8 +1,8 @@
-AresData<template>
+<template>
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
-          <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button" v-i18n>
-            {{ hideTiles ? 'show' : 'hide' }} tiles
+          <div class="hide-tile-button" @click="$emit('toggleTileView')" data-test="hide-tiles-button" v-i18n>
+            {{ tileView }} tiles
           </div>
         </div>
         <div class="board-outer-spaces">
@@ -84,7 +84,7 @@ AresData<template>
               :space="curSpace"
               :is_selectable="true"
               :aresExtension="aresExtension"
-              :hideTiles="hideTiles"
+              :tileView="tileView"
               data-test="board-space"
             />
 
@@ -205,6 +205,7 @@ import {AresData} from '@/common/ares/AresData';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {SpaceId} from '@/common/Types';
+import {TileView} from '@/client/components/board/TileView';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -247,9 +248,8 @@ export default Vue.extend({
     aresData: {
       type: Object as () => AresData | undefined,
     },
-    hideTiles: {
-      type: Boolean,
-      default: false,
+    tileView: {
+      type: String as () => TileView,
     },
   },
   components: {

@@ -8,6 +8,7 @@ import Vue from 'vue';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType} from '@/common/TileType';
 import {SpaceHighlight} from '@/common/models/SpaceModel';
+import {TileView} from '@/client/components/board/TileView';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],
@@ -104,9 +105,9 @@ export default Vue.extend({
     aresExtension: {
       type: Boolean,
     },
-    hideTiles: {
-      type: Boolean,
-      default: false,
+    tileView: {
+      type: String as () => TileView,
+      default: 'show',
     },
     spaceType: {
       type: String as () => SpaceType,
@@ -162,7 +163,7 @@ export default Vue.extend({
           }
         }
       }
-      if (this.hideTiles) {
+      if (this.tileView !== 'show') {
         css += ' board-hidden-tile';
       }
       return css;

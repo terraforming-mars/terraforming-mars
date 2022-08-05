@@ -27,7 +27,6 @@
       </sidebar>
 
       <div v-if="thisPlayer.tableau.length > 0">
-
           <div class="player_home_block">
               <a name="board" class="player_home_anchor"></a>
               <board
@@ -42,14 +41,14 @@
                 :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
                 :altVenusBoard="game.gameOptions.altVenusBoard"
                 :aresData="game.aresData"
-                :hideTiles="hideTiles"
-                @toggleHideTiles="hideTiles = !hideTiles"
+                :tileView="tileView"
+                @toggleTileView="cycleTileView()"
                 id="shortkey-board"
               />
 
               <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-              <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :hideTiles="hideTiles"/>
+              <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
 
               <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
@@ -295,12 +294,13 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
 
 import * as raw_settings from '@/genfiles/settings.json';
+import {nextTileView, TileView} from './board/TileView';
 
 export interface PlayerHomeModel {
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
-  hideTiles: boolean;
+  tileView: TileView;
 }
 
 class TerraformedAlertDialog {
@@ -315,7 +315,7 @@ export default Vue.extend({
       showActiveCards: !preferences.hide_active_cards,
       showAutomatedCards: !preferences.hide_automated_cards,
       showEventCards: !preferences.hide_event_cards,
-      hideTiles: false,
+      tileView: 'show',
     };
   },
   watch: {
@@ -432,6 +432,9 @@ export default Vue.extend({
         this.showEventCards = !this.showEventCards;
         break;
       }
+    },
+    cycleTileView(): void {
+      this.tileView = nextTileView(this.tileView);
     },
     isVisible(type: string): boolean {
       switch (type) {

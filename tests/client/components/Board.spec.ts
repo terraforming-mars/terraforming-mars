@@ -50,13 +50,11 @@ const spaces: SpaceModel[] = [
 ];
 
 
-describe('MoonBoard', () => {
+describe('Board', () => {
   it('has visible tiles on the board', () => {
-    const hideTiles = false;
-
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, hideTiles},
+      propsData: {spaces, tileView: 'hide'},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).wrappers.filter((wrapper) => {
@@ -64,16 +62,14 @@ describe('MoonBoard', () => {
     });
 
     expect(
-      boardSpacesWrappers.every((wrapper) => wrapper.props('hideTiles') === hideTiles),
+      boardSpacesWrappers.every((wrapper) => wrapper.props('tileView') === 'hide'),
     ).to.be.true;
   });
 
   it('has hidden tiles on the board', () => {
-    const hideTiles = true;
-
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, hideTiles},
+      propsData: {spaces, tileView: 'show'},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).wrappers.filter((wrapper) => {
@@ -81,24 +77,24 @@ describe('MoonBoard', () => {
     });
 
     expect(
-      boardSpacesWrappers.every((wrapper) => wrapper.props('hideTiles') === hideTiles),
+      boardSpacesWrappers.every((wrapper) => wrapper.props('tileView') === 'show'),
     ).to.be.true;
   });
 
-  it('emits toggleHideTiles on toggle button click', async () => {
+  it('emits toggleTileView on toggle button click', async () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
       propsData: {spaces},
     });
 
     await wrapper.find('[data-test=hide-tiles-button]').trigger('click');
-    expect(wrapper.emitted('toggleHideTiles')?.length).to.be.eq(1);
+    expect(wrapper.emitted('toggleTileView')?.length).to.be.eq(1);
   });
 
   it('renders "show tiles" in toggle button if tiles are hidden', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, hideTiles: true},
+      propsData: {spaces, tileView: 'show'},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('show tiles');
@@ -107,7 +103,7 @@ describe('MoonBoard', () => {
   it('renders "hide tiles" in toggle button if tiles are visible', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, hideTiles: false},
+      propsData: {spaces, tileView: 'hide'},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('hide tiles');

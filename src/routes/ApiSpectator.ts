@@ -1,7 +1,7 @@
 import * as http from 'http';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {Game} from '../Game';
 import {isSpectatorId} from '../common/Types';
 
@@ -12,7 +12,7 @@ export class ApiSpectator extends Handler {
     super();
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     const id = ctx.url.searchParams.get('id');
     if (!id) {
       ctx.route.badRequest(req, res, 'invalid id');

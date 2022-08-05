@@ -9,7 +9,7 @@ import {GameModule} from '../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {ALL_EVENTS, getGlobalEventModule} from '../turmoil/globalEvents/GlobalEventDealer';
 import {IClientGlobalEvent} from '../common/turmoil/IClientGlobalEvent';
-import {IClientCard} from '../common/cards/IClientCard';
+import {ClientCard} from '../common/cards/ClientCard';
 import {CardType} from '../common/cards/CardType';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {PreludeCard} from '../cards/prelude/PreludeCard';
@@ -17,7 +17,7 @@ import {IColonyMetadata} from '../common/colonies/IColonyMetadata';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 
 class ProjectCardProcessor {
-  public static json: Array<IClientCard> = [];
+  public static json: Array<ClientCard> = [];
   public static makeJson() {
     ALL_CARD_MANIFESTS.forEach(this.processManifest);
   }
@@ -44,7 +44,7 @@ class ProjectCardProcessor {
       startingMegaCredits = (card as ICorporationCard).startingMegaCredits;
       cardCost = (card as ICorporationCard).cardCost;
     }
-    const clientCard: IClientCard = {
+    const clientCard: ClientCard = {
       module: module,
       name: card.name,
       tags: card.tags,

@@ -10,7 +10,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -22,7 +22,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
   constructor(
     name: CardName = CardName.ECOLOGICAL_ZONE,
     cost: number = 12,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata: ICardMetadata = {
       description: {
         text: 'Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.',

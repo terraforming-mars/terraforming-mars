@@ -7,14 +7,14 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../common/cards/CardName';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearZone extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.NUCLEAR_ZONE,
     cost: number = 10,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '097',
       renderData: CardRenderer.builder((b) => {

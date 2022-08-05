@@ -2,7 +2,7 @@ import * as http from 'http';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../common/inputs/InputResponse';
@@ -14,7 +14,7 @@ export class PlayerInput extends Handler {
     super();
   }
 
-  public override async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
     if (playerId === null) {
       ctx.route.badRequest(req, res, 'missing id parameter');
@@ -51,7 +51,7 @@ export class PlayerInput extends Handler {
            waitingFor instanceof OrOptions && waitingFor.options[Number(entity[0][0])] instanceof UndoActionOption;
   }
 
-  private async performUndo(_req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext, player: Player): Promise<void> {
+  private async performUndo(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: Player): Promise<void> {
     /**
      * The `lastSaveId` property is incremented during every `takeAction`.
      * The first save being decremented is the increment during `takeAction` call
@@ -75,7 +75,7 @@ export class PlayerInput extends Handler {
   private processInput(
     req: http.IncomingMessage,
     res: http.ServerResponse,
-    ctx: IContext,
+    ctx: Context,
     player: Player,
   ): Promise<void> {
     return new Promise((resolve) => {

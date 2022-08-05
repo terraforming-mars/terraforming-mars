@@ -2,7 +2,7 @@ import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {BufferCache} from './BufferCache';
 import {ContentType} from './ContentType';
 import {Handler} from './Handler';
@@ -52,7 +52,7 @@ export class ServeAsset extends Handler {
     this.cache.set('build/styles.css.br', brotli);
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     if (req.url === undefined) {
       ctx.route.internalServerError(req, res, new Error('no url on request'));
       return;

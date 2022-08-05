@@ -1,6 +1,6 @@
 import * as http from 'http';
 import {Handler} from './Handler';
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {Database} from '../database/Database';
 
 
@@ -10,7 +10,7 @@ export class ApiStats extends Handler {
     super({validateServerId: true});
   }
 
-  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     try {
       const stats = await Database.getInstance().stats();
       ctx.route.writeJson(res, stats, 2);

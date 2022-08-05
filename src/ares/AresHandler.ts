@@ -9,8 +9,8 @@ import {CardResource} from '../common/CardResource';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {Tile} from '../Tile';
-import {IAresData, IMilestoneCount} from '../common/ares/IAresData';
-import {IAdjacencyCost} from './IAdjacencyCost';
+import {AresData, MilestoneCount} from '../common/ares/AresData';
+import {AdjacencyCost} from './AdjacencyCost';
 import {Multiset} from '../utils/Multiset';
 import {Phase} from '../common/Phase';
 import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
@@ -27,14 +27,14 @@ export enum HazardSeverity {
 export class AresHandler {
   private constructor() {}
 
-  public static ifAres(game: Game, cb: (aresData: IAresData) => void) {
+  public static ifAres(game: Game, cb: (aresData: AresData) => void) {
     if (game.gameOptions.aresExtension) {
       if (game.aresData === undefined) throw new Error('Assertion failure: game.aresData is undefined');
       cb(game.aresData);
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: IAresData, player: Player, space: ISpace) {
+  public static earnAdjacencyBonuses(aresData: AresData, player: Player, space: ISpace) {
     let incrementMilestone = false;
 
     player.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -44,7 +44,7 @@ export class AresHandler {
     });
     if (incrementMilestone) {
       const milestoneResults = aresData.milestoneResults;
-      const entry : IMilestoneCount | undefined = milestoneResults.find((e) => e.id === player.id);
+      const entry : MilestoneCount | undefined = milestoneResults.find((e) => e.id === player.id);
       if (entry === undefined) {
         throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
       }
@@ -148,7 +148,7 @@ export class AresHandler {
     }
   }
 
-  private static computeAdjacencyCosts(game: Game, space: ISpace, subjectToHazardAdjacency: boolean): IAdjacencyCost {
+  private static computeAdjacencyCosts(game: Game, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
     // Summing up production cost isn't really the way to do it, because each tile could
     // reduce different production costs. Oh well.
     let megaCreditCost = 0;
@@ -181,7 +181,7 @@ export class AresHandler {
     return {megacredits: megaCreditCost, production: productionCost};
   }
 
-  public static assertCanPay(player: Player, space: ISpace, subjectToHazardAdjacency: boolean): IAdjacencyCost {
+  public static assertCanPay(player: Player, space: ISpace, subjectToHazardAdjacency: boolean): AdjacencyCost {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }
@@ -235,15 +235,15 @@ export class AresHandler {
     return false;
   }
 
-  public static onTemperatureChange(game: Game, aresData: IAresData) {
+  public static onTemperatureChange(game: Game, aresData: AresData) {
     _AresHazardPlacement.onTemperatureChange(game, aresData);
   }
 
-  public static onOceanPlaced(aresData: IAresData, player: Player) {
+  public static onOceanPlaced(aresData: AresData, player: Player) {
     _AresHazardPlacement.onOceanPlaced(aresData, player);
   }
 
-  public static onOxygenChange(game: Game, aresData: IAresData) {
+  public static onOxygenChange(game: Game, aresData: AresData) {
     _AresHazardPlacement.onOxygenChange(game, aresData);
   }
 

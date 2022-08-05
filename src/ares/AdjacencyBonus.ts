@@ -1,6 +1,6 @@
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 
-export interface IAdjacencyBonus {
+export type AdjacencyBonus = {
   bonus: Array<SpaceBonus>;
   cost ?: number;
 }

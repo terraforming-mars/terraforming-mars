@@ -1,6 +1,6 @@
 import * as http from 'http';
 import {Handler} from './Handler';
-import {IContext} from './IHandler';
+import {Context} from './IHandler';
 import {ServeApp} from './ServeApp';
 import {ServeAsset} from './ServeAsset';
 
@@ -11,7 +11,7 @@ export class GamesOverview extends Handler {
   private constructor() {
     super({validateServerId: true});
   }
-  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void> {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
     req.url = '/assets/index.html';
     return ServeAsset.INSTANCE.get(req, res, ctx);
   }

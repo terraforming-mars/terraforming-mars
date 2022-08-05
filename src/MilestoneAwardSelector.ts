@@ -19,7 +19,6 @@ import {Thermalist} from './awards/Thermalist';
 import {Venuphile} from './awards/Venuphile';
 import {BoardName} from './common/boards/BoardName';
 import {GameOptions} from './GameOptions';
-import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
 import {Builder} from './milestones/Builder';
 import {Diversifier} from './milestones/Diversifier';
 import {Ecologist} from './milestones/Ecologist';
@@ -50,6 +49,11 @@ import {Irrigator} from './milestones/Irrigator';
 import {Smith} from './milestones/Smith';
 import {Tradesman} from './milestones/Tradesman';
 import {Voyager} from './awards/Voyager';
+
+type DrawnMilestonesAndAwards = {
+  milestones: Array<IMilestone>,
+  awards: Array<IAward>
+}
 
 export namespace MilestoneAwardSelector {
   // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
@@ -283,8 +287,8 @@ export namespace MilestoneAwardSelector {
     highThreshold: 100,
   };
 
-  export function chooseMilestonesAndAwards(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
-    let drawnMilestonesAndAwards: IDrawnMilestonesAndAwards = {
+  export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilestonesAndAwards {
+    let drawnMilestonesAndAwards: DrawnMilestonesAndAwards = {
       milestones: [],
       awards: [],
     };
@@ -359,7 +363,7 @@ export namespace MilestoneAwardSelector {
   function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     numberMARequested: number,
     constraints: Constraints,
-    attempt: number = 1): IDrawnMilestonesAndAwards {
+    attempt: number = 1): DrawnMilestonesAndAwards {
     // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
     // didn't get past 3.
     // https://github.com/bafolts/terraforming-mars/pull/1637#issuecomment-711411034

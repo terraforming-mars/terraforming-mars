@@ -1,8 +1,8 @@
 import {ICardMetadata} from '../common/cards/ICardMetadata';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
-import {ICardDiscount} from '../common/cards/Types';
-import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
+import {CardDiscount} from '../common/cards/Types';
+import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../common/CardResource';
 import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
@@ -15,7 +15,7 @@ import {IVictoryPoints} from '../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 
 export interface StaticCardProperties {
-  adjacencyBonus?: IAdjacencyBonus;
+  adjacencyBonus?: AdjacencyBonus;
   cardCost?: number;
   cardType: CardType;
   cost?: number;
@@ -27,7 +27,7 @@ export interface StaticCardProperties {
   startingMegaCredits?: number;
   tags?: Array<Tags>;
   productionBox?: Units;
-  cardDiscount?: ICardDiscount | Array<ICardDiscount>;
+  cardDiscount?: CardDiscount | Array<CardDiscount>;
   reserveUnits?: Units,
   tr?: TRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,

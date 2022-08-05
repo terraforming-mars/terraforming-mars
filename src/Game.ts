@@ -46,7 +46,7 @@ import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './common/ma/RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
-import {IAresData} from './common/ares/IAresData';
+import {AresData} from './common/ares/AresData';
 import {GameSetup} from './GameSetup';
 import {GameCards} from './GameCards';
 import {GlobalParameter} from './common/GlobalParameter';
@@ -122,7 +122,7 @@ export class Game {
   public colonies: Array<IColony> = [];
   public discardedColonies: Array<IColony> = []; // Not serialized
   public turmoil: Turmoil | undefined;
-  public aresData: IAresData | undefined;
+  public aresData: AresData | undefined;
   public moonData: IMoonData | undefined;
   public pathfindersData: IPathfindersData | undefined;
 

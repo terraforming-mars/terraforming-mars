@@ -9,7 +9,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 import {digit} from '../Options';
@@ -17,7 +17,7 @@ import {digit} from '../Options';
 export class MoholeArea extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.MOHOLE_AREA,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '142',
       renderData: CardRenderer.builder((b) => {

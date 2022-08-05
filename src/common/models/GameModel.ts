@@ -5,7 +5,7 @@ import {TurmoilModel} from './TurmoilModel';
 import {ClaimedMilestoneModel} from './ClaimedMilestoneModel';
 import {FundedAwardModel} from './FundedAwardModel';
 import {Phase} from '../Phase';
-import {IAresData} from '../ares/IAresData';
+import {AresData} from '../ares/AresData';
 import {SpaceModel} from './SpaceModel';
 import {MoonModel} from './MoonModel';
 import {PathfindersModel} from './PathfindersModel';
@@ -14,7 +14,7 @@ import {SpectatorId} from '../Types';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export interface GameModel {
-  aresData: IAresData | undefined;
+  aresData: AresData | undefined;
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;
   corporationsToDraft: Array<CardModel>;

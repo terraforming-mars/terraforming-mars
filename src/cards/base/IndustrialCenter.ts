@@ -11,13 +11,13 @@ import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class IndustrialCenter extends Card implements IActionCard, IProjectCard {
   constructor(
     name: CardName = CardName.INDUSTRIAL_CENTER,
-    adjacencyBonus: IAdjacencyBonus | undefined = undefined,
+    adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '123',
       renderData: CardRenderer.builder((b) => {

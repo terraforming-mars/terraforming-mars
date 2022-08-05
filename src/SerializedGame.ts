@@ -9,7 +9,7 @@ import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId} from './common/Types';
 import {GameOptions} from './GameOptions';
-import {IAresData} from './common/ares/IAresData';
+import {AresData} from './common/ares/AresData';
 import {LogMessage} from './common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
@@ -17,7 +17,7 @@ import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData
 
 export interface SerializedGame {
     activePlayer: PlayerId;
-    aresData?: IAresData;
+    aresData?: AresData;
     awards: Array<string>;
     board: SerializedBoard;
     // game.rng changes over the course of a game but isn't saved and serialized

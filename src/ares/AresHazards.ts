@@ -4,7 +4,7 @@ import {LogHelper} from '../LogHelper';
 import {Phase} from '../common/Phase';
 import {Player} from '../Player';
 import {TileType} from '../common/TileType';
-import {IAresData, IHazardConstraint} from '../common/ares/IAresData';
+import {AresData, HazardConstraint} from '../common/ares/AresData';
 
 /**
  * Package-private support for placing and upgrading hazard tiles.
@@ -32,7 +32,7 @@ export class _AresHazardPlacement {
     game.log('${0} have upgraded to ${1}', (b) => b.string(TileType.toString(from)).string(TileType.toString(to)));
   }
 
-  public static onTemperatureChange(game: Game, aresData: IAresData) {
+  public static onTemperatureChange(game: Game, aresData: AresData) {
     // This will have no effect if the erosions don't exist, but that's OK --
     // the check for placing erosions will take this into account.
     this.testConstraint(
@@ -44,18 +44,18 @@ export class _AresHazardPlacement {
     );
   }
 
-  public static onOceanPlaced(aresData: IAresData, player: Player) {
+  public static onOceanPlaced(aresData: AresData, player: Player) {
     this.testToPlaceErosionTiles(aresData, player);
     this.testToRemoveDustStorms(aresData, player);
   }
 
-  public static onOxygenChange(game: Game, aresData: IAresData) {
+  public static onOxygenChange(game: Game, aresData: AresData) {
     this.testConstraint(aresData.hazardData.severeDustStormOxygen, game.getOxygenLevel(), () => {
       this.makeSevere(game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
     });
   }
 
-  private static testToPlaceErosionTiles(aresData: IAresData, player: Player) {
+  private static testToPlaceErosionTiles(aresData: AresData, player: Player) {
     if (player.game.gameOptions.aresHazards === false) {
       return;
     }
@@ -78,7 +78,7 @@ export class _AresHazardPlacement {
     );
   }
 
-  private static testToRemoveDustStorms(aresData: IAresData, player: Player) {
+  private static testToRemoveDustStorms(aresData: AresData, player: Player) {
     this.testConstraint(
       aresData.hazardData.removeDustStormsOceanCount,
       player.game.board.getOceanCount(),
@@ -99,7 +99,7 @@ export class _AresHazardPlacement {
     );
   }
 
-  private static testConstraint(constraint: IHazardConstraint, testValue: number, cb: () => void) {
+  private static testConstraint(constraint: HazardConstraint, testValue: number, cb: () => void) {
     if (!constraint.available) {
       return;
     }

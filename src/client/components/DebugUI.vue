@@ -1,4 +1,4 @@
-<template>
+ClientCard<template>
   <div class="debug-ui-container" :class="getLanguageCssClass()">
       <h1 v-i18n>Cards List</h1>
       <div class="legacy-anchor">
@@ -132,7 +132,7 @@ import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {Tags} from '@/common/cards/Tags';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
-import {IClientCard} from '@/common/cards/IClientCard';
+import {ClientCard} from '@/common/cards/ClientCard';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -350,7 +350,7 @@ export default Vue.extend({
       case 'pathfinders': return 'Pathfinders';
       }
     },
-    filterByTags(card: IClientCard): boolean {
+    filterByTags(card: ClientCard): boolean {
       if (card.tags.length === 0) {
         return this.tags['none'] === true;
       }

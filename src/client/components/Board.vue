@@ -1,4 +1,4 @@
-<template>
+AresData<template>
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
           <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button" v-i18n>
@@ -201,7 +201,7 @@
 import Vue from 'vue';
 import * as constants from '@/common/constants';
 import BoardSpace from '@/client/components/BoardSpace.vue';
-import {IAresData} from '@/common/ares/IAresData';
+import {AresData} from '@/common/ares/AresData';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {SpaceId} from '@/common/Types';
@@ -245,7 +245,7 @@ export default Vue.extend({
       type: Boolean,
     },
     aresData: {
-      type: Object as () => IAresData | undefined,
+      type: Object as () => AresData | undefined,
     },
     hideTiles: {
       type: Boolean,

@@ -3,10 +3,10 @@ import {IGameLoader} from '../database/IGameLoader';
 import {Route} from './Route';
 
 export interface IHandler {
-  processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): Promise<void>;
+  processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void>;
 }
 
-export interface IContext {
+export type Context = {
   url: URL,
   route: Route,
   serverId: string,

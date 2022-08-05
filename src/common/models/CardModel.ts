@@ -4,7 +4,7 @@ import {CardResource} from '../CardResource';
 import {Units} from '../Units';
 import {CardName} from '../cards/CardName';
 import {Resources} from '../Resources';
-import {ICardDiscount} from '../cards/Types';
+import {CardDiscount} from '../cards/Types';
 import {Tags} from '../cards/Tags';
 
 export interface CardModel {
@@ -13,7 +13,7 @@ export interface CardModel {
     // TODO(kberg): Rename to cardResource. Actually, remove it altogether, and rely on the JSON implementation.
     resourceType: CardResource | undefined;
     calculatedCost?: number;
-    discount?: Array<ICardDiscount>,
+    discount?: Array<CardDiscount>,
     cardType: CardType;
     isDisabled: boolean; // Used with Pharmacy Union
     warning?: string | Message;

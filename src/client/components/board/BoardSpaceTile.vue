@@ -1,5 +1,5 @@
 <template>
-  <div :class="klass" :title="$t(title)" data-test="tile"/>
+  <div :class="klass" :title="$t(description)" data-test="tile"/>
 </template>
 
 <script lang="ts">
@@ -53,6 +53,48 @@ const tileTypeToCssClassAresOverride = new Map<TileType, string>([
   [TileType.RESTRICTED_AREA, 'restricted-area-ares'],
 ]);
 
+const descriptions: Record<TileType, string> = {
+  [TileType.MOHOLE_AREA]: 'Mohole Area',
+  [TileType.COMMERCIAL_DISTRICT]: 'Commercial District: 1 VP per adjacent city tile',
+  [TileType.ECOLOGICAL_ZONE]: 'Ecological Zone',
+  [TileType.INDUSTRIAL_CENTER]: 'Industrial Center',
+  [TileType.LAVA_FLOWS]: 'Lava Flows',
+  [TileType.CAPITAL]: 'Capital',
+  [TileType.MINING_AREA]: 'Mining Area',
+  [TileType.MINING_RIGHTS]: 'Mining Rights',
+  [TileType.NATURAL_PRESERVE]: 'Natural Preserve',
+  [TileType.NUCLEAR_ZONE]: 'Nuclear Zone',
+  [TileType.RESTRICTED_AREA]: 'Restricted Area',
+  [TileType.GREAT_DAM]: 'Great Dam',
+  [TileType.MAGNETIC_FIELD_GENERATORS]: 'Magnetic field generators',
+  [TileType.DEIMOS_DOWN]: 'Deimos Down',
+  [TileType.CITY]: 'City: 1 VP per adjacent greenery',
+  [TileType.GREENERY]: 'Greenery: 1 VP',
+  [TileType.OCEAN]: 'Ocean: grants 2M€ when players put tiles next to it',
+  [TileType.BIOFERTILIZER_FACILITY]: 'Biofertilizer Facility',
+  [TileType.METALLIC_ASTEROID]: 'Metallic Asteroid',
+  [TileType.SOLAR_FARM]: 'Solar Farm',
+  [TileType.OCEAN_CITY]: 'Ocean City: counts as an ocean and a city.',
+  [TileType.OCEAN_FARM]: 'Ocean Farm',
+  [TileType.OCEAN_SANCTUARY]: 'Ocean Sanctuary',
+  [TileType.DUST_STORM_MILD]: 'Mild Dust Storm: lose 1 production when placing next to it. Pay 8M€ to place over it.',
+  [TileType.DUST_STORM_SEVERE]: 'Severe Dust Storm: lose 2 production when placing next to it. Pay 16M€ to place over it.',
+  [TileType.EROSION_MILD]: 'Mild Erosion: lose 1 production when placing next to it. Pay 8M€ to place over it.',
+  [TileType.EROSION_SEVERE]: 'Severe Erosion: lose 2 production when placing next to it. Pay 16M€ to place over it.',
+  [TileType.MINING_STEEL_BONUS]: 'Mining: steel bonus',
+  [TileType.MINING_TITANIUM_BONUS]: 'Mining: titanium bonus',
+  [TileType.MOON_MINE]: 'Moon Mine: 1 VP per adjacent road',
+  [TileType.MOON_COLONY]: 'Moon Colony: 1 VP per adjacent road',
+  [TileType.MOON_ROAD]: 'Moon Road: 1 VP',
+  [TileType.LUNA_TRADE_STATION]: 'Luna Trade Station',
+  [TileType.LUNA_MINING_HUB]: 'Luna Mining Hub',
+  [TileType.LUNA_TRAIN_STATION]: 'Luna Train Station: 2 VP per adjacent road',
+  [TileType.LUNAR_MINE_URBANIZATION]: 'Luna Mine Urbanization: counts as both a colony and a mine tile.',
+
+  [TileType.WETLANDS]: 'Wetlands: counts as an ocean and a greenery. Does not count toward 9 oceans.',
+  [TileType.RED_CITY]: 'Red City: 1 VP per empty adjacent area. No greeneries may be placed next to it.',
+  [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders',
+};
 export default Vue.extend({
   name: 'board-space-tile',
   props: {
@@ -82,92 +124,10 @@ export default Vue.extend({
     return {};
   },
   computed: {
-    title(): string {
-      switch (this.tileType) {
-      case TileType.MOHOLE_AREA:
-        return 'Mohole Area';
-      case TileType.COMMERCIAL_DISTRICT:
-        return 'Commercial District: 1 VP per adjacent city tile';
-      case TileType.ECOLOGICAL_ZONE:
-        return 'Ecological Zone';
-      case TileType.INDUSTRIAL_CENTER:
-        return 'Industrial Center';
-      case TileType.LAVA_FLOWS:
-        return 'Lava Flows';
-      case TileType.CAPITAL:
-        return 'Capital';
-      case TileType.MINING_AREA:
-        return 'Mining Area';
-      case TileType.MINING_RIGHTS:
-        return 'Mining Rights';
-      case TileType.NATURAL_PRESERVE:
-        return 'Natural Preserve';
-      case TileType.NUCLEAR_ZONE:
-        return 'Nuclear Zone';
-      case TileType.RESTRICTED_AREA:
-        return 'Restricted Area';
-      case TileType.GREAT_DAM:
-        return 'Great Dam';
-      case TileType.MAGNETIC_FIELD_GENERATORS:
-        return 'Magnetic field generators';
-      case TileType.DEIMOS_DOWN:
-        return 'Deimos Down';
-      case TileType.CITY:
-        if (this.spaceType === SpaceType.COLONY) {
-          return 'City in space.';
-        } else {
-          return 'City: 1 VP per adjacent greenery';
-        }
-      case TileType.GREENERY:
-        return 'Greenery: 1 VP';
-      case TileType.BIOFERTILIZER_FACILITY:
-        return 'Biofertilizer Facility';
-      case TileType.METALLIC_ASTEROID:
-        return 'Metallic Asteroid';
-      case TileType.SOLAR_FARM:
-        return 'Solar Farm';
-      case TileType.OCEAN_CITY:
-        return 'Ocean City. Counts as an ocean and a city.';
-      case TileType.OCEAN_FARM:
-        return 'Ocean Farm';
-      case TileType.OCEAN_SANCTUARY:
-        return 'Ocean Sanctuary';
-      case TileType.DUST_STORM_MILD:
-        return 'Mild Dust Storm';
-      case TileType.DUST_STORM_SEVERE:
-        return 'Severe Dust Storm';
-      case TileType.EROSION_MILD:
-        return 'Mild Erosion';
-      case TileType.EROSION_SEVERE:
-        return 'Severe Erosion';
-      case TileType.MINING_STEEL_BONUS:
-        return 'Mining: steel bonus';
-      case TileType.MINING_TITANIUM_BONUS:
-        return 'Mining: titanium bonus';
-      case TileType.MOON_MINE:
-        return 'Moon Mine: 1 VP per adjacent road';
-      case TileType.MOON_COLONY:
-        return 'Moon Colony: 1 VP per adjacent road';
-      case TileType.MOON_ROAD:
-        return 'Moon Road: 1 VP';
-      case TileType.LUNA_TRADE_STATION:
-        return 'Luna Trade Station';
-      case TileType.LUNA_MINING_HUB:
-        return 'Luna Mining Hub';
-      case TileType.LUNA_TRAIN_STATION:
-        return 'Luna Train Station. 2 VP per adjacent road';
-      case TileType.LUNAR_MINE_URBANIZATION:
-        return 'Luna Mine Urbanization. Counts as both a colony and a mine tile.';
-
-      case TileType.WETLANDS:
-        return 'Wetlands. Counts as an ocean and a greenery. Does not count toward 9 oceans.';
-      case TileType.RED_CITY:
-        return 'Red City. 1 VP per empty adjacent area. No greeneries may be placed next to it.';
-      case TileType.MARTIAN_NATURE_WONDERS:
-        return 'Martian Nature Wonders';
-      default:
-        return '';
-      }
+    description(): string {
+      if (this.tileType === undefined) return '';
+      if (this.tileType === TileType.CITY && this.spaceType === SpaceType.COLONY) return 'City in space.';
+      return descriptions[this.tileType];
     },
     klass(): string {
       let css = 'board-space';

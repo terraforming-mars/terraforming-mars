@@ -27,7 +27,7 @@ export class SQLite implements IDatabase {
     this.db = new sqlite3.Database(filename);
   }
 
-  async initialize(): Promise<void> {
+  public async initialize(): Promise<void> {
     await this.asyncRun('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
     await this.asyncRun('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participant varchar, PRIMARY KEY (game_id, participant))');
     await this.asyncRun('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
@@ -39,66 +39,33 @@ export class SQLite implements IDatabase {
         PRIMARY KEY (game_id)`);
   }
 
-  getPlayerCount(gameId: GameId): Promise<number> {
-    return new Promise((resolve, reject) => {
-      const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
-
-      this.db.get(sql, [gameId], (err, row) => {
-        if (err) {
-          reject(err);
-        } else if (row) {
-          resolve(row.players);
-        } else {
-          reject(new Error(`unknown error loadign player count for ${gameId}`));
-        }
-      });
-    });
+  public async getPlayerCount(gameId: GameId): Promise<number> {
+    const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
+    const row = await this.asyncGet(sql, [gameId]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${gameId}`);
+    }
+    return row.players;
   }
 
-  getGameIds(): Promise<Array<GameId>> {
-    return new Promise((resolve, reject) => {
-      const sql: string = 'SELECT distinct game_id game_id FROM games';
-
-      this.db.all(sql, [], (err, rows) => {
-        if (err) {
-          reject(new Error('Error in getGames: ' + err.message));
-        } else {
-          const allGames: Array<GameId> = [];
-          rows.forEach((row) => {
-            allGames.push(row.game_id);
-          });
-          resolve(allGames);
-        }
-      });
-    });
+  public async getGameIds(): Promise<Array<GameId>> {
+    const sql: string = 'SELECT distinct game_id game_id FROM games';
+    const rows = await this.asyncAll(sql, []);
+    return rows.map((row) => row.game_id);
   }
 
   // TODO(kberg): Remove repetition between this and getGameVersion.
   // this is basically getGameVersion with save ID 0.
   // This method has more content, so that has to be reconciled.
-  loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
-    return new Promise((resolve, reject) => {
-    // Retrieve first save from database
-      this.db.get('SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0', [game_id], (err: Error | null, row: { game_id: GameId, game: any; }) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (row?.game_id === undefined) {
-          reject(new Error(`Game ${game_id} not found`));
-          return;
-        }
+  public async loadCloneableGame(game_id: GameId): Promise<SerializedGame> {
+    const sql = 'SELECT game_id, game FROM games WHERE game_id = ? AND save_id = 0';
+    const row: { game_id: GameId, game: any; } = await this.asyncGet(sql, [game_id]);
+    if (row === undefined || row.game_id === undefined || row.game === undefined) {
+      throw new Error(`Game ${game_id} not found`);
+    }
 
-        try {
-          const json = JSON.parse(row.game);
-          resolve(json);
-        } catch (exception) {
-          console.error(`unable to load game ${game_id} at save point 0`, exception);
-          const error = exception instanceof Error ? exception : new Error(String(exception));
-          reject(error);
-        }
-      });
-    });
+    const json = JSON.parse(row.game);
+    return json;
   }
 
   saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
@@ -113,24 +80,17 @@ export class SQLite implements IDatabase {
     );
   }
 
-  getGame(game_id: GameId): Promise<SerializedGame> {
-    return new Promise((resolve, reject) => {
-      // Retrieve last save from database
-      this.db.get('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id], (err: Error | null, row: { game: any; }) => {
-        if (err) {
-          reject(err);
-        } else {
-          if (row === undefined) {
-            reject(new Error(`Game ${game_id} not found`));
-          }
-          resolve(JSON.parse(row.game));
-        }
-      });
-    });
+  public async getGame(game_id: GameId): Promise<SerializedGame> {
+    // Retrieve last save from database
+    const row: { game: any; } = await this.asyncGet('SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1', [game_id]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${game_id}`);
+    }
+    return JSON.parse(row.game);
   }
 
   // TODO(kberg): throw an error if two game ids exist.
-  getGameId(id: PlayerId | SpectatorId): Promise<GameId> {
+  public async getGameId(id: PlayerId | SpectatorId): Promise<GameId> {
     // Default sql is for player id;
     let sql: string = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
     if (id.charAt(0) === 's') {
@@ -138,85 +98,49 @@ export class SQLite implements IDatabase {
     } else if (id.charAt(0) !== 'p') {
       throw new Error(`id ${id} is neither a player id or spectator id`);
     }
-    return new Promise((resolve, reject) => {
-      this.db.get(sql, [id], (err: Error | null, row: { game_id: any; }) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (row === undefined) {
-          reject(new Error(`No game id found for participant id ${id}`));
-          return;
-        }
-        resolve(row.game_id);
-      });
-    });
+
+    const row: { game_id: any; } = await this.asyncGet(sql, [id]);
+    if (row === undefined) {
+      throw new Error(`No game id found for participant id ${id}`);
+    }
+    return row.game_id;
   }
 
-  public getSaveIds(gameId: GameId): Promise<Array<number>> {
-    return new Promise((resolve, reject) => {
-      const allSaveIds: Array<number> = [];
-      const sql: string = 'SELECT distinct save_id FROM games WHERE game_id = ?';
-      this.db.all(sql, [gameId], (err, rows) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (rows) {
-          rows.forEach((row) => {
-            allSaveIds.push(row.save_id);
-          });
-        }
-        resolve(allSaveIds);
-      });
-    });
+  public async getSaveIds(gameId: GameId): Promise<Array<number>> {
+    const rows = await this.asyncAll('SELECT distinct save_id FROM games WHERE game_id = ?', [gameId]);
+    return rows.map((row) => row.save_id);
   }
 
-  getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
-    return new Promise((resolve, reject) => {
-      this.db.get(
-        'SELECT game game FROM games WHERE game_id = ? and save_id = ?',
-        [game_id, save_id],
-        (err: Error | null, row: { game: any; }) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(JSON.parse(row.game));
-          }
-        });
-    });
+  public async getGameVersion(game_id: GameId, save_id: number): Promise<SerializedGame> {
+    const row: { game: any; } = await this.asyncGet(
+      'SELECT game FROM games WHERE game_id = ? and save_id = ?',
+      [game_id, save_id]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${game_id}`);
+    }
+    return JSON.parse(row.game);
   }
 
-  getMaxSaveId(game_id: GameId, cb: (err: Error | undefined, id: number | undefined) => void): void {
-    this.db.get('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [game_id], (err: Error | null, row: { save_id: number; }) => {
-      if (err) {
-        return cb(err ?? undefined, undefined);
-      }
-      cb(undefined, row.save_id);
-    });
+  async getMaxSaveId(game_id: GameId): Promise<number> {
+    const row: { save_id: any; } = await this.asyncGet('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [game_id]);
+    if (row === undefined) {
+      throw new Error(`bad game id ${game_id}`);
+    }
+    return row.save_id;
   }
 
-  cleanGame(game_id: GameId): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.getMaxSaveId(game_id, ((err, save_id) => {
-        if (err) {
-          reject(new Error('SQLite: cleanGame:' + err.message));
-        }
-        if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
-        // Purges isn't used yet
-        this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
-        // DELETE all saves except initial and last one
-        this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], (err) => {
-          if (err) console.warn('SQLite: cleanGame1: ', err.message);
-          // Flag game as finished
-          this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], async (err) => {
-            if (err) console.warn('SQLite: cleanGame2: ', err.message);
-            await this.purgeUnfinishedGames();
-            resolve();
-          });
-        });
-      }));
-    });
+  async cleanGame(game_id: GameId): Promise<void> {
+    try {
+      const save_id = await this.getMaxSaveId(game_id);
+      // Purges isn't used yet
+      await this.asyncRun('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
+      // DELETE all saves except initial and last one
+      await this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id]);
+      await this.asyncRun('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id]);
+      await this.purgeUnfinishedGames();
+    } catch (err) {
+      console.error(`SQLite: cleanGame for ${game_id} ` + err);
+    }
   }
 
   purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
@@ -230,6 +154,7 @@ export class SQLite implements IDatabase {
   }
 
   restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {
+    // I don't think this is tested. Once it is use this.asyncGet
     return new Promise((resolve, reject) => {
       // Retrieve last save from database
       this.db.get('SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
@@ -329,17 +254,17 @@ export class SQLite implements IDatabase {
     });
   }
 
-  // private asyncGet(sql: string, params?: any): Promise<any> {
-  //   return new Promise((resolve, reject) => {
-  //     this.db.get(sql, params, (err: Error | null, result: any) => {
-  //       if (err) {
-  //         reject(err);
-  //       } else {
-  //         resolve(result);
-  //       }
-  //     });
-  //   });
-  // }
+  private asyncGet(sql: string, params?: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db.get(sql, params, (err: Error | null, row: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row);
+        }
+      });
+    });
+  }
 
   private asyncAll(sql: string, params?: any): Promise<Array<any>> {
     return new Promise((resolve, reject) => {

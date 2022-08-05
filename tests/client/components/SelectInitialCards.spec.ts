@@ -5,7 +5,7 @@ import {CardName} from '@/common/cards/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {IPreferences} from '@/client/utils/PreferencesManager';
+import {Preferences} from '@/client/utils/PreferencesManager';
 
 let savedData: InputResponse | undefined;
 
@@ -121,7 +121,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
       showsave: true,
       preferences: {
         show_alerts: true,
-      } as Readonly<IPreferences>,
+      } as Readonly<Preferences>,
     },
   });
 }

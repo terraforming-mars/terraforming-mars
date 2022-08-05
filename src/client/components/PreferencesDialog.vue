@@ -147,6 +147,14 @@ export default (Vue as WithRefs<Refs>).extend({
           <span class="tooltip tooltip-left" :data-tooltip="$t('Test out any possible new experimental UI features for feedback.')">&#9432;</span>
         </label>
       </div>
+      <div class="preferences_panel_item">
+        <label class="form-switch">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.debug_view" data-test="debug_view">
+          <i class="form-icon"></i>
+          <span v-i18n>Debug View</span>
+          <span class="tooltip tooltip-left" :data-tooltip="$t('Add information useful for development and debugging.')">&#9432;</span>
+        </label>
+      </div>
       <div class="preferences_panel_item form-group">
         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
         <div class="preferences_panel_langs">

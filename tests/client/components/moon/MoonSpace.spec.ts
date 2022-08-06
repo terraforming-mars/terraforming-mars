@@ -20,7 +20,7 @@ describe('MoonSpace', () => {
       localVue: getLocalVue(),
       propsData: {
         space: {id: 'm1'},
-        hideTiles: true,
+        tileView: 'hide',
       },
     });
 

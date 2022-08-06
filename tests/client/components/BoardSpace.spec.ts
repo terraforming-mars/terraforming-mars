@@ -20,7 +20,7 @@ describe('BoardSpace', () => {
       localVue: getLocalVue(),
       propsData: {
         space: {id: 'm1', bonus: []},
-        hideTiles: true,
+        tileView: 'hide',
       },
     });
 

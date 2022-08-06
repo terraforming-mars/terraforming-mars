@@ -1,26 +1,26 @@
-AresData<template>
+<template>
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
-          <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button" v-i18n>
-            {{ hideTiles ? 'show' : 'hide' }} tiles
+          <div class="hide-tile-button" @click="$emit('toggleTileView')" data-test="hide-tiles-button" v-i18n>
+            {{ tileView }} tiles
           </div>
         </div>
         <div class="board-outer-spaces">
-            <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
-            <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>
-            <board-space :space="getSpaceById('69')" text="Stanford Torus"></board-space>
+            <board-space :space="getSpaceById('01')" text="Ganymede Colony" :tileView="tileView"></board-space>
+            <board-space :space="getSpaceById('02')" text="Phobos Space Haven" :tileView="tileView"></board-space>
+            <board-space :space="getSpaceById('69')" text="Stanford Torus" :tileView="tileView"></board-space>
             <template v-if="venusNextExtension">
-              <board-space :space="getSpaceById('70')" text="Luna Metropolis"></board-space>
-              <board-space :space="getSpaceById('71')" text="Dawn City"></board-space>
-              <board-space :space="getSpaceById('72')" text="Stratopolis"></board-space>
-              <board-space :space="getSpaceById('73')" text="Maxwell Base"></board-space>
+              <board-space :space="getSpaceById('70')" text="Luna Metropolis" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('71')" text="Dawn City" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('72')" text="Stratopolis" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('73')" text="Maxwell Base" :tileView="tileView"></board-space>
             </template>
             <template v-if="pathfindersExpansion">
-              <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station"></board-space> -->
-              <board-space :space="getSpaceById('75')" text="Ceres Spaceport"></board-space>
-              <board-space :space="getSpaceById('76')" text="Dyson Screens"></board-space>
-              <board-space :space="getSpaceById('77')" text="Lunar Embassy"></board-space>
-              <board-space :space="getSpaceById('78')" text="Venera Base"></board-space>
+              <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station" :tileView="tileView"></board-space> -->
+              <board-space :space="getSpaceById('75')" text="Ceres Spaceport" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('76')" text="Dyson Screens" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('77')" text="Lunar Embassy" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('78')" text="Venera Base" :tileView="tileView"></board-space>
             </template>
         </div>
 
@@ -84,7 +84,7 @@ AresData<template>
               :space="curSpace"
               :is_selectable="true"
               :aresExtension="aresExtension"
-              :hideTiles="hideTiles"
+              :tileView="tileView"
               data-test="board-space"
             />
 
@@ -205,6 +205,7 @@ import {AresData} from '@/common/ares/AresData';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {SpaceId} from '@/common/Types';
+import {TileView} from '@/client/components/board/TileView';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -247,9 +248,8 @@ export default Vue.extend({
     aresData: {
       type: Object as () => AresData | undefined,
     },
-    hideTiles: {
-      type: Boolean,
-      default: false,
+    tileView: {
+      type: String as () => TileView,
     },
   },
   components: {

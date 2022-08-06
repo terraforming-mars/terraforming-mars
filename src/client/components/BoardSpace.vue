@@ -4,14 +4,17 @@
       :tileType="space.tileType"
       :spaceType="space.spaceType"
       :aresExtension="aresExtension"
-      :hideTiles="hideTiles"
+      :tileView="tileView"
       :highlight="space.highlight"
       :restricted="restricted"
     ></board-space-tile>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
     <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
-    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !hideTiles"></div>
+    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && tileView === 'show'"></div>
+    <template v-if="tileView === 'coords'">
+      <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
+    </template>
   </div>
 </template>
 
@@ -20,6 +23,7 @@
 import Vue from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
+import {TileView} from '@/client/components/board/TileView';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
@@ -38,8 +42,8 @@ export default Vue.extend({
     aresExtension: {
       type: Boolean,
     },
-    hideTiles: {
-      type: Boolean,
+    tileView: {
+      type: String as () => TileView,
     },
   },
   data() {
@@ -60,7 +64,7 @@ export default Vue.extend({
   },
   computed: {
     showBonus(): boolean {
-      return this.space.tileType === undefined || this.hideTiles;
+      return this.space.tileType === undefined || this.tileView === 'hide';
     },
     restricted(): boolean {
       return this.space.bonus.includes(SpaceBonus.RESTRICTED);

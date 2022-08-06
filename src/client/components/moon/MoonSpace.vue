@@ -2,9 +2,9 @@
   <div :class="mainClass" :data_space_id="space.id" :title="verboseTitle">
     <div :class="tileClass" data-test="tile"/>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-    <bonus v-if="space.tileType === undefined || hideTiles" :bonus="space.bonus" />
+    <bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
     <div
-      v-if="space.color !== undefined && !hideTiles"
+      v-if="space.color !== undefined && tileView === 'show'"
       class="board-cube"
       :class="`board-cube--${space.color}`"
     />
@@ -16,6 +16,7 @@ import Vue from 'vue';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {TileType} from '@/common/TileType';
 import Bonus from '@/client/components/Bonus.vue';
+import {TileView} from '../board/TileView';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.MOON_ROAD, 'road'],
@@ -27,6 +28,7 @@ const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.LUNAR_MINE_URBANIZATION, 'lunar-mine-urbanization'],
 ]);
 
+// TODO(kberg): Can part of this become BoardSpaceTile?
 export default Vue.extend({
   name: 'MoonSpace',
   props: {
@@ -39,9 +41,9 @@ export default Vue.extend({
     is_selectable: {
       type: Boolean,
     },
-    hideTiles: {
-      type: Boolean,
-      default: false,
+    tileView: {
+      type: String as () => TileView,
+      default: 'show',
     },
   },
   components: {
@@ -96,7 +98,7 @@ export default Vue.extend({
         }
       }
 
-      if (this.hideTiles) {
+      if (this.tileView === 'hide') {
         css += ' board-hidden-tile';
       }
 

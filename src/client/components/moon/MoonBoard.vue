@@ -66,7 +66,7 @@
         :key="curSpace.id"
         :space="curSpace"
         :is_selectable="true"
-        :hideTiles="hideTiles"
+        :tileView="tileView"
         data-test="moon-board-space"
       />
     </div>
@@ -79,6 +79,7 @@ import {MoonModel} from '@/common/models/MoonModel';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import MoonSpace from '@/client/components/moon/MoonSpace.vue';
+import {TileView} from '../board/TileView';
 
 class MoonParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -91,9 +92,9 @@ export default Vue.extend({
     model: {
       type: Object as () => MoonModel,
     },
-    hideTiles: {
-      type: Boolean,
-      default: false,
+    tileView: {
+      type: String as () => TileView,
+      default: 'show',
     },
   },
   components: {

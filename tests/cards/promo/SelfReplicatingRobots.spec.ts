@@ -9,6 +9,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
+import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 
 describe('SelfReplicatingRobots', function() {
   let card: SelfReplicatingRobots;
@@ -33,13 +34,22 @@ describe('SelfReplicatingRobots', function() {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
 
+    player.cardsInHand.push(new EarthOffice());
+    expect(card.canAct(player)).is.not.true;
+
     player.cardsInHand.push(new HousePrinting());
     expect(card.canAct(player)).is.true;
+  });
+
+  it('act', () => {
+    const earthOffice = new EarthOffice();
+    player.cardsInHand.push(earthOffice);
+    player.cardsInHand.push(new HousePrinting());
 
     const action = cast(card.action(player), OrOptions);
     action.options[0].cb([(action.options[0] as SelectCard<IProjectCard>).cards[0]]);
     expect(card.targetCards[0].resourceCount).to.eq(2);
-    expect(player.cardsInHand).has.lengthOf(0);
+    expect(player.cardsInHand).deep.eq([earthOffice]);
     expect(card.targetCards).has.lengthOf(1);
 
     const action2 = cast(card.action(player), OrOptions);

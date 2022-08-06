@@ -6,21 +6,21 @@
           </div>
         </div>
         <div class="board-outer-spaces">
-            <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
-            <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>
-            <board-space :space="getSpaceById('69')" text="Stanford Torus"></board-space>
+            <board-space :space="getSpaceById('01')" text="Ganymede Colony" :tileView="tileView"></board-space>
+            <board-space :space="getSpaceById('02')" text="Phobos Space Haven" :tileView="tileView"></board-space>
+            <board-space :space="getSpaceById('69')" text="Stanford Torus" :tileView="tileView"></board-space>
             <template v-if="venusNextExtension">
-              <board-space :space="getSpaceById('70')" text="Luna Metropolis"></board-space>
-              <board-space :space="getSpaceById('71')" text="Dawn City"></board-space>
-              <board-space :space="getSpaceById('72')" text="Stratopolis"></board-space>
-              <board-space :space="getSpaceById('73')" text="Maxwell Base"></board-space>
+              <board-space :space="getSpaceById('70')" text="Luna Metropolis" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('71')" text="Dawn City" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('72')" text="Stratopolis" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('73')" text="Maxwell Base" :tileView="tileView"></board-space>
             </template>
             <template v-if="pathfindersExpansion">
-              <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station"></board-space> -->
-              <board-space :space="getSpaceById('75')" text="Ceres Spaceport"></board-space>
-              <board-space :space="getSpaceById('76')" text="Dyson Screens"></board-space>
-              <board-space :space="getSpaceById('77')" text="Lunar Embassy"></board-space>
-              <board-space :space="getSpaceById('78')" text="Venera Base"></board-space>
+              <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station" :tileView="tileView"></board-space> -->
+              <board-space :space="getSpaceById('75')" text="Ceres Spaceport" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('76')" text="Dyson Screens" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('77')" text="Lunar Embassy" :tileView="tileView"></board-space>
+              <board-space :space="getSpaceById('78')" text="Venera Base" :tileView="tileView"></board-space>
             </template>
         </div>
 

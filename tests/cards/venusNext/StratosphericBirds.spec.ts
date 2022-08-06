@@ -10,6 +10,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
@@ -82,6 +83,22 @@ describe('StratosphericBirds', () => {
     expect(extractorBalloons.resourceCount).to.eq(1);
   });
 
+  it('Edge case: only one card has floaters, and it is not Dirigibles', () => {
+    const aerialMappers = new AerialMappers();
+    aerialMappers.resourceCount = 1;
+    player.playedCards.push(aerialMappers);
+
+    (game as any).venusScaleLevel = 12;
+    player.megaCredits = 12;
+
+    const selectHowToPayForProjectCard = player.getPlayProjectCardInput();
+    expect(player.canPlayIgnoringCost(card)).is.true;
+
+    selectHowToPayForProjectCard.cb(card, {...HowToPay.EMPTY, megaCredits: 12});
+    game.deferredActions.pop()!.execute(); // Remove floater
+    expect(aerialMappers.resourceCount).to.eq(0);
+  });
+
   it('Edge case: Dirigibles with no other floater cards', () => {
     // Add dirigibles with 1 floater
     const dirigibles = new Dirigibles();
@@ -102,13 +119,13 @@ describe('StratosphericBirds', () => {
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
-      selectHowToPayForProjectCard!.cb(card, {...HowToPay.EMPTY, megaCredits: 9, floaters: 1});
+      selectHowToPayForProjectCard.cb(card, {...HowToPay.EMPTY, megaCredits: 9, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
-    selectHowToPayForProjectCard!.cb(card, {...HowToPay.EMPTY, megaCredits: 12});
-        game.deferredActions.pop()!.execute(); // Remove floater
-        expect(dirigibles.resourceCount).to.eq(0);
+    selectHowToPayForProjectCard.cb(card, {...HowToPay.EMPTY, megaCredits: 12});
+    game.deferredActions.pop()!.execute(); // Remove floater
+    expect(dirigibles.resourceCount).to.eq(0);
   });
 
   it('Allow spending all floaters from Dirigibles if there is at least one other card with a floater', () => {
@@ -125,10 +142,10 @@ describe('StratosphericBirds', () => {
 
     // Spend all 3 floaters from Dirigibles to pay for the card
     selectHowToPayForCard!.cb(card, {...HowToPay.EMPTY, megaCredits: 3, floaters: 3});
-        game.deferredActions.pop()!.execute(); // Remove floater
-        expect(dirigibles.resourceCount).to.eq(0);
-        expect(deuteriumExport.resourceCount).to.eq(0);
-        expect(player.megaCredits).to.eq(0);
+    game.deferredActions.pop()!.execute(); // Remove floater
+    expect(dirigibles.resourceCount).to.eq(0);
+    expect(deuteriumExport.resourceCount).to.eq(0);
+    expect(player.megaCredits).to.eq(0);
   });
 
   it('Can play with discounts and single Dirigibles floater', () => {

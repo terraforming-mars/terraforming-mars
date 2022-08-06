@@ -309,25 +309,30 @@
 }
 
 /* Card Magnification */
-.preferences_magnify_cards .filterDiv {
-    transition: transform 0.15s;
-}
-.preferences_magnify_cards .filterDiv:hover {
-    transform: scale(1.2);
-    z-index: 100;
-}
+.preferences_magnify_cards {
+    .filterDiv {
+        transition: transform 0.15s;
+    }
+    .filterDiv:hover {
+        transform: scale(1.2);
+        z-index: 100;
+    }
 
-.preferences_magnify_cards .cards-stack:hover,
-.preferences_magnify_cards .cards-stack-first:hover {
-    z-index: 2;
-    transform: scale(1);
-}
+    .dragging .filterDiv:hover {
+        transform: none;
+    }
 
-.preferences_magnify_cards .global-event:hover {
-    transform: scale(1.2);
-    z-index: 2;
-}
+    .cards-stack:hover,
+    .cards-stack-first:hover {
+        z-index: 2;
+        transform: scale(1);
+    }
 
+    .global-event:hover {
+        transform: scale(1.2);
+        z-index: 2;
+    }
+}
 /* Magnify the wee little cards in a special way, if requested */
 .preferences_small_cards.preferences_magnify_cards .filterDiv:hover {
     transform: scale(0.95);

@@ -87,7 +87,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
         'Select card to link with Self-Replicating Robots',
         'Link card', selectableCards,
         ([card]) => {
-          const projectCardIndex = player.cardsInHand.findIndex((card) => card.name === card.name);
+          const projectCardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
           player.cardsInHand.splice(projectCardIndex, 1);
           this.targetCards.push(
             {

@@ -34,7 +34,6 @@ describe('ShiftAresGlobalParameters', function() {
     coloniesModel: undefined,
     payProduction: undefined,
     aresData: {
-      active: true,
       includeHazards: true,
       hazardData: {
         erosionOceanCount: {

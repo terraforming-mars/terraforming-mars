@@ -203,7 +203,7 @@ export class Game {
     game.spectatorId = spectatorId;
     // Initialize Ares data
     if (gameOptions.aresExtension) {
-      game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
+      game.aresData = AresSetup.initialData(gameOptions.aresHazards, players);
     }
 
     const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);

@@ -1,7 +1,6 @@
 import {PlayerId} from '../Types';
 
 export type AresData = {
-    active: boolean;
     includeHazards: boolean;
     hazardData: HazardData;
     milestoneResults: Array<MilestoneCount>;

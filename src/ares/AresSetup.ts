@@ -7,9 +7,8 @@ import {_AresHazardPlacement} from './AresHazards';
 export class AresSetup {
   private constructor() {}
 
-  public static initialData(active: boolean, includeHazards: boolean, players: Player[]): AresData {
+  public static initialData(includeHazards: boolean, players: Player[]): AresData {
     return {
-      active: active,
       includeHazards: includeHazards,
       hazardData: {
         erosionOceanCount: {threshold: 3, available: true}, // oceans: add erosion tiles

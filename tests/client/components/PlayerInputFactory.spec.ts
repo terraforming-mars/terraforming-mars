@@ -117,7 +117,6 @@ const typesToTest: PlayerInputModel[] = [
     ...baseInput,
     inputType: PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS,
     aresData: {
-      active: false,
       includeHazards: false,
       hazardData: {
         erosionOceanCount: {threshold: 0, available: false},

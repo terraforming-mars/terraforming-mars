@@ -64,8 +64,8 @@ export default Vue.extend({
           max = Math.max(max, this.cardOrder[key]);
         }
         this.cardOrder[this.dragCard] = max + 1;
-      // place it ahead of the card
       } else {
+        // place it ahead of the card
         const temp = this.cardOrder[source];
         const keys = Object.keys(this.cardOrder);
         for (const key of keys) {

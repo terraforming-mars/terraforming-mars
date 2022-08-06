@@ -1334,10 +1334,12 @@ export class Player {
       throw new Error('You do not have that many resources to spend');
     }
 
-    if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
-      const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
-      if (cardsWithFloater.length === 1) {
-        throw new Error('Cannot spend all floaters to play Stratospheric Birds');
+    if (howToPay.floaters > 0) {
+      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
+        const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
+        if (cardsWithFloater.length === 1) {
+          throw new Error('Cannot spend all floaters to play Stratospheric Birds');
+        }
       }
     }
 

@@ -1,4 +1,4 @@
-TileView<template>
+<template>
   <div :class="getMainClass()" :data_space_id="space.id">
     <board-space-tile
       :tileType="space.tileType"

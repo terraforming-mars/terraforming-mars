@@ -61,7 +61,7 @@ describe('RobinsonIndustries', function() {
     player.heat = 1;
     expect(card.canAct(player)).is.true;
 
-    // Setting a larger amount of heat just to make the test results
+    // Setting a larger amount of heat just to make the test results more interesting
     player.heat = 5;
 
     const selectResource = cast(card.action(player), OrOptions);

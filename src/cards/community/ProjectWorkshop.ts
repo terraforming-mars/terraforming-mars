@@ -12,7 +12,6 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
-import {Resources} from '../../common/Resources';
 import {digit} from '../Options';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../common/turmoil/PartyName';
@@ -71,7 +70,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
   }
 
   public canAct(player: Player): boolean {
-    if (player.megaCredits >= 3) return true;
+    if (player.canAfford(3)) return true;
     return this.getEligibleCards(player).length > 0;
   }
 
@@ -104,8 +103,10 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
     );
 
     const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
-      player.deductResource(Resources.MEGACREDITS, 3);
-      player.drawCard(1, {cardType: CardType.ACTIVE});
+      player.payMegacreditsDeferred(
+        3,
+        'Select how to pay for Project Workshop action.',
+        () => player.drawCard(1, {cardType: CardType.ACTIVE}));
       return undefined;
     });
 

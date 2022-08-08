@@ -45,8 +45,13 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
 
     [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
       const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-        player.deductResource(Resources.MEGACREDITS, 4);
-        player.addProduction(resource, 1, {log: true});
+        player.payMegacreditsDeferred(
+          4,
+          'Select how to pay for Robinson Industries action.',
+          () => {
+            // Add production after payment, to prevent Manutech from being in the way.
+            player.addProduction(resource, 1, {log: true});
+          });
         return undefined;
       });
 

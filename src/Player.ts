@@ -1325,6 +1325,11 @@ export class Player {
       data: this.canUseData(selectedCard),
     };
   }
+
+  public payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void) {
+    this.game.defer(new SelectHowToPayDeferred(this, cost, {title, afterPay}));
+  }
+
   public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay, cardAction: CardAction = 'add') {
     const cardCost: number = this.getCardCost(selectedCard);
 

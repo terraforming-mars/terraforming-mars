@@ -17,6 +17,9 @@ import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Birds} from '../../../src/cards/base/Birds';
+import {Helion} from '../../../src/cards/corporation/Helion';
+import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {HowToPay} from '../../../src/common/inputs/HowToPay';
 
 describe('ProjectWorkshop', function() {
   let card: ProjectWorkshop;
@@ -54,6 +57,7 @@ describe('ProjectWorkshop', function() {
 
     expect(card.canAct(player)).is.true;
     card.action(player).cb();
+    runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
@@ -171,5 +175,28 @@ describe('ProjectWorkshop', function() {
     expect(game.dealer.discarded).contains(birds);
     expect(player.getTerraformRating()).to.eq(originalTR + 1);
     expect(player.megaCredits).eq(2); // Spent 3MC for the reds tax.
+  });
+
+  it('Project Workshop + Helion', function() {
+    const helion = new Helion();
+    helion.play(player);
+    player.corporations.push(helion);
+
+    player.megaCredits = 2;
+    expect(card.canAct(player)).is.false;
+    player.heat = 1;
+    expect(card.canAct(player)).is.true;
+
+    // Setting a larger amount of heat just to make the test results more interesting
+    player.heat = 5;
+
+    card.action(player).cb();
+    runAllActions(game);
+    const howToPay = cast(player.popWaitingFor(), SelectHowToPay);
+    howToPay.cb({...HowToPay.EMPTY, megaCredits: 1, heat: 2});
+    expect(player.megaCredits).to.eq(1);
+    expect(player.heat).to.eq(3);
+    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
 });

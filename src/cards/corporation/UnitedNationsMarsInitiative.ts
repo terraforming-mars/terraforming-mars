@@ -6,7 +6,6 @@ import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../common/Resources';
 
 export const ACTION_COST = 3;
 export class UnitedNationsMarsInitiative extends Card implements IActionCard, ICorporationCard {
@@ -40,8 +39,10 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, IC
     return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford(ACTION_COST, {tr: {tr: 1}});
   }
   public action(player: Player) {
-    player.deductResource(Resources.MEGACREDITS, 3);
-    player.increaseTerraformRating();
+    player.payMegacreditsDeferred(
+      3,
+      'Select how to pay for UNMI action.',
+      () => player.increaseTerraformRating());
     return undefined;
   }
 }

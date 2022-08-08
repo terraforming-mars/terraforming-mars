@@ -33,7 +33,7 @@ export class SocialEvents extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.increaseTerraformRatingSteps(this.getExpectedTr(player));
+    player.increaseTerraformRatingSteps(this.getExpectedTr(player), {log: true});
     return undefined;
   }
 }

@@ -4,32 +4,84 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectOption} from '../../../src/inputs/SelectOption';
+import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {Tags} from '../../../src/common/cards/Tags';
+import {Helion} from '../../../src/cards/corporation/Helion';
 
 describe('Factorum', function() {
-  it('Should play', function() {
-    const card = new Factorum();
-    const player = TestPlayer.BLUE.newPlayer();
+  let card: Factorum;
+  let player: TestPlayer;
+  let game: Game;
+
+  beforeEach(function() {
+    card = new Factorum();
+    player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
+    player.setCorporationForTest(card);
+  });
+
+  it('Should play', function() {
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
     player.megaCredits = 10;
 
-    player.setCorporationForTest(card);
+    const orOptions = cast(card.action(player), OrOptions);
+    expect(orOptions.options).has.lengthOf(2);
+    const drawCardOption = cast(orOptions.options[1], SelectOption);
 
-    const action = cast(card.action(player), OrOptions);
-    expect(action.options).has.lengthOf(2);
-    const orOptions = cast(action.options[1], SelectOption);
-
-    orOptions.cb();
+    drawCardOption.cb();
+    runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(7);
 
-    const orOptions2 = cast(action.options[0], SelectOption);
-    orOptions2.cb();
+    const gainEnergyProductionOption = cast(orOptions.options[0], SelectOption);
+    gainEnergyProductionOption.cb();
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+  });
+
+  it('Only offer building card if player has energy', function() {
+    const play = card.play(player);
+    expect(play).is.undefined;
+    player.megaCredits = 10;
+    player.energy = 1;
+
+    const selectOption = cast(card.action(player), SelectOption);
+    selectOption.cb();
+    runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player.cardsInHand[0].tags).includes(Tags.BUILDING);
+    expect(player.megaCredits).to.eq(7);
+  });
+
+  it('Factorum + Helion', function() {
+    const helion = new Helion();
+    helion.play(player);
+    player.corporations.push(helion);
+
+    player.megaCredits = 2;
+    player.energy = 5;
+
+    expect(card.canAct(player)).is.false;
+    player.heat = 1;
+    expect(card.canAct(player)).is.true;
+
+    // Setting a larger amount of heat just to make the test results more interesting
+    player.heat = 5;
+
+    const selectOption = cast(card.action(player), SelectOption);
+    selectOption.cb();
+    runAllActions(game);
+
+    const howToPay = cast(player.popWaitingFor(), SelectHowToPay);
+    howToPay.cb({...HowToPay.EMPTY, megaCredits: 1, heat: 2});
+
+    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player.megaCredits).to.eq(1);
+    expect(player.heat).to.eq(3);
   });
 });

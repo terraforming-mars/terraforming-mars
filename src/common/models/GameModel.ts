@@ -13,7 +13,7 @@ import {CardModel} from './CardModel';
 import {SpectatorId} from '../Types';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
-export interface GameModel {
+export type GameModel = {
   aresData: AresData | undefined;
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;

@@ -4,17 +4,15 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
 import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
-namespace DecreaseAnyProduction {
-  export interface Options {
-    count: number,
-    stealing?: boolean
-  }
+export type Options = {
+  count: number,
+  stealing?: boolean
 }
 export class DecreaseAnyProduction extends DeferredAction {
   constructor(
     player: Player,
     public resource: Resources,
-    public options: DecreaseAnyProduction.Options = {
+    public options: Options = {
       count: 1,
       stealing: false,
     },

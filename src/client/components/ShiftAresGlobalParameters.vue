@@ -43,7 +43,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import {IAresGlobalParametersResponse} from '@/common/inputs/IAresGlobalParametersResponse';
+import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
@@ -76,7 +76,7 @@ export default Vue.extend({
   },
   methods: {
     saveData() {
-      const response: IAresGlobalParametersResponse = {
+      const response: AresGlobalParametersResponse = {
         lowOceanDelta: this.$data.lowOceanDelta,
         highOceanDelta: this.$data.highOceanDelta,
         temperatureDelta: this.$data.temperatureDelta,

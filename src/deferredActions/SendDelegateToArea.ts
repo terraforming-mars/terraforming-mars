@@ -6,13 +6,23 @@ import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer, Turmoil} from '../turmoil/Turmoil';
 import {PartyName} from '../common/turmoil/PartyName';
 
+export type Options = {
+  /** The number of delegates to replace. Default is 1. */
+  count?: number,
+  /** If defined, this action is used to replace another player's delegates */
+  replace?: PlayerId | NeutralPlayer | undefined,
+  /** Cost for sending this delegate. Default is no cost. */
+  cost?: number,
+  /** Source of the delegates being added. Default is 'lobby' */
+  source?: 'lobby' | 'reserve'
+}
 export class SendDelegateToArea extends DeferredAction {
   private turmoil: Turmoil;
 
   constructor(
     player: Player,
     public title: string = 'Select where to send a delegate',
-    public options: SendDelegateToArea.Options = {},
+    public options: Options = {},
   ) {
     super(player, Priority.DEFAULT);
     this.turmoil = Turmoil.getTurmoil(player.game);
@@ -74,18 +84,5 @@ export class SendDelegateToArea extends DeferredAction {
     });
 
     return sendDelegate;
-  }
-}
-
-export namespace SendDelegateToArea {
-  export interface Options {
-    /** The number of delegates to replace. Default is 1. */
-    count?: number,
-    /** If defined, this action is used to replace another player's delegates */
-    replace?: PlayerId | NeutralPlayer | undefined,
-    /** Cost for sending this delegate. Default is no cost. */
-    cost?: number,
-    /** Source of the delegates being added. Default is 'lobby' */
-    source?: 'lobby' | 'reserve'
   }
 }

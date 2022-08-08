@@ -3,12 +3,12 @@ import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
 import {IMilestone} from './IMilestone';
 
-export interface ClaimedMilestone {
+export type ClaimedMilestone = {
   milestone: IMilestone;
   player: Player;
 }
 
-export interface SerializedClaimedMilestone {
+export type SerializedClaimedMilestone = {
   name?: string;
   playerId?: PlayerId;
 }

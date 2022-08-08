@@ -15,13 +15,6 @@ export interface Units {
 }
 
 export namespace Units {
-  // // Options used when logging changes in units.
-  // export interface Options {
-  //   dueTo?: Player;
-  //   globalEvent?: boolean;
-  //   log?: boolean;
-  // };
-
   export const EMPTY: Readonly<Units> = {
     get megacredits() {
       return 0;
@@ -74,16 +67,4 @@ export namespace Units {
       heat: -units.heat,
     };
   }
-
-  // export function adjustUnits(delta: PartialUnits, player: Player, purse: Units) {
-  //   if (!player.hasUnits(delta)) {
-  //     throw new Error();
-  //   }
-  //   purse.megacredits += delta.megacredits || 0;
-  //   purse.steel += delta.steel || 0;
-  //   purse.titanium += delta.titanium || 0;
-  //   purse.plants += delta.plants || 0;
-  //   purse.energy += delta.energy || 0;
-  //   purse.heat += delta.heat || 0;
-  // }
 }

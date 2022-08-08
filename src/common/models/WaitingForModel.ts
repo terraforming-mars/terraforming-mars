@@ -1,4 +1,4 @@
 
-export interface WaitingForModel {
-  result: 'GO' | 'REFRESH' | 'WAIT'
+export type WaitingForModel = {
+  result: 'GO' | 'REFRESH' | 'WAIT',
 }

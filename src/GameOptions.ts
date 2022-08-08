@@ -6,7 +6,7 @@ import {GameId} from './common/Types';
 import {RandomMAOptionType} from './common/ma/RandomMAOptionType';
 import {AgendaStyle} from './common/turmoil/Types';
 
-export interface GameOptions {
+export type GameOptions = {
   boardName: BoardName;
   clonedGamedId: GameId | undefined;
 

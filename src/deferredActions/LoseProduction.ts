@@ -3,19 +3,17 @@ import {Resources} from '../common/Resources';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogBuilder} from '../LogBuilder';
 
-export namespace LoseProduction {
-  export interface Options {
-    count?: number;
-    logMessage?: string;
-    logBuilder?: (builder: LogBuilder) => void;
-  }
+export type Options = {
+  count?: number;
+  logMessage?: string;
+  logBuilder?: (builder: LogBuilder) => void;
 }
 
 export class LoseProduction extends DeferredAction {
   constructor(
     player: Player,
     public resource: Resources,
-    public options: LoseProduction.Options = {},
+    public options: Options = {},
   ) {
     super(player, Priority.LOSE_RESOURCE_OR_PRODUCTION);
   }

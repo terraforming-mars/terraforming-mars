@@ -1,4 +1,4 @@
-export interface PathfindersModel {
+export type PathfindersModel = {
   venus: number;
   earth: number;
   mars: number;

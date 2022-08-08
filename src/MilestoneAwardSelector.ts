@@ -263,7 +263,7 @@ export namespace MilestoneAwardSelector {
     return max;
   }
 
-  export interface Constraints {
+  export type Constraints = {
     // No pairing may have a synergy greater than this.
     maxSynergyAllowed: number;
     // Sum of all the synergies may be no greater than this.

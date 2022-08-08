@@ -1,7 +1,7 @@
 import {Tags} from '../common/cards/Tags';
 import {PlayerId} from '../common/Types';
 
-export interface SerializedPathfindersData {
+export type SerializedPathfindersData = {
   venus: number;
   earth: number;
   mars: number;

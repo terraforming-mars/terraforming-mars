@@ -1,6 +1,6 @@
 // TRSource represents the ways an action will gain TR. This is used
 // exclusively to compute tax when Reds are in power.
-export interface TRSource {
+export type TRSource = {
   oxygen?: number,
   temperature?: number,
   oceans?: number,

@@ -13,7 +13,7 @@ export interface IGlobalEvent {
     resolve: (game: Game, turmoil: Turmoil) => void;
 }
 
-export interface StaticGlobalEventProperties {
+export type StaticGlobalEventProperties = {
   name: GlobalEventName,
   description: string,
   revealedDelegate: PartyName,

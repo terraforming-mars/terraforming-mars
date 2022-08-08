@@ -28,9 +28,9 @@ import {Resources} from '../common/Resources';
 import {CardType} from '../common/cards/CardType';
 import {
   ClaimedMilestoneModel,
-  IMilestoneScore,
+  MilestoneScore,
 } from '../common/models/ClaimedMilestoneModel';
-import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
+import {FundedAwardModel, AwardScore} from '../common/models/FundedAwardModel';
 import {getTurmoilModel} from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
@@ -156,7 +156,7 @@ export class Server {
       const claimed = claimedMilestones.find(
         (m) => m.milestone.name === milestone.name,
       );
-      let scores: Array<IMilestoneScore> = [];
+      let scores: Array<MilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < 3) {
         scores = game.getPlayers().map((player) => ({
           playerColor: player.color,
@@ -185,7 +185,7 @@ export class Server {
       const funded = fundedAwards.find(
         (a) => a.award.name === award.name,
       );
-      let scores: Array<IAwardScore> = [];
+      let scores: Array<AwardScore> = [];
       if (fundedAwards.length < 3 || funded !== undefined) {
         scores = game.getPlayers().map((player) => ({
           playerColor: player.color,

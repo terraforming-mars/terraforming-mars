@@ -7,12 +7,12 @@ import {Policy} from './Policy';
 import {Turmoil} from './Turmoil';
 import {Agenda, AgendaStyle} from '../common/turmoil/Types';
 
-export interface PoliticalAgendasData {
+export type PoliticalAgendasData = {
   agendas: Map<PartyName, Agenda>;
   agendaStyle: AgendaStyle;
 }
 
-export interface SerializedPoliticalAgendasData {
+export type SerializedPoliticalAgendasData = {
   agendas: Array<[PartyName, Agenda]>;
   agendaStyle: AgendaStyle;
 }

@@ -60,7 +60,7 @@ import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
-import {IPathfindersData} from './pathfinders/IPathfindersData';
+import {PathfindersData} from './pathfinders/PathfindersData';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
@@ -124,7 +124,7 @@ export class Game {
   public turmoil: Turmoil | undefined;
   public aresData: AresData | undefined;
   public moonData: IMoonData | undefined;
-  public pathfindersData: IPathfindersData | undefined;
+  public pathfindersData: PathfindersData | undefined;
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -380,7 +380,7 @@ export class Game {
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
-      pathfindersData: IPathfindersData.serialize(this.pathfindersData),
+      pathfindersData: PathfindersData.serialize(this.pathfindersData),
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
       researchedPlayers: Array.from(this.researchedPlayers),
@@ -1648,7 +1648,7 @@ export class Game {
     }
 
     if (d.pathfindersData !== undefined && gameOptions.pathfindersExpansion === true) {
-      game.pathfindersData = IPathfindersData.deserialize(d.pathfindersData);
+      game.pathfindersData = PathfindersData.deserialize(d.pathfindersData);
     }
 
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);

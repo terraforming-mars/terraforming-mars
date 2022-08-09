@@ -3,7 +3,7 @@ import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {CardName} from '../cards/CardName';
 
-export interface GameOptionsModel {
+export type GameOptionsModel = {
   aresExtension: boolean,
   altVenusBoard: boolean,
   boardName: BoardName,

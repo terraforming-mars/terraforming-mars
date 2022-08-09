@@ -2,7 +2,7 @@ import {Tags} from '../common/cards/Tags';
 import {PlayerId} from '../common/Types';
 import {SerializedPathfindersData} from './SerializedPathfindersData';
 
-export interface IPathfindersData {
+export type PathfindersData = {
   venus: number;
   earth: number;
   mars: number;
@@ -11,8 +11,8 @@ export interface IPathfindersData {
   vps: Array<{id: PlayerId, tag: Tags, points: number}>;
 }
 
-export namespace IPathfindersData {
-  export function serialize(pathfindersData: IPathfindersData | undefined): SerializedPathfindersData | undefined {
+export namespace PathfindersData {
+  export function serialize(pathfindersData: PathfindersData | undefined): SerializedPathfindersData | undefined {
     if (pathfindersData === undefined) {
       return undefined;
     }
@@ -26,7 +26,7 @@ export namespace IPathfindersData {
     };
   }
 
-  export function deserialize(pathfindersData: SerializedPathfindersData): IPathfindersData {
+  export function deserialize(pathfindersData: SerializedPathfindersData): PathfindersData {
     return {
       venus: pathfindersData.venus,
       earth: pathfindersData.earth,
@@ -37,7 +37,7 @@ export namespace IPathfindersData {
     };
   }
 
-  export function getValue(pathfindersData: IPathfindersData, tag: Tags): number {
+  export function getValue(pathfindersData: PathfindersData, tag: Tags): number {
     switch (tag) {
     case Tags.VENUS:
       return pathfindersData.venus;
@@ -54,7 +54,7 @@ export namespace IPathfindersData {
     }
   }
 
-  export function setValue(pathfindersData: IPathfindersData, tag: Tags, value: number): void {
+  export function setValue(pathfindersData: PathfindersData, tag: Tags, value: number): void {
     switch (tag) {
     case Tags.VENUS:
       pathfindersData.venus = value;

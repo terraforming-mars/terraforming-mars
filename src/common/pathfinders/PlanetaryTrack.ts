@@ -1,10 +1,10 @@
 import {Reward} from './Reward';
 
-export interface PlanetaryTrack {
+export type PlanetaryTrack = {
   spaces: ReadonlyArray<PlanetaryTrackSpace>;
 }
 
-export interface PlanetaryTrackSpace {
+export type PlanetaryTrackSpace = {
   everyone: ReadonlyArray<Reward>;
   risingPlayer: ReadonlyArray<Reward>;
   mostTags: ReadonlyArray<Reward>;

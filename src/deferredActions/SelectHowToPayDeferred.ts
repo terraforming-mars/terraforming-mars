@@ -5,11 +5,20 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {Resources} from '../common/Resources';
 import {CardName} from '../common/cards/CardName';
 
+export type Options = {
+  canUseSteel?: boolean;
+  canUseTitanium?: boolean;
+  canUseSeeds?: boolean,
+  canUseData?: boolean,
+  title?: string;
+  afterPay?: () => void;
+}
+
 export class SelectHowToPayDeferred extends DeferredAction {
   constructor(
     player: Player,
     public amount: number,
-    public options: SelectHowToPayDeferred.Options = {},
+    public options: Options = {},
   ) {
     super(player, Priority.DEFAULT);
   }
@@ -57,16 +66,5 @@ export class SelectHowToPayDeferred extends DeferredAction {
         return undefined;
       },
     );
-  }
-}
-
-export namespace SelectHowToPayDeferred {
-  export interface Options {
-    canUseSteel?: boolean;
-    canUseTitanium?: boolean;
-    canUseSeeds?: boolean,
-    canUseData?: boolean,
-    title?: string;
-    afterPay?: () => void;
   }
 }

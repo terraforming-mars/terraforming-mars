@@ -118,7 +118,7 @@ export class TestPlayer extends Player {
   }
 }
 
-export interface TagsForTest {
+export type TagsForTest = {
   building: number;
   space: number;
   science: number;

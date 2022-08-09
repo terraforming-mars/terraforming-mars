@@ -2,19 +2,17 @@ import {Player} from '../Player';
 import {Resources} from '../common/Resources';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export namespace GainResources {
-  export interface Options {
-    count?: number;
-    cb?: () => void;
-    log?: boolean;
-  }
+export type Options = {
+  count?: number;
+  cb?: () => void;
+  log?: boolean;
 }
 
 export class GainResources extends DeferredAction {
   constructor(
     player: Player,
     public resource: Resources,
-    public options: GainResources.Options = {},
+    public options: Options = {},
   ) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
     if ((options.count ?? 0) < 0) {

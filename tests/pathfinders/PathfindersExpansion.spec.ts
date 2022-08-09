@@ -6,14 +6,14 @@ import {Tags} from '../../src/common/cards/Tags';
 import {fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
 import {Game} from '../../src/Game';
-import {IPathfindersData} from '../../src/pathfinders/IPathfindersData';
+import {PathfindersData} from '../../src/pathfinders/PathfindersData';
 import {CardName} from '../../src/common/cards/CardName';
 
 describe('PathfindersExpansion', function() {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let game: Game;
-  let pathfindersData: IPathfindersData;
+  let pathfindersData: PathfindersData;
 
   beforeEach(() => {
     game = newTestGame(2, {

@@ -1,12 +1,12 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
-export interface FundedAward {
+export type FundedAward = {
   award: IAward;
   player: Player;
 }
 
-export interface SerializedFundedAward {
+export type SerializedFundedAward = {
   name?: string;
   playerId?: PlayerId;
 }

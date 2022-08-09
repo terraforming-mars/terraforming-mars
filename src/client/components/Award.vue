@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {FundedAwardModel, IAwardScore} from '@/common/models/FundedAwardModel';
+import {FundedAwardModel, AwardScore} from '@/common/models/FundedAwardModel';
 
 export default Vue.extend({
   name: 'Award',
@@ -51,7 +51,7 @@ export default Vue.extend({
     maAwardClass(): string {
       return 'ma-name--' + this.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },
-    sortedScores(): IAwardScore[] {
+    sortedScores(): AwardScore[] {
       return [...this.award.scores].sort((s1, s2) => s2.playerScore - s1.playerScore);
     },
   },

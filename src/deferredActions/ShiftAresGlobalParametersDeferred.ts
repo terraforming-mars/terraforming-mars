@@ -3,7 +3,7 @@ import {Player} from '../Player';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {AresHandler} from '../ares/AresHandler';
 import {PlayerInput} from '../PlayerInput';
-import {IAresGlobalParametersResponse} from '../common/inputs/IAresGlobalParametersResponse';
+import {AresGlobalParametersResponse} from '../common/inputs/AresGlobalParametersResponse';
 
 export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   constructor(player: Player) {
@@ -16,7 +16,7 @@ export class ShiftAresGlobalParametersDeferred extends DeferredAction {
       pi = new ShiftAresGlobalParameters(
         this.player,
         aresData,
-        (response: IAresGlobalParametersResponse) => {
+        (response: AresGlobalParametersResponse) => {
           const hazardData = aresData.hazardData;
           if (hazardData.erosionOceanCount.available) {
             hazardData.erosionOceanCount.threshold += response.lowOceanDelta;

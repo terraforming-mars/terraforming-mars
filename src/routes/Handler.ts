@@ -1,15 +1,13 @@
 import * as http from 'http';
 import {IHandler, Context} from './IHandler';
 
-export namespace Handler {
-  export interface Options {
-    validateServerId?: boolean;
-  }
+export type Options = {
+  validateServerId?: boolean;
 }
 
 export abstract class Handler implements IHandler {
   private validateServerId: boolean = false;
-  constructor(options?: Handler.Options) {
+  constructor(options?: Options) {
     this.validateServerId = options?.validateServerId === true;
   }
 

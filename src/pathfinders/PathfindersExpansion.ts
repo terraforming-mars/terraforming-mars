@@ -5,7 +5,7 @@ import {Game} from '../Game';
 import {GameOptions} from '../GameOptions';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
-import {IPathfindersData} from './IPathfindersData';
+import {PathfindersData} from './PathfindersData';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
@@ -35,7 +35,7 @@ export class PathfindersExpansion {
   private constructor() {
   }
 
-  public static initialize(gameOptions: GameOptions): IPathfindersData {
+  public static initialize(gameOptions: GameOptions): PathfindersData {
     return {
       venus: gameOptions.venusNextExtension ? 0 : -1,
       earth: 0,
@@ -90,7 +90,7 @@ export class PathfindersExpansion {
       return;
     }
 
-    let space = IPathfindersData.getValue(data, tag);
+    let space = PathfindersData.getValue(data, tag);
 
     // Do not raise tracks unused this game.
     if (space === -1) {
@@ -114,7 +114,7 @@ export class PathfindersExpansion {
     // game.indentation++;
     while (space < lastSpace) {
       space++;
-      IPathfindersData.setValue(data, tag, space);
+      PathfindersData.setValue(data, tag, space);
       const rewards = track.spaces[space];
 
       // Can be false because of the Constant Struggle global event.

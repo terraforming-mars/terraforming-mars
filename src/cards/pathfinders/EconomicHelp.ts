@@ -9,7 +9,7 @@ import {PathfindersExpansion, PlanetaryTag, TRACKS} from '../../pathfinders/Path
 import {Tags} from '../../common/cards/Tags';
 import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
-import {IPathfindersData} from '../../pathfinders/IPathfindersData';
+import {PathfindersData} from '../../pathfinders/PathfindersData';
 
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {
@@ -35,7 +35,7 @@ export class EconomicHelp extends Card implements IProjectCard {
     });
   }
 
-  private trackOffset(tag: PlanetaryTag, data: IPathfindersData): number {
+  private trackOffset(tag: PlanetaryTag, data: PathfindersData): number {
     const value = data[tag];
     return TRACKS[tag].spaces.length === value ? -1 : value;
   }

@@ -6,7 +6,7 @@ import {SpaceId} from '../Types';
 
 export type SpaceHighlight = undefined | 'noctis' | 'volcanic';
 
-export interface SpaceModel {
+export type SpaceModel = {
     id: SpaceId;
     x: number;
     y: number;

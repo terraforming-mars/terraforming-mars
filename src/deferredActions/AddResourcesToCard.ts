@@ -5,21 +5,19 @@ import {ICard} from '../cards/ICard';
 import {Tags} from '../common/cards/Tags';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export namespace AddResourcesToCard {
-  export interface Options {
-    count?: number;
-    restrictedTag?: Tags;
-    title?: string;
-    filter?: (card: ICard) => boolean;
-    log?: () => void;
-  }
+export type Options = {
+  count?: number;
+  restrictedTag?: Tags;
+  title?: string;
+  filter?: (card: ICard) => boolean;
+  log?: () => void;
 }
 
 export class AddResourcesToCard extends DeferredAction {
   constructor(
     player: Player,
     public resourceType: CardResource | undefined,
-    public options: AddResourcesToCard.Options = {},
+    public options: Options = {},
   ) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
   }

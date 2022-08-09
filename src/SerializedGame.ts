@@ -15,7 +15,7 @@ import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
 
-export interface SerializedGame {
+export type SerializedGame = {
     activePlayer: PlayerId;
     aresData?: AresData;
     awards: Array<string>;

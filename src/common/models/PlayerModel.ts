@@ -16,7 +16,7 @@ export interface ViewModel {
 }
 
 /** The public information about a player */
-export interface PublicPlayerModel {
+export type PublicPlayerModel = {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
   actionsTakenThisGame: number;

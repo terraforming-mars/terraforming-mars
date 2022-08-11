@@ -75,7 +75,7 @@ export default Vue.extend({
     },
     saveData() {
       if (this.canSave() === false) {
-        alert('Not all options selected');
+        window.app.showErrorWithInputAlert('Not all options selected');
         return;
       }
       for (const child of this.$children) {

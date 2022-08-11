@@ -20,7 +20,6 @@ import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 import * as raw_settings from '@/genfiles/settings.json';
-import {MainAppData} from '@/client/components/App';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SpectatorId} from '@/common/Types';
 
@@ -63,8 +62,7 @@ function browser(): string {
 export default (Vue as WithRefs<Refs>).extend({
   name: 'BugReportDialog',
   data() {
-    const mainData = this.$root as unknown as MainAppData;
-    const playerView: PlayerViewModel | undefined = mainData.playerView;
+    const playerView: PlayerViewModel | undefined = window.app.$data.playerView;
     return {
       message: `URL: ${url(playerView)}
 Player color: ${playerView?.thisPlayer.color}

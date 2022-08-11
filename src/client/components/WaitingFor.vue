@@ -64,7 +64,7 @@ export default Vue.extend({
     onsave(out: InputResponse) {
       const xhr = new XMLHttpRequest();
       const root = this.$root as unknown as typeof mainAppSettings.data;
-      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+      const showErrorWithInputAlert = window.app.showErrorWithInputAlert;
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
@@ -83,9 +83,9 @@ export default Vue.extend({
             (window).location = (window).location; // eslint-disable-line no-self-assign
           }
         } else if (xhr.status === 400 && xhr.responseType === 'json') {
-          showAlert(xhr.response.message);
+          showErrorWithInputAlert(xhr.response.message);
         } else {
-          showAlert('Unexpected response from server. Please try again.');
+          showErrorWithInputAlert('Unexpected response from server. Please try again.');
         }
         root.isServerSideRequestInProgress = false;
       };
@@ -96,20 +96,19 @@ export default Vue.extend({
     },
     waitForUpdate() {
       const vueApp = this;
-      const root = this.$root as unknown as typeof mainAppSettings.methods;
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
         xhr.onerror = function() {
-          root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
+          window.app.showErrorWithInputAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
         xhr.onload = () => {
           if (xhr.status === 200) {
             const result = xhr.response as WaitingForModel;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.
-              root.updatePlayer();
+              window.app.updatePlayer();
 
               if (Notification.permission !== 'granted') {
                 Notification.requestPermission();
@@ -144,16 +143,16 @@ export default Vue.extend({
             } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
               if (isPlayerId(this.playerView.id)) {
-                root.updatePlayer();
+                window.app.updatePlayer();
               } else {
-                root.updateSpectator();
+                window.app.updateSpectator();
               }
 
               return;
             }
             vueApp.waitForUpdate();
           } else {
-            root.showAlert(`Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
+            window.app.showErrorWithInputAlert(`Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
           }
         };
         xhr.responseType = 'json';

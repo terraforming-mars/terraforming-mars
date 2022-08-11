@@ -3,7 +3,7 @@
 //
 
 export function windowHasHTMLDialogElement(): boolean {
-  return (window as any).HTMLDialogElement !== undefined;
+  return window.HTMLDialogElement !== undefined;
 }
 
 export function hasShowModal(dialogElement: HTMLElement) {

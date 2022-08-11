@@ -1,3 +1,8 @@
+import {$t} from '@/client/directives/i18n';
+
+import * as constants from '@/common/constants';
+import * as raw_settings from '@/genfiles/settings.json';
+
 import GameEnd from '@/client/components/GameEnd.vue';
 import CreateGameForm from '@/client/components/create/CreateGameForm.vue';
 import GameHome from '@/client/components/GameHome.vue';
@@ -12,11 +17,7 @@ import DebugUI from '@/client/components/DebugUI.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
 import AdminHome from '@/client/components/admin/AdminHome.vue';
-
-import {$t} from '@/client/directives/i18n';
-
-import * as constants from '@/common/constants';
-import * as raw_settings from '@/genfiles/settings.json';
+import BugReportDialog from './BugReportDialog.vue';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
@@ -91,24 +92,34 @@ export const mainAppSettings = {
     'debug-ui': DebugUI,
     'help': Help,
     'admin-home': AdminHome,
+    'bug-report-dialog': BugReportDialog,
   },
   'methods': {
-    showAlert(message: string, cb: () => void = () => {}): void {
-      const dialogElement: HTMLElement | null = document.getElementById('alert-dialog');
-      const buttonElement: HTMLElement | null = document.getElementById('alert-dialog-button');
-      const messageElement: HTMLElement | null = document.getElementById('alert-dialog-message');
-      if (buttonElement !== null && messageElement !== null && dialogElement !== null && hasShowModal(dialogElement)) {
-        messageElement.innerHTML = $t(message);
-        const handler = () => {
-          buttonElement.removeEventListener('click', handler);
-          cb();
-        };
-        buttonElement.addEventListener('click', handler);
-        showModal(dialogElement);
-      } else {
-        alert(message);
-        cb();
+    showErrorWithInputAlert(message: string, cb?: () => void): void {
+      this.showAlert({message, title: 'Error with input', cb});
+    },
+    showAlert(options: {message: string, title: string, cb?: () => void}) {
+      const dialogElement = document.getElementById('alert-dialog');
+      const buttonElement = document.getElementById('alert-dialog-button');
+      const messageElement = document.getElementById('alert-dialog-message');
+      const titleElement = document.getElementById('alert-dialog-title');
+      if (buttonElement === null || messageElement === null || dialogElement === null || titleElement === null || !hasShowModal(dialogElement)) {
+        alert(options.message);
+        options.cb?.();
+        return;
       }
+
+      messageElement.innerHTML = $t(options.message);
+      titleElement.innerHTML = $t(options.title ?? '');
+      const handler = () => {
+        buttonElement.removeEventListener('click', handler);
+        options.cb?.();
+      };
+      buttonElement.addEventListener('click', handler);
+      showModal(dialogElement);
+    },
+    showBugReportDialog(): void {
+
     },
     setVisibilityState(targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;

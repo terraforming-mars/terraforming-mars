@@ -483,7 +483,7 @@ export default Vue.extend({
   mounted() {
     window.addEventListener('keydown', this.navigatePage);
     if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && getPreferences().show_alerts) {
-      alert('Mars is Terraformed!');
+      window.app.showAlert({message: 'Mars is Terraformed!', title: 'Congratulations!'});
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;
     }

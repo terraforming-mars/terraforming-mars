@@ -14,13 +14,14 @@
             <section>
                 <dialog id="alert-dialog" class="alert-dialog">
                     <form method="dialog">
-                        <p class="title" v-i18n>Error with input</p>
+                        <p class="title"  id="alert-dialog-title"></p>
                         <p id="alert-dialog-message"></p>
                         <menu class="dialog-menu centered-content">
                             <button id="alert-dialog-button" class="btn btn-lg btn-primary">OK</button>
                         </menu>
                     </form>
                 </dialog>
+                <bug-report-dialog></bug-report-dialog>
             </section>
             <div class="main-container">
                 <start-screen v-if="screen === 'start-screen'" :version="settings.version"></start-screen>

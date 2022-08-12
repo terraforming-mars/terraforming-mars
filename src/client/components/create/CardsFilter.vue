@@ -47,12 +47,12 @@ interface CardsFilterModel {
 export default Vue.extend({
   name: 'CardsFilter',
   props: {},
-  data() {
+  data(): CardsFilterModel {
     return {
       selectedCardNames: [],
       foundCardNames: [],
       searchTerm: '',
-    } as CardsFilterModel;
+    };
   },
   components: {Button},
   methods: {

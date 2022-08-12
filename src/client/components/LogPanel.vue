@@ -80,6 +80,14 @@ const translatableMessageDataTypes = new Set([
   LogMessageDataType.TILE_TYPE,
   LogMessageDataType.GLOBAL_EVENT]);
 
+type LogPanelModel = {
+  // temporary storage used when showing cards on the log line.
+  cards: Array<CardName>,
+  globalEventNames: Array<GlobalEventName>,
+  messages: Array<LogMessage>,
+  selectedGeneration: number,
+};
+
 export default Vue.extend({
   name: 'log-panel',
   props: {
@@ -104,13 +112,11 @@ export default Vue.extend({
       default: 0,
     },
   },
-  data() {
+  data(): LogPanelModel {
     return {
-      // temporary storage used when showing cards on the log line.
-      cards: [] as Array<CardName>,
-      globalEventNames: [] as Array<GlobalEventName>,
-
-      messages: [] as Array<LogMessage>,
+      cards: [],
+      globalEventNames: [],
+      messages: [],
       selectedGeneration: this.generation,
     };
   },

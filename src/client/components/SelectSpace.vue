@@ -76,8 +76,8 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     confirmPlacement() {
       const tiles = this.getSelectableSpaces();
-      tiles.forEach((tile: Element) => {
-        (tile as HTMLElement).onclick = null;
+      tiles.forEach((tile) => {
+        tile.onclick = null;
       });
 
       if (this.selectedTile === undefined) {
@@ -89,18 +89,18 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     disableAvailableSpaceAnimation() {
       const tiles = this.getSelectableSpaces();
-      tiles.forEach((tile: Element) => {
+      tiles.forEach((tile) => {
         tile.classList.remove('board-space--available', 'board-space--selected');
       });
     },
-    getSelectableSpaces() {
-      const spaces: Array<Element> = [];
+    getSelectableSpaces(): Array<HTMLElement> {
+      const spaces: Array<HTMLElement> = [];
 
       let board = document.getElementById('main_board');
       if (board !== null) {
         const array = board.getElementsByClassName('board-space-selectable');
         for (let i = 0, length = array.length; i < length; i++) {
-          spaces.push(array[i]);
+          spaces.push(array[i] as HTMLElement);
         }
       }
 
@@ -108,7 +108,7 @@ export default (Vue as WithRefs<Refs>).extend({
       if (board !== null) {
         const array = board.getElementsByClassName('board-space-selectable');
         for (let i = 0, length = array.length; i < length; i++) {
-          spaces.push(array[i]);
+          spaces.push(array[i] as HTMLElement);
         }
       }
 

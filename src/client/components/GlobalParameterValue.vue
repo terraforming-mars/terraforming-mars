@@ -22,7 +22,7 @@ export default Vue.extend({
   name: 'global-parameter-value',
   props: {
     param: {
-      type: Number, // GlobalParameter
+      type: Number as () => GlobalParameter,
     },
     value: {
       type: Number,
@@ -30,7 +30,7 @@ export default Vue.extend({
   },
   methods: {
     isMax(): boolean {
-      switch (this.param as GlobalParameter) {
+      switch (this.param) {
       case GlobalParameter.TEMPERATURE:
         return this.value === MAX_TEMPERATURE;
       case GlobalParameter.OXYGEN:
@@ -44,7 +44,7 @@ export default Vue.extend({
       }
     },
     getTitle(): string {
-      switch (this.param as GlobalParameter) {
+      switch (this.param) {
       case GlobalParameter.TEMPERATURE:
         return 'Temperature';
       case GlobalParameter.OXYGEN:
@@ -58,7 +58,7 @@ export default Vue.extend({
       }
     },
     getIconClass(): string {
-      switch (this.param as GlobalParameter) {
+      switch (this.param) {
       case GlobalParameter.TEMPERATURE:
         return 'temperature-tile';
       case GlobalParameter.OXYGEN:
@@ -78,4 +78,3 @@ export default Vue.extend({
 });
 
 </script>
-

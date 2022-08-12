@@ -16,16 +16,20 @@ Chart.defaults.font.size = 20;
 Chart.defaults.font.family = 'Ubuntu, Sans';
 Chart.defaults.color = 'rgb(240, 240, 240)';
 
-const ColorStringMap = new Map([
-  [Color.RED, 'rgb(153, 17, 0)'],
-  [Color.YELLOW, 'rgb(170, 170, 0)'],
-  [Color.GREEN, 'rgb(0, 153, 0)'],
-  [Color.BLACK, 'rgb(170, 170, 170)'],
-  [Color.BLUE, 'rgb(0, 102, 255)'],
-  [Color.PURPLE, 'rgb(140, 0, 255)'],
-  [Color.ORANGE, 'rgb(236, 113, 12)'],
-  [Color.PINK, 'rgb(245, 116, 187)'],
-]);
+const ColorStringMap: Record<Color, string> = {
+  [Color.RED]: 'rgb(153, 17, 0)',
+  [Color.YELLOW]: 'rgb(170, 170, 0)',
+  [Color.GREEN]: 'rgb(0, 153, 0)',
+  [Color.BLACK]: 'rgb(170, 170, 170)',
+  [Color.BLUE]: 'rgb(0, 102, 255)',
+  [Color.PURPLE]: 'rgb(140, 0, 255)',
+  [Color.ORANGE]: 'rgb(236, 113, 12)',
+  [Color.PINK]: 'rgb(245, 116, 187)',
+
+  // Not actual player colors
+  [Color.NEUTRAL]: '',
+  [Color.BRONZE]: '',
+};
 
 interface ChartDataSet {
   label: string,
@@ -62,8 +66,8 @@ export default Vue.extend({
         label: player.name,
         data: player.victoryPointsByGeneration,
         fill: false,
-        backgroundColor: ColorStringMap.get(player.color) as string,
-        borderColor: ColorStringMap.get(player.color) as string,
+        backgroundColor: ColorStringMap[player.color],
+        borderColor: ColorStringMap[player.color],
         tension: 0.1,
         pointRadius: 6,
       };

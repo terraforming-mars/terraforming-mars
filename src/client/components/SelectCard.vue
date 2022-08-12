@@ -70,12 +70,12 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data() {
+  data(): SelectCardModel {
     return {
       cards: [],
       warning: undefined,
       owners: new Map(),
-    } as SelectCardModel;
+    };
   },
   components: {
     Card,

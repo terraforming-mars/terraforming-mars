@@ -85,7 +85,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data() {
+  data(): SelectProductionToLoseModel {
     return {
       megacredits: 0,
       steel: 0,
@@ -94,7 +94,7 @@ export default Vue.extend({
       energy: 0,
       heat: 0,
       warning: undefined,
-    } as SelectProductionToLoseModel;
+    };
   },
   methods: {
     canDeductMegaCredits() {
@@ -139,7 +139,7 @@ export default Vue.extend({
       const current = this.$data[type];
       let newValue = current + direction;
       const lowestValue = (type === 'megacredit') ? -5 : 0;
-      const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction as PayProductionModel);
+      const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction);
       newValue = Math.min(Math.max(newValue, lowestValue), expendableQuantity);
       this.$data[type] = newValue;
     },

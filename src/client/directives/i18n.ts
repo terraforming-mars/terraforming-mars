@@ -1,7 +1,6 @@
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {Message} from '@/common/logs/Message';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {LogMessageData} from '@/common/logs/LogMessageData';
 import {Log} from '@/common/logs/Log';
 
 export function translateMessage(message: Message): string {
@@ -17,7 +16,7 @@ export function translateMessage(message: Message): string {
 let translated: Set<string> | undefined;
 export function translateText(englishText: string): string {
   const lang = getPreferences().lang;
-  const translations: {[key: string]: string} | undefined = (window as any)._translations;
+  const translations = window.translations;
   if (lang === 'en' || translations === undefined) {
     return englishText;
   }
@@ -68,7 +67,7 @@ export function translateTextWithParams(englishText: string, params: Array<strin
     return {
       type: LogMessageDataType.RAW_STRING,
       value: p,
-    } as LogMessageData;
+    };
   });
 
   const message: Message = {

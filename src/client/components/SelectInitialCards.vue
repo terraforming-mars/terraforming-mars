@@ -36,6 +36,12 @@ type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
 }
 
+type SelectInitialCardsModel = {
+  selectedCards: Array<CardName>,
+  selectedCorporation: ClientCard | undefined,
+  selectedPreludes: Array<CardName>,
+}
+
 export default (Vue as WithRefs<Refs>).extend({
   name: 'SelectInitialCards',
   props: {
@@ -64,11 +70,11 @@ export default (Vue as WithRefs<Refs>).extend({
     SelectCard,
     'confirm-dialog': ConfirmDialog,
   },
-  data() {
+  data(): SelectInitialCardsModel {
     return {
-      selectedCards: [] as Array<CardName>,
-      selectedCorporation: undefined as ClientCard | undefined,
-      selectedPreludes: [] as Array<CardName>,
+      selectedCards: [],
+      selectedCorporation: undefined,
+      selectedPreludes: [],
     };
   },
   methods: {

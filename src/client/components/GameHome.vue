@@ -67,7 +67,7 @@ export default Vue.extend({
   data() {
     return {
       // Variable to keep the state for the current copied player id. Used to display message of which button and which player playable link is currently in the clipboard
-      urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID as string,
+      urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID,
     };
   },
   methods: {

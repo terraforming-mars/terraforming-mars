@@ -17,6 +17,10 @@ import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
+type SelectColonyModel = {
+  selectedColony: string | undefined,
+};
+
 export default Vue.extend({
   name: 'SelectColony',
   props: {
@@ -33,9 +37,9 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data() {
+  data(): SelectColonyModel {
     return {
-      selectedColony: undefined as string | undefined,
+      selectedColony: undefined,
     };
   },
   components: {

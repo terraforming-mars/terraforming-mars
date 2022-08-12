@@ -155,15 +155,17 @@ export default Vue.extend({
       return this.turmoil.ruling.toLowerCase().split(' ').join('_');
     },
     getRulingParty(): string {
-      const rulingPartyName = this.turmoil.ruling;
-      if (rulingPartyName === PartyName.MARS) {
+      switch (this.turmoil.ruling) {
+      case PartyName.MARS:
         return 'Mars';
-      } else if (rulingPartyName === PartyName.SCIENTISTS) {
+      case PartyName.SCIENTISTS:
         return 'Science';
-      } else if (rulingPartyName === PartyName.KELVINISTS) {
+      case PartyName.KELVINISTS:
         return 'Kelvin';
-      } else {
-        return rulingPartyName as string;
+      case undefined:
+        return '???';
+      default:
+        return this.turmoil.ruling;
       }
     },
   },

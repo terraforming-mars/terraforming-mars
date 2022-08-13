@@ -15,7 +15,7 @@ const br = zlib.createBrotliCompress({
   params: {
     [zlib.constants.BROTLI_PARAM_MODE]: zlib.constants.BROTLI_MODE_TEXT,
     [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY,
-  }
+  },
 });
 
 fileContents.pipe(br).pipe(writeStreamBr);

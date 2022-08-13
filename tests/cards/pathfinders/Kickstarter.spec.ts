@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Kickstarter} from '../../../src/cards/pathfinders/Kickstarter';
+import {Kickstarter} from '../../../src/server/cards/pathfinders/Kickstarter';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Game} from '../../../src/Game';
-import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Game} from '../../../src/server/Game';
+import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tags} from '../../../src/common/cards/Tags';
 import {cast} from '../../TestingUtils';
 

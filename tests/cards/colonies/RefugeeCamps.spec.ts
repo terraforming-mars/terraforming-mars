@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {RefugeeCamps} from '../../../src/cards/colonies/RefugeeCamps';
-import {Player} from '../../../src/Player';
+import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

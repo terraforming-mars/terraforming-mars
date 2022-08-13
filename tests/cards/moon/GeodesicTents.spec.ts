@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {GeodesicTents} from '../../../src/cards/moon/GeodesicTents';
+import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
 import {Resources} from '../../../src/common/Resources';
-import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
+import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

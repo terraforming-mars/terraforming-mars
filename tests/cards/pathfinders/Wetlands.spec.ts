@@ -1,15 +1,15 @@
-import {Game} from '../../../src/Game';
-import {Wetlands} from '../../../src/cards/pathfinders/Wetlands';
+import {Game} from '../../../src/server/Game';
+import {Wetlands} from '../../../src/server/cards/pathfinders/Wetlands';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {cast, fakeCard, runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {ISpace} from '../../../src/boards/ISpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {ISpace} from '../../../src/server/boards/ISpace';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
-import {CardRequirements} from '../../../src/cards/CardRequirements';
+import {CardRequirements} from '../../../src/server/cards/CardRequirements';
 import {CardName} from '../../../src/common/cards/CardName';
 
 const toSpaceId = (space: ISpace): string => space.id;

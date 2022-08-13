@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Fish} from '../../../src/cards/base/Fish';
-import {LargeConvoy} from '../../../src/cards/base/LargeConvoy';
-import {Pets} from '../../../src/cards/base/Pets';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {LargeConvoy} from '../../../src/server/cards/base/LargeConvoy';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 

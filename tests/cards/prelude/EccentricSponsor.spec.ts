@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {EccentricSponsor} from '../../../src/cards/prelude/EccentricSponsor';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {EccentricSponsor} from '../../../src/server/cards/prelude/EccentricSponsor';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EccentricSponsor', function() {

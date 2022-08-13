@@ -1,15 +1,15 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {ThoriumRush} from '../../../src/cards/moon/ThoriumRush';
+import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 import {expect} from 'chai';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {IMoonData} from '../../../src/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {Phase} from '../../../src/common/Phase';
-import {Greens} from '../../../src/turmoil/parties/Greens';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {Reds} from '../../../src/turmoil/parties/Reds';
+import {Greens} from '../../../src/server/turmoil/parties/Greens';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

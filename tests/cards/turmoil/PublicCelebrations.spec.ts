@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {PublicCelebrations} from '../../../src/cards/turmoil/PublicCelebrations';
-import {Game} from '../../../src/Game';
+import {PublicCelebrations} from '../../../src/server/cards/turmoil/PublicCelebrations';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

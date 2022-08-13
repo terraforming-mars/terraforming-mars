@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Pollinators} from '../../../src/cards/pathfinders/Pollinators';
-import {Game} from '../../../src/Game';
+import {Pollinators} from '../../../src/server/cards/pathfinders/Pollinators';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';

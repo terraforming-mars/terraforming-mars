@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Builder} from '../../src/milestones/Builder';
+import {Builder} from '../../src/server/milestones/Builder';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Builder', () => {

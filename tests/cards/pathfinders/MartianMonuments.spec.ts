@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {MartianMonuments} from '../../../src/cards/pathfinders/MartianMonuments';
-import {Game} from '../../../src/Game';
+import {MartianMonuments} from '../../../src/server/cards/pathfinders/MartianMonuments';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {addCity} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {SpaceName} from '../../../src/SpaceName';
+import {SpaceName} from '../../../src/server/SpaceName';
 
 describe('MartianMonuments', function() {
   let card: MartianMonuments;

@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {DirectedImpactors} from '../../../src/cards/promo/DirectedImpactors';
-import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
+import {DirectedImpactors} from '../../../src/server/cards/promo/DirectedImpactors';
+import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
-import {Player} from '../../../src/Player';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('DirectedImpactors', function() {
   let card: DirectedImpactors;

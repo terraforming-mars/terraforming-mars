@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
-import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
-import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
+import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
+import {Game} from '../../../src/server/Game';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
-import {DeepLunarMining} from '../../../src/cards/moon/DeepLunarMining';
+import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
+import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
 
 describe('Gyropolis', function() {
   let card: Gyropolis;

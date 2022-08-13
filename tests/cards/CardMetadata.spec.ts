@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
-import {ALL_CARD_MANIFESTS} from '../../src/cards/AllCards';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
+import {ALL_CARD_MANIFESTS} from '../../src/server/cards/AllCards';
 import {setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 

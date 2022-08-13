@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MediaGroup} from '../../../src/cards/base/MediaGroup';
-import {Virus} from '../../../src/cards/base/Virus';
-import {Game} from '../../../src/Game';
+import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
+import {Virus} from '../../../src/server/cards/base/Virus';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 

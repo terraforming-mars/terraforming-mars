@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {SymbioticFungus} from '../../../src/cards/base/SymbioticFungus';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Decomposers} from '../../../src/server/cards/base/Decomposers';
+import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SymbioticFungus', function() {

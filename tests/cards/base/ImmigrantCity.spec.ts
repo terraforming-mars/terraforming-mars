@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {ImmigrantCity} from '../../../src/cards/base/ImmigrantCity';
-import {TharsisRepublic} from '../../../src/cards/corporation/TharsisRepublic';
-import {Game} from '../../../src/Game';
+import {ImmigrantCity} from '../../../src/server/cards/base/ImmigrantCity';
+import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepublic';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';

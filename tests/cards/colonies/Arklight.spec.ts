@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Predators} from '../../../src/cards/base/Predators';
-import {Arklight} from '../../../src/cards/colonies/Arklight';
-import {Game} from '../../../src/Game';
+import {Predators} from '../../../src/server/cards/base/Predators';
+import {Arklight} from '../../../src/server/cards/colonies/Arklight';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Arklight', function() {

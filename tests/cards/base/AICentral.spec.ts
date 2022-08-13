@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {AICentral} from '../../../src/cards/base/AICentral';
+import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 
 describe('AICentral', function() {

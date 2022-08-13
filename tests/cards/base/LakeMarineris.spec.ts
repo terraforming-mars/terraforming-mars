@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {LakeMarineris} from '../../../src/cards/base/LakeMarineris';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {LakeMarineris} from '../../../src/server/cards/base/LakeMarineris';
+import {Game} from '../../../src/server/Game';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LakeMarineris', function() {

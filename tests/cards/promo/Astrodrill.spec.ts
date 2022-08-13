@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {ICard} from '../../../src/cards/ICard';
-import {Astrodrill} from '../../../src/cards/promo/Astrodrill';
-import {CometAiming} from '../../../src/cards/promo/CometAiming';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {ICard} from '../../../src/server/cards/ICard';
+import {Astrodrill} from '../../../src/server/cards/promo/Astrodrill';
+import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectOption} from '../../../src/inputs/SelectOption';
+import {SelectOption} from '../../../src/server/inputs/SelectOption';
 
 describe('Astrodrill', function() {
   let card: Astrodrill;

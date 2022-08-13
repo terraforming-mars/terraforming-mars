@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
-import {PointLuna} from '../../../src/cards/prelude/PointLuna';
-import {Game} from '../../../src/Game';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
+import {PointLuna} from '../../../src/server/cards/prelude/PointLuna';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

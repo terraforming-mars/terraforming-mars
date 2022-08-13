@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {SoilDetoxification} from '../../../src/cards/pathfinders/SoilDetoxification';
-import {Game} from '../../../src/Game';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {SoilDetoxification} from '../../../src/server/cards/pathfinders/SoilDetoxification';
+import {Game} from '../../../src/server/Game';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {EcoLine} from '../../../src/cards/corporation/EcoLine';
-import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
-import {Unity} from '../../../src/turmoil/parties/Unity';
-import {Greens} from '../../../src/turmoil/parties/Greens';
+import {EcoLine} from '../../../src/server/cards/corporation/EcoLine';
+import {ConvertPlants} from '../../../src/server/cards/base/standardActions/ConvertPlants';
+import {Unity} from '../../../src/server/turmoil/parties/Unity';
+import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Units} from '../../../src/common/Units';
 
 describe('SoilDetoxification', function() {

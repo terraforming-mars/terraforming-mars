@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {setCustomGameOptions} from '../TestingUtils';
-import {ColonyDealer} from '../../src/colonies/ColonyDealer';
-import {SeededRandom} from '../../src/Random';
+import {ColonyDealer} from '../../src/server/colonies/ColonyDealer';
+import {SeededRandom} from '../../src/server/Random';
 
 describe('ColonyDealer', function() {
   const options = setCustomGameOptions({venusNextExtension: false, coloniesExtension: false, turmoilExtension: false, communityCardsOption: false});

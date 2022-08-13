@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {PrivateSecurity} from '../../../src/cards/pathfinders/PrivateSecurity';
+import {PrivateSecurity} from '../../../src/server/cards/pathfinders/PrivateSecurity';
 import {TestPlayer} from '../../TestPlayer';
-import {Fish} from '../../../src/cards/base/Fish';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';

@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {ValuableGases} from '../../../src/cards/pathfinders/ValuableGases';
-import {Game} from '../../../src/Game';
+import {ValuableGases} from '../../../src/server/cards/pathfinders/ValuableGases';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
-import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
-import {AirRaid} from '../../../src/cards/colonies/AirRaid';
+import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
+import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
+import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectHowToPayForProjectCard} from '../../../src/inputs/SelectHowToPayForProjectCard';
+import {SelectHowToPayForProjectCard} from '../../../src/server/inputs/SelectHowToPayForProjectCard';
 
 describe('ValuableGases', function() {
   let card: ValuableGases;

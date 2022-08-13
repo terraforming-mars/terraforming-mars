@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {SpaceMirrors} from '../../../src/cards/base/SpaceMirrors';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {SpaceMirrors} from '../../../src/server/cards/base/SpaceMirrors';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

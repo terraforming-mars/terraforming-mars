@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {CosmicSettler} from '../../src/awards/CosmicSettler';
+import {Game} from '../../src/server/Game';
+import {CosmicSettler} from '../../src/server/awards/CosmicSettler';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
-import {Board} from '../../src/boards/Board';
+import {Board} from '../../src/server/boards/Board';
 import {TileType} from '../../src/common/TileType';
 
 describe('CosmicSettler', function() {

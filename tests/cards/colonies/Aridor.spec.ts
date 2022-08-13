@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {Predators} from '../../../src/cards/base/Predators';
-import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
-import {Aridor} from '../../../src/cards/colonies/Aridor';
-import {Game} from '../../../src/Game';
+import {Predators} from '../../../src/server/cards/base/Predators';
+import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
+import {Aridor} from '../../../src/server/cards/colonies/Aridor';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
-import {Venus} from '../../../src/cards/community/Venus';
-import {Celestic} from '../../../src/cards/venusNext/Celestic';
+import {Venus} from '../../../src/server/cards/community/Venus';
+import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 
 let card: Aridor;
 let game: Game;

@@ -1,29 +1,29 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
+import {Player} from '../../src/server/Player';
+import {Game} from '../../src/server/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
-import {Tile} from '../../src/Tile';
+import {Tile} from '../../src/server/Tile';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {Resources} from '../../src/common/Resources';
-import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
-import {OriginalBoard} from '../../src/boards/OriginalBoard';
-import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
-import {Decomposers} from '../../src/cards/base/Decomposers';
-import {EnergyTapping} from '../../src/cards/base/EnergyTapping';
+import {SelectProductionToLose} from '../../src/server/inputs/SelectProductionToLose';
+import {OriginalBoard} from '../../src/server/boards/OriginalBoard';
+import {DesperateMeasures} from '../../src/server/cards/ares/DesperateMeasures';
+import {Decomposers} from '../../src/server/cards/base/Decomposers';
+import {EnergyTapping} from '../../src/server/cards/base/EnergyTapping';
 import {Phase} from '../../src/common/Phase';
 import {TestPlayer} from '../TestPlayer';
-import {_AresHazardPlacement} from '../../src/ares/AresHazards';
-import {AresSetup} from '../../src/ares/AresSetup';
-import {SeededRandom} from '../../src/Random';
+import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
+import {AresSetup} from '../../src/server/ares/AresSetup';
+import {SeededRandom} from '../../src/server/Random';
 import {Units} from '../../src/common/Units';
 import {addOcean, cast, runAllActions} from '../TestingUtils';
-import {Ants} from '../../src/cards/base/Ants';
-import {Birds} from '../../src/cards/base/Birds';
+import {Ants} from '../../src/server/cards/base/Ants';
+import {Birds} from '../../src/server/cards/base/Birds';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {HugeAsteroid} from '../../../src/cards/prelude/HugeAsteroid';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

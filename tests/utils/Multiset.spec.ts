@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Multiset} from '../../src/utils/Multiset';
+import {Multiset} from '../../src/server/utils/Multiset';
 
 describe('Multiset', function() {
   it('sanity', function() {

@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Birds} from '../../../src/cards/base/Birds';
-import {CEOsFavoriteProject} from '../../../src/cards/base/CEOsFavoriteProject';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
-import {SelfReplicatingRobots} from '../../../src/cards/promo/SelfReplicatingRobots';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
+import {Decomposers} from '../../../src/server/cards/base/Decomposers';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
+import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplicatingRobots';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CEOsFavoriteProject', function() {

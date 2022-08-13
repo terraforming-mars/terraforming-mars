@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {HE3ProductionQuotas} from '../../../src/cards/moon/HE3ProductionQuotas';
+import {HE3ProductionQuotas} from '../../../src/server/cards/moon/HE3ProductionQuotas';
 import {expect} from 'chai';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {IMoonData} from '../../../src/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
-import {Kelvinists} from '../../../src/turmoil/parties/Kelvinists';
-import {Greens} from '../../../src/turmoil/parties/Greens';
+import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
+import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

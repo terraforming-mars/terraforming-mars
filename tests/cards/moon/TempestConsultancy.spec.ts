@@ -1,11 +1,11 @@
-import {Game} from '../../../src/Game';
-import {TempestConsultancy} from '../../../src/cards/moon/TempestConsultancy';
+import {Game} from '../../../src/server/Game';
+import {TempestConsultancy} from '../../../src/server/cards/moon/TempestConsultancy';
 import {expect} from 'chai';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
-import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
-import {Greens} from '../../../src/turmoil/parties/Greens';
+import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
+import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 
 describe('TempestConsultancy', () => {

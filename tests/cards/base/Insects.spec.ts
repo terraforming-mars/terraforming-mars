@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Insects} from '../../../src/cards/base/Insects';
-import {Trees} from '../../../src/cards/base/Trees';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Insects} from '../../../src/server/cards/base/Insects';
+import {Trees} from '../../../src/server/cards/base/Trees';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

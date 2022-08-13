@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {OumuamuaTypeObjectSurvey} from '../../../src/cards/pathfinders/OumuamuaTypeObjectSurvey';
-import {Game} from '../../../src/Game';
+import {OumuamuaTypeObjectSurvey} from '../../../src/server/cards/pathfinders/OumuamuaTypeObjectSurvey';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
+import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {fakeCard, runAllActions} from '../../TestingUtils';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
-import {CardRequirements} from '../../../src/cards/CardRequirements';
-import {Dealer} from '../../../src/Dealer';
+import {CardRequirements} from '../../../src/server/cards/CardRequirements';
+import {Dealer} from '../../../src/server/Dealer';
 import {Resources} from '../../../src/common/Resources';
 
 describe('OumuamuaTypeObjectSurvey', function() {

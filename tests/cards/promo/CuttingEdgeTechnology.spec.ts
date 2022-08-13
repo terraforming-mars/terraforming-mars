@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {DustSeals} from '../../../src/cards/base/DustSeals';
-import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
-import {CuttingEdgeTechnology} from '../../../src/cards/promo/CuttingEdgeTechnology';
-import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence';
-import {Game} from '../../../src/Game';
+import {DustSeals} from '../../../src/server/cards/base/DustSeals';
+import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
+import {CuttingEdgeTechnology} from '../../../src/server/cards/promo/CuttingEdgeTechnology';
+import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CuttingEdgeTechnology', function() {

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Birds} from '../../src/cards/base/Birds';
-import {CometAiming} from '../../src/cards/promo/CometAiming';
-import {Dirigibles} from '../../src/cards/venusNext/Dirigibles';
-import {Tradesman} from '../../src/milestones/Tradesman';
-import {Player} from '../../src/Player';
+import {Birds} from '../../src/server/cards/base/Birds';
+import {CometAiming} from '../../src/server/cards/promo/CometAiming';
+import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
+import {Tradesman} from '../../src/server/milestones/Tradesman';
+import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Tradesman', () => {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MagneticFieldGenerators} from '../../../src/cards/base/MagneticFieldGenerators';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {MagneticFieldGenerators} from '../../../src/server/cards/base/MagneticFieldGenerators';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

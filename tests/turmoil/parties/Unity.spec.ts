@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Player} from '../../../src/server/Player';
+import {Game} from '../../../src/server/Game';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/turmoil/parties/Unity';
-import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
-import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
-import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/server/turmoil/parties/Unity';
+import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
+import {VestaShipyard} from '../../../src/server/cards/base/VestaShipyard';
+import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Unity', function() {

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {DomeFarming} from '../../../src/cards/prelude/DomeFarming';
+import {DomeFarming} from '../../../src/server/cards/prelude/DomeFarming';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

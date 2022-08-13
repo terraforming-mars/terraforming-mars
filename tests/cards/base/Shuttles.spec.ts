@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Bushes} from '../../../src/cards/base/Bushes';
-import {Shuttles} from '../../../src/cards/base/Shuttles';
-import {TollStation} from '../../../src/cards/base/TollStation';
-import {Game} from '../../../src/Game';
+import {Bushes} from '../../../src/server/cards/base/Bushes';
+import {Shuttles} from '../../../src/server/cards/base/Shuttles';
+import {TollStation} from '../../../src/server/cards/base/TollStation';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {AsteroidMining} from '../../../src/cards/base/AsteroidMining';
+import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

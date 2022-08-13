@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
-import {Pets} from '../../../src/cards/base/Pets';
-import {Research} from '../../../src/cards/base/Research';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {Research} from '../../../src/server/cards/base/Research';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MarsUniversity', function() {

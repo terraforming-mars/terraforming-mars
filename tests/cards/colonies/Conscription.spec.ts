@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MicroMills} from '../../../src/cards/base/MicroMills';
-import {Conscription} from '../../../src/cards/colonies/Conscription';
-import {Game} from '../../../src/Game';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {Conscription} from '../../../src/server/cards/colonies/Conscription';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Conscription', function() {

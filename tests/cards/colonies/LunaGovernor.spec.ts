@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

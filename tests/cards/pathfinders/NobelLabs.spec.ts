@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {NobelLabs} from '../../../src/cards/pathfinders/NobelLabs';
-import {Game} from '../../../src/Game';
+import {NobelLabs} from '../../../src/server/cards/pathfinders/NobelLabs';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {RegolithEaters} from '../../../src/cards/base/RegolithEaters';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
+import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast} from '../../TestingUtils';
 
 describe('NobelLabs', function() {

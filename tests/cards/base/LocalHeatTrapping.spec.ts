@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {Fish} from '../../../src/cards/base/Fish';
-import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
-import {Pets} from '../../../src/cards/base/Pets';
-import {Helion} from '../../../src/cards/corporation/Helion';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {LocalHeatTrapping} from '../../../src/server/cards/base/LocalHeatTrapping';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LocalHeatTrapping', () => {

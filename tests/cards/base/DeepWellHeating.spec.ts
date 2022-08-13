@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {DeepWellHeating} from '../../../src/cards/base/DeepWellHeating';
-import {Game} from '../../../src/Game';
+import {DeepWellHeating} from '../../../src/server/cards/base/DeepWellHeating';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

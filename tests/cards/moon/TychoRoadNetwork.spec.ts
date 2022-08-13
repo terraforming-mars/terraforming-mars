@@ -1,15 +1,15 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {TychoRoadNetwork} from '../../../src/cards/moon/TychoRoadNetwork';
+import {TychoRoadNetwork} from '../../../src/server/cards/moon/TychoRoadNetwork';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

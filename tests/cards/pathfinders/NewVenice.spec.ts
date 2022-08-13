@@ -1,10 +1,10 @@
-import {Game} from '../../../src/Game';
-import {NewVenice} from '../../../src/cards/pathfinders/NewVenice';
+import {Game} from '../../../src/server/Game';
+import {NewVenice} from '../../../src/server/cards/pathfinders/NewVenice';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {Capital} from '../../../src/cards/base/Capital';
+import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';

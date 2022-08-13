@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Birds} from '../../../src/cards/base/Birds';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {Player} from '../../../src/server/Player';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Birds', function() {

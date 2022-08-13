@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {TerraformingControlStation} from '../../../src/cards/pathfinders/TerraformingControlStation';
-import {Game} from '../../../src/Game';
+import {TerraformingControlStation} from '../../../src/server/cards/pathfinders/TerraformingControlStation';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Ants} from '../../../src/cards/base/Ants';
-import {AgroDrones} from '../../../src/cards/pathfinders/AgroDrones';
-import {CorroderSuits} from '../../../src/cards/venusNext/CorroderSuits';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {AgroDrones} from '../../../src/server/cards/pathfinders/AgroDrones';
+import {CorroderSuits} from '../../../src/server/cards/venusNext/CorroderSuits';
 
 describe('TerraformingControlStation', function() {
   let card: TerraformingControlStation;

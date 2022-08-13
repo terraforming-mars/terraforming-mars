@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {UndergroundDetonations} from '../../../src/cards/base/UndergroundDetonations';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {UndergroundDetonations} from '../../../src/server/cards/base/UndergroundDetonations';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

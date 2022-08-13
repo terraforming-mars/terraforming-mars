@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {IoResearchOutpost} from '../../../src/cards/prelude/IoResearchOutpost';
-import {Game} from '../../../src/Game';
+import {IoResearchOutpost} from '../../../src/server/cards/prelude/IoResearchOutpost';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

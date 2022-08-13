@@ -1,10 +1,10 @@
 
 import {expect} from 'chai';
-import {Algae} from '../src/cards/base/Algae';
-import {Ants} from '../src/cards/base/Ants';
-import {Birds} from '../src/cards/base/Birds';
-import {Game} from '../src/Game';
-import {LogHelper} from '../src/LogHelper';
+import {Algae} from '../src/server/cards/base/Algae';
+import {Ants} from '../src/server/cards/base/Ants';
+import {Birds} from '../src/server/cards/base/Birds';
+import {Game} from '../src/server/Game';
+import {LogHelper} from '../src/server/LogHelper';
 import {TestPlayer} from './TestPlayer';
 
 describe('LogHelper', function() {

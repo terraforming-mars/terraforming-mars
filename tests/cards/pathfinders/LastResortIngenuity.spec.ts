@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {LastResortIngenuity} from '../../../src/cards/pathfinders/LastResortIngenuity';
-import {AsteroidMiningConsortium} from '../../../src/cards/base/AsteroidMiningConsortium';
-import {Game} from '../../../src/Game';
+import {LastResortIngenuity} from '../../../src/server/cards/pathfinders/LastResortIngenuity';
+import {AsteroidMiningConsortium} from '../../../src/server/cards/base/AsteroidMiningConsortium';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LastResortIngenuity', function() {

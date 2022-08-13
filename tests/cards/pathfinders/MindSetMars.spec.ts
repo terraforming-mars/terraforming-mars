@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {MindSetMars} from '../../../src/cards/pathfinders/MindSetMars';
-import {Game} from '../../../src/Game';
+import {MindSetMars} from '../../../src/server/cards/pathfinders/MindSetMars';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {cast, fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {SelectOption} from '../../../src/inputs/SelectOption';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {assertPlaceCityTile, assertSendDelegateToArea} from './assertions';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('MindSetMars', function() {
   let card: MindSetMars;

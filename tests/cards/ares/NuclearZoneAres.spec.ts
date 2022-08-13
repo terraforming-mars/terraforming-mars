@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
-import {NuclearZoneAres} from '../../../src/cards/ares/NuclearZoneAres';
+import {NuclearZoneAres} from '../../../src/server/cards/ares/NuclearZoneAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 

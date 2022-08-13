@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Biolab} from '../../../src/cards/prelude/Biolab';
-import {Game} from '../../../src/Game';
+import {Biolab} from '../../../src/server/cards/prelude/Biolab';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

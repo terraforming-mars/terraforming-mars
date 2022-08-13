@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {LagrangeObservatory} from '../../../src/cards/base/LagrangeObservatory';
-import {Game} from '../../../src/Game';
+import {LagrangeObservatory} from '../../../src/server/cards/base/LagrangeObservatory';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LagrangeObservatory', function() {

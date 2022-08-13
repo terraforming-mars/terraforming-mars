@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Solarnet} from '../../../src/cards/venusNext/Solarnet';
-import {Game} from '../../../src/Game';
+import {Solarnet} from '../../../src/server/cards/venusNext/Solarnet';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Solarnet', function() {

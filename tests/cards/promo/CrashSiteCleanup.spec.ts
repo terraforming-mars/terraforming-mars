@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {CrashSiteCleanup} from '../../../src/cards/promo/CrashSiteCleanup';
-import {SmallAsteroid} from '../../../src/cards/promo/SmallAsteroid';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {CrashSiteCleanup} from '../../../src/server/cards/promo/CrashSiteCleanup';
+import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CrashSiteCleanup', function() {

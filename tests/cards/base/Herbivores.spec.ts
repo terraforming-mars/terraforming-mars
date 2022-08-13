@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Herbivores} from '../../../src/cards/base/Herbivores';
-import {Game} from '../../../src/Game';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {Player} from '../../../src/Player';
+import {Herbivores} from '../../../src/server/cards/base/Herbivores';
+import {Game} from '../../../src/server/Game';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';

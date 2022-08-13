@@ -1,11 +1,11 @@
-import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
+import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {expect} from 'chai';
-import {EarlyExpedition} from '../../../src/cards/pathfinders/EarlyExpedition';
-import {Game} from '../../../src/Game';
+import {EarlyExpedition} from '../../../src/server/cards/pathfinders/EarlyExpedition';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {runAllActions} from '../../TestingUtils';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('EarlyExpedition', function() {
   let card: EarlyExpedition;

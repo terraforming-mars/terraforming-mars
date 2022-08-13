@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {GanymedeColony} from '../../../src/cards/base/GanymedeColony';
-import {Game} from '../../../src/Game';
+import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GanymedeColony', function() {

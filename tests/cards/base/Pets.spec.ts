@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Pets} from '../../../src/cards/base/Pets';
-import {Game} from '../../../src/Game';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {Game} from '../../../src/server/Game';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

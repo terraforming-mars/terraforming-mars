@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Penguins} from '../../../src/cards/promo/Penguins';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Penguins} from '../../../src/server/cards/promo/Penguins';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

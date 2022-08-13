@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {HeavyTaxation} from '../../../src/cards/colonies/HeavyTaxation';
+import {HeavyTaxation} from '../../../src/server/cards/colonies/HeavyTaxation';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Birds} from '../../../src/cards/base/Birds';
-import {ICard} from '../../../src/cards/ICard';
-import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
-import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
-import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBirds';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {ICard} from '../../../src/server/cards/ICard';
+import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
+import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
+import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,7 +14,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CardResource} from '../../../src/common/CardResource';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 
 describe('MaxwellBase', function() {
   let card: MaxwellBase;

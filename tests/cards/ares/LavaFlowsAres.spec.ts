@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
+import {Player} from '../../../src/server/Player';
+import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {resetBoard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LavaFlowsAres} from '../../../src/cards/ares/LavaFlowsAres';
+import {LavaFlowsAres} from '../../../src/server/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 

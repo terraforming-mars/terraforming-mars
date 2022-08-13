@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
-import {ICard} from '../../../src/cards/ICard';
-import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {ExtractorBalloons} from '../../../src/cards/venusNext/ExtractorBalloons';
-import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBirds';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
+import {ICard} from '../../../src/server/cards/ICard';
+import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
+import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
+import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
+import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
-import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
+import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;

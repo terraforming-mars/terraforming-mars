@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
-import {MirandaResort} from '../../../src/cards/base/MirandaResort';
+import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
+import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 
 describe('MirandaResort', function() {
   it('Should play', function() {

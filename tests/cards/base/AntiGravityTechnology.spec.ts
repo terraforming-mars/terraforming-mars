@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {AntiGravityTechnology} from '../../../src/cards/base/AntiGravityTechnology';
+import {AntiGravityTechnology} from '../../../src/server/cards/base/AntiGravityTechnology';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AntiGravityTechnology', function() {

@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/Player';
+import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {DeferredAction} from '../../../src//deferredActions/DeferredAction';
-import {SendDelegateToArea} from '../../../src//deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src//inputs/SelectPartyToSendDelegate';
+import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
+import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
+import {SelectPartyToSendDelegate} from '../../../src/server//inputs/SelectPartyToSendDelegate';
 import {cast} from '../../TestingUtils';
-import {PlaceCityTile} from '../../../src/deferredActions/PlaceCityTile';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
 export function assertSendDelegateToArea(player: Player, action: DeferredAction) {

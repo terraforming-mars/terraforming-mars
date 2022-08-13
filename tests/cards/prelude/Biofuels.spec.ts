@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Biofuels} from '../../../src/cards/prelude/Biofuels';
+import {Biofuels} from '../../../src/server/cards/prelude/Biofuels';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

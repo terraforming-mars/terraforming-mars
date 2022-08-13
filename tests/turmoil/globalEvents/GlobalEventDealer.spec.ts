@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
-import {GlobalDustStorm} from '../../../src/turmoil/globalEvents/GlobalDustStorm';
-import {GlobalEventDealer, getGlobalEventByName} from '../../../src/turmoil/globalEvents/GlobalEventDealer';
+import {Game} from '../../../src/server/Game';
+import {GlobalDustStorm} from '../../../src/server/turmoil/globalEvents/GlobalDustStorm';
+import {GlobalEventDealer, getGlobalEventByName} from '../../../src/server/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
-import {IGlobalEvent} from '../../../src/turmoil/globalEvents/IGlobalEvent';
-import {ScientificCommunity} from '../../../src/turmoil/globalEvents/ScientificCommunity';
-import {SerializedGlobalEventDealer} from '../../../src/turmoil/globalEvents/SerializedGlobalEventDealer';
-import {SponsoredProjects} from '../../../src/turmoil/globalEvents/SponsoredProjects';
-import {SuccessfulOrganisms} from '../../../src/turmoil/globalEvents/SuccessfulOrganisms';
-import {WarOnEarth} from '../../../src/turmoil/globalEvents/WarOnEarth';
+import {IGlobalEvent} from '../../../src/server/turmoil/globalEvents/IGlobalEvent';
+import {ScientificCommunity} from '../../../src/server/turmoil/globalEvents/ScientificCommunity';
+import {SerializedGlobalEventDealer} from '../../../src/server/turmoil/globalEvents/SerializedGlobalEventDealer';
+import {SponsoredProjects} from '../../../src/server/turmoil/globalEvents/SponsoredProjects';
+import {SuccessfulOrganisms} from '../../../src/server/turmoil/globalEvents/SuccessfulOrganisms';
+import {WarOnEarth} from '../../../src/server/turmoil/globalEvents/WarOnEarth';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {AdvancedPowerGrid} from '../../../src/cards/pathfinders/AdvancedPowerGrid';
-import {Game} from '../../../src/Game';
+import {AdvancedPowerGrid} from '../../../src/server/cards/pathfinders/AdvancedPowerGrid';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 

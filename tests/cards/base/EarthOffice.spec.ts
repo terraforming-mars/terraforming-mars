@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Birds} from '../../../src/cards/base/Birds';
-import {EarthOffice} from '../../../src/cards/base/EarthOffice';
-import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EarthOffice', function() {

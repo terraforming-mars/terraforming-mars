@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {HE3Lobbyists} from '../../../src/cards/moon/HE3Lobbyists';
+import {HE3Lobbyists} from '../../../src/server/cards/moon/HE3Lobbyists';
 import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

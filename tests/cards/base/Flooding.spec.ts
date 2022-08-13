@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Flooding} from '../../../src/cards/base/Flooding';
-import {LandClaim} from '../../../src/cards/base/LandClaim';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Flooding} from '../../../src/server/cards/base/Flooding';
+import {LandClaim} from '../../../src/server/cards/base/LandClaim';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {cast, maxOutOceans} from '../../TestingUtils';

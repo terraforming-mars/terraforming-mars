@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {GiantSolarShade} from '../../../src/cards/venusNext/GiantSolarShade';
-import {Game} from '../../../src/Game';
+import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
+import {GiantSolarShade} from '../../../src/server/cards/venusNext/GiantSolarShade';
+import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/Player';
-import {Reds} from '../../../src/turmoil/parties/Reds';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
+import {Player} from '../../../src/server/Player';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 let card: GiantSolarShade;

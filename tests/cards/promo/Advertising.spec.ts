@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
-import {Advertising} from '../../../src/cards/promo/Advertising';
-import {Game} from '../../../src/Game';
+import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
+import {Advertising} from '../../../src/server/cards/promo/Advertising';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

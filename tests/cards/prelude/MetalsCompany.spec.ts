@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {MetalsCompany} from '../../../src/cards/prelude/MetalsCompany';
+import {MetalsCompany} from '../../../src/server/cards/prelude/MetalsCompany';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -2,8 +2,8 @@ import {expect} from 'chai';
 
 import {CardName} from '../../src/common/cards/CardName';
 import {CardType} from '../../src/common/cards/CardType';
-import {Helion} from '../../src/cards/corporation/Helion';
-import {Inventrix} from '../../src/cards/corporation/Inventrix';
+import {Helion} from '../../src/server/cards/corporation/Helion';
+import {Inventrix} from '../../src/server/cards/corporation/Inventrix';
 import {Tags} from '../../src/common/cards/Tags';
 
 describe('Card', function() {

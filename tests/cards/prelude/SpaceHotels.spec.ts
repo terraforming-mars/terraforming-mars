@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
-import {Player} from '../../../src/Player';
+import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

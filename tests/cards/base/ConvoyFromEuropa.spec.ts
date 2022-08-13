@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {ConvoyFromEuropa} from '../../../src/cards/base/ConvoyFromEuropa';
-import {Game} from '../../../src/Game';
+import {ConvoyFromEuropa} from '../../../src/server/cards/base/ConvoyFromEuropa';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ConvoyFromEuropa', function() {

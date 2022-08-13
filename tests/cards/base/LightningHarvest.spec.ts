@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {GeneRepair} from '../../../src/cards/base/GeneRepair';
-import {LightningHarvest} from '../../../src/cards/base/LightningHarvest';
-import {Game} from '../../../src/Game';
+import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
+import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

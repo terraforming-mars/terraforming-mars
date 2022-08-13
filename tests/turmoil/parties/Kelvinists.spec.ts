@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {ISpace} from '../../../src/boards/ISpace';
+import {Game} from '../../../src/server/Game';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {ISpace} from '../../../src/server/boards/ISpace';
 import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/turmoil/parties/Kelvinists';
+import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
-import {AndOptions} from '../../../src/inputs/AndOptions';
-import {SelectAmount} from '../../../src/inputs/SelectAmount';
+import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 
 describe('Kelvinists', function() {
   let player: TestPlayer;

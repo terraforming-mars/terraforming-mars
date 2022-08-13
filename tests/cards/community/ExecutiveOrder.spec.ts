@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/Player';
+import {Player} from '../../../src/server/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
-import {GameOptions} from '../../../src/GameOptions';
+import {Game} from '../../../src/server/Game';
+import {GameOptions} from '../../../src/server/GameOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {ExecutiveOrder} from '../../../src/cards/community/ExecutiveOrder';
-import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {ExecutiveOrder} from '../../../src/server/cards/community/ExecutiveOrder';
+import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('ExecutiveOrder', function() {
   let card: ExecutiveOrder;

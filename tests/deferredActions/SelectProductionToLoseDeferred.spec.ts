@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 
-import {SelectProductionToLoseDeferred} from '../../src/deferredActions/SelectProductionToLoseDeferred';
+import {SelectProductionToLoseDeferred} from '../../src/server/deferredActions/SelectProductionToLoseDeferred';
 import {Units} from '../../src/common/Units';
 import {TestPlayer} from '../TestPlayer';
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {newTestGame, getTestPlayer} from '../TestGame';
 
 describe('SelectProductionToLose', function() {

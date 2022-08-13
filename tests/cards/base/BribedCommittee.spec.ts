@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {BribedCommittee} from '../../../src/cards/base/BribedCommittee';
-import {Game} from '../../../src/Game';
+import {BribedCommittee} from '../../../src/server/cards/base/BribedCommittee';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BribedCommittee', function() {

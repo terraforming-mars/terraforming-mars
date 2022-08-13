@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Capital} from '../../../src/cards/base/Capital';
+import {Capital} from '../../../src/server/cards/base/Capital';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {Board} from '../../../src/boards/Board';
+import {Board} from '../../../src/server/boards/Board';
 
 describe('Capital', () => {
   let card: Capital;

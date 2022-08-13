@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {PhobosSpaceHaven} from '../../../src/cards/base/PhobosSpaceHaven';
-import {Game} from '../../../src/Game';
+import {PhobosSpaceHaven} from '../../../src/server/cards/base/PhobosSpaceHaven';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

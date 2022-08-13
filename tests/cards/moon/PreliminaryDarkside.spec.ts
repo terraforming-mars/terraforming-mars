@@ -1,10 +1,10 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {PreliminaryDarkside} from '../../../src/cards/moon/PreliminaryDarkside';
+import {PreliminaryDarkside} from '../../../src/server/cards/moon/PreliminaryDarkside';
 import {expect} from 'chai';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Polaris} from '../../../src/cards/pathfinders/Polaris';
-import {Game} from '../../../src/Game';
+import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
 describe('Polaris', function() {

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {SimpleDeferredAction} from '../../src/deferredActions/DeferredAction';
-import {DeferredActionsQueue} from '../../src/deferredActions/DeferredActionsQueue';
+import {SimpleDeferredAction} from '../../src/server/deferredActions/DeferredAction';
+import {DeferredActionsQueue} from '../../src/server/deferredActions/DeferredActionsQueue';
 import {PlayerInputTypes} from '../../src/common/input/PlayerInputTypes';
 import {TestPlayer} from '../TestPlayer';
-import {SelectOption} from '../../src/inputs/SelectOption';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
 
 describe('DeferredActionsQueue', () => {
   it('runs actions for player', () => {

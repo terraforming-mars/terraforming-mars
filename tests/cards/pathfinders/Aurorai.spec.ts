@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Aurorai} from '../../../src/cards/pathfinders/Aurorai';
-import {Game} from '../../../src/Game';
+import {Aurorai} from '../../../src/server/cards/pathfinders/Aurorai';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
+import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 
 describe('Aurorai', function() {
   let card: Aurorai;

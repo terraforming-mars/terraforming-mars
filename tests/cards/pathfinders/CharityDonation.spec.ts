@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {CharityDonation} from '../../../src/cards/pathfinders/CharityDonation';
-import {Game} from '../../../src/Game';
+import {CharityDonation} from '../../../src/server/cards/pathfinders/CharityDonation';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {AcquiredCompany} from '../../../src/cards/base/AcquiredCompany';
-import {BeamFromAThoriumAsteroid} from '../../../src/cards/base/BeamFromAThoriumAsteroid';
-import {CEOsFavoriteProject} from '../../../src/cards/base/CEOsFavoriteProject';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
+import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
+import {BeamFromAThoriumAsteroid} from '../../../src/server/cards/base/BeamFromAThoriumAsteroid';
+import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
+import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {cast, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CharityDonation', function() {
   let card: CharityDonation;

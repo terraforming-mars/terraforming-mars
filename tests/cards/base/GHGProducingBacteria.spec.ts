@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 

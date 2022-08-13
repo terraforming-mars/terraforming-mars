@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {GHGImportFromVenus} from '../../../src/cards/venusNext/GHGImportFromVenus';
-import {Game} from '../../../src/Game';
+import {GHGImportFromVenus} from '../../../src/server/cards/venusNext/GHGImportFromVenus';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

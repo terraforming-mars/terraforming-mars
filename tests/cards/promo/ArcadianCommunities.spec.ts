@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {ArcadianCommunities} from '../../../src/cards/promo/ArcadianCommunities';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
-import {Board} from '../../../src/boards/Board';
+import {Board} from '../../../src/server/boards/Board';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('ArcadianCommunities', function() {

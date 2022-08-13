@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {MethaneFromTitan} from '../../../src/cards/base/MethaneFromTitan';
-import {Game} from '../../../src/Game';
+import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

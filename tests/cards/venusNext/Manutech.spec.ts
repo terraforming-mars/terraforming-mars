@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
-import {Manutech} from '../../../src/cards/venusNext/Manutech';
-import {Game} from '../../../src/Game';
+import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
+import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

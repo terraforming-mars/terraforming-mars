@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganisms';
-import {Game} from '../../../src/Game';
+import {DesignedOrganisms} from '../../../src/server/cards/pathfinders/DesignedOrganisms';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {Penguins} from '../../../src/cards/promo/Penguins';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {Penguins} from '../../../src/server/cards/promo/Penguins';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {runAllActions} from '../../TestingUtils';
 
 describe('DesignedOrganisms', function() {

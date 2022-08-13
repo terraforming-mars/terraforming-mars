@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Airliners} from '../../../src/cards/colonies/Airliners';
+import {Airliners} from '../../../src/server/cards/colonies/Airliners';
 import {Resources} from '../../../src/common/Resources';
-import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {Game} from '../../../src/Game';
+import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 

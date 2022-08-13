@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Comet} from '../../../src/cards/base/Comet';
-import {Game} from '../../../src/Game';
+import {Comet} from '../../../src/server/cards/base/Comet';
+import {Game} from '../../../src/server/Game';
 import {cast, maxOutOceans} from '../../TestingUtils';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Comet', function() {

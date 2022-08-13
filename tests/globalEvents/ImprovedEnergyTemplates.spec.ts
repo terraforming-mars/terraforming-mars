@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {SolarWindPower} from '../../src/cards/base/SolarWindPower';
-import {Game} from '../../src/Game';
+import {SolarWindPower} from '../../src/server/cards/base/SolarWindPower';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {ImprovedEnergyTemplates} from '../../src/turmoil/globalEvents/ImprovedEnergyTemplates';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {ImprovedEnergyTemplates} from '../../src/server/turmoil/globalEvents/ImprovedEnergyTemplates';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('ImprovedEnergyTemplates', function() {

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {PowerGrid} from '../../../src/cards/base/PowerGrid';
+import {PowerGrid} from '../../../src/server/cards/base/PowerGrid';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 
 describe('PowerGrid', function() {
   it('Should play', function() {

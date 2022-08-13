@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {VenusMagnetizer} from '../../../src/cards/venusNext/VenusMagnetizer';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {VenusMagnetizer} from '../../../src/server/cards/venusNext/VenusMagnetizer';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

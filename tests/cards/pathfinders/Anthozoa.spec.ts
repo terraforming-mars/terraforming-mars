@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Anthozoa} from '../../../src/cards/pathfinders/Anthozoa';
-import {Game} from '../../../src/Game';
+import {Anthozoa} from '../../../src/server/cards/pathfinders/Anthozoa';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
 

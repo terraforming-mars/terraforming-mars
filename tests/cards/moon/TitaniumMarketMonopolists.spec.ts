@@ -1,12 +1,12 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {TitaniumMarketMonopolists} from '../../../src/cards/moon/TitaniumMarketMonopolists';
+import {TitaniumMarketMonopolists} from '../../../src/server/cards/moon/TitaniumMarketMonopolists';
 import {expect} from 'chai';
-import {SelectAmount} from '../../../src/inputs/SelectAmount';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

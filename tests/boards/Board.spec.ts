@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {OriginalBoard} from '../../src/boards/OriginalBoard';
-import {Player} from '../../src/Player';
+import {OriginalBoard} from '../../src/server/boards/OriginalBoard';
+import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
-import {ISpace} from '../../src/boards/ISpace';
+import {ISpace} from '../../src/server/boards/ISpace';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
-import {Board} from '../../src/boards/Board';
+import {Board} from '../../src/server/boards/Board';
 import {Color} from '../../src/common/Color';
-import {SerializedBoard} from '../../src/boards/SerializedBoard';
-import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {SeededRandom} from '../../src/Random';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/GameOptions';
+import {SerializedBoard} from '../../src/server/boards/SerializedBoard';
+import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
+import {SeededRandom} from '../../src/server/Random';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/GameOptions';
 import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {

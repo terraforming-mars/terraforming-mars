@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {deserializeClaimedMilestones, serializeClaimedMilestones} from '../../src/milestones/ClaimedMilestone';
-import {ClaimedMilestone} from '../../src/milestones/ClaimedMilestone';
-import {Diversifier} from '../../src/milestones/Diversifier';
-import {Generalist} from '../../src/milestones/Generalist';
+import {deserializeClaimedMilestones, serializeClaimedMilestones} from '../../src/server/milestones/ClaimedMilestone';
+import {ClaimedMilestone} from '../../src/server/milestones/ClaimedMilestone';
+import {Diversifier} from '../../src/server/milestones/Diversifier';
+import {Generalist} from '../../src/server/milestones/Generalist';
 import {TestPlayer} from '../TestPlayer';
 
 describe('ClaimedMilestones', function() {

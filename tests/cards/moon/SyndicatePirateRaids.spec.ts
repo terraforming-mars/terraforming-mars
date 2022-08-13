@@ -1,8 +1,8 @@
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {SyndicatePirateRaids} from '../../../src/cards/moon/SyndicatePirateRaids';
+import {SyndicatePirateRaids} from '../../../src/server/cards/moon/SyndicatePirateRaids';
 
 describe('SyndicatePirateRaids', () => {
   let player: TestPlayer;

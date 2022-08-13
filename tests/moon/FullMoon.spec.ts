@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {CoreMine} from '../../src/cards/moon/CoreMine';
-import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
-import {FullMoon} from '../../src/moon/FullMoon';
+import {CoreMine} from '../../src/server/cards/moon/CoreMine';
+import {ResearchNetwork} from '../../src/server/cards/prelude/ResearchNetwork';
+import {FullMoon} from '../../src/server/moon/FullMoon';
 import {TestPlayer} from '../TestPlayer';
 
 describe('FullMoon', () => {

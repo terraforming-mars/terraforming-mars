@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {EnergyTapping} from '../../../src/cards/base/EnergyTapping';
-import {Game} from '../../../src/Game';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {EnergyTapping} from '../../../src/server/cards/base/EnergyTapping';
+import {Game} from '../../../src/server/Game';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, cast} from '../../TestingUtils';

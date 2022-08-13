@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
+import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

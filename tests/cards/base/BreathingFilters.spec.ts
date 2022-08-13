@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {BreathingFilters} from '../../../src/cards/base/BreathingFilters';
-import {Game} from '../../../src/Game';
+import {BreathingFilters} from '../../../src/server/cards/base/BreathingFilters';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BreathingFilters', function() {

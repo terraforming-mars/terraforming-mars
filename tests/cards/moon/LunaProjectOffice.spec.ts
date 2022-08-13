@@ -1,11 +1,11 @@
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {finishGeneration, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LunaProjectOffice} from '../../../src/cards/moon/LunaProjectOffice';
+import {LunaProjectOffice} from '../../../src/server/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {Player} from '../../../src/Player';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {Player} from '../../../src/server/Player';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

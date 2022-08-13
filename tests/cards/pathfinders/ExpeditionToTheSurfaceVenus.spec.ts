@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {ExpeditionToTheSurfaceVenus} from '../../../src/cards/pathfinders/ExpeditionToTheSurfaceVenus';
-import {Game} from '../../../src/Game';
+import {ExpeditionToTheSurfaceVenus} from '../../../src/server/cards/pathfinders/ExpeditionToTheSurfaceVenus';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 

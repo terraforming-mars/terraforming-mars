@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
-import {Player} from '../../../src/Player';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
+import {Player} from '../../../src/server/Player';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessNetwork', function() {

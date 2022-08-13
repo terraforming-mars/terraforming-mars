@@ -1,15 +1,15 @@
-import {CardFinder} from '../src/CardFinder';
+import {CardFinder} from '../src/server/CardFinder';
 import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
-import {Dealer} from '../src/Dealer';
+import {Dealer} from '../src/server/Dealer';
 import {expect} from 'chai';
-import {Game} from '../src/Game';
+import {Game} from '../src/server/Game';
 import {getTestPlayer, newTestGame} from './TestGame';
-import {ICard} from '../src/cards/ICard';
-import {IProjectCard} from '../src/cards/IProjectCard';
-import {Player} from '../src/Player';
-import {SelectCard} from '../src/inputs/SelectCard';
-import {SelectInitialCards} from '../src/inputs/SelectInitialCards';
+import {ICard} from '../src/server/cards/ICard';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
+import {Player} from '../src/server/Player';
+import {SelectCard} from '../src/server/inputs/SelectCard';
+import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
 
 // Tests for drafting

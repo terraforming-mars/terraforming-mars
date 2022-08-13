@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {InventionContest} from '../../../src/cards/base/InventionContest';
-import {Game} from '../../../src/Game';
+import {InventionContest} from '../../../src/server/cards/base/InventionContest';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InventionContest', function() {

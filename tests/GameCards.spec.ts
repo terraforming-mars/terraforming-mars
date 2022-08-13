@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {COMMUNITY_CARD_MANIFEST} from '../src/cards/community/CommunityCardManifest';
-import {CardFinder} from '../src/CardFinder';
+import {COMMUNITY_CARD_MANIFEST} from '../src/server/cards/community/CommunityCardManifest';
+import {CardFinder} from '../src/server/CardFinder';
 import {setCustomGameOptions} from './TestingUtils';
-import {GameCards} from '../src/GameCards';
+import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
 
 describe('GameCards', function() {

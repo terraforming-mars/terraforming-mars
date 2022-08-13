@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Bushes} from '../../../src/cards/base/Bushes';
-import {QuantumExtractor} from '../../../src/cards/base/QuantumExtractor';
-import {TollStation} from '../../../src/cards/base/TollStation';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Bushes} from '../../../src/server/cards/base/Bushes';
+import {QuantumExtractor} from '../../../src/server/cards/base/QuantumExtractor';
+import {TollStation} from '../../../src/server/cards/base/TollStation';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('QuantumExtractor', function() {

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {BiosphereSupport} from '../../../src/cards/prelude/BiosphereSupport';
-import {Player} from '../../../src/Player';
+import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

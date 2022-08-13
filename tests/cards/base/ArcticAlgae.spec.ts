@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
-import {Game} from '../../../src/Game';
+import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
+import {Game} from '../../../src/server/Game';
 import {runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

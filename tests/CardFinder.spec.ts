@@ -1,6 +1,6 @@
 import {CardName} from '../src/common/cards/CardName';
 import {expect} from 'chai';
-import {CardFinder} from '../src/CardFinder';
+import {CardFinder} from '../src/server/CardFinder';
 
 describe('CardFinder', function() {
   it('findProjectCardByName: success', function() {

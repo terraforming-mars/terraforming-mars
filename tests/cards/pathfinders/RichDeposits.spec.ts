@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {RichDeposits} from '../../../src/cards/pathfinders/RichDeposits';
-import {Game} from '../../../src/Game';
+import {RichDeposits} from '../../../src/server/cards/pathfinders/RichDeposits';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RichDeposits', function() {

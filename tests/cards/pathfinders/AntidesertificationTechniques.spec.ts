@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {AntidesertificationTechniques} from '../../../src/cards/pathfinders/AntidesertificationTechniques';
-import {Game} from '../../../src/Game';
+import {AntidesertificationTechniques} from '../../../src/server/cards/pathfinders/AntidesertificationTechniques';
+import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 

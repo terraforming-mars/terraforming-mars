@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {MineralDeposit} from '../../../src/cards/base/MineralDeposit';
-import {Game} from '../../../src/Game';
+import {MineralDeposit} from '../../../src/server/cards/base/MineralDeposit';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MineralDeposit', function() {

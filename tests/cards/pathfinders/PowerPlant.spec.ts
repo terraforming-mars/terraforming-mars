@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
-import {Game} from '../../../src/Game';
+import {PowerPlant} from '../../../src/server/cards/pathfinders/PowerPlant';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 

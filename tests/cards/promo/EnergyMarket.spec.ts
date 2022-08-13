@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {EnergyMarket} from '../../../src/cards/promo/EnergyMarket';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectAmount} from '../../../src/inputs/SelectAmount';
-import {Player} from '../../../src/Player';
+import {EnergyMarket} from '../../../src/server/cards/promo/EnergyMarket';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

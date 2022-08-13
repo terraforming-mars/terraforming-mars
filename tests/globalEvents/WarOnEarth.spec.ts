@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {WarOnEarth} from '../../src/turmoil/globalEvents/WarOnEarth';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Game} from '../../src/server/Game';
+import {WarOnEarth} from '../../src/server/turmoil/globalEvents/WarOnEarth';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('WarOnEarth', function() {

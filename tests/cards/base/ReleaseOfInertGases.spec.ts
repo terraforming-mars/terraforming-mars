@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
-import {Game} from '../../../src/Game';
+import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ReleaseOfInertGases', function() {

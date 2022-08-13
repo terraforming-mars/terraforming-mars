@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Pets} from '../../src/cards/base/Pets';
-import {Predators} from '../../src/cards/base/Predators';
-import {Miranda} from '../../src/colonies/Miranda';
-import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
+import {Pets} from '../../src/server/cards/base/Pets';
+import {Predators} from '../../src/server/cards/base/Predators';
+import {Miranda} from '../../src/server/colonies/Miranda';
+import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 

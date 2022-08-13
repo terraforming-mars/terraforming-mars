@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Cyanobacteria} from '../../../src/cards/pathfinders/Cyanobacteria';
-import {Game} from '../../../src/Game';
+import {Cyanobacteria} from '../../../src/server/cards/pathfinders/Cyanobacteria';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans, runAllActions} from '../../TestingUtils';
-import {AndOptions} from '../../../src/inputs/AndOptions';
-import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Ants} from '../../../src/cards/base/Ants';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {Ants} from '../../../src/server/cards/base/Ants';
 import {TileType} from '../../../src/common/TileType';
 
 describe('Cyanobacteria', function() {

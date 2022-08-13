@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {CassiniStation} from '../../../src/cards/pathfinders/CassiniStation';
-import {Game} from '../../../src/Game';
+import {CassiniStation} from '../../../src/server/cards/pathfinders/CassiniStation';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Leavitt} from '../../../src/cards/community/Leavitt';
-import {Mercury} from '../../../src/cards/community/Mercury';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {Mercury} from '../../../src/server/cards/community/Mercury';
 import {Units} from '../../../src/common/Units';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
-import {EconomicEspionage} from '../../../src/cards/pathfinders/EconomicEspionage';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
+import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
+import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
+import {EconomicEspionage} from '../../../src/server/cards/pathfinders/EconomicEspionage';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 
 describe('CassiniStation', function() {
   let card: CassiniStation;

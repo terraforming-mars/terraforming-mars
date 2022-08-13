@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {DesperateMeasures} from '../../../src/cards/ares/DesperateMeasures';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {DesperateMeasures} from '../../../src/server/cards/ares/DesperateMeasures';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';

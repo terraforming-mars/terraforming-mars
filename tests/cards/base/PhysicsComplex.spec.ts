@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {PhysicsComplex} from '../../../src/cards/base/PhysicsComplex';
-import {Player} from '../../../src/Player';
+import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PhysicsComplex', function() {

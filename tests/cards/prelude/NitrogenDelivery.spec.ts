@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {NitrogenDelivery} from '../../../src/cards/prelude/NitrogenDelivery';
-import {Game} from '../../../src/Game';
+import {NitrogenDelivery} from '../../../src/server/cards/prelude/NitrogenDelivery';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

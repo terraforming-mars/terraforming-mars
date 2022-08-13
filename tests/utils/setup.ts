@@ -1,8 +1,8 @@
-import {Database} from '../../src/database/Database';
-import {IDatabase} from '../../src/database/IDatabase';
-import {SerializedGame} from '../../src/SerializedGame';
-import {IGameLoader} from '../../src/database/IGameLoader';
-import {GameLoader} from '../../src/database/GameLoader';
+import {Database} from '../../src/server/database/Database';
+import {IDatabase} from '../../src/server/database/IDatabase';
+import {SerializedGame} from '../../src/server/SerializedGame';
+import {IGameLoader} from '../../src/server/database/IGameLoader';
+import {GameLoader} from '../../src/server/database/GameLoader';
 
 const FAKE_DATABASE: IDatabase = {
   cleanGame: () => Promise.resolve(),

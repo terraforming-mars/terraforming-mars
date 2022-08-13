@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {Irrigator} from '../../src/milestones/Irrigator';
-import {Player} from '../../src/Player';
+import {Game} from '../../src/server/Game';
+import {Irrigator} from '../../src/server/milestones/Irrigator';
+import {Player} from '../../src/server/Player';
 import {maxOutOceans} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 

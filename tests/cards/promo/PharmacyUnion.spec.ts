@@ -1,20 +1,20 @@
-import {MediaGroup} from '../../../src/cards/base/MediaGroup';
+import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
 import {expect} from 'chai';
-import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Fish} from '../../../src/cards/base/Fish';
-import {LagrangeObservatory} from '../../../src/cards/base/LagrangeObservatory';
-import {Lichen} from '../../../src/cards/base/Lichen';
-import {Research} from '../../../src/cards/base/Research';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
-import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
+import {AdvancedEcosystems} from '../../../src/server/cards/base/AdvancedEcosystems';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {LagrangeObservatory} from '../../../src/server/cards/base/LagrangeObservatory';
+import {Lichen} from '../../../src/server/cards/base/Lichen';
+import {Research} from '../../../src/server/cards/base/Research';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
+import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Game} from '../../../src/Game';
-import {AndOptions} from '../../../src/inputs/AndOptions';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Game} from '../../../src/server/Game';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {Virus} from '../../../src/cards/base/Virus';
+import {Virus} from '../../../src/server/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {

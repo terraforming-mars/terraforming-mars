@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Donation} from '../../../src/cards/prelude/Donation';
+import {Donation} from '../../../src/server/cards/prelude/Donation';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Donation', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {BreedingFarms} from '../../../src/cards/pathfinders/BreedingFarms';
-import {Fish} from '../../../src/cards/base/Fish';
-import {Game} from '../../../src/Game';
+import {BreedingFarms} from '../../../src/server/cards/pathfinders/BreedingFarms';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {IProjectCard} from '../../src/cards/IProjectCard';
-import {Pluto} from '../../src/colonies/Pluto';
-import {Game} from '../../src/Game';
-import {SelectCard} from '../../src/inputs/SelectCard';
-import {Player} from '../../src/Player';
+import {IProjectCard} from '../../src/server/cards/IProjectCard';
+import {Pluto} from '../../src/server/colonies/Pluto';
+import {Game} from '../../src/server/Game';
+import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 

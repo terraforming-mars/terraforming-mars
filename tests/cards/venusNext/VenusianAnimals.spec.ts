@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Research} from '../../../src/cards/base/Research';
-import {VenusianAnimals} from '../../../src/cards/venusNext/VenusianAnimals';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Research} from '../../../src/server/cards/base/Research';
+import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusianAnimals', function() {

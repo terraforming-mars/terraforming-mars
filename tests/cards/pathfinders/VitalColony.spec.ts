@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {VitalColony} from '../../../src/cards/pathfinders/VitalColony';
-import {Player} from '../../../src/Player';
-import {SelectColony} from '../../../src/inputs/SelectColony';
+import {VitalColony} from '../../../src/server/cards/pathfinders/VitalColony';
+import {Player} from '../../../src/server/Player';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {cast} from '../../TestingUtils';
 

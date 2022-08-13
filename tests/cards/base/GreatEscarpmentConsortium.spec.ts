@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {GreatEscarpmentConsortium} from '../../../src/cards/base/GreatEscarpmentConsortium';
-import {Game} from '../../../src/Game';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {GreatEscarpmentConsortium} from '../../../src/server/cards/base/GreatEscarpmentConsortium';
+import {Game} from '../../../src/server/Game';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {runAllActions, cast} from '../../TestingUtils';

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {BlackPolarDust} from '../../../src/cards/base/BlackPolarDust';
-import {Game} from '../../../src/Game';
+import {BlackPolarDust} from '../../../src/server/cards/base/BlackPolarDust';
+import {Game} from '../../../src/server/Game';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('BlackPolarDust', function() {
   let card: BlackPolarDust;

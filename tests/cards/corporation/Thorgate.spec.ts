@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {EnergySaving} from '../../../src/cards/base/EnergySaving';
-import {Pets} from '../../../src/cards/base/Pets';
-import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
-import {Thorgate} from '../../../src/cards/corporation/Thorgate';
-import {Game} from '../../../src/Game';
+import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
+import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

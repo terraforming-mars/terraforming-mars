@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {RobinHaulings} from '../../../src/cards/pathfinders/RobinHaulings';
-import {Game} from '../../../src/Game';
+import {RobinHaulings} from '../../../src/server/cards/pathfinders/RobinHaulings';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('RobinHaulings', function() {
   let card: RobinHaulings;

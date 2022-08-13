@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {OceanSanctuary} from '../../../src/cards/ares/OceanSanctuary';
-import {CuriosityII} from '../../../src/cards/community/CuriosityII';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {OceanSanctuary} from '../../../src/server/cards/ares/OceanSanctuary';
+import {CuriosityII} from '../../../src/server/cards/community/CuriosityII';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Phase} from '../../../src/common/Phase';
 import {TileType} from '../../../src/common/TileType';
 import {setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {CommunicationCenter} from '../../../src/cards/pathfinders/CommunicationCenter';
-import {Game} from '../../../src/Game';
+import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';

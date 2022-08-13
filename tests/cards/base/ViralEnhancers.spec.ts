@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Birds} from '../../../src/cards/base/Birds';
-import {EcologicalZone} from '../../../src/cards/base/EcologicalZone';
-import {Moss} from '../../../src/cards/base/Moss';
-import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {EcologicalZone} from '../../../src/server/cards/base/EcologicalZone';
+import {Moss} from '../../../src/server/cards/base/Moss';
+import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ViralEnhancers', function() {

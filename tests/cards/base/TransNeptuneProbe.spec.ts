@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {TransNeptuneProbe} from '../../../src/cards/base/TransNeptuneProbe';
+import {TransNeptuneProbe} from '../../../src/server/cards/base/TransNeptuneProbe';
 
 describe('TransNeptuneProbe', function() {
   it('Should play', function() {

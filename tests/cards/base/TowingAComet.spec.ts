@@ -1,7 +1,7 @@
 
 import {expect} from 'chai';
-import {TowingAComet} from '../../../src/cards/base/TowingAComet';
-import {Game} from '../../../src/Game';
+import {TowingAComet} from '../../../src/server/cards/base/TowingAComet';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TowingAComet', function() {

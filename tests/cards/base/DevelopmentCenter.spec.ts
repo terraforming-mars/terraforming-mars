@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {DevelopmentCenter} from '../../../src/cards/base/DevelopmentCenter';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {DevelopmentCenter} from '../../../src/server/cards/base/DevelopmentCenter';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DevelopmentCenter', function() {

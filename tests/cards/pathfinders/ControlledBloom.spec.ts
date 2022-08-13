@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
-import {Game} from '../../../src/Game';
+import {ControlledBloom} from '../../../src/server/cards/pathfinders/ControlledBloom';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {addOcean, cast, fakeCard} from '../../TestingUtils';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardResource} from '../../../src/common/CardResource';
 
 describe('ControlledBloom', function() {

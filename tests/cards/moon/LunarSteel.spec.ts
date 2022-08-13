@@ -1,8 +1,8 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LunarSteel} from '../../../src/cards/moon/LunarSteel';
+import {LunarSteel} from '../../../src/server/cards/moon/LunarSteel';
 import {expect} from 'chai';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

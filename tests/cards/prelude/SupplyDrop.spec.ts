@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SupplyDrop} from '../../../src/cards/prelude/SupplyDrop';
+import {SupplyDrop} from '../../../src/server/cards/prelude/SupplyDrop';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SupplyDrop', function() {

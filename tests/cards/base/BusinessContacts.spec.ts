@@ -1,8 +1,8 @@
 
 import {expect} from 'chai';
-import {BusinessContacts} from '../../../src/cards/base/BusinessContacts';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {BusinessContacts} from '../../../src/server/cards/base/BusinessContacts';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessContacts', function() {

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {AerialLenses} from '../../../src/cards/turmoil/AerialLenses';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {AerialLenses} from '../../../src/server/cards/turmoil/AerialLenses';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast, setCustomGameOptions} from '../../TestingUtils';

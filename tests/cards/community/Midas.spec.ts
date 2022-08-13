@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Midas} from '../../../src/cards/community/Midas';
+import {Midas} from '../../../src/server/cards/community/Midas';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Midas', function() {

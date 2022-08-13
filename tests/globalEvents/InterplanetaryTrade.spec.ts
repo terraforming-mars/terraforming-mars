@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {MethaneFromTitan} from '../../src/cards/base/MethaneFromTitan';
-import {Game} from '../../src/Game';
+import {MethaneFromTitan} from '../../src/server/cards/base/MethaneFromTitan';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {InterplanetaryTrade} from '../../src/turmoil/globalEvents/InterplanetaryTrade';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {InterplanetaryTrade} from '../../src/server/turmoil/globalEvents/InterplanetaryTrade';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('InterplanetaryTrade', function() {

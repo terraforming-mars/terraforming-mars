@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
-import {Recyclon} from '../../../src/cards/promo/Recyclon';
-import {Splice} from '../../../src/cards/promo/Splice';
-import {Game} from '../../../src/Game';
-import {AndOptions} from '../../../src/inputs/AndOptions';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
+import {Recyclon} from '../../../src/server/cards/promo/Recyclon';
+import {Splice} from '../../../src/server/cards/promo/Splice';
+import {Game} from '../../../src/server/Game';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectOption} from '../../../src/inputs/SelectOption';
+import {SelectOption} from '../../../src/server/inputs/SelectOption';
 
 describe('Splice', function() {
   let card: Splice;

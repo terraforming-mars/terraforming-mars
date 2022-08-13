@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {PublicSponsoredGrant} from '../../../src/cards/pathfinders/PublicSponsoredGrant';
-import {Game} from '../../../src/Game';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {PublicSponsoredGrant} from '../../../src/server/cards/pathfinders/PublicSponsoredGrant';
+import {Game} from '../../../src/server/Game';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {BiomassCombustors} from '../../../src/cards/base/BiomassCombustors';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
-import {Unity} from '../../../src/turmoil/parties/Unity';
-import {Scientists} from '../../../src/turmoil/parties/Scientists';
+import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
+import {Unity} from '../../../src/server/turmoil/parties/Unity';
+import {Scientists} from '../../../src/server/turmoil/parties/Scientists';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardName} from '../../../src/common/cards/CardName';
-import {MonsInsurance} from '../../../src/cards/promo/MonsInsurance';
+import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 
 describe('PublicSponsoredGrant', function() {
   let card: PublicSponsoredGrant;

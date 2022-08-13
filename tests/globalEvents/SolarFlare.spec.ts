@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {SpaceStation} from '../../src/cards/base/SpaceStation';
-import {Game} from '../../src/Game';
+import {SpaceStation} from '../../src/server/cards/base/SpaceStation';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {SolarFlare} from '../../src/turmoil/globalEvents/SolarFlare';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {SolarFlare} from '../../src/server/turmoil/globalEvents/SolarFlare';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('SolarFlare', function() {

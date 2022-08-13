@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {AdhaiHighOrbitConstructions} from '../../../src/cards/pathfinders/AdhaiHighOrbitConstructions';
-import {Game} from '../../../src/Game';
+import {AdhaiHighOrbitConstructions} from '../../../src/server/cards/pathfinders/AdhaiHighOrbitConstructions';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {Soletta} from '../../../src/cards/base/Soletta';
-import {GanymedeColony} from '../../../src/cards/base/GanymedeColony';
-import {PhobosSpaceHaven} from '../../../src/cards/base/PhobosSpaceHaven';
-import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
-import {BuildColonyStandardProject} from '../../../src/cards/colonies/BuildColonyStandardProject';
-import {ColoniesHandler} from '../../../src/colonies/ColoniesHandler';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {Soletta} from '../../../src/server/cards/base/Soletta';
+import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
+import {PhobosSpaceHaven} from '../../../src/server/cards/base/PhobosSpaceHaven';
+import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
+import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
+import {ColoniesHandler} from '../../../src/server/colonies/ColoniesHandler';
 import {cast} from '../../TestingUtils';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {AndOptions} from '../../../src/inputs/AndOptions';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
 
 describe('AdhaiHighOrbitConstructions', function() {
   let game: Game;

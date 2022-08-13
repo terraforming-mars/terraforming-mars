@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
-import {MartianZoo} from '../../../src/cards/colonies/MartianZoo';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianZoo', function() {

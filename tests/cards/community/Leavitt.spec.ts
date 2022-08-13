@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Leavitt} from '../../../src/cards/community/Leavitt';
-import {Vitor} from '../../../src/cards/prelude/Vitor';
-import {Game} from '../../../src/Game';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {Vitor} from '../../../src/server/cards/prelude/Vitor';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Tags} from '../../../src/common/cards/Tags';
 

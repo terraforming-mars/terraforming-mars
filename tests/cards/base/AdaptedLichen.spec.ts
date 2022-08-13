@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {AdaptedLichen} from '../../../src/cards/base/AdaptedLichen';
+import {AdaptedLichen} from '../../../src/server/cards/base/AdaptedLichen';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

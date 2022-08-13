@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {ExperimentalForest} from '../../../src/cards/prelude/ExperimentalForest';
+import {ExperimentalForest} from '../../../src/server/cards/prelude/ExperimentalForest';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Game} from '../../../src/server/Game';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ExperimentalForest', function() {

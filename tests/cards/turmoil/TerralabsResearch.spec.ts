@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
-import {PowerPlant} from '../../../src/cards/base/PowerPlant';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TerralabsResearch} from '../../../src/cards/turmoil/TerralabsResearch';
-import {Game} from '../../../src/Game';
-import {AndOptions} from '../../../src/inputs/AndOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
+import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {TerralabsResearch} from '../../../src/server/cards/turmoil/TerralabsResearch';
+import {Game} from '../../../src/server/Game';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TerralabsResearch', function() {

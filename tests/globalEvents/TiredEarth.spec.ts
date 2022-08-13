@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {AcquiredCompany} from '../../src/cards/base/AcquiredCompany';
-import {Game} from '../../src/Game';
-import {TiredEarth} from '../../src/turmoil/globalEvents/TiredEarth';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {AcquiredCompany} from '../../src/server/cards/base/AcquiredCompany';
+import {Game} from '../../src/server/Game';
+import {TiredEarth} from '../../src/server/turmoil/globalEvents/TiredEarth';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('TiredEarth', function() {

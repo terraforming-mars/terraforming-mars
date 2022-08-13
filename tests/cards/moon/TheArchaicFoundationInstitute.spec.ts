@@ -1,15 +1,15 @@
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {TheArchaicFoundationInstitute} from '../../../src/cards/moon/TheArchaicFoundationInstitute';
+import {TheArchaicFoundationInstitute} from '../../../src/server/cards/moon/TheArchaicFoundationInstitute';
 import {expect} from 'chai';
-import {MicroMills} from '../../../src/cards/base/MicroMills';
-import {HE3ProductionQuotas} from '../../../src/cards/moon/HE3ProductionQuotas';
-import {LunaTradeStation} from '../../../src/cards/moon/LunaTradeStation';
-import {CosmicRadiation} from '../../../src/cards/moon/CosmicRadiation';
-import {GeodesicTents} from '../../../src/cards/moon/GeodesicTents';
-import {DeepLunarMining} from '../../../src/cards/moon/DeepLunarMining';
-import {Habitat14} from '../../../src/cards/moon/Habitat14';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {HE3ProductionQuotas} from '../../../src/server/cards/moon/HE3ProductionQuotas';
+import {LunaTradeStation} from '../../../src/server/cards/moon/LunaTradeStation';
+import {CosmicRadiation} from '../../../src/server/cards/moon/CosmicRadiation';
+import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
+import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
+import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

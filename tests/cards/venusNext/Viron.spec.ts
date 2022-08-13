@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
-import {Viron} from '../../../src/cards/venusNext/Viron';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {RestrictedArea} from '../../../src/server/cards/base/RestrictedArea';
+import {Viron} from '../../../src/server/cards/venusNext/Viron';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Viron', function() {

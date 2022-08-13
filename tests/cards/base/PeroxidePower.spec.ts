@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PeroxidePower} from '../../../src/cards/base/PeroxidePower';
+import {PeroxidePower} from '../../../src/server/cards/base/PeroxidePower';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

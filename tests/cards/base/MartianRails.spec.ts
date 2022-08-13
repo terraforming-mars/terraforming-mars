@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {MartianRails} from '../../../src/cards/base/MartianRails';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
-import {SpaceName} from '../../../src/SpaceName';
+import {MartianRails} from '../../../src/server/cards/base/MartianRails';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
+import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 

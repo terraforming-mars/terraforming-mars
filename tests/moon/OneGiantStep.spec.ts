@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {CoreMine} from '../../src/cards/moon/CoreMine';
-import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
-import {OneGiantStep} from '../../src/moon/OneGiantStep';
+import {CoreMine} from '../../src/server/cards/moon/CoreMine';
+import {ResearchNetwork} from '../../src/server/cards/prelude/ResearchNetwork';
+import {OneGiantStep} from '../../src/server/moon/OneGiantStep';
 import {TestPlayer} from '../TestPlayer';
 
 describe('OneGiantStep', () => {

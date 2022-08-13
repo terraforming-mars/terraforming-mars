@@ -1,0 +1,468 @@
+[
+  {
+    "module": "colonies",
+    "name": "Ceres",
+    "buildType": 8,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "buildResource": "steel",
+    "tradeType": 9,
+    "tradeQuantity": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8,
+      10
+    ],
+    "tradeResource": "steel",
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 2,
+    "colonyBonusResource": "steel",
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Enceladus",
+    "buildType": 0,
+    "buildQuantity": [
+      3,
+      3,
+      3
+    ],
+    "resourceType": "Microbe",
+    "tradeType": 0,
+    "tradeQuantity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      4,
+      5
+    ],
+    "colonyBonusType": 0,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Europa",
+    "buildType": 16,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "tradeType": 8,
+    "tradeQuantity": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "tradeResource": [
+      "megacredits",
+      "megacredits",
+      "energy",
+      "energy",
+      "plants",
+      "plants",
+      "plants"
+    ],
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 1,
+    "colonyBonusResource": "megacredits",
+    "shouldIncreaseTrack": 2
+  },
+  {
+    "module": "colonies",
+    "name": "Ganymede",
+    "buildType": 8,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "buildResource": "plants",
+    "tradeType": 9,
+    "tradeQuantity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "tradeResource": "plants",
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 1,
+    "colonyBonusResource": "plants",
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Io",
+    "buildType": 8,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "buildResource": "heat",
+    "tradeType": 9,
+    "tradeQuantity": [
+      2,
+      3,
+      4,
+      6,
+      8,
+      10,
+      13
+    ],
+    "tradeResource": "heat",
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 2,
+    "colonyBonusResource": "heat",
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Luna",
+    "buildType": 8,
+    "buildQuantity": [
+      2,
+      2,
+      2
+    ],
+    "buildResource": "megacredits",
+    "tradeType": 9,
+    "tradeQuantity": [
+      1,
+      2,
+      4,
+      7,
+      10,
+      13,
+      17
+    ],
+    "tradeResource": "megacredits",
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 2,
+    "colonyBonusResource": "megacredits",
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Miranda",
+    "buildType": 0,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "resourceType": "Animal",
+    "tradeType": 0,
+    "tradeQuantity": [
+      0,
+      1,
+      1,
+      2,
+      2,
+      3,
+      3
+    ],
+    "colonyBonusType": 3,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Titan",
+    "buildType": 0,
+    "buildQuantity": [
+      3,
+      3,
+      3
+    ],
+    "resourceType": "Floater",
+    "tradeType": 0,
+    "tradeQuantity": [
+      0,
+      1,
+      1,
+      2,
+      3,
+      3,
+      4
+    ],
+    "colonyBonusType": 0,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Callisto",
+    "buildType": 8,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "buildResource": "energy",
+    "tradeType": 9,
+    "tradeQuantity": [
+      0,
+      2,
+      3,
+      5,
+      7,
+      10,
+      13
+    ],
+    "tradeResource": "energy",
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 3,
+    "colonyBonusResource": "energy",
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Pluto",
+    "buildType": 3,
+    "buildQuantity": [
+      2,
+      2,
+      2
+    ],
+    "tradeType": 3,
+    "tradeQuantity": [
+      0,
+      1,
+      2,
+      2,
+      3,
+      3,
+      4
+    ],
+    "colonyBonusType": 5,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "colonies",
+    "name": "Triton",
+    "buildType": 9,
+    "buildQuantity": [
+      3,
+      3,
+      3
+    ],
+    "buildResource": "titanium",
+    "tradeType": 9,
+    "tradeQuantity": [
+      0,
+      1,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "tradeResource": "titanium",
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 1,
+    "colonyBonusResource": "titanium",
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "community",
+    "name": "Iapetus",
+    "buildType": 11,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "tradeType": 11,
+    "tradeQuantity": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      2
+    ],
+    "colonyBonusType": 7,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "community",
+    "name": "Mercury",
+    "buildType": 2,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "tradeType": 8,
+    "tradeQuantity": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "tradeResource": [
+      "heat",
+      "heat",
+      "heat",
+      "steel",
+      "steel",
+      "titanium",
+      "titanium"
+    ],
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 2,
+    "colonyBonusResource": "megacredits",
+    "shouldIncreaseTrack": 2
+  },
+  {
+    "module": "community",
+    "name": "Hygiea",
+    "buildType": 15,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "tradeType": 17,
+    "tradeQuantity": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "tradeResource": [
+      "megacredits",
+      "megacredits",
+      "heat",
+      "energy",
+      "plants",
+      "steel",
+      "titanium"
+    ],
+    "colonyBonusType": 9,
+    "colonyBonusQuantity": 3,
+    "colonyBonusResource": "megacredits",
+    "shouldIncreaseTrack": 2
+  },
+  {
+    "module": "community",
+    "name": "Titania",
+    "buildType": 12,
+    "buildQuantity": [
+      5,
+      3,
+      2
+    ],
+    "tradeType": 12,
+    "tradeQuantity": [
+      2,
+      2,
+      2,
+      1,
+      1,
+      0,
+      0
+    ],
+    "colonyBonusType": 14,
+    "colonyBonusQuantity": 3,
+    "colonyBonusResource": "megacredits",
+    "shouldIncreaseTrack": 1
+  },
+  {
+    "module": "community",
+    "name": "Venus",
+    "buildType": 13,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "tradeType": 1,
+    "tradeQuantity": [
+      0,
+      0,
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "colonyBonusType": 1,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "community",
+    "name": "Leavitt",
+    "buildType": 10,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "tradeType": 6,
+    "tradeQuantity": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "colonyBonusType": 4,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  },
+  {
+    "module": "community",
+    "name": "Pallas",
+    "buildType": 18,
+    "buildQuantity": [
+      1,
+      1,
+      1
+    ],
+    "tradeType": 19,
+    "tradeQuantity": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      3
+    ],
+    "colonyBonusType": 20,
+    "colonyBonusQuantity": 1,
+    "shouldIncreaseTrack": 0
+  }
+]

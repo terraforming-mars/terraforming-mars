@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {Entrepreneur} from '../../src/awards/Entrepreneur';
+import {Game} from '../../src/server/Game';
+import {Entrepreneur} from '../../src/server/awards/Entrepreneur';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {Player} from '../../src/Player';
+import {Player} from '../../src/server/Player';
 import {SpaceId} from '../../src/common/Types';
-import {AdjacencyBonus} from '../../src/ares/AdjacencyBonus';
+import {AdjacencyBonus} from '../../src/server/ares/AdjacencyBonus';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 
 function addAdjacencyBonus(player: Player, spaceId: SpaceId, adjacency: AdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {LawSuit} from '../../../src/cards/promo/LawSuit';
-import {Game} from '../../../src/Game';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {Player} from '../../../src/Player';
+import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
+import {Game} from '../../../src/server/Game';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

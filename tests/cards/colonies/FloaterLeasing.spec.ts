@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {FloaterLeasing} from '../../../src/cards/colonies/FloaterLeasing';
+import {FloaterLeasing} from '../../../src/server/cards/colonies/FloaterLeasing';
 import {Resources} from '../../../src/common/Resources';
-import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
+import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 
 describe('FloaterLeasing', function() {
   it('Should play', function() {

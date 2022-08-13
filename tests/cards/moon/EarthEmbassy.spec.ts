@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
+import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {Tags} from '../../../src/common/cards/Tags';
-import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
-import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

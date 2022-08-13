@@ -1,7 +1,7 @@
-import {Game, Score} from '../../src/Game';
-import {GameOptions} from '../../src/GameOptions';
-import {SerializedGame} from '../../src/SerializedGame';
-import {GameIdLedger, IDatabase} from '../../src/database/IDatabase';
+import {Game, Score} from '../../src/server/Game';
+import {GameOptions} from '../../src/server/GameOptions';
+import {SerializedGame} from '../../src/server/SerializedGame';
+import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
 import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
 
 export class InMemoryDatabase implements IDatabase {

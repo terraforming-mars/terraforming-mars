@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {HousePrinting} from '../../../src/cards/prelude/HousePrinting';
-import {SponsoredAcademies} from '../../../src/cards/venusNext/SponsoredAcademies';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {HousePrinting} from '../../../src/server/cards/prelude/HousePrinting';
+import {SponsoredAcademies} from '../../../src/server/cards/venusNext/SponsoredAcademies';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {DiscardCards} from '../../../src/deferredActions/DiscardCards';
-import {DrawCards} from '../../../src/deferredActions/DrawCards';
+import {DiscardCards} from '../../../src/server/deferredActions/DiscardCards';
+import {DrawCards} from '../../../src/server/deferredActions/DrawCards';
 import {runAllActions} from '../../TestingUtils';
 
 describe('SponsoredAcademies', function() {

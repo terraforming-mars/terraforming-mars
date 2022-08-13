@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {RoverConstruction} from '../../../src/cards/base/RoverConstruction';
-import {Game} from '../../../src/Game';
+import {RoverConstruction} from '../../../src/server/cards/base/RoverConstruction';
+import {Game} from '../../../src/server/Game';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

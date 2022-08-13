@@ -1,15 +1,15 @@
-import {LobbyHalls} from '../../src/cards/pathfinders/LobbyHalls';
+import {LobbyHalls} from '../../src/server/cards/pathfinders/LobbyHalls';
 import {expect} from 'chai';
-import {DeclareCloneTag} from '../../src/pathfinders/DeclareCloneTag';
+import {DeclareCloneTag} from '../../src/server/pathfinders/DeclareCloneTag';
 import {Tags} from '../../src/common/cards/Tags';
-import {OrOptions} from '../../src/inputs/OrOptions';
-import {SelectOption} from '../../src/inputs/SelectOption';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {cast, runAllActions} from '../TestingUtils';
-import {Game} from '../../src/Game';
-import {CrewTraining} from '../../src/cards/pathfinders/CrewTraining';
-import {MartianZoo} from '../../src/cards/colonies/MartianZoo';
+import {Game} from '../../src/server/Game';
+import {CrewTraining} from '../../src/server/cards/pathfinders/CrewTraining';
+import {MartianZoo} from '../../src/server/cards/colonies/MartianZoo';
 
 describe('DeclareCloneTag', function() {
   let player: TestPlayer;

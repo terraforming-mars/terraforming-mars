@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {SulphurExports} from '../../../src/cards/venusNext/SulphurExports';
-import {Game} from '../../../src/Game';
+import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,5 +1,5 @@
-import {Capitalist} from '../../src/milestones/Capitalist';
-import {Player} from '../../src/Player';
+import {Capitalist} from '../../src/server/milestones/Capitalist';
+import {Player} from '../../src/server/Player';
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 

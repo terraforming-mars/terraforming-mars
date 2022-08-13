@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
-import {Player} from '../../../src/Player';
+import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SecurityFleet', function() {

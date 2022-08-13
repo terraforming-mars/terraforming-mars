@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {InventorsGuild} from '../../../src/cards/base/InventorsGuild';
-import {Plantation} from '../../../src/cards/base/Plantation';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
+import {Plantation} from '../../../src/server/cards/base/Plantation';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Plantation', function() {

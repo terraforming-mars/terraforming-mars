@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 
-import {LobbyHalls} from '../../src/cards/pathfinders/LobbyHalls';
+import {LobbyHalls} from '../../src/server/cards/pathfinders/LobbyHalls';
 import {Tags} from '../../src/common/cards/Tags';
-import {deserializeProjectCard, serializeProjectCard} from '../../src/cards/CardSerialization';
-import {CardFinder} from '../../src/CardFinder';
+import {deserializeProjectCard, serializeProjectCard} from '../../src/server/cards/CardSerialization';
+import {CardFinder} from '../../src/server/CardFinder';
 import {cast} from '../TestingUtils';
 
 describe('CardSerialization', function() {

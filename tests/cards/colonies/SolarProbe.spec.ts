@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Research} from '../../../src/cards/base/Research';
-import {SolarProbe} from '../../../src/cards/colonies/SolarProbe';
-import {Game} from '../../../src/Game';
+import {Research} from '../../../src/server/cards/base/Research';
+import {SolarProbe} from '../../../src/server/cards/colonies/SolarProbe';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SolarProbe', function() {

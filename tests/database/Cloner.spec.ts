@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Cloner} from '../../src/database/Cloner';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
+import {Cloner} from '../../src/server/database/Cloner';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
 import {setCustomGameOptions} from '../TestingUtils';
 import {Color} from '../../src/common/Color';
 

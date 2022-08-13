@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {LandSpecialist} from '../../src/milestones/LandSpecialist';
+import {Game} from '../../src/server/Game';
+import {LandSpecialist} from '../../src/server/milestones/LandSpecialist';
 import {setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
-import {Board} from '../../src/boards/Board';
-import {ISpace} from '../../src/boards/ISpace';
+import {Board} from '../../src/server/boards/Board';
+import {ISpace} from '../../src/server/boards/ISpace';
 import {TileType} from '../../src/common/TileType';
-import {MoonExpansion} from '../../src/moon/MoonExpansion';
+import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 
 describe('LandSpecialist', function() {
   let milestone: LandSpecialist;

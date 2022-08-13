@@ -1,16 +1,16 @@
-import {SelectColony} from './../../../src/inputs/SelectColony';
+import {SelectColony} from './../../../src/server/inputs/SelectColony';
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Pets} from '../../../src/cards/base/Pets';
-import {MarketManipulation} from '../../../src/cards/colonies/MarketManipulation';
-import {Enceladus} from '../../../src/colonies/Enceladus';
-import {Luna} from '../../../src/colonies/Luna';
-import {Miranda} from '../../../src/colonies/Miranda';
-import {Europa} from './../../../src/colonies/Europa';
-import {Pluto} from '../../../src/colonies/Pluto';
-import {Callisto} from '../../../src/colonies/Callisto';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {MarketManipulation} from '../../../src/server/cards/colonies/MarketManipulation';
+import {Enceladus} from '../../../src/server/colonies/Enceladus';
+import {Luna} from '../../../src/server/colonies/Luna';
+import {Miranda} from '../../../src/server/colonies/Miranda';
+import {Europa} from './../../../src/server/colonies/Europa';
+import {Pluto} from '../../../src/server/colonies/Pluto';
+import {Callisto} from '../../../src/server/colonies/Callisto';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 describe('MarketManipulation', function() {

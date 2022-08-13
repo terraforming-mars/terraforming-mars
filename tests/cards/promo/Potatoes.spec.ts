@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
-import {Potatoes} from '../../../src/cards/promo/Potatoes';
-import {Player} from '../../../src/Player';
+import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
+import {Potatoes} from '../../../src/server/cards/promo/Potatoes';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

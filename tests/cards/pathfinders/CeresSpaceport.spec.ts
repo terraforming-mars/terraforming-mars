@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {CeresSpaceport} from '../../../src/cards/pathfinders/CeresSpaceport';
-import {Game} from '../../../src/Game';
+import {CeresSpaceport} from '../../../src/server/cards/pathfinders/CeresSpaceport';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
-import {SpaceName} from '../../../src/SpaceName';
+import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
+import {SpaceName} from '../../../src/server/SpaceName';
 import {Units} from '../../../src/common/Units';
 import {setCustomGameOptions} from '../../TestingUtils';
 

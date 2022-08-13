@@ -1,23 +1,23 @@
 import {expect} from 'chai';
-import {LunarBeam} from '../src/cards/base/LunarBeam';
-import {Game} from '../src/Game';
-import {Insulation} from '../src/cards/base/Insulation';
-import {IoMiningIndustries} from '../src/cards/base/IoMiningIndustries';
-import {PowerSupplyConsortium} from '../src/cards/base/PowerSupplyConsortium';
-import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
-import {SelectOption} from '../src/inputs/SelectOption';
+import {LunarBeam} from '../src/server/cards/base/LunarBeam';
+import {Game} from '../src/server/Game';
+import {Insulation} from '../src/server/cards/base/Insulation';
+import {IoMiningIndustries} from '../src/server/cards/base/IoMiningIndustries';
+import {PowerSupplyConsortium} from '../src/server/cards/base/PowerSupplyConsortium';
+import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
+import {SelectOption} from '../src/server/inputs/SelectOption';
 import {Resources} from '../src/common/Resources';
-import {SerializedPlayer} from '../src/SerializedPlayer';
+import {SerializedPlayer} from '../src/server/SerializedPlayer';
 import {SerializedTimer} from '../src/common/SerializedTimer';
-import {SerializedGame} from '../src/SerializedGame';
-import {Player} from '../src/Player';
+import {SerializedGame} from '../src/server/SerializedGame';
+import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {formatLogMessage, setCustomGameOptions} from './TestingUtils';
 import {Units} from '../src/common/Units';
-import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
-import {Pets} from '../src/cards/base/Pets';
+import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
+import {Pets} from '../src/server/cards/base/Pets';
 import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventName';
 
 describe('Player', function() {

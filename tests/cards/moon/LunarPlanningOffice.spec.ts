@@ -1,13 +1,13 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LunarPlanningOffice} from '../../../src/cards/moon/LunarPlanningOffice';
+import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
 import {expect} from 'chai';
-import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
-import {MareImbriumMine} from '../../../src/cards/moon/MareImbriumMine';
-import {MicroMills} from '../../../src/cards/base/MicroMills';
-import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
+import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
+import {MareImbriumMine} from '../../../src/server/cards/moon/MareImbriumMine';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {CardName} from '../../../src/common/cards/CardName';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

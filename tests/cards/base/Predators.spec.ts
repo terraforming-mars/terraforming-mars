@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {BioengineeringEnclosure} from '../../../src/cards/ares/BioengineeringEnclosure';
-import {Fish} from '../../../src/cards/base/Fish';
-import {Pets} from '../../../src/cards/base/Pets';
-import {Predators} from '../../../src/cards/base/Predators';
-import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
-import {SmallAnimals} from '../../../src/cards/base/SmallAnimals';
-import {ICard} from '../../../src/cards/ICard';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {Predators} from '../../../src/server/cards/base/Predators';
+import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
+import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
+import {ICard} from '../../../src/server/cards/ICard';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Predators', function() {

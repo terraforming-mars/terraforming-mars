@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Triton} from '../../src/colonies/Triton';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
+import {Triton} from '../../src/server/colonies/Triton';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 

@@ -1,4 +1,4 @@
-import {Multiset} from '../../../src/utils/Multiset';
+import {Multiset} from '../../../src/server/utils/Multiset';
 import {fail} from 'assert';
 import {CardName} from '../../../src/common/cards/CardName';
 

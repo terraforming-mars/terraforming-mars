@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
+import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
-import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
-import {MoonSpaces} from '../../../src/moon/MoonSpaces';
+import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
+import {MoonSpaces} from '../../../src/server/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

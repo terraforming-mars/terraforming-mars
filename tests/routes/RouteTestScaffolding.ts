@@ -1,7 +1,7 @@
 import * as http from 'http';
-import {Context} from '../../src/routes/IHandler';
-import {Handler} from '../../src/routes/Handler';
-import {Route} from '../../src/routes/Route';
+import {Context} from '../../src/server/routes/IHandler';
+import {Handler} from '../../src/server/routes/Handler';
+import {Route} from '../../src/server/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
 

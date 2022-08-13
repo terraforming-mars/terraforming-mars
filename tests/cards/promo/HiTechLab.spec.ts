@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {HiTechLab} from '../../../src/cards/promo/HiTechLab';
-import {Game} from '../../../src/Game';
-import {SelectAmount} from '../../../src/inputs/SelectAmount';
-import {Player} from '../../../src/Player';
+import {HiTechLab} from '../../../src/server/cards/promo/HiTechLab';
+import {Game} from '../../../src/server/Game';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

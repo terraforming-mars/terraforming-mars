@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/awards/Awards';
-import {IAward} from '../src/awards/IAward';
-import {MilestoneAwardSelector} from '../src/MilestoneAwardSelector';
-import {IMilestone} from '../src/milestones/IMilestone';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/milestones/Milestones';
+import {ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/server/awards/Awards';
+import {IAward} from '../src/server/awards/IAward';
+import {MilestoneAwardSelector} from '../src/server/MilestoneAwardSelector';
+import {IMilestone} from '../src/server/milestones/IMilestone';
+import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/server/milestones/Milestones';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {setCustomGameOptions} from './TestingUtils';
 import {intersection} from '../src/common/utils/utils';

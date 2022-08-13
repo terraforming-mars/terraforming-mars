@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {LunarBeam} from '../../../src/cards/base/LunarBeam';
-import {Player} from '../../../src/Player';
+import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

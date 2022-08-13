@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Bushes} from '../../../src/cards/base/Bushes';
-import {Virus} from '../../../src/cards/base/Virus';
-import {InterplanetaryCinematics} from '../../../src/cards/corporation/InterplanetaryCinematics';
-import {Game} from '../../../src/Game';
+import {Bushes} from '../../../src/server/cards/base/Bushes';
+import {Virus} from '../../../src/server/cards/base/Virus';
+import {InterplanetaryCinematics} from '../../../src/server/cards/corporation/InterplanetaryCinematics';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryCinematics', function() {

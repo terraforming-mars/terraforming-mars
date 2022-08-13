@@ -1,11 +1,11 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {WeGrowAsOne} from '../../../src/cards/moon/WeGrowAsOne';
+import {WeGrowAsOne} from '../../../src/server/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
-import {Unity} from '../../../src/turmoil/parties/Unity';
-import {Greens} from '../../../src/turmoil/parties/Greens';
+import {Unity} from '../../../src/server/turmoil/parties/Unity';
+import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
 describe('WeGrowAsOne', () => {
   let player: Player;

@@ -1,8 +1,8 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {runNextAction, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {ProcessorFactory} from '../../../src/cards/moon/ProcessorFactory';
+import {ProcessorFactory} from '../../../src/server/cards/moon/ProcessorFactory';
 import {expect} from 'chai';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

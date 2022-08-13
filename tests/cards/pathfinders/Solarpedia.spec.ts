@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Solarpedia} from '../../../src/cards/pathfinders/Solarpedia';
-import {Game} from '../../../src/Game';
+import {Solarpedia} from '../../../src/server/cards/pathfinders/Solarpedia';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {ICard, IResourceCard} from '../../../src/cards/ICard';
+import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {ICard, IResourceCard} from '../../../src/server/cards/ICard';
 
 describe('Solarpedia', function() {
   let card: Solarpedia;

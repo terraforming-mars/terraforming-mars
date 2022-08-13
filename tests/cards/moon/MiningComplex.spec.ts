@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {MiningComplex} from '../../../src/cards/moon/MiningComplex';
+import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
 import {expect} from 'chai';
-import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
-import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
+import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

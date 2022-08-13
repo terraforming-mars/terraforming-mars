@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {Odyssey} from '../../../src/cards/pathfinders/Odyssey';
-import {Game} from '../../../src/Game';
+import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
-import {ImportOfAdvancedGHG} from '../../../src/cards/base/ImportOfAdvancedGHG';
-import {InventionContest} from '../../../src/cards/base/InventionContest';
-import {SelectHowToPayForProjectCard} from '../../../src/inputs/SelectHowToPayForProjectCard';
+import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
+import {InventionContest} from '../../../src/server/cards/base/InventionContest';
+import {SelectHowToPayForProjectCard} from '../../../src/server/inputs/SelectHowToPayForProjectCard';
 import {Resources} from '../../../src/common/Resources';
-import {MediaGroup} from '../../../src/cards/base/MediaGroup';
-import {IceCapMelting} from '../../../src/cards/base/IceCapMelting';
+import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
+import {IceCapMelting} from '../../../src/server/cards/base/IceCapMelting';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
 
 describe('Odyssey', () => {

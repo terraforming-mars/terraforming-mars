@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {EarthOffice} from '../../../src/cards/base/EarthOffice';
-import {Sponsors} from '../../../src/cards/base/Sponsors';
-import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
-import {Player} from '../../../src/Player';
+import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
+import {Sponsors} from '../../../src/server/cards/base/Sponsors';
+import {SaturnSurfing} from '../../../src/server/cards/promo/SaturnSurfing';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

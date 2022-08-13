@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {AsteroidStandardProject} from '../../../src/cards/base/standardProjects/AsteroidStandardProject';
-import {SellPatentsStandardProject} from '../../../src/cards/base/standardProjects/SellPatentsStandardProject';
-import {StandardTechnology} from '../../../src/cards/base/StandardTechnology';
+import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
+import {SellPatentsStandardProject} from '../../../src/server/cards/base/standardProjects/SellPatentsStandardProject';
+import {StandardTechnology} from '../../../src/server/cards/base/StandardTechnology';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('StandardTechnology', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {HeliostatMirrorArray} from '../../../src/cards/moon/HeliostatMirrorArray';
+import {HeliostatMirrorArray} from '../../../src/server/cards/moon/HeliostatMirrorArray';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

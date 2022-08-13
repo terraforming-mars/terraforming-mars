@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
-import {Game} from '../../../src/Game';
+import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AdvancedAlloys', function() {

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Luna} from '../../src/colonies/Luna';
-import {Triton} from '../../src/colonies/Triton';
-import {Game} from '../../src/Game';
-import {MicrogravityHealthProblems} from '../../src/turmoil/globalEvents/MicrogravityHealthProblems';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Luna} from '../../src/server/colonies/Luna';
+import {Triton} from '../../src/server/colonies/Triton';
+import {Game} from '../../src/server/Game';
+import {MicrogravityHealthProblems} from '../../src/server/turmoil/globalEvents/MicrogravityHealthProblems';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('MicrogravityHealthProblems', function() {

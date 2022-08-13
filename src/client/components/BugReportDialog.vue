@@ -5,13 +5,15 @@
       or the <a href="https://discord.com/channels/737945098695999559/742721510376210583" target="_blank">#bug-reports Discord channel</a>
     </p>
     <textarea ref="textarea" readonly rows="6" cols = "50" v-model="message"></textarea>
-    <menu class="dialog-menu centered-content">
+    <div class="dialog-menu centered-content">
       <div>
         <button class="btn btn-lg btn-primary" @click="copyTextArea">Copy to Clipboard</button>
         <div :class="{ center: true, invisible: !showCopied }">Copied!</div>
       </div>
-      <button class="btn btn-lg btn-primary" @click="$emit('hide')">Close</button>
-    </menu>
+      <form method="dialog">
+        <button class="btn btn-lg">Close</button>
+      </form>
+    </div>
   </dialog>
 </template>
 
@@ -30,16 +32,6 @@ type Refs = {
   dialog: HTMLElement,
   textarea: HTMLTextAreaElement,
   copied: HTMLSpanElement,
-}
-
-function url(playerView?: PlayerViewModel) {
-  const url = new URL(window.location.href);
-  const spectatorId: SpectatorId | undefined = playerView?.game?.spectatorId;
-  if (spectatorId && url.pathname === '/player' && url.searchParams.has('id')) {
-    url.searchParams.set('id', spectatorId);
-    url.pathname = '/spectator';
-  }
-  return url;
 }
 
 function browser(): string {
@@ -63,14 +55,8 @@ function browser(): string {
 export default (Vue as WithRefs<Refs>).extend({
   name: 'BugReportDialog',
   data() {
-    const mainData = this.$root as unknown as MainAppData;
-    const playerView: PlayerViewModel | undefined = mainData.playerView;
     return {
-      message: `URL: ${url(playerView)}
-Player color: ${playerView?.thisPlayer.color}
-Step: ${playerView?.game.step}
-Version: ${raw_settings.head}, built at ${raw_settings.builtAt}
-Browser: ${browser()}`,
+      message: '',
       showCopied: false,
     };
   },
@@ -83,9 +69,28 @@ Browser: ${browser()}`,
       navigator.clipboard.writeText(this.$refs.textarea.value);
       this.showCopied = true;
     },
+    url(playerView: PlayerViewModel | undefined) {
+      const url = new URL(window.location.href);
+      const spectatorId: SpectatorId | undefined = playerView?.game?.spectatorId;
+      if (spectatorId && url.pathname === '/player' && url.searchParams.has('id')) {
+        url.searchParams.set('id', spectatorId);
+        url.pathname = '/spectator';
+      }
+      return url;
+    },
+    setMessage() {
+      const mainData = this.$root as unknown as MainAppData;
+      const playerView: PlayerViewModel | undefined = mainData.playerView;
+      this.message = `URL: ${this.url(playerView)}
+Player color: ${playerView?.thisPlayer.color}
+Step: ${playerView?.game.step}
+Version: ${raw_settings.head}, built at ${raw_settings.builtAt}
+Browser: ${browser()}`;
+    },
   },
   mounted() {
     if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
+    this.setMessage();
   },
 });
 </script>

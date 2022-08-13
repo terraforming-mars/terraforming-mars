@@ -7,10 +7,6 @@
     <textarea ref="textarea" readonly rows="6" cols = "50" v-model="message"></textarea>
     <div class="dialog-menu centered-content">
       <div>
-        <template :v-show="redactable">
-          <input type="checkbox" id="redact-url" v-model="redact">
-          <label for="redact-url">Redact URL</label>&nbsp;
-        </template>
         <button class="btn btn-lg btn-primary" @click="copyTextArea">Copy to Clipboard</button>
         <div :class="{ center: true, invisible: !showCopied }">Copied!</div>
       </div>
@@ -38,11 +34,6 @@ type Refs = {
   copied: HTMLSpanElement,
 }
 
-const knownHosts = [
-  'terraforming-mars.herokuapp.com',
-  'tfm-community.herokuapp.com',
-];
-
 function browser(): string {
   // Taken from https://stackoverflow.com/questions/5916900/how-can-you-detect-the-version-of-a-browser
   const ua= navigator.userAgent;
@@ -65,7 +56,6 @@ export default (Vue as WithRefs<Refs>).extend({
   name: 'BugReportDialog',
   data() {
     return {
-      redact: false,
       message: '',
       showCopied: false,
     };
@@ -79,16 +69,9 @@ export default (Vue as WithRefs<Refs>).extend({
       navigator.clipboard.writeText(this.$refs.textarea.value);
       this.showCopied = true;
     },
-    redactable() {
-      const url = new URL(window.location.href);
-      return !knownHosts.includes(url.hostname);
-    },
     url(playerView: PlayerViewModel | undefined) {
       const url = new URL(window.location.href);
       const spectatorId: SpectatorId | undefined = playerView?.game?.spectatorId;
-      if (this.redactable() && this.redact) {
-        url.host = 'redacted';
-      }
       if (spectatorId && url.pathname === '/player' && url.searchParams.has('id')) {
         url.searchParams.set('id', spectatorId);
         url.pathname = '/spectator';
@@ -108,13 +91,6 @@ Browser: ${browser()}`;
   mounted() {
     if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
     this.setMessage();
-  },
-  watch: {
-    redact: {
-      handler() {
-        this.setMessage();
-      },
-    },
   },
 });
 </script>

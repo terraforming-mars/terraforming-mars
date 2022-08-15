@@ -65,6 +65,10 @@ describe('Aurorai', function() {
     expect(selectHowToPay.canUseData).is.true;
 
     expect(game.getTemperature()).eq(-30);
+    expect(() =>
+      selectHowToPay.cb({...HowToPay.EMPTY, megaCredits: 4, data: 2}),
+    ).to.throw(/Did not spend enough/);
+
     selectHowToPay.cb({...HowToPay.EMPTY, megaCredits: 8, data: 2});
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);

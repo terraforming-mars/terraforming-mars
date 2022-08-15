@@ -1761,7 +1761,7 @@ export class Player {
       0 <= howToPay[key] && howToPay[key] <= maxPayable[key]);
   }
 
-  private payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
+  public payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
     const mult: {[key in keyof HowToPay]: number} = {
       megaCredits: 1,
       steel: this.getSteelValue(),

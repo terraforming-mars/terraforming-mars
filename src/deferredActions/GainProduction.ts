@@ -1,12 +1,9 @@
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
 import {DeferredAction, Priority} from './DeferredAction';
-import {LogBuilder} from '../LogBuilder';
 
 export type Options = {
   count?: number;
-  logMessage?: string;
-  logBuilder?: (builder: LogBuilder) => void;
 }
 
 export class GainProduction extends DeferredAction {
@@ -27,9 +24,6 @@ export class GainProduction extends DeferredAction {
       return undefined;
     }
     this.player.addProduction(this.resource, this.options.count);
-    if (this.options.logMessage !== undefined) {
-      this.player.game.log(this.options.logMessage, this.options.logBuilder);
-    }
     return undefined;
   }
 }

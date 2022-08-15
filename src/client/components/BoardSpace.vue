@@ -10,7 +10,6 @@
     ></board-space-tile>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
-    <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
     <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && tileView === 'show'"></div>
     <template v-if="tileView === 'coords'">
       <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>

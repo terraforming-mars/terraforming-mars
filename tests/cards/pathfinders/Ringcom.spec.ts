@@ -6,6 +6,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
+import {Resources} from '../../../src/common/Resources';
 
 describe('Ringcom', function() {
   let card: Ringcom;
@@ -19,6 +20,14 @@ describe('Ringcom', function() {
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
     player.setCorporationForTest(card);
+  });
+
+  it('play', () => {
+    expect(player.titanium).eq(0);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    card.play(player);
+    expect(player.titanium).eq(1);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(3);
   });
 
   it('initialAction', function() {

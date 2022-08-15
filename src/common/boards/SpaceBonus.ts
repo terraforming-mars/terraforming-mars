@@ -12,7 +12,7 @@ export enum SpaceBonus {
 
     // Ares-specific
     MEGACREDITS, // 6
-    ANIMAL, // 7
+    ANIMAL, // 7 (Also used in Amazonis)
     MICROBE, // 8 (Also used in Arabia Terra)
     ENERGY, // 9 // Ares and Terra Cimmeria
 
@@ -24,7 +24,8 @@ export enum SpaceBonus {
     // Vastitas Borealis-specific
     TEMPERATURE, // 13
     // Amazonis-specific
-    RESTRICTED, // 14
+    // TODO(kberg): move RESTRICTED to SpaceType?
+    RESTRICTED, // 14  // RESTRICTED is just a that a space is empty, not an actual bonus.
 }
 
 const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([

@@ -103,7 +103,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
     if (availableActions.length === 1) {
       const action = availableActions[0];
 
-      if (action instanceof SelectOption) return (availableActions[0] as SelectOption).cb();
+      if (action instanceof SelectOption) return action.cb();
       return availableActions[0]; // SelectCard
     }
 

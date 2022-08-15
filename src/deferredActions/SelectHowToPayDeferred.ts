@@ -45,13 +45,16 @@ export class SelectHowToPayDeferred extends DeferredAction {
 
   public execute() {
     if (this.mustPayWithMegacredits()) {
+      if (this.player.megaCredits < this.amount) {
+        throw new Error(`Player does not have ${this.amount} M€`);
+      }
       this.player.deductResource(Resources.MEGACREDITS, this.amount);
       this.options.afterPay?.();
       return undefined;
     }
 
     return new SelectHowToPay(
-      this.options.title || 'Select how to pay for ' + this.amount + ' MCs',
+      this.options.title || 'Select how to pay for ' + this.amount + ' M€',
       this.options.canUseSteel || false,
       this.options.canUseTitanium || false,
       this.player.canUseHeatAsMegaCredits,
@@ -61,6 +64,18 @@ export class SelectHowToPayDeferred extends DeferredAction {
       (howToPay: HowToPay) => {
         if (!this.player.canSpend(howToPay)) {
           throw new Error('You do not have that many resources to spend');
+        }
+        const amountPaid = this.player.payingAmount(howToPay, {
+          steel: this.options.canUseSteel,
+          titanium: this.options.canUseTitanium,
+          seeds: this.options.canUseSeeds,
+          floaters: false, // Used in project cards only
+          microbes: false, // Used in project cards only
+          science: false, // Used in project cards only
+          data: this.options.canUseData,
+        });
+        if (amountPaid < this.amount) {
+          throw new Error('Did not spend enough to pay for standard project');
         }
         this.player.pay(howToPay);
         this.options.afterPay?.();

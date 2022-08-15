@@ -36,9 +36,10 @@ export class SelectHowToPayDeferred extends DeferredAction {
     if (this.options.canUseSeeds && (this.player.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)?.resourceCount ?? 0) > 0) {
       return false;
     }
-    if (this.options.canUseSeeds && (this.player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS)?.resourceCount ?? 0) > 0) {
+    if (this.options.canUseData && (this.player.getCorporation(CardName.AURORAI)?.resourceCount ?? 0) > 0) {
       return false;
     }
+
     return true;
   }
 

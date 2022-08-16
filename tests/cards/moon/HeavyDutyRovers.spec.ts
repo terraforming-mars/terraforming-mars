@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {HeavyDutyRovers} from '../../../src/cards/moon/HeavyDutyRovers';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {HeavyDutyRovers} from '../../../src/server/cards/moon/HeavyDutyRovers';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

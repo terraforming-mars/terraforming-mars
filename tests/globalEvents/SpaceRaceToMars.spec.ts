@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {SpaceRaceToMars} from '../../src/turmoil/globalEvents/SpaceRaceToMars';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {SpaceRaceToMars} from '../../src/server/turmoil/globalEvents/SpaceRaceToMars';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {Resources} from '../../src/common/Resources';
 import {TileType} from '../../src/common/TileType';
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {ISpace} from '../../src/boards/ISpace';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
+import {ISpace} from '../../src/server/boards/ISpace';
 
 let card: SpaceRaceToMars;
 let game: Game;

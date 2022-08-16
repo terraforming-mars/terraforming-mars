@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {deserializeFundedAwards, serializeFundedAwards} from '../../src/awards/FundedAward';
-import {FundedAward} from '../../src/awards/FundedAward';
-import {Cultivator} from '../../src/awards/Cultivator';
-import {Industrialist} from '../../src/awards/Industrialist';
+import {deserializeFundedAwards, serializeFundedAwards} from '../../src/server/awards/FundedAward';
+import {FundedAward} from '../../src/server/awards/FundedAward';
+import {Cultivator} from '../../src/server/awards/Cultivator';
+import {Industrialist} from '../../src/server/awards/Industrialist';
 import {TestPlayer} from '../TestPlayer';
 
 describe('FundedAwards', function() {

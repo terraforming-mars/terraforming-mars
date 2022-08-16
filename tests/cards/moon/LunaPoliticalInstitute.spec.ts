@@ -1,12 +1,12 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LunaPoliticalInstitute} from '../../../src/cards/moon/LunaPoliticalInstitute';
+import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
-import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
+import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Tags} from '../../../src/common/cards/Tags';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

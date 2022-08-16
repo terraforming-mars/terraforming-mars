@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {MiningRights} from '../../../src/cards/base/MiningRights';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {MiningRights} from '../../../src/server/cards/base/MiningRights';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {ISpace} from '../../../src/boards/ISpace';
+import {ISpace} from '../../../src/server/boards/ISpace';
 import {runAllActions, cast} from '../../TestingUtils';
-import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Units} from '../../../src/common/Units';
 import {Resources} from '../../../src/common/Resources';
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {BeginnerCorporation} from '../../../src/cards/corporation/BeginnerCorporation';
-import {Game} from '../../../src/Game';
+import {BeginnerCorporation} from '../../../src/server/cards/corporation/BeginnerCorporation';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BeginnerCorporation', function() {

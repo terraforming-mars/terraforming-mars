@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ContentType} from '../../src/routes/ContentType';
+import {ContentType} from '../../src/server/routes/ContentType';
 
 describe('ContentType', () => {
   const tests: Array<[path: string, type: string|undefined]> = [

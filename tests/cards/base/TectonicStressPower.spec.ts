@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {TectonicStressPower} from '../../../src/cards/base/TectonicStressPower';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {TectonicStressPower} from '../../../src/server/cards/base/TectonicStressPower';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

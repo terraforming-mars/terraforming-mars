@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Thermophiles} from '../../../src/cards/venusNext/Thermophiles';
-import {VenusianInsects} from '../../../src/cards/venusNext/VenusianInsects';
-import {VenusSoils} from '../../../src/cards/venusNext/VenusSoils';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
+import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
+import {VenusSoils} from '../../../src/server/cards/venusNext/VenusSoils';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {CaretakerContract} from '../../../src/cards/base/CaretakerContract';
-import {Game} from '../../../src/Game';
+import {CaretakerContract} from '../../../src/server/cards/base/CaretakerContract';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
-import {Greens} from '../../../src/turmoil/parties/Greens';
-import {Reds} from '../../../src/turmoil/parties/Reds';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {Helion} from '../../../src/cards/corporation/Helion';
-import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
+import {Greens} from '../../../src/server/turmoil/parties/Greens';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 
 describe('CaretakerContract', function() {
   let card: CaretakerContract;

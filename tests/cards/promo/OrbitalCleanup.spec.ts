@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
-import {Research} from '../../../src/cards/base/Research';
-import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
-import {OrbitalCleanup} from '../../../src/cards/promo/OrbitalCleanup';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
+import {Research} from '../../../src/server/cards/base/Research';
+import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
+import {OrbitalCleanup} from '../../../src/server/cards/promo/OrbitalCleanup';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

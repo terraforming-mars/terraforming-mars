@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {BuildingIndustries} from '../../../src/cards/base/BuildingIndustries';
-import {CheungShingMARS} from '../../../src/cards/prelude/CheungShingMARS';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {BuildingIndustries} from '../../../src/server/cards/base/BuildingIndustries';
+import {CheungShingMARS} from '../../../src/server/cards/prelude/CheungShingMARS';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

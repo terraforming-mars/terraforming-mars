@@ -1,12 +1,12 @@
-import {AICentral} from '../../../src/cards/base/AICentral';
-import {BioengineeringEnclosure} from '../../../src/cards/ares/BioengineeringEnclosure';
-import {Birds} from '../../../src/cards/base/Birds';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {AICentral} from '../../../src/server/cards/base/AICentral';
+import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {expect} from 'chai';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 
 describe('BioengineeringEnclosure', function() {
   let card: BioengineeringEnclosure;

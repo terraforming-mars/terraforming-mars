@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Helion} from '../../../src/cards/corporation/Helion';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {NuclearZone} from '../../../src/cards/base/NuclearZone';
-import {Game} from '../../../src/Game';
+import {NuclearZone} from '../../../src/server/cards/base/NuclearZone';
+import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 

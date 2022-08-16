@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {EcoLine} from '../../../src/cards/corporation/EcoLine';
+import {EcoLine} from '../../../src/server/cards/corporation/EcoLine';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
-import {Game} from '../../../src/Game';
+import {ConvertPlants} from '../../../src/server/cards/base/standardActions/ConvertPlants';
+import {Game} from '../../../src/server/Game';
 
 describe('EcoLine', function() {
   it('Should play', function() {

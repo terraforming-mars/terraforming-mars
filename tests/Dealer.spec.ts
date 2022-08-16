@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Dealer} from '../src/Dealer';
+import {Dealer} from '../src/server/Dealer';
 import {setCustomGameOptions} from './TestingUtils';
-import {GameCards} from '../src/GameCards';
-import {DEFAULT_GAME_OPTIONS} from '../src/GameOptions';
+import {GameCards} from '../src/server/GameCards';
+import {DEFAULT_GAME_OPTIONS} from '../src/server/GameOptions';
 import {CardName} from '../src/common/cards/CardName';
-import {ConstRandom} from '../src/Random';
+import {ConstRandom} from '../src/server/Random';
 
 describe('Dealer', function() {
   it('deserializes from serialized', () => {

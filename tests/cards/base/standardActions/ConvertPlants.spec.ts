@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {ConvertPlants} from '../../../../src/cards/base/standardActions/ConvertPlants';
+import {ConvertPlants} from '../../../../src/server/cards/base/standardActions/ConvertPlants';
 import {Phase} from '../../../../src/common/Phase';
-import {Player} from '../../../../src/Player';
+import {Player} from '../../../../src/server/Player';
 import {setCustomGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
-import {Game} from '../../../../src/Game';
-import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
-import {Reds} from '../../../../src/turmoil/parties/Reds';
+import {Game} from '../../../../src/server/Game';
+import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
+import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 
 describe('ConvertPlants', function() {

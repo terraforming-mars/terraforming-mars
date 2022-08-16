@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {CryoSleep} from '../../../src/cards/colonies/CryoSleep';
-import {Ceres} from '../../../src/colonies/Ceres';
-import {Game} from '../../../src/Game';
+import {CryoSleep} from '../../../src/server/cards/colonies/CryoSleep';
+import {Ceres} from '../../../src/server/colonies/Ceres';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CryoSleep', function() {

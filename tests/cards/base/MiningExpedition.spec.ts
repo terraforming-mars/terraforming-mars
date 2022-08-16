@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {MiningExpedition} from '../../../src/cards/base/MiningExpedition';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {MiningExpedition} from '../../../src/server/cards/base/MiningExpedition';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MiningExpedition', function() {

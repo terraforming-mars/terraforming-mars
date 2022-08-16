@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {IshtarMining} from '../../../src/cards/venusNext/IshtarMining';
-import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
-import {Game} from '../../../src/Game';
+import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
+import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MorningStarInc', function() {

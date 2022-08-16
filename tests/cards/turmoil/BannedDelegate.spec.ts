@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {BannedDelegate} from '../../../src/cards/turmoil/BannedDelegate';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectDelegate} from '../../../src/inputs/SelectDelegate';
-import {Player} from '../../../src/Player';
+import {BannedDelegate} from '../../../src/server/cards/turmoil/BannedDelegate';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectDelegate} from '../../../src/server/inputs/SelectDelegate';
+import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

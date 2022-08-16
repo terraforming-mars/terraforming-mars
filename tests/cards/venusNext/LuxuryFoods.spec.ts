@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {LuxuryFoods} from '../../../src/cards/venusNext/LuxuryFoods';
+import {LuxuryFoods} from '../../../src/server/cards/venusNext/LuxuryFoods';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LuxuryFoods', function() {

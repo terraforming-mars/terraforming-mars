@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {IceAsteroid} from '../../../src/cards/base/IceAsteroid';
-import {Game} from '../../../src/Game';
+import {IceAsteroid} from '../../../src/server/cards/base/IceAsteroid';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('IceAsteroid', function() {

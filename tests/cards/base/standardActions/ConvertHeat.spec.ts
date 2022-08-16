@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {ConvertHeat} from '../../../../src/cards/base/standardActions/ConvertHeat';
+import {ConvertHeat} from '../../../../src/server/cards/base/standardActions/ConvertHeat';
 import {Phase} from '../../../../src/common/Phase';
-import {Player} from '../../../../src/Player';
+import {Player} from '../../../../src/server/Player';
 import {setCustomGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
-import {Game} from '../../../../src/Game';
-import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
-import {Reds} from '../../../../src/turmoil/parties/Reds';
+import {Game} from '../../../../src/server/Game';
+import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
+import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 
 describe('ConvertHeat', function() {

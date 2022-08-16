@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {Thermophiles} from '../../../src/cards/venusNext/Thermophiles';
-import {VenusianInsects} from '../../../src/cards/venusNext/VenusianInsects';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
+import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Thermophiles', function() {

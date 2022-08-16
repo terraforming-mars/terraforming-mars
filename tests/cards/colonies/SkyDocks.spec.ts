@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SkyDocks} from '../../../src/cards/colonies/SkyDocks';
+import {SkyDocks} from '../../../src/server/cards/colonies/SkyDocks';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SkyDocks', function() {

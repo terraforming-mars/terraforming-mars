@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {JovianEmbassy} from '../../../src/cards/promo/JovianEmbassy';
-import {Game} from '../../../src/Game';
+import {JovianEmbassy} from '../../../src/server/cards/promo/JovianEmbassy';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('JovianEmbassy', function() {

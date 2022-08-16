@@ -1,7 +1,7 @@
 
 import {expect} from 'chai';
-import {SubterraneanReservoir} from '../../../src/cards/base/SubterraneanReservoir';
-import {Game} from '../../../src/Game';
+import {SubterraneanReservoir} from '../../../src/server/cards/base/SubterraneanReservoir';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SubterraneanReservoir', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {PersonalAgenda} from '../../../src/cards/pathfinders/PersonalAgenda';
-import {Game} from '../../../src/Game';
+import {PersonalAgenda} from '../../../src/server/cards/pathfinders/PersonalAgenda';
+import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';

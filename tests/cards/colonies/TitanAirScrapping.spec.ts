@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {TitanAirScrapping} from '../../../src/cards/colonies/TitanAirScrapping';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {TitanAirScrapping} from '../../../src/server/cards/colonies/TitanAirScrapping';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TitanAirScrapping', function() {

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
+import {Game} from '../../../src/server/Game';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ResearchOutpost', function() {

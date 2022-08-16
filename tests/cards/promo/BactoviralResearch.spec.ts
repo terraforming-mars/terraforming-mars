@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {RegolithEaters} from '../../../src/cards/base/RegolithEaters';
-import {Research} from '../../../src/cards/base/Research';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {ICard} from '../../../src/cards/ICard';
-import {BactoviralResearch} from '../../../src/cards/promo/BactoviralResearch';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
+import {Research} from '../../../src/server/cards/base/Research';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {ICard} from '../../../src/server/cards/ICard';
+import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BactoviralResearch', function() {

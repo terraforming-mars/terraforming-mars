@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
-import {Game} from '../../../src/Game';
+import {SpaceElevator} from '../../../src/server/cards/base/SpaceElevator';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

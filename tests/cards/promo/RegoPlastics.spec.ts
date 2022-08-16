@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {RegoPlastics} from '../../../src/cards/promo/RegoPlastics';
-import {Player} from '../../../src/Player';
+import {RegoPlastics} from '../../../src/server/cards/promo/RegoPlastics';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 
 describe('RegoPlastics', function() {
   let card: RegoPlastics;

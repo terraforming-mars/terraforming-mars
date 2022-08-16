@@ -1,6 +1,6 @@
 import {ITestDatabase, describeDatabaseSuite} from './databaseSuite';
-import {Game} from '../../src/Game';
-import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
+import {Game} from '../../src/server/Game';
+import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/server/database/SQLite';
 
 class TestSQLite extends SQLite implements ITestDatabase {
   public lastSaveGamePromise: Promise<void> = Promise.resolve();

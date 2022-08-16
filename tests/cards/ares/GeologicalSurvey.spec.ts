@@ -1,19 +1,19 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {GeologicalSurvey} from '../../../src/cards/ares/GeologicalSurvey';
-import {Pets} from '../../../src/cards/base/Pets';
-import {Game} from '../../../src/Game';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {GeologicalSurvey} from '../../../src/server/cards/ares/GeologicalSurvey';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/Player';
+import {Player} from '../../../src/server/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
+import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
 import {addGreenery, resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {OceanCity} from '../../../src/cards/ares/OceanCity';
+import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {MartianRepository} from '../../../src/cards/pathfinders/MartianRepository';
-import {Game} from '../../../src/Game';
+import {MartianRepository} from '../../../src/server/cards/pathfinders/MartianRepository';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MartianRepository', function() {

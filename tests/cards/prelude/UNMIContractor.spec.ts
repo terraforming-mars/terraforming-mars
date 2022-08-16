@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {UNMIContractor} from '../../../src/cards/prelude/UNMIContractor';
-import {Game} from '../../../src/Game';
+import {UNMIContractor} from '../../../src/server/cards/prelude/UNMIContractor';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('UNMIContractor', function() {

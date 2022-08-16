@@ -1,11 +1,11 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {StagingStationBehemoth} from '../../../src/cards/moon/StagingStationBehemoth';
+import {StagingStationBehemoth} from '../../../src/server/cards/moon/StagingStationBehemoth';
 import {expect} from 'chai';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {IMoonData} from '../../../src/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

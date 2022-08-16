@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {TerraformingContract} from '../../../src/cards/venusNext/TerraformingContract';
+import {TerraformingContract} from '../../../src/server/cards/venusNext/TerraformingContract';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

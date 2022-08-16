@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Bushes} from '../../../src/cards/base/Bushes';
-import {GiantIceAsteroid} from '../../../src/cards/base/GiantIceAsteroid';
-import {AsteroidStandardProject} from '../../../src/cards/base/standardProjects/AsteroidStandardProject';
-import {CityStandardProject} from '../../../src/cards/base/standardProjects/CityStandardProject';
-import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
-import {CrediCor} from '../../../src/cards/corporation/CrediCor';
-import {Game} from '../../../src/Game';
+import {Bushes} from '../../../src/server/cards/base/Bushes';
+import {GiantIceAsteroid} from '../../../src/server/cards/base/GiantIceAsteroid';
+import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
+import {CityStandardProject} from '../../../src/server/cards/base/standardProjects/CityStandardProject';
+import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
+import {CrediCor} from '../../../src/server/cards/corporation/CrediCor';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CrediCor', function() {

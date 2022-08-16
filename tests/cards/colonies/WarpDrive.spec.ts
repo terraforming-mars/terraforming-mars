@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {TollStation} from '../../../src/cards/base/TollStation';
-import {WarpDrive} from '../../../src/cards/colonies/WarpDrive';
-import {Game} from '../../../src/Game';
+import {TollStation} from '../../../src/server/cards/base/TollStation';
+import {WarpDrive} from '../../../src/server/cards/colonies/WarpDrive';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('WarpDrive', function() {

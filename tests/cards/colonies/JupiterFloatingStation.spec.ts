@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {JupiterFloatingStation} from '../../../src/cards/colonies/JupiterFloatingStation';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {JupiterFloatingStation} from '../../../src/server/cards/colonies/JupiterFloatingStation';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('JupiterFloatingStation', function() {

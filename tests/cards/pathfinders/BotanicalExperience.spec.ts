@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {BotanicalExperience} from '../../../src/cards/pathfinders/BotanicalExperience';
-import {Game} from '../../../src/Game';
+import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {ISpace} from '../../../src/boards/ISpace';
+import {ISpace} from '../../../src/server/boards/ISpace';
 import {TileType} from '../../../src/common/TileType';
 import {Resources} from '../../../src/common/Resources';
-import {StealResources} from '../../../src/deferredActions/StealResources';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {RemoveAnyPlants} from '../../../src/deferredActions/RemoveAnyPlants';
+import {StealResources} from '../../../src/server/deferredActions/StealResources';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {RemoveAnyPlants} from '../../../src/server/deferredActions/RemoveAnyPlants';
 
 describe('BotanicalExperience', function() {
   let card: BotanicalExperience;

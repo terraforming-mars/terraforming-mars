@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {OrbitalReflectors} from '../../../src/cards/venusNext/OrbitalReflectors';
-import {Game} from '../../../src/Game';
+import {OrbitalReflectors} from '../../../src/server/cards/venusNext/OrbitalReflectors';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

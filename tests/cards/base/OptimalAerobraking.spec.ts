@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {BigAsteroid} from '../../../src/cards/base/BigAsteroid';
-import {OptimalAerobraking} from '../../../src/cards/base/OptimalAerobraking';
-import {Game} from '../../../src/Game';
+import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
+import {OptimalAerobraking} from '../../../src/server/cards/base/OptimalAerobraking';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('OptimalAerobraking', function() {

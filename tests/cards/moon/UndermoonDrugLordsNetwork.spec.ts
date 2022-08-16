@@ -1,9 +1,9 @@
 import {setCustomGameOptions} from '../../TestingUtils';
-import {UndermoonDrugLordsNetwork} from '../../../src/cards/moon/UndermoonDrugLordsNetwork';
+import {UndermoonDrugLordsNetwork} from '../../../src/server/cards/moon/UndermoonDrugLordsNetwork';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {Game} from '../../../src/server/Game';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

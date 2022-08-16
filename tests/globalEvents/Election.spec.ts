@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {StripMine} from '../../src/cards/base/StripMine';
-import {Election} from '../../src/turmoil/globalEvents/Election';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {StripMine} from '../../src/server/cards/base/StripMine';
+import {Election} from '../../src/server/turmoil/globalEvents/Election';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {fakeCard} from '../TestingUtils';
 import {Tags} from '../../src/common/cards/Tags';

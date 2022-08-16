@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {AnOfferYouCantRefuse} from '../../../src/cards/moon/AnOfferYouCantRefuse';
+import {AnOfferYouCantRefuse} from '../../../src/server/cards/moon/AnOfferYouCantRefuse';
 import {TestPlayer} from '../../TestPlayer';
-import {NeutralPlayer, Turmoil} from '../../../src/turmoil/Turmoil';
+import {NeutralPlayer, Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PlayerId} from '../../../src/common/Types';
-import {IParty} from '../../../src/turmoil/parties/IParty';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 const GAME_OPTIONS = setCustomGameOptions({moonExpansion: true, turmoilExtension: true});
 

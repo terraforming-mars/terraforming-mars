@@ -1,12 +1,12 @@
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {TheDarksideofTheMoonSyndicate} from '../../../src/cards/moon/TheDarksideofTheMoonSyndicate';
+import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {StealResources} from '../../../src/deferredActions/StealResources';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {StealResources} from '../../../src/server/deferredActions/StealResources';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
 

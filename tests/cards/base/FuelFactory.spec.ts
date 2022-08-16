@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {FuelFactory} from '../../../src/cards/base/FuelFactory';
+import {FuelFactory} from '../../../src/server/cards/base/FuelFactory';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

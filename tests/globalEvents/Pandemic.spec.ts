@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {StripMine} from '../../src/cards/base/StripMine';
-import {Game} from '../../src/Game';
+import {StripMine} from '../../src/server/cards/base/StripMine';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {Pandemic} from '../../src/turmoil/globalEvents/Pandemic';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Pandemic} from '../../src/server/turmoil/globalEvents/Pandemic';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Pandemic', function() {

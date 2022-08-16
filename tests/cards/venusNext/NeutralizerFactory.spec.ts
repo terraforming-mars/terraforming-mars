@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {NeutralizerFactory} from '../../../src/cards/venusNext/NeutralizerFactory';
-import {Game} from '../../../src/Game';
+import {NeutralizerFactory} from '../../../src/server/cards/venusNext/NeutralizerFactory';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NeutralizerFactory', function() {

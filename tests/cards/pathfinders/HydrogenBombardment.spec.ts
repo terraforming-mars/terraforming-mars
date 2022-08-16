@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {HydrogenBombardment} from '../../../src/cards/pathfinders/HydrogenBombardment';
-import {Game} from '../../../src/Game';
+import {HydrogenBombardment} from '../../../src/server/cards/pathfinders/HydrogenBombardment';
+import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 

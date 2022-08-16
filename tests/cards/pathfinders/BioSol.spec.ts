@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {BioSol} from '../../../src/cards/pathfinders/BioSol';
-import {Game} from '../../../src/Game';
+import {BioSol} from '../../../src/server/cards/pathfinders/BioSol';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {Tags} from '../../../src/common/cards/Tags';

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {PoliticalAlliance} from '../../../src/cards/turmoil/PoliticalAlliance';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {PoliticalAlliance} from '../../../src/server/cards/turmoil/PoliticalAlliance';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

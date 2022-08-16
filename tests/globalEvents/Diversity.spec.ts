@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {AdvancedEcosystems} from '../../src/cards/base/AdvancedEcosystems';
-import {SolarWindPower} from '../../src/cards/base/SolarWindPower';
-import {EarlySettlement} from '../../src/cards/prelude/EarlySettlement';
-import {Game} from '../../src/Game';
+import {AdvancedEcosystems} from '../../src/server/cards/base/AdvancedEcosystems';
+import {SolarWindPower} from '../../src/server/cards/base/SolarWindPower';
+import {EarlySettlement} from '../../src/server/cards/prelude/EarlySettlement';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {Diversity} from '../../src/turmoil/globalEvents/Diversity';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Diversity} from '../../src/server/turmoil/globalEvents/Diversity';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Diversity', function() {

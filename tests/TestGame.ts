@@ -1,5 +1,5 @@
-import {Game} from '../src/Game';
-import {GameOptions} from '../src/GameOptions';
+import {Game} from '../src/server/Game';
+import {GameOptions} from '../src/server/GameOptions';
 import {setCustomGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Poseidon} from '../../../src/cards/colonies/Poseidon';
-import {Ceres} from '../../../src/colonies/Ceres';
-import {Game} from '../../../src/Game';
+import {Poseidon} from '../../../src/server/cards/colonies/Poseidon';
+import {Ceres} from '../../../src/server/colonies/Ceres';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

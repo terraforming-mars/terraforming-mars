@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {CarbonateProcessing} from '../../../src/cards/base/CarbonateProcessing';
-import {Player} from '../../../src/Player';
+import {CarbonateProcessing} from '../../../src/server/cards/base/CarbonateProcessing';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

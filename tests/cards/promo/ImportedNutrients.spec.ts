@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {ImportedNutrients} from '../../../src/cards/promo/ImportedNutrients';
-import {Player} from '../../../src/Player';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Decomposers} from '../../../src/server/cards/base/Decomposers';
+import {ImportedNutrients} from '../../../src/server/cards/promo/ImportedNutrients';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImportedNutrients', function() {

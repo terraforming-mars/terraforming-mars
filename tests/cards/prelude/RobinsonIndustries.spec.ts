@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {RobinsonIndustries} from '../../../src/cards/prelude/RobinsonIndustries';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {RobinsonIndustries} from '../../../src/server/cards/prelude/RobinsonIndustries';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {Helion} from '../../../src/cards/corporation/Helion';
-import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
 
 describe('RobinsonIndustries', function() {

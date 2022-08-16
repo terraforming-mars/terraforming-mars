@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
-import {Game} from '../../../src/Game';
+import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 

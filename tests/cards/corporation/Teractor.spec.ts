@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Birds} from '../../../src/cards/base/Birds';
-import {Cartel} from '../../../src/cards/base/Cartel';
-import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
-import {Teractor} from '../../../src/cards/corporation/Teractor';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {Cartel} from '../../../src/server/cards/base/Cartel';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {Teractor} from '../../../src/server/cards/corporation/Teractor';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Teractor', function() {

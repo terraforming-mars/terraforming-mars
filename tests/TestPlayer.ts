@@ -1,10 +1,10 @@
-import {Player} from '../src/Player';
-import {PlayerInput} from '../src/PlayerInput';
+import {Player} from '../src/server/Player';
+import {PlayerInput} from '../src/server/PlayerInput';
 import {Color} from '../src/common/Color';
 import {Units} from '../src/common/Units';
 import {Tags} from '../src/common/cards/Tags';
 import {InputResponse} from '../src/common/inputs/InputResponse';
-import {ICorporationCard} from '@/cards/corporation/ICorporationCard';
+import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 
 class TestPlayerFactory {
   constructor(private color: Color) {}

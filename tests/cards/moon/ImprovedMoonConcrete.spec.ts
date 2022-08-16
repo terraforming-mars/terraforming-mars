@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {ImprovedMoonConcrete} from '../../../src/cards/moon/ImprovedMoonConcrete';
+import {ImprovedMoonConcrete} from '../../../src/server/cards/moon/ImprovedMoonConcrete';
 import {expect} from 'chai';
-import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
+import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/common/cards/CardName';
-import {MoonMineStandardProject} from '../../../src/cards/moon/MoonMineStandardProject';
+import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

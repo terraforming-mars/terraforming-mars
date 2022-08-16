@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {SpecializedSettlement} from '../../../src/cards/pathfinders/SpecializedSettlement';
-import {Game} from '../../../src/Game';
+import {SpecializedSettlement} from '../../../src/server/cards/pathfinders/SpecializedSettlement';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {Units} from '../../../src/common/Units';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SpecializedSettlement', function() {

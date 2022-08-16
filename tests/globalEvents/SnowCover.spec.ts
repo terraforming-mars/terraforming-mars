@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {MAX_TEMPERATURE} from '../../src/common/constants';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
-import {SnowCover} from '../../src/turmoil/globalEvents/SnowCover';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
+import {SnowCover} from '../../src/server/turmoil/globalEvents/SnowCover';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('SnowCover', function() {

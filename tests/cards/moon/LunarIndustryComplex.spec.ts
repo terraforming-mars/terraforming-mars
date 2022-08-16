@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LunarIndustryComplex} from '../../../src/cards/moon/LunarIndustryComplex';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {IMoonData} from '../../../src/moon/IMoonData';
+import {LunarIndustryComplex} from '../../../src/server/cards/moon/LunarIndustryComplex';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {Units} from '../../../src/common/Units';
 import {Resources} from '../../../src/common/Resources';
-import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
+import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

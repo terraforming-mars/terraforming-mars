@@ -1,12 +1,12 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {LunarSecurityStations} from '../../../src/cards/moon/LunarSecurityStations';
+import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
 import {expect} from 'chai';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 

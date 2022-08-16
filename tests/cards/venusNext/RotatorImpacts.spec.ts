@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
-import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
+import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
+import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RotatorImpacts', () => {

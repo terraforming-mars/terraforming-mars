@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {NuclearPower} from '../../../src/cards/base/NuclearPower';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {NuclearPower} from '../../../src/server/cards/base/NuclearPower';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

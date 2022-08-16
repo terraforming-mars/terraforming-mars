@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {Factorum} from '../../../src/cards/promo/Factorum';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Factorum} from '../../../src/server/cards/promo/Factorum';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectOption} from '../../../src/inputs/SelectOption';
-import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {SelectOption} from '../../../src/server/inputs/SelectOption';
+import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Helion} from '../../../src/cards/corporation/Helion';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
 
 describe('Factorum', function() {
   let card: Factorum;

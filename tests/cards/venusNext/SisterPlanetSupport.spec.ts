@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
+import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

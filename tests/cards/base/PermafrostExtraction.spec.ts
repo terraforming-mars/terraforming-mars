@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {PermafrostExtraction} from '../../../src/cards/base/PermafrostExtraction';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {PermafrostExtraction} from '../../../src/server/cards/base/PermafrostExtraction';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('PermafrostExtraction', function() {

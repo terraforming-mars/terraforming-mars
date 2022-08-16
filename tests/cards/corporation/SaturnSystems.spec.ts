@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MirandaResort} from '../../../src/cards/base/MirandaResort';
-import {SaturnSystems} from '../../../src/cards/corporation/SaturnSystems';
-import {Game} from '../../../src/Game';
+import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
+import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

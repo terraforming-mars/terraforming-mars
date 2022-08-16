@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {AsteroidResources} from '../../../src/cards/pathfinders/AsteroidResources';
-import {Game} from '../../../src/Game';
+import {AsteroidResources} from '../../../src/server/cards/pathfinders/AsteroidResources';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
-import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
+import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';

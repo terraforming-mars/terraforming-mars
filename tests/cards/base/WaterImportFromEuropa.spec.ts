@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {WaterImportFromEuropa} from '../../../src/cards/base/WaterImportFromEuropa';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {WaterImportFromEuropa} from '../../../src/server/cards/base/WaterImportFromEuropa';
+import {Game} from '../../../src/server/Game';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {Player} from '../../../src/server/Player';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

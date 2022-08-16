@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
-import {Game} from '../../../src/Game';
+import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ProtectedHabitats', function() {

@@ -1,12 +1,12 @@
 import * as http from 'http';
 import * as EventEmitter from 'events';
 import {expect} from 'chai';
-import {PlayerInput} from '../../src/routes/PlayerInput';
+import {PlayerInput} from '../../src/server/routes/PlayerInput';
 import {MockResponse} from './HttpMocks';
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
-import {OrOptions} from '../../src/inputs/OrOptions';
-import {UndoActionOption} from '../../src/inputs/UndoActionOption';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {UndoActionOption} from '../../src/server/inputs/UndoActionOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {cast} from '../TestingUtils';
 

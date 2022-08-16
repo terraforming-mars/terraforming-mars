@@ -1,13 +1,13 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {MomentumViriumHabitat} from '../../../src/cards/moon/MomentumViriumHabitat';
+import {MomentumViriumHabitat} from '../../../src/server/cards/moon/MomentumViriumHabitat';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
-import {MoonSpaces} from '../../../src/moon/MoonSpaces';
+import {MoonSpaces} from '../../../src/server/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

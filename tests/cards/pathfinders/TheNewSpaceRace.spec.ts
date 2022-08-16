@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {TheNewSpaceRace} from '../../../src/cards/pathfinders/TheNewSpaceRace';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpaceRace';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {AlliedBanks} from '../../../src/cards/prelude/AlliedBanks';
-import {BiosphereSupport} from '../../../src/cards/prelude/BiosphereSupport';
-import {AquiferTurbines} from '../../../src/cards/prelude/AquiferTurbines';
-import {GalileanMining} from '../../../src/cards/prelude/GalileanMining';
-import {HugeAsteroid} from '../../../src/cards/prelude/HugeAsteroid';
-import {SelectInitialCards} from '../../../src/inputs/SelectInitialCards';
+import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
+import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
+import {AquiferTurbines} from '../../../src/server/cards/prelude/AquiferTurbines';
+import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
+import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
+import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 
 describe('TheNewSpaceRace', function() {

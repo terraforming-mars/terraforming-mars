@@ -1,21 +1,21 @@
 import {expect} from 'chai';
-import {CollegiumCopernicus} from '../../../src/cards/pathfinders/CollegiumCopernicus';
-import {Luna} from '../../../src/colonies/Luna';
-import {Triton} from '../../../src/colonies/Triton';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectColony} from '../../../src/inputs/SelectColony';
-import {AndOptions} from '../../../src/inputs/AndOptions';
+import {CollegiumCopernicus} from '../../../src/server/cards/pathfinders/CollegiumCopernicus';
+import {Luna} from '../../../src/server/colonies/Luna';
+import {Triton} from '../../../src/server/colonies/Triton';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {Enceladus} from '../../../src/colonies/Enceladus';
-import {Europa} from '../../../src/colonies/Europa';
-import {Io} from '../../../src/colonies/Io';
-import {Pluto} from '../../../src/colonies/Pluto';
-import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
+import {Enceladus} from '../../../src/server/colonies/Enceladus';
+import {Europa} from '../../../src/server/colonies/Europa';
+import {Io} from '../../../src/server/colonies/Io';
+import {Pluto} from '../../../src/server/colonies/Pluto';
+import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {Tags} from '../../../src/common/cards/Tags';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CollegiumCopernicus', function() {
   let card: CollegiumCopernicus;

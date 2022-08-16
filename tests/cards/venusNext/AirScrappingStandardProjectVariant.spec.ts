@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {AirScrappingStandardProjectVariant} from '../../../src/cards/venusNext/AirScrappingStandardProjectVariant';
+import {AirScrappingStandardProjectVariant} from '../../../src/server/cards/venusNext/AirScrappingStandardProjectVariant';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 
 describe('AirScrappingStandardProjectVariant', function() {
   let card: AirScrappingStandardProjectVariant;

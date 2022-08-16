@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Asteroid} from '../../../src/cards/base/Asteroid';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Asteroid} from '../../../src/server/cards/base/Asteroid';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';

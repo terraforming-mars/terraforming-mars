@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {ImportedHydrogen} from '../../../src/cards/base/ImportedHydrogen';
-import {Pets} from '../../../src/cards/base/Pets';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {SelectOption} from '../../../src/inputs/SelectOption';
-import {Player} from '../../../src/Player';
+import {Decomposers} from '../../../src/server/cards/base/Decomposers';
+import {ImportedHydrogen} from '../../../src/server/cards/base/ImportedHydrogen';
+import {Pets} from '../../../src/server/cards/base/Pets';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectOption} from '../../../src/server/inputs/SelectOption';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImportedHydrogen', function() {

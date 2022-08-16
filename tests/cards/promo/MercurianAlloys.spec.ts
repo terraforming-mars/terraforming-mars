@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Research} from '../../../src/cards/base/Research';
-import {MercurianAlloys} from '../../../src/cards/promo/MercurianAlloys';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Research} from '../../../src/server/cards/base/Research';
+import {MercurianAlloys} from '../../../src/server/cards/promo/MercurianAlloys';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MercurianAlloys', function() {

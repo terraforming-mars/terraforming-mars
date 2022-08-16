@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {MartianDustProcessingPlant} from '../../../src/cards/pathfinders/MartianDustProcessingPlant';
-import {Game} from '../../../src/Game';
+import {MartianDustProcessingPlant} from '../../../src/server/cards/pathfinders/MartianDustProcessingPlant';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';

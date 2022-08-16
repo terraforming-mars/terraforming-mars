@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
-import {SpinoffDepartment} from '../../../src/cards/colonies/SpinoffDepartment';
-import {Game} from '../../../src/Game';
+import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
+import {SpinoffDepartment} from '../../../src/server/cards/colonies/SpinoffDepartment';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

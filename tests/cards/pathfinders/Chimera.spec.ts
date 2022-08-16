@@ -1,24 +1,24 @@
 import {expect} from 'chai';
-import {Chimera} from '../../../src/cards/pathfinders/Chimera';
-import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
-import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
-import {AdaptationTechnology} from '../../../src/cards/base/AdaptationTechnology';
-import {Cartel} from '../../../src/cards/base/Cartel';
-import {Game} from '../../../src/Game';
+import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
+import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
+import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
+import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
+import {Cartel} from '../../../src/server/cards/base/Cartel';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
-import {CardRequirements} from '../../../src/cards/CardRequirements';
+import {CardRequirements} from '../../../src/server/cards/CardRequirements';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
-import {Businessperson} from '../../../src/milestones/Businessperson';
-import {Scientist} from '../../../src/awards/Scientist';
-import {Ecologist} from '../../../src/milestones/Ecologist';
-import {Algae} from '../../../src/cards/base/Algae';
-import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
-import {Diversifier} from '../../../src/milestones/Diversifier';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {Businessperson} from '../../../src/server/milestones/Businessperson';
+import {Scientist} from '../../../src/server/awards/Scientist';
+import {Ecologist} from '../../../src/server/milestones/Ecologist';
+import {Algae} from '../../../src/server/cards/base/Algae';
+import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
+import {Diversifier} from '../../../src/server/milestones/Diversifier';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 
 describe('Chimera', function() {
   let card: Chimera;

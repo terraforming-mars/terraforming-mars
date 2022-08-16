@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {TerraformingRobots} from '../../../src/cards/pathfinders/TerraformingRobots';
-import {Game} from '../../../src/Game';
+import {TerraformingRobots} from '../../../src/server/cards/pathfinders/TerraformingRobots';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
+import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
+import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 

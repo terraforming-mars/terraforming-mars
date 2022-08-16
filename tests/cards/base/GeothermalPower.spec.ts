@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {GeothermalPower} from '../../../src/cards/base/GeothermalPower';
+import {GeothermalPower} from '../../../src/server/cards/base/GeothermalPower';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

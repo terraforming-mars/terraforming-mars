@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {TitaniumMine} from '../../../src/cards/base/TitaniumMine';
-import {Game} from '../../../src/Game';
+import {TitaniumMine} from '../../../src/server/cards/base/TitaniumMine';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

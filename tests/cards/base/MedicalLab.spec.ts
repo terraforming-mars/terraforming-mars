@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Capital} from '../../../src/cards/base/Capital';
-import {MedicalLab} from '../../../src/cards/base/MedicalLab';
-import {Game} from '../../../src/Game';
+import {Capital} from '../../../src/server/cards/base/Capital';
+import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

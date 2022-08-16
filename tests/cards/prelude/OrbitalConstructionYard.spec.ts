@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {OrbitalConstructionYard} from '../../../src/cards/prelude/OrbitalConstructionYard';
+import {OrbitalConstructionYard} from '../../../src/server/cards/prelude/OrbitalConstructionYard';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

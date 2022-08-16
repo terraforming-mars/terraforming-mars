@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {ExperiencedMartians} from '../../../src/cards/pathfinders/ExperiencedMartians';
+import {ExperiencedMartians} from '../../../src/server/cards/pathfinders/ExperiencedMartians';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {Game} from '../../../src/Game';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {Game} from '../../../src/server/Game';
 import {Tags} from '../../../src/common/cards/Tags';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
+import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
+import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {fakeCard} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
 

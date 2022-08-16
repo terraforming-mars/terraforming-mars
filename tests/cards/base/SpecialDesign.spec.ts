@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {SpecialDesign} from '../../../src/cards/base/SpecialDesign';
-import {Game} from '../../../src/Game';
+import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SpecialDesign', function() {

@@ -1,10 +1,10 @@
-import {ButterflyEffect} from '../../../src/cards/ares/ButterflyEffect';
+import {ButterflyEffect} from '../../../src/server/cards/ares/ButterflyEffect';
 import {expect} from 'chai';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
-import {ShiftAresGlobalParameters} from '../../../src/inputs/ShiftAresGlobalParameters';
+import {ShiftAresGlobalParameters} from '../../../src/server/inputs/ShiftAresGlobalParameters';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('ButterflyEffect', function() {

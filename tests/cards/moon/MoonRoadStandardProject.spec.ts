@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {MoonRoadStandardProject} from '../../../src/cards/moon/MoonRoadStandardProject';
+import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadStandardProject';
 import {expect} from 'chai';
-import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
-import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
-import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
+import {SelectHowToPayDeferred} from '../../../src/server/deferredActions/SelectHowToPayDeferred';
+import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
+import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

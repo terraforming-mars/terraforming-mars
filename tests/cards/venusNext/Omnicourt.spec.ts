@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Omnicourt} from '../../../src/cards/venusNext/Omnicourt';
-import {Game} from '../../../src/Game';
+import {Omnicourt} from '../../../src/server/cards/venusNext/Omnicourt';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Omnicourt', function() {

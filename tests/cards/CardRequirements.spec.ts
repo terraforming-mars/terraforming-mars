@@ -1,18 +1,18 @@
 import {expect} from 'chai';
-import {CardRequirements} from '../../src/cards/CardRequirements';
+import {CardRequirements} from '../../src/server/cards/CardRequirements';
 import {setCustomGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
-import {Game} from '../../src/Game';
-import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
+import {Game} from '../../src/server/Game';
+import {AdaptationTechnology} from '../../src/server/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/common/TileType';
-import {Ants} from '../../src/cards/base/Ants';
-import {Ceres} from '../../src/colonies/Ceres';
-import {Celestic} from '../../src/cards/venusNext/Celestic';
+import {Ants} from '../../src/server/cards/base/Ants';
+import {Ceres} from '../../src/server/colonies/Ceres';
+import {Celestic} from '../../src/server/cards/venusNext/Celestic';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Tags} from '../../src/common/cards/Tags';
-import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination';
+import {ResearchCoordination} from '../../src/server/cards/prelude/ResearchCoordination';
 import {Resources} from '../../src/common/Resources';
-import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';
-import {OrOptions} from '../../src/inputs/OrOptions';
+import {SmallAsteroid} from '../../src/server/cards/promo/SmallAsteroid';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../TestPlayer';
 
 describe('CardRequirements', function() {

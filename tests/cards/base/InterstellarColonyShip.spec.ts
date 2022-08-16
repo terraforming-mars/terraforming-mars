@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {GeneRepair} from '../../../src/cards/base/GeneRepair';
-import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColonyShip';
-import {Research} from '../../../src/cards/base/Research';
-import {Game} from '../../../src/Game';
+import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
+import {InterstellarColonyShip} from '../../../src/server/cards/base/InterstellarColonyShip';
+import {Research} from '../../../src/server/cards/base/Research';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterstellarColonyShip', function() {

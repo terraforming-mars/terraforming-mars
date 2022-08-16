@@ -1,11 +1,11 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {NewColonyPlanningInitiaitives} from '../../../src/cards/moon/NewColonyPlanningInitiaitives';
+import {NewColonyPlanningInitiaitives} from '../../../src/server/cards/moon/NewColonyPlanningInitiaitives';
 import {expect} from 'chai';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

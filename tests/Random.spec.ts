@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SeededRandom} from '../src/Random';
+import {SeededRandom} from '../src/server/Random';
 import {range} from '../src/common/utils/utils';
 
 describe('Random', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';

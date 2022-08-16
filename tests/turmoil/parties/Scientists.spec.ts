@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Game} from '../../../src/server/Game';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4} from '../../../src/turmoil/parties/Scientists';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {Research} from '../../../src/cards/base/Research';
-import {GeneRepair} from '../../../src/cards/base/GeneRepair';
-import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArkship';
-import {SpaceStation} from '../../../src/cards/base/SpaceStation';
-import {Satellites} from '../../../src/cards/base/Satellites';
-import {HabitatMarte} from '../../../src/cards/pathfinders/HabitatMarte';
-import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganisms';
+import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4} from '../../../src/server/turmoil/parties/Scientists';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {Research} from '../../../src/server/cards/base/Research';
+import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
+import {PrideoftheEarthArkship} from '../../../src/server/cards/moon/PrideoftheEarthArkship';
+import {SpaceStation} from '../../../src/server/cards/base/SpaceStation';
+import {Satellites} from '../../../src/server/cards/base/Satellites';
+import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
+import {DesignedOrganisms} from '../../../src/server/cards/pathfinders/DesignedOrganisms';
 
 describe('Scientists', function() {
   let player: TestPlayer;

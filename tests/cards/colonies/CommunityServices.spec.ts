@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Aridor} from '../../../src/cards/colonies/Aridor';
-import {CommunityServices} from '../../../src/cards/colonies/CommunityServices';
-import {EccentricSponsor} from '../../../src/cards/prelude/EccentricSponsor';
-import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
-import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
-import {Game} from '../../../src/Game';
+import {Aridor} from '../../../src/server/cards/colonies/Aridor';
+import {CommunityServices} from '../../../src/server/cards/colonies/CommunityServices';
+import {EccentricSponsor} from '../../../src/server/cards/prelude/EccentricSponsor';
+import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
+import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

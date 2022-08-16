@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {SurveyMission} from '../../../src/cards/pathfinders/SurveyMission';
-import {Game} from '../../../src/Game';
+import {SurveyMission} from '../../../src/server/cards/pathfinders/SurveyMission';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {ISpace} from '../../../src/boards/ISpace';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {MiningGuild} from '../../../src/cards/corporation/MiningGuild';
+import {ISpace} from '../../../src/server/boards/ISpace';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Units} from '../../../src/common/Units';
 

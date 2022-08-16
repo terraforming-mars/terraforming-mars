@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {CulturalMetropolis} from '../../../src/cards/turmoil/CulturalMetropolis';
+import {CulturalMetropolis} from '../../../src/server/cards/turmoil/CulturalMetropolis';
 import {PLAYER_DELEGATES_COUNT} from '../../../src/common/constants';
-import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
-import {VastitasBorealisBoard} from '../../src/boards/VastitasBorealisBoard';
-import {Player} from '../../src/Player';
+import {Game} from '../../src/server/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {VastitasBorealisBoard} from '../../src/server/boards/VastitasBorealisBoard';
+import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
-import {SeededRandom} from '../../src/Random';
+import {SeededRandom} from '../../src/server/Random';
 import {setCustomGameOptions, runAllActions} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
-import {SpaceName} from '../../src/SpaceName';
+import {SpaceName} from '../../src/server/SpaceName';
 
 describe('VastitasBorealisBoard', function() {
   let board: VastitasBorealisBoard;

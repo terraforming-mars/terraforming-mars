@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {FueledGenerators} from '../../../src/cards/base/FueledGenerators';
+import {FueledGenerators} from '../../../src/server/cards/base/FueledGenerators';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

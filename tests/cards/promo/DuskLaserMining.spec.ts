@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Research} from '../../../src/cards/base/Research';
-import {DuskLaserMining} from '../../../src/cards/promo/DuskLaserMining';
-import {Player} from '../../../src/Player';
+import {Research} from '../../../src/server/cards/base/Research';
+import {DuskLaserMining} from '../../../src/server/cards/promo/DuskLaserMining';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

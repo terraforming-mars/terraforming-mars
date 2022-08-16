@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {FloatingHabs} from '../../src/cards/venusNext/FloatingHabs';
-import {Game} from '../../src/Game';
-import {CloudSocieties} from '../../src/turmoil/globalEvents/CloudSocieties';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {FloatingHabs} from '../../src/server/cards/venusNext/FloatingHabs';
+import {Game} from '../../src/server/Game';
+import {CloudSocieties} from '../../src/server/turmoil/globalEvents/CloudSocieties';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('CloudSocieties', function() {

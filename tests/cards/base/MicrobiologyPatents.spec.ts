@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MicrobiologyPatents} from '../../../src/cards/pathfinders/MicrobiologyPatents';
-import {Virus} from '../../../src/cards/base/Virus';
-import {MicroMills} from '../../../src/cards/base/MicroMills';
+import {MicrobiologyPatents} from '../../../src/server/cards/pathfinders/MicrobiologyPatents';
+import {Virus} from '../../../src/server/cards/base/Virus';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 

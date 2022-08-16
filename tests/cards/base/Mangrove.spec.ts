@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Mangrove} from '../../../src/cards/base/Mangrove';
-import {Game} from '../../../src/Game';
+import {Mangrove} from '../../../src/server/cards/base/Mangrove';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 

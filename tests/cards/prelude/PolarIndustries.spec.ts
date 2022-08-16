@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {PolarIndustries} from '../../../src/cards/prelude/PolarIndustries';
-import {Game} from '../../../src/Game';
+import {PolarIndustries} from '../../../src/server/cards/prelude/PolarIndustries';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

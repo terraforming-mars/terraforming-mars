@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {AristarchusRoadNetwork} from '../../../src/cards/moon/AristarchusRoadNetwork';
+import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
+import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

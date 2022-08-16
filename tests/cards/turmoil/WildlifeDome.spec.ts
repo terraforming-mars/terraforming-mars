@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {WildlifeDome} from '../../../src/cards/turmoil/WildlifeDome';
-import {Game} from '../../../src/Game';
+import {WildlifeDome} from '../../../src/server/cards/turmoil/WildlifeDome';
+import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/Player';
+import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

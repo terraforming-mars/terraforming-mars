@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {ResearchGrant} from '../../../src/cards/community/ResearchGrant';
-import {Player} from '../../../src/Player';
+import {ResearchGrant} from '../../../src/server/cards/community/ResearchGrant';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ResearchGrant', function() {

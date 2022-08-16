@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {RedCity} from '../../../src/cards/pathfinders/RedCity';
-import {Game} from '../../../src/Game';
+import {RedCity} from '../../../src/server/cards/pathfinders/RedCity';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Phase} from '../../../src/common/Phase';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {Board} from '../../../src/boards/Board';
+import {Board} from '../../../src/server/boards/Board';
 import {Units} from '../../../src/common/Units';
 
 describe('RedCity', function() {

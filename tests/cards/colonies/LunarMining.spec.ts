@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
-import {LunarMining} from '../../../src/cards/colonies/LunarMining';
-import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
-import {Game} from '../../../src/Game';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {LunarMining} from '../../../src/server/cards/colonies/LunarMining';
+import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

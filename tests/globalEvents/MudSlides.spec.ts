@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {MudSlides} from '../../src/turmoil/globalEvents/MudSlides';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {setCustomGameOptions} from '../TestingUtils';
-import {ISpace} from '../../src/boards/ISpace';
+import {ISpace} from '../../src/server/boards/ISpace';
 import {TileType} from '../../src/common/TileType';
 
 describe('MudSlides', function() {

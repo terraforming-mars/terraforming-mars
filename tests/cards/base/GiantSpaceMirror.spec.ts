@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {GiantSpaceMirror} from '../../../src/cards/base/GiantSpaceMirror';
+import {GiantSpaceMirror} from '../../../src/server/cards/base/GiantSpaceMirror';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

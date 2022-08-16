@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {OrbitalLaboratories} from '../../../src/cards/pathfinders/OrbitalLaboratories';
-import {Game} from '../../../src/Game';
+import {OrbitalLaboratories} from '../../../src/server/cards/pathfinders/OrbitalLaboratories';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

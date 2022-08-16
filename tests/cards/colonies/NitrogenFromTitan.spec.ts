@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
-import {NitrogenFromTitan} from '../../../src/cards/colonies/NitrogenFromTitan';
-import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
-import {ICard} from '../../../src/cards/ICard';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {NitrogenFromTitan} from '../../../src/server/cards/colonies/NitrogenFromTitan';
+import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFloatingLaunchPad';
+import {ICard} from '../../../src/server/cards/ICard';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrogenFromTitan', function() {

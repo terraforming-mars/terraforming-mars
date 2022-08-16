@@ -1,11 +1,11 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {IntragenSanctuaryHeadquarters} from '../../../src/cards/moon/IntragenSanctuaryHeadquarters';
+import {IntragenSanctuaryHeadquarters} from '../../../src/server/cards/moon/IntragenSanctuaryHeadquarters';
 import {expect} from 'chai';
-import {MicroMills} from '../../../src/cards/base/MicroMills';
-import {MartianZoo} from '../../../src/cards/colonies/MartianZoo';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

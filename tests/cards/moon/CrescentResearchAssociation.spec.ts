@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {CrescentResearchAssociation} from '../../../src/cards/moon/CrescentResearchAssociation';
+import {CrescentResearchAssociation} from '../../../src/server/cards/moon/CrescentResearchAssociation';
 import {TestPlayer} from '../../TestPlayer';
-import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
-import {Predators} from '../../../src/cards/base/Predators';
+import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
+import {Predators} from '../../../src/server/cards/base/Predators';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

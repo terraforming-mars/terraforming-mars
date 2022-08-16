@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {InterplanetaryTransport} from '../../../src/cards/pathfinders/InterplanetaryTransport';
-import {Game} from '../../../src/Game';
+import {InterplanetaryTransport} from '../../../src/server/cards/pathfinders/InterplanetaryTransport';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceName} from '../../../src/SpaceName';
+import {SpaceName} from '../../../src/server/SpaceName';
 import {Resources} from '../../../src/common/Resources';
 
 describe('InterplanetaryTransport', function() {

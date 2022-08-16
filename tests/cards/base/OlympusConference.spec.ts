@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Bushes} from '../../../src/cards/base/Bushes';
-import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
-import {OlympusConference} from '../../../src/cards/base/OlympusConference';
-import {Research} from '../../../src/cards/base/Research';
-import {AdaptationTechnology} from '../../../src//cards/base/AdaptationTechnology';
-import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActionsQueue';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Bushes} from '../../../src/server/cards/base/Bushes';
+import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
+import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
+import {Research} from '../../../src/server/cards/base/Research';
+import {AdaptationTechnology} from '../../../src/server//cards/base/AdaptationTechnology';
+import {DeferredActionsQueue} from '../../../src/server/deferredActions/DeferredActionsQueue';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 

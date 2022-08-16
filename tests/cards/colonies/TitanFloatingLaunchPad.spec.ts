@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {JupiterFloatingStation} from '../../../src/cards/colonies/JupiterFloatingStation';
-import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
-import {ICard} from '../../../src/cards/ICard';
-import {Luna} from '../../../src/colonies/Luna';
-import {Triton} from '../../../src/colonies/Triton';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {SelectColony} from '../../../src/inputs/SelectColony';
+import {JupiterFloatingStation} from '../../../src/server/cards/colonies/JupiterFloatingStation';
+import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFloatingLaunchPad';
+import {ICard} from '../../../src/server/cards/ICard';
+import {Luna} from '../../../src/server/colonies/Luna';
+import {Triton} from '../../../src/server/colonies/Triton';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
-import {AndOptions} from '../../../src/inputs/AndOptions';
+import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 

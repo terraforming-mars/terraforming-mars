@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {AerialMappers} from '../../src/cards/venusNext/AerialMappers';
-import {Dirigibles} from '../../src/cards/venusNext/Dirigibles';
-import {Titan} from '../../src/colonies/Titan';
-import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
+import {AerialMappers} from '../../src/server/cards/venusNext/AerialMappers';
+import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
+import {Titan} from '../../src/server/colonies/Titan';
+import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 

@@ -1,8 +1,8 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
+import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {expect} from 'chai';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});

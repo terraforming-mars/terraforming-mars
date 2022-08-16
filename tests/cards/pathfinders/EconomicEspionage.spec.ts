@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {EconomicEspionage} from '../../../src/cards/pathfinders/EconomicEspionage';
-import {Game} from '../../../src/Game';
+import {EconomicEspionage} from '../../../src/server/cards/pathfinders/EconomicEspionage';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 

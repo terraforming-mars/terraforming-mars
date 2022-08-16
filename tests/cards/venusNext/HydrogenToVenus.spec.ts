@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
-import {ICard} from '../../../src/cards/ICard';
-import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {HydrogenToVenus} from '../../../src/cards/venusNext/HydrogenToVenus';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
+import {ICard} from '../../../src/server/cards/ICard';
+import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
+import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
+import {HydrogenToVenus} from '../../../src/server/cards/venusNext/HydrogenToVenus';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('HydrogenToVenus', function() {

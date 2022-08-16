@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Route} from '../../src/routes/Route';
+import {Route} from '../../src/server/routes/Route';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 

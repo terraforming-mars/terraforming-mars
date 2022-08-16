@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Recyclon} from '../../../src/cards/promo/Recyclon';
+import {Recyclon} from '../../../src/server/cards/promo/Recyclon';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

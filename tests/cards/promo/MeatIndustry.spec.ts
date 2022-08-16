@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {EosChasmaNationalPark} from '../../../src/cards/base/EOSChasmaNationalPark';
-import {Fish} from '../../../src/cards/base/Fish';
-import {Predators} from '../../../src/cards/base/Predators';
-import {MeatIndustry} from '../../../src/cards/promo/MeatIndustry';
-import {Game} from '../../../src/Game';
+import {EosChasmaNationalPark} from '../../../src/server/cards/base/EOSChasmaNationalPark';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {Predators} from '../../../src/server/cards/base/Predators';
+import {MeatIndustry} from '../../../src/server/cards/promo/MeatIndustry';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MeatIndustry', function() {

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {SelectCard} from '../../src/inputs/SelectCard';
-import {AquiferPumping} from '../../src/cards/base/AquiferPumping';
-import {RoboticWorkforce} from '../../src/cards/base/RoboticWorkforce';
-import {IoMiningIndustries} from '../../src/cards/base/IoMiningIndustries';
+import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {AquiferPumping} from '../../src/server/cards/base/AquiferPumping';
+import {RoboticWorkforce} from '../../src/server/cards/base/RoboticWorkforce';
+import {IoMiningIndustries} from '../../src/server/cards/base/IoMiningIndustries';
 import {TestPlayer} from '../TestPlayer';
-import {ICard} from '../../src/cards/ICard';
+import {ICard} from '../../src/server/cards/ICard';
 
 describe('SelectCard', function() {
   it('Throws error when selected card was not enabled', function() {

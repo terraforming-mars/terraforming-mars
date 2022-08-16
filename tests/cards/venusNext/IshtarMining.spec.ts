@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {IshtarMining} from '../../../src/cards/venusNext/IshtarMining';
-import {Game} from '../../../src/Game';
+import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

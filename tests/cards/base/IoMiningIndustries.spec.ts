@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {IoMiningIndustries} from '../../../src/cards/base/IoMiningIndustries';
+import {IoMiningIndustries} from '../../../src/server/cards/base/IoMiningIndustries';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
+import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

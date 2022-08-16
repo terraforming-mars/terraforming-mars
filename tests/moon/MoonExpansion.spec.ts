@@ -1,21 +1,21 @@
 import {expect} from 'chai';
-import {ISpace} from '../../src/boards/ISpace';
-import {SpecialDesign} from '../../src/cards/base/SpecialDesign';
-import {EcologicalSurvey} from '../../src/cards/ares/EcologicalSurvey';
-import {GeologicalSurvey} from '../../src/cards/ares/GeologicalSurvey';
-import {LunaMiningHub} from '../../src/cards/moon/LunaMiningHub';
-import {Philares} from '../../src/cards/promo/Philares';
-import {Game} from '../../src/Game';
-import {IMoonData} from '../../src/moon/IMoonData';
-import {MoonExpansion} from '../../src/moon/MoonExpansion';
-import {MoonSpaces} from '../../src/moon/MoonSpaces';
+import {ISpace} from '../../src/server/boards/ISpace';
+import {SpecialDesign} from '../../src/server/cards/base/SpecialDesign';
+import {EcologicalSurvey} from '../../src/server/cards/ares/EcologicalSurvey';
+import {GeologicalSurvey} from '../../src/server/cards/ares/GeologicalSurvey';
+import {LunaMiningHub} from '../../src/server/cards/moon/LunaMiningHub';
+import {Philares} from '../../src/server/cards/promo/Philares';
+import {Game} from '../../src/server/Game';
+import {IMoonData} from '../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
+import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
 import {Resources} from '../../src/common/Resources';
-import {SpaceName} from '../../src/SpaceName';
+import {SpaceName} from '../../src/server/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
-import {VictoryPointsBreakdown} from '../../src/VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../../src/server/VictoryPointsBreakdown';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {FusionPower} from '../../../src/cards/base/FusionPower';
-import {Player} from '../../../src/Player';
+import {FusionPower} from '../../../src/server/cards/base/FusionPower';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

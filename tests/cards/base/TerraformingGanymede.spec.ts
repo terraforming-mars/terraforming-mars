@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {TerraformingGanymede} from '../../../src/cards/base/TerraformingGanymede';
-import {Game} from '../../../src/Game';
+import {TerraformingGanymede} from '../../../src/server/cards/base/TerraformingGanymede';
+import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
-import {Reds} from '../../../src/turmoil/parties/Reds';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {setCustomGameOptions} from '../../TestingUtils';
 
 describe('TerraformingGanymede', function() {

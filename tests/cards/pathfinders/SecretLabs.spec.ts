@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {SecretLabs} from '../../../src/cards/pathfinders/SecretLabs';
-import {Game} from '../../../src/Game';
+import {SecretLabs} from '../../../src/server/cards/pathfinders/SecretLabs';
+import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
-import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
 describe('SecretLabs', function() {

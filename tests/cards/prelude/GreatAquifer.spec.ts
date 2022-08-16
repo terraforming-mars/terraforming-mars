@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {GreatAquifer} from '../../../src/cards/prelude/GreatAquifer';
-import {Game} from '../../../src/Game';
+import {GreatAquifer} from '../../../src/server/cards/prelude/GreatAquifer';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GreatAquifer', function() {

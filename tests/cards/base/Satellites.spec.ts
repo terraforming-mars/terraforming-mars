@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Satellites} from '../../../src/cards/base/Satellites';
+import {Satellites} from '../../../src/server/cards/base/Satellites';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 
 describe('Satellites', function() {
   it('Should play', function() {

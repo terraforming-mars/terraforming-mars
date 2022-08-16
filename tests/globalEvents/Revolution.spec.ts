@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Sponsors} from '../../src/cards/base/Sponsors';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
-import {Revolution} from '../../src/turmoil/globalEvents/Revolution';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {Sponsors} from '../../src/server/cards/base/Sponsors';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
+import {Revolution} from '../../src/server/turmoil/globalEvents/Revolution';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Revolution', function() {

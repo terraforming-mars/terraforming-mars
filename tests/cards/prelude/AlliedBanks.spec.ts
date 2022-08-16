@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {AlliedBanks} from '../../../src/cards/prelude/AlliedBanks';
+import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

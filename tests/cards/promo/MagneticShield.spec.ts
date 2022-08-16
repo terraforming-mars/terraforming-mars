@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {PowerPlant} from '../../../src/cards/base/PowerPlant';
-import {MagneticShield} from '../../../src/cards/promo/MagneticShield';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
+import {MagneticShield} from '../../../src/server/cards/promo/MagneticShield';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MagneticShield', function() {

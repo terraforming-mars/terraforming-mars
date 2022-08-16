@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {CallistoPenalMines} from '../../../src/cards/base/CallistoPenalMines';
+import {CallistoPenalMines} from '../../../src/server/cards/base/CallistoPenalMines';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

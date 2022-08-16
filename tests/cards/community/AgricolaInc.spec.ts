@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Research} from '../../../src/cards/base/Research';
-import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
-import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
-import {AgricolaInc} from '../../../src/cards/community/AgricolaInc';
-import {Game} from '../../../src/Game';
+import {Research} from '../../../src/server/cards/base/Research';
+import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
+import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
+import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

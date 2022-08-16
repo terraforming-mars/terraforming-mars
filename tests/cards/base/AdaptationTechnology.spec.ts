@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {AdaptationTechnology} from '../../../src/cards/base/AdaptationTechnology';
+import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
 
 describe('AdaptationTechnology', function() {
   it('Should play', function() {

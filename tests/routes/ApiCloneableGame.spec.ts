@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {ApiCloneableGame} from '../../src/routes/ApiCloneableGame';
+import {ApiCloneableGame} from '../../src/server/routes/ApiCloneableGame';
 import {MockResponse} from './HttpMocks';
-import {Database} from '../../src/database/Database';
+import {Database} from '../../src/server/database/Database';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {GameId} from '../../src/common/Types';
 

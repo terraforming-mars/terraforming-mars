@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {DeimosDownPromo} from '../../../src/cards/promo/DeimosDownPromo';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {DeimosDownPromo} from '../../../src/server/cards/promo/DeimosDownPromo';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DeimosDownPromo', function() {

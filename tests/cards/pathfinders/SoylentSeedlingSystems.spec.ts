@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {SoylentSeedlingSystems} from '../../../src/cards/pathfinders/SoylentSeedlingSystems';
-import {Game} from '../../../src/Game';
+import {SoylentSeedlingSystems} from '../../../src/server/cards/pathfinders/SoylentSeedlingSystems';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Celestic} from '../../../src/cards/venusNext/Celestic';
-import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
+import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 

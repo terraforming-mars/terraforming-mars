@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Algae} from '../../../src/cards/base/Algae';
-import {Birds} from '../../../src/cards/base/Birds';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
-import {Game} from '../../../src/Game';
+import {Algae} from '../../../src/server/cards/base/Algae';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {Decomposers} from '../../../src/server/cards/base/Decomposers';
+import {EcologyExperts} from '../../../src/server/cards/prelude/EcologyExperts';
+import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/Player';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Decomposers', function() {

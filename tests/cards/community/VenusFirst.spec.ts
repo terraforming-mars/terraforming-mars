@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {VenusFirst} from '../../../src/cards/community/VenusFirst';
+import {VenusFirst} from '../../../src/server/cards/community/VenusFirst';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

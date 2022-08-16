@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {LobbyHalls} from '../../../src/cards/pathfinders/LobbyHalls';
+import {LobbyHalls} from '../../../src/server/cards/pathfinders/LobbyHalls';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {Game} from '../../../src/Game';
-import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {Game} from '../../../src/server/Game';
+import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tags} from '../../../src/common/cards/Tags';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {DeferredAction} from '../../../src//deferredActions/DeferredAction';
-import {SendDelegateToArea} from '../../../src//deferredActions/SendDelegateToArea';
-import {SelectPartyToSendDelegate} from '../../../src//inputs/SelectPartyToSendDelegate';
+import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
+import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
+import {SelectPartyToSendDelegate} from '../../../src/server//inputs/SelectPartyToSendDelegate';
 import {cast} from '../../TestingUtils';
 
 describe('LobbyHalls', function() {

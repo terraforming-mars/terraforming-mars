@@ -1,6 +1,6 @@
 // import {Assertion} from 'chai';
 // import {utils} from 'mocha';
-// import {Units} from '../src/Units';
+// import {Units} from '../src/server/Units';
 
 // utils.addProperty(Assertion.prototype, 'units', function() {
 //   this.assert(

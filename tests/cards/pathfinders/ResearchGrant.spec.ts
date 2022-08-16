@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {ResearchGrant} from '../../../src/cards/pathfinders/ResearchGrant';
-import {Game} from '../../../src/Game';
+import {ResearchGrant} from '../../../src/server/cards/pathfinders/ResearchGrant';
+import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 

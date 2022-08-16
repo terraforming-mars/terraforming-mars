@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
+import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

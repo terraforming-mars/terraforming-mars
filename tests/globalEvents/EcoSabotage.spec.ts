@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {EcoSabotage} from '../../src/turmoil/globalEvents/EcoSabotage';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {EcoSabotage} from '../../src/server/turmoil/globalEvents/EcoSabotage';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('EcoSabotage', function() {

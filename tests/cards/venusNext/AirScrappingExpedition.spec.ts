@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {ICard} from '../../../src/cards/ICard';
-import {AirScrappingExpedition} from '../../../src/cards/venusNext/AirScrappingExpedition';
-import {Celestic} from '../../../src/cards/venusNext/Celestic';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {ICard} from '../../../src/server/cards/ICard';
+import {AirScrappingExpedition} from '../../../src/server/cards/venusNext/AirScrappingExpedition';
+import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AirScrappingExpedition', function() {

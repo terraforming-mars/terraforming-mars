@@ -1,6 +1,6 @@
 import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
-import {Game} from '../../src/Game';
-import {LocalFilesystem} from '../../src/database/LocalFilesystem';
+import {Game} from '../../src/server/Game';
+import {LocalFilesystem} from '../../src/server/database/LocalFilesystem';
 const path = require('path');
 const fs = require('fs');
 import {tmpdir} from 'os';

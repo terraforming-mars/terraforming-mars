@@ -3,10 +3,10 @@ import {use} from 'chai';
 import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
 
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
-import {IDatabase} from '../../src/database/IDatabase';
+import {IDatabase} from '../../src/server/database/IDatabase';
 import {newTestGame} from '../TestGame';
 
 export interface ITestDatabase extends IDatabase {

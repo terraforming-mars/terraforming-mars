@@ -1,15 +1,15 @@
-import {Deck} from '../src/Deck';
-import {IProjectCard} from '../src/cards/IProjectCard';
-import {ICardFactory} from '../src/cards/ICardFactory';
+import {Deck} from '../src/server/Deck';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
+import {ICardFactory} from '../src/server/cards/ICardFactory';
 import {CardName} from '../src/common/cards/CardName';
 import {expect} from 'chai';
-import {AcquiredCompany} from '../src/cards/base/AcquiredCompany';
-import {BannedDelegate} from '../src/cards/turmoil/BannedDelegate';
-import {CallistoPenalMines} from '../src/cards/base/CallistoPenalMines';
-import {CEOsFavoriteProject} from '../src/cards/base/CEOsFavoriteProject';
-import {RadChemFactory} from '../src/cards/base/RadChemFactory';
-import {TitanFloatingLaunchPad} from '../src/cards/colonies/TitanFloatingLaunchPad';
-import {EarthEmbassy} from '../src/cards/moon/EarthEmbassy';
+import {AcquiredCompany} from '../src/server/cards/base/AcquiredCompany';
+import {BannedDelegate} from '../src/server/cards/turmoil/BannedDelegate';
+import {CallistoPenalMines} from '../src/server/cards/base/CallistoPenalMines';
+import {CEOsFavoriteProject} from '../src/server/cards/base/CEOsFavoriteProject';
+import {RadChemFactory} from '../src/server/cards/base/RadChemFactory';
+import {TitanFloatingLaunchPad} from '../src/server/cards/colonies/TitanFloatingLaunchPad';
+import {EarthEmbassy} from '../src/server/cards/moon/EarthEmbassy';
 
 describe('Deck', function() {
   const cards: Array<ICardFactory<IProjectCard>> = [

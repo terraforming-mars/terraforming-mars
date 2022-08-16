@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {GeologicalExpedition} from '../../../src/cards/pathfinders/GeologicalExpedition';
-import {Game} from '../../../src/Game';
+import {GeologicalExpedition} from '../../../src/server/cards/pathfinders/GeologicalExpedition';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {ISpace} from '../../../src/boards/ISpace';
+import {ISpace} from '../../../src/server/boards/ISpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
 import {Units} from '../../../src/common/Units';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SpaceName} from '../../../src/SpaceName';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 

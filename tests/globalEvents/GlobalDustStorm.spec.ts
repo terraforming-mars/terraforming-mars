@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {StripMine} from '../../src/cards/base/StripMine';
-import {Game} from '../../src/Game';
+import {StripMine} from '../../src/server/cards/base/StripMine';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {GlobalDustStorm} from '../../src/turmoil/globalEvents/GlobalDustStorm';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {GlobalDustStorm} from '../../src/server/turmoil/globalEvents/GlobalDustStorm';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('GlobalDustStorm', function() {

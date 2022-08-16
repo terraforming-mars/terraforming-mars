@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Fish} from '../../../src/cards/base/Fish';
-import {NitriteReducingBacteria} from '../../../src/cards/base/NitriteReducingBacteria';
-import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
-import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
+import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
+import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 

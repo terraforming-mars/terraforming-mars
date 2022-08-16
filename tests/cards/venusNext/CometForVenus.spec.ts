@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
-import {CometForVenus} from '../../../src/cards/venusNext/CometForVenus';
-import {Game} from '../../../src/Game';
+import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
+import {CometForVenus} from '../../../src/server/cards/venusNext/CometForVenus';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('CometForVenus', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MediaArchives} from '../../../src/cards/base/MediaArchives';
-import {Virus} from '../../../src/cards/base/Virus';
-import {Game} from '../../../src/Game';
+import {MediaArchives} from '../../../src/server/cards/base/MediaArchives';
+import {Virus} from '../../../src/server/cards/base/Virus';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MediaArchives', function() {

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Sponsors} from '../../src/cards/base/Sponsors';
-import {Game} from '../../src/Game';
+import {Sponsors} from '../../src/server/cards/base/Sponsors';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {HomeworldSupport} from '../../src/turmoil/globalEvents/HomeworldSupport';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {HomeworldSupport} from '../../src/server/turmoil/globalEvents/HomeworldSupport';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('HomeworldSupport', function() {

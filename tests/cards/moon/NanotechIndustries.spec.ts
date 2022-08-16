@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {NanotechIndustries} from '../../../src/cards/moon/NanotechIndustries';
+import {NanotechIndustries} from '../../../src/server/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
-import {PhysicsComplex} from '../../../src/cards/base/PhysicsComplex';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {OlympusConference} from '../../../src/cards/base/OlympusConference';
-import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArkship';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
+import {PrideoftheEarthArkship} from '../../../src/server/cards/moon/PrideoftheEarthArkship';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

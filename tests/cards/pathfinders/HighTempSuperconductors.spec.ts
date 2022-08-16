@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {HighTempSuperconductors} from '../../../src/cards/pathfinders/HighTempSuperconductors';
-import {Thorgate} from '../../../src/cards/corporation/Thorgate';
-import {Game} from '../../../src/Game';
+import {HighTempSuperconductors} from '../../../src/server/cards/pathfinders/HighTempSuperconductors';
+import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Reds} from '../../../src/turmoil/parties/Reds';
-import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
+import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {fakeCard, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {Tags} from '../../../src/common/cards/Tags';
-import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
+import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 
 describe('HighTempSuperconductors', function() {
   let card: HighTempSuperconductors;

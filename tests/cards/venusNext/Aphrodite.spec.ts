@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Aphrodite} from '../../../src/cards/venusNext/Aphrodite';
-import {Game} from '../../../src/Game';
+import {Aphrodite} from '../../../src/server/cards/venusNext/Aphrodite';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {AerosportTournament} from '../../../src/cards/venusNext/AerosportTournament';
-import {Celestic} from '../../../src/cards/venusNext/Celestic';
-import {Game} from '../../../src/Game';
+import {AerosportTournament} from '../../../src/server/cards/venusNext/AerosportTournament';
+import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerosportTournament', function() {

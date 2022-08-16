@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {AquiferPumping, OCEAN_COST} from '../../../src/cards/base/AquiferPumping';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {AquiferPumping, OCEAN_COST} from '../../../src/server/cards/base/AquiferPumping';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {maxOutOceans, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
-import {Greens} from '../../../src/turmoil/parties/Greens';
-import {Reds} from '../../../src/turmoil/parties/Reds';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
+import {Greens} from '../../../src/server/turmoil/parties/Greens';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 
 describe('AquiferPumping', function() {
   let card: AquiferPumping;

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
-import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
-import {VenusWaystation} from '../../../src/cards/venusNext/VenusWaystation';
-import {Game} from '../../../src/Game';
+import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
+import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
+import {VenusWaystation} from '../../../src/server/cards/venusNext/VenusWaystation';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusWaystation', function() {

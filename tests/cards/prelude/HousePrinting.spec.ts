@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {HousePrinting} from '../../../src/cards/prelude/HousePrinting';
+import {HousePrinting} from '../../../src/server/cards/prelude/HousePrinting';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

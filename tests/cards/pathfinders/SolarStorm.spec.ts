@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 
-import {SolarStorm} from '../../../src/cards/pathfinders/SolarStorm';
+import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Cryptocurrency} from '../../../src/cards/pathfinders/Cryptocurrency';
-import {CommunicationCenter} from '../../../src/cards/pathfinders/CommunicationCenter';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
+import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('SolarStorm', function() {
   let card: SolarStorm;

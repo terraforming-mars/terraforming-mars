@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
+import {AdvancedEcosystems} from '../../../src/server/cards/base/AdvancedEcosystems';
 import {TestPlayer} from '../../TestPlayer';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {TundraFarming} from '../../../src/cards/base/TundraFarming';
-import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
-import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {TundraFarming} from '../../../src/server/cards/base/TundraFarming';
+import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
+import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 
 describe('AdvancedEcosystems', function() {
   let card: AdvancedEcosystems;

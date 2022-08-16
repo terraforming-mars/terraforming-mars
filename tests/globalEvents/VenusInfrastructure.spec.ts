@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {CorroderSuits} from '../../src/cards/venusNext/CorroderSuits';
-import {Game} from '../../src/Game';
+import {CorroderSuits} from '../../src/server/cards/venusNext/CorroderSuits';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {VenusInfrastructure} from '../../src/turmoil/globalEvents/VenusInfrastructure';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {VenusInfrastructure} from '../../src/server/turmoil/globalEvents/VenusInfrastructure';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('VenusInfrastructure', function() {

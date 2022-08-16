@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
-import {PathfindersExpansion} from '../../src/pathfinders/PathfindersExpansion';
+import {PathfindersExpansion} from '../../src/server/pathfinders/PathfindersExpansion';
 import {Tags} from '../../src/common/cards/Tags';
 import {fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
-import {Game} from '../../src/Game';
-import {PathfindersData} from '../../src/pathfinders/PathfindersData';
+import {Game} from '../../src/server/Game';
+import {PathfindersData} from '../../src/server/pathfinders/PathfindersData';
 import {CardName} from '../../src/common/cards/CardName';
 
 describe('PathfindersExpansion', function() {

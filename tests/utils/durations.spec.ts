@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {durationToMilliseconds} from '../../src/utils/durations';
+import {durationToMilliseconds} from '../../src/server/utils/durations';
 
 describe('durations', () => {
   it('sanity', () => {

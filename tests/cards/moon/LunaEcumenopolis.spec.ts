@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LunaEcumenopolis} from '../../../src/cards/moon/LunaEcumenopolis';
+import {LunaEcumenopolis} from '../../../src/server/cards/moon/LunaEcumenopolis';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-// import {Phase} from '../../../src/Phase';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+// import {Phase} from '../../../src/server/Phase';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

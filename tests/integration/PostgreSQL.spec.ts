@@ -1,14 +1,14 @@
 import * as dotenv from 'dotenv';
 import {expect} from 'chai';
 import {ITestDatabase, describeDatabaseSuite} from '../database/databaseSuite';
-import {Game} from '../../src/Game';
-import {PostgreSQL} from '../../src/database/PostgreSQL';
+import {Game} from '../../src/server/Game';
+import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
-import {SelectOption} from '../../src/inputs/SelectOption';
+import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
 import {runAllActions, setCustomGameOptions} from '../TestingUtils';
-import {Player} from '../../src/Player';
-import {GameLoader} from '../../src/database/GameLoader';
+import {Player} from '../../src/server/Player';
+import {GameLoader} from '../../src/server/database/GameLoader';
 
 dotenv.config({path: 'tests/integration/.env', debug: true});
 

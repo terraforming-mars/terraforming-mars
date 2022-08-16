@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../src/common/constants';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
-import {MagneticFieldStimulationDelays} from '../../src/turmoil/globalEvents/MagneticFieldStimulationDelays';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
+import {MagneticFieldStimulationDelays} from '../../src/server/turmoil/globalEvents/MagneticFieldStimulationDelays';
 import {TestPlayer} from '../TestPlayer';
 
 describe('MagneticFieldStimulationDelays', function() {

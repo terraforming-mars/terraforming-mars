@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Player} from '../../src/Player';
+import {Player} from '../../src/server/Player';
 import {PartyName} from '../../src/common/turmoil/PartyName';
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
-import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
+import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
 import {AgendaStyle} from '../../src/common/turmoil/Types';
-import {OrOptions} from '../../src/inputs/OrOptions';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 describe('PoliticalAgendas', function() {
   let player1: Player;

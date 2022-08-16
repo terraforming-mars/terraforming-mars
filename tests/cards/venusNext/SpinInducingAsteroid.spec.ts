@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
-import {SpinInducingAsteroid} from '../../../src/cards/venusNext/SpinInducingAsteroid';
-import {Game} from '../../../src/Game';
+import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
+import {SpinInducingAsteroid} from '../../../src/server/cards/venusNext/SpinInducingAsteroid';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SpinInducingAsteroid', function() {

@@ -1,11 +1,11 @@
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {LTFPrivileges} from '../../../src/cards/moon/LTFPrivileges';
+import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {AristarchusRoadNetwork} from '../../../src/cards/moon/AristarchusRoadNetwork';
+import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

@@ -1,10 +1,10 @@
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {Ants} from '../../../src/cards/base/Ants';
-import {MedicalLab} from '../../../src/cards/base/MedicalLab';
-import {Research} from '../../../src/cards/base/Research';
-import {ValleyTrust} from '../../../src/cards/prelude/ValleyTrust';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
+import {Research} from '../../../src/server/cards/base/Research';
+import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 import {getTestPlayer, newTestGame} from '../../TestGame';

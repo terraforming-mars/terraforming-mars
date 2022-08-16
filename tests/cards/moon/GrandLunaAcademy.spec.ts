@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {GrandLunaAcademy} from '../../../src/cards/moon/GrandLunaAcademy';
+import {GrandLunaAcademy} from '../../../src/server/cards/moon/GrandLunaAcademy';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

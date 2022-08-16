@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {ExtremeColdFungus} from '../../../src/cards/base/ExtremeColdFungus';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {ExtremeColdFungus} from '../../../src/server/cards/base/ExtremeColdFungus';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ExtremeColdFungus', () => {

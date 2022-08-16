@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {GameLoader} from '../../src/database/GameLoader';
-import {Player} from '../../src/Player';
-import {SerializedGame} from '../../src/SerializedGame';
+import {Game} from '../../src/server/Game';
+import {GameLoader} from '../../src/server/database/GameLoader';
+import {Player} from '../../src/server/Player';
+import {SerializedGame} from '../../src/server/SerializedGame';
 
 import {TestPlayer} from '../TestPlayer';
 import {Color} from '../../src/common/Color';
-import {GameIdLedger} from '../../src/database/IDatabase';
+import {GameIdLedger} from '../../src/server/database/IDatabase';
 import {GameId, PlayerId} from '../../src/common/Types';
 import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../utils/setup';
 import {sleep} from '../TestingUtils';

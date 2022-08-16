@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {TradeAdvance} from '../../../src/cards/community/TradeAdvance';
+import {TradeAdvance} from '../../../src/server/cards/community/TradeAdvance';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

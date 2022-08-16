@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {ElectroCatapult} from '../../../src/cards/base/ElectroCatapult';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {ElectroCatapult} from '../../../src/server/cards/base/ElectroCatapult';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

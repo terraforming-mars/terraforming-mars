@@ -1,7 +1,7 @@
-import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {expect} from 'chai';
-import {OriginalBoard} from '../../src/boards/OriginalBoard';
-import {SeededRandom} from '../../src/Random';
+import {OriginalBoard} from '../../src/server/boards/OriginalBoard';
+import {SeededRandom} from '../../src/server/Random';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 
 describe('OriginalBoard', function() {

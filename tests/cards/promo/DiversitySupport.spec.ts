@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Fish} from '../../../src/cards/base/Fish';
-import {DiversitySupport} from '../../../src/cards/promo/DiversitySupport';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Fish} from '../../../src/server/cards/base/Fish';
+import {DiversitySupport} from '../../../src/server/cards/promo/DiversitySupport';
+import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DiversitySupport', function() {

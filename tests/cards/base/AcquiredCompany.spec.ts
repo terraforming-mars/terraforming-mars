@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {AcquiredCompany} from '../../../src/cards/base/AcquiredCompany';
+import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
-import {ImpactorSwarm} from '../../../src/cards/colonies/ImpactorSwarm';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {ImpactorSwarm} from '../../../src/server/cards/colonies/ImpactorSwarm';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImpactorSwarm', function() {

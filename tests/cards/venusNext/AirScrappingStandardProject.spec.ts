@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {AirScrappingStandardProject} from '../../../src/cards/venusNext/AirScrappingStandardProject';
+import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {Reds} from '../../../src/turmoil/parties/Reds';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {Phase} from '../../../src/common/Phase';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 

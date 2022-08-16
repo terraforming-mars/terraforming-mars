@@ -1,6 +1,6 @@
-import {IGameLoader} from '../../src/database/IGameLoader';
-import {GameIdLedger} from '../../src/database/IDatabase';
-import {Game} from '../../src/Game';
+import {IGameLoader} from '../../src/server/database/IGameLoader';
+import {GameIdLedger} from '../../src/server/database/IDatabase';
+import {Game} from '../../src/server/Game';
 import {GameId, isGameId, PlayerId, SpectatorId} from '../../src/common/Types';
 
 export class FakeGameLoader implements IGameLoader {

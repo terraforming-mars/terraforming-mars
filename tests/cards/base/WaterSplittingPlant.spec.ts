@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {WaterSplittingPlant} from '../../../src/server/cards/base/WaterSplittingPlant';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 

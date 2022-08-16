@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {TopsoilContract} from '../../../src/cards/promo/TopsoilContract';
-import {Player} from '../../../src/Player';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Game} from '../../../src/Game';
-import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmoniaAsteroid';
+import {TopsoilContract} from '../../../src/server/cards/promo/TopsoilContract';
+import {Player} from '../../../src/server/Player';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Game} from '../../../src/server/Game';
+import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TopsoilContract', function() {

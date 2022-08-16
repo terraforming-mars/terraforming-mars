@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {QuantumCommunications} from '../../../src/cards/colonies/QuantumCommunications';
-import {Luna} from '../../../src/colonies/Luna';
-import {Triton} from '../../../src/colonies/Triton';
-import {Game} from '../../../src/Game';
+import {QuantumCommunications} from '../../../src/server/cards/colonies/QuantumCommunications';
+import {Luna} from '../../../src/server/colonies/Luna';
+import {Triton} from '../../../src/server/colonies/Triton';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

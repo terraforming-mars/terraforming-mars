@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PowerGeneration} from '../../../src/cards/prelude/PowerGeneration';
+import {PowerGeneration} from '../../../src/server/cards/prelude/PowerGeneration';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Aurorai} from '../../../src/cards/pathfinders/Aurorai';
-import {Game} from '../../../src/Game';
+import {Aurorai} from '../../../src/server/cards/pathfinders/Aurorai';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
-import {AsteroidStandardProject} from '../../../src/cards/base/standardProjects/AsteroidStandardProject';
-import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
+import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
+import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
 
 describe('Aurorai', function() {

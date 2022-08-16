@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {BigAsteroid} from '../../../src/cards/base/BigAsteroid';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {IndustrialMicrobes} from '../../../src/cards/base/IndustrialMicrobes';
-import {Game} from '../../../src/Game';
+import {IndustrialMicrobes} from '../../../src/server/cards/base/IndustrialMicrobes';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

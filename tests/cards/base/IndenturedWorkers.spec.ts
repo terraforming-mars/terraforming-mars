@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
-import {MicroMills} from '../../../src/cards/base/MicroMills';
-import {Game} from '../../../src/Game';
+import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('IndenturedWorkers', function() {

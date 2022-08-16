@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {CometAiming} from '../../../src/cards/promo/CometAiming';
-import {RotatorImpacts} from '../../../src/cards/venusNext/RotatorImpacts';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
+import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 

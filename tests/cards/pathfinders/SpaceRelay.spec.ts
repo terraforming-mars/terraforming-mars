@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {SpaceRelay} from '../../../src/cards/pathfinders/SpaceRelay';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
+import {SpaceRelay} from '../../../src/server/cards/pathfinders/SpaceRelay';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SpaceRelay', function() {

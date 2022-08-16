@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {FileAPI, ServeAsset} from '../../src/routes/ServeAsset';
+import {FileAPI, ServeAsset} from '../../src/server/routes/ServeAsset';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 class FileApiMock extends FileAPI {

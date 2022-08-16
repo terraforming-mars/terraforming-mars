@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {DustSeals} from '../../../src/cards/base/DustSeals';
-import {Game} from '../../../src/Game';
+import {DustSeals} from '../../../src/server/cards/base/DustSeals';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
 

@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {HabitatMarte} from '../../../src/cards/pathfinders/HabitatMarte';
-import {Game} from '../../../src/Game';
+import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
-import {ValleyTrust} from '../../../src/cards/prelude/ValleyTrust';
-import {OlympusConference} from '../../../src/cards/base/OlympusConference';
-import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColonyShip';
+import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
+import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
+import {InterstellarColonyShip} from '../../../src/server/cards/base/InterstellarColonyShip';
 
 describe('HabitatMarte', () => {
   let card: HabitatMarte;

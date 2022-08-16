@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SolarReflectors} from '../../../src/cards/colonies/SolarReflectors';
+import {SolarReflectors} from '../../../src/server/cards/colonies/SolarReflectors';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

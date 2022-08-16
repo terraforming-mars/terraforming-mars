@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {ProductiveOutpost} from '../../../src/cards/colonies/ProductiveOutpost';
-import {Luna} from '../../../src/colonies/Luna';
-import {Triton} from '../../../src/colonies/Triton';
-import {Game} from '../../../src/Game';
+import {ProductiveOutpost} from '../../../src/server/cards/colonies/ProductiveOutpost';
+import {Luna} from '../../../src/server/colonies/Luna';
+import {Triton} from '../../../src/server/colonies/Triton';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 

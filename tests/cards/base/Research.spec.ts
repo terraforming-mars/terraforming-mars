@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Research} from '../../../src/cards/base/Research';
-import {Game} from '../../../src/Game';
+import {Research} from '../../../src/server/cards/base/Research';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Research', function() {

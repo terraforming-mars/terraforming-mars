@@ -1,14 +1,14 @@
 import {expect} from 'chai';
-import {Ambient} from '../../../src/cards/pathfinders/Ambient';
-import {Game} from '../../../src/Game';
+import {Ambient} from '../../../src/server/cards/pathfinders/Ambient';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('Ambient', function() {
   let card: Ambient;

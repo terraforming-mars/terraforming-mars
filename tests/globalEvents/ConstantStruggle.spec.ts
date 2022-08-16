@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {ConstantStruggle} from '../../src/turmoil/globalEvents/ConstantStruggle';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
+import {ConstantStruggle} from '../../src/server/turmoil/globalEvents/ConstantStruggle';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
 
 describe('ConstantStruggle', function() {

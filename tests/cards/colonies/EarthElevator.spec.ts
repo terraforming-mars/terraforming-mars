@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {EarthElevator} from '../../../src/cards/colonies/EarthElevator';
+import {EarthElevator} from '../../../src/server/cards/colonies/EarthElevator';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

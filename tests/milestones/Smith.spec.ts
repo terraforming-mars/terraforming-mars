@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Resources} from '../../src/common/Resources';
-import {Smith} from '../../src/milestones/Smith';
-import {Player} from '../../src/Player';
+import {Smith} from '../../src/server/milestones/Smith';
+import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Smith', () => {

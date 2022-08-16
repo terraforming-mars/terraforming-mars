@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {ArchaeBacteria} from '../../../src/cards/base/ArchaeBacteria';
+import {ArchaeBacteria} from '../../../src/server/cards/base/ArchaeBacteria';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 
 describe('ArchaeBacteria', function() {

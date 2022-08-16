@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Research} from '../../../src/cards/base/Research';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
-import {Game} from '../../../src/Game';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {Research} from '../../../src/server/cards/base/Research';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Extremophiles', function() {

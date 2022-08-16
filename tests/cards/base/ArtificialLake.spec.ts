@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {ArtificialLake} from '../../../src/cards/base/ArtificialLake';
+import {ArtificialLake} from '../../../src/server/cards/base/ArtificialLake';
 import * as constants from '../../../src/common/constants';
-import {Game} from '../../../src/Game';
-import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Game} from '../../../src/server/Game';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';

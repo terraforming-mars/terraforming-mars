@@ -1,13 +1,13 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats';
+import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {TheWomb} from '../../../src/cards/moon/TheWomb';
+import {TheWomb} from '../../../src/server/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
-import {MoonColonyStandardProject} from '../../../src/cards/moon/MoonColonyStandardProject';
+import {MoonColonyStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

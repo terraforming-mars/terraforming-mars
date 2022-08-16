@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Harvest} from '../../../src/cards/promo/Harvest';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Harvest} from '../../../src/server/cards/promo/Harvest';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Harvest', function() {

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Cartel} from '../../../src/cards/base/Cartel';
-import {ImportedHydrogen} from '../../../src/cards/base/ImportedHydrogen';
-import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColonyShip';
-import {LunarBeam} from '../../../src/cards/base/LunarBeam';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Cartel} from '../../../src/server/cards/base/Cartel';
+import {ImportedHydrogen} from '../../../src/server/cards/base/ImportedHydrogen';
+import {InterstellarColonyShip} from '../../../src/server/cards/base/InterstellarColonyShip';
+import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

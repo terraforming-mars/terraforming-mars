@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {PrefabricationofHumanHabitats} from '../../../src/cards/pathfinders/PrefabricationofHumanHabitats';
-import {Game} from '../../../src/Game';
+import {PrefabricationofHumanHabitats} from '../../../src/server/cards/pathfinders/PrefabricationofHumanHabitats';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {ImmigrantCity} from '../../../src/cards/base/ImmigrantCity';
-import {CityStandardProject} from '../../../src/cards/base/standardProjects/CityStandardProject';
+import {ImmigrantCity} from '../../../src/server/cards/base/ImmigrantCity';
+import {CityStandardProject} from '../../../src/server/cards/base/standardProjects/CityStandardProject';
 
 describe('PrefabricationofHumanHabitats', function() {
   let card: PrefabricationofHumanHabitats;

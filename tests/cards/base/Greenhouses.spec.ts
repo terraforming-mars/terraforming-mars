@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Greenhouses} from '../../../src/cards/base/Greenhouses';
-import {Game} from '../../../src/Game';
+import {Greenhouses} from '../../../src/server/cards/base/Greenhouses';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Greenhouses', function() {

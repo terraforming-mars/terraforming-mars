@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {OreProcessor} from '../../../src/cards/base/OreProcessor';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {OreProcessor} from '../../../src/server/cards/base/OreProcessor';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('OreProcessor', function() {

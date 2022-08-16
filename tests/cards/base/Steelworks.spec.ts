@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Steelworks} from '../../../src/cards/base/Steelworks';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Steelworks} from '../../../src/server/cards/base/Steelworks';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Steelworks', function() {

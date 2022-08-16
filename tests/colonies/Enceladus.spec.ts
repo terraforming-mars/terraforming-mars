@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {RegolithEaters} from '../../src/cards/base/RegolithEaters';
-import {Tardigrades} from '../../src/cards/base/Tardigrades';
-import {Enceladus} from '../../src/colonies/Enceladus';
-import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
-import {Game} from '../../src/Game';
-import {Player} from '../../src/Player';
+import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
+import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
+import {Enceladus} from '../../src/server/colonies/Enceladus';
+import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
+import {Game} from '../../src/server/Game';
+import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 

@@ -1,13 +1,13 @@
-import {SelectCard} from '../../../src/inputs/SelectCard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {ReturntoAbandonedTechnology} from '../../../src/cards/pathfinders/ReturntoAbandonedTechnology';
-import {Game} from '../../../src/Game';
+import {ReturntoAbandonedTechnology} from '../../../src/server/cards/pathfinders/ReturntoAbandonedTechnology';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Ants} from '../../../src/cards/base/Ants';
-import {Birds} from '../../../src/cards/base/Birds';
-import {Capital} from '../../../src/cards/base/Capital';
-import {Decomposers} from '../../../src/cards/base/Decomposers';
-import {EarthOffice} from '../../../src/cards/base/EarthOffice';
+import {Ants} from '../../../src/server/cards/base/Ants';
+import {Birds} from '../../../src/server/cards/base/Birds';
+import {Capital} from '../../../src/server/cards/base/Capital';
+import {Decomposers} from '../../../src/server/cards/base/Decomposers';
+import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 
 describe('ReturntoAbandonedTechnology', function() {
   let card: ReturntoAbandonedTechnology;

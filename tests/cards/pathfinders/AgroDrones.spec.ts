@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {AgroDrones} from '../../../src/cards/pathfinders/AgroDrones';
-import {Game} from '../../../src/Game';
+import {AgroDrones} from '../../../src/server/cards/pathfinders/AgroDrones';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AgroDrones', function() {

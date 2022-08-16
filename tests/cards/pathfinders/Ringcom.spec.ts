@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Ringcom} from '../../../src/cards/pathfinders/Ringcom';
-import {Game} from '../../../src/Game';
+import {Ringcom} from '../../../src/server/cards/pathfinders/Ringcom';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';

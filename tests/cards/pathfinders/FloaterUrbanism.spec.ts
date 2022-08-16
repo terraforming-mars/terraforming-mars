@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {FloaterUrbanism} from '../../../src/cards/pathfinders/FloaterUrbanism';
-import {Game} from '../../../src/Game';
+import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
+import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
+import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 
 describe('FloaterUrbanism', function() {
   let card: FloaterUrbanism;

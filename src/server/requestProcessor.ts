@@ -1,25 +1,25 @@
 import * as http from 'http';
 
-import {ApiCloneableGame} from '../routes/ApiCloneableGame';
-import {ApiGameLogs} from '../routes/ApiGameLogs';
-import {ApiGames} from '../routes/ApiGames';
-import {ApiGame} from '../routes/ApiGame';
-import {ApiGameHistory} from '../routes/ApiGameHistory';
-import {ApiPlayer} from '../routes/ApiPlayer';
-import {ApiStats} from '../routes/ApiStats';
-import {ApiMetrics} from '../routes/ApiMetrics';
-import {ApiSpectator} from '../routes/ApiSpectator';
-import {ApiWaitingFor} from '../routes/ApiWaitingFor';
-import {GameHandler} from '../routes/Game';
-import {GameLoader} from '../database/GameLoader';
-import {GamesOverview} from '../routes/GamesOverview';
-import {IHandler} from '../routes/IHandler';
-import {Load} from '../routes/Load';
-import {LoadGame} from '../routes/LoadGame';
-import {Route} from '../routes/Route';
-import {PlayerInput} from '../routes/PlayerInput';
-import {ServeApp} from '../routes/ServeApp';
-import {ServeAsset} from '../routes/ServeAsset';
+import {ApiCloneableGame} from './routes/ApiCloneableGame';
+import {ApiGameLogs} from './routes/ApiGameLogs';
+import {ApiGames} from './routes/ApiGames';
+import {ApiGame} from './routes/ApiGame';
+import {ApiGameHistory} from './routes/ApiGameHistory';
+import {ApiPlayer} from './routes/ApiPlayer';
+import {ApiStats} from './routes/ApiStats';
+import {ApiMetrics} from './routes/ApiMetrics';
+import {ApiSpectator} from './routes/ApiSpectator';
+import {ApiWaitingFor} from './routes/ApiWaitingFor';
+import {GameHandler} from './routes/Game';
+import {GameLoader} from './database/GameLoader';
+import {GamesOverview} from './routes/GamesOverview';
+import {IHandler} from './routes/IHandler';
+import {Load} from './routes/Load';
+import {LoadGame} from './routes/LoadGame';
+import {Route} from './routes/Route';
+import {PlayerInput} from './routes/PlayerInput';
+import {ServeApp} from './routes/ServeApp';
+import {ServeAsset} from './routes/ServeAsset';
 
 const handlers: Map<string, IHandler> = new Map(
   [

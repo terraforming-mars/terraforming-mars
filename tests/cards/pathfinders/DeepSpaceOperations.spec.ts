@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {DeepSpaceOperations} from '../../../src/cards/pathfinders/DeepSpaceOperations';
-import {Game} from '../../../src/Game';
+import {DeepSpaceOperations} from '../../../src/server/cards/pathfinders/DeepSpaceOperations';
+import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';

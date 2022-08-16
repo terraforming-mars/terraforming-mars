@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Pristar} from '../../../src/cards/turmoil/Pristar';
-import {Game} from '../../../src/Game';
+import {Pristar} from '../../../src/server/cards/turmoil/Pristar';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Pristar', function() {

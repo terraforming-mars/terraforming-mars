@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {CrewTraining} from '../../../src/cards/pathfinders/CrewTraining';
-import {Game} from '../../../src/Game';
+import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
+import {Game} from '../../../src/server/Game';
 import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
-import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 
 describe('CrewTraining', function() {

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
+import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
-import {RedInfluence} from '../../src/turmoil/globalEvents/RedInfluence';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {RedInfluence} from '../../src/server/turmoil/globalEvents/RedInfluence';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('RedInfluence', function() {

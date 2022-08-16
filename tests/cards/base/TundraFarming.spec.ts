@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {TundraFarming} from '../../../src/cards/base/TundraFarming';
-import {Game} from '../../../src/Game';
+import {TundraFarming} from '../../../src/server/cards/base/TundraFarming';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

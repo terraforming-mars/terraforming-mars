@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {BufferGasStandardProject} from '../../../src/cards/prelude/BufferGasStandardProject';
+import {BufferGasStandardProject} from '../../../src/server/cards/prelude/BufferGasStandardProject';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/Game';
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
-import {Reds} from '../../../src/turmoil/parties/Reds';
+import {Game} from '../../../src/server/Game';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {Phase} from '../../../src/common/Phase';
 
 describe('BufferGasStandardProject', function() {

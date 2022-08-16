@@ -1,21 +1,21 @@
 import {expect} from 'chai';
-import {Game} from '../../src/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/GameOptions';
-import {ArabiaTerraBoard} from '../../src/boards/ArabiaTerraBoard';
-import {Player} from '../../src/Player';
+import {Game} from '../../src/server/Game';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
+import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
+import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
-import {SeededRandom} from '../../src/Random';
+import {SeededRandom} from '../../src/server/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {setCustomGameOptions, runAllActions, cast} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
-import {ProcessorFactory} from '../../src/cards/moon/ProcessorFactory';
-import {SearchForLife} from '../../src/cards/base/SearchForLife';
-import {Decomposers} from '../../src/cards/base/Decomposers';
+import {ProcessorFactory} from '../../src/server/cards/moon/ProcessorFactory';
+import {SearchForLife} from '../../src/server/cards/base/SearchForLife';
+import {Decomposers} from '../../src/server/cards/base/Decomposers';
 import {Resources} from '../../src/common/Resources';
-import {LandClaim} from '../../src/cards/base/LandClaim';
-import {SelectSpace} from '../../src/inputs/SelectSpace';
+import {LandClaim} from '../../src/server/cards/base/LandClaim';
+import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('ArabiaTerraBoard', function() {
   let board: ArabiaTerraBoard;

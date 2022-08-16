@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {UnitedNationsMarsInitiative} from '../../../src/cards/corporation/UnitedNationsMarsInitiative';
-import {Game} from '../../../src/Game';
+import {UnitedNationsMarsInitiative} from '../../../src/server/cards/corporation/UnitedNationsMarsInitiative';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Helion} from '../../../src/cards/corporation/Helion';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
+import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
 import {HowToPay} from '../../../src/common/inputs/HowToPay';
 
 describe('UnitedNationsMarsInitiative', function() {

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Mohole} from '../../../src/cards/prelude/Mohole';
+import {Mohole} from '../../../src/server/cards/prelude/Mohole';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

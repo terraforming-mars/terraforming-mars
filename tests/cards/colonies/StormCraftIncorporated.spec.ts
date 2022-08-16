@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
+import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 import * as constants from '../../../src/common/constants';
-import {Game} from '../../../src/Game';
-import {SelectAmount} from '../../../src/inputs/SelectAmount';
+import {Game} from '../../../src/server/Game';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('StormCraftIncorporated', function() {

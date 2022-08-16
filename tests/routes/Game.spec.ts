@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {GameHandler} from '../../src/routes/Game';
+import {GameHandler} from '../../src/server/routes/Game';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {RandomBoardOption} from '../../src/common/boards/RandomBoardOption';
 

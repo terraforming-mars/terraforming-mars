@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {VenusFirst} from '../../../src/cards/pathfinders/VenusFirst';
+import {VenusFirst} from '../../../src/server/cards/pathfinders/VenusFirst';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {Player} from '../../../src/server/Player';
 
 describe('VenusFirst', function() {
   let card: VenusFirst;

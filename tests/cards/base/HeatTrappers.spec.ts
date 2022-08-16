@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
-import {Game} from '../../../src/Game';
-import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
+import {Game} from '../../../src/server/Game';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

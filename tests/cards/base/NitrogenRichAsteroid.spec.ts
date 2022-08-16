@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Bushes} from '../../../src/cards/base/Bushes';
-import {NitrogenRichAsteroid} from '../../../src/cards/base/NitrogenRichAsteroid';
-import {Game} from '../../../src/Game';
+import {Bushes} from '../../../src/server/cards/base/Bushes';
+import {NitrogenRichAsteroid} from '../../../src/server/cards/base/NitrogenRichAsteroid';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

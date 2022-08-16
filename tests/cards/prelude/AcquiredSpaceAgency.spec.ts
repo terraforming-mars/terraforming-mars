@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {AcquiredSpaceAgency} from '../../../src/cards/prelude/AcquiredSpaceAgency';
+import {AcquiredSpaceAgency} from '../../../src/server/cards/prelude/AcquiredSpaceAgency';
 import {Tags} from '../../../src/common/cards/Tags';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AcquiredSpaceAgency', function() {

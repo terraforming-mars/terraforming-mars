@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/Game';
+import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {HE3Refinery} from '../../../src/cards/moon/HE3Refinery';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
+import {HE3Refinery} from '../../../src/server/cards/moon/HE3Refinery';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

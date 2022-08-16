@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {Windmills} from '../../../src/cards/base/Windmills';
-import {Game} from '../../../src/Game';
+import {Windmills} from '../../../src/server/cards/base/Windmills';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 

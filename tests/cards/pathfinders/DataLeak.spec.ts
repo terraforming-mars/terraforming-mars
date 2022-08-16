@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {DataLeak} from '../../../src/cards/pathfinders/DataLeak';
-import {Game} from '../../../src/Game';
+import {DataLeak} from '../../../src/server/cards/pathfinders/DataLeak';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
+import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {runAllActions} from '../../TestingUtils';
 
 describe('DataLeak', function() {

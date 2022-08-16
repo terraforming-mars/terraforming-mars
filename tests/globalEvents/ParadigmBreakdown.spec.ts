@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {Asteroid} from '../../src/cards/base/Asteroid';
-import {DustSeals} from '../../src/cards/base/DustSeals';
-import {PowerPlant} from '../../src/cards/base/PowerPlant';
-import {Game} from '../../src/Game';
-import {SelectCard} from '../../src/inputs/SelectCard';
+import {Asteroid} from '../../src/server/cards/base/Asteroid';
+import {DustSeals} from '../../src/server/cards/base/DustSeals';
+import {PowerPlant} from '../../src/server/cards/base/PowerPlant';
+import {Game} from '../../src/server/Game';
+import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Resources} from '../../src/common/Resources';
-import {ParadigmBreakdown} from '../../src/turmoil/globalEvents/ParadigmBreakdown';
-import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
+import {ParadigmBreakdown} from '../../src/server/turmoil/globalEvents/ParadigmBreakdown';
+import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
+import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 
 describe('ParadigmBreakdown', function() {

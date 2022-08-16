@@ -1,6 +1,6 @@
 
 import {expect} from 'chai';
-import {Sponsors} from '../../../src/cards/base/Sponsors';
+import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 

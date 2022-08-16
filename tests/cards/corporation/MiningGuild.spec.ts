@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {MiningGuild} from '../../../src/cards/corporation/MiningGuild';
-import {Game} from '../../../src/Game';
+import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
+import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
 import {maxOutOceans, setCustomGameOptions, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {BoardType} from '../../../src/boards/BoardType';
+import {BoardType} from '../../../src/server/boards/BoardType';
 import {TileType} from '../../../src/common/TileType';
-import {OceanCity} from '../../../src/cards/ares/OceanCity';
+import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 
 describe('MiningGuild', () => {
   let card: MiningGuild;

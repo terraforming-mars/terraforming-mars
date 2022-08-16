@@ -1,14 +1,14 @@
-import {Game} from '../../../src/Game';
-import {IMoonData} from '../../../src/moon/IMoonData';
-import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Player} from '../../../src/Player';
+import {Game} from '../../../src/server/Game';
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {Player} from '../../../src/server/Player';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {MooncrateConvoysToMars} from '../../../src/cards/moon/MooncrateConvoysToMars';
+import {MooncrateConvoysToMars} from '../../../src/server/cards/moon/MooncrateConvoysToMars';
 import {expect} from 'chai';
-import {SelectAmount} from '../../../src/inputs/SelectAmount';
-import {Reds} from '../../../src/turmoil/parties/Reds';
-import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
+import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

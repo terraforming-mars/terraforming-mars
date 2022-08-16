@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import * as constants from '../../../src/common/constants';
-import {Research} from '../../../src/cards/base/Research';
-import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {ICard} from '../../../src/cards/ICard';
-import {Atmoscoop} from '../../../src/cards/venusNext/Atmoscoop';
-import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
-import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
-import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {Research} from '../../../src/server/cards/base/Research';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {ICard} from '../../../src/server/cards/ICard';
+import {Atmoscoop} from '../../../src/server/cards/venusNext/Atmoscoop';
+import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
+import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
-import {SelectOption} from '../../../src/inputs/SelectOption';
+import {SelectOption} from '../../../src/server/inputs/SelectOption';
 
 describe('Atmoscoop', function() {
   let card: Atmoscoop;

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {FlatMarsTheory} from '../../../src/cards/pathfinders/FlatMarsTheory';
-import {Game} from '../../../src/Game';
+import {FlatMarsTheory} from '../../../src/server/cards/pathfinders/FlatMarsTheory';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 

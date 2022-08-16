@@ -250,6 +250,7 @@ export default Vue.extend({
     },
     tileView: {
       type: String as () => TileView,
+      default: 'show',
     },
   },
   components: {

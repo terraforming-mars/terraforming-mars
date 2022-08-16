@@ -1415,7 +1415,7 @@ export class Player {
     if (howToPay.data > 0) {
       const aurorai = this.getCorporation(CardName.AURORAI);
       if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
-      this.removeResourceFrom(aurorai, howToPay.seeds);
+      this.removeResourceFrom(aurorai, howToPay.data);
     }
   }
 
@@ -1761,7 +1761,7 @@ export class Player {
       0 <= howToPay[key] && howToPay[key] <= maxPayable[key]);
   }
 
-  private payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
+  public payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
     const mult: {[key in keyof HowToPay]: number} = {
       megaCredits: 1,
       steel: this.getSteelValue(),

@@ -9,6 +9,24 @@
 import Vue from 'vue';
 import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
+const css: Record<SpaceBonus, string> = {
+  [SpaceBonus.TITANIUM]: 'titanium',
+  [SpaceBonus.STEEL]: 'steel',
+  [SpaceBonus.PLANT]: 'plant',
+  [SpaceBonus.DRAW_CARD]: 'card',
+  [SpaceBonus.HEAT]: 'heat',
+  [SpaceBonus.OCEAN]: 'bonusocean',
+  [SpaceBonus.MEGACREDITS]: '', // Only used for Ares
+  [SpaceBonus.ANIMAL]: 'animal',
+  [SpaceBonus.MICROBE]: 'microbe',
+  [SpaceBonus.ENERGY]: 'energy',
+  [SpaceBonus.DATA]: 'data',
+  [SpaceBonus.SCIENCE]: 'science',
+  [SpaceBonus.ENERGY_PRODUCTION]: 'energy-production',
+  [SpaceBonus.TEMPERATURE]: 'bonustemperature',
+  [SpaceBonus.RESTRICTED]: '', // RESTRICTED is just a that a space is empty, not an actual bonus.
+};
+
 export default Vue.extend({
   name: 'bonus',
   props: {
@@ -18,34 +36,7 @@ export default Vue.extend({
   },
   methods: {
     getClass(idx: number, bonus: SpaceBonus): string {
-      let ret = 'board-space-bonus board-space-bonus--';
-      if (bonus === SpaceBonus.TITANIUM) {
-        ret += 'titanium';
-      } else if (bonus === SpaceBonus.STEEL) {
-        ret += 'steel';
-      } else if (bonus === SpaceBonus.PLANT) {
-        ret += 'plant';
-      } else if (bonus === SpaceBonus.DRAW_CARD) {
-        ret += 'card';
-      } else if (bonus === SpaceBonus.HEAT) {
-        ret += 'heat';
-      } else if (bonus === SpaceBonus.OCEAN) {
-        ret += 'bonusocean';
-      } else if (bonus === SpaceBonus.MICROBE) {
-        ret += 'microbe';
-      } else if (bonus === SpaceBonus.DATA) {
-        ret += 'data';
-      } else if (bonus === SpaceBonus.ENERGY_PRODUCTION) {
-        ret += 'energy-production';
-      } else if (bonus === SpaceBonus.SCIENCE) {
-        ret += 'science';
-      } else if (bonus === SpaceBonus.TEMPERATURE) {
-        ret += 'bonustemperature';
-      } else if (bonus === SpaceBonus.ENERGY) {
-        ret += 'energy';
-      }
-      ret += ' board-space-bonus-pos--' + idx.toString();
-      return ret;
+      return `board-space-bonus board-space-bonus--${css[bonus]} board-space-bonus-pos--${idx}`;
     },
   },
 });

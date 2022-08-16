@@ -36,7 +36,7 @@ export class SelectHowToPayDeferred extends DeferredAction {
     if (this.options.canUseSeeds && (this.player.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)?.resourceCount ?? 0) > 0) {
       return false;
     }
-    if (this.options.canUseSeeds && (this.player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS)?.resourceCount ?? 0) > 0) {
+    if (this.options.canUseData && (this.player.getCorporation(CardName.AURORAI)?.resourceCount ?? 0) > 0) {
       return false;
     }
     return true;
@@ -44,6 +44,9 @@ export class SelectHowToPayDeferred extends DeferredAction {
 
   public execute() {
     if (this.mustPayWithMegacredits()) {
+      if (this.player.megaCredits < this.amount) {
+        throw new Error(`Player does not have ${this.amount} M€`);
+      }
       this.player.deductResource(Resources.MEGACREDITS, this.amount);
       this.options.afterPay?.();
       return undefined;
@@ -60,6 +63,18 @@ export class SelectHowToPayDeferred extends DeferredAction {
       (howToPay: HowToPay) => {
         if (!this.player.canSpend(howToPay)) {
           throw new Error('You do not have that many resources to spend');
+        }
+        const amountPaid = this.player.payingAmount(howToPay, {
+          steel: this.options.canUseSteel,
+          titanium: this.options.canUseTitanium,
+          seeds: this.options.canUseSeeds,
+          floaters: false, // Used in project cards only
+          microbes: false, // Used in project cards only
+          science: false, // Used in project cards only
+          data: this.options.canUseData,
+        });
+        if (amountPaid < this.amount) {
+          throw new Error('Did not spend enough to pay for standard project');
         }
         this.player.pay(howToPay);
         this.options.afterPay?.();

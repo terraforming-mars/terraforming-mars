@@ -39,6 +39,7 @@ export class SelectHowToPayDeferred extends DeferredAction {
     if (this.options.canUseData && (this.player.getCorporation(CardName.AURORAI)?.resourceCount ?? 0) > 0) {
       return false;
     }
+
     return true;
   }
 
@@ -53,7 +54,7 @@ export class SelectHowToPayDeferred extends DeferredAction {
     }
 
     return new SelectHowToPay(
-      this.options.title || 'Select how to pay for ' + this.amount + ' MCs',
+      this.options.title || 'Select how to pay for ' + this.amount + ' M€',
       this.options.canUseSteel || false,
       this.options.canUseTitanium || false,
       this.player.canUseHeatAsMegaCredits,

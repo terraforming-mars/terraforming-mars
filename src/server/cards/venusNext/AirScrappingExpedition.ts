@@ -6,8 +6,9 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class AirScrappingExpedition extends Card {
+export class AirScrappingExpedition extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.AIR_SCRAPPING_EXPEDITION,

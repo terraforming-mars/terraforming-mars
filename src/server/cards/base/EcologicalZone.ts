@@ -9,7 +9,6 @@ import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -18,7 +17,7 @@ import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
 import {Board} from '../../boards/Board';
 
-export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
+export class EcologicalZone extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.ECOLOGICAL_ZONE,
     cost: number = 12,

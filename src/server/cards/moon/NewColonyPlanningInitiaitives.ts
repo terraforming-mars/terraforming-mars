@@ -5,8 +5,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class NewColonyPlanningInitiaitives extends Card {
+export class NewColonyPlanningInitiaitives extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,

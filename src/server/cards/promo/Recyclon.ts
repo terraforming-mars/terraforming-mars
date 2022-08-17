@@ -8,13 +8,12 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 import {digit, played} from '../Options';
 
-export class Recyclon extends Card implements ICorporationCard, IResourceCard {
+export class Recyclon extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

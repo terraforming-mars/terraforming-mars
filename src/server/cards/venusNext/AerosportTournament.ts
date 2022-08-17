@@ -7,9 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
 import {all} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
 
-export class AerosportTournament extends Card {
+export class AerosportTournament extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.AEROSPORT_TOURNAMENT,

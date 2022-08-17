@@ -5,11 +5,10 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Tardigrades extends Card implements IProjectCard, IResourceCard {
+export class Tardigrades extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

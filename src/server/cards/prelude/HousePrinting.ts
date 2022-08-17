@@ -6,8 +6,9 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
+import {IProjectCard} from '../IProjectCard';
 
-export class HousePrinting extends Card {
+export class HousePrinting extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

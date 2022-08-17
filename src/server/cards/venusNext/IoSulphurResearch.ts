@@ -5,8 +5,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {digit, played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class IoSulphurResearch extends Card {
+export class IoSulphurResearch extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.IO_SULPHUR_RESEARCH,

@@ -4,14 +4,13 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {played} from '../Options';
 
-export class VenusianAnimals extends Card implements IResourceCard {
+export class VenusianAnimals extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUSIAN_ANIMALS,

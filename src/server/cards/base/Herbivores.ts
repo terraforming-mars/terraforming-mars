@@ -8,7 +8,6 @@ import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,7 +16,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 
-export class Herbivores extends Card implements IProjectCard, IResourceCard {
+export class Herbivores extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

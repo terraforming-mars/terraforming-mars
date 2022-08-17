@@ -12,7 +12,7 @@ import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorpora
 import {Game} from './Game';
 import {HowToPay} from '../common/inputs/HowToPay';
 import {IAward} from './awards/IAward';
-import {ICard, IResourceCard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
+import {ICard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ITagCount} from '../common/cards/ITagCount';
@@ -753,8 +753,8 @@ export class Player {
     }
   }
 
-  public getCardsWithResources(resource?: CardResource): Array<ICard & IResourceCard> {
-    let result: Array<ICard & IResourceCard> = [
+  public getCardsWithResources(resource?: CardResource): Array<ICard> {
+    let result: Array<ICard> = [
       ...this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
       ...this.corporations.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
     ];

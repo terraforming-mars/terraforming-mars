@@ -1,4 +1,4 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Tags} from '../../../common/cards/Tags';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -12,7 +12,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class ForcedPrecipitation extends Card implements IActionCard, IResourceCard {
+export class ForcedPrecipitation extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.FORCED_PRECIPITATION,

@@ -2,7 +2,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../../common/cards/Tags';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
@@ -11,7 +11,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class Celestic extends Card implements IActionCard, ICorporationCard, IResourceCard {
+export class Celestic extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.CELESTIC,

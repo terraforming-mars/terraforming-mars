@@ -4,8 +4,9 @@ import {Tags} from '../../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
+import {IProjectCard} from '../IProjectCard';
 
-export class MooncrateBlockFactory extends Card {
+export class MooncrateBlockFactory extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOONCRATE_BLOCK_FACTORY,

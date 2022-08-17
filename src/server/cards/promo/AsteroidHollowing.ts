@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,7 +10,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AsteroidHollowing extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class AsteroidHollowing extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

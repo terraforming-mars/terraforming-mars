@@ -1,4 +1,4 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../../common/cards/Tags';
 import {Card} from '../Card';
@@ -12,7 +12,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class GHGProducingBacteria extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class GHGProducingBacteria extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

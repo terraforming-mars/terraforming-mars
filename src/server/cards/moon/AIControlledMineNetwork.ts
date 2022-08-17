@@ -6,8 +6,9 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class AIControlledMineNetwork extends Card {
+export class AIControlledMineNetwork extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.AI_CONTROLLED_MINE_NETWORK,

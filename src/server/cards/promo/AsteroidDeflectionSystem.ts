@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Units} from '../../../common/Units';
 import {played} from '../Options';
 
-export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

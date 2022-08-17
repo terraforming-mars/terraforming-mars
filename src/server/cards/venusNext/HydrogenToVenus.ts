@@ -7,8 +7,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class HydrogenToVenus extends Card {
+export class HydrogenToVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HYDROGEN_TO_VENUS,

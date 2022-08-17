@@ -5,8 +5,9 @@ import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class GHGImportFromVenus extends Card {
+export class GHGImportFromVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GHG_IMPORT_FROM_VENUS,

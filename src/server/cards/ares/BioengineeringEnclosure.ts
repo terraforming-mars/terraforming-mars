@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardType} from '../../../common/cards/CardType';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../../common/cards/Tags';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -11,7 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 
-export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard, IResourceCard {
+export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

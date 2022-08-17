@@ -4,8 +4,9 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class LuxuryFoods extends Card {
+export class LuxuryFoods extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUXURY_FOODS,

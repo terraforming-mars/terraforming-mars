@@ -1,4 +1,4 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Tags} from '../../../common/cards/Tags';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -10,7 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class LocalShading extends Card implements IActionCard, IResourceCard {
+export class LocalShading extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LOCAL_SHADING,

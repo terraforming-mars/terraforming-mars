@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IColony} from '../../colonies/IColony';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -15,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 
-export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResourceCard {
+export class TitanFloatingLaunchPad extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 18,

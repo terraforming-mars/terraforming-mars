@@ -6,8 +6,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class SulphurExports extends Card {
+export class SulphurExports extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SULPHUR_EXPORTS,

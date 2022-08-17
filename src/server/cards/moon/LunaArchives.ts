@@ -5,10 +5,10 @@ import {Tags} from '../../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {played} from '../Options';
 
-export class LunaArchives extends Card implements IResourceCard, IActionCard {
+export class LunaArchives extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_ARCHIVES,

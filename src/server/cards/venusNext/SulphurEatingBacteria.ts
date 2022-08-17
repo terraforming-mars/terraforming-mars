@@ -1,4 +1,4 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {PlayerInput} from '../../PlayerInput';
 import {Tags} from '../../../common/cards/Tags';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {multiplier} from '../Options';
 
-export class SulphurEatingBacteria extends Card implements IActionCard, IResourceCard {
+export class SulphurEatingBacteria extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.SULPHUR_EATING_BACTERIA,

@@ -5,8 +5,9 @@ import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class OrbitalReflectors extends Card {
+export class OrbitalReflectors extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.ORBITAL_REFLECTORS,

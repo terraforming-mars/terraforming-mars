@@ -11,10 +11,10 @@ import {Size} from '../../../common/cards/render/Size';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardResource} from '../../../common/CardResource';
-import {ICard, IResourceCard} from '../ICard';
+import {ICard} from '../ICard';
 import {Resources} from '../../../common/Resources';
 
-export class BotanicalExperience extends Card implements IProjectCard, IResourceCard {
+export class BotanicalExperience extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

@@ -8,8 +8,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class DawnCity extends Card {
+export class DawnCity extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DAWN_CITY,

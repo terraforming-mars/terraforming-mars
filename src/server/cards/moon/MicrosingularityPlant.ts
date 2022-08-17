@@ -7,8 +7,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class MicrosingularityPlant extends Card {
+export class MicrosingularityPlant extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MICROSINGULARITY_PLANT,

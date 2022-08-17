@@ -5,8 +5,9 @@ import {Tags} from '../../../common/cards/Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class DarksideMeteorBombardment extends Card {
+export class DarksideMeteorBombardment extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_METEOR_BOMBARDMENT,

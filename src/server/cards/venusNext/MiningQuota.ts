@@ -7,8 +7,9 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Units} from '../../../common/Units';
+import {IProjectCard} from '../IProjectCard';
 
-export class MiningQuota extends Card {
+export class MiningQuota extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MINING_QUOTA,

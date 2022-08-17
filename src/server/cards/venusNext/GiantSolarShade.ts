@@ -4,8 +4,9 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class GiantSolarShade extends Card {
+export class GiantSolarShade extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GIANT_SOLAR_SHADE,

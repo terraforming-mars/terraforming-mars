@@ -8,8 +8,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class Gyropolis extends Card {
+export class Gyropolis extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GYROPOLIS,

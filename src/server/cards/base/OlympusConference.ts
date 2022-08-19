@@ -7,12 +7,11 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class OlympusConference extends Card implements IProjectCard, IResourceCard {
+export class OlympusConference extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

@@ -4,8 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class UndergroundDetonators extends Card {
+export class UndergroundDetonators extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.UNDERGROUND_DETONATORS,

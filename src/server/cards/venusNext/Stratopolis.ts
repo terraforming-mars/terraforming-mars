@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Resources} from '../../../common/Resources';
-import {IActionCard, ICard, IResourceCard} from '../ICard';
+import {IActionCard, ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class Stratopolis extends Card implements IActionCard, IResourceCard {
+export class Stratopolis extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.STRATOPOLIS,

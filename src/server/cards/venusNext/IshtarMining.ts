@@ -6,8 +6,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class IshtarMining extends Card {
+export class IshtarMining extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.ISHTAR_MINING,

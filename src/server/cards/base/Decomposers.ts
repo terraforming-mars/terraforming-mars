@@ -6,13 +6,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
 
-export class Decomposers extends Card implements IProjectCard, IResourceCard {
+export class Decomposers extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

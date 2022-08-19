@@ -25,11 +25,6 @@ export function isIActionCard(object: any): object is IActionCard {
   return object !== undefined && object.canAct !== undefined && object.action !== undefined;
 }
 
-export interface IResourceCard {
-    resourceCount: number;
-    resourceType?: CardResource;
-}
-
 export namespace VictoryPoints {
   export function resource(points: number, per: number): IVictoryPoints {
     return {type: 'resource', points, per};
@@ -52,7 +47,7 @@ export interface TRSource {
     moonLogistics?: number,
   }
 
-export interface ICard extends Partial<IActionCard>, IResourceCard {
+export interface ICard extends Partial<IActionCard> {
     name: CardName;
     tags: Array<Tags>;
     play: (player: Player) => PlayerInput | undefined;
@@ -84,6 +79,8 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
     warning?: string | Message;
     productionBox?: Units;
     produce?: (player: Player) => void;
-    tr?: TRSource,
+    tr?: TRSource;
+    resourceCount: number;
+    resourceType?: CardResource;
 }
 

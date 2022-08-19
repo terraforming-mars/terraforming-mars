@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard, VictoryPoints} from '../ICard';
+import {IActionCard, VictoryPoints} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,7 +10,7 @@ import {Tags} from '../../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../../common/Resources';
 
-export class Pollinators extends Card implements IProjectCard, IResourceCard, IActionCard {
+export class Pollinators extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

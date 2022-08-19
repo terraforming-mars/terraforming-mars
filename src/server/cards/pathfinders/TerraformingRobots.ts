@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IResourceCard, VictoryPoints} from '../ICard';
+import {VictoryPoints} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,7 +10,7 @@ import {Tags} from '../../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 
-export class TerraformingRobots extends Card implements IProjectCard, IResourceCard {
+export class TerraformingRobots extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

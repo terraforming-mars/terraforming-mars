@@ -12,8 +12,9 @@ import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {AresHandler} from '../../ares/AresHandler';
 import {Board} from '../../boards/Board';
+import {IProjectCard} from '../IProjectCard';
 
-export class RedCity extends Card {
+export class RedCity extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

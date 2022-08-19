@@ -6,8 +6,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class VenusGovernor extends Card {
+export class VenusGovernor extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUS_GOVERNOR,

@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {IResourceCard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -13,7 +12,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
-export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard {
+export class SubZeroSaltFish extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 5,

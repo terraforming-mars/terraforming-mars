@@ -7,8 +7,9 @@ import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class CorroderSuits extends Card {
+export class CorroderSuits extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.CORRODER_SUITS,

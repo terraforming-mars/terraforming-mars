@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IResourceCard, VictoryPoints} from '../ICard';
+import {VictoryPoints} from '../ICard';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
@@ -11,7 +11,7 @@ import {Tags} from '../../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {SelectCard} from '../../inputs/SelectCard';
 
-export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, IResourceCard {
+export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

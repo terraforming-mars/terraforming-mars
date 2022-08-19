@@ -7,8 +7,9 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class VenusSoils extends Card {
+export class VenusSoils extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUS_SOILS,

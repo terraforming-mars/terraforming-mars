@@ -7,8 +7,9 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class LunarTradeFleet extends Card {
+export class LunarTradeFleet extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_TRADE_FLEET,

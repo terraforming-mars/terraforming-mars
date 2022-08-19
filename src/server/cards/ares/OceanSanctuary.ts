@@ -8,12 +8,12 @@ import {CardResource} from '../../../common/CardResource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
-import {IResourceCard} from '../ICard';
 import {Tags} from '../../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '../IProjectCard';
 
-export class OceanSanctuary extends Card implements IResourceCard {
+export class OceanSanctuary extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

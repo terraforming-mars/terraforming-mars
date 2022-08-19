@@ -9,13 +9,12 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {IResourceCard} from '../ICard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class Pets extends Card implements IProjectCard, IResourceCard {
+export class Pets extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

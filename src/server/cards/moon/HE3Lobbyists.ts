@@ -5,8 +5,9 @@ import {Tags} from '../../../common/cards/Tags';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class HE3Lobbyists extends Card {
+export class HE3Lobbyists extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HE3_LOBBYISTS,

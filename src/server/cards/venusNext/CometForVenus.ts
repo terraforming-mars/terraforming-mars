@@ -9,8 +9,9 @@ import {Card} from '../Card';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {all} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class CometForVenus extends Card {
+export class CometForVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.COMET_FOR_VENUS,

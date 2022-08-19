@@ -1,4 +1,4 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Tags} from '../../../common/cards/Tags';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,7 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {max} from '../Options';
 
-export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
+export class RotatorImpacts extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.ROTATOR_IMPACTS,

@@ -8,8 +8,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {Card} from '../Card';
 import {all, digit} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class SponsoredAcademies extends Card {
+export class SponsoredAcademies extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SPONSORED_ACADEMIES,

@@ -1,4 +1,4 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {PlayerInput} from '../../PlayerInput';
 import {Tags} from '../../../common/cards/Tags';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class Thermophiles extends Card implements IActionCard, IResourceCard {
+export class Thermophiles extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.THERMOPHILES,

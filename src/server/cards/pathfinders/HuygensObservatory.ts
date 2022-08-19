@@ -11,6 +11,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class HuygensObservatory extends Card implements IProjectCard {
   constructor() {
@@ -94,14 +95,14 @@ export class HuygensObservatory extends Card implements IProjectCard {
     }
   }
   public override canPlay(player: Player): boolean {
-    return player.hasAvailableColonyTileToBuildOn(true) || this.tradeableColonies(player).length > 0;
+    return ColoniesHandler.getPlayableColonies(player, true).length > 0 || this.tradeableColonies(player).length > 0;
   }
 
   public play(player: Player) {
     player.increaseTerraformRating();
     const game = player.game;
 
-    if (player.hasAvailableColonyTileToBuildOn(true)) {
+    if (ColoniesHandler.getPlayableColonies(player, true).length > 0) {
       game.defer(new BuildColony(player, true, 'Select colony for Huygens Observatory', undefined, {
         cb: () => this.tryToTrade(player),
       }));

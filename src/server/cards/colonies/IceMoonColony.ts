@@ -7,6 +7,7 @@ import {BuildColony} from '../../deferredActions/BuildColony';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class IceMoonColony extends Card implements IProjectCard {
   constructor() {
@@ -26,7 +27,7 @@ export class IceMoonColony extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.hasAvailableColonyTileToBuildOn();
+    return ColoniesHandler.getPlayableColonies(player).length > 0;
   }
 
   public play(player: Player) {

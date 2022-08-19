@@ -35,7 +35,7 @@ export class TradingColony extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, false, 'Select colony for Trading Colony'));
+    player.game.defer(new BuildColony(player, {title: 'Select colony for Trading Colony'}));
     player.colonyTradeOffset++;
     return undefined;
   }

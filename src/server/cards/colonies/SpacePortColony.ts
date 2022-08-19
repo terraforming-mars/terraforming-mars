@@ -33,7 +33,7 @@ export class SpacePortColony extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, true, 'Select colony for Space Port Colony'));
+    player.game.defer(new BuildColony(player, {allowDuplicate: true, title: 'Select colony for Space Port Colony'}));
     player.increaseFleetSize();
     return undefined;
   }

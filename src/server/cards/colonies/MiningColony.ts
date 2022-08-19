@@ -32,7 +32,7 @@ export class MiningColony extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, false, 'Select colony for Mining Colony'));
+    player.game.defer(new BuildColony(player, {title: 'Select colony for Mining Colony'}));
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }

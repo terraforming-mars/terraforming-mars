@@ -21,7 +21,7 @@
     "Select colony tile to remove": "제거할 개척기치 타일 선택",
     "Colony Bonus": "개척기지 보너스",
     "Trade Income": "무역 수입",
-    "Select colony": "개척기지 선택",
+    "Select where to build a colony": "개척기지 선택",
     "Remove colony": "개척기지 제거",
 
     "Colony Fee": "개척기지 세금",
@@ -164,7 +164,7 @@
     "Increase Ganymede (Plants) and decrease Iapetus (TR)": "가니메데 (식물) 위성 트랙을 1칸 전진시키고 이아페투스 (TR) 위성 트랙을 1칸 후퇴",
     "Increase Ganymede (Plants) and decrease Mercury (Production)": "가니메데 (식물) 위성 트랙을 1칸 전진시키고 수성 (생산량) 위성 트랙을 1칸 후퇴",
     "Increase Ganymede (Plants) and decrease Pallas (Politics)": "가니메데 (식물) 위성 트랙을 1칸 전진시키고 팔라스 (정책) 위성 트랙을 1칸 후퇴",
-    
+
     "Increase Io (Heat) and decrease Callisto (Energy)": "이오 (열) 위성 트랙을 1칸 전진시키고 칼리스토 (에너지) 위성 트랙을 1칸 후퇴",
     "Increase Io (Heat) and decrease Ceres (Steel)": "이오 (열) 위성 트랙을 1칸 전진시키고 세레스 (강철) 위성 트랙을 1칸 후퇴",
     "Increase Io (Heat) and decrease Enceladus (Microbes)": "이오 (열) 위성 트랙을 1칸 전진시키고 엔셀라두스 (미생물) 위성 트랙을 1칸 후퇴",

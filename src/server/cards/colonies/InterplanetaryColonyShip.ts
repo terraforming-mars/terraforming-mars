@@ -29,7 +29,7 @@ export class InterplanetaryColonyShip extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, false, 'Select colony for Interplanetary Colony Ship'));
+    player.game.defer(new BuildColony(player, {title: 'Select colony for Interplanetary Colony Ship'}));
     return undefined;
   }
 }

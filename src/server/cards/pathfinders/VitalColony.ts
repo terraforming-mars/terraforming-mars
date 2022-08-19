@@ -22,12 +22,7 @@ export class VitalColony extends PreludeCard {
   }
   public play(player: Player) {
     player.game.defer(
-      new BuildColony(
-        player,
-        false,
-        undefined,
-        undefined,
-        {giveBonusTwice: true}));
+      new BuildColony(player, {giveBonusTwice: true}));
     return undefined;
   }
 }

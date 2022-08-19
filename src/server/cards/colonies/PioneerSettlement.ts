@@ -10,6 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {max} from '../Options';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class PioneerSettlement extends Card implements IProjectCard {
   constructor() {
@@ -35,7 +36,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
   public warning?: string;
 
   public override canPlay(player: Player): boolean {
-    if (player.hasAvailableColonyTileToBuildOn() === false) {
+    if (ColoniesHandler.getPlayableColonies(player).length === 0) {
       return false;
     }
 

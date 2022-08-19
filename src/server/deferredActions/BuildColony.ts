@@ -2,6 +2,7 @@ import {Player} from '../Player';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
+import {MAX_COLONIES_PER_TILE} from '../../common/constants';
 
 export class BuildColony extends DeferredAction {
   constructor(
@@ -19,9 +20,10 @@ export class BuildColony extends DeferredAction {
   }
 
   public execute() {
+    // Pretty sure this is exactly the same as ColoniesHandler.getPlayableColonies.
     if (this.openColonies === undefined) {
       this.openColonies = this.player.game.colonies.filter((colony) =>
-        colony.colonies.length < 3 &&
+        colony.colonies.length < MAX_COLONIES_PER_TILE &&
         (colony.colonies.includes(this.player.id) === false || this.allowDuplicate) &&
         colony.isActive);
     }

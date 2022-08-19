@@ -2322,23 +2322,6 @@ export class Player {
     if (this.fleetSize > 0) this.fleetSize--;
   }
 
-  public hasAvailableColonyTileToBuildOn(allowDuplicate: boolean = false): boolean {
-    if (this.game.gameOptions.coloniesExtension === false) return false;
-
-    const availableColonyTiles = this.game.colonies.filter((colony) => colony.isActive);
-    let unavailableColonies: number = 0;
-
-    availableColonyTiles.forEach((colony) => {
-      if (colony.colonies.length === constants.MAX_COLONIES_PER_TILE) {
-        unavailableColonies++;
-      } else if (!allowDuplicate && colony.colonies.includes(this.id)) {
-        unavailableColonies++;
-      }
-    });
-
-    return unavailableColonies < availableColonyTiles.length;
-  }
-
   /* Shorthand for deferring things */
   public defer(input: PlayerInput | undefined, priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) return;

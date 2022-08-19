@@ -1,4 +1,4 @@
-import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../../common/constants';
+import {ENERGY_TRADE_COST, MAX_COLONIES_PER_TILE, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../../common/constants';
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {IColony} from './IColony';
@@ -123,6 +123,15 @@ export class ColoniesHandler {
     trade.buttonLabel = 'Trade';
 
     return trade;
+  }
+
+  public static getPlayableColonies(player: Player, allowDuplicate: boolean = false) {
+    if (player.game.gameOptions.coloniesExtension === false) return [];
+
+    return player.game.colonies
+      .filter((colony) => colony.isActive)
+      .filter((colony) => colony.colonies.length < MAX_COLONIES_PER_TILE)
+      .filter((colony) => allowDuplicate || !colony.colonies.includes(player.id));
   }
 }
 

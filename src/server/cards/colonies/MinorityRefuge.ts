@@ -8,6 +8,7 @@ import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class MinorityRefuge extends Card implements IProjectCard {
   constructor() {
@@ -30,7 +31,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
   public warning?: string;
 
   public override canPlay(player: Player): boolean {
-    if (player.hasAvailableColonyTileToBuildOn() === false) {
+    if (ColoniesHandler.getPlayableColonies(player).length > 0) {
       return false;
     }
 

@@ -7,6 +7,7 @@ import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class TradingColony extends Card implements IProjectCard {
   constructor() {
@@ -30,7 +31,7 @@ export class TradingColony extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.hasAvailableColonyTileToBuildOn();
+    return ColoniesHandler.getPlayableColonies(player).length > 0;
   }
 
   public play(player: Player) {

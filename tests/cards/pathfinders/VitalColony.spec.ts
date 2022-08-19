@@ -33,7 +33,7 @@ describe('VitalColony', function() {
     card.play(player);
 
     const selectColony = cast(game.deferredActions.pop()!.execute(), SelectColony);
-    const colonyName = selectColony.colonies[0].name as ColonyName;
+    const colonyName = selectColony.colonies[0].name;
 
     expect(colonyName).eq(ColonyName.GANYMEDE);
 

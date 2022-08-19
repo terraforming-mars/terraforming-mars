@@ -2,17 +2,16 @@ import {Player} from '../Player';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
-import {MAX_COLONIES_PER_TILE} from '../../common/constants';
+import {ColoniesHandler} from '../colonies/ColoniesHandler';
 
 export class BuildColony extends DeferredAction {
   constructor(
     player: Player,
-    public allowDuplicate: boolean = false,
-    public title: string = 'Select where to build a colony',
-    public openColonies?: Array<IColony>,
     private options?: {
-      // Custom for Vital Colony.
-      giveBonusTwice?: boolean,
+      allowDuplicate?: boolean, // Allow placing a colony on a tile that already has a colony.
+      title?: string,
+      colonies?: Array<IColony>, // If not specified, will accept all playable colonies.
+      giveBonusTwice?: boolean, // Custom for Vital Colony. Rewards the bonus when placing a colony a second time.
       cb?: (colony: IColony) => void,
     },
   ) {
@@ -20,23 +19,16 @@ export class BuildColony extends DeferredAction {
   }
 
   public execute() {
-    // Pretty sure this is exactly the same as ColoniesHandler.getPlayableColonies.
-    if (this.openColonies === undefined) {
-      this.openColonies = this.player.game.colonies.filter((colony) =>
-        colony.colonies.length < MAX_COLONIES_PER_TILE &&
-        (colony.colonies.includes(this.player.id) === false || this.allowDuplicate) &&
-        colony.isActive);
-    }
+    const colonies = this.options?.colonies || ColoniesHandler.getPlayableColonies(this.player, this.options?.allowDuplicate);
 
-    if (this.openColonies.length === 0) {
+    if (colonies.length === 0) {
       return undefined;
     }
 
-    const openColonies = this.openColonies;
-
-    return new SelectColony(this.title, 'Build', openColonies, (colony: IColony) => {
+    const title = this.options?.title ?? 'Select where to build a colony';
+    return new SelectColony(title, 'Build', colonies, (colony: IColony) => {
       colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
-      if (this.options?.cb) this.options.cb(colony);
+      this.options?.cb?.(colony);
       return undefined;
     });
   }

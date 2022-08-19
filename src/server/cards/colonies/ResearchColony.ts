@@ -26,7 +26,7 @@ export class ResearchColony extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, true, 'Select colony for Research Colony'));
+    player.game.defer(new BuildColony(player, {allowDuplicate: true, title: 'Select colony for Research Colony'}));
     player.drawCard(2);
     return undefined;
   }

@@ -28,7 +28,7 @@ export class LTFHeadquarters extends Card {
 
   public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);
-    player.game.defer(new BuildColony(player, false));
+    player.game.defer(new BuildColony(player));
     player.increaseFleetSize();
     return undefined;
   }

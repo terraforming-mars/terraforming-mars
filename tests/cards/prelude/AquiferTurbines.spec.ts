@@ -28,7 +28,7 @@ describe('AquiferTurbines', function() {
     // PlaceOceanTile
     game.deferredActions.pop();
 
-    // SelectHowToPayDeferred
+    // SelectPaymentDeferred
     game.deferredActions.runNext();
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);

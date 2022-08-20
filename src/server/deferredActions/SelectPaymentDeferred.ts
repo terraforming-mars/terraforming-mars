@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {SelectHowToPay} from '../inputs/SelectHowToPay';
+import {SelectPayment} from '../inputs/SelectPayment';
 import {Payment} from '../../common/inputs/Payment';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Resources} from '../../common/Resources';
@@ -14,7 +14,7 @@ export type Options = {
   afterPay?: () => void;
 }
 
-export class SelectHowToPayDeferred extends DeferredAction {
+export class SelectPaymentDeferred extends DeferredAction {
   constructor(
     player: Player,
     public amount: number,
@@ -53,7 +53,7 @@ export class SelectHowToPayDeferred extends DeferredAction {
       return undefined;
     }
 
-    return new SelectHowToPay(
+    return new SelectPayment(
       this.options.title || 'Select how to pay for ' + this.amount + ' M€',
       this.options.canUseSteel || false,
       this.options.canUseTitanium || false,

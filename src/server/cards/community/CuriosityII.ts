@@ -11,7 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
@@ -69,7 +69,7 @@ export class CuriosityII extends Card implements ICorporationCard {
 
     return new OrOptions(
       new SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
-        player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
+        player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}));
         player.game.defer(DrawCards.keepAll(player));
         return undefined;
       }),

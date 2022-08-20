@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class HugeAsteroid extends PreludeCard {
@@ -26,7 +26,7 @@ export class HugeAsteroid extends PreludeCard {
   }
   public play(player: Player) {
     player.game.increaseTemperature(player, 3);
-    player.game.defer(new SelectHowToPayDeferred(player, 5));
+    player.game.defer(new SelectPaymentDeferred(player, 5));
     return undefined;
   }
 }

@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class EconomicEspionage extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -39,7 +39,7 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
   }
 
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 2, {
+    player.game.defer(new SelectPaymentDeferred(player, 2, {
       title: 'Select how to pay for action',
       afterPay: () => {
         player.game.defer(new AddResourcesToCard(player, CardResource.DATA));

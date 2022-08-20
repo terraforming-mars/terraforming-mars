@@ -8,7 +8,7 @@ import {Resources} from '../../../common/Resources';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
@@ -50,7 +50,7 @@ export class EnergyMarket extends Card implements IProjectCard {
       (amount: number) => {
         if (player.canUseHeatAsMegaCredits) {
           player.addResource(Resources.ENERGY, amount);
-          player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
+          player.game.defer(new SelectPaymentDeferred(player, (amount * 2)));
         } else {
           player.addResource(Resources.ENERGY, amount);
           player.deductResource(Resources.MEGACREDITS, (amount * 2));

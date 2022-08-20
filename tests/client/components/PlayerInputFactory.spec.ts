@@ -61,11 +61,11 @@ const typesToTest: PlayerInputModel[] = [
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_HOW_TO_PAY,
+    inputType: PlayerInputTypes.SELECT_PAYMENT,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD,
+    inputType: PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY,
     cards: [{name: CardName.ANTS, reserveUnits: Units.of({})} as CardModel],
   },
   {

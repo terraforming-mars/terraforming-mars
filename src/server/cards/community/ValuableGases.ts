@@ -4,7 +4,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
+import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
@@ -34,7 +34,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     const playableCards = player.getPlayableCards().filter((card) => card.tags.includes(Tags.VENUS));
 
     if (playableCards.length > 0) {
-      return new SelectHowToPayForProjectCard(
+      return new SelectProjectCardToPlay(
         player,
         playableCards,
         (selectedCard, payment) => {

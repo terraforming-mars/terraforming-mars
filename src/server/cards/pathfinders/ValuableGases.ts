@@ -11,7 +11,7 @@ import {Resources} from '../../../common/Resources';
 import {digit} from '../Options';
 import {CardType} from '../../../common/cards/CardType';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
+import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 
 // TODO(kberg) like #3644, this card may have similar behavior.
 export class ValuableGases extends PreludeCard implements IProjectCard {
@@ -49,7 +49,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     });
     if (playableCards.length !== 0) {
       player.game.defer(new SimpleDeferredAction(player, () => {
-        return new SelectHowToPayForProjectCard(
+        return new SelectProjectCardToPlay(
           player,
           playableCards,
           (selectedCard, payment) => {

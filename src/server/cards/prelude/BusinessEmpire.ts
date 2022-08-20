@@ -2,7 +2,7 @@ import {Tags} from '../../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
@@ -31,7 +31,7 @@ export class BusinessEmpire extends PreludeCard {
   }
   public play(player: Player) {
     player.adjustProduction(this.productionBox);
-    player.game.defer(new SelectHowToPayDeferred(player, 6));
+    player.game.defer(new SelectPaymentDeferred(player, 6));
     return undefined;
   }
 }

@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resources} from '../../../common/Resources';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -48,7 +48,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for Martian Media Center action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 3, {title: 'Select how to pay for Martian Media Center action'}));
     player.game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', {source: 'reserve'}));
     return undefined;
   }

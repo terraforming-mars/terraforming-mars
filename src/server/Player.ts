@@ -29,8 +29,8 @@ import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
-import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
-import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
+import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
+import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
@@ -276,7 +276,7 @@ export class Player {
         // Cannot pay Reds, will not increase TR
         return;
       }
-      const deferred = new SelectHowToPayDeferred(
+      const deferred = new SelectPaymentDeferred(
         this,
         REDS_RULING_POLICY_COST * steps,
         {
@@ -1327,7 +1327,7 @@ export class Player {
   }
 
   public payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void) {
-    this.game.defer(new SelectHowToPayDeferred(this, cost, {title, afterPay}));
+    this.game.defer(new SelectPaymentDeferred(this, cost, {title, afterPay}));
   }
 
   public checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction: CardAction = 'add') {
@@ -1357,7 +1357,7 @@ export class Player {
   }
 
   public getPlayProjectCardInput(cards: Array<IProjectCard> = this.getPlayableCards(), cardAction: CardAction = 'add') {
-    return new SelectHowToPayForProjectCard(
+    return new SelectProjectCardToPlay(
       this,
       cards,
       (selectedCard, payment) => this.checkPaymentAndPlayCard(selectedCard, payment, cardAction),
@@ -1572,7 +1572,7 @@ export class Player {
         player: this,
         milestone: milestone,
       });
-      this.game.defer(new SelectHowToPayDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+      this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1580,7 +1580,7 @@ export class Player {
 
   private fundAward(award: IAward): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')', () => {
-      this.game.defer(new SelectHowToPayDeferred(this, this.game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
+      this.game.defer(new SelectPaymentDeferred(this, this.game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
       this.game.fundAward(this, award);
       return undefined;
     });

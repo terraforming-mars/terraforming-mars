@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('UnitedNationsMarsInitiative', function() {
@@ -58,8 +58,8 @@ describe('UnitedNationsMarsInitiative', function() {
 
     card.action(player);
     runAllActions(game);
-    const selectHowToPay = cast(player.popWaitingFor(), SelectHowToPay);
-    selectHowToPay.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.getTerraformRating()).to.eq(22);
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);

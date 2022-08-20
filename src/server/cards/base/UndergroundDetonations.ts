@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class UndergroundDetonations extends Card implements IActionCard, IProjectCard {
@@ -31,7 +31,7 @@ export class UndergroundDetonations extends Card implements IActionCard, IProjec
     return player.canAfford(10);
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 10, {title: 'Select how to pay for action'}));
     player.addProduction(Resources.HEAT, 2);
     return undefined;
   }

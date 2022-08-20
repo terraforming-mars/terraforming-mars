@@ -3,7 +3,7 @@ import {Game} from '../Game';
 import {Player} from '../Player';
 import {IColony} from './IColony';
 import {ColonyName} from '../../common/colonies/ColonyName';
-import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Resources} from '../../common/Resources';
 import {TradeWithTitanFloatingLaunchPad} from '../cards/colonies/TitanFloatingLaunchPad';
 import {OrOptions} from '../inputs/OrOptions';
@@ -198,7 +198,7 @@ export class TradeWithMegacredits implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.game.defer(new SelectHowToPayDeferred(
+    this.player.game.defer(new SelectPaymentDeferred(
       this.player,
       this.tradeCost,
       {

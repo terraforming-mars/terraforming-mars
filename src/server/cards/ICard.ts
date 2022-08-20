@@ -36,16 +36,17 @@ export namespace VictoryPoints {
 
 // TRSource represents the ways an action will gain TR. This is used exclusively to compute
 // tax when Reds are in power.
-export interface TRSource {
-    oxygen?: number,
-    temperature?: number,
-    oceans?: number,
-    tr?: number,
-    venus?: number
-    moonColony?: number,
-    moonMining?: number,
-    moonLogistics?: number,
-  }
+export type TRSource = {
+  oxygen?: number,
+  temperature?: number,
+  oceans?: number,
+  tr?: number,
+  venus?: number
+  moonColony?: number,
+  moonMining?: number,
+  moonLogistics?: number,
+}
+export type DynamicTRSource = (player: Player) => TRSource;
 
 export interface ICard extends Partial<IActionCard> {
     name: CardName;
@@ -79,7 +80,7 @@ export interface ICard extends Partial<IActionCard> {
     warning?: string | Message;
     productionBox?: Units;
     produce?: (player: Player) => void;
-    tr?: TRSource;
+    tr?: TRSource | DynamicTRSource;
     resourceCount: number;
     resourceType?: CardResource;
 }

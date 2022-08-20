@@ -12,7 +12,7 @@ import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorpora
 import {Game} from './Game';
 import {HowToPay} from '../common/inputs/HowToPay';
 import {IAward} from './awards/IAward';
-import {ICard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
+import {ICard, isIActionCard, TRSource, IActionCard, DynamicTRSource} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ITagCount} from '../common/cards/ITagCount';
@@ -2332,5 +2332,5 @@ export class Player {
 
 export interface CanAffordOptions extends Partial<HowToPay.Options> {
   reserveUnits?: Units,
-  tr?: TRSource,
+  tr?: TRSource | DynamicTRSource,
 }

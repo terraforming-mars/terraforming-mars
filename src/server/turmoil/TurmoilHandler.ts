@@ -14,7 +14,7 @@ import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import * as constants from '../../common/constants';
-import {TRSource} from '../cards/ICard';
+import {DynamicTRSource, TRSource} from '../cards/ICard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
 export class TurmoilHandler {
@@ -201,9 +201,10 @@ export class TurmoilHandler {
 
   // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
   // It works, but4 a test would be helpful.
-  public static computeTerraformRatingBump(player: Player, tr: TRSource = {}): number {
+  public static computeTerraformRatingBump(player: Player, inputTr: TRSource | DynamicTRSource = {}): number {
     if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) return 0;
 
+    let tr = inputTr instanceof Function ? inputTr(player) : inputTr;
     // Local copy
     tr = {...tr};
     let total = 0;

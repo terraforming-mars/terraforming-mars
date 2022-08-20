@@ -8,7 +8,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../Player';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './CardRequirements';
-import {TRSource} from './ICard';
+import {DynamicTRSource, TRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
@@ -29,7 +29,7 @@ export interface StaticCardProperties {
   productionBox?: Units;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
   reserveUnits?: Units,
-  tr?: TRSource,
+  tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
@@ -99,7 +99,7 @@ export abstract class Card {
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
   }
-  public get tr(): TRSource {
+  public get tr(): TRSource | DynamicTRSource {
     return this.properties.tr || {};
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {

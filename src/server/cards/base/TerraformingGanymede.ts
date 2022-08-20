@@ -15,6 +15,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 33,
       victoryPoints: 2,
+      tr: (player) => ({tr: 1 + player.getTagCount(Tags.JOVIAN)}),
 
       metadata: {
         cardNumber: '197',
@@ -24,10 +25,6 @@ export class TerraformingGanymede extends Card implements IProjectCard {
         description: 'Raise your TR 1 step for each Jovian tag you have, including this.',
       },
     });
-  }
-  public override canPlay(player: Player): boolean {
-    const steps = 1 + player.getTagCount(Tags.JOVIAN);
-    return player.canAfford(player.getCardCost(this), {titanium: true, tr: {tr: steps}});
   }
   public play(player: Player) {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);

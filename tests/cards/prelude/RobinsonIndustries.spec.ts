@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
-import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('RobinsonIndustries', function() {
   let card: RobinsonIndustries;
@@ -69,8 +69,8 @@ describe('RobinsonIndustries', function() {
 
     selectResource.options[1].cb();
     runAllActions(game);
-    const howToPay = cast(player.popWaitingFor(), SelectHowToPay);
-    howToPay.cb({...HowToPay.EMPTY, megaCredits: 2, heat: 2});
+    const selectHowToPay = cast(player.popWaitingFor(), SelectHowToPay);
+    selectHowToPay.cb({...Payment.EMPTY, megaCredits: 2, heat: 2});
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);

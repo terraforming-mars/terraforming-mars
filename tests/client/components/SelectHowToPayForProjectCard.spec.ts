@@ -9,14 +9,14 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
-import {HowToPay} from '@/common/inputs/HowToPay';
+import {Payment} from '@/common/inputs/Payment';
 import {CardResource} from '@/common/CardResource';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 describe('SelectHowToPayForProjectCard', () => {
   let localStorage: FakeLocalStorage;
-  let saveResponse: HowToPay;
+  let saveResponse: Payment;
 
   beforeEach(() => {
     localStorage = new FakeLocalStorage();
@@ -83,7 +83,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('heat', 3);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({heat: 3, megaCredits: 7}));
+    expect(saveResponse).deep.eq(payment({heat: 3, megaCredits: 7}));
   });
 
   it('using max button with heat', async () => {
@@ -109,7 +109,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('heat', 2);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({heat: 2, megaCredits: 8}));
+    expect(saveResponse).deep.eq(payment({heat: 2, megaCredits: 8}));
   });
 
   it('using microbes', async () => {
@@ -125,7 +125,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('microbes', 2);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({microbes: 2, megaCredits: 6}));
+    expect(saveResponse).deep.eq(payment({microbes: 2, megaCredits: 6}));
   });
 
   it('using floaters', async () => {
@@ -141,7 +141,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('floaters', 2);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 2, megaCredits: 4}));
+    expect(saveResponse).deep.eq(payment({floaters: 2, megaCredits: 4}));
   });
 
   it('Paying for Stratospheric Birds without floaters', async () => {
@@ -156,7 +156,7 @@ describe('SelectHowToPayForProjectCard', () => {
 
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({megaCredits: 12}));
+    expect(saveResponse).deep.eq(payment({megaCredits: 12}));
   });
 
   it('Paying for Stratospheric Birds with Dirigibles', async () => {
@@ -170,12 +170,12 @@ describe('SelectHowToPayForProjectCard', () => {
     await tester.nextTick();
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+    expect(saveResponse).deep.eq(payment({floaters: 1, megaCredits: 9}));
 
     tester.clickMax('floaters');
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 2, megaCredits: 6}));
+    expect(saveResponse).deep.eq(payment({floaters: 2, megaCredits: 6}));
   });
 
   it('Paying for Stratospheric Birds with Dirigibles while another card has floaters (#4052)', async () => {
@@ -194,12 +194,12 @@ describe('SelectHowToPayForProjectCard', () => {
     await tester.nextTick();
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+    expect(saveResponse).deep.eq(payment({floaters: 1, megaCredits: 9}));
 
     tester.clickMax('floaters');
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 3, megaCredits: 3}));
+    expect(saveResponse).deep.eq(payment({floaters: 3, megaCredits: 3}));
   });
 
   it('Paying for other card with Dirigibles uses all floaters', async () => {
@@ -213,12 +213,12 @@ describe('SelectHowToPayForProjectCard', () => {
     await tester.nextTick();
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+    expect(saveResponse).deep.eq(payment({floaters: 1, megaCredits: 9}));
 
     tester.clickMax('floaters');
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 3, megaCredits: 3}));
+    expect(saveResponse).deep.eq(payment({floaters: 3, megaCredits: 3}));
   });
 
   it('using steel', async () => {
@@ -236,7 +236,7 @@ describe('SelectHowToPayForProjectCard', () => {
 
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({steel: 2, megaCredits: 6}));
+    expect(saveResponse).deep.eq(payment({steel: 2, megaCredits: 6}));
   });
 
   it('using titanium metal bonus', async () => {
@@ -260,7 +260,7 @@ describe('SelectHowToPayForProjectCard', () => {
 
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({titanium: 2, megaCredits: 0}));
+    expect(saveResponse).deep.eq(payment({titanium: 2, megaCredits: 0}));
   });
 
   it('using steel and titanium with metal bonus', async () => {
@@ -284,7 +284,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('titanium', 3);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({steel: 3, titanium: 3, megaCredits: 0}));
+    expect(saveResponse).deep.eq(payment({steel: 3, titanium: 3, megaCredits: 0}));
   });
 
   it('using steel and microbes', async () => {
@@ -308,7 +308,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('microbes', 4);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({microbes: 4, steel: 4, megaCredits: 0}));
+    expect(saveResponse).deep.eq(payment({microbes: 4, steel: 4, megaCredits: 0}));
   });
 
   it('using floater and microbes', async () => {
@@ -331,7 +331,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('floaters', 1);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({floaters: 1, microbes: 5, megaCredits: 1}));
+    expect(saveResponse).deep.eq(payment({floaters: 1, microbes: 5, megaCredits: 1}));
   });
 
   it('using floater and titanium', async () => {
@@ -354,7 +354,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('titanium', 1);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({titanium: 1, floaters: 7, megaCredits: 0}));
+    expect(saveResponse).deep.eq(payment({titanium: 1, floaters: 7, megaCredits: 0}));
   });
 
   it('Luna Train Station limits how much steel you can use', async () => {
@@ -385,7 +385,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('steel', 2);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({steel: 2, megaCredits: 16}));
+    expect(saveResponse).deep.eq(payment({steel: 2, megaCredits: 16}));
   });
 
   it('using titanium metal bonus without using steel', async () => {
@@ -412,7 +412,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectIsAvailable('steel', false);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({titanium: 7, megaCredits: 6}));
+    expect(saveResponse).deep.eq(payment({titanium: 7, megaCredits: 6}));
   });
 
   // TODO(kberg): Be greedy with science units.
@@ -434,7 +434,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('megaCredits', 7);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({science: 8, megaCredits: 7}));
+    expect(saveResponse).deep.eq(payment({science: 8, megaCredits: 7}));
   });
 
   // TODO(kberg): be greedy with seeds.
@@ -455,7 +455,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('megaCredits', 7);
 
     tester.clickSave();
-    expect(saveResponse).deep.eq(howToPay({seeds: 1, megaCredits: 7}));
+    expect(saveResponse).deep.eq(payment({seeds: 1, megaCredits: 7}));
   });
 
   it('initial setup allows for steel and titanium when using Last Restort Ingenuity', async () => {
@@ -476,17 +476,17 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectIsAvailable('titanium', true);
   });
 
-  const howToPay = function(htp: Partial<HowToPay>) : HowToPay {
+  const payment = function(payment: Partial<Payment>) : Payment {
     return {
-      data: htp.data ?? 0,
-      floaters: htp.floaters ?? 0,
-      heat: htp.heat ?? 0,
-      megaCredits: htp.megaCredits ?? 0,
-      microbes: htp.microbes ?? 0,
-      science: htp.science ?? 0,
-      seeds: htp.seeds ?? 0,
-      steel: htp.steel ?? 0,
-      titanium: htp.titanium ?? 0,
+      data: payment.data ?? 0,
+      floaters: payment.floaters ?? 0,
+      heat: payment.heat ?? 0,
+      megaCredits: payment.megaCredits ?? 0,
+      microbes: payment.microbes ?? 0,
+      science: payment.science ?? 0,
+      seeds: payment.seeds ?? 0,
+      steel: payment.steel ?? 0,
+      titanium: payment.titanium ?? 0,
     };
   };
 

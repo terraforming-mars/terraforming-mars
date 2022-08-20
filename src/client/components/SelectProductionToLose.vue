@@ -144,7 +144,7 @@ export default Vue.extend({
       this.$data[type] = newValue;
     },
     saveData() {
-      const htp: Units = {
+      const units: Units = {
         megacredits: this.$data.megacredits,
         steel: this.$data.steel,
         titanium: this.$data.titanium,
@@ -166,7 +166,7 @@ export default Vue.extend({
       }
 
       this.onsave([[
-        JSON.stringify(htp),
+        JSON.stringify(units),
       ]]);
     },
   },

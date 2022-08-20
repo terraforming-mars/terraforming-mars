@@ -1,4 +1,4 @@
-export type HowToPay = {
+export type Payment = {
   heat: number;
   megaCredits: number;
   steel: number;
@@ -10,11 +10,11 @@ export type HowToPay = {
   data: number;
 }
 
-export namespace HowToPay {
-  export const EMPTY: Readonly<HowToPay> = {
+export namespace Payment {
+  export const EMPTY: Readonly<Payment> = {
     heat: 0, megaCredits: 0, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, seeds: 0, data: 0,
   } as const;
-  export const keys = Object.keys(EMPTY) as (keyof HowToPay)[];
+  export const keys = Object.keys(EMPTY) as (keyof Payment)[];
 
   export interface Options {
     steel: boolean,

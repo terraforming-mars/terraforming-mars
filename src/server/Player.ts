@@ -10,7 +10,7 @@ import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
 import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
-import {HowToPay} from '../common/inputs/HowToPay';
+import {Payment} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, TRSource, IActionCard, DynamicTRSource} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
@@ -994,21 +994,21 @@ export class Player {
     }
   }
 
-  public isHowToPay(u: unknown): u is HowToPay {
+  public isPayment(u: unknown): u is Payment {
     if (typeof u !== 'object') return false;
     if (!u) return false;
-    const h = u as {[key in keyof HowToPay]?: any};
-    return HowToPay.keys.every((key) =>
+    const h = u as {[key in keyof Payment]?: any};
+    return Payment.keys.every((key) =>
       h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
   }
 
-  public parseHowToPayJSON(json: string): HowToPay {
+  public parsePaymentJSON(json: string): Payment {
     try {
-      const howToPay: unknown = JSON.parse(json);
-      if (!this.isHowToPay(howToPay)) {
+      const payment: unknown = JSON.parse(json);
+      if (!this.isPayment(payment)) {
         throw new Error('does not match interface');
       }
-      return howToPay;
+      return payment;
     } catch (err) {
       throw new Error('Unable to parse HowToPay input ' + err);
     }
@@ -1314,7 +1314,7 @@ export class Player {
     );
   }
 
-  private howToPayOptionsForCard(selectedCard: IProjectCard): HowToPay.Options {
+  private paymentOptionsForCard(selectedCard: IProjectCard): Payment.Options {
     return {
       steel: this.canUseSteel(selectedCard),
       titanium: this.canUseTitanium(selectedCard),
@@ -1330,17 +1330,17 @@ export class Player {
     this.game.defer(new SelectHowToPayDeferred(this, cost, {title, afterPay}));
   }
 
-  public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay, cardAction: CardAction = 'add') {
+  public checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction: CardAction = 'add') {
     const cardCost: number = this.getCardCost(selectedCard);
 
     const reserved = MoonExpansion.adjustedReserveCosts(this, selectedCard);
 
-    if (!this.canSpend(howToPay, reserved)) {
+    if (!this.canSpend(payment, reserved)) {
       throw new Error('You do not have that many resources to spend');
     }
 
-    if (howToPay.floaters > 0) {
-      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getSpendableFloaters()) {
+    if (payment.floaters > 0) {
+      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && payment.floaters === this.getSpendableFloaters()) {
         const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
         if (cardsWithFloater.length === 1) {
           throw new Error('Cannot spend all floaters to play Stratospheric Birds');
@@ -1348,19 +1348,19 @@ export class Player {
       }
     }
 
-    const totalToPay = this.payingAmount(howToPay, this.howToPayOptionsForCard(selectedCard));
+    const totalToPay = this.payingAmount(payment, this.paymentOptionsForCard(selectedCard));
 
     if (totalToPay < cardCost) {
       throw new Error('Did not spend enough to pay for card');
     }
-    return this.playCard(selectedCard, howToPay, cardAction);
+    return this.playCard(selectedCard, payment, cardAction);
   }
 
   public getPlayProjectCardInput(cards: Array<IProjectCard> = this.getPlayableCards(), cardAction: CardAction = 'add') {
     return new SelectHowToPayForProjectCard(
       this,
       cards,
-      (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, cardAction),
+      (selectedCard, payment) => this.checkPaymentAndPlayCard(selectedCard, payment, cardAction),
     );
   }
 
@@ -1387,41 +1387,41 @@ export class Player {
     return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
   }
 
-  public pay(howToPay: HowToPay) {
-    this.deductResource(Resources.STEEL, howToPay.steel);
-    this.deductResource(Resources.TITANIUM, howToPay.titanium);
-    this.deductResource(Resources.MEGACREDITS, howToPay.megaCredits);
-    this.deductResource(Resources.HEAT, howToPay.heat);
+  public pay(payment: Payment) {
+    this.deductResource(Resources.STEEL, payment.steel);
+    this.deductResource(Resources.TITANIUM, payment.titanium);
+    this.deductResource(Resources.MEGACREDITS, payment.megaCredits);
+    this.deductResource(Resources.HEAT, payment.heat);
 
     for (const playedCard of this.playedCards) {
       if (playedCard.name === CardName.PSYCHROPHILES) {
-        this.removeResourceFrom(playedCard, howToPay.microbes);
+        this.removeResourceFrom(playedCard, payment.microbes);
       }
 
       if (playedCard.name === CardName.DIRIGIBLES) {
-        this.removeResourceFrom(playedCard, howToPay.floaters);
+        this.removeResourceFrom(playedCard, payment.floaters);
       }
 
       if (playedCard.name === CardName.LUNA_ARCHIVES) {
-        this.removeResourceFrom(playedCard, howToPay.science);
+        this.removeResourceFrom(playedCard, payment.science);
       }
     }
 
-    if (howToPay.seeds > 0) {
+    if (payment.seeds > 0) {
       const soylent = this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
       if (soylent === undefined) throw new Error('Cannot pay with seeds without ' + CardName.SOYLENT_SEEDLING_SYSTEMS);
-      this.removeResourceFrom(soylent, howToPay.seeds);
+      this.removeResourceFrom(soylent, payment.seeds);
     }
-    if (howToPay.data > 0) {
+    if (payment.data > 0) {
       const aurorai = this.getCorporation(CardName.AURORAI);
       if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
-      this.removeResourceFrom(aurorai, howToPay.data);
+      this.removeResourceFrom(aurorai, payment.data);
     }
   }
 
-  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
-    if (howToPay !== undefined) {
-      this.pay(howToPay);
+  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
+    if (payment !== undefined) {
+      this.pay(payment);
     }
 
     ColoniesHandler.onCardPlayed(this.game, selectedCard);
@@ -1721,7 +1721,7 @@ export class Player {
     return this.canAfford(
       this.getCardCost(card),
       {
-        ...this.howToPayOptionsForCard(card),
+        ...this.paymentOptionsForCard(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
         tr: card.tr,
       });
@@ -1740,7 +1740,7 @@ export class Player {
     return card.canPlay(this);
   }
 
-  private maxSpendable(reserveUnits: Units = Units.EMPTY): HowToPay {
+  private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
       megaCredits: this.megaCredits - reserveUnits.megacredits,
       steel: this.steel - reserveUnits.steel,
@@ -1754,15 +1754,15 @@ export class Player {
     };
   }
 
-  public canSpend(howToPay: HowToPay, reserveUnits?: Units): boolean {
+  public canSpend(payment: Payment, reserveUnits?: Units): boolean {
     const maxPayable = this.maxSpendable(reserveUnits);
 
-    return HowToPay.keys.every((key: keyof HowToPay) =>
-      0 <= howToPay[key] && howToPay[key] <= maxPayable[key]);
+    return Payment.keys.every((key: keyof Payment) =>
+      0 <= payment[key] && payment[key] <= maxPayable[key]);
   }
 
-  public payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
-    const mult: {[key in keyof HowToPay]: number} = {
+  public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
+    const mult: {[key in keyof Payment]: number} = {
       megaCredits: 1,
       steel: this.getSteelValue(),
       titanium: this.getTitaniumValue(),
@@ -1774,7 +1774,7 @@ export class Player {
       data: constants.DATA_VALUE,
     };
 
-    const usable: {[key in keyof HowToPay]: boolean} = {
+    const usable: {[key in keyof Payment]: boolean} = {
       megaCredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,
@@ -1787,8 +1787,8 @@ export class Player {
     };
 
     let totalToPay = 0;
-    for (const key of HowToPay.keys) {
-      if (usable[key]) totalToPay += howToPay[key] * mult[key];
+    for (const key of Payment.keys) {
+      if (usable[key]) totalToPay += payment[key] * mult[key];
     }
 
     return totalToPay;
@@ -2330,7 +2330,7 @@ export class Player {
   }
 }
 
-export interface CanAffordOptions extends Partial<HowToPay.Options> {
+export interface CanAffordOptions extends Partial<Payment.Options> {
   reserveUnits?: Units,
   tr?: TRSource | DynamicTRSource,
 }

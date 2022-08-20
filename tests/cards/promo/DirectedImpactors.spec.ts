@@ -3,7 +3,7 @@ import {DirectedImpactors} from '../../../src/server/cards/promo/DirectedImpacto
 import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
 import {Game} from '../../../src/server/Game';
-import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
 import {Player} from '../../../src/server/Player';
@@ -39,7 +39,7 @@ describe('DirectedImpactors', function() {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
-    selectHowToPay.cb({...HowToPay.EMPTY, titanium: 1, megaCredits: 3});
+    selectHowToPay.cb({...Payment.EMPTY, titanium: 1, megaCredits: 3});
 
     expect(player.megaCredits).to.eq(0);
     expect(player.titanium).to.eq(0);
@@ -72,7 +72,7 @@ describe('DirectedImpactors', function() {
     const selectCard = cast(action.options[1].cb(), SelectCard);
     expect(game.deferredActions).has.lengthOf(1);
     const selectHowToPay = cast(game.deferredActions.peek()!.execute(), SelectHowToPay);
-    selectHowToPay.cb({...HowToPay.EMPTY, titanium: 1, megaCredits: 3});
+    selectHowToPay.cb({...Payment.EMPTY, titanium: 1, megaCredits: 3});
 
     selectCard!.cb([card2]);
     expect(card2.resourceCount).to.eq(1);

@@ -1,6 +1,6 @@
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
-import {HowToPay} from '../../common/inputs/HowToPay';
+import {Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
@@ -22,7 +22,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
   constructor(
     player: Player,
     public cards: Array<IProjectCard>,
-    public cb: (cardToPlay: IProjectCard, howToPay: HowToPay) => PlayerInput | undefined) {
+    public cb: (cardToPlay: IProjectCard, payment: Payment) => PlayerInput | undefined) {
     this.microbes = player.getSpendableMicrobes();
     this.floaters = player.getSpendableFloaters();
     this.canUseHeat = player.canUseHeatAsMegaCredits;
@@ -39,16 +39,16 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     const cardName = input[0][0];
     const cardData = PlayerInput.getCard(this.cards, cardName);
     const foundCard: IProjectCard = cardData.card;
-    const howToPay: HowToPay = player.parseHowToPayJSON(input[0][1]);
+    const payment: Payment = player.parsePaymentJSON(input[0][1]);
     const reserveUnits = this.reserveUnits[cardData.idx];
     // These are not used for safety but do help give a better error message
     // to the user
-    if (reserveUnits.steel + howToPay.steel > player.steel) {
+    if (reserveUnits.steel + payment.steel > player.steel) {
       throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
     }
-    if (reserveUnits.titanium + howToPay.titanium > player.titanium) {
+    if (reserveUnits.titanium + payment.titanium > player.titanium) {
       throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
     }
-    return this.cb(foundCard, howToPay);
+    return this.cb(foundCard, payment);
   }
 }

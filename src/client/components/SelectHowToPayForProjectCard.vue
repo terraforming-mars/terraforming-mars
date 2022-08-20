@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 
-import {HowToPay} from '@/common/inputs/HowToPay';
+import {Payment} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
@@ -277,7 +277,7 @@ export default Vue.extend({
       return this.card?.reserveUnits?.heat > 0 && this.canUseHeat();
     },
     saveData() {
-      const htp: HowToPay = {
+      const payment: Payment = {
         heat: this.heat,
         megaCredits: this.megaCredits,
         steel: this.steel,
@@ -290,11 +290,11 @@ export default Vue.extend({
       };
       let totalSpent = 0;
       for (const target of unit) {
-        if (htp[target] > this.getAmount(target)) {
+        if (payment[target] > this.getAmount(target)) {
           this.$data.warning = `You do not have enough ${target}`;
           return;
         }
-        totalSpent += htp[target] * this.getResourceRate(target);
+        totalSpent += payment[target] * this.getResourceRate(target);
       }
 
       if (totalSpent < this.cost) {
@@ -305,7 +305,7 @@ export default Vue.extend({
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
         for (const target of unit) {
-          if (htp[target] && diff >= this.getResourceRate(target)) {
+          if (payment[target] && diff >= this.getResourceRate(target)) {
             this.$data.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -320,7 +320,7 @@ export default Vue.extend({
         if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[
             this.card.name,
-            JSON.stringify(htp),
+            JSON.stringify(payment),
           ]]);
         } else {
           this.warning = 'Please adjust payment amount';
@@ -329,7 +329,7 @@ export default Vue.extend({
       } else {
         this.onsave([[
           this.card.name,
-          JSON.stringify(htp),
+          JSON.stringify(payment),
         ]]);
       }
     },

@@ -69,10 +69,10 @@ export abstract class MarketCard extends Card implements IActionCard {
         const cashDue = tradesRequested * terms.from;
         const unitsEarned = tradesRequested * terms.to;
         if (player.canUseHeatAsMegaCredits) {
-          const howToPay = new SelectHowToPayDeferred(player, cashDue, {afterPay: () => {
+          const payment = new SelectHowToPayDeferred(player, cashDue, {afterPay: () => {
             player.addResource(this.tradeResource, unitsEarned);
           }});
-          player.game.defer(howToPay);
+          player.game.defer(payment);
         } else {
           player.deductResource(Resources.MEGACREDITS, cashDue);
           player.addResource(this.tradeResource, unitsEarned);

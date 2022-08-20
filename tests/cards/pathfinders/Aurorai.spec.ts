@@ -7,7 +7,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
-import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('Aurorai', function() {
   let card: Aurorai;
@@ -66,10 +66,10 @@ describe('Aurorai', function() {
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>
-      selectHowToPay.cb({...HowToPay.EMPTY, megaCredits: 4, data: 2}),
+      selectHowToPay.cb({...Payment.EMPTY, megaCredits: 4, data: 2}),
     ).to.throw(/Did not spend enough/);
 
-    selectHowToPay.cb({...HowToPay.EMPTY, megaCredits: 8, data: 2});
+    selectHowToPay.cb({...Payment.EMPTY, megaCredits: 8, data: 2});
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
     expect(player.getSpendableData()).eq(1);

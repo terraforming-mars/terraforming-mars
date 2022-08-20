@@ -9,7 +9,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
-import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 
 describe('StratosphericBirds', () => {
@@ -94,7 +94,7 @@ describe('StratosphericBirds', () => {
     const selectHowToPayForProjectCard = player.getPlayProjectCardInput();
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    selectHowToPayForProjectCard.cb(card, {...HowToPay.EMPTY, megaCredits: 12});
+    selectHowToPayForProjectCard.cb(card, {...Payment.EMPTY, megaCredits: 12});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(aerialMappers.resourceCount).to.eq(0);
   });
@@ -119,11 +119,11 @@ describe('StratosphericBirds', () => {
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
-      selectHowToPayForProjectCard.cb(card, {...HowToPay.EMPTY, megaCredits: 9, floaters: 1});
+      selectHowToPayForProjectCard.cb(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
-    selectHowToPayForProjectCard.cb(card, {...HowToPay.EMPTY, megaCredits: 12});
+    selectHowToPayForProjectCard.cb(card, {...Payment.EMPTY, megaCredits: 12});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
   });
@@ -141,7 +141,7 @@ describe('StratosphericBirds', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
-    selectHowToPayForCard!.cb(card, {...HowToPay.EMPTY, megaCredits: 3, floaters: 3});
+    selectHowToPayForCard!.cb(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
     expect(deuteriumExport.resourceCount).to.eq(0);

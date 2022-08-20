@@ -23,8 +23,8 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     player: Player,
     public cards: Array<IProjectCard>,
     public cb: (cardToPlay: IProjectCard, howToPay: HowToPay) => PlayerInput | undefined) {
-    this.microbes = player.getMicrobesCanSpend();
-    this.floaters = player.getFloatersCanSpend();
+    this.microbes = player.getSpendableMicrobes();
+    this.floaters = player.getSpendableFloaters();
     this.canUseHeat = player.canUseHeatAsMegaCredits;
     this.scienceResources = player.getSpendableScienceResources();
     this.seedResources = player.getSpendableSeedResources();

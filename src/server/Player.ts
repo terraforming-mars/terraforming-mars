@@ -1340,7 +1340,7 @@ export class Player {
     }
 
     if (howToPay.floaters > 0) {
-      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
+      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getSpendableFloaters()) {
         const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
         if (cardsWithFloater.length === 1) {
           throw new Error('Cannot spend all floaters to play Stratospheric Birds');
@@ -1364,12 +1364,12 @@ export class Player {
     );
   }
 
-  public getMicrobesCanSpend(): number {
+  public getSpendableMicrobes(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
     return psychrophiles?.resourceCount ?? 0;
   }
 
-  public getFloatersCanSpend(): number {
+  public getSpendableFloaters(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
     return dirigibles?.resourceCount ?? 0;
   }
@@ -1746,8 +1746,8 @@ export class Player {
       steel: this.steel - reserveUnits.steel,
       titanium: this.titanium - reserveUnits.titanium,
       heat: this.heat - reserveUnits.heat,
-      floaters: this.getFloatersCanSpend(),
-      microbes: this.getMicrobesCanSpend(),
+      floaters: this.getSpendableFloaters(),
+      microbes: this.getSpendableMicrobes(),
       science: this.getSpendableScienceResources(),
       seeds: this.getSpendableSeedResources(),
       data: this.getSpendableData(),

@@ -1274,35 +1274,6 @@ export class Player {
     return Math.max(cost, 0);
   }
 
-  private canUseSteel(card: ICard): boolean {
-    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.BUILDING);
-  }
-
-  private canUseTitanium(card: ICard): boolean {
-    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.SPACE);
-  }
-
-  private canUseMicrobes(card: ICard): boolean {
-    return card.tags.includes(Tags.PLANT);
-  }
-
-  private canUseFloaters(card: ICard): boolean {
-    return card.tags.includes(Tags.VENUS);
-  }
-
-  private canUseScience(card: ICard): boolean {
-    return card.tags.includes(Tags.MOON);
-  }
-
-  private canUseSeeds(card: ICard): boolean {
-    return card.tags.includes(Tags.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
-  }
-
-  private canUseData(card: ICard): boolean {
-    // TODO(kberg): add this.corporation.name === CardName.AURORAI
-    return card.cardType === CardType.STANDARD_PROJECT;
-  }
-
   private playPreludeCard(): PlayerInput {
     return new SelectCard(
       'Select prelude card to play',
@@ -1314,15 +1285,24 @@ export class Player {
     );
   }
 
-  private paymentOptionsForCard(selectedCard: IProjectCard): Payment.Options {
+  private paymentOptionsForCard(card: IProjectCard): Payment.Options {
+    const canUseSteel = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.BUILDING);
+    const canUseTitanium = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.SPACE);
+    const canUseMicrobes = card.tags.includes(Tags.PLANT);
+    const canUseFloaters = card.tags.includes(Tags.VENUS);
+    const canUseScience = card.tags.includes(Tags.MOON);
+    const canUseSeeds = card.tags.includes(Tags.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
+    // TODO(kberg): add this.corporation.name === CardName.AURORAI
+    const canUseData = card.cardType === CardType.STANDARD_PROJECT;
+
     return {
-      steel: this.canUseSteel(selectedCard),
-      titanium: this.canUseTitanium(selectedCard),
-      seeds: this.canUseSeeds(selectedCard),
-      floaters: this.canUseFloaters(selectedCard),
-      microbes: this.canUseMicrobes(selectedCard),
-      science: this.canUseScience(selectedCard),
-      data: this.canUseData(selectedCard),
+      steel: canUseSteel,
+      titanium: canUseTitanium,
+      seeds: canUseSeeds,
+      floaters: canUseFloaters,
+      microbes: canUseMicrobes,
+      science: canUseScience,
+      data: canUseData,
     };
   }
 

@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -14,7 +14,7 @@ export class HE3Refinery extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.HE3_REFINERY,
       cost: 8,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
 
       metadata: {
         cardNumber: 'M49',

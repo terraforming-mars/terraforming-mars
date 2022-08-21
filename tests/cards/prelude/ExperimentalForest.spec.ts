@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ExperimentalForest} from '../../../src/server/cards/prelude/ExperimentalForest';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
@@ -19,6 +19,6 @@ describe('ExperimentalForest', function() {
     expect(selectSpace instanceof SelectSpace).is.true;
     expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
     expect(player.cardsInHand).has.lengthOf(2);
-    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.PLANT))).has.lengthOf(2);
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.PLANT))).has.lengthOf(2);
   });
 });

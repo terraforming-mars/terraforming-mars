@@ -7,7 +7,7 @@ import {played} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
@@ -48,7 +48,7 @@ export class MindSetMars extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (player.game.getCardPlayer(this.name) !== player) return;
-    if (card.tags.includes(Tags.BUILDING)) {
+    if (card.tags.includes(Tag.BUILDING)) {
       player.addResourceTo(this, {qty: 1, log: true});
     }
   }

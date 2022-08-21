@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.SPACE_ELEVATOR,
-      tags: [Tags.SPACE, Tags.BUILDING],
+      tags: [Tag.SPACE, Tag.BUILDING],
       cost: 27,
       productionBox: Units.of({titanium: 1}),
       victoryPoints: 2,

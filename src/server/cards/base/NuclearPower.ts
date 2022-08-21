@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,7 +13,7 @@ export class NuclearPower extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.NUCLEAR_POWER,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 10,
       productionBox: Units.of({energy: 3, megacredits: -2}),
 

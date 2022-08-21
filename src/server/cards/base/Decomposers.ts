@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -16,7 +16,7 @@ export class Decomposers extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DECOMPOSERS,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 5,
 
       resourceType: CardResource.MICROBE,
@@ -40,7 +40,7 @@ export class Decomposers extends Card implements IProjectCard {
   }
   public override resourceCount: number = 0;
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
+    player.addResourceTo(this, card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length);
   }
   public play(player: Player) {
     // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts

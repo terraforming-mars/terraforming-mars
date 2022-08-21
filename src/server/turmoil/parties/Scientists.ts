@@ -2,7 +2,7 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {Bonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -22,7 +22,7 @@ class ScientistsBonus01 implements Bonus {
   description: string = 'Gain 1 M€ for each Science tag you have';
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.SCIENCE, 'raw-pf');
+    return player.getTagCount(Tag.SCIENCE, 'raw-pf');
   }
 
   grant(game: Game) {

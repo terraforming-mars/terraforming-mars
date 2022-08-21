@@ -2,7 +2,7 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -28,7 +28,7 @@ class MarsFirstBonus01 implements Bonus {
   isDefault = true;
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.BUILDING, 'raw');
+    return player.getTagCount(Tag.BUILDING, 'raw');
   }
 
   grant(game: Game) {
@@ -73,7 +73,7 @@ class MarsFirstPolicy02 implements Policy {
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
+    if (card.tags.includes(Tag.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
   }
 }
 
@@ -103,7 +103,7 @@ class MarsFirstPolicy04 implements Policy {
       {
         title: 'Select how to pay for Turmoil Mars First action',
         afterPay: () => {
-          player.drawCard(1, {tag: Tags.BUILDING});
+          player.drawCard(1, {tag: Tag.BUILDING});
         },
       },
     ));

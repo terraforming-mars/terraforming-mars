@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ export class TitanAirScrapping extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 21,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       name: CardName.TITAN_AIRSCRAPPING,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,

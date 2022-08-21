@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,7 +13,7 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.FIRST_LUNAR_SETTLEMENT,
-      tags: [Tags.CITY, Tags.MOON],
+      tags: [Tag.CITY, Tag.MOON],
       productionBox: Units.of({megacredits: 1}),
       metadata: {
         description: 'Place a colony tile on the Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.',

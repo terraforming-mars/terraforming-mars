@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {Resources} from '../../../common/Resources';
 import {Units} from '../../../common/Units';
@@ -19,7 +19,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.COMMUNICATION_CENTER,
       cost: 13,
-      tags: [Tags.SPACE, Tags.MARS, Tags.BUILDING],
+      tags: [Tag.SPACE, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
       productionBox: Units.of({energy: -1}),
 

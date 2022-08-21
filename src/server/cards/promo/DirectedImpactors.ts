@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -19,7 +19,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DIRECTED_IMPACTORS,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 8,
       resourceType: CardResource.ASTEROID,
 

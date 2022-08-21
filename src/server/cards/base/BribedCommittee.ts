@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -11,7 +11,7 @@ export class BribedCommittee extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.BRIBED_COMMITTEE,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 7,
       tr: {tr: 2},
       victoryPoints: -2,

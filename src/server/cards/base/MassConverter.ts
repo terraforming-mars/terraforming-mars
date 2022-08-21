@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,11 +14,11 @@ export class MassConverter extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.MASS_CONVERTER,
-      tags: [Tags.SCIENCE, Tags.ENERGY],
+      tags: [Tag.SCIENCE, Tag.ENERGY],
       cost: 8,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
-      cardDiscount: {tag: Tags.SPACE, amount: 2, per: 'card'},
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),
+      cardDiscount: {tag: Tag.SPACE, amount: 2, per: 'card'},
       metadata: {
         cardNumber: '094',
         renderData: CardRenderer.builder((b) => {

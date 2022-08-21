@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {Resources} from '../../../common/Resources';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -30,10 +30,10 @@ export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {
       const deducted = Math.max(10 - influence, 0);
       player.deductResource(Resources.MEGACREDITS, deducted, {log: true, from: this.name});
     });
-    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.VENUS, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.EARTH, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.MARS, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.JOVIAN, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.MOON, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tag.VENUS, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tag.EARTH, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tag.MARS, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tag.JOVIAN, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tag.MOON, this.name, game, 2, false);
   }
 }

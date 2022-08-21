@@ -18,7 +18,7 @@ import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {StealResources} from '../deferredActions/StealResources';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -176,7 +176,7 @@ export abstract class Colony implements IColony {
         break;
 
       case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
-        action = new AddResourcesToCard(player, undefined, {count: quantity, restrictedTag: Tags.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)'});
+        action = new AddResourcesToCard(player, undefined, {count: quantity, restrictedTag: Tag.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)'});
         break;
 
       case ColonyBenefit.COPY_TRADE:

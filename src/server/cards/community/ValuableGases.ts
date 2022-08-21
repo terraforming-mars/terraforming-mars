@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -13,14 +13,14 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.VALUABLE_GASES,
-      tags: [Tags.JOVIAN, Tags.VENUS],
+      tags: [Tag.JOVIAN, Tag.VENUS],
       startingMegacredits: 6,
 
       metadata: {
         cardNumber: 'Y06',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(6).br.br;
-          b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: Tags.VENUS}).colon();
+          b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: Tag.VENUS}).colon();
           b.floaters(4, {digit});
         }),
         description: 'Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.',
@@ -31,7 +31,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
   public play(player: Player) {
     player.megaCredits += 6;
 
-    const playableCards = player.getPlayableCards().filter((card) => card.tags.includes(Tags.VENUS));
+    const playableCards = player.getPlayableCards().filter((card) => card.tags.includes(Tag.VENUS));
 
     if (playableCards.length > 0) {
       return new SelectProjectCardToPlay(

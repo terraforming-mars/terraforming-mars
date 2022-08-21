@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
@@ -17,7 +17,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
     super({
       cardType: CardType.CORPORATION,
       name: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,
-      tags: [Tags.ANIMAL, Tags.MOON],
+      tags: [Tag.ANIMAL, Tag.MOON],
       startingMegaCredits: 38,
       resourceType: CardResource.ANIMAL,
       initialActionText: 'Place a colony tile on the Moon.',
@@ -56,7 +56,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
-    const count = card.tags.filter((tag) => tag === Tags.ANIMAL).length;
+    const count = card.tags.filter((tag) => tag === Tag.ANIMAL).length;
     player.addResourceTo(this, count);
     return undefined;
   }

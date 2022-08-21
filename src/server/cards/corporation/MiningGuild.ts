@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
 import {Phase} from '../../../common/Phase';
@@ -19,7 +19,7 @@ export class MiningGuild extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.MINING_GUILD,
-      tags: [Tags.BUILDING, Tags.BUILDING],
+      tags: [Tag.BUILDING, Tag.BUILDING],
       startingMegaCredits: 30,
       productionBox: Units.of({steel: 1}),
 

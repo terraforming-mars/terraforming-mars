@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -17,7 +17,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
     super({
       cardType: CardType.ACTIVE,
       name: CardName.NITRITE_REDUCING_BACTERIA,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 11,
       resourceType: CardResource.MICROBE,
 

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
@@ -30,10 +30,10 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
     });
   }
 
-  public cloneTag: Tags = Tags.CLONE;
+  public cloneTag: Tag = Tag.CLONE;
 
-  public override get tags(): Array<Tags> {
-    return [this.cloneTag, Tags.BUILDING];
+  public override get tags(): Array<Tag> {
+    return [this.cloneTag, Tag.BUILDING];
   }
 
   public play(player: Player) {

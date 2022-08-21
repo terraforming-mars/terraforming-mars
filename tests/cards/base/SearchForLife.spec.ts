@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
@@ -41,8 +41,8 @@ describe('SearchForLife', function() {
   it('Should act', function() {
     player.playedCards.push(card);
 
-    while (game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] === Tags.MICROBE) === undefined ||
-               game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBE) === undefined) {
+    while (game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] === Tag.MICROBE) === undefined ||
+               game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tag.MICROBE) === undefined) {
       player.megaCredits = 1;
       card.action(player);
       game.deferredActions.runNext();

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,7 +14,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 6,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       name: CardName.URBAN_DECOMPOSERS,
       cardType: CardType.AUTOMATED,
 

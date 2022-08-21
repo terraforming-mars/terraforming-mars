@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
@@ -13,7 +13,7 @@ export class CoreMine extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.CORE_MINE,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       productionBox: Units.of({titanium: 1}),
       metadata: {
         description: 'Place a mine tile on the Moon and raise the Mining Rate 1 step. Increase your titanium production 1 step.',

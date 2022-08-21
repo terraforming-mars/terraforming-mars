@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
@@ -17,7 +17,7 @@ export class SmallComet extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SMALL_COMET,
       cost: 32,
-      tags: [Tags.MARS, Tags.SPACE],
+      tags: [Tag.MARS, Tag.SPACE],
       tr: {temperature: 1, oxygen: 1, oceans: 1},
 
       metadata: {

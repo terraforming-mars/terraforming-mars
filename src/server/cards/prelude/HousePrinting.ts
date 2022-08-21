@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -13,7 +13,7 @@ export class HousePrinting extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.HOUSE_PRINTING,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 10,
       productionBox: Units.of({steel: 1}),
       victoryPoints: 1,

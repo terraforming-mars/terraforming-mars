@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -15,7 +15,7 @@ export class SpacePort extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 22,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       name: CardName.SPACE_PORT,
       cardType: CardType.AUTOMATED,
       productionBox: Units.of({energy: -1, megacredits: 4}),

@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {Size} from '../../../common/cards/render/Size';
@@ -31,9 +31,9 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
     });
   }
 
-  public cloneTag: Tags = Tags.CLONE;
+  public cloneTag: Tag = Tag.CLONE;
 
-  public override get tags(): Array<Tags> {
+  public override get tags(): Array<Tag> {
     return [this.cloneTag, this.cloneTag];
   }
 

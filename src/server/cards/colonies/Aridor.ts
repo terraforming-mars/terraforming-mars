@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../../common/Resources';
@@ -35,7 +35,7 @@ export class Aridor extends Card implements ICorporationCard {
       },
     });
   }
-  public allTags = new Set<Tags>();
+  public allTags = new Set<Tag>();
   public initialAction(player: Player) {
     const game = player.game;
     if (game.discardedColonies.length === 0) return undefined;
@@ -70,12 +70,12 @@ export class Aridor extends Card implements ICorporationCard {
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (
       card.cardType === CardType.EVENT ||
-        card.tags.filter((tag) => tag !== Tags.WILD).length === 0 ||
+        card.tags.filter((tag) => tag !== Tag.WILD).length === 0 ||
         !player.isCorporation(this.name)) {
       return undefined;
     }
 
-    for (const tag of card.tags.filter((tag) => tag !== Tags.WILD)) {
+    for (const tag of card.tags.filter((tag) => tag !== Tag.WILD)) {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {

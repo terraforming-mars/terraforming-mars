@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,7 +16,7 @@ export class ColonistShuttles extends MoonCard {
     super({
       name: CardName.COLONIST_SHUTTLES,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 12,
       reserveUnits: Units.of({titanium: 1}),
       tr: {moonColony: 1},

@@ -8,7 +8,7 @@ import {Ants} from '../../src/server/cards/base/Ants';
 import {Ceres} from '../../src/server/colonies/Ceres';
 import {Celestic} from '../../src/server/cards/venusNext/Celestic';
 import {PartyName} from '../../src/common/turmoil/PartyName';
-import {Tags} from '../../src/common/cards/Tags';
+import {Tag} from '../../src/common/cards/Tag';
 import {ResearchCoordination} from '../../src/server/cards/prelude/ResearchCoordination';
 import {Resources} from '../../src/common/Resources';
 import {SmallAsteroid} from '../../src/server/cards/promo/SmallAsteroid';
@@ -158,7 +158,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for same tags', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE, 2));
+    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE, 2));
 
     const ants = new Ants();
     player.playedCards.push(ants);
@@ -170,7 +170,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for different tags', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE).tag(Tags.ANIMAL));
+    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE).tag(Tag.ANIMAL));
 
     player.tagsForTest = {wild: 1};
     expect(requirements.satisfies(player)).eq(false);
@@ -180,7 +180,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for max tag requirement', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE, 1, {max: true}));
+    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE, 1, {max: true}));
 
     player.tagsForTest = {microbe: 1};
     expect(requirements.satisfies(player)).eq(true);
@@ -193,7 +193,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for any tag requirement', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE, 2, {all: true}));
+    const requirements = CardRequirements.builder((b) => b.tag(Tag.MICROBE, 2, {all: true}));
 
     player.tagsForTest = {microbe: 2};
     expect(requirements.satisfies(player)).is.true;

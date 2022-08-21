@@ -6,7 +6,7 @@ import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('MassConverter', function() {
   let card: MassConverter;
@@ -32,7 +32,7 @@ describe('MassConverter', function() {
     expect(card.getCardDiscount(player, card)).to.eq(0);
     expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
 
-    const fake = fakeCard({tags: [Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE]});
+    const fake = fakeCard({tags: [Tag.SPACE, Tag.SPACE, Tag.SPACE, Tag.SPACE, Tag.SPACE]});
     expect(card.getCardDiscount(player, fake)).eq(2);
   });
 });

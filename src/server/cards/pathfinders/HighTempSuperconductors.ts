@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../../common/Resources';
 import {PartyName} from '../../../common/turmoil/PartyName';
@@ -16,10 +16,10 @@ export class HighTempSuperconductors extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.HIGH_TEMP_SUPERCONDUCTORS,
       cost: 10,
-      tags: [Tags.ENERGY, Tags.SCIENCE],
+      tags: [Tag.ENERGY, Tag.SCIENCE],
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
-      cardDiscount: {tag: Tags.ENERGY, amount: 3},
+      cardDiscount: {tag: Tag.ENERGY, amount: 3},
 
       metadata: {
         cardNumber: 'PfTMP',

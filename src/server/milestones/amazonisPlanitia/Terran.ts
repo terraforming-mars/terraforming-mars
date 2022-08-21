@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {IMilestone} from '../IMilestone';
 
@@ -7,7 +7,7 @@ export class Terran implements IMilestone {
   public description: string = 'Have 6 Earth tags';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.EARTH);
+    return player.getTagCount(Tag.EARTH);
   }
 
   public canClaim(player: Player): boolean {

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,11 +13,11 @@ export class MagneticShield extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MAGNETIC_SHIELD,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 24,
       tr: {tr: 4},
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 3)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.ENERGY, 3)),
       metadata: {
         cardNumber: 'X24',
         renderData: CardRenderer.builder((b) => b.tr(4, {digit})),

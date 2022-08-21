@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {cast, fakeCard} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {assertPlaceCityTile, assertSendDelegateToArea} from './assertions';
@@ -34,14 +34,14 @@ describe('MindSetMars', function() {
   });
 
   it('when you play a jovian tag', function() {
-    const a = fakeCard({name: 'A' as CardName, tags: [Tags.BUILDING]});
+    const a = fakeCard({name: 'A' as CardName, tags: [Tag.BUILDING]});
     expect(card.resourceCount).eq(0);
     player.playCard(a);
     expect(card.resourceCount).eq(1);
   });
 
   it('when opponent plays a building tag', function() {
-    const a = fakeCard({name: 'A' as CardName, tags: [Tags.BUILDING]});
+    const a = fakeCard({name: 'A' as CardName, tags: [Tag.BUILDING]});
     expect(card.resourceCount).eq(0);
     player2.playCard(a);
     expect(card.resourceCount).eq(0);

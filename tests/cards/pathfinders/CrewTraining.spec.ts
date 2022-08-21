@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
 import {Game} from '../../../src/server/Game';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -21,7 +21,7 @@ describe('CrewTraining', function() {
 
   it('Should play', function() {
     expect(player.getTerraformRating()).eq(14);
-    expect(card.tags).deep.eq([Tags.CLONE, Tags.CLONE]);
+    expect(card.tags).deep.eq([Tag.CLONE, Tag.CLONE]);
 
     card.play(player);
 
@@ -51,6 +51,6 @@ describe('CrewTraining', function() {
       moon: -1,
       vps: [],
     });
-    expect(card.tags).deep.eq([Tags.EARTH, Tags.EARTH]);
+    expect(card.tags).deep.eq([Tag.EARTH, Tag.EARTH]);
   });
 });

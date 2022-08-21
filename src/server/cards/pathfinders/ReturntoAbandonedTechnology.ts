@@ -5,7 +5,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 
 export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
@@ -14,7 +14,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.RETURN_TO_ABANDONED_TECHNOLOGY,
       cost: 4,
-      tags: [Tags.MARS],
+      tags: [Tag.MARS],
 
       metadata: {
         cardNumber: 'Pf22',

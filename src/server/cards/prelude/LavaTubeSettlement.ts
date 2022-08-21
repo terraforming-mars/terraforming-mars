@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -16,7 +16,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.LAVA_TUBE_SETTLEMENT,
-      tags: [Tags.BUILDING, Tags.CITY],
+      tags: [Tag.BUILDING, Tag.CITY],
       cost: 15,
       productionBox: Units.of({energy: -1, megacredits: 2}),
 

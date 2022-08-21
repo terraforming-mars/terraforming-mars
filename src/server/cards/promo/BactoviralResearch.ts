@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ export class BactoviralResearch extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.BACTOVIRAL_RESEARCH,
-      tags: [Tags.MICROBE, Tags.SCIENCE],
+      tags: [Tag.MICROBE, Tag.SCIENCE],
       cost: 10,
       metadata: {
         cardNumber: 'X35',
@@ -30,7 +30,7 @@ export class BactoviralResearch extends Card implements IProjectCard {
   public play(player: Player) {
     player.drawCard();
 
-    const scienceTags: number = player.getTagCount(Tags.SCIENCE) + 1;
+    const scienceTags: number = player.getTagCount(Tag.SCIENCE) + 1;
     const microbeCards = player.getResourceCards(CardResource.MICROBE);
 
     if (microbeCards.length === 0) {

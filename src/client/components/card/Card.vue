@@ -32,7 +32,7 @@ import CardContent from './CardContent.vue';
 import CardHelp from './CardHelp.vue';
 import {ICardMetadata} from '@/common/cards/ICardMetadata';
 import {ICardRequirements} from '@/common/cards/ICardRequirements';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {CardResource} from '@/common/CardResource';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
@@ -90,12 +90,12 @@ export default Vue.extend({
       tags.forEach((tag, idx) => {
         // Clone are changed on card implementations but that's not passed down directly through the
         // model, however, it sends down the `cloneTag` field. So this function does the substitution.
-        if (tag === Tags.CLONE && this.card.cloneTag !== undefined) {
+        if (tag === Tag.CLONE && this.card.cloneTag !== undefined) {
           tags[idx] = this.card.cloneTag;
         }
       });
       if (type === CardType.EVENT) {
-        tags.push(Tags.EVENT);
+        tags.push(Tag.EVENT);
       }
       return tags;
     },

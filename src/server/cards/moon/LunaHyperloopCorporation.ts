@@ -10,14 +10,14 @@ import {IActionCard} from '../ICard';
 import {all} from '../Options';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class LunaHyperloopCorporation extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.LUNA_HYPERLOOP_CORPORATION,
-      tags: [Tags.MOON, Tags.BUILDING],
+      tags: [Tag.MOON, Tag.BUILDING],
       startingMegaCredits: 38,
 
       victoryPoints: 'special',

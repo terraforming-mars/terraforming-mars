@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -16,7 +16,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.CERES_SPACEPORT,
-      tags: [Tags.JOVIAN, Tags.JOVIAN, Tags.CITY, Tags.SPACE],
+      tags: [Tag.JOVIAN, Tag.JOVIAN, Tag.CITY, Tag.SPACE],
       cost: 36,
       victoryPoints: 1,
       tr: {oceans: 1},
@@ -39,7 +39,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
     const game = player.game;
     player.addProduction(Resources.MEGACREDITS, 2);
     // The +1 below is for the two Jovian tags on this card.
-    player.addProduction(Resources.TITANIUM, (1 + Math.floor(player.getTagCount(Tags.JOVIAN) / 2)), {log: true});
+    player.addProduction(Resources.TITANIUM, (1 + Math.floor(player.getTagCount(Tag.JOVIAN) / 2)), {log: true});
     player.drawCard();
     player.game.addCityTile(player, SpaceName.CERES_SPACEPORT, SpaceType.COLONY);
     game.defer(new PlaceOceanTile(player));

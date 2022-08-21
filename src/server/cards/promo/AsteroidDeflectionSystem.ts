@@ -5,7 +5,7 @@ import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,7 +18,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ASTEROID_DEFLECTION_SYSTEM,
-      tags: [Tags.SPACE, Tags.EARTH, Tags.BUILDING],
+      tags: [Tag.SPACE, Tag.EARTH, Tag.BUILDING],
       cost: 13,
 
       resourceType: CardResource.ASTEROID,
@@ -57,7 +57,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
 
   public action(player: Player) {
     const topCard = player.game.dealer.dealCard(player.game);
-    if (topCard.tags.includes(Tags.SPACE)) player.addResourceTo(this);
+    if (topCard.tags.includes(Tag.SPACE)) player.addResourceTo(this);
     player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
     player.game.dealer.discard(topCard);
     return undefined;

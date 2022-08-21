@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../../common/Resources';
@@ -9,7 +9,7 @@ export class Biolab extends PreludeCard {
   constructor() {
     super({
       name: CardName.BIOLAB,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
 
       metadata: {
         cardNumber: 'P04',

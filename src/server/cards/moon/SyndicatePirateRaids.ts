@@ -4,14 +4,14 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class SyndicatePirateRaids extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SYNDICATE_PIRATE_RAIDS,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 8,
 
       metadata: {

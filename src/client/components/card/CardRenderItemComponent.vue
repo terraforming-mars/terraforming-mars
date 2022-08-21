@@ -13,7 +13,7 @@ import {generateClassString} from '@/common/utils/utils';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
@@ -321,7 +321,7 @@ export default Vue.extend({
         }
       }
 
-      const previouslyRendered: Array<Tags | AltSecondaryTag> = [
+      const previouslyRendered: Array<Tag | AltSecondaryTag> = [
         AltSecondaryTag.OXYGEN,
         AltSecondaryTag.MOON_COLONY_RATE,
         AltSecondaryTag.MOON_MINING_RATE,

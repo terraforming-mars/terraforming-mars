@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ export class ArchaeBacteria extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ARCHAEBACTERIA,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 6,
 
       requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),

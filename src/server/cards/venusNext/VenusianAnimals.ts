@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -15,7 +15,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
     super({
       name: CardName.VENUSIAN_ANIMALS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS, Tags.ANIMAL, Tags.SCIENCE],
+      tags: [Tag.VENUS, Tag.ANIMAL, Tag.SCIENCE],
       cost: 15,
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
@@ -38,6 +38,6 @@ export class VenusianAnimals extends Card implements IProjectCard {
     return undefined;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, player.cardTagCount(card, Tags.SCIENCE));
+    player.addResourceTo(this, player.cardTagCount(card, Tag.SCIENCE));
   }
 }

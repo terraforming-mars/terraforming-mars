@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Resources} from '../../../common/Resources';
@@ -14,11 +14,11 @@ export class CheungShingMARS extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.CHEUNG_SHING_MARS,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 44,
       productionBox: Units.of({megacredits: 3}),
 
-      cardDiscount: {tag: Tags.BUILDING, amount: 2},
+      cardDiscount: {tag: Tag.BUILDING, amount: 2},
       metadata: {
         cardNumber: 'R16',
         description: 'You start with 3 M€ production and 44 M€.',

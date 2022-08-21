@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,12 +16,12 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
     super({
       name: CardName.PRIDE_OF_THE_EARTH_ARKSHIP,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SCIENCE, Tags.SCIENCE, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SPACE],
       cost: 22,
 
       resourceType: CardResource.SCIENCE,
       victoryPoints: VictoryPoints.resource(1, 1),
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.SPACE, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.SPACE, 2)),
       reserveUnits: Units.of({titanium: 2}),
 
       metadata: {
@@ -44,11 +44,11 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   }
 
   public canAct(player: Player) {
-    return player.getTagCount(Tags.SCIENCE) >= 5;
+    return player.getTagCount(Tag.SCIENCE) >= 5;
   }
 
   public action(player: Player) {
-    const count = Math.floor(player.getTagCount(Tags.SCIENCE) / 5);
+    const count = Math.floor(player.getTagCount(Tag.SCIENCE) / 5);
     player.addResourceTo(this, count);
 
     return undefined;

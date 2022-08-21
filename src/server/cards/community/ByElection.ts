@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -10,7 +10,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.BY_ELECTION,
-      tags: [Tags.WILD],
+      tags: [Tag.WILD],
 
       metadata: {
         cardNumber: 'Y02',

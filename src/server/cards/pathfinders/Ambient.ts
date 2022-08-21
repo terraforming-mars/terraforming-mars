@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -17,7 +17,7 @@ export class Ambient extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.AMBIENT,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       startingMegaCredits: 38,
 
       initialActionText: 'Raise the Venus scale 2 steps.',
@@ -55,7 +55,7 @@ export class Ambient extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (player.isCorporation(this.name) && card.tags.includes(Tags.VENUS)) {
+    if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
       player.addProduction(Resources.HEAT, 1, {log: true});
     }
   }

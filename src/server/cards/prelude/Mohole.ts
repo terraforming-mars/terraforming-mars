@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -11,7 +11,7 @@ export class Mohole extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOHOLE,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       productionBox: Units.of({heat: 3}),
 
       metadata: {

@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../../common/Resources';
@@ -11,7 +11,7 @@ export class EarlySettlement extends PreludeCard {
   constructor() {
     super({
       name: CardName.EARLY_SETTLEMENT,
-      tags: [Tags.BUILDING, Tags.CITY],
+      tags: [Tag.BUILDING, Tag.CITY],
       productionBox: Units.of({plants: 1}),
 
       metadata: {

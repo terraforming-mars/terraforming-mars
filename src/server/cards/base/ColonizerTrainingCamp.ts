@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ export class ColonizerTrainingCamp extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.COLONIZER_TRAINING_CAMP,
-      tags: [Tags.JOVIAN, Tags.BUILDING],
+      tags: [Tag.JOVIAN, Tag.BUILDING],
       cost: 8,
       victoryPoints: 2,
 

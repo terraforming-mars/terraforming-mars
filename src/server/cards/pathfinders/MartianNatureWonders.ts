@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -17,7 +17,7 @@ export class MartianNatureWonders extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.MARTIAN_NATURE_WONDERS,
       cost: 13,
-      tags: [Tags.MARS],
+      tags: [Tag.MARS],
       victoryPoints: 2,
 
       metadata: {

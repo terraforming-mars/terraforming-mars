@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,7 +10,7 @@ export class EarthCatapult extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.EARTH_CATAPULT,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 23,
       victoryPoints: 2,
 

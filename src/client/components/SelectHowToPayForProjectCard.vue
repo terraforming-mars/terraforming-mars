@@ -11,7 +11,7 @@ import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/cli
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {InputResponse} from '@/common/inputs/InputResponse';
@@ -198,7 +198,7 @@ export default Vue.extend({
     },
     canUseSteel() {
       if (this.card !== undefined && this.available.steel > 0) {
-        if (this.tags.includes(Tags.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
+        if (this.tags.includes(Tag.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
       }
@@ -206,7 +206,7 @@ export default Vue.extend({
     },
     canUseTitanium() {
       if (this.card !== undefined && this.available.titanium > 0) {
-        if (this.tags.includes(Tags.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
+        if (this.tags.includes(Tag.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
       }
@@ -215,7 +215,7 @@ export default Vue.extend({
     canUseMicrobes() {
       // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
       if (this.card !== undefined && (this.playerinput.microbes ?? 0) > 0) {
-        if (this.tags.includes(Tags.PLANT)) {
+        if (this.tags.includes(Tag.PLANT)) {
           return true;
         }
       }
@@ -224,7 +224,7 @@ export default Vue.extend({
     canUseFloaters() {
       // FYI Floaters are limited to the DIRIGIBLES card.
       if (this.card !== undefined && (this.playerinput.floaters ?? 0) > 0) {
-        if (this.tags.includes(Tags.VENUS)) {
+        if (this.tags.includes(Tag.VENUS)) {
           return true;
         }
       }
@@ -233,7 +233,7 @@ export default Vue.extend({
     canUseScience() {
       // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
       if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
-        if (this.tags.includes(Tags.MOON)) {
+        if (this.tags.includes(Tag.MOON)) {
           return true;
         }
       }
@@ -243,7 +243,7 @@ export default Vue.extend({
       // FYI Seed Resources are limited to the Soylent Seedling Systems corp card, which allows spending its
       // resources for plant cards and the standard greenery project.
       if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
-        if (this.tags.includes(Tags.PLANT)) {
+        if (this.tags.includes(Tag.PLANT)) {
           return true;
         }
         if (this.card.name === CardName.GREENERY_STANDARD_PROJECT) {

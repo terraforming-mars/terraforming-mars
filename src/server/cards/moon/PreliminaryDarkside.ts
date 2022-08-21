@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -16,7 +16,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
     super({
       name: CardName.PRELIMINARY_DARKSIDE,
       cardType: CardType.EVENT,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 13,
       tr: {moonMining: 1},
 

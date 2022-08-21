@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
@@ -16,7 +16,7 @@ export class MaxwellBase extends Card implements IActionCard {
     super({
       name: CardName.MAXWELL_BASE,
       cardType: CardType.ACTIVE,
-      tags: [Tags.CITY, Tags.VENUS],
+      tags: [Tag.CITY, Tag.VENUS],
       cost: 18,
 
       requirements: CardRequirements.builder((b) => b.venus(12)),
@@ -26,7 +26,7 @@ export class MaxwellBase extends Card implements IActionCard {
         cardNumber: '238',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 resource to ANOTHER VENUS CARD.', (eb) => {
-            eb.empty().startAction.wild(1, {secondaryTag: Tags.VENUS});
+            eb.empty().startAction.wild(1, {secondaryTag: Tag.VENUS});
           }).br;
           b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
         }),
@@ -47,7 +47,7 @@ export class MaxwellBase extends Card implements IActionCard {
   }
 
   public getResCards(player: Player): ICard[] {
-    return player.getResourceCards().filter((card) => card.tags.includes(Tags.VENUS));
+    return player.getResourceCards().filter((card) => card.tags.includes(Tag.VENUS));
   }
 
   public canAct(player: Player): boolean {

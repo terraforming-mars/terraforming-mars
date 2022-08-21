@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Resources} from '../../../src/common/Resources';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -40,14 +40,14 @@ describe('Ambient', function() {
     card.onCardPlayed(player, fakeCard({tags: []}));
     expect(player.getProduction(Resources.HEAT)).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tags.EARTH]}));
+    card.onCardPlayed(player, fakeCard({tags: [Tag.EARTH]}));
     expect(player.getProduction(Resources.HEAT)).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tags.VENUS]}));
+    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
     expect(player.getProduction(Resources.HEAT)).eq(1);
     expect(player2.getProduction(Resources.HEAT)).eq(0);
 
-    card.onCardPlayed(player2, fakeCard({tags: [Tags.VENUS]}));
+    card.onCardPlayed(player2, fakeCard({tags: [Tag.VENUS]}));
     expect(player.getProduction(Resources.HEAT)).eq(1);
     expect(player2.getProduction(Resources.HEAT)).eq(0);
   });

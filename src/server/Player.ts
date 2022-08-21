@@ -38,7 +38,7 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from '../common/boards/SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
-import {Tags} from '../common/cards/Tags';
+import {Tag} from '../common/cards/Tag';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {Timer} from '../common/Timer';
@@ -667,8 +667,8 @@ export class Player {
   public getNoTagsCount() {
     let noTagsCount: number = 0;
 
-    noTagsCount += this.corporations.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILD)).length;
-    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILD)).length;
+    noTagsCount += this.corporations.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
+    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
 
     return noTagsCount;
   }
@@ -793,21 +793,21 @@ export class Player {
 
   public getAllTags(): Array<ITagCount> {
     return [
-      {tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, 'raw')},
-      {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, 'raw')},
-      {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, 'raw')},
-      {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, 'raw')},
-      {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, 'raw')},
-      {tag: Tags.MARS, count: this.getTagCount(Tags.MARS, 'raw')},
-      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, 'raw')},
-      {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, 'raw')},
-      {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, 'raw')},
-      {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, 'raw')},
-      {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, 'raw')},
-      {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, 'raw')},
-      {tag: Tags.WILD, count: this.getTagCount(Tags.WILD, 'raw')},
-      {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, 'raw')},
-      {tag: Tags.EVENT, count: this.getPlayedEventsCount()},
+      {tag: Tag.BUILDING, count: this.getTagCount(Tag.BUILDING, 'raw')},
+      {tag: Tag.CITY, count: this.getTagCount(Tag.CITY, 'raw')},
+      {tag: Tag.EARTH, count: this.getTagCount(Tag.EARTH, 'raw')},
+      {tag: Tag.ENERGY, count: this.getTagCount(Tag.ENERGY, 'raw')},
+      {tag: Tag.JOVIAN, count: this.getTagCount(Tag.JOVIAN, 'raw')},
+      {tag: Tag.MARS, count: this.getTagCount(Tag.MARS, 'raw')},
+      {tag: Tag.MICROBE, count: this.getTagCount(Tag.MICROBE, 'raw')},
+      {tag: Tag.MOON, count: this.getTagCount(Tag.MOON, 'raw')},
+      {tag: Tag.PLANT, count: this.getTagCount(Tag.PLANT, 'raw')},
+      {tag: Tag.SCIENCE, count: this.getTagCount(Tag.SCIENCE, 'raw')},
+      {tag: Tag.SPACE, count: this.getTagCount(Tag.SPACE, 'raw')},
+      {tag: Tag.VENUS, count: this.getTagCount(Tag.VENUS, 'raw')},
+      {tag: Tag.WILD, count: this.getTagCount(Tag.WILD, 'raw')},
+      {tag: Tag.ANIMAL, count: this.getTagCount(Tag.ANIMAL, 'raw')},
+      {tag: Tag.EVENT, count: this.getPlayedEventsCount()},
     ].filter((tag) => tag.count > 0);
   }
 
@@ -821,33 +821,33 @@ export class Player {
    * 'vps': Same as raw, but include event tags.
    * 'raw-pf': Same as raw, but includes Mars Tags when tag is Science  (Habitat Marte)
    */
-  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
+  public getTagCount(tag: Tag, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
     const includeEvents = this.isCorporation(CardName.ODYSSEY);
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.getRawTagCount(tag, includeEvents);
 
     // Leavitt Station hook
-    if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
+    if (tag === Tag.SCIENCE && this.scienceTagCount > 0) {
       tagCount += this.scienceTagCount;
     }
 
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
-      if (tag === Tags.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-        tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
+      if (tag === Tag.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
+        tagCount += this.getRawTagCount(Tag.MOON, includeEvents);
       }
 
-      if (tag !== Tags.WILD) {
-        tagCount += this.getRawTagCount(Tags.WILD, includeEvents);
+      if (tag !== Tag.WILD) {
+        tagCount += this.getRawTagCount(Tag.WILD, includeEvents);
       }
     }
 
     // Habitat Marte hook
     if (mode !== 'raw') {
-      if (tag === Tags.SCIENCE && this.isCorporation(CardName.HABITAT_MARTE)) {
-        tagCount += this.getRawTagCount(Tags.MARS, includeEvents);
+      if (tag === Tag.SCIENCE && this.isCorporation(CardName.HABITAT_MARTE)) {
+        tagCount += this.getRawTagCount(Tag.MARS, includeEvents);
       }
     }
 
@@ -865,22 +865,22 @@ export class Player {
     return tagCount;
   }
 
-  public cardHasTag(card: ICard, target: Tags): boolean {
+  public cardHasTag(card: ICard, target: Tag): boolean {
     for (const tag of card.tags) {
       if (tag === target) return true;
-      if (tag === Tags.MARS &&
-        target === Tags.SCIENCE &&
+      if (tag === Tag.MARS &&
+        target === Tag.SCIENCE &&
         this.isCorporation(CardName.HABITAT_MARTE)) {
         return true;
       }
     }
     return false;
   }
-  public cardTagCount(card: ICard, target: Tags): number {
+  public cardTagCount(card: ICard, target: Tag): number {
     let count = 0;
     for (const tag of card.tags) {
       if (tag === target) count++;
-      if (tag === Tags.MARS && target === Tags.SCIENCE &&
+      if (tag === Tag.MARS && target === Tag.SCIENCE &&
         this.isCorporation(CardName.HABITAT_MARTE)) {
         count++;
       }
@@ -889,7 +889,7 @@ export class Player {
   }
 
   // Counts the tags in the player's play area only.
-  public getRawTagCount(tag: Tags, includeEventsTags: boolean) {
+  public getRawTagCount(tag: Tag, includeEventsTags: boolean) {
     let tagCount = 0;
 
     this.tableau.forEach((card: IProjectCard | ICorporationCard) => {
@@ -903,18 +903,18 @@ export class Player {
 
   // Return the total number of tags assocaited with these types.
   // Tag substitutions are included
-  public getMultipleTagCount(tags: Array<Tags>, mode: 'default' | 'milestones' = 'default'): number {
+  public getMultipleTagCount(tags: Array<Tag>, mode: 'default' | 'milestones' = 'default'): number {
     let tagCount = 0;
     tags.forEach((tag) => {
       tagCount += this.getRawTagCount(tag, false);
     });
 
     // This is repeated behavior from getTagCount, sigh, OK.
-    if (tags.includes(Tags.EARTH) && !tags.includes(Tags.MOON) && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-      tagCount += this.getRawTagCount(Tags.MOON, false);
+    if (tags.includes(Tag.EARTH) && !tags.includes(Tag.MOON) && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
+      tagCount += this.getRawTagCount(Tag.MOON, false);
     }
 
-    tagCount += this.getRawTagCount(Tags.WILD, false);
+    tagCount += this.getRawTagCount(Tag.WILD, false);
 
     // Chimera has 2 wild tags but should only count as one for milestones.
     if (this.isCorporation(CardName.CHIMERA) && mode === 'milestones') tagCount--;
@@ -923,11 +923,11 @@ export class Player {
   }
 
   // Counts the number of distinct tags
-  public getDistinctTagCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tags): number {
+  public getDistinctTagCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
     let wildTagCount: number = 0;
-    const uniqueTags = new Set<Tags>();
-    const addTag = (tag: Tags) => {
-      if (tag === Tags.WILD) {
+    const uniqueTags = new Set<Tag>();
+    const addTag = (tag: Tag) => {
+      if (tag === Tag.WILD) {
         wildTagCount++;
       } else {
         uniqueTags.add(tag);
@@ -948,7 +948,7 @@ export class Player {
       }
     }
     // Leavitt Station hook
-    if (this.scienceTagCount > 0) uniqueTags.add(Tags.SCIENCE);
+    if (this.scienceTagCount > 0) uniqueTags.add(Tag.SCIENCE);
 
     if (mode === 'globalEvent') return uniqueTags.size;
 
@@ -966,16 +966,16 @@ export class Player {
   }
 
   // Return true if this player has all the tags in `tags` showing.
-  public checkMultipleTagPresence(tags: Array<Tags>): boolean {
+  public checkMultipleTagPresence(tags: Array<Tag>): boolean {
     let distinctCount = 0;
     tags.forEach((tag) => {
       if (this.getTagCount(tag, 'raw') > 0) {
         distinctCount++;
-      } else if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
+      } else if (tag === Tag.SCIENCE && this.hasTurmoilScienceTagBonus) {
         distinctCount++;
       }
     });
-    if (distinctCount + this.getTagCount(Tags.WILD) >= tags.length) {
+    if (distinctCount + this.getTagCount(Tag.WILD) >= tags.length) {
       return true;
     }
     return false;
@@ -1267,7 +1267,7 @@ export class Player {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
+    if (card.tags.includes(Tag.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
       cost -= 2;
     }
 
@@ -1286,12 +1286,12 @@ export class Player {
   }
 
   private paymentOptionsForCard(card: IProjectCard): Payment.Options {
-    const canUseSteel = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.BUILDING);
-    const canUseTitanium = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.SPACE);
-    const canUseMicrobes = card.tags.includes(Tags.PLANT);
-    const canUseFloaters = card.tags.includes(Tags.VENUS);
-    const canUseScience = card.tags.includes(Tags.MOON);
-    const canUseSeeds = card.tags.includes(Tags.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
+    const canUseSteel = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING);
+    const canUseTitanium = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE);
+    const canUseMicrobes = card.tags.includes(Tag.PLANT);
+    const canUseFloaters = card.tags.includes(Tag.VENUS);
+    const canUseScience = card.tags.includes(Tag.MOON);
+    const canUseSeeds = card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
     // TODO(kberg): add this.corporation.name === CardName.AURORAI
     const canUseData = card.cardType === CardType.STANDARD_PROJECT;
 
@@ -1454,7 +1454,7 @@ export class Player {
     }
 
     // See DeclareCloneTag for why.
-    if (!selectedCard.tags.includes(Tags.CLONE)) {
+    if (!selectedCard.tags.includes(Tag.CLONE)) {
       this.onCardPlayed(selectedCard);
     }
 

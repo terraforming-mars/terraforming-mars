@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,11 +11,11 @@ export class SpaceStation extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.SPACE_STATION,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 10,
       victoryPoints: 1,
 
-      cardDiscount: {tag: Tags.SPACE, amount: 2},
+      cardDiscount: {tag: Tag.SPACE, amount: 2},
       metadata: {
         cardNumber: '025',
         renderData: CardRenderer.builder((b) => {

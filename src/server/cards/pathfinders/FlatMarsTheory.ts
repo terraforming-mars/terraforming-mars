@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../../common/Resources';
 import {max} from '../Options';
@@ -15,8 +15,8 @@ export class FlatMarsTheory extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.FLAT_MARS_THEORY,
       cost: 8,
-      tags: [Tags.EARTH],
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 1, {max})),
+      tags: [Tag.EARTH],
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 1, {max})),
 
       metadata: {
         cardNumber: 'Pf39',

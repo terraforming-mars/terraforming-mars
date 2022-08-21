@@ -5,7 +5,7 @@ import {Units} from '../Units';
 import {CardName} from '../cards/CardName';
 import {Resources} from '../Resources';
 import {CardDiscount} from '../cards/Types';
-import {Tags} from '../cards/Tags';
+import {Tag} from '../cards/Tag';
 
 export interface CardModel {
     name: CardName;
@@ -19,6 +19,6 @@ export interface CardModel {
     warning?: string | Message;
     reserveUnits: Readonly<Units>; // Written for The Moon, but useful in other contexts.
     bonusResource?: Array<Resources>; // Used with the Mining cards and Robotic Workforce
-    cloneTag?: Tags; // Used with Pathfinders
+    cloneTag?: Tag; // Used with Pathfinders
     startingMegacredits?: number;
 }

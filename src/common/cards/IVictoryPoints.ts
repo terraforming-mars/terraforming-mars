@@ -1,7 +1,7 @@
-import {Tags} from './Tags';
+import {Tag} from './Tag';
 
 export interface IVictoryPoints {
-  type: 'resource' | Tags,
+  type: 'resource' | Tag,
   points: number,
   per: number,
 }

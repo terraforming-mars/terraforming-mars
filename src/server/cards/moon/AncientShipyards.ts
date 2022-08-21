@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Resources} from '../../../common/Resources';
@@ -16,7 +16,7 @@ export class AncientShipyards extends MoonCard {
     super({
       name: CardName.ANCIENT_SHIPYARDS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.MOON, Tags.SPACE],
+      tags: [Tag.MOON, Tag.SPACE],
       cost: 6,
 
       resourceType: CardResource.RESOURCE_CUBE,

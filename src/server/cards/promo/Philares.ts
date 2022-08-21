@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -20,7 +20,7 @@ export class Philares extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.PHILARES,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 47,
       initialActionText: 'Place a greenery tile and raise the oxygen 1 step',
 

@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class Aphrodite extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.APHRODITE,
-      tags: [Tags.PLANT, Tags.VENUS],
+      tags: [Tag.PLANT, Tag.VENUS],
       startingMegaCredits: 47,
       cardType: CardType.CORPORATION,
 

@@ -8,7 +8,7 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
@@ -18,7 +18,7 @@ export class OceanFarm extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.OCEAN_FARM,
-      tags: [Tags.PLANT, Tags.BUILDING],
+      tags: [Tag.PLANT, Tag.BUILDING],
       cost: 15,
       productionBox: Units.of({plants: 1, heat: 1}),
 

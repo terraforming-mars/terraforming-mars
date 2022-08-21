@@ -31,7 +31,7 @@ import TagCount from '@/client/components/TagCount.vue';
 import {ITagCount} from '@/common/cards/ITagCount';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {GameModel} from '@/common/models/GameModel';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {SpecialTags} from '@/client/cards/SpecialTags';
 import PlayerTagDiscount from '@/client/components/overview/PlayerTagDiscount.vue';
 import PointsPerTag from '@/client/components/overview/PointsPerTag.vue';
@@ -39,7 +39,7 @@ import {PartyName} from '@/common/turmoil/PartyName';
 import {Shared} from '@/client/components/overview/Shared';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
-type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
+type InterfaceTagsType = Tag | SpecialTags | 'all' | 'separator';
 type TagDetail = {
   name: InterfaceTagsType;
   discount: number;
@@ -48,23 +48,23 @@ type TagDetail = {
 };
 
 const ORDER: Array<InterfaceTagsType> = [
-  Tags.BUILDING,
-  Tags.SPACE,
-  Tags.SCIENCE,
-  Tags.ENERGY,
-  Tags.EARTH,
-  Tags.JOVIAN,
-  Tags.VENUS,
-  Tags.PLANT,
-  Tags.MICROBE,
-  Tags.ANIMAL,
-  Tags.CITY,
-  Tags.MOON,
-  Tags.MARS,
+  Tag.BUILDING,
+  Tag.SPACE,
+  Tag.SCIENCE,
+  Tag.ENERGY,
+  Tag.EARTH,
+  Tag.JOVIAN,
+  Tag.VENUS,
+  Tag.PLANT,
+  Tag.MICROBE,
+  Tag.ANIMAL,
+  Tag.CITY,
+  Tag.MOON,
+  Tag.MARS,
   'separator',
-  Tags.EVENT,
+  Tag.EVENT,
   SpecialTags.NONE,
-  Tags.WILD,
+  Tag.WILD,
   SpecialTags.INFLUENCE,
   SpecialTags.CITY_COUNT,
   SpecialTags.COLONY_COUNT,
@@ -73,9 +73,9 @@ const ORDER: Array<InterfaceTagsType> = [
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) return false;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
-  if (game.gameOptions.venusNextExtension === false && tag === Tags.VENUS) return false;
-  if (game.gameOptions.moonExpansion === false && tag === Tags.MOON) return false;
-  if (game.gameOptions.pathfindersExpansion === false && tag === Tags.MARS) return false;
+  if (game.gameOptions.venusNextExtension === false && tag === Tag.VENUS) return false;
+  if (game.gameOptions.moonExpansion === false && tag === Tag.MOON) return false;
+  if (game.gameOptions.pathfindersExpansion === false && tag === Tag.MARS) return false;
   return true;
 };
 
@@ -146,7 +146,7 @@ export default Vue.extend({
     // Other modifiers
     if (this.playerView.game.turmoil?.ruling === PartyName.UNITY &&
       this.playerView.game.turmoil.politicalAgendas?.unity.policyId === 'up04') {
-      details[Tags.SPACE].discount += 2;
+      details[Tag.SPACE].discount += 2;
     }
 
     // Put them in order.

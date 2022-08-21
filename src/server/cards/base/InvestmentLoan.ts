@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -12,7 +12,7 @@ export class InvestmentLoan extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.INVESTMENT_LOAN,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 3,
 
       metadata: {

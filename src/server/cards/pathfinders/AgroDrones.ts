@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class AgroDrones extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -15,7 +15,7 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
       cardType: CardType.ACTIVE,
       name: CardName.AGRO_DRONES,
       cost: 14,
-      tags: [Tags.PLANT, Tags.MARS],
+      tags: [Tag.PLANT, Tag.MARS],
 
       requirements: CardRequirements.builder((b) => b.temperature(-18)),
       metadata: {

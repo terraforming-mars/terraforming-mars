@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IActionCard} from '../ICard';
@@ -15,7 +15,7 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
     super({
       name: CardName.LUNAR_OBSERVATION_POST,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SCIENCE, Tags.SCIENCE],
+      tags: [Tag.SCIENCE, Tag.SCIENCE],
       cost: 7,
 
       resourceType: CardResource.DATA,

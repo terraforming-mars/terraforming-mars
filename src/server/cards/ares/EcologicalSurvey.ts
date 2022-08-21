@@ -5,7 +5,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SurveyCard} from './SurveyCard';
@@ -16,7 +16,7 @@ export class EcologicalSurvey extends SurveyCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ECOLOGICAL_SURVEY,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 9,
 
       requirements: CardRequirements.builder((b) => b.greeneries(3, {all})),

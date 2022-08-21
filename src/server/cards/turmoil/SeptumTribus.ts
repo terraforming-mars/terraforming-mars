@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
@@ -13,7 +13,7 @@ export class SeptumTribus extends Card implements IActionCard, ICorporationCard 
   constructor() {
     super({
       name: CardName.SEPTUM_TRIBUS,
-      tags: [Tags.WILD],
+      tags: [Tag.WILD],
       startingMegaCredits: 36,
       cardType: CardType.CORPORATION,
 

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {VictoryPoints} from '../ICard';
 
@@ -14,8 +14,8 @@ export class CultivationOfVenus extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.CULTIVATION_OF_VENUS,
       cost: 18,
-      tags: [Tags.PLANT, Tags.VENUS],
-      victoryPoints: VictoryPoints.tags(Tags.VENUS, 1, 2),
+      tags: [Tag.PLANT, Tag.VENUS],
+      victoryPoints: VictoryPoints.tags(Tag.VENUS, 1, 2),
 
       metadata: {
         cardNumber: 'Pf45',

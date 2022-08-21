@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -20,7 +20,7 @@ export class LargeConvoy extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.LARGE_CONVOY,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tag.EARTH, Tag.SPACE],
       cost: 36,
       tr: {oceans: 1},
       victoryPoints: 2,

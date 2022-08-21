@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
@@ -14,7 +14,7 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.SPACE_MIRRORS,
-      tags: [Tags.ENERGY, Tags.SPACE],
+      tags: [Tag.ENERGY, Tag.SPACE],
       cost: 3,
 
       metadata: {

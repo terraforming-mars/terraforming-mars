@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -11,10 +11,10 @@ export class Teractor extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.TERACTOR,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       startingMegaCredits: 60,
 
-      cardDiscount: {tag: Tags.EARTH, amount: 3},
+      cardDiscount: {tag: Tag.EARTH, amount: 3},
       metadata: {
         cardNumber: 'R30',
         description: 'You start with 60 M€.',

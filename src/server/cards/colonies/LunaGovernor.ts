@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,11 +12,11 @@ export class LunaGovernor extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 4,
-      tags: [Tags.EARTH, Tags.EARTH],
+      tags: [Tag.EARTH, Tag.EARTH],
       name: CardName.LUNA_GOVERNOR,
       cardType: CardType.AUTOMATED,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 3)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 3)),
       metadata: {
         cardNumber: 'C20',
         renderData: CardRenderer.builder((b) => {

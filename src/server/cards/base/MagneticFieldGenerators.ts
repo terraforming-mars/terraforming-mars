@@ -1,6 +1,6 @@
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
@@ -14,7 +14,7 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MAGNETIC_FIELD_GENERATORS,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 20,
       productionBox: Units.of({energy: -4, plants: 2}),
       tr: {tr: 3},

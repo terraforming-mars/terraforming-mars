@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -10,7 +10,7 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.RESEARCH_NETWORK,
-      tags: [Tags.WILD],
+      tags: [Tag.WILD],
       productionBox: Units.of({megacredits: 1}),
 
       metadata: {

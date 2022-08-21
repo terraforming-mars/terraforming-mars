@@ -7,7 +7,7 @@ import {Resources} from '../../../common/Resources';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
@@ -17,7 +17,7 @@ export class OceanCity extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.OCEAN_CITY,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 18,
       productionBox: Units.of({energy: -1, megacredits: 3}),
 

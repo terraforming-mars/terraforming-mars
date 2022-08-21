@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {TileType} from '../../../common/TileType';
@@ -18,7 +18,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
     super({
       name: CardName.LUNA_TRADE_STATION,
       cardType: CardType.ACTIVE,
-      tags: [Tags.MOON, Tags.MOON, Tags.SPACE],
+      tags: [Tag.MOON, Tag.MOON, Tag.SPACE],
       cost: 10,
       reserveUnits: Units.of({titanium: 2}),
 

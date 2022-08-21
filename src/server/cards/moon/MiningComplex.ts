@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
@@ -15,7 +15,7 @@ export class MiningComplex extends PreludeCard {
   constructor() {
     super({
       name: CardName.MINING_COMPLEX,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       startingMegacredits: -7,
 
       metadata: {

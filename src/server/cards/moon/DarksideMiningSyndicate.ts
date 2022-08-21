@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
@@ -13,7 +13,7 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
     super({
       name: CardName.DARKSIDE_MINING_SYNDICATE,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.SPACE],
+      tags: [Tag.MOON, Tag.SPACE],
       cost: 18,
       tr: {moonMining: 1},
 

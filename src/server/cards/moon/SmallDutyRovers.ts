@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -17,7 +17,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
     super({
       name: CardName.SMALL_DUTY_ROVERS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.SPACE],
+      tags: [Tag.MOON, Tag.SPACE],
       cost: 9,
       reserveUnits: Units.of({titanium: 1}),
       tr: {moonLogistics: 1},

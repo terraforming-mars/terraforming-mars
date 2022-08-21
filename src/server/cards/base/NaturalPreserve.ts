@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -29,7 +29,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 9,
       productionBox: Units.of({megacredits: 1}),
       adjacencyBonus,

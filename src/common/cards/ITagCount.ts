@@ -1,6 +1,6 @@
-import {Tags} from './Tags';
+import {Tag} from './Tag';
 
 export interface ITagCount {
-  tag: Tags;
+  tag: Tag;
   count: number;
 }

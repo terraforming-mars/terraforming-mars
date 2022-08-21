@@ -7,7 +7,7 @@ import {AICentral} from '../../src/server/cards/base/AICentral';
 import {Asteroid} from '../../src/server/cards/base/Asteroid';
 import {CapitalAres} from '../../src/server/cards/ares/CapitalAres';
 import {CardType} from '../../src/common/cards/CardType';
-import {Tags} from '../../src/common/cards/Tags';
+import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Dealer} from '../../src/server/Dealer';
 import {cast} from '../TestingUtils';
@@ -44,9 +44,9 @@ describe('DrawCards', function() {
   });
 
   it('draws 3 special', function() {
-    DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tags.SPACE}).execute();
+    DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tag.SPACE}).execute();
     expect(player.cardsInHand).has.length(3);
-    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.SPACE) && card.cardType === CardType.ACTIVE))
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SPACE) && card.cardType === CardType.ACTIVE))
       .has.length(3);
   });
 

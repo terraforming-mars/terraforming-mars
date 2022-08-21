@@ -1,6 +1,6 @@
 import {Player} from '../Player';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
@@ -30,12 +30,12 @@ export class DeclareCloneTag extends DeferredAction {
   }
 
   public execute() {
-    const tags: Array<PlanetaryTag> = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];
+    const tags: Array<PlanetaryTag> = [Tag.EARTH, Tag.JOVIAN, Tag.MARS];
     if (this.player.game.gameOptions.venusNextExtension === true) {
-      tags.push(Tags.VENUS);
+      tags.push(Tag.VENUS);
     }
     if (this.player.game.gameOptions.moonExpansion === true) {
-      tags.push(Tags.MOON);
+      tags.push(Tag.MOON);
     }
 
     const options = tags.map((tag) => {

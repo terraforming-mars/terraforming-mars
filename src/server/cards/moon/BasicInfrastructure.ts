@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -10,7 +10,7 @@ export class BasicInfrastructure extends PreludeCard {
   constructor() {
     super({
       name: CardName.BASIC_INFRASTRUCTURE,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
 
       metadata: {
         description: 'Place a road tile on the Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.',

@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ export class Incite extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.INCITE,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       startingMegaCredits: 32,
       cardType: CardType.CORPORATION,
       initialActionText: 'Place 2 delegates in one party',

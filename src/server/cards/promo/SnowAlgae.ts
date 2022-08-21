@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
@@ -14,7 +14,7 @@ export class SnowAlgae extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.SNOW_ALGAE,
       cost: 12,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
 
       requirements: CardRequirements.builder((b) => b.oceans(2)),
       metadata: {

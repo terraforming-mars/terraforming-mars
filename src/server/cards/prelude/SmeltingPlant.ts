@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -8,7 +8,7 @@ export class SmeltingPlant extends PreludeCard {
   constructor() {
     super({
       name: CardName.SMELTING_PLANT,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
 
       metadata: {
         cardNumber: 'P30',

@@ -9,7 +9,7 @@ import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPla
 import {VestaShipyard} from '../../../src/server/cards/base/VestaShipyard';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('Unity', function() {
   let player: Player;
@@ -82,7 +82,7 @@ describe('Unity', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);
-    expect(player.cardsInHand[0].tags.includes(Tags.SPACE)).to.be.true;
+    expect(player.cardsInHand[0].tags.includes(Tag.SPACE)).to.be.true;
     expect(unityPolicy.canAct(player)).to.be.false;
   });
 

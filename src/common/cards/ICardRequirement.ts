@@ -1,7 +1,7 @@
 import {Resources} from '../Resources';
 import {PartyName} from '../turmoil/PartyName';
 import {RequirementType} from './RequirementType';
-import {Tags} from './Tags';
+import {Tag} from './Tag';
 
 export interface ICardRequirement {
   type: RequirementType;
@@ -19,5 +19,5 @@ export interface IProductionCardRequirement extends ICardRequirement {
 }
 
 export interface ITagCardRequirement extends ICardRequirement {
-  tag: Tags;
+  tag: Tag;
 }

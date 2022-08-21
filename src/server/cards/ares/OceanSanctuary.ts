@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
@@ -18,7 +18,7 @@ export class OceanSanctuary extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.OCEAN_SANCTUARY,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 9,
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),

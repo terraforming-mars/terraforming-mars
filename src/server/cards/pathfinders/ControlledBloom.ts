@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -17,7 +17,7 @@ export class ControlledBloom extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.CONTROLLED_BLOOM,
       cost: 13,
-      tags: [Tags.MICROBE, Tags.PLANT],
+      tags: [Tag.MICROBE, Tag.PLANT],
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),

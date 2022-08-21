@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -18,7 +18,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ELECTRO_CATAPULT,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 17,
       productionBox: Units.of({energy: -1}),
       victoryPoints: 1,

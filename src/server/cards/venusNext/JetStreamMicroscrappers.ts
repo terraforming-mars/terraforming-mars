@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -16,7 +16,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
     super({
       name: CardName.JET_STREAM_MICROSCRAPPERS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 12,
       resourceType: CardResource.FLOATER,
 

@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
@@ -21,7 +21,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THE_GRAND_LUNA_CAPITAL_GROUP,
-      tags: [Tags.CITY, Tags.MOON],
+      tags: [Tag.CITY, Tag.MOON],
       startingMegaCredits: 32,
       initialActionText: 'Place a colony tile',
       victoryPoints: 'special',

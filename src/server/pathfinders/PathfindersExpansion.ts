@@ -18,17 +18,17 @@ import {CardResource} from '../../common/CardResource';
 import {Reward} from '../../common/pathfinders/Reward';
 import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 
-export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON] as const;
+export const PLANETARY_TAGS = [Tag.VENUS, Tag.EARTH, Tag.MARS, Tag.JOVIAN, Tag.MOON] as const;
 export type PlanetaryTag = typeof PLANETARY_TAGS[number];
 
 export const TRACKS = PlanetaryTracks.initialize();
 
-export function isPlanetaryTag(tag: Tags): tag is PlanetaryTag {
+export function isPlanetaryTag(tag: Tag): tag is PlanetaryTag {
   return PLANETARY_TAGS.includes(tag as PlanetaryTag);
 }
 export class PathfindersExpansion {
@@ -145,7 +145,7 @@ export class PathfindersExpansion {
     }
   }
 
-  private static grant(reward: Reward, player: Player, tag: Tags) {
+  private static grant(reward: Reward, player: Player, tag: Tag) {
     const game = player.game;
 
     switch (reward) {
@@ -244,7 +244,7 @@ export class PathfindersExpansion {
     }
   }
 
-  private static playersWithMostTags(tag: Tags, players: Array<Player>, activePlayer: Player | undefined): Array<Player> {
+  private static playersWithMostTags(tag: Tag, players: Array<Player>, activePlayer: Player | undefined): Array<Player> {
     const counts = players.map((player) => {
       // Wild tags only apply to a player taking an action.
       const includeWildTags = player.id === activePlayer?.id;

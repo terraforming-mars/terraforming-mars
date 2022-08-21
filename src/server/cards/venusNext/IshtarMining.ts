@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -13,7 +13,7 @@ export class IshtarMining extends Card implements IProjectCard {
     super({
       name: CardName.ISHTAR_MINING,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 5,
 
       requirements: CardRequirements.builder((b) => b.venus(8)),

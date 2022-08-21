@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -14,7 +14,7 @@ export class CorroderSuits extends Card implements IProjectCard {
     super({
       name: CardName.CORRODER_SUITS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 8,
 
       metadata: {
@@ -23,7 +23,7 @@ export class CorroderSuits extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(2);
-          }).wild(1, {secondaryTag: Tags.VENUS});
+          }).wild(1, {secondaryTag: Tag.VENUS});
         }),
       },
     });
@@ -51,6 +51,6 @@ export class CorroderSuits extends Card implements IProjectCard {
     );
   }
   public static getVenusResCards(player: Player): ICard[] {
-    return player.getResourceCards().filter((card) => card.tags.includes(Tags.VENUS));
+    return player.getResourceCards().filter((card) => card.tags.includes(Tag.VENUS));
   }
 }

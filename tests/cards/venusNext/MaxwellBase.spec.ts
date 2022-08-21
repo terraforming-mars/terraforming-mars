@@ -11,7 +11,7 @@ import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CardResource} from '../../../src/common/CardResource';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
@@ -85,7 +85,7 @@ describe('MaxwellBase', function() {
     const fakeCard: IProjectCard = {
       name: 'HELLO' as CardName,
       cost: 1,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       canPlay: () => true,
       play: () => undefined,
       getVictoryPoints: () => 0,

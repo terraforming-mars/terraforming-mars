@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -13,10 +13,10 @@ export class VenusGovernor extends Card implements IProjectCard {
     super({
       name: CardName.VENUS_GOVERNOR,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS, Tags.VENUS],
+      tags: [Tag.VENUS, Tag.VENUS],
       cost: 4,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 2)),
       metadata: {
         cardNumber: '255',
         renderData: CardRenderer.builder((b) => {

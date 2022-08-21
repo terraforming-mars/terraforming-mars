@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../../common/Resources';
@@ -10,7 +10,7 @@ export class GalileanMining extends PreludeCard {
   constructor() {
     super({
       name: CardName.GALILEAN_MINING,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
 
       startingMegacredits: -5,
 

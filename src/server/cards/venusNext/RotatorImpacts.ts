@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -18,7 +18,7 @@ export class RotatorImpacts extends Card implements IActionCard {
     super({
       name: CardName.ROTATOR_IMPACTS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 6,
       resourceType: CardResource.ASTEROID,
 

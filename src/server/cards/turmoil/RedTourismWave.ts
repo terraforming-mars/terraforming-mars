@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ export class RedTourismWave extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 3,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       name: CardName.RED_TOURISM_WAVE,
       cardType: CardType.EVENT,
 

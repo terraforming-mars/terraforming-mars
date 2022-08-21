@@ -130,7 +130,7 @@ import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
 
@@ -152,7 +152,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
 const ALL_MODULES = 'bcpvCt*ramP';
 
 type TypeOptions = CardType | 'colonyTiles' | 'globalEvents';
-type TagOptions = Tags | 'none';
+type TagOptions = Tag | 'none';
 
 export interface DebugUIModel {
   filterText: string,
@@ -247,11 +247,11 @@ export default Vue.extend({
         'globalEvents',
       ];
     },
-    allTags(): Array<Tags | 'none'> {
-      const results: Array<Tags | 'none'> = [];
-      for (const tag in Tags) {
-        if (Object.prototype.hasOwnProperty.call(Tags, tag)) {
-          results.push((<any>Tags)[tag]);
+    allTags(): Array<Tag | 'none'> {
+      const results: Array<Tag | 'none'> = [];
+      for (const tag in Tag) {
+        if (Object.prototype.hasOwnProperty.call(Tag, tag)) {
+          results.push((<any>Tag)[tag]);
         }
       }
       return results.concat('none');

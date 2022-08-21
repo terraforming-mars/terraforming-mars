@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class SpinoffDepartment extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 10,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       name: CardName.SPINOFF_DEPARTMENT,
       cardType: CardType.ACTIVE,
       productionBox: Units.of({megacredits: 2}),

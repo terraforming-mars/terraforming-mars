@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {played} from '../Options';
@@ -11,7 +11,7 @@ export class EarthEmbassy extends Card implements IProjectCard {
     super({
       name: CardName.EARTH_EMBASSY,
       cardType: CardType.ACTIVE,
-      tags: [Tags.MOON, Tags.EARTH],
+      tags: [Tag.MOON, Tag.EARTH],
       cost: 16,
 
       metadata: {

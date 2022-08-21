@@ -3,14 +3,14 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 
 export class ResearchGrant extends PreludeCard {
   constructor() {
     super({
       name: CardName.RESEARCH_GRANT_PATHFINDERS,
-      tags: [Tags.SCIENCE, Tags.SCIENCE],
+      tags: [Tag.SCIENCE, Tag.SCIENCE],
       productionBox: Units.of({energy: 1}),
       startingMegacredits: 14,
 

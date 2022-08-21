@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardDiscount} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './CardRequirements';
@@ -25,7 +25,7 @@ export interface StaticCardProperties {
   name: CardName;
   resourceType?: CardResource;
   startingMegaCredits?: number;
-  tags?: Array<Tags>;
+  tags?: Array<Tag>;
   productionBox?: Units;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
   reserveUnits?: Units,
@@ -156,10 +156,10 @@ export abstract class Card {
       break;
 
     case CardRenderItemType.JOVIAN:
-      units = player?.getTagCount(Tags.JOVIAN, 'vps');
+      units = player?.getTagCount(Tag.JOVIAN, 'vps');
       break;
     case CardRenderItemType.MOON:
-      units = player?.getTagCount(Tags.MOON, 'vps');
+      units = player?.getTagCount(Tag.MOON, 'vps');
       break;
     }
 

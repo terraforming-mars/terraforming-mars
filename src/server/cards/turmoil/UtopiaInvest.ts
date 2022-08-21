@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -16,7 +16,7 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 40,
       cardType: CardType.CORPORATION,
       productionBox: Units.of({steel: 1, titanium: 1}),

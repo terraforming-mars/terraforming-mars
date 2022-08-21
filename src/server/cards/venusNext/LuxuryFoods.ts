@@ -24,7 +24,7 @@ export class LuxuryFoods extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.checkMultipleTagPresence([Tag.VENUS, Tag.EARTH, Tag.JOVIAN]);
+    return player.tags.checkMultipleTagPresence([Tag.VENUS, Tag.EARTH, Tag.JOVIAN]);
   }
 
   public play() {

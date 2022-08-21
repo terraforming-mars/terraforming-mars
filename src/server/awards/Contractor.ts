@@ -6,6 +6,6 @@ export class Contractor implements IAward {
   public name: string = 'Contractor';
   public description: string = 'Having the most building tags in play';
   public getScore(player: Player): number {
-    return player.getTagCount(Tag.BUILDING, 'award');
+    return player.tags.getTagCount(Tag.BUILDING, 'award');
   }
 }

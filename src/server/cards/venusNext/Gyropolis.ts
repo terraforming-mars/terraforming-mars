@@ -39,7 +39,7 @@ export class Gyropolis extends Card implements IProjectCard {
   public produce(player: Player) {
     const tags: Array<Tag> = [Tag.VENUS, Tag.EARTH];
     player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags), {log: true});
+    player.addProduction(Resources.MEGACREDITS, player.tags.getMultipleTagCount(tags), {log: true});
   }
 
   public play(player: Player) {

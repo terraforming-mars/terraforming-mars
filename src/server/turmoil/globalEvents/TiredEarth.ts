@@ -25,7 +25,7 @@ export class TiredEarth extends GlobalEvent implements IGlobalEvent {
 
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      const tags = player.getTagCount(Tag.EARTH, 'raw');
+      const tags = player.tags.getTagCount(Tag.EARTH, 'raw');
       const rawTotal = Math.min(tags, 5) - turmoil.getPlayerInfluence(player);
       const total = Math.max(rawTotal, 0);
       player.deductResource(Resources.PLANTS, total, {log: true, from: this.name});

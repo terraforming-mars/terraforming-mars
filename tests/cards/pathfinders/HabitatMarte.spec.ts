@@ -22,8 +22,8 @@ describe('HabitatMarte', () => {
 
   it('tag count', () => {
     player.setCorporationForTest(card);
-    expect(player.getTagCount(Tag.SCIENCE, 'raw')).eq(0);
-    expect(player.getTagCount(Tag.SCIENCE)).eq(1);
+    expect(player.tags.getTagCount(Tag.SCIENCE, 'raw')).eq(0);
+    expect(player.tags.getTagCount(Tag.SCIENCE)).eq(1);
   });
 
   it('card cost', () => {

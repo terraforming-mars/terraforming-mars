@@ -21,11 +21,11 @@ describe('Leavitt', function() {
   });
 
   it('Should build', function() {
-    expect(player.getTagCount(Tag.SCIENCE)).to.eq(0);
+    expect(player.tags.getTagCount(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
-    expect(player.getTagCount(Tag.SCIENCE)).to.eq(1);
+    expect(player.tags.getTagCount(Tag.SCIENCE)).to.eq(1);
     leavitt.addColony(player);
-    expect(player.getTagCount(Tag.SCIENCE)).to.eq(2);
+    expect(player.tags.getTagCount(Tag.SCIENCE)).to.eq(2);
   });
 
   // TODO(kberg): add trade and trade bonus tests.
@@ -50,8 +50,8 @@ describe('Leavitt', function() {
     // Merely completing these is sufficient because
     // it doesn't throw an Error.
     player.setCorporationForTest(new Vitor());
-    expect(player.getTagCount(Tag.SCIENCE)).to.eq(0);
+    expect(player.tags.getTagCount(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
-    expect(player.getTagCount(Tag.SCIENCE)).to.eq(1);
+    expect(player.tags.getTagCount(Tag.SCIENCE)).to.eq(1);
   });
 });

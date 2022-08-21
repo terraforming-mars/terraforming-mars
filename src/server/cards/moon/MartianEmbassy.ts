@@ -28,7 +28,7 @@ export class MartianEmbassy extends Card implements IProjectCard {
 
   public play(player: Player) {
     // The +1 is "including this".
-    const tags = player.getTagCount(Tag.MOON) + 1;
+    const tags = player.tags.getTagCount(Tag.MOON) + 1;
     const rate = Math.floor(tags / 3);
     PathfindersExpansion.raiseTrack(Tag.MARS, player, rate);
     return undefined;

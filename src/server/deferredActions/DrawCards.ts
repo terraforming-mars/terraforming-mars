@@ -33,7 +33,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
       if (this.options.cardType !== undefined && this.options.cardType !== card.cardType) {
         return false;
       }
-      if (this.options.tag !== undefined && !this.player.cardHasTag(card, this.options.tag)) {
+      if (this.options.tag !== undefined && !this.player.tags.cardHasTag(card, this.options.tag)) {
         return false;
       }
       if (this.options.include !== undefined && !this.options.include(card)) {

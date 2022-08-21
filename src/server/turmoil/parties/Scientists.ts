@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Tags} from '../../../common/cards/Tags';
 import {Resources} from '../../../common/Resources';
 import {Bonus} from '../Bonus';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
 
@@ -60,7 +60,7 @@ class ScientistsPolicy01 implements Policy {
   action(player: Player) {
     const game = player.game;
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
-    game.defer(new SelectHowToPayDeferred(
+    game.defer(new SelectPaymentDeferred(
       player,
       10,
       {

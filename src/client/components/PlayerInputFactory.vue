@@ -83,7 +83,7 @@ export default Vue.component('player-input-factory', {
         return 'and-options';
       case PlayerInputTypes.SELECT_CARD:
         return 'SelectCard';
-      case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
+      case PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY:
         return 'SelectHowToPayForProjectCard';
       case PlayerInputTypes.SELECT_INITIAL_CARDS:
         return 'SelectInitialCards';
@@ -91,7 +91,7 @@ export default Vue.component('player-input-factory', {
         return 'or-options';
       case PlayerInputTypes.SELECT_OPTION:
         return 'select-option';
-      case PlayerInputTypes.SELECT_HOW_TO_PAY:
+      case PlayerInputTypes.SELECT_PAYMENT:
         return 'SelectHowToPay';
       case PlayerInputTypes.SELECT_SPACE:
         return 'select-space';

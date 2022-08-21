@@ -10,7 +10,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
 import {Phase} from '../../../common/Phase';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 
@@ -97,7 +97,7 @@ class MarsFirstPolicy04 implements Policy {
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectHowToPayDeferred(
+    game.defer(new SelectPaymentDeferred(
       player,
       4,
       {

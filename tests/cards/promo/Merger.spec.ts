@@ -59,7 +59,7 @@ describe('Merger', function() {
     const index = selectCorp.cards.findIndex((card) => card.name === CardName.ARCADIAN_COMMUNITIES);
     selectCorp.cb([selectCorp.cards[index]]); // Arcadian
 
-    game.deferredActions.pop()!.execute(); // SelectHowToPayDeferred
+    game.deferredActions.pop()!.execute(); // SelectPaymentDeferred
     expect(player.isCorporation(CardName.ARCADIAN_COMMUNITIES)).is.true;
     expect(player.pendingInitialActions).has.length(1);
   });

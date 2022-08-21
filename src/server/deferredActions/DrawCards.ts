@@ -5,7 +5,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';
 import {CardResource} from '../../common/CardResource';
 import {CardType} from '../../common/cards/CardType';
-import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
 
 enum LogType {
@@ -85,7 +85,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
     const cb = (selected: Array<IProjectCard>) => {
       if (options.paying && selected.length > 0) {
         player.game.defer(
-          new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
+          new SelectPaymentDeferred(player, selected.length * player.cardCost, {
             title: 'Select how to pay for cards',
             afterPay: () => {
               this.keep(player, selected, LogType.BOUGHT);

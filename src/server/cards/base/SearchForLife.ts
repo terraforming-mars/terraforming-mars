@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -62,7 +62,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     }
 
     player.game.dealer.discard(topCard);
-    player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for action'}));
     return undefined;
   }
 }

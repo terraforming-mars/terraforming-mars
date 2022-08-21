@@ -7,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -72,7 +72,7 @@ export class RotatorImpacts extends Card implements IActionCard {
   }
 
   private addResource(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
     player.addResourceTo(this, {log: true});
     return undefined;
   }

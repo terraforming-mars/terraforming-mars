@@ -4,7 +4,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
@@ -95,7 +95,7 @@ class RedsPolicy02 implements Policy {
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
-      player.game.defer(new SelectHowToPayDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
+      player.game.defer(new SelectPaymentDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
     }
   }
 }
@@ -171,7 +171,7 @@ class RedsPolicy03 implements Policy {
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectHowToPayDeferred(
+    game.defer(new SelectPaymentDeferred(
       player,
       4,
       {

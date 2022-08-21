@@ -18,7 +18,7 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('ProjectWorkshop', function() {
@@ -192,8 +192,8 @@ describe('ProjectWorkshop', function() {
 
     card.action(player).cb();
     runAllActions(game);
-    const selectHowtoPay = cast(player.popWaitingFor(), SelectHowToPay);
-    selectHowtoPay.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(1);

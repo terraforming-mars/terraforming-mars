@@ -7,7 +7,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
 const ACTION_COST = 12;
@@ -39,7 +39,7 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
     return player.canAfford(ACTION_COST, {titanium: true, tr: {oceans: 1}});
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, ACTION_COST, {canUseTitanium: true, title: 'Select how to pay for action', afterPay: () => {
+    player.game.defer(new SelectPaymentDeferred(player, ACTION_COST, {canUseTitanium: true, title: 'Select how to pay for action', afterPay: () => {
       player.game.defer(new PlaceOceanTile(player));
     }}));
     return undefined;

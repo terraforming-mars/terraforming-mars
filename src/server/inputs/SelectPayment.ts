@@ -5,8 +5,8 @@ import {Payment} from '../../common/inputs/Payment';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
-export class SelectHowToPay implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY;
+export class SelectPayment implements PlayerInput {
+  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PAYMENT;
   public buttonLabel: string = 'Pay'; // no input button
   constructor(
         public title: string | Message,

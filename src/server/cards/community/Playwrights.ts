@@ -7,7 +7,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../../common/Resources';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -71,7 +71,7 @@ export class Playwrights extends Card implements ICorporationCard {
         });
 
         const cost = player.getCardCost(selectedCard);
-        player.game.defer(new SelectHowToPayDeferred(
+        player.game.defer(new SelectPaymentDeferred(
           player,
           cost,
           {

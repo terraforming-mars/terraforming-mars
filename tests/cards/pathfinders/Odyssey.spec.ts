@@ -8,7 +8,7 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
 import {InventionContest} from '../../../src/server/cards/base/InventionContest';
-import {SelectHowToPayForProjectCard} from '../../../src/server/inputs/SelectHowToPayForProjectCard';
+import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {Resources} from '../../../src/common/Resources';
 import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
 import {IceCapMelting} from '../../../src/server/cards/base/IceCapMelting';
@@ -74,16 +74,16 @@ describe('Odyssey', () => {
     const inventionContest = new InventionContest();
     player.playedCards = [importOfAdvancedGHG, inventionContest];
 
-    let selectCard = cast(card.action(player), SelectHowToPayForProjectCard);
+    let selectCard = cast(card.action(player), SelectProjectCardToPlay);
 
     expect(selectCard.cards).is.empty;
 
     player.megaCredits = 4;
-    selectCard = cast(card.action(player), SelectHowToPayForProjectCard);
+    selectCard = cast(card.action(player), SelectProjectCardToPlay);
     expect(selectCard.cards).has.members([inventionContest]);
 
     player.megaCredits = 9;
-    selectCard = cast(card.action(player), SelectHowToPayForProjectCard);
+    selectCard = cast(card.action(player), SelectProjectCardToPlay);
     expect(selectCard.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
     expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
@@ -104,7 +104,7 @@ describe('Odyssey', () => {
     player.megaCredits = 50;
 
     player.playedCards = [importOfAdvancedGHG, mediaGroup];
-    const selectCard = cast(card.action(player), SelectHowToPayForProjectCard);
+    const selectCard = cast(card.action(player), SelectProjectCardToPlay);
 
     expect(player.getProduction(Resources.HEAT)).eq(0);
     expect(player.megaCredits).eq(50);

@@ -6,7 +6,7 @@ import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
-import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {Tags} from '../../../src/common/cards/Tags';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
@@ -77,8 +77,8 @@ describe('Factorum', function() {
     selectOption.cb();
     runAllActions(game);
 
-    const selectHowToPay = cast(player.popWaitingFor(), SelectHowToPay);
-    selectHowToPay.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(1);

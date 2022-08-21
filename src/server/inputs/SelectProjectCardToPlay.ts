@@ -7,8 +7,8 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
-export class SelectHowToPayForProjectCard implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD;
+export class SelectProjectCardToPlay implements PlayerInput {
+  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY;
   public title = 'Play project card';
   public buttonLabel: string = 'Play card';
   public microbes: number;

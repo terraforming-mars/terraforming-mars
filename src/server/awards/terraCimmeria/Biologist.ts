@@ -7,6 +7,6 @@ export class Biologist implements IAward {
   public description: string = 'Having the most Animal, Plant, and Microbe tags in play';
 
   public getScore(player: Player): number {
-    return player.tags.getTagCount(Tag.MICROBE, 'award') + player.tags.getTagCount(Tag.PLANT, 'award') + player.tags.getTagCount(Tag.ANIMAL, 'award');
+    return player.tags.count(Tag.MICROBE, 'award') + player.tags.count(Tag.PLANT, 'award') + player.tags.count(Tag.ANIMAL, 'award');
   }
 }

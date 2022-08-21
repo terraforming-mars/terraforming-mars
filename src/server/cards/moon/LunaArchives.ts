@@ -37,7 +37,7 @@ export class LunaArchives extends Card implements IActionCard {
   }
 
   public action(player: Player) {
-    const qty = player.tags.getTagCount(Tag.MOON);
+    const qty = player.tags.count(Tag.MOON);
     player.addResourceTo(this, {qty, log: true});
     return undefined;
   }

@@ -30,7 +30,7 @@ export class IoSulphurResearch extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.drawCard(player.tags.getTagCount(Tag.VENUS) >= 3 ? 3 : 1);
+    player.drawCard(player.tags.count(Tag.VENUS) >= 3 ? 3 : 1);
     return undefined;
   }
 }

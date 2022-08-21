@@ -39,7 +39,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
     const game = player.game;
     player.addProduction(Resources.MEGACREDITS, 2);
     // The +1 below is for the two Jovian tags on this card.
-    player.addProduction(Resources.TITANIUM, (1 + Math.floor(player.tags.getTagCount(Tag.JOVIAN) / 2)), {log: true});
+    player.addProduction(Resources.TITANIUM, (1 + Math.floor(player.tags.count(Tag.JOVIAN) / 2)), {log: true});
     player.drawCard();
     player.game.addCityTile(player, SpaceName.CERES_SPACEPORT, SpaceType.COLONY);
     game.defer(new PlaceOceanTile(player));

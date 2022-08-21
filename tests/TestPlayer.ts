@@ -21,10 +21,10 @@ class TestTags extends Tags {
     this.testPlayer = player;
   }
 
-  public override getRawTagCount(tag: Tag, includeEventsTags:boolean = false): number {
+  public override rawCount(tag: Tag, includeEventsTags:boolean = false): number {
     return this.testPlayer.tagsForTest !== undefined ?
       this.testPlayer.tagsForTest[tag] ?? 0 :
-      super.getRawTagCount(tag, includeEventsTags);
+      super.rawCount(tag, includeEventsTags);
   }
 }
 export class TestPlayer extends Player {

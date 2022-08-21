@@ -362,10 +362,10 @@ export class Server {
 
       // Too bad this is hard-coded
       if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
-        discount = [{tag: Tag.MOON, amount: player.tags.getTagCount(Tag.MOON)}];
+        discount = [{tag: Tag.MOON, amount: player.tags.count(Tag.MOON)}];
       }
       if (card.name === CardName.MARS_DIRECT) {
-        discount = [{tag: Tag.MARS, amount: player.tags.getTagCount(Tag.MARS)}];
+        discount = [{tag: Tag.MARS, amount: player.tags.count(Tag.MARS)}];
       }
 
       const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);

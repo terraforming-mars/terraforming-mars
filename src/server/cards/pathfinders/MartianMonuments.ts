@@ -37,7 +37,7 @@ export class MartianMonuments extends Card implements IProjectCard {
   }
 
   public produce(player: Player, increment: number = 0) {
-    const count = player.tags.getTagCount(Tag.MARS) + increment;
+    const count = player.tags.count(Tag.MARS) + increment;
     player.addProduction(Resources.MEGACREDITS, count, {log: true});
   }
 

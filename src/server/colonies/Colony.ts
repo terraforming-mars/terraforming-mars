@@ -228,7 +228,7 @@ export abstract class Colony implements IColony {
         break;
 
       case ColonyBenefit.GAIN_SCIENCE_TAG:
-        player.scienceTagCount += 1;
+        player.tags.gainScienceTag();
         player.playCard(new ScienceTagCard(), undefined, 'nothing');
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;

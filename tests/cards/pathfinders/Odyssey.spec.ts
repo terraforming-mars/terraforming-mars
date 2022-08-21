@@ -29,9 +29,9 @@ describe('Odyssey', () => {
   it('events count for tags', () => {
     const event = fakeCard({cardType: CardType.EVENT, tags: [Tag.JOVIAN]});
     player.playedCards.push(event);
-    expect(player.getTagCount(Tag.JOVIAN)).eq(1);
+    expect(player.tags.getTagCount(Tag.JOVIAN)).eq(1);
     player.setCorporationForTest(undefined);
-    expect(player.getTagCount(Tag.JOVIAN)).eq(0);
+    expect(player.tags.getTagCount(Tag.JOVIAN)).eq(0);
   });
 
   it('cannot act - cannot afford', () => {

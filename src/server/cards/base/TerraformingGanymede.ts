@@ -15,7 +15,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 33,
       victoryPoints: 2,
-      tr: (player) => ({tr: 1 + player.getTagCount(Tag.JOVIAN)}),
+      tr: (player) => ({tr: 1 + player.tags.getTagCount(Tag.JOVIAN)}),
 
       metadata: {
         cardNumber: '197',
@@ -27,7 +27,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    const steps = 1 + player.getTagCount(Tag.JOVIAN);
+    const steps = 1 + player.tags.getTagCount(Tag.JOVIAN);
     player.increaseTerraformRatingSteps(steps, {log: true});
 
     return undefined;

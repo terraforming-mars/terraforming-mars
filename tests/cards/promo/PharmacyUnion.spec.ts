@@ -129,7 +129,7 @@ describe('PharmacyUnion', function() {
   });
 
   it('Corporation tags do not count when corporation is disabled', function() {
-    expect(player.getTagCount(Tag.MICROBE)).to.eq(2);
+    expect(player.tags.getTagCount(Tag.MICROBE)).to.eq(2);
     const advancedEcosystems = new AdvancedEcosystems();
     player.playedCards.push(new Fish());
     player.playedCards.push(new Lichen());
@@ -141,7 +141,7 @@ describe('PharmacyUnion', function() {
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
     expect(card.isDisabled).is.true;
-    expect(player.getTagCount(Tag.MICROBE)).to.eq(0);
+    expect(player.tags.getTagCount(Tag.MICROBE)).to.eq(0);
     expect(player.canPlayIgnoringCost(advancedEcosystems)).is.not.true;
   });
 

@@ -63,7 +63,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (player.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
+    if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
       this.addResource(player);
     }
   }

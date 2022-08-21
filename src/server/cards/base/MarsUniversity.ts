@@ -32,7 +32,7 @@ export class MarsUniversity extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    const scienceTags = player.cardTagCount(card, Tag.SCIENCE);
+    const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     for (let i = 0; i < scienceTags; i++) {
       player.game.defer(new SimpleDeferredAction(
         player,

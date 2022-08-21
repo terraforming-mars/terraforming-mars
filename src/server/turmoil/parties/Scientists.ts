@@ -22,7 +22,7 @@ class ScientistsBonus01 implements Bonus {
   description: string = 'Gain 1 M€ for each Science tag you have';
 
   getScore(player: Player) {
-    return player.getTagCount(Tag.SCIENCE, 'raw-pf');
+    return player.tags.getTagCount(Tag.SCIENCE, 'raw-pf');
   }
 
   grant(game: Game) {

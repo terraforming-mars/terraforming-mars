@@ -35,7 +35,7 @@ export class ParliamentHall extends Card implements IProjectCard {
   public produce(player: Player) {
     // Include this when the card is first played, and not when it is called by Robotic Workforce.
     const includeThis = !player.cardIsInEffect(this.name);
-    const tagCount = player.getTagCount(Tag.BUILDING) + (includeThis ? 1 : 0);
+    const tagCount = player.tags.getTagCount(Tag.BUILDING) + (includeThis ? 1 : 0);
     const amount = Math.floor(tagCount / 3);
     player.addProduction(Resources.MEGACREDITS, amount, {log: true});
   }

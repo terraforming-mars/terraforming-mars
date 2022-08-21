@@ -27,7 +27,7 @@ export class SocialEvents extends Card implements IProjectCard {
   }
 
   private getExpectedTr(player: Player) {
-    return Math.floor((player.getTagCount(Tag.MARS) + 1) / 2); // +1 is the "including this"
+    return Math.floor((player.tags.getTagCount(Tag.MARS) + 1) / 2); // +1 is the "including this"
   }
 
   public play(player: Player) {

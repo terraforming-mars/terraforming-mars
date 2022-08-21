@@ -8,14 +8,13 @@ import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
-import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, TRSource, IActionCard, DynamicTRSource} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ITagCount} from '../common/cards/ITagCount';
 import {LogMessageDataType} from '../common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
@@ -65,6 +64,7 @@ import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {SerializedGame} from './SerializedGame';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from '../common/inputs/InputResponse';
+import {Tags} from './player/Tags';
 
 // Behavior when playing a card.
 // add it to the tableau
@@ -76,6 +76,7 @@ export class Player {
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
   public game: Game;
+  public tags: Tags;
 
   // Corporate identity
   public corporations: Array<ICorporationCard> = [];
@@ -145,6 +146,7 @@ export class Player {
 
   // Custom cards
   // Leavitt Station.
+  // TODO(kberg): move scienceTagCount to Tags?
   public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41
   public hasTurmoilScienceTagBonus: boolean = false;
@@ -176,6 +178,7 @@ export class Player {
     // Ideally the right thing is to invert how players and games get created.
     // But one thing at a time.
     this.game = undefined as unknown as Game;
+    this.tags = new Tags(this);
   }
 
   public static initialize(
@@ -789,196 +792,6 @@ export class Player {
 
   public getCardsByCardType(cardType: CardType) {
     return this.playedCards.filter((card) => card.cardType === cardType);
-  }
-
-  public getAllTags(): Array<ITagCount> {
-    return [
-      {tag: Tag.BUILDING, count: this.getTagCount(Tag.BUILDING, 'raw')},
-      {tag: Tag.CITY, count: this.getTagCount(Tag.CITY, 'raw')},
-      {tag: Tag.EARTH, count: this.getTagCount(Tag.EARTH, 'raw')},
-      {tag: Tag.ENERGY, count: this.getTagCount(Tag.ENERGY, 'raw')},
-      {tag: Tag.JOVIAN, count: this.getTagCount(Tag.JOVIAN, 'raw')},
-      {tag: Tag.MARS, count: this.getTagCount(Tag.MARS, 'raw')},
-      {tag: Tag.MICROBE, count: this.getTagCount(Tag.MICROBE, 'raw')},
-      {tag: Tag.MOON, count: this.getTagCount(Tag.MOON, 'raw')},
-      {tag: Tag.PLANT, count: this.getTagCount(Tag.PLANT, 'raw')},
-      {tag: Tag.SCIENCE, count: this.getTagCount(Tag.SCIENCE, 'raw')},
-      {tag: Tag.SPACE, count: this.getTagCount(Tag.SPACE, 'raw')},
-      {tag: Tag.VENUS, count: this.getTagCount(Tag.VENUS, 'raw')},
-      {tag: Tag.WILD, count: this.getTagCount(Tag.WILD, 'raw')},
-      {tag: Tag.ANIMAL, count: this.getTagCount(Tag.ANIMAL, 'raw')},
-      {tag: Tag.EVENT, count: this.getPlayedEventsCount()},
-    ].filter((tag) => tag.count > 0);
-  }
-
-  /*
-   * Get the number of tags a player has, depending on certain conditions.
-   *
-   * 'raw': count face-up tags literally, including Leavitt Station.
-   * 'default': Same as raw, but include the wild tags.
-   * 'milestone': Same as raw with special conditions for milestones (Chimera)
-   * 'award': Same as raw with special conditions for awards (Chimera)
-   * 'vps': Same as raw, but include event tags.
-   * 'raw-pf': Same as raw, but includes Mars Tags when tag is Science  (Habitat Marte)
-   */
-  public getTagCount(tag: Tag, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
-    const includeEvents = this.isCorporation(CardName.ODYSSEY);
-    const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
-
-    let tagCount = this.getRawTagCount(tag, includeEvents);
-
-    // Leavitt Station hook
-    if (tag === Tag.SCIENCE && this.scienceTagCount > 0) {
-      tagCount += this.scienceTagCount;
-    }
-
-
-    if (includeTagSubstitutions) {
-      // Earth Embassy hook
-      if (tag === Tag.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-        tagCount += this.getRawTagCount(Tag.MOON, includeEvents);
-      }
-
-      if (tag !== Tag.WILD) {
-        tagCount += this.getRawTagCount(Tag.WILD, includeEvents);
-      }
-    }
-
-    // Habitat Marte hook
-    if (mode !== 'raw') {
-      if (tag === Tag.SCIENCE && this.isCorporation(CardName.HABITAT_MARTE)) {
-        tagCount += this.getRawTagCount(Tag.MARS, includeEvents);
-      }
-    }
-
-    // Chimera hook
-    if (this.isCorporation(CardName.CHIMERA)) {
-      // Milestones don't count wild tags, so in this case one will be added.
-      if (mode === 'award') {
-        tagCount++;
-      }
-      // Milestones count wild tags, so in this case one will be deducted.
-      if (mode === 'milestone') {
-        tagCount--;
-      }
-    }
-    return tagCount;
-  }
-
-  public cardHasTag(card: ICard, target: Tag): boolean {
-    for (const tag of card.tags) {
-      if (tag === target) return true;
-      if (tag === Tag.MARS &&
-        target === Tag.SCIENCE &&
-        this.isCorporation(CardName.HABITAT_MARTE)) {
-        return true;
-      }
-    }
-    return false;
-  }
-  public cardTagCount(card: ICard, target: Tag): number {
-    let count = 0;
-    for (const tag of card.tags) {
-      if (tag === target) count++;
-      if (tag === Tag.MARS && target === Tag.SCIENCE &&
-        this.isCorporation(CardName.HABITAT_MARTE)) {
-        count++;
-      }
-    }
-    return count;
-  }
-
-  // Counts the tags in the player's play area only.
-  public getRawTagCount(tag: Tag, includeEventsTags: boolean) {
-    let tagCount = 0;
-
-    this.tableau.forEach((card: IProjectCard | ICorporationCard) => {
-      if (!includeEventsTags && card.cardType === CardType.EVENT) return;
-      if (isICorporationCard(card) && card.isDisabled) return;
-      tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-    });
-
-    return tagCount;
-  }
-
-  // Return the total number of tags assocaited with these types.
-  // Tag substitutions are included
-  public getMultipleTagCount(tags: Array<Tag>, mode: 'default' | 'milestones' = 'default'): number {
-    let tagCount = 0;
-    tags.forEach((tag) => {
-      tagCount += this.getRawTagCount(tag, false);
-    });
-
-    // This is repeated behavior from getTagCount, sigh, OK.
-    if (tags.includes(Tag.EARTH) && !tags.includes(Tag.MOON) && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-      tagCount += this.getRawTagCount(Tag.MOON, false);
-    }
-
-    tagCount += this.getRawTagCount(Tag.WILD, false);
-
-    // Chimera has 2 wild tags but should only count as one for milestones.
-    if (this.isCorporation(CardName.CHIMERA) && mode === 'milestones') tagCount--;
-
-    return tagCount;
-  }
-
-  // Counts the number of distinct tags
-  public getDistinctTagCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
-    let wildTagCount: number = 0;
-    const uniqueTags = new Set<Tag>();
-    const addTag = (tag: Tag) => {
-      if (tag === Tag.WILD) {
-        wildTagCount++;
-      } else {
-        uniqueTags.add(tag);
-      }
-    };
-    if (extraTag !== undefined) {
-      uniqueTags.add(extraTag);
-    }
-
-    for (const card of this.corporations) {
-      if (!card.isDisabled) {
-        card.tags.forEach(addTag);
-      }
-    }
-    for (const card of this.playedCards) {
-      if (card.cardType !== CardType.EVENT) {
-        card.tags.forEach(addTag);
-      }
-    }
-    // Leavitt Station hook
-    if (this.scienceTagCount > 0) uniqueTags.add(Tag.SCIENCE);
-
-    if (mode === 'globalEvent') return uniqueTags.size;
-
-    if (mode === 'milestone' && this.isCorporation(CardName.CHIMERA)) wildTagCount--;
-
-    // TODO(kberg): it might be more correct to count all the tags
-    // in a game regardless of expansion? But if that happens it needs
-    // to be done once, during set-up so that this operation doesn't
-    // always go through every tag every time.
-    let maxTagCount = 10;
-    if (this.game.gameOptions.venusNextExtension) maxTagCount++;
-    if (this.game.gameOptions.moonExpansion) maxTagCount++;
-    if (this.game.gameOptions.pathfindersExpansion) maxTagCount++;
-    return Math.min(uniqueTags.size + wildTagCount, maxTagCount);
-  }
-
-  // Return true if this player has all the tags in `tags` showing.
-  public checkMultipleTagPresence(tags: Array<Tag>): boolean {
-    let distinctCount = 0;
-    tags.forEach((tag) => {
-      if (this.getTagCount(tag, 'raw') > 0) {
-        distinctCount++;
-      } else if (tag === Tag.SCIENCE && this.hasTurmoilScienceTagBonus) {
-        distinctCount++;
-      }
-    });
-    if (distinctCount + this.getTagCount(Tag.WILD) >= tags.length) {
-      return true;
-    }
-    return false;
   }
 
   public deferInputCb(result: PlayerInput | undefined): void {

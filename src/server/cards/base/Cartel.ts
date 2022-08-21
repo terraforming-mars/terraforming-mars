@@ -27,7 +27,7 @@ export class Cartel extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tag.EARTH) + 1, {log: true});
+    player.addProduction(Resources.MEGACREDITS, player.tags.getTagCount(Tag.EARTH) + 1, {log: true});
     return undefined;
   }
 }

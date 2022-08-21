@@ -46,7 +46,7 @@ export class AgricolaInc extends Card implements ICorporationCard {
     const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.ENERGY, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
     if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);
 
-    const playerTags : ITagCount[] = player.getAllTags();
+    const playerTags : ITagCount[] = player.tags.getAllTags();
     let points = 0;
 
     scorableTags.forEach((tag) => {

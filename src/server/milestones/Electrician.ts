@@ -7,7 +7,7 @@ export class Electrician implements IMilestone {
   public description: string = 'Have at least 4 Power tags';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tag.ENERGY);
+    return player.tags.getTagCount(Tag.ENERGY);
   }
 
   public canClaim(player: Player): boolean {

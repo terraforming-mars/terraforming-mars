@@ -7,7 +7,7 @@ export class Spacefarer implements IMilestone {
   public description: string = 'Have 6 Space tags';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tag.SPACE);
+    return player.tags.getTagCount(Tag.SPACE);
   }
 
   public canClaim(player: Player): boolean {

@@ -42,6 +42,6 @@ export class MarsDirect extends Card implements ICorporationCard {
     if (card.tags.indexOf(Tag.MARS) === -1) {
       return 0;
     }
-    return player.getTagCount(Tag.MARS);
+    return player.tags.getTagCount(Tag.MARS);
   }
 }

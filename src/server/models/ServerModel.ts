@@ -362,10 +362,10 @@ export class Server {
 
       // Too bad this is hard-coded
       if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
-        discount = [{tag: Tag.MOON, amount: player.getTagCount(Tag.MOON)}];
+        discount = [{tag: Tag.MOON, amount: player.tags.getTagCount(Tag.MOON)}];
       }
       if (card.name === CardName.MARS_DIRECT) {
-        discount = [{tag: Tag.MARS, amount: player.getTagCount(Tag.MARS)}];
+        discount = [{tag: Tag.MARS, amount: player.tags.getTagCount(Tag.MARS)}];
       }
 
       const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);
@@ -423,7 +423,7 @@ export class Server {
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(),
-      tags: player.getAllTags(),
+      tags: player.tags.getAllTags(),
       terraformRating: player.getTerraformRating(),
       timer: player.timer.serialize(),
       titanium: player.titanium,

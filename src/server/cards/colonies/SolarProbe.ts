@@ -27,7 +27,7 @@ export class SolarProbe extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.drawCard(Math.floor((player.tags.getTagCount(Tag.SCIENCE) + 1) / 3));
+    player.drawCard(Math.floor((player.tags.count(Tag.SCIENCE) + 1) / 3));
     return undefined;
   }
 }

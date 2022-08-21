@@ -23,14 +23,14 @@ describe('EarthEmbassy', () => {
     const fake = fakeCard({tags: [Tag.EARTH, Tag.MOON, Tag.MOON]});
 
     player.playedCards = [fake];
-    expect(player.tags.getTagCount(Tag.EARTH, 'raw')).eq(1);
-    expect(player.tags.getTagCount(Tag.EARTH, 'default')).eq(1);
+    expect(player.tags.count(Tag.EARTH, 'raw')).eq(1);
+    expect(player.tags.count(Tag.EARTH, 'default')).eq(1);
 
     // This changes the results because Earth Embassy has one earth tag and one moon tag.
     // [ Earth Embassy: earth/moon, Fake Card: earth/moon/moon ]
     player.playedCards.push(earthEmbassy);
-    expect(player.tags.getTagCount(Tag.EARTH, 'raw')).eq(2);
-    expect(player.tags.getTagCount(Tag.EARTH, 'default')).eq(5);
+    expect(player.tags.count(Tag.EARTH, 'raw')).eq(2);
+    expect(player.tags.count(Tag.EARTH, 'default')).eq(5);
   });
 
   it('Works for Luna Governor', () => {

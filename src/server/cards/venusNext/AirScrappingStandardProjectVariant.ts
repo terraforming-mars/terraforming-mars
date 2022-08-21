@@ -25,7 +25,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
   }
 
   protected override discount(player: Player): number {
-    const tagCount = player.tags.getTagCount(Tag.VENUS);
+    const tagCount = player.tags.count(Tag.VENUS);
     const discount = Math.min(tagCount, 5);
     return discount + super.discount(player);
   }

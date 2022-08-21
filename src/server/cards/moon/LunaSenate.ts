@@ -33,9 +33,9 @@ export class LunaSenate extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    let count = player.game.getPlayers().map((p) => p.tags.getTagCount(Tag.MOON, 'raw')).reduce((p, v) => p + v, 0);
+    let count = player.game.getPlayers().map((p) => p.tags.count(Tag.MOON, 'raw')).reduce((p, v) => p + v, 0);
     // Including wild tags here because if it were included above it would count opponents' wild tags.
-    count += player.tags.getTagCount(Tag.WILD, 'raw');
+    count += player.tags.count(Tag.WILD, 'raw');
     // count + 2 because the 2 moon tags above apply, and this card isn't in played cards yet.
     player.addProduction(Resources.MEGACREDITS, count + 2, {log: true});
     return undefined;

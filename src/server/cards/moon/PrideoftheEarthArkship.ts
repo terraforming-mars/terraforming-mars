@@ -44,11 +44,11 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   }
 
   public canAct(player: Player) {
-    return player.tags.getTagCount(Tag.SCIENCE) >= 5;
+    return player.tags.count(Tag.SCIENCE) >= 5;
   }
 
   public action(player: Player) {
-    const count = Math.floor(player.tags.getTagCount(Tag.SCIENCE) / 5);
+    const count = Math.floor(player.tags.count(Tag.SCIENCE) / 5);
     player.addResourceTo(this, count);
 
     return undefined;

@@ -28,7 +28,7 @@ class MarsFirstBonus01 implements Bonus {
   isDefault = true;
 
   getScore(player: Player) {
-    return player.tags.getTagCount(Tag.BUILDING, 'raw');
+    return player.tags.count(Tag.BUILDING, 'raw');
   }
 
   grant(game: Game) {

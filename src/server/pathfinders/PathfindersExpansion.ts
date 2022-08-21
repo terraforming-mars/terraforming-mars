@@ -248,7 +248,7 @@ export class PathfindersExpansion {
     const counts = players.map((player) => {
       // Wild tags only apply to a player taking an action.
       const includeWildTags = player.id === activePlayer?.id;
-      const count = player.tags.getTagCount(tag, includeWildTags ? 'default' : 'raw');
+      const count = player.tags.count(tag, includeWildTags ? 'default' : 'raw');
       return {player, count};
     });
     const max = Math.max(...counts.map((c) => c.count));

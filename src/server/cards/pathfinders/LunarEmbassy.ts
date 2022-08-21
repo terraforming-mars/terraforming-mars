@@ -35,7 +35,7 @@ export class LunarEmbassy extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);
-    player.addProduction(Resources.PLANTS, Math.floor((1 + player.tags.getTagCount(Tag.EARTH)) / 2), {log: true});
+    player.addProduction(Resources.PLANTS, Math.floor((1 + player.tags.count(Tag.EARTH)) / 2), {log: true});
     player.drawCard();
     player.game.addCityTile(player, SpaceName.LUNAR_EMBASSY, SpaceType.COLONY);
     return undefined;

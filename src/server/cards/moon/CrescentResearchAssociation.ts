@@ -39,6 +39,6 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
     if (card.tags.indexOf(Tag.MOON) === -1) {
       return 0;
     }
-    return player.tags.getTagCount(Tag.MOON);
+    return player.tags.count(Tag.MOON);
   }
 }

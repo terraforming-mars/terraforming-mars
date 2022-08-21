@@ -28,7 +28,7 @@ export class AdvancedPowerGrid extends Card implements IProjectCard {
 
   public produce(player: Player) {
     player.addProduction(Resources.ENERGY, 2, {log: true});
-    const tagCount = player.tags.getTagCount(Tag.ENERGY) + 1; // +1 is including this.
+    const tagCount = player.tags.count(Tag.ENERGY) + 1; // +1 is including this.
     player.addProduction(Resources.MEGACREDITS, tagCount, {log: true});
   }
 

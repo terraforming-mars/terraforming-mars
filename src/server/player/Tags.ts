@@ -17,20 +17,20 @@ export class Tags {
 
   public getAllTags(): Array<ITagCount> {
     return [
-      {tag: Tag.BUILDING, count: this.getTagCount(Tag.BUILDING, 'raw')},
-      {tag: Tag.CITY, count: this.getTagCount(Tag.CITY, 'raw')},
-      {tag: Tag.EARTH, count: this.getTagCount(Tag.EARTH, 'raw')},
-      {tag: Tag.ENERGY, count: this.getTagCount(Tag.ENERGY, 'raw')},
-      {tag: Tag.JOVIAN, count: this.getTagCount(Tag.JOVIAN, 'raw')},
-      {tag: Tag.MARS, count: this.getTagCount(Tag.MARS, 'raw')},
-      {tag: Tag.MICROBE, count: this.getTagCount(Tag.MICROBE, 'raw')},
-      {tag: Tag.MOON, count: this.getTagCount(Tag.MOON, 'raw')},
-      {tag: Tag.PLANT, count: this.getTagCount(Tag.PLANT, 'raw')},
-      {tag: Tag.SCIENCE, count: this.getTagCount(Tag.SCIENCE, 'raw')},
-      {tag: Tag.SPACE, count: this.getTagCount(Tag.SPACE, 'raw')},
-      {tag: Tag.VENUS, count: this.getTagCount(Tag.VENUS, 'raw')},
-      {tag: Tag.WILD, count: this.getTagCount(Tag.WILD, 'raw')},
-      {tag: Tag.ANIMAL, count: this.getTagCount(Tag.ANIMAL, 'raw')},
+      {tag: Tag.BUILDING, count: this.count(Tag.BUILDING, 'raw')},
+      {tag: Tag.CITY, count: this.count(Tag.CITY, 'raw')},
+      {tag: Tag.EARTH, count: this.count(Tag.EARTH, 'raw')},
+      {tag: Tag.ENERGY, count: this.count(Tag.ENERGY, 'raw')},
+      {tag: Tag.JOVIAN, count: this.count(Tag.JOVIAN, 'raw')},
+      {tag: Tag.MARS, count: this.count(Tag.MARS, 'raw')},
+      {tag: Tag.MICROBE, count: this.count(Tag.MICROBE, 'raw')},
+      {tag: Tag.MOON, count: this.count(Tag.MOON, 'raw')},
+      {tag: Tag.PLANT, count: this.count(Tag.PLANT, 'raw')},
+      {tag: Tag.SCIENCE, count: this.count(Tag.SCIENCE, 'raw')},
+      {tag: Tag.SPACE, count: this.count(Tag.SPACE, 'raw')},
+      {tag: Tag.VENUS, count: this.count(Tag.VENUS, 'raw')},
+      {tag: Tag.WILD, count: this.count(Tag.WILD, 'raw')},
+      {tag: Tag.ANIMAL, count: this.count(Tag.ANIMAL, 'raw')},
       {tag: Tag.EVENT, count: this.player.getPlayedEventsCount()},
     ].filter((tag) => tag.count > 0);
   }
@@ -45,11 +45,11 @@ export class Tags {
    * 'vps': Same as raw, but include event tags.
    * 'raw-pf': Same as raw, but includes Mars Tags when tag is Science  (Habitat Marte)
    */
-  public getTagCount(tag: Tag, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
+  public count(tag: Tag, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
     const includeEvents = this.player.isCorporation(CardName.ODYSSEY);
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
-    let tagCount = this.getRawTagCount(tag, includeEvents);
+    let tagCount = this.rawCount(tag, includeEvents);
 
     // Leavitt Station hook
     if (tag === Tag.SCIENCE && this.player.scienceTagCount > 0) {
@@ -60,18 +60,18 @@ export class Tags {
     if (includeTagSubstitutions) {
       // Earth Embassy hook
       if (tag === Tag.EARTH && this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-        tagCount += this.getRawTagCount(Tag.MOON, includeEvents);
+        tagCount += this.rawCount(Tag.MOON, includeEvents);
       }
 
       if (tag !== Tag.WILD) {
-        tagCount += this.getRawTagCount(Tag.WILD, includeEvents);
+        tagCount += this.rawCount(Tag.WILD, includeEvents);
       }
     }
 
     // Habitat Marte hook
     if (mode !== 'raw') {
       if (tag === Tag.SCIENCE && this.player.isCorporation(CardName.HABITAT_MARTE)) {
-        tagCount += this.getRawTagCount(Tag.MARS, includeEvents);
+        tagCount += this.rawCount(Tag.MARS, includeEvents);
       }
     }
 
@@ -113,7 +113,7 @@ export class Tags {
   }
 
   // Counts the tags in the player's play area only.
-  public getRawTagCount(tag: Tag, includeEventsTags: boolean) {
+  protected rawCount(tag: Tag, includeEventsTags: boolean) {
     let tagCount = 0;
 
     this.player.tableau.forEach((card: IProjectCard | ICorporationCard) => {
@@ -127,18 +127,18 @@ export class Tags {
 
   // Return the total number of tags assocaited with these types.
   // Tag substitutions are included
-  public getMultipleTagCount(tags: Array<Tag>, mode: 'default' | 'milestones' = 'default'): number {
+  public multipleCount(tags: Array<Tag>, mode: 'default' | 'milestones' = 'default'): number {
     let tagCount = 0;
     tags.forEach((tag) => {
-      tagCount += this.getRawTagCount(tag, false);
+      tagCount += this.rawCount(tag, false);
     });
 
     // This is repeated behavior from getTagCount, sigh, OK.
     if (tags.includes(Tag.EARTH) && !tags.includes(Tag.MOON) && this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-      tagCount += this.getRawTagCount(Tag.MOON, false);
+      tagCount += this.rawCount(Tag.MOON, false);
     }
 
-    tagCount += this.getRawTagCount(Tag.WILD, false);
+    tagCount += this.rawCount(Tag.WILD, false);
 
     // Chimera has 2 wild tags but should only count as one for milestones.
     if (this.player.isCorporation(CardName.CHIMERA) && mode === 'milestones') tagCount--;
@@ -147,7 +147,7 @@ export class Tags {
   }
 
   // Counts the number of distinct tags
-  public getDistinctTagCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
+  public distinctCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
     let wildTagCount: number = 0;
     const uniqueTags = new Set<Tag>();
     const addTag = (tag: Tag) => {
@@ -191,16 +191,16 @@ export class Tags {
   }
 
   // Return true if this player has all the tags in `tags` showing.
-  public checkMultipleTagPresence(tags: Array<Tag>): boolean {
+  public playerHas(tags: Array<Tag>): boolean {
     let distinctCount = 0;
     tags.forEach((tag) => {
-      if (this.getTagCount(tag, 'raw') > 0) {
+      if (this.count(tag, 'raw') > 0) {
         distinctCount++;
       } else if (tag === Tag.SCIENCE && this.player.hasTurmoilScienceTagBonus) {
         distinctCount++;
       }
     });
-    if (distinctCount + this.getTagCount(Tag.WILD) >= tags.length) {
+    if (distinctCount + this.count(Tag.WILD) >= tags.length) {
       return true;
     }
     return false;

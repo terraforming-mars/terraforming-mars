@@ -25,7 +25,7 @@ export class VenusInfrastructure extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      const amount = Math.min(5, player.tags.getTagCount(Tag.VENUS, 'raw')) + turmoil.getPlayerInfluence(player);
+      const amount = Math.min(5, player.tags.count(Tag.VENUS, 'raw')) + turmoil.getPlayerInfluence(player);
       if (amount > 0) {
         player.addResource(Resources.MEGACREDITS, amount * 2, {log: true, from: this.name});
       }

@@ -156,13 +156,13 @@ export class TagCardRequirement extends CardRequirement implements ITagCardRequi
 
   public override satisfies(player: Player): boolean {
     const mode = this.isMax !== true ? 'default' : 'raw';
-    let tagCount = player.tags.getTagCount(this.tag, mode);
+    let tagCount = player.tags.count(this.tag, mode);
 
     if (this.isAny) {
       player.game.getPlayers().forEach((p) => {
         if (p.id !== player.id) {
           // Don't include opponents' wild tags because they are not performing the action.
-          tagCount += p.tags.getTagCount(this.tag, 'raw');
+          tagCount += p.tags.count(this.tag, 'raw');
         }
       });
     }

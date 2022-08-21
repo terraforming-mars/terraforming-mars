@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -13,7 +13,7 @@ export class VenusMagnetizer extends Card implements IActionCard {
     super({
       name: CardName.VENUS_MAGNETIZER,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 7,
 
       requirements: CardRequirements.builder((b) => b.venus(10)),

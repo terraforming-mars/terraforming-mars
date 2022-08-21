@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
@@ -68,7 +68,7 @@ describe('SoylentSeedlingSystems', function() {
   });
 
   it('plant tag', () => {
-    const plantCard = fakeCard({name: 'A' as CardName, cost: 10, tags: [Tags.PLANT]});
+    const plantCard = fakeCard({name: 'A' as CardName, cost: 10, tags: [Tag.PLANT]});
 
     player.megaCredits = 10;
     expect(player.canPlay(plantCard)).is.true;

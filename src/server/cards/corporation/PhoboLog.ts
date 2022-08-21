@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ export class PhoboLog extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.PHOBOLOG,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       startingMegaCredits: 23,
 
       metadata: {

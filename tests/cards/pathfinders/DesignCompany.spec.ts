@@ -3,7 +3,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {DesignCompany} from '../../../src/server/cards/pathfinders/DesignCompany';
 import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DesignCompany', function() {
@@ -24,7 +24,7 @@ describe('DesignCompany', function() {
 
     expect(player.cardsInHand).has.lengthOf(3);
     player.cardsInHand.forEach((card) => {
-      expect(card.tags.indexOf(Tags.BUILDING)).not.to.eq(-1);
+      expect(card.tags.indexOf(Tag.BUILDING)).not.to.eq(-1);
     });
   });
 });

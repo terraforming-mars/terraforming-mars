@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,7 +10,7 @@ export class BusinessEmpire extends PreludeCard {
   constructor() {
     super({
       name: CardName.BUSINESS_EMPIRE,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
 
       productionBox: Units.of({megacredits: 6}),
       startingMegacredits: -6,

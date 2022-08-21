@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
@@ -17,8 +17,8 @@ export class DesignedOrganisms extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.DESIGNED_ORGANISMS,
       cost: 12,
-      tags: [Tags.SCIENCE, Tags.PLANT, Tags.MARS],
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
+      tags: [Tag.SCIENCE, Tag.PLANT, Tag.MARS],
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),
       productionBox: Units.of({plants: 2}),
 
       metadata: {

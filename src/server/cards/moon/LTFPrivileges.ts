@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -10,7 +10,7 @@ export class LTFPrivileges extends Card implements IProjectCard {
     super({
       name: CardName.LTF_PRIVILEGES,
       cardType: CardType.ACTIVE,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 21,
 
       metadata: {

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ export class IceMoonColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 23,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.ICE_MOON_COLONY,
       cardType: CardType.AUTOMATED,
       tr: {oceans: 1},

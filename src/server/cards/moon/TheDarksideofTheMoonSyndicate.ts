@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
@@ -22,7 +22,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       startingMegaCredits: 40,
       resourceType: CardResource.SYNDICATE_FLEET,
 
@@ -37,7 +37,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
           b.text('Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.', Size.TINY, false, false).br;
           b
             .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
-              eb.emptyTile('normal', {size: Size.SMALL, secondaryTag: Tags.MOON})
+              eb.emptyTile('normal', {size: Size.SMALL, secondaryTag: Tag.MOON})
                 .startEffect
                 .text('STEAL').megacredits(2, {all}).slash().emptyTile('normal', {size: Size.SMALL}).emptyTile('normal', {size: Size.SMALL, all});
             });

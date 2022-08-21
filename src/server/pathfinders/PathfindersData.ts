@@ -1,4 +1,4 @@
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {PlayerId} from '../../common/Types';
 import {SerializedPathfindersData} from './SerializedPathfindersData';
 
@@ -8,7 +8,7 @@ export type PathfindersData = {
   mars: number;
   jovian: number;
   moon: number;
-  vps: Array<{id: PlayerId, tag: Tags, points: number}>;
+  vps: Array<{id: PlayerId, tag: Tag, points: number}>;
 }
 
 export namespace PathfindersData {
@@ -37,38 +37,38 @@ export namespace PathfindersData {
     };
   }
 
-  export function getValue(pathfindersData: PathfindersData, tag: Tags): number {
+  export function getValue(pathfindersData: PathfindersData, tag: Tag): number {
     switch (tag) {
-    case Tags.VENUS:
+    case Tag.VENUS:
       return pathfindersData.venus;
-    case Tags.EARTH:
+    case Tag.EARTH:
       return pathfindersData.earth;
-    case Tags.MARS:
+    case Tag.MARS:
       return pathfindersData.mars;
-    case Tags.JOVIAN:
+    case Tag.JOVIAN:
       return pathfindersData.jovian;
-    case Tags.MOON:
+    case Tag.MOON:
       return pathfindersData.moon;
     default:
       return -1;
     }
   }
 
-  export function setValue(pathfindersData: PathfindersData, tag: Tags, value: number): void {
+  export function setValue(pathfindersData: PathfindersData, tag: Tag, value: number): void {
     switch (tag) {
-    case Tags.VENUS:
+    case Tag.VENUS:
       pathfindersData.venus = value;
       break;
-    case Tags.EARTH:
+    case Tag.EARTH:
       pathfindersData.earth = value;
       break;
-    case Tags.MARS:
+    case Tag.MARS:
       pathfindersData.mars = value;
       break;
-    case Tags.JOVIAN:
+    case Tag.JOVIAN:
       pathfindersData.jovian = value;
       break;
-    case Tags.MOON:
+    case Tag.MOON:
       pathfindersData.moon = value;
       break;
     }

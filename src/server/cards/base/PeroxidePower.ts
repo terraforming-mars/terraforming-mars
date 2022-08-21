@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ export class PeroxidePower extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.PEROXIDE_POWER,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 7,
       productionBox: Units.of({energy: 2, megacredits: -1}),
 

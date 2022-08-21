@@ -1,4 +1,4 @@
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {IMilestone} from '../milestones/IMilestone';
 import {Player} from '../Player';
 
@@ -8,7 +8,7 @@ export class OneGiantStep implements IMilestone {
   // was before the deck got 100% larger.
   public description: string = 'Have at least 6 moon tags in play';
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.MOON, 'milestone');
+    return player.getTagCount(Tag.MOON, 'milestone');
   }
   public canClaim(player: Player): boolean {
     return this.getScore(player) >= 6;

@@ -5,7 +5,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {cast} from '../../TestingUtils';
 
 describe('Kickstarter', function() {
@@ -20,7 +20,7 @@ describe('Kickstarter', function() {
   });
 
   it('play', () => {
-    expect(card.tags).deep.eq([Tags.CLONE]);
+    expect(card.tags).deep.eq([Tag.CLONE]);
 
     card.play(player);
 
@@ -50,6 +50,6 @@ describe('Kickstarter', function() {
       vps: [],
     });
 
-    expect(card.tags).deep.eq([Tags.MARS]);
+    expect(card.tags).deep.eq([Tag.MARS]);
   });
 });

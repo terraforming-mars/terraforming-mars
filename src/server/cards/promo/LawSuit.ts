@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -16,7 +16,7 @@ export class LawSuit extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.LAW_SUIT,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 2,
       victoryPoints: 'special',
 

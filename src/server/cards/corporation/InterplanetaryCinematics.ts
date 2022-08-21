@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ export class InterplanetaryCinematics extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.INTERPLANETARY_CINEMATICS,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 30,
 
       metadata: {

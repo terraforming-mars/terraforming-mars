@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,10 +11,10 @@ export class EarthOffice extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.EARTH_OFFICE,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 1,
 
-      cardDiscount: {tag: Tags.EARTH, amount: 3},
+      cardDiscount: {tag: Tag.EARTH, amount: 3},
       metadata: {
         cardNumber: '105',
         renderData: CardRenderer.builder((b) => {

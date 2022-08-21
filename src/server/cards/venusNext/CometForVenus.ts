@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
@@ -16,7 +16,7 @@ export class CometForVenus extends Card implements IProjectCard {
     super({
       name: CardName.COMET_FOR_VENUS,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 11,
       tr: {venus: 1},
 
@@ -24,14 +24,14 @@ export class CometForVenus extends Card implements IProjectCard {
         description: 'Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.',
         cardNumber: '218',
         renderData: CardRenderer.builder((b) => {
-          b.venus(1).nbsp.nbsp.minus().megacredits(4, {all, secondaryTag: Tags.VENUS});
+          b.venus(1).nbsp.nbsp.minus().megacredits(4, {all, secondaryTag: Tag.VENUS});
         }),
       },
     });
   }
 
   public play(player: Player) {
-    const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tags.VENUS, 'raw') > 0);
+    const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tag.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {
       player.game.increaseVenusScaleLevel(player, 1);

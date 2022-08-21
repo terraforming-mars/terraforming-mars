@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
@@ -11,7 +11,7 @@ export class ArchimedesHydroponicsStation extends MoonCard {
     super({
       name: CardName.ARCHIMEDES_HYDROPONICS_STATION,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
       cost: 12,
       productionBox: Units.of({energy: -1, megacredits: -1, plants: 2}),
 

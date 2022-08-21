@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -14,7 +14,7 @@ export class Dirigibles extends Card implements IActionCard {
     super({
       name: CardName.DIRIGIBLES,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 11,
       resourceType: CardResource.FLOATER,
 

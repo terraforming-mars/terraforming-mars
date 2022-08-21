@@ -3,7 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../../common/Resources';
@@ -16,7 +16,7 @@ export class CorporateStronghold extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.CORPORATE_STRONGHOLD,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 11,
       productionBox: Units.of({energy: -1, megacredits: 3}),
       victoryPoints: -2,

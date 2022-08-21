@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -18,7 +18,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.MARTIAN_MEDIA_CENTER,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 7,
       productionBox: Units.of({megacredits: 2}),
 

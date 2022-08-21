@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
@@ -16,7 +16,7 @@ export class ThoriumRush extends Card implements IProjectCard {
     super({
       name: CardName.THORIUM_RUSH,
       cardType: CardType.EVENT,
-      tags: [Tags.MOON, Tags.BUILDING],
+      tags: [Tag.MOON, Tag.BUILDING],
       cost: 39,
       tr: {moonColony: 1, moonMining: 1, moonLogistics: 1},
 

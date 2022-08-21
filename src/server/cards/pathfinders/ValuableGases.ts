@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -18,7 +18,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.VALUABLE_GASES_PATHFINDERS,
-      tags: [Tags.JOVIAN, Tags.VENUS],
+      tags: [Tag.JOVIAN, Tag.VENUS],
 
       metadata: {
         cardNumber: '',

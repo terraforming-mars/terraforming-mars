@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -16,7 +16,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.BIOMASS_COMBUSTORS,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 4,
       victoryPoints: -1,
 

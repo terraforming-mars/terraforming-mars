@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
@@ -17,8 +17,8 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SPACE_DEBRIS_CLEANING_OPERATION,
       cost: 7,
-      tags: [Tags.MARS, Tags.SPACE],
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 4)),
+      tags: [Tag.MARS, Tag.SPACE],
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 4)),
 
       metadata: {
         cardNumber: 'Pf24',
@@ -43,7 +43,7 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
         {
           count: 1,
           filter: (card: ICard) => {
-            return card.resourceType !== undefined && card.resourceType !== CardResource.SCIENCE && !card.tags.includes(Tags.ANIMAL);
+            return card.resourceType !== undefined && card.resourceType !== CardResource.SCIENCE && !card.tags.includes(Tag.ANIMAL);
           },
         },
       ));

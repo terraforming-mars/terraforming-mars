@@ -7,7 +7,7 @@ import {expect} from 'chai';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -30,10 +30,10 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(player.getPlayableCards()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tags.MOON]})];
+    player.playedCards = [fakeCard({tags: [Tag.MOON]})];
     expect(player.getPlayableCards()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tags.MOON, Tags.MOON]})];
+    player.playedCards = [fakeCard({tags: [Tag.MOON, Tag.MOON]})];
     expect(player.getPlayableCards()).includes(card);
   });
 

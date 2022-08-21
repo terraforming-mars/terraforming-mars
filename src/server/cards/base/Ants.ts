@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -18,7 +18,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ANTS,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 9,
 
       resourceType: CardResource.MICROBE,

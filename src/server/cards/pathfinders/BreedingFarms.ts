@@ -9,7 +9,7 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class BreedingFarms extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -17,10 +17,10 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       cardType: CardType.ACTIVE,
       name: CardName.BREEDING_FARMS,
       cost: 16,
-      tags: [Tags.SCIENCE, Tags.ANIMAL, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.ANIMAL, Tag.BUILDING],
       tr: {temperature: 1},
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.ANIMAL)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.ANIMAL)),
       metadata: {
         cardNumber: 'Pf01',
         renderData: CardRenderer.builder((b) => {

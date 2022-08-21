@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {digit, played} from '../Options';
 import {Resources} from '../../../common/Resources';
 import {Size} from '../../../common/cards/render/Size';
@@ -18,8 +18,8 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
       cost: 20,
-      tags: [Tags.SPACE, Tags.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 1).tag(Tags.SCIENCE, 1)),
+      tags: [Tag.SPACE, Tag.SCIENCE],
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 1).tag(Tag.SCIENCE, 1)),
 
       metadata: {
         cardNumber: 'Pf53',
@@ -44,10 +44,10 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
 
   private processCard(player: Player, card: IProjectCard): boolean {
     const tags = card.tags;
-    if (player.cardHasTag(card, Tags.SCIENCE) || player.cardHasTag(card, Tags.MICROBE)) {
+    if (player.cardHasTag(card, Tag.SCIENCE) || player.cardHasTag(card, Tag.MICROBE)) {
       player.playCard(card, undefined);
       return true;
-    } else if (tags.includes(Tags.SPACE)) {
+    } else if (tags.includes(Tag.SPACE)) {
       player.addProduction(Resources.ENERGY, 3, {log: true});
       this.keep(player, card);
       return true;

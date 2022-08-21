@@ -1,7 +1,7 @@
 
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -15,7 +15,7 @@ export class EnergySaving extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ENERGY_SAVING,
-      tags: [Tags.ENERGY],
+      tags: [Tag.ENERGY],
       cost: 15,
 
       metadata: {

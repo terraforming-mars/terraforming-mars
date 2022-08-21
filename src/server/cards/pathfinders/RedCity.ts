@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Card} from '../Card';
@@ -19,7 +19,7 @@ export class RedCity extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.RED_CITY,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 21,
       productionBox: Units.of({energy: -1, megacredits: 2}),
       requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ export class EarthElevator extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 43,
-      tags: [Tags.SPACE, Tags.EARTH],
+      tags: [Tag.SPACE, Tag.EARTH],
       name: CardName.EARTH_ELEVATOR,
       cardType: CardType.AUTOMATED,
       victoryPoints: 4,

@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,7 +13,7 @@ export class IronExtractionCenter extends MoonCard {
     super({
       name: CardName.IRON_EXTRACTION_CENTER,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 10,
       reserveUnits: Units.of({titanium: 1}),
 

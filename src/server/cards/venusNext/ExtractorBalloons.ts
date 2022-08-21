@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -17,7 +17,7 @@ export class ExtractorBalloons extends Card implements IActionCard {
     super({
       name: CardName.EXTRACTOR_BALLOONS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 21,
       resourceType: CardResource.FLOATER,
 

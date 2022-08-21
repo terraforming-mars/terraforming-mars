@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -13,7 +13,7 @@ export class LunaStagingStation extends MoonCard {
     super({
       name: CardName.LUNA_STAGING_STATION,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.BUILDING],
+      tags: [Tag.MOON, Tag.BUILDING],
       cost: 12,
       reserveUnits: Units.of({titanium: 1}),
       tr: {moonLogistics: 2},

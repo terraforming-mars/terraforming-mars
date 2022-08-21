@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -16,7 +16,7 @@ export class OpenCity extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.OPEN_CITY,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 23,
       productionBox: Units.of({energy: -1, megacredits: 4}),
       requirements: CardRequirements.builder((b) => b.oxygen(12)),

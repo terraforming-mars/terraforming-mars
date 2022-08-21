@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
 import {InventionContest} from '../../../src/server/cards/base/InventionContest';
@@ -27,11 +27,11 @@ describe('Odyssey', () => {
   });
 
   it('events count for tags', () => {
-    const event = fakeCard({cardType: CardType.EVENT, tags: [Tags.JOVIAN]});
+    const event = fakeCard({cardType: CardType.EVENT, tags: [Tag.JOVIAN]});
     player.playedCards.push(event);
-    expect(player.getTagCount(Tags.JOVIAN)).eq(1);
+    expect(player.getTagCount(Tag.JOVIAN)).eq(1);
     player.setCorporationForTest(undefined);
-    expect(player.getTagCount(Tags.JOVIAN)).eq(0);
+    expect(player.getTagCount(Tag.JOVIAN)).eq(0);
   });
 
   it('cannot act - cannot afford', () => {

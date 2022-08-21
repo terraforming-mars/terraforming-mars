@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,7 +14,7 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.BIO_SOL,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       startingMegaCredits: 42,
       resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 3),
@@ -25,7 +25,7 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
         cardNumber: 'PfC14',
         description: 'You start with 42 M€. As your first action, draw 2 cards with a microbe tag.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(42).cards(2, {secondaryTag: Tags.MICROBE}).br;
+          b.megacredits(42).cards(2, {secondaryTag: Tag.MICROBE}).br;
           b.corpBox('action', (corpbox) => corpbox.action(
             'Add 1 microbe to ANY card',
             (ab) => ab.empty().startAction.microbes(1).asterix()));
@@ -39,7 +39,7 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
   }
 
   public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tags.MICROBE});
+    player.drawCard(2, {tag: Tag.MICROBE});
     return undefined;
   }
 

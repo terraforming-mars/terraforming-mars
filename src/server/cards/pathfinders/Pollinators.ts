@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../../common/Resources';
 
@@ -16,9 +16,9 @@ export class Pollinators extends Card implements IProjectCard, IActionCard {
       cardType: CardType.ACTIVE,
       name: CardName.POLLINATORS,
       cost: 19,
-      tags: [Tags.PLANT, Tags.ANIMAL],
+      tags: [Tag.PLANT, Tag.ANIMAL],
       resourceType: CardResource.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.PLANT, 3)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.PLANT, 3)),
       victoryPoints: VictoryPoints.resource(1, 1),
 
       metadata: {

@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
@@ -14,7 +14,7 @@ export class Habitat14 extends MoonCard {
     super({
       name: CardName.HABITAT_14,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.CITY, Tags.MOON],
+      tags: [Tag.CITY, Tag.MOON],
       cost: 5,
       productionBox: Units.of({energy: -1, megacredits: -1}),
       reserveUnits: Units.of({titanium: 1}),

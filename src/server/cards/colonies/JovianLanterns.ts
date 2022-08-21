@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,14 +14,14 @@ export class JovianLanterns extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 20,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       name: CardName.JOVIAN_LANTERNS,
       cardType: CardType.ACTIVE,
 
       resourceType: CardResource.FLOATER,
       victoryPoints: VictoryPoints.resource(1, 2),
       tr: {tr: 1},
-      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
 
       metadata: {
         cardNumber: 'C18',

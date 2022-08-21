@@ -5,7 +5,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {Units} from '../../../common/Units';
@@ -18,7 +18,7 @@ export class MartianRepository extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.MARTIAN_REPOSITORY,
       cost: 12,
-      tags: [Tags.MARS, Tags.MARS, Tags.BUILDING],
+      tags: [Tag.MARS, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
       productionBox: Units.of({energy: -1}),
       victoryPoints: VictoryPoints.resource(1, 3),
@@ -39,7 +39,7 @@ export class MartianRepository extends Card implements IProjectCard {
   public override resourceCount = 0;
 
   public onCardPlayed(player: Player, card: ICard) {
-    const qty = player.cardTagCount(card, Tags.SCIENCE) + player.cardTagCount(card, Tags. MARS);
+    const qty = player.cardTagCount(card, Tag.SCIENCE) + player.cardTagCount(card, Tag. MARS);
     if (qty > 0) player.addResourceTo(this, {qty, log: true});
   }
 

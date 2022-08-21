@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ export class ResearchColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 20,
-      tags: [Tags.SPACE, Tags.SCIENCE],
+      tags: [Tag.SPACE, Tag.SCIENCE],
       name: CardName.RESEARCH_COLONY,
       cardType: CardType.AUTOMATED,
 

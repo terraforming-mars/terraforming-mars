@@ -10,7 +10,7 @@ import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
@@ -203,7 +203,7 @@ describe('RoboticWorkforce', () => {
       const gameOptions = setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
 
       let include = false;
-      if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILD)) && card.play !== undefined) {
+      if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
         // Solar Farm is a pain to test so let's just say it's fine
         if (card.name === CardName.SOLAR_FARM) {
           return;

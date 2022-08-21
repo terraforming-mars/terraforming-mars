@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -11,7 +11,7 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARTIAN_INDUSTRIES,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       productionBox: Units.of({energy: 1, steel: 1}),
       startingMegacredits: 6,
 

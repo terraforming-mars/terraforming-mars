@@ -2,7 +2,7 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
@@ -28,7 +28,7 @@ class UnityBonus01 implements Bonus {
   isDefault = true;
 
   getScore(player: Player) {
-    const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
+    const tags = [Tag.VENUS, Tag.EARTH, Tag.JOVIAN];
     return tags.map((tag) => player.getTagCount(tag, 'raw')).reduce((acc, count) => acc + count, 0);
   }
 
@@ -45,7 +45,7 @@ class UnityBonus02 implements Bonus {
   isDefault = false;
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.SPACE, 'raw');
+    return player.getTagCount(Tag.SPACE, 'raw');
   }
 
   grant(game: Game) {
@@ -141,7 +141,7 @@ class UnityPolicy03 implements Policy {
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          player.drawCard(1, {tag: Tags.SPACE});
+          player.drawCard(1, {tag: Tag.SPACE});
         },
       },
     ));

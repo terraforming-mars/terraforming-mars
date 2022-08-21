@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,13 +14,13 @@ export class RedSpotObservatory extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 17,
-      tags: [Tags.JOVIAN, Tags.SCIENCE],
+      tags: [Tag.JOVIAN, Tag.SCIENCE],
       name: CardName.RED_SPOT_OBSERVATORY,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
       victoryPoints: 2,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       metadata: {
         cardNumber: 'C32',
         renderData: CardRenderer.builder((b) => {

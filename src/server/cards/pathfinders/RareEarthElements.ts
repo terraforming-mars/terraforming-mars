@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {isSpecialTile, playerTileFn} from '../../boards/Board';
 
 export class RareEarthElements extends Card implements IProjectCard {
@@ -14,7 +14,7 @@ export class RareEarthElements extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.RARE_EARTH_ELEMENTS,
       cost: 5,
-      tags: [Tags.EARTH, Tags.MARS],
+      tags: [Tag.EARTH, Tag.MARS],
 
       metadata: {
         cardNumber: 'Pf06',

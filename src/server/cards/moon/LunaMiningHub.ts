@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
@@ -17,7 +17,7 @@ export class LunaMiningHub extends MoonCard {
     super({
       name: CardName.LUNA_MINING_HUB,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 16,
 
       productionBox: Units.of({steel: 1, titanium: 1}),

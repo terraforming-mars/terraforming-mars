@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 
 export class PowerPlant extends Card implements IProjectCard {
@@ -13,7 +13,7 @@ export class PowerPlant extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.POWER_PLANT_PATHFINDERS,
       cost: 13,
-      tags: [Tags.MARS, Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING],
       productionBox: Units.of({heat: 2, energy: 1}),
 
       metadata: {

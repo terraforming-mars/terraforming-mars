@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 25,
-      tags: [Tags.JOVIAN, Tags.SPACE],
+      tags: [Tag.JOVIAN, Tag.SPACE],
       name: CardName.NITROGEN_FROM_TITAN,
       cardType: CardType.AUTOMATED,
       tr: {tr: 2},
@@ -21,7 +21,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C28',
         renderData: CardRenderer.builder((b) => {
-          b.tr(2).floaters(2, {secondaryTag: Tags.JOVIAN});
+          b.tr(2).floaters(2, {secondaryTag: Tag.JOVIAN});
         }),
         description: 'Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.',
       },
@@ -30,7 +30,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.increaseTerraformRatingSteps(2);
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
     return undefined;
   }
 }

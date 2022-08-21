@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
@@ -14,7 +14,7 @@ export class TychoRoadNetwork extends MoonCard {
     super({
       name: CardName.TYCHO_ROAD_NETWORK,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 15,
       productionBox: Units.of({megacredits: 1}),
       reserveUnits: Units.of({steel: 1}),

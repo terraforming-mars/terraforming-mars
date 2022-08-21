@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -9,7 +9,7 @@ export class DomeFarming extends PreludeCard {
   constructor() {
     super({
       name: CardName.DOME_FARMING,
-      tags: [Tags.PLANT, Tags.BUILDING],
+      tags: [Tag.PLANT, Tag.BUILDING],
       productionBox: Units.of({megacredits: 2, plants: 1}),
 
       metadata: {

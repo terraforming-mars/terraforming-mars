@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -10,7 +10,7 @@ export class OrbitalConstructionYard extends PreludeCard implements IProjectCard
   constructor() {
     super({
       name: CardName.ORBITAL_CONSTRUCTION_YARD,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
 
       metadata: {
         cardNumber: 'P25',

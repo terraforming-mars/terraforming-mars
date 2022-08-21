@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {all} from '../Options';
@@ -17,9 +17,9 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
       cardType: CardType.ACTIVE,
       name: CardName.MARTIAN_CULTURE,
       cost: 11,
-      tags: [Tags.MARS, Tags.MARS],
+      tags: [Tag.MARS, Tag.MARS],
       resourceType: CardResource.DATA,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.MARS, 2, {all})),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.MARS, 2, {all})),
       victoryPoints: VictoryPoints.resource(1, 2),
 
       metadata: {

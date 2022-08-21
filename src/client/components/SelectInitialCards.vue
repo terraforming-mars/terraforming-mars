@@ -28,7 +28,7 @@ import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
 
@@ -106,13 +106,13 @@ export default (Vue as WithRefs<Refs>).extend({
 
         // When ANY microbe tag is played ... lose 4 M€ or as much as possible.
         case CardName.PHARMACY_UNION:
-          const tags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const tags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
           result -= (4 * tags);
           break;
 
         // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
         case CardName.SPLICE:
-          const microbeTags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const microbeTags = card.tags.filter((tag) => tag === Tag.MICROBE).length;
           result += (2 * microbeTags);
           break;
 

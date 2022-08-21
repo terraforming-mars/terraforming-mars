@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,10 +14,10 @@ export class GanymedeColony extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.GANYMEDE_COLONY,
-      tags: [Tags.JOVIAN, Tags.SPACE, Tags.CITY],
+      tags: [Tag.JOVIAN, Tag.SPACE, Tag.CITY],
       cost: 20,
 
-      victoryPoints: VictoryPoints.tags(Tags.JOVIAN, 1, 1),
+      victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
 
       metadata: {
         description: 'Place a city tile ON THE RESERVED AREA.',

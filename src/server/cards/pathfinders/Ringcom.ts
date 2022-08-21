@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,7 +14,7 @@ export class Ringcom extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.RINGCOM,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       startingMegaCredits: 39,
 
       initialActionText: 'Draw 2 cards with a jovian tag',
@@ -25,7 +25,7 @@ export class Ringcom extends Card implements ICorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(39).production((pb) => pb.megacredits(3));
-          b.cards(2, {secondaryTag: Tags.JOVIAN});
+          b.cards(2, {secondaryTag: Tag.JOVIAN});
           b.corpBox('effect', (ce) => {
             ce.effect('When any player plays a card with a jovian tag (including this) gain 1 titanium.', (eb) => {
               eb.jovian({all, played}).startEffect.titanium(1);
@@ -44,7 +44,7 @@ export class Ringcom extends Card implements ICorporationCard {
   }
 
   public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tags.JOVIAN});
+    player.drawCard(2, {tag: Tag.JOVIAN});
     return undefined;
   }
 
@@ -54,7 +54,7 @@ export class Ringcom extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (card.tags.includes(Tags.JOVIAN)) {
+    if (card.tags.includes(Tag.JOVIAN)) {
       player.game.getPlayers().forEach((p) => {
         if (p.isCorporation(this.name)) {
           p.addResource(Resources.TITANIUM, 1, {log: true});

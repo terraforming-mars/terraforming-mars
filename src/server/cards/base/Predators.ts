@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -18,7 +18,7 @@ export class Predators extends Card implements IProjectCard, IActionCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.PREDATORS,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 14,
 
       resourceType: CardResource.ANIMAL,

@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
@@ -17,7 +17,7 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
     super({
       name: CardName.MARE_NECTARIS_MINE,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.BUILDING],
+      tags: [Tag.MOON, Tag.BUILDING],
       cost: 14,
       productionBox: Units.of({steel: 1}),
       reserveUnits: Units.of({titanium: 1}),

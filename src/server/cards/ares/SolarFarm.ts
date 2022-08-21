@@ -9,7 +9,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SolarFarm extends Card implements IProjectCard {
@@ -17,7 +17,7 @@ export class SolarFarm extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SOLAR_FARM,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 12,
 
       metadata: {

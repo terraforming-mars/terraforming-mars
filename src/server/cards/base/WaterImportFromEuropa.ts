@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -16,10 +16,10 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
     super({
       cardType: CardType.ACTIVE,
       name: CardName.WATER_IMPORT_FROM_EUROPA,
-      tags: [Tags.JOVIAN, Tags.SPACE],
+      tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 25,
 
-      victoryPoints: VictoryPoints.tags(Tags.JOVIAN, 1, 1),
+      victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
 
       metadata: {
         cardNumber: '012',

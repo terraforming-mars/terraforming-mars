@@ -1,6 +1,6 @@
 
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,11 +14,11 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.BEAM_FROM_A_THORIUM_ASTEROID,
-      tags: [Tags.JOVIAN, Tags.SPACE, Tags.ENERGY],
+      tags: [Tag.JOVIAN, Tag.SPACE, Tag.ENERGY],
       cost: 32,
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
       metadata: {
         cardNumber: '058',
         description: 'Requires a Jovian tag. Increase your heat production and Energy production 3 steps each',

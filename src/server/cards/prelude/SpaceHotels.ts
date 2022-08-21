@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,10 +13,10 @@ export class SpaceHotels extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SPACE_HOTELS,
-      tags: [Tags.SPACE, Tags.EARTH],
+      tags: [Tag.SPACE, Tag.EARTH],
       cost: 12,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
       metadata: {
         cardNumber: 'P42',
         renderData: CardRenderer.builder((b) => {

@@ -3,7 +3,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CO2Reducers} from '../../../src/server/cards/pathfinders/CO2Reducers';
 import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CO2Reducers', function() {
@@ -23,6 +23,6 @@ describe('CO2Reducers', function() {
     expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
 
     expect(player.cardsInHand).has.lengthOf(2);
-    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.MICROBE)).not.to.eq(-1));
+    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tag.MICROBE)).not.to.eq(-1));
   });
 });

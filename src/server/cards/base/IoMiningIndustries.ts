@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,9 +13,9 @@ export class IoMiningIndustries extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.IO_MINING_INDUSTRIES,
-      tags: [Tags.JOVIAN, Tags.SPACE],
+      tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 41,
-      victoryPoints: VictoryPoints.tags(Tags.JOVIAN, 1, 1),
+      victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
 
       metadata: {
         cardNumber: '092',

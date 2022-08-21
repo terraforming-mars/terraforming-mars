@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -17,7 +17,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 27,
-      tags: [Tags.SCIENCE, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.SPACE],
       name: CardName.HUYGENS_OBSERVATORY,
       cardType: CardType.AUTOMATED,
       victoryPoints: 1,

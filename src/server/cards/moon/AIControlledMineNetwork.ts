@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -13,7 +13,7 @@ export class AIControlledMineNetwork extends Card implements IProjectCard {
     super({
       name: CardName.AI_CONTROLLED_MINE_NETWORK,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 6,
       tr: {moonLogistics: 1},
 

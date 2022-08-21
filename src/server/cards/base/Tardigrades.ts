@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ export class Tardigrades extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.TARDIGRADES,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 4,
 
       resourceType: CardResource.MICROBE,

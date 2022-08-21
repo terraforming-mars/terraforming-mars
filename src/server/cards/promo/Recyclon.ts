@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
@@ -18,7 +18,7 @@ export class Recyclon extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.RECYCLON,
-      tags: [Tags.MICROBE, Tags.BUILDING],
+      tags: [Tag.MICROBE, Tag.BUILDING],
       startingMegaCredits: 38,
       resourceType: CardResource.MICROBE,
       productionBox: Units.of({steel: 1}),
@@ -47,7 +47,7 @@ export class Recyclon extends Card implements ICorporationCard {
     return undefined;
   }
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING) === false || !player.isCorporation(this.name)) {
+    if (card.tags.includes(Tag.BUILDING) === false || !player.isCorporation(this.name)) {
       return undefined;
     }
     if (this.resourceCount < 2) {

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,11 +11,11 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ANTI_GRAVITY_TECHNOLOGY,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 14,
       victoryPoints: 3,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 7)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 7)),
       cardDiscount: {amount: 2},
       metadata: {
         description: 'Requires 7 science tags.',

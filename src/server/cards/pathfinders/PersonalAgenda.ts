@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Units} from '../../../common/Units';
 
@@ -17,7 +17,7 @@ export class PersonalAgenda extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(3)).br;
           // TODO(kberg): allow more than one secondary tag.
-          b.cards(3, {secondaryTag: Tags.EVENT}).asterix();
+          b.cards(3, {secondaryTag: Tag.EVENT}).asterix();
         }),
         description: 'Increase your M€ production 3 steps. Draw 3 event cards that do not have a space tag.',
       },
@@ -28,7 +28,7 @@ export class PersonalAgenda extends PreludeCard {
     player.drawCard(3, {
       include: (card) => {
         return card.cardType === CardType.EVENT &&
-          (card.tags.includes(Tags.SPACE) === false);
+          (card.tags.includes(Tag.SPACE) === false);
       }});
     return undefined;
   }

@@ -46,7 +46,7 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../../common/models/MoonModel';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 
 export class Server {
@@ -362,10 +362,10 @@ export class Server {
 
       // Too bad this is hard-coded
       if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
-        discount = [{tag: Tags.MOON, amount: player.getTagCount(Tags.MOON)}];
+        discount = [{tag: Tag.MOON, amount: player.getTagCount(Tag.MOON)}];
       }
       if (card.name === CardName.MARS_DIRECT) {
-        discount = [{tag: Tags.MARS, amount: player.getTagCount(Tags.MARS)}];
+        discount = [{tag: Tag.MARS, amount: player.getTagCount(Tag.MARS)}];
       }
 
       const isDisabled = isICorporationCard(card) ? (card.isDisabled || false) : (options.enabled?.[index] === false);

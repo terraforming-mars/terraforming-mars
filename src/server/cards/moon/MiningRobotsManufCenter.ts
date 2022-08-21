@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
@@ -12,7 +12,7 @@ export class MiningRobotsManufCenter extends MoonCard {
     super({
       name: CardName.MINING_ROBOTS_MANUF_CENTER,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 12,
       reserveUnits: Units.of({titanium: 1}),
       tr: {moonMining: 2},

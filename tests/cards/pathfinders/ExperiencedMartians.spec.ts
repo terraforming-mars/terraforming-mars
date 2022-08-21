@@ -5,7 +5,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Game} from '../../../src/server/Game';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
@@ -26,10 +26,10 @@ describe('ExperiencedMartians', function() {
   });
 
   it('play', function() {
-    const a = fakeCard({name: 'A' as CardName, tags: [Tags.MARS]});
+    const a = fakeCard({name: 'A' as CardName, tags: [Tag.MARS]});
     const b = fakeCard({name: 'B' as CardName, tags: []});
-    const c = fakeCard({name: 'C' as CardName, tags: [Tags.MARS]});
-    const d = fakeCard({name: 'D' as CardName, tags: [Tags.BUILDING]});
+    const c = fakeCard({name: 'C' as CardName, tags: [Tag.MARS]});
+    const d = fakeCard({name: 'D' as CardName, tags: [Tag.BUILDING]});
     game.dealer.deck.push(a, b, c, d);
 
     card.play(player);

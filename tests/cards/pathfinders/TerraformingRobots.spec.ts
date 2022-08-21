@@ -8,7 +8,7 @@ import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 import {fakeCard} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('TerraformingRobots', function() {
   let card: TerraformingRobots;
@@ -44,18 +44,18 @@ describe('TerraformingRobots', function() {
     expect(card.resourceCount).eq(0);
 
     card.onCardPlayed(player, fakeCard({
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
     }));
     expect(card.resourceCount).eq(0);
 
     card.onCardPlayed(player, fakeCard({
-      tags: [Tags.MARS],
+      tags: [Tag.MARS],
     }));
     expect(card.resourceCount).eq(1);
 
     card.resourceCount = 0;
     card.onCardPlayed(player, fakeCard({
-      tags: [Tags.MARS, Tags.SCIENCE, Tags.MARS],
+      tags: [Tag.MARS, Tag.SCIENCE, Tag.MARS],
     }));
     expect(card.resourceCount).eq(2);
   });

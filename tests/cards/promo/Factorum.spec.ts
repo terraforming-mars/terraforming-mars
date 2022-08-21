@@ -8,7 +8,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 
 describe('Factorum', function() {
@@ -54,7 +54,7 @@ describe('Factorum', function() {
     selectOption.cb();
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].tags).includes(Tags.BUILDING);
+    expect(player.cardsInHand[0].tags).includes(Tag.BUILDING);
     expect(player.megaCredits).to.eq(7);
   });
 

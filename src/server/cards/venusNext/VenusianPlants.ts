@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -16,7 +16,7 @@ export class VenusianPlants extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.VENUSIAN_PLANTS,
       cost: 13,
-      tags: [Tags.VENUS, Tags.PLANT],
+      tags: [Tag.VENUS, Tag.PLANT],
       tr: {venus: 1},
 
       requirements: CardRequirements.builder((b) => b.venus(16)),
@@ -26,8 +26,8 @@ export class VenusianPlants extends Card implements IProjectCard {
         cardNumber: '261',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br.br; // intentional double br
-          b.microbes(1, {secondaryTag: Tags.VENUS}).nbsp;
-          b.or().nbsp.animals(1, {secondaryTag: Tags.VENUS});
+          b.microbes(1, {secondaryTag: Tag.VENUS}).nbsp;
+          b.or().nbsp.animals(1, {secondaryTag: Tag.VENUS});
         }),
         description: {
           text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD',
@@ -61,6 +61,6 @@ export class VenusianPlants extends Card implements IProjectCard {
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(CardResource.MICROBE);
     resourceCards = resourceCards.concat(player.getResourceCards(CardResource.ANIMAL));
-    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
+    return resourceCards.filter((card) => card.tags.includes(Tag.VENUS));
   }
 }

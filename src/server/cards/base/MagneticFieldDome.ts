@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MAGNETIC_FIELD_DOME,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 5,
       productionBox: Units.of({energy: -2, plants: 1}),
       tr: {tr: 1},

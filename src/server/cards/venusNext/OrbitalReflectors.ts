@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -12,7 +12,7 @@ export class OrbitalReflectors extends Card implements IProjectCard {
     super({
       name: CardName.ORBITAL_REFLECTORS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS, Tags.SPACE],
+      tags: [Tag.VENUS, Tag.SPACE],
       cost: 26,
       tr: {venus: 2},
 

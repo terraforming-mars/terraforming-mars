@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class OrbitalLaboratories extends Card implements IProjectCard {
   constructor() {
@@ -13,7 +13,7 @@ export class OrbitalLaboratories extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.ORBITAL_LABORATORIES,
       cost: 18,
-      tags: [Tags.SCIENCE, Tags.PLANT, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.PLANT, Tag.SPACE],
 
       metadata: {
         cardNumber: 'Pf07',

@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../../common/Resources';
@@ -9,7 +9,7 @@ export class BiosphereSupport extends PreludeCard {
   constructor() {
     super({
       name: CardName.BIOSPHERE_SUPPORT,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
 
       metadata: {
         cardNumber: 'P05',

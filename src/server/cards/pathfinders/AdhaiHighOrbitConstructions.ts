@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -17,7 +17,7 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     super({
       cardType: CardType.CORPORATION,
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       startingMegaCredits: 43,
       resourceType: CardResource.ORBITAL,
 
@@ -40,10 +40,10 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
 
   public override resourceCount = 0;
 
-  private matchingTags(tags: Array<Tags>): boolean {
+  private matchingTags(tags: Array<Tag>): boolean {
     let spaceTag: boolean = false;
     for (const tag of tags) {
-      if (tag === Tags.SPACE) spaceTag = true;
+      if (tag === Tag.SPACE) spaceTag = true;
       if (isPlanetaryTag(tag)) return false;
     }
     return spaceTag;

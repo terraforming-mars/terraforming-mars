@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -11,7 +11,7 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
   constructor() {
     super({
       name: CardName.SELF_SUFFICIENT_SETTLEMENT,
-      tags: [Tags.BUILDING, Tags.CITY],
+      tags: [Tag.BUILDING, Tag.CITY],
       productionBox: Units.of({megacredits: 2}),
 
       metadata: {

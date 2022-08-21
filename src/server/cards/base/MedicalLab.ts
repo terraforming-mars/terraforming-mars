@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,7 +13,7 @@ export class MedicalLab extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MEDICAL_LAB,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 13,
       victoryPoints: 1,
 
@@ -32,7 +32,7 @@ export class MedicalLab extends Card implements IProjectCard {
   public produce(player: Player) {
     // Include this when the card is first played, and not when it is called by Robotic Workforce.
     const includeThis = !player.cardIsInEffect(this.name);
-    const tagCount = player.getTagCount(Tags.BUILDING) + (includeThis ? 1 : 0);
+    const tagCount = player.getTagCount(Tag.BUILDING) + (includeThis ? 1 : 0);
     player.addProduction(Resources.MEGACREDITS, Math.floor(tagCount / 2), {log: true});
   }
   public play(player: Player) {

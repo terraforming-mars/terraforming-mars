@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
@@ -12,7 +12,7 @@ export class AlgaeBioreactors extends MoonCard {
     super({
       name: CardName.ALGAE_BIOREACTORS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
       cost: 9,
       productionBox: Units.of({plants: -1}),
       tr: {moonColony: 1, oxygen: 1},

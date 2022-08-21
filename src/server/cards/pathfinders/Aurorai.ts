@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,7 +14,7 @@ export class Aurorai extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.AURORAI,
-      tags: [Tags.MARS],
+      tags: [Tag.MARS],
       startingMegaCredits: 33,
       resourceType: CardResource.DATA,
 

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -20,7 +20,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.IMMIGRANT_CITY,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 13,
       productionBox: Units.of({energy: -1, megacredits: -2}),
 

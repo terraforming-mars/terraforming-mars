@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardResource} from '../../../common/CardResource';
 import {all, digit} from '../Options';
@@ -16,7 +16,7 @@ export class SolarStorm extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SOLAR_STORM,
       cost: 12,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       tr: {temperature: 1},
 
       metadata: {

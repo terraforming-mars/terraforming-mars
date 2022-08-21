@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {played} from '../Options';
 
@@ -14,7 +14,7 @@ export class AdvancedPowerGrid extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.ADVANCED_POWER_GRID,
       cost: 18,
-      tags: [Tags.ENERGY, Tags.BUILDING, Tags.MARS],
+      tags: [Tag.ENERGY, Tag.BUILDING, Tag.MARS],
 
       metadata: {
         cardNumber: 'Pf56',
@@ -28,7 +28,7 @@ export class AdvancedPowerGrid extends Card implements IProjectCard {
 
   public produce(player: Player) {
     player.addProduction(Resources.ENERGY, 2, {log: true});
-    const tagCount = player.getTagCount(Tags.ENERGY) + 1; // +1 is including this.
+    const tagCount = player.getTagCount(Tag.ENERGY) + 1; // +1 is including this.
     player.addProduction(Resources.MEGACREDITS, tagCount, {log: true});
   }
 

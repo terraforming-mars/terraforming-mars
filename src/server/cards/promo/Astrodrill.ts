@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -21,7 +21,7 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.ASTRODRILL,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       startingMegaCredits: 35,
       resourceType: CardResource.ASTEROID,
 

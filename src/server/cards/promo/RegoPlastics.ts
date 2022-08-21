@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -12,7 +12,7 @@ export class RegoPlastics extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.REGO_PLASTICS,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 10,
       victoryPoints: 1,
 

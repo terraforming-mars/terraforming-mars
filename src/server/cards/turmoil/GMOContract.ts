@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -16,7 +16,7 @@ export class GMOContract extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.GMO_CONTRACT,
-      tags: [Tags.MICROBE, Tags.SCIENCE],
+      tags: [Tag.MICROBE, Tag.SCIENCE],
       cost: 3,
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
@@ -34,7 +34,7 @@ export class GMOContract extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    const amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
+    const amount = card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length;
     if (amount > 0) {
       player.game.defer(
         new SimpleDeferredAction(player, () => {

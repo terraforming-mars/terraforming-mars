@@ -6,7 +6,7 @@ import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservat
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {CardRequirements} from '../../../src/server/cards/CardRequirements';
 import {Dealer} from '../../../src/server/Dealer';
 import {Resources} from '../../../src/common/Resources';
@@ -23,33 +23,33 @@ describe('OumuamuaTypeObjectSurvey', function() {
   });
   const earthTag = fakeCard({
     name: 'earth' as CardName,
-    tags: [Tags.EARTH],
+    tags: [Tag.EARTH],
   });
   const scienceTag: IProjectCard = fakeCard({
     name: 'sci' as CardName,
-    tags: [Tags.SCIENCE],
+    tags: [Tag.SCIENCE],
   });
   const microbeTag: IProjectCard = fakeCard({
     name: 'mi' as CardName,
-    tags: [Tags.MICROBE],
+    tags: [Tag.MICROBE],
   });
   const spaceTag = fakeCard({
     name: 'space' as CardName,
-    tags: [Tags.SPACE],
+    tags: [Tag.SPACE],
   });
   const scienceMicrobeTag = fakeCard({
     name: 'sci/mi' as CardName,
-    tags: [Tags.SCIENCE, Tags.MICROBE],
+    tags: [Tag.SCIENCE, Tag.MICROBE],
   });
   const spaceScienceTag = fakeCard({
     cost: 20,
     name: 'space/sci' as CardName,
-    tags: [Tags.SPACE, Tags.SCIENCE],
+    tags: [Tag.SPACE, Tag.SCIENCE],
   });
   const requirementsCard = fakeCard({
     cost: 10,
     name: 'req' as CardName,
-    tags: [Tags.SCIENCE],
+    tags: [Tag.SCIENCE],
     requirements: CardRequirements.builder((b) => b.temperature(-28, {max: true})),
   });
   // The slug is the card at the bottom of the deck. If it were drawn, the deck would be empty and refilled from the discard pile.

@@ -8,7 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
@@ -21,7 +21,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost,
       metadata,
     });

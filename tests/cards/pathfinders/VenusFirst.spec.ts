@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {VenusFirst} from '../../../src/server/cards/pathfinders/VenusFirst';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 
@@ -21,6 +21,6 @@ describe('VenusFirst', function() {
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);
 
-    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.VENUS)).not.to.eq(-1));
+    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tag.VENUS)).not.to.eq(-1));
   });
 });

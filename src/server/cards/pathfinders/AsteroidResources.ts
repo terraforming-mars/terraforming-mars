@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {Units} from '../../../common/Units';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -19,7 +19,7 @@ export class AsteroidResources extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.ASTEROID_RESOURCES,
       cost: 17,
-      tags: [Tags.JOVIAN, Tags.SPACE],
+      tags: [Tag.JOVIAN, Tag.SPACE],
       reserveUnits: Units.of({energy: 3}),
       victoryPoints: 1,
 

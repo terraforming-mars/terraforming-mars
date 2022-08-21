@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ export class GiantSolarShade extends Card implements IProjectCard {
     super({
       name: CardName.GIANT_SOLAR_SHADE,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.SPACE, Tags.VENUS],
+      tags: [Tag.SPACE, Tag.VENUS],
       cost: 27,
       tr: {venus: 3},
 

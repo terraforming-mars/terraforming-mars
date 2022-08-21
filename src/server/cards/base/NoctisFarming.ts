@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ export class NoctisFarming extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.NOCTIS_FARMING,
-      tags: [Tags.PLANT, Tags.BUILDING],
+      tags: [Tag.PLANT, Tag.BUILDING],
       cost: 10,
       productionBox: Units.of({megacredits: 1}),
       requirements: CardRequirements.builder((b) => b.temperature(-20)),

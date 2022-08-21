@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,7 +10,7 @@ export class AerospaceMission extends PreludeCard {
   constructor() {
     super({
       name: CardName.AEROSPACE_MISSION,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       startingMegacredits: -14,
 
       metadata: {

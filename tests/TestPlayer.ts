@@ -2,7 +2,7 @@ import {Player} from '../src/server/Player';
 import {PlayerInput} from '../src/server/PlayerInput';
 import {Color} from '../src/common/Color';
 import {Units} from '../src/common/Units';
-import {Tags} from '../src/common/cards/Tags';
+import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 
@@ -73,7 +73,7 @@ export class TestPlayer extends Player {
 
   public tagsForTest: Partial<TagsForTest> | undefined = undefined;
 
-  public override getRawTagCount(tag: Tags, includeEventsTags:boolean = false): number {
+  public override getRawTagCount(tag: Tag, includeEventsTags:boolean = false): number {
     return this.tagsForTest !== undefined ?
       this.tagsForTest[tag] ?? 0 :
       super.getRawTagCount(tag, includeEventsTags);

@@ -3,7 +3,7 @@ import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {DATA_VALUE, SEED_VALUE} from '@/common/constants';
 import {CardResource} from '@/common/CardResource';
@@ -27,7 +27,7 @@ export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
   cardName: CardName;
   card: CardModel;
   cards: Array<CardModel>;
-  tags: Array<Tags>
+  tags: Array<Tag>
   science: number;
   seeds: number;
   available: Units;
@@ -37,7 +37,7 @@ export interface PaymentWidgetModel extends SelectHowToPayModel {
   cardName?: CardName;
   card?: CardModel;
   cards?: Array<CardModel>;
-  tags?: Array<Tags>;
+  tags?: Array<Tag>;
   available?: Units;
   $data: SelectHowToPayModel | SelectHowToPayForProjectCardModel;
   playerView: PlayerViewModel;

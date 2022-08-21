@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,7 +13,7 @@ export class TundraFarming extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.TUNDRA_FARMING,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
       cost: 16,
       victoryPoints: 2,
 

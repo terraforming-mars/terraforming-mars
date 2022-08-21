@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Player} from '../../Player';
 import {BoardType} from '../../boards/BoardType';
@@ -33,7 +33,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.GEOLOGICAL_EXPEDITION,
       cost: 18,
-      tags: [Tags.MARS, Tags.SCIENCE],
+      tags: [Tag.MARS, Tag.SCIENCE],
       victoryPoints: 2,
 
       metadata: {

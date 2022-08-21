@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
@@ -18,7 +18,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       startingMegaCredits: 48,
       resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,

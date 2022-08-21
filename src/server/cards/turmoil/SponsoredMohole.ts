@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ export class SponsoredMohole extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 5,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       name: CardName.SPONSORED_MOHOLE,
       cardType: CardType.AUTOMATED,
       productionBox: Units.of({heat: 2}),

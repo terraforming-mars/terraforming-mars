@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -16,7 +16,7 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.SMALL_OPEN_PIT_MINE,
       cost: 10,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
 
       metadata: {
         cardNumber: 'Pf31',

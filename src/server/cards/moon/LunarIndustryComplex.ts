@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Units} from '../../../common/Units';
@@ -14,7 +14,7 @@ export class LunarIndustryComplex extends MoonCard implements IProjectCard {
     super({
       name: CardName.LUNAR_INDUSTRY_COMPLEX,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 28,
       productionBox: Units.of({steel: 1, titanium: 1, energy: 2, heat: 1}),
       reserveUnits: Units.of({titanium: 2}),

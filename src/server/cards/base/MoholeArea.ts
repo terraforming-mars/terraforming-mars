@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../../common/Resources';
@@ -29,7 +29,7 @@ export class MoholeArea extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 20,
       adjacencyBonus,
       metadata,

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
 
 export class TerraformingControlStation extends Card implements IProjectCard {
@@ -13,10 +13,10 @@ export class TerraformingControlStation extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.TERRAFORMING_CONTROL_STATION,
       cost: 18,
-      tags: [Tags.VENUS, Tags.MARS, Tags.SPACE],
+      tags: [Tag.VENUS, Tag.MARS, Tag.SPACE],
       tr: {tr: 2},
 
-      cardDiscount: [{tag: Tags.VENUS, amount: 2}, {tag: Tags.MARS, amount: 2}],
+      cardDiscount: [{tag: Tag.VENUS, amount: 2}, {tag: Tag.MARS, amount: 2}],
       metadata: {
         cardNumber: 'Pf12',
         renderData: CardRenderer.builder((b) => {

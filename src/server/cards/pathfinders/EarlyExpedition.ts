@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../../common/Units';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -23,7 +23,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.EARLY_EXPEDITION,
       cost: 15,
-      tags: [Tags.SCIENCE, Tags.SPACE, Tags.CITY],
+      tags: [Tag.SCIENCE, Tag.SPACE, Tag.CITY],
       requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),
       productionBox: Units.of({energy: -1, megacredits: 3}),
 

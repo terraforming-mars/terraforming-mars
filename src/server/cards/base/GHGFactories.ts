@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,7 +14,7 @@ export class GHGFactories extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.GHG_FACTORIES,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 11,
       productionBox: Units.of({energy: -1, heat: 4}),
 

@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -15,7 +15,7 @@ export class Celestic extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.CELESTIC,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       startingMegaCredits: 42,
       resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,

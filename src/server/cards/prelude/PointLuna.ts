@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -14,7 +14,7 @@ export class PointLuna extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.POINT_LUNA,
-      tags: [Tags.SPACE, Tags.EARTH],
+      tags: [Tag.SPACE, Tag.EARTH],
       startingMegaCredits: 38,
 
       metadata: {
@@ -37,8 +37,8 @@ export class PointLuna extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
-    const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
-    if (player.isCorporation(this.name) && card.tags.includes(Tags.EARTH)) {
+    const tagCount = card.tags.filter((tag) => tag === Tag.EARTH).length;
+    if (player.isCorporation(this.name) && card.tags.includes(Tag.EARTH)) {
       player.drawCard(tagCount);
     }
     return undefined;

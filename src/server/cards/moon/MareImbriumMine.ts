@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -17,7 +17,7 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
     super({
       name: CardName.MARE_IMBRIUM_MINE,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.BUILDING],
+      tags: [Tag.MOON, Tag.BUILDING],
       cost: 19,
       productionBox: Units.of({steel: 1, titanium: 1}),
       reserveUnits: Units.of({titanium: 1}),

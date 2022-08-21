@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resources} from '../../../common/Resources';
@@ -15,7 +15,7 @@ export class SoilDetoxification extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.SOIL_DETOXIFICATION,
       cost: 10,
-      tags: [Tags.PLANT, Tags.SCIENCE],
+      tags: [Tag.PLANT, Tag.SCIENCE],
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
 

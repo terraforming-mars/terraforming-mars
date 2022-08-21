@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -13,11 +13,11 @@ export class Conscription extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       cost: 5,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       name: CardName.CONSCRIPTION,
       victoryPoints: -1,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
       metadata: {
         cardNumber: 'C05',
         renderData: CardRenderer.builder((b) => {

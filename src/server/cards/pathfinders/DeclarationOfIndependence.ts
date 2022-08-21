@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Turmoil} from '../../turmoil/Turmoil';
@@ -15,8 +15,8 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.DECLARATION_OF_INDEPENDENCE,
       cost: 20,
-      tags: [Tags.MARS],
-      requirements: CardRequirements.builder((b) => b.tag(Tags.MARS, 6)),
+      tags: [Tag.MARS],
+      requirements: CardRequirements.builder((b) => b.tag(Tag.MARS, 6)),
       victoryPoints: 4,
 
       metadata: {

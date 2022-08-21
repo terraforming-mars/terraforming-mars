@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 
@@ -16,9 +16,9 @@ export class TerraformingRobots extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.TERRAFORMING_ROBOTS,
       cost: 7,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       resourceType: CardResource.SPECIALIZED_ROBOT,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
       victoryPoints: VictoryPoints.resource(1, 1),
 
       metadata: {
@@ -37,7 +37,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
   public override resourceCount = 0;
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    const qty = card.tags.filter((tag) => tag === Tags.MARS).length;
+    const qty = card.tags.filter((tag) => tag === Tag.MARS).length;
     if (qty !== 0) {
       player.addResourceTo(this, {log: true, qty: qty});
     }

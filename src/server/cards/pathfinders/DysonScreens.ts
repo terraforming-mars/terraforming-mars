@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Size} from '../../../common/cards/render/Size';
@@ -17,7 +17,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DYSON_SCREENS,
-      tags: [Tags.SCIENCE, Tags.VENUS, Tags.ENERGY, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.VENUS, Tag.ENERGY, Tag.SPACE],
       cost: 28,
       victoryPoints: 1,
       tr: {temperature: 1},

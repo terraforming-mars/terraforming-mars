@@ -3,7 +3,7 @@ import {BioSol} from '../../../src/server/cards/pathfinders/BioSol';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {runAllActions} from '../../TestingUtils';
 
 describe('BioSol', function() {
@@ -22,7 +22,7 @@ describe('BioSol', function() {
     expect(player.cardsInHand).is.empty;
     card.initialAction(player);
     expect(player.cardsInHand).has.length(2);
-    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.MICROBE))).has.length(2);
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.MICROBE))).has.length(2);
   });
 
   it('action', function() {

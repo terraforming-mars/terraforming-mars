@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -12,7 +12,7 @@ export class GHGImportFromVenus extends Card implements IProjectCard {
     super({
       name: CardName.GHG_IMPORT_FROM_VENUS,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE, Tags.VENUS],
+      tags: [Tag.SPACE, Tag.VENUS],
       cost: 23,
       tr: {venus: 1},
 

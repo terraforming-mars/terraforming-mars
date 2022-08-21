@@ -4,7 +4,7 @@ import {Election} from '../../src/server/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {fakeCard} from '../TestingUtils';
-import {Tags} from '../../src/common/cards/Tags';
+import {Tag} from '../../src/common/cards/Tag';
 
 describe('Election', function() {
   let card: Election;
@@ -44,7 +44,7 @@ describe('Election', function() {
     const player = getTestPlayer(game, 0);
     const turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
-    const fake = fakeCard({tags: [Tags.BUILDING, Tags.BUILDING, Tags.BUILDING, Tags.BUILDING]});
+    const fake = fakeCard({tags: [Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING]});
     player.playedCards.push(fake);
 
     expect(player.getTerraformRating()).to.eq(14);
@@ -54,21 +54,21 @@ describe('Election', function() {
 
     expect(player.getTerraformRating()).to.eq(14);
 
-    fake.tags.push(Tags.BUILDING);
+    fake.tags.push(Tag.BUILDING);
     expect(card.getScore(player, turmoil, game)).eq(5);
 
     card.resolve(game, turmoil);
 
     expect(player.getTerraformRating()).to.eq(15);
 
-    fake.tags.push(Tags.BUILDING, Tags.BUILDING, Tags.BUILDING, Tags.BUILDING);
+    fake.tags.push(Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING);
     expect(card.getScore(player, turmoil, game)).eq(9);
 
     card.resolve(game, turmoil);
 
     expect(player.getTerraformRating()).to.eq(16);
 
-    fake.tags.push(Tags.BUILDING);
+    fake.tags.push(Tag.BUILDING);
     expect(card.getScore(player, turmoil, game)).eq(10);
 
     card.resolve(game, turmoil);

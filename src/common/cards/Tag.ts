@@ -1,4 +1,4 @@
-export enum Tags {
+export enum Tag {
     BUILDING = 'building',
     SPACE = 'space',
     SCIENCE = 'science',

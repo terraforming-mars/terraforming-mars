@@ -14,7 +14,7 @@ import {Europa} from '../../../src/server/colonies/Europa';
 import {Io} from '../../../src/server/colonies/Io';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CollegiumCopernicus', function() {
@@ -112,7 +112,7 @@ describe('CollegiumCopernicus', function() {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
 
-    card.onCardPlayed(player, fakeCard({tags: [Tags.SCIENCE]}));
+    card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(game);
     const selectCard = cast(player.getWaitingFor(), SelectCard);
 
@@ -130,6 +130,6 @@ describe('CollegiumCopernicus', function() {
     expect(player.cardsInHand).is.empty;
     card.initialAction(player);
     expect(player.cardsInHand).has.length(2);
-    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.SCIENCE))).has.length(2);
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SCIENCE))).has.length(2);
   });
 });

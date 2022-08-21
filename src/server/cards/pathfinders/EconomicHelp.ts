@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {PathfindersExpansion, PlanetaryTag, TRACKS} from '../../pathfinders/PathfindersExpansion';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 import {PathfindersData} from '../../pathfinders/PathfindersData';
@@ -45,22 +45,22 @@ export class EconomicHelp extends Card implements IProjectCard {
       return undefined;
     }
     const values = [
-      this.trackOffset(Tags.EARTH, data),
-      this.trackOffset(Tags.JOVIAN, data),
-      this.trackOffset(Tags.MARS, data),
+      this.trackOffset(Tag.EARTH, data),
+      this.trackOffset(Tag.JOVIAN, data),
+      this.trackOffset(Tag.MARS, data),
     ];
-    if (player.game.gameOptions.moonExpansion === true) values.push(this.trackOffset(Tags.MOON, data));
-    if (player.game.gameOptions.venusNextExtension === true) values.push(this.trackOffset(Tags.VENUS, data));
+    if (player.game.gameOptions.moonExpansion === true) values.push(this.trackOffset(Tag.MOON, data));
+    if (player.game.gameOptions.venusNextExtension === true) values.push(this.trackOffset(Tag.VENUS, data));
     // Filter any maximized track.
     // Filter out -1.
     const lowest = Math.min(...(values.filter((v) => v >= 0)));
     const count = values.filter((v) => v === lowest).length;
     const increment = (count === 1) ? 3 : 2;
-    if (data.earth === lowest) PathfindersExpansion.raiseTrack(Tags.EARTH, player, increment);
-    if (data.jovian === lowest) PathfindersExpansion.raiseTrack(Tags.JOVIAN, player, increment);
-    if (data.mars === lowest) PathfindersExpansion.raiseTrack(Tags.MARS, player, increment);
-    if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) PathfindersExpansion.raiseTrack(Tags.MOON, player, increment);
-    if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) PathfindersExpansion.raiseTrack(Tags.VENUS, player, increment);
+    if (data.earth === lowest) PathfindersExpansion.raiseTrack(Tag.EARTH, player, increment);
+    if (data.jovian === lowest) PathfindersExpansion.raiseTrack(Tag.JOVIAN, player, increment);
+    if (data.mars === lowest) PathfindersExpansion.raiseTrack(Tag.MARS, player, increment);
+    if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) PathfindersExpansion.raiseTrack(Tag.MOON, player, increment);
+    if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) PathfindersExpansion.raiseTrack(Tag.VENUS, player, increment);
     player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }

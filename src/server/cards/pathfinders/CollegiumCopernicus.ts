@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -24,7 +24,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
     super({
       cardType: CardType.CORPORATION,
       name: CardName.COLLEGIUM_COPERNICUS,
-      tags: [Tags.SCIENCE, Tags.EARTH],
+      tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 33,
       resourceType: CardResource.DATA,
 
@@ -35,7 +35,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
         description: 'You start with 33 M€. As your first action, draw 2 cards with a science tag.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(33).cards(2, {secondaryTag: Tags.SCIENCE}).br;
+          b.megacredits(33).cards(2, {secondaryTag: Tag.SCIENCE}).br;
           b.effect('When you play a card with a science tag (including this) Add 1 data to ANY card.', (eb) => {
             eb.science(1, {played}).startEffect.data().asterix();
           }).br;
@@ -53,7 +53,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 
   public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tags.SCIENCE});
+    player.drawCard(2, {tag: Tag.SCIENCE});
     return undefined;
   }
 
@@ -63,7 +63,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (player.cardHasTag(card, Tags.SCIENCE) && player.isCorporation(this.name)) {
+    if (player.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
       this.addResource(player);
     }
   }

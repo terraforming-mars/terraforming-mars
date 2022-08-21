@@ -7,13 +7,13 @@ import {GameModule} from './GameModule';
 import {ICardMetadata} from './ICardMetadata';
 import {ICardRequirements} from './ICardRequirements';
 import {IVictoryPoints} from './IVictoryPoints';
-import {Tags} from './Tags';
+import {Tag} from './Tag';
 import {CardDiscount} from './Types';
 
 export type ClientCard = {
   name: CardName;
   module: GameModule;
-  tags: Array<Tags>;
+  tags: Array<Tag>;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
   victoryPoints?: number | 'special' | IVictoryPoints,
   cost?: number;

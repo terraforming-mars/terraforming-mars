@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('RobinHaulings', function() {
@@ -30,11 +30,11 @@ describe('RobinHaulings', function() {
   it('onCardPlayed', () => {
     expect(card.resourceCount).eq(0);
 
-    player.playCard(fakeCard({tags: [Tags.EARTH]}));
+    player.playCard(fakeCard({tags: [Tag.EARTH]}));
 
     expect(card.resourceCount).eq(0);
 
-    player.playCard(fakeCard({tags: [Tags.VENUS, Tags.VENUS]}));
+    player.playCard(fakeCard({tags: [Tag.VENUS, Tag.VENUS]}));
 
     expect(card.resourceCount).eq(0);
   });
@@ -42,11 +42,11 @@ describe('RobinHaulings', function() {
   it('onCardPlayed, other player', () => {
     expect(card.resourceCount).eq(0);
 
-    player2.playCard(fakeCard({tags: [Tags.EARTH]}));
+    player2.playCard(fakeCard({tags: [Tag.EARTH]}));
 
     expect(card.resourceCount).eq(0);
 
-    player2.playCard(fakeCard({tags: [Tags.VENUS, Tags.VENUS]}));
+    player2.playCard(fakeCard({tags: [Tag.VENUS, Tag.VENUS]}));
 
     expect(card.resourceCount).eq(0);
   });

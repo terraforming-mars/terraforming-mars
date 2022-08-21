@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';
@@ -113,7 +113,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
 
 export namespace DrawCards {
   export interface DrawOptions {
-    tag?: Tags,
+    tag?: Tag,
     resource?: CardResource,
     cardType?: CardType,
     include?: (card: IProjectCard) => boolean,

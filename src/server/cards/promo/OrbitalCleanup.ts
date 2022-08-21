@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,7 +13,7 @@ export class OrbitalCleanup extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ORBITAL_CLEANUP,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tag.EARTH, Tag.SPACE],
       cost: 14,
       victoryPoints: 2,
 
@@ -47,7 +47,7 @@ export class OrbitalCleanup extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, player.getTagCount(Tags.SCIENCE), {log: true});
+    player.addResource(Resources.MEGACREDITS, player.getTagCount(Tag.SCIENCE), {log: true});
     return undefined;
   }
 }

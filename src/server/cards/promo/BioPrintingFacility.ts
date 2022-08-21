@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -18,7 +18,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
     super({
       cardType: CardType.ACTIVE,
       name: CardName.BIO_PRINTING_FACILITY,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 7,
 
       metadata: {

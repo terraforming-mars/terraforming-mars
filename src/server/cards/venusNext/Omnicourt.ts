@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,11 +12,11 @@ export class Omnicourt extends Card implements IProjectCard {
     super({
       name: CardName.OMNICOURT,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 11,
       tr: {tr: 2},
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.JOVIAN)),
       metadata: {
         cardNumber: '241',
         renderData: CardRenderer.builder((b) => {

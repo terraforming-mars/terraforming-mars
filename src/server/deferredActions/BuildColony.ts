@@ -2,7 +2,6 @@ import {Player} from '../Player';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
-import {ColoniesHandler} from '../colonies/ColoniesHandler';
 
 export class BuildColony extends DeferredAction {
   constructor(
@@ -19,7 +18,7 @@ export class BuildColony extends DeferredAction {
   }
 
   public execute() {
-    const colonies = this.options?.colonies || ColoniesHandler.getPlayableColonies(this.player, this.options?.allowDuplicate);
+    const colonies = this.options?.colonies || this.player.colonies.getPlayableColonies(this.options?.allowDuplicate);
 
     if (colonies.length === 0) {
       return undefined;

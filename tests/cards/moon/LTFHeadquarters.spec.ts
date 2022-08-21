@@ -26,7 +26,7 @@ describe('LTFHeadquarters', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.colonyRate).eq(0);
 
-    expect(player.getFleetSize()).eq(1);
+    expect(player.colonies.getFleetSize()).eq(1);
 
     card.play(player);
 
@@ -36,7 +36,7 @@ describe('LTFHeadquarters', () => {
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
 
-    expect(player.getFleetSize()).eq(2);
+    expect(player.colonies.getFleetSize()).eq(2);
   });
 });
 

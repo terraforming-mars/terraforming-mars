@@ -72,7 +72,7 @@ describe('CoordinatedRaid', function() {
   });
 
   it('Coordinated Raid ignores Trade Envoys', function() {
-    player.colonyTradeOffset += 2;
+    player.colonies.tradeOffset += 2;
     const colony = game.colonies[1];
     colony.addColony(player2);
     const selectColony = cast(card.play(player), SelectColony);

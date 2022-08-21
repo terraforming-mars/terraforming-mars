@@ -149,7 +149,7 @@ describe('HuygensObservatory', function() {
   it('play, trade fleet on colony or home', function() {
     ganymede.trade(player);
     expect(ganymede.visitor).eq(player.id);
-    player.increaseFleetSize();
+    player.colonies.increaseFleetSize();
 
     const action = card.play(player);
 

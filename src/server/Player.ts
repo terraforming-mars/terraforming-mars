@@ -10,7 +10,7 @@ import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
 import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
-import {Payment} from '../common/inputs/Payment';
+import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
 import {ICard, isIActionCard, TRSource, IActionCard, DynamicTRSource} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
@@ -994,11 +994,11 @@ export class Player {
     }
   }
 
-  public isPayment(u: unknown): u is Payment {
-    if (typeof u !== 'object') return false;
-    if (!u) return false;
-    const h = u as {[key in keyof Payment]?: any};
-    return Payment.keys.every((key) =>
+  public isPayment(obj: unknown): obj is Payment {
+    if (typeof obj !== 'object') return false;
+    if (!obj) return false;
+    const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
+    return PAYMENT_KEYS.every((key) =>
       h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
   }
 
@@ -1737,12 +1737,12 @@ export class Player {
   public canSpend(payment: Payment, reserveUnits?: Units): boolean {
     const maxPayable = this.maxSpendable(reserveUnits);
 
-    return Payment.keys.every((key: keyof Payment) =>
+    return PAYMENT_KEYS.every((key) =>
       0 <= payment[key] && payment[key] <= maxPayable[key]);
   }
 
   public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
-    const mult: {[key in keyof Payment]: number} = {
+    const multiplier: {[key in PaymentKey]: number} = {
       megaCredits: 1,
       steel: this.getSteelValue(),
       titanium: this.getTitaniumValue(),
@@ -1754,7 +1754,7 @@ export class Player {
       data: constants.DATA_VALUE,
     };
 
-    const usable: {[key in keyof Payment]: boolean} = {
+    const usable: {[key in PaymentKey]: boolean} = {
       megaCredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,
@@ -1767,8 +1767,8 @@ export class Player {
     };
 
     let totalToPay = 0;
-    for (const key of Payment.keys) {
-      if (usable[key]) totalToPay += payment[key] * mult[key];
+    for (const key of PAYMENT_KEYS) {
+      if (usable[key]) totalToPay += payment[key] * multiplier[key];
     }
 
     return totalToPay;

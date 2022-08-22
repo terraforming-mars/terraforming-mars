@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {IActionCard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
+import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 
 export class Odyssey extends Card implements ICorporationCard, IActionCard {
   constructor() {
@@ -50,6 +51,11 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
 
   public action(player: Player) {
     const eventCards = this.availableEventCards(player);
-    return player.getPlayProjectCardInput(eventCards, 'discard');
+    return new SelectProjectCardToPlay(
+      player,
+      eventCards,
+      {
+        action: 'discard',
+      });
   }
 }

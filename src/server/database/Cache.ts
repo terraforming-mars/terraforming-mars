@@ -107,7 +107,7 @@ export class Cache extends EventEmitter {
   }
 
   public mark(gameId: GameId) {
-    console.log(`Marking ${gameId} to be evited in ${this.config.evictMillis}ms`);
+    console.log(`Marking ${gameId} to be evicted in ${this.config.evictMillis}ms`);
     this.evictionSchedule.set(gameId, this.clock.now() + this.config.evictMillis);
   }
 

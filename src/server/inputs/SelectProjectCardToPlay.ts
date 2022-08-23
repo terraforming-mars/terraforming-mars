@@ -1,6 +1,6 @@
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
-import {Payment} from '../../common/inputs/Payment';
+import {jsonToPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
@@ -43,7 +43,7 @@ export class SelectProjectCardToPlay implements PlayerInput {
     const cardName = input[0][0];
     const cardData = PlayerInput.getCard(this.cards, cardName);
     const card: IProjectCard = cardData.card;
-    const payment: Payment = player.parsePaymentJSON(input[0][1]);
+    const payment: Payment = jsonToPayment(input[0][1]);
     const reserveUnits = this.reserveUnits[cardData.idx];
     // These are not used for safety but do help give a better error message
     // to the user

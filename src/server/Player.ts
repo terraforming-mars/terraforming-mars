@@ -807,26 +807,6 @@ export class Player {
     }
   }
 
-  public isPayment(obj: unknown): obj is Payment {
-    if (typeof obj !== 'object') return false;
-    if (!obj) return false;
-    const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
-    return PAYMENT_KEYS.every((key) =>
-      h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
-  }
-
-  public parsePaymentJSON(json: string): Payment {
-    try {
-      const payment: unknown = JSON.parse(json);
-      if (!this.isPayment(payment)) {
-        throw new Error('does not match interface');
-      }
-      return payment;
-    } catch (err) {
-      throw new Error('Unable to parse HowToPay input ' + err);
-    }
-  }
-
   public runInput(input: InputResponse, pi: PlayerInput): void {
     this.deferInputCb(pi.process(input, this));
   }

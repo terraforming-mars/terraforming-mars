@@ -417,7 +417,7 @@ export class Server {
       noTagsCount: player.getNoTagsCount(),
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
-      plantsAreProtected: player.plantsAreProtected(),
+      plantsAreProtected: player.plantsAreProtected() ? 1 : (player.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE) ? 0.5 : 0),
       tableau: Server.getCards(player, player.tableau, {showResources: true}),
       selfReplicatingRobotsCards: Server.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,

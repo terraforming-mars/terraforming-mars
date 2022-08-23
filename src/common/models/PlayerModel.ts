@@ -45,7 +45,7 @@ export type PublicPlayerModel = {
   noTagsCount: number;
   plants: number;
   plantProduction: number;
-  plantsAreProtected: boolean;
+  plantsAreProtected: 0 | 1 | 0.5; // 0 is false, 1 is true, .5 is Botanical Experience.
   tableau: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;

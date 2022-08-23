@@ -7,6 +7,7 @@
       <div class="resource_item_prod">
           <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
           <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
+          <div v-if="displayPlantsHalfProtectedIcon()" class="shield_icon_half"></div>
           <div v-if="showResourceValue()" class="resource_icon--metalbonus">{{ getResourceValue() }}</div>
       </div>
   </div>
@@ -36,8 +37,8 @@ export default Vue.extend({
       type: Number,
     },
     plantsAreProtected: {
-      type: Boolean,
-      default: false,
+      type: Number,
+      default: 0,
     },
     steelValue: {
       type: Number,
@@ -64,7 +65,10 @@ export default Vue.extend({
       return '';
     },
     displayPlantsProtectedIcon(): boolean {
-      return this.type === Resources.PLANTS && this.plantsAreProtected;
+      return this.type === Resources.PLANTS && this.plantsAreProtected === 1;
+    },
+    displayPlantsHalfProtectedIcon(): boolean {
+      return this.type === Resources.PLANTS && this.plantsAreProtected === 0.5;
     },
     showResourceValue(): boolean {
       const learnerModeOn = getPreferences().learner_mode;

@@ -45,14 +45,14 @@ export class SaturnSystems extends Card implements ICorporationCard {
   private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
     for (const tag of card.tags) {
       if (tag === Tag.JOVIAN) {
-        player.game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS, 1, {log: true});
+        player.game.getCardPlayer(this.name).production.add(Resources.MEGACREDITS, 1, {log: true});
       }
     }
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, 1);
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.TITANIUM, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

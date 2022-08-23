@@ -44,7 +44,7 @@ export class PointLuna extends Card implements ICorporationCard {
     return undefined;
   }
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, 1);
+    player.production.add(Resources.TITANIUM, 1);
     player.drawCard();
     return undefined;
   }

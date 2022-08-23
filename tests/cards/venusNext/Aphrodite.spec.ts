@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Aphrodite} from '../../../src/server/cards/venusNext/Aphrodite';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Aphrodite', function() {
@@ -12,7 +11,7 @@ describe('Aphrodite', function() {
     const game = Game.newInstance('gameid', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     player.setCorporationForTest(card);
     expect(player.megaCredits).to.eq(0);
     game.increaseVenusScaleLevel(player2, 2);

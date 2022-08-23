@@ -34,7 +34,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
 
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 4);
+    player.production.add(Resources.ENERGY, 4);
     return undefined;
   }
 }

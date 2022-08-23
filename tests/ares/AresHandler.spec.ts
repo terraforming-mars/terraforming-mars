@@ -162,20 +162,20 @@ describe('AresHandler', function() {
     _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
     // No resources available to play the tile.
-    player.addProduction(Resources.MEGACREDITS, -5);
+    player.production.add(Resources.MEGACREDITS, -5);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     expect(() => {
       game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
     }).to.throw(/Placing here costs 1 units of production/);
 
-    player.addProduction(Resources.PLANTS, 7);
+    player.production.add(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(1);
     input.cb(Units.of({plants: 1}));
-    expect(player.getProduction(Resources.PLANTS)).eq(6);
+    expect(player.production.plants).eq(6);
   });
 
   it('pay adjacent hazard costs - severe', function() {
@@ -183,7 +183,7 @@ describe('AresHandler', function() {
     _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE);
 
     // No resources available to play the tile.
-    player.addProduction(Resources.MEGACREDITS, -5);
+    player.production.add(Resources.MEGACREDITS, -5);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     try {
@@ -192,27 +192,27 @@ describe('AresHandler', function() {
       expect((err as any).toString()).includes('Placing here costs 2 units of production');
     }
 
-    player.addProduction(Resources.PLANTS, 7);
+    player.production.add(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(2);
     input.cb(Units.of({plants: 2}));
-    expect(player.getProduction(Resources.PLANTS)).eq(5);
+    expect(player.production.plants).eq(5);
   });
 
   it('Adjacenct hazard costs do not apply to oceans', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
-    const before = getProduction(player);
+    const before = player.production.asUnits();
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.OCEAN});
     expect(game.deferredActions.peek()).is.undefined;
 
-    const after = getProduction(player);
+    const after = player.production.asUnits();
     expect(before).to.deep.eq(after);
   });
 
@@ -468,11 +468,3 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
   });
 });
-
-function getProduction(player: Player): Map<Resources, number> {
-  const map: Map<Resources, number> = new Map();
-  [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.TITANIUM, Resources.STEEL].forEach(
-    (r) => map.set(r, player.getProduction(r)),
-  );
-  return map;
-}

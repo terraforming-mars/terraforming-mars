@@ -31,11 +31,11 @@ export class FoodFactory extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.PLANTS) >= 1;
+    return player.production.plants >= 1;
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, -1);
-    player.addProduction(Resources.MEGACREDITS, 4);
+    player.production.add(Resources.PLANTS, -1);
+    player.production.add(Resources.MEGACREDITS, 4);
     return undefined;
   }
 }

@@ -11,7 +11,6 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {CardRequirements} from '../../../src/server/cards/CardRequirements';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Resources} from '../../../src/common/Resources';
 import {Businessperson} from '../../../src/server/milestones/Businessperson';
 import {Scientist} from '../../../src/server/awards/Scientist';
 import {Ecologist} from '../../../src/server/milestones/Ecologist';
@@ -44,11 +43,11 @@ describe('Chimera', function() {
   it('during an action', function() {
     // Cartel: Increase your M€ production 1 step for each Earth tag you have, including this.
     player.playedCards = [new BusinessNetwork(), new EarthCatapult()];
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(0);
     new Cartel().play(player);
     // Megacredit count is 2 for the played cards, one for Cartel ("including this")
     // and two for Chimera.
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
+    expect(player.production.megacredits).to.eq(5);
   });
 
   it('as award', function() {

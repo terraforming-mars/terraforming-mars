@@ -26,8 +26,8 @@ describe('Birds', function() {
     const player3 = TestPlayer.GREEN.newPlayer();
     const game = Game.newInstance('gameid', [player, player2, player3], player);
 
-    player2.addProduction(Resources.PLANTS, 2);
-    player3.addProduction(Resources.PLANTS, 7);
+    player2.production.add(Resources.PLANTS, 2);
+    player3.production.add(Resources.PLANTS, 7);
     (game as any).oxygenLevel = 13;
     expect(card.canPlay(player)).is.true;
 
@@ -36,8 +36,8 @@ describe('Birds', function() {
     const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
 
-    expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
-    expect(player3.getProduction(Resources.PLANTS)).to.eq(7);
+    expect(player2.production.plants).to.eq(0);
+    expect(player3.production.plants).to.eq(7);
   });
 
   it('Should act', function() {

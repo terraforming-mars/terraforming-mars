@@ -6,7 +6,6 @@ import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Game} from '../../../src/server/Game';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -32,7 +31,7 @@ describe('TradingColony', function() {
 
     const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
     selectColony.cb(selectColony.colonies[0]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
     expect(player.colonyTradeOffset).to.eq(1);
   });
 

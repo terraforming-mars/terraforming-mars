@@ -44,7 +44,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 &&
+    return player.production.energy >= 1 &&
       player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
@@ -66,8 +66,8 @@ export class CommercialDistrict extends Card implements IProjectCard {
           card: this.name,
         });
         foundSpace.adjacency = this.adjacencyBonus;
-        player.addProduction(Resources.ENERGY, -1);
-        player.addProduction(Resources.MEGACREDITS, 4);
+        player.production.add(Resources.ENERGY, -1);
+        player.production.add(Resources.MEGACREDITS, 4);
         return undefined;
       },
     );

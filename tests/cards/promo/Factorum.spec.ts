@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Factorum} from '../../../src/server/cards/promo/Factorum';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
@@ -27,7 +26,7 @@ describe('Factorum', function() {
   it('Should play', function() {
     const play = card.play(player);
     expect(play).is.undefined;
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
     player.megaCredits = 10;
 
     const orOptions = cast(card.action(player), OrOptions);
@@ -41,7 +40,7 @@ describe('Factorum', function() {
 
     const gainEnergyProductionOption = cast(orOptions.options[0], SelectOption);
     gainEnergyProductionOption.cb();
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
   });
 
   it('Only offer building card if player has energy', function() {

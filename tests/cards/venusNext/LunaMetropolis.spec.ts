@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {LunaMetropolis} from '../../../src/server/cards/venusNext/LunaMetropolis';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -15,6 +14,6 @@ describe('LunaMetropolis', function() {
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

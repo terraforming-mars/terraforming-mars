@@ -30,7 +30,7 @@ export class GreatDam extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     return undefined;
   }
 }

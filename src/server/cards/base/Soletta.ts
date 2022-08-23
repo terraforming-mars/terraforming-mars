@@ -25,7 +25,7 @@ export class Soletta extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 7);
+    player.production.add(Resources.HEAT, 7);
     return undefined;
   }
 }

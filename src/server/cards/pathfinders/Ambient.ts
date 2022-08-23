@@ -56,7 +56,7 @@ export class Ambient extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
-      player.addProduction(Resources.HEAT, 1, {log: true});
+      player.production.add(Resources.HEAT, 1, {log: true});
     }
   }
 

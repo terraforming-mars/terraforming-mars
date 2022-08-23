@@ -41,13 +41,13 @@ describe('LawSuit', () => {
   });
 
   it('Can play if production decreased this turn by other player', () => {
-    player.addProduction(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    player.production.add(Resources.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
     player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
-    player.addProduction(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    player.production.add(Resources.MEGACREDITS, -1, {log: true, from: player2});
 
     const play = card.play(player);
     expect(play).instanceOf(SelectPlayer);

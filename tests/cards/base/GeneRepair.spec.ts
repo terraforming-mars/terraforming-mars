@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('GeneRepair', function() {
   let card: GeneRepair;
@@ -24,7 +23,7 @@ describe('GeneRepair', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(2);
   });
 });

@@ -35,19 +35,19 @@ describe('MaxwellBase', function() {
   });
 
   it('Can not play if Venus requirement not met', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 10;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 12;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(0);
   });
 
   it('Should act - single target', function() {

@@ -6,7 +6,6 @@ import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonColonyStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
@@ -57,14 +56,14 @@ describe('MoonColonyStandardProject', () => {
   it('act', () => {
     player.titanium = 3;
     expect(player.getTerraformRating()).eq(14);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
 
     card.action(player);
     const payAction = game.deferredActions.pop() as SelectPaymentDeferred;
     payAction.options.afterPay!();
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
 
     expect(moonData.colonyRate).eq(0);
 

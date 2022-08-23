@@ -25,20 +25,20 @@ describe('CupolaCity', function() {
   });
 
   it('Can not play if oxygen level too high', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 10;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const action = cast(card.play(player), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(3);
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
   });
 });

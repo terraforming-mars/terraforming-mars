@@ -24,7 +24,7 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.game.defer(new PlaceCityTile(player));
     return undefined;
   }

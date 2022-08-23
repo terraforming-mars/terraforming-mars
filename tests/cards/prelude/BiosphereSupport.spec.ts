@@ -14,14 +14,14 @@ describe('BiosphereSupport', function() {
   });
 
   it('Can not play', function() {
-    player.addProduction(Resources.MEGACREDITS, -5);
+    player.production.add(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+    expect(player.production.plants).to.eq(2);
+    expect(player.production.megacredits).to.eq(-1);
   });
 });

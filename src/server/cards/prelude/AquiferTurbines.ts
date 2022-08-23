@@ -30,7 +30,7 @@ export class AquiferTurbines extends PreludeCard {
     return player.canAfford(3);
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.game.defer(new PlaceOceanTile(player));
     player.game.defer(new SelectPaymentDeferred(player, 3));
     return undefined;

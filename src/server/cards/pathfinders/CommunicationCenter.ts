@@ -42,11 +42,11 @@ export class CommunicationCenter extends Card implements IProjectCard {
   // does not apply to _any card played_
 
   public override canPlay(player: Player) {
-    return player.getProduction(Resources.ENERGY) > 0;
+    return player.production.energy > 0;
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
+    player.production.add(Resources.ENERGY, -1);
     player.game.defer(new SimpleDeferredAction(player, () => {
       // Play this after the card's been put in hand. Otherwise it will generate an error.
       player.addResourceTo(this, 2);

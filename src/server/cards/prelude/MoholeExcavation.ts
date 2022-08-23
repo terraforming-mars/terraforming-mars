@@ -27,8 +27,8 @@ export class MoholeExcavation extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
-    player.addProduction(Resources.HEAT, 2);
+    player.production.add(Resources.STEEL, 1);
+    player.production.add(Resources.HEAT, 2);
     player.heat += 2;
     return undefined;
   }

@@ -218,7 +218,7 @@ describe('Turmoil', function() {
     expect(player.canPlay(releaseOfInertGases)).is.not.true; // needs 20 MC
     expect(player.canPlay(jovianEmbassy)).is.not.true; // needs 17 MC
 
-    player.addProduction(Resources.ENERGY, 4);
+    player.production.add(Resources.ENERGY, 4);
     player.megaCredits = 30;
     const magneticFieldGeneratorsPromo = new MagneticFieldGeneratorsPromo();
     expect(player.canPlay(magneticFieldGeneratorsPromo)).is.not.true; // needs 31 MC
@@ -263,7 +263,7 @@ describe('Turmoil', function() {
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
-    player.setProductionForTest({energy: 2}); // Card requirement.
+    player.production.override({energy: 2}); // Card requirement.
 
     turmoil.rulingParty = new Greens();
     PoliticalAgendas.setNextAgenda(turmoil, game);
@@ -299,7 +299,7 @@ describe('Turmoil', function() {
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
-    player.setProductionForTest({energy: 2}); // Card requirement.
+    player.production.override({energy: 2}); // Card requirement.
 
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);
@@ -320,7 +320,7 @@ describe('Turmoil', function() {
     const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
-    player.setProductionForTest({energy: 2}); // Card requirement.
+    player.production.override({energy: 2}); // Card requirement.
 
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);

@@ -8,9 +8,9 @@ describe('FueledGenerators', function() {
     const card = new FueledGenerators();
     const player = TestPlayer.BLUE.newPlayer();
 
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.megacredits).to.eq(-1);
+    expect(player.production.energy).to.eq(1);
   });
 });

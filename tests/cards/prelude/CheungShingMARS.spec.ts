@@ -4,7 +4,6 @@ import {BuildingIndustries} from '../../../src/server/cards/base/BuildingIndustr
 import {CheungShingMARS} from '../../../src/server/cards/prelude/CheungShingMARS';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CheungShingMARS', function() {
@@ -26,6 +25,6 @@ describe('CheungShingMARS', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.megacredits).to.eq(3);
   });
 });

@@ -51,7 +51,7 @@ export class Capital extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2 &&
+    return player.production.energy >= 2 &&
         player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
@@ -63,8 +63,8 @@ export class Capital extends Card implements IProjectCard {
     return 0;
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, 5);
+    player.production.add(Resources.ENERGY, -2);
+    player.production.add(Resources.MEGACREDITS, 5);
     return new SelectSpace(
       'Select space for special city tile',
       player.game.board.getAvailableSpacesForCity(player),

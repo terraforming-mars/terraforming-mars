@@ -42,7 +42,7 @@ export class Recyclon extends Card implements ICorporationCard {
   public override resourceCount = 0;
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
+    player.production.add(Resources.STEEL, 1);
     player.addResourceTo(this);
     return undefined;
   }
@@ -62,7 +62,7 @@ export class Recyclon extends Card implements ICorporationCard {
 
     const spendResource = new SelectOption('Remove 2 microbes on this card and increase plant production 1 step', 'Remove microbes', () => {
       player.removeResourceFrom(this, 2);
-      player.addProduction(Resources.PLANTS, 1);
+      player.production.add(Resources.PLANTS, 1);
       return undefined;
     });
     return new OrOptions(spendResource, addResource);

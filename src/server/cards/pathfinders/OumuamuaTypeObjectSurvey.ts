@@ -48,7 +48,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       player.playCard(card, undefined);
       return true;
     } else if (tags.includes(Tag.SPACE)) {
-      player.addProduction(Resources.ENERGY, 3, {log: true});
+      player.production.add(Resources.ENERGY, 3, {log: true});
       this.keep(player, card);
       return true;
     } else {

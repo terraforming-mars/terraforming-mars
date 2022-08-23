@@ -31,9 +31,9 @@ describe('SoilDetoxification', function() {
   });
 
   it('play', function() {
-    expect(player.getProductionForTest()).deep.eq(Units.of({}));
+    expect(player.production.asUnits()).deep.eq(Units.of({}));
     card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.of({plants: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
   it('standard project', function() {

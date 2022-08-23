@@ -4,7 +4,6 @@ import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {cast, runAllActions, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
-import {Resources} from '../../../src/common/Resources';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
@@ -128,6 +127,6 @@ describe('Reds', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[3].id);
 
     game.increaseOxygenLevel(player, 1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+    expect(player.production.megacredits).to.eq(-1);
   });
 });

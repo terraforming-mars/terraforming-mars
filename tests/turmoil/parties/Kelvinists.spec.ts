@@ -26,7 +26,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each Heat production you have', function() {
-    player.addProduction(Resources.HEAT, 5);
+    player.production.add(Resources.HEAT, 5);
 
     const bonus = KELVINISTS_BONUS_1;
     bonus.grant(game);
@@ -34,7 +34,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling bonus 2: Gain 1 heat for each Heat production you have', function() {
-    player.addProduction(Resources.HEAT, 5);
+    player.production.add(Resources.HEAT, 5);
 
     const bonus = KELVINISTS_BONUS_2;
     bonus.grant(game);
@@ -49,8 +49,8 @@ describe('Kelvinists', function() {
     kelvinistsPolicy.action(player);
 
     game.deferredActions.runNext();
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player.getProduction(Resources.HEAT)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.heat).to.eq(1);
   });
 
   it('Ruling policy 2: When you raise temperature, gain 3 M€ per step raised', function() {

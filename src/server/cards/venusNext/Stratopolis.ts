@@ -44,7 +44,7 @@ export class Stratopolis extends Card implements IActionCard {
   public override resourceCount: number = 0;
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.MEGACREDITS, 2);
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
     return undefined;
   }

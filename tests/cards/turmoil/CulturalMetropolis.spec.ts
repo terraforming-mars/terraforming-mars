@@ -35,12 +35,12 @@ describe('Cultural Metropolis', function() {
 
 
   it('Can not play without two delegate in unity or unity ruling', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can not play without 2 delegates available', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
     for (let i = 0; i < PLAYER_DELEGATES_COUNT - 4; i++) {
@@ -56,7 +56,7 @@ describe('Cultural Metropolis', function() {
     const unity = turmoil.getPartyByName(PartyName.UNITY)!;
     const startingUnityDelegateCount = unity.delegates.length;
 
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
 
@@ -71,8 +71,8 @@ describe('Cultural Metropolis', function() {
     const options = action.execute();
     options!.cb(PartyName.UNITY);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(3);
     expect(unity.delegates).has.lengthOf(startingUnityDelegateCount + 4);
   });
 });

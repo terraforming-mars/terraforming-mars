@@ -178,7 +178,7 @@ export class ProductionCardRequirement extends CardRequirement implements IProdu
     super(RequirementType.PRODUCTION, amount, options);
   }
   public override satisfies(player: Player): boolean {
-    return this.satisfiesInequality(player.getProduction(this.resource));
+    return this.satisfiesInequality(player.production[this.resource]);
   }
 }
 

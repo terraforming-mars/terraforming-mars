@@ -54,7 +54,7 @@ export class Polaris extends Card implements ICorporationCard {
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isUncoveredOceanSpace(space)) {
       // TODO(kberg): Find a way to add Card to addProduction log options.
-      cardOwner.addProduction(Resources.MEGACREDITS, 1);
+      cardOwner.production.add(Resources.MEGACREDITS, 1);
       activePlayer.game.log(
         '${0} gained 1 ${1} production from ${2}',
         (b) => b.player(cardOwner).string(Resources.MEGACREDITS).cardName(this.name));

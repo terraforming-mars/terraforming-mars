@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessEmpire', function() {
@@ -30,6 +29,6 @@ describe('BusinessEmpire', function() {
     game.deferredActions.runNext();
 
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.production.megacredits).to.eq(6);
   });
 });

@@ -24,7 +24,7 @@ export class EarlySettlement extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
     player.game.defer(new PlaceCityTile(player));
     return undefined;
   }

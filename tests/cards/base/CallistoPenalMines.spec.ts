@@ -1,7 +1,6 @@
 
 import {expect} from 'chai';
 import {CallistoPenalMines} from '../../../src/server/cards/base/CallistoPenalMines';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CallistoPenalMines', function() {
@@ -10,7 +9,7 @@ describe('CallistoPenalMines', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.megacredits).to.eq(3);
     expect(card.getVictoryPoints()).to.eq(2);
   });
 });

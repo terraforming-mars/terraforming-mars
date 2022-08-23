@@ -27,23 +27,23 @@ describe('StripMine', function() {
   });
 
   it('Can not play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.STEEL)).to.eq(2);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.steel).to.eq(2);
+    expect(player.production.titanium).to.eq(1);
     expect(game.getOxygenLevel()).to.eq(2);
   });
 
   it('Cannot play if Reds are ruling and cannot afford 6 MC', function() {
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;
 

@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Farming} from '../../../src/server/cards/base/Farming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('Farming', function() {
   let card: Farming;
@@ -25,8 +24,8 @@ describe('Farming', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
+    expect(player.production.plants).to.eq(2);
     expect(player.plants).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(2);

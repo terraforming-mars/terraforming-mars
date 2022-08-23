@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {MiningQuota} from '../../../src/server/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MiningQuota', function() {
@@ -34,6 +33,6 @@ describe('MiningQuota', function() {
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.STEEL)).to.eq(2);
+    expect(player.production.steel).to.eq(2);
   });
 });

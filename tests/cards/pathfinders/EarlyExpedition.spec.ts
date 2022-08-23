@@ -21,27 +21,27 @@ describe('EarlyExpedition', function() {
 
   it('canPlay', function() {
     (game as any).temperature = -16;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.false;
 
     (game as any).temperature = -18;
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     expect(player.canPlayIgnoringCost(card)).is.false;
 
     (game as any).temperature = -18;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', function() {
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
     player.playedCards = [lunarObservationPost];
 
     const selectSpace = card.play(player);
     runAllActions(game);
 
-    expect(player.getProductionForTest()).eql(Units.of({megacredits: 3}));
+    expect(player.production.asUnits()).eql(Units.of({megacredits: 3}));
     expect(lunarObservationPost.resourceCount).eq(1);
 
     expect(selectSpace).instanceOf(SelectSpace);

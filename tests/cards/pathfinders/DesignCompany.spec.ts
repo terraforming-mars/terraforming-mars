@@ -20,7 +20,7 @@ describe('DesignCompany', function() {
   it('Should play', function() {
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
 
     expect(player.cardsInHand).has.lengthOf(3);
     player.cardsInHand.forEach((card) => {

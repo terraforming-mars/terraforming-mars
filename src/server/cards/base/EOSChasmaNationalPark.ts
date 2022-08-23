@@ -36,7 +36,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
   public play(player: Player) {
     const cards = player.getResourceCards(CardResource.ANIMAL);
     player.plants += 3;
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.MEGACREDITS, 2);
 
     if ( cards.length < 1 ) return undefined;
 

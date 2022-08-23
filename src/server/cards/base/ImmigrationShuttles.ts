@@ -32,7 +32,7 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
     return Math.floor(player.game.getCitiesCount() / 3);
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 5);
+    player.production.add(Resources.MEGACREDITS, 5);
     return undefined;
   }
 }

@@ -3,7 +3,6 @@ import {PrivateSecurity} from '../../../src/server/cards/pathfinders/PrivateSecu
 import {TestPlayer} from '../../TestPlayer';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 
@@ -22,8 +21,8 @@ describe('PrivateSecurity', function() {
   });
 
   it('protects against Fish', function() {
-    opponent1.setProductionForTest({plants: 2});
-    opponent2.setProductionForTest({plants: 4});
+    opponent1.production.override({plants: 2});
+    opponent2.production.override({plants: 4});
 
     const fish = new Fish();
 
@@ -40,12 +39,12 @@ describe('PrivateSecurity', function() {
     // Options for only one opponent.
     expect(action).is.undefined;
     // And it's the one without Private Security.
-    expect(opponent1.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(opponent1.production.plants).to.eq(1);
   });
 
   it('Card cannot be played if the only opponent with production has Private Security', () => {
-    opponent1.setProductionForTest({plants: 1});
-    opponent2.setProductionForTest({plants: 0});
+    opponent1.production.override({plants: 1});
+    opponent2.production.override({plants: 0});
 
     const fish = new Fish();
 
@@ -57,9 +56,9 @@ describe('PrivateSecurity', function() {
 
   it('Card applies to you if you have production and Private Security', () => {
     // https://github.com/terraforming-mars/terraforming-mars/issues/4318
-    player.setProductionForTest({plants: 1});
-    opponent1.setProductionForTest({plants: 1});
-    opponent2.setProductionForTest({plants: 1});
+    player.production.override({plants: 1});
+    opponent1.production.override({plants: 1});
+    opponent2.production.override({plants: 1});
 
     const fish = new Fish();
 

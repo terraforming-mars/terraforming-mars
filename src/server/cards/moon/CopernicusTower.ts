@@ -50,7 +50,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   }
 
   public canAct(player: Player) {
-    return player.getProduction(Resources.TITANIUM) >= 2 || this.canRaiseTR(player);
+    return player.production.titanium >= 2 || this.canRaiseTR(player);
   }
 
   public action(player: Player) {
@@ -73,7 +73,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   private spendResource(player: Player) {
     player.removeResourceFrom(this);
     player.increaseTerraformRating();
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

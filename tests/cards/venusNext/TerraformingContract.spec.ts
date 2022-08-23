@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {TerraformingContract} from '../../../src/server/cards/venusNext/TerraformingContract';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TerraformingContract', function() {
@@ -10,6 +9,6 @@ describe('TerraformingContract', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
 });

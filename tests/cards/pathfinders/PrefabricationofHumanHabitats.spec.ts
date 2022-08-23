@@ -19,10 +19,10 @@ describe('PrefabricationofHumanHabitats', function() {
   it('canPlay', function() {
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    player.setProductionForTest({steel: 0});
+    player.production.override({steel: 0});
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    player.setProductionForTest({steel: 1});
+    player.production.override({steel: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 

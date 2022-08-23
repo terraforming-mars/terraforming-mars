@@ -24,7 +24,6 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
 import {TileType} from '../../common/TileType';
 import {Phase} from '../../common/Phase';
-import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
 import {
   ClaimedMilestoneModel,
@@ -331,12 +330,12 @@ export class Server {
       playerInputModel.payProduction = {
         cost: (waitingFor as SelectProductionToLose).unitsToLose,
         units: {
-          megacredits: _player.getProduction(Resources.MEGACREDITS),
-          steel: _player.getProduction(Resources.STEEL),
-          titanium: _player.getProduction(Resources.TITANIUM),
-          plants: _player.getProduction(Resources.PLANTS),
-          energy: _player.getProduction(Resources.ENERGY),
-          heat: _player.getProduction(Resources.HEAT),
+          megacredits: _player.production.megacredits,
+          steel: _player.production.steel,
+          titanium: _player.production.titanium,
+          plants: _player.production.plants,
+          energy: _player.production.energy,
+          heat: _player.production.heat,
         },
       };
       break;
@@ -401,33 +400,33 @@ export class Server {
       coloniesCount: player.getColoniesCount(),
       color: player.color,
       energy: player.energy,
-      energyProduction: player.getProduction(Resources.ENERGY),
+      energyProduction: player.production.energy,
       fleetSize: player.getFleetSize(),
       heat: player.heat,
-      heatProduction: player.getProduction(Resources.HEAT),
+      heatProduction: player.production.heat,
       id: game.phase === Phase.END ? player.id : player.color,
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
       isActive: player.id === game.activePlayer,
       lastCardPlayed: player.lastCardPlayed,
       megaCredits: player.megaCredits,
-      megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      megaCreditProduction: player.production.megacredits,
       name: player.name,
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),
       noTagsCount: player.getNoTagsCount(),
       plants: player.plants,
-      plantProduction: player.getProduction(Resources.PLANTS),
+      plantProduction: player.production.plants,
       plantsAreProtected: player.plantsAreProtected(),
       tableau: Server.getCards(player, player.tableau, {showResources: true}),
       selfReplicatingRobotsCards: Server.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
-      steelProduction: player.getProduction(Resources.STEEL),
+      steelProduction: player.production.steel,
       steelValue: player.getSteelValue(),
       tags: player.tags.getAllTags(),
       terraformRating: player.getTerraformRating(),
       timer: player.timer.serialize(),
       titanium: player.titanium,
-      titaniumProduction: player.getProduction(Resources.TITANIUM),
+      titaniumProduction: player.production.titanium,
       titaniumValue: player.getTitaniumValue(),
       tradesThisGeneration: player.tradesThisGeneration,
       victoryPointsBreakdown: player.getVictoryPoints(),

@@ -24,7 +24,7 @@ export class PersonalAgenda extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox, {log: true});
+    player.production.adjust(this.productionBox, {log: true});
     player.drawCard(3, {
       include: (card) => {
         return card.cardType === CardType.EVENT &&

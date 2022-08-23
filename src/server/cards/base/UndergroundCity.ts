@@ -32,13 +32,13 @@ export class UndergroundCity extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2 && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return player.production.energy >= 2 && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public play(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (foundSpace: ISpace) => {
       player.game.addCityTile(player, foundSpace.id);
-      player.addProduction(Resources.ENERGY, -2);
-      player.addProduction(Resources.STEEL, 2);
+      player.production.add(Resources.ENERGY, -2);
+      player.production.add(Resources.STEEL, 2);
       return undefined;
     });
   }

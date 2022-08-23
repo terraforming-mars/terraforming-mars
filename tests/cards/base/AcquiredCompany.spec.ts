@@ -1,7 +1,5 @@
-
 import {expect} from 'chai';
 import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AcquiredCompany', function() {
@@ -10,6 +8,6 @@ describe('AcquiredCompany', function() {
     const player = TestPlayer.BLUE.newPlayer();
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.megacredits).to.eq(3);
   });
 });

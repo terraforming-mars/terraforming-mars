@@ -11,7 +11,6 @@ import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems
 import {TerralabsResearch} from '../../../src/server/cards/turmoil/TerralabsResearch';
 import {Splice} from '../../../src/server/cards/promo/Splice';
 import {VestaShipyard} from '../../../src/server/cards/base/VestaShipyard';
-import {Resources} from '../../../src/common/Resources';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Polyphemos} from '../../../src/server/cards/colonies/Polyphemos';
 import {CARD_COST} from '../../../src/common/constants';
@@ -82,7 +81,7 @@ describe('Merger', function() {
     expect(player.isCorporation(CardName.SATURN_SYSTEMS)).is.true;
 
     player2.playCard(new VestaShipyard());
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1); // Saturn Sys
+    expect(player.production.megacredits).to.eq(1); // Saturn Sys
 
     player2.playCard(new Ants());
     expect(player.megaCredits).to.eq(2); // Splice

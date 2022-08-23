@@ -28,7 +28,7 @@ export class Trees extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 3);
+    player.production.add(Resources.PLANTS, 3);
     player.plants++;
     return undefined;
   }

@@ -28,15 +28,15 @@ export class CloudSeeding extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) > -5 &&
+    return player.production.megacredits > -5 &&
     player.canReduceAnyProduction(Resources.HEAT, 1);
   }
 
   public play(player: Player) {
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.HEAT, {count: 1}));
-    player.addProduction(Resources.MEGACREDITS, -1);
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.MEGACREDITS, -1);
+    player.production.add(Resources.PLANTS, 2);
     return undefined;
   }
 }

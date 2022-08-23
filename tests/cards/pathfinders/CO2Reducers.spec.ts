@@ -20,7 +20,7 @@ describe('CO2Reducers', function() {
   it('Should play', function() {
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
 
     expect(player.cardsInHand).has.lengthOf(2);
     player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tag.MICROBE)).not.to.eq(-1));

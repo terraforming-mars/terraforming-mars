@@ -28,7 +28,7 @@ export class Insects extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, player.tags.count(Tag.PLANT), {log: true});
+    player.production.add(Resources.PLANTS, player.tags.count(Tag.PLANT), {log: true});
     return undefined;
   }
 }

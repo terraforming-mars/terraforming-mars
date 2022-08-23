@@ -6,7 +6,6 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {VictoryPointsBreakdown} from '../../../src/server/VictoryPointsBreakdown';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -42,7 +41,7 @@ describe('LunarMineUrbanization', () => {
     space.tile = {tileType: TileType.MOON_MINE};
     space.player = player;
 
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
     moonData.colonyRate = 0;
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
@@ -51,7 +50,7 @@ describe('LunarMineUrbanization', () => {
 
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_COLONY)).eql([]);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
 
     action.cb(space);
 

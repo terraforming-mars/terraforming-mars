@@ -8,11 +8,11 @@ describe('TropicalResort', function() {
   it('Should play', function() {
     const card = new TropicalResort();
     const player = TestPlayer.BLUE.newPlayer();
-    player.addProduction(Resources.HEAT, 2);
+    player.production.add(Resources.HEAT, 2);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.HEAT)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.heat).to.eq(0);
+    expect(player.production.megacredits).to.eq(3);
     expect(card.getVictoryPoints()).to.eq(2);
   });
 });

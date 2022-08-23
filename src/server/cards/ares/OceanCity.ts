@@ -36,12 +36,12 @@ export class OceanCity extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) > 0;
+    return player.production.energy > 0;
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.ENERGY, -1);
+    player.production.add(Resources.MEGACREDITS, 3);
 
     return new SelectSpace(
       'Select space for Ocean City',

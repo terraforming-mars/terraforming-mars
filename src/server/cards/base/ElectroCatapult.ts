@@ -40,7 +40,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return player.production.energy >= 1;
   }
   public canAct(player: Player): boolean {
     return player.plants > 0 || player.steel > 0;
@@ -73,7 +73,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     return undefined;
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
+    player.production.add(Resources.ENERGY, -1);
     return undefined;
   }
 

@@ -7,7 +7,6 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -48,7 +47,7 @@ describe('UrbanDecomposers', function() {
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 
   it('Should play with single target', function() {
@@ -61,7 +60,7 @@ describe('UrbanDecomposers', function() {
     game.deferredActions.pop();
     expect(input).is.undefined;
     expect(decomposers.resourceCount).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 
   it('Should play with multiple targets', function() {
@@ -76,6 +75,6 @@ describe('UrbanDecomposers', function() {
     const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     selectCard.cb([ants]);
     expect(ants.resourceCount).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 });

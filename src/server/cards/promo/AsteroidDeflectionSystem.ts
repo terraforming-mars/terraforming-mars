@@ -43,11 +43,11 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
   public override resourceCount = 0;
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return player.production.energy >= 1;
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
+    player.production.add(Resources.ENERGY, -1);
     return undefined;
   }
 

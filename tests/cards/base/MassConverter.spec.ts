@@ -3,7 +3,6 @@ import {MassConverter} from '../../../src/server/cards/base/MassConverter';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -28,7 +27,7 @@ describe('MassConverter', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(6);
+    expect(player.production.energy).to.eq(6);
     expect(card.getCardDiscount(player, card)).to.eq(0);
     expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
 

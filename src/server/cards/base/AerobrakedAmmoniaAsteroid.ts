@@ -33,8 +33,8 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
 
   public play(player: Player) {
     const cardsToPick = player.getResourceCards(CardResource.MICROBE);
-    player.addProduction(Resources.HEAT, 3);
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.HEAT, 3);
+    player.production.add(Resources.PLANTS, 1);
 
     if (cardsToPick.length < 1) return undefined;
 

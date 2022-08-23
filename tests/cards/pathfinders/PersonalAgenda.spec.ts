@@ -21,7 +21,7 @@ describe('PersonalAgenda', function() {
   it('Should play', function() {
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
 
     expect(player.cardsInHand).has.lengthOf(3);
     player.cardsInHand.forEach((card) => {

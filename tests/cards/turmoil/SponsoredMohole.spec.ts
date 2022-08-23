@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {SponsoredMohole} from '../../../src/server/cards/turmoil/SponsoredMohole';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -20,6 +19,6 @@ describe('SponsoredMohole', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
   });
 });

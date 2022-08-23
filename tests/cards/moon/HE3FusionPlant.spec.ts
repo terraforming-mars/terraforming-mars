@@ -3,7 +3,6 @@ import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3FusionPlant} from '../../../src/server/cards/moon/HE3FusionPlant';
-import {Resources} from '../../../src/common/Resources';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
@@ -34,19 +33,19 @@ describe('HE3FusionPlant', () => {
   });
 
   it('play', () => {
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
 
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     moonData.moon.getSpace('m06')!.tile = {tileType: TileType.MOON_MINE};
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.energy).eq(1);
 
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     moonData.moon.getSpace('m07')!.tile = {tileType: TileType.MOON_MINE};
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).eq(2);
+    expect(player.production.energy).eq(2);
   });
 });
 

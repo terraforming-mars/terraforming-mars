@@ -3,7 +3,6 @@ import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {cast} from '../../TestingUtils';
 
@@ -43,7 +42,7 @@ describe('NaturalPreserve', () => {
     const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
     expect(space.adjacency?.bonus).eq(undefined);
 

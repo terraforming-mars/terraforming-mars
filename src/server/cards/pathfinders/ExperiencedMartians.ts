@@ -23,7 +23,7 @@ export class ExperiencedMartians extends PreludeCard {
   public play(player: Player) {
     player.game.defer(new SendDelegateToArea(player, undefined, {count: 1, source: 'reserve'}));
     player.drawCard(2, {tag: Tag.MARS});
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

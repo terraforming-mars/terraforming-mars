@@ -42,16 +42,16 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     } else if (card.name === CardName.HEAT_TRAPPERS) {
       return player.canReduceAnyProduction(Resources.HEAT, 2);
     } else if (card.name === CardName.GYROPOLIS) {
-      return player.getProduction(Resources.ENERGY) >= 2;
+      return player.production.energy >= 2;
     } else if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
-      return player.getProduction(Resources.ENERGY) >= 1;
+      return player.production.energy >= 1;
     }
 
     if (card.produce !== undefined) return true;
 
     if (card.productionBox === undefined || card.productionBox === Units.EMPTY) return false;
 
-    return player.canAdjustProduction(card.productionBox);
+    return player.production.canAdjust(card.productionBox);
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
@@ -75,7 +75,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       if (card.produce) {
         card.produce(player);
       } else if (card.productionBox) {
-        player.adjustProduction(card.productionBox);
+        player.production.adjust(card.productionBox);
       } else {
         throw new Error(`Card ${card.name} is not a valid Robotic Workforce card.`);
       }

@@ -3,7 +3,6 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {PointLuna} from '../../../src/server/cards/prelude/PointLuna';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PointLuna', function() {
@@ -27,7 +26,7 @@ describe('PointLuna', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.titanium).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 });

@@ -17,19 +17,19 @@ describe('MartianDustProcessingPlant', function() {
   });
 
   it('canPlay', function() {
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     expect(player.canPlayIgnoringCost(card)).is.false;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', function() {
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(14);
 
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 2}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
     expect(player.getTerraformRating()).eq(15);
   });
 });

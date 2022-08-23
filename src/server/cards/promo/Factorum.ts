@@ -39,7 +39,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
+    player.production.add(Resources.STEEL, 1);
     return undefined;
   }
 
@@ -52,7 +52,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
       'Increase your energy production 1 step',
       'Increase production',
       () => {
-        player.addProduction(Resources.ENERGY, 1, {log: true});
+        player.production.add(Resources.ENERGY, 1, {log: true});
         return undefined;
       },
     );

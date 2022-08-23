@@ -7,7 +7,6 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
@@ -41,7 +40,7 @@ describe('AsteroidRights', function() {
 
     // Gain 1 M€ prod
     action.options[1].cb();
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
 
     // Gain 2 titanium
     action.options[0].cb();

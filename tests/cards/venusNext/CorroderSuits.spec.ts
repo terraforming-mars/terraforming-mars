@@ -6,7 +6,6 @@ import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrba
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CorroderSuits', function() {
@@ -22,7 +21,7 @@ describe('CorroderSuits', function() {
 
   it('Should play - no targets', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should play - single target', function() {
@@ -31,7 +30,7 @@ describe('CorroderSuits', function() {
 
     card.play(player);
     expect(card2.resourceCount).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should play - multiple targets', function() {
@@ -44,7 +43,7 @@ describe('CorroderSuits', function() {
 
         action!.cb([card2]);
         expect(card2.resourceCount).to.eq(1);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+        expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should play - specialized resource type', function() {
@@ -53,6 +52,6 @@ describe('CorroderSuits', function() {
 
     card.play(player);
     expect(card2.resourceCount).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 });

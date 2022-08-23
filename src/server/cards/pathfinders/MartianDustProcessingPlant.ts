@@ -30,11 +30,11 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player) {
-    return player.canAdjustProduction(this.productionBox);
+    return player.production.canAdjust(this.productionBox);
   }
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.increaseTerraformRating();
     return undefined;
   }

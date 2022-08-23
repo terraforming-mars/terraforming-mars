@@ -28,7 +28,7 @@ export class SisterPlanetSupport extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.MEGACREDITS, 3);
     return undefined;
   }
 }

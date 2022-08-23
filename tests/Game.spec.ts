@@ -44,12 +44,12 @@ describe('Game', () => {
     const gameOptions = setCustomGameOptions({corporateEra: false});
 
     Game.newInstance('gameid', [player], player, gameOptions);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player.getProduction(Resources.HEAT)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
+    expect(player.production.steel).to.eq(1);
+    expect(player.production.titanium).to.eq(1);
+    expect(player.production.plants).to.eq(1);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.heat).to.eq(1);
   });
 
   it('correctly calculates victory points', () => {
@@ -74,10 +74,10 @@ describe('Game', () => {
     game.fundAward(player, award);
 
     // Set second player to win Banker award
-    player2.addProduction(Resources.MEGACREDITS, 10);
+    player2.production.add(Resources.MEGACREDITS, 10);
 
     // Our testing player will be 2nd Banker in the game
-    player.addProduction(Resources.MEGACREDITS, 7);
+    player.production.add(Resources.MEGACREDITS, 7);
 
     // Two other players will share Thermalist award
     award = new Thermalist();

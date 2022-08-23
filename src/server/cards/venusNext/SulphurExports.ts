@@ -29,7 +29,7 @@ export class SulphurExports extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.tags.count(Tag.VENUS) + 1, {log: true});
+    player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.VENUS) + 1, {log: true});
     player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }

@@ -36,12 +36,12 @@ describe('HydrogenProcessingPlant', function() {
     addOcean(player);
     addOcean(player);
     addOcean(player);
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     card.play(player);
 
     expect(game.getOxygenLevel()).eq(2);
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 3}));
   });
 });
 

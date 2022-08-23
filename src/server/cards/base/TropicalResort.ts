@@ -31,11 +31,11 @@ export class TropicalResort extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.HEAT) >= 2;
+    return player.production.heat >= 2;
   }
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, -2);
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.HEAT, -2);
+    player.production.add(Resources.MEGACREDITS, 3);
     return undefined;
   }
 }

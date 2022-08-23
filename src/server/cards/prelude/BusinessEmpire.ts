@@ -30,7 +30,7 @@ export class BusinessEmpire extends PreludeCard {
     return player.canAfford(6);
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.game.defer(new SelectPaymentDeferred(player, 6));
     return undefined;
   }

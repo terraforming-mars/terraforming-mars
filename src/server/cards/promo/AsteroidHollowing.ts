@@ -44,7 +44,7 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
 
   public action(player: Player) {
     player.deductResource(Resources.TITANIUM, 1);
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     player.addResourceTo(this, {log: true});
 
     return undefined;

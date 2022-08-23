@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {UndergroundDetonations} from '../../../src/server/cards/base/UndergroundDetonations';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('UndergroundDetonations', function() {
@@ -29,6 +28,6 @@ describe('UndergroundDetonations', function() {
     card.action(player);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
   });
 });

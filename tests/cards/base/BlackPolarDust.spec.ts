@@ -19,14 +19,14 @@ describe('BlackPolarDust', function() {
   });
 
   it('Can not play', function() {
-    player.addProduction(Resources.MEGACREDITS, -4);
+    player.production.add(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
-    expect(player.getProduction(Resources.HEAT)).to.eq(3);
+    expect(player.production.megacredits).to.eq(-2);
+    expect(player.production.heat).to.eq(3);
 
     expect(game.deferredActions).has.lengthOf(1);
     const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;

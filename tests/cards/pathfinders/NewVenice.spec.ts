@@ -42,13 +42,13 @@ describe('NewVenice', function() {
   it('play', function() {
     const oceanSpace = addOcean(player);
     player.plants = 2;
-    player.setProductionForTest({energy: 0, megacredits: 0});
+    player.production.override({energy: 0, megacredits: 0});
 
     const action = card.play(player);
 
     expect(player.plants).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.megacredits).eq(2);
+    expect(player.production.energy).eq(1);
     expect(game.getCitiesOnMarsCount()).eq(0);
     expect(player.game.getCitiesCount(player)).eq(0);
 
@@ -80,7 +80,7 @@ describe('NewVenice', function() {
 
   it('Can place New Venice next to a city', function() {
     const oceanSpace = addOcean(player);
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
 
     const citySpace = game.board
       .getAdjacentSpaces(oceanSpace)

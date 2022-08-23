@@ -3,7 +3,6 @@ import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3Lobbyists} from '../../../src/server/cards/moon/HE3Lobbyists';
-import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -25,16 +24,16 @@ describe('HE3Lobbyists', () => {
   });
 
   it('play', () => {
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
     player.tagsForTest = {moon: 0};
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
 
 
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
     player.tagsForTest = {moon: 7};
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(8);
+    expect(player.production.megacredits).eq(8);
   });
 });
 

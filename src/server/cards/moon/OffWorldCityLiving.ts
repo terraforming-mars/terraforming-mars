@@ -36,7 +36,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
 
   public play(player: Player) {
     const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();
-    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
+    player.production.add(Resources.MEGACREDITS, amount, {log: true});
     MoonExpansion.raiseColonyRate(player);
     return undefined;
   }

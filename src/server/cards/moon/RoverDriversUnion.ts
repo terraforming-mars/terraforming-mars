@@ -33,7 +33,7 @@ export class RoverDriversUnion extends Card implements IProjectCard {
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       MoonExpansion.raiseLogisticRate(player);
-      player.addProduction(Resources.MEGACREDITS, moonData.logisticRate, {log: true});
+      player.production.add(Resources.MEGACREDITS, moonData.logisticRate, {log: true});
     });
     return undefined;
   }

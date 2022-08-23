@@ -5,7 +5,6 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {addOcean} from '../../TestingUtils';
@@ -38,14 +37,14 @@ describe('OceanFarm', () => {
   });
 
   it('Play', () => {
-    expect(player.getProduction(Resources.HEAT)).eq(0);
-    expect(player.getProduction(Resources.PLANTS)).eq(0);
+    expect(player.production.heat).eq(0);
+    expect(player.production.plants).eq(0);
 
     const oceanSpace = addOcean(player);
     const action = card.play(player);
 
-    expect(player.getProduction(Resources.HEAT)).eq(1);
-    expect(player.getProduction(Resources.PLANTS)).eq(1);
+    expect(player.production.heat).eq(1);
+    expect(player.production.plants).eq(1);
 
     action.cb(oceanSpace);
 

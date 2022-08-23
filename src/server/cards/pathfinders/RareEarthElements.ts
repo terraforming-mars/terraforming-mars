@@ -32,7 +32,7 @@ export class RareEarthElements extends Card implements IProjectCard {
       .filter(playerTileFn(player))
       .filter(isSpecialTile);
 
-    player.addProduction(Resources.MEGACREDITS, spaces.length, {log: true});
+    player.production.add(Resources.MEGACREDITS, spaces.length, {log: true});
     return undefined;
   }
 }

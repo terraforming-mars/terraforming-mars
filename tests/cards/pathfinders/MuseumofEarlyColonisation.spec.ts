@@ -22,13 +22,13 @@ describe('MuseumofEarlyColonisation', function() {
     const ocean = addOcean(player2);
     const greenery = addGreenery(player2);
     const city = addCity(player2);
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
     ocean.tile!.tileType = TileType.BIOFERTILIZER_FACILITY;
     expect(player.canPlayIgnoringCost(card)).is.false;
@@ -45,12 +45,12 @@ describe('MuseumofEarlyColonisation', function() {
   });
 
   it('play', function() {
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(20);
 
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1, titanium: 1, plants: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1, titanium: 1, plants: 1}));
     expect(player.getTerraformRating()).eq(21);
   });
 });

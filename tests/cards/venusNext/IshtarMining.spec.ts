@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('IshtarMining', function() {
@@ -17,6 +16,6 @@ describe('IshtarMining', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.titanium).to.eq(1);
   });
 });

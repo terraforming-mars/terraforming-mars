@@ -32,8 +32,8 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 3);
-    player.addProduction(Resources.ENERGY, 3);
+    player.production.add(Resources.HEAT, 3);
+    player.production.add(Resources.ENERGY, 3);
     return undefined;
   }
 }

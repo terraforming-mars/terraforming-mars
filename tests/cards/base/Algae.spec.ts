@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Algae} from '../../../src/server/cards/base/Algae';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -32,6 +31,6 @@ describe('Algae', function() {
 
     card.play(player);
     expect(player.plants).to.eq(1);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.plants).to.eq(2);
   });
 });

@@ -37,7 +37,7 @@ export class CassiniStation extends Card implements IProjectCard {
       coloniesCount += colony.colonies.length;
     });
 
-    player.addProduction(Resources.ENERGY, coloniesCount, {log: true});
+    player.production.add(Resources.ENERGY, coloniesCount, {log: true});
 
     const cards = [
       ...player.getResourceCards(CardResource.FLOATER),

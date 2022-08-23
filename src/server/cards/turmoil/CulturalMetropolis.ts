@@ -37,7 +37,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    if (player.getProduction(Resources.ENERGY) < 1) {
+    if (player.production.energy < 1) {
       return false;
     }
 
@@ -48,8 +48,8 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.ENERGY, -1);
+    player.production.add(Resources.MEGACREDITS, 3);
     player.game.defer(new PlaceCityTile(player));
     const title = 'Select where to send two delegates';
 

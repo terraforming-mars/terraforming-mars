@@ -1,7 +1,6 @@
 import {MarketingExperts} from '../../../src/server/cards/ares/MarketingExperts';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {expect} from 'chai';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -25,9 +24,9 @@ describe('MarketingExperts', function() {
   });
 
   it('Play', function() {
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
   });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from

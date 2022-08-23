@@ -46,7 +46,7 @@ describe('MiningRights', () => {
 
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
-    expect(player.getProductionForTest()).deep.eq(Units.of({titanium: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({titanium: 1}));
     expect(titaniumSpace!.adjacency?.bonus).eq(undefined);
   });
 
@@ -62,7 +62,7 @@ describe('MiningRights', () => {
 
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
     expect(steelSpace!.adjacency?.bonus).eq(undefined);
   });
 
@@ -80,7 +80,7 @@ describe('MiningRights', () => {
     const orOptions = cast(deferredAction?.execute(), OrOptions);
 
     orOptions.options[0].cb();
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
     expect(card.bonusResource).deep.eq([Resources.STEEL]);
   });
 
@@ -94,7 +94,7 @@ describe('MiningRights', () => {
     const deferredAction = game.deferredActions.pop();
     const orOptions = cast(deferredAction?.execute(), OrOptions);
     orOptions.options[0].cb();
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
 
     player.playedCards = [card];
 
@@ -103,6 +103,6 @@ describe('MiningRights', () => {
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([selectCard.cards[0]]);
     runAllActions(game);
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 2}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
   });
 });

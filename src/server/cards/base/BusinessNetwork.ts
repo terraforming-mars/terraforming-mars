@@ -29,10 +29,10 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) >= -4;
+    return player.production.megacredits >= -4;
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -1);
+    player.production.add(Resources.MEGACREDITS, -1);
     return undefined;
   }
   public canAct(): boolean {

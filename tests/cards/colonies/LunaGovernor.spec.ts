@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LunaGovernor', function() {
@@ -10,6 +9,6 @@ describe('LunaGovernor', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 });

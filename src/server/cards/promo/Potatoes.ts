@@ -34,7 +34,7 @@ export class Potatoes extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.plants -= 2;
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

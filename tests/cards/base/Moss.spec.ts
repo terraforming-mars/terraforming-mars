@@ -3,7 +3,6 @@ import {Moss} from '../../../src/server/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -37,7 +36,7 @@ describe('Moss', function() {
 
     card.play(player);
     expect(player.plants).to.eq(0);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 
   it('Can play with 0 plants if have Viral Enhancers', function() {
@@ -52,6 +51,6 @@ describe('Moss', function() {
     expect(player.plants).to.eq(-1);
     viralEnhancers.onCardPlayed(player, card);
     expect(player.plants).to.eq(0);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 });

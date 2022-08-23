@@ -37,7 +37,7 @@ export class Ringcom extends Card implements ICorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.MEGACREDITS, 3);
     // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
     this.onCardPlayed(player, this);
     return undefined;

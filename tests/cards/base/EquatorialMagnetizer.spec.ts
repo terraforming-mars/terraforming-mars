@@ -21,11 +21,11 @@ describe('EquatorialMagnetizer', function() {
   });
 
   it('Should act', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(0);
     expect(player.getTerraformRating()).to.eq(21);
   });
 });

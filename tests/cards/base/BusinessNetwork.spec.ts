@@ -22,11 +22,11 @@ describe('BusinessNetwork', function() {
   it('Should play', function() {
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+    expect(player.production.megacredits).to.eq(-1);
   });
 
   it('Can not play', function() {
-    player.addProduction(Resources.MEGACREDITS, -5);
+    player.production.add(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });
 

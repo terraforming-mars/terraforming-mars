@@ -9,7 +9,6 @@ import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
 import {InventionContest} from '../../../src/server/cards/base/InventionContest';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {Resources} from '../../../src/common/Resources';
 import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
 import {IceCapMelting} from '../../../src/server/cards/base/IceCapMelting';
 import {Payment} from '../../../src/common/inputs/Payment';
@@ -87,12 +86,12 @@ describe('Odyssey', () => {
     expect(selectCard.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
     expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
-    expect(player.getProduction(Resources.HEAT)).eq(0);
+    expect(player.production.heat).eq(0);
 
     selectCard.cb(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
     runAllActions(game);
 
-    expect(player.getProduction(Resources.HEAT)).eq(2);
+    expect(player.production.heat).eq(2);
     expect(game.dealer.discarded.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([inventionContest]);
     expect(player.megaCredits).eq(0);
@@ -106,13 +105,13 @@ describe('Odyssey', () => {
     player.playedCards = [importOfAdvancedGHG, mediaGroup];
     const selectCard = cast(card.action(player), SelectProjectCardToPlay);
 
-    expect(player.getProduction(Resources.HEAT)).eq(0);
+    expect(player.production.heat).eq(0);
     expect(player.megaCredits).eq(50);
 
     selectCard.cb(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: 9});
     runAllActions(game);
 
-    expect(player.getProduction(Resources.HEAT)).eq(2);
+    expect(player.production.heat).eq(2);
     expect(player.megaCredits).eq(44); // 50 - 9 + 3 = 44
     expect(game.dealer.discarded.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([mediaGroup]);

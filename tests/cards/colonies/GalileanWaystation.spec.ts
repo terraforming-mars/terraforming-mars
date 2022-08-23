@@ -6,7 +6,6 @@ import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCo
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GalileanWaystation', function() {
@@ -28,7 +27,7 @@ describe('GalileanWaystation', function() {
     player2.playedCards.push(card3);
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Corectly counts wildtags', function() {
@@ -41,6 +40,6 @@ describe('GalileanWaystation', function() {
     player2.playedCards.push(card3, researchNetwork); // Should NOT include this wild tag
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.megacredits).to.eq(3);
   });
 });

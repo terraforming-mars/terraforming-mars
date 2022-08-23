@@ -9,7 +9,6 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardRequirements} from '../../../src/server/cards/CardRequirements';
 import {Dealer} from '../../../src/server/Dealer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('OumuamuaTypeObjectSurvey', function() {
   let card: OumuamuaTypeObjectSurvey;
@@ -75,7 +74,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags, earthTag]);
     expect(player.playedCards).is.empty;
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
   });
 
   it('Card has a space tag', () => {
@@ -86,7 +85,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags, spaceTag]);
     expect(player.playedCards).is.empty;
-    expect(player.getProduction(Resources.ENERGY)).eq(3);
+    expect(player.production.energy).eq(3);
   });
 
   it('Two cards with space tags, only the first one is used', () => {
@@ -98,7 +97,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([spaceTag, spaceScienceTag]);
     expect(player.playedCards).is.empty;
-    expect(player.getProduction(Resources.ENERGY)).eq(3);
+    expect(player.production.energy).eq(3);
   });
 
   it('Two cards with space tags, but first one has science tag', () => {
@@ -110,7 +109,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([spaceTag]);
     expect(player.playedCards).deep.eq([spaceScienceTag]);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
   });
@@ -123,7 +122,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([microbeTag]);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
   });
@@ -136,7 +135,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([scienceTag]);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
   });
@@ -149,7 +148,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([scienceMicrobeTag]);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
   });
@@ -166,7 +165,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(dealer.deck).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([requirementsCard]);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
   });

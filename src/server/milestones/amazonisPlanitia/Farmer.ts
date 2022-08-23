@@ -1,5 +1,4 @@
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {IMilestone} from '../IMilestone';
 
 export class Farmer implements IMilestone {
@@ -7,7 +6,7 @@ export class Farmer implements IMilestone {
   public description: string = 'Have 4 plant production';
 
   public getScore(player: Player): number {
-    return player.getProduction(Resources.PLANTS);
+    return player.production.plants;
   }
 
   public canClaim(player: Player): boolean {

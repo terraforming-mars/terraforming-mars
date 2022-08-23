@@ -46,7 +46,7 @@ describe('SolarStorm', function() {
     expect(player.plants).eq(3);
     expect(player2.plants).eq(13);
     expect(player3.plants).eq(398);
-    expect(player.getProductionForTest()).deep.eq(Units.of({heat: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({heat: 1}));
   });
 
   it('remove data, nobody has data', function() {

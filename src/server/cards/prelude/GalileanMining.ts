@@ -30,7 +30,7 @@ export class GalileanMining extends PreludeCard {
     return player.canAfford(5);
   }
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, 2);
+    player.production.add(Resources.TITANIUM, 2);
     player.game.defer(new SelectPaymentDeferred(player, 5));
     return undefined;
   }

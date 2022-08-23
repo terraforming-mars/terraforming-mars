@@ -29,7 +29,7 @@ export class Worms extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, Math.floor((player.tags.count(Tag.MICROBE) + 1) / 2), {log: true});
+    player.production.add(Resources.PLANTS, Math.floor((player.tags.count(Tag.MICROBE) + 1) / 2), {log: true});
     return undefined;
   }
 }

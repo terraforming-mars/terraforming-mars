@@ -35,7 +35,7 @@ describe('HighTempSuperconductors', function() {
 
   it('play', function() {
     card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 2}));
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 2}));
   });
 
   it('discount power tag', function() {

@@ -30,7 +30,7 @@ export class FusionPower extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 3);
+    player.production.add(Resources.ENERGY, 3);
     return undefined;
   }
 }

@@ -25,7 +25,7 @@ export class ResearchGrant extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox, {log: true});
+    player.production.adjust(this.productionBox, {log: true});
     player.addResource(Resources.MEGACREDITS, 14);
     return undefined;
   }

@@ -33,10 +33,10 @@ export class VenusMagnetizer extends Card implements IActionCard {
     return undefined;
   }
   public canAct(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) > 0 && player.canAfford(0, {tr: {venus: 1}});
+    return player.production.energy > 0 && player.canAfford(0, {tr: {venus: 1}});
   }
   public action(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
+    player.production.add(Resources.ENERGY, -1);
     player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }

@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {SpaceRelay} from '../../../src/server/cards/pathfinders/SpaceRelay';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Resources} from '../../../src/common/Resources';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -19,7 +18,7 @@ describe('SpaceRelay', function() {
 
   it('play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
   });
 
   it('onCardPlayed', function() {

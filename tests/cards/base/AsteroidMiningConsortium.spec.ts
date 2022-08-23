@@ -25,27 +25,27 @@ describe('AsteroidMiningConsortium', function() {
   });
 
   it('Can play if player has titanium production', function() {
-    player.addProduction(Resources.TITANIUM, 1);
+    player.production.add(Resources.TITANIUM, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play - auto select if single target', function() {
-    player2.addProduction(Resources.TITANIUM, 1);
+    player2.production.add(Resources.TITANIUM, 1);
 
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
-    expect(player2.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.titanium).to.eq(0);
+    expect(player2.production.titanium).to.eq(1);
 
     card.play(player); // can decrease own production
     runAllActions(game);
     const input = player.popWaitingFor();
 
     expect(input).is.undefined;
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-    expect(player2.getProduction(Resources.TITANIUM)).to.eq(0);
+    expect(player.production.titanium).to.eq(1);
+    expect(player2.production.titanium).to.eq(0);
   });
 
   it('Should play - do not auto select single target is self', function() {
-    player.addProduction(Resources.TITANIUM, 1);
+    player.production.add(Resources.TITANIUM, 1);
     card.play(player); // can decrease own production
 
     runAllActions(game);
@@ -56,18 +56,18 @@ describe('AsteroidMiningConsortium', function() {
     selectPlayer.cb(selectPlayer.players[0]);
 
     // Demonstrates correct play order: removed from self before adding to self.
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
+    expect(player.production.titanium).to.eq(0);
 
     runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
 
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.titanium).to.eq(1);
   });
 
   it('Should play - multiple targets', function() {
-    player.addProduction(Resources.TITANIUM, 1);
-    player2.addProduction(Resources.TITANIUM, 1);
+    player.production.add(Resources.TITANIUM, 1);
+    player2.production.add(Resources.TITANIUM, 1);
     card.play(player);
 
     runAllActions(game);
@@ -76,8 +76,8 @@ describe('AsteroidMiningConsortium', function() {
 
     runAllActions(game);
 
-    expect(player2.getProduction(Resources.TITANIUM)).to.eq(0);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
+    expect(player2.production.titanium).to.eq(0);
+    expect(player.production.titanium).to.eq(2);
   });
 
   it('Gives victory points', function() {

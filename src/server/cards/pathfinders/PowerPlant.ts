@@ -27,7 +27,7 @@ export class PowerPlant extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     return undefined;
   }
 }

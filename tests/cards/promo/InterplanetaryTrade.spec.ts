@@ -12,7 +12,6 @@ import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryTrade', function() {
@@ -33,7 +32,7 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new ResearchCoordination());
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
 
   it('Should only count wild tags up to the max amount of tag types existing (10 at base)', function() {
@@ -46,7 +45,7 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new ColonizerTrainingCamp());
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(10);
+    expect(player.production.megacredits).to.eq(10);
   });
 
   it('Should only count wild tags up to the max amount of tag types existing (11 with venus)', function() {
@@ -60,7 +59,7 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new ColonizerTrainingCamp());
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(11);
+    expect(player.production.megacredits).to.eq(11);
   });
 
   it('Should only count wild tags up to the max amount of tag types existing (12 with venus and moon)', function() {
@@ -75,7 +74,7 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new ColonizerTrainingCamp());
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(12);
+    expect(player.production.megacredits).to.eq(12);
   });
 
   it('Should only count wild tags up to the max amount of tag types existing (13 with venus, moon, and Mars)', function() {
@@ -91,7 +90,7 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new ColonizerTrainingCamp());
     player.playedCards.push(new DeclarationOfIndependence());
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(12);
+    expect(player.production.megacredits).to.eq(12);
   });
 
   it('Should give victory points', function() {
@@ -101,6 +100,6 @@ describe('InterplanetaryTrade', function() {
 
   it('Should raise MC production by one', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

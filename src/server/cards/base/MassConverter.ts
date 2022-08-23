@@ -34,7 +34,7 @@ export class MassConverter extends Card implements IProjectCard {
 
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 6);
+    player.production.add(Resources.ENERGY, 6);
     return undefined;
   }
 }

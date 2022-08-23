@@ -5,7 +5,6 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceName} from '../../../src/server/SpaceName';
-import {Resources} from '../../../src/common/Resources';
 
 describe('InterplanetaryTransport', function() {
   let card: InterplanetaryTransport;
@@ -23,19 +22,19 @@ describe('InterplanetaryTransport', function() {
     for (const space of landSpaces) {
       game.simpleAddTile(player, space, {tileType: TileType.CITY});
       card.play(player);
-      expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+      expect(player.production.megacredits).eq(0);
     }
   });
 
   it('play - greeneries in space yield nothing', function() {
     game.simpleAddTile(player, game.board.getSpace(SpaceName.STANFORD_TORUS), {tileType: TileType.GREENERY});
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
   });
 
   it('play - cities in space yield money', function() {
     game.simpleAddTile(player, game.board.getSpace(SpaceName.STANFORD_TORUS), {tileType: TileType.CITY});
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
   });
 });

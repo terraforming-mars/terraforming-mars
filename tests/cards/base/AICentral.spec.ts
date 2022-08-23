@@ -26,10 +26,10 @@ describe('AICentral', function() {
 
   it('Should play', function() {
     player.playedCards.push(card, card, card);
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(0);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 

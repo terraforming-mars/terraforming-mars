@@ -9,7 +9,6 @@ import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -33,7 +32,7 @@ describe('NewPartner', function() {
     const selectCard = cast(card.play(player), SelectCard);
     expect(selectCard.cards).has.length(2);
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.playedCards.every((card) => card.cardType === CardType.PRELUDE)).is.true;
   });
 
@@ -55,6 +54,6 @@ describe('NewPartner', function() {
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

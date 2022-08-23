@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
@@ -39,9 +38,9 @@ describe('Polaris', function() {
 
     expect(space.tile?.tileType === TileType.OCEAN);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.megaCredits).to.eq(4);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player2.production.megacredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
   });
 
@@ -49,9 +48,9 @@ describe('Polaris', function() {
     game.addOceanTile(player2, '06');
     runAllActions(game);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.megaCredits).to.eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player2.production.megacredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
   });
 
@@ -59,9 +58,9 @@ describe('Polaris', function() {
     game.addOceanTile(player, '06');
     runAllActions(game);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.megaCredits).to.eq(4);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player2.production.megacredits).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
   });
 });

@@ -268,7 +268,14 @@ export class Game {
     for (const player of game.getPlayersInGenerationOrder()) {
       player.setTerraformRating(player.getTerraformRating() + player.handicap);
       if (!gameOptions.corporateEra) {
-        GameSetup.setStartingProductions(player);
+        player.production.override({
+          megacredits: 1,
+          steel: 1,
+          titanium: 1,
+          plants: 1,
+          energy: 1,
+          heat: 1,
+        });
       }
 
       if (!player.beginner ||
@@ -665,7 +672,7 @@ export class Game {
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
-      this.players[0].addProduction(Resources.MEGACREDITS, -2);
+      this.players[0].production.add(Resources.MEGACREDITS, -2);
       this.defer(new RemoveColonyFromGame(this.players[0]));
     }
   }
@@ -1186,10 +1193,10 @@ export class Game {
     if (this.phase !== Phase.SOLAR) {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
-        player.addProduction(Resources.HEAT, 1, {log: true});
+        player.production.add(Resources.HEAT, 1, {log: true});
       }
       if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
-        player.addProduction(Resources.HEAT, 1, {log: true});
+        player.production.add(Resources.HEAT, 1, {log: true});
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
@@ -1398,7 +1405,7 @@ export class Game {
       this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
     case SpaceBonus.ENERGY_PRODUCTION:
-      player.addProduction(Resources.ENERGY, count, {log: true});
+      player.production.add(Resources.ENERGY, count, {log: true});
       break;
     case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
@@ -1547,7 +1554,7 @@ export class Game {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
     return this.getPlayers().some((p) => {
-      if (p.getProduction(resource) < minQuantity) return false;
+      if (p.production[resource] < minQuantity) return false;
       // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
       if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
       return true;

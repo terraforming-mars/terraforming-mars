@@ -28,11 +28,11 @@ export class BlackPolarDust extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) >= -3;
+    return player.production.megacredits >= -3;
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -2);
-    player.addProduction(Resources.HEAT, 3);
+    player.production.add(Resources.MEGACREDITS, -2);
+    player.production.add(Resources.HEAT, 3);
     player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }

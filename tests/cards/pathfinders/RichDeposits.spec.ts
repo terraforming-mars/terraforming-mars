@@ -22,8 +22,8 @@ describe('RichDeposits', function() {
   });
 
   it('play', function() {
-    expect(player.getProductionForTest().steel).eq(0);
+    expect(player.production.asUnits().steel).eq(0);
     card.play(player);
-    expect(player.getProductionForTest().steel).eq(3);
+    expect(player.production.asUnits().steel).eq(3);
   });
 });

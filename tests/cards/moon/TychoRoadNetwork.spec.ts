@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TychoRoadNetwork} from '../../../src/server/cards/moon/TychoRoadNetwork';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -37,14 +36,14 @@ describe('TychoRoadNetwork', () => {
 
   it('play', () => {
     player.steel = 1;
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
 
     const deferredAction = game.deferredActions.peek() as PlaceMoonRoadTile;
     const selectSpace: SelectSpace = deferredAction.execute()!;

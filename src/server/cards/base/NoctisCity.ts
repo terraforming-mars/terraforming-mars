@@ -33,7 +33,7 @@ export class NoctisCity extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    if (player.getProduction(Resources.ENERGY) < 1) {
+    if (player.production.energy < 1) {
       return false;
     }
     if (player.game.board.getNoctisCitySpaceId !== undefined) {
@@ -43,8 +43,8 @@ export class NoctisCity extends Card implements IProjectCard {
     }
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.ENERGY, -1);
+    player.production.add(Resources.MEGACREDITS, 3);
     const noctisCitySpaceId = player.game.board.getNoctisCitySpaceId();
     if (noctisCitySpaceId !== undefined) {
       player.game.addCityTile(player, noctisCitySpaceId);

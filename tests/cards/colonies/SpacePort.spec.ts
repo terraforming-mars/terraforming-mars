@@ -20,7 +20,7 @@ describe('SpacePort', function() {
   });
 
   it('Can not play without colony', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -32,7 +32,7 @@ describe('SpacePort', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     const colony = new Ceres();
     colony.colonies.push(player.id);
     player.game.colonies.push(colony);
@@ -40,7 +40,7 @@ describe('SpacePort', function() {
 
     const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(4);
   });
 });

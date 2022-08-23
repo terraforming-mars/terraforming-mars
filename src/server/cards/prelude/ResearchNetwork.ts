@@ -24,7 +24,7 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox),
+    player.production.adjust(this.productionBox),
     player.drawCard(3);
     return undefined;
   }

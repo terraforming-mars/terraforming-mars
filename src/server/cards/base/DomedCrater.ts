@@ -41,7 +41,7 @@ export class DomedCrater extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 &&
+    return player.production.energy >= 1 &&
       player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public play(player: Player) {
@@ -51,8 +51,8 @@ export class DomedCrater extends Card implements IProjectCard {
       (space: ISpace) => {
         player.game.addCityTile(player, space.id);
         player.plants += 3;
-        player.addProduction(Resources.ENERGY, -1);
-        player.addProduction(Resources.MEGACREDITS, 3);
+        player.production.add(Resources.ENERGY, -1);
+        player.production.add(Resources.MEGACREDITS, 3);
         return undefined;
       },
     );

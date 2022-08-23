@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {GreatDam} from '../../../src/server/cards/base/GreatDam';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 
 describe('GreatDam', () => {
@@ -28,7 +27,7 @@ describe('GreatDam', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

@@ -17,7 +17,7 @@ describe('EconomicHelp', function() {
   });
 
   it('Play - one lowest influence tracks', function() {
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     game.pathfindersData = {
       venus: 0,
       earth: 1,
@@ -29,7 +29,7 @@ describe('EconomicHelp', function() {
 
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1}));
     expect(game.pathfindersData).deep.eq({
       venus: 3,
       earth: 1,

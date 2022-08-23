@@ -49,7 +49,6 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
-import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
@@ -65,6 +64,7 @@ import {SerializedGame} from './SerializedGame';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
+import {Production} from './player/Production';
 
 // Behavior when playing a card.
 // add it to the tableau
@@ -77,6 +77,7 @@ export class Player {
   protected waitingForCb?: () => void;
   public game: Game;
   public tags: Tags;
+  public readonly production: Production;
 
   // Corporate identity
   public corporations: Array<ICorporationCard> = [];
@@ -91,17 +92,11 @@ export class Player {
 
   // Resources
   public megaCredits: number = 0;
-  protected megaCreditProduction: number = 0;
   public steel: number = 0;
-  protected steelProduction: number = 0;
   public titanium: number = 0;
-  protected titaniumProduction: number = 0;
   public plants: number = 0;
-  protected plantProduction: number = 0;
   public energy: number = 0;
-  protected energyProduction: number = 0;
   public heat: number = 0;
-  protected heatProduction: number = 0;
 
   // Resource values
   private titaniumValue: number = 3;
@@ -179,6 +174,7 @@ export class Player {
     // But one thing at a time.
     this.game = undefined as unknown as Game;
     this.tags = new Tags(this);
+    this.production = new Production(this);
   }
 
   public static initialize(
@@ -303,16 +299,6 @@ export class Player {
     return this.terraformRating = value;
   }
 
-  public getProduction(resource: Resources): number {
-    if (resource === Resources.MEGACREDITS) return this.megaCreditProduction;
-    if (resource === Resources.STEEL) return this.steelProduction;
-    if (resource === Resources.TITANIUM) return this.titaniumProduction;
-    if (resource === Resources.PLANTS) return this.plantProduction;
-    if (resource === Resources.ENERGY) return this.energyProduction;
-    if (resource === Resources.HEAT) return this.heatProduction;
-    throw new Error('Resource ' + resource + ' not found');
-  }
-
   public getResource(resource: Resources): number {
     if (resource === Resources.MEGACREDITS) return this.megaCredits;
     if (resource === Resources.STEEL) return this.steel;
@@ -323,7 +309,7 @@ export class Player {
     throw new Error('Resource ' + resource + ' not found');
   }
 
-  private logUnitDelta(
+  public logUnitDelta(
     resource: Resources,
     amount: number,
     unitType: 'production' | 'amount',
@@ -429,43 +415,6 @@ export class Player {
     }
   }
 
-  public addProduction(
-    resource: Resources,
-    amount : number,
-    options? : { log: boolean, from? : Player | GlobalEventName, stealing?: boolean},
-  ) {
-    const adj = resource === Resources.MEGACREDITS ? -5 : 0;
-    const delta = (amount >= 0) ? amount : Math.max(amount, -(this.getProduction(resource) - adj));
-
-    if (resource === Resources.MEGACREDITS) this.megaCreditProduction += delta;
-    else if (resource === Resources.STEEL) this.steelProduction += delta;
-    else if (resource === Resources.TITANIUM) this.titaniumProduction += delta;
-    else if (resource === Resources.PLANTS) this.plantProduction += delta;
-    else if (resource === Resources.ENERGY) this.energyProduction += delta;
-    else if (resource === Resources.HEAT) this.heatProduction += delta;
-    else {
-      throw new Error(`tried to add unsupported production ${resource}`);
-    }
-
-    if (options?.log === true) {
-      this.logUnitDelta(resource, amount, 'production', options.from, options.stealing);
-    }
-
-    if (options?.from instanceof Player) {
-      LawSuit.resourceHook(this, resource, delta, options.from);
-    }
-
-    // Mons Insurance hook
-    if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
-      MonsInsurance.resolveInsurance(this);
-    }
-
-    // Manutech hook
-    if (this.isCorporation(CardName.MANUTECH)) {
-      Manutech.onProductionGain(this, resource, amount);
-    }
-  }
-
   // Returns true when the player has the supplied units in its inventory.
   public hasUnits(units: Units): boolean {
     return this.megaCredits - units.megacredits >= 0 &&
@@ -496,41 +445,6 @@ export class Player {
     this.deductResource(Resources.PLANTS, units.plants);
     this.deductResource(Resources.ENERGY, units.energy);
     this.deductResource(Resources.HEAT, units.heat);
-  }
-
-  public canAdjustProduction(units: Units): boolean {
-    return this.getProduction(Resources.MEGACREDITS) + units.megacredits >= -5 &&
-      this.getProduction(Resources.STEEL) + units.steel >= 0 &&
-      this.getProduction(Resources.TITANIUM) + units.titanium >= 0 &&
-      this.getProduction(Resources.PLANTS) + units.plants >= 0 &&
-      this.getProduction(Resources.ENERGY) + units.energy >= 0 &&
-      this.getProduction(Resources.HEAT) + units.heat >= 0;
-  }
-
-  public adjustProduction(units: Units, options?: {log: boolean, from?: Player}) {
-    if (units.megacredits !== undefined) {
-      this.addProduction(Resources.MEGACREDITS, units.megacredits, options);
-    }
-
-    if (units.steel !== undefined) {
-      this.addProduction(Resources.STEEL, units.steel, options);
-    }
-
-    if (units.titanium !== undefined) {
-      this.addProduction(Resources.TITANIUM, units.titanium, options);
-    }
-
-    if (units.plants !== undefined) {
-      this.addProduction(Resources.PLANTS, units.plants, options);
-    }
-
-    if (units.energy !== undefined) {
-      this.addProduction(Resources.ENERGY, units.energy, options);
-    }
-
-    if (units.heat !== undefined) {
-      this.addProduction(Resources.HEAT, units.heat, options);
-    }
   }
 
   public getActionsThisGeneration(): Set<CardName> {
@@ -647,9 +561,9 @@ export class Player {
 
   public canHaveProductionReduced(resource: Resources, minQuantity: number, attacker: Player) {
     if (resource === Resources.MEGACREDITS) {
-      if ((this.getProduction(resource) + 5) < minQuantity) return false;
+      if ((this.production[resource] + 5) < minQuantity) return false;
     } else {
-      if (this.getProduction(resource) < minQuantity) return false;
+      if (this.production[resource] < minQuantity) return false;
     }
 
     if (resource === Resources.STEEL || resource === Resources.TITANIUM) {
@@ -831,13 +745,13 @@ export class Player {
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
-    this.megaCredits += this.megaCreditProduction + this.terraformRating;
+    this.megaCredits += this.production.megacredits + this.terraformRating;
     this.heat += this.energy;
-    this.heat += this.heatProduction;
-    this.energy = this.energyProduction;
-    this.titanium += this.titaniumProduction;
-    this.steel += this.steelProduction;
-    this.plants += this.plantProduction;
+    this.heat += this.production.heat;
+    this.energy = this.production.energy;
+    this.titanium += this.production.titanium;
+    this.steel += this.production.steel;
+    this.plants += this.production.plants;
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
   }
@@ -1904,17 +1818,17 @@ export class Player {
       terraformRatingAtGenerationStart: this.terraformRatingAtGenerationStart,
       // Resources
       megaCredits: this.megaCredits,
-      megaCreditProduction: this.megaCreditProduction,
+      megaCreditProduction: this.production.megacredits,
       steel: this.steel,
-      steelProduction: this.steelProduction,
+      steelProduction: this.production.steel,
       titanium: this.titanium,
-      titaniumProduction: this.titaniumProduction,
+      titaniumProduction: this.production.titanium,
       plants: this.plants,
-      plantProduction: this.plantProduction,
+      plantProduction: this.production.plants,
       energy: this.energy,
-      energyProduction: this.energyProduction,
+      energyProduction: this.production.energy,
       heat: this.heat,
-      heatProduction: this.heatProduction,
+      heatProduction: this.production.heat,
       // Resource values
       titaniumValue: this.titaniumValue,
       steelValue: this.steelValue,
@@ -1991,28 +1905,30 @@ export class Player {
       player.victoryPointsByGeneration = new Array(game.generation).fill(0);
     }
     player.energy = d.energy;
-    player.energyProduction = d.energyProduction;
     player.fleetSize = d.fleetSize;
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
-    player.heatProduction = d.heatProduction;
-    player.megaCreditProduction = d.megaCreditProduction;
     player.megaCredits = d.megaCredits;
     player.needsToDraft = d.needsToDraft;
     player.oceanBonus = d.oceanBonus;
-    player.plantProduction = d.plantProduction;
     player.plants = d.plants;
     player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+    player.production.override(Units.of({
+      energy: d.energyProduction,
+      heat: d.heatProduction,
+      megacredits: d.megaCreditProduction,
+      plants: d.plantProduction,
+      steel: d.steelProduction,
+      titanium: d.titaniumProduction,
+    }));
     player.removingPlayers = d.removingPlayers;
     player.scienceTagCount = d.scienceTagCount;
     player.steel = d.steel;
-    player.steelProduction = d.steelProduction;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;
     player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
     player.titanium = d.titanium;
-    player.titaniumProduction = d.titaniumProduction;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
     player.tradesThisGeneration = d.tradesThisTurn;

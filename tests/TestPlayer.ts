@@ -43,38 +43,6 @@ export class TestPlayer extends Player {
     this.tags = new TestTags(this);
   }
 
-  public setProductionForTest(units: Partial<Units>) {
-    if (units.megacredits !== undefined) {
-      this.megaCreditProduction = units.megacredits;
-    }
-    if (units.steel !== undefined) {
-      this.steelProduction = units.steel;
-    }
-    if (units.titanium !== undefined) {
-      this.titaniumProduction = units.titanium;
-    }
-    if (units.plants !== undefined) {
-      this.plantProduction = units.plants;
-    }
-    if (units.energy !== undefined) {
-      this.energyProduction = units.energy;
-    }
-    if (units.heat !== undefined) {
-      this.heatProduction = units.heat;
-    }
-  }
-
-  public getProductionForTest(): Units {
-    return {
-      megacredits: this.megaCreditProduction,
-      steel: this.steelProduction,
-      titanium: this.titaniumProduction,
-      plants: this.plantProduction,
-      energy: this.energyProduction,
-      heat: this.heatProduction,
-    };
-  }
-
   public getResourcesForTest(): Units {
     return {
       megacredits: this.megaCredits,

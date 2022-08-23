@@ -22,7 +22,7 @@ export class DomeFarming extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     return undefined;
   }
 }

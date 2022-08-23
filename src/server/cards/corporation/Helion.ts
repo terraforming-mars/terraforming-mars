@@ -33,7 +33,7 @@ export class Helion extends Card implements ICorporationCard {
   }
   public play(player: Player) {
     player.canUseHeatAsMegaCredits = true;
-    player.addProduction(Resources.HEAT, 3);
+    player.production.add(Resources.HEAT, 3);
     return undefined;
   }
 }

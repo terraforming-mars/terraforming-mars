@@ -30,10 +30,10 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
     return undefined;
   }
   public canAct(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && player.canAfford(0, {tr: {tr: 1}});
+    return player.production.energy >= 1 && player.canAfford(0, {tr: {tr: 1}});
   }
   public action(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
+    player.production.add(Resources.ENERGY, -1);
     player.increaseTerraformRating();
     return undefined;
   }

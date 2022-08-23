@@ -23,7 +23,6 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from '../../common/models/SpaceModel';
 import {TileType} from '../../common/TileType';
-import {Phase} from '../../common/Phase';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
 import {
@@ -405,7 +404,6 @@ export class Server {
       fleetSize: player.getFleetSize(),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
-      id: game.phase === Phase.END ? player.id : player.color,
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
       isActive: player.id === game.activePlayer,
       lastCardPlayed: player.lastCardPlayed,

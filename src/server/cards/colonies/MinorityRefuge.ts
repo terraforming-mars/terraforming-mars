@@ -31,7 +31,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
   public warning?: string;
 
   public override canPlay(player: Player): boolean {
-    if (ColoniesHandler.getPlayableColonies(player).length > 0) {
+    if (ColoniesHandler.getPlayableColonies(player).length === 0) {
       return false;
     }
 

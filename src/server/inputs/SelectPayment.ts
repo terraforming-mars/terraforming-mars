@@ -1,7 +1,7 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
-import {Payment} from '../../common/inputs/Payment';
+import {jsonToPayment, Payment} from '../../common/inputs/Payment';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
@@ -22,7 +22,7 @@ export class SelectPayment implements PlayerInput {
 
   public process(input: InputResponse, player: Player) {
     player.checkInputLength(input, 1, 1);
-    const payment: Payment = player.parsePaymentJSON(input[0][0]);
+    const payment: Payment = jsonToPayment(input[0][0]);
     if (!player.canSpend(payment)) {
       throw new Error('You do not have that many resources');
     }

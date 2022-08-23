@@ -1149,14 +1149,6 @@ export class Player {
     return this.playCard(selectedCard, payment, cardAction);
   }
 
-  public getPlayProjectCardInput(cards: Array<IProjectCard> = this.getPlayableCards(), cardAction: CardAction = 'add') {
-    return new SelectProjectCardToPlay(
-      this,
-      cards,
-      (selectedCard, payment) => this.checkPaymentAndPlayCard(selectedCard, payment, cardAction),
-    );
-  }
-
   public getSpendableMicrobes(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
     return psychrophiles?.resourceCount ?? 0;
@@ -1807,7 +1799,8 @@ export class Player {
 
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(this.getPlayProjectCardInput(playableCards));
+      action.options.push(
+        new SelectProjectCardToPlay(this, playableCards));
     }
 
     const coloniesTradeAction = ColoniesHandler.coloniesTradeAction(this);

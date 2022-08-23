@@ -37,14 +37,13 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
       return new SelectProjectCardToPlay(
         player,
         playableCards,
-        (selectedCard, payment) => {
-          const result = player.checkPaymentAndPlayCard(selectedCard, payment);
-          if (selectedCard.resourceType === CardResource.FLOATER) {
-            player.addResourceTo(selectedCard, 4);
-          }
-          return result;
-        },
-      );
+        {
+          cb: (card) => {
+            if (card.resourceType === CardResource.FLOATER) {
+              player.addResourceTo(card, 4);
+            }
+          },
+        });
     }
 
     return undefined;

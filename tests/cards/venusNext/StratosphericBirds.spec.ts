@@ -11,6 +11,7 @@ import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
+import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
@@ -91,10 +92,10 @@ describe('StratosphericBirds', () => {
     (game as any).venusScaleLevel = 12;
     player.megaCredits = 12;
 
-    const SelectPaymentDeferred = player.getPlayProjectCardInput();
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    SelectPaymentDeferred.cb(card, {...Payment.EMPTY, megaCredits: 12});
+    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
+    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(aerialMappers.resourceCount).to.eq(0);
   });
@@ -114,16 +115,17 @@ describe('StratosphericBirds', () => {
 
     // 12 M€ + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
-    const SelectPaymentDeferred = player.getPlayProjectCardInput();
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
-      SelectPaymentDeferred.cb(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
+      const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
+      selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 9, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
-    SelectPaymentDeferred.cb(card, {...Payment.EMPTY, megaCredits: 12});
+    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
+    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 12});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
   });
@@ -137,11 +139,11 @@ describe('StratosphericBirds', () => {
     (game as any).venusScaleLevel = 12;
     player.megaCredits = 3;
 
-    const selectHowToPayForCard = player.getPlayProjectCardInput();
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
-    selectHowToPayForCard!.cb(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
+    const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
+    selectProjectCardToPlay.cb(card, {...Payment.EMPTY, megaCredits: 3, floaters: 3});
     game.deferredActions.pop()!.execute(); // Remove floater
     expect(dirigibles.resourceCount).to.eq(0);
     expect(deuteriumExport.resourceCount).to.eq(0);

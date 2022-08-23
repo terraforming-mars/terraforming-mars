@@ -4,9 +4,10 @@ import {Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {Player} from '../Player';
+import {CardAction, Player} from '../Player';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
+// One more rename to SelectAndPlay?
 export class SelectProjectCardToPlay implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY;
   public title = 'Play project card';
@@ -20,9 +21,12 @@ export class SelectProjectCardToPlay implements PlayerInput {
   public reserveUnits: Array<Units>;
 
   constructor(
-    player: Player,
-    public cards: Array<IProjectCard>,
-    public cb: (cardToPlay: IProjectCard, payment: Payment) => PlayerInput | undefined) {
+    private player: Player,
+    public cards: Array<IProjectCard> = player.getPlayableCards(),
+    public config?: {
+      action?: CardAction,
+      cb?: (cardToPlay: IProjectCard) => void,
+    }) {
     this.microbes = player.getSpendableMicrobes();
     this.floaters = player.getSpendableFloaters();
     this.canUseHeat = player.canUseHeatAsMegaCredits;
@@ -38,7 +42,7 @@ export class SelectProjectCardToPlay implements PlayerInput {
     player.checkInputLength(input, 1, 2);
     const cardName = input[0][0];
     const cardData = PlayerInput.getCard(this.cards, cardName);
-    const foundCard: IProjectCard = cardData.card;
+    const card: IProjectCard = cardData.card;
     const payment: Payment = player.parsePaymentJSON(input[0][1]);
     const reserveUnits = this.reserveUnits[cardData.idx];
     // These are not used for safety but do help give a better error message
@@ -49,6 +53,14 @@ export class SelectProjectCardToPlay implements PlayerInput {
     if (reserveUnits.titanium + payment.titanium > player.titanium) {
       throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
     }
-    return this.cb(foundCard, payment);
+    this.cb(card, payment);
+    return undefined;
+  }
+
+  // To fullfil PlayerInput.
+  public cb(card: IProjectCard, payment: Payment) {
+    this.player.checkPaymentAndPlayCard(card, payment, this.config?.action);
+    this.config?.cb?.(card);
+    return undefined;
   }
 }

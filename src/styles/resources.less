@@ -82,7 +82,7 @@
     line-height: 36px;
 }
 
-.resource_icon--metalbonus {
+.resource_icon--megacredit-value {
     background-image: url(assets/resources/megacredit.png);
     background-size: 20px 20px;
     width: 20px;
@@ -111,6 +111,12 @@ each(@resource_types, {
     background-image: url(assets/resources/power.png);
 }
 
+.shield_parent {
+    position: relative;
+    top: 12px;
+    left: 0;
+}
+
 .shield_icon {
     background-image: url(assets/misc/shield-icon.png);
     filter: invert(1);
@@ -120,6 +126,32 @@ each(@resource_types, {
     position: relative;
     bottom: -18%;
     right: -20%;
+}
+
+.shield_icon_half {
+    &:extend(.shield_icon);
+    background-image: url(assets/misc/half-shield-icon.png);
+}
+
+.shield_resource_protection {
+    background-image: url(./assets/resources/wild.png);
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 0px;
+    left: 6px;
+}
+
+.shield_production_protection {
+    background-image: url(assets/misc/production.png);
+    background-size: 10px 10px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 0px;
+    left: 23px;
+    filter: brightness(1.1);
 }
 
 .alloys {

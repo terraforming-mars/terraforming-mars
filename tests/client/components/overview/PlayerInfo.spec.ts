@@ -1,4 +1,4 @@
-import {mount} from '@vue/test-utils';
+import {shallowMount} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
@@ -31,7 +31,7 @@ describe('PlayerInfo', function() {
       },
       players: [thisPlayer],
     };
-    const playerStatus = mount(PlayerInfo, {
+    const playerInfo = shallowMount(PlayerInfo, {
       localVue: getLocalVue(),
       parentComponent: {
         methods: {
@@ -44,7 +44,7 @@ describe('PlayerInfo', function() {
         playerIndex: 0,
       },
     });
-    const test = playerStatus.find('div[class*="played-cards-count"]');
+    const test = playerInfo.find('div[class*="played-cards-count"]');
     expect(test.text()).to.eq('3');
   });
 });

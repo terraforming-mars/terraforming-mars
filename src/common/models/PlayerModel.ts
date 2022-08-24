@@ -7,6 +7,7 @@ import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId, SpectatorId} from '../Types';
 import {CardName} from '../cards/CardName';
+import {Resources} from '../Resources';
 
 export interface ViewModel {
   game: GameModel;
@@ -14,6 +15,11 @@ export interface ViewModel {
   id?: PlayerId | SpectatorId;
   thisPlayer: PublicPlayerModel | undefined;
 }
+
+// 'off': Resources (or production) are unprotected.
+// 'on': Resources (or production) are protected.
+// 'half': Half resources are protected when targeted. Applies to Botanical Experience.
+export type Protection = 'off' | 'on' | 'half';
 
 /** The public information about a player */
 export type PublicPlayerModel = {
@@ -45,7 +51,8 @@ export type PublicPlayerModel = {
   noTagsCount: number;
   plants: number;
   plantProduction: number;
-  plantsAreProtected: boolean;
+  protectedResources: Record<Resources, Protection>;
+  protectedProduction: Record<Resources, Protection>;
   tableau: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;

@@ -973,23 +973,15 @@ export class Player {
   }
 
   private paymentOptionsForCard(card: IProjectCard): Payment.Options {
-    const canUseSteel = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING);
-    const canUseTitanium = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE);
-    const canUseMicrobes = card.tags.includes(Tag.PLANT);
-    const canUseFloaters = card.tags.includes(Tag.VENUS);
-    const canUseScience = card.tags.includes(Tag.MOON);
-    const canUseSeeds = card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
-    // TODO(kberg): add this.corporation.name === CardName.AURORAI
-    const canUseData = card.cardType === CardType.STANDARD_PROJECT;
-
     return {
-      steel: canUseSteel,
-      titanium: canUseTitanium,
-      seeds: canUseSeeds,
-      floaters: canUseFloaters,
-      microbes: canUseMicrobes,
-      science: canUseScience,
-      data: canUseData,
+      steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
+      titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
+      seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
+      floaters: card.tags.includes(Tag.VENUS),
+      microbes: card.tags.includes(Tag.PLANT),
+      science: card.tags.includes(Tag.MOON),
+      // TODO(kberg): add this.corporation.name === CardName.AURORAI
+      data: card.cardType === CardType.STANDARD_PROJECT,
     };
   }
 

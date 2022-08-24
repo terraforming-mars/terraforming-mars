@@ -27,7 +27,7 @@ describe('BasicInfrastructure', () => {
     expect(player.production.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
-    expect(player.getFleetSize()).eq(1);
+    expect(player.colonies.getFleetSize()).eq(1);
 
     card.play(player);
     const placeTileAction = game.deferredActions.peek() as PlaceMoonRoadTile;
@@ -35,7 +35,7 @@ describe('BasicInfrastructure', () => {
 
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
-    expect(player.getFleetSize()).eq(2);
+    expect(player.colonies.getFleetSize()).eq(2);
   });
 });
 

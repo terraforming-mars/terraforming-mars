@@ -17,7 +17,7 @@ import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
 function tradeCost(player: Player) {
-  return Math.max(0, 3 - player.colonyTradeDiscount);
+  return Math.max(0, 3 - player.colonies.tradeDiscount);
 }
 export class CollegiumCopernicus extends Card implements ICorporationCard, IActionCard {
   constructor() {
@@ -73,7 +73,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 
   public canAct(player: Player) {
-    return ColoniesHandler.canTrade(player) && this.resourceCount >= tradeCost(player);
+    return player.colonies.canTrade() && this.resourceCount >= tradeCost(player);
   }
 
   public action(player: Player) {

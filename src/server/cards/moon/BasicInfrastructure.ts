@@ -26,7 +26,7 @@ export class BasicInfrastructure extends PreludeCard {
 
   public play(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));
-    player.increaseFleetSize();
+    player.colonies.increaseFleetSize();
     return undefined;
   }
 }

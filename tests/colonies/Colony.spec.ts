@@ -352,18 +352,18 @@ describe('Colony', function() {
   });
 
   it('usesTradeFleet', () => {
-    expect(player.tradesThisGeneration).eq(0);
+    expect(player.colonies.tradesThisGeneration).eq(0);
     luna.trade(player);
-    expect(player.tradesThisGeneration).eq(1);
+    expect(player.colonies.tradesThisGeneration).eq(1);
 
     luna.trade(player, {});
-    expect(player.tradesThisGeneration).eq(2);
+    expect(player.colonies.tradesThisGeneration).eq(2);
 
     luna.trade(player, {usesTradeFleet: false});
-    expect(player.tradesThisGeneration).eq(2);
+    expect(player.colonies.tradesThisGeneration).eq(2);
 
     luna.trade(player, {usesTradeFleet: true});
-    expect(player.tradesThisGeneration).eq(3);
+    expect(player.colonies.tradesThisGeneration).eq(3);
   });
 
   it('serializing and deserializing', () => {

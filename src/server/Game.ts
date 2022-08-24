@@ -709,7 +709,7 @@ export class Game {
     this.passedPlayers.clear();
     this.someoneHasRemovedOtherPlayersPlants = false;
     this.players.forEach((player) => {
-      player.cardDiscount = 0; // Iapetus reset hook
+      player.colonies.cardDiscount = 0; // Iapetus reset hook
       player.runProductionPhase();
     });
 
@@ -719,7 +719,7 @@ export class Game {
       return;
     } else {
       this.players.forEach((player) => {
-        player.returnTradeFleets();
+        player.colonies.returnTradeFleets();
       });
     }
 

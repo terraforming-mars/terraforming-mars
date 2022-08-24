@@ -32,7 +32,7 @@ describe('TradingColony', function() {
     const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
     selectColony.cb(selectColony.colonies[0]);
     expect(player.production.energy).to.eq(1);
-    expect(player.colonyTradeOffset).to.eq(1);
+    expect(player.colonies.tradeOffset).to.eq(1);
   });
 
   it('Can play if there are available colony tiles to build on', function() {

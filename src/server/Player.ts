@@ -1,6 +1,6 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
 import {Aridor} from './cards/colonies/Aridor';
 import {Aurorai} from './cards/pathfinders/Aurorai';
 import {Board} from './boards/Board';
@@ -64,6 +64,7 @@ import {SerializedGame} from './SerializedGame';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
+import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 
 // Behavior when playing a card.
@@ -77,6 +78,7 @@ export class Player {
   protected waitingForCb?: () => void;
   public game: Game;
   public tags: Tags;
+  public colonies: Colonies;
   public readonly production: Production;
 
   // Corporate identity
@@ -110,7 +112,6 @@ export class Player {
   public lastCardPlayed: CardName | undefined;
   public pendingInitialActions: Array<ICorporationCard> = [];
 
-
   // Cards
   public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
@@ -124,14 +125,6 @@ export class Player {
   public needsToDraft?: boolean;
 
   public timer: Timer = Timer.newInstance();
-
-  // Colonies
-  private fleetSize: number = 1;
-  public tradesThisGeneration: number = 0;
-  public colonyTradeOffset: number = 0;
-  public colonyTradeDiscount: number = 0;
-  public colonyVictoryPoints: number = 0;
-  public cardDiscount: number = 0; // Iapetus Colony
 
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
@@ -174,6 +167,7 @@ export class Player {
     // But one thing at a time.
     this.game = undefined as unknown as Game;
     this.tags = new Tags(this);
+    this.colonies = new Colonies(this);
     this.production = new Production(this);
   }
 
@@ -506,11 +500,7 @@ export class Player {
       }
     });
 
-    // Titania Colony VP
-    if (this.colonyVictoryPoints > 0) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
-    }
-
+    this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 
@@ -756,16 +746,6 @@ export class Player {
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
   }
 
-  public returnTradeFleets(): void {
-    // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
-    // retrieve their fleets.
-    // See Colony.ts for the other half of this effect, and Game.ts which disables it.
-    if (this.game.syndicatePirateRaider === undefined) {
-      this.tradesThisGeneration = 0;
-    } else if (this.game.syndicatePirateRaider === this.id) {
-      this.tradesThisGeneration = 0;
-    }
-  }
   private doneWorldGovernmentTerraforming(): void {
     this.game.deferredActions.runAll(() => this.game.doneWorldGovernmentTerraforming());
   }
@@ -960,7 +940,7 @@ export class Player {
 
   public getCardCost(card: IProjectCard): number {
     let cost: number = card.cost;
-    cost -= this.cardDiscount;
+    cost -= this.colonies.cardDiscount;
 
     this.tableau.forEach((playedCard) => {
       cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
@@ -1697,7 +1677,7 @@ export class Player {
         new SelectProjectCardToPlay(this, playableCards));
     }
 
-    const coloniesTradeAction = ColoniesHandler.coloniesTradeAction(this);
+    const coloniesTradeAction = this.colonies.coloniesTradeAction();
     if (coloniesTradeAction !== undefined) {
       action.options.push(coloniesTradeAction);
     }
@@ -1849,13 +1829,14 @@ export class Player {
       draftedCards: this.draftedCards.map((c) => c.name),
       cardCost: this.cardCost,
       needsToDraft: this.needsToDraft,
-      cardDiscount: this.cardDiscount,
+      cardDiscount: this.colonies.cardDiscount,
       // Colonies
-      fleetSize: this.fleetSize,
-      tradesThisTurn: this.tradesThisGeneration,
-      colonyTradeOffset: this.colonyTradeOffset,
-      colonyTradeDiscount: this.colonyTradeDiscount,
-      colonyVictoryPoints: this.colonyVictoryPoints,
+      // TODO(kberg): consider a ColoniesSerializer or something.
+      fleetSize: this.colonies.getFleetSize(),
+      tradesThisTurn: this.colonies.tradesThisGeneration,
+      colonyTradeOffset: this.colonies.tradeOffset,
+      colonyTradeDiscount: this.colonies.tradeDiscount,
+      colonyVictoryPoints: this.colonies.victoryPoints,
       // Turmoil
       turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
       politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
@@ -1895,17 +1876,17 @@ export class Player {
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.cardCost = d.cardCost;
-    player.cardDiscount = d.cardDiscount;
-    player.colonyTradeDiscount = d.colonyTradeDiscount;
-    player.colonyTradeOffset = d.colonyTradeOffset;
-    player.colonyVictoryPoints = d.colonyVictoryPoints;
+    player.colonies.cardDiscount = d.cardDiscount;
+    player.colonies.tradeDiscount = d.colonyTradeDiscount;
+    player.colonies.tradeOffset = d.colonyTradeOffset;
+    player.colonies.victoryPoints = d.colonyVictoryPoints;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     // TODO(kberg): delete this conditional by 2022-06-01
     if (!player.victoryPointsByGeneration) {
       player.victoryPointsByGeneration = new Array(game.generation).fill(0);
     }
     player.energy = d.energy;
-    player.fleetSize = d.fleetSize;
+    player.colonies.setFleetSize(d.fleetSize);
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
@@ -1931,7 +1912,7 @@ export class Player {
     player.titanium = d.titanium;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
-    player.tradesThisGeneration = d.tradesThisTurn;
+    player.colonies.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 
@@ -1990,18 +1971,6 @@ export class Player {
     player.timer = Timer.deserialize(d.timer);
 
     return player;
-  }
-
-  public getFleetSize(): number {
-    return this.fleetSize;
-  }
-
-  public increaseFleetSize(): void {
-    if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
-  }
-
-  public decreaseFleetSize(): void {
-    if (this.fleetSize > 0) this.fleetSize--;
   }
 
   /* Shorthand for deferring things */

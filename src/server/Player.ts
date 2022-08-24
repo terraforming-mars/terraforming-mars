@@ -797,26 +797,6 @@ export class Player {
     }
   }
 
-  public isPayment(obj: unknown): obj is Payment {
-    if (typeof obj !== 'object') return false;
-    if (!obj) return false;
-    const h = obj as Payment; // Still might not be Payment, but h is does not escape this method.
-    return PAYMENT_KEYS.every((key) =>
-      h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
-  }
-
-  public parsePaymentJSON(json: string): Payment {
-    try {
-      const payment: unknown = JSON.parse(json);
-      if (!this.isPayment(payment)) {
-        throw new Error('does not match interface');
-      }
-      return payment;
-    } catch (err) {
-      throw new Error('Unable to parse HowToPay input ' + err);
-    }
-  }
-
   public runInput(input: InputResponse, pi: PlayerInput): void {
     this.deferInputCb(pi.process(input, this));
   }
@@ -1127,14 +1107,6 @@ export class Player {
       throw new Error('Did not spend enough to pay for card');
     }
     return this.playCard(selectedCard, payment, cardAction);
-  }
-
-  public getPlayProjectCardInput(cards: Array<IProjectCard> = this.getPlayableCards(), cardAction: CardAction = 'add') {
-    return new SelectProjectCardToPlay(
-      this,
-      cards,
-      (selectedCard, payment) => this.checkPaymentAndPlayCard(selectedCard, payment, cardAction),
-    );
   }
 
   public getSpendableMicrobes(): number {
@@ -1787,7 +1759,8 @@ export class Player {
 
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(this.getPlayProjectCardInput(playableCards));
+      action.options.push(
+        new SelectProjectCardToPlay(this, playableCards));
     }
 
     const coloniesTradeAction = this.colonies.coloniesTradeAction();

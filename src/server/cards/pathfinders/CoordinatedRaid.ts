@@ -29,7 +29,7 @@ export class CoordinatedRaid extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.getFleetSize() > player.tradesThisGeneration;
+    return player.colonies.getFleetSize() > player.colonies.tradesThisGeneration;
   }
 
   public play(player: Player) {

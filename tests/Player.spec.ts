@@ -269,7 +269,7 @@ describe('Player', function() {
     const newPlayer = Player.deserialize(json, {generation: 1} as SerializedGame);
 
     expect(newPlayer.color).eq(Color.PURPLE);
-    expect(newPlayer.tradesThisGeneration).eq(100);
+    expect(newPlayer.colonies.tradesThisGeneration).eq(100);
   });
   it('pulls self replicating robots target cards', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');

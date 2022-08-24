@@ -32,11 +32,11 @@ export class SkyDocks extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.increaseFleetSize();
+    player.colonies.increaseFleetSize();
     return undefined;
   }
 
   public onDiscard(player: Player): void {
-    player.decreaseFleetSize();
+    player.colonies.decreaseFleetSize();
   }
 }

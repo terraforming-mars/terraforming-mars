@@ -25,11 +25,11 @@ export class CryoSleep extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.colonyTradeDiscount++;
+    player.colonies.tradeDiscount++;
     return undefined;
   }
 
   public onDiscard(player: Player): void {
-    player.colonyTradeDiscount--;
+    player.colonies.tradeDiscount--;
   }
 }

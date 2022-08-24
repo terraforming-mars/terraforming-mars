@@ -33,13 +33,13 @@ export class Gyropolis extends Card implements IProjectCard {
   }
   public override canPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
-    return player.getProduction(Resources.ENERGY) >= 2;
+    return player.production.energy >= 2;
   }
 
   public produce(player: Player) {
     const tags: Array<Tag> = [Tag.VENUS, Tag.EARTH];
-    player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, player.tags.multipleCount(tags), {log: true});
+    player.production.add(Resources.ENERGY, -2);
+    player.production.add(Resources.MEGACREDITS, player.tags.multipleCount(tags), {log: true});
   }
 
   public play(player: Player) {

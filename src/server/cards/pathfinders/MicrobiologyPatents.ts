@@ -28,7 +28,7 @@ export class MicrobiologyPatents extends Card implements IProjectCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tag.MICROBE)) {
-      player.addProduction(Resources.MEGACREDITS, 1, {log: true});
+      player.production.add(Resources.MEGACREDITS, 1, {log: true});
     }
   }
 

@@ -26,7 +26,7 @@ export class FloaterLeasing extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, Math.floor(player.getResourceCount(CardResource.FLOATER) / 3), {log: true});
+    player.production.add(Resources.MEGACREDITS, Math.floor(player.getResourceCount(CardResource.FLOATER) / 3), {log: true});
     return undefined;
   }
 }

@@ -59,7 +59,7 @@ export class MiningGuild extends Card implements ICorporationCard {
 
   public play(player: Player) {
     player.steel = 5;
-    player.addProduction(Resources.STEEL, 1);
+    player.production.add(Resources.STEEL, 1);
     return undefined;
   }
 }

@@ -36,7 +36,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return player.production.energy >= 1;
   }
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(CardResource.ANIMAL);
@@ -54,8 +54,8 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
         cards,
         ([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
-          player.addProduction(Resources.ENERGY, -1);
-          player.addProduction(Resources.MEGACREDITS, 2);
+          player.production.add(Resources.ENERGY, -1);
+          player.production.add(Resources.MEGACREDITS, 2);
           return undefined;
         },
       );
@@ -65,8 +65,8 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
       player.addResourceTo(cards[0], {qty: 2, log: true});
     }
 
-    player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.ENERGY, -1);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

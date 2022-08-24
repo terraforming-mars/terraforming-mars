@@ -25,7 +25,7 @@ export class VolcanicEruptions extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = turmoil.getPlayerInfluence(player);
       if (amount > 0) {
-        player.addProduction(Resources.HEAT, amount, {log: true, from: this.name});
+        player.production.add(Resources.HEAT, amount, {log: true, from: this.name});
       }
     });
   }

@@ -137,7 +137,7 @@ describe('LunaEcumenopolis', () => {
   //   game.phase = Phase.ACTION;
 
   //   // Card requirements
-  //   player.setProductionForTest({plants: 1});
+  //   player.production.override({plants: 1});
 
   //   testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
   //   moonData.colonyRate = 8;

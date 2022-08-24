@@ -43,8 +43,8 @@ export class AsteroidResources extends Card implements IProjectCard {
     const options = new OrOptions(
       new SelectOption('Increase your steel and titanium production 1 step.', 'Select', () => {
         player.deductUnits(this.reserveUnits);
-        player.addProduction(Resources.STEEL, 1, {log: true});
-        player.addProduction(Resources.TITANIUM, 1, {log: true});
+        player.production.add(Resources.STEEL, 1, {log: true});
+        player.production.add(Resources.TITANIUM, 1, {log: true});
         return undefined;
       }),
       new SelectOption('Place an ocean, and gain 2 steel and one titanium.', 'Select', () => {

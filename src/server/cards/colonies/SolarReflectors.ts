@@ -27,7 +27,7 @@ export class SolarReflectors extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 5);
+    player.production.add(Resources.HEAT, 5);
     return undefined;
   }
 }

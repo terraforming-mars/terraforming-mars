@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {IndustrialCenter} from '../../../src/server/cards/base/IndustrialCenter';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -28,7 +27,7 @@ describe('IndustrialCenter', function() {
     card.action(player);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
   });
 
   it('Should play', function() {

@@ -17,12 +17,12 @@ describe('FoodFactory', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.plants).to.eq(0);
+    expect(player.production.megacredits).to.eq(4);
 
     expect(card.getVictoryPoints()).to.eq(1);
   });

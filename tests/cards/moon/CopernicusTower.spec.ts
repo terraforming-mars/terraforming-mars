@@ -21,10 +21,10 @@ describe('CopernicusTower', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    player.setProductionForTest({titanium: 2});
+    player.production.override({titanium: 2});
     expect(player.getPlayableCards()).does.include(card);
 
-    player.setProductionForTest({titanium: 1});
+    player.production.override({titanium: 1});
     expect(player.getPlayableCards()).does.not.include(card);
   });
 

@@ -23,7 +23,7 @@ export class AntidesertificationTechniques extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox, {log: true});
+    player.production.adjust(this.productionBox, {log: true});
     player.addResource(Resources.MEGACREDITS, 5);
     return undefined;
   }

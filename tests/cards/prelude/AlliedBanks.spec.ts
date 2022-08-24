@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AlliedBanks', function() {
@@ -10,6 +9,6 @@ describe('AlliedBanks', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.megaCredits).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
 });

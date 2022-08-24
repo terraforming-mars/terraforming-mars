@@ -24,21 +24,21 @@ describe('CommunicationCenter', function() {
   it('canPlay', () => {
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
 
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', () => {
     card.resourceCount = 0;
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
 
     expect(card.play(player));
 
     runAllActions(game);
 
     expect(card.resourceCount).eq(2);
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.energy).eq(1);
   });
 
   it('onCardPlayed', () => {

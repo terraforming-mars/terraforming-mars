@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {BasicInfrastructure} from '../../../src/server/cards/moon/BasicInfrastructure';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -25,7 +24,7 @@ describe('BasicInfrastructure', () => {
   });
 
   it('play', () => {
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
     expect(player.colonies.getFleetSize()).eq(1);

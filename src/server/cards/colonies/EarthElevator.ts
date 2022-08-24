@@ -27,7 +27,7 @@ export class EarthElevator extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, 3);
+    player.production.add(Resources.TITANIUM, 3);
     return undefined;
   }
 }

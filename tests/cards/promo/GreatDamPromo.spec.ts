@@ -3,7 +3,6 @@ import {GreatDamPromo} from '../../../src/server/cards/promo/GreatDamPromo';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -28,7 +27,7 @@ describe('GreatDamPromo', function() {
 
     const action = card.play(player);
     expect(action).instanceOf(SelectSpace);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 
@@ -37,7 +36,7 @@ describe('GreatDamPromo', function() {
 
     const action = card.play(player);
     expect(action).instanceOf(SelectSpace);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

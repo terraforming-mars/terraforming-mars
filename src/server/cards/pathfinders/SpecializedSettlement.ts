@@ -37,7 +37,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   public bonusResource?: Array<Resources>;
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 &&
+    return player.production.energy >= 1 &&
       player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
@@ -80,7 +80,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
           player, bonusResources,
           'Select a resource to gain 1 unit of production',
           (resource) => {
-            player.addProduction(resource, 1, {log: true});
+            player.production.add(resource, 1, {log: true});
             this.bonusResource = [resource];
           },
         ));
@@ -92,13 +92,13 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   public produce(player: Player) {
     this.defaultProduce(player);
     if (this.bonusResource && this.bonusResource.length === 1) {
-      player.addProduction(this.bonusResource[0], 1, {log: true});
+      player.production.add(this.bonusResource[0], 1, {log: true});
     }
   }
 
   private defaultProduce(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.ENERGY, -1);
+    player.production.add(Resources.MEGACREDITS, 3);
   }
 
   public produceForTile(player: Player, bonusResources: Array<Resources>) {
@@ -108,7 +108,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
       player, bonusResources,
       'Select a resource to gain 1 unit of production',
       (resource) => {
-        player.addProduction(resource, 1, {log: true});
+        player.production.add(resource, 1, {log: true});
         this.bonusResource = [resource];
       },
     ));

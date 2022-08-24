@@ -6,7 +6,6 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
-import {Resources} from '../../../src/common/Resources';
 
 describe('MartianInsuranceGroup', function() {
   let card: MartianInsuranceGroup;
@@ -24,19 +23,19 @@ describe('MartianInsuranceGroup', function() {
 
   it('when you play an event', function() {
     const event = fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
     player.playCard(event);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(1);
+    expect(player2.production.megacredits).eq(0);
   });
 
   it('when opponent plays an event', function() {
     const event = fakeCard({name: 'A' as CardName, cardType: CardType.EVENT});
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
     player2.playCard(event);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
   });
 });

@@ -30,7 +30,7 @@ export class SpaceHotels extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 4);
+    player.production.add(Resources.MEGACREDITS, 4);
     return undefined;
   }
 }

@@ -24,7 +24,7 @@ export class HydrogenBombardment extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.addResource(Resources.MEGACREDITS, this.startingMegaCredits);
     player.game.increaseVenusScaleLevel(player, 1);
     return undefined;

@@ -28,7 +28,7 @@ export class MarketingExperts extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

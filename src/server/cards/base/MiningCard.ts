@@ -66,7 +66,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
 
   public produce(player: Player) {
     if (this.bonusResource && this.bonusResource.length === 1) {
-      player.addProduction(this.bonusResource[0], 1, {log: true});
+      player.production.add(this.bonusResource[0], 1, {log: true});
     }
   }
 
@@ -84,7 +84,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
         player, bonusResources,
         'Select a resource to gain 1 unit of production',
         (resource) => {
-          player.addProduction(resource, 1, {log: true});
+          player.production.add(resource, 1, {log: true});
           this.bonusResource = [resource];
           const spaceBonus = resource === Resources.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
           player.game.addTile(player, space.spaceType, space, {tileType: this.getTileType(spaceBonus)});

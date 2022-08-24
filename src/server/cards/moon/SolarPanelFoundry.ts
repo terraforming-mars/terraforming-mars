@@ -36,7 +36,7 @@ export class SolarPanelFoundry extends Card implements IActionCard, IProjectCard
 
   public action(player: Player) {
     player.deductResource(Resources.STEEL, 2);
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     return undefined;
   }
 }

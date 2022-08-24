@@ -10,7 +10,6 @@ import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
@@ -31,7 +30,7 @@ describe('Playwrights', () => {
   });
 
   it('Cannot act without any played events', () => {
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.energy).eq(1);
     expect(card.canAct(player)).is.not.true;
   });
 

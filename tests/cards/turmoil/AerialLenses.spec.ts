@@ -3,7 +3,6 @@ import {AerialLenses} from '../../../src/server/cards/turmoil/AerialLenses';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -33,7 +32,7 @@ describe('AerialLenses', function() {
 
   it('Should play without plants', function() {
     card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });
@@ -41,7 +40,7 @@ describe('AerialLenses', function() {
   it('Should play with plants', function() {
     player2.plants = 5;
     card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);

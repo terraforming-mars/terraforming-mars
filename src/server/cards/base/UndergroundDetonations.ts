@@ -32,7 +32,7 @@ export class UndergroundDetonations extends Card implements IActionCard, IProjec
   }
   public action(player: Player) {
     player.game.defer(new SelectPaymentDeferred(player, 10, {title: 'Select how to pay for action'}));
-    player.addProduction(Resources.HEAT, 2);
+    player.production.add(Resources.HEAT, 2);
     return undefined;
   }
   public play() {

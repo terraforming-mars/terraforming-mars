@@ -3,7 +3,6 @@ import {DeepWellHeating} from '../../../src/server/cards/base/DeepWellHeating';
 import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {ParliamentHall} from '../../../src/server/cards/turmoil/ParliamentHall';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -25,6 +24,6 @@ describe('ParliamentHall', function() {
 
     player.playedCards.push(card2, card3);
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

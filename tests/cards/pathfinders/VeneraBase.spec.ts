@@ -47,14 +47,14 @@ describe('VeneraBase', function() {
   });
 
   it('play', function() {
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     const space = game.board.getSpace(SpaceName.VENERA_BASE);
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
 
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(space.player?.id).eq(player.id);
   });

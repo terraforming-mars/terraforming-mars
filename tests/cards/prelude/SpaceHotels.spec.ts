@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SpaceHotels', function() {
@@ -23,6 +22,6 @@ describe('SpaceHotels', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
 });

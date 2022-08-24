@@ -1,6 +1,5 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
 
 export class Thermalist implements IAward {
   public name: string = 'Thermalist';
@@ -9,7 +8,7 @@ export class Thermalist implements IAward {
     if (player.game.isDoneWithFinalProduction()) {
       return player.heat;
     } else {
-      return player.energy + player.heat + player.getProduction(Resources.HEAT);
+      return player.energy + player.heat + player.production.heat;
     }
   }
 }

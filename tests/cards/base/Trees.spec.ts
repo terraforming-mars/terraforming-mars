@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Trees} from '../../../src/server/cards/base/Trees';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('Trees', function() {
   let card: Trees;
@@ -25,7 +24,7 @@ describe('Trees', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(3);
+    expect(player.production.plants).to.eq(3);
     expect(player.plants).to.eq(1);
 
     expect(card.getVictoryPoints()).to.eq(1);

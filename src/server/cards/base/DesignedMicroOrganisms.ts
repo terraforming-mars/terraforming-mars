@@ -29,7 +29,7 @@ export class DesignedMicroOrganisms extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.PLANTS, 2);
     return undefined;
   }
 }

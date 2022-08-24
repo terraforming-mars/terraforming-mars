@@ -53,6 +53,6 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
     player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonMineTile(player));
-    player.addProduction(Resources.STEEL, 1, {log: true});
+    player.production.add(Resources.STEEL, 1, {log: true});
   }
 }

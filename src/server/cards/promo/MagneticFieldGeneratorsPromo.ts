@@ -36,14 +36,14 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
+    const meetsEnergyRequirements = player.production.energy >= 4;
     const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
 
     return meetsEnergyRequirements && canPlaceTile;
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -4);
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.ENERGY, -4);
+    player.production.add(Resources.PLANTS, 2);
     player.increaseTerraformRatingSteps(3);
 
     const availableSpaces = player.game.board.getAvailableSpacesOnLand(player);

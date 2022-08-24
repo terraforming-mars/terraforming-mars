@@ -34,12 +34,12 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 4;
+    return player.production.energy >= 4;
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -4);
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.ENERGY, -4);
+    player.production.add(Resources.PLANTS, 2);
     player.increaseTerraformRatingSteps(3);
     return undefined;
   }

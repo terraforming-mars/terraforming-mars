@@ -26,7 +26,7 @@ describe('Pollinators', function() {
 
   it('play', () => {
     card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.of({plants: 1, megacredits: 2}));
+    expect(player.production.asUnits()).deep.eq(Units.of({plants: 1, megacredits: 2}));
   });
 
   it('act', () => {

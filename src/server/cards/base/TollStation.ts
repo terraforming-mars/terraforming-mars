@@ -32,7 +32,7 @@ export class TollStation extends Card implements IProjectCard {
       .filter((aPlayer) => aPlayer !== player)
       .map((opponent) => opponent.tags.count(Tag.SPACE, 'raw'))
       .reduce((a, c) => a + c, 0);
-    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
+    player.production.add(Resources.MEGACREDITS, amount, {log: true});
     return undefined;
   }
 }

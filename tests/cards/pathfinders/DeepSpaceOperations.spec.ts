@@ -20,7 +20,7 @@ describe('DeepSpaceOperations', function() {
   it('Should play', function() {
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     expect(player.titanium).eq(4);
 
     expect(player.cardsInHand).has.lengthOf(2);

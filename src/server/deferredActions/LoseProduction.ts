@@ -23,7 +23,7 @@ export class LoseProduction extends DeferredAction {
     } else if (this.options.count === 0) {
       return undefined;
     }
-    this.player.addProduction(this.resource, -this.options.count);
+    this.player.production.add(this.resource, -this.options.count);
     return undefined;
   }
 }

@@ -45,11 +45,11 @@ export class EarlyExpedition extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player) {
-    return player.canAdjustProduction(this.productionBox) && this.getAvailableSpaces(player).length > 0;
+    return player.production.canAdjust(this.productionBox) && this.getAvailableSpaces(player).length > 0;
   }
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
 
     return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {

@@ -60,7 +60,7 @@ export class CuriosityII extends Card implements ICorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL, 2);
+    player.production.add(Resources.STEEL, 2);
     return undefined;
   }
 

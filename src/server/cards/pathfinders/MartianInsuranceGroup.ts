@@ -34,13 +34,13 @@ export class MartianInsuranceGroup extends Card implements ICorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
     if (player.isCorporation(this.name) && card.cardType === CardType.EVENT) {
-      player.addProduction(Resources.MEGACREDITS, 1, {log: true});
+      player.production.add(Resources.MEGACREDITS, 1, {log: true});
     }
   }
 }

@@ -49,7 +49,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.production.add(Resources.MEGACREDITS, 3);
     player.game.addCityTile(player, SpaceName.VENERA_BASE, SpaceType.COLONY);
     return undefined;
   }

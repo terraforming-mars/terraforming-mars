@@ -25,11 +25,11 @@ export class Sabotage extends GlobalEvent implements IGlobalEvent {
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       // This conditional isn't to prevent negative production, but to prevent misleading logging when the production diff is zero.
-      if (player.getProduction(Resources.ENERGY) >= 1) {
-        player.addProduction(Resources.ENERGY, -1, {log: true, from: this.name});
+      if (player.production.energy >= 1) {
+        player.production.add(Resources.ENERGY, -1, {log: true, from: this.name});
       }
-      if (player.getProduction(Resources.STEEL) >= 1) {
-        player.addProduction(Resources.STEEL, -1, {log: true, from: this.name});
+      if (player.production.steel >= 1) {
+        player.production.add(Resources.STEEL, -1, {log: true, from: this.name});
       }
       player.addResource(Resources.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });

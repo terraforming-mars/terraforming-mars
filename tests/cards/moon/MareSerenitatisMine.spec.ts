@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {MoonSpaces} from '../../../src/server/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
@@ -33,8 +32,8 @@ describe('MareSerenitatisMine', () => {
   it('play', () => {
     player.titanium = 3;
     player.steel = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
-    expect(player.getProduction(Resources.TITANIUM)).eq(0);
+    expect(player.production.steel).eq(0);
+    expect(player.production.titanium).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
@@ -42,8 +41,8 @@ describe('MareSerenitatisMine', () => {
 
     expect(player.titanium).eq(1);
     expect(player.steel).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
-    expect(player.getProduction(Resources.TITANIUM)).eq(1);
+    expect(player.production.steel).eq(1);
+    expect(player.production.titanium).eq(1);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 

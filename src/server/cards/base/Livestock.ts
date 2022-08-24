@@ -44,11 +44,11 @@ export class Livestock extends Card implements IActionCard, IProjectCard {
 
   public override resourceCount = 0;
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.PLANTS) >= 1;
+    return player.production.plants >= 1;
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, -1);
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.PLANTS, -1);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
   public canAct(): boolean {

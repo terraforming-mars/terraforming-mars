@@ -35,18 +35,18 @@ describe('RobinsonIndustries', function() {
 
     result.options[1].cb();
     runAllActions(game);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
     expect(player.megaCredits).to.eq(0);
   });
 
   it('Only allows to choose from lowest production(s)', function() {
-    player.addProduction(Resources.MEGACREDITS, -1);
+    player.production.add(Resources.MEGACREDITS, -1);
     let result = cast(card.action(player), OrOptions);
     expect(result.options).has.lengthOf(1);
 
-    player.addProduction(Resources.MEGACREDITS, 5);
-    player.addProduction(Resources.TITANIUM, 1);
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.MEGACREDITS, 5);
+    player.production.add(Resources.TITANIUM, 1);
+    player.production.add(Resources.PLANTS, 2);
 
     result = cast(card.action(player), OrOptions);
     expect(result.options).has.lengthOf(3);
@@ -71,7 +71,7 @@ describe('RobinsonIndustries', function() {
     runAllActions(game);
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 2, heat: 2});
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
   });

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {EcoLine} from '../../../src/server/cards/corporation/EcoLine';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {ConvertPlants} from '../../../src/server/cards/base/standardActions/ConvertPlants';
 import {Game} from '../../../src/server/Game';
@@ -12,7 +11,7 @@ describe('EcoLine', function() {
     Game.newInstance('gameid', [player], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.plants).to.eq(2);
     expect(player.plants).to.eq(3);
     expect(player.plantsNeededForGreenery).to.eq(7);
 

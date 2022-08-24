@@ -29,20 +29,20 @@ describe('Fish', function() {
 
   it('Should play - auto select if single target', function() {
     (game as any).temperature = 2;
-    player2.addProduction(Resources.PLANTS, 1);
+    player2.production.add(Resources.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
 
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
-    expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
+    expect(player2.production.plants).to.eq(0);
   });
 
   it('Should play - multiple targets', function() {
     (game as any).temperature = 2;
-    player.addProduction(Resources.PLANTS, 1);
-    player2.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
+    player2.production.add(Resources.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
@@ -50,7 +50,7 @@ describe('Fish', function() {
     expect(game.deferredActions).has.lengthOf(1);
     const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
-    expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
+    expect(player2.production.plants).to.eq(0);
   });
 
   it('Should give victory points', function() {

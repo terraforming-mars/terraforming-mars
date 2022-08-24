@@ -32,13 +32,13 @@ export class StripMine extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2;
+    return player.production.energy >= 2;
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.STEEL, 2);
-    player.addProduction(Resources.TITANIUM, 1);
+    player.production.add(Resources.ENERGY, -2);
+    player.production.add(Resources.STEEL, 2);
+    player.production.add(Resources.TITANIUM, 1);
     return player.game.increaseOxygenLevel(player, 2);
   }
 }

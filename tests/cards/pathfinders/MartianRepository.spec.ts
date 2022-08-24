@@ -18,14 +18,14 @@ describe('MartianRepository', function() {
 
   it('can play', function() {
     expect(player.canPlayIgnoringCost(card)).is.false;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', function() {
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
   });
 
   it('effect', function() {

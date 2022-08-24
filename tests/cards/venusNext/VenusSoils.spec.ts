@@ -5,7 +5,6 @@ import {VenusSoils} from '../../../src/server/cards/venusNext/VenusSoils';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusSoils', function() {
@@ -26,7 +25,7 @@ describe('VenusSoils', function() {
     card.play(player);
 
     expect(card2.resourceCount).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
@@ -40,7 +39,7 @@ describe('VenusSoils', function() {
 
         action!.cb([card2]);
         expect(card2.resourceCount).to.eq(2);
-        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+        expect(player.production.plants).to.eq(1);
         expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

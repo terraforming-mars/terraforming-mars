@@ -20,7 +20,7 @@ describe('Manutech', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
     expect(player.steel).to.eq(1);
   });
 

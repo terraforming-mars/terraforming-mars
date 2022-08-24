@@ -40,7 +40,7 @@ export class NewVenice extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.plants -= 2;
 
     return new SelectSpace(

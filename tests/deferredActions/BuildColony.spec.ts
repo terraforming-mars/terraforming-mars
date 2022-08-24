@@ -5,7 +5,6 @@ import {TestPlayer} from '../TestPlayer';
 import {cast} from '../TestingUtils';
 import {getTestPlayers, newTestGame} from '../TestGame';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
-import {Resources} from '../../src/common/Resources';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {ColoniesHandler} from '../../src/server/colonies/ColoniesHandler';
 
@@ -42,7 +41,7 @@ describe('BuildColony', function() {
 
     selectColony.cb(selectColony.colonies[0]);
 
-    expect(player.getProduction(Resources.PLANTS)).eq(1);
+    expect(player.production.plants).eq(1);
     expect(ganymede.colonies).deep.eq([player.id]);
   });
 
@@ -88,7 +87,7 @@ describe('BuildColony', function() {
 
     selectColony.cb(selectColony.colonies[0]);
 
-    expect(player.getProduction(Resources.PLANTS)).eq(1);
+    expect(player.production.plants).eq(1);
     expect(ganymede.colonies).deep.eq([player.id, player.id]);
   });
 });

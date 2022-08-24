@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Biofuels} from '../../../src/server/cards/prelude/Biofuels';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Biofuels', function() {
@@ -9,8 +8,8 @@ describe('Biofuels', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(player.plants).to.eq(2);
   });
 });

@@ -33,7 +33,7 @@ export class LunarTradeFleet extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1, {log: true});
+    player.production.add(Resources.MEGACREDITS, 1, {log: true});
     MoonExpansion.raiseLogisticRate(player);
     return undefined;
   }

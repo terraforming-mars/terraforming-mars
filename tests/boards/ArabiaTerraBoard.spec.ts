@@ -13,7 +13,6 @@ import {BoardName} from '../../src/common/boards/BoardName';
 import {ProcessorFactory} from '../../src/server/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/server/cards/base/SearchForLife';
 import {Decomposers} from '../../src/server/cards/base/Decomposers';
-import {Resources} from '../../src/common/Resources';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
@@ -76,12 +75,12 @@ describe('ArabiaTerraBoard', function() {
 
   it('Grants energy production bonus', () => {
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.ENERGY_PRODUCTION))!;
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.CITY});
     runAllActions(game);
 
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.energy).eq(1);
   });
 
   it('Grants microbe bonus', () => {

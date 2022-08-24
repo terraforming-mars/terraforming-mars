@@ -5,7 +5,6 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {cast} from '../../TestingUtils';
 
 describe('EosChasmaNationalPark', () => {
@@ -42,7 +41,7 @@ describe('EosChasmaNationalPark', () => {
 
     expect(birds.resourceCount).to.eq(1);
     expect(player.plants).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);
     expect(player.getVictoryPoints().victoryPoints).to.eq(2);
@@ -61,7 +60,7 @@ describe('EosChasmaNationalPark', () => {
 
     expect(birds.resourceCount).to.eq(1);
     expect(player.plants).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);
     expect(player.getVictoryPoints().victoryPoints).to.eq(2);

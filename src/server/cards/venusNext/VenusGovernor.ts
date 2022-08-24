@@ -27,7 +27,7 @@ export class VenusGovernor extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

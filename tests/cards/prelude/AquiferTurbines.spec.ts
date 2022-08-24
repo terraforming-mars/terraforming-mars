@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {AquiferTurbines} from '../../../src/server/cards/prelude/AquiferTurbines';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AquiferTurbines', function() {
@@ -31,7 +30,7 @@ describe('AquiferTurbines', function() {
     // SelectPaymentDeferred
     game.deferredActions.runNext();
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.energy).to.eq(2);
     expect(player.megaCredits).to.eq(0);
   });
 });

@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Windmills} from '../../../src/server/cards/base/Windmills';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('Windmills', function() {
   let card: Windmills;
@@ -25,7 +24,7 @@ describe('Windmills', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

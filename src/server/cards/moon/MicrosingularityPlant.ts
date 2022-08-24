@@ -29,7 +29,7 @@ export class MicrosingularityPlant extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 2, {log: true});
+    player.production.add(Resources.ENERGY, 2, {log: true});
     return undefined;
   }
 }

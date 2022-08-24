@@ -26,7 +26,7 @@ export class Advertising extends Card implements IProjectCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.cost >= 20) {
-      player.addProduction(Resources.MEGACREDITS, 1);
+      player.production.add(Resources.MEGACREDITS, 1);
     }
   }
 

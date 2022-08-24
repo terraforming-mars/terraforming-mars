@@ -43,8 +43,8 @@ export class FieldCappedCity extends Card implements IProjectCard {
       (space: ISpace) => {
         player.game.addCityTile(player, space.id);
         player.plants += 3;
-        player.addProduction(Resources.ENERGY, 1);
-        player.addProduction(Resources.MEGACREDITS, 2);
+        player.production.add(Resources.ENERGY, 1);
+        player.production.add(Resources.MEGACREDITS, 2);
         return undefined;
       },
     );

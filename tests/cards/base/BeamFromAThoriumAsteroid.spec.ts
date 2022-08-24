@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {BeamFromAThoriumAsteroid} from '../../../src/server/cards/base/BeamFromAThoriumAsteroid';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('BeamFromAThoriumAsteroid', function() {
   let card: BeamFromAThoriumAsteroid;
@@ -21,8 +20,8 @@ describe('BeamFromAThoriumAsteroid', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(3);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(3);
+    expect(player.production.heat).to.eq(3);
+    expect(player.production.energy).to.eq(3);
 
     expect(card.getVictoryPoints()).to.eq(1);
   });

@@ -4,7 +4,6 @@ import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
@@ -189,12 +188,12 @@ export class AresHandler {
 
     // Make this more sophisticated, a player can pay for different adjacencies
     // with different production units, and, a severe hazard can't split payments.
-    const availableProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5) +
-            player.getProduction(Resources.STEEL) +
-            player.getProduction(Resources.TITANIUM) +
-            player.getProduction(Resources.PLANTS) +
-            player.getProduction(Resources.ENERGY) +
-            player.getProduction(Resources.HEAT);
+    const availableProductionUnits = (player.production.megacredits + 5) +
+            player.production.steel +
+            player.production.titanium +
+            player.production.plants +
+            player.production.energy +
+            player.production.heat;
 
     if (availableProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
       return cost;

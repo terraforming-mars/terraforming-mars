@@ -25,7 +25,7 @@ export class AlliedBanks extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.megaCredits += this.startingMegaCredits;
     return undefined;
   }

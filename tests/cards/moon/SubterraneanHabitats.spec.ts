@@ -49,7 +49,7 @@ describe('SubterraneanHabitats', () => {
   it('effect', () => {
     // This test and the next show that The Womb needs 2 titanium.
     const theWomb = new TheWomb();
-    player.setProductionForTest({energy: 2});
+    player.production.override({energy: 2});
     player.titanium = 2;
     player.megaCredits = 1000;
 

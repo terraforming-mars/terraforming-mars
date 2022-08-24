@@ -31,7 +31,7 @@ export class InterplanetaryTransport extends Card implements IProjectCard {
 
   public play(player: Player) {
     const offWorldCities = player.game.board.getSpaces(SpaceType.COLONY, player).filter((space) => space.tile?.tileType === TileType.CITY);
-    player.addProduction(Resources.MEGACREDITS, offWorldCities.length, {log: true});
+    player.production.add(Resources.MEGACREDITS, offWorldCities.length, {log: true});
     return undefined;
   }
 }

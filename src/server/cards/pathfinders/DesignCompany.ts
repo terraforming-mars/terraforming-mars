@@ -23,7 +23,7 @@ export class DesignCompany extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox, {log: true});
+    player.production.adjust(this.productionBox, {log: true});
     player.drawCard(3, {tag: Tag.BUILDING});
     return undefined;
   }

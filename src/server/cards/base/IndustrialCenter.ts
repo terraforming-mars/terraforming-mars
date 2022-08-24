@@ -58,7 +58,7 @@ export class IndustrialCenter extends Card implements IActionCard, IProjectCard 
   }
   public action(player: Player) {
     player.game.defer(new SelectPaymentDeferred(player, 7, {title: 'Select how to pay for action'}));
-    player.addProduction(Resources.STEEL, 1);
+    player.production.add(Resources.STEEL, 1);
     return undefined;
   }
 }

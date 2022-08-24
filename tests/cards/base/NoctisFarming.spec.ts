@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('NoctisFarming', function() {
   let card: NoctisFarming;
@@ -25,7 +24,7 @@ describe('NoctisFarming', function() {
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.plants).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);

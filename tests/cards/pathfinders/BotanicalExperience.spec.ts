@@ -51,19 +51,19 @@ describe('BotanicalExperience', function() {
     card.onTilePlaced(player, player, space);
     expect(card.resourceCount).eq(2);
 
-    expect(player.getProduction(Resources.PLANTS)).eq(0);
+    expect(player.production.plants).eq(0);
     space.tile = {tileType: TileType.GREENERY};
     card.onTilePlaced(player, player, space);
     expect(card.resourceCount).eq(0);
-    expect(player.getProduction(Resources.PLANTS)).eq(1);
+    expect(player.production.plants).eq(1);
   });
 
   it('card.addResourceTo', () => {
     card.resourceCount = 2;
-    expect(player.getProduction(Resources.PLANTS)).eq(0);
+    expect(player.production.plants).eq(0);
     player.addResourceTo(card, 8);
     expect(card.resourceCount).eq(1);
-    expect(player.getProduction(Resources.PLANTS)).eq(3);
+    expect(player.production.plants).eq(3);
   });
 
   it('targeted to remove plants', () => {

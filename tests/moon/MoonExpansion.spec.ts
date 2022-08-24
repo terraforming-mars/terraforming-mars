@@ -9,7 +9,6 @@ import {Game} from '../../src/server/Game';
 import {IMoonData} from '../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
-import {Resources} from '../../src/common/Resources';
 import {SpaceName} from '../../src/server/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {setCustomGameOptions} from '../TestingUtils';
@@ -141,9 +140,9 @@ describe('MoonExpansion', () => {
 
   it('Raise mining rate bonus 5-6', () => {
     moonData.miningRate = 5;
-    player.setProductionForTest({titanium: 0});
+    player.production.override({titanium: 0});
     MoonExpansion.raiseMiningRate(player, 1);
-    expect(player.getProduction(Resources.TITANIUM)).eq(1);
+    expect(player.production.titanium).eq(1);
   });
 
   it('Raise logistic rate bonus 2-3', () => {
@@ -155,9 +154,9 @@ describe('MoonExpansion', () => {
 
   it('Raise logistic rate bonus 5-6', () => {
     moonData.logisticRate = 5;
-    player.setProductionForTest({steel: 0});
+    player.production.override({steel: 0});
     MoonExpansion.raiseLogisticRate(player, 1);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
+    expect(player.production.steel).eq(1);
   });
 
   it('Raise colony rate bonus 2-3', () => {
@@ -169,9 +168,9 @@ describe('MoonExpansion', () => {
 
   it('Raise colony rate bonus 5-6', () => {
     moonData.colonyRate = 5;
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     MoonExpansion.raiseColonyRate(player, 1);
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.energy).eq(1);
   });
 
   it('Moon parameters are global parameters', () => {

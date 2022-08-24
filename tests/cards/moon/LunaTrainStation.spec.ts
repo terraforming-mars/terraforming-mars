@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTrainStation} from '../../../src/server/cards/moon/LunaTrainStation';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/server/moon/PlaceSpecialMoonTile';
 
@@ -44,14 +43,14 @@ describe('LunaTrainStation', () => {
 
   it('play', () => {
     player.steel = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
+    expect(player.production.steel).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(4);
+    expect(player.production.megacredits).eq(4);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.logisticRate).eq(1);
 

@@ -67,7 +67,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
 
     const increaseMcProdOption = new SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step', 'Remove asteroid', () => {
       this.resourceCount--;
-      player.addProduction(Resources.MEGACREDITS, 1);
+      player.production.add(Resources.MEGACREDITS, 1);
       LogHelper.logRemoveResource(player, this, 1, 'increase M€ production 1 step');
       return undefined;
     });

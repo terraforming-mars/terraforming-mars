@@ -24,21 +24,21 @@ describe('LunarTradeFleet', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    player.setProductionForTest({titanium: 2});
+    player.production.override({titanium: 2});
     expect(player.getPlayableCards()).does.include(card);
 
-    player.setProductionForTest({titanium: 1});
+    player.production.override({titanium: 1});
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
     expect(player.getTerraformRating()).eq(14);
     moonData.logisticRate = 0;
 
     card.play(player);
 
-    player.setProductionForTest({megacredits: 2});
+    player.production.override({megacredits: 2});
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });

@@ -32,11 +32,11 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
     player.game.defer(new SimpleDeferredAction(player, () => {
       return new OrOptions(
         new SelectOption('Increase your steel production 2 steps', 'Increase', () => {
-          player.addProduction(Resources.STEEL, 2, {log: true});
+          player.production.add(Resources.STEEL, 2, {log: true});
           return undefined;
         }),
         new SelectOption('Increase your titanium production 1 step', 'Increase', () => {
-          player.addProduction(Resources.TITANIUM, 1, {log: true});
+          player.production.add(Resources.TITANIUM, 1, {log: true});
           return undefined;
         }));
     }));

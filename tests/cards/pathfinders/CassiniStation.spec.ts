@@ -40,22 +40,22 @@ describe('CassiniStation', function() {
     const colonyTile2 = new Mercury();
     game.colonies = [colonyTile1, colonyTile2];
     const options = card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 0}));
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 0}));
     expect(options).is.undefined;
 
     colonyTile1.colonies.push(player.id);
 
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 1}));
 
-    player.setProductionForTest(Units.EMPTY);
+    player.production.override(Units.EMPTY);
     colonyTile2.colonies.push(player.id);
     colonyTile2.colonies.push(getTestPlayer(game, 1).id);
 
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 3}));
   });
 
   it('play - one floater card', function() {

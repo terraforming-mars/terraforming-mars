@@ -26,7 +26,7 @@ describe('Gyropolis', function() {
     const card2 = new LunaGovernor();
 
     player.playedCards.push(card1, card2);
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
     const action = card.play(player) as SelectSpace;
     expect(action).is.not.undefined;
@@ -34,22 +34,22 @@ describe('Gyropolis', function() {
     expect(action.availableSpaces[0].player).to.eq(player);
     expect(action.availableSpaces[0].tile).is.not.undefined;
     expect(action.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(3);
   });
 
   it('Compatible with Moon Embassy', function() {
     player.playedCards = [new DeepLunarMining()];
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(0);
 
     player.playedCards = [new EarthEmbassy()];
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
 
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
     player.playedCards = [new DeepLunarMining(), new EarthEmbassy()];
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.megacredits).to.eq(3);
   });
 });

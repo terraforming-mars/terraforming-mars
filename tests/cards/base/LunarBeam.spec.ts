@@ -14,17 +14,17 @@ describe('LunarBeam', function() {
   });
 
   it('Can play', function() {
-    player.addProduction(Resources.MEGACREDITS, -4);
+    player.production.add(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
 
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.megacredits).to.eq(-2);
+    expect(player.production.heat).to.eq(2);
+    expect(player.production.energy).to.eq(2);
   });
 });

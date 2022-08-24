@@ -27,7 +27,7 @@ describe('FreyjaBiodomes', function() {
   });
 
   it('Can not play if Venus requirement not met', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 8;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
@@ -36,28 +36,28 @@ describe('FreyjaBiodomes', function() {
     const card2 = new Extremophiles();
     player.playedCards.push(card2);
 
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 10;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(2);
     expect(card2.resourceCount).to.eq(2);
   });
 
   it('Should play - multiple targets', function() {
     const card2 = new Extremophiles();
     const card3 = new VenusianAnimals();
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     player.playedCards.push(card2, card3);
 
     const action = card.play(player) as SelectCard<ICard>;
     expect(action).instanceOf(SelectCard);
 
     action.cb([card2]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(2);
     expect(card2.resourceCount).to.eq(2);
   });
 });

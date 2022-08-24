@@ -35,9 +35,9 @@ export class MonsInsurance extends Card implements ICorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 6);
+    player.production.add(Resources.MEGACREDITS, 6);
     for (const p of player.game.getPlayers()) {
-      p.addProduction(Resources.MEGACREDITS, -2, {log: true});
+      p.production.add(Resources.MEGACREDITS, -2, {log: true});
     }
     player.game.monsInsuranceOwner = player.id;
     return undefined;

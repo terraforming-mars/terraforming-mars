@@ -39,15 +39,15 @@ describe('Player', function() {
     const player2 = new Player('red', Color.RED, false, 0, 'p-red');
     const player3 = new Player('yellow', Color.YELLOW, false, 0, 'p-yellow');
     Game.newInstance('gameid', [player, player2, player3], player);
-    player2.addProduction(Resources.ENERGY, 2);
-    player3.addProduction(Resources.ENERGY, 2);
+    player2.production.add(Resources.ENERGY, 2);
+    player3.production.add(Resources.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
     const action = card.play(player); //  Game.newInstance('gameid', [player, player2, player3], player));
     if (action !== undefined) {
       player.setWaitingFor(action);
       player.process([[player2.id]]);
-      expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+      expect(player.production.energy).to.eq(1);
     }
   });
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
@@ -77,7 +77,7 @@ describe('Player', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const redPlayer = new Player('red', Color.RED, false, 0, 'p-red');
 
-    player.addProduction(Resources.HEAT, 2);
+    player.production.add(Resources.HEAT, 2);
     Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player); // Game.newInstance('gameid', [player, redPlayer], player));
     expect(action).is.not.undefined;
@@ -94,8 +94,8 @@ describe('Player', function() {
       player.process([['foobar']]);
     }).to.throw('Amount is not a number');
     player.process([['1']]);
-    expect(player.getProduction(Resources.HEAT)).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.heat).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.getWaitingFor()).is.undefined;
   });
   it('Runs SaturnSystems when other player plays card', function() {
@@ -104,10 +104,10 @@ describe('Player', function() {
     Game.newInstance('gto', [player1, player2], player1);
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
-    expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player1.production.megacredits).to.eq(0);
     player1.corporations = [corporationCard];
     player2.playCard(card, undefined);
-    expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player1.production.megacredits).to.eq(1);
   });
   it('Chains onend functions from player inputs', function(done) {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
@@ -503,12 +503,12 @@ describe('Player', function() {
   it('deduct production', () => {
     function asProductionUnits(player: Player): Units {
       return {
-        megacredits: player.getProduction(Resources.MEGACREDITS),
-        steel: player.getProduction(Resources.STEEL),
-        titanium: player.getProduction(Resources.TITANIUM),
-        plants: player.getProduction(Resources.PLANTS),
-        energy: player.getProduction(Resources.ENERGY),
-        heat: player.getProduction(Resources.HEAT),
+        megacredits: player.production.megacredits,
+        steel: player.production.steel,
+        titanium: player.production.titanium,
+        plants: player.production.plants,
+        energy: player.production.energy,
+        heat: player.production.heat,
       };
     }
 
@@ -523,14 +523,14 @@ describe('Player', function() {
       heat: 0,
     });
 
-    player.addProduction(Resources.MEGACREDITS, 20);
-    player.addProduction(Resources.STEEL, 19);
-    player.addProduction(Resources.TITANIUM, 18);
-    player.addProduction(Resources.PLANTS, 17);
-    player.addProduction(Resources.ENERGY, 16);
-    player.addProduction(Resources.HEAT, 15);
+    player.production.add(Resources.MEGACREDITS, 20);
+    player.production.add(Resources.STEEL, 19);
+    player.production.add(Resources.TITANIUM, 18);
+    player.production.add(Resources.PLANTS, 17);
+    player.production.add(Resources.ENERGY, 16);
+    player.production.add(Resources.HEAT, 15);
 
-    player.adjustProduction(Units.of({megacredits: -10}));
+    player.production.adjust(Units.of({megacredits: -10}));
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 19,
@@ -540,7 +540,7 @@ describe('Player', function() {
       heat: 15,
     });
 
-    player.adjustProduction(Units.of({steel: -10}));
+    player.production.adjust(Units.of({steel: -10}));
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -550,7 +550,7 @@ describe('Player', function() {
       heat: 15,
     });
 
-    player.adjustProduction(Units.of({titanium: -10}));
+    player.production.adjust(Units.of({titanium: -10}));
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -560,7 +560,7 @@ describe('Player', function() {
       heat: 15,
     });
 
-    player.adjustProduction(Units.of({plants: -10}));
+    player.production.adjust(Units.of({plants: -10}));
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -570,7 +570,7 @@ describe('Player', function() {
       heat: 15,
     });
 
-    player.adjustProduction(Units.of({energy: -10}));
+    player.production.adjust(Units.of({energy: -10}));
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -580,7 +580,7 @@ describe('Player', function() {
       heat: 15,
     });
 
-    player.adjustProduction(Units.of({heat: -10}));
+    player.production.adjust(Units.of({heat: -10}));
     expect(asProductionUnits(player)).deep.eq({
       megacredits: 10,
       steel: 9,
@@ -626,12 +626,12 @@ describe('Player', function() {
     const player2 = new Player('red', Color.RED, false, 0, 'p-red');
     const game = Game.newInstance('gameid', [player1, player2], player1);
     player1.megaCredits = 0;
-    player1.addProduction(Resources.MEGACREDITS, -5);
+    player1.production.add(Resources.MEGACREDITS, -5);
     player2.megaCredits = 3;
     game.monsInsuranceOwner = player2.id;
     player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
     expect(player2.megaCredits).eq(3);
-    player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    player1.production.add(Resources.MEGACREDITS, -3, {from: player2, log: false});
     expect(player2.megaCredits).eq(3);
   });
 

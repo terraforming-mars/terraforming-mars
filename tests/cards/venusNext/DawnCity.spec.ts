@@ -12,12 +12,12 @@ describe('DawnCity', function() {
     const redPlayer = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions();
     Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.titanium).to.eq(1);
   });
 });

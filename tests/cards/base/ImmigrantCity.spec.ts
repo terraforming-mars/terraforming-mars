@@ -24,56 +24,56 @@ describe('ImmigrantCity', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     const action = card.play(player);
     action.cb(action.availableSpaces[0]);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(-2);
     player.playedCards.push(card);
 
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     runNextAction(game);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+    expect(player.production.megacredits).to.eq(-1);
   });
 
   it('Can play at -4 M€ production', function() {
-    player.addProduction(Resources.ENERGY, 1);
-    player.addProduction(Resources.MEGACREDITS, -4);
+    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
     action.cb(action.availableSpaces[0]);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-5);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(-5);
     player.playedCards.push(card);
 
     // add another city tile
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     runNextAction(game);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-4);
+    expect(player.production.megacredits).to.eq(-4);
   });
 
   it('Tharsis can play at -5 M€ production', function() {
     player.setCorporationForTest(new TharsisRepublic());
-    player.addProduction(Resources.ENERGY, 1);
-    player.addProduction(Resources.MEGACREDITS, -5);
+    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
     action.cb(action.availableSpaces[0]);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-5); // should not increase
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(-5); // should not increase
     player.playedCards.push(card);
 
     // add another city tile - MC prod should increase by 2 (1 from Tharsis, 1 from IC)
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     runAllActions(game);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-3);
+    expect(player.production.megacredits).to.eq(-3);
   });
 });

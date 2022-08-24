@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CoronaExtractor', function() {
@@ -10,6 +9,6 @@ describe('CoronaExtractor', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.ENERGY)).to.eq(4);
+    expect(player.production.energy).to.eq(4);
   });
 });

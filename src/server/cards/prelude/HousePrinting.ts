@@ -28,7 +28,7 @@ export class HousePrinting extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
+    player.production.add(Resources.STEEL, 1);
     return undefined;
   }
 }

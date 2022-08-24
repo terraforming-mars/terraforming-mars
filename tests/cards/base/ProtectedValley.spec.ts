@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {ProtectedValley} from '../../../src/server/cards/base/ProtectedValley';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -15,7 +14,7 @@ describe('ProtectedValley', function() {
     expect(action).is.not.undefined;
     action.cb(action.availableSpaces[0]);
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.GREENERY);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
     expect(game.getOxygenLevel()).to.eq(1);
   });
 });

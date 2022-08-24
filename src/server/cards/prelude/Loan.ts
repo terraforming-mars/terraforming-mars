@@ -23,10 +23,10 @@ export class Loan extends PreludeCard implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) >= -3;
+    return player.production.megacredits >= -3;
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -2);
+    player.production.add(Resources.MEGACREDITS, -2);
     player.megaCredits += 30;
     return undefined;
   }

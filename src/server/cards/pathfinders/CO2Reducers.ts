@@ -23,7 +23,7 @@ export class CO2Reducers extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.drawCard(2, {tag: Tag.MICROBE});
     return undefined;
   }

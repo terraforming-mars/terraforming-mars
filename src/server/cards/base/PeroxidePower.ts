@@ -30,11 +30,11 @@ export class PeroxidePower extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) >= -4;
+    return player.production.megacredits >= -4;
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -1);
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.MEGACREDITS, -1);
+    player.production.add(Resources.ENERGY, 2);
     return undefined;
   }
 }

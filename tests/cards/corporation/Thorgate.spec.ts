@@ -4,7 +4,6 @@ import {Pets} from '../../../src/server/cards/base/Pets';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Thorgate', function() {
@@ -16,7 +15,7 @@ describe('Thorgate', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     player.setCorporationForTest(card);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
     expect(card.getCardDiscount(player, new EnergySaving())).to.eq(3);
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);
     const powerPlant = new PowerPlantStandardProject();

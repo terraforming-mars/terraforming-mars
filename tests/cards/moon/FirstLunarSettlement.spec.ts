@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {FirstLunarSettlement} from '../../../src/server/cards/moon/FirstLunarSettlement';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -25,7 +24,7 @@ describe('FirstLunarSettlement', () => {
   });
 
   it('play', () => {
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.colonyRate).eq(0);
 

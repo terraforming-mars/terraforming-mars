@@ -22,7 +22,7 @@ describe('RefugeeCamps', function() {
   });
 
   it('Can not act', function() {
-    player.addProduction(Resources.MEGACREDITS, -5);
+    player.production.add(Resources.MEGACREDITS, -5);
     expect(card.canAct(player)).is.not.true;
   });
 

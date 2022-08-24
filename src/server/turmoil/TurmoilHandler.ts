@@ -190,7 +190,7 @@ export class TurmoilHandler {
 
     // PoliticalAgendas Reds P4 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp04')) {
-      player.addProduction(Resources.MEGACREDITS, -1 * steps, {log: true});
+      player.production.add(Resources.MEGACREDITS, -1 * steps, {log: true});
     }
 
     // PoliticalAgendas Scientists P3 hook

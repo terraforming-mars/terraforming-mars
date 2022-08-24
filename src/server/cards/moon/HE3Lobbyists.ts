@@ -27,7 +27,7 @@ export class HE3Lobbyists extends Card implements IProjectCard {
 
   public play(player: Player) {
     // + 1 because the tag above isn't yet included in the played cards pile.
-    player.addProduction(Resources.MEGACREDITS, player.tags.count(Tag.MOON) + 1, {log: true});
+    player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.MOON) + 1, {log: true});
     return undefined;
   }
 }

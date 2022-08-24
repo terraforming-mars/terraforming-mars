@@ -30,8 +30,8 @@ export class MethaneFromTitan extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 2);
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.HEAT, 2);
+    player.production.add(Resources.PLANTS, 2);
     return undefined;
   }
 }

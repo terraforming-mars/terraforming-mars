@@ -42,8 +42,8 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
 
   public action(player: Player) {
     player.titanium -= 2;
-    player.addProduction(Resources.HEAT, 1);
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.HEAT, 1);
+    player.production.add(Resources.ENERGY, 1);
     return undefined;
   }
 
@@ -52,8 +52,8 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     game.increaseTemperature(player, 1);
     player.drawCard();
     player.game.addCityTile(player, SpaceName.DYSON_SCREENS, SpaceType.COLONY);
-    player.addProduction(Resources.ENERGY, 2);
-    player.addProduction(Resources.HEAT, 2);
+    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resources.HEAT, 2);
     return undefined;
   }
 }

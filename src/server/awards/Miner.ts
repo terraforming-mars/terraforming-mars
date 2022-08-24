@@ -1,6 +1,5 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
 
 export class Miner implements IAward {
   public name: string = 'Miner';
@@ -9,7 +8,7 @@ export class Miner implements IAward {
     if (player.game.isDoneWithFinalProduction()) {
       return player.steel + player.titanium;
     } else {
-      return player.steel + player.getProduction(Resources.STEEL) + player.titanium + player.getProduction(Resources.TITANIUM);
+      return player.steel + player.production.steel + player.titanium + player.production.titanium;
     }
   }
 }

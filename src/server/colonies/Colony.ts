@@ -90,7 +90,7 @@ export abstract class Colony implements IColony {
       // Poseidon hook
       const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
-        poseidon.addProduction(Resources.MEGACREDITS, 1);
+        poseidon.production.add(Resources.MEGACREDITS, 1);
       }
     }
 
@@ -219,7 +219,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.GAIN_PRODUCTION:
         if (resource === undefined) throw new Error('Resource cannot be undefined');
-        player.addProduction(resource, quantity, {log: true});
+        player.production.add(resource, quantity, {log: true});
         break;
 
       case ColonyBenefit.GAIN_RESOURCES:

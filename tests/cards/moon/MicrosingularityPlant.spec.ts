@@ -6,7 +6,6 @@ import {MicrosingularityPlant} from '../../../src/server/cards/moon/Microsingula
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -39,11 +38,11 @@ describe('MicrosingularityPlant', () => {
   });
 
   it('play', () => {
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
 
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).eq(2);
+    expect(player.production.energy).eq(2);
   });
 });
 

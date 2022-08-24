@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 
@@ -36,14 +35,14 @@ describe('AristarchusRoadNetwork', () => {
 
   it('play', () => {
     player.steel = 2;
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
+    expect(player.production.megacredits).eq(2);
 
     const deferredAction = game.deferredActions.peek() as PlaceMoonRoadTile;
     const selectSpace = deferredAction.execute()!;

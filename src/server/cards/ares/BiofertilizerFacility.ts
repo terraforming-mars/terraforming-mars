@@ -42,7 +42,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
 
     return new SelectSpace(

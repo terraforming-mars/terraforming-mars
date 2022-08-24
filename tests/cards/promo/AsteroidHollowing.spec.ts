@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {AsteroidHollowing} from '../../../src/server/cards/promo/AsteroidHollowing';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AsteroidHollowing', function() {
@@ -32,7 +31,7 @@ describe('AsteroidHollowing', function() {
     card.action(player);
     expect(player.titanium).to.eq(0);
     expect(card.resourceCount).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 
   it('Should give victory points', function() {

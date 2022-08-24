@@ -35,7 +35,7 @@ describe('ExperiencedMartians', function() {
     card.play(player);
 
     expect(player.cardsInHand).has.members([a, c]);
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 2}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
 

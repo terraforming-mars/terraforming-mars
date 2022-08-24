@@ -45,11 +45,11 @@ export class RedCity extends Card implements IProjectCard {
     return citySpaces.filter((space) => !board.getAdjacentSpaces(space).some(Board.isGreenerySpace));
   }
   public override canPlay(player: Player) {
-    return player.canAdjustProduction(this.productionBox) && this.availableRedCitySpaces(player).length > 0;
+    return player.production.canAdjust(this.productionBox) && this.availableRedCitySpaces(player).length > 0;
   }
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
       player.game.addTile(player, space.spaceType, space, {tileType: TileType.RED_CITY, card: this.name});
       return undefined;

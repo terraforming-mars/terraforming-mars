@@ -23,7 +23,7 @@ class KelvinistsBonus01 implements Bonus {
   description = 'Gain 1 M€ for each Heat production you have';
 
   getScore(player: Player) {
-    return player.getProduction(Resources.HEAT);
+    return player.production.heat;
   }
 
   grant(game: Game) {
@@ -39,7 +39,7 @@ class KelvinistsBonus02 implements Bonus {
   isDefault = false;
 
   getScore(player: Player) {
-    return player.getProduction(Resources.HEAT);
+    return player.production.heat;
   }
 
   grant(game: Game) {
@@ -73,8 +73,8 @@ class KelvinistsPolicy01 implements Policy {
       {
         title: 'Select how to pay for Turmoil Kelvinists action',
         afterPay: () => {
-          player.addProduction(Resources.ENERGY, 1);
-          player.addProduction(Resources.HEAT, 1);
+          player.production.add(Resources.ENERGY, 1);
+          player.production.add(Resources.HEAT, 1);
           game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
         },
       },

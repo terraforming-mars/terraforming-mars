@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SaturnSystems', function() {
@@ -18,14 +17,14 @@ describe('SaturnSystems', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.titanium).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 
   it('Runs onCardPlayed', function() {
     player.setCorporationForTest(card);
     card.onCardPlayed(player, new MirandaResort());
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 
   it('Runs onCardPlayed when other player plays card', function() {
@@ -34,6 +33,6 @@ describe('SaturnSystems', function() {
     player.setCorporationForTest(card);
 
     card.onCardPlayed(player2, new MirandaResort());
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

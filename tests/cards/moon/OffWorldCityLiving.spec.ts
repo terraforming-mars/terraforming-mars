@@ -8,7 +8,6 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -35,7 +34,7 @@ describe('OffWorldCityLiving', () => {
   it('play', () => {
     expect(moonData.colonyRate).eq(0);
     expect(player.getTerraformRating()).eq(20);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
 
     const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
     colonySpaces[0].tile = {tileType: TileType.CITY};
@@ -50,7 +49,7 @@ describe('OffWorldCityLiving', () => {
 
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(21);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
+    expect(player.production.megacredits).eq(2);
   });
 
   it('getVictoryPoints', () => {

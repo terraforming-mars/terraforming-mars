@@ -35,7 +35,7 @@ export class DesignedOrganisms extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addResource(Resources.PLANTS, 3);
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.PLANTS, 2);
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
     player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 1}));
     return undefined;

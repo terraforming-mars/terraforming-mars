@@ -18,11 +18,11 @@ describe('CarbonateProcessing', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.HEAT)).to.eq(3);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.heat).to.eq(3);
   });
 });

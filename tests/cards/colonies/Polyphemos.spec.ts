@@ -6,7 +6,6 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Game} from '../../../src/server/Game';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Polyphemos', function() {
@@ -23,7 +22,7 @@ describe('Polyphemos', function() {
 
     // 50 starting MC - 5 for each card select at the start (total: 10)
     expect(player.megaCredits).to.eq(40);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
+    expect(player.production.megacredits).to.eq(5);
 
     player.playedCards.push(card3);
     const action = card3.action(player);

@@ -50,7 +50,7 @@ describe('SmallDutyRovers', () => {
     MoonExpansion.addTile(player, 'm08', {tileType: TileType.MOON_COLONY});
     MoonExpansion.addTile(player, 'm09', {tileType: TileType.MOON_ROAD});
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.megaCredits).eq(6);

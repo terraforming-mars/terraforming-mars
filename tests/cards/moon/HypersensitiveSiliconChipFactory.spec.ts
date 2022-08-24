@@ -49,7 +49,7 @@ describe('HypersensitiveSiliconChipFactory', () => {
     player.production.override({megacredits: 0});
     player.titanium = 2;
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.production.megacredits).eq(4);

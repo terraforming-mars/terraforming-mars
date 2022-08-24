@@ -1,5 +1,4 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
@@ -29,8 +28,7 @@ export class ArchimedesHydroponicsStation extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
+  public play() {
     return undefined;
   }
 }

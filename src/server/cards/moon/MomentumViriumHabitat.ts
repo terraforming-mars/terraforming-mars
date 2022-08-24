@@ -38,8 +38,7 @@ export class MomentumViriumHabitat extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addColonyTile(player, MoonSpaces.MOMENTUM_VIRIUM, this.name);
     MoonExpansion.raiseColonyRate(player);
     return undefined;

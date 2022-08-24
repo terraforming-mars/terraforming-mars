@@ -44,8 +44,7 @@ export class LunaMiningHub extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     player.game.defer(new PlaceSpecialMoonTile(
       player, {
         tileType: TileType.LUNA_MINING_HUB,

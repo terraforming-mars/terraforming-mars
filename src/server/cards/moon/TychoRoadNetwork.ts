@@ -35,8 +35,7 @@ export class TychoRoadNetwork extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));
     return undefined;
   }

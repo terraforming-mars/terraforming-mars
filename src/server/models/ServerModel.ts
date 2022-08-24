@@ -14,7 +14,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
-import {PlayerViewModel, PublicPlayerModel} from '../../common/models/PlayerModel';
+import {PlayerViewModel, Protection, PublicPlayerModel} from '../../common/models/PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectPayment} from '../inputs/SelectPayment';
@@ -417,7 +417,8 @@ export class Server {
       noTagsCount: player.getNoTagsCount(),
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
-      plantsAreProtected: player.plantsAreProtected() ? 1 : (player.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE) ? 0.5 : 0),
+      protectedResources: Server.getResourceProtections(player),
+      protectedProduction: Server.getProductionProtections(player),
       tableau: Server.getCards(player, player.tableau, {showResources: true}),
       selfReplicatingRobotsCards: Server.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
@@ -433,6 +434,49 @@ export class Server {
       victoryPointsBreakdown: player.getVictoryPoints(),
       victoryPointsByGeneration: player.victoryPointsByGeneration,
     };
+  }
+
+  private static getResourceProtections(player: Player) {
+    const protection: Record<Resources, Protection> = {
+      megacredits: 'off',
+      steel: 'off',
+      titanium: 'off',
+      plants: 'off',
+      energy: 'off',
+      heat: 'off',
+    };
+
+    if (player.alloysAreProtected()) {
+      protection.steel = 'on';
+      protection.titanium = 'on';
+    }
+
+    if (player.plantsAreProtected()) {
+      protection.plants = 'on';
+    } else if (player.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      protection.plants = 'half';
+    }
+
+    return protection;
+  }
+
+  private static getProductionProtections(player: Player) {
+    const defaultProteection = player.cardIsInEffect(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
+    const protection: Record<Resources, Protection> = {
+      megacredits: defaultProteection,
+      steel: defaultProteection,
+      titanium: defaultProteection,
+      plants: defaultProteection,
+      energy: defaultProteection,
+      heat: defaultProteection,
+    };
+
+    if (player.alloysAreProtected()) {
+      protection.steel = 'on';
+      protection.titanium = 'on';
+    }
+
+    return protection;
   }
 
   public static getColonies(game: Game): Array<ColonyModel> {

@@ -33,7 +33,7 @@ describe('EosChasmaNationalPark', () => {
     player.playedCards.push(birds, fish);
 
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = cast(card.play(player), SelectCard);
+    const action = cast(player.simplePlay(card), SelectCard);
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
     player.playedCards.push(card);
     expect(player.getVictoryPoints().victoryPoints).to.eq(1);
@@ -55,8 +55,7 @@ describe('EosChasmaNationalPark', () => {
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
 
     expect(player.canPlayIgnoringCost(card)).is.true;
-    card.play(player);
-    player.playedCards.push(card);
+    player.playCard(card);
 
     expect(birds.resourceCount).to.eq(1);
     expect(player.plants).to.eq(3);

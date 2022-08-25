@@ -49,6 +49,7 @@ export type TRSource = {
 export type DynamicTRSource = (player: Player) => TRSource;
 
 export interface ICard extends Partial<IActionCard> {
+    migrated?: boolean; // Used to migrate card behavior.
     name: CardName;
     tags: Array<Tag>;
     play: (player: Player) => PlayerInput | undefined;

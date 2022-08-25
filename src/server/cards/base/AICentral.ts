@@ -4,13 +4,13 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {IActionCard} from '../ICard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class AICentral extends Card implements IActionCard, IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -34,11 +34,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1;
-  }
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
+  public play() {
     return undefined;
   }
   public canAct(): boolean {

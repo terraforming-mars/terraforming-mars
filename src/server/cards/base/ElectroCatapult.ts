@@ -14,6 +14,7 @@ import {Units} from '../../../common/Units';
 import {max} from '../Options';
 
 export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -38,9 +39,6 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-  public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1;
   }
   public canAct(player: Player): boolean {
     return player.plants > 0 || player.steel > 0;
@@ -72,8 +70,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     }
     return undefined;
   }
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
+  public play() {
     return undefined;
   }
 

@@ -1141,9 +1141,11 @@ export class Player {
     return undefined;
   }
 
-  public simplePlay(card: ICard) {
-    if (card instanceof MoonCard) {
-      this.production.adjust(card.productionBox, {log: true});
+  public simplePlay(card: IProjectCard) {
+    if (card instanceof MoonCard || (card.migrated === true)) {
+      if (card.productionBox !== undefined) {
+        this.production.adjust(card.productionBox);
+      }
       const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
       this.deductUnits(adjustedReserveUnits);
     }
@@ -1397,16 +1399,21 @@ export class Player {
   }
 
   public canPlay(card: IProjectCard): boolean {
-    return this.canAffordCard(card) && this.canPlayIgnoringCost(card);
+    return this.canAffordCard(card) && this.simpleCanPlay(card);
+  }
+
+  // TODO(kberg): Replace all uses of canPlayIgnoringCost with simpleCanPlay.
+  public canPlayIgnoringCost(card: IProjectCard) {
+    return this.simpleCanPlay(card);
   }
 
   // Verify if requirements for the card can be met, ignoring the project cost.
   // Only made public for tests.
-  public canPlayIgnoringCost(card: IProjectCard): boolean {
+  public simpleCanPlay(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;
     }
-    if (card instanceof MoonCard && card.productionBox && !this.production.canAdjust(card.productionBox)) {
+    if ((card instanceof MoonCard || card.migrated === true) && card.productionBox && !this.production.canAdjust(card.productionBox)) {
       return false;
     }
     return card.canPlay(this);

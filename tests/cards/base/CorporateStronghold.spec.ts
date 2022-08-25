@@ -19,14 +19,14 @@ describe('CorporateStronghold', function() {
   });
 
   it('Can not play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    const action = cast(player.simplePlay(card), SelectSpace);
     action.cb(action.availableSpaces[0]);
 
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);

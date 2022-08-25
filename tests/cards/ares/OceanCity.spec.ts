@@ -9,7 +9,8 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addOcean} from '../../TestingUtils';
+import {addOcean, cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('OceanCity', function() {
   let card: OceanCity;
@@ -25,32 +26,32 @@ describe('OceanCity', function() {
 
   it('Can play', function() {
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     player.production.add(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {
     const oceanSpace = addOcean(player);
     player.production.add(Resources.ENERGY, 1);
 
-    const action = card.play(player);
+    const action = cast(player.simplePlay(card), SelectSpace);
 
     expect(player.production.energy).eq(0);
     expect(player.production.megacredits).eq(3);

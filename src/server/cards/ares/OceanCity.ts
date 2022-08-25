@@ -3,7 +3,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -13,6 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class OceanCity extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -35,14 +35,8 @@ export class OceanCity extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return player.production.energy > 0;
-  }
 
   public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
-    player.production.add(Resources.MEGACREDITS, 3);
-
     return new SelectSpace(
       'Select space for Ocean City',
       player.game.board.getOceanSpaces({upgradedOceans: false}),

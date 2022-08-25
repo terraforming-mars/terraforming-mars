@@ -7,7 +7,6 @@ import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
@@ -18,6 +17,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 import {Units} from '../../../common/Units';
 
 export class Capital extends Card implements IProjectCard {
+  public migrated = true;
   constructor(
     name: CardName = CardName.CAPITAL,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
@@ -51,8 +51,7 @@ export class Capital extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.production.energy >= 2 &&
-        player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
     const usedSpace = player.game.board.getSpaceByTileCard(this.name);
@@ -63,8 +62,6 @@ export class Capital extends Card implements IProjectCard {
     return 0;
   }
   public play(player: Player) {
-    player.production.add(Resources.ENERGY, -2);
-    player.production.add(Resources.MEGACREDITS, 5);
     return new SelectSpace(
       'Select space for special city tile',
       player.game.board.getAvailableSpacesForCity(player),

@@ -3,7 +3,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,6 +13,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class OceanFarm extends Card implements IProjectCard {
+  public migrated = true;
+
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -37,9 +38,6 @@ export class OceanFarm extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.production.add(Resources.HEAT, 1);
-    player.production.add(Resources.PLANTS, 1);
-
     return new SelectSpace(
       'Select space for Ocean Farm',
       player.game.board.getOceanSpaces({upgradedOceans: false}),

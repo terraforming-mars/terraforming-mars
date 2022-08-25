@@ -21,10 +21,13 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
     this.options.push(
       new SelectCard<ICorporationCard>(
         'Select corporation', undefined, player.dealtCorporationCards,
-        ([card]) => {
-          corporation = card;
+        (cards) => {
+          if (cards.length !== 1) {
+            throw new Error('Only select 1 corporation card');
+          }
+          corporation = cards[0];
           return undefined;
-        },
+        }, {min: 2, max: player.dealtCorporationCards.length},
       ),
     );
 
@@ -33,9 +36,12 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         new SelectCard(
           'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
           (preludeCards: Array<IProjectCard>) => {
+            if (preludeCards.length !== 2) {
+              throw new Error('Only select 2 preludes');
+            }
             player.preludeCardsInHand.push(...preludeCards);
             return undefined;
-          }, {min: 2, max: 2},
+          }, {min: 2, max: player.dealtPreludeCards.length},
         ),
       );
     }

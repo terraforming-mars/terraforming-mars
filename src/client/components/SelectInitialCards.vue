@@ -4,12 +4,12 @@
       message="Continue without buying any project cards?"
       ref="confirmation"
       v-on:accept="confirmSelection" />
-    <SelectCard :playerView="playerView" :playerinput="getOption(0)" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
-    <SelectCard v-if="hasPrelude()" :playerView="playerView" :playerinput="getOption(1)" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
-    <SelectCard :playerView="playerView" :playerinput="getOption(hasPrelude() ? 2 : 1)" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
+    <SelectCard :playerView="playerView" :playerinput="corpCardOption" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
+    <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
+    <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <template v-if="this.selectedCorporations.length === 1">
       <div v-i18n>Starting Megacredits: <div class="megacredits">{{getStartingMegacredits()}}</div></div>
-      <div v-if="hasPrelude()" v-i18n>After Preludes: <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
+      <div v-if="hasPrelude" v-i18n>After Preludes: <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     </template>
     <div v-if="warning !== undefined" class="tm-warning">
       <label class="label label-error">{{ $t(warning) }}</label>
@@ -32,7 +32,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences, Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tag} from '@/common/cards/Tag';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
@@ -169,12 +169,6 @@ export default (Vue as WithRefs<Refs>).extend({
       }
       return result;
     },
-    getOption(idx: number) {
-      if (this.playerinput.options === undefined || this.playerinput.options[idx] === undefined) {
-        throw new Error('invalid input, missing option');
-      }
-      return this.playerinput.options[idx];
-    },
     getStartingMegacredits() {
       if (this.selectedCorporations.length !== 1) {
         return NaN;
@@ -204,14 +198,11 @@ export default (Vue as WithRefs<Refs>).extend({
       if (this.selectedCorporations.length === 1) {
         result[0].push(this.selectedCorporations[0]);
       }
-      if (this.hasPrelude()) {
+      if (this.hasPrelude) {
         result.push(this.selectedPreludes);
       }
       result.push(this.selectedCards);
       this.onsave(result);
-    },
-    hasPrelude() {
-      return this.playerinput.options !== undefined && this.playerinput.options.length === 3;
     },
     cardsChanged(cards: Array<CardName>) {
       this.selectedCards = cards;
@@ -236,7 +227,7 @@ export default (Vue as WithRefs<Refs>).extend({
         this.warning = 'You selected too many corporations';
         return false;
       }
-      if (this.hasPrelude()) {
+      if (this.hasPrelude) {
         if (this.selectedPreludes.length < 2) {
           this.warning = 'Select 2 preludes';
           return false;
@@ -259,9 +250,40 @@ export default (Vue as WithRefs<Refs>).extend({
       this.saveData();
     },
   },
+  computed: {
+    hasPrelude() {
+      return this.playerinput.options?.length === 3;
+    },
+    corpCardOption() {
+      const option = getOption(this.playerinput.options, 0);
+      if (!getPreferences().experimental_ui) {
+        option.minCardsToSelect = 1;
+        option.maxCardsToSelect = 1;
+      }
+      return option;
+    },
+    preludeCardOption() {
+      const option = getOption(this.playerinput.options, 1);
+      if (!getPreferences().experimental_ui) {
+        option.maxCardsToSelect = 2;
+      }
+      return option;
+    },
+    projectCardOption() {
+      // Compiler won't accept this method using this.hasPrelude, despite documentation saying I can.
+      return getOption(this.playerinput.options, this.playerinput.options?.length === 3 ? 2 : 1);
+    },
+  },
   mounted() {
     this.validate();
   },
 });
 
+function getOption(options: Array<PlayerInputModel> | undefined, idx: number): PlayerInputModel {
+  const option = options?.[idx];
+  if (option === undefined) {
+    throw new Error('invalid input, missing option');
+  }
+  return option;
+}
 </script>

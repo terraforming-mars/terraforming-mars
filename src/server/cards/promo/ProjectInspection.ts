@@ -3,8 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Playwrights} from '../community/Playwrights';
-import {IActionCard, ICard, isIActionCard} from '../ICard';
+import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -28,7 +27,7 @@ export class ProjectInspection extends Card implements IProjectCard {
     const result: Array<IActionCard & ICard> = [];
 
     for (const playedCard of player.tableau) {
-      if (playedCard.name === CardName.PLAYWRIGHTS && (<Playwrights> playedCard).getCheckLoops() >= 2) continue;
+      if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) continue;
       if (isIActionCard(playedCard) && playedCard.canAct(player) && player.getActionsThisGeneration().has(playedCard.name)) {
         result.push(playedCard);
       }

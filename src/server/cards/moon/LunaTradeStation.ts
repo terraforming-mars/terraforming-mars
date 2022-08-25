@@ -34,8 +34,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addTile(
       player,
       MoonSpaces.LUNA_TRADE_STATION,

@@ -36,8 +36,7 @@ export class TheWomb extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;
   }

@@ -28,8 +28,7 @@ export class MiningRobotsManufCenter extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.raiseMiningRate(player, 2);
     return undefined;
   }

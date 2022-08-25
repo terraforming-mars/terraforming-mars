@@ -38,8 +38,7 @@ export class MareSerenitatisMine extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_SERENITATIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     const moon = MoonExpansion.moonData(player.game).moon;

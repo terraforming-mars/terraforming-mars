@@ -40,7 +40,7 @@ describe('LunarDustProcessingPlant', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(2);
     expect(player.getTerraformRating()).eq(15);

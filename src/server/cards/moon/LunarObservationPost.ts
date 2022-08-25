@@ -38,8 +38,7 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
 
   public override resourceCount: number = 0;
 
-  public override play(player: Player) {
-    super.play(player);
+  public play() {
     return undefined;
   }
 

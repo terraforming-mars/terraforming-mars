@@ -66,6 +66,7 @@ import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
+import {MoonCard} from './cards/moon/MoonCard';
 
 // Behavior when playing a card.
 // add it to the tableau
@@ -1083,7 +1084,7 @@ export class Player {
     }
 
     // Play the card
-    const action = selectedCard.play(this);
+    const action = this.simplePlay(selectedCard);
     this.defer(action, Priority.DEFAULT);
 
     // This could probably include 'nothing' but for now this will work.
@@ -1130,6 +1131,15 @@ export class Player {
     }
 
     return undefined;
+  }
+
+  public simplePlay(card: ICard) {
+    if (card instanceof MoonCard) {
+      this.production.adjust(card.productionBox, {log: true});
+      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
+      this.deductUnits(adjustedReserveUnits);
+    }
+    return card.play(this);
   }
 
   public onCardPlayed(card: IProjectCard) {
@@ -1368,7 +1378,7 @@ export class Player {
     return candidateCards.filter((card) => this.canPlay(card));
   }
 
-  public canAffordCard(card: IProjectCard): boolean {
+  private canAffordCard(card: IProjectCard): boolean {
     return this.canAfford(
       this.getCardCost(card),
       {
@@ -1386,6 +1396,9 @@ export class Player {
   // Only made public for tests.
   public canPlayIgnoringCost(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
+      return false;
+    }
+    if (card instanceof MoonCard && card.productionBox && !this.production.canAdjust(card.productionBox)) {
       return false;
     }
     return card.canPlay(this);

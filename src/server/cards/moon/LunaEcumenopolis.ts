@@ -60,10 +60,6 @@ export class LunaEcumenopolis extends MoonCard {
   }
 
   public override canPlay(player: Player) {
-    if (!super.canPlay(player)) {
-      return false;
-    }
-
     if (!this.canAffordTRBump(player)) {
       return false;
     }
@@ -103,7 +99,7 @@ export class LunaEcumenopolis extends MoonCard {
     return false;
   }
 
-  public override play(player: Player) {
+  public play(player: Player) {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));

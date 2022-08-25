@@ -26,8 +26,7 @@ export class WaterTreatmentComplex extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.raiseColonyRate(player, 2);
     return undefined;
   }

@@ -28,4 +28,8 @@ export class HypersensitiveSiliconChipFactory extends MoonCard {
       },
     });
   }
+
+  public play() {
+    return undefined;
+  }
 }

@@ -37,7 +37,7 @@ describe('DeepLunarMining', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(2);
     expect(player.production.titanium).eq(2);

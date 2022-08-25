@@ -48,8 +48,7 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
   }
   public override resourceCount = 0;
 
-  public override play(player: Player) {
-    super.play(player);
+  public play() {
     return undefined;
   }
 

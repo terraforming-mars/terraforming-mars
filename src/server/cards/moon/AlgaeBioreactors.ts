@@ -28,8 +28,7 @@ export class AlgaeBioreactors extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);
     player.game.increaseOxygenLevel(player, 1);
     return undefined;

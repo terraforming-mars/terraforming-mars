@@ -37,8 +37,7 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_NECTARIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

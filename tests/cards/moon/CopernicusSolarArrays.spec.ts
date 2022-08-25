@@ -32,7 +32,7 @@ describe('CopernicusSolarArrays', () => {
     player.titanium = 1;
     player.heat = 0;
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.heat).eq(2);

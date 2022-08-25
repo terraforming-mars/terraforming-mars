@@ -33,12 +33,25 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
     });
   }
 
+  // For Project Inspection
+  private checkLoops: number = 0;
+
+  public getCheckLoops(): number {
+    return this.checkLoops;
+  }
+
+
   public availableEventCards(player: Player) {
-    return player.playedCards.filter((card) => {
-      return card.cardType === CardType.EVENT &&
+    this.checkLoops++;
+    try {
+      return player.playedCards.filter((card) => {
+        return card.cardType === CardType.EVENT &&
         card.cost <= 16 &&
         player.canPlay(card);
-    });
+      });
+    } finally {
+      this.checkLoops--;
+    }
   }
 
   public play() {

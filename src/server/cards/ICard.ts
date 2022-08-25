@@ -25,6 +25,14 @@ export function isIActionCard(object: any): object is IActionCard {
   return object !== undefined && object.canAct !== undefined && object.action !== undefined;
 }
 
+export interface IHasCheckLoops {
+    getCheckLoops(): number;
+}
+
+export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
+  return object.getCheckLoops !== undefined;
+}
+
 export namespace VictoryPoints {
   export function resource(points: number, per: number): IVictoryPoints {
     return {type: 'resource', points, per};

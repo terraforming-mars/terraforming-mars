@@ -1,13 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 
 export class HousePrinting extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -26,8 +25,7 @@ export class HousePrinting extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
+  public play() {
     return undefined;
   }
 }

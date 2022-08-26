@@ -9,7 +9,7 @@ describe('TitaniumMine', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
-    const action = card.play(player);
+    const action = player.simplePlay(card);
     expect(action).is.undefined;
     expect(player.production.titanium).to.eq(1);
   });

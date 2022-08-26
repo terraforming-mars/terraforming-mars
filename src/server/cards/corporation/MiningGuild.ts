@@ -14,6 +14,7 @@ import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
 
 export class MiningGuild extends Card implements ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -58,7 +59,6 @@ export class MiningGuild extends Card implements ICorporationCard {
 
   public play(player: Player) {
     player.steel = 5;
-    player.production.add(Resources.STEEL, 1);
     return undefined;
   }
 }

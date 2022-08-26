@@ -5,12 +5,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class UrbanizedArea extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -36,13 +36,11 @@ export class UrbanizedArea extends Card implements IProjectCard {
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
   public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1 && this.getAvailableSpaces(player).length > 0;
+    return this.getAvailableSpaces(player).length > 0;
   }
   public play(player: Player) {
     return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
       player.game.addCityTile(player, foundSpace.id);
-      player.production.add(Resources.ENERGY, -1);
-      player.production.add(Resources.MEGACREDITS, 2);
       return undefined;
     });
   }

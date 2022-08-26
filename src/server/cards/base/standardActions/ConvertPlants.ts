@@ -5,7 +5,7 @@ import {Player} from '../../../Player';
 import {MAX_OXYGEN_LEVEL} from '../../../../common/constants';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {ISpace} from '../../../boards/ISpace';
-import {Units} from '@/common/Units';
+import {Units} from '../../../../common/Units';
 
 
 export class ConvertPlants extends StandardActionCard {

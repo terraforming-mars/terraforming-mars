@@ -1,10 +1,10 @@
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MetalsCompany extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.METALS_COMPANY,
@@ -19,8 +19,7 @@ export class MetalsCompany extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
-    player.production.adjust(this.productionBox);
+  public play() {
     return undefined;
   }
 }

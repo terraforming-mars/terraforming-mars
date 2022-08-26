@@ -8,6 +8,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Manutech extends Card implements ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.MANUTECH,
@@ -32,8 +33,7 @@ export class Manutech extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
+  public play() {
     return undefined;
   }
 

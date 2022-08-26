@@ -7,12 +7,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -41,12 +41,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
   }
   public override resourceCount = 0;
 
-  public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1;
-  }
-
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
+  public play() {
     return undefined;
   }
 

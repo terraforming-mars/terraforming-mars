@@ -6,6 +6,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {CardRenderer} from '../render/CardRenderer';
 
 export class BusinessEmpire extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.BUSINESS_EMPIRE,
@@ -29,7 +30,6 @@ export class BusinessEmpire extends PreludeCard {
     return player.canAfford(6);
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.game.defer(new SelectPaymentDeferred(player, 6));
     return undefined;
   }

@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class EarlySettlement extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.EARLY_SETTLEMENT,
@@ -23,7 +23,6 @@ export class EarlySettlement extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.add(Resources.PLANTS, 1);
     player.game.defer(new PlaceCityTile(player));
     return undefined;
   }

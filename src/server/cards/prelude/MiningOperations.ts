@@ -2,11 +2,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningOperations extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.MINING_OPERATIONS,
@@ -24,7 +24,6 @@ export class MiningOperations extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.production.add(Resources.STEEL, 2);
     player.steel += 4;
     return undefined;
   }

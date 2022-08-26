@@ -13,6 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 
 export class Recyclon extends Card implements ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -41,7 +42,6 @@ export class Recyclon extends Card implements ICorporationCard {
   public override resourceCount = 0;
 
   public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
     player.addResourceTo(this);
     return undefined;
   }

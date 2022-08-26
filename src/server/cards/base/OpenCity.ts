@@ -5,12 +5,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class OpenCity extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -38,13 +38,11 @@ export class OpenCity extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1 && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public play(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
-      player.production.add(Resources.ENERGY, -1);
-      player.production.add(Resources.MEGACREDITS, 4);
       player.plants += 2;
       return undefined;
     });

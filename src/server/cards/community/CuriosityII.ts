@@ -3,7 +3,6 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,6 +17,7 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
 
 export class CuriosityII extends Card implements ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -58,8 +58,7 @@ export class CuriosityII extends Card implements ICorporationCard {
     }
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 2);
+  public play() {
     return undefined;
   }
 

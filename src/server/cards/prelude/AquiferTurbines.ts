@@ -7,6 +7,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {CardRenderer} from '../render/CardRenderer';
 
 export class AquiferTurbines extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.AQUIFER_TURBINES,
@@ -29,7 +30,6 @@ export class AquiferTurbines extends PreludeCard {
     return player.canAfford(3);
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.game.defer(new PlaceOceanTile(player));
     player.game.defer(new SelectPaymentDeferred(player, 3));
     return undefined;

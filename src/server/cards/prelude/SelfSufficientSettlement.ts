@@ -7,6 +7,7 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.SELF_SUFFICIENT_SETTLEMENT,
@@ -23,7 +24,6 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.game.defer(new PlaceCityTile(player));
     return undefined;
   }

@@ -10,9 +10,9 @@ import {all, played} from '../Options';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
 import {ICard} from '../ICard';
-import {Resources} from '../../../common/Resources';
 
 export class CommunicationCenter extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -40,12 +40,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
   // Card behavior is in PathfindersExpansion.onCardPlayed. Card.onCardPlayed
   // does not apply to _any card played_
 
-  public override canPlay(player: Player) {
-    return player.production.energy > 0;
-  }
-
   public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
     player.game.defer(new SimpleDeferredAction(player, () => {
       // Play this after the card's been put in hand. Otherwise it will generate an error.
       player.addResourceTo(this, 2);

@@ -14,6 +14,7 @@ import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
 
 export class RedCity extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -44,11 +45,10 @@ export class RedCity extends Card implements IProjectCard {
     return citySpaces.filter((space) => !board.getAdjacentSpaces(space).some(Board.isGreenerySpace));
   }
   public override canPlay(player: Player) {
-    return player.production.canAdjust(this.productionBox) && this.availableRedCitySpaces(player).length > 0;
+    return this.availableRedCitySpaces(player).length > 0;
   }
 
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
       player.game.addTile(player, space.spaceType, space, {tileType: TileType.RED_CITY, card: this.name});
       return undefined;

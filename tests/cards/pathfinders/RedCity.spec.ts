@@ -10,6 +10,8 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {Board} from '../../../src/server/boards/Board';
 import {Units} from '../../../src/common/Units';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../TestingUtils';
 
 describe('RedCity', function() {
   let card: RedCity;
@@ -86,7 +88,7 @@ describe('RedCity', function() {
   it('play', function() {
     const redCitySpace = board.getSpace('53');
     player.production.override({energy: 1});
-    const action = card.play(player);
+    const action = cast(player.simplePlay(card), SelectSpace);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 2}));
     expect(action.availableSpaces).includes(redCitySpace);
 
@@ -99,7 +101,7 @@ describe('RedCity', function() {
   it('vps', function() {
     const redCitySpace = board.getSpace('53');
     player.production.override({energy: 1});
-    card.play(player).cb(redCitySpace);
+    cast(player.simplePlay(card), SelectSpace).cb(redCitySpace);
 
     expect(card.getVictoryPoints(player)).eq(4);
 
@@ -119,7 +121,7 @@ describe('RedCity', function() {
   it('cannot place greenery next to red city', function() {
     const redCitySpace = board.getSpace('53');
     player.production.override({energy: 1});
-    card.play(player).cb(redCitySpace);
+    cast(player.simplePlay(card), SelectSpace).cb(redCitySpace);
     const adjacentSpaces = board.getAdjacentSpaces(redCitySpace);
 
     // Nobody may place a greenery next to Red City.

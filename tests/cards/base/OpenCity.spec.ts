@@ -3,6 +3,8 @@ import {OpenCity} from '../../../src/server/cards/base/OpenCity';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../TestingUtils';
 
 describe('OpenCity', function() {
   let card: OpenCity;
@@ -31,8 +33,7 @@ describe('OpenCity', function() {
     (game as any).oxygenLevel = 12;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.not.undefined;
+    const action = cast(player.simplePlay(card), SelectSpace);
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesOnMarsCount()).to.eq(1);
 

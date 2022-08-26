@@ -17,14 +17,14 @@ describe('MagneticFieldDome', function() {
   });
 
   it('Can not play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 2);
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.energy).to.eq(0);
     expect(player.production.plants).to.eq(1);
     expect(player.getTerraformRating()).to.eq(21);

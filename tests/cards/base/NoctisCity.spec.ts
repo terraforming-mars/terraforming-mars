@@ -7,7 +7,9 @@ import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame} from '../../TestGame';
+import {cast} from '../../TestingUtils';
 import {BoardName} from '../../../src/common/boards/BoardName';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('NoctisCity', function() {
   let card: NoctisCity;
@@ -22,7 +24,7 @@ describe('NoctisCity', function() {
   });
 
   it('Cannot play without energy production', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('All land spaces are available on Hellas', function() {
@@ -30,15 +32,15 @@ describe('NoctisCity', function() {
     const game = newTestGame(2, {boardName: BoardName.HELLAS});
     const player = game.getPlayersInGenerationOrder()[0];
 
-    const action = card.play(player);
+    const action = cast(player.simplePlay(card), SelectSpace);
     expect(action!.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 

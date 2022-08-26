@@ -6,7 +6,7 @@ describe('PowerPlant', function() {
   it('Should play', function() {
     const card = new PowerPlant();
     const player = TestPlayer.BLUE.newPlayer();
-    expect(card.play(player)).is.undefined;
+    expect(player.simplePlay(card)).is.undefined;
     expect(player.production.energy).to.eq(1);
   });
 });

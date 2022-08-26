@@ -7,7 +7,6 @@ import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class TectonicStressPower extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +15,7 @@ export class TectonicStressPower extends Card implements IProjectCard {
       name: CardName.TECTONIC_STRESS_POWER,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 18,
-      productionBox: Units.of({energy: 3}),
+      productionBox: {energy: 3},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),

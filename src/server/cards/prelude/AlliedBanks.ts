@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class AlliedBanks extends PreludeCard {
   constructor() {
@@ -11,7 +10,7 @@ export class AlliedBanks extends PreludeCard {
       name: CardName.ALLIED_BANKS,
       tags: [Tag.EARTH],
 
-      productionBox: Units.of({megacredits: 4}),
+      productionBox: {megacredits: 4},
       startingMegacredits: 3,
 
       metadata: {

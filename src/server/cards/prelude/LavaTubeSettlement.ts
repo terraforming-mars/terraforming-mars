@@ -9,7 +9,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {BoardName} from '../../../common/boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class LavaTubeSettlement extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +17,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
       name: CardName.LAVA_TUBE_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
       cost: 15,
-      productionBox: Units.of({energy: -1, megacredits: 2}),
+      productionBox: {energy: -1, megacredits: 2},
 
       metadata: {
         cardNumber: 'P37',

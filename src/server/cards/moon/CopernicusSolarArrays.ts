@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class CopernicusSolarArrays extends MoonCard {
@@ -14,7 +13,7 @@ export class CopernicusSolarArrays extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.ENERGY, Tag.SPACE],
       cost: 8,
-      reserveUnits: Units.of({titanium: 1}),
+      reserveUnits: {titanium: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.',

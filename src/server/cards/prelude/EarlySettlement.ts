@@ -5,14 +5,13 @@ import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class EarlySettlement extends PreludeCard {
   constructor() {
     super({
       name: CardName.EARLY_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
-      productionBox: Units.of({plants: 1}),
+      productionBox: {plants: 1},
 
       metadata: {
         cardNumber: 'P09',

@@ -5,14 +5,13 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class MartianIndustries extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARTIAN_INDUSTRIES,
       tags: [Tag.BUILDING],
-      productionBox: Units.of({energy: 1, steel: 1}),
+      productionBox: {energy: 1, steel: 1},
       startingMegacredits: 6,
 
       metadata: {

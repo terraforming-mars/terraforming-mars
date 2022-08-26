@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class IndustrialMicrobes extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class IndustrialMicrobes extends Card implements IProjectCard {
       name: CardName.INDUSTRIAL_MICROBES,
       tags: [Tag.MICROBE, Tag.BUILDING],
       cost: 12,
-      productionBox: Units.of({energy: 1, steel: 1}),
+      productionBox: {energy: 1, steel: 1},
 
       metadata: {
         cardNumber: '158',

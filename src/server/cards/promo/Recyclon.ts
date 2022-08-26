@@ -10,7 +10,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit, played} from '../Options';
 
 export class Recyclon extends Card implements ICorporationCard {
@@ -21,7 +20,7 @@ export class Recyclon extends Card implements ICorporationCard {
       tags: [Tag.MICROBE, Tag.BUILDING],
       startingMegaCredits: 38,
       resourceType: CardResource.MICROBE,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         cardNumber: 'R26',

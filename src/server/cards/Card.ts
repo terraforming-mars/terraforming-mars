@@ -26,17 +26,20 @@ export interface StaticCardProperties {
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  productionBox?: Units;
+  productionBox?: Partial<Units>;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
-  reserveUnits?: Units,
+  reserveUnits?: Partial<Units>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-export const staticCardProperties = new Map<CardName, StaticCardProperties>();
+type Properties = Omit<StaticCardProperties, 'productionBox|reserveUnits'> & {productionBox?: Units, reserveUnits?: Units};
+
+
+export const staticCardProperties = new Map<CardName, Properties>();
 
 export abstract class Card {
-  private readonly properties: StaticCardProperties;
+  private readonly properties: Properties;
   constructor(properties: StaticCardProperties) {
     let staticInstance = staticCardProperties.get(properties.name);
     if (staticInstance === undefined) {
@@ -51,8 +54,13 @@ export abstract class Card {
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(properties);
 
-      staticCardProperties.set(properties.name, properties);
-      staticInstance = properties;
+      const p: Properties = {
+        ...properties,
+        productionBox: properties.productionBox === undefined ? undefined : Units.of(properties.productionBox),
+        reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
+      };
+      staticCardProperties.set(properties.name, p);
+      staticInstance = p;
     }
     this.properties = staticInstance;
   }

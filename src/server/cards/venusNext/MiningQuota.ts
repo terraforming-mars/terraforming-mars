@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../../common/Units';
 import {IProjectCard} from '../IProjectCard';
 
 export class MiningQuota extends Card implements IProjectCard {
@@ -16,7 +15,7 @@ export class MiningQuota extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 5,
-      productionBox: Units.of({steel: 2}),
+      productionBox: {steel: 2},
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.JOVIAN)),
       metadata: {

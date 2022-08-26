@@ -4,7 +4,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {Units} from '../../../common/Units';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -13,7 +12,7 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
   constructor(properties = {
     name: CardName.MOON_ROAD_STANDARD_PROJECT,
     cost: 18,
-    reserveUnits: Units.of({steel: 1}),
+    reserveUnits: {steel: 1},
     tr: {moonLogistics: 1},
 
     metadata: {

@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 import {all} from '../Options';
 
@@ -16,8 +15,8 @@ export class LunaResort extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 11,
-      productionBox: Units.of({energy: -1, megacredits: 3}),
-      reserveUnits: Units.of({titanium: 2}),
+      productionBox: {energy: -1, megacredits: 3},
+      reserveUnits: {titanium: 2},
       tr: {moonColony: 1},
 
       requirements: CardRequirements.builder((b) => b.colonyTiles(2, {all})),

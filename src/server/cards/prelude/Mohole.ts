@@ -5,14 +5,13 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class Mohole extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOHOLE,
       tags: [Tag.BUILDING],
-      productionBox: Units.of({heat: 3}),
+      productionBox: {heat: 3},
 
       metadata: {
         cardNumber: 'P22',

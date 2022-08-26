@@ -8,7 +8,6 @@ import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class Windmills extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +16,7 @@ export class Windmills extends Card implements IProjectCard {
       name: CardName.WINDMILLS,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 6,
-      productionBox: Units.of({energy: 1}),
+      productionBox: {energy: 1},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(7)),

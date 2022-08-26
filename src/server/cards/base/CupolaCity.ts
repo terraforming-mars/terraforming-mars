@@ -9,7 +9,6 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {max} from '../Options';
 
 export class CupolaCity extends Card implements IProjectCard {
@@ -20,7 +19,7 @@ export class CupolaCity extends Card implements IProjectCard {
       name: CardName.CUPOLA_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 16,
-      productionBox: Units.of({energy: -1, megacredits: 3}),
+      productionBox: {energy: -1, megacredits: 3},
 
       requirements: CardRequirements.builder((b) => b.oxygen(9, {max})),
       metadata: {

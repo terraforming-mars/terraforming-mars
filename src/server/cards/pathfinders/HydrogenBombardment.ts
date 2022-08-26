@@ -3,13 +3,12 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Units} from '../../../common/Units';
 
 export class HydrogenBombardment extends PreludeCard {
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,
-      productionBox: Units.of({titanium: 1}),
+      productionBox: {titanium: 1},
       startingMegacredits: 6,
 
       metadata: {

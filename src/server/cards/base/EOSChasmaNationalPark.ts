@@ -8,7 +8,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class EosChasmaNationalPark extends Card implements IProjectCard {
   public migrated = true;
@@ -18,7 +17,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 16,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.temperature(-12)),

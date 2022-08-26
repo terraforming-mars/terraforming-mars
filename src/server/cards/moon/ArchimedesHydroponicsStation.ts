@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class ArchimedesHydroponicsStation extends MoonCard {
@@ -12,7 +11,7 @@ export class ArchimedesHydroponicsStation extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.PLANT],
       cost: 12,
-      productionBox: Units.of({energy: -1, megacredits: -1, plants: 2}),
+      productionBox: {energy: -1, megacredits: -1, plants: 2},
 
       metadata: {
         description: 'Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.',

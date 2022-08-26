@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class HeliostatMirrorArray extends MoonCard {
@@ -13,8 +12,8 @@ export class HeliostatMirrorArray extends MoonCard {
       tags: [Tag.ENERGY],
       cardType: CardType.AUTOMATED,
       name: CardName.HELIOSTAT_MIRROR_ARRAY,
-      productionBox: Units.of({energy: 2}),
-      reserveUnits: Units.of({titanium: 1}),
+      productionBox: {energy: 2},
+      reserveUnits: {titanium: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.',

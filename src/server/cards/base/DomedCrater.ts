@@ -9,7 +9,6 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit, max} from '../Options';
 
 export class DomedCrater extends Card implements IProjectCard {
@@ -21,7 +20,7 @@ export class DomedCrater extends Card implements IProjectCard {
       name: CardName.DOMED_CRATER,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 24,
-      productionBox: Units.of({energy: -1, megacredits: 3}),
+      productionBox: {energy: -1, megacredits: 3},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(7, {max})),

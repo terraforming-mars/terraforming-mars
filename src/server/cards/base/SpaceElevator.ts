@@ -7,7 +7,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class SpaceElevator extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -16,7 +15,7 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
       name: CardName.SPACE_ELEVATOR,
       tags: [Tag.SPACE, Tag.BUILDING],
       cost: 27,
-      productionBox: Units.of({titanium: 1}),
+      productionBox: {titanium: 1},
       victoryPoints: 2,
 
       metadata: {

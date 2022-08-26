@@ -11,7 +11,6 @@ import {Board} from '../../boards/Board';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Units} from '../../../common/Units';
 
 export class CommercialDistrict extends Card implements IProjectCard {
   public migrated = true;
@@ -37,7 +36,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
       tags: [Tag.BUILDING],
       cost: 16,
       adjacencyBonus,
-      productionBox: Units.of({energy: -1, megacredits: 4}),
+      productionBox: {energy: -1, megacredits: 4},
       victoryPoints: 'special',
       metadata,
     });

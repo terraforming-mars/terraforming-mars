@@ -10,7 +10,6 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class CulturalMetropolis extends Card implements IProjectCard {
@@ -20,7 +19,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
       name: CardName.CULTURAL_METROPOLIS,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 20,
-      productionBox: Units.of({energy: -1, megacredits: 3}),
+      productionBox: {energy: -1, megacredits: 3},
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
       metadata: {

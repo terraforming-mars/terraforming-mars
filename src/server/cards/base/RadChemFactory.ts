@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class RadChemFactory extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class RadChemFactory extends Card implements IProjectCard {
       name: CardName.RAD_CHEM_FACTORY,
       tags: [Tag.BUILDING],
       cost: 8,
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
       tr: {tr: 2},
 
       metadata: {

@@ -6,7 +6,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class MagneticFieldDome extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_DOME,
       tags: [Tag.BUILDING],
       cost: 5,
-      productionBox: Units.of({energy: -2, plants: 1}),
+      productionBox: {energy: -2, plants: 1},
       tr: {tr: 1},
 
       metadata: {

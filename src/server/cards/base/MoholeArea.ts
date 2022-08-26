@@ -11,7 +11,6 @@ import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
 export class MoholeArea extends Card implements IProjectCard {
@@ -33,7 +32,7 @@ export class MoholeArea extends Card implements IProjectCard {
       cost: 20,
       adjacencyBonus,
       metadata,
-      productionBox: Units.of({heat: 4}),
+      productionBox: {heat: 4},
     });
   }
 

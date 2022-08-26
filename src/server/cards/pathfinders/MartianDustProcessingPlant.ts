@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Units} from '../../../common/Units';
 
 export class MartianDustProcessingPlant extends Card implements IProjectCard {
   constructor() {
@@ -14,7 +13,7 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
       name: CardName.MARTIAN_DUST_PROCESSING_PLANT,
       cost: 15,
       tags: [Tag.MARS, Tag.BUILDING],
-      productionBox: Units.of({energy: -1, steel: 2}),
+      productionBox: {energy: -1, steel: 2},
       tr: {tr: 1},
       victoryPoints: 1,
 

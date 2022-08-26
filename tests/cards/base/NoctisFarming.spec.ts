@@ -21,9 +21,9 @@ describe('NoctisFarming', function() {
 
   it('Should play', function() {
     (game as any).temperature = -20;
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.megacredits).to.eq(1);
     expect(player.plants).to.eq(2);
 

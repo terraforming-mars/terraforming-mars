@@ -1,15 +1,14 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class GreatDam extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -29,8 +28,7 @@ export class GreatDam extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, 2);
+  public play() {
     return undefined;
   }
 }

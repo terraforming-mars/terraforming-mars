@@ -25,7 +25,7 @@ describe('GreatDam', () => {
   it('Should play', () => {
     maxOutOceans(player, 4);
     expect(player.canPlayIgnoringCost(card)).is.true;
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);

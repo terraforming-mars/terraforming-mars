@@ -4,7 +4,7 @@ import {EarlyExpedition} from '../../../src/server/cards/pathfinders/EarlyExpedi
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('EarlyExpedition', function() {
@@ -38,13 +38,12 @@ describe('EarlyExpedition', function() {
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
     player.playedCards = [lunarObservationPost];
 
-    const selectSpace = card.play(player);
+    const selectSpace = cast(player.simplePlay(card), SelectSpace);
     runAllActions(game);
 
     expect(player.production.asUnits()).eql(Units.of({megacredits: 3}));
     expect(lunarObservationPost.resourceCount).eq(1);
 
-    expect(selectSpace).instanceOf(SelectSpace);
     let tiles = 0;
     selectSpace.availableSpaces.forEach((space) => {
       game.board.getAdjacentSpaces(space).forEach((s) => {

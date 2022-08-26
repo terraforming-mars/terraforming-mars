@@ -12,6 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class NewVenice extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -36,11 +37,10 @@ export class NewVenice extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return super.canPlay(player) && (player.plants >= 2);
+    return player.plants >= 2;
   }
 
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.plants -= 2;
 
     return new SelectSpace(

@@ -18,7 +18,7 @@ describe('MartianMediaCenter', function() {
     mars.delegates.push(player.id, player.id);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.megacredits).to.eq(2);
   });
 });

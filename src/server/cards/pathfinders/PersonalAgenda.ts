@@ -7,6 +7,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Units} from '../../../common/Units';
 
 export class PersonalAgenda extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.PERSONAL_AGENDA,
@@ -24,7 +25,6 @@ export class PersonalAgenda extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
     player.drawCard(3, {
       include: (card) => {
         return card.cardType === CardType.EVENT &&

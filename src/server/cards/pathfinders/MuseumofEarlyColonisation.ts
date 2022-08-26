@@ -10,6 +10,7 @@ import {Units} from '../../../common/Units';
 import {all} from '../Options';
 
 export class MuseumofEarlyColonisation extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -33,11 +34,7 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
-    return super.canPlay(player) && player.production.canAdjust(this.productionBox);
-  }
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.increaseTerraformRating();
     return undefined;
   }

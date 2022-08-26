@@ -6,6 +6,7 @@ import {Resources} from '../../../common/Resources';
 import {Units} from '../../../common/Units';
 
 export class AntidesertificationTechniques extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.ANTI_DESERTIFICATION_TECHNIQUES,
@@ -23,7 +24,6 @@ export class AntidesertificationTechniques extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
     player.addResource(Resources.MEGACREDITS, 5);
     return undefined;
   }

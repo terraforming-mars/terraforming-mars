@@ -48,7 +48,7 @@ describe('MuseumofEarlyColonisation', function() {
     player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(20);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1, titanium: 1, plants: 1}));
     expect(player.getTerraformRating()).eq(21);

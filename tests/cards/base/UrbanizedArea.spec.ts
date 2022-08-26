@@ -7,6 +7,8 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../TestingUtils';
 
 describe('UrbanizedArea', function() {
   let card: UrbanizedArea;
@@ -25,13 +27,13 @@ describe('UrbanizedArea', function() {
   });
 
   it('Can not play without energy production', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play without available space between two cities', function() {
     game.addCityTile(player, lands[0].id);
     player.production.add(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
@@ -39,10 +41,9 @@ describe('UrbanizedArea', function() {
     game.addCityTile(player, lands[1].id);
 
     player.production.add(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.not.undefined;
+    const action = cast(player.simplePlay(card), SelectSpace);
     expect(action.availableSpaces).has.lengthOf(1);
 
     action.cb(action.availableSpaces[0]);

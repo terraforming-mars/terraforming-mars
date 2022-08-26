@@ -64,7 +64,7 @@ describe('Cultural Metropolis', function() {
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(5);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(game.deferredActions).has.lengthOf(2);
     player.game.deferredActions.pop(); // Pop out the city placement deferred action
     const action = player.game.deferredActions.pop() as SendDelegateToArea;

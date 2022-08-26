@@ -6,6 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 
 export class DesignCompany extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.DESIGN_COMPANY,
@@ -23,7 +24,6 @@ export class DesignCompany extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
     player.drawCard(3, {tag: Tag.BUILDING});
     return undefined;
   }

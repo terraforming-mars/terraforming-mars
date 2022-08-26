@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -8,6 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 
 export class PowerPlant extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -26,8 +26,7 @@ export class PowerPlant extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.adjust(this.productionBox);
+  public play() {
     return undefined;
   }
 }

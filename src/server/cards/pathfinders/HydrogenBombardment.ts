@@ -6,6 +6,7 @@ import {Resources} from '../../../common/Resources';
 import {Units} from '../../../common/Units';
 
 export class HydrogenBombardment extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,
@@ -24,7 +25,6 @@ export class HydrogenBombardment extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.addResource(Resources.MEGACREDITS, this.startingMegaCredits);
     player.game.increaseVenusScaleLevel(player, 1);
     return undefined;

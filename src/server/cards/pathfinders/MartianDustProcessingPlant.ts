@@ -8,6 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 
 export class MartianDustProcessingPlant extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -29,12 +30,7 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
-    return player.production.canAdjust(this.productionBox);
-  }
-
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.increaseTerraformRating();
     return undefined;
   }

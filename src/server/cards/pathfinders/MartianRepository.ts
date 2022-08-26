@@ -6,13 +6,13 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {Units} from '../../../common/Units';
 import {ICard} from '../ICard';
 import {played} from '../Options';
 
 export class MartianRepository extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -43,12 +43,7 @@ export class MartianRepository extends Card implements IProjectCard {
     if (qty > 0) player.addResourceTo(this, {qty, log: true});
   }
 
-  public override canPlay(player: Player) {
-    return player.production.energy > 0;
-  }
-
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
+  public play() {
     return undefined;
   }
 }

@@ -32,7 +32,7 @@ describe('DesignedOrganisms', function() {
     const penguins = new Penguins();
     player.playedCards = [tardigrades, penguins];
 
-    card.play(player);
+    player.simplePlay(card);
     runAllActions(game);
 
     expect(player.plants).eq(3);

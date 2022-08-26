@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class AlliedBanks extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.ALLIED_BANKS,
@@ -25,7 +26,6 @@ export class AlliedBanks extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.megaCredits += this.startingMegaCredits;
     return undefined;
   }

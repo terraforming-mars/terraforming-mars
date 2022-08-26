@@ -6,6 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Units} from '../../../common/Units';
 
 export class CO2Reducers extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.CO2_REDUCERS,
@@ -23,7 +24,6 @@ export class CO2Reducers extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.drawCard(2, {tag: Tag.MICROBE});
     return undefined;
   }

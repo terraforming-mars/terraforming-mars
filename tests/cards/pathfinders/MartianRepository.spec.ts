@@ -24,7 +24,7 @@ describe('MartianRepository', function() {
 
   it('play', function() {
     player.production.override({energy: 1});
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
   });
 

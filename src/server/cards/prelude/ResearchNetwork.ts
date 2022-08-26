@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.RESEARCH_NETWORK,
@@ -24,7 +25,6 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox),
     player.drawCard(3);
     return undefined;
   }

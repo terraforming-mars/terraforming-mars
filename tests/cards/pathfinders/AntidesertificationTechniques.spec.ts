@@ -17,7 +17,7 @@ describe('AntidesertificationTechniques', function() {
   });
 
   it('Should play', function() {
-    card.play(player);
+    player.simplePlay(card);
     expect(player.megaCredits).eq(5);
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1, steel: 1}));
   });

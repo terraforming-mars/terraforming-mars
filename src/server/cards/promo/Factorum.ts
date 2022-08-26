@@ -13,6 +13,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Units} from '../../../common/Units';
 
 export class Factorum extends Card implements IActionCard, ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -38,8 +39,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
+  public play() {
     return undefined;
   }
 

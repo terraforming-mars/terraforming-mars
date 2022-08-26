@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Resources} from '../../../common/Resources';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
@@ -14,6 +13,7 @@ import {Units} from '../../../common/Units';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class MartianMediaCenter extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -38,8 +38,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
+  public play() {
     return undefined;
   }
 

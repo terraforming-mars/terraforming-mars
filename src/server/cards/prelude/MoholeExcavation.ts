@@ -2,12 +2,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../../common/Units';
 
 export class MoholeExcavation extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.MOHOLE_EXCAVATION,
@@ -27,8 +27,6 @@ export class MoholeExcavation extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
-    player.production.add(Resources.HEAT, 2);
     player.heat += 2;
     return undefined;
   }

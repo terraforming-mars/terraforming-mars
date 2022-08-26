@@ -13,6 +13,7 @@ import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
 export class UtopiaInvest extends Card implements IActionCard, ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,
@@ -37,9 +38,7 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
-    player.production.add(Resources.TITANIUM, 1);
+  public play() {
     return undefined;
   }
   public canAct(player: Player): boolean {

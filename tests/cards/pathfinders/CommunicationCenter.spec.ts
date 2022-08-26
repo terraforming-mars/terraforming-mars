@@ -33,7 +33,7 @@ describe('CommunicationCenter', function() {
     card.resourceCount = 0;
     player.production.add(Resources.ENERGY, 2);
 
-    expect(card.play(player));
+    expect(player.simplePlay(card));
 
     runAllActions(game);
 

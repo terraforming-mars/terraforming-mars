@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class BuildingIndustries extends Card implements IProjectCard {
   public migrated = true;
@@ -14,7 +13,7 @@ export class BuildingIndustries extends Card implements IProjectCard {
       name: CardName.BUILDING_INDUSTRIES,
       tags: [Tag.BUILDING],
       cost: 6,
-      productionBox: Units.of({energy: -1, steel: 2}),
+      productionBox: {energy: -1, steel: 2},
 
       metadata: {
         cardNumber: '065',

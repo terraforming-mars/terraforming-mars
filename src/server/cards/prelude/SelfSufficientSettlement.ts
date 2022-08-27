@@ -5,7 +5,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
   public migrated = true;
@@ -13,7 +12,7 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
     super({
       name: CardName.SELF_SUFFICIENT_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'P29',

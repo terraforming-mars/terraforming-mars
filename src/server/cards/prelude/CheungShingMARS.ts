@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {played} from '../Options';
 
 export class CheungShingMARS extends Card implements ICorporationCard {
@@ -15,7 +14,7 @@ export class CheungShingMARS extends Card implements ICorporationCard {
       name: CardName.CHEUNG_SHING_MARS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 44,
-      productionBox: Units.of({megacredits: 3}),
+      productionBox: {megacredits: 3},
 
       cardDiscount: {tag: Tag.BUILDING, amount: 2},
       metadata: {

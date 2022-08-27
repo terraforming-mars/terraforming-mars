@@ -10,7 +10,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 import {max} from '../Options';
 
@@ -31,7 +30,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       name,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 9,
-      productionBox: Units.of({megacredits: 1}),
+      productionBox: {megacredits: 1},
       adjacencyBonus,
       requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
       victoryPoints: 1,

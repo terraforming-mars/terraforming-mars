@@ -8,7 +8,6 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class ProtectedValley extends Card implements IProjectCard {
   public migrated = true;
@@ -18,7 +17,7 @@ export class ProtectedValley extends Card implements IProjectCard {
       name: CardName.PROTECTED_VALLEY,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 23,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
       tr: {oxygen: 1},
 
       metadata: {

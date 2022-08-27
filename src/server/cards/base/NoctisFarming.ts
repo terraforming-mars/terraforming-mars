@@ -6,7 +6,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class NoctisFarming extends Card implements IProjectCard {
   public migrated = true;
@@ -16,7 +15,7 @@ export class NoctisFarming extends Card implements IProjectCard {
       name: CardName.NOCTIS_FARMING,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 10,
-      productionBox: Units.of({megacredits: 1}),
+      productionBox: {megacredits: 1},
       requirements: CardRequirements.builder((b) => b.temperature(-20)),
       victoryPoints: 1,
 

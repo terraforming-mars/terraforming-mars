@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -16,8 +15,8 @@ export class SinusIridiumRoadNetwork extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,
-      productionBox: Units.of({energy: -1, megacredits: 3}),
-      reserveUnits: Units.of({steel: 1}),
+      productionBox: {energy: -1, megacredits: 3},
+      reserveUnits: {steel: 1},
       tr: {moonLogistics: 1},
 
       metadata: {

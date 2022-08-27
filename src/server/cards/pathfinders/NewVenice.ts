@@ -9,7 +9,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class NewVenice extends Card implements IProjectCard {
   public migrated = true;
@@ -19,7 +18,7 @@ export class NewVenice extends Card implements IProjectCard {
       name: CardName.NEW_VENICE,
       tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING, Tag.CITY],
       cost: 21,
-      productionBox: Units.of({energy: 1, megacredits: 2}),
+      productionBox: {energy: 1, megacredits: 2},
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {

@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class FuelFactory extends Card implements IProjectCard {
   public migrated = true;
@@ -14,7 +13,7 @@ export class FuelFactory extends Card implements IProjectCard {
       name: CardName.FUEL_FACTORY,
       tags: [Tag.BUILDING],
       cost: 6,
-      productionBox: Units.of({energy: -1, megacredits: 1, titanium: 1}),
+      productionBox: {energy: -1, megacredits: 1, titanium: 1},
 
       metadata: {
         cardNumber: '180',

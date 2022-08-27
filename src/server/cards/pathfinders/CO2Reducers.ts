@@ -3,7 +3,6 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Units} from '../../../common/Units';
 
 export class CO2Reducers extends PreludeCard {
   public migrated = true;
@@ -11,7 +10,7 @@ export class CO2Reducers extends PreludeCard {
     super({
       name: CardName.CO2_REDUCERS,
       tags: [Tag.MICROBE, Tag.VENUS],
-      productionBox: Units.of({megacredits: 3}),
+      productionBox: {megacredits: 3},
 
       metadata: {
         cardNumber: '',

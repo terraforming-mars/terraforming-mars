@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class StripMine extends Card implements IProjectCard {
   public migrated = true;
@@ -15,7 +14,7 @@ export class StripMine extends Card implements IProjectCard {
       name: CardName.STRIP_MINE,
       tags: [Tag.BUILDING],
       cost: 25,
-      productionBox: Units.of({energy: -2, steel: 2, titanium: 1}),
+      productionBox: {energy: -2, steel: 2, titanium: 1},
       tr: {oxygen: 2},
 
       metadata: {

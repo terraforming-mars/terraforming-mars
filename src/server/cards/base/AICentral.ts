@@ -7,7 +7,6 @@ import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class AICentral extends Card implements IActionCard, IProjectCard {
   public migrated = true;
@@ -17,7 +16,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       name: CardName.AI_CENTRAL,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 21,
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),

@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
-import {Units} from '../../../common/Units';
 
 export class ResearchGrant extends PreludeCard {
   public migrated = true;
@@ -12,7 +11,7 @@ export class ResearchGrant extends PreludeCard {
     super({
       name: CardName.RESEARCH_GRANT_PATHFINDERS,
       tags: [Tag.SCIENCE, Tag.SCIENCE],
-      productionBox: Units.of({energy: 1}),
+      productionBox: {energy: 1},
       startingMegacredits: 14,
 
       metadata: {

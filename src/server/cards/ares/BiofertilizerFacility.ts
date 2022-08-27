@@ -13,7 +13,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class BiofertilizerFacility extends Card implements IProjectCard {
   public migrated = true;
@@ -23,7 +22,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
       name: CardName.BIOFERTILIZER_FACILITY,
       tags: [Tag.MICROBE, Tag.BUILDING],
       cost: 12,
-      productionBox: Units.of({plants: 1}),
+      productionBox: {plants: 1},
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
       metadata: {

@@ -14,7 +14,6 @@ import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Units} from '../../../common/Units';
 
 export class Capital extends Card implements IProjectCard {
   public migrated = true;
@@ -43,7 +42,7 @@ export class Capital extends Card implements IProjectCard {
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 26,
       adjacencyBonus,
-      productionBox: Units.of({energy: -2, megacredits: 5}),
+      productionBox: {energy: -2, megacredits: 5},
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       victoryPoints: 'special',

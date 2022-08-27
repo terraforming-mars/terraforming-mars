@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Units} from '../../../common/Units';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
@@ -18,7 +17,7 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
       cardType: CardType.AUTOMATED,
       name: CardName.LOBBY_HALLS,
       cost: 11,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'PfTBD',

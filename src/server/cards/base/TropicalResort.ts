@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class TropicalResort extends Card implements IProjectCard {
   public migrated = true;
@@ -14,7 +13,7 @@ export class TropicalResort extends Card implements IProjectCard {
       name: CardName.TROPICAL_RESORT,
       tags: [Tag.BUILDING],
       cost: 13,
-      productionBox: Units.of({megacredits: 3, heat: -2}),
+      productionBox: {megacredits: 3, heat: -2},
       victoryPoints: 2,
 
       metadata: {

@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class SoilFactory extends Card implements IProjectCard {
   public migrated = true;
@@ -14,7 +13,7 @@ export class SoilFactory extends Card implements IProjectCard {
       name: CardName.SOIL_FACTORY,
       tags: [Tag.BUILDING],
       cost: 9,
-      productionBox: Units.of({energy: -1, plants: 1}),
+      productionBox: {energy: -1, plants: 1},
       victoryPoints: 1,
 
       metadata: {

@@ -4,7 +4,6 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class MiningOperations extends PreludeCard implements IProjectCard {
   public migrated = true;
@@ -12,7 +11,7 @@ export class MiningOperations extends PreludeCard implements IProjectCard {
     super({
       name: CardName.MINING_OPERATIONS,
       tags: [Tag.BUILDING],
-      productionBox: Units.of({steel: 2}),
+      productionBox: {steel: 2},
 
       metadata: {
         cardNumber: 'P21',

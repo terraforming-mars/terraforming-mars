@@ -8,7 +8,6 @@ import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {Units} from '../../../common/Units';
 
 export class SpacePort extends Card implements IProjectCard {
   public migrated = true;
@@ -18,7 +17,7 @@ export class SpacePort extends Card implements IProjectCard {
       tags: [Tag.CITY, Tag.BUILDING],
       name: CardName.SPACE_PORT,
       cardType: CardType.AUTOMATED,
-      productionBox: Units.of({energy: -1, megacredits: 4}),
+      productionBox: {energy: -1, megacredits: 4},
 
       requirements: CardRequirements.builder((b) => b.colonies()),
       metadata: {

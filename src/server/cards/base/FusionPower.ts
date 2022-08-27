@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class FusionPower extends Card implements IProjectCard {
   public migrated = true;
@@ -15,7 +14,7 @@ export class FusionPower extends Card implements IProjectCard {
       name: CardName.FUSION_POWER,
       tags: [Tag.SCIENCE, Tag.ENERGY, Tag.BUILDING],
       cost: 14,
-      productionBox: Units.of({energy: 3}),
+      productionBox: {energy: 3},
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.ENERGY, 2)),
       metadata: {

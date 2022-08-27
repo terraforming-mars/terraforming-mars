@@ -6,7 +6,6 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../../common/Units';
 
 export class SponsoredMohole extends Card implements IProjectCard {
   public migrated = true;
@@ -16,7 +15,7 @@ export class SponsoredMohole extends Card implements IProjectCard {
       tags: [Tag.BUILDING],
       name: CardName.SPONSORED_MOHOLE,
       cardType: CardType.AUTOMATED,
-      productionBox: Units.of({heat: 2}),
+      productionBox: {heat: 2},
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
       metadata: {

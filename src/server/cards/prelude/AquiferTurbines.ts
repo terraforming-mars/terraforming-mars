@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class AquiferTurbines extends PreludeCard {
   public migrated = true;
@@ -14,7 +13,7 @@ export class AquiferTurbines extends PreludeCard {
       name: CardName.AQUIFER_TURBINES,
       tags: [Tag.ENERGY],
 
-      productionBox: Units.of({energy: 2}),
+      productionBox: {energy: 2},
       startingMegacredits: -3,
 
       metadata: {

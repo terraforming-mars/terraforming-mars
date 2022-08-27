@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class PeroxidePower extends Card implements IProjectCard {
   public migrated = true;
@@ -14,7 +13,7 @@ export class PeroxidePower extends Card implements IProjectCard {
       name: CardName.PEROXIDE_POWER,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 7,
-      productionBox: Units.of({energy: 2, megacredits: -1}),
+      productionBox: {energy: 2, megacredits: -1},
 
       metadata: {
         cardNumber: '089',

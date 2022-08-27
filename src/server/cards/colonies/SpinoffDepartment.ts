@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../../common/Units';
 
 export class SpinoffDepartment extends Card implements IProjectCard {
   public migrated = true;
@@ -15,7 +14,7 @@ export class SpinoffDepartment extends Card implements IProjectCard {
       tags: [Tag.BUILDING],
       name: CardName.SPINOFF_DEPARTMENT,
       cardType: CardType.ACTIVE,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'C41',

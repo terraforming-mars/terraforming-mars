@@ -9,7 +9,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Units} from '../../../common/Units';
 import {played} from '../Options';
 
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
@@ -23,7 +22,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
 
       resourceType: CardResource.ASTEROID,
       victoryPoints: VictoryPoints.resource(1, 1),
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
 
       metadata: {
         cardNumber: 'X14',

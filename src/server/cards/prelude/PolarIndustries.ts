@@ -5,7 +5,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class PolarIndustries extends PreludeCard implements IProjectCard {
   public migrated = true;
@@ -13,7 +12,7 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
     super({
       name: CardName.POLAR_INDUSTRIES,
       tags: [Tag.BUILDING],
-      productionBox: Units.of({heat: 2}),
+      productionBox: {heat: 2},
 
       metadata: {
         cardNumber: 'P26',

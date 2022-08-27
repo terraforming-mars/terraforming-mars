@@ -4,7 +4,6 @@ import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class BusinessEmpire extends PreludeCard {
   public migrated = true;
@@ -13,7 +12,7 @@ export class BusinessEmpire extends PreludeCard {
       name: CardName.BUSINESS_EMPIRE,
       tags: [Tag.EARTH],
 
-      productionBox: Units.of({megacredits: 6}),
+      productionBox: {megacredits: 6},
       startingMegacredits: -6,
 
       metadata: {

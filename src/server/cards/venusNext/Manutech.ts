@@ -6,7 +6,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class Manutech extends Card implements ICorporationCard {
   public migrated = true;
@@ -16,7 +15,7 @@ export class Manutech extends Card implements ICorporationCard {
       tags: [Tag.BUILDING],
       startingMegaCredits: 35,
       cardType: CardType.CORPORATION,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         cardNumber: 'R23',

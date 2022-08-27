@@ -8,7 +8,6 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
 export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
       tags: [Tag.BUILDING],
       cost: 22,
-      productionBox: Units.of({energy: -4, plants: 2}),
+      productionBox: {energy: -4, plants: 2},
       tr: {tr: 3},
 
       metadata: {

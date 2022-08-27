@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class DeepWellHeating extends Card implements IProjectCard {
   public migrated = true;
@@ -15,7 +14,7 @@ export class DeepWellHeating extends Card implements IProjectCard {
       name: CardName.DEEP_WELL_HEATING,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 13,
-      productionBox: Units.of({energy: 1}),
+      productionBox: {energy: 1},
       tr: {temperature: 1},
 
       metadata: {

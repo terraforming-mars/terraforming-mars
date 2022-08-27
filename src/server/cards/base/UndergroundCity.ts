@@ -7,7 +7,6 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class UndergroundCity extends Card implements IProjectCard {
   public migrated = true;
@@ -17,7 +16,7 @@ export class UndergroundCity extends Card implements IProjectCard {
       name: CardName.UNDERGROUND_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 18,
-      productionBox: Units.of({energy: -2, steel: 2}),
+      productionBox: {energy: -2, steel: 2},
 
       metadata: {
         cardNumber: '032',

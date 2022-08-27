@@ -1,4 +1,3 @@
-
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
@@ -66,7 +65,7 @@ const typesToTest: PlayerInputModel[] = [
   {
     ...baseInput,
     inputType: PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY,
-    cards: [{name: CardName.ANTS, reserveUnits: Units.of({})} as CardModel],
+    cards: [{name: CardName.ANTS, reserveUnits: {}} as CardModel],
   },
   {
     ...baseInput,

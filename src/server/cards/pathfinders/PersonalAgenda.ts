@@ -4,14 +4,13 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Units} from '../../../common/Units';
 
 export class PersonalAgenda extends PreludeCard {
   public migrated = true;
   constructor() {
     super({
       name: CardName.PERSONAL_AGENDA,
-      productionBox: Units.of({megacredits: 3}),
+      productionBox: {megacredits: 3},
 
       metadata: {
         cardNumber: 'P08',

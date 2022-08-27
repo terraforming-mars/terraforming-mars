@@ -8,7 +8,6 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class OpenCity extends Card implements IProjectCard {
   public migrated = true;
@@ -18,7 +17,7 @@ export class OpenCity extends Card implements IProjectCard {
       name: CardName.OPEN_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 23,
-      productionBox: Units.of({energy: -1, megacredits: 4}),
+      productionBox: {energy: -1, megacredits: 4},
       requirements: CardRequirements.builder((b) => b.oxygen(12)),
       victoryPoints: 1,
 

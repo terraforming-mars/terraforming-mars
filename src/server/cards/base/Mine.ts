@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class Mine extends Card implements IProjectCard {
   public migrated = true;
@@ -14,7 +13,7 @@ export class Mine extends Card implements IProjectCard {
       name: CardName.MINE,
       tags: [Tag.BUILDING],
       cost: 4,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         description: 'Increase your steel production 1 step.',

@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {MoonCard} from './MoonCard';
 import {TileType} from '../../../common/TileType';
@@ -19,7 +18,7 @@ export class LunaEcumenopolis extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.CITY, Tag.MOON],
       cost: 35,
-      reserveUnits: Units.of({titanium: 2}),
+      reserveUnits: {titanium: 2},
 
       metadata: {
         description: 'Spend 2 Titanium. ' +

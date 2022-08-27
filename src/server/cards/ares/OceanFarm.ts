@@ -10,7 +10,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class OceanFarm extends Card implements IProjectCard {
   public migrated = true;
@@ -21,7 +20,7 @@ export class OceanFarm extends Card implements IProjectCard {
       name: CardName.OCEAN_FARM,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 15,
-      productionBox: Units.of({plants: 1, heat: 1}),
+      productionBox: {plants: 1, heat: 1},
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {

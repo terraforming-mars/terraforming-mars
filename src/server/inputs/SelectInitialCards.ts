@@ -27,7 +27,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
           }
           corporation = cards[0];
           return undefined;
-        }, {min: 2, max: player.dealtCorporationCards.length},
+        }, {min: 1, max: 1},
       ),
     );
 
@@ -41,7 +41,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
             }
             player.preludeCardsInHand.push(...preludeCards);
             return undefined;
-          }, {min: 2, max: player.dealtPreludeCards.length},
+          }, {min: 2, max: 2},
         ),
       );
     }

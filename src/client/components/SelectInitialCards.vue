@@ -256,16 +256,16 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     corpCardOption() {
       const option = getOption(this.playerinput.options, 0);
-      if (!getPreferences().experimental_ui) {
+      if (getPreferences().experimental_ui) {
         option.minCardsToSelect = 1;
-        option.maxCardsToSelect = 1;
+        option.maxCardsToSelect = undefined;
       }
       return option;
     },
     preludeCardOption() {
       const option = getOption(this.playerinput.options, 1);
-      if (!getPreferences().experimental_ui) {
-        option.maxCardsToSelect = 2;
+      if (getPreferences().experimental_ui) {
+        option.maxCardsToSelect = undefined;
       }
       return option;
     },

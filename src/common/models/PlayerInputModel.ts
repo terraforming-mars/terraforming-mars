@@ -23,13 +23,11 @@ export interface PlayerInputModel {
     min: number | undefined;
     max: number | undefined;
     maxByDefault?: boolean;
-    maxCardsToSelect: number | undefined;
     microbes: number | undefined;
     floaters: number | undefined;
     science: number | undefined;
     seeds: number | undefined;
     data: number | undefined;
-    minCardsToSelect: number | undefined;
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;
     buttonLabel: string;

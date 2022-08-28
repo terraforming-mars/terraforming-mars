@@ -4,7 +4,7 @@
         <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
             <template v-if="!card.isDisabled">
               <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" />
-              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
+              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" />
             </template>
             <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
               <template v-if="playerinput.showOwner">
@@ -163,12 +163,12 @@ export default Vue.extend({
   },
   computed: {
     selectOnlyOneCard() : boolean {
-      return this.playerinput.maxCardsToSelect === 1 && this.playerinput.minCardsToSelect === 1;
+      return this.playerinput.max === 1 && this.playerinput.min === 1;
     },
     isOptionalToManyCards(): boolean {
-      return this.playerinput.maxCardsToSelect !== undefined &&
-             this.playerinput.maxCardsToSelect > 1 &&
-             this.playerinput.minCardsToSelect === 0;
+      return this.playerinput.max !== undefined &&
+             this.playerinput.max > 1 &&
+             this.playerinput.min === 0;
     },
   },
 });

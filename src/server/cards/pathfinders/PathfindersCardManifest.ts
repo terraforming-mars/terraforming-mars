@@ -233,6 +233,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   cardsToRemove: [
     CardName.VENUS_FIRST,
     CardName.RESEARCH_GRANT,
+    CardName.VALUABLE_GASES,
   ],
 });
 

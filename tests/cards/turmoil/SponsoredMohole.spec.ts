@@ -18,7 +18,7 @@ describe('SponsoredMohole', function() {
     kelvinists.delegates.push(player.id, player.id);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.heat).to.eq(2);
   });
 });

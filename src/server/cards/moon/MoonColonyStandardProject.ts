@@ -4,7 +4,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
-import {Units} from '../../../common/Units';
 import {Resources} from '../../../common/Resources';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../../common/TileType';
@@ -15,7 +14,7 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
   constructor(properties = {
     name: CardName.MOON_COLONY_STANDARD_PROJECT,
     cost: 22,
-    reserveUnits: Units.of({titanium: 1}),
+    reserveUnits: {titanium: 1},
     tr: {moonColony: 1},
 
     metadata: {

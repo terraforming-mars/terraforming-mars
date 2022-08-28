@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {Units} from '../../../common/Units';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {nextToNoOtherTileFn} from '../../boards/Board';
@@ -15,6 +14,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {max} from '../Options';
 
 export class EarlyExpedition extends Card implements IProjectCard {
+  public migrated = true;
   // This card repeats the NEXT TO NO OTHER TILE behavior from Research Outpost, and Philares
   // has some similar code. Time for code reduction.
 
@@ -25,7 +25,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
       cost: 15,
       tags: [Tag.SCIENCE, Tag.SPACE, Tag.CITY],
       requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),
-      productionBox: Units.of({energy: -1, megacredits: 3}),
+      productionBox: {energy: -1, megacredits: 3},
 
       metadata: {
         cardNumber: 'Pf18',
@@ -45,11 +45,10 @@ export class EarlyExpedition extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player) {
-    return player.production.canAdjust(this.productionBox) && this.getAvailableSpaces(player).length > 0;
+    return this.getAvailableSpaces(player).length > 0;
   }
 
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
 
     return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {

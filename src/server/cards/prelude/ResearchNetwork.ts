@@ -4,14 +4,14 @@ import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.RESEARCH_NETWORK,
       tags: [Tag.WILD],
-      productionBox: Units.of({megacredits: 1}),
+      productionBox: {megacredits: 1},
 
       metadata: {
         cardNumber: 'P28',
@@ -24,7 +24,6 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox),
     player.drawCard(3);
     return undefined;
   }

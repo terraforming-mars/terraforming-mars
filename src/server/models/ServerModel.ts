@@ -219,8 +219,8 @@ export class Server {
       amount: undefined,
       options: undefined,
       cards: undefined,
-      maxCardsToSelect: undefined,
-      minCardsToSelect: undefined,
+      max: undefined,
+      min: undefined,
       canUseSteel: undefined,
       canUseTitanium: undefined,
       canUseHeat: undefined,
@@ -228,8 +228,6 @@ export class Server {
       canUseData: undefined,
       players: undefined,
       availableSpaces: undefined,
-      min: undefined,
-      max: undefined,
       maxByDefault: undefined,
       microbes: undefined,
       floaters: undefined,
@@ -275,8 +273,8 @@ export class Server {
         showResources: selectCard.config.played === true || selectCard.config.played === CardName.SELF_REPLICATING_ROBOTS,
         enabled: selectCard.config.enabled,
       });
-      playerInputModel.maxCardsToSelect = selectCard.config.max;
-      playerInputModel.minCardsToSelect = selectCard.config.min;
+      playerInputModel.max = selectCard.config.max;
+      playerInputModel.min = selectCard.config.min;
       playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled?.every((p: boolean) => p === false);
       playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
       playerInputModel.showOwner = selectCard.config.showOwner === true;

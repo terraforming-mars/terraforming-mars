@@ -6,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {Units} from '../../../common/Units';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
 import {MoonCard} from './MoonCard';
@@ -19,8 +18,8 @@ export class MareSerenitatisMine extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 21,
-      productionBox: Units.of({steel: 1, titanium: 1}),
-      reserveUnits: Units.of({steel: 1, titanium: 2}),
+      productionBox: {steel: 1, titanium: 1},
+      reserveUnits: {steel: 1, titanium: 2},
       tr: {moonMining: 1, moonLogistics: 1},
 
       metadata: {
@@ -38,8 +37,7 @@ export class MareSerenitatisMine extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_SERENITATIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     const moon = MoonExpansion.moonData(player.game).moon;

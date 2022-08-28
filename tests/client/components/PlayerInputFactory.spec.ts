@@ -1,4 +1,3 @@
-
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
@@ -21,14 +20,12 @@ const baseInput = {
   options: undefined,
   min: undefined,
   max: undefined,
-  maxCardsToSelect: undefined,
   microbes: undefined,
   floaters: undefined,
   science: undefined,
   seeds: undefined,
   data: undefined,
   title: 'test input',
-  minCardsToSelect: undefined,
   players: undefined,
   buttonLabel: 'save',
   coloniesModel: undefined,
@@ -66,7 +63,7 @@ const typesToTest: PlayerInputModel[] = [
   {
     ...baseInput,
     inputType: PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY,
-    cards: [{name: CardName.ANTS, reserveUnits: Units.of({})} as CardModel],
+    cards: [{name: CardName.ANTS, reserveUnits: {}} as CardModel],
   },
   {
     ...baseInput,

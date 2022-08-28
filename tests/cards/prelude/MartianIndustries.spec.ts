@@ -6,7 +6,7 @@ describe('MartianIndustries', function() {
   it('Should play', function() {
     const card = new MartianIndustries();
     const player = TestPlayer.BLUE.newPlayer();
-    const action = card.play(player);
+    const action = player.simplePlay(card);
     expect(action).is.undefined;
     expect(player.production.energy).to.eq(1);
     expect(player.production.steel).to.eq(1);

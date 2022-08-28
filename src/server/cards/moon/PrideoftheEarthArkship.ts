@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
@@ -22,7 +21,7 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
       resourceType: CardResource.SCIENCE,
       victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.SPACE, 2)),
-      reserveUnits: Units.of({titanium: 2}),
+      reserveUnits: {titanium: 2},
 
       metadata: {
         description: 'Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.',
@@ -38,8 +37,7 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   }
   public override resourceCount = 0;
 
-  public override play(player: Player) {
-    super.play(player);
+  public play() {
     return undefined;
   }
 

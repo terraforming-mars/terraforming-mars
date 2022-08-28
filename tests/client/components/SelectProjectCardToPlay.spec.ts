@@ -50,10 +50,10 @@ describe('SelectProjectCardToPlay', () => {
           title: 'foo',
           cards: [{
             name: CardName.ANTS,
-            reserveUnits: Units.of({}),
+            reserveUnits: {},
           }, {
             name: CardName.BIRDS,
-            reserveUnits: Units.of({}),
+            reserveUnits: {},
           }],
         },
         onsave: () => {},

@@ -4,6 +4,8 @@ import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../TestingUtils';
 
 describe('UndergroundCity', function() {
   let card: UndergroundCity;
@@ -19,14 +21,13 @@ describe('UndergroundCity', function() {
 
   it('Can not play', function() {
     player.production.add(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 2);
-    expect(card.canPlay(player)).is.true;
-    const action = card.play(player);
-    expect(action).is.not.undefined;
+    expect(player.simpleCanPlay(card)).is.true;
+    const action = cast(player.simplePlay(card), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesCount()).to.eq(1);

@@ -6,7 +6,7 @@ describe('Recyclon', function() {
   it('Should play', function() {
     const card = new Recyclon();
     const player = TestPlayer.BLUE.newPlayer();
-    const play = card.play(player);
+    const play = player.simplePlay(card);
     expect(play).is.undefined;
     expect(player.production.steel).to.eq(1);
     expect(card.resourceCount).to.eq(1);

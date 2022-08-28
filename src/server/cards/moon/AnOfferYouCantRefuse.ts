@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PlayerId} from '../../../common/Types';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ProjectCard} from '../ProjectCard';
+import {Card} from '../Card';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -12,7 +12,7 @@ import {Game} from '../../Game';
 import {IParty} from '../../turmoil/parties/IParty';
 import {all} from '../Options';
 
-export class AnOfferYouCantRefuse extends ProjectCard {
+export class AnOfferYouCantRefuse extends Card {
   constructor() {
     super({
       name: CardName.AN_OFFER_YOU_CANT_REFUSE,
@@ -64,7 +64,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
     return orOptions;
   }
 
-  public override play(player: Player) {
+  public play(player: Player) {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
     const orOptions = new OrOptions();

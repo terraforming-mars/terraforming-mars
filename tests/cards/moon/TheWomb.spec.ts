@@ -39,7 +39,7 @@ describe('TheWomb', () => {
     player.titanium = 2;
     expect(player.getTerraformRating()).eq(14);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.production.energy).eq(0);

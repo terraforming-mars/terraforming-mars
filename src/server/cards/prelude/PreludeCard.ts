@@ -13,7 +13,7 @@ interface StaticPreludeProperties {
     name: CardName;
     tags?: Array<Tag>;
     startingMegacredits?: number;
-    productionBox?: Units;
+    productionBox?: Partial<Units>;
 }
 
 export abstract class PreludeCard extends Card implements IProjectCard {

@@ -4,21 +4,20 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {LavaFlows} from '../base/LavaFlows';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {BoardName} from '../../../common/boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class LavaTubeSettlement extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.LAVA_TUBE_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
       cost: 15,
-      productionBox: Units.of({energy: -1, megacredits: 2}),
+      productionBox: {energy: -1, megacredits: 2},
 
       metadata: {
         cardNumber: 'P37',
@@ -48,8 +47,6 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
-    player.production.add(Resources.ENERGY, -1);
     player.game.defer(new PlaceCityTile(
       player,
       'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',

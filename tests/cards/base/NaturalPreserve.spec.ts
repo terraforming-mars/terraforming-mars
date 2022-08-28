@@ -39,7 +39,7 @@ describe('NaturalPreserve', () => {
 
   it('Should play', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = cast(card.play(player), SelectSpace);
+    const action = cast(player.simplePlay(card), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
     expect(player.production.megacredits).to.eq(1);

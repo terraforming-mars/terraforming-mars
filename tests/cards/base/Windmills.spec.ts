@@ -23,7 +23,7 @@ describe('Windmills', function() {
     (game as any).oxygenLevel = 7;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });

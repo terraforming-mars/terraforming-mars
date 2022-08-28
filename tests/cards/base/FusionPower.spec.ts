@@ -13,14 +13,14 @@ describe('FusionPower', function() {
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(card, card);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.energy).to.eq(3);
   });
 });

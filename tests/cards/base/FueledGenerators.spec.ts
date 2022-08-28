@@ -9,7 +9,7 @@ describe('FueledGenerators', function() {
     const player = TestPlayer.BLUE.newPlayer();
 
     player.production.add(Resources.PLANTS, 1);
-    card.play(player);
+    player.simplePlay(card);
     expect(player.production.megacredits).to.eq(-1);
     expect(player.production.energy).to.eq(1);
   });

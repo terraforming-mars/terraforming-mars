@@ -66,6 +66,7 @@ import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
+import {MoonCard} from './cards/moon/MoonCard';
 
 // Behavior when playing a card.
 // add it to the tableau
@@ -660,11 +661,10 @@ export class Player {
     }
   }
 
+  // Returns the set of played cards that have actual resources on them.
+  // If `resource` is supplied, only cards that hold that type of resource are retured.
   public getCardsWithResources(resource?: CardResource): Array<ICard> {
-    let result: Array<ICard> = [
-      ...this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
-      ...this.corporations.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
-    ];
+    let result = this.tableau.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
@@ -673,11 +673,10 @@ export class Player {
     return result;
   }
 
+  // Returns the set of played cards that can store resources on them.
+  // If `resource` is supplied, only cards that hold that type of resource are retured.
   public getResourceCards(resource?: CardResource): Array<ICard> {
-    let result: Array<ICard> = [
-      ...this.playedCards.filter((card) => card.resourceType !== undefined),
-      ...this.corporations.filter((card) => card.resourceType !== undefined),
-    ];
+    let result = this.tableau.filter((card) => card.resourceType !== undefined);
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
@@ -973,23 +972,15 @@ export class Player {
   }
 
   private paymentOptionsForCard(card: IProjectCard): Payment.Options {
-    const canUseSteel = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING);
-    const canUseTitanium = this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE);
-    const canUseMicrobes = card.tags.includes(Tag.PLANT);
-    const canUseFloaters = card.tags.includes(Tag.VENUS);
-    const canUseScience = card.tags.includes(Tag.MOON);
-    const canUseSeeds = card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
-    // TODO(kberg): add this.corporation.name === CardName.AURORAI
-    const canUseData = card.cardType === CardType.STANDARD_PROJECT;
-
     return {
-      steel: canUseSteel,
-      titanium: canUseTitanium,
-      seeds: canUseSeeds,
-      floaters: canUseFloaters,
-      microbes: canUseMicrobes,
-      science: canUseScience,
-      data: canUseData,
+      steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
+      titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
+      seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
+      floaters: card.tags.includes(Tag.VENUS),
+      microbes: card.tags.includes(Tag.PLANT),
+      science: card.tags.includes(Tag.MOON),
+      // TODO(kberg): add this.corporation.name === CardName.AURORAI
+      data: card.cardType === CardType.STANDARD_PROJECT,
     };
   }
 
@@ -1091,7 +1082,7 @@ export class Player {
     }
 
     // Play the card
-    const action = selectedCard.play(this);
+    const action = this.simplePlay(selectedCard);
     this.defer(action, Priority.DEFAULT);
 
     // This could probably include 'nothing' but for now this will work.
@@ -1138,6 +1129,17 @@ export class Player {
     }
 
     return undefined;
+  }
+
+  public simplePlay(card: IProjectCard) {
+    if (card instanceof MoonCard || (card.migrated === true)) {
+      if (card.productionBox !== undefined) {
+        this.production.adjust(card.productionBox);
+      }
+      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
+      this.deductUnits(adjustedReserveUnits);
+    }
+    return card.play(this);
   }
 
   public onCardPlayed(card: IProjectCard) {
@@ -1376,7 +1378,7 @@ export class Player {
     return candidateCards.filter((card) => this.canPlay(card));
   }
 
-  public canAffordCard(card: IProjectCard): boolean {
+  private canAffordCard(card: IProjectCard): boolean {
     return this.canAfford(
       this.getCardCost(card),
       {
@@ -1387,13 +1389,21 @@ export class Player {
   }
 
   public canPlay(card: IProjectCard): boolean {
-    return this.canAffordCard(card) && this.canPlayIgnoringCost(card);
+    return this.canAffordCard(card) && this.simpleCanPlay(card);
+  }
+
+  // TODO(kberg): Replace all uses of canPlayIgnoringCost with simpleCanPlay.
+  public canPlayIgnoringCost(card: IProjectCard) {
+    return this.simpleCanPlay(card);
   }
 
   // Verify if requirements for the card can be met, ignoring the project cost.
   // Only made public for tests.
-  public canPlayIgnoringCost(card: IProjectCard): boolean {
+  public simpleCanPlay(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
+      return false;
+    }
+    if ((card instanceof MoonCard || card.migrated === true) && card.productionBox && !this.production.canAdjust(card.productionBox)) {
       return false;
     }
     return card.canPlay(this);

@@ -6,16 +6,16 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class Manutech extends Card implements ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.MANUTECH,
       tags: [Tag.BUILDING],
       startingMegaCredits: 35,
       cardType: CardType.CORPORATION,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         cardNumber: 'R23',
@@ -33,8 +33,7 @@ export class Manutech extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
+  public play() {
     return undefined;
   }
 

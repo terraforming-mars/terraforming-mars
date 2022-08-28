@@ -34,7 +34,7 @@ describe('AncientShipyards', () => {
     bluePlayer.titanium = 3;
     expect(bluePlayer.production.steel).eq(0);
 
-    card.play(bluePlayer);
+    bluePlayer.simplePlay(card);
 
     expect(bluePlayer.titanium).eq(0);
   });

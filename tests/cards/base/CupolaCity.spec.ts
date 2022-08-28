@@ -34,7 +34,7 @@ describe('CupolaCity', function() {
     player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    const action = cast(player.simplePlay(card), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(player.production.energy).to.eq(0);

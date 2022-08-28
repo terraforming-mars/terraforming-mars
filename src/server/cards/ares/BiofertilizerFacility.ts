@@ -3,7 +3,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -14,16 +13,16 @@ import {Tag} from '../../../common/cards/Tag';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class BiofertilizerFacility extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.BIOFERTILIZER_FACILITY,
       tags: [Tag.MICROBE, Tag.BUILDING],
       cost: 12,
-      productionBox: Units.of({plants: 1}),
+      productionBox: {plants: 1},
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
       metadata: {
@@ -42,7 +41,6 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.production.add(Resources.PLANTS, 1);
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
 
     return new SelectSpace(

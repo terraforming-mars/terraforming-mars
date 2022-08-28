@@ -6,7 +6,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
 import {IMoonCard} from './IMoonCard';
 import {MoonCard} from './MoonCard';
@@ -19,8 +18,8 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 19,
-      productionBox: Units.of({steel: 1, titanium: 1}),
-      reserveUnits: Units.of({titanium: 1}),
+      productionBox: {steel: 1, titanium: 1},
+      reserveUnits: {titanium: 1},
       tr: {moonMining: 1},
 
       metadata: {
@@ -37,8 +36,7 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_IMBRIUM, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

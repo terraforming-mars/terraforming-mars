@@ -1,5 +1,6 @@
 import {LogMessageDataType} from './LogMessageDataType';
 
-export class LogMessageData {
-  constructor(public type: LogMessageDataType, public value: string) {}
+export type LogMessageData = {
+  type: LogMessageDataType;
+  value: string;
 }

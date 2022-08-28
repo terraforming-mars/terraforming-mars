@@ -32,17 +32,17 @@ export class LogBuilder {
   }
 
   public string(value: string): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.STRING, value));
+    this.parameters.push({type: LogMessageDataType.STRING, value});
     return this;
   }
 
   public rawString(value: string): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.RAW_STRING, value));
+    this.parameters.push({type: LogMessageDataType.RAW_STRING, value});
     return this;
   }
 
   public number(value: number): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.RAW_STRING, value.toString()));
+    this.parameters.push({type: LogMessageDataType.RAW_STRING, value: value.toString()});
     return this;
   }
 
@@ -51,7 +51,7 @@ export class LogBuilder {
   }
 
   public playerId(value: string): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.PLAYER, value));
+    this.parameters.push({type: LogMessageDataType.PLAYER, value});
     return this;
   }
 
@@ -60,47 +60,47 @@ export class LogBuilder {
   }
 
   public cardName(value: CardName): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.CARD, value));
+    this.parameters.push({type: LogMessageDataType.CARD, value});
     return this;
   }
 
   public award(value: IAward): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.AWARD, value.name));
+    this.parameters.push({type: LogMessageDataType.AWARD, value: value.name});
     return this;
   }
 
   public milestone(value: IMilestone): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.MILESTONE, value.name));
+    this.parameters.push({type: LogMessageDataType.MILESTONE, value: value.name});
     return this;
   }
 
   public colony(value: IColony): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.COLONY, value.name));
+    this.parameters.push({type: LogMessageDataType.COLONY, value: value.name});
     return this;
   }
 
   public standardProject(value: string): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.STANDARD_PROJECT, value));
+    this.parameters.push({type: LogMessageDataType.STANDARD_PROJECT, value});
     return this;
   }
 
   public party(value: IParty): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.PARTY, value.name));
+    this.parameters.push({type: LogMessageDataType.PARTY, value: value.name});
     return this;
   }
 
   public partyName(value: PartyName): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.PARTY, value));
+    this.parameters.push({type: LogMessageDataType.PARTY, value});
     return this;
   }
 
   public tileType(value: TileType): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.TILE_TYPE, value.toString()));
+    this.parameters.push({type: LogMessageDataType.TILE_TYPE, value: value.toString()});
     return this;
   }
 
   public spaceBonus(value: SpaceBonus): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.SPACE_BONUS, value.toString()));
+    this.parameters.push({type: LogMessageDataType.SPACE_BONUS, value: value.toString()});
     return this;
   }
 
@@ -109,7 +109,7 @@ export class LogBuilder {
   }
 
   public globalEventName(value: GlobalEventName): LogBuilder {
-    this.parameters.push(new LogMessageData(LogMessageDataType.GLOBAL_EVENT, value.toString()));
+    this.parameters.push({type: LogMessageDataType.GLOBAL_EVENT, value: value.toString()});
     return this;
   }
 

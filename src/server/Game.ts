@@ -437,7 +437,7 @@ export class Game {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  public defer(action: DeferredAction, priority?: Priority | number): void {
+  public defer(action: DeferredAction, priority?: Priority): void {
     if (priority !== undefined) {
       action.priority = priority;
     }

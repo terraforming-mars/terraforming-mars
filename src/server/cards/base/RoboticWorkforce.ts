@@ -29,9 +29,6 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
-    return this.getAvailableCards(player).length > 0;
-  }
 
   private isCardApplicable(card: ICard, player: Player): boolean {
     if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
@@ -55,10 +52,11 @@ export class RoboticWorkforce extends Card implements IProjectCard {
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
-    return [
-      ...player.playedCards.filter((card) => this.isCardApplicable(card, player)),
-      ...player.corporations.filter((card) => this.isCardApplicable(card, player)),
-    ];
+    return player.tableau.filter((card) => this.isCardApplicable(card, player));
+  }
+
+  public override canPlay(player: Player): boolean {
+    return this.getAvailableCards(player).length > 0;
   }
 
   public play(player: Player) {

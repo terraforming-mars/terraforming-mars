@@ -1,10 +1,18 @@
-ClientCard<template>
+<template>
   <div class="select-initial-cards">
     <confirm-dialog
       message="Continue without buying any project cards?"
       ref="confirmation"
       v-on:accept="confirmSelection" />
     <SelectCard :playerView="playerView" :playerinput="getOption(0)" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
+    <div v-if="playerCanChooseAridor" class="player_home_colony_cont">
+      <div v-i18n>These are the colony tiles Aridor may choose from:</div>
+      <div class="discarded-colonies-for-aridor">
+        <div class="player_home_colony small_colony" v-for="colony in playerView.game.discardedColonies" :key="colony.name">
+          <colony :colony="colony"></colony>
+        </div>
+      </div>
+    </div>
     <SelectCard v-if="hasPrelude()" :playerView="playerView" :playerinput="getOption(1)" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
     <SelectCard :playerView="playerView" :playerinput="getOption(hasPrelude() ? 2 : 1)" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getStartingMegacredits()}}</div></div>
@@ -31,6 +39,7 @@ import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager
 import {Tag} from '@/common/cards/Tag';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
+import Colony from '@/client/components/colonies/Colony.vue';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -69,6 +78,7 @@ export default (Vue as WithRefs<Refs>).extend({
     Button,
     SelectCard,
     'confirm-dialog': ConfirmDialog,
+    Colony,
   },
   data(): SelectInitialCardsModel {
     return {
@@ -211,6 +221,11 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     confirmSelection() {
       this.saveData();
+    },
+  },
+  computed: {
+    playerCanChooseAridor() {
+      return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },
   },
 });

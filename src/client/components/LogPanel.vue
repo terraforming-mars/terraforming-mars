@@ -339,9 +339,9 @@ export default Vue.extend({
     getColony(colonyName: ColonyName): ColonyModel {
       return {
         colonies: [],
-        isActive: true,
+        isActive: false,
         name: colonyName,
-        trackPosition: 5,
+        trackPosition: 0,
         visitor: undefined,
       };
     },

@@ -660,11 +660,10 @@ export class Player {
     }
   }
 
+  // Returns the set of played cards that have actual resources on them.
+  // If `resource` is supplied, only cards that hold that type of resource are retured.
   public getCardsWithResources(resource?: CardResource): Array<ICard> {
-    let result: Array<ICard> = [
-      ...this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
-      ...this.corporations.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
-    ];
+    let result = this.tableau.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
@@ -673,11 +672,10 @@ export class Player {
     return result;
   }
 
+  // Returns the set of played cards that can store resources on them.
+  // If `resource` is supplied, only cards that hold that type of resource are retured.
   public getResourceCards(resource?: CardResource): Array<ICard> {
-    let result: Array<ICard> = [
-      ...this.playedCards.filter((card) => card.resourceType !== undefined),
-      ...this.corporations.filter((card) => card.resourceType !== undefined),
-    ];
+    let result = this.tableau.filter((card) => card.resourceType !== undefined);
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);

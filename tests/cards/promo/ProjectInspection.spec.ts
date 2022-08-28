@@ -73,7 +73,7 @@ describe('ProjectInspection', function() {
     expect(action1.cards[0]?.name).eq(indenturedWorkers.name);
     expect(action1.cards[1]?.name).eq(card.name);
     action1.cb([card]) as SelectCard<ICard>;
-    player.game.deferredActions.pop()!.execute(); // SelectHowToPay + Plays the card
+    player.game.deferredActions.pop()!.execute(); // SelectPayment + Plays the card
 
     const play2 = player.game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(play2).is.not.undefined;
@@ -101,7 +101,7 @@ describe('ProjectInspection', function() {
     expect(action1.cards).has.lengthOf(1); // Only PI is available
     expect(action1.cards[0]?.name).eq(card.name);
     action1.cb([card]) as SelectCard<ICard>;
-    player.game.deferredActions.pop()!.execute(); // SelectHowToPay + Plays the card
+    player.game.deferredActions.pop()!.execute(); // SelectPayment + Plays the card
 
     const play1 = player.game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(play1).is.not.undefined;
@@ -124,7 +124,7 @@ describe('ProjectInspection', function() {
     expect(action1.cards).has.lengthOf(2); // PI and IW are available
     expect(action1.cards[0]?.name).eq(card.name);
     action1.cb([card]) as SelectCard<ICard>;
-    player.game.deferredActions.pop()!.execute(); // SelectHowToPay + Plays the card
+    player.game.deferredActions.pop()!.execute(); // SelectPayment + Plays the card
 
     const play1 = player.game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(play1).is.not.undefined;

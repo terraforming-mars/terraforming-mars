@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Payment} from '@/common/inputs/Payment';
-import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectPaymentModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -9,7 +9,7 @@ import Button from '@/client/components/common/Button.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
-  name: 'SelectHowToPay',
+  name: 'SelectPayment',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
@@ -36,7 +36,7 @@ export default Vue.extend({
     Button,
   },
   data() {
-    const model: SelectHowToPayModel = {
+    const model: SelectPaymentModel = {
       cost: 0,
       heat: 0,
       megaCredits: 0,

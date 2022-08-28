@@ -7,17 +7,10 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, Player} from '../Player';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
-// One more rename to SelectAndPlay?
 export class SelectProjectCardToPlay implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY;
   public title = 'Play project card';
   public buttonLabel: string = 'Play card';
-  public microbes: number;
-  public floaters: number;
-  public canUseHeat: boolean;
-  public scienceResources: number;
-  public seedResources: number;
-  public dataResources: number;
   public reserveUnits: Array<Units>;
 
   constructor(
@@ -27,12 +20,6 @@ export class SelectProjectCardToPlay implements PlayerInput {
       action?: CardAction,
       cb?: (cardToPlay: IProjectCard) => void,
     }) {
-    this.microbes = player.getSpendableMicrobes();
-    this.floaters = player.getSpendableFloaters();
-    this.canUseHeat = player.canUseHeatAsMegaCredits;
-    this.scienceResources = player.getSpendableScienceResources();
-    this.seedResources = player.getSpendableSeedResources();
-    this.dataResources = player.getSpendableData();
     this.reserveUnits = this.cards.map((card) => {
       return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
     });

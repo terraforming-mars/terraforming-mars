@@ -262,11 +262,11 @@ export class Server {
     case PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY:
       const spctp: SelectProjectCardToPlay = waitingFor as SelectProjectCardToPlay;
       playerInputModel.cards = this.getCards(player, spctp.cards, {showCalculatedCost: true, reserveUnits: spctp.reserveUnits});
-      playerInputModel.microbes = spctp.microbes;
-      playerInputModel.floaters = spctp.floaters;
-      playerInputModel.canUseHeat = spctp.canUseHeat;
-      playerInputModel.science = spctp.scienceResources;
-      playerInputModel.seeds = spctp.seedResources;
+      playerInputModel.microbes = player.getSpendableMicrobes();
+      playerInputModel.floaters = player.getSpendableFloaters();
+      playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
+      playerInputModel.science = player.getSpendableScienceResources();
+      playerInputModel.seeds = player.getSpendableSeedResources();
       break;
     case PlayerInputTypes.SELECT_CARD:
       const selectCard = waitingFor as SelectCard<ICard>;
@@ -285,13 +285,14 @@ export class Server {
       playerInputModel.coloniesModel = this.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
       break;
     case PlayerInputTypes.SELECT_PAYMENT:
-      playerInputModel.amount = (waitingFor as SelectPayment).amount;
-      playerInputModel.canUseSteel = (waitingFor as SelectPayment).canUseSteel;
-      playerInputModel.canUseTitanium = (waitingFor as SelectPayment).canUseTitanium;
-      playerInputModel.canUseHeat = (waitingFor as SelectPayment).canUseHeat;
-      playerInputModel.canUseSeeds = (waitingFor as SelectPayment).canUseSeeds;
+      const sp = waitingFor as SelectPayment;
+      playerInputModel.amount = sp.amount;
+      playerInputModel.canUseSteel = sp.canUseSteel;
+      playerInputModel.canUseTitanium = sp.canUseTitanium;
+      playerInputModel.canUseHeat = sp.canUseHeat;
+      playerInputModel.canUseSeeds = sp.canUseSeeds;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseData = (waitingFor as SelectPayment).canUseData;
+      playerInputModel.canUseData = sp.canUseData;
       playerInputModel.data = player.getSpendableData();
       break;
     case PlayerInputTypes.SELECT_PLAYER:

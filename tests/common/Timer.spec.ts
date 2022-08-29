@@ -21,7 +21,6 @@ describe('Timer', function() {
 
   it('shows 00:01 after 1 sec', function() {
     // this lastStoppedAt is a bit of a gross mess.
-    (Timer as any).lastStoppedAt = 0;
     const clock = new FakeClock();
     const timer = Timer.newInstance(clock);
 
@@ -41,7 +40,6 @@ describe('Timer', function() {
 
   it('shows 1:00:01 after 3601 sec', function() {
     // this lastStoppedAt is a bit of a gross mess.
-    (Timer as any).lastStoppedAt = 0;
     const clock = new FakeClock();
     const timer = Timer.newInstance(clock);
 

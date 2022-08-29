@@ -19,7 +19,6 @@ describe('EscapeVelocity', function() {
       escapeVelocityPeriod: 4, // 4m
     });
     player = getTestPlayer(game, 0);
-    (Timer as any).lastStoppedAt = 0;
     clock = new FakeClock();
     timer = Timer.newInstance(clock);
     player.timer = timer;

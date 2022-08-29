@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import {CardType} from '@/common/cards/CardType';
-import SelectHowToPayForProjectCard from '@/client/components/SelectHowToPayForProjectCard.vue';
+import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
@@ -14,7 +14,7 @@ import {CardResource} from '@/common/CardResource';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
-describe('SelectHowToPayForProjectCard', () => {
+describe('SelectProjectCardToPlay', () => {
   let localStorage: FakeLocalStorage;
   let saveResponse: Payment;
 
@@ -32,7 +32,7 @@ describe('SelectHowToPayForProjectCard', () => {
       [CardName.ANTS]: 2,
       [CardName.BIRDS]: 1,
     }));
-    const sortable = mount(SelectHowToPayForProjectCard, {
+    const sortable = mount(SelectProjectCardToPlay, {
       localVue: getLocalVue(),
       propsData: {
         playerView: {
@@ -523,7 +523,7 @@ describe('SelectHowToPayForProjectCard', () => {
     };
     Object.assign(playerInput, playerInputFields);
 
-    return mount(SelectHowToPayForProjectCard, {
+    return mount(SelectProjectCardToPlay, {
       localVue: getLocalVue(),
       propsData: {
         playerView: playerView,

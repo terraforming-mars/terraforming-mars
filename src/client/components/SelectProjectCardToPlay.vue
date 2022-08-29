@@ -7,7 +7,7 @@ import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectProjectCardToPlayModel, unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -17,7 +17,7 @@ import {CardName} from '@/common/cards/CardName';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
-  name: 'SelectHowToPayForProjectCard',
+  name: 'SelectProjectCardToPlay',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
@@ -40,7 +40,7 @@ export default Vue.extend({
       return this.playerView.thisPlayer;
     },
   },
-  data(): SelectHowToPayForProjectCardModel {
+  data(): SelectProjectCardToPlayModel {
     let card: CardModel | undefined;
     let cards: Array<CardModel> = [];
     if (this.playerinput !== undefined &&

@@ -8,7 +8,7 @@ import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
-import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
@@ -1131,13 +1131,15 @@ export class Player {
     return undefined;
   }
 
-  public simplePlay(card: IProjectCard) {
+  public simplePlay(card: IProjectCard | ICorporationCard) {
     if (card instanceof MoonCard || (card.migrated === true)) {
       if (card.productionBox !== undefined) {
         this.production.adjust(card.productionBox);
       }
-      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
-      this.deductUnits(adjustedReserveUnits);
+      if (!isICorporationCard(card)) {
+        const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
+        this.deductUnits(adjustedReserveUnits);
+      }
     }
     return card.play(this);
   }

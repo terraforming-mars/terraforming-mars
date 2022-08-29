@@ -581,7 +581,7 @@ export class Game {
       const diff = player.cardsInHand.length * player.cardCost;
       player.deductResource(Resources.MEGACREDITS, diff);
     }
-    corporationCard.play(player);
+    player.simplePlay(corporationCard);
     if (corporationCard.initialAction !== undefined) player.pendingInitialActions.push(corporationCard);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
     player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));

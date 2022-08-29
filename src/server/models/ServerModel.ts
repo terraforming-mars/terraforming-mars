@@ -72,8 +72,9 @@ export class Server {
     return {
       aresData: game.aresData,
       awards: this.getAwards(game),
-      colonies: this.getColonies(game),
+      colonies: this.getColonies(game, game.colonies),
       deckSize: game.dealer.getDeckSize(),
+      discardedColonies: this.getColonies(game, game.discardedColonies, /* showTrackPosition */ false),
       gameAge: game.gameAge,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),
@@ -478,13 +479,13 @@ export class Server {
     return protection;
   }
 
-  public static getColonies(game: Game): Array<ColonyModel> {
-    return game.colonies.map(
+  public static getColonies(game: Game, colonies: Array<IColony>, isActive: boolean = true): Array<ColonyModel> {
+    return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(
           (playerId): Color => game.getPlayerById(playerId).color,
         ),
-        isActive: colony.isActive,
+        isActive: isActive && colony.isActive,
         name: colony.name,
         trackPosition: colony.trackPosition,
         visitor:

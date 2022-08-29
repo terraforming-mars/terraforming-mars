@@ -150,6 +150,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
     propsData: {
       playerView: {
         id: 'foo',
+        dealtCorporationCards: [],
         thisPlayer: {actionsThisGeneration: []},
       },
       playerinput: {

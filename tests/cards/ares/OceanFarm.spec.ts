@@ -7,7 +7,8 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
-import {addOcean} from '../../TestingUtils';
+import {addOcean, cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('OceanFarm', () => {
   let card: OceanFarm;
@@ -24,16 +25,16 @@ describe('OceanFarm', () => {
 
   it('Can play', () => {
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('Play', () => {
@@ -41,7 +42,7 @@ describe('OceanFarm', () => {
     expect(player.production.plants).eq(0);
 
     const oceanSpace = addOcean(player);
-    const action = card.play(player);
+    const action = cast(player.simplePlay(card), SelectSpace);
 
     expect(player.production.heat).eq(1);
     expect(player.production.plants).eq(1);
@@ -55,7 +56,7 @@ describe('OceanFarm', () => {
 
   it('Ocean Farm counts as ocean for adjacency', () => {
     const oceanSpace = addOcean(player);
-    const action = card.play(player);
+    const action = cast(player.simplePlay(card), SelectSpace);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];
 
@@ -75,7 +76,7 @@ describe('OceanFarm', () => {
     game.addOceanTile(player, oceanSpace.id);
     expect(player.plants).eq(1);
 
-    const action = card.play(player);
+    const action = cast(player.simplePlay(card), SelectSpace);
 
     expect(player.plants).eq(1);
 

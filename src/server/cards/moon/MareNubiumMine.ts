@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -17,8 +16,8 @@ export class MareNubiumMine extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 17,
-      productionBox: Units.of({titanium: 1}),
-      reserveUnits: Units.of({titanium: 1}),
+      productionBox: {titanium: 1},
+      reserveUnits: {titanium: 1},
       tr: {moonMining: 1},
 
       metadata: {
@@ -34,8 +33,7 @@ export class MareNubiumMine extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_NUBIUM, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

@@ -9,9 +9,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
-import {Units} from '../../../common/Units';
 
 export class DesignedOrganisms extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -19,7 +19,7 @@ export class DesignedOrganisms extends Card implements IProjectCard {
       cost: 12,
       tags: [Tag.SCIENCE, Tag.PLANT, Tag.MARS],
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),
-      productionBox: Units.of({plants: 2}),
+      productionBox: {plants: 2},
 
       metadata: {
         cardNumber: 'Pf23',
@@ -35,7 +35,6 @@ export class DesignedOrganisms extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addResource(Resources.PLANTS, 3);
-    player.production.add(Resources.PLANTS, 2);
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
     player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 1}));
     return undefined;

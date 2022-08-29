@@ -4,20 +4,19 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {IActionCard} from '../ICard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class AICentral extends Card implements IActionCard, IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.AI_CENTRAL,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 21,
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
@@ -34,11 +33,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1;
-  }
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
+  public play() {
     return undefined;
   }
   public canAct(): boolean {

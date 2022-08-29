@@ -13,7 +13,7 @@ interface StaticStandardProjectCardProperties {
   name: CardName,
   cost: number,
   metadata: ICardMetadata,
-  reserveUnits?: Units,
+  reserveUnits?: Partial<Units>,
   tr?: TRSource,
 }
 

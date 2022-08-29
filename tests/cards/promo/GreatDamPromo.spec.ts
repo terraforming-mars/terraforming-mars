@@ -19,13 +19,13 @@ describe('GreatDamPromo', function() {
   });
 
   it('Can not play without meeting requirements', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, 4);
 
-    const action = card.play(player);
+    const action = player.simplePlay(card);
     expect(action).instanceOf(SelectSpace);
     expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
@@ -34,7 +34,7 @@ describe('GreatDamPromo', function() {
   it('Works with Ares', function() {
     maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
 
-    const action = card.play(player);
+    const action = player.simplePlay(card);
     expect(action).instanceOf(SelectSpace);
     expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);

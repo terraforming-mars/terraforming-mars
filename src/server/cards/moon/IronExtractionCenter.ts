@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class IronExtractionCenter extends MoonCard {
@@ -15,7 +14,7 @@ export class IronExtractionCenter extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 10,
-      reserveUnits: Units.of({titanium: 1}),
+      reserveUnits: {titanium: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.',
@@ -34,8 +33,7 @@ export class IronExtractionCenter extends MoonCard {
     player.production.add(Resources.STEEL, productionIncrease, {log: true});
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     this.produce(player);
     return undefined;
   }

@@ -2,17 +2,16 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class MartianIndustries extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.MARTIAN_INDUSTRIES,
       tags: [Tag.BUILDING],
-      productionBox: Units.of({energy: 1, steel: 1}),
+      productionBox: {energy: 1, steel: 1},
       startingMegacredits: 6,
 
       metadata: {
@@ -26,8 +25,6 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.production.add(Resources.ENERGY, 1);
-    player.production.add(Resources.STEEL, 1);
     player.megaCredits += 6;
     return undefined;
   }

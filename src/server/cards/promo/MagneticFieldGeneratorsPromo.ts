@@ -3,23 +3,22 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
 export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
       tags: [Tag.BUILDING],
       cost: 22,
-      productionBox: Units.of({energy: -4, plants: 2}),
+      productionBox: {energy: -4, plants: 2},
       tr: {tr: 3},
 
       metadata: {
@@ -36,14 +35,9 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    const meetsEnergyRequirements = player.production.energy >= 4;
-    const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
-
-    return meetsEnergyRequirements && canPlaceTile;
+    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public play(player: Player) {
-    player.production.add(Resources.ENERGY, -4);
-    player.production.add(Resources.PLANTS, 2);
     player.increaseTerraformRatingSteps(3);
 
     const availableSpaces = player.game.board.getAvailableSpacesOnLand(player);

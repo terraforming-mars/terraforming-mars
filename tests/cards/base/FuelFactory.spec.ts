@@ -13,13 +13,13 @@ describe('FuelFactory', function() {
   });
 
   it('Can not play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.true;
-    card.play(player);
+    expect(player.simpleCanPlay(card)).is.true;
+    player.simplePlay(card);
 
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(1);

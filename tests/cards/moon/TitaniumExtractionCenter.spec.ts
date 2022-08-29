@@ -36,15 +36,15 @@ describe('TitaniumExtractionCenter', () => {
 
     player.titanium = 4;
     moonData.miningRate = 3;
-    card.play(player);
+
+    player.simplePlay(card);
 
     expect(player.titanium).eq(2);
     expect(player.production.titanium).eq(1);
 
-
     // Play a second time. Steel rate will go up by 2.
     moonData.miningRate = 4;
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.production.titanium).eq(3);

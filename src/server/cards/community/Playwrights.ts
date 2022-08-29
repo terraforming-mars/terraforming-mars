@@ -42,6 +42,7 @@ export class Playwrights extends Card implements ICorporationCard {
     });
   }
 
+  // For Project Inspection
   private checkLoops: number = 0;
 
   public play(player: Player) {
@@ -112,16 +113,19 @@ export class Playwrights extends Card implements ICorporationCard {
     const playedEvents : IProjectCard[] = [];
 
     this.checkLoops++;
-    player.game.getPlayers().forEach((p) => {
-      playedEvents.push(...p.playedCards.filter((card) => {
-        return card.cardType === CardType.EVENT &&
-            // Can player.canPlay(card) replace this?
-            player.canAfford(player.getCardCost(card), {
-              reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
-            }) && player.canPlayIgnoringCost(card);
-      }));
-    });
-    this.checkLoops--;
+    try {
+      player.game.getPlayers().forEach((p) => {
+        playedEvents.push(...p.playedCards.filter((card) => {
+          return card.cardType === CardType.EVENT &&
+          // Can player.canPlay(card) replace this?
+          player.canAfford(player.getCardCost(card), {
+            reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
+          }) && player.canPlayIgnoringCost(card);
+        }));
+      });
+    } finally {
+      this.checkLoops--;
+    }
 
     return playedEvents;
   }

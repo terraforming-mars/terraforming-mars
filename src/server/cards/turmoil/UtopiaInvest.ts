@@ -9,17 +9,17 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
 export class UtopiaInvest extends Card implements IActionCard, ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,
       tags: [Tag.BUILDING],
       startingMegaCredits: 40,
       cardType: CardType.CORPORATION,
-      productionBox: Units.of({steel: 1, titanium: 1}),
+      productionBox: {steel: 1, titanium: 1},
 
       metadata: {
         cardNumber: 'R33',
@@ -37,9 +37,7 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
-    player.production.add(Resources.TITANIUM, 1);
+  public play() {
     return undefined;
   }
   public canAct(player: Player): boolean {

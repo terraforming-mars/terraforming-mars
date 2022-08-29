@@ -19,7 +19,7 @@ describe('TectonicStressPower', function() {
   it('Should play', function() {
     player.playedCards.push(new SearchForLife(), new SearchForLife());
     expect(player.canPlayIgnoringCost(card)).is.true;
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.production.energy).to.eq(3);
     expect(card.getVictoryPoints()).to.eq(1);

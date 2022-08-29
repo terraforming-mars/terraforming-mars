@@ -2,22 +2,20 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../../common/Units';
 
 export class SponsoredMohole extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cost: 5,
       tags: [Tag.BUILDING],
       name: CardName.SPONSORED_MOHOLE,
       cardType: CardType.AUTOMATED,
-      productionBox: Units.of({heat: 2}),
+      productionBox: {heat: 2},
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
       metadata: {
@@ -30,8 +28,7 @@ export class SponsoredMohole extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.HEAT, 2);
+  public play() {
     return undefined;
   }
 }

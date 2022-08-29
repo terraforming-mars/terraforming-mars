@@ -27,7 +27,7 @@ describe('MartianDustProcessingPlant', function() {
     player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(14);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
     expect(player.getTerraformRating()).eq(15);

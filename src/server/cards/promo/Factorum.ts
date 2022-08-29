@@ -10,16 +10,16 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Units} from '../../../common/Units';
 
 export class Factorum extends Card implements IActionCard, ICorporationCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.FACTORUM,
       tags: [Tag.ENERGY, Tag.BUILDING],
       startingMegaCredits: 37,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         cardNumber: 'R22',
@@ -38,8 +38,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.STEEL, 1);
+  public play() {
     return undefined;
   }
 

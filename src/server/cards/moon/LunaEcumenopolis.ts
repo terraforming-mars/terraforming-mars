@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {MoonCard} from './MoonCard';
 import {TileType} from '../../../common/TileType';
@@ -19,7 +18,7 @@ export class LunaEcumenopolis extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.CITY, Tag.MOON],
       cost: 35,
-      reserveUnits: Units.of({titanium: 2}),
+      reserveUnits: {titanium: 2},
 
       metadata: {
         description: 'Spend 2 Titanium. ' +
@@ -60,10 +59,6 @@ export class LunaEcumenopolis extends MoonCard {
   }
 
   public override canPlay(player: Player) {
-    if (!super.canPlay(player)) {
-      return false;
-    }
-
     if (!this.canAffordTRBump(player)) {
       return false;
     }
@@ -103,7 +98,7 @@ export class LunaEcumenopolis extends MoonCard {
     return false;
   }
 
-  public override play(player: Player) {
+  public play(player: Player) {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));

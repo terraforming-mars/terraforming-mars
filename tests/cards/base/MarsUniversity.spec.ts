@@ -6,6 +6,11 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
+import {Mine} from '../../../src/server/cards/base/Mine';
+import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
+import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('MarsUniversity', function() {
   let card: MarsUniversity;
@@ -59,5 +64,35 @@ describe('MarsUniversity', function() {
     orOptions2.options[1].cb();
 
     expect(game.deferredActions).has.lengthOf(0);
+  });
+
+  // https://github.com/terraforming-mars/terraforming-mars/issues/3251
+  it('verifying Mars U play order', () => {
+    // It actually doesn't matter in this specific test that Olympus Conference is first, but it's fine.
+    // If that changes, this test can change, and/or be more flexible.
+    player.cardsInHand = [new EarthOffice()];
+    const olympusConference = new OlympusConference();
+    const marsUniversity = new MarsUniversity();
+    player.playedCards = [marsUniversity, olympusConference, new Mine()];
+    olympusConference.resourceCount = 1;
+    const roboticWorkforce = new RoboticWorkforce();
+    player.playCard(roboticWorkforce);
+    expect(game.deferredActions).has.lengthOf(3);
+
+    const olympusConferenceAction = game.deferredActions.pop()?.execute();
+    expect(olympusConferenceAction?.title).to.match(/Olympus Conference/);
+    // Second option adds another resource.
+    olympusConferenceAction?.options?.[1].cb();
+    expect(olympusConference.resourceCount).eq(2);
+
+    const marsUniversityAction = cast(game.deferredActions.pop()?.execute(), OrOptions);
+    expect(marsUniversityAction.options[0].title).to.match(/Select a card to discard/);
+    // Second option does nothing.
+    marsUniversityAction?.options?.[1].cb();
+
+    const roboticWorkforceAction = cast(game.deferredActions.pop()?.execute(), SelectCard);
+    expect(roboticWorkforceAction.title).to.match(/Select builder card/);
+
+    expect(game.deferredActions.pop()).is.undefined;
   });
 });

@@ -12,7 +12,6 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {all} from '../Options';
 
 export class ImmigrantCity extends Card implements IProjectCard {
@@ -22,7 +21,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
       name: CardName.IMMIGRANT_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 13,
-      productionBox: Units.of({energy: -1, megacredits: -2}),
+      productionBox: {energy: -1, megacredits: -2},
 
       metadata: {
         cardNumber: '200',

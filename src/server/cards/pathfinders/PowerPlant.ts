@@ -1,20 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Units} from '../../../common/Units';
 
 export class PowerPlant extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.POWER_PLANT_PATHFINDERS,
       cost: 13,
       tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING],
-      productionBox: Units.of({heat: 2, energy: 1}),
+      productionBox: {heat: 2, energy: 1},
 
       metadata: {
         cardNumber: 'Pf20',
@@ -26,8 +25,7 @@ export class PowerPlant extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.adjust(this.productionBox);
+  public play() {
     return undefined;
   }
 }

@@ -29,7 +29,7 @@ describe('MiningGuild', () => {
   });
 
   it('Should play', () => {
-    card.play(player);
+    player.simplePlay(card);
     expect(player.steel).to.eq(5);
     expect(player.production.steel).to.eq(1);
   });

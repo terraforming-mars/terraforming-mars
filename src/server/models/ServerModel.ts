@@ -220,8 +220,8 @@ export class Server {
       amount: undefined,
       options: undefined,
       cards: undefined,
-      maxCardsToSelect: undefined,
-      minCardsToSelect: undefined,
+      max: undefined,
+      min: undefined,
       canUseSteel: undefined,
       canUseTitanium: undefined,
       canUseHeat: undefined,
@@ -229,8 +229,6 @@ export class Server {
       canUseData: undefined,
       players: undefined,
       availableSpaces: undefined,
-      min: undefined,
-      max: undefined,
       maxByDefault: undefined,
       microbes: undefined,
       floaters: undefined,
@@ -263,11 +261,11 @@ export class Server {
     case PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY:
       const spctp: SelectProjectCardToPlay = waitingFor as SelectProjectCardToPlay;
       playerInputModel.cards = this.getCards(player, spctp.cards, {showCalculatedCost: true, reserveUnits: spctp.reserveUnits});
-      playerInputModel.microbes = spctp.microbes;
-      playerInputModel.floaters = spctp.floaters;
-      playerInputModel.canUseHeat = spctp.canUseHeat;
-      playerInputModel.science = spctp.scienceResources;
-      playerInputModel.seeds = spctp.seedResources;
+      playerInputModel.microbes = player.getSpendableMicrobes();
+      playerInputModel.floaters = player.getSpendableFloaters();
+      playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
+      playerInputModel.science = player.getSpendableScienceResources();
+      playerInputModel.seeds = player.getSpendableSeedResources();
       break;
     case PlayerInputTypes.SELECT_CARD:
       const selectCard = waitingFor as SelectCard<ICard>;
@@ -276,8 +274,8 @@ export class Server {
         showResources: selectCard.config.played === true || selectCard.config.played === CardName.SELF_REPLICATING_ROBOTS,
         enabled: selectCard.config.enabled,
       });
-      playerInputModel.maxCardsToSelect = selectCard.config.max;
-      playerInputModel.minCardsToSelect = selectCard.config.min;
+      playerInputModel.max = selectCard.config.max;
+      playerInputModel.min = selectCard.config.min;
       playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled?.every((p: boolean) => p === false);
       playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
       playerInputModel.showOwner = selectCard.config.showOwner === true;
@@ -286,13 +284,14 @@ export class Server {
       playerInputModel.coloniesModel = this.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
       break;
     case PlayerInputTypes.SELECT_PAYMENT:
-      playerInputModel.amount = (waitingFor as SelectPayment).amount;
-      playerInputModel.canUseSteel = (waitingFor as SelectPayment).canUseSteel;
-      playerInputModel.canUseTitanium = (waitingFor as SelectPayment).canUseTitanium;
-      playerInputModel.canUseHeat = (waitingFor as SelectPayment).canUseHeat;
-      playerInputModel.canUseSeeds = (waitingFor as SelectPayment).canUseSeeds;
+      const sp = waitingFor as SelectPayment;
+      playerInputModel.amount = sp.amount;
+      playerInputModel.canUseSteel = sp.canUseSteel;
+      playerInputModel.canUseTitanium = sp.canUseTitanium;
+      playerInputModel.canUseHeat = sp.canUseHeat;
+      playerInputModel.canUseSeeds = sp.canUseSeeds;
       playerInputModel.seeds = player.getSpendableSeedResources();
-      playerInputModel.canUseData = (waitingFor as SelectPayment).canUseData;
+      playerInputModel.canUseData = sp.canUseData;
       playerInputModel.data = player.getSpendableData();
       break;
     case PlayerInputTypes.SELECT_PLAYER:

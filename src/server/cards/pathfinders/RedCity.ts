@@ -4,7 +4,6 @@ import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -15,13 +14,14 @@ import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
 
 export class RedCity extends Card implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.RED_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 21,
-      productionBox: Units.of({energy: -1, megacredits: 2}),
+      productionBox: {energy: -1, megacredits: 2},
       requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
       victoryPoints: 'special',
 
@@ -45,11 +45,10 @@ export class RedCity extends Card implements IProjectCard {
     return citySpaces.filter((space) => !board.getAdjacentSpaces(space).some(Board.isGreenerySpace));
   }
   public override canPlay(player: Player) {
-    return player.production.canAdjust(this.productionBox) && this.availableRedCitySpaces(player).length > 0;
+    return this.availableRedCitySpaces(player).length > 0;
   }
 
   public play(player: Player) {
-    player.production.adjust(this.productionBox);
     return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
       player.game.addTile(player, space.spaceType, space, {tileType: TileType.RED_CITY, card: this.name});
       return undefined;

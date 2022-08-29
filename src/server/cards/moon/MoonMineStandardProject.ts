@@ -4,7 +4,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
-import {Units} from '../../../common/Units';
 import {Resources} from '../../../common/Resources';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../../common/TileType';
@@ -14,7 +13,7 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
   constructor(properties = {
     name: CardName.MOON_MINE_STANDARD_PROJECT,
     cost: 20,
-    reserveUnits: Units.of({titanium: 1}),
+    reserveUnits: {titanium: 1},
     tr: {moonMining: 1},
 
     metadata: {

@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Resources} from '../../../common/Resources';
-import {Units} from '../../../common/Units';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {MoonCard} from './MoonCard';
@@ -19,7 +18,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.SPACE],
       cost: 9,
-      reserveUnits: Units.of({titanium: 1}),
+      reserveUnits: {titanium: 1},
       tr: {moonLogistics: 1},
 
       metadata: {
@@ -36,8 +35,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player);
     const moonData = MoonExpansion.moonData(player.game);
     const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;

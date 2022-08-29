@@ -3,13 +3,13 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Units} from '../../../common/Units';
 
 export class AntidesertificationTechniques extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.ANTI_DESERTIFICATION_TECHNIQUES,
-      productionBox: Units.of({plants: 1, steel: 1}),
+      productionBox: {plants: 1, steel: 1},
       startingMegacredits: 5,
 
       metadata: {
@@ -23,7 +23,6 @@ export class AntidesertificationTechniques extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
     player.addResource(Resources.MEGACREDITS, 5);
     return undefined;
   }

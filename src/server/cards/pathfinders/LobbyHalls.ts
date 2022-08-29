@@ -5,19 +5,19 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {Units} from '../../../common/Units';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
+  public migrated = true;
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.LOBBY_HALLS,
       cost: 11,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'PfTBD',
@@ -38,7 +38,6 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
 
   public play(player: Player) {
     player.game.defer(new DeclareCloneTag(player, this));
-    player.production.adjust(this.productionBox);
     const turmoil = Turmoil.getTurmoil(player.game);
     if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {
       player.game.defer(new SendDelegateToArea(player, undefined, {source: 'reserve'}));

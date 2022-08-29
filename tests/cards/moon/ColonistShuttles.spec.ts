@@ -48,7 +48,7 @@ describe('ColonistShuttles', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.colonyRate).eq(0);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.getTerraformRating()).eq(15);

@@ -36,7 +36,7 @@ export class SQLite implements IDatabase {
         game_id varchar not null,
         last_save_id number not null,
         completed_time timestamp not null default (strftime('%s', 'now')),
-        PRIMARY KEY (game_id)`);
+        PRIMARY KEY (game_id))`);
   }
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
@@ -143,11 +143,20 @@ export class SQLite implements IDatabase {
     }
   }
 
-  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
+  async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
-      return this.runQuietly(`DELETE FROM games WHERE created_time < ? and status = 'running'`, [dateToSeconds]);
+      const selectResult = await this.asyncAll('SELECT distinct game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
+      const gameIds = selectResult.map((row) => row.game_id);
+      console.log(`About to purge ${gameIds} games`);
+      const placeholders: string = gameIds.map(() => '?').join(', ');
+      if (gameIds.length > 0) {
+        const deleteResult = await this.asyncRun(`DELETE FROM games WHERE game_id in ( ${placeholders} )`, [gameIds]);
+        console.log(`Purged ${deleteResult.changes} rows from games`);
+        const deleteParticipantsResult = await this.asyncRun(`DELETE FROM participants WHERE game_id in ( ${placeholders} )`, [gameIds]);
+        console.log(`Purged ${deleteParticipantsResult.changes} rows from participants`);
+      }
     } else {
       return Promise.resolve();
     }
@@ -238,13 +247,17 @@ export class SQLite implements IDatabase {
 
   private asyncRun(sql: string, params?: any): Promise<RunResult> {
     return new Promise((resolve, reject) => {
-      const cb = (result: RunResult, err: Error | null) => {
+      // It is intentional that this is declared `function` and that the first
+      // parameter is `this`.
+      // See https://stackoverflow.com/questions/73523387/in-node-sqlite3-does-runs-first-callback-parameter-return-error
+      function cb(this: RunResult, err: Error | null) {
         if (err) {
           reject(err);
         } else {
-          resolve(result);
+          // eslint-disable-next-line no-invalid-this
+          resolve(this);
         }
-      };
+      }
 
       if (params !== undefined) {
         this.db.run(sql, params, cb);
@@ -256,7 +269,7 @@ export class SQLite implements IDatabase {
 
   private asyncGet(sql: string, params?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.db.get(sql, params, (err: Error | null, row: any) => {
+      this.db.get(sql, params, function(err: Error | null, row: any) {
         if (err) {
           reject(err);
         } else {
@@ -268,7 +281,7 @@ export class SQLite implements IDatabase {
 
   private asyncAll(sql: string, params?: any): Promise<Array<any>> {
     return new Promise((resolve, reject) => {
-      this.db.all(sql, params, (err, rows: Array<any>) => {
+      this.db.all(sql, params, function(err, rows: Array<any>) {
         if (err) {
           reject(err);
         } else {

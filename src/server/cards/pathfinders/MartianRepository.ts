@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,8 +10,7 @@ import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
 import {played} from '../Options';
 
-export class MartianRepository extends Card implements IProjectCard {
-  public migrated = true;
+export class MartianRepository extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -40,9 +39,5 @@ export class MartianRepository extends Card implements IProjectCard {
   public onCardPlayed(player: Player, card: ICard) {
     const qty = player.tags.cardTagCount(card, Tag.SCIENCE) + player.tags.cardTagCount(card, Tag. MARS);
     if (qty > 0) player.addResourceTo(this, {qty, log: true});
-  }
-
-  public play() {
-    return undefined;
   }
 }

@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -10,8 +10,7 @@ import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
-  public migrated = true;
+export class LobbyHalls extends Card2 implements IProjectCard, ICloneTagCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -36,7 +35,7 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
     return [this.cloneTag, Tag.BUILDING];
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new DeclareCloneTag(player, this));
     const turmoil = Turmoil.getTurmoil(player.game);
     if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {

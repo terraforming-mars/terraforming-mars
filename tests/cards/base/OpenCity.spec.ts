@@ -19,21 +19,21 @@ describe('OpenCity', function() {
   });
 
   it('Can not play without energy production', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', function() {
     player.production.add(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 11;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 12;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesOnMarsCount()).to.eq(1);
 

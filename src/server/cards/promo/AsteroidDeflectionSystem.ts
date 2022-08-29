@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -11,8 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 
-export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
-  public migrated = true;
+export class AsteroidDeflectionSystem extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -40,10 +39,6 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
     });
   }
   public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
 
   public canAct(): boolean {
     return true;

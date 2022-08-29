@@ -7,6 +7,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {CommercialDistrictAres} from '../../../src/server/cards/ares/CommercialDistrictAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('CommercialDistrictAres', function() {
   let card: CommercialDistrictAres;
@@ -20,11 +21,11 @@ describe('CommercialDistrictAres', function() {
   });
 
   it('Should play', function() {
+    expect(card.canPlay(player)).is.false;
     player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action instanceof SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
 
     expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});

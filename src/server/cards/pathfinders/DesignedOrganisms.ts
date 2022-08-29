@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -10,8 +10,7 @@ import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 
-export class DesignedOrganisms extends Card implements IProjectCard {
-  public migrated = true;
+export class DesignedOrganisms extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -33,11 +32,10 @@ export class DesignedOrganisms extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.PLANTS, 3);
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
     player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 1}));
     return undefined;
   }
 }
-

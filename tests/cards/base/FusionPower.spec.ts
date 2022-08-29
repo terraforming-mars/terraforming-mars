@@ -20,7 +20,7 @@ describe('FusionPower', function() {
     player.playedCards.push(card, card);
     expect(player.simpleCanPlay(card)).is.true;
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.energy).to.eq(3);
   });
 });

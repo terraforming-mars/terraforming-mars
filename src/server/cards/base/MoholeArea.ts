@@ -1,5 +1,5 @@
 import {TileType} from '../../../common/TileType';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -12,8 +12,7 @@ import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class MoholeArea extends Card implements IProjectCard {
-  public migrated = true;
+export class MoholeArea extends Card2 implements IProjectCard {
   constructor(
     name: CardName = CardName.MOHOLE_AREA,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
@@ -36,7 +35,7 @@ export class MoholeArea extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select an ocean space for special tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
       player.game.addTile(player, SpaceType.OCEAN, space, {tileType: TileType.MOHOLE_AREA});
       space.adjacency = this.adjacencyBonus;

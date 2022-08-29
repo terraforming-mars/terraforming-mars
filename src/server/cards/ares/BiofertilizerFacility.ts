@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -14,8 +14,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class BiofertilizerFacility extends Card implements IProjectCard {
-  public migrated = true;
+export class BiofertilizerFacility extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -40,7 +39,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
 
     return new SelectSpace(

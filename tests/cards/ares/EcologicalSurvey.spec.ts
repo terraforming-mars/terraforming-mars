@@ -11,9 +11,10 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {addGreenery, runAllActions} from '../../TestingUtils';
+import {addGreenery, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('EcologicalSurvey', () => {
   let card: EcologicalSurvey;
@@ -133,7 +134,7 @@ describe('EcologicalSurvey', () => {
     game.simpleAddTile(redPlayer, space, {tileType: TileType.OCEAN});
 
     player.plants = 0;
-    const selectSpace = new OceanCity().play(player);
+    const selectSpace = cast(new OceanCity().play(player), SelectSpace);
     selectSpace.cb(space);
     expect(player.plants).eq(0);
   });

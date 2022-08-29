@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
@@ -13,8 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
 
-export class MiningGuild extends Card implements ICorporationCard {
-  public migrated = true;
+export class MiningGuild extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -57,7 +56,7 @@ export class MiningGuild extends Card implements ICorporationCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel = 5;
     return undefined;
   }

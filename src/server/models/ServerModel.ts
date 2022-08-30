@@ -6,7 +6,7 @@ import {GameOptions} from '../GameOptions';
 import {SimpleGameModel} from '../../common/models/SimpleGameModel';
 import {GameOptionsModel} from '../../common/models/GameOptionsModel';
 import {ICard} from '../cards/ICard';
-import {IProjectCard} from '../cards/IProjectCard';
+import {isIProjectCard} from '../cards/IProjectCard';
 import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
@@ -374,12 +374,12 @@ export class Server {
         resources: options.showResources ? card.resourceCount : undefined,
         resourceType: card.resourceType,
         name: card.name,
-        calculatedCost: options.showCalculatedCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
+        calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
         cardType: card.cardType,
         isDisabled: isDisabled,
         warning: card.warning,
         reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
-        bonusResource: (card as IProjectCard).bonusResource,
+        bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
         discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
       };

@@ -8,7 +8,7 @@ import {IMoonData} from './IMoonData';
 import {CardName} from '../../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
-import {IMoonCard} from '../cards/moon/IMoonCard';
+import {isIMoonCard} from '../cards/moon/IMoonCard';
 import {Tag} from '../../common/cards/Tag';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../../common/constants';
@@ -16,11 +16,6 @@ import {Resources} from '../../common/Resources';
 import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
-
-// export interface CoOwnedSpace {
-//   spaceId: string;
-//   coOwner: PlayerId;
-// }
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -327,7 +322,7 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    const tilesBuilt: Array<TileType> = (card as unknown as IMoonCard).tilesBuilt || [];
+    const tilesBuilt: Array<TileType> = isIMoonCard(card) ? card.tilesBuilt : [];
 
     if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
       titanium -= 1;

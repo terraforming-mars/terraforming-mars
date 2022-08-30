@@ -10,9 +10,8 @@ import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {ALL_EVENTS, getGlobalEventModule} from '../turmoil/globalEvents/GlobalEventDealer';
 import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
 import {ClientCard} from '../../common/cards/ClientCard';
-import {CardType} from '../../common/cards/CardType';
-import {ICorporationCard} from '../cards/corporation/ICorporationCard';
-import {PreludeCard} from '../cards/prelude/PreludeCard';
+import {isICorporationCard} from '../cards/corporation/ICorporationCard';
+import {isPreludeCard} from '../cards/prelude/PreludeCard';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 
@@ -37,12 +36,12 @@ class ProjectCardProcessor {
   private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
     let startingMegaCredits = undefined;
     let cardCost = undefined;
-    if (card.cardType === CardType.PRELUDE) {
-      startingMegaCredits = (card as PreludeCard).startingMegaCredits;
+    if (isPreludeCard(card)) {
+      startingMegaCredits = card.startingMegaCredits;
     }
-    if (card.cardType === CardType.CORPORATION) {
-      startingMegaCredits = (card as ICorporationCard).startingMegaCredits;
-      cardCost = (card as ICorporationCard).cardCost;
+    if (isICorporationCard(card)) {
+      startingMegaCredits = card.startingMegaCredits;
+      cardCost = card.cardCost;
     }
     const clientCard: ClientCard = {
       module: module,

@@ -48,7 +48,7 @@
 
               <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-              <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
+              <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
 
               <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
@@ -239,6 +239,7 @@
 
                   <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
+                  <a name="moonBoard" class="player_home_anchor"></a>
                   <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
 
               </div>
@@ -373,24 +374,24 @@ export default Vue.extend({
     navigatePage(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
-        let idSuffix: string | undefined = undefined;
+        let id: string | undefined = undefined;
         switch (event.code) {
         case KeyboardNavigation.GAMEBOARD:
-          idSuffix = 'board';
+          id = 'shortkey-board';
           break;
         case KeyboardNavigation.PLAYERSOVERVIEW:
-          idSuffix = 'playersoverview';
+          id = 'shortkey-playersoverview';
           break;
         case KeyboardNavigation.HAND:
-          idSuffix = 'hand';
+          id = 'shortkey-hand';
           break;
         case KeyboardNavigation.COLONIES:
-          idSuffix = 'colonies';
+          id = 'shortkey-colonies';
           break;
         default:
           return;
         }
-        const el = document.getElementById('shortkey-' + idSuffix);
+        const el = document.getElementById(id);
         if (el) {
           event.preventDefault();
           el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});

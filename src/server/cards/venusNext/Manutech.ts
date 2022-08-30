@@ -2,13 +2,12 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Manutech extends Card implements ICorporationCard {
-  public migrated = true;
+export class Manutech extends Card2 implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MANUTECH,
@@ -31,10 +30,6 @@ export class Manutech extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 
   public static onProductionGain(player: Player, resource: Resources, amount: number) {

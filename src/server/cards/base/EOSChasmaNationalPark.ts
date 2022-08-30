@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -9,8 +9,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EosChasmaNationalPark extends Card implements IProjectCard {
-  public migrated = true;
+export class EosChasmaNationalPark extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -32,7 +31,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cards = player.getResourceCards(CardResource.ANIMAL);
     player.plants += 3;
 

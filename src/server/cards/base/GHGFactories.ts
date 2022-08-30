@@ -1,13 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class GHGFactories extends Card implements IProjectCard {
-  public migrated = true;
+export class GHGFactories extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -27,8 +26,5 @@ export class GHGFactories extends Card implements IProjectCard {
         description: 'Decrease your Energy production 1 step and increase your heat production 4 steps.',
       },
     });
-  }
-  public play() {
-    return undefined;
   }
 }

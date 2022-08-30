@@ -1,7 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -13,8 +13,7 @@ import {AresHandler} from '../../ares/AresHandler';
 import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
 
-export class RedCity extends Card implements IProjectCard {
-  public migrated = true;
+export class RedCity extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -44,11 +43,11 @@ export class RedCity extends Card implements IProjectCard {
     const citySpaces = board.getAvailableSpacesForCity(player);
     return citySpaces.filter((space) => !board.getAdjacentSpaces(space).some(Board.isGreenerySpace));
   }
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return this.availableRedCitySpaces(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
       player.game.addTile(player, space.spaceType, space, {tileType: TileType.RED_CITY, card: this.name});
       return undefined;

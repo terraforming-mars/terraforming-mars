@@ -22,15 +22,15 @@ describe('EarlyExpedition', function() {
   it('canPlay', function() {
     (game as any).temperature = -16;
     player.production.override({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     (game as any).temperature = -18;
     player.production.override({energy: 0});
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     (game as any).temperature = -18;
     player.production.override({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {
@@ -38,7 +38,7 @@ describe('EarlyExpedition', function() {
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
     player.playedCards = [lunarObservationPost];
 
-    const selectSpace = cast(player.simplePlay(card), SelectSpace);
+    const selectSpace = cast(card.play(player), SelectSpace);
     runAllActions(game);
 
     expect(player.production.asUnits()).eql(Units.of({megacredits: 3}));

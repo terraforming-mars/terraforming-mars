@@ -31,9 +31,9 @@ describe('DomedCrater', function() {
 
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 1);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);

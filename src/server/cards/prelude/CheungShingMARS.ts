@@ -1,13 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class CheungShingMARS extends Card implements ICorporationCard {
-  public migrated = true;
+export class CheungShingMARS extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -31,9 +30,5 @@ export class CheungShingMARS extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

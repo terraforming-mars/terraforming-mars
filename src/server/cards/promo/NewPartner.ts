@@ -1,11 +1,11 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 
-export class NewPartner extends PreludeCard2 {
+export class NewPartner extends PreludeCard {
   constructor() {
     super({
       name: CardName.NEW_PARTNER,

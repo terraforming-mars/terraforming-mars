@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 
-export class AerospaceMission extends PreludeCard2 {
+export class AerospaceMission extends PreludeCard {
   constructor() {
     super({
       name: CardName.AEROSPACE_MISSION,

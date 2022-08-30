@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
@@ -11,7 +11,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
 
-export class ExecutiveOrder extends PreludeCard2 implements IProjectCard {
+export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.EXECUTIVE_ORDER,

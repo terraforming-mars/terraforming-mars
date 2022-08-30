@@ -1,11 +1,11 @@
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {PreludeCard2} from './PreludeCard';
+import {PreludeCard} from './PreludeCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class EccentricSponsor extends PreludeCard2 {
+export class EccentricSponsor extends PreludeCard {
   constructor() {
     super({
       name: CardName.ECCENTRIC_SPONSOR,

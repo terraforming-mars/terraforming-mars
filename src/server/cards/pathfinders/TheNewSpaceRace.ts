@@ -2,13 +2,13 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 import {Game} from '../../Game';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class TheNewSpaceRace extends PreludeCard2 implements IProjectCard {
+export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.THE_NEW_SPACE_RACE,

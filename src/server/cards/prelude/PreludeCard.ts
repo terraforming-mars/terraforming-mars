@@ -14,7 +14,7 @@ interface StaticPreludeProperties {
     productionBox?: Partial<Units>;
 }
 
-export abstract class PreludeCard2 extends Card2 implements IProjectCard {
+export abstract class PreludeCard extends Card2 implements IProjectCard {
   constructor(properties: StaticPreludeProperties) {
     super({
       cardType: CardType.PRELUDE,

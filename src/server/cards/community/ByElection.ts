@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class ByElection extends PreludeCard2 implements IProjectCard {
+export class ByElection extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.BY_ELECTION,

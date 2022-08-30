@@ -1,11 +1,11 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 
-export class PersonalAgenda extends PreludeCard2 {
+export class PersonalAgenda extends PreludeCard {
   constructor() {
     super({
       name: CardName.PERSONAL_AGENDA,

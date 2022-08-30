@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 
-export class ValuableGases extends PreludeCard2 implements IProjectCard {
+export class ValuableGases extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.VALUABLE_GASES,

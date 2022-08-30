@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 
-export class AntidesertificationTechniques extends PreludeCard2 {
+export class AntidesertificationTechniques extends PreludeCard {
   constructor() {
     super({
       name: CardName.ANTI_DESERTIFICATION_TECHNIQUES,

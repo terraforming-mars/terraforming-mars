@@ -1,11 +1,11 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 
-export class ResearchGrant extends PreludeCard2 {
+export class ResearchGrant extends PreludeCard {
   constructor() {
     super({
       name: CardName.RESEARCH_GRANT_PATHFINDERS,

@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from './PreludeCard';
+import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class GreatAquifer extends PreludeCard2 {
+export class GreatAquifer extends PreludeCard {
   constructor() {
     super({
       name: CardName.GREAT_AQUIFER,

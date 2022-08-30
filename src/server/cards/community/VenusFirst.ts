@@ -1,11 +1,11 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class VenusFirst extends PreludeCard2 implements IProjectCard {
+export class VenusFirst extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUS_FIRST,

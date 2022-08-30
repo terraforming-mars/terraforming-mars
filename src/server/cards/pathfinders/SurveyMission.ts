@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
@@ -11,7 +11,7 @@ import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
 
 type Triplet = [ISpace, ISpace, ISpace];
-export class SurveyMission extends PreludeCard2 {
+export class SurveyMission extends PreludeCard {
   constructor() {
     super({
       name: CardName.SURVEY_MISSION,

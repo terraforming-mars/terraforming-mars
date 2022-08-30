@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
@@ -14,7 +14,7 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
 
 // TODO(kberg) like #3644, this card may have similar behavior.
-export class ValuableGases extends PreludeCard2 implements IProjectCard {
+export class ValuableGases extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.VALUABLE_GASES_PATHFINDERS,

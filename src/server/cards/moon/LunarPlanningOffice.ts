@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 
-export class LunarPlanningOffice extends PreludeCard2 implements IProjectCard {
+export class LunarPlanningOffice extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_PlANNING_OFFICE,

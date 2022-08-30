@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from './PreludeCard';
+import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class HugeAsteroid extends PreludeCard2 {
+export class HugeAsteroid extends PreludeCard {
   constructor() {
     super({
       name: CardName.HUGE_ASTEROID,

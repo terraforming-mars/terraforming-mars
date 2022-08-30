@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
@@ -8,7 +8,7 @@ import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 
-export class CrewTraining extends PreludeCard2 implements ICloneTagCard {
+export class CrewTraining extends PreludeCard implements ICloneTagCard {
   constructor() {
     super({
       name: CardName.CREW_TRAINING,

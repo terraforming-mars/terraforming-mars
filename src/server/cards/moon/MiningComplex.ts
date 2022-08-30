@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Player} from '../../Player';
@@ -11,7 +11,7 @@ import {Resources} from '../../../common/Resources';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {TileType} from '../../../common/TileType';
 
-export class MiningComplex extends PreludeCard2 {
+export class MiningComplex extends PreludeCard {
   constructor() {
     super({
       name: CardName.MINING_COMPLEX,

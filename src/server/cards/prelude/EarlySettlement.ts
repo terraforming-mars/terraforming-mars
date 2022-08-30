@@ -1,11 +1,11 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard2} from './PreludeCard';
+import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EarlySettlement extends PreludeCard2 {
+export class EarlySettlement extends PreludeCard {
   constructor() {
     super({
       name: CardName.EARLY_SETTLEMENT,

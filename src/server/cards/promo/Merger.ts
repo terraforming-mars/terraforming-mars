@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard2} from '../prelude/PreludeCard';
+import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -12,7 +12,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CARD_COST} from '../../../common/constants';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
-export class Merger extends PreludeCard2 {
+export class Merger extends PreludeCard {
   constructor() {
     super({
       name: CardName.MERGER,

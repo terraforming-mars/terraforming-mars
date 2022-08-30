@@ -12,7 +12,7 @@ import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
 import {ClientCard} from '../../common/cards/ClientCard';
 import {CardType} from '../../common/cards/CardType';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
-import {PreludeCard2} from '../cards/prelude/PreludeCard';
+import {PreludeCard} from '../cards/prelude/PreludeCard';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 
@@ -38,7 +38,7 @@ class ProjectCardProcessor {
     let startingMegaCredits = undefined;
     let cardCost = undefined;
     if (card.cardType === CardType.PRELUDE) {
-      startingMegaCredits = (card as PreludeCard2).startingMegaCredits;
+      startingMegaCredits = (card as PreludeCard).startingMegaCredits;
     }
     if (card.cardType === CardType.CORPORATION) {
       startingMegaCredits = (card as ICorporationCard).startingMegaCredits;

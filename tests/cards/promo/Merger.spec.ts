@@ -107,13 +107,13 @@ describe('Merger', function() {
   });
 
   it('Works with both Terralabs and Polyphemos together', function() {
-    game.playCorporationCard(player, new TerralabsResearch());
+    player.playCorporationCard(new TerralabsResearch());
     Merger.playSecondCorporationCard(player, new Polyphemos());
     expect(player.cardCost).to.eq(CARD_COST);
   });
 
   it('Adds Merger corp initial action to player.pendingInitialActions', function() {
-    game.playCorporationCard(player, new TharsisRepublic());
+    player.playCorporationCard(new TharsisRepublic());
     expect(player.pendingInitialActions).has.length(1);
 
     card.play(player);
@@ -125,7 +125,7 @@ describe('Merger', function() {
   });
 
   it('Works with Point Luna and second corp with Earth tag', function() {
-    game.playCorporationCard(player, new PointLuna());
+    player.playCorporationCard(new PointLuna());
     const handSize = player.cardsInHand.length;
 
     Merger.playSecondCorporationCard(player, new Teractor());

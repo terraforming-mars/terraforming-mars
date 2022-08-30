@@ -66,7 +66,6 @@ import {isProduction} from './utils/server';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
-import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 
 export interface Score {
@@ -559,47 +558,7 @@ export class Game {
         if (somePlayer.pickedCorporationCard === undefined) {
           throw new Error(`pickedCorporationCard is not defined for ${somePlayer.id}`);
         }
-        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard);
-      }
-    }
-  }
-
-  // public for testing
-  public playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
-    if (player.corporations.length === 0) {
-      player.corporations.push(corporationCard);
-    } else {
-      throw new Error('Do not use playCorporationCard for more than one corporation card.');
-    }
-
-    player.megaCredits = corporationCard.startingMegaCredits;
-    if (corporationCard.cardCost !== undefined) {
-      player.cardCost = corporationCard.cardCost;
-    }
-
-    if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
-      const diff = player.cardsInHand.length * player.cardCost;
-      player.deductResource(Resources.MEGACREDITS, diff);
-    }
-    player.simplePlay(corporationCard);
-    if (corporationCard.initialAction !== undefined) player.pendingInitialActions.push(corporationCard);
-    this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
-    player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));
-
-    this.triggerOtherCorpEffects(player, corporationCard);
-    ColoniesHandler.onCardPlayed(this, corporationCard);
-    PathfindersExpansion.onCardPlayed(player, corporationCard);
-
-    this.playerIsFinishedWithResearchPhase(player);
-  }
-
-  public triggerOtherCorpEffects(player: Player, playedCorporationCard: ICorporationCard) {
-    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
-    for (const somePlayer of player.game.getPlayers()) {
-      for (const corporation of somePlayer.corporations) {
-        if (somePlayer === player && corporation.name === playedCorporationCard.name) continue;
-        if (corporation.onCorpCardPlayed === undefined) continue;
-        this.defer(new SimpleDeferredAction(player, () => corporation.onCorpCardPlayed?.(player, playedCorporationCard)));
+        somePlayer.playCorporationCard(somePlayer.pickedCorporationCard);
       }
     }
   }

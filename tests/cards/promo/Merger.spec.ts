@@ -4,7 +4,7 @@ import {Merger} from '../../../src/server/cards/promo/Merger';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
@@ -18,6 +18,7 @@ import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepu
 import {CardName} from '../../../src/common/cards/CardName';
 import {PointLuna} from '../../../src/server/cards/prelude/PointLuna';
 import {Teractor} from '../../../src/server/cards/corporation/Teractor';
+import {CheungShingMARS} from '../../../src/server/cards/prelude/CheungShingMARS';
 
 describe('Merger', function() {
   let card : Merger; let player : Player; let player2: Player; let game : Game;
@@ -38,7 +39,7 @@ describe('Merger', function() {
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
     card.play(player);
 
-    const selectCorp = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     expect(selectCorp.cards).has.length(4);
   });
 
@@ -46,7 +47,7 @@ describe('Merger', function() {
     player.megaCredits = 27;
     card.play(player);
 
-    const selectCorp = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     expect(selectCorp.cards).has.length(3);
   });
 
@@ -54,7 +55,7 @@ describe('Merger', function() {
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
     card.play(player);
 
-    const selectCorp = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     const index = selectCorp.cards.findIndex((card) => card.name === CardName.ARCADIAN_COMMUNITIES);
     selectCorp.cb([selectCorp.cards[index]]); // Arcadian
 
@@ -67,7 +68,7 @@ describe('Merger', function() {
     player.corporations.push(new Splice());
     card.play(player);
 
-    const selectCorp = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     selectCorp.cb([selectCorp.cards[0]]);
     expect(player.corporations).has.length(2);
   });
@@ -87,11 +88,26 @@ describe('Merger', function() {
     expect(player.megaCredits).to.eq(2); // Splice
   });
 
+  it('Confirming that Cheung Shing Mars works', function() {
+    player.corporations.push(new Splice());
+    card.play(player);
+
+    const cheungShingMARS = new CheungShingMARS();
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
+    selectCorp.cb([cheungShingMARS]);
+    expect(player.corporations).has.length(2);
+
+    expect(player.isCorporation(CardName.SPLICE)).is.true;
+    expect(player.isCorporation(CardName.CHEUNG_SHING_MARS)).is.true;
+
+    expect(player.production.megacredits).to.eq(3);
+  });
+
   it('Works with Terralabs played via Merger', function() {
     player.megaCredits = 50; // Ensure enough to pay for Merger cost
     card.play(player);
 
-    const selectCorp = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     const index = selectCorp.cards.findIndex((card) => card.name === CardName.TERRALABS_RESEARCH);
     selectCorp.cb([selectCorp.cards[index]]); // Terralabs
     expect(player.cardCost).to.eq(1);
@@ -100,7 +116,7 @@ describe('Merger', function() {
   it('Works with Polyphemos played via Merger', function() {
     card.play(player);
 
-    const selectCorp = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     const index = selectCorp.cards.findIndex((card) => card.name === CardName.POLYPHEMOS);
     selectCorp.cb([selectCorp.cards[index]]); // Polyphemos
     expect(player.cardCost).to.eq(5);
@@ -118,7 +134,7 @@ describe('Merger', function() {
 
     card.play(player);
 
-    const selectCorp = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCorp = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     const index = selectCorp.cards.findIndex((card) => card.name === CardName.ARCADIAN_COMMUNITIES);
     selectCorp.cb([selectCorp.cards[index]]); // Arcadian
     expect(player.pendingInitialActions).has.length(2);

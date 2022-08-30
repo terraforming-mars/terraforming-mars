@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {TURMOIL_CARD_MANIFEST} from '../turmoil/TurmoilCardManifest';
@@ -7,7 +7,7 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class PoliticalUprising extends PreludeCard implements IProjectCard {
+export class PoliticalUprising extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.POLITICAL_UPRISING,
@@ -23,7 +23,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.drawTurmoilCard(player);
 
     for (let i = 0; i < 4; i++) {

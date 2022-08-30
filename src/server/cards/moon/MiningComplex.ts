@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Player} from '../../Player';
@@ -11,7 +11,7 @@ import {Resources} from '../../../common/Resources';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {TileType} from '../../../common/TileType';
 
-export class MiningComplex extends PreludeCard {
+export class MiningComplex extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.MINING_COMPLEX,
@@ -32,7 +32,11 @@ export class MiningComplex extends PreludeCard {
 
   public tilesBuilt = [TileType.MOON_MINE, TileType.MOON_ROAD];
 
-  public play(player: Player) {
+  public override bespokeCanPlay(player: Player) {
+    return player.canAfford(7);
+  }
+
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonMineTile(player)
       .andThen((space) => {
         const moon = MoonExpansion.moonData(player.game).moon;

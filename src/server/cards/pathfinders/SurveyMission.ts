@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
@@ -11,7 +11,7 @@ import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
 
 type Triplet = [ISpace, ISpace, ISpace];
-export class SurveyMission extends PreludeCard {
+export class SurveyMission extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.SURVEY_MISSION,
@@ -62,7 +62,7 @@ export class SurveyMission extends PreludeCard {
     return result;
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return this.validTriplets(player.game.board).length > 0;
   }
 
@@ -94,7 +94,7 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.STEEL, 5);
 
     const triplets = this.validTriplets(player.game.board);

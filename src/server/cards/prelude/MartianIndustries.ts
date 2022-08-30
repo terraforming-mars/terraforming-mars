@@ -28,4 +28,3 @@ export class MartianIndustries extends PreludeCard2 implements IProjectCard {
     return undefined;
   }
 }
-

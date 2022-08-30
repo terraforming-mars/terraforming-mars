@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 
-export class BasicInfrastructure extends PreludeCard {
+export class BasicInfrastructure extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.BASIC_INFRASTRUCTURE,
@@ -24,7 +24,7 @@ export class BasicInfrastructure extends PreludeCard {
 
   public tilesBuilt = [TileType.MOON_ROAD];
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));
     player.colonies.increaseFleetSize();
     return undefined;

@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class GreatAquifer extends PreludeCard {
+export class GreatAquifer extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.GREAT_AQUIFER,
@@ -18,7 +18,7 @@ export class GreatAquifer extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
     player.game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     return undefined;

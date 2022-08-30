@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class SupplyDrop extends PreludeCard {
+export class SupplyDrop extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.SUPPLY_DROP,
@@ -19,7 +19,7 @@ export class SupplyDrop extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.titanium +=3;
     player.steel +=8;
     player.plants +=3;

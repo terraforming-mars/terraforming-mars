@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
@@ -7,7 +7,7 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {Tag} from '../../../common/cards/Tag';
 
-export class StrategicBasePlanning extends PreludeCard {
+export class StrategicBasePlanning extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.STRATEGIC_BASE_PLANNING,
@@ -22,7 +22,7 @@ export class StrategicBasePlanning extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.deductResource(Resources.MEGACREDITS, 8);
     player.game.defer(new PlaceCityTile(player));
     player.game.defer(new BuildColony(player));

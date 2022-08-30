@@ -5,7 +5,7 @@ import {CardManifest} from './cards/CardManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Deck} from './Deck';
-import {PreludeCard} from './cards/prelude/PreludeCard';
+import {PreludeCard2} from './cards/prelude/PreludeCard';
 import {ALL_CARD_MANIFESTS} from './cards/AllCards';
 
 export class CardFinder {
@@ -37,7 +37,7 @@ export class CardFinder {
     return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards]);
   }
 
-  public getPreludeByName(cardName: CardName): PreludeCard | undefined {
+  public getPreludeByName(cardName: CardName): PreludeCard2 | undefined {
     return this.getCardByName(cardName, (manifest) => [manifest.preludeCards]);
   }
 

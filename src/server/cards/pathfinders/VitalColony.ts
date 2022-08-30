@@ -1,11 +1,11 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
-export class VitalColony extends PreludeCard {
+export class VitalColony extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.VITAL_COLONY,
@@ -20,7 +20,7 @@ export class VitalColony extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(
       new BuildColony(player, {giveBonusTwice: true}));
     return undefined;

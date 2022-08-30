@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {played} from '../Options';
 
-export class DeepSpaceOperations extends PreludeCard {
+export class DeepSpaceOperations extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.DEEP_SPACE_OPERATIONS,
@@ -23,7 +23,7 @@ export class DeepSpaceOperations extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.TITANIUM, 4);
     player.drawCard(2, {
       tag: Tag.SPACE,

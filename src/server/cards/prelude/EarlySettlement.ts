@@ -26,4 +26,3 @@ export class EarlySettlement extends PreludeCard2 {
     return undefined;
   }
 }
-

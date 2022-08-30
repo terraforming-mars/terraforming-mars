@@ -21,4 +21,3 @@ export class DomeFarming extends PreludeCard2 {
     });
   }
 }
-

@@ -1,12 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 
-export class LunarPlanningOffice extends PreludeCard implements IProjectCard {
+export class LunarPlanningOffice extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_PlANNING_OFFICE,
@@ -22,7 +22,7 @@ export class LunarPlanningOffice extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel += 6;
     player.game.defer(DrawCards.keepAll(player, 2, {tag: Tag.MOON}));
     return undefined;

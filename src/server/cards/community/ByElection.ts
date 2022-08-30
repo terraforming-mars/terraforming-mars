@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class ByElection extends PreludeCard implements IProjectCard {
+export class ByElection extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.BY_ELECTION,
@@ -21,11 +21,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public override canPlay() {
-    return true;
-  }
-
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     Turmoil.ifTurmoil((player.game), (turmoil) => {
       turmoil.addInfluenceBonus(player);
       turmoil.chooseRulingParty(player);

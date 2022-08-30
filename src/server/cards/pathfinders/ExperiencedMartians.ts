@@ -1,15 +1,15 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 
-export class ExperiencedMartians extends PreludeCard {
+export class ExperiencedMartians extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.EXPERIENCED_MARTIANS,
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'P08',
@@ -20,10 +20,9 @@ export class ExperiencedMartians extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new SendDelegateToArea(player, undefined, {count: 1, source: 'reserve'}));
     player.drawCard(2, {tag: Tag.MARS});
-    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

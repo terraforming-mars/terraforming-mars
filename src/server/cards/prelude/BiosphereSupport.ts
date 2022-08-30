@@ -1,15 +1,14 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../../common/Resources';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class BiosphereSupport extends PreludeCard {
+export class BiosphereSupport extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.BIOSPHERE_SUPPORT,
       tags: [Tag.PLANT],
+      productionBox: {plants: 2, megacredits: -1},
 
       metadata: {
         cardNumber: 'P05',
@@ -22,14 +21,6 @@ export class BiosphereSupport extends PreludeCard {
         description: 'Increase your plant production 2 steps. Decrease your M€ production 1 step.',
       },
     });
-  }
-  public override canPlay(player: Player): boolean {
-    return player.production.megacredits >= -4;
-  }
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, -1);
-    player.production.add(Resources.PLANTS, 2);
-    return undefined;
   }
 }
 

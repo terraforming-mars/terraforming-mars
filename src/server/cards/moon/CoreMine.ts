@@ -1,14 +1,14 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {TileType} from '../../../common/TileType';
 
-export class CoreMine extends PreludeCard implements IProjectCard {
+export class CoreMine extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.CORE_MINE,
@@ -26,8 +26,7 @@ export class CoreMine extends PreludeCard implements IProjectCard {
 
   public tilesBuilt = [TileType.MOON_MINE];
 
-  public play(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonMineTile(player));
     return undefined;
   }

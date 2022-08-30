@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 
-export class AerospaceMission extends PreludeCard {
+export class AerospaceMission extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.AEROSPACE_MISSION,
@@ -24,11 +24,11 @@ export class AerospaceMission extends PreludeCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.canAfford(14);
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.deductResource(Resources.MEGACREDITS, 14);
     player.game.defer(new BuildColony(player, {title: 'Select where to build the first colony'}));
     player.game.defer(new BuildColony(player, {title: 'Select where to build the second colony'}));

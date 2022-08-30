@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class TradeAdvance extends PreludeCard implements IProjectCard {
+export class TradeAdvance extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.TRADE_ADVANCE,
@@ -25,7 +25,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new SimpleDeferredAction(
       player,
       () => {

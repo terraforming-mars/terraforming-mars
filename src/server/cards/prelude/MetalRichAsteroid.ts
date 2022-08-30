@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class MetalRichAsteroid extends PreludeCard implements IProjectCard {
+export class MetalRichAsteroid extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.METAL_RICH_ASTEROID,
@@ -18,7 +18,7 @@ export class MetalRichAsteroid extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.titanium += 4;
     player.steel += 4;
     return player.game.increaseTemperature(player, 1);

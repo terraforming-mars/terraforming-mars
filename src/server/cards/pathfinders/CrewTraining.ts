@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
@@ -8,7 +8,7 @@ import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 
-export class CrewTraining extends PreludeCard implements ICloneTagCard {
+export class CrewTraining extends PreludeCard2 implements ICloneTagCard {
   constructor() {
     super({
       name: CardName.CREW_TRAINING,
@@ -37,7 +37,7 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
     return [this.cloneTag, this.cloneTag];
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(2);
 
     player.game.defer(new DeclareCloneTag(player, this));

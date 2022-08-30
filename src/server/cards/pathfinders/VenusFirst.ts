@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
-export class VenusFirst extends PreludeCard {
+export class VenusFirst extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.VENUS_FIRST_PATHFINDERS,
@@ -20,7 +20,7 @@ export class VenusFirst extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseVenusScaleLevel(player, 2);
     player.drawCard(2, {tag: Tag.VENUS});
     return undefined;

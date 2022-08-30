@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 
-export class ValuableGases extends PreludeCard implements IProjectCard {
+export class ValuableGases extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.VALUABLE_GASES,
@@ -28,7 +28,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.megaCredits += 6;
 
     const playableCards = player.getPlayableCards().filter((card) => card.tags.includes(Tag.VENUS));

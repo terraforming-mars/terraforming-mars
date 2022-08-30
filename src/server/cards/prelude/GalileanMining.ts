@@ -1,17 +1,16 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../../common/Resources';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
-export class GalileanMining extends PreludeCard {
+export class GalileanMining extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.GALILEAN_MINING,
       tags: [Tag.JOVIAN],
-
+      productionBox: {titanium: 2},
       startingMegacredits: -5,
 
       metadata: {
@@ -26,11 +25,10 @@ export class GalileanMining extends PreludeCard {
       },
     });
   }
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.canAfford(5);
   }
-  public play(player: Player) {
-    player.production.add(Resources.TITANIUM, 2);
+  public override bespokePlay(player: Player) {
     player.game.defer(new SelectPaymentDeferred(player, 5));
     return undefined;
   }

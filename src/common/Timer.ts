@@ -7,7 +7,8 @@ export class Clock {
 }
 const REAL_CLOCK = new Clock();
 export class Timer {
-  private lastStoppedAt: number = 0; // When was last time it was stopped.
+  private static lastStoppedAt: number = 0; // When was last time any Timer.stop() called
+
   private sumElapsed: number = 0; // Sum of elapsed closed time intervals
   private startedAt: number = 0; // When was current time interval started
   private running: boolean = false; // Is the timer currently running
@@ -25,7 +26,7 @@ export class Timer {
       startedAt: this.startedAt,
       running: this.running,
       afterFirstAction: this.afterFirstAction,
-      lastStoppedAt: this.lastStoppedAt,
+      lastStoppedAt: Timer.lastStoppedAt,
     };
   }
 
@@ -35,7 +36,9 @@ export class Timer {
     timer.startedAt = d.startedAt;
     timer.running = d.running;
     timer.afterFirstAction = d.afterFirstAction;
-    timer.lastStoppedAt = d.lastStoppedAt;
+
+    // Should this be `Math.max(Timer.lastStoppedAt, d.lastStoppedAt)`?
+    Timer.lastStoppedAt = d.lastStoppedAt;
     return timer;
   }
 
@@ -44,18 +47,18 @@ export class Timer {
     this.running = true;
     // Timer is starting when previous timer was stopped. Normally it does not make any difference,
     // but this way undoing actions does not undo the timers.
-    this.startedAt = this.lastStoppedAt === 0 ? this.clock.now() : this.lastStoppedAt;
+    this.startedAt = Timer.lastStoppedAt === 0 ? this.clock.now() : Timer.lastStoppedAt;
   }
 
   // stop() is called immediately when player performs new input action.
   public stop() : void {
     this.running = false;
-    this.lastStoppedAt = this.clock.now();
+    Timer.lastStoppedAt = this.clock.now();
     if (!this.afterFirstAction) { // Skipping timer for first move in game
       this.afterFirstAction = true;
       return;
     }
-    this.sumElapsed += this.lastStoppedAt - this.startedAt;
+    this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
   }
 
   public getElapsed(): number {

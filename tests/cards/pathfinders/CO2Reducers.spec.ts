@@ -18,7 +18,7 @@ describe('CO2Reducers', function() {
   });
 
   it('Should play', function() {
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
 

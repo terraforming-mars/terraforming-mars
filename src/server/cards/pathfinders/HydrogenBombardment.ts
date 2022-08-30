@@ -1,11 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 
-export class HydrogenBombardment extends PreludeCard {
-  public migrated = true;
+export class HydrogenBombardment extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,
@@ -23,7 +22,7 @@ export class HydrogenBombardment extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.MEGACREDITS, this.startingMegaCredits);
     player.game.increaseVenusScaleLevel(player, 1);
     return undefined;

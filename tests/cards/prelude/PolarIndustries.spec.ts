@@ -9,7 +9,7 @@ describe('PolarIndustries', function() {
     const card = new PolarIndustries();
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
-    const action = player.simplePlay(card);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.production.heat).to.eq(2);
   });

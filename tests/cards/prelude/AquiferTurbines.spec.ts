@@ -17,12 +17,12 @@ describe('AquiferTurbines', function() {
 
   it('Can play', function() {
     player.megaCredits = 3;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
     player.megaCredits = 3;
-    player.simplePlay(card);
+    card.play(player);
 
     // PlaceOceanTile
     game.deferredActions.pop();

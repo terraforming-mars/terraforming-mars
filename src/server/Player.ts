@@ -1134,7 +1134,7 @@ export class Player {
   // eslint-disable-next-line valid-jsdoc
   /** @deprecated use Card2. */
   public simplePlay(card: IProjectCard | ICorporationCard) {
-    if (card instanceof MoonCard || (card.migrated === true)) {
+    if (card instanceof MoonCard) {
       if (card.productionBox !== undefined) {
         this.production.adjust(card.productionBox);
       }
@@ -1413,7 +1413,7 @@ export class Player {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;
     }
-    if ((card instanceof MoonCard || card.migrated === true) && card.productionBox && !this.production.canAdjust(card.productionBox)) {
+    if (card instanceof MoonCard && card.productionBox && !this.production.canAdjust(card.productionBox)) {
       return false;
     }
     return card.canPlay(this);

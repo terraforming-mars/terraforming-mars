@@ -32,3 +32,36 @@ export abstract class PreludeCard extends Card implements IProjectCard {
     return true;
   }
 }
+
+/**
+ * See Card2 for details
+ */
+export abstract class PreludeCard2 extends PreludeCard {
+  constructor(properties: StaticPreludeProperties) {
+    super(properties);
+  }
+  public override canPlay(player: Player) {
+    if (this.requirements?.satisfies(player) === false) {
+      return false;
+    }
+    if (this.productionBox && !player.production.canAdjust(this.productionBox)) {
+      return false;
+    }
+    return this.bespokeCanPlay(player);
+  }
+
+  public bespokeCanPlay(_player: Player): boolean {
+    return true;
+  }
+
+  public play(player: Player) {
+    if (this.productionBox !== undefined) {
+      player.production.adjust(this.productionBox);
+    }
+    return this.bespokePlay(player);
+  }
+
+  public bespokePlay(_player: Player): PlayerInput | undefined {
+    return undefined;
+  }
+}

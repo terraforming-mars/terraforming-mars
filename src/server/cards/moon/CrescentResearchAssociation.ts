@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -8,7 +8,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
-export class CrescentResearchAssociation extends Card implements ICorporationCard {
+export class CrescentResearchAssociation extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -31,7 +31,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
     });
   }
 
-  public play() {
+  public override bespokePlay() {
     return undefined;
   }
 

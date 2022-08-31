@@ -8,10 +8,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MareSerenitatisMine extends MoonCard {
+export class MareSerenitatisMine extends Card2 {
   constructor() {
     super({
       name: CardName.MARE_SERENITATIS_MINE,
@@ -32,12 +32,11 @@ export class MareSerenitatisMine extends MoonCard {
           b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix().nbsp.moonRoad({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_SERENITATIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     const moon = MoonExpansion.moonData(player.game).moon;

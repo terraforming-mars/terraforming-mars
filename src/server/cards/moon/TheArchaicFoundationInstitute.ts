@@ -6,10 +6,10 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {ICard} from '../ICard';
 
-export class TheArchaicFoundationInstitute extends Card implements ICorporationCard {
+export class TheArchaicFoundationInstitute extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -36,7 +36,7 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
 
   public override resourceCount = 0;
 
-  public play() {
+  public override bespokePlay() {
     this.resourceCount += 2;
     return undefined;
   }

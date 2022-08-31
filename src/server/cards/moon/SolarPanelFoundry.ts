@@ -6,9 +6,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class SolarPanelFoundry extends Card implements IActionCard, IProjectCard {
+export class SolarPanelFoundry extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.SOLAR_PANEL_FOUNDRY,
@@ -24,10 +24,6 @@ export class SolarPanelFoundry extends Card implements IActionCard, IProjectCard
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player) {

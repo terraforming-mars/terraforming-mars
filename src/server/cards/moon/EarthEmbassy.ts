@@ -3,10 +3,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {played} from '../Options';
 
-export class EarthEmbassy extends Card implements IProjectCard {
+export class EarthEmbassy extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.EARTH_EMBASSY,
@@ -23,10 +23,5 @@ export class EarthEmbassy extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  // Behavior is baked into `Player.getTagCount`
-  public play() {
-    return undefined;
   }
 }

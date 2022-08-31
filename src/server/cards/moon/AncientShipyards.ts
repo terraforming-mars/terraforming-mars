@@ -6,11 +6,11 @@ import {CardResource} from '../../../common/CardResource';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {all} from '../Options';
 import {VictoryPoints} from '../ICard';
 
-export class AncientShipyards extends MoonCard {
+export class AncientShipyards extends Card2 {
   constructor() {
     super({
       name: CardName.ANCIENT_SHIPYARDS,
@@ -35,10 +35,6 @@ export class AncientShipyards extends MoonCard {
     });
   }
   public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
-  }
 
   public canAct(): boolean {
     return true;

@@ -56,7 +56,7 @@ describe('OceanFarm', () => {
 
   it('Ocean Farm counts as ocean for adjacency', () => {
     const oceanSpace = addOcean(player);
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];
 
@@ -76,7 +76,7 @@ describe('OceanFarm', () => {
     game.addOceanTile(player, oceanSpace.id);
     expect(player.plants).eq(1);
 
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     expect(player.plants).eq(1);
 

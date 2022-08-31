@@ -6,10 +6,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MomentumViriumHabitat extends MoonCard {
+export class MomentumViriumHabitat extends Card2 {
   constructor() {
     super({
       name: CardName.MOMENTUM_VIRUM_HABITAT,
@@ -32,12 +32,11 @@ export class MomentumViriumHabitat extends MoonCard {
           b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).asterix();
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_COLONY],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.addColonyTile(player, MoonSpaces.MOMENTUM_VIRIUM, this.name);
     MoonExpansion.raiseColonyRate(player);
     return undefined;

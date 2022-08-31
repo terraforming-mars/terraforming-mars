@@ -7,11 +7,11 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class CosmicRadiation extends Card implements IProjectCard {
+export class CosmicRadiation extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.COSMIC_RADIATION,
@@ -30,7 +30,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
     player.game.getPlayersInGenerationOrder().forEach((mineTileOwner) => {
       const owned = mines.filter((mine) => mine.player?.id === mineTileOwner.id).length;

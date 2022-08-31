@@ -8,10 +8,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {digit} from '../Options';
 
-export class PreliminaryDarkside extends Card implements IProjectCard {
+export class PreliminaryDarkside extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.PRELIMINARY_DARKSIDE,
@@ -32,7 +32,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseMiningRate(player);
     return new OrOptions(
       new SelectOption('Gain 3 titanium.', 'Gain titanium', () => {

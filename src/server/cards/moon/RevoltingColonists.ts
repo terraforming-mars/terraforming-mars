@@ -7,11 +7,11 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class RevoltingColonists extends Card implements IProjectCard {
+export class RevoltingColonists extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.REVOLTING_COLONISTS,
@@ -30,7 +30,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const colonies = MoonExpansion.spaces(player.game, TileType.MOON_COLONY);
     player.game.getPlayers().forEach((colonyTileOwner) => {
       const owned = colonies.filter((colony) => colony.player?.id === colonyTileOwner.id).length;

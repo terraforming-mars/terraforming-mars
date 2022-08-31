@@ -5,12 +5,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 import {VictoryPoints} from '../ICard';
 
-export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
+export class PrideoftheEarthArkship extends Card2 implements IActionCard {
   constructor() {
     super({
       name: CardName.PRIDE_OF_THE_EARTH_ARKSHIP,
@@ -36,10 +36,6 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
     });
   }
   public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
 
   public canAct(player: Player) {
     return player.tags.count(Tag.SCIENCE) >= 5;

@@ -5,10 +5,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Resources} from '../../../common/Resources';
 
-export class HE3Refinery extends Card implements IProjectCard {
+export class HE3Refinery extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -26,10 +26,6 @@ export class HE3Refinery extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 
   public canAct() {

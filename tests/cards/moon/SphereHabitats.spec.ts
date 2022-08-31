@@ -32,7 +32,7 @@ describe('SphereHabitats', () => {
     expect(player.production.steel).eq(0);
     expect(player.getTerraformRating()).eq(14);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(2);
     // PlaceMoonColonyTile is what's responsible for raising the colony rate.

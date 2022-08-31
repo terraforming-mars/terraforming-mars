@@ -6,9 +6,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
+export class UndermoonDrugLordsNetwork extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.UNDERMOON_DRUG_LORDS_NETWORK,
@@ -29,7 +29,7 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const gain = Math.floor(MoonExpansion.moonData(player.game).colonyRate / 2);
     player.production.add(Resources.MEGACREDITS, gain, {log: true});
     return undefined;

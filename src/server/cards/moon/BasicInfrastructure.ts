@@ -19,10 +19,9 @@ export class BasicInfrastructure extends PreludeCard {
           b.tile(TileType.MOON_ROAD, false).tradeFleet();
         }),
       },
+      tilesBuilt: [TileType.MOON_ROAD],
     });
   }
-
-  public tilesBuilt = [TileType.MOON_ROAD];
 
   public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));

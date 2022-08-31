@@ -2,11 +2,11 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
 
-export class HypersensitiveSiliconChipFactory extends MoonCard {
+export class HypersensitiveSiliconChipFactory extends Card2 {
   constructor() {
     super({
       name: CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY,
@@ -26,9 +26,5 @@ export class HypersensitiveSiliconChipFactory extends MoonCard {
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

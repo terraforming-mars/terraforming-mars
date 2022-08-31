@@ -40,7 +40,7 @@ describe('AlgaeBioreactors', () => {
     expect(game.getOxygenLevel()).eq(0);
     moonData.colonyRate = 0;
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.production.plants).eq(0);
     expect(moonData.colonyRate).eq(1);

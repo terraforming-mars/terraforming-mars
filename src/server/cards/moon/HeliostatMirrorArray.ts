@@ -3,9 +3,9 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class HeliostatMirrorArray extends MoonCard {
+export class HeliostatMirrorArray extends Card2 {
   constructor() {
     super({
       cost: 10,
@@ -27,7 +27,7 @@ export class HeliostatMirrorArray extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.heat++;
     return undefined;
   }

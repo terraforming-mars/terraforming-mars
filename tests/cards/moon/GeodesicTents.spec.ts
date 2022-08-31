@@ -38,7 +38,7 @@ describe('GeodesicTents', () => {
     player.titanium = 1;
     player.production.override({energy: 1});
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(0);
     expect(player.production.energy).eq(0);

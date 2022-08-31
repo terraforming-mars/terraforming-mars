@@ -40,7 +40,7 @@ describe('PrideoftheEarthArkship', () => {
   it('play', () => {
     player.titanium = 3;
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(1);
   });

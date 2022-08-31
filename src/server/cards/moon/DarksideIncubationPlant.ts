@@ -9,11 +9,11 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {LogHelper} from '../../LogHelper';
 import {VictoryPoints} from '../ICard';
 
-export class DarksideIncubationPlant extends MoonCard implements IActionCard, IProjectCard {
+export class DarksideIncubationPlant extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_INCUBATION_PLANT,
@@ -46,10 +46,6 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
     });
   }
   public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
 
   public canAct() {
     return true;

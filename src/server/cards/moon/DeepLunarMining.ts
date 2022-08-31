@@ -4,9 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class DeepLunarMining extends MoonCard {
+export class DeepLunarMining extends Card2 {
   constructor() {
     super({
       name: CardName.DEEP_LUNAR_MINING,
@@ -30,7 +30,7 @@ export class DeepLunarMining extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

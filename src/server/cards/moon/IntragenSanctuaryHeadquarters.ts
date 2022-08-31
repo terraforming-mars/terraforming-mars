@@ -7,12 +7,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all, played} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
+export class IntragenSanctuaryHeadquarters extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -44,7 +44,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
     return undefined;
   }
 
-  public play() {
+  public override bespokePlay() {
     // Gains the initial resource from its own tag.
     this.resourceCount = 1;
     return undefined;

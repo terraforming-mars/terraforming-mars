@@ -73,7 +73,7 @@ export class Merger extends PreludeCard {
     player.corporations.push(corporationCard);
     player.megaCredits += corporationCard.startingMegaCredits;
     Merger.setCardCostIfNeeded(player, corporationCard);
-    player.simplePlay(corporationCard);
+    corporationCard.play(player);
     if (corporationCard.initialAction !== undefined) {
       player.pendingInitialActions.push(corporationCard);
     }

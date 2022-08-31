@@ -41,7 +41,7 @@ describe('SinusIridiumRoadNetwork', () => {
     player.steel = 1;
     expect(player.production.megacredits).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.steel).eq(0);
     expect(player.production.energy).eq(0);

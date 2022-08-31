@@ -5,11 +5,11 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
-export class LunaProjectOffice extends Card implements IProjectCard {
+export class LunaProjectOffice extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_PROJECT_OFFICE,
@@ -28,7 +28,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.moonData(player.game).lunaProjectOfficeLastGeneration = player.game.generation + 2;
     return undefined;
   }

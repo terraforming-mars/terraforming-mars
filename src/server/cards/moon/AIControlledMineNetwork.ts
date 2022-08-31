@@ -5,10 +5,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class AIControlledMineNetwork extends Card implements IProjectCard {
+export class AIControlledMineNetwork extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.AI_CONTROLLED_MINE_NETWORK,
@@ -28,7 +28,7 @@ export class AIControlledMineNetwork extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseLogisticRate(player);
     return undefined;
   }

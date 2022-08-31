@@ -59,7 +59,7 @@ describe('LunaResort', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.colonyRate).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(1);
     expect(player.production.energy).eq(0);

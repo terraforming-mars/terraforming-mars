@@ -6,6 +6,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {MoonColonyStandardProject} from './MoonColonyStandardProject';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {TileType} from '../../../common/TileType';
 
 export class MoonColonyStandardProjectVariant2 extends MoonColonyStandardProject {
   constructor() {
@@ -14,6 +15,7 @@ export class MoonColonyStandardProjectVariant2 extends MoonColonyStandardProject
       cost: 26,
       reserveUnits: Units.EMPTY,
       tr: {moonColony: 1},
+      tilesBuilt: [TileType.MOON_COLONY],
 
       metadata: {
         cardNumber: '',
@@ -38,6 +40,7 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
       cost: 23,
       reserveUnits: Units.EMPTY,
       tr: {moonMining: 1},
+      tilesBuilt: [TileType.MOON_MINE],
 
       metadata: {
         cardNumber: '',
@@ -62,6 +65,7 @@ export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
       cost: 21,
       reserveUnits: Units.EMPTY,
       tr: {moonLogistics: 1},
+      tilesBuilt: [TileType.MOON_ROAD],
 
       metadata: {
         cardNumber: '',

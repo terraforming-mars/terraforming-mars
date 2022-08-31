@@ -3,10 +3,10 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class UndergroundDetonators extends Card implements IProjectCard {
+export class UndergroundDetonators extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.UNDERGROUND_DETONATORS,
@@ -26,7 +26,7 @@ export class UndergroundDetonators extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel += 1;
     player.titanium += 1;
     MoonExpansion.raiseMiningRate(player);

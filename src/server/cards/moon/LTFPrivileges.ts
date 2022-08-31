@@ -3,9 +3,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class LTFPrivileges extends Card implements IProjectCard {
+export class LTFPrivileges extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LTF_PRIVILEGES,
@@ -23,9 +23,5 @@ export class LTFPrivileges extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

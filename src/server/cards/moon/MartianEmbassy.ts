@@ -4,11 +4,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {played} from '../Options';
 
-export class MartianEmbassy extends Card implements IProjectCard {
+export class MartianEmbassy extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARTIAN_EMBASSY,
@@ -26,7 +26,7 @@ export class MartianEmbassy extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     // The +1 is "including this".
     const tags = player.tags.count(Tag.MOON) + 1;
     const rate = Math.floor(tags / 3);

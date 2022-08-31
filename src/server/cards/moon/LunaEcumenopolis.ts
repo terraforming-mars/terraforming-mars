@@ -4,14 +4,14 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {ISpace} from '../../boards/ISpace';
 
-export class LunaEcumenopolis extends MoonCard {
+export class LunaEcumenopolis extends Card2 {
   constructor() {
     super({
       name: CardName.LUNA_ECUMENOPOLIS,
@@ -31,7 +31,6 @@ export class LunaEcumenopolis extends MoonCard {
           b.tr(1).slash().moonColonyRate().moonColonyRate();
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_COLONY],
     });
   }
@@ -98,7 +97,7 @@ export class LunaEcumenopolis extends MoonCard {
     return false;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));

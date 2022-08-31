@@ -9,9 +9,9 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {Resources} from '../../../common/Resources';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class SmallDutyRovers extends MoonCard implements IProjectCard {
+export class SmallDutyRovers extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.SMALL_DUTY_ROVERS,
@@ -35,7 +35,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseLogisticRate(player);
     const moonData = MoonExpansion.moonData(player.game);
     const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;

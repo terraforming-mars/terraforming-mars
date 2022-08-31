@@ -1,12 +1,11 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 
-export class HousePrinting extends Card implements IProjectCard {
-  public migrated = true;
+export class HousePrinting extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -24,8 +23,5 @@ export class HousePrinting extends Card implements IProjectCard {
         description: 'Increase your steel production 1 step.',
       },
     });
-  }
-  public play() {
-    return undefined;
   }
 }

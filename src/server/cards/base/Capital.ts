@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
@@ -15,8 +15,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class Capital extends Card implements IProjectCard {
-  public migrated = true;
+export class Capital extends Card2 implements IProjectCard {
   constructor(
     name: CardName = CardName.CAPITAL,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
@@ -49,7 +48,7 @@ export class Capital extends Card implements IProjectCard {
       metadata,
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
@@ -60,7 +59,7 @@ export class Capital extends Card implements IProjectCard {
     }
     return 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space for special city tile',
       player.game.board.getAvailableSpacesForCity(player),

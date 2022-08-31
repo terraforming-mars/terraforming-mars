@@ -23,32 +23,32 @@ describe('MuseumofEarlyColonisation', function() {
     const greenery = addGreenery(player2);
     const city = addCity(player2);
     player.production.override({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.production.override({energy: 0});
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.production.override({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     ocean.tile!.tileType = TileType.BIOFERTILIZER_FACILITY;
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     ocean.tile!.tileType = TileType.OCEAN;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     greenery.tile!.tileType = TileType.BIOFERTILIZER_FACILITY;
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     greenery.tile!.tileType = TileType.GREENERY;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     city.tile!.tileType = TileType.BIOFERTILIZER_FACILITY;
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
   });
 
   it('play', function() {
     player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(20);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1, titanium: 1, plants: 1}));
     expect(player.getTerraformRating()).eq(21);

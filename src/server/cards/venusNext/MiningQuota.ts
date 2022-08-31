@@ -3,11 +3,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class MiningQuota extends Card implements IProjectCard {
-  public migrated = true;
+export class MiningQuota extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.MINING_QUOTA,
@@ -25,9 +24,5 @@ export class MiningQuota extends Card implements IProjectCard {
         description: 'Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.',
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

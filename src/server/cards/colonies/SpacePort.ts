@@ -7,10 +7,9 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class SpacePort extends Card implements IProjectCard {
-  public migrated = true;
+export class SpacePort extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 22,
@@ -34,7 +33,7 @@ export class SpacePort extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
     let coloniesCount: number = 0;
     player.game.colonies.forEach((colony) => {
@@ -43,7 +42,7 @@ export class SpacePort extends Card implements IProjectCard {
     return coloniesCount > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.colonies.increaseFleetSize();
 
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {

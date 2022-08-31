@@ -5,10 +5,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class SponsoredMohole extends Card implements IProjectCard {
-  public migrated = true;
+export class SponsoredMohole extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 5,
@@ -26,9 +25,5 @@ export class SponsoredMohole extends Card implements IProjectCard {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.',
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

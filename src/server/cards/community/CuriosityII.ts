@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
@@ -16,8 +16,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
 
-export class CuriosityII extends Card implements ICorporationCard {
-  public migrated = true;
+export class CuriosityII extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -56,10 +55,6 @@ export class CuriosityII extends Card implements ICorporationCard {
     if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space.tile?.covers !== undefined) {
       cardOwner.game.defer(new SimpleDeferredAction(cardOwner, () => this.corpAction(cardOwner)));
     }
-  }
-
-  public play() {
-    return undefined;
   }
 
   private corpAction(player: Player) {

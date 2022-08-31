@@ -4,7 +4,6 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
-import {fail} from 'assert';
 import {Phase} from '../../src/common/Phase';
 import {use} from 'chai';
 import chaiAsPromised = require('chai-as-promised');
@@ -119,14 +118,8 @@ describe('ApiGameLogs', function() {
     scaffolding.url = '/api/game/logs?id=' + player.id + '&full';
     const game = Game.newInstance('game-id', [player], player);
     await scaffolding.ctx.gameLoader.add(game);
-    // expect(async() => await scaffolding...).to.throw didn't work
-    // -- something to do with async I suppose. Feel free to try it.
-    try {
-      await scaffolding.get(ApiGameLogs.INSTANCE, res);
-      fail('Error expected');
-    } catch (error) {
-      expect((error as any as Error).message).to.match(/Game is not over/);
-    }
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    expect(res.content).eq('Bad request: cannot fetch game-end log');
   });
 
   it('Pulls full logs at game end', async () => {

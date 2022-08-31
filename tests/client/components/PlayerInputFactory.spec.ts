@@ -135,6 +135,7 @@ describe('PlayerInputFactory', function() {
           players: [],
           playerView: {
             id: 'foo',
+            dealtCorporationCards: [],
           },
           playerinput,
           onsave: function() {

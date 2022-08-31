@@ -1401,6 +1401,9 @@ export class Game {
     case SpaceBonus.MICROBE:
       this.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: count}));
       break;
+    case SpaceBonus.ANIMAL:
+      this.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: count}));
+      break;
     case SpaceBonus.DATA:
       this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
@@ -1426,7 +1429,7 @@ export class Game {
       // TODO(kberg): Remove the isProduction condition after 2022-01-01.
       // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
       if (!isProduction()) {
-        throw new Error('Unhandled space bonus ' + spaceBonus);
+        throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
       }
     }
   }

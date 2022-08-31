@@ -5,6 +5,14 @@
       ref="confirmation"
       v-on:accept="confirmSelection" />
     <SelectCard :playerView="playerView" :playerinput="corpCardOption" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
+    <div v-if="playerCanChooseAridor" class="player_home_colony_cont">
+      <div v-i18n>These are the colony tiles Aridor may choose from:</div>
+      <div class="discarded-colonies-for-aridor">
+        <div class="player_home_colony small_colony" v-for="colony in playerView.game.discardedColonies" :key="colony.name">
+          <colony :colony="colony"></colony>
+        </div>
+      </div>
+    </div>
     <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
     <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <template v-if="this.selectedCorporations.length === 1">
@@ -36,6 +44,7 @@ import {getPreferences, Preferences, PreferencesManager} from '@/client/utils/Pr
 import {Tag} from '@/common/cards/Tag';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
+import Colony from '@/client/components/colonies/Colony.vue';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -77,6 +86,7 @@ export default (Vue as WithRefs<Refs>).extend({
     Button,
     SelectCard,
     'confirm-dialog': ConfirmDialog,
+    Colony,
   },
   data(): SelectInitialCardsModel {
     return {
@@ -251,6 +261,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   computed: {
+    playerCanChooseAridor() {
+      return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
+    },
     hasPrelude() {
       return this.playerinput.options?.length === 3;
     },

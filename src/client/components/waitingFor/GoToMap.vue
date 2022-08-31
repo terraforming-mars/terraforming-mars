@@ -19,7 +19,6 @@ export default Vue.extend({
   methods: {
     onclick(event: MouseEvent) {
       const id = isMarsSpace(this.playerinput.availableSpaces?.[0] ?? '') ? 'shortkey-board' : 'shortkey-moonBoard';
-      console.log(id);
       const el = document.getElementById(id);
       if (el) {
         event.preventDefault();

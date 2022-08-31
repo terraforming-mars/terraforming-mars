@@ -26,7 +26,7 @@ describe('MagneticFieldGeneratorsPromo', function() {
     player.production.add(Resources.ENERGY, 4);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = player.simplePlay(card);
+    const action = card.play(player);
     expect(action).instanceOf(SelectSpace);
     expect(player.production.energy).to.eq(0);
     expect(player.production.plants).to.eq(2);

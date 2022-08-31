@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -11,8 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class MartianMediaCenter extends Card implements IProjectCard {
-  public migrated = true;
+export class MartianMediaCenter extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -35,10 +34,6 @@ export class MartianMediaCenter extends Card implements IProjectCard {
         description: 'Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.',
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

@@ -32,7 +32,7 @@ describe('NoctisCity', function() {
     const game = newTestGame(2, {boardName: BoardName.HELLAS});
     const player = game.getPlayersInGenerationOrder()[0];
 
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     expect(action!.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));
   });
 
@@ -40,7 +40,7 @@ describe('NoctisCity', function() {
     player.production.add(Resources.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
 

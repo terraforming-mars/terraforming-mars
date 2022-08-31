@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -9,8 +9,7 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class ProtectedValley extends Card implements IProjectCard {
-  public migrated = true;
+export class ProtectedValley extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -31,7 +30,7 @@ export class ProtectedValley extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space reserved for ocean to place greenery tile',
       player.game.board.getAvailableSpacesForOcean(player),

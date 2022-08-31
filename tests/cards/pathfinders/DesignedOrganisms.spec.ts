@@ -21,10 +21,10 @@ describe('DesignedOrganisms', function() {
 
   it('canPlay', function() {
     player.tagsForTest = {science: 4};
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.tagsForTest = {science: 5};
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {
@@ -32,7 +32,7 @@ describe('DesignedOrganisms', function() {
     const penguins = new Penguins();
     player.playedCards = [tardigrades, penguins];
 
-    player.simplePlay(card);
+    card.play(player);
     runAllActions(game);
 
     expect(player.plants).eq(3);

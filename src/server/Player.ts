@@ -1131,6 +1131,8 @@ export class Player {
     return undefined;
   }
 
+  // eslint-disable-next-line valid-jsdoc
+  /** @deprecated use Card2. */
   public simplePlay(card: IProjectCard | ICorporationCard) {
     if (card instanceof MoonCard || (card.migrated === true)) {
       if (card.productionBox !== undefined) {
@@ -1380,7 +1382,9 @@ export class Player {
     return candidateCards.filter((card) => this.canPlay(card));
   }
 
-  private canAffordCard(card: IProjectCard): boolean {
+  // TODO(kberg): After migration, see if this can become private again.
+  // Or perhaps moved into card?
+  public canAffordCard(card: IProjectCard): boolean {
     return this.canAfford(
       this.getCardCost(card),
       {
@@ -1399,8 +1403,12 @@ export class Player {
     return this.simpleCanPlay(card);
   }
 
-  // Verify if requirements for the card can be met, ignoring the project cost.
-  // Only made public for tests.
+  // eslint-disable-next-line valid-jsdoc
+  /**
+   * Verify if requirements for the card can be met, ignoring the project cost.
+   * Only made public for tests.
+   * @deprecated use Card2.
+   */
   public simpleCanPlay(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;

@@ -9,10 +9,9 @@ import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class GreatDamPromo extends Card implements IProjectCard {
-  public migrated = true;
+export class GreatDamPromo extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -33,11 +32,11 @@ export class GreatDamPromo extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 

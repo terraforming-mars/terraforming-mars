@@ -19,7 +19,7 @@ describe('Manutech', function() {
   });
 
   it('Should play', function() {
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.steel).to.eq(1);
     expect(player.steel).to.eq(1);
   });

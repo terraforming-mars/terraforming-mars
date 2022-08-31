@@ -17,6 +17,7 @@ export type GameModel = {
   aresData: AresData | undefined;
   awards: Array<FundedAwardModel>;
   colonies: Array<ColonyModel>;
+  discardedColonies: Array<ColonyModel>; // TODO(kberg): Replace with Array<ColonyName>
   corporationsToDraft: Array<CardModel>;
   deckSize: number;
   gameAge: number;

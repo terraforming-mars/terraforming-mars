@@ -7,6 +7,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
+import {isPlayerId, PlayerId} from '../../../src/common/Types';
 
 describe('TempestConsultancy', () => {
   let player: TestPlayer;
@@ -98,6 +100,25 @@ describe('TempestConsultancy', () => {
 
     expect(turmoil.chairman).eq(player.id);
     expect(player.getTerraformRating()).eq(22);
+  });
+
+  it('With Vote of No Confidence', () => {
+    player.setCorporationForTest(card);
+    turmoil.chairman = 'NEUTRAL';
+
+    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    greens.partyLeader = player.id;
+
+    expect(player.getTerraformRating()).to.eq(20);
+
+    const voteOfNoConfidence = new VoteOfNoConfidence();
+    voteOfNoConfidence.play(player);
+
+    expect(isPlayerId(turmoil.chairman)).is.true;
+    expect(game.getPlayerById(turmoil.chairman as PlayerId)).to.eq(player);
+    runAllActions(game);
+    // With Vote of No Confidence, player becomes chairman and gains 1 TR. Tempest gives player a second TR.
+    expect(player.getTerraformRating()).to.eq(22);
   });
 });
 

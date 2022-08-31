@@ -7,12 +7,12 @@ import {MoonSpaces} from '../../moon/MoonSpaces';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {Game} from '../../Game';
 import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class LunaTradeStation extends MoonCard implements IActionCard {
+export class LunaTradeStation extends Card2 implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_TRADE_STATION,
@@ -33,7 +33,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.addTile(
       player,
       MoonSpaces.LUNA_TRADE_STATION,

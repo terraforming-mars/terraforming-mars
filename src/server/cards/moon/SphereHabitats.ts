@@ -4,11 +4,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class SphereHabitats extends MoonCard {
+export class SphereHabitats extends Card2 {
   constructor() {
     super({
       name: CardName.SPHERE_HABITATS,
@@ -26,12 +26,11 @@ export class SphereHabitats extends MoonCard {
           b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE});
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_COLONY],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;
   }

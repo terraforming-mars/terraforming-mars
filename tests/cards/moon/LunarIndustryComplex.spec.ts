@@ -40,7 +40,7 @@ describe('LunarIndustryComplex', () => {
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 2;
 
-    player.simplePlay(card);
+    card.play(player);
 
     const placeMineTile = game.deferredActions.pop() as PlaceMoonMineTile;
     placeMineTile.execute()!.cb(moonData.moon.getSpace('m02'));

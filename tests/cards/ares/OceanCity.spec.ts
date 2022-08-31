@@ -51,7 +51,7 @@ describe('OceanCity', function() {
     const oceanSpace = addOcean(player);
     player.production.add(Resources.ENERGY, 1);
 
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     expect(player.production.energy).eq(0);
     expect(player.production.megacredits).eq(3);

@@ -7,11 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
-import {IMoonCard} from './IMoonCard';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard {
+export class MareImbriumMine extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARE_IMBRIUM_MINE,
@@ -31,12 +30,11 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
           b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_MINE],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_IMBRIUM, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

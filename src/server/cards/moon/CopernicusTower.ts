@@ -10,11 +10,11 @@ import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 
-export class CopernicusTower extends Card implements IActionCard, IProjectCard {
+export class CopernicusTower extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.COPERNICUS_TOWER,
@@ -40,10 +40,6 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
     });
   }
   public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
 
   private canRaiseTR(player: Player) {
     return this.resourceCount > 0 && player.canAfford(0, {tr: {tr: 1}});

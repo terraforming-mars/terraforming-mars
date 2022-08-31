@@ -32,7 +32,7 @@ describe('MoonTether', () => {
   });
 
   it('play', () => {
-    card.play();
+    card.play(player);
 
     expect(card.getVictoryPoints()).to.eq(1);
     expect(card.getCardDiscount()).to.eq(2);

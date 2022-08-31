@@ -5,9 +5,9 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class StagingStationBehemoth extends Card implements IProjectCard {
+export class StagingStationBehemoth extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.STAGING_STATION_BEHEMOTH,
@@ -26,7 +26,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.colonies.increaseFleetSize();
     player.colonies.increaseFleetSize();
     MoonExpansion.raiseLogisticRate(player);

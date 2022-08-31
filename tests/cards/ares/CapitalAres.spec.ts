@@ -30,7 +30,7 @@ describe('CapitalAres', function() {
     player.production.add(Resources.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(5);
 

@@ -4,9 +4,9 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class MoonTether extends Card implements IProjectCard {
+export class MoonTether extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOON_TETHER,
@@ -27,9 +27,5 @@ export class MoonTether extends Card implements IProjectCard {
         description: 'Requires 6 Space tags.',
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

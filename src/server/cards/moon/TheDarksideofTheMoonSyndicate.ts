@@ -14,10 +14,10 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Size} from '../../../common/cards/render/Size';
 import {Phase} from '../../../common/Phase';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {all} from '../Options';
 
-export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationCard {
+export class TheDarksideofTheMoonSyndicate extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -48,7 +48,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
 
   public override resourceCount = 0;
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResourceTo(this, 2);
     return undefined;
   }

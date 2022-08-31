@@ -4,9 +4,9 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class ImprovedMoonConcrete extends MoonCard implements IProjectCard {
+export class ImprovedMoonConcrete extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.IMPROVED_MOON_CONCRETE,
@@ -28,7 +28,7 @@ export class ImprovedMoonConcrete extends MoonCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

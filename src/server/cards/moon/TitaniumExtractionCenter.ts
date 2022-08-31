@@ -5,9 +5,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class TitaniumExtractionCenter extends MoonCard {
+export class TitaniumExtractionCenter extends Card2 {
   constructor() {
     super({
       name: CardName.TITANIUM_EXTRACTION_CENTER,
@@ -33,7 +33,7 @@ export class TitaniumExtractionCenter extends MoonCard {
     player.production.add(Resources.TITANIUM, productionIncrease, {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player);
     return undefined;
   }

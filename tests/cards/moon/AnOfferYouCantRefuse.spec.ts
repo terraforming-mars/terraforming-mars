@@ -59,7 +59,7 @@ describe('AnOfferYouCantRefuse', () => {
     populateParty(parties.reds, 'NEUTRAL', redPlayer.id, 'NEUTRAL', redPlayer.id);
     expect(parties.reds.partyLeader).eq('NEUTRAL');
 
-    const options = card.play(player);
+    const options = cast(card.play(player), OrOptions);
     expect(options.options.map((option) => option.title)).deep.eq(
       [
         'Greens / player-red', // Option 0
@@ -107,7 +107,7 @@ describe('AnOfferYouCantRefuse', () => {
     populateParty(parties.greens, player.id, redPlayer.id, greenPlayer.id);
     populateParty(parties.reds, 'NEUTRAL', redPlayer.id, 'NEUTRAL', redPlayer.id);
 
-    const options = card.play(player);
+    const options = cast(card.play(player), OrOptions);
     expect(options.options.map((option) => option.title)).deep.eq(
       [
         'Greens / player-red', // Option 0
@@ -133,7 +133,7 @@ describe('AnOfferYouCantRefuse', () => {
     populateParty(parties.reds, 'NEUTRAL', player.id);
     expect(parties.reds.partyLeader).eq('NEUTRAL');
 
-    const options = card.play(player);
+    const options = cast(card.play(player), OrOptions);
     expect(options.options.map((option) => option.title)).deep.eq(['Greens / player-green']);
 
     // Now do a delegate exchange

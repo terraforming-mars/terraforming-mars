@@ -6,11 +6,11 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class HeavyDutyRovers extends Card implements IProjectCard {
+export class HeavyDutyRovers extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -31,7 +31,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
       const minesNextToRoads = mines.filter((mine) => {

@@ -13,10 +13,10 @@ import {Resources} from '../../../common/Resources';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {all} from '../Options';
 
-export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
+export class TheGrandLunaCapitalGroup extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -46,7 +46,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.titanium++;
     return undefined;
   }

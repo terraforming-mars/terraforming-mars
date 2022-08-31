@@ -23,7 +23,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
 
   it('on play', () => {
     expect(card.resourceCount).eq(0);
-    card.play();
+    card.play(player);
     expect(card.resourceCount).eq(1);
   });
 

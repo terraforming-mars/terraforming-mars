@@ -39,7 +39,7 @@ describe('AristarchusRoadNetwork', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.steel).eq(0);
     expect(player.production.megacredits).eq(2);

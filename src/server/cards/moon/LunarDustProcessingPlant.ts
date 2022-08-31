@@ -6,9 +6,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
+export class LunarDustProcessingPlant extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_DUST_PROCESSING_PLANT,
@@ -31,7 +31,7 @@ export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseLogisticRate(player);
     return undefined;
   }

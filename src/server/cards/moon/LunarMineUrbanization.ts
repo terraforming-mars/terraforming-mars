@@ -8,10 +8,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 
-export class LunarMineUrbanization extends Card implements IProjectCard {
+export class LunarMineUrbanization extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_MINE_URBANIZATION,
@@ -37,8 +37,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 1);
+  public override bespokePlay(player: Player) {
     const tiles = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player});
     return new SelectSpace('Select one of your mines to upgrade', tiles, (space) => {
       if (space.tile === undefined) {

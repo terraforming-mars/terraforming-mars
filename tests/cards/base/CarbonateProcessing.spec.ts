@@ -21,7 +21,7 @@ describe('CarbonateProcessing', function() {
     player.production.add(Resources.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.energy).to.eq(0);
     expect(player.production.heat).to.eq(3);
   });

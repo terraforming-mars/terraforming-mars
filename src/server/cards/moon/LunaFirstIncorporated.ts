@@ -6,10 +6,10 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {all} from '../Options';
 
-export class LunaFirstIncorporated extends Card implements ICorporationCard {
+export class LunaFirstIncorporated extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -39,7 +39,7 @@ export class LunaFirstIncorporated extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.moonData(player.game).lunaFirstPlayer = player;
     player.steel = 2;
     player.titanium = 2;

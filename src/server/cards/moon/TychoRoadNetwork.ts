@@ -5,10 +5,10 @@ import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class TychoRoadNetwork extends MoonCard {
+export class TychoRoadNetwork extends Card2 {
   constructor() {
     super({
       name: CardName.TYCHO_ROAD_NETWORK,
@@ -29,12 +29,11 @@ export class TychoRoadNetwork extends MoonCard {
           b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_ROAD],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));
     return undefined;
   }

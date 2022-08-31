@@ -7,11 +7,11 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {Size} from '../../../common/cards/render/Size';
 
-export class LunaMiningHub extends MoonCard {
+export class LunaMiningHub extends Card2 {
   constructor() {
     super({
       name: CardName.LUNA_MINING_HUB,
@@ -43,7 +43,7 @@ export class LunaMiningHub extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceSpecialMoonTile(
       player, {
         tileType: TileType.LUNA_MINING_HUB,

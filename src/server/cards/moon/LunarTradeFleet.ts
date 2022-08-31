@@ -6,10 +6,10 @@ import {Resources} from '../../../common/Resources';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class LunarTradeFleet extends Card implements IProjectCard {
+export class LunarTradeFleet extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_TRADE_FLEET,
@@ -32,7 +32,7 @@ export class LunarTradeFleet extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 1, {log: true});
     MoonExpansion.raiseLogisticRate(player);
     return undefined;

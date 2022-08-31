@@ -5,9 +5,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class LunaStagingStation extends MoonCard {
+export class LunaStagingStation extends Card2 {
   constructor() {
     super({
       name: CardName.LUNA_STAGING_STATION,
@@ -29,7 +29,7 @@ export class LunaStagingStation extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseLogisticRate(player, 2);
     return undefined;
   }

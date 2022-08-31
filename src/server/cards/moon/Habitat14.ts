@@ -5,10 +5,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
 
-export class Habitat14 extends MoonCard {
+export class Habitat14 extends Card2 {
   constructor() {
     super({
       name: CardName.HABITAT_14,
@@ -30,12 +30,11 @@ export class Habitat14 extends MoonCard {
           b.moonColony();
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_COLONY],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;
   }

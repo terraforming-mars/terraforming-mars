@@ -43,7 +43,7 @@ describe('LunaStagingStation', () => {
     moonData.logisticRate = 2;
     expect(player.getTerraformRating()).eq(14);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(0);
     expect(moonData.logisticRate).eq(4);

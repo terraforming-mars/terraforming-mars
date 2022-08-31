@@ -34,7 +34,7 @@ describe('MareImbriumMine', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);

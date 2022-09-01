@@ -1131,6 +1131,47 @@ export class Player {
     return undefined;
   }
 
+  // public for testing
+  public playCorporationCard(corporationCard: ICorporationCard): void {
+    if (this.corporations.length === 0) {
+      this.corporations.push(corporationCard);
+    } else {
+      throw new Error('Do not use playCorporationCard for more than one corporation card.');
+    }
+
+    this.megaCredits = corporationCard.startingMegaCredits;
+    if (corporationCard.cardCost !== undefined) {
+      this.cardCost = corporationCard.cardCost;
+    }
+
+    if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
+      const diff = this.cardsInHand.length * this.cardCost;
+      this.deductResource(Resources.MEGACREDITS, diff);
+    }
+    this.simplePlay(corporationCard);
+    if (corporationCard.initialAction !== undefined) this.pendingInitialActions.push(corporationCard);
+    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
+    this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(this.cardsInHand.length));
+
+    this.triggerOtherCorpEffects(corporationCard);
+    ColoniesHandler.onCardPlayed(this.game, corporationCard);
+    PathfindersExpansion.onCardPlayed(this, corporationCard);
+
+    this.game.playerIsFinishedWithResearchPhase(this);
+  }
+
+  // Public for Merger.
+  public triggerOtherCorpEffects(playedCorporationCard: ICorporationCard) {
+    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
+    for (const somePlayer of this.game.getPlayers()) {
+      for (const corporation of somePlayer.corporations) {
+        if (somePlayer === this && corporation.name === playedCorporationCard.name) continue;
+        if (corporation.onCorpCardPlayed === undefined) continue;
+        this.game.defer(new SimpleDeferredAction(this, () => corporation.onCorpCardPlayed?.(this, playedCorporationCard)));
+      }
+    }
+  }
+
   // eslint-disable-next-line valid-jsdoc
   /** @deprecated use Card2. */
   public simplePlay(card: IProjectCard | ICorporationCard) {

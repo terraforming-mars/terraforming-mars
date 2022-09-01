@@ -78,7 +78,7 @@ export class Merger extends PreludeCard {
       player.pendingInitialActions.push(corporationCard);
     }
     player.game.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
-    player.game.triggerOtherCorpEffects(player, corporationCard);
+    player.triggerOtherCorpEffects(corporationCard);
     ColoniesHandler.onCardPlayed(player.game, corporationCard);
     PathfindersExpansion.onCardPlayed(player, corporationCard);
   }

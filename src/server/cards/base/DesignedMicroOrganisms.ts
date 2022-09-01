@@ -1,21 +1,20 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 
-export class DesignedMicroOrganisms extends Card implements IProjectCard {
+export class DesignedMicroOrganisms extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.DESIGNED_MICRO_ORGANISMS,
       tags: [Tag.SCIENCE, Tag.MICROBE],
       cost: 16,
+      productionBox: {plants: 2},
 
       requirements: CardRequirements.builder((b) => b.temperature(-14, {max})),
       metadata: {
@@ -26,10 +25,5 @@ export class DesignedMicroOrganisms extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.production.add(Resources.PLANTS, 2);
-    return undefined;
   }
 }

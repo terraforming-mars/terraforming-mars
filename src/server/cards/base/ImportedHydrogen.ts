@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -14,7 +14,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class ImportedHydrogen extends Card implements IProjectCard {
+export class ImportedHydrogen extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -37,7 +37,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player): undefined | PlayerInput {
+  public override bespokePlay(player: Player): undefined | PlayerInput {
     const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
     const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
 

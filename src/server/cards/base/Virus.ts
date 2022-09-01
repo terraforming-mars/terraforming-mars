@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -13,7 +13,7 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 
-export class Virus extends Card implements IProjectCard {
+export class Virus extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -31,7 +31,7 @@ export class Virus extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player): PlayerInput | undefined {
+  public override bespokePlay(player: Player): PlayerInput | undefined {
     if (player.game.isSoloMode()) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;

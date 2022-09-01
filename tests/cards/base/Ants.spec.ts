@@ -33,7 +33,7 @@ describe('Ants', function() {
     (game as any).oxygenLevel = 4;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play();
+    card.play(player);
     card.resourceCount += 5;
     expect(card.getVictoryPoints()).to.eq(2);
   });

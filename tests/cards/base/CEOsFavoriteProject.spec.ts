@@ -1,4 +1,6 @@
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
@@ -37,8 +39,7 @@ describe('CEOsFavoriteProject', function() {
     player.addResourceTo(searchForLife);
     player.addResourceTo(birds);
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<IProjectCard>);
 
     action.cb([searchForLife]);
     expect(searchForLife.resourceCount).to.eq(2);
@@ -55,8 +56,7 @@ describe('CEOsFavoriteProject', function() {
     const birds = new Birds();
     player.playedCards.push(srr);
     srr.targetCards.push({card: birds, resourceCount: 0});
-    const action = card.play(player);
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<IProjectCard>);
     action.cb([birds]);
     expect(srr.targetCards[0].resourceCount).to.eq(1);
   });

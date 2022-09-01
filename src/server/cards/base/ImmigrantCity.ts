@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
@@ -14,14 +14,13 @@ import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class ImmigrantCity extends Card implements IProjectCard {
+export class ImmigrantCity extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.IMMIGRANT_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 13,
-      productionBox: {energy: -1, megacredits: -2},
 
       metadata: {
         cardNumber: '200',
@@ -36,7 +35,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     const hasEnergyProduction = player.production.energy >= 1;
     const canPlaceCityOnMars = player.game.board.getAvailableSpacesForCity(player).length > 0;
     const canDecreaseMcProduction = player.production.megacredits >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
@@ -53,7 +52,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
       player.game.defer(new LoseProduction(player, Resources.ENERGY, {count: 1}));

@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -10,7 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class NuclearZone extends Card implements IProjectCard {
+export class NuclearZone extends Card2 implements IProjectCard {
   constructor(
     name: CardName = CardName.NUCLEAR_ZONE,
     cost: number = 10,
@@ -34,11 +34,11 @@ export class NuclearZone extends Card implements IProjectCard {
       tr: {temperature: 2},
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 2);
     return new SelectSpace('Select space for special tile', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
       player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NUCLEAR_ZONE});

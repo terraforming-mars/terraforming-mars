@@ -67,7 +67,7 @@ describe('Flooding', function() {
 
   it('Does not suggest player who played Land Claim', function() {
     const landClaim = new LandClaim();
-    const landClaimAction = landClaim.play(player2);
+    const landClaimAction = cast(landClaim.play(player2), SelectSpace);
     const adjacentSpace = game.board.getAvailableSpacesOnLand(player).filter((space) => space.id === '03')[0];
 
     landClaimAction.cb(adjacentSpace);

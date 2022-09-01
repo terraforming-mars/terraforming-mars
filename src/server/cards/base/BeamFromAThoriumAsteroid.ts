@@ -1,15 +1,13 @@
 
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
+export class BeamFromAThoriumAsteroid extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -17,6 +15,7 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE, Tag.ENERGY],
       cost: 32,
       victoryPoints: 1,
+      productionBox: {heat: 3, energy: 3},
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
       metadata: {
@@ -31,10 +30,4 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
-    player.production.add(Resources.HEAT, 3);
-    player.production.add(Resources.ENERGY, 3);
-    return undefined;
-  }
 }
-

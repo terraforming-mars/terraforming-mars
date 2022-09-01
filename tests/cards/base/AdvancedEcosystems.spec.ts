@@ -26,7 +26,7 @@ describe('AdvancedEcosystems', function() {
     player.playedCards.push(new Tardigrades());
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play();
+    card.play(player);
     expect(card.getVictoryPoints()).to.eq(3);
   });
 

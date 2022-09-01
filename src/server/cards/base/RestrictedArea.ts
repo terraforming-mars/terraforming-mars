@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
@@ -12,7 +12,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RestrictedArea extends Card implements IActionCard, IProjectCard {
+export class RestrictedArea extends Card2 implements IActionCard, IProjectCard {
   constructor(
     name: CardName = CardName.RESTRICTED_AREA,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
@@ -36,10 +36,10 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       metadata,
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for tile', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
       player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.RESTRICTED_AREA});
       foundSpace.adjacency = this.adjacencyBonus;

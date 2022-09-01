@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class ReleaseOfInertGases extends Card implements IProjectCard {
+export class ReleaseOfInertGases extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -23,7 +23,7 @@ export class ReleaseOfInertGases extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(2);
     return undefined;
   }

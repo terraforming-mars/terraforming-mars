@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -11,7 +11,7 @@ import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredActi
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class MarsUniversity extends Card implements IProjectCard {
+export class MarsUniversity extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -58,9 +58,6 @@ export class MarsUniversity extends Card implements IProjectCard {
       ),
       Priority.DISCARD_BEFORE_DRAW);
     }
-    return undefined;
-  }
-  public play() {
     return undefined;
   }
 }

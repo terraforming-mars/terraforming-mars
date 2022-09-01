@@ -1,15 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 
-export class Shuttles extends Card implements IProjectCard {
+export class Shuttles extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -17,6 +15,7 @@ export class Shuttles extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       cost: 10,
       victoryPoints: 1,
+      productionBox: {energy: -1, megacredits: 2},
 
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
       cardDiscount: {tag: Tag.SPACE, amount: 2},
@@ -37,14 +36,5 @@ export class Shuttles extends Card implements IProjectCard {
         },
       },
     });
-  }
-  public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1;
-  }
-
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
-    player.production.add(Resources.MEGACREDITS, 2);
-    return undefined;
   }
 }

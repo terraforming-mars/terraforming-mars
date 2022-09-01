@@ -23,7 +23,7 @@ describe('ViralEnhancers', function() {
   });
 
   it('Should play', function() {
-    card.play();
+    card.play(player);
 
     const ants = new Ants();
     const birds = new Birds();
@@ -50,7 +50,7 @@ describe('ViralEnhancers', function() {
   });
 
   it('Should play for each tag', function() {
-    card.play();
+    card.play(player);
 
     const ecologicalZone = new EcologicalZone();
     card.onCardPlayed(player, ecologicalZone);

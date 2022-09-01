@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
@@ -10,7 +10,7 @@ import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
-export class PowerInfrastructure extends Card implements IActionCard, IProjectCard {
+export class PowerInfrastructure extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -27,10 +27,6 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
         }),
       },
     });
-  }
-
-  public play(_player: Player) {
-    return undefined;
   }
   public canAct(player: Player): boolean {
     return player.energy > 0;

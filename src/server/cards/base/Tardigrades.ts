@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
@@ -8,7 +8,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Tardigrades extends Card implements IProjectCard {
+export class Tardigrades extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -32,9 +32,6 @@ export class Tardigrades extends Card implements IProjectCard {
   }
   public override resourceCount = 0;
 
-  public play() {
-    return undefined;
-  }
   public action(player: Player) {
     player.addResourceTo(this);
     return undefined;

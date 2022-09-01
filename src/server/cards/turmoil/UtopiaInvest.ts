@@ -5,14 +5,13 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class UtopiaInvest extends Card implements IActionCard, ICorporationCard {
-  public migrated = true;
+export class UtopiaInvest extends Card2 implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,
@@ -35,10 +34,6 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
   public canAct(player: Player): boolean {
     return player.production.megacredits +

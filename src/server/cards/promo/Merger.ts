@@ -11,6 +11,7 @@ import {LogHelper} from '../../LogHelper';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CARD_COST} from '../../../common/constants';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class Merger extends PreludeCard {
   constructor() {
@@ -72,18 +73,19 @@ export class Merger extends PreludeCard {
     player.corporations.push(corporationCard);
     player.megaCredits += corporationCard.startingMegaCredits;
     Merger.setCardCostIfNeeded(player, corporationCard);
-    corporationCard.play(player);
+    player.simplePlay(corporationCard);
     if (corporationCard.initialAction !== undefined) {
       player.pendingInitialActions.push(corporationCard);
     }
     player.game.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
     player.triggerOtherCorpEffects(corporationCard);
     ColoniesHandler.onCardPlayed(player.game, corporationCard);
+    PathfindersExpansion.onCardPlayed(player, corporationCard);
   }
 
   private static setCardCostIfNeeded(player: Player, corporationCard: ICorporationCard) {
-    const corpNames = player.corporations.map((corp) => corp.name);
     if (corporationCard.cardCost !== undefined) {
+      const corpNames = player.corporations.map((corp) => corp.name);
       if (corpNames.includes(CardName.TERRALABS_RESEARCH) && corpNames.includes(CardName.POLYPHEMOS)) {
         player.cardCost = CARD_COST;
       } else {

@@ -27,7 +27,7 @@ describe('LobbyHalls', function() {
   });
 
   it('play', function() {
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 
@@ -35,7 +35,7 @@ describe('LobbyHalls', function() {
     turmoil.delegateReserve = [];
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
-    player.simplePlay(card);
+    card.play(player);
 
     // Only one available action
     expect(game.deferredActions.length).eq(1);
@@ -48,7 +48,7 @@ describe('LobbyHalls', function() {
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(game.deferredActions.length).eq(2);
 

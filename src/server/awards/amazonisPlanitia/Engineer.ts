@@ -4,8 +4,8 @@ import {Units} from '../../../common/Units';
 import {IAward} from '../IAward';
 
 export class Engineer implements IAward {
-  public name: string = 'Engineer';
-  public description: string = 'Most cards that directly alter your own production';
+  public readonly name = 'Engineer';
+  public readonly description = 'Most cards that directly alter your own production';
 
   public getScore(player: Player): number {
     // TODO(kberg): should Engineer include events?

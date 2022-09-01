@@ -463,8 +463,8 @@ export namespace MilestoneAwardSelector {
     milestones: Array<string> = [];
     awards: Array<string> = [];
 
-    private accumulatedHighCount: number = 0;
-    private accumulatedTotalSynergy: number = 0;
+    private accumulatedHighCount = 0;
+    private accumulatedTotalSynergy = 0;
 
     constructor(private constraints: Constraints) {
     }

@@ -43,7 +43,7 @@ describe('UrbanizedArea', function() {
     player.production.add(Resources.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     expect(action.availableSpaces).has.lengthOf(1);
 
     action.cb(action.availableSpaces[0]);

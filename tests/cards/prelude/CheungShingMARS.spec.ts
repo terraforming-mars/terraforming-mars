@@ -24,7 +24,7 @@ describe('CheungShingMARS', function() {
   });
 
   it('Should play', function() {
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.megacredits).to.eq(3);
   });
 });

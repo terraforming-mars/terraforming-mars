@@ -4,8 +4,8 @@ import {isHazardTileType} from '../../common/TileType';
 import {Board} from '../boards/Board';
 
 export class EstateDealer implements IAward {
-  public name: string = 'Estate Dealer';
-  public description: string = 'Most tiles adjacent to ocean tiles';
+  public readonly name = 'Estate Dealer';
+  public readonly description = 'Most tiles adjacent to ocean tiles';
   public getScore(player: Player): number {
     return player.game.board.spaces.filter((space) =>
       space.player === player &&

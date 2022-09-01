@@ -1,12 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class FuelFactory extends Card implements IProjectCard {
-  public migrated = true;
+export class FuelFactory extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -26,9 +25,5 @@ export class FuelFactory extends Card implements IProjectCard {
         description: 'Decrease your Energy production 1 step and increase your titanium and your M€ production 1 step each.',
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

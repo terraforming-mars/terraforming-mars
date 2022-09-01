@@ -16,7 +16,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class IndustrialCenter extends Card implements IActionCard, IProjectCard {
   constructor(
-    name: CardName = CardName.INDUSTRIAL_CENTER,
+    name = CardName.INDUSTRIAL_CENTER,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '123',

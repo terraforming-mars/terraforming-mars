@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -12,8 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max} from '../Options';
 
-export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
-  public migrated = true;
+export class ElectroCatapult extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -67,9 +66,6 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       this.log(player, Resources.STEEL);
       player.megaCredits += 7;
     }
-    return undefined;
-  }
-  public play() {
     return undefined;
   }
 

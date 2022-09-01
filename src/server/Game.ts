@@ -173,7 +173,7 @@ export class Game {
     players: Array<Player>,
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
-    seed: number = 0,
+    seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
@@ -589,7 +589,7 @@ export class Game {
 
   // Public for testing.
   public incrementFirstPlayer(): void {
-    let firstIndex: number = this.players.map((x) => x.id).indexOf(this.first.id);
+    let firstIndex = this.players.map((x) => x.id).indexOf(this.first.id);
     if (firstIndex === -1) {
       throw new Error('Didn\'t even find player');
     }
@@ -927,7 +927,7 @@ export class Game {
   }
 
   private getPlayerBefore(player: Player): Player | undefined {
-    const playerIndex: number = this.players.indexOf(player);
+    const playerIndex = this.players.indexOf(player);
 
     // The player was not found
     if (playerIndex === -1) {
@@ -939,7 +939,7 @@ export class Game {
   }
 
   private getPlayerAfter(player: Player): Player | undefined {
-    const playerIndex: number = this.players.indexOf(player);
+    const playerIndex = this.players.indexOf(player);
 
     // The player was not found
     if (playerIndex === -1) {
@@ -1086,15 +1086,15 @@ export class Game {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): void {
+  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): number {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
-      return;
+      return 0;
     }
 
     // PoliticalAgendas Reds P3 hook
     if (increments === -1) {
       this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
-      return;
+      return -1;
     }
 
     // Literal typing makes |increments| a const
@@ -1130,6 +1130,8 @@ export class Game {
     }
 
     this.venusScaleLevel += steps * 2;
+
+    return steps;
   }
 
   public getVenusScaleLevel(): number {
@@ -1456,7 +1458,7 @@ export class Game {
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): Array<Player> {
     const ret: Array<Player> = [];
-    let insertIdx: number = 0;
+    let insertIdx = 0;
     for (const p of this.players) {
       if (p.id === this.first.id || insertIdx > 0) {
         ret.splice(insertIdx, 0, p);

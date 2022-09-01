@@ -161,10 +161,10 @@ export class PostgreSQL implements IDatabase {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
       const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < $1', [dateToSeconds]);
       const gameIds = selectResult.rows.map((row) => row.game_id);
-      const deleteResult = await this.client.query('DELETE FROM games WHERE game_id in ANY($1)', [gameIds]);
-      console.log(`Purged ${deleteResult.rowCount} rows from games`);
-      const idsResult = await this.client.query('DELETE FROM participants WHERE game_id in ANY($1)', [gameIds]);
-      console.log(`Purged ${idsResult.rowCount} rows from participants`);
+      const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id in ANY($1)', [gameIds]);
+      console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
+      const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id in ANY($1)', [gameIds]);
+      console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
     }
   }
 
@@ -203,7 +203,7 @@ export class PostgreSQL implements IDatabase {
 
       game.lastSaveId = thisSaveId + 1;
 
-      let inserted: boolean = true;
+      let inserted = true;
       try {
         inserted = res.rows[0].inserted;
       } catch (err) {

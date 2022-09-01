@@ -30,7 +30,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
     });

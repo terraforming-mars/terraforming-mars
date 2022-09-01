@@ -3,8 +3,8 @@ import {Player} from '../Player';
 import {Board} from '../boards/Board';
 
 export class Entrepreneur implements IAward {
-  public name: string = 'Entrepreneur';
-  public description: string = 'Most tiles that grant adjacency bonuses';
+  public readonly name = 'Entrepreneur';
+  public readonly description = 'Most tiles that grant adjacency bonuses';
   public getScore(player: Player): number {
     return player.game.board.spaces
       .filter(Board.ownedBy(player))

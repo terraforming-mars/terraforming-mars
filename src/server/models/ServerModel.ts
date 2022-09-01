@@ -103,7 +103,7 @@ export class Server {
     const game = player.game;
 
     const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
-    const thisPlayerIndex: number = players.findIndex((p) => p.color === player.color);
+    const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 
     return {

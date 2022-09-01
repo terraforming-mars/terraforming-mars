@@ -392,7 +392,7 @@ export class Turmoil {
   }
 
   public getPlayerInfluence(player: Player) {
-    let influence: number = 0;
+    let influence = 0;
     if (this.chairman !== undefined && this.chairman === player.id) influence++;
 
     const dominantParty : IParty = this.dominantParty;
@@ -463,7 +463,7 @@ export class Turmoil {
 
   // Get Victory Points
   public getPlayerVictoryPoints(player: Player): number {
-    let victory: number = 0;
+    let victory = 0;
     if (this.chairman !== undefined && this.chairman === player.id) victory++;
     this.parties.forEach(function(party) {
       if (party.partyLeader === player.id) {

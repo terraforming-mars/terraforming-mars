@@ -203,7 +203,7 @@ export class PostgreSQL implements IDatabase {
 
       game.lastSaveId = thisSaveId + 1;
 
-      let inserted: boolean = true;
+      let inserted = true;
       try {
         inserted = res.rows[0].inserted;
       } catch (err) {

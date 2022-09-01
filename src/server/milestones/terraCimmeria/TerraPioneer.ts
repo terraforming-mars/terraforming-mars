@@ -4,8 +4,8 @@ import {isHazardTileType, TileType} from '../../../common/TileType';
 import {IMilestone} from '../IMilestone';
 
 export class TerraPioneer implements IMilestone {
-  public name: string = 'Terra Pioneer';
-  public description: string = 'Have 5 tiles on Mars';
+  public readonly name = 'Terra Pioneer';
+  public readonly description = 'Have 5 tiles on Mars';
 
   public getScore(player: Player): number {
     // Don't simplify this to "space.tile?.tileType !== TileType.OCEAN"
@@ -14,7 +14,7 @@ export class TerraPioneer implements IMilestone {
       (space) => space.tile !== undefined && isHazardTileType(space.tile.tileType) === false && space.tile.tileType !== TileType.OCEAN && space.player === player,
     ).length;
 
-    const moonSpaces: number = MoonExpansion.ifElseMoon(player.game, (moonData) => moonData.moon.spaces.filter(
+    const moonSpaces = MoonExpansion.ifElseMoon(player.game, (moonData) => moonData.moon.spaces.filter(
       (space) => space.tile !== undefined && space.player === player).length,
     () => 0);
 

@@ -118,7 +118,7 @@ export const mainAppSettings = {
       return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
     },
     update(path: '/player' | '/spectator'): void {
-      const currentPathname: string = window.location.pathname;
+      const currentPathname = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
 
@@ -183,7 +183,7 @@ export const mainAppSettings = {
   mounted() {
     document.title = constants.APP_NAME;
     if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
-    const currentPathname: string = window.location.pathname;
+    const currentPathname = window.location.pathname;
     const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player') {
       app.updatePlayer();

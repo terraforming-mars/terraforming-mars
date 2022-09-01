@@ -42,7 +42,7 @@ export class ColonyDealer {
     const customColonies = this.gameOptions.customColoniesList;
     const colonies = customColonies.length === 0 ? this.gameColonies : this.gameColonies.filter((c) => customColonies.includes(c.name));
 
-    const count: number = (players + 2) +
+    const count = (players + 2) +
       (players <= 2 ? 1 : 0); // Two-player games and solo games get one more colony.
 
     if (colonies.length < count) {

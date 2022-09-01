@@ -28,6 +28,7 @@ import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 import {IColony} from '../src/server/colonies/IColony';
+import {IAward} from '@/server/awards/IAward';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -70,7 +71,7 @@ describe('Game', () => {
     });
 
     // Fund awards
-    let award = new Banker();
+    let award: IAward = new Banker();
     game.fundAward(player, award);
 
     // Set second player to win Banker award

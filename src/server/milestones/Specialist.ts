@@ -2,8 +2,8 @@ import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
 
 export class Specialist implements IMilestone {
-  public name: string = 'Specialist';
-  public description: string = 'Requires that you have at least 10 in production of any resource';
+  public readonly name = 'Specialist';
+  public readonly description = 'Requires that you have at least 10 in production of any resource';
   public getScore(player: Player): number {
     return Math.max(player.production.megacredits,
       player.production.steel,

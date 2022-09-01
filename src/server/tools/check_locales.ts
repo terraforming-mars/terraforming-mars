@@ -34,7 +34,7 @@ for (sourceString in raw_translations) {
   missingLocales = [];
   for (const localeName of localesToWarn) {
     const trans: string = (translations as any)[localeName];
-    if ( ! trans) {
+    if (!trans) {
       missingLocales.push(localeName);
     }
   }

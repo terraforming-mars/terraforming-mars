@@ -4,8 +4,8 @@ import {Board} from '../boards/Board';
 import {isHazardTileType} from '../../common/TileType';
 
 export class Irrigator implements IMilestone {
-  public name: string = 'Irrigator';
-  public description: string = 'Have at least 4 tiles adjacent to oceans';
+  public readonly name = 'Irrigator';
+  public readonly description = 'Have at least 4 tiles adjacent to oceans';
 
   public getScore(player: Player): number {
     return player.game.board.spaces.filter((space) =>

@@ -310,7 +310,7 @@ export default Vue.extend({
     },
     // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {
-      let result: string = '';
+      let result = '';
       // in case of symbols inside
       if (isICardRenderItem(this.item) && this.item.amountInside) {
         if (this.item.amount !== 0) {

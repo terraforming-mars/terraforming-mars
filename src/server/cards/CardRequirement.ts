@@ -107,7 +107,7 @@ export class CardRequirement implements ICardRequirement {
 
   private checkGlobalRequirement(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
-    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter);
+    let playerRequirementsBonus = player.getRequirementsBonus(parameter);
 
     switch (parameter) {
     case GlobalParameter.OCEANS:

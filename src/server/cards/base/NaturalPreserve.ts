@@ -15,7 +15,7 @@ import {max} from '../Options';
 
 export class NaturalPreserve extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.NATURAL_PRESERVE,
+    name = CardName.NATURAL_PRESERVE,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '044',

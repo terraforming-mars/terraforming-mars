@@ -17,7 +17,7 @@ import {CardResource} from '../../../common/CardResource';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
-  description: string = 'Wants to see humanity prosper in the whole solar system.';
+  description = 'Wants to see humanity prosper in the whole solar system.';
   bonuses = [UNITY_BONUS_1, UNITY_BONUS_2];
   policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }
@@ -58,12 +58,12 @@ class UnityBonus02 implements Bonus {
 class UnityPolicy01 implements Policy {
   isDefault = true;
   id = 'up01' as const;
-  description: string = 'Your titanium resources are worth 1 M€ extra';
+  description = 'Your titanium resources are worth 1 M€ extra';
 }
 
 class UnityPolicy02 implements Policy {
   id = 'up02' as const;
-  description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
+  description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -123,7 +123,7 @@ class UnityPolicy02 implements Policy {
 
 class UnityPolicy03 implements Policy {
   id = 'up03' as const;
-  description: string = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
+  description = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -152,7 +152,7 @@ class UnityPolicy03 implements Policy {
 
 class UnityPolicy04 implements Policy {
   id = 'up04' as const;
-  description: string = 'Cards with Space tags cost 2 M€ less to play';
+  description = 'Cards with Space tags cost 2 M€ less to play';
   isDefault = false;
 }
 

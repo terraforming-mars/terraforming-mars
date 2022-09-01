@@ -70,7 +70,7 @@ export class GameHandler extends Handler {
               this.generateRandomId('p') as PlayerId,
             );
           });
-          let firstPlayerIdx: number = 0;
+          let firstPlayerIdx = 0;
           for (let i = 0; i < gameReq.players.length; i++) {
             if (gameReq.players[i].first === true) {
               firstPlayerIdx = i;

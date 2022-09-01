@@ -4,8 +4,8 @@ import {TileType} from '../../../common/TileType';
 import {IAward} from '../IAward';
 
 export class Urbanist implements IAward {
-  public name: string = 'Urbanist';
-  public description: string = 'Most VP from city tile adjacencies on Mars';
+  public readonly name = 'Urbanist';
+  public readonly description = 'Most VP from city tile adjacencies on Mars';
 
   public getScore(player: Player): number {
     let score = 0;

@@ -14,7 +14,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class CommercialDistrict extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.COMMERCIAL_DISTRICT,
+    name = CardName.COMMERCIAL_DISTRICT,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '085',

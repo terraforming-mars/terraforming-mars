@@ -174,7 +174,7 @@ export class Game {
     players: Array<Player>,
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
-    seed: number = 0,
+    seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
@@ -630,7 +630,7 @@ export class Game {
 
   // Public for testing.
   public incrementFirstPlayer(): void {
-    let firstIndex: number = this.players.map((x) => x.id).indexOf(this.first.id);
+    let firstIndex = this.players.map((x) => x.id).indexOf(this.first.id);
     if (firstIndex === -1) {
       throw new Error('Didn\'t even find player');
     }
@@ -968,7 +968,7 @@ export class Game {
   }
 
   private getPlayerBefore(player: Player): Player | undefined {
-    const playerIndex: number = this.players.indexOf(player);
+    const playerIndex = this.players.indexOf(player);
 
     // The player was not found
     if (playerIndex === -1) {
@@ -980,7 +980,7 @@ export class Game {
   }
 
   private getPlayerAfter(player: Player): Player | undefined {
-    const playerIndex: number = this.players.indexOf(player);
+    const playerIndex = this.players.indexOf(player);
 
     // The player was not found
     if (playerIndex === -1) {
@@ -1497,7 +1497,7 @@ export class Game {
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): Array<Player> {
     const ret: Array<Player> = [];
-    let insertIdx: number = 0;
+    let insertIdx = 0;
     for (const p of this.players) {
       if (p.id === this.first.id || insertIdx > 0) {
         ret.splice(insertIdx, 0, p);

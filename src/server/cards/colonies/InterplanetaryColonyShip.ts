@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class InterplanetaryColonyShip extends Card implements IProjectCard {
+export class InterplanetaryColonyShip extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 12,
@@ -23,11 +23,11 @@ export class InterplanetaryColonyShip extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.colonies.getPlayableColonies().length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new BuildColony(player, {title: 'Select colony for Interplanetary Colony Ship'}));
     return undefined;
   }

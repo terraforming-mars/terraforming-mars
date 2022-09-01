@@ -5,12 +5,12 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {all, played} from '../Options';
 
-export class MartianZoo extends Card implements IProjectCard {
+export class MartianZoo extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 12,
@@ -53,10 +53,6 @@ export class MartianZoo extends Card implements IProjectCard {
 
   public action(player: Player) {
     player.addResource(Resources.MEGACREDITS, this.resourceCount, {log: true});
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

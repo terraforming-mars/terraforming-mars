@@ -3,20 +3,20 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class UrbanDecomposers extends Card implements IProjectCard {
+export class UrbanDecomposers extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 6,
       tags: [Tag.MICROBE],
       name: CardName.URBAN_DECOMPOSERS,
       cardType: CardType.AUTOMATED,
+      productionBox: {plants: 1},
 
       requirements: CardRequirements.builder((b) => b.colonies().cities()),
       metadata: {
@@ -29,7 +29,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     let coloniesCount: number = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
@@ -37,9 +37,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
     return coloniesCount > 0 && player.game.getCitiesCount(player) > 0;
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.PLANTS, 1);
-
+  public override bespokePlay(player: Player) {
     const microbeCards = player.getResourceCards(CardResource.MICROBE);
     if (microbeCards.length) {
       player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));

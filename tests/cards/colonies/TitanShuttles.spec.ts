@@ -24,7 +24,7 @@ describe('TitanShuttles', function() {
   });
 
   it('Should play', function() {
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

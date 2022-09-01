@@ -4,11 +4,11 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class FloaterLeasing extends Card implements IProjectCard {
+export class FloaterLeasing extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 3,
@@ -25,9 +25,8 @@ export class FloaterLeasing extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, Math.floor(player.getResourceCount(CardResource.FLOATER) / 3), {log: true});
     return undefined;
   }
 }
-

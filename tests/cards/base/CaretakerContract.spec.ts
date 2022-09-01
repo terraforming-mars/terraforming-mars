@@ -94,7 +94,7 @@ describe('CaretakerContract', function() {
   it('Can use Stormcraft Incorporated', function() {
     const stormcraft = new StormCraftIncorporated();
     player.setCorporationForTest(stormcraft);
-    stormcraft.play();
+    stormcraft.play(player);
     stormcraft.resourceCount = 3;
     player.heat = 1;
     expect(card.canAct(player)).is.false;

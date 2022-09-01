@@ -8,11 +8,11 @@ import {CardResource} from '../../../common/CardResource';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
-export class SubZeroSaltFish extends Card implements IProjectCard {
+export class SubZeroSaltFish extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 5,
@@ -47,7 +47,7 @@ export class SubZeroSaltFish extends Card implements IProjectCard {
     return true;
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
 
@@ -56,7 +56,7 @@ export class SubZeroSaltFish extends Card implements IProjectCard {
     return undefined;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
     return undefined;

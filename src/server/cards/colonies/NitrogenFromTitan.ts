@@ -6,9 +6,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class NitrogenFromTitan extends Card implements IProjectCard {
+export class NitrogenFromTitan extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 25,
@@ -28,7 +28,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(2);
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
     return undefined;

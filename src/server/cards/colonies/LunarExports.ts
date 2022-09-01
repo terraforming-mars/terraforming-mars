@@ -6,11 +6,11 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class LunarExports extends Card implements IProjectCard {
+export class LunarExports extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 19,
@@ -30,7 +30,7 @@ export class LunarExports extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new OrOptions(
       new SelectOption('Increase your M€ production by 5', 'Increase +MC', () => {
         player.production.add(Resources.MEGACREDITS, 5, {log: true});

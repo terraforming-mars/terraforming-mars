@@ -11,10 +11,10 @@ import {IColony} from '../../colonies/IColony';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 
-export class TitanFloatingLaunchPad extends Card implements IProjectCard {
+export class TitanFloatingLaunchPad extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 18,
@@ -78,7 +78,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
     );
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
     return undefined;
   }

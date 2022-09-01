@@ -3,10 +3,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CryoSleep extends Card implements IProjectCard {
+export class CryoSleep extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 10,
@@ -24,7 +24,7 @@ export class CryoSleep extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.colonies.tradeDiscount++;
     return undefined;
   }

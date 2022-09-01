@@ -6,12 +6,12 @@ import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {StealResources} from '../../deferredActions/StealResources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class AirRaid extends Card implements IProjectCard {
+export class AirRaid extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 0,
@@ -29,11 +29,11 @@ export class AirRaid extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.getResourceCount(CardResource.FLOATER) > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new StealResources(player, Resources.MEGACREDITS, 5));
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, true));
     return undefined;

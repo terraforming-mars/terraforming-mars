@@ -7,12 +7,12 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class AtmoCollectors extends Card implements IProjectCard {
+export class AtmoCollectors extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 15,
@@ -69,7 +69,7 @@ export class AtmoCollectors extends Card implements IProjectCard {
       }),
     );
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
     return undefined;
   }

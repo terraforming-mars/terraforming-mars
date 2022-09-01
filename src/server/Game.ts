@@ -1127,15 +1127,15 @@ export class Game {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): void {
+  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): number {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
-      return;
+      return 0;
     }
 
     // PoliticalAgendas Reds P3 hook
     if (increments === -1) {
       this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
-      return;
+      return -1;
     }
 
     // Literal typing makes |increments| a const
@@ -1171,6 +1171,8 @@ export class Game {
     }
 
     this.venusScaleLevel += steps * 2;
+
+    return steps;
   }
 
   public getVenusScaleLevel(): number {

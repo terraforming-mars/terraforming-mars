@@ -58,7 +58,7 @@ export class LogHelper {
   }
 
   static logVenusIncrease(player: Player, steps: number) {
-    player.game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
+    player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
   static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {

@@ -194,11 +194,37 @@
                       <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                 </template>
-                <template v-if="boardName === BoardName.TERRA_CIMMERIA">
-ALBOR_THOLUS,
-ANSERIS_MONS,
-PINDUS_MONS,
-ULYSSES_THOLUS,
+                <template v-if="boardName === BoardName.VASTITAS_BOREALIS">
+                  <g id="elysium_mons_vastitas_borealis"  transform="translate(410, 70)">
+                      <text class="board-caption">
+                          <tspan dy="15">Elysium</tspan>
+                          <tspan x="5" dy="12">Mons</tspan>
+                      </text>
+                  </g>
+                  <g id="alba_fossae"  transform="translate(350, 70)">
+                      <line x1="20" y1="30" x2="41" y2="82" class="board-line"></line>
+                      <text x="39" y="85" class="board-caption board_caption--black">&#x25cf;</text>
+                      <text class="board-caption">
+                          <tspan dy="15">Alba</tspan>
+                          <tspan x="5" dy="12">Fossae</tspan>
+                      </text>
+                  </g>
+                  <g id="ceranius_fossae" transform="translate(80, 230)">
+                      <text class="board-caption">
+                          <tspan dy="15">Ceranius</tspan>
+                          <tspan x="9" dy="12">Fossae</tspan>
+                      </text>
+                      <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
+                      <text x="66" y="33" class="board-caption board_caption--black">●</text>
+                  </g>
+                  <g id="alba_mons" transform="translate(105, 200)">
+                      <text class="board-caption">
+                          <tspan dy="15">Alba</tspan>
+                          <tspan x="9" dy="12">Mons</tspan>
+                      </text>
+                      <line x1="35" y1="25" x2="94" y2="31" class="board-line" />
+                      <text x="92" y="34" class="board-caption board_caption--black">●</text>
+                  </g>
                 </template>
                 <template v-if="boardName === BoardName.TERRA_CIMMERIA">
                   <g id="albor_tholus"  transform="translate(260, 70)">

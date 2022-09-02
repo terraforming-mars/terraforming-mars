@@ -35,6 +35,8 @@ module.exports = { // eslint-disable-line no-undef
     'no-redeclare': 'off', // If we stopped using namespaces, this could be enabled.
     'no-prototype-builtins': 'off', // This could be enabled actually; just fix uses of 'hasOwnProperty'
 
+    '@typescript-eslint/prefer-for-of': 'error',
+
     '@typescript-eslint/no-non-null-assertion': 'error',
     // Old modules prior to the linting rule being enabled
     // Avoid adding tags to this list

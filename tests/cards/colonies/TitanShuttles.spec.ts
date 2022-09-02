@@ -51,7 +51,7 @@ describe('TitanShuttles', function() {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([card]);
     expect(card.resourceCount).to.eq(2);
   });
@@ -73,7 +73,7 @@ describe('TitanShuttles', function() {
     orOptions.options[0].cb();
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([card2]);
     expect(card2.resourceCount).to.eq(2);
   });

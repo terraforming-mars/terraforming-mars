@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {AirScrappingExpedition} from '../../../src/server/cards/venusNext/AirScrappingExpedition';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
@@ -15,10 +16,7 @@ describe('AirScrappingExpedition', function() {
     const game = Game.newInstance('gameid', [player, redPlayer], player);
     player.setCorporationForTest(corp);
 
-
-    const selectCard = card.play(player) as SelectCard<ICard>;
-    expect(selectCard).is.not.undefined;
-    expect(selectCard instanceof SelectCard).is.true;
+    const selectCard = cast(card.play(player), SelectCard<ICard>);
 
     selectCard.cb([selectCard.cards[0]]);
     expect(corp.resourceCount).to.eq(3);

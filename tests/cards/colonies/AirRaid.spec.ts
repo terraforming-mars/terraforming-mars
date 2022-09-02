@@ -42,7 +42,7 @@ describe('AirRaid', function() {
 
     card.play(player);
     const option1 = cast(player.game.deferredActions.pop()!.execute(), OrOptions);
-    const option2 = player.game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const option2 = cast(player.game.deferredActions.pop()!.execute(), SelectCard<ICard>);
 
     option1.options[0].cb();
     expect(player2.megaCredits).to.eq(0);

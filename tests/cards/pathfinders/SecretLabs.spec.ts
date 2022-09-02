@@ -46,7 +46,7 @@ describe('SecretLabs', function() {
     placeOcean.cb();
     runAllActions(player.game);
 
-    const selectSpace = player.getWaitingFor() as SelectSpace;
+    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     expect(selectSpace.availableSpaces[0].tile).is.undefined;
 
     selectSpace.cb(selectSpace.availableSpaces[0]);

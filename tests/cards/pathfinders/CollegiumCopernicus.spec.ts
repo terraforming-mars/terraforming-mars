@@ -61,7 +61,7 @@ describe('CollegiumCopernicus', function() {
     card.resourceCount = 10;
 
     card.action(player);
-    const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
+    const selectColony = cast(game.deferredActions.peek()!.execute(), SelectColony);
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
     expect(player.megaCredits).to.eq(2);

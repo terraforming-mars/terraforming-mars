@@ -183,7 +183,7 @@ describe('Turmoil', function() {
 
     player.worldGovernmentTerraforming();
     const action = cast(player.getWaitingFor(), OrOptions);
-    const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
+    const placeOcean = cast(action.options.find((option) => option.title === 'Add an ocean'), SelectSpace);
     const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
 
     placeOcean.cb(steelSpace!);

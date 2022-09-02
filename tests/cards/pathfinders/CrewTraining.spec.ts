@@ -29,7 +29,7 @@ describe('CrewTraining', function() {
 
     expect(game.deferredActions.length).eq(1);
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
-    const options = cast(action!.execute(), OrOptions);
+    const options = cast(action.execute(), OrOptions);
 
     expect(options.options[0].title).to.match(/earth/);
     expect(game.pathfindersData).deep.eq({

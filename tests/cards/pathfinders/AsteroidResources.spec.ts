@@ -50,8 +50,8 @@ describe('AsteroidResources', function() {
     expect(player.production.steel).eq(0);
     expect(player.titanium).eq(1);
     expect(player.steel).eq(2);
-    const action = player.game.deferredActions.peek()! as PlaceOceanTile;
-    const select = action.execute() as SelectSpace;
+    const action = cast(player.game.deferredActions.peek(), PlaceOceanTile);
+    const select = cast(action.execute(), SelectSpace);
     const space = select.availableSpaces[0];
 
     expect(space.spaceType).eq(SpaceType.OCEAN);

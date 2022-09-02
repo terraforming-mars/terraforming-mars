@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {ICard} from '../../../src/server/cards/ICard';
+import {cast} from '../../TestingUtils';
 
 describe('Solarpedia', function() {
   let card: Solarpedia;
@@ -85,9 +85,7 @@ describe('Solarpedia', function() {
   });
 
   function testAddResourcesToCard() {
-    const action = game.deferredActions.pop()?.execute();
-    expect(action).instanceOf(SelectCard);
-    const selectCard = action as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.pop()?.execute(), SelectCard);
     expect(selectCard.cards).eql([lunarObservationPost, card]);
     selectCard.cb([lunarObservationPost]);
     expect(lunarObservationPost.resourceCount).eq(2);

@@ -5,6 +5,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('LawSuit', () => {
   let card: LawSuit;
@@ -59,9 +60,8 @@ describe('LawSuit', () => {
     // This thief now has has 2MC
     player2.megaCredits = 2;
     player.megaCredits = 0;
-    const play = card.play(player);
-    expect(play).instanceOf(SelectPlayer);
-    (play as SelectPlayer).cb(player2);
+    const play = cast(card.play(player), SelectPlayer);
+    play.cb(player2);
     expect(player.megaCredits).eq(2);
     expect(player2.megaCredits).eq(0);
   });

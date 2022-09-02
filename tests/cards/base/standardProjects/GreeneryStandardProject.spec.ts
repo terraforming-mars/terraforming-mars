@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {setCustomGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
@@ -37,7 +38,7 @@ describe('GreeneryStandardProject', function() {
     card.action(player);
     runAllActions(game);
 
-    const selectSpace = player.getWaitingFor() as SelectSpace;
+    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     const availableSpace = selectSpace.availableSpaces[0];
 
     expect(availableSpace.spaceType).eq(SpaceType.LAND);

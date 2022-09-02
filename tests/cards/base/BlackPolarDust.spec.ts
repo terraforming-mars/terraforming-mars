@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {BlackPolarDust} from '../../../src/server/cards/base/BlackPolarDust';
 import {Game} from '../../../src/server/Game';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -29,7 +29,7 @@ describe('BlackPolarDust', function() {
     expect(player.production.heat).to.eq(3);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
+    const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });

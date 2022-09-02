@@ -36,9 +36,9 @@ describe('Flooding', function() {
       }
     }
 
-    const subAction = cast(action!.cb(oceans[0]), OrOptions);
-    expect(subAction!.options).has.lengthOf(2);
-    expect(subAction!.options[1].cb()).is.undefined;
+    const subAction = cast(action.cb(oceans[0]), OrOptions);
+    expect(subAction.options).has.lengthOf(2);
+    expect(subAction.options[1].cb()).is.undefined;
     const subActionSelectPlayer = cast(subAction.options[0], SelectPlayer);
     expect(subActionSelectPlayer.players).has.lengthOf(1);
     expect(subActionSelectPlayer.players[0]).to.eq(player2);
@@ -75,7 +75,7 @@ describe('Flooding', function() {
     expect(adjacentSpace.tile).is.undefined;
 
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
-    const action = card.play(player) as SelectSpace;
+    const action = cast(card.play(player), SelectSpace);
     expect(action.cb(oceanSpaces[0])).is.undefined;
   });
 

@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {cast} from '../../TestingUtils';
 
 describe('HeatTrappers', function() {
   let card: HeatTrappers;
@@ -49,7 +50,7 @@ describe('HeatTrappers', function() {
     expect(player.production.energy).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
+    const selectPlayer = cast(game.deferredActions.peek()!.execute(), SelectPlayer);
     selectPlayer.cb(player2);
     expect(player2.production.heat).to.eq(5);
   });

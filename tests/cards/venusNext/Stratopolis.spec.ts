@@ -5,7 +5,7 @@ import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
@@ -42,9 +42,9 @@ describe('Stratopolis', function() {
     const card2 = new AerialMappers();
     player.playedCards.push(card, card2);
 
-    const action = card.action(player);
-    expect(action).instanceOf(SelectCard);
-        action!.cb([card2]);
-        expect(card2.resourceCount).to.eq(2);
+    const action = cast(card.action(player), SelectCard);
+    action.cb([card2]);
+
+    expect(card2.resourceCount).to.eq(2);
   });
 });

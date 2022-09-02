@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MooncrateConvoysToMars} from '../../../src/server/cards/moon/MooncrateConvoysToMars';
 import {expect} from 'chai';
@@ -54,7 +54,7 @@ describe('MooncrateConvoysToMars', () => {
 
     expect(moonData.logisticRate).eq(1);
 
-    const firstSale = game.deferredActions.pop()!.execute() as SelectAmount;
+    const firstSale = cast(game.deferredActions.pop()!.execute(), SelectAmount);
     expect(firstSale.max).eq(5);
     firstSale.cb(2);
     expect(player1.steel).eq(3);
@@ -63,7 +63,7 @@ describe('MooncrateConvoysToMars', () => {
     const secondSale = game.deferredActions.pop()!.execute();
     expect(secondSale).is.undefined;
 
-    const thirdSale = game.deferredActions.pop()!.execute() as SelectAmount;
+    const thirdSale = cast(game.deferredActions.pop()!.execute(), SelectAmount);
     expect(thirdSale.max).eq(3);
   });
 });

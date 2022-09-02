@@ -20,8 +20,7 @@ describe('DeimosDownPromo', function() {
   });
 
   it('Should play without plants', function() {
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    cast(card.play(player), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
     expect(player.steel).to.eq(4);
     const input = player.game.deferredActions.peek()!.execute();
@@ -31,8 +30,7 @@ describe('DeimosDownPromo', function() {
   it('Can remove plants', function() {
     player2.plants = 5;
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    cast(card.play(player), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
     expect(player.steel).to.eq(4);
 
@@ -49,8 +47,7 @@ describe('DeimosDownPromo', function() {
     Game.newInstance('gameid', [player], player);
 
     player.plants = 15;
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    cast(card.play(player), SelectSpace);
 
     expect(player.game.getTemperature()).to.eq(-24);
     expect(player.steel).to.eq(4);

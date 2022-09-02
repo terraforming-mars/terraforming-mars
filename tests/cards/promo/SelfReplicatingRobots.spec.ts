@@ -47,13 +47,13 @@ describe('SelfReplicatingRobots', function() {
     player.cardsInHand.push(new HousePrinting());
 
     const action = cast(card.action(player), OrOptions);
-    action.options[0].cb([(action.options[0] as SelectCard<IProjectCard>).cards[0]]);
+    action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
     expect(card.targetCards[0].resourceCount).to.eq(2);
     expect(player.cardsInHand).deep.eq([earthOffice]);
     expect(card.targetCards).has.lengthOf(1);
 
     const action2 = cast(card.action(player), OrOptions);
-    action2.options[0].cb([(action2.options[0] as SelectCard<IProjectCard>).cards[0]]);
+    action2.options[0].cb([cast(action2.options[0], SelectCard<IProjectCard>).cards[0]]);
     expect(card.targetCards[0].resourceCount).to.eq(4);
   });
 });

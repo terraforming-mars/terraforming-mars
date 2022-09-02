@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {runAllActions, runNextAction} from '../../TestingUtils';
+import {cast, runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Herbivores', () => {
@@ -52,7 +52,7 @@ describe('Herbivores', () => {
     expect(card.resourceCount).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = runNextAction(game) as SelectPlayer;
+    const selectPlayer = cast(runNextAction(game), SelectPlayer);
     selectPlayer.cb(player2);
     expect(player2.production.plants).to.eq(0);
   });

@@ -7,7 +7,7 @@ import {Player} from '../Player';
 
 // TODO(kberg): Rename to SelectParty
 export class SelectPartyToSendDelegate implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE;
+  public readonly inputType = PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE;
   constructor(
         public title: string | Message,
         public buttonLabel: string = 'Send delegate',

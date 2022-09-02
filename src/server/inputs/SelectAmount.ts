@@ -6,7 +6,7 @@ import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectAmount implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_AMOUNT;
+  public readonly inputType = PlayerInputType.SELECT_AMOUNT;
   constructor(
         public title: string | Message,
         public buttonLabel: string = 'Save',

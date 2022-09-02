@@ -5,7 +5,7 @@ import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
 export class SelectPlayer implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_PLAYER;
+  public readonly inputType = PlayerInputType.SELECT_PLAYER;
   constructor(public players: Array<Player>, public title: string | Message, public buttonLabel: string = 'Save', public cb: (player: Player) => PlayerInput | undefined) {
     this.buttonLabel = buttonLabel;
   }

@@ -11,7 +11,7 @@ export class OrOptions implements PlayerInput {
   public title: string | Message = 'Select one option';
   public buttonLabel: string = 'Save';
   public options: Array<PlayerInput>;
-  public inputType: PlayerInputType = PlayerInputType.OR_OPTIONS;
+  public readonly inputType = PlayerInputType.OR_OPTIONS;
   constructor(
     ...options: Array<PlayerInput>
   ) {

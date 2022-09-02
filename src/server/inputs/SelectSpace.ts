@@ -6,7 +6,7 @@ import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectSpace implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_SPACE;
+  public readonly inputType = PlayerInputType.SELECT_SPACE;
   public buttonLabel: string = 'Save'; // not used (for now)
   constructor(
         public title: string | Message,

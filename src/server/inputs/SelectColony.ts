@@ -8,7 +8,7 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColoniesHandler} from '../colonies/ColoniesHandler';
 
 export class SelectColony implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_COLONY;
+  public readonly inputType = PlayerInputType.SELECT_COLONY;
 
   constructor(
         public title: string | Message,

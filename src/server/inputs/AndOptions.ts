@@ -4,7 +4,7 @@ import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class AndOptions implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.AND_OPTIONS;
+  public readonly inputType: PlayerInputType = PlayerInputType.AND_OPTIONS;
   public title = '';
   public buttonLabel: string = 'Save';
   public options: Array<PlayerInput>;

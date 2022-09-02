@@ -6,7 +6,7 @@ import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectPayment implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_PAYMENT;
+  public readonly inputType = PlayerInputType.SELECT_PAYMENT;
   public buttonLabel: string = 'Pay'; // no input button
   constructor(
         public title: string | Message,

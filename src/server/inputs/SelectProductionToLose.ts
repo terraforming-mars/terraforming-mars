@@ -6,7 +6,7 @@ import {Units} from '../../common/Units';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
 export class SelectProductionToLose implements PlayerInput {
-  public inputType = PlayerInputType.SELECT_PRODUCTION_TO_LOSE;
+  public readonly inputType = PlayerInputType.SELECT_PRODUCTION_TO_LOSE;
 
   constructor(
         public title: string | Message,

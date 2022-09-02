@@ -6,7 +6,7 @@ import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParame
 import {InputResponse} from '../../common/inputs/InputResponse';
 
 export class ShiftAresGlobalParameters implements PlayerInput {
-  public inputType = PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS;
+  public readonly inputType = PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS;
   public title = 'Adjust Ares global parameters up to 1 step.';
   public buttonLabel = 'Save';
 

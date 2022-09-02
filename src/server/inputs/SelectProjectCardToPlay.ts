@@ -8,7 +8,7 @@ import {CardAction, Player} from '../Player';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
 export class SelectProjectCardToPlay implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY;
+  public readonly inputType = PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY;
   public title = 'Play project card';
   public buttonLabel: string = 'Play card';
   public reserveUnits: Array<Units>;

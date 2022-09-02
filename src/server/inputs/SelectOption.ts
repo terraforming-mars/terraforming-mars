@@ -5,7 +5,7 @@ import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectOption implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_OPTION;
+  public readonly inputType = PlayerInputType.SELECT_OPTION;
   constructor(
         public title: string | Message,
         public buttonLabel: string = 'Select',

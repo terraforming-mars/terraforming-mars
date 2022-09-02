@@ -6,7 +6,7 @@ import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
 export class SelectDelegate implements PlayerInput {
-  public inputType: PlayerInputType = PlayerInputType.SELECT_DELEGATE;
+  public readonly inputType = PlayerInputType.SELECT_DELEGATE;
   public buttonLabel: string = 'Save';
   constructor(public players: Array<Player | NeutralPlayer>, public title: string | Message, public cb: (player: Player | NeutralPlayer) => PlayerInput | undefined) {
   }

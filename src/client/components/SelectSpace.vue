@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="select_space_cont">
     <confirm-dialog
         message="Place your tile here?"
         :enableDontShowAgainCheckbox="true"
@@ -7,18 +7,25 @@
         v-on:accept="confirmPlacement"
         v-on:dismiss="cancelPlacement"
         v-on:hide="hideDialog" />
-    <div v-if="showtitle" class="wf-select-space">{{ $t(playerinput.title) }}</div>
-    <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning" v-i18n>{{ warning }}</span></div>
+    <div v-if="showtitle" class="wf-select-space">
+      {{ $t(playerinput.title) }}
+      <go-to-map v-if="experimental()" :playerinput="playerinput"></go-to-map>
+    </div>
+    <div v-if="warning" class="nes-container is-rounded">
+      <span class="nes-text is-warning" v-i18n>{{ warning }}</span>
+      <go-to-map v-if="experimental()" :playerinput="playerinput"></go-to-map>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
-import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {InputResponse} from '@/common/inputs/InputResponse';
+import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
+import GoToMap from '@/client/components/waitingFor/GoToMap.vue';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -50,6 +57,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   components: {
     'confirm-dialog': ConfirmDialog,
+    GoToMap,
   },
   methods: {
     animateSpace(tile: Element, activate: boolean) {
@@ -128,6 +136,9 @@ export default (Vue as WithRefs<Refs>).extend({
       } else {
         this.$refs.confirmation.show();
       }
+    },
+    experimental(): boolean {
+      return getPreferences().experimental_ui;
     },
     saveData() {
       if (this.$data.spaceId === undefined) {

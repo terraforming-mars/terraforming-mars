@@ -11,7 +11,7 @@ describe('SpinoffDepartment', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
-    const action = player.simplePlay(card);
+    const action = card.play(player);
     expect(action).is.undefined;
     expect(player.production.megacredits).to.eq(2);
     card.onCardPlayed(player, card2);

@@ -18,16 +18,16 @@ describe('MartianDustProcessingPlant', function() {
 
   it('canPlay', function() {
     player.production.override({energy: 0});
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
     player.production.override({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {
     player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(14);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
     expect(player.getTerraformRating()).eq(15);

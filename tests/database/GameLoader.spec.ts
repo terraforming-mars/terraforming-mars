@@ -15,7 +15,7 @@ import {FakeClock} from '../common/FakeClock';
 
 class TestDatabase extends InMemoryDatabase {
   public failure: 'getGameIds' | 'getParticipants' | undefined = undefined;
-  public getGameSleep: number = 0;
+  public getGameSleep = 0;
 
   override async getGame(gameId: GameId): Promise<SerializedGame> {
     const game = await super.getGame(gameId);
@@ -156,7 +156,7 @@ describe('GameLoader', function() {
   it('waits for games to finish loading', async function() {
     // Set up a clean number of games;
     database.data.delete('gameid');
-    const numberOfGames : number = 10;
+    const numberOfGames = 10;
     for (let i = 0; i < numberOfGames; i++) {
       const player = new Player('name', Color.BLUE, false, 0, 'p-' + i as PlayerId);
       Game.newInstance('game-' + i as GameId, [player], player);

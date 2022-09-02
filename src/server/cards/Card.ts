@@ -13,6 +13,9 @@ import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryP
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
+import {MoonExpansion} from '../moon/MoonExpansion';
+import {PlayerInput} from '../PlayerInput';
+import {isICorporationCard} from './corporation/ICorporationCard';
 
 export interface StaticCardProperties {
   adjacencyBonus?: AdjacencyBonus;
@@ -38,6 +41,14 @@ type Properties = Omit<StaticCardProperties, 'productionBox|reserveUnits'> & {pr
 
 export const staticCardProperties = new Map<CardName, Properties>();
 
+/**
+ * Card is an implementation for most cards in the game, which provides one key features:
+ *
+ * 1. It stores key card properties into a static cache, which means that each instance of a card
+ *    consumes very little memory.
+ *
+ * // TODO(kberg): Card2 will be merged into this eventually.
+ */
 export abstract class Card {
   private readonly properties: Properties;
   constructor(properties: StaticCardProperties) {
@@ -228,5 +239,55 @@ export abstract class Card {
       }
     }
     return sum;
+  }
+}
+
+/**
+ * Card2 provides new behavior over Card, and will eventually be moved directly into Card.
+ *
+ * It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
+ * in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
+ * put right in here.
+ *
+ * In order to implement this default behavior, Card2 subclasses should ideally not
+ * override `play` and `canPlay`. Instead, they should override `bespokeCanPlay` and
+ * `bespokePlay`, which provide bespoke, or custom hand-crafted play and canPlay
+ * behavior.
+ *
+ * If this seems counterintuitive, think about it this way: very little behavior should
+ * be custom-written for each card, _no_ common behavior should be custom-written for
+ * each card, either.
+ */
+export abstract class Card2 extends Card {
+  constructor(properties: StaticCardProperties) {
+    super(properties);
+  }
+  public override canPlay(player: Player) {
+    if (this.requirements?.satisfies(player) === false) {
+      return false;
+    }
+    if (this.productionBox && !player.production.canAdjust(this.productionBox)) {
+      return false;
+    }
+    return this.bespokeCanPlay(player);
+  }
+
+  public bespokeCanPlay(_player: Player): boolean {
+    return true;
+  }
+
+  public play(player: Player) {
+    if (this.productionBox !== undefined) {
+      player.production.adjust(this.productionBox);
+    }
+    if (!isICorporationCard(this)) {
+      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
+      player.deductUnits(adjustedReserveUnits);
+    }
+    return this.bespokePlay(player);
+  }
+
+  public bespokePlay(_player: Player): PlayerInput | undefined {
+    return undefined;
   }
 }

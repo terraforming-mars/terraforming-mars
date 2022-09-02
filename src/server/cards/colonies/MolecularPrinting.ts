@@ -30,7 +30,7 @@ export class MolecularPrinting extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });

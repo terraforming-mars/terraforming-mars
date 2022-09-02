@@ -27,7 +27,7 @@ describe('UndergroundCity', function() {
   it('Should play', function() {
     player.production.add(Resources.ENERGY, 2);
     expect(player.simpleCanPlay(card)).is.true;
-    const action = cast(player.simplePlay(card), SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesCount()).to.eq(1);

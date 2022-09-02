@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {LavaFlows} from '../base/LavaFlows';
@@ -9,8 +9,7 @@ import {BoardName} from '../../../common/boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class LavaTubeSettlement extends Card implements IProjectCard {
-  public migrated = true;
+export class LavaTubeSettlement extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -42,11 +41,11 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     return LavaFlows.getVolcanicSpaces(player);
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return this.getSpacesForCity(player).length > 0 && player.production.energy >= 1;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceCityTile(
       player,
       'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',

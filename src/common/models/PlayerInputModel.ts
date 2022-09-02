@@ -1,4 +1,3 @@
-
 import {PlayerInputTypes} from '../input/PlayerInputTypes';
 import {CardModel} from './CardModel';
 import {ColonyModel} from './ColonyModel';
@@ -8,10 +7,11 @@ import {AresData} from '../ares/AresData';
 import {Message} from '../logs/Message';
 import {PartyName} from '../turmoil/PartyName';
 import {TurmoilModel} from './TurmoilModel';
+import {SpaceId} from '../Types';
 
 export interface PlayerInputModel {
     amount: number | undefined;
-    availableSpaces: Array<string> | undefined;
+    availableSpaces: Array<SpaceId> | undefined;
     canUseHeat: boolean | undefined;
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;

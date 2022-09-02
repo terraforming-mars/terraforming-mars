@@ -22,18 +22,18 @@ describe('CommunicationCenter', function() {
   });
 
   it('canPlay', () => {
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.production.add(Resources.ENERGY, 1);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', () => {
     card.resourceCount = 0;
     player.production.add(Resources.ENERGY, 2);
 
-    expect(player.simplePlay(card));
+    expect(card.play(player));
 
     runAllActions(game);
 

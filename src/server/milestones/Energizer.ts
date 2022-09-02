@@ -2,8 +2,8 @@ import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
 
 export class Energizer implements IMilestone {
-  public name: string = 'Energizer';
-  public description: string = 'Requires that you have 6 energy production';
+  public readonly name = 'Energizer';
+  public readonly description = 'Requires that you have 6 energy production';
   public getScore(player: Player): number {
     return player.production.energy;
   }

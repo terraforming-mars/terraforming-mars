@@ -35,7 +35,7 @@ describe('StripMine', function() {
     player.production.add(Resources.ENERGY, 2);
     expect(player.simpleCanPlay(card)).is.true;
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.energy).to.eq(0);
     expect(player.production.steel).to.eq(2);
     expect(player.production.titanium).to.eq(1);

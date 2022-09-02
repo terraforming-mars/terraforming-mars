@@ -12,13 +12,13 @@ describe('MartianMediaCenter', function() {
 
     const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('gameid', [player], player, gameOptions);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     const mars = game.turmoil!.getPartyByName(PartyName.MARS)!;
     mars.delegates.push(player.id, player.id);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.megacredits).to.eq(2);
   });
 });

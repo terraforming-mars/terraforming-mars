@@ -16,19 +16,19 @@ describe('AICentral', function() {
   });
 
   it('Can not play if not enough science tags to play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if no energy production', function() {
     player.playedCards.push(card, card, card);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(card, card, card);
     player.production.add(Resources.ENERGY, 1);
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.energy).to.eq(0);
     expect(card.getVictoryPoints()).to.eq(1);
   });

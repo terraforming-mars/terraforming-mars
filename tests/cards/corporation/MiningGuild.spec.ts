@@ -4,11 +4,12 @@ import {Game} from '../../../src/server/Game';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {maxOutOceans, setCustomGameOptions, runAllActions} from '../../TestingUtils';
+import {maxOutOceans, setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {BoardType} from '../../../src/server/boards/BoardType';
 import {TileType} from '../../../src/common/TileType';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('MiningGuild', () => {
   let card: MiningGuild;
@@ -29,7 +30,7 @@ describe('MiningGuild', () => {
   });
 
   it('Should play', () => {
-    player.simplePlay(card);
+    card.play(player);
     expect(player.steel).to.eq(5);
     expect(player.production.steel).to.eq(1);
   });
@@ -89,7 +90,7 @@ describe('MiningGuild', () => {
     expect(player.production.steel).to.eq(1);
 
     const oceanCity = new OceanCity();
-    const selectSpace = oceanCity.play(player);
+    const selectSpace = cast(oceanCity.play(player), SelectSpace);
     selectSpace.cb(space);
 
     expect(space.tile?.tileType).equal(TileType.OCEAN_CITY);

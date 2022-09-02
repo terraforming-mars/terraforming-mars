@@ -3,8 +3,8 @@ import {isHazardTileType} from '../../../common/TileType';
 import {IMilestone} from '../IMilestone';
 
 export class Tropicalist implements IMilestone {
-  public name: string = 'Tropicalist';
-  public description: string = 'Have 3 tiles in the middle 3 equatorial rows';
+  public readonly name = 'Tropicalist';
+  public readonly description = 'Have 3 tiles in the middle 3 equatorial rows';
 
   public getScore(player: Player): number {
     return player.game.board.spaces

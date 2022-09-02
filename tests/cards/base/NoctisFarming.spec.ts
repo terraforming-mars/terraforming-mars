@@ -16,14 +16,14 @@ describe('NoctisFarming', function() {
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = -20;
     expect(player.simpleCanPlay(card)).is.true;
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.megacredits).to.eq(1);
     expect(player.plants).to.eq(2);
 

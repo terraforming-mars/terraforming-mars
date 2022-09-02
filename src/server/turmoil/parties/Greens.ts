@@ -20,16 +20,16 @@ import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {Board} from '../../boards/Board';
 
 export class Greens extends Party implements IParty {
-  name = PartyName.GREENS;
-  description = 'Want to see a new Earth as soon as possible.';
-  bonuses = [GREENS_BONUS_1, GREENS_BONUS_2];
-  policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
+  readonly name = PartyName.GREENS;
+  readonly description = 'Want to see a new Earth as soon as possible.';
+  readonly bonuses = [GREENS_BONUS_1, GREENS_BONUS_2];
+  readonly policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
 }
 
 class GreensBonus01 implements Bonus {
-  isDefault = true;
-  id = 'gb01' as const;
-  description: string = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
+  readonly isDefault = true;
+  readonly id = 'gb01' as const;
+  readonly description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
   getScore(player: Player) {
     return player.tags.count(Tag.PLANT, 'raw') +
@@ -45,9 +45,9 @@ class GreensBonus01 implements Bonus {
 }
 
 class GreensBonus02 implements Bonus {
-  id = 'gb02' as const;
-  description: string = 'Gain 2 M€ for each greenery tile you have';
-  isDefault = false;
+  readonly id = 'gb02' as const;
+  readonly description = 'Gain 2 M€ for each greenery tile you have';
+  readonly isDefault = false;
 
   getScore(player: Player) {
     const boardSpaces = player.game.board.spaces;
@@ -63,9 +63,9 @@ class GreensBonus02 implements Bonus {
 }
 
 class GreensPolicy01 implements Policy {
-  isDefault = true;
-  id = 'gp01' as const;
-  description: string = 'When you place a greenery tile, gain 4 M€';
+  readonly isDefault = true;
+  readonly id = 'gp01' as const;
+  readonly description = 'When you place a greenery tile, gain 4 M€';
 
   onTilePlaced(player: Player, space: ISpace) {
     if (Board.isGreenerySpace(space) && player.game.phase === Phase.ACTION) {
@@ -75,9 +75,9 @@ class GreensPolicy01 implements Policy {
 }
 
 class GreensPolicy02 implements Policy {
-  id = 'gp02' as const;
-  description: string = 'When you place a tile, gain 1 plant';
-  isDefault = false;
+  readonly id = 'gp02' as const;
+  readonly description = 'When you place a tile, gain 1 plant';
+  readonly isDefault = false;
 
   onTilePlaced(player: Player) {
     player.addResource(Resources.PLANTS, 1);
@@ -85,9 +85,9 @@ class GreensPolicy02 implements Policy {
 }
 
 class GreensPolicy03 implements Policy {
-  id = 'gp03' as const;
-  description: string = 'When you play an animal, plant or microbe tag, gain 2 M€';
-  isDefault = false;
+  readonly id = 'gp03' as const;
+  readonly description = 'When you play an animal, plant or microbe tag, gain 2 M€';
+  readonly isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
@@ -98,9 +98,9 @@ class GreensPolicy03 implements Policy {
 }
 
 class GreensPolicy04 implements Policy {
-  id = 'gp04' as const;
-  description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
-  isDefault = false;
+  readonly id = 'gp04' as const;
+  readonly description = 'Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)';
+  readonly isDefault = false;
 
   canAct(player: Player) {
     return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;

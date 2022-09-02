@@ -29,7 +29,7 @@ describe('BiofertilizerFacility', function() {
   });
 
   it('Cannot play without a science tag', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Play', function() {
@@ -43,8 +43,8 @@ describe('BiofertilizerFacility', function() {
     expect(microbeHost.resourceCount || 0).is.eq(0);
     expect(game.deferredActions).has.lengthOf(0);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = cast(player.simplePlay(card), SelectSpace);
+    expect(card.canPlay(player)).is.true;
+    const action = cast(card.play(player), SelectSpace);
     expect(player.production.plants).is.eq(1);
 
     const citySpace = game.board.getAvailableSpacesForCity(player)[0];

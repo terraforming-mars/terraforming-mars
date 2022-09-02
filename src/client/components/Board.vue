@@ -312,7 +312,7 @@ export default Vue.extend({
         throw new Error('Wrong parameter to get values from: ' + targetParameter);
       }
 
-      for (let value: number = endValue; value >= startValue; value -= step) {
+      for (let value = endValue; value >= startValue; value -= step) {
         strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
         values.push(
           new GlobalParamLevel(value, value === curValue, strValue),

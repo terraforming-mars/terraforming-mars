@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
@@ -11,8 +11,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Factorum extends Card implements IActionCard, ICorporationCard {
-  public migrated = true;
+export class Factorum extends Card2 implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -36,10 +35,6 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

@@ -1,13 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class GreatDam extends Card implements IProjectCard {
-  public migrated = true;
+export class GreatDam extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -26,9 +25,6 @@ export class GreatDam extends Card implements IProjectCard {
         description: 'Requires 4 ocean tiles. Increase your Energy production 2 steps.',
       },
     });
-  }
-  public play() {
-    return undefined;
   }
 }
 

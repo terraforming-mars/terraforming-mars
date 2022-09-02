@@ -11,9 +11,10 @@ import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
-import {addGreenery, resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, runAllActions} from '../../TestingUtils';
+import {addGreenery, resetBoard, setCustomGameOptions, setRulingPartyAndRulingPolicy, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
@@ -166,7 +167,7 @@ describe('GeologicalSurvey', () => {
     game.simpleAddTile(redPlayer, space, {tileType: TileType.OCEAN});
 
     player.heat = 0;
-    const selectSpace = new OceanCity().play(player);
+    const selectSpace = cast(new OceanCity().play(player), SelectSpace);
     selectSpace.cb(space);
     runAllActions(game);
     expect(player.heat).eq(0);

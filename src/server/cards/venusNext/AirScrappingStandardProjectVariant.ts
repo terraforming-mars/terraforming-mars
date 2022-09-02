@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {AirScrappingStandardProject} from './AirScrappingStandardProject';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
@@ -25,7 +25,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
   }
 
   protected override discount(player: Player): number {
-    const tagCount = player.getTagCount(Tags.VENUS);
+    const tagCount = player.tags.count(Tag.VENUS);
     const discount = Math.min(tagCount, 5);
     return discount + super.discount(player);
   }

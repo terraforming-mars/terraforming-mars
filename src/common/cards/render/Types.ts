@@ -1,5 +1,5 @@
 import {AltSecondaryTag} from './AltSecondaryTag';
-import {Tags} from '../Tags';
+import {Tag} from '../Tag';
 import {TileType} from '../../TileType';
 import {CardComponent} from './CardComponent';
 import {CardRenderItemType} from './CardRenderItemType';
@@ -93,7 +93,7 @@ export interface ICardRenderItem extends CardComponent {
   /** Size of the item. Very much depends on the CSS rendered for this item. */
   size?: Size;
   /** adding tag dependency (top right bubble of this item) */
-  secondaryTag?: Tags | AltSecondaryTag;
+  secondaryTag?: Tag | AltSecondaryTag;
   /** used for amount labels like 2x, x, etc. */
   multiplier?: boolean;
   /** add a symbol on top of the item to show it's cancelled or negated in some way (usually X) */

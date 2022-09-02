@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 
@@ -20,17 +20,17 @@ describe('EarthEmbassy', () => {
   });
 
   it('play', () => {
-    const fake = fakeCard({tags: [Tags.EARTH, Tags.MOON, Tags.MOON]});
+    const fake = fakeCard({tags: [Tag.EARTH, Tag.MOON, Tag.MOON]});
 
     player.playedCards = [fake];
-    expect(player.getTagCount(Tags.EARTH, 'raw')).eq(1);
-    expect(player.getTagCount(Tags.EARTH, 'default')).eq(1);
+    expect(player.tags.count(Tag.EARTH, 'raw')).eq(1);
+    expect(player.tags.count(Tag.EARTH, 'default')).eq(1);
 
     // This changes the results because Earth Embassy has one earth tag and one moon tag.
     // [ Earth Embassy: earth/moon, Fake Card: earth/moon/moon ]
     player.playedCards.push(earthEmbassy);
-    expect(player.getTagCount(Tags.EARTH, 'raw')).eq(2);
-    expect(player.getTagCount(Tags.EARTH, 'default')).eq(5);
+    expect(player.tags.count(Tag.EARTH, 'raw')).eq(2);
+    expect(player.tags.count(Tag.EARTH, 'default')).eq(5);
   });
 
   it('Works for Luna Governor', () => {

@@ -9,7 +9,6 @@ import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
 import {PhobosSpaceHaven} from '../../../src/server/cards/base/PhobosSpaceHaven';
 import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
-import {ColoniesHandler} from '../../../src/server/colonies/ColoniesHandler';
 import {cast} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
@@ -81,36 +80,36 @@ describe('AdhaiHighOrbitConstructions', function() {
 
 
   it('trade discount', function() {
-    expect(ColoniesHandler.coloniesTradeAction(player)).is.undefined;
+    expect(player.colonies.coloniesTradeAction()).is.undefined;
 
     player.megaCredits = 8;
-    expect(ColoniesHandler.coloniesTradeAction(player)).is.undefined;
+    expect(player.colonies.coloniesTradeAction()).is.undefined;
 
     card.resourceCount = 2;
-    expect(ColoniesHandler.coloniesTradeAction(player)).is.not.undefined;
-    const tradeAction = cast(ColoniesHandler.coloniesTradeAction(player), AndOptions);
+    expect(player.colonies.coloniesTradeAction()).is.not.undefined;
+    const tradeAction = cast(player.colonies.coloniesTradeAction(), AndOptions);
     const orOptions = cast(tradeAction.options[0], OrOptions);
     expect(orOptions.options).has.length(1);
     expect(orOptions.options[0].title).eq('Pay 8 M€');
 
     card.resourceCount = 4;
-    const tradeAction2 = cast(ColoniesHandler.coloniesTradeAction(player), AndOptions);
+    const tradeAction2 = cast(player.colonies.coloniesTradeAction(), AndOptions);
     expect(cast(tradeAction2.options[0], OrOptions).options[0].title).eq('Pay 7 M€');
 
     card.resourceCount = 30;
-    const tradeAction3 = cast(ColoniesHandler.coloniesTradeAction(player), AndOptions);
+    const tradeAction3 = cast(player.colonies.coloniesTradeAction(), AndOptions);
     expect(cast(tradeAction3.options[0], OrOptions).options[0].title).eq('Pay 0 M€');
 
     // This doesn't work with titanium
     card.resourceCount = 2;
     player.megaCredits = 0;
     player.titanium = 2;
-    expect(ColoniesHandler.coloniesTradeAction(player)).is.undefined;
+    expect(player.colonies.coloniesTradeAction()).is.undefined;
 
     // This doesn't work with energy
     card.resourceCount = 2;
     player.titanium = 0;
     player.energy = 2;
-    expect(ColoniesHandler.coloniesTradeAction(player)).is.undefined;
+    expect(player.colonies.coloniesTradeAction()).is.undefined;
   });
 });

@@ -1,5 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../../common/Resources';
@@ -18,7 +18,7 @@ export class LakefrontResorts extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.LAKEFRONT_RESORTS,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 54,
 
       metadata: {

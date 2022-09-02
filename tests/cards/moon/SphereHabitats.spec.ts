@@ -4,7 +4,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SphereHabitats} from '../../../src/server/cards/moon/SphereHabitats';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -30,10 +29,10 @@ describe('SphereHabitats', () => {
 
   it('play', () => {
     player.titanium = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
+    expect(player.production.steel).eq(0);
     expect(player.getTerraformRating()).eq(14);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(2);
     // PlaceMoonColonyTile is what's responsible for raising the colony rate.

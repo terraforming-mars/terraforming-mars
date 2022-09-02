@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -12,12 +12,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
 
-export class ExtractorBalloons extends Card implements IActionCard, IResourceCard {
+export class ExtractorBalloons extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.EXTRACTOR_BALLOONS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 21,
       resourceType: CardResource.FLOATER,
 
@@ -36,7 +36,7 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play(player: Player) {
     player.addResourceTo(this, 3);
@@ -56,8 +56,8 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
       new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
         'Remove floaters', () => {
           player.removeResourceFrom(this, 2);
-          player.game.increaseVenusScaleLevel(player, 1);
-          LogHelper.logVenusIncrease( player, 1);
+          const actual = player.game.increaseVenusScaleLevel(player, 1);
+          LogHelper.logVenusIncrease(player, actual);
           return undefined;
         }),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {

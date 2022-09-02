@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Size} from '../../../common/cards/render/Size';
@@ -17,7 +17,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DYSON_SCREENS,
-      tags: [Tags.SCIENCE, Tags.VENUS, Tags.ENERGY, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.VENUS, Tag.ENERGY, Tag.SPACE],
       cost: 28,
       victoryPoints: 1,
       tr: {temperature: 1},
@@ -42,8 +42,8 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
 
   public action(player: Player) {
     player.titanium -= 2;
-    player.addProduction(Resources.HEAT, 1);
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.HEAT, 1);
+    player.production.add(Resources.ENERGY, 1);
     return undefined;
   }
 
@@ -52,8 +52,8 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     game.increaseTemperature(player, 1);
     player.drawCard();
     player.game.addCityTile(player, SpaceName.DYSON_SCREENS, SpaceType.COLONY);
-    player.addProduction(Resources.ENERGY, 2);
-    player.addProduction(Resources.HEAT, 2);
+    player.production.add(Resources.ENERGY, 2);
+    player.production.add(Resources.HEAT, 2);
     return undefined;
   }
 }

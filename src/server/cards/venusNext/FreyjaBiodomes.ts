@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -9,13 +9,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class FreyjaBiodomes extends Card {
+export class FreyjaBiodomes extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.FREYJA_BIODOMES,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.PLANT, Tags.VENUS],
+      tags: [Tag.PLANT, Tag.VENUS],
       cost: 14,
 
       requirements: CardRequirements.builder((b) => b.venus(10)),
@@ -24,7 +25,7 @@ export class FreyjaBiodomes extends Card {
       metadata: {
         cardNumber: '227',
         renderData: CardRenderer.builder((b) => {
-          b.microbes(2, {secondaryTag: Tags.VENUS}).or().animals(2, {secondaryTag: Tags.VENUS}).br;
+          b.microbes(2, {secondaryTag: Tag.VENUS}).or().animals(2, {secondaryTag: Tag.VENUS}).br;
           b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
         }),
         description: {
@@ -35,12 +36,12 @@ export class FreyjaBiodomes extends Card {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
+    return player.production.energy >= 1;
   }
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(CardResource.ANIMAL);
     resourceCards = resourceCards.concat(player.getResourceCards(CardResource.MICROBE));
-    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
+    return resourceCards.filter((card) => card.tags.includes(Tag.VENUS));
   }
 
   public play(player: Player) {
@@ -53,8 +54,8 @@ export class FreyjaBiodomes extends Card {
         cards,
         ([card]) => {
           player.addResourceTo(card, {qty: 2, log: true});
-          player.addProduction(Resources.ENERGY, -1);
-          player.addProduction(Resources.MEGACREDITS, 2);
+          player.production.add(Resources.ENERGY, -1);
+          player.production.add(Resources.MEGACREDITS, 2);
           return undefined;
         },
       );
@@ -64,8 +65,8 @@ export class FreyjaBiodomes extends Card {
       player.addResourceTo(cards[0], {qty: 2, log: true});
     }
 
-    player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.ENERGY, -1);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

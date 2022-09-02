@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -17,7 +17,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ROBOTIC_WORKFORCE,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 9,
       metadata: {
         cardNumber: '086',
@@ -29,12 +29,9 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
-    return this.getAvailableCards(player).length > 0;
-  }
 
   private isCardApplicable(card: ICard, player: Player): boolean {
-    if (!card.tags.includes(Tags.BUILDING) && !card.tags.includes(Tags.WILD)) {
+    if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
       return false;
     }
     if (card.name === CardName.BIOMASS_COMBUSTORS) {
@@ -42,23 +39,24 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     } else if (card.name === CardName.HEAT_TRAPPERS) {
       return player.canReduceAnyProduction(Resources.HEAT, 2);
     } else if (card.name === CardName.GYROPOLIS) {
-      return player.getProduction(Resources.ENERGY) >= 2;
+      return player.production.energy >= 2;
     } else if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
-      return player.getProduction(Resources.ENERGY) >= 1;
+      return player.production.energy >= 1;
     }
 
     if (card.produce !== undefined) return true;
 
     if (card.productionBox === undefined || card.productionBox === Units.EMPTY) return false;
 
-    return player.canAdjustProduction(card.productionBox);
+    return player.production.canAdjust(card.productionBox);
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
-    return [
-      ...player.playedCards.filter((card) => this.isCardApplicable(card, player)),
-      ...player.corporations.filter((card) => this.isCardApplicable(card, player)),
-    ];
+    return player.tableau.filter((card) => this.isCardApplicable(card, player));
+  }
+
+  public override canPlay(player: Player): boolean {
+    return this.getAvailableCards(player).length > 0;
   }
 
   public play(player: Player) {
@@ -75,7 +73,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       if (card.produce) {
         card.produce(player);
       } else if (card.productionBox) {
-        player.adjustProduction(card.productionBox);
+        player.production.adjust(card.productionBox);
       } else {
         throw new Error(`Card ${card.name} is not a valid Robotic Workforce card.`);
       }

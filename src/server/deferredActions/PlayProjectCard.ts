@@ -1,3 +1,4 @@
+import {SelectProjectCardToPlay} from '../inputs/SelectProjectCardToPlay';
 import {Player} from '../Player';
 import {DeferredAction, Priority} from './DeferredAction';
 
@@ -11,6 +12,6 @@ export class PlayProjectCard extends DeferredAction {
     if (playableCards.length === 0) {
       return undefined;
     }
-    return this.player.getPlayProjectCardInput(playableCards);
+    return new SelectProjectCardToPlay(this.player, playableCards);
   }
 }

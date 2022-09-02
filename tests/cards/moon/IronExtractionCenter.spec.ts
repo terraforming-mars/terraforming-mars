@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IronExtractionCenter} from '../../../src/server/cards/moon/IronExtractionCenter';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -33,22 +32,23 @@ describe('IronExtractionCenter', () => {
   });
 
   it('play', () => {
-    expect(player.getProduction(Resources.STEEL)).eq(0);
+    expect(player.production.steel).eq(0);
 
     player.titanium = 3;
     moonData.miningRate = 3;
-    card.play(player);
+
+    player.simplePlay(card);
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
+    expect(player.production.steel).eq(1);
 
 
     // Play a second time. Steel rate will go up by 2.
     moonData.miningRate = 4;
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(1);
-    expect(player.getProduction(Resources.STEEL)).eq(3);
+    expect(player.production.steel).eq(3);
   });
 });
 

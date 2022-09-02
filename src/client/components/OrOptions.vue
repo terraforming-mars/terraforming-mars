@@ -88,8 +88,8 @@ export default Vue.extend({
       }
       return (out: InputResponse) => {
         const copy = [[String(idx)]];
-        for (let i = 0; i < out.length; i++) {
-          copy.push(out[i].slice());
+        for (const row of out) {
+          copy.push(row.slice());
         }
         this.onsave(copy);
       };

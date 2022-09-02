@@ -3,7 +3,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {PersonalAgenda} from '../../../src/server/cards/pathfinders/PersonalAgenda';
 import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
 
@@ -19,14 +19,14 @@ describe('PersonalAgenda', function() {
   });
 
   it('Should play', function() {
-    card.play(player);
+    player.simplePlay(card);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
 
     expect(player.cardsInHand).has.lengthOf(3);
     player.cardsInHand.forEach((card) => {
       expect(card.cardType).eq(CardType.EVENT);
-      expect(card.tags.indexOf(Tags.SPACE)).to.eq(-1);
+      expect(card.tags.indexOf(Tag.SPACE)).to.eq(-1);
     });
   });
 });

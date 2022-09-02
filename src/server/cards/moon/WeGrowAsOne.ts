@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
@@ -14,7 +14,7 @@ export class WeGrowAsOne extends Card implements IProjectCard {
     super({
       name: CardName.WE_GROW_AS_ONE,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 8,
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
 

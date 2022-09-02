@@ -1,6 +1,6 @@
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -16,7 +16,7 @@ export class MarketManipulation extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 1,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       name: CardName.MARKET_MANIPULATION,
       cardType: CardType.EVENT,
 

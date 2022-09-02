@@ -6,10 +6,9 @@ import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {Board} from '../../boards/Board';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -18,11 +17,11 @@ export class Wetlands extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.WETLANDS,
-      tags: [Tags.PLANT, Tags.MARS],
+      tags: [Tag.PLANT, Tag.MARS],
       cost: 20,
       tr: {oxygen: 1, tr: 1},
       requirements: CardRequirements.builder((b) => b.oceans(2)),
-      reserveUnits: Units.of({plants: 4}),
+      reserveUnits: {plants: 4},
 
       metadata: {
         cardNumber: 'Pf03',

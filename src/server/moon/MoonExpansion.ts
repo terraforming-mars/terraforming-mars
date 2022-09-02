@@ -8,19 +8,14 @@ import {IMoonData} from './IMoonData';
 import {CardName} from '../../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
-import {IMoonCard} from '../cards/moon/IMoonCard';
-import {Tags} from '../../common/cards/Tags';
+import {isIMoonCard} from '../cards/moon/IMoonCard';
+import {Tag} from '../../common/cards/Tag';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../../common/constants';
 import {Resources} from '../../common/Resources';
 import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
-
-// export interface CoOwnedSpace {
-//   spaceId: string;
-//   coOwner: PlayerId;
-// }
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -139,8 +134,8 @@ export class MoonExpansion {
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
       const offsets = [-1, 0, 1, 1, 1, 0, -1];
-      const row: number = space.y + 1;
-      const position: number = space.x + offsets[space.y];
+      const row = space.y + 1;
+      const position = space.x + offsets[space.y];
 
       player.game.log('${0} placed a ${1} tile on the Moon at (${2}, ${3})', (b) =>
         b.player(player).string(TileType.toString(tileType)).number(row).number(position));
@@ -168,7 +163,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.miningRate, increment, 6, () => {
-            player.addProduction(Resources.TITANIUM, 1, {log: true});
+            player.production.add(Resources.TITANIUM, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, increment);
         }
@@ -192,7 +187,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.colonyRate, increment, 6, () => {
-            player.addProduction(Resources.ENERGY, 1, {log: true});
+            player.production.add(Resources.ENERGY, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, count);
         }
@@ -216,7 +211,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.logisticRate, increment, 6, () => {
-            player.addProduction(Resources.STEEL, 1, {log: true});
+            player.production.add(Resources.STEEL, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, increment);
         }
@@ -230,7 +225,7 @@ export class MoonExpansion {
     if (lunaFirstPlayer !== undefined) {
       lunaFirstPlayer.addResource(Resources.MEGACREDITS, count, {log: true});
       if (lunaFirstPlayer.id === sourcePlayer?.id) {
-        lunaFirstPlayer.addProduction(Resources.MEGACREDITS, count, {log: true});
+        lunaFirstPlayer.production.add(Resources.MEGACREDITS, count, {log: true});
       }
     }
   }
@@ -293,7 +288,7 @@ export class MoonExpansion {
           if (space.tile === undefined) {
             return false;
           }
-          let include: boolean = true;
+          let include = true;
           if (tileType) {
             include = MoonExpansion.spaceHasType(space, tileType);
           }
@@ -317,7 +312,7 @@ export class MoonExpansion {
     // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
     // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
 
-    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tags.MOON)) {
+    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tag.MOON)) {
       return Units.EMPTY;
     }
 
@@ -327,7 +322,7 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    const tilesBuilt: Array<TileType> = (card as unknown as IMoonCard).tilesBuilt || [];
+    const tilesBuilt: Array<TileType> = isIMoonCard(card) ? card.tilesBuilt : [];
 
     if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
       titanium -= 1;

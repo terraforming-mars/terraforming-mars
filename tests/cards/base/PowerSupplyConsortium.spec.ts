@@ -21,7 +21,7 @@ describe('PowerSupplyConsortium', function() {
   });
 
   it('Cannot play without power tags', function() {
-    player.addProduction(Resources.ENERGY, 3);
+    player.production.add(Resources.ENERGY, 3);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -33,11 +33,11 @@ describe('PowerSupplyConsortium', function() {
     runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
   });
 
   it('Can play - single target', function() {
-    player2.setProductionForTest({energy: 1});
+    player2.production.override({energy: 1});
     player.playedCards.push(card, card);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
@@ -45,13 +45,13 @@ describe('PowerSupplyConsortium', function() {
     runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player2.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(1);
+    expect(player2.production.energy).to.eq(0);
   });
 
   it('Can play - multiple targets', function() {
-    player.addProduction(Resources.ENERGY, 1);
-    player2.addProduction(Resources.ENERGY, 3);
+    player.production.add(Resources.ENERGY, 1);
+    player2.production.add(Resources.ENERGY, 3);
 
     card.play(player);
 
@@ -59,8 +59,8 @@ describe('PowerSupplyConsortium', function() {
     const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
     selectPlayer.cb(player2);
     runAllActions(game);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
-    expect(player2.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.energy).to.eq(2);
+    expect(player2.production.energy).to.eq(2);
   });
 
   it('Can play in solo mode if have enough power tags', function() {
@@ -72,6 +72,6 @@ describe('PowerSupplyConsortium', function() {
 
     card.play(soloPlayer);
     runAllActions(soloGame);
-    expect(soloPlayer.getProduction(Resources.ENERGY)).to.eq(1); // incremented
+    expect(soloPlayer.production.energy).to.eq(1); // incremented
   });
 });

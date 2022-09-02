@@ -5,6 +5,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('CommercialDistrict', function() {
   let card: CommercialDistrict;
@@ -23,15 +24,14 @@ describe('CommercialDistrict', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action instanceof SelectSpace);
+    const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(4);
 
     const adjacent = game.board.getAdjacentSpaces(action.availableSpaces[0]);
     adjacent[0].tile = {tileType: TileType.CITY, card: card.name};

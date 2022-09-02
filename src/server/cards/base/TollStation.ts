@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,7 +13,7 @@ export class TollStation extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.TOLL_STATION,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 12,
 
       metadata: {
@@ -30,9 +30,9 @@ export class TollStation extends Card implements IProjectCard {
   public play(player: Player) {
     const amount = player.game.getPlayers()
       .filter((aPlayer) => aPlayer !== player)
-      .map((opponent) => opponent.getTagCount(Tags.SPACE, 'raw'))
+      .map((opponent) => opponent.tags.count(Tag.SPACE, 'raw'))
       .reduce((a, c) => a + c, 0);
-    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
+    player.production.add(Resources.MEGACREDITS, amount, {log: true});
     return undefined;
   }
 }

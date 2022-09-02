@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
@@ -10,7 +10,7 @@ export class EcologyExperts extends PreludeCard {
   constructor() {
     super({
       name: CardName.ECOLOGY_EXPERTS,
-      tags: [Tags.PLANT, Tags.MICROBE],
+      tags: [Tag.PLANT, Tag.MICROBE],
 
       metadata: {
         cardNumber: 'P10',
@@ -30,7 +30,7 @@ export class EcologyExperts extends PreludeCard {
     return 0;
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
     player.game.defer(new PlayProjectCard(player));
     return undefined;
   }

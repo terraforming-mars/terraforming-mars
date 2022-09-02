@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
@@ -19,12 +19,12 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
     super({
       name: CardName.COPERNICUS_TOWER,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SCIENCE, Tags.MOON],
+      tags: [Tag.SCIENCE, Tag.MOON],
       cost: 36,
 
       resourceType: CardResource.SCIENCE,
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
-      victoryPoints: VictoryPoints.tags(Tags.MOON, 1, 1),
+      victoryPoints: VictoryPoints.tags(Tag.MOON, 1, 1),
 
       metadata: {
         cardNumber: 'M72',
@@ -50,7 +50,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   }
 
   public canAct(player: Player) {
-    return player.getProduction(Resources.TITANIUM) >= 2 || this.canRaiseTR(player);
+    return player.production.titanium >= 2 || this.canRaiseTR(player);
   }
 
   public action(player: Player) {
@@ -73,7 +73,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   private spendResource(player: Player) {
     player.removeResourceFrom(this);
     player.increaseTerraformRating();
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

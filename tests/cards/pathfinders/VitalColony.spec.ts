@@ -5,7 +5,6 @@ import {Player} from '../../../src/server/Player';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {cast} from '../../TestingUtils';
 
 describe('VitalColony', function() {
@@ -33,12 +32,12 @@ describe('VitalColony', function() {
     card.play(player);
 
     const selectColony = cast(game.deferredActions.pop()!.execute(), SelectColony);
-    const colonyName = selectColony.colonies[0].name as ColonyName;
+    const colonyName = selectColony.colonies[0].name;
 
     expect(colonyName).eq(ColonyName.GANYMEDE);
 
     selectColony.cb(selectColony.colonies[0]);
 
-    expect(player.getProduction(Resources.PLANTS)).eq(2);
+    expect(player.production.plants).eq(2);
   });
 });

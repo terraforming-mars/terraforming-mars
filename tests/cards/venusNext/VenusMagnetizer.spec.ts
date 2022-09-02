@@ -29,11 +29,11 @@ describe('VenusMagnetizer', function() {
   });
 
   it('Should act', function() {
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     player.playedCards.push(card);
 
     card.action(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

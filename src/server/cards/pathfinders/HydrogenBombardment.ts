@@ -3,13 +3,13 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Units} from '../../../common/Units';
 
 export class HydrogenBombardment extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,
-      productionBox: Units.of({titanium: 1}),
+      productionBox: {titanium: 1},
       startingMegacredits: 6,
 
       metadata: {
@@ -24,7 +24,6 @@ export class HydrogenBombardment extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
     player.addResource(Resources.MEGACREDITS, this.startingMegaCredits);
     player.game.increaseVenusScaleLevel(player, 1);
     return undefined;

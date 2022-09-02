@@ -1,6 +1,6 @@
 import {Player} from '../Player';
-import {SelectHowToPay} from '../inputs/SelectHowToPay';
-import {HowToPay} from '../../common/inputs/HowToPay';
+import {SelectPayment} from '../inputs/SelectPayment';
+import {Payment} from '../../common/inputs/Payment';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
@@ -14,7 +14,7 @@ export type Options = {
   afterPay?: () => void;
 }
 
-export class SelectHowToPayDeferred extends DeferredAction {
+export class SelectPaymentDeferred extends DeferredAction {
   constructor(
     player: Player,
     public amount: number,
@@ -53,7 +53,7 @@ export class SelectHowToPayDeferred extends DeferredAction {
       return undefined;
     }
 
-    return new SelectHowToPay(
+    return new SelectPayment(
       this.options.title || 'Select how to pay for ' + this.amount + ' M€',
       this.options.canUseSteel || false,
       this.options.canUseTitanium || false,
@@ -61,11 +61,11 @@ export class SelectHowToPayDeferred extends DeferredAction {
       this.options.canUseSeeds || false,
       this.options.canUseData || false,
       this.amount,
-      (howToPay: HowToPay) => {
-        if (!this.player.canSpend(howToPay)) {
+      (payment: Payment) => {
+        if (!this.player.canSpend(payment)) {
           throw new Error('You do not have that many resources to spend');
         }
-        const amountPaid = this.player.payingAmount(howToPay, {
+        const amountPaid = this.player.payingAmount(payment, {
           steel: this.options.canUseSteel,
           titanium: this.options.canUseTitanium,
           seeds: this.options.canUseSeeds,
@@ -77,7 +77,7 @@ export class SelectHowToPayDeferred extends DeferredAction {
         if (amountPaid < this.amount) {
           throw new Error('Did not spend enough to pay for standard project');
         }
-        this.player.pay(howToPay);
+        this.player.pay(payment);
         this.options.afterPay?.();
         return undefined;
       },

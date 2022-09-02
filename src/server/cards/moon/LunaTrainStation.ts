@@ -1,12 +1,11 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {CardRequirements} from '../CardRequirements';
@@ -17,11 +16,11 @@ export class LunaTrainStation extends MoonCard {
     super({
       name: CardName.LUNA_TRAIN_STATION,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 20,
-      productionBox: Units.of({megacredits: 4}),
+      productionBox: {megacredits: 4},
       requirements: CardRequirements.builder((b) => b.logisticRate(5)),
-      reserveUnits: Units.of({steel: 2}),
+      reserveUnits: {steel: 2},
       tr: {moonLogistics: 1},
       victoryPoints: 'special',
 
@@ -40,8 +39,7 @@ export class LunaTrainStation extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     player.game.defer(new PlaceSpecialMoonTile(player, {
       tileType: TileType.LUNA_TRAIN_STATION,
       card: this.name,

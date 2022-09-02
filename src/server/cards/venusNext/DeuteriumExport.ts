@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -11,12 +11,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
 
-export class DeuteriumExport extends Card implements IActionCard, IResourceCard {
+export class DeuteriumExport extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.DEUTERIUM_EXPORT,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SPACE, Tags.VENUS, Tags.ENERGY],
+      tags: [Tag.SPACE, Tag.VENUS, Tag.ENERGY],
       cost: 11,
       resourceType: CardResource.FLOATER,
 
@@ -35,7 +35,7 @@ export class DeuteriumExport extends Card implements IActionCard, IResourceCard 
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;
@@ -51,7 +51,7 @@ export class DeuteriumExport extends Card implements IActionCard, IResourceCard 
     return new OrOptions(
       new SelectOption('Remove 1 floater to raise energy production 1 step', 'Remove floater', () => {
         this.resourceCount--;
-        player.addProduction(Resources.ENERGY, 1);
+        player.production.add(Resources.ENERGY, 1);
         return undefined;
       }),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {

@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, IC
     super({
       cardType: CardType.CORPORATION,
       name: CardName.UNITED_NATIONS_MARS_INITIATIVE,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       startingMegaCredits: 40,
 
       metadata: {

@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeStation} from '../../../src/server/cards/moon/LunaTradeStation';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {MoonSpaces} from '../../../src/server/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
@@ -36,9 +35,9 @@ describe('LunaTradeStation', () => {
 
   it('play', () => {
     player.titanium = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
+    expect(player.production.steel).eq(0);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(1);
 

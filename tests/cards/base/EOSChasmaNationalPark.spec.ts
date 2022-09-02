@@ -5,7 +5,6 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {cast} from '../../TestingUtils';
 
 describe('EosChasmaNationalPark', () => {
@@ -22,9 +21,9 @@ describe('EosChasmaNationalPark', () => {
 
   it('Can play', () => {
     (game as any).temperature = -14;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     (game as any).temperature = -12;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
@@ -33,16 +32,16 @@ describe('EosChasmaNationalPark', () => {
     const fish = new Fish();
     player.playedCards.push(birds, fish);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     const action = cast(card.play(player), SelectCard);
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
     player.playedCards.push(card);
     expect(player.getVictoryPoints().victoryPoints).to.eq(1);
-    action!.cb([birds]);
+    action.cb([birds]);
 
     expect(birds.resourceCount).to.eq(1);
     expect(player.plants).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);
     expect(player.getVictoryPoints().victoryPoints).to.eq(2);
@@ -55,13 +54,12 @@ describe('EosChasmaNationalPark', () => {
 
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
-    card.play(player);
-    player.playedCards.push(card);
+    expect(card.canPlay(player)).is.true;
+    player.playCard(card);
 
     expect(birds.resourceCount).to.eq(1);
     expect(player.plants).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);
     expect(player.getVictoryPoints().victoryPoints).to.eq(2);

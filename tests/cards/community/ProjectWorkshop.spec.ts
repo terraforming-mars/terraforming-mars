@@ -18,8 +18,8 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
-import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('ProjectWorkshop', function() {
   let card: ProjectWorkshop;
@@ -89,8 +89,7 @@ describe('ProjectWorkshop', function() {
     player.playedCards.push(smallAnimals, extremophiles);
 
     const selectOption = cast(card.action(player), SelectOption);
-
-    const selectCard = selectOption.cb() as SelectCard<ICard>;
+    const selectCard = cast(selectOption.cb(), SelectCard<ICard>);
 
     selectCard.cb([smallAnimals]);
     expect(player.getTerraformRating()).to.eq(originalTR + 2);
@@ -192,8 +191,8 @@ describe('ProjectWorkshop', function() {
 
     card.action(player).cb();
     runAllActions(game);
-    const howToPay = cast(player.popWaitingFor(), SelectHowToPay);
-    howToPay.cb({...HowToPay.EMPTY, megaCredits: 1, heat: 2});
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(1);

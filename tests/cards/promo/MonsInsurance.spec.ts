@@ -32,9 +32,9 @@ describe('MonsInsurance', () => {
   });
 
   it('Should play', () => {
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(-2);
-    expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(-2);
+    expect(player.production.megacredits).to.eq(4);
+    expect(player2.production.megacredits).to.eq(-2);
+    expect(player3.production.megacredits).to.eq(-2);
   });
 
   it('Triggers effect when resources are removed', () => {
@@ -101,22 +101,22 @@ describe('MonsInsurance', () => {
   });
 
   it('Effect triggers direct calls to addProduction', () => {
-    player.setProductionForTest({megacredits: 1});
+    player.production.override({megacredits: 1});
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.addProduction(Resources.MEGACREDITS, -1, {log: false, from: player3});
+    player2.production.add(Resources.MEGACREDITS, -1, {log: false, from: player3});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
   });
 
   it('Effect does not trigger direct calls to addProduction for Global Event', () => {
-    player.setProductionForTest({megacredits: 1});
+    player.production.override({megacredits: 1});
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    player2.addProduction(Resources.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.production.add(Resources.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);
@@ -140,7 +140,7 @@ describe('MonsInsurance - Solo', () => {
   });
 
   it('Should play', () => {
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
 
   it('Triggers on StealResources', () => {

@@ -17,16 +17,16 @@ describe('MagneticFieldGenerators', function() {
   });
 
   it('Can not play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 4);
-    expect(card.canPlay(player)).is.true;
+    player.production.add(Resources.ENERGY, 4);
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.plants).to.eq(2);
     expect(player.getTerraformRating()).to.eq(23);
   });
 });

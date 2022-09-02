@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,12 +13,12 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Predators extends Card implements IProjectCard, IActionCard, IResourceCard {
+export class Predators extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.PREDATORS,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 14,
 
       resourceType: CardResource.ANIMAL,
@@ -38,7 +38,7 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

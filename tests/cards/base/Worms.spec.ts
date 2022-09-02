@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Worms} from '../../../src/server/cards/base/Worms';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Worms', function() {
@@ -28,6 +27,6 @@ describe('Worms', function() {
     player.playedCards.push(card);
 
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 });

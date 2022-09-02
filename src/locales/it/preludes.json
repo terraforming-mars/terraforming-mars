@@ -2,12 +2,12 @@
   "Cheung Shing MARS":"Cheung Shing MARS",
   "You start with 3 M€ production and 44 M€.":"Inizi con 44 M€ e una Produzione di M€ pari a 3.",
   "Effect: When you play a building tag, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Edificio, la paghi 2 M€ in meno.",
-    
+
   "Point Luna":"Point Luna",
   "Effect: When you play an Earth tag, including this, draw a card.":"Effetto: quando giochi una carta con un simbolo Terra, inclusa questa, pesca 1 carta.",
   "You start with 1 titanium production and 38 M€.":"Inizi con 38 M€ e 1 Produzione di Titanio.",
-    
-  "Robinson Industries":"Robinson Industries", 
+
+  "Robinson Industries":"Robinson Industries",
   "You start with 47 M€.":"Inizi con 47 M€.",
   "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.":"Azione: spendi 4 M€ per incrementare di 1 livello la tua PRODUZIONE PIÙ BASSA (una sola).",
 
@@ -18,42 +18,42 @@
   "Vitor":"Vitor",
   "You start with 45 M€. As your first action, fund an award for free.":"Inizi con 45 M€. Come prima azione, finanzia un Riconoscimento senza spendere M€.",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.":"Effetto: quando giochi una carta contenente una qualunque icona PV NON NEGATIVA, inclusa questa, guadagni 3 M€.",
-    
-    
-    
-    
-    
+
+
+
+
+
     "max":"al massimo",
     "Global requirements":"Parametri Globali",
-    
+
     "House Printing":"Stampaggio di Abitazioni",
     "Increase your steel production 1 step.":"Incrementa la tua Produzione di Acciaio di 1 livello.",
-    
+
     "Lava Tube Settlement":"Colonia del Tunnel nella Lava",
     "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 2 livelli. Colloca 1 tessera Città SU UN'AREA VULCANICA, indipendentemente dal fatto che ci siano altre Città adiacenti.",
-    
+
     "Martian Survey":"Rilevamento Marziano",
     "Oxygen must be 4% or lower. Draw two cards.":"Il livello di Ossigeno deve essere minore o uguale al 4%. Pesca 2 carte.",
-    
+
     "Psychrophiles":"Psicrofili",
     "Add 1 microbe to this card.":"Azione: aggiungi 1 Microbo a questa carta.",
     "When paying for a plant card, microbes here may be used as 2 M€ each.":"Effetto: quando giochi una carta con un simbolo Pianta, i Microbi collocati qui possono essere utilizzati come se valessero 2 M€ ciascuno.",
     "Temperature must be -20 C or lower.":"Richiede che la Temperatura sia minore o uguale a -20°C.",
-    
+
     "Research Coordination":"Coordinamento della Ricerca",
     "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"Dopo che questa carta è stata giocata, quando compi un'azione, il simbolo Jolly conta come un qualunque simbolo a tua scelta.",
-    
+
     "SF Memorial":"Memoriale Sci-Fi",
     "Draw 1 card.":"Pesca 1 carta.",
-    
+
     "Space Hotels":"Hotel Spaziali",
     "Requires 2 Earth tags. Increase M€ production 4 steps.":"Richiede 2 simboli Terra. Incrementa la tua Produzione di M€ di 4 livelli.",
-    
-  
-   
-  
-  
-    
+
+
+
+
+
+
     "Allied Banks": "Banca Alleata",
     "Increase your M€ production 4 steps. Gain 3 M€.": "Incrementa la tua Produzione di M€ di 4 livelli. Ottieni 3 M€.",
 
@@ -139,13 +139,13 @@
     "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Incrementa la tua Produzione di M€ di 1 livello. Pesca 3 carte. Dopo che questa carta è stata giocata, quando compi un'azione, il simbolo Jolly conta come un qualunque simbolo a tua scelta.",
 
     "Self-Sufficient Settlement": "Insediamento Autosufficiente",
-    "Increase your money production 2 steps. Place a City tile.": "Colloca 1 tessera Città. Incrementa la tua Produzione di M€ di 2 livelli.",
+    "Increase your M€ production 2 steps. Place a City tile.": "Colloca 1 tessera Città. Incrementa la tua Produzione di M€ di 2 livelli.",
 
     "Smelting Plant": "Fonderia",
     "Raise oxygen 2 steps. Gain 5 steel.": "Incrementa l'Ossigeno di 2 livelli. Ottieni 5 risorse Acciaio.",
 
     "Society Support": "Supporto Sociale",
-    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "Diminuisci la tua Produzione di M€ di 1 livello. Incrementa le tue Produzioni di Piante, Energia e Calore di 1 livello ciascuna.",
+    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "Diminuisci la tua Produzione di M€ di 1 livello. Incrementa le tue Produzioni di Piante, Energia e Calore di 1 livello ciascuna.",
 
     "Supplier": "Fornitore",
     "Increase your energy production 2 steps. Gain 4 steel.": "Incrementa la tua Produzione di Energia di 2 livelli. Ottieni 4 risorse Acciaio.",

@@ -1,11 +1,10 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 import {Size} from '../../../common/cards/render/Size';
 import {Resources} from '../../../common/Resources';
@@ -16,9 +15,9 @@ export class ColonistShuttles extends MoonCard {
     super({
       name: CardName.COLONIST_SHUTTLES,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 12,
-      reserveUnits: Units.of({titanium: 1}),
+      reserveUnits: {titanium: 1},
       tr: {moonColony: 1},
 
       metadata: {
@@ -34,8 +33,7 @@ export class ColonistShuttles extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);
     const surfaceColonies = MoonExpansion.spaces(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
     player.addResource(Resources.MEGACREDITS, surfaceColonies * 2, {log: true});

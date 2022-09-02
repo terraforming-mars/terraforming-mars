@@ -4,7 +4,6 @@ import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
@@ -39,7 +38,7 @@ describe('SolarFarm', function() {
     ];
 
     const action = cast(card.play(player), SelectSpace);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
     const citySpace = game.board.getAvailableSpacesOnLand(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
     action.cb(citySpace);
     expect(citySpace.player).to.eq(player);
@@ -47,6 +46,6 @@ describe('SolarFarm', function() {
     expect(citySpace.adjacency).to.deep.eq({
       bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY],
     });
-    expect(player.getProduction(Resources.ENERGY)).eq(7);
+    expect(player.production.energy).eq(7);
   });
 });

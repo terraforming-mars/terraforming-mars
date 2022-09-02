@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -8,13 +8,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class Gyropolis extends Card {
+export class Gyropolis extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GYROPOLIS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 20,
 
       metadata: {
@@ -32,13 +33,13 @@ export class Gyropolis extends Card {
   }
   public override canPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
-    return player.getProduction(Resources.ENERGY) >= 2;
+    return player.production.energy >= 2;
   }
 
   public produce(player: Player) {
-    const tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
-    player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags), {log: true});
+    const tags: Array<Tag> = [Tag.VENUS, Tag.EARTH];
+    player.production.add(Resources.ENERGY, -2);
+    player.production.add(Resources.MEGACREDITS, player.tags.multipleCount(tags), {log: true});
   }
 
   public play(player: Player) {

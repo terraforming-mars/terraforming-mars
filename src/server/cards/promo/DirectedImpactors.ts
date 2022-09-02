@@ -1,25 +1,25 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard, ICard} from '../ICard';
+import {IActionCard, ICard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {LogHelper} from '../../LogHelper';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class DirectedImpactors extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class DirectedImpactors extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DIRECTED_IMPACTORS,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 8,
       resourceType: CardResource.ASTEROID,
 
@@ -79,7 +79,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
   }
 
   private addResource(player: Player, asteroidCards: ICard[]) {
-    player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
 
     if (asteroidCards.length === 1) {
       player.addResourceTo(this, {log: true});

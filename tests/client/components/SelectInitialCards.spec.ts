@@ -1,4 +1,4 @@
-import {mount} from '@vue/test-utils';
+import {mount, Wrapper} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
@@ -18,19 +18,25 @@ describe('SelectInitialCards', function() {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS]);
     expect(component).not.is.undefined;
 
+    const button = getButton(component);
+    expect(button.attributes().disabled).eq('disabled');
+
     const selectCards = component.findAllComponents({name: 'select-card'});
     expect(selectCards.length).to.eq(2);
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+
+    await component.vm.$nextTick();
+    expect(button.attributes().disabled).is.undefined;
+
     selectCards.at(1).vm.$emit('cardschanged', [CardName.ANTS]);
-    component.vm.$nextTick();
-    const buttons = component.findAllComponents({name: 'Button'});
-    await buttons.at(0).findAllComponents({
-      name: 'button',
-    }).at(0).trigger('click');
+    await component.vm.$nextTick();
+
+    await button.trigger('click');
+
     expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ANTS]]);
   });
 
-  it('saves data with prelude', async function() {
+  it('Cannot save with only one prelude', async function() {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS], [CardName.ALLIED_BANKS]);
     expect(component).not.is.undefined;
 
@@ -39,14 +45,42 @@ describe('SelectInitialCards', function() {
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
     selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS]);
     selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
-    component.vm.$nextTick();
-    const buttons = component.findAllComponents({name: 'Button'});
-    await buttons.at(0).findAllComponents({
-      name: 'button',
-    }).at(0).trigger('click');
-    expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ALLIED_BANKS], [CardName.ANTS]]);
+    await component.vm.$nextTick();
 
-    component.vm.$nextTick();
+    const button = getButton(component);
+    expect(button.attributes().disabled).eq('disabled');
+  });
+
+  it('saves data with prelude', async function() {
+    const component = createComponent(
+      [CardName.ECOLINE],
+      [CardName.ANTS],
+      [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+    expect(component).not.is.undefined;
+
+    const button = getButton(component);
+    expect(button.attributes().disabled).eq('disabled');
+
+    const selectCards = component.findAllComponents({name: 'select-card'});
+    expect(selectCards.length).to.eq(3);
+
+    selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+    await component.vm.$nextTick();
+    expect(button.attributes().disabled).eq('disabled');
+
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+
+    await component.vm.$nextTick();
+    expect(button.attributes().disabled).is.undefined;
+
+    selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
+    await component.vm.$nextTick();
+
+    await button.trigger('click');
+
+    expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP], [CardName.ANTS]]);
+
+    await component.vm.$nextTick();
     const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
     expect(confirmationDialog.$data.shown).is.false;
   });
@@ -55,35 +89,42 @@ describe('SelectInitialCards', function() {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS]);
     const selectCards = component.findAllComponents({name: 'select-card'});
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-    component.vm.$nextTick();
-    const buttons = component.findAllComponents({name: 'Button'});
-    await buttons.at(0).findAllComponents({
-      name: 'button',
-    }).at(0).trigger('click');
+    await component.vm.$nextTick();
+
+    const button = getButton(component);
+    await button.trigger('click');
+
     expect(savedData).is.empty;
 
-    component.vm.$nextTick();
+    await component.vm.$nextTick();
     const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
     expect(confirmationDialog.$data.shown).is.true;
   });
 
   it('shows error when prelude cards are selected but not project cards', async function() {
-    const component = createComponent([CardName.ECOLINE], [CardName.ANTS], [CardName.ALLIED_BANKS]);
+    const component = createComponent(
+      [CardName.ECOLINE],
+      [CardName.ANTS],
+      [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+
     const selectCards = component.findAllComponents({name: 'select-card'});
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS]);
-    component.vm.$nextTick();
-    const buttons = component.findAllComponents({name: 'Button'});
-    await buttons.at(0).findAllComponents({
-      name: 'button',
-    }).at(0).trigger('click');
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+    await component.vm.$nextTick();
+    const button = getButton(component);
+    await button.trigger('click');
     expect(savedData).is.empty;
 
-    component.vm.$nextTick();
+    await component.vm.$nextTick();
     const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
     expect(confirmationDialog.$data.shown).is.true;
   });
 });
+
+function getButton(component: Wrapper<SelectInitialCards>) {
+  const button = component.findAllComponents({name: 'Button'}).at(0);
+  return button.findAllComponents({name: 'button'}).at(0);
+}
 
 function createComponent(corpCards: Array<CardName>, projectCards: Array<CardName>, preludeCards?: Array<CardName>) {
   const toObject = (cards: Array<CardName>) => cards.map((name) => {
@@ -109,6 +150,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
     propsData: {
       playerView: {
         id: 'foo',
+        dealtCorporationCards: [],
         thisPlayer: {actionsThisGeneration: []},
       },
       playerinput: {

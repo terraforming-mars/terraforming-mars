@@ -15,7 +15,7 @@ describe('DuskLaserMining', function() {
   });
 
   it('Can not play if not enough science tags', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -26,12 +26,12 @@ describe('DuskLaserMining', function() {
 
   it('Should play', function() {
     player.playedCards.push(new Research());
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.titanium).to.eq(1);
     expect(player.titanium).to.eq(4);
   });
 });

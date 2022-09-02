@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class GalileanWaystation extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 15,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.GALILEAN_WAYSTATION,
       cardType: CardType.AUTOMATED,
       victoryPoints: 1,
@@ -29,9 +29,9 @@ export class GalileanWaystation extends Card implements IProjectCard {
 
   public play(player: Player) {
     const amount = player.game.getPlayers()
-      .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN, player.id === aplayer.id ? 'default' : 'raw'))
+      .map((aplayer) => aplayer.tags.count(Tag.JOVIAN, player.id === aplayer.id ? 'default' : 'raw'))
       .reduce((a, c) => a + c, 0);
-    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
+    player.production.add(Resources.MEGACREDITS, amount, {log: true});
     return undefined;
   }
 }

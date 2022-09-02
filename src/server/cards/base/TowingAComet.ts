@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -12,7 +12,7 @@ export class TowingAComet extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.TOWING_A_COMET,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 23,
       tr: {oxygen: 1, oceans: 1},
 

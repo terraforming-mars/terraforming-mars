@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -11,12 +11,12 @@ import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class JetStreamMicroscrappers extends Card implements IActionCard, IResourceCard {
+export class JetStreamMicroscrappers extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.JET_STREAM_MICROSCRAPPERS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 12,
       resourceType: CardResource.FLOATER,
 
@@ -34,7 +34,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
       },
     });
   }
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;
@@ -76,8 +76,8 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
 
   private spendResource(player: Player) {
     player.removeResourceFrom(this, 2);
-    player.game.increaseVenusScaleLevel(player, 1);
-    LogHelper.logVenusIncrease( player, 1);
+    const actual = player.game.increaseVenusScaleLevel(player, 1);
+    LogHelper.logVenusIncrease(player, actual);
     return undefined;
   }
 }

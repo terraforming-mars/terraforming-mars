@@ -9,7 +9,7 @@ import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
 import {Unity} from '../../../src/server/turmoil/parties/Unity';
 import {Scientists} from '../../../src/server/turmoil/parties/Scientists';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {CardName} from '../../../src/common/cards/CardName';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 
@@ -48,7 +48,7 @@ describe('PublicSponsoredGrant', function() {
     expect(player2.megaCredits).eq(0);
     expect(player3.megaCredits).eq(0);
 
-    expect(options.options[0].title).eq(Tags.BUILDING);
+    expect(options.options[0].title).eq(Tag.BUILDING);
     expect(player.cardsInHand).is.empty;
 
     const scienceCard = new SearchForLife();

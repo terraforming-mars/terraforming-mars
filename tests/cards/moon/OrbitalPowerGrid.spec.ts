@@ -4,7 +4,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OrbitalPowerGrid} from '../../../src/server/cards/moon/OrbitalPowerGrid';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
@@ -28,7 +27,7 @@ describe('OrbitalPowerGrid', () => {
   });
 
   it('play', () => {
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
 
     const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
     colonySpaces[0].tile = {tileType: TileType.CITY};
@@ -36,11 +35,11 @@ describe('OrbitalPowerGrid', () => {
 
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).eq(2);
+    expect(player.production.energy).eq(2);
   });
 
   it('play - ignore cities on mars', () => {
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
 
     const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
     colonySpaces[0].tile = {tileType: TileType.CITY};
@@ -53,7 +52,7 @@ describe('OrbitalPowerGrid', () => {
 
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).eq(2);
+    expect(player.production.energy).eq(2);
   });
 });
 

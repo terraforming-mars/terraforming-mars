@@ -1,14 +1,14 @@
-// Common code for SelectHowToPay and SelectHowToPayForProjectCard
+// Common code for SelectPayment and SelectProjectCardToPlay
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {DATA_VALUE, SEED_VALUE} from '@/common/constants';
 import {CardResource} from '@/common/CardResource';
 
-export interface SelectHowToPayModel {
+export interface SelectPaymentModel {
     card?: CardModel;
     cost: number;
     heat: number;
@@ -23,23 +23,23 @@ export interface SelectHowToPayModel {
     data?: number;
 }
 
-export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
+export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
   cardName: CardName;
   card: CardModel;
   cards: Array<CardModel>;
-  tags: Array<Tags>
+  tags: Array<Tag>
   science: number;
   seeds: number;
   available: Units;
 }
 
-export interface PaymentWidgetModel extends SelectHowToPayModel {
+export interface PaymentWidgetModel extends SelectPaymentModel {
   cardName?: CardName;
   card?: CardModel;
   cards?: Array<CardModel>;
-  tags?: Array<Tags>;
+  tags?: Array<Tag>;
   available?: Units;
-  $data: SelectHowToPayModel | SelectHowToPayForProjectCardModel;
+  $data: SelectPaymentModel | SelectProjectCardToPlayModel;
   playerView: PlayerViewModel;
   playerinput: PlayerInputModel;
 }
@@ -54,7 +54,7 @@ export const PaymentWidgetMixin = {
     // Please don't copy this pattern. This
     // is being used as an interim solution
     // until there is better typing on the
-    // SelectHowToPay components.
+    // SelectPayment components.
     asModel(): PaymentWidgetModel {
       return this as unknown as PaymentWidgetModel;
     },

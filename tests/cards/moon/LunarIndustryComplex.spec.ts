@@ -6,7 +6,6 @@ import {LunarIndustryComplex} from '../../../src/server/cards/moon/LunarIndustry
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {Units} from '../../../src/common/Units';
-import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -36,12 +35,13 @@ describe('LunarIndustryComplex', () => {
   });
 
   it('play', () => {
-    player.setProductionForTest(Units.EMPTY);
+    player.production.override(Units.EMPTY);
     expect(moonData.miningRate).eq(0);
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 2;
 
-    card.play(player);
+    player.simplePlay(card);
+
     const placeMineTile = game.deferredActions.pop() as PlaceMoonMineTile;
     placeMineTile.execute()!.cb(moonData.moon.getSpace('m02'));
 
@@ -49,10 +49,10 @@ describe('LunarIndustryComplex', () => {
     expect(player.getTerraformRating()).eq(15);
 
     expect(player.titanium).eq(0);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
-    expect(player.getProduction(Resources.TITANIUM)).eq(1);
-    expect(player.getProduction(Resources.ENERGY)).eq(2);
-    expect(player.getProduction(Resources.HEAT)).eq(1);
+    expect(player.production.steel).eq(1);
+    expect(player.production.titanium).eq(1);
+    expect(player.production.energy).eq(2);
+    expect(player.production.heat).eq(1);
   });
 });
 

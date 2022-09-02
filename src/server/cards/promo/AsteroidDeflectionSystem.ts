@@ -1,29 +1,27 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
-import {Card} from '../Card';
+import {IActionCard} from '../ICard';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Units} from '../../../common/Units';
 import {played} from '../Options';
 
-export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class AsteroidDeflectionSystem extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ASTEROID_DEFLECTION_SYSTEM,
-      tags: [Tags.SPACE, Tags.EARTH, Tags.BUILDING],
+      tags: [Tag.SPACE, Tag.EARTH, Tag.BUILDING],
       cost: 13,
 
       resourceType: CardResource.ASTEROID,
       victoryPoints: VictoryPoints.resource(1, 1),
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
 
       metadata: {
         cardNumber: 'X14',
@@ -42,22 +40,13 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
   }
   public override resourceCount = 0;
 
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
-    return undefined;
-  }
-
   public canAct(): boolean {
     return true;
   }
 
   public action(player: Player) {
     const topCard = player.game.dealer.dealCard(player.game);
-    if (topCard.tags.includes(Tags.SPACE)) player.addResourceTo(this);
+    if (topCard.tags.includes(Tag.SPACE)) player.addResourceTo(this);
     player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
     player.game.dealer.discard(topCard);
     return undefined;

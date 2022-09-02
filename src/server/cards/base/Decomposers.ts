@@ -1,23 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
 
-export class Decomposers extends Card implements IProjectCard, IResourceCard {
+export class Decomposers extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DECOMPOSERS,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 5,
 
       resourceType: CardResource.MICROBE,
@@ -39,9 +38,9 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
+    player.addResourceTo(this, card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length);
   }
   public play(player: Player) {
     // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts

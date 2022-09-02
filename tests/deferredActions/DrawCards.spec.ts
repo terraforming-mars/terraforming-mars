@@ -7,7 +7,7 @@ import {AICentral} from '../../src/server/cards/base/AICentral';
 import {Asteroid} from '../../src/server/cards/base/Asteroid';
 import {CapitalAres} from '../../src/server/cards/ares/CapitalAres';
 import {CardType} from '../../src/common/cards/CardType';
-import {Tags} from '../../src/common/cards/Tags';
+import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Dealer} from '../../src/server/Dealer';
 import {cast} from '../TestingUtils';
@@ -44,17 +44,17 @@ describe('DrawCards', function() {
   });
 
   it('draws 3 special', function() {
-    DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tags.SPACE}).execute();
+    DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tag.SPACE}).execute();
     expect(player.cardsInHand).has.length(3);
-    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.SPACE) && card.cardType === CardType.ACTIVE))
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SPACE) && card.cardType === CardType.ACTIVE))
       .has.length(3);
   });
 
   it('draws 2 from 4', function() {
     const action = cast(DrawCards.keepSome(player, 4, {keepMax: 2}).execute(), SelectCard);
-    expect(action!.config.min).to.eq(2);
-    expect(action!.config.max).to.eq(2);
-    action!.cb([action!.cards[0], action!.cards[2]]);
+    expect(action.config.min).to.eq(2);
+    expect(action.config.max).to.eq(2);
+    action.cb([action.cards[0], action.cards[2]]);
     expect(player.cardsInHand).has.length(2);
     expect(dealer.discarded).has.length(2);
   });
@@ -62,9 +62,9 @@ describe('DrawCards', function() {
   it('buys 1', function() {
     player.megaCredits = 3;
     const action = cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), SelectCard);
-    expect(action!.config.min).to.eq(0);
-    expect(action!.config.max).to.eq(1);
-    action!.cb([action!.cards[0]]);
+    expect(action.config.min).to.eq(0);
+    expect(action.config.max).to.eq(1);
+    action.cb([action.cards[0]]);
     player.game.deferredActions.runNext();
     expect(player.cardsInHand).has.length(1);
     expect(dealer.discarded).has.length(0);
@@ -74,9 +74,9 @@ describe('DrawCards', function() {
   it('cannot buy', function() {
     player.megaCredits = 2;
     const action = cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), SelectCard);
-    expect(action!.config.min).to.eq(0);
-    expect(action!.config.max).to.eq(0);
-    action!.cb([]);
+    expect(action.config.min).to.eq(0);
+    expect(action.config.max).to.eq(0);
+    action.cb([]);
     expect(player.cardsInHand).has.length(0);
     expect(dealer.discarded).has.length(1);
     expect(player.megaCredits).to.eq(2);

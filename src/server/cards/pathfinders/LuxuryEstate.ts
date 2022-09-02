@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -15,7 +15,7 @@ export class LuxuryEstate extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.LUXURY_ESTATE,
       cost: 12,
-      tags: [Tags.EARTH, Tags.MARS, Tags.BUILDING],
+      tags: [Tag.EARTH, Tag.MARS, Tag.BUILDING],
       requirements: CardRequirements.builder((b) => b.oxygen(7)),
 
       metadata: {

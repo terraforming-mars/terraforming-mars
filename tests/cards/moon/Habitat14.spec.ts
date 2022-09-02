@@ -3,7 +3,6 @@ import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
-import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -23,32 +22,32 @@ describe('Habitat14', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 0;
-    player.setProductionForTest({megacredits: -4, energy: 1});
+    player.production.override({megacredits: -4, energy: 1});
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
-    player.setProductionForTest({megacredits: -5, energy: 1});
+    player.production.override({megacredits: -5, energy: 1});
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
-    player.setProductionForTest({megacredits: -4, energy: 0});
+    player.production.override({megacredits: -4, energy: 0});
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
-    player.setProductionForTest({megacredits: -4, energy: 1});
+    player.production.override({megacredits: -4, energy: 1});
     expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.titanium = 1;
-    player.setProductionForTest({megacredits: 1, energy: 1});
+    player.production.override({megacredits: 1, energy: 1});
     expect(player.getTerraformRating()).eq(14);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player.production.energy).eq(0);
 
     expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
   });

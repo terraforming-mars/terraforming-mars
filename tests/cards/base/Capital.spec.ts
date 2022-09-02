@@ -23,20 +23,20 @@ describe('Capital', () => {
 
   it('Cannot play without 2 energy production', () => {
     maxOutOceans(player, 4);
-    player.addProduction(Resources.ENERGY, 1);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.production.add(Resources.ENERGY, 1);
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Cannot play if oceans requirement not met', () => {
     maxOutOceans(player, 3);
-    player.addProduction(Resources.ENERGY, 2);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    player.production.add(Resources.ENERGY, 2);
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     maxOutOceans(player, 4);
-    player.addProduction(Resources.ENERGY, 2);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    player.production.add(Resources.ENERGY, 2);
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
@@ -44,12 +44,12 @@ describe('Capital', () => {
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
-    player.addProduction(Resources.ENERGY, 2);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    player.production.add(Resources.ENERGY, 2);
+    expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), SelectSpace);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(5);
 
     const citySpace = game.board.getAdjacentSpaces(oceanSpaces[0])[1];
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);

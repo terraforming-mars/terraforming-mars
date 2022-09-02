@@ -1,5 +1,5 @@
-import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
+import {Card2} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
 import {Phase} from '../../../common/Phase';
@@ -10,18 +10,17 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
 
-export class MiningGuild extends Card implements ICorporationCard {
+export class MiningGuild extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.MINING_GUILD,
-      tags: [Tags.BUILDING, Tags.BUILDING],
+      tags: [Tag.BUILDING, Tag.BUILDING],
       startingMegaCredits: 30,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         cardNumber: 'R24',
@@ -57,9 +56,8 @@ export class MiningGuild extends Card implements ICorporationCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel = 5;
-    player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
 }

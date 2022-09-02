@@ -4,7 +4,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusSolarArrays} from '../../../src/server/cards/moon/CopernicusSolarArrays';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -33,10 +32,10 @@ describe('CopernicusSolarArrays', () => {
     player.titanium = 1;
     player.heat = 0;
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.heat).eq(2);
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.energy).eq(1);
   });
 });

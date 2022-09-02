@@ -304,7 +304,7 @@ export class Turmoil {
       this.delegateReserve.push(this.chairman);
     }
 
-    this.chairman = this.rulingParty.partyLeader || 'NEUTRAL';
+    const newChariman = this.rulingParty.partyLeader || 'NEUTRAL';
 
     if (this.rulingParty.partyLeader !== undefined) {
       const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader);
@@ -318,7 +318,15 @@ export class Turmoil {
     this.rulingParty.partyLeader = undefined;
     this.rulingParty.delegates = [];
 
-    PoliticalAgendas.setNextAgenda(this, game);
+    this.setNewChairman(newChariman, game, /* setAgenda*/ true);
+  }
+
+  public setNewChairman(newChairman : PlayerId | NeutralPlayer, game: Game, setAgenda: boolean = true) {
+    this.chairman = newChairman;
+    if (setAgenda) {
+      PoliticalAgendas.setNextAgenda(this, game);
+    }
+
 
     // Finally, award Chairman TR
     if (this.chairman !== 'NEUTRAL') {
@@ -384,7 +392,7 @@ export class Turmoil {
   }
 
   public getPlayerInfluence(player: Player) {
-    let influence: number = 0;
+    let influence = 0;
     if (this.chairman !== undefined && this.chairman === player.id) influence++;
 
     const dominantParty : IParty = this.dominantParty;
@@ -455,7 +463,7 @@ export class Turmoil {
 
   // Get Victory Points
   public getPlayerVictoryPoints(player: Player): number {
-    let victory: number = 0;
+    let victory = 0;
     if (this.chairman !== undefined && this.chairman === player.id) victory++;
     this.parties.forEach(function(party) {
       if (party.partyLeader === player.id) {

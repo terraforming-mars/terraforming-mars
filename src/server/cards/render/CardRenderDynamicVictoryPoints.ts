@@ -3,7 +3,7 @@ import {ICardRenderDynamicVictoryPoints} from '../../../common/cards/render/ICar
 import {CardRenderItem} from './CardRenderItem';
 import {Size} from '../../../common/cards/render/Size';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 const RESOURCE_TO_ITEM_TYPE = new Map([
   [CardResource.MICROBE, CardRenderItemType.MICROBES],
@@ -32,11 +32,11 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
     }
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(itemType), points, target);
   }
-  public static tag(type: Tags, points: number, target: number): CardRenderDynamicVictoryPoints {
-    const map = new Map<Tags, CardRenderItemType>([
-      [Tags.JOVIAN, CardRenderItemType.JOVIAN],
-      [Tags.MOON, CardRenderItemType.MOON],
-      [Tags.VENUS, CardRenderItemType.VENUS],
+  public static tag(type: Tag, points: number, target: number): CardRenderDynamicVictoryPoints {
+    const map = new Map<Tag, CardRenderItemType>([
+      [Tag.JOVIAN, CardRenderItemType.JOVIAN],
+      [Tag.MOON, CardRenderItemType.MOON],
+      [Tag.VENUS, CardRenderItemType.VENUS],
     ]);
     const itemType = map.get(type);
     if (itemType === undefined) {

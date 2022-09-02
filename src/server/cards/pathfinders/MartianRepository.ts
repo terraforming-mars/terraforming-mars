@@ -1,26 +1,24 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
-import {Resources} from '../../../common/Resources';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {Units} from '../../../common/Units';
 import {ICard} from '../ICard';
 import {played} from '../Options';
 
-export class MartianRepository extends Card implements IProjectCard {
+export class MartianRepository extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.MARTIAN_REPOSITORY,
       cost: 12,
-      tags: [Tags.MARS, Tags.MARS, Tags.BUILDING],
+      tags: [Tag.MARS, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
       victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
@@ -39,16 +37,7 @@ export class MartianRepository extends Card implements IProjectCard {
   public override resourceCount = 0;
 
   public onCardPlayed(player: Player, card: ICard) {
-    const qty = player.cardTagCount(card, Tags.SCIENCE) + player.cardTagCount(card, Tags. MARS);
+    const qty = player.tags.cardTagCount(card, Tag.SCIENCE) + player.tags.cardTagCount(card, Tag. MARS);
     if (qty > 0) player.addResourceTo(this, {qty, log: true});
-  }
-
-  public override canPlay(player: Player) {
-    return player.getProduction(Resources.ENERGY) > 0;
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
-    return undefined;
   }
 }

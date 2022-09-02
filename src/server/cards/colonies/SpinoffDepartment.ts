@@ -1,21 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {Units} from '../../../common/Units';
+import {Card2} from '../Card';
 
-export class SpinoffDepartment extends Card implements IProjectCard {
+export class SpinoffDepartment extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 10,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       name: CardName.SPINOFF_DEPARTMENT,
       cardType: CardType.ACTIVE,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'C41',
@@ -34,10 +32,5 @@ export class SpinoffDepartment extends Card implements IProjectCard {
     if (card.cost >= 20) {
       player.drawCard();
     }
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
-    return undefined;
   }
 }

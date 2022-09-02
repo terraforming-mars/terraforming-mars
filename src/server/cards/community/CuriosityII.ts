@@ -1,9 +1,8 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -11,21 +10,20 @@ import {Size} from '../../../common/cards/render/Size';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
-import {Units} from '../../../common/Units';
 
-export class CuriosityII extends Card implements ICorporationCard {
+export class CuriosityII extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.CURIOSITY_II,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.BUILDING],
       startingMegaCredits: 40,
-      productionBox: Units.of({steel: 2}),
+      productionBox: {steel: 2},
 
       metadata: {
         cardNumber: '',
@@ -59,17 +57,12 @@ export class CuriosityII extends Card implements ICorporationCard {
     }
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.STEEL, 2);
-    return undefined;
-  }
-
   private corpAction(player: Player) {
     if (!player.canAfford(2)) return undefined;
 
     return new OrOptions(
       new SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
-        player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
+        player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}));
         player.game.defer(DrawCards.keepAll(player));
         return undefined;
       }),

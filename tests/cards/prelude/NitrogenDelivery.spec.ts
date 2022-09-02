@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {NitrogenDelivery} from '../../../src/server/cards/prelude/NitrogenDelivery';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrogenDelivery', function() {
@@ -13,7 +12,7 @@ describe('NitrogenDelivery', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getTerraformRating()).to.eq(21);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(player.megaCredits).to.eq(5);
   });
 });

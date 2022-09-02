@@ -1,20 +1,19 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
 
 export class CoreMine extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.CORE_MINE,
-      tags: [Tags.MOON],
-      productionBox: Units.of({titanium: 1}),
+      tags: [Tag.MOON],
+      productionBox: {titanium: 1},
       metadata: {
         description: 'Place a mine tile on the Moon and raise the Mining Rate 1 step. Increase your titanium production 1 step.',
         cardNumber: '',
@@ -28,7 +27,7 @@ export class CoreMine extends PreludeCard implements IProjectCard {
   public tilesBuilt = [TileType.MOON_MINE];
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox, {log: true});
+    player.production.adjust(this.productionBox, {log: true});
     player.game.defer(new PlaceMoonMineTile(player));
     return undefined;
   }

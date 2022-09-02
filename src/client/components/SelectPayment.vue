@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
-import {HowToPay} from '@/common/inputs/HowToPay';
-import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
+import {Payment} from '@/common/inputs/Payment';
+import {PaymentWidgetMixin, SelectPaymentModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -9,7 +9,7 @@ import Button from '@/client/components/common/Button.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
-  name: 'SelectHowToPay',
+  name: 'SelectPayment',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
@@ -36,7 +36,7 @@ export default Vue.extend({
     Button,
   },
   data() {
-    const model: SelectHowToPayModel = {
+    const model: SelectPaymentModel = {
       cost: 0,
       heat: 0,
       megaCredits: 0,
@@ -141,7 +141,7 @@ export default Vue.extend({
     saveData() {
       const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat', 'megaCredits'];
 
-      const htp: HowToPay = {
+      const payment: Payment = {
         heat: this.$data.heat,
         megaCredits: this.$data.megaCredits,
         steel: this.$data.steel,
@@ -155,11 +155,11 @@ export default Vue.extend({
 
       let totalSpent = 0;
       for (const target of targets) {
-        if (htp[target] > this.getAmount(target)) {
+        if (payment[target] > this.getAmount(target)) {
           this.$data.warning = `You do not have enough ${target}`;
           return;
         }
-        totalSpent += htp[target] * this.getResourceRate(target);
+        totalSpent += payment[target] * this.getResourceRate(target);
       }
 
       const requiredAmt = this.playerinput.amount || 0;
@@ -175,14 +175,14 @@ export default Vue.extend({
       // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
       // from user when nothing is required. Can probably remove this if server only removes what is required.
       if (requiredAmt === 0) {
-        htp.heat = 0;
-        htp.megaCredits = 0;
+        payment.heat = 0;
+        payment.megaCredits = 0;
       }
 
       if (requiredAmt > 0 && totalSpent > requiredAmt) {
         const diff = totalSpent - requiredAmt;
         for (const target of targets) {
-          if (htp[target] && diff >= this.getResourceRate(target)) {
+          if (payment[target] && diff >= this.getResourceRate(target)) {
             this.$data.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -194,13 +194,13 @@ export default Vue.extend({
         const diff = totalSpent - requiredAmt;
 
         if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.onsave([[JSON.stringify(htp)]]);
+          this.onsave([[JSON.stringify(payment)]]);
         } else {
           this.$data.warning = 'Please adjust payment amount';
           return;
         }
       } else {
-        this.onsave([[JSON.stringify(htp)]]);
+        this.onsave([[JSON.stringify(payment)]]);
       }
     },
   },

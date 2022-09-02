@@ -22,5 +22,9 @@ export function newTestGame(count: number, customOptions?: Partial<GameOptions>,
 }
 
 export function getTestPlayer(game: Game, idx: number): TestPlayer {
-  return ((game as any).players[idx]) as TestPlayer;
+  return game.getPlayers()[idx] as TestPlayer;
+}
+
+export function getTestPlayers(game: Game): Array<TestPlayer> {
+  return game.getPlayers() as Array<TestPlayer>;
 }

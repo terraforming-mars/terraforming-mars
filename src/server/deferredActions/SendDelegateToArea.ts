@@ -2,7 +2,7 @@ import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
-import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {NeutralPlayer, Turmoil} from '../turmoil/Turmoil';
 import {PartyName} from '../../common/turmoil/PartyName';
 
@@ -59,7 +59,7 @@ export class SendDelegateToArea extends DeferredAction {
 
     const sendDelegate = new SelectPartyToSendDelegate(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
       if (this.options.cost) {
-        this.player.game.defer(new SelectHowToPayDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
+        this.player.game.defer(new SelectPaymentDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
       }
 
       const source = this.options.source || 'lobby';

@@ -25,24 +25,24 @@ describe('GreatEscarpmentConsortium', function() {
   });
 
   it('Can play if player has steel production', function() {
-    player.addProduction(Resources.STEEL, 1);
+    player.production.add(Resources.STEEL, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play - auto select if single target', function() {
-    player2.addProduction(Resources.STEEL, 1);
+    player2.production.add(Resources.STEEL, 1);
 
     card.play(player);
     runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
-    expect(player2.getProduction(Resources.STEEL)).to.eq(0);
+    expect(player.production.steel).to.eq(1);
+    expect(player2.production.steel).to.eq(0);
   });
 
   it('Should play - multiple targets', function() {
-    player.addProduction(Resources.STEEL, 1);
-    player2.addProduction(Resources.STEEL, 1);
+    player.production.add(Resources.STEEL, 1);
+    player2.production.add(Resources.STEEL, 1);
     card.play(player);
 
     runAllActions(game);
@@ -50,20 +50,20 @@ describe('GreatEscarpmentConsortium', function() {
     selectPlayer.cb(player2);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.STEEL)).to.eq(2);
-    expect(player2.getProduction(Resources.STEEL)).to.eq(0);
+    expect(player.production.steel).to.eq(2);
+    expect(player2.production.steel).to.eq(0);
   });
 
   it('Can play in solo - will not reduce own production', function() {
     const game = Game.newInstance('gameid', [player], player);
     player.popWaitingFor(); // Remove SelectInitialCards
-    player.addProduction(Resources.STEEL, 1);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    player.production.add(Resources.STEEL, 1);
+    expect(player.production.steel).to.eq(1);
 
     card.play(player);
     runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
-    expect(player.getProduction(Resources.STEEL)).to.eq(2); // should increase
+    expect(player.production.steel).to.eq(2); // should increase
   });
 });

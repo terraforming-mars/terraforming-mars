@@ -1,12 +1,12 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 
 export class Builder implements IMilestone {
-  public name: string = 'Builder';
-  public description: string = 'Having at least 8 building tags in play';
+  public readonly name = 'Builder';
+  public readonly description = 'Having at least 8 building tags in play';
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.BUILDING, 'milestone');
+    return player.tags.count(Tag.BUILDING, 'milestone');
   }
   public canClaim(player: Player): boolean {
     return this.getScore(player) >= 8;

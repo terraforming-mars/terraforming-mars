@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Ganymede} from '../../src/server/colonies/Ganymede';
 import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
-import {Resources} from '../../src/common/Resources';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
@@ -23,8 +22,8 @@ describe('Ganymede', function() {
 
   it('Should build', function() {
     ganymede.addColony(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-    expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
+    expect(player.production.plants).to.eq(1);
+    expect(player2.production.plants).to.eq(0);
   });
 
   it('Should trade', function() {
@@ -39,8 +38,8 @@ describe('Ganymede', function() {
     ganymede.trade(player2);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-    expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
+    expect(player.production.plants).to.eq(1);
+    expect(player2.production.plants).to.eq(0);
     expect(player.plants).to.eq(1);
     expect(player2.plants).to.eq(1);
   });

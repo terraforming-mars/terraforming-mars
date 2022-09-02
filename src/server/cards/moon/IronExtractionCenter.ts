@@ -1,11 +1,10 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class IronExtractionCenter extends MoonCard {
@@ -13,9 +12,9 @@ export class IronExtractionCenter extends MoonCard {
     super({
       name: CardName.IRON_EXTRACTION_CENTER,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 10,
-      reserveUnits: Units.of({titanium: 1}),
+      reserveUnits: {titanium: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.',
@@ -31,11 +30,10 @@ export class IronExtractionCenter extends MoonCard {
   public produce(player: Player) {
     const miningRate = MoonExpansion.moonData(player.game).miningRate;
     const productionIncrease = Math.floor(miningRate / 2);
-    player.addProduction(Resources.STEEL, productionIncrease, {log: true});
+    player.production.add(Resources.STEEL, productionIncrease, {log: true});
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     this.produce(player);
     return undefined;
   }

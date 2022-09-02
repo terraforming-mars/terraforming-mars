@@ -3,7 +3,7 @@ import {WaterImportFromEuropa} from '../../../src/server/cards/base/WaterImportF
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Player} from '../../../src/server/Player';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('WaterImportFromEuropa', function() {
@@ -34,11 +34,11 @@ describe('WaterImportFromEuropa', function() {
     const action = card.action(player);
     expect(action).is.undefined;
 
-    game.deferredActions.runNext(); // HowToPay
+    game.deferredActions.runNext(); // Payment
     expect(player.megaCredits).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectOcean = game.deferredActions.peek()!.execute() as SelectSpace;
+    const selectOcean = cast(game.deferredActions.peek()!.execute(), SelectSpace);
     selectOcean.cb(selectOcean.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });

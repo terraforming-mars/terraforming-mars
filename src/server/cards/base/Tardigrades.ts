@@ -1,20 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Tardigrades extends Card implements IProjectCard, IResourceCard {
+export class Tardigrades extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.TARDIGRADES,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 4,
 
       resourceType: CardResource.MICROBE,

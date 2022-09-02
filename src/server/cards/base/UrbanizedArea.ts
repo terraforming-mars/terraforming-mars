@@ -1,24 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
-export class UrbanizedArea extends Card implements IProjectCard {
+export class UrbanizedArea extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.URBANIZED_AREA,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 10,
-      productionBox: Units.of({energy: -1, megacredits: 2}),
+      productionBox: {energy: -1, megacredits: 2},
 
       metadata: {
         cardNumber: '120',
@@ -36,14 +34,12 @@ export class UrbanizedArea extends Card implements IProjectCard {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: Player): boolean {
+    return this.getAvailableSpaces(player).length > 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
       player.game.addCityTile(player, foundSpace.id);
-      player.addProduction(Resources.ENERGY, -1);
-      player.addProduction(Resources.MEGACREDITS, 2);
       return undefined;
     });
   }

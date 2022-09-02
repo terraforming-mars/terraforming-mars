@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,12 +12,12 @@ export class HeavyTaxation extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 3,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       name: CardName.HEAVY_TAXATION,
       cardType: CardType.AUTOMATED,
       victoryPoints: -1,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
       metadata: {
         cardNumber: 'C14',
         renderData: CardRenderer.builder((b) => {
@@ -29,7 +29,7 @@ export class HeavyTaxation extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.MEGACREDITS, 2);
     player.megaCredits += 4;
     return undefined;
   }

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
@@ -26,14 +26,14 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
     });
   }
 
-  public cloneTag: Tags = Tags.CLONE;
+  public cloneTag: Tag = Tag.CLONE;
 
-  public override get tags(): Array<Tags> {
+  public override get tags(): Array<Tag> {
     return [this.cloneTag];
   }
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+    player.production.adjust(this.productionBox);
     player.game.defer(
       new DeclareCloneTag(
         player,

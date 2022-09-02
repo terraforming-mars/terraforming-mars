@@ -30,12 +30,12 @@ describe('StagingStationBehemoth', () => {
 
   it('play', () => {
     moonData.logisticRate = 0;
-    expect(player.getFleetSize()).to.eq(1);
+    expect(player.colonies.getFleetSize()).to.eq(1);
 
     card.play(player);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getFleetSize()).to.eq(3);
+    expect(player.colonies.getFleetSize()).to.eq(3);
     expect(player.getTerraformRating()).eq(15);
   });
 });

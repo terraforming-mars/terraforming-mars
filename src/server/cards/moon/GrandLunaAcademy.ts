@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {digit, played} from '../Options';
@@ -12,7 +12,7 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
     super({
       name: CardName.GRAND_LUNA_ACADEMY,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 13,
 
       metadata: {
@@ -26,7 +26,7 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const tags = player.getTagCount(Tags.MOON);
+    const tags = player.tags.count(Tag.MOON);
     // Adding 1 so this tag is included in the count.
     const gain = Math.floor((tags + 1) / 2);
     player.drawCard(gain);

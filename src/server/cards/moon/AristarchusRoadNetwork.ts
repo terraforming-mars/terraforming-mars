@@ -2,10 +2,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -14,10 +13,10 @@ export class AristarchusRoadNetwork extends MoonCard {
     super({
       name: CardName.ARISTARCHUS_ROAD_NETWORK,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 15,
-      productionBox: Units.of({megacredits: 2}),
-      reserveUnits: Units.of({steel: 2}),
+      productionBox: {megacredits: 2},
+      reserveUnits: {steel: 2},
       tr: {moonLogistics: 1},
 
       metadata: {
@@ -34,8 +33,7 @@ export class AristarchusRoadNetwork extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));
     return undefined;
   }

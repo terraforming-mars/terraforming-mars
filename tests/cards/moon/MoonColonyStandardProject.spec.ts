@@ -2,12 +2,11 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
+import {cast, setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonColonyStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
-import {SelectHowToPayDeferred} from '../../../src/server/deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
@@ -45,31 +44,31 @@ describe('MoonColonyStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    let payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
+    let payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     expect(payAction.amount).eq(22);
 
     player.playedCards.push(new MooncrateBlockFactory());
     card.action(player);
-    payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
+    payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     expect(payAction.amount).eq(18);
   });
 
   it('act', () => {
     player.titanium = 3;
     expect(player.getTerraformRating()).eq(14);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
 
     card.action(player);
-    const payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
+    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     payAction.options.afterPay!();
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(1);
 
     expect(moonData.colonyRate).eq(0);
 
-    const placeTileAction = game.deferredActions.peek() as PlaceMoonColonyTile;
-    placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonColonyTile);
+    placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);

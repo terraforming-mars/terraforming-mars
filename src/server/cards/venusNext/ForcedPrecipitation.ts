@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -7,17 +7,17 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class ForcedPrecipitation extends Card implements IActionCard, IResourceCard {
+export class ForcedPrecipitation extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.FORCED_PRECIPITATION,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 8,
       resourceType: CardResource.FLOATER,
 
@@ -35,7 +35,7 @@ export class ForcedPrecipitation extends Card implements IActionCard, IResourceC
       },
     });
   }
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;
@@ -69,15 +69,15 @@ export class ForcedPrecipitation extends Card implements IActionCard, IResourceC
   }
 
   private addResource(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}));
     player.addResourceTo(this, {log: true});
     return undefined;
   }
 
   private spendResource(player: Player) {
     player.removeResourceFrom(this, 2);
-    player.game.increaseVenusScaleLevel(player, 1);
-    LogHelper.logVenusIncrease( player, 1);
+    const actual = player.game.increaseVenusScaleLevel(player, 1);
+    LogHelper.logVenusIncrease(player, actual);
     return undefined;
   }
 }

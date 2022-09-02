@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
@@ -17,7 +17,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
     super({
       cardType: CardType.CORPORATION,
       name: CardName.NANOTECH_INDUSTRIES,
-      tags: [Tags.SCIENCE, Tags.MOON],
+      tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 42,
       resourceType: CardResource.SCIENCE,
       initialActionText: 'Draw 3 cards and keep 2.',

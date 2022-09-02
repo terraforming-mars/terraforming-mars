@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
@@ -32,6 +31,6 @@ describe('LocalShading', function() {
     expect(orOptions instanceof OrOptions).is.true;
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

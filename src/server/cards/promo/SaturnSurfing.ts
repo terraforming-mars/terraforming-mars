@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -10,13 +10,13 @@ import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.SATURN_SURFING,
       cost: 13,
-      tags: [Tags.JOVIAN, Tags.EARTH],
+      tags: [Tag.JOVIAN, Tag.EARTH],
       resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 
@@ -37,7 +37,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
   public override resourceCount = 0;
 
   public play(player: Player) {
-    this.resourceCount = player.getTagCount(Tags.EARTH) + 1;
+    this.resourceCount = player.tags.count(Tag.EARTH) + 1;
     return undefined;
   }
 

@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,13 +11,14 @@ import {IProjectCard} from '../IProjectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
+import {LogHelper} from '../../LogHelper';
 
 export class Ambient extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.AMBIENT,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       startingMegaCredits: 38,
 
       initialActionText: 'Raise the Venus scale 2 steps.',
@@ -45,7 +46,8 @@ export class Ambient extends Card implements ICorporationCard {
   }
 
   public initialAction(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 2);
+    const actual = player.game.increaseVenusScaleLevel(player, 2);
+    LogHelper.logVenusIncrease(player, actual);
     return undefined;
   }
 
@@ -55,8 +57,8 @@ export class Ambient extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (player.isCorporation(this.name) && card.tags.includes(Tags.VENUS)) {
-      player.addProduction(Resources.HEAT, 1, {log: true});
+    if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
+      player.production.add(Resources.HEAT, 1, {log: true});
     }
   }
 

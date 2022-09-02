@@ -1,19 +1,19 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class AquiferTurbines extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.AQUIFER_TURBINES,
-      tags: [Tags.ENERGY],
+      tags: [Tag.ENERGY],
 
-      productionBox: Units.of({energy: 2}),
+      productionBox: {energy: 2},
       startingMegacredits: -3,
 
       metadata: {
@@ -30,9 +30,8 @@ export class AquiferTurbines extends PreludeCard {
     return player.canAfford(3);
   }
   public play(player: Player) {
-    player.adjustProduction(this.productionBox);
     player.game.defer(new PlaceOceanTile(player));
-    player.game.defer(new SelectHowToPayDeferred(player, 3));
+    player.game.defer(new SelectPaymentDeferred(player, 3));
     return undefined;
   }
 }

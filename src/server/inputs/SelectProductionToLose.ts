@@ -24,7 +24,7 @@ export class SelectProductionToLose implements PlayerInput {
     if (!Units.keys.every((k) => units[k] >= 0)) {
       throw new Error('All units must be positive');
     }
-    if (!player.canAdjustProduction(Units.negative(units))) {
+    if (!player.production.canAdjust(Units.negative(units))) {
       throw new Error('You do not have those units');
     }
     this.cb(units);

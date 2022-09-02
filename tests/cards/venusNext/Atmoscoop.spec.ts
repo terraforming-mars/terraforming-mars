@@ -71,7 +71,7 @@ describe('Atmoscoop', function() {
     expect(game.getVenusScaleLevel()).to.eq(4);
 
     // Then the floaters
-    const selectCard = orOptions.cb() as SelectCard<ICard>;
+    const selectCard = cast(orOptions.cb(), SelectCard<ICard>);
     selectCard.cb([dirigibles]);
     expect(dirigibles.resourceCount).to.eq(2);
     selectCard.cb([floatingHabs]);
@@ -102,8 +102,7 @@ describe('Atmoscoop', function() {
     player.playedCards.push(dirigibles, floatingHabs);
     (game as any).temperature = constants.MAX_TEMPERATURE;
 
-    const action = card.play(player) as SelectCard<ICard>;
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<ICard>);
 
     action.cb([dirigibles]);
     expect(game.getVenusScaleLevel()).to.eq(4);
@@ -115,8 +114,7 @@ describe('Atmoscoop', function() {
     (game as any).venusScaleLevel = constants.MAX_VENUS_SCALE;
     (game as any).temperature = constants.MAX_TEMPERATURE;
 
-    const action = card.play(player) as SelectCard<ICard>;
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<ICard>);
     action.cb([dirigibles]);
     expect(dirigibles.resourceCount).to.eq(2);
   });

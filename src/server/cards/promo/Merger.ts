@@ -5,12 +5,11 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Size} from '../../../common/cards/render/Size';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Dealer} from '../../Dealer';
 import {LogHelper} from '../../LogHelper';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CARD_COST} from '../../../common/constants';
-import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class Merger extends PreludeCard {
   constructor() {
@@ -28,7 +27,7 @@ export class Merger extends PreludeCard {
     });
   }
 
-  private static mergerCost = 42;
+  public static readonly mergerCost = 42;
 
   public play(player: Player) {
     const game = player.game;
@@ -42,11 +41,11 @@ export class Merger extends PreludeCard {
     }
     game.defer(new SimpleDeferredAction(player, () => {
       return new SelectCard('Choose corporation card to play', 'Play', availableCorps, ([card]) => {
-        Merger.playSecondCorporationCard(player, card);
+        player.playAdditionalCorporationCard(card);
         return undefined;
       });
     }));
-    game.defer(new SelectHowToPayDeferred(player, Merger.mergerCost, {title: 'Select how to pay for prelude'}));
+    game.defer(new SelectPaymentDeferred(player, Merger.mergerCost, {title: 'Select how to pay for prelude'}));
     return undefined;
   }
 
@@ -68,27 +67,9 @@ export class Merger extends PreludeCard {
     return cards;
   }
 
-  public static playSecondCorporationCard(player: Player, corporationCard: ICorporationCard) {
-    player.corporations.push(corporationCard);
-    player.megaCredits += corporationCard.startingMegaCredits;
-    Merger.setCardCostIfNeeded(player, corporationCard);
-    corporationCard.play(player);
-    if (corporationCard.initialAction !== undefined) {
-      player.pendingInitialActions.push(corporationCard);
-    }
-    player.game.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
-    player.game.triggerOtherCorpEffects(player, corporationCard);
-    ColoniesHandler.onCardPlayed(player.game, corporationCard);
-  }
-
-  private static setCardCostIfNeeded(player: Player, corporationCard: ICorporationCard) {
-    const corpNames = player.corporations.map((corp) => corp.name);
-    if (corporationCard.cardCost !== undefined) {
-      if (corpNames.includes(CardName.TERRALABS_RESEARCH) && corpNames.includes(CardName.POLYPHEMOS)) {
-        player.cardCost = CARD_COST;
-      } else {
-        player.cardCost = corporationCard.cardCost;
-      }
-    }
+  public static setCardCost(player: Player) {
+    return player.corporations
+      .map((card) => (card.cardCost ?? CARD_COST) - CARD_COST) // Convert every card cost to delta from zero. (e.g. -2, 0, +2)
+      .reduce((prev, curr) => prev + curr, CARD_COST); // Add them up, and add CARD_COST back.
   }
 }

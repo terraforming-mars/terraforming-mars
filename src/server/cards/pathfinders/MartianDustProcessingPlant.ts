@@ -1,20 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
-import {Units} from '../../../common/Units';
+import {Tag} from '../../../common/cards/Tag';
 
-export class MartianDustProcessingPlant extends Card implements IProjectCard {
+export class MartianDustProcessingPlant extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MARTIAN_DUST_PROCESSING_PLANT,
       cost: 15,
-      tags: [Tags.MARS, Tags.BUILDING],
-      productionBox: Units.of({energy: -1, steel: 2}),
+      tags: [Tag.MARS, Tag.BUILDING],
+      productionBox: {energy: -1, steel: 2},
       tr: {tr: 1},
       victoryPoints: 1,
 
@@ -29,14 +28,8 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
-    return player.canAdjustProduction(this.productionBox);
-  }
-
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRating();
     return undefined;
   }
 }
-

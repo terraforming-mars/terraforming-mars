@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessEmpire', function() {
@@ -18,18 +17,18 @@ describe('BusinessEmpire', function() {
 
   it('Can not play', function() {
     player.megaCredits = 5;
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.megaCredits = 6;
-    expect(card.canPlay(player)).is.true;
-    card.play(player);
+    expect(player.simpleCanPlay(card)).is.true;
+    player.simplePlay(card);
 
-    // SelectHowToPayDeferred
+    // SelectPaymentDeferred
     game.deferredActions.runNext();
 
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.production.megacredits).to.eq(6);
   });
 });

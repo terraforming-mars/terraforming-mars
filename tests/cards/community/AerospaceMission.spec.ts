@@ -8,8 +8,7 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerospaceMission', function() {
@@ -37,16 +36,16 @@ describe('AerospaceMission', function() {
     expect(game.colonies[1].name).to.eq(ColonyName.CERES);
 
     // Build the first free on Callisto
-    const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
+    const selectColony = cast(game.deferredActions.peek()!.execute(), SelectColony);
     game.deferredActions.pop();
     selectColony.cb(selectColony.colonies[0]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
 
     // Build the second free on Ceres
-    const selectColony2 = game.deferredActions.peek()!.execute() as SelectColony;
+    const selectColony2 = cast(game.deferredActions.peek()!.execute(), SelectColony);
     game.deferredActions.pop();
     selectColony2.cb(selectColony2.colonies[0]);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
 
     // Check that we built two colonies
     const builtColonies = game.colonies.filter((colony) => colony.isActive && colony.colonies.length > 0);

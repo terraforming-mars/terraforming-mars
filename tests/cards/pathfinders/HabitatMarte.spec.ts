@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {fakeCard, runAllActions} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
 import {InterstellarColonyShip} from '../../../src/server/cards/base/InterstellarColonyShip';
@@ -22,28 +22,28 @@ describe('HabitatMarte', () => {
 
   it('tag count', () => {
     player.setCorporationForTest(card);
-    expect(player.getTagCount(Tags.SCIENCE, 'raw')).eq(0);
-    expect(player.getTagCount(Tags.SCIENCE)).eq(1);
+    expect(player.tags.count(Tag.SCIENCE, 'raw')).eq(0);
+    expect(player.tags.count(Tag.SCIENCE)).eq(1);
   });
 
   it('card cost', () => {
     player.playedCards.push(new ValleyTrust()); // -2 per science tag (This is hilarious because Valley Trust is actually a corp card.)
     player.setCorporationForTest(undefined);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS]}))).eq(10);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.SCIENCE]}))).eq(8);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS, Tags.MARS]}))).eq(10);
+    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS]}))).eq(10);
+    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.SCIENCE]}))).eq(8);
+    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS, Tag.MARS]}))).eq(10);
 
     player.setCorporationForTest(card);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS]}))).eq(8);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.SCIENCE]}))).eq(8);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tags.MARS, Tags.MARS]}))).eq(6);
+    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS]}))).eq(8);
+    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.SCIENCE]}))).eq(8);
+    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS, Tag.MARS]}))).eq(6);
   });
 
   it('card requirements', () => {
     player.setCorporationForTest(undefined);
-    const fourScienceTags = fakeCard({tags: [Tags.SCIENCE, Tags.SCIENCE, Tags.SCIENCE, Tags.SCIENCE]});
-    const oneMarsTag = fakeCard({tags: [Tags.MARS]});
-    const fiveMarsTags = fakeCard({tags: [Tags.MARS, Tags.MARS, Tags.MARS, Tags.MARS, Tags.MARS]});
+    const fourScienceTags = fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]});
+    const oneMarsTag = fakeCard({tags: [Tag.MARS]});
+    const fiveMarsTags = fakeCard({tags: [Tag.MARS, Tag.MARS, Tag.MARS, Tag.MARS, Tag.MARS]});
 
     // Requires five science tags
     const interstellar = new InterstellarColonyShip();
@@ -70,7 +70,7 @@ describe('HabitatMarte', () => {
 
   it('Olympus Conference', () => {
     player.popWaitingFor();
-    const marsCard = fakeCard({tags: [Tags.MARS]});
+    const marsCard = fakeCard({tags: [Tag.MARS]});
     const olympusConference = new OlympusConference();
     player.playedCards = [olympusConference];
     expect(olympusConference.resourceCount).eq(0);

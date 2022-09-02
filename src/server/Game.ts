@@ -32,7 +32,7 @@ import {CardResource} from '../common/CardResource';
 import {Resources} from '../common/Resources';
 import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
-import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
 import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
 import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
@@ -66,7 +66,6 @@ import {isProduction} from './utils/server';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
-import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 
 export interface Score {
@@ -174,7 +173,7 @@ export class Game {
     players: Array<Player>,
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
-    seed: number = 0,
+    seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
@@ -268,7 +267,14 @@ export class Game {
     for (const player of game.getPlayersInGenerationOrder()) {
       player.setTerraformRating(player.getTerraformRating() + player.handicap);
       if (!gameOptions.corporateEra) {
-        GameSetup.setStartingProductions(player);
+        player.production.override({
+          megacredits: 1,
+          steel: 1,
+          titanium: 1,
+          plants: 1,
+          energy: 1,
+          heat: 1,
+        });
       }
 
       if (!player.beginner ||
@@ -430,7 +436,7 @@ export class Game {
     return ids.map((id) => this.getPlayerById(id));
   }
 
-  public defer(action: DeferredAction, priority?: Priority | number): void {
+  public defer(action: DeferredAction, priority?: Priority): void {
     if (priority !== undefined) {
       action.priority = priority;
     }
@@ -552,47 +558,7 @@ export class Game {
         if (somePlayer.pickedCorporationCard === undefined) {
           throw new Error(`pickedCorporationCard is not defined for ${somePlayer.id}`);
         }
-        this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard);
-      }
-    }
-  }
-
-  // public for testing
-  public playCorporationCard(player: Player, corporationCard: ICorporationCard): void {
-    if (player.corporations.length === 0) {
-      player.corporations.push(corporationCard);
-    } else {
-      throw new Error('Do not use playCorporationCard for more than one corporation card.');
-    }
-
-    player.megaCredits = corporationCard.startingMegaCredits;
-    if (corporationCard.cardCost !== undefined) {
-      player.cardCost = corporationCard.cardCost;
-    }
-
-    if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
-      const diff = player.cardsInHand.length * player.cardCost;
-      player.deductResource(Resources.MEGACREDITS, diff);
-    }
-    corporationCard.play(player);
-    if (corporationCard.initialAction !== undefined) player.pendingInitialActions.push(corporationCard);
-    this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
-    player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));
-
-    this.triggerOtherCorpEffects(player, corporationCard);
-    ColoniesHandler.onCardPlayed(this, corporationCard);
-    PathfindersExpansion.onCardPlayed(player, corporationCard);
-
-    this.playerIsFinishedWithResearchPhase(player);
-  }
-
-  public triggerOtherCorpEffects(player: Player, playedCorporationCard: ICorporationCard) {
-    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
-    for (const somePlayer of player.game.getPlayers()) {
-      for (const corporation of somePlayer.corporations) {
-        if (somePlayer === player && corporation.name === playedCorporationCard.name) continue;
-        if (corporation.onCorpCardPlayed === undefined) continue;
-        this.defer(new SimpleDeferredAction(player, () => corporation.onCorpCardPlayed?.(player, playedCorporationCard)));
+        somePlayer.playCorporationCard(somePlayer.pickedCorporationCard);
       }
     }
   }
@@ -623,7 +589,7 @@ export class Game {
 
   // Public for testing.
   public incrementFirstPlayer(): void {
-    let firstIndex: number = this.players.map((x) => x.id).indexOf(this.first.id);
+    let firstIndex = this.players.map((x) => x.id).indexOf(this.first.id);
     if (firstIndex === -1) {
       throw new Error('Didn\'t even find player');
     }
@@ -665,7 +631,7 @@ export class Game {
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
-      this.players[0].addProduction(Resources.MEGACREDITS, -2);
+      this.players[0].production.add(Resources.MEGACREDITS, -2);
       this.defer(new RemoveColonyFromGame(this.players[0]));
     }
   }
@@ -702,7 +668,7 @@ export class Game {
     this.passedPlayers.clear();
     this.someoneHasRemovedOtherPlayersPlants = false;
     this.players.forEach((player) => {
-      player.cardDiscount = 0; // Iapetus reset hook
+      player.colonies.cardDiscount = 0; // Iapetus reset hook
       player.runProductionPhase();
     });
 
@@ -712,7 +678,7 @@ export class Game {
       return;
     } else {
       this.players.forEach((player) => {
-        player.returnTradeFleets();
+        player.colonies.returnTradeFleets();
       });
     }
 
@@ -961,7 +927,7 @@ export class Game {
   }
 
   private getPlayerBefore(player: Player): Player | undefined {
-    const playerIndex: number = this.players.indexOf(player);
+    const playerIndex = this.players.indexOf(player);
 
     // The player was not found
     if (playerIndex === -1) {
@@ -973,7 +939,7 @@ export class Game {
   }
 
   private getPlayerAfter(player: Player): Player | undefined {
-    const playerIndex: number = this.players.indexOf(player);
+    const playerIndex = this.players.indexOf(player);
 
     // The player was not found
     if (playerIndex === -1) {
@@ -1120,15 +1086,15 @@ export class Game {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): void {
+  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): number {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
-      return;
+      return 0;
     }
 
     // PoliticalAgendas Reds P3 hook
     if (increments === -1) {
       this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
-      return;
+      return -1;
     }
 
     // Literal typing makes |increments| a const
@@ -1164,6 +1130,8 @@ export class Game {
     }
 
     this.venusScaleLevel += steps * 2;
+
+    return steps;
   }
 
   public getVenusScaleLevel(): number {
@@ -1186,10 +1154,10 @@ export class Game {
     if (this.phase !== Phase.SOLAR) {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
-        player.addProduction(Resources.HEAT, 1, {log: true});
+        player.production.add(Resources.HEAT, 1, {log: true});
       }
       if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
-        player.addProduction(Resources.HEAT, 1, {log: true});
+        player.production.add(Resources.HEAT, 1, {log: true});
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
@@ -1305,7 +1273,7 @@ export class Game {
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
+        this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 
@@ -1394,11 +1362,14 @@ export class Game {
     case SpaceBonus.MICROBE:
       this.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: count}));
       break;
+    case SpaceBonus.ANIMAL:
+      this.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: count}));
+      break;
     case SpaceBonus.DATA:
       this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
     case SpaceBonus.ENERGY_PRODUCTION:
-      player.addProduction(Resources.ENERGY, count, {log: true});
+      player.production.add(Resources.ENERGY, count, {log: true});
       break;
     case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
@@ -1406,7 +1377,7 @@ export class Game {
     case SpaceBonus.TEMPERATURE:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
         this.defer(new SimpleDeferredAction(player, () => this.increaseTemperature(player, 1)));
-        this.defer(new SelectHowToPayDeferred(
+        this.defer(new SelectPaymentDeferred(
           player,
           constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
           {title: 'Select how to pay for placement bonus temperature'}));
@@ -1419,7 +1390,7 @@ export class Game {
       // TODO(kberg): Remove the isProduction condition after 2022-01-01.
       // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
       if (!isProduction()) {
-        throw new Error('Unhandled space bonus ' + spaceBonus);
+        throw new Error('Unhandled space bonus ' + spaceBonus + '. Report this exact error, please.');
       }
     }
   }
@@ -1487,7 +1458,7 @@ export class Game {
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): Array<Player> {
     const ret: Array<Player> = [];
-    let insertIdx: number = 0;
+    let insertIdx = 0;
     for (const p of this.players) {
       if (p.id === this.first.id || insertIdx > 0) {
         ret.splice(insertIdx, 0, p);
@@ -1547,7 +1518,7 @@ export class Game {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
     return this.getPlayers().some((p) => {
-      if (p.getProduction(resource) < minQuantity) return false;
+      if (p.production[resource] < minQuantity) return false;
       // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
       if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
       return true;

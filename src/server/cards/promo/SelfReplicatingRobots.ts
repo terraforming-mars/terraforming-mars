@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -22,7 +22,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
       name: CardName.SELF_REPLICATING_ROBOTS,
       cost: 7,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
       metadata: {
         cardNumber: '210',
         renderData: CardRenderer.builder((b) => {
@@ -54,12 +54,12 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
 
   public canAct(player: Player): boolean {
     return this.targetCards.length > 0 ||
-             player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.BUILDING));
+             player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tag.SPACE || tag === Tag.BUILDING));
   }
 
   public action(player: Player) {
     const orOptions = new OrOptions();
-    const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tags.SPACE || tag === Tags.BUILDING));
+    const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tag.SPACE || tag === Tag.BUILDING));
 
     if (this.targetCards.length > 0) {
       const robotCards = this.targetCards.map((targetCard) => targetCard.card);

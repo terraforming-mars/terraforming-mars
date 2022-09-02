@@ -1,7 +1,6 @@
 
 import {expect} from 'chai';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Sponsors', function() {
@@ -10,6 +9,6 @@ describe('Sponsors', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 });

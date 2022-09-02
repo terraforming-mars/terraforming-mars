@@ -1,17 +1,18 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class NeutralizerFactory extends Card {
+export class NeutralizerFactory extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.NEUTRALIZER_FACTORY,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 7,
       tr: {venus: 1},
 

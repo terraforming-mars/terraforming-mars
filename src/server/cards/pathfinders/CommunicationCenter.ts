@@ -1,27 +1,25 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {Resources} from '../../../common/Resources';
-import {Units} from '../../../common/Units';
 import {all, played} from '../Options';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
 import {ICard} from '../ICard';
 
-export class CommunicationCenter extends Card implements IProjectCard {
+export class CommunicationCenter extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.COMMUNICATION_CENTER,
       cost: 13,
-      tags: [Tags.SPACE, Tags.MARS, Tags.BUILDING],
+      tags: [Tag.SPACE, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
 
       metadata: {
         cardNumber: 'Pf28',
@@ -41,12 +39,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
   // Card behavior is in PathfindersExpansion.onCardPlayed. Card.onCardPlayed
   // does not apply to _any card played_
 
-  public override canPlay(player: Player) {
-    return player.getProduction(Resources.ENERGY) > 0;
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
+  public override bespokePlay(player: Player) {
     player.game.defer(new SimpleDeferredAction(player, () => {
       // Play this after the card's been put in hand. Otherwise it will generate an error.
       player.addResourceTo(this, 2);
@@ -66,4 +59,3 @@ export class CommunicationCenter extends Card implements IProjectCard {
     }
   }
 }
-

@@ -3,6 +3,8 @@ import {OpenCity} from '../../../src/server/cards/base/OpenCity';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../TestingUtils';
 
 describe('OpenCity', function() {
   let card: OpenCity;
@@ -17,27 +19,26 @@ describe('OpenCity', function() {
   });
 
   it('Can not play without energy production', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 11;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 12;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.not.undefined;
+    const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesOnMarsCount()).to.eq(1);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(4);
     expect(player.plants).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);

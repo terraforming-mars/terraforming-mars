@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,7 +14,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 6,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       name: CardName.URBAN_DECOMPOSERS,
       cardType: CardType.AUTOMATED,
 
@@ -30,7 +30,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
     });
@@ -38,7 +38,7 @@ export class UrbanDecomposers extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
 
     const microbeCards = player.getResourceCards(CardResource.MICROBE);
     if (microbeCards.length) {

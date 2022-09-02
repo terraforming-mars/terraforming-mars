@@ -3,7 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -16,7 +16,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.SOYLENT_SEEDLING_SYSTEMS,
-      tags: [Tags.SCIENCE, Tags.PLANT],
+      tags: [Tag.SCIENCE, Tag.PLANT],
       startingMegaCredits: 38,
       resourceType: CardResource.SEED,
 

@@ -22,11 +22,11 @@ export class JovianTaxRights extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      let coloniesCount: number = 0;
+      let coloniesCount = 0;
       game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
       });
-      player.addProduction(Resources.MEGACREDITS, coloniesCount, {log: true, from: this.name});
+      player.production.add(Resources.MEGACREDITS, coloniesCount, {log: true, from: this.name});
       player.addResource(Resources.TITANIUM, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }

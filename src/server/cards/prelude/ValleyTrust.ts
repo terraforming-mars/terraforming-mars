@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -14,11 +14,11 @@ export class ValleyTrust extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.VALLEY_TRUST,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       startingMegaCredits: 37,
       initialActionText: 'Draw 3 Prelude cards, and play one of them',
 
-      cardDiscount: {tag: Tags.SCIENCE, amount: 2},
+      cardDiscount: {tag: Tag.SCIENCE, amount: 2},
       metadata: {
         cardNumber: 'R34',
         description: 'You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.',
@@ -38,7 +38,7 @@ export class ValleyTrust extends Card implements ICorporationCard {
 
   public override getCardDiscount(player: Player, card: IProjectCard) {
     // TODO(chosta) -> improve once the discounts property is given a go
-    return player.cardTagCount(card, Tags.SCIENCE) * 2;
+    return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
   }
 
   public initialAction(player: Player) {

@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepublic';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions} from '../../TestingUtils';
@@ -29,7 +28,7 @@ describe('TharsisRepublic', function() {
     runAllActions(game);
 
     expect(game.getCitiesOnMarsCount()).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.megaCredits).to.eq(3);
   });
 
@@ -38,7 +37,7 @@ describe('TharsisRepublic', function() {
     runAllActions(game);
 
     expect(player.megaCredits).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 
   it('Gives MC production only for other player\'s city on Mars', function() {
@@ -46,7 +45,7 @@ describe('TharsisRepublic', function() {
     runAllActions(game);
 
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 
   it('Does not give MC production for own city off Mars', function() {
@@ -54,7 +53,7 @@ describe('TharsisRepublic', function() {
       tileType: TileType.CITY,
     });
     runAllActions(game);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(0);
   });
 
   it('Gives 2 M€ production in solo mode', function() {
@@ -62,6 +61,6 @@ describe('TharsisRepublic', function() {
     const game = Game.newInstance('gameid', [player], player);
     card.play(player);
     runAllActions(game);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 });

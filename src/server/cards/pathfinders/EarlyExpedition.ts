@@ -1,12 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {Units} from '../../../common/Units';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {nextToNoOtherTileFn} from '../../boards/Board';
@@ -14,7 +13,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {max} from '../Options';
 
-export class EarlyExpedition extends Card implements IProjectCard {
+export class EarlyExpedition extends Card2 implements IProjectCard {
   // This card repeats the NEXT TO NO OTHER TILE behavior from Research Outpost, and Philares
   // has some similar code. Time for code reduction.
 
@@ -23,9 +22,9 @@ export class EarlyExpedition extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.EARLY_EXPEDITION,
       cost: 15,
-      tags: [Tags.SCIENCE, Tags.SPACE, Tags.CITY],
+      tags: [Tag.SCIENCE, Tag.SPACE, Tag.CITY],
       requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),
-      productionBox: Units.of({energy: -1, megacredits: 3}),
+      productionBox: {energy: -1, megacredits: 3},
 
       metadata: {
         cardNumber: 'Pf18',
@@ -44,12 +43,11 @@ export class EarlyExpedition extends Card implements IProjectCard {
       .filter(nextToNoOtherTileFn(player.game.board));
   }
 
-  public override canPlay(player: Player) {
-    return player.canAdjustProduction(this.productionBox) && this.getAvailableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: Player) {
+    return this.getAvailableSpaces(player).length > 0;
   }
 
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
 
     return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
@@ -58,4 +56,3 @@ export class EarlyExpedition extends Card implements IProjectCard {
     });
   }
 }
-

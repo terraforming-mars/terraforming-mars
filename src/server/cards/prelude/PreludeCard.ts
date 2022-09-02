@@ -4,16 +4,17 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../../common/Units';
+import {ICard} from '../ICard';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;
     name: CardName;
-    tags?: Array<Tags>;
+    tags?: Array<Tag>;
     startingMegacredits?: number;
-    productionBox?: Units;
+    productionBox?: Partial<Units>;
 }
 
 export abstract class PreludeCard extends Card implements IProjectCard {
@@ -31,4 +32,8 @@ export abstract class PreludeCard extends Card implements IProjectCard {
   public override canPlay(_player: Player): boolean {
     return true;
   }
+}
+
+export function isPreludeCard(card: ICard): card is PreludeCard {
+  return card instanceof PreludeCard;
 }

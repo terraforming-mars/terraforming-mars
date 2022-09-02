@@ -17,15 +17,15 @@ export class SocietySupport extends PreludeCard {
             pb.energy(1).heat(1);
           });
         }),
-        description: 'Increase your plant, energy and heat production 1 step. Decrease money production 1 step.',
+        description: 'Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.',
       },
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -1);
-    player.addProduction(Resources.PLANTS, 1);
-    player.addProduction(Resources.ENERGY, 1);
-    player.addProduction(Resources.HEAT, 1);
+    player.production.add(Resources.MEGACREDITS, -1);
+    player.production.add(Resources.PLANTS, 1);
+    player.production.add(Resources.ENERGY, 1);
+    player.production.add(Resources.HEAT, 1);
     return undefined;
   }
 }

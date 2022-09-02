@@ -1,6 +1,6 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
 import {Aridor} from './cards/colonies/Aridor';
 import {Aurorai} from './cards/pathfinders/Aurorai';
 import {Board} from './boards/Board';
@@ -10,12 +10,11 @@ import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
 import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
-import {HowToPay} from '../common/inputs/HowToPay';
+import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
-import {ICard, IResourceCard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
+import {ICard, isIActionCard, TRSource, IActionCard, DynamicTRSource} from './cards/ICard';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ITagCount} from '../common/cards/ITagCount';
 import {LogMessageDataType} from '../common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
@@ -29,8 +28,8 @@ import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
-import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
-import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
+import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
+import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
@@ -38,7 +37,7 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from '../common/boards/SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
-import {Tags} from '../common/cards/Tags';
+import {Tag} from '../common/cards/Tag';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {Timer} from '../common/Timer';
@@ -50,7 +49,6 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
-import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
@@ -65,6 +63,11 @@ import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {SerializedGame} from './SerializedGame';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from '../common/inputs/InputResponse';
+import {Tags} from './player/Tags';
+import {Colonies} from './player/Colonies';
+import {Production} from './player/Production';
+import {MoonCard} from './cards/moon/MoonCard';
+import {Merger} from './cards/promo/Merger';
 
 // Behavior when playing a card.
 // add it to the tableau
@@ -76,6 +79,9 @@ export class Player {
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
   public game: Game;
+  public tags: Tags;
+  public colonies: Colonies;
+  public readonly production: Production;
 
   // Corporate identity
   public corporations: Array<ICorporationCard> = [];
@@ -90,17 +96,11 @@ export class Player {
 
   // Resources
   public megaCredits: number = 0;
-  protected megaCreditProduction: number = 0;
   public steel: number = 0;
-  protected steelProduction: number = 0;
   public titanium: number = 0;
-  protected titaniumProduction: number = 0;
   public plants: number = 0;
-  protected plantProduction: number = 0;
   public energy: number = 0;
-  protected energyProduction: number = 0;
   public heat: number = 0;
-  protected heatProduction: number = 0;
 
   // Resource values
   private titaniumValue: number = 3;
@@ -113,7 +113,6 @@ export class Player {
   private actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: CardName | undefined;
   public pendingInitialActions: Array<ICorporationCard> = [];
-
 
   // Cards
   public dealtCorporationCards: Array<ICorporationCard> = [];
@@ -129,14 +128,6 @@ export class Player {
 
   public timer: Timer = Timer.newInstance();
 
-  // Colonies
-  private fleetSize: number = 1;
-  public tradesThisGeneration: number = 0;
-  public colonyTradeOffset: number = 0;
-  public colonyTradeDiscount: number = 0;
-  public colonyVictoryPoints: number = 0;
-  public cardDiscount: number = 0; // Iapetus Colony
-
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
   public politicalAgendasActionUsedCount: number = 0;
@@ -145,6 +136,7 @@ export class Player {
 
   // Custom cards
   // Leavitt Station.
+  // TODO(kberg): move scienceTagCount to Tags?
   public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41
   public hasTurmoilScienceTagBonus: boolean = false;
@@ -176,6 +168,9 @@ export class Player {
     // Ideally the right thing is to invert how players and games get created.
     // But one thing at a time.
     this.game = undefined as unknown as Game;
+    this.tags = new Tags(this);
+    this.colonies = new Colonies(this);
+    this.production = new Production(this);
   }
 
   public static initialize(
@@ -276,7 +271,7 @@ export class Player {
         // Cannot pay Reds, will not increase TR
         return;
       }
-      const deferred = new SelectHowToPayDeferred(
+      const deferred = new SelectPaymentDeferred(
         this,
         REDS_RULING_POLICY_COST * steps,
         {
@@ -300,16 +295,6 @@ export class Player {
     return this.terraformRating = value;
   }
 
-  public getProduction(resource: Resources): number {
-    if (resource === Resources.MEGACREDITS) return this.megaCreditProduction;
-    if (resource === Resources.STEEL) return this.steelProduction;
-    if (resource === Resources.TITANIUM) return this.titaniumProduction;
-    if (resource === Resources.PLANTS) return this.plantProduction;
-    if (resource === Resources.ENERGY) return this.energyProduction;
-    if (resource === Resources.HEAT) return this.heatProduction;
-    throw new Error('Resource ' + resource + ' not found');
-  }
-
   public getResource(resource: Resources): number {
     if (resource === Resources.MEGACREDITS) return this.megaCredits;
     if (resource === Resources.STEEL) return this.steel;
@@ -320,7 +305,7 @@ export class Player {
     throw new Error('Resource ' + resource + ' not found');
   }
 
-  private logUnitDelta(
+  public logUnitDelta(
     resource: Resources,
     amount: number,
     unitType: 'production' | 'amount',
@@ -426,43 +411,6 @@ export class Player {
     }
   }
 
-  public addProduction(
-    resource: Resources,
-    amount : number,
-    options? : { log: boolean, from? : Player | GlobalEventName, stealing?: boolean},
-  ) {
-    const adj = resource === Resources.MEGACREDITS ? -5 : 0;
-    const delta = (amount >= 0) ? amount : Math.max(amount, -(this.getProduction(resource) - adj));
-
-    if (resource === Resources.MEGACREDITS) this.megaCreditProduction += delta;
-    else if (resource === Resources.STEEL) this.steelProduction += delta;
-    else if (resource === Resources.TITANIUM) this.titaniumProduction += delta;
-    else if (resource === Resources.PLANTS) this.plantProduction += delta;
-    else if (resource === Resources.ENERGY) this.energyProduction += delta;
-    else if (resource === Resources.HEAT) this.heatProduction += delta;
-    else {
-      throw new Error(`tried to add unsupported production ${resource}`);
-    }
-
-    if (options?.log === true) {
-      this.logUnitDelta(resource, amount, 'production', options.from, options.stealing);
-    }
-
-    if (options?.from instanceof Player) {
-      LawSuit.resourceHook(this, resource, delta, options.from);
-    }
-
-    // Mons Insurance hook
-    if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
-      MonsInsurance.resolveInsurance(this);
-    }
-
-    // Manutech hook
-    if (this.isCorporation(CardName.MANUTECH)) {
-      Manutech.onProductionGain(this, resource, amount);
-    }
-  }
-
   // Returns true when the player has the supplied units in its inventory.
   public hasUnits(units: Units): boolean {
     return this.megaCredits - units.megacredits >= 0 &&
@@ -493,41 +441,6 @@ export class Player {
     this.deductResource(Resources.PLANTS, units.plants);
     this.deductResource(Resources.ENERGY, units.energy);
     this.deductResource(Resources.HEAT, units.heat);
-  }
-
-  public canAdjustProduction(units: Units): boolean {
-    return this.getProduction(Resources.MEGACREDITS) + units.megacredits >= -5 &&
-      this.getProduction(Resources.STEEL) + units.steel >= 0 &&
-      this.getProduction(Resources.TITANIUM) + units.titanium >= 0 &&
-      this.getProduction(Resources.PLANTS) + units.plants >= 0 &&
-      this.getProduction(Resources.ENERGY) + units.energy >= 0 &&
-      this.getProduction(Resources.HEAT) + units.heat >= 0;
-  }
-
-  public adjustProduction(units: Units, options?: {log: boolean, from?: Player}) {
-    if (units.megacredits !== undefined) {
-      this.addProduction(Resources.MEGACREDITS, units.megacredits, options);
-    }
-
-    if (units.steel !== undefined) {
-      this.addProduction(Resources.STEEL, units.steel, options);
-    }
-
-    if (units.titanium !== undefined) {
-      this.addProduction(Resources.TITANIUM, units.titanium, options);
-    }
-
-    if (units.plants !== undefined) {
-      this.addProduction(Resources.PLANTS, units.plants, options);
-    }
-
-    if (units.energy !== undefined) {
-      this.addProduction(Resources.ENERGY, units.energy, options);
-    }
-
-    if (units.heat !== undefined) {
-      this.addProduction(Resources.HEAT, units.heat, options);
-    }
   }
 
   public getActionsThisGeneration(): Set<CardName> {
@@ -581,7 +494,7 @@ export class Player {
     });
 
     // Turmoil Victory Points
-    const includeTurmoilVP : boolean = this.game.gameIsOver() || this.game.phase === Phase.END;
+    const includeTurmoilVP = this.game.gameIsOver() || this.game.phase === Phase.END;
 
     Turmoil.ifTurmoil(this.game, (turmoil) => {
       if (includeTurmoilVP) {
@@ -589,11 +502,7 @@ export class Player {
       }
     });
 
-    // Titania Colony VP
-    if (this.colonyVictoryPoints > 0) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
-    }
-
+    this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 
@@ -644,9 +553,9 @@ export class Player {
 
   public canHaveProductionReduced(resource: Resources, minQuantity: number, attacker: Player) {
     if (resource === Resources.MEGACREDITS) {
-      if ((this.getProduction(resource) + 5) < minQuantity) return false;
+      if ((this.production[resource] + 5) < minQuantity) return false;
     } else {
-      if (this.getProduction(resource) < minQuantity) return false;
+      if (this.production[resource] < minQuantity) return false;
     }
 
     if (resource === Resources.STEEL || resource === Resources.TITANIUM) {
@@ -665,10 +574,10 @@ export class Player {
   // Return the number of cards in the player's hand without tags.
   // Wild tags are ignored in this computation. (why?)
   public getNoTagsCount() {
-    let noTagsCount: number = 0;
+    let noTagsCount = 0;
 
-    noTagsCount += this.corporations.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILD)).length;
-    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILD)).length;
+    noTagsCount += this.corporations.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
+    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
 
     return noTagsCount;
   }
@@ -676,7 +585,7 @@ export class Player {
   public getColoniesCount() {
     if (!this.game.gameOptions.coloniesExtension) return 0;
 
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
 
     this.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === this.id).length;
@@ -698,7 +607,7 @@ export class Player {
   }
 
   public getRequirementsBonus(parameter: GlobalParameter): number {
-    let requirementsBonus: number = 0;
+    let requirementsBonus = 0;
     for (const playedCard of this.tableau) {
       if (playedCard.getRequirementBonus !== undefined) requirementsBonus += playedCard.getRequirementBonus(this, parameter);
     }
@@ -753,11 +662,10 @@ export class Player {
     }
   }
 
-  public getCardsWithResources(resource?: CardResource): Array<ICard & IResourceCard> {
-    let result: Array<ICard & IResourceCard> = [
-      ...this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
-      ...this.corporations.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0),
-    ];
+  // Returns the set of played cards that have actual resources on them.
+  // If `resource` is supplied, only cards that hold that type of resource are retured.
+  public getCardsWithResources(resource?: CardResource): Array<ICard> {
+    let result = this.tableau.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
@@ -766,11 +674,10 @@ export class Player {
     return result;
   }
 
+  // Returns the set of played cards that can store resources on them.
+  // If `resource` is supplied, only cards that hold that type of resource are retured.
   public getResourceCards(resource?: CardResource): Array<ICard> {
-    let result: Array<ICard> = [
-      ...this.playedCards.filter((card) => card.resourceType !== undefined),
-      ...this.corporations.filter((card) => card.resourceType !== undefined),
-    ];
+    let result = this.tableau.filter((card) => card.resourceType !== undefined);
 
     if (resource !== undefined) {
       result = result.filter((card) => card.resourceType === resource);
@@ -780,7 +687,7 @@ export class Player {
   }
 
   public getResourceCount(resource: CardResource): number {
-    let count: number = 0;
+    let count = 0;
     this.getCardsWithResources(resource).forEach((card) => {
       count += card.resourceCount;
     });
@@ -789,196 +696,6 @@ export class Player {
 
   public getCardsByCardType(cardType: CardType) {
     return this.playedCards.filter((card) => card.cardType === cardType);
-  }
-
-  public getAllTags(): Array<ITagCount> {
-    return [
-      {tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, 'raw')},
-      {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, 'raw')},
-      {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, 'raw')},
-      {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, 'raw')},
-      {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, 'raw')},
-      {tag: Tags.MARS, count: this.getTagCount(Tags.MARS, 'raw')},
-      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, 'raw')},
-      {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, 'raw')},
-      {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, 'raw')},
-      {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, 'raw')},
-      {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, 'raw')},
-      {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, 'raw')},
-      {tag: Tags.WILD, count: this.getTagCount(Tags.WILD, 'raw')},
-      {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, 'raw')},
-      {tag: Tags.EVENT, count: this.getPlayedEventsCount()},
-    ].filter((tag) => tag.count > 0);
-  }
-
-  /*
-   * Get the number of tags a player has, depending on certain conditions.
-   *
-   * 'raw': count face-up tags literally, including Leavitt Station.
-   * 'default': Same as raw, but include the wild tags.
-   * 'milestone': Same as raw with special conditions for milestones (Chimera)
-   * 'award': Same as raw with special conditions for awards (Chimera)
-   * 'vps': Same as raw, but include event tags.
-   * 'raw-pf': Same as raw, but includes Mars Tags when tag is Science  (Habitat Marte)
-   */
-  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' | 'raw-pf' = 'default') {
-    const includeEvents = this.isCorporation(CardName.ODYSSEY);
-    const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
-
-    let tagCount = this.getRawTagCount(tag, includeEvents);
-
-    // Leavitt Station hook
-    if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
-      tagCount += this.scienceTagCount;
-    }
-
-
-    if (includeTagSubstitutions) {
-      // Earth Embassy hook
-      if (tag === Tags.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-        tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
-      }
-
-      if (tag !== Tags.WILD) {
-        tagCount += this.getRawTagCount(Tags.WILD, includeEvents);
-      }
-    }
-
-    // Habitat Marte hook
-    if (mode !== 'raw') {
-      if (tag === Tags.SCIENCE && this.isCorporation(CardName.HABITAT_MARTE)) {
-        tagCount += this.getRawTagCount(Tags.MARS, includeEvents);
-      }
-    }
-
-    // Chimera hook
-    if (this.isCorporation(CardName.CHIMERA)) {
-      // Milestones don't count wild tags, so in this case one will be added.
-      if (mode === 'award') {
-        tagCount++;
-      }
-      // Milestones count wild tags, so in this case one will be deducted.
-      if (mode === 'milestone') {
-        tagCount--;
-      }
-    }
-    return tagCount;
-  }
-
-  public cardHasTag(card: ICard, target: Tags): boolean {
-    for (const tag of card.tags) {
-      if (tag === target) return true;
-      if (tag === Tags.MARS &&
-        target === Tags.SCIENCE &&
-        this.isCorporation(CardName.HABITAT_MARTE)) {
-        return true;
-      }
-    }
-    return false;
-  }
-  public cardTagCount(card: ICard, target: Tags): number {
-    let count = 0;
-    for (const tag of card.tags) {
-      if (tag === target) count++;
-      if (tag === Tags.MARS && target === Tags.SCIENCE &&
-        this.isCorporation(CardName.HABITAT_MARTE)) {
-        count++;
-      }
-    }
-    return count;
-  }
-
-  // Counts the tags in the player's play area only.
-  public getRawTagCount(tag: Tags, includeEventsTags: boolean) {
-    let tagCount = 0;
-
-    this.tableau.forEach((card: IProjectCard | ICorporationCard) => {
-      if (!includeEventsTags && card.cardType === CardType.EVENT) return;
-      if (isICorporationCard(card) && card.isDisabled) return;
-      tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-    });
-
-    return tagCount;
-  }
-
-  // Return the total number of tags assocaited with these types.
-  // Tag substitutions are included
-  public getMultipleTagCount(tags: Array<Tags>, mode: 'default' | 'milestones' = 'default'): number {
-    let tagCount = 0;
-    tags.forEach((tag) => {
-      tagCount += this.getRawTagCount(tag, false);
-    });
-
-    // This is repeated behavior from getTagCount, sigh, OK.
-    if (tags.includes(Tags.EARTH) && !tags.includes(Tags.MOON) && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-      tagCount += this.getRawTagCount(Tags.MOON, false);
-    }
-
-    tagCount += this.getRawTagCount(Tags.WILD, false);
-
-    // Chimera has 2 wild tags but should only count as one for milestones.
-    if (this.isCorporation(CardName.CHIMERA) && mode === 'milestones') tagCount--;
-
-    return tagCount;
-  }
-
-  // Counts the number of distinct tags
-  public getDistinctTagCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tags): number {
-    let wildTagCount: number = 0;
-    const uniqueTags = new Set<Tags>();
-    const addTag = (tag: Tags) => {
-      if (tag === Tags.WILD) {
-        wildTagCount++;
-      } else {
-        uniqueTags.add(tag);
-      }
-    };
-    if (extraTag !== undefined) {
-      uniqueTags.add(extraTag);
-    }
-
-    for (const card of this.corporations) {
-      if (!card.isDisabled) {
-        card.tags.forEach(addTag);
-      }
-    }
-    for (const card of this.playedCards) {
-      if (card.cardType !== CardType.EVENT) {
-        card.tags.forEach(addTag);
-      }
-    }
-    // Leavitt Station hook
-    if (this.scienceTagCount > 0) uniqueTags.add(Tags.SCIENCE);
-
-    if (mode === 'globalEvent') return uniqueTags.size;
-
-    if (mode === 'milestone' && this.isCorporation(CardName.CHIMERA)) wildTagCount--;
-
-    // TODO(kberg): it might be more correct to count all the tags
-    // in a game regardless of expansion? But if that happens it needs
-    // to be done once, during set-up so that this operation doesn't
-    // always go through every tag every time.
-    let maxTagCount = 10;
-    if (this.game.gameOptions.venusNextExtension) maxTagCount++;
-    if (this.game.gameOptions.moonExpansion) maxTagCount++;
-    if (this.game.gameOptions.pathfindersExpansion) maxTagCount++;
-    return Math.min(uniqueTags.size + wildTagCount, maxTagCount);
-  }
-
-  // Return true if this player has all the tags in `tags` showing.
-  public checkMultipleTagPresence(tags: Array<Tags>): boolean {
-    let distinctCount = 0;
-    tags.forEach((tag) => {
-      if (this.getTagCount(tag, 'raw') > 0) {
-        distinctCount++;
-      } else if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
-        distinctCount++;
-      }
-    });
-    if (distinctCount + this.getTagCount(Tags.WILD) >= tags.length) {
-      return true;
-    }
-    return false;
   }
 
   public deferInputCb(result: PlayerInput | undefined): void {
@@ -991,26 +708,6 @@ export class Player {
     }
     if (firstOptionLength !== undefined && input[0].length !== firstOptionLength) {
       throw new Error('Incorrect options provided (nested)');
-    }
-  }
-
-  public isHowToPay(u: unknown): u is HowToPay {
-    if (typeof u !== 'object') return false;
-    if (!u) return false;
-    const h = u as {[key in keyof HowToPay]?: any};
-    return HowToPay.keys.every((key) =>
-      h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
-  }
-
-  public parseHowToPayJSON(json: string): HowToPay {
-    try {
-      const howToPay: unknown = JSON.parse(json);
-      if (!this.isHowToPay(howToPay)) {
-        throw new Error('does not match interface');
-      }
-      return howToPay;
-    } catch (err) {
-      throw new Error('Unable to parse HowToPay input ' + err);
     }
   }
 
@@ -1038,33 +735,23 @@ export class Player {
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
-    this.megaCredits += this.megaCreditProduction + this.terraformRating;
+    this.megaCredits += this.production.megacredits + this.terraformRating;
     this.heat += this.energy;
-    this.heat += this.heatProduction;
-    this.energy = this.energyProduction;
-    this.titanium += this.titaniumProduction;
-    this.steel += this.steelProduction;
-    this.plants += this.plantProduction;
+    this.heat += this.production.heat;
+    this.energy = this.production.energy;
+    this.titanium += this.production.titanium;
+    this.steel += this.production.steel;
+    this.plants += this.production.plants;
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
   }
 
-  public returnTradeFleets(): void {
-    // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
-    // retrieve their fleets.
-    // See Colony.ts for the other half of this effect, and Game.ts which disables it.
-    if (this.game.syndicatePirateRaider === undefined) {
-      this.tradesThisGeneration = 0;
-    } else if (this.game.syndicatePirateRaider === this.id) {
-      this.tradesThisGeneration = 0;
-    }
-  }
   private doneWorldGovernmentTerraforming(): void {
     this.game.deferredActions.runAll(() => this.game.doneWorldGovernmentTerraforming());
   }
 
   public worldGovernmentTerraforming(): void {
-    const action: OrOptions = new OrOptions();
+    const action = new OrOptions();
     action.title = 'Select action for World Government Terraforming';
     action.buttonLabel = 'Confirm';
     const game = this.game;
@@ -1252,8 +939,8 @@ export class Player {
   }
 
   public getCardCost(card: IProjectCard): number {
-    let cost: number = card.cost;
-    cost -= this.cardDiscount;
+    let cost = card.cost;
+    cost -= this.colonies.cardDiscount;
 
     this.tableau.forEach((playedCard) => {
       cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
@@ -1267,40 +954,11 @@ export class Player {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
+    if (card.tags.includes(Tag.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
       cost -= 2;
     }
 
     return Math.max(cost, 0);
-  }
-
-  private canUseSteel(card: ICard): boolean {
-    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.BUILDING);
-  }
-
-  private canUseTitanium(card: ICard): boolean {
-    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.SPACE);
-  }
-
-  private canUseMicrobes(card: ICard): boolean {
-    return card.tags.includes(Tags.PLANT);
-  }
-
-  private canUseFloaters(card: ICard): boolean {
-    return card.tags.includes(Tags.VENUS);
-  }
-
-  private canUseScience(card: ICard): boolean {
-    return card.tags.includes(Tags.MOON);
-  }
-
-  private canUseSeeds(card: ICard): boolean {
-    return card.tags.includes(Tags.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
-  }
-
-  private canUseData(card: ICard): boolean {
-    // TODO(kberg): add this.corporation.name === CardName.AURORAI
-    return card.cardType === CardType.STANDARD_PROJECT;
   }
 
   private playPreludeCard(): PlayerInput {
@@ -1314,33 +972,34 @@ export class Player {
     );
   }
 
-  private howToPayOptionsForCard(selectedCard: IProjectCard): HowToPay.Options {
+  private paymentOptionsForCard(card: IProjectCard): Payment.Options {
     return {
-      steel: this.canUseSteel(selectedCard),
-      titanium: this.canUseTitanium(selectedCard),
-      seeds: this.canUseSeeds(selectedCard),
-      floaters: this.canUseFloaters(selectedCard),
-      microbes: this.canUseMicrobes(selectedCard),
-      science: this.canUseScience(selectedCard),
-      data: this.canUseData(selectedCard),
+      steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
+      titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
+      seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
+      floaters: card.tags.includes(Tag.VENUS),
+      microbes: card.tags.includes(Tag.PLANT),
+      science: card.tags.includes(Tag.MOON),
+      // TODO(kberg): add this.corporation.name === CardName.AURORAI
+      data: card.cardType === CardType.STANDARD_PROJECT,
     };
   }
 
   public payMegacreditsDeferred(cost: number, title: string, afterPay?: () => void) {
-    this.game.defer(new SelectHowToPayDeferred(this, cost, {title, afterPay}));
+    this.game.defer(new SelectPaymentDeferred(this, cost, {title, afterPay}));
   }
 
-  public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay, cardAction: CardAction = 'add') {
-    const cardCost: number = this.getCardCost(selectedCard);
+  public checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction: CardAction = 'add') {
+    const cardCost = this.getCardCost(selectedCard);
 
     const reserved = MoonExpansion.adjustedReserveCosts(this, selectedCard);
 
-    if (!this.canSpend(howToPay, reserved)) {
+    if (!this.canSpend(payment, reserved)) {
       throw new Error('You do not have that many resources to spend');
     }
 
-    if (howToPay.floaters > 0) {
-      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
+    if (payment.floaters > 0) {
+      if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && payment.floaters === this.getSpendableFloaters()) {
         const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
         if (cardsWithFloater.length === 1) {
           throw new Error('Cannot spend all floaters to play Stratospheric Birds');
@@ -1348,28 +1007,20 @@ export class Player {
       }
     }
 
-    const totalToPay = this.payingAmount(howToPay, this.howToPayOptionsForCard(selectedCard));
+    const totalToPay = this.payingAmount(payment, this.paymentOptionsForCard(selectedCard));
 
     if (totalToPay < cardCost) {
       throw new Error('Did not spend enough to pay for card');
     }
-    return this.playCard(selectedCard, howToPay, cardAction);
+    return this.playCard(selectedCard, payment, cardAction);
   }
 
-  public getPlayProjectCardInput(cards: Array<IProjectCard> = this.getPlayableCards(), cardAction: CardAction = 'add') {
-    return new SelectHowToPayForProjectCard(
-      this,
-      cards,
-      (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, cardAction),
-    );
-  }
-
-  public getMicrobesCanSpend(): number {
+  public getSpendableMicrobes(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
     return psychrophiles?.resourceCount ?? 0;
   }
 
-  public getFloatersCanSpend(): number {
+  public getSpendableFloaters(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
     return dirigibles?.resourceCount ?? 0;
   }
@@ -1387,41 +1038,41 @@ export class Player {
     return this.getCorporation(CardName.AURORAI)?.resourceCount ?? 0;
   }
 
-  public pay(howToPay: HowToPay) {
-    this.deductResource(Resources.STEEL, howToPay.steel);
-    this.deductResource(Resources.TITANIUM, howToPay.titanium);
-    this.deductResource(Resources.MEGACREDITS, howToPay.megaCredits);
-    this.deductResource(Resources.HEAT, howToPay.heat);
+  public pay(payment: Payment) {
+    this.deductResource(Resources.STEEL, payment.steel);
+    this.deductResource(Resources.TITANIUM, payment.titanium);
+    this.deductResource(Resources.MEGACREDITS, payment.megaCredits);
+    this.deductResource(Resources.HEAT, payment.heat);
 
     for (const playedCard of this.playedCards) {
       if (playedCard.name === CardName.PSYCHROPHILES) {
-        this.removeResourceFrom(playedCard, howToPay.microbes);
+        this.removeResourceFrom(playedCard, payment.microbes);
       }
 
       if (playedCard.name === CardName.DIRIGIBLES) {
-        this.removeResourceFrom(playedCard, howToPay.floaters);
+        this.removeResourceFrom(playedCard, payment.floaters);
       }
 
       if (playedCard.name === CardName.LUNA_ARCHIVES) {
-        this.removeResourceFrom(playedCard, howToPay.science);
+        this.removeResourceFrom(playedCard, payment.science);
       }
     }
 
-    if (howToPay.seeds > 0) {
+    if (payment.seeds > 0) {
       const soylent = this.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS);
       if (soylent === undefined) throw new Error('Cannot pay with seeds without ' + CardName.SOYLENT_SEEDLING_SYSTEMS);
-      this.removeResourceFrom(soylent, howToPay.seeds);
+      this.removeResourceFrom(soylent, payment.seeds);
     }
-    if (howToPay.data > 0) {
+    if (payment.data > 0) {
       const aurorai = this.getCorporation(CardName.AURORAI);
       if (aurorai === undefined) throw new Error('Cannot pay with data without ' + CardName.AURORAI);
-      this.removeResourceFrom(aurorai, howToPay.data);
+      this.removeResourceFrom(aurorai, payment.data);
     }
   }
 
-  public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
-    if (howToPay !== undefined) {
-      this.pay(howToPay);
+  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
+    if (payment !== undefined) {
+      this.pay(payment);
     }
 
     ColoniesHandler.onCardPlayed(this.game, selectedCard);
@@ -1432,7 +1083,7 @@ export class Player {
     }
 
     // Play the card
-    const action = selectedCard.play(this);
+    const action = this.simplePlay(selectedCard);
     this.defer(action, Priority.DEFAULT);
 
     // This could probably include 'nothing' but for now this will work.
@@ -1474,11 +1125,37 @@ export class Player {
     }
 
     // See DeclareCloneTag for why.
-    if (!selectedCard.tags.includes(Tags.CLONE)) {
+    if (!selectedCard.tags.includes(Tag.CLONE)) {
       this.onCardPlayed(selectedCard);
     }
 
     return undefined;
+  }
+
+  private triggerOtherCorpEffects(playedCorporationCard: ICorporationCard) {
+    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
+    for (const somePlayer of this.game.getPlayers()) {
+      for (const corporation of somePlayer.corporations) {
+        if (somePlayer === this && corporation.name === playedCorporationCard.name) continue;
+        if (corporation.onCorpCardPlayed === undefined) continue;
+        this.game.defer(new SimpleDeferredAction(this, () => corporation.onCorpCardPlayed?.(this, playedCorporationCard)));
+      }
+    }
+  }
+
+  // eslint-disable-next-line valid-jsdoc
+  /** @deprecated use Card2. */
+  public simplePlay(card: IProjectCard | ICorporationCard) {
+    if (card instanceof MoonCard || (card.migrated === true)) {
+      if (card.productionBox !== undefined) {
+        this.production.adjust(card.productionBox);
+      }
+      if (!isICorporationCard(card)) {
+        const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
+        this.deductUnits(adjustedReserveUnits);
+      }
+    }
+    return card.play(this);
   }
 
   public onCardPlayed(card: IProjectCard) {
@@ -1532,6 +1209,54 @@ export class Player {
     );
   }
 
+  public playAdditionalCorporationCard(corporationCard: ICorporationCard): void {
+    if (this.corporations.length === 0) {
+      throw new Error('Cannot add additional corporation when it does not have a starting corporation.');
+    }
+    return this._playCorporationCard(corporationCard, true);
+  }
+
+  public playCorporationCard(corporationCard: ICorporationCard): void {
+    if (this.corporations.length > 0) {
+      throw new Error('Cannot add additional corporation without specifying it explicitly.');
+    }
+    return this._playCorporationCard(corporationCard, false);
+  }
+
+  private _playCorporationCard(corporationCard: ICorporationCard, additionalCorp = false): void {
+    this.corporations.push(corporationCard);
+
+    // There is a simpler way to deal with this block, but I'd rather not deal with the fallout of getting it wrong.
+    if (additionalCorp) {
+      this.megaCredits += corporationCard.startingMegaCredits;
+      this.cardCost = Merger.setCardCost(this);
+    } else {
+      this.megaCredits = corporationCard.startingMegaCredits;
+      if (corporationCard.cardCost !== undefined) {
+        this.cardCost = corporationCard.cardCost;
+      }
+    }
+
+    if (additionalCorp === false && corporationCard.name !== CardName.BEGINNER_CORPORATION) {
+      const diff = this.cardsInHand.length * this.cardCost;
+      this.deductResource(Resources.MEGACREDITS, diff);
+    }
+    this.simplePlay(corporationCard);
+    if (corporationCard.initialAction !== undefined) this.pendingInitialActions.push(corporationCard);
+    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
+    if (additionalCorp === false) {
+      this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(this.cardsInHand.length));
+    }
+
+    this.triggerOtherCorpEffects(corporationCard);
+    ColoniesHandler.onCardPlayed(this.game, corporationCard);
+    PathfindersExpansion.onCardPlayed(this, corporationCard);
+
+    if (!additionalCorp) {
+      this.game.playerIsFinishedWithResearchPhase(this);
+    }
+  }
+
   public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {
     return DrawCards.keepAll(this, count, options).execute();
   }
@@ -1572,7 +1297,7 @@ export class Player {
         player: this,
         milestone: milestone,
       });
-      this.game.defer(new SelectHowToPayDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+      this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1580,7 +1305,7 @@ export class Player {
 
   private fundAward(award: IAward): PlayerInput {
     return new SelectOption(award.name, 'Fund - ' + '(' + award.name + ')', () => {
-      this.game.defer(new SelectHowToPayDeferred(this, this.game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
+      this.game.defer(new SelectPaymentDeferred(this, this.game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
       this.game.fundAward(this, award);
       return undefined;
     });
@@ -1659,7 +1384,7 @@ export class Player {
     }
 
     if (this.game.canPlaceGreenery(this)) {
-      const action: OrOptions = new OrOptions();
+      const action = new OrOptions();
       action.title = 'Place any final greenery from plants';
       action.buttonLabel = 'Confirm';
       action.options.push(
@@ -1717,52 +1442,66 @@ export class Player {
     return candidateCards.filter((card) => this.canPlay(card));
   }
 
+  // TODO(kberg): After migration, see if this can become private again.
+  // Or perhaps moved into card?
   public canAffordCard(card: IProjectCard): boolean {
     return this.canAfford(
       this.getCardCost(card),
       {
-        ...this.howToPayOptionsForCard(card),
+        ...this.paymentOptionsForCard(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
         tr: card.tr,
       });
   }
 
   public canPlay(card: IProjectCard): boolean {
-    return this.canAffordCard(card) && this.canPlayIgnoringCost(card);
+    return this.canAffordCard(card) && this.simpleCanPlay(card);
   }
 
-  // Verify if requirements for the card can be met, ignoring the project cost.
-  // Only made public for tests.
-  public canPlayIgnoringCost(card: IProjectCard): boolean {
+  // TODO(kberg): Replace all uses of canPlayIgnoringCost with simpleCanPlay.
+  public canPlayIgnoringCost(card: IProjectCard) {
+    return this.simpleCanPlay(card);
+  }
+
+  // eslint-disable-next-line valid-jsdoc
+  /**
+   * Verify if requirements for the card can be met, ignoring the project cost.
+   * Only made public for tests.
+   * @deprecated use Card2.
+   */
+  public simpleCanPlay(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
+      return false;
+    }
+    if ((card instanceof MoonCard || card.migrated === true) && card.productionBox && !this.production.canAdjust(card.productionBox)) {
       return false;
     }
     return card.canPlay(this);
   }
 
-  private maxSpendable(reserveUnits: Units = Units.EMPTY): HowToPay {
+  private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
       megaCredits: this.megaCredits - reserveUnits.megacredits,
       steel: this.steel - reserveUnits.steel,
       titanium: this.titanium - reserveUnits.titanium,
       heat: this.heat - reserveUnits.heat,
-      floaters: this.getFloatersCanSpend(),
-      microbes: this.getMicrobesCanSpend(),
+      floaters: this.getSpendableFloaters(),
+      microbes: this.getSpendableMicrobes(),
       science: this.getSpendableScienceResources(),
       seeds: this.getSpendableSeedResources(),
       data: this.getSpendableData(),
     };
   }
 
-  public canSpend(howToPay: HowToPay, reserveUnits?: Units): boolean {
+  public canSpend(payment: Payment, reserveUnits?: Units): boolean {
     const maxPayable = this.maxSpendable(reserveUnits);
 
-    return HowToPay.keys.every((key: keyof HowToPay) =>
-      0 <= howToPay[key] && howToPay[key] <= maxPayable[key]);
+    return PAYMENT_KEYS.every((key) =>
+      0 <= payment[key] && payment[key] <= maxPayable[key]);
   }
 
-  public payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
-    const mult: {[key in keyof HowToPay]: number} = {
+  public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
+    const multiplier: {[key in PaymentKey]: number} = {
       megaCredits: 1,
       steel: this.getSteelValue(),
       titanium: this.getTitaniumValue(),
@@ -1774,7 +1513,7 @@ export class Player {
       data: constants.DATA_VALUE,
     };
 
-    const usable: {[key in keyof HowToPay]: boolean} = {
+    const usable: {[key in PaymentKey]: boolean} = {
       megaCredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,
@@ -1787,8 +1526,8 @@ export class Player {
     };
 
     let totalToPay = 0;
-    for (const key of HowToPay.keys) {
-      if (usable[key]) totalToPay += howToPay[key] * mult[key];
+    for (const key of PAYMENT_KEYS) {
+      if (usable[key]) totalToPay += payment[key] * multiplier[key];
     }
 
     return totalToPay;
@@ -1969,9 +1708,9 @@ export class Player {
     this.actionsTakenThisGame++;
   }
 
-  // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
+  // Return possible mid-game actions like play a card and fund an award, but not play prelude card.
   public getActions() {
-    const action: OrOptions = new OrOptions();
+    const action = new OrOptions();
     action.title = this.actionsTakenThisRound === 0 ?
       'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';
@@ -2014,10 +1753,11 @@ export class Player {
 
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(this.getPlayProjectCardInput(playableCards));
+      action.options.push(
+        new SelectProjectCardToPlay(this, playableCards));
     }
 
-    const coloniesTradeAction = ColoniesHandler.coloniesTradeAction(this);
+    const coloniesTradeAction = this.colonies.coloniesTradeAction();
     if (coloniesTradeAction !== undefined) {
       action.options.push(coloniesTradeAction);
     }
@@ -2138,17 +1878,17 @@ export class Player {
       terraformRatingAtGenerationStart: this.terraformRatingAtGenerationStart,
       // Resources
       megaCredits: this.megaCredits,
-      megaCreditProduction: this.megaCreditProduction,
+      megaCreditProduction: this.production.megacredits,
       steel: this.steel,
-      steelProduction: this.steelProduction,
+      steelProduction: this.production.steel,
       titanium: this.titanium,
-      titaniumProduction: this.titaniumProduction,
+      titaniumProduction: this.production.titanium,
       plants: this.plants,
-      plantProduction: this.plantProduction,
+      plantProduction: this.production.plants,
       energy: this.energy,
-      energyProduction: this.energyProduction,
+      energyProduction: this.production.energy,
       heat: this.heat,
-      heatProduction: this.heatProduction,
+      heatProduction: this.production.heat,
       // Resource values
       titaniumValue: this.titaniumValue,
       steelValue: this.steelValue,
@@ -2169,13 +1909,14 @@ export class Player {
       draftedCards: this.draftedCards.map((c) => c.name),
       cardCost: this.cardCost,
       needsToDraft: this.needsToDraft,
-      cardDiscount: this.cardDiscount,
+      cardDiscount: this.colonies.cardDiscount,
       // Colonies
-      fleetSize: this.fleetSize,
-      tradesThisTurn: this.tradesThisGeneration,
-      colonyTradeOffset: this.colonyTradeOffset,
-      colonyTradeDiscount: this.colonyTradeDiscount,
-      colonyVictoryPoints: this.colonyVictoryPoints,
+      // TODO(kberg): consider a ColoniesSerializer or something.
+      fleetSize: this.colonies.getFleetSize(),
+      tradesThisTurn: this.colonies.tradesThisGeneration,
+      colonyTradeOffset: this.colonies.tradeOffset,
+      colonyTradeDiscount: this.colonies.tradeDiscount,
+      colonyVictoryPoints: this.colonies.victoryPoints,
       // Turmoil
       turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
       politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
@@ -2215,41 +1956,43 @@ export class Player {
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.cardCost = d.cardCost;
-    player.cardDiscount = d.cardDiscount;
-    player.colonyTradeDiscount = d.colonyTradeDiscount;
-    player.colonyTradeOffset = d.colonyTradeOffset;
-    player.colonyVictoryPoints = d.colonyVictoryPoints;
+    player.colonies.cardDiscount = d.cardDiscount;
+    player.colonies.tradeDiscount = d.colonyTradeDiscount;
+    player.colonies.tradeOffset = d.colonyTradeOffset;
+    player.colonies.victoryPoints = d.colonyVictoryPoints;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     // TODO(kberg): delete this conditional by 2022-06-01
     if (!player.victoryPointsByGeneration) {
       player.victoryPointsByGeneration = new Array(game.generation).fill(0);
     }
     player.energy = d.energy;
-    player.energyProduction = d.energyProduction;
-    player.fleetSize = d.fleetSize;
+    player.colonies.setFleetSize(d.fleetSize);
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
-    player.heatProduction = d.heatProduction;
-    player.megaCreditProduction = d.megaCreditProduction;
     player.megaCredits = d.megaCredits;
     player.needsToDraft = d.needsToDraft;
     player.oceanBonus = d.oceanBonus;
-    player.plantProduction = d.plantProduction;
     player.plants = d.plants;
     player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+    player.production.override(Units.of({
+      energy: d.energyProduction,
+      heat: d.heatProduction,
+      megacredits: d.megaCreditProduction,
+      plants: d.plantProduction,
+      steel: d.steelProduction,
+      titanium: d.titaniumProduction,
+    }));
     player.removingPlayers = d.removingPlayers;
     player.scienceTagCount = d.scienceTagCount;
     player.steel = d.steel;
-    player.steelProduction = d.steelProduction;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;
     player.terraformRatingAtGenerationStart = d.terraformRatingAtGenerationStart;
     player.titanium = d.titanium;
-    player.titaniumProduction = d.titaniumProduction;
     player.titaniumValue = d.titaniumValue;
     player.totalDelegatesPlaced = d.totalDelegatesPlaced;
-    player.tradesThisGeneration = d.tradesThisTurn;
+    player.colonies.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 
@@ -2310,35 +2053,6 @@ export class Player {
     return player;
   }
 
-  public getFleetSize(): number {
-    return this.fleetSize;
-  }
-
-  public increaseFleetSize(): void {
-    if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
-  }
-
-  public decreaseFleetSize(): void {
-    if (this.fleetSize > 0) this.fleetSize--;
-  }
-
-  public hasAvailableColonyTileToBuildOn(allowDuplicate: boolean = false): boolean {
-    if (this.game.gameOptions.coloniesExtension === false) return false;
-
-    const availableColonyTiles = this.game.colonies.filter((colony) => colony.isActive);
-    let unavailableColonies: number = 0;
-
-    availableColonyTiles.forEach((colony) => {
-      if (colony.colonies.length === constants.MAX_COLONIES_PER_TILE) {
-        unavailableColonies++;
-      } else if (!allowDuplicate && colony.colonies.includes(this.id)) {
-        unavailableColonies++;
-      }
-    });
-
-    return unavailableColonies < availableColonyTiles.length;
-  }
-
   /* Shorthand for deferring things */
   public defer(input: PlayerInput | undefined, priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) return;
@@ -2347,7 +2061,7 @@ export class Player {
   }
 }
 
-export interface CanAffordOptions extends Partial<HowToPay.Options> {
+export interface CanAffordOptions extends Partial<Payment.Options> {
   reserveUnits?: Units,
-  tr?: TRSource,
+  tr?: TRSource | DynamicTRSource,
 }

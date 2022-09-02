@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -16,7 +16,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 27,
-      tags: [Tags.SCIENCE, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.SPACE],
       name: CardName.HUYGENS_OBSERVATORY,
       cardType: CardType.AUTOMATED,
       victoryPoints: 1,
@@ -57,7 +57,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
     orOptions.title = 'Select a trade fleet';
 
     const visitedColonies = game.colonies.filter((colony) => colony.visitor === player.id);
-    const hasFreeTradeFleet = visitedColonies.length < player.getFleetSize();
+    const hasFreeTradeFleet = visitedColonies.length < player.colonies.getFleetSize();
     const tradeInput = this.trade(player, tradeableColonies);
     if (visitedColonies.length > 0) {
       orOptions.options.push(
@@ -71,7 +71,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
               (b) => b.player(player).colony(colony));
             colony.visitor = undefined;
             // TODO(kberg): counting the trades in a generation is not the same as using trade fleets. :[
-            player.tradesThisGeneration--;
+            player.colonies.tradesThisGeneration--;
             game.defer(new SimpleDeferredAction(player, () => tradeInput));
             return undefined;
           }));
@@ -94,15 +94,17 @@ export class HuygensObservatory extends Card implements IProjectCard {
     }
   }
   public override canPlay(player: Player): boolean {
-    return player.hasAvailableColonyTileToBuildOn(true) || this.tradeableColonies(player).length > 0;
+    return player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0 || this.tradeableColonies(player).length > 0;
   }
 
   public play(player: Player) {
     player.increaseTerraformRating();
     const game = player.game;
 
-    if (player.hasAvailableColonyTileToBuildOn(true)) {
-      game.defer(new BuildColony(player, true, 'Select colony for Huygens Observatory', undefined, {
+    if (player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0) {
+      game.defer(new BuildColony(player, {
+        allowDuplicate: true,
+        title: 'Select colony for Huygens Observatory',
         cb: () => this.tryToTrade(player),
       }));
     } else {

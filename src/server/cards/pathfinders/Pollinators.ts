@@ -1,24 +1,24 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard, VictoryPoints} from '../ICard';
+import {IActionCard, VictoryPoints} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../../common/Resources';
 
-export class Pollinators extends Card implements IProjectCard, IResourceCard, IActionCard {
+export class Pollinators extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.POLLINATORS,
       cost: 19,
-      tags: [Tags.PLANT, Tags.ANIMAL],
+      tags: [Tag.PLANT, Tag.ANIMAL],
       resourceType: CardResource.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.PLANT, 3)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.PLANT, 3)),
       victoryPoints: VictoryPoints.resource(1, 1),
 
       metadata: {
@@ -45,8 +45,8 @@ export class Pollinators extends Card implements IProjectCard, IResourceCard, IA
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.PLANTS, 1);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

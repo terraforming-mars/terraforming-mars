@@ -24,7 +24,7 @@ export class MicroMills extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 1);
+    player.production.add(Resources.HEAT, 1);
     return undefined;
   }
 }

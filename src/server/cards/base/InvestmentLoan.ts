@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -12,7 +12,7 @@ export class InvestmentLoan extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.INVESTMENT_LOAN,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 3,
 
       metadata: {
@@ -26,10 +26,10 @@ export class InvestmentLoan extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) >= -4;
+    return player.production.megacredits >= -4;
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -1);
+    player.production.add(Resources.MEGACREDITS, -1);
     player.megaCredits += 10;
     return undefined;
   }

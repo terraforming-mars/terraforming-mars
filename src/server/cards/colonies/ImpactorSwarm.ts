@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,11 +13,11 @@ export class ImpactorSwarm extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 11,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.IMPACTOR_SWARM,
       cardType: CardType.EVENT,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN, 2)),
       metadata: {
         cardNumber: 'C16',
         renderData: CardRenderer.builder((b) => {

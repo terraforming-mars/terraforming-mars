@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {SpinoffDepartment} from '../../../src/server/cards/colonies/SpinoffDepartment';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SpinoffDepartment', function() {
@@ -14,7 +13,7 @@ describe('SpinoffDepartment', function() {
     Game.newInstance('gameid', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
     card.onCardPlayed(player, card2);
     expect(player.cardsInHand).has.lengthOf(1);
   });

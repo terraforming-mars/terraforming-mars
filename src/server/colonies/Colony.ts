@@ -18,7 +18,7 @@ import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {StealResources} from '../deferredActions/StealResources';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -90,7 +90,7 @@ export abstract class Colony implements IColony {
       // Poseidon hook
       const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
-        poseidon.addProduction(Resources.MEGACREDITS, 1);
+        poseidon.production.add(Resources.MEGACREDITS, 1);
       }
     }
 
@@ -106,7 +106,7 @@ export abstract class Colony implements IColony {
      * @returns
      */
     public trade(player: Player, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
-      const tradeOffset = player.colonyTradeOffset + bonusTradeOffset;
+      const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;
       const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
       const steps = maxTrackPosition - this.trackPosition;
 
@@ -148,7 +148,7 @@ export abstract class Colony implements IColony {
       // !== false because default is true.
       if (options.usesTradeFleet !== false) {
         this.visitor = player.id;
-        player.tradesThisGeneration++;
+        player.colonies.tradesThisGeneration++;
       }
 
       // !== false because default is true.
@@ -176,7 +176,7 @@ export abstract class Colony implements IColony {
         break;
 
       case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
-        action = new AddResourcesToCard(player, undefined, {count: quantity, restrictedTag: Tags.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)'});
+        action = new AddResourcesToCard(player, undefined, {count: quantity, restrictedTag: Tag.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)'});
         break;
 
       case ColonyBenefit.COPY_TRADE:
@@ -213,13 +213,13 @@ export abstract class Colony implements IColony {
         break;
 
       case ColonyBenefit.GAIN_CARD_DISCOUNT:
-        player.cardDiscount += 1;
+        player.colonies.cardDiscount += 1;
         game.log('Cards played by ${0} cost 1 M€ less this generation', (b) => b.player(player));
         break;
 
       case ColonyBenefit.GAIN_PRODUCTION:
         if (resource === undefined) throw new Error('Resource cannot be undefined');
-        player.addProduction(resource, quantity, {log: true});
+        player.production.add(resource, quantity, {log: true});
         break;
 
       case ColonyBenefit.GAIN_RESOURCES:
@@ -228,7 +228,7 @@ export abstract class Colony implements IColony {
         break;
 
       case ColonyBenefit.GAIN_SCIENCE_TAG:
-        player.scienceTagCount += 1;
+        player.tags.gainScienceTag();
         player.playCard(new ScienceTagCard(), undefined, 'nothing');
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;
@@ -273,7 +273,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.GAIN_VP:
         if (quantity > 0) {
-          player.colonyVictoryPoints += quantity;
+          player.colonies.victoryPoints += quantity;
           game.log('${0} gained ${1} VP', (b) => b.player(player).number(quantity));
         }
         break;

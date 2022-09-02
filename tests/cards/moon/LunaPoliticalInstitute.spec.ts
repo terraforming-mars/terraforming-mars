@@ -1,13 +1,13 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
+import {cast, fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -30,10 +30,10 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(player.getPlayableCards()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tags.MOON]})];
+    player.playedCards = [fakeCard({tags: [Tag.MOON]})];
     expect(player.getPlayableCards()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tags.MOON, Tags.MOON]})];
+    player.playedCards = [fakeCard({tags: [Tag.MOON, Tag.MOON]})];
     expect(player.getPlayableCards()).includes(card);
   });
 
@@ -53,7 +53,7 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(0);
 
-    const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    const selectParty = cast(game.deferredActions.peek()!.execute(), SelectPartyToSendDelegate);
     selectParty.cb(PartyName.MARS);
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(1);

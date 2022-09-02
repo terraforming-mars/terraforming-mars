@@ -1,11 +1,11 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -15,7 +15,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.AQUIFER_PUMPING,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 18,
 
       metadata: {
@@ -34,7 +34,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
     return player.canAfford(OCEAN_COST, {steel: true, tr: {oceans: 1}});
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action', afterPay: () => {
+    player.game.defer(new SelectPaymentDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action', afterPay: () => {
       player.game.defer(new PlaceOceanTile(player));
     }}));
     return undefined;

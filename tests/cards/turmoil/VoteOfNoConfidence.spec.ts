@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {Game} from '../../../src/server/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {isPlayerId, PlayerId} from '../../../src/common/Types';
 
@@ -26,6 +26,7 @@ describe('VoteOfNoConfidence', function() {
     card.play(player);
     expect(isPlayerId(turmoil.chairman)).is.true;
     expect(game.getPlayerById(turmoil.chairman as PlayerId)).to.eq(player);
+    runAllActions(game);
     expect(player.getTerraformRating()).to.eq(15);
   });
 });

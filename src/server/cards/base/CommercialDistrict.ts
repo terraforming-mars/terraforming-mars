@@ -1,22 +1,20 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Units} from '../../../common/Units';
 
-export class CommercialDistrict extends Card implements IProjectCard {
+export class CommercialDistrict extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.COMMERCIAL_DISTRICT,
+    name = CardName.COMMERCIAL_DISTRICT,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '085',
@@ -34,18 +32,17 @@ export class CommercialDistrict extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 16,
       adjacencyBonus,
-      productionBox: Units.of({energy: -1, megacredits: 4}),
+      productionBox: {energy: -1, megacredits: 4},
       victoryPoints: 'special',
       metadata,
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 &&
-      player.game.board.getAvailableSpacesOnLand(player).length > 0;
+  public override bespokeCanPlay(player: Player): boolean {
+    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
     const usedSpace = player.game.board.getSpaceByTileCard(this.name);
@@ -56,7 +53,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
     }
     return 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space for special tile',
       player.game.board.getAvailableSpacesOnLand(player),
@@ -66,8 +63,6 @@ export class CommercialDistrict extends Card implements IProjectCard {
           card: this.name,
         });
         foundSpace.adjacency = this.adjacencyBonus;
-        player.addProduction(Resources.ENERGY, -1);
-        player.addProduction(Resources.MEGACREDITS, 4);
         return undefined;
       },
     );

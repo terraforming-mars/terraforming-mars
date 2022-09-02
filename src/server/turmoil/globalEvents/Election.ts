@@ -2,7 +2,7 @@ import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../boards/Board';
@@ -73,7 +73,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   }
 
   public getScore(player: Player, turmoil: Turmoil, game: Game) {
-    const score = player.getTagCount(Tags.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
+    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
 
     const cities = game.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.player === player,

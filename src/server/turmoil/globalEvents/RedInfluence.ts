@@ -29,7 +29,7 @@ export class RedInfluence extends GlobalEvent implements IGlobalEvent {
         const amount = Math.min(sets, 5);
         player.deductResource(Resources.MEGACREDITS, amount * 3, {log: true, from: this.name});
       }
-      player.addProduction(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.production.add(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }
 }

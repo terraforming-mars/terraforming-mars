@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IActionCard, ICard, isIActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
@@ -12,7 +12,7 @@ export class Viron extends Card implements ICard, ICorporationCard {
   constructor() {
     super({
       name: CardName.VIRON,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       startingMegaCredits: 48,
       cardType: CardType.CORPORATION,
 

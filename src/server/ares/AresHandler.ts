@@ -4,7 +4,6 @@ import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
-import {Resources} from '../../common/Resources';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
@@ -14,7 +13,7 @@ import {AdjacencyCost} from './AdjacencyCost';
 import {Multiset} from '../utils/Multiset';
 import {Phase} from '../../common/Phase';
 import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
-import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
 
@@ -189,12 +188,12 @@ export class AresHandler {
 
     // Make this more sophisticated, a player can pay for different adjacencies
     // with different production units, and, a severe hazard can't split payments.
-    const availableProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5) +
-            player.getProduction(Resources.STEEL) +
-            player.getProduction(Resources.TITANIUM) +
-            player.getProduction(Resources.PLANTS) +
-            player.getProduction(Resources.ENERGY) +
-            player.getProduction(Resources.HEAT);
+    const availableProductionUnits = (player.production.megacredits + 5) +
+            player.production.steel +
+            player.production.titanium +
+            player.production.plants +
+            player.production.energy +
+            player.production.heat;
 
     if (availableProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
       return cost;
@@ -215,7 +214,7 @@ export class AresHandler {
     }
     if (cost.megacredits > 0) {
       player.game.log('${0} placing a tile here costs ${1} M€', (b) => b.player(player).number(cost.megacredits));
-      player.game.defer(new SelectHowToPayDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
+      player.game.defer(new SelectPaymentDeferred(player, cost.megacredits, {title: 'Select how to pay additional placement costs.'}));
     }
   }
 

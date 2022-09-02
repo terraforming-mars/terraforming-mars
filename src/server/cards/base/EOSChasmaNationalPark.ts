@@ -1,24 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
-export class EosChasmaNationalPark extends Card implements IProjectCard {
+export class EosChasmaNationalPark extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
-      tags: [Tags.PLANT, Tags.BUILDING],
+      tags: [Tag.PLANT, Tag.BUILDING],
       cost: 16,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.temperature(-12)),
@@ -33,10 +31,9 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cards = player.getResourceCards(CardResource.ANIMAL);
     player.plants += 3;
-    player.addProduction(Resources.MEGACREDITS, 2);
 
     if ( cards.length < 1 ) return undefined;
 

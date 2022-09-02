@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {MoholeArea} from '../../../src/server/cards/base/MoholeArea';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
@@ -18,7 +17,7 @@ describe('MoholeArea', function() {
     action.cb(space);
 
     expect(space.tile && space.tile.tileType).to.eq(TileType.MOHOLE_AREA);
-    expect(player.getProduction(Resources.HEAT)).to.eq(4);
+    expect(player.production.heat).to.eq(4);
     expect(space.adjacency?.bonus).eq(undefined);
   });
 });

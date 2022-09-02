@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,7 +10,7 @@ export class TerralabsResearch extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.TERRALABS_RESEARCH,
-      tags: [Tags.SCIENCE, Tags.EARTH],
+      tags: [Tag.SCIENCE, Tag.EARTH],
       startingMegaCredits: 14,
       cardType: CardType.CORPORATION,
       cardCost: 1,

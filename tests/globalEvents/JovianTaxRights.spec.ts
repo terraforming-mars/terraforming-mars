@@ -32,7 +32,7 @@ describe('JovianTaxRights', function() {
     card.resolve(game, turmoil);
     expect(player.getResource(Resources.TITANIUM)).to.eq(0);
     expect(player2.getResource(Resources.TITANIUM)).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(0);
+    expect(player2.production.megacredits).to.eq(2);
   });
 });

@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -21,7 +21,7 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PROJECT_WORKSHOP,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       startingMegaCredits: 39,
       cardType: CardType.CORPORATION,
       initialActionText: 'Draw a blue card',

@@ -1,23 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
-import {Units} from '../../../common/Units';
+import {Tag} from '../../../common/cards/Tag';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
+export class LobbyHalls extends Card2 implements IProjectCard, ICloneTagCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.LOBBY_HALLS,
       cost: 11,
-      productionBox: Units.of({megacredits: 2}),
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'PfTBD',
@@ -30,15 +29,14 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
     });
   }
 
-  public cloneTag: Tags = Tags.CLONE;
+  public cloneTag: Tag = Tag.CLONE;
 
-  public override get tags(): Array<Tags> {
-    return [this.cloneTag, Tags.BUILDING];
+  public override get tags(): Array<Tag> {
+    return [this.cloneTag, Tag.BUILDING];
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new DeclareCloneTag(player, this));
-    player.adjustProduction(this.productionBox);
     const turmoil = Turmoil.getTurmoil(player.game);
     if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {
       player.game.defer(new SendDelegateToArea(player, undefined, {source: 'reserve'}));

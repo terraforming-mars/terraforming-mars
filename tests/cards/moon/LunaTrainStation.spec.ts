@@ -2,11 +2,10 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTrainStation} from '../../../src/server/cards/moon/LunaTrainStation';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/server/moon/PlaceSpecialMoonTile';
 
@@ -44,20 +43,20 @@ describe('LunaTrainStation', () => {
 
   it('play', () => {
     player.steel = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
+    expect(player.production.steel).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.steel).eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(4);
+    expect(player.production.megacredits).eq(4);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.logisticRate).eq(1);
 
     const space = moonData.moon.spaces[2];
-    const placeTileAction = game.deferredActions.peek() as PlaceSpecialMoonTile;
-    placeTileAction!.execute()!.cb(space);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceSpecialMoonTile);
+    placeTileAction.execute()!.cb(space);
 
     expect(space.player).eq(player);
     expect(space.tile!.tileType).eq(TileType.LUNA_TRAIN_STATION);

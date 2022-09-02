@@ -3,7 +3,6 @@ import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/server/cards/moon/AlgaeBioreactors';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Phase} from '../../../src/common/Phase';
@@ -28,22 +27,22 @@ describe('AlgaeBioreactors', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    player.setProductionForTest({plants: 1});
+    player.production.override({plants: 1});
     expect(player.getPlayableCards()).does.include(card);
 
-    player.setProductionForTest({plants: 0});
+    player.production.override({plants: 0});
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
-    player.setProductionForTest({plants: 1});
+    player.production.override({plants: 1});
     expect(player.getTerraformRating()).eq(14);
     expect(game.getOxygenLevel()).eq(0);
     moonData.colonyRate = 0;
 
-    card.play(player);
+    player.simplePlay(card);
 
-    expect(player.getProduction(Resources.PLANTS)).eq(0);
+    expect(player.production.plants).eq(0);
     expect(moonData.colonyRate).eq(1);
     expect(game.getOxygenLevel()).eq(1);
     expect(player.getTerraformRating()).eq(16);
@@ -56,7 +55,7 @@ describe('AlgaeBioreactors', () => {
     game.phase = Phase.ACTION;
 
     // Card requirements
-    player.setProductionForTest({plants: 1});
+    player.production.override({plants: 1});
 
     testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
     moonData.colonyRate = 8;

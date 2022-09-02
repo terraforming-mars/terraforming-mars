@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ export class EcoLine extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.ECOLINE,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
       startingMegaCredits: 36,
 
       metadata: {
@@ -32,7 +32,7 @@ export class EcoLine extends Card implements ICorporationCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 2);
+    player.production.add(Resources.PLANTS, 2);
     player.plants = 3;
     player.plantsNeededForGreenery = 7;
     return undefined;

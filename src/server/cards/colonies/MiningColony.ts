@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class MiningColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 20,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.MINING_COLONY,
       cardType: CardType.AUTOMATED,
 
@@ -27,12 +27,12 @@ export class MiningColony extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.hasAvailableColonyTileToBuildOn();
+    return player.colonies.getPlayableColonies().length > 0;
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, false, 'Select colony for Mining Colony'));
-    player.addProduction(Resources.TITANIUM, 1);
+    player.game.defer(new BuildColony(player, {title: 'Select colony for Mining Colony'}));
+    player.production.add(Resources.TITANIUM, 1);
     return undefined;
   }
 }

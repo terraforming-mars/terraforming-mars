@@ -18,8 +18,8 @@ import AndOptions from '@/client/components/AndOptions.vue';
 import OrOptions from '@/client/components/OrOptions.vue';
 import SelectAmount from '@/client/components/SelectAmount.vue';
 import SelectCard from '@/client/components/SelectCard.vue';
-import SelectHowToPay from '@/client/components/SelectHowToPay.vue';
-import SelectHowToPayForProjectCard from '@/client/components/SelectHowToPayForProjectCard.vue';
+import SelectPayment from '@/client/components/SelectPayment.vue';
+import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import SelectOption from '@/client/components/SelectOption.vue';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
@@ -58,8 +58,8 @@ export default Vue.component('player-input-factory', {
     'select-amount': SelectAmount,
     SelectCard,
     'select-option': SelectOption,
-    SelectHowToPay,
-    SelectHowToPayForProjectCard,
+    SelectPayment,
+    SelectProjectCardToPlay,
     SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
@@ -83,16 +83,16 @@ export default Vue.component('player-input-factory', {
         return 'and-options';
       case PlayerInputTypes.SELECT_CARD:
         return 'SelectCard';
-      case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
-        return 'SelectHowToPayForProjectCard';
+      case PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY:
+        return 'SelectProjectCardToPlay';
       case PlayerInputTypes.SELECT_INITIAL_CARDS:
         return 'SelectInitialCards';
       case PlayerInputTypes.OR_OPTIONS:
         return 'or-options';
       case PlayerInputTypes.SELECT_OPTION:
         return 'select-option';
-      case PlayerInputTypes.SELECT_HOW_TO_PAY:
-        return 'SelectHowToPay';
+      case PlayerInputTypes.SELECT_PAYMENT:
+        return 'SelectPayment';
       case PlayerInputTypes.SELECT_SPACE:
         return 'select-space';
       case PlayerInputTypes.SELECT_PLAYER:

@@ -5,7 +5,6 @@ import {InterstellarColonyShip} from '../../../src/server/cards/base/Interstella
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Cartel', function() {
@@ -23,11 +22,11 @@ describe('Cartel', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     player.playedCards.push(card);
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.megacredits).to.eq(3);
   });
 
   it('Correctly counts tags', function() {
@@ -39,6 +38,6 @@ describe('Cartel', function() {
 
     player.playedCards = player.playedCards.concat(cards);
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2); // exclude events
+    expect(player.production.megacredits).to.eq(2); // exclude events
   });
 });

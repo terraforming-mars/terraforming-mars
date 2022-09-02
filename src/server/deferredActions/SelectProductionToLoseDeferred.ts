@@ -22,7 +22,7 @@ export class SelectProductionToLoseDeferred extends DeferredAction {
         if (total !== this.unitsToLose) {
           throw new Error(`Expected ${this.unitsToLose} units of production, got ${total}`);
         }
-        this.player.adjustProduction(Units.negative(production), {log: true});
+        this.player.production.adjust(Units.negative(production), {log: true});
         return undefined;
       },
     );

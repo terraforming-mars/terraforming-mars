@@ -2,25 +2,25 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardType} from '../../../common/cards/CardType';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 
-export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard, IResourceCard {
+export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.BIOENGINEERING_ENCLOSURE,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 7,
       resourceType: CardResource.ANIMAL,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
       metadata: {
         description: 'Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.',
         cardNumber: 'A01',

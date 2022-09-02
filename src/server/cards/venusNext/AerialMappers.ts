@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {PlayerInput} from '../../PlayerInput';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -13,12 +13,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
 
-export class AerialMappers extends Card implements IActionCard, IResourceCard {
+export class AerialMappers extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.AERIAL_MAPPERS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 11,
       resourceType: CardResource.FLOATER,
       victoryPoints: 1,
@@ -37,7 +37,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
       },
     });
   }
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

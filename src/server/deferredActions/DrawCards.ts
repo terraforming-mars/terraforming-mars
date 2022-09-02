@@ -1,11 +1,11 @@
 import {Player} from '../Player';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';
 import {CardResource} from '../../common/CardResource';
 import {CardType} from '../../common/cards/CardType';
-import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
 
 enum LogType {
@@ -33,7 +33,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
       if (this.options.cardType !== undefined && this.options.cardType !== card.cardType) {
         return false;
       }
-      if (this.options.tag !== undefined && !this.player.cardHasTag(card, this.options.tag)) {
+      if (this.options.tag !== undefined && !this.player.tags.cardHasTag(card, this.options.tag)) {
         return false;
       }
       if (this.options.include !== undefined && !this.options.include(card)) {
@@ -85,7 +85,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
     const cb = (selected: Array<IProjectCard>) => {
       if (options.paying && selected.length > 0) {
         player.game.defer(
-          new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
+          new SelectPaymentDeferred(player, selected.length * player.cardCost, {
             title: 'Select how to pay for cards',
             afterPay: () => {
               this.keep(player, selected, LogType.BOUGHT);
@@ -113,7 +113,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
 
 export namespace DrawCards {
   export interface DrawOptions {
-    tag?: Tags,
+    tag?: Tag,
     resource?: CardResource,
     cardType?: CardType,
     include?: (card: IProjectCard) => boolean,

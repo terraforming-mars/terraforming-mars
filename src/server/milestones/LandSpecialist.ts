@@ -4,8 +4,8 @@ import {isSpecialTile, playerTileFn} from '../boards/Board';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
 export class LandSpecialist implements IMilestone {
-  public name: string = 'Land Specialist';
-  public description: string = 'Requires that you have 3 special (normally, brown) tiles in play';
+  public readonly name = 'Land Specialist';
+  public readonly description = 'Requires that you have 3 special (normally, brown) tiles in play';
   public getScore(player: Player): number {
     const spaces = player.game.board.spaces
       .filter(playerTileFn(player))

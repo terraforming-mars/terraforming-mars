@@ -4,15 +4,18 @@ import {CardType} from '../../common/cards/CardType';
 import {CardDiscount} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './CardRequirements';
-import {TRSource} from './ICard';
+import {DynamicTRSource, TRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
+import {MoonExpansion} from '../moon/MoonExpansion';
+import {PlayerInput} from '../PlayerInput';
+import {isICorporationCard} from './corporation/ICorporationCard';
 
 export interface StaticCardProperties {
   adjacencyBonus?: AdjacencyBonus;
@@ -25,18 +28,29 @@ export interface StaticCardProperties {
   name: CardName;
   resourceType?: CardResource;
   startingMegaCredits?: number;
-  tags?: Array<Tags>;
-  productionBox?: Units;
+  tags?: Array<Tag>;
+  productionBox?: Partial<Units>;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
-  reserveUnits?: Units,
-  tr?: TRSource,
+  reserveUnits?: Partial<Units>,
+  tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-export const staticCardProperties = new Map<CardName, StaticCardProperties>();
+type Properties = Omit<StaticCardProperties, 'productionBox|reserveUnits'> & {productionBox?: Units, reserveUnits?: Units};
 
+
+export const staticCardProperties = new Map<CardName, Properties>();
+
+/**
+ * Card is an implementation for most cards in the game, which provides one key features:
+ *
+ * 1. It stores key card properties into a static cache, which means that each instance of a card
+ *    consumes very little memory.
+ *
+ * // TODO(kberg): Card2 will be merged into this eventually.
+ */
 export abstract class Card {
-  private readonly properties: StaticCardProperties;
+  private readonly properties: Properties;
   constructor(properties: StaticCardProperties) {
     let staticInstance = staticCardProperties.get(properties.name);
     if (staticInstance === undefined) {
@@ -51,8 +65,13 @@ export abstract class Card {
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(properties);
 
-      staticCardProperties.set(properties.name, properties);
-      staticInstance = properties;
+      const p: Properties = {
+        ...properties,
+        productionBox: properties.productionBox === undefined ? undefined : Units.of(properties.productionBox),
+        reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
+      };
+      staticCardProperties.set(properties.name, p);
+      staticInstance = p;
     }
     this.properties = staticInstance;
   }
@@ -99,7 +118,7 @@ export abstract class Card {
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
   }
-  public get tr(): TRSource {
+  public get tr(): TRSource | DynamicTRSource {
     return this.properties.tr || {};
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
@@ -123,7 +142,7 @@ export abstract class Card {
         return vp1.points * Math.floor(this.resourceCount / vp1.per);
       } else {
         const tag = vp1.type;
-        const count = player?.getTagCount(tag, 'vps') ?? 0;
+        const count = player?.tags.count(tag, 'vps') ?? 0;
         return vp1.points * Math.floor(count / vp1.per);
       }
     }
@@ -156,10 +175,10 @@ export abstract class Card {
       break;
 
     case CardRenderItemType.JOVIAN:
-      units = player?.getTagCount(Tags.JOVIAN, 'vps');
+      units = player?.tags.count(Tag.JOVIAN, 'vps');
       break;
     case CardRenderItemType.MOON:
-      units = player?.getTagCount(Tags.MOON, 'vps');
+      units = player?.tags.count(Tag.MOON, 'vps');
       break;
     }
 
@@ -220,5 +239,55 @@ export abstract class Card {
       }
     }
     return sum;
+  }
+}
+
+/**
+ * Card2 provides new behavior over Card, and will eventually be moved directly into Card.
+ *
+ * It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
+ * in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
+ * put right in here.
+ *
+ * In order to implement this default behavior, Card2 subclasses should ideally not
+ * override `play` and `canPlay`. Instead, they should override `bespokeCanPlay` and
+ * `bespokePlay`, which provide bespoke, or custom hand-crafted play and canPlay
+ * behavior.
+ *
+ * If this seems counterintuitive, think about it this way: very little behavior should
+ * be custom-written for each card, _no_ common behavior should be custom-written for
+ * each card, either.
+ */
+export abstract class Card2 extends Card {
+  constructor(properties: StaticCardProperties) {
+    super(properties);
+  }
+  public override canPlay(player: Player) {
+    if (this.requirements?.satisfies(player) === false) {
+      return false;
+    }
+    if (this.productionBox && !player.production.canAdjust(this.productionBox)) {
+      return false;
+    }
+    return this.bespokeCanPlay(player);
+  }
+
+  public bespokeCanPlay(_player: Player): boolean {
+    return true;
+  }
+
+  public play(player: Player) {
+    if (this.productionBox !== undefined) {
+      player.production.adjust(this.productionBox);
+    }
+    if (!isICorporationCard(this)) {
+      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
+      player.deductUnits(adjustedReserveUnits);
+    }
+    return this.bespokePlay(player);
+  }
+
+  public bespokePlay(_player: Player): PlayerInput | undefined {
+    return undefined;
   }
 }

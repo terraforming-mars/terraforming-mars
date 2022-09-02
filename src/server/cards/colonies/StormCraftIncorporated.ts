@@ -1,8 +1,8 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -14,11 +14,11 @@ import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resources} from '../../../common/Resources';
 
-export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard, IResourceCard {
+export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       startingMegaCredits: 48,
       resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,

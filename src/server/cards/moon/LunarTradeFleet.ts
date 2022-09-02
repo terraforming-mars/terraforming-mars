@@ -1,19 +1,20 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class LunarTradeFleet extends Card {
+export class LunarTradeFleet extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_TRADE_FLEET,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.SPACE],
+      tags: [Tag.MOON, Tag.SPACE],
       cost: 8,
       tr: {moonLogistics: 1},
 
@@ -32,7 +33,7 @@ export class LunarTradeFleet extends Card {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1, {log: true});
+    player.production.add(Resources.MEGACREDITS, 1, {log: true});
     MoonExpansion.raiseLogisticRate(player);
     return undefined;
   }

@@ -1,10 +1,11 @@
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('AerobrakedAmmoniaAsteroid', function() {
   let card: AerobrakedAmmoniaAsteroid;
@@ -20,8 +21,8 @@ describe('AerobrakedAmmoniaAsteroid', function() {
   it('Should play without microbe cards', function() {
     player.playedCards.push(card);
     const action = card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(3);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.heat).to.eq(3);
+    expect(player.production.plants).to.eq(1);
 
     // It's okay to not have a card to collect Microbes on
     expect(action).is.undefined;
@@ -34,8 +35,8 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     player.playedCards.push(selectedCard);
 
     card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(3);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.heat).to.eq(3);
+    expect(player.production.plants).to.eq(1);
     expect(selectedCard.resourceCount).to.eq(2);
   });
 
@@ -47,13 +48,12 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     const otherMicrobeCard = new Decomposers();
     player.playedCards.push(selectedCard, otherMicrobeCard);
 
-    const action = card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(3);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    const action = cast(card.play(player), SelectCard);
+    expect(player.production.heat).to.eq(3);
+    expect(player.production.plants).to.eq(1);
 
-    expect(action).is.not.undefined;
-        action!.cb([selectedCard]);
+    action.cb([selectedCard]);
 
-        expect(selectedCard.resourceCount).to.eq(2);
+    expect(selectedCard.resourceCount).to.eq(2);
   });
 });

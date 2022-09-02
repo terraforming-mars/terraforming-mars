@@ -1,24 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
-export class OpenCity extends Card implements IProjectCard {
+export class OpenCity extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.OPEN_CITY,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 23,
-      productionBox: Units.of({energy: -1, megacredits: 4}),
+      productionBox: {energy: -1, megacredits: 4},
       requirements: CardRequirements.builder((b) => b.oxygen(12)),
       victoryPoints: 1,
 
@@ -38,14 +36,12 @@ export class OpenCity extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && player.game.board.getAvailableSpacesForCity(player).length > 0;
+  public override bespokeCanPlay(player: Player): boolean {
+    return player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
-      player.addProduction(Resources.ENERGY, -1);
-      player.addProduction(Resources.MEGACREDITS, 4);
       player.plants += 2;
       return undefined;
     });

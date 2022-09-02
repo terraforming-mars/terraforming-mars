@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {DeferredAction, Priority} from '../..//deferredActions/DeferredAction';
@@ -14,7 +14,7 @@ export class CharityDonation extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.CHARITY_DONATION,
-      tags: [Tags.MARS],
+      tags: [Tag.MARS],
       cost: 7,
       victoryPoints: 1,
 

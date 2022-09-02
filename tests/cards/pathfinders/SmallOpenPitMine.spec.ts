@@ -31,7 +31,7 @@ describe('SmallOpenPitMine', function() {
 
     twoSteel.cb();
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 2}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
   });
 
   it('play - titanium', function() {
@@ -41,6 +41,6 @@ describe('SmallOpenPitMine', function() {
 
     oneTitanium.cb();
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({titanium: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({titanium: 1}));
   });
 });

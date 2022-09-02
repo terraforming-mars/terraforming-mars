@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 import {Board} from '../../boards/Board';
@@ -17,7 +17,7 @@ export class MartianMonuments extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.MARTIAN_MONUMENTS,
       cost: 10,
-      tags: [Tags.MARS, Tags.BUILDING],
+      tags: [Tag.MARS, Tag.BUILDING],
       requirements: CardRequirements.builder((b) => b.cities(1, {text: 'ON MARS'})),
 
       metadata: {
@@ -37,8 +37,8 @@ export class MartianMonuments extends Card implements IProjectCard {
   }
 
   public produce(player: Player, increment: number = 0) {
-    const count = player.getTagCount(Tags.MARS) + increment;
-    player.addProduction(Resources.MEGACREDITS, count, {log: true});
+    const count = player.tags.count(Tag.MARS) + increment;
+    player.production.add(Resources.MEGACREDITS, count, {log: true});
   }
 
   public play(player: Player) {

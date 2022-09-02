@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {WavePower} from '../../../src/server/cards/base/WavePower';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 
 describe('WavePower', function() {
@@ -26,7 +25,7 @@ describe('WavePower', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

@@ -1,11 +1,11 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {VenusSoils} from '../../../src/server/cards/venusNext/VenusSoils';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusSoils', function() {
@@ -26,7 +26,7 @@ describe('VenusSoils', function() {
     card.play(player);
 
     expect(card2.resourceCount).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
@@ -35,12 +35,11 @@ describe('VenusSoils', function() {
     const card3 = new VenusianInsects();
     player.playedCards.push(card2, card3);
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard);
+    action.cb([card2]);
 
-        action!.cb([card2]);
-        expect(card2.resourceCount).to.eq(2);
-        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    expect(card2.resourceCount).to.eq(2);
+    expect(player.production.plants).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

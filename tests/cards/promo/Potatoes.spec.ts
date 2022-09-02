@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/server/cards/promo/Potatoes';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Potatoes', function() {
@@ -31,6 +30,6 @@ describe('Potatoes', function() {
 
     card.play(player);
     expect(player.plants).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 });

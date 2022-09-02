@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
 
 export class SocialEvents extends Card implements IProjectCard {
@@ -13,7 +13,8 @@ export class SocialEvents extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SOCIAL_EVENTS,
       cost: 18,
-      tags: [Tags.EARTH, Tags.MARS],
+      tags: [Tag.EARTH, Tag.MARS],
+      tr: ((player) => ({tr: this.getExpectedTr(player)})),
 
       metadata: {
         cardNumber: '...',
@@ -26,10 +27,7 @@ export class SocialEvents extends Card implements IProjectCard {
   }
 
   private getExpectedTr(player: Player) {
-    return Math.floor((player.getTagCount(Tags.MARS) + 1) / 2); // +1 is the "including this"
-  }
-  public override canPlay(player: Player): boolean {
-    return player.canAfford(player.getCardCost(this), {tr: {tr: this.getExpectedTr(player)}});
+    return Math.floor((player.tags.count(Tag.MARS) + 1) / 2); // +1 is the "including this"
   }
 
   public play(player: Player) {

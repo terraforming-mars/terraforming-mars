@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -6,19 +6,18 @@ import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
-export class NewVenice extends Card implements IProjectCard {
+export class NewVenice extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.NEW_VENICE,
-      tags: [Tags.MARS, Tags.ENERGY, Tags.BUILDING, Tags.CITY],
+      tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING, Tag.CITY],
       cost: 21,
-      productionBox: Units.of({energy: 1, megacredits: 2}),
+      productionBox: {energy: 1, megacredits: 2},
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {
@@ -35,12 +34,12 @@ export class NewVenice extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return super.canPlay(player) && (player.plants >= 2);
+  // TODO(kberg): use reserveUnits for plants.
+  public override bespokeCanPlay(player: Player): boolean {
+    return player.plants >= 2;
   }
 
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+  public override bespokePlay(player: Player) {
     player.plants -= 2;
 
     return new SelectSpace(

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../../common/Resources';
 
@@ -14,7 +14,7 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.HYDROGEN_PROCESSING_PLANT,
       cost: 9,
-      tags: [Tags.BUILDING, Tags.ENERGY],
+      tags: [Tag.BUILDING, Tag.ENERGY],
       requirements: CardRequirements.builder((b) => b.oxygen(3)),
       victoryPoints: -1,
 
@@ -31,7 +31,7 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
   }
 
   public produce(player: Player) {
-    player.addProduction(Resources.ENERGY, Math.floor(player.game.board.getOceanCount({wetlands: true}) / 2), {log: true});
+    player.production.add(Resources.ENERGY, Math.floor(player.game.board.getOceanCount({wetlands: true}) / 2), {log: true});
   }
 
   public play(player: Player) {

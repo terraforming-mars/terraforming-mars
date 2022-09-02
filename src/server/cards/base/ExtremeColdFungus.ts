@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -19,7 +19,7 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
     super({
       cardType: CardType.ACTIVE,
       name: CardName.EXTREME_COLD_FUNGUS,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 13,
 
       requirements: CardRequirements.builder((b) => b.temperature(-10, {max})),

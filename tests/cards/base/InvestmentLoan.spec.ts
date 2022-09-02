@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {InvestmentLoan} from '../../../src/server/cards/base/InvestmentLoan';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InvestmentLoan', function() {
@@ -12,7 +11,7 @@ describe('InvestmentLoan', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+    expect(player.production.megacredits).to.eq(-1);
     expect(player.megaCredits).to.eq(10);
   });
 });

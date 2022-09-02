@@ -1,22 +1,20 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
-export class NoctisFarming extends Card implements IProjectCard {
+export class NoctisFarming extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.NOCTIS_FARMING,
-      tags: [Tags.PLANT, Tags.BUILDING],
+      tags: [Tag.PLANT, Tag.BUILDING],
       cost: 10,
-      productionBox: Units.of({megacredits: 1}),
+      productionBox: {megacredits: 1},
       requirements: CardRequirements.builder((b) => b.temperature(-20)),
       victoryPoints: 1,
 
@@ -32,8 +30,7 @@ export class NoctisFarming extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
+  public override bespokePlay(player: Player) {
     player.plants += 2;
     return undefined;
   }

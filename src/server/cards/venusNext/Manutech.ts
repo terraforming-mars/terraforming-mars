@@ -1,21 +1,20 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
-export class Manutech extends Card implements ICorporationCard {
+export class Manutech extends Card2 implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MANUTECH,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 35,
       cardType: CardType.CORPORATION,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         cardNumber: 'R23',
@@ -31,11 +30,6 @@ export class Manutech extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
-    return undefined;
   }
 
   public static onProductionGain(player: Player, resource: Resources, amount: number) {

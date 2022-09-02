@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.AEROBRAKED_AMMONIA_ASTEROID,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 26,
 
       metadata: {
@@ -33,8 +33,8 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
 
   public play(player: Player) {
     const cardsToPick = player.getResourceCards(CardResource.MICROBE);
-    player.addProduction(Resources.HEAT, 3);
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.HEAT, 3);
+    player.production.add(Resources.PLANTS, 1);
 
     if (cardsToPick.length < 1) return undefined;
 

@@ -1,4 +1,4 @@
-import {Tags} from '../common/cards/Tags';
+import {Tag} from '../common/cards/Tag';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 
 export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon colony' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
@@ -75,7 +75,7 @@ export class VictoryPointsBreakdown {
       break;
     case 'planetary tracks':
       this.points.planetaryTracks += points;
-      if (message !== undefined) this.points.detailsPlanetaryTracks.push({tag: message as Tags, points});
+      if (message !== undefined) this.points.detailsPlanetaryTracks.push({tag: message as Tag, points});
       break;
     default:
       console.warn('Unknown victory point constraint ' + key);

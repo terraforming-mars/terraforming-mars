@@ -4,7 +4,6 @@ import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {CoronaExtractor} from '../../../src/server/cards/colonies/CoronaExtractor';
 import {AgricolaInc} from '../../../src/server/cards/community/AgricolaInc';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AgricolaInc', function() {
@@ -22,8 +21,8 @@ describe('AgricolaInc', function() {
   });
 
   it('Starts with correct production', function() {
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 
   it('Scores endgame VP correctly', function() {

@@ -3,7 +3,6 @@ import {NitrophilicMoss} from '../../../src/server/cards/base/NitrophilicMoss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -37,7 +36,7 @@ describe('NitrophilicMoss', function() {
 
     card.play(player);
     expect(player.plants).to.eq(0);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.plants).to.eq(2);
   });
 
   it('Can play with 1 plant if have Viral Enhancers', function() {
@@ -53,7 +52,7 @@ describe('NitrophilicMoss', function() {
     expect(player.plants).to.eq(-1);
     viralEnhancers.onCardPlayed(player, card);
     expect(player.plants).to.eq(0);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.plants).to.eq(2);
   });
 
   it('Should play', function() {

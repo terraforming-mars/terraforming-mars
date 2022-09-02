@@ -2,11 +2,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
-import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
 import {IMoonCard} from './IMoonCard';
 import {MoonCard} from './MoonCard';
@@ -17,10 +16,10 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
     super({
       name: CardName.MARE_NECTARIS_MINE,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.BUILDING],
+      tags: [Tag.MOON, Tag.BUILDING],
       cost: 14,
-      productionBox: Units.of({steel: 1}),
-      reserveUnits: Units.of({titanium: 1}),
+      productionBox: {steel: 1},
+      reserveUnits: {titanium: 1},
       tr: {moonMining: 1},
 
       metadata: {
@@ -37,8 +36,7 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_NECTARIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

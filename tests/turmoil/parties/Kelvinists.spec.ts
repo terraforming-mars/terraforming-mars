@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {ISpace} from '../../../src/server/boards/ISpace';
-import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Resources} from '../../../src/common/Resources';
@@ -26,7 +26,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each Heat production you have', function() {
-    player.addProduction(Resources.HEAT, 5);
+    player.production.add(Resources.HEAT, 5);
 
     const bonus = KELVINISTS_BONUS_1;
     bonus.grant(game);
@@ -34,7 +34,7 @@ describe('Kelvinists', function() {
   });
 
   it('Ruling bonus 2: Gain 1 heat for each Heat production you have', function() {
-    player.addProduction(Resources.HEAT, 5);
+    player.production.add(Resources.HEAT, 5);
 
     const bonus = KELVINISTS_BONUS_2;
     bonus.grant(game);
@@ -49,8 +49,8 @@ describe('Kelvinists', function() {
     kelvinistsPolicy.action(player);
 
     game.deferredActions.runNext();
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player.getProduction(Resources.HEAT)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.heat).to.eq(1);
   });
 
   it('Ruling policy 2: When you raise temperature, gain 3 M€ per step raised', function() {
@@ -88,8 +88,8 @@ describe('Kelvinists', function() {
     expect(kelvinistsPolicy.canAct(player)).to.be.true;
 
     const action = kelvinistsPolicy.action(player) as AndOptions;
-    const heatOption = action.options[0] as SelectAmount;
-    const floaterOption = action.options[1] as SelectAmount;
+    const heatOption = cast(action.options[0], SelectAmount);
+    const floaterOption = cast(action.options[1], SelectAmount);
 
     heatOption.cb(4);
     floaterOption.cb(1);

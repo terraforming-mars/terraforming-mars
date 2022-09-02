@@ -3,7 +3,6 @@ import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/server/cards/moon/LunaSenate';
-import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -33,21 +32,21 @@ describe('LunaSenate', () => {
   it('play', () => {
     player.tagsForTest = {moon: 3};
     player2.tagsForTest = {moon: 4};
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
 
     card.play(player);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(9);
+    expect(player.production.megacredits).eq(9);
   });
 
   it('does not count opponent wild tags', () => {
     player.tagsForTest = {moon: 3};
     player2.tagsForTest = {moon: 3, wild: 2};
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
 
     card.play(player);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(8);
+    expect(player.production.megacredits).eq(8);
   });
 
   it('getVictoryPoints', () => {

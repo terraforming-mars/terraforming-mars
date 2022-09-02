@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -7,13 +7,14 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class VenusSoils extends Card {
+export class VenusSoils extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.VENUS_SOILS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS, Tags.PLANT],
+      tags: [Tag.VENUS, Tag.PLANT],
       cost: 20,
       tr: {venus: 1},
 
@@ -29,7 +30,7 @@ export class VenusSoils extends Card {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
+    player.production.add(Resources.PLANTS, 1);
     player.game.increaseVenusScaleLevel(player, 1);
 
     const microbeCards = player.getResourceCards(CardResource.MICROBE);

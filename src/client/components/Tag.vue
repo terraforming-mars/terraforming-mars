@@ -5,13 +5,13 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 
 export default Vue.extend({
   name: 'Tag',
   props: {
     tag: {
-      type: String as () => Tags,
+      type: String as () => Tag,
     },
     size: {
       type: String,

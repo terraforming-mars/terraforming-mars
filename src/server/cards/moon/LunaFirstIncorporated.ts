@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -14,7 +14,7 @@ export class LunaFirstIncorporated extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.LUNA_FIRST_INCORPORATED,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       startingMegaCredits: 40,
 
       metadata: {

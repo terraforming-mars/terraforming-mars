@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MomentumViriumHabitat} from '../../../src/server/cards/moon/MomentumViriumHabitat';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {MoonSpaces} from '../../../src/server/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
@@ -38,16 +37,16 @@ describe('MomentumViriumHabitat', () => {
 
   it('play', () => {
     player.titanium = 1;
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player.getProduction(Resources.HEAT)).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player.production.heat).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.colonyRate).eq(0);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(3);
-    expect(player.getProduction(Resources.HEAT)).eq(2);
+    expect(player.production.megacredits).eq(3);
+    expect(player.production.heat).eq(2);
 
     const momentumVirium = moonData.moon.getSpace(MoonSpaces.MOMENTUM_VIRIUM);
     expect(momentumVirium.player).eq(player);

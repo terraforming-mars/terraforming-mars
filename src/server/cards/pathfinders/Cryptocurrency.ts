@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -17,7 +17,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
       cardType: CardType.ACTIVE,
       name: CardName.CRYPTOCURRENCY,
       cost: 6,
-      tags: [Tags.ENERGY],
+      tags: [Tag.ENERGY],
       resourceType: CardResource.DATA,
 
       metadata: {

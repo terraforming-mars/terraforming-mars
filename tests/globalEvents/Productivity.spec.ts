@@ -21,8 +21,8 @@ describe('Productivity', function() {
     turmoil.dominantParty.delegates.push(player2.id);
     turmoil.dominantParty.delegates.push(player2.id);
 
-    player.addProduction(Resources.STEEL, 3);
-    player2.addProduction(Resources.STEEL, 3);
+    player.production.add(Resources.STEEL, 3);
+    player2.production.add(Resources.STEEL, 3);
 
     card.resolve(game, turmoil);
     expect(player.getResource(Resources.STEEL)).to.eq(3);

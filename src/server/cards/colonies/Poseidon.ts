@@ -33,7 +33,7 @@ export class Poseidon extends Card implements ICorporationCard {
 
   public initialAction(player: Player) {
     if (player.game.gameOptions.coloniesExtension) {
-      player.game.defer(new BuildColony(player, false, 'Poseidon first action - Select where to build colony'));
+      player.game.defer(new BuildColony(player, {title: 'Poseidon first action - Select where to build colony'}));
       return undefined;
     } else {
       console.warn('Colonies extension isn\'t selected.');

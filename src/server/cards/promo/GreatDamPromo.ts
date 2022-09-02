@@ -1,8 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
@@ -10,17 +9,16 @@ import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {Units} from '../../../common/Units';
+import {Card2} from '../Card';
 
-export class GreatDamPromo extends Card implements IProjectCard {
+export class GreatDamPromo extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.GREAT_DAM_PROMO,
       cost: 15,
-      tags: [Tags.ENERGY, Tags.BUILDING],
-      productionBox: Units.of({energy: 2}),
+      tags: [Tag.ENERGY, Tag.BUILDING],
+      productionBox: {energy: 2},
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       victoryPoints: 1,
 
@@ -34,13 +32,11 @@ export class GreatDamPromo extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 2);
-
+  public override bespokePlay(player: Player) {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 

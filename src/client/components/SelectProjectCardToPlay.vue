@@ -2,22 +2,22 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 
-import {HowToPay} from '@/common/inputs/HowToPay';
+import {Payment} from '@/common/inputs/Payment';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectProjectCardToPlayModel, unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
-  name: 'SelectHowToPayForProjectCard',
+  name: 'SelectProjectCardToPlay',
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
@@ -40,7 +40,7 @@ export default Vue.extend({
       return this.playerView.thisPlayer;
     },
   },
-  data(): SelectHowToPayForProjectCardModel {
+  data(): SelectProjectCardToPlayModel {
     let card: CardModel | undefined;
     let cards: Array<CardModel> = [];
     if (this.playerinput !== undefined &&
@@ -198,7 +198,7 @@ export default Vue.extend({
     },
     canUseSteel() {
       if (this.card !== undefined && this.available.steel > 0) {
-        if (this.tags.includes(Tags.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
+        if (this.tags.includes(Tag.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
       }
@@ -206,7 +206,7 @@ export default Vue.extend({
     },
     canUseTitanium() {
       if (this.card !== undefined && this.available.titanium > 0) {
-        if (this.tags.includes(Tags.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
+        if (this.tags.includes(Tag.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
       }
@@ -215,7 +215,7 @@ export default Vue.extend({
     canUseMicrobes() {
       // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
       if (this.card !== undefined && (this.playerinput.microbes ?? 0) > 0) {
-        if (this.tags.includes(Tags.PLANT)) {
+        if (this.tags.includes(Tag.PLANT)) {
           return true;
         }
       }
@@ -224,7 +224,7 @@ export default Vue.extend({
     canUseFloaters() {
       // FYI Floaters are limited to the DIRIGIBLES card.
       if (this.card !== undefined && (this.playerinput.floaters ?? 0) > 0) {
-        if (this.tags.includes(Tags.VENUS)) {
+        if (this.tags.includes(Tag.VENUS)) {
           return true;
         }
       }
@@ -233,7 +233,7 @@ export default Vue.extend({
     canUseScience() {
       // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
       if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
-        if (this.tags.includes(Tags.MOON)) {
+        if (this.tags.includes(Tag.MOON)) {
           return true;
         }
       }
@@ -243,7 +243,7 @@ export default Vue.extend({
       // FYI Seed Resources are limited to the Soylent Seedling Systems corp card, which allows spending its
       // resources for plant cards and the standard greenery project.
       if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
-        if (this.tags.includes(Tags.PLANT)) {
+        if (this.tags.includes(Tag.PLANT)) {
           return true;
         }
         if (this.card.name === CardName.GREENERY_STANDARD_PROJECT) {
@@ -277,7 +277,7 @@ export default Vue.extend({
       return this.card?.reserveUnits?.heat > 0 && this.canUseHeat();
     },
     saveData() {
-      const htp: HowToPay = {
+      const payment: Payment = {
         heat: this.heat,
         megaCredits: this.megaCredits,
         steel: this.steel,
@@ -290,11 +290,11 @@ export default Vue.extend({
       };
       let totalSpent = 0;
       for (const target of unit) {
-        if (htp[target] > this.getAmount(target)) {
+        if (payment[target] > this.getAmount(target)) {
           this.$data.warning = `You do not have enough ${target}`;
           return;
         }
-        totalSpent += htp[target] * this.getResourceRate(target);
+        totalSpent += payment[target] * this.getResourceRate(target);
       }
 
       if (totalSpent < this.cost) {
@@ -305,7 +305,7 @@ export default Vue.extend({
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
         for (const target of unit) {
-          if (htp[target] && diff >= this.getResourceRate(target)) {
+          if (payment[target] && diff >= this.getResourceRate(target)) {
             this.$data.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -320,7 +320,7 @@ export default Vue.extend({
         if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[
             this.card.name,
-            JSON.stringify(htp),
+            JSON.stringify(payment),
           ]]);
         } else {
           this.warning = 'Please adjust payment amount';
@@ -329,7 +329,7 @@ export default Vue.extend({
       } else {
         this.onsave([[
           this.card.name,
-          JSON.stringify(htp),
+          JSON.stringify(payment),
         ]]);
       }
     },

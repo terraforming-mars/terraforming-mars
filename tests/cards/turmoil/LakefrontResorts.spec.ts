@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {LakefrontResorts} from '../../../src/server/cards/turmoil/LakefrontResorts';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -18,7 +17,7 @@ describe('LakefrontResorts', function() {
     game.addOceanTile(player, '07');
     runAllActions(game);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
     // The 2 oceans are adjacent
     expect(player.megaCredits).to.eq(3);
   });

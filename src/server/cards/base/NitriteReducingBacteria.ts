@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -12,12 +12,12 @@ import {LogHelper} from '../../LogHelper';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.NITRITE_REDUCING_BACTERIA,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 11,
       resourceType: CardResource.MICROBE,
 
@@ -38,7 +38,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play(player: Player) {
     player.game.defer(new SimpleDeferredAction(

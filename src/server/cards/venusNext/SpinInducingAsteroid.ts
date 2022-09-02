@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,7 +14,7 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SPIN_INDUCING_ASTEROID,
       cost: 16,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       tr: {venus: 2},
 
       requirements: CardRequirements.builder((b) => b.venus(10, {max})),

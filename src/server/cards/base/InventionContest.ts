@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,7 +12,7 @@ export class InventionContest extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.INVENTION_CONTEST,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 2,
 
       metadata: {

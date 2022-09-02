@@ -1,24 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
-import {Units} from '../../../common/Units';
+import {Card2} from '../Card';
 
-export class SpacePort extends Card implements IProjectCard {
+export class SpacePort extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 22,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       name: CardName.SPACE_PORT,
       cardType: CardType.AUTOMATED,
-      productionBox: Units.of({energy: -1, megacredits: 4}),
+      productionBox: {energy: -1, megacredits: 4},
 
       requirements: CardRequirements.builder((b) => b.colonies()),
       metadata: {
@@ -35,23 +33,25 @@ export class SpacePort extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
     });
-    return coloniesCount > 0 && player.getProduction(Resources.ENERGY) > 0;
+    return coloniesCount > 0;
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 4);
-    player.addProduction(Resources.ENERGY, -1);
-    player.increaseFleetSize();
+  public override bespokePlay(player: Player) {
+    player.colonies.increaseFleetSize();
 
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
       return undefined;
     });
+  }
+
+  public onDiscard(player: Player): void {
+    player.colonies.decreaseFleetSize();
   }
 }

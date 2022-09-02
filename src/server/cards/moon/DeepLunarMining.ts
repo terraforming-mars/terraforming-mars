@@ -1,10 +1,9 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class DeepLunarMining extends MoonCard {
@@ -12,10 +11,10 @@ export class DeepLunarMining extends MoonCard {
     super({
       name: CardName.DEEP_LUNAR_MINING,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 18,
-      productionBox: Units.of({titanium: 2}),
-      reserveUnits: Units.of({titanium: 1}),
+      productionBox: {titanium: 2},
+      reserveUnits: {titanium: 1},
       tr: {moonMining: 1},
 
       metadata: {
@@ -31,8 +30,7 @@ export class DeepLunarMining extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

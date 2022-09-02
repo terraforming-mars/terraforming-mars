@@ -3,7 +3,7 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
 import {RequirementType} from '../../common/cards/RequirementType';
 import {ICardRequirements} from '../../common/cards/ICardRequirements';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
 import {
   MAX_OCEAN_TILES,
@@ -25,14 +25,14 @@ export class CardRequirements implements ICardRequirements {
   public satisfies(player: Player): boolean {
     // Process tags separately, though max & any tag criteria will be processed later.
     // This pre-computation takes the wild tag into account.
-    const tags: Array<Tags> = [];
+    const tags: Array<Tag> = [];
     this.requirements.forEach((requirement) => {
       if ((requirement.type === RequirementType.TAG) &&
       requirement.isAny !== true && requirement.isMax !== true) {
         tags.push((requirement as TagCardRequirement).tag);
       }
     });
-    if (tags.length > 1 && !player.checkMultipleTagPresence(tags)) {
+    if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
     return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));
@@ -127,7 +127,7 @@ class Builder {
     return this;
   }
 
-  public tag(tag: Tags, amount: number = 1, options?: Options): Builder {
+  public tag(tag: Tag, amount: number = 1, options?: Options): Builder {
     this.reqs.push(new TagCardRequirement(tag, amount, options));
     return this;
   }

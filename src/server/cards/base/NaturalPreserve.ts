@@ -1,23 +1,21 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 import {max} from '../Options';
 
-export class NaturalPreserve extends Card implements IProjectCard {
+export class NaturalPreserve extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.NATURAL_PRESERVE,
+    name = CardName.NATURAL_PRESERVE,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '044',
@@ -29,9 +27,9 @@ export class NaturalPreserve extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 9,
-      productionBox: Units.of({megacredits: 1}),
+      productionBox: {megacredits: 1},
       adjacencyBonus,
       requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
       victoryPoints: 1,
@@ -42,14 +40,13 @@ export class NaturalPreserve extends Card implements IProjectCard {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter(nextToNoOtherTileFn(player.game.board));
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for special tile next to no other tile', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
       player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NATURAL_PRESERVE});
       foundSpace.adjacency = this.adjacencyBonus;
-      player.addProduction(Resources.MEGACREDITS, 1);
       return undefined;
     });
   }

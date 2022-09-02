@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -10,17 +10,16 @@ import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {max} from '../Options';
 
-export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
+export class ElectroCatapult extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ELECTRO_CATAPULT,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 17,
-      productionBox: Units.of({energy: -1}),
+      productionBox: {energy: -1},
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),
@@ -38,9 +37,6 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1;
   }
   public canAct(player: Player): boolean {
     return player.plants > 0 || player.steel > 0;
@@ -70,10 +66,6 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       this.log(player, Resources.STEEL);
       player.megaCredits += 7;
     }
-    return undefined;
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
     return undefined;
   }
 

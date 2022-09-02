@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Biolab} from '../../../src/server/cards/prelude/Biolab';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Biolab', function() {
@@ -11,7 +10,7 @@ describe('Biolab', function() {
     Game.newInstance('gameid', [player], player);
     card.play(player);
 
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(3);
   });
 });

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -16,7 +16,7 @@ export class MarsUniversity extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.MARS_UNIVERSITY,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 8,
       victoryPoints: 1,
 
@@ -32,7 +32,7 @@ export class MarsUniversity extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
+    const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     for (let i = 0; i < scienceTags; i++) {
       player.game.defer(new SimpleDeferredAction(
         player,

@@ -1,17 +1,18 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class DarksideMeteorBombardment extends Card {
+export class DarksideMeteorBombardment extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_METEOR_BOMBARDMENT,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 20,
       tr: {moonMining: 2},
 

@@ -3,7 +3,6 @@ import {QuantumCommunications} from '../../../src/server/cards/colonies/QuantumC
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('QuantumCommunications', function() {
@@ -23,7 +22,7 @@ describe('QuantumCommunications', function() {
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

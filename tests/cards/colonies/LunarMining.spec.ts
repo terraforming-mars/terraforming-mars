@@ -3,7 +3,6 @@ import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {LunarMining} from '../../../src/server/cards/colonies/LunarMining';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarMining', function() {
@@ -16,6 +15,6 @@ describe('LunarMining', function() {
     player.playedCards.push(card2, card3);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
+    expect(player.production.titanium).to.eq(2);
   });
 });

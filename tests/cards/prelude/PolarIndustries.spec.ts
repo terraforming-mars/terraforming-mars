@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {PolarIndustries} from '../../../src/server/cards/prelude/PolarIndustries';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 
@@ -10,8 +9,8 @@ describe('PolarIndustries', function() {
     const card = new PolarIndustries();
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
-    const action = card.play(player);
+    const action = player.simplePlay(card);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
   });
 });

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ export class SolarProbe extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 9,
-      tags: [Tags.SPACE, Tags.SCIENCE],
+      tags: [Tag.SPACE, Tag.SCIENCE],
       name: CardName.SOLAR_PROBE,
       cardType: CardType.EVENT,
       victoryPoints: 1,
@@ -27,7 +27,7 @@ export class SolarProbe extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.drawCard(Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3));
+    player.drawCard(Math.floor((player.tags.count(Tag.SCIENCE) + 1) / 3));
     return undefined;
   }
 }

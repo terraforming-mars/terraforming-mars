@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {SolarReflectors} from '../../../src/server/cards/colonies/SolarReflectors';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SolarReflectors', function() {
@@ -9,6 +8,6 @@ describe('SolarReflectors', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.HEAT)).to.eq(5);
+    expect(player.production.heat).to.eq(5);
   });
 });

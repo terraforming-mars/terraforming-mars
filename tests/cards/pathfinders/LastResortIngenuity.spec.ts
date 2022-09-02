@@ -18,7 +18,7 @@ describe('LastResortIngenuity', function() {
     const cardWithoutTags = new AsteroidMiningConsortium();
     player.titanium = 10;
     // AsteroidMiningConsortium doesn't have a space tag, but requires titanium production.
-    player.setProductionForTest({titanium: 1});
+    player.production.override({titanium: 1});
 
     expect(player.canPlay(cardWithoutTags)).is.false;
 

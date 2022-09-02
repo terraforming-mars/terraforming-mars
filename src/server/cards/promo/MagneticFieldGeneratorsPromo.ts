@@ -1,25 +1,23 @@
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
-export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
+export class MagneticFieldGeneratorsPromo extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 22,
-      productionBox: Units.of({energy: -4, plants: 2}),
+      productionBox: {energy: -4, plants: 2},
       tr: {tr: 3},
 
       metadata: {
@@ -35,15 +33,10 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
-    const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
-    const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
-
-    return meetsEnergyRequirements && canPlaceTile;
+  public override bespokeCanPlay(player: Player): boolean {
+    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -4);
-    player.addProduction(Resources.PLANTS, 2);
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(3);
 
     const availableSpaces = player.game.board.getAvailableSpacesOnLand(player);

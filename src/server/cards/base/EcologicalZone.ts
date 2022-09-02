@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -9,7 +9,6 @@ import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
@@ -18,10 +17,10 @@ import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
 import {Board} from '../../boards/Board';
 
-export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
+export class EcologicalZone extends Card implements IProjectCard {
   constructor(
-    name: CardName = CardName.ECOLOGICAL_ZONE,
-    cost: number = 12,
+    name = CardName.ECOLOGICAL_ZONE,
+    cost = 12,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata: ICardMetadata = {
       description: {
@@ -40,7 +39,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
     super({
       cardType: CardType.ACTIVE,
       name,
-      tags: [Tags.ANIMAL, Tags.PLANT],
+      tags: [Tag.ANIMAL, Tag.PLANT],
       cost,
       resourceType: CardResource.ANIMAL,
       adjacencyBonus,
@@ -51,7 +50,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
@@ -61,7 +60,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
     return this.getAvailableSpaces(player).length > 0;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
+    player.addResourceTo(this, card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT).length);
   }
   public play(player: Player) {
     // Get one extra animal from EcoExperts if played during prelude while having just played EcoExperts

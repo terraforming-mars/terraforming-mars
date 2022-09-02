@@ -8,8 +8,9 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {SellSteel} from '../../moon/SellSteel';
 import {all} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class MooncrateConvoysToMars extends Card {
+export class MooncrateConvoysToMars extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOONCRATE_CONVOYS_TO_MARS,

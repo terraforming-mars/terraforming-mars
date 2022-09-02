@@ -25,11 +25,11 @@ export class TradeEnvoys extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.colonyTradeOffset++;
+    player.colonies.tradeOffset++;
     return undefined;
   }
 
   public onDiscard(player: Player): void {
-    player.colonyTradeOffset--;
+    player.colonies.tradeOffset--;
   }
 }

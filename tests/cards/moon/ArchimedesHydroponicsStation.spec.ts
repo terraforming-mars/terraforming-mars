@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {ArchimedesHydroponicsStation} from '../../../src/server/cards/moon/ArchimedesHydroponicsStation';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -21,23 +20,23 @@ describe('ArchimedesHydroponicsStation', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    player.setProductionForTest({energy: 1, megacredits: -4});
+    player.production.override({energy: 1, megacredits: -4});
     expect(player.getPlayableCards()).does.include(card);
 
-    player.setProductionForTest({energy: 0, megacredits: -4});
+    player.production.override({energy: 0, megacredits: -4});
     expect(player.getPlayableCards()).does.not.include(card);
 
-    player.setProductionForTest({energy: 1, megacredits: -5});
+    player.production.override({energy: 1, megacredits: -5});
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
-    player.setProductionForTest({energy: 1, megacredits: 1, plants: 0});
+    player.production.override({energy: 1, megacredits: 1, plants: 0});
 
-    card.play(player);
+    player.simplePlay(card);
 
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player.getProduction(Resources.PLANTS)).eq(2);
+    expect(player.production.energy).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player.production.plants).eq(2);
   });
 });

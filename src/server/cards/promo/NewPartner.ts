@@ -22,7 +22,7 @@ export class NewPartner extends PreludeCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
 
     const cardsDrawn: Array<IProjectCard> = [
       player.game.dealer.dealPreludeCard(),

@@ -3,9 +3,8 @@ import {GreatDamPromo} from '../../../src/server/cards/promo/GreatDamPromo';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GreatDamPromo', function() {
@@ -20,24 +19,22 @@ describe('GreatDamPromo', function() {
   });
 
   it('Can not play without meeting requirements', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
     maxOutOceans(player, 4);
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    cast(card.play(player), SelectSpace);
+    expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 
   it('Works with Ares', function() {
     maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    cast(card.play(player), SelectSpace);
+    expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

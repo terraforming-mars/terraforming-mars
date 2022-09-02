@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Heather} from '../../../src/server/cards/base/Heather';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Heather', function() {
@@ -25,7 +24,7 @@ describe('Heather', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(player.plants).to.eq(1);
   });
 });

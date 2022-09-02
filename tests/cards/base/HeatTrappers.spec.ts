@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {cast} from '../../TestingUtils';
 
 describe('HeatTrappers', function() {
   let card: HeatTrappers;
@@ -20,38 +21,38 @@ describe('HeatTrappers', function() {
 
   it('Should be playable in solo mode', function() {
     game = Game.newInstance('gameid', [player], player);
-    player.addProduction(Resources.HEAT, 1);
+    player.production.add(Resources.HEAT, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.HEAT)).to.eq(1); // Not changed
+    expect(player.production.heat).to.eq(1); // Not changed
     expect(card.getVictoryPoints()).to.eq(-1);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
+    expect(player.production.energy).to.eq(1); // Incremented
   });
 
   it('Should play - auto select if single target', function() {
-    player2.addProduction(Resources.HEAT, 7);
+    player2.production.add(Resources.HEAT, 7);
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
 
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
-    expect(player2.getProduction(Resources.HEAT)).to.eq(5);
+    expect(player2.production.heat).to.eq(5);
   });
 
   it('Should play - multiple targets', function() {
-    player.addProduction(Resources.HEAT, 3);
-    player2.addProduction(Resources.HEAT, 7);
+    player.production.add(Resources.HEAT, 3);
+    player2.production.add(Resources.HEAT, 7);
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
+    const selectPlayer = cast(game.deferredActions.peek()!.execute(), SelectPlayer);
     selectPlayer.cb(player2);
-    expect(player2.getProduction(Resources.HEAT)).to.eq(5);
+    expect(player2.production.heat).to.eq(5);
   });
 
   it('Can not play if nobody has heat production', function() {

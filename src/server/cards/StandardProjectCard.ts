@@ -4,7 +4,7 @@ import {IActionCard, ICard, TRSource} from './ICard';
 import {PlayerInput} from '../PlayerInput';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Units} from '../../common/Units';
@@ -13,7 +13,7 @@ interface StaticStandardProjectCardProperties {
   name: CardName,
   cost: number,
   metadata: ICardMetadata,
-  reserveUnits?: Units,
+  reserveUnits?: Partial<Units>,
   tr?: TRSource,
 }
 
@@ -67,7 +67,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
 
   public action(player: Player): PlayerInput | undefined {
     const canPayWith = this.canPayWith(player);
-    player.game.defer(new SelectHowToPayDeferred(
+    player.game.defer(new SelectPaymentDeferred(
       player,
       this.cost - this.discount(player),
       {

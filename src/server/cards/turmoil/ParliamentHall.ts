@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -15,7 +15,7 @@ export class ParliamentHall extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.PARLIAMENT_HALL,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 8,
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       victoryPoints: 1,
@@ -35,9 +35,9 @@ export class ParliamentHall extends Card implements IProjectCard {
   public produce(player: Player) {
     // Include this when the card is first played, and not when it is called by Robotic Workforce.
     const includeThis = !player.cardIsInEffect(this.name);
-    const tagCount = player.getTagCount(Tags.BUILDING) + (includeThis ? 1 : 0);
+    const tagCount = player.tags.count(Tag.BUILDING) + (includeThis ? 1 : 0);
     const amount = Math.floor(tagCount / 3);
-    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
+    player.production.add(Resources.MEGACREDITS, amount, {log: true});
   }
 
   public play(player: Player) {

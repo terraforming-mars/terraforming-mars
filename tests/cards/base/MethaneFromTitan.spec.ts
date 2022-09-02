@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('MethaneFromTitan', function() {
   let card: MethaneFromTitan;
@@ -25,8 +24,8 @@ describe('MethaneFromTitan', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
+    expect(player.production.plants).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(2);
   });
 });

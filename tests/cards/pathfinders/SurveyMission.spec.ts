@@ -104,7 +104,7 @@ describe('SurveyMission', () => {
 
     expect(player.steel).eq(5); // Comes from playing the Prelude
     expect(player.plants).eq(0);
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     const space = board.getSpace('04');
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.PLANT];
@@ -113,7 +113,7 @@ describe('SurveyMission', () => {
 
     expect(player.steel).eq(6);
     expect(player.plants).eq(1);
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });
   // TODO Hazards are playable, but you won't get anything.
   // TODO Arcadian communities should not interfere with Survey Mission.

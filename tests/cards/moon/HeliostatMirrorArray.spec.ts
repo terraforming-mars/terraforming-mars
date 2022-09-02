@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {HeliostatMirrorArray} from '../../../src/server/cards/moon/HeliostatMirrorArray';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -29,15 +28,15 @@ describe('HeliostatMirrorArray', () => {
   });
 
   it('play', () => {
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     player.titanium = 1;
     player.heat = 0;
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(0);
     expect(player.heat).eq(1);
-    expect(player.getProduction(Resources.ENERGY)).eq(2);
+    expect(player.production.energy).eq(2);
   });
 });
 

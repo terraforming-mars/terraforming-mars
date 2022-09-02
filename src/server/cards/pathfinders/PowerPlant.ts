@@ -1,20 +1,18 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
-import {Units} from '../../../common/Units';
+import {Tag} from '../../../common/cards/Tag';
 
-export class PowerPlant extends Card implements IProjectCard {
+export class PowerPlant extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.POWER_PLANT_PATHFINDERS,
       cost: 13,
-      tags: [Tags.MARS, Tags.ENERGY, Tags.BUILDING],
-      productionBox: Units.of({heat: 2, energy: 1}),
+      tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING],
+      productionBox: {heat: 2, energy: 1},
 
       metadata: {
         cardNumber: 'Pf20',
@@ -24,11 +22,6 @@ export class PowerPlant extends Card implements IProjectCard {
         description: 'Increase your heat production 2 steps and your energy production 1 step.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
-    return undefined;
   }
 }
 

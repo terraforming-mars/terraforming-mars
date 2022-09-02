@@ -18,7 +18,7 @@
   "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"任何殖民地放置时，包括这个，增加你的M€产量1级。",
 
   "STORM":"暴风",
-  "CRAFT":"舰",  
+  "CRAFT":"舰",
   "Stormcraft Incorporated":"暴风舰公司",
   "You start with 48 M€.":"起始获得48 M€",
   "Action: Add a floater to ANY card.":"行动：增加云资源到任意卡牌",
@@ -216,7 +216,7 @@
     "Triton":"海卫一",
     "Colony Bonus":"殖民地奖励",
     "Trade Income":"贸易收入",
-    "Select colony":"选择殖民地",
+    "Select where to build a colony":"选择殖民地",
     "Trade Income: Gain the indicated production":"贸易收入：获得指定的产量",
     "Callisto - (Energy)":"木卫四-（能量）",
     "Ceres - (Steel)":"谷神星-（钢铁）",

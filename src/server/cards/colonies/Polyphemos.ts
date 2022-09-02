@@ -31,7 +31,7 @@ export class Polyphemos extends Card implements ICorporationCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 5);
+    player.production.add(Resources.MEGACREDITS, 5);
     player.titanium = 5;
     return undefined;
   }

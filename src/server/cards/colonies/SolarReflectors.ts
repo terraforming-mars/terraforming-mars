@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class SolarReflectors extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 23,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.SOLAR_REFLECTORS,
       cardType: CardType.AUTOMATED,
 
@@ -27,7 +27,7 @@ export class SolarReflectors extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 5);
+    player.production.add(Resources.HEAT, 5);
     return undefined;
   }
 }

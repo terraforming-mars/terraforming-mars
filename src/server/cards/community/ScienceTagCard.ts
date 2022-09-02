@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
@@ -9,7 +9,7 @@ export class ScienceTagCard implements IProjectCard {
     return 0;
   }
   public get tags() {
-    return [Tags.SCIENCE];
+    return [Tag.SCIENCE];
   }
   public get name() {
     return CardName.SCIENCE_TAG_BLANK_CARD;

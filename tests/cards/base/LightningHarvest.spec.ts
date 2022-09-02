@@ -3,7 +3,6 @@ import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('LightningHarvest', function() {
   let card: LightningHarvest;
@@ -25,8 +24,8 @@ describe('LightningHarvest', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
 
     expect(card.getVictoryPoints()).to.eq(1);
   });

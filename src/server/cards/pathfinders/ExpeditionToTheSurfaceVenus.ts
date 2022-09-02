@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
 
 export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
@@ -14,7 +14,7 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.EXPEDITION_TO_THE_SURFACE_VENUS,
       cost: 16,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       tr: {venus: 1},
 
       metadata: {
@@ -31,7 +31,7 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
   public play(player: Player) {
     player.drawCard(2);
     player.game.increaseVenusScaleLevel(player, 1);
-    const tagCount = player.getTagCount(Tags.VENUS) + 1;
+    const tagCount = player.tags.count(Tag.VENUS) + 1;
     player.addResource(Resources.MEGACREDITS, tagCount, {log: true});
     return undefined;
   }

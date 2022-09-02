@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -15,7 +15,7 @@ export class PROffice extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.PR_OFFICE,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 7,
       tr: {tr: 1},
 
@@ -33,7 +33,7 @@ export class PROffice extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.increaseTerraformRating();
-    const amount = player.getTagCount(Tags.EARTH) + 1;
+    const amount = player.tags.count(Tag.EARTH) + 1;
     player.addResource(Resources.MEGACREDITS, amount);
     return undefined;
   }

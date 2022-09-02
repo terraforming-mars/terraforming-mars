@@ -1,18 +1,17 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class Mohole extends PreludeCard implements IProjectCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.MOHOLE,
-      tags: [Tags.BUILDING],
-      productionBox: Units.of({heat: 3}),
+      tags: [Tag.BUILDING],
+      productionBox: {heat: 3},
 
       metadata: {
         cardNumber: 'P22',
@@ -25,7 +24,6 @@ export class Mohole extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.HEAT, 3);
     player.heat += 3;
     return undefined;
   }

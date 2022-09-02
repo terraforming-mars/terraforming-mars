@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -15,7 +15,7 @@ export class WildlifeDome extends Card implements IProjectCard {
     super({
       name: CardName.WILDLIFE_DOME,
       cost: 15,
-      tags: [Tags.ANIMAL, Tags.PLANT, Tags.BUILDING],
+      tags: [Tag.ANIMAL, Tag.PLANT, Tag.BUILDING],
       cardType: CardType.AUTOMATED,
       requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
       tr: {oxygen: 1},

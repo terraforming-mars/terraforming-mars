@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {TundraFarming} from '../../../src/server/cards/base/TundraFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('TundraFarming', function() {
   let card: TundraFarming;
@@ -25,8 +24,8 @@ describe('TundraFarming', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.plants).to.eq(1);
+    expect(player.production.megacredits).to.eq(2);
     expect(player.plants).to.eq(1);
 
     expect(card.getVictoryPoints()).to.eq(2);

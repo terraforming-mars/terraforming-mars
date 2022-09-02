@@ -1,11 +1,11 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
-import SelectHowToPay from '@/client/components/SelectHowToPay.vue';
+import SelectPayment from '@/client/components/SelectPayment.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 
-describe('SelectHowToPay', () => {
+describe('SelectPayment', () => {
   it('Uses heat', async () => {
     const wrapper = setupBill(
       10,
@@ -229,7 +229,7 @@ describe('SelectHowToPay', () => {
       science: 0,
     }, playerInputFields);
 
-    return mount(SelectHowToPay, {
+    return mount(SelectPayment, {
       localVue: getLocalVue(),
       propsData: {
         playerView: playerView,

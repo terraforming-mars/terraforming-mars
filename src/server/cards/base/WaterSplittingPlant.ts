@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -12,7 +12,7 @@ export class WaterSplittingPlant extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.WATER_SPLITTING_PLANT,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 12,
 
       requirements: CardRequirements.builder((b) => b.oceans(2)),

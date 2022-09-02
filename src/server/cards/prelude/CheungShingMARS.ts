@@ -1,24 +1,21 @@
-import {Tags} from '../../../common/cards/Tags';
-import {Player} from '../../Player';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {played} from '../Options';
 
-export class CheungShingMARS extends Card implements ICorporationCard {
+export class CheungShingMARS extends Card2 implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.CHEUNG_SHING_MARS,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 44,
-      productionBox: Units.of({megacredits: 3}),
+      productionBox: {megacredits: 3},
 
-      cardDiscount: {tag: Tags.BUILDING, amount: 2},
+      cardDiscount: {tag: Tag.BUILDING, amount: 2},
       metadata: {
         cardNumber: 'R16',
         description: 'You start with 3 M€ production and 44 M€.',
@@ -33,10 +30,5 @@ export class CheungShingMARS extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
-    return undefined;
   }
 }

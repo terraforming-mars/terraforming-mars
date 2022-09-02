@@ -6,7 +6,6 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -34,14 +33,14 @@ describe('DeepLunarMining', () => {
 
   it('play', () => {
     player.titanium = 3;
-    expect(player.getProduction(Resources.TITANIUM)).eq(0);
+    expect(player.production.titanium).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
-    card.play(player);
+    player.simplePlay(card);
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.TITANIUM)).eq(2);
+    expect(player.production.titanium).eq(2);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
   });

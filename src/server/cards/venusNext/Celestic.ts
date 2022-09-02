@@ -1,8 +1,8 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
@@ -11,11 +11,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class Celestic extends Card implements IActionCard, ICorporationCard, IResourceCard {
+export class Celestic extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.CELESTIC,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       startingMegaCredits: 42,
       resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,

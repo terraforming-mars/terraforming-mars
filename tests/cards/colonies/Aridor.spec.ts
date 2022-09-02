@@ -5,7 +5,6 @@ import {Predators} from '../../../src/server/cards/base/Predators';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 
@@ -28,11 +27,11 @@ describe('Aridor', function() {
     const play = card.play();
     expect(play).is.undefined;
     card.onCardPlayed(player, new Predators());
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     card.onCardPlayed(player2, new ResearchOutpost());
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player2.production.megacredits).to.eq(0);
     card.onCardPlayed(player, new ResearchOutpost());
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
 
   // A test that directly calls initialAction is also good, but this

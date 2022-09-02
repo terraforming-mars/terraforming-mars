@@ -6,7 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class TempestConsultancy extends Card implements ICorporationCard {
@@ -14,7 +14,7 @@ export class TempestConsultancy extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.TEMPEST_CONSULTANCY,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       startingMegaCredits: 37,
       initialActionText: 'Place 2 delegates in one party',
 
@@ -46,11 +46,11 @@ export class TempestConsultancy extends Card implements ICorporationCard {
   }
 
   public canAct(player: Player) {
-    return player.getTagCount(Tags.MOON) >= 5;
+    return player.tags.count(Tag.MOON) >= 5;
   }
 
   public action(player: Player) {
-    let count = Math.floor(player.getTagCount(Tags.MOON) / 5);
+    let count = Math.floor(player.tags.count(Tag.MOON) / 5);
     count = Math.min(count, 3);
     count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve'));
     if (count > 0) {

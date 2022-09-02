@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('MartianRepository', function() {
   let card: MartianRepository;
@@ -17,33 +17,33 @@ describe('MartianRepository', function() {
   });
 
   it('can play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.false;
-    player.setProductionForTest({energy: 1});
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.false;
+    player.production.override({energy: 1});
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
   });
 
   it('effect', function() {
-    card.onCardPlayed(player, {tags: [Tags.VENUS]} as IProjectCard);
+    card.onCardPlayed(player, {tags: [Tag.VENUS]} as IProjectCard);
     expect(card.resourceCount).eq(0);
-    card.onCardPlayed(player, {tags: [Tags.EARTH]} as IProjectCard);
+    card.onCardPlayed(player, {tags: [Tag.EARTH]} as IProjectCard);
     expect(card.resourceCount).eq(0);
-    card.onCardPlayed(player, {tags: [Tags.MARS]} as IProjectCard);
+    card.onCardPlayed(player, {tags: [Tag.MARS]} as IProjectCard);
     expect(card.resourceCount).eq(1);
-    card.onCardPlayed(player, {tags: [Tags.SCIENCE]} as IProjectCard);
+    card.onCardPlayed(player, {tags: [Tag.SCIENCE]} as IProjectCard);
     expect(card.resourceCount).eq(2);
 
     // Should increment twice. ("For every science or Mars tag")
-    card.onCardPlayed(player, {tags: [Tags.MARS, Tags.SCIENCE]} as IProjectCard);
+    card.onCardPlayed(player, {tags: [Tag.MARS, Tag.SCIENCE]} as IProjectCard);
     expect(card.resourceCount).eq(4);
 
     // Should increment twice. ("For every science or Mars tag")
-    card.onCardPlayed(player, {tags: [Tags.SCIENCE, Tags.SCIENCE]} as IProjectCard);
+    card.onCardPlayed(player, {tags: [Tag.SCIENCE, Tag.SCIENCE]} as IProjectCard);
     expect(card.resourceCount).eq(6);
   });
 

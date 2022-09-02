@@ -1,12 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IColony} from '../../colonies/IColony';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -15,11 +14,11 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 
-export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResourceCard {
+export class TitanFloatingLaunchPad extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 18,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       name: CardName.TITAN_FLOATING_LAUNCHPAD,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
@@ -29,12 +28,12 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
         cardNumber: 'C44',
         renderData: CardRenderer.builder((b) => {
           b.action(undefined, (eb) => {
-            eb.empty().startAction.floaters(1, {secondaryTag: Tags.JOVIAN}).nbsp.or();
+            eb.empty().startAction.floaters(1, {secondaryTag: Tag.JOVIAN}).nbsp.or();
           }).br;
           b.action('Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.', (eb) => {
             eb.floaters(1).startAction.trade();
           }).br.br;
-          b.floaters(2, {secondaryTag: Tags.JOVIAN});
+          b.floaters(2, {secondaryTag: Tag.JOVIAN});
         }),
         description: {
           text: 'Add two floaters to ANY JOVIAN CARD.',
@@ -44,7 +43,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public canAct(): boolean {
     return true;
@@ -53,8 +52,8 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
   public action(player: Player) {
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
-    if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisGeneration) {
-      player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
+    if (this.resourceCount === 0 || openColonies.length === 0 || player.colonies.getFleetSize() <= player.colonies.tradesThisGeneration) {
+      player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tag.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
       return undefined;
     }
 
@@ -73,14 +72,14 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
         return undefined;
       }),
       new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tags.JOVIAN}));
+        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tag.JOVIAN}));
         return undefined;
       }),
     );
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
     return undefined;
   }
 }

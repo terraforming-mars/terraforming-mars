@@ -1,13 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Units} from '../../../common/Units';
 import {MoonCard} from './MoonCard';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {Size} from '../../../common/cards/render/Size';
@@ -17,11 +16,11 @@ export class LunaMiningHub extends MoonCard {
     super({
       name: CardName.LUNA_MINING_HUB,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 16,
 
-      productionBox: Units.of({steel: 1, titanium: 1}),
-      reserveUnits: Units.of({steel: 1, titanium: 1}),
+      productionBox: {steel: 1, titanium: 1},
+      reserveUnits: {steel: 1, titanium: 1},
       tr: {moonMining: 1},
       victoryPoints: 'special',
       requirements: CardRequirements.builder((b) => b.miningRate(5)),
@@ -44,8 +43,7 @@ export class LunaMiningHub extends MoonCard {
     });
   }
 
-  public override play(player: Player) {
-    super.play(player);
+  public play(player: Player) {
     player.game.defer(new PlaceSpecialMoonTile(
       player, {
         tileType: TileType.LUNA_MINING_HUB,

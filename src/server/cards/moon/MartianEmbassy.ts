@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
@@ -13,7 +13,7 @@ export class MartianEmbassy extends Card implements IProjectCard {
     super({
       name: CardName.MARTIAN_EMBASSY,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.MARS],
+      tags: [Tag.MOON, Tag.MARS],
       cost: 11,
 
       metadata: {
@@ -28,9 +28,9 @@ export class MartianEmbassy extends Card implements IProjectCard {
 
   public play(player: Player) {
     // The +1 is "including this".
-    const tags = player.getTagCount(Tags.MOON) + 1;
+    const tags = player.tags.count(Tag.MOON) + 1;
     const rate = Math.floor(tags / 3);
-    PathfindersExpansion.raiseTrack(Tags.MARS, player, rate);
+    PathfindersExpansion.raiseTrack(Tag.MARS, player, rate);
     return undefined;
   }
 }

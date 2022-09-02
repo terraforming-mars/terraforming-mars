@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ export class ResearchColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 20,
-      tags: [Tags.SPACE, Tags.SCIENCE],
+      tags: [Tag.SPACE, Tag.SCIENCE],
       name: CardName.RESEARCH_COLONY,
       cardType: CardType.AUTOMATED,
 
@@ -26,7 +26,7 @@ export class ResearchColony extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, true, 'Select colony for Research Colony'));
+    player.game.defer(new BuildColony(player, {allowDuplicate: true, title: 'Select colony for Research Colony'}));
     player.drawCard(2);
     return undefined;
   }

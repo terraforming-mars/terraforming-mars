@@ -14,7 +14,7 @@ describe('Loan', function() {
   });
 
   it('Can not play', function() {
-    player.addProduction(Resources.MEGACREDITS, -4);
+    player.production.add(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -23,6 +23,6 @@ describe('Loan', function() {
     card.play(player);
 
     expect(player.megaCredits).to.eq(30);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
+    expect(player.production.megacredits).to.eq(-2);
   });
 });

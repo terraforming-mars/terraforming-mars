@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -12,7 +12,7 @@ export class Sponsors extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SPONSORS,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 6,
 
       metadata: {
@@ -25,7 +25,7 @@ export class Sponsors extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

@@ -6,8 +6,9 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addOcean, setCustomGameOptions} from '../../TestingUtils';
+import {addOcean, cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', function() {
@@ -24,31 +25,31 @@ describe('NewVenice', function() {
 
   it('Can play', function() {
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     player.plants = 1;
-    expect(card.canPlay(player)).is.false;
+    expect(player.simpleCanPlay(card)).is.false;
 
     player.plants = 2;
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
   });
 
   it('play', function() {
     const oceanSpace = addOcean(player);
     player.plants = 2;
-    player.setProductionForTest({energy: 0, megacredits: 0});
+    player.production.override({energy: 0, megacredits: 0});
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     expect(player.plants).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
-    expect(player.getProduction(Resources.ENERGY)).eq(1);
+    expect(player.production.megacredits).eq(2);
+    expect(player.production.energy).eq(1);
     expect(game.getCitiesOnMarsCount()).eq(0);
     expect(player.game.getCitiesCount(player)).eq(0);
 
@@ -64,7 +65,7 @@ describe('NewVenice', function() {
   it('Cannot place a city next to New Venice', function() {
     const oceanSpace = addOcean(player);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(oceanSpace);
 
@@ -80,14 +81,14 @@ describe('NewVenice', function() {
 
   it('Can place New Venice next to a city', function() {
     const oceanSpace = addOcean(player);
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
 
     const citySpace = game.board
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
     game.addCityTile(player, citySpace.id);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(oceanSpace);
     expect(oceanSpace.player).to.eq(player);
@@ -96,7 +97,7 @@ describe('NewVenice', function() {
 
   it('New Venice counts as ocean for adjacency', function() {
     const oceanSpace = addOcean(player);
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
     action.cb(oceanSpace);
     const greenery = game.board
       .getAdjacentSpaces(oceanSpace)
@@ -111,7 +112,7 @@ describe('NewVenice', function() {
 
   it('New Venice counts for city-related VP', function() {
     const oceanSpace = addOcean(player);
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
     action.cb(oceanSpace);
     const greenery = game.board
       .getAdjacentSpaces(oceanSpace)
@@ -128,7 +129,7 @@ describe('NewVenice', function() {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
 
     const capital = new Capital();
-    const capitalAction = capital.play(player);
+    const capitalAction = cast(capital.play(player), SelectSpace);
     player.playedCards = [capital];
 
     const capitalSpace = game.board
@@ -142,7 +143,7 @@ describe('NewVenice', function() {
 
     // And now adds the tile.
     game.addOceanTile(player, oceanSpace.id);
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(oceanSpace);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
@@ -159,7 +160,7 @@ describe('NewVenice', function() {
     game.addOceanTile(player, oceanSpace.id);
     expect(player.plants).eq(4);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(oceanSpace);
 

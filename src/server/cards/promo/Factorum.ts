@@ -1,7 +1,7 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {Resources} from '../../../common/Resources';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -10,16 +10,15 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Units} from '../../../common/Units';
 
-export class Factorum extends Card implements IActionCard, ICorporationCard {
+export class Factorum extends Card2 implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.FACTORUM,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.ENERGY, Tag.BUILDING],
       startingMegaCredits: 37,
-      productionBox: Units.of({steel: 1}),
+      productionBox: {steel: 1},
 
       metadata: {
         cardNumber: 'R22',
@@ -30,17 +29,12 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
             ce.vSpace(Size.LARGE);
             ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.', (eb) => {
               eb.empty().arrow().production((pb) => pb.energy(1));
-              eb.or().megacredits(3).startAction.cards(1, {secondaryTag: Tags.BUILDING});
+              eb.or().megacredits(3).startAction.cards(1, {secondaryTag: Tag.BUILDING});
             });
           });
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
-    return undefined;
   }
 
   public canAct(player: Player): boolean {
@@ -52,7 +46,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
       'Increase your energy production 1 step',
       'Increase production',
       () => {
-        player.addProduction(Resources.ENERGY, 1, {log: true});
+        player.production.add(Resources.ENERGY, 1, {log: true});
         return undefined;
       },
     );
@@ -61,7 +55,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
       player.payMegacreditsDeferred(
         3,
         'Select how to pay for Factorum action.',
-        () => player.drawCard(1, {tag: Tags.BUILDING}));
+        () => player.drawCard(1, {tag: Tag.BUILDING}));
       return undefined;
     });
 

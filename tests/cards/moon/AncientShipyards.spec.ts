@@ -4,7 +4,6 @@ import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
@@ -33,9 +32,9 @@ describe('AncientShipyards', () => {
 
   it('play', () => {
     bluePlayer.titanium = 3;
-    expect(bluePlayer.getProduction(Resources.STEEL)).eq(0);
+    expect(bluePlayer.production.steel).eq(0);
 
-    card.play(bluePlayer);
+    bluePlayer.simplePlay(card);
 
     expect(bluePlayer.titanium).eq(0);
   });

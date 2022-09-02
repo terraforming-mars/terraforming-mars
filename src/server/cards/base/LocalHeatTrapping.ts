@@ -10,7 +10,6 @@ import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
 export class LocalHeatTrapping extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
-      reserveUnits: Units.of({heat: 5}),
+      reserveUnits: {heat: 5},
 
       metadata: {
         cardNumber: '190',

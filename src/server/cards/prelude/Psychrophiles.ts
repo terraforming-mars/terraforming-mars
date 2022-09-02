@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -10,12 +10,12 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max, played} from '../Options';
 
-export class Psychrophiles extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Psychrophiles extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.PSYCHROPHILES,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 2,
       resourceType: CardResource.MICROBE,
 

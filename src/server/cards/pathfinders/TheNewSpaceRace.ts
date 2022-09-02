@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Game} from '../../Game';
 import {Turmoil} from '../../turmoil/Turmoil';
 
@@ -12,7 +12,7 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.THE_NEW_SPACE_RACE,
-      tags: [Tags.SCIENCE, Tags.EARTH],
+      tags: [Tag.SCIENCE, Tag.EARTH],
 
       metadata: {
         cardNumber: '',

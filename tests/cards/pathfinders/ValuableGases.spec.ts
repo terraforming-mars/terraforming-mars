@@ -8,7 +8,7 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectHowToPayForProjectCard} from '../../../src/server/inputs/SelectHowToPayForProjectCard';
+import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 
 describe('ValuableGases', function() {
   let card: ValuableGases;
@@ -46,11 +46,11 @@ describe('ValuableGases', function() {
 
     const input = player.popWaitingFor();
 
-    const selectHowToPay = cast(input, SelectHowToPayForProjectCard);
-    expect(selectHowToPay.cards).has.members([localShading]);
+    const selectProjectCardToPlay = cast(input, SelectProjectCardToPlay);
+    expect(selectProjectCardToPlay.cards).has.members([localShading]);
     expect(player.megaCredits).eq(10);
 
-    selectHowToPay.cb(localShading, {
+    selectProjectCardToPlay.cb(localShading, {
       heat: 0,
       megaCredits: localShading.cost,
       steel: 0,

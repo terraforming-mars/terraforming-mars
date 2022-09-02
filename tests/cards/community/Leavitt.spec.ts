@@ -3,7 +3,7 @@ import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {Vitor} from '../../../src/server/cards/prelude/Vitor';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('Leavitt', function() {
   let leavitt: Leavitt;
@@ -21,11 +21,11 @@ describe('Leavitt', function() {
   });
 
   it('Should build', function() {
-    expect(player.getTagCount(Tags.SCIENCE)).to.eq(0);
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
-    expect(player.getTagCount(Tags.SCIENCE)).to.eq(1);
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(1);
     leavitt.addColony(player);
-    expect(player.getTagCount(Tags.SCIENCE)).to.eq(2);
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(2);
   });
 
   // TODO(kberg): add trade and trade bonus tests.
@@ -50,8 +50,8 @@ describe('Leavitt', function() {
     // Merely completing these is sufficient because
     // it doesn't throw an Error.
     player.setCorporationForTest(new Vitor());
-    expect(player.getTagCount(Tags.SCIENCE)).to.eq(0);
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
-    expect(player.getTagCount(Tags.SCIENCE)).to.eq(1);
+    expect(player.tags.count(Tag.SCIENCE)).to.eq(1);
   });
 });

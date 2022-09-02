@@ -1,17 +1,18 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class HE3Lobbyists extends Card {
+export class HE3Lobbyists extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HE3_LOBBYISTS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 7,
 
       metadata: {
@@ -26,7 +27,7 @@ export class HE3Lobbyists extends Card {
 
   public play(player: Player) {
     // + 1 because the tag above isn't yet included in the played cards pile.
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.MOON) + 1, {log: true});
+    player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.MOON) + 1, {log: true});
     return undefined;
   }
 }

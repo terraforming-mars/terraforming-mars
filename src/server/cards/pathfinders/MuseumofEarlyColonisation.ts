@@ -1,23 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {Units} from '../../../common/Units';
 import {all} from '../Options';
 
-export class MuseumofEarlyColonisation extends Card implements IProjectCard {
+export class MuseumofEarlyColonisation extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MUSEUM_OF_EARLY_COLONISATION,
       cost: 20,
-      tags: [Tags.BUILDING, Tags.MARS],
+      tags: [Tag.BUILDING, Tag.MARS],
       requirements: CardRequirements.builder((b) => b.oceans(1).cities(1, {all}).greeneries(1, {all})),
-      productionBox: Units.of({energy: -1, steel: 1, titanium: 1, plants: 1}),
+      productionBox: {energy: -1, steel: 1, titanium: 1, plants: 1},
       tr: {tr: 1},
 
       metadata: {
@@ -33,13 +32,8 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
-    return super.canPlay(player) && player.canAdjustProduction(this.productionBox);
-  }
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRating();
     return undefined;
   }
 }
-

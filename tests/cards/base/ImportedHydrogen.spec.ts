@@ -34,8 +34,8 @@ describe('ImportedHydrogen', function() {
     action.options[0].cb();
     expect(player.plants).to.eq(3);
 
-    const selectAnimal = action.options[2] as SelectOption;
-    const selectMicrobe = action.options[1] as SelectCard<any>;
+    const selectAnimal = cast(action.options[2], SelectOption);
+    const selectMicrobe = cast(action.options[1], SelectCard);
 
     expect(selectMicrobe.cards).has.lengthOf(2);
     expect(selectMicrobe.cards[0]).to.eq(tardigrades);

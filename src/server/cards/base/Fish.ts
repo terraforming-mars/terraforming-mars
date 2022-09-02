@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,12 +13,12 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Fish extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Fish extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.FISH,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 9,
 
       resourceType: CardResource.ANIMAL,
@@ -41,7 +41,7 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       },
     });
   }
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public override canPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.PLANTS, 1);

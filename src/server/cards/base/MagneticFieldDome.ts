@@ -1,21 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {Card2} from '../Card';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
-export class MagneticFieldDome extends Card implements IProjectCard {
+export class MagneticFieldDome extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MAGNETIC_FIELD_DOME,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 5,
-      productionBox: Units.of({energy: -2, plants: 1}),
+      productionBox: {energy: -2, plants: 1},
       tr: {tr: 1},
 
       metadata: {
@@ -32,13 +30,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2;
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.PLANTS, 1);
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRating();
     return undefined;
   }

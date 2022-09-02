@@ -1,17 +1,18 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {digit, played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class IoSulphurResearch extends Card {
+export class IoSulphurResearch extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.IO_SULPHUR_RESEARCH,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.SCIENCE, Tags.JOVIAN],
+      tags: [Tag.SCIENCE, Tag.JOVIAN],
       cost: 17,
 
       victoryPoints: 2,
@@ -29,7 +30,7 @@ export class IoSulphurResearch extends Card {
   }
 
   public play(player: Player) {
-    player.drawCard(player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1);
+    player.drawCard(player.tags.count(Tag.VENUS) >= 3 ? 3 : 1);
     return undefined;
   }
 }

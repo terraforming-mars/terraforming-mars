@@ -67,6 +67,7 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {MoonCard} from './cards/moon/MoonCard';
+import {Merger} from './cards/promo/Merger';
 
 // Behavior when playing a card.
 // add it to the tableau
@@ -1131,37 +1132,7 @@ export class Player {
     return undefined;
   }
 
-  // public for testing
-  public playCorporationCard(corporationCard: ICorporationCard): void {
-    if (this.corporations.length === 0) {
-      this.corporations.push(corporationCard);
-    } else {
-      throw new Error('Do not use playCorporationCard for more than one corporation card.');
-    }
-
-    this.megaCredits = corporationCard.startingMegaCredits;
-    if (corporationCard.cardCost !== undefined) {
-      this.cardCost = corporationCard.cardCost;
-    }
-
-    if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
-      const diff = this.cardsInHand.length * this.cardCost;
-      this.deductResource(Resources.MEGACREDITS, diff);
-    }
-    this.simplePlay(corporationCard);
-    if (corporationCard.initialAction !== undefined) this.pendingInitialActions.push(corporationCard);
-    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
-    this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(this.cardsInHand.length));
-
-    this.triggerOtherCorpEffects(corporationCard);
-    ColoniesHandler.onCardPlayed(this.game, corporationCard);
-    PathfindersExpansion.onCardPlayed(this, corporationCard);
-
-    this.game.playerIsFinishedWithResearchPhase(this);
-  }
-
-  // Public for Merger.
-  public triggerOtherCorpEffects(playedCorporationCard: ICorporationCard) {
+  private triggerOtherCorpEffects(playedCorporationCard: ICorporationCard) {
     // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
     for (const somePlayer of this.game.getPlayers()) {
       for (const corporation of somePlayer.corporations) {
@@ -1236,6 +1207,54 @@ export class Player {
         return undefined;
       }, {selectBlueCardAction: true},
     );
+  }
+
+  public playAdditionalCorporationCard(corporationCard: ICorporationCard): void {
+    if (this.corporations.length === 0) {
+      throw new Error('Cannot add additional corporation when it does not have a starting corporation.');
+    }
+    return this._playCorporationCard(corporationCard, true);
+  }
+
+  public playCorporationCard(corporationCard: ICorporationCard): void {
+    if (this.corporations.length > 0) {
+      throw new Error('Cannot add additional corporation without specifying it explicitly.');
+    }
+    return this._playCorporationCard(corporationCard, false);
+  }
+
+  private _playCorporationCard(corporationCard: ICorporationCard, additionalCorp = false): void {
+    this.corporations.push(corporationCard);
+
+    // There is a simpler way to deal with this block, but I'd rather not deal with the fallout of getting it wrong.
+    if (additionalCorp) {
+      this.megaCredits += corporationCard.startingMegaCredits;
+      this.cardCost = Merger.setCardCost(this);
+    } else {
+      this.megaCredits = corporationCard.startingMegaCredits;
+      if (corporationCard.cardCost !== undefined) {
+        this.cardCost = corporationCard.cardCost;
+      }
+    }
+
+    if (additionalCorp === false && corporationCard.name !== CardName.BEGINNER_CORPORATION) {
+      const diff = this.cardsInHand.length * this.cardCost;
+      this.deductResource(Resources.MEGACREDITS, diff);
+    }
+    this.simplePlay(corporationCard);
+    if (corporationCard.initialAction !== undefined) this.pendingInitialActions.push(corporationCard);
+    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
+    if (additionalCorp === false) {
+      this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(this.cardsInHand.length));
+    }
+
+    this.triggerOtherCorpEffects(corporationCard);
+    ColoniesHandler.onCardPlayed(this.game, corporationCard);
+    PathfindersExpansion.onCardPlayed(this, corporationCard);
+
+    if (!additionalCorp) {
+      this.game.playerIsFinishedWithResearchPhase(this);
+    }
   }
 
   public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {

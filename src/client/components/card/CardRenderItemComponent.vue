@@ -96,6 +96,7 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
+        if (this.item.cancelled === true) classes.push('card-private-security');
       } else if (type === CardRenderItemType.PRESERVATION) {
         classes.push('card-resource');
         classes.push('card-resource-preservation');
@@ -338,7 +339,7 @@ export default Vue.extend({
       }
       if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';
-      } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS) {
+      } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS || this.item.type === CardRenderItemType.IGNORE_GLOBAL_REQUIREMENTS) {
         result += '<div class="card-project-requirements">';
         result += '<div class="card-x">x</div>';
         result += '<div class="card-requirements">Global Requirements</div>';
@@ -383,6 +384,9 @@ export default Vue.extend({
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
         result = '<div class="card-x">x</div>';
+      }
+      if (this.item.type === CardRenderItemType.WILD && this.item.cancelled === true) {
+        result = '<div class="card-x">✕</div>';
       }
 
       return result;

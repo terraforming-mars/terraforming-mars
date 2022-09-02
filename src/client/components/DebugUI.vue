@@ -376,7 +376,6 @@ export default Vue.extend({
     showGlobalEvent(name: GlobalEventName): boolean {
       if (!this.filterByName(name)) return false;
       const globalEvent = getGlobalEvent(name);
-      console.log(globalEvent?.module);
       return globalEvent !== undefined && this.expansions[globalEvent.module] === true;
     },
     showColony(name: ColonyName): boolean {

@@ -29,9 +29,9 @@ describe('Flooding', function() {
     expect(action.cb(oceans[0])).is.undefined;
     const adjacentSpaces = game.board.getAdjacentSpaces(oceans[0]);
     oceans[0].tile = undefined;
-    for (let i = 0; i < adjacentSpaces.length; i++) {
-      if (adjacentSpaces[i].spaceType === SpaceType.LAND) {
-        game.addGreenery(player2, adjacentSpaces[i].id);
+    for (const adjacentSpace of adjacentSpaces) {
+      if (adjacentSpace.spaceType === SpaceType.LAND) {
+        game.addGreenery(player2, adjacentSpace.id);
         break;
       }
     }

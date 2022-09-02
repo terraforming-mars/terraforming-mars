@@ -1,7 +1,7 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {CardName} from '@/common/cards/CardName';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
@@ -15,7 +15,7 @@ export type Options = {
   showOwner: boolean, // Default is false. If true then show the name of the card owner below.
 }
 export class SelectCard<T extends ICard> implements PlayerInput {
-  public readonly inputType: PlayerInputTypes = PlayerInputTypes.SELECT_CARD;
+  public readonly inputType: PlayerInputType = PlayerInputType.SELECT_CARD;
   public config: Options;
 
   constructor(

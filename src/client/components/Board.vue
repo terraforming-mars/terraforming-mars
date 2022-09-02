@@ -135,6 +135,7 @@
                       <text x="136" y="-18" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
               </template>
+
               <template v-if="boardName === BoardName.ELYSIUM">
                   <g id="elysium_mons" transform="translate(110, 190)">
                       <text class="board-caption">
@@ -164,6 +165,7 @@
                       </text>
                   </g>
                 </template>
+
                 <template v-if="boardName === BoardName.ARABIA_TERRA">
                   <g id="tikhonarov" transform="translate(487, 185)">
                       <text class="board-caption">
@@ -194,6 +196,42 @@
                       <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                 </template>
+
+                <template v-if="boardName === BoardName.AMAZONIS">
+                  <g id="albor_tholus" transform="translate(85, 175)">
+                      <text class="board-caption" dx="47">
+                          <tspan dy="-7">Albor</tspan>
+                          <tspan dy="12" x="48">Tholus</tspan>
+                      </text>
+                      <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
+                      <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
+                  </g>
+                  <g id="anseris_mons" transform="translate(525, 330)">
+                      <text class="board-caption">
+                          <tspan>Anseris</tspan>
+                          <tspan x="5" dy="12">Mons</tspan>
+                      </text>
+                      <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"></line>
+                      <text x="-95" y="-25" class="board-caption board_caption--black">&#x25cf;</text>
+                  </g>
+                  <g id="pindus_mons" transform="translate(500, 370)">
+                      <text class="board-caption">
+                          <tspan>Pindus</tspan>
+                          <tspan x="5" dy="12">Mons</tspan>
+                      </text>
+                      <line x1="6" y1="-4" x2="-90" y2="-27" class="board-line"></line>
+                      <text x="-95" y="-25" class="board-caption board_caption--black">&#x25cf;</text>
+                  </g>
+                  <g id="ulysses_tholus" transform="translate(325, 496)">
+                      <text class="board-caption">
+                          <tspan>Ulysses</tspan>
+                          <tspan x="10" dy="12">Tholus</tspan>
+                      </text>
+                      <line x1="20" y1="-1" x2="4" y2="-109" class="board-line"></line>
+                      <text x="1" y="-107" class="board-caption board_caption--black">&#x25cf;</text>
+                  </g>
+                </template>
+
                 <template v-if="boardName === BoardName.VASTITAS_BOREALIS">
                   <g id="elysium_mons_vastitas_borealis"  transform="translate(410, 70)">
                       <text class="board-caption">
@@ -226,6 +264,7 @@
                       <text x="92" y="34" class="board-caption board_caption--black">●</text>
                   </g>
                 </template>
+
                 <template v-if="boardName === BoardName.TERRA_CIMMERIA">
                   <g id="albor_tholus"  transform="translate(260, 70)">
                       <text class="board-caption">
@@ -241,7 +280,6 @@
                       <line x1="15" y1="5" x2="-35" y2="30" class="board-line"></line>
                       <text x="-40" y="33" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
-
                   <g id="hadriacus_mons" transform="translate(78, 320)">
                       <text class="board-caption">
                           <tspan dy="15">Hadriacus</tspan>

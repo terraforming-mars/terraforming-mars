@@ -364,8 +364,7 @@ export default Vue.extend({
         result = '<div class="card-party-icon"></div>';
       }
       if (this.item.type === CardRenderItemType.AWARD) {
-        // iconography on card shows plural (awards)
-        result = '<span class="card-award-icon">awards</span>';
+        result = '<span class="card-award-icon">award</span>';
       }
       if (this.item.type === CardRenderItemType.VP) {
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';

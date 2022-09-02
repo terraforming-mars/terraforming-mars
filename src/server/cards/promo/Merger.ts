@@ -27,7 +27,7 @@ export class Merger extends PreludeCard {
     });
   }
 
-  private static mergerCost = 42;
+  public static readonly mergerCost = 42;
 
   public play(player: Player) {
     const game = player.game;

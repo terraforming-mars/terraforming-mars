@@ -26,8 +26,7 @@ import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
-import {CardType} from '../../../src/common/cards/CardType';
-import {ICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
+import {isICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -243,9 +242,10 @@ describe('RoboticWorkforce', () => {
           game.moonData!.moon.spaces[4].player = player;
         }
 
-        if (card.cardType === CardType.CORPORATION) {
-          (game as any).playCorporationCard(player, card as ICorporationCard);
+        if (isICorporationCard(card)) {
+          player.playCorporationCard(card);
         } else {
+          // TODO(kberg): add isIProjectCard
           player.playCard(card as IProjectCard);
         }
 

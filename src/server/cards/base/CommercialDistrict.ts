@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
@@ -12,10 +12,9 @@ import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class CommercialDistrict extends Card implements IProjectCard {
-  public migrated = true;
+export class CommercialDistrict extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.COMMERCIAL_DISTRICT,
+    name = CardName.COMMERCIAL_DISTRICT,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '085',
@@ -42,7 +41,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
@@ -54,7 +53,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
     }
     return 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space for special tile',
       player.game.board.getAvailableSpacesOnLand(player),

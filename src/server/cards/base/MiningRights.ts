@@ -6,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningRights extends MiningCard {
   constructor(
-    name: CardName = CardName.MINING_RIGHTS,
+    name = CardName.MINING_RIGHTS,
     metadata = {
       cardNumber: '067',
       renderData: CardRenderer.builder((b) => {

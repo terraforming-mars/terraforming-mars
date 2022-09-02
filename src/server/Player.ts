@@ -494,7 +494,7 @@ export class Player {
     });
 
     // Turmoil Victory Points
-    const includeTurmoilVP : boolean = this.game.gameIsOver() || this.game.phase === Phase.END;
+    const includeTurmoilVP = this.game.gameIsOver() || this.game.phase === Phase.END;
 
     Turmoil.ifTurmoil(this.game, (turmoil) => {
       if (includeTurmoilVP) {
@@ -574,7 +574,7 @@ export class Player {
   // Return the number of cards in the player's hand without tags.
   // Wild tags are ignored in this computation. (why?)
   public getNoTagsCount() {
-    let noTagsCount: number = 0;
+    let noTagsCount = 0;
 
     noTagsCount += this.corporations.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
     noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tag.WILD)).length;
@@ -585,7 +585,7 @@ export class Player {
   public getColoniesCount() {
     if (!this.game.gameOptions.coloniesExtension) return 0;
 
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
 
     this.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === this.id).length;
@@ -607,7 +607,7 @@ export class Player {
   }
 
   public getRequirementsBonus(parameter: GlobalParameter): number {
-    let requirementsBonus: number = 0;
+    let requirementsBonus = 0;
     for (const playedCard of this.tableau) {
       if (playedCard.getRequirementBonus !== undefined) requirementsBonus += playedCard.getRequirementBonus(this, parameter);
     }
@@ -687,7 +687,7 @@ export class Player {
   }
 
   public getResourceCount(resource: CardResource): number {
-    let count: number = 0;
+    let count = 0;
     this.getCardsWithResources(resource).forEach((card) => {
       count += card.resourceCount;
     });
@@ -751,7 +751,7 @@ export class Player {
   }
 
   public worldGovernmentTerraforming(): void {
-    const action: OrOptions = new OrOptions();
+    const action = new OrOptions();
     action.title = 'Select action for World Government Terraforming';
     action.buttonLabel = 'Confirm';
     const game = this.game;
@@ -939,7 +939,7 @@ export class Player {
   }
 
   public getCardCost(card: IProjectCard): number {
-    let cost: number = card.cost;
+    let cost = card.cost;
     cost -= this.colonies.cardDiscount;
 
     this.tableau.forEach((playedCard) => {
@@ -990,7 +990,7 @@ export class Player {
   }
 
   public checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction: CardAction = 'add') {
-    const cardCost: number = this.getCardCost(selectedCard);
+    const cardCost = this.getCardCost(selectedCard);
 
     const reserved = MoonExpansion.adjustedReserveCosts(this, selectedCard);
 
@@ -1132,6 +1132,19 @@ export class Player {
     return undefined;
   }
 
+  private triggerOtherCorpEffects(playedCorporationCard: ICorporationCard) {
+    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
+    for (const somePlayer of this.game.getPlayers()) {
+      for (const corporation of somePlayer.corporations) {
+        if (somePlayer === this && corporation.name === playedCorporationCard.name) continue;
+        if (corporation.onCorpCardPlayed === undefined) continue;
+        this.game.defer(new SimpleDeferredAction(this, () => corporation.onCorpCardPlayed?.(this, playedCorporationCard)));
+      }
+    }
+  }
+
+  // eslint-disable-next-line valid-jsdoc
+  /** @deprecated use Card2. */
   public simplePlay(card: IProjectCard | ICorporationCard) {
     if (card instanceof MoonCard || (card.migrated === true)) {
       if (card.productionBox !== undefined) {
@@ -1218,7 +1231,7 @@ export class Player {
       }
     }
 
-    if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
+    if (additionalCorp === false && corporationCard.name !== CardName.BEGINNER_CORPORATION) {
       const diff = this.cardsInHand.length * this.cardCost;
       this.deductResource(Resources.MEGACREDITS, diff);
     }
@@ -1234,17 +1247,6 @@ export class Player {
     PathfindersExpansion.onCardPlayed(this, corporationCard);
 
     this.game.playerIsFinishedWithResearchPhase(this);
-  }
-
-  public triggerOtherCorpEffects(playedCorporationCard: ICorporationCard) {
-    // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
-    for (const somePlayer of this.game.getPlayers()) {
-      for (const corporation of somePlayer.corporations) {
-        if (somePlayer === this && corporation.name === playedCorporationCard.name) continue;
-        if (corporation.onCorpCardPlayed === undefined) continue;
-        this.game.defer(new SimpleDeferredAction(this, () => corporation.onCorpCardPlayed?.(this, playedCorporationCard)));
-      }
-    }
   }
 
   public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {
@@ -1374,7 +1376,7 @@ export class Player {
     }
 
     if (this.game.canPlaceGreenery(this)) {
-      const action: OrOptions = new OrOptions();
+      const action = new OrOptions();
       action.title = 'Place any final greenery from plants';
       action.buttonLabel = 'Confirm';
       action.options.push(
@@ -1432,7 +1434,9 @@ export class Player {
     return candidateCards.filter((card) => this.canPlay(card));
   }
 
-  private canAffordCard(card: IProjectCard): boolean {
+  // TODO(kberg): After migration, see if this can become private again.
+  // Or perhaps moved into card?
+  public canAffordCard(card: IProjectCard): boolean {
     return this.canAfford(
       this.getCardCost(card),
       {
@@ -1451,8 +1455,12 @@ export class Player {
     return this.simpleCanPlay(card);
   }
 
-  // Verify if requirements for the card can be met, ignoring the project cost.
-  // Only made public for tests.
+  // eslint-disable-next-line valid-jsdoc
+  /**
+   * Verify if requirements for the card can be met, ignoring the project cost.
+   * Only made public for tests.
+   * @deprecated use Card2.
+   */
   public simpleCanPlay(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;
@@ -1692,9 +1700,9 @@ export class Player {
     this.actionsTakenThisGame++;
   }
 
-  // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
+  // Return possible mid-game actions like play a card and fund an award, but not play prelude card.
   public getActions() {
-    const action: OrOptions = new OrOptions();
+    const action = new OrOptions();
     action.title = this.actionsTakenThisRound === 0 ?
       'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';

@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -11,8 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class CulturalMetropolis extends Card implements IProjectCard {
-  public migrated = true;
+export class CulturalMetropolis extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -35,14 +34,14 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     // This card requires player has 2 delegates available
     const turmoil = Turmoil.getTurmoil(player.game);
     const hasEnoughDelegates = turmoil.getAvailableDelegateCount(player.id, 'both') >= 2;
     return hasEnoughDelegates;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceCityTile(player));
     const title = 'Select where to send two delegates';
 

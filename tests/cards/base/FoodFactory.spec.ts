@@ -20,7 +20,7 @@ describe('FoodFactory', function() {
     player.production.add(Resources.PLANTS, 1);
     expect(player.simpleCanPlay(card)).is.true;
 
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.plants).to.eq(0);
     expect(player.production.megacredits).to.eq(4);
 

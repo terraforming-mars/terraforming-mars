@@ -137,10 +137,14 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
 
         await db.purgeUnfinishedGames('1');
         expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+        const entry = (await db.getParticipants()).find((entry) => entry.gameId === game.id);
+        expect(entry?.participantIds).deep.eq([player.id]);
         // Doesn't purge until the time has passed.
         await db.purgeUnfinishedGames('-1');
         // await db.purgeUnfinishedGames('0'); This doesn't work! I wonder if it's just too precise a clock problem.
         expect(await db.getSaveIds(game.id)).is.empty;
+        const postPurgeEntry = (await db.getParticipants()).find((entry) => entry.gameId === game.id);
+        expect(postPurgeEntry).is.undefined;
       });
     }
 

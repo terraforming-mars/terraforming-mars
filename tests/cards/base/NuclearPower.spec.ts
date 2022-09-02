@@ -23,7 +23,7 @@ describe('NuclearPower', function() {
 
   it('Should play', function() {
     expect(player.simpleCanPlay(card)).is.true;
-    player.simplePlay(card);
+    card.play(player);
     expect(player.production.megacredits).to.eq(-2);
     expect(player.production.energy).to.eq(3);
   });

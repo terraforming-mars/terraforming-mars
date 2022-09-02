@@ -3,10 +3,10 @@ import {Player} from '../Player';
 import {Turmoil} from '../turmoil/Turmoil';
 
 export class Terraformer implements IMilestone {
-  public name: string = 'Terraformer';
+  public readonly name = 'Terraformer';
   private terraformRating: number = 35;
   private terraformRatingTurmoil: number = 26;
-  public description: string;
+  public readonly description;
   constructor() {
     this.description = 'Having a terraform rating of at least ' +
                             this.terraformRating + ' or ' +

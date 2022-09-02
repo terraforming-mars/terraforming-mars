@@ -151,4 +151,12 @@ describe('Merger', function() {
     game.deferredActions.runAll(() => {});
     expect(player.cardsInHand.length).to.eq(handSize + 1);
   });
+
+  it('Playing next corp card doesn't charge', function() {
+
+  });
+
+  it('Polyphemos and Terralabs', function() {
+
+  });
 });

@@ -1209,21 +1209,27 @@ export class Player {
     );
   }
 
-  // public for testing and Merger.
-  public playCorporationCard(corporationCard: ICorporationCard, additionalCorp = false): void {
-    if (this.corporations.length === 0 && additionalCorp === true) {
+  public playAdditionalCorporationCard(corporationCard: ICorporationCard): void {
+    if (this.corporations.length === 0) {
       throw new Error('Cannot add additional corporation when it does not have a starting corporation.');
     }
-    if (this.corporations.length > 0 && additionalCorp === false) {
+    return this._playCorporationCard(corporationCard, true);
+  }
+
+  public playCorporationCard(corporationCard: ICorporationCard): void {
+    if (this.corporations.length > 0) {
       throw new Error('Cannot add additional corporation without specifying it explicitly.');
     }
+    return this._playCorporationCard(corporationCard, false);
+  }
+
+  private _playCorporationCard(corporationCard: ICorporationCard, additionalCorp = false): void {
     this.corporations.push(corporationCard);
 
-
-    // There is a simpler way, but I'd rather not deal with the fallout of getting it wrong.
-    if (this.corporations.length > 1) {
+    // There is a simpler way to deal with this block, but I'd rather not deal with the fallout of getting it wrong.
+    if (additionalCorp) {
       this.megaCredits += corporationCard.startingMegaCredits;
-      Merger.setCardCost(this, corporationCard);
+      this.cardCost = Merger.setCardCost(this);
     } else {
       this.megaCredits = corporationCard.startingMegaCredits;
       if (corporationCard.cardCost !== undefined) {
@@ -1246,7 +1252,9 @@ export class Player {
     ColoniesHandler.onCardPlayed(this.game, corporationCard);
     PathfindersExpansion.onCardPlayed(this, corporationCard);
 
-    this.game.playerIsFinishedWithResearchPhase(this);
+    if (!additionalCorp) {
+      this.game.playerIsFinishedWithResearchPhase(this);
+    }
   }
 
   public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {

@@ -41,7 +41,7 @@ export class Merger extends PreludeCard {
     }
     game.defer(new SimpleDeferredAction(player, () => {
       return new SelectCard('Choose corporation card to play', 'Play', availableCorps, ([card]) => {
-        player.playCorporationCard(card, /** additionalCorp*/ true);
+        player.playAdditionalCorporationCard(card);
         return undefined;
       });
     }));
@@ -67,12 +67,9 @@ export class Merger extends PreludeCard {
     return cards;
   }
 
-  public static setCardCost(player: Player, corporationCard: ICorporationCard) {
-    const corpNames = player.corporations.map((corp) => corp.name);
-    if (corpNames.includes(CardName.TERRALABS_RESEARCH) && corpNames.includes(CardName.POLYPHEMOS)) {
-      player.cardCost = CARD_COST;
-    } else {
-      player.cardCost = corporationCard.cardCost ?? 3;
-    }
+  public static setCardCost(player: Player) {
+    return player.corporations
+      .map((card) => (card.cardCost ?? CARD_COST) - CARD_COST) // Convert every card cost to delta from zero. (e.g. -2, 0, +2)
+      .reduce((prev, curr) => prev + curr, CARD_COST); // Add them up, and add CARD_COST back.
   }
 }

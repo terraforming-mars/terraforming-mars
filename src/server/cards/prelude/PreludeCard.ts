@@ -7,6 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../../common/Units';
+import {ICard} from '../ICard';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;
@@ -31,4 +32,8 @@ export abstract class PreludeCard extends Card implements IProjectCard {
   public override canPlay(_player: Player): boolean {
     return true;
   }
+}
+
+export function isPreludeCard(card: ICard): card is PreludeCard {
+  return card instanceof PreludeCard;
 }

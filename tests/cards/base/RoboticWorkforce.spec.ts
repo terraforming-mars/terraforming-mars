@@ -27,7 +27,7 @@ import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
 import {isICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {isIProjectCard} from '../../../src/server/cards/IProjectCard';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
@@ -244,9 +244,8 @@ describe('RoboticWorkforce', () => {
 
         if (isICorporationCard(card)) {
           player.playCorporationCard(card);
-        } else {
-          // TODO(kberg): add isIProjectCard
-          player.playCard(card as IProjectCard);
+        } else if (isIProjectCard(card)) {
+          player.playCard(card);
         }
 
         // SelectSpace will trigger production changes in the right cards (e.g. Mining Rights)

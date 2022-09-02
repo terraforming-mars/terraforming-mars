@@ -48,7 +48,7 @@ describe('Banned Delegate', function() {
       selectDelegate.cb(result.players[0]);
     } else {
       const orOptions = cast(result, OrOptions);
-      orOptions.options.forEach((option) => option.cb((option as SelectDelegate).players[0]));
+      orOptions.options.forEach((option) => option.cb(cast(option, SelectDelegate).players[0]));
     }
 
     expect(greens.delegates).has.lengthOf(initialDelegatesCount - 1);

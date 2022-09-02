@@ -27,15 +27,15 @@ describe('ArtificialLake', function() {
   it('Should play', function() {
     const action = cast(card.play(player), SelectSpace);
 
-        action!.availableSpaces.forEach((space) => {
-          expect(space.spaceType).to.eq(SpaceType.LAND);
-        });
+    action.availableSpaces.forEach((space) => {
+      expect(space.spaceType).to.eq(SpaceType.LAND);
+    });
 
-        action!.cb(action!.availableSpaces[0]);
-        const placedTile = action!.availableSpaces[0].tile;
-        expect(placedTile!.tileType).to.eq(TileType.OCEAN);
+    action.cb(action!.availableSpaces[0]);
+    const placedTile = action.availableSpaces[0].tile;
+    expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
-        expect(card.getVictoryPoints()).to.eq(1);
+    expect(card.getVictoryPoints()).to.eq(1);
   });
 
   it('Cannot place ocean if all oceans are already placed', function() {

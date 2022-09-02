@@ -1,4 +1,6 @@
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
@@ -46,13 +48,12 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     const otherMicrobeCard = new Decomposers();
     player.playedCards.push(selectedCard, otherMicrobeCard);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectCard);
     expect(player.production.heat).to.eq(3);
     expect(player.production.plants).to.eq(1);
 
-    expect(action).is.not.undefined;
-        action!.cb([selectedCard]);
+    action.cb([selectedCard]);
 
-        expect(selectedCard.resourceCount).to.eq(2);
+    expect(selectedCard.resourceCount).to.eq(2);
   });
 });

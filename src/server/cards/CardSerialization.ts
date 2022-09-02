@@ -2,7 +2,7 @@ import {CardFinder} from '../CardFinder';
 import {SerializedCard} from '../SerializedCard';
 import {MiningCard} from './base/MiningCard';
 import {IProjectCard} from './IProjectCard';
-import {ICloneTagCard, isICloneTagCard} from './pathfinders/ICloneTagCard';
+import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
 
 export function serializeProjectCard(c: IProjectCard): SerializedCard {
@@ -37,8 +37,8 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
   if (element.resourceCount !== undefined) {
     card.resourceCount = element.resourceCount;
   }
-  if (element.cloneTag !== undefined) {
-    (card as unknown as ICloneTagCard).cloneTag = element.cloneTag;
+  if (isICloneTagCard(card) && element.cloneTag !== undefined) {
+    card.cloneTag = element.cloneTag;
   }
   if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
     card.targetCards = [];

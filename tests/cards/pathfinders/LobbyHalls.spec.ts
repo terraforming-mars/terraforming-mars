@@ -57,7 +57,7 @@ describe('LobbyHalls', function() {
 
     // Next test adds a delegate.
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
-    assertAddDelegateAction(game.deferredActions.pop()!);
+    assertAddDelegateAction(cast(game.deferredActions.pop(), SendDelegateToArea));
   });
 
   function assertCloneTagAction(action: DeferredAction) {
@@ -66,14 +66,13 @@ describe('LobbyHalls', function() {
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);
   }
 
-  function assertAddDelegateAction(action: DeferredAction) {
+  function assertAddDelegateAction(action: SendDelegateToArea) {
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     expect(marsFirst.getDelegates(player.id)).eq(0);
 
-    expect(action).instanceOf(SendDelegateToArea);
-    const options = action.execute()! as SelectPartyToSendDelegate;
+    const options = cast(action.execute(), SelectPartyToSendDelegate);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(5);

@@ -32,9 +32,9 @@ describe('CharityDonation', function() {
     const decomposers = new Decomposers();
     game.dealer.deck.push(decomposers, ceosFavoriteProject, beamFromAThoriumAsteroid, acquiredCompany);
 
-    (player1 as any).waitingFor = undefined;
-    (player2 as any).waitingFor = undefined;
-    (player3 as any).waitingFor = undefined;
+    player1.popWaitingFor();
+    player2.popWaitingFor();
+    player3.popWaitingFor();
 
     // Letting player 2 go first to test the wraparound nature of the algorithm.
     card.play(player2);

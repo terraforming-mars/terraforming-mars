@@ -11,7 +11,7 @@ import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
-import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
@@ -34,7 +34,7 @@ describe('PharmacyUnion', function() {
   it('Should play', function() {
     player.corporations.length = 0; // Resetting so when setting the corproation it doesn't do anything flaky.
     Game.newInstance('gameid', [player], player);
-    const pi = player.getWaitingFor() as AndOptions;
+    const pi = cast(player.getWaitingFor(), SelectInitialCards);
     pi.options[0].cb([card]);
     pi.options[1].cb([]);
     pi.cb();

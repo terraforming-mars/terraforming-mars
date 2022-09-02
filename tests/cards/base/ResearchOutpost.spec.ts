@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -18,8 +19,7 @@ describe('ResearchOutpost', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player) as SelectSpace;
-    expect(action).is.not.undefined;
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesCount()).to.eq(1);

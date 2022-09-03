@@ -6,11 +6,11 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class JovianLanterns extends Card implements IProjectCard {
+export class JovianLanterns extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 20,
@@ -51,7 +51,7 @@ export class JovianLanterns extends Card implements IProjectCard {
     return undefined;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
     player.increaseTerraformRating();
     return undefined;

@@ -26,7 +26,7 @@ describe('MartianZoo', function() {
     player.game.addCityTile(player, lands[1].id);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

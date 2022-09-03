@@ -5,14 +5,14 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Game} from '../../Game';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectColony} from '../..//inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 import {LogHelper} from '../../LogHelper';
 
-export class MarketManipulation extends Card implements IProjectCard {
+export class MarketManipulation extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 1,
@@ -33,7 +33,7 @@ export class MarketManipulation extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     const increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
 
@@ -63,7 +63,7 @@ export class MarketManipulation extends Card implements IProjectCard {
     );
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     let increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
     // if there is only one decreaseable colony and it is an increaseable colony, don't allow increase of that colony.

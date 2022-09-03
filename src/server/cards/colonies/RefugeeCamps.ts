@@ -6,10 +6,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class RefugeeCamps extends Card implements IProjectCard {
+export class RefugeeCamps extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 10,
@@ -40,10 +40,6 @@ export class RefugeeCamps extends Card implements IProjectCard {
   public action(player: Player) {
     player.production.add(Resources.MEGACREDITS, -1);
     player.addResourceTo(this, 1);
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

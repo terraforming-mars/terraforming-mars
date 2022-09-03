@@ -9,11 +9,11 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class JupiterFloatingStation extends Card implements IProjectCard {
+export class JupiterFloatingStation extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 9,
@@ -62,9 +62,5 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
         return undefined;
       }),
     );
-  }
-
-  public play() {
-    return undefined;
   }
 }

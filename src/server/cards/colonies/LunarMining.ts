@@ -4,11 +4,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class LunarMining extends Card implements IProjectCard {
+export class LunarMining extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 11,
@@ -28,7 +28,7 @@ export class LunarMining extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.TITANIUM, Math.floor((player.tags.count(Tag.EARTH)+1) / 2), {log: true});
     return undefined;
   }

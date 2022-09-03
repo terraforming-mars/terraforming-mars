@@ -4,10 +4,10 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 
-export class ProductiveOutpost extends Card implements IProjectCard {
+export class ProductiveOutpost extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 0,
@@ -23,7 +23,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
         // Not using GiveColonyBonus deferred action because it's only for the active player

@@ -3,15 +3,14 @@ import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Arklight extends Card implements ICorporationCard {
+export class Arklight extends Card2 implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,
@@ -20,6 +19,7 @@ export class Arklight extends Card implements ICorporationCard {
       resourceType: CardResource.ANIMAL,
       cardType: CardType.CORPORATION,
       victoryPoints: VictoryPoints.resource(1, 2),
+      productionBox: {megacredits: 2},
 
       metadata: {
         cardNumber: 'R04',
@@ -38,8 +38,7 @@ export class Arklight extends Card implements ICorporationCard {
   }
 
 
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
+  public override bespokePlay(player: Player) {
     player.addResourceTo(this, {log: true});
     return undefined;
   }

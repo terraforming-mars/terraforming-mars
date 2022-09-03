@@ -5,10 +5,10 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class FloaterTechnology extends Card implements IProjectCard {
+export class FloaterTechnology extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 7,
@@ -39,9 +39,4 @@ export class FloaterTechnology extends Card implements IProjectCard {
 
     return undefined;
   }
-
-  public play() {
-    return undefined;
-  }
 }
-

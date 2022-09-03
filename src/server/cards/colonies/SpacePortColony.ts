@@ -6,10 +6,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class SpacePortColony extends Card implements IProjectCard {
+export class SpacePortColony extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 27,
@@ -32,8 +32,9 @@ export class SpacePortColony extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new BuildColony(player, {allowDuplicate: true, title: 'Select colony for Space Port Colony'}));
+    // TODO(kberg): shouldn't this have an onDiscard?
     player.colonies.increaseFleetSize();
     return undefined;
   }

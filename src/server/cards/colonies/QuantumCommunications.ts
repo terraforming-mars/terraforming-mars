@@ -6,11 +6,11 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class QuantumCommunications extends Card implements IProjectCard {
+export class QuantumCommunications extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 8,
@@ -31,7 +31,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;

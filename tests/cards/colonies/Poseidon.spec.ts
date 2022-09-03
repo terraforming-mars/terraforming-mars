@@ -12,7 +12,7 @@ describe('Poseidon', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
-    const play = card.play();
+    const play = card.play(player);
     expect(play).is.undefined;
     player.setCorporationForTest(card);
     const ceres = new Ceres();

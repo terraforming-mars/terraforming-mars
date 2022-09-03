@@ -1,13 +1,13 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Poseidon extends Card implements ICorporationCard {
+export class Poseidon extends Card2 implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POSEIDON,
@@ -39,9 +39,5 @@ export class Poseidon extends Card implements ICorporationCard {
       console.warn('Colonies extension isn\'t selected.');
       return undefined;
     }
-  }
-
-  public play() {
-    return undefined;
   }
 }

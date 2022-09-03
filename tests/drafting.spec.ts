@@ -387,9 +387,7 @@ describe('drafting', () => {
 });
 
 function getWaitingFor(player: Player): SelectCard<IProjectCard> {
-  const action = player.getWaitingFor();
-  expect(action).instanceof(SelectCard);
-  return action as SelectCard<IProjectCard>;
+  return cast(player.getWaitingFor(), SelectCard<IProjectCard>);
 }
 
 function unshiftCards(deck: Array<IProjectCard>, cards: Array<CardName>) {
@@ -417,8 +415,8 @@ function draftSelection(player: Player) {
   return getWaitingFor(player).cards.map((card) => card.name);
 }
 
-function selectCard<T extends ICard>(player: TestPlayer, cardName: CardName) {
-  const selectCard = player.popWaitingFor() as SelectCard<T>;
+function selectCard(player: TestPlayer, cardName: CardName) {
+  const selectCard = cast(player.popWaitingFor(), SelectCard);
   const cards = selectCard.cards;
   const card = cards.find((c) => c.name === cardName);
   if (card === undefined) throw new Error(`${cardName} isn't in list`);

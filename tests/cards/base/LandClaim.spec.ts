@@ -27,8 +27,7 @@ describe('LandClaim', function() {
     Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({
       boardName: BoardName.HELLAS,
     }));
-    const action = card.play(player) as SelectSpace;
-    expect(action).is.not.undefined;
+    const action = cast(card.play(player), SelectSpace);
     expect(player.canAfford(constants.HELLAS_BONUS_OCEAN_COST)).to.be.false;
     expect(action.availableSpaces.some((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.be.true;
   });

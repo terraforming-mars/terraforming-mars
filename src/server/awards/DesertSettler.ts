@@ -4,8 +4,8 @@ import {isHazardTileType} from '../../common/TileType';
 import {Board} from '../boards/Board';
 
 export class DesertSettler implements IAward {
-  public name: string = 'Desert Settler';
-  public description: string = 'Most tiles south of the equator (the four bottom rows)';
+  public readonly name = 'Desert Settler';
+  public readonly description = 'Most tiles south of the equator (the four bottom rows)';
   public getScore(player: Player): number {
     return player.game.board.spaces
       .filter(Board.ownedBy(player))

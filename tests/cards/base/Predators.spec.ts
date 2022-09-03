@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {BioengineeringEnclosure} from '../../../src/server/cards/ares/BioengineeringEnclosure';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Pets} from '../../../src/server/cards/base/Pets';
@@ -46,13 +47,13 @@ describe('Predators', function() {
     player.addResourceTo(smallAnimals);
 
     card.action(player);
-    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-        game.deferredActions.pop()!.execute(); // Add animal to predators
+    game.deferredActions.pop()!.execute(); // Add animal to predators
 
-        expect(card.resourceCount).to.eq(1);
-        expect(fish.resourceCount).to.eq(0);
+    expect(card.resourceCount).to.eq(1);
+    expect(fish.resourceCount).to.eq(0);
   });
 
   it('Respects pets', function() {
@@ -67,13 +68,12 @@ describe('Predators', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
-    expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.pop()!.execute(); // Add animal to predators
+    expect(game.deferredActions.pop()!.execute()).is.undefined; // Only one option: Fish
+    game.deferredActions.pop()!.execute(); // Add animal to predators
 
-        expect(card.resourceCount).to.eq(1);
-        expect(fish.resourceCount).to.eq(0);
-        expect(pets.resourceCount).to.eq(1);
+    expect(card.resourceCount).to.eq(1);
+    expect(fish.resourceCount).to.eq(0);
+    expect(pets.resourceCount).to.eq(1);
   });
 
   it('Respects Bioengineering Enclosure', function() {
@@ -88,13 +88,12 @@ describe('Predators', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
-    expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.pop()!.execute(); // Add animal to predators
+    expect(game.deferredActions.pop()!.execute()).is.undefined; // Only one option: Fish
+    game.deferredActions.pop()!.execute(); // Add animal to predators
 
-        expect(card.resourceCount).to.eq(1);
-        expect(fish.resourceCount).to.eq(0);
-        expect(bioengineeringEnclosure.resourceCount).to.eq(1);
+    expect(card.resourceCount).to.eq(1);
+    expect(fish.resourceCount).to.eq(0);
+    expect(bioengineeringEnclosure.resourceCount).to.eq(1);
   });
 
   it('Respects protected habitats', function() {

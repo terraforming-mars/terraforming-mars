@@ -12,6 +12,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
+import {cast} from '../../TestingUtils';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
@@ -76,7 +77,7 @@ describe('StratosphericBirds', () => {
     player.addResourceTo(extractorBalloons, 1);
 
     card.play(player);
-    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.pop()!.execute(), SelectCard<ICard>);
     expect(selectCard.cards).has.lengthOf(2);
 
     selectCard.cb([deuteriumExport]);

@@ -3,8 +3,8 @@ import {Player} from '../../Player';
 import {IMilestone} from '../IMilestone';
 
 export class Spacefarer implements IMilestone {
-  public name: string = 'Spacefarer';
-  public description: string = 'Have 6 Space tags';
+  public readonly name = 'Spacefarer';
+  public readonly description = 'Have 6 Space tags';
 
   public getScore(player: Player): number {
     return player.tags.count(Tag.SPACE);

@@ -38,7 +38,7 @@ describe('DirectedImpactors', function() {
     // can add resource to itself
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPayment = game.deferredActions.peek()!.execute() as SelectPayment;
+    const selectPayment = cast(game.deferredActions.peek()!.execute(), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, titanium: 1, megaCredits: 3});
 
     expect(player.megaCredits).to.eq(0);

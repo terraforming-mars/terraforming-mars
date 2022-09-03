@@ -136,15 +136,13 @@ describe('SpecializedSettlement', function() {
 
   it('play on hazard space', function() {
     player.production.override({energy: 1});
-    player.megaCredits = 8; // Placing on a hazard space costs 8MC
+    player.megaCredits = 8; // Placing on a mild hazard costs 8MC
 
     const hazardSpace = player.game.board.getAvailableSpacesForCity(player)[0];
     hazardSpace.bonus = [SpaceBonus.HEAT];
     hazardSpace.tile = {tileType: TileType.DUST_STORM_MILD, protectedHazard: false};
 
-    const action = card.play(player);
-
-    const selectSpace = cast(action, SelectSpace);
+    const selectSpace = cast(card.play(player), SelectSpace);
     expect(selectSpace.availableSpaces).contains(hazardSpace);
     selectSpace.cb(hazardSpace);
 

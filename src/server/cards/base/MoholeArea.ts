@@ -14,7 +14,7 @@ import {digit} from '../Options';
 
 export class MoholeArea extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.MOHOLE_AREA,
+    name = CardName.MOHOLE_AREA,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '142',

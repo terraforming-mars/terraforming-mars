@@ -11,16 +11,16 @@ import {MAX_TEMPERATURE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
 
 export class Kelvinists extends Party implements IParty {
-  name = PartyName.KELVINISTS;
-  description = 'Pushes for rapid terraforming, usually employing a heat-first strategy.';
-  bonuses = [KELVINISTS_BONUS_1, KELVINISTS_BONUS_2];
-  policies = [KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
+  readonly name = PartyName.KELVINISTS;
+  readonly description = 'Pushes for rapid terraforming, usually employing a heat-first strategy.';
+  readonly bonuses = [KELVINISTS_BONUS_1, KELVINISTS_BONUS_2];
+  readonly policies = [KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
 }
 
 class KelvinistsBonus01 implements Bonus {
-  id = 'kb01' as const;
-  isDefault = true;
-  description = 'Gain 1 M€ for each Heat production you have';
+  readonly id = 'kb01' as const;
+  readonly isDefault = true;
+  readonly description = 'Gain 1 M€ for each Heat production you have';
 
   getScore(player: Player) {
     return player.production.heat;
@@ -34,9 +34,9 @@ class KelvinistsBonus01 implements Bonus {
 }
 
 class KelvinistsBonus02 implements Bonus {
-  id = 'kb02' as const;
-  description = 'Gain 1 heat for each Heat production you have';
-  isDefault = false;
+  readonly id = 'kb02' as const;
+  readonly description = 'Gain 1 heat for each Heat production you have';
+  readonly isDefault = false;
 
   getScore(player: Player) {
     return player.production.heat;
@@ -50,8 +50,8 @@ class KelvinistsBonus02 implements Bonus {
 }
 
 class KelvinistsPolicy01 implements Policy {
-  isDefault = true;
-  id = 'kp01' as const;
+  readonly isDefault = true;
+  readonly id = 'kp01' as const;
   description(player: Player | undefined): string {
     const cost = player === undefined ? 10 : this.cost(player);
     return `Pay ${cost} M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)`;
@@ -85,15 +85,15 @@ class KelvinistsPolicy01 implements Policy {
 }
 
 class KelvinistsPolicy02 implements Policy {
-  id = 'kp02' as const;
-  description: string = 'When you raise temperature, gain 3 M€ per step raised';
-  isDefault = false;
+  readonly id = 'kp02' as const;
+  readonly description = 'When you raise temperature, gain 3 M€ per step raised';
+  readonly isDefault = false;
 }
 
 class KelvinistsPolicy03 implements Policy {
-  id = 'kp03' as const;
-  description: string = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
-  isDefault = false;
+  readonly id = 'kp03' as const;
+  readonly description = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
+  readonly isDefault = false;
 
   canAct(player: Player) {
     return player.availableHeat() >= 6 && player.game.getTemperature() < MAX_TEMPERATURE;
@@ -112,9 +112,9 @@ class KelvinistsPolicy03 implements Policy {
 }
 
 class KelvinistsPolicy04 implements Policy {
-  id = 'kp04' as const;
-  description: string = 'When you place a tile, gain 2 heat';
-  isDefault = false;
+  readonly id = 'kp04' as const;
+  readonly description = 'When you place a tile, gain 2 heat';
+  readonly isDefault = false;
 
   onTilePlaced(player: Player) {
     player.addResource(Resources.HEAT, 2);

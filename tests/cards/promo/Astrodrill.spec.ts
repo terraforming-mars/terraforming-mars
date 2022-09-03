@@ -54,7 +54,7 @@ describe('Astrodrill', function() {
     player.playedCards.push(cometAiming);
 
     const action = cast(card.action(player), OrOptions);
-    const addAsteroidOption = action.options[1] as SelectCard<ICard>;
+    const addAsteroidOption = cast(action.options[1], SelectCard<ICard>);
 
     const result = addAsteroidOption.cb([cometAiming]);
     expect(cometAiming.resourceCount).to.eq(1);

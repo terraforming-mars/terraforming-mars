@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class LavaFlows extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.LAVA_FLOWS,
+    name = CardName.LAVA_FLOWS,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '140',

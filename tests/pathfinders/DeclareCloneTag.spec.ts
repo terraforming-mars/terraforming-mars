@@ -78,7 +78,7 @@ describe('DeclareCloneTag', function() {
 
 
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
-    const options = cast(action!.execute(), OrOptions);
+    const options = cast(action.execute(), OrOptions);
 
     expect(options.options[0].title).to.match(/earth/);
 

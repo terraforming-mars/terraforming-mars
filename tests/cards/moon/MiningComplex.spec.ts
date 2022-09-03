@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
 import {expect} from 'chai';
@@ -35,14 +35,14 @@ describe('MiningComplex', () => {
 
     expect(player.megaCredits).eq(0);
 
-    const placeMineTile = game.deferredActions.pop() as PlaceMoonMineTile;
+    const placeMineTile = cast(game.deferredActions.pop(), PlaceMoonMineTile);
     placeMineTile.execute()!.cb(moonData.moon.getSpace('m06'));
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
 
-    const placeRoadTile = game.deferredActions.pop() as PlaceMoonRoadTile;
-    const selectSpace = placeRoadTile.execute() as SelectSpace;
+    const placeRoadTile = cast(game.deferredActions.pop(), PlaceMoonRoadTile);
+    const selectSpace = cast(placeRoadTile.execute(), SelectSpace);
     const spaces = selectSpace.availableSpaces;
     expect(spaces.map((s) => s.id)).to.have.members(['m02', 'm12']);
     selectSpace.cb(spaces[0]);
@@ -51,4 +51,3 @@ describe('MiningComplex', () => {
     expect(player.getTerraformRating()).eq(16);
   });
 });
-

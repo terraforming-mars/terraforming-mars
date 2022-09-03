@@ -28,8 +28,7 @@ describe('IndustrialCenterAres', function() {
     const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
-    expect(space.tile).is.not.undefined;
-    expect(space.tile && space.tile.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
+    expect(space.tile?.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
   });
 });

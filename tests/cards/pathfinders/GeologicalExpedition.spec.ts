@@ -32,8 +32,7 @@ describe('GeologicalExpedition', function() {
     microbeCard = fakeCard({resourceType: CardResource.MICROBE});
     scienceCard = fakeCard({resourceType: CardResource.SCIENCE});
     player.playedCards = [card, microbeCard, scienceCard];
-    (player as any).waitingFor = undefined;
-    (player as any).waitingForCb = undefined;
+    player.popWaitingFor();
   });
 
   it('no bonuses, gain 1 steel', () => {

@@ -12,8 +12,8 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearZone extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.NUCLEAR_ZONE,
-    cost: number = 10,
+    name = CardName.NUCLEAR_ZONE,
+    cost = 10,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '097',

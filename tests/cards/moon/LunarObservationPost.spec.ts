@@ -43,6 +43,7 @@ describe('LunarObservationPost', () => {
     expect(card.resourceCount).eq(0);
 
     card.action(player);
+    // TODO(kberg): figure out what type action should be.
     const action = game.deferredActions.pop();
     action!.execute();
 

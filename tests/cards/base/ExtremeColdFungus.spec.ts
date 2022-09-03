@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {ExtremeColdFungus} from '../../../src/server/cards/base/ExtremeColdFungus';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -39,15 +40,14 @@ describe('ExtremeColdFungus', () => {
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
 
-    const action = card.action(player);
-    expect(action).instanceOf(OrOptions);
-    expect(action!.options).has.lengthOf(2);
+    const action = cast(card.action(player), OrOptions);
+    expect(action.options).has.lengthOf(2);
 
-        action!.options[0].cb();
-        expect(tardigrades.resourceCount).to.eq(2);
+    action.options[0].cb();
+    expect(tardigrades.resourceCount).to.eq(2);
 
-        action!.options[1].cb();
-        expect(player.plants).to.eq(1);
+    action.options[1].cb();
+    expect(player.plants).to.eq(1);
   });
 
   it('Should act - multiple targets', () => {
@@ -55,14 +55,13 @@ describe('ExtremeColdFungus', () => {
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
 
-    const action = card.action(player);
-    expect(action).instanceOf(OrOptions);
-    expect(action!.options).has.lengthOf(2);
+    const action = cast(card.action(player), OrOptions);
+    expect(action.options).has.lengthOf(2);
 
-        action!.options[0].cb([tardigrades]);
-        expect(tardigrades.resourceCount).to.eq(2);
+    action.options[0].cb([tardigrades]);
+    expect(tardigrades.resourceCount).to.eq(2);
 
-        action!.options[0].cb([ants]);
-        expect(ants.resourceCount).to.eq(2);
+    action.options[0].cb([ants]);
+    expect(ants.resourceCount).to.eq(2);
   });
 });

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {ICard} from '../../../src/server/cards/ICard';
@@ -24,7 +25,7 @@ describe('MoholeLake', function() {
     card.play(player);
 
     expect(player.game.deferredActions).has.lengthOf(1);
-    const selectSpace = player.game.deferredActions.peek()!.execute() as SelectSpace;
+    const selectSpace = cast(player.game.deferredActions.peek()!.execute(), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(player.game.getTemperature()).to.eq(-28);
@@ -55,7 +56,7 @@ describe('MoholeLake', function() {
 
     card.play(player);
     expect(card.canAct()).is.true;
-    const action = card.action(player) as SelectCard<ICard>;
+    const action = cast(card.action(player), SelectCard<ICard>);
 
     action.cb([ants]);
     expect(ants.resourceCount).to.eq(1);

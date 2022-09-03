@@ -28,16 +28,15 @@ describe('PrivateSecurity', function() {
 
     opponent2.playedCards = [];
     fish.play(player);
-    let action = player.game.deferredActions.pop()?.execute()! as SelectPlayer;
+    const action = cast(player.game.deferredActions.pop()?.execute(), SelectPlayer);
     // Options for both opponents.
     expect(action.players).has.lengthOf(2);
 
     // Opponent 2 has Private Security
     opponent2.playedCards = [card];
     fish.play(player);
-    action = player.game.deferredActions.pop()?.execute()! as SelectPlayer;
     // Options for only one opponent.
-    expect(action).is.undefined;
+    expect(player.game.deferredActions.pop()?.execute()).is.undefined;
     // And it's the one without Private Security.
     expect(opponent1.production.plants).to.eq(1);
   });

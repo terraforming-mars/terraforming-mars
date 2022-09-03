@@ -1,5 +1,4 @@
-
-export enum PlayerInputTypes {
+export enum PlayerInputType {
     AND_OPTIONS,
     OR_OPTIONS,
     SELECT_AMOUNT,

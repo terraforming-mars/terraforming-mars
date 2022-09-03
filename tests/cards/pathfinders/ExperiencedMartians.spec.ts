@@ -9,7 +9,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
-import {fakeCard} from '../../TestingUtils';
+import {cast, fakeCard} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
 
 describe('ExperiencedMartians', function() {
@@ -46,9 +46,8 @@ describe('ExperiencedMartians', function() {
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     expect(marsFirst.getDelegates(player.id)).eq(0);
 
-    const action = game.deferredActions.pop()!;
-    expect(action).instanceOf(SendDelegateToArea);
-    const options = action.execute()! as SelectPartyToSendDelegate;
+    const action = cast(game.deferredActions.pop(), SendDelegateToArea);
+    const options = cast(action.execute(), SelectPartyToSendDelegate);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(5);

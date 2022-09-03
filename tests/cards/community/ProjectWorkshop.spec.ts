@@ -89,8 +89,7 @@ describe('ProjectWorkshop', function() {
     player.playedCards.push(smallAnimals, extremophiles);
 
     const selectOption = cast(card.action(player), SelectOption);
-
-    const selectCard = selectOption.cb() as SelectCard<ICard>;
+    const selectCard = cast(selectOption.cb(), SelectCard<ICard>);
 
     selectCard.cb([smallAnimals]);
     expect(player.getTerraformRating()).to.eq(originalTR + 2);

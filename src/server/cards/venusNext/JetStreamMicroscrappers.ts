@@ -34,7 +34,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
       },
     });
   }
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;
@@ -76,8 +76,8 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
 
   private spendResource(player: Player) {
     player.removeResourceFrom(this, 2);
-    player.game.increaseVenusScaleLevel(player, 1);
-    LogHelper.logVenusIncrease( player, 1);
+    const actual = player.game.increaseVenusScaleLevel(player, 1);
+    LogHelper.logVenusIncrease(player, actual);
     return undefined;
   }
 }

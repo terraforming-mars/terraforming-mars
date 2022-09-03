@@ -59,8 +59,8 @@ export default Vue.extend({
       }
 
       let result: Array<PublicPlayerModel> = [];
-      let currentPlayerOffset: number = 0;
-      const currentPlayerIndex: number = playerIndex(
+      let currentPlayerOffset = 0;
+      const currentPlayerIndex = playerIndex(
         this.thisPlayer.color,
         this.players,
       );
@@ -95,7 +95,7 @@ export default Vue.extend({
         (p: PublicPlayerModel) => !this.playerView.game.passedPlayers.includes(p.color),
       );
 
-      const currentPlayerIndex: number = playerIndex(
+      const currentPlayerIndex = playerIndex(
         player.color,
         notPassedPlayers,
       );

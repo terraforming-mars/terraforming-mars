@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -18,8 +19,7 @@ describe('ResearchOutpost', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player) as SelectSpace;
-    expect(action).is.not.undefined;
+    const action = cast(card.play(player), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesCount()).to.eq(1);
@@ -28,9 +28,7 @@ describe('ResearchOutpost', function() {
 
   it('Can not play if no spaces available', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
-    for (let i = 0; i < lands.length; i++) {
-      game.addGreenery(player, lands[i].id);
-    }
+    lands.forEach((land) => game.addGreenery(player, land.id));
 
     expect(card.canPlay(player)).is.not.true;
   });

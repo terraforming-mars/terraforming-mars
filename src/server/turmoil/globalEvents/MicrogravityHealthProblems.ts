@@ -23,7 +23,7 @@ export class MicrogravityHealthProblems extends GlobalEvent implements IGlobalEv
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      let coloniesCount: number = 0;
+      let coloniesCount = 0;
       game.colonies.forEach((colony) => {
         coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
       });

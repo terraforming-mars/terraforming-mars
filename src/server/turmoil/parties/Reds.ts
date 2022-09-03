@@ -16,16 +16,16 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 
 export class Reds extends Party implements IParty {
-  name = PartyName.REDS;
-  description = 'Wishes to preserve the red planet.';
-  bonuses = [REDS_BONUS_1, REDS_BONUS_2];
-  policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
+  readonly name = PartyName.REDS;
+  readonly description = 'Wishes to preserve the red planet.';
+  readonly bonuses = [REDS_BONUS_1, REDS_BONUS_2];
+  readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
 class RedsBonus01 implements Bonus {
-  id = 'rb01' as const;
-  description = 'The player(s) with the lowest TR gains 1 TR';
-  isDefault = true;
+  readonly id = 'rb01' as const;
+  readonly description = 'The player(s) with the lowest TR gains 1 TR';
+  readonly isDefault = true;
 
   getScore(player: Player) {
     const game = player.game;
@@ -51,9 +51,9 @@ class RedsBonus01 implements Bonus {
 }
 
 class RedsBonus02 implements Bonus {
-  id = 'rb02' as const;
-  description = 'The player(s) with the highest TR loses 1 TR';
-  isDefault = false;
+  readonly id = 'rb02' as const;
+  readonly description = 'The player(s) with the highest TR loses 1 TR';
+  readonly isDefault = false;
 
   getScore(player: Player) {
     const game = player.game;
@@ -79,18 +79,18 @@ class RedsBonus02 implements Bonus {
 }
 
 class RedsPolicy01 implements Policy {
-  id = 'rp01' as const;
-  isDefault = true;
-  description: string = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
+  readonly id = 'rp01' as const;
+  readonly isDefault = true;
+  readonly description = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
 class RedsPolicy02 implements Policy {
-  id = 'rp02' as const;
-  description: string = 'When you place a tile, pay 3 M€ or as much as possible';
-  isDefault = false;
+  readonly id = 'rp02' as const;
+  readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
+  readonly isDefault = false;
 
   onTilePlaced(player: Player) {
-    let amountPlayerHas: number = player.megaCredits;
+    let amountPlayerHas = player.megaCredits;
     if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
@@ -101,9 +101,9 @@ class RedsPolicy02 implements Policy {
 }
 
 class RedsPolicy03 implements Policy {
-  id = 'rp03' as const;
-  description: string = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
-  isDefault = false;
+  readonly id = 'rp03' as const;
+  readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
+  readonly isDefault = false;
 
   private canDecrease(game: Game, parameter: GlobalParameter) {
     switch (parameter) {
@@ -248,9 +248,9 @@ class RedsPolicy03 implements Policy {
 }
 
 class RedsPolicy04 implements Policy {
-  id = 'rp04' as const;
-  description: string = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
-  isDefault = false;
+  readonly id = 'rp04' as const;
+  readonly description = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
+  readonly isDefault = false;
 }
 
 export const REDS_BONUS_1 = new RedsBonus01();

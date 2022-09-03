@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTrainStation} from '../../../src/server/cards/moon/LunaTrainStation';
 import {expect} from 'chai';
@@ -55,8 +55,8 @@ describe('LunaTrainStation', () => {
     expect(moonData.logisticRate).eq(1);
 
     const space = moonData.moon.spaces[2];
-    const placeTileAction = game.deferredActions.peek() as PlaceSpecialMoonTile;
-    placeTileAction!.execute()!.cb(space);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceSpecialMoonTile);
+    placeTileAction.execute()!.cb(space);
 
     expect(space.player).eq(player);
     expect(space.tile!.tileType).eq(TileType.LUNA_TRAIN_STATION);

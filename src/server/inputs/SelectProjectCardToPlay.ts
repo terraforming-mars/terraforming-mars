@@ -1,5 +1,5 @@
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {jsonToPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
@@ -8,7 +8,7 @@ import {CardAction, Player} from '../Player';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
 export class SelectProjectCardToPlay implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY;
+  public readonly inputType = PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY;
   public title = 'Play project card';
   public buttonLabel: string = 'Play card';
   public reserveUnits: Array<Units>;

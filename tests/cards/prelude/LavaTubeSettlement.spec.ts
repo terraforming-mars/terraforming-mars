@@ -7,7 +7,7 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {resetBoard} from '../../TestingUtils';
+import {cast, resetBoard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LavaTubeSettlement', function() {
@@ -43,7 +43,7 @@ describe('LavaTubeSettlement', function() {
     expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
-    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
+    const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(selectSpace.availableSpaces[0].tile && selectSpace.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);

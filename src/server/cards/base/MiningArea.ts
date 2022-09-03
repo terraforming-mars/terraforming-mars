@@ -6,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningArea extends MiningCard {
   constructor(
-    name: CardName = CardName.MINING_AREA,
+    name = CardName.MINING_AREA,
     metadata = {
       cardNumber: '064',
       renderData: CardRenderer.builder((b) => {

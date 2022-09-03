@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {VenusSoils} from '../../../src/server/cards/venusNext/VenusSoils';
@@ -34,12 +35,11 @@ describe('VenusSoils', function() {
     const card3 = new VenusianInsects();
     player.playedCards.push(card2, card3);
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard);
+    action.cb([card2]);
 
-        action!.cb([card2]);
-        expect(card2.resourceCount).to.eq(2);
-        expect(player.production.plants).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    expect(card2.resourceCount).to.eq(2);
+    expect(player.production.plants).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

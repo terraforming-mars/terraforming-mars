@@ -11,6 +11,7 @@ import {IProjectCard} from '../IProjectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
+import {LogHelper} from '../../LogHelper';
 
 export class Ambient extends Card implements ICorporationCard {
   constructor() {
@@ -45,7 +46,8 @@ export class Ambient extends Card implements ICorporationCard {
   }
 
   public initialAction(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 2);
+    const actual = player.game.increaseVenusScaleLevel(player, 2);
+    LogHelper.logVenusIncrease(player, actual);
     return undefined;
   }
 

@@ -9,6 +9,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('UrbanDecomposers', function() {
   let card: UrbanDecomposers;
@@ -72,7 +73,7 @@ describe('UrbanDecomposers', function() {
     expect(game.deferredActions).has.lengthOf(1);
 
     // add two microbes to Ants
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([ants]);
     expect(ants.resourceCount).to.eq(2);
     expect(player.production.plants).to.eq(1);

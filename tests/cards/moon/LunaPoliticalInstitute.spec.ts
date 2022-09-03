@@ -1,6 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
+import {cast, fakeCard, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
@@ -53,7 +53,7 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(0);
 
-    const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    const selectParty = cast(game.deferredActions.peek()!.execute(), SelectPartyToSendDelegate);
     selectParty.cb(PartyName.MARS);
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(1);

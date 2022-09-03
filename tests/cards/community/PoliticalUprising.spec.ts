@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalUprising', function() {
@@ -25,7 +25,7 @@ describe('PoliticalUprising', function() {
     expect(game.deferredActions).has.lengthOf(4);
 
     while (game.deferredActions.length) {
-      const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+      const selectParty = cast(game.deferredActions.peek()!.execute(), SelectPartyToSendDelegate);
       selectParty.cb(PartyName.MARS);
       game.deferredActions.pop();
     }

@@ -1,9 +1,11 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {ImportedNutrients} from '../../../src/server/cards/promo/ImportedNutrients';
 import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('ImportedNutrients', function() {
   let card: ImportedNutrients;
@@ -34,11 +36,10 @@ describe('ImportedNutrients', function() {
     const decomposers = new Decomposers();
     player.playedCards.push(ants, decomposers);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectCard);
     expect(player.plants).to.eq(4);
 
-    expect(action).is.not.undefined;
-        action!.cb([decomposers]);
-        expect(decomposers.resourceCount).to.eq(4);
+    action.cb([decomposers]);
+    expect(decomposers.resourceCount).to.eq(4);
   });
 });

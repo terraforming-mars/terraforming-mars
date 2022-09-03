@@ -6,7 +6,7 @@ import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Game} from '../../../src/server/Game';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TradingColony', function() {
@@ -29,7 +29,7 @@ describe('TradingColony', function() {
     card.play(player);
     expect(game.deferredActions).has.length(1);
 
-    const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
+    const selectColony = cast(game.deferredActions.pop()!.execute(), SelectColony);
     selectColony.cb(selectColony.colonies[0]);
     expect(player.production.energy).to.eq(1);
     expect(player.colonies.tradeOffset).to.eq(1);

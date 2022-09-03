@@ -37,7 +37,7 @@ describe('EosChasmaNationalPark', () => {
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
     player.playedCards.push(card);
     expect(player.getVictoryPoints().victoryPoints).to.eq(1);
-    action!.cb([birds]);
+    action.cb([birds]);
 
     expect(birds.resourceCount).to.eq(1);
     expect(player.plants).to.eq(3);

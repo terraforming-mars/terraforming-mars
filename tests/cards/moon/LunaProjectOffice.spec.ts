@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {finishGeneration, setCustomGameOptions} from '../../TestingUtils';
+import {cast, finishGeneration, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaProjectOffice} from '../../../src/server/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
@@ -180,7 +180,5 @@ describe('LunaProjectOffice', () => {
 });
 
 function getWaitingFor(player: Player): SelectCard<IProjectCard> {
-  const action = player.getWaitingFor();
-  expect(action).instanceof(SelectCard);
-  return action as SelectCard<IProjectCard>;
+  return cast(player.getWaitingFor(), SelectCard<IProjectCard>);
 }

@@ -4,6 +4,8 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../TestingUtils';
 
 describe('SmallComet', function() {
   let card: SmallComet;
@@ -26,7 +28,7 @@ describe('SmallComet', function() {
     player2.plants = 15;
     player3.plants = 400;
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     expect(player.getTerraformRating()).eq(22);
     expect(player.game.getTemperature()).eq(-28);
@@ -36,8 +38,8 @@ describe('SmallComet', function() {
     expect(player3.plants).eq(398);
     expect(player.titanium).eq(1);
 
-    const space = action!.availableSpaces[0];
-    expect(action!.availableSpaces.some((space) => space.spaceType !== SpaceType.LAND)).is.false;
+    const space = action.availableSpaces[0];
+    expect(action.availableSpaces.some((space) => space.spaceType !== SpaceType.LAND)).is.false;
     expect(space.tile).is.undefined;
 
     action?.cb(space);

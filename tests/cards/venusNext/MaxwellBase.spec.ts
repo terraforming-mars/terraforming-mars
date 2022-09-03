@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Birds} from '../../../src/server/cards/base/Birds';
-import {ICard} from '../../../src/server/cards/ICard';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
@@ -8,7 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -69,9 +68,8 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card, card2, card3);
     expect(card.canAct(player)).is.true;
 
-    const action = card.action(player);
-    expect(action).instanceOf(SelectCard);
-    (action as SelectCard<ICard>).cb([card2]);
+    const action = cast(card.action(player), SelectCard);
+    action.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
   });
 

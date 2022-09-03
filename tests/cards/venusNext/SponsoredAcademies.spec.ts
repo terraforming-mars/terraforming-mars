@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {DiscardCards} from '../../../src/server/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/server/deferredActions/DrawCards';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('SponsoredAcademies', function() {
   it('Should play', function() {
@@ -24,7 +24,7 @@ describe('SponsoredAcademies', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     player.playCard(card);
-    const discardCard = game.deferredActions.pop()!.execute() as SelectCard<IProjectCard>;
+    const discardCard = cast(game.deferredActions.pop()!.execute(), SelectCard<IProjectCard>);
     expect(discardCard instanceof SelectCard).is.true;
 
     // No SponsoredAcademies itself suggested to discard

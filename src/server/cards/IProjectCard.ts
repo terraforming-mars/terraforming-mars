@@ -2,6 +2,7 @@ import {ICard} from './ICard';
 import {Player} from '../Player';
 import {Resources} from '../../common/Resources';
 import {Units} from '../../common/Units';
+import {CardType} from '../../common/cards/CardType';
 
 export interface IProjectCard extends ICard {
     canPlay: (player: Player) => boolean;
@@ -19,4 +20,10 @@ export interface IProjectCard extends ICard {
     // Cards that require a unit of steel while playing, for instance.
     // Added for the expansion The Moon.
     reserveUnits?: Units;
+}
+
+export function isIProjectCard(card: ICard): card is IProjectCard {
+  return card.cardType === CardType.AUTOMATED ||
+    card.cardType === CardType.ACTIVE ||
+    card.cardType === CardType.EVENT;
 }

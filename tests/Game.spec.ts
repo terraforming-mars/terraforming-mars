@@ -28,6 +28,7 @@ import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 import {IColony} from '../src/server/colonies/IColony';
+import {IAward} from '../src/server/awards/IAward';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -70,7 +71,7 @@ describe('Game', () => {
     });
 
     // Fund awards
-    let award = new Banker();
+    let award: IAward = new Banker();
     game.fundAward(player, award);
 
     // Set second player to win Banker award
@@ -225,8 +226,8 @@ describe('Game', () => {
     // Must remove waitingFor or playerIsFinishedTakingActions
     // will pre-emptively exit -- you can't end the game
     // if the game is waiting for a player to do something!
-    (player as any).waitingFor = undefined;
-    (player2 as any).waitingFor = undefined;
+    player.popWaitingFor();
+    player2.popWaitingFor();
     game.playerIsFinishedTakingActions();
     // Now game should be in end state
     expect(game.phase).to.eq(Phase.END);
@@ -299,8 +300,8 @@ describe('Game', () => {
     // Must remove waitingFor or playerIsFinishedTakingActions
     // will pre-emptively exit -- you can't end the game
     // if the game is waiting for a player to do something!
-    (player as any).waitingFor = undefined;
-    (otherPlayer as any).waitingFor = undefined;
+    player.popWaitingFor();
+    otherPlayer.popWaitingFor();
 
     // Trigger end game
     player.setTerraformRating(20);
@@ -330,14 +331,14 @@ describe('Game', () => {
   });
 
   it('Final greenery placement in order of the current generation', () => {
-    const player1 = new Player('p1', Color.BLUE, false, 0, 'p1-id');
-    const player2 = new Player('p2', Color.GREEN, false, 0, 'p2-id');
-    const player3 = new Player('p3', Color.YELLOW, false, 0, 'p3-id');
-    const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
+    const player1 = new TestPlayer(Color.BLUE);
+    const player2 = new TestPlayer(Color.GREEN);
+    const player3 = new TestPlayer(Color.YELLOW);
+    const player4 = new TestPlayer(Color.RED);
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
-    game.getPlayersInGenerationOrder().forEach((p) => {
-      (p as any).waitingFor = undefined;
+    [player1, player2, player3, player4].forEach((p) => {
+      p.popWaitingFor();
       p.plants = 8;
     });
 
@@ -382,15 +383,15 @@ describe('Game', () => {
   });
 
   it('Final greenery placement skips players without enough plants', () => {
-    const player1 = new Player('p1', Color.BLUE, false, 0, 'p1-id');
-    const player2 = new Player('p2', Color.GREEN, false, 0, 'p2-id');
-    const player3 = new Player('p3', Color.YELLOW, false, 0, 'p3-id');
-    const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
+    const player1 = new TestPlayer(Color.BLUE);
+    const player2 = new TestPlayer(Color.GREEN);
+    const player3 = new TestPlayer(Color.YELLOW);
+    const player4 = new TestPlayer(Color.RED);
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player2);
     game.incrementFirstPlayer();
 
-    game.getPlayersInGenerationOrder().forEach((p) => {
-      (p as any).waitingFor = undefined;
+    [player1, player2, player3, player4].forEach((p) => {
+      p.popWaitingFor();
     });
 
     player1.plants = 8;

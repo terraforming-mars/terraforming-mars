@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaEcumenopolis} from '../../../src/server/cards/moon/LunaEcumenopolis';
 import {expect} from 'chai';
@@ -77,13 +77,13 @@ describe('LunaEcumenopolis', () => {
     moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
     card.play(player);
 
-    const input1 = game.deferredActions.pop()!.execute() as SelectSpace;
+    const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     expect(input1.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpace('m18'));
     expect(moonData.colonyRate).eq(3);
     expect(player.getTerraformRating()).eq(15);
 
-    const input2 = game.deferredActions.pop()!.execute() as SelectSpace;
+    const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.colonyRate).eq(4);
@@ -115,13 +115,13 @@ describe('LunaEcumenopolis', () => {
     moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
     card.play(player);
 
-    const input1 = game.deferredActions.pop()!.execute() as SelectSpace;
+    const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     expect(input1.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpace('m18'));
     expect(moonData.colonyRate).eq(3);
     expect(player.getTerraformRating()).eq(15);
 
-    const input2 = game.deferredActions.pop()!.execute() as SelectSpace;
+    const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.colonyRate).eq(4);

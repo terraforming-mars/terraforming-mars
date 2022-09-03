@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Pluto} from '../../src/server/colonies/Pluto';
 import {Game} from '../../src/server/Game';
@@ -41,8 +42,7 @@ describe('Pluto', function() {
 
     runAllActions(game);
 
-    const input = player.getWaitingFor() as SelectCard<IProjectCard>;
-    expect(input).to.be.an.instanceof(SelectCard);
+    const input = cast(player.getWaitingFor(), SelectCard<IProjectCard>);
     input.cb([input.cards[0]]); // Discard a card
 
     expect(player.cardsInHand).has.lengthOf(2);

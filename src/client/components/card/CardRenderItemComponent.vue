@@ -96,6 +96,7 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
+        if (this.item.cancelled === true) classes.push('card-private-security');
       } else if (type === CardRenderItemType.PRESERVATION) {
         classes.push('card-resource');
         classes.push('card-resource-preservation');
@@ -310,7 +311,7 @@ export default Vue.extend({
     },
     // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {
-      let result: string = '';
+      let result = '';
       // in case of symbols inside
       if (isICardRenderItem(this.item) && this.item.amountInside) {
         if (this.item.amount !== 0) {
@@ -338,7 +339,7 @@ export default Vue.extend({
       }
       if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';
-      } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS) {
+      } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS || this.item.type === CardRenderItemType.IGNORE_GLOBAL_REQUIREMENTS) {
         result += '<div class="card-project-requirements">';
         result += '<div class="card-x">x</div>';
         result += '<div class="card-requirements">Global Requirements</div>';
@@ -363,8 +364,7 @@ export default Vue.extend({
         result = '<div class="card-party-icon"></div>';
       }
       if (this.item.type === CardRenderItemType.AWARD) {
-        // iconography on card shows plural (awards)
-        result = '<span class="card-award-icon">awards</span>';
+        result = '<span class="card-award-icon">award</span>';
       }
       if (this.item.type === CardRenderItemType.VP) {
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
@@ -383,6 +383,9 @@ export default Vue.extend({
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
         result = '<div class="card-x">x</div>';
+      }
+      if (this.item.type === CardRenderItemType.WILD && this.item.cancelled === true) {
+        result = '<div class="card-x">✕</div>';
       }
 
       return result;

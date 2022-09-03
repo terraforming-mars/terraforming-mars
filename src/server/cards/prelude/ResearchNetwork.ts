@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard2} from './PreludeCard';
+import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
 // TODO(kberg): Add a test
-export class ResearchNetwork extends PreludeCard2 implements IProjectCard {
+export class ResearchNetwork extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.RESEARCH_NETWORK,

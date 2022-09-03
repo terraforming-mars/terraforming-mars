@@ -30,8 +30,7 @@ export class Tardigrades extends Card implements IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
-
+  PreludeCard
   public play() {
     return undefined;
   }

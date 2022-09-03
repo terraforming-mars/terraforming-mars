@@ -34,8 +34,7 @@ export class CommunicationCenter extends Card2 implements IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   // Card behavior is in PathfindersExpansion.onCardPlayed. Card.onCardPlayed
   // does not apply to _any card played_
 

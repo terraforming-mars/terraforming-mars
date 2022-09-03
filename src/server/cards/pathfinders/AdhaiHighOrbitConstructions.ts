@@ -38,8 +38,7 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   private matchingTags(tags: Array<Tag>): boolean {
     let spaceTag = false;
     for (const tag of tags) {

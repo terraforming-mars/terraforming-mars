@@ -34,8 +34,7 @@ export class AncientShipyards extends Card2 {
       },
     });
   }
-  public override resourceCount = 0;
-
+  PreludeCard
   public canAct(): boolean {
     return true;
   }

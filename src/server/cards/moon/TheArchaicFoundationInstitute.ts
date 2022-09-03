@@ -34,8 +34,7 @@ export class TheArchaicFoundationInstitute extends Card2 implements ICorporation
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public override bespokePlay() {
     this.resourceCount += 2;
     return undefined;

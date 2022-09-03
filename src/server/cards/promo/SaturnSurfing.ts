@@ -34,8 +34,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public play(player: Player) {
     this.resourceCount = player.tags.count(Tag.EARTH) + 1;
     return undefined;

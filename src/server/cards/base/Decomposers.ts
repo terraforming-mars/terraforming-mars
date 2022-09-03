@@ -38,8 +38,7 @@ export class Decomposers extends Card implements IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
-  public onCardPlayed(player: Player, card: IProjectCard): void {
+  PreludeCard  public onCardPlayed(player: Player, card: IProjectCard): void {
     player.addResourceTo(this, card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length);
   }
   public play(player: Player) {

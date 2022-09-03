@@ -35,8 +35,7 @@ export class PrideoftheEarthArkship extends Card2 implements IActionCard {
       },
     });
   }
-  public override resourceCount = 0;
-
+  PreludeCard
   public canAct(player: Player) {
     return player.tags.count(Tag.SCIENCE) >= 5;
   }

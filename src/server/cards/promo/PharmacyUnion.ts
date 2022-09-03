@@ -44,8 +44,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     });
   }
 
-  public override resourceCount = 0;
-  public isDisabled = false;
+  PreludeCard  public isDisabled = false;
 
   public override get tags() {
     if (this.isDisabled) {

@@ -38,8 +38,7 @@ export class RedSpotObservatory extends Card implements IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public canAct(): boolean {
     return true;
   }

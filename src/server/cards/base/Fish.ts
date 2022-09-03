@@ -41,8 +41,7 @@ export class Fish extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
-
+  PreludeCard
   public override canPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }

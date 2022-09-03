@@ -43,8 +43,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public play() {
     return undefined;
   }

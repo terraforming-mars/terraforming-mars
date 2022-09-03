@@ -31,8 +31,7 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
-
+  PreludeCard
   public play() {
     return undefined;
   }

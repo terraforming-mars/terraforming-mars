@@ -32,8 +32,7 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public canAct(player: Player) {
     return player.canAfford(2);
   }

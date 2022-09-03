@@ -37,8 +37,7 @@ export class Arklight extends Card implements ICorporationCard {
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public play(player: Player) {
     player.production.add(Resources.MEGACREDITS, 2);
     player.addResourceTo(this, {log: true});

@@ -34,8 +34,7 @@ export class MartianRepository extends Card2 implements IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public onCardPlayed(player: Player, card: ICard) {
     const qty = player.tags.cardTagCount(card, Tag.SCIENCE) + player.tags.cardTagCount(card, Tag. MARS);
     if (qty > 0) player.addResourceTo(this, {qty, log: true});

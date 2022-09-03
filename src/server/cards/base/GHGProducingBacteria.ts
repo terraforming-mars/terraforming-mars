@@ -38,8 +38,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public play() {
     return undefined;
   }

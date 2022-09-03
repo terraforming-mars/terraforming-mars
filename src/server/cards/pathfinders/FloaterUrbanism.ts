@@ -35,8 +35,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public canAct(player: Player) {
     return player.getResourceCount(CardResource.FLOATER) > 0;
   }

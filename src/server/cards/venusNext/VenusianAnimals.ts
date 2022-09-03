@@ -33,8 +33,7 @@ export class VenusianAnimals extends Card implements IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
-  public play() {
+  PreludeCard  public play() {
     return undefined;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {

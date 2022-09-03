@@ -30,8 +30,7 @@ export class LunaArchives extends Card2 implements IActionCard {
     });
   }
 
-  public override resourceCount = 0;
-
+  PreludeCard
   public canAct() {
     return true;
   }

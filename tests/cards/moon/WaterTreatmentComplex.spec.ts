@@ -46,7 +46,7 @@ describe('WaterTreatmentComplex', () => {
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(0);
     expect(moonData.colonyRate).eq(2);

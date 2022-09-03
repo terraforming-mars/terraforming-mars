@@ -37,7 +37,7 @@ describe('LunaTradeStation', () => {
     player.titanium = 3;
     expect(player.production.steel).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(1);
 

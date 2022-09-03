@@ -40,7 +40,7 @@ describe('ImprovedMoonConcrete', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.steel).eq(10);
     expect(player.getTerraformRating()).eq(15);

@@ -4,9 +4,9 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class SubterraneanHabitats extends MoonCard implements IProjectCard {
+export class SubterraneanHabitats extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.SUBTERRANEAN_HABITATS,
@@ -29,7 +29,7 @@ export class SubterraneanHabitats extends MoonCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseColonyRate(player);
     return undefined;
   }

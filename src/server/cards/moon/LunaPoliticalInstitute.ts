@@ -7,10 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class LunaPoliticalInstitute extends Card implements IActionCard, IProjectCard {
+export class LunaPoliticalInstitute extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_POLITICAL_INSTITUTE,
@@ -29,10 +29,6 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
         }),
       },
     });
-  }
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player) {

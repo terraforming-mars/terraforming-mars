@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class NewColonyPlanningInitiaitives extends Card implements IProjectCard {
+export class NewColonyPlanningInitiaitives extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,
@@ -26,7 +26,7 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseColonyRate(player);
     return undefined;
   }

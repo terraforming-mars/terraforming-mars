@@ -4,16 +4,16 @@ import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MoonRoadStandardProject extends StandardProjectCard implements IMoonCard {
+export class MoonRoadStandardProject extends StandardProjectCard {
   constructor(properties = {
     name: CardName.MOON_ROAD_STANDARD_PROJECT,
     cost: 18,
     reserveUnits: {steel: 1},
     tr: {moonLogistics: 1},
+    tilesBuilt: [TileType.MOON_ROAD],
 
     metadata: {
       cardNumber: '',
@@ -26,8 +26,6 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
   }) {
     super(properties);
   }
-
-  public tilesBuilt = [TileType.MOON_ROAD];
 
   protected override discount(player: Player): number {
     if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {

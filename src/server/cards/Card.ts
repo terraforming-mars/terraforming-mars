@@ -16,6 +16,7 @@ import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
 import {isICorporationCard} from './corporation/ICorporationCard';
+import {TileType} from '../../common/TileType';
 
 export interface StaticCardProperties {
   adjacencyBonus?: AdjacencyBonus;
@@ -34,6 +35,7 @@ export interface StaticCardProperties {
   reserveUnits?: Partial<Units>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
+  tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
 }
 
 type Properties = Omit<StaticCardProperties, 'productionBox|reserveUnits'> & {productionBox?: Units, reserveUnits?: Units};
@@ -123,6 +125,9 @@ export abstract class Card {
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
+  }
+  public get tilesBuilt(): Array<TileType> {
+    return this.properties.tilesBuilt || [];
   }
   public canPlay(_player: Player) {
     return true;

@@ -42,7 +42,7 @@ describe('MomentumViriumHabitat', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.colonyRate).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(0);
     expect(player.production.megacredits).eq(3);

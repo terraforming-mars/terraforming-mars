@@ -6,12 +6,12 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {CardRequirements} from '../CardRequirements';
 import {digit} from '../Options';
 
-export class LunaTrainStation extends MoonCard {
+export class LunaTrainStation extends Card2 {
   constructor() {
     super({
       name: CardName.LUNA_TRAIN_STATION,
@@ -39,7 +39,7 @@ export class LunaTrainStation extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceSpecialMoonTile(player, {
       tileType: TileType.LUNA_TRAIN_STATION,
       card: this.name,

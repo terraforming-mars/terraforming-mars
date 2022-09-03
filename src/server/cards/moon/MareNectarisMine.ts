@@ -7,11 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {TileType} from '../../../common/TileType';
-import {IMoonCard} from './IMoonCard';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCard {
+export class MareNectarisMine extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARE_NECTARIS_MINE,
@@ -31,12 +30,11 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
           b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_MINE],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_NECTARIS, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

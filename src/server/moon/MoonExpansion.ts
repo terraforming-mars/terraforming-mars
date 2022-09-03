@@ -8,7 +8,6 @@ import {IMoonData} from './IMoonData';
 import {CardName} from '../../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
-import {isIMoonCard} from '../cards/moon/IMoonCard';
 import {Tag} from '../../common/cards/Tag';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../../common/constants';
@@ -322,7 +321,7 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    const tilesBuilt: Array<TileType> = isIMoonCard(card) ? card.tilesBuilt : [];
+    const tilesBuilt: Array<TileType> = card.tilesBuilt || [];
 
     if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
       titanium -= 1;

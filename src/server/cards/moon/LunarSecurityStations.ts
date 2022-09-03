@@ -2,14 +2,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../../../common/cards/render/Size';
 import {IProjectCard} from '../IProjectCard';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
 
-export class LunarSecurityStations extends Card implements IProjectCard {
+export class LunarSecurityStations extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_SECURITY_STATIONS,
@@ -30,7 +30,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseLogisticRate(player);
     return undefined;
   }

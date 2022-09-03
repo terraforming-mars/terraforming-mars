@@ -2,9 +2,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class ArchimedesHydroponicsStation extends MoonCard {
+export class ArchimedesHydroponicsStation extends Card2 {
   constructor() {
     super({
       name: CardName.ARCHIMEDES_HYDROPONICS_STATION,
@@ -22,12 +22,6 @@ export class ArchimedesHydroponicsStation extends MoonCard {
           b.production((pb) => pb.plants(2));
         }),
       },
-    }, {
-      // No moon card properties.
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

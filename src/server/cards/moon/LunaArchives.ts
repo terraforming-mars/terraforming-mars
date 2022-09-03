@@ -3,12 +3,12 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard} from '../ICard';
 import {played} from '../Options';
 
-export class LunaArchives extends Card implements IActionCard {
+export class LunaArchives extends Card2 implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_ARCHIVES,
@@ -39,10 +39,6 @@ export class LunaArchives extends Card implements IActionCard {
   public action(player: Player) {
     const qty = player.tags.count(Tag.MOON);
     player.addResourceTo(this, {qty, log: true});
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

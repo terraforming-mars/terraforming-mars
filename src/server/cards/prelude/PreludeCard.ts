@@ -5,6 +5,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../../common/Units';
+import {TileType} from '../../../common/TileType';
 import {ICard} from '../ICard';
 
 interface StaticPreludeProperties {
@@ -13,6 +14,7 @@ interface StaticPreludeProperties {
     tags?: Array<Tag>;
     startingMegacredits?: number;
     productionBox?: Partial<Units>;
+    tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
 }
 
 export abstract class PreludeCard extends Card2 implements IProjectCard {

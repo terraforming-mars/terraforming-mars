@@ -9,10 +9,10 @@ import {Player} from '../../Player';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
+export class NanotechIndustries extends Card2 implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -39,10 +39,6 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
   }
 
   public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
 
   public initialAction(player: Player): PlayerInput {
     return player.drawCardKeepSome(3, {keepMax: 2});

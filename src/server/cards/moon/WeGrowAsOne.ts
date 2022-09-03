@@ -6,10 +6,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {all} from '../Options';
 
-export class WeGrowAsOne extends Card implements IProjectCard {
+export class WeGrowAsOne extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.WE_GROW_AS_ONE,
@@ -31,7 +31,7 @@ export class WeGrowAsOne extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.colonies.forEach((colony) => {
       if (colony.colonies.includes(player.id)) {
         colony.increaseTrack(2);

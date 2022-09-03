@@ -5,16 +5,16 @@ import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Resources} from '../../../common/Resources';
-import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MoonMineStandardProject extends StandardProjectCard implements IMoonCard {
+export class MoonMineStandardProject extends StandardProjectCard {
   constructor(properties = {
     name: CardName.MOON_MINE_STANDARD_PROJECT,
     cost: 20,
     reserveUnits: {titanium: 1},
     tr: {moonMining: 1},
+    tilesBuilt: [TileType.MOON_MINE],
 
     metadata: {
       cardNumber: '',
@@ -27,8 +27,6 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
   }) {
     super(properties);
   }
-
-  public tilesBuilt = [TileType.MOON_MINE];
 
   protected override discount(player: Player): number {
     if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {

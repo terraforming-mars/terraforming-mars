@@ -6,11 +6,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
-export class LunaSenate extends Card implements IProjectCard {
+export class LunaSenate extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_SENATE,
@@ -32,7 +32,7 @@ export class LunaSenate extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     let count = player.game.getPlayers().map((p) => p.tags.count(Tag.MOON, 'raw')).reduce((p, v) => p + v, 0);
     // Including wild tags here because if it were included above it would count opponents' wild tags.
     count += player.tags.count(Tag.WILD, 'raw');

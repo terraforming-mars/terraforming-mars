@@ -4,9 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class MiningRobotsManufCenter extends MoonCard {
+export class MiningRobotsManufCenter extends Card2 {
   constructor() {
     super({
       name: CardName.MINING_ROBOTS_MANUF_CENTER,
@@ -27,7 +27,7 @@ export class MiningRobotsManufCenter extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseMiningRate(player, 2);
     return undefined;
   }

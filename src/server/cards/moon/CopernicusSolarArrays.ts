@@ -4,9 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 
-export class CopernicusSolarArrays extends MoonCard {
+export class CopernicusSolarArrays extends Card2 {
   constructor() {
     super({
       name: CardName.COPERNICUS_SOLAR_ARRAYS,
@@ -29,7 +29,7 @@ export class CopernicusSolarArrays extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.heat += 2;
     player.production.add(Resources.ENERGY, 1, {log: true});
     return undefined;

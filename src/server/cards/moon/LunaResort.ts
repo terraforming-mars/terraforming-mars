@@ -5,10 +5,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {all} from '../Options';
 
-export class LunaResort extends MoonCard {
+export class LunaResort extends Card2 {
   constructor() {
     super({
       name: CardName.LUNA_RESORT,
@@ -34,7 +34,7 @@ export class LunaResort extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.raiseColonyRate(player);
     return undefined;
   }

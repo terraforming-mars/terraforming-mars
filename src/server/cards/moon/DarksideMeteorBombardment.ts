@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class DarksideMeteorBombardment extends Card implements IProjectCard {
+export class DarksideMeteorBombardment extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_METEOR_BOMBARDMENT,
@@ -28,7 +28,7 @@ export class DarksideMeteorBombardment extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel += 2;
     player.titanium += 2;
     MoonExpansion.raiseMiningRate(player, 2);

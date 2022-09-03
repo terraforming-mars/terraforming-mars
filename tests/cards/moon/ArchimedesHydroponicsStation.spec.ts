@@ -33,7 +33,7 @@ describe('ArchimedesHydroponicsStation', () => {
   it('play', () => {
     player.production.override({energy: 1, megacredits: 1, plants: 0});
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.production.energy).eq(0);
     expect(player.production.megacredits).eq(0);

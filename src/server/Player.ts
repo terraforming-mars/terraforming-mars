@@ -8,7 +8,7 @@ import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
-import {ICorporationCard, isICorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
@@ -66,7 +66,6 @@ import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
-import {MoonCard} from './cards/moon/MoonCard';
 import {Merger} from './cards/promo/Merger';
 
 // Behavior when playing a card.
@@ -1083,7 +1082,7 @@ export class Player {
     }
 
     // Play the card
-    const action = this.simplePlay(selectedCard);
+    const action = selectedCard.play(this);
     this.defer(action, Priority.DEFAULT);
 
     // This could probably include 'nothing' but for now this will work.
@@ -1144,17 +1143,8 @@ export class Player {
   }
 
   // eslint-disable-next-line valid-jsdoc
-  /** @deprecated use Card2. */
+  /** @deprecated use card.play */
   public simplePlay(card: IProjectCard | ICorporationCard) {
-    if (card instanceof MoonCard) {
-      if (card.productionBox !== undefined) {
-        this.production.adjust(card.productionBox);
-      }
-      if (!isICorporationCard(card)) {
-        const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(this, card);
-        this.deductUnits(adjustedReserveUnits);
-      }
-    }
     return card.play(this);
   }
 
@@ -1471,9 +1461,6 @@ export class Player {
    */
   public simpleCanPlay(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
-      return false;
-    }
-    if (card instanceof MoonCard && card.productionBox && !this.production.canAdjust(card.productionBox)) {
       return false;
     }
     return card.canPlay(this);

@@ -15,6 +15,7 @@ import {BoardType} from '../boards/BoardType';
 import {Units} from '../../common/Units';
 import {CardDiscount} from '../../common/cards/Types';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
+import {TileType} from '@/common/TileType';
 
 export interface IActionCard {
     action: (player: Player) => PlayerInput | undefined;
@@ -81,6 +82,7 @@ export interface ICard extends Partial<IActionCard> {
      */
     onResourceAdded?: (player: Player, playedCard: ICard, count: number) => void;
 
+    /** Used with IProjectCard only, I think. */
     cost?: number;
     cardType: CardType;
     requirements?: CardRequirements;
@@ -91,5 +93,7 @@ export interface ICard extends Partial<IActionCard> {
     tr?: TRSource | DynamicTRSource;
     resourceCount: number;
     resourceType?: CardResource;
+    /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
+    tilesBuilt?: Array<TileType>;
 }
 

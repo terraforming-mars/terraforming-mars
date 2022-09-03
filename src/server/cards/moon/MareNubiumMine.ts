@@ -6,10 +6,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
-import {MoonCard} from './MoonCard';
+import {Card2} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MareNubiumMine extends MoonCard {
+export class MareNubiumMine extends Card2 {
   constructor() {
     super({
       name: CardName.MARE_NUBIUM_MINE,
@@ -28,12 +28,11 @@ export class MareNubiumMine extends MoonCard {
           b.production((pb) => pb.titanium(1)).moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
-    }, {
       tilesBuilt: [TileType.MOON_MINE],
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_NUBIUM, this.name);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

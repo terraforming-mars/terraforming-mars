@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {LunarMineUrbanization} from '../../../src/server/cards/moon/LunarMineUrbanization';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {VictoryPointsBreakdown} from '../../../src/server/VictoryPointsBreakdown';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
@@ -46,7 +47,7 @@ describe('LunarMineUrbanization', () => {
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_COLONY)).eql([]);

@@ -37,7 +37,7 @@ describe('MareSerenitatisMine', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.titanium).eq(1);
     expect(player.steel).eq(2);

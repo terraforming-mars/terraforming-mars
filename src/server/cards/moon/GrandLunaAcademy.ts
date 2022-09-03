@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {digit, played} from '../Options';
 
-export class GrandLunaAcademy extends Card implements IProjectCard {
+export class GrandLunaAcademy extends Card2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.GRAND_LUNA_ACADEMY,
@@ -25,7 +25,7 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const tags = player.tags.count(Tag.MOON);
     // Adding 1 so this tag is included in the count.
     const gain = Math.floor((tags + 1) / 2);

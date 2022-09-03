@@ -28,7 +28,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseOxygenLevel(player, 1);
     const microbes = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
     player.game.defer(new AddResourcesToCards(player, CardResource.MICROBE, microbes));

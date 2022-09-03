@@ -49,7 +49,7 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     return spaceTag;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResourceTo(this, 1);
     return undefined;
   }

@@ -26,7 +26,7 @@ describe('VenusianAnimals', function() {
     (game as any).venusScaleLevel = 18;
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
 
     card.onCardPlayed(player, card);
     expect(card.resourceCount).to.eq(1);

@@ -48,10 +48,6 @@ export class BotanicalExperience extends Card implements IProjectCard {
     }
   }
 
-  public play() {
-    return undefined;
-  }
-
   public onResourceAdded(player: Player, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
     if (this.resourceCount >= 3) {

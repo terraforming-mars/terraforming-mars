@@ -74,8 +74,4 @@ export class Vitor extends Card implements ICorporationCard {
 
     player.megaCredits += 3;
   }
-
-  public play(_player: Player) {
-    return undefined;
-  }
 }

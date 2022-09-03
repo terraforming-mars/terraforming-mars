@@ -31,10 +31,6 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
       },
     });
   }
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     return player.canAfford(4);
   }

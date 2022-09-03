@@ -29,7 +29,7 @@ export class RedTourismWave extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const amount = RedTourismWave.getAdjacentEmptySpacesCount(player);
     player.addResource(Resources.MEGACREDITS, amount);
     return undefined;

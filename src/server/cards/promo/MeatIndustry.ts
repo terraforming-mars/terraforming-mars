@@ -27,10 +27,6 @@ export class MeatIndustry extends Card implements IProjectCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public onResourceAdded(player: Player, card: ICard, count: number) {
     if (card.resourceType === CardResource.ANIMAL) {
       player.megaCredits += count * 2;

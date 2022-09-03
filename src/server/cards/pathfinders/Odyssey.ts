@@ -54,10 +54,6 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
     }
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player) {
     return this.availableEventCards(player).length > 0;
   }

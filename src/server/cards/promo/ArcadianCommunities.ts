@@ -76,7 +76,7 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     );
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel = 10;
     return undefined;
   }

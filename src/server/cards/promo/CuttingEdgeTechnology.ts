@@ -27,10 +27,6 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public override getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.requirements !== undefined) return 2;
     return 0;

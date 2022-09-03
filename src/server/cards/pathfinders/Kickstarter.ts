@@ -32,7 +32,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
     return [this.cloneTag];
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.adjust(this.productionBox);
     player.game.defer(
       new DeclareCloneTag(

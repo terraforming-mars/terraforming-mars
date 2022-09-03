@@ -30,7 +30,7 @@ export class DiasporaMovement extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const amount = player.game.getPlayers()
       .map((p) => p.tags.count(Tag.JOVIAN, p.id === player.id ? 'default' : 'raw'))
       .reduce((a, c) => a + c);

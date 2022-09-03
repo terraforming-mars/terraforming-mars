@@ -31,8 +31,4 @@ export class MicrobiologyPatents extends Card implements IProjectCard {
       player.production.add(Resources.MEGACREDITS, 1, {log: true});
     }
   }
-
-  public play() {
-    return undefined;
-  }
 }

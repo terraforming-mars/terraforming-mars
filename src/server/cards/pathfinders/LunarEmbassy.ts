@@ -33,7 +33,7 @@ export class LunarEmbassy extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 3);
     player.production.add(Resources.PLANTS, Math.floor((1 + player.tags.count(Tag.EARTH)) / 2), {log: true});
     player.drawCard();

@@ -13,7 +13,7 @@ describe('SeptumTribus', function() {
 
     const gameOptions = setCustomGameOptions();
     const game = Game.newInstance('gameid', [player, player2], player, gameOptions);
-    card.play();
+    card.play(player);
 
     player.setCorporationForTest(card);
     player.megaCredits = 0;

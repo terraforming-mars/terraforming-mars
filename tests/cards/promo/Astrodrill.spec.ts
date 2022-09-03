@@ -19,7 +19,7 @@ describe('Astrodrill', function() {
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
-    card.play();
+    card.play(player);
     player.setCorporationForTest(card);
   });
 

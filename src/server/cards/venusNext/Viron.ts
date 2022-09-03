@@ -64,8 +64,4 @@ export class Viron extends Card implements ICard, ICorporationCard {
       },
     );
   }
-
-  public play() {
-    return undefined;
-  }
 }

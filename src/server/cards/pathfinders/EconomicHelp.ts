@@ -39,7 +39,7 @@ export class EconomicHelp extends Card implements IProjectCard {
     const value = data[tag];
     return TRACKS[tag].spaces.length === value ? -1 : value;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const data = player.game.pathfindersData;
     if (data === undefined) {
       return undefined;

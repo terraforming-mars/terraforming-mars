@@ -47,7 +47,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.addResource(player);
     return undefined;
   }

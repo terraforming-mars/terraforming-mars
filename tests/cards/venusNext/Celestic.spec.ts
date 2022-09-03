@@ -13,7 +13,7 @@ describe('Celestic', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
-    const play = card.play();
+    const play = card.play(player);
     expect(play).is.undefined;
 
     player.setCorporationForTest(card);

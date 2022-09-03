@@ -38,9 +38,5 @@ export class OzoneGenerators extends Card implements IProjectCard, IActionCard {
     player.game.log('${0} spent 3 energy to gain 1 TR', (b) => b.player(player));
     return undefined;
   }
-
-  public play() {
-    return undefined;
-  }
 }
 

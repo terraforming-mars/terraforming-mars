@@ -35,9 +35,5 @@ export class PrefabricationofHumanHabitats extends Card implements IProjectCard 
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
 }
 

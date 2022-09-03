@@ -39,9 +39,5 @@ export class CultivationOfVenus extends Card implements IProjectCard {
     player.game.log('${0} spent 3 plants to raise the Venus level 1 step', (b) => b.player(player));
     return undefined;
   }
-
-  public play() {
-    return undefined;
-  }
 }
 

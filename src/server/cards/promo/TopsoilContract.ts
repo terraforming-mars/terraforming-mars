@@ -29,7 +29,7 @@ export class TopsoilContract extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.plants += 3;
     return undefined;
   }

@@ -36,7 +36,7 @@ export class OceanSanctuary extends Card implements IProjectCard {
   }
   public override resourceCount = 0;
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResourceTo(this, 1);
     return new SelectSpace(
       'Select space for Ocean Sanctuary',

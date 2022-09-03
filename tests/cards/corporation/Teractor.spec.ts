@@ -17,7 +17,7 @@ describe('Teractor', function() {
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

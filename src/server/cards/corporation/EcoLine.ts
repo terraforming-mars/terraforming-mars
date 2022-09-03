@@ -31,7 +31,7 @@ export class EcoLine extends Card implements ICorporationCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.PLANTS, 2);
     player.plants = 3;
     player.plantsNeededForGreenery = 7;

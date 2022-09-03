@@ -34,10 +34,6 @@ export class LocalShading extends Card implements IActionCard {
     });
   }
   public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }

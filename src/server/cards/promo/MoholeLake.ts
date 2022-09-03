@@ -33,7 +33,7 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 1);
     player.game.defer(new PlaceOceanTile(player));
     player.plants += 3;

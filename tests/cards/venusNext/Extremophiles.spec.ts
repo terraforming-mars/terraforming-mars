@@ -26,7 +26,7 @@ describe('Extremophiles', function() {
   it('Should play', function() {
     player.playedCards.push(new Research());
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

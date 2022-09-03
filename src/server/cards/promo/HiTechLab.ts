@@ -28,10 +28,6 @@ export class HiTechLab extends Card implements IProjectCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     return player.energy > 0;
   }

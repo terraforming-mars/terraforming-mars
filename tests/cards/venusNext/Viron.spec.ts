@@ -11,7 +11,7 @@ describe('Viron', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
     player.setCorporationForTest(card);
     player.playedCards.push(new RestrictedArea());

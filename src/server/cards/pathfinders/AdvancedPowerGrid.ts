@@ -32,7 +32,7 @@ export class AdvancedPowerGrid extends Card implements IProjectCard {
     player.production.add(Resources.MEGACREDITS, tagCount, {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player);
     return undefined;
   }

@@ -28,11 +28,11 @@ export class CoordinatedRaid extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.colonies.getFleetSize() > player.colonies.tradesThisGeneration;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const colonies = player.game.colonies.filter((colony) => colony.isActive);
     return new SelectColony('Select colony tile for trade', 'trade', colonies, (colony: IColony) => {
       colony.trade(player, {selfishTrade: true});

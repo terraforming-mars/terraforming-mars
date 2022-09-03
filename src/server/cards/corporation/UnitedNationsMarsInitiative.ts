@@ -32,9 +32,6 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, IC
       },
     });
   }
-  public play() {
-    return undefined;
-  }
   public canAct(player: Player): boolean {
     return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford(ACTION_COST, {tr: {tr: 1}});
   }

@@ -61,8 +61,4 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
     }
     return input;
   }
-
-  public play() {
-    return undefined;
-  }
 }

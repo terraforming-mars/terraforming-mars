@@ -12,6 +12,8 @@ import {Scientists} from '../../../src/server/turmoil/parties/Scientists';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardName} from '../../../src/common/cards/CardName';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {cast} from '../../TestingUtils';
 
 describe('PublicSponsoredGrant', function() {
   let card: PublicSponsoredGrant;
@@ -42,7 +44,7 @@ describe('PublicSponsoredGrant', function() {
     player2.megaCredits = 1;
     player3.megaCredits = 0;
 
-    const options = card.play(player);
+    const options = cast(card.play(player), OrOptions);
 
     expect(player.megaCredits).eq(2);
     expect(player2.megaCredits).eq(0);

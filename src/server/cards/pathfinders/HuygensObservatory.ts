@@ -93,11 +93,11 @@ export class HuygensObservatory extends Card implements IProjectCard {
       game.defer(new SimpleDeferredAction(player, () => orOptions));
     }
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0 || this.tradeableColonies(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRating();
     const game = player.game;
 

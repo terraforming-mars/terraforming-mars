@@ -18,8 +18,4 @@ export class ResearchCoordination extends Card implements IProjectCard {
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
 }

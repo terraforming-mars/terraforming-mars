@@ -28,12 +28,12 @@ describe('Thermophiles', function() {
   it('Should play', function() {
     (game as any).venusScaleLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
   it('Should act - multiple targets', function() {
-    card.play();
+    card.play(player);
     player.playedCards.push(card, new VenusianInsects());
 
     const action = cast(card.action(player), SelectCard);
@@ -49,7 +49,7 @@ describe('Thermophiles', function() {
   });
 
   it('Should act - single target', function() {
-    card.play();
+    card.play(player);
     player.playedCards.push(card);
 
     const action = card.action(player);

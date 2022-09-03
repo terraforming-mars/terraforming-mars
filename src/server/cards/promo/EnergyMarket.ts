@@ -35,10 +35,6 @@ export class EnergyMarket extends Card implements IProjectCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     return player.canAfford(2) || player.production.energy >= 1;
   }

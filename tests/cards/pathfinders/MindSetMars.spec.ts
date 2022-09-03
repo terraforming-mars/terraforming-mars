@@ -29,7 +29,7 @@ describe('MindSetMars', function() {
 
   it('play', function() {
     expect(card.resourceCount).eq(0);
-    card.play();
+    card.play(player);
     expect(card.resourceCount).eq(1);
   });
 

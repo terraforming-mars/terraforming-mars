@@ -24,6 +24,7 @@ import {Units} from '../../src/common/Units';
 import {addOcean, cast, runAllActions} from '../TestingUtils';
 import {Ants} from '../../src/server/cards/base/Ants';
 import {Birds} from '../../src/server/cards/base/Birds';
+import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -293,7 +294,7 @@ describe('AresHandler', function() {
 
     // The key two lines
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
-    new DesperateMeasures().play(player).cb(protectedDustStorm);
+    cast(new DesperateMeasures().play(player), SelectSpace).cb(protectedDustStorm);
 
     const priorTr = player.getTerraformRating();
 

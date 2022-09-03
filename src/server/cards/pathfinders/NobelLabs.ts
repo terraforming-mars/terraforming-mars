@@ -43,9 +43,5 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
     player.game.defer(new AddResourcesToCard(player, undefined, {filter: NobelLabs.PREDICATE, count: 2}));
     return undefined;
   }
-
-  public play() {
-    return undefined;
-  }
 }
 

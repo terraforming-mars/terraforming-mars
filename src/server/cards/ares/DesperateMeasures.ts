@@ -33,12 +33,12 @@ export class DesperateMeasures extends Card implements IProjectCard {
     return game.board.spaces.filter((space) => AresHandler.hasHazardTile(space));
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     // You can't play desperate measures if there isn't a hazard marker in play.
     return this.getHazardTiles(player.game).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select a hazard space to protect', this.getHazardTiles(player.game), (space: ISpace) => {
       if (space.tile === undefined) {
         throw new Error(`selected space ${space.id} without tile for DesperateMeasures`);

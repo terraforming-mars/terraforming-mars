@@ -24,7 +24,7 @@ export class RichDeposits extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.STEEL, 3);
     return undefined;
   }

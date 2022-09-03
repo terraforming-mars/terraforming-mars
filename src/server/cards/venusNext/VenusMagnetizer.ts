@@ -28,10 +28,6 @@ export class VenusMagnetizer extends Card implements IActionCard {
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
   public canAct(player: Player): boolean {
     return player.production.energy > 0 && player.canAfford(0, {tr: {venus: 1}});
   }

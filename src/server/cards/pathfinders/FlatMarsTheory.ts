@@ -28,7 +28,7 @@ export class FlatMarsTheory extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const generation = player.game.generation;
     player.production.add(Resources.MEGACREDITS, generation, {log: true});
     return undefined;

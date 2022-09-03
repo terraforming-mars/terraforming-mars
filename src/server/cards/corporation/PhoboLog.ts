@@ -31,7 +31,7 @@ export class PhoboLog extends Card implements ICorporationCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.titanium = 10;
     player.increaseTitaniumValue();
     return undefined;

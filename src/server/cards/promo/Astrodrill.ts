@@ -116,7 +116,7 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
     return new OrOptions(...opts);
   }
 
-  public play() {
+  public override bespokePlay() {
     this.resourceCount = 3;
     return undefined;
   }

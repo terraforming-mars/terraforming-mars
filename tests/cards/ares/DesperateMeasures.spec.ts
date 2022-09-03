@@ -5,7 +5,8 @@ import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
-import {addOcean} from '../../TestingUtils';
+import {addOcean, cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('DesperateMeasures', function() {
   let card: DesperateMeasures;
@@ -25,7 +26,7 @@ describe('DesperateMeasures', function() {
 
     const priorTr = player.getTerraformRating();
 
-    card.play(player).cb(protectedDustStorm);
+    cast(card.play(player), SelectSpace).cb(protectedDustStorm);
 
     expect(player.getTerraformRating()).eq(priorTr + 1);
     expect(game.getOxygenLevel()).eq(1);
@@ -43,7 +44,7 @@ describe('DesperateMeasures', function() {
     const priorTr = player.getTerraformRating();
     const priorTemp = game.getTemperature();
 
-    card.play(player).cb(protectedErosion);
+    cast(card.play(player), SelectSpace).cb(protectedErosion);
 
     expect(player.getTerraformRating()).eq(priorTr + 1);
     expect(game.getTemperature()).eq(priorTemp + 2);
@@ -54,7 +55,7 @@ describe('DesperateMeasures', function() {
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).contains(protectedDustStorm.id);
 
-    card.play(player).cb(protectedDustStorm);
+    cast(card.play(player), SelectSpace).cb(protectedDustStorm);
 
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).not.contains(protectedDustStorm.id);
   });
@@ -62,7 +63,7 @@ describe('DesperateMeasures', function() {
   it('hazard tile with player marker is not removed after placing the sixth ocean', function() {
     const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
-    card.play(player).cb(protectedDustStorm);
+    cast(card.play(player), SelectSpace).cb(protectedDustStorm);
 
     // The sixth ocean removes dust storms.
     addOcean(player);

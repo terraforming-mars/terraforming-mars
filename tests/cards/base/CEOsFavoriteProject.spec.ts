@@ -52,15 +52,24 @@ describe('CEOsFavoriteProject', function() {
     expect(securityFleet.resourceCount).to.eq(2);
   });
 
-  it('Cannot play on SelfReplicatingRobots cards', function() {
+  it('Can play on SelfReplicatingRobots cards', function() {
     const srr = new SelfReplicatingRobots();
+    const birds = new Birds();
+    player.playedCards.push(srr);
+    srr.targetCards.push({card: birds, resourceCount: 0});
+    const action = cast(card.play(player), SelectCard<ICard>);
+    action.cb([birds]);
+    expect(srr.targetCards[0].resourceCount).to.eq(1);
+  });
+
+  it('Cannot play on card with no resources', function() {
     const birds = new Birds();
     const securityFleet = new SecurityFleet();
     securityFleet.resourceCount++;
-    player.playedCards.push(srr, securityFleet);
-    srr.targetCards.push({card: birds, resourceCount: 0});
-    const action = cast(card.play(player), SelectCard<IProjectCard>);
-    action.cb([birds]);
-    expect(srr.targetCards[0].resourceCount).to.eq(1);
+    player.playedCards.push(securityFleet, birds);
+    const action = cast(card.play(player), SelectCard<ICard>);
+    expect(action.cards).does.not.contain(birds);
+    expect(action.cards).does.contain(securityFleet);
+    expect(() => action.cb([birds])).to.throw(Error, /Invalid card/);
   });
 });

@@ -33,10 +33,6 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     return player.energy >= 2;
   }

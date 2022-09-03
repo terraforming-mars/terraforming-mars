@@ -28,11 +28,12 @@ export class CEOsFavoriteProject extends Card2 implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
+    const cards = player.getCardsWithResources();
     const robotCards = player.getSelfReplicatingRobotsTargetCards();
     return new SelectCard(
       'Select card to add resource',
       'Add resource',
-      player.getCardsWithResources().concat(robotCards.map((c) => c.card)),
+      cards.concat(robotCards.map((c) => c.card)),
       ([card]) => {
         // if the user selected a robot card, handle it here:
         const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === card.name);
@@ -40,6 +41,9 @@ export class CEOsFavoriteProject extends Card2 implements IProjectCard {
           robotCard.resourceCount++;
           LogHelper.logAddResource(player, robotCard.card);
         } else {
+          if (!cards.includes(card)) {
+            throw new Error('Invalid card selection');
+          }
           player.addResourceTo(card, {log: true});
         }
         return undefined;

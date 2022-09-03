@@ -46,6 +46,7 @@ describe('PrivateSecurity', function() {
     opponent2.production.override({plants: 0});
 
     const fish = new Fish();
+    (player.game as any).temperature = 2;
 
     opponent2.playedCards = [];
     expect(fish.canPlay(player)).is.true;
@@ -60,6 +61,7 @@ describe('PrivateSecurity', function() {
     opponent2.production.override({plants: 1});
 
     const fish = new Fish();
+    (player.game as any).temperature = 2;
 
     player.playedCards = [card];
     expect(fish.canPlay(player)).is.true;

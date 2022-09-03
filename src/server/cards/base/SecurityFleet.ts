@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -9,7 +9,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SecurityFleet extends Card implements IActionCard, IProjectCard {
+export class SecurityFleet extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -33,9 +33,6 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard {
   }
   public override resourceCount = 0;
 
-  public play() {
-    return undefined;
-  }
   public canAct(player: Player): boolean {
     return player.titanium > 0;
   }

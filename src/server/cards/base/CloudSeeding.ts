@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -9,12 +9,13 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class CloudSeeding extends Card implements IProjectCard {
+export class CloudSeeding extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.CLOUD_SEEDING,
       cost: 11,
+      productionBox: {megacredits: -1, plants: 2},
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {
@@ -27,16 +28,14 @@ export class CloudSeeding extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.production.megacredits > -5 &&
     player.canReduceAnyProduction(Resources.HEAT, 1);
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.HEAT, {count: 1}));
-    player.production.add(Resources.MEGACREDITS, -1);
-    player.production.add(Resources.PLANTS, 2);
     return undefined;
   }
 }

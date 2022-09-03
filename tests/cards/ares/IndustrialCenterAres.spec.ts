@@ -6,8 +6,8 @@ import {IndustrialCenterAres} from '../../../src/server/cards/ares/IndustrialCen
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('IndustrialCenterAres', function() {
   let card: IndustrialCenterAres;

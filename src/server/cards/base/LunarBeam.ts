@@ -1,19 +1,18 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class LunarBeam extends Card implements IProjectCard {
+export class LunarBeam extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.LUNAR_BEAM,
       tags: [Tag.EARTH, Tag.ENERGY],
       cost: 13,
+      productionBox: {megacredits: -2, heat: 2, energy: 2},
 
       metadata: {
         cardNumber: '030',
@@ -27,14 +26,5 @@ export class LunarBeam extends Card implements IProjectCard {
         description: 'Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.',
       },
     });
-  }
-  public override canPlay(player: Player): boolean {
-    return player.production.megacredits >= -3;
-  }
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, -2);
-    player.production.add(Resources.HEAT, 2);
-    player.production.add(Resources.ENERGY, 2);
-    return undefined;
   }
 }

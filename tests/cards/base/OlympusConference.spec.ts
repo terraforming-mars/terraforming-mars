@@ -24,7 +24,7 @@ describe('OlympusConference', function() {
 
   it('Should play', function() {
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
 
     expect(card.getVictoryPoints()).to.eq(1);
 

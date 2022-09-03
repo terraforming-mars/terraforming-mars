@@ -8,7 +8,7 @@ describe('StandardTechnology', function() {
   it('Should play', function() {
     const card = new StandardTechnology();
     const player = TestPlayer.BLUE.newPlayer();
-    const action = card.play();
+    const action = card.play(player);
     card.onStandardProject(player, new SellPatentsStandardProject());
     expect(player.megaCredits).to.eq(0);
     card.onStandardProject(player, new AsteroidStandardProject());

@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -11,7 +11,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RegolithEaters extends Card implements IActionCard, IProjectCard {
+export class RegolithEaters extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -37,7 +37,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard {
 
   public override resourceCount = 0;
 
-  public play(_player: Player) {
+  public override bespokePlay(_player: Player) {
     return undefined;
   }
   public canAct(): boolean {

@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 
-export class InterstellarColonyShip extends Card implements IProjectCard {
+export class InterstellarColonyShip extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -20,8 +20,5 @@ export class InterstellarColonyShip extends Card implements IProjectCard {
         cardNumber: '027',
       },
     });
-  }
-  public play() {
-    return undefined;
   }
 }

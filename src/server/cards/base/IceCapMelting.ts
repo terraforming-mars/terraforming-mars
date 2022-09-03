@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
@@ -7,7 +7,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class IceCapMelting extends Card implements IProjectCard {
+export class IceCapMelting extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -23,7 +23,7 @@ export class IceCapMelting extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }

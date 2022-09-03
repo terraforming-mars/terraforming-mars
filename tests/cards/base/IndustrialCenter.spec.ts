@@ -4,8 +4,8 @@ import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('IndustrialCenter', function() {
   let card: IndustrialCenter;

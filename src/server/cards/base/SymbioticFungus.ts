@@ -2,7 +2,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardResource} from '../../../common/CardResource';
@@ -10,7 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
+export class SymbioticFungus extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -29,9 +29,6 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
         description: 'Requires -14 C° or warmer.',
       },
     });
-  }
-  public play() {
-    return undefined;
   }
   public canAct(): boolean {
     return true;

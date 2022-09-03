@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -7,15 +7,15 @@ import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
-import {GainProduction} from '../../deferredActions/GainProduction';
 
-export class Hackers extends Card implements IProjectCard {
+export class Hackers extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.HACKERS,
       cost: 3,
       victoryPoints: -1,
+      productionBox: {energy: -1, megacredits: 2},
 
       metadata: {
         cardNumber: '125',
@@ -30,15 +30,9 @@ export class Hackers extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return player.production.energy >= 1;
-  }
-
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.MEGACREDITS, {count: 2, stealing: true}));
-    player.game.defer(new GainProduction(player, Resources.MEGACREDITS, {count: 2}));
-    player.production.add(Resources.ENERGY, -1);
     return undefined;
   }
 }

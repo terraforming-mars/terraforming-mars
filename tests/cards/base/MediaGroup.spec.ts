@@ -11,7 +11,7 @@ describe('MediaGroup', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
 
     card.onCardPlayed(player, new Virus());

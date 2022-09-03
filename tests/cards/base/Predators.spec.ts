@@ -33,7 +33,7 @@ describe('Predators', function() {
     (game as any).oxygenLevel = 11;
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
 
     player.addResourceTo(card, 5);
     expect(card.getVictoryPoints()).to.eq(5);

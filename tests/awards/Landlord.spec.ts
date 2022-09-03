@@ -11,7 +11,8 @@ import {EmptyBoard} from '../ares/EmptyBoard';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
-import {setCustomGameOptions} from '../TestingUtils';
+import {cast, setCustomGameOptions} from '../TestingUtils';
+import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('Landlord', () => {
   let player: Player;
@@ -60,8 +61,7 @@ describe('Landlord', () => {
     expect(award.getScore(player)).to.eq(0);
 
     const card = new LandClaim();
-    const action = card.play(player);
-    expect(action).is.not.undefined;
+    const action = cast(card.play(player), SelectSpace);
     action.cb(firstSpace);
 
     expect(firstSpace.player).to.eq(player);

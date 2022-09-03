@@ -1,19 +1,18 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class GiantSpaceMirror extends Card implements IProjectCard {
+export class GiantSpaceMirror extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.GIANT_SPACE_MIRROR,
       tags: [Tag.ENERGY, Tag.SPACE],
       cost: 17,
+      productionBox: {energy: 3},
 
       metadata: {
         cardNumber: '083',
@@ -21,9 +20,5 @@ export class GiantSpaceMirror extends Card implements IProjectCard {
         description: 'Increase your energy production 3 steps.',
       },
     });
-  }
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, 3);
-    return undefined;
   }
 }

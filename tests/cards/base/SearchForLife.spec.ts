@@ -30,7 +30,7 @@ describe('SearchForLife', function() {
     (game as any).oxygenLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
 
     expect(card.getVictoryPoints()).to.eq(0);
     player.addResourceTo(card);

@@ -1,13 +1,13 @@
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 
-export class PermafrostExtraction extends Card implements IProjectCard {
+export class PermafrostExtraction extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -26,7 +26,7 @@ export class PermafrostExtraction extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }

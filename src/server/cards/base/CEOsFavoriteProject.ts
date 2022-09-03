@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {RobotCard} from '../promo/SelfReplicatingRobots';
 
-export class CEOsFavoriteProject extends Card implements IProjectCard {
+export class CEOsFavoriteProject extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -27,7 +27,7 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
            player.getSelfReplicatingRobotsTargetCards().length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cards = player.getCardsWithResources();
     const robotCards = player.getSelfReplicatingRobotsTargetCards();
     return new SelectCard(

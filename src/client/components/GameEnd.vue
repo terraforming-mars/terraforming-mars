@@ -1,6 +1,6 @@
 <template>
   <div id="game-end" class="game_end_cont">
-      <h1>{{ constants.APP_NAME }} - Game finished!</h1>
+      <h1  v-i18n>{{ constants.APP_NAME }} - Game finished!</h1>
       <div class="game_end">
           <div v-if="isSoloGame()">
               <div v-if="game.isSoloModeWin">
@@ -42,17 +42,17 @@
               </a>
           </div>
           <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
-              <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> won!
+              <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
           </div>
           <div class="game_end_victory_points">
-              <h2 v-i18n>Victory points breakdown after<span> {{game.generation}} </span>generations</h2>
+              <h2><span v-i18n>Victory points breakdown after</span> {{game.generation}} <span v-i18n>generations</span></h2>
               <table class="table game_end_table">
                   <thead>
                       <tr v-i18n>
                           <th><div class="card-delegate"></div></th>
                           <th><div class="tr"></div></th>
-                          <th><div class="m-and-a" title="Milestones points">M</div></th>
-                          <th><div class="m-and-a" title="Awards points">A</div></th>
+                          <th><div class="m-and-a tooltip tooltip-top" :data-tooltip="$t('Milestones points')">M</div></th>
+                          <th><div class="m-and-a tooltip tooltip-top" :data-tooltip="$t('Awards points')">A</div></th>
                           <th><div class="table-forest-tile"></div></th>
                           <th><div class="table-city-tile"></div></th>
                           <th v-if="game.moon !== undefined"><div class="table-moon-road-tile"></div></th>
@@ -155,7 +155,7 @@
           </div>
           <div class="game_end_block--log game-end-column">
             <log-panel :color="color" :generation="game.generation" v-if="viewModel.id !== undefined" :id="viewModel.id" :lastSoloGeneration="game.lastSoloGeneration" :players="players"></log-panel>
-            <a :href="downloadLogUrl" target="_blank">Download game log</a>
+            <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>
       </div>

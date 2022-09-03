@@ -52,12 +52,12 @@ export class Philares extends Card implements ICorporationCard {
   }
 
   private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {
-    let megacreditsAmount: number = 0;
-    let steelAmount: number = 0;
-    let titaniumAmount: number = 0;
-    let plantsAmount: number = 0;
-    let energyAmount: number = 0;
-    let heatAmount: number = 0;
+    let megacreditsAmount = 0;
+    let steelAmount = 0;
+    let titaniumAmount = 0;
+    let plantsAmount = 0;
+    let energyAmount = 0;
+    let heatAmount = 0;
 
     const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
       megacreditsAmount = amount;

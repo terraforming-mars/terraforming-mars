@@ -4,7 +4,7 @@
           <h2 :class="getTitleClasses()">
               <span v-i18n>Game log</span>
           </h2>
-          <div class="log-gen-title">Gen: </div>
+          <div class="log-gen-title"  v-i18n>Gen: </div>
           <div class="log-gen-numbers">
             <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
               {{ n }}

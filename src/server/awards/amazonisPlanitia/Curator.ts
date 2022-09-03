@@ -3,8 +3,8 @@ import {Player} from '../../Player';
 import {IAward} from '../IAward';
 
 export class Curator implements IAward {
-  public name: string = 'Curator';
-  public description: string = 'Having the most played tags of any one type';
+  public readonly name = 'Curator';
+  public readonly description = 'Having the most played tags of any one type';
 
   public getScore(player: Player): number {
     let max = 0;

@@ -530,7 +530,7 @@ abstract class Builder<T> {
    * A one off function to handle Project Requirements prelude card
    */
   public projectRequirements(): Builder<T> {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.PROJECT_REQUIREMENTS));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.IGNORE_GLOBAL_REQUIREMENTS));
   }
 
   /**

@@ -43,7 +43,7 @@ export class Playwrights extends Card implements ICorporationCard {
   }
 
   // For Project Inspection
-  private checkLoops: number = 0;
+  private checkLoops = 0;
 
   public play(player: Player) {
     player.production.add(Resources.ENERGY, 1);

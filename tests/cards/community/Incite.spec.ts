@@ -4,7 +4,7 @@ import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/server/Game';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Incite', function() {
@@ -37,7 +37,7 @@ describe('Incite', function() {
     card.initialAction(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const sendDelegate = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    const sendDelegate = cast(game.deferredActions.peek()!.execute(), SelectPartyToSendDelegate);
     sendDelegate.cb(PartyName.MARS);
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);

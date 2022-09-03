@@ -154,7 +154,12 @@ export default Vue.extend({
         if (this.spaceType === SpaceType.OCEAN) {
           css += ' board-space-type-ocean';
         } else if (this.spaceType === SpaceType.COVE) {
-          css += ' board-space-type-cove';
+          if (this.highlight !== 'volcanic') {
+            // Custom for Arabia Terra's space Tikhonarov.
+            css += ' board-space-type-cove';
+          } else {
+            css += ' board-space-type-volcanic-cove';
+          }
         } else if (!this.restricted) {
           css += ` board-space-type-land`;
 

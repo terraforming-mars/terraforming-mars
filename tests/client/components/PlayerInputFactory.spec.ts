@@ -2,7 +2,7 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
-import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
+import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {CardModel} from '@/common/models/CardModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {Units} from '@/common/Units';
@@ -36,38 +36,38 @@ const baseInput = {
 const typesToTest: PlayerInputModel[] = [
   {
     ...baseInput,
-    inputType: PlayerInputTypes.AND_OPTIONS,
+    inputType: PlayerInputType.AND_OPTIONS,
     options: [],
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.OR_OPTIONS,
+    inputType: PlayerInputType.OR_OPTIONS,
     options: [],
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_AMOUNT,
+    inputType: PlayerInputType.SELECT_AMOUNT,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_CARD,
+    inputType: PlayerInputType.SELECT_CARD,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_OPTION,
+    inputType: PlayerInputType.SELECT_OPTION,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_PAYMENT,
+    inputType: PlayerInputType.SELECT_PAYMENT,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_PROJECT_CARD_TO_PLAY,
+    inputType: PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY,
     cards: [{name: CardName.ANTS, reserveUnits: {}} as CardModel],
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_INITIAL_CARDS,
+    inputType: PlayerInputType.SELECT_INITIAL_CARDS,
     options: [
         {} as PlayerInputModel,
         {} as PlayerInputModel,
@@ -75,15 +75,15 @@ const typesToTest: PlayerInputModel[] = [
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_SPACE,
+    inputType: PlayerInputType.SELECT_SPACE,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_PLAYER,
+    inputType: PlayerInputType.SELECT_PLAYER,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE,
+    inputType: PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE,
     turmoil: {
       dominant: undefined,
       ruling: undefined,
@@ -100,11 +100,11 @@ const typesToTest: PlayerInputModel[] = [
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_COLONY,
+    inputType: PlayerInputType.SELECT_COLONY,
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE,
+    inputType: PlayerInputType.SELECT_PRODUCTION_TO_LOSE,
     payProduction: {
       cost: 0,
       units: Units.EMPTY,
@@ -112,7 +112,7 @@ const typesToTest: PlayerInputModel[] = [
   },
   {
     ...baseInput,
-    inputType: PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS,
+    inputType: PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS,
     aresData: {
       includeHazards: false,
       hazardData: {

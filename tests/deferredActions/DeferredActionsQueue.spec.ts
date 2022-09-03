@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SimpleDeferredAction} from '../../src/server/deferredActions/DeferredAction';
 import {DeferredActionsQueue} from '../../src/server/deferredActions/DeferredActionsQueue';
-import {PlayerInputTypes} from '../../src/common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../src/common/input/PlayerInputType';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 
@@ -19,7 +19,7 @@ describe('DeferredActionsQueue', () => {
       finished = true;
     });
     expect(redPlayer.getWaitingFor()).eq(expectedInput);
-    redPlayer.process([[String(PlayerInputTypes.SELECT_OPTION)]]);
+    redPlayer.process([[String(PlayerInputType.SELECT_OPTION)]]);
     expect(redPlayer.getWaitingFor()).eq(undefined);
     expect(finished).eq(true);
     expect(queue.length).eq(1);

@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
-import {maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GreatDamPromo', function() {
@@ -25,8 +25,7 @@ describe('GreatDamPromo', function() {
   it('Should play', function() {
     maxOutOceans(player, 4);
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    cast(card.play(player), SelectSpace);
     expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
@@ -34,8 +33,7 @@ describe('GreatDamPromo', function() {
   it('Works with Ares', function() {
     maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    cast(card.play(player), SelectSpace);
     expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });

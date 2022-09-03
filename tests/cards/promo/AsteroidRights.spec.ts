@@ -63,7 +63,7 @@ describe('AsteroidRights', function() {
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 
-    const action = card.action(player) as SelectCard<ICard>;
+    const action = cast(card.action(player), SelectCard<ICard>);
     action.cb([cometAiming]);
     expect(cometAiming.resourceCount).to.eq(1);
   });
@@ -74,7 +74,6 @@ describe('AsteroidRights', function() {
     player.playedCards.push(cometAiming);
 
     const action = cast(card.action(player), OrOptions);
-    expect(action).instanceOf(OrOptions);
     expect(action.options[0] instanceof SelectOption).is.true;
     expect(action.options[1] instanceof SelectOption).is.true;
     expect(action.options[2] instanceof SelectCard).is.true;

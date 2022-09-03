@@ -6,6 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
+import {ICard} from '../ICard';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;
@@ -27,4 +28,8 @@ export abstract class PreludeCard extends Card2 implements IProjectCard {
       startingMegaCredits: properties.startingMegacredits,
     });
   }
+}
+
+export function isPreludeCard(card: ICard): card is PreludeCard {
+  return card instanceof PreludeCard;
 }

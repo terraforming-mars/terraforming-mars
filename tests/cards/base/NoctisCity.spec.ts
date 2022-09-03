@@ -33,7 +33,7 @@ describe('NoctisCity', function() {
     const player = game.getPlayersInGenerationOrder()[0];
 
     const action = cast(card.play(player), SelectSpace);
-    expect(action!.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));
+    expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));
   });
 
   it('Should play', function() {
@@ -45,6 +45,6 @@ describe('NoctisCity', function() {
     expect(player.production.megacredits).to.eq(3);
 
     const noctis = game.board.getSpace(SpaceName.NOCTIS_CITY);
-    expect(noctis.tile && noctis.tile.tileType).to.eq(TileType.CITY);
+    expect(noctis.tile?.tileType).to.eq(TileType.CITY);
   });
 });

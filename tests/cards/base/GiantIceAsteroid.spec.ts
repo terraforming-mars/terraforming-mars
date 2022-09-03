@@ -28,9 +28,9 @@ describe('GiantIceAsteroid', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(3);
 
-    const firstOcean = game.deferredActions.pop()!.execute() as SelectSpace;
+    const firstOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     firstOcean.cb(firstOcean.availableSpaces[0]);
-    const secondOcean = game.deferredActions.pop()!.execute() as SelectSpace;
+    const secondOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     secondOcean.cb(secondOcean.availableSpaces[1]);
 
     const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
@@ -46,4 +46,3 @@ describe('GiantIceAsteroid', function() {
     expect(player.getTerraformRating()).to.eq(24);
   });
 });
-

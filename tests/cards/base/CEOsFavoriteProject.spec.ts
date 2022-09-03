@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
@@ -9,6 +10,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
+import {ICard} from '../../../src/server/cards/ICard';
 
 describe('CEOsFavoriteProject', function() {
   let card: CEOsFavoriteProject;
@@ -37,8 +39,7 @@ describe('CEOsFavoriteProject', function() {
     player.addResourceTo(searchForLife);
     player.addResourceTo(birds);
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<ICard>);
 
     action.cb([searchForLife]);
     expect(searchForLife.resourceCount).to.eq(2);
@@ -50,14 +51,26 @@ describe('CEOsFavoriteProject', function() {
     expect(securityFleet.resourceCount).to.eq(2);
   });
 
-  it('Can play on SelfReplicatingRobots cards', function() {
+  it('Cannot play on SelfReplicatingRobots cards', function() {
     const srr = new SelfReplicatingRobots();
     const birds = new Birds();
-    player.playedCards.push(srr);
+    const securityFleet = new SecurityFleet();
+    securityFleet.resourceCount++;
+    player.playedCards.push(srr, securityFleet);
     srr.targetCards.push({card: birds, resourceCount: 0});
-    const action = card.play(player);
-    expect(action).instanceOf(SelectCard);
-    action.cb([birds]);
-    expect(srr.targetCards[0].resourceCount).to.eq(1);
+    const action = cast(card.play(player), SelectCard<ICard>);
+    expect(action.cards).does.not.contain(birds);
+    expect(action.cards).does.contain(securityFleet);
+  });
+
+  it('Cannot play on card with no resources', function() {
+    const birds = new Birds();
+    const securityFleet = new SecurityFleet();
+    securityFleet.resourceCount++;
+    player.playedCards.push(securityFleet, birds);
+    const action = cast(card.play(player), SelectCard<ICard>);
+    expect(action.cards).does.not.contain(birds);
+    expect(action.cards).does.contain(securityFleet);
+    expect(() => action.cb([birds])).to.throw(Error, /Invalid card/);
   });
 });

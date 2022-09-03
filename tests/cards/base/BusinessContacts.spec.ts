@@ -1,7 +1,9 @@
 
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {BusinessContacts} from '../../../src/server/cards/base/BusinessContacts';
 import {Game} from '../../../src/server/Game';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -11,9 +13,7 @@ describe('BusinessContacts', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
-    const action = card.play(player)!;
-    expect(action).is.not.undefined;
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<IProjectCard>);
     const card1 = action.cards[0];
     const card2 = action.cards[1];
     const card3 = action.cards[2];

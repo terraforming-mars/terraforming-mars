@@ -49,7 +49,7 @@ export class SQLite implements IDatabase {
   }
 
   public async getGameIds(): Promise<Array<GameId>> {
-    const sql: string = 'SELECT distinct game_id game_id FROM games';
+    const sql = 'SELECT distinct game_id game_id FROM games';
     const rows = await this.asyncAll(sql, []);
     return rows.map((row) => row.game_id);
   }
@@ -92,7 +92,7 @@ export class SQLite implements IDatabase {
   // TODO(kberg): throw an error if two game ids exist.
   public async getGameId(id: PlayerId | SpectatorId): Promise<GameId> {
     // Default sql is for player id;
-    let sql: string = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
+    let sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
     if (id.charAt(0) === 's') {
       sql = 'SELECT game_id from games where json_extract(games.game, \'$.spectatorId\') = ?';
     } else if (id.charAt(0) !== 'p') {
@@ -150,7 +150,7 @@ export class SQLite implements IDatabase {
       const selectResult = await this.asyncAll('SELECT distinct game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
       const gameIds = selectResult.map((row) => row.game_id);
       console.log(`About to purge ${gameIds} games`);
-      const placeholders: string = gameIds.map(() => '?').join(', ');
+      const placeholders = gameIds.map(() => '?').join(', ');
       if (gameIds.length > 0) {
         const deleteResult = await this.asyncRun(`DELETE FROM games WHERE game_id in ( ${placeholders} )`, [gameIds]);
         console.log(`Purged ${deleteResult.changes} rows from games`);
@@ -227,7 +227,7 @@ export class SQLite implements IDatabase {
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {
     // Sequence of '(?, ?)' pairs.
-    const placeholders: string = entry.participantIds.map(() => '(?, ?)').join(', ');
+    const placeholders = entry.participantIds.map(() => '(?, ?)').join(', ');
     // Sequence of [game_id, id] pairs.
     const values: Array<GameId | PlayerId | SpectatorId> = entry.participantIds.map((participant) => [entry.gameId, participant]).flat();
 

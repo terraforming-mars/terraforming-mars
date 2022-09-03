@@ -1,5 +1,5 @@
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {Message} from '../../common/logs/Message';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
@@ -11,7 +11,7 @@ export class OrOptions implements PlayerInput {
   public title: string | Message = 'Select one option';
   public buttonLabel: string = 'Save';
   public options: Array<PlayerInput>;
-  public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;
+  public readonly inputType = PlayerInputType.OR_OPTIONS;
   constructor(
     ...options: Array<PlayerInput>
   ) {

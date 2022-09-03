@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('Fish', function() {
   let card: Fish;
@@ -48,7 +49,7 @@ describe('Fish', function() {
     card.play(player);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
+    const selectPlayer = cast(game.deferredActions.peek()!.execute(), SelectPlayer);
     selectPlayer.cb(player2);
     expect(player2.production.plants).to.eq(0);
   });

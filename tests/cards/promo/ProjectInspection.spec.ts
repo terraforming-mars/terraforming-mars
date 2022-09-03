@@ -45,8 +45,8 @@ describe('ProjectInspection', function() {
     player.addActionThisGeneration(restrictedArea.name);
     expect(card.canPlay(player)).is.true;
 
-    const play = card.play(player);
-    expect(play instanceof SelectCard).is.true;
+    // returns SelectCard.
+    cast(card.play(player), SelectCard);
   });
 
   it('Can not play with Playwrights if there is no other card to chain', function() {
@@ -149,8 +149,7 @@ describe('ProjectInspection', function() {
     player.addResource(Resources.MEGACREDITS, 2);
     expect(playwrights.canAct(player)).is.true; // PW -> PI -> PW -> IW
 
-    const action1 = playwrights.action(player) as SelectCard<IProjectCard>;
-    expect(action1).is.not.undefined;
+    const action1 = cast(playwrights.action(player), SelectCard<IProjectCard>);
     expect(action1.cards).has.lengthOf(2); // PI and IW are available
     expect(action1.cards[0]?.name).eq(card.name);
     action1.cb([card]);
@@ -161,7 +160,6 @@ describe('ProjectInspection', function() {
     expect(play1.cards[0]?.name).eq(playwrights.name);
 
     const action2 = cast(play1.cb([playwrights]), SelectCard<ICard>);
-    expect(action2).is.not.undefined;
     expect(action2.cards).has.lengthOf(1); // Only IW is available, PI has been removed from play
     expect(action2.cards[0]?.name).eq(indenturedWorkers.name);
   });

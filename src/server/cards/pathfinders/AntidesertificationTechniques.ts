@@ -1,11 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 
-export class AntidesertificationTechniques extends PreludeCard {
-  public migrated = true;
+export class AntidesertificationTechniques extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.ANTI_DESERTIFICATION_TECHNIQUES,
@@ -22,7 +21,7 @@ export class AntidesertificationTechniques extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.MEGACREDITS, 5);
     return undefined;
   }

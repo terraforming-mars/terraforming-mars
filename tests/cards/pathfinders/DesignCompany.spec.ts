@@ -18,7 +18,7 @@ describe('DesignCompany', function() {
   });
 
   it('Should play', function() {
-    player.simplePlay(card);
+    card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
 

@@ -1,13 +1,13 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
-  public migrated = true;
+// TODO(kberg): Add a test
+export class SelfSufficientSettlement extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.SELF_SUFFICIENT_SETTLEMENT,
@@ -23,7 +23,7 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceCityTile(player));
     return undefined;
   }

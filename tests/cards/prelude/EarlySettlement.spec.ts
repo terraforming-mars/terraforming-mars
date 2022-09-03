@@ -12,7 +12,7 @@ describe('EarlySettlement', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player);
 
-    player.simplePlay(card);
+    card.play(player);
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
 
     expect(player.production.plants).to.eq(1);

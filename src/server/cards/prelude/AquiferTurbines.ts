@@ -1,13 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AquiferTurbines extends PreludeCard {
-  public migrated = true;
+export class AquiferTurbines extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.AQUIFER_TURBINES,
@@ -26,10 +25,10 @@ export class AquiferTurbines extends PreludeCard {
       },
     });
   }
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.canAfford(3);
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
     player.game.defer(new SelectPaymentDeferred(player, 3));
     return undefined;

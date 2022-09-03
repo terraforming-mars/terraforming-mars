@@ -1,12 +1,11 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class BusinessEmpire extends PreludeCard {
-  public migrated = true;
+export class BusinessEmpire extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.BUSINESS_EMPIRE,
@@ -25,11 +24,11 @@ export class BusinessEmpire extends PreludeCard {
       },
     });
   }
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     if (player.isCorporation(CardName.MANUTECH)) return true;
     return player.canAfford(6);
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new SelectPaymentDeferred(player, 6));
     return undefined;
   }

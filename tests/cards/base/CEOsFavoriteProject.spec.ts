@@ -51,16 +51,14 @@ describe('CEOsFavoriteProject', function() {
     expect(securityFleet.resourceCount).to.eq(2);
   });
 
-  it('Cannot play on SelfReplicatingRobots cards', function() {
+  it('Can play on SelfReplicatingRobots cards', function() {
     const srr = new SelfReplicatingRobots();
     const birds = new Birds();
-    const securityFleet = new SecurityFleet();
-    securityFleet.resourceCount++;
-    player.playedCards.push(srr, securityFleet);
+    player.playedCards.push(srr);
     srr.targetCards.push({card: birds, resourceCount: 0});
     const action = cast(card.play(player), SelectCard<ICard>);
-    expect(action.cards).does.not.contain(birds);
-    expect(action.cards).does.contain(securityFleet);
+    action.cb([birds]);
+    expect(srr.targetCards[0].resourceCount).to.eq(1);
   });
 
   it('Cannot play on card with no resources', function() {

@@ -34,7 +34,6 @@ export class Extremophiles extends Card implements IActionCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public play() {
     return undefined;

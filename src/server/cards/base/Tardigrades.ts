@@ -30,7 +30,6 @@ export class Tardigrades extends Card2 implements IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   public action(player: Player) {
     player.addResourceTo(this);

@@ -38,7 +38,6 @@ export class AsteroidDeflectionSystem extends Card2 implements IActionCard, IPro
       },
     });
   }
-  public override resourceCount = 0;
 
   public canAct(): boolean {
     return true;

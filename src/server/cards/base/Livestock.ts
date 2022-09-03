@@ -42,7 +42,6 @@ export class Livestock extends Card2 implements IActionCard, IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
   public canAct(): boolean {
     return true;
   }

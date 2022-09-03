@@ -50,7 +50,6 @@ export class EcologicalZone extends Card2 implements IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)

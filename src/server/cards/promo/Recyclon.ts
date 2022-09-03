@@ -38,7 +38,6 @@ export class Recyclon extends Card2 implements ICorporationCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   public override bespokePlay(player: Player) {
     player.addResourceTo(this);

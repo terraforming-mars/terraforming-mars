@@ -39,7 +39,6 @@ export class RobinHaulings extends Card implements ICorporationCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public play(player: Player) {
     player.addResourceTo(this, 1);

@@ -35,7 +35,6 @@ export class RegolithEaters extends Card2 implements IActionCard, IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public override bespokePlay(_player: Player) {
     return undefined;

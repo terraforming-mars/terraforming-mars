@@ -38,7 +38,6 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     });
   }
 
-  public override resourceCount = 0;
 
   private matchingTags(tags: Array<Tag>): boolean {
     let spaceTag = false;

@@ -1,4 +1,4 @@
-import {PlayerInputTypes} from '../input/PlayerInputTypes';
+import {PlayerInputType} from '../input/PlayerInputType';
 import {CardModel} from './CardModel';
 import {ColonyModel} from './ColonyModel';
 import {ColorWithNeutral} from '../Color';
@@ -18,7 +18,7 @@ export interface PlayerInputModel {
     canUseSeeds: boolean | undefined;
     canUseData: boolean | undefined;
     cards: Array<CardModel> | undefined;
-    inputType: PlayerInputTypes;
+    inputType: PlayerInputType;
     options: Array<PlayerInputModel> | undefined;
     min: number | undefined;
     max: number | undefined;

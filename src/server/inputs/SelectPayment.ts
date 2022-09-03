@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {jsonToPayment, Payment} from '../../common/inputs/Payment';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectPayment implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PAYMENT;
+  public readonly inputType = PlayerInputType.SELECT_PAYMENT;
   public buttonLabel: string = 'Pay'; // no input button
   constructor(
         public title: string | Message,

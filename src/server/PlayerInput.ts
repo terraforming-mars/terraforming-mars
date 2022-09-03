@@ -1,11 +1,11 @@
 import {ICard} from './cards/ICard';
 import {Message} from '../common/logs/Message';
-import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../common/input/PlayerInputType';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Player} from './Player';
 
 export interface PlayerInput {
-    inputType: PlayerInputTypes;
+    inputType: PlayerInputType;
     buttonLabel: string;
     options?: Array<PlayerInput>;
     title: string | Message;

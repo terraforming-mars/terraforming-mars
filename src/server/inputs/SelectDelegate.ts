@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse} from '../../common/inputs/InputResponse';
 
 export class SelectDelegate implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_DELEGATE;
+  public readonly inputType = PlayerInputType.SELECT_DELEGATE;
   public buttonLabel: string = 'Save';
   constructor(public players: Array<Player | NeutralPlayer>, public title: string | Message, public cb: (player: Player | NeutralPlayer) => PlayerInput | undefined) {
   }

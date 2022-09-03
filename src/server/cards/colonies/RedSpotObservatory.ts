@@ -38,7 +38,7 @@ export class RedSpotObservatory extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public canAct(): boolean {
     return true;
   }

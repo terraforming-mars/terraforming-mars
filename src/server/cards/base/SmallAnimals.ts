@@ -41,7 +41,7 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  PreludeCard  public override canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
   public play(player: Player) {

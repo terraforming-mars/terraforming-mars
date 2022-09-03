@@ -30,7 +30,7 @@ export class Tardigrades extends Card implements IProjectCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

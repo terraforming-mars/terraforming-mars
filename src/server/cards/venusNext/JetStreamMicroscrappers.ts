@@ -34,7 +34,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

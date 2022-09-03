@@ -45,7 +45,7 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
       },
     });
   }
-  PreludeCard
+
   public canAct(): boolean {
     return true;
   }

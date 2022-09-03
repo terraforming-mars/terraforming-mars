@@ -32,7 +32,7 @@ export class Dirigibles extends Card implements IActionCard {
     });
   }
 
-  PreludeCard
+
   public play() {
     return undefined;
   }

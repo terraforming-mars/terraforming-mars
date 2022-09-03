@@ -39,7 +39,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

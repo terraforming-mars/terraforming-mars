@@ -32,7 +32,7 @@ export class VenusianInsects extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

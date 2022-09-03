@@ -34,7 +34,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public onCardPlayed(player: Player, card: IProjectCard) {
     const qty = card.tags.filter((tag) => tag === Tag.MARS).length;
     if (qty !== 0) {

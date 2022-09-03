@@ -33,7 +33,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  PreludeCard
+
   public canAct(player: Player) {
     return player.plants > 0;
   }

@@ -34,7 +34,7 @@ export class OceanSanctuary extends Card implements IProjectCard {
       },
     });
   }
-  PreludeCard
+
   public play(player: Player) {
     player.addResourceTo(this, 1);
     return new SelectSpace(

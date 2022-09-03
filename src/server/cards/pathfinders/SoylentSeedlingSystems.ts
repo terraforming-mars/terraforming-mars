@@ -36,7 +36,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
     });
   }
 
-  PreludeCard
+
   public play() {
     this.resourceCount += 2;
     return undefined;

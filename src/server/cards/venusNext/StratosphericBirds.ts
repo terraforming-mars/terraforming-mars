@@ -37,7 +37,7 @@ export class StratosphericBirds extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard  public override canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const cardsWithFloater = player.getCardsWithResources(CardResource.FLOATER);
     if (cardsWithFloater.length === 0) return false;
 

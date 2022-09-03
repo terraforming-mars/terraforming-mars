@@ -34,7 +34,7 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  PreludeCard
+
   public canAct() {
     return true;
   }

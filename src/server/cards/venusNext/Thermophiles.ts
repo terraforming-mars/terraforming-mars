@@ -38,7 +38,7 @@ export class Thermophiles extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

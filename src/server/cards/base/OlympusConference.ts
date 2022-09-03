@@ -33,7 +33,7 @@ export class OlympusConference extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public onCardPlayed(player: Player, card: IProjectCard) {
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     for (let i = 0; i < scienceTags; i++) {

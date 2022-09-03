@@ -33,7 +33,7 @@ export class Penguins extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

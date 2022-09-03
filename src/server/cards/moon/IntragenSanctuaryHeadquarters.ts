@@ -37,7 +37,7 @@ export class IntragenSanctuaryHeadquarters extends Card2 implements ICorporation
     });
   }
 
-  PreludeCard
+
   public initialAction(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;

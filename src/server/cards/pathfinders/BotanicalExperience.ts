@@ -40,7 +40,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public onTilePlaced(cardOwner: Player, _activePlayer: Player, space: ISpace) {
     if (Board.isGreenerySpace(space)) {
       cardOwner.addResourceTo(this, 1);

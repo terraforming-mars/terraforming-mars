@@ -39,7 +39,7 @@ export class CopernicusTower extends Card2 implements IActionCard, IProjectCard 
       },
     });
   }
-  PreludeCard
+
   private canRaiseTR(player: Player) {
     return this.resourceCount > 0 && player.canAfford(0, {tr: {tr: 1}});
   }

@@ -33,7 +33,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
       },
     });
   }
-  PreludeCard
+
   public play(player: Player) {
     player.addResourceTo(this, 2);
 

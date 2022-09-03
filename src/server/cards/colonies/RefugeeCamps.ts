@@ -32,7 +32,7 @@ export class RefugeeCamps extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public canAct(player: Player): boolean {
     return player.production.megacredits >= -4;
   }

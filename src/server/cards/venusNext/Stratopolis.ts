@@ -41,7 +41,7 @@ export class Stratopolis extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard
+
   public play(player: Player) {
     player.production.add(Resources.MEGACREDITS, 2);
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);

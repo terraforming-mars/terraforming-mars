@@ -38,7 +38,7 @@ export class NanotechIndustries extends Card2 implements IActionCard, ICorporati
     });
   }
 
-  PreludeCard
+
   public initialAction(player: Player): PlayerInput {
     return player.drawCardKeepSome(3, {keepMax: 2});
   }

@@ -45,7 +45,7 @@ export class Herbivores extends Card implements IProjectCard {
       },
     });
   }
-  PreludeCard
+
   public override canPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }

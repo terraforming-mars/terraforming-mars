@@ -50,7 +50,7 @@ export class EcologicalZone extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter(Board.isGreenerySpace).length > 0);

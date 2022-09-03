@@ -32,7 +32,7 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

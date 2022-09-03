@@ -38,7 +38,7 @@ export class Recyclon extends Card2 implements ICorporationCard {
       },
     });
   }
-  PreludeCard
+
   public override bespokePlay(player: Player) {
     player.addResourceTo(this);
     return undefined;

@@ -33,7 +33,7 @@ export class Pollinators extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  PreludeCard
+
   public canAct() {
     return true;
   }

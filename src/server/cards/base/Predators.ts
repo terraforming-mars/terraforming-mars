@@ -38,7 +38,7 @@ export class Predators extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  PreludeCard
+
   public play() {
     return undefined;
   }

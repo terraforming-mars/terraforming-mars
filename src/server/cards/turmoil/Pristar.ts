@@ -35,7 +35,7 @@ export class Pristar extends Card implements ICorporationCard {
     });
   }
 
-  PreludeCard
+
   public play(player: Player) {
     player.decreaseTerraformRatingSteps(2);
     return undefined;

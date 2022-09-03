@@ -46,7 +46,7 @@ export class TheDarksideofTheMoonSyndicate extends Card2 implements ICorporation
     });
   }
 
-  PreludeCard
+
   public override bespokePlay(player: Player) {
     player.addResourceTo(this, 2);
     return undefined;

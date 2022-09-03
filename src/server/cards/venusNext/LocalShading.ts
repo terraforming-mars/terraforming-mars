@@ -33,7 +33,7 @@ export class LocalShading extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

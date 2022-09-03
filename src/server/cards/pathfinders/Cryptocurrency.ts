@@ -34,7 +34,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  PreludeCard
+
   public canAct(player: Player) {
     return player.energy > 0 || this.resourceCount > 0;
   }

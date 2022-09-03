@@ -43,7 +43,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
     });
   }
 
-  PreludeCard
+
   public play() {
     return undefined;
   }

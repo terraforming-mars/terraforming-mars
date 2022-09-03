@@ -43,7 +43,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public canAct(): boolean {
     return true;
   }

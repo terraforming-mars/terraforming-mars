@@ -42,7 +42,7 @@ export class Livestock extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  PreludeCard  public override canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.production.plants >= 1;
   }
   public play(player: Player) {

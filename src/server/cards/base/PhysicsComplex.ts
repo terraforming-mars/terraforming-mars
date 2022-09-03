@@ -33,7 +33,7 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  PreludeCard
+
   public play() {
     return undefined;
   }

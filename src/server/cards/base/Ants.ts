@@ -38,7 +38,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  PreludeCard
+
   public play() {
     return undefined;
   }

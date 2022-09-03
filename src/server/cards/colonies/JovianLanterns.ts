@@ -40,7 +40,7 @@ export class JovianLanterns extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public canAct(player: Player): boolean {
     return player.titanium > 0;
   }

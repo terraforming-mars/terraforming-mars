@@ -45,7 +45,7 @@ export class DarksideIncubationPlant extends Card2 implements IActionCard, IProj
       },
     });
   }
-  PreludeCard
+
   public canAct() {
     return true;
   }

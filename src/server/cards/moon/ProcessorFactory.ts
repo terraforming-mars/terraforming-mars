@@ -30,7 +30,7 @@ export class ProcessorFactory extends Card2 implements IProjectCard {
       },
     });
   }
-  PreludeCard
+
   public canAct(player: Player) {
     return player.steel > 0;
   }

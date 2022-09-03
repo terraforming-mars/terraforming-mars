@@ -35,7 +35,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  PreludeCard
+
   public play(_player: Player) {
     return undefined;
   }

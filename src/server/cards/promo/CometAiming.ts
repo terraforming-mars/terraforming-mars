@@ -37,7 +37,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

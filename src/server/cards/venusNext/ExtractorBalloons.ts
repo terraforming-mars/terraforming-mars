@@ -36,7 +36,7 @@ export class ExtractorBalloons extends Card implements IActionCard {
     });
   }
 
-  PreludeCard
+
   public play(player: Player) {
     player.addResourceTo(this, 3);
     return undefined;

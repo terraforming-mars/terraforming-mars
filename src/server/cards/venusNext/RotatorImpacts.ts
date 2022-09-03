@@ -37,7 +37,7 @@ export class RotatorImpacts extends Card implements IActionCard {
       },
     });
   }
-  PreludeCard
+
   public play() {
     return undefined;
   }

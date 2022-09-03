@@ -40,7 +40,7 @@ export class Pets extends Card implements IProjectCard {
     });
   }
 
-  PreludeCard
+
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(

@@ -1,19 +1,19 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class Polyphemos extends Card implements ICorporationCard {
+export class Polyphemos extends Card2 implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POLYPHEMOS,
       startingMegaCredits: 50,
       cardType: CardType.CORPORATION,
       cardCost: 5,
+      productionBox: {megacredits: 5},
 
       metadata: {
         cardNumber: 'R11',
@@ -30,8 +30,7 @@ export class Polyphemos extends Card implements ICorporationCard {
       },
     });
   }
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 5);
+  public override bespokePlay(player: Player) {
     player.titanium = 5;
     return undefined;
   }

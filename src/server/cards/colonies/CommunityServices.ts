@@ -3,10 +3,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CommunityServices extends Card implements IProjectCard {
+export class CommunityServices extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 13,
@@ -26,7 +26,7 @@ export class CommunityServices extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
     return undefined;
   }

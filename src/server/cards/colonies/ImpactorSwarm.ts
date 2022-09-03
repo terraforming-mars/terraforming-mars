@@ -5,11 +5,11 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 
-export class ImpactorSwarm extends Card implements IProjectCard {
+export class ImpactorSwarm extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 11,
@@ -29,7 +29,7 @@ export class ImpactorSwarm extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new RemoveAnyPlants(player, 2));
     player.heat += 12;
     return undefined;

@@ -8,9 +8,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class RedSpotObservatory extends Card implements IProjectCard {
+export class RedSpotObservatory extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 17,
@@ -72,7 +72,7 @@ export class RedSpotObservatory extends Card implements IProjectCard {
     return undefined;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.drawCard(2);
     return undefined;
   }

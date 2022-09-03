@@ -7,10 +7,10 @@ import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EcologyResearch extends Card implements IProjectCard {
+export class EcologyResearch extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 21,
@@ -30,7 +30,7 @@ export class EcologyResearch extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const coloniesCount = player.getColoniesCount();
     player.production.add(Resources.PLANTS, coloniesCount, {log: true});
 

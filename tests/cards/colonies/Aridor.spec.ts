@@ -24,7 +24,7 @@ describe('Aridor', function() {
   });
 
   it('Should play', function() {
-    const play = card.play();
+    const play = card.play(player);
     expect(play).is.undefined;
     card.onCardPlayed(player, new Predators());
     expect(player.production.megacredits).to.eq(1);

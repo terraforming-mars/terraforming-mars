@@ -22,7 +22,7 @@ describe('FloaterTechnology', function() {
   });
 
   it('Can play', function() {
-    const result = card.play();
+    const result = card.play(player);
     expect(result).is.undefined;
   });
 

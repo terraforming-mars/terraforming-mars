@@ -7,9 +7,9 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 
-export class TitanAirScrapping extends Card implements IProjectCard {
+export class TitanAirScrapping extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 21,
@@ -77,10 +77,6 @@ export class TitanAirScrapping extends Card implements IProjectCard {
   private spendResource(player: Player) {
     player.removeResourceFrom(this, 2);
     player.increaseTerraformRating();
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

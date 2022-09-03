@@ -8,10 +8,10 @@ import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {max} from '../Options';
 
-export class PioneerSettlement extends Card implements IProjectCard {
+export class PioneerSettlement extends Card2 implements IProjectCard {
   constructor() {
     super({
       cost: 13,
@@ -34,7 +34,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
 
   public warning?: string;
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     if (player.colonies.getPlayableColonies().length === 0) {
       return false;
     }
@@ -71,7 +71,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
     return true;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const openColonies = player.production.megacredits <= -4 ?
       player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
       undefined;

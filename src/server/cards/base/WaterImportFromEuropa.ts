@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -11,7 +11,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {CardRenderer} from '../render/CardRenderer';
 
 const ACTION_COST = 12;
-export class WaterImportFromEuropa extends Card implements IActionCard, IProjectCard {
+export class WaterImportFromEuropa extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -31,9 +31,6 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
         }),
       },
     });
-  }
-  public play() {
-    return undefined;
   }
   public canAct(player: Player): boolean {
     return player.canAfford(ACTION_COST, {titanium: true, tr: {oceans: 1}});

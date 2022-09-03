@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -9,7 +9,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class HeatTrappers extends Card implements IProjectCard {
+export class HeatTrappers extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -31,7 +31,7 @@ export class HeatTrappers extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.HEAT, 2);
   }
 
@@ -41,7 +41,7 @@ export class HeatTrappers extends Card implements IProjectCard {
     player.production.add(Resources.ENERGY, 1);
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player);
     return undefined;
   }

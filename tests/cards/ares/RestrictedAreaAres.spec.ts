@@ -6,6 +6,8 @@ import {RestrictedAreaAres} from '../../../src/server/cards/ares/RestrictedAreaA
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('RestrictedAreaAres', function() {
   let card: RestrictedAreaAres;
@@ -19,12 +21,10 @@ describe('RestrictedAreaAres', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.not.undefined;
-
+    const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
-
     action.cb(space);
+
     expect(space.tile && space.tile.tileType).to.eq(TileType.RESTRICTED_AREA);
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.DRAW_CARD]});
   });

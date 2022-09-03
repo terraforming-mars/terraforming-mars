@@ -1,19 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class BlackPolarDust extends Card implements IProjectCard {
+export class BlackPolarDust extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.BLACK_POLAR_DUST,
       cost: 15,
       tr: {oceans: 1},
+      productionBox: {megacredits: -2, heat: 3},
 
       metadata: {
         cardNumber: '022',
@@ -27,12 +27,7 @@ export class BlackPolarDust extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
-    return player.production.megacredits >= -3;
-  }
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, -2);
-    player.production.add(Resources.HEAT, 3);
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }

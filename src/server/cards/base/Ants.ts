@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,7 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Ants extends Card implements IActionCard, IProjectCard {
+export class Ants extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -36,11 +36,6 @@ export class Ants extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

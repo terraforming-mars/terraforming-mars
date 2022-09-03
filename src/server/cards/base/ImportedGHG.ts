@@ -1,19 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class ImportedGHG extends Card implements IProjectCard {
+export class ImportedGHG extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
       name: CardName.IMPORTED_GHG,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 7,
+      productionBox: {heat: 1},
 
       metadata: {
         cardNumber: '162',
@@ -25,8 +25,7 @@ export class ImportedGHG extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.HEAT, 1);
+  public override bespokePlay(player: Player) {
     player.heat += 3;
     return undefined;
   }

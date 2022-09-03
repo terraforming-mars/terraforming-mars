@@ -13,7 +13,7 @@ describe('PhysicsComplex', function() {
   });
 
   it('Can not act', function() {
-    card.play();
+    card.play(player);
     player.energy = 5;
     expect(card.canAct(player)).is.not.true;
   });

@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -8,7 +8,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
-export class Insulation extends Card implements IProjectCard {
+export class Insulation extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -27,11 +27,11 @@ export class Insulation extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.production.heat >= 1;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectAmount(
       'Select amount of heat production to decrease',
       'Decrease',

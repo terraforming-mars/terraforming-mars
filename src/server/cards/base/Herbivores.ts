@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -16,7 +16,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 
-export class Herbivores extends Card implements IProjectCard {
+export class Herbivores extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -46,7 +46,7 @@ export class Herbivores extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
 
@@ -56,7 +56,7 @@ export class Herbivores extends Card implements IProjectCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResourceTo(this);
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));

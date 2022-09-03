@@ -23,7 +23,7 @@ describe('ColonizerTrainingCamp', function() {
     (game as any).oxygenLevel = 5;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play();
+    card.play(player);
     expect(card.getVictoryPoints()).to.eq(2);
   });
 });

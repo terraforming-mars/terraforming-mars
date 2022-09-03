@@ -4,6 +4,8 @@ import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('RestrictedArea', function() {
   let card: RestrictedArea;
@@ -23,12 +25,10 @@ describe('RestrictedArea', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.not.undefined;
-
+    const action = cast(card.play(player), SelectSpace);
     const space = action.availableSpaces[0];
-
     action.cb(space);
+
     expect(space.tile && space.tile.tileType).to.eq(TileType.RESTRICTED_AREA);
     expect(space.adjacency?.bonus).eq(undefined);
   });

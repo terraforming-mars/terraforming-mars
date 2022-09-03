@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -12,7 +12,7 @@ import {LogHelper} from '../../LogHelper';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard {
+export class NitriteReducingBacteria extends Card2 implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -39,7 +39,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
   }
 
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new SimpleDeferredAction(
       player,
       () => {

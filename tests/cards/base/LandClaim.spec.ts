@@ -14,8 +14,7 @@ describe('LandClaim', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
-    const action = card.play(player);
-    expect(action).is.not.undefined;
+    const action = cast(card.play(player), SelectSpace);
     const landSpace = player.game.board.getAvailableSpacesOnLand(player)[0];
     action.cb(landSpace);
     expect(landSpace.player).to.eq(player);

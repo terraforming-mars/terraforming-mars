@@ -15,7 +15,7 @@ describe('Advertising', function() {
     expect(player.production.megacredits).to.eq(0);
 
     const card = new EarthCatapult();
-    card.play();
+    card.play(player);
     advertising.onCardPlayed(player, card);
     expect(player.production.megacredits).to.eq(1);
   });

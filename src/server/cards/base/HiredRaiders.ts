@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class HiredRaiders extends Card implements IProjectCard {
+export class HiredRaiders extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -29,7 +29,7 @@ export class HiredRaiders extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     if (player.game.isSoloMode()) {
       return new OrOptions(
         new SelectOption('Steal 2 steel', 'Steal steel', () => {

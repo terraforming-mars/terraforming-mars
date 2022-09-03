@@ -23,7 +23,7 @@ describe('WaterImportFromEuropa', function() {
   });
 
   it('Should play', function() {
-    card.play();
+    card.play(player);
     player.playedCards.push(card);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

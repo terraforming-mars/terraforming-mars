@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Priority} from '../../deferredActions/DeferredAction';
 
-export class ArtificialPhotosynthesis extends Card implements IProjectCard {
+export class ArtificialPhotosynthesis extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -26,7 +26,7 @@ export class ArtificialPhotosynthesis extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const options = new OrOptions(
       new SelectOption('Increase your energy production 2 steps', 'Increase', () => {
         player.production.add(Resources.ENERGY, 2, {log: true});

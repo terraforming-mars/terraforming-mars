@@ -27,7 +27,7 @@ describe('GHGProducingBacteria', () => {
 
   it('Should play', () => {
     (game as any).oxygenLevel = 4;
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

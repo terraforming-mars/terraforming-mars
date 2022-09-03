@@ -130,6 +130,9 @@ export function fakeCard(card: Partial<IProjectCard>): IProjectCard {
   return Object.assign(template, card);
 }
 
+/*
+ * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
+ */
 export function cast<T>(obj: any, klass: new (...args: any[]) => T): T {
   if (!(obj instanceof klass)) {
     throw new Error(`Not an instance of ${klass.name}: ${obj.constructor.name}`);

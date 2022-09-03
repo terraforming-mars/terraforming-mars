@@ -1,4 +1,4 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,7 +13,7 @@ import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
 
-export abstract class MiningCard extends Card implements IProjectCard {
+export abstract class MiningCard extends Card2 implements IProjectCard {
   constructor(
     name: CardName,
     cost: number,
@@ -27,7 +27,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     });
   }
   public bonusResource?: Array<Resources>;
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
   private isAres(): boolean {
@@ -70,7 +70,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     }
   }
 
-  public play(player: Player): SelectSpace {
+  public override bespokePlay(player: Player): SelectSpace {
     return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: ISpace) => {
       const bonusResources = [];
       if (space.bonus.includes(SpaceBonus.STEEL)) {

@@ -1,20 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class RadSuits extends Card implements IProjectCard {
+export class RadSuits extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.RAD_SUITS,
       cost: 6,
       victoryPoints: 1,
+      productionBox: {megacredits: 1},
 
       requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       metadata: {
@@ -25,9 +24,5 @@ export class RadSuits extends Card implements IProjectCard {
         description: 'Requires two cities in play. Increase your M€ production 1 step.',
       },
     });
-  }
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 1);
-    return undefined;
   }
 }

@@ -2,12 +2,12 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class IceAsteroid extends Card implements IProjectCard {
+export class IceAsteroid extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -24,7 +24,7 @@ export class IceAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
     player.game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     return undefined;

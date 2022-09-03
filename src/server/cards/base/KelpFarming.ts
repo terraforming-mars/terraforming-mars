@@ -1,14 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class KelpFarming extends Card implements IProjectCard {
+export class KelpFarming extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -16,6 +15,7 @@ export class KelpFarming extends Card implements IProjectCard {
       tags: [Tag.PLANT],
       cost: 17,
       victoryPoints: 1,
+      productionBox: {megacredits: 2, plants: 3},
 
       requirements: CardRequirements.builder((b) => b.oceans(6)),
       metadata: {
@@ -30,10 +30,7 @@ export class KelpFarming extends Card implements IProjectCard {
       },
     });
   }
-
-  public play(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
-    player.production.add(Resources.PLANTS, 3);
+  public override bespokePlay(player: Player) {
     player.plants += 2;
     return undefined;
   }

@@ -25,7 +25,7 @@ describe('MarsUniversity', function() {
   });
 
   it('Should play', function() {
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
 
     expect(card.onCardPlayed(player, new Pets())).is.undefined;
@@ -46,7 +46,7 @@ describe('MarsUniversity', function() {
   });
 
   it('Gives victory point', function() {
-    card.play();
+    card.play(player);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 

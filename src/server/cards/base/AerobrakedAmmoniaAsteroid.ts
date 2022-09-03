@@ -1,21 +1,21 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
+export class AerobrakedAmmoniaAsteroid extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
       name: CardName.AEROBRAKED_AMMONIA_ASTEROID,
       tags: [Tag.SPACE],
       cost: 26,
+      productionBox: {heat: 3, plants: 1},
 
       metadata: {
         description: 'Increase your heat production 3 steps and your plant production 1 step. Add 2 Microbes to ANOTHER card.',
@@ -31,10 +31,8 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cardsToPick = player.getResourceCards(CardResource.MICROBE);
-    player.production.add(Resources.HEAT, 3);
-    player.production.add(Resources.PLANTS, 1);
 
     if (cardsToPick.length < 1) return undefined;
 

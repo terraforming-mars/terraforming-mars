@@ -1,4 +1,3 @@
-
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {BusinessContacts} from '../../../src/server/cards/base/BusinessContacts';

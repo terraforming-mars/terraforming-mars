@@ -3,6 +3,8 @@ import {Mangrove} from '../../../src/server/cards/base/Mangrove';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
+import {cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('Mangrove', function() {
   let card: Mangrove;
@@ -20,9 +22,7 @@ describe('Mangrove', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.not.undefined;
-
+    const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
     expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.GREENERY);
     expect(action.availableSpaces[0].player).to.eq(player);

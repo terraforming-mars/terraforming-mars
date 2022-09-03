@@ -1,14 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 
-export class MethaneFromTitan extends Card implements IProjectCard {
+export class MethaneFromTitan extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -16,6 +14,7 @@ export class MethaneFromTitan extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 28,
       victoryPoints: 2,
+      productionBox: {heat: 2, plants: 2},
 
       requirements: CardRequirements.builder((b) => b.oxygen(2)),
       metadata: {
@@ -27,11 +26,5 @@ export class MethaneFromTitan extends Card implements IProjectCard {
         })),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.production.add(Resources.HEAT, 2);
-    player.production.add(Resources.PLANTS, 2);
-    return undefined;
   }
 }

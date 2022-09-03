@@ -1,17 +1,16 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class MicroMills extends Card implements IProjectCard {
+export class MicroMills extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MICRO_MILLS,
       cost: 3,
+      productionBox: {heat: 1},
 
       metadata: {
         cardNumber: '164',
@@ -22,10 +21,4 @@ export class MicroMills extends Card implements IProjectCard {
       },
     });
   }
-
-  public play(player: Player) {
-    player.production.add(Resources.HEAT, 1);
-    return undefined;
-  }
 }
-

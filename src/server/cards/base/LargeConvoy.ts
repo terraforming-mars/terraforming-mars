@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 
-export class LargeConvoy extends Card implements IProjectCard {
+export class LargeConvoy extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -36,7 +36,7 @@ export class LargeConvoy extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player): PlayerInput | undefined {
+  public override bespokePlay(player: Player): PlayerInput | undefined {
     player.drawCard(2);
 
     const animalCards = player.getResourceCards(CardResource.ANIMAL);

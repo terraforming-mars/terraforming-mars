@@ -1,13 +1,15 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
+import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {RobotCard} from '../promo/SelfReplicatingRobots';
 
-export class CEOsFavoriteProject extends Card implements IProjectCard {
+export class CEOsFavoriteProject extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -21,23 +23,31 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
     });
   }
   public override canPlay(player: Player): boolean {
-    return player.getCardsWithResources().length > 0;
+    return player.getCardsWithResources().length > 0 ||
+           player.getSelfReplicatingRobotsTargetCards().length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cards = player.getCardsWithResources();
+    const robotCards = player.getSelfReplicatingRobotsTargetCards();
     return new SelectCard(
       'Select card to add resource',
       'Add resource',
-      cards,
+      cards.concat(robotCards.map((c) => c.card)),
       ([card]) => {
-        if (!cards.includes(card)) {
-          throw new Error('Invalid card selection');
+        // if the user selected a robot card, handle it here:
+        const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === card.name);
+        if (robotCard) {
+          robotCard.resourceCount++;
+          LogHelper.logAddResource(player, robotCard.card);
+        } else {
+          if (!cards.includes(card)) {
+            throw new Error('Invalid card selection');
+          }
+          player.addResourceTo(card, {log: true});
         }
-        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );
   }
 }
-

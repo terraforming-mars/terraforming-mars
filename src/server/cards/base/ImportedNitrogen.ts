@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -9,7 +9,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class ImportedNitrogen extends Card implements IProjectCard {
+export class ImportedNitrogen extends Card2 implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,
@@ -31,7 +31,7 @@ export class ImportedNitrogen extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.plants += 4;
     player.increaseTerraformRating();
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));

@@ -23,7 +23,7 @@ export class DeepSpaceOperations extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.TITANIUM, 4);
     player.drawCard(2, {
       tag: Tag.SPACE,

@@ -20,7 +20,7 @@ export class SmeltingPlant extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel += 5;
     return player.game.increaseOxygenLevel(player, 2);
   }

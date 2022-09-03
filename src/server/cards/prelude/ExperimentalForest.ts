@@ -19,7 +19,7 @@ export class ExperimentalForest extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.drawCard(2, {tag: Tag.PLANT});
     player.game.defer(new PlaceGreeneryTile(player));
     return undefined;

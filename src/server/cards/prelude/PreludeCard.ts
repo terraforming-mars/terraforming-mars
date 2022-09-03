@@ -1,7 +1,6 @@
-import {Card} from '../Card';
+import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {PlayerInput} from '../../PlayerInput';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
@@ -17,7 +16,7 @@ interface StaticPreludeProperties {
     productionBox?: Partial<Units>;
 }
 
-export abstract class PreludeCard extends Card implements IProjectCard {
+export abstract class PreludeCard extends Card2 implements IProjectCard {
   constructor(properties: StaticPreludeProperties) {
     super({
       cardType: CardType.PRELUDE,
@@ -27,10 +26,6 @@ export abstract class PreludeCard extends Card implements IProjectCard {
       productionBox: properties.productionBox,
       startingMegaCredits: properties.startingMegacredits,
     });
-  }
-  public abstract play(player: Player): PlayerInput | undefined;
-  public override canPlay(_player: Player): boolean {
-    return true;
   }
 }
 
@@ -51,19 +46,11 @@ export abstract class PreludeCard2 extends PreludeCard {
     return this.bespokeCanPlay(player);
   }
 
-  public bespokeCanPlay(_player: Player): boolean {
-    return true;
-  }
-
-  public play(player: Player) {
+  public override play(player: Player) {
     if (this.productionBox !== undefined) {
       player.production.adjust(this.productionBox);
     }
     return this.bespokePlay(player);
-  }
-
-  public bespokePlay(_player: Player): PlayerInput | undefined {
-    return undefined;
   }
 }
 

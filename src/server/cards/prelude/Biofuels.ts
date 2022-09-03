@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -10,6 +9,7 @@ export class Biofuels extends PreludeCard {
     super({
       name: CardName.BIOFUELS,
       tags: [Tag.MICROBE],
+      productionBox: {energy: 1, plants: 1},
 
       metadata: {
         cardNumber: 'P03',
@@ -21,9 +21,7 @@ export class Biofuels extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, 1);
-    player.production.add(Resources.PLANTS, 1);
+  public override bespokePlay(player: Player) {
     player.plants += 2;
     return undefined;
   }

@@ -62,7 +62,7 @@ export class SurveyMission extends PreludeCard {
     return result;
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return this.validTriplets(player.game.board).length > 0;
   }
 
@@ -94,7 +94,7 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.STEEL, 5);
 
     const triplets = this.validTriplets(player.game.board);

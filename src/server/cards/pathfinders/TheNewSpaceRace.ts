@@ -23,7 +23,7 @@ export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     player.addResource(Resources.MEGACREDITS, 12);
     game.overrideFirstPlayer(player);

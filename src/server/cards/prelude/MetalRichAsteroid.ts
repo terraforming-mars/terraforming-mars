@@ -18,7 +18,7 @@ export class MetalRichAsteroid extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.titanium += 4;
     player.steel += 4;
     return player.game.increaseTemperature(player, 1);

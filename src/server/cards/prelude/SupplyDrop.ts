@@ -19,7 +19,7 @@ export class SupplyDrop extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.titanium +=3;
     player.steel +=8;
     player.plants +=3;

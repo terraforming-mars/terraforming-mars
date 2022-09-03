@@ -37,7 +37,7 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
     return [this.cloneTag, this.cloneTag];
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(2);
 
     player.game.defer(new DeclareCloneTag(player, this));

@@ -28,7 +28,7 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.MEGACREDITS, 10, {log: true});
     const turmoil = Turmoil.getTurmoil(player.game);
     const globalEvents: IGlobalEvent[] = [];

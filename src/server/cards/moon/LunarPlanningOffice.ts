@@ -22,7 +22,7 @@ export class LunarPlanningOffice extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel += 6;
     player.game.defer(DrawCards.keepAll(player, 2, {tag: Tag.MOON}));
     return undefined;

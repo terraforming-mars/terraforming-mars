@@ -21,10 +21,10 @@ export class HugeAsteroid extends PreludeCard {
       },
     });
   }
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.canAfford(5);
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 3);
     player.game.defer(new SelectPaymentDeferred(player, 5));
     return undefined;

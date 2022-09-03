@@ -26,8 +26,7 @@ export class CoreMine extends PreludeCard implements IProjectCard {
 
   public tilesBuilt = [TileType.MOON_MINE];
 
-  public play(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonMineTile(player));
     return undefined;
   }

@@ -22,7 +22,7 @@ export class ResearchGrant extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.megaCredits += 8;
     return undefined;
   }

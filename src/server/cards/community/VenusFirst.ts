@@ -21,7 +21,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseVenusScaleLevel(player, 2);
     player.drawCard(2, {tag: Tag.VENUS});
     return undefined;

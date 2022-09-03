@@ -20,7 +20,7 @@ export class UNMIContractor extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(3);
     player.drawCard();
     return undefined;

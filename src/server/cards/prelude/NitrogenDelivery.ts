@@ -1,7 +1,6 @@
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -10,6 +9,7 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
     super({
       name: CardName.NITROGEN_SHIPMENT,
       startingMegacredits: 5,
+      productionBox: {plants: 1},
 
 
       metadata: {
@@ -22,10 +22,9 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.megaCredits += 5;
     player.increaseTerraformRating();
-    player.production.add(Resources.PLANTS, 1);
     return undefined;
   }
 }

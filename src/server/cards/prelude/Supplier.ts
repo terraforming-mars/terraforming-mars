@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -10,6 +9,7 @@ export class Supplier extends PreludeCard {
     super({
       name: CardName.SUPPLIER,
       tags: [Tag.ENERGY],
+      productionBox: {energy: 2},
 
       metadata: {
         cardNumber: 'P32',
@@ -22,8 +22,7 @@ export class Supplier extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
-    player.production.add(Resources.ENERGY, 2);
+  public override bespokePlay(player: Player) {
     player.steel +=4;
     return undefined;
   }

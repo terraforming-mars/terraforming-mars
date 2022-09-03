@@ -19,7 +19,7 @@ export class AcquiredSpaceAgency extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.titanium += 6;
     player.drawCard(2, {tag: Tag.SPACE});
     return undefined;

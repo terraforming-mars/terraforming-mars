@@ -21,11 +21,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public override canPlay() {
-    return true;
-  }
-
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     Turmoil.ifTurmoil((player.game), (turmoil) => {
       turmoil.addInfluenceBonus(player);
       turmoil.chooseRulingParty(player);

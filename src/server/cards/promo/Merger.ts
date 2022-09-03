@@ -29,7 +29,7 @@ export class Merger extends PreludeCard {
 
   public static readonly mergerCost = 42;
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     const dealtCorps = Merger.dealCorporations(player, game.dealer);
     const availableCorps = dealtCorps.filter((corp) => {

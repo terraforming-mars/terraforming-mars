@@ -22,7 +22,7 @@ export class StrategicBasePlanning extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.deductResource(Resources.MEGACREDITS, 8);
     player.game.defer(new PlaceCityTile(player));
     player.game.defer(new BuildColony(player));

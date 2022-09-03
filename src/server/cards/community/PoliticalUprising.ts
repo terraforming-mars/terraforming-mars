@@ -23,7 +23,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.drawTurmoilCard(player);
 
     for (let i = 0; i < 4; i++) {

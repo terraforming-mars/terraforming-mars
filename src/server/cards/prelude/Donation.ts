@@ -19,7 +19,7 @@ export class Donation extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.megaCredits += 21;
     return undefined;
   }

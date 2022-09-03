@@ -32,7 +32,11 @@ export class MiningComplex extends PreludeCard {
 
   public tilesBuilt = [TileType.MOON_MINE, TileType.MOON_ROAD];
 
-  public play(player: Player) {
+  public override bespokeCanPlay(player: Player) {
+    return player.canAfford(7);
+  }
+
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonMineTile(player)
       .andThen((space) => {
         const moon = MoonExpansion.moonData(player.game).moon;

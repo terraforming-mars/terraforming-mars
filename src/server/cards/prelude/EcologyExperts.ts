@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../../common/Resources';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -11,6 +10,7 @@ export class EcologyExperts extends PreludeCard {
     super({
       name: CardName.ECOLOGY_EXPERTS,
       tags: [Tag.PLANT, Tag.MICROBE],
+      productionBox: {plants: 1},
 
       metadata: {
         cardNumber: 'P10',
@@ -29,8 +29,7 @@ export class EcologyExperts extends PreludeCard {
     }
     return 0;
   }
-  public play(player: Player) {
-    player.production.add(Resources.PLANTS, 1);
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlayProjectCard(player));
     return undefined;
   }

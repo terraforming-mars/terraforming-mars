@@ -20,7 +20,7 @@ export class VitalColony extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(
       new BuildColony(player, {giveBonusTwice: true}));
     return undefined;

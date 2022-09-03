@@ -8,6 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('FreyjaBiodomes', function() {
   let card: FreyjaBiodomes;
@@ -52,8 +53,7 @@ describe('FreyjaBiodomes', function() {
     player.production.add(Resources.ENERGY, 1);
     player.playedCards.push(card2, card3);
 
-    const action = card.play(player) as SelectCard<ICard>;
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<ICard>);
 
     action.cb([card2]);
     expect(player.production.energy).to.eq(0);

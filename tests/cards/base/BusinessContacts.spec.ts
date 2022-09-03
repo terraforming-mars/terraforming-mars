@@ -1,8 +1,8 @@
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {BusinessContacts} from '../../../src/server/cards/base/BusinessContacts';
 import {Game} from '../../../src/server/Game';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 

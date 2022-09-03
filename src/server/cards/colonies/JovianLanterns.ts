@@ -40,7 +40,7 @@ export class JovianLanterns extends Card2 implements IProjectCard {
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public canAct(player: Player): boolean {
     return player.titanium > 0;

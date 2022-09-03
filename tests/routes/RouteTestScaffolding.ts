@@ -29,11 +29,11 @@ export class RouteTestScaffolding {
     this.ctx.url = new URL('http://boo.com' + headlessUri);
   }
 
-  public async get(handler: Handler, res: MockResponse): Promise<void> {
+  public get(handler: Handler, res: MockResponse): Promise<void> {
     return handler.get(this.req, res.hide(), this.ctx);
   }
 
-  public async post(handler: Handler, res: MockResponse) {
+  public post(handler: Handler, res: MockResponse) {
     return handler.post(this.req, res.hide(), this.ctx);
   }
 }

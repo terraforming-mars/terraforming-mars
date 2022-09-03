@@ -4,10 +4,8 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {RobotCard} from '../promo/SelfReplicatingRobots';
 
 export class CEOsFavoriteProject extends Card2 implements IProjectCard {
   constructor() {
@@ -22,26 +20,21 @@ export class CEOsFavoriteProject extends Card2 implements IProjectCard {
       },
     });
   }
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.getCardsWithResources().length > 0 ||
-           player.getSelfReplicatingRobotsTargetCards().length > 0;
+  public override canPlay(player: Player): boolean {
+    return player.getCardsWithResources().length > 0;
   }
 
   public override bespokePlay(player: Player) {
-    const robotCards = player.getSelfReplicatingRobotsTargetCards();
+    const cards = player.getCardsWithResources();
     return new SelectCard(
       'Select card to add resource',
       'Add resource',
-      player.getCardsWithResources().concat(robotCards.map((c) => c.card)),
+      cards,
       ([card]) => {
-        // if the user selected a robot card, handle it here:
-        const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === card.name);
-        if (robotCard) {
-          robotCard.resourceCount++;
-          LogHelper.logAddResource(player, robotCard.card);
-        } else {
-          player.addResourceTo(card, {log: true});
+        if (!cards.includes(card)) {
+          throw new Error('Invalid card selection');
         }
+        player.addResourceTo(card, {log: true});
         return undefined;
       },
     );

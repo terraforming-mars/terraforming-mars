@@ -40,7 +40,7 @@ export class SpacePortColony extends Card2 implements IProjectCard {
   }
 
   public override getVictoryPoints(player: Player) {
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });

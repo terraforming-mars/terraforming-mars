@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {NanotechIndustries} from '../../../src/server/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
@@ -36,10 +36,9 @@ describe('NanotechIndustries', () => {
     player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
     nanotechIndustries.action(player);
 
-    const action: SelectCard<IProjectCard> =
-      player.game.deferredActions.pop()?.execute() as SelectCard<IProjectCard>;
+    const action = cast(player.game.deferredActions.pop()?.execute(), SelectCard<IProjectCard>);
 
-    expect(action!.cards).has.members([nanotechIndustries, olympusConference, prideoftheEarthArkship]);
+    expect(action.cards).has.members([nanotechIndustries, olympusConference, prideoftheEarthArkship]);
 
     olympusConference.resourceCount = 0;
     action.cb([olympusConference]);

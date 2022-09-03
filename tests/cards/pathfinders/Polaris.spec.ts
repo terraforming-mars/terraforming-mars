@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
 import {Game} from '../../../src/server/Game';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -24,12 +24,8 @@ describe('Polaris', function() {
   it('initial action', function() {
     card.initialAction(player);
     runAllActions(game);
-    const input = player.getWaitingFor();
-
-    expect(input).instanceOf(SelectSpace);
-
+    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     const space = game.board.getSpace('06');
-    const selectSpace = input as SelectSpace;
 
     expect(selectSpace.availableSpaces).includes(space);
 

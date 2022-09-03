@@ -33,7 +33,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse} from '@/common/inputs/InputResponse';
-import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
+import {PlayerInputType} from '@/common/input/PlayerInputType';
 
 let unique = 0;
 
@@ -70,7 +70,7 @@ export default Vue.extend({
     // Special case: If the first displayed option is SelectCard, and none of them are enabled, skip it.
     let selectedOption = displayedOptions[0];
     if (displayedOptions.length > 1 &&
-      selectedOption.inputType === PlayerInputTypes.SELECT_CARD &&
+      selectedOption.inputType === PlayerInputType.SELECT_CARD &&
       !selectedOption.cards?.some((card) => card.isDisabled === false)) {
       selectedOption = displayedOptions[1];
     }
@@ -88,8 +88,8 @@ export default Vue.extend({
       }
       return (out: InputResponse) => {
         const copy = [[String(idx)]];
-        for (let i = 0; i < out.length; i++) {
-          copy.push(out[i].slice());
+        for (const row of out) {
+          copy.push(row.slice());
         }
         this.onsave(copy);
       };

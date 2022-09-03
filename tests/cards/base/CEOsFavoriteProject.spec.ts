@@ -11,6 +11,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
+import {ICard} from '../../../src/server/cards/ICard';
 
 describe('CEOsFavoriteProject', function() {
   let card: CEOsFavoriteProject;
@@ -39,7 +40,7 @@ describe('CEOsFavoriteProject', function() {
     player.addResourceTo(searchForLife);
     player.addResourceTo(birds);
 
-    const action = cast(card.play(player), SelectCard<IProjectCard>);
+    const action = cast(card.play(player), SelectCard<ICard>);
 
     action.cb([searchForLife]);
     expect(searchForLife.resourceCount).to.eq(2);
@@ -51,10 +52,12 @@ describe('CEOsFavoriteProject', function() {
     expect(securityFleet.resourceCount).to.eq(2);
   });
 
-  it('Can play on SelfReplicatingRobots cards', function() {
+  it('Cannot play on SelfReplicatingRobots cards', function() {
     const srr = new SelfReplicatingRobots();
     const birds = new Birds();
-    player.playedCards.push(srr);
+    const securityFleet = new SecurityFleet();
+    securityFleet.resourceCount++;
+    player.playedCards.push(srr, securityFleet);
     srr.targetCards.push({card: birds, resourceCount: 0});
     const action = cast(card.play(player), SelectCard<IProjectCard>);
     action.cb([birds]);

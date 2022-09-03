@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
 import {ICard} from '../../../src/server/cards/ICard';
 import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
@@ -27,8 +28,7 @@ describe('HydrogenToVenus', function() {
     const card4 = new Dirigibles();
     player.playedCards.push(card2, card3, card4);
 
-    const action = card.play(player) as SelectCard<ICard>;
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<ICard>);
     action.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
@@ -40,9 +40,9 @@ describe('HydrogenToVenus', function() {
     const card3 = new ColonizerTrainingCamp();
     player.playedCards.push(card2, card3);
 
-        card.play(player) as SelectCard<ICard>;
-        expect(card2.resourceCount).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    expect(card.play(player)).is.undefined;
+    expect(card2.resourceCount).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
   it('Should play with no venus cards', function() {

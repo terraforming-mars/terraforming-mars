@@ -30,10 +30,7 @@ export class Plantation extends Card2 implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: Player): boolean {
-    if (player.game.board.getAvailableSpacesOnLand(player).length === 0) {
-      return false;
-    }
-    return true;
+    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 
   public override bespokePlay(player: Player) {

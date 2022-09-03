@@ -62,7 +62,7 @@ describe('TitanFloatingLaunchPad', function() {
 
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([card]);
     expect(card.resourceCount).to.eq(1);
   });
@@ -79,14 +79,14 @@ describe('TitanFloatingLaunchPad', function() {
 
     orOptions.options[1].cb(); // Add resource
     expect(game.deferredActions).has.lengthOf(1);
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     game.deferredActions.pop();
     selectCard.cb([card]);
     expect(card.resourceCount).to.eq(8);
 
     orOptions.options[0].cb(); // Trade for free
     expect(game.deferredActions).has.lengthOf(1);
-    const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
+    const selectColony = cast(game.deferredActions.peek()!.execute(), SelectColony);
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
     expect(player.megaCredits).to.eq(2);
@@ -116,7 +116,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(floaterOption.title).to.match(/Pay 1 Floater/);
 
     floaterOption.cb();
-    (tradeAction as AndOptions).options[1].cb(luna);
+    tradeAction.options[1].cb(luna);
 
     expect(card.resourceCount).eq(0);
     expect(player.megaCredits).eq(2);

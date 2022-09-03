@@ -85,7 +85,7 @@ describe('Philares', () => {
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     const action = game.deferredActions.pop();
-    const options = action?.execute() as AndOptions;
+    const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
     expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
     options.options[0].cb(1);
@@ -97,7 +97,7 @@ describe('Philares', () => {
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     const action = game.deferredActions.pop();
-    const options = action?.execute() as AndOptions;
+    const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
     expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
     options.options[0].cb(1);
@@ -112,7 +112,7 @@ describe('Philares', () => {
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
     const action = game.deferredActions.pop();
-    const options = action?.execute() as AndOptions;
+    const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
     expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
     options.options[0].cb(1);
@@ -128,7 +128,7 @@ describe('Philares', () => {
     game.addTile(otherPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
     const action = game.deferredActions.pop();
-    const options = action?.execute() as AndOptions;
+    const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
     expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
     options.options[0].cb(1);
@@ -142,7 +142,7 @@ describe('Philares', () => {
     game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     const action = game.deferredActions.pop();
-    const options = action?.execute() as AndOptions;
+    const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
     expect(philaresPlayer.purse()).deep.eq(Units.EMPTY);
     options.options[0].cb(1);
@@ -184,13 +184,12 @@ describe('Philares', () => {
 
     // Philares player gains plant and can subsequently place a greenery
     philaresPlayer.takeActionForFinalGreenery();
-    const philaresPlayerResourceSelection = philaresPlayer.getWaitingFor() as AndOptions;
+    const philaresPlayerResourceSelection = cast(philaresPlayer.getWaitingFor(), AndOptions);
     // Option 3 is plants.
     philaresPlayerResourceSelection.options[3].cb(1);
     philaresPlayerResourceSelection.cb();
     expect(philaresPlayer.plants).to.eq(8);
-    (philaresPlayer as any).waitingFor = undefined;
-    (philaresPlayer as any).waitingForCb = undefined;
+    philaresPlayer.popWaitingFor();
     game.gotoFinalGreeneryPlacement();
     const finalGreeneryPlacement = cast(philaresPlayer.getWaitingFor(), OrOptions);
     expect(game.phase).eq(Phase.RESEARCH);

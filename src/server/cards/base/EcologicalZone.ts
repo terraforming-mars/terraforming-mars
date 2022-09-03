@@ -19,8 +19,8 @@ import {Board} from '../../boards/Board';
 
 export class EcologicalZone extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.ECOLOGICAL_ZONE,
-    cost: number = 12,
+    name = CardName.ECOLOGICAL_ZONE,
+    cost = 12,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata: ICardMetadata = {
       description: {
@@ -50,7 +50,7 @@ export class EcologicalZone extends Card2 implements IProjectCard {
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)

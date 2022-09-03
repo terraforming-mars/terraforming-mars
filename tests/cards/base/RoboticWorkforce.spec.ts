@@ -26,9 +26,8 @@ import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
-import {CardType} from '../../../src/common/cards/CardType';
-import {ICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {isICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
+import {isIProjectCard} from '../../../src/server/cards/IProjectCard';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
@@ -243,10 +242,10 @@ describe('RoboticWorkforce', () => {
           game.moonData!.moon.spaces[4].player = player;
         }
 
-        if (card.cardType === CardType.CORPORATION) {
-          (game as any).playCorporationCard(player, card as ICorporationCard);
-        } else {
-          player.playCard(card as IProjectCard);
+        if (isICorporationCard(card)) {
+          player.playCorporationCard(card);
+        } else if (isIProjectCard(card)) {
+          player.playCard(card);
         }
 
         // SelectSpace will trigger production changes in the right cards (e.g. Mining Rights)

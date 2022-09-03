@@ -38,7 +38,7 @@ export class NitriteReducingBacteria extends Card2 implements IActionCard, IProj
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public override bespokePlay(player: Player) {
     player.game.defer(new SimpleDeferredAction(

@@ -1,12 +1,12 @@
 
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectAmount implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_AMOUNT;
+  public readonly inputType = PlayerInputType.SELECT_AMOUNT;
   constructor(
         public title: string | Message,
         public buttonLabel: string = 'Save',

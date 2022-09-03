@@ -36,7 +36,7 @@ export class AtmoCollectors extends Card2 implements IProjectCard {
     });
   }
 
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public canAct(): boolean {
     return true;

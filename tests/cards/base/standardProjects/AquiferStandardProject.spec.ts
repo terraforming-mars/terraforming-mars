@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {maxOutOceans, setCustomGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
@@ -36,7 +37,7 @@ describe('AquiferStandardProject', function() {
     card.action(player);
     runAllActions(game);
 
-    const selectSpace = player.getWaitingFor() as SelectSpace;
+    const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     const availableSpace = selectSpace.availableSpaces[0];
 
     expect(availableSpace.spaceType).eq(SpaceType.OCEAN);

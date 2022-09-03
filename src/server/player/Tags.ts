@@ -148,7 +148,7 @@ export class Tags {
 
   // Counts the number of distinct tags
   public distinctCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
-    let wildTagCount: number = 0;
+    let wildTagCount = 0;
     const uniqueTags = new Set<Tag>();
     const addTag = (tag: Tag) => {
       if (tag === Tag.WILD) {

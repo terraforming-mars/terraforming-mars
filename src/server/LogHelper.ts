@@ -39,9 +39,9 @@ export class LogHelper {
     // Skip solo play random tiles
     if (player.name === 'neutral') return;
 
-    const offset: number = Math.abs(space.y - 4);
-    const row: number = space.y + 1;
-    const position: number = space.x - offset + 1;
+    const offset = Math.abs(space.y - 4);
+    const row = space.y + 1;
+    const position = space.x - offset + 1;
 
     player.game.log('${0} ${1} ${2} on row ${3} position ${4}', (b) =>
       b.player(player).string(action).string(description).number(row).number(position));
@@ -58,7 +58,7 @@ export class LogHelper {
   }
 
   static logVenusIncrease(player: Player, steps: number) {
-    player.game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
+    player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
   static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {

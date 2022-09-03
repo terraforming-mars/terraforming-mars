@@ -34,7 +34,7 @@ export class AncientShipyards extends Card2 {
       },
     });
   }
-  public override resourceCount: number = 0;
+  public override resourceCount = 0;
 
   public canAct(): boolean {
     return true;

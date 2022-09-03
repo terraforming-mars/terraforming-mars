@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 
 export class RestrictedArea extends Card2 implements IActionCard, IProjectCard {
   constructor(
-    name: CardName = CardName.RESTRICTED_AREA,
+    name = CardName.RESTRICTED_AREA,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata = {
       cardNumber: '199',

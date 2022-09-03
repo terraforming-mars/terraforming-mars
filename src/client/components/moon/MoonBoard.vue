@@ -138,7 +138,7 @@ export default Vue.extend({
       }
 
       const values: Array<MoonParamLevel> = [];
-      for (let value: number = 8; value >= 0; value -= 1) {
+      for (let value = 8; value >= 0; value -= 1) {
         const strValue = value.toString();
         values.push(
           new MoonParamLevel(value, value === curValue, strValue),

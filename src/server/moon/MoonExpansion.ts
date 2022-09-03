@@ -16,11 +16,6 @@ import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 
-// export interface CoOwnedSpace {
-//   spaceId: string;
-//   coOwner: PlayerId;
-// }
-
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
     TileType.MOON_MINE,
@@ -138,8 +133,8 @@ export class MoonExpansion {
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
       const offsets = [-1, 0, 1, 1, 1, 0, -1];
-      const row: number = space.y + 1;
-      const position: number = space.x + offsets[space.y];
+      const row = space.y + 1;
+      const position = space.x + offsets[space.y];
 
       player.game.log('${0} placed a ${1} tile on the Moon at (${2}, ${3})', (b) =>
         b.player(player).string(TileType.toString(tileType)).number(row).number(position));
@@ -292,7 +287,7 @@ export class MoonExpansion {
           if (space.tile === undefined) {
             return false;
           }
-          let include: boolean = true;
+          let include = true;
           if (tileType) {
             include = MoonExpansion.spaceHasType(space, tileType);
           }

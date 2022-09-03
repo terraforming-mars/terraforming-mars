@@ -17,7 +17,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 
 export class Capital extends Card2 implements IProjectCard {
   constructor(
-    name: CardName = CardName.CAPITAL,
+    name = CardName.CAPITAL,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata: ICardMetadata = {
       cardNumber: '008',

@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
+import {cast, setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonColonyStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
 import {expect} from 'chai';
@@ -44,12 +44,12 @@ describe('MoonColonyStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    let payAction = game.deferredActions.pop() as SelectPaymentDeferred;
+    let payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     expect(payAction.amount).eq(22);
 
     player.playedCards.push(new MooncrateBlockFactory());
     card.action(player);
-    payAction = game.deferredActions.pop() as SelectPaymentDeferred;
+    payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     expect(payAction.amount).eq(18);
   });
 
@@ -59,7 +59,7 @@ describe('MoonColonyStandardProject', () => {
     expect(player.production.megacredits).eq(0);
 
     card.action(player);
-    const payAction = game.deferredActions.pop() as SelectPaymentDeferred;
+    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     payAction.options.afterPay!();
 
     expect(player.titanium).eq(2);
@@ -67,8 +67,8 @@ describe('MoonColonyStandardProject', () => {
 
     expect(moonData.colonyRate).eq(0);
 
-    const placeTileAction = game.deferredActions.peek() as PlaceMoonColonyTile;
-    placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonColonyTile);
+    placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);

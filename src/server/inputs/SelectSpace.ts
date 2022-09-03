@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {ISpace} from '../boards/ISpace';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectSpace implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_SPACE;
+  public readonly inputType = PlayerInputType.SELECT_SPACE;
   public buttonLabel: string = 'Save'; // not used (for now)
   constructor(
         public title: string | Message,

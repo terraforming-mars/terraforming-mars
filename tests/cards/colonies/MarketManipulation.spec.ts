@@ -12,6 +12,7 @@ import {Callisto} from '../../../src/server/colonies/Callisto';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
+import {cast} from '../../TestingUtils';
 
 describe('MarketManipulation', function() {
   let card: MarketManipulation;
@@ -34,13 +35,13 @@ describe('MarketManipulation', function() {
 
   it('Should play', function() {
     card.play(player);
-    const increaseColonyAction = game.deferredActions.pop()!.execute() as SelectColony;
+    const increaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
     increaseColonyAction.cb(increaseColonyAction.colonies[0]);
     expect(game.colonies[0].trackPosition).to.eq(2);
     expect(game.colonies[1].trackPosition).to.eq(1);
     expect(game.colonies[2].trackPosition).to.eq(1);
 
-    const decreaseColonyAction = game.deferredActions.pop()!.execute() as SelectColony;
+    const decreaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
     decreaseColonyAction.cb(increaseColonyAction.colonies[1]);
     expect(game.colonies[0].trackPosition).to.eq(2);
     expect(game.colonies[1].trackPosition).to.eq(0);
@@ -58,7 +59,7 @@ describe('MarketManipulation', function() {
     player.game.colonies = [pluto, callisto, europa];
     player.game.gameOptions.coloniesExtension = true;
     card.play(player);
-    const increaseColonyAction = game.deferredActions.pop()!.execute() as SelectColony;
+    const increaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
     expect(increaseColonyAction.colonies.length).to.eq(2);
 
     increaseColonyAction.cb(increaseColonyAction.colonies[0]);
@@ -66,7 +67,7 @@ describe('MarketManipulation', function() {
     expect(game.colonies[1].trackPosition).to.eq(0);
     expect(game.colonies[2].trackPosition).to.eq(1);
 
-    const decreaseColonyAction = game.deferredActions.pop()!.execute() as SelectColony;
+    const decreaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
     expect(decreaseColonyAction.colonies.length).to.eq(1);
     decreaseColonyAction.cb(decreaseColonyAction.colonies[0]);
     expect(game.colonies[0].trackPosition).to.eq(1);

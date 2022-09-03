@@ -1,9 +1,9 @@
 import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class DomeFarming extends PreludeCard {
+export class DomeFarming extends PreludeCard2 {
   public migrated = true;
   constructor() {
     super({

@@ -1,4 +1,6 @@
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
@@ -39,10 +41,9 @@ describe('SymbioticFungus', function() {
 
   it('Should act - multiple targets', function() {
     player.playedCards.push(new Ants(), new Decomposers());
-    const action = card.action(player);
-    expect(action).is.not.undefined;
+    const action = cast(card.action(player), SelectCard);
 
-        action!.cb([player.playedCards[0]]);
-        expect(player.playedCards[0].resourceCount).to.eq(1);
+    action.cb([player.playedCards[0]]);
+    expect(player.playedCards[0].resourceCount).to.eq(1);
   });
 });

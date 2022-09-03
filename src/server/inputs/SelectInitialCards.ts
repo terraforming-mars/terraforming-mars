@@ -4,11 +4,11 @@ import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {SelectCard} from './SelectCard';
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
-  public override inputType = PlayerInputTypes.SELECT_INITIAL_CARDS;
+  public override inputType = PlayerInputType.SELECT_INITIAL_CARDS;
   constructor(player: Player, cb: (corporation: ICorporationCard) => undefined) {
     super(() => {
       cb(corporation);

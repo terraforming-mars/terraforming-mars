@@ -5,6 +5,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('MagneticFieldGeneratorsPromo', function() {
   let card: MagneticFieldGeneratorsPromo;
@@ -26,8 +27,7 @@ describe('MagneticFieldGeneratorsPromo', function() {
     player.production.add(Resources.ENERGY, 4);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectSpace);
+    cast(card.play(player), SelectSpace);
     expect(player.production.energy).to.eq(0);
     expect(player.production.plants).to.eq(2);
     expect(player.getTerraformRating()).to.eq(23);

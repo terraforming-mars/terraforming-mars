@@ -1,6 +1,6 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {IColony} from '../colonies/IColony';
 import {InputResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
@@ -8,7 +8,7 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColoniesHandler} from '../colonies/ColoniesHandler';
 
 export class SelectColony implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_COLONY;
+  public readonly inputType = PlayerInputType.SELECT_COLONY;
 
   constructor(
         public title: string | Message,

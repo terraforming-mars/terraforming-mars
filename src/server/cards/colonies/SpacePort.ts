@@ -35,7 +35,7 @@ export class SpacePort extends Card2 implements IProjectCard {
 
   public override bespokeCanPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
     });

@@ -6,6 +6,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('BioPrintingFacility', function() {
   let card: BioPrintingFacility;
@@ -41,14 +42,13 @@ describe('BioPrintingFacility', function() {
     player.playedCards.push(smallanimals);
     player.energy = 2;
 
-    const action = card.action(player);
-    expect(action).instanceOf(OrOptions);
-    expect(action!.options).has.lengthOf(2);
+    const action = cast(card.action(player), OrOptions);
+    expect(action.options).has.lengthOf(2);
 
-    action!.options[0].cb();
+    action.options[0].cb();
     expect(smallanimals.resourceCount).to.eq(1);
 
-    action!.options[1].cb();
+    action.options[1].cb();
     expect(player.plants).to.eq(2);
   });
 
@@ -58,14 +58,13 @@ describe('BioPrintingFacility', function() {
     player.playedCards.push(smallanimals, fish);
     player.energy = 2;
 
-    const action = card.action(player);
-    expect(action).instanceOf(OrOptions);
-    expect(action!.options).has.lengthOf(2);
+    const action = cast(card.action(player), OrOptions);
+    expect(action.options).has.lengthOf(2);
 
-    action!.options[0].cb([smallanimals]);
+    action.options[0].cb([smallanimals]);
     expect(smallanimals.resourceCount).to.eq(1);
 
-    action!.options[0].cb([fish]);
+    action.options[0].cb([fish]);
     expect(fish.resourceCount).to.eq(1);
   });
 });

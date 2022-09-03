@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CoreMine} from '../../../src/server/cards/moon/CoreMine';
 import {expect} from 'chai';
@@ -30,8 +30,8 @@ describe('CoreMine', () => {
 
     card.play(player);
     expect(player.production.titanium).eq(1);
-    const placeTileAction = game.deferredActions.peek() as PlaceMoonMineTile;
-    placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonMineTile);
+    placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);

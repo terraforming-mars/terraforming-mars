@@ -67,7 +67,7 @@ export class LunaEcumenopolis extends MoonCard {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     const len = spaces.length;
 
-    let firstSpaceId: string = '';
+    let firstSpaceId = '';
 
     // This function returns true when this space is next to two colonies. Don't try to understand firstSpaceId yet.
     const nextToTwoColonies = function(space: ISpace): boolean {

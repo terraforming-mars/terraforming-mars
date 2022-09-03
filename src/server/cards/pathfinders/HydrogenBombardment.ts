@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
-import {PreludeCard} from '../prelude/PreludeCard';
+import {PreludeCard2} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 
-export class HydrogenBombardment extends PreludeCard {
+export class HydrogenBombardment extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,

@@ -18,7 +18,7 @@ export class PrivateSecurity extends Card implements IProjectCard {
         cardNumber: 'Pf25',
         renderData: CardRenderer.builder((b) => {
           b.text('Opponents may not remove your basic resource production', Size.SMALL, true).br;
-          b.production((pb) => pb.wild(1)).text('NO'); // TODO(kberg): Remove NO.
+          b.production((pb) => pb.wild(1, {cancelled: true}));
         }),
       },
     });

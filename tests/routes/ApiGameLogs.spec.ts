@@ -4,6 +4,10 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {Phase} from '../../src/common/Phase';
+import {use} from 'chai';
+import chaiAsPromised = require('chai-as-promised');
+use(chaiAsPromised);
 
 describe('ApiGameLogs', function() {
   let scaffolding: RouteTestScaffolding;
@@ -107,5 +111,24 @@ describe('ApiGameLogs', function() {
       expect(messages[0].message).eq('All players see this.');
       expect(messages[1].message).eq(`${entry.color} player sees this.`);
     });
+  });
+
+  it('Cannot pull full logs before game end', async () => {
+    const player = TestPlayer.BLACK.newPlayer();
+    scaffolding.url = '/api/game/logs?id=' + player.id + '&full';
+    const game = Game.newInstance('game-id', [player], player);
+    await scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    expect(res.content).eq('Bad request: cannot fetch game-end log');
+  });
+
+  it('Pulls full logs at game end', async () => {
+    const player = TestPlayer.BLACK.newPlayer();
+    scaffolding.url = '/api/game/logs?id=' + player.id + '&full';
+    const game = Game.newInstance('game-id', [player], player);
+    game.phase = Phase.END;
+    await scaffolding.ctx.gameLoader.add(game);
+    await scaffolding.get(ApiGameLogs.INSTANCE, res);
+    expect(res.content).to.match(/^Drew and discarded/);
   });
 });

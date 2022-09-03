@@ -8,6 +8,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
+import {cast} from '../../TestingUtils';
 
 describe('ReturntoAbandonedTechnology', function() {
   let card: ReturntoAbandonedTechnology;
@@ -24,10 +25,8 @@ describe('ReturntoAbandonedTechnology', function() {
   it('play when discard pile is empty', function() {
     game.dealer.discarded = [];
 
-    const action = card.play(player);
-
-    expect(action).instanceof(SelectCard);
-    expect((action as SelectCard<any>).cards).is.empty;
+    const action = cast(card.play(player), SelectCard);
+    expect(action.cards).is.empty;
   });
 
   it('play when discard pile has 1 card', function() {
@@ -35,10 +34,9 @@ describe('ReturntoAbandonedTechnology', function() {
     game.dealer.discarded = [];
     game.dealer.discard(ants);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectCard);
 
-    expect(action).instanceof(SelectCard);
-    expect((action as SelectCard<any>).cards).deep.eq([ants]);
+    expect(action.cards).deep.eq([ants]);
     expect(game.dealer.discarded).is.empty;
   });
 
@@ -56,10 +54,9 @@ describe('ReturntoAbandonedTechnology', function() {
     game.dealer.discard(decomposers);
     game.dealer.discard(earthOffice);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectCard);
 
-    expect(action).instanceof(SelectCard);
-    expect((action as SelectCard<any>).cards).to.have.members([birds, capital, decomposers, earthOffice]);
+    expect(action.cards).to.have.members([birds, capital, decomposers, earthOffice]);
     expect(game.dealer.discarded).deep.eq([ants]);
   });
 });

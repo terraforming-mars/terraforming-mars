@@ -2,8 +2,8 @@ import * as http from 'http';
 
 export class MockResponse {
   public headers: Map<string, string> = new Map();
-  public content: string = '';
-  public statusCode: number = 200;
+  public content = '';
+  public statusCode = 200;
 
   public setHeader(key: string, value: string) {
     this.headers.set(key, value);

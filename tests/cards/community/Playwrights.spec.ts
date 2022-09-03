@@ -11,7 +11,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('Playwrights', () => {
   let card: Playwrights;
@@ -46,7 +46,7 @@ describe('Playwrights', () => {
     player.megaCredits = event.cost;
     expect(card.canAct(player)).is.true;
 
-    const selectCard = card.action(player) as SelectCard<IProjectCard>;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectPayment
@@ -66,7 +66,7 @@ describe('Playwrights', () => {
 
     player.megaCredits = event.cost;
     expect(card.canAct(player)).is.true;
-    const selectCard = card.action(player) as SelectCard<IProjectCard>;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectPayment
@@ -91,7 +91,7 @@ describe('Playwrights', () => {
     const indenturedWorkers = new IndenturedWorkers();
     player.playedCards.push(indenturedWorkers);
 
-    const selectCard = card.action(player) as SelectCard<IProjectCard>;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     selectCard.cb([indenturedWorkers]);
     // SelectPayment
     game.deferredActions.pop()!.execute();
@@ -111,11 +111,11 @@ describe('Playwrights', () => {
     player.removingPlayers = [player2.id];
     expect(card.canAct(player)).is.true;
 
-    const selectCard = card.action(player) as SelectCard<IProjectCard>;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectPayment
-    const selectPlayer = game.deferredActions.pop()!.execute() as SelectPlayer;
+    const selectPlayer = cast(game.deferredActions.pop()!.execute(), SelectPlayer);
     selectPlayer.cb(player2);
 
     runAllActions(player.game);

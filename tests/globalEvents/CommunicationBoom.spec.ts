@@ -50,11 +50,8 @@ describe('CommunicationBoom', function() {
     expect(e.resourceCount).eq(2);
     expect(f.resourceCount).eq(2);
 
-    (player as any).waitingFor = undefined;
-    (player as any).waitingForCb = undefined;
-
-    (player2 as any).waitingFor = undefined;
-    (player2 as any).waitingForCb = undefined;
+    player.popWaitingFor();
+    player2.popWaitingFor();
 
     runAllActions(game);
 

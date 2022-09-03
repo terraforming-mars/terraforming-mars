@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AquiferTurbines extends PreludeCard {
+export class AquiferTurbines extends PreludeCard2 {
   constructor() {
     super({
       name: CardName.AQUIFER_TURBINES,

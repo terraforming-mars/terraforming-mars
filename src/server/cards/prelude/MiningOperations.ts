@@ -1,11 +1,11 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {PreludeCard} from './PreludeCard';
+import {PreludeCard2} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class MiningOperations extends PreludeCard implements IProjectCard {
+export class MiningOperations extends PreludeCard2 implements IProjectCard {
   constructor() {
     super({
       name: CardName.MINING_OPERATIONS,

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -26,8 +27,7 @@ describe('BactoviralResearch', function() {
     const card4 = new Tardigrades();
     player.playedCards.push(card2, card3, card4);
 
-    const action = card.play(player) as SelectCard<ICard>;
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.play(player), SelectCard<ICard>);
     action.cb([card3]);
     expect(card3.resourceCount).to.eq(4);
     expect(player.cardsInHand.length).to.eq(1);
@@ -36,7 +36,7 @@ describe('BactoviralResearch', function() {
   it('Should play with single microbe card', function() {
     const card2 = new RegolithEaters();
     player.playedCards.push(card2);
-    card.play(player) as SelectCard<ICard>;
+    expect(card.play(player)).is.undefined;
     expect(card2.resourceCount).to.eq(2);
     expect(player.cardsInHand.length).to.eq(1);
   });

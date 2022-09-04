@@ -5,12 +5,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class ColonistShuttles extends Card2 {
+export class ColonistShuttles extends Card {
   constructor() {
     super({
       name: CardName.COLONIST_SHUTTLES,

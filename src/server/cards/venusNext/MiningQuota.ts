@@ -3,10 +3,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class MiningQuota extends Card2 implements IProjectCard {
+export class MiningQuota extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MINING_QUOTA,

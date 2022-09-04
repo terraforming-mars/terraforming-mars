@@ -4,9 +4,9 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class SubterraneanHabitats extends Card2 implements IProjectCard {
+export class SubterraneanHabitats extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SUBTERRANEAN_HABITATS,

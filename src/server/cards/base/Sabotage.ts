@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all, digit} from '../Options';
 
-export class Sabotage extends Card2 implements IProjectCard {
+export class Sabotage extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

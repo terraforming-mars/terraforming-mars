@@ -7,11 +7,11 @@ import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 // TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
-export class ThoriumRush extends Card2 implements IProjectCard {
+export class ThoriumRush extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.THORIUM_RUSH,

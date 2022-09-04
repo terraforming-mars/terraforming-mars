@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
@@ -12,7 +12,7 @@ import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class CommercialDistrict extends Card2 implements IProjectCard {
+export class CommercialDistrict extends Card implements IProjectCard {
   constructor(
     name = CardName.COMMERCIAL_DISTRICT,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,

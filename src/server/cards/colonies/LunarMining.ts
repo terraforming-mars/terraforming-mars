@@ -4,11 +4,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class LunarMining extends Card2 implements IProjectCard {
+export class LunarMining extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 11,

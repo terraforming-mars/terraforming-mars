@@ -6,10 +6,10 @@ import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class LunarObservationPost extends Card2 implements IActionCard {
+export class LunarObservationPost extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNAR_OBSERVATION_POST,

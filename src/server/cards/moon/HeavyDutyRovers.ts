@@ -6,11 +6,11 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class HeavyDutyRovers extends Card2 implements IProjectCard {
+export class HeavyDutyRovers extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

@@ -1,13 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class MiningExpedition extends Card2 implements IProjectCard {
+export class MiningExpedition extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

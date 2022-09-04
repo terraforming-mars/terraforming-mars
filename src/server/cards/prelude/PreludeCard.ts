@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
@@ -19,7 +19,7 @@ interface StaticPreludeProperties {
     behavior?: Partial<Behavior>,
 }
 
-export abstract class PreludeCard extends Card2 implements IProjectCard {
+export abstract class PreludeCard extends Card implements IProjectCard {
   constructor(properties: StaticPreludeProperties) {
     super({
       behavior: properties.behavior,

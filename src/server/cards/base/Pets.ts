@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -14,7 +14,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class Pets extends Card2 implements IProjectCard {
+export class Pets extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

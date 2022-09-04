@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -11,7 +11,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class OceanFarm extends Card2 implements IProjectCard {
+export class OceanFarm extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

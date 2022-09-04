@@ -6,10 +6,10 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {ICard} from '../ICard';
 
-export class TheArchaicFoundationInstitute extends Card2 implements ICorporationCard {
+export class TheArchaicFoundationInstitute extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

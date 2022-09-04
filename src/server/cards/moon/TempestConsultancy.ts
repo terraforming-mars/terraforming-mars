@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -9,7 +9,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class TempestConsultancy extends Card2 implements ICorporationCard {
+export class TempestConsultancy extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

@@ -2,10 +2,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EarthElevator extends Card2 implements IProjectCard {
+export class EarthElevator extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 43,

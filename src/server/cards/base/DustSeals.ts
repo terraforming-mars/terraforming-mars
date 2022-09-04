@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {max} from '../Options';
 
-export class DustSeals extends Card2 implements IProjectCard {
+export class DustSeals extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

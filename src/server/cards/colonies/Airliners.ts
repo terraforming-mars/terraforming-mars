@@ -5,10 +5,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Airliners extends Card2 implements IProjectCard {
+export class Airliners extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 11,

@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
@@ -9,7 +9,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class LandClaim extends Card2 implements IProjectCard {
+export class LandClaim extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

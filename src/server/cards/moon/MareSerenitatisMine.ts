@@ -8,10 +8,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MareSerenitatisMine extends Card2 {
+export class MareSerenitatisMine extends Card {
   constructor() {
     super({
       name: CardName.MARE_SERENITATIS_MINE,

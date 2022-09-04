@@ -9,10 +9,10 @@ import {Player} from '../../Player';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
 import {PlayerInput} from '../../PlayerInput';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class NanotechIndustries extends Card2 implements IActionCard, ICorporationCard {
+export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

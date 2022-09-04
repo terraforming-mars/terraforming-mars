@@ -5,11 +5,11 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 
-export class LunaProjectOffice extends Card2 implements IProjectCard {
+export class LunaProjectOffice extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_PROJECT_OFFICE,

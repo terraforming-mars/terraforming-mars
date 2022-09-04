@@ -5,9 +5,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class LunaStagingStation extends Card2 {
+export class LunaStagingStation extends Card {
   constructor() {
     super({
       name: CardName.LUNA_STAGING_STATION,

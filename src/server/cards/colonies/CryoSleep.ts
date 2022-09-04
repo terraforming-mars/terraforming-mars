@@ -3,10 +3,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CryoSleep extends Card2 implements IProjectCard {
+export class CryoSleep extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 10,

@@ -5,9 +5,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class TitaniumExtractionCenter extends Card2 {
+export class TitaniumExtractionCenter extends Card {
   constructor() {
     super({
       name: CardName.TITANIUM_EXTRACTION_CENTER,

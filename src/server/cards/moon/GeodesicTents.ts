@@ -4,11 +4,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class GeodesicTents extends Card2 {
+export class GeodesicTents extends Card {
   constructor() {
     super({
       name: CardName.GEODESIC_TENTS,

@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -9,7 +9,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class ImportedNitrogen extends Card2 implements IProjectCard {
+export class ImportedNitrogen extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

@@ -6,10 +6,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MomentumViriumHabitat extends Card2 {
+export class MomentumViriumHabitat extends Card {
   constructor() {
     super({
       name: CardName.MOMENTUM_VIRUM_HABITAT,

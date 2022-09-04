@@ -4,14 +4,14 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {ISpace} from '../../boards/ISpace';
 
-export class LunaEcumenopolis extends Card2 {
+export class LunaEcumenopolis extends Card {
   constructor() {
     super({
       name: CardName.LUNA_ECUMENOPOLIS,

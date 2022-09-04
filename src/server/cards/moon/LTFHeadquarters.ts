@@ -5,10 +5,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {BuildColony} from '../../deferredActions/BuildColony';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class LTFHeadquarters extends Card2 implements IProjectCard {
+export class LTFHeadquarters extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LTF_HEADQUARTERS,

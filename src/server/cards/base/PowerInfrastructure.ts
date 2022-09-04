@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
@@ -10,7 +10,7 @@ import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
-export class PowerInfrastructure extends Card2 implements IActionCard, IProjectCard {
+export class PowerInfrastructure extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

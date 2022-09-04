@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -8,7 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CorporateStronghold extends Card2 implements IProjectCard {
+export class CorporateStronghold extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

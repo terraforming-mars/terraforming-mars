@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,7 +13,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {max} from '../Options';
 
-export class EarlyExpedition extends Card2 implements IProjectCard {
+export class EarlyExpedition extends Card implements IProjectCard {
   // This card repeats the NEXT TO NO OTHER TILE behavior from Research Outpost, and Philares
   // has some similar code. Time for code reduction.
 

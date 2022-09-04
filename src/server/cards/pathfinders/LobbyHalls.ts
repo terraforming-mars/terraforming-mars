@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -10,7 +10,7 @@ import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class LobbyHalls extends Card2 implements IProjectCard, ICloneTagCard {
+export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

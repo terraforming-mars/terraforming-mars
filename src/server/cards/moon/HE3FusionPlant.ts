@@ -8,10 +8,10 @@ import {Resources} from '../../../common/Resources';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {all} from '../Options';
 
-export class HE3FusionPlant extends Card2 implements IProjectCard {
+export class HE3FusionPlant extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HE3_FUSION_PLANT,

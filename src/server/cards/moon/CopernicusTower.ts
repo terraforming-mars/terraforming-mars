@@ -10,11 +10,11 @@ import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 
-export class CopernicusTower extends Card2 implements IActionCard, IProjectCard {
+export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.COPERNICUS_TOWER,

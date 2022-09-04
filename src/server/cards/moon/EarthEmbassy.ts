@@ -3,10 +3,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {played} from '../Options';
 
-export class EarthEmbassy extends Card2 implements IProjectCard {
+export class EarthEmbassy extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.EARTH_EMBASSY,

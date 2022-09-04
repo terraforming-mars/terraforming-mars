@@ -7,12 +7,12 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class AtmoCollectors extends Card2 implements IProjectCard {
+export class AtmoCollectors extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 15,

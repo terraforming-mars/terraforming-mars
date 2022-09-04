@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -14,7 +14,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class BiofertilizerFacility extends Card2 implements IProjectCard {
+export class BiofertilizerFacility extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

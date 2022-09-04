@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {digit, played} from '../Options';
 
-export class GrandLunaAcademy extends Card2 implements IProjectCard {
+export class GrandLunaAcademy extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GRAND_LUNA_ACADEMY,

@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
-export class PowerPlant extends Card2 implements IProjectCard {
+export class PowerPlant extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

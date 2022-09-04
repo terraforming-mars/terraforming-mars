@@ -5,10 +5,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
 
-export class Habitat14 extends Card2 {
+export class Habitat14 extends Card {
   constructor() {
     super({
       name: CardName.HABITAT_14,

@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
@@ -17,7 +17,7 @@ interface StaticPreludeProperties {
     tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
 }
 
-export abstract class PreludeCard extends Card2 implements IProjectCard {
+export abstract class PreludeCard extends Card implements IProjectCard {
   constructor(properties: StaticPreludeProperties) {
     super({
       cardType: CardType.PRELUDE,

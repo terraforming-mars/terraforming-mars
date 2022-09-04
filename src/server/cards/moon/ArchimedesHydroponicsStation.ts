@@ -2,9 +2,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class ArchimedesHydroponicsStation extends Card2 {
+export class ArchimedesHydroponicsStation extends Card {
   constructor() {
     super({
       name: CardName.ARCHIMEDES_HYDROPONICS_STATION,

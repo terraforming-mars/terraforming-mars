@@ -5,14 +5,14 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Game} from '../../Game';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectColony} from '../..//inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
 import {LogHelper} from '../../LogHelper';
 
-export class MarketManipulation extends Card2 implements IProjectCard {
+export class MarketManipulation extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 1,

@@ -5,10 +5,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {all} from '../Options';
 
-export class OrbitalPowerGrid extends Card2 implements IProjectCard {
+export class OrbitalPowerGrid extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.ORBITAL_POWER_GRID,

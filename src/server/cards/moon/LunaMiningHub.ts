@@ -7,11 +7,11 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {Size} from '../../../common/cards/render/Size';
 
-export class LunaMiningHub extends Card2 {
+export class LunaMiningHub extends Card {
   constructor() {
     super({
       name: CardName.LUNA_MINING_HUB,

@@ -5,9 +5,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class IronExtractionCenter extends Card2 {
+export class IronExtractionCenter extends Card {
   constructor() {
     super({
       name: CardName.IRON_EXTRACTION_CENTER,

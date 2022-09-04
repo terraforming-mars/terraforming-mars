@@ -8,11 +8,11 @@ import {CardResource} from '../../../common/CardResource';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
-export class SubZeroSaltFish extends Card2 implements IProjectCard {
+export class SubZeroSaltFish extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 5,

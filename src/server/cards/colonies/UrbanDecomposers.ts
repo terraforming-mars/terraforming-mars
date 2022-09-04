@@ -7,9 +7,9 @@ import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class UrbanDecomposers extends Card2 implements IProjectCard {
+export class UrbanDecomposers extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 6,

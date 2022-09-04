@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Player} from '../../Player';
@@ -10,7 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class LavaFlows extends Card2 implements IProjectCard {
+export class LavaFlows extends Card implements IProjectCard {
   constructor(
     name = CardName.LAVA_FLOWS,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,

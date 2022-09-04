@@ -7,10 +7,10 @@ import {Resources} from '../../../common/Resources';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {all} from '../Options';
 
-export class OffWorldCityLiving extends Card2 implements IProjectCard {
+export class OffWorldCityLiving extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.OFF_WORLD_CITY_LIVING,

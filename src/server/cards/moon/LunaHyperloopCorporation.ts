@@ -3,7 +3,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {TileType} from '../../../common/TileType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IActionCard} from '../ICard';
@@ -12,7 +12,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
-export class LunaHyperloopCorporation extends Card2 implements IActionCard, ICorporationCard {
+export class LunaHyperloopCorporation extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class HE3Lobbyists extends Card2 implements IProjectCard {
+export class HE3Lobbyists extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HE3_LOBBYISTS,

@@ -2,12 +2,12 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Manutech extends Card2 implements ICorporationCard {
+export class Manutech extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MANUTECH,

@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {digit} from '../Options';
 
-export class CoronaExtractor extends Card2 implements IProjectCard {
+export class CoronaExtractor extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

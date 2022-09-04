@@ -1,7 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -13,7 +13,7 @@ import {AresHandler} from '../../ares/AresHandler';
 import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
 
-export class RedCity extends Card2 implements IProjectCard {
+export class RedCity extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

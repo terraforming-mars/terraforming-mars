@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
@@ -14,7 +14,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class IndustrialCenter extends Card2 implements IActionCard, IProjectCard {
+export class IndustrialCenter extends Card implements IActionCard, IProjectCard {
   constructor(
     name = CardName.INDUSTRIAL_CENTER,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,

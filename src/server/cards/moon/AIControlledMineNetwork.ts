@@ -5,10 +5,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class AIControlledMineNetwork extends Card2 implements IProjectCard {
+export class AIControlledMineNetwork extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.AI_CONTROLLED_MINE_NETWORK,

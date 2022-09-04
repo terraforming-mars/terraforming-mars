@@ -7,10 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {MoonCards} from '../../moon/MoonCards';
 import {IActionCard, ICard} from '../ICard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {SelectCard} from '../../inputs/SelectCard';
 
-export class DarksideObservatory extends Card2 implements IProjectCard, IActionCard {
+export class DarksideObservatory extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_OBSERVATORY,

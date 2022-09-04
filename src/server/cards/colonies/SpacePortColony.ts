@@ -6,10 +6,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class SpacePortColony extends Card2 implements IProjectCard {
+export class SpacePortColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 27,

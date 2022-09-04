@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {played} from '../Options';
 
-export class WarpDrive extends Card2 implements IProjectCard {
+export class WarpDrive extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 14,

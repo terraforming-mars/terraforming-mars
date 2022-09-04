@@ -6,11 +6,11 @@ import {CardResource} from '../../../common/CardResource';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {all} from '../Options';
 import {VictoryPoints} from '../ICard';
 
-export class AncientShipyards extends Card2 {
+export class AncientShipyards extends Card {
   constructor() {
     super({
       name: CardName.ANCIENT_SHIPYARDS,

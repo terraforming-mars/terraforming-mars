@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AerobrakedAmmoniaAsteroid extends Card2 implements IProjectCard {
+export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

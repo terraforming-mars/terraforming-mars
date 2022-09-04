@@ -6,11 +6,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
-export class LunaSenate extends Card2 implements IProjectCard {
+export class LunaSenate extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_SENATE,

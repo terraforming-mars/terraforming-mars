@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -13,7 +13,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Flooding extends Card2 implements IProjectCard {
+export class Flooding extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

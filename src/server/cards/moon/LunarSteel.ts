@@ -5,9 +5,9 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class LunarSteel extends Card2 implements IProjectCard {
+export class LunarSteel extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_STEEL,

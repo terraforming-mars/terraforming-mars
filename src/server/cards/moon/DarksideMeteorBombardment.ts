@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class DarksideMeteorBombardment extends Card2 implements IProjectCard {
+export class DarksideMeteorBombardment extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_METEOR_BOMBARDMENT,

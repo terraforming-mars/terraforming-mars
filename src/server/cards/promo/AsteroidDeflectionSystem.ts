@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 
-export class AsteroidDeflectionSystem extends Card2 implements IActionCard, IProjectCard {
+export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

@@ -8,10 +8,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {digit} from '../Options';
 
-export class PreliminaryDarkside extends Card2 implements IProjectCard {
+export class PreliminaryDarkside extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.PRELIMINARY_DARKSIDE,

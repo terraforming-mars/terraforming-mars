@@ -3,10 +3,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 
-export class SyndicatePirateRaids extends Card2 implements IProjectCard {
+export class SyndicatePirateRaids extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SYNDICATE_PIRATE_RAIDS,

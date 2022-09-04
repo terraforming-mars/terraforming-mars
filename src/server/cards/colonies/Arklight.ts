@@ -5,12 +5,12 @@ import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Arklight extends Card2 implements ICorporationCard {
+export class Arklight extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,

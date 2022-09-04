@@ -7,12 +7,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all, played} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class IntragenSanctuaryHeadquarters extends Card2 implements ICorporationCard {
+export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

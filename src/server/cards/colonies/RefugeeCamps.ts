@@ -6,10 +6,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class RefugeeCamps extends Card2 implements IProjectCard {
+export class RefugeeCamps extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 10,

@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -12,7 +12,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Units} from '../../../common/Units';
 import {played} from '../Options';
 
-export class RoboticWorkforce extends Card2 implements IProjectCard {
+export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

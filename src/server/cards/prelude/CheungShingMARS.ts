@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class CheungShingMARS extends Card2 implements ICorporationCard {
+export class CheungShingMARS extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

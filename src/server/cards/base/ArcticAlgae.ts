@@ -21,6 +21,10 @@ export class ArcticAlgae extends Card2 implements IProjectCard {
       tags: [Tag.PLANT],
       cost: 12,
 
+      behavior: {
+        stock: {plants: 1},
+      },
+
       requirements: CardRequirements.builder((b) => b.temperature(-12, {max})),
       metadata: {
         description: 'It must be -12 C or colder to play. Gain 1 plant.',
@@ -45,10 +49,5 @@ export class ArcticAlgae extends Card2 implements IProjectCard {
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }
-  }
-
-  public override bespokePlay(player: Player) {
-    player.plants++;
-    return undefined;
   }
 }

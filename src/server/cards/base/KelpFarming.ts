@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,7 +14,11 @@ export class KelpFarming extends Card2 implements IProjectCard {
       tags: [Tag.PLANT],
       cost: 17,
       victoryPoints: 1,
-      productionBox: {megacredits: 2, plants: 3},
+
+      behavior: {
+        production: {megacredits: 2, plants: 3},
+        stock: {plants: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(6)),
       metadata: {
@@ -29,9 +32,5 @@ export class KelpFarming extends Card2 implements IProjectCard {
         description: 'Requires 6 ocean tiles. Increase your M€ production 2 steps and your Plant production 3 steps. Gain 2 Plants.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.plants += 2;
-    return undefined;
   }
 }

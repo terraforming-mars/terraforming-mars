@@ -17,6 +17,10 @@ export class ImportedNutrients extends Card implements IProjectCard {
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 14,
 
+      behavior: {
+        stock: {plants: 4},
+      },
+
       metadata: {
         cardNumber: 'X22',
         renderData: CardRenderer.builder((b) => {
@@ -28,7 +32,6 @@ export class ImportedNutrients extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.plants += 4;
     const microbeCards = player.getResourceCards(CardResource.MICROBE);
 
     if (microbeCards.length === 1) {

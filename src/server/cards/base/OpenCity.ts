@@ -20,6 +20,10 @@ export class OpenCity extends Card2 implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.oxygen(12)),
       victoryPoints: 1,
 
+      behavior: {
+        stock: {plants: 2},
+      },
+
       metadata: {
         cardNumber: '108',
         renderData: CardRenderer.builder((b) => {
@@ -42,7 +46,6 @@ export class OpenCity extends Card2 implements IProjectCard {
   public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
-      player.plants += 2;
       return undefined;
     });
   }

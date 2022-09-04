@@ -21,6 +21,10 @@ export class DomedCrater extends Card2 implements IProjectCard {
       productionBox: {energy: -1, megacredits: 3},
       victoryPoints: 1,
 
+      behavior: {
+        stock: {plants: 3},
+      },
+
       requirements: CardRequirements.builder((b) => b.oxygen(7, {max})),
       metadata: {
         cardNumber: 'T03',
@@ -47,7 +51,6 @@ export class DomedCrater extends Card2 implements IProjectCard {
       player.game.board.getAvailableSpacesForCity(player),
       (space: ISpace) => {
         player.game.addCityTile(player, space.id);
-        player.plants += 3;
         return undefined;
       },
     );

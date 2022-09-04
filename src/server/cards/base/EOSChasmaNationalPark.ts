@@ -19,6 +19,10 @@ export class EosChasmaNationalPark extends Card2 implements IProjectCard {
       productionBox: {megacredits: 2},
       victoryPoints: 1,
 
+      behavior: {
+        stock: {plants: 3},
+      },
+
       requirements: CardRequirements.builder((b) => b.temperature(-12)),
       metadata: {
         cardNumber: '026',
@@ -33,8 +37,6 @@ export class EosChasmaNationalPark extends Card2 implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     const cards = player.getResourceCards(CardResource.ANIMAL);
-    player.plants += 3;
-
     if ( cards.length < 1 ) return undefined;
 
     if (cards.length === 1) {

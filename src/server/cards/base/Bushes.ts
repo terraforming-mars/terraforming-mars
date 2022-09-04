@@ -1,9 +1,7 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card2} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,7 +13,11 @@ export class Bushes extends Card2 implements IProjectCard {
       name: CardName.BUSHES,
       tags: [Tag.PLANT],
       cost: 10,
-      productionBox: {plants: 2},
+
+      behavior: {
+        production: {plants: 2},
+        stock: {plants: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.temperature(-10)),
       metadata: {
@@ -28,9 +30,5 @@ export class Bushes extends Card2 implements IProjectCard {
         }),
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.plants += 2;
-    return undefined;
   }
 }

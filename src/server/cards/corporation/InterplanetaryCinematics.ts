@@ -16,6 +16,10 @@ export class InterplanetaryCinematics extends Card implements ICorporationCard {
       tags: [Tag.BUILDING],
       startingMegaCredits: 30,
 
+      behavior: {
+        stock: {steel: 20},
+      },
+
       metadata: {
         cardNumber: 'R19',
         description: 'You start with 20 steel and 30 M€.',
@@ -35,9 +39,5 @@ export class InterplanetaryCinematics extends Card implements ICorporationCard {
     if (player.isCorporation(this.name) && card.cardType === CardType.EVENT) {
       player.megaCredits += 2;
     }
-  }
-  public override bespokePlay(player: Player) {
-    player.steel = 20;
-    return undefined;
   }
 }

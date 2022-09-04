@@ -1,8 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,6 +13,10 @@ export class Chimera extends Card implements ICorporationCard {
       name: CardName.CHIMERA,
       tags: [Tag.WILD, Tag.WILD],
       startingMegaCredits: 36,
+
+      behavior: {
+        stock: {steel: 1, titanium: 1},
+      },
 
       metadata: {
         cardNumber: 'PfC5',
@@ -30,11 +32,5 @@ export class Chimera extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResource(Resources.STEEL, 1);
-    player.addResource(Resources.TITANIUM, 1);
-    return undefined;
   }
 }

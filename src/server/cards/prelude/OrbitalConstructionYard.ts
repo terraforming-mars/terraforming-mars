@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,7 +9,11 @@ export class OrbitalConstructionYard extends PreludeCard implements IProjectCard
     super({
       name: CardName.ORBITAL_CONSTRUCTION_YARD,
       tags: [Tag.SPACE],
-      productionBox: {titanium: 1},
+
+      behavior: {
+        production: {titanium: 1},
+        stock: {titanium: 4},
+      },
 
       metadata: {
         cardNumber: 'P25',
@@ -21,9 +24,5 @@ export class OrbitalConstructionYard extends PreludeCard implements IProjectCard
         description: 'Increase your titanium production 1 step. Gain 4 titanium.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.titanium += 4;
-    return undefined;
   }
 }

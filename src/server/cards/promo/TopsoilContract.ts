@@ -16,6 +16,10 @@ export class TopsoilContract extends Card implements IProjectCard {
       tags: [Tag.MICROBE, Tag.EARTH],
       cost: 8,
 
+      behavior: {
+        stock: {plants: 3},
+      },
+
       metadata: {
         cardNumber: 'X30',
         renderData: CardRenderer.builder((b) => {
@@ -27,11 +31,6 @@ export class TopsoilContract extends Card implements IProjectCard {
         description: 'Gain 3 plants.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.plants += 3;
-    return undefined;
   }
 
   public onResourceAdded(player: Player, card: ICard, count: number) {

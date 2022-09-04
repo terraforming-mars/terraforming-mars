@@ -20,6 +20,10 @@ export class DeimosDownPromo extends Card implements IProjectCard {
       cost: 31,
       tr: {temperature: 3},
 
+      behavior: {
+        stock: {steel: 4},
+      },
+
       metadata: {
         cardNumber: 'X31',
         description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.',
@@ -39,7 +43,6 @@ export class DeimosDownPromo extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 3);
     player.game.defer(new RemoveAnyPlants(player, 6));
-    player.steel += 4;
 
     const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
 

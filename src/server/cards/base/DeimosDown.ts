@@ -17,6 +17,10 @@ export class DeimosDown extends Card2 implements IProjectCard {
       cost: 31,
       tr: {temperature: 3},
 
+      behavior: {
+        stock: {steel: 4},
+      },
+
       metadata: {
         cardNumber: '039',
         description: 'Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.',
@@ -32,7 +36,6 @@ export class DeimosDown extends Card2 implements IProjectCard {
   public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 3);
     player.game.defer(new RemoveAnyPlants(player, 8));
-    player.steel += 4;
     return undefined;
   }
 }

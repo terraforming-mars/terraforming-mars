@@ -17,6 +17,10 @@ export class Asteroid extends Card2 implements IProjectCard {
       cost: 14,
       tr: {temperature: 1},
 
+      behavior: {
+        stock: {titanium: 2},
+      },
+
       metadata: {
         description: 'Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.',
         cardNumber: '009',
@@ -32,7 +36,6 @@ export class Asteroid extends Card2 implements IProjectCard {
   public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 1);
     player.game.defer(new RemoveAnyPlants(player, 3));
-    player.titanium += 2;
     return undefined;
   }
 }

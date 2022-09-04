@@ -3,12 +3,12 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard} from '../ICard';
 import {played} from '../Options';
 
-export class LunaArchives extends Card2 implements IActionCard {
+export class LunaArchives extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_ARCHIVES,

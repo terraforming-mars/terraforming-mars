@@ -5,12 +5,12 @@ import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 import {VictoryPoints} from '../ICard';
 
-export class PrideoftheEarthArkship extends Card2 implements IActionCard {
+export class PrideoftheEarthArkship extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.PRIDE_OF_THE_EARTH_ARKSHIP,

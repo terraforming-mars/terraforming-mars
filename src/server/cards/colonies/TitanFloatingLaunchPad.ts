@@ -11,10 +11,10 @@ import {IColony} from '../../colonies/IColony';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 
-export class TitanFloatingLaunchPad extends Card2 implements IProjectCard {
+export class TitanFloatingLaunchPad extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 18,

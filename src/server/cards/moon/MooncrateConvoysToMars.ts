@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -10,7 +10,7 @@ import {SellSteel} from '../../moon/SellSteel';
 import {all} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 
-export class MooncrateConvoysToMars extends Card2 implements IProjectCard {
+export class MooncrateConvoysToMars extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MOONCRATE_CONVOYS_TO_MARS,

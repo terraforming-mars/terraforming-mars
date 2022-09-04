@@ -8,13 +8,13 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resources} from '../../../common/Resources';
 
-export class StormCraftIncorporated extends Card2 implements IActionCard, ICorporationCard {
+export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,

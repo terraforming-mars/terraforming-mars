@@ -7,9 +7,9 @@ import {Resources} from '../../../common/Resources';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class MinorityRefuge extends Card2 implements IProjectCard {
+export class MinorityRefuge extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 5,

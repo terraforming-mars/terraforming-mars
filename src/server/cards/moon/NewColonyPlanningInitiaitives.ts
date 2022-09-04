@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 
-export class NewColonyPlanningInitiaitives extends Card2 implements IProjectCard {
+export class NewColonyPlanningInitiaitives extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,

@@ -4,10 +4,10 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 
-export class ProductiveOutpost extends Card2 implements IProjectCard {
+export class ProductiveOutpost extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 0,

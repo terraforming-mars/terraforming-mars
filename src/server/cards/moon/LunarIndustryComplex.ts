@@ -5,10 +5,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 
-export class LunarIndustryComplex extends Card2 implements IProjectCard {
+export class LunarIndustryComplex extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_INDUSTRY_COMPLEX,

@@ -9,9 +9,9 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {Resources} from '../../../common/Resources';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class SmallDutyRovers extends Card2 implements IProjectCard {
+export class SmallDutyRovers extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SMALL_DUTY_ROVERS,

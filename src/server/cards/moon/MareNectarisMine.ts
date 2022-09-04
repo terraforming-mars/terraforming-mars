@@ -7,10 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {TileType} from '../../../common/TileType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class MareNectarisMine extends Card2 implements IProjectCard {
+export class MareNectarisMine extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MARE_NECTARIS_MINE,

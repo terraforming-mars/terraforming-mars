@@ -6,9 +6,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class NitrogenFromTitan extends Card2 implements IProjectCard {
+export class NitrogenFromTitan extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 25,

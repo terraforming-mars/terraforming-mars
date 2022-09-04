@@ -8,9 +8,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class RedSpotObservatory extends Card2 implements IProjectCard {
+export class RedSpotObservatory extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 17,

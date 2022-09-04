@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
@@ -11,7 +11,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Factorum extends Card2 implements IActionCard, ICorporationCard {
+export class Factorum extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

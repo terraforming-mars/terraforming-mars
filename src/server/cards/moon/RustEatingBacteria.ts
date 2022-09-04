@@ -6,11 +6,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {Resources} from '../../../common/Resources';
 
-export class RustEatingBacteria extends Card2 implements IActionCard, IProjectCard {
+export class RustEatingBacteria extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.RUST_EATING_BACTERIA,

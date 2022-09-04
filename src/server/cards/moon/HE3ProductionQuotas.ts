@@ -8,11 +8,11 @@ import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class HE3ProductionQuotas extends Card2 implements IProjectCard {
+export class HE3ProductionQuotas extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.HE3_PRODUCTION_QUOTAS,

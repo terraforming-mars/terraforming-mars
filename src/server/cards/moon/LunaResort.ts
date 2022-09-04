@@ -5,10 +5,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {all} from '../Options';
 
-export class LunaResort extends Card2 {
+export class LunaResort extends Card {
   constructor() {
     super({
       name: CardName.LUNA_RESORT,

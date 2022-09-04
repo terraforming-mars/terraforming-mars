@@ -9,11 +9,11 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {LogHelper} from '../../LogHelper';
 import {VictoryPoints} from '../ICard';
 
-export class DarksideIncubationPlant extends Card2 implements IActionCard, IProjectCard {
+export class DarksideIncubationPlant extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_INCUBATION_PLANT,

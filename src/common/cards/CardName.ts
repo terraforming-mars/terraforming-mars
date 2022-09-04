@@ -470,6 +470,7 @@ export enum CardName {
     OUTDOOR_SPORTS = 'Outdoor Sports',
     NEW_PARTNER = 'New Partner',
     MERGER = 'Merger',
+    CORPORATE_ARCHIVES = 'Corporate Archives',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

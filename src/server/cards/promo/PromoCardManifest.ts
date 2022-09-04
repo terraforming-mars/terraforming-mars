@@ -9,6 +9,7 @@ import {Astrodrill} from './Astrodrill';
 import {BactoviralResearch} from './BactoviralResearch';
 import {BioPrintingFacility} from './BioPrintingFacility';
 import {CometAiming} from './CometAiming';
+import {CorporateArchives} from './CorporateArchives';
 import {CrashSiteCleanup} from './CrashSiteCleanup';
 import {CuttingEdgeTechnology} from './CuttingEdgeTechnology';
 import {DeimosDownPromo} from './DeimosDownPromo';
@@ -100,6 +101,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
   preludeCards: [
     {cardName: CardName.NEW_PARTNER, Factory: NewPartner},
     {cardName: CardName.MERGER, Factory: Merger},
+    {cardName: CardName.CORPORATE_ARCHIVES, Factory: CorporateArchives},
   ],
 
   cardsToRemove: [

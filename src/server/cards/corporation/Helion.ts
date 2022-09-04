@@ -31,7 +31,7 @@ export class Helion extends Card implements ICorporationCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.canUseHeatAsMegaCredits = true;
     player.production.add(Resources.HEAT, 3);
     return undefined;

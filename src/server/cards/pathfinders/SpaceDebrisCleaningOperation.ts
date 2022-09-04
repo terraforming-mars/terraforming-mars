@@ -34,7 +34,7 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.TITANIUM, 3);
     player.game.defer(
       new AddResourcesToCard(

@@ -28,7 +28,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const gainTitanium = new SelectOption(
       'Gain 1 titanium',
       'Gain titanium',

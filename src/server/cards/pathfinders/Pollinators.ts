@@ -43,7 +43,7 @@ export class Pollinators extends Card implements IProjectCard, IActionCard {
     return undefined;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.PLANTS, 1);
     player.production.add(Resources.MEGACREDITS, 2);
     return undefined;

@@ -44,8 +44,4 @@ export class GMOContract extends Card implements IProjectCard {
       );
     }
   }
-
-  public play() {
-    return undefined;
-  }
 }

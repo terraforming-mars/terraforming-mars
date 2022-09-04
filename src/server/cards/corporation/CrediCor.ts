@@ -40,7 +40,4 @@ export class CrediCor extends Card implements ICorporationCard {
   public onStandardProject(player: Player, project: StandardProjectCard) {
     this.effect(player, project);
   }
-  public play() {
-    return undefined;
-  }
 }

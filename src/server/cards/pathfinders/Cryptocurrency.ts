@@ -68,7 +68,4 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
     }
     return new OrOptions(firstOption, secondOption);
   }
-  public play() {
-    return undefined;
-  }
 }

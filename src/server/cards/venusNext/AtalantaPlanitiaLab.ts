@@ -26,7 +26,7 @@ export class AtalantaPlanitiaLab extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.drawCard(2);
     return undefined;
   }

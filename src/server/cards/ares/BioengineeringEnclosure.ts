@@ -34,7 +34,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResourceTo(this, 2);
 
     return undefined;

@@ -27,7 +27,7 @@ export class StanfordTorus extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.addCityTile(player, SpaceName.STANFORD_TORUS, SpaceType.COLONY);
     return undefined;
   }

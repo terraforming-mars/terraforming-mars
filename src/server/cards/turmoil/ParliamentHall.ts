@@ -40,7 +40,7 @@ export class ParliamentHall extends Card implements IProjectCard {
     player.production.add(Resources.MEGACREDITS, amount, {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player);
     return undefined;
   }

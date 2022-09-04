@@ -35,10 +35,10 @@ export class AsteroidResources extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.hasUnits(this.reserveUnits);
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const options = new OrOptions(
       new SelectOption('Increase your steel and titanium production 1 step.', 'Select', () => {
         player.deductUnits(this.reserveUnits);

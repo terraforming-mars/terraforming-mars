@@ -33,7 +33,7 @@ export class MartianInsuranceGroup extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }

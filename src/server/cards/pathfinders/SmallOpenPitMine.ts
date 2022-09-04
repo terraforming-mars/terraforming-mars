@@ -42,7 +42,7 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
     }));
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player);
     return undefined;
   }

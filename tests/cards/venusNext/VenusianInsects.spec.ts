@@ -31,7 +31,7 @@ describe('VenusianInsects', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
 
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

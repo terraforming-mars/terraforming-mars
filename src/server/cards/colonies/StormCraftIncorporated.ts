@@ -43,7 +43,6 @@ export class StormCraftIncorporated extends Card2 implements IActionCard, ICorpo
     });
   }
 
-
   public canAct(): boolean {
     return true;
   }

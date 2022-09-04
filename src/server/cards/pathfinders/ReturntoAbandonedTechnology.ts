@@ -25,11 +25,11 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.game.dealer.discarded.length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cards: Array<IProjectCard> = [];
     for (let idx = 0; idx < 4; idx++) {
       const card = player.game.dealer.discarded.pop();

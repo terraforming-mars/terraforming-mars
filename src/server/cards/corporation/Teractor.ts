@@ -30,8 +30,4 @@ export class Teractor extends Card implements ICorporationCard {
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
 }

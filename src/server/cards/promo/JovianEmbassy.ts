@@ -26,7 +26,7 @@ export class JovianEmbassy extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRating();
     return undefined;
   }

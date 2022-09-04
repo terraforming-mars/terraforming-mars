@@ -34,7 +34,7 @@ export class MonsInsurance extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 6);
     for (const p of player.game.getPlayers()) {
       p.production.add(Resources.MEGACREDITS, -2, {log: true});

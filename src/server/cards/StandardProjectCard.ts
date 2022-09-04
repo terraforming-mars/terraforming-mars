@@ -29,10 +29,6 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     return 0;
   }
 
-  public play() {
-    return undefined;
-  }
-
   protected abstract actionEssence(player: Player): void
 
   public onStandardProject(player: Player): void {

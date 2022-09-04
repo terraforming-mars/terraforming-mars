@@ -21,8 +21,4 @@ export class PublicCelebrations extends Card implements IProjectCard {
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
 }

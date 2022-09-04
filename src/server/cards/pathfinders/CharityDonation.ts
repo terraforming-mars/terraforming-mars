@@ -28,7 +28,7 @@ export class CharityDonation extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     const players = game.getPlayersInGenerationOrder();
     const thisIdx = players.findIndex((p) => p === player);

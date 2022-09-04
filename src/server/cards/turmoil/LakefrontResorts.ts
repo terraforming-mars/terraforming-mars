@@ -40,7 +40,7 @@ export class LakefrontResorts extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.oceanBonus = 3;
     return undefined;
   }

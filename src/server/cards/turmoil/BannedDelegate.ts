@@ -30,7 +30,7 @@ export class BannedDelegate extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
     const orOptions: Array<SelectDelegate> = [];
     // Take each party having more than just the party leader in the area

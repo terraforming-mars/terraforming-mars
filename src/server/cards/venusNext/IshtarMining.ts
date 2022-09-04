@@ -24,7 +24,7 @@ export class IshtarMining extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.TITANIUM, 1);
     return undefined;
   }

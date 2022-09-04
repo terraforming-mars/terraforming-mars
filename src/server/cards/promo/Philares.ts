@@ -135,8 +135,4 @@ export class Philares extends Card implements ICorporationCard {
       );
     }
   }
-
-  public play() {
-    return undefined;
-  }
 }

@@ -8,8 +8,7 @@ describe('ResearchCoordination', function() {
     const game = newTestGame(1);
     const player = getTestPlayer(game, 0);
     const card = new ResearchCoordination();
-
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
 
     expect(player.tags.count(Tag.WILD)).eq(0);

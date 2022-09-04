@@ -33,10 +33,6 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     return player.titanium > 0;
   }

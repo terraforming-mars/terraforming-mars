@@ -51,7 +51,7 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 1);
     return undefined;
   }

@@ -7,6 +7,7 @@ import {Phase} from '../../../src/common/Phase';
 import {TileType} from '../../../src/common/TileType';
 import {setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('CuriosityII', function() {
   let card: CuriosityII;
@@ -67,7 +68,7 @@ describe('CuriosityII', function() {
     game.board.getSpace(oceanSpace.id).tile = {tileType: TileType.OCEAN};
 
     const oceanCity = new OceanSanctuary();
-    const action = oceanCity.play(player);
+    const action = cast(oceanCity.play(player), SelectSpace);
     action.cb(oceanSpace);
 
     const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);

@@ -11,7 +11,7 @@ describe('MicrobiologyPatents', function() {
     const game = newTestGame(1);
     const player = getTestPlayer(game, 0);
 
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
 
     card.onCardPlayed(player, new Virus());

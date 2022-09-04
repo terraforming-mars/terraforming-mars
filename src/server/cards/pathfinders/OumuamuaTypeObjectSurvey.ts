@@ -57,7 +57,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     const cards = [game.dealer.dealCard(player.game), game.dealer.dealCard(player.game)];

@@ -36,7 +36,7 @@ export class Pristar extends Card implements ICorporationCard {
   }
 
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.decreaseTerraformRatingSteps(2);
     return undefined;
   }

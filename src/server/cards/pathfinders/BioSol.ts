@@ -34,10 +34,6 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public initialAction(player: Player) {
     player.drawCard(2, {tag: Tag.MICROBE});
     return undefined;

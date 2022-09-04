@@ -42,10 +42,6 @@ export class Polaris extends Card implements ICorporationCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public initialAction(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
     return undefined;

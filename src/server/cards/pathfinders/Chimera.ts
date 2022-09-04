@@ -32,7 +32,7 @@ export class Chimera extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.STEEL, 1);
     player.addResource(Resources.TITANIUM, 1);
     return undefined;

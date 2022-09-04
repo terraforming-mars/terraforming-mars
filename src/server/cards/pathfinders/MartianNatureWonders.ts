@@ -32,11 +32,11 @@ export class MartianNatureWonders extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return new SelectSpace('Select a Martian Natural Wonder space',
       player.game.board.getAvailableSpacesOnLand(player),

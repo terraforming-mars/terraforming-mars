@@ -25,7 +25,7 @@ describe('VenusMagnetizer', function() {
   it('Should play', function() {
     (game as any).venusScaleLevel = 10;
     expect(player.canPlayIgnoringCost(card)).is.true;
-    expect(card.play()).is.undefined;
+    expect(card.play(player)).is.undefined;
   });
 
   it('Should act', function() {

@@ -16,7 +16,7 @@ describe('Inventrix', function() {
   });
 
   it('Should play', function() {
-    card.play();
+    card.play(player);
     expect(card.getRequirementBonus()).to.eq(2);
   });
 

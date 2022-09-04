@@ -30,11 +30,11 @@ export class SponsoredAcademies extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.cardsInHand.length > 1; // this card and at least another
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new DiscardCards(player), Priority.DISCARD_BEFORE_DRAW);
     player.game.defer(DrawCards.keepAll(player, 3));
     const otherPlayers = player.game.getPlayers().filter((p) => p.id !== player.id);

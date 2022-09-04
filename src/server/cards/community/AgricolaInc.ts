@@ -35,7 +35,7 @@ export class AgricolaInc extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 1);
     player.production.add(Resources.PLANTS, 1);
 

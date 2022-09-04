@@ -39,8 +39,4 @@ export class MorningStarInc extends Card implements ICorporationCard {
   public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
     return parameter === GlobalParameter.VENUS ? 2 : 0;
   }
-
-  public play() {
-    return undefined;
-  }
 }

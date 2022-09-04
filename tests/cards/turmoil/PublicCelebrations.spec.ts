@@ -15,6 +15,6 @@ describe('PublicCelebrations', function() {
 
         game.turmoil!.chairman = player.id;
         expect(player.canPlayIgnoringCost(card)).is.true;
-        card.play();
+        card.play(player);
   });
 });

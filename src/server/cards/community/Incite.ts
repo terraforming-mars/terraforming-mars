@@ -38,7 +38,7 @@ export class Incite extends Card implements ICorporationCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     Turmoil.getTurmoil(player.game).addInfluenceBonus(player);
     return undefined;
   }

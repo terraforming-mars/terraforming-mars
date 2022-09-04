@@ -26,8 +26,4 @@ export abstract class StandardActionCard extends Card implements IActionCard, IC
   protected actionUsed(player: Player) {
     player.game.log('${0} used ${1} standard action', (b) => b.player(player).card(this));
   }
-
-  public play() {
-    return undefined;
-  }
 }

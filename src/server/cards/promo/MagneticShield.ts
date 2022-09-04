@@ -26,7 +26,7 @@ export class MagneticShield extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(4);
     return undefined;
   }

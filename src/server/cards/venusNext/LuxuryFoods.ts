@@ -23,11 +23,7 @@ export class LuxuryFoods extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.tags.playerHas([Tag.VENUS, Tag.EARTH, Tag.JOVIAN]);
-  }
-
-  public play() {
-    return undefined;
   }
 }

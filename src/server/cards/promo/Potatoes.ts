@@ -25,14 +25,14 @@ export class Potatoes extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     const viralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
     const hasEnoughPlants = player.plants >= 2 || player.plants >= 1 && viralEnhancers !== undefined;
 
     return hasEnoughPlants;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.plants -= 2;
     player.production.add(Resources.MEGACREDITS, 2);
     return undefined;

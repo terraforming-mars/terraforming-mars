@@ -27,7 +27,7 @@ export class RareEarthElements extends Card implements IProjectCard {
   }
 
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const spaces = player.game.board.spaces
       .filter(playerTileFn(player))
       .filter(isSpecialTile);

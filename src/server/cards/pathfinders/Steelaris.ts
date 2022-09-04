@@ -38,10 +38,6 @@ export class Steelaris extends Card implements ICorporationCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
     const game = cardOwner.game;
     // Does not apply to The Moon.

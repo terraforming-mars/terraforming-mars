@@ -36,7 +36,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
 
   public bonusResource?: Array<Resources>;
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.production.energy >= 1 &&
       player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
@@ -62,7 +62,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
     return Array.from(resources);
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.defaultProduce(player);
     return new SelectSpace(
       'Select space for city tile',

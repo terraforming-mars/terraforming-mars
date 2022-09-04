@@ -31,11 +31,11 @@ export class DuskLaserMining extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.production.energy >= 1;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.ENERGY, -1);
     player.production.add(Resources.TITANIUM, 1);
     player.titanium += 4;

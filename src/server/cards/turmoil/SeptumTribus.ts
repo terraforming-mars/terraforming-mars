@@ -33,10 +33,6 @@ export class SeptumTribus extends Card implements IActionCard, ICorporationCard 
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(): boolean {
     return true;
   }

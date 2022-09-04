@@ -29,8 +29,4 @@ export class Advertising extends Card implements IProjectCard {
       player.production.add(Resources.MEGACREDITS, 1);
     }
   }
-
-  public play() {
-    return undefined;
-  }
 }

@@ -53,7 +53,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     return [Tag.MICROBE, Tag.MICROBE];
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.resourceCount = 2;
     player.drawCard(1, {tag: Tag.SCIENCE});
     return undefined;

@@ -33,7 +33,7 @@ export class ControlledBloom extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.PLANTS, 3);
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
     return undefined;

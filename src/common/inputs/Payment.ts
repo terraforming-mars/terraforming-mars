@@ -1,14 +1,24 @@
 export const PAYMENT_KEYS = ['heat', 'megaCredits', 'steel', 'titanium', 'microbes', 'floaters', 'science', 'seeds', 'data'] as const;
 export type PaymentKey = typeof PAYMENT_KEYS[number];
 export type Payment = {
-  heat: number;
+  // Standard currency for paying for stuff
   megaCredits: number;
+  // Helion corporation can spend heat as M€.
+  heat: number;
+  // Used for cards with building tags
   steel: number;
+  // Used for cards with space tags
   titanium: number;
+  // Psychrophiles corporation can spend its floaters for cards with plant tags.
   microbes: number;
+  // Dirigibles corporation can spend its floaters for cards with Venus tags.
   floaters: number;
+  // Luna Archives corporation can spend its science resources for cards with Moon tags.
   science: number;
+  // TODO: add test for Soylent Seedling Systems + Psychophiles.
+  // Soylent Seedling Systems corporation can use its seeds to pay for cards with plant tags, or the standard greenery project.
   seeds: number;
+  // Aurorai corporation can use its data to pay for standard projects.
   data: number;
 }
 

@@ -34,7 +34,7 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
     player.production.add(Resources.ENERGY, Math.floor(player.game.board.getOceanCount({wetlands: true}) / 2), {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseOxygenLevel(player, -1);
     this.produce(player);
     return undefined;

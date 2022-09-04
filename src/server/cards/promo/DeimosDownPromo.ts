@@ -32,11 +32,11 @@ export class DeimosDownPromo extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 3);
     player.game.defer(new RemoveAnyPlants(player, 6));
     player.steel += 4;

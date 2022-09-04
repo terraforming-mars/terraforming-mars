@@ -22,7 +22,7 @@ export class BeginnerCorporation extends Card implements ICorporationCard {
       startingMegaCredits: 42,
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.drawCard(10);
     return undefined;
   }

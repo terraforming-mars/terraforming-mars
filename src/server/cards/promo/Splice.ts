@@ -86,8 +86,4 @@ export class Splice extends Card implements ICorporationCard {
       return undefined;
     }
   }
-
-  public play() {
-    return undefined;
-  }
 }

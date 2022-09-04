@@ -6,6 +6,8 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('MetallicAsteroid', function() {
   let card: MetallicAsteroid;
@@ -27,7 +29,7 @@ describe('MetallicAsteroid', function() {
     expect(game.getTemperature()).eq(-30);
     expect(game.deferredActions).has.lengthOf(0);
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
     expect(player.titanium).eq(1);
     expect(game.getTemperature()).eq(-28);
     // This interrupt is for removing four plants. Not going to do further

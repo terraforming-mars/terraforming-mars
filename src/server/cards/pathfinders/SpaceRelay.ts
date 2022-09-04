@@ -36,7 +36,7 @@ export class SpaceRelay extends Card implements IProjectCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }

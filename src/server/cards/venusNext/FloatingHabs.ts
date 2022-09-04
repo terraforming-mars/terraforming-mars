@@ -35,10 +35,6 @@ export class FloatingHabs extends Card implements IActionCard {
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
   public canAct(player: Player): boolean {
     return player.canAfford(2);
   }

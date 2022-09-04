@@ -26,8 +26,4 @@ export class VenusWaystation extends Card implements IProjectCard {
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
 }

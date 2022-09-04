@@ -27,7 +27,7 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     // This card's tag also counts.
     const distinctTagCount = player.tags.distinctCount('default', Tag.SPACE);
     player.production.add(Resources.MEGACREDITS, distinctTagCount, {log: true});

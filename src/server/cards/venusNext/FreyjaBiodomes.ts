@@ -35,7 +35,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.production.energy >= 1;
   }
   public getResCards(player: Player): ICard[] {
@@ -44,7 +44,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
     return resourceCards.filter((card) => card.tags.includes(Tag.VENUS));
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cards = this.getResCards(player);
 
     if (cards.length > 1) {

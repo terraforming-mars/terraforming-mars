@@ -84,8 +84,4 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     action.priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
     activePlayer.game.defer(action);
   }
-
-  public play() {
-    return undefined;
-  }
 }

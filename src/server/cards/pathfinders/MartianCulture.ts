@@ -41,9 +41,5 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
     return undefined;
   }
-
-  public play() {
-    return undefined;
-  }
 }
 

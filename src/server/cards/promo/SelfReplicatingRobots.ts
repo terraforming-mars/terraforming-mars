@@ -48,10 +48,6 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     return 0;
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     return this.targetCards.length > 0 ||
              player.cardsInHand.some((card) => card.tags.some((tag) => tag === Tag.SPACE || tag === Tag.BUILDING));

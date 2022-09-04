@@ -47,7 +47,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     return undefined;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     game.increaseTemperature(player, 1);
     player.drawCard();

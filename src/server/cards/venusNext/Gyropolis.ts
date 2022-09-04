@@ -31,7 +31,7 @@ export class Gyropolis extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
     return player.production.energy >= 2;
   }
@@ -42,7 +42,7 @@ export class Gyropolis extends Card implements IProjectCard {
     player.production.add(Resources.MEGACREDITS, player.tags.multipleCount(tags), {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player);
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);

@@ -30,11 +30,11 @@ export class WildlifeDome extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for greenery tile', player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
       return player.game.addGreenery(player, space.id);
     });

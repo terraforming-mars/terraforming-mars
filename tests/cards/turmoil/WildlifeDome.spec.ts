@@ -5,8 +5,9 @@ import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('WildlifeDome', function() {
   let card: WildlifeDome;
@@ -40,8 +41,7 @@ describe('WildlifeDome', function() {
     player.megaCredits = 18;
     expect(player.canPlay(card)).is.true;
 
-    const action = card.play(player);
-    expect(action).is.not.undefined;
+    const action = cast(card.play(player), SelectSpace);
     action.cb(action.availableSpaces[0]);
     expect(game.getOxygenLevel()).to.eq(1);
   });

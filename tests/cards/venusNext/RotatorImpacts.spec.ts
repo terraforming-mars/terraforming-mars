@@ -31,13 +31,13 @@ describe('RotatorImpacts', () => {
 
   it('Should play', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
   it('Works with MSI corporation', () => {
     const corp = new MorningStarInc();
-    corp.play();
+    corp.play(player);
     player.setCorporationForTest(corp);
 
     (game as any).venusScaleLevel = 18;

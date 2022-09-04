@@ -30,10 +30,6 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(): boolean {
     return true;
   }

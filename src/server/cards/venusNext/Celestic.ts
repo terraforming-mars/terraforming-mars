@@ -71,10 +71,6 @@ export class Celestic extends Card implements IActionCard, ICorporationCard {
     return undefined;
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(): boolean {
     return true;
   }

@@ -66,7 +66,7 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     return;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     if (player.game.isSoloMode()) {
       // Get bonus for 2 neutral cities
       player.production.add(Resources.MEGACREDITS, 2);

@@ -27,7 +27,7 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseVenusScaleLevel(player, 1);
     let floaterCards = player.getResourceCards(CardResource.FLOATER);
     floaterCards = floaterCards.filter((card) => card.tags.some((cardTag) => cardTag === Tag.VENUS));

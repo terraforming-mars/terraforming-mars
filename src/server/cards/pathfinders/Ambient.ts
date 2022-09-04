@@ -40,7 +40,7 @@ export class Ambient extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.onCorpCardPlayed(player, this);
     return undefined;
   }

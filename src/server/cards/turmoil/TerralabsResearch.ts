@@ -31,7 +31,7 @@ export class TerralabsResearch extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.decreaseTerraformRating();
     return undefined;
   }

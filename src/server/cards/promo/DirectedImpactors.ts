@@ -38,10 +38,6 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     const cardHasResources = this.resourceCount > 0;
     const canPayForAsteroid = player.canAfford(6, {titanium: true});

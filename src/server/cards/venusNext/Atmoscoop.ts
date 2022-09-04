@@ -38,7 +38,7 @@ export class Atmoscoop extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
@@ -50,7 +50,7 @@ export class Atmoscoop extends Card implements IProjectCard {
     return true;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     const floaterCards = player.getResourceCards(CardResource.FLOATER);
 

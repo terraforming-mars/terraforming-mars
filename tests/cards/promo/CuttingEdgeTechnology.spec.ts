@@ -12,7 +12,7 @@ describe('CuttingEdgeTechnology', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
-    card.play();
+    card.play(player);
 
     const discountedCard = new DustSeals();
     const discountedCard2 = new VoteOfNoConfidence();

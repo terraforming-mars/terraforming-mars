@@ -26,7 +26,7 @@ export class Harvest extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.MEGACREDITS, 12, {log: true});
     return undefined;
   }

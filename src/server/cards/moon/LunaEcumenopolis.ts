@@ -57,7 +57,7 @@ export class LunaEcumenopolis extends Card2 {
     return player.canAfford(0, {tr: {moonColony: 2, tr: expectedTRBump}});
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     if (!this.canAffordTRBump(player)) {
       return false;
     }

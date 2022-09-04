@@ -28,7 +28,7 @@ export class LuxuryEstate extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const count = player.game.getCitiesCount(player) + player.game.getGreeneriesCount(player);
     player.addResource(Resources.TITANIUM, count, {log: true});
     return undefined;

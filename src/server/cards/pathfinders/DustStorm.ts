@@ -29,7 +29,7 @@ export class DustStorm extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.getPlayers().forEach((p) => p.deductResource(Resources.ENERGY, p.energy, {log: true}));
     player.game.increaseTemperature(player, 2);
     return undefined;

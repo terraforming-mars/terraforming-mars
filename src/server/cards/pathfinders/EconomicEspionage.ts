@@ -46,8 +46,4 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
     }));
     return undefined;
   }
-
-  public play() {
-    return undefined;
-  }
 }

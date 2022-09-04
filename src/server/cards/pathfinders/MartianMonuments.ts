@@ -30,7 +30,7 @@ export class MartianMonuments extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.game.board.spaces.some((space) => {
       return Board.isCitySpace(space) && space.player?.id === player.id && space.spaceType !== SpaceType.COLONY;
     });
@@ -41,7 +41,7 @@ export class MartianMonuments extends Card implements IProjectCard {
     player.production.add(Resources.MEGACREDITS, count, {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player, 1); // The 1 is the "including this"
     return undefined;
   }

@@ -32,7 +32,7 @@ describe('HiTechLab', function() {
   });
 
   it('Should give victory points', function() {
-    card.play();
+    card.play(player);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

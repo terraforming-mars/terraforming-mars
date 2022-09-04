@@ -25,7 +25,7 @@ export class Recruitment extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
     if (turmoil.hasDelegatesInReserve(player.id) === false) {
       return false;
@@ -37,7 +37,7 @@ export class Recruitment extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new SendDelegateToArea(player, 'Select which Neutral delegate to remove', {replace: 'NEUTRAL', source: 'reserve'}));
     return undefined;
   }

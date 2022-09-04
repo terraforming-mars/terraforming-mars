@@ -29,7 +29,7 @@ export class InterplanetaryTransport extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const offWorldCities = player.game.board.getSpaces(SpaceType.COLONY, player).filter((space) => space.tile?.tileType === TileType.CITY);
     player.production.add(Resources.MEGACREDITS, offWorldCities.length, {log: true});
     return undefined;

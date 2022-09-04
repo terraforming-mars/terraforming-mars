@@ -37,10 +37,6 @@ export class AerialMappers extends Card implements IActionCard {
       },
     });
   }
-
-  public play() {
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }

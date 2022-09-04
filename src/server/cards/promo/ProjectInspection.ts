@@ -35,11 +35,11 @@ export class ProjectInspection extends Card implements IProjectCard {
     return result;
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return this.getActionCards(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const actionCards = this.getActionCards(player);
     if (actionCards.length === 0 ) {
       return undefined;

@@ -28,9 +28,5 @@ export class HabitatMarte extends Card implements ICorporationCard {
       },
     });
   }
-
   // Behavior in Player.getTagCount
-  public play() {
-    return undefined;
-  }
 }

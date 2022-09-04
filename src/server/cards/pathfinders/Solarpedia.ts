@@ -44,7 +44,7 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
     return undefined;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return undefined;
   }

@@ -32,7 +32,7 @@ export class SolarFarm extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 
@@ -45,7 +45,7 @@ export class SolarFarm extends Card implements IProjectCard {
     player.production.add(Resources.ENERGY, plantsOnSpace, {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space for Solar Farm tile',
       player.game.board.getAvailableSpacesOnLand(player),

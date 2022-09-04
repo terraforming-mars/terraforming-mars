@@ -36,7 +36,7 @@ export class InterplanetaryCinematics extends Card implements ICorporationCard {
       player.megaCredits += 2;
     }
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.steel = 20;
     return undefined;
   }

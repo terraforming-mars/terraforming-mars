@@ -30,7 +30,7 @@ export class SoilDetoxification extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.PLANTS, 1);
     player.plantsNeededForGreenery--;
     return undefined;

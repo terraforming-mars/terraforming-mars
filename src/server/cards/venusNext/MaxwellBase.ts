@@ -37,10 +37,10 @@ export class MaxwellBase extends Card implements IActionCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.production.energy >= 1;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.ENERGY, -1);
     player.game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
     return undefined;

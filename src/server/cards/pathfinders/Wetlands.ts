@@ -55,14 +55,14 @@ export class Wetlands extends Card implements IProjectCard {
       .filter((space) => !spacesNextToRedCity.includes(space));
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     if (!player.hasUnits(this.reserveUnits)) {
       return false;
     }
     return this.availableSpaces(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.deductUnits(this.reserveUnits);
 
     return new SelectSpace(

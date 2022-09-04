@@ -21,7 +21,7 @@ describe('AsteroidRights', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
 
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
   });
 
   it('Should play', function() {

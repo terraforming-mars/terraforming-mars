@@ -44,9 +44,5 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
     player.game.log('${0} spent 1 plant to place an animal on ${1}.', (b) => b.player(player).card(this));
     return undefined;
   }
-
-  public play() {
-    return undefined;
-  }
 }
 

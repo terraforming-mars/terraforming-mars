@@ -35,10 +35,6 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;

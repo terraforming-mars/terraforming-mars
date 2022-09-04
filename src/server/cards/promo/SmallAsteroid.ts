@@ -28,7 +28,7 @@ export class SmallAsteroid extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 1);
     player.game.defer(new RemoveAnyPlants(player, 2));
     return undefined;

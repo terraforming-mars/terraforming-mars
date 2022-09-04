@@ -35,7 +35,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     player.production.add(Resources.MEGACREDITS, 2);
     // The +1 below is for the two Jovian tags on this card.

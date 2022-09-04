@@ -29,7 +29,7 @@ export class CorroderSuits extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 2);
     const cards = CorroderSuits.getVenusResCards(player);
 

@@ -11,7 +11,7 @@ describe('Advertising', function() {
     Game.newInstance('gameid', [player], player);
 
     player.playedCards.push(advertising);
-    advertising.play();
+    advertising.play(player);
     expect(player.production.megacredits).to.eq(0);
 
     const card = new EarthCatapult();

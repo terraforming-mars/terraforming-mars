@@ -48,7 +48,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
     return undefined;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 3);
     player.game.addCityTile(player, SpaceName.VENERA_BASE, SpaceType.COLONY);
     return undefined;

@@ -129,8 +129,33 @@ export abstract class Card {
   public get tilesBuilt(): Array<TileType> {
     return this.properties.tilesBuilt || [];
   }
-  public canPlay(_player: Player) {
+  public canPlay(player: Player) {
+    if (this.requirements?.satisfies(player) === false) {
+      return false;
+    }
+    if (this.productionBox && !player.production.canAdjust(this.productionBox)) {
+      return false;
+    }
+    return this.bespokeCanPlay(player);
+  }
+
+  public bespokeCanPlay(_player: Player): boolean {
     return true;
+  }
+
+  public play(player: Player) {
+    if (this.productionBox !== undefined) {
+      player.production.adjust(this.productionBox);
+    }
+    if (!isICorporationCard(this)) {
+      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
+      player.deductUnits(adjustedReserveUnits);
+    }
+    return this.bespokePlay(player);
+  }
+
+  public bespokePlay(_player: Player): PlayerInput | undefined {
+    return undefined;
   }
 
   // player is optional to support historical tests.
@@ -266,33 +291,5 @@ export abstract class Card {
 export abstract class Card2 extends Card {
   constructor(properties: StaticCardProperties) {
     super(properties);
-  }
-  public override canPlay(player: Player) {
-    if (this.requirements?.satisfies(player) === false) {
-      return false;
-    }
-    if (this.productionBox && !player.production.canAdjust(this.productionBox)) {
-      return false;
-    }
-    return this.bespokeCanPlay(player);
-  }
-
-  public bespokeCanPlay(_player: Player): boolean {
-    return true;
-  }
-
-  public play(player: Player) {
-    if (this.productionBox !== undefined) {
-      player.production.adjust(this.productionBox);
-    }
-    if (!isICorporationCard(this)) {
-      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-      player.deductUnits(adjustedReserveUnits);
-    }
-    return this.bespokePlay(player);
-  }
-
-  public bespokePlay(_player: Player): PlayerInput | undefined {
-    return undefined;
   }
 }

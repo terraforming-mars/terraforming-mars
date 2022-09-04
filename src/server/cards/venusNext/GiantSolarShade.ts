@@ -23,7 +23,7 @@ export class GiantSolarShade extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.increaseVenusScaleLevel(player, 3);
     return undefined;
   }

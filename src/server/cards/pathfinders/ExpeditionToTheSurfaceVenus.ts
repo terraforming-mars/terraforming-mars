@@ -28,7 +28,7 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.drawCard(2);
     player.game.increaseVenusScaleLevel(player, 1);
     const tagCount = player.tags.count(Tag.VENUS) + 1;

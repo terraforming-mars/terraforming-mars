@@ -6,11 +6,11 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class LunarExports extends Card2 implements IProjectCard {
+export class LunarExports extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 19,

@@ -4,9 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class MiningRobotsManufCenter extends Card2 {
+export class MiningRobotsManufCenter extends Card {
   constructor() {
     super({
       name: CardName.MINING_ROBOTS_MANUF_CENTER,

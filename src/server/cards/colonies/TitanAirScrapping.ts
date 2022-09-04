@@ -7,9 +7,9 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class TitanAirScrapping extends Card2 implements IProjectCard {
+export class TitanAirScrapping extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 21,

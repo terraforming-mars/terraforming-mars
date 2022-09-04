@@ -8,12 +8,12 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class LunaConference extends Card2 implements IProjectCard {
+export class LunaConference extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNA_CONFERENCE,

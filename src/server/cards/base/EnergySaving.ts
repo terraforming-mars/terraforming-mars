@@ -1,5 +1,5 @@
 
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
@@ -10,7 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class EnergySaving extends Card2 implements IProjectCard {
+export class EnergySaving extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

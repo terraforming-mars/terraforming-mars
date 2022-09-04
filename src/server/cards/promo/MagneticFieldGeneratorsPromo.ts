@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -10,7 +10,7 @@ import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class MagneticFieldGeneratorsPromo extends Card2 implements IProjectCard {
+export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

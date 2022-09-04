@@ -1,4 +1,4 @@
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class HiredRaiders extends Card2 implements IProjectCard {
+export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

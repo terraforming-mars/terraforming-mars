@@ -6,12 +6,12 @@ import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {StealResources} from '../../deferredActions/StealResources';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class AirRaid extends Card2 implements IProjectCard {
+export class AirRaid extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 0,

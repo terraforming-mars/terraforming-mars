@@ -8,10 +8,10 @@ import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {max} from '../Options';
 
-export class PioneerSettlement extends Card2 implements IProjectCard {
+export class PioneerSettlement extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 13,

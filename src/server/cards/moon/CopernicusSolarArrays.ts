@@ -4,9 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class CopernicusSolarArrays extends Card2 {
+export class CopernicusSolarArrays extends Card {
   constructor() {
     super({
       name: CardName.COPERNICUS_SOLAR_ARRAYS,

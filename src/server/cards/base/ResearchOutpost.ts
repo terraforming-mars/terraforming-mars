@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -10,7 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 
-export class ResearchOutpost extends Card2 implements IProjectCard {
+export class ResearchOutpost extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

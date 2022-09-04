@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -11,7 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Priority} from '../../deferredActions/DeferredAction';
 
-export class ArtificialPhotosynthesis extends Card2 implements IProjectCard {
+export class ArtificialPhotosynthesis extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

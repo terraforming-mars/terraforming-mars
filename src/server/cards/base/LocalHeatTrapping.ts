@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -12,7 +12,7 @@ import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class LocalHeatTrapping extends Card2 implements IProjectCard {
+export class LocalHeatTrapping extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

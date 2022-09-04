@@ -4,7 +4,7 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
-import {Card2, StaticCardProperties} from '../Card';
+import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
 
 export interface Terms {
@@ -14,7 +14,7 @@ export interface Terms {
 }
 
 // An abstract base class for SteelMarketMonopolists and TitaniumMarketMonopolists
-export abstract class MarketCard extends Card2 implements IActionCard {
+export abstract class MarketCard extends Card implements IActionCard {
   constructor(
     public readonly tradeResource: Resources,
     public readonly buyingTerms: Terms,

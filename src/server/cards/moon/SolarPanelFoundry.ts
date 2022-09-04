@@ -6,9 +6,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class SolarPanelFoundry extends Card2 implements IActionCard, IProjectCard {
+export class SolarPanelFoundry extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.SOLAR_PANEL_FOUNDRY,

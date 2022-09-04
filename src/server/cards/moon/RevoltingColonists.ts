@@ -7,11 +7,11 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class RevoltingColonists extends Card2 implements IProjectCard {
+export class RevoltingColonists extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.REVOLTING_COLONISTS,

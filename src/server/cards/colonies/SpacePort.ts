@@ -7,9 +7,9 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class SpacePort extends Card2 implements IProjectCard {
+export class SpacePort extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 22,

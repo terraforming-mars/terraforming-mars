@@ -5,10 +5,10 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class IceMoonColony extends Card2 implements IProjectCard {
+export class IceMoonColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 23,

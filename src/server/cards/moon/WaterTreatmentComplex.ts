@@ -3,11 +3,11 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
 
-export class WaterTreatmentComplex extends Card2 {
+export class WaterTreatmentComplex extends Card {
   constructor() {
     super({
       name: CardName.WATER_TREATMENT_COMPLEX,

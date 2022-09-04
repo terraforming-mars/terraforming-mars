@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -10,7 +10,7 @@ import {CardResource} from '../../../common/CardResource';
 import {ICard} from '../ICard';
 import {played} from '../Options';
 
-export class MartianRepository extends Card2 implements IProjectCard {
+export class MartianRepository extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

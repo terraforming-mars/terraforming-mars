@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class HeavyTaxation extends Card2 implements IProjectCard {
+export class HeavyTaxation extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 3,

@@ -7,10 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 
-export class LunarMineUrbanization extends Card2 implements IProjectCard {
+export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.LUNAR_MINE_URBANIZATION,

@@ -4,12 +4,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 
-export class MicrosingularityPlant extends Card2 implements IProjectCard {
+export class MicrosingularityPlant extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.MICROSINGULARITY_PLANT,

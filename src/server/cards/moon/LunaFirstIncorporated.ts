@@ -6,10 +6,10 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../../../common/cards/render/Size';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {all} from '../Options';
 
-export class LunaFirstIncorporated extends Card2 implements ICorporationCard {
+export class LunaFirstIncorporated extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

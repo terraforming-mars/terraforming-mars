@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
@@ -9,7 +9,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class OpenCity extends Card2 implements IProjectCard {
+export class OpenCity extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

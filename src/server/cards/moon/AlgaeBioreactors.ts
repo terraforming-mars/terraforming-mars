@@ -4,9 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class AlgaeBioreactors extends Card2 {
+export class AlgaeBioreactors extends Card {
   constructor() {
     super({
       name: CardName.ALGAE_BIOREACTORS,

@@ -1,5 +1,5 @@
 import {TileType} from '../../../common/TileType';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -12,7 +12,7 @@ import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class MoholeArea extends Card2 implements IProjectCard {
+export class MoholeArea extends Card implements IProjectCard {
   constructor(
     name = CardName.MOHOLE_AREA,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,

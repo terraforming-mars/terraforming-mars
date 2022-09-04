@@ -9,9 +9,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class TitanShuttles extends Card2 implements IProjectCard {
+export class TitanShuttles extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 23,

@@ -5,13 +5,13 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class UtopiaInvest extends Card2 implements IActionCard, ICorporationCard {
+export class UtopiaInvest extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,

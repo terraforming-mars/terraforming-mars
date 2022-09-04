@@ -5,9 +5,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class SponsoredMohole extends Card2 implements IProjectCard {
+export class SponsoredMohole extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 5,

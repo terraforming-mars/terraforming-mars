@@ -4,11 +4,11 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class FloaterLeasing extends Card2 implements IProjectCard {
+export class FloaterLeasing extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 3,

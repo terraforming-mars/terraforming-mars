@@ -6,10 +6,10 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class ProcessorFactory extends Card2 implements IProjectCard {
+export class ProcessorFactory extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.PROCESSOR_FACTORY,

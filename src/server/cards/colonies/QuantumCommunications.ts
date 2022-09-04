@@ -6,11 +6,11 @@ import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class QuantumCommunications extends Card2 implements IProjectCard {
+export class QuantumCommunications extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 8,

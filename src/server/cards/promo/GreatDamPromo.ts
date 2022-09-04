@@ -9,9 +9,9 @@ import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class GreatDamPromo extends Card2 implements IProjectCard {
+export class GreatDamPromo extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

@@ -4,11 +4,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Conscription extends Card2 implements IProjectCard {
+export class Conscription extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.EVENT,

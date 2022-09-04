@@ -7,10 +7,10 @@ import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Size} from '../../../common/cards/render/Size';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EcologyResearch extends Card2 implements IProjectCard {
+export class EcologyResearch extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 21,

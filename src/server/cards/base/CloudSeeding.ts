@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class CloudSeeding extends Card2 implements IProjectCard {
+export class CloudSeeding extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

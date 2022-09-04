@@ -6,9 +6,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 
-export class UndermoonDrugLordsNetwork extends Card2 implements IProjectCard {
+export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.UNDERMOON_DRUG_LORDS_NETWORK,

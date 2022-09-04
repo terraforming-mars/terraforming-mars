@@ -7,12 +7,12 @@ import {MoonSpaces} from '../../moon/MoonSpaces';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Game} from '../../Game';
 import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class LunaTradeStation extends Card2 implements IActionCard {
+export class LunaTradeStation extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LUNA_TRADE_STATION,

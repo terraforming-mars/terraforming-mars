@@ -17,29 +17,38 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
 import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
+import {Behavior, InternalBehavior, internalize} from '../behavior/Behavior';
+import {Behaviors} from '../behavior/Behaviors';
 
+/* External representation of card properties. */
 export interface StaticCardProperties {
   adjacencyBonus?: AdjacencyBonus;
+  behavior?: Behavior;
   cardCost?: number;
+  cardDiscount?: CardDiscount | Array<CardDiscount>;
   cardType: CardType;
   cost?: number;
   initialActionText?: string;
   metadata: ICardMetadata;
+  productionBox?: Partial<Units>;
   requirements?: CardRequirements;
   name: CardName;
+  reserveUnits?: Partial<Units>,
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  productionBox?: Partial<Units>;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
-  reserveUnits?: Partial<Units>,
+  tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
-  tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
 }
 
-type Properties = Omit<StaticCardProperties, 'productionBox|reserveUnits'> & {productionBox?: Units, reserveUnits?: Units};
-
+/*
+ * Internal representation of card properties.
+ */
+type Properties = Omit<StaticCardProperties, 'productionBox|reserveUnits|behavior'> & {
+  productionBox?: Units,
+  reserveUnits?: Units,
+  behavior: InternalBehavior | undefined};
 
 export const staticCardProperties = new Map<CardName, Properties>();
 
@@ -82,6 +91,7 @@ export abstract class Card {
         ...properties,
         productionBox: properties.productionBox === undefined ? undefined : Units.of(properties.productionBox),
         reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
+        behavior: properties.behavior === undefined ? undefined : internalize(properties.behavior),
       };
       staticCardProperties.set(properties.name, p);
       staticInstance = p;
@@ -91,6 +101,9 @@ export abstract class Card {
   public resourceCount = 0;
   public get adjacencyBonus() {
     return this.properties.adjacencyBonus;
+  }
+  public get behavior() {
+    return this.properties.behavior;
   }
   public get cardCost() {
     return this.properties.cardCost;
@@ -147,6 +160,9 @@ export abstract class Card {
     if (this.productionBox && !player.production.canAdjust(this.productionBox)) {
       return false;
     }
+    if (this.behavior !== undefined && !Behaviors.canExecute(player, this, this.behavior)) {
+      return false;
+    }
     return this.bespokeCanPlay(player);
   }
 
@@ -161,6 +177,9 @@ export abstract class Card {
     if (!isICorporationCard(this)) {
       const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
       player.deductUnits(adjustedReserveUnits);
+    }
+    if (this.behavior !== undefined) {
+      Behaviors.execute(player, this, this.behavior);
     }
     return this.bespokePlay(player);
   }

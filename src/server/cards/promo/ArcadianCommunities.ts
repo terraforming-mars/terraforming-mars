@@ -18,6 +18,10 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
       startingMegaCredits: 40,
       initialActionText: 'Place a community (player marker) on a non-reserved area',
 
+      behavior: {
+        stock: {steel: 10},
+      },
+
       metadata: {
         cardNumber: 'R44',
         description: 'You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.',
@@ -74,10 +78,5 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
         return undefined;
       },
     );
-  }
-
-  public override bespokePlay(player: Player) {
-    player.steel = 10;
-    return undefined;
   }
 }

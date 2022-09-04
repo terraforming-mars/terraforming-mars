@@ -17,6 +17,10 @@ export class ImpactorSwarm extends Card implements IProjectCard {
       name: CardName.IMPACTOR_SWARM,
       cardType: CardType.EVENT,
 
+      behavior: {
+        stock: {heat: 12},
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN, 2)),
       metadata: {
         cardNumber: 'C16',
@@ -31,7 +35,6 @@ export class ImpactorSwarm extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(new RemoveAnyPlants(player, 2));
-    player.heat += 12;
     return undefined;
   }
 }

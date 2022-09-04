@@ -2,7 +2,6 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {played} from '../Options';
@@ -11,6 +10,10 @@ export class DeepSpaceOperations extends PreludeCard {
   constructor() {
     super({
       name: CardName.DEEP_SPACE_OPERATIONS,
+
+      behavior: {
+        stock: {titanium: 4},
+      },
 
       metadata: {
         cardNumber: 'P08',
@@ -24,7 +27,6 @@ export class DeepSpaceOperations extends PreludeCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.addResource(Resources.TITANIUM, 4);
     player.drawCard(2, {
       tag: Tag.SPACE,
       cardType: CardType.EVENT,

@@ -22,6 +22,10 @@ export class MiningGuild extends Card implements ICorporationCard {
       startingMegaCredits: 30,
       productionBox: {steel: 1},
 
+      behavior: {
+        stock: {steel: 5},
+      },
+
       metadata: {
         cardNumber: 'R24',
         description: 'You start with 30 M€, 5 steel and 1 steel production.',
@@ -54,10 +58,5 @@ export class MiningGuild extends Card implements ICorporationCard {
     if (space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM)) {
       cardOwner.game.defer(new GainProduction(cardOwner, Resources.STEEL));
     }
-  }
-
-  public override bespokePlay(player: Player) {
-    player.steel = 5;
-    return undefined;
   }
 }

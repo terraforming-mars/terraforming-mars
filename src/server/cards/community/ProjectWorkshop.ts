@@ -26,6 +26,10 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
       initialActionText: 'Draw a blue card',
 
+      behavior: {
+        stock: {steel: 1, titanium: 1},
+      },
+
       metadata: {
         cardNumber: 'R45',
         description: 'You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.',
@@ -46,12 +50,6 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.steel = 1;
-    player.titanium = 1;
-    return undefined;
   }
 
   public initialAction(player: Player) {

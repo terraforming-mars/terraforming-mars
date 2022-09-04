@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -9,7 +8,10 @@ export class Biofuels extends PreludeCard {
     super({
       name: CardName.BIOFUELS,
       tags: [Tag.MICROBE],
-      productionBox: {energy: 1, plants: 1},
+      behavior: {
+        production: {energy: 1, plants: 1},
+        stock: {plants: 2},
+      },
 
       metadata: {
         cardNumber: 'P03',
@@ -20,10 +22,6 @@ export class Biofuels extends PreludeCard {
         description: 'Increase your energy and plant production 1 step. Gain 2 plants.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.plants += 2;
-    return undefined;
   }
 }
 

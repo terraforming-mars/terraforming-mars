@@ -16,6 +16,11 @@ export class FieldCappedCity extends Card implements IProjectCard {
       tags: [Tag.CITY, Tag.BUILDING, Tag.ENERGY],
       cost: 29,
       productionBox: {energy: 1, megacredits: 2},
+
+      behavior: {
+        stock: {plants: 3},
+      },
+
       metadata: {
         cardNumber: 'X21',
         description: 'Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',
@@ -40,7 +45,6 @@ export class FieldCappedCity extends Card implements IProjectCard {
       player.game.board.getAvailableSpacesForCity(player),
       (space: ISpace) => {
         player.game.addCityTile(player, space.id);
-        player.plants += 3;
         return undefined;
       },
     );

@@ -1,16 +1,23 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
+import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Tag} from '../../../src/common/cards/Tag';
+import {Units} from '../../../src/common/Units';
 
-describe('ResearchCoordination', function() {
+describe('ResearchNetwork', function() {
   it('Should play', function() {
     const game = newTestGame(1);
     const player = getTestPlayer(game, 0);
-    const card = new ResearchCoordination();
+    const card = new ResearchNetwork();
 
-    const action = card.play();
+    expect(player.cardsInHand).has.length(0);
+    expect(player.production.asUnits()).deep.eq(Units.of({}));
+
+    const action = card.play(player);
     expect(action).is.undefined;
+
+    expect(player.cardsInHand).has.length(3);
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1}));
 
     expect(player.tags.count(Tag.WILD)).eq(0);
     expect(player.tags.count(Tag.BUILDING)).eq(0);

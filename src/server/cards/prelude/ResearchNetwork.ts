@@ -5,7 +5,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-// TODO(kberg): Add a test
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
   constructor() {
     super({

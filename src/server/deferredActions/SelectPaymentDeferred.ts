@@ -24,7 +24,7 @@ export class SelectPaymentDeferred extends DeferredAction {
   }
 
   private mustPayWithMegacredits() {
-    if (this.player.canUseHeatAsMegaCredits && this.player.heat > 0) {
+    if (this.player.canUseHeatAsMegaCredits && this.player.availableHeat() > 0) {
       return false;
     }
     if (this.options.canUseSteel && this.player.steel > 0) {
@@ -54,7 +54,7 @@ export class SelectPaymentDeferred extends DeferredAction {
     }
 
     return new SelectPayment(
-      this.options.title || 'Select how to pay for ' + this.amount + ' M€',
+      this.options.title || 'Select how to spend ' + this.amount + ' M€',
       this.options.canUseSteel || false,
       this.options.canUseTitanium || false,
       this.player.canUseHeatAsMegaCredits,

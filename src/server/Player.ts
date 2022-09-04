@@ -918,10 +918,10 @@ export class Player {
 
   /**
    * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
-   * plus any units of heat available thanks to Helion.
+   * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
    */
   public spendableMegacredits(): number {
-    return (this.canUseHeatAsMegaCredits) ? (this.heat + this.megaCredits) : this.megaCredits;
+    return this.megaCredits + (this.canUseHeatAsMegaCredits ? this.availableHeat() : 0);
   }
 
   public runResearchPhase(draftVariant: boolean): void {
@@ -1041,7 +1041,10 @@ export class Player {
     this.deductResource(Resources.STEEL, payment.steel);
     this.deductResource(Resources.TITANIUM, payment.titanium);
     this.deductResource(Resources.MEGACREDITS, payment.megaCredits);
-    this.deductResource(Resources.HEAT, payment.heat);
+
+    if (payment.heat > 0) {
+      this.defer(this.spendHeat(payment.heat));
+    }
 
     for (const playedCard of this.playedCards) {
       if (playedCard.name === CardName.PSYCHROPHILES) {
@@ -1274,7 +1277,7 @@ export class Player {
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
     const stormcraft = <StormCraftIncorporated> this.getCorporation(CardName.STORMCRAFT_INCORPORATED);
-    if (stormcraft !== undefined && stormcraft.resourceCount > 0) {
+    if (stormcraft?.resourceCount > 0) {
       return stormcraft.spendHeat(this, amount, cb);
     }
     this.deductResource(Resources.HEAT, amount);
@@ -1471,7 +1474,7 @@ export class Player {
       megaCredits: this.megaCredits - reserveUnits.megacredits,
       steel: this.steel - reserveUnits.steel,
       titanium: this.titanium - reserveUnits.titanium,
-      heat: this.heat - reserveUnits.heat,
+      heat: this.availableHeat() - reserveUnits.heat,
       floaters: this.getSpendableFloaters(),
       microbes: this.getSpendableMicrobes(),
       science: this.getSpendableScienceResources(),

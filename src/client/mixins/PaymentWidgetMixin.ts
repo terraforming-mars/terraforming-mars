@@ -86,7 +86,6 @@ export const PaymentWidgetMixin = {
         throw new Error(`can not reduceValue for ${target} on this`);
       }
 
-
       const adjustedDelta = Math.min(delta, currentValue);
       if (adjustedDelta === 0) return;
       this.asModel()[target] -= adjustedDelta;
@@ -151,6 +150,9 @@ export const PaymentWidgetMixin = {
       const thisPlayer = model.playerView.thisPlayer;
       switch (target) {
       case 'heat':
+        amount = this.availableHeat();
+        break;
+
       case 'steel':
       case 'titanium':
       case 'megaCredits':
@@ -190,5 +192,15 @@ export const PaymentWidgetMixin = {
       }
       return amount;
     },
+    availableHeat(): number {
+      const model = this.asModel();
+      const thisPlayer = model.playerView.thisPlayer;
+      const stormcraft = thisPlayer.tableau.find((card) => card.name === CardName.STORMCRAFT_INCORPORATED);
+      if (stormcraft !== undefined && stormcraft.resources !== undefined) {
+        return thisPlayer.heat + (stormcraft.resources * 2);
+      }
+      return thisPlayer.heat;
+    },
+
   },
 };

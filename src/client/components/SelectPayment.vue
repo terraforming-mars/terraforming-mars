@@ -123,7 +123,7 @@ export default Vue.extend({
       return this.thisPlayer.megaCredits >= this.$data.cost;
     },
     canUseHeat() {
-      return this.playerinput.canUseHeat && this.thisPlayer.heat > 0;
+      return this.playerinput.canUseHeat && this.availableHeat() > 0;
     },
     canUseSteel() {
       return this.playerinput.canUseSteel && this.thisPlayer.steel > 0;

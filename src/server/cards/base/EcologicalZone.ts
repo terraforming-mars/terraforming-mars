@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -17,7 +17,7 @@ import {Phase} from '../../../common/Phase';
 import {played} from '../Options';
 import {Board} from '../../boards/Board';
 
-export class EcologicalZone extends Card2 implements IProjectCard {
+export class EcologicalZone extends Card implements IProjectCard {
   constructor(
     name = CardName.ECOLOGICAL_ZONE,
     cost = 12,

@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,7 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
 
-export class BiomassCombustors extends Card2 implements IProjectCard {
+export class BiomassCombustors extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

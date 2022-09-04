@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class MagneticFieldDome extends Card2 implements IProjectCard {
+export class MagneticFieldDome extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

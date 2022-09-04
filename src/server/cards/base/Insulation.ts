@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Card2} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -8,7 +8,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
-export class Insulation extends Card2 implements IProjectCard {
+export class Insulation extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,

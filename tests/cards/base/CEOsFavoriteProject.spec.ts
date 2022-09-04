@@ -1,4 +1,3 @@
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {Birds} from '../../../src/server/cards/base/Birds';

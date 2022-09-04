@@ -34,7 +34,6 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   public canAct(): boolean {
     return true;

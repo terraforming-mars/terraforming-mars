@@ -37,7 +37,6 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   private canPlaceOcean(player: Player) {
     return player.game.canAddOcean() && player.canAfford(0, {tr: {oceans: 1}});

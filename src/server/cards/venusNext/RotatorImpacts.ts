@@ -37,7 +37,6 @@ export class RotatorImpacts extends Card implements IActionCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   public canAct(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;

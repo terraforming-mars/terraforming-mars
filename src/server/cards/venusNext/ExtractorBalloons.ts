@@ -36,7 +36,6 @@ export class ExtractorBalloons extends Card implements IActionCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public override bespokePlay(player: Player) {
     player.addResourceTo(this, 3);

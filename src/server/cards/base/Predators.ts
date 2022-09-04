@@ -38,8 +38,6 @@ export class Predators extends Card2 implements IProjectCard, IActionCard {
     });
   }
 
-  public override resourceCount = 0;
-
   public canAct(player: Player): boolean {
     if (player.game.isSoloMode()) return true;
     return RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.ANIMAL).length > 0;

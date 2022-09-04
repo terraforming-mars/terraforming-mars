@@ -34,7 +34,6 @@ export class OceanSanctuary extends Card implements IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   public override bespokePlay(player: Player) {
     player.addResourceTo(this, 1);

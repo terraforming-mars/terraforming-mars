@@ -34,7 +34,6 @@ export class TitanAirScrapping extends Card2 implements IProjectCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public canAct(player: Player): boolean {
     if (player.titanium > 0) {

@@ -35,7 +35,6 @@ export class LunarObservationPost extends Card2 implements IActionCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public canAct() {
     return true;

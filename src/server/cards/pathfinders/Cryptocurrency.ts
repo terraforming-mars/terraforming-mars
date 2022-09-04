@@ -34,7 +34,6 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public canAct(player: Player) {
     return player.energy > 0 || this.resourceCount > 0;

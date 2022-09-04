@@ -34,7 +34,6 @@ export class Aurorai extends Card implements ICorporationCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public override play() {
     this.resourceCount = 2;

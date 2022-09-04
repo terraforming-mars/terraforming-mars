@@ -37,7 +37,6 @@ export class SearchForLife extends Card2 implements IActionCard, IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   public override getVictoryPoints() {
     if (this.resourceCount > 0) {

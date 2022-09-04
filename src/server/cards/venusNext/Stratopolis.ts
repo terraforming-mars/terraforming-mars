@@ -41,7 +41,6 @@ export class Stratopolis extends Card implements IActionCard {
       },
     });
   }
-  public override resourceCount = 0;
 
   public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 2);

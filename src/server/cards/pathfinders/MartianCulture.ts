@@ -32,7 +32,6 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public override resourceCount = 0;
 
   public canAct() {
     return true;

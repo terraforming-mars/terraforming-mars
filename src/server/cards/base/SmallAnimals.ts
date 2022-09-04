@@ -41,7 +41,6 @@ export class SmallAnimals extends Card2 implements IActionCard, IProjectCard {
       },
     });
   }
-  public override resourceCount = 0;
   public override bespokeCanPlay(player: Player): boolean {
     return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }

@@ -90,6 +90,7 @@ export default Vue.extend({
         cardsByModule[card.module].push(card.name);
       }
     });
+    GAME_MODULES.forEach((module) => cardsByModule[module].sort());
 
     return {
       cardsByModule: cardsByModule,

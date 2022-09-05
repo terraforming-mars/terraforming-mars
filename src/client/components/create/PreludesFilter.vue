@@ -72,6 +72,7 @@ export default Vue.extend({
     getCards(byType(CardType.PRELUDE)).forEach((card) => {
       cardsByModule[card.module].push(card.name);
     });
+    GAME_MODULES.forEach((module) => cardsByModule[module].sort());
 
     return {
       cardsByModule: cardsByModule,

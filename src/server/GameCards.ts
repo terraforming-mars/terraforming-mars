@@ -20,7 +20,7 @@ import {GameOptions} from './GameOptions';
  * Returns the cards available to a game based on its `GameOptions`.
  *
  * It only includes manifests appropriate to the modules for the game,
- * and considers the denylist, and extra-module compatibility
+ * and considers the exclusion list, and extra-module compatibility
  * (e.g. cards in one module that can't be played without another one.)
  *
  * Therefore, this is only used when constructing a brand new instance.
@@ -112,7 +112,7 @@ export class GameCards {
       this.addDeck(cards, getDeck(manifest));
     }
     return cards.filter((card) => {
-      if (this.gameOptions.cardsBlackList.includes(card.name)) return false;
+      if (this.gameOptions.bannedCards.includes(card.name)) return false;
       for (const manifest of this.manifests) {
         if (manifest.cardsToRemove.has(card.name)) return false;
       }

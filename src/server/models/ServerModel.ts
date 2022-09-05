@@ -540,7 +540,7 @@ export class Server {
       altVenusBoard: options.altVenusBoard,
       aresExtension: options.aresExtension,
       boardName: options.boardName,
-      cardsBlackList: options.cardsBlackList,
+      bannedCards: options.bannedCards,
       coloniesExtension: options.coloniesExtension,
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,

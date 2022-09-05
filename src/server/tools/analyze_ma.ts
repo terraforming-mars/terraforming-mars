@@ -113,7 +113,7 @@ function simpleGameOptions(): GameOptions {
     shuffleMapOption: false,
     soloTR: false,
     customCorporationsList: [],
-    cardsBlackList: [],
+    bannedCards: [],
     customColoniesList: [],
     requiresVenusTrackCompletion: false, // Venus must be completed to end the game
     requiresMoonTrackCompletion: false, // Moon must be completed to end the game

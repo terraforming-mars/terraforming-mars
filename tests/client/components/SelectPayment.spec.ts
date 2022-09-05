@@ -209,25 +209,28 @@ describe('SelectPayment', () => {
     amount: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<PlayerInputModel>) {
-    const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
+    const thisPlayer: Partial<PublicPlayerModel> = {
       steel: 0,
       titanium: 0,
       heat: 0,
       steelValue: 2,
       titaniumValue: 3,
-    }, playerFields);
+      tableau: [],
+      ...playerFields};
+
     const playerView: Partial<PlayerViewModel> = {
       thisPlayer: thisPlayer as PublicPlayerModel,
       id: 'playerid-foo',
     };
 
-    const playerInput: Partial<PlayerInputModel> = Object.assign({
+    const playerInput: Partial<PlayerInputModel> = {
       amount: amount,
       title: 'foo',
       microbes: 0,
       floaters: 0,
       science: 0,
-    }, playerInputFields);
+      ...playerInputFields,
+    };
 
     return mount(SelectPayment, {
       localVue: getLocalVue(),

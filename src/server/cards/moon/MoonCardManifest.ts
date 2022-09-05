@@ -228,10 +228,10 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MOON_ROAD_STANDARD_PROJECT_V2, Factory: MoonRoadStandardProjectVariant2},
   ],
   preludeCards: [
-    {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement},
-    {cardName: CardName.CORE_MINE, Factory: CoreMine},
-    {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: 'colonies'},
-    {cardName: CardName.LUNAR_PlANNING_OFFICE, Factory: LunarPlanningOffice},
-    {cardName: CardName.MINING_COMPLEX, Factory: MiningComplex},
+    {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement, compatibility: 'moon'},
+    {cardName: CardName.CORE_MINE, Factory: CoreMine, compatibility: 'moon'},
+    {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: ['moon', 'colonies']},
+    {cardName: CardName.LUNAR_PlANNING_OFFICE, Factory: LunarPlanningOffice, compatibility: 'moon'},
+    {cardName: CardName.MINING_COMPLEX, Factory: MiningComplex, compatibility: 'moon'},
   ],
 });

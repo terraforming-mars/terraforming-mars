@@ -570,6 +570,28 @@ describe('Game', () => {
     expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
   });
 
+  it('specifically-requested preludes override expansion preludes', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const customPreludes = [
+      CardName.MERGER,
+      CardName.CORPORATE_ARCHIVES,
+      CardName.SURVEY_MISSION,
+      CardName.DESIGN_COMPANY,
+      CardName.PERSONAL_AGENDA,
+      CardName.VITAL_COLONY,
+      CardName.STRATEGIC_BASE_PLANNING,
+      CardName.EXPERIENCED_MARTIANS,
+    ];
+    const gameOptions = setCustomGameOptions({preludeExtension: true, customPreludes, pathfindersExpansion: false, promoCardsOption: false});
+    Game.newInstance('gameid', [player, player2], player, gameOptions);
+
+    const assignedPreludes =
+            [...player.dealtPreludeCards, ...player2.dealtPreludeCards].map((c) => c.name);
+
+    expect(assignedPreludes).has.members(customPreludes);
+  });
+
   it('fails when the same id appears in two players', () => {
     const player1 = new Player('name', Color.BLUE, false, 0, 'p-id3');
     const player2 = new Player('name', Color.RED, false, 0, 'p-id3');

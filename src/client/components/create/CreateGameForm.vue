@@ -229,6 +229,13 @@
                                 <span v-i18n>Custom Corporation list</span>
                             </label>
 
+                            <template v-if="prelude">
+                              <input type="checkbox" v-model="showPreludesList" id="customPreludes-checkbox">
+                              <label for="customPreludes-checkbox">
+                                  <span v-i18n>Custom Preludes list</span>
+                              </label>
+                            </template>
+
                             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
@@ -384,7 +391,7 @@
             <div class="create-game--block" v-if="showCorporationList">
               <CorporationsFilter
                   ref="corporationsFilter"
-                  v-on:corporation-list-changed="updateCustomCorporationsList"
+                  v-on:corporation-list-changed="updatecustomCorporations"
                   v-bind:corporateEra="corporateEra"
                   v-bind:prelude="prelude"
                   v-bind:venusNext="venusNext"
@@ -400,11 +407,22 @@
             <div class="create-game--block" v-if="showColoniesList">
               <ColoniesFilter
                   ref="coloniesFilter"
-                  v-on:colonies-list-changed="updateCustomColoniesList"
+                  v-on:colonies-list-changed="updatecustomColonies"
                   v-bind:venusNext="venusNext"
                   v-bind:turmoil="turmoil"
                   v-bind:communityCardsOption="communityCardsOption"
               ></ColoniesFilter>
+            </div>
+
+            <div class="create-game--block" v-if="showPreludesList">
+              <PreludesFilter
+                  ref="preludesFilter"
+                  v-on:prelude-list-changed="updateCustomPreludes"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
+              ></PreludesFilter>
             </div>
 
             <div class="create-game--block" v-if="showBannedCards">
@@ -425,6 +443,7 @@ import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
+import PreludesFilter from '@/client/components/create/PreludesFilter.vue';
 import {translateText, translateTextWithParams} from '@/client/directives/i18n';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
@@ -455,16 +474,17 @@ export interface CreateGameModel {
     randomMA: RandomMAOptionType;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
-    // beginnerOption: boolean;
     venusNext: boolean;
     colonies: boolean;
     turmoil: boolean;
-    customCorporationsList: Array<CardName>;
-    customColoniesList: Array<ColonyName>;
     bannedCards: Array<CardName>;
+    customColonies: Array<ColonyName>;
+    customCorporations: Array<CardName>;
+    customPreludes: Array<CardName>;
+    showBannedCards: boolean;
     showCorporationList: boolean;
     showColoniesList: boolean;
-    showBannedCards: boolean;
+    showPreludesList: boolean;
     board: BoardNameType;
     boards: Array<BoardNameType>;
     seed: number;
@@ -532,10 +552,12 @@ export default (Vue as WithRefs<Refs>).extend({
       colonies: false,
       showColoniesList: false,
       showCorporationList: false,
+      showPreludesList: false,
       showBannedCards: false,
       turmoil: false,
-      customCorporationsList: [],
-      customColoniesList: [],
+      customColonies: [],
+      customCorporations: [],
+      customPreludes: [],
       bannedCards: [],
       board: BoardName.ORIGINAL,
       boards: [
@@ -583,6 +605,7 @@ export default (Vue as WithRefs<Refs>).extend({
     CardsFilter,
     ColoniesFilter,
     CorporationsFilter,
+    PreludesFilter,
     PreferencesIcon,
   },
   watch: {
@@ -638,8 +661,8 @@ export default (Vue as WithRefs<Refs>).extend({
           const results = JSON.parse(readerResults);
           const players = results['players'];
           component.playersCount = players.length;
-          component.showCorporationList = results['customCorporationsList'].length > 0;
-          component.showColoniesList = results['customColoniesList'].length > 0;
+          component.showCorporationList = results['customCorporations'].length > 0;
+          component.showColoniesList = results['customColonies'].length > 0;
           component.showBannedCards = results['bannedCards'].length > 0;
 
           // Capture the solar phase option since several of the other results will change
@@ -647,7 +670,7 @@ export default (Vue as WithRefs<Refs>).extend({
           const capturedSolarPhaseOption = results.solarPhaseOption;
 
           for (const k in results) {
-            if (['customCorporationsList', 'customColoniesList', 'bannedCards', 'players', 'solarPhaseOption'].includes(k)) continue;
+            if (['customCorporations', 'customColonies', 'bannedCards', 'players', 'solarPhaseOption'].includes(k)) continue;
             (component as any)[k] = results[k];
           }
 
@@ -657,18 +680,22 @@ export default (Vue as WithRefs<Refs>).extend({
 
           Vue.nextTick(() => {
             if (component.showColoniesList) {
-              refs.coloniesFilter.updateColoniesByNames(results['customColoniesList']);
+              refs.coloniesFilter.updateColoniesByNames(results['customColonies']);
             }
 
             if (component.showCorporationList) {
-              refs.corporationsFilter.selectedCorporations = results['customCorporationsList'];
+              refs.corporationsFilter.selectedCorporations = results['customCorporations'];
+            }
+
+            if (component.showPreludeList) {
+              refs.preludesFilter.updatePreludes(results['customPreludeList']);
             }
 
             if (component.showBannedCards) {
               refs.cardsFilter.selectedCardNames = results['bannedCards'];
             }
 
-            if ( ! component.seededGame) {
+            if (!component.seededGame) {
               component.seed = Math.random();
             }
 
@@ -689,14 +716,17 @@ export default (Vue as WithRefs<Refs>).extend({
         [String(player.index)],
       );
     },
-    updateCustomCorporationsList(customCorporationsList: Array<CardName>) {
-      this.customCorporationsList = customCorporationsList;
+    updatecustomCorporations(customCorporations: Array<CardName>) {
+      this.customCorporations = customCorporations;
+    },
+    updateCustomPreludes(customPreludes: Array<CardName>) {
+      this.customPreludes = customPreludes;
     },
     updateBannedCards(bannedCards: Array<CardName>) {
       this.bannedCards = bannedCards;
     },
-    updateCustomColoniesList(customColoniesList: Array<ColonyName>) {
-      this.customColoniesList = customColoniesList;
+    updatecustomColonies(customColonies: Array<ColonyName>) {
+      this.customColonies = customColonies;
     },
     getPlayers(): Array<NewPlayerModel> {
       return this.players.slice(0, this.playersCount);
@@ -866,8 +896,9 @@ export default (Vue as WithRefs<Refs>).extend({
       const turmoil = component.turmoil;
       const solarPhaseOption = this.solarPhaseOption;
       const shuffleMapOption = this.shuffleMapOption;
-      const customCorporationsList = component.customCorporationsList;
-      const customColoniesList = component.customColoniesList;
+      const customColonies = component.customColonies;
+      const customCorporations = component.customCorporations;
+      const customPreludes = component.customPreludes;
       const bannedCards = component.bannedCards;
       const board = component.board;
       const seed = component.seed;
@@ -894,7 +925,7 @@ export default (Vue as WithRefs<Refs>).extend({
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
-      if (customColoniesList.length > 0) {
+      if (customColonies.length > 0) {
         const playersCount = players.length;
         let neededColoniesCount = playersCount + 2;
         if (playersCount === 1) {
@@ -903,7 +934,7 @@ export default (Vue as WithRefs<Refs>).extend({
           neededColoniesCount = 5;
         }
 
-        if (customColoniesList.length < neededColoniesCount) {
+        if (customColonies.length < neededColoniesCount) {
           window.alert(translateTextWithParams('Must select at least ${0} colonies', [neededColoniesCount.toString()]));
           return;
         }
@@ -916,14 +947,14 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       // Check custom corp count
-      if (component.showCorporationList && customCorporationsList.length > 0) {
+      if (component.showCorporationList && customCorporations.length > 0) {
         const neededCorpsCount = players.length * startingCorporations;
-        if (customCorporationsList.length < neededCorpsCount) {
+        if (customCorporations.length < neededCorpsCount) {
           window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
           return;
         }
         let valid = true;
-        for (const corp of customCorporationsList) {
+        for (const corp of customCorporations) {
           const card = getCard(corp);
           for (const module of card?.compatibility ?? []) {
             if (!this.isEnabled(module)) {
@@ -937,7 +968,33 @@ export default (Vue as WithRefs<Refs>).extend({
           if (confirm === false) return;
         }
       } else {
-        customCorporationsList.length = 0;
+        customCorporations.length = 0;
+      }
+
+      // TODO(kberg): this is a direct copy of the code right above.
+      // Check custom prelude count
+      if (component.showPreludesList && customPreludes.length > 0) {
+        const requiredPreludeCount = players.length * constants.PRELUDE_CARDS_DEALT_PER_PLAYER;
+        if (customPreludes.length < requiredPreludeCount) {
+          window.alert(translateTextWithParams('Must select at least ${0} Preludes', [requiredPreludeCount.toString()]));
+          return;
+        }
+        let valid = true;
+        for (const prelude of customPreludes) {
+          const card = getCard(prelude);
+          for (const module of card?.compatibility ?? []) {
+            if (!this.isEnabled(module)) {
+              valid = false;
+            }
+          }
+        }
+        if (valid === false) {
+          const confirm = window.confirm(translateText(
+            'Some of the Preludes you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
+          if (confirm === false) return;
+        }
+      } else {
+        customPreludes.length = 0;
       }
 
       // Clone game checks
@@ -979,8 +1036,9 @@ export default (Vue as WithRefs<Refs>).extend({
         venusNext,
         colonies,
         turmoil,
-        customCorporationsList,
-        customColoniesList,
+        customCorporationsList: customCorporations,
+        customColoniesList: customColonies,
+        customPreludes,
         bannedCards,
         board,
         seed,

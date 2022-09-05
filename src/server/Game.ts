@@ -241,12 +241,12 @@ export class Game {
       game.pathfindersData = PathfindersExpansion.initialize(gameOptions);
     }
 
-    // Setup custom corporation list
+    // Set up custom corporation list
     let corporationCards = game.dealer.corporationCards;
 
     const minCorpsRequired = players.length * gameOptions.startingCorporations;
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-      const customCorporationCards: ICorporationCard[] = [];
+      const customCorporationCards: Array<ICorporationCard> = [];
       for (const corp of gameOptions.customCorporationsList) {
         const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
@@ -256,10 +256,29 @@ export class Game {
 
     corporationCards = Dealer.shuffle(corporationCards);
 
-    // Failsafe for exceding corporation pool
-    if (gameOptions.startingCorporations * players.length > corporationCards.length) {
+    // Failsafe for exceeding corporation pool
+    if (minCorpsRequired > corporationCards.length) {
       gameOptions.startingCorporations = 2;
     }
+
+    // Set up custom preludes list
+    let preludeCards: Array<IProjectCard> = game.dealer.preludeDeck;
+    if (gameOptions.preludeExtension) {
+      const minPreludesRequired = players.length * constants.PRELUDE_CARDS_DEALT_PER_PLAYER;
+      const customPreludes: Array<IProjectCard> = [];
+      if (gameOptions.customPreludes && gameOptions.customPreludes.length >= minPreludesRequired) {
+        for (const preludeName of gameOptions.customPreludes) {
+          const prelude = cardFinder.getPreludeByName(preludeName);
+          if (prelude) customPreludes.push(prelude);
+        }
+        // Failsafe for custom list not being large enough
+        if (minPreludesRequired <= preludeCards.length) {
+          preludeCards = customPreludes;
+        }
+      }
+    }
+
+    preludeCards = Dealer.shuffle(preludeCards);
 
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
@@ -298,8 +317,13 @@ export class Game {
           }
         }
         if (gameOptions.preludeExtension) {
-          for (let i = 0; i < 4; i++) {
-            player.dealtPreludeCards.push(dealer.dealPreludeCard());
+          for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
+            const prelude = preludeCards.pop();
+            if (prelude !== undefined) {
+              player.dealtPreludeCards.push(prelude);
+            } else {
+              throw new Error('No prelude card dealt for player');
+            }
           }
         }
       } else {

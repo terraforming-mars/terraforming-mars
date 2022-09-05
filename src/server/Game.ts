@@ -1583,6 +1583,7 @@ export class Game {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
+    gameOptions.bannedCards = gameOptions.bannedCards ?? [];
     const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element, d));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {

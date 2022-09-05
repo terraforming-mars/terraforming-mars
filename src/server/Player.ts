@@ -1365,11 +1365,15 @@ export class Player {
   }
 
   public takeActionForFinalGreenery(): void {
+    const resolveFinalGreeneryDeferredActions = () => {
+      this.game.deferredActions.runAll(() => this.takeActionForFinalGreenery());
+    };
+
     // Resolve any deferredAction before placing the next greenery
     // Otherwise if two tiles are placed next to Philares, only the last benefit is triggered
     // if Philares does not accept the first bonus before the second tile is down
     if (this.game.deferredActions.length > 0) {
-      this.resolveFinalGreeneryDeferredActions();
+      resolveFinalGreeneryDeferredActions();
       return;
     }
 
@@ -1388,8 +1392,7 @@ export class Player {
             this.takeActionForFinalGreenery();
 
             // Resolve Philares deferred actions
-            if (this.game.deferredActions.length > 0) this.resolveFinalGreeneryDeferredActions();
-
+            if (this.game.deferredActions.length > 0) resolveFinalGreeneryDeferredActions();
             return undefined;
           },
         ),
@@ -1405,14 +1408,10 @@ export class Player {
     }
 
     if (this.game.deferredActions.length > 0) {
-      this.resolveFinalGreeneryDeferredActions();
+      resolveFinalGreeneryDeferredActions();
     } else {
       this.game.playerIsDoneWithGame(this);
     }
-  }
-
-  private resolveFinalGreeneryDeferredActions() {
-    this.game.deferredActions.runAll(() => this.takeActionForFinalGreenery());
   }
 
   private getPlayablePreludeCards(): Array<IProjectCard> {

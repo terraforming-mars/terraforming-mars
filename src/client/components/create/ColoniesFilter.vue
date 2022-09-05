@@ -51,13 +51,16 @@ export default Vue.extend({
     },
   },
   data() {
+    const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
+    const communityColonies = [...OFFICIAL_COLONY_NAMES].sort();
+
     const data: Data = {
-      allColonies: OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES),
-      officialColonies: OFFICIAL_COLONY_NAMES,
-      communityColonies: COMMUNITY_COLONY_NAMES,
+      allColonies: officialColonies.concat(communityColonies),
+      officialColonies,
+      communityColonies,
       selectedColonies: [
-        ...OFFICIAL_COLONY_NAMES,
-        ...this.communityCardsOption ? COMMUNITY_COLONY_NAMES: [],
+        ...officialColonies,
+        ...this.communityCardsOption ? communityColonies: [],
       ],
       modules: ['colonies', 'community'],
     };

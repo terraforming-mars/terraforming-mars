@@ -115,6 +115,7 @@ function simpleGameOptions(): GameOptions {
     customCorporationsList: [],
     bannedCards: [],
     customColoniesList: [],
+    customPreludes: [],
     requiresVenusTrackCompletion: false, // Venus must be completed to end the game
     requiresMoonTrackCompletion: false, // Moon must be completed to end the game
     moonStandardProjectVariant: false,

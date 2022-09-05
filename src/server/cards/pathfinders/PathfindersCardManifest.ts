@@ -215,7 +215,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CO2_REDUCERS, Factory: CO2Reducers, compatibility: 'venus'},
     {cardName: CardName.HYDROGEN_BOMBARDMENT, Factory: HydrogenBombardment, compatibility: 'venus'},
     {cardName: CardName.RESEARCH_GRANT_PATHFINDERS, Factory: ResearchGrant},
-    {cardName: CardName.CREW_TRAINING, Factory: CrewTraining},
+    {cardName: CardName.CREW_TRAINING, Factory: CrewTraining, compatibility: 'pathfinders'},
     {cardName: CardName.SURVEY_MISSION, Factory: SurveyMission},
     {cardName: CardName.DESIGN_COMPANY, Factory: DesignCompany},
     // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
@@ -224,7 +224,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: 'colonies'},
     {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
     {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},
-    {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: 'turmoil'},
+    {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: ['turmoil', 'pathfinders']},
     {cardName: CardName.THE_NEW_SPACE_RACE, Factory: TheNewSpaceRace, compatibility: 'turmoil'},
   ],
 

@@ -44,6 +44,7 @@ export type GameOptions = {
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
+  customPreludes: Array<CardName>;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
@@ -67,6 +68,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   corporationsDraft: false,
   customColoniesList: [],
   customCorporationsList: [],
+  customPreludes: [],
   draftVariant: false,
   escapeVelocityMode: false, // When true, escape velocity is enabled.
   escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.

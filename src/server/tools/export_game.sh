@@ -9,4 +9,4 @@ POSTGRES_HOST=$(heroku pg:credentials:url --app $1 | grep postgres: | xargs)
 
 echo POSTGRES_HOST is ${POSTGRES_HOST}
 
-POSTGRES_HOST=${POSTGRES_HOST} node build/src/tools/export_game.js $2
+POSTGRES_HOST=${POSTGRES_HOST} node build/src/server/tools/export_game.js $2

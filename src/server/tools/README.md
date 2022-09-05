@@ -41,7 +41,7 @@ as result you will see the warnings for Chinese and Russian languages only.
 
 ```
 npm run build
-sh src/tools/export_game.sh <heroku-app-name>  <game id | player id | spectator id>
+sh src/server/tools/export_game.sh <heroku-app-name>  <game id | player id | spectator id>
 ```
 
 or
@@ -67,7 +67,7 @@ Starts a local web server that you can use to get results of MA synergy. To run,
 
 ```sh
 npm run compile
-node build/src/tools/analyze_ma.js
+node build/src/server/tools/analyze_ma.js
 ```
 
 And then point your browser to http://localhost:8081

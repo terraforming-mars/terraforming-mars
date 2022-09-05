@@ -7,7 +7,7 @@ export type GameOptionsModel = {
   aresExtension: boolean,
   altVenusBoard: boolean,
   boardName: BoardName,
-  cardsBlackList: Array<CardName>;
+  bannedCards: Array<CardName>;
   coloniesExtension: boolean,
   communityCardsOption: boolean,
   corporateEra: boolean,

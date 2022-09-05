@@ -53,7 +53,7 @@ describe('ApiGame', () => {
           'altVenusBoard': false,
           'aresExtension': false,
           'boardName': 'tharsis',
-          'cardsBlackList': [],
+          'bannedCards': [],
           'coloniesExtension': false,
           'communityCardsOption': false,
           'corporateEra': true,

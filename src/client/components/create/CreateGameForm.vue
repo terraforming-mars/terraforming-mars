@@ -229,8 +229,8 @@
                                 <span v-i18n>Custom Corporation list</span>
                             </label>
 
-                            <input type="checkbox" v-model="showCardsBlackList" id="blackList-checkbox">
-                            <label for="blackList-checkbox">
+                            <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
+                            <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
                             </label>
 
@@ -407,10 +407,10 @@
               ></ColoniesFilter>
             </div>
 
-            <div class="create-game--block" v-if="showCardsBlackList">
+            <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter
                   ref="cardsFilter"
-                  v-on:cards-list-changed="updateCardsBlackList"
+                  v-on:cards-list-changed="updateBannedCards"
               ></CardsFilter>
             </div>
           <preferences-icon></preferences-icon>
@@ -461,10 +461,10 @@ export interface CreateGameModel {
     turmoil: boolean;
     customCorporationsList: Array<CardName>;
     customColoniesList: Array<ColonyName>;
-    cardsBlackList: Array<CardName>;
+    bannedCards: Array<CardName>;
     showCorporationList: boolean;
     showColoniesList: boolean;
-    showCardsBlackList: boolean;
+    showBannedCards: boolean;
     board: BoardNameType;
     boards: Array<BoardNameType>;
     seed: number;
@@ -532,11 +532,11 @@ export default (Vue as WithRefs<Refs>).extend({
       colonies: false,
       showColoniesList: false,
       showCorporationList: false,
-      showCardsBlackList: false,
+      showBannedCards: false,
       turmoil: false,
       customCorporationsList: [],
       customColoniesList: [],
-      cardsBlackList: [],
+      bannedCards: [],
       board: BoardName.ORIGINAL,
       boards: [
         BoardName.ORIGINAL,
@@ -640,14 +640,14 @@ export default (Vue as WithRefs<Refs>).extend({
           component.playersCount = players.length;
           component.showCorporationList = results['customCorporationsList'].length > 0;
           component.showColoniesList = results['customColoniesList'].length > 0;
-          component.showCardsBlackList = results['cardsBlackList'].length > 0;
+          component.showBannedCards = results['bannedCards'].length > 0;
 
           // Capture the solar phase option since several of the other results will change
           // it via the watch mechanism.
           const capturedSolarPhaseOption = results.solarPhaseOption;
 
           for (const k in results) {
-            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players', 'solarPhaseOption'].includes(k)) continue;
+            if (['customCorporationsList', 'customColoniesList', 'bannedCards', 'players', 'solarPhaseOption'].includes(k)) continue;
             (component as any)[k] = results[k];
           }
 
@@ -664,8 +664,8 @@ export default (Vue as WithRefs<Refs>).extend({
               refs.corporationsFilter.selectedCorporations = results['customCorporationsList'];
             }
 
-            if (component.showCardsBlackList) {
-              refs.cardsFilter.selectedCardNames = results['cardsBlackList'];
+            if (component.showBannedCards) {
+              refs.cardsFilter.selectedCardNames = results['bannedCards'];
             }
 
             if ( ! component.seededGame) {
@@ -692,8 +692,8 @@ export default (Vue as WithRefs<Refs>).extend({
     updateCustomCorporationsList(customCorporationsList: Array<CardName>) {
       this.customCorporationsList = customCorporationsList;
     },
-    updateCardsBlackList(cardsBlackList: Array<CardName>) {
-      this.cardsBlackList = cardsBlackList;
+    updateBannedCards(bannedCards: Array<CardName>) {
+      this.bannedCards = bannedCards;
     },
     updateCustomColoniesList(customColoniesList: Array<ColonyName>) {
       this.customColoniesList = customColoniesList;
@@ -868,7 +868,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const shuffleMapOption = this.shuffleMapOption;
       const customCorporationsList = component.customCorporationsList;
       const customColoniesList = component.customColoniesList;
-      const cardsBlackList = component.cardsBlackList;
+      const bannedCards = component.bannedCards;
       const board = component.board;
       const seed = component.seed;
       const promoCardsOption = component.promoCardsOption;
@@ -981,7 +981,7 @@ export default (Vue as WithRefs<Refs>).extend({
         turmoil,
         customCorporationsList,
         customColoniesList,
-        cardsBlackList,
+        bannedCards,
         board,
         seed,
         solarPhaseOption,

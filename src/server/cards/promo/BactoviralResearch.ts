@@ -16,6 +16,11 @@ export class BactoviralResearch extends Card implements IProjectCard {
       name: CardName.BACTOVIRAL_RESEARCH,
       tags: [Tag.MICROBE, Tag.SCIENCE],
       cost: 10,
+
+      behavior: {
+        drawCard: 1,
+      },
+
       metadata: {
         cardNumber: 'X35',
         renderData: CardRenderer.builder((b) => {
@@ -28,8 +33,6 @@ export class BactoviralResearch extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.drawCard();
-
     const scienceTags = player.tags.count(Tag.SCIENCE) + 1;
     const microbeCards = player.getResourceCards(CardResource.MICROBE);
 

@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,6 +12,7 @@ export class DeepSpaceOperations extends PreludeCard {
 
       behavior: {
         stock: {titanium: 4},
+        drawCard: {count: 2, tag: Tag.SPACE, type: CardType.EVENT},
       },
 
       metadata: {
@@ -25,13 +25,6 @@ export class DeepSpaceOperations extends PreludeCard {
         description: 'Gain 4 titanium. Draw 2 event cards with a space tag.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.drawCard(2, {
-      tag: Tag.SPACE,
-      cardType: CardType.EVENT,
-    });
-    return undefined;
   }
 }
 

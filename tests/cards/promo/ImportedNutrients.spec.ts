@@ -4,8 +4,8 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {ImportedNutrients} from '../../../src/server/cards/promo/ImportedNutrients';
 import {Player} from '../../../src/server/Player';
-import {TestPlayer} from '../../TestPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('ImportedNutrients', function() {
   let card: ImportedNutrients;
@@ -13,7 +13,8 @@ describe('ImportedNutrients', function() {
 
   beforeEach(function() {
     card = new ImportedNutrients();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can play without microbe cards', function() {

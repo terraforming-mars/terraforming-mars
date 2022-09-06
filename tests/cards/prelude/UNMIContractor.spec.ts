@@ -1,12 +1,11 @@
 import {expect} from 'chai';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {UNMIContractor} from '../../../src/server/cards/prelude/UNMIContractor';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
 
 describe('UNMIContractor', function() {
   it('Should play', function() {
-    const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
     const card = new UNMIContractor();
     card.play(player);
 

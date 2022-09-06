@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -11,6 +10,10 @@ export class IoResearchOutpost extends PreludeCard {
       tags: [Tag.JOVIAN, Tag.SCIENCE],
       productionBox: {titanium: 1},
 
+      behavior: {
+        drawCard: 1,
+      },
+
       metadata: {
         cardNumber: 'P16',
         renderData: CardRenderer.builder((b) => {
@@ -20,9 +23,5 @@ export class IoResearchOutpost extends PreludeCard {
         description: 'Increase your titanium production 1 step. Draw a card.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.drawCard();
-    return undefined;
   }
 }

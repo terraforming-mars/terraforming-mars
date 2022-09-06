@@ -10,6 +10,11 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
     super({
       name: CardName.VENUS_FIRST,
       tags: [Tag.VENUS],
+
+      behavior: {
+        drawCard: {count: 2, tag: Tag.VENUS},
+      },
+
       metadata: {
         cardNumber: 'Y07',
         renderData: CardRenderer.builder((b) => {
@@ -23,7 +28,6 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.increaseVenusScaleLevel(player, 2);
-    player.drawCard(2, {tag: Tag.VENUS});
     return undefined;
   }
 }

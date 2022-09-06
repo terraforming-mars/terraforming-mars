@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -16,6 +15,11 @@ export class PointLuna extends Card implements ICorporationCard {
       name: CardName.POINT_LUNA,
       tags: [Tag.SPACE, Tag.EARTH],
       startingMegaCredits: 38,
+
+      behavior: {
+        production: {titanium: 1},
+        drawCard: 1,
+      },
 
       metadata: {
         cardNumber: 'R10',
@@ -41,11 +45,6 @@ export class PointLuna extends Card implements ICorporationCard {
     if (player.isCorporation(this.name) && card.tags.includes(Tag.EARTH)) {
       player.drawCard(tagCount);
     }
-    return undefined;
-  }
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.TITANIUM, 1);
-    player.drawCard();
     return undefined;
   }
 }

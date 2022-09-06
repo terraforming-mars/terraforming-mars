@@ -15,6 +15,10 @@ export class ResearchColony extends Card implements IProjectCard {
       name: CardName.RESEARCH_COLONY,
       cardType: CardType.AUTOMATED,
 
+      behavior: {
+        drawCard: 2,
+      },
+
       metadata: {
         cardNumber: 'C34',
         renderData: CardRenderer.builder((b) => {
@@ -27,7 +31,6 @@ export class ResearchColony extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(new BuildColony(player, {allowDuplicate: true, title: 'Select colony for Research Colony'}));
-    player.drawCard(2);
     return undefined;
   }
 }

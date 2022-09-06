@@ -3,7 +3,7 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {DuskLaserMining} from '../../../src/server/cards/promo/DuskLaserMining';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('DuskLaserMining', function() {
   let card: DuskLaserMining;
@@ -11,7 +11,8 @@ describe('DuskLaserMining', function() {
 
   beforeEach(function() {
     card = new DuskLaserMining();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play if not enough science tags', function() {

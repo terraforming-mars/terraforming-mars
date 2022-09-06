@@ -29,5 +29,13 @@ export class Behaviors {
     if (behavior.stock) {
       player.addUnits(behavior.stock);
     }
+    if (behavior.drawCard !== undefined) {
+      if (typeof(behavior.drawCard) === 'number') {
+        player.drawCard(behavior.drawCard);
+      } else {
+        const options = behavior.drawCard;
+        player.drawCard(options.count, {tag: options.tag, resource: options.resource, cardType: options.type});
+      }
+    }
   }
 }

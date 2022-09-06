@@ -9,6 +9,11 @@ export class UNMIContractor extends PreludeCard {
     super({
       name: CardName.UNMI_CONTRACTOR,
       tags: [Tag.EARTH],
+
+      behavior: {
+        drawCard: 1,
+      },
+
       metadata: {
         cardNumber: 'P34',
         renderData: CardRenderer.builder((b) => {
@@ -19,10 +24,8 @@ export class UNMIContractor extends PreludeCard {
       },
     });
   }
-
   public override bespokePlay(player: Player) {
     player.increaseTerraformRatingSteps(3);
-    player.drawCard();
     return undefined;
   }
 }

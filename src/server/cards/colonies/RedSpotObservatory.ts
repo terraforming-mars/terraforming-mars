@@ -20,6 +20,10 @@ export class RedSpotObservatory extends Card implements IProjectCard {
       resourceType: CardResource.FLOATER,
       victoryPoints: 2,
 
+      behavior: {
+        drawCard: 2,
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       metadata: {
         cardNumber: 'C32',
@@ -68,11 +72,6 @@ export class RedSpotObservatory extends Card implements IProjectCard {
   private spendResource(player: Player) {
     this.resourceCount--;
     player.drawCard();
-    return undefined;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.drawCard(2);
     return undefined;
   }
 }

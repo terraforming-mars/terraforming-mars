@@ -24,8 +24,7 @@ export abstract class MarketCard extends Card implements IActionCard {
   }
 
   private canBuy(player: Player) {
-    const availableMC = (player.canUseHeatAsMegaCredits) ? player.megaCredits + player.heat : player.megaCredits;
-    return availableMC >= this.buyingTerms.from;
+    return player.spendableMegacredits() >= this.buyingTerms.from;
   }
 
   private canSell(player: Player) {
@@ -53,7 +52,7 @@ export abstract class MarketCard extends Card implements IActionCard {
   }
 
   private getBuyingOption(player: Player): SelectAmount {
-    const availableMC = (player.canUseHeatAsMegaCredits) ? player.megaCredits + player.heat : player.megaCredits;
+    const availableMC = player.spendableMegacredits();
     const terms = this.buyingTerms;
     let limit = Math.floor(availableMC / terms.from);
     limit = Math.min(limit, terms.limit);
@@ -64,17 +63,14 @@ export abstract class MarketCard extends Card implements IActionCard {
       (tradesRequested: number) => {
         const cashDue = tradesRequested * terms.from;
         const unitsEarned = tradesRequested * terms.to;
-        if (player.canUseHeatAsMegaCredits) {
-          const payment = new SelectPaymentDeferred(player, cashDue, {afterPay: () => {
-            player.addResource(this.tradeResource, unitsEarned);
-          }});
-          player.game.defer(payment);
-        } else {
-          player.deductResource(Resources.MEGACREDITS, cashDue);
-          player.addResource(this.tradeResource, unitsEarned);
-        }
+        player.game.defer(
+          new SelectPaymentDeferred(
+            player,
+            cashDue,
+            {afterPay: () => {
+              player.addResource(this.tradeResource, unitsEarned, {log: true});
+            }}));
 
-        player.game.log('${0} gained ${1} ${2}', (b) => b.player(player).number(tradesRequested).string(this.tradeResource));
         return undefined;
       },
       1,

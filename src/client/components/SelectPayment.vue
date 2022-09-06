@@ -123,7 +123,7 @@ export default Vue.extend({
       return this.thisPlayer.megaCredits >= this.$data.cost;
     },
     canUseHeat() {
-      return this.playerinput.canUseHeat && this.thisPlayer.heat > 0;
+      return this.playerinput.canUseHeat && this.availableHeat() > 0;
     },
     canUseSteel() {
       return this.playerinput.canUseSteel && this.thisPlayer.steel > 0;
@@ -193,15 +193,12 @@ export default Vue.extend({
       if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
         const diff = totalSpent - requiredAmt;
 
-        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.onsave([[JSON.stringify(payment)]]);
-        } else {
+        if (!confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.$data.warning = 'Please adjust payment amount';
           return;
         }
-      } else {
-        this.onsave([[JSON.stringify(payment)]]);
       }
+      this.onsave([[JSON.stringify(payment)]]);
     },
   },
 });

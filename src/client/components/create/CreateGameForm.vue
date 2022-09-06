@@ -458,6 +458,7 @@ import {getCard} from '@/client/cards/ClientCardManifest';
 import {GameModule} from '@/common/cards/GameModule';
 
 import * as constants from '@/common/constants';
+import * as json_constants from '@/client/components/create/json';
 import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 
 export interface CreateGameModel {
@@ -653,55 +654,72 @@ export default (Vue as WithRefs<Refs>).extend({
       const refs = this.$refs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
-      const component = this.$data;
+      const component = this.$data as CreateGameModel;
 
       reader.addEventListener('load', function() {
-        const readerResults = reader.result;
-        if (typeof(readerResults) === 'string') {
-          const results = JSON.parse(readerResults);
-          const players = results['players'];
-          component.playersCount = players.length;
-          component.showCorporationList = results['customCorporations'].length > 0;
-          component.showColoniesList = results['customColonies'].length > 0;
-          component.showBannedCards = results['bannedCards'].length > 0;
+        const warnings: Array<string> = [];
+        try {
+          const readerResults = reader.result;
+          if (typeof(readerResults) === 'string') {
+            const results = JSON.parse(readerResults);
 
-          // Capture the solar phase option since several of the other results will change
-          // it via the watch mechanism.
-          const capturedSolarPhaseOption = results.solarPhaseOption;
+            const customCorporations = results[json_constants.CUSTOM_CORPORATIONS] || results[json_constants.OLD_CUSTOM_CORPORATIONS] || [];
+            const customColonies = results[json_constants.CUSTOM_COLONIES] || results[json_constants.OLD_CUSTOM_COLONIES] || [];
+            const bannedCards = results[json_constants.BANNED_CARDS] || results[json_constants.OLD_BANNED_CARDS] || [];
+            const customPreludes = results[json_constants.CUSTOM_PRELUDES] || [];
 
-          for (const k in results) {
-            if (['customCorporations', 'customColonies', 'bannedCards', 'players', 'solarPhaseOption'].includes(k)) continue;
-            (component as any)[k] = results[k];
+            const players = results['players'];
+            component.playersCount = players.length;
+            component.showCorporationList = customCorporations.length > 0;
+            component.showColoniesList = customColonies.length > 0;
+            component.showBannedCards = bannedCards.length > 0;
+            component.showPreludesList = customPreludes.length > 0;
+
+            // Capture the solar phase option since several of the other results will change
+            // it via the watch mechanism.
+            const capturedSolarPhaseOption = results.solarPhaseOption;
+
+            const specialFields = [
+              json_constants.CUSTOM_CORPORATIONS,
+              json_constants.OLD_CUSTOM_CORPORATIONS,
+              json_constants.CUSTOM_COLONIES,
+              json_constants.OLD_CUSTOM_COLONIES,
+              json_constants.CUSTOM_PRELUDES,
+              json_constants.BANNED_CARDS,
+              json_constants.OLD_BANNED_CARDS,
+              'players',
+              'solarPhaseOption',
+              'constants'];
+            for (const k in results) {
+              if (specialFields.includes(k)) continue;
+              if (!Object.prototype.hasOwnProperty.call(component, k)) {
+                warnings.push('Unknown property: ' + k);
+              }
+              // This is safe because of the hasOwnProperty check, above. hasOwnProperty doesn't help with type declarations.
+              (component as any)[k] = results[k];
+            }
+
+            for (let i = 0; i < players.length; i++) {
+              component.players[i] = players[i];
+            }
+
+            Vue.nextTick(() => {
+              if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
+              if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
+              if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
+              if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
+              if (!component.seededGame) component.seed = Math.random();
+              // set to alter after any watched properties
+              component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
+            });
           }
-
-          for (let i = 0; i < players.length; i++) {
-            component.players[i] = players[i];
+          if (warnings.length > 0) {
+            window.alert('Settings loaded, with these errors: \n' + warnings.join('\n'));
+          } else {
+            window.alert('Settings loaded.');
           }
-
-          Vue.nextTick(() => {
-            if (component.showColoniesList) {
-              refs.coloniesFilter.updateColoniesByNames(results['customColonies']);
-            }
-
-            if (component.showCorporationList) {
-              refs.corporationsFilter.selectedCorporations = results['customCorporations'];
-            }
-
-            if (component.showPreludeList) {
-              refs.preludesFilter.updatePreludes(results['customPreludeList']);
-            }
-
-            if (component.showBannedCards) {
-              refs.cardsFilter.selectedCardNames = results['bannedCards'];
-            }
-
-            if (!component.seededGame) {
-              component.seed = Math.random();
-            }
-
-            // set to alter after any watched properties
-            component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
-          });
+        } catch (e) {
+          window.alert('Error reading JSON ' + e);
         }
       }, false);
       if (file) {

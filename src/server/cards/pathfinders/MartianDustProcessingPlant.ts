@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -17,6 +16,10 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
       tr: {tr: 1},
       victoryPoints: 1,
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: 'Pf44',
         renderData: CardRenderer.builder((b) => {
@@ -26,10 +29,5 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
         description: 'Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
-    return undefined;
   }
 }

@@ -17,6 +17,11 @@ export class SaturnSystems extends Card implements ICorporationCard {
       tags: [Tag.JOVIAN],
       startingMegaCredits: 42,
 
+      behavior: {
+        // The 1MC is for the card effect related to itself.
+        production: {titanium: 1, megacredits: 1},
+      },
+
       metadata: {
         cardNumber: 'R03',
         description: 'You start with 1 titanium production and 42 M€.',
@@ -48,11 +53,5 @@ export class SaturnSystems extends Card implements ICorporationCard {
         player.game.getCardPlayer(this.name).production.add(Resources.MEGACREDITS, 1, {log: true});
       }
     }
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.TITANIUM, 1);
-    player.production.add(Resources.MEGACREDITS, 1);
-    return undefined;
   }
 }

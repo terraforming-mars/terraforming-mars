@@ -17,6 +17,10 @@ export class MartianInsuranceGroup extends Card implements ICorporationCard {
       tags: [Tag.MARS],
       startingMegaCredits: 42,
 
+      behavior: {
+        production: {megacredits: 1},
+      },
+
       metadata: {
         cardNumber: 'PfC12',
         description: 'You start with 42 M€ and 1 M€ production.',
@@ -31,11 +35,6 @@ export class MartianInsuranceGroup extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 1);
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {

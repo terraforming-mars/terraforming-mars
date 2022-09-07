@@ -8,7 +8,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../../common/Resources';
 
 export class Pollinators extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -20,6 +19,10 @@ export class Pollinators extends Card implements IProjectCard, IActionCard {
       resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.tag(Tag.PLANT, 3)),
       victoryPoints: VictoryPoints.resource(1, 1),
+
+      behavior: {
+        production: {plants: 1, megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '...',
@@ -33,19 +36,12 @@ export class Pollinators extends Card implements IProjectCard, IActionCard {
     });
   }
 
-
   public canAct() {
     return true;
   }
 
   public action(player: Player) {
     player.addResourceTo(this, 1);
-    return undefined;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.PLANTS, 1);
-    player.production.add(Resources.MEGACREDITS, 2);
     return undefined;
   }
 }

@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
@@ -17,6 +16,10 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
       productionBox: {energy: -4, plants: 2},
       tr: {tr: 3},
 
+      behavior: {
+        tr: 3,
+      },
+
       metadata: {
         cardNumber: '165',
         renderData: CardRenderer.builder((b) => {
@@ -29,10 +32,5 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
         description: 'Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(3);
-    return undefined;
   }
 }

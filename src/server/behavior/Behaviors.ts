@@ -48,5 +48,9 @@ export class Behaviors {
       if (global.moonMining !== undefined) MoonExpansion.raiseMiningRate(player, global.moonMining);
       if (global.moonLogistics !== undefined) MoonExpansion.raiseLogisticRate(player, global.moonLogistics);
     }
+
+    if (behavior.tr !== undefined) {
+      player.increaseTerraformRatingSteps(behavior.tr);
+    }
   }
 }

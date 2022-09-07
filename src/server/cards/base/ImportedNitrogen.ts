@@ -20,6 +20,7 @@ export class ImportedNitrogen extends Card implements IProjectCard {
 
       behavior: {
         stock: {plants: 4},
+        tr: 1,
       },
 
       metadata: {
@@ -36,7 +37,6 @@ export class ImportedNitrogen extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
     player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
     player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
     return undefined;

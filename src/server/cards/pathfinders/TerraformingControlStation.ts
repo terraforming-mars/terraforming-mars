@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -16,6 +15,10 @@ export class TerraformingControlStation extends Card implements IProjectCard {
       tags: [Tag.VENUS, Tag.MARS, Tag.SPACE],
       tr: {tr: 2},
 
+      behavior: {
+        tr: 2,
+      },
+
       cardDiscount: [{tag: Tag.VENUS, amount: 2}, {tag: Tag.MARS, amount: 2}],
       metadata: {
         cardNumber: 'Pf12',
@@ -28,11 +31,6 @@ export class TerraformingControlStation extends Card implements IProjectCard {
         description: 'Raise your TR 2 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(2);
-    return undefined;
   }
 }
 

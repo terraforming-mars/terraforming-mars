@@ -1,68 +1,69 @@
 {
     "CORPORATION": "CORPORATION",
-
     "Beginner": "Jeune Corporation",
     "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Vous commencez avec 42 M€. AU LIEU DE PARTICIPER À LA PREMIÈRE PHASE DE RECHERCHE, PIOCHEZ GRATUITEMENT 10 CARTES.",
-
     "credicor": "credicor",
     "Credicor": "Credicor",
     "You start with 57 M€.": "Vous commencez avec 57 M€.",
-    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "Effet: Après avoir payé une carte ou un projet standard ayant un coût de base de 20 M€ ou plus, vous gagnez 4 M€.",
-
+    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "Effet : Après avoir payé une carte ou un projet standard ayant un coût de base de 20 M€ ou plus, vous gagnez 4 M€.",
     "ecoline": "ecoline",
     "Ecoline": "Ecoline",
     "You start with 2 plant production, 3 plants, and 36 M€": "Vous commencez avec une production de plantes de 2, 3 plantes et 36 M€.",
-    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Effet: Placer une tuile Forêt vous coûte 7 plantes au lieu de 8.",
-
+    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Effet : Placer une tuile Forêt vous coûte 7 plantes au lieu de 8.",
     "Helion": "Helion",
     "You start with 3 heat production and 42 M€.": "Vous commencez avec une production de chaleur de 3 et 42 M€.",
-    "Effect: You may use heat as M€. You may not use M€ as heat.": "Effet: Vous pouvez utiliser la chaleur en remplacement des M€. Vous ne pouvez pas utiliser des M€ pour remplacer de la chaleur.",
-
+    "Effect: You may use heat as M€. You may not use M€ as heat.": "Effet : Vous pouvez utiliser la chaleur en remplacement des M€. Vous ne pouvez pas utiliser des M€ pour remplacer de la chaleur.",
     "INTERPLANETARY": "CINÉMATIQUES",
     "CINEMATICS": "INTERPLANÉTAIRES",
     "Interplanetary Сinematics": "Cinématiques Interplanétaires",
     "You start with 20 steel and 30 M€.": "Vous commencez avec 20 aciers et 30 M€.",
-    "Effect: Each time you play an event, you gain 2 M€.": "Effet: Chaque fois que vous jouez un Évènement, vous gagnez 2 M€.",
-
+    "Effect: Each time you play an event, you gain 2 M€.": "Effet : Chaque fois que vous jouez un Évènement, vous gagnez 2 M€.",
     "INVENTRIX": "INVENTRIX",
     "Inventrix": "Inventrix",
     "As your first action in the game, draw 3 cards. Start with 45 M€.": "Comme première action de la partie, piochez 3 cartes. Vous commencez avec 45 M€.",
-    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Effet: Vous pouvez ajuster les prérequis globaux des cartes que vous jouez de +2 ou -2, à votre convenance.",
-
+    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Effet : Vous pouvez ajuster les prérequis globaux des cartes que vous jouez de +2 ou -2, à votre convenance.",
     "Phobolog": "Phobolog",
     "You start with 10 titanium and 23 M€.": "Vous commencez avez 10 titane et 23 M€.",
-    "Effect: Your titanium resources are each worth 1 M€ extra.": "Effet: Vos ressources de titane valent chacune 1 M€ de plus.",
-
+    "Effect: Your titanium resources are each worth 1 M€ extra.": "Effet : Vos ressources de titane valent chacune 1 M€ de plus.",
     "THARSIS": "RÉPUBLIQUE",
     "REPUBLIC": "DE THARSIS",
     "Tharsis Republic": "République de Tharsis",
     "You start with 40 M€. As your first action in the game, place a city tile.": "Vous commencez avec 40 M€. Comme première action de la partie, placez une tuile Cité.",
-    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Effet: Lorsqu'une Cité est placée SUR MARS, augmentez votre production de M€ de 1. Lorsque vous placez une tuile Cité, gagnez 3 M€.",
-
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Effet : Lorsqu'une Cité est placée SUR MARS, augmentez votre production de M€ de 1. Lorsque vous placez une tuile Cité, gagnez 3 M€.",
     "THORGATE": "THORGATE",
     "Thorgate": "Thorgate",
     "You start with 1 energy production and 48 M€.": "Vous commencez avec une production d'énergie de 1 et 48 M€.",
-    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Effet: Le coût de vos cartes Énergie ET DU PROJET STANDARD \"CENTRALE\"  est réduit de 3 M€.",
-
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Effet : Le coût de vos cartes Énergie ET DU PROJET STANDARD \"CENTRALE\" est réduit de 3 M€.",
     "UNITED NATIONS MARS INITIATIVE": "UNITED NATIONS MARS INITIATIVE",
     "UNMI": "UNMI",
     "You start with 40 M€.": "Vous commencez avec 40 M€.",
-    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Action: Si votre Niveau de Terraformation a augmenté durant cette génération, vous pouvez payer 3 M€ pour l'augmenter de 1 supplémentaire.",
-
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Action : Si votre Niveau de Terraformation a augmenté durant cette génération, vous pouvez payer 3 M€ pour l'augmenter de 1 supplémentaire.",
     "MINING": "MINING",
     "GUILD": "GUILD",
     "Mining Guild": "Mining Guild",
     "You start with 30 M€, 5 steel, and 1 steel production": "Vous commencez avec 30 M€, 5 aciers et une production d'acier de 1.",
-    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Effet: Chaque fois que vous recevez de l'acier ou du titane comme bonus de placement, augmentez votre production d'acier de 1.",
-
+    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Effet : Chaque fois que vous recevez de l'acier ou du titane comme bonus de placement, augmentez votre production d'acier de 1.",
     "TERACTOR": "TERACTOR",
     "Teractor": "Teractor",
     "You start with 60 M€.": "Vous commencez avec 60 M€.",
     "Effect: When playing an Earth card, you pay 3 M€ less for it.": "Effet: Le coût de vos cartes Terre est réduit de 3 M€.",
-
     "SATURN": "SATURN",
     "SYSTEMS": "SYSTEMS",
     "Saturn Systems": "Saturn Systems",
     "You start with 1 titanium production and 42 M€.": "Vous commencez avec une production de titane de 1 et 42 M€.",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Effet: Chaque fois qu'un badge Jovien entre en jeu, y compris celui-ci, augmentez votre production de M€ de 1."
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Effet : Chaque fois qu'un badge Jovien entre en jeu, y compris celui-ci, augmentez votre production de M€ de 1.",
+    "You start with 30 M€, 5 steel and 1 steel production.": "Vous commencez avec 30 M€, 5 aciers et 1 production d'acier de 1.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Effet : Le coût des cartes Terre que vous jouez est réduit de 3 M€.",
+    "Beginner Corporation": "Jeune Corporation",
+    "CREDICOR": "CREDICOR",
+    "CrediCor": "CrediCor",
+    "ECOLINE": "ECOLINE",
+    "EcoLine": "EcoLine",
+    "You start with 2 plant production, 3 plants, and 36 M€.": "Vous commencez avec une production de plantes de 2, 3 plantes et 36 M€.",
+    "HELION": "HELION",
+    "Interplanetary Cinematics": "Cinématiques Interplanétaires",
+    "PHOBOLOG": "PHOBOLOG",
+    "PhoboLog": "PhoboLog",
+    "United Nations Mars Initiative": "United Nations Mars Initiative",
+    "BEGINNER CORPORATION": "JEUNE CORPORATION"
 }

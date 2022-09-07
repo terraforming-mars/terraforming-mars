@@ -1038,6 +1038,7 @@ export class Game {
   // Called when a player cannot or chose not to place any more greeneries.
   public playerIsDoneWithGame(player: Player): void {
     this.donePlayers.add(player.id);
+    // Go back in to find someone else to play final greeneries.
     this.gotoFinalGreeneryPlacement();
   }
 
@@ -1050,8 +1051,16 @@ export class Game {
       if (this.donePlayers.has(player.id)) {
         continue;
       }
+
+      // You many not place greeneries in solo mode unless you have already won the game
+      // (e.g. completed global parameters, reached TR63.)
+      if (this.isSoloMode() && !this.isSoloModeWin()) {
+        continue;
+      }
+
       if (this.canPlaceGreenery(player)) {
-        this.startFinalGreeneryPlacement(player);
+        this.activePlayer = player.id;
+        player.takeActionForFinalGreenery();
         return;
       } else if (player.getWaitingFor() !== undefined) {
         return;
@@ -1061,11 +1070,6 @@ export class Game {
     }
     this.updateVPbyGeneration();
     this.gotoEndGame();
-  }
-
-  private startFinalGreeneryPlacement(player: Player) {
-    this.activePlayer = player.id;
-    player.takeActionForFinalGreenery();
   }
 
   private startActionsForPlayer(player: Player) {
@@ -1081,7 +1085,7 @@ export class Game {
     }
 
     // PoliticalAgendas Reds P3 && Magnetic Field Stimulation Delays hook
-    if (increments < 0 ) {
+    if (increments < 0) {
       this.oxygenLevel = Math.max(constants.MIN_OXYGEN_LEVEL, this.oxygenLevel + increments);
       return undefined;
     }

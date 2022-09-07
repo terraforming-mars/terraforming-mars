@@ -4,6 +4,9 @@ import SelectPayment from '@/client/components/SelectPayment.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
+import {CardName} from '@/common/cards/CardName';
+import {CardModel} from '@/common/models/CardModel';
+import {CardResource} from '@/common/CardResource';
 
 describe('SelectPayment', () => {
   it('Uses heat', async () => {
@@ -196,7 +199,6 @@ describe('SelectPayment', () => {
     tester.expectValue('heat', 0);
     tester.expectValue('megaCredits', 2);
 
-    console.log('click');
     await tester.clickMax('megaCredits');
     await tester.nextTick();
 
@@ -205,29 +207,93 @@ describe('SelectPayment', () => {
     tester.expectValue('megaCredits', 5);
   });
 
+  it('Stormcraft floaters count for heat', async () => {
+    // Must spend 10. Player has 7M€ and will use 3 of the 4 available heat units.
+    const wrapper = setupBill(
+      10,
+      {
+        heat: 2,
+        megaCredits: 3,
+        tableau: [
+          {
+            name: CardName.STORMCRAFT_INCORPORATED,
+            resources: 5,
+          } as CardModel,
+          {
+            // Dirigibles is here to show that it's got floaters, but is ignored.
+            name: CardName.DIRIGIBLES,
+            resourceType: CardResource.FLOATER,
+            resources: 3,
+          } as CardModel,
+        ]},
+      {canUseHeat: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectIsAvailable('heat', true);
+    tester.expectValue('heat', 7);
+    tester.clickSave();
+  });
+
+  it('Max includes Stormcraft floaters', async () => {
+    // Action costs 10. Player has 10 MC, 3 heat, and 1 floaters.
+    //
+    // Initial setup will be that it selects 10MC.
+    //
+    // Then when clicking the 'max' button for heat, the algorithm will switch to 5M€ and 5 heat.
+
+    const wrapper = setupBill(
+      10,
+      {
+        heat: 3, megaCredits: 10, titaniumValue: 1, steelValue: 1,
+        tableau: [
+          {
+            name: CardName.STORMCRAFT_INCORPORATED,
+            resources: 1,
+          } as CardModel,
+        ],
+      },
+      {canUseHeat: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 10);
+    tester.expectValue('heat', 0);
+
+    await tester.clickMax('heat');
+
+    tester.expectValue('megaCredits', 5);
+    tester.expectValue('heat', 5);
+  });
+
   const setupBill = function(
     amount: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<PlayerInputModel>) {
-    const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
+    const thisPlayer: Partial<PublicPlayerModel> = {
       steel: 0,
       titanium: 0,
       heat: 0,
       steelValue: 2,
       titaniumValue: 3,
-    }, playerFields);
+      tableau: [],
+      ...playerFields};
+
     const playerView: Partial<PlayerViewModel> = {
       thisPlayer: thisPlayer as PublicPlayerModel,
       id: 'playerid-foo',
     };
 
-    const playerInput: Partial<PlayerInputModel> = Object.assign({
+    const playerInput: Partial<PlayerInputModel> = {
       amount: amount,
       title: 'foo',
       microbes: 0,
       floaters: 0,
       science: 0,
-    }, playerInputFields);
+      ...playerInputFields,
+    };
 
     return mount(SelectPayment, {
       localVue: getLocalVue(),

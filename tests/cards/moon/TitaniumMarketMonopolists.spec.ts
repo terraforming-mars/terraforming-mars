@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TitaniumMarketMonopolists} from '../../../src/server/cards/moon/TitaniumMarketMonopolists';
 import {expect} from 'chai';
@@ -76,6 +76,7 @@ describe('TitaniumMarketMonopolists', () => {
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(3);
     selectAmount.cb(2);
+    runAllActions(game);
     expect(player.megaCredits).eq(3);
     expect(player.titanium).eq(2);
   });

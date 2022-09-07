@@ -57,4 +57,18 @@ export namespace Payment {
     seeds: boolean,
     data: boolean,
   }
+
+  export function of(payment: Partial<Payment>) : Payment {
+    return {
+      data: payment.data ?? 0,
+      floaters: payment.floaters ?? 0,
+      heat: payment.heat ?? 0,
+      megaCredits: payment.megaCredits ?? 0,
+      microbes: payment.microbes ?? 0,
+      science: payment.science ?? 0,
+      seeds: payment.seeds ?? 0,
+      steel: payment.steel ?? 0,
+      titanium: payment.titanium ?? 0,
+    };
+  }
 }

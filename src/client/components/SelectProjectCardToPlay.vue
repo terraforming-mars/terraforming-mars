@@ -36,7 +36,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    thisPlayer: function(): PublicPlayerModel {
+    thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
   },
@@ -174,7 +174,7 @@ export default Vue.extend({
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
       }
 
-      this.available.heat = Math.max(this.thisPlayer.heat - this.card.reserveUnits.heat, 0);
+      this.available.heat = Math.max(this.availableHeat() - this.card.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.available.heat, 1);
       }
@@ -194,7 +194,7 @@ export default Vue.extend({
       }
     },
     canUseHeat(): boolean {
-      return this.playerinput.canUseHeat === true && this.thisPlayer.heat > 0;
+      return this.playerinput.canUseHeat === true && this.availableHeat() > 0;
     },
     canUseSteel() {
       if (this.card !== undefined && this.available.steel > 0) {

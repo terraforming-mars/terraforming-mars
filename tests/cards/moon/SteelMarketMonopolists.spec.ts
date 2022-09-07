@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SteelMarketMonopolists} from '../../../src/server/cards/moon/SteelMarketMonopolists';
 import {expect} from 'chai';
@@ -75,6 +75,7 @@ describe('SteelMarketMonopolists', () => {
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(2);
     selectAmount.cb(2);
+    runAllActions(game);
     expect(player.megaCredits).eq(1);
     expect(player.steel).eq(4);
   });

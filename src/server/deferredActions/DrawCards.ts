@@ -84,9 +84,10 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
     const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
     const cb = (selected: Array<IProjectCard>) => {
       if (options.paying && selected.length > 0) {
+        const cost = selected.length * player.cardCost;
         player.game.defer(
-          new SelectPaymentDeferred(player, selected.length * player.cardCost, {
-            title: 'Select how to pay for cards',
+          new SelectPaymentDeferred(player, cost, {
+            title: `Select how to spend ${cost} M€ for ${selected.length} cards`,
             afterPay: () => {
               this.keep(player, selected, LogType.BOUGHT);
               this.discard(player, selected, cards);

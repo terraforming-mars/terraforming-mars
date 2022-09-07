@@ -52,7 +52,7 @@ export default Vue.extend({
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
-    const communityColonies = [...OFFICIAL_COLONY_NAMES].sort();
+    const communityColonies = [...COMMUNITY_COLONY_NAMES].sort();
 
     const data: Data = {
       allColonies: officialColonies.concat(communityColonies),

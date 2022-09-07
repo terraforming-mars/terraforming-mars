@@ -36,9 +36,6 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard {
   }
 
 
-  public override bespokePlay(_player: Player) {
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }
@@ -54,7 +51,8 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard {
       orOptions.options.push(new SelectOption('Remove 2 microbes to raise oxygen level 1 step', 'Remove microbes', () => {
         player.removeResourceFrom(this, 2);
         LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
-        return player.game.increaseOxygenLevel(player, 1);
+        player.game.increaseOxygenLevel(player, 1);
+        return undefined;
       }));
     }
 

@@ -21,6 +21,10 @@ export class SmallDutyRovers extends Card implements IProjectCard {
       reserveUnits: {titanium: 1},
       tr: {moonLogistics: 1},
 
+      behavior: {
+        global: {moonLogistics: 1},
+      },
+
       metadata: {
         description: 'Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per colony tile, mine tile and road tile on the Moon.',
         cardNumber: 'M73',
@@ -36,7 +40,6 @@ export class SmallDutyRovers extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    MoonExpansion.raiseLogisticRate(player);
     const moonData = MoonExpansion.moonData(player.game);
     const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;
 

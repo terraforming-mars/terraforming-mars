@@ -17,6 +17,10 @@ export class Cyanobacteria extends Card implements IProjectCard {
       tags: [Tag.MICROBE, Tag.MARS],
       tr: {oxygen: 1},
 
+      behavior: {
+        global: {oxygen: 1},
+      },
+
       metadata: {
         cardNumber: 'Pf27',
         renderData: CardRenderer.builder((b) => {
@@ -29,7 +33,6 @@ export class Cyanobacteria extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseOxygenLevel(player, 1);
     const microbes = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
     player.game.defer(new AddResourcesToCards(player, CardResource.MICROBE, microbes));
     return undefined;

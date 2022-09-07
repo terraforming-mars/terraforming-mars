@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -18,6 +17,11 @@ export class VenusSoils extends Card implements IProjectCard {
       cost: 20,
       tr: {venus: 1},
 
+      behavior: {
+        production: {plants: 1},
+        global: {venus: 1},
+      },
+
       metadata: {
         cardNumber: '257',
         renderData: CardRenderer.builder((b) => {
@@ -30,9 +34,6 @@ export class VenusSoils extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.PLANTS, 1);
-    player.game.increaseVenusScaleLevel(player, 1);
-
     const microbeCards = player.getResourceCards(CardResource.MICROBE);
 
     if (microbeCards.length === 0) return undefined;

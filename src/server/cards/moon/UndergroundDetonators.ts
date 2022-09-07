@@ -1,7 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -14,6 +12,11 @@ export class UndergroundDetonators extends Card implements IProjectCard {
       cost: 9,
       tr: {moonMining: 1},
 
+      behavior: {
+        stock: {steel: 1, titanium: 1},
+        global: {moonMining: 1},
+      },
+
       metadata: {
         description: 'Gain 1 steel and 1 titanium. Raise the Mining Rate 1 step.',
         cardNumber: 'M34',
@@ -24,12 +27,5 @@ export class UndergroundDetonators extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.steel += 1;
-    player.titanium += 1;
-    MoonExpansion.raiseMiningRate(player);
-    return undefined;
   }
 }

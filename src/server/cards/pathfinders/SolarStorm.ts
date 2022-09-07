@@ -19,6 +19,11 @@ export class SolarStorm extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       tr: {temperature: 1},
 
+      behavior: {
+        production: {heat: 1},
+        global: {temperature: 1},
+      },
+
       metadata: {
         cardNumber: 'Pf32',
         renderData: CardRenderer.builder((b) => {
@@ -32,7 +37,6 @@ export class SolarStorm extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.HEAT, 1);
     player.game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
@@ -40,7 +44,6 @@ export class SolarStorm extends Card implements IProjectCard {
     });
     player.game.defer(new RemoveResourcesFromCard(
       player, CardResource.DATA, 3, /* ownCards */ false, /* mandatory */ false));
-    player.game.increaseTemperature(player, 1);
     return undefined;
   }
 }

@@ -18,6 +18,10 @@ export class Comet extends Card implements IProjectCard {
       cost: 21,
       tr: {temperature: 1, oceans: 1},
 
+      behavior: {
+        global: {temperature: 1},
+      },
+
       metadata: {
         cardNumber: '010',
         description: 'Raise temperature 1 step and place an ocean tile. Remove up to 3 Plants from any player.',
@@ -30,7 +34,6 @@ export class Comet extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 1);
     player.game.defer(new PlaceOceanTile(player));
     player.game.defer(new RemoveAnyPlants(player, 3));
     return undefined;

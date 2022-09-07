@@ -1,7 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -16,6 +14,11 @@ export class OrbitalReflectors extends Card implements IProjectCard {
       cost: 26,
       tr: {venus: 2},
 
+      behavior: {
+        production: {heat: 2},
+        global: {venus: 2},
+      },
+
       metadata: {
         cardNumber: '242',
         renderData: CardRenderer.builder((b) => {
@@ -27,11 +30,5 @@ export class OrbitalReflectors extends Card implements IProjectCard {
         description: 'Raise Venus 2 steps. Increase your heat production 2 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 2);
-    player.production.add(Resources.HEAT, 2);
-    return undefined;
   }
 }

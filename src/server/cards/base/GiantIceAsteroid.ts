@@ -18,6 +18,10 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
       cost: 36,
       tr: {temperature: 2, oceans: 2},
 
+      behavior: {
+        global: {temperature: 2},
+      },
+
       metadata: {
         description: 'Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.',
         cardNumber: '080',
@@ -31,7 +35,6 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 2);
     player.game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
     player.game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     player.game.defer(new RemoveAnyPlants(player, 6));

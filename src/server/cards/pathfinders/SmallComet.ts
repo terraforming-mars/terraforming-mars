@@ -22,6 +22,7 @@ export class SmallComet extends Card implements IProjectCard {
 
       behavior: {
         stock: {titanium: 1},
+        global: {temperature: 1, oxygen: 1},
       },
 
       metadata: {
@@ -45,8 +46,6 @@ export class SmallComet extends Card implements IProjectCard {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
       }
     });
-    player.game.increaseTemperature(player, 1);
-    player.game.increaseOxygenLevel(player, 1);
     if (player.game.canAddOcean()) {
       return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
         player.game.addOceanTile(player, space.id, SpaceType.LAND);

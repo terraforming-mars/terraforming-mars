@@ -17,6 +17,10 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
       cost: 13,
       tr: {venus: 1},
 
+      behavior: {
+        global: {venus: 1},
+      },
+
       metadata: {
         cardNumber: '215',
         description: 'Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.',
@@ -28,7 +32,6 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 1);
     let floaterCards = player.getResourceCards(CardResource.FLOATER);
     floaterCards = floaterCards.filter((card) => card.tags.some((cardTag) => cardTag === Tag.VENUS));
     if (floaterCards.length === 0) {

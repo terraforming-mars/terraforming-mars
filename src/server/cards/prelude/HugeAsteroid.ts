@@ -11,6 +11,10 @@ export class HugeAsteroid extends PreludeCard {
 
       startingMegacredits: -5,
 
+      behavior: {
+        global: {temperature: 3},
+      },
+
       metadata: {
         cardNumber: 'P15',
         renderData: CardRenderer.builder((b) => {
@@ -25,7 +29,6 @@ export class HugeAsteroid extends PreludeCard {
     return player.canAfford(5);
   }
   public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 3);
     player.game.defer(new SelectPaymentDeferred(player, 5));
     return undefined;
   }

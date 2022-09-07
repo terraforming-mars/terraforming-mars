@@ -19,6 +19,7 @@ export class Asteroid extends Card implements IProjectCard {
 
       behavior: {
         stock: {titanium: 2},
+        global: {temperature: 1},
       },
 
       metadata: {
@@ -34,7 +35,6 @@ export class Asteroid extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 1);
     player.game.defer(new RemoveAnyPlants(player, 3));
     return undefined;
   }

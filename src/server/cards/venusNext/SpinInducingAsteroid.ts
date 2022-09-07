@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,6 +16,10 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       tr: {venus: 2},
 
+      behavior: {
+        global: {venus: 2},
+      },
+
       requirements: CardRequirements.builder((b) => b.venus(10, {max})),
       metadata: {
         cardNumber: '246',
@@ -26,10 +29,5 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
         description: 'Venus must be 10% or lower. Raise Venus 2 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 2);
-    return undefined;
   }
 }

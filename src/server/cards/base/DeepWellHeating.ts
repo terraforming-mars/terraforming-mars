@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -16,6 +15,10 @@ export class DeepWellHeating extends Card implements IProjectCard {
       productionBox: {energy: 1},
       tr: {temperature: 1},
 
+      behavior: {
+        global: {temperature: 1},
+      },
+
       metadata: {
         cardNumber: '003',
         description: 'Increase your Energy production 1 step. Increase temperature 1 step.',
@@ -24,9 +27,5 @@ export class DeepWellHeating extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    return player.game.increaseTemperature(player, 1);
   }
 }

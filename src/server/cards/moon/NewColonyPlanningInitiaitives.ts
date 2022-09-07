@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -15,6 +13,10 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
       cost: 6,
       tr: {moonColony: 1},
 
+      behavior: {
+        global: {moonColony: 1},
+      },
+
       requirements: CardRequirements.builder((b) => b.colonyRate(2)),
       metadata: {
         description: 'Requires Colony Rate to be 2 or higher. Raise the Colony Rate 1 step.',
@@ -24,10 +26,5 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    MoonExpansion.raiseColonyRate(player);
-    return undefined;
   }
 }

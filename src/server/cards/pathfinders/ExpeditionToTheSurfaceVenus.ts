@@ -19,6 +19,7 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
 
       behavior: {
         drawCard: 2,
+        global: {venus: 1},
       },
 
       metadata: {
@@ -33,7 +34,6 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 1);
     const tagCount = player.tags.count(Tag.VENUS) + 1;
     player.addResource(Resources.MEGACREDITS, tagCount, {log: true});
     return undefined;

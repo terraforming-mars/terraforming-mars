@@ -17,6 +17,10 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
       cost: 31,
       tr: {tr: 2, temperature: 1},
 
+      behavior: {
+        global: {temperature: 1},
+      },
+
       metadata: {
         cardNumber: '037',
         renderData: CardRenderer.builder((b) => {
@@ -38,6 +42,6 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
     } else {
       player.production.add(Resources.PLANTS, 4, {log: true});
     }
-    return player.game.increaseTemperature(player, 1);
+    return undefined;
   }
 }

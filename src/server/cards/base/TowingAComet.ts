@@ -18,6 +18,7 @@ export class TowingAComet extends Card implements IProjectCard {
 
       behavior: {
         stock: {plants: 2},
+        global: {oxygen: 1},
       },
 
       metadata: {
@@ -32,6 +33,6 @@ export class TowingAComet extends Card implements IProjectCard {
   }
   public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
-    return player.game.increaseOxygenLevel(player, 1);
+    return undefined;
   }
 }

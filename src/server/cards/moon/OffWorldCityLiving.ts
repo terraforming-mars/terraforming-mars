@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
@@ -19,6 +18,10 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
       cost: 35,
       tr: {moonColony: 1},
       victoryPoints: 'special',
+
+      behavior: {
+        global: {moonColony: 1},
+      },
 
       metadata: {
         // Check the card for a clever icon.
@@ -37,7 +40,6 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();
     player.production.add(Resources.MEGACREDITS, amount, {log: true});
-    MoonExpansion.raiseColonyRate(player);
     return undefined;
   }
 

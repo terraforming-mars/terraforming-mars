@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/server/cards/promo/Potatoes';
 import {Player} from '../../../src/server/Player';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Potatoes', function() {
   let card: Potatoes;
@@ -10,7 +10,8 @@ describe('Potatoes', function() {
 
   beforeEach(function() {
     card = new Potatoes();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {

@@ -80,7 +80,7 @@ export function translateTextWithParams(englishText: string, params: Array<strin
 }
 
 function normalizeText(text: string): string {
-  return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ').trim();
+  return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ');
 }
 
 function translateChildren(node: Node) {

@@ -8,7 +8,7 @@ import * as constants from '../src/common/constants';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {cast, maxOutOceans, setCustomGameOptions} from './TestingUtils';
+import {cast, forceGenerationEnd, maxOutOceans, runAllActions, setCustomGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resources} from '../src/common/Resources';
@@ -283,6 +283,80 @@ describe('Game', () => {
 
     // Now game should be in research state
     expect(game.phase).to.eq(Phase.RESEARCH);
+  });
+
+  it('Solo player should place final greeneries if victory condition met', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-solo2', [player], player);
+
+    // Set up end-game conditions
+    game.generation = 14;
+    (game as any).temperature = constants.MAX_TEMPERATURE;
+    (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
+    maxOutOceans(player);
+    player.plants = 9;
+
+    // Pass last turn
+    forceGenerationEnd(game);
+
+    // Final greenery placement is considered part of the production phase.
+    expect(game.phase).to.eq(Phase.PRODUCTION);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), OrOptions);
+    expect(options.title).eq('Place any final greenery from plants');
+  });
+
+  it('Solo player should not place final greeneries if victory condition not met', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-solo2', [player], player);
+
+    // Set up near end-game conditions
+    game.generation = 14;
+    (game as any).temperature = constants.MAX_TEMPERATURE - 2;
+    (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
+    maxOutOceans(player);
+    player.plants = 9;
+
+    // Pass last turn
+    forceGenerationEnd(game);
+
+    // Now game should be over
+    expect(game.phase).to.eq(Phase.END);
+  });
+
+  it('Solo player should place final greeneries in TR 63 mode if victory condition is met', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-solo2', [player], player, setCustomGameOptions({soloTR: true}));
+
+    // Set up end-game conditions
+    game.generation = 14;
+    player.setTerraformRating(63);
+    player.plants = 9;
+
+    // Pass last turn
+    forceGenerationEnd(game);
+
+    // Final greenery placement is considered part of the production phase.
+    expect(game.phase).to.eq(Phase.PRODUCTION);
+    runAllActions(game);
+    const options = cast(player.popWaitingFor(), OrOptions);
+    expect(options.title).eq('Place any final greenery from plants');
+  });
+
+  it('Solo player should not place final greeneries in TR63 mode if victory condition not met', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-solo2', [player], player, setCustomGameOptions({soloTR: true}));
+
+    // Set up near end-game conditions
+    game.generation = 14;
+    player.setTerraformRating(62);
+    player.plants = 9;
+
+    // Pass last turn
+    forceGenerationEnd(game);
+
+    // Now game should be over
+    expect(game.phase).to.eq(Phase.END);
   });
 
   it('Should not give TR or raise oxygen for final greenery placements', () => {

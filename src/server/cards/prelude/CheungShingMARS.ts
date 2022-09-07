@@ -13,7 +13,10 @@ export class CheungShingMARS extends Card implements ICorporationCard {
       name: CardName.CHEUNG_SHING_MARS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 44,
-      productionBox: {megacredits: 3},
+
+      behavior: {
+        production: {megacredits: 3},
+      },
 
       cardDiscount: {tag: Tag.BUILDING, amount: 2},
       metadata: {

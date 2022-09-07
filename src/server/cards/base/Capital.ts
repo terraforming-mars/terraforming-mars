@@ -41,7 +41,10 @@ export class Capital extends Card implements IProjectCard {
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 26,
       adjacencyBonus,
-      productionBox: {energy: -2, megacredits: 5},
+
+      behavior: {
+        production: {energy: -2, megacredits: 5},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       victoryPoints: 'special',

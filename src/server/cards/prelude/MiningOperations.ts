@@ -9,9 +9,9 @@ export class MiningOperations extends PreludeCard implements IProjectCard {
     super({
       name: CardName.MINING_OPERATIONS,
       tags: [Tag.BUILDING],
-      productionBox: {steel: 2},
 
       behavior: {
+        production: {steel: 2},
         stock: {steel: 4},
       },
 

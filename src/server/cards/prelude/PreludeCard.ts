@@ -4,7 +4,6 @@ import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
-import {Units} from '../../../common/Units';
 import {TileType} from '../../../common/TileType';
 import {ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
@@ -14,7 +13,6 @@ interface StaticPreludeProperties {
     name: CardName;
     tags?: Array<Tag>;
     startingMegacredits?: number;
-    productionBox?: Partial<Units>;
     tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
     behavior?: Partial<Behavior>,
 }
@@ -27,7 +25,6 @@ export abstract class PreludeCard extends Card implements IProjectCard {
       name: properties.name,
       tags: properties.tags,
       metadata: properties.metadata,
-      productionBox: properties.productionBox,
       startingMegaCredits: properties.startingMegacredits,
     });
   }

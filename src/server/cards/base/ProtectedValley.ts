@@ -16,7 +16,10 @@ export class ProtectedValley extends Card implements IProjectCard {
       name: CardName.PROTECTED_VALLEY,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 23,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
       tr: {oxygen: 1},
 
       metadata: {

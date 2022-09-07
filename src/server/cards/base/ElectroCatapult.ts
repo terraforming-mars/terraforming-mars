@@ -19,7 +19,10 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       name: CardName.ELECTRO_CATAPULT,
       tags: [Tag.BUILDING],
       cost: 17,
-      productionBox: {energy: -1},
+
+      behavior: {
+        production: {energy: -1},
+      },
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),

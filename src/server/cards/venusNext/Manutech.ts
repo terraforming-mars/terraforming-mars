@@ -14,7 +14,10 @@ export class Manutech extends Card implements ICorporationCard {
       tags: [Tag.BUILDING],
       startingMegaCredits: 35,
       cardType: CardType.CORPORATION,
-      productionBox: {steel: 1},
+
+      behavior: {
+        production: {steel: 1},
+      },
 
       metadata: {
         cardNumber: 'R23',

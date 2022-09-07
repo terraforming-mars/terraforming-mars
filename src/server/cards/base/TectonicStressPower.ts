@@ -13,7 +13,10 @@ export class TectonicStressPower extends Card implements IProjectCard {
       name: CardName.TECTONIC_STRESS_POWER,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 18,
-      productionBox: {energy: 3},
+
+      behavior: {
+        production: {energy: 3},
+      },
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),

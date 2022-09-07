@@ -10,7 +10,10 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
     super({
       name: CardName.MARTIAN_INDUSTRIES,
       tags: [Tag.BUILDING],
-      productionBox: {energy: 1, steel: 1},
+
+      behavior: {
+        production: {energy: 1, steel: 1},
+      },
       startingMegacredits: 6,
 
       metadata: {

@@ -8,10 +8,10 @@ export class HydrogenBombardment extends PreludeCard {
   constructor() {
     super({
       name: CardName.HYDROGEN_BOMBARDMENT,
-      productionBox: {titanium: 1},
       startingMegacredits: 6,
 
       behavior: {
+        production: {titanium: 1},
         global: {venus: 1},
       },
 

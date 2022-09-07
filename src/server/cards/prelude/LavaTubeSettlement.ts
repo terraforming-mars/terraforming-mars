@@ -16,7 +16,10 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
       name: CardName.LAVA_TUBE_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
       cost: 15,
-      productionBox: {energy: -1, megacredits: 2},
+
+      behavior: {
+        production: {energy: -1, megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'P37',

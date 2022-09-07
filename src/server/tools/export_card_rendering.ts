@@ -54,7 +54,7 @@ class ProjectCardProcessor {
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,
-      productionBox: card.productionBox,
+      productionBox: card.behavior?.production,
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,

@@ -16,7 +16,10 @@ export class MomentumViriumHabitat extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.SPACE],
       cost: 23,
-      productionBox: {heat: 2, megacredits: 3},
+
+      behavior: {
+        production: {heat: 2, megacredits: 3},
+      },
       reserveUnits: {titanium: 1},
       tr: {moonColony: 1},
 

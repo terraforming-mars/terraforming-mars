@@ -14,6 +14,7 @@ export class Harvest extends Card implements IProjectCard {
       tags: [Tag.PLANT],
       cost: 4,
       requirements: CardRequirements.builder((b) => b.greeneries(3)),
+
       behavior: {
         stock: {megacredits: 12},
       },

@@ -12,7 +12,10 @@ export class TropicalResort extends Card implements IProjectCard {
       name: CardName.TROPICAL_RESORT,
       tags: [Tag.BUILDING],
       cost: 13,
-      productionBox: {megacredits: 3, heat: -2},
+
+      behavior: {
+        production: {megacredits: 3, heat: -2},
+      },
       victoryPoints: 2,
 
       metadata: {

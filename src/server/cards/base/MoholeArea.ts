@@ -31,7 +31,10 @@ export class MoholeArea extends Card implements IProjectCard {
       cost: 20,
       adjacencyBonus,
       metadata,
-      productionBox: {heat: 4},
+
+      behavior: {
+        production: {heat: 4},
+      },
     });
   }
 

@@ -12,7 +12,10 @@ export class PowerPlant extends Card implements IProjectCard {
       name: CardName.POWER_PLANT,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 4,
-      productionBox: {energy: 1},
+
+      behavior: {
+        production: {energy: 1},
+      },
 
       metadata: {
         cardNumber: '141',

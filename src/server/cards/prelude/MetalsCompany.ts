@@ -8,7 +8,10 @@ export class MetalsCompany extends PreludeCard implements IProjectCard {
     super({
       name: CardName.METALS_COMPANY,
 
-      productionBox: {megacredits: 1, steel: 1, titanium: 1},
+      behavior: {
+        production: {megacredits: 1, steel: 1, titanium: 1},
+      },
+
       metadata: {
         cardNumber: 'P20',
         renderData: CardRenderer.builder((b) => {

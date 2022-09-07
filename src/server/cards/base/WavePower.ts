@@ -14,7 +14,10 @@ export class WavePower extends Card implements IProjectCard {
       tags: [Tag.ENERGY],
       cost: 8,
       victoryPoints: 1,
-      productionBox: {energy: 1},
+
+      behavior: {
+        production: {energy: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {

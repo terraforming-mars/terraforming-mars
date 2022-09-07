@@ -16,7 +16,10 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
       cardType: CardType.AUTOMATED,
       name: CardName.LOBBY_HALLS,
       cost: 11,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'PfTBD',

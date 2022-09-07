@@ -19,7 +19,10 @@ export class CommunicationCenter extends Card implements IProjectCard {
       cost: 13,
       tags: [Tag.SPACE, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
-      productionBox: {energy: -1},
+
+      behavior: {
+        production: {energy: -1},
+      },
 
       metadata: {
         cardNumber: 'Pf28',

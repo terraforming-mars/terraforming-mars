@@ -13,11 +13,11 @@ export class LunaResort extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 11,
-      productionBox: {energy: -1, megacredits: 3},
       reserveUnits: {titanium: 2},
       tr: {moonColony: 1},
 
       behavior: {
+        production: {energy: -1, megacredits: 3},
         global: {moonColony: 1},
       },
 

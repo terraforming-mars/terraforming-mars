@@ -13,7 +13,10 @@ export class RadSuits extends Card implements IProjectCard {
       name: CardName.RAD_SUITS,
       cost: 6,
       victoryPoints: 1,
-      productionBox: {megacredits: 1},
+
+      behavior: {
+        production: {megacredits: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       metadata: {

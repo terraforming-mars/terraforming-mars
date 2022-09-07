@@ -15,7 +15,10 @@ export class LunarIndustryComplex extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 28,
-      productionBox: {steel: 1, titanium: 1, energy: 2, heat: 1},
+
+      behavior: {
+        production: {steel: 1, titanium: 1, energy: 2, heat: 1},
+      },
       reserveUnits: {titanium: 2},
       tr: {moonMining: 1},
 

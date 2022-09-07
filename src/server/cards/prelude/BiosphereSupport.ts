@@ -8,7 +8,10 @@ export class BiosphereSupport extends PreludeCard {
     super({
       name: CardName.BIOSPHERE_SUPPORT,
       tags: [Tag.PLANT],
-      productionBox: {plants: 2, megacredits: -1},
+
+      behavior: {
+        production: {plants: 2, megacredits: -1},
+      },
 
       metadata: {
         cardNumber: 'P05',

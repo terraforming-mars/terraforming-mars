@@ -14,7 +14,10 @@ export class CallistoPenalMines extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 24,
       victoryPoints: 2,
-      productionBox: {megacredits: 3},
+
+      behavior: {
+        production: {megacredits: 3},
+      },
 
       metadata: {
         description: 'Increase your M€ production 3 steps.',

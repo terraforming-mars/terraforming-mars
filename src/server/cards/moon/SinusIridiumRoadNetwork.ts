@@ -15,7 +15,10 @@ export class SinusIridiumRoadNetwork extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,
-      productionBox: {energy: -1, megacredits: 3},
+
+      behavior: {
+        production: {energy: -1, megacredits: 3},
+      },
       reserveUnits: {steel: 1},
       tr: {moonLogistics: 1},
 

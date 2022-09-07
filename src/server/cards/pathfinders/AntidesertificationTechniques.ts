@@ -8,7 +8,10 @@ export class AntidesertificationTechniques extends PreludeCard {
   constructor() {
     super({
       name: CardName.ANTI_DESERTIFICATION_TECHNIQUES,
-      productionBox: {plants: 1, steel: 1},
+
+      behavior: {
+        production: {plants: 1, steel: 1},
+      },
       startingMegacredits: 5,
 
       metadata: {

@@ -10,7 +10,10 @@ export class EcologyExperts extends PreludeCard {
     super({
       name: CardName.ECOLOGY_EXPERTS,
       tags: [Tag.PLANT, Tag.MICROBE],
-      productionBox: {plants: 1},
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       metadata: {
         cardNumber: 'P10',

@@ -30,7 +30,6 @@ export interface StaticCardProperties {
   cost?: number;
   initialActionText?: string;
   metadata: ICardMetadata;
-  productionBox?: Partial<Units>;
   requirements?: CardRequirements;
   name: CardName;
   reserveUnits?: Partial<Units>,
@@ -45,8 +44,7 @@ export interface StaticCardProperties {
 /*
  * Internal representation of card properties.
  */
-type Properties = Omit<StaticCardProperties, 'productionBox|reserveUnits|behavior'> & {
-  productionBox?: Units,
+type Properties = Omit<StaticCardProperties, 'reserveUnits|behavior'> & {
   reserveUnits?: Units,
   behavior: InternalBehavior | undefined};
 
@@ -89,7 +87,6 @@ export abstract class Card {
 
       const p: Properties = {
         ...properties,
-        productionBox: properties.productionBox === undefined ? undefined : Units.of(properties.productionBox),
         reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
         behavior: properties.behavior === undefined ? undefined : internalize(properties.behavior),
       };
@@ -135,9 +132,6 @@ export abstract class Card {
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;
   }
-  public get productionBox(): Units {
-    return this.properties.productionBox || Units.EMPTY;
-  }
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
@@ -157,9 +151,6 @@ export abstract class Card {
     if (this.requirements?.satisfies(player) === false) {
       return false;
     }
-    if (this.productionBox && !player.production.canAdjust(this.productionBox)) {
-      return false;
-    }
     if (this.behavior !== undefined && !Behaviors.canExecute(player, this, this.behavior)) {
       return false;
     }
@@ -171,9 +162,6 @@ export abstract class Card {
   }
 
   public play(player: Player) {
-    if (this.productionBox !== undefined) {
-      player.production.adjust(this.productionBox);
-    }
     if (!isICorporationCard(this)) {
       const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
       player.deductUnits(adjustedReserveUnits);

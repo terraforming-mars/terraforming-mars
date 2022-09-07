@@ -12,7 +12,10 @@ export class HousePrinting extends Card implements IProjectCard {
       name: CardName.HOUSE_PRINTING,
       tags: [Tag.BUILDING],
       cost: 10,
-      productionBox: {steel: 1},
+
+      behavior: {
+        production: {steel: 1},
+      },
       victoryPoints: 1,
 
       metadata: {

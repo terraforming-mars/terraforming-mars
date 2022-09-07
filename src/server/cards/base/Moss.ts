@@ -14,7 +14,10 @@ export class Moss extends Card implements IProjectCard {
       name: CardName.MOSS,
       tags: [Tag.PLANT],
       cost: 4,
-      productionBox: {plants: 1},
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {

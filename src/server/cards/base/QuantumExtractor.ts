@@ -14,7 +14,10 @@ export class QuantumExtractor extends Card implements IProjectCard {
       name: CardName.QUANTUM_EXTRACTOR,
       tags: [Tag.SCIENCE, Tag.ENERGY],
       cost: 13,
-      productionBox: {energy: 4},
+
+      behavior: {
+        production: {energy: 4},
+      },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 4)),
       cardDiscount: {tag: Tag.SPACE, amount: 2},

@@ -18,7 +18,10 @@ export class UtopiaInvest extends Card implements IActionCard, ICorporationCard 
       tags: [Tag.BUILDING],
       startingMegaCredits: 40,
       cardType: CardType.CORPORATION,
-      productionBox: {steel: 1, titanium: 1},
+
+      behavior: {
+        production: {steel: 1, titanium: 1},
+      },
 
       metadata: {
         cardNumber: 'R33',

@@ -19,7 +19,9 @@ export class LunaMiningHub extends Card {
       tags: [Tag.BUILDING],
       cost: 16,
 
-      productionBox: {steel: 1, titanium: 1},
+      behavior: {
+        production: {steel: 1, titanium: 1},
+      },
       reserveUnits: {steel: 1, titanium: 1},
       tr: {moonMining: 1},
       victoryPoints: 'special',

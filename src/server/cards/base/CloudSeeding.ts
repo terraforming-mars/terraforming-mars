@@ -15,7 +15,10 @@ export class CloudSeeding extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.CLOUD_SEEDING,
       cost: 11,
-      productionBox: {megacredits: -1, plants: 2},
+
+      behavior: {
+        production: {megacredits: -1, plants: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {

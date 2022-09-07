@@ -21,7 +21,7 @@ export type ClientCard = {
   requirements?: ICardRequirements;
   metadata: ICardMetadata;
   warning?: string | Message;
-  productionBox?: Units;
+  productionBox?: Units; // Replace with behavior?
   resourceType?: CardResource;
   startingMegaCredits?: number; // Corporation and Prelude
   cardCost?: number; // Corporation

@@ -15,7 +15,10 @@ export class Shuttles extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       cost: 10,
       victoryPoints: 1,
-      productionBox: {energy: -1, megacredits: 2},
+
+      behavior: {
+        production: {energy: -1, megacredits: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
       cardDiscount: {tag: Tag.SPACE, amount: 2},

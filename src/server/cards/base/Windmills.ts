@@ -13,7 +13,10 @@ export class Windmills extends Card implements IProjectCard {
       name: CardName.WINDMILLS,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 6,
-      productionBox: {energy: 1},
+
+      behavior: {
+        production: {energy: 1},
+      },
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(7)),

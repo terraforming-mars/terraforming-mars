@@ -12,10 +12,10 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_DOME,
       tags: [Tag.BUILDING],
       cost: 5,
-      productionBox: {energy: -2, plants: 1},
       tr: {tr: 1},
 
       behavior: {
+        production: {energy: -2, plants: 1},
         tr: 1,
       },
 

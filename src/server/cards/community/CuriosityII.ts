@@ -23,7 +23,10 @@ export class CuriosityII extends Card implements ICorporationCard {
       name: CardName.CURIOSITY_II,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       startingMegaCredits: 40,
-      productionBox: {steel: 2},
+
+      behavior: {
+        production: {steel: 2},
+      },
 
       metadata: {
         cardNumber: '',

@@ -13,7 +13,10 @@ export class HypersensitiveSiliconChipFactory extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 11,
-      productionBox: {megacredits: 4},
+
+      behavior: {
+        production: {megacredits: 4},
+      },
       requirements: CardRequirements.builder((b) => b.miningTiles(2, {all})),
       reserveUnits: {titanium: 2},
 

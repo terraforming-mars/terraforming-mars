@@ -18,7 +18,10 @@ export class LunaTrainStation extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 20,
-      productionBox: {megacredits: 4},
+
+      behavior: {
+        production: {megacredits: 4},
+      },
       requirements: CardRequirements.builder((b) => b.logisticRate(5)),
       reserveUnits: {steel: 2},
       tr: {moonLogistics: 1},

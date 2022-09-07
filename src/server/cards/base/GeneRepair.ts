@@ -14,7 +14,10 @@ export class GeneRepair extends Card implements IProjectCard {
       tags: [Tag.SCIENCE],
       cost: 12,
       victoryPoints: 2,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       metadata: {

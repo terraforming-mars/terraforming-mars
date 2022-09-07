@@ -15,7 +15,10 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
       name: CardName.AEROBRAKED_AMMONIA_ASTEROID,
       tags: [Tag.SPACE],
       cost: 26,
-      productionBox: {heat: 3, plants: 1},
+
+      behavior: {
+        production: {heat: 3, plants: 1},
+      },
 
       metadata: {
         description: 'Increase your heat production 3 steps and your plant production 1 step. Add 2 Microbes to ANOTHER card.',

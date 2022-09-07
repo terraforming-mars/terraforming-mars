@@ -12,7 +12,10 @@ export class PowerPlant extends Card implements IProjectCard {
       name: CardName.POWER_PLANT_PATHFINDERS,
       cost: 13,
       tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING],
-      productionBox: {heat: 2, energy: 1},
+
+      behavior: {
+        production: {heat: 2, energy: 1},
+      },
 
       metadata: {
         cardNumber: 'Pf20',

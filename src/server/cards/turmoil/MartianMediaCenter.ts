@@ -18,7 +18,10 @@ export class MartianMediaCenter extends Card implements IProjectCard {
       name: CardName.MARTIAN_MEDIA_CENTER,
       tags: [Tag.BUILDING],
       cost: 7,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       metadata: {

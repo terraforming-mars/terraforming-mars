@@ -12,7 +12,10 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
     super({
       name: CardName.SELF_SUFFICIENT_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'P29',

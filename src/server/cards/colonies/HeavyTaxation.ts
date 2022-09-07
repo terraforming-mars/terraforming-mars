@@ -15,7 +15,10 @@ export class HeavyTaxation extends Card implements IProjectCard {
       name: CardName.HEAVY_TAXATION,
       cardType: CardType.AUTOMATED,
       victoryPoints: -1,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
       metadata: {

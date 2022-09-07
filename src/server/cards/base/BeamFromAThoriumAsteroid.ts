@@ -15,7 +15,10 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE, Tag.ENERGY],
       cost: 32,
       victoryPoints: 1,
-      productionBox: {heat: 3, energy: 3},
+
+      behavior: {
+        production: {heat: 3, energy: 3},
+      },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
       metadata: {

@@ -262,15 +262,11 @@ describe('RoboticWorkforce', () => {
         include = productions.filter((prod) => player.production[prod] !== 2).length > 0;
       }
 
-      const isEmpty = function(u: Units): boolean {
-        return u.megacredits === 0 && u.steel === 0 && u.titanium === 0 && u.plants === 0 && u.energy === 0 && u.heat === 0;
-      };
-
       console.log(`        ${card.name}: ${include}`);
       // The card must have a productionBox or produce method.
       if (include) {
         if (card.produce === undefined) {
-          if (card.productionBox === undefined || isEmpty(card.productionBox)) {
+          if (card.behavior?.production === undefined || Units.isEmpty(card.behavior?.production)) {
             fail(card.name + ' should be registered for Robotic Workforce');
           }
         }

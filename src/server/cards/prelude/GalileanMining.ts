@@ -10,7 +10,10 @@ export class GalileanMining extends PreludeCard {
     super({
       name: CardName.GALILEAN_MINING,
       tags: [Tag.JOVIAN],
-      productionBox: {titanium: 2},
+
+      behavior: {
+        production: {titanium: 2},
+      },
       startingMegacredits: -5,
 
       metadata: {

@@ -13,7 +13,10 @@ export class Lichen extends Card implements IProjectCard {
       name: CardName.LICHEN,
       tags: [Tag.PLANT],
       cost: 7,
-      productionBox: {plants: 1},
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.temperature(-24)),
       metadata: {

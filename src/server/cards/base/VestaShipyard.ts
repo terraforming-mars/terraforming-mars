@@ -13,7 +13,10 @@ export class VestaShipyard extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 15,
       victoryPoints: 1,
-      productionBox: {titanium: 1},
+
+      behavior: {
+        production: {titanium: 1},
+      },
 
       metadata: {
         cardNumber: '057',

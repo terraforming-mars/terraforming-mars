@@ -9,7 +9,10 @@ export class DomeFarming extends PreludeCard {
     super({
       name: CardName.DOME_FARMING,
       tags: [Tag.PLANT, Tag.BUILDING],
-      productionBox: {megacredits: 2, plants: 1},
+
+      behavior: {
+        production: {megacredits: 2, plants: 1},
+      },
 
       metadata: {
         cardNumber: 'P07',

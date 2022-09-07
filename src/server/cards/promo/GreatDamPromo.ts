@@ -18,7 +18,11 @@ export class GreatDamPromo extends Card implements IProjectCard {
       name: CardName.GREAT_DAM_PROMO,
       cost: 15,
       tags: [Tag.ENERGY, Tag.BUILDING],
-      productionBox: {energy: 2},
+
+      behavior: {
+        production: {energy: 2},
+      },
+
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       victoryPoints: 1,
 

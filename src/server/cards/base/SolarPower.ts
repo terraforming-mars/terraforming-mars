@@ -12,7 +12,10 @@ export class SolarPower extends Card implements IProjectCard {
       name: CardName.SOLAR_POWER,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 11,
-      productionBox: {energy: 1},
+
+      behavior: {
+        production: {energy: 1},
+      },
       victoryPoints: 1,
 
       metadata: {

@@ -14,7 +14,10 @@ export class LightningHarvest extends Card implements IProjectCard {
       cost: 8,
       tags: [Tag.ENERGY],
       victoryPoints: 1,
-      productionBox: {energy: 1, megacredits: 1},
+
+      behavior: {
+        production: {energy: 1, megacredits: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       metadata: {

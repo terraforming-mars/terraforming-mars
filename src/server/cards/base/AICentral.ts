@@ -15,7 +15,10 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       name: CardName.AI_CENTRAL,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 21,
-      productionBox: {energy: -1},
+
+      behavior: {
+        production: {energy: -1},
+      },
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),

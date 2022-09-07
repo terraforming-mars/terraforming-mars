@@ -9,7 +9,10 @@ export class Loan extends PreludeCard implements IProjectCard {
     super({
       name: CardName.LOAN,
       startingMegacredits: 30,
-      productionBox: {megacredits: -2},
+
+      behavior: {
+        production: {megacredits: -2},
+      },
 
       metadata: {
         cardNumber: 'P17',

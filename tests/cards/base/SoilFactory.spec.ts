@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {SoilFactory} from '../../../src/server/cards/base/SoilFactory';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SoilFactory', function() {
   let card: SoilFactory;
@@ -9,7 +10,8 @@ describe('SoilFactory', function() {
 
   beforeEach(function() {
     card = new SoilFactory();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {

@@ -13,7 +13,10 @@ export class SpinoffDepartment extends Card implements IProjectCard {
       tags: [Tag.BUILDING],
       name: CardName.SPINOFF_DEPARTMENT,
       cardType: CardType.ACTIVE,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'C41',

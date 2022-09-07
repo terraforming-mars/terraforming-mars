@@ -16,7 +16,10 @@ export class UrbanizedArea extends Card implements IProjectCard {
       name: CardName.URBANIZED_AREA,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 10,
-      productionBox: {energy: -1, megacredits: 2},
+
+      behavior: {
+        production: {energy: -1, megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '120',

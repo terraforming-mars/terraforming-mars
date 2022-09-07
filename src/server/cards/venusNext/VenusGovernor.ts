@@ -15,6 +15,7 @@ export class VenusGovernor extends Card implements IProjectCard {
       cost: 4,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 2)),
+
       behavior: {
         production: {megacredits: 2},
       },

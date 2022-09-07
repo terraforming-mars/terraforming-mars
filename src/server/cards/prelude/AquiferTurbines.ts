@@ -12,7 +12,9 @@ export class AquiferTurbines extends PreludeCard {
       name: CardName.AQUIFER_TURBINES,
       tags: [Tag.ENERGY],
 
-      productionBox: {energy: 2},
+      behavior: {
+        production: {energy: 2},
+      },
       startingMegacredits: -3,
 
       metadata: {

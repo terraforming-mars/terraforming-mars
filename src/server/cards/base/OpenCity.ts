@@ -16,11 +16,11 @@ export class OpenCity extends Card implements IProjectCard {
       name: CardName.OPEN_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 23,
-      productionBox: {energy: -1, megacredits: 4},
       requirements: CardRequirements.builder((b) => b.oxygen(12)),
       victoryPoints: 1,
 
       behavior: {
+        production: {energy: -1, megacredits: 4},
         stock: {plants: 2},
       },
 

@@ -9,7 +9,10 @@ export class PowerGeneration extends PreludeCard implements IProjectCard {
     super({
       name: CardName.POWER_GENERATION,
       tags: [Tag.ENERGY],
-      productionBox: {energy: 3},
+
+      behavior: {
+        production: {energy: 3},
+      },
 
       metadata: {
         cardNumber: 'P27',

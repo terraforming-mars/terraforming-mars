@@ -12,7 +12,10 @@ export class ImportOfAdvancedGHG extends Card implements IProjectCard {
       name: CardName.IMPORT_OF_ADVANCED_GHG,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 9,
-      productionBox: {heat: 2},
+
+      behavior: {
+        production: {heat: 2},
+      },
 
       metadata: {
         cardNumber: '167',

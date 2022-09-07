@@ -67,4 +67,8 @@ export namespace Units {
       heat: -units.heat,
     };
   }
+
+  export function isEmpty(u: Units): boolean {
+    return u.megacredits === 0 && u.steel === 0 && u.titanium === 0 && u.plants === 0 && u.energy === 0 && u.heat === 0;
+  }
 }

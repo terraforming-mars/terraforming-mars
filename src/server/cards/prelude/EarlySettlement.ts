@@ -10,7 +10,10 @@ export class EarlySettlement extends PreludeCard {
     super({
       name: CardName.EARLY_SETTLEMENT,
       tags: [Tag.BUILDING, Tag.CITY],
-      productionBox: {plants: 1},
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       metadata: {
         cardNumber: 'P09',

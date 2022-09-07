@@ -10,6 +10,11 @@ export class ExperimentalForest extends PreludeCard {
     super({
       name: CardName.EXPERIMENTAL_FOREST,
       tags: [Tag.PLANT],
+
+      behavior: {
+        drawCard: {count: 2, tag: Tag.PLANT},
+      },
+
       metadata: {
         cardNumber: 'P12',
         renderData: CardRenderer.builder((b) => {
@@ -20,7 +25,6 @@ export class ExperimentalForest extends PreludeCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.drawCard(2, {tag: Tag.PLANT});
     player.game.defer(new PlaceGreeneryTile(player));
     return undefined;
   }

@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -9,7 +8,11 @@ export class DesignCompany extends PreludeCard {
     super({
       name: CardName.DESIGN_COMPANY,
       tags: [Tag.MARS],
-      productionBox: {steel: 1},
+
+      behavior: {
+        production: {steel: 1},
+        drawCard: {count: 3, tag: Tag.BUILDING},
+      },
 
       metadata: {
         cardNumber: 'P08',
@@ -20,10 +23,6 @@ export class DesignCompany extends PreludeCard {
         description: 'Increase your steel production 1 step. Draw 3 cards with a building tag.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.drawCard(3, {tag: Tag.BUILDING});
-    return undefined;
   }
 }
 

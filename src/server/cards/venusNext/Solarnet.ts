@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,6 +16,10 @@ export class Solarnet extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.JOVIAN)),
       victoryPoints: 1,
 
+      behavior: {
+        drawCard: 2,
+      },
+
       metadata: {
         cardNumber: '245',
         renderData: CardRenderer.builder((b) => {
@@ -25,10 +28,5 @@ export class Solarnet extends Card implements IProjectCard {
         description: 'Requires Venus, Earth and Jovian tags. Draw 2 cards.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.drawCard(2);
-    return undefined;
   }
 }

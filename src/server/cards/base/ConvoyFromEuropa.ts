@@ -16,6 +16,10 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
       cost: 15,
       tr: {oceans: 1},
 
+      behavior: {
+        drawCard: 1,
+      },
+
       metadata: {
         cardNumber: '161',
         description: 'Place 1 ocean tile and draw 1 card.',
@@ -25,7 +29,6 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.drawCard();
     player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }

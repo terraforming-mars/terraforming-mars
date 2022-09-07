@@ -1,5 +1,7 @@
 // import {SpaceType} from '../../common/boards/SpaceType';
-// import {Tag} from '../../common/cards/Tag';
+import {CardResource} from '@/common/CardResource';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '../../common/cards/Tag';
 // import {SpaceId} from '../../common/Types';
 // import {CardResource} from '../../common/CardResource';
 // import {TileType} from '../../common/TileType';
@@ -43,8 +45,8 @@ export interface InternalBehavior {
   // // Raise the titanium and steel value. On discard, reduce them.
   // resourceValues: {titanum?: number, steel?: number},
 
-  // // Draw this many cards from the deck.
-  // drawCard: number | {count: number, tag: Tag},
+  // Draw this many cards from the deck.
+  drawCard: number | DrawCard,
 
   // spendResourcesHere: number,
   // spendResource: {type: CardResource, count: number},
@@ -53,7 +55,8 @@ export interface InternalBehavior {
 
 export type Behavior = /* Omit<InternalBehavior, 'production|stock'> & */ {
   production?: Partial<Units>,
-  stock?: Partial<Units>
+  stock?: Partial<Units>,
+  drawCard?: number | DrawCard,
 };
 
 export function internalize(behavior: Behavior): InternalBehavior {
@@ -61,9 +64,16 @@ export function internalize(behavior: Behavior): InternalBehavior {
     ...behavior,
     production: behavior.production === undefined ? undefined : Units.of(behavior.production),
     stock: behavior.stock === undefined ? undefined : Units.of(behavior.stock),
+    drawCard: behavior.drawCard || 0,
   };
 }
 
+export interface DrawCard {
+  count: number,
+  tag?: Tag,
+  type?: CardType,
+  resource?: CardResource,
+}
 // export interface AddResource {
 //   count: number,
 //   type?: CardResource,

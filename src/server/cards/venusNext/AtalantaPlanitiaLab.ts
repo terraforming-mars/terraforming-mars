@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,16 +17,15 @@ export class AtalantaPlanitiaLab extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       victoryPoints: 2,
 
+      behavior: {
+        drawCard: 2,
+      },
+
       metadata: {
         cardNumber: '216',
         description: 'Requires 3 science tags. Draw 2 cards.',
         renderData: CardRenderer.builder((b) => b.cards(2)),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.drawCard(2);
-    return undefined;
   }
 }

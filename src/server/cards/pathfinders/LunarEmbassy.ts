@@ -19,6 +19,10 @@ export class LunarEmbassy extends Card implements IProjectCard {
       cost: 28,
       victoryPoints: 2,
 
+      behavior: {
+        drawCard: 1,
+      },
+
       metadata: {
         cardNumber: 'Pf16',
         renderData: CardRenderer.builder((b) => {
@@ -36,7 +40,6 @@ export class LunarEmbassy extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, 3);
     player.production.add(Resources.PLANTS, Math.floor((1 + player.tags.count(Tag.EARTH)) / 2), {log: true});
-    player.drawCard();
     player.game.addCityTile(player, SpaceName.LUNAR_EMBASSY, SpaceType.COLONY);
     return undefined;
   }

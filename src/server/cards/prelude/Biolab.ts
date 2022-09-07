@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -11,6 +10,10 @@ export class Biolab extends PreludeCard {
       tags: [Tag.SCIENCE],
       productionBox: {plants: 1},
 
+      behavior: {
+        drawCard: 3,
+      },
+
       metadata: {
         cardNumber: 'P04',
         renderData: CardRenderer.builder((b) => {
@@ -20,10 +23,6 @@ export class Biolab extends PreludeCard {
         description: 'Increase your plant production 1 step. Draw 3 cards.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.drawCard(3);
-    return undefined;
   }
 }
 

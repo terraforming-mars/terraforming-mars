@@ -11,6 +11,10 @@ export class ExperiencedMartians extends PreludeCard {
       name: CardName.EXPERIENCED_MARTIANS,
       productionBox: {megacredits: 2},
 
+      behavior: {
+        drawCard: {count: 2, tag: Tag.MARS},
+      },
+
       metadata: {
         cardNumber: 'P08',
         renderData: CardRenderer.builder((b) => {
@@ -22,7 +26,6 @@ export class ExperiencedMartians extends PreludeCard {
   }
   public override bespokePlay(player: Player) {
     player.game.defer(new SendDelegateToArea(player, undefined, {count: 1, source: 'reserve'}));
-    player.drawCard(2, {tag: Tag.MARS});
     return undefined;
   }
 }

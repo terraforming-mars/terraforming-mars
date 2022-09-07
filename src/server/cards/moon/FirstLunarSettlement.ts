@@ -13,8 +13,12 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
     super({
       name: CardName.FIRST_LUNAR_SETTLEMENT,
       tags: [Tag.CITY, Tag.MOON],
-      productionBox: {megacredits: 1},
       tilesBuilt: [TileType.MOON_COLONY],
+
+      behavior: {
+        production: {megacredits: 1},
+      },
+
       metadata: {
         description: 'Place a colony tile on the Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.',
         cardNumber: '',
@@ -26,7 +30,6 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.adjust(this.productionBox, {log: true});
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;
   }

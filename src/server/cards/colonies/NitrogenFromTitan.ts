@@ -18,6 +18,10 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
       tr: {tr: 2},
       victoryPoints: 1,
 
+      behavior: {
+        tr: 2,
+      },
+
       metadata: {
         cardNumber: 'C28',
         renderData: CardRenderer.builder((b) => {
@@ -29,7 +33,6 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(2);
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
     return undefined;
   }

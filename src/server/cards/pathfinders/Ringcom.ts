@@ -19,6 +19,10 @@ export class Ringcom extends Card implements ICorporationCard {
 
       initialActionText: 'Draw 2 cards with a jovian tag',
 
+      behavior: {
+        production: {megacredits: 3},
+      },
+
       metadata: {
         cardNumber: 'PfC4',
         description: 'You start with 39 M€ and 3 M€ production. As your first action, draw 2 cards with a jovian tag.',
@@ -37,7 +41,6 @@ export class Ringcom extends Card implements ICorporationCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 3);
     // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
     this.onCardPlayed(player, this);
     return undefined;

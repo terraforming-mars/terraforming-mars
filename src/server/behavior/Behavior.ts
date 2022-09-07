@@ -21,8 +21,8 @@ export interface InternalBehavior {
   // // Add resources to any cards
   // addResourceToAnyCards: AddResource;
 
-  // // Gain units of TR
-  // tr: number;
+  // Gain units of TR
+  tr?: number;
 
   // Raise certain global parameters.
   // Not sure how to deal with Oceans, yet.
@@ -66,6 +66,8 @@ export type Behavior = /* Omit<InternalBehavior, 'production|stock'> & */ {
     moonMining?: number,
     moonLogistics?: number,
   },
+  // Gain units of TR
+  tr?: number;
 };
 
 export function internalize(behavior: Behavior): InternalBehavior {

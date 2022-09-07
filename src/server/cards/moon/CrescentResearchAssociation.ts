@@ -31,10 +31,6 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
     });
   }
 
-  public override bespokePlay() {
-    return undefined;
-  }
-
   public override getCardDiscount(player: Player, card: IProjectCard) {
     if (card.tags.indexOf(Tag.MOON) === -1) {
       return 0;

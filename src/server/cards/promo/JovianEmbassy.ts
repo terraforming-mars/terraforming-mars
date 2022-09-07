@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -16,6 +15,10 @@ export class JovianEmbassy extends Card implements IProjectCard {
       tr: {tr: 1},
       victoryPoints: 1,
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: 'X23',
         renderData: CardRenderer.builder((b) => {
@@ -24,10 +27,5 @@ export class JovianEmbassy extends Card implements IProjectCard {
         description: 'Raise your TR 1 step.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
-    return undefined;
   }
 }

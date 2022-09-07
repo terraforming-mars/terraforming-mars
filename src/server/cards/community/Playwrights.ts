@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Resources} from '../../../common/Resources';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -21,6 +20,10 @@ export class Playwrights extends Card implements ICorporationCard {
       tags: [Tag.ENERGY],
       startingMegaCredits: 38,
       cardType: CardType.CORPORATION,
+
+      behavior: {
+        production: {energy: 1},
+      },
 
       metadata: {
         cardNumber: 'R40',
@@ -44,11 +47,6 @@ export class Playwrights extends Card implements ICorporationCard {
 
   // For Project Inspection
   private checkLoops = 0;
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.ENERGY, 1);
-    return undefined;
-  }
 
   public canAct(player: Player): boolean {
     const replayableEvents = this.getReplayableEvents(player);

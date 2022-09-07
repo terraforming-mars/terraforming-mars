@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
@@ -17,6 +16,10 @@ export class MagneticShield extends Card implements IProjectCard {
       cost: 24,
       tr: {tr: 4},
 
+      behavior: {
+        tr: 4,
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.ENERGY, 3)),
       metadata: {
         cardNumber: 'X24',
@@ -24,10 +27,5 @@ export class MagneticShield extends Card implements IProjectCard {
         description: 'Requires 3 power tags. Raise your TR 4 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(4);
-    return undefined;
   }
 }

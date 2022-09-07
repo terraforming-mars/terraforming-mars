@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -14,6 +13,10 @@ export class DiversitySupport extends Card implements IProjectCard {
       tags: [],
       cost: 1,
 
+      behavior: {
+        tr: 1,
+      },
+
       requirements: CardRequirements.builder((b) => b.resourceTypes(9)),
       metadata: {
         cardNumber: 'X20',
@@ -21,9 +24,5 @@ export class DiversitySupport extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => b.tr(1)),
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
-    return undefined;
   }
 }

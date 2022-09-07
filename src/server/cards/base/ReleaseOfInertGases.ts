@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -13,6 +12,10 @@ export class ReleaseOfInertGases extends Card implements IProjectCard {
       cost: 14,
       tr: {tr: 2},
 
+      behavior: {
+        tr: 2,
+      },
+
       metadata: {
         cardNumber: '036',
         renderData: CardRenderer.builder((b) => {
@@ -21,10 +24,5 @@ export class ReleaseOfInertGases extends Card implements IProjectCard {
         description: 'Raise your terraforming rating 2 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(2);
-    return undefined;
   }
 }

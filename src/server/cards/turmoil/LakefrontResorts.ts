@@ -40,6 +40,7 @@ export class LakefrontResorts extends Card implements ICorporationCard {
     });
   }
 
+  // TODO(kberg): This requires an onDiscard.
   public override bespokePlay(player: Player) {
     player.oceanBonus = 3;
     return undefined;

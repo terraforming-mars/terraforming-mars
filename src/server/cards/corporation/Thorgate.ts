@@ -1,8 +1,6 @@
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,6 +13,10 @@ export class Thorgate extends Card implements ICorporationCard {
       name: CardName.THORGATE,
       tags: [Tag.ENERGY],
       startingMegaCredits: 48,
+
+      behavior: {
+        production: {energy: 1},
+      },
 
       cardDiscount: {tag: Tag.ENERGY, amount: 3},
       metadata: {
@@ -32,11 +34,6 @@ export class Thorgate extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.ENERGY, 1);
-    return undefined;
   }
 }
 

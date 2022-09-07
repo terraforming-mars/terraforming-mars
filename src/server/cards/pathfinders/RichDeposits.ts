@@ -1,10 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 
@@ -15,6 +13,10 @@ export class RichDeposits extends Card implements IProjectCard {
       name: CardName.RICH_DEPOSITS,
       cost: 12,
 
+      behavior: {
+        production: {steel: 3},
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
       metadata: {
         cardNumber: 'Pf52',
@@ -23,10 +25,4 @@ export class RichDeposits extends Card implements IProjectCard {
       },
     });
   }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.STEEL, 3);
-    return undefined;
-  }
 }
-

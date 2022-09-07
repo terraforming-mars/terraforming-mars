@@ -9,8 +9,11 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
     super({
       name: CardName.NITROGEN_SHIPMENT,
       startingMegacredits: 5,
-      productionBox: {plants: 1},
 
+      behavior: {
+        production: {plants: 1},
+        tr: 1,
+      },
 
       metadata: {
         cardNumber: 'P24',
@@ -24,7 +27,6 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
   }
   public override bespokePlay(player: Player) {
     player.megaCredits += 5;
-    player.increaseTerraformRating();
     return undefined;
   }
 }

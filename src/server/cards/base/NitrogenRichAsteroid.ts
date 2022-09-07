@@ -19,6 +19,7 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
 
       behavior: {
         global: {temperature: 1},
+        tr: 1,
       },
 
       metadata: {
@@ -36,7 +37,6 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(2);
     if (player.tags.count(Tag.PLANT) < 3) {
       player.production.add(Resources.PLANTS, 1, {log: true});
     } else {

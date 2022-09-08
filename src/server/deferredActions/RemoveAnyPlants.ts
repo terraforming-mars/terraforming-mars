@@ -4,7 +4,6 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
-import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 export class RemoveAnyPlants extends DeferredAction {
   constructor(
@@ -19,7 +18,7 @@ export class RemoveAnyPlants extends DeferredAction {
     if (this.player.game.isSoloMode()) {
       // Crash site cleanup hook
       this.player.game.someoneHasRemovedOtherPlayersPlants = true;
-      MonsInsurance.resolveInsuranceInSoloGame(this.player);
+      this.player.resolveInsuranceInSoloGame();
       return undefined;
     }
 

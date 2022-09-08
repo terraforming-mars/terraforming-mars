@@ -65,40 +65,4 @@ export class MonsInsurance extends Card implements ICorporationCard {
       }
     }
   }
-
-  /**
-   * In the multiplayer game, after an attack, the attacked player makes a claim
-   * for insurance. If Mons Insurance is in the game, the claimant will receive
-   * as much ass possible from the insurer.
-   *
-   * @param {Player} claimant: the attacked player.
-   */
-  public static resolveInsurance(claimant: Player) {
-    // game.monsInsuranceOwner could be eliminated entirely if there
-    // was a fast version of getCardPlayer().
-    // I mean, it could be eliminated now, but getCardPlayer is expensive, and
-    // checking for who is Mons Insurance is called often even when the card
-    // is out of play.
-    const game = claimant.game;
-    if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== claimant.id) {
-      const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
-      // TODO(kberg): replace with "getCorporationOrThrow"?
-      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporation(CardName.MONS_INSURANCE);
-      monsInsurance?.payDebt(monsInsuranceOwner, claimant);
-    }
-  }
-
-  /**
-   * In the solo game, Mons Insurance is only held by the sole player, who will
-   * have to pay the penalty for hurting the neutral player.
-   *
-   * @param {Player} potentialInsurer: the solo player in the game. It's not
-   * clear yet whether the player has Mons Insurance, but if they do, they will
-   * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
-   * disappears.
-   */
-  public static resolveInsuranceInSoloGame(potentialInsurer: Player) {
-    const monsInsurance = <MonsInsurance> potentialInsurer.getCorporation(CardName.MONS_INSURANCE);
-    monsInsurance?.payDebt(potentialInsurer, undefined);
-  }
 }

@@ -1,6 +1,7 @@
 // import {SpaceType} from '../../common/boards/SpaceType';
-import {CardResource} from '@/common/CardResource';
-import {CardType} from '@/common/cards/CardType';
+import {CardResource} from '../../common/CardResource';
+import {CardType} from '../../common/cards/CardType';
+import {Resources} from '../../common/Resources';
 import {Tag} from '../../common/cards/Tag';
 // import {SpaceId} from '../../common/Types';
 // import {CardResource} from '../../common/CardResource';
@@ -20,6 +21,9 @@ export interface Behavior {
 
   // Add resources to any cards
   addResourcesToAnyCard?: AddResource | Array<AddResource>;
+
+  // Decrease any production
+  decreaseAnyProduction?: DecreaseAnyProduction;
 
   // Gain units of TR
   tr?: number;
@@ -63,4 +67,9 @@ export interface AddResource {
   count: number,
   type?: CardResource,
   tag?: Tag;
+}
+
+export interface DecreaseAnyProduction {
+  count: number;
+  type: Resources;
 }

@@ -40,7 +40,6 @@ export class Arklight extends Card implements ICorporationCard {
     });
   }
 
-
   public override bespokePlay(player: Player) {
     player.addResourceTo(this, {log: true});
     return undefined;

@@ -8,7 +8,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -25,6 +24,10 @@ export class Birds extends Card implements IActionCard, IProjectCard {
       requirements: CardRequirements.builder((b) => b.oxygen(13)),
       victoryPoints: VictoryPoints.resource(1, 1),
 
+      behavior: {
+        decreaseAnyProduction: {type: Resources.PLANTS, count: 2},
+      },
+
       metadata: {
         cardNumber: '072',
         description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.',
@@ -40,15 +43,6 @@ export class Birds extends Card implements IActionCard, IProjectCard {
     });
   }
 
-
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.canReduceAnyProduction(Resources.PLANTS, 2);
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(
-      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 2}));
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }

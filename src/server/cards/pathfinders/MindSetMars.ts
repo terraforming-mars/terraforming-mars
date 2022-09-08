@@ -39,7 +39,6 @@ export class MindSetMars extends Card implements ICorporationCard {
     });
   }
 
-
   public override bespokePlay() {
     this.resourceCount++;
     return undefined;

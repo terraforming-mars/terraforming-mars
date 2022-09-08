@@ -8,7 +8,6 @@ import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
-import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -20,6 +19,10 @@ export class Fish extends Card implements IActionCard, IProjectCard {
       name: CardName.FISH,
       tags: [Tag.ANIMAL],
       cost: 9,
+
+      behavior: {
+        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+      },
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
@@ -42,14 +45,6 @@ export class Fish extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.canReduceAnyProduction(Resources.PLANTS, 1);
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(
-      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }

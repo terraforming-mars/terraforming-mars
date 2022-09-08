@@ -9,7 +9,6 @@ import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
@@ -27,6 +26,10 @@ export class Herbivores extends Card implements IProjectCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.oxygen(8)),
+
+      behavior: {
+        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+      },
 
       metadata: {
         cardNumber: '147',
@@ -46,10 +49,6 @@ export class Herbivores extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.canReduceAnyProduction(Resources.PLANTS, 1);
-  }
-
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (cardOwner.id === activePlayer.id && Board.isGreenerySpace(space)) {
       cardOwner.game.defer(new AddResourcesToCard(cardOwner, CardResource.ANIMAL, {filter: (c) => c.name === this.name}));
@@ -58,8 +57,6 @@ export class Herbivores extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.addResourceTo(this);
-    player.game.defer(
-      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
     return undefined;
   }
 }

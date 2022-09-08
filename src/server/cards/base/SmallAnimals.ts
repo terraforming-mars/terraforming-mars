@@ -8,7 +8,6 @@ import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -24,6 +23,10 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
+
+      behavior: {
+        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+      },
 
       metadata: {
         cardNumber: '054',
@@ -41,14 +44,7 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.canReduceAnyProduction(Resources.PLANTS, 1);
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(
-      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
-    return undefined;
-  }
+
   public canAct(): boolean {
     return true;
   }

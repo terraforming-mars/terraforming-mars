@@ -2,7 +2,6 @@ import {CardName} from '../../common/cards/CardName';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {LawSuit} from '../cards/promo/LawSuit';
 import {Manutech} from '../cards/venusNext/Manutech';
-import {MonsInsurance} from '../cards/promo/MonsInsurance';
 import {Player} from '../Player';
 import {Resources} from '../../common/Resources';
 import {Units} from '../../common/Units';
@@ -65,7 +64,7 @@ export class Production {
 
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.player.id)) {
-      MonsInsurance.resolveInsurance(this.player);
+      this.player.resolveInsurance();
     }
 
     // Manutech hook

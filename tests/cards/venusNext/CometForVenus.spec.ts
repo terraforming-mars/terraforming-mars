@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {CometForVenus} from '../../../src/server/cards/venusNext/CometForVenus';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {cast} from '../../TestingUtils';
@@ -11,9 +10,9 @@ describe('CometForVenus', function() {
   it('Should play', function() {
     const card = new CometForVenus();
     const card2 = new AerialMappers();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
+    const game = newTestGame(2);
+    const player = getTestPlayer(game, 0);
+    const player2 = getTestPlayer(game, 1);
 
     player2.megaCredits = 10;
     player2.playedCards.push(card2);

@@ -1,14 +1,12 @@
 import {expect} from 'chai';
 import {Solarnet} from '../../../src/server/cards/venusNext/Solarnet';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Solarnet', function() {
   it('Should play', function() {
     const card = new Solarnet();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const game = newTestGame(2);
+    const player = getTestPlayer(game, 0);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     player.tagsForTest = {venus: 1};

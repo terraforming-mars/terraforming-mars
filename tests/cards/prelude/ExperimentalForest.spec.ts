@@ -1,16 +1,15 @@
 import {expect} from 'chai';
 import {ExperimentalForest} from '../../../src/server/cards/prelude/ExperimentalForest';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('ExperimentalForest', function() {
   it('Should play', function() {
     const card = new ExperimentalForest();
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player);
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
     card.play(player);
 
     // Select Greenery space

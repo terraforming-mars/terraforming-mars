@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {IoResearchOutpost} from '../../../src/server/cards/prelude/IoResearchOutpost';
 import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('IoResearchOutpost', function() {
   it('Should play', function() {
     const card = new IoResearchOutpost();
-    const player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
     Game.newInstance('gameid', [player], player);
     card.play(player);
 

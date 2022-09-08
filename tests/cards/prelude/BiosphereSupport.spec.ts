@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('BiosphereSupport', function() {
   let card: BiosphereSupport;
@@ -10,7 +10,8 @@ describe('BiosphereSupport', function() {
 
   beforeEach(function() {
     card = new BiosphereSupport();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {

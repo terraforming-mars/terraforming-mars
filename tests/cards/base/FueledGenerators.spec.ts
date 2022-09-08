@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {FueledGenerators} from '../../../src/server/cards/base/FueledGenerators';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('FueledGenerators', function() {
   it('Should play', function() {
     const card = new FueledGenerators();
-    const player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
 
     player.production.add(Resources.PLANTS, 1);
     card.play(player);

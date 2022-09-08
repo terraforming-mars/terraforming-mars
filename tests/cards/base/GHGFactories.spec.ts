@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GHGFactories} from '../../../src/server/cards/base/GHGFactories';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('GHGFactories', function() {
   let card: GHGFactories;
@@ -10,7 +10,8 @@ describe('GHGFactories', function() {
 
   beforeEach(function() {
     card = new GHGFactories();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {

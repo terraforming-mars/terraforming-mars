@@ -3,17 +3,15 @@ import {cast} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {AirScrappingExpedition} from '../../../src/server/cards/venusNext/AirScrappingExpedition';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
-import {Game} from '../../../src/server/Game';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {TestPlayer} from '../../TestPlayer';
 
 describe('AirScrappingExpedition', function() {
   it('Should play', function() {
     const card = new AirScrappingExpedition();
     const corp = new Celestic();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    const game = newTestGame(2);
+    const player = getTestPlayer(game, 0);
     player.setCorporationForTest(corp);
 
     const selectCard = cast(card.play(player), SelectCard<ICard>);

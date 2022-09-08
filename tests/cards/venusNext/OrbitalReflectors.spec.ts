@@ -1,14 +1,12 @@
 import {expect} from 'chai';
 import {OrbitalReflectors} from '../../../src/server/cards/venusNext/OrbitalReflectors';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('OrbitalReflectors', function() {
   it('Should play', function() {
     const card = new OrbitalReflectors();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    const game = newTestGame(2);
+    const player = getTestPlayer(game, 0);
 
     const action = card.play(player);
     expect(action).is.undefined;

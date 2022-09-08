@@ -1,16 +1,15 @@
 import {expect} from 'chai';
 import {EarlySettlement} from '../../../src/server/cards/prelude/EarlySettlement';
-import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('EarlySettlement', function() {
   it('Should play', function() {
     const card = new EarlySettlement();
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player);
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
 
     card.play(player);
     const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);

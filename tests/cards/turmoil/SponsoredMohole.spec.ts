@@ -1,17 +1,14 @@
 import {expect} from 'chai';
 import {SponsoredMohole} from '../../../src/server/cards/turmoil/SponsoredMohole';
-import {Game} from '../../../src/server/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SponsoredMohole', function() {
   it('Should play', function() {
     const card = new SponsoredMohole();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    const game = newTestGame(1, setCustomGameOptions());
+    const player = getTestPlayer(game, 0);
     expect(card.canPlay(player)).is.not.true;
 
     const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;

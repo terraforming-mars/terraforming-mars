@@ -1,17 +1,14 @@
 import {expect} from 'chai';
 import {SupportedResearch} from '../../../src/server/cards/turmoil/SupportedResearch';
-import {Game} from '../../../src/server/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SupportedResearch', function() {
   it('Should play', function() {
     const card = new SupportedResearch();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    const game = newTestGame(2, setCustomGameOptions());
+    const player = getTestPlayer(game, 0);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS)!;

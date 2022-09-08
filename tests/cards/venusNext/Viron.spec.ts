@@ -1,16 +1,14 @@
 import {expect} from 'chai';
 import {RestrictedArea} from '../../../src/server/cards/base/RestrictedArea';
 import {Viron} from '../../../src/server/cards/venusNext/Viron';
-import {Game} from '../../../src/server/Game';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {TestPlayer} from '../../TestPlayer';
 
 describe('Viron', function() {
   it('Should act', function() {
     const card = new Viron();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
     const action = card.play(player);
     expect(action).is.undefined;
     player.setCorporationForTest(card);

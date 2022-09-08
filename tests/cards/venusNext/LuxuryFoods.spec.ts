@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {LuxuryFoods} from '../../../src/server/cards/venusNext/LuxuryFoods';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('LuxuryFoods', function() {
   it('Should play', function() {
     const card = new LuxuryFoods();
-    const player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     player.tagsForTest = {venus: 1};

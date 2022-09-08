@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {MetalRichAsteroid} from '../../../src/server/cards/prelude/MetalRichAsteroid';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Metal-RichAsteroid', function() {
   it('Should play', function() {
     const card = new MetalRichAsteroid();
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player);
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.titanium).to.eq(4);

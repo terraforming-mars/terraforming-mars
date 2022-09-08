@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Loan} from '../../../src/server/cards/prelude/Loan';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Loan', function() {
   let card: Loan;
@@ -10,7 +10,8 @@ describe('Loan', function() {
 
   beforeEach(function() {
     card = new Loan();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {

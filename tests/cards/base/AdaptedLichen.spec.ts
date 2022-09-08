@@ -1,11 +1,12 @@
 import {expect} from 'chai';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {AdaptedLichen} from '../../../src/server/cards/base/AdaptedLichen';
-import {TestPlayer} from '../../TestPlayer';
 
 describe('AdaptedLichen', function() {
   it('Should play', function() {
     const card = new AdaptedLichen();
-    const player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
 
     card.play(player);
     expect(player.production.plants).to.eq(1);

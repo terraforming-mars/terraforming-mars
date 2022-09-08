@@ -1,7 +1,7 @@
 import {expect} from 'chai';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {FusionPower} from '../../../src/server/cards/base/FusionPower';
 import {Player} from '../../../src/server/Player';
-import {TestPlayer} from '../../TestPlayer';
 
 describe('FusionPower', function() {
   let card: FusionPower;
@@ -9,7 +9,8 @@ describe('FusionPower', function() {
 
   beforeEach(function() {
     card = new FusionPower();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {

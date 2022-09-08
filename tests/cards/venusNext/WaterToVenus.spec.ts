@@ -1,14 +1,12 @@
 import {expect} from 'chai';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {WaterToVenus} from '../../../src/server/cards/venusNext/WaterToVenus';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
 
 describe('WaterToVenus', function() {
   it('Should play', function() {
     const card = new WaterToVenus();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    const game = newTestGame(2);
+    const player = getTestPlayer(game, 0);
 
     const play = card.play(player);
     expect(play).is.undefined;

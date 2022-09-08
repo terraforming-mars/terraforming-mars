@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Resources} from '../../../src/common/Resources';
 import {CardType} from '../../../src/common/cards/CardType';
 
@@ -11,13 +10,12 @@ describe('CommunicationCenter', function() {
   let card: CommunicationCenter;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new CommunicationCenter();
     game = newTestGame(2, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
-    otherPlayer = getTestPlayer(game, 1);
+    [player, otherPlayer] = game.testPlayers;
     player.playedCards = [card];
   });
 

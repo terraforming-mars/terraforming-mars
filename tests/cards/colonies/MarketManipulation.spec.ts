@@ -1,6 +1,6 @@
 import {SelectColony} from './../../../src/server/inputs/SelectColony';
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {MarketManipulation} from '../../../src/server/cards/colonies/MarketManipulation';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
@@ -9,7 +9,6 @@ import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Europa} from './../../../src/server/colonies/Europa';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 import {Callisto} from '../../../src/server/colonies/Callisto';
-import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {cast} from '../../TestingUtils';
@@ -17,7 +16,7 @@ import {cast} from '../../TestingUtils';
 describe('MarketManipulation', function() {
   let card: MarketManipulation;
   let player: Player;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new MarketManipulation();
@@ -30,7 +29,7 @@ describe('MarketManipulation', function() {
         ColonyName.CALLISTO,
         ColonyName.EUROPA],
     });
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Should play', function() {

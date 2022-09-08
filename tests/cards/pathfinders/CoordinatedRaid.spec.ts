@@ -1,9 +1,8 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {CoordinatedRaid} from '../../../src/server/cards/pathfinders/CoordinatedRaid';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Colony} from '../../../src/server/colonies/Colony';
 import {ColonyBenefit} from '../../../src/common/colonies/ColonyBenefit';
@@ -34,7 +33,7 @@ describe('CoordinatedRaid', function() {
   let card: CoordinatedRaid;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new CoordinatedRaid();
@@ -48,8 +47,7 @@ describe('CoordinatedRaid', function() {
         ColonyName.LUNA,
       ],
     });
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [player, player2] = game.testPlayers;
     // This shortens the array.
     game.colonies = [game.colonies[0], new TestColony()];
   });

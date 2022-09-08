@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {ExperiencedMartians} from '../../../src/server/cards/pathfinders/ExperiencedMartians';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {Game} from '../../../src/server/Game';
 import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
@@ -14,14 +13,14 @@ import {CardName} from '../../../src/common/cards/CardName';
 
 describe('ExperiencedMartians', function() {
   let card: ExperiencedMartians;
-  let game: Game;
+  let game: TestGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new ExperiencedMartians();
     game = newTestGame(1, {turmoilExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     turmoil = game.turmoil!;
   });
 

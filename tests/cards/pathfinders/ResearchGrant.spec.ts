@@ -1,19 +1,18 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {ResearchGrant} from '../../../src/server/cards/pathfinders/ResearchGrant';
-import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ResearchGrant', function() {
   let card: ResearchGrant;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new ResearchGrant();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Should play', function() {

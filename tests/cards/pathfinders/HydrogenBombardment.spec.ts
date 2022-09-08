@@ -1,19 +1,18 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {HydrogenBombardment} from '../../../src/server/cards/pathfinders/HydrogenBombardment';
-import {Game} from '../../../src/server/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('HydrogenBombardment', function() {
   let card: HydrogenBombardment;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new HydrogenBombardment();
     game = newTestGame(1, {venusNextExtension: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Should play', function() {

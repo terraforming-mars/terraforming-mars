@@ -5,22 +5,21 @@ import {Tag} from '../../src/common/cards/Tag';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {newTestGame, TestGame} from '../TestGame';
 import {cast, runAllActions} from '../TestingUtils';
-import {Game} from '../../src/server/Game';
 import {CrewTraining} from '../../src/server/cards/pathfinders/CrewTraining';
 import {MartianZoo} from '../../src/server/cards/colonies/MartianZoo';
 
 describe('DeclareCloneTag', function() {
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let card: LobbyHalls;
   let tag: Tag;
 
   beforeEach(function() {
     game = newTestGame(1);
     card = new LobbyHalls();
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('sanity', function() {
@@ -47,7 +46,7 @@ describe('DeclareCloneTag', function() {
 
   it('clone tag with expansions', function() {
     const game = newTestGame(1, {venusNextExtension: true, moonExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
 
     const action = new DeclareCloneTag(player, card, (t) => tag = t);
 

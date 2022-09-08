@@ -1,15 +1,14 @@
 import {expect} from 'chai';
 import {SpaceRaceToMars} from '../../src/server/turmoil/globalEvents/SpaceRaceToMars';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {newTestGame, TestGame} from '../TestGame';
 import {TileType} from '../../src/common/TileType';
-import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {ISpace} from '../../src/server/boards/ISpace';
 
 let card: SpaceRaceToMars;
-let game: Game;
+let game: TestGame;
 let player: TestPlayer;
 let player2: TestPlayer;
 let turmoil: Turmoil;
@@ -20,8 +19,7 @@ describe('SpaceRaceToMars', function() {
   beforeEach(() => {
     card = new SpaceRaceToMars();
     game = newTestGame(2, {turmoilExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [player, player2] = game.testPlayers;
     turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
     spaces = player.game.board.getAvailableSpacesOnLand(player);

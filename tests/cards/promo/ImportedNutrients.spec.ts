@@ -5,7 +5,7 @@ import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {ImportedNutrients} from '../../../src/server/cards/promo/ImportedNutrients';
 import {Player} from '../../../src/server/Player';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 
 describe('ImportedNutrients', function() {
   let card: ImportedNutrients;
@@ -14,7 +14,7 @@ describe('ImportedNutrients', function() {
   beforeEach(function() {
     card = new ImportedNutrients();
     const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Can play without microbe cards', function() {

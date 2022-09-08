@@ -3,11 +3,10 @@ import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BiofertilizerFacility} from '../../../src/server/cards/ares/BiofertilizerFacility';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Game} from '../../../src/server/Game';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
@@ -15,7 +14,7 @@ import {cast} from '../../TestingUtils';
 describe('BiofertilizerFacility', function() {
   let card: BiofertilizerFacility;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   let scienceTagCard: IProjectCard = new AICentral();
   let microbeHost: IProjectCard = new Ants();
@@ -23,7 +22,7 @@ describe('BiofertilizerFacility', function() {
   beforeEach(function() {
     card = new BiofertilizerFacility();
     game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     scienceTagCard = new AICentral();
     microbeHost = new Ants();
   });

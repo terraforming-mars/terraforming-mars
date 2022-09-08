@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
@@ -16,12 +15,12 @@ import {Payment} from '../../../src/common/inputs/Payment';
 describe('Odyssey', () => {
   let card: Odyssey;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(() => {
     card = new Odyssey();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     player.setCorporationForTest(card);
   });
 

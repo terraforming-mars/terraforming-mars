@@ -1,11 +1,10 @@
 import {Player} from '../src/server/Player';
-import {Game} from '../src/server/Game';
 import {expect} from 'chai';
 import {Timer} from '../src/common/Timer';
 import {FakeClock} from './common/FakeClock';
-import {getTestPlayer, newTestGame} from './TestGame';
+import {newTestGame, TestGame} from './TestGame';
 
-let game: Game;
+let game: TestGame;
 let player: Player;
 let clock: FakeClock;
 let timer: Timer;
@@ -18,7 +17,7 @@ describe('EscapeVelocity', function() {
       escapeVelocityPenalty: 2, // 2vp
       escapeVelocityPeriod: 4, // 4m
     });
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     (Timer as any).lastStoppedAt = 0;
     clock = new FakeClock();
     timer = Timer.newInstance(clock);

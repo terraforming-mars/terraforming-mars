@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {NobelLabs} from '../../../src/server/cards/pathfinders/NobelLabs';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
@@ -14,7 +13,7 @@ import {cast} from '../../TestingUtils';
 describe('NobelLabs', function() {
   let card: NobelLabs;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let floater: IProjectCard;
   let microbe: IProjectCard;
   let data: IProjectCard;
@@ -23,7 +22,7 @@ describe('NobelLabs', function() {
   beforeEach(function() {
     card = new NobelLabs();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
 
     floater = new FloatingHabs();
     microbe = new RegolithEaters();

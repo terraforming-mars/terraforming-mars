@@ -1,18 +1,17 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {StrategicBasePlanning} from '../../../src/server/cards/pathfinders/StrategicBasePlanning';
 import {Player} from '../../../src/server/Player';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
 import {cast} from '../../TestingUtils';
 
 describe('StrategicBasePlanning', function() {
   let card: StrategicBasePlanning;
   let player: Player;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new StrategicBasePlanning();
@@ -27,7 +26,7 @@ describe('StrategicBasePlanning', function() {
         ColonyName.TITAN,
         ColonyName.TRITON],
     });
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Should play', function() {

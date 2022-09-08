@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Player} from '../../../src/server/Player';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
 describe('LocalShading', function() {
@@ -12,7 +12,7 @@ describe('LocalShading', function() {
   beforeEach(function() {
     card = new LocalShading();
     const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Should play', function() {

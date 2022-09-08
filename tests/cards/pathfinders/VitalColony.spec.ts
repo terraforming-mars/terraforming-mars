@@ -1,16 +1,15 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {VitalColony} from '../../../src/server/cards/pathfinders/VitalColony';
 import {Player} from '../../../src/server/Player';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
 import {cast} from '../../TestingUtils';
 
 describe('VitalColony', function() {
   let card: VitalColony;
   let player: Player;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new VitalColony();
@@ -25,7 +24,7 @@ describe('VitalColony', function() {
         ColonyName.TITAN,
         ColonyName.TRITON],
     });
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Should play', function() {

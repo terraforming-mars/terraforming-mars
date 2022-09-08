@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
@@ -11,7 +10,7 @@ import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCultu
 describe('FloaterUrbanism', function() {
   let card: FloaterUrbanism;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   let floater1: IProjectCard;
   let floater2: IProjectCard;
@@ -20,7 +19,7 @@ describe('FloaterUrbanism', function() {
   beforeEach(function() {
     card = new FloaterUrbanism();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();

@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {Polaris} from '../../../src/server/cards/pathfinders/Polaris';
-import {Game} from '../../../src/server/Game';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
@@ -11,13 +10,12 @@ describe('Polaris', function() {
   let card: Polaris;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new Polaris();
     game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [player, player2] = game.testPlayers;
     player.setCorporationForTest(card);
   });
 

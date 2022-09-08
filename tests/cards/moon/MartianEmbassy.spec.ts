@@ -1,17 +1,16 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MartianEmbassy} from '../../../src/server/cards/moon/MartianEmbassy';
 
 describe('MartianEmbassy', () => {
   let player: TestPlayer;
   let card: MartianEmbassy;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(() => {
     game = newTestGame(1, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     card = new MartianEmbassy();
   });
 

@@ -1,10 +1,9 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {newTestGame, TestGame} from '../TestGame';
 import {setCustomGameOptions} from '../TestingUtils';
 import {ISpace} from '../../src/server/boards/ISpace';
 import {TileType} from '../../src/common/TileType';
@@ -12,15 +11,13 @@ import {TileType} from '../../src/common/TileType';
 describe('MudSlides', function() {
   let card: MudSlides;
   let player: TestPlayer;
-  let player2: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let turmoil: Turmoil;
 
   beforeEach(() => {
     card = new MudSlides();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    game = newTestGame(2);
+    [player] = game.testPlayers;
     turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
   });
@@ -38,7 +35,7 @@ describe('MudSlides', function() {
 
   it('resolve play with overplaced tiles', function() {
     game = newTestGame(2, setCustomGameOptions({aresExtension: true, turmoilExtension: true}));
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
 
     // Find two adjacent ocean spaces
     function adjacentOceans(): {first: ISpace, second: ISpace} {

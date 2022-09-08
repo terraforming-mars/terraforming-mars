@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {HighTempSuperconductors} from '../../../src/server/cards/pathfinders/HighTempSuperconductors';
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -15,13 +14,13 @@ import {PowerPlantStandardProject} from '../../../src/server/cards/base/standard
 describe('HighTempSuperconductors', function() {
   let card: HighTempSuperconductors;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new HighTempSuperconductors();
     game = newTestGame(1, {turmoilExtension: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     turmoil = Turmoil.getTurmoil(game);
   });
 

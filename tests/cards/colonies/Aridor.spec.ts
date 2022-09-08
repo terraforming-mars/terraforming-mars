@@ -1,15 +1,14 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Predators} from '../../../src/server/cards/base/Predators';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
-import {Game} from '../../../src/server/Game';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 
 let card: Aridor;
-let game: Game;
+let game: TestGame;
 let player: TestPlayer;
 let player2: TestPlayer;
 
@@ -18,8 +17,7 @@ describe('Aridor', function() {
     card = new Aridor();
     // 2-player so as to not bother with pre-game action that drops a colony.
     game = newTestGame(2, {coloniesExtension: true});
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [player, player2] = game.testPlayers;
     player.setCorporationForTest(card);
   });
 

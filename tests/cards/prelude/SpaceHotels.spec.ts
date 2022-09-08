@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
 import {Player} from '../../../src/server/Player';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 
 describe('SpaceHotels', function() {
   let card: SpaceHotels;
@@ -10,7 +10,7 @@ describe('SpaceHotels', function() {
   beforeEach(function() {
     card = new SpaceHotels();
     const game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Can not play', function() {

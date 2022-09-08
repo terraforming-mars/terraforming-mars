@@ -3,13 +3,13 @@ import {cast} from '../../TestingUtils';
 import {CorporateArchives} from '../../../src/server/cards/promo/CorporateArchives';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 
 describe('CorporateArchives', function() {
   it('Should play', function() {
     const card = new CorporateArchives();
     const game = newTestGame(2);
-    const player = getTestPlayer(game, 0);
+    const player = game.testPlayers[0];
     const discarded = game.dealer.discarded;
     expect(discarded).is.empty;
     expect(player.megaCredits).eq(0);

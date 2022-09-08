@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -15,7 +15,7 @@ describe('ArcadianCommunities', function() {
   beforeEach(() => {
     card = new ArcadianCommunities();
     const game = newTestGame(2);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     player.setCorporationForTest(card);
     board = game.board;
   });

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Aurorai} from '../../../src/server/cards/pathfinders/Aurorai';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
@@ -12,12 +11,12 @@ import {Payment} from '../../../src/common/inputs/Payment';
 describe('Aurorai', function() {
   let card: Aurorai;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new Aurorai();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     player.setCorporationForTest(card);
   });
 

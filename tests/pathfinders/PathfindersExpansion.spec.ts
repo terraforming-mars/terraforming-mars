@@ -1,18 +1,17 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {newTestGame, TestGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/server/pathfinders/PathfindersExpansion';
 import {Tag} from '../../src/common/cards/Tag';
 import {fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
-import {Game} from '../../src/server/Game';
 import {PathfindersData} from '../../src/server/pathfinders/PathfindersData';
 import {CardName} from '../../src/common/cards/CardName';
 
 describe('PathfindersExpansion', function() {
   let player1: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let pathfindersData: PathfindersData;
 
   beforeEach(() => {
@@ -22,8 +21,7 @@ describe('PathfindersExpansion', function() {
       moonExpansion: true,
     });
     pathfindersData = game.pathfindersData!;
-    player1 = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [player1, player2] = game.testPlayers;
   });
 
   it('Earth track', () => {

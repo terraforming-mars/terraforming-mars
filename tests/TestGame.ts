@@ -3,7 +3,9 @@ import {GameOptions} from '../src/server/GameOptions';
 import {setCustomGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 
-export function newTestGame(count: number, customOptions?: Partial<GameOptions>, idSuffix = ''): Game {
+export type TestGame = Game & {testPlayers: Array<TestPlayer>};
+
+export function newTestGame(count: number, customOptions?: Partial<GameOptions>, idSuffix = ''): TestGame {
   const players = [
     TestPlayer.BLUE.newPlayer(false, idSuffix),
     TestPlayer.RED.newPlayer(false, idSuffix),
@@ -18,13 +20,9 @@ export function newTestGame(count: number, customOptions?: Partial<GameOptions>,
   const options: GameOptions | undefined = customOptions === undefined ?
     undefined :
     setCustomGameOptions(customOptions);
-  return Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
-}
+  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
 
-export function getTestPlayer(game: Game, idx: number): TestPlayer {
-  return game.getPlayers()[idx] as TestPlayer;
-}
-
-export function getTestPlayers(game: Game): Array<TestPlayer> {
-  return game.getPlayers() as Array<TestPlayer>;
+  // I'm not proud of these next two steps.
+  (game as any).testPlayers = players;
+  return game as TestGame;
 }

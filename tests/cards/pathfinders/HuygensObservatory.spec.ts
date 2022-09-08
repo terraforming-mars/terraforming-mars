@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {HuygensObservatory} from '../../../src/server/cards/pathfinders/HuygensObservatory';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
@@ -14,7 +13,7 @@ import {IColony} from '../../../src/server/colonies/IColony';
 describe('HuygensObservatory', function() {
   let card: HuygensObservatory;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let ganymede: IColony;
 
   beforeEach(function() {
@@ -31,7 +30,7 @@ describe('HuygensObservatory', function() {
         ColonyName.EUROPA,
       ],
     });
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     ganymede = game.colonies.find((colony) => colony.name === ColonyName.GANYMEDE)!;
   });
 

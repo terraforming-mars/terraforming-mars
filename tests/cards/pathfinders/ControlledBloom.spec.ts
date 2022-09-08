@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {ControlledBloom} from '../../../src/server/cards/pathfinders/ControlledBloom';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {addOcean, cast, fakeCard} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -11,12 +10,12 @@ import {CardResource} from '../../../src/common/CardResource';
 describe('ControlledBloom', function() {
   let card: ControlledBloom;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new ControlledBloom();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('canPlay', function() {

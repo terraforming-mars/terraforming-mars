@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
-import {Game} from '../../../src/server/Game';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
@@ -11,12 +10,12 @@ import {cast} from '../../TestingUtils';
 describe('CrewTraining', function() {
   let card: CrewTraining;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new CrewTraining();
     game = newTestGame(1, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Should play', function() {

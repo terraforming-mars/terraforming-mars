@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
@@ -12,12 +11,12 @@ import {InterstellarColonyShip} from '../../../src/server/cards/base/Interstella
 describe('HabitatMarte', () => {
   let card: HabitatMarte;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(() => {
     card = new HabitatMarte();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('tag count', () => {

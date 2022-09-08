@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpaceRace';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
 import {AquiferTurbines} from '../../../src/server/cards/prelude/AquiferTurbines';
@@ -20,14 +19,12 @@ describe('TheNewSpaceRace', function() {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new TheNewSpaceRace();
     game = newTestGame(3, {turmoilExtension: true, preludeExtension: true, draftVariant: false, initialDraftVariant: false});
-    player1 = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
+    [player1, player2, player3] = game.testPlayers;
   });
 
   /*

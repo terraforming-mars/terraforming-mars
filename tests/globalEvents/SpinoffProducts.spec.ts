@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {Research} from '../../src/server/cards/base/Research';
-import {Game} from '../../src/server/Game';
 import {Resources} from '../../src/common/Resources';
 import {SpinoffProducts} from '../../src/server/turmoil/globalEvents/SpinoffProducts';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {getTestPlayer, newTestGame} from '../TestGame';
+import {newTestGame, TestGame} from '../TestGame';
 import {TestPlayer} from '../TestPlayer';
 import {HabitatMarte} from '../../src/server/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../src/server/cards/pathfinders/DesignedOrganisms';
@@ -13,7 +12,7 @@ import {setCustomGameOptions} from '../TestingUtils';
 
 describe('SpinoffProducts', function() {
   let card: SpinoffProducts;
-  let game: Game;
+  let game: TestGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let turmoil: Turmoil;
@@ -21,8 +20,7 @@ describe('SpinoffProducts', function() {
   beforeEach(() => {
     card = new SpinoffProducts();
     game = newTestGame(2, setCustomGameOptions());
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [player, player2] = game.testPlayers;
     turmoil = game.turmoil!;
   });
 

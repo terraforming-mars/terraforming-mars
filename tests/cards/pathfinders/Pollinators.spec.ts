@@ -1,19 +1,18 @@
 import {expect} from 'chai';
 import {Pollinators} from '../../../src/server/cards/pathfinders/Pollinators';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 
 describe('Pollinators', function() {
   let card: Pollinators;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new Pollinators();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('canPlay', function() {

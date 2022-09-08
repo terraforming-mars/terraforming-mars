@@ -1,18 +1,17 @@
 import {expect} from 'chai';
 import {CultivationOfVenus} from '../../../src/server/cards/pathfinders/CultivationOfVenus';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 
 describe('CultivationOfVenus', function() {
   let card: CultivationOfVenus;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new CultivationOfVenus();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Can act', function() {

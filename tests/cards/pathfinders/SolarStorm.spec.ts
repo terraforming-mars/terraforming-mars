@@ -4,7 +4,7 @@ import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -21,9 +21,7 @@ describe('SolarStorm', function() {
   beforeEach(function() {
     card = new SolarStorm();
     const game = newTestGame(3);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
+    [player, player2, player3] = game.testPlayers;
     player.popWaitingFor();
     player2.popWaitingFor();
     player3.popWaitingFor();

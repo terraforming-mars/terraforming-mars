@@ -7,7 +7,7 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/common/cards/CardType';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 
 describe('ValleyTrust', function() {
   let card: ValleyTrust;
@@ -16,7 +16,7 @@ describe('ValleyTrust', function() {
   beforeEach(function() {
     card = new ValleyTrust();
     const game = newTestGame(1, {preludeExtension: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Does not get card discount for other tags', function() {
@@ -41,7 +41,7 @@ describe('ValleyTrust', function() {
 
   it('Card works even without prelude', () => {
     const game = newTestGame(1, {preludeExtension: false});
-    const player = getTestPlayer(game, 0);
+    const player = game.testPlayers[0];
     const selectCard = cast(card.initialAction(player), SelectCard);
     expect(selectCard.cards).has.length(3);
     expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);

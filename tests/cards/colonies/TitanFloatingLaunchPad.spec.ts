@@ -4,24 +4,23 @@ import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFl
 import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
 describe('TitanFloatingLaunchPad', function() {
   let card: TitanFloatingLaunchPad;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();
     game = newTestGame(2, {coloniesExtension: true, turmoilExtension: false});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     // Second player is ignored.
   });
 

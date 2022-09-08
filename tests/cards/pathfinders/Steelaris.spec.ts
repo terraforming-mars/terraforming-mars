@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {Steelaris} from '../../../src/server/cards/pathfinders/Steelaris';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
@@ -11,13 +10,12 @@ describe('Steelaris', function() {
   let card: Steelaris;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new Steelaris();
     game = newTestGame(2);
-    player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
+    [player, player2] = game.testPlayers;
     player.setCorporationForTest(card);
     game.board = EmptyBoard.newInstance();
   });

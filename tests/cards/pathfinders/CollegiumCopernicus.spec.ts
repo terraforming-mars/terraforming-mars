@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {CollegiumCopernicus} from '../../../src/server/cards/pathfinders/CollegiumCopernicus';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
-import {newTestGame, getTestPlayer} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Enceladus} from '../../../src/server/colonies/Enceladus';
 import {Europa} from '../../../src/server/colonies/Europa';
@@ -20,12 +19,12 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 describe('CollegiumCopernicus', function() {
   let card: CollegiumCopernicus;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new CollegiumCopernicus();
     game = newTestGame(2, {coloniesExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     player.setCorporationForTest(card);
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [

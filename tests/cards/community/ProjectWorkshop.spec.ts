@@ -5,7 +5,6 @@ import {CardType} from '../../../src/common/cards/CardType';
 import {ProjectWorkshop} from '../../../src/server/cards/community/ProjectWorkshop';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
@@ -15,7 +14,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
@@ -24,14 +23,13 @@ import {Payment} from '../../../src/common/inputs/Payment';
 describe('ProjectWorkshop', function() {
   let card: ProjectWorkshop;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let advancedAlloys : AdvancedAlloys;
 
   beforeEach(function() {
     card = new ProjectWorkshop();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    game = newTestGame(2);
+    player = game.testPlayers[0];
     advancedAlloys = new AdvancedAlloys();
 
     card.play(player);
@@ -126,7 +124,7 @@ describe('ProjectWorkshop', function() {
 
   it('Project Workshop and Reds taxes', () => {
     game = newTestGame(1, {turmoilExtension: true});
-    const player = getTestPlayer(game, 0);
+    const player = game.testPlayers[0];
     card.play(player);
     player.setCorporationForTest(card);
     player.game.phase = Phase.ACTION;

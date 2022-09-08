@@ -4,7 +4,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {cast} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame} from '../../TestGame';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 describe('SpacePort', function() {
@@ -20,7 +20,7 @@ describe('SpacePort', function() {
       ColonyName.EUROPA,
       ColonyName.GANYMEDE,
     ]});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('Can not play without colony', function() {

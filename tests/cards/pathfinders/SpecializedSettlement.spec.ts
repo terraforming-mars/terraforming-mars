@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {SpecializedSettlement} from '../../../src/server/cards/pathfinders/SpecializedSettlement';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
@@ -11,17 +10,17 @@ import {TileType} from '../../../src/common/TileType';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new SpecializedSettlement();
     game = newTestGame(1, {aresExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     game.board = EmptyBoard.newInstance();
     player.popWaitingFor(); // Clears out the default waiting for (selecting initial cards)
   });

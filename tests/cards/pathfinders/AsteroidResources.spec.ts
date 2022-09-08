@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {AsteroidResources} from '../../../src/server/cards/pathfinders/AsteroidResources';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
@@ -13,12 +12,12 @@ import {cast} from '../../TestingUtils';
 describe('AsteroidResources', function() {
   let card: AsteroidResources;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new AsteroidResources();
     game = newTestGame(1);
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
   });
 
   it('canPlay', function() {

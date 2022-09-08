@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {CharityDonation} from '../../../src/server/cards/pathfinders/CharityDonation';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {BeamFromAThoriumAsteroid} from '../../../src/server/cards/base/BeamFromAThoriumAsteroid';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {cast, runAllActions} from '../../TestingUtils';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CharityDonation', function() {
@@ -15,14 +14,12 @@ describe('CharityDonation', function() {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     card = new CharityDonation();
     game = newTestGame(3);
-    player1 = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
-    player3 = getTestPlayer(game, 2);
+    [player1, player2, player3] = game.testPlayers;
   });
 
   it('play', function() {

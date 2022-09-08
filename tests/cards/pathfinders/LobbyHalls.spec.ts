@@ -1,10 +1,9 @@
 import {expect} from 'chai';
 import {LobbyHalls} from '../../../src/server/cards/pathfinders/LobbyHalls';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {Game} from '../../../src/server/Game';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -15,14 +14,14 @@ import {cast} from '../../TestingUtils';
 
 describe('LobbyHalls', function() {
   let card: LobbyHalls;
-  let game: Game;
+  let game: TestGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new LobbyHalls();
     game = newTestGame(1, {turmoilExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     turmoil = game.turmoil!;
   });
 

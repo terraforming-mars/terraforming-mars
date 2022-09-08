@@ -3,8 +3,7 @@ import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
 import {Dealer} from '../src/server/Dealer';
 import {expect} from 'chai';
-import {Game} from '../src/server/Game';
-import {getTestPlayer, newTestGame} from './TestGame';
+import {newTestGame, TestGame} from './TestGame';
 import {ICard} from '../src/server/cards/ICard';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {Player} from '../src/server/Player';
@@ -16,8 +15,7 @@ import {TestPlayer} from './TestPlayer';
 describe('drafting', () => {
   it('2 player - project draft', () => {
     const game = newTestGame(2, {draftVariant: true});
-    const player = getTestPlayer(game, 0);
-    const otherPlayer = getTestPlayer(game, 1);
+    const [player, otherPlayer] = game.testPlayers;
     const deck = game.dealer.deck;
 
     unshiftCards(deck, [
@@ -118,7 +116,7 @@ describe('drafting', () => {
 
   it('2 player - initial draft', () => {
     const shuffle = Dealer.shuffle;
-    let game: Game;
+    let game: TestGame;
     try {
       // This keeps the cards in their original order. If necessary, this deck could be front-loaded instead.
       Dealer.shuffle = <T> (cards: Array<T>) => cards;
@@ -126,8 +124,7 @@ describe('drafting', () => {
     } finally {
       Dealer.shuffle = shuffle;
     }
-    const player = getTestPlayer(game, 0);
-    const otherPlayer = getTestPlayer(game, 1);
+    const [player, otherPlayer] = game.testPlayers;
 
     // First round
 

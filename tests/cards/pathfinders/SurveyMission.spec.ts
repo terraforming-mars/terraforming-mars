@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {SurveyMission} from '../../../src/server/cards/pathfinders/SurveyMission';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
@@ -20,7 +19,7 @@ function toSpaceIdDigit(space: ISpace) {
 describe('SurveyMission', () => {
   let card: SurveyMission;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let board: EmptyBoard;
 
   // The map will be all oceans, except for the spaces
@@ -35,7 +34,7 @@ describe('SurveyMission', () => {
   beforeEach(function() {
     card = new SurveyMission();
     game = newTestGame(1, {pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
     board = EmptyBoard.newInstance();
     const availableSpaces = [
       '03', '04', '05',

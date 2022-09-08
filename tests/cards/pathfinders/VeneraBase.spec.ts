@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {VeneraBase} from '../../../src/server/cards/pathfinders/VeneraBase';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {getTestPlayer, newTestGame} from '../../TestGame';
+import {newTestGame, TestGame} from '../../TestGame';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Unity} from '../../../src/server/turmoil/parties/Unity';
@@ -20,7 +19,7 @@ import {cast} from '../../TestingUtils';
 describe('VeneraBase', function() {
   let card: VeneraBase;
   let player: TestPlayer;
-  let game: Game;
+  let game: TestGame;
   let nonVenusFloater: IProjectCard;
   let venusFloater: IProjectCard;
   let venusFloater2: IProjectCard;
@@ -29,7 +28,7 @@ describe('VeneraBase', function() {
   beforeEach(function() {
     card = new VeneraBase();
     game = newTestGame(1, {turmoilExtension: true, pathfindersExpansion: true});
-    player = getTestPlayer(game, 0);
+    player = game.testPlayers[0];
 
     nonVenusFloater = new TitanShuttles();
     venusFloater = new FloatingHabs();

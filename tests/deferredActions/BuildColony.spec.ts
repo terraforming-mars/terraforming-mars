@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {BuildColony} from '../../src/server/deferredActions/BuildColony';
-import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {cast} from '../TestingUtils';
-import {getTestPlayers, newTestGame} from '../TestGame';
+import {newTestGame, TestGame} from '../TestGame';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {ColoniesHandler} from '../../src/server/colonies/ColoniesHandler';
@@ -13,7 +12,7 @@ describe('BuildColony', function() {
   let player2: TestPlayer;
   let player3: TestPlayer;
 
-  let game: Game;
+  let game: TestGame;
 
   beforeEach(function() {
     game = newTestGame(3, {
@@ -26,7 +25,7 @@ describe('BuildColony', function() {
         ColonyName.TITAN,
         ColonyName.TRITON],
     });
-    [player, player2, player3] = getTestPlayers(game);
+    [player, player2, player3] = game.testPlayers;
   });
 
   it('simple', function() {

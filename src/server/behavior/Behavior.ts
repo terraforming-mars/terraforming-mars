@@ -11,15 +11,15 @@ import {Units} from '../../common/Units';
 
 export interface Behavior {
   // Gain or lose production
-  production?: Units;
+  production?: Partial<Units>;
   // Gain or lose stock
-  stock?: Units;
+  stock?: Partial<Units>;
 
   // // Add resources to this card itself
   // addResourceToSelf: number;
 
   // Add resources to any cards
-  addResourceToAnyCards?: AddResource;
+  addResourcesToAnyCard?: AddResource | Array<AddResource>;
 
   // Gain units of TR
   tr?: number;
@@ -46,7 +46,7 @@ export interface Behavior {
   // resourceValues: {titanum?: number, steel?: number},
 
   // Draw this many cards from the deck.
-  drawCard: number | DrawCard,
+  drawCard?: number | DrawCard,
 
   // spendResourcesHere: number,
   // spendResource: {type: CardResource, count: number},

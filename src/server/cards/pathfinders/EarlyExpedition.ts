@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 import {ISpace} from '../../boards/ISpace';
@@ -27,6 +26,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1, megacredits: 3},
+        addResourcesToAnyCard: {type: CardResource.DATA, count: 1},
       },
 
       metadata: {
@@ -51,8 +51,6 @@ export class EarlyExpedition extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
-
     return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
       player.game.addCityTile(player, foundSpace.id);
       return undefined;

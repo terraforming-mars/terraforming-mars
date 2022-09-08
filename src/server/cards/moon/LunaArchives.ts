@@ -30,7 +30,6 @@ export class LunaArchives extends Card implements IActionCard {
     });
   }
 
-
   public canAct() {
     return true;
   }

@@ -21,6 +21,10 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
       resourceType: CardResource.DATA,
       victoryPoints: VictoryPoints.resource(1, 6),
 
+      behavior: {
+        addResourcesToAnyCard: {type: CardResource.DATA, count: 2},
+      },
+
       metadata: {
         cardNumber: 'Pf54',
         renderData: CardRenderer.builder((b) => {
@@ -34,17 +38,11 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
     });
   }
 
-
   public canAct() {
     return true;
   }
 
   public action(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
-    return undefined;
-  }
-
-  public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return undefined;
   }

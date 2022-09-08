@@ -17,13 +17,13 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
 import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
-import {Behavior, InternalBehavior, internalize} from '../behavior/Behavior';
+import {Behavior} from '../behavior/Behavior';
 import {Behaviors} from '../behavior/Behaviors';
 
 /* External representation of card properties. */
 export interface StaticCardProperties {
   adjacencyBonus?: AdjacencyBonus;
-  behavior?: Behavior;
+  behavior?: Behavior | undefined;
   cardCost?: number;
   cardDiscount?: CardDiscount | Array<CardDiscount>;
   cardType: CardType;
@@ -46,7 +46,8 @@ export interface StaticCardProperties {
  */
 type Properties = Omit<StaticCardProperties, 'reserveUnits|behavior'> & {
   reserveUnits?: Units,
-  behavior: InternalBehavior | undefined};
+  behavior: Behavior,
+};
 
 export const staticCardProperties = new Map<CardName, Properties>();
 
@@ -88,7 +89,7 @@ export abstract class Card {
       const p: Properties = {
         ...properties,
         reserveUnits: properties.reserveUnits === undefined ? undefined : Units.of(properties.reserveUnits),
-        behavior: properties.behavior === undefined ? undefined : internalize(properties.behavior),
+        behavior: properties.behavior || {},
       };
       staticCardProperties.set(properties.name, p);
       staticInstance = p;

@@ -59,6 +59,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     const game = player.game;
+    // TODO(kberg): Make sure this action occurs after the card play, in case the played card has data.
     game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     const cards = [game.dealer.dealCard(player.game), game.dealer.dealCard(player.game)];
 

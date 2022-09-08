@@ -32,7 +32,6 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
     });
   }
 
-
   public canAct() {
     return true;
   }

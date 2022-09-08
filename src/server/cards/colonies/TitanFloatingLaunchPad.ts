@@ -24,6 +24,10 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
       resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 
+      behavior: {
+        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 2, tag: Tag.JOVIAN},
+      },
+
       metadata: {
         cardNumber: 'C44',
         renderData: CardRenderer.builder((b) => {
@@ -75,11 +79,6 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
         return undefined;
       }),
     );
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
-    return undefined;
   }
 }
 

@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -7,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
 export class ControlledBloom extends Card implements IProjectCard {
   constructor() {
@@ -22,6 +20,7 @@ export class ControlledBloom extends Card implements IProjectCard {
 
       behavior: {
         stock: {plants: 3},
+        addResourcesToAnyCard: {count: 3, type: CardResource.MICROBE},
       },
 
       metadata: {
@@ -33,10 +32,5 @@ export class ControlledBloom extends Card implements IProjectCard {
         description: 'Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
-    return undefined;
   }
 }

@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -19,6 +17,7 @@ export class Airliners extends Card implements IProjectCard {
 
       behavior: {
         production: {megacredits: 2},
+        addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER},
       },
 
       metadata: {
@@ -30,10 +29,5 @@ export class Airliners extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
-    return undefined;
   }
 }

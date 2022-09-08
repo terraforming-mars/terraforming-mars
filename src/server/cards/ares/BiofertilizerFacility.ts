@@ -10,7 +10,6 @@ import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -24,6 +23,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
 
       behavior: {
         production: {plants: 1},
+        addResourcesToAnyCard: {count: 2, type: CardResource.MICROBE},
       },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
@@ -43,8 +43,6 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
-
     return new SelectSpace(
       'Select space for Biofertilizer Facility tile',
       player.game.board.getAvailableSpacesOnLand(player),

@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -18,6 +16,7 @@ export class MiningExpedition extends Card implements IProjectCard {
       behavior: {
         stock: {steel: 2},
         global: {oxygen: 1},
+        removeAnyPlants: 2,
       },
 
       metadata: {
@@ -30,10 +29,5 @@ export class MiningExpedition extends Card implements IProjectCard {
         description: 'Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new RemoveAnyPlants(player, 2));
-    return undefined;
   }
 }

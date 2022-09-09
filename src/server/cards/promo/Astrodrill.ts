@@ -25,6 +25,10 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
       startingMegaCredits: 35,
       resourceType: CardResource.ASTEROID,
 
+      behavior: {
+        addResources: 3,
+      },
+
       metadata: {
         cardNumber: 'R21',
         description: 'You start with 35 M€ and 3 asteroid resources.',
@@ -113,10 +117,5 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
     opts.push(gainStandardResource);
 
     return new OrOptions(...opts);
-  }
-
-  public override bespokePlay() {
-    this.resourceCount = 3;
-    return undefined;
   }
 }

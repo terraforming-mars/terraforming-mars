@@ -18,6 +18,10 @@ export class Aurorai extends Card implements ICorporationCard {
       startingMegaCredits: 33,
       resourceType: CardResource.DATA,
 
+      behavior: {
+        addResources: 2,
+      },
+
       metadata: {
         cardNumber: 'PfC9',
         description: 'You start with 33 M€. and 2 data on this card',
@@ -32,11 +36,6 @@ export class Aurorai extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override play() {
-    this.resourceCount = 2;
-    return undefined;
   }
 
   public onIncreaseTerraformRating(player: Player, steps: number) {

@@ -2,9 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -20,6 +18,7 @@ export class DeimosDown extends Card implements IProjectCard {
       behavior: {
         stock: {steel: 4},
         global: {temperature: 3},
+        removeAnyPlants: 8,
       },
 
       metadata: {
@@ -32,10 +31,5 @@ export class DeimosDown extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new RemoveAnyPlants(player, 8));
-    return undefined;
   }
 }

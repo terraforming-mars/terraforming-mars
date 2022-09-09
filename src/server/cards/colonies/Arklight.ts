@@ -22,6 +22,7 @@ export class Arklight extends Card implements ICorporationCard {
 
       behavior: {
         production: {megacredits: 2},
+        addResources: 1,
       },
 
       metadata: {
@@ -38,11 +39,6 @@ export class Arklight extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this, {log: true});
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {

@@ -18,6 +18,10 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
       startingMegaCredits: 55,
       resourceType: CardResource.RESOURCE_CUBE,
 
+      behavior: {
+        addResources: 2,
+      },
+
       metadata: {
         description: 'You start with 55 M€.',
         cardNumber: '',
@@ -32,11 +36,6 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
         }),
       },
     });
-  }
-
-  public override bespokePlay() {
-    this.resourceCount += 2;
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {

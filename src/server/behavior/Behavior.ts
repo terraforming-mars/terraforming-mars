@@ -16,14 +16,15 @@ export interface Behavior {
   // Gain or lose stock
   stock?: Partial<Units>;
 
-  // // Add resources to this card itself
-  // addResourceToSelf: number;
+  // Add resources to this card itself
+  addResources?: number;
 
   // Add resources to any cards
   addResourcesToAnyCard?: AddResource | Array<AddResource>;
 
   // Decrease any production
   decreaseAnyProduction?: DecreaseAnyProduction;
+  removeAnyPlants?: number,
 
   // Gain units of TR
   tr?: number;

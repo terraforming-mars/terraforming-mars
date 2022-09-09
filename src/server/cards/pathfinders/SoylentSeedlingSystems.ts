@@ -20,6 +20,10 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
       startingMegaCredits: 38,
       resourceType: CardResource.SEED,
 
+      behavior: {
+        addResources: 2,
+      },
+
       metadata: {
         cardNumber: 'PfC8',
         renderData: CardRenderer.builder((b) => {
@@ -34,11 +38,6 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
         description: 'You start with 38M€ and 2 seeds on this card.',
       },
     });
-  }
-
-  public override bespokePlay() {
-    this.resourceCount += 2;
-    return undefined;
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {

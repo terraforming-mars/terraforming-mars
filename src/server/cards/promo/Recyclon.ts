@@ -23,6 +23,7 @@ export class Recyclon extends Card implements ICorporationCard {
 
       behavior: {
         production: {steel: 1},
+        addResources: 1,
       },
 
       metadata: {
@@ -42,10 +43,6 @@ export class Recyclon extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
-  }
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tag.BUILDING) === false || !player.isCorporation(this.name)) {
       return undefined;

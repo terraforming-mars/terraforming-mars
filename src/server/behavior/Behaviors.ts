@@ -47,13 +47,13 @@ export class Behaviors {
     }
 
     if (behavior.global !== undefined) {
-      const global = behavior.global;
-      if (global.temperature !== undefined) player.game.increaseTemperature(player, global.temperature);
-      if (global.oxygen !== undefined) player.game.increaseOxygenLevel(player, global.oxygen);
-      if (global.venus !== undefined) player.game.increaseVenusScaleLevel(player, global.venus);
-      if (global.moonColony !== undefined) MoonExpansion.raiseColonyRate(player, global.moonColony);
-      if (global.moonMining !== undefined) MoonExpansion.raiseMiningRate(player, global.moonMining);
-      if (global.moonLogistics !== undefined) MoonExpansion.raiseLogisticRate(player, global.moonLogistics);
+      const g = behavior.global;
+      if (g.temperature !== undefined) player.game.increaseTemperature(player, g.temperature);
+      if (g.oxygen !== undefined) player.game.increaseOxygenLevel(player, g.oxygen);
+      if (g.venus !== undefined) player.game.increaseVenusScaleLevel(player, g.venus);
+      if (g.moonColony !== undefined) MoonExpansion.raiseColonyRate(player, g.moonColony);
+      if (g.moonMining !== undefined) MoonExpansion.raiseMiningRate(player, g.moonMining);
+      if (g.moonLogistics !== undefined) MoonExpansion.raiseLogisticRate(player, g.moonLogistics);
     }
 
     if (behavior.tr !== undefined) {

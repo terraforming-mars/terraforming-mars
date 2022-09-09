@@ -1,7 +1,7 @@
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {InventionContest} from '../../../src/server/cards/base/InventionContest';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,8 +12,13 @@ describe('InventionContest', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, redPlayer], player);
-    const action = cast(card.play(player), SelectCard<IProjectCard>);
+
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+
+    const action = cast(player.popWaitingFor(), SelectCard<IProjectCard>);
     action.cb([action.cards[0]]);
+
     expect(game.dealer.discarded).has.lengthOf(2);
     expect(game.dealer.discarded.indexOf(action.cards[0])).to.eq(-1);
     expect(game.dealer.discarded.indexOf(action.cards[1])).not.to.eq(-1);

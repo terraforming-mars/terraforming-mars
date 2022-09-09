@@ -21,20 +21,20 @@ export interface InternalBehavior {
   // // Add resources to any cards
   // addResourceToAnyCards: AddResource;
 
-  // // Gain units of TR
-  // tr: number;
+  // Gain units of TR
+  tr?: number;
 
-  // // Raise certain global parameters.
-  // // Not sure how to deal with Oceans, yet.
-  // globalParameters: {
-  //   temperature?: -2 | -1 | 1 | 2 | 3;
-  //   oxygen?: 2 | 1 | -1 | -2;
+  // Raise certain global parameters.
+  // Not sure how to deal with Oceans, yet.
+  global?: {
+    temperature?: -2 | -1 | 1 | 2 | 3;
+    oxygen?: 2 | 1 | -1 | -2;
   //   ocean?: number;
-  //   venus?: 3 | 2 | 1 | -1;
-  //   moonColony?: number,
-  //   moonMining?: number,
-  //   moonLogistics?: number,
-  // },
+    venus?: 3 | 2 | 1 | -1;
+    moonColony?: number,
+    moonMining?: number,
+    moonLogistics?: number,
+  },
 
   // // Remove plants from any player. Typical for asteroid cards.
   // removePlants: number,
@@ -57,6 +57,17 @@ export type Behavior = /* Omit<InternalBehavior, 'production|stock'> & */ {
   production?: Partial<Units>,
   stock?: Partial<Units>,
   drawCard?: number | DrawCard,
+  global?: {
+    temperature?: -2 | -1 | 1 | 2 | 3;
+    oxygen?: 2 | 1 | -1 | -2;
+  //   ocean?: number;
+    venus?: 3 | 2 | 1 | -1;
+    moonColony?: number,
+    moonMining?: number,
+    moonLogistics?: number,
+  },
+  // Gain units of TR
+  tr?: number;
 };
 
 export function internalize(behavior: Behavior): InternalBehavior {

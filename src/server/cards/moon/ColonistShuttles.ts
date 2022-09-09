@@ -20,6 +20,10 @@ export class ColonistShuttles extends Card {
       reserveUnits: {titanium: 1},
       tr: {moonColony: 1},
 
+      behavior: {
+        global: {moonColony: 1},
+      },
+
       metadata: {
         description: 'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.',
         cardNumber: 'M16',
@@ -33,7 +37,6 @@ export class ColonistShuttles extends Card {
   }
 
   public override bespokePlay(player: Player) {
-    MoonExpansion.raiseColonyRate(player);
     const surfaceColonies = MoonExpansion.spaces(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
     player.addResource(Resources.MEGACREDITS, surfaceColonies * 2, {log: true});
 

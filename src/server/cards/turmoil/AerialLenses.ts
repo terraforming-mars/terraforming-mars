@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRequirements} from '../CardRequirements';
@@ -18,6 +17,10 @@ export class AerialLenses extends Card implements IProjectCard {
       cost: 2,
       victoryPoints: -1,
 
+      behavior: {
+        production: {heat: 2},
+      },
+
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
       metadata: {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.',
@@ -28,7 +31,6 @@ export class AerialLenses extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.HEAT, 2);
     player.game.defer(new RemoveAnyPlants(player, 2));
     return undefined;
   }

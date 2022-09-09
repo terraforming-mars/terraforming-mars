@@ -23,6 +23,10 @@ export class JovianLanterns extends Card implements IProjectCard {
       tr: {tr: 1},
       requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: 'C18',
         renderData: CardRenderer.builder((b) => {
@@ -53,7 +57,6 @@ export class JovianLanterns extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
-    player.increaseTerraformRating();
     return undefined;
   }
 }

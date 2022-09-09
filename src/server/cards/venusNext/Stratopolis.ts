@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {Resources} from '../../../common/Resources';
 import {IActionCard, ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -25,6 +24,10 @@ export class Stratopolis extends Card implements IActionCard {
       victoryPoints: VictoryPoints.resource(1, 3),
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
 
+      behavior: {
+        production: {megacredits: 2},
+      },
+
       metadata: {
         cardNumber: '248',
         renderData: CardRenderer.builder((b) => {
@@ -43,7 +46,6 @@ export class Stratopolis extends Card implements IActionCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
     return undefined;
   }

@@ -1,5 +1,6 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
+import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
 import {InternalBehavior} from './Behavior';
 
@@ -36,6 +37,20 @@ export class Behaviors {
         const options = behavior.drawCard;
         player.drawCard(options.count, {tag: options.tag, resource: options.resource, cardType: options.type});
       }
+    }
+
+    if (behavior.global !== undefined) {
+      const g = behavior.global;
+      if (g.temperature !== undefined) player.game.increaseTemperature(player, g.temperature);
+      if (g.oxygen !== undefined) player.game.increaseOxygenLevel(player, g.oxygen);
+      if (g.venus !== undefined) player.game.increaseVenusScaleLevel(player, g.venus);
+      if (g.moonColony !== undefined) MoonExpansion.raiseColonyRate(player, g.moonColony);
+      if (g.moonMining !== undefined) MoonExpansion.raiseMiningRate(player, g.moonMining);
+      if (g.moonLogistics !== undefined) MoonExpansion.raiseLogisticRate(player, g.moonLogistics);
+    }
+
+    if (behavior.tr !== undefined) {
+      player.increaseTerraformRatingSteps(behavior.tr);
     }
   }
 }

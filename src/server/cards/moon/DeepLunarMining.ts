@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -13,9 +11,13 @@ export class DeepLunarMining extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 18,
-      productionBox: {titanium: 2},
       reserveUnits: {titanium: 1},
       tr: {moonMining: 1},
+
+      behavior: {
+        production: {titanium: 2},
+        global: {moonMining: 1},
+      },
 
       metadata: {
         description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise the Mining Rate 1 step.',
@@ -28,10 +30,5 @@ export class DeepLunarMining extends Card {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    MoonExpansion.raiseMiningRate(player);
-    return undefined;
   }
 }

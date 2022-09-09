@@ -1,9 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../../../common/cards/render/Size';
 import {IProjectCard} from '../IProjectCard';
 import {CardRequirements} from '../CardRequirements';
@@ -18,6 +16,10 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.roadTiles(3, {all})),
       tr: {moonLogistics: 1},
 
+      behavior: {
+        global: {moonLogistics: 1},
+      },
+
       metadata: {
         description: 'Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.',
         cardNumber: 'M42',
@@ -28,10 +30,5 @@ export class LunarSecurityStations extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    MoonExpansion.raiseLogisticRate(player);
-    return undefined;
   }
 }

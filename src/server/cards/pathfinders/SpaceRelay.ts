@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
-import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
 
@@ -16,6 +15,10 @@ export class SpaceRelay extends Card implements IProjectCard {
       name: CardName.SPACE_RELAY,
       cost: 13,
       tags: [Tag.SPACE, Tag.JOVIAN],
+
+      behavior: {
+        production: {megacredits: 1},
+      },
 
       metadata: {
         cardNumber: 'Pf33',
@@ -34,11 +37,6 @@ export class SpaceRelay extends Card implements IProjectCard {
     if (card.tags.includes(Tag.JOVIAN)) {
       player.drawCard();
     }
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 1);
-    return undefined;
   }
 }
 

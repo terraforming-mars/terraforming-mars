@@ -23,11 +23,9 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
       tr: {temperature: 1},
 
       behavior: {
-        production: {
-          energy: 2,
-          heat: 2,
-        },
+        production: {energy: 2, heat: 2},
         drawCard: 1,
+        global: {temperature: 1},
       },
 
       metadata: {
@@ -56,8 +54,6 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
   }
 
   public override bespokePlay(player: Player) {
-    const game = player.game;
-    game.increaseTemperature(player, 1);
     player.game.addCityTile(player, SpaceName.DYSON_SCREENS, SpaceType.COLONY);
     return undefined;
   }

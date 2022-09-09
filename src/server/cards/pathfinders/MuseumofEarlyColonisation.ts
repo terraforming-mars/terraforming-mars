@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -19,6 +18,10 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
       productionBox: {energy: -1, steel: 1, titanium: 1, plants: 1},
       tr: {tr: 1},
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: 'Pf11',
         renderData: CardRenderer.builder((b) => {
@@ -30,10 +33,5 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
          'Gain 1 TR.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
-    return undefined;
   }
 }

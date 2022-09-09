@@ -17,6 +17,10 @@ export class SmallAsteroid extends Card implements IProjectCard {
       cost: 10,
       tr: {temperature: 1},
 
+      behavior: {
+        global: {temperature: 1},
+      },
+
       metadata: {
         cardNumber: '209',
         renderData: CardRenderer.builder((b) => {
@@ -29,7 +33,6 @@ export class SmallAsteroid extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 1);
     player.game.defer(new RemoveAnyPlants(player, 2));
     return undefined;
   }

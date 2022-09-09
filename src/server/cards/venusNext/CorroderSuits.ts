@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
@@ -17,6 +16,10 @@ export class CorroderSuits extends Card implements IProjectCard {
       tags: [Tag.VENUS],
       cost: 8,
 
+      behavior: {
+        production: {megacredits: 2},
+      },
+
       metadata: {
         cardNumber: '219',
         description: 'Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.',
@@ -30,7 +33,6 @@ export class CorroderSuits extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
     const cards = CorroderSuits.getVenusResCards(player);
 
     if (cards.length === 0) return undefined;

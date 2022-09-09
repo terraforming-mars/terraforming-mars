@@ -22,6 +22,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
 
       behavior: {
         stock: {steel: 4},
+        global: {temperature: 3},
       },
 
       metadata: {
@@ -41,7 +42,6 @@ export class DeimosDownPromo extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 3);
     player.game.defer(new RemoveAnyPlants(player, 6));
 
     const availableSpaces = player.game.board.getAvailableSpacesForCity(player);

@@ -17,6 +17,10 @@ export class DustStorm extends Card implements IProjectCard {
       tags: [Tag.MARS],
       tr: {temperature: 2},
 
+      behavior: {
+        global: {temperature: 2},
+      },
+
       metadata: {
         cardNumber: 'Pf08',
         renderData: CardRenderer.builder((b) => {
@@ -31,7 +35,6 @@ export class DustStorm extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.getPlayers().forEach((p) => p.deductResource(Resources.ENERGY, p.energy, {log: true}));
-    player.game.increaseTemperature(player, 2);
     return undefined;
   }
 }

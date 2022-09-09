@@ -1,7 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {ITagCount} from '../../../common/cards/ITagCount';
@@ -19,6 +18,9 @@ export class AgricolaInc extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
 
       victoryPoints: 'special',
+      behavior: {
+        production: {megacredits: 1, plants: 1},
+      },
 
       metadata: {
         cardNumber: 'R36',
@@ -33,13 +35,6 @@ export class AgricolaInc extends Card implements ICorporationCard {
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 1);
-    player.production.add(Resources.PLANTS, 1);
-
-    return undefined;
   }
 
   public override getVictoryPoints(player: Player): number {

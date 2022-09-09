@@ -1079,7 +1079,7 @@ export class Game {
     player.takeAction();
   }
 
-  public increaseOxygenLevel(player: Player, increments: -2 | -1 | 1 | 2): undefined {
+  public increaseOxygenLevel(player: Player, increments: -2 | -1 | 1 | 2): void {
     if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
       return undefined;
     }
@@ -1106,8 +1106,6 @@ export class Game {
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOxygenChange(this, aresData);
     });
-
-    return undefined;
   }
 
   public getOxygenLevel(): number {
@@ -1433,7 +1431,7 @@ export class Game {
     // Turmoil Greens ruling policy
     PartyHooks.applyGreensRulingPolicy(player, this.board.getSpace(spaceId));
 
-    if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
+    if (shouldRaiseOxygen) this.increaseOxygenLevel(player, 1);
     return undefined;
   }
 

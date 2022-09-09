@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,6 +15,10 @@ export class MagneticFieldDome extends Card implements IProjectCard {
       productionBox: {energy: -2, plants: 1},
       tr: {tr: 1},
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: '171',
         renderData: CardRenderer.builder((b) => {
@@ -28,10 +31,5 @@ export class MagneticFieldDome extends Card implements IProjectCard {
         description: 'Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
-    return undefined;
   }
 }

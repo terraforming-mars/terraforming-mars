@@ -22,6 +22,10 @@ export class VenusianPlants extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.venus(16)),
       victoryPoints: 1,
 
+      behavior: {
+        global: {venus: 1},
+      },
+
       metadata: {
         cardNumber: '261',
         renderData: CardRenderer.builder((b) => {
@@ -38,7 +42,6 @@ export class VenusianPlants extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 1);
     const cards = this.getResCards(player);
     if (cards.length === 0) return undefined;
 

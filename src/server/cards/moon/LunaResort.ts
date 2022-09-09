@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -19,6 +17,10 @@ export class LunaResort extends Card {
       reserveUnits: {titanium: 2},
       tr: {moonColony: 1},
 
+      behavior: {
+        global: {moonColony: 1},
+      },
+
       requirements: CardRequirements.builder((b) => b.colonyTiles(2, {all})),
       metadata: {
         description:
@@ -32,10 +34,5 @@ export class LunaResort extends Card {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    MoonExpansion.raiseColonyRate(player);
-    return undefined;
   }
 }

@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,6 +11,7 @@ export class UNMIContractor extends PreludeCard {
 
       behavior: {
         drawCard: 1,
+        tr: 3,
       },
 
       metadata: {
@@ -23,9 +23,5 @@ export class UNMIContractor extends PreludeCard {
         description: 'Increase your TR 3 steps. Draw a card.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(3);
-    return undefined;
   }
 }

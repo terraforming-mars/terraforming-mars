@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -15,17 +14,16 @@ export class GiantSolarShade extends Card implements IProjectCard {
       cost: 27,
       tr: {venus: 3},
 
+      behavior: {
+        global: {venus: 3},
+      },
+
       metadata: {
         cardNumber: '229',
         renderData: CardRenderer.builder((b) => b.venus(3)),
         description: 'Raise Venus 3 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 3);
-    return undefined;
   }
 }
 

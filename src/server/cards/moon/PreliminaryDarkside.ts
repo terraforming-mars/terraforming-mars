@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
@@ -20,6 +19,9 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
       cost: 13,
       tr: {moonMining: 1},
 
+      behavior: {
+        global: {moonMining: 1},
+      },
 
       metadata: {
         description: 'Gain 3 titanium or 4 steel. Raise the Mining Rate 1 step.',
@@ -33,7 +35,6 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    MoonExpansion.raiseMiningRate(player);
     return new OrOptions(
       new SelectOption('Gain 3 titanium.', 'Gain titanium', () => {
         player.addResource(Resources.TITANIUM, 3, {log: true});

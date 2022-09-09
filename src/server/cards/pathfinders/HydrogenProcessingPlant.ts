@@ -18,6 +18,10 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.oxygen(3)),
       victoryPoints: -1,
 
+      behavior: {
+        global: {oxygen: -1},
+      },
+
       metadata: {
         cardNumber: 'Pf19',
         renderData: CardRenderer.builder((b) => {
@@ -35,7 +39,6 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseOxygenLevel(player, -1);
     this.produce(player);
     return undefined;
   }

@@ -17,6 +17,10 @@ export class SulphurExports extends Card implements IProjectCard {
       cost: 21,
       tr: {venus: 1},
 
+      behavior: {
+        global: {venus: 1},
+      },
+
       metadata: {
         cardNumber: '250',
         renderData: CardRenderer.builder((b) => {
@@ -30,7 +34,6 @@ export class SulphurExports extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.VENUS) + 1, {log: true});
-    player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }
 }

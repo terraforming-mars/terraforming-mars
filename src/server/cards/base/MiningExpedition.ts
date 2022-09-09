@@ -17,6 +17,7 @@ export class MiningExpedition extends Card implements IProjectCard {
 
       behavior: {
         stock: {steel: 2},
+        global: {oxygen: 1},
       },
 
       metadata: {
@@ -33,6 +34,6 @@ export class MiningExpedition extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(new RemoveAnyPlants(player, 2));
-    return player.game.increaseOxygenLevel(player, 1);
+    return undefined;
   }
 }

@@ -20,6 +20,10 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       tags: [Tag.SCIENCE, Tag.ANIMAL, Tag.BUILDING],
       tr: {temperature: 1},
 
+      behavior: {
+        global: {temperature: 1},
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE).tag(Tag.ANIMAL)),
       metadata: {
         cardNumber: 'Pf01',
@@ -49,11 +53,6 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
         player.addResourceTo(card, {log: true});
         return undefined;
       });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 1);
-    return undefined;
   }
 }
 

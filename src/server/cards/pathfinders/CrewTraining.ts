@@ -13,6 +13,10 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
     super({
       name: CardName.CREW_TRAINING,
 
+      behavior: {
+        tr: 2,
+      },
+
       metadata: {
         cardNumber: 'P08',
         renderData: CardRenderer.builder((b) => {
@@ -38,8 +42,6 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.increaseTerraformRatingSteps(2);
-
     player.game.defer(new DeclareCloneTag(player, this));
     return undefined;
   }

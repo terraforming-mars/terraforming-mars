@@ -18,6 +18,10 @@ export class HydrogenToVenus extends Card implements IProjectCard {
       cost: 11,
       tr: {venus: 1},
 
+      behavior: {
+        global: {venus: 1},
+      },
+
       metadata: {
         cardNumber: '231',
         renderData: CardRenderer.builder((b) => {
@@ -43,13 +47,11 @@ export class HydrogenToVenus extends Card implements IProjectCard {
           floatersCards,
           ([card]) => {
             player.addResourceTo(card, {qty: jovianTags, log: true});
-            player.game.increaseVenusScaleLevel(player, 1);
             return undefined;
           },
         );
       }
     }
-    player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }
 }

@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -14,6 +13,10 @@ export class CopernicusSolarArrays extends Card {
       tags: [Tag.ENERGY, Tag.SPACE],
       cost: 8,
       reserveUnits: {titanium: 1},
+
+      behavior: {
+        production: {energy: 1},
+      },
 
       metadata: {
         description: 'Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.',
@@ -31,7 +34,6 @@ export class CopernicusSolarArrays extends Card {
 
   public override bespokePlay(player: Player) {
     player.heat += 2;
-    player.production.add(Resources.ENERGY, 1, {log: true});
     return undefined;
   }
 }

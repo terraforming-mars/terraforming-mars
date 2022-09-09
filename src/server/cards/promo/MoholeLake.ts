@@ -21,6 +21,7 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
 
       behavior: {
         stock: {plants: 3},
+        global: {temperature: 1},
       },
 
       metadata: {
@@ -38,7 +39,6 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.increaseTemperature(player, 1);
     player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }

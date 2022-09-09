@@ -1,7 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,6 +15,10 @@ export class VenusGovernor extends Card implements IProjectCard {
       cost: 4,
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 2)),
+      behavior: {
+        production: {megacredits: 2},
+      },
+
       metadata: {
         cardNumber: '255',
         renderData: CardRenderer.builder((b) => {
@@ -25,9 +27,5 @@ export class VenusGovernor extends Card implements IProjectCard {
         description: 'Requires 2 Venus tags. Increase your M€ production 2 steps.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
-    return undefined;
   }
 }

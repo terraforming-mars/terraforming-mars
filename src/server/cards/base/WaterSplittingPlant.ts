@@ -32,6 +32,7 @@ export class WaterSplittingPlant extends Card implements IProjectCard {
   }
   public action(player: Player) {
     player.energy -= 3;
-    return player.game.increaseOxygenLevel(player, 1);
+    player.game.increaseOxygenLevel(player, 1);
+    return undefined;
   }
 }

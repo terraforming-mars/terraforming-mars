@@ -21,6 +21,11 @@ export class MetallicAsteroid extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       cost: 13,
 
+      behavior: {
+        stock: {titanium: 1},
+        global: {temperature: 1},
+      },
+
       metadata: {
         cardNumber: 'A13',
         renderData: CardRenderer.builder((b) => {
@@ -33,8 +38,6 @@ export class MetallicAsteroid extends Card implements IProjectCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.titanium++;
-    player.game.increaseTemperature(player, 1);
     player.game.defer(new RemoveAnyPlants(player, 4));
 
     return new SelectSpace('Select space for Metallic Asteroid tile', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {

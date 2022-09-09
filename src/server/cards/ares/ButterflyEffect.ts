@@ -14,6 +14,10 @@ export class ButterflyEffect extends Card implements IProjectCard {
       name: CardName.BUTTERFLY_EFFECT,
       cost: 8,
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: 'A03',
         description: 'Gain 1 TR. Move each individual hazard marker up to 1 step up or down.',
@@ -25,7 +29,6 @@ export class ButterflyEffect extends Card implements IProjectCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
     player.game.defer(new ShiftAresGlobalParametersDeferred(player));
     return undefined;
   }

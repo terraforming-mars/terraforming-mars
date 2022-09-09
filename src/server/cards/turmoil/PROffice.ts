@@ -19,6 +19,10 @@ export class PROffice extends Card implements IProjectCard {
       cost: 7,
       tr: {tr: 1},
 
+      behavior: {
+        tr: 1,
+      },
+
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
       metadata: {
         cardNumber: 'T09',
@@ -32,7 +36,6 @@ export class PROffice extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
     const amount = player.tags.count(Tag.EARTH) + 1;
     player.addResource(Resources.MEGACREDITS, amount);
     return undefined;

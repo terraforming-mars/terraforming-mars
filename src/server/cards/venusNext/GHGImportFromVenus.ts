@@ -1,7 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -16,6 +14,11 @@ export class GHGImportFromVenus extends Card implements IProjectCard {
       cost: 23,
       tr: {venus: 1},
 
+      behavior: {
+        production: {heat: 3},
+        global: {venus: 1},
+      },
+
       metadata: {
         description: 'Raise Venus 1 step. Increase your heat production 3 steps.',
         cardNumber: '228',
@@ -26,11 +29,5 @@ export class GHGImportFromVenus extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.HEAT, 3);
-    player.game.increaseVenusScaleLevel(player, 1);
-    return undefined;
   }
 }

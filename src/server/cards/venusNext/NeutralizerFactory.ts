@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,6 +15,10 @@ export class NeutralizerFactory extends Card implements IProjectCard {
       cost: 7,
       tr: {venus: 1},
 
+      behavior: {
+        global: {venus: 1},
+      },
+
       requirements: CardRequirements.builder((b) => b.venus(10)),
       metadata: {
         cardNumber: '240',
@@ -25,10 +28,5 @@ export class NeutralizerFactory extends Card implements IProjectCard {
         description: 'Requires Venus 10%. Increase the Venus track 1 step.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 1);
-    return undefined;
   }
 }

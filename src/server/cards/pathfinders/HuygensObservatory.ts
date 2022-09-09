@@ -22,6 +22,10 @@ export class HuygensObservatory extends Card implements IProjectCard {
       victoryPoints: 1,
       tr: {tr: 1},
 
+      behavior: {
+        tr: 1,
+      },
+
       metadata: {
         cardNumber: 'Pf61',
         renderData: CardRenderer.builder((b) => b.colonies(1).asterix().trade().asterix().tr(1)),
@@ -98,7 +102,6 @@ export class HuygensObservatory extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.increaseTerraformRating();
     const game = player.game;
 
     if (player.colonies.getPlayableColonies(/** allowDuplicate = */true).length > 0) {

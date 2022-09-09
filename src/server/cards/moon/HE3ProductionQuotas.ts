@@ -21,6 +21,10 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       cost: 10,
       tr: {moonMining: 1},
 
+      behavior: {
+        global: {moonMining: 1},
+      },
+
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1, {all})),
       metadata: {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on the Moon. ' +
@@ -47,7 +51,6 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
     const moonTiles = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {surfaceOnly: true});
     player.steel -= moonTiles.length;
     player.heat += (4 * moonTiles.length);
-    MoonExpansion.raiseMiningRate(player);
     return undefined;
   }
 }

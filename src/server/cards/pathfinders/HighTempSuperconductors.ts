@@ -1,12 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../../common/Resources';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {played} from '../Options';
 
@@ -21,6 +19,10 @@ export class HighTempSuperconductors extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
       cardDiscount: {tag: Tag.ENERGY, amount: 3},
 
+      behavior: {
+        production: {energy: 2},
+      },
+
       metadata: {
         cardNumber: 'PfTMP',
         renderData: CardRenderer.builder((b) => {
@@ -33,10 +35,5 @@ export class HighTempSuperconductors extends Card implements IProjectCard {
         description: 'Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.ENERGY, 2);
-    return undefined;
   }
 }

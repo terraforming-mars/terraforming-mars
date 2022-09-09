@@ -32,6 +32,7 @@ export class OreProcessor extends Card implements IActionCard, IProjectCard {
   public action(player: Player) {
     player.energy -= 4;
     player.titanium++;
-    return player.game.increaseOxygenLevel(player, 1);
+    player.game.increaseOxygenLevel(player, 1);
+    return undefined;
   }
 }

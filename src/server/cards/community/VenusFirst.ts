@@ -1,5 +1,4 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,6 +12,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
 
       behavior: {
         drawCard: {count: 2, tag: Tag.VENUS},
+        global: {venus: 2},
       },
 
       metadata: {
@@ -24,11 +24,6 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
         description: 'Raise Venus 2 steps. Draw 2 Venus cards from the deck.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 2);
-    return undefined;
   }
 }
 

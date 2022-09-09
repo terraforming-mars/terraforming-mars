@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
   let card: AsteroidRights;
@@ -18,10 +18,11 @@ describe('AsteroidRights', function() {
     card = new AsteroidRights();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const game = Game.newInstance('gameid', [player, redPlayer], player);
 
     player.playedCards.push(card);
     card.play(player);
+    runAllActions(game);
   });
 
   it('Should play', function() {

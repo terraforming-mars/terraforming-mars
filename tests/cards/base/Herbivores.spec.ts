@@ -2,15 +2,14 @@ import {expect} from 'chai';
 import {Herbivores} from '../../../src/server/cards/base/Herbivores';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {cast, runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Herbivores', () => {
   let card: Herbivores;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
@@ -37,6 +36,7 @@ describe('Herbivores', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
     const input = runNextAction(game);
@@ -49,10 +49,10 @@ describe('Herbivores', () => {
     player2.production.add(Resources.PLANTS, 1);
 
     card.play(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(1);
 
-    expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = cast(runNextAction(game), SelectPlayer);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
     selectPlayer.cb(player2);
     expect(player2.production.plants).to.eq(0);
   });

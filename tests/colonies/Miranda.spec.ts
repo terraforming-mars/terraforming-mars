@@ -4,15 +4,14 @@ import {Predators} from '../../src/server/cards/base/Predators';
 import {Miranda} from '../../src/server/colonies/Miranda';
 import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 
 describe('Miranda', function() {
   let miranda: Miranda;
   let pets: Pets;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -23,6 +22,7 @@ describe('Miranda', function() {
     game = Game.newInstance('gameid', [player, player2], player);
     game.gameOptions.coloniesExtension = true;
     game.colonies.push(miranda);
+    player.popWaitingFor(); // Removes SelectInitialCards
   });
 
   it('Should activate', function() {
@@ -33,20 +33,17 @@ describe('Miranda', function() {
 
   it('Should build', function() {
     player.playCard(pets);
+    runAllActions(game);
+    expect(pets.resourceCount).to.eq(1); // Pets starts with 1 resource
     miranda.addColony(player);
-
-    expect(game.deferredActions).has.lengthOf(1);
-    const action = game.deferredActions.pop()!;
-    expect(action).to.be.an.instanceof(AddResourcesToCard);
-    expect(action.player).to.eq(player);
+    runAllActions(game);
     // Should directly add to Pets, since there's no other target
-    action.execute();
-
     expect(pets.resourceCount).to.eq(2); // Pets starts with 1 resource
   });
 
   it('Should trade', function() {
     player.playCard(pets);
+    runAllActions(game);
     miranda.trade(player);
 
     // Should have GiveColonyBonus, AddResourcesToCard and decrease track
@@ -65,9 +62,10 @@ describe('Miranda', function() {
     const predators = new Predators();
     player.playCard(pets);
     player2.playCard(predators);
+    runAllActions(game);
 
     miranda.addColony(player);
-    game.deferredActions.pop()!.execute(); // Gain placement animals
+    runAllActions(game);
 
     miranda.trade(player2);
     runAllActions(game); // Gain Trade & Bonus

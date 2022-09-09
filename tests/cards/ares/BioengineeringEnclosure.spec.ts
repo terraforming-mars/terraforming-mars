@@ -7,6 +7,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
+import {runAllActions} from '../../TestingUtils';
 
 describe('BioengineeringEnclosure', function() {
   let card: BioengineeringEnclosure;
@@ -18,6 +19,7 @@ describe('BioengineeringEnclosure', function() {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
     game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
+    game.deferredActions.pop(); // Removing SelectInitialCards.
     player = getTestPlayer(game, 0);
   });
 
@@ -30,17 +32,18 @@ describe('BioengineeringEnclosure', function() {
   it('Play', () => {
     expect(card.resourceCount).eq(0);
     card.play(player);
+    runAllActions(game);
     expect(card.resourceCount).eq(2);
   });
 
-  it('Can not move animal if it\'s empty', () => {
+  it('Can not move animal if it is empty', () => {
     card.play(player);
     player.playCard(animalHost);
     card.resourceCount = 0;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Can not move animal if theres not another card', () => {
+  it('Can not move animal if there is no other animal card', () => {
     card.play(player);
     expect(card.canAct(player)).is.false;
   });
@@ -48,8 +51,8 @@ describe('BioengineeringEnclosure', function() {
   it('Move animal', () => {
     // Set up the cards.
     player.playCard(animalHost);
-    game.deferredActions.pop();
     player.playCard(card);
+    runAllActions(game);
 
     // Initial expectations that will change after playing the card.
     expect(card.canAct(player)).is.true;

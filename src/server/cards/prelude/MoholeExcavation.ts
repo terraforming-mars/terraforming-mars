@@ -15,6 +15,10 @@ export class MoholeExcavation extends PreludeCard implements IProjectCard {
         stock: {heat: 2},
       },
 
+      behavior: {
+        stock: {heat: 2},
+      },
+
       metadata: {
         cardNumber: 'P23',
         renderData: CardRenderer.builder((b) => {

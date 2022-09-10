@@ -6,7 +6,6 @@ import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../../common/Resources';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
@@ -19,6 +18,10 @@ export class AtmoCollectors extends Card implements IProjectCard {
       name: CardName.ATMO_COLLECTORS,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
+
+      behavior: {
+        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 2},
+      },
 
       metadata: {
         description: 'Add 2 floaters to ANY card.',
@@ -67,9 +70,5 @@ export class AtmoCollectors extends Card implements IProjectCard {
         return undefined;
       }),
     );
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
-    return undefined;
   }
 }

@@ -2,10 +2,8 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
@@ -21,6 +19,10 @@ export class ImportedNitrogen extends Card implements IProjectCard {
       behavior: {
         stock: {plants: 4},
         tr: 1,
+        addResourcesToAnyCard: [
+          {type: CardResource.MICROBE, count: 3},
+          {type: CardResource.ANIMAL, count: 2},
+        ],
       },
 
       metadata: {
@@ -34,11 +36,5 @@ export class ImportedNitrogen extends Card implements IProjectCard {
         description: 'Raise your TR 1 step and gain 4 Plants. Add 3 Microbes to ANOTHER card and 2 Animals to ANOTHER card.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
-    player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 2}));
-    return undefined;
   }
 }

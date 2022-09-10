@@ -13,6 +13,7 @@ import {ClientCard} from '../../common/cards/ClientCard';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {isPreludeCard} from '../cards/prelude/PreludeCard';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
+import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 
 class ProjectCardProcessor {
@@ -54,7 +55,7 @@ class ProjectCardProcessor {
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,
-      productionBox: card.behavior?.production,
+      productionBox: Units.of(card.behavior?.production ?? Units.EMPTY),
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,

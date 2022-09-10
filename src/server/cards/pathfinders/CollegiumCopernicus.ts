@@ -28,6 +28,10 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
       startingMegaCredits: 33,
       resourceType: CardResource.DATA,
 
+      behavior: {
+        addResourcesToAnyCard: {count: 1, type: CardResource.DATA},
+      },
+
       initialActionText: 'Draw 2 cards with a science tag',
 
       metadata: {
@@ -47,11 +51,6 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
     });
   }
 
-  public override bespokePlay(player: Player) {
-    this.addResource(player);
-    return undefined;
-  }
-
   public initialAction(player: Player) {
     player.drawCard(2, {tag: Tag.SCIENCE});
     return undefined;
@@ -64,12 +63,8 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
-      this.addResource(player);
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }
-  }
-
-  private addResource(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
   }
 
   public canAct(player: Player) {

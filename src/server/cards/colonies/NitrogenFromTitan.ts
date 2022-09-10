@@ -1,10 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -20,6 +18,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
 
       behavior: {
         tr: 2,
+        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 2, tag: Tag.JOVIAN},
       },
 
       metadata: {
@@ -30,11 +29,6 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
         description: 'Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tag.JOVIAN}));
-    return undefined;
   }
 }
 

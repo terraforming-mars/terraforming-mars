@@ -89,7 +89,7 @@ export interface ICard extends Partial<IActionCard> {
     metadata: ICardMetadata;
     warning?: string | Message;
     behavior?: {
-      production?: Units;
+      production?: Partial<Units> | undefined;
     }
     produce?: (player: Player) => void;
     tr?: TRSource | DynamicTRSource;

@@ -9,6 +9,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {TileType} from '../../../src/common/TileType';
 
 describe('Cultural Metropolis', function() {
   let card: CulturalMetropolis;
@@ -50,6 +51,24 @@ describe('Cultural Metropolis', function() {
     expect(card.canPlay(player)).is.true;
     turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('Can not play without an available city space', () => {
+    player.production.add(Resources.ENERGY, 1);
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
+
+    const availableCitySpaces = game.board.getAvailableSpacesForCity(player);
+    const savedSpace = availableCitySpaces.pop()!;
+    for (const space of availableCitySpaces) {
+      game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
+    }
+
+    expect(card.canPlay(player)).is.true;
+
+    game.simpleAddTile(player, savedSpace, {tileType: TileType.GREENERY});
+
+    expect(card.canPlay(player)).is.false;
   });
 
   it('Should play', function() {

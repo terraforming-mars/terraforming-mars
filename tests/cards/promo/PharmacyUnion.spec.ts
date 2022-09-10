@@ -21,12 +21,13 @@ describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
   let player: TestPlayer;
   let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new PharmacyUnion();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
 
     player.setCorporationForTest(card);
   });
@@ -50,6 +51,7 @@ describe('PharmacyUnion', function() {
     player.megaCredits = 8;
     player2.megaCredits = 8;
     card.play(player);
+    runAllActions(game);
 
     const ants = new Ants();
     player.playedCards.push(ants);
@@ -69,6 +71,7 @@ describe('PharmacyUnion', function() {
 
   it('Removes diseases and gives TR only when corp owner plays science cards', function() {
     card.play(player);
+    runAllActions(game);
 
     const searchForLife = new SearchForLife();
     player.playedCards.push(searchForLife);
@@ -90,6 +93,8 @@ describe('PharmacyUnion', function() {
 
   it('Works correctly with Research', function() {
     card.play(player);
+    runAllActions(game);
+
     expect(card.resourceCount).to.eq(2);
 
     const research = new Research();

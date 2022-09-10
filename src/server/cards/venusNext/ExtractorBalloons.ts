@@ -21,6 +21,10 @@ export class ExtractorBalloons extends Card implements IActionCard {
       cost: 21,
       resourceType: CardResource.FLOATER,
 
+      behavior: {
+        addResources: 3,
+      },
+
       metadata: {
         cardNumber: '223',
         description: 'Add 3 Floaters to this card',
@@ -36,10 +40,6 @@ export class ExtractorBalloons extends Card implements IActionCard {
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this, 3);
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }

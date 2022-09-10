@@ -25,6 +25,10 @@ export class Pets extends Card implements IProjectCard {
 
       victoryPoints: VictoryPoints.resource(1, 2),
 
+      behavior: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: '172',
         renderData: CardRenderer.builder((b) => {
@@ -48,10 +52,5 @@ export class Pets extends Card implements IProjectCard {
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
   }
 }

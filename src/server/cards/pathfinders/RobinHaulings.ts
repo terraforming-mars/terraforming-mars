@@ -22,6 +22,10 @@ export class RobinHaulings extends Card implements ICorporationCard {
       startingMegaCredits: 39,
       resourceType: CardResource.FLOATER,
 
+      behavior: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: 'PfC9',
         description: 'You start with 39 M€',
@@ -37,11 +41,6 @@ export class RobinHaulings extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this, 1);
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {

@@ -20,6 +20,10 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
       cost: 7,
       resourceType: CardResource.ANIMAL,
 
+      behavior: {
+        addResources: 2,
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
       metadata: {
         description: 'Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.',
@@ -32,12 +36,6 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this, 2);
-
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

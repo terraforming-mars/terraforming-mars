@@ -21,6 +21,11 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
       startingMegaCredits: 43,
       resourceType: CardResource.ORBITAL,
 
+      behavior: {
+        // This is the onCardPlayed effect.
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: 'PfC23',
         description: 'You start with 43 M€',
@@ -46,11 +51,6 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
       if (isPlanetaryTag(tag)) return false;
     }
     return spaceTag;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this, 1);
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {

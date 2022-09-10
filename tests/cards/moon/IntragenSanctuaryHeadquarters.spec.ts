@@ -1,6 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IntragenSanctuaryHeadquarters} from '../../../src/server/cards/moon/IntragenSanctuaryHeadquarters';
 import {expect} from 'chai';
@@ -24,6 +24,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   it('on play', () => {
     expect(card.resourceCount).eq(0);
     card.play(player);
+    runAllActions(player.game);
     expect(card.resourceCount).eq(1);
   });
 

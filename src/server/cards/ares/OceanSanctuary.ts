@@ -24,6 +24,10 @@ export class OceanSanctuary extends Card implements IProjectCard {
       victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.oceans(5)),
 
+      behavior: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: 'A22',
         renderData: CardRenderer.builder((b) => {
@@ -36,7 +40,6 @@ export class OceanSanctuary extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.addResourceTo(this, 1);
     return new SelectSpace(
       'Select space for Ocean Sanctuary',
       player.game.board.getOceanSpaces({upgradedOceans: false}),

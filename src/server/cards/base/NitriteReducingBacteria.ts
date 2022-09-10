@@ -9,7 +9,6 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard {
@@ -20,6 +19,10 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
       tags: [Tag.MICROBE],
       cost: 11,
       resourceType: CardResource.MICROBE,
+
+      behavior: {
+        addResources: 3,
+      },
 
       metadata: {
         cardNumber: '157',
@@ -38,16 +41,6 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
     });
   }
 
-  public override bespokePlay(player: Player) {
-    player.game.defer(new SimpleDeferredAction(
-      player,
-      () => {
-        player.addResourceTo(this, 3);
-        return undefined;
-      },
-    ));
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }

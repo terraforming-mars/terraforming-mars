@@ -9,6 +9,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
 import {addOcean, cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {runAllActions} from '../../TestingUtils';
 
 describe('OceanSanctuary', function() {
   let card: OceanSanctuary;
@@ -47,6 +48,7 @@ describe('OceanSanctuary', function() {
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
     expect(oceanSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.ANIMAL]});
+    runAllActions(game);
     expect(card.resourceCount).is.eq(1);
   });
 

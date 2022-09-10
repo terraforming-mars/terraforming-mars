@@ -24,6 +24,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
 
       behavior: {
         drawCard: {count: 1, tag: Tag.SCIENCE},
+        addResources: 2,
       },
 
       metadata: {
@@ -55,11 +56,6 @@ export class PharmacyUnion extends Card implements ICorporationCard {
       return [];
     }
     return [Tag.MICROBE, Tag.MICROBE];
-  }
-
-  public override bespokePlay() {
-    this.resourceCount = 2;
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {

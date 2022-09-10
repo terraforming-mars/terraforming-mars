@@ -7,7 +7,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 
@@ -23,6 +22,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
       behavior: {
         stock: {steel: 4},
         global: {temperature: 3},
+        removeAnyPlants: 6,
       },
 
       metadata: {
@@ -42,8 +42,6 @@ export class DeimosDownPromo extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new RemoveAnyPlants(player, 6));
-
     const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
 
     return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {

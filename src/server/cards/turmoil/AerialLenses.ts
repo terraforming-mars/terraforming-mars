@@ -2,9 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -19,6 +17,7 @@ export class AerialLenses extends Card implements IProjectCard {
 
       behavior: {
         production: {heat: 2},
+        removeAnyPlants: 2,
       },
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
@@ -28,10 +27,5 @@ export class AerialLenses extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => b.minus().plants(-2, {all}).production((pb) => pb.heat(2))),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new RemoveAnyPlants(player, 2));
-    return undefined;
   }
 }

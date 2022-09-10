@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -20,6 +19,7 @@ export class Comet extends Card implements IProjectCard {
 
       behavior: {
         global: {temperature: 1},
+        removeAnyPlants: 3,
       },
 
       metadata: {
@@ -35,7 +35,6 @@ export class Comet extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(new PlaceOceanTile(player));
-    player.game.defer(new RemoveAnyPlants(player, 3));
     return undefined;
   }
 }

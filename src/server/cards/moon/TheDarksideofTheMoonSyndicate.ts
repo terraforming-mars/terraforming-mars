@@ -26,6 +26,10 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
       startingMegaCredits: 40,
       resourceType: CardResource.SYNDICATE_FLEET,
 
+      behavior: {
+        addResources: 2,
+      },
+
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
@@ -44,11 +48,6 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this, 2);
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

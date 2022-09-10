@@ -71,8 +71,11 @@ describe('CuriosityII', function() {
     const action = cast(oceanCity.play(player), SelectSpace);
     action.cb(oceanSpace);
 
-    const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
+    runAllActions(game);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb(); // Pay 2 M€ to draw a card
+
     runAllActions(game);
 
     expect(player.cardsInHand).has.lengthOf(1);

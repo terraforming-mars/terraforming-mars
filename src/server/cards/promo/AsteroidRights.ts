@@ -24,6 +24,10 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
       cost: 10,
       resourceType: CardResource.ASTEROID,
 
+      behavior: {
+        addResources: 2,
+      },
+
       metadata: {
         cardNumber: 'X31',
         description: 'Add 2 asteroids to this card.',
@@ -41,11 +45,6 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay() {
-    this.resourceCount = 2;
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

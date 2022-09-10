@@ -2,6 +2,8 @@ import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
 import {Behavior} from './Behavior';
@@ -28,7 +30,7 @@ export class Behaviors {
     return true;
   }
 
-  public static execute(player: Player, _card: ICard, behavior: Behavior) {
+  public static execute(player: Player, card: ICard, behavior: Behavior) {
     if (behavior.production !== undefined) {
       player.production.adjust(Units.of(behavior.production));
     }
@@ -57,6 +59,13 @@ export class Behaviors {
     if (behavior.tr !== undefined) {
       player.increaseTerraformRatingSteps(behavior.tr);
     }
+    if (behavior.addResources !== undefined) {
+      player.game.defer(new SimpleDeferredAction(player, () => {
+        player.addResourceTo(card, behavior.addResources);
+        return undefined;
+      }));
+    }
+
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
       for (const entry of array) {
@@ -65,6 +74,9 @@ export class Behaviors {
     }
     if (behavior.decreaseAnyProduction !== undefined) {
       player.game.defer(new DecreaseAnyProduction(player, behavior.decreaseAnyProduction.type, {count: behavior.decreaseAnyProduction.count}));
+    }
+    if (behavior.removeAnyPlants !== undefined) {
+      player.game.defer(new RemoveAnyPlants(player, behavior.removeAnyPlants));
     }
   }
 }

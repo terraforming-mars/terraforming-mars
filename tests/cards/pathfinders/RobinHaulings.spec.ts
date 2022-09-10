@@ -3,7 +3,7 @@ import {RobinHaulings} from '../../../src/server/cards/pathfinders/RobinHaulings
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {cast, fakeCard} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
@@ -24,6 +24,7 @@ describe('RobinHaulings', function() {
   it('play', () => {
     expect(card.resourceCount).eq(0);
     card.play(player);
+    runAllActions(game);
     expect(card.resourceCount).eq(1);
   });
 

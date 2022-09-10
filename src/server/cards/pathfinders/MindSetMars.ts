@@ -23,6 +23,10 @@ export class MindSetMars extends Card implements ICorporationCard {
       startingMegaCredits: 44,
       resourceType: CardResource.AGENDA,
 
+      behavior: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: 'PfC23',
         description: 'You start with 44 M€ and 1 agenda resource to this card.',
@@ -37,11 +41,6 @@ export class MindSetMars extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay() {
-    this.resourceCount++;
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {

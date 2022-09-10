@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -25,6 +25,7 @@ describe('ExtractorBalloons', function() {
 
   it('Should act', function() {
     card.play(player);
+    runAllActions(game);
     expect(card.resourceCount).to.eq(3);
 
     const orOptions = cast(card.action(player), OrOptions);

@@ -29,6 +29,7 @@ export class Herbivores extends Card implements IProjectCard {
 
       behavior: {
         decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+        addResources: 1,
       },
 
       metadata: {
@@ -53,10 +54,5 @@ export class Herbivores extends Card implements IProjectCard {
     if (cardOwner.id === activePlayer.id && Board.isGreenerySpace(space)) {
       cardOwner.game.defer(new AddResourcesToCard(cardOwner, CardResource.ANIMAL, {filter: (c) => c.name === this.name}));
     }
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResourceTo(this);
-    return undefined;
   }
 }

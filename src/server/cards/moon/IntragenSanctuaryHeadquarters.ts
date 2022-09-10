@@ -23,6 +23,11 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
       initialActionText: 'Place a colony tile on the Moon.',
       victoryPoints: VictoryPoints.resource(1, 2),
 
+      behavior: {
+        // Gains the initial resource from its own tag.
+        addResources: 1,
+      },
+
       metadata: {
         description: 'You start with 38 M€. ' +
         'As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step. 1 VP for every 2 animals on this card.',
@@ -37,15 +42,8 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
     });
   }
 
-
   public initialAction(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));
-    return undefined;
-  }
-
-  public override bespokePlay() {
-    // Gains the initial resource from its own tag.
-    this.resourceCount = 1;
     return undefined;
   }
 

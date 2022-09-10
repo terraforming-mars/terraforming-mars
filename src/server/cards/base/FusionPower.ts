@@ -13,7 +13,10 @@ export class FusionPower extends Card implements IProjectCard {
       name: CardName.FUSION_POWER,
       tags: [Tag.SCIENCE, Tag.ENERGY, Tag.BUILDING],
       cost: 14,
-      productionBox: {energy: 3},
+
+      behavior: {
+        production: {energy: 3},
+      },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.ENERGY, 2)),
       metadata: {

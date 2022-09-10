@@ -9,7 +9,10 @@ export class PersonalAgenda extends PreludeCard {
   constructor() {
     super({
       name: CardName.PERSONAL_AGENDA,
-      productionBox: {megacredits: 3},
+
+      behavior: {
+        production: {megacredits: 3},
+      },
 
       metadata: {
         cardNumber: 'P08',

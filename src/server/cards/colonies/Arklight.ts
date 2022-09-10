@@ -19,7 +19,10 @@ export class Arklight extends Card implements ICorporationCard {
       resourceType: CardResource.ANIMAL,
       cardType: CardType.CORPORATION,
       victoryPoints: VictoryPoints.resource(1, 2),
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'R04',

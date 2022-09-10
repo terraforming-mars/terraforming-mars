@@ -12,7 +12,10 @@ export class Sponsors extends Card implements IProjectCard {
       name: CardName.SPONSORS,
       tags: [Tag.EARTH],
       cost: 6,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '068',

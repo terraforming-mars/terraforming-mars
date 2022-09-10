@@ -9,9 +9,9 @@ export class Mohole extends PreludeCard implements IProjectCard {
     super({
       name: CardName.MOHOLE,
       tags: [Tag.BUILDING],
-      productionBox: {heat: 3},
 
       behavior: {
+        production: {heat: 3},
         stock: {heat: 3},
       },
 

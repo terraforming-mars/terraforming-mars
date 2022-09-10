@@ -16,7 +16,10 @@ export class UrbanDecomposers extends Card implements IProjectCard {
       tags: [Tag.MICROBE],
       name: CardName.URBAN_DECOMPOSERS,
       cardType: CardType.AUTOMATED,
-      productionBox: {plants: 1},
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.colonies().cities()),
       metadata: {

@@ -15,7 +15,10 @@ export class TheWomb extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.MOON],
       cost: 16,
-      productionBox: {energy: -2, megacredits: 4},
+
+      behavior: {
+        production: {energy: -2, megacredits: 4},
+      },
       reserveUnits: {titanium: 2},
       tr: {moonColony: 1},
 

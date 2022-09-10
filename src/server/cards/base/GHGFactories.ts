@@ -13,7 +13,10 @@ export class GHGFactories extends Card implements IProjectCard {
       name: CardName.GHG_FACTORIES,
       tags: [Tag.BUILDING],
       cost: 11,
-      productionBox: {energy: -1, heat: 4},
+
+      behavior: {
+        production: {energy: -1, heat: 4},
+      },
 
       metadata: {
         cardNumber: '126',

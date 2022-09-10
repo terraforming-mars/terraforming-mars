@@ -12,7 +12,10 @@ export class BuildingIndustries extends Card implements IProjectCard {
       name: CardName.BUILDING_INDUSTRIES,
       tags: [Tag.BUILDING],
       cost: 6,
-      productionBox: {energy: -1, steel: 2},
+
+      behavior: {
+        production: {energy: -1, steel: 2},
+      },
 
       metadata: {
         cardNumber: '065',

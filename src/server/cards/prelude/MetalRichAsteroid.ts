@@ -7,6 +7,7 @@ export class MetalRichAsteroid extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.METAL_RICH_ASTEROID,
+
       behavior: {
         stock: {titanium: 4, steel: 4},
         global: {temperature: 1},

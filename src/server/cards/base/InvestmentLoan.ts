@@ -13,7 +13,10 @@ export class InvestmentLoan extends Card implements IProjectCard {
       name: CardName.INVESTMENT_LOAN,
       tags: [Tag.EARTH],
       cost: 3,
-      productionBox: {megacredits: -1},
+
+      behavior: {
+        production: {megacredits: -1},
+      },
 
       metadata: {
         cardNumber: '151',

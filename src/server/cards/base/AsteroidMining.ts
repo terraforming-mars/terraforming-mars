@@ -13,7 +13,10 @@ export class AsteroidMining extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 30,
       victoryPoints: 2,
-      productionBox: {titanium: 2},
+
+      behavior: {
+        production: {titanium: 2},
+      },
 
       metadata: {
         description: 'Increase your titanium production 2 steps.',

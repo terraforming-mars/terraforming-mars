@@ -29,7 +29,11 @@ export class NaturalPreserve extends Card implements IProjectCard {
       name,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 9,
-      productionBox: {megacredits: 1},
+
+      behavior: {
+        production: {megacredits: 1},
+      },
+
       adjacencyBonus,
       requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
       victoryPoints: 1,

@@ -13,11 +13,11 @@ export class NoctisFarming extends Card implements IProjectCard {
       name: CardName.NOCTIS_FARMING,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 10,
-      productionBox: {megacredits: 1},
       requirements: CardRequirements.builder((b) => b.temperature(-20)),
       victoryPoints: 1,
 
       behavior: {
+        production: {megacredits: 1},
         stock: {plants: 2},
       },
 

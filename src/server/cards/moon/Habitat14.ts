@@ -15,7 +15,10 @@ export class Habitat14 extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.CITY, Tag.MOON],
       cost: 5,
-      productionBox: {energy: -1, megacredits: -1},
+
+      behavior: {
+        production: {energy: -1, megacredits: -1},
+      },
       reserveUnits: {titanium: 1},
       tr: {moonColony: 1},
 

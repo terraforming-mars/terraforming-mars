@@ -12,7 +12,10 @@ export class FuelFactory extends Card implements IProjectCard {
       name: CardName.FUEL_FACTORY,
       tags: [Tag.BUILDING],
       cost: 6,
-      productionBox: {energy: -1, megacredits: 1, titanium: 1},
+
+      behavior: {
+        production: {energy: -1, megacredits: 1, titanium: 1},
+      },
 
       metadata: {
         cardNumber: '180',

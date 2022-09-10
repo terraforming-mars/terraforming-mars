@@ -10,7 +10,9 @@ export class AlliedBanks extends PreludeCard {
       name: CardName.ALLIED_BANKS,
       tags: [Tag.EARTH],
 
-      productionBox: {megacredits: 4},
+      behavior: {
+        production: {megacredits: 4},
+      },
       startingMegacredits: 3,
 
       metadata: {

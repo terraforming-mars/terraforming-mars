@@ -13,7 +13,10 @@ export class MiningQuota extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 5,
-      productionBox: {steel: 2},
+
+      behavior: {
+        production: {steel: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.JOVIAN)),
       metadata: {

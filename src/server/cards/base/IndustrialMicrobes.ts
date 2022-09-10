@@ -12,7 +12,10 @@ export class IndustrialMicrobes extends Card implements IProjectCard {
       name: CardName.INDUSTRIAL_MICROBES,
       tags: [Tag.MICROBE, Tag.BUILDING],
       cost: 12,
-      productionBox: {energy: 1, steel: 1},
+
+      behavior: {
+        production: {energy: 1, steel: 1},
+      },
 
       metadata: {
         cardNumber: '158',

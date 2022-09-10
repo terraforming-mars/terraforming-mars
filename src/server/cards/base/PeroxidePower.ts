@@ -12,7 +12,10 @@ export class PeroxidePower extends Card implements IProjectCard {
       name: CardName.PEROXIDE_POWER,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 7,
-      productionBox: {energy: 2, megacredits: -1},
+
+      behavior: {
+        production: {energy: 2, megacredits: -1},
+      },
 
       metadata: {
         cardNumber: '089',

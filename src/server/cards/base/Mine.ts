@@ -12,7 +12,10 @@ export class Mine extends Card implements IProjectCard {
       name: CardName.MINE,
       tags: [Tag.BUILDING],
       cost: 4,
-      productionBox: {steel: 1},
+
+      behavior: {
+        production: {steel: 1},
+      },
 
       metadata: {
         description: 'Increase your steel production 1 step.',

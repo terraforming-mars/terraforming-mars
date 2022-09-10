@@ -17,7 +17,10 @@ export class NewVenice extends Card implements IProjectCard {
       name: CardName.NEW_VENICE,
       tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING, Tag.CITY],
       cost: 21,
-      productionBox: {energy: 1, megacredits: 2},
+
+      behavior: {
+        production: {energy: 1, megacredits: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {

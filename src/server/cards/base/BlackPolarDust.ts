@@ -13,7 +13,10 @@ export class BlackPolarDust extends Card implements IProjectCard {
       name: CardName.BLACK_POLAR_DUST,
       cost: 15,
       tr: {oceans: 1},
-      productionBox: {megacredits: -2, heat: 3},
+
+      behavior: {
+        production: {megacredits: -2, heat: 3},
+      },
 
       metadata: {
         cardNumber: '022',

@@ -12,10 +12,10 @@ export class StripMine extends Card implements IProjectCard {
       name: CardName.STRIP_MINE,
       tags: [Tag.BUILDING],
       cost: 25,
-      productionBox: {energy: -2, steel: 2, titanium: 1},
       tr: {oxygen: 2},
 
       behavior: {
+        production: {energy: -2, steel: 2, titanium: 1},
         global: {oxygen: 2},
       },
 

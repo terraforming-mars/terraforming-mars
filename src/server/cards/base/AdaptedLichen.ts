@@ -12,7 +12,10 @@ export class AdaptedLichen extends Card implements IProjectCard {
       name: CardName.ADAPTED_LICHEN,
       tags: [Tag.PLANT],
       cost: 9,
-      productionBox: {plants: 1},
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       metadata: {
         description: 'Increase your Plant production 1 step.',

@@ -8,6 +8,7 @@ export class Biofuels extends PreludeCard {
     super({
       name: CardName.BIOFUELS,
       tags: [Tag.MICROBE],
+
       behavior: {
         production: {energy: 1, plants: 1},
         stock: {plants: 2},

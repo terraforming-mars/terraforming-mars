@@ -21,7 +21,10 @@ export class Livestock extends Card implements IActionCard, IProjectCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.oxygen(9)),
-      productionBox: {plants: -1, megacredits: 2},
+
+      behavior: {
+        production: {plants: -1, megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '184',

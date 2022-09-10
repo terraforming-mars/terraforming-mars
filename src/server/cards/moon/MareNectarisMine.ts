@@ -17,7 +17,10 @@ export class MareNectarisMine extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 14,
-      productionBox: {steel: 1},
+
+      behavior: {
+        production: {steel: 1},
+      },
       reserveUnits: {titanium: 1},
       tr: {moonMining: 1},
 

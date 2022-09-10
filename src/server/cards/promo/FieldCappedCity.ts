@@ -15,9 +15,9 @@ export class FieldCappedCity extends Card implements IProjectCard {
       name: CardName.FIELD_CAPPED_CITY,
       tags: [Tag.CITY, Tag.BUILDING, Tag.ENERGY],
       cost: 29,
-      productionBox: {energy: 1, megacredits: 2},
 
       behavior: {
+        production: {energy: 1, megacredits: 2},
         stock: {plants: 3},
       },
 

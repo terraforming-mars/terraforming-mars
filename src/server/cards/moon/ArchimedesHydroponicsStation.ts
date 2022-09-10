@@ -11,7 +11,10 @@ export class ArchimedesHydroponicsStation extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.PLANT],
       cost: 12,
-      productionBox: {energy: -1, megacredits: -1, plants: 2},
+
+      behavior: {
+        production: {energy: -1, megacredits: -1, plants: 2},
+      },
 
       metadata: {
         description: 'Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.',

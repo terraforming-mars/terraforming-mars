@@ -12,7 +12,10 @@ export class HeliostatMirrorArray extends Card {
       tags: [Tag.ENERGY],
       cardType: CardType.AUTOMATED,
       name: CardName.HELIOSTAT_MIRROR_ARRAY,
-      productionBox: {energy: 2},
+
+      behavior: {
+        production: {energy: 2},
+      },
       reserveUnits: {titanium: 1},
 
       metadata: {

@@ -12,7 +12,10 @@ export class TitaniumMine extends Card implements IProjectCard {
       name: CardName.TITANIUM_MINE,
       tags: [Tag.BUILDING],
       cost: 7,
-      productionBox: {titanium: 1},
+
+      behavior: {
+        production: {titanium: 1},
+      },
 
       metadata: {
         cardNumber: '144',

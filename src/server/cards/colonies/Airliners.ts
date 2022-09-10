@@ -16,7 +16,10 @@ export class Airliners extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       requirements: CardRequirements.builder((b) => b.floaters(3)),
       victoryPoints: 1,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: 'C01',

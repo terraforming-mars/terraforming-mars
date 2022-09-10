@@ -9,7 +9,10 @@ export class NewPartner extends PreludeCard {
   constructor() {
     super({
       name: CardName.NEW_PARTNER,
-      productionBox: {megacredits: 1},
+
+      behavior: {
+        production: {megacredits: 1},
+      },
 
       metadata: {
         cardNumber: 'P43',

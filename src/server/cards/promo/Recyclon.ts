@@ -20,7 +20,10 @@ export class Recyclon extends Card implements ICorporationCard {
       tags: [Tag.MICROBE, Tag.BUILDING],
       startingMegaCredits: 38,
       resourceType: CardResource.MICROBE,
-      productionBox: {steel: 1},
+
+      behavior: {
+        production: {steel: 1},
+      },
 
       metadata: {
         cardNumber: 'R26',

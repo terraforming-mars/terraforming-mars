@@ -15,7 +15,10 @@ export class GeodesicTents extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.PLANT, Tag.CITY, Tag.MOON],
       cost: 13,
-      productionBox: {energy: -1, plants: 1},
+
+      behavior: {
+        production: {energy: -1, plants: 1},
+      },
       reserveUnits: {titanium: 1},
       tr: {moonColony: 1},
 

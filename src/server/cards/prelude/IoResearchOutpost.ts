@@ -8,9 +8,9 @@ export class IoResearchOutpost extends PreludeCard {
     super({
       name: CardName.IO_RESEARCH_OUTPOST,
       tags: [Tag.JOVIAN, Tag.SCIENCE],
-      productionBox: {titanium: 1},
 
       behavior: {
+        production: {titanium: 1},
         drawCard: 1,
       },
 

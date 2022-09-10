@@ -33,7 +33,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.production.adjust(this.productionBox);
+    // player.production.adjust(this.productionBox); Why was this here? Remove it, I suppose.
     player.game.defer(
       new DeclareCloneTag(
         player,

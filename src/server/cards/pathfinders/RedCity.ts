@@ -20,7 +20,11 @@ export class RedCity extends Card implements IProjectCard {
       name: CardName.RED_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 21,
-      productionBox: {energy: -1, megacredits: 2},
+
+      behavior: {
+        production: {energy: -1, megacredits: 2},
+      },
+
       requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
       victoryPoints: 'special',
 

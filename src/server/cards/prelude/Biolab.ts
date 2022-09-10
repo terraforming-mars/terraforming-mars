@@ -8,9 +8,9 @@ export class Biolab extends PreludeCard {
     super({
       name: CardName.BIOLAB,
       tags: [Tag.SCIENCE],
-      productionBox: {plants: 1},
 
       behavior: {
+        production: {plants: 1},
         drawCard: 3,
       },
 

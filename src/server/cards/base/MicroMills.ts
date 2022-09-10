@@ -10,7 +10,10 @@ export class MicroMills extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.MICRO_MILLS,
       cost: 3,
-      productionBox: {heat: 1},
+
+      behavior: {
+        production: {heat: 1},
+      },
 
       metadata: {
         cardNumber: '164',

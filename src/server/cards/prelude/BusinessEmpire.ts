@@ -11,7 +11,9 @@ export class BusinessEmpire extends PreludeCard {
       name: CardName.BUSINESS_EMPIRE,
       tags: [Tag.EARTH],
 
-      productionBox: {megacredits: 6},
+      behavior: {
+        production: {megacredits: 6},
+      },
       startingMegacredits: -6,
 
       metadata: {

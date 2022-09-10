@@ -6,7 +6,10 @@ export class SocietySupport extends PreludeCard {
   constructor() {
     super({
       name: CardName.SOCIETY_SUPPORT,
-      productionBox: {plants: 1, energy: 1, heat: 1, megacredits: -1},
+
+      behavior: {
+        production: {plants: 1, energy: 1, heat: 1, megacredits: -1},
+      },
 
       metadata: {
         cardNumber: 'P31',

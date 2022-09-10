@@ -16,7 +16,10 @@ export class SpacePort extends Card implements IProjectCard {
       tags: [Tag.CITY, Tag.BUILDING],
       name: CardName.SPACE_PORT,
       cardType: CardType.AUTOMATED,
-      productionBox: {energy: -1, megacredits: 4},
+
+      behavior: {
+        production: {energy: -1, megacredits: 4},
+      },
 
       requirements: CardRequirements.builder((b) => b.colonies()),
       metadata: {

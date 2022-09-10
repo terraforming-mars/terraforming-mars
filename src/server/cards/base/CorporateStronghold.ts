@@ -15,7 +15,10 @@ export class CorporateStronghold extends Card implements IProjectCard {
       name: CardName.CORPORATE_STRONGHOLD,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 11,
-      productionBox: {energy: -1, megacredits: 3},
+
+      behavior: {
+        production: {energy: -1, megacredits: 3},
+      },
       victoryPoints: -2,
 
       metadata: {

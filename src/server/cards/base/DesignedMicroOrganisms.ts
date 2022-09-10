@@ -14,7 +14,10 @@ export class DesignedMicroOrganisms extends Card implements IProjectCard {
       name: CardName.DESIGNED_MICRO_ORGANISMS,
       tags: [Tag.SCIENCE, Tag.MICROBE],
       cost: 16,
-      productionBox: {plants: 2},
+
+      behavior: {
+        production: {plants: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.temperature(-14, {max})),
       metadata: {

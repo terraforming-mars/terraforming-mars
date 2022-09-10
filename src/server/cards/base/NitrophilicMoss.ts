@@ -14,7 +14,10 @@ export class NitrophilicMoss extends Card implements IProjectCard {
       name: CardName.NITROPHILIC_MOSS,
       tags: [Tag.PLANT],
       cost: 8,
-      productionBox: {plants: 2},
+
+      behavior: {
+        production: {plants: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {

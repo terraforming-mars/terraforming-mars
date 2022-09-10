@@ -20,9 +20,9 @@ export class MiningGuild extends Card implements ICorporationCard {
       name: CardName.MINING_GUILD,
       tags: [Tag.BUILDING, Tag.BUILDING],
       startingMegaCredits: 30,
-      productionBox: {steel: 1},
 
       behavior: {
+        production: {steel: 1},
         stock: {steel: 5},
       },
 

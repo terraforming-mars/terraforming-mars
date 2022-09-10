@@ -14,7 +14,10 @@ export class IoMiningIndustries extends Card implements IProjectCard {
       tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 41,
       victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
-      productionBox: {titanium: 2, megacredits: 2},
+
+      behavior: {
+        production: {titanium: 2, megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '092',

@@ -12,7 +12,10 @@ export class NuclearPower extends Card implements IProjectCard {
       name: CardName.NUCLEAR_POWER,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 10,
-      productionBox: {energy: 3, megacredits: -2},
+
+      behavior: {
+        production: {energy: 3, megacredits: -2},
+      },
 
       metadata: {
         cardNumber: '045',

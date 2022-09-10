@@ -9,9 +9,9 @@ export class ExperiencedMartians extends PreludeCard {
   constructor() {
     super({
       name: CardName.EXPERIENCED_MARTIANS,
-      productionBox: {megacredits: 2},
 
       behavior: {
+        production: {megacredits: 2},
         drawCard: {count: 2, tag: Tag.MARS},
       },
 

@@ -18,7 +18,10 @@ export class CulturalMetropolis extends Card implements IProjectCard {
       name: CardName.CULTURAL_METROPOLIS,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 20,
-      productionBox: {energy: -1, megacredits: 3},
+
+      behavior: {
+        production: {energy: -1, megacredits: 3},
+      },
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
       metadata: {

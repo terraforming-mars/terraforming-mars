@@ -12,7 +12,10 @@ export class Soletta extends Card implements IProjectCard {
       name: CardName.SOLETTA,
       tags: [Tag.SPACE],
       cost: 35,
-      productionBox: {heat: 7},
+
+      behavior: {
+        production: {heat: 7},
+      },
 
       metadata: {
         cardNumber: '203',

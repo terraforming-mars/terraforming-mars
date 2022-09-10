@@ -24,7 +24,10 @@ export class EarlyExpedition extends Card implements IProjectCard {
       cost: 15,
       tags: [Tag.SCIENCE, Tag.SPACE, Tag.CITY],
       requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),
-      productionBox: {energy: -1, megacredits: 3},
+
+      behavior: {
+        production: {energy: -1, megacredits: 3},
+      },
 
       metadata: {
         cardNumber: 'Pf18',

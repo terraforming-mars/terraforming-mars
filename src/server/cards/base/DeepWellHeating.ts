@@ -12,10 +12,10 @@ export class DeepWellHeating extends Card implements IProjectCard {
       name: CardName.DEEP_WELL_HEATING,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 13,
-      productionBox: {energy: 1},
       tr: {temperature: 1},
 
       behavior: {
+        production: {energy: 1},
         global: {temperature: 1},
       },
 

@@ -15,7 +15,10 @@ export class Hackers extends Card implements IProjectCard {
       name: CardName.HACKERS,
       cost: 3,
       victoryPoints: -1,
-      productionBox: {energy: -1, megacredits: 2},
+
+      behavior: {
+        production: {energy: -1, megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '125',

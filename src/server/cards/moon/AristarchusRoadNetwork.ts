@@ -15,7 +15,10 @@ export class AristarchusRoadNetwork extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,
-      productionBox: {megacredits: 2},
+
+      behavior: {
+        production: {megacredits: 2},
+      },
       reserveUnits: {steel: 2},
       tr: {moonLogistics: 1},
 

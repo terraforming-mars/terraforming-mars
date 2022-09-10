@@ -9,9 +9,9 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     super({
       name: CardName.RESEARCH_NETWORK,
       tags: [Tag.WILD],
-      productionBox: {megacredits: 1},
 
       behavior: {
+        production: {megacredits: 1},
         drawCard: 3,
       },
 

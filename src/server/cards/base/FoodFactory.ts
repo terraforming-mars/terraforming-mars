@@ -12,7 +12,10 @@ export class FoodFactory extends Card implements IProjectCard {
       name: CardName.FOOD_FACTORY,
       tags: [Tag.BUILDING],
       cost: 12,
-      productionBox: {megacredits: 4, plants: -1},
+
+      behavior: {
+        production: {megacredits: 4, plants: -1},
+      },
       victoryPoints: 1,
 
       metadata: {

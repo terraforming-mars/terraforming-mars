@@ -12,7 +12,10 @@ export class AcquiredCompany extends Card implements IProjectCard {
       name: CardName.ACQUIRED_COMPANY,
       tags: [Tag.EARTH],
       cost: 10,
-      productionBox: {megacredits: 3},
+
+      behavior: {
+        production: {megacredits: 3},
+      },
 
       metadata: {
         description: 'Increase your M€ production 3 steps.',

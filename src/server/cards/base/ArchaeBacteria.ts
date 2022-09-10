@@ -14,7 +14,10 @@ export class ArchaeBacteria extends Card implements IProjectCard {
       name: CardName.ARCHAEBACTERIA,
       tags: [Tag.MICROBE],
       cost: 6,
-      productionBox: {plants: 1},
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),
       metadata: {

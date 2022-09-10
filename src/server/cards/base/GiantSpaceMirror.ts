@@ -12,7 +12,10 @@ export class GiantSpaceMirror extends Card implements IProjectCard {
       name: CardName.GIANT_SPACE_MIRROR,
       tags: [Tag.ENERGY, Tag.SPACE],
       cost: 17,
-      productionBox: {energy: 3},
+
+      behavior: {
+        production: {energy: 3},
+      },
 
       metadata: {
         cardNumber: '083',

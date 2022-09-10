@@ -18,7 +18,10 @@ export class CupolaCity extends Card implements IProjectCard {
       name: CardName.CUPOLA_CITY,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 16,
-      productionBox: {energy: -1, megacredits: 3},
+
+      behavior: {
+        production: {energy: -1, megacredits: 3},
+      },
 
       requirements: CardRequirements.builder((b) => b.oxygen(9, {max})),
       metadata: {

@@ -13,7 +13,10 @@ export class EarthElevator extends Card implements IProjectCard {
       name: CardName.EARTH_ELEVATOR,
       cardType: CardType.AUTOMATED,
       victoryPoints: 4,
-      productionBox: {titanium: 3},
+
+      behavior: {
+        production: {titanium: 3},
+      },
 
       metadata: {
         description: 'Increase your titanium production 3 steps.',

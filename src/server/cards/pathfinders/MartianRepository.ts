@@ -18,7 +18,11 @@ export class MartianRepository extends Card implements IProjectCard {
       cost: 12,
       tags: [Tag.MARS, Tag.MARS, Tag.BUILDING],
       resourceType: CardResource.DATA,
-      productionBox: {energy: -1},
+
+      behavior: {
+        production: {energy: -1},
+      },
+
       victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {

@@ -15,6 +15,7 @@ export class Farming extends Card implements IProjectCard {
       tags: [Tag.PLANT],
       cost: 16,
       victoryPoints: 2,
+
       behavior: {
         production: {megacredits: 2, plants: 2},
         stock: {plants: 2},

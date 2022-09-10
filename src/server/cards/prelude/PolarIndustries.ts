@@ -11,7 +11,10 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
     super({
       name: CardName.POLAR_INDUSTRIES,
       tags: [Tag.BUILDING],
-      productionBox: {heat: 2},
+
+      behavior: {
+        production: {heat: 2},
+      },
 
       metadata: {
         cardNumber: 'P26',

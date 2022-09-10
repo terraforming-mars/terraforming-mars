@@ -18,7 +18,10 @@ export class OceanFarm extends Card implements IProjectCard {
       name: CardName.OCEAN_FARM,
       tags: [Tag.PLANT, Tag.BUILDING],
       cost: 15,
-      productionBox: {plants: 1, heat: 1},
+
+      behavior: {
+        production: {plants: 1, heat: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {

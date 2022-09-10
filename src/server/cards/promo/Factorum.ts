@@ -18,7 +18,10 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
       name: CardName.FACTORUM,
       tags: [Tag.ENERGY, Tag.BUILDING],
       startingMegaCredits: 37,
-      productionBox: {steel: 1},
+
+      behavior: {
+        production: {steel: 1},
+      },
 
       metadata: {
         cardNumber: 'R22',

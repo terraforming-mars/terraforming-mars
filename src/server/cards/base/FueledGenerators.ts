@@ -12,7 +12,10 @@ export class FueledGenerators extends Card implements IProjectCard {
       name: CardName.FUELED_GENERATORS,
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 1,
-      productionBox: {energy: 1, megacredits: -1},
+
+      behavior: {
+        production: {energy: 1, megacredits: -1},
+      },
 
       metadata: {
         cardNumber: '100',

@@ -10,7 +10,10 @@ export class ResearchGrant extends PreludeCard {
     super({
       name: CardName.RESEARCH_GRANT_PATHFINDERS,
       tags: [Tag.SCIENCE, Tag.SCIENCE],
-      productionBox: {energy: 1},
+
+      behavior: {
+        production: {energy: 1},
+      },
       startingMegacredits: 14,
 
       metadata: {

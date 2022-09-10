@@ -15,10 +15,6 @@ export class Mohole extends PreludeCard implements IProjectCard {
         stock: {heat: 3},
       },
 
-      behavior: {
-        stock: {heat: 3},
-      },
-
       metadata: {
         cardNumber: 'P22',
         renderData: CardRenderer.builder((b) => {

@@ -22,10 +22,6 @@ export class AgricolaInc extends Card implements ICorporationCard {
         production: {megacredits: 1, plants: 1},
       },
 
-      behavior: {
-        production: {megacredits: 1, plants: 1},
-      },
-
       metadata: {
         cardNumber: 'R36',
         description: 'You start with 1 plant production, 1 M€ production and 40 M€.',

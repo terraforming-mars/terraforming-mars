@@ -15,10 +15,6 @@ export class MiningOperations extends PreludeCard implements IProjectCard {
         stock: {steel: 4},
       },
 
-      behavior: {
-        stock: {steel: 4},
-      },
-
       metadata: {
         cardNumber: 'P21',
         renderData: CardRenderer.builder((b) => {

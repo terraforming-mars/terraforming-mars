@@ -266,7 +266,7 @@ describe('RoboticWorkforce', () => {
       // The card must have a productionBox or produce method.
       if (include) {
         if (card.produce === undefined) {
-          if (card.behavior?.production === undefined || Units.isEmpty(Units.of(card.behavior?.production))) {
+          if (card.behavior?.production === undefined || Units.isEmpty(card.behavior?.production)) {
             fail(card.name + ' should be registered for Robotic Workforce');
           }
         }

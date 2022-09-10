@@ -40,8 +40,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   public override bespokeCanPlay(player: Player): boolean {
     // This card requires player has 2 delegates available
     const turmoil = Turmoil.getTurmoil(player.game);
-    const hasEnoughDelegates = turmoil.getAvailableDelegateCount(player.id, 'both') >= 2;
-    return hasEnoughDelegates;
+    return turmoil.getAvailableDelegateCount(player.id, 'both') >= 2 && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
   public override bespokePlay(player: Player) {

@@ -29,7 +29,6 @@ export class Herbivores extends Card implements IProjectCard {
 
       behavior: {
         decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
-        addResources: 1,
       },
 
       metadata: {

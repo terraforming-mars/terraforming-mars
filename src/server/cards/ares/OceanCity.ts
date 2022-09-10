@@ -36,7 +36,6 @@ export class OceanCity extends Card implements IProjectCard {
     });
   }
 
-
   public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space for Ocean City',

@@ -1,15 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
-import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
-import {GainProduction} from '../../deferredActions/GainProduction';
 
 export class BiomassCombustors extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +16,12 @@ export class BiomassCombustors extends Card implements IProjectCard {
       tags: [Tag.ENERGY, Tag.BUILDING],
       cost: 4,
       victoryPoints: -1,
+
+      // This might not work for Robotic Workforce yet.
+      behavior: {
+        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+        production: {energy: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
       metadata: {
@@ -32,20 +35,5 @@ export class BiomassCombustors extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.canReduceAnyProduction(Resources.PLANTS, 1);
-  }
-
-  public override bespokePlay(player: Player) {
-    this.produce(player);
-    return undefined;
-  }
-
-  public produce(player: Player) {
-    player.game.defer(
-      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
-    player.game.defer(new GainProduction(player, Resources.ENERGY, {count: 2}));
   }
 }

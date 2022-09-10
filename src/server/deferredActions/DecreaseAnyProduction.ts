@@ -2,7 +2,6 @@ import {Player} from '../Player';
 import {Resources} from '../../common/Resources';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
-import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 export type Options = {
   count: number,
@@ -23,7 +22,7 @@ export class DecreaseAnyProduction extends DeferredAction {
 
   public execute() {
     if (this.player.game.isSoloMode()) {
-      MonsInsurance.resolveInsuranceInSoloGame(this.player);
+      this.player.resolveInsuranceInSoloGame();
       return undefined;
     }
 

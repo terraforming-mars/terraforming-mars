@@ -35,7 +35,6 @@ export class ValleyTrust extends Card implements ICorporationCard {
     });
   }
 
-
   public override getCardDiscount(player: Player, card: IProjectCard) {
     // TODO(chosta) -> improve once the discounts property is given a go
     return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;

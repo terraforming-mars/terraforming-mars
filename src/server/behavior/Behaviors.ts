@@ -1,6 +1,7 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
+import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
 import {Behavior} from './Behavior';
@@ -20,6 +21,10 @@ export class Behaviors {
       //   return false;
       // }
     }
+    if (behavior.decreaseAnyProduction !== undefined) {
+      return player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count);
+    }
+
     return true;
   }
 
@@ -57,6 +62,9 @@ export class Behaviors {
       for (const entry of array) {
         player.game.defer(new AddResourcesToCard(player, entry.type, {count: entry.count}));
       }
+    }
+    if (behavior.decreaseAnyProduction !== undefined) {
+      player.game.defer(new DecreaseAnyProduction(player, behavior.decreaseAnyProduction.type, {count: behavior.decreaseAnyProduction.count}));
     }
   }
 }

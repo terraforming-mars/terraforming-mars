@@ -406,7 +406,7 @@ export class Player {
 
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
-      MonsInsurance.resolveInsurance(this);
+      this.resolveInsurance();
     }
   }
 
@@ -581,6 +581,42 @@ export class Player {
     return noTagsCount;
   }
 
+  /**
+   * In the multiplayer game, after an attack, the attacked player makes a claim
+   * for insurance. If Mons Insurance is in the game, the claimant will receive
+   * as much as possible from the insurer.
+   *
+   * `this` is the attacked player.
+   */
+  public resolveInsurance() {
+  // game.monsInsuranceOwner could be eliminated entirely if there
+  // was a fast version of getCardPlayer().
+  // I mean, it could be eliminated now, but getCardPlayer is expensive, and
+  // checking for who is Mons Insurance is called often even when the card
+  // is out of play.
+    const game = this.game;
+    if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== this.id) {
+      const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
+      // TODO(kberg): replace with "getCorporationOrThrow"?
+      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getCorporation(CardName.MONS_INSURANCE);
+      monsInsurance?.payDebt(monsInsuranceOwner, this);
+    }
+  }
+
+  /**
+   * In the solo game, Mons Insurance is only held by the sole player, who will
+   * have to pay the penalty for hurting the neutral player.
+   *
+   * `this` is the potentialInsurer: the solo player in the game. It's not
+   * clear yet whether the player has Mons Insurance, but if they do, they will
+   * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
+   * disappears.
+   */
+  public resolveInsuranceInSoloGame() {
+    const monsInsurance = <MonsInsurance> this.getCorporation(CardName.MONS_INSURANCE);
+    monsInsurance?.payDebt(this, undefined);
+  }
+
   public getColoniesCount() {
     if (!this.game.gameOptions.coloniesExtension) return 0;
 
@@ -626,7 +662,7 @@ export class Player {
       if (amountRemoved === 0) return;
       card.resourceCount -= amountRemoved;
 
-      if (removingPlayer !== undefined && removingPlayer !== this) MonsInsurance.resolveInsurance(this);
+      if (removingPlayer !== undefined && removingPlayer !== this) this.resolveInsurance();
 
       if (options?.log ?? true === true) {
         this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>

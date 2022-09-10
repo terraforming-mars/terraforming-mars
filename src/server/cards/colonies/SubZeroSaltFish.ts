@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -23,6 +22,10 @@ export class SubZeroSaltFish extends Card implements IProjectCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
+
+      behavior: {
+        decreaseAnyProduction: {type: Resources.PLANTS, count: 1},
+      },
 
       metadata: {
         cardNumber: 'C42',
@@ -46,18 +49,8 @@ export class SubZeroSaltFish extends Card implements IProjectCard {
     return true;
   }
 
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.canReduceAnyProduction(Resources.PLANTS, 1);
-  }
-
   public action(player: Player) {
     player.addResourceTo(this);
-    return undefined;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(
-      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
     return undefined;
   }
 }

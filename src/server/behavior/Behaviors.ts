@@ -2,7 +2,7 @@ import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
-import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
@@ -50,11 +50,25 @@ export class Behaviors {
       player.addUnits(behavior.stock);
     }
     if (behavior.drawCard !== undefined) {
-      if (typeof(behavior.drawCard) === 'number') {
-        player.drawCard(behavior.drawCard);
+      const drawCard = behavior.drawCard;
+      if (typeof(drawCard) === 'number') {
+        player.drawCard(drawCard);
       } else {
-        const options = behavior.drawCard;
-        player.drawCard(options.count, {tag: options.tag, resource: options.resource, cardType: options.type});
+        // This conditional could probably be removed, using the else clause for both.
+        if (drawCard.keep === undefined && drawCard.pay === undefined) {
+          player.drawCard(drawCard.count, {tag: drawCard.tag, resource: drawCard.resource, cardType: drawCard.type});
+        } else {
+          const input = player.drawCardKeepSome(drawCard.count, {
+            tag: drawCard.tag,
+            resource: drawCard.resource,
+            cardType: drawCard.type,
+            keepMax: drawCard.keep,
+            paying: drawCard.pay,
+          });
+          // By moving behavior to this object, Priority for this action is changing from DEFAULT.
+          // TODO: remove this comment block by 2023-10-01, or once bug reports on card drawing order subsides.
+          player.defer(input, Priority.DRAW_CARDS);
+        }
       }
     }
 

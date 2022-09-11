@@ -66,10 +66,19 @@ export interface Behavior {
 
 export interface DrawCard {
   count: number,
+  // The number of cards to keep, should be between [1..count-1]
+  keep?: number,
+  // When true, player has to pay to keep the card. (e.g. 3MC)
+  pay?: boolean,
+
+  // Discard cards without this tag
   tag?: Tag,
+  // Discard cards not of this type
   type?: CardType,
+  // Discard cards without this type of resource.
   resource?: CardResource,
 }
+
 export interface AddResource {
   count: number,
   type?: CardResource,

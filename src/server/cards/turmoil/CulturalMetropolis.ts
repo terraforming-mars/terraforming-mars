@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -21,6 +20,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1, megacredits: 3},
+        city: {},
       },
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
@@ -44,7 +44,6 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceCityTile(player));
     const title = 'Select where to send two delegates';
 
     const turmoil = Turmoil.getTurmoil(player.game);

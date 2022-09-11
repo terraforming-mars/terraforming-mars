@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('OpenCity', function() {
   let card: OpenCity;
@@ -33,7 +33,10 @@ describe('OpenCity', function() {
     (game as any).oxygenLevel = 12;
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(player.game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+
     action.cb(action.availableSpaces[0]);
     expect(game.getCitiesOnMarsCount()).to.eq(1);
 

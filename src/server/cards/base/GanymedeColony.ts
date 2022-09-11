@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
@@ -18,6 +17,9 @@ export class GanymedeColony extends Card implements IProjectCard {
       cost: 20,
 
       victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
+      behavior: {
+        city: {space: SpaceName.GANYMEDE_COLONY, type: SpaceType.COLONY},
+      },
 
       metadata: {
         description: 'Place a city tile ON THE RESERVED AREA.',
@@ -28,9 +30,5 @@ export class GanymedeColony extends Card implements IProjectCard {
         }),
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
-    return undefined;
   }
 }

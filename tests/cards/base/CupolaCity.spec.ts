@@ -2,15 +2,14 @@ import {expect} from 'chai';
 import {CupolaCity} from '../../../src/server/cards/base/CupolaCity';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('CupolaCity', function() {
   let card: CupolaCity;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -34,7 +33,9 @@ describe('CupolaCity', function() {
     player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(player.game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(player.production.energy).to.eq(0);

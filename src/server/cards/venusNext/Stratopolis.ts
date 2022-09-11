@@ -26,6 +26,7 @@ export class Stratopolis extends Card implements IActionCard {
 
       behavior: {
         production: {megacredits: 2},
+        city: {space: SpaceName.STRATOPOLIS, type: SpaceType.COLONY},
       },
 
       metadata: {
@@ -43,11 +44,6 @@ export class Stratopolis extends Card implements IActionCard {
         },
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
-    return undefined;
   }
 
   public getResCards(player: Player): ICard[] {

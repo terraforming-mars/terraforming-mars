@@ -1,9 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class PolarIndustries extends PreludeCard implements IProjectCard {
@@ -14,6 +12,7 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
 
       behavior: {
         production: {heat: 2},
+        ocean: {},
       },
 
       metadata: {
@@ -25,9 +24,5 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
         description: 'Increase your heat production 2 steps. Place an Ocean tile.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player));
-    return undefined;
   }
 }

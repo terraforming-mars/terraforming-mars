@@ -2,9 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class ConvoyFromEuropa extends Card implements IProjectCard {
@@ -17,6 +15,7 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
       tr: {oceans: 1},
 
       behavior: {
+        ocean: {},
         drawCard: 1,
       },
 
@@ -26,10 +25,5 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => b.oceans(1).cards(1)),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player));
-    return undefined;
   }
 }

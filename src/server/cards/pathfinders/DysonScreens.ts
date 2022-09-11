@@ -5,12 +5,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {Size} from '../../../common/cards/render/Size';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {IActionCard} from '../ICard';
 import {digit} from '../Options';
+import {SpaceType} from '../../../common/boards/SpaceType';
 
 export class DysonScreens extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -26,6 +26,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
         production: {energy: 2, heat: 2},
         drawCard: 1,
         global: {temperature: 1},
+        city: {space: SpaceName.DYSON_SCREENS, type: SpaceType.COLONY},
       },
 
       metadata: {
@@ -50,11 +51,6 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     player.titanium -= 2;
     player.production.add(Resources.HEAT, 1);
     player.production.add(Resources.ENERGY, 1);
-    return undefined;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.addCityTile(player, SpaceName.DYSON_SCREENS, SpaceType.COLONY);
     return undefined;
   }
 }

@@ -2,8 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -18,6 +16,10 @@ export class Gyropolis extends Card implements IProjectCard {
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 20,
 
+      behavior: {
+        city: {},
+      },
+
       metadata: {
         cardNumber: '230',
         renderData: CardRenderer.builder((b) => {
@@ -31,22 +33,19 @@ export class Gyropolis extends Card implements IProjectCard {
       },
     });
   }
+
   public override bespokeCanPlay(player: Player): boolean {
-    if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
     return player.production.energy >= 2;
   }
 
   public produce(player: Player) {
-    const tags: Array<Tag> = [Tag.VENUS, Tag.EARTH];
     player.production.add(Resources.ENERGY, -2);
+    const tags: Array<Tag> = [Tag.VENUS, Tag.EARTH];
     player.production.add(Resources.MEGACREDITS, player.tags.multipleCount(tags), {log: true});
   }
 
   public override bespokePlay(player: Player) {
     this.produce(player);
-    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space.id);
-      return undefined;
-    });
+    return undefined;
   }
 }

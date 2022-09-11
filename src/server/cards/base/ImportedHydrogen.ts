@@ -10,7 +10,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
@@ -22,6 +21,10 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 16,
       tr: {oceans: 1},
+
+      behavior: {
+        ocean: {},
+      },
 
       metadata: {
         cardNumber: '019',
@@ -43,7 +46,6 @@ export class ImportedHydrogen extends Card implements IProjectCard {
 
     const gainPlants = function() {
       player.addResource(Resources.PLANTS, 3, {log: true});
-      player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };
 
@@ -60,7 +62,6 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       const targetMicrobeCard = availableMicrobeCards[0];
       availableActions.push(new SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes', () => {
         player.addResourceTo(targetMicrobeCard, {qty: 3, log: true});
-        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else if (availableMicrobeCards.length > 1) {
@@ -68,7 +69,6 @@ export class ImportedHydrogen extends Card implements IProjectCard {
         'Add microbes',
         availableMicrobeCards, ([card]) => {
           player.addResourceTo(card, {qty: 3, log: true});
-          player.game.defer(new PlaceOceanTile(player));
           return undefined;
         }));
     }
@@ -77,13 +77,11 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       const targetAnimalCard = availableAnimalCards[0];
       availableActions.push(new SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, {qty: 2, log: true});
-        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else if (availableAnimalCards.length > 1) {
       availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, ([card]) => {
         player.addResourceTo(card, {qty: 2, log: true});
-        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     }

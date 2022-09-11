@@ -16,7 +16,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
 
       behavior: {
         global: {moonLogistics: 1},
-        addTradeFleet: 2,
+        colonies: {addTradeFleet: 2},
       },
 
       metadata: {

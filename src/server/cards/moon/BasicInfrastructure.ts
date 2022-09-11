@@ -13,7 +13,7 @@ export class BasicInfrastructure extends PreludeCard {
       tags: [Tag.MOON],
 
       behavior: {
-        addTradeFleet: 1,
+        colonies: {addTradeFleet: 1},
       },
 
       metadata: {

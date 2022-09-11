@@ -20,8 +20,10 @@ export class SpacePortColony extends Card implements IProjectCard {
       victoryPoints: 'special',
 
       behavior: {
-        colony: {allowDuplicates: true},
-        addTradeFleet: 1,
+        colonies: {
+          buildColony: {allowDuplicates: true},
+          addTradeFleet: 1,
+        },
       },
 
       metadata: {

@@ -15,7 +15,7 @@ export class CryoSleep extends Card implements IProjectCard {
       victoryPoints: 1,
 
       behavior: {
-        tradeDiscount: 1,
+        colonies: {tradeDiscount: 1},
       },
 
       metadata: {

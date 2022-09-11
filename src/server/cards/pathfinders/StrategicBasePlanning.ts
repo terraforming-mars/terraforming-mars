@@ -12,7 +12,7 @@ export class StrategicBasePlanning extends PreludeCard {
       tags: [Tag.BUILDING],
 
       behavior: {
-        colony: {},
+        colonies: {buildColony: {}},
         city: {},
       },
 

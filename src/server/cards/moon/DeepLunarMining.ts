@@ -16,7 +16,7 @@ export class DeepLunarMining extends Card {
 
       behavior: {
         production: {titanium: 2},
-        global: {moonMining: 1},
+        moon: {miningRate: 1},
       },
 
       metadata: {

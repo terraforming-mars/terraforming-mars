@@ -22,7 +22,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       tr: {moonMining: 1},
 
       behavior: {
-        global: {moonMining: 1},
+        moon: {miningRate: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1, {all})),

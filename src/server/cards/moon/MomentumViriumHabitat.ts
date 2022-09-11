@@ -19,6 +19,9 @@ export class MomentumViriumHabitat extends Card {
 
       behavior: {
         production: {heat: 2, megacredits: 3},
+        moon: {
+          colonyTile: {space: MoonSpaces.MOMENTUM_VIRIUM},
+        },
       },
       reserveUnits: {titanium: 1},
       tr: {moonColony: 1},

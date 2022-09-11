@@ -1,10 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 
 export class BasicInfrastructure extends PreludeCard {
   constructor() {
@@ -14,6 +12,7 @@ export class BasicInfrastructure extends PreludeCard {
 
       behavior: {
         addTradeFleet: 1,
+        moon: {roadTile: {}},
       },
 
       metadata: {
@@ -25,10 +24,5 @@ export class BasicInfrastructure extends PreludeCard {
       },
       tilesBuilt: [TileType.MOON_ROAD],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonRoadTile(player));
-    return undefined;
   }
 }

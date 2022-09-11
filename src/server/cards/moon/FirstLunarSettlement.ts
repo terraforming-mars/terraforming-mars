@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {IProjectCard} from '../IProjectCard';
@@ -17,6 +15,7 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
 
       behavior: {
         production: {megacredits: 1},
+        moon: {mineTile: {}},
       },
 
       metadata: {
@@ -27,10 +26,5 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonColonyTile(player));
-    return undefined;
   }
 }

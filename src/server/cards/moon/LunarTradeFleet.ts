@@ -18,7 +18,7 @@ export class LunarTradeFleet extends Card implements IProjectCard {
 
       behavior: {
         production: {megacredits: 1},
-        global: {moonLogistics: 1},
+        moon: {logisticsRate: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),

@@ -20,7 +20,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
       victoryPoints: 'special',
 
       behavior: {
-        global: {moonColony: 1},
+        moon: {colonyRate: 1},
       },
 
       metadata: {

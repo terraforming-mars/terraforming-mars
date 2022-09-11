@@ -9,8 +9,14 @@ import {Tag} from '../../common/cards/Tag';
 import {Units} from '../../common/Units';
 import {SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
+import {MoonSpaces} from '../moon/MoonSpaces';
+import {TileType} from '@/common/TileType';
 
 /** A set of steps that an action can perform in any specific order. */
+
+interface NoAttributes {
+  _unused?: undefined,
+}
 
 export interface Behavior {
   // Gain or lose production
@@ -38,14 +44,11 @@ export interface Behavior {
     oxygen?: 2 | 1 | -1 | -2;
   //   ocean?: number;
     venus?: 3 | 2 | 1 | -1;
-    moonColony?: number,
-    moonMining?: number,
-    moonLogistics?: number,
   },
 
   city?: {space?: SpaceId, type?: SpaceType},
-  greenery?: {},
-  ocean?: {},
+  greenery?: NoAttributes,
+  ocean?: NoAttributes,
 
   // // Remove plants from any player. Typical for asteroid cards.
   // removePlants: number,
@@ -74,6 +77,20 @@ export interface Behavior {
 
   // When trading increase the colony track this many steps.
   tradeOffset?: number,
+
+  moon?: {
+    colonyTile?: PlaceMoonTile,
+    mineTile?: PlaceMoonTile,
+    roadTile?: PlaceMoonTile,
+    tile?: PlaceMoonTile & {type: TileType, title?: string},
+    colonyRate?: number,
+    miningRate?: number,
+    logisticsRate?: number,
+  },
+}
+
+export interface PlaceMoonTile {
+  space?: MoonSpaces;
 }
 
 export interface DrawCard {

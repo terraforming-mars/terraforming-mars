@@ -15,7 +15,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
       tr: {moonLogistics: 1},
 
       behavior: {
-        global: {moonLogistics: 1},
+        moon: {logisticsRate: 1},
         addTradeFleet: 2,
       },
 

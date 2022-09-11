@@ -16,7 +16,7 @@ export class DarksideMeteorBombardment extends Card implements IProjectCard {
 
       behavior: {
         stock: {steel: 2, titanium: 2},
-        global: {moonMining: 2},
+        moon: {miningRate: 2},
       },
 
       metadata: {

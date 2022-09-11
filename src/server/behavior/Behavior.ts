@@ -56,6 +56,18 @@ export interface Behavior {
   // spendResourcesHere: number,
   // spendResource: {type: CardResource, count: number},
   // tile: {type: TileType, space?: SpaceId, spaceType?: SpaceType};
+  colony?: {
+    allowDuplicates?: boolean,
+  },
+
+  // Add this many trade fleets to your armada.
+  addTradeFleet?: number,
+
+  // When trading increase the colony track this many steps.
+  tradeDiscount?: number,
+
+  // When trading increase the colony track this many steps.
+  tradeOffset?: number,
 }
 
 export interface DrawCard {

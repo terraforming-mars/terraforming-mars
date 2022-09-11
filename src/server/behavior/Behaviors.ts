@@ -1,6 +1,7 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
+import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
 import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
@@ -24,9 +25,16 @@ export class Behaviors {
       // }
     }
     if (behavior.decreaseAnyProduction !== undefined) {
-      return player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count);
+      if (!player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count)) {
+        return false;
+      }
     }
 
+    if (behavior.colony !== undefined) {
+      if (player.colonies.getPlayableColonies(behavior.colony.allowDuplicates).length === 0) {
+        return false;
+      }
+    }
     return true;
   }
 
@@ -91,6 +99,34 @@ export class Behaviors {
     }
     if (behavior.removeAnyPlants !== undefined) {
       player.game.defer(new RemoveAnyPlants(player, behavior.removeAnyPlants));
+    }
+    if (behavior.colony !== undefined) {
+      player.game.defer(new BuildColony(player, {allowDuplicate: behavior.colony.allowDuplicates}));
+    }
+    if (behavior.addTradeFleet !== undefined) {
+      for (let idx = 0; idx < behavior.addTradeFleet; idx++) {
+        player.colonies.increaseFleetSize();
+      }
+    }
+    if (behavior.tradeDiscount !== undefined) {
+      player.colonies.tradeDiscount += behavior.tradeDiscount;
+    }
+    if (behavior.tradeOffset !== undefined) {
+      player.colonies.tradeOffset += behavior.tradeOffset;
+    }
+  }
+
+  public static discard(player: Player, _card: ICard, behavior: Behavior) {
+    if (behavior.addTradeFleet !== undefined) {
+      for (let idx = 0; idx < behavior.addTradeFleet; idx++) {
+        player.colonies.decreaseFleetSize();
+      }
+    }
+    if (behavior.tradeDiscount !== undefined) {
+      player.colonies.tradeDiscount -= behavior.tradeDiscount;
+    }
+    if (behavior.tradeOffset !== undefined) {
+      player.colonies.tradeOffset -= behavior.tradeOffset;
     }
   }
 }

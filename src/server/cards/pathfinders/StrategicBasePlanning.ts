@@ -4,7 +4,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
-import {BuildColony} from '../../deferredActions/BuildColony';
 import {Tag} from '../../../common/cards/Tag';
 
 export class StrategicBasePlanning extends PreludeCard {
@@ -12,6 +11,10 @@ export class StrategicBasePlanning extends PreludeCard {
     super({
       name: CardName.STRATEGIC_BASE_PLANNING,
       tags: [Tag.BUILDING],
+
+      behavior: {
+        colony: {},
+      },
 
       metadata: {
         cardNumber: 'P08',
@@ -25,7 +28,6 @@ export class StrategicBasePlanning extends PreludeCard {
   public override bespokePlay(player: Player) {
     player.deductResource(Resources.MEGACREDITS, 8);
     player.game.defer(new PlaceCityTile(player));
-    player.game.defer(new BuildColony(player));
     return undefined;
   }
 }

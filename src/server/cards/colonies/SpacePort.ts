@@ -19,6 +19,7 @@ export class SpacePort extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1, megacredits: 4},
+        addTradeFleet: 1,
       },
 
       requirements: CardRequirements.builder((b) => b.colonies()),
@@ -46,15 +47,9 @@ export class SpacePort extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.colonies.increaseFleetSize();
-
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
       return undefined;
     });
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonies.decreaseFleetSize();
   }
 }

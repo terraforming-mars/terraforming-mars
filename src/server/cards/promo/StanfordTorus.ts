@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
@@ -17,6 +16,10 @@ export class StanfordTorus extends Card implements IProjectCard {
       cost: 12,
       victoryPoints: 2,
 
+      behavior: {
+        city: {space: SpaceName.STANFORD_TORUS, type: SpaceType.COLONY},
+      },
+
       metadata: {
         cardNumber: 'X12',
         renderData: CardRenderer.builder((b) => {
@@ -25,10 +28,5 @@ export class StanfordTorus extends Card implements IProjectCard {
         description: 'Place a city tile IN SPACE, outside and separate from the planet.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.addCityTile(player, SpaceName.STANFORD_TORUS, SpaceType.COLONY);
-    return undefined;
   }
 }

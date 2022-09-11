@@ -1,8 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class ExperimentalForest extends PreludeCard {
@@ -13,6 +11,7 @@ export class ExperimentalForest extends PreludeCard {
 
       behavior: {
         drawCard: {count: 2, tag: Tag.PLANT},
+        greenery: {},
       },
 
       metadata: {
@@ -23,10 +22,6 @@ export class ExperimentalForest extends PreludeCard {
         description: 'Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceGreeneryTile(player));
-    return undefined;
   }
 }
 

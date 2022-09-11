@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {SpacePort} from '../../../src/server/cards/colonies/SpacePort';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
+import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 describe('SpacePort', function() {
   let card: SpacePort;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SpacePort();
@@ -38,7 +38,10 @@ describe('SpacePort', function() {
     player.game.colonies[0].colonies.push(player.id);
     expect(player.simpleCanPlay(card)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(player.game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+
     action.cb(action.availableSpaces[0]);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(4);

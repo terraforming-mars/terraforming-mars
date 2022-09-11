@@ -8,7 +8,6 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {played} from '../Options';
 
 export class CeresSpaceport extends Card implements IProjectCard {
@@ -23,6 +22,8 @@ export class CeresSpaceport extends Card implements IProjectCard {
 
       behavior: {
         drawCard: 1,
+        ocean: {},
+        city: {space: SpaceName.CERES_SPACEPORT, type: SpaceType.COLONY},
       },
 
       metadata: {
@@ -40,12 +41,9 @@ export class CeresSpaceport extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    const game = player.game;
     player.production.add(Resources.MEGACREDITS, 2);
     // The +1 below is for the two Jovian tags on this card.
     player.production.add(Resources.TITANIUM, (1 + Math.floor(player.tags.count(Tag.JOVIAN) / 2)), {log: true});
-    player.game.addCityTile(player, SpaceName.CERES_SPACEPORT, SpaceType.COLONY);
-    game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

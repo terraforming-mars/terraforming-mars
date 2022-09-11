@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {Resources} from '../../../common/Resources';
 import {IActionCard, ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -21,6 +20,10 @@ export class MaxwellBase extends Card implements IActionCard {
 
       requirements: CardRequirements.builder((b) => b.venus(12)),
       victoryPoints: 3,
+      behavior: {
+        production: {energy: -1},
+        city: {space: SpaceName.MAXWELL_BASE, type: SpaceType.COLONY},
+      },
 
       metadata: {
         cardNumber: '238',
@@ -36,14 +39,6 @@ export class MaxwellBase extends Card implements IActionCard {
         },
       },
     });
-  }
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.production.energy >= 1;
-  }
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.ENERGY, -1);
-    player.game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
-    return undefined;
   }
 
   public getResCards(player: Player): ICard[] {

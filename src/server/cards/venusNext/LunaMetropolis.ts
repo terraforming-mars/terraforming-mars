@@ -19,6 +19,9 @@ export class LunaMetropolis extends Card implements IProjectCard {
       cost: 21,
 
       victoryPoints: 2,
+      behavior: {
+        city: {space: SpaceName.LUNA_METROPOLIS, type: SpaceType.COLONY},
+      },
 
       metadata: {
         cardNumber: '236',
@@ -32,7 +35,6 @@ export class LunaMetropolis extends Card implements IProjectCard {
   }
   public override bespokePlay(player: Player) {
     player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.EARTH) + 1, {log: true});
-    player.game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);
     return undefined;
   }
 }

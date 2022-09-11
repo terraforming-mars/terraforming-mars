@@ -7,6 +7,8 @@ import {Tag} from '../../common/cards/Tag';
 // import {CardResource} from '../../common/CardResource';
 // import {TileType} from '../../common/TileType';
 import {Units} from '../../common/Units';
+import {SpaceId} from '../../common/Types';
+import {SpaceType} from '../../common/boards/SpaceType';
 
 /** A set of steps that an action can perform in any specific order. */
 
@@ -40,6 +42,10 @@ export interface Behavior {
     moonMining?: number,
     moonLogistics?: number,
   },
+
+  city?: {space?: SpaceId, type?: SpaceType},
+  greenery?: {},
+  ocean?: {},
 
   // // Remove plants from any player. Typical for asteroid cards.
   // removePlants: number,

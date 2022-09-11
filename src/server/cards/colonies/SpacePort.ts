@@ -3,8 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -19,6 +17,7 @@ export class SpacePort extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1, megacredits: 4},
+        city: {},
       },
 
       requirements: CardRequirements.builder((b) => b.colonies()),
@@ -37,7 +36,6 @@ export class SpacePort extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: Player): boolean {
-    if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
     let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
@@ -47,11 +45,7 @@ export class SpacePort extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.colonies.increaseFleetSize();
-
-    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space.id);
-      return undefined;
-    });
+    return undefined;
   }
 
   public onDiscard(player: Player): void {

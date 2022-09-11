@@ -26,6 +26,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
 
       behavior: {
         production: {megacredits: 3},
+        city: {space: SpaceName.VENERA_BASE, type: SpaceType.COLONY},
       },
 
       metadata: {
@@ -48,11 +49,6 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
 
   public action(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tag.VENUS}));
-    return undefined;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.addCityTile(player, SpaceName.VENERA_BASE, SpaceType.COLONY);
     return undefined;
   }
 }

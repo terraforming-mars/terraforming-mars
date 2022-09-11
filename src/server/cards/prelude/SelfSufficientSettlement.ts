@@ -1,9 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 // TODO(kberg): Add a test
@@ -15,6 +13,7 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
 
       behavior: {
         production: {megacredits: 2},
+        city: {},
       },
 
       metadata: {
@@ -25,9 +24,5 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
         description: 'Increase your M€ production 2 steps. Place a City tile.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceCityTile(player));
-    return undefined;
   }
 }

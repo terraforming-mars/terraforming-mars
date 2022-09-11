@@ -1,11 +1,9 @@
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 
 export class PermafrostExtraction extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +12,10 @@ export class PermafrostExtraction extends Card implements IProjectCard {
       name: CardName.PERMAFROST_EXTRACTION,
       cost: 8,
       tr: {oceans: 1},
+
+      behavior: {
+        ocean: {},
+      },
 
       requirements: CardRequirements.builder((b) => b.temperature(-8)),
       metadata: {
@@ -24,10 +26,5 @@ export class PermafrostExtraction extends Card implements IProjectCard {
         description: 'Requires -8 C or warmer. Place 1 ocean tile.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player));
-    return undefined;
   }
 }

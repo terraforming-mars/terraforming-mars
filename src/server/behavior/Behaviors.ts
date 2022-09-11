@@ -4,6 +4,9 @@ import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
 import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
+import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
+import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
@@ -24,6 +27,7 @@ export class Behaviors {
       //   return false;
       // }
     }
+
     if (behavior.decreaseAnyProduction !== undefined) {
       if (!player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count)) {
         return false;
@@ -34,6 +38,16 @@ export class Behaviors {
       if (player.colonies.getPlayableColonies(behavior.colony.allowDuplicates).length === 0) {
         return false;
       }
+    }
+
+    if (behavior.city !== undefined) {
+      if (behavior.city.space === undefined) {
+        return player.game.board.getAvailableSpacesForCity(player).length > 0;
+      }
+    }
+
+    if (behavior.greenery !== undefined) {
+      return player.game.board.getAvailableSpacesForGreenery(player).length > 0;
     }
     return true;
   }
@@ -113,6 +127,20 @@ export class Behaviors {
     }
     if (behavior.tradeOffset !== undefined) {
       player.colonies.tradeOffset += behavior.tradeOffset;
+    }
+
+    if (behavior.ocean !== undefined) {
+      player.game.defer(new PlaceOceanTile(player));
+    }
+    if (behavior.city !== undefined) {
+      if (behavior.city.space !== undefined) {
+        player.game.addCityTile(player, behavior.city.space, behavior.city.type);
+      } else {
+        player.game.defer(new PlaceCityTile(player));
+      }
+    }
+    if (behavior.greenery !== undefined) {
+      player.game.defer(new PlaceGreeneryTile(player));
     }
   }
 

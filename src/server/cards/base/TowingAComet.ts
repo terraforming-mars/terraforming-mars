@@ -2,9 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class TowingAComet extends Card implements IProjectCard {
@@ -19,6 +17,7 @@ export class TowingAComet extends Card implements IProjectCard {
       behavior: {
         stock: {plants: 2},
         global: {oxygen: 1},
+        ocean: {},
       },
 
       metadata: {
@@ -30,9 +29,5 @@ export class TowingAComet extends Card implements IProjectCard {
         description: 'Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player));
-    return undefined;
   }
 }

@@ -9,7 +9,7 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('Gyropolis', function() {
   let card: Gyropolis;
@@ -28,8 +28,12 @@ describe('Gyropolis', function() {
 
     player.playedCards.push(card1, card2);
     player.production.add(Resources.ENERGY, 2);
+
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(player.game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+
     expect(action.cb(action.availableSpaces[0])).is.undefined;
     expect(action.availableSpaces[0].player).to.eq(player);
     expect(action.availableSpaces[0].tile).is.not.undefined;

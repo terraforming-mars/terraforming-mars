@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SubterraneanReservoir extends Card implements IProjectCard {
@@ -14,6 +12,10 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
       cost: 11,
       tr: {oceans: 1},
 
+      behavior: {
+        ocean: {},
+      },
+
       metadata: {
         cardNumber: '127',
         renderData: CardRenderer.builder((b) => {
@@ -22,11 +24,6 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
         description: 'Place 1 ocean tile.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player));
-    return undefined;
   }
 }
 

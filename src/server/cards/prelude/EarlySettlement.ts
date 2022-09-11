@@ -1,8 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class EarlySettlement extends PreludeCard {
@@ -13,6 +11,7 @@ export class EarlySettlement extends PreludeCard {
 
       behavior: {
         production: {plants: 1},
+        city: {},
       },
 
       metadata: {
@@ -23,9 +22,5 @@ export class EarlySettlement extends PreludeCard {
         description: 'Increase your plant production 1 step. Place a city tile.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceCityTile(player));
-    return undefined;
   }
 }

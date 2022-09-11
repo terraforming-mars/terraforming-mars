@@ -10,7 +10,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
@@ -27,6 +26,7 @@ export class LargeConvoy extends Card implements IProjectCard {
 
       behavior: {
         drawCard: 2,
+        ocean: {},
       },
 
       metadata: {
@@ -45,7 +45,6 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     const gainPlants = function() {
       player.addResource(Resources.PLANTS, 5, {log: true});
-      player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };
 
@@ -60,7 +59,6 @@ export class LargeConvoy extends Card implements IProjectCard {
       const targetAnimalCard = animalCards[0];
       availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
-        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else {
@@ -71,7 +69,6 @@ export class LargeConvoy extends Card implements IProjectCard {
           animalCards,
           ([card]) => {
             player.addResourceTo(card, {qty: 4, log: true});
-            player.game.defer(new PlaceOceanTile(player));
             return undefined;
           },
         ),

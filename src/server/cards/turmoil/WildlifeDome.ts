@@ -3,10 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -20,6 +17,10 @@ export class WildlifeDome extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
       tr: {oxygen: 1},
 
+      behavior: {
+        greenery: {},
+      },
+
       metadata: {
         cardNumber: 'T15',
         renderData: CardRenderer.builder((b) => {
@@ -27,16 +28,6 @@ export class WildlifeDome extends Card implements IProjectCard {
         }),
         description: 'Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.',
       },
-    });
-  }
-
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.game.board.getAvailableSpacesForGreenery(player).length > 0;
-  }
-
-  public override bespokePlay(player: Player) {
-    return new SelectSpace('Select space for greenery tile', player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-      return player.game.addGreenery(player, space.id);
     });
   }
 }

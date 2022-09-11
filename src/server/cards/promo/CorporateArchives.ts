@@ -1,12 +1,9 @@
-import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {SelectCard} from '../../inputs/SelectCard';
-
 
 export class CorporateArchives extends PreludeCard {
   constructor() {
@@ -14,6 +11,10 @@ export class CorporateArchives extends PreludeCard {
       name: CardName.CORPORATE_ARCHIVES,
       tags: [Tag.SCIENCE],
       startingMegacredits: 13,
+
+      behavior: {
+        drawCard: {count: 7, keep: 2},
+      },
 
       metadata: {
         cardNumber: 'X58',
@@ -26,8 +27,8 @@ export class CorporateArchives extends PreludeCard {
       },
     });
   }
-  public override bespokePlay(player: Player): SelectCard<IProjectCard> {
+  public override bespokePlay(player: Player) {
     player.megaCredits += this.startingMegaCredits;
-    return player.drawCardKeepSome(7, {keepMax: 2});
+    return undefined;
   }
 }

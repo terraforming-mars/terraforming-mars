@@ -8,35 +8,38 @@ import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
-import {CardManifest} from './cards/CardManifest';
+import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
-import {Deck} from './Deck';
 import {GameModule} from '../common/cards/GameModule';
 import {GameOptions} from './GameOptions';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {IProjectCard} from './cards/IProjectCard';
+import {StandardProjectCard} from './cards/StandardProjectCard';
+import {PreludeCard} from './cards/prelude/PreludeCard';
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
  *
  * It only includes manifests appropriate to the modules for the game,
- * and considers the exclusion list, and extra-module compatibility
+ * and considers the banned cards, and extra-module compatibility
  * (e.g. cards in one module that can't be played without another one.)
  *
  * Therefore, this is only used when constructing a brand new instance.
  *
  * ... and one other place. When trying to determine the available standard
  * projects for a game. This is just done on the fly all the time, rather
- * that store them. (We should do that.)
+ * that store them. (We should fix that.)
  */
 export class GameCards {
   private readonly gameOptions: GameOptions;
-  private readonly manifests: Array<CardManifest>;
+  private readonly moduleManifests: Array<ModuleManifest>;
 
   public constructor(gameOptions: GameOptions) {
     this.gameOptions = gameOptions;
 
-    const manifests: Array<[boolean, CardManifest]> = [
+    const manifests: Array<[boolean, ModuleManifest]> = [
       [true, BASE_CARD_MANIFEST],
       [gameOptions.corporateEra, CORP_ERA_CARD_MANIFEST],
       [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
@@ -50,10 +53,10 @@ export class GameCards {
       [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
     ];
 
-    this.manifests = manifests.filter((a) => a[0]).map((a) => a[1]);
+    this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);
   }
 
-  private static include(gameOptions: GameOptions, cf: ICardFactory<ICard>): boolean {
+  private static isCompatibleWith(cf: ICardFactory<ICard>, gameOptions: GameOptions): boolean {
     if (cf.compatibility === undefined) {
       return true;
     }
@@ -71,49 +74,62 @@ export class GameCards {
       case 'pathfinders':
         return gameOptions.pathfindersExpansion;
       default:
-        throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
+        throw new Error(`Unhandled expansion type ${expansion}`);
       }
     });
   }
 
-  private addDeck<T extends ICard>(cards: Array<T>, deck: Deck<T>): void {
-    for (const cf of deck.factories.values()) {
-      if (cf.Factory === undefined) continue;
-      if (GameCards.include(this.gameOptions, cf)) {
-        cards.push(new cf.Factory());
-      }
-    }
+  private instantiate<T extends ICard>(manifest: CardManifest<T>): Array<T> {
+    return CardManifest.values(manifest)
+      .filter((factory) => GameCards.isCompatibleWith(factory, this.gameOptions))
+      .map((factory) => new factory.Factory());
   }
 
   public getProjectCards() {
-    return this.getCards((manifest) => manifest.projectCards);
+    return this.getCards<IProjectCard>('projectCards');
   }
   public getStandardProjects() {
-    return this.getCards((manifest) => manifest.standardProjects);
+    return this.getCards<StandardProjectCard>('standardProjects');
   }
-  public getCorporationCards() {
-    return this.getCards((manifest) => manifest.corporationCards)
+  public getCorporationCards(): Array<ICorporationCard> {
+    return this.getCards<ICorporationCard>('corporationCards')
       .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
   }
   public getPreludeCards() {
-    const preludes = this.getCards((manifest) => manifest.preludeCards);
+    const preludes = this.getCards<PreludeCard>('preludeCards');
     // https://github.com/terraforming-mars/terraforming-mars/issues/2833
     // Make Valley Trust playable even when Preludes is out of the game
     // by preparing a deck of preludes.
-    if (preludes.length === 0) {
-      this.addDeck(preludes, PRELUDE_CARD_MANIFEST.preludeCards);
+    if (preludes.length > 0) {
+      return preludes;
     }
-    return preludes;
+    return this.instantiate(PRELUDE_CARD_MANIFEST.preludeCards);
   }
 
-  private getCards<T extends ICard>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
-    const cards: Array<T> = [];
-    for (const manifest of this.manifests) {
-      this.addDeck(cards, getDeck(manifest));
+  private getCards<T extends ICard>(cardManifestName: keyof ModuleManifest) : Array<T> {
+    let cards: Array<T> = [];
+    for (const moduleManifest of this.moduleManifests) {
+      // a bit of a hack, but since this is a private API, this is reasonable.
+      const cardManifest: CardManifest<T> = moduleManifest[cardManifestName] as CardManifest<T>;
+      cards.push(...this.instantiate(cardManifest));
     }
+
+    cards = this.filterBannedCards(cards);
+    cards = this.filterReplacedCards(cards);
+    return cards;
+  }
+
+  /* Remove cards excluded by choice in game options */
+  private filterBannedCards<T extends ICard>(cards: Array<T>): Array<T> {
     return cards.filter((card) => {
-      if (this.gameOptions.bannedCards.includes(card.name)) return false;
-      for (const manifest of this.manifests) {
+      return this.gameOptions.bannedCards.includes(card.name) !== true;
+    });
+  }
+
+  /* Remove cards that are replaced by new versions in other manifests */
+  private filterReplacedCards<T extends ICard>(cards: Array<T>): Array<T> {
+    return cards.filter((card) => {
+      for (const manifest of this.moduleManifests) {
         if (manifest.cardsToRemove.has(card.name)) return false;
       }
       return true;

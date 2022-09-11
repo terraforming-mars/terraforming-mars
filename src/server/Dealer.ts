@@ -21,13 +21,13 @@ export class Dealer {
     this.random = random;
   }
 
-  public static newInstance(cardsForGame: GameCards, random: Random = UnseededRandom.INSTANCE): Dealer {
+  public static newInstance(gameCards: GameCards, random: Random = UnseededRandom.INSTANCE): Dealer {
     const dealer = new Dealer(random);
 
-    dealer.deck = Dealer.shuffle(cardsForGame.getProjectCards(), random);
-    dealer.corporationCards = cardsForGame.getCorporationCards();
+    dealer.deck = Dealer.shuffle(gameCards.getProjectCards(), random);
+    dealer.corporationCards = gameCards.getCorporationCards();
 
-    dealer.preludeDeck = Dealer.shuffle(cardsForGame.getPreludeCards(), random);
+    dealer.preludeDeck = Dealer.shuffle(gameCards.getPreludeCards(), random);
     // Special-case prelude deck: both The New Space Race and By-Election cannot
     // be used in the same game.
     const indexes = INCOMPATIBLE_PRELUDES.map((name) => dealer.preludeDeck.findIndex((c) => c.name === name));

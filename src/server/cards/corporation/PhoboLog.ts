@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -18,6 +17,7 @@ export class PhoboLog extends Card implements ICorporationCard {
 
       behavior: {
         stock: {titanium: 10},
+        titanumValue: 1,
       },
 
       metadata: {
@@ -34,9 +34,5 @@ export class PhoboLog extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.increaseTitaniumValue();
-    return undefined;
   }
 }

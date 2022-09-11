@@ -30,7 +30,7 @@ export class RimFreighters extends Card implements IProjectCard {
     return undefined;
   }
 
-  public onDiscard(player: Player): void {
+  public override bespokeOnDiscard(player: Player): void {
     player.colonies.tradeDiscount--;
   }
 }

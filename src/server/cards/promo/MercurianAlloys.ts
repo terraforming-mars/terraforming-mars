@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -16,6 +15,10 @@ export class MercurianAlloys extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       cost: 3,
 
+      behavior: {
+        titanumValue: 1,
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
       metadata: {
         cardNumber: 'X07',
@@ -27,14 +30,5 @@ export class MercurianAlloys extends Card implements IProjectCard {
         description: 'Requires 2 Science tags.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTitaniumValue();
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.decreaseTitaniumValue();
   }
 }

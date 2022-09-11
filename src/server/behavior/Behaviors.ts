@@ -49,6 +49,13 @@ export class Behaviors {
     if (behavior.stock) {
       player.addUnits(behavior.stock);
     }
+    if (behavior.steelValue === 1) {
+      player.increaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.increaseTitaniumValue();
+    }
+
     if (behavior.drawCard !== undefined) {
       const drawCard = behavior.drawCard;
       if (typeof(drawCard) === 'number') {
@@ -116,6 +123,15 @@ export class Behaviors {
     }
     if (behavior.greenery !== undefined) {
       player.game.defer(new PlaceGreeneryTile(player));
+    }
+  }
+
+  public static onDiscard(player: Player, behavior: Behavior) {
+    if (behavior.steelValue === 1) {
+      player.decreaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.decreaseTitaniumValue();
     }
   }
 }

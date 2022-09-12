@@ -30,7 +30,7 @@ describe('ExperiencedMartians', function() {
     const b = fakeCard({name: 'B' as CardName, tags: []});
     const c = fakeCard({name: 'C' as CardName, tags: [Tag.MARS]});
     const d = fakeCard({name: 'D' as CardName, tags: [Tag.BUILDING]});
-    game.dealer.deck.push(a, b, c, d);
+    game.projectDeck.drawPile.push(a, b, c, d);
 
     card.play(player);
 

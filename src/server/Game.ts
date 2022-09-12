@@ -67,6 +67,7 @@ import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
+import {CorporationDeck, PreludeDeck, ProjectDeck} from './cards/Deck';
 
 export interface Score {
   corporation: String;
@@ -85,7 +86,9 @@ export class Game {
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
-  public dealer: Dealer;
+  public projectDeck: ProjectDeck;
+  public preludeDeck: PreludeDeck;
+  public corporationDeck: CorporationDeck;
   public board: Board;
 
   // Global parameters
@@ -141,7 +144,9 @@ export class Game {
     public gameOptions: GameOptions,
     rng: SeededRandom,
     board: Board,
-    dealer: Dealer) {
+    projectDeck: ProjectDeck,
+    corporationDeck: CorporationDeck,
+    preludeDeck: PreludeDeck) {
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -160,7 +165,9 @@ export class Game {
     this.activePlayer = activePlayer;
     this.first = first;
     this.rng = rng;
-    this.dealer = dealer;
+    this.projectDeck = projectDeck;
+    this.corporationDeck = corporationDeck;
+    this.preludeDeck = preludeDeck;
     this.board = board;
 
     this.players.forEach((player) => {
@@ -181,9 +188,16 @@ export class Game {
 
     const rng = new SeededRandom(seed);
     const board = GameSetup.newBoard(gameOptions, rng);
-    const cardFinder = new CardFinder();
-    const cardsForGame = new GameCards(gameOptions);
-    const dealer = Dealer.newInstance(cardsForGame);
+    const gameCards = new GameCards(gameOptions);
+
+    const projectDeck = new ProjectDeck(gameCards.getProjectCards(), [], rng);
+    projectDeck.shuffle();
+
+    const corporationDeck = new CorporationDeck(gameCards.getCorporationCards(), [], rng);
+    corporationDeck.shuffle(gameOptions.customCorporationsList);
+
+    const preludeDeck = new PreludeDeck(gameCards.getPreludeCards(), [], rng);
+    preludeDeck.shuffle(gameOptions.customPreludes);
 
     const activePlayer = firstPlayer.id;
 
@@ -198,7 +212,7 @@ export class Game {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, dealer);
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
     game.spectatorId = spectatorId;
     // Initialize Ares data
     if (gameOptions.aresExtension) {
@@ -211,10 +225,10 @@ export class Game {
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
-      const dealer = new ColonyDealer(rng, gameOptions);
-      dealer.drawColonies(players.length);
-      game.colonies = dealer.colonies;
-      game.discardedColonies = dealer.discardedColonies;
+      const colonyDealer = new ColonyDealer(rng, gameOptions);
+      colonyDealer.drawColonies(players.length);
+      game.colonies = colonyDealer.colonies;
+      game.discardedColonies = colonyDealer.discardedColonies;
     }
 
     // Add Turmoil stuff
@@ -241,44 +255,12 @@ export class Game {
       game.pathfindersData = PathfindersExpansion.initialize(gameOptions);
     }
 
-    // Set up custom corporation list
-    let corporationCards = game.dealer.corporationCards;
-
-    const minCorpsRequired = players.length * gameOptions.startingCorporations;
-    if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-      const customCorporationCards: Array<ICorporationCard> = [];
-      for (const corp of gameOptions.customCorporationsList) {
-        const customCorp = cardFinder.getCorporationCardByName(corp);
-        if (customCorp) customCorporationCards.push(customCorp);
-      }
-      corporationCards = customCorporationCards;
-    }
-
-    corporationCards = Dealer.shuffle(corporationCards);
-
     // Failsafe for exceeding corporation pool
-    if (minCorpsRequired > corporationCards.length) {
+    // (I do not think this is necessary any further given how corporation cards are stored now)
+    const minCorpsRequired = players.length * gameOptions.startingCorporations;
+    if (minCorpsRequired > corporationDeck.drawPile.length) {
       gameOptions.startingCorporations = 2;
     }
-
-    // Set up custom preludes list
-    let preludeCards: Array<IProjectCard> = game.dealer.preludeDeck;
-    if (gameOptions.preludeExtension) {
-      const minPreludesRequired = players.length * constants.PRELUDE_CARDS_DEALT_PER_PLAYER;
-      const customPreludes: Array<IProjectCard> = [];
-      if (gameOptions.customPreludes && gameOptions.customPreludes.length >= minPreludesRequired) {
-        for (const preludeName of gameOptions.customPreludes) {
-          const prelude = cardFinder.getPreludeByName(preludeName);
-          if (prelude) customPreludes.push(prelude);
-        }
-        // Failsafe for custom list not being large enough
-        if (minPreludesRequired <= preludeCards.length) {
-          preludeCards = customPreludes;
-        }
-      }
-    }
-
-    preludeCards = Dealer.shuffle(preludeCards);
 
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
@@ -304,26 +286,17 @@ export class Game {
         gameOptions.turmoilExtension ||
         gameOptions.initialDraftVariant) {
         for (let i = 0; i < gameOptions.startingCorporations; i++) {
-          const corpCard = corporationCards.pop();
-          if (corpCard !== undefined) {
-            player.dealtCorporationCards.push(corpCard);
-          } else {
-            throw new Error('No corporation card dealt for player');
-          }
+          player.dealtCorporationCards.push(corporationDeck.deal(game));
         }
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(dealer.dealCard(game));
+            player.dealtProjectCards.push(projectDeck.deal(game));
           }
         }
         if (gameOptions.preludeExtension) {
           for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
-            const prelude = preludeCards.pop();
-            if (prelude !== undefined) {
-              player.dealtPreludeCards.push(prelude);
-            } else {
-              throw new Error('No prelude card dealt for player');
-            }
+            const prelude = preludeDeck.deal(game);
+            player.dealtPreludeCards.push(prelude);
           }
         }
       } else {
@@ -346,9 +319,7 @@ export class Game {
     if (gameOptions.corporationsDraft) {
       game.phase = Phase.CORPORATIONDRAFTING;
       for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
-        const card = corporationCards.pop();
-        if (card === undefined) throw new Error('No more corporation cards for game ' + id);
-        game.corporationsToDraft.push(card);
+        game.corporationsToDraft.push(game.corporationDeck.deal(game));
       }
       // First player should be the last player
       const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
@@ -391,8 +362,8 @@ export class Game {
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies.map((colony) => colony.serialize()),
+      corporationDeck: this.corporationDeck.serialize(),
       currentSeed: this.rng.current,
-      dealer: this.dealer.serialize(),
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
       draftedPlayers: Array.from(this.draftedPlayers),
@@ -413,6 +384,8 @@ export class Game {
       pathfindersData: PathfindersData.serialize(this.pathfindersData),
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
+      preludeDeck: this.preludeDeck.serialize(),
+      projectDeck: this.projectDeck.serialize(),
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.rng.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
@@ -599,7 +572,7 @@ export class Game {
       // discard all unpurchased cards
       player.dealtProjectCards.forEach((card) => {
         if (player.cardsInHand.includes(card) === false) {
-          this.dealer.discard(card);
+          this.projectDeck.discard(card);
         }
       });
 
@@ -1553,15 +1526,15 @@ export class Game {
 
   public discardForCost(cardCount: 1 | 2, toPlace: TileType) {
     if (cardCount === 1) {
-      const card = this.dealer.dealCard(this);
-      this.dealer.discard(card);
+      const card = this.projectDeck.deal(this);
+      this.projectDeck.discard(card);
       this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
       return card.cost;
     } else {
-      const card1 = this.dealer.dealCard(this);
-      this.dealer.discard(card1);
-      const card2 = this.dealer.dealCard(this);
-      this.dealer.discard(card2);
+      const card1 = this.projectDeck.deal(this);
+      this.projectDeck.discard(card1);
+      const card2 = this.projectDeck.deal(this);
+      this.projectDeck.discard(card2);
       this.log('Drew and discarded ${0} (cost ${1}) and ${2} (cost ${3}) to place a ${4}', (b) => b.card(card1).number(card1.cost).card(card2).number(card2.cost).tileType(toPlace));
       return card1.cost + card2.cost;
     }
@@ -1594,10 +1567,28 @@ export class Game {
 
     const board = GameSetup.deserializeBoard(players, gameOptions, d);
 
-    // Rebuild dealer object to be sure that we will have cards in the same order
-    const dealer = Dealer.deserialize(d.dealer);
     const rng = new SeededRandom(d.seed, d.currentSeed);
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, dealer);
+
+    let projectDeck: ProjectDeck;
+    let corporationDeck: CorporationDeck;
+    let preludeDeck: PreludeDeck;
+    // Rebuild dealer object to be sure that we will have cards in the same order
+    if (d.dealer !== undefined) {
+      const dealer = Dealer.deserialize(d.dealer);
+      projectDeck = new ProjectDeck(dealer.deck, dealer.discarded, rng);
+      corporationDeck = new CorporationDeck(dealer.corporationCards, [], rng);
+      preludeDeck = new PreludeDeck(dealer.preludeDeck, [], rng);
+    } else {
+      // TODO(kberg): Delete this conditional when `d.dealer` is removed.
+      if (d.projectDeck === undefined || d.corporationDeck === undefined ||d.preludeDeck === undefined) {
+        throw new Error('Wow');
+      }
+      projectDeck = ProjectDeck.deserialize(d.projectDeck);
+      corporationDeck = CorporationDeck.deserialize(d.corporationDeck);
+      preludeDeck = PreludeDeck.deserialize(d.preludeDeck);
+    }
+
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
@@ -1630,9 +1621,9 @@ export class Game {
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
       game.colonies = ColonyDeserializer.deserializeAndFilter(d.colonies);
-      const dealer = new ColonyDealer(rng, gameOptions);
-      dealer.restore(game.colonies);
-      game.discardedColonies = dealer.discardedColonies;
+      const colonyDealer = new ColonyDealer(rng, gameOptions);
+      colonyDealer.restore(game.colonies);
+      game.discardedColonies = colonyDealer.discardedColonies;
     }
 
     // Reload turmoil elements if needed

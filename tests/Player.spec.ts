@@ -596,6 +596,7 @@ describe('Player', function() {
     const game = Game.newInstance('gameid', [player], player);
 
     const log = game.gameLog;
+
     log.length = 0; // Empty it out.
 
     const card = new Pets();

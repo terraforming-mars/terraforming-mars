@@ -37,7 +37,7 @@ describe('Merger', function() {
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     // Preset corporation deck for testing
-    game.dealer.corporationCards = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
+    game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
   });
 
   it('Can play as long as have enough M€', function() {
@@ -47,7 +47,18 @@ describe('Merger', function() {
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
-    expect(selectCorp.cards).has.length(4);
+    expect(selectCorp.config.enabled).deep.eq([
+      true,
+      true,
+      true,
+      true]);
+
+    expect(selectCorp.cards.map((c) => c.name)).deep.eq([
+      'Polyphemos',
+      'Terralabs Research',
+      'Saturn Systems',
+      'Arcadian Communities',
+    ]);
   });
 
   it('Excludes corps that player cannot afford', function() {
@@ -56,7 +67,18 @@ describe('Merger', function() {
     runAllActions(game);
 
     const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
-    expect(selectCorp.cards).has.length(3);
+    expect(selectCorp.config.enabled).deep.eq([
+      true,
+      false,
+      true,
+      true]);
+
+    expect(selectCorp.cards.map((c) => c.name)).deep.eq([
+      'Polyphemos',
+      'Terralabs Research',
+      'Saturn Systems',
+      'Arcadian Communities',
+    ]);
   });
 
   it('Can play as long as have enough M€', function() {

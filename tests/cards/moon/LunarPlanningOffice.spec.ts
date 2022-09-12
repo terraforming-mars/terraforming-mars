@@ -29,11 +29,11 @@ describe('LunarPlanningOffice', () => {
 
     // Prime the deck for a determinstic outcome.
     // Mare Imbrium is expected out first.
-    game.dealer.deck.push(new RoboticWorkforce());
-    game.dealer.deck.push(new MareNectarisMine());
-    game.dealer.deck.push(new MicroMills());
-    game.dealer.deck.push(new MareImbriumMine());
-    game.dealer.discarded = [];
+    game.projectDeck.drawPile.push(new RoboticWorkforce());
+    game.projectDeck.drawPile.push(new MareNectarisMine());
+    game.projectDeck.drawPile.push(new MicroMills());
+    game.projectDeck.drawPile.push(new MareImbriumMine());
+    game.projectDeck.discards = [];
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -42,10 +42,10 @@ describe('LunarPlanningOffice', () => {
 
     expect(player.popWaitingFor()).is.undefined;
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);
-    expect(game.dealer.discarded.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
+    expect(game.projectDeck.discards.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
 
     // Robotic Workforce is at the top of the deck.
-    expect(game.dealer.dealCard(game).name).eq(CardName.ROBOTIC_WORKFORCE);
+    expect(game.projectDeck.deal(game).name).eq(CardName.ROBOTIC_WORKFORCE);
   });
 });
 

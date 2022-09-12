@@ -31,7 +31,7 @@ describe('Kickstarter', function() {
 
     expect(options.options[2].title).to.match(/mars/);
     expect(game.pathfindersData).deep.eq({
-      venus: 0,
+      venus: -1,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -42,7 +42,7 @@ describe('Kickstarter', function() {
     options.options[2].cb();
 
     expect(game.pathfindersData).deep.eq({
-      venus: 0,
+      venus: -1,
       earth: 0,
       mars: 3,
       jovian: 0,

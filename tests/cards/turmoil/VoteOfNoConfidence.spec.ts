@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {isPlayerId, PlayerId} from '../../../src/common/Types';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('VoteOfNoConfidence', function() {
   it('Should play', function() {
     const card = new VoteOfNoConfidence();
-    const game = newTestGame(1, setCustomGameOptions());
+    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
     const player = getTestPlayer(game, 0);
     const turmoil = game.turmoil!;
     expect(player.canPlayIgnoringCost(card)).is.not.true;

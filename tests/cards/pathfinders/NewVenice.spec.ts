@@ -6,7 +6,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addOcean, cast, setCustomGameOptions} from '../../TestingUtils';
+import {addOcean, cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
@@ -20,7 +20,7 @@ describe('NewVenice', function() {
     card = new NewVenice();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({pathfindersExpansion: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({pathfindersExpansion: true}));
   });
 
   it('Can play', function() {

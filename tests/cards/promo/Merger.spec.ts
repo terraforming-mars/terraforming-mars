@@ -3,7 +3,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Merger} from '../../../src/server/cards/promo/Merger';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
@@ -33,7 +33,7 @@ describe('Merger', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions({preludeExtension: true});
+    const gameOptions = testGameOptions({preludeExtension: true});
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     // Preset corporation deck for testing

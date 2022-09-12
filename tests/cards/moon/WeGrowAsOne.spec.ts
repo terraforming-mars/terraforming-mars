@@ -1,6 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {WeGrowAsOne} from '../../../src/server/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
@@ -18,9 +18,10 @@ describe('WeGrowAsOne', () => {
       'gameid',
       [player],
       player,
-      setCustomGameOptions({
+      testGameOptions({
         moonExpansion: true,
         coloniesExtension: true,
+        turmoilExtension: true,
       }));
     card = new WeGrowAsOne();
   });

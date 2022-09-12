@@ -1,13 +1,11 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DarksideMiningSyndicate} from '../../../src/server/cards/moon/DarksideMiningSyndicate';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('DarksideMiningSyndicate', () => {
   let player: Player;
@@ -16,7 +14,7 @@ describe('DarksideMiningSyndicate', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new DarksideMiningSyndicate();
     moonData = MoonExpansion.moonData(game);
   });

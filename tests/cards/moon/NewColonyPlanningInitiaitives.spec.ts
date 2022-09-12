@@ -1,13 +1,11 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {NewColonyPlanningInitiaitives} from '../../../src/server/cards/moon/NewColonyPlanningInitiaitives';
 import {expect} from 'chai';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('NewColonyPlanningInitiaitives', () => {
   let player: Player;
@@ -16,7 +14,7 @@ describe('NewColonyPlanningInitiaitives', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new NewColonyPlanningInitiaitives();
     moonData = MoonExpansion.moonData(game);
   });

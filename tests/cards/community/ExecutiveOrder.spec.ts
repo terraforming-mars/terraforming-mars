@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
-import {GameOptions} from '../../../src/server/GameOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {ExecutiveOrder} from '../../../src/server/cards/community/ExecutiveOrder';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
@@ -19,8 +18,7 @@ describe('ExecutiveOrder', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions() as GameOptions;
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
   });
 
   it('Should play', function() {

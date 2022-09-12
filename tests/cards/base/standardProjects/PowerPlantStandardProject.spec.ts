@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {PowerPlantStandardProject} from '../../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {Player} from '../../../../src/server/Player';
-import {setCustomGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {StandardTechnology} from '../../../../src/server/cards/base/StandardTechnology';
@@ -15,7 +14,7 @@ describe('PowerPlantStandardProjects', function() {
     card = new PowerPlantStandardProject();
     player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should act', function() {

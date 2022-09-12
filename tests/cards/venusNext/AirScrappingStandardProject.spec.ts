@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
-import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
@@ -16,7 +16,7 @@ describe('AirScrappingStandardProject', function() {
   beforeEach(function() {
     card = new AirScrappingStandardProject();
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({altVenusBoard: false}));
+    game = Game.newInstance('gameid', [player], player, testGameOptions({venusNextExtension: true, altVenusBoard: false, turmoilExtension: true}));
   });
 
   it('Can act', function() {

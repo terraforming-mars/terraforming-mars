@@ -11,12 +11,10 @@ import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
 import {SpaceName} from '../../src/server/SpaceName';
 import {TileType} from '../../src/common/TileType';
-import {setCustomGameOptions} from '../TestingUtils';
+import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
 import {VictoryPointsBreakdown} from '../../src/server/VictoryPointsBreakdown';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonExpansion', () => {
   let game: Game;
@@ -27,7 +25,7 @@ describe('MoonExpansion', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.PINK.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
   });
 

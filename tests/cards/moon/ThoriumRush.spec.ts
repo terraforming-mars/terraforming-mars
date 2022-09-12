@@ -1,6 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 import {expect} from 'chai';
@@ -11,8 +11,6 @@ import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('ThoriumRush', () => {
   let player: Player;
   let game: Game;
@@ -21,7 +19,7 @@ describe('ThoriumRush', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new ThoriumRush();
     moonData = MoonExpansion.moonData(game);
   });
@@ -51,9 +49,9 @@ describe('ThoriumRush', () => {
     expect(player.getTerraformRating()).eq(17);
   });
 
-  it('canPlay when Reds are in power.', () => {
+  it('canPlay when Reds are in power', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;

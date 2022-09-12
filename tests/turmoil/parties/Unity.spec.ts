@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/server/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
@@ -19,8 +19,7 @@ describe('Unity', function() {
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player], player, gameOptions);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     unity = new Unity();
   });

@@ -8,7 +8,7 @@ import {Resources} from '../../../src/common/Resources';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DiasporaMovement', function() {
@@ -24,8 +24,7 @@ describe('DiasporaMovement', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     reds = turmoil.getPartyByName(PartyName.REDS)!;
   });

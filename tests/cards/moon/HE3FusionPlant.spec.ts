@@ -1,13 +1,11 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3FusionPlant} from '../../../src/server/cards/moon/HE3FusionPlant';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('HE3FusionPlant', () => {
   let player: TestPlayer;
@@ -16,7 +14,7 @@ describe('HE3FusionPlant', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new HE3FusionPlant();
     moonData = MoonExpansion.moonData(game);
   });

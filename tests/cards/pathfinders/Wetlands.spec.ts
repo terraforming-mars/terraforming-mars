@@ -3,7 +3,7 @@ import {Wetlands} from '../../../src/server/cards/pathfinders/Wetlands';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {cast, fakeCard, runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {cast, fakeCard, runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -23,7 +23,7 @@ describe('Wetlands', function() {
     card = new Wetlands();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({pathfindersExpansion: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({pathfindersExpansion: true}));
     game.board = EmptyBoard.newInstance();
     game.board.getSpace('15').spaceType = SpaceType.OCEAN;
     game.board.getSpace('16').spaceType = SpaceType.OCEAN;

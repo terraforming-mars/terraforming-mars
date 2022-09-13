@@ -155,17 +155,31 @@ export class Behaviors {
     }
 
     // TODO(kberg): Add canPlay for these behaviors.
-    // TODO(kberg): Add setting spaces.
     if (behavior.moon !== undefined) {
       const moon = behavior.moon;
       if (moon.colonyTile !== undefined) {
-        player.game.defer(new PlaceMoonColonyTile(player));
+        if (moon.colonyTile.space === undefined) {
+          player.game.defer(new PlaceMoonColonyTile(player));
+        } else {
+          MoonExpansion.addColonyTile(player, moon.colonyTile.space, card.name);
+          MoonExpansion.raiseColonyRate(player);
+        }
       }
       if (moon.mineTile !== undefined) {
-        player.game.defer(new PlaceMoonMineTile(player));
+        if (moon.mineTile.space === undefined) {
+          player.game.defer(new PlaceMoonMineTile(player));
+        } else {
+          MoonExpansion.addMineTile(player, moon.mineTile.space, card.name);
+          MoonExpansion.raiseMiningRate(player);
+        }
       }
       if (moon.roadTile !== undefined) {
-        player.game.defer(new PlaceMoonRoadTile(player));
+        if (moon.roadTile.space === undefined) {
+          player.game.defer(new PlaceMoonRoadTile(player));
+        } else {
+          MoonExpansion.addRoadTile(player, moon.roadTile.space, card.name);
+          MoonExpansion.raiseLogisticRate(player);
+        }
       }
       if (moon.tile !== undefined) {
         if (moon.tile.space !== undefined) {

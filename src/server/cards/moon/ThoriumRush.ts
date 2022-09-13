@@ -21,7 +21,7 @@ export class ThoriumRush extends Card implements IProjectCard {
           colonyTile: {},
           mineTile: {},
           roadTile: {},
-        }
+        },
       },
 
       metadata: {

@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {testGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
 import {expect} from 'chai';
@@ -38,6 +38,7 @@ describe('MareNectarisMine', () => {
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
+    runAllActions(game);
 
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);

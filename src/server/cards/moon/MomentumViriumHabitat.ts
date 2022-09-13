@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
@@ -40,11 +38,5 @@ export class MomentumViriumHabitat extends Card {
       },
       tilesBuilt: [TileType.MOON_COLONY],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    MoonExpansion.addColonyTile(player, MoonSpaces.MOMENTUM_VIRIUM, this.name);
-    MoonExpansion.raiseColonyRate(player);
-    return undefined;
   }
 }

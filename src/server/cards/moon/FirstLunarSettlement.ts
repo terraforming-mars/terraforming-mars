@@ -15,7 +15,7 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
 
       behavior: {
         production: {megacredits: 1},
-        moon: {mineTile: {}},
+        moon: {colonyTile: {}},
       },
 
       metadata: {

@@ -6,7 +6,7 @@ import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Game} from '../../../src/server/Game';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TradingColony', function() {
@@ -20,7 +20,7 @@ describe('TradingColony', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    const gameOptions = testGameOptions({coloniesExtension: true});
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });

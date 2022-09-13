@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Dealer} from '../src/server/Dealer';
-import {setCustomGameOptions} from './TestingUtils';
+import {testGameOptions} from './TestingUtils';
 import {GameCards} from '../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../src/server/GameOptions';
 import {CardName} from '../src/common/cards/CardName';
@@ -8,7 +8,7 @@ import {ConstRandom} from '../src/server/Random';
 
 describe('Dealer', function() {
   it('deserializes from serialized', () => {
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = testGameOptions({
       corporateEra: false,
       preludeExtension: true,
       venusNextExtension: false,

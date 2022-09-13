@@ -5,7 +5,7 @@ import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
@@ -16,8 +16,7 @@ describe('Stratopolis', function() {
     card = new Stratopolis();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true}));
   });
 
   it('Can not play', function() {

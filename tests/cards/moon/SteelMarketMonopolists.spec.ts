@@ -2,13 +2,11 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SteelMarketMonopolists} from '../../../src/server/cards/moon/SteelMarketMonopolists';
 import {expect} from 'chai';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('SteelMarketMonopolists', () => {
   let game: Game;
@@ -18,7 +16,7 @@ describe('SteelMarketMonopolists', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new SteelMarketMonopolists();
   });

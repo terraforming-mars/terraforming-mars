@@ -2,15 +2,13 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
 import {expect} from 'chai';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MiningComplex', () => {
   let game: Game;
@@ -20,7 +18,7 @@ describe('MiningComplex', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new MiningComplex();
   });

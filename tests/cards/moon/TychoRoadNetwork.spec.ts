@@ -2,15 +2,13 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TychoRoadNetwork} from '../../../src/server/cards/moon/TychoRoadNetwork';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('TychoRoadNetwork', () => {
   let game: Game;
@@ -20,7 +18,7 @@ describe('TychoRoadNetwork', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new TychoRoadNetwork();
   });

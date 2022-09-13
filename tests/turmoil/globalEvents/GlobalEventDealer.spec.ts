@@ -9,7 +9,7 @@ import {SerializedGlobalEventDealer} from '../../../src/server/turmoil/globalEve
 import {SponsoredProjects} from '../../../src/server/turmoil/globalEvents/SponsoredProjects';
 import {SuccessfulOrganisms} from '../../../src/server/turmoil/globalEvents/SuccessfulOrganisms';
 import {WarOnEarth} from '../../../src/server/turmoil/globalEvents/WarOnEarth';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GlobalEventDealer', () => {
@@ -44,7 +44,7 @@ describe('GlobalEventDealer', () => {
   });
 
   it('getGlobalEventByName can retrieve all cards', () => {
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = testGameOptions({
       preludeExtension: true,
       venusNextExtension: true,
       coloniesExtension: true,

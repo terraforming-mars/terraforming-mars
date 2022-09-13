@@ -3,7 +3,7 @@ import {DeepWellHeating} from '../../../src/server/cards/base/DeepWellHeating';
 import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {ParliamentHall} from '../../../src/server/cards/turmoil/ParliamentHall';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('ParliamentHall', function() {
@@ -11,7 +11,7 @@ describe('ParliamentHall', function() {
     const card = new ParliamentHall();
     const card2 = new DeepWellHeating();
     const card3 = new MartianRails();
-    const game = newTestGame(1, setCustomGameOptions());
+    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
     const player = getTestPlayer(game, 0);
 
     expect(player.canPlayIgnoringCost(card)).is.not.true;

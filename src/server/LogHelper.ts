@@ -1,10 +1,10 @@
 import {CardName} from '../common/cards/CardName';
-import {Game} from './Game';
 import {Player} from './Player';
 import {ICard} from './cards/ICard';
 import {ISpace} from './boards/ISpace';
 import {TileType} from '../common/TileType';
 import {IColony} from './colonies/IColony';
+import {Logger} from './logs/Logger';
 
 export class LogHelper {
   static logAddResource(player: Player, card: ICard, qty: number = 1): void {
@@ -61,8 +61,8 @@ export class LogHelper {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {
-    game.log('${0} card(s) were discarded', (b) => {
+  static logDiscardedCards(logger: Logger, cards: Array<ICard> | Array<CardName>) {
+    logger.log('${0} card(s) were discarded', (b) => {
       b.rawString(cards.length.toString());
       for (const card of cards) {
         if (typeof card === 'string') {

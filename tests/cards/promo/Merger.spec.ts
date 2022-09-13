@@ -21,6 +21,7 @@ import {BeginnerCorporation} from '../../../src/server/cards/corporation/Beginne
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Asteroid} from '../../../src/server/cards/base/Asteroid';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 describe('Merger', function() {
   let card: Merger;
@@ -40,25 +41,25 @@ describe('Merger', function() {
     game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
   });
 
+  function enabledMap(selectCard: SelectCard<ICorporationCard>): Array<[CardName, boolean]> {
+    return selectCard.cards.map((card, idx) => [card.name, selectCard.config.enabled![idx]]);
+  }
+
   it('Can play as long as have enough M€', function() {
     player.corporations.push(new BeginnerCorporation()); // Vestigial corporation
     player.megaCredits = 28; // 28 + 14 from Terralabs is just enough to pay the cost of 42 M€
     card.play(player);
     runAllActions(game);
 
-    const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
-    expect(selectCorp.config.enabled).deep.eq([
-      true,
-      true,
-      true,
-      true]);
+    const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
 
-    expect(selectCorp.cards.map((c) => c.name)).deep.eq([
-      'Polyphemos',
-      'Terralabs Research',
-      'Saturn Systems',
-      'Arcadian Communities',
-    ]);
+    expect(enabledMap(selectCorp)).to.have.deep.members(
+      [
+        ['Arcadian Communities', true],
+        ['Saturn Systems', true],
+        ['Polyphemos', true],
+        ['Terralabs Research', true],
+      ]);
   });
 
   it('Excludes corps that player cannot afford', function() {
@@ -66,19 +67,14 @@ describe('Merger', function() {
     card.play(player);
     runAllActions(game);
 
-    const selectCorp = cast(player.popWaitingFor(), SelectCard<ICard>);
-    expect(selectCorp.config.enabled).deep.eq([
-      true,
-      false,
-      true,
-      true]);
-
-    expect(selectCorp.cards.map((c) => c.name)).deep.eq([
-      'Polyphemos',
-      'Terralabs Research',
-      'Saturn Systems',
-      'Arcadian Communities',
-    ]);
+    const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
+    expect(enabledMap(selectCorp)).to.have.deep.members(
+      [
+        ['Arcadian Communities', true],
+        ['Saturn Systems', true],
+        ['Polyphemos', true],
+        ['Terralabs Research', false],
+      ]);
   });
 
   it('Can play as long as have enough M€', function() {

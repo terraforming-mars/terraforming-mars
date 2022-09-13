@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,6 +14,10 @@ export class CryoSleep extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       victoryPoints: 1,
 
+      behavior: {
+        colonies: {tradeDiscount: 1},
+      },
+
       metadata: {
         cardNumber: 'C07',
         renderData: CardRenderer.builder((b) => b.effect('When you trade, you pay 1 less resource for it.', (be) => {
@@ -22,14 +25,5 @@ export class CryoSleep extends Card implements IProjectCard {
         })),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.colonies.tradeDiscount++;
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonies.tradeDiscount--;
   }
 }

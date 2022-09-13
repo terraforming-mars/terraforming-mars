@@ -68,7 +68,6 @@ export class Merger extends PreludeCard {
     LogHelper.logDrawnCards(player, cards, /* privateMessage= */true);
     return cards;
   }
-
   public static setCardCost(player: Player) {
     return player.corporations
       .map((card) => (card.cardCost ?? CARD_COST) - CARD_COST) // Convert every card cost to delta from zero. (e.g. -2, 0, +2)

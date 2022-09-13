@@ -18,7 +18,7 @@ import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
 import {Tile} from './Tile';
-import {LogBuilder} from './LogBuilder';
+import {LogBuilder} from './logs/LogBuilder';
 import {LogHelper} from './LogHelper';
 import {LogMessage} from '../common/logs/LogMessage';
 import {ALL_MILESTONES} from './milestones/Milestones';
@@ -68,12 +68,13 @@ import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck} from './cards/Deck';
+import {Logger} from './logs/Logger';
 
 export interface Score {
   corporation: String;
   playerScore: number;
 }
-export class Game {
+export class Game implements Logger {
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;

@@ -38,8 +38,8 @@ export class Behaviors {
       }
     }
 
-    if (behavior.colony !== undefined) {
-      if (player.colonies.getPlayableColonies(behavior.colony.allowDuplicates).length === 0) {
+    if (behavior.colonies?.buildColony !== undefined) {
+      if (player.colonies.getPlayableColonies(behavior.colonies.buildColony.allowDuplicates).length === 0) {
         return false;
       }
     }
@@ -63,6 +63,13 @@ export class Behaviors {
     if (behavior.stock) {
       player.addUnits(behavior.stock);
     }
+    if (behavior.steelValue === 1) {
+      player.increaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.increaseTitaniumValue();
+    }
+
     if (behavior.drawCard !== undefined) {
       const drawCard = behavior.drawCard;
       if (typeof(drawCard) === 'number') {
@@ -115,19 +122,22 @@ export class Behaviors {
     if (behavior.removeAnyPlants !== undefined) {
       player.game.defer(new RemoveAnyPlants(player, behavior.removeAnyPlants));
     }
-    if (behavior.colony !== undefined) {
-      player.game.defer(new BuildColony(player, {allowDuplicate: behavior.colony.allowDuplicates}));
-    }
-    if (behavior.addTradeFleet !== undefined) {
-      for (let idx = 0; idx < behavior.addTradeFleet; idx++) {
-        player.colonies.increaseFleetSize();
+    if (behavior.colonies !== undefined) {
+      const colonies = behavior.colonies;
+      if (colonies.buildColony !== undefined) {
+        player.game.defer(new BuildColony(player, {allowDuplicate: colonies.buildColony.allowDuplicates}));
       }
-    }
-    if (behavior.tradeDiscount !== undefined) {
-      player.colonies.tradeDiscount += behavior.tradeDiscount;
-    }
-    if (behavior.tradeOffset !== undefined) {
-      player.colonies.tradeOffset += behavior.tradeOffset;
+      if (colonies.addTradeFleet !== undefined) {
+        for (let idx = 0; idx < colonies.addTradeFleet; idx++) {
+          player.colonies.increaseFleetSize();
+        }
+      }
+      if (colonies.tradeDiscount !== undefined) {
+        player.colonies.tradeDiscount += colonies.tradeDiscount;
+      }
+      if (colonies.tradeOffset !== undefined) {
+        player.colonies.tradeOffset += colonies.tradeOffset;
+      }
     }
 
     if (behavior.ocean !== undefined) {
@@ -172,17 +182,27 @@ export class Behaviors {
     }
   }
 
-  public static discard(player: Player, _card: ICard, behavior: Behavior) {
-    if (behavior.addTradeFleet !== undefined) {
-      for (let idx = 0; idx < behavior.addTradeFleet; idx++) {
-        player.colonies.decreaseFleetSize();
+  public static onDiscard(player: Player, behavior: Behavior) {
+    if (behavior.steelValue === 1) {
+      player.decreaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.decreaseTitaniumValue();
+    }
+
+    if (behavior.colonies !== undefined) {
+      const colonies = behavior.colonies;
+      if (colonies.addTradeFleet !== undefined) {
+        for (let idx = 0; idx < colonies.addTradeFleet; idx++) {
+          player.colonies.decreaseFleetSize();
+        }
       }
-    }
-    if (behavior.tradeDiscount !== undefined) {
-      player.colonies.tradeDiscount -= behavior.tradeDiscount;
-    }
-    if (behavior.tradeOffset !== undefined) {
-      player.colonies.tradeOffset -= behavior.tradeOffset;
+      if (colonies.tradeDiscount !== undefined) {
+        player.colonies.tradeDiscount -= colonies.tradeDiscount;
+      }
+      if (colonies.tradeOffset !== undefined) {
+        player.colonies.tradeOffset -= colonies.tradeOffset;
+      }
     }
   }
 }

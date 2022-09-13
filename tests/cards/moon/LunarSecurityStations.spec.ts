@@ -2,15 +2,13 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {LunarSecurityStations} from '../../../src/server/cards/moon/LunarSecurityStations';
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunarSecurityStations', () => {
   let game: Game;
@@ -24,7 +22,7 @@ describe('LunarSecurityStations', () => {
     player = TestPlayer.BLUE.newPlayer();
     opponent1 = TestPlayer.RED.newPlayer();
     opponent2 = TestPlayer.GREEN.newPlayer();
-    game = Game.newInstance('gameid', [player, opponent1, opponent2], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player, opponent1, opponent2], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new LunarSecurityStations();
   });

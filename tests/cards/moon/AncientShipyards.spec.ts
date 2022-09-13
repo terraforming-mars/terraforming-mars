@@ -1,12 +1,10 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('AncientShipyards', () => {
   let game: Game;
@@ -17,7 +15,7 @@ describe('AncientShipyards', () => {
   beforeEach(() => {
     bluePlayer = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [bluePlayer, redPlayer], bluePlayer, testGameOptions({moonExpansion: true}));
     card = new AncientShipyards();
   });
 
@@ -56,7 +54,7 @@ describe('AncientShipyards', () => {
 
   it('act solo', () => {
     redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [redPlayer], redPlayer, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [redPlayer], redPlayer, testGameOptions({moonExpansion: true}));
 
     expect(card.resourceCount).eq(0);
     redPlayer.megaCredits = 10;

@@ -15,9 +15,7 @@ export class ResearchColony extends Card implements IProjectCard {
 
       behavior: {
         drawCard: 2,
-        colony: {
-          allowDuplicates: true,
-        },
+        colonies: {buildColony: {allowDuplicates: true}},
       },
 
       metadata: {

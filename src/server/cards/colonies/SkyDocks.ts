@@ -16,7 +16,7 @@ export class SkyDocks extends Card implements IProjectCard {
       victoryPoints: 2,
 
       behavior: {
-        addTradeFleet: 1,
+        colonies: {addTradeFleet: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),

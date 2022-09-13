@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
@@ -9,8 +9,6 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {StealResources} from '../../../src/server/deferredActions/StealResources';
 import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/common/Phase';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('TheDarksideofTheMoonSyndicate', () => {
   let player: TestPlayer;
@@ -22,7 +20,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({moonExpansion: true}));
     card = new TheDarksideofTheMoonSyndicate();
     moonData = MoonExpansion.moonData(game);
   });

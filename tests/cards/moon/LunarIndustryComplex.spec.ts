@@ -1,14 +1,12 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarIndustryComplex} from '../../../src/server/cards/moon/LunarIndustryComplex';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {Units} from '../../../src/common/Units';
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunarIndustryComplex', () => {
   let player: TestPlayer;
@@ -18,7 +16,7 @@ describe('LunarIndustryComplex', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new LunarIndustryComplex();
     moonData = MoonExpansion.moonData(game);
   });

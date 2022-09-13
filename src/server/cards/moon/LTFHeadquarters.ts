@@ -15,9 +15,11 @@ export class LTFHeadquarters extends Card implements IProjectCard {
       tr: {moonColony: 1},
 
       behavior: {
-        colony: {},
         moon: {colonyRate: 1},
-        addTradeFleet: 1,
+        colonies: {
+          buildColony: {},
+          addTradeFleet: 1,
+        },
       },
 
       metadata: {

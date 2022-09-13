@@ -13,7 +13,7 @@ export class TradeEnvoys extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
 
       behavior: {
-        tradeOffset: 1,
+        colonies: {tradeOffset: 1},
       },
 
       metadata: {

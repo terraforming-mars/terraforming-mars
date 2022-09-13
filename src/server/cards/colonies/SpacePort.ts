@@ -16,7 +16,7 @@ export class SpacePort extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1, megacredits: 4},
-        addTradeFleet: 1,
+        colonies: {addTradeFleet: 1},
         city: {},
       },
 

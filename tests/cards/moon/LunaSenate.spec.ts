@@ -1,10 +1,8 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/server/cards/moon/LunaSenate';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaSenate', () => {
   let player: TestPlayer;
@@ -14,7 +12,7 @@ describe('LunaSenate', () => {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.PURPLE.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player, player2], player, testGameOptions({moonExpansion: true}));
     card = new LunaSenate();
   });
 

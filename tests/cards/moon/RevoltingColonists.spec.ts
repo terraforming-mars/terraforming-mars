@@ -1,14 +1,12 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RevoltingColonists} from '../../../src/server/cards/moon/RevoltingColonists';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('RevoltingColonists', () => {
   let player1: TestPlayer;
@@ -21,7 +19,7 @@ describe('RevoltingColonists', () => {
     player1 = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     player3 = TestPlayer.YELLOW.newPlayer();
-    const game = Game.newInstance('gameid', [player1, player2, player3], player1, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player1, player2, player3], player1, testGameOptions({moonExpansion: true}));
     card = new RevoltingColonists();
     moonData = MoonExpansion.moonData(game);
   });

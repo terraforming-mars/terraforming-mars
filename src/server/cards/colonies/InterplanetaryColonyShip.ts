@@ -14,7 +14,7 @@ export class InterplanetaryColonyShip extends Card implements IProjectCard {
       cardType: CardType.EVENT,
 
       behavior: {
-        colony: {},
+        colonies: {buildColony: {}},
       },
 
       metadata: {

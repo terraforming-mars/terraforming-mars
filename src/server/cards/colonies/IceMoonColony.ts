@@ -17,7 +17,7 @@ export class IceMoonColony extends Card implements IProjectCard {
       tr: {oceans: 1},
 
       behavior: {
-        colony: {},
+        colonies: {buildColony: {}},
       },
 
       metadata: {

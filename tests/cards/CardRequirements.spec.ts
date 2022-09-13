@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/server/cards/CardRequirements';
-import {setCustomGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
+import {testGameOptions, runAllActions, cast, addGreenery} from '../TestingUtils';
 import {Game} from '../../src/server/Game';
 import {AdaptationTechnology} from '../../src/server/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/common/TileType';
@@ -23,9 +23,8 @@ describe('CardRequirements', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
 
-    Game.newInstance('gameid', [player, player2], player, gameOptions);
+    Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
   });
 
   it('satisfies properly for oceans', function() {

@@ -14,7 +14,7 @@ export class RimFreighters extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
 
       behavior: {
-        tradeDiscount: 1,
+        colonies: {tradeDiscount: 1},
       },
 
       metadata: {

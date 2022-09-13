@@ -8,7 +8,7 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EcologyResearch', function() {
@@ -21,7 +21,7 @@ describe('EcologyResearch', function() {
     card = new EcologyResearch();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    const gameOptions = testGameOptions({coloniesExtension: true});
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();

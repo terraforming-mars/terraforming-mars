@@ -1,23 +1,30 @@
 {
     "Polyphemos": "Polyphemos",
     "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Vous commencez avec 50 M€. Augmentez votre production de M€ de 5. Gagnez 5 titanes.",
-    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Effet: chaque fois que vous achetez une carte pour l'ajouter à votre main, payez 5 M€ au lieu de 3 M€ y compris pour votre main de départ.",
-
-    "STORMCRAFT INCORPORATED": "Stormcraft Incorporated",
+    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Effet : chaque fois que vous achetez une carte pour l'ajouter à votre main, payez 5 M€ au lieu de 3 M€ y compris pour votre main de départ.",
+    "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
     "You start with 48 M€.": "Vous commencez avec 48 M€.",
-    "Action: Add a floater to ANY card.": "Action: Ajoutez 1 flotteur à N'IMPORTE QUELLE carte.",
-	"Effect: Floaters on this card may be used as 2 heat each.": "Effet: les flotteurs sur cette carte peuvent être utilisés comme 2 chaleurs chacune.",
-
+    "Action: Add a floater to ANY card.": "Action : Ajoutez 1 flotteur à N'IMPORTE QUELLE carte.",
+    "Effect: Floaters on this card may be used as 2 heat each.": "Effet : les flotteurs sur cette carte peuvent être utilisés comme 2 chaleurs chacun.",
     "Arklight": "Arklight",
     "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "Vous commencez avec 45 M€. Augmentez votre production de M€ de 2. 1 PV par groupe de 2 animaux sur cette carte.",
-    "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "Effet: Chaque fois que vous jouez un badge Animal ou Plante, y compris celui-ci, ajoutez 1 animal sur cette carte.",
-
+    "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "Effet : Chaque fois que vous jouez un badge Animal ou Plante, y compris celui-ci, ajoutez 1 animal sur cette carte.",
     "Aridor": "Aridor",
     "COLONY": "COLONIE",
     "You start with 40 M€. As your first action add a colony tile.": "Vous commencez avec 40 M€. Pour votre première action, mettez en jeu une tuile Colonie supplémentaire de votre choix.",
     "When you get a new type of tag in play (event cards do not count), increase your M€ production 1 step.": "Effet: Chaque fois que vous mettez en jeu un nouveau badge, augmentez votre production de M€ de 1.",
-
     "Poseidon": "Poseidon",
-    "You start with 45 M€. As your first action, place a colony.": "Vous commencez avec 45 M€. Pour votre premièr action, placez une colonie.",
-    "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "Effet : Chaque fois qu'une colonie est placée, y compris celle-ci, augmentez votre production de M€ de 1."
+    "You start with 45 M€. As your first action, place a colony.": "Vous commencez avec 45 M€. Pour votre première action, placez une colonie.",
+    "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "Effet : Chaque fois qu'une colonie est placée, y compris celle-ci, augmentez votre production de M€ de 1.",
+    "POLYPHEMOS": "POLYPHEMOS",
+    "STORM": "STORM",
+    "CRAFT": "CRAFT",
+    "INCOR": "INCOR",
+    "PORATED": "PORATED",
+    "Stormcraft Incorporated": "Stormcraft Incorporated",
+    "ARKLIGHT": "ARKLIGHT",
+    "ARIDOR": "ARIDOR",
+    "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "Effet : Chaque fois que vous mettez en jeu un nouveau badge, augmentez votre production de M€ de 1.",
+    "POSEIDON": "POSEIDON",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Vous commencez avec 40M€. Pour votre première action, mettez en jeu une tuile Colonie supplémentaire de votre choix."
 }

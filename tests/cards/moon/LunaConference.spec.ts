@@ -1,6 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaConference} from '../../../src/server/cards/moon/LunaConference';
 import {expect} from 'chai';
@@ -10,8 +10,6 @@ import {TileType} from '../../../src/common/TileType';
 import {Scientists} from '../../../src/server/turmoil/parties/Scientists';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('LunaConference', () => {
   let player: Player;
   let game: Game;
@@ -20,7 +18,7 @@ describe('LunaConference', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
     card = new LunaConference();
     moonData = MoonExpansion.moonData(game);
   });

@@ -4,13 +4,13 @@ import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('RedTourismWave', function() {
   it('Should play', function() {
     const card = new RedTourismWave();
-    const game = newTestGame(2, setCustomGameOptions());
+    const game = newTestGame(2, testGameOptions({turmoilExtension: true}));
     const player = getTestPlayer(game, 0);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 

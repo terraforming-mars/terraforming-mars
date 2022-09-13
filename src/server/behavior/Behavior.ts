@@ -56,8 +56,9 @@ export interface Behavior {
   // // Remove resources from any player.
   // removeAnyResource: {type: CardResource, count: number},
 
-  // // Raise the titanium and steel value. On discard, reduce them.
-  // resourceValues: {titanum?: number, steel?: number},
+  // Raise the titanium and steel value. On discard, reduce them.
+  titanumValue?: 1;
+  steelValue?: 1;
 
   // Draw this many cards from the deck.
   drawCard?: number | DrawCard,
@@ -65,18 +66,20 @@ export interface Behavior {
   // spendResourcesHere: number,
   // spendResource: {type: CardResource, count: number},
   // tile: {type: TileType, space?: SpaceId, spaceType?: SpaceType};
-  colony?: {
-    allowDuplicates?: boolean,
-  },
+  colonies?: {
+    buildColony?: {
+      allowDuplicates?: boolean,
+    },
 
-  // Add this many trade fleets to your armada.
-  addTradeFleet?: number,
+    // Add this many trade fleets to your armada.
+    addTradeFleet?: number,
 
-  // When trading increase the colony track this many steps.
-  tradeDiscount?: number,
+    // When trading increase the colony track this many steps.
+    tradeDiscount?: number,
 
-  // When trading increase the colony track this many steps.
-  tradeOffset?: number,
+    // When trading increase the colony track this many steps.
+    tradeOffset?: number,
+  }
 
   moon?: {
     colonyTile?: PlaceMoonTile,

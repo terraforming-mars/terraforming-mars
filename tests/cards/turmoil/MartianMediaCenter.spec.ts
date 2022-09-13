@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {MartianMediaCenter} from '../../../src/server/cards/turmoil/MartianMediaCenter';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('MartianMediaCenter', function() {
   it('Should play', function() {
     const card = new MartianMediaCenter();
-    const game = newTestGame(1, setCustomGameOptions());
+    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
     const player = getTestPlayer(game, 0);
 
     expect(card.canPlay(player)).is.not.true;

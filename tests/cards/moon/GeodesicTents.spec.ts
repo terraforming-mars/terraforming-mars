@@ -1,11 +1,9 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
 import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('GeodesicTents', () => {
   let player: TestPlayer;
@@ -13,7 +11,7 @@ describe('GeodesicTents', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new GeodesicTents();
   });
 

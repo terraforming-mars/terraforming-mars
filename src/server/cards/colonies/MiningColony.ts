@@ -15,7 +15,7 @@ export class MiningColony extends Card implements IProjectCard {
 
       behavior: {
         production: {titanium: 1},
-        colony: {},
+        colonies: {buildColony: {}},
       },
 
       metadata: {

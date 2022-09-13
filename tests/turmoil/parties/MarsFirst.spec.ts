@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../../src/server/turmoil/parties/MarsFirst';
 import {Mine} from '../../../src/server/cards/base/Mine';
@@ -17,8 +17,7 @@ describe('MarsFirst', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     const otherPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     marsFirst = new MarsFirst();
   });

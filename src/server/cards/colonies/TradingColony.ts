@@ -15,8 +15,10 @@ export class TradingColony extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
 
       behavior: {
-        colony: {},
-        tradeOffset: 1,
+        colonies: {
+          buildColony: {},
+          tradeOffset: 1,
+        },
       },
 
       metadata: {

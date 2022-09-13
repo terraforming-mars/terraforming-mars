@@ -33,7 +33,7 @@ describe('CrewTraining', function() {
 
     expect(options.options[0].title).to.match(/earth/);
     expect(game.pathfindersData).deep.eq({
-      venus: 0,
+      venus: -1,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -44,7 +44,7 @@ describe('CrewTraining', function() {
     options.options[0].cb();
 
     expect(game.pathfindersData).deep.eq({
-      venus: 0,
+      venus: -1,
       earth: 2,
       mars: 0,
       jovian: 0,

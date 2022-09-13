@@ -32,20 +32,20 @@ export class Merger extends PreludeCard {
   public override bespokePlay(player: Player) {
     const game = player.game;
     const dealtCorps = Merger.dealCorporations(player, game.dealer);
-    const availableCorps = dealtCorps.filter((corp) => {
-      const balance = Merger.mergerCost - corp.startingMegaCredits;
-      return player.canAfford(balance);
+    const enabled = dealtCorps.map((corp) => {
+      return player.canAfford(Merger.mergerCost - corp.startingMegaCredits);
     });
-    if (availableCorps.length === 0) {
-      return undefined;
+    if (enabled.some((v) => v === true) === false) {
+      game.log('None of the four drawn corporation cards are affordable.');
     }
     game.defer(new SimpleDeferredAction(player, () => {
-      return new SelectCard('Choose corporation card to play', 'Play', availableCorps, ([card]) => {
+      return new SelectCard('Choose corporation card to play', 'Play', dealtCorps, ([card]) => {
         player.playAdditionalCorporationCard(card);
         return undefined;
-      });
+      },
+      {enabled: enabled});
     }));
-    game.defer(new SelectPaymentDeferred(player, Merger.mergerCost, {title: 'Select how to pay for prelude'}));
+    game.defer(new SelectPaymentDeferred(player, Merger.mergerCost, {title: 'Select how to pay for Merger'}));
     return undefined;
   }
 
@@ -66,7 +66,6 @@ export class Merger extends PreludeCard {
     LogHelper.logDrawnCards(player, cards, true);
     return cards;
   }
-
   public static setCardCost(player: Player) {
     return player.corporations
       .map((card) => (card.cardCost ?? CARD_COST) - CARD_COST) // Convert every card cost to delta from zero. (e.g. -2, 0, +2)

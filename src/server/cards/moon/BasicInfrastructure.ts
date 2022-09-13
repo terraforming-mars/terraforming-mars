@@ -12,6 +12,10 @@ export class BasicInfrastructure extends PreludeCard {
       name: CardName.BASIC_INFRASTRUCTURE,
       tags: [Tag.MOON],
 
+      behavior: {
+        colonies: {addTradeFleet: 1},
+      },
+
       metadata: {
         description: 'Place a road tile on the Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.',
         cardNumber: '',
@@ -25,7 +29,6 @@ export class BasicInfrastructure extends PreludeCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));
-    player.colonies.increaseFleetSize();
     return undefined;
   }
 }

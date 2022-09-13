@@ -38,7 +38,7 @@ export class SoilDetoxification extends Card implements IProjectCard {
     return undefined;
   }
 
-  public onDiscard(player: Player) {
+  public override bespokeOnDiscard(player: Player) {
     player.plantsNeededForGreenery++;
   }
 }

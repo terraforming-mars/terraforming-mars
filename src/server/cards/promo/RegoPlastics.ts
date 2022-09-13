@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -16,6 +15,10 @@ export class RegoPlastics extends Card implements IProjectCard {
       cost: 10,
       victoryPoints: 1,
 
+      behavior: {
+        steelValue: 1,
+      },
+
       metadata: {
         cardNumber: 'X10',
         renderData: CardRenderer.builder((b) => {
@@ -25,14 +28,5 @@ export class RegoPlastics extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseSteelValue();
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.decreaseSteelValue();
   }
 }

@@ -53,8 +53,9 @@ export interface Behavior {
   // // Remove resources from any player.
   // removeAnyResource: {type: CardResource, count: number},
 
-  // // Raise the titanium and steel value. On discard, reduce them.
-  // resourceValues: {titanum?: number, steel?: number},
+  // Raise the titanium and steel value. On discard, reduce them.
+  titanumValue?: 1;
+  steelValue?: 1;
 
   // Draw this many cards from the deck.
   drawCard?: number | DrawCard,

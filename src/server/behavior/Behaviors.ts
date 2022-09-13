@@ -59,6 +59,13 @@ export class Behaviors {
     if (behavior.stock) {
       player.addUnits(behavior.stock);
     }
+    if (behavior.steelValue === 1) {
+      player.increaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.increaseTitaniumValue();
+    }
+
     if (behavior.drawCard !== undefined) {
       const drawCard = behavior.drawCard;
       if (typeof(drawCard) === 'number') {
@@ -147,7 +154,14 @@ export class Behaviors {
     }
   }
 
-  public static discard(player: Player, _card: ICard, behavior: Behavior) {
+  public static onDiscard(player: Player, behavior: Behavior) {
+    if (behavior.steelValue === 1) {
+      player.decreaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.decreaseTitaniumValue();
+    }
+
     if (behavior.colonies !== undefined) {
       const colonies = behavior.colonies;
       if (colonies.addTradeFleet !== undefined) {

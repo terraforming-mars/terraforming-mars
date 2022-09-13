@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -13,6 +12,10 @@ export class TradeEnvoys extends Card implements IProjectCard {
       name: CardName.TRADE_ENVOYS,
       cardType: CardType.ACTIVE,
 
+      behavior: {
+        colonies: {tradeOffset: 1},
+      },
+
       metadata: {
         cardNumber: 'C46',
         renderData: CardRenderer.builder((b) => {
@@ -22,14 +25,5 @@ export class TradeEnvoys extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.colonies.tradeOffset++;
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonies.tradeOffset--;
   }
 }

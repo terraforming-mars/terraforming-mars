@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -20,6 +19,13 @@ export class SpacePortColony extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.colonies()),
       victoryPoints: 'special',
 
+      behavior: {
+        colonies: {
+          buildColony: {allowDuplicates: true},
+          addTradeFleet: 1,
+        },
+      },
+
       metadata: {
         cardNumber: 'C39',
         renderData: CardRenderer.builder((b) => {
@@ -30,13 +36,6 @@ export class SpacePortColony extends Card implements IProjectCard {
         victoryPoints: CardRenderDynamicVictoryPoints.colonies(1, 2, true),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new BuildColony(player, {allowDuplicate: true, title: 'Select colony for Space Port Colony'}));
-    // TODO(kberg): shouldn't this have an onDiscard?
-    player.colonies.increaseFleetSize();
-    return undefined;
   }
 
   public override getVictoryPoints(player: Player) {

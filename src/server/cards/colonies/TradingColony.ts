@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
@@ -16,6 +14,13 @@ export class TradingColony extends Card implements IProjectCard {
       name: CardName.TRADING_COLONY,
       cardType: CardType.ACTIVE,
 
+      behavior: {
+        colonies: {
+          buildColony: {},
+          tradeOffset: 1,
+        },
+      },
+
       metadata: {
         cardNumber: 'C47',
         renderData: CardRenderer.builder((b) => {
@@ -27,19 +32,5 @@ export class TradingColony extends Card implements IProjectCard {
         description: 'Place a colony.',
       },
     });
-  }
-
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.colonies.getPlayableColonies().length > 0;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new BuildColony(player, {title: 'Select colony for Trading Colony'}));
-    player.colonies.tradeOffset++;
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonies.tradeOffset--;
   }
 }

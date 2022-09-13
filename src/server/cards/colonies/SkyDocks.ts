@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -16,6 +15,10 @@ export class SkyDocks extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       victoryPoints: 2,
 
+      behavior: {
+        colonies: {addTradeFleet: 1},
+      },
+
       requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
       cardDiscount: {amount: 1},
       metadata: {
@@ -29,14 +32,5 @@ export class SkyDocks extends Card implements IProjectCard {
         description: 'Requires 2 Earth tags. Gain 1 Trade Fleet.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.colonies.increaseFleetSize();
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonies.decreaseFleetSize();
   }
 }

@@ -48,7 +48,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     return player.canAfford(1);
   }
   public action(player: Player) {
-    const topCard = player.game.projectDeck.deal(player.game);
+    const topCard = player.game.projectDeck.draw(player.game);
 
     player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 

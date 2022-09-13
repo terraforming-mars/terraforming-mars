@@ -62,7 +62,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
     projectDeck = game.projectDeck;
-    projectDeck.discards = [];
+    projectDeck.discardPile = [];
     player.megaCredits = 100;
   });
 

@@ -2,18 +2,21 @@ import {SerializedDeck} from './SerializedDeck';
 import {CardFinder} from '../CardFinder';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../LogHelper';
-import {Game} from '../Game';
 import {Random, UnseededRandom} from '../Random';
 import {ICard} from './ICard';
 import {ICorporationCard} from './corporation/ICorporationCard';
 import {IProjectCard} from './IProjectCard';
 import {inplaceShuffle} from '../utils/shuffle';
+import {Logger} from '../logs/Logger';
 
+/**
+ * A deck of cards to draw from, and also its discard pile.
+ */
 export class Deck<T extends ICard> {
   private readonly type;
   // TODO(kberg): make these private and readonly.
   public drawPile: Array<T>;
-  public discards: Array<T>;
+  public discardPile: Array<T>;
   private readonly random: Random;
 
   // Exposing shuffle so it can be replaced in tests.
@@ -24,14 +27,14 @@ export class Deck<T extends ICard> {
   protected constructor(type: string, drawPile: Array<T>, discards: Array<T>, random: Random) {
     this.type = type;
     this.drawPile = drawPile;
-    this.discards = discards;
+    this.discardPile = discards;
     this.random = random;
   }
 
   public shuffle(cardsOnTop: Array<CardName> = []) {
-    const copy = [...this.drawPile, ...this.discards];
+    const copy = [...this.drawPile, ...this.discardPile];
     this.drawPile.splice(0, this.drawPile.length);
-    this.discards.splice(0, this.discards.length);
+    this.discardPile.splice(0, this.discardPile.length);
 
     if (cardsOnTop.length === 0) {
       Deck.shuffle(copy, this.random);
@@ -53,7 +56,7 @@ export class Deck<T extends ICard> {
     }
   }
 
-  public deal(game: Game, source: 'top' | 'bottom' = 'top'): T {
+  public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
     const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
 
     if (card === undefined) {
@@ -61,23 +64,23 @@ export class Deck<T extends ICard> {
     }
 
     if (this.drawPile.length === 0) {
-      game.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
+      logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
       this.shuffle();
     }
 
     return card;
   }
 
-  public dealByCondition(game: Game, total: number, include: (card: T) => boolean) {
+  public drawByCondition(logger: Logger, total: number, include: (card: T) => boolean) {
     const result: Array<T> = [];
     const discardedCards = new Set<CardName>();
 
     while (result.length < total) {
-      if (discardedCards.size >= this.drawPile.length + this.discards.length) {
-        game.log(`discarded every ${this.type} card without a match`);
+      if (discardedCards.size >= this.drawPile.length + this.discardPile.length) {
+        logger.log(`discarded every ${this.type} card without a match`);
         break;
       }
-      const projectCard = this.deal(game);
+      const projectCard = this.draw(logger);
       if (include(projectCard)) {
         result.push(projectCard);
       } else {
@@ -86,14 +89,14 @@ export class Deck<T extends ICard> {
       }
     }
     if (discardedCards.size > 0) {
-      LogHelper.logDiscardedCards(game, Array.from(discardedCards));
+      LogHelper.logDiscardedCards(logger, Array.from(discardedCards));
     }
 
     return result;
   }
 
   public discard(card: T): void {
-    this.discards.push(card);
+    this.discardPile.push(card);
   }
 
   public moveToTop(customList: Array<CardName> | undefined) {
@@ -117,7 +120,7 @@ export class Deck<T extends ICard> {
   public serialize(): SerializedDeck {
     return {
       drawPile: this.drawPile.map((c) => c.name),
-      discards: this.discards.map((c) => c.name),
+      discardPile: this.discardPile.map((c) => c.name),
     };
   }
 }
@@ -132,7 +135,7 @@ export class CorporationDeck extends Deck<ICorporationCard> {
     const cardFinder = new CardFinder();
 
     const deck = cardFinder.corporationCardsFromJSON(d.drawPile);
-    const discarded = cardFinder.corporationCardsFromJSON(d.discards);
+    const discarded = cardFinder.corporationCardsFromJSON(d.discardPile);
     return new CorporationDeck(deck, discarded, UnseededRandom.INSTANCE);
   }
 }
@@ -147,7 +150,7 @@ export class ProjectDeck extends Deck<IProjectCard> {
     const cardFinder = new CardFinder();
 
     const deck = cardFinder.cardsFromJSON(d.drawPile);
-    const discarded = cardFinder.cardsFromJSON(d.discards);
+    const discarded = cardFinder.cardsFromJSON(d.discardPile);
     return new ProjectDeck(deck, discarded, UnseededRandom.INSTANCE);
   }
 }
@@ -172,7 +175,7 @@ export class PreludeDeck extends Deck<IProjectCard> {
     const cardFinder = new CardFinder();
 
     const deck = cardFinder.cardsFromJSON(d.drawPile);
-    const discarded = cardFinder.cardsFromJSON(d.discards);
+    const discarded = cardFinder.cardsFromJSON(d.discardPile);
     return new ProjectDeck(deck, discarded, UnseededRandom.INSTANCE);
   }
 }

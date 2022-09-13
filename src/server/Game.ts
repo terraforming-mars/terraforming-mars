@@ -287,16 +287,16 @@ export class Game implements Logger {
         gameOptions.turmoilExtension ||
         gameOptions.initialDraftVariant) {
         for (let i = 0; i < gameOptions.startingCorporations; i++) {
-          player.dealtCorporationCards.push(corporationDeck.deal(game));
+          player.dealtCorporationCards.push(corporationDeck.draw(game));
         }
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(projectDeck.deal(game));
+            player.dealtProjectCards.push(projectDeck.draw(game));
           }
         }
         if (gameOptions.preludeExtension) {
           for (let i = 0; i < constants.PRELUDE_CARDS_DEALT_PER_PLAYER; i++) {
-            const prelude = preludeDeck.deal(game);
+            const prelude = preludeDeck.draw(game);
             player.dealtPreludeCards.push(prelude);
           }
         }
@@ -320,7 +320,7 @@ export class Game implements Logger {
     if (gameOptions.corporationsDraft) {
       game.phase = Phase.CORPORATIONDRAFTING;
       for (let i = 0; i < gameOptions.startingCorporations * players.length; i++) {
-        game.corporationsToDraft.push(game.corporationDeck.deal(game));
+        game.corporationsToDraft.push(game.corporationDeck.draw(game));
       }
       // First player should be the last player
       const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
@@ -1527,14 +1527,14 @@ export class Game implements Logger {
 
   public discardForCost(cardCount: 1 | 2, toPlace: TileType) {
     if (cardCount === 1) {
-      const card = this.projectDeck.deal(this);
+      const card = this.projectDeck.draw(this);
       this.projectDeck.discard(card);
       this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
       return card.cost;
     } else {
-      const card1 = this.projectDeck.deal(this);
+      const card1 = this.projectDeck.draw(this);
       this.projectDeck.discard(card1);
-      const card2 = this.projectDeck.deal(this);
+      const card2 = this.projectDeck.draw(this);
       this.projectDeck.discard(card2);
       this.log('Drew and discarded ${0} (cost ${1}) and ${2} (cost ${3}) to place a ${4}', (b) => b.card(card1).number(card1.cost).card(card2).number(card2.cost).tileType(toPlace));
       return card1.cost + card2.cost;

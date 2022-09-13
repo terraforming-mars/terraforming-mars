@@ -33,7 +33,7 @@ describe('LunarPlanningOffice', () => {
     game.projectDeck.drawPile.push(new MareNectarisMine());
     game.projectDeck.drawPile.push(new MicroMills());
     game.projectDeck.drawPile.push(new MareImbriumMine());
-    game.projectDeck.discards = [];
+    game.projectDeck.discardPile = [];
 
     expect(card.play(player)).is.undefined;
     runAllActions(game);
@@ -42,10 +42,10 @@ describe('LunarPlanningOffice', () => {
 
     expect(player.popWaitingFor()).is.undefined;
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);
-    expect(game.projectDeck.discards.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
+    expect(game.projectDeck.discardPile.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
 
     // Robotic Workforce is at the top of the deck.
-    expect(game.projectDeck.deal(game).name).eq(CardName.ROBOTIC_WORKFORCE);
+    expect(game.projectDeck.draw(game).name).eq(CardName.ROBOTIC_WORKFORCE);
   });
 });
 

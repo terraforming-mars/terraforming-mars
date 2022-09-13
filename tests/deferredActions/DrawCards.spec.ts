@@ -28,19 +28,19 @@ describe('DrawCards', function() {
   it('keeps cards', function() {
     DrawCards.keep(player, [cards[0], cards[1]]);
     expect(player.cardsInHand).has.length(2);
-    expect(projectDeck.discards).has.length(0);
+    expect(projectDeck.discardPile).has.length(0);
   });
 
   it('discards cards', function() {
     DrawCards.discard(player, [cards[1]], cards);
     expect(player.cardsInHand).has.length(0);
-    expect(projectDeck.discards).has.length(2);
+    expect(projectDeck.discardPile).has.length(2);
   });
 
   it('draws 3', function() {
     DrawCards.keepAll(player, 3).execute();
     expect(player.cardsInHand).has.length(3);
-    expect(projectDeck.discards).has.length(0);
+    expect(projectDeck.discardPile).has.length(0);
   });
 
   it('draws 3 special', function() {
@@ -56,7 +56,7 @@ describe('DrawCards', function() {
     expect(action.config.max).to.eq(2);
     action.cb([action.cards[0], action.cards[2]]);
     expect(player.cardsInHand).has.length(2);
-    expect(projectDeck.discards).has.length(2);
+    expect(projectDeck.discardPile).has.length(2);
   });
 
   it('buys 1', function() {
@@ -67,7 +67,7 @@ describe('DrawCards', function() {
     action.cb([action.cards[0]]);
     player.game.deferredActions.runNext();
     expect(player.cardsInHand).has.length(1);
-    expect(projectDeck.discards).has.length(0);
+    expect(projectDeck.discardPile).has.length(0);
     expect(player.megaCredits).to.eq(0);
   });
 
@@ -78,7 +78,7 @@ describe('DrawCards', function() {
     expect(action.config.max).to.eq(0);
     action.cb([]);
     expect(player.cardsInHand).has.length(0);
-    expect(projectDeck.discards).has.length(1);
+    expect(projectDeck.discardPile).has.length(1);
     expect(player.megaCredits).to.eq(2);
   });
 });

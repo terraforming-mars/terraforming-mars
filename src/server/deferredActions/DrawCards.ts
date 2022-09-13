@@ -26,7 +26,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
 
   public execute() : T {
     const game = this.player.game;
-    const cards = game.projectDeck.dealByCondition(game, this.count, (card) => {
+    const cards = game.projectDeck.drawByCondition(game, this.count, (card) => {
       if (this.options.resource !== undefined && this.options.resource !== card.resourceType) {
         return false;
       }

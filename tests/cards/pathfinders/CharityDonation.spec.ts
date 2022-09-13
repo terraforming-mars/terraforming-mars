@@ -77,6 +77,6 @@ describe('CharityDonation', function() {
     expect(player1.cardsInHand).deep.eq([acquiredCompany]);
     expect(player2.cardsInHand).deep.eq([beamFromAThoriumAsteroid]);
     expect(player3.cardsInHand).deep.eq([decomposers]);
-    expect(game.projectDeck.discards).deep.eq([ceosFavoriteProject]);
+    expect(game.projectDeck.discardPile).deep.eq([ceosFavoriteProject]);
   });
 });

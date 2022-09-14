@@ -5,10 +5,10 @@ import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 
 export interface IGlobalEvent {
-    name: GlobalEventName,
-    description: string,
-    revealedDelegate: PartyName,
-    currentDelegate: PartyName,
-    renderData: ICardRenderRoot;
-    resolve: (game: Game, turmoil: Turmoil) => void;
+  name: GlobalEventName,
+  description: string,
+  revealedDelegate: PartyName,
+  currentDelegate: PartyName,
+  renderData: ICardRenderRoot;
+  resolve: (game: Game, turmoil: Turmoil) => void;
 }

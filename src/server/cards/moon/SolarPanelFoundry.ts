@@ -19,7 +19,7 @@ export class SolarPanelFoundry extends Card implements IActionCard, IProjectCard
       metadata: {
         cardNumber: 'M89',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 2 Steel to increase your Energy Production 1 step.',
+          b.action('Spend 2 steel to increase your Energy Production 1 step.',
             (eb) => eb.startAction.steel(2).arrow().production((pb) => pb.energy(1)));
         }),
       },

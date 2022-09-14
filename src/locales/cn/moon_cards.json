@@ -61,7 +61,7 @@
   "Gain 2 steel and 2 titanium. Raise the Mining Rate 2 steps.":"增加2个钢和2个钛。提高采矿效率2级。",
 
   "Darkside Mining Syndicate":"黑暗采矿集团",
-  "Increase your Titanium production 2 steps, or 1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.":"增加您的钛产量2级，如果采矿率至少为2，则增加1级。然后提高采矿效率1",
+  "Increase your titanium production 2 steps, or 1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.":"增加您的钛产量2级，如果采矿率至少为2，则增加1级。然后提高采矿效率1",
 
   "Darkside Observatory":"黑暗矿业集团",
   "Action: Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]":"行动：在任意卡片上添加1门科学资源(每个科学资源给予2个VP或更多的卡片除外)",
@@ -133,7 +133,7 @@
 
   "Luna Political Institute" :"月球政治研究所",
   "2 Moon": "2 月球标志",
-  "Action: Move one of your delegates from the reserve to any party.": "行动：把你的一名代表从预备区移到任何党派。",
+  "Action: Move one of your delegates in any party.": "行动：把你的一名代表从预备区移到任何党派。",
   "Requires that you have 2 Moon tags.": "需要两个月球标志。",
 
   "Luna Project Office" :"月球项目办公室",
@@ -181,7 +181,7 @@
   "Lunar Steel" :"月球钢制品",
 
   "Lunar Trade Fleet" :"月球贸易车队",
-  "2 Titanium production": "2钛产量",
+  "2 titanium production": "2钛产量",
   "Requires that you have 2 titanium production. Increase your M€ production 1 step. Raise the Logistic Rate 1 step.":"需要你有2钛产量。降低你的M€产量1级。提升物流效率1级。",
 
   "Mare Imbrium Mine": "雨海采矿",
@@ -235,7 +235,7 @@
 
   "Processor Factory":"处理器工厂",
   "1 VP for every 3 data resources here.":"此卡上每3个数据资源价值1VP。",
-  "Action: Spend 1 Steel to add 2 Data resources to ANY card.":"行动：花费1钢，在任何牌上增加2数据资源。",
+  "Action: Spend 1 steel to add 2 Data resources to ANY card.":"行动：花费1钢，在任何牌上增加2数据资源。",
 
   "Revolting Colonists":"反抗的殖民者",
   "4 Colony rate":"4 殖民效率",
@@ -255,7 +255,7 @@
   "Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per colony tile, mine tile and road tile on the Moon.":"花费1钛。提升物流效率1级。月球上每有一个殖民地、采矿、道路板块，获得1M€。",
 
   "Solar Panel Foundry":"太阳能板铸造厂",
-  "Action: Spend 2 Steel to increase your Energy Production 1 step.":"行动：花费2钢，提升你的电力产量1级。",
+  "Action: Spend 2 steel to increase your Energy Production 1 step.":"行动：花费2钢，提升你的电力产量1级。",
 
   "Sphere Habitats":"球形栖息地",
   "Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.":"花费1钛。在月球上放置1个殖民地板块，并提升殖民效率1级。",

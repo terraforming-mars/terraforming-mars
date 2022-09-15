@@ -15,7 +15,7 @@ import {BoardType} from '../boards/BoardType';
 import {Units} from '../../common/Units';
 import {CardDiscount} from '../../common/cards/Types';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
-import {TileType} from '@/common/TileType';
+import {TileType} from '../../common/TileType';
 
 export interface IActionCard {
     action: (player: Player) => PlayerInput | undefined;

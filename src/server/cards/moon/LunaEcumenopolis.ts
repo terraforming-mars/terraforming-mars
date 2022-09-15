@@ -10,7 +10,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {ISpace} from '../../boards/ISpace';
-import {IMoonData} from '@/server/moon/IMoonData';
+import {IMoonData} from '../../moon/IMoonData';
 
 export class LunaEcumenopolis extends Card {
   constructor() {

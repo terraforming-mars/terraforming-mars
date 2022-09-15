@@ -1,5 +1,4 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,6 +14,7 @@ export class HeliostatMirrorArray extends Card {
 
       behavior: {
         production: {energy: 2},
+        stock: {heat: 1},
       },
       reserveUnits: {titanium: 1},
 
@@ -28,10 +28,5 @@ export class HeliostatMirrorArray extends Card {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.heat++;
-    return undefined;
   }
 }

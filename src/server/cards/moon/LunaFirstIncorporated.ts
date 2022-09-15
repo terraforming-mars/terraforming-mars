@@ -17,6 +17,10 @@ export class LunaFirstIncorporated extends Card implements ICorporationCard {
       tags: [Tag.MOON],
       startingMegaCredits: 40,
 
+      behavior: {
+        stock: {steel: 2, titanium: 2},
+      },
+
       metadata: {
         description: 'You start with 40 M€, 2 steel, and 2 Titanium.',
         cardNumber: '',
@@ -41,8 +45,6 @@ export class LunaFirstIncorporated extends Card implements ICorporationCard {
 
   public override bespokePlay(player: Player) {
     MoonExpansion.moonData(player.game).lunaFirstPlayer = player;
-    player.steel += 2;
-    player.titanium += 2;
     return undefined;
   }
 }

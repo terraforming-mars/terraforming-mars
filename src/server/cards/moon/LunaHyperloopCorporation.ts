@@ -20,6 +20,10 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
       tags: [Tag.MOON, Tag.BUILDING],
       startingMegaCredits: 38,
 
+      behavior: {
+        stock: {steel: 4},
+      },
+
       victoryPoints: 'special',
 
       metadata: {
@@ -35,11 +39,6 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(1, true),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.steel += 4;
-    return undefined;
   }
 
   public canAct() {

@@ -17,7 +17,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       tr: {moonLogistics: 1},
 
       behavior: {
-        global: {moonLogistics: 1},
+        moon: {logisticsRate: 1},
       },
 
       metadata: {

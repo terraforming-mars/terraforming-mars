@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
@@ -18,6 +16,7 @@ export class Habitat14 extends Card {
 
       behavior: {
         production: {energy: -1, megacredits: -1},
+        moon: {colonyTile: {}},
       },
       reserveUnits: {titanium: 1},
       tr: {moonColony: 1},
@@ -35,10 +34,5 @@ export class Habitat14 extends Card {
       },
       tilesBuilt: [TileType.MOON_COLONY],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonColonyTile(player));
-    return undefined;
   }
 }

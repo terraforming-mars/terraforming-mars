@@ -7,7 +7,6 @@ import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {CardRequirements} from '../CardRequirements';
 import {digit} from '../Options';
 
@@ -21,6 +20,10 @@ export class LunaTrainStation extends Card {
 
       behavior: {
         production: {megacredits: 4},
+        moon: {
+          tile: {type: TileType.LUNA_TRAIN_STATION, title: 'Select a space for Luna Train Station.'},
+          logisticsRate: 1,
+        },
       },
       requirements: CardRequirements.builder((b) => b.logisticRate(5)),
       reserveUnits: {steel: 2},
@@ -40,16 +43,6 @@ export class LunaTrainStation extends Card {
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceSpecialMoonTile(player, {
-      tileType: TileType.LUNA_TRAIN_STATION,
-      card: this.name,
-    },
-    'Select a space for Luna Train Station.'));
-    MoonExpansion.raiseLogisticRate(player);
-    return undefined;
   }
 
   public override getVictoryPoints(player: Player) {

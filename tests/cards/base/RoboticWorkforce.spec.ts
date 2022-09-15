@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {ALL_CARD_MANIFESTS} from '../../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllCards';
 import {CapitalAres} from '../../../src/server/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';
@@ -30,6 +30,7 @@ import {isICorporationCard} from '../../../src/server/cards/corporation/ICorpora
 import {isIProjectCard} from '../../../src/server/cards/IProjectCard';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -179,22 +180,14 @@ describe('RoboticWorkforce', () => {
   });
 
   describe('test all cards', () => {
-    ALL_CARD_MANIFESTS.forEach((manifest) => {
-      manifest.projectCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
+    ALL_MODULE_MANIFESTS.forEach((manifest) => {
+      const cards: CardManifest<ICard> = {...manifest.projectCards, ...manifest.preludeCards, ...manifest.corporationCards};
+      for (const [cardName, factory] of CardManifest.entries(cards)) {
+        it(cardName, () => {
+          const card = new factory!.Factory();
+          testCard(card);
         });
-      });
-      manifest.preludeCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
-        });
-      });
-      manifest.corporationCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
-        });
-      });
+      }
     });
 
     const testCard = function(card: ICard) {

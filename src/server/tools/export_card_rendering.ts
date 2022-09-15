@@ -1,10 +1,9 @@
 require('dotenv').config();
 import * as fs from 'fs';
 
-import {ALL_CARD_MANIFESTS} from '../cards/AllCards';
-import {CardManifest} from '../cards/CardManifest';
+import {ALL_MODULE_MANIFESTS} from '../cards/AllCards';
+import {CardManifest, ModuleManifest} from '../cards/ModuleManifest';
 import {ICard} from '../cards/ICard';
-import {Deck} from '../Deck';
 import {GameModule} from '../../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {ALL_EVENTS, getGlobalEventModule} from '../turmoil/globalEvents/GlobalEventDealer';
@@ -19,19 +18,19 @@ import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 class ProjectCardProcessor {
   public static json: Array<ClientCard> = [];
   public static makeJson() {
-    ALL_CARD_MANIFESTS.forEach(this.processManifest);
+    ALL_MODULE_MANIFESTS.forEach(this.processManifest);
   }
 
-  private static processManifest(manifest: CardManifest) {
-    for (const deck of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.standardActions, manifest.standardProjects]) {
-      ProjectCardProcessor.processDeck(manifest.module, deck);
+  private static processManifest(manifest: ModuleManifest) {
+    for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.standardActions, manifest.standardProjects]) {
+      ProjectCardProcessor.processDeck(manifest.module, cardManifest);
     }
   }
 
-  private static processDeck(module: GameModule, deck: Deck<ICard>) {
-    deck.factories.forEach((factory) => {
+  private static processDeck(module: GameModule, cardManifest: CardManifest<ICard>) {
+    for (const factory of CardManifest.values(cardManifest)) {
       ProjectCardProcessor.processCard(module, new factory.Factory(), factory.compatibility);
-    });
+    }
   }
 
   private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {

@@ -1,5 +1,5 @@
 import {ARES_CARD_MANIFEST} from './ares/AresCardManifest';
-import {CardManifest} from './CardManifest';
+import {ModuleManifest} from './ModuleManifest';
 import {COLONIES_CARD_MANIFEST} from './colonies/ColoniesCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './community/CommunityCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './prelude/PreludeCardManifest';
@@ -13,7 +13,7 @@ import {VENUS_CARD_MANIFEST} from './venusNext/VenusCardManifest';
 import {MOON_CARD_MANIFEST} from './moon/MoonCardManifest';
 import {PATHFINDERS_CARD_MANIFEST} from './pathfinders/PathfindersCardManifest';
 
-export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
+export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   BASE_CARD_MANIFEST,
   CORP_ERA_CARD_MANIFEST,
   PROMO_CARD_MANIFEST,

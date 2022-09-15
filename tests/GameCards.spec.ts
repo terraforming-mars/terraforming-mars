@@ -4,6 +4,7 @@ import {CardFinder} from '../src/server/CardFinder';
 import {testGameOptions} from './TestingUtils';
 import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
+import {CardManifest} from '../src/server/cards/ModuleManifest';
 
 describe('GameCards', function() {
   it('correctly removes projectCardsToRemove', function() {
@@ -58,9 +59,8 @@ describe('GameCards', function() {
 
     const preludeDeck = new GameCards(gameOptions).getPreludeCards();
 
-    const turmoilPreludes: Array<CardName> = [];
-    COMMUNITY_CARD_MANIFEST.preludeCards.factories.forEach((cf) => turmoilPreludes.push(cf.cardName));
-    turmoilPreludes.forEach((preludeName) => {
+    const communityPreludes = CardManifest.keys(COMMUNITY_CARD_MANIFEST.preludeCards);
+    communityPreludes.forEach((preludeName) => {
       const preludeCard = new CardFinder().getPreludeByName(preludeName)!;
       expect(preludeDeck.includes(preludeCard)).is.not.true;
     });

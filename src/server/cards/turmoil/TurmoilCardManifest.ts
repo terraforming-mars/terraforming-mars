@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardManifest} from '../CardManifest';
+import {ModuleManifest} from '../ModuleManifest';
 import {AerialLenses} from './AerialLenses';
 import {BannedDelegate} from './BannedDelegate';
 import {CulturalMetropolis} from './CulturalMetropolis';
@@ -23,34 +23,34 @@ import {UtopiaInvest} from './UtopiaInvest';
 import {VoteOfNoConfidence} from './VoteOfNoConfidence';
 import {WildlifeDome} from './WildlifeDome';
 
-export const TURMOIL_CARD_MANIFEST = new CardManifest({
+export const TURMOIL_CARD_MANIFEST = new ModuleManifest({
   module: 'turmoil',
-  projectCards: [
-    {cardName: CardName.AERIAL_LENSES, Factory: AerialLenses},
-    {cardName: CardName.BANNED_DELEGATE, Factory: BannedDelegate},
-    {cardName: CardName.CULTURAL_METROPOLIS, Factory: CulturalMetropolis},
-    {cardName: CardName.DIASPORA_MOVEMENT, Factory: DiasporaMovement},
-    {cardName: CardName.EVENT_ANALYSTS, Factory: EventAnalysts},
-    {cardName: CardName.GMO_CONTRACT, Factory: GMOContract},
-    {cardName: CardName.MARTIAN_MEDIA_CENTER, Factory: MartianMediaCenter},
-    {cardName: CardName.PARLIAMENT_HALL, Factory: ParliamentHall},
-    {cardName: CardName.PR_OFFICE, Factory: PROffice},
-    {cardName: CardName.POLITICAL_ALLIANCE, Factory: PoliticalAlliance},
-    {cardName: CardName.PUBLIC_CELEBRATIONS, Factory: PublicCelebrations},
-    {cardName: CardName.RECRUITMENT, Factory: Recruitment},
-    {cardName: CardName.RED_TOURISM_WAVE, Factory: RedTourismWave},
-    {cardName: CardName.SPONSORED_MOHOLE, Factory: SponsoredMohole},
-    {cardName: CardName.SUPPORTED_RESEARCH, Factory: SupportedResearch},
-    {cardName: CardName.WILDLIFE_DOME, Factory: WildlifeDome},
-    {cardName: CardName.VOTE_OF_NO_CONFIDENCE, Factory: VoteOfNoConfidence},
-  ],
+  projectCards: {
+    [CardName.AERIAL_LENSES]: {Factory: AerialLenses},
+    [CardName.BANNED_DELEGATE]: {Factory: BannedDelegate},
+    [CardName.CULTURAL_METROPOLIS]: {Factory: CulturalMetropolis},
+    [CardName.DIASPORA_MOVEMENT]: {Factory: DiasporaMovement},
+    [CardName.EVENT_ANALYSTS]: {Factory: EventAnalysts},
+    [CardName.GMO_CONTRACT]: {Factory: GMOContract},
+    [CardName.MARTIAN_MEDIA_CENTER]: {Factory: MartianMediaCenter},
+    [CardName.PARLIAMENT_HALL]: {Factory: ParliamentHall},
+    [CardName.PR_OFFICE]: {Factory: PROffice},
+    [CardName.POLITICAL_ALLIANCE]: {Factory: PoliticalAlliance},
+    [CardName.PUBLIC_CELEBRATIONS]: {Factory: PublicCelebrations},
+    [CardName.RECRUITMENT]: {Factory: Recruitment},
+    [CardName.RED_TOURISM_WAVE]: {Factory: RedTourismWave},
+    [CardName.SPONSORED_MOHOLE]: {Factory: SponsoredMohole},
+    [CardName.SUPPORTED_RESEARCH]: {Factory: SupportedResearch},
+    [CardName.WILDLIFE_DOME]: {Factory: WildlifeDome},
+    [CardName.VOTE_OF_NO_CONFIDENCE]: {Factory: VoteOfNoConfidence},
+  },
 
-  corporationCards: [
-    {cardName: CardName.LAKEFRONT_RESORTS, Factory: LakefrontResorts},
-    {cardName: CardName.PRISTAR, Factory: Pristar},
-    {cardName: CardName.TERRALABS_RESEARCH, Factory: TerralabsResearch},
-    {cardName: CardName.UTOPIA_INVEST, Factory: UtopiaInvest},
-    {cardName: CardName.SEPTUM_TRIBUS, Factory: SeptumTribus, compatibility: 'turmoil'},
-  ],
+  corporationCards: {
+    [CardName.LAKEFRONT_RESORTS]: {Factory: LakefrontResorts},
+    [CardName.PRISTAR]: {Factory: Pristar},
+    [CardName.TERRALABS_RESEARCH]: {Factory: TerralabsResearch},
+    [CardName.UTOPIA_INVEST]: {Factory: UtopiaInvest},
+    [CardName.SEPTUM_TRIBUS]: {Factory: SeptumTribus, compatibility: 'turmoil'},
+  },
 });
 

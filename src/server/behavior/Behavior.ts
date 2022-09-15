@@ -9,7 +9,7 @@ import {Tag} from '../../common/cards/Tag';
 import {Units} from '../../common/Units';
 import {SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {MoonSpaces} from '../moon/MoonSpaces';
+import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {TileType} from '../../common/TileType';
 
 /** A set of steps that an action can perform in any specific order. */

@@ -6,7 +6,7 @@ import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareNubiumMine} from '../../../src/server/cards/moon/MareNubiumMine';
 import {expect} from 'chai';
-import {MoonSpaces} from '../../../src/server/moon/MoonSpaces';
+import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MareNubiumMine', () => {

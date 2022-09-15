@@ -1,19 +1,19 @@
 {
 
  "Basic Infrastructure":"Infrastruttura Base",
- "Place a road tile on the Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.":"Colloca 1 tessera Strada sulla Luna e incrementa la Traccia Logistica di 1 livello. Ottieni 1 Flotta Commerciale.",
+ "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.":"Colloca 1 tessera Strada sulla Luna e incrementa la Traccia Logistica di 1 livello. Ottieni 1 Flotta Commerciale.",
 
  "Core Mine":"Miniera nel Nucleo",
- "Place a mine tile on the Moon and raise the Mining Rate 1 step. Increase your titanium production 1 step.":"Colloca 1 tessera Miniera sulla Luna e incrementa la Traccia Scavi di 1 livello. Incrementa la tua Produzione di Titianio di 1 livello.",
+ "Place a mine tile on The Moon and raise the Mining Rate 1 step. Increase your titanium production 1 step.":"Colloca 1 tessera Miniera sulla Luna e incrementa la Traccia Scavi di 1 livello. Incrementa la tua Produzione di Titianio di 1 livello.",
 
  "First Lunar Settlement":"Primo Insediamento Lunare",
- "Place a colony tile on the Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.":"Colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. Incrementa la tua Produzione di M€ di 1 livello.",
+ "Place a colony tile on The Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.":"Colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. Incrementa la tua Produzione di M€ di 1 livello.",
 
  "Lunar Planning Office":"Ufficio di Progettazione Lunare",
  "Draw 2 cards with Moon tag. Gain 6 steel.":"Pesca 2 carte con il simbolo Luna. Ottieni 6 risorse Acciaio.",
 
  "Mining Complex":"Complesso Minerario",
- "Place a mine tile on the Moon and raise the Mining Rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.":"Colloca 1 tessera Miniera sulla Luna e incrementa la Traccia Scavi di 1 livello. Colloca 1 tessera Strada accanto a una tessera Miniera e incrementa la Traccia Logistica di 1 livello. Paga 7 M€.",
+ "Place a mine tile on The Moon and raise the Mining Rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.":"Colloca 1 tessera Miniera sulla Luna e incrementa la Traccia Scavi di 1 livello. Colloca 1 tessera Strada accanto a una tessera Miniera e incrementa la Traccia Logistica di 1 livello. Paga 7 M€.",
 
 
 
@@ -34,10 +34,10 @@
   "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.":"Diminuisci la tua Produzione di Energia di 1 livello e la tua Produzione di M€ di 1 livello. Incrementa la tua Produzione di Piante di 2 livelli.",
 
   "Aristarchus Road Network":"Rete Stradale Aristarco",
-  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on the Moon and raise the Logistics Rate 1 step.":"Spendi 2 risorse Acciao. Incrementa la tua Produzione di M€ di 2 livelli. Colloca 1 tessera Strada sulla Luna e incrementa la Traccia Logistica di 1 livello.",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.":"Spendi 2 risorse Acciao. Incrementa la tua Produzione di M€ di 2 livelli. Colloca 1 tessera Strada sulla Luna e incrementa la Traccia Logistica di 1 livello.",
 
   "Colonist Shuttles":"Shuttle Coloniali",
-  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2 M€ for each colony tile on the Moon.":"Spendi 1 risorsa Titanio. Incrementa la Traccia Colonie di 1 livello. Ottieni 2 M€ per ogni tessera Colonia sulla Luna.",
+  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2 M€ for each colony tile on The Moon.":"Spendi 1 risorsa Titanio. Incrementa la Traccia Colonie di 1 livello. Ottieni 2 M€ per ogni tessera Colonia sulla Luna.",
 
   "Copernicus Solar Arrays":"Pannelli Solari Copernico",
   "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.":"Spendi 1 risorsa Titanio. Ottieni 2 risorse Calore. Incrementa la tua Produzione di Energia di 1 livello.",
@@ -60,7 +60,7 @@
   "Gain 2 steel and 2 titanium. Raise the Mining Rate 2 steps.":"Ottieni 2 risorse Acciaio e 2 risorse Titanio. Incrementa la Traccia Scavi di 2 livelli.",
 
   "Darkside Mining Syndicate":"Unione Mineraria del Lato Oscuro",
-  "Increase your Titanium production 2 steps, or 1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.":"Incrementa la tua Produzione di Titanio di 2 livelli, o di 1 livello se la Traccia Scavi è almeno al livello 2. Dopodiché incrementa la Traccia Scavi di 1 livello.",
+  "Increase your titanium production 2 steps, or 1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.":"Incrementa la tua Produzione di Titanio di 2 livelli, o di 1 livello se la Traccia Scavi è almeno al livello 2. Dopodiché incrementa la Traccia Scavi di 1 livello.",
 
   "Darkside Observatory":"Osservatorio sul Lato Oscuro",
   "Action: Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]":"Azione: aggiungi 1 risorsa Scienza a una qualunque carta [tranne a quelle che danno 2 o più PV per risorsa].",

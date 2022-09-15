@@ -14,7 +14,7 @@ export class UndergroundDetonators extends Card implements IProjectCard {
 
       behavior: {
         stock: {steel: 1, titanium: 1},
-        global: {moonMining: 1},
+        moon: {miningRate: 1},
       },
 
       metadata: {

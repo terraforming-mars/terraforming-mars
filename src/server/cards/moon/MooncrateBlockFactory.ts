@@ -16,7 +16,7 @@ export class MooncrateBlockFactory extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.miningTiles(1)),
 
       metadata: {
-        description: 'Requires 1 mine on the Moon.',
+        description: 'Requires 1 mine on The Moon.',
         cardNumber: 'M38',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you pay for a Lunar standard project, you spend 4M€ less.', (eb) => {

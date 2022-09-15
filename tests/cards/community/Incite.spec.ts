@@ -4,7 +4,7 @@ import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/server/Game';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Incite', function() {
@@ -16,8 +16,7 @@ describe('Incite', function() {
     card = new Incite();
     player = TestPlayer.BLUE.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player], player, gameOptions);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
 
     card.play(player);
     player.setCorporationForTest(card);

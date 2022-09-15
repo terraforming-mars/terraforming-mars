@@ -21,7 +21,7 @@ export class MicrosingularityPlant extends Card implements IProjectCard {
       },
 
       metadata: {
-        description: 'Requires 2 colonies on the Moon. Increase your energy production 2 steps.',
+        description: 'Requires 2 colonies on The Moon. Increase your energy production 2 steps.',
         cardNumber: 'M40',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2));

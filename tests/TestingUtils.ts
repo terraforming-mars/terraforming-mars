@@ -55,6 +55,11 @@ export function resetBoard(game: Game): void {
   });
 }
 
+export function testGameOptions(options: Partial<GameOptions>): GameOptions {
+  return {...DEFAULT_GAME_OPTIONS, ...options};
+}
+
+// Use gameOptions, which doesn't hide that certain features are on.
 export function setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
   const defaultOptions = {
     ...DEFAULT_GAME_OPTIONS,

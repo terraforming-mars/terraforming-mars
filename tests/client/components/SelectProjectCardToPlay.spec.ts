@@ -389,7 +389,7 @@ describe('SelectProjectCardToPlay', () => {
   });
 
   it('using titanium metal bonus without using steel', async () => {
-    // Io Mining Industries cost 41 mc. Player has 10 MC, 2 Steel and 13 Ti.
+    // Io Mining Industries cost 41 mc. Player has 10 MC, 2 steel and 13 Ti.
     // The steel is artificially inflated to be worth 4 M€ each.
     // The titanium is artificially inflated to be worth 5 M€ each.
     // The algorithm will try to spend 10 mc. Then spend as much Ti as possible.

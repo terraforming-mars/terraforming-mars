@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
+import {testGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/server/cards/moon/AlgaeBioreactors';
 import {expect} from 'chai';
@@ -7,8 +7,6 @@ import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Phase} from '../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('AlgaeBioreactors', () => {
   let player: TestPlayer;
@@ -18,7 +16,7 @@ describe('AlgaeBioreactors', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new AlgaeBioreactors();
     moonData = MoonExpansion.moonData(game);
   });
@@ -50,7 +48,7 @@ describe('AlgaeBioreactors', () => {
 
   it('canPlay when Reds are in power', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 

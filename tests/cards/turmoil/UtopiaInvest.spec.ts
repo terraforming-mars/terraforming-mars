@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('UtopiaInvest', function() {
   it('Should play', function() {
     const card = new UtopiaInvest();
-    const game = newTestGame(2, setCustomGameOptions());
+    const game = newTestGame(2, testGameOptions({turmoilExtension: true}));
     const player = getTestPlayer(game, 0);
     const play = card.play(player);
     expect(play).is.undefined;

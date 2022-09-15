@@ -12,7 +12,7 @@ describe('EconomicHelp', function() {
 
   beforeEach(function() {
     card = new EconomicHelp();
-    game = newTestGame(1, {pathfindersExpansion: true});
+    game = newTestGame(1, {pathfindersExpansion: true, venusNextExtension: true});
     player = getTestPlayer(game, 0);
   });
 

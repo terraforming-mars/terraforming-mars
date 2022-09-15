@@ -1,11 +1,9 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {MoonSpaces} from '../../moon/MoonSpaces';
+import {MoonSpaces} from '../../../common/moon/MoonSpaces';
 import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -20,6 +18,9 @@ export class MareNectarisMine extends Card implements IProjectCard {
 
       behavior: {
         production: {steel: 1},
+        moon: {
+          mineTile: {space: MoonSpaces.MARE_NECTARIS},
+        },
       },
       reserveUnits: {titanium: 1},
       tr: {moonMining: 1},
@@ -35,11 +36,5 @@ export class MareNectarisMine extends Card implements IProjectCard {
       },
       tilesBuilt: [TileType.MOON_MINE],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    MoonExpansion.addMineTile(player, MoonSpaces.MARE_NECTARIS, this.name);
-    MoonExpansion.raiseMiningRate(player);
-    return undefined;
   }
 }

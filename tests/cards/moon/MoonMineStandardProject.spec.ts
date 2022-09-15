@@ -2,7 +2,7 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
+import {cast, testGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
 import {expect} from 'chai';
@@ -10,8 +10,6 @@ import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectP
 import {PlaceMoonMineTile} from '../../../src/server/moon/PlaceMoonMineTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonMineStandardProject', () => {
   let game: Game;
@@ -21,7 +19,7 @@ describe('MoonMineStandardProject', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new MoonMineStandardProject();
   });
@@ -75,7 +73,7 @@ describe('MoonMineStandardProject', () => {
 
   it('can act when Reds are in power.', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 

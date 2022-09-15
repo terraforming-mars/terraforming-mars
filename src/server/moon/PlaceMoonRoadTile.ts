@@ -1,34 +1,25 @@
 import {ISpace} from '../boards/ISpace';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {SelectSpace} from '../inputs/SelectSpace';
 import {Player} from '../Player';
+import {BasePlaceMoonTile} from './BasePlaceMoonTile';
+import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonRoadTile extends DeferredAction {
+export class PlaceMoonRoadTile extends BasePlaceMoonTile {
   constructor(
     player: Player,
-    public title = 'Select a space on the Moon for a road tile.',
-    public spaces?: Array<ISpace>,
+    spaces?: Array<ISpace>,
+    title = 'Select a space on The Moon for a road tile.',
   ) {
-    super(player, Priority.DEFAULT);
+    super(player, spaces, title);
   }
 
-  public execute() {
-    const moonData = MoonExpansion.moonData(this.player.game);
-    const spaces = this.spaces !== undefined ?
-      this.spaces:
-      moonData.moon.getAvailableSpacesOnLand(this.player);
+  protected getSpaces(moonData: IMoonData) {
+    return moonData.moon.getAvailableSpacesOnLand(this.player);
+  }
 
-    if (spaces.length === 0) {
-      return undefined;
-    }
-    return new SelectSpace(
-      this.title,
-      spaces,
-      (space) => {
-        MoonExpansion.addRoadTile(this.player, space.id);
-        MoonExpansion.raiseLogisticRate(this.player);
-        return undefined;
-      });
+  protected placeTile(space: ISpace) {
+    MoonExpansion.addRoadTile(this.player, space.id);
+    MoonExpansion.raiseLogisticRate(this.player);
+    return undefined;
   }
 }

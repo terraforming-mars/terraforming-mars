@@ -8,7 +8,7 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {cast, maxOutOceans, runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {cast, maxOutOceans, runAllActions, testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/server/turmoil/parties/Reds';
 import {Greens} from '../../src/server/turmoil/parties/Greens';
@@ -47,9 +47,8 @@ describe('Turmoil', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
 
-    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
   });
@@ -260,7 +259,7 @@ describe('Turmoil', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.production.override({energy: 2}); // Card requirement.
@@ -296,7 +295,7 @@ describe('Turmoil', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.production.override({energy: 2}); // Card requirement.
@@ -317,7 +316,7 @@ describe('Turmoil', function() {
     // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
     player.production.override({energy: 2}); // Card requirement.
@@ -340,7 +339,7 @@ describe('Turmoil', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -377,7 +376,7 @@ describe('Turmoil', function() {
     // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -397,7 +396,7 @@ describe('Turmoil', function() {
     // ArtificialLake uses trSource.
     const card = new ArtificialLake();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     (game as any).temperature = -6; // minimum requirement for the card.
     game.phase = Phase.ACTION;
@@ -426,7 +425,7 @@ describe('Turmoil', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -463,7 +462,7 @@ describe('Turmoil', function() {
     // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -483,7 +482,7 @@ describe('Turmoil', function() {
     // Raises the colony rate two steps.
     const card = new WaterTreatmentComplex();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true, moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -523,7 +522,7 @@ describe('Turmoil', function() {
     // Raises the mining rate two steps.
     const card = new DarksideMeteorBombardment();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true, moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -559,7 +558,7 @@ describe('Turmoil', function() {
     // Raises the logistic rate two steps.
     const card = new LunaStagingStation();
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true, moonExpansion: true}));
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -597,7 +596,7 @@ describe('Turmoil', function() {
 
   it('Reds: Cannot raise TR directly without the money to back it up', function() {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true, moonExpansion: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 

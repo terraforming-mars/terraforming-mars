@@ -5,7 +5,7 @@ import {MilestoneAwardSelector} from '../src/server/MilestoneAwardSelector';
 import {IMilestone} from '../src/server/milestones/IMilestone';
 import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/server/milestones/Milestones';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
-import {setCustomGameOptions} from './TestingUtils';
+import {testGameOptions} from './TestingUtils';
 import {intersection} from '../src/common/utils/utils';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
@@ -72,35 +72,35 @@ describe('MilestoneAwardSelector', () => {
   it('Main entrance point', () => {
     // These tests don't test results, they just make sure these calls don't fail.
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.NONE}));
+      testGameOptions({randomMA: RandomMAOptionType.NONE}));
   });
   it('Main entrance point - limited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED}));
+      testGameOptions({randomMA: RandomMAOptionType.LIMITED}));
   });
   it('Main entrance point - unlimited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
+      testGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.NONE, moonExpansion: true}));
+      testGameOptions({randomMA: RandomMAOptionType.NONE, moonExpansion: true}));
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, moonExpansion: true}));
+      testGameOptions({randomMA: RandomMAOptionType.LIMITED, moonExpansion: true}));
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true}));
+      testGameOptions({randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true}));
   });
 
   it('Main entrance point, Ares & Moon enabled', () => {
     // These tests don't test results, they just make sure these calls don't fail.
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true}));
+      testGameOptions({randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true}));
   });
   it('Main entrance point, Ares & Moon enabled - limited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true}));
+      testGameOptions({randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true}));
   });
   it('Main entrance point, Ares & Moon enabled - unlimited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true}));
+      testGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true}));
   });
 
   it('Do not select expansion milestones or awards when they are not selected', () => {
@@ -108,7 +108,7 @@ describe('MilestoneAwardSelector', () => {
     const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES, ...ARABIA_TERRA_MILESTONES].map((m) => m.name);
     for (let idx = 0; idx < 10000; idx++) {
       const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(
-        setCustomGameOptions({
+        testGameOptions({
           randomMA: RandomMAOptionType.LIMITED,
           venusNextExtension: false,
           aresExtension: false,

@@ -199,7 +199,7 @@
     "${0} spent ${1} energy": "${0} bezahlte ${1} Energie",
     "${0} placed a Greenery tile": "${0} platzierte ein Grünflächenplättchen",
     "${0} must select ${1} bonus resource(s) from ${2}' ability": "${0} muss ${1} Bonus-Ressource(n) von ${2} auswählen",
-    "${0} placed a ${1} tile on the Moon at (${2}, ${3})": "${0} platzierte ein ${1}-Plättchen auf dem Mond (Reihe ${2}, Feld ${3})",
+    "${0} placed a ${1} tile on The Moon at (${2}, ${3})": "${0} platzierte ein ${1}-Plättchen auf dem Mond (Reihe ${2}, Feld ${3})",
     "${0} acted as World Government and raised the mining rate ${1} step(s)": "${0} agierte als Weltregierung und erhöhte die Bergbaurate um ${1} Schritt(e)",
     "${0} raised the mining rate ${1} step(s)": "${0} erhöhte die Bergbaurate um ${1} Schritt(e)",
     "${0} acted as World Government and raised the colony rate ${1} step(s)": "${0} agierte als Weltregierung und erhöhte die Kolonierate um ${1} Schritt(e)",

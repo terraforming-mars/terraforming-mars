@@ -20,7 +20,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
       tr: {moonMining: 1},
 
       behavior: {
-        global: {moonMining: 1},
+        moon: {miningRate: 1},
       },
 
       metadata: {

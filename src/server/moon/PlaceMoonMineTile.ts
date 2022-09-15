@@ -1,17 +1,18 @@
 import {ISpace} from '../boards/ISpace';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {SelectSpace} from '../inputs/SelectSpace';
 import {Player} from '../Player';
+import {BasePlaceMoonTile} from './BasePlaceMoonTile';
+import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonMineTile extends DeferredAction {
+export class PlaceMoonMineTile extends BasePlaceMoonTile {
   private cb: (space: ISpace) => void = () => {};
 
   constructor(
     player: Player,
-    public title: string = 'Select a space on the Moon for a mining tile.',
+    spaces?: Array<ISpace>,
+    title: string = 'Select a space on The Moon for a mining tile.',
   ) {
-    super(player, Priority.DEFAULT);
+    super(player, spaces, title);
   }
 
   public andThen(cb: (space: ISpace) => void) {
@@ -19,21 +20,14 @@ export class PlaceMoonMineTile extends DeferredAction {
     return this;
   }
 
-  public execute() {
-    const moonData = MoonExpansion.moonData(this.player.game);
-    const spaces = moonData.moon.getAvailableSpacesForMine(this.player);
+  protected getSpaces(moonData: IMoonData) {
+    return moonData.moon.getAvailableSpacesForMine(this.player);
+  }
 
-    if (spaces.length === 0) {
-      return undefined;
-    }
-    return new SelectSpace(
-      this.title,
-      spaces,
-      (space) => {
-        MoonExpansion.addMineTile(this.player, space.id);
-        MoonExpansion.raiseMiningRate(this.player);
-        this.cb(space);
-        return undefined;
-      });
+  public placeTile(space: ISpace) {
+    MoonExpansion.addMineTile(this.player, space.id);
+    MoonExpansion.raiseMiningRate(this.player);
+    this.cb(space);
+    return undefined;
   }
 }

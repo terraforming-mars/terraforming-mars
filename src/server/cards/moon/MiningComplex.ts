@@ -20,7 +20,7 @@ export class MiningComplex extends PreludeCard {
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
 
       metadata: {
-        description: 'Place a mine tile on the Moon and raise the Mining Rate 1 step. ' +
+        description: 'Place a mine tile on The Moon and raise the Mining Rate 1 step. ' +
         'Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. ' +
         'Pay 7 M€.',
         cardNumber: '',
@@ -46,8 +46,9 @@ export class MiningComplex extends PreludeCard {
         player.game.defer(
           new PlaceMoonRoadTile(
             player,
+            availableRoadSpaces,
             'Select a space next to the mine for a road',
-            availableRoadSpaces));
+          ));
       }));
     player.deductResource(Resources.MEGACREDITS, 7);
     return undefined;

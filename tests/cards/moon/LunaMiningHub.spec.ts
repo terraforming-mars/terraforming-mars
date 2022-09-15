@@ -2,14 +2,12 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaMiningHub} from '../../../src/server/cards/moon/LunaMiningHub';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/server/moon/PlaceSpecialMoonTile';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaMiningHub', () => {
   let game: Game;
@@ -19,7 +17,7 @@ describe('LunaMiningHub', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new LunaMiningHub();
   });

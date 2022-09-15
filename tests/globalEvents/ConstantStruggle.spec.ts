@@ -23,7 +23,7 @@ describe('ConstantStruggle', function() {
     turmoil.dominantParty.delegates.push(player2.id);
 
     expect(game.pathfindersData).deep.eq({
-      venus: 0,
+      venus: -1,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -37,7 +37,7 @@ describe('ConstantStruggle', function() {
     expect(player2.megaCredits).eq(5);
 
     expect(game.pathfindersData).deep.eq({
-      venus: 2,
+      venus: -1,
       earth: 2,
       mars: 2,
       jovian: 2,

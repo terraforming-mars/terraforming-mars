@@ -1,10 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 
 export class BasicInfrastructure extends PreludeCard {
   constructor() {
@@ -13,11 +11,12 @@ export class BasicInfrastructure extends PreludeCard {
       tags: [Tag.MOON],
 
       behavior: {
+        moon: {roadTile: {}},
         colonies: {addTradeFleet: 1},
       },
 
       metadata: {
-        description: 'Place a road tile on the Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.',
+        description: 'Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.tile(TileType.MOON_ROAD, false).tradeFleet();
@@ -25,10 +24,5 @@ export class BasicInfrastructure extends PreludeCard {
       },
       tilesBuilt: [TileType.MOON_ROAD],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonRoadTile(player));
-    return undefined;
   }
 }

@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
@@ -18,13 +16,14 @@ export class GeodesicTents extends Card {
 
       behavior: {
         production: {energy: -1, plants: 1},
+        moon: {colonyTile: {}},
       },
       reserveUnits: {titanium: 1},
       tr: {moonColony: 1},
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your plant production 1 step. ' +
-        'Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
+        'Spend 1 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.',
         cardNumber: 'M06',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
@@ -36,10 +35,5 @@ export class GeodesicTents extends Card {
       },
       tilesBuilt: [TileType.MOON_COLONY],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonColonyTile(player));
-    return undefined;
   }
 }

@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 
@@ -17,8 +17,7 @@ describe('ByElection', function() {
     card = new ByElection();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
   });
 
   it('Should play', function() {

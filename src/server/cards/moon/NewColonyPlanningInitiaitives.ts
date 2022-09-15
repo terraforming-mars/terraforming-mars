@@ -14,7 +14,7 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
       tr: {moonColony: 1},
 
       behavior: {
-        global: {moonColony: 1},
+        moon: {colonyRate: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.colonyRate(2)),

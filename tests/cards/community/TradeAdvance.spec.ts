@@ -3,7 +3,7 @@ import {TradeAdvance} from '../../../src/server/cards/community/TradeAdvance';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions, runAllActions} from '../../TestingUtils';
+import {testGameOptions, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TradeAdvance', function() {
@@ -15,7 +15,7 @@ describe('TradeAdvance', function() {
     card = new TradeAdvance();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = testGameOptions({
       coloniesExtension: true,
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });

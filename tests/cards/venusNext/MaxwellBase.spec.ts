@@ -7,7 +7,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -24,8 +24,7 @@ describe('MaxwellBase', function() {
     card = new MaxwellBase();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true}));
   });
 
   it('Can not play without energy production', function() {

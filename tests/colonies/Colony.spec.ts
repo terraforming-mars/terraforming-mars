@@ -10,7 +10,7 @@ import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
-import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {cast, runAllActions, testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/server/cards/community/Pallas';
@@ -51,7 +51,7 @@ describe('Colony', function() {
     player2 = TestPlayer.RED.newPlayer();
     player3 = TestPlayer.YELLOW.newPlayer();
     player4 = TestPlayer.GREEN.newPlayer();
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = testGameOptions({
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.LUNA,

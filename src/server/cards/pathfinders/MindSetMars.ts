@@ -36,7 +36,7 @@ export class MindSetMars extends Card implements ICorporationCard {
           b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', Size.SMALL, false, false).br;
           b.agenda({amount: 2, digit: true}).arrow(Size.SMALL).delegates(1).nbsp;
           b.agenda({amount: 5, digit: true}).arrow(Size.SMALL).city().br;
-          b.text('(Action: Spend 2 agenda resources to place 1 delegate from the reserve in any party.)', Size.SMALL, false, false).br;
+          b.text('(Action: Spend 2 agenda resources to place 1 delegate in any party.)', Size.SMALL, false, false).br;
           b.text('(Action: Spend 5 agenda resources to place a city tile on Mars.)', Size.SMALL, false, false);
         }),
       },

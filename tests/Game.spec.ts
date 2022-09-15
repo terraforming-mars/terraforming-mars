@@ -8,7 +8,7 @@ import * as constants from '../src/common/constants';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {cast, forceGenerationEnd, maxOutOceans, runAllActions, setCustomGameOptions} from './TestingUtils';
+import {cast, forceGenerationEnd, maxOutOceans, runAllActions, testGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resources} from '../src/common/Resources';
@@ -42,7 +42,7 @@ describe('Game', () => {
   it('sets starting production if corporate era not selected', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
-    const gameOptions = setCustomGameOptions({corporateEra: false});
+    const gameOptions = testGameOptions({corporateEra: false});
 
     Game.newInstance('gameid', [player], player, gameOptions);
     expect(player.production.megacredits).to.eq(1);
@@ -326,7 +326,7 @@ describe('Game', () => {
 
   it('Solo player should place final greeneries in TR 63 mode if victory condition is met', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo2', [player], player, setCustomGameOptions({soloTR: true}));
+    const game = Game.newInstance('game-solo2', [player], player, testGameOptions({soloTR: true}));
 
     // Set up end-game conditions
     game.generation = 14;
@@ -345,7 +345,7 @@ describe('Game', () => {
 
   it('Solo player should not place final greeneries in TR63 mode if victory condition not met', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo2', [player], player, setCustomGameOptions({soloTR: true}));
+    const game = Game.newInstance('game-solo2', [player], player, testGameOptions({soloTR: true}));
 
     // Set up near end-game conditions
     game.generation = 14;
@@ -557,7 +557,7 @@ describe('Game', () => {
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
     const secondPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
+    const gameOptions = testGameOptions({boardName: BoardName.HELLAS});
     const game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
@@ -584,7 +584,7 @@ describe('Game', () => {
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
     const secondPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS});
+    const gameOptions = testGameOptions({boardName: BoardName.HELLAS});
     const game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
     player.setCorporationForTest(new Helion());
     player.canUseHeatAsMegaCredits = true;
@@ -611,7 +611,7 @@ describe('Game', () => {
   it('Generates random milestones and awards', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED});
+    const gameOptions = testGameOptions({boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED});
     const game = Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     const prevMilestones = game.milestones.map((m) => m.name).sort();
@@ -635,7 +635,7 @@ describe('Game', () => {
       CardName.TERRALABS_RESEARCH,
       CardName.UTOPIA_INVEST,
     ];
-    const gameOptions = setCustomGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false});
+    const gameOptions = testGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false});
     Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     const corpsAssignedToPlayers =
@@ -657,7 +657,7 @@ describe('Game', () => {
       CardName.STRATEGIC_BASE_PLANNING,
       CardName.EXPERIENCED_MARTIANS,
     ];
-    const gameOptions = setCustomGameOptions({preludeExtension: true, customPreludes, pathfindersExpansion: false, promoCardsOption: false});
+    const gameOptions = testGameOptions({preludeExtension: true, customPreludes, pathfindersExpansion: false, promoCardsOption: false});
     Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     const assignedPreludes =
@@ -727,7 +727,7 @@ describe('Game', () => {
 
   it('deserializing a game without moon data still loads', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({moonExpansion: false}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: false}));
     const serialized = game.serialize();
     delete serialized['moonData'];
     const deserialized = Game.deserialize(serialized);
@@ -736,7 +736,7 @@ describe('Game', () => {
 
   it('deserializing a game without pathfinders still loads', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: false}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
     (serialized.gameOptions as any).pathfindersData = undefined;
     const deserialized = Game.deserialize(serialized);
@@ -745,7 +745,7 @@ describe('Game', () => {
 
   it('deserializing a game with awards', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: false}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.awards).deep.eq(game.awards);
@@ -753,7 +753,7 @@ describe('Game', () => {
 
   it('deserializing a game with milestones', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: false}));
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.milestones).deep.eq(game.milestones);
@@ -763,7 +763,7 @@ describe('Game', () => {
     const toName = (x: IColony) => x.name;
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({coloniesExtension: false}));
+    const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({coloniesExtension: false}));
 
     const colonyNames = game.colonies.map(toName);
     const discardedColonyNames = game.discardedColonies.map(toName);

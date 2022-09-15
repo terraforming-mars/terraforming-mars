@@ -1495,7 +1495,6 @@ export class Player {
   /**
    * Verify if requirements for the card can be met, ignoring the project cost.
    * Only made public for tests.
-   * @deprecated use Card2.
    */
   public simpleCanPlay(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {

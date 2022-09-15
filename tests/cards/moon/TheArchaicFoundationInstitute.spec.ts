@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheArchaicFoundationInstitute} from '../../../src/server/cards/moon/TheArchaicFoundationInstitute';
 import {expect} from 'chai';
@@ -11,15 +11,13 @@ import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
 import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('TheArchaicFoundationInstitute', () => {
   let player: TestPlayer;
   let card: TheArchaicFoundationInstitute;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new TheArchaicFoundationInstitute();
   });
 

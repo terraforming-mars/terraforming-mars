@@ -44,7 +44,6 @@ export class EnergyMarket extends Card implements IProjectCard {
       'Select amount of energy to gain',
       'Gain energy',
       (amount: number) => {
-        player.addResource(Resources.ENERGY, amount);
         player.game.defer(new SelectPaymentDeferred(
           player,
           amount * 2,

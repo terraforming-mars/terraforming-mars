@@ -4,7 +4,7 @@ import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {PROffice} from '../../../src/server/cards/turmoil/PROffice';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('PROffice', function() {
@@ -12,7 +12,7 @@ describe('PROffice', function() {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();
-    const game = newTestGame(1, setCustomGameOptions());
+    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
     const player = getTestPlayer(game, 0);
 
     expect(player.canPlayIgnoringCost(card)).is.not.true;

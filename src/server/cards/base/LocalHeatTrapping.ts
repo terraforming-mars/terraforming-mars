@@ -18,7 +18,8 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
-      reserveUnits: {heat: 5},
+      // The 5 heat will be deducted in bespokePlay
+      reserveUnits: {heat: 5, deduct: false},
 
       metadata: {
         cardNumber: '190',

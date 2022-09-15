@@ -1,7 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
@@ -18,13 +16,16 @@ export class TychoRoadNetwork extends Card {
 
       behavior: {
         production: {megacredits: 1},
+        moon: {
+          roadTile: {},
+        },
       },
       reserveUnits: {steel: 1},
       tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Spend 1 steel. Increase your M€ production 1 step. ' +
-        'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
+        'Place a road tile on The Moon and raise the Logistics Rate 1 step.',
         cardNumber: 'M09',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
@@ -34,10 +35,5 @@ export class TychoRoadNetwork extends Card {
       },
       tilesBuilt: [TileType.MOON_ROAD],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonRoadTile(player));
-    return undefined;
   }
 }

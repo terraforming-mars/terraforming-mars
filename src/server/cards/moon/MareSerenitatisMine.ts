@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonSpaces} from '../../moon/MoonSpaces';
+import {MoonSpaces} from '../../../common/moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -47,7 +47,7 @@ export class MareSerenitatisMine extends Card {
     const availableRoadSpaces = spaces.filter((space) => {
       return space.player === undefined && space.spaceType === SpaceType.LAND;
     });
-    player.game.defer(new PlaceMoonRoadTile(player, 'Select a space next to Mare Serintatis to play a road', availableRoadSpaces));
+    player.game.defer(new PlaceMoonRoadTile(player, availableRoadSpaces, 'Select a space next to Mare Serintatis to play a road'));
     return undefined;
   }
 }

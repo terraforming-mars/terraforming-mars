@@ -14,7 +14,7 @@ import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
-import {formatLogMessage, setCustomGameOptions} from './TestingUtils';
+import {formatLogMessage, testGameOptions} from './TestingUtils';
 import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/server/cards/base/Pets';
@@ -147,7 +147,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = setCustomGameOptions({venusNextExtension: false});
+    const gameOptions = testGameOptions({venusNextExtension: false});
     Game.newInstance('gameid', [player], player, gameOptions);
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
@@ -159,7 +159,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start, with Venus', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = setCustomGameOptions({venusNextExtension: true});
+    const gameOptions = testGameOptions({venusNextExtension: true});
     Game.newInstance('gameid', [player], player, gameOptions);
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
@@ -172,7 +172,7 @@ describe('Player', function() {
 
   it('wgt includes all parameters at the game start, with The Moon', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const gameOptions = setCustomGameOptions({venusNextExtension: false, moonExpansion: true});
+    const gameOptions = testGameOptions({venusNextExtension: false, moonExpansion: true});
     Game.newInstance('gameid', [player], player, gameOptions);
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);

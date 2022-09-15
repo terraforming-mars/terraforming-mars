@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {cast, runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
@@ -18,8 +18,7 @@ describe('WildlifeDome', function() {
     card = new WildlifeDome();
     player = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
   });
 
   it('Should play: reds', function() {

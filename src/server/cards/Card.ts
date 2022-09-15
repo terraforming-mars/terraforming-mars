@@ -177,6 +177,16 @@ export abstract class Card {
     return undefined;
   }
 
+  public onDiscard(player: Player): void {
+    if (this.behavior !== undefined) {
+      Behaviors.onDiscard(player, this.behavior);
+    }
+    this.bespokeOnDiscard(player);
+  }
+
+  public bespokeOnDiscard(_player: Player): void {
+  }
+
   // player is optional to support historical tests.
   public getVictoryPoints(player?: Player): number {
     const vp1 = this.properties.victoryPoints;

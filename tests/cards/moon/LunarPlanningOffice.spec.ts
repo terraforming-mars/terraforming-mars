@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {runAllActions, setCustomGameOptions} from '../../TestingUtils';
+import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
 import {expect} from 'chai';
@@ -9,8 +9,6 @@ import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {CardName} from '../../../src/common/cards/CardName';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('LunarPlanningOffice', () => {
   let game: Game;
   let player: TestPlayer;
@@ -18,7 +16,7 @@ describe('LunarPlanningOffice', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new LunarPlanningOffice();
     player.popWaitingFor(); // Removing SelectInitialCards.
   });

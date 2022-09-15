@@ -15,7 +15,8 @@ export class AlgaeBioreactors extends Card {
 
       behavior: {
         production: {plants: -1},
-        global: {oxygen: 1, moonColony: 1},
+        global: {oxygen: 1},
+        moon: {colonyRate: 1},
       },
 
       metadata: {

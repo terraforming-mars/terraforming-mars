@@ -22,13 +22,13 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       tr: {moonMining: 1},
 
       behavior: {
-        global: {moonMining: 1},
+        moon: {miningRate: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1, {all})),
       metadata: {
-        description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on the Moon. ' +
-        'Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise the Mining Rate 1 step.',
+        description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. ' +
+        'Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the Mining Rate 1 step.',
         cardNumber: 'M57',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).slash().moonMine({size: Size.SMALL, all})

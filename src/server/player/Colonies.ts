@@ -18,11 +18,16 @@ import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 export class Colonies {
   private player: Player;
 
+  // Each ship in the player's fleet allows a single trade.
   private fleetSize: number = 1;
   public tradesThisGeneration: number = 0;
+  // When trading you may increase the Colony track this many steps.
   public tradeOffset: number = 0;
+
+  // When trading you many use this many fewer resources of the trading type.
   public tradeDiscount: number = 0;
-  public victoryPoints: number = 0;
+
+  public victoryPoints: number = 0; // Titania Colony VP
   public cardDiscount: number = 0; // Iapetus Colony
 
   constructor(player: Player) {
@@ -122,6 +127,8 @@ export class Colonies {
   }
 
   public decreaseFleetSize(): void {
+    // This fleet size management is a little tricky, because with The Moon, it's possible to
+    // have more fleets than MAX_FLEET_SIZE which are then discarded.
     if (this.fleetSize > 0) this.fleetSize--;
   }
 

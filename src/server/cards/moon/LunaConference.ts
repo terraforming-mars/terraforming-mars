@@ -24,7 +24,7 @@ export class LunaConference extends Card implements IProjectCard {
 
       metadata: {
         description: 'Requires that Scientists are ruling or that you have 2 delegates there. ' +
-        'Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.',
+        'Gain 2 M€ per road tile on The Moon. Gain 2M€ per colony tile on The Moon.',
         cardNumber: 'M58',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(2).slash().moonRoad({size: Size.SMALL, all}).br;

@@ -16,7 +16,7 @@ export class LunaStagingStation extends Card {
       tr: {moonLogistics: 2},
 
       behavior: {
-        global: {moonLogistics: 2},
+        moon: {logisticsRate: 2},
       },
 
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),

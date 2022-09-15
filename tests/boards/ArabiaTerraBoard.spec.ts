@@ -8,7 +8,7 @@ import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
 import {SeededRandom} from '../../src/server/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
-import {setCustomGameOptions, runAllActions, cast} from '../TestingUtils';
+import {testGameOptions, runAllActions, cast} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {ProcessorFactory} from '../../src/server/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/server/cards/base/SearchForLife';
@@ -26,7 +26,7 @@ describe('ArabiaTerraBoard', function() {
     board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameId', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    game = Game.newInstance('gameId', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA}));
   });
 
   it('Can place an ocean in a cove', () => {

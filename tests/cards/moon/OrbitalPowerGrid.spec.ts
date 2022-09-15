@@ -1,13 +1,11 @@
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OrbitalPowerGrid} from '../../../src/server/cards/moon/OrbitalPowerGrid';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('OrbitalPowerGrid', () => {
   let player: Player;
@@ -15,7 +13,7 @@ describe('OrbitalPowerGrid', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new OrbitalPowerGrid();
   });
 

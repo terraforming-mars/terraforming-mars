@@ -1,12 +1,10 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {CrescentResearchAssociation} from '../../../src/server/cards/moon/CrescentResearchAssociation';
 import {TestPlayer} from '../../TestPlayer';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
 import {Predators} from '../../../src/server/cards/base/Predators';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('CrescentResearchAssociation', () => {
   let player: TestPlayer;
@@ -15,7 +13,7 @@ describe('CrescentResearchAssociation', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new CrescentResearchAssociation();
   });
 

@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
@@ -18,13 +16,16 @@ export class TheWomb extends Card {
 
       behavior: {
         production: {energy: -2, megacredits: 4},
+        moon: {
+          colonyTile: {},
+        },
       },
       reserveUnits: {titanium: 2},
       tr: {moonColony: 1},
 
       metadata: {
         description: 'Decrease your energy production 2 steps and increase your M€ production 4 steps. ' +
-          'Spend 2 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
+          'Spend 2 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.',
         cardNumber: 'M08',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
@@ -35,10 +36,5 @@ export class TheWomb extends Card {
       },
       tilesBuilt: [TileType.MOON_COLONY],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonColonyTile(player));
-    return undefined;
   }
 }

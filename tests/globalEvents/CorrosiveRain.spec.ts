@@ -3,7 +3,7 @@ import {Game} from '../../src/server/Game';
 import {CorrosiveRain} from '../../src/server/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {cast, runAllActions, testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TitanShuttles} from '../../src/server/cards/colonies/TitanShuttles';
 import {TitanAirScrapping} from '../../src/server/cards/colonies/TitanAirScrapping';
@@ -23,7 +23,7 @@ describe('CorrosiveRain', function() {
     card = new CorrosiveRain();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     player.popWaitingFor(); // To clear out the SelectInitialCards input.
   });

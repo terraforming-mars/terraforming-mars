@@ -3,7 +3,7 @@ import {Game} from '../../src/server/Game';
 import {Generalist} from '../../src/server/milestones/Generalist';
 import {Player} from '../../src/server/Player';
 import {Resources} from '../../src/common/Resources';
-import {setCustomGameOptions} from '../TestingUtils';
+import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Generalist', function() {
@@ -28,7 +28,7 @@ describe('Generalist', function() {
   });
 
   it('Cannot claim with +1 of each production in game without corp era', function() {
-    const gameOptions = setCustomGameOptions({corporateEra: false});
+    const gameOptions = testGameOptions({corporateEra: false});
     Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     resources.forEach((resource) => expect(player.production[resource]).to.eq(1));
@@ -36,7 +36,7 @@ describe('Generalist', function() {
   });
 
   it('Can claim with +2 of each production in game without corp era', function() {
-    const gameOptions = setCustomGameOptions({corporateEra: false});
+    const gameOptions = testGameOptions({corporateEra: false});
     Game.newInstance('gameid', [player, player2], player, gameOptions);
     resources.forEach((resource) => player.production.add(resource, 1));
 

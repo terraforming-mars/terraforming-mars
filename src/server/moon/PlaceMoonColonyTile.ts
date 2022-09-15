@@ -1,34 +1,25 @@
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {SelectSpace} from '../inputs/SelectSpace';
+import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
+import {BasePlaceMoonTile} from './BasePlaceMoonTile';
+import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonColonyTile extends DeferredAction {
+export class PlaceMoonColonyTile extends BasePlaceMoonTile {
   constructor(
     player: Player,
-    public title: string = 'Select a space on the Moon for a colony tile.',
+    spaces?: Array<ISpace>,
+    title: string = 'Select a space on The Moon for a colony tile.',
   ) {
-    super(player, Priority.DEFAULT);
+    super(player, spaces, title);
   }
 
-  protected getSpaces() {
-    const moonData = MoonExpansion.moonData(this.player.game);
+  protected getSpaces(moonData: IMoonData) {
     return moonData.moon.getAvailableSpacesOnLand(this.player);
   }
 
-  public execute() {
-    const spaces = this.getSpaces();
-
-    if (spaces.length === 0) {
-      return undefined;
-    }
-    return new SelectSpace(
-      this.title,
-      spaces,
-      (space) => {
-        MoonExpansion.addColonyTile(this.player, space.id);
-        MoonExpansion.raiseColonyRate(this.player);
-        return undefined;
-      });
+  protected placeTile(space: ISpace) {
+    MoonExpansion.addColonyTile(this.player, space.id);
+    MoonExpansion.raiseColonyRate(this.player);
+    return undefined;
   }
 }

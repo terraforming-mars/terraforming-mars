@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
@@ -17,6 +16,7 @@ export class SpacePort extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1, megacredits: 4},
+        colonies: {addTradeFleet: 1},
         city: {},
       },
 
@@ -33,22 +33,5 @@ export class SpacePort extends Card implements IProjectCard {
         description: 'Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
       },
     });
-  }
-
-  public override bespokeCanPlay(player: Player): boolean {
-    let coloniesCount = 0;
-    player.game.colonies.forEach((colony) => {
-      coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
-    });
-    return coloniesCount > 0;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.colonies.increaseFleetSize();
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonies.decreaseFleetSize();
   }
 }

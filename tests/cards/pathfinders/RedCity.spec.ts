@@ -23,7 +23,7 @@ describe('RedCity', function() {
 
   beforeEach(function() {
     card = new RedCity();
-    game = newTestGame(2, {pathfindersExpansion: true});
+    game = newTestGame(2, {pathfindersExpansion: true, turmoilExtension: true});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
     turmoil = game.turmoil!;

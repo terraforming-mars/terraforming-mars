@@ -1,6 +1,7 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
+import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
 import {Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
@@ -8,6 +9,10 @@ import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {PlaceMoonColonyTile} from '../moon/PlaceMoonColonyTile';
+import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
+import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
+import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
 import {Player} from '../Player';
 import {Behavior} from './Behavior';
 
@@ -26,8 +31,17 @@ export class Behaviors {
       //   return false;
       // }
     }
+
     if (behavior.decreaseAnyProduction !== undefined) {
-      return player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count);
+      if (!player.canReduceAnyProduction(behavior.decreaseAnyProduction.type, behavior.decreaseAnyProduction.count)) {
+        return false;
+      }
+    }
+
+    if (behavior.colonies?.buildColony !== undefined) {
+      if (player.colonies.getPlayableColonies(behavior.colonies.buildColony.allowDuplicates).length === 0) {
+        return false;
+      }
     }
 
     if (behavior.city !== undefined) {
@@ -49,6 +63,13 @@ export class Behaviors {
     if (behavior.stock) {
       player.addUnits(behavior.stock);
     }
+    if (behavior.steelValue === 1) {
+      player.increaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.increaseTitaniumValue();
+    }
+
     if (behavior.drawCard !== undefined) {
       const drawCard = behavior.drawCard;
       if (typeof(drawCard) === 'number') {
@@ -77,9 +98,6 @@ export class Behaviors {
       if (g.temperature !== undefined) player.game.increaseTemperature(player, g.temperature);
       if (g.oxygen !== undefined) player.game.increaseOxygenLevel(player, g.oxygen);
       if (g.venus !== undefined) player.game.increaseVenusScaleLevel(player, g.venus);
-      if (g.moonColony !== undefined) MoonExpansion.raiseColonyRate(player, g.moonColony);
-      if (g.moonMining !== undefined) MoonExpansion.raiseMiningRate(player, g.moonMining);
-      if (g.moonLogistics !== undefined) MoonExpansion.raiseLogisticRate(player, g.moonLogistics);
     }
 
     if (behavior.tr !== undefined) {
@@ -104,6 +122,24 @@ export class Behaviors {
     if (behavior.removeAnyPlants !== undefined) {
       player.game.defer(new RemoveAnyPlants(player, behavior.removeAnyPlants));
     }
+    if (behavior.colonies !== undefined) {
+      const colonies = behavior.colonies;
+      if (colonies.buildColony !== undefined) {
+        player.game.defer(new BuildColony(player, {allowDuplicate: colonies.buildColony.allowDuplicates}));
+      }
+      if (colonies.addTradeFleet !== undefined) {
+        for (let idx = 0; idx < colonies.addTradeFleet; idx++) {
+          player.colonies.increaseFleetSize();
+        }
+      }
+      if (colonies.tradeDiscount !== undefined) {
+        player.colonies.tradeDiscount += colonies.tradeDiscount;
+      }
+      if (colonies.tradeOffset !== undefined) {
+        player.colonies.tradeOffset += colonies.tradeOffset;
+      }
+    }
+
     if (behavior.ocean !== undefined) {
       player.game.defer(new PlaceOceanTile(player));
     }
@@ -116,6 +152,71 @@ export class Behaviors {
     }
     if (behavior.greenery !== undefined) {
       player.game.defer(new PlaceGreeneryTile(player));
+    }
+
+    // TODO(kberg): Add canPlay for these behaviors.
+    if (behavior.moon !== undefined) {
+      const moon = behavior.moon;
+      if (moon.colonyTile !== undefined) {
+        if (moon.colonyTile.space === undefined) {
+          player.game.defer(new PlaceMoonColonyTile(player));
+        } else {
+          MoonExpansion.addColonyTile(player, moon.colonyTile.space, card.name);
+          MoonExpansion.raiseColonyRate(player);
+        }
+      }
+      if (moon.mineTile !== undefined) {
+        if (moon.mineTile.space === undefined) {
+          player.game.defer(new PlaceMoonMineTile(player));
+        } else {
+          MoonExpansion.addMineTile(player, moon.mineTile.space, card.name);
+          MoonExpansion.raiseMiningRate(player);
+        }
+      }
+      if (moon.roadTile !== undefined) {
+        if (moon.roadTile.space === undefined) {
+          player.game.defer(new PlaceMoonRoadTile(player));
+        } else {
+          MoonExpansion.addRoadTile(player, moon.roadTile.space, card.name);
+          MoonExpansion.raiseLogisticRate(player);
+        }
+      }
+      if (moon.tile !== undefined) {
+        if (moon.tile.space !== undefined) {
+          MoonExpansion.addTile(player, moon.tile.space, {tileType: moon.tile.type, card: card.name});
+        } else {
+          player.game.defer(new PlaceSpecialMoonTile(
+            player, {tileType: moon.tile.type, card: card.name},
+            moon.tile.title));
+        }
+      }
+      if (moon.colonyRate !== undefined) MoonExpansion.raiseColonyRate(player, moon.colonyRate);
+      if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
+      if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
+    }
+  }
+
+  public static onDiscard(player: Player, behavior: Behavior) {
+    if (behavior.steelValue === 1) {
+      player.decreaseSteelValue();
+    }
+    if (behavior.titanumValue === 1) {
+      player.decreaseTitaniumValue();
+    }
+
+    if (behavior.colonies !== undefined) {
+      const colonies = behavior.colonies;
+      if (colonies.addTradeFleet !== undefined) {
+        for (let idx = 0; idx < colonies.addTradeFleet; idx++) {
+          player.colonies.decreaseFleetSize();
+        }
+      }
+      if (colonies.tradeDiscount !== undefined) {
+        player.colonies.tradeDiscount -= colonies.tradeDiscount;
+      }
+      if (colonies.tradeOffset !== undefined) {
+        player.colonies.tradeOffset -= colonies.tradeOffset;
+      }
     }
   }
 }

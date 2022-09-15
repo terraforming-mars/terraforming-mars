@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {BuildColony} from '../../deferredActions/BuildColony';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,6 +15,10 @@ export class IceMoonColony extends Card implements IProjectCard {
       name: CardName.ICE_MOON_COLONY,
       cardType: CardType.AUTOMATED,
       tr: {oceans: 1},
+
+      behavior: {
+        colonies: {buildColony: {}},
+      },
 
       metadata: {
         cardNumber: 'C15',
@@ -30,7 +33,6 @@ export class IceMoonColony extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new BuildColony(player, {title: 'Select colony for Ice Moon Colony'}));
     player.game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
     return undefined;
   }

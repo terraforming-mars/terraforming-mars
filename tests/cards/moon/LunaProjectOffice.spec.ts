@@ -1,5 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {cast, finishGeneration, setCustomGameOptions} from '../../TestingUtils';
+import {cast, finishGeneration, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaProjectOffice} from '../../../src/server/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
@@ -7,12 +7,10 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Player} from '../../../src/server/Player';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('LunaProjectOffice', () => {
   it('can play', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     const card = new LunaProjectOffice();
 
     player.cardsInHand = [card];
@@ -31,7 +29,7 @@ describe('LunaProjectOffice', () => {
       'gameid',
       [player],
       player,
-      setCustomGameOptions({
+      testGameOptions({
         moonExpansion: true,
         turmoilExtension: false,
       }));
@@ -79,7 +77,7 @@ describe('LunaProjectOffice', () => {
       'gameid',
       [player, redPlayer],
       player,
-      setCustomGameOptions({
+      testGameOptions({
         moonExpansion: true,
         draftVariant: true,
         turmoilExtension: false,
@@ -135,7 +133,7 @@ describe('LunaProjectOffice', () => {
       'gameid',
       [player, redPlayer],
       player,
-      setCustomGameOptions({
+      testGameOptions({
         moonExpansion: true,
         draftVariant: false,
         turmoilExtension: false,

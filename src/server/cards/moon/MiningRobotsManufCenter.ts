@@ -15,7 +15,7 @@ export class MiningRobotsManufCenter extends Card {
       tr: {moonMining: 2},
 
       behavior: {
-        global: {moonMining: 2},
+        moon: {miningRate: 2},
       },
 
       metadata: {

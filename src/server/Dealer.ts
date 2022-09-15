@@ -5,8 +5,8 @@ import {CardFinder} from './CardFinder';
 import {GameCards} from './GameCards';
 import {CardName} from '../common/cards/CardName';
 import {LogHelper} from './LogHelper';
-import {Game} from './Game';
 import {Random, UnseededRandom} from './Random';
+import {Logger} from './logs/Logger';
 
 const INCOMPATIBLE_PRELUDES = [CardName.BY_ELECTION, CardName.THE_NEW_SPACE_RACE] as const;
 
@@ -51,7 +51,7 @@ export class Dealer {
   public discard(card: IProjectCard): void {
     this.discarded.push(card);
   }
-  public dealCard(game: Game, isResearchPhase: boolean = false): IProjectCard {
+  public dealCard(logger: Logger, isResearchPhase: boolean = false): IProjectCard {
     let result: IProjectCard | undefined;
     if (isResearchPhase) {
       result = this.deck.shift();
@@ -64,7 +64,7 @@ export class Dealer {
     }
 
     if (this.deck.length === 0) {
-      game.log('The discard pile has been shuffled to form a new deck.');
+      logger.log('The discard pile has been shuffled to form a new deck.');
       this.deck = Dealer.shuffle(this.discarded, this.random);
       this.discarded = [];
     }
@@ -72,16 +72,16 @@ export class Dealer {
     return result;
   }
 
-  public drawProjectCardsByCondition(game: Game, total: number, include: (card: IProjectCard) => boolean) {
+  public drawProjectCardsByCondition(logger: Logger, total: number, include: (card: IProjectCard) => boolean) {
     const result: Array<IProjectCard> = [];
     const discardedCards = new Set<CardName>();
 
     while (result.length < total) {
       if (discardedCards.size >= this.getDeckSize() + this.getDiscardedSize()) {
-        game.log('discarded every card without match');
+        logger.log('discarded every card without match');
         break;
       }
-      const projectCard = this.dealCard(game);
+      const projectCard = this.dealCard(logger);
       if (include(projectCard)) {
         result.push(projectCard);
       } else {
@@ -90,7 +90,7 @@ export class Dealer {
       }
     }
     if (discardedCards.size > 0) {
-      LogHelper.logDiscardedCards(game, Array.from(discardedCards));
+      LogHelper.logDiscardedCards(logger, Array.from(discardedCards));
     }
 
     return result;

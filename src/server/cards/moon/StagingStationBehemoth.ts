@@ -1,5 +1,4 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -16,7 +15,8 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
       tr: {moonLogistics: 1},
 
       behavior: {
-        global: {moonLogistics: 1},
+        moon: {logisticsRate: 1},
+        colonies: {addTradeFleet: 2},
       },
 
       metadata: {
@@ -27,11 +27,5 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.colonies.increaseFleetSize();
-    player.colonies.increaseFleetSize();
-    return undefined;
   }
 }

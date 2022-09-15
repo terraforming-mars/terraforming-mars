@@ -2,12 +2,10 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IronExtractionCenter} from '../../../src/server/cards/moon/IronExtractionCenter';
 import {expect} from 'chai';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('IronExtractionCenter', () => {
   let game: Game;
@@ -17,7 +15,7 @@ describe('IronExtractionCenter', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new IronExtractionCenter();
   });
@@ -43,7 +41,7 @@ describe('IronExtractionCenter', () => {
     expect(player.production.steel).eq(1);
 
 
-    // Play a second time. Steel rate will go up by 2.
+    // Play a second time. steel rate will go up by 2.
     moonData.miningRate = 4;
     card.play(player);
 

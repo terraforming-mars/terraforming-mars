@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {ISpace} from '../../../src/server/boards/ISpace';
-import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Resources} from '../../../src/common/Resources';
@@ -19,8 +19,7 @@ describe('Kelvinists', function() {
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player], player, gameOptions);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     kelvinists = new Kelvinists();
   });

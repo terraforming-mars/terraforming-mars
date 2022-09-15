@@ -2,15 +2,13 @@ import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ImprovedMoonConcrete} from '../../../src/server/cards/moon/ImprovedMoonConcrete';
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/common/cards/CardName';
 import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('ImprovedMoonConcrete', () => {
   let game: Game;
@@ -20,7 +18,7 @@ describe('ImprovedMoonConcrete', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new ImprovedMoonConcrete();
   });

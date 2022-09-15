@@ -9,8 +9,14 @@ import {Tag} from '../../common/cards/Tag';
 import {Units} from '../../common/Units';
 import {SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
+import {MoonSpaces} from '../../common/moon/MoonSpaces';
+import {TileType} from '../../common/TileType';
 
 /** A set of steps that an action can perform in any specific order. */
+
+interface NoAttributes {
+  _unused?: undefined,
+}
 
 export interface Behavior {
   // Gain or lose production
@@ -38,14 +44,12 @@ export interface Behavior {
     oxygen?: 2 | 1 | -1 | -2;
   //   ocean?: number;
     venus?: 3 | 2 | 1 | -1;
-    moonColony?: number,
-    moonMining?: number,
-    moonLogistics?: number,
   },
 
   city?: {space?: SpaceId, type?: SpaceType},
-  greenery?: {},
-  ocean?: {},
+  /** Places a greenery tile and also raises the oxygen. */
+  greenery?: NoAttributes,
+  ocean?: NoAttributes,
 
   // // Remove plants from any player. Typical for asteroid cards.
   // removePlants: number,
@@ -53,8 +57,9 @@ export interface Behavior {
   // // Remove resources from any player.
   // removeAnyResource: {type: CardResource, count: number},
 
-  // // Raise the titanium and steel value. On discard, reduce them.
-  // resourceValues: {titanum?: number, steel?: number},
+  // Raise the titanium and steel value. On discard, reduce them.
+  titanumValue?: 1;
+  steelValue?: 1;
 
   // Draw this many cards from the deck.
   drawCard?: number | DrawCard,
@@ -62,6 +67,38 @@ export interface Behavior {
   // spendResourcesHere: number,
   // spendResource: {type: CardResource, count: number},
   // tile: {type: TileType, space?: SpaceId, spaceType?: SpaceType};
+  colonies?: {
+    buildColony?: {
+      allowDuplicates?: boolean,
+    },
+
+    // Add this many trade fleets to your armada.
+    addTradeFleet?: number,
+
+    // When trading increase the colony track this many steps.
+    tradeDiscount?: number,
+
+    // When trading increase the colony track this many steps.
+    tradeOffset?: number,
+  }
+
+  moon?: {
+    /** Places a colony tile and also raises the colony rate */
+    colonyTile?: PlaceMoonTile,
+    /** Places a mine tile and also raises the mining rate */
+    mineTile?: PlaceMoonTile,
+    /** Places a road tile and also raises the logistics rate */
+    roadTile?: PlaceMoonTile,
+    /** Places a special tile on the Moon. */
+    tile?: PlaceMoonTile & {type: TileType, title?: string},
+    colonyRate?: number,
+    miningRate?: number,
+    logisticsRate?: number,
+  },
+}
+
+export interface PlaceMoonTile {
+  space?: MoonSpaces;
 }
 
 export interface DrawCard {

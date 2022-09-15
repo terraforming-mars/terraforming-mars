@@ -4,7 +4,7 @@ import {SerializedBoard} from '../boards/SerializedBoard';
 import {Player} from '../Player';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {MoonSpaces} from './MoonSpaces';
+import {MoonSpaces} from '../../common/moon/MoonSpaces';
 
 class Space implements ISpace {
   constructor(

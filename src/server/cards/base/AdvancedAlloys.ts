@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -14,6 +13,11 @@ export class AdvancedAlloys extends Card implements IProjectCard {
       name: CardName.ADVANCED_ALLOYS,
       tags: [Tag.SCIENCE],
       cost: 9,
+
+      behavior: {
+        steelValue: 1,
+        titanumValue: 1,
+      },
 
       metadata: {
         cardNumber: '071',
@@ -27,16 +31,5 @@ export class AdvancedAlloys extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.increaseTitaniumValue();
-    player.increaseSteelValue();
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.decreaseTitaniumValue();
-    player.decreaseSteelValue();
   }
 }

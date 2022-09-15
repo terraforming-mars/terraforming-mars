@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
-import {maxOutOceans, setCustomGameOptions, runAllActions, cast} from '../../TestingUtils';
+import {maxOutOceans, testGameOptions, runAllActions, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {BoardType} from '../../../src/server/boards/BoardType';
 import {TileType} from '../../../src/common/TileType';
@@ -21,7 +21,7 @@ describe('MiningGuild', () => {
     card = new MiningGuild();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({
       aresExtension: true,
       aresHazards: false,
     }));

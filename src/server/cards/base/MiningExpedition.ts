@@ -11,7 +11,6 @@ export class MiningExpedition extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.MINING_EXPEDITION,
       cost: 12,
-      tr: {oxygen: 1},
 
       behavior: {
         stock: {steel: 2},

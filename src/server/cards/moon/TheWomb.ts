@@ -21,7 +21,6 @@ export class TheWomb extends Card {
         },
       },
       reserveUnits: {titanium: 2},
-      tr: {moonColony: 1},
 
       metadata: {
         description: 'Decrease your energy production 2 steps and increase your M€ production 4 steps. ' +

@@ -13,7 +13,6 @@ export class WaterTreatmentComplex extends Card {
       cost: 12,
       requirements: CardRequirements.builder((b) => b.colonyTiles(1, {all})),
       reserveUnits: {titanium: 1},
-      tr: {moonColony: 2},
 
       behavior: {
         moon: {colonyRate: 2},

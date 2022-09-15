@@ -18,7 +18,6 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       name: CardName.BREEDING_FARMS,
       cost: 16,
       tags: [Tag.SCIENCE, Tag.ANIMAL, Tag.BUILDING],
-      tr: {temperature: 1},
 
       behavior: {
         global: {temperature: 1},

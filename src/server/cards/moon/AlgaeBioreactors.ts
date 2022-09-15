@@ -11,7 +11,6 @@ export class AlgaeBioreactors extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.PLANT],
       cost: 9,
-      tr: {moonColony: 1, oxygen: 1},
 
       behavior: {
         production: {plants: -1},

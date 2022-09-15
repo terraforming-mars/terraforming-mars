@@ -14,7 +14,6 @@ export class LunaResort extends Card {
       tags: [Tag.MOON],
       cost: 11,
       reserveUnits: {titanium: 2},
-      tr: {moonColony: 1},
 
       behavior: {
         production: {energy: -1, megacredits: 3},

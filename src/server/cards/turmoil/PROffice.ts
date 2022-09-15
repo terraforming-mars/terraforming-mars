@@ -17,7 +17,6 @@ export class PROffice extends Card implements IProjectCard {
       name: CardName.PR_OFFICE,
       tags: [Tag.EARTH],
       cost: 7,
-      tr: {tr: 1},
 
       behavior: {
         tr: 1,

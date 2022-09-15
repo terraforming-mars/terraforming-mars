@@ -12,7 +12,6 @@ export class TowingAComet extends Card implements IProjectCard {
       name: CardName.TOWING_A_COMET,
       tags: [Tag.SPACE],
       cost: 23,
-      tr: {oxygen: 1, oceans: 1},
 
       behavior: {
         stock: {plants: 2},

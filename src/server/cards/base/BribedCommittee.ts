@@ -12,7 +12,6 @@ export class BribedCommittee extends Card implements IProjectCard {
       name: CardName.BRIBED_COMMITTEE,
       tags: [Tag.EARTH],
       cost: 7,
-      tr: {tr: 2},
       victoryPoints: -2,
 
       behavior: {

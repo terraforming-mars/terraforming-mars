@@ -10,7 +10,6 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SUBTERRANEAN_RESERVOIR,
       cost: 11,
-      tr: {oceans: 1},
 
       behavior: {
         ocean: {},

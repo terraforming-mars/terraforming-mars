@@ -15,7 +15,6 @@ export class SulphurExports extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.SPACE],
       cost: 21,
-      tr: {venus: 1},
 
       behavior: {
         global: {venus: 1},

@@ -14,7 +14,6 @@ export class ImportedNitrogen extends Card implements IProjectCard {
       name: CardName.IMPORTED_NITROGEN,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 23,
-      tr: {tr: 1},
 
       behavior: {
         stock: {plants: 4},

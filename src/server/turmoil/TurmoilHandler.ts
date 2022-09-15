@@ -1,3 +1,4 @@
+import * as constants from '../../common/constants';
 import {IProjectCard} from '../cards/IProjectCard';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
@@ -13,9 +14,9 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
-import * as constants from '../../common/constants';
-import {DynamicTRSource, TRSource} from '../cards/ICard';
+import {DynamicTRSource} from '../cards/ICard';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {TRSource} from '../../common/cards/TRSource';
 
 export class TurmoilHandler {
   private constructor() {}

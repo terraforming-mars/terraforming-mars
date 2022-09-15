@@ -15,7 +15,6 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
       name: CardName.NITROGEN_RICH_ASTEROID,
       tags: [Tag.SPACE],
       cost: 31,
-      tr: {tr: 2, temperature: 1},
 
       behavior: {
         global: {temperature: 1},

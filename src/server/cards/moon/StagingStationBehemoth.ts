@@ -12,7 +12,6 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.SPACE],
       cost: 24,
-      tr: {moonLogistics: 1},
 
       behavior: {
         moon: {logisticsRate: 1},

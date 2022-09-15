@@ -14,7 +14,6 @@ export class SphereHabitats extends Card {
       tags: [Tag.CITY, Tag.MOON],
       cost: 14,
       reserveUnits: {titanium: 1},
-      tr: {moonColony: 1},
 
       behavior: {
         moon: {

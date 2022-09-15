@@ -13,7 +13,6 @@ export class BigAsteroid extends Card implements IProjectCard {
       name: CardName.BIG_ASTEROID,
       tags: [Tag.SPACE],
       cost: 27,
-      tr: {temperature: 2},
 
       behavior: {
         stock: {titanium: 4},

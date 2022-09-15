@@ -21,7 +21,6 @@ export class SinusIridiumRoadNetwork extends Card {
         },
       },
       reserveUnits: {steel: 1},
-      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. ' +

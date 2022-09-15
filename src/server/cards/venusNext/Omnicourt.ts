@@ -13,7 +13,6 @@ export class Omnicourt extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 11,
-      tr: {tr: 2},
 
       behavior: {
         tr: 2,

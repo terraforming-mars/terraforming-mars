@@ -14,7 +14,6 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       cost: 9,
       requirements: CardRequirements.builder((b) => b.roadTiles(3, {all})),
-      tr: {moonLogistics: 1},
 
       behavior: {
         moon: {logisticsRate: 1},

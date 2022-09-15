@@ -18,7 +18,6 @@ export class ColonistShuttles extends Card {
       tags: [Tag.SPACE],
       cost: 12,
       reserveUnits: {titanium: 1},
-      tr: {moonColony: 1},
 
       behavior: {
         moon: {colonyRate: 1},

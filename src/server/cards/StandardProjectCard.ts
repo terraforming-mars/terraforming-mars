@@ -1,6 +1,7 @@
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../Player';
-import {IActionCard, ICard, TRSource} from './ICard';
+import {IActionCard, ICard} from './ICard';
+import {TRSource} from '../../common/cards/TRSource';
 import {PlayerInput} from '../PlayerInput';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardName} from '../../common/cards/CardName';

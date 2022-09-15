@@ -15,7 +15,6 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tag.VENUS],
       cost: 13,
-      tr: {venus: 1},
 
       behavior: {
         global: {venus: 1},

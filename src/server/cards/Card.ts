@@ -6,9 +6,10 @@ import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
 import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
+import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './CardRequirements';
-import {DynamicTRSource, TRSource} from './ICard';
+import {DynamicTRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
@@ -140,8 +141,8 @@ export abstract class Card {
   public get reserveUnits(): ReserveUnits {
     return this.properties.reserveUnits || {...Units.EMPTY, deduct: true};
   }
-  public get tr(): TRSource | DynamicTRSource {
-    return this.properties.tr || {};
+  public get tr(): TRSource | DynamicTRSource | undefined {
+    return this.properties.tr;
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;

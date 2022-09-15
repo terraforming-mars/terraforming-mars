@@ -21,7 +21,6 @@ export class TychoRoadNetwork extends Card {
         },
       },
       reserveUnits: {steel: 1},
-      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Spend 1 steel. Increase your M€ production 1 step. ' +

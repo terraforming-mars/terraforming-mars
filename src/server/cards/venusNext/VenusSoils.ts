@@ -15,7 +15,6 @@ export class VenusSoils extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.VENUS, Tag.PLANT],
       cost: 20,
-      tr: {venus: 1},
 
       behavior: {
         production: {plants: 1},

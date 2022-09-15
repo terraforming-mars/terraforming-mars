@@ -13,7 +13,6 @@ export class TerraformingControlStation extends Card implements IProjectCard {
       name: CardName.TERRAFORMING_CONTROL_STATION,
       cost: 18,
       tags: [Tag.VENUS, Tag.MARS, Tag.SPACE],
-      tr: {tr: 2},
 
       behavior: {
         tr: 2,

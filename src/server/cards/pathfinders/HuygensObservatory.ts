@@ -20,7 +20,6 @@ export class HuygensObservatory extends Card implements IProjectCard {
       name: CardName.HUYGENS_OBSERVATORY,
       cardType: CardType.AUTOMATED,
       victoryPoints: 1,
-      tr: {tr: 1},
 
       behavior: {
         tr: 1,

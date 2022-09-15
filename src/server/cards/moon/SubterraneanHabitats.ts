@@ -21,7 +21,7 @@ export class SubterraneanHabitats extends Card implements IProjectCard {
         description: 'Spend 2 steel. Raise the Colony Rate 1 step.',
         cardNumber: 'M36',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you build a colony on the Moon, you spend 1 titanium less.', (eb) => {
+          b.effect('When you build a colony on The Moon, you spend 1 titanium less.', (eb) => {
             eb.startEffect.moonColony().colon().minus().titanium(1);
           });
           b.br;

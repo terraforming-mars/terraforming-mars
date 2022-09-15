@@ -23,7 +23,7 @@ export class SphereHabitats extends Card {
       },
 
       metadata: {
-        description: 'Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
+        description: 'Spend 1 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.',
         cardNumber: 'M07',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;

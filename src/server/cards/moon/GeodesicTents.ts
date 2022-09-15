@@ -23,7 +23,7 @@ export class GeodesicTents extends Card {
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your plant production 1 step. ' +
-        'Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
+        'Spend 1 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.',
         cardNumber: 'M06',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {

@@ -10,7 +10,7 @@ export class PlaceMoonMineTile extends BasePlaceMoonTile {
   constructor(
     player: Player,
     spaces?: Array<ISpace>,
-    title: string = 'Select a space on the Moon for a mining tile.',
+    title: string = 'Select a space on The Moon for a mining tile.',
   ) {
     super(player, spaces, title);
   }

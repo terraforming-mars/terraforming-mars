@@ -47,6 +47,7 @@ export interface Behavior {
   },
 
   city?: {space?: SpaceId, type?: SpaceType},
+  /** Places a greenery tile and also raises the oxygen. */
   greenery?: NoAttributes,
   ocean?: NoAttributes,
 
@@ -82,9 +83,13 @@ export interface Behavior {
   }
 
   moon?: {
+    /** Places a colony tile and also raises the colony rate */
     colonyTile?: PlaceMoonTile,
+    /** Places a mine tile and also raises the mining rate */
     mineTile?: PlaceMoonTile,
+    /** Places a road tile and also raises the logistics rate */
     roadTile?: PlaceMoonTile,
+    /** Places a special tile on the Moon. */
     tile?: PlaceMoonTile & {type: TileType, title?: string},
     colonyRate?: number,
     miningRate?: number,

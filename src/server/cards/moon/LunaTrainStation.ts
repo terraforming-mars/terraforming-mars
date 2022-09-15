@@ -45,16 +45,6 @@ export class LunaTrainStation extends Card {
     });
   }
 
-  // public override bespokePlay(player: Player) {
-  //   player.game.defer(new PlaceSpecialMoonTile(player, {
-  //     tileType: TileType.LUNA_TRAIN_STATION,
-  //     card: this.name,
-  //   },
-  //   'Select a space for Luna Train Station.'));
-  //   MoonExpansion.raiseLogisticRate(player);
-  //   return undefined;
-  // }
-
   public override getVictoryPoints(player: Player) {
     const moonData = MoonExpansion.moonData(player.game);
     const usedSpace = moonData.moon.getSpaceByTileCard(this.name);

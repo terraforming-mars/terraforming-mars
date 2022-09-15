@@ -14,7 +14,7 @@ export class SubterraneanHabitats extends Card implements IProjectCard {
       tr: {moonColony: 1},
 
       behavior: {
-        global: {moonColony: 1},
+        moon: {colonyRate: 1},
       },
 
       metadata: {

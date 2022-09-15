@@ -16,7 +16,7 @@ export class WaterTreatmentComplex extends Card {
       tr: {moonColony: 2},
 
       behavior: {
-        global: {moonColony: 2},
+        moon: {colonyRate: 2},
       },
 
       metadata: {

@@ -8,7 +8,6 @@ import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Card} from '../Card';
-import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
 import {Size} from '../../../common/cards/render/Size';
 
 export class LunaMiningHub extends Card {
@@ -21,6 +20,11 @@ export class LunaMiningHub extends Card {
 
       behavior: {
         production: {steel: 1, titanium: 1},
+        // TODO(kberg): mining rate ought to occur after tile is placed.
+        moon: {
+          tile: {type: TileType.LUNA_MINING_HUB, title: 'Select a space for Luna Mining Hub.'},
+          miningRate: 1,
+        },
       },
       reserveUnits: {steel: 1, titanium: 1},
       tr: {moonMining: 1},
@@ -43,17 +47,6 @@ export class LunaMiningHub extends Card {
         victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceSpecialMoonTile(
-      player, {
-        tileType: TileType.LUNA_MINING_HUB,
-        card: this.name,
-      },
-      'Select a space for Luna Mining Hub.'));
-    MoonExpansion.raiseMiningRate(player);
-    return undefined;
   }
 
   public override getVictoryPoints(player: Player) {

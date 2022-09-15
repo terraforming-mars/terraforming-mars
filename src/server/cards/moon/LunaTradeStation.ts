@@ -21,6 +21,15 @@ export class LunaTradeStation extends Card implements IActionCard {
       cost: 10,
       reserveUnits: {titanium: 2},
 
+      behavior: {
+        moon: {
+          tile: {
+            type: TileType.LUNA_TRADE_STATION,
+            space: MoonSpaces.LUNA_TRADE_STATION,
+          },
+        },
+      },
+
       metadata: {
         description: 'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',
         cardNumber: 'M13',
@@ -31,17 +40,6 @@ export class LunaTradeStation extends Card implements IActionCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    MoonExpansion.addTile(
-      player,
-      MoonSpaces.LUNA_TRADE_STATION,
-      {
-        tileType: TileType.LUNA_TRADE_STATION,
-        card: this.name,
-      });
-    return undefined;
   }
 
   private surfaceColonyCount(game: Game): number {

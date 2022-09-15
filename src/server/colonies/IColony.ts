@@ -4,7 +4,7 @@ import {PlayerId} from '../../common/Types';
 import {Game} from '../Game';
 import {SerializedColony} from '../SerializedColony';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
-import {ColonyName} from '@/common/colonies/ColonyName';
+import {ColonyName} from '../../common/colonies/ColonyName';
 
 export type TradeOptions = {
   usesTradeFleet?: boolean;

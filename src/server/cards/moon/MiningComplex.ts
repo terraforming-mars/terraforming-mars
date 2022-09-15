@@ -46,8 +46,9 @@ export class MiningComplex extends PreludeCard {
         player.game.defer(
           new PlaceMoonRoadTile(
             player,
+            availableRoadSpaces,
             'Select a space next to the mine for a road',
-            availableRoadSpaces));
+          ));
       }));
     player.deductResource(Resources.MEGACREDITS, 7);
     return undefined;

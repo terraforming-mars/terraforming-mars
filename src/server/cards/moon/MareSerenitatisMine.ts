@@ -47,7 +47,7 @@ export class MareSerenitatisMine extends Card {
     const availableRoadSpaces = spaces.filter((space) => {
       return space.player === undefined && space.spaceType === SpaceType.LAND;
     });
-    player.game.defer(new PlaceMoonRoadTile(player, 'Select a space next to Mare Serintatis to play a road', availableRoadSpaces));
+    player.game.defer(new PlaceMoonRoadTile(player, availableRoadSpaces, 'Select a space next to Mare Serintatis to play a road'));
     return undefined;
   }
 }

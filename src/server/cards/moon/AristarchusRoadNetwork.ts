@@ -1,7 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
@@ -18,6 +16,9 @@ export class AristarchusRoadNetwork extends Card {
 
       behavior: {
         production: {megacredits: 2},
+        moon: {
+          roadTile: {},
+        },
       },
       reserveUnits: {steel: 2},
       tr: {moonLogistics: 1},
@@ -33,10 +34,5 @@ export class AristarchusRoadNetwork extends Card {
       },
       tilesBuilt: [TileType.MOON_ROAD],
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceMoonRoadTile(player));
-    return undefined;
   }
 }

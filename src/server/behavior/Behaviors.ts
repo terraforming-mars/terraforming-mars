@@ -226,7 +226,7 @@ export class Behaviors {
       tr: behavior.tr,
 
       temperature: behavior.global?.temperature,
-      oxygen: behavior.global?.oxygen,
+      oxygen: (behavior.global?.oxygen ?? 0) + (behavior.greenery !== undefined ? 1 : 0),
       venus: behavior.global?.venus,
       oceans: behavior.ocean !== undefined ? 1 : undefined,
 

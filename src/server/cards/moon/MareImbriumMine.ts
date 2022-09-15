@@ -15,6 +15,7 @@ export class MareImbriumMine extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON, Tag.BUILDING],
       cost: 19,
+      reserveUnits: {titanium: 1},
 
       behavior: {
         production: {steel: 1, titanium: 1},
@@ -22,8 +23,6 @@ export class MareImbriumMine extends Card implements IProjectCard {
           mineTile: {space: MoonSpaces.MARE_IMBRIUM},
         },
       },
-      reserveUnits: {titanium: 1},
-      tr: {moonMining: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.',

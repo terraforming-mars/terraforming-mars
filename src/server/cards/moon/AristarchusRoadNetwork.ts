@@ -13,6 +13,7 @@ export class AristarchusRoadNetwork extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,
+      reserveUnits: {steel: 2},
 
       behavior: {
         production: {megacredits: 2},
@@ -20,8 +21,7 @@ export class AristarchusRoadNetwork extends Card {
           roadTile: {},
         },
       },
-      reserveUnits: {steel: 2},
-      tr: {moonLogistics: 1},
+
 
       metadata: {
         description: 'Spend 2 steel. Increase your M€ production 2 steps. ' +

@@ -17,7 +17,6 @@ export class DeimosDownPromo extends Card implements IProjectCard {
       name: CardName.DEIMOS_DOWN_PROMO,
       tags: [Tag.SPACE],
       cost: 31,
-      tr: {temperature: 3},
 
       behavior: {
         stock: {steel: 4},

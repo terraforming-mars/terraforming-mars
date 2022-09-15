@@ -12,7 +12,6 @@ export class DarksideMeteorBombardment extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 20,
-      tr: {moonMining: 2},
 
       behavior: {
         stock: {steel: 2, titanium: 2},

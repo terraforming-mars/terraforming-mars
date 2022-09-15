@@ -19,7 +19,6 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 10,
-      tr: {moonMining: 1},
 
       behavior: {
         moon: {miningRate: 1},

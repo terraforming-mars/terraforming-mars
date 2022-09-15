@@ -13,7 +13,6 @@ export class NeutralizerFactory extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.VENUS],
       cost: 7,
-      tr: {venus: 1},
 
       behavior: {
         global: {venus: 1},

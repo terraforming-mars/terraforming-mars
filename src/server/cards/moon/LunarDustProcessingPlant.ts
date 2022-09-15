@@ -14,7 +14,6 @@ export class LunarDustProcessingPlant extends Card implements IProjectCard {
       tags: [Tag.BUILDING],
       cost: 6,
       reserveUnits: {titanium: 1},
-      tr: {moonLogistics: 1},
 
       behavior: {
         moon: {logisticsRate: 1},

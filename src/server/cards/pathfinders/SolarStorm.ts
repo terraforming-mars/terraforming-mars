@@ -17,7 +17,6 @@ export class SolarStorm extends Card implements IProjectCard {
       name: CardName.SOLAR_STORM,
       cost: 12,
       tags: [Tag.SPACE],
-      tr: {temperature: 1},
 
       behavior: {
         production: {heat: 1},

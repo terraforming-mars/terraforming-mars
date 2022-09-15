@@ -11,7 +11,6 @@ export class PoliticalAlliance extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.POLITICAL_ALLIANCE,
       cost: 4,
-      tr: {tr: 1},
 
       behavior: {
         tr: 1,

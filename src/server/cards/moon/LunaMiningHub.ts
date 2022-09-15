@@ -17,6 +17,7 @@ export class LunaMiningHub extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 16,
+      reserveUnits: {steel: 1, titanium: 1},
 
       behavior: {
         production: {steel: 1, titanium: 1},
@@ -26,8 +27,7 @@ export class LunaMiningHub extends Card {
           miningRate: 1,
         },
       },
-      reserveUnits: {steel: 1, titanium: 1},
-      tr: {moonMining: 1},
+
       victoryPoints: 'special',
       requirements: CardRequirements.builder((b) => b.miningRate(5)),
 

@@ -15,7 +15,6 @@ export class DustStorm extends Card implements IProjectCard {
       name: CardName.DUST_STORM,
       cost: 17,
       tags: [Tag.MARS],
-      tr: {temperature: 2},
 
       behavior: {
         global: {temperature: 2},

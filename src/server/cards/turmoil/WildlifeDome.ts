@@ -15,7 +15,6 @@ export class WildlifeDome extends Card implements IProjectCard {
       tags: [Tag.ANIMAL, Tag.PLANT, Tag.BUILDING],
       cardType: CardType.AUTOMATED,
       requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
-      tr: {oxygen: 1},
 
       behavior: {
         greenery: {},

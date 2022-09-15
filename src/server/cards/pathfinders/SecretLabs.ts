@@ -12,7 +12,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {TRSource} from '../ICard';
+import {TRSource} from '../../../common/cards/TRSource';
 import {digit} from '../Options';
 
 export class SecretLabs extends Card implements IProjectCard {

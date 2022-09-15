@@ -11,7 +11,6 @@ export class ImprovedMoonConcrete extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       cost: 12,
       reserveUnits: {steel: 2},
-      tr: {moonMining: 1},
 
       behavior: {
         moon: {miningRate: 1},

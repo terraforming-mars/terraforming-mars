@@ -11,7 +11,6 @@ export class PermafrostExtraction extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.PERMAFROST_EXTRACTION,
       cost: 8,
-      tr: {oceans: 1},
 
       behavior: {
         ocean: {},

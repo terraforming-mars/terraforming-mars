@@ -16,7 +16,6 @@ export class HydrogenToVenus extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 11,
-      tr: {venus: 1},
 
       behavior: {
         global: {venus: 1},

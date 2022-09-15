@@ -13,13 +13,12 @@ export class GeodesicTents extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.PLANT, Tag.CITY, Tag.MOON],
       cost: 13,
+      reserveUnits: {titanium: 1},
 
       behavior: {
         production: {energy: -1, plants: 1},
         moon: {colonyTile: {}},
       },
-      reserveUnits: {titanium: 1},
-      tr: {moonColony: 1},
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your plant production 1 step. ' +

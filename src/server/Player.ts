@@ -12,7 +12,8 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {Payment, PaymentKey, PAYMENT_KEYS} from '../common/inputs/Payment';
 import {IAward} from './awards/IAward';
-import {ICard, isIActionCard, TRSource, IActionCard, DynamicTRSource} from './cards/ICard';
+import {ICard, isIActionCard, IActionCard, DynamicTRSource} from './cards/ICard';
+import {TRSource} from '../common/cards/TRSource';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {LogMessageDataType} from '../common/logs/LogMessageDataType';
@@ -67,6 +68,7 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
+import {Behaviors} from './behavior/Behaviors';
 
 // Behavior when playing a card.
 // add it to the tableau
@@ -1473,12 +1475,13 @@ export class Player {
   // TODO(kberg): After migration, see if this can become private again.
   // Or perhaps moved into card?
   public canAffordCard(card: IProjectCard): boolean {
+    const trSource: TRSource | DynamicTRSource | undefined = card.tr || (card.behavior !== undefined ? Behaviors.toTRSource(card.behavior) : undefined);
     return this.canAfford(
       this.getCardCost(card),
       {
         ...this.paymentOptionsForCard(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
-        tr: card.tr,
+        tr: trSource,
       });
   }
 

@@ -17,7 +17,6 @@ export class VenusianPlants extends Card implements IProjectCard {
       name: CardName.VENUSIAN_PLANTS,
       cost: 13,
       tags: [Tag.VENUS, Tag.PLANT],
-      tr: {venus: 1},
 
       requirements: CardRequirements.builder((b) => b.venus(16)),
       victoryPoints: 1,

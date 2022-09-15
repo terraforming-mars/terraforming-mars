@@ -15,7 +15,6 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
       name: CardName.EXPEDITION_TO_THE_SURFACE_VENUS,
       cost: 16,
       tags: [Tag.VENUS],
-      tr: {venus: 1},
 
       behavior: {
         drawCard: 2,

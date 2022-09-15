@@ -12,7 +12,6 @@ export class ConvoyFromEuropa extends Card implements IProjectCard {
       name: CardName.CONVOY_FROM_EUROPA,
       tags: [Tag.SPACE],
       cost: 15,
-      tr: {oceans: 1},
 
       behavior: {
         ocean: {},

@@ -22,7 +22,6 @@ export class MomentumViriumHabitat extends Card {
         },
       },
       reserveUnits: {titanium: 1},
-      tr: {moonColony: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. ' +

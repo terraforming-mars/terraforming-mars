@@ -21,7 +21,6 @@ export class LargeConvoy extends Card implements IProjectCard {
       name: CardName.LARGE_CONVOY,
       tags: [Tag.EARTH, Tag.SPACE],
       cost: 36,
-      tr: {oceans: 1},
       victoryPoints: 2,
 
       behavior: {

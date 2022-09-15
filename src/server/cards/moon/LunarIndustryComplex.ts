@@ -19,7 +19,6 @@ export class LunarIndustryComplex extends Card implements IProjectCard {
         moon: {mineTile: {}},
       },
       reserveUnits: {titanium: 2},
-      tr: {moonMining: 1},
 
       metadata: {
         description: 'Spend 2 Titanium. Place a mine tile on the Moon and raise the Mining Rate 1 step. ' +

@@ -1,5 +1,6 @@
 import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
+import {TRSource} from '../../common/cards/TRSource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {BuildColony} from '../deferredActions/BuildColony';
 import {DecreaseAnyProduction} from '../deferredActions/DecreaseAnyProduction';
@@ -218,5 +219,21 @@ export class Behaviors {
         player.colonies.tradeOffset -= colonies.tradeOffset;
       }
     }
+  }
+
+  public static toTRSource(behavior: Behavior): TRSource {
+    const trSource: TRSource = {
+      tr: behavior.tr,
+
+      temperature: behavior.global?.temperature,
+      oxygen: behavior.global?.oxygen,
+      venus: behavior.global?.venus,
+      oceans: behavior.ocean !== undefined ? 1 : undefined,
+
+      moonColony: (behavior.moon?.colonyRate ?? 0) + (behavior.moon?.colonyTile !== undefined ? 1 : 0),
+      moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
+      moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
+    };
+    return trSource;
   }
 }

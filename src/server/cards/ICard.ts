@@ -12,10 +12,11 @@ import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
-import {Units} from '../../common/Units';
 import {CardDiscount} from '../../common/cards/Types';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {TileType} from '../../common/TileType';
+import {Behavior} from '../behavior/Behavior';
+import {TRSource} from '../../common/cards/TRSource';
 
 export interface IActionCard {
     action: (player: Player) => PlayerInput | undefined;
@@ -43,18 +44,6 @@ export namespace VictoryPoints {
   }
 }
 
-// TRSource represents the ways an action will gain TR. This is used exclusively to compute
-// tax when Reds are in power.
-export type TRSource = {
-  oxygen?: number,
-  temperature?: number,
-  oceans?: number,
-  tr?: number,
-  venus?: number
-  moonColony?: number,
-  moonMining?: number,
-  moonLogistics?: number,
-}
 export type DynamicTRSource = (player: Player) => TRSource;
 
 export interface ICard extends Partial<IActionCard> {
@@ -88,9 +77,7 @@ export interface ICard extends Partial<IActionCard> {
     requirements?: CardRequirements;
     metadata: ICardMetadata;
     warning?: string | Message;
-    behavior?: {
-      production?: Partial<Units> | undefined;
-    }
+    behavior?: Behavior,
     produce?: (player: Player) => void;
     tr?: TRSource | DynamicTRSource;
     resourceCount: number;

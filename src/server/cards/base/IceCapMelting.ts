@@ -11,7 +11,6 @@ export class IceCapMelting extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.ICE_CAP_MELTING,
       cost: 5,
-      tr: {oceans: 1},
 
       behavior: {
         ocean: {},

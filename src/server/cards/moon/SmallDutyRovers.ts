@@ -19,7 +19,6 @@ export class SmallDutyRovers extends Card implements IProjectCard {
       tags: [Tag.MOON, Tag.SPACE],
       cost: 9,
       reserveUnits: {titanium: 1},
-      tr: {moonLogistics: 1},
 
       behavior: {
         moon: {logisticsRate: 1},

@@ -17,6 +17,8 @@ export class LunaTrainStation extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
       cost: 20,
+      reserveUnits: {steel: 2},
+      victoryPoints: 'special',
 
       behavior: {
         production: {megacredits: 4},
@@ -25,10 +27,8 @@ export class LunaTrainStation extends Card {
           logisticsRate: 1,
         },
       },
+
       requirements: CardRequirements.builder((b) => b.logisticRate(5)),
-      reserveUnits: {steel: 2},
-      tr: {moonLogistics: 1},
-      victoryPoints: 'special',
 
       metadata: {
         description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +

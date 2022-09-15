@@ -13,7 +13,6 @@ export class SmallAsteroid extends Card implements IProjectCard {
       name: CardName.SMALL_ASTEROID,
       tags: [Tag.SPACE],
       cost: 10,
-      tr: {temperature: 1},
 
       behavior: {
         global: {temperature: 1},

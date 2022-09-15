@@ -10,7 +10,6 @@ export class ReleaseOfInertGases extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.RELEASE_OF_INERT_GASES,
       cost: 14,
-      tr: {tr: 2},
 
       behavior: {
         tr: 2,

@@ -40,7 +40,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
             .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8, {all}).br;
           b.text('Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.', Size.TINY, false, false).br;
           b
-            .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
+            .effect('When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
               eb.emptyTile('normal', {size: Size.SMALL, secondaryTag: Tag.MOON})
                 .startEffect
                 .text('STEAL').megacredits(2, {all}).slash().emptyTile('normal', {size: Size.SMALL}).emptyTile('normal', {size: Size.SMALL, all});

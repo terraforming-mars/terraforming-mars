@@ -4,7 +4,7 @@ import {Landlord} from '../../src/server/awards/Landlord';
 import {TestPlayer} from '../TestPlayer';
 import {SpaceName} from '../../src/server/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
+import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {Player} from '../../src/server/Player';
 import {ARES_OPTIONS_NO_HAZARDS} from '../ares/AresTestHelper';
 import {EmptyBoard} from '../ares/EmptyBoard';

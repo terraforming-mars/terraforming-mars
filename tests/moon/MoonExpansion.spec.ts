@@ -8,7 +8,7 @@ import {Philares} from '../../src/server/cards/promo/Philares';
 import {Game} from '../../src/server/Game';
 import {IMoonData} from '../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
+import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SpaceName} from '../../src/server/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {testGameOptions} from '../TestingUtils';

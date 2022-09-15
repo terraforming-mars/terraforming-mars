@@ -8,7 +8,7 @@ import {TestPlayer} from '../TestPlayer';
 import {Board} from '../../src/server/boards/Board';
 import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/server/boards/SerializedBoard';
-import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
+import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SeededRandom} from '../../src/server/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/GameOptions';
 import {MultiSet} from 'mnemonist';

@@ -9,7 +9,7 @@ export class PlaceMoonMineTile extends DeferredAction {
 
   constructor(
     player: Player,
-    public title: string = 'Select a space on the Moon for a mining tile.',
+    public title: string = 'Select a space on The Moon for a mining tile.',
   ) {
     super(player, Priority.DEFAULT);
   }

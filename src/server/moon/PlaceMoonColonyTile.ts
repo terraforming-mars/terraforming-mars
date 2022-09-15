@@ -6,7 +6,7 @@ import {MoonExpansion} from './MoonExpansion';
 export class PlaceMoonColonyTile extends DeferredAction {
   constructor(
     player: Player,
-    public title: string = 'Select a space on the Moon for a colony tile.',
+    public title: string = 'Select a space on The Moon for a colony tile.',
   ) {
     super(player, Priority.DEFAULT);
   }

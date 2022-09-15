@@ -29,7 +29,7 @@ export class LunaTrainStation extends Card {
 
       metadata: {
         description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +
-        'Increase your M€ production 4 steps. Place this tile on the Moon and raise the Logistic Rate 1 step. ' +
+        'Increase your M€ production 4 steps. Place this tile on The Moon and raise the Logistic Rate 1 step. ' +
         '2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.',
         cardNumber: 'M15',
         renderData: CardRenderer.builder((b) => {

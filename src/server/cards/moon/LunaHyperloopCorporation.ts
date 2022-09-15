@@ -27,10 +27,10 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).steel(4).br;
-          b.action('Gain 1 M€ for each road tile on the Moon.', (eb) => {
+          b.action('Gain 1 M€ for each road tile on The Moon.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().moonRoad({all});
           }).br,
-          b.vpText('1 VP for each road tile on the Moon.').br;
+          b.vpText('1 VP for each road tile on The Moon.').br;
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(1, true),
       },

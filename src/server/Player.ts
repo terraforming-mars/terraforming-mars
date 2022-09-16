@@ -61,7 +61,6 @@ import {Turmoil} from './turmoil/Turmoil';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
-import {SerializedGame} from './SerializedGame';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
@@ -70,10 +69,13 @@ import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {Behaviors} from './behavior/Behaviors';
 
-// Behavior when playing a card.
-// add it to the tableau
-// discard it from the tableau
-// do nothing.
+/**
+ * Behavior when playing a card:
+ *   add it to the tableau
+ *   discard it from the tableau
+ *   or do nothing.
+ */
+
 export type CardAction ='add' | 'discard' | 'nothing';
 export class Player {
   public readonly id: PlayerId;
@@ -1975,7 +1977,7 @@ export class Player {
     return result;
   }
 
-  public static deserialize(d: SerializedPlayer, game: SerializedGame): Player {
+  public static deserialize(d: SerializedPlayer): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
@@ -1988,10 +1990,6 @@ export class Player {
     player.colonies.tradeOffset = d.colonyTradeOffset;
     player.colonies.victoryPoints = d.colonyVictoryPoints;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
-    // TODO(kberg): delete this conditional by 2022-06-01
-    if (!player.victoryPointsByGeneration) {
-      player.victoryPointsByGeneration = new Array(game.generation).fill(0);
-    }
     player.energy = d.energy;
     player.colonies.setFleetSize(d.fleetSize);
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;

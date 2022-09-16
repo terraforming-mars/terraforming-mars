@@ -128,8 +128,7 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    getCardMetadata(): ICardMetadata | undefined {
-      // TODO(kberg): This doesn't return undefined anymore.
+    getCardMetadata(): ICardMetadata {
       return this.cardInstance.metadata;
     },
     getCardRequirements(): ICardRequirements | undefined {

@@ -20,9 +20,7 @@ export type SerializedGame = {
     aresData?: AresData;
     awards: Array<string>;
     board: SerializedBoard;
-    // game.rng changes over the course of a game but isn't saved and serialized
-    // for instance, in the face of a redeal.
-    currentSeed: number | undefined; // TODO(kberg): Remove '|undefined' by 2022-06-01
+    currentSeed: number;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;

@@ -7,6 +7,7 @@ import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {DATA_VALUE, SEED_VALUE} from '@/common/constants';
 import {CardResource} from '@/common/CardResource';
+import {getCard} from '../cards/ClientCardManifest';
 
 export interface SelectPaymentModel {
     card?: CardModel;
@@ -185,7 +186,7 @@ export const PaymentWidgetMixin = {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
         if (!thisPlayer.tableau.some((card) => {
-          return card.name !== CardName.DIRIGIBLES && card.resourceType === CardResource.FLOATER && (card.resources ?? 0) > 0;
+          return card.name !== CardName.DIRIGIBLES && getCard(card.name)?.resourceType === CardResource.FLOATER && (card.resources ?? 0) > 0;
         })) {
           amount = Math.max(amount - 1, 0);
         }

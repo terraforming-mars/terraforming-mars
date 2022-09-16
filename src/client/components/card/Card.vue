@@ -147,15 +147,12 @@ export default Vue.extend({
   },
   computed: {
     hasResourceType(): boolean {
-      return this.card.resourceType !== undefined ||
-        this.cardInstance.resourceType !== undefined ||
-        this.robotCard !== undefined;
+      return this.card.isSelfReplicatingRobotsCard === true || this.cardInstance.resourceType !== undefined || this.robotCard !== undefined;
     },
     resourceType(): CardResource {
-      if (this.robotCard !== undefined) return CardResource.RESOURCE_CUBE;
-      if (this.card.resourceType !== undefined) return this.card.resourceType;
-      if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
-      return CardResource.RESOURCE_CUBE;
+      if (this.robotCard !== undefined || this.card.isSelfReplicatingRobotsCard === true) return CardResource.RESOURCE_CUBE;
+      // This last RESOURCE_CUBE is functionally unnecessary and serves to satisfy the type contract.
+      return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },
     hasHelp(): boolean {
       return names.includes(this.card.name) && getPreferences().experimental_ui;

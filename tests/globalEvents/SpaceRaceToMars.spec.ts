@@ -65,6 +65,16 @@ describe('SpaceRaceToMars', function() {
     expect(player2.production.megacredits).eq(0);
   });
 
+  it('Land-claimed hazard tile does not count', function() {
+    // Greenery won't doesn't change this card's reward.
+    game.simpleAddTile(player, spaces[3], {tileType: TileType.EROSION_SEVERE});
+
+    card.resolve(game, turmoil);
+
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
+  });
+
   it('Other players special tile', function() {
     game.simpleAddTile(player2, spaces[3], {tileType: TileType.LAVA_FLOWS});
 

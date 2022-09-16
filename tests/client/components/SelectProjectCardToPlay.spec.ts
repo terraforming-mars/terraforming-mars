@@ -10,7 +10,6 @@ import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
 import {Payment} from '@/common/inputs/Payment';
-import {CardResource} from '@/common/CardResource';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
@@ -180,8 +179,8 @@ describe('SelectProjectCardToPlay', () => {
 
   it('Paying for Stratospheric Birds with Dirigibles while another card has floaters (#4052)', async () => {
     const tableau: Array<Partial<CardModel>> = [
-      {name: CardName.DIRIGIBLES, resourceType: CardResource.FLOATER, resources: 3},
-      {name: CardName.AERIAL_MAPPERS, resourceType: CardResource.FLOATER, resources: 1},
+      {name: CardName.DIRIGIBLES, resources: 3},
+      {name: CardName.AERIAL_MAPPERS, resources: 1},
     ];
     const wrapper = setupCardForPurchase(
       CardName.STRATOSPHERIC_BIRDS, 12, {
@@ -491,7 +490,6 @@ describe('SelectProjectCardToPlay', () => {
           {
             // Dirigibles is here to show that it's got floaters, but is ignored.
             name: CardName.DIRIGIBLES,
-            resourceType: CardResource.FLOATER,
             resources: 3,
           } as CardModel,
         ]},
@@ -567,7 +565,6 @@ describe('SelectProjectCardToPlay', () => {
       cards: [{
         name: cardName,
         resources: undefined,
-        resourceType: undefined,
         cardType: CardType.ACTIVE,
         isDisabled: false,
         reserveUnits: reserveUnits,

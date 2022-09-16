@@ -137,12 +137,12 @@ export class Server {
     return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
       const model: CardModel = {
         resources: targetCard.resourceCount,
-        resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
         name: targetCard.card.name,
         calculatedCost: player.getCardCost(targetCard.card),
         cardType: CardType.ACTIVE,
         isDisabled: false,
         reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
+        isSelfReplicatingRobotsCard: true,
       };
       return model;
     });
@@ -372,7 +372,6 @@ export class Server {
 
       const model: CardModel = {
         resources: options.showResources ? card.resourceCount : undefined,
-        resourceType: card.resourceType,
         name: card.name,
         calculatedCost: options.showCalculatedCost ? (isIProjectCard(card) && card.cost !== undefined ? player.getCardCost(card) : undefined) : card.cost,
         cardType: card.cardType,

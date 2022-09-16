@@ -6,7 +6,6 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
-import {CardResource} from '@/common/CardResource';
 
 describe('SelectPayment', () => {
   it('Uses heat', async () => {
@@ -222,7 +221,6 @@ describe('SelectPayment', () => {
           {
             // Dirigibles is here to show that it's got floaters, but is ignored.
             name: CardName.DIRIGIBLES,
-            resourceType: CardResource.FLOATER,
             resources: 3,
           } as CardModel,
         ]},

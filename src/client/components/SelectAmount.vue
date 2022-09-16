@@ -1,3 +1,16 @@
+<template>
+  <div>
+    <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+    <div class="flex">
+      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
+      &nbsp;
+      <Button size="big" type="max" @click="setMaxValue" title="MAX" />
+      &nbsp;
+      <Button v-if="showsave === true" size="big" @click="saveData" :title="playerinput.buttonLabel" />
+    </div>
+  </div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
@@ -38,13 +51,3 @@ export default Vue.extend({
   },
 });
 </script>
-<template>
-  <div>
-    <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-    <div class="flex">
-      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
-      <Button size="big" type="max" @click="setMaxValue" title="MAX" />
-      <Button v-if="showsave === true" size="big" @click="saveData" :title="playerinput.buttonLabel" />
-    </div>
-  </div>
-</template>

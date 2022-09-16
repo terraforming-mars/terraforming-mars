@@ -2,7 +2,7 @@ import {SerializedDeck} from './SerializedDeck';
 import {CardFinder} from '../CardFinder';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../LogHelper';
-import {Random, UnseededRandom} from '../Random';
+import {Random} from '../Random';
 import {ICard} from './ICard';
 import {ICorporationCard} from './corporation/ICorporationCard';
 import {IProjectCard} from './IProjectCard';
@@ -130,13 +130,12 @@ export class CorporationDeck extends Deck<ICorporationCard> {
     super('corporation', deck, discarded, random);
   }
 
-  public static deserialize(d: SerializedDeck): Deck<ICorporationCard> {
-    // TODO(kberg): serializing the randomizer would help when using a seeded game that reshuffles.
+  public static deserialize(d: SerializedDeck, random: Random): Deck<ICorporationCard> {
     const cardFinder = new CardFinder();
 
     const deck = cardFinder.corporationCardsFromJSON(d.drawPile);
     const discarded = cardFinder.corporationCardsFromJSON(d.discardPile);
-    return new CorporationDeck(deck, discarded, UnseededRandom.INSTANCE);
+    return new CorporationDeck(deck, discarded, random);
   }
 }
 
@@ -145,13 +144,12 @@ export class ProjectDeck extends Deck<IProjectCard> {
     super('project', deck, discarded, random);
   }
 
-  public static deserialize(d: SerializedDeck): Deck<IProjectCard> {
-    // TODO(kberg): serializing the randomizer would help when using a seeded game that reshuffles.
+  public static deserialize(d: SerializedDeck, random: Random): Deck<IProjectCard> {
     const cardFinder = new CardFinder();
 
     const deck = cardFinder.cardsFromJSON(d.drawPile);
     const discarded = cardFinder.cardsFromJSON(d.discardPile);
-    return new ProjectDeck(deck, discarded, UnseededRandom.INSTANCE);
+    return new ProjectDeck(deck, discarded, random);
   }
 }
 
@@ -170,12 +168,11 @@ export class PreludeDeck extends Deck<IProjectCard> {
     super('prelude', copy, discarded, random);
   }
 
-  public static deserialize(d: SerializedDeck): Deck<IProjectCard> {
-    // TODO(kberg): serializing the randomizer would help when using a seeded game that reshuffles.
+  public static deserialize(d: SerializedDeck, random: Random): Deck<IProjectCard> {
     const cardFinder = new CardFinder();
 
     const deck = cardFinder.cardsFromJSON(d.drawPile);
     const discarded = cardFinder.cardsFromJSON(d.discardPile);
-    return new ProjectDeck(deck, discarded, UnseededRandom.INSTANCE);
+    return new PreludeDeck(deck, discarded, random);
   }
 }

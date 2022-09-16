@@ -4,7 +4,6 @@ import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
 import {setCustomGameOptions} from '../TestingUtils';
 import {Color} from '../../src/common/Color';
-import {Deck} from '../../src/server/cards/Deck';
 
 describe('Cloner', function() {
   it('solo game preserved', () => {
@@ -44,15 +43,9 @@ describe('Cloner', function() {
     expect(game.rng.seed).eq(newGame.rng.seed);
     expect(game.gameAge).eq(newGame.gameAge);
     expect(game.undoCount).eq(newGame.undoCount);
-    function extractDeck(deck: Deck<any>) {
-      return {
-        drawPile: deck.drawPile,
-        discardPile: deck.discardPile,
-      };
-    }
-    expect(extractDeck(game.projectDeck), 'projectDeck').to.deep.eq(extractDeck(newGame.projectDeck));
-    expect(extractDeck(game.corporationDeck), 'corporationDeck').to.deep.eq(extractDeck(newGame.corporationDeck));
-    expect(extractDeck(game.preludeDeck), 'preludeDeck').to.deep.eq(extractDeck(newGame.preludeDeck));
+    expect(game.projectDeck, 'projectDeck').to.deep.eq(newGame.projectDeck);
+    expect(game.corporationDeck, 'corporationDeck').to.deep.eq(newGame.corporationDeck);
+    expect(game.preludeDeck, 'preludeDeck').to.deep.eq(newGame.preludeDeck);
     expect(game.milestones, 'milestones').to.deep.eq(newGame.milestones);
     expect(game.awards, 'awards').to.deep.eq(newGame.awards);
 

@@ -1573,7 +1573,7 @@ export class Game implements Logger {
     let projectDeck: ProjectDeck;
     let corporationDeck: CorporationDeck;
     let preludeDeck: PreludeDeck;
-    // Rebuild dealer object to be sure that we will have cards in the same order
+    // Rebuild dealer object to be sure that cards are in the same order
     if (d.dealer !== undefined) {
       const dealer = Dealer.deserialize(d.dealer);
       projectDeck = new ProjectDeck(dealer.deck, dealer.discarded, rng);
@@ -1581,12 +1581,12 @@ export class Game implements Logger {
       preludeDeck = new PreludeDeck(dealer.preludeDeck, [], rng);
     } else {
       // TODO(kberg): Delete this conditional when `d.dealer` is removed.
-      if (d.projectDeck === undefined || d.corporationDeck === undefined ||d.preludeDeck === undefined) {
+      if (d.projectDeck === undefined || d.corporationDeck === undefined || d.preludeDeck === undefined) {
         throw new Error('Wow');
       }
-      projectDeck = ProjectDeck.deserialize(d.projectDeck);
-      corporationDeck = CorporationDeck.deserialize(d.corporationDeck);
-      preludeDeck = PreludeDeck.deserialize(d.preludeDeck);
+      projectDeck = ProjectDeck.deserialize(d.projectDeck, rng);
+      corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
+      preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
     }
 
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);

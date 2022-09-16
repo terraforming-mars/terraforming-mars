@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,6 +17,7 @@ export class EcoLine extends Card implements ICorporationCard {
       behavior: {
         production: {plants: 2},
         stock: {plants: 3},
+        greeneryDiscount: 1,
       },
 
       metadata: {
@@ -34,9 +34,5 @@ export class EcoLine extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.plantsNeededForGreenery = 7;
-    return undefined;
   }
 }

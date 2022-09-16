@@ -62,6 +62,9 @@ export interface Behavior {
   /** Draw this many cards from the deck. */
   drawCard?: number | DrawCard,
 
+  /** Greeneries cost one plant less. */
+  greeneryDiscount?: 1,
+
   // spendResourcesHere: number,
   // spendResource: {type: CardResource, count: number},
   // tile: {type: TileType, space?: SpaceId, spaceType?: SpaceType};

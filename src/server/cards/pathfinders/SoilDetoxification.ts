@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -20,6 +19,7 @@ export class SoilDetoxification extends Card implements IProjectCard {
 
       behavior: {
         production: {plants: 1},
+        greeneryDiscount: 1,
       },
 
       metadata: {
@@ -31,14 +31,5 @@ export class SoilDetoxification extends Card implements IProjectCard {
         description: 'Requires Greens are ruling or you have 2 delegates there. Increase your plant production 1 step',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.plantsNeededForGreenery--;
-    return undefined;
-  }
-
-  public override bespokeOnDiscard(player: Player) {
-    player.plantsNeededForGreenery++;
   }
 }

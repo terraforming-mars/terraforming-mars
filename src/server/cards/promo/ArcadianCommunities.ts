@@ -42,8 +42,8 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getAvailableSpacesOnLand(player),
-      (foundSpace: ISpace) => {
-        foundSpace.player = player;
+      (space: ISpace) => {
+        space.player = player;
 
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
 
@@ -73,8 +73,8 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     return new SelectSpace(
       'Select space for claim',
       this.getAvailableSpacesForMarker(player),
-      (foundSpace: ISpace) => {
-        foundSpace.player = player;
+      (space: ISpace) => {
+        space.player = player;
         return undefined;
       },
     );

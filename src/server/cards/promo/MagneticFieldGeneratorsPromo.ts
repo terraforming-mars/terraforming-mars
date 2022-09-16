@@ -43,8 +43,8 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
     const availableSpaces = player.game.board.getAvailableSpacesOnLand(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.MAGNETIC_FIELD_GENERATORS});
+    return new SelectSpace('Select space for tile', availableSpaces, (space: ISpace) => {
+      player.game.addTile(player, space.spaceType, space, {tileType: TileType.MAGNETIC_FIELD_GENERATORS});
       return undefined;
     });
   }

@@ -1,5 +1,5 @@
-PayProductionModel  // TODO(chosta): consolidate repetition into a reusable component.
 <template>
+  <!-- TODO(chosta): consolidate repetition into a reusable component. -->
   <div class="wf-component wf-component--select-production-to-lose">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
 

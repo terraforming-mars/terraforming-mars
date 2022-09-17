@@ -133,7 +133,7 @@
 
   "Luna Political Institute" :"月球政治研究所",
   "2 Moon": "2 月球标志",
-  "Action: Move one of your delegates in any party.": "行动：把你的一名代表从预备区移到任何党派。",
+  "Action: Place one of your delegates in any party.": "行动：把你的一名代表从预备区移到任何党派。",
   "Requires that you have 2 Moon tags.": "需要两个月球标志。",
 
   "Luna Project Office" :"月球项目办公室",
@@ -219,7 +219,6 @@
   "Requires Colony Rate to be 2 or higher. Raise the Colony Rate 1 step.":"需要殖民效率为2或更高。提升殖民效率1级。",
 
   "Off-World City Living":"地外城市生活",
-  "1 VP for each 3 city tiles in play.":"每3个城市板块1VP",
   "Increase your M€ production 1 step per city tile NOT ON MARS. Increase Colony Rate 1 step.":"每有一个不在火星上的城市板块，提升你的M€产量1级。提升殖民效率1级。",
 
   "Orbital Power Grid":"轨道电网",

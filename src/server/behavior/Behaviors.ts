@@ -71,6 +71,9 @@ export class Behaviors {
       player.increaseTitaniumValue();
     }
 
+    if (behavior?.greeneryDiscount) {
+      player.plantsNeededForGreenery -= behavior.greeneryDiscount;
+    }
     if (behavior.drawCard !== undefined) {
       const drawCard = behavior.drawCard;
       if (typeof(drawCard) === 'number') {
@@ -203,6 +206,10 @@ export class Behaviors {
     }
     if (behavior.titanumValue === 1) {
       player.decreaseTitaniumValue();
+    }
+
+    if (behavior?.greeneryDiscount) {
+      player.plantsNeededForGreenery += behavior.greeneryDiscount;
     }
 
     if (behavior.colonies !== undefined) {

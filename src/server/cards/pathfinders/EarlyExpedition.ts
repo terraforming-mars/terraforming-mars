@@ -51,8 +51,8 @@ export class EarlyExpedition extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
-      player.game.addCityTile(player, foundSpace.id);
+    return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (space: ISpace) => {
+      player.game.addCityTile(player, space.id);
       return undefined;
     });
   }

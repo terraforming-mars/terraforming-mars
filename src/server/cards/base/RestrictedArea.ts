@@ -40,9 +40,9 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public override bespokePlay(player: Player) {
-    return new SelectSpace('Select space for tile', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.RESTRICTED_AREA});
-      foundSpace.adjacency = this.adjacencyBonus;
+    return new SelectSpace('Select space for tile', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
+      player.game.addTile(player, space.spaceType, space, {tileType: TileType.RESTRICTED_AREA});
+      space.adjacency = this.adjacencyBonus;
       return undefined;
     });
   }

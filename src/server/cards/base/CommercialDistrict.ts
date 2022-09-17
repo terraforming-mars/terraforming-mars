@@ -61,12 +61,12 @@ export class CommercialDistrict extends Card implements IProjectCard {
     return new SelectSpace(
       'Select space for special tile',
       player.game.board.getAvailableSpacesOnLand(player),
-      (foundSpace: ISpace) => {
-        player.game.addTile(player, foundSpace.spaceType, foundSpace, {
+      (space: ISpace) => {
+        player.game.addTile(player, space.spaceType, space, {
           tileType: TileType.COMMERCIAL_DISTRICT,
           card: this.name,
         });
-        foundSpace.adjacency = this.adjacencyBonus;
+        space.adjacency = this.adjacencyBonus;
         return undefined;
       },
     );

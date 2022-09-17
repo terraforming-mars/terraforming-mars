@@ -44,8 +44,8 @@ export class GreatDamPromo extends Card implements IProjectCard {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.GREAT_DAM});
+    return new SelectSpace('Select space for tile', availableSpaces, (space: ISpace) => {
+      player.game.addTile(player, space.spaceType, space, {tileType: TileType.GREAT_DAM});
       return undefined;
     });
   }

@@ -43,8 +43,8 @@ export class DeimosDownPromo extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
 
-    return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.DEIMOS_DOWN});
+    return new SelectSpace('Select space for tile', availableSpaces, (space: ISpace) => {
+      player.game.addTile(player, space.spaceType, space, {tileType: TileType.DEIMOS_DOWN});
       return undefined;
     });
   }

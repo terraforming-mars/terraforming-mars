@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -16,6 +15,7 @@ export class InvestmentLoan extends Card implements IProjectCard {
 
       behavior: {
         production: {megacredits: -1},
+        stock: {megacredits: 10},
       },
 
       metadata: {
@@ -26,10 +26,5 @@ export class InvestmentLoan extends Card implements IProjectCard {
         description: 'Decrease your M€ production 1 step. Gain 10 M€.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.megaCredits += 10;
-    return undefined;
   }
 }

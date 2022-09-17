@@ -6,7 +6,6 @@ import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
-import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import * as constants from '../../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -27,6 +26,10 @@ export class Atmoscoop extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       victoryPoints: 1,
 
+      behavior: {
+        addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER},
+      },
+
       metadata: {
         cardNumber: '217',
         description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
@@ -44,6 +47,7 @@ export class Atmoscoop extends Card implements IProjectCard {
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
+      // TODO(kberg): this is not correct, because the titanium can't be used for the reds cost.
       return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
     }
 
@@ -52,9 +56,7 @@ export class Atmoscoop extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     const game = player.game;
-    const floaterCards = player.getResourceCards(CardResource.FLOATER);
-
-    if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game) && floaterCards.length === 0) {
+    if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       return undefined;
     }
 
@@ -62,46 +64,21 @@ export class Atmoscoop extends Card implements IProjectCard {
       game.increaseTemperature(player, 2);
       return undefined;
     });
-    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise venus', () => {
+    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus', () => {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });
     const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus);
     increaseTempOrVenus.title = 'Choose global parameter to raise';
 
-    const addFloaters = new SelectCard(
-      'Select card to add 2 floaters',
-      'Add floaters',
-      floaterCards,
-      ([card]) => {
-        player.addResourceTo(card, {qty: 2, log: true});
-        return undefined;
-      },
-    );
-
     if (!this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       player.game.increaseTemperature(player, 2);
     } else if (this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
       player.game.increaseVenusScaleLevel(player, 2);
+    } else {
+      return increaseTempOrVenus;
     }
-
-    switch (floaterCards.length) {
-    case 1:
-      player.addResourceTo(floaterCards[0], {qty: 2, log: true});
-      // Intentional fall-through
-    case 0: // eslint-disable-line no-fallthrough
-      if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
-        return increaseTempOrVenus;
-      }
-      return undefined;
-
-    default:
-      if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
-        increaseTempOrVenus.cb = () => addFloaters;
-        return increaseTempOrVenus;
-      }
-      return addFloaters;
-    }
+    return undefined;
   }
 
   private temperatureIsMaxed(game: Game) {

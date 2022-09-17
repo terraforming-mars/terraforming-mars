@@ -26,6 +26,10 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
       initialActionText: 'Place a colony tile',
       victoryPoints: 'special',
 
+      behavior: {
+        stock: {titanium: 1},
+      },
+
       metadata: {
         description: {
           text: 'You start with 32 M€ and 1 titanium. As your first action, place a colony tile on The Moon and raise the Colony Rate 1 step.',
@@ -44,11 +48,6 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
         victoryPoints: CardRenderDynamicVictoryPoints.moonColonyTile(1),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.titanium++;
-    return undefined;
   }
 
   public initialAction(player: Player) {

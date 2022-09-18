@@ -22,6 +22,11 @@ export function newTestGame(count: number, customOptions?: Partial<GameOptions>,
 }
 
 export function getTestPlayer(game: Game, idx: number): TestPlayer {
+  const players = game.getPlayers();
+  const length = players.length;
+  if (idx >= length) {
+    throw new Error(`Invalid index ${idx} when game has ${length} players`);
+  }
   return game.getPlayers()[idx] as TestPlayer;
 }
 

@@ -30,7 +30,7 @@ describe('Behaviors', () => {
   // let player2: TestPlayer;
 
   beforeEach(() => {
-    game = newTestGame(2);
+    game = newTestGame(2, {venusNextExtension: true});
     player = getTestPlayer(game, 0);
     // player2 = getTestPlayer(game, 1);
   });
@@ -179,109 +179,24 @@ describe('Behaviors', () => {
     expect(player.cardsInHand).has.length(1);
     expect(player.megaCredits).eq(2);
   });
+
+  it('global parameters', () => {
+    function levels(): [number, number, number] {
+      return [game.getTemperature(), game.getOxygenLevel(), game.getVenusScaleLevel()];
+    }
+
+    expect(levels()).deep.eq([-30, 0, 0]);
+
+    Behaviors.execute({global: {temperature: 2}}, player);
+    expect(levels()).deep.eq([-26, 0, 0]);
+
+    Behaviors.execute({global: {oxygen: 1}}, player);
+    expect(levels()).deep.eq([-26, 1, 0]);
+
+    Behaviors.execute({global: {venus: 1}}, player);
+    expect(levels()).deep.eq([-26, 1, 2]);
+
+    Behaviors.execute({global: {temperature: 1, oxygen: 2, venus: 3}}, player);
+    expect(levels()).deep.eq([-24, 3, 8]);
+  });
 });
-
-// if (behavior.global !== undefined) {
-//   const g = behavior.global;
-//   if (g.temperature !== undefined) player.game.increaseTemperature(player, g.temperature);
-//   if (g.oxygen !== undefined) player.game.increaseOxygenLevel(player, g.oxygen);
-//   if (g.BUILDING !== undefined) player.game.increaseBUILDINGScaleLevel(player, g.BUILDING);
-// }
-
-// if (behavior.tr !== undefined) {
-//   player.increaseTerraformRatingSteps(behavior.tr);
-// }
-// if (behavior.addResources !== undefined) {
-//   if (card === undefined) {
-//     throw new Error('Cannot add resources without supplying a card');
-//   }
-//   player.game.defer(new SimpleDeferredAction(player, () => {
-//     player.addResourceTo(card, behavior.addResources);
-//     return undefined;
-//   }));
-// }
-
-// if (behavior.addResourcesToAnyCard) {
-//   const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
-//   for (const entry of array) {
-//     player.game.defer(new AddResourcesToCard(player, entry.type, {count: entry.count}));
-//   }
-// }
-// if (behavior.decreaseAnyProduction !== undefined) {
-//   player.game.defer(new DecreaseAnyProduction(player, behavior.decreaseAnyProduction.type, {count: behavior.decreaseAnyProduction.count}));
-// }
-// if (behavior.removeAnyPlants !== undefined) {
-//   player.game.defer(new RemoveAnyPlants(player, behavior.removeAnyPlants));
-// }
-// if (behavior.colonies !== undefined) {
-//   const colonies = behavior.colonies;
-//   if (colonies.buildColony !== undefined) {
-//     player.game.defer(new BuildColony(player, {allowDuplicate: colonies.buildColony.allowDuplicates}));
-//   }
-//   if (colonies.addTradeFleet !== undefined) {
-//     for (let idx = 0; idx < colonies.addTradeFleet; idx++) {
-//       player.colonies.increaseFleetSize();
-//     }
-//   }
-//   if (colonies.tradeDiscount !== undefined) {
-//     player.colonies.tradeDiscount += colonies.tradeDiscount;
-//   }
-//   if (colonies.tradeOffset !== undefined) {
-//     player.colonies.tradeOffset += colonies.tradeOffset;
-//   }
-// }
-
-// if (behavior.ocean !== undefined) {
-//   player.game.defer(new PlaceOceanTile(player));
-// }
-// if (behavior.city !== undefined) {
-//   if (behavior.city.space !== undefined) {
-//     player.game.addCityTile(player, behavior.city.space, behavior.city.type);
-//   } else {
-//     player.game.defer(new PlaceCityTile(player));
-//   }
-// }
-// if (behavior.greenery !== undefined) {
-//   player.game.defer(new PlaceGreeneryTile(player));
-// }
-
-// // TODO(kberg): Add canPlay for these behaviors.
-// if (behavior.moon !== undefined) {
-//   const moon = behavior.moon;
-//   if (moon.colonyTile !== undefined) {
-//     if (moon.colonyTile.space === undefined) {
-//       player.game.defer(new PlaceMoonColonyTile(player));
-//     } else {
-//       MoonExpansion.addColonyTile(player, moon.colonyTile.space, card?.name);
-//       MoonExpansion.raiseColonyRate(player);
-//     }
-//   }
-//   if (moon.mineTile !== undefined) {
-//     if (moon.mineTile.space === undefined) {
-//       player.game.defer(new PlaceMoonMineTile(player));
-//     } else {
-//       MoonExpansion.addMineTile(player, moon.mineTile.space, card?.name);
-//       MoonExpansion.raiseMiningRate(player);
-//     }
-//   }
-//   if (moon.roadTile !== undefined) {
-//     if (moon.roadTile.space === undefined) {
-//       player.game.defer(new PlaceMoonRoadTile(player));
-//     } else {
-//       MoonExpansion.addRoadTile(player, moon.roadTile.space, card?.name);
-//       MoonExpansion.raiseLogisticRate(player);
-//     }
-//   }
-//   if (moon.tile !== undefined) {
-//     if (moon.tile.space !== undefined) {
-//       MoonExpansion.addTile(player, moon.tile.space, {tileType: moon.tile.type, card: card?.name});
-//     } else {
-//       player.game.defer(new PlaceSpecialMoonTile(
-//         player, {tileType: moon.tile.type, card: card?.name},
-//         moon.tile.title));
-//     }
-//   }
-//   if (moon.colonyRate !== undefined) MoonExpansion.raiseColonyRate(player, moon.colonyRate);
-//   if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
-//   if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
-// }

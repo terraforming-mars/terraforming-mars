@@ -199,4 +199,16 @@ describe('Behaviors', () => {
     Behaviors.execute({global: {temperature: 1, oxygen: 2, venus: 3}}, player);
     expect(levels()).deep.eq([-24, 3, 8]);
   });
+
+  it('tr', () => {
+    expect(player.getTerraformRating()).eq(20);
+
+    Behaviors.execute({tr: 2}, player);
+
+    expect(player.getTerraformRating()).eq(22);
+
+    Behaviors.execute({tr: -1}, player);
+
+    expect(player.getTerraformRating()).eq(21);
+  });
 });

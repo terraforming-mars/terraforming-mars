@@ -24,7 +24,7 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
         cardNumber: 'M71',
         renderData: CardRenderer.builder((b) => {
           b.action(
-            'Move one of your delegates in any party.',
+            'Place one of your delegates in any party.',
             (eb) => eb.empty().startAction.delegates(1));
         }),
       },

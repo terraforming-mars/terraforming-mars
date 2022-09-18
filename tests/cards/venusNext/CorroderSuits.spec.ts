@@ -5,19 +5,20 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('CorroderSuits', function() {
   let card: CorroderSuits;
-  let player: Player;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new CorroderSuits();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
+    player.popSelectInitialCards();
   });
 
   it('Should play - no targets', function() {
@@ -30,6 +31,8 @@ describe('CorroderSuits', function() {
     player.playedCards.push(card2);
 
     card.play(player);
+    runAllActions(game);
+
     expect(card2.resourceCount).to.eq(1);
     expect(player.production.megacredits).to.eq(2);
   });
@@ -39,8 +42,10 @@ describe('CorroderSuits', function() {
     const card3 = new Dirigibles();
     player.playedCards.push(card2, card3);
 
-    const action = cast(card.play(player), SelectCard);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
 
+    const action = cast(player.popWaitingFor(), SelectCard);
     action.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
     expect(player.production.megacredits).to.eq(2);
@@ -51,6 +56,8 @@ describe('CorroderSuits', function() {
     player.playedCards.push(card2);
 
     card.play(player);
+    runAllActions(game);
+
     expect(card2.resourceCount).to.eq(1);
     expect(player.production.megacredits).to.eq(2);
   });

@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {PathfindersExpansion, PlanetaryTag, TRACKS} from '../../pathfinders/PathfindersExpansion';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
@@ -17,6 +16,10 @@ export class EconomicHelp extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.ECONOMIC_HELP,
       cost: 9,
+
+      behavior: {
+        production: {megacredits: 1},
+      },
 
       metadata: {
         cardNumber: 'Pf42',
@@ -61,7 +64,6 @@ export class EconomicHelp extends Card implements IProjectCard {
     if (data.mars === lowest) PathfindersExpansion.raiseTrack(Tag.MARS, player, increment);
     if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) PathfindersExpansion.raiseTrack(Tag.MOON, player, increment);
     if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) PathfindersExpansion.raiseTrack(Tag.VENUS, player, increment);
-    player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

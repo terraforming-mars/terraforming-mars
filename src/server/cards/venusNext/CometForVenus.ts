@@ -18,7 +18,10 @@ export class CometForVenus extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tag.SPACE],
       cost: 11,
-      tr: {venus: 1},
+
+      behavior: {
+        global: {venus: 1},
+      },
 
       metadata: {
         description: 'Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.',
@@ -34,7 +37,6 @@ export class CometForVenus extends Card implements IProjectCard {
     const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.tags.count(Tag.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {
-      player.game.increaseVenusScaleLevel(player, 1);
       return undefined;
     }
 
@@ -46,17 +48,13 @@ export class CometForVenus extends Card implements IProjectCard {
           'Remove M€',
           (selectedPlayer: Player) => {
             selectedPlayer.deductResource(Resources.MEGACREDITS, 4, {log: true, from: player});
-            player.game.increaseVenusScaleLevel(player, 1);
             return undefined;
           },
         ),
         new SelectOption(
           'Do not remove M€',
           'Confirm',
-          () => {
-            player.game.increaseVenusScaleLevel(player, 1);
-            return undefined;
-          },
+          () => undefined,
         ),
       );
     }

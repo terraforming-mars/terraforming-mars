@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -18,6 +17,7 @@ export class HeavyTaxation extends Card implements IProjectCard {
 
       behavior: {
         production: {megacredits: 2},
+        stock: {megacredits: 4},
       },
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.EARTH, 2)),
@@ -29,10 +29,5 @@ export class HeavyTaxation extends Card implements IProjectCard {
         description: 'Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.megaCredits += 4;
-    return undefined;
   }
 }

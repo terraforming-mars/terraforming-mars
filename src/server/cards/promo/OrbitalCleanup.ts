@@ -17,6 +17,10 @@ export class OrbitalCleanup extends Card implements IProjectCard {
       cost: 14,
       victoryPoints: 2,
 
+      behavior: {
+        production: {megacredits: -2},
+      },
+
       metadata: {
         cardNumber: 'X08',
 
@@ -31,15 +35,6 @@ export class OrbitalCleanup extends Card implements IProjectCard {
         description: 'Decrease your M€ production 2 steps.',
       },
     });
-  }
-
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.production.megacredits >= -3;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, -2);
-    return undefined;
   }
 
   public canAct(): boolean {

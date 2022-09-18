@@ -21,6 +21,7 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
 
       behavior: {
         stock: {titanium: 3},
+        addResourcesToAnyCard: {count: 1, type: CardResource.DATA},
         drawCard: 1,
       },
 
@@ -50,7 +51,6 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
           },
         },
       ));
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     return undefined;
   }
 }

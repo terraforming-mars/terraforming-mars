@@ -15,6 +15,8 @@ export class MooncrateBlockFactory extends Card implements IProjectCard {
       cost: 8,
       requirements: CardRequirements.builder((b) => b.miningTiles(1)),
 
+      // Behavior is in MoonColonyStandardProject, MoonMineStandardProject and MoonRoadStandardProject.
+
       metadata: {
         description: 'Requires 1 mine on The Moon.',
         cardNumber: 'M38',
@@ -25,10 +27,5 @@ export class MooncrateBlockFactory extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay() {
-    // Behavior is in MoonColonyStandardProject, MoonMineStandardProject and MoonRoadStandardProject.
-    return undefined;
   }
 }

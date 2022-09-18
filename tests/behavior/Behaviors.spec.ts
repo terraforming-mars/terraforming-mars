@@ -12,6 +12,7 @@ import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
 import {cast, runAllActions} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../src/server/cards/base/Ants';
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
@@ -32,13 +33,16 @@ describe('Behaviors', () => {
   let game: Game;
   let player: TestPlayer;
   let player2: TestPlayer;
+  let player3: TestPlayer;
 
   beforeEach(() => {
-    game = newTestGame(2, {venusNextExtension: true});
+    game = newTestGame(3, {venusNextExtension: true});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
+    player3 = getTestPlayer(game, 2);
     player.popSelectInitialCards();
     player2.popSelectInitialCards();
+    player3.popSelectInitialCards();
   });
 
   it('production - simple', () => {
@@ -295,5 +299,28 @@ describe('Behaviors', () => {
       regolithEathers: 0,
       livestock: 2,
     });
+  });
+
+  it('decrease any production - cannot execute with zero targets', () => {
+    expect(Behaviors.canExecute({decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}}, player)).is.false;
+  });
+
+  it('decrease any production - standard', () => {
+    const behavior = {decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}};
+    player.production.add(Resources.TITANIUM, 3);
+    player2.production.add(Resources.TITANIUM, 2);
+    player3.production.add(Resources.TITANIUM, 2);
+    expect(Behaviors.canExecute(behavior, player)).is.true;
+
+    Behaviors.execute(behavior, player);
+    runAllActions(game);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
+
+    // Omits self.
+    expect(selectPlayer.players).deep.eq([player, player2, player3]);
+
+    selectPlayer.cb(player3);
+
+    expect(player3.production.titanium).to.eq(0);
   });
 });

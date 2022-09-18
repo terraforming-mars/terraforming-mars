@@ -12,6 +12,7 @@ import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
 import {cast, runAllActions} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 
 function asUnits(player: Player): Units {
   return {
@@ -210,5 +211,17 @@ describe('Behaviors', () => {
     Behaviors.execute({tr: -1}, player);
 
     expect(player.getTerraformRating()).eq(21);
+  });
+
+  it('add resources to card', () => {
+    // Cards are necessary when adding resource to self.
+    expect(() => Behaviors.execute({addResources: 3}, player)).to.throw();
+
+    const card = new Tardigrades();
+    card.resourceCount = 2;
+    Behaviors.execute({addResources: 3}, player, card);
+    runAllActions(game);
+
+    expect(card.resourceCount).eq(5);
   });
 });

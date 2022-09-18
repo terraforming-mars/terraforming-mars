@@ -3,6 +3,11 @@ import {RareEarthElements} from '../../../src/server/cards/pathfinders/RareEarth
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {LandClaim} from '../../../src/server/cards/base/LandClaim';
+import {AresHandler} from '../../../src/server/ares/AresHandler';
+import {cast, runAllActions} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('RareEarthElements', function() {
   let card: RareEarthElements;
@@ -53,5 +58,21 @@ describe('RareEarthElements', function() {
     player.production.override({megacredits: 0});
     card.play(player);
     expect(player.production.megacredits).eq(3);
+  });
+
+  it('You do not own hazards you land-claimed', () => {
+    const game = newTestGame(1, {aresExtension: true, pathfindersExpansion: true});
+    const player = getTestPlayer(game, 0);
+    const hazardSpace = game.board.spaces.filter(AresHandler.hasHazardTile)[0];
+    const landClaim = new LandClaim();
+    player.playCard(landClaim);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    expect(selectSpace.availableSpaces).includes(hazardSpace);
+    selectSpace.cb(hazardSpace);
+
+    player.playCard(card);
+
+    expect(player.production.megacredits).eq(0);
   });
 });

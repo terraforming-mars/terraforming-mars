@@ -48,6 +48,7 @@ describe('LandSpecialist', function() {
     game.simpleAddTile(player, spaces[0], {tileType: TileType.CITY});
     game.simpleAddTile(player, spaces[1], {tileType: TileType.CITY});
     game.simpleAddTile(player, spaces[2], {tileType: TileType.GREENERY});
+    game.simpleAddTile(player, spaces[3], {tileType: TileType.EROSION_MILD});
     expect(milestone.getScore(player)).eq(0);
     expect(milestone.canClaim(player)).is.false;
   });

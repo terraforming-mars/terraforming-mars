@@ -154,7 +154,7 @@ export abstract class Card {
     if (this.requirements?.satisfies(player) === false) {
       return false;
     }
-    if (this.behavior !== undefined && !Behaviors.canExecute(player, this, this.behavior)) {
+    if (this.behavior !== undefined && !Behaviors.canExecute(this.behavior, player, this)) {
       return false;
     }
     return this.bespokeCanPlay(player);
@@ -170,7 +170,7 @@ export abstract class Card {
       player.deductUnits(adjustedReserveUnits);
     }
     if (this.behavior !== undefined) {
-      Behaviors.execute(player, this, this.behavior);
+      Behaviors.execute(this.behavior, player, this);
     }
     return this.bespokePlay(player);
   }
@@ -181,7 +181,7 @@ export abstract class Card {
 
   public onDiscard(player: Player): void {
     if (this.behavior !== undefined) {
-      Behaviors.onDiscard(player, this.behavior);
+      Behaviors.onDiscard(this.behavior, player, this);
     }
     this.bespokeOnDiscard(player);
   }

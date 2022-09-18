@@ -18,7 +18,7 @@ import {Player} from '../Player';
 import {Behavior} from './Behavior';
 
 export class Behaviors {
-  public static canExecute(player: Player, _card: ICard, behavior: Behavior) {
+  public static canExecute(behavior: Behavior, player: Player, _card?: ICard) {
     if (behavior.production && !player.production.canAdjust(Units.of(behavior.production))) {
       return false;
     }
@@ -57,7 +57,7 @@ export class Behaviors {
     return true;
   }
 
-  public static execute(player: Player, card: ICard, behavior: Behavior) {
+  public static execute(behavior: Behavior, player: Player, card?: ICard) {
     if (behavior.production !== undefined) {
       player.production.adjust(Units.of(behavior.production));
     }
@@ -108,6 +108,9 @@ export class Behaviors {
       player.increaseTerraformRatingSteps(behavior.tr);
     }
     if (behavior.addResources !== undefined) {
+      if (card === undefined) {
+        throw new Error('card is required for addResources behavior.');
+      }
       player.game.defer(new SimpleDeferredAction(player, () => {
         player.addResourceTo(card, behavior.addResources);
         return undefined;
@@ -165,7 +168,7 @@ export class Behaviors {
         if (moon.colonyTile.space === undefined) {
           player.game.defer(new PlaceMoonColonyTile(player));
         } else {
-          MoonExpansion.addColonyTile(player, moon.colonyTile.space, card.name);
+          MoonExpansion.addColonyTile(player, moon.colonyTile.space, card?.name);
           MoonExpansion.raiseColonyRate(player);
         }
       }
@@ -173,7 +176,7 @@ export class Behaviors {
         if (moon.mineTile.space === undefined) {
           player.game.defer(new PlaceMoonMineTile(player));
         } else {
-          MoonExpansion.addMineTile(player, moon.mineTile.space, card.name);
+          MoonExpansion.addMineTile(player, moon.mineTile.space, card?.name);
           MoonExpansion.raiseMiningRate(player);
         }
       }
@@ -181,16 +184,16 @@ export class Behaviors {
         if (moon.roadTile.space === undefined) {
           player.game.defer(new PlaceMoonRoadTile(player));
         } else {
-          MoonExpansion.addRoadTile(player, moon.roadTile.space, card.name);
+          MoonExpansion.addRoadTile(player, moon.roadTile.space, card?.name);
           MoonExpansion.raiseLogisticRate(player);
         }
       }
       if (moon.tile !== undefined) {
         if (moon.tile.space !== undefined) {
-          MoonExpansion.addTile(player, moon.tile.space, {tileType: moon.tile.type, card: card.name});
+          MoonExpansion.addTile(player, moon.tile.space, {tileType: moon.tile.type, card: card?.name});
         } else {
           player.game.defer(new PlaceSpecialMoonTile(
-            player, {tileType: moon.tile.type, card: card.name},
+            player, {tileType: moon.tile.type, card: card?.name},
             moon.tile.title));
         }
       }
@@ -200,7 +203,7 @@ export class Behaviors {
     }
   }
 
-  public static onDiscard(player: Player, behavior: Behavior) {
+  public static onDiscard(behavior: Behavior, player: Player, _card?: ICard) {
     if (behavior.steelValue === 1) {
       player.decreaseSteelValue();
     }

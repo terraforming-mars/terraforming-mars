@@ -13,6 +13,9 @@ import {CardType} from '../../src/common/cards/CardType';
 import {cast, runAllActions} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
+import {Ants} from '../../src/server/cards/base/Ants';
+import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
+import {Livestock} from '../../src/server/cards/base/Livestock';
 
 function asUnits(player: Player): Units {
   return {
@@ -28,12 +31,14 @@ function asUnits(player: Player): Units {
 describe('Behaviors', () => {
   let game: Game;
   let player: TestPlayer;
-  // let player2: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(() => {
     game = newTestGame(2, {venusNextExtension: true});
     player = getTestPlayer(game, 0);
-    // player2 = getTestPlayer(game, 1);
+    player2 = getTestPlayer(game, 1);
+    player.popSelectInitialCards();
+    player2.popSelectInitialCards();
   });
 
   it('production - simple', () => {
@@ -213,7 +218,7 @@ describe('Behaviors', () => {
     expect(player.getTerraformRating()).eq(21);
   });
 
-  it('add resources to card', () => {
+  it('add resources to specific card', () => {
     // Cards are necessary when adding resource to self.
     expect(() => Behaviors.execute({addResources: 3}, player)).to.throw();
 
@@ -223,5 +228,72 @@ describe('Behaviors', () => {
     runAllActions(game);
 
     expect(card.resourceCount).eq(5);
+  });
+
+  // TODO(kberg): Add test where type includes multiple resource types
+  // TODO(kberg): Add test taht filters on card tags.
+  it('add resources to any card', () => {
+    const tardigrades = new Tardigrades(); // Holds microbes
+    const ants = new Ants(); // Holds microbes
+    const regolithEathers = new RegolithEaters(); // Holds microbes
+    const livestock = new Livestock(); // Holds animals
+
+    function resourceCount() {
+      return {
+        tardigrades: tardigrades.resourceCount,
+        ants: ants.resourceCount,
+        regolithEathers: regolithEathers.resourceCount,
+        livestock: livestock.resourceCount,
+      };
+    }
+
+    player.playedCards = [tardigrades, ants, regolithEathers, livestock];
+
+    expect(resourceCount()).deep.eq({
+      tardigrades: 0,
+      ants: 0,
+      regolithEathers: 0,
+      livestock: 0,
+    });
+
+    // No floater cards.
+    Behaviors.execute({addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER}}, player);
+    runAllActions(game);
+
+    expect(player.popWaitingFor()).is.undefined;
+    expect(resourceCount()).deep.eq({
+      tardigrades: 0,
+      ants: 0,
+      regolithEathers: 0,
+      livestock: 0,
+    });
+
+    // One animal card. Auto-populated.
+    Behaviors.execute({addResourcesToAnyCard: {count: 2, type: CardResource.ANIMAL}}, player);
+    runAllActions(game);
+    expect(player.popWaitingFor()).is.undefined;
+
+    expect(resourceCount()).deep.eq({
+      tardigrades: 0,
+      ants: 0,
+      regolithEathers: 0,
+      livestock: 2,
+    });
+
+    // Three microbe cards. Player is asked to choose.
+    Behaviors.execute({addResourcesToAnyCard: {count: 1, type: CardResource.MICROBE}}, player);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    expect(selectCard.cards).has.members([tardigrades, ants, regolithEathers]);
+
+    selectCard.cb([ants]);
+
+    expect(resourceCount()).deep.eq({
+      tardigrades: 0,
+      ants: 1,
+      regolithEathers: 0,
+      livestock: 2,
+    });
   });
 });

@@ -1529,6 +1529,16 @@ export class Player {
       0 <= payment[key] && payment[key] <= maxPayable[key]);
   }
 
+  /**
+   * Returns the value of the suppled payment given the payment options.
+   *
+   * For example, if the payment is 3MC and 2 steel, given that steel by default is
+   * worth 2M€, this will return 7.
+   *
+   * @param {Payment} payment the resources being paid.
+   * @param {Payment.Options} options any configuration defining the accepted forma of payment.
+   * @return {number} a number representing the value of payment in M€.
+   */
   public payingAmount(payment: Payment, options?: Partial<Payment.Options>): number {
     const multiplier: {[key in PaymentKey]: number} = {
       megaCredits: 1,

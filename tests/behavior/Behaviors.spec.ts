@@ -242,6 +242,16 @@ describe('Behaviors', () => {
     expect(tardigrades.resourceCount).eq(5);
   });
 
+  it('add resources to specific card - countable', () => {
+    const tardigrades = new Tardigrades();
+    tardigrades.resourceCount = 2;
+    player.tagsForTest = {moon: 7};
+    Behaviors.execute({addResources: {tag: Tag.MOON, per: 3}}, player, tardigrades);
+    runAllActions(game);
+
+    expect(tardigrades.resourceCount).eq(4);
+  });
+
   // TODO(kberg): Add test where type includes multiple resource types
   // TODO(kberg): Add test that filters on card tags.
   it('add resources to any card', () => {

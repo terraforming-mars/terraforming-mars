@@ -23,7 +23,7 @@ export interface Behavior {
   stock?: Partial<Units>;
 
   /** Add resources to this card itself */
-  addResources?: number;
+  addResources?: Countable;
 
   /** Add resources to any cards */
   addResourcesToAnyCard?: AddResource | Array<AddResource>;

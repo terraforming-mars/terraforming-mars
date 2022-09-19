@@ -109,9 +109,10 @@ export class Behaviors {
     if (behavior.tr !== undefined) {
       player.increaseTerraformRatingSteps(behavior.tr);
     }
-    if (behavior.addResources !== undefined) {
+    const addResources = behavior.addResources;
+    if (addResources !== undefined) {
       player.game.defer(new SimpleDeferredAction(player, () => {
-        player.addResourceTo(card, behavior.addResources);
+        player.addResourceTo(card, ctx.count(addResources));
         return undefined;
       }));
     }

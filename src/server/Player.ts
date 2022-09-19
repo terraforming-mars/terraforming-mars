@@ -1185,7 +1185,6 @@ export class Player {
     }
   }
 
-  // eslint-disable-next-line valid-jsdoc
   /** @deprecated use card.play */
   public simplePlay(card: IProjectCard | ICorporationCard) {
     return card.play(this);
@@ -1496,7 +1495,6 @@ export class Player {
     return this.simpleCanPlay(card);
   }
 
-  // eslint-disable-next-line valid-jsdoc
   /**
    * Verify if requirements for the card can be met, ignoring the project cost.
    * Only made public for tests.

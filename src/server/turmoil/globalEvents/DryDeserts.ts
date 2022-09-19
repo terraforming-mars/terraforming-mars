@@ -9,7 +9,7 @@ import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDefe
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().oceans(1).br.wild(1).slash().influence();
+  b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
 });
 
 export class DryDeserts extends GlobalEvent implements IGlobalEvent {

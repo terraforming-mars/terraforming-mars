@@ -329,10 +329,9 @@ export default Vue.extend({
         AltSecondaryTag.MOON_LOGISTICS_RATE,
       ];
       // Oxygen is handled specially separately.
-      if (this.item.secondaryTag !== undefined && !previouslyRendered.includes(this.item.secondaryTag)) {
-        const classes: string[] = ['card-icon'];
-        classes.push(`card-tag-${this.item.secondaryTag}`);
-        result += '<div class="' + generateClassString(classes) + '"></div>';
+      const secondaryTag = this.item.secondaryTag;
+      if (secondaryTag !== undefined && !previouslyRendered.includes(secondaryTag)) {
+        result += '<div class="card-icon card-tag-' + secondaryTag + '"></div>';
       }
       if (this.item.isPlate || this.item.text !== undefined) {
         result += this.item.text || 'n/a';

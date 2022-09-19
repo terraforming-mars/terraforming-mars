@@ -11,12 +11,10 @@ import {SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {TileType} from '../../common/TileType';
+import {NoAttributes} from './NoAttributes';
+import {Countable} from './Countable';
 
 /** A set of steps that an action can perform in any specific order. */
-
-interface NoAttributes {
-  _unused?: undefined,
-}
 
 export interface Behavior {
   /** Gain or lose production */
@@ -103,7 +101,7 @@ export interface PlaceMoonTile {
 }
 
 export interface DrawCard {
-  count: number,
+  count: Countable,
   /** The number of cards to keep, should be between [1..count-1] */
   keep?: number,
   /** When true, player has to pay to keep the card. (e.g. 3MC) */
@@ -118,7 +116,7 @@ export interface DrawCard {
 }
 
 export interface AddResource {
-  count: number,
+  count: Countable,
   type?: CardResource,
   tag?: Tag;
 }

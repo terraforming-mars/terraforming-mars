@@ -16,9 +16,10 @@ import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
 import {Player} from '../Player';
 import {Behavior} from './Behavior';
+import {Counter} from './Counter';
 
 export class Behaviors {
-  public static canExecute(behavior: Behavior, player: Player, _card?: ICard) {
+  public static canExecute(behavior: Behavior, player: Player, _card: ICard) {
     if (behavior.production && !player.production.canAdjust(Units.of(behavior.production))) {
       return false;
     }
@@ -57,7 +58,8 @@ export class Behaviors {
     return true;
   }
 
-  public static execute(behavior: Behavior, player: Player, card?: ICard) {
+  public static execute(behavior: Behavior, player: Player, card: ICard) {
+    const ctx = new Counter(player, card);
     if (behavior.production !== undefined) {
       player.production.adjust(Units.of(behavior.production));
     }
@@ -81,9 +83,9 @@ export class Behaviors {
       } else {
         // This conditional could probably be removed, using the else clause for both.
         if (drawCard.keep === undefined && drawCard.pay === undefined) {
-          player.drawCard(drawCard.count, {tag: drawCard.tag, resource: drawCard.resource, cardType: drawCard.type});
+          player.drawCard(ctx.count(drawCard.count), {tag: drawCard.tag, resource: drawCard.resource, cardType: drawCard.type});
         } else {
-          const input = player.drawCardKeepSome(drawCard.count, {
+          const input = player.drawCardKeepSome(ctx.count(drawCard.count), {
             tag: drawCard.tag,
             resource: drawCard.resource,
             cardType: drawCard.type,
@@ -108,9 +110,6 @@ export class Behaviors {
       player.increaseTerraformRatingSteps(behavior.tr);
     }
     if (behavior.addResources !== undefined) {
-      if (card === undefined) {
-        throw new Error('card is required for addResources behavior.');
-      }
       player.game.defer(new SimpleDeferredAction(player, () => {
         player.addResourceTo(card, behavior.addResources);
         return undefined;
@@ -120,7 +119,7 @@ export class Behaviors {
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
       for (const entry of array) {
-        player.game.defer(new AddResourcesToCard(player, entry.type, {count: entry.count}));
+        player.game.defer(new AddResourcesToCard(player, entry.type, {count: ctx.count(entry.count)}));
       }
     }
     if (behavior.decreaseAnyProduction !== undefined) {
@@ -203,7 +202,7 @@ export class Behaviors {
     }
   }
 
-  public static onDiscard(behavior: Behavior, player: Player, _card?: ICard) {
+  public static onDiscard(behavior: Behavior, player: Player, _card: ICard) {
     if (behavior.steelValue === 1) {
       player.decreaseSteelValue();
     }

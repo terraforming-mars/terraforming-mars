@@ -1,6 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {Units} from '../../../common/Units';
 import {IAward} from '../IAward';
 
 export class Engineer implements IAward {
@@ -10,10 +9,13 @@ export class Engineer implements IAward {
   public getScore(player: Player): number {
     // TODO(kberg): should Engineer include events?
     const score = player.tableau.filter((card) => {
+      if (Engineer.productionCards.includes(card.name)) return true;
+
       if (card.produce !== undefined) return true;
       const production = card.behavior?.production;
-      if (Units.isUnits(production) && Units.isEmpty(production)) return true;
-      if (Engineer.productionCards.includes(card.name)) return true;
+      if (production !== undefined) {
+        return Object.keys(production).length > 0;
+      }
       return false;
     }).length;
 

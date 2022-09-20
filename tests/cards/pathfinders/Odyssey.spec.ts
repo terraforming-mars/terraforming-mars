@@ -92,7 +92,7 @@ describe('Odyssey', () => {
     runAllActions(game);
 
     expect(player.production.heat).eq(2);
-    expect(game.dealer.discarded.pop()).eq(importOfAdvancedGHG);
+    expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([inventionContest]);
     expect(player.megaCredits).eq(0);
   });
@@ -113,7 +113,7 @@ describe('Odyssey', () => {
 
     expect(player.production.heat).eq(2);
     expect(player.megaCredits).eq(44); // 50 - 9 + 3 = 44
-    expect(game.dealer.discarded.pop()).eq(importOfAdvancedGHG);
+    expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([mediaGroup]);
   });
 });

@@ -868,9 +868,9 @@ export class Player {
     });
   }
 
-  public dealCards(quantity: number, cards: Array<IProjectCard>): void {
+  public dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
     for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.dealer.dealCard(this.game, true));
+      cards.push(this.game.projectDeck.draw(this.game, 'bottom'));
     }
   }
 
@@ -892,9 +892,9 @@ export class Player {
           cardsToKeep = 2;
         }
 
-        this.dealCards(cardsToDraw, cards);
+        this.dealForDraft(cardsToDraw, cards);
       } else {
-        this.dealCards(5, cards);
+        this.dealForDraft(5, cards);
       }
     } else {
       cards = passedCards;
@@ -967,7 +967,7 @@ export class Player {
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
-      this.dealCards(LunaProjectOffice.isActive(this) ? 5 : 4, dealtCards);
+      this.dealForDraft(LunaProjectOffice.isActive(this) ? 5 : 4, dealtCards);
     } else {
       dealtCards = this.draftedCards;
       this.draftedCards = [];
@@ -1305,7 +1305,7 @@ export class Player {
       return;
     }
     this.playedCards.splice(cardIndex, 1);
-    this.game.dealer.discard(card);
+    this.game.projectDeck.discard(card);
     card.onDiscard?.(this);
     this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
   }

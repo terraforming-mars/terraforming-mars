@@ -39,7 +39,7 @@ describe('ValleyTrust', function() {
     expect(selectCard.cards.filter((c) => c.cardType === CardType.PRELUDE)).has.length(3);
   });
 
-  it('Card works even without prelude', () => {
+  it('Card works even without prelude expansion enabled', () => {
     const game = newTestGame(1, {preludeExtension: false});
     const player = getTestPlayer(game, 0);
     const selectCard = cast(card.initialAction(player), SelectCard);

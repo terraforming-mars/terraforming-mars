@@ -61,7 +61,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     const game = player.game;
     // TODO(kberg): Make sure this action occurs after the card play, in case the played card has data.
     game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
-    const cards = [game.dealer.dealCard(player.game), game.dealer.dealCard(player.game)];
+    const cards = [game.projectDeck.draw(player.game), game.projectDeck.draw(player.game)];
 
     player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0]).card(cards[1]));
     if (this.processCard(player, cards[0])) {

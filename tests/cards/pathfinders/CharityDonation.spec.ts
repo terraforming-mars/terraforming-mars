@@ -30,7 +30,7 @@ describe('CharityDonation', function() {
     const beamFromAThoriumAsteroid = new BeamFromAThoriumAsteroid();
     const ceosFavoriteProject = new CEOsFavoriteProject();
     const decomposers = new Decomposers();
-    game.dealer.deck.push(decomposers, ceosFavoriteProject, beamFromAThoriumAsteroid, acquiredCompany);
+    game.projectDeck.drawPile.push(decomposers, ceosFavoriteProject, beamFromAThoriumAsteroid, acquiredCompany);
 
     player1.popWaitingFor();
     player2.popWaitingFor();
@@ -77,6 +77,6 @@ describe('CharityDonation', function() {
     expect(player1.cardsInHand).deep.eq([acquiredCompany]);
     expect(player2.cardsInHand).deep.eq([beamFromAThoriumAsteroid]);
     expect(player3.cardsInHand).deep.eq([decomposers]);
-    expect(game.dealer.discarded).deep.eq([ceosFavoriteProject]);
+    expect(game.projectDeck.discardPile).deep.eq([ceosFavoriteProject]);
   });
 });

@@ -44,7 +44,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
               break;
             }
           }
-          player.game.dealer.discard(card);
+          player.game.projectDeck.discard(card);
         });
         this.projectPlayed(player);
         player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(cards.length));

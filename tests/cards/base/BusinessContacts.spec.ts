@@ -20,6 +20,6 @@ describe('BusinessContacts', function() {
     action.cb([card1, card2]);
 
     expect(player.cardsInHand).deep.eq([card1, card2]);
-    expect(game.dealer.discarded).deep.eq([card3, card4]);
+    expect(game.projectDeck.discardPile).deep.eq([card3, card4]);
   });
 });

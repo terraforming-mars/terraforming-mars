@@ -26,7 +26,7 @@ describe('NewPartner', function() {
   });
 
   it('Should play with at least 1 playable prelude', function() {
-    game.dealer.preludeDeck.push(new SmeltingPlant(), new Donation());
+    game.preludeDeck.drawPile.push(new SmeltingPlant(), new Donation());
 
     const selectCard = cast(card.play(player), SelectCard);
     expect(selectCard.cards).has.length(2);
@@ -38,7 +38,7 @@ describe('NewPartner', function() {
   it('Should play with only 1 playable prelude', function() {
     // In this test, only one card is playable. play() should still return SelectCard with
     // the one card, so the player sees their option.
-    game.dealer.preludeDeck.push(new HugeAsteroid(), new Donation());
+    game.preludeDeck.drawPile.push(new HugeAsteroid(), new Donation());
 
     const selectCard = cast(card.play(player), SelectCard);
     expect(selectCard.cards).has.length(1);
@@ -49,7 +49,7 @@ describe('NewPartner', function() {
     player.megaCredits = 0;
     // Both of these cards cost MC which the player does not have, and so
     // if the player plays this they just get the MC production.
-    game.dealer.preludeDeck.push(new HugeAsteroid(), new GalileanMining());
+    game.preludeDeck.drawPile.push(new HugeAsteroid(), new GalileanMining());
 
     const action = card.play(player);
     expect(action).is.undefined;

@@ -40,7 +40,7 @@ describe('BusinessNetwork', function() {
     expect(action.config.max).to.eq(0);
 
     action.cb([]);
-    expect(game.dealer.discarded).has.lengthOf(1);
+    expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.cardsInHand).has.lengthOf(0);
     expect(player.megaCredits).to.eq(2);
   });
@@ -50,7 +50,7 @@ describe('BusinessNetwork', function() {
     const action = cast(card.action(player), SelectCard);
 
     action.cb([]);
-    expect(game.dealer.discarded).has.lengthOf(1);
+    expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);
 
     player.megaCredits = 3;

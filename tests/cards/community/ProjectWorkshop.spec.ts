@@ -72,7 +72,7 @@ describe('ProjectWorkshop', function() {
 
     card.action(player).cb();
     expect(player.playedCards).has.lengthOf(0);
-    expect(game.dealer.discarded.includes(advancedAlloys)).is.true;
+    expect(game.projectDeck.discardPile.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.getSteelValue()).to.eq(2);
     expect(player.getTitaniumValue()).to.eq(3);
@@ -171,7 +171,7 @@ describe('ProjectWorkshop', function() {
     runAllActions(game);
 
     expect(player.playedCards).has.members([smallAnimals, extremophiles]);
-    expect(game.dealer.discarded).contains(birds);
+    expect(game.projectDeck.discardPile).contains(birds);
     expect(player.getTerraformRating()).to.eq(originalTR + 1);
     expect(player.megaCredits).eq(2); // Spent 3MC for the reds tax.
   });

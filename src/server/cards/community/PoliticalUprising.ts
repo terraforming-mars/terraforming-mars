@@ -43,13 +43,13 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     const turmoilCardNames = CardManifest.keys(TURMOIL_CARD_MANIFEST.projectCards);
 
     // Then find the first card in the deck that matches one of those names.
-    const drawnCard = player.game.dealer.deck.find((card) => turmoilCardNames.includes(card.name));
+    const drawnCard = player.game.projectDeck.drawPile.find((card) => turmoilCardNames.includes(card.name));
 
     if (drawnCard === undefined) {
       player.game.log('${0} played ${1} to find a Turmoil card but none were in the draw deck.', (b) => b.player(player).card(this));
     } else {
-      const cardIndex = player.game.dealer.deck.findIndex((c) => c.name === drawnCard.name);
-      player.game.dealer.deck.splice(cardIndex, 1);
+      const cardIndex = player.game.projectDeck.drawPile.findIndex((c) => c.name === drawnCard.name);
+      player.game.projectDeck.drawPile.splice(cardIndex, 1);
 
       player.cardsInHand.push(drawnCard);
       player.game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));

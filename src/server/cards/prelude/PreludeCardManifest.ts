@@ -28,7 +28,7 @@ import {MetalsCompany} from './MetalsCompany';
 import {MiningOperations} from './MiningOperations';
 import {Mohole} from './Mohole';
 import {MoholeExcavation} from './MoholeExcavation';
-import {NitrogenDelivery} from './NitrogenDelivery';
+import {NitrogenShipment} from './NitrogenShipment';
 import {OrbitalConstructionYard} from './OrbitalConstructionYard';
 import {PointLuna} from './PointLuna';
 import {PolarIndustries} from './PolarIndustries';
@@ -82,7 +82,7 @@ export const PRELUDE_CARD_MANIFEST = new ModuleManifest({
     [CardName.DOME_FARMING]: {Factory: DomeFarming},
     [CardName.BUSINESS_EMPIRE]: {Factory: BusinessEmpire},
     [CardName.DONATION]: {Factory: Donation},
-    [CardName.NITROGEN_SHIPMENT]: {Factory: NitrogenDelivery},
+    [CardName.NITROGEN_SHIPMENT]: {Factory: NitrogenShipment},
     [CardName.SMELTING_PLANT]: {Factory: SmeltingPlant},
     [CardName.SUPPLIER]: {Factory: Supplier},
     [CardName.SUPPLY_DROP]: {Factory: SupplyDrop},

@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class NitrogenDelivery extends PreludeCard implements IProjectCard {
+export class NitrogenShipment extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.NITROGEN_SHIPMENT,

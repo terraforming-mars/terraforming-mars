@@ -19,8 +19,10 @@ import {Behavior} from './Behavior';
 import {Counter} from './Counter';
 
 export class Behaviors {
-  public static canExecute(behavior: Behavior, player: Player, _card: ICard) {
-    if (behavior.production && !player.production.canAdjust(Units.of(behavior.production))) {
+  public static canExecute(behavior: Behavior, player: Player, card: ICard) {
+    const ctx = new Counter(player, card);
+
+    if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
       return false;
     }
     if (behavior.stock !== undefined) {
@@ -61,10 +63,12 @@ export class Behaviors {
   public static execute(behavior: Behavior, player: Player, card: ICard) {
     const ctx = new Counter(player, card);
     if (behavior.production !== undefined) {
-      player.production.adjust(Units.of(behavior.production));
+      const units = ctx.countUnits(behavior.production);
+      player.production.adjust(units, {log: true});
     }
     if (behavior.stock) {
-      player.addUnits(behavior.stock);
+      const units = ctx.countUnits(behavior.stock);
+      player.addUnits(units, {log: true});
     }
     if (behavior.steelValue === 1) {
       player.increaseSteelValue();

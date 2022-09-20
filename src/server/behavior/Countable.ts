@@ -1,3 +1,4 @@
+import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
 
 /**
@@ -47,3 +48,18 @@ export type _Countable = {
 };
 
 export type Countable = number | _Countable;
+
+/**
+ * A companion to Units with countable values.
+ */
+export type CountableUnits = {[k in keyof Units]: Countable}
+
+export namespace CountableUnits {
+  export function hasNegativeRawValues(units: Partial<CountableUnits>): boolean {
+    for (const key of Object.keys(units)) {
+      const value = units[key as keyof CountableUnits];
+      if (typeof(value) === 'number' && value < 0) return true;
+    }
+    return false;
+  }
+}

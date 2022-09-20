@@ -1,7 +1,7 @@
-// import {Units} from '../../common/Units';
+import {Units} from '../../common/Units';
 import {ICard} from '../cards/ICard';
 import {Player} from '../Player';
-import {Countable} from './Countable';
+import {Countable, CountableUnits} from './Countable';
 import {intersection} from '../../common/utils/utils';
 
 /**
@@ -77,5 +77,15 @@ export class Counter {
       sum = Math.floor(sum / countable.per);
     }
     return sum;
+  }
+
+  public countUnits(countableUnits: Partial<CountableUnits>): Units {
+    const units: Units = {...Units.EMPTY};
+    for (const key of Object.keys(units)) {
+      const safeKey = key as keyof CountableUnits;
+      const countable = countableUnits[safeKey] ?? 0;
+      units[safeKey] = this.count(countable);
+    }
+    return units;
   }
 }

@@ -6,21 +6,20 @@ import {Tag} from '../../common/cards/Tag';
 // import {SpaceId} from '../../common/Types';
 // import {CardResource} from '../../common/CardResource';
 // import {TileType} from '../../common/TileType';
-import {Units} from '../../common/Units';
 import {SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {TileType} from '../../common/TileType';
 import {NoAttributes} from './NoAttributes';
-import {Countable} from './Countable';
+import {Countable, CountableUnits} from './Countable';
 
 /** A set of steps that an action can perform in any specific order. */
 
 export interface Behavior {
   /** Gain or lose production */
-  production?: Partial<Units>;
+  production?: Partial<CountableUnits>;
   /** Gain or lose stock */
-  stock?: Partial<Units>;
+  stock?: Partial<CountableUnits>;
 
   /** Add resources to this card itself */
   addResources?: Countable;

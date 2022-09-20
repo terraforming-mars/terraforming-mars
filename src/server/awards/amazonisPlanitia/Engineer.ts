@@ -11,13 +11,15 @@ export class Engineer implements IAward {
     // TODO(kberg): should Engineer include events?
     const score = player.tableau.filter((card) => {
       if (card.produce !== undefined) return true;
-      if (card.behavior?.production !== undefined && Units.isEmpty(card.behavior.production)) return true;
+      const production = card.behavior?.production;
+      if (Units.isUnits(production) && Units.isEmpty(production)) return true;
       if (Engineer.productionCards.includes(card.name)) return true;
       return false;
     }).length;
 
     return score;
   }
+
 
   // TODO(kberg)
   private static productionCards = [

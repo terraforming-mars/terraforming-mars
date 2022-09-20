@@ -110,14 +110,15 @@ export class GameCards {
   }
 
   private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {
-    const list = (customList || []);
-    for (const cardName of list) {
+    for (const cardName of customList) {
       const idx = cards.findIndex((c) => c.name === cardName);
       if (idx === -1) {
         const card = this.cardFinder.getCardByName(cardName);
-        if (card !== undefined) {
-          cards.push(<T> card);
+        if (card === undefined) {
+          // TODO(kberg): throw an error.
+          console.warn(`Unknown card: ${cardName}`);
         }
+        cards.push(<T> card);
       }
     }
     return cards;

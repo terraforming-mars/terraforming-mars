@@ -69,7 +69,7 @@ describe('PreludeDeck', function() {
     expect(serialized.drawPile).has.length(33);
     expect(serialized.discardPile).has.length(2);
 
-    const deserialized = PreludeDeck.deserialize(serialized);
+    const deserialized = PreludeDeck.deserialize(serialized, UnseededRandom.INSTANCE);
     expect(deserialized.drawPile).has.length(33);
     expect(deserialized.discardPile).has.length(2);
 

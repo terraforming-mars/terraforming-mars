@@ -109,7 +109,7 @@ export class GameCards {
     return this.addCustomCards(preludes, this.gameOptions.customPreludes);
   }
 
-  private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> | undefined): Array<T> {
+  private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {
     const list = (customList || []);
     for (const cardName of list) {
       const idx = cards.findIndex((c) => c.name === cardName);

@@ -3,7 +3,7 @@
 
 import {Random} from '../Random';
 
-export function inplaceShuffle(array: Array<any>, rng: Random) {
+export function inplaceShuffle(array: Array<unknown>, rng: Random) {
   let last = array.length;
 
   // While there remain elements to shuffle…

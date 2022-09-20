@@ -285,8 +285,10 @@ export class Game implements Logger {
         gameOptions.coloniesExtension ||
         gameOptions.turmoilExtension ||
         gameOptions.initialDraftVariant) {
-        for (let i = 0; i < gameOptions.startingCorporations; i++) {
-          player.dealtCorporationCards.push(corporationDeck.draw(game));
+        if (gameOptions.corporationsDraft === false) {
+          for (let i = 0; i < gameOptions.startingCorporations; i++) {
+            player.dealtCorporationCards.push(corporationDeck.draw(game));
+          }
         }
         if (gameOptions.initialDraftVariant === false) {
           for (let i = 0; i < 10; i++) {

@@ -13,7 +13,8 @@ export function inplaceShuffle(array: Array<any>, rng: Random) {
     last--;
 
     // And swap it with the current element.
-    const temp = array[last];
+   
+    [array[last], array[idx]] = [array[idx], array[last]];
     array[last] = array[idx];
     array[idx] = temp;
   }

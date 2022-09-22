@@ -34,6 +34,7 @@ module.exports = { // eslint-disable-line no-undef
     'no-case-declarations': 'off',
     'no-redeclare': 'off', // If we stopped using namespaces, this could be enabled.
     'no-prototype-builtins': 'off', // This could be enabled actually; just fix uses of 'hasOwnProperty'
+    'valid-jsdoc': 'off', // precise valid jsdoc is in the way of taking advantage of partial jsdoc. A case of the perfecct being the enemy of the good.
 
     '@typescript-eslint/prefer-for-of': 'error',
 

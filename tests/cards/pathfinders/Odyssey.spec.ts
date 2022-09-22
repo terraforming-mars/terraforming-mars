@@ -12,6 +12,8 @@ import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectC
 import {MediaGroup} from '../../../src/server/cards/base/MediaGroup';
 import {IceCapMelting} from '../../../src/server/cards/base/IceCapMelting';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
+import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
 
 describe('Odyssey', () => {
   let card: Odyssey;
@@ -115,5 +117,22 @@ describe('Odyssey', () => {
     expect(player.megaCredits).eq(44); // 50 - 9 + 3 = 44
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
     expect(player.playedCards).has.members([mediaGroup]);
+  });
+
+  it('Acts correctly for event cards that give one time discount', () => {
+    const indenturedWorkers = new IndenturedWorkers();
+    player.playedCards.push(indenturedWorkers);
+
+    const selectCard = cast(card.action(player), SelectProjectCardToPlay);
+    expect(selectCard.cards).includes(indenturedWorkers);
+    selectCard.cb(indenturedWorkers, Payment.of({})); // Indentured workers costs 0.
+    runAllActions(game);
+    const deimosDown = new DeimosDown();
+
+    expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - 8);
+
+    player.playCard(deimosDown);
+
+    expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
   });
 });

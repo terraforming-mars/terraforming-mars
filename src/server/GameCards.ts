@@ -18,6 +18,7 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {PreludeCard} from './cards/prelude/PreludeCard';
+import {CardFinder} from './CardFinder';
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
@@ -35,6 +36,7 @@ import {PreludeCard} from './cards/prelude/PreludeCard';
 export class GameCards {
   private readonly gameOptions: GameOptions;
   private readonly moduleManifests: Array<ModuleManifest>;
+  private readonly cardFinder: CardFinder = new CardFinder();
 
   public constructor(gameOptions: GameOptions) {
     this.gameOptions = gameOptions;
@@ -92,18 +94,34 @@ export class GameCards {
     return this.getCards<StandardProjectCard>('standardProjects');
   }
   public getCorporationCards(): Array<ICorporationCard> {
-    return this.getCards<ICorporationCard>('corporationCards')
+    const cards = this.getCards<ICorporationCard>('corporationCards')
       .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
+    return this.addCustomCards(cards, this.gameOptions.customCorporationsList);
   }
   public getPreludeCards() {
-    const preludes = this.getCards<PreludeCard>('preludeCards');
+    let preludes = this.getCards<PreludeCard>('preludeCards');
     // https://github.com/terraforming-mars/terraforming-mars/issues/2833
     // Make Valley Trust playable even when Preludes is out of the game
     // by preparing a deck of preludes.
-    if (preludes.length > 0) {
-      return preludes;
+    if (preludes.length === 0) {
+      preludes = this.instantiate(PRELUDE_CARD_MANIFEST.preludeCards);
     }
-    return this.instantiate(PRELUDE_CARD_MANIFEST.preludeCards);
+    return this.addCustomCards(preludes, this.gameOptions.customPreludes);
+  }
+
+  private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {
+    for (const cardName of customList) {
+      const idx = cards.findIndex((c) => c.name === cardName);
+      if (idx === -1) {
+        const card = this.cardFinder.getCardByName(cardName);
+        if (card === undefined) {
+          // TODO(kberg): throw an error.
+          console.warn(`Unknown card: ${cardName}`);
+        }
+        cards.push(<T> card);
+      }
+    }
+    return cards;
   }
 
   private getCards<T extends ICard>(cardManifestName: keyof ModuleManifest) : Array<T> {

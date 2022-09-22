@@ -48,8 +48,8 @@ export class AddResourcesToCard extends DeferredAction {
       title,
       count === 1 ? 'Add resource' : 'Add resources',
       cards,
-      (selected: Array<ICard>) => {
-        this.addResource(selected[0], count);
+      ([card]) => {
+        this.addResource(card, count);
         return undefined;
       },
     );

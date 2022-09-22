@@ -8,9 +8,10 @@ import {Turmoil} from '../Turmoil';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().megacredits(3).slash().text('blue').cards(1).influence({size: Size.SMALL});
+  b.minus().megacredits(3).slash().cards(1, {secondaryTag: AltSecondaryTag.BLUE}).influence({size: Size.SMALL});
 });
 
 export class SolarnetShutdown extends GlobalEvent implements IGlobalEvent {

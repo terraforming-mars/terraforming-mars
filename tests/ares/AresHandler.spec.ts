@@ -82,7 +82,7 @@ describe('AresHandler', function() {
       // front-load the deck with cards of predetermined costs.
       // four player game places two dust storms.
 
-      const deck = game.dealer.deck;
+      const deck = game.projectDeck.drawPile;
       deck.push(new EnergyTapping());
       deck.push(new Decomposers());
 
@@ -97,7 +97,7 @@ describe('AresHandler', function() {
       // front-load the deck with cards of predetermined costs.
       // 5 player game places one dust storm but with two cards.
 
-      const deck = game.dealer.deck;
+      const deck = game.projectDeck.drawPile;
       deck.push(new EnergyTapping());
       deck.push(new Decomposers());
 
@@ -110,7 +110,7 @@ describe('AresHandler', function() {
       // front-load the deck with cards of predetermined costs.
       // 3 player game places 3 dust storms, the first with two cards.
 
-      const deck = game.dealer.deck;
+      const deck = game.projectDeck.drawPile;
       deck.push(new EnergyTapping());
       deck.push(new Decomposers());
       deck.push(new Ants());

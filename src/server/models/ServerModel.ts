@@ -73,7 +73,7 @@ export class Server {
       aresData: game.aresData,
       awards: this.getAwards(game),
       colonies: this.getColonies(game, game.colonies),
-      deckSize: game.dealer.getDeckSize(),
+      deckSize: game.projectDeck.drawPile.length,
       discardedColonies: this.getColonies(game, game.discardedColonies, /* showTrackPosition */ false),
       gameAge: game.gameAge,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),

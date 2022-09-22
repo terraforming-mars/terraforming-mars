@@ -15,7 +15,7 @@ const CARD_RENAMES = new Map<string, CardName>([
 ]);
 
 export class CardFinder {
-  private getCardByName<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {
+  private getCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {
     const standardizedCardName = CARD_RENAMES.get(cardName) || cardName;
 
     for (const moduleManifest of ALL_MODULE_MANIFESTS) {
@@ -31,8 +31,12 @@ export class CardFinder {
     return undefined;
   }
 
+  public getCardByName(cardName: CardName): ICard | undefined {
+    return this.getCard(cardName, ['corporationCards', 'projectCards', 'preludeCards']);
+  }
+
   public getCorporationCardByName(cardName: CardName): ICorporationCard | undefined {
-    return this.getCardByName(cardName, ['corporationCards']);
+    return this.getCard(cardName, ['corporationCards']);
   }
 
   // Function to return a card object by its name
@@ -40,11 +44,11 @@ export class CardFinder {
   // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
   //              another function, perhaps?
   public getProjectCardByName(cardName: CardName): IProjectCard | undefined {
-    return this.getCardByName(cardName, ['projectCards', 'preludeCards']);
+    return this.getCard(cardName, ['projectCards', 'preludeCards']);
   }
 
   public getPreludeByName(cardName: CardName): PreludeCard | undefined {
-    return this.getCardByName(cardName, ['preludeCards']);
+    return this.getCard(cardName, ['preludeCards']);
   }
 
   public cardsFromJSON(cards: Array<CardName>): Array<IProjectCard> {

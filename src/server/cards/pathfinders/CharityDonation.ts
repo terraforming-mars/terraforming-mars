@@ -32,7 +32,7 @@ export class CharityDonation extends Card implements IProjectCard {
     const game = player.game;
     const players = game.getPlayersInGenerationOrder();
     const thisIdx = players.findIndex((p) => p === player);
-    const cards = game.dealer.drawProjectCardsByCondition(game, players.length + 1, () => true);
+    const cards = game.projectDeck.drawByCondition(game, players.length + 1, () => true);
     // TODO(kberg): log the drawn cards after raising the planetary track.
     LogHelper.logDrawnCards(player, cards);
     game.defer(new SelectCharityDonationCard(players, thisIdx, thisIdx, cards));
@@ -65,7 +65,7 @@ export class SelectCharityDonationCard extends DeferredAction {
         if (nextIndex !== this.boundaryIndex) {
           game.defer(new SelectCharityDonationCard(this.players, nextIndex, this.boundaryIndex, this.cards));
         } else {
-          game.dealer.discard(this.cards[0]);
+          game.projectDeck.discard(this.cards[0]);
           game.log('${0} was discarded.', (b) => b.card(this.cards[0]));
         }
         return undefined;

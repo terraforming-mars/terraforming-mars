@@ -6,10 +6,10 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {Size} from '../../../common/cards/render/Size';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {Dealer} from '../../Dealer';
 import {LogHelper} from '../../LogHelper';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CARD_COST} from '../../../common/constants';
+import {CorporationDeck} from '../Deck';
 
 export class Merger extends PreludeCard {
   constructor() {
@@ -31,16 +31,22 @@ export class Merger extends PreludeCard {
 
   public override bespokePlay(player: Player) {
     const game = player.game;
-    const dealtCorps = Merger.dealCorporations(player, game.dealer);
+    const dealtCorps = Merger.dealCorporations(player, game.corporationDeck);
     const enabled = dealtCorps.map((corp) => {
       return player.canAfford(Merger.mergerCost - corp.startingMegaCredits);
     });
     if (enabled.some((v) => v === true) === false) {
       game.log('None of the four drawn corporation cards are affordable.');
+      dealtCorps.forEach((corp) => game.corporationDeck.discard(corp));
     }
     game.defer(new SimpleDeferredAction(player, () => {
       return new SelectCard('Choose corporation card to play', 'Play', dealtCorps, ([card]) => {
         player.playAdditionalCorporationCard(card);
+        dealtCorps.forEach((corp) => {
+          if (corp.name !== card.name) {
+            game.corporationDeck.discard(corp);
+          }
+        });
         return undefined;
       },
       {enabled: enabled});
@@ -49,21 +55,17 @@ export class Merger extends PreludeCard {
     return undefined;
   }
 
-  private static dealCorporations(player: Player, dealer: Dealer) {
-    // is this filter necessary?
-    const corpsInPlay = player.game.getPlayers().map((p) => p.corporations).reduce((acc, curVal) => acc.concat(curVal), []).map((c) => c.name);
-    let candidateCards = dealer.corporationCards.filter((card) => {
-      return !corpsInPlay.includes(card.name);
-    });
-
-    candidateCards = Dealer.shuffle(candidateCards);
+  private static dealCorporations(player: Player, corporationDeck: CorporationDeck) {
     const cards: Array<ICorporationCard> = [];
-    while (cards.length < 4) {
-      const card = candidateCards.pop();
-      if (card === undefined) break;
-      cards.push(card);
+    try {
+      while (cards.length < 4) {
+        cards.push(corporationDeck.draw(player.game));
+      }
+    } catch (err) {
+      // Error will only occur if the deck is empty. That won't happen, but here we'll just do our best.
+      player.game.log('Not enough corporations while resolving ${0}', (b) => b.cardName(CardName.MERGER));
     }
-    LogHelper.logDrawnCards(player, cards, true);
+    LogHelper.logDrawnCards(player, cards, /* privateMessage= */true);
     return cards;
   }
   public static setCardCost(player: Player) {

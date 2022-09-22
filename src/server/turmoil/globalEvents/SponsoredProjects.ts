@@ -5,9 +5,10 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.br.cards(1).text('w/rsrs').colon().wild(1).nbsp;
+  b.br.cards(1, {secondaryTag: AltSecondaryTag.WILD_RESOURCE}).colon().wild(1).nbsp;
   b.cards(1).slash().influence();
 });
 

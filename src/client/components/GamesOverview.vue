@@ -1,7 +1,7 @@
 <template>
   <div id="games-overview">
-    <h1>{{ constants.APP_NAME }} — Games Overview</h1>
-      <p>The following games are available on this server:</p>
+    <h1 v-i18n>{{ constants.APP_NAME }} — Games Overview</h1>
+      <p v-i18n>The following games are available on this server:</p>
       <ul>
         <li v-for="entry in entries" :key="entry.id">
           <game-overview :id="entry.id" :game="entry.game" :status="entry.status"></game-overview>

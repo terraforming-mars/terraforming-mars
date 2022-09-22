@@ -195,17 +195,17 @@
                             </label>
 
                             <label for="escapeThreshold-checkbox" v-show="escapeVelocityMode">
-                              <span v-i18n>After&nbsp;</span>
+                              <span v-i18n>After</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="30" step="5" min="0" :max="180" v-model="escapeVelocityThreshold" id="escapeThreshold-checkbox">
-                              <span v-i18n>&nbsp;min</span>
+                              <span v-i18n>min</span>
                             </label>
 
                             <label for="escapePeriod-checkbox" v-show="escapeVelocityMode">
-                              <span v-i18n>Reduce&nbsp;</span>
+                              <span v-i18n>Reduce</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="1" min="1" :max="10" v-model="escapeVelocityPenalty" id="escapePeriod-checkbox">
-                              <span v-i18n>&nbsp;VP every&nbsp;</span>
+                              <span v-i18n>VP every</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="2" min="1" :max="10" v-model="escapeVelocityPeriod" id="escapePeriod-checkbox">
-                              <span v-i18n>&nbsp;min</span>
+                              <span v-i18n>min</span>
                             </label>
 
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">

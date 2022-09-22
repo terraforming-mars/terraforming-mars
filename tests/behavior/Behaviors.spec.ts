@@ -17,6 +17,9 @@ import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../src/server/cards/base/Ants';
 import {RegolithEaters} from '../../src/server/cards/base/RegolithEaters';
 import {Livestock} from '../../src/server/cards/base/Livestock';
+import {NitriteReducingBacteria} from '../../src/server/cards/base/NitriteReducingBacteria';
+import {AerialMappers} from '../../src/server/cards/venusNext/AerialMappers';
+import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
 
 function asUnits(player: Player): Units {
   return {
@@ -235,7 +238,6 @@ describe('Behaviors', () => {
   });
 
   // TODO(kberg): Add test where type includes multiple resource types
-  // TODO(kberg): Add test taht filters on card tags.
   it('add resources to any card', () => {
     const tardigrades = new Tardigrades(); // Holds microbes
     const ants = new Ants(); // Holds microbes
@@ -299,6 +301,21 @@ describe('Behaviors', () => {
       regolithEathers: 0,
       livestock: 2,
     });
+  });
+
+  it('add resources to any card by tag', () => {
+    const aerialMappers = new AerialMappers(); // Venus tag with Floaters
+    const dirigibles = new Dirigibles(); // Venus tag with Floaters
+    const nitriteReducingBacteria = new NitriteReducingBacteria(); // Microbe tag with microbes
+    player.playedCards.push(aerialMappers, dirigibles, nitriteReducingBacteria);
+
+    Behaviors.execute({addResourcesToAnyCard: {count: 1, tag: Tag.VENUS}}, player);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).does.not.include(nitriteReducingBacteria);
+    expect(selectCard.cards).includes(aerialMappers);
+    expect(selectCard.cards).includes(dirigibles);
   });
 
   it('decrease any production - cannot execute with zero targets', () => {

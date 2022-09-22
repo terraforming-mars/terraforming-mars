@@ -120,7 +120,7 @@ export class Behaviors {
     if (behavior.addResourcesToAnyCard) {
       const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
       for (const entry of array) {
-        player.game.defer(new AddResourcesToCard(player, entry.type, {count: entry.count}));
+        player.game.defer(new AddResourcesToCard(player, entry.type, {count: entry.count, restrictedTag: entry.tag}));
       }
     }
     if (behavior.decreaseAnyProduction !== undefined) {

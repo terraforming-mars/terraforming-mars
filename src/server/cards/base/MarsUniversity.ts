@@ -56,7 +56,7 @@ export class MarsUniversity extends Card implements IProjectCard {
           );
         },
       ),
-      Priority.DISCARD_BEFORE_DRAW);
+      Priority.DISCARD_AND_DRAW);
     }
     return undefined;
   }

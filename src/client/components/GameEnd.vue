@@ -9,8 +9,8 @@
                       <div class="game_end_solo_img">
                           <img src="/assets/solo_win.png" />
                       </div>
-                      <div class="game_end_notice" v-i18n>
-                          But it isn't the reason to stop making Mars better.
+                      <div class="game_end_notice">
+                        <span v-i18n>But it isn't the reason to stop making Mars better.</span>
                       </div>
                       <ul class="game_end_list">
                           <li v-i18n>Try to win with expansions enabled</li>
@@ -22,9 +22,9 @@
               <div v-else>
                   <div class="game_end_fail">
                       <h2 v-i18n>Sorry, you lose.</h2>
-                      <div class="game_end_notice" v-i18n>
-                          Next time you will get more luck!<br>
-                          Also, take into account these small hints to win:
+                      <div class="game_end_notice">
+                        <span v-i18n>Next time you will get more luck!</span><br>
+                        <span v-i18n>Also, take into account these small hints to win:</span>
                       </div>
                       <ul class="game_end_list" v-i18n>
                           <li>Concentrate more on Global parameters, not on Victory Points</li>
@@ -36,9 +36,9 @@
               </div>
           </div>
           <div class="game_end_go_home">
-              <a href="/" v-i18n>
+              <a href="/">
                   <Button size="big" type="back" />
-                  Go to main page
+                  <span  v-i18n>Go to main page</span>
               </a>
           </div>
           <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
@@ -70,7 +70,7 @@
                       <tr v-for="p in getSortedPlayers()" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
                           <td>
                             <a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a>
-                            <div class="column-corporation">{{ getCorporationName(p) }}</div>
+                            <div class="column-corporation"><span v-i18n>{{ getCorporationName(p) }}</span></div>
                           </td>
                           <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                           <td>{{ p.victoryPointsBreakdown.milestones }}</td>

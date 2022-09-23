@@ -6,6 +6,7 @@ import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {Tag} from '../../../src/common/cards/Tag';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
+import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
 
 describe('EarthEmbassy', () => {
   let player: TestPlayer;
@@ -38,6 +39,23 @@ describe('EarthEmbassy', () => {
     // Business Contacts has an earth tag.
     player.playedCards.push(earthEmbassy, new BusinessNetwork());
     expect(player.canPlayIgnoringCost(lunaGovernor)).is.true;
+  });
+
+  it('Works for Martian Zoo', () => {
+    const martianZoo = new MartianZoo();
+    player.playedCards.push(martianZoo);
+
+    const fake = fakeCard({tags: [Tag.EARTH, Tag.MOON, Tag.MOON]});
+    martianZoo.resourceCount = 0;
+    martianZoo.onCardPlayed(player, fake);
+
+    expect(martianZoo.resourceCount).eq(1);
+
+    player.playedCards.push(earthEmbassy);
+    martianZoo.resourceCount = 0;
+    martianZoo.onCardPlayed(player, fake);
+
+    expect(martianZoo.resourceCount).eq(3);
   });
 });
 

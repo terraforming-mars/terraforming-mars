@@ -97,6 +97,11 @@ export class Tags {
         this.player.isCorporation(CardName.HABITAT_MARTE)) {
         return true;
       }
+      if (tag === Tag.MOON &&
+        target === Tag.EARTH &&
+        this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
+        return true;
+      }
     }
     return false;
   }
@@ -106,6 +111,11 @@ export class Tags {
       if (tag === target) count++;
       if (tag === Tag.MARS && target === Tag.SCIENCE &&
         this.player.isCorporation(CardName.HABITAT_MARTE)) {
+        count++;
+      }
+      if (tag === Tag.MOON &&
+        target === Tag.EARTH &&
+        this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
         count++;
       }
     }

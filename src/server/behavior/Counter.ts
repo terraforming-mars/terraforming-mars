@@ -25,8 +25,9 @@ export class Counter {
   private cardIsUnplayed: boolean;
 
   public constructor(private player: Player, private card: ICard) {
-    this.cardIsUnplayed = card !== undefined && !player.cardIsInEffect(card.name);
+    this.cardIsUnplayed = !player.cardIsInEffect(card.name);
   }
+
   public count(countable: Countable): number {
     if (typeof(countable) === 'number') {
       return countable;

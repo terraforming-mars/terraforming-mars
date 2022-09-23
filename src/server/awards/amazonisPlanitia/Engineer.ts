@@ -14,6 +14,8 @@ export class Engineer implements IAward {
       if (card.produce !== undefined) return true;
       const production = card.behavior?.production;
       if (production !== undefined) {
+        // TODO(kberg): this is mildly unsafe because it doesn't take into account when
+        // production[key] = undefined (e.g. {megacredits: undefined}).
         return Object.keys(production).length > 0;
       }
       return false;

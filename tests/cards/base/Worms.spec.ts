@@ -28,7 +28,6 @@ describe('Worms', function() {
     player.playedCards.push(tardigrades);
 
     card.play(player);
-    // runAllActions(game);
     expect(player.production.plants).to.eq(1);
   });
 });

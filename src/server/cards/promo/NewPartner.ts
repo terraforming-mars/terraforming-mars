@@ -26,8 +26,8 @@ export class NewPartner extends PreludeCard {
 
   public override bespokePlay(player: Player) {
     const cardsDrawn: Array<IProjectCard> = [
-      player.game.dealer.dealPreludeCard(),
-      player.game.dealer.dealPreludeCard(),
+      player.game.preludeDeck.draw(player.game),
+      player.game.preludeDeck.draw(player.game),
     ];
     player.game.log(
       'You drew ${0} and ${1}',

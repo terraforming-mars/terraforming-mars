@@ -29,7 +29,7 @@ describe('InventorsGuild', function() {
     const action = cast(card.action(player), SelectCard);
     action.cb([]);
 
-    expect(game.dealer.discarded).has.lengthOf(1);
+    expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);
     player.megaCredits = 3;
 
@@ -45,7 +45,7 @@ describe('InventorsGuild', function() {
     expect(selectCard.config.max).to.eq(0);
     selectCard.cb([]);
     expect(game.deferredActions).has.lengthOf(0);
-    expect(game.dealer.discarded).has.lengthOf(1);
+    expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.cardsInHand).has.lengthOf(0);
     expect(player.megaCredits).to.eq(2);
   });

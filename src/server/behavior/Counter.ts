@@ -1,8 +1,10 @@
 import {Units} from '../../common/Units';
+import {TileType} from '../../common/TileType';
 import {ICard} from '../cards/ICard';
 import {Player} from '../Player';
 import {Countable, CountableUnits} from './Countable';
 import {intersection} from '../../common/utils/utils';
+import {MoonExpansion} from '../moon/MoonExpansion';
 
 /**
  * Counts things in game state.
@@ -25,8 +27,9 @@ export class Counter {
   private cardIsUnplayed: boolean;
 
   public constructor(private player: Player, private card: ICard) {
-    this.cardIsUnplayed = card !== undefined && !player.cardIsInEffect(card.name);
+    this.cardIsUnplayed = !player.cardIsInEffect(card.name);
   }
+
   public count(countable: Countable): number {
     if (typeof(countable) === 'number') {
       return countable;
@@ -67,6 +70,30 @@ export class Counter {
             .filter((p) => p.id !== player.id)
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
         }
+      }
+    }
+
+    if (countable.moon !== undefined) {
+      const moon = countable.moon;
+      MoonExpansion.ifMoon(game, (moonData) => {
+        if (moon.colonyRate) {
+          sum += moonData.colonyRate;
+        }
+        if (moon.miningRate) {
+          sum += moonData.miningRate;
+        }
+        if (moon.logisticRate) {
+          sum += moonData.logisticRate;
+        }
+      });
+      if (moon.colony) {
+        sum += MoonExpansion.spaces(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+      }
+      if (moon.mine) {
+        sum += MoonExpansion.spaces(game, TileType.MOON_MINE, {surfaceOnly: true}).length;
+      }
+      if (moon.road) {
+        sum += MoonExpansion.spaces(game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
       }
     }
 

@@ -33,7 +33,7 @@ describe('AsteroidDeflectionSystem', function() {
     player.playedCards.push(card);
     expect(card.canAct()).is.true;
 
-    while (player.game.dealer.discarded.find((card) => card.tags.includes(Tag.SPACE)) === undefined) {
+    while (player.game.projectDeck.discardPile.find((card) => card.tags.includes(Tag.SPACE)) === undefined) {
       card.action(player);
     }
 

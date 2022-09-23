@@ -46,10 +46,10 @@ export class SelectCard<T extends ICard> implements PlayerInput {
     }
     const cards: Array<T> = [];
     for (const cardName of input[0]) {
-      const cardIndex = PlayerInput.getCard(this.cards, cardName);
-      cards.push(cardIndex.card);
-      if (this.config.enabled?.[cardIndex.idx] === false) {
-        throw new Error('Selected unavailable card');
+      const {card, idx} = PlayerInput.getCard(this.cards, cardName);
+      cards.push(card);
+      if (this.config.enabled?.[idx] === false) {
+        throw new Error(`${cardName} is not available`);
       }
     }
     return this.cb(cards);

@@ -1,7 +1,7 @@
 import {CardFinder} from '../src/server/CardFinder';
 import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
-import {Dealer} from '../src/server/Dealer';
+// import {Dealer} from '../src/server/Dealer';
 import {expect} from 'chai';
 import {Game} from '../src/server/Game';
 import {getTestPlayer, newTestGame} from './TestGame';
@@ -11,6 +11,7 @@ import {Player} from '../src/server/Player';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
+import {Deck} from '../src/server/cards/Deck';
 
 // Tests for drafting
 describe('drafting', () => {
@@ -18,9 +19,9 @@ describe('drafting', () => {
     const game = newTestGame(2, {draftVariant: true});
     const player = getTestPlayer(game, 0);
     const otherPlayer = getTestPlayer(game, 1);
-    const deck = game.dealer.deck;
+    const drawPile = game.projectDeck.drawPile;
 
-    unshiftCards(deck, [
+    unshiftCards(drawPile, [
       CardName.ACQUIRED_COMPANY,
       CardName.BIOFERTILIZER_FACILITY,
       CardName.CAPITAL,
@@ -117,14 +118,13 @@ describe('drafting', () => {
   });
 
   it('2 player - initial draft', () => {
-    const shuffle = Dealer.shuffle;
+    const shuffle = Deck.shuffle;
     let game: Game;
     try {
-      // This keeps the cards in their original order. If necessary, this deck could be front-loaded instead.
-      Dealer.shuffle = <T> (cards: Array<T>) => cards;
+      Deck.shuffle = function() {};
       game = newTestGame(2, {draftVariant: true, initialDraftVariant: true});
     } finally {
-      Dealer.shuffle = shuffle;
+      Deck.shuffle = shuffle;
     }
     const player = getTestPlayer(game, 0);
     const otherPlayer = getTestPlayer(game, 1);
@@ -360,29 +360,45 @@ describe('drafting', () => {
     expect(player.draftedCards).is.empty;
     expect(otherPlayer.draftedCards).is.empty;
 
-    expect(initialCardSelection(player).projectCards).deep.eq([
-      CardName.ADAPTATION_TECHNOLOGY,
-      CardName.ARCTIC_ALGAE,
-      CardName.AEROBRAKED_AMMONIA_ASTEROID,
-      CardName.ARCHAEBACTERIA,
-      CardName.ADVANCED_ECOSYSTEMS,
-      CardName.ASTEROID_MINING,
-      CardName.BLACK_POLAR_DUST,
-      CardName.ASTEROID,
-      CardName.BIRDS,
-      CardName.BIG_ASTEROID]);
+    expect(initialCardSelection(player)).deep.eq({
+      'projectCards': [
+        CardName.ADAPTATION_TECHNOLOGY,
+        CardName.ARCTIC_ALGAE,
+        CardName.AEROBRAKED_AMMONIA_ASTEROID,
+        CardName.ARCHAEBACTERIA,
+        CardName.ADVANCED_ECOSYSTEMS,
+        CardName.ASTEROID_MINING,
+        CardName.BLACK_POLAR_DUST,
+        CardName.ASTEROID,
+        CardName.BIRDS,
+        CardName.BIG_ASTEROID,
+      ],
+      'corporationCards': [
+        CardName.TERACTOR,
+        CardName.SATURN_SYSTEMS,
+      ],
+      'preludeCards': [],
+    });
 
-    expect(initialCardSelection(otherPlayer).projectCards).deep.eq([
-      CardName.ALGAE,
-      CardName.ANTS,
-      CardName.AQUIFER_PUMPING,
-      CardName.ADAPTED_LICHEN,
-      CardName.ARTIFICIAL_LAKE,
-      CardName.BUSHES,
-      CardName.ARTIFICIAL_PHOTOSYNTHESIS,
-      CardName.BREATHING_FILTERS,
-      CardName.BEAM_FROM_A_THORIUM_ASTEROID,
-      CardName.BIOMASS_COMBUSTORS]);
+    expect(initialCardSelection(otherPlayer)).deep.eq({
+      'projectCards': [
+        CardName.ALGAE,
+        CardName.ANTS,
+        CardName.AQUIFER_PUMPING,
+        CardName.ADAPTED_LICHEN,
+        CardName.ARTIFICIAL_LAKE,
+        CardName.BUSHES,
+        CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+        CardName.BREATHING_FILTERS,
+        CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+        CardName.BIOMASS_COMBUSTORS,
+      ],
+      'corporationCards': [
+        CardName.UNITED_NATIONS_MARS_INITIATIVE,
+        CardName.THORGATE,
+      ],
+      'preludeCards': [],
+    });
   });
 });
 

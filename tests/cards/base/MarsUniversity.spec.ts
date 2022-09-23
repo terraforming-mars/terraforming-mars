@@ -40,8 +40,8 @@ describe('MarsUniversity', function() {
     orOptions.options[0].cb([card]);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0]).not.to.eq(card);
-    expect(game.dealer.discarded).has.lengthOf(1);
-    expect(game.dealer.discarded[0]).to.eq(card);
+    expect(game.projectDeck.discardPile).has.lengthOf(1);
+    expect(game.projectDeck.discardPile[0]).to.eq(card);
     expect(game.deferredActions).has.lengthOf(0);
   });
 

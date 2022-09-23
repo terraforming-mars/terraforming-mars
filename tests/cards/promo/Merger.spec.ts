@@ -38,7 +38,7 @@ describe('Merger', function() {
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     // Preset corporation deck for testing
-    game.dealer.corporationCards = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
+    game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
   });
 
   function enabledMap(selectCard: SelectCard<ICorporationCard>): Array<[CardName, boolean]> {

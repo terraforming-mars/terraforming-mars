@@ -10,7 +10,7 @@ describe('CorporateArchives', function() {
     const card = new CorporateArchives();
     const game = newTestGame(2);
     const player = getTestPlayer(game, 0);
-    const discarded = game.dealer.discarded;
+    const discarded = game.projectDeck.discardPile;
     expect(discarded).is.empty;
     expect(player.megaCredits).eq(0);
 

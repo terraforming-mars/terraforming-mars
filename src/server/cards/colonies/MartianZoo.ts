@@ -41,8 +41,9 @@ export class MartianZoo extends Card implements IProjectCard {
 
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tag.EARTH)) {
-      player.addResourceTo(this, card.tags.filter((tag) => tag === Tag.EARTH).length);
+    const count = player.tags.cardTagCount(card, Tag.EARTH);
+    if (count > 0) {
+      player.addResourceTo(this, count);
     }
   }
 

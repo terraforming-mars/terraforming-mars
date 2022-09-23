@@ -65,6 +65,7 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
       eventCards,
       {
         action: 'discard',
+        cb: (card) => player.removedFromPlayCards.push(card),
       });
   }
 }

@@ -8,13 +8,13 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardRequirements} from '../../../src/server/cards/CardRequirements';
-import {Dealer} from '../../../src/server/Dealer';
+import {ProjectDeck} from '../../../src/server/cards/Deck';
 
 describe('OumuamuaTypeObjectSurvey', function() {
   let card: OumuamuaTypeObjectSurvey;
   let player: TestPlayer;
   let game: Game;
-  let dealer: Dealer;
+  let projectDeck: ProjectDeck;
 
   const noTags = fakeCard({
     name: 'none' as CardName,
@@ -61,28 +61,28 @@ describe('OumuamuaTypeObjectSurvey', function() {
     card = new OumuamuaTypeObjectSurvey();
     player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player);
-    dealer = game.dealer;
-    dealer.discarded = [];
+    projectDeck = game.projectDeck;
+    projectDeck.discardPile = [];
     player.megaCredits = 100;
   });
 
   it('Neither drawn card valid', () => {
-    dealer.deck = [slug, earthTag, noTags];
+    projectDeck.drawPile = [slug, earthTag, noTags];
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags, earthTag]);
     expect(player.playedCards).is.empty;
     expect(player.production.energy).eq(0);
   });
 
   it('Card has a space tag', () => {
-    dealer.deck = [slug, spaceTag, noTags];
+    projectDeck.drawPile = [slug, spaceTag, noTags];
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags, spaceTag]);
     expect(player.playedCards).is.empty;
     expect(player.production.energy).eq(3);
@@ -90,11 +90,11 @@ describe('OumuamuaTypeObjectSurvey', function() {
 
   it('Two cards with space tags, only the first one is used', () => {
     // spaceTag will be drawn first, so spaceScienceTag won't be evaluated.
-    dealer.deck = [slug, spaceScienceTag, spaceTag];
+    projectDeck.drawPile = [slug, spaceScienceTag, spaceTag];
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([spaceTag, spaceScienceTag]);
     expect(player.playedCards).is.empty;
     expect(player.production.energy).eq(3);
@@ -102,11 +102,11 @@ describe('OumuamuaTypeObjectSurvey', function() {
 
   it('Two cards with space tags, but first one has science tag', () => {
     // spaceScienceTag will be drawn first, so spaceTag won't be evaluated.
-    dealer.deck = [slug, spaceTag, spaceScienceTag];
+    projectDeck.drawPile = [slug, spaceTag, spaceScienceTag];
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([spaceTag]);
     expect(player.playedCards).deep.eq([spaceScienceTag]);
     expect(player.production.energy).eq(0);
@@ -115,11 +115,11 @@ describe('OumuamuaTypeObjectSurvey', function() {
   });
 
   it('Card has a microbe tag', () => {
-    dealer.deck = [slug, microbeTag, noTags];
+    projectDeck.drawPile = [slug, microbeTag, noTags];
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([microbeTag]);
     expect(player.production.energy).eq(0);
@@ -128,11 +128,11 @@ describe('OumuamuaTypeObjectSurvey', function() {
   });
 
   it('Card has a science tag', () => {
-    dealer.deck = [slug, scienceTag, noTags];
+    projectDeck.drawPile = [slug, scienceTag, noTags];
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([scienceTag]);
     expect(player.production.energy).eq(0);
@@ -141,11 +141,11 @@ describe('OumuamuaTypeObjectSurvey', function() {
   });
 
   it('Card has a science tag and microbe tag', () => {
-    dealer.deck = [slug, scienceMicrobeTag, noTags];
+    projectDeck.drawPile = [slug, scienceMicrobeTag, noTags];
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([scienceMicrobeTag]);
     expect(player.production.energy).eq(0);
@@ -154,7 +154,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
   });
 
   it('Card has requirements', () => {
-    dealer.deck = [slug, requirementsCard, noTags];
+    projectDeck.drawPile = [slug, requirementsCard, noTags];
 
     expect(player.canPlay(requirementsCard)).is.true;
     (game as any).temperature = 0;
@@ -162,7 +162,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
 
     card.play(player);
 
-    expect(dealer.deck).deep.eq([slug]);
+    expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
     expect(player.playedCards).deep.eq([requirementsCard]);
     expect(player.production.energy).eq(0);
@@ -174,7 +174,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
     // Put two cards on the front of the deck so they don't have data
-    dealer.deck.push(slug, noTags);
+    projectDeck.drawPile.push(slug, noTags);
 
     card.play(player);
     runAllActions(game);

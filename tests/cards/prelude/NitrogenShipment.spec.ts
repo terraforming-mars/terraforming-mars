@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {NitrogenDelivery} from '../../../src/server/cards/prelude/NitrogenDelivery';
+import {NitrogenShipment} from '../../../src/server/cards/prelude/NitrogenShipment';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
-describe('NitrogenDelivery', function() {
+describe('NitrogenShipment', function() {
   it('Should play', function() {
-    const card = new NitrogenDelivery();
+    const card = new NitrogenShipment();
     const game = newTestGame(2);
     const player = getTestPlayer(game, 0);
 

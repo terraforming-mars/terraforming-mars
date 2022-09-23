@@ -1,6 +1,6 @@
 <template>
   <span class="gotomap_cont">
-    &nbsp;&nbsp;<span @click="onclick">go to map</span>
+    &nbsp;&nbsp;<span @click="onclick" v-i18n>go to map</span>
   </span>
 </template>
 

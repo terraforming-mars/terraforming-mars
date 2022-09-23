@@ -56,13 +56,13 @@ describe('PublicSponsoredGrant', function() {
     const scienceCard = new SearchForLife();
     const buildingCard1 = new BiomassCombustors();
     const buildingCard2 = new ColonizerTrainingCamp();
-    game.dealer.deck.push(buildingCard1, scienceCard, buildingCard2);
-    game.dealer.discarded = [];
+    game.projectDeck.drawPile.push(buildingCard1, scienceCard, buildingCard2);
+    game.projectDeck.discardPile = [];
 
     options.options[0].cb();
 
     expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.BIOMASS_COMBUSTORS, CardName.COLONIZER_TRAINING_CAMP]);
-    expect(game.dealer.discarded.map((c) => c.name)).deep.eq([CardName.SEARCH_FOR_LIFE]);
+    expect(game.projectDeck.discardPile.map((c) => c.name)).deep.eq([CardName.SEARCH_FOR_LIFE]);
   });
 
   it('compatible with Mons Insurance', function() {

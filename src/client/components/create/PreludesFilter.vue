@@ -89,6 +89,16 @@ export default Vue.extend({
     };
   },
   methods: {
+    // Do not delete this method. It's used by CreateGameForm.
+    updatePreludes(cardNames: Array<CardName>) {
+      this.selectedPreludes = [];
+      for (const cardName of this.getItemsByGroup('All')) {
+        if (cardNames.includes(cardName)) {
+          this.selectedPreludes.push(cardName);
+        }
+      }
+    },
+
     getItemsByGroup(group: Group): Array<CardName> {
       if (group === 'All') return GAME_MODULES.map((module) => this.cardsByModule[module]).flat();
       const corps = this.cardsByModule[group];

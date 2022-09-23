@@ -23,7 +23,7 @@ describe('ReturntoAbandonedTechnology', function() {
   });
 
   it('play when discard pile is empty', function() {
-    game.dealer.discarded = [];
+    game.projectDeck.discardPile = [];
 
     const action = cast(card.play(player), SelectCard);
     expect(action.cards).is.empty;
@@ -31,13 +31,13 @@ describe('ReturntoAbandonedTechnology', function() {
 
   it('play when discard pile has 1 card', function() {
     const ants = new Ants();
-    game.dealer.discarded = [];
-    game.dealer.discard(ants);
+    game.projectDeck.discardPile = [];
+    game.projectDeck.discard(ants);
 
     const action = cast(card.play(player), SelectCard);
 
     expect(action.cards).deep.eq([ants]);
-    expect(game.dealer.discarded).is.empty;
+    expect(game.projectDeck.discardPile).is.empty;
   });
 
   it('play when discard pile has 5 cards', function() {
@@ -47,16 +47,16 @@ describe('ReturntoAbandonedTechnology', function() {
     const decomposers = new Decomposers();
     const earthOffice = new EarthOffice();
 
-    game.dealer.discarded = [];
-    game.dealer.discard(ants);
-    game.dealer.discard(birds);
-    game.dealer.discard(capital);
-    game.dealer.discard(decomposers);
-    game.dealer.discard(earthOffice);
+    game.projectDeck.discardPile = [];
+    game.projectDeck.discard(ants);
+    game.projectDeck.discard(birds);
+    game.projectDeck.discard(capital);
+    game.projectDeck.discard(decomposers);
+    game.projectDeck.discard(earthOffice);
 
     const action = cast(card.play(player), SelectCard);
 
     expect(action.cards).to.have.members([birds, capital, decomposers, earthOffice]);
-    expect(game.dealer.discarded).deep.eq([ants]);
+    expect(game.projectDeck.discardPile).deep.eq([ants]);
   });
 });

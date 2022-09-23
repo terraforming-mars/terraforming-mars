@@ -41,8 +41,8 @@ describe('SearchForLife', function() {
   it('Should act', function() {
     player.playedCards.push(card);
 
-    while (game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] === Tag.MICROBE) === undefined ||
-               game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tag.MICROBE) === undefined) {
+    while (game.projectDeck.discardPile.find((c) => c.tags.length === 1 && c.tags[0] === Tag.MICROBE) === undefined ||
+               game.projectDeck.discardPile.find((c) => c.tags.length === 1 && c.tags[0] !== Tag.MICROBE) === undefined) {
       player.megaCredits = 1;
       card.action(player);
       game.deferredActions.runNext();

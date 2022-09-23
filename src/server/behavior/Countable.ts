@@ -1,5 +1,6 @@
 import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
+import {NoAttributes} from './NoAttributes';
 
 /**
  * Describes something that can be counted.
@@ -20,14 +21,14 @@ export type _Countable = {
   //   upgradedOceans?: boolean,
   //   wetlands?: boolean
   // },
-  // moon?: {
-  //   colonyRate?: NoAttributes,
-  //   miningRate?: NoAttributes,
-  //   logisticRate?: NoAttributes,
-  //   colony?: NoAttributes,
-  //   mine?: NoAttributes,
-  //   road?: NoAttributes,
-  // }
+  moon?: {
+    colonyRate?: NoAttributes,
+    miningRate?: NoAttributes,
+    logisticRate?: NoAttributes,
+    colony?: NoAttributes,
+    mine?: NoAttributes,
+    road?: NoAttributes,
+  }
 
   all?: boolean; // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
   others?: true; // For tags this has a behavior.

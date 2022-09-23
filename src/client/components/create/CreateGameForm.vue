@@ -195,17 +195,17 @@
                             </label>
 
                             <label for="escapeThreshold-checkbox" v-show="escapeVelocityMode">
-                              <span v-i18n>After&nbsp;</span>
+                              <span v-i18n>After</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="30" step="5" min="0" :max="180" v-model="escapeVelocityThreshold" id="escapeThreshold-checkbox">
-                              <span v-i18n>&nbsp;min</span>
+                              <span v-i18n>min</span>
                             </label>
 
                             <label for="escapePeriod-checkbox" v-show="escapeVelocityMode">
-                              <span v-i18n>Reduce&nbsp;</span>
+                              <span v-i18n>Reduce</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="1" min="1" :max="10" v-model="escapeVelocityPenalty" id="escapePeriod-checkbox">
-                              <span v-i18n>&nbsp;VP every&nbsp;</span>
+                              <span v-i18n>VP every</span><span>&nbsp;</span>
                               <input type="number" class="create-game-corporations-count" value="2" min="1" :max="10" v-model="escapeVelocityPeriod" id="escapePeriod-checkbox">
-                              <span v-i18n>&nbsp;min</span>
+                              <span v-i18n>min</span>
                             </label>
 
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
@@ -519,6 +519,7 @@ export interface CreateGameModel {
 type Refs = {
   coloniesFilter: InstanceType<typeof ColoniesFilter>,
   corporationsFilter: InstanceType<typeof CorporationsFilter>,
+  preludesFilter: InstanceType<typeof PreludesFilter>,
   cardsFilter: InstanceType<typeof CardsFilter>,
   file: HTMLInputElement,
 }
@@ -651,7 +652,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     handleSettingsUpload() {
-      const refs = this.$refs;
+      const refs: Refs = this.$refs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
       const component = this.$data as CreateGameModel;
@@ -704,13 +705,17 @@ export default (Vue as WithRefs<Refs>).extend({
             }
 
             Vue.nextTick(() => {
-              if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
-              if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
-              if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
-              if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
-              if (!component.seededGame) component.seed = Math.random();
-              // set to alter after any watched properties
-              component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
+              try {
+                if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
+                if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
+                if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
+                if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
+                if (!component.seededGame) component.seed = Math.random();
+                // set to alter after any watched properties
+                component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
+              } catch (e) {
+                window.alert('Error reading JSON ' + e);
+              }
             });
           }
           if (warnings.length > 0) {

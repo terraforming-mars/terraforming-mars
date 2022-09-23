@@ -50,11 +50,9 @@ export class Engineer implements IAward {
     CardName.MONS_INSURANCE,
     // Moon
     CardName.DARKSIDE_MINING_SYNDICATE,
-    CardName.HE3_FUSION_PLANT,
     CardName.OFF_WORLD_CITY_LIVING,
     CardName.ORBITAL_POWER_GRID,
     CardName.ROVER_DRIVERS_UNION,
-    CardName.UNDERMOON_DRUG_LORDS_NETWORK,
     CardName.LUNA_FIRST_INCORPORATED,
   ];
 }

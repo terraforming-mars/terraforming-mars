@@ -1,7 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -18,6 +16,7 @@ export class SulphurExports extends Card implements IProjectCard {
 
       behavior: {
         global: {venus: 1},
+        production: {megacredits: {tag: Tag.VENUS}},
       },
 
       metadata: {
@@ -29,10 +28,5 @@ export class SulphurExports extends Card implements IProjectCard {
         description: 'Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.VENUS) + 1, {log: true});
-    return undefined;
   }
 }

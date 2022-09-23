@@ -48,4 +48,3 @@ describe('TitaniumExtractionCenter', () => {
     expect(player.production.titanium).eq(3);
   });
 });
-

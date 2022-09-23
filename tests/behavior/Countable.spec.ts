@@ -7,6 +7,7 @@ import {Tag} from '../../src/common/cards/Tag';
 import {fakeCard} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
+import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 
 describe('Counter', () => {
   let game: Game;
@@ -94,5 +95,103 @@ describe('Counter', () => {
     });
 
     expect(units).deep.eq(Units.of({megacredits: 3, energy: -1, heat: 4}));
+  });
+});
+
+
+describe('Counter for Moon', () => {
+  let game: Game;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let player3: TestPlayer;
+  let fake: IProjectCard;
+
+  beforeEach(() => {
+    game = newTestGame(3, {moonExpansion: true});
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
+    player3 = getTestPlayer(game, 2);
+    player.popSelectInitialCards();
+    player2.popSelectInitialCards();
+    player3.popSelectInitialCards();
+    fake = fakeCard({});
+  });
+
+  it('colony rate', () => {
+    const counter = new Counter(player, fake);
+    const moonData = MoonExpansion.moonData(game);
+    moonData.colonyRate = 3;
+
+    expect(counter.count({moon: {colonyRate: {}}})).eq(3);
+    expect(counter.count({moon: {colonyRate: {}}, per: 2})).eq(1);
+    expect(counter.count({moon: {colonyRate: {}}, each: 2})).eq(6);
+  });
+
+  it('mining rate', () => {
+    const counter = new Counter(player, fake);
+    const moonData = MoonExpansion.moonData(game);
+    moonData.miningRate = 1;
+
+    expect(counter.count({moon: {miningRate: {}}})).eq(1);
+    expect(counter.count({moon: {miningRate: {}}, per: 2})).eq(0);
+    expect(counter.count({moon: {miningRate: {}}, each: 2})).eq(2);
+  });
+
+  it('logistic rate', () => {
+    const counter = new Counter(player, fake);
+    const moonData = MoonExpansion.moonData(game);
+    moonData.logisticRate = 7;
+
+    expect(counter.count({moon: {logisticRate: {}}})).eq(7);
+    expect(counter.count({moon: {logisticRate: {}}, per: 2})).eq(3);
+    expect(counter.count({moon: {logisticRate: {}}, each: 2})).eq(14);
+  });
+
+  it('colony tiles', () => {
+    const counter = new Counter(player, fake);
+
+    expect(counter.count({moon: {colony: {}}})).eq(0);
+    MoonExpansion.addColonyTile(player, 'm02');
+    expect(counter.count({moon: {colony: {}}})).eq(1);
+    MoonExpansion.addColonyTile(player, 'm03');
+    expect(counter.count({moon: {colony: {}}})).eq(2);
+    MoonExpansion.addColonyTile(player, 'm04');
+    expect(counter.count({moon: {colony: {}}})).eq(3);
+    MoonExpansion.addColonyTile(player, 'm05');
+    expect(counter.count({moon: {colony: {}}})).eq(4);
+    MoonExpansion.addColonyTile(player, 'm06');
+    expect(counter.count({moon: {colony: {}}})).eq(5);
+  });
+
+  it('mine tiles', () => {
+    const counter = new Counter(player, fake);
+
+    expect(counter.count({moon: {mine: {}}})).eq(0);
+    MoonExpansion.addMineTile(player, 'm02');
+    expect(counter.count({moon: {mine: {}}})).eq(1);
+    MoonExpansion.addMineTile(player, 'm03');
+    expect(counter.count({moon: {mine: {}}})).eq(2);
+    MoonExpansion.addMineTile(player, 'm04');
+    expect(counter.count({moon: {mine: {}}})).eq(3);
+    MoonExpansion.addMineTile(player, 'm05');
+    expect(counter.count({moon: {mine: {}}})).eq(4);
+    MoonExpansion.addMineTile(player, 'm06');
+    expect(counter.count({moon: {mine: {}}})).eq(5);
+  });
+
+  it('road tiles', () => {
+    const counter = new Counter(player, fake);
+
+    expect(counter.count({moon: {road: {}}})).eq(0);
+    MoonExpansion.addRoadTile(player, 'm02');
+    expect(counter.count({moon: {road: {}}})).eq(1);
+    MoonExpansion.addRoadTile(player, 'm03');
+    expect(counter.count({moon: {road: {}}})).eq(2);
+    MoonExpansion.addRoadTile(player, 'm04');
+    expect(counter.count({moon: {road: {}}})).eq(3);
+    MoonExpansion.addRoadTile(player, 'm05');
+    expect(counter.count({moon: {road: {}}})).eq(4);
+    MoonExpansion.addRoadTile(player, 'm06');
+    expect(counter.count({moon: {road: {}}})).eq(5);
   });
 });

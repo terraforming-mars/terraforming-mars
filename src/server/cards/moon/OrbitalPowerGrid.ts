@@ -28,7 +28,7 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();
+    const amount = player.game.getCitiesOffMarsCount();
     player.production.add(Resources.ENERGY, amount, {log: true});
     return undefined;
   }

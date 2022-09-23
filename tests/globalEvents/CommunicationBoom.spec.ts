@@ -69,7 +69,6 @@ describe('CommunicationBoom', function() {
 
     runAllActions(game);
 
-    expect(player.getWaitingFor()).instanceOf(AndOptions);
     const playerOptions2 = cast(player2.getWaitingFor(), AndOptions);
     expect(playerOptions2.options).has.length(2);
     expect(playerOptions2.options[0].title).contains(e.name);

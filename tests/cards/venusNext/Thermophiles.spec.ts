@@ -53,13 +53,12 @@ describe('Thermophiles', function() {
     player.playedCards.push(card);
 
     const action = card.action(player);
-    expect(action instanceof SelectCard).is.not.true;
+    expect(action).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card);
 
     const orOptions = cast(card.action(player), OrOptions);
-    expect(orOptions instanceof OrOptions).is.true;
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

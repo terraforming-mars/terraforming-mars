@@ -36,8 +36,7 @@ describe('Enceladus', function() {
     enceladus.addColony(player);
 
     expect(game.deferredActions).has.lengthOf(1);
-    const action = game.deferredActions.pop()!;
-    expect(action).to.be.an.instanceof(AddResourcesToCard);
+    const action = cast(game.deferredActions.pop(), AddResourcesToCard);
     expect(action.player).to.eq(player);
     // Should directly add to Tardigrades, since there's no other target
     action.execute();

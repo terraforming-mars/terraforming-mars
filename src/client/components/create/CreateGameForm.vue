@@ -519,6 +519,7 @@ export interface CreateGameModel {
 type Refs = {
   coloniesFilter: InstanceType<typeof ColoniesFilter>,
   corporationsFilter: InstanceType<typeof CorporationsFilter>,
+  preludesFilter: InstanceType<typeof PreludesFilter>,
   cardsFilter: InstanceType<typeof CardsFilter>,
   file: HTMLInputElement,
 }
@@ -651,7 +652,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     handleSettingsUpload() {
-      const refs = this.$refs;
+      const refs: Refs = this.$refs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
       const component = this.$data as CreateGameModel;
@@ -704,13 +705,17 @@ export default (Vue as WithRefs<Refs>).extend({
             }
 
             Vue.nextTick(() => {
-              if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
-              if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
-              if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
-              if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
-              if (!component.seededGame) component.seed = Math.random();
-              // set to alter after any watched properties
-              component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
+              try {
+                if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
+                if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
+                if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
+                if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
+                if (!component.seededGame) component.seed = Math.random();
+                // set to alter after any watched properties
+                component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
+              } catch (e) {
+                window.alert('Error reading JSON ' + e);
+              }
             });
           }
           if (warnings.length > 0) {

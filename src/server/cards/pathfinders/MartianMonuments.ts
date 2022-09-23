@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
@@ -20,6 +19,10 @@ export class MartianMonuments extends Card implements IProjectCard {
       tags: [Tag.MARS, Tag.BUILDING],
       requirements: CardRequirements.builder((b) => b.cities(1, {text: 'ON MARS'})),
 
+      behavior: {
+        production: {megacredits: {tag: Tag.MARS}},
+      },
+
       metadata: {
         cardNumber: 'Pf09',
         renderData: CardRenderer.builder((b) => {
@@ -30,20 +33,11 @@ export class MartianMonuments extends Card implements IProjectCard {
     });
   }
 
+  // Is this necessary?
   public override bespokeCanPlay(player: Player) {
     return player.game.board.spaces.some((space) => {
       return Board.isCitySpace(space) && space.player?.id === player.id && space.spaceType !== SpaceType.COLONY;
     });
-  }
-
-  public produce(player: Player, increment: number = 0) {
-    const count = player.tags.count(Tag.MARS) + increment;
-    player.production.add(Resources.MEGACREDITS, count, {log: true});
-  }
-
-  public override bespokePlay(player: Player) {
-    this.produce(player, 1); // The 1 is the "including this"
-    return undefined;
   }
 }
 

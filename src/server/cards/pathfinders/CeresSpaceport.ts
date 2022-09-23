@@ -2,12 +2,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {played} from '../Options';
 
 export class CeresSpaceport extends Card implements IProjectCard {
@@ -23,6 +21,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
         drawCard: 1,
         ocean: {},
         city: {space: SpaceName.CERES_SPACEPORT, type: SpaceType.COLONY},
+        production: {megacredits: 2, titanium: {tag: Tag.JOVIAN, per: 2}},
       },
 
       metadata: {
@@ -37,12 +36,5 @@ export class CeresSpaceport extends Card implements IProjectCard {
           'Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, 2);
-    // The +1 below is for the two Jovian tags on this card.
-    player.production.add(Resources.TITANIUM, (1 + Math.floor(player.tags.count(Tag.JOVIAN) / 2)), {log: true});
-    return undefined;
   }
 }

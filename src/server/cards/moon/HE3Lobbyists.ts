@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -15,6 +13,10 @@ export class HE3Lobbyists extends Card implements IProjectCard {
       tags: [Tag.MOON],
       cost: 7,
 
+      behavior: {
+        production: {megacredits: {tag: Tag.MOON}},
+      },
+
       metadata: {
         description: 'Increase your M€ production 1 step for each moon tag you have (including this).',
         cardNumber: 'M50',
@@ -23,11 +25,5 @@ export class HE3Lobbyists extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    // + 1 because the tag above isn't yet included in the played cards pile.
-    player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.MOON) + 1, {log: true});
-    return undefined;
   }
 }

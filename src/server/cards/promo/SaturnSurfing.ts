@@ -20,6 +20,10 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
       resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 
+      behavior: {
+        addResources: {tag: Tag.EARTH},
+      },
+
       metadata: {
         cardNumber: 'X11',
         renderData: CardRenderer.builder((b) => {
@@ -32,11 +36,6 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
         description: 'Add 1 floater here for every Earth tag you have, including this.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    this.resourceCount = player.tags.count(Tag.EARTH) + 1;
-    return undefined;
   }
 
   public canAct(): boolean {

@@ -1,6 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {Units} from '../../../common/Units';
 import {IAward} from '../IAward';
 
 export class Engineer implements IAward {
@@ -10,14 +9,21 @@ export class Engineer implements IAward {
   public getScore(player: Player): number {
     // TODO(kberg): should Engineer include events?
     const score = player.tableau.filter((card) => {
-      if (card.produce !== undefined) return true;
-      if (card.behavior?.production !== undefined && Units.isEmpty(card.behavior.production)) return true;
       if (Engineer.productionCards.includes(card.name)) return true;
+
+      if (card.produce !== undefined) return true;
+      const production = card.behavior?.production;
+      if (production !== undefined) {
+        // TODO(kberg): this is mildly unsafe because it doesn't take into account when
+        // production[key] = undefined (e.g. {megacredits: undefined}).
+        return Object.keys(production).length > 0;
+      }
       return false;
     }).length;
 
     return score;
   }
+
 
   // TODO(kberg)
   private static productionCards = [

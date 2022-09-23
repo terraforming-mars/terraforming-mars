@@ -23,7 +23,8 @@ describe('Cartel', function() {
   it('Should play', function() {
     card.play(player);
     expect(player.production.megacredits).to.eq(1);
-    player.playedCards.push(card);
+
+    player.playedCards.push(new LunarBeam()); // green card with an earth tag.
 
     card.play(player);
     expect(player.production.megacredits).to.eq(3);
@@ -33,11 +34,11 @@ describe('Cartel', function() {
     const cards = [
       new ImportedHydrogen(), // event with earth tag
       new InterstellarColonyShip(), // event with earth tag
-      new LunarBeam(), // another card with earth tag
+      new LunarBeam(), // green card with earth tag
     ];
 
     player.playedCards = player.playedCards.concat(cards);
     card.play(player);
-    expect(player.production.megacredits).to.eq(2); // exclude events
+    expect(player.production.megacredits).to.eq(2); // events are excluded
   });
 });

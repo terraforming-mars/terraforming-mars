@@ -118,21 +118,19 @@ export function testRedsCosts(cb: () => boolean, player: Player, initialMegacred
   expect(cb(), 'Reds in power, enough money').is.true;
 }
 
+const FAKE_CARD_TEMPLATE: IProjectCard = {
+  name: 'HELLO' as CardName,
+  cost: 0,
+  tags: [],
+  canPlay: () => true,
+  play: () => undefined,
+  getVictoryPoints: () => 0,
+  cardType: CardType.ACTIVE,
+  metadata: {},
+  resourceCount: 0,
+};
 export function fakeCard(card: Partial<IProjectCard>): IProjectCard {
-  const template: IProjectCard = {
-    name: 'HELLO' as CardName,
-    cost: 0,
-    tags: [],
-    canPlay: () => true,
-    play: () => undefined,
-    getVictoryPoints: () => 0,
-    cardType: CardType.ACTIVE,
-    metadata: {
-      cardNumber: '1',
-    },
-    resourceCount: 0,
-  };
-  return Object.assign(template, card);
+  return {...FAKE_CARD_TEMPLATE, ...card};
 }
 
 /*

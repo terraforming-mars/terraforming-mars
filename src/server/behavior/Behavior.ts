@@ -6,26 +6,23 @@ import {Tag} from '../../common/cards/Tag';
 // import {SpaceId} from '../../common/Types';
 // import {CardResource} from '../../common/CardResource';
 // import {TileType} from '../../common/TileType';
-import {Units} from '../../common/Units';
 import {SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {TileType} from '../../common/TileType';
+import {NoAttributes} from './NoAttributes';
+import {Countable, CountableUnits} from './Countable';
 
 /** A set of steps that an action can perform in any specific order. */
 
-interface NoAttributes {
-  _unused?: undefined,
-}
-
 export interface Behavior {
   /** Gain or lose production */
-  production?: Partial<Units>;
+  production?: Partial<CountableUnits>;
   /** Gain or lose stock */
-  stock?: Partial<Units>;
+  stock?: Partial<CountableUnits>;
 
   /** Add resources to this card itself */
-  addResources?: number;
+  addResources?: Countable;
 
   /** Add resources to any cards */
   addResourcesToAnyCard?: AddResource | Array<AddResource>;
@@ -103,7 +100,7 @@ export interface PlaceMoonTile {
 }
 
 export interface DrawCard {
-  count: number,
+  count: Countable,
   /** The number of cards to keep, should be between [1..count-1] */
   keep?: number,
   /** When true, player has to pay to keep the card. (e.g. 3MC) */
@@ -118,7 +115,7 @@ export interface DrawCard {
 }
 
 export interface AddResource {
-  count: number,
+  count: Countable,
   type?: CardResource,
   tag?: Tag;
 }

@@ -34,10 +34,10 @@ export class Viron extends Card implements ICard, ICorporationCard {
 
   private getActionCards(player: Player): Array<IActionCard & ICard> {
     const result: Array<IActionCard & ICard> = [];
-    for (const playedCard of player.playedCards) {
+    for (const playedCard of player.tableau) {
       if (isIActionCard(playedCard) &&
-                    player.getActionsThisGeneration().has(playedCard.name) &&
-                    playedCard.canAct(player)) {
+          player.getActionsThisGeneration().has(playedCard.name) &&
+          playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }

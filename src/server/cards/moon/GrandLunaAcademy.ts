@@ -1,5 +1,4 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
@@ -15,6 +14,10 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
       tags: [Tag.MOON],
       cost: 13,
 
+      behavior: {
+        drawCard: {count: {tag: Tag.MOON, per: 2}},
+      },
+
       metadata: {
         description: 'Draw 1 card per 2 Moon tags you have, including this.',
         cardNumber: 'M83',
@@ -23,13 +26,5 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    const tags = player.tags.count(Tag.MOON);
-    // Adding 1 so this tag is included in the count.
-    const gain = Math.floor((tags + 1) / 2);
-    player.drawCard(gain);
-    return undefined;
   }
 }

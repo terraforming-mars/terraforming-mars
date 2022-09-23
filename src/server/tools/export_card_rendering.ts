@@ -43,6 +43,8 @@ class ProjectCardProcessor {
       startingMegaCredits = card.startingMegaCredits;
       cardCost = card.cardCost;
     }
+
+    const production = card.behavior?.production;
     const clientCard: ClientCard = {
       module: module,
       name: card.name,
@@ -54,7 +56,7 @@ class ProjectCardProcessor {
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,
-      productionBox: Units.of(card.behavior?.production ?? Units.EMPTY),
+      productionBox: Units.isUnits(production) ? Units.of(production) : Units.EMPTY, // Dynamic units aren't used on on the client side.
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,

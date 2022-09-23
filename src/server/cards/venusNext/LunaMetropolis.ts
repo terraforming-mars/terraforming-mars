@@ -1,9 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -20,6 +18,7 @@ export class LunaMetropolis extends Card implements IProjectCard {
 
       victoryPoints: 2,
       behavior: {
+        production: {megacredits: {tag: Tag.EARTH}},
         city: {space: SpaceName.LUNA_METROPOLIS, type: SpaceType.COLONY},
       },
 
@@ -32,9 +31,5 @@ export class LunaMetropolis extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, player.tags.count(Tag.EARTH) + 1, {log: true});
-    return undefined;
   }
 }

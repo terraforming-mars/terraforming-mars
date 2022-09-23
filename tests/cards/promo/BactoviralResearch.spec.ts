@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -7,18 +7,18 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BactoviralResearch', function() {
   let card: BactoviralResearch;
-  let player: Player;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new BactoviralResearch();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play with multiple microbe cards', function() {
@@ -27,7 +27,9 @@ describe('BactoviralResearch', function() {
     const card4 = new Tardigrades();
     player.playedCards.push(card2, card3, card4);
 
-    const action = cast(card.play(player), SelectCard<ICard>);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard<ICard>);
     action.cb([card3]);
     expect(card3.resourceCount).to.eq(4);
     expect(player.cardsInHand.length).to.eq(1);
@@ -37,13 +39,17 @@ describe('BactoviralResearch', function() {
     const card2 = new RegolithEaters();
     player.playedCards.push(card2);
     expect(card.play(player)).is.undefined;
+
+    runAllActions(game);
+
     expect(card2.resourceCount).to.eq(2);
     expect(player.cardsInHand.length).to.eq(1);
   });
 
   it('Should play with no microbe cards', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+
     expect(player.cardsInHand.length).to.eq(1);
   });
 });

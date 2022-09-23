@@ -52,6 +52,19 @@ export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;
 export const DEFAULT_ESCAPE_VELOCITY_PERIOD = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 
+export const LANGUAGES2 = {
+  en: 'English',
+  de: 'Deutsch',
+  fr: 'Français',
+  ru: 'Русский',
+  cn: '华语',
+  pl: 'Polskie',
+  es: 'Español',
+  br: 'Português Brasileiro',
+  it: 'Italiano',
+  ko: '한국어',
+};
+
 export const LANGUAGES = [
   {'id': 'en', 'title': 'English'},
   {'id': 'de', 'title': 'Deutsch'},

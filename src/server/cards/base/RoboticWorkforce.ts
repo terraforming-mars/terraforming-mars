@@ -9,8 +9,9 @@ import {Resources} from '../../../common/Resources';
 import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Units} from '../../../common/Units';
 import {played} from '../Options';
+import {CountableUnits} from '../../behavior/Countable';
+import {Counter} from '../../behavior/Counter';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
@@ -46,8 +47,14 @@ export class RoboticWorkforce extends Card implements IProjectCard {
 
     if (card.produce !== undefined) return true;
 
-    if (card.behavior?.production === undefined || Units.isEmpty(card.behavior.production)) return false;
-    return player.production.canAdjust(Units.of(card.behavior.production));
+    const production = card.behavior?.production;
+    if (production === undefined) {
+      return false;
+    }
+    if (CountableUnits.hasNegativeRawValues(production)) {
+      return player.production.canAdjust(new Counter(player, card).countUnits(production));
+    }
+    return true;
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
@@ -72,7 +79,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       if (card.produce) {
         card.produce(player);
       } else if (card.behavior?.production) {
-        player.production.adjust(Units.of(card.behavior.production));
+        player.production.adjust(new Counter(player, card).countUnits(card.behavior.production));
       } else {
         throw new Error(`Card ${card.name} is not a valid Robotic Workforce card.`);
       }

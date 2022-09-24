@@ -4,10 +4,15 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
-import {fakeCard} from '../TestingUtils';
+import {cast, fakeCard, maxOutOceans} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
+import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceType} from '../../src/common/boards/SpaceType';
+import {OceanCity} from '../../src/server/cards/ares/OceanCity';
+import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {Wetlands} from '../../src/server/cards/pathfinders/Wetlands';
 
 describe('Counter', () => {
   let game: Game;
@@ -17,7 +22,7 @@ describe('Counter', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    game = newTestGame(3, {venusNextExtension: true});
+    game = newTestGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
     player3 = getTestPlayer(game, 2);
@@ -83,6 +88,89 @@ describe('Counter', () => {
     // New game state needs a new Counter.
     counter = new Counter(player, fake);
     expect(counter.count({tag: Tag.CITY})).eq(3);
+  });
+
+  it('count cities', () => {
+    const counter = new Counter(player, fake);
+
+    function count() {
+      return {
+        '': counter.count({cities: {}}),
+        'onmars': counter.count({cities: {where: 'onmars'}}),
+        'offmars': counter.count({cities: {where: 'offmars'}}),
+        'everywhere': counter.count({cities: {where: 'everywhere'}}),
+      };
+    }
+    expect(count()).deep.eq({'': 0, 'onmars': 0, 'offmars': 0, 'everywhere': 0});
+
+    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+
+    expect(count()).deep.eq({'': 1, 'onmars': 0, 'offmars': 1, 'everywhere': 1});
+
+    const landSpace = game.board.getAvailableSpacesForCity(player)[0];
+    game.addCityTile(player, landSpace.id, SpaceType.LAND);
+
+    expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
+
+    const oceanCity = new OceanCity();
+    const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
+    game.addOceanTile(player, oceanSpace.id, SpaceType.OCEAN);
+
+    expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
+
+    const selectSpace = cast(oceanCity.play(player), SelectSpace);
+    selectSpace.cb(oceanSpace);
+
+    expect(count()).deep.eq({'': 3, 'onmars': 2, 'offmars': 1, 'everywhere': 3});
+  });
+
+  it('count greeneries', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({greeneries: {}})).eq(0);
+
+    const greenerySpaces = game.board.getAvailableSpacesForGreenery(player);
+    game.addGreenery(player, greenerySpaces[0].id);
+
+    expect(counter.count({greeneries: {}})).eq(1);
+
+    game.addGreenery(player, greenerySpaces[1].id);
+
+    expect(counter.count({greeneries: {}})).eq(2);
+
+    game.addGreenery(player, greenerySpaces[2].id);
+
+    expect(counter.count({greeneries: {}})).eq(3);
+
+    maxOutOceans(player);
+    const wetlands = new Wetlands();
+    player.plants = 4;
+    const selectSpace = cast(wetlands.play(player), SelectSpace);
+    selectSpace.cb(selectSpace.availableSpaces[0]);
+    expect(counter.count({greeneries: {}})).eq(4);
+  });
+
+  it('count oceans', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({oceans: {}})).eq(0);
+
+    maxOutOceans(player, 1);
+
+    expect(counter.count({oceans: {}})).eq(1);
+
+    maxOutOceans(player, 2);
+
+    expect(counter.count({oceans: {}})).eq(2);
+
+    maxOutOceans(player, 6);
+
+    expect(counter.count({oceans: {}})).eq(6);
+
+    maxOutOceans(player);
+    const wetlands = new Wetlands();
+    player.plants = 4;
+    const selectSpace = cast(wetlands.play(player), SelectSpace);
+    selectSpace.cb(selectSpace.availableSpaces[0]);
+    expect(counter.count({oceans: {}})).eq(10);
   });
 
   it('count units', () => {

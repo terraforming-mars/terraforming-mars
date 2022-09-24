@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
@@ -20,6 +19,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
 
       behavior: {
         moon: {colonyRate: 1},
+        production: {megacredits: {cities: {where: 'offmars'}}},
       },
 
       metadata: {
@@ -34,12 +34,6 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3, true),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    const amount = player.game.getCitiesOffMarsCount();
-    player.production.add(Resources.MEGACREDITS, amount, {log: true});
-    return undefined;
   }
 
   public override getVictoryPoints(player: Player) {

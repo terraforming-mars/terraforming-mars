@@ -29,7 +29,6 @@ export class Engineer implements IAward {
     // Base + Corp Era
     CardName.ARTIFICIAL_PHOTOSYNTHESIS,
     CardName.ASTEROID_MINING_CONSORTIUM,
-    CardName.ENERGY_SAVING,
     CardName.ENERGY_TAPPING,
     CardName.GREAT_ESCARPMENT_CONSORTIUM,
     CardName.INSULATION,

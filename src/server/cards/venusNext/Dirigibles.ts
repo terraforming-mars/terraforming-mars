@@ -21,10 +21,10 @@ export class Dirigibles extends Card implements IActionCard {
       metadata: {
         cardNumber: '222',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Floater to ANY card', (eb) => {
+          b.action('Add 1 floater to ANY card', (eb) => {
             eb.empty().startAction.floaters(1).asterix();
           }).br;
-          b.effect('When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.', (eb) => {
+          b.effect('When playing a Venus tag, floaters here may be used as payment, and are worth 3M€ each.', (eb) => {
             eb.venus(1, {played}).startEffect.floaters(1).equals().megacredits(3);
           });
         }),

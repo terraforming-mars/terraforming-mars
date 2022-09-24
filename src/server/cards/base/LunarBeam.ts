@@ -26,7 +26,7 @@ export class LunarBeam extends Card implements IProjectCard {
             pb.plus().energy(2);
           });
         }),
-        description: 'Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.',
+        description: 'Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.',
       },
     });
   }

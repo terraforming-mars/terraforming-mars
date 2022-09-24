@@ -165,7 +165,7 @@
  "Spend 1 titanium. Raise the Logistic Rate 1 step.": "花费1钛。提高物流效率1级。",
 
   "Lunar Industry Complex" :"月球工业园区",
-  "Spend 2 Titanium. Place a mine tile on The Moon and raise the Mining Rate 1 step. Increase your Steel, Titanium, and Heat production 1 step each. Increase your Energy production 2 steps.": "花费2钛。在月球上放置一个挖矿板块，并提高采矿速率1级。将钢、钛和热的产量分别增加1级。电产增加2级。",
+  "Spend 2 titanium. Place a mine tile on The Moon and raise the Mining Rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "花费2钛。在月球上放置一个挖矿板块，并提高采矿速率1级。将钢、钛和热的产量分别增加1级。电产增加2级。",
 
   "Lunar Mine Urbanization" :"月球矿脉城市化",
   "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the Colony Rate 1 step. This tile counts both as a colony and a mine tile.": "要求你有1个矿板块。增加你的M€生产1级。用这种特殊的改造板块替换你的一个采矿板块。提高殖民效率1级。这个特殊板块既可以算作殖民地板块也可以算作采矿板块。",
@@ -234,7 +234,7 @@
 
   "Processor Factory":"处理器工厂",
   "1 VP for every 3 data resources here.":"此卡上每3个数据资源价值1VP。",
-  "Action: Spend 1 steel to add 2 Data resources to ANY card.":"行动：花费1钢，在任何牌上增加2数据资源。",
+  "Action: Spend 1 steel to add 2 data resources to ANY card.":"行动：花费1钢，在任何牌上增加2数据资源。",
 
   "Revolting Colonists":"反抗的殖民者",
   "4 Colony rate":"4 殖民效率",

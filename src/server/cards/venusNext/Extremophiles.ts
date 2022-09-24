@@ -23,7 +23,7 @@ export class Extremophiles extends Card implements IActionCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
       metadata: {
         cardNumber: '224',
-        description: 'Requires 2 Science tags.',
+        description: 'Requires 2 science tags.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to ANY card.', (eb) => {
             eb.empty().startAction.microbes(1).asterix();

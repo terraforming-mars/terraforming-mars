@@ -69,7 +69,7 @@
     "Place this tile and raise temperature 2 steps.":"提升温度2级，放置此板块。",
 
     "Ocean City": "海洋城市",
-    "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "需求有6块海洋。降低你的电力产量1级，提升你的M€产量3级。放置此板块到一个已有的海洋板块上，无视通常的城市放置限制。此板块即视为城市也视为海洋",
+    "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "需求有6块海洋。降低你的电力产量1级，提升你的M€产量3级。放置此板块到一个已有的海洋板块上，无视通常的城市放置限制。此板块即视为城市也视为海洋",
 
     "Ocean Farm": "海洋农场",
     "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "需求有4块海洋。提升你的热能产量1级，提升你的植物产量1级。放置此板块到一个已有的海洋板块上，此板块的相邻收益为1个植物资源",

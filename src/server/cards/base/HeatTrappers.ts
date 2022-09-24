@@ -29,7 +29,7 @@ export class HeatTrappers extends Card implements IProjectCard {
             pb.plus().energy(1);
           });
         }),
-        description: 'Decrease any heat production 2 steps and increase your Energy production 1 step.',
+        description: 'Decrease any heat production 2 steps and increase your energy production 1 step.',
       },
     });
   }

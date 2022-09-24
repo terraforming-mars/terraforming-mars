@@ -31,7 +31,7 @@ export class StratosphericBirds extends Card implements IActionCard {
           b.vpText('1 VP for each Animal on this card.');
         }),
         description: {
-          text: 'Requires Venus 12% and that you spend 1 Floater from any card.',
+          text: 'Requires Venus 12% and that you spend 1 floater from any card.',
           align: 'left',
         },
       },

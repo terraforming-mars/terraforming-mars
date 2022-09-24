@@ -23,7 +23,7 @@ export class PowerGrid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1).slash().energy(1, {played}));
         }),
-        description: 'Increase your Energy production step for each Power tag you have, including this.',
+        description: 'Increase your energy production step for each Power tag you have, including this.',
       },
     });
   }

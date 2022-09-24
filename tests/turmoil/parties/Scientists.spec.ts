@@ -26,7 +26,7 @@ describe('Scientists', function() {
     scientists = new Scientists();
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Science tag you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each science tag you have', function() {
     player.playedCards.push(new SearchForLife());
 
     const bonus = SCIENTISTS_BONUS_1;
@@ -34,7 +34,7 @@ describe('Scientists', function() {
     expect(player.megaCredits).to.eq(1);
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Science tag you have, with Habitat Marte', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each science tag you have, with Habitat Marte', function() {
     player.setCorporationForTest(new HabitatMarte());
     player.playedCards.push(new SearchForLife(), new DesignedOrganisms());
 
@@ -87,7 +87,7 @@ describe('Scientists', function() {
     expect(player.cardsInHand).has.lengthOf(3);
   });
 
-  it('Ruling policy 4: Cards with Science tag requirements may be played with 1 less Science tag', function() {
+  it('Ruling policy 4: Cards with science tag requirements may be played with 1 less science tag', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, scientists, SCIENTISTS_POLICY_4.id);
 
     const card = new GeneRepair();
@@ -99,10 +99,10 @@ describe('Scientists', function() {
     expect(player.canPlayIgnoringCost(card)).to.be.true;
   });
 
-  it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less Science tag', function() {
+  it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less science tag', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, scientists, SCIENTISTS_POLICY_4.id);
 
-    // Meet all card requirements except the Science tag
+    // Meet all card requirements except the science tag
     player.playedCards.push(new SpaceStation(), new Satellites());
     player.titanium = 2;
     const card = new PrideoftheEarthArkship();

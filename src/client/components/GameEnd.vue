@@ -29,7 +29,7 @@
                       <ul class="game_end_list" v-i18n>
                           <li>Concentrate more on Global parameters, not on Victory Points</li>
                           <li>Don't be greedy with card selection</li>
-                          <li>Try to increase Heat production, not Megacredits</li>
+                          <li>Try to increase heat production instead of M€</li>
                           <li>Try to start with Beginner corporation</li>
                       </ul>
                   </div>

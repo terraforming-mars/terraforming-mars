@@ -89,7 +89,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
         heatAmount = amount;
         return undefined;
       }, 0, Math.min(player.heat, targetAmount)),
-      new SelectAmount('Stormcraft Incorporated Floaters (2 heat each)', 'Spend floaters', (amount: number) => {
+      new SelectAmount('Stormcraft Incorporated floaters (2 heat each)', 'Spend floaters', (amount: number) => {
         floaterAmount = amount;
         return undefined;
       }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),

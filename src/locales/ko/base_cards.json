@@ -6,7 +6,7 @@
     "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "조건: 보유한 티타늄 생산력 1 이상.) (아무 1명의 티타늄 생산력 1 감소. 자신의 티타늄 생산력 1 증가.",
 
     "Deep Well Heating": "심부유정 발열",
-    "Increase your Energy production 1 step. Increase temperature 1 step.": "에너지 생산력 1 증가. 기온 1단계 상승.",
+    "Increase your energy production 1 step. Increase temperature 1 step.": "에너지 생산력 1 증가. 기온 1단계 상승.",
 
     "Cloud Seeding": "인공 구름 형성",
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "조건: 해양 타일 3장 이상.) (자신의 메가크레딧 생산력 1 감소. 아무 1명의 열 생산력 1 감소. 자신의 식물 생산력 2 증가.",
@@ -28,17 +28,17 @@
     "4 Oceans": "해양 타일 4장",
     "5 Oceans": "해양 타일 5장",
     "6 Oceans": "해양 타일 6장",
-    "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2 감소. 메가크레딧 생산력 5 증가. 도시 타일 1장 배치.",
+    "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2 감소. 메가크레딧 생산력 5 증가. 도시 타일 1장 배치.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "이 특수 타일과 인접한 해양 타일 1장당 1점.",
 
     "Asteroid": "소행성",
-    "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "기온 1단계 상승. 티타늄 자원 2개 획득. 아무 1명의 식물 자원 3개까지 제거.",
+    "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "기온 1단계 상승. 티타늄 자원 2개 획득. 아무 1명의 식물 자원 3개까지 제거.",
 
     "Comet": "혜성",
-    "Raise temperature 1 step and place an ocean tile. Remove up to 3 Plants from any player.": "기온 1단계 상승. 해양 타일 1장 배치. 아무 1명의 식물 자원 3개까지 제거.",
+    "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.": "기온 1단계 상승. 해양 타일 1장 배치. 아무 1명의 식물 자원 3개까지 제거.",
 
     "Big Asteroid": "대형 소행성",
-    "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "기온 2단계 상승. 티타늄 자원 4개 획득. 아무 1명의 식물 자원 4개까지 제거.",
+    "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "기온 2단계 상승. 티타늄 자원 4개 획득. 아무 1명의 식물 자원 4개까지 제거.",
 
     "Water Import From Europa": "유로파에서 물 수입",
     "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "12 M€ 소비해서 해양 타일 1장 배치. 티타늄 자원도 소비 가능.",
@@ -52,13 +52,13 @@
     "Action: Spend 1 Energy to draw a card.": "행동: 에너지 자원 1개 소비해서 카드 1장 획득.",
 
     "Equatorial Magnetizer": "적도 자기장 생성기",
-    "Action: Decrease your Energy production 1 step to increase your terraform rating 1 step.": "행동: 에너지 생산력 1 감소시켜서 테라포밍 등급 1TR 상승.",
+    "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "행동: 에너지 생산력 1 감소시켜서 테라포밍 등급 1TR 상승.",
 
     "Domed Crater": "돔 크레이터",
-    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.": "에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 식물 자원 3개 획득. 도시 타일 1장 배치.",
+    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 식물 자원 3개 획득. 도시 타일 1장 배치.",
 
     "Noctis City": "녹티스 시티",
-    "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 배치 제한 무시하고 녹티스 시티 전용 구역에 도시 타일 1장 배치.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 배치 제한 무시하고 녹티스 시티 전용 구역에 도시 타일 1장 배치.",
 
     "Methane From Titan": "타이탄에서 메테인 수입",
     "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.": "열 생산력 2 증가. 식물 생산력 2 증가.",
@@ -99,16 +99,16 @@
     "1 VP for each fighter resource on this card.": "이 카드의 전투기 자원 1개당 승점 1점.",
 
     "Cupola City": "반구형 도시",
-    "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.": "조건: 산소 농도 9% 이하.) (에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 도시 타일 1장 배치.",
+    "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "조건: 산소 농도 9% 이하.) (에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 도시 타일 1장 배치.",
 
     "Lunar Beam": "루나 빔",
-    "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "메가크레딧 생산력 2 감소. 열 생산력 2 증가. 에너지 생산력 2 증가.",
+    "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "메가크레딧 생산력 2 감소. 열 생산력 2 증가. 에너지 생산력 2 증가.",
 
     "Optimal Aerobraking": "첨단 대기권제동기술",
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "지속효과: 우주 사건형 카드 사용 시, 3 M€과 열 자원 3개 획득.",
 
     "Underground City": "지하 도시",
-    "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "에너지 생산력 2 감소. 강철 생산력 2 증가. 도시 타일 1장 배치.",
+    "Place a City tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "에너지 생산력 2 감소. 강철 생산력 2 증가. 도시 타일 1장 배치.",
 
     "Regolith Eaters": "표토 섭식 미생물",
     "Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.": "행동: 이 카드에 미생물 자원 1개 추가 또는 이 카드에 미생물 자원 2개 소비해서 산소 농도 1% 상승.",
@@ -133,7 +133,7 @@
     "Effect: When any City tile is placed, gain 2 M€.": "지속효과: 아무 도시 타일이 1장 놓일 때마다 자신이 2 M€ 획득.",
 
     "Deimos Down": "데이모스 추락",
-    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 8개까지 제거.",
+    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 8개까지 제거.",
 
     "Asteroid Mining": "소행성 채굴",
     "Increase your titanium production 2 steps.": "티타늄 생산력 2 증가.",
@@ -145,16 +145,16 @@
     "It must be -18 C or colder. Increase your Plant production 1 step.": "조건: 기온 -18℃ 이하.) (식물 생산력 1 증가.",
 
     "Carbonate Processing": "탄산염 분해 작업",
-    "Decrease your Energy production 1 step and increase your heat production 3 steps.": "에너지 생산력 1 감소. 열 생산력 3 증가.",
+    "Decrease your energy production 1 step and increase your heat production 3 steps.": "에너지 생산력 1 감소. 열 생산력 3 증가.",
 
     "Natural Preserve": "자연 보존",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.": "조건: 산소 농도 4% 이하.) (메가크레딧 생산력 1 증가. 다른 타일과 인접하지 않은 빈 구역 한 곳에 타일 배치.",
 
     "Nuclear Power": "원자력 발전",
-    "Decrease your M€ production 2 steps and increase your Energy production 3 steps.": "메가크레딧 생산력 2 감소. 에너지 생산력 3 증가.",
+    "Decrease your M€ production 2 steps and increase your energy production 3 steps.": "메가크레딧 생산력 2 감소. 에너지 생산력 3 증가.",
 
     "Lightning Harvest": "번개걷이",
-    "Requires 3 Science tags. Increase your Energy production and your M€ production one step each.": "조건: 보유한 과학 태그 3개 이상.) (에너지 생산력 1 증가. 메가크레딧 생산력 1 증가.",
+    "Requires 3 Science tags. Increase your energy production and your M€ production one step each.": "조건: 보유한 과학 태그 3개 이상.) (에너지 생산력 1 증가. 메가크레딧 생산력 1 증가.",
 
     "Algae": "조류",
     "Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.": "조건: 해양 타일 5장 이상.) (식물 생산력 2 증가. 식물 자원 1개 획득.",
@@ -167,7 +167,7 @@
     "1 VP per 4 Microbes on this card.": "이 카드의 미생물 자원 4개당 승점 1점.",
 
     "Virus": "바이러스",
-    "Remove up to 2 Animals or 5 Plants from any player.": "아무 1명의 동물 자원 2개까지 또는 식물 자원 5개까지 제거.",
+    "Remove up to 2 Animals or 5 plants from any player.": "아무 1명의 동물 자원 2개까지 또는 식물 자원 5개까지 제거.",
 
     "Miranda Resort": "미란다 리조트",
     "Increase your M€ production 1 step for each Earth tag you have.": "보유한 지구 태그 1개당 메가크레딧 생산력 1 증가.",
@@ -192,7 +192,7 @@
     "Vesta Shipyard": "베스타 조선소",
 
     "Beam From A Thorium Asteroid": "토륨 소행성 핵발전소",
-    "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each": "조건: 보유한 목성 태그 1개 이상.) (열 생산력 3 증가. 에너지 생산력 3 증가.",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each": "조건: 보유한 목성 태그 1개 이상.) (열 생산력 3 증가. 에너지 생산력 3 증가.",
 
     "Mangrove": "맹그로브",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "조건: 기온 +4℃ 이상.) (배치 제한 무시하고 빈 해양 전용 구역 한 곳에 녹지 타일 1장 배치. 그에 따른 산소 농도 1% 상승.",
@@ -213,7 +213,7 @@
     "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "자신의 타일과 인접한, 강철/티타늄 점유 보너스가 있는 빈 구역에 타일 배치. 해당 점유 보너스 자원 중 한 종류의 생산력 1 증가.",
 
     "Building Industries": "공업단지 건설",
-    "Decrease your Energy production 1 step and increase your steel production 2 steps.": "에너지 생산력 1 감소. 강철 생산력 2 증가.",
+    "Decrease your energy production 1 step and increase your steel production 2 steps.": "에너지 생산력 1 감소. 강철 생산력 2 증가.",
 
     "Land Claim": "영토 소유권 주장",
     "Place your marker on a non-reserved area. Only you may place a tile there.": "자신의 색깔 마커 1개를 빈 구역 (전용 구역 제외) 한 곳에 배치. 이제부터 그 구역에는 자신만이 타일을 배치할 수 있음.",
@@ -289,7 +289,7 @@
     "Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.": "조건: 기온 -14℃ 이상.) (식물 생산력 1 증가. 식물 자원 1개 획득.",
 
     "Peroxide Power": "과산화물 발전",
-    "Decrease your M€ production 1 step and increase your Energy production 2 steps.": "메가크레딧 생산력 1 감소. 에너지 생산력 2 증가.",
+    "Decrease your M€ production 1 step and increase your energy production 2 steps.": "메가크레딧 생산력 1 감소. 에너지 생산력 2 증가.",
 
     "Research": "연구",
     "Counts as playing 2 science cards. Draw 2 cards.": "카드 2장 획득.",
@@ -323,13 +323,13 @@
     "Increase your M€ production 1 step for each space tag your OPPONENTS have.": "다른 플레이어들이 보유한 우주 태그 1개당 자신의 메가크레딧 생산력 1 증가.",
 
     "Fueled Generators": "화력 발전",
-    "Decrease your M€ production 1 step and increase your Energy production 1 steps.": "메가크레딧 생산력 1 감소. 에너지 생산력 1 증가.",
+    "Decrease your M€ production 1 step and increase your energy production 1 steps.": "메가크레딧 생산력 1 감소. 에너지 생산력 1 증가.",
 
     "Ironworks": "제철소",
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "행동: 에너지 자원 4개 소비해서 강철 자원 1개 획득 및 산소 농도 1% 상승.",
 
     "Power Grid": "전력망",
-    "Increase your Energy production step for each Power tag you have, including this.": "이 카드도 포함해서, 보유한 에너지 태그 1개당 에너지 생산력 1 증가.",
+    "Increase your energy production step for each Power tag you have, including this.": "이 카드도 포함해서, 보유한 에너지 태그 1개당 에너지 생산력 1 증가.",
 
     "Steelworks": "제강소",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "행동: 에너지 자원 4개 소비해서 강철 자원 2개 획득 및 산소 농도 1% 상승.",
@@ -347,7 +347,7 @@
     "Gain 1 M€ for each event EVER PLAYED by all players.": "모든 플레이어가 지금까지 사용한 모든 사건형 카드 1장당 자신이 1 M€ 획득.",
 
     "Open City": "개방형 도시",
-    "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "조건: 산소 농도 12% 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 4 증가. 식물 자원 2개 획득. 도시 타일 1장 배치.",
+    "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "조건: 산소 농도 12% 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 4 증가. 식물 자원 2개 획득. 도시 타일 1장 배치.",
 
     "Media Group": "미디어 그룹",
     "Effect: After you play an event card, you gain 3 M€.": "지속효과: 사건형 카드 사용 시, 3 M€ 획득.",
@@ -383,7 +383,7 @@
     "Requires 3 or less ocean tiles.": "조건: 해양 타일 3장 이하.",
 
     "Urbanized Area": "광역 대도시권",
-    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 아무 도시 타일 2장 이상과 인접한 빈 구역 한 곳에 도시 타일 1장 배치.",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 아무 도시 타일 2장 이상과 인접한 빈 구역 한 곳에 도시 타일 1장 배치.",
 
     "Sabotage": "파괴공작",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "아무 1명의 티타늄 자원 3개까지 또는 강철 자원 4개까지 또는 7 M€까지 제거.",
@@ -402,7 +402,7 @@
     "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.": "자신의 에너지 생산력 1 감소. 아무 1명의 메가크레딧 생산력 2 감소. 자신의 메가크레딧 생산력 2 증가.",
 
     "GHG Factories": "온실가스 공장",
-    "Decrease your Energy production 1 step and increase your heat production 4 steps.": "에너지 생산력 1 감소. 열 생산력 4 증가.",
+    "Decrease your energy production 1 step and increase your heat production 4 steps.": "에너지 생산력 1 감소. 열 생산력 4 증가.",
 
     "Subterranean Reservoir": "대수층",
     "Place 1 ocean tile.": "해양 타일 1장 배치.",
@@ -424,7 +424,7 @@
     "1 VP per 3 Microbes on this card.": "이 카드의 미생물 자원 3개당 승점 1점.",
 
     "Fusion Power": "핵융합 발전",
-    "Requires 2 Power tags. Increase your Energy production 3 steps.": "조건: 보유한 에너지 태그 2개 이상.) (에너지 생산력 3 증가.",
+    "Requires 2 Power tags. Increase your energy production 3 steps.": "조건: 보유한 에너지 태그 2개 이상.) (에너지 생산력 3 증가.",
 
     "Symbiotic Fungus": "공생성 진균류",
     "Action: Add a microbe to ANOTHER card.": "행동: 자신의 다른카드 1장에 미생물 자원 1개 추가.",
@@ -439,13 +439,13 @@
     "Requires a Plant tag, a Microbe tag, and an Animal tag.": "조건: 보유한 식물/미생물/동물 태그 각 1개 이상.",
 
     "Great Dam": "대형 댐",
-    "Requires 4 ocean tiles. Increase your Energy production 2 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2 증가.",
+    "Requires 4 ocean tiles. Increase your energy production 2 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2 증가.",
 
     "Cartel": "카르텔",
     "Increase your M€ production 1 step for each Earth tag you have, including this.": "이 카드도 포함해서, 보유한 지구 태그 1개당 메가크레딧 생산력 1 증가.",
 
     "Strip Mine": "노천채굴",
-    "Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "에너지 생산력 2 감소. 강철 생산력 2 증가. 티타늄 생산력 1 증가. 산소 농도 2% 상승.",
+    "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "에너지 생산력 2 감소. 강철 생산력 2 증가. 티타늄 생산력 1 증가. 산소 농도 2% 상승.",
 
     "Wave Power": "파력 발전",
     "Requires 3 ocean tiles. Increase your energy production 1 step.": "조건: 해양 타일 3장 이상.) (에너지 생산력 1 증가.",
@@ -454,18 +454,18 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "기온 2단계 상승. 화산 구역 중 빈 구역 한 곳에 타일 배치.",
 
     "Power Plant": "발전소",
-    "Increase your Energy production 1 step.": "에너지 생산력 1 증가.",
+    "Increase your energy production 1 step.": "에너지 생산력 1 증가.",
 
     "Mohole Area": "모홀 지역",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "열 생산력 4 증가. 빈 해양 전용 구역 한 곳에 타일 배치.",
 
     "Large Convoy": "대규모 수송선단",
-    "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.": "해양 타일 1장 배치. 카드 2장 획득. 식물 자원 5개 획득 또는 자신의 아무 카드 1장에 동물 자원 4개 추가.",
+    "Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 Animals to ANOTHER card.": "해양 타일 1장 배치. 카드 2장 획득. 식물 자원 5개 획득 또는 자신의 아무 카드 1장에 동물 자원 4개 추가.",
 
     "Titanium Mine": "티타늄 광산",
 
     "Tectonic Stress Power": "지체응력 발전",
-    "Requires 2 Science tags. Increase your Energy production 3 steps.": "조건: 보유한 과학 태그 2개 이상.) (에너지 생산력 3 증가.",
+    "Requires 2 science tags. Increase your energy production 3 steps.": "조건: 보유한 과학 태그 2개 이상.) (에너지 생산력 3 증가.",
 
     "Nitrophilic Moss": "호질소성 이끼류",
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "조건: 해양 타일 3장 이상.) (식물 자원 2개 제거. 식물 생산력 2 증가.",
@@ -509,13 +509,13 @@
     "Add 3 Microbes to this card.": "이 카드에 미생물 자원 3개 추가.",
 
     "Industrial Microbes": "공업용 미생물",
-    "Increase your Energy production and your steel production 1 step each.": "에너지 생산력 1 증가. 강철 생산력 1 증가.",
+    "Increase your energy production and your steel production 1 step each.": "에너지 생산력 1 증가. 강철 생산력 1 증가.",
 
     "Lichen": "지의류",
     "Requires -24 C or warmer. Increase your Plant production 1 step.": "조건: 기온 -24℃ 이상.) (식물 생산력 1 증가.",
 
     "Power Supply Consortium": "전력 공급 컨소시엄",
-    "Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.": "조건: 보유한 에너지 태그 2개 이상.) (아무 1명의 에너지 생산력 1 감소. 자신의 에너지 생산력 1 증가.",
+    "Requires 2 Power tags. Decrease any energy production 1 step and increase your own 1 step.": "조건: 보유한 에너지 태그 2개 이상.) (아무 1명의 에너지 생산력 1 감소. 자신의 에너지 생산력 1 증가.",
 
     "Convoy From Europa": "유로파 수송선단",
     "Place 1 ocean tile and draw 1 card.": "해양 타일 1장 배치. 카드 1장 획득.",
@@ -530,16 +530,16 @@
     "Increase your heat production 1 step.": "열 생산력 1 증가.",
 
     "Magnetic Field Generators": "자기장 생성기",
-    "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "에너지 생산력 4 감소. 식물 생산력 2 증가. 테라포밍 등급 3TR 상승.",
+    "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "에너지 생산력 4 감소. 식물 생산력 2 증가. 테라포밍 등급 3TR 상승.",
 
     "Shuttles": "왕복선",
-    "Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.": "조건: 산소 농도 5% 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 2 증가.",
+    "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "조건: 산소 농도 5% 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 2 증가.",
 
     "Import of Advanced GHG": "강화형 온실가스 수입",
     "Increase your heat production 2 steps.": "열 생산력 2 증가.",
 
     "Windmills": "풍차",
-    "Requires 7% oxygen. Increase your Energy production 1 step.": "조건: 산소 농도 7% 이상.) (에너지 생산력 1 증가.",
+    "Requires 7% oxygen. Increase your energy production 1 step.": "조건: 산소 농도 7% 이상.) (에너지 생산력 1 증가.",
 
     "Tundra Farming": "툰드라 농경지",
     "Requires -6° C or warmer. Increase your Plant production 1 step and your M€ production 2 steps. Gain 1 Plant.": "조건: 산소 농도 -6℃ 이상.) (식물 생산력 1 증가. 메가크레딧 생산력 2 증가. 식물 자원 1개 획득.",
@@ -548,7 +548,7 @@
     "Increase your heat production 3 steps and your plant production 1 step. Add 2 Microbes to ANOTHER card.": "열 생산력 3 증가. 식물 생산력 1 증가. 자신의 다른 카드 1장에 미생물 자원 2개 추가.",
 
     "Magnetic Field Dome": "자기장 돔",
-    "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "에너지 생산력 2 감소. 식물 생산력 1 증가. 테라포밍 등급 1TR 상승.",
+    "Decrease your energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "에너지 생산력 2 감소. 식물 생산력 1 증가. 테라포밍 등급 1TR 상승.",
 
     "Pets": "애완동물",
     "Animals may not be removed from this card": "이 카드의 동물 자원은 제거 불가.",
@@ -573,22 +573,22 @@
     "Requires 2 ocean tiles.": "조건: 해양 타일 2장 이상.",
 
     "Heat Trappers": "축열 장치",
-    "Decrease any heat production 2 steps and increase your Energy production 1 step.": "아무 1명의 열 생산력 2 감소. 자신의 에너지 생산력 1 증가.",
+    "Decrease any heat production 2 steps and increase your energy production 1 step.": "아무 1명의 열 생산력 2 감소. 자신의 에너지 생산력 1 증가.",
 
     "Soil Factory": "토양정화소",
-    "Decrease your Energy production 1 step and increase your Plant production 1 step.": "에너지 생산력 1 감소. 식물 생산력 1 증가.",
+    "Decrease your energy production 1 step and increase your Plant production 1 step.": "에너지 생산력 1 감소. 식물 생산력 1 증가.",
 
     "Fuel Factory": "정유소",
-    "Decrease your Energy production 1 step and increase your titanium and your M€ production 1 step each.": "에너지 생산력 1 감소. 티타늄 생산력 1 증가. 메가크레딧 생산력 1 증가.",
+    "Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each.": "에너지 생산력 1 감소. 티타늄 생산력 1 증가. 메가크레딧 생산력 1 증가.",
 
     "Ice Cap Melting": "극관 해빙",
     "Requires +2 C or warmer. Place 1 ocean tile.": "조건: 기온 +2℃ 이상.) (해양 타일 1장 배치.",
 
     "Corporate Stronghold": "사유화 도시",
-    "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 도시 타일 1장 배치.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 도시 타일 1장 배치.",
 
     "Biomass Combustors": "바이오매스 연소시설",
-    "Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.": "조건: 산소 농도 6% 이상.) (아무 1명의 식물 생산력 1 감소. 에너지 생산력 2 증가.",
+    "Requires 6% oxygen. Decrease any Plant production 1 step and increase your energy production 2 steps.": "조건: 산소 농도 6% 이상.) (아무 1명의 식물 생산력 1 감소. 에너지 생산력 2 증가.",
 
     "Livestock": "가축",
     "Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps": "조건: 산소 농도 9% 이상.) (식물 생산력 1 감소. 메가크레딧 생산력 2 M€ 증가.",
@@ -606,7 +606,7 @@
     "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "해양 타일 1장 배치. 이 해양 타일과 인접한 다른 타일이 있다면, 그 소유주 중 1명에게서 4 M€까지 제거.",
 
     "Energy Saving": "에너지 절약",
-    "Increase your Energy production 1 step for each City tile in play.": "현재 배치된 아무 도시 타일 1장당 자신의 에너지 생산력 1 증가.",
+    "Increase your energy production 1 step for each City tile in play.": "현재 배치된 아무 도시 타일 1장당 자신의 에너지 생산력 1 증가.",
 
     "Local Heat Trapping": "국소적 축열",
     "Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.": "열 자원 5개 제거. 식물 자원 4개 획득 또는 자신의 다른 카드 1장에 동물 자원 2개 추가.",
@@ -618,7 +618,7 @@
     "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": "프로젝트 덱 최상단 카드 3장 확인 후 1장 획득하고 2장 버림.",
 
     "Plantation": "산림조성지",
-    "Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.": "조건: 보유한 과학 태그 2장 이상.) (녹지 타일 1장 배치. 그에 따른 산소 농도 1% 상승.",
+    "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "조건: 보유한 과학 태그 2장 이상.) (녹지 타일 1장 배치. 그에 따른 산소 농도 1% 상승.",
 
     "Power Infrastructure": "전력 공급 인프라",
     "Action: Spend any amount of energy and gain that amount of M€.": "행동: 원하는 수만큼 에너지 자원을 소비해서 같은 수만큼 메가크레딧 획득.",
@@ -642,10 +642,10 @@
 
     "Immigrant City": "이민자 도시",
     "Effect: When a City tile is placed, including this, increase your M€ production 1 step.": "지속효과: 이 카드도 포함해서 아무 도시타일이 1장 놓일 때, 메가크레딧 생산력 1 증가.",
-    "Decrease your Energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "도시 타일 1장 배치. 에너지 생산력 1 감소. 메가크레딧 생산력 2 감소.",
+    "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "도시 타일 1장 배치. 에너지 생산력 1 감소. 메가크레딧 생산력 2 감소.",
 
     "Energy Tapping": "전기 도둑질",
-    "Decrease any Energy production 1 step and increase your own 1 step.": "아무 1명의 에너지 생산력 1 감소. 자신의 에너지 생산력 1 증가.",
+    "Decrease any energy production 1 step and increase your own 1 step.": "아무 1명의 에너지 생산력 1 감소. 자신의 에너지 생산력 1 증가.",
 
     "Underground Detonations": "지하 핵폭발",
     "Action: Spend 10M€ to increase your heat production 2 steps.": "행동: 10 M€ 소비해서 열 생산력 2 증가.",
@@ -657,7 +657,7 @@
     "Draw two cards.": "카드 2장 획득.",
 
     "Rad-Chem Factory": "방사선흡수화합물 공장",
-    "Decrease your Energy production 1 step. Raise your TR 2 steps.": "에너지 생산력 1 감소. 테라포밍 등급 2TR 상승.",
+    "Decrease your energy production 1 step. Raise your TR 2 steps.": "에너지 생산력 1 감소. 테라포밍 등급 2TR 상승.",
 
     "Special Design": "특수 설계",
     "The next card you play this generation is +2 or -2 steps in global requirements, your choice.": "이번 세대에, 자신이 사용하는 다음번 카드의 추진 조건 중 행성 지표에는 +/- 2단계 중 원하는 것을 적용.",
@@ -667,5 +667,5 @@
 
     "AI Central": "중앙 인공지능 센터",
     "Action: Draw 2 cards.": "행동: 카드 2장 획득.",
-    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "조건: 보유한 과학 태그 3개 이상.) (에너지 생산력 1 감소."
+    "Requires 3 Science tags to play. Decrease your energy production 1 step.": "조건: 보유한 과학 태그 3개 이상.) (에너지 생산력 1 감소."
 }

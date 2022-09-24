@@ -22,7 +22,7 @@ export class LunaEcumenopolis extends Card {
       reserveUnits: {titanium: 2},
 
       metadata: {
-        description: 'Spend 2 Titanium. ' +
+        description: 'Spend 2 titanium. ' +
         'Place 2 colony tiles adjacent to at least 2 other colony tiles and raise Colony rate 2 steps. ' +
         'Increase your TR 1 step for each 2 steps of the colony rate.',
         cardNumber: 'M84',

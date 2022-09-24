@@ -25,7 +25,7 @@ export class WarpDrive extends Card implements IProjectCard {
             eb.space({played}).startEffect.megacredits(-4);
           });
         }),
-        description: 'Requires 5 Science tags.',
+        description: 'Requires 5 science tags.',
       },
     });
   }

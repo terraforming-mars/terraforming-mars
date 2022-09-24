@@ -596,7 +596,7 @@
   {
     "module": "turmoil",
     "name": "Spin-Off Products",
-    "description": "Gain 2 M€ for each Science tag (max 5) and influence.",
+    "description": "Gain 2 M€ for each science tag (max 5) and influence.",
     "revealedDelegate": "Greens",
     "currentDelegate": "Scientists",
     "renderData": {

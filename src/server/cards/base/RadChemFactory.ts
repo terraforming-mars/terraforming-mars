@@ -24,7 +24,7 @@ export class RadChemFactory extends Card implements IProjectCard {
           b.production((pb) => pb.minus().energy(1)).br;
           b.tr(2);
         }),
-        description: 'Decrease your Energy production 1 step. Raise your TR 2 steps.',
+        description: 'Decrease your energy production 1 step. Raise your TR 2 steps.',
       },
     });
   }

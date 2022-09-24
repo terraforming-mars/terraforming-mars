@@ -23,11 +23,11 @@ export class DeuteriumExport extends Card implements IActionCard {
       metadata: {
         cardNumber: '221',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Floater to this card.', (eb) => {
+          b.action('Add 1 floater to this card.', (eb) => {
             eb.empty().startAction.floaters(1);
           }).br;
           b.or(Size.SMALL).br;
-          b.action('Spend 1 Floater here to increase your energy production 1 step.', (be) => {
+          b.action('Spend 1 floater here to increase your energy production 1 step.', (be) => {
             be.floaters(1).startAction.production((pb) => pb.energy(1));
           });
         }),

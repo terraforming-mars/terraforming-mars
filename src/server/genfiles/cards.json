@@ -729,7 +729,7 @@
     "cost": 14,
     "cardType": "event",
     "metadata": {
-      "description": "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.",
+      "description": "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.",
       "cardNumber": "009",
       "renderData": {
         "rows": [
@@ -851,7 +851,7 @@
     },
     "metadata": {
       "cardNumber": "058",
-      "description": "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each",
+      "description": "Requires a Jovian tag. Increase your heat production and energy production 3 steps each",
       "renderData": {
         "rows": [
           [
@@ -903,7 +903,7 @@
     "cost": 27,
     "cardType": "event",
     "metadata": {
-      "description": "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.",
+      "description": "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.",
       "cardNumber": "011",
       "renderData": {
         "rows": [
@@ -976,7 +976,7 @@
       ]
     },
     "metadata": {
-      "description": "Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.",
+      "description": "Requires 6% oxygen. Decrease any Plant production 1 step and increase your energy production 2 steps.",
       "cardNumber": "183",
       "renderData": {
         "rows": [
@@ -1334,7 +1334,7 @@
     "metadata": {
       "cardNumber": "008",
       "description": {
-        "text": "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.",
+        "text": "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.",
         "align": "left"
       },
       "renderData": {
@@ -1442,7 +1442,7 @@
     "cardType": "automated",
     "metadata": {
       "cardNumber": "043",
-      "description": "Decrease your Energy production 1 step and increase your heat production 3 steps.",
+      "description": "Decrease your energy production 1 step and increase your heat production 3 steps.",
       "renderData": {
         "rows": [
           [
@@ -1624,7 +1624,7 @@
     "cardType": "event",
     "metadata": {
       "cardNumber": "010",
-      "description": "Raise temperature 1 step and place an ocean tile. Remove up to 3 Plants from any player.",
+      "description": "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.",
       "renderData": {
         "rows": [
           [
@@ -1737,7 +1737,7 @@
     },
     "metadata": {
       "cardNumber": "029",
-      "description": "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.",
+      "description": "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.",
       "renderData": {
         "rows": [
           [
@@ -1957,7 +1957,7 @@
     "cardType": "automated",
     "metadata": {
       "cardNumber": "003",
-      "description": "Increase your Energy production 1 step. Increase temperature 1 step.",
+      "description": "Increase your energy production 1 step. Increase temperature 1 step.",
       "renderData": {
         "rows": [
           [
@@ -2007,7 +2007,7 @@
     "cardType": "event",
     "metadata": {
       "cardNumber": "039",
-      "description": "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.",
+      "description": "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.",
       "renderData": {
         "rows": [
           [
@@ -2136,7 +2136,7 @@
     "metadata": {
       "cardNumber": "T03",
       "description": {
-        "text": "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.",
+        "text": "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.",
         "align": "left"
       },
       "renderData": {
@@ -2395,7 +2395,7 @@
     "cardType": "automated",
     "metadata": {
       "cardNumber": "189",
-      "description": "Increase your Energy production 1 step for each City tile in play.",
+      "description": "Increase your energy production 1 step for each City tile in play.",
       "renderData": {
         "rows": [
           [
@@ -2571,7 +2571,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Decrease your Energy production 1 step to increase your terraform rating 1 step."
+                  "Action: Decrease your energy production 1 step to increase your terraform rating 1 step."
                 ]
               ],
               "is": "effect"
@@ -3094,7 +3094,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 Power tags. Increase your Energy production 3 steps."
+      "description": "Requires 2 Power tags. Increase your energy production 3 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -3162,7 +3162,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your M€ production 1 step and increase your Energy production 1 steps."
+      "description": "Decrease your M€ production 1 step and increase your energy production 1 steps."
     },
     "productionBox": {
       "megacredits": -1,
@@ -3348,7 +3348,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step and increase your heat production 4 steps."
+      "description": "Decrease your energy production 1 step and increase your heat production 4 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -3683,7 +3683,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 4 ocean tiles. Increase your Energy production 2 steps.",
+      "description": "Requires 4 ocean tiles. Increase your energy production 2 steps.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -3863,7 +3863,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease any heat production 2 steps and increase your Energy production 1 step.",
+      "description": "Decrease any heat production 2 steps and increase your energy production 1 step.",
       "victoryPoints": -1
     },
     "productionBox": {
@@ -4193,7 +4193,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step and decrease your M€ production 2 steps. Place a City tile."
+      "description": "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a City tile."
     },
     "productionBox": {
       "megacredits": -2,
@@ -4583,7 +4583,7 @@
         ],
         "is": "root"
       },
-      "description": "Increase your Energy production and your steel production 1 step each."
+      "description": "Increase your energy production and your steel production 1 step each."
     },
     "productionBox": {
       "megacredits": 0,
@@ -4998,7 +4998,7 @@
         ],
         "is": "root"
       },
-      "description": "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.",
+      "description": "Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 Animals to ANOTHER card.",
       "victoryPoints": 2
     },
     "productionBox": {
@@ -5407,7 +5407,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each."
+      "description": "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each."
     },
     "productionBox": {
       "megacredits": 0,
@@ -5478,7 +5478,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step."
+      "description": "Decrease your energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step."
     },
     "productionBox": {
       "megacredits": 0,
@@ -5552,7 +5552,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps."
+      "description": "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -6507,7 +6507,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions."
+      "description": "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions."
     },
     "productionBox": {
       "megacredits": 3,
@@ -6647,7 +6647,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your M€ production 2 steps and increase your Energy production 3 steps."
+      "description": "Decrease your M€ production 2 steps and increase your energy production 3 steps."
     },
     "productionBox": {
       "megacredits": -2,
@@ -6788,7 +6788,7 @@
         "is": "root"
       },
       "description": {
-        "text": "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.",
+        "text": "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 4 steps.",
         "align": "left"
       },
       "victoryPoints": 1
@@ -7050,7 +7050,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your M€ production 1 step and increase your Energy production 2 steps."
+      "description": "Decrease your M€ production 1 step and increase your energy production 2 steps."
     },
     "productionBox": {
       "megacredits": -1,
@@ -7286,7 +7286,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step."
+      "description": "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step."
     },
     "productionBox": {
       "megacredits": 0,
@@ -7343,7 +7343,7 @@
         ],
         "is": "root"
       },
-      "description": "Increase your Energy production step for each Power tag you have, including this."
+      "description": "Increase your energy production step for each Power tag you have, including this."
     },
     "productionBox": {
       "megacredits": 0,
@@ -7387,7 +7387,7 @@
         ],
         "is": "root"
       },
-      "description": "Increase your Energy production 1 step."
+      "description": "Increase your energy production 1 step."
     },
     "productionBox": {
       "megacredits": 0,
@@ -7617,7 +7617,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step. Raise your TR 2 steps."
+      "description": "Decrease your energy production 1 step. Raise your TR 2 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -8159,7 +8159,7 @@
         "is": "root"
       },
       "description": {
-        "text": "Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.",
+        "text": "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.",
         "align": "left"
       },
       "victoryPoints": 1
@@ -8355,7 +8355,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step and increase your Plant production 1 step.",
+      "description": "Decrease your energy production 1 step and increase your Plant production 1 step.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -8775,7 +8775,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps."
+      "description": "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -8941,7 +8941,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 Science tags. Increase your Energy production 3 steps.",
+      "description": "Requires 2 science tags. Increase your energy production 3 steps.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -9207,7 +9207,7 @@
         ],
         "is": "root"
       },
-      "description": "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps."
+      "description": "Place a City tile. Decrease your energy production 2 steps and increase your steel production 2 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -9359,7 +9359,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES."
+      "description": "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES."
     },
     "productionBox": {
       "megacredits": 2,
@@ -9655,7 +9655,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 7% oxygen. Increase your Energy production 1 step.",
+      "description": "Requires 7% oxygen. Increase your energy production 1 step.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -11077,7 +11077,7 @@
                     "size": "M",
                     "secondaryTag": "oxygen"
                   },
-                  "Spend 8 Plants to place a greenery tile and raise oxygen 1 step."
+                  "Spend 8 plants to place a greenery tile and raise oxygen 1 step."
                 ]
               ],
               "is": "effect"
@@ -11344,7 +11344,7 @@
                     ],
                     "is": "production-box"
                   },
-                  "Spend 11 M€ to increase your Energy production 1 step."
+                  "Spend 11 M€ to increase your energy production 1 step."
                 ]
               ],
               "is": "effect"
@@ -11802,7 +11802,7 @@
     },
     "metadata": {
       "description": {
-        "text": "Requires 3 Science tags to play. Decrease your Energy production 1 step.",
+        "text": "Requires 3 science tags to play. Decrease your energy production 1 step.",
         "align": "left"
       },
       "cardNumber": "208",
@@ -12083,7 +12083,7 @@
     "cardType": "automated",
     "metadata": {
       "cardNumber": "065",
-      "description": "Decrease your Energy production 1 step and increase your steel production 2 steps.",
+      "description": "Decrease your energy production 1 step and increase your steel production 2 steps.",
       "renderData": {
         "rows": [
           [
@@ -12608,7 +12608,7 @@
     "cardType": "automated",
     "metadata": {
       "cardNumber": "182",
-      "description": "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile.",
+      "description": "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile.",
       "renderData": {
         "rows": [
           [
@@ -13007,7 +13007,7 @@
     "cardType": "automated",
     "metadata": {
       "cardNumber": "201",
-      "description": "Decrease any Energy production 1 step and increase your own 1 step.",
+      "description": "Decrease any energy production 1 step and increase your own 1 step.",
       "renderData": {
         "rows": [
           [
@@ -13125,7 +13125,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step and increase your titanium and your M€ production 1 step each."
+      "description": "Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each."
     },
     "productionBox": {
       "megacredits": 1,
@@ -13589,7 +13589,7 @@
       ]
     },
     "metadata": {
-      "description": "Requires that you have 5 Science tags.",
+      "description": "Requires that you have 5 science tags.",
       "cardNumber": "027",
       "victoryPoints": 4
     },
@@ -13988,7 +13988,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 3 Science tags. Increase your Energy production and your M€ production one step each.",
+      "description": "Requires 3 science tags. Increase your energy production and your M€ production one step each.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -14069,7 +14069,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card."
+                  "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card."
                 ]
               ],
               "is": "effect"
@@ -14664,7 +14664,7 @@
         ],
         "is": "root"
       },
-      "description": "When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.",
+      "description": "When you play a science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -14911,7 +14911,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step."
+      "description": "Requires 2 Power tags. Decrease any energy production 1 step and increase your own 1 step."
     },
     "productionBox": {
       "megacredits": 0,
@@ -16463,7 +16463,7 @@
         ],
         "is": "root"
       },
-      "description": "Remove up to 2 Animals or 5 Plants from any player."
+      "description": "Remove up to 2 Animals or 5 plants from any player."
     },
     "productionBox": {
       "megacredits": 0,
@@ -16894,7 +16894,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 Science tags."
+      "description": "Requires 2 science tags."
     },
     "productionBox": {
       "megacredits": 0,
@@ -17039,7 +17039,7 @@
     },
     "metadata": {
       "cardNumber": "X01",
-      "description": "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.",
+      "description": "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.",
       "renderData": {
         "rows": [
           [
@@ -17176,7 +17176,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 Science tags."
+      "description": "Requires 2 science tags."
     },
     "productionBox": {
       "megacredits": 0,
@@ -17379,7 +17379,7 @@
                     "cancelled": false,
                     "isPlayed": true
                   },
-                  "Action: Gain 1 M€ per Science tag you have."
+                  "Action: Gain 1 M€ per science tag you have."
                 ]
               ],
               "is": "effect"
@@ -19398,7 +19398,7 @@
     "cardType": "event",
     "metadata": {
       "cardNumber": "X31",
-      "description": "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.",
+      "description": "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.",
       "renderData": {
         "rows": [
           [
@@ -19524,7 +19524,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.",
+      "description": "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -19612,7 +19612,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps."
+      "description": "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -21445,7 +21445,7 @@
     },
     "metadata": {
       "cardNumber": "214",
-      "description": "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.",
+      "description": "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.",
       "renderData": {
         "rows": [
           [
@@ -21500,7 +21500,7 @@
     "cardType": "event",
     "metadata": {
       "cardNumber": "215",
-      "description": "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.",
+      "description": "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.",
       "renderData": {
         "rows": [
           [
@@ -21607,7 +21607,7 @@
     },
     "metadata": {
       "cardNumber": "217",
-      "description": "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.",
+      "description": "Requires 3 science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.",
       "renderData": {
         "rows": [
           [
@@ -21805,7 +21805,7 @@
     },
     "metadata": {
       "cardNumber": "220",
-      "description": "Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.",
+      "description": "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.",
       "renderData": {
         "rows": [
           [
@@ -21921,7 +21921,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Add 1 Floater to this card."
+                  "Action: Add 1 floater to this card."
                 ]
               ],
               "is": "effect"
@@ -21970,7 +21970,7 @@
                     ],
                     "is": "production-box"
                   },
-                  "Action: Spend 1 Floater here to increase your energy production 1 step."
+                  "Action: Spend 1 floater here to increase your energy production 1 step."
                 ]
               ],
               "is": "effect"
@@ -22036,7 +22036,7 @@
                     "isIcon": false,
                     "is": "symbol"
                   },
-                  "Action: Add 1 Floater to ANY card"
+                  "Action: Add 1 floater to ANY card"
                 ]
               ],
               "is": "effect"
@@ -22087,7 +22087,7 @@
                     "amountInside": true,
                     "size": "M"
                   },
-                  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each."
+                  "Effect: When playing a Venus tag, floaters here may be used as payment, and are worth 3M€ each."
                 ]
               ],
               "is": "effect"
@@ -22118,7 +22118,7 @@
     "cardType": "active",
     "metadata": {
       "cardNumber": "223",
-      "description": "Add 3 Floaters to this card",
+      "description": "Add 3 floaters to this card",
       "renderData": {
         "rows": [
           [
@@ -22148,7 +22148,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Add 1 Floater to this card."
+                  "Action: Add 1 floater to this card."
                 ]
               ],
               "is": "effect"
@@ -22188,7 +22188,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Remove 2 Floaters here to raise Venus 1 step."
+                  "Action: Remove 2 floaters here to raise Venus 1 step."
                 ]
               ],
               "is": "effect"
@@ -22245,7 +22245,7 @@
     },
     "metadata": {
       "cardNumber": "224",
-      "description": "Requires 2 Science tags.",
+      "description": "Requires 2 science tags.",
       "renderData": {
         "rows": [
           [
@@ -22393,7 +22393,7 @@
                     "isIcon": false,
                     "is": "symbol"
                   },
-                  "Action: Spend 2 M€ to add 1 Floater to ANY card"
+                  "Action: Spend 2 M€ to add 1 floater to ANY card"
                 ]
               ],
               "is": "effect"
@@ -22406,7 +22406,7 @@
               "is": "item",
               "multiplier": false,
               "cancelled": false,
-              "text": "1 VP for every 2nd Floater on this card.",
+              "text": "1 VP for every 2nd floater on this card.",
               "size": "XS",
               "isUppercase": true,
               "isBold": true
@@ -22415,7 +22415,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 Science tags.",
+      "description": "Requires 2 science tags.",
       "victoryPoints": {
         "item": {
           "type": "floaters",
@@ -22484,7 +22484,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Spend 2 M€ to add 1 Floater to THIS card."
+                  "Action: Spend 2 M€ to add 1 floater to THIS card."
                 ]
               ],
               "is": "effect"
@@ -22526,7 +22526,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Spend 2 Floaters here to increase Venus 1 step."
+                  "Action: Spend 2 floaters here to increase Venus 1 step."
                 ]
               ],
               "is": "effect"
@@ -22924,7 +22924,7 @@
         ],
         "is": "root"
       },
-      "description": "Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have."
+      "description": "Raise Venus 1 step. Add 1 floater to A Venus CARD for each Jovian tag you have."
     },
     "productionBox": {
       "megacredits": 0,
@@ -23100,7 +23100,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Spend 1 titanium to add 2 Floaters here"
+                  "Action: Spend 1 titanium to add 2 floaters here"
                 ]
               ],
               "is": "effect"
@@ -23142,7 +23142,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Spend 2 Floaters here to raise Venus 1 step"
+                  "Action: Spend 2 floaters here to raise Venus 1 step"
                 ]
               ],
               "is": "effect"
@@ -23282,7 +23282,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Add 1 Floater to this card."
+                  "Action: Add 1 floater to this card."
                 ]
               ],
               "is": "effect"
@@ -23334,7 +23334,7 @@
                     ],
                     "is": "production-box"
                   },
-                  "Action: Spend 1 Floater here to raise your M€ production 1 step."
+                  "Action: Spend 1 floater here to raise your M€ production 1 step."
                 ]
               ],
               "is": "effect"
@@ -23974,7 +23974,7 @@
               "is": "item",
               "multiplier": false,
               "cancelled": false,
-              "text": "1 VP for every 3rd Floater on this card.",
+              "text": "1 VP for every 3rd floater on this card.",
               "size": "XS",
               "isUppercase": true,
               "isBold": true
@@ -24105,7 +24105,7 @@
         "is": "root"
       },
       "description": {
-        "text": "Requires Venus 12% and that you spend 1 Floater from any card.",
+        "text": "Requires Venus 12% and that you spend 1 floater from any card.",
         "align": "left"
       },
       "victoryPoints": {
@@ -24618,7 +24618,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Effect: When you play a Science tag, including this, add 1 Animal to this card."
+                  "Effect: When you play a science tag, including this, add 1 Animal to this card."
                 ]
               ],
               "is": "effect"
@@ -24915,7 +24915,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Decrease your Energy production 1 step to raise Venus 1 step."
+                  "Action: Decrease your energy production 1 step to raise Venus 1 step."
                 ]
               ],
               "is": "effect"
@@ -27476,7 +27476,7 @@
         "is": "root"
       },
       "description": {
-        "text": "Requires 3 Science tags.",
+        "text": "Requires 3 science tags.",
         "align": "left"
       },
       "victoryPoints": 1
@@ -28237,7 +28237,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.",
+      "description": "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -28347,7 +28347,7 @@
         "is": "root"
       },
       "description": {
-        "text": "Requires 3 Science tags. Draw 2 cards.",
+        "text": "Requires 3 science tags. Draw 2 cards.",
         "align": "left"
       },
       "victoryPoints": 2
@@ -28859,7 +28859,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet."
+      "description": "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet."
     },
     "productionBox": {
       "megacredits": 4,
@@ -29819,7 +29819,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 5 Science tags.",
+      "description": "Requires 5 science tags.",
       "victoryPoints": 2
     },
     "productionBox": {
@@ -30803,7 +30803,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities."
+      "description": "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities."
     },
     "productionBox": {
       "megacredits": 2,
@@ -31338,7 +31338,7 @@
                           "amountInside": true,
                           "size": "M"
                         },
-                        "Effect: When you play a Science tag, you pay 2M€ less for it."
+                        "Effect: When you play a science tag, you pay 2M€ less for it."
                       ]
                     ],
                     "is": "effect"
@@ -35519,7 +35519,7 @@
     "cardType": "corporation",
     "metadata": {
       "cardNumber": "R40",
-      "description": "You start with 38 M€ and 1 Energy production.",
+      "description": "You start with 38 M€ and 1 energy production.",
       "renderData": {
         "rows": [
           [],
@@ -37918,7 +37918,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean."
+      "description": "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean."
     },
     "productionBox": {
       "megacredits": 3,
@@ -44062,7 +44062,7 @@
     "cost": 28,
     "cardType": "automated",
     "metadata": {
-      "description": "Spend 2 Titanium. Place a mine tile on the Moon and raise the Mining Rate 1 step. Increase your Steel, Titanium, and Heat production 1 step each. Increase your Energy production 2 steps.",
+      "description": "Spend 2 titanium. Place a mine tile on the Moon and raise the Mining Rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.",
       "cardNumber": "M74",
       "renderData": {
         "rows": [
@@ -44745,7 +44745,7 @@
     "cost": 35,
     "cardType": "automated",
     "metadata": {
-      "description": "Spend 2 Titanium. Place 2 colony tiles adjacent to at least 2 other colony tiles and raise Colony rate 2 steps. Increase your TR 1 step for each 2 steps of the colony rate.",
+      "description": "Spend 2 titanium. Place 2 colony tiles adjacent to at least 2 other colony tiles and raise Colony rate 2 steps. Increase your TR 1 step for each 2 steps of the colony rate.",
       "cardNumber": "M84",
       "renderData": {
         "rows": [
@@ -44957,7 +44957,7 @@
                     "isIcon": false,
                     "is": "symbol"
                   },
-                  "Action: Spend 1 Steel to add 2 Data resources to ANY card."
+                  "Action: Spend 1 Steel to add 2 data resources to ANY card."
                 ]
               ],
               "is": "effect"
@@ -46068,7 +46068,7 @@
     "cost": 0,
     "cardType": "corporation",
     "metadata": {
-      "description": "You start with 40 M€, 2 steel, and 2 Titanium.",
+      "description": "You start with 40 M€, 2 steel, and 2 titanium.",
       "cardNumber": "",
       "renderData": {
         "rows": [
@@ -49540,7 +49540,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 1 Science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.",
+      "description": "Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -52302,7 +52302,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 4 Science tags."
+      "description": "Requires 4 science tags."
     },
     "productionBox": {
       "megacredits": 0,
@@ -55545,7 +55545,7 @@
                           "cancelled": false,
                           "isPlayed": true
                         },
-                        "Effect: Mars tags also count as Science tags."
+                        "Effect: Mars tags also count as science tags."
                       ]
                     ],
                     "is": "effect"

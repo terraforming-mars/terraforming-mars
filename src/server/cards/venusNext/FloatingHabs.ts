@@ -26,12 +26,12 @@ export class FloatingHabs extends Card implements IActionCard {
       metadata: {
         cardNumber: '225',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 2 M€ to add 1 Floater to ANY card', (eb) => {
+          b.action('Spend 2 M€ to add 1 floater to ANY card', (eb) => {
             eb.megacredits(2).startAction.floaters(1).asterix();
           }).br;
-          b.vpText('1 VP for every 2nd Floater on this card.');
+          b.vpText('1 VP for every 2nd floater on this card.');
         }),
-        description: 'Requires 2 Science tags.',
+        description: 'Requires 2 science tags.',
       },
     });
   }

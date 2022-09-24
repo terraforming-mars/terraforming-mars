@@ -24,7 +24,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
       metadata: {
         description: {
-          text: 'Requires 3 Science tags to play. Decrease your Energy production 1 step.',
+          text: 'Requires 3 science tags to play. Decrease your energy production 1 step.',
           align: 'left',
         },
         cardNumber: '208',

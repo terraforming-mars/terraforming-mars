@@ -7,7 +7,7 @@
     "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "Необходимо производство титана 1 или выше. Снизьте у любого игрока производство титана на 1 и повысьте своё производство титана на 1.",
 
     "Deep Well Heating": "Тепло глубин",
-    "Increase your Energy production 1 step. Increase temperature 1 step.": "Повысьте своё производство энергии на 1. Повысьте температуру на 1.",
+    "Increase your energy production 1 step. Increase temperature 1 step.": "Повысьте своё производство энергии на 1. Повысьте температуру на 1.",
     "Titanium production": "Производство титана",
 
     "Cloud Seeding": "Засев облаков",
@@ -30,17 +30,17 @@
     "4 Oceans": "4 Океана",
     "5 Oceans": "5 Океанов",
     "6 Oceans": "6 Океанов",
-    "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.": "Необходимо 4 тайла океана. Постройте этот особый тайл города. Снизьте своё производство энергии на 2 и повысьте свой доход на 5.",
+    "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Необходимо 4 тайла океана. Постройте этот особый тайл города. Снизьте своё производство энергии на 2 и повысьте свой доход на 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "Дополнительно принесёт 1 ПО за каждый тайл океана, соседний с этим городом.",
 
     "Asteroid": "Астероид",
-    "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "Повысьте температуру на 1 и получите 2 титана. Удалите до 3 растений у любого игрока.",
+    "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Повысьте температуру на 1 и получите 2 титана. Удалите до 3 растений у любого игрока.",
 
     "Comet": "Комета",
-    "Raise temperature 1 step and place an ocean tile. Remove up to 3 Plants from any player.": "Повысьте температуру на 1 и выложите тайл океана. Удалите до 3 растений у любого игрока.",
+    "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.": "Повысьте температуру на 1 и выложите тайл океана. Удалите до 3 растений у любого игрока.",
 
     "Big Asteroid": "Большой астероид",
-    "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "Повысьте температуру на 2 и получите 4 титана. Удалите до 4 растений у любого игрока.",
+    "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Повысьте температуру на 2 и получите 4 титана. Удалите до 4 растений у любого игрока.",
 
     "Water Import from Europa": "Импорт воды с Европы",
     "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Действие: заплатите 12 M€, чтоб выложить тайл океана. Можно использовать титан для оплаты, как при игре карты с символом космоса.",
@@ -54,13 +54,13 @@
     "Action: Spend 1 Energy to draw a card.": "Действие: потратьте 1 энергию, чтобы взять 1 карту.",
 
     "Equatorial Magnetizer": "Искусственное магнитное поле",
-    "Action: Decrease your Energy production 1 step to increase your terraform rating 1 step.": "Действие: снизьте своё производство энергии на 1, чтобы повысить свой рейтинг на 1.",
+    "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "Действие: снизьте своё производство энергии на 1, чтобы повысить свой рейтинг на 1.",
 
     "Domed Crater": "Город под куполом",
-    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.": "Уровень кислорода должен быть не больше 7%. Получите 3 растения и постройте город. Производство энергии: -1; Доход: +3",
+    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Уровень кислорода должен быть не больше 7%. Получите 3 растения и постройте город. Производство энергии: -1; Доход: +3",
 
     "Noctis City": "Ноктис-Сити",
-    "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Снизьте своё производство энергии на 1 и повысьте свой доход на 3. Постройте город на зарезервированном участке, независимо от стандартных требований к строительству города.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Снизьте своё производство энергии на 1 и повысьте свой доход на 3. Постройте город на зарезервированном участке, независимо от стандартных требований к строительству города.",
 
     "Methane From Titan": "Метан с Титана",
     "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.": "Уровень кислорода должен быть 2%. Повысьте своё производство тепла на 2 и производство растений на 2.",
@@ -100,16 +100,16 @@
     "1 VP for each fighter resource on this card.": "1 ПО за каждый жетон истребителя на этой карте.",
 
     "Cupola City": "Город под куполом",
-    "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.": "Уровень кислорода должен быть 9% или ниже. Постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 3.",
+    "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Уровень кислорода должен быть 9% или ниже. Постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 3.",
 
     "Lunar Beam": "Луч с Луны",
-    "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Снизьте свой доход на 2 и повысьте своё производство тепла и производство энергии на 2.",
+    "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Снизьте свой доход на 2 и повысьте своё производство тепла и производство энергии на 2.",
 
     "Optimal Aerobraking": "Аэроторможение",
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Свойство: когда вы играете карту события с символом космоса, вы получаете 3 M€ и 3 тепла.",
 
     "Underground City": "Подземный город",
-    "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Постройте город. Снизьте своё производство энергии на 2 и повысьте своё производство стали на 2.",
+    "Place a City tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Постройте город. Снизьте своё производство энергии на 2 и повысьте своё производство стали на 2.",
 
     "Regolith Eaters": "Поедатели реголита",
     "Action: Remove 2 Microbes from this card to raise oxygen level 1 step.": "Действие: положите жетон бактерий на эту карту или сбросьте 2 жетона бактерий с этой карты, чтобы повысить уровень кислорода на 1.",
@@ -132,7 +132,7 @@
     "Effect: When any City tile is placed, gain 2 M€.": "Свойство: когда любой игрок строит город, вы получаете 2 M€.",
 
     "Deimos Down": "Падение Деймоса",
-    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.": "Повысьте температуру на 3 и получите 4 стали. Удалите до 8 растений у любого игрока.",
+    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Повысьте температуру на 3 и получите 4 стали. Удалите до 8 растений у любого игрока.",
 
     "Asteroid Mining": "Разработка астероидов",
     "Increase your titanium production 2 steps.": "Повысьте своё производство титана на 2.",
@@ -144,16 +144,16 @@
     "It must be -18 C or colder. Increase your Plant production 1 step.": "Температура должна быть -18 градусов или ниже. Повысьте своё производство растений на 1.",
 
     "Carbonate Processing": "Производство карбонатов",
-    "Decrease your Energy production 1 step and increase your heat production 3 steps.": "Снизьте своё производство энергии на 1 и повысьте своё производство тепла на 3.",
+    "Decrease your energy production 1 step and increase your heat production 3 steps.": "Снизьте своё производство энергии на 1 и повысьте своё производство тепла на 3.",
 
     "Natural Preserve": "Природный заповедник",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.": "Уровень кислорода должен быть 4% или ниже. Выложите этот тайл так, чтобы он не был соседним ни с каким другим тайлом. Повысьте свой доход на 1.",
 
     "Nuclear Power": "Ядерная энергия",
-    "Decrease your M€ production 2 steps and increase your Energy production 3 steps.": "Снизьте свой доход на 2 и повысьте своё производство энергии на 3.",
+    "Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Снизьте свой доход на 2 и повысьте своё производство энергии на 3.",
 
     "Lightning Harvest": "Грозовая энергетика",
-    "Requires 3 Science tags. Increase your Energy production and your M€ production one step each.": "Необходимо 3 символа науки. Повысьте своё производство энергии и свой доход на 1",
+    "Requires 3 Science tags. Increase your energy production and your M€ production one step each.": "Необходимо 3 символа науки. Повысьте своё производство энергии и свой доход на 1",
 
     "Algae": "Водоросли",
     "Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.": "Необходимо 5 тайлов океана. Получите 1 растение и повысьте своё производство растений на 2.",
@@ -166,7 +166,7 @@
     "1 VP per 4 Microbes on this card.": "1 ПО за каждые 4 жетона бактерий на этой карте.",
 
     "Virus": "Вирус",
-    "Remove up to 2 Animals or 5 Plants from any player.": "Удалите до 2 жетонов животных или до 5 растений у любого игрока.",
+    "Remove up to 2 Animals or 5 plants from any player.": "Удалите до 2 жетонов животных или до 5 растений у любого игрока.",
 
     "Miranda Resort": "Курорт на Миранде",
     "Increase your M€ production 1 step for each Earth tag you have.": "Повысьте свой доход на 1 за каждый имеющийся у вас символ Земли.",
@@ -193,7 +193,7 @@
     "Vesta Shipyard": "Верфь на Весте",
 
     "Beam From A Thorium Asteroid": "Луч с ториевого астероида",
-    "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each": "Необходим символ Юпитера. Повысьте своё производство тепла и своё производство энергии на 3.",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each": "Необходим символ Юпитера. Повысьте своё производство тепла и своё производство энергии на 3.",
 
     "Mangrove": "Мангровые леса",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Температура должна быть +4 градуса или выше. Проведите озеленение на зарезервированном для океана участке, игнорируя правила проведения озеленения, и повысьте уровень кислорода на 1.",
@@ -215,7 +215,7 @@
     "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "Выложите этот тайл на участок, где титан или сталь являются бонусом за размещение тайла. Этот тайл должен быть соседним с любым другим вашим тайлом. Повысьте своё производство стали или титана на 1.",
 
     "Building Industries": "Строительство промышленности",
-    "Decrease your Energy production 1 step and increase your steel production 2 steps.": "Снизьте своё производство энергии на 1 и повысьте своё производство стали на 2.",
+    "Decrease your energy production 1 step and increase your steel production 2 steps.": "Снизьте своё производство энергии на 1 и повысьте своё производство стали на 2.",
 
     "Land Claim": "Застолбить территорию",
     "Place your marker on a non-reserved area. Only you may place a tile there.": "Выложите свой маркер на любой свободный участок. Только вы можете выложить тайл на этот участок.",
@@ -292,7 +292,7 @@
     "Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.": "Температура должна быть -14 градусов или выше. Повысьте своё производство растений на 1 и получите 1 растение.",
 
     "Peroxide Power": "Пероксидная энергия",
-    "Decrease your M€ production 1 step and increase your Energy production 2 steps.": "Снизьте свой доход на 1 и повысьте своё производство энергии на 2.",
+    "Decrease your M€ production 1 step and increase your energy production 2 steps.": "Снизьте свой доход на 1 и повысьте своё производство энергии на 2.",
 
     "Research": "Исследование",
     "Counts as playing 2 science cards. Draw 2 cards.": "Считается за 2 символа науки. Возьмите 2 карты.",
@@ -326,13 +326,13 @@
     "Increase your M€ production 1 step for each space tag your OPPONENTS have.": "Повысьте свой доход на 1 за каждый символ космоса у ваших противников.",
 
     "Fueled Generators": "Топливные генераторы",
-    "Decrease your M€ production 1 step and increase your Energy production 1 steps.": "Снизьте свой доход на 1 и повысьте производство энергии на 1.",
+    "Decrease your M€ production 1 step and increase your energy production 1 steps.": "Снизьте свой доход на 1 и повысьте производство энергии на 1.",
 
     "Ironworks": "Металлургический завод",
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 1 сталь и повысить уровень кислорода на 1.",
 
     "Power Grid": "Энергосеть",
-    "Increase your Energy production step for each Power tag you have, including this.": "Повысьте своё производство энергии на 1 за каждый ваш символ энергии, включая этот.",
+    "Increase your energy production step for each Power tag you have, including this.": "Повысьте своё производство энергии на 1 за каждый ваш символ энергии, включая этот.",
 
     "Steelworks": "Сталелитейный завод",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 2 стали и повысить уровень кислорода на 1.",
@@ -349,7 +349,7 @@
     "Gain 1 M€ for each event EVER PLAYED by all players.": "Получите 1 M€ за каждую сыгранную карту событий, учитываются все карты событий, сыгранные всеми игроками в этой партии.",
 
     "Open City": "Открытый город",
-    "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "Уровень кислорода должен быть 12%. Получите 2 растения и постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 4.",
+    "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Уровень кислорода должен быть 12%. Получите 2 растения и постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 4.",
 
     "Media Group": "Медиа-холдинг",
     "Effect: After you play an event card, you gain 3 M€.": "Свойство: когда вы сыграли карту события, получите 3 M€.",
@@ -391,7 +391,7 @@
     "Requires 3 or less ocean tiles.": "Необходимо 3 или меньше тайлов океана.",
 
     "Urbanized Area": "Городской массив",
-    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Снизьте своё производство энергии на 1 и повысьте свой доход на 2. Постройте город, соседний как минимум с двумя другими городами.",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Снизьте своё производство энергии на 1 и повысьте свой доход на 2. Постройте город, соседний как минимум с двумя другими городами.",
 
     "Sabotage": "Саботаж",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Удалите у любого игрока до 3 титана, или до 4 стали или до 7 M€.",
@@ -410,7 +410,7 @@
     "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.": "Снизьте своё производство энергии на 1 и доход любого игрока на 2. Повысьте свой доход на 2.",
 
     "GHG Factories": "Фабрики парникового газа",
-    "Decrease your Energy production 1 step and increase your heat production 4 steps.": "Снизьте своё производство энергии на 1 и повысьте своё производство тепла на 4.",
+    "Decrease your energy production 1 step and increase your heat production 4 steps.": "Снизьте своё производство энергии на 1 и повысьте своё производство тепла на 4.",
 
     "Subterranean Reservoir": "Подземный резервуар",
     "Place 1 ocean tile.": "Выложите 1 тайл океана.",
@@ -432,7 +432,7 @@
     "Requires 3% oxygen.": "Уровень кислорода должен быть 3%",
 
     "Fusion Power": "Термоядерная энергия",
-    "Requires 2 Power tags. Increase your Energy production 3 steps.": "Необходимо 2 символа энергии. Повысьте своё производство энергии на 3.",
+    "Requires 2 Power tags. Increase your energy production 3 steps.": "Необходимо 2 символа энергии. Повысьте своё производство энергии на 3.",
 
     "Symbiotic Fungus": "Грибы-симбионты",
     "Action: Add a microbe to ANOTHER card.": "Действие: положите жетон бактерий на другую карту.",
@@ -447,13 +447,13 @@
     "Requires a Plant tag, a Microbe tag, and an Animal tag.": "Необходим символ растений, символ бактерий и символ животных.",
 
     "Great Dam": "Великая плотина",
-    "Requires 4 ocean tiles. Increase your Energy production 2 steps.": "Необходимо 4 тайла океана. Повысьте своё производство энергии на 2.",
+    "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Необходимо 4 тайла океана. Повысьте своё производство энергии на 2.",
 
     "Cartel": "Картель",
     "Increase your M€ production 1 step for each Earth tag you have, including this.": "Повысьте свой доход на 1 за каждый ваш символ Земли, включая этот.",
 
     "Strip Mine": "Карьер",
-    "Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "Снизьте своё производство энергии на 2. Повысьте своё производство стали на 2 и производство титана на 1. Повысьте уровень кислорода на 2.",
+    "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "Снизьте своё производство энергии на 2. Повысьте своё производство стали на 2 и производство титана на 1. Повысьте уровень кислорода на 2.",
 
     "Wave Power": "Энергия волн",
     "Requires 3 ocean tiles. Increase your energy production 1 step.": "Необходимо 3 тайла океана. Повысьте своё производство энергии на 1.",
@@ -462,18 +462,18 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Повысьте температуру на 2 и выложите этот тайл либо на купол Фарсида, либо на гору Павлина, либо на гору Арсия.",
 
     "Power Plant": "Электростанция",
-    "Increase your Energy production 1 step.": "Повысьте своё производство энергии на 1.",
+    "Increase your energy production 1 step.": "Повысьте своё производство энергии на 1.",
 
     "Mohole Area": "Проект Мохол",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Повысьте своё производство тепла на 4. Выложите этот тайл на зарезервированный для океана участок.",
 
     "Large Convoy": "Груз с Земли",
-    "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.": "Выложите тайл океана и возьмите 2 карты. Получите 5 растений или положите 4 жетона животных на другую карту.",
+    "Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 Animals to ANOTHER card.": "Выложите тайл океана и возьмите 2 карты. Получите 5 растений или положите 4 жетона животных на другую карту.",
 
     "Titanium Mine": "Титановая шахта",
 
     "Tectonic Stress Power": "Тектоническая энергия",
-    "Requires 2 Science tags. Increase your Energy production 3 steps.": "Необходимо 2 символа науки. Повысьте своё производство энергии на 3.",
+    "Requires 2 science tags. Increase your energy production 3 steps.": "Необходимо 2 символа науки. Повысьте своё производство энергии на 3.",
 
     "Nitrophilic Moss": "Азотолюбивый мох",
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Необходимо 3 тайла океана и потерять 2 растения. Повысьте своё производство растений на 2.",
@@ -516,13 +516,13 @@
     "Add 3 Microbes to this card.": "Положите 3 жетона бактерий на эту карту.",
 
     "Industrial Microbes": "Промышленные микробы",
-    "Increase your Energy production and your steel production 1 step each.": "Повысьте своё производство энергии и производство стали на 1.",
+    "Increase your energy production and your steel production 1 step each.": "Повысьте своё производство энергии и производство стали на 1.",
 
     "Lichen": "Лишайник",
     "Requires -24 C or warmer. Increase your Plant production 1 step.": "Температура должна быть -24 или выше. Повысьте своё производство растений на 1.",
 
     "Power Supply Consortium": "Консорциум энергокомпаний",
-    "Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.": "Необходимо 2 символа энергии. Снизьте у любого игрока производство энергии на 1 и повысьте своё производство энергии на 1.",
+    "Requires 2 Power tags. Decrease any energy production 1 step and increase your own 1 step.": "Необходимо 2 символа энергии. Снизьте у любого игрока производство энергии на 1 и повысьте своё производство энергии на 1.",
 
     "Convoy From Europa": "Груз с Европы",
     "Place 1 ocean tile and draw 1 card.": "Выложите 1 тайл океана и возьмите 1 карту.",
@@ -537,16 +537,16 @@
     "Increase your heat production 1 step.": "Повысьте своё производство тепла на 1.",
 
     "Magnetic Field Generators": "Генераторы магнитного поля",
-    "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Снизьте своё производство энергии на 4 и повысьте своё производство растений на 2. Повысьте свой рейтинг на 3.",
+    "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Снизьте своё производство энергии на 4 и повысьте своё производство растений на 2. Повысьте свой рейтинг на 3.",
 
     "Shuttles": "Шаттлы",
-    "Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.": "Уровень кислорода должен быть 5%. Снизьте своё производство энергии на 1 и повысьте доход на 2.",
+    "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Уровень кислорода должен быть 5%. Снизьте своё производство энергии на 1 и повысьте доход на 2.",
 
     "Import of Advanced GHG": "Импорт улучшенного парникового газа",
     "Increase your heat production 2 steps.": "Повысьте своё производство тепла на 2.",
 
     "Windmills": "Ветряные электростанции",
-    "Requires 7% oxygen. Increase your Energy production 1 step.": "Уровень кислорода должен быть 7%. Повысьте своё производство энергии на 1.",
+    "Requires 7% oxygen. Increase your energy production 1 step.": "Уровень кислорода должен быть 7%. Повысьте своё производство энергии на 1.",
 
     "Tundra Farming": "Земледелие в тундре",
     "Requires -6° C or warmer. Increase your Plant production 1 step and your M€ production 2 steps. Gain 1 Plant.": "Температура должна быть -6 или выше. Повысьте своё производство растений на 1, а доход – на 2. Получите 1 растение.",
@@ -555,7 +555,7 @@
     "Increase your heat production 3 steps and your plant production 1 step. Add 2 Microbes to ANOTHER card.": "Положите 2 жетона бактерий на другую карту. Повысьте своё производство тепла на 3 и производство растений на 1.",
 
     "Magnetic Field Dome": "Купол с магнитным полем",
-    "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "Снизьте своё производство энергии на 2 и повысьте своё производство растений на 1. Повысьте свой рейтинг на 1.",
+    "Decrease your energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "Снизьте своё производство энергии на 2 и повысьте своё производство растений на 1. Повысьте свой рейтинг на 1.",
 
     "Pets": "Домашние любимцы",
     "Animals may not be removed from this card": "Животных с этой карты удалять нельзя!",
@@ -581,22 +581,22 @@
     "Requires 2 ocean tiles.": "Необходимо 2 тайла океана.",
 
     "Heat Trappers": "Теплоуловители",
-    "Decrease any heat production 2 steps and increase your Energy production 1 step.": "Снизьте производство тепла у любого игрока на 2 и повысьте своё производство энергии на 1.",
+    "Decrease any heat production 2 steps and increase your energy production 1 step.": "Снизьте производство тепла у любого игрока на 2 и повысьте своё производство энергии на 1.",
 
     "Soil Factory": "Фабрика по производству почвы",
-    "Decrease your Energy production 1 step and increase your Plant production 1 step.": "Снизьте своё производство энергии на 1 и повысьте своё производство растений на 1.",
+    "Decrease your energy production 1 step and increase your Plant production 1 step.": "Снизьте своё производство энергии на 1 и повысьте своё производство растений на 1.",
 
     "Fuel Factory": "Топливный завод",
-    "Decrease your Energy production 1 step and increase your titanium and your M€ production 1 step each.": "Снизьте своё производство энергии на 1. Повысьте своё производство титана и свой доход на 1.",
+    "Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each.": "Снизьте своё производство энергии на 1. Повысьте своё производство титана и свой доход на 1.",
 
     "Ice Cap Melting": "Таяние ледяных шапок",
     "Requires +2 C or warmer. Place 1 ocean tile.": "Температура должна быть +2 или выше. Выложите 1 тайл океана.",
 
     "Corporate Stronghold": "Цитадель корпорации",
-    "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "Снизьте своё производство энергии на 1 и повысьте вой доход на 3. Постройте город.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "Снизьте своё производство энергии на 1 и повысьте вой доход на 3. Постройте город.",
 
     "Biomass Combustors": "Сжигание биомассы",
-    "Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.": "Уровень кислорода должен быть 6%. Снизьте производство растений у любого игрока на 1 и повысьте своё производство энергии на 2.",
+    "Requires 6% oxygen. Decrease any Plant production 1 step and increase your energy production 2 steps.": "Уровень кислорода должен быть 6%. Снизьте производство растений у любого игрока на 1 и повысьте своё производство энергии на 2.",
 
     "Livestock": "Домашний скот",
     "Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps": "Уровень кислорода должен быть 9%. Снизьте своё производство растений на 1 и повысьте свой доход на 2. 1 ПО за каждый жетон животных на этой карте.",
@@ -614,7 +614,7 @@
     "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Выложите тайл океана. Если рядом с этим тайлом есть другие тайлы, вы можете удалить 4M€ у владельца одного из тайлов.",
 
     "Energy Saving": "Энергосбережение",
-    "Increase your Energy production 1 step for each City tile in play.": "Повысьте своё производство энергии на 1 за каждый город в игре.",
+    "Increase your energy production 1 step for each City tile in play.": "Повысьте своё производство энергии на 1 за каждый город в игре.",
 
     "Local Heat Trapping": "Эксплуатация источников тепла",
     "Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.": "Потратьте 5 тепла и получите 4 растения или положите 2 жетона животных на другую карту.",
@@ -626,7 +626,7 @@
     "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": "Посмотрите 3 верхних карты колоды. Возьмите 1 из них на руку и сбросьте остальные 2.",
 
     "Plantation": "Насаждения",
-    "Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.": "Необходимо 2 символа науки. Проведите озеленение и повысьте уровень кислорода на 1.",
+    "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Необходимо 2 символа науки. Проведите озеленение и повысьте уровень кислорода на 1.",
 
     "Power Infrastructure": "Инфраструктура энергетики",
     "Action: Spend any amount of energy and gain that amount of M€.": "Действие: потратьте любое количество энергии, чтобы получить такое же количество MC.",
@@ -650,10 +650,10 @@
 
     "Immigrant City": "Город иммигрантов",
     "Effect: When a City tile is placed, including this, increase your M€ production 1 step.": "Свойство: каждый раз, когда строится город, включая этот, повысьте свой доход на 1.",
-    "Decrease your Energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "Снизьте ваше производство энергии на 1, а доход – на 2. Постройте город.",
+    "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "Снизьте ваше производство энергии на 1, а доход – на 2. Постройте город.",
 
     "Energy Tapping": "Отвод от линии электропередач",
-    "Decrease any Energy production 1 step and increase your own 1 step.": "Снизьте у любого игрока производство энергии на 1 и повысьте своё производство энергии на 1.",
+    "Decrease any energy production 1 step and increase your own 1 step.": "Снизьте у любого игрока производство энергии на 1 и повысьте своё производство энергии на 1.",
 
     "Underground Detonations": "Подземные взрывы",
     "Action: Spend 10M€ to increase your heat production 2 steps.": "Действие: потратьте 10 M€, чтобы повысить своё производство тепла на 2.",
@@ -665,7 +665,7 @@
     "Draw two cards.": "Возьмите 2 карты.",
 
     "Rad-Chem Factory": "Радиохимический завод",
-    "Decrease your Energy production 1 step. Raise your TR 2 steps.": "Снизьте своё производство энергии на 1. Повысьте свой рейтинг на 2.",
+    "Decrease your energy production 1 step. Raise your TR 2 steps.": "Снизьте своё производство энергии на 1. Повысьте свой рейтинг на 2.",
 
     "Special Design": "Особая разработка",
     "The next card you play this generation is +2 or -2 steps in global requirements, your choice.": "Требования к температуре, кислороду и океанам для вашей следующей карты +2 или -2, на ваш выбор.",
@@ -678,7 +678,7 @@
     "3 Science": "3 Науки",
     "5 Science": "5 Науки",
     "Action: Draw 2 cards.": "Действие: Доберите 2 карты",
-    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "У вас должно быть 3 метки Науки. Уменьшите ваше производство энергии на 1",
+    "Requires 3 Science tags to play. Decrease your energy production 1 step.": "У вас должно быть 3 метки Науки. Уменьшите ваше производство энергии на 1",
     "Jovian": "Юпитер",
     "Sell": "Продать",
     "Project Requirement": "Требования пректа",

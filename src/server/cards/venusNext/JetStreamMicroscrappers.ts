@@ -23,11 +23,11 @@ export class JetStreamMicroscrappers extends Card implements IActionCard {
       metadata: {
         cardNumber: '234',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 titanium to add 2 Floaters here', (eb) => {
+          b.action('Spend 1 titanium to add 2 floaters here', (eb) => {
             eb.titanium(1).startAction.floaters(2);
           }).br;
           b.or().br;
-          b.action('Spend 2 Floaters here to raise Venus 1 step', (eb) => {
+          b.action('Spend 2 floaters here to raise Venus 1 step', (eb) => {
             eb.floaters(2).startAction.venus(1);
           });
         }),

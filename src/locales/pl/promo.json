@@ -57,7 +57,7 @@
   "Meat Industry": "Meat Industry",
   "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Efekt trwały: Gdy umieszczasz jednostkę zwierząt na dowolnej karcie, otrzymujesz 2 M€.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "",
+  "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "",
 
   "Orbital Cleanup": "Sprzątanie Orbitalne",
   "Action: Gain 1 M€ per Science tag you have.": "Akcja: Otrzymujesz 1 M€ za każdy posiadany symbol nauki.",
@@ -97,7 +97,7 @@
   "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Efekt trwały: Karty umieszczone na tej karcie mogą być zagrywane jak z ręki z kosztem zagrania obniżonym o umieszczoną na niej liczbę zasobów.",
 
   "Dusk Laser Mining": "Nocne górnictwo laserowe",
-  "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Wymagania: Musisz posiadać przynajmniej 2 symbole nauki. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom. Otrzymujesz 4 jednostki tytanu.",
+  "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Wymagania: Musisz posiadać przynajmniej 2 symbole nauki. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom. Otrzymujesz 4 jednostki tytanu.",
 
   "Hi-Tech Lab": "Laboratorium hi-tech",
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Akcja: Wydaj dowolną liczbę jednostek energii, aby dobrać tyle samo kart. WEŹ 1 Z NICH NA RĘKĘ, ODRZUĆ RESZTĘ.",
@@ -132,14 +132,14 @@
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Warunki początkowe: Rozpoczynasz grę z 44 M€. W ramach swojej pierwszej akcji odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz karty z symbolem mikrobów. Weź tę kartę do ręki, resztę odrzuć.",
   "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem mikrobów (z tą włącznie), ten gracz otrzymuje 2 M€ albo umieszcza 1 jednostkę mikrobów na zagranej karcie, a Ty dodatkowo otrzymujesz 2 M€ za każdy symbol mikrobów na zagranej karcie.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "Podnieś temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 6 jednostek roślinności dowolnego gracza. Umieść ten obszar na planszy na polu, które nie sąsiaduje z żadnym obszarem miasta.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Podnieś temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 6 jednostek roślinności dowolnego gracza. Umieść ten obszar na planszy na polu, które nie sąsiaduje z żadnym obszarem miasta.",
 
   "You start with 38 M€ and 3 asteroid resources.": "Rozpoczynasz grę z 3 jednostkami asteroid i 38 M€.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Akcja: Umieść 1 jednostkę asteroid na dowolnej karcie, albo otrzymaj 1 dowolną jednostkę zasobów, albo wydaj 1 jednostkę asteroid z tej karty, aby otrzymać 3 jednostki tytanu.",
 
-  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Wymagania: Na planszy muszą się znajdować przynajmniej 4 obszary oceanów. Podnieś swoją produkcję energii o 2 poziomy. Umieść ten obszar na planszy na polu sąsiadującym z obszarem oceanu.",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Wymagania: Na planszy muszą się znajdować przynajmniej 4 obszary oceanów. Podnieś swoją produkcję energii o 2 poziomy. Umieść ten obszar na planszy na polu sąsiadującym z obszarem oceanu.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3. Umieść ten obszar na planszy.",
+  "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3. Umieść ten obszar na planszy.",
 
   "You start with 37 M€. Increase your steel production 1 step.": "Rozpoczynasz grę z 37 M€ i dodatkowym poziomem produkcji stali.",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "JEŚLI NIE POSIADASZ JEDNOSTEK ENERGII, podnieś swoją produkcję energii o 1 poziom ALBO wydaj 3 M€, aby dobrać pierwszą z odkrywanych kart z symbolem budowli z talii projektów (pozostałe odrzuć).",

@@ -15,7 +15,7 @@ export class ConvertPlants extends StandardActionCard {
       metadata: {
         cardNumber: 'SA2',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 8 Plants to place a greenery tile and raise oxygen 1 step.', (eb) => {
+          b.standardProject('Spend 8 plants to place a greenery tile and raise oxygen 1 step.', (eb) => {
             eb.plants(8).startAction.greenery();
           }),
         ),

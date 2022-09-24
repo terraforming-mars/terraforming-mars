@@ -27,7 +27,7 @@ export class StripMine extends Card implements IProjectCard {
           }).br;
           b.oxygen(2);
         }),
-        description: 'Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.',
+        description: 'Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.',
       },
     });
   }

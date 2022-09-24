@@ -3,7 +3,7 @@
 
   "Stratospheric Birds": "금성 성층권 조류",
   "Action: Add 1 animal to this card.": "행동: 이 카드에 동물 자원 1개 추가.",
-  "Requires Venus 12% and that you spend 1 Floater from any card.": "조건: 금성개척률 12% 이상.) (자신의 아무 카드 1장에서 부양체 자원 1개 제거.",
+  "Requires Venus 12% and that you spend 1 floater from any card.": "조건: 금성개척률 12% 이상.) (자신의 아무 카드 1장에서 부양체 자원 1개 제거.",
 
   "Venusian Plants": "금성 식물",
   "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD": "조건: 금성개척률 16% 이상.) (금성 개척률 1단계 상승. 자신의 아무 금성 카드 1장에 미생물 또는 동물 자원 1개 추가.",
@@ -61,23 +61,23 @@
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "조건: 보유한 금성/지구/목성 태그 각 1개 이상.) (테라포밍 등급 2TR 상승.",
 
   "Jet Stream Microscrappers": "소형 대기감쇄기 살포",
-  "Action: Spend 1 titanium to add 2 Floaters here": "행동: 티타늄 자원 1개 소비해서 이 카드에 부양체 자원 2개 추가,",
-  "Action: Spend 2 Floaters here to raise Venus 1 step": "행동: 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
+  "Action: Spend 1 titanium to add 2 floaters here": "행동: 티타늄 자원 1개 소비해서 이 카드에 부양체 자원 2개 추가,",
+  "Action: Spend 2 floaters here to raise Venus 1 step": "행동: 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
 
   "Spin-Inducing Asteroid": "소행성 비껴치기",
   "Venus must be 10% or lower. Raise Venus 2 steps.": "조건: 금성개척률 10% 이하.) (금성 개척률 2단계 상승.",
 
   "Dirigibles": "비행선",
-  "Action: Add 1 Floater to ANY card": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
-  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
+  "Action: Add 1 floater to ANY card": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
+  "Effect: When playing a Venus tag, floaters here may be used as payment, and are worth 3M€ each.": "지속효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
 
   "Floating Habs": "공중 주거구역",
-  "Action: Spend 2 M€ to add 1 Floater to ANY card": "행동: 2M€ 소비해서 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
-  "1 VP for every 2nd Floater on this card.": "이 카드의 부양체 자원 2개당 승점 1점.",
-  "Requires 2 Science tags. 1 VP for every 2nd Floater on this card": "조건: 보유한 과학 태그 2개 이상.) (이 카드의 부양체 자원 2개당 승점 1점.",
+  "Action: Spend 2 M€ to add 1 floater to ANY card": "행동: 2M€ 소비해서 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
+  "1 VP for every 2nd floater on this card.": "이 카드의 부양체 자원 2개당 승점 1점.",
+  "Requires 2 science tags. 1 VP for every 2nd floater on this card": "조건: 보유한 과학 태그 2개 이상.) (이 카드의 부양체 자원 2개당 승점 1점.",
 
   "Hydrogen to Venus": "금성으로 수소 수송",
-  "Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have.": "금성 개척률 1단계 상승. 보유한 목성 태그 수만큼 자신의 아무 금성 카드 1장에 부양체 자원 추가.",
+  "Raise Venus 1 step. Add 1 floater to A Venus CARD for each Jovian tag you have.": "금성 개척률 1단계 상승. 보유한 목성 태그 수만큼 자신의 아무 금성 카드 1장에 부양체 자원 추가.",
 
   "Water to Venus": "금성으로 물 수송",
   "Raise Venus 1 step.": "금성 개척률 1단계 상승.",
@@ -90,13 +90,13 @@
   "Action: Spend one floater here to draw 1 card.": "행동: 이 카드에 부양체 자원 1개 소비해서 카드 1장 획득.",
 
   "Aerosport Tournament": "공중스포츠 토너먼트",
-  "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.": "조건: 보유한 부양체 자원 5개 이상.) (배치된 아무 도시 타일 1장당 1M€ 획득.",
+  "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "조건: 보유한 부양체 자원 5개 이상.) (배치된 아무 도시 타일 1장당 1M€ 획득.",
 
   "Air-Scrapping Expedition": "대기 감쇄 항해",
-  "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.": "금성 개척률 1단계 상승. 자신의 아무 금성 카드 1장에 부양체 자원 3개 추가.",
+  "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.": "금성 개척률 1단계 상승. 자신의 아무 금성 카드 1장에 부양체 자원 3개 추가.",
 
   "Atmoscoop": "공기긁개",
-  "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.": "조건: 보유한 과학 태그 3개 이상.) (기온 또는 금성 개척률 2단계 상승. 자신의 아무 카드 1장에 부양체 자원 2개 추가.",
+  "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.": "조건: 보유한 과학 태그 3개 이상.) (기온 또는 금성 개척률 2단계 상승. 자신의 아무 카드 1장에 부양체 자원 2개 추가.",
 
   "Comet for Venus": "금성 충돌용 혜성",
   "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.": "금성 개척률 1단계 상승. 금성 태그를 보유한 아무 1명에게서 4M€까지 제거.",
@@ -105,16 +105,16 @@
   "Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.": "조건: 보유한 과학 태그 4개 이상.) (에너지 생산력 1 감소. 티타늄 생산력 1 증가. 새벽녘 시티 전용 구역에 도시 타일 1장 배치.",
 
   "Deuterium Export": "금성에서 중수소 수출",
-  "Action: Add 1 Floater to this card.": "행동: 이 카드에 부양체 자원 1개 추가,",
-  "Action: Spend 1 Floater here to increase your energy production 1 step.": "행동: 카드에 부양체 자원 1개 소비해서 에너지 생산력 1 증가.",
+  "Action: Add 1 floater to this card.": "행동: 이 카드에 부양체 자원 1개 추가,",
+  "Action: Spend 1 floater here to increase your energy production 1 step.": "행동: 카드에 부양체 자원 1개 소비해서 에너지 생산력 1 증가.",
 
   "Extractor Balloons": "대기 포집 풍선",
-  "Action: Remove 2 Floaters here to raise Venus 1 step.": "행동: 이 카드의 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
-  "Add 3 Floaters to this card": "이 카드에 부양체 자원 3개 추가.",
+  "Action: Remove 2 floaters here to raise Venus 1 step.": "행동: 이 카드의 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
+  "Add 3 floaters to this card": "이 카드에 부양체 자원 3개 추가.",
 
   "Forced Precipitation": "인공 강우",
-  "Action: Spend 2 M€ to add 1 Floater to THIS card.": "행동: 2M€ 소비해서 이 카드에 부양체 자원 1개 추가.",
-  "Action: Spend 2 Floaters here to increase Venus 1 step.": "행동: 이 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card.": "행동: 2M€ 소비해서 이 카드에 부양체 자원 1개 추가.",
+  "Action: Spend 2 floaters here to increase Venus 1 step.": "행동: 이 카드에 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
 
   "Freyja Biodomes": "프레이야 바이오돔",
   "10% Venus": "조건: 금성개척률 10% 이상.",
@@ -137,7 +137,7 @@
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA": "이 카드도 포함해서, 보유한 지구 태그 1개당 메가크레딧 생산력 1 증가. 루나 메트로폴리스 전용 구역에 도시 타일 1장 배치.",
 
   "Local Shading": "국지규모 햇빛가리개",
-  "Action: Spend 1 Floater here to raise your M€ production 1 step.": "행동: 이 카드에 부양체 자원 1개 소비해서 메가크레딧 생산력 1 증가.",
+  "Action: Spend 1 floater here to raise your M€ production 1 step.": "행동: 이 카드에 부양체 자원 1개 소비해서 메가크레딧 생산력 1 증가.",
 
   "Maxwell Base": "맥스웰 기지",
   "Action: Add 1 resource to ANOTHER VENUS CARD.": "행동: 자신의 아무 금성 카드 1장에 특수 자원 1개 추가.",
@@ -149,7 +149,7 @@
 
   "Stratopolis": "스트라토폴리스",
   "Action: Add 2 floaters to ANY VENUS CARD.": "행동: 자신의 아무 금성 카드 1장에 부양체 자원 2개 추가.",
-  "1 VP for every 3rd Floater on this card.": "이 카드의 부양체 자원 3개당 승점 1점.",
+  "1 VP for every 3rd floater on this card.": "이 카드의 부양체 자원 3개당 승점 1점.",
   "Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA": "조건: 보유한 과학 태그 2개 이상.) (메가크레딧 생산력 2 증가. 스트라토폴리스 전용 구역에 도시 타일 1장 배치.",
 
   "Venus Governor": "금성 총독",
@@ -161,7 +161,7 @@
   "Requires Venus 18%": "조건: 금성개척률 18% 이상.",
 
   "Venus Magnetizer": "금성 자기장 형성기",
-  "Action: Decrease your Energy production 1 step to raise Venus 1 step.": "행동: 에너지 생산력 1 감소시켜서 금성 개척률 1단계 상승.",
+  "Action: Decrease your energy production 1 step to raise Venus 1 step.": "행동: 에너지 생산력 1 감소시켜서 금성 개척률 1단계 상승.",
   "Requires Venus 10%.": "조건: 금성개척률 10% 이상.",
 
   "Luxury Foods": "최고급 요리",

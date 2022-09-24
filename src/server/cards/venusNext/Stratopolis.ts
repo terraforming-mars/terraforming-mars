@@ -36,7 +36,7 @@ export class Stratopolis extends Card implements IActionCard {
             eb.empty().startAction.floaters(2, {secondaryTag: Tag.VENUS});
           }).br;
           b.production((pb) => pb.megacredits(2)).city().asterix();
-          b.vpText('1 VP for every 3rd Floater on this card.');
+          b.vpText('1 VP for every 3rd floater on this card.');
         }),
         description: {
           text: 'Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA',

@@ -34,7 +34,7 @@ describe('BiofertilizerFacility', function() {
 
   it('Play', function() {
     // Set up the cards.
-    // Adds the necessary Science tag.
+    // Adds the necessary science tag.
     player.playCard(scienceTagCard);
     player.playCard(microbeHost);
 

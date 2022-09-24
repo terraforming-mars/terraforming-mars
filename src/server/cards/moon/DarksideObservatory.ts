@@ -57,7 +57,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
     ];
 
     return new SelectCard(
-      'Select card to add EITHER 1 Science resource OR 2 Data resources',
+      'Select card to add EITHER 1 Science resource OR 2 data resources',
       'Add',
       playableCards,
       ([card]) => {

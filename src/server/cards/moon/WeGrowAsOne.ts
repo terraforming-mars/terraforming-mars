@@ -20,8 +20,8 @@ export class WeGrowAsOne extends Card implements IProjectCard {
 
       metadata: {
         description: 'Requires that Unity are ruling or that you have 2 delegates there. ' +
-        'Increase ALL Colony Tile Tracks 1 step. ' +
-        'Increase each Colony Tile Track 1 step if you have a colony on that Colony Tile.',
+        'Increase ALL colony tile tracks 1 step. ' +
+        'Increase each colony tile track 1 step if you have a colony on that colony tile.',
         cardNumber: 'M59',
         renderData: CardRenderer.builder((b) => {
           b.placeColony({all}).text('+1').br;

@@ -35,7 +35,6 @@ export class Engineer implements IAward {
     CardName.NITROGEN_RICH_ASTEROID,
     CardName.POWER_SUPPLY_CONSORTIUM,
     CardName.SATELLITES,
-    CardName.ZEPPELINS,
     // Colonies
     CardName.COMMUNITY_SERVICES,
     CardName.ECOLOGY_RESEARCH,
@@ -49,8 +48,6 @@ export class Engineer implements IAward {
     CardName.MONS_INSURANCE,
     // Moon
     CardName.DARKSIDE_MINING_SYNDICATE,
-    CardName.OFF_WORLD_CITY_LIVING,
-    CardName.ORBITAL_POWER_GRID,
     CardName.ROVER_DRIVERS_UNION,
     CardName.LUNA_FIRST_INCORPORATED,
   ];

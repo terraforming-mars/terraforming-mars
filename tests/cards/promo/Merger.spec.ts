@@ -3,7 +3,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Merger} from '../../../src/server/cards/promo/Merger';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ArcadianCommunities} from '../../../src/server/cards/promo/ArcadianCommunities';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
@@ -21,7 +21,10 @@ import {BeginnerCorporation} from '../../../src/server/cards/corporation/Beginne
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Asteroid} from '../../../src/server/cards/base/Asteroid';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {ICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
+import {Viron} from '../../../src/server/cards/venusNext/Viron';
+import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Merger', function() {
   let card: Merger;
@@ -31,11 +34,9 @@ describe('Merger', function() {
 
   beforeEach(() => {
     card = new Merger();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    const gameOptions = testGameOptions({preludeExtension: true});
-    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
+    game = newTestGame(2, {preludeExtension: true, turmoilExtension: true});
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
 
     // Preset corporation deck for testing
     game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
@@ -221,5 +222,20 @@ describe('Merger', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(helion.startingMegaCredits + tharsis.startingMegaCredits - Merger.mergerCost - 6);
+  });
+
+  it('Works Viron and another corporation card', function() {
+    const viron = new Viron();
+    const septumTribus = new SeptumTribus();
+    player.playCorporationCard(viron);
+    player.playAdditionalCorporationCard(septumTribus);
+
+    expect(viron.canAct(player)).is.false;
+    expect(player.getPlayableActionCards()).deep.eq([septumTribus]);
+    player.addActionThisGeneration(septumTribus.name);
+    expect(player.getPlayableActionCards()).deep.eq([viron]);
+    expect(viron.canAct(player)).is.true;
+    const selectCard = cast(viron.action(player), SelectCard);
+    expect(selectCard.cards).deep.eq([septumTribus]);
   });
 });

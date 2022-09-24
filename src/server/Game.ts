@@ -1203,14 +1203,18 @@ export class Game implements Logger {
     return player;
   }
 
-  public getCitiesOnMarsCount(): number {
-    return this.board.spaces.filter(
-      (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
+  public getCitiesOffMarsCount(player?: Player): number {
+    return this.getCitiesCount(player, (space) => space.spaceType === SpaceType.COLONY);
   }
 
-  public getCitiesCount(player?: Player): number {
+  public getCitiesOnMarsCount(player?: Player): number {
+    return this.getCitiesCount(player, (space) => space.spaceType !== SpaceType.COLONY);
+  }
+
+  public getCitiesCount(player?: Player, filter?: (space: ISpace) => boolean): number {
     let cities = this.board.spaces.filter(Board.isCitySpace);
     if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
+    if (filter) cities = cities.filter(filter);
     return cities.length;
   }
 

@@ -37,7 +37,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();
+    const amount = player.game.getCitiesOffMarsCount();
     player.production.add(Resources.MEGACREDITS, amount, {log: true});
     return undefined;
   }

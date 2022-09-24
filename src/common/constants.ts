@@ -52,17 +52,30 @@ export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;
 export const DEFAULT_ESCAPE_VELOCITY_PERIOD = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 
+export const LANGUAGES2 = {
+  en: 'English',
+  de: 'Deutsch',
+  fr: 'Français',
+  ru: 'Русский',
+  cn: '华语',
+  pl: 'Polskie',
+  es: 'Español',
+  br: 'Português Brasileiro',
+  it: 'Italiano',
+  ko: '한국어',
+};
+
 export const LANGUAGES = [
   {'id': 'en', 'title': 'English'},
-  {'id': 'de', 'title': 'German'},
-  {'id': 'fr', 'title': 'French'},
-  {'id': 'ru', 'title': 'Russian'},
-  {'id': 'cn', 'title': 'Chinese'},
-  {'id': 'pl', 'title': 'Polish'},
-  {'id': 'es', 'title': 'Spanish'},
+  {'id': 'de', 'title': 'Deutsch'},
+  {'id': 'fr', 'title': 'Français'},
+  {'id': 'ru', 'title': 'Русский'},
+  {'id': 'cn', 'title': '华语'},
+  {'id': 'pl', 'title': 'Polskie'},
+  {'id': 'es', 'title': 'Español'},
   {'id': 'br', 'title': 'Português Brasileiro'},
-  {'id': 'it', 'title': 'Italian'},
-  {'id': 'ko', 'title': '한국어 (Korean)'},
+  {'id': 'it', 'title': 'Italiano'},
+  {'id': 'ko', 'title': '한국어'},
 ];
 
 export const APP_NAME = 'Terraforming Mars';

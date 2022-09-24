@@ -1,10 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
 
@@ -19,6 +17,7 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
       behavior: {
         drawCard: 2,
         global: {venus: 1},
+        stock: {megacredits: {tag: Tag.VENUS}},
       },
 
       metadata: {
@@ -30,12 +29,6 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
         description: 'Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    const tagCount = player.tags.count(Tag.VENUS) + 1;
-    player.addResource(Resources.MEGACREDITS, tagCount, {log: true});
-    return undefined;
   }
 }
 

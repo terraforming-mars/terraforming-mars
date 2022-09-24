@@ -49,4 +49,3 @@ describe('IronExtractionCenter', () => {
     expect(player.production.steel).eq(3);
   });
 });
-

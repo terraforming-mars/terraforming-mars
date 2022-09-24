@@ -2,8 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
@@ -16,6 +14,10 @@ export class PowerGrid extends Card implements IProjectCard {
       tags: [Tag.ENERGY],
       cost: 18,
 
+      behavior: {
+        production: {energy: {tag: Tag.ENERGY}},
+      },
+
       metadata: {
         cardNumber: '102',
         renderData: CardRenderer.builder((b) => {
@@ -24,10 +26,5 @@ export class PowerGrid extends Card implements IProjectCard {
         description: 'Increase your Energy production step for each Power tag you have, including this.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.ENERGY, 1 + player.tags.count(Tag.ENERGY), {log: true});
-    return undefined;
   }
 }

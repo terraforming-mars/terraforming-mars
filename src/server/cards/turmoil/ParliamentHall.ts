@@ -3,9 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
@@ -20,6 +18,10 @@ export class ParliamentHall extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       victoryPoints: 1,
 
+      behavior: {
+        production: {megacredits: {tag: Tag.BUILDING, per: 3}},
+      },
+
       metadata: {
         cardNumber: 'T08',
         renderData: CardRenderer.builder((b) => {
@@ -30,18 +32,5 @@ export class ParliamentHall extends Card implements IProjectCard {
         description: 'Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.',
       },
     });
-  }
-
-  public produce(player: Player) {
-    // Include this when the card is first played, and not when it is called by Robotic Workforce.
-    const includeThis = !player.cardIsInEffect(this.name);
-    const tagCount = player.tags.count(Tag.BUILDING) + (includeThis ? 1 : 0);
-    const amount = Math.floor(tagCount / 3);
-    player.production.add(Resources.MEGACREDITS, amount, {log: true});
-  }
-
-  public override bespokePlay(player: Player) {
-    this.produce(player);
-    return undefined;
   }
 }

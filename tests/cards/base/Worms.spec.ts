@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {Worms} from '../../../src/server/cards/base/Worms';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 
 describe('Worms', function() {
   let card: Worms;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -24,7 +24,8 @@ describe('Worms', function() {
   it('Should play', function() {
     (game as any).oxygenLevel = 4;
     expect(player.canPlayIgnoringCost(card)).is.true;
-    player.playedCards.push(card);
+    const tardigrades = new Tardigrades();
+    player.playedCards.push(tardigrades);
 
     card.play(player);
     expect(player.production.plants).to.eq(1);

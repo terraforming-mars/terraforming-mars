@@ -1,8 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,6 +15,10 @@ export class Zeppelins extends Card implements IProjectCard {
       cost: 13,
       victoryPoints: 1,
 
+      behavior: {
+        production: {megacredits: {cities: {where: 'onmars'}}},
+      },
+
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
       metadata: {
         cardNumber: '129',
@@ -29,10 +31,6 @@ export class Zeppelins extends Card implements IProjectCard {
         description: 'Requires 5% oxygen. Increase your M€ production 1 step for each City tile ON MARS.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.production.add(Resources.MEGACREDITS, player.game.getCitiesOnMarsCount(), {log: true});
-    return undefined;
   }
 }
 

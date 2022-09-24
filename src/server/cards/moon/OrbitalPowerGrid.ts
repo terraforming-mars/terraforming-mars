@@ -1,10 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {Card} from '../Card';
 import {all} from '../Options';
 
@@ -17,6 +15,10 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
       cost: 19,
       victoryPoints: 1,
 
+      behavior: {
+        production: {energy: {cities: {where: 'offmars'}}},
+      },
+
       metadata: {
         description: 'Increase your energy production 1 step per city tile NOT ON MARS.',
         cardNumber: 'M85',
@@ -25,11 +27,5 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();
-    player.production.add(Resources.ENERGY, amount, {log: true});
-    return undefined;
   }
 }

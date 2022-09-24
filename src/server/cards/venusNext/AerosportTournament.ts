@@ -1,7 +1,5 @@
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -20,6 +18,10 @@ export class AerosportTournament extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.floaters(5)),
       victoryPoints: 1,
 
+      behavior: {
+        stock: {megacredits: {cities: {}}},
+      },
+
       metadata: {
         cardNumber: '214',
         description: 'Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.',
@@ -28,10 +30,5 @@ export class AerosportTournament extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.addResource(Resources.MEGACREDITS, player.game.getCitiesCount(), {log: true});
-    return undefined;
   }
 }

@@ -1,12 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../../common/Resources';
 
 export class HydrogenProcessingPlant extends Card implements IProjectCard {
   constructor() {
@@ -20,6 +18,7 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
 
       behavior: {
         global: {oxygen: -1},
+        production: {energy: {oceans: {}, per: 2}},
       },
 
       metadata: {
@@ -32,15 +31,6 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
           'Raise your energy production 1 step for every two ocean tiles on Mars.',
       },
     });
-  }
-
-  public produce(player: Player) {
-    player.production.add(Resources.ENERGY, Math.floor(player.game.board.getOceanCount({wetlands: true}) / 2), {log: true});
-  }
-
-  public override bespokePlay(player: Player) {
-    this.produce(player);
-    return undefined;
   }
 }
 

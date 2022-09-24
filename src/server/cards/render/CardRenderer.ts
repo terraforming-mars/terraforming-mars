@@ -358,12 +358,12 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.RESOURCE_CUBE, amount));
   }
 
-  public moonColony(options?: ItemOptions | undefined): Builder<T> {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_COLONY, 1, options));
+  public moonHabitat(options?: ItemOptions | undefined): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_HABITAT, 1, options));
   }
 
-  public moonColonyRate(options?: ItemOptions): Builder<T> {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE, 1, options));
+  public moonHabitatRate(options?: ItemOptions): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_HABITAT_RATE, 1, options));
   }
 
   // TODO(kberg): Replace moon road image with JUST a road, and add an altsecondary tag to support it.

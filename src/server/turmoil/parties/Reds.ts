@@ -7,7 +7,7 @@ import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -118,10 +118,10 @@ class RedsPolicy03 implements Policy {
     case GlobalParameter.VENUS:
       const venusScaleLevel = game.getVenusScaleLevel();
       return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
-    case GlobalParameter.MOON_COLONY_RATE:
+    case GlobalParameter.MOON_HABITAT_RATE:
       return MoonExpansion.ifElseMoon(game, (moonData) => {
         const rate = moonData.colonyRate;
-        return rate > 0 && rate !== MAXIMUM_COLONY_RATE;
+        return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
       },
       () => false);
     case GlobalParameter.MOON_LOGISTICS_RATE:
@@ -214,9 +214,9 @@ class RedsPolicy03 implements Policy {
             }));
           }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_COLONY_RATE)) {
+          if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
             orOptions.options.push(new SelectOption('Decrease Moon Habitat Rate', 'Confirm', () => {
-              MoonExpansion.lowerColonyRate(player, 1);
+              MoonExpansion.lowerHabitatRate(player, 1);
               return undefined;
             }));
           }

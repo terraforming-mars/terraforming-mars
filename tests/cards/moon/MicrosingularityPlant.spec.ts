@@ -27,8 +27,8 @@ describe('MicrosingularityPlant', () => {
     const space1 = moonData.moon.getAvailableSpacesOnLand(player)[0];
     const space2 = moonData.moon.getAvailableSpacesOnLand(player)[1];
 
-    space1.tile = {tileType: TileType.MOON_COLONY};
-    space2.tile = {tileType: TileType.MOON_COLONY};
+    space1.tile = {tileType: TileType.MOON_HABITAT};
+    space2.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.include(card);
 
     space2.tile = {tileType: TileType.MOON_ROAD};

@@ -36,7 +36,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
             eb.empty().startAction.microbes(1);
           }).br;
           b.action('Spend 2 microbes to raise the Habitat Rate 1 step.', (eb) => {
-            eb.microbes(2).startAction.moonColonyRate();
+            eb.microbes(2).startAction.moonHabitatRate();
           });
 
           b.br;
@@ -51,7 +51,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
   }
 
   private canRaiseColonyRate(player: Player) {
-    return this.resourceCount >= 2 && player.canAfford(0, {tr: {moonColony: 1}});
+    return this.resourceCount >= 2 && player.canAfford(0, {tr: {moonHabitat: 1}});
   }
 
   public action(player: Player) {
@@ -61,7 +61,7 @@ export class DarksideIncubationPlant extends Card implements IActionCard, IProje
         options.push(new SelectOption('Spend 2 microbes to raise the Habitat Rate 1 step.', 'Select', () => {
           player.removeResourceFrom(this, 2);
           LogHelper.logRemoveResource(player, this, 2, 'raise the Habitat Rate');
-          MoonExpansion.raiseColonyRate(player);
+          MoonExpansion.raiseHabitatRate(player);
           return undefined;
         }));
       }

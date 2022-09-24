@@ -39,7 +39,7 @@ describe('RevoltingColonists', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player1);
 
     const assignTile = function(idx: number, player: Player) {
-      spaces[idx].tile = {tileType: TileType.MOON_COLONY};
+      spaces[idx].tile = {tileType: TileType.MOON_HABITAT};
       spaces[idx].player = player;
     };
 

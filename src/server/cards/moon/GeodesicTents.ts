@@ -17,7 +17,7 @@ export class GeodesicTents extends Card {
 
       behavior: {
         production: {energy: -1, plants: 1},
-        moon: {colonyTile: {}},
+        moon: {habitatTile: {}},
       },
 
       metadata: {
@@ -29,10 +29,10 @@ export class GeodesicTents extends Card {
             pb.minus().energy(1).nbsp.plants(1);
           }).br;
           b.minus().titanium(1).br;
-          b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE});
+          b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),
       },
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

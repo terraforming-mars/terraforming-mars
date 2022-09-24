@@ -32,13 +32,13 @@ describe('ColonistShuttles', () => {
   });
 
   it('play', () => {
-    MoonExpansion.addColonyTile(player, 'm02');
-    MoonExpansion.addColonyTile(player, 'm03');
-    MoonExpansion.addColonyTile(player, 'm04');
-    MoonExpansion.addColonyTile(player, 'm05');
-    MoonExpansion.addColonyTile(player, 'm06');
-    MoonExpansion.addColonyTile(player, 'm07');
-    MoonExpansion.addColonyTile(player, 'm08');
+    MoonExpansion.addHabitatTile(player, 'm02');
+    MoonExpansion.addHabitatTile(player, 'm03');
+    MoonExpansion.addHabitatTile(player, 'm04');
+    MoonExpansion.addHabitatTile(player, 'm05');
+    MoonExpansion.addHabitatTile(player, 'm06');
+    MoonExpansion.addHabitatTile(player, 'm07');
+    MoonExpansion.addHabitatTile(player, 'm08');
 
     player.titanium = 1;
     player.megaCredits = 0;

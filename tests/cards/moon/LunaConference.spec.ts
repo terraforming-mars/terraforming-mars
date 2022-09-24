@@ -44,9 +44,9 @@ describe('LunaConference', () => {
 
     expect(player.megaCredits).eq(4);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
-    spaces[2].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[2].tile = {tileType: TileType.MOON_HABITAT};
 
     player.megaCredits = 0;
     card.play(player);

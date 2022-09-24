@@ -27,11 +27,11 @@ describe('WaterTreatmentComplex', () => {
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
     player.titanium = 1;
-    space.tile = {tileType: TileType.MOON_COLONY};
+    space.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
-    space.tile = {tileType: TileType.MOON_COLONY};
+    space.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;

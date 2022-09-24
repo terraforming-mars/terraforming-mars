@@ -37,7 +37,7 @@ describe('LunaHyperloopCorporation', () => {
     expect(player.megaCredits).eq(3);
 
     player.megaCredits = 0;
-    MoonExpansion.addColonyTile(player, spaces[3].id);
+    MoonExpansion.addHabitatTile(player, spaces[3].id);
     card.action(player);
     expect(player.megaCredits).eq(3);
   });
@@ -60,7 +60,7 @@ describe('LunaHyperloopCorporation', () => {
     expect(card.getVictoryPoints(player)).eq(3);
 
     player.megaCredits = 0;
-    MoonExpansion.addColonyTile(player, spaces[3].id);
+    MoonExpansion.addHabitatTile(player, spaces[3].id);
     card.action(player);
     expect(card.getVictoryPoints(player)).eq(3);
   });

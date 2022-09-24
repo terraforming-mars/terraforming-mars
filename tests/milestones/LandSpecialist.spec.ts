@@ -67,7 +67,7 @@ describe('LandSpecialist', function() {
     const moonSpaces = MoonExpansion.moonData(game).moon.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, moonSpaces[0], {tileType: TileType.MOON_MINE});
-    game.simpleAddTile(player, moonSpaces[1], {tileType: TileType.MOON_COLONY});
+    game.simpleAddTile(player, moonSpaces[1], {tileType: TileType.MOON_HABITAT});
     game.simpleAddTile(player, moonSpaces[2], {tileType: TileType.MOON_ROAD});
     expect(milestone.getScore(player)).eq(0);
     expect(milestone.canClaim(player)).is.false;

@@ -16,7 +16,7 @@ export class Habitat14 extends Card {
 
       behavior: {
         production: {energy: -1, megacredits: -1},
-        moon: {colonyTile: {}},
+        moon: {habitatTile: {}},
       },
       reserveUnits: {titanium: 1},
 
@@ -28,10 +28,10 @@ export class Habitat14 extends Card {
             pb.minus().energy(1).minus().megacredits(1);
           }).br;
           b.minus().titanium(1).br;
-          b.moonColony();
+          b.moonHabitat();
         }),
       },
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

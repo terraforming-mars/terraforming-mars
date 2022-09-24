@@ -4,7 +4,7 @@ import {BasePlaceMoonTile} from './BasePlaceMoonTile';
 import {IMoonData} from './IMoonData';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonColonyTile extends BasePlaceMoonTile {
+export class PlaceMoonHabitatTile extends BasePlaceMoonTile {
   constructor(
     player: Player,
     spaces?: Array<ISpace>,
@@ -18,8 +18,8 @@ export class PlaceMoonColonyTile extends BasePlaceMoonTile {
   }
 
   protected placeTile(space: ISpace) {
-    MoonExpansion.addColonyTile(this.player, space.id);
-    MoonExpansion.raiseColonyRate(this.player);
+    MoonExpansion.addHabitatTile(this.player, space.id);
+    MoonExpansion.raiseHabitatRate(this.player);
     return undefined;
   }
 }

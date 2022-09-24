@@ -180,7 +180,7 @@ describe('Player', function() {
       GlobalParameter.TEMPERATURE,
       GlobalParameter.OCEANS,
       GlobalParameter.MOON_MINING_RATE,
-      GlobalParameter.MOON_COLONY_RATE,
+      GlobalParameter.MOON_HABITAT_RATE,
       GlobalParameter.MOON_LOGISTICS_RATE]);
   });
 
@@ -785,7 +785,7 @@ function titlesToGlobalParameter(title: string): GlobalParameter {
     return GlobalParameter.VENUS;
   }
   if (title.includes('colony')) {
-    return GlobalParameter.MOON_COLONY_RATE;
+    return GlobalParameter.MOON_HABITAT_RATE;
   }
   if (title.includes('mining')) {
     return GlobalParameter.MOON_MINING_RATE;

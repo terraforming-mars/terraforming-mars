@@ -835,10 +835,10 @@ export class Player {
     }
 
     MoonExpansion.ifMoon(game, (moonData) => {
-      if (moonData.colonyRate < constants.MAXIMUM_COLONY_RATE) {
+      if (moonData.colonyRate < constants.MAXIMUM_HABITAT_RATE) {
         action.options.push(
           new SelectOption('Increase the Moon colony rate', 'Increase', () => {
-            MoonExpansion.raiseColonyRate(this, 1);
+            MoonExpansion.raiseHabitatRate(this, 1);
             return undefined;
           }),
         );
@@ -1608,7 +1608,7 @@ export class Player {
           return gameOptions.altVenusBoard === false;
         case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
           return gameOptions.altVenusBoard === true;
-        case CardName.MOON_COLONY_STANDARD_PROJECT_V2:
+        case CardName.MOON_HABITAT_STANDARD_PROJECT_V2:
         case CardName.MOON_MINE_STANDARD_PROJECT_V2:
         case CardName.MOON_ROAD_STANDARD_PROJECT_V2:
           return gameOptions.moonStandardProjectVariant === true;

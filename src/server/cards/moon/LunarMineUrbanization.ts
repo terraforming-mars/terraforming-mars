@@ -23,7 +23,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       },
       // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
       requirements: CardRequirements.builder((b) => b.miningTiles(1)),
-      tr: {moonColony: 1},
+      tr: {moonHabitat: 1},
 
       metadata: {
         description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles ' +
@@ -32,7 +32,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
 
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).br;
-          b.moonColonyRate();
+          b.moonHabitatRate();
           b.tile(TileType.LUNAR_MINE_URBANIZATION, true).asterix();
         }),
       },
@@ -46,7 +46,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
       }
       space.tile.tileType = TileType.LUNAR_MINE_URBANIZATION;
-      MoonExpansion.raiseColonyRate(player);
+      MoonExpansion.raiseHabitatRate(player);
       return undefined;
     });
   }

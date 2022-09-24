@@ -13,7 +13,7 @@ interface StaticPreludeProperties {
     name: CardName;
     tags?: Array<Tag>;
     startingMegacredits?: number;
-    tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
+    tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
     behavior?: Partial<Behavior>,
 }
 

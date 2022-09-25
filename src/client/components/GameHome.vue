@@ -1,14 +1,14 @@
 <template>
       <div id="game-home" class="game-home-container">
-        <h1><span v-i18n>Terraforming Mars</span> [game id: <span>{{getGameId()}}</span>]</h1>
-        <h4 v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name. <br/>Save this page in case you or one of your opponents loses a link.</h4>
+        <h1><span v-i18n>Terraforming Mars</span> [<span v-i18n>game id:</span> <span>{{getGameId()}}</span>]</h1>
+        <h4><span v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name.</span><br/><span v-i18n>Save this page in case you or one of your opponents loses a link.</span></h4>
         <ul>
           <li v-for="(player, index) in (game === undefined ? [] : game.players)" :key="player.color">
             <span class="turn-order" v-i18n>{{getTurnOrder(index)}}</span>
             <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
             <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
             <Button title="copy" size="tiny" @click="copyUrl(player.id)"/>
-            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
+            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Playable link for</span> {{player.name}} <span v-i18n>copied to clipboard</span> <span class="dismissed" @click="setCopiedIdToDefault" v-i18n>dismiss</span></span>
           </li>
           <li v-if="game !== undefined && game.spectatorId">
             <p/>

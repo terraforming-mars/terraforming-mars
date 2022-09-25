@@ -981,9 +981,11 @@ export class Game implements Logger {
   private gotoEndGame(): void {
     // Log id or cloned game id
     if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
-      this.log('This game was a clone from game ' + this.clonedGamedId);
+      const clonedGamedId = this.clonedGamedId;
+      this.log('This game was a clone from game ${0}', (b) => b.rawString(clonedGamedId));
     } else {
-      this.log('This game id was ' + this.id);
+      const id = this.id;
+      this.log('This game id was ${0}', (b) => b.rawString(id));
     }
 
     const scores: Array<Score> = [];

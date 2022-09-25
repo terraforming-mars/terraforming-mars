@@ -26,6 +26,10 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     });
   }
 
+  public override get cardType(): CardType.STANDARD_PROJECT {
+    return CardType.STANDARD_PROJECT;
+  }
+
   protected discount(_player: Player) {
     return 0;
   }

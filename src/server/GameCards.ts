@@ -16,9 +16,9 @@ import {GameModule} from '../common/cards/GameModule';
 import {GameOptions} from './GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
-import {StandardProjectCard} from './cards/StandardProjectCard';
-import {PreludeCard} from './cards/prelude/PreludeCard';
+import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {CardFinder} from './CardFinder';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
@@ -91,7 +91,7 @@ export class GameCards {
     return this.getCards<IProjectCard>('projectCards');
   }
   public getStandardProjects() {
-    return this.getCards<StandardProjectCard>('standardProjects');
+    return this.getCards<IStandardProjectCard>('standardProjects');
   }
   public getCorporationCards(): Array<ICorporationCard> {
     const cards = this.getCards<ICorporationCard>('corporationCards')
@@ -99,7 +99,7 @@ export class GameCards {
     return this.addCustomCards(cards, this.gameOptions.customCorporationsList);
   }
   public getPreludeCards() {
-    let preludes = this.getCards<PreludeCard>('preludeCards');
+    let preludes = this.getCards<IPreludeCard>('preludeCards');
     // https://github.com/terraforming-mars/terraforming-mars/issues/2833
     // Make Valley Trust playable even when Preludes is out of the game
     // by preparing a deck of preludes.

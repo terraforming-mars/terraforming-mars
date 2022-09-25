@@ -5,7 +5,8 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCard} from '../StandardProjectCard';
+import {ICard} from '../ICard';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class CrediCor extends Card implements ICorporationCard {
   constructor() {
@@ -29,7 +30,7 @@ export class CrediCor extends Card implements ICorporationCard {
       },
     });
   }
-  private effect(player: Player, card: IProjectCard | StandardProjectCard): void {
+  private effect(player: Player, card: IProjectCard | IStandardProjectCard): void {
     if (player.isCorporation(this.name) && card.cost >= 20) {
       player.megaCredits += 4;
     }
@@ -37,7 +38,8 @@ export class CrediCor extends Card implements ICorporationCard {
   public onCardPlayed(player: Player, card: IProjectCard) {
     this.effect(player, card);
   }
-  public onStandardProject(player: Player, project: StandardProjectCard) {
-    this.effect(player, project);
+  public onStandardProject(player: Player, project: ICard) {
+    // TODO(kberg): Remove this typecasting.
+    this.effect(player, <IStandardProjectCard>project);
   }
 }

@@ -34,7 +34,7 @@ export class LunaTradeStation extends Card implements IActionCard {
         description: 'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
-          b.action('Gain 2 M€ for each colony tile on The Moon.', (eb) =>
+          b.action('Gain 2 M€ for each habitat tile on The Moon.', (eb) =>
             eb.empty().startAction.megacredits(2).slash().moonColony({all}));
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),

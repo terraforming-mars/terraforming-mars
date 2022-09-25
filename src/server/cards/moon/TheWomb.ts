@@ -24,7 +24,7 @@ export class TheWomb extends Card {
 
       metadata: {
         description: 'Decrease your energy production 2 steps and increase your M€ production 4 steps. ' +
-          'Spend 2 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.',
+          'Spend 2 titanium. Place a habitat tile on The Moon and raise the Habitat Rate 1 step.',
         cardNumber: 'M08',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {

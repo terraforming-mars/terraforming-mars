@@ -6,7 +6,7 @@
   "Place a mine tile on The Moon and raise the Mining Rate 1 step. Increase your titanium production 1 step.": "",
 
   "First Lunar Settlement": "",
-  "Place a colony tile on The Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.": "",
+  "Place a habitat tile on The Moon and raise the Habitat Rate 1 step. Increase your M€ production 1 step.": "",
 
   "Lunar Planning Office": "",
   "Draw 2 cards with Moon tag. Gain 6 steel.": "",
@@ -18,7 +18,7 @@
   "Requires Logistic Rate to be 2 or higher. Raise the Logistic Rate 1 step": "",
 
   "Algae Bioreactors": "",
-  "Decrease your plant production 1 step. Raise the Colony Rate 1 step and oxygen 1%.": "",
+  "Decrease your plant production 1 step. Raise the Habitat Rate 1 step and oxygen 1%.": "",
 
   "Ancient Shipyards": "",
   "Ancient Shipyards (Nerfed)": "",
@@ -32,7 +32,7 @@
   "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "",
 
   "Colonist Shuttles": "",
-  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on The Moon.": "",
+  "Spend 1 titanium. Raise the Habitat Rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "",
 
   "Copernicus Solar Arrays": "",
   "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "",
@@ -47,7 +47,7 @@
 
   "Darkside Incubation Plant": "",
   "Action: Add 1 microbe here.": "",
-  "Action: Spend 2 microbes to raise the Colony Rate 1 step.": "",
+  "Action: Spend 2 microbes to raise the Habitat Rate 1 step.": "",
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "",
 
   "Darkside Meteor Bombardment": "",
@@ -67,7 +67,7 @@
   "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.": "",
 
   "Geodesic Tents": "",
-  "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.": "",
+  "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the Habitat Rate 1 step.": "",
 
   "Grand Luna Academy": "",
   "Draw 1 card per 2 Moon tags you have, including this.": "",
@@ -85,7 +85,7 @@
   "Action: Gain 1 M€ for each level of Mining Rate.": "",
 
   "Habitat 14": "",
-  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.": "",
+  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the Habitat Rate 1 step.": "",
 
   "Heavy Duty Rovers": "",
   "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.": "",
@@ -104,13 +104,13 @@
   "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "",
 
   "L.T.F. Headquarters": "",
-  "Raise the Colony Rate 1 step. Place a colony. Gain 1 trade fleet.": "",
+  "Raise the Habitat Rate 1 step. Place a colony. Gain 1 trade fleet.": "",
 
   "L.T.F. Privileges": "",
   "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "",
 
   "Luna Conference": "",
-  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per colony tile on The Moon.": "",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "",
 
   "Luna Mining Hub": "",
   "Requires a Mining Rate of 5 or higher.": "",
@@ -126,7 +126,7 @@
   "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "",
 
   "Luna Resort": "",
-  "Requires 2 colonies on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the Colony Rate 1 step.": "",
+  "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the Habitat Rate 1 step.": "",
 
   "Luna Senate": "",
   "1 VP per Moon tag you have.": "",
@@ -136,7 +136,7 @@
   "Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise the Logistic Rate 2 steps.": "",
 
   "Luna Trade Station": "",
-  "Action: Gain 2 M€ for each colony tile on The Moon.": "",
+  "Action: Gain 2 M€ for each habitat tile on The Moon.": "",
   "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "",
 
   "Luna Train Station": "",
@@ -150,7 +150,7 @@
   "Spend 2 Titanium. Place a mine tile on The Moon and raise the Mining Rate 1 step. Increase your Steel, Titanium, and Heat production 1 step each. Increase your Energy production 2 steps.": "",
 
   "Lunar Mine Urbanization": "",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the Colony Rate 1 step. This tile counts both as a colony and a mine tile.": "",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the Habitat Rate 1 step. This tile counts both as a habitat and a mine tile.": "",
 
   "Lunar Observation Post": "",
   "Action: Add 1 data resource to ANY card": "",
@@ -177,13 +177,13 @@
   "Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the Mining Rate 1 step and the Logistic Rate 1 step.": "",
 
   "Microsingularity Plant": "",
-  "Requires 2 colonies on The Moon. Increase your energy production 2 steps.": "",
+  "Requires 2 habitats on The Moon. Increase your energy production 2 steps.": "",
 
   "Mining Robots Manuf. Center": "",
   "Spend 1 titanium. Raise the Mining Rate 2 steps.": "",
 
   "Momentum Virium Habitat": "",
-  "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a colony tile ON THE RESERVED AREA and raise the Colony Rate 1 step.": "",
+  "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the Habitat Rate 1 step.": "",
 
   "Moon Tether": "",
   "Requires 6 Space tags.": "",
@@ -194,10 +194,10 @@
   "Requires 1 mine on The Moon.": "",
 
   "New Colony Planning Initiaitives": "",
-  "Requires Colony Rate to be 2 or higher. Raise the Colony Rate 1 step.": "",
+  "Requires Habitat Rate to be 2 or higher. Raise the Habitat Rate 1 step.": "",
 
   "Off-World City Living": "",
-  "Increase your M€ production 1 step per city tile NOT ON MARS. Increase Colony Rate 1 step.": "",
+  "Increase your M€ production 1 step per city tile NOT ON MARS. Increase Habitat Rate 1 step.": "",
 
   "Orbital Power Grid": "",
   "Increase your energy production 1 step per city tile NOT ON MARS.": "",
@@ -215,7 +215,7 @@
   "Action: Spend 1 steel to add 2 Data resources to ANY card.": "",
 
   "Revolting Colonists": "",
-  "Requires 4 Colony Rate. All players pay 3M€ for each colony tile they own.": "",
+  "Requires 4 Habitat Rate. All players pay 3M€ for each habitat tile they own.": "",
 
   "Rover Drivers Union": "",
   "Requires 2 Logistic Rate. Raise the Logistic Rate 1 step. Increase your M€ production 1 step per Logistic Rate.": "",
@@ -228,13 +228,13 @@
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "",
 
   "Small Duty Rovers": "",
-  "Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per colony tile, mine tile and road tile on The Moon.": "",
+  "Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "",
 
   "Solar Panel Foundry": "",
   "Action: Spend 2 steel to increase your Energy Production 1 step.": "",
 
   "Sphere Habitats": "",
-  "Spend 1 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.": "",
+  "Spend 1 titanium. Place a habitat tile on The Moon and raise the Habitat Rate 1 step.": "",
 
   "Staging Station \"Behemoth\"": "",
   "Gain 2 trade fleets. Raise the Logistic Rate 1 step.": "",
@@ -245,17 +245,17 @@
   "Action: Spend X steel to gain 3X M€ (max 3 steel).": "",
 
   "Subterranean Habitats": "",
-  "Effect: When you build a colony on The Moon, you spend 1 titanium less.": "",
-  "Spend 2 steel. Raise the Colony Rate 1 step.": "",
+  "Effect: When you build a habitat on The Moon, you spend 1 titanium less.": "",
+  "Spend 2 steel. Raise the Habitat Rate 1 step.": "",
 
   "Syndicate Pirate Raids": "",
   "ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION": "",
 
   "The Womb": "",
-  "Decrease your energy production 2 steps and increase your M€ production 4 steps. Spend 2 titanium. Place a colony tile on The Moon and raise the Colony Rate 1 step.": "",
+  "Decrease your energy production 2 steps and increase your M€ production 4 steps. Spend 2 titanium. Place a habitat tile on The Moon and raise the Habitat Rate 1 step.": "",
 
   "Thorium Rush": "",
-  "Place 1 colony tile, 1 mining tile and 1 road tile on The Moon. Raise the Colony Rate, Mining Rate and Logistic Rate 1 step.": "",
+  "Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. Raise the Habitat Rate, Mining Rate and Logistic Rate 1 step.": "",
 
   "Titanium Extraction Center": "",
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of Mining Rate.": "",
@@ -271,16 +271,16 @@
   "Gain 1 steel and 1 titanium. Raise the Mining Rate 1 step.": "",
 
   "Undermoon Drug Lords Network": "",
-  "Increase your M€ production 1 step per 2 steps of Colony Rate.": "",
+  "Increase your M€ production 1 step per 2 steps of Habitat Rate.": "",
 
   "Water Treatment Complex": "",
-  "Requires 1 colony tile on The Moon. Spend 1 titanium. Raise the Colony Rate 2 steps.": "",
+  "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the Habitat Rate 2 steps.": "",
 
   "We Grow As One": "",
-  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL Colony Tile Tracks 1 step. Increase each Colony Tile Track 1 step if you have a colony on that Colony Tile.": "",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "",
 
   "Steal": "",
-  "Colony rate": "",
+  "Habitat Rate": "",
   "Mining rate": "",
   "Logistic rate": "",
   "Colony tiles": "",

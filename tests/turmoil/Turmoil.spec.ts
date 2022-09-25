@@ -478,7 +478,7 @@ describe('Turmoil', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('canPlay: reds tax applies by default when raising moon colony rate', function() {
+  it('canPlay: reds tax applies by default when raising moon habitat rate', function() {
     // Raises the colony rate two steps.
     const card = new WaterTreatmentComplex();
     const player = TestPlayer.BLUE.newPlayer();

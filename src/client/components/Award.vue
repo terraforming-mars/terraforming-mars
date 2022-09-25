@@ -4,8 +4,8 @@
       <i :title="award.player_name" class="board-cube" :class="`board-cube--${award.player_color}`" />
     </div>
 
-    <div class="ma-name ma-name--awards award-block" :class="maAwardClass" v-i18n>
-      {{ award.name }}
+    <div class="ma-name ma-name--awards award-block" :class="maAwardClass">
+      <span v-i18n>{{ award.name }}</span>
       <div class="ma-scores player_home_block--milestones-and-awards-scores" v-if="showScores">
         <p
           v-for="score in sortedScores"
@@ -18,8 +18,8 @@
       </div>
     </div>
 
-    <div v-if="showDescription" class="ma-description" v-i18n>
-      {{ award.description }}
+    <div v-if="showDescription" class="ma-description">
+      <span v-i18n>{{ award.description }}</span>
     </div>
   </div>
 </template>

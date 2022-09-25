@@ -130,7 +130,7 @@
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="altVenusBoard" id="altVenusBoard-checkbox">
                                 <label for="altVenusBoard-checkbox">
-                                    <span v-i18n>Alt. Venus Board</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/#alt-venus" class="tooltip" target="_blank">&#9432;</a>
+                                    <span v-i18n>Alt. Venus Board</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Alternative-Venus-Board" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
                         </div>

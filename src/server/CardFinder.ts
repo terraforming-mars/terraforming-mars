@@ -3,7 +3,7 @@ import {IProjectCard} from './cards/IProjectCard';
 import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
-import {PreludeCard} from './cards/prelude/PreludeCard';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ALL_MODULE_MANIFESTS} from './cards/AllCards';
 
 const CARD_RENAMES = new Map<string, CardName>([
@@ -47,8 +47,25 @@ export class CardFinder {
     return this.getCard(cardName, ['projectCards', 'preludeCards']);
   }
 
-  public getPreludeByName(cardName: CardName): PreludeCard | undefined {
+  public getPreludeByName(cardName: CardName): IPreludeCard | undefined {
     return this.getCard(cardName, ['preludeCards']);
+  }
+
+  public preludesFromJSON(cards: Array<CardName>): Array<IPreludeCard> {
+    if (cards === undefined) {
+      console.warn('missing cards calling cardsFromJSON');
+      return [];
+    }
+    const result: Array<IPreludeCard> = [];
+    cards.forEach((element: CardName) => {
+      const card = this.getPreludeByName(element);
+      if (card !== undefined) {
+        result.push(card);
+      } else {
+        console.warn(`card ${element} not found while loading game.`);
+      }
+    });
+    return result;
   }
 
   public cardsFromJSON(cards: Array<CardName>): Array<IProjectCard> {

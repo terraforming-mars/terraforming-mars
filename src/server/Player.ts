@@ -110,6 +110,8 @@ export class Player {
   private steelValue: number = 2;
   // Helion
   public canUseHeatAsMegaCredits: boolean = false;
+  // Luna Trade Federation
+  public canUseTitaniumAsMegacredits: boolean = false;
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
@@ -961,7 +963,10 @@ export class Player {
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
    */
   public spendableMegacredits(): number {
-    return this.megaCredits + (this.canUseHeatAsMegaCredits ? this.availableHeat() : 0);
+    let total = this.megaCredits;
+    if (this.canUseHeatAsMegaCredits) total += this.availableHeat();
+    if (this.canUseTitaniumAsMegacredits) total += this.titanium * (this.titaniumValue - 1);
+    return total;
   }
 
   public runResearchPhase(draftVariant: boolean): void {
@@ -1562,6 +1567,12 @@ export class Player {
       data: options?.data ?? false,
     };
 
+    // HOOK: Luna Trade Federation
+    if (usable.titanium === false && payment.titanium > 0 && this.isCorporation(CardName.LUNA_TRADE_FEDERATION)) {
+      usable.titanium = true;
+      multiplier.titanium -= 1;
+    }
+
     let totalToPay = 0;
     for (const key of PAYMENT_KEYS) {
       if (usable[key]) totalToPay += payment[key] * multiplier[key];
@@ -1570,8 +1581,10 @@ export class Player {
     return totalToPay;
   }
 
-  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
-  // and additionally pay the reserveUnits (no replaces here)
+  /**
+   * Returns `true` if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
+   * and additionally pay the reserveUnits (no replaces here)
+   */
   public canAfford(cost: number, options?: CanAffordOptions) {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (!this.hasUnits(reserveUnits)) {
@@ -1931,6 +1944,7 @@ export class Player {
       steelValue: this.steelValue,
       // Helion
       canUseHeatAsMegaCredits: this.canUseHeatAsMegaCredits,
+      canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
@@ -1992,6 +2006,8 @@ export class Player {
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+    // TODO(kberg): remove ?? false by 2022-12-01
+    player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits ?? false;
     player.cardCost = d.cardCost;
     player.colonies.cardDiscount = d.cardDiscount;
     player.colonies.tradeDiscount = d.colonyTradeDiscount;

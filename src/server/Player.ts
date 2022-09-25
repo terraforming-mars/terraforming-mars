@@ -837,7 +837,7 @@ export class Player {
     MoonExpansion.ifMoon(game, (moonData) => {
       if (moonData.colonyRate < constants.MAXIMUM_COLONY_RATE) {
         action.options.push(
-          new SelectOption('Increase the Moon colony rate', 'Increase', () => {
+          new SelectOption('Increase the Moon habitat rate', 'Increase', () => {
             MoonExpansion.raiseColonyRate(this, 1);
             return undefined;
           }),

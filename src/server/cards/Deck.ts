@@ -8,6 +8,7 @@ import {ICorporationCard} from './corporation/ICorporationCard';
 import {IProjectCard} from './IProjectCard';
 import {inplaceShuffle} from '../utils/shuffle';
 import {Logger} from '../logs/Logger';
+import {IPreludeCard} from './prelude/IPreludeCard';
 
 /**
  * A deck of cards to draw from, and also its discard pile.
@@ -154,8 +155,8 @@ export class ProjectDeck extends Deck<IProjectCard> {
 }
 
 const INCOMPATIBLE_PRELUDES = [CardName.BY_ELECTION, CardName.THE_NEW_SPACE_RACE] as const;
-export class PreludeDeck extends Deck<IProjectCard> {
-  public constructor(deck: Array<IProjectCard>, discarded: Array<IProjectCard>, random: Random) {
+export class PreludeDeck extends Deck<IPreludeCard> {
+  public constructor(deck: Array<IPreludeCard>, discarded: Array<IPreludeCard>, random: Random) {
     const copy = [...deck];
     const indexes = INCOMPATIBLE_PRELUDES.map((name) => deck.findIndex((c) => c.name === name));
     if (indexes[0] >= 0 && indexes[1] >= 0) {
@@ -168,11 +169,11 @@ export class PreludeDeck extends Deck<IProjectCard> {
     super('prelude', copy, discarded, random);
   }
 
-  public static deserialize(d: SerializedDeck, random: Random): Deck<IProjectCard> {
+  public static deserialize(d: SerializedDeck, random: Random): Deck<IPreludeCard> {
     const cardFinder = new CardFinder();
 
-    const deck = cardFinder.cardsFromJSON(d.drawPile);
-    const discarded = cardFinder.cardsFromJSON(d.discardPile);
+    const deck = <Array<IPreludeCard>>cardFinder.preludesFromJSON(d.drawPile);
+    const discarded = cardFinder.preludesFromJSON(d.discardPile);
     return new PreludeDeck(deck, discarded, random);
   }
 }

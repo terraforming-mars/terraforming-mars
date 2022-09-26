@@ -8,7 +8,6 @@ import {Tag} from '../../common/cards/Tag';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
-import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
@@ -17,15 +16,6 @@ import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
-
-export interface IActionCard {
-    action: (player: Player) => PlayerInput | undefined;
-    canAct: (player: Player) => boolean;
-}
-
-export function isIActionCard(object: any): object is IActionCard {
-  return object !== undefined && object.canAct !== undefined && object.action !== undefined;
-}
 
 export interface IHasCheckLoops {
     getCheckLoops(): number;
@@ -46,7 +36,7 @@ export namespace VictoryPoints {
 
 export type DynamicTRSource = (player: Player) => TRSource;
 
-export interface ICard extends Partial<IActionCard> {
+export interface ICard {
     name: CardName;
     tags: Array<Tag>;
     play: (player: Player) => PlayerInput | undefined;
@@ -57,7 +47,7 @@ export interface ICard extends Partial<IActionCard> {
     victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
-    onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
+    onStandardProject?: (player: Player, project: ICard) => void;
     onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;
 
@@ -86,3 +76,11 @@ export interface ICard extends Partial<IActionCard> {
     tilesBuilt?: Array<TileType>;
 }
 
+export interface IActionCard {
+  action: (player: Player) => PlayerInput | undefined;
+  canAct: (player: Player) => boolean;
+}
+
+export function isIActionCard(object: any): object is IActionCard {
+  return object !== undefined && object.canAct !== undefined && object.action !== undefined;
+}

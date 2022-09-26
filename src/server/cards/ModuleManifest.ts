@@ -3,10 +3,10 @@ import {GameModule} from '../../common/cards/GameModule';
 import {ICorporationCard} from './corporation/ICorporationCard';
 import {ICardFactory} from './ICardFactory';
 import {IProjectCard} from './IProjectCard';
-import {StandardProjectCard} from './StandardProjectCard';
-import {StandardActionCard} from './StandardActionCard';
-import {PreludeCard} from './prelude/PreludeCard';
 import {ICard} from './ICard';
+import {IStandardProjectCard} from './IStandardProjectCard';
+import {IStandardActionCard} from './IStandardActionCard';
+import {IPreludeCard} from './prelude/IPreludeCard';
 
 export type CardManifest<T extends ICard> = Partial<Record<CardName, ICardFactory<T>>>;
 
@@ -33,17 +33,17 @@ export class ModuleManifest {
   projectCards : CardManifest<IProjectCard>;
   cardsToRemove: Set<CardName>;
   corporationCards : CardManifest<ICorporationCard>;
-  preludeCards : CardManifest<PreludeCard>;
-  standardProjects : CardManifest<StandardProjectCard>;
-  standardActions : CardManifest<StandardActionCard>;
+  preludeCards : CardManifest<IPreludeCard>;
+  standardProjects : CardManifest<IStandardProjectCard>;
+  standardActions : CardManifest<IStandardActionCard>;
   constructor(arg: {
          module: GameModule,
          projectCards?: CardManifest<IProjectCard>,
          cardsToRemove?: Array<CardName>,
          corporationCards?: CardManifest<ICorporationCard>,
-         preludeCards?: CardManifest<PreludeCard>,
-         standardProjects?: CardManifest<StandardProjectCard>,
-         standardActions?: CardManifest<StandardActionCard>,
+         preludeCards?: CardManifest<IPreludeCard>,
+         standardProjects?: CardManifest<IStandardProjectCard>,
+         standardActions?: CardManifest<IStandardActionCard>,
          }) {
     this.module = arg.module;
     this.projectCards = arg.projectCards || {};

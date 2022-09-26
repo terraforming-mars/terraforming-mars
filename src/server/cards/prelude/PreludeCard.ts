@@ -3,10 +3,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
 import {TileType} from '../../../common/TileType';
-import {ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
+import {IPreludeCard} from './IPreludeCard';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;
@@ -17,7 +16,7 @@ interface StaticPreludeProperties {
     behavior?: Partial<Behavior>,
 }
 
-export abstract class PreludeCard extends Card implements IProjectCard {
+export abstract class PreludeCard extends Card implements IPreludeCard {
   constructor(properties: StaticPreludeProperties) {
     super({
       behavior: properties.behavior,
@@ -28,8 +27,7 @@ export abstract class PreludeCard extends Card implements IProjectCard {
       startingMegaCredits: properties.startingMegacredits,
     });
   }
-}
-
-export function isPreludeCard(card: ICard): card is PreludeCard {
-  return card instanceof PreludeCard;
+  public override get cardType(): CardType.PRELUDE {
+    return CardType.PRELUDE;
+  }
 }

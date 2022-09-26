@@ -7,12 +7,13 @@ import {CardName} from '../common/cards/CardName';
 import {LogHelper} from './LogHelper';
 import {Random, UnseededRandom} from './Random';
 import {Logger} from './logs/Logger';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
 
 const INCOMPATIBLE_PRELUDES = [CardName.BY_ELECTION, CardName.THE_NEW_SPACE_RACE] as const;
 
 export class Dealer {
   public deck: Array<IProjectCard> = [];
-  public preludeDeck: Array<IProjectCard> = [];
+  public preludeDeck: Array<IPreludeCard> = [];
   public discarded: Array<IProjectCard> = [];
   public corporationCards: Array<ICorporationCard> = [];
   private random: Random;
@@ -122,7 +123,7 @@ export class Dealer {
     dealer.corporationCards = cardFinder.corporationCardsFromJSON(d.corporationCards);
     dealer.deck = cardFinder.cardsFromJSON(d.deck);
     dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
-    dealer.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
+    dealer.preludeDeck = cardFinder.preludesFromJSON(d.preludeDeck);
     return dealer;
   }
 

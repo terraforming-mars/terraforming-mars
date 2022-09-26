@@ -40,7 +40,7 @@
         </span>
       </div>
 
-      <span @click="toggleDescription" title="press to show or hide the description" data-test="toggle-description">
+      <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
         <div v-show="showAwards">
           <Award
             v-for="award in awards"

@@ -215,7 +215,7 @@ class RedsPolicy03 implements Policy {
           }
 
           if (this.canDecrease(game, GlobalParameter.MOON_COLONY_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon Colony Rate', 'Confirm', () => {
+            orOptions.options.push(new SelectOption('Decrease Moon Habitat Rate', 'Confirm', () => {
               MoonExpansion.lowerColonyRate(player, 1);
               return undefined;
             }));

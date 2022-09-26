@@ -81,7 +81,7 @@ const TO_STRING_MAP: Map<TileType, string> = new Map([
   [TileType.MINING_STEEL_BONUS, 'Mining (Steel)'],
   [TileType.MINING_TITANIUM_BONUS, 'Mining (Titanium)'],
   [TileType.MOON_MINE, 'Mine'],
-  [TileType.MOON_COLONY, 'Colony'],
+  [TileType.MOON_COLONY, 'Habitat'],
   [TileType.MOON_ROAD, 'Road'],
   [TileType.LUNA_TRADE_STATION, 'Luna Trade Station'],
   [TileType.LUNA_MINING_HUB, 'Luna Mining Hub'],

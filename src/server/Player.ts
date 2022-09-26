@@ -47,7 +47,7 @@ import {GameCards} from './GameCards';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {MoonExpansion} from './moon/MoonExpansion';
-import {StandardProjectCard} from './cards/StandardProjectCard';
+import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
@@ -837,7 +837,7 @@ export class Player {
     MoonExpansion.ifMoon(game, (moonData) => {
       if (moonData.colonyRate < constants.MAXIMUM_COLONY_RATE) {
         action.options.push(
-          new SelectOption('Increase the Moon colony rate', 'Increase', () => {
+          new SelectOption('Increase the Moon habitat rate', 'Increase', () => {
             MoonExpansion.raiseColonyRate(this, 1);
             return undefined;
           }),
@@ -1592,7 +1592,7 @@ export class Player {
     return cost + redsCost <= usable;
   }
 
-  private getStandardProjects(): Array<StandardProjectCard> {
+  private getStandardProjects(): Array<IStandardProjectCard> {
     const gameOptions = this.game.gameOptions;
     return new GameCards(gameOptions)
       .getStandardProjects()
@@ -1620,8 +1620,8 @@ export class Player {
   }
 
   // Public for testing.
-  public getStandardProjectOption(): SelectCard<StandardProjectCard> {
-    const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
+  public getStandardProjectOption(): SelectCard<IStandardProjectCard> {
+    const standardProjects: Array<IStandardProjectCard> = this.getStandardProjects();
 
     return new SelectCard(
       'Standard projects',

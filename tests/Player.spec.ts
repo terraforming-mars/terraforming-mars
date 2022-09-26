@@ -784,7 +784,7 @@ function titlesToGlobalParameter(title: string): GlobalParameter {
   if (title.includes('Venus')) {
     return GlobalParameter.VENUS;
   }
-  if (title.includes('colony')) {
+  if (title.includes('habitat')) {
     return GlobalParameter.MOON_COLONY_RATE;
   }
   if (title.includes('mining')) {

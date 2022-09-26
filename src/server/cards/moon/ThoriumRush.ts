@@ -24,8 +24,8 @@ export class ThoriumRush extends Card implements IProjectCard {
       },
 
       metadata: {
-        description: 'Place 1 colony tile, 1 mining tile and 1 road tile on The Moon. ' +
-        'Raise the Colony Rate, Mining Rate and Logistic Rate 1 step.',
+        description: 'Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. ' +
+        'Raise the Habitat Rate, Mining Rate and Logistic Rate 1 step.',
         cardNumber: 'M56',
         renderData: CardRenderer.builder((b) => {
           b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE})

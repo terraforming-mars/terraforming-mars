@@ -5,7 +5,7 @@
 
   "Intragen Sanctuary Headquarters":"Intragen Sanctuary Headquarters",
  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)":"Effetto: quando un giocatore gioca una carta con un simbolo Animale (inclusa questa), aggiungi 1 Animale a questa carta.",
- "You start with 38 M€. As your first action, place a colony tile on The Moon and raise the Colony Rate 1 step. 1 VP for every 2 animals on this card.":"Inizi con 38 M€. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. 1 PV ogni 2 Animali su questa carta.",
+ "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the Habitat Rate 1 step. 1 VP for every 2 animals on this card.":"Inizi con 38 M€. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. 1 PV ogni 2 Animali su questa carta.",
 
  "Luna First Incorporated":"Luna First Incorporated",
  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.":"Effetto: quando tu incrementi una qualsiasi Traccia Lunare, incrementa la tua Produzione di M€ di 1 livello.",
@@ -38,8 +38,8 @@
 
   "The Grand Luna Capital Group":"The Grand Luna Capital Group",
  "Effect: When you place a colony tile, gain 2 M€ for each adjacent colony tile.":"Effetto: quando collochi una tessera Colonia, ottieni 2 M€ per ogni tessera Colonia adiacente.",
- "1 VP for each colony tile adjacent to your colony tiles.":"1 PV per ogni tessera Colonia adiacente alle tue tessere Colonia.",
-  "You start with 32 M€ and 1 titanium. As your first action, place a colony tile on The Moon and raise the Colony Rate 1 step.":"Inizi con 32 M€ e 1 risorsa Titanio. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello."
+ "1 VP for each habitat tile adjacent to your habitat tiles.":"1 PV per ogni tessera Colonia adiacente alle tue tessere Colonia.",
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the Habitat Rate 1 step.":"Inizi con 32 M€ e 1 risorsa Titanio. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello."
 
 
 }

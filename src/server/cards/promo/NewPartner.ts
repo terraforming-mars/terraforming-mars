@@ -1,8 +1,8 @@
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class NewPartner extends PreludeCard {
@@ -25,7 +25,7 @@ export class NewPartner extends PreludeCard {
   }
 
   public override bespokePlay(player: Player) {
-    const cardsDrawn: Array<IProjectCard> = [
+    const cardsDrawn: Array<IPreludeCard> = [
       player.game.preludeDeck.draw(player.game),
       player.game.preludeDeck.draw(player.game),
     ];

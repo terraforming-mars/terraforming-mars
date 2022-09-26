@@ -41,6 +41,28 @@ export class Counter {
     const card = this.card;
     const game = player.game;
 
+    if (countable.cities !== undefined) {
+      const p = (countable.all === false) ? player : undefined;
+      switch (countable.cities.where) {
+      case 'offmars':
+        sum = game.getCitiesOffMarsCount(p);
+        break;
+      case 'onmars':
+        sum += game.getCitiesOnMarsCount(p);
+        break;
+      case 'everywhere':
+      default:
+        sum += game.getCitiesCount(p);
+      }
+    }
+
+    if (countable.oceans !== undefined) {
+      sum += game.board.getOceanCount({wetlands: true});
+    }
+
+    if (countable.greeneries !== undefined) {
+      sum += game.getGreeneriesCount();
+    }
     if (countable.tag !== undefined) {
       const tag = countable.tag;
 

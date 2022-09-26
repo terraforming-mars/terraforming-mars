@@ -6,7 +6,7 @@ import {ServeApp} from './ServeApp';
 export class Load extends Handler {
   public static readonly INSTANCE = new Load();
   private constructor() {
-    super();
+    super({validateServerId: true});
   }
 
   public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {

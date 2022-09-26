@@ -42,7 +42,7 @@ export class TempestConsultancy extends Card implements ICorporationCard {
   }
 
   public canAct(player: Player) {
-    return player.tags.count(Tag.MOON) >= 5;
+    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve') > 0;
   }
 
   public action(player: Player) {

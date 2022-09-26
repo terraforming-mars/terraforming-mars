@@ -15,12 +15,9 @@ export type _Countable = {
    * a player's wild tags count, events are ignored.)
    */
   tag?: Tag | Array<Tag>,
-  // cities?: {where?: 'onmars' | 'offmars' | 'everywhere'},
-  // greeneries?: NoAttributes,
-  // oceans?: {
-  //   upgradedOceans?: boolean,
-  //   wetlands?: boolean
-  // },
+  cities?: {where?: 'onmars' | 'offmars' | 'everywhere'},
+  greeneries?: NoAttributes,
+  oceans?: NoAttributes,
   moon?: {
     colonyRate?: NoAttributes,
     miningRate?: NoAttributes,

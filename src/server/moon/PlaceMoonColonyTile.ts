@@ -8,7 +8,7 @@ export class PlaceMoonColonyTile extends BasePlaceMoonTile {
   constructor(
     player: Player,
     spaces?: Array<ISpace>,
-    title: string = 'Select a space on The Moon for a colony tile.',
+    title: string = 'Select a space on The Moon for a habitat tile.',
   ) {
     super(player, spaces, title);
   }

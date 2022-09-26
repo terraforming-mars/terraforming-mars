@@ -5,7 +5,7 @@
 
   "Intragen Sanctuary Headquarters":"内在屁胡所总部",
  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)":"效果：当任何玩家使用动物标签(包括此牌)时，在此卡上加1只动物。",
- "You start with 38 M€. As your first action, place a colony tile on The Moon and raise the Colony Rate 1 step. 1 VP for every 2 animals on this card.":" 你起始拥有38元。作为你的第一个行动，在月球上放置一个殖民地板块，并提高殖民地速度1级。这张牌上每2只动物获得1分 ",
+ "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the Habitat Rate 1 step. 1 VP for every 2 animals on this card.":" 你起始拥有38元。作为你的第一个行动，在月球上放置一个殖民地板块，并提高殖民地速度1级。这张牌上每2只动物获得1分 ",
 
  "Luna First Incorporated":"第一月球公司",
  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.":"效果：当你提高任何月亮效率时，每增加1你的M€产量提高1。",
@@ -38,8 +38,8 @@
 
   "The Grand Luna Capital Group":"大月神资本集团",
  "Effect: When you place a colony tile, gain 2 M€ for each adjacent colony tile.":"效果：当你放置一个殖民地板块，每个相邻的殖民地板块获得2 M€。",
- "1 VP for each colony tile adjacent to your colony tiles.":"每与殖民地板块相邻的殖民地板块算1VP。",
-  "You start with 32 M€ and 1 titanium. As your first action, place a colony tile on The Moon and raise the Colony Rate 1 step.":"一开始有32 M€和1个钛。作为你的第一个行动，在月球上放置一个殖民地瓷砖，并提高殖民地率1级。"
+ "1 VP for each habitat tile adjacent to your habitat tiles.":"每与殖民地板块相邻的殖民地板块算1VP。",
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the Habitat Rate 1 step.":"一开始有32 M€和1个钛。作为你的第一个行动，在月球上放置一个殖民地瓷砖，并提高殖民地率1级。"
 
 
 }

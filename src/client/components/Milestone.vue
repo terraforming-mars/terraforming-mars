@@ -14,10 +14,10 @@
                 </span>
             </div>
             <div v-show="shouldShowList()">
-                <div title="press to show or hide the description" v-on:click.prevent="toggleDescription()" v-for="milestone in milestones_list" :key="milestone.name" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
+                <div :title="$t('press to show or hide the description')" v-on:click.prevent="toggleDescription()" v-for="milestone in milestones_list" :key="milestone.name" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
                     <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
-                    <div class="ma-name--milestones" :class="getNameCss(milestone.name)" v-i18n>
-                        {{milestone.name}}
+                    <div class="ma-name--milestones" :class="getNameCss(milestone.name)">
+                        <span v-i18n>{{milestone.name}}</span>
                         <div v-if="show_scores" class="ma-scores player_home_block--milestones-and-awards-scores">
                             <p v-for="score in [...milestone.scores].sort(
                                 (s1, s2) => s2.playerScore - s1.playerScore

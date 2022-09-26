@@ -177,10 +177,10 @@ export class MoonExpansion {
       const increment = Math.min(count, available);
       if (increment > 0) {
         if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('${0} acted as World Government and raised the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, count);
         } else {
-          player.game.log('${0} raised the moon colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('${0} raised the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
           player.increaseTerraformRatingSteps(count);
           this.bonus(moonData.colonyRate, increment, 3, () => {
             player.drawCard();
@@ -241,7 +241,7 @@ export class MoonExpansion {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const increment = Math.min(moonData.colonyRate, count);
       moonData.colonyRate -= increment;
-      player.game.log('${0} lowered the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+      player.game.log('${0} lowered the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
     });
   }
 

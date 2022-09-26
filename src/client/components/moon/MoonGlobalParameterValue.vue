@@ -1,5 +1,5 @@
 <template>
-  <div title="Moon colony, logistics, and mining rates">
+  <div v-i18n title="Moon habitat, logistics, and mining rates">
     <div class="moon-tile"/>
     <div>
       <div v-if="isMax" class="global_params_value">

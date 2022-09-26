@@ -33,12 +33,11 @@ describe('TempestConsultancy', () => {
     expect(card.canAct(player)).is.false;
   });
 
-  it('can act, not enough delegates', () => {
+  it('cannot act, not enough delegates', () => {
     player.tagsForTest = {moon: 5};
     expect(card.canAct(player)).is.true;
     turmoil.delegateReserve = [];
-    // Can still play, just ... no delegates
-    expect(card.canAct(player)).is.true;
+    expect(card.canAct(player)).is.false;
   });
 
   it('action, 1 delegate', () => {

@@ -20,7 +20,7 @@ export class MoonColonyStandardProjectVariant2 extends MoonColonyStandardProject
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 26 M€ place a colony on the moon and raise your M€ production 1 step.', (eb) => {
+          b.standardProject('Spend 26 M€ place a habitat on The Moon and raise your M€ production 1 step.', (eb) => {
             eb.megacredits(26).startAction.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).production((pb) => pb.megacredits(1));
           }),
         ),

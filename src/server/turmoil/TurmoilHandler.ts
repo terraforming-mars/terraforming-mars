@@ -245,9 +245,9 @@ export class TurmoilHandler {
     }
 
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (tr.moonColony !== undefined) {
-        const availableSteps = constants.MAXIMUM_COLONY_RATE - moonData.colonyRate;
-        total = total + Math.min(availableSteps, tr.moonColony);
+      if (tr.moonHabitat !== undefined) {
+        const availableSteps = constants.MAXIMUM_HABITAT_RATE - moonData.colonyRate;
+        total = total + Math.min(availableSteps, tr.moonHabitat);
       }
 
       if (tr.moonMining !== undefined) {

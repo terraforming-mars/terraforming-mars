@@ -85,7 +85,7 @@ const descriptions: Record<TileType, string> = {
   [TileType.MINING_STEEL_BONUS]: 'Mining: steel bonus',
   [TileType.MINING_TITANIUM_BONUS]: 'Mining: titanium bonus',
   [TileType.MOON_MINE]: 'Moon Mine: 1 VP per adjacent road',
-  [TileType.MOON_COLONY]: 'Moon Colony: 1 VP per adjacent road',
+  [TileType.MOON_HABITAT]: 'Moon Colony: 1 VP per adjacent road',
   [TileType.MOON_ROAD]: 'Moon Road: 1 VP',
   [TileType.LUNA_TRADE_STATION]: 'Luna Trade Station',
   [TileType.LUNA_MINING_HUB]: 'Luna Mining Hub',

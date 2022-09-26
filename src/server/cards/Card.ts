@@ -38,7 +38,7 @@ export interface StaticCardProperties {
   resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType.MOON_COLONY | TileType.MOON_MINE | TileType.MOON_ROAD>,
+  tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
   tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }

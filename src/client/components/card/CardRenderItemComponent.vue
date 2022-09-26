@@ -195,8 +195,8 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.AGENDA) {
         classes.push('card-resource');
         classes.push('card-resource-agenda');
-      } else if (this.item.type === CardRenderItemType.MOON_COLONY) {
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_COLONY_RATE) {
+      } else if (this.item.type === CardRenderItemType.MOON_HABITAT) {
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
           classes.push(sized('card-tile-lunar-colony-rate', this.item.size));
         } else {
           classes.push(sized('card-tile-lunar-colony', this.item.size));
@@ -209,7 +209,7 @@ export default Vue.extend({
         return size !== undefined ? `${clazz}--${size}` : clazz;
       }
 
-      if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
+      if (this.item.type === CardRenderItemType.MOON_HABITAT_RATE) {
         classes.push('card-colony-rate');
         if (this.item.size !== undefined) classes.push(`card-colony-rate--${this.item.size}`);
       }
@@ -324,7 +324,7 @@ export default Vue.extend({
 
       const previouslyRendered: Array<Tag | AltSecondaryTag> = [
         AltSecondaryTag.OXYGEN,
-        AltSecondaryTag.MOON_COLONY_RATE,
+        AltSecondaryTag.MOON_HABITAT_RATE,
         AltSecondaryTag.MOON_MINING_RATE,
         AltSecondaryTag.MOON_LOGISTICS_RATE,
       ];

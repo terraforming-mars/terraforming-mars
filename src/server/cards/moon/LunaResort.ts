@@ -17,7 +17,7 @@ export class LunaResort extends Card {
 
       behavior: {
         production: {energy: -1, megacredits: 3},
-        moon: {colonyRate: 1},
+        moon: {habitatRate: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.colonyTiles(2, {all})),
@@ -29,7 +29,7 @@ export class LunaResort extends Card {
           b.minus().titanium(2).production((pb) => {
             pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
-          b.moonColonyRate();
+          b.moonHabitatRate();
         }),
       },
     });

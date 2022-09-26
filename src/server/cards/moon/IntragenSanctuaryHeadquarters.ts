@@ -6,7 +6,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
-import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonColonyTile';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {all, played} from '../Options';
@@ -33,7 +33,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
         'As your first action, place a habitat tile on The Moon and raise the Habitat Rate 1 step. 1 VP for every 2 animals on this card.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(38).moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).br;
+          b.megacredits(38).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).br;
           b.effect('When any player plays an animal tag (including this), add 1 animal on this card.', (eb) => {
             eb.animals(1, {played, all}).startEffect.animals(1);
           }).br;
@@ -43,7 +43,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
   }
 
   public initialAction(player: Player) {
-    player.game.defer(new PlaceMoonColonyTile(player));
+    player.game.defer(new PlaceMoonHabitatTile(player));
     return undefined;
   }
 

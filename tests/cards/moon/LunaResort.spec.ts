@@ -26,25 +26,25 @@ describe('LunaResort', () => {
 
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     player.titanium = 2;
     player.production.override({energy: 1});
     expect(player.getPlayableCards()).does.include(card);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     player.titanium = 1;
     player.production.override({energy: 1});
     expect(player.getPlayableCards()).does.not.include(card);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     player.titanium = 2;
     player.production.override({energy: 0});
     expect(player.getPlayableCards()).does.not.include(card);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
     player.titanium = 2;
     player.production.override({energy: 1});

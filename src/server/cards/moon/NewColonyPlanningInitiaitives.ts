@@ -13,7 +13,7 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
       cost: 6,
 
       behavior: {
-        moon: {colonyRate: 1},
+        moon: {habitatRate: 1},
       },
 
       requirements: CardRequirements.builder((b) => b.colonyRate(2)),
@@ -21,7 +21,7 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
         description: 'Requires Habitat Rate to be 2 or higher. Raise the Habitat Rate 1 step.',
         cardNumber: 'M31',
         renderData: CardRenderer.builder((b) => {
-          b.moonColonyRate();
+          b.moonHabitatRate();
         }),
       },
     });

@@ -72,8 +72,8 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, points);
   }
-  public static moonColonyTile(points: number): CardRenderDynamicVictoryPoints {
-    const item = new CardRenderItem(CardRenderItemType.MOON_COLONY);
+  public static moonHabitatTile(points: number): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.MOON_HABITAT);
     item.size = Size.SMALL;
     return new CardRenderDynamicVictoryPoints(item, points, 1);
   }

@@ -76,7 +76,7 @@ describe('MoonExpansion', () => {
   it('raiseColonyRate', () => {
     expect(moonData.colonyRate).to.eq(0);
     expect(player.getTerraformRating()).eq(20);
-    MoonExpansion.raiseColonyRate(player);
+    MoonExpansion.raiseHabitatRate(player);
     expect(moonData.colonyRate).to.eq(1);
     expect(player.getTerraformRating()).eq(21);
   });
@@ -92,12 +92,12 @@ describe('MoonExpansion', () => {
   it('computeVictoryPoints', () => {
     const vps = new VictoryPointsBreakdown();
     function computeVps() {
-      vps.points.moonColonies = 0;
+      vps.points.moonHabitats = 0;
       vps.points.moonMines = 0;
       vps.points.moonRoads = 0;
       MoonExpansion.calculateVictoryPoints(player, vps);
       return {
-        colonies: vps.points.moonColonies,
+        colonies: vps.points.moonHabitats,
         mines: vps.points.moonMines,
         roads: vps.points.moonRoads,
       };
@@ -107,7 +107,7 @@ describe('MoonExpansion', () => {
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
     MoonExpansion.calculateVictoryPoints(player, vps);
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
-    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_COLONY});
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_HABITAT});
 
     // Reassign that road to the other player, and our player still gets credit for the colony;
     moonData.moon.getSpace('m02').player = player2;
@@ -157,17 +157,17 @@ describe('MoonExpansion', () => {
     expect(player.production.steel).eq(1);
   });
 
-  it('Raise colony rate bonus 2-3', () => {
+  it('Raise habitat rate bonus 2-3', () => {
     moonData.colonyRate = 2;
     player.cardsInHand = [];
-    MoonExpansion.raiseColonyRate(player, 1);
+    MoonExpansion.raiseHabitatRate(player, 1);
     expect(player.cardsInHand).has.length(1);
   });
 
-  it('Raise colony rate bonus 5-6', () => {
+  it('Raise habitat rate bonus 5-6', () => {
     moonData.colonyRate = 5;
     player.production.override({energy: 0});
-    MoonExpansion.raiseColonyRate(player, 1);
+    MoonExpansion.raiseHabitatRate(player, 1);
     expect(player.production.energy).eq(1);
   });
 
@@ -203,7 +203,7 @@ describe('MoonExpansion', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.colonyRate).to.eq(0);
     expect(player.getTerraformRating()).eq(20);
-    MoonExpansion.raiseColonyRate(player);
+    MoonExpansion.raiseHabitatRate(player);
     expect(moonData.colonyRate).to.eq(1);
     expect(player.getTerraformRating()).eq(20);
   });

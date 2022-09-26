@@ -11,18 +11,18 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
     super({
       name: CardName.FIRST_LUNAR_SETTLEMENT,
       tags: [Tag.CITY, Tag.MOON],
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
 
       behavior: {
         production: {megacredits: 1},
-        moon: {colonyTile: {}},
+        moon: {habitatTile: {}},
       },
 
       metadata: {
         description: 'Place a habitat tile on The Moon and raise the Habitat Rate 1 step. Increase your M€ production 1 step.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE});
+          b.production((pb) => pb.megacredits(1)).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),
       },
     });

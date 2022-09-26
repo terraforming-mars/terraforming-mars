@@ -31,7 +31,7 @@ describe('LunaFirstIncorporated', () => {
     player.production.override({megacredits: 0});
     player.megaCredits = 0;
 
-    MoonExpansion.raiseColonyRate(otherPlayer, 2);
+    MoonExpansion.raiseHabitatRate(otherPlayer, 2);
     expect(player.megaCredits).eq(2);
     expect(player.production.megacredits).eq(0);
 

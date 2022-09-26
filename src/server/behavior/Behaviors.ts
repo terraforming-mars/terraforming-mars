@@ -10,7 +10,7 @@ import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {RemoveAnyPlants} from '../deferredActions/RemoveAnyPlants';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {PlaceMoonColonyTile} from '../moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../moon/PlaceMoonColonyTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
@@ -169,12 +169,12 @@ export class Behaviors {
     // TODO(kberg): Add canPlay for these behaviors.
     if (behavior.moon !== undefined) {
       const moon = behavior.moon;
-      if (moon.colonyTile !== undefined) {
-        if (moon.colonyTile.space === undefined) {
-          player.game.defer(new PlaceMoonColonyTile(player));
+      if (moon.habitatTile !== undefined) {
+        if (moon.habitatTile.space === undefined) {
+          player.game.defer(new PlaceMoonHabitatTile(player));
         } else {
-          MoonExpansion.addColonyTile(player, moon.colonyTile.space, card?.name);
-          MoonExpansion.raiseColonyRate(player);
+          MoonExpansion.addHabitatTile(player, moon.habitatTile.space, card?.name);
+          MoonExpansion.raiseHabitatRate(player);
         }
       }
       if (moon.mineTile !== undefined) {
@@ -202,7 +202,7 @@ export class Behaviors {
             moon.tile.title));
         }
       }
-      if (moon.colonyRate !== undefined) MoonExpansion.raiseColonyRate(player, moon.colonyRate);
+      if (moon.habitatRate !== undefined) MoonExpansion.raiseHabitatRate(player, moon.habitatRate);
       if (moon.miningRate !== undefined) MoonExpansion.raiseMiningRate(player, moon.miningRate);
       if (moon.logisticsRate !== undefined) MoonExpansion.raiseLogisticRate(player, moon.logisticsRate);
     }
@@ -245,7 +245,7 @@ export class Behaviors {
       venus: behavior.global?.venus,
       oceans: behavior.ocean !== undefined ? 1 : undefined,
 
-      moonColony: (behavior.moon?.colonyRate ?? 0) + (behavior.moon?.colonyTile !== undefined ? 1 : 0),
+      moonHabitat: (behavior.moon?.habitatRate ?? 0) + (behavior.moon?.habitatTile !== undefined ? 1 : 0),
       moonMining: (behavior.moon?.miningRate ?? 0) + (behavior.moon?.mineTile !== undefined ? 1 : 0),
       moonLogistics: (behavior.moon?.logisticsRate ?? 0) + (behavior.moon?.roadTile !== undefined ? 1 : 0),
     };

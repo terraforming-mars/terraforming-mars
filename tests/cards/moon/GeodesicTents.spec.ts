@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
-import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 describe('GeodesicTents', () => {
   let player: TestPlayer;
@@ -42,7 +42,7 @@ describe('GeodesicTents', () => {
     expect(player.production.energy).eq(0);
     expect(player.production.plants).eq(1);
 
-    expect(player.game.deferredActions.peek()!).is.instanceOf(PlaceMoonColonyTile);
+    expect(player.game.deferredActions.peek()!).is.instanceOf(PlaceMoonHabitatTile);
   });
 });
 

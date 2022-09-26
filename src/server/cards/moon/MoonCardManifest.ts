@@ -70,8 +70,8 @@ import {MicrosingularityPlant} from './MicrosingularityPlant';
 import {MiningComplex} from './MiningComplex';
 import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
 import {MomentumViriumHabitat} from './MomentumViriumHabitat';
-import {MoonColonyStandardProject} from './MoonColonyStandardProject';
-import {MoonColonyStandardProjectVariant2} from './MoonStandardProjectVariants';
+import {MoonHabitatStandardProject} from './MoonColonyStandardProject';
+import {MoonHabitatStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
@@ -220,8 +220,8 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE]: {Factory: TheArchaicFoundationInstitute, compatibility: 'moon'},
   },
   standardProjects: {
-    [CardName.MOON_COLONY_STANDARD_PROJECT]: {Factory: MoonColonyStandardProject},
-    [CardName.MOON_COLONY_STANDARD_PROJECT_V2]: {Factory: MoonColonyStandardProjectVariant2},
+    [CardName.MOON_HABITAT_STANDARD_PROJECT]: {Factory: MoonHabitatStandardProject},
+    [CardName.MOON_HABITAT_STANDARD_PROJECT_V2]: {Factory: MoonHabitatStandardProjectVariant2},
     [CardName.MOON_MINE_STANDARD_PROJECT]: {Factory: MoonMineStandardProject},
     [CardName.MOON_MINE_STANDARD_PROJECT_V2]: {Factory: MoonMineStandardProjectVariant2},
     [CardName.MOON_ROAD_STANDARD_PROJECT]: {Factory: MoonRoadStandardProject},

@@ -18,7 +18,7 @@ export class MomentumViriumHabitat extends Card {
       behavior: {
         production: {heat: 2, megacredits: 3},
         moon: {
-          colonyTile: {space: MoonSpaces.MOMENTUM_VIRIUM},
+          habitatTile: {space: MoonSpaces.MOMENTUM_VIRIUM},
         },
       },
       reserveUnits: {titanium: 1},
@@ -32,10 +32,10 @@ export class MomentumViriumHabitat extends Card {
           b.production((pb) => {
             pb.heat(2).megacredits(3);
           }).br;
-          b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).asterix();
+          b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).asterix();
         }),
       },
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

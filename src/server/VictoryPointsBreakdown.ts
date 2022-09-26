@@ -1,7 +1,7 @@
 import {Tag} from '../common/cards/Tag';
 import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 
-export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon colony' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
+export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon habitat' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
 
 export class VictoryPointsBreakdown {
   public readonly points: IVictoryPointsBreakdown = {
@@ -11,7 +11,7 @@ export class VictoryPointsBreakdown {
     greenery: 0,
     city: 0,
     escapeVelocity: 0,
-    moonColonies: 0,
+    moonHabitats: 0,
     moonMines: 0,
     moonRoads: 0,
     planetaryTracks: 0,
@@ -31,7 +31,7 @@ export class VictoryPointsBreakdown {
     this.points.total += this.points.greenery;
     this.points.total += this.points.city;
     this.points.total += this.points.escapeVelocity;
-    this.points.total += this.points.moonColonies;
+    this.points.total += this.points.moonHabitats;
     this.points.total += this.points.moonMines;
     this.points.total += this.points.moonRoads;
     this.points.total += this.points.planetaryTracks;
@@ -64,8 +64,8 @@ export class VictoryPointsBreakdown {
       this.points.victoryPoints += points;
       if (message !== undefined) this.points.detailsCards.push({cardName: message, victoryPoint: points});
       break;
-    case 'moon colony':
-      this.points.moonColonies += points;
+    case 'moon habitat':
+      this.points.moonHabitats += points;
       break;
     case 'moon mine':
       this.points.moonMines += points;

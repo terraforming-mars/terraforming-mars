@@ -17,7 +17,7 @@ export class TheWomb extends Card {
       behavior: {
         production: {energy: -2, megacredits: 4},
         moon: {
-          colonyTile: {},
+          habitatTile: {},
         },
       },
       reserveUnits: {titanium: 2},
@@ -30,10 +30,10 @@ export class TheWomb extends Card {
           b.production((pb) => {
             pb.minus().energy(2).nbsp.megacredits(4);
           }).br;
-          b.minus().titanium(2).moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE});
+          b.minus().titanium(2).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),
       },
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

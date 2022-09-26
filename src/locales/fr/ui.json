@@ -492,5 +492,12 @@
     "Yes": "Oui",
     "No": "Non",
     "Don't show this again": "Ne plus afficher le message",
-    "Mars is Terraformed!": "Mars est terraformé !"
+    "Mars is Terraformed!": "Mars est terraformé !",
+    "Copy the text below and then paste it in": "Copiez le texte ci-dessous et collez-le soit",
+    "a": "dans une",
+    "GitHub issue": "issue GitHub",
+    "or the": "ou sur le",
+    "#bug-reports Discord channel": "canal Discord #bug-reports",
+    "Copy to Clipboard": "Copier dans le presse-papier",
+    "Close": "Fermer"
 }

@@ -115,8 +115,9 @@ export class Behaviors {
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {
+      const count = ctx.count(addResources);
       player.game.defer(new SimpleDeferredAction(player, () => {
-        player.addResourceTo(card, ctx.count(addResources));
+        player.addResourceTo(card, count);
         return undefined;
       }));
     }

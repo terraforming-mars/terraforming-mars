@@ -21,6 +21,7 @@ import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {NitriteReducingBacteria} from '../../src/server/cards/base/NitriteReducingBacteria';
 import {AerialMappers} from '../../src/server/cards/venusNext/AerialMappers';
 import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
+import {SaturnSurfing} from '../../src/server/cards/promo/SaturnSurfing';
 
 function asUnits(player: Player): Units {
   return {
@@ -253,6 +254,18 @@ describe('Behaviors', () => {
     runAllActions(game);
 
     expect(tardigrades.resourceCount).eq(4);
+  });
+
+  // This is a special test that ensure counting the resources works appropriately.
+  // Because beforehand, it counted an additional tag.
+  it('add resources to specific card - includes self', () => {
+    const saturnSurfing = new SaturnSurfing();
+    player.playedCards = [fakeCard({tags: [Tag.EARTH, Tag.EARTH]})];
+    player.megaCredits = saturnSurfing.cost;
+    player.playCard(saturnSurfing);
+    runAllActions(game);
+
+    expect(saturnSurfing.resourceCount).eq(3);
   });
 
   // TODO(kberg): Add test where type includes multiple resource types

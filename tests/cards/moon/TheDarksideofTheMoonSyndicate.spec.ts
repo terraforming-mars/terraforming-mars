@@ -84,12 +84,12 @@ describe('TheDarksideofTheMoonSyndicate', () => {
 
     // Space 0 intentionallyleft blank
     MoonExpansion.addMineTile(otherPlayer, adjacentSpaces[1].id);
-    MoonExpansion.addColonyTile(otherPlayer, adjacentSpaces[2].id);
+    MoonExpansion.addHabitatTile(otherPlayer, adjacentSpaces[2].id);
     MoonExpansion.addRoadTile(otherPlayer, adjacentSpaces[3].id);
 
     // Active player will be ignored. Also, using direct construction here so as to not trigger
     // corp effect just yet.
-    adjacentSpaces[4].tile = {tileType: TileType.MOON_COLONY};
+    adjacentSpaces[4].tile = {tileType: TileType.MOON_HABITAT};
     adjacentSpaces[4].player = player;
 
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
@@ -118,12 +118,12 @@ describe('TheDarksideofTheMoonSyndicate', () => {
 
     // Space 0 intentionallyleft blank
     MoonExpansion.addMineTile(otherPlayer, adjacentSpaces[1].id);
-    MoonExpansion.addColonyTile(otherPlayer, adjacentSpaces[2].id);
+    MoonExpansion.addHabitatTile(otherPlayer, adjacentSpaces[2].id);
     MoonExpansion.addRoadTile(otherPlayer, adjacentSpaces[3].id);
 
     // Active player will be ignored. Also, using direct construction here so as to not trigger
     // corp effect just yet.
-    adjacentSpaces[4].tile = {tileType: TileType.MOON_COLONY};
+    adjacentSpaces[4].tile = {tileType: TileType.MOON_HABITAT};
     adjacentSpaces[4].player = player;
 
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.

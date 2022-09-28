@@ -6,7 +6,7 @@ import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {FirstLunarSettlement} from '../../../src/server/cards/moon/FirstLunarSettlement';
 import {expect} from 'chai';
-import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 describe('FirstLunarSettlement', () => {
   let game: Game;
@@ -27,7 +27,7 @@ describe('FirstLunarSettlement', () => {
     expect(moonData.colonyRate).eq(0);
 
     card.play(player);
-    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonColonyTile);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonHabitatTile);
     placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.colonyRate).eq(1);

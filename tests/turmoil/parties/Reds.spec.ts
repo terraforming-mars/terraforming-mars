@@ -105,7 +105,7 @@ describe('Reds', function() {
     const redsPolicy = REDS_POLICY_3;
     player.megaCredits = 7;
 
-    MoonExpansion.raiseColonyRate(secondPlayer, 1);
+    MoonExpansion.raiseHabitatRate(secondPlayer, 1);
     MoonExpansion.raiseMiningRate(secondPlayer, 1);
     MoonExpansion.raiseLogisticRate(secondPlayer, 1);
 

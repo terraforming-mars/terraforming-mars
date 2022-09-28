@@ -6,7 +6,7 @@ export type TRSource = {
   oceans?: number,
   tr?: number,
   venus?: number
-  moonColony?: number,
+  moonHabitat?: number,
   moonMining?: number,
   moonLogistics?: number,
 }

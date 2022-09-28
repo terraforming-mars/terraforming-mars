@@ -17,7 +17,7 @@ export class ThoriumRush extends Card implements IProjectCard {
 
       behavior: {
         moon: {
-          colonyTile: {},
+          habitatTile: {},
           mineTile: {},
           roadTile: {},
         },
@@ -28,7 +28,7 @@ export class ThoriumRush extends Card implements IProjectCard {
         'Raise the Habitat Rate, Mining Rate and Logistic Rate 1 step.',
         cardNumber: 'M56',
         renderData: CardRenderer.builder((b) => {
-          b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE})
+          b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE})
             .moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE})
             .moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),

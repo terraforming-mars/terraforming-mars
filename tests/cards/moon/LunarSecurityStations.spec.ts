@@ -38,7 +38,7 @@ describe('LunarSecurityStations', () => {
 
     expect(player.getPlayableCards()).includes(card);
 
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.not.include(card);
   });
 

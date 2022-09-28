@@ -20,7 +20,7 @@ import {TileView} from '../board/TileView';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.MOON_ROAD, 'road'],
-  [TileType.MOON_COLONY, 'colony'],
+  [TileType.MOON_HABITAT, 'colony'],
   [TileType.MOON_MINE, 'mine'],
   [TileType.LUNA_TRADE_STATION, 'luna-trade-station'],
   [TileType.LUNA_MINING_HUB, 'luna-mining-hub'],
@@ -83,7 +83,7 @@ export default Vue.extend({
 
       if (tileType !== undefined) {
         switch (this.space.tileType) {
-        case TileType.MOON_COLONY:
+        case TileType.MOON_HABITAT:
           css += ' board-space-tile--colony';
           break;
         case TileType.MOON_ROAD:

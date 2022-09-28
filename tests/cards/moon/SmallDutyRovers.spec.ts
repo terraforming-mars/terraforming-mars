@@ -42,10 +42,10 @@ describe('SmallDutyRovers', () => {
     });
 
     MoonExpansion.addTile(player, 'm04', {tileType: TileType.MOON_MINE});
-    MoonExpansion.addTile(player, 'm05', {tileType: TileType.MOON_COLONY});
+    MoonExpansion.addTile(player, 'm05', {tileType: TileType.MOON_HABITAT});
     MoonExpansion.addTile(player, 'm06', {tileType: TileType.MOON_ROAD});
     MoonExpansion.addTile(player, 'm07', {tileType: TileType.MOON_MINE});
-    MoonExpansion.addTile(player, 'm08', {tileType: TileType.MOON_COLONY});
+    MoonExpansion.addTile(player, 'm08', {tileType: TileType.MOON_HABITAT});
     MoonExpansion.addTile(player, 'm09', {tileType: TileType.MOON_ROAD});
 
     card.play(player);

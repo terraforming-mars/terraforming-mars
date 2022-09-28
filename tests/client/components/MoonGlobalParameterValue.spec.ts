@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import MoonGlobalParameterValue from '@/client/components/moon/MoonGlobalParameterValue.vue';
 import {MoonModel} from '@/common/models/MoonModel';
-import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
 
 const moonData: MoonModel = {
   colonyRate: 1,
@@ -42,7 +42,7 @@ describe('MoonGlobalParameterValue', () => {
 
   it(`doesn't show any rating if every rating is on its max (or above)`, () => {
     const moonData: MoonModel = {
-      colonyRate: MAXIMUM_COLONY_RATE,
+      colonyRate: MAXIMUM_HABITAT_RATE,
       logisticsRate: MAXIMUM_LOGISTICS_RATE + 1,
       miningRate: MAXIMUM_MINING_RATE + 2,
       spaces: [],
@@ -54,7 +54,7 @@ describe('MoonGlobalParameterValue', () => {
     });
 
     expect(wrapper.text()).to.not.include.oneOf([
-      MAXIMUM_COLONY_RATE,
+      MAXIMUM_HABITAT_RATE,
       MAXIMUM_LOGISTICS_RATE + 1,
       MAXIMUM_MINING_RATE + 2,
     ]);
@@ -62,7 +62,7 @@ describe('MoonGlobalParameterValue', () => {
 
   it('shows completed-checkmark if every of rate is its on max (or above)', () => {
     const moonData: MoonModel = {
-      colonyRate: MAXIMUM_COLONY_RATE + 2,
+      colonyRate: MAXIMUM_HABITAT_RATE + 2,
       logisticsRate: MAXIMUM_LOGISTICS_RATE + 1,
       miningRate: MAXIMUM_MINING_RATE,
       spaces: [],
@@ -77,21 +77,21 @@ describe('MoonGlobalParameterValue', () => {
   });
 
   it(`doesn't show completed-checkmark if any of rate is under its max`, () => {
-    const cases = [
+    const cases: Array<MoonModel> = [
       {
-        colonyRate: MAXIMUM_COLONY_RATE - 1,
+        colonyRate: MAXIMUM_HABITAT_RATE - 1,
         logisticsRate: MAXIMUM_LOGISTICS_RATE,
         miningRate: MAXIMUM_MINING_RATE,
         spaces: [],
       },
       {
-        colonyRate: MAXIMUM_COLONY_RATE,
+        colonyRate: MAXIMUM_HABITAT_RATE,
         logisticsRate: MAXIMUM_LOGISTICS_RATE - 1,
         miningRate: MAXIMUM_MINING_RATE,
         spaces: [],
       },
       {
-        colonyRate: MAXIMUM_COLONY_RATE,
+        colonyRate: MAXIMUM_HABITAT_RATE,
         logisticsRate: MAXIMUM_LOGISTICS_RATE,
         miningRate: MAXIMUM_MINING_RATE - 1,
         spaces: [],

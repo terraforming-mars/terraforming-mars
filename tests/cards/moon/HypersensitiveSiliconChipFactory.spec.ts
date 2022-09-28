@@ -38,7 +38,7 @@ describe('HypersensitiveSiliconChipFactory', () => {
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 2;
-    space2.tile = {tileType: TileType.MOON_COLONY};
+    space2.tile = {tileType: TileType.MOON_HABITAT};
     player.production.override({energy: 1});
     expect(player.getPlayableCards()).does.not.include(card);
   });

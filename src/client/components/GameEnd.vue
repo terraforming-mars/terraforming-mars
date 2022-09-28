@@ -78,7 +78,7 @@
                           <td>{{ p.victoryPointsBreakdown.greenery }}</td>
                           <td>{{ p.victoryPointsBreakdown.city }}</td>
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonRoads }}</td>
-                          <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonColonies }}</td>
+                          <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonHabitats }}</td>
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                           <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                           <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>

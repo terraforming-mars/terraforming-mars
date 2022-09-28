@@ -488,7 +488,7 @@ describe('Turmoil', function() {
     game.phase = Phase.ACTION;
 
     // Card requirements.
-    moonData.moon.getAvailableSpacesOnLand(player)[0].tile = {tileType: TileType.MOON_COLONY};
+    moonData.moon.getAvailableSpacesOnLand(player)[0].tile = {tileType: TileType.MOON_HABITAT};
     player.titanium = 1;
 
     turmoil.rulingParty = new Greens();

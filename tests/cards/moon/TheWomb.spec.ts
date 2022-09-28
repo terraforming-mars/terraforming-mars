@@ -3,7 +3,7 @@ import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheWomb} from '../../../src/server/cards/moon/TheWomb';
 import {expect} from 'chai';
-import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 describe('TheWomb', () => {
   let player: TestPlayer;
@@ -42,7 +42,7 @@ describe('TheWomb', () => {
     expect(player.titanium).eq(0);
     expect(player.production.energy).eq(0);
     expect(player.production.megacredits).eq(4);
-    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
+    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonHabitatTile);
   });
 });
 

@@ -81,15 +81,15 @@ export interface Behavior {
   }
 
   moon?: {
-    /** Places a colony tile and also raises the colony rate */
-    colonyTile?: PlaceMoonTile,
+    /** Places a habitat tile and also raises the habitat rate */
+    habitatTile?: PlaceMoonTile,
     /** Places a mine tile and also raises the mining rate */
     mineTile?: PlaceMoonTile,
     /** Places a road tile and also raises the logistics rate */
     roadTile?: PlaceMoonTile,
     /** Places a special tile on the Moon. */
     tile?: PlaceMoonTile & {type: TileType, title?: string},
-    colonyRate?: number,
+    habitatRate?: number,
     miningRate?: number,
     logisticsRate?: number,
   },

@@ -19,7 +19,7 @@ export class LunaConference extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
 
       behavior: {
-        stock: {megacredits: {moon: {road: {}, colony: {}}, each: 2}},
+        stock: {megacredits: {moon: {road: {}, habitat: {}}, each: 2}},
       },
 
       metadata: {
@@ -28,7 +28,7 @@ export class LunaConference extends Card implements IProjectCard {
         cardNumber: 'M58',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(2).slash().moonRoad({size: Size.SMALL, all}).br;
-          b.megacredits(2).slash().moonColony({size: Size.SMALL, all}).br;
+          b.megacredits(2).slash().moonHabitat({size: Size.SMALL, all}).br;
         }),
       },
     });

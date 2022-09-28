@@ -7,7 +7,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonColonyTile';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {ISpace} from '../../boards/ISpace';
 import {IMoonData} from '../../moon/IMoonData';
@@ -28,11 +28,11 @@ export class LunaEcumenopolis extends Card {
         cardNumber: 'M84',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).nbsp;
-          b.text('2').moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).asterix().br;
-          b.tr(1).slash().moonColonyRate().moonColonyRate();
+          b.text('2').moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).asterix().br;
+          b.tr(1).slash().moonHabitatRate().moonHabitatRate();
         }),
       },
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 
@@ -55,7 +55,7 @@ export class LunaEcumenopolis extends Card {
     const moonData = MoonExpansion.moonData(player.game);
     const expectedColonyRate = Math.min(moonData.colonyRate + 2, 8);
     const expectedTRBump = Math.floor(expectedColonyRate / 2);
-    return player.canAfford(0, {tr: {moonColony: 2, tr: expectedTRBump}});
+    return player.canAfford(0, {tr: {moonHabitat: 2, tr: expectedTRBump}});
   }
 
   public override bespokeCanPlay(player: Player) {
@@ -72,7 +72,7 @@ export class LunaEcumenopolis extends Card {
     // This function returns true when this space is next to two colonies. Don't try to understand firstSpaceId yet.
     const nextToTwoColonies = function(space: ISpace): boolean {
       const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {
-        return MoonExpansion.spaceHasType(adjacentSpace, TileType.MOON_COLONY) || adjacentSpace.id === firstSpaceId;
+        return MoonExpansion.spaceHasType(adjacentSpace, TileType.MOON_HABITAT) || adjacentSpace.id === firstSpaceId;
       });
       return adjacentSpaces.length >= 2;
     };
@@ -111,12 +111,12 @@ export class LunaEcumenopolis extends Card {
   }
 }
 
-class CustomPlaceMoonTile extends PlaceMoonColonyTile {
+class CustomPlaceMoonTile extends PlaceMoonHabitatTile {
   protected override getSpaces(moonData: IMoonData) {
     const spaces = moonData.moon.getAvailableSpacesOnLand(this.player);
     const filtered = spaces.filter((space) => {
       const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {
-        return MoonExpansion.spaceHasType(adjacentSpace, TileType.MOON_COLONY);
+        return MoonExpansion.spaceHasType(adjacentSpace, TileType.MOON_HABITAT);
       });
       return adjacentSpaces.length >= 2;
     });

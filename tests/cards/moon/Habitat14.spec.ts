@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
-import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 describe('Habitat14', () => {
   let player: TestPlayer;
@@ -47,7 +47,7 @@ describe('Habitat14', () => {
     expect(player.production.megacredits).eq(0);
     expect(player.production.energy).eq(0);
 
-    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
+    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonHabitatTile);
   });
 });
 

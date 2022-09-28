@@ -7,7 +7,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {ISpace} from '../../boards/ISpace';
 import {IMoonData} from '../../moon/IMoonData';

@@ -4,10 +4,10 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
+import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
 import {expect} from 'chai';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
-import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
 
@@ -37,7 +37,7 @@ describe('MoonHabitatStandardProject', () => {
     player.megaCredits = 22;
     expect(player.canPlay(card)).is.true;
 
-    // TODO(kberg): Are there spaces on the moon for a colony?
+    // TODO(kberg): Are there spaces on the moon for a habitat?
   });
 
   it('has discount', () => {

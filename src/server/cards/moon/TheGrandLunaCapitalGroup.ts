@@ -5,7 +5,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceId} from '../../../common/Types';

@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
-import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
 
 describe('GeodesicTents', () => {
   let player: TestPlayer;

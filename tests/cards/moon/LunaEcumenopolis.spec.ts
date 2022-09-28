@@ -35,8 +35,8 @@ describe('LunaEcumenopolis', () => {
     player.megaCredits = card.cost;
 
     const moon = moonData.moon;
-    moon.getSpace('m12').tile = {tileType: TileType.MOON_COLONY};
-    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+    moon.getSpace('m12').tile = {tileType: TileType.MOON_HABITAT};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
 
     player.titanium = 2;
     expect(player.getPlayableCards()).does.include(card);
@@ -50,8 +50,8 @@ describe('LunaEcumenopolis', () => {
     player.megaCredits = card.cost;
 
     const moon = moonData.moon;
-    moon.getSpace('m18').tile = {tileType: TileType.MOON_COLONY};
-    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+    moon.getSpace('m18').tile = {tileType: TileType.MOON_HABITAT};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
 
     // This test works because space 13 is the only available colony space, but after
     // playing it, space 12 can take a colony.
@@ -61,8 +61,8 @@ describe('LunaEcumenopolis', () => {
 
   it('Cannot play: not enough adjacent colony tiles', () => {
     player.titanium = 2;
-    moonData.moon.getSpace('m09').tile = {tileType: TileType.MOON_COLONY};
-    moonData.moon.getSpace('m18').tile = {tileType: TileType.MOON_COLONY};
+    moonData.moon.getSpace('m09').tile = {tileType: TileType.MOON_HABITAT};
+    moonData.moon.getSpace('m18').tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
@@ -71,8 +71,8 @@ describe('LunaEcumenopolis', () => {
     const moon = moonData.moon;
     expect(player.getTerraformRating()).eq(14);
 
-    moon.getSpace('m12').tile = {tileType: TileType.MOON_COLONY};
-    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+    moon.getSpace('m12').tile = {tileType: TileType.MOON_HABITAT};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
@@ -95,7 +95,7 @@ describe('LunaEcumenopolis', () => {
 
     const moon = moonData.moon;
     moon.getSpace('m12').tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
-    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
 
     player.titanium = 2;
     expect(player.getPlayableCards()).does.include(card);
@@ -110,7 +110,7 @@ describe('LunaEcumenopolis', () => {
     expect(player.getTerraformRating()).eq(14);
 
     moon.getSpace('m12').tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
-    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_HABITAT};
     card.play(player);
 
     const input1 = cast(game.deferredActions.pop()!.execute(), SelectSpace);

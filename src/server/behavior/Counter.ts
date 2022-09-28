@@ -98,7 +98,7 @@ export class Counter {
     if (countable.moon !== undefined) {
       const moon = countable.moon;
       MoonExpansion.ifMoon(game, (moonData) => {
-        if (moon.colonyRate) {
+        if (moon.habitatRate) {
           sum += moonData.colonyRate;
         }
         if (moon.miningRate) {
@@ -108,8 +108,8 @@ export class Counter {
           sum += moonData.logisticRate;
         }
       });
-      if (moon.colony) {
-        sum += MoonExpansion.spaces(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+      if (moon.habitat) {
+        sum += MoonExpansion.spaces(game, TileType.MOON_HABITAT, {surfaceOnly: true}).length;
       }
       if (moon.mine) {
         sum += MoonExpansion.spaces(game, TileType.MOON_MINE, {surfaceOnly: true}).length;

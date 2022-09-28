@@ -7,7 +7,7 @@ import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {TheWomb} from '../../../src/server/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
-import {MoonColonyStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
+import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
 
 describe('SubterraneanHabitats', () => {
   let game: Game;
@@ -66,7 +66,7 @@ describe('SubterraneanHabitats', () => {
     player.titanium = 1;
     player.megaCredits = 1000;
 
-    const projectCard = new MoonColonyStandardProject();
+    const projectCard = new MoonHabitatStandardProject();
     expect(projectCard.canAct(player)).is.true;
 
     player.titanium = 0;

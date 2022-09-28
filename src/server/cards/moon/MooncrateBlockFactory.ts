@@ -15,7 +15,7 @@ export class MooncrateBlockFactory extends Card implements IProjectCard {
       cost: 8,
       requirements: CardRequirements.builder((b) => b.miningTiles(1)),
 
-      // Behavior is in MoonColonyStandardProject, MoonMineStandardProject and MoonRoadStandardProject.
+      // Behavior is in MoonHabitatStandardProject, MoonMineStandardProject and MoonRoadStandardProject.
 
       metadata: {
         description: 'Requires 1 mine on The Moon.',

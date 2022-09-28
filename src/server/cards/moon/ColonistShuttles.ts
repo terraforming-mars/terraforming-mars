@@ -17,19 +17,19 @@ export class ColonistShuttles extends Card {
       reserveUnits: {titanium: 1},
 
       behavior: {
-        moon: {colonyRate: 1},
-        stock: {megacredits: {moon: {colony: {}}, each: 2}},
+        moon: {habitatRate: 1},
+        stock: {megacredits: {moon: {habitat: {}}, each: 2}},
       },
 
       metadata: {
         description: 'Spend 1 titanium. Raise the Habitat Rate 1 step. Gain 2M€ for each habitat tile on The Moon.',
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).moonColonyRate().br;
-          b.megacredits(2).slash().moonColony({size: Size.SMALL, all});
+          b.minus().titanium(1).moonHabitatRate().br;
+          b.megacredits(2).slash().moonHabitat({size: Size.SMALL, all});
         }),
       },
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

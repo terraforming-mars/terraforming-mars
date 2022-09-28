@@ -13,7 +13,7 @@ export class SubterraneanHabitats extends Card implements IProjectCard {
       reserveUnits: {steel: 2},
 
       behavior: {
-        moon: {colonyRate: 1},
+        moon: {habitatRate: 1},
       },
 
       metadata: {
@@ -21,10 +21,10 @@ export class SubterraneanHabitats extends Card implements IProjectCard {
         cardNumber: 'M36',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you build a habitat on The Moon, you spend 1 titanium less.', (eb) => {
-            eb.startEffect.moonColony().colon().minus().titanium(1);
+            eb.startEffect.moonHabitat().colon().minus().titanium(1);
           });
           b.br;
-          b.minus().steel(2).moonColonyRate();
+          b.minus().steel(2).moonHabitatRate();
         }),
       },
     });

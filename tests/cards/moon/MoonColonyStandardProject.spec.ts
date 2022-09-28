@@ -4,24 +4,24 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {MoonColonyStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
+import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
 import {expect} from 'chai';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
-import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
 
-describe('MoonColonyStandardProject', () => {
+describe('MoonHabitatStandardProject', () => {
   let game: Game;
   let player: Player;
   let moonData: IMoonData;
-  let card: MoonColonyStandardProject;
+  let card: MoonHabitatStandardProject;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
-    card = new MoonColonyStandardProject();
+    card = new MoonHabitatStandardProject();
   });
 
   it('can act', () => {
@@ -65,7 +65,7 @@ describe('MoonColonyStandardProject', () => {
 
     expect(moonData.colonyRate).eq(0);
 
-    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonColonyTile);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonHabitatTile);
     placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.colonyRate).eq(1);

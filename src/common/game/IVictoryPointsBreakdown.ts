@@ -7,7 +7,7 @@ export interface IVictoryPointsBreakdown {
   greenery: number;
   city: number;
   escapeVelocity: number;
-  moonColonies: number;
+  moonHabitats: number;
   moonMines: number;
   moonRoads: number;
   planetaryTracks: number;

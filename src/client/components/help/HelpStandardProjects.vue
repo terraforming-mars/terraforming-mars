@@ -44,7 +44,7 @@ export default Vue.extend({
       CardName.BUFFER_GAS_STANDARD_PROJECT,
     ],
     getFanMadeStandardProjects: () => [
-      CardName.MOON_COLONY_STANDARD_PROJECT,
+      CardName.MOON_HABITAT_STANDARD_PROJECT,
       CardName.MOON_MINE_STANDARD_PROJECT,
       CardName.MOON_ROAD_STANDARD_PROJECT,
     ],

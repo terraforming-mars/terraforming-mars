@@ -30,7 +30,7 @@ export class SmallDutyRovers extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonLogisticsRate().br;
           b.megacredits(1).slash()
-            .moonColony({size: Size.SMALL, all})
+            .moonHabitat({size: Size.SMALL, all})
             .moonMine({size: Size.SMALL, all})
             .moonRoad({size: Size.SMALL, all});
         }),

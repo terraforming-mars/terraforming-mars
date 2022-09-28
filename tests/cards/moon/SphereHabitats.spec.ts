@@ -4,7 +4,7 @@ import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SphereHabitats} from '../../../src/server/cards/moon/SphereHabitats';
 import {expect} from 'chai';
-import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
 
 describe('SphereHabitats', () => {
   let player: Player;
@@ -33,11 +33,11 @@ describe('SphereHabitats', () => {
     card.play(player);
 
     expect(player.titanium).eq(2);
-    // PlaceMoonColonyTile is what's responsible for raising the colony rate.
+    // PlaceMoonHabitatTile is what's responsible for raising the colony rate.
     // Currently that path is already tested with existing code.
     // So I won't keep repeating it.
     // That said, PlaceMoonRoadTile could have its own test. :D
-    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
+    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonHabitatTile);
   });
 });
 

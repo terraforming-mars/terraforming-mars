@@ -210,9 +210,9 @@ describe('Counter for Moon', () => {
     const moonData = MoonExpansion.moonData(game);
     moonData.colonyRate = 3;
 
-    expect(counter.count({moon: {colonyRate: {}}})).eq(3);
-    expect(counter.count({moon: {colonyRate: {}}, per: 2})).eq(1);
-    expect(counter.count({moon: {colonyRate: {}}, each: 2})).eq(6);
+    expect(counter.count({moon: {habitatRate: {}}})).eq(3);
+    expect(counter.count({moon: {habitatRate: {}}, per: 2})).eq(1);
+    expect(counter.count({moon: {habitatRate: {}}, each: 2})).eq(6);
   });
 
   it('mining rate', () => {
@@ -238,17 +238,17 @@ describe('Counter for Moon', () => {
   it('colony tiles', () => {
     const counter = new Counter(player, fake);
 
-    expect(counter.count({moon: {colony: {}}})).eq(0);
-    MoonExpansion.addColonyTile(player, 'm02');
-    expect(counter.count({moon: {colony: {}}})).eq(1);
-    MoonExpansion.addColonyTile(player, 'm03');
-    expect(counter.count({moon: {colony: {}}})).eq(2);
-    MoonExpansion.addColonyTile(player, 'm04');
-    expect(counter.count({moon: {colony: {}}})).eq(3);
-    MoonExpansion.addColonyTile(player, 'm05');
-    expect(counter.count({moon: {colony: {}}})).eq(4);
-    MoonExpansion.addColonyTile(player, 'm06');
-    expect(counter.count({moon: {colony: {}}})).eq(5);
+    expect(counter.count({moon: {habitat: {}}})).eq(0);
+    MoonExpansion.addHabitatTile(player, 'm02');
+    expect(counter.count({moon: {habitat: {}}})).eq(1);
+    MoonExpansion.addHabitatTile(player, 'm03');
+    expect(counter.count({moon: {habitat: {}}})).eq(2);
+    MoonExpansion.addHabitatTile(player, 'm04');
+    expect(counter.count({moon: {habitat: {}}})).eq(3);
+    MoonExpansion.addHabitatTile(player, 'm05');
+    expect(counter.count({moon: {habitat: {}}})).eq(4);
+    MoonExpansion.addHabitatTile(player, 'm06');
+    expect(counter.count({moon: {habitat: {}}})).eq(5);
   });
 
   it('mine tiles', () => {

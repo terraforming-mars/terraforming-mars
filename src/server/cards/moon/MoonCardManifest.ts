@@ -70,7 +70,7 @@ import {MicrosingularityPlant} from './MicrosingularityPlant';
 import {MiningComplex} from './MiningComplex';
 import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
 import {MomentumViriumHabitat} from './MomentumViriumHabitat';
-import {MoonHabitatStandardProject} from './MoonColonyStandardProject';
+import {MoonHabitatStandardProject} from './MoonHabitatStandardProject';
 import {MoonHabitatStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';

@@ -7,7 +7,7 @@ import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {TheWomb} from '../../../src/server/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
-import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
+import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
 
 describe('SubterraneanHabitats', () => {
   let game: Game;

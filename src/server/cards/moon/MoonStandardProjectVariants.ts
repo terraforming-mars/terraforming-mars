@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {Units} from '../../../common/Units';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {MoonHabitatStandardProject} from './MoonColonyStandardProject';
+import {MoonHabitatStandardProject} from './MoonHabitatStandardProject';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 import {TileType} from '../../../common/TileType';

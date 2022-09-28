@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Habitat14} from '../../../src/server/cards/moon/Habitat14';
-import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonColonyTile';
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
 
 describe('Habitat14', () => {
   let player: TestPlayer;

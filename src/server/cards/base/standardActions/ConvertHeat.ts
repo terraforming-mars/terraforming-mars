@@ -13,7 +13,7 @@ export class ConvertHeat extends StandardActionCard {
       metadata: {
         cardNumber: 'SA2',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 8 Heat to raise temperature 1 step.', (eb) => {
+          b.standardProject('Spend 8 heat to raise temperature 1 step.', (eb) => {
             eb.heat(8).startAction.temperature(1);
           }),
         ),

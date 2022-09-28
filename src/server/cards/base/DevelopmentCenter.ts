@@ -18,7 +18,7 @@ export class DevelopmentCenter extends Card implements IActionCard, IProjectCard
       metadata: {
         cardNumber: '014',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 Energy to draw a card.', (eb) => {
+          b.action('Spend 1 energy to draw a card.', (eb) => {
             eb.energy(1).startAction.cards(1);
           });
         }),

@@ -22,7 +22,7 @@ export class LunarIndustryComplex extends Card implements IProjectCard {
 
       metadata: {
         description: 'Spend 2 Titanium. Place a mine tile on The Moon and raise the Mining Rate 1 step. ' +
-          'Increase your Steel, Titanium, and Heat production 1 step each. Increase your Energy production 2 steps.',
+          'Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.',
         cardNumber: 'M74',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).moonMine().br;

@@ -2,7 +2,6 @@ import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
 import {Aridor} from './cards/colonies/Aridor';
-import {Aurorai} from './cards/pathfinders/Aurorai';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
@@ -264,9 +263,11 @@ export class Player {
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
       }
-      // Aurori hook
-      const aurorai = <Aurorai> this.getCorporation(CardName.AURORAI);
-      aurorai?.onIncreaseTerraformRating(this, steps);
+      this.game.getPlayersInGenerationOrder().forEach((player) => {
+        player.corporations.forEach((corp) => {
+          corp.onIncreaseTerraformRating?.(this, player, steps);
+        });
+      });
     };
 
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {

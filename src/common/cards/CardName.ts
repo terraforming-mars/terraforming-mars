@@ -479,6 +479,7 @@ export enum CardName {
     MIDAS = 'Midas',
     PLAYWRIGHTS = 'Playwrights',
     PROJECT_WORKSHOP = 'Project Workshop',
+    UNITED_NATIONS_MISSION_ONE = 'United Nations Mission One',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',

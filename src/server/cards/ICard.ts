@@ -50,6 +50,14 @@ export interface ICard {
     onStandardProject?: (player: Player, project: ICard) => void;
     onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;
+    /**
+     * Called when anybody gains TR
+     *
+     * @param player the player gaining TR
+     * @param cardOwner the owner of this card
+     * @param steps the number of steps gained
+     */
+    onIncreaseTerraformRating?(player: Player, cardOwner: Player, steps: number): void;
 
     /**
      * Optional callback when a resource is added to this card.

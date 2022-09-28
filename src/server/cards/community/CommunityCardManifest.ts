@@ -14,6 +14,7 @@ import {ByElection} from './ByElection';
 import {Midas} from './Midas';
 import {CuriosityII} from './CuriosityII';
 import {ExecutiveOrder} from './ExecutiveOrder';
+import {UnitedNationsMissionOne} from './UnitedNationsMissionOne';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',
@@ -24,6 +25,7 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.PLAYWRIGHTS]: {Factory: Playwrights},
     [CardName.CURIOSITY_II]: {Factory: CuriosityII},
     [CardName.MIDAS]: {Factory: Midas},
+    [CardName.UNITED_NATIONS_MISSION_ONE]: {Factory: UnitedNationsMissionOne},
   },
   preludeCards: {
     [CardName.RESEARCH_GRANT]: {Factory: ResearchGrant},

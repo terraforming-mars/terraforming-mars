@@ -20,7 +20,7 @@ import {TileView} from '../board/TileView';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.MOON_ROAD, 'road'],
-  [TileType.MOON_HABITAT, 'habitat'],
+  [TileType.MOON_HABITAT, 'colony'],
   [TileType.MOON_MINE, 'mine'],
   [TileType.LUNA_TRADE_STATION, 'luna-trade-station'],
   [TileType.LUNA_MINING_HUB, 'luna-mining-hub'],

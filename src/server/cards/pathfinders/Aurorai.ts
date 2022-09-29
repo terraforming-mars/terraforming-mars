@@ -38,7 +38,9 @@ export class Aurorai extends Card implements ICorporationCard {
     });
   }
 
-  public onIncreaseTerraformRating(player: Player, steps: number) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  public onIncreaseTerraformRating(player: Player, cardOwner: Player, steps: number) {
+    if (player === cardOwner) {
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
+    }
   }
 }

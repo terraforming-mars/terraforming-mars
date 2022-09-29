@@ -18,6 +18,14 @@ export function getGlobalEvent(globalEventName: GlobalEventName): IClientGlobalE
   return events.get(globalEventName);
 }
 
+export function getGlobalEventOrThrow(globalEventName: GlobalEventName): IClientGlobalEvent {
+  const globalEvent = getGlobalEvent(globalEventName);
+  if (globalEvent === undefined) {
+    throw new Error(`global event ${globalEventName} not found`);
+  }
+  return globalEvent;
+}
+
 export function getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
   const globalEvent = getGlobalEvent(globalEventName);
   if (globalEvent) {

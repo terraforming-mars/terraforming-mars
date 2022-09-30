@@ -133,7 +133,7 @@
     "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "El oxígeno debe ser 9% o inferior. Coloca una loseta de ciudad. Reduce tu producción de energía en 1 y aumenta tu producción de M€ 3 niveles.",
 
     "Lunar Beam": "Haz de Luna",
-    "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Reduce tu producción de M€ en 2 e incrementa tu producción de calor y producción de energía 2 niveles cada una.",
+    "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Reduce tu producción de M€ en 2 e incrementa tu producción de calor y producción de energía 2 niveles cada una.",
 
     "Optimal Aerobraking": "Aerofreno Óptimo",
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Efecto: al jugar un evento tipo espacio obtienes 3 M€ y 3 de calor.",
@@ -199,7 +199,7 @@
     "1 VP per 4 Microbes on this card.": "1 PV por cada 4 microbios en esta carta.",
 
     "Virus": "Virus",
-    "Remove up to 2 Animals or 5 Plants from any player.": "Elimina hasta 2 animales o hasta 5 plantas de cualquier jugador.",
+    "Remove up to 2 animals or 5 plants from any player.": "Elimina hasta 2 animales o hasta 5 plantas de cualquier jugador.",
 
     "Miranda Resort": "Centro Turístico Miranda",
     "Increase your M€ production 1 step for each Earth tag you have.": "Aumenta tu producción de M€ 1 nivel por cada símbolo de Tierra que tengas.",
@@ -226,7 +226,7 @@
     "Vesta Shipyard": "Astilleros Vesta",
 
     "Beam From A Thorium Asteroid": "Haz de un Asteroide de Torio",
-    "(Requires a Jovian tag. Increase your heat production and Energy production 3 steps each)": "Requiere un símbolo Joviano. Aumenta tu producción de calor y producción de energía 3 niveles cada una.",
+    "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each)": "Requiere un símbolo Joviano. Aumenta tu producción de calor y producción de energía 3 niveles cada una.",
 
     "Mangrove": "Manglares",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Requiere +4°C o más cálido. Coloca 1 loseta de vegetación EN CUALQUIER ÁREA RESERVADA PARA OCÉANO (incrementa el oxígeno en 1 como siempre). No tengas en cuenta las restricciones normales de colocación.",
@@ -277,7 +277,7 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "Efecto: por cada símbolo de ciencia que juegues, incluyendo este, puedes descartar 1 carta de tu mano para coger otra.",
 
     "Viral Enhancers": "Potenciadores Virales",
-    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Efecto: al jugar un símbolo de planta, microbio o animal, incluyendo este, obtienes 1 planta o añade un recurso a DICHA CARTA.",
+    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Efecto: al jugar un símbolo de planta, microbio o animal, incluyendo este, obtienes 1 planta o añade un recurso a DICHA CARTA.",
 
     "Towing A Comet": "Remolque de Cometa",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Obtén 2 plantas. Aumenta el nivel de oxígeno 1 nivel y coloca una loseta de océano.",
@@ -341,7 +341,7 @@
     "Requires 5 science tags. Increase your energy production 6 steps.": "Requiere 5 símbolos de ciencia. Aumenta tu producción de energía 6 niveles.",
 
     "Physics Complex": "Complejo Físico",
-    "Action: Spend 6 Energy to add a science resource to this card.": "Acción: gasta 6 de energía para añadir un recurso de ciencia a esta carta.",
+    "Action: Spend 6 energy to add a science resource to this card.": "Acción: gasta 6 de energía para añadir un recurso de ciencia a esta carta.",
     "2 VP for each science resource on this card.": "2 PV por cada recurso de ciencia en esta carta.",
 
     "Greenhouses": "Invernaderos",
@@ -363,7 +363,7 @@
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Acción: gasta 4 de energía para obtener 1 de acero e incrementar el oxígeno 1 nivel.",
 
     "Power Grid": "Red Eléctrica",
-    "Increase your energy production step for each Power tag you have, including this.": "Aumenta tu producción de energía 1 nivel por cada símbolo de energía que tengas, incluyendo este.",
+    "Increase your energy production step for each power tag you have, including this.": "Aumenta tu producción de energía 1 nivel por cada símbolo de energía que tengas, incluyendo este.",
 
     "Steelworks": "Siderurgia",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Acción: gasta 4 de energía para obtener 2 de acero e incrementar el oxígeno 1 nivel.",

@@ -103,7 +103,7 @@
     "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Уровень кислорода должен быть 9% или ниже. Постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 3.",
 
     "Lunar Beam": "Луч с Луны",
-    "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Снизьте свой доход на 2 и повысьте своё производство тепла и производство энергии на 2.",
+    "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Снизьте свой доход на 2 и повысьте своё производство тепла и производство энергии на 2.",
 
     "Optimal Aerobraking": "Аэроторможение",
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Свойство: когда вы играете карту события с символом космоса, вы получаете 3 M€ и 3 тепла.",
@@ -166,7 +166,7 @@
     "1 VP per 4 Microbes on this card.": "1 ПО за каждые 4 жетона бактерий на этой карте.",
 
     "Virus": "Вирус",
-    "Remove up to 2 Animals or 5 Plants from any player.": "Удалите до 2 жетонов животных или до 5 растений у любого игрока.",
+    "Remove up to 2 animals or 5 plants from any player.": "Удалите до 2 жетонов животных или до 5 растений у любого игрока.",
 
     "Miranda Resort": "Курорт на Миранде",
     "Increase your M€ production 1 step for each Earth tag you have.": "Повысьте свой доход на 1 за каждый имеющийся у вас символ Земли.",
@@ -193,7 +193,7 @@
     "Vesta Shipyard": "Верфь на Весте",
 
     "Beam From A Thorium Asteroid": "Луч с ториевого астероида",
-    "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each": "Необходим символ Юпитера. Повысьте своё производство тепла и своё производство энергии на 3.",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each": "Необходим символ Юпитера. Повысьте своё производство тепла и своё производство энергии на 3.",
 
     "Mangrove": "Мангровые леса",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Температура должна быть +4 градуса или выше. Проведите озеленение на зарезервированном для океана участке, игнорируя правила проведения озеленения, и повысьте уровень кислорода на 1.",
@@ -245,7 +245,7 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "Свойство: когда вы играете карту с символом науки, включая эту, можете сбросить карту с руки, чтобы взять карту.",
 
     "Viral Enhancers": "Вирусные векторы",
-    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Свойство: когда вы играете карту с символом растения, бактерии или животного, включая эту, получите 1 растение или положите 1 соответствующий жетон на только что сыгранную карту.",
+    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Свойство: когда вы играете карту с символом растения, бактерии или животного, включая эту, получите 1 растение или положите 1 соответствующий жетон на только что сыгранную карту.",
 
     "Towing a Comet": "Буксировка кометы",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Получите 2 растения. Повысьте уровень кислорода на 1 и выложите тайл океана.",
@@ -310,7 +310,7 @@
     "Requires 5 science tags. Increase your energy production 6 steps.": "Необходимо 5 символов науки. Повысьте своё производство энергии на 6.",
 
     "Physics Complex": "Центр физики",
-    "Action: Spend 6 Energy to add a science resource to this card.": "Действие: потратьте 6 энергии,чтобы положить жетон науки на эту карту.",
+    "Action: Spend 6 energy to add a science resource to this card.": "Действие: потратьте 6 энергии,чтобы положить жетон науки на эту карту.",
     "2 VP for each science resource on this card.": "2 ПО за каждый жетон науки на этой карте.",
 
     "Greenhouses": "Теплицы",
@@ -332,7 +332,7 @@
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 1 сталь и повысить уровень кислорода на 1.",
 
     "Power Grid": "Энергосеть",
-    "Increase your energy production step for each Power tag you have, including this.": "Повысьте своё производство энергии на 1 за каждый ваш символ энергии, включая этот.",
+    "Increase your energy production step for each power tag you have, including this.": "Повысьте своё производство энергии на 1 за каждый ваш символ энергии, включая этот.",
 
     "Steelworks": "Сталелитейный завод",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 2 стали и повысить уровень кислорода на 1.",

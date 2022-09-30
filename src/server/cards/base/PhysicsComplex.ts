@@ -24,7 +24,7 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '095',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 6 Energy to add a science resource to this card.', (eb) => {
+          b.action('Spend 6 energy to add a science resource to this card.', (eb) => {
             eb.energy(6, {digit}).startAction.science();
           }).br;
           b.vpText('2 VP for each science resource on this card.');

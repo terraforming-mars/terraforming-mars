@@ -39,7 +39,7 @@ export class Stratopolis extends Card implements IActionCard {
           b.vpText('1 VP for every 3rd Floater on this card.');
         }),
         description: {
-          text: 'Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA',
+          text: 'Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA',
           align: 'left',
         },
       },

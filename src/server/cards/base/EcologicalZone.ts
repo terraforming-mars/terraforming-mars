@@ -32,7 +32,7 @@ export class EcologicalZone extends Card implements IProjectCard {
         b.effect('When you play an animal or plant tag INCLUDING THESE, add an animal to this card.', (eb) => {
           eb.animals(1, {played}).slash().plants(1, {played}).startEffect.animals(1);
         }).br;
-        b.vpText('1 VP per 2 Animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
+        b.vpText('1 VP per 2 animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
       }),
     },
   ) {

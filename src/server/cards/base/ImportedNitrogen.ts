@@ -32,7 +32,7 @@ export class ImportedNitrogen extends Card implements IProjectCard {
           b.microbes(3, {digit}).asterix().nbsp;
           b.animals(2, {digit}).asterix();
         }),
-        description: 'Raise your TR 1 step and gain 4 Plants. Add 3 microbes to ANOTHER card and 2 Animals to ANOTHER card.',
+        description: 'Raise your TR 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.',
       },
     });
   }

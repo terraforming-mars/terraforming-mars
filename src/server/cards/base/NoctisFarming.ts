@@ -28,7 +28,7 @@ export class NoctisFarming extends Card implements IProjectCard {
             pb.megacredits(1);
           }).nbsp.plants(2);
         }),
-        description: 'Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 Plants.',
+        description: 'Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 plants.',
       },
     });
   }

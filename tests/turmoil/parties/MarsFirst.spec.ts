@@ -22,7 +22,7 @@ describe('MarsFirst', function() {
     marsFirst = new MarsFirst();
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Building tag you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each building tag you have', function() {
     player.playedCards.push(new Mine());
 
     const bonus = MARS_FIRST_BONUS_1;
@@ -45,7 +45,7 @@ describe('MarsFirst', function() {
     expect(player.steel).to.eq(1);
   });
 
-  it('Ruling policy 2: When you play a Building tag, gain 2 MC', function() {
+  it('Ruling policy 2: When you play a building tag, gain 2 MC', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[1].id);
 
     const mine = new Mine();

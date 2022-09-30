@@ -28,7 +28,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
           b.plus().plants(4, {digit});
           b.or().animals(2, {digit}).asterix();
         }),
-        description: 'Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.',
+        description: 'Spend 5 heat to gain either 4 plants, or to add 2 animals to ANOTHER card.',
       },
     });
   }

@@ -27,7 +27,7 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
           b.action('Spend 1 steel to add 2 Microbes here.', (eb) => {
             eb.startAction.steel(1).arrow().microbes(2);
           }).br;
-          b.vpText('1 VP per 3 Microbes here.');
+          b.vpText('1 VP per 3 microbes here.');
         }),
       },
     });

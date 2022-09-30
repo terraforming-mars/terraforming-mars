@@ -5,7 +5,7 @@
 
   "Arklight":"Arklight",
   "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"Inizi con 45 M€. Incrementa la tua Produzione di M€ di 2 livelli. 1 PV per ogni coppia di Animali su questa carta.",
-  "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 Animale a questa carta.",
+  "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 animale a questa carta.",
 
   "Polyphemos":"Polyphemos",
   "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.":"Inizi con 50 M€. Incrementa la tua Produzione di M€ di 5 livelli. Ottieni 5 risorse Titanio.",
@@ -51,7 +51,7 @@
   "Increase your M€ production 1 step PER 3 floaters you have.": "Incrementa la tua Produzione di M€ di 1 livello per ogni terna di Galleggianti in tuo possesso.",
 
   "Martian Zoo": "Zoo Marziano",
-  "Effect: When you play an Earth tag, place an animal here.": "Effetto: quando metti in gioco un simbolo Terra, aggiungi 1 Animale a questa carta.",
+  "Effect: When you play an Earth tag, place an animal here.": "Effetto: quando metti in gioco un simbolo Terra, aggiungi 1 animale a questa carta.",
   "Action: Gain 1 M€ per animal here.": "Azione: ottieni 1 M€ per ogni Animale su questa carta.",
   "(Requires 2 city)":"Richiede che ci siano",
   "(tiles in play.)":"2 tessere Città in gioco",
@@ -137,7 +137,7 @@
   "Effect: When you trade, you pay 1 less resource for it.":"Effetto: quando commerci, paghi 1 risorsa in meno.",
 
   "Ecology Research":"Ricerca Ecologica",
-  "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.":"Incrementa la tua Produzione di Piante di 1 livello per ogni Colonia in tuo possesso. Aggiungi 1 Animale AD UNA QUALUNQUE CARTA e 2 Microbi AD UNA QUALUNQUE CARTA.",
+  "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.":"Incrementa la tua Produzione di Piante di 1 livello per ogni Colonia in tuo possesso. Aggiungi 1 animale AD UNA QUALUNQUE CARTA e 2 Microbi AD UNA QUALUNQUE CARTA.",
 
   "Galilean Waystation":"Stazione Galileiana Secondaria",
   "Increase your M€ production 1 step for every Jovian tag in play.":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Gioviano in gioco.",
@@ -182,7 +182,7 @@
   "Solar Probe":"Sonda Solare",
   "Draw 1 card for every 3 science tags you have, including this.":"Pesca una carta per ogni terna di simboli Scienza che possiedi in gioco, incluso questo.",
   "Space Port":"Spazioporto",
-  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Ottieni 1 Flotta Commerciale. Colloca 1 tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
+  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Ottieni 1 Flotta Commerciale. Colloca 1 tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale. 1 PV per ogni coppia di Colonie in gioco.",
   "Spin-off Department":"Dipartimento Spin-Off",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20 M€ OR MORE, draw a card.":"Effetto: QUANDO GIOCHI UNA CARTA CON UN COSTO DI PARTENZA MAGGIORE O UGUALE A 20 M€, pesca una carta.",
@@ -197,7 +197,7 @@
   "Effect: When you play a Space card, you pay 4 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Spazio, la paghi 4 M€ in meno.",
   "Requires 5 science tags.":"Richiede 5 simboli Scienza.",
 
-  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 Animale a questa carta.",
+  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 animale a questa carta.",
 
       "Callisto":"Callisto",
     "Ceres":"Ceres",

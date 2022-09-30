@@ -43,7 +43,7 @@
     "${0} removed a disease from ${1} to gain 1 TR": "${0} a retiré une maladie de ${1} pour gagner 1 NT",
     "${0} turned ${1} face down to gain 3 TR": "${0} a retourné ${1} face cachée pour gagner 3 NT",
     "${0} placed a Greenery tile": "${0} a placé une tuile Forêt",
-    "${0} placed a City tile": "${0} a placé une tuile Cité",
+    "${0} placed a city tile": "${0} a placé une tuile Cité",
     "${0} added ${1} ${2} to ${3}": "${0} a ajouté ${1} ${2} sur ${3}",
     "${0} removed ${1} ${2} from ${3} to ${4}": "${0} a déplacé ${1} ${2} de ${3} vers ${4}",
     "${0} ${1} ${2} card(s)": "${0} ${1} ${2} carte(s)",

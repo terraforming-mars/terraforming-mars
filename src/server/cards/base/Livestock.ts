@@ -29,7 +29,7 @@ export class Livestock extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '184',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Animal to this card.', (eb) => {
+          b.action('Add 1 animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
           b.production((pb) => {

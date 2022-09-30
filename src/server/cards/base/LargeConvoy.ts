@@ -34,7 +34,7 @@ export class LargeConvoy extends Card implements IProjectCard {
           b.oceans(1).cards(2).br;
           b.plants(5, {digit}).or(Size.MEDIUM).animals(4, {digit}).asterix();
         }),
-        description: 'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
+        description: 'Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.',
       },
     });
   }

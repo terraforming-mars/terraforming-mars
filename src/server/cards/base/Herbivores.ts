@@ -38,7 +38,7 @@ export class Herbivores extends Card implements IProjectCard {
           b.effect('When you place a greenery tile, add an Animal to this card.', (eb) => {
             eb.greenery(Size.MEDIUM, false).startEffect.animals(1);
           }).br;
-          b.vpText('1 VP per 2 Animals on this card.');
+          b.vpText('1 VP per 2 animals on this card.');
           b.animals(1).production((pb) => pb.minus().plants(1, {all}));
         }),
         description: {

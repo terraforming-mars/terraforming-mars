@@ -173,7 +173,7 @@
     "${0} spent ${1} data from ${2} to trade with ${3}": "${0} bezahlte ${1} Daten von ${2}, um mit ${3} zu handeln",
     "${0} gained 1 ${1} production from ${2}": "${0} erhielt 1 ${1}-Produktion von ${2}",
     "${0} gained ${1} from ${2}": "${0} erhielt ${1} von ${2}",
-    "${0} placed a City tile": "${0} platzierte ein Stadtplättchen",
+    "${0} placed a city tile": "${0} platzierte ein Stadtplättchen",
     "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0} entfernte ${1} Daten von ${2}, um die Pflanzen-Produktion um ${3} zu erhöhen.",
     "${0} spent 1 plant to place an animal on ${1}.": "${0} bezahlte 1 Pflanze, um ein Tier auf ${1} zu platzieren.",
     "${0} flipped and discarded ${1}": "${0} drehte ${1} um und entfernte die Karte",

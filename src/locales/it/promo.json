@@ -6,7 +6,7 @@
   "Small Asteroid":"Piccolo Asteroide",
   "Increase temperature 1 step. Remove up to 2 plants from any player.":"Incrementa la Temperatura di 1 livello. Rimuovi fino a 2 Piante da un qualunque giocatore.",
   "Snow Algae":"Alghe della Neve",
-  "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.":"Richiede almeno 2 tessere Oceano. Incrementa la tua Produzione di Piante e la tua Produzione di Calore di 1 livello ciascuna.",
+  "Requires 2 oceans. Increase your plant production and your heat production 1 step each.":"Richiede almeno 2 tessere Oceano. Incrementa la tua Produzione di Piante e la tua Produzione di Calore di 1 livello ciascuna.",
   "Dusk Laser Mining":"Estrazione Laser al Crepuscolo",
   "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.":"Richiede 2 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di Titanio di 1 livello. Ottieni 4 risorse Titanio.",
   "Mercurian Alloys":"Leghe da Mercurio",
@@ -30,6 +30,6 @@
   "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.":"Ruba 3 M€ da un giocatore che abbia RIMOSSO TUE RISORSE O CHE ABBIA DIMINUITO UNA DELLE TUE PRODUZIONI durante questa Generazione. Colloca questa carta a faccia in giù NELLA PILA DEGLI EVENTI DI QUEL GIOCATORE.",
   "Stanford Torus":"Toro di Stanford",
   "Place a city tile IN SPACE, outside and separate from the planet.":"Colloca 1 tessera Città NELLO SPAZIO, in modo che sia all'esterno e separata dal pianeta."
-  
+
 
 }

@@ -26,7 +26,7 @@ export class VenusSoils extends Card implements IProjectCard {
           b.venus(1).br;
           b.production((pb) => pb.plants(1)).microbes(2).asterix();
         }),
-        description: 'Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card',
+        description: 'Raise Venus 1 step. Increase your plant production 1 step. Add 2 Microbes to ANOTHER card',
       },
     });
   }

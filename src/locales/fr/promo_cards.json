@@ -31,7 +31,7 @@
     "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Effet : Lorsque vous gagnez un Animal sur N'IMPORTE QUELLE CARTE, gagnez 2 M€.",
     "Mercurian Alloys": "Alliages Mercuriens",
     "Requires 2 Science tags.": "Nécessite 2 badges Science.",
-    "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "Diminuez votre production d'énergie de 4, augmentez votre production de plantes de 2. Augmentez votre NT de 3 et placez cette tuile.",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Diminuez votre production d'énergie de 4, augmentez votre production de plantes de 2. Augmentez votre NT de 3 et placez cette tuile.",
     "Orbital Cleanup": "Nettoyage Orbital",
     "Action: Gain 1 M€ per Science tag you have.": "Action: Gagnez 1 M€ par badge Science en votre possession.",
     "Decrease your M€ production 2 steps.": "Diminuez votre production de M€ de 2.",
@@ -54,7 +54,7 @@
     "Action: Add 1 Animal to this card.": "Action : Ajoutez 1 animal sur cette carte.",
     "Requires 8 oceans.": "Nécessite 8 Océans.",
     "Snow Algae": "Algue des Neiges",
-    "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.": "Nécessite 2 Océans. Augmentez votre production de plantes et de chaleur de 1 chacune.",
+    "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Nécessite 2 Océans. Augmentez votre production de plantes et de chaleur de 1 chacune.",
     "Self-replicating Robots": "Robots Auto-réplicants",
     "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Action: Révélez et placez ici une carte ayant un badge Construction ou Espace depuis votre main et placez 2 ressources dessus ou doublez le nombre de ressources sur cette carte.",
     "Dusk Laser Mining": "Forage Crépusculaire au Laser",
@@ -70,6 +70,6 @@
     "Add 2 asteroids to this card.": "*Ajouez 2 astéroïdes sur cette carte.",
     "Stanford Torus": "Tore de Stanford",
     "Place a city tile IN SPACE, outside and separate from the planet.": "Placez une tuile Cité DANS L'ESPACE, en dehors et détachée de la planète.",
-    "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Diminuez votre production d'énergie de 4 et augmentez votre production de plantes de 2. Augmentez votre NT de 3.",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Diminuez votre production d'énergie de 4 et augmentez votre production de plantes de 2. Augmentez votre NT de 3.",
     "(Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.)": "Placez une tuile Océan. Augmentez la température de 1. Gagnez 3 plantes."
 }

@@ -24,7 +24,7 @@ export class Lichen extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1));
         }),
-        description: 'Requires -24 C or warmer. Increase your Plant production 1 step.',
+        description: 'Requires -24 C or warmer. Increase your plant production 1 step.',
       },
     });
   }

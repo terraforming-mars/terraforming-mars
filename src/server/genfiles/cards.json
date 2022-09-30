@@ -77,7 +77,7 @@
     "cost": 9,
     "cardType": "automated",
     "metadata": {
-      "description": "Increase your Plant production 1 step.",
+      "description": "Increase your plant production 1 step.",
       "cardNumber": "048",
       "renderData": {
         "rows": [
@@ -434,7 +434,7 @@
       ]
     },
     "metadata": {
-      "description": "Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.",
+      "description": "Requires 5 ocean tiles. Gain 1 Plant and increase your plant production 2 steps.",
       "cardNumber": "047",
       "renderData": {
         "rows": [
@@ -494,7 +494,7 @@
       ]
     },
     "metadata": {
-      "description": "It must be -18 C or colder. Increase your Plant production 1 step.",
+      "description": "It must be -18 C or colder. Increase your plant production 1 step.",
       "cardNumber": "042",
       "renderData": {
         "rows": [
@@ -1514,7 +1514,7 @@
     },
     "metadata": {
       "cardNumber": "004",
-      "description": "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your Plant production 2 steps.",
+      "description": "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.",
       "renderData": {
         "rows": [
           [
@@ -2080,7 +2080,7 @@
     },
     "metadata": {
       "cardNumber": "155",
-      "description": "It must be -14 C or colder. Increase your Plant production 2 steps.",
+      "description": "It must be -14 C or colder. Increase your plant production 2 steps.",
       "renderData": {
         "rows": [
           [
@@ -3037,7 +3037,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your Plant production 1 step and increase your M€ production 4 steps",
+      "description": "Decrease your plant production 1 step and increase your M€ production 4 steps",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -4650,7 +4650,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have."
+      "description": "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have."
     },
     "productionBox": {
       "megacredits": 0,
@@ -4876,7 +4876,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 6 ocean tiles. Increase your M€ production 2 steps and your Plant production 3 steps. Gain 2 Plants.",
+      "description": "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 Plants.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -5100,7 +5100,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires -24 C or warmer. Increase your Plant production 1 step."
+      "description": "Requires -24 C or warmer. Increase your plant production 1 step."
     },
     "productionBox": {
       "megacredits": 0,
@@ -5233,7 +5233,7 @@
         "is": "root"
       },
       "description": {
-        "text": "Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps",
+        "text": "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps",
         "align": "left"
       },
       "victoryPoints": {
@@ -5478,7 +5478,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step."
+      "description": "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step."
     },
     "productionBox": {
       "megacredits": 0,
@@ -5552,7 +5552,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps."
+      "description": "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -6347,7 +6347,7 @@
         ],
         "is": "root"
       },
-      "description": "Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags."
+      "description": "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 Plant tags."
     },
     "productionBox": {
       "megacredits": 0,
@@ -8355,7 +8355,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your energy production 1 step and increase your Plant production 1 step.",
+      "description": "Decrease your energy production 1 step and increase your plant production 1 step.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -9055,7 +9055,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.",
+      "description": "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 Plant.",
       "victoryPoints": 1
     },
     "productionBox": {
@@ -9127,7 +9127,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires -6° C or warmer. Increase your Plant production 1 step and your M€ production 2 steps. Gain 1 Plant.",
+      "description": "Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 Plant.",
       "victoryPoints": 2
     },
     "productionBox": {
@@ -9723,7 +9723,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 4% oxygen. Increase your Plant production 1 step for every 2 Microbe tags you have, including this."
+      "description": "Requires 4% oxygen. Increase your plant production 1 step for every 2 Microbe tags you have, including this."
     },
     "productionBox": {
       "megacredits": 0,
@@ -17006,7 +17006,7 @@
         ],
         "is": "root"
       },
-      "description": "Requires 2 oceans. Increase your Plant production and your heat production 1 step each."
+      "description": "Requires 2 oceans. Increase your plant production and your heat production 1 step each."
     },
     "productionBox": {
       "megacredits": 0,
@@ -19612,7 +19612,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps."
+      "description": "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps."
     },
     "productionBox": {
       "megacredits": 0,
@@ -24990,7 +24990,7 @@
         ],
         "is": "root"
       },
-      "description": "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card"
+      "description": "Raise Venus 1 step. Increase your plant production 1 step. Add 2 Microbes to ANOTHER card"
     },
     "productionBox": {
       "megacredits": 0,

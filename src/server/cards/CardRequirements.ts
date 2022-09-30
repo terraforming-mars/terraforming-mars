@@ -147,8 +147,8 @@ class Builder {
     return this;
   }
 
-  public colonyRate(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.COLONY_RATE, amount, options));
+  public habitatRate(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.HABITAT_RATE, amount, options));
     return this;
   }
 
@@ -162,8 +162,8 @@ class Builder {
     return this;
   }
 
-  public colonyTiles(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.COLONY_TILES, amount, options));
+  public habitatTiles(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.HABITAT_TILES, amount, options));
     return this;
   }
 

@@ -18,7 +18,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 3,
-      requirements: CardRequirements.builder((b) => b.colonyRate(4)),
+      requirements: CardRequirements.builder((b) => b.habitatRate(4)),
 
       metadata: {
         description: 'Requires 4 Habitat Rate. All players pay 3M€ for each habitat tile they own.',

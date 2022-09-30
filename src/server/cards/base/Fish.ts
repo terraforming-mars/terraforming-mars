@@ -38,7 +38,7 @@ export class Fish extends Card implements IActionCard, IProjectCard {
           b.vpText('1 VP for each Animal on this card.');
         }),
         description: {
-          text: 'Requires +2 C° or warmer. Decrease any Plant production 1 step.',
+          text: 'Requires +2 C° or warmer. Decrease any plant production 1 step.',
           align: 'left',
         },
       },

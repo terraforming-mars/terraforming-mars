@@ -37,7 +37,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
           });
         }),
         description: {
-          text: 'Requires 3 Science tags.',
+          text: 'Requires 3 science tags.',
           align: 'left',
         },
       },

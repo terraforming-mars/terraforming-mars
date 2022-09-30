@@ -28,7 +28,7 @@ export class OlympusConference extends Card implements IProjectCard {
           b.or().br;
           b.minus().science().plus().cards(1);
         }),
-        description: 'When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.',
+        description: 'When you play a Science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.',
       },
     });
   }

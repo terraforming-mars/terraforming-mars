@@ -1,6 +1,6 @@
 {
     "Airliners": "Авиалайнеры",
-    "3 Floaters": "3 аэростата",
+    "3 floaters": "3 аэростата",
     "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Требует 3 аэростата. Увеличьте ваше производство МС на 2. Добавьте 2 аэростата на ЛЮБУЮ карту",
 
     "Air Raid": "Авианалёт",
@@ -69,7 +69,7 @@
     "Jupiter Floating Station": "Станция Юпитера",
     "Action: Add 1 floater to a JOVIAN CARD.": "Дествие: Добавьте 1 аэростат на карту с меткой Юпитера",
     "Action: Gain 1 M€ for every floater here [MAX 4].": "Дествие: Получите 1 МС за каждый аэростат здесь, но не больше 4",
-    "Requires 3 Science tags.": "Требует 3 метки Науки",
+    "Requires 3 science tags.": "Требует 3 метки Науки",
 
     "Luna Governor": "губернатор Луны",
     "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Требует 3 метки Земли. Увеличьте своё производство МС на 2",
@@ -107,11 +107,11 @@
     "Gain all your colony bonuses.": "Получите бонусы всех ваших колоний",
 
     "Quantum Communications": "Квантовая запутанность",
-    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Требует 4 метки Науки. Увеличьте своё производство МС на 1 за каждую колонию",
+    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Требует 4 метки Науки. Увеличьте своё производство МС на 1 за каждую колонию",
 
     "Red Spot Observatory": "Изуч. красного пятна",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Действие: Добавьте 1 аэростат сюда или потратьте 1 аэростат отсюда, чтобы добрать карту",
-    "Requires 3 Science tags. Draw 2 cards.": "Требует 3 метки Науки. Доберите 2 карты",
+    "Requires 3 science tags. Draw 2 cards.": "Требует 3 метки Науки. Доберите 2 карты",
 
     "Refugee Camp": "Лагеря беженцев",
     "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Действие: Уменьшите своё производство МС, чтобы добавить сюда лагерь",
@@ -144,7 +144,7 @@
     "Increase your M€ production 2 steps.": "Увеличьте своё производство МС на 2",
 
     "Sub-Zero Salt Fish": "Ледяная рыба",
-    "Requires -6 C. Decrease any Plant production 1 step.": "Требование: температура -6 C или выше. Уменьшите любое производство растений на 1",
+    "Requires -6 C. Decrease any plant production 1 step.": "Требование: температура -6 C или выше. Уменьшите любое производство растений на 1",
 
     "Titan Air-scrapping": "Очистка воздуха Титана",
     "Action: Spend 2 floaters here to increase your TR 1 step.": "Действие: Потратьте 2 титана с этой карты, чтобы увеличить свой РТ на 1",
@@ -167,7 +167,7 @@
 
     "Warp Drive": "Варп-двигатель",
     "Effect: When you play a Space card, you pay 4 M€ less for it.": "Эффект: Тратьте розыгрыш карт с меткой космоса на 4 МС меньше",
-    "Requires 5 Science tags.": "Требует 5 меток Науки",
+    "Requires 5 science tags.": "Требует 5 меток Науки",
 
     "Colony City": "Колония Город",
     "max 1 Colony": "max 1 Колония",

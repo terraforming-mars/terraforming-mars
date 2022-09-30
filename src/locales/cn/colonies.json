@@ -116,7 +116,7 @@
   "Add two floaters to ANOTHER card.":"放置2个云资源到另一张牌",
 
   "Airliners":"航空公司",
-  "3 Floaters":"3个云资源",
+  "3 floaters":"3个云资源",
   "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.":"需求：你有3个云资源。你的金钱产量+2，在任意卡牌上增加2个云资源。",
 
   "Air Raid":"空袭",
@@ -160,7 +160,7 @@
   "Jupiter Floating Station":"木星浮动站",
   "Action: Add 1 floater to a JOVIAN CARD.":"行动：在一张木星卡上+1云资源",
   "Action: Gain 1 M€ for every floater here [MAX 4].":"行动：获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
-  "Requires 3 Science tags.":"需求：3个科技标志。",
+  "Requires 3 science tags.":"需求：3个科技标志。",
 
   "Lunar Exports":"月球出口",
   "Increase your plant production 2 steps, or your M€ production 5 steps.":"你的植物产量+2，或你的金钱产量+5。",
@@ -179,8 +179,8 @@
   "max 1 Colony":"最多1块殖民地",
   "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.":"需求：你拥有不超过1块殖民地。金钱产量-2。放置1块殖民地。",
   "Quantum Communications":"量子通信",
-  "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.":"需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",
-  "Requires 3 Science tags. Draw 2 cards.":"需求：3个科技标志。抽2张牌。",
+  "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.":"需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",
+  "Requires 3 science tags. Draw 2 cards.":"需求：3个科技标志。抽2张牌。",
   "Rim Freighters":"里姆货船",
   "Refugee Camps":"难民营",
   "Solar Probe":"太阳探测器",
@@ -193,13 +193,13 @@
 
 
   "Sub-zero Salt Fish":"零下咸鱼",
-  "Requires -6 C. Decrease any Plant production 1 step.":"需求：-6℃。任何植物产量-1。",
+  "Requires -6 C. Decrease any plant production 1 step.":"需求：-6℃。任何植物产量-1。",
 
   "Titan Floating Launch-Pad":"土卫六漂浮发射台",
   "Colony City":"殖民地城市",
   "Warp Drive":"曲率引擎",
   "Effect: When you play a Space card, you pay 4 M€ less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
-  "Requires 5 Science tags.":"需求：5个科技标志。",
+  "Requires 5 science tags.":"需求：5个科技标志。",
 
   "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果： 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡",
 

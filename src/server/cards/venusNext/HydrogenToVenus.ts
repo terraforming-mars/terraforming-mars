@@ -27,7 +27,7 @@ export class HydrogenToVenus extends Card implements IProjectCard {
           b.venus(1).br.br; // double br is intentional for visual appeal
           b.floaters(1, {secondaryTag: Tag.VENUS}).slash().jovian({played});
         }),
-        description: 'Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have.',
+        description: 'Raise Venus 1 step. Add 1 floater to A Venus CARD for each Jovian tag you have.',
       },
     });
   }

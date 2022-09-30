@@ -16,7 +16,7 @@ export class InterstellarColonyShip extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 5)),
       metadata: {
-        description: 'Requires that you have 5 Science tags.',
+        description: 'Requires that you have 5 science tags.',
         cardNumber: '027',
       },
     });

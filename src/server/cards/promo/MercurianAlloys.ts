@@ -27,7 +27,7 @@ export class MercurianAlloys extends Card implements IProjectCard {
             eb.titanium(1).startEffect.plus(Size.SMALL).megacredits(1);
           });
         }),
-        description: 'Requires 2 Science tags.',
+        description: 'Requires 2 science tags.',
       },
     });
   }

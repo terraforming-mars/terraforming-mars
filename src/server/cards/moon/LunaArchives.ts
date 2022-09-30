@@ -23,7 +23,7 @@ export class LunaArchives extends Card implements IActionCard {
           b.action('Add 1 science resource here for each Moon tag you have.',
             (ab) => ab.empty().startAction.science().slash().moon());
           b.br;
-          b.effect('When playing a Moon tag, Science resources here may be used as payment, and are worth 1M€ each.',
+          b.effect('When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.',
             (eb) => eb.moon(1, {played}).startEffect.science().equals().megacredits(1));
         }),
       },

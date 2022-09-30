@@ -5,13 +5,12 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
-import {CountableUnits} from '../../behavior/Countable';
-import {Counter} from '../../behavior/Counter';
+import {Behaviors} from '../../behavior/Behaviors';
+import {Behavior} from '../../behavior/Behavior';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
@@ -31,30 +30,41 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     });
   }
 
+  /**
+   * Returns a copy of behavior with just `production` and `decreaseAnyProduction` fields.
+   */
+  private productionBehavior(behavior: Behavior): Behavior {
+    const filtered: Behavior = {};
+    if (behavior.production !== undefined) {
+      filtered.production = behavior.production;
+    }
+    if (behavior.decreaseAnyProduction !== undefined) {
+      filtered.decreaseAnyProduction = behavior.decreaseAnyProduction;
+    }
+    return filtered;
+  }
+
   private isCardApplicable(card: ICard, player: Player): boolean {
     if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
       return false;
     }
-    if (card.name === CardName.BIOMASS_COMBUSTORS) {
-      return player.canReduceAnyProduction(Resources.PLANTS, 1);
-    } else if (card.name === CardName.HEAT_TRAPPERS) {
-      return player.canReduceAnyProduction(Resources.HEAT, 2);
-    } else if (card.name === CardName.GYROPOLIS) {
-      return player.production.energy >= 2;
-    } else if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
+    if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
       return player.production.energy >= 1;
     }
 
-    if (card.produce !== undefined) return true;
+    if (card.produce !== undefined) {
+      return true;
+    }
 
-    const production = card.behavior?.production;
-    if (production === undefined) {
-      return false;
+    if (card.behavior !== undefined) {
+      const productionBehavior = this.productionBehavior(card.behavior);
+      if (Object.keys(productionBehavior).length > 0) {
+        return Behaviors.canExecute(productionBehavior, player, card);
+      }
     }
-    if (CountableUnits.hasNegativeRawValues(production)) {
-      return player.production.canAdjust(new Counter(player, card).countUnits(production));
-    }
-    return true;
+
+    // Card has no production box.
+    return false;
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
@@ -78,10 +88,8 @@ export class RoboticWorkforce extends Card implements IProjectCard {
 
       if (card.produce) {
         card.produce(player);
-      } else if (card.behavior?.production) {
-        player.production.adjust(new Counter(player, card).countUnits(card.behavior.production));
-      } else {
-        throw new Error(`Card ${card.name} is not a valid Robotic Workforce card.`);
+      } else if (card.behavior !== undefined) {
+        Behaviors.execute(this.productionBehavior(card.behavior), player, card);
       }
       return undefined;
     });

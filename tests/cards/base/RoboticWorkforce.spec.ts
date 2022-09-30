@@ -16,7 +16,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {resetBoard, setCustomGameOptions, runNextAction, cast} from '../../TestingUtils';
+import {resetBoard, setCustomGameOptions, runNextAction, cast, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -31,6 +31,7 @@ import {isIProjectCard} from '../../../src/server/cards/IProjectCard';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
+import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -157,6 +158,7 @@ describe('RoboticWorkforce', () => {
   it('Should not work with Solar Wind Power (no building tag, but has production)', () => {
     player.playedCards.push(new SolarWindPower());
 
+    expect(card.canPlay(player)).is.false;
     const action = card.play(player);
     expect(action).is.undefined;
   });
@@ -164,6 +166,7 @@ describe('RoboticWorkforce', () => {
   it('Should not work with Mars University (building tag, no production)', () => {
     player.playedCards.push(new MarsUniversity());
 
+    expect(card.canPlay(player)).is.false;
     const action = card.play(player);
     expect(action).is.undefined;
   });
@@ -177,6 +180,29 @@ describe('RoboticWorkforce', () => {
     expect(player.production.megacredits).to.eq(0);
     action.cb([researchNetwork]);
     expect(player.production.megacredits).to.eq(1);
+  });
+
+  it('Should work with Heat Trappers', () => {
+    const heatTrappers = new HeatTrappers();
+    player.playedCards.push(heatTrappers);
+    player.production.override(Units.of({heat: 1}));
+    redPlayer.production.override(Units.of({heat: 1}));
+
+    expect(card.canPlay(player)).is.false;
+
+    redPlayer.production.override(Units.of({heat: 2}));
+
+    expect(card.canPlay(player)).is.true;
+
+    const selectCard = cast(card.play(player), SelectCard);
+
+    expect(selectCard.cards).deep.eq([heatTrappers]);
+
+    selectCard.cb([heatTrappers]);
+    runAllActions(game);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({heat: 1, energy: 1}));
+    expect(redPlayer.production.asUnits()).deep.eq(Units.EMPTY);
   });
 
   describe('test all cards', () => {

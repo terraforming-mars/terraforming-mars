@@ -20,7 +20,7 @@ export class DeepWellHeating extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '003',
-        description: 'Increase your Energy production 1 step. Increase temperature 1 step.',
+        description: 'Increase your energy production 1 step. Increase temperature 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1)).temperature(1);
         }),

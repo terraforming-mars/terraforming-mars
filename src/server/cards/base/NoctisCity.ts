@@ -28,7 +28,7 @@ export class NoctisCity extends Card implements IProjectCard {
             pb.plus().megacredits(3);
           }).nbsp.city().asterix();
         }),
-        description: 'Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.',
+        description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.',
       },
     });
   }

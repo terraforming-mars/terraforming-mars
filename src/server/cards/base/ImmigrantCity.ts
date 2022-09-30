@@ -30,7 +30,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
           }).br;
           b.production((pb) => pb.minus().energy(1).megacredits(-2)).city();
         }),
-        description: 'Decrease your Energy production 1 step and decrease your M€ production 2 steps. Place a City tile.',
+        description: 'Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a City tile.',
       },
     });
   }

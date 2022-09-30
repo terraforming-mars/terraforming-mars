@@ -6,7 +6,7 @@
     "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "Requiere que tengas producción de titanio. Reduce cualquier producción de titanio en 1 e incrementa la propia 1 nivel.",
 
     "Deep Well Heating": "Calor de Pozo Profundo",
-    "Increase your Energy production 1 step. Increase temperature 1 step.": "Aumenta tu producción de energía en 1. Aumenta la temperatura 1 nivel.",
+    "Increase your energy production 1 step. Increase temperature 1 step.": "Aumenta tu producción de energía en 1. Aumenta la temperatura 1 nivel.",
 
     "Cloud Seeding": "Siembra de Nubes",
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Requiere 3 losetas de océano. Reduce tu producción de M€ en 1 y la producción de calor de cualquiera en 1. Aumenta tu producción de plantas en 2.",
@@ -47,7 +47,7 @@
     "Action: Look at the top card and either buy it or discard it": "ACCIÓN: MIRA LA CARTA SUPERIOR DEL MAZO DE CARTAS, Y CÓMPRALA A TU MANO O DESCÁRTALA.",
 
     "Martian Rails": "Tren Marciano",
-    "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Acción: gasta 1 de energía para obtener 1 M€ por cada loseta de ciudad EN MARTE.",
+    "Action: Spend 1 energy to gain 1 M€ for each City tile ON MARS.": "Acción: gasta 1 de energía para obtener 1 M€ por cada loseta de ciudad EN MARTE.",
 
 
 
@@ -58,7 +58,7 @@
     "4 Oceans": "4 Océanos",
     "5 Oceans": "5 Océanos",
     "6 Oceans": "6 Océanos",
-    "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.": "Requiere 4 losetas de océano. Coloca esta loseta. Reduce tu producción de energía en 2 y aumenta tu producción de M€ en 5.",
+    "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Requiere 4 losetas de océano. Coloca esta loseta. Reduce tu producción de energía en 2 y aumenta tu producción de M€ en 5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "1 PV ADICIONAL POR CADA LOSETA DE OCÉANO ADYACENTE A ESTA LOSETA DE CIUDAD.",
 
     "Asteroid": "Asteroide",
@@ -79,16 +79,16 @@
     "Increase your titanium production 1 step.": "Aumenta tu producción de titanio en 1.",
 
     "Development Center": "Centro de Desarrollo",
-    "Action: Spend 1 Energy to draw a card.": "Acción: gasta 1 de energía para coger 1 carta.",
+    "Action: Spend 1 energy to draw a card.": "Acción: gasta 1 de energía para coger 1 carta.",
 
     "Equatorial Magnetizer": "Magnetizador Ecuatorial",
-    "Action: Decrease your Energy production 1 step to increase your terraform rating 1 step.": "Acción: reduce tu producción de energía en 1 para incrementar tu valor de terraformación 1 nivel.",
+    "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "Acción: reduce tu producción de energía en 1 para incrementar tu valor de terraformación 1 nivel.",
 
     "Domed Crater": "Cráter Abovedado",
-    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.": "El oxígeno debe ser 7% o inferior. Obtén 3 plantas y coloca una loseta de ciudad. Reduce tu producción de energía en 1 y aumenta tu producción de M€ en 3.",
+    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "El oxígeno debe ser 7% o inferior. Obtén 3 plantas y coloca una loseta de ciudad. Reduce tu producción de energía en 1 y aumenta tu producción de M€ en 3.",
 
     "Noctis City": "Ciudad Noctis",
-    "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Reduce tu producción de energía en 1 y aumenta tu producción de M€ 3 niveles. Coloca una loseta de ciudad en el ÁREA RESERVADA para Ciudad Noctis, sin tener en cuenta las restricciones normales de colocación.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Reduce tu producción de energía en 1 y aumenta tu producción de M€ 3 niveles. Coloca una loseta de ciudad en el ÁREA RESERVADA para Ciudad Noctis, sin tener en cuenta las restricciones normales de colocación.",
 
     "Methane From Titan": "Metano desde Titán",
     "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "Requiere 2% de oxígeno. Aumenta tu producción de calor y tu producción de plantas 2 niveles cada una.",
@@ -130,7 +130,7 @@
     "1 VP for each fighter resource on this card.": "1 PV por cada recurso caza espacial sobre esta carta.",
 
     "Cupola City": "Ciudad Cúpula",
-    "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.": "El oxígeno debe ser 9% o inferior. Coloca una loseta de ciudad. Reduce tu producción de energía en 1 y aumenta tu producción de M€ 3 niveles.",
+    "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "El oxígeno debe ser 9% o inferior. Coloca una loseta de ciudad. Reduce tu producción de energía en 1 y aumenta tu producción de M€ 3 niveles.",
 
     "Lunar Beam": "Haz de Luna",
     "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Reduce tu producción de M€ en 2 e incrementa tu producción de calor y producción de energía 2 niveles cada una.",
@@ -139,7 +139,7 @@
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Efecto: al jugar un evento tipo espacio obtienes 3 M€ y 3 de calor.",
 
     "Underground City": "Ciudad Subterránea",
-    "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Coloca una loseta de ciudad. Reduce tu producción de energía 2 niveles e incrementa tu producción de acero 2 niveles.",
+    "Place a City tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Coloca una loseta de ciudad. Reduce tu producción de energía 2 niveles e incrementa tu producción de acero 2 niveles.",
 
     "Regolith Eaters": "Devorador de Regolito",
     "Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.": "Acción: añade 1 microbio a esta carta, o elimina 2 microbios de esta carta para aumentar el oxígeno 1 nivel.",
@@ -177,16 +177,16 @@
     "It must be -18 C or colder. Increase your Plant production 1 step.": "La temperatura debe ser -18°C o más fría. Aumenta tu producción de plantas 1 nivel.",
 
     "Carbonate Processing": "Proceso de Carbonatos",
-    "Decrease your Energy production 1 step and increase your heat production 3 steps.": "Reduce tu producción de energía en 1 e incrementa tu producción de calor 3 niveles.",
+    "Decrease your energy production 1 step and increase your heat production 3 steps.": "Reduce tu producción de energía en 1 e incrementa tu producción de calor 3 niveles.",
 
     "Natural Preserve": "Reserva Natural",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.": "El oxígeno debe ser 4% o inferior. Coloca esta loseta NO ADYACENTE A NINGUNA OTRA LOSETA. Aumenta tu producción de M€ 1 nivel.",
 
     "Nuclear Power": "Energía Nuclear",
-    "Decrease your M€ production 2 steps and increase your Energy production 3 steps.": "Reduce tu producción de M€ en 2 e incrementa tu producción de energía 3 niveles.",
+    "Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Reduce tu producción de M€ en 2 e incrementa tu producción de energía 3 niveles.",
 
     "Lightning Harvest": "Recolección de Rayos",
-    "Requires 3 Science tags. Increase your Energy production and your M€ production one step each.": "Requiere 3 símbolos de ciencia. Aumenta tu producción de energía y tu producción de M€ 1 nivel cada una.",
+    "Requires 3 Science tags. Increase your energy production and your M€ production one step each.": "Requiere 3 símbolos de ciencia. Aumenta tu producción de energía y tu producción de M€ 1 nivel cada una.",
 
     "Algae": "Algas",
     "Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.": "Requiere 5 losetas de océano. Obtén 1 planta e incrementa tu producción de plantas 2 niveles.",
@@ -247,7 +247,7 @@
     "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "Coloca esta loseta en un área con bonificación por colocación de acero o titanio, adyacente a otra de tus losetas. Aumenta tu producción de ese recurso 1 nivel.",
 
     "Building Industries": "Constructoras",
-    "Decrease your Energy production 1 step and increase your steel production 2 steps.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de acero en 2.",
+    "Decrease your energy production 1 step and increase your steel production 2 steps.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de acero en 2.",
 
     "Land Claim": "Reclamar Territorio",
     "Place your marker on a non-reserved area. Only you may place a tile there.": "COLOCA UN MARCADOR TUYO EN UN ÁREA NO RESERVADA. SOLO TÚ PUEDES COLOCAR UNA LOSETA AQUÍ.",
@@ -323,7 +323,7 @@
     "(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)": "Requiere -14°C o más cálido. Aumenta tu producción de plantas 1 nivel. Obtén 1 planta.",
 
     "Peroxide Power": "Energía de Peróxidos",
-    "Decrease your M€ production 1 step and increase your Energy production 2 steps.": "Reduce tu producción de M€ 1 nivel y aumenta tu producción de energía en 2.",
+    "Decrease your M€ production 1 step and increase your energy production 2 steps.": "Reduce tu producción de M€ 1 nivel y aumenta tu producción de energía en 2.",
 
     "Research": "Investigación",
     "Counts as playing 2 science cards. Draw 2 cards.": "Contabiliza como jugar 2 cartas tipo ciencia. Roba 2 cartas.",
@@ -357,13 +357,13 @@
     "Increase your M€ production 1 step for each space tag your OPPONENTS have.": "Aumenta tu producción de M€ 1 nivel por cada símbolo de espacio que posean tus OPONENTES.",
 
     "Fueled Generators": "Generadores de Combustión",
-    "Decrease your M€ production 1 step and increase your Energy production 1 steps.": "Reduce tu producción de M€ 1 nivel y aumenta tu producción de energía en 1.",
+    "Decrease your M€ production 1 step and increase your energy production 1 steps.": "Reduce tu producción de M€ 1 nivel y aumenta tu producción de energía en 1.",
 
     "Ironworks": "Metalurgia",
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Acción: gasta 4 de energía para obtener 1 de acero e incrementar el oxígeno 1 nivel.",
 
     "Power Grid": "Red Eléctrica",
-    "Increase your Energy production step for each Power tag you have, including this.": "Aumenta tu producción de energía 1 nivel por cada símbolo de energía que tengas, incluyendo este.",
+    "Increase your energy production step for each Power tag you have, including this.": "Aumenta tu producción de energía 1 nivel por cada símbolo de energía que tengas, incluyendo este.",
 
     "Steelworks": "Siderurgia",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Acción: gasta 4 de energía para obtener 2 de acero e incrementar el oxígeno 1 nivel.",
@@ -381,7 +381,7 @@
     "Gain 1 M€ for each event EVER PLAYED by all players.": "Obtén 1 M€ por cada evento YA JUGADO por todos los jugadores.",
 
     "Open City": "Ciudad Abierta",
-    "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "Requiere 12% de oxígeno. Reduce tu producción de energía 1 nivel y aumenta tu producción de M€ en 4. Obtén 2 plantas y coloca una loseta de ciudad.",
+    "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Requiere 12% de oxígeno. Reduce tu producción de energía 1 nivel y aumenta tu producción de M€ en 4. Obtén 2 plantas y coloca una loseta de ciudad.",
 
     "Media Group": "Grupo de Comunicación",
     "Effect: After you play an event card, you gain 3 M€.": "Efecto: aal jugar una carta de evento, obtienes 3 M€.",
@@ -417,7 +417,7 @@
     "Requires 3 or less ocean tiles.": "Requiere que no haya más de 3 losetas de océano.",
 
     "Urbanized Area": "Área Urbanizada",
-    "(Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "Reduce tu producción de energía 1 nivel e incrementa tu producción de M€ en 2. Coloca una loseta de ciudad ADYACENTE AL MENOS A OTRAS 2 LOSETAS DE CIUDAD.)",
+    "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "Reduce tu producción de energía 1 nivel e incrementa tu producción de M€ en 2. Coloca una loseta de ciudad ADYACENTE AL MENOS A OTRAS 2 LOSETAS DE CIUDAD.)",
 
     "Sabotage": "Sabotaje",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Elimina hasta 3 de titanio de cualquier jugador, o 4 de acero, o 7 M€.",
@@ -436,7 +436,7 @@
     "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.": "Reduce tu producción de energía 1 nivel y la producción de M€ de cualquier jugador 2 niveles. Aumenta tu producción de M€ 2 niveles.",
 
     "GHG Factories": "Fábricas de GEI",
-    "Decrease your Energy production 1 step and increase your heat production 4 steps.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de calor 4 niveles.",
+    "Decrease your energy production 1 step and increase your heat production 4 steps.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de calor 4 niveles.",
 
     "Subterranean Reservoir": "Reserva Subterránea",
     "Place 1 ocean tile.": "Coloca 1 loseta de océano.",
@@ -458,7 +458,7 @@
     "1 VP per 3 Microbes on this card.": "1 PV por cada 3 microbios en esta carta.",
 
     "Fusion Power": "Energía de Fusión",
-    "Requires 2 Power tags. Increase your Energy production 3 steps.": "Requiere 2 símbolos de energía. Aumenta tu producción de energía 3 niveles.",
+    "Requires 2 Power tags. Increase your energy production 3 steps.": "Requiere 2 símbolos de energía. Aumenta tu producción de energía 3 niveles.",
 
     "Symbiotic Fungus": "Hongos Simbióticos",
     "Action: Add a microbe to ANOTHER card.": "Acción: añade un microbio a OTRA carta.",
@@ -474,13 +474,13 @@
     "Requires a Plant tag, a Microbe tag, and an Animal tag.": "Requiere un símbolo de planta, uno de microbio y uno de animal.",
 
     "Great Dam": "Presa Gigante",
-    "Requires 4 ocean tiles. Increase your Energy production 2 steps.": "Requiere 4 losetas de océano. Aumenta tu producción de energía 2 niveles.",
+    "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Requiere 4 losetas de océano. Aumenta tu producción de energía 2 niveles.",
 
     "Cartel": "Cártel",
     "Increase your M€ production 1 step for each Earth tag you have, including this.": "Aumenta tu producción de M€ 1 nivel por cada símbolo de Tierra que poseas, incluyendo este.",
 
     "Strip Mine": "Mina a Cielo Abierto",
-    "Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "Reduce tu producción de energía 2 niveles. Aumenta tu producción de acero en 2 y tu producción de titanio en 1. Incrementa el oxígeno 2 niveles.",
+    "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "Reduce tu producción de energía 2 niveles. Aumenta tu producción de acero en 2 y tu producción de titanio en 1. Incrementa el oxígeno 2 niveles.",
 
     "Wave Power": "Energía Olamotriz",
     "Requires 3 ocean tiles. Increase your energy production 1 step.": "Requiere 3 losetas de océano. Aumenta tu producción de energía 1 nivel.",
@@ -489,7 +489,7 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Aumenta la temperatura 2 niveles y coloca esta loseta en THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS O ARSIA MONS.",
 
     "Power Plant": "Central Eléctrica",
-    "Increase your Energy production 1 step.": "Aumenta tu producción de energía 1 nivel.",
+    "Increase your energy production 1 step.": "Aumenta tu producción de energía 1 nivel.",
 
     "Mohole Area": "Área Mohole",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Aumenta tu producción de calor 4 niveles. Coloca esta loseta EN UN ÁREA RESERVADA PARA OCÉANO.",
@@ -500,7 +500,7 @@
     "Titanium Mine": "Mina de Titanio",
 
     "Tectonic Stress Power": "Energía de Placas Tectónicas",
-    "Requires 2 Science tags. Increase your Energy production 3 steps.": "Requiere 2 símbolos de ciencia. Aumenta tu producción de energía en 3.",
+    "Requires 2 Science tags. Increase your energy production 3 steps.": "Requiere 2 símbolos de ciencia. Aumenta tu producción de energía en 3.",
 
     "Nitrophilic Moss": "Musgo Nitrofílico",
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Requiere 3 losetas de océano y que pierdas 2 plantas. Aumenta tu producción de plantas 2 niveles.",
@@ -544,7 +544,7 @@
     "Add 3 Microbes to this card.": "Añade 3 microbios a esta carta.",
 
     "Industrial Microbes": "Microbios Industriales",
-    "Increase your Energy production and your steel production 1 step each.": "Aumenta tu producción de energía y tu producción de acero 1 nivel cada una.",
+    "Increase your energy production and your steel production 1 step each.": "Aumenta tu producción de energía y tu producción de acero 1 nivel cada una.",
 
     "Lichen": "Liquen",
     "Requires -24 C or warmer. Increase your Plant production 1 step.": "Requiere -24°C o más cálido. Aumenta tu producción de plantas 1 nivel.",
@@ -565,16 +565,16 @@
     "Increase your heat production 1 step.": "Aumenta tu producción de calor 1 nivel.",
 
     "Magnetic Field Generators": "Generadores de Campo Magnético",
-    "(Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.)": "Reduce tu producción de energía 4 niveles e incrementa tu producción de plantas en 2. Aumenta tu VT 3 niveles.",
+    "(Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.)": "Reduce tu producción de energía 4 niveles e incrementa tu producción de plantas en 2. Aumenta tu VT 3 niveles.",
 
     "Shuttles": "Transbordadores",
-    "Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.": "Requiere 5% de oxígeno. Reduce tu producción de energía 1 nivel y aumenta tu producción de M€ en 2.",
+    "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Requiere 5% de oxígeno. Reduce tu producción de energía 1 nivel y aumenta tu producción de M€ en 2.",
 
     "Import of Advanced GHG": "Importación de GEI Avanzado",
     "Increase your heat production 2 steps.": "Aumenta tu producción de calor 2 niveles.",
 
     "Windmills": "Molinos de Viento",
-    "Requires 7% oxygen. Increase your Energy production 1 step.": "Requiere 7% de oxígeno. Aumenta tu producción de energía 1 nivel.",
+    "Requires 7% oxygen. Increase your energy production 1 step.": "Requiere 7% de oxígeno. Aumenta tu producción de energía 1 nivel.",
 
     "Tundra Farming": "Cultivo en Tundra",
     "(Requires -6° C or warmer. Increase your Plant production 1 step and your M€ production 2 steps. Gain 1 Plant.)": "Requiere -6°C o más cálido. Aumenta tu producción de plantas 1 nivel y tu producción de M€ 2 niveles. Obtén 1 planta.",
@@ -583,7 +583,7 @@
     "(Increase your heat production 3 steps and your plant production 1 step. Add 2 Microbes to ANOTHER card.)": "(Aumenta tu producción de calor 3 niveles y tu producción de plantas 1 nivel. Añade 2 microbios a OTRA carta.)",
 
     "Magnetic Field Dome": "Bóveda de Campo Magnético",
-    "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "Reduce tu producción de energía 2 niveles e incrementa tu producción de plantas en 1. Aumenta tu valor de terraformación 1 nivel.",
+    "Decrease your energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "Reduce tu producción de energía 2 niveles e incrementa tu producción de plantas en 1. Aumenta tu valor de terraformación 1 nivel.",
 
     "Pets": "Mascotas",
     "Animals may not be removed from this card": "NO SE PUEDEN ELIMINAR ANIMALES DE ESTA CARTA",
@@ -608,22 +608,22 @@
     "Requires 2 ocean tiles.": "Requiere 2 losetas de océano.",
 
     "Heat Trappers": "Atrapadores de Calor",
-    "Decrease any heat production 2 steps and increase your Energy production 1 step.": "Reduce cualquier producción de calor 2 niveles e incrementa tu producción de energía 1 nivel.",
+    "Decrease any heat production 2 steps and increase your energy production 1 step.": "Reduce cualquier producción de calor 2 niveles e incrementa tu producción de energía 1 nivel.",
 
     "Soil Factory": "Fábrica de Mantillo",
-    "Decrease your Energy production 1 step and increase your Plant production 1 step.": "Reduce tu producción de energía 1 nivel y aumenta tu producción de plantas en 1.",
+    "Decrease your energy production 1 step and increase your Plant production 1 step.": "Reduce tu producción de energía 1 nivel y aumenta tu producción de plantas en 1.",
 
     "Fuel Factory": "Refinería de Combustible",
-    "Decrease your Energy production 1 step and increase your titanium and your M€ production 1 step each.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de titanio y tu producción de M€ 1 nivel cada una.",
+    "Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de titanio y tu producción de M€ 1 nivel cada una.",
 
     "Ice Cap Melting": "Deshielo de Casquete Polar",
     "Requires +2 C or warmer. Place 1 ocean tile.": "Requiere +2°C o más cálido. Coloca una loseta de océano.",
 
     "Corporate Stronghold": "Bastión Corporativo",
-    "Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de M€ en 3. Coloca una loseta de ciudad.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de M€ en 3. Coloca una loseta de ciudad.",
 
     "Biomass Combustors": "Combustión de Biomasa",
-    "Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.": "Requiere 6% de oxígeno. Reduce cualquier producción de plantas 1 nivel e incrementa tu producción de energía en 2.",
+    "Requires 6% oxygen. Decrease any Plant production 1 step and increase your energy production 2 steps.": "Requiere 6% de oxígeno. Reduce cualquier producción de plantas 1 nivel e incrementa tu producción de energía en 2.",
 
     "Livestock": "Ganado",
     "(Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps)": "Requiere 9% de oxígeno. Reduce tu producción de plantas 1 nivel e incrementa tu producción de M€ en 2.",
@@ -641,7 +641,7 @@
     "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Coloca una loseta de océano. SI HAY LOSETAS ADYACENTES A ESTA LOSETA DE OCÉANO, PUEDES ELIMINAR 4 M€ DEL POSEEDOR DE UNA DE ESAS LOSETAS.",
 
     "Energy Saving": "Ahorro Energético",
-    "Increase your Energy production 1 step for each City tile in play.": "Aumenta tu producción de energía 1 nivel por cada loseta de ciudad en juego.",
+    "Increase your energy production 1 step for each City tile in play.": "Aumenta tu producción de energía 1 nivel por cada loseta de ciudad en juego.",
 
     "Local Heat Trapping": "Recolección de Calor Local",
     "Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.": "Gasta 5 de calor para bien obtener 4 plantas o bien añadir 2 animales a OTRA carta.",
@@ -679,7 +679,7 @@
 
     "Immigrant City": "Ciudad de Inmigrantes",
     "Effect: When a City tile is placed, including this, increase your M€ production 1 step.": "Efecto: cada vez que se coloque una loseta de ciudad, incluyendo esta, aumenta tu producción de M€ 1 nivel.",
-    "Decrease your Energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "Reduce tu producción de energía 1 nivel y tu producción de M€ en 2. Coloca una loseta de ciudad.",
+    "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "Reduce tu producción de energía 1 nivel y tu producción de M€ en 2. Coloca una loseta de ciudad.",
 
     "Energy Tapping": "Robo de Energía",
     "Decrease any Energy production 1 step and increase your own 1 step.": "Reduce cualquier producción de energía 1 nivel e incrementa la tuya en 1.",
@@ -694,7 +694,7 @@
     "Draw two cards.": "Roba 2 cartas.",
 
     "Rad-Chem Factory": "Fábrica Radiológica-Química",
-    "Decrease your Energy production 1 step. Raise your TR 2 steps.": "Reduce tu producción de energía 1 nivel. Aumenta tu valor de terraformación 2 niveles.",
+    "Decrease your energy production 1 step. Raise your TR 2 steps.": "Reduce tu producción de energía 1 nivel. Aumenta tu valor de terraformación 2 niveles.",
 
     "Special Design": "Diseño Exclusivo",
     "The next card you play this generation is +2 or -2 steps in global requirements, your choice.": "La siguiente carta que juegues esta generación tiene +2 o -2 para los requisitos globales, a tu elección.",
@@ -710,7 +710,7 @@
     "5 Science": "5 Ciencia",
     "(Effect: Draw 2 cards.)": "(Efecto: Roba 2 cartas.)",
 
-    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "Requiere 3 símbolos de Ciencia para ser jugada. Reduce tu producción de energía 1 nivel.",
+    "Requires 3 Science tags to play. Decrease your energy production 1 step.": "Requiere 3 símbolos de Ciencia para ser jugada. Reduce tu producción de energía 1 nivel.",
 
   "HYDROGEN TO VENUS":"Hidrógeno a Venus",
 

@@ -24,7 +24,7 @@ export class FusionPower extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(3));
         }),
-        description: 'Requires 2 Power tags. Increase your Energy production 3 steps.',
+        description: 'Requires 2 Power tags. Increase your energy production 3 steps.',
       },
     });
   }

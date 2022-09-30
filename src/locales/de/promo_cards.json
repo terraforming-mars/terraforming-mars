@@ -1,7 +1,7 @@
 {
   "New Partner": "Neuer Partner",
   "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Erhöhe deine M€-Produktion um 1. Ziehe sofort 2 Präludium-Karten, spiele eine dieser Karten und wirf die andere ab.",
-  
+
   "Comet Aiming": "Kometenzielen",
   "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "AKTION: Bezahle 1 Titan, um 1 Asteroid-Ressource einer BELIEBIGEN Karte hinzuzufügen.",
   "Action: Remove 1 asteroid here to place an ocean.": "AKTION: Entferne 1 Asteroid-Ressource von dieser Karte, um einen Ozean zu platzieren.",
@@ -59,7 +59,7 @@
   "Meat Industry": "Fleischindustrie",
   "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "EFFEKT: Wenn IRGENDEINE deiner Karten ein Tier erhält, erhalte zusätzlich 2 M€.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen TW um 3 und plaziere dieses Plättchen.",
+  "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen TW um 3 und plaziere dieses Plättchen.",
 
   "Orbital Cleanup": "Orbitalsäuberung",
   "Action: Gain 1 M€ per Science tag you have.": "AKTION: Erhalte 1 M€ für jedes Wissenschaftssymbol, das du besitzt.",
@@ -121,9 +121,9 @@
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "Erhöhe die Temperatur um 6 °C und erhalte 4 Stahl. Platziere dieses Plättchen NICHT ANGRENZEND an ein anderes Stadtplättchen. Entferne 6 Pflanzen eines beliebigen Spielers.",
 
-  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Erfordert 4 Ozeanplättchen. Erhöhe deine Energie-Produktion um 2. Platziere dieses Plättchen NEBEN einem Ozeanplättchen.",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Erfordert 4 Ozeanplättchen. Erhöhe deine Energie-Produktion um 2. Platziere dieses Plättchen NEBEN einem Ozeanplättchen.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deine TW um 3.",
+  "Decrease your energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deine TW um 3.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Erfordert 8 Ozeane. 1 SP für jedes Tier auf dieser Karte.",
   "Requires 2 Science tags.": "Erfordert 2 Wissenschaftssymbole.",

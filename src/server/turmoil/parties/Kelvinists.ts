@@ -20,7 +20,7 @@ export class Kelvinists extends Party implements IParty {
 class KelvinistsBonus01 implements Bonus {
   readonly id = 'kb01' as const;
   readonly isDefault = true;
-  readonly description = 'Gain 1 M€ for each Heat production you have';
+  readonly description = 'Gain 1 M€ for each heat production you have';
 
   getScore(player: Player) {
     return player.production.heat;
@@ -35,7 +35,7 @@ class KelvinistsBonus01 implements Bonus {
 
 class KelvinistsBonus02 implements Bonus {
   readonly id = 'kb02' as const;
-  readonly description = 'Gain 1 heat for each Heat production you have';
+  readonly description = 'Gain 1 heat for each heat production you have';
   readonly isDefault = false;
 
   getScore(player: Player) {
@@ -54,7 +54,7 @@ class KelvinistsPolicy01 implements Policy {
   readonly id = 'kp01' as const;
   description(player: Player | undefined): string {
     const cost = player === undefined ? 10 : this.cost(player);
-    return `Pay ${cost} M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)`;
+    return `Pay ${cost} M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)`;
   }
 
   cost(player: Player): number {

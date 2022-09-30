@@ -112,7 +112,6 @@ describe('SpecializedSettlement', function() {
     expect(player.popWaitingFor()).is.undefined;
   });
 
-
   it('play - 3 different, then play Robotic Workforce', function() {
     singleResourceTest(
       [SpaceBonus.HEAT, SpaceBonus.STEEL, SpaceBonus.TITANIUM],
@@ -126,7 +125,9 @@ describe('SpecializedSettlement', function() {
     player.playedCards = [card];
 
     const roboticWorkforce = new RoboticWorkforce();
+    expect(roboticWorkforce.canPlay(player)).is.false;
     expect(roboticWorkforce.play(player)).is.undefined;
+
     player.production.override(Units.of({energy: 1}));
     const selectCard = cast(roboticWorkforce.play(player), SelectCard);
     expect(selectCard.cards).deep.eq([card]);

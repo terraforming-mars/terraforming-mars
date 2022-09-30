@@ -10,6 +10,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
 import {cast, runAllActions} from '../../TestingUtils';
+import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
+import {Units} from '../../../src/common/Units';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('Gyropolis', function() {
   let card: Gyropolis;
@@ -23,10 +26,10 @@ describe('Gyropolis', function() {
   });
 
   it('Should play', function() {
-    const card1 = new ResearchNetwork();
-    const card2 = new LunaGovernor();
+    const researchNetwork = new ResearchNetwork();
+    const lunaGoveror = new LunaGovernor();
 
-    player.playedCards.push(card1, card2);
+    player.playedCards.push(researchNetwork, lunaGoveror);
     player.production.add(Resources.ENERGY, 2);
 
     expect(player.canPlayIgnoringCost(card)).is.true;
@@ -55,5 +58,28 @@ describe('Gyropolis', function() {
     player.playedCards = [new DeepLunarMining(), new EarthEmbassy()];
     card.play(player);
     expect(player.production.megacredits).to.eq(3);
+  });
+
+  it('Compatible with Robotic Workforce', function() {
+    const lunaGoveror = new LunaGovernor();
+
+    player.playedCards.push(lunaGoveror, card);
+
+    const roboticWorkforce = new RoboticWorkforce();
+    expect(roboticWorkforce.canPlay(player)).is.false;
+    expect(roboticWorkforce.play(player)).is.undefined;
+
+    player.production.override(Units.of({energy: 1}));
+
+    expect(roboticWorkforce.canPlay(player)).is.false;
+    expect(roboticWorkforce.play(player)).is.undefined;
+
+    player.production.override(Units.of({energy: 2}));
+    expect(roboticWorkforce.canPlay(player)).is.true;
+
+    const selectCard = cast(roboticWorkforce.play(player), SelectCard);
+    expect(selectCard.cards).deep.eq([card]);
+    selectCard.cb([selectCard.cards[0]]);
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 });

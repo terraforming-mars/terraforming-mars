@@ -46,9 +46,8 @@ export interface StaticCardProperties {
 /*
  * Internal representation of card properties.
  */
-type Properties = Omit<StaticCardProperties, 'reserveUnits|behavior'> & {
+type Properties = Omit<StaticCardProperties, 'reserveUnits'> & {
   reserveUnits?: ReserveUnits,
-  behavior: Behavior,
 };
 
 export const staticCardProperties = new Map<CardName, Properties>();
@@ -60,8 +59,8 @@ export const staticCardProperties = new Map<CardName, Properties>();
  *    consumes very little memory.
  *
  * 2. It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
- * in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
- * put right in here.
+ *    in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
+ *    put right in here.
  *
  * In order to implement this default behavior, Card subclasses should ideally not
  * override `play` and `canPlay`. Instead, they should override `bespokeCanPlay` and
@@ -91,7 +90,6 @@ export abstract class Card {
       const p: Properties = {
         ...properties,
         reserveUnits: properties.reserveUnits === undefined ? undefined : {...Units.of(properties.reserveUnits), deduct: properties.reserveUnits.deduct ?? true},
-        behavior: properties.behavior || {},
       };
       staticCardProperties.set(properties.name, p);
       staticInstance = p;

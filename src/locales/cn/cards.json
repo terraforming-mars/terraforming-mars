@@ -118,7 +118,7 @@
     "Select a space for city tile":"为城市板块选择一个位置",
 
     "Lunar Beam": "月球射线",
-    "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "降低你的M€产量2级并增加你的热能产量和电力产产量各2级。",
+    "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "降低你的M€产量2级并增加你的热能产量和电力产产量各2级。",
 
     "Optimal Aerobraking": "最优的空气动力制动",
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "效果： 当你打出同时带有空间标志和事件标志的牌时，获得3 M€和3热能资源。",
@@ -179,7 +179,7 @@
     "1 VP per 4 Microbes on this card.": "本卡上每有4个微生物，获得1分。",
 
     "Virus": "病毒",
-    "Remove up to 2 Animals or 5 Plants from any player.": "移除任一玩家最多2个动物资源或5个植物资源。",
+    "Remove up to 2 animals or 5 plants from any player.": "移除任一玩家最多2个动物资源或5个植物资源。",
 
     "Miranda Resort": "米兰达度假村",
     "Increase your M€ production 1 step for each Earth tag you have.": "每有1个地球标志，增加你的M€产量1级。",
@@ -207,7 +207,7 @@
     "Vesta Shipyard": "维斯塔造船厂",
 
     "Beam From A Thorium Asteroid": "钍行星射线",
-    "(Requires a Jovian tag. Increase your heat production and Energy production 3 steps each)": "需要拥有一个木星标志。增加你的热能产量和电力产量各3级",
+    "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each)": "需要拥有一个木星标志。增加你的热能产量和电力产量各3级",
 
     "Mangrove": "红树林",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "需要火星温度至少+4度。放置一个森林板块在原本用于放置海洋板块的地方(无视基础放置条件)。提升氧气1级。",
@@ -259,7 +259,7 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "效果： 当你打出一个科学标志,包括本牌,你可以从手牌中弃掉1张牌，然后抽1张牌。",
 
     "Viral Enhancers": "病毒增强",
-    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "效果： 当你打出一个植物、微生物或动物标志时,包括本牌,获得1个植物，或增加1个对应资源到该牌。",
+    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "效果： 当你打出一个植物、微生物或动物标志时,包括本牌,获得1个植物，或增加1个对应资源到该牌。",
 
     "Towing A Comet": "牵引彗星",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "获得2个植物资源。提升1级氧气并放置一个海洋板块。",
@@ -320,7 +320,7 @@
     "Requires 5 science tags. Increase your energy production 6 steps.": "需要5个科学标志。增加你的电力产量6级。",
 
     "Physics Complex": "物理复杂性",
-    "Action: Spend 6 Energy to add a science resource to this card.": "行动： 花费6个电力资源，放置一个资源在本卡。",
+    "Action: Spend 6 energy to add a science resource to this card.": "行动： 花费6个电力资源，放置一个资源在本卡。",
     "2 VP for each science resource on this card.": "本卡上每有1个资源，获得2分。",
 
     "Greenhouses": "温室",
@@ -339,7 +339,7 @@
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "行动： 花费4电力资源，获得1钢铁资源和提升1级氧气。",
 
     "Power Grid": "电网",
-    "Increase your energy production step for each Power tag you have, including this.": "每有1个电力标志，提升你的电力产量1级。",
+    "Increase your energy production step for each power tag you have, including this.": "每有1个电力标志，提升你的电力产量1级。",
 
     "Steelworks": "钢铁厂",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "行动： 花费4个电力资源，获得2个钢铁资源和提升氧气1级。",

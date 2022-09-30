@@ -27,7 +27,7 @@ export class Virus extends Card implements IProjectCard {
           b.minus().animals(2, {all, digit}).nbsp;
           b.or().nbsp.minus().plants(5, {all, digit});
         }),
-        description: 'Remove up to 2 Animals or 5 Plants from any player.',
+        description: 'Remove up to 2 animals or 5 plants from any player.',
       },
     });
   }

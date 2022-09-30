@@ -96,7 +96,7 @@
     "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Poziom Tlenu musi być równy albo niższy niż 9%. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy.",
 
     "Lunar Beam": "Wiązka z Księżyca",
-    "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Obniż swoją produkcję M€ o 2 poziomy i podnieś swoją produkcję ciepła i energii o 2 poziomy.",
+    "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Obniż swoją produkcję M€ o 2 poziomy i podnieś swoją produkcję ciepła i energii o 2 poziomy.",
 
     "Optimal Aerobraking": "Optymalne Hamowanie Aerodynamiczne",
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia z symbolem przestrzeni kosmicznej, otrzymujesz 3 M€ i 3 jednostki ciepła.",
@@ -162,7 +162,7 @@
     "1 VP per 4 Microbes on this card.": "Otrzymujesz po 1 PZ za każde 4 znajdujące się na tej karcie jednostki mikrobów.",
 
     "Virus": "Wirus",
-    "Remove up to 2 Animals or 5 Plants from any player.": "Usuń do 2 jednostek zwierząt albo do 5 jednostek roślinności dowolnego gracza.",
+    "Remove up to 2 animals or 5 plants from any player.": "Usuń do 2 jednostek zwierząt albo do 5 jednostek roślinności dowolnego gracza.",
 
     "Miranda Resort": "Kurort na Mirandzie",
     "Increase your M€ production 1 step for each Earth tag you have.": "Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Ziemi.",
@@ -188,7 +188,7 @@
     "Increase your titanium production 1 step.": "Podnieś swoją produkcję tytanu o 1 poziom.",
 
     "Beam From A Thorium Asteroid": "Wiązka z Asteroidy Bogatej w Tor",
-    "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each": "Musisz posiadać przynajmniej 1 symbol Jowisza. Podnieś swoją produkcję ciepła i energii o 3 poziomy.",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each": "Musisz posiadać przynajmniej 1 symbol Jowisza. Podnieś swoją produkcję ciepła i energii o 3 poziomy.",
 
     "Mangrove": "Namorzyny",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Temperatura musi być równa albo wyższa niż 4°C. Umieść obszar zieleni na planszy, na polu ZAREZERWOWANYM DLA OCEANÓW, ignorując normalne ograniczenia umieszczania obszarów.",
@@ -239,7 +239,7 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem nauki (z tą włącznie), za każdy symbol nauki na zagrywanej karcie możesz odrzucić kartę z ręki i dobrać nową kartę.",
 
     "Viral Enhancers": "Wirusy Wspomagające",
-    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Efekt trwały: Gdy zagrywasz kartę z symbolem roślinności, mikrobów lub zwierząt (z tą włącznie), otrzymujesz 1 jednostkę roślinności albo umieszczasz 1 jednostkę danych zasobów za każdy symbol na zagranej karcie.",
+    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Efekt trwały: Gdy zagrywasz kartę z symbolem roślinności, mikrobów lub zwierząt (z tą włącznie), otrzymujesz 1 jednostkę roślinności albo umieszczasz 1 jednostkę danych zasobów za każdy symbol na zagranej karcie.",
 
     "Towing A Comet": "Holowanie Komety",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Otrzymujesz 2 jednostki roślinności. Podnieś Poziom Tlenu o 1% i umieść na planszy obszar oceanu.",
@@ -306,7 +306,7 @@
     "Requires 5 science tags. Increase your energy production 6 steps.": "Musisz posiadać przynajmniej 5 symboli nauki. Podnieś swoją produkcję energii o 6 poziomów.",
 
     "Physics Complex": "Kompleks Fizyki Jądrowej",
-    "Action: Spend 6 Energy to add a science resource to this card.": "Akcja: Wydaj 6 jednostek energii, żeby umieścić na tej karcie 1 jednostkę nauki.",
+    "Action: Spend 6 energy to add a science resource to this card.": "Akcja: Wydaj 6 jednostek energii, żeby umieścić na tej karcie 1 jednostkę nauki.",
     "2 VP for each science resource on this card.": "Otrzymujesz po 2 PZ za każdą znajdującą się na tej karcie jednostkę nauki.",
 
     "Greenhouses": "Szklarnie",
@@ -328,7 +328,7 @@
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "Akcja: Wydaj 4 jednostki energii, żeby otrzymać 1 jednostkę stali i podnieś Poziom Tlenu o 1%.",
 
     "Power Grid": "Sieć Energetyczna",
-    "Increase your energy production step for each Power tag you have, including this.": "Podnieś swoją produkcję energii o 1 poziom za każdy posiadany symbol energii (z tym włącznie).",
+    "Increase your energy production step for each power tag you have, including this.": "Podnieś swoją produkcję energii o 1 poziom za każdy posiadany symbol energii (z tym włącznie).",
 
     "Steelworks": "Stalownie",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Akcja: Wydaj 4 jednostki energii, żeby otrzymać 2 jednostki stali i podnieść Poziom Tlenu o 1%.",

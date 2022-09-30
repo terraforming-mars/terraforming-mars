@@ -102,7 +102,7 @@
     "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "조건: 산소 농도 9% 이하.) (에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 도시 타일 1장 배치.",
 
     "Lunar Beam": "루나 빔",
-    "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "메가크레딧 생산력 2 감소. 열 생산력 2 증가. 에너지 생산력 2 증가.",
+    "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "메가크레딧 생산력 2 감소. 열 생산력 2 증가. 에너지 생산력 2 증가.",
 
     "Optimal Aerobraking": "첨단 대기권제동기술",
     "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "지속효과: 우주 사건형 카드 사용 시, 3 M€과 열 자원 3개 획득.",
@@ -167,7 +167,7 @@
     "1 VP per 4 Microbes on this card.": "이 카드의 미생물 자원 4개당 승점 1점.",
 
     "Virus": "바이러스",
-    "Remove up to 2 Animals or 5 Plants from any player.": "아무 1명의 동물 자원 2개까지 또는 식물 자원 5개까지 제거.",
+    "Remove up to 2 animals or 5 plants from any player.": "아무 1명의 동물 자원 2개까지 또는 식물 자원 5개까지 제거.",
 
     "Miranda Resort": "미란다 리조트",
     "Increase your M€ production 1 step for each Earth tag you have.": "보유한 지구 태그 1개당 메가크레딧 생산력 1 증가.",
@@ -192,7 +192,7 @@
     "Vesta Shipyard": "베스타 조선소",
 
     "Beam From A Thorium Asteroid": "토륨 소행성 핵발전소",
-    "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each": "조건: 보유한 목성 태그 1개 이상.) (열 생산력 3 증가. 에너지 생산력 3 증가.",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each": "조건: 보유한 목성 태그 1개 이상.) (열 생산력 3 증가. 에너지 생산력 3 증가.",
 
     "Mangrove": "맹그로브",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "조건: 기온 +4℃ 이상.) (배치 제한 무시하고 빈 해양 전용 구역 한 곳에 녹지 타일 1장 배치. 그에 따른 산소 농도 1% 상승.",
@@ -243,7 +243,7 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다 손에 든 카드 1장 버리고, 새로운 카드 1장 획득.",
 
     "Viral Enhancers": "바이러스 벡터",
-    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 식물/미생물/동물 태그 1개마다, 식물 자원 1개 획득, 또는 사용한 그 카드에 자원 1개 추가.",
+    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 식물/미생물/동물 태그 1개마다, 식물 자원 1개 획득, 또는 사용한 그 카드에 자원 1개 추가.",
 
     "Towing A Comet": "혜성 견인",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "산소 농도 1% 상승. 해양 타일 1장 배치. 식물 자원 2개 획득.",
@@ -307,7 +307,7 @@
     "Requires 5 science tags. Increase your energy production 6 steps.": "조건: 보유한 과학 태그 5개 이상.) (에너지 생산력 6 증가.",
 
     "Physics Complex": "물리 복합연구단지",
-    "Action: Spend 6 Energy to add a science resource to this card.": "행동: 에너지 자원 6개 소비해서 이 카드에 과학 자원 1개 추가.",
+    "Action: Spend 6 energy to add a science resource to this card.": "행동: 에너지 자원 6개 소비해서 이 카드에 과학 자원 1개 추가.",
     "2 VP for each science resource on this card.": "이 카드의 과학 자원 1개당 승점 2점.",
 
     "Greenhouses": "온실",
@@ -329,7 +329,7 @@
     "Action: Spend 4 energy to gain 1 steel and raise oxygen 1 step.": "행동: 에너지 자원 4개 소비해서 강철 자원 1개 획득 및 산소 농도 1% 상승.",
 
     "Power Grid": "전력망",
-    "Increase your energy production step for each Power tag you have, including this.": "이 카드도 포함해서, 보유한 에너지 태그 1개당 에너지 생산력 1 증가.",
+    "Increase your energy production step for each power tag you have, including this.": "이 카드도 포함해서, 보유한 에너지 태그 1개당 에너지 생산력 1 증가.",
 
     "Steelworks": "제강소",
     "Action: Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "행동: 에너지 자원 4개 소비해서 강철 자원 2개 획득 및 산소 농도 1% 상승.",

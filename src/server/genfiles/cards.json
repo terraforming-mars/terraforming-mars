@@ -851,7 +851,7 @@
     },
     "metadata": {
       "cardNumber": "058",
-      "description": "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each",
+      "description": "Requires a Jovian tag. Increase your heat production and energy production 3 steps each",
       "renderData": {
         "rows": [
           [
@@ -5407,7 +5407,7 @@
         ],
         "is": "root"
       },
-      "description": "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each."
+      "description": "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each."
     },
     "productionBox": {
       "megacredits": 0,
@@ -7343,7 +7343,7 @@
         ],
         "is": "root"
       },
-      "description": "Increase your energy production step for each Power tag you have, including this."
+      "description": "Increase your energy production step for each power tag you have, including this."
     },
     "productionBox": {
       "megacredits": 0,
@@ -14725,7 +14725,7 @@
                     "multiplier": false,
                     "cancelled": false
                   },
-                  "Action: Spend 6 Energy to add a science resource to this card."
+                  "Action: Spend 6 energy to add a science resource to this card."
                 ]
               ],
               "is": "effect"
@@ -16378,7 +16378,7 @@
                     "isIcon": false,
                     "is": "symbol"
                   },
-                  "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD."
+                  "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD."
                 ]
               ],
               "is": "effect"
@@ -16463,7 +16463,7 @@
         ],
         "is": "root"
       },
-      "description": "Remove up to 2 Animals or 5 Plants from any player."
+      "description": "Remove up to 2 animals or 5 plants from any player."
     },
     "productionBox": {
       "megacredits": 0,

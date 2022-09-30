@@ -16,7 +16,7 @@ export class NewColonyPlanningInitiaitives extends Card implements IProjectCard 
         moon: {habitatRate: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.colonyRate(2)),
+      requirements: CardRequirements.builder((b) => b.habitatRate(2)),
       metadata: {
         description: 'Requires Habitat Rate to be 2 or higher. Raise the Habitat Rate 1 step.',
         cardNumber: 'M31',

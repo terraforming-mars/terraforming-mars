@@ -11,7 +11,7 @@ export class WaterTreatmentComplex extends Card {
       name: CardName.WATER_TREATMENT_COMPLEX,
       cardType: CardType.AUTOMATED,
       cost: 12,
-      requirements: CardRequirements.builder((b) => b.colonyTiles(1, {all})),
+      requirements: CardRequirements.builder((b) => b.habitatTiles(1, {all})),
       reserveUnits: {titanium: 1},
 
       behavior: {

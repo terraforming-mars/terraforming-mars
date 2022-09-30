@@ -14,7 +14,7 @@ export class MicrosingularityPlant extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tag.ENERGY],
       cost: 10,
-      requirements: CardRequirements.builder((b) => b.colonyTiles(2, {all})),
+      requirements: CardRequirements.builder((b) => b.habitatTiles(2, {all})),
 
       behavior: {
         production: {energy: 2},

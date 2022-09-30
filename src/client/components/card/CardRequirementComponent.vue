@@ -59,7 +59,7 @@ export default Vue.extend({
       case RequirementType.TEMPERATURE:
       case RequirementType.OXYGEN:
       case RequirementType.VENUS:
-      case RequirementType.COLONY_RATE:
+      case RequirementType.HABITAT_RATE:
       case RequirementType.MINING_RATE:
       case RequirementType.LOGISTIC_RATE:
         return this.requirement.amount;
@@ -123,13 +123,13 @@ export default Vue.extend({
       case RequirementType.TAG:
         const tagRequirement = this.requirement as ITagCardRequirement;
         return ['card-resource-tag--S', 'card-tag-' + tagRequirement.tag];
-      case RequirementType.COLONY_RATE:
+      case RequirementType.HABITAT_RATE:
         return ['card-colony-rate', 'card-colony-rate--req'];
       case RequirementType.MINING_RATE:
         return ['card-mining-rate', 'card-mining-rate--req'];
       case RequirementType.LOGISTIC_RATE:
         return ['card-logistics-rate', 'card-logistics-rate--req'];
-      case RequirementType.COLONY_TILES:
+      case RequirementType.HABITAT_TILES:
         return ['card-tile-lunar-colony--S', 'tile--req'];
       case RequirementType.MINING_TILES:
         return ['card-tile-lunar-mine--S', 'tile--req'];

@@ -30,7 +30,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
             eb.empty().startAction.microbes(1);
           }).br;
           b.or().br;
-          b.action('Remove 2 Microbes to raise temperature 1 step.', (eb) => {
+          b.action('Remove 2 microbes to raise temperature 1 step.', (eb) => {
             eb.microbes(2).startAction.temperature(1);
           });
         }),

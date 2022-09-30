@@ -62,7 +62,7 @@
    "Jupiter Floating Station": "Estação Flutuante de Júpiter",
    "Action: Add 1 floater to a JOVIAN CARD.": "Ação: Adicione 1 flutuador à uma CARTA JOVIANA.",
    "Action: Gain 1 M€ for every floater here [MAX 4].": "Ação: Receba 1 M€ para cada flutuador nesta carta (máx. 4)",
-   "Requires 3 Science tags.": "Requer 3 ícones de ciência.",
+   "Requires 3 science tags.": "Requer 3 ícones de ciência.",
    "Gain 1 M€ per floater here (max 4)": "Receba 1 M€ para cara flutuador aqui (máx. 4)",
 
    "Luna Governor": "Governador da Lua",
@@ -100,10 +100,10 @@
    "Gain all your colony bonuses.": "Receba todos os benefícios de todas as suas colônias.",
 
    "Quantum Communications": "Comunicações Quânticas",
-   "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Requer 4 ícones de ciência. Aumente sua produção de M€ em 1 nível para cada colônia em jogo.",
+   "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Requer 4 ícones de ciência. Aumente sua produção de M€ em 1 nível para cada colônia em jogo.",
    "Red Spot Observatory": "Observatório do Ponto Vermelho'",
    "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Ação: Adicione 1 flutuador à esta carta, ou remova 1 flutuador desta carta para receber 1 carta.",
-   "Requires 3 Science tags. Draw 2 cards.": "Requer 3 ícones de ciência. Receba 2 cartas.",
+   "Requires 3 science tags. Draw 2 cards.": "Requer 3 ícones de ciência. Receba 2 cartas.",
 
    "Refugee Camp": "Campo de Refugiados",
    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Ação Reduza sua produção de M€ em 1 nível para receber um recurso de acampamento nesta carta.",
@@ -137,7 +137,7 @@
    "Sub-zero Salt Fish": "Peixe Abaixo de Zero",
    "Action: Add 1 Animal to this card.": "Ação: Adicione 1 animal à esta carta.",
    "1 VP per 2 Animals on this card.": "1 PV para cada 2 animais nesta carta.",
-   "Requires -6 C. Decrease any Plant production 1 step.": "Requer -6°C ou mais de temperatura. Reduza qualquer produção de planta em 1 nível.",
+   "Requires -6 C. Decrease any plant production 1 step.": "Requer -6°C ou mais de temperatura. Reduza qualquer produção de planta em 1 nível.",
 
    "Titan Air-scrapping": "Coletor Aéreo em Titã",
    "Action: Spend 2 floaters here to increase your TR 1 step.": "Ação: Remova 2 flutuadores desta carta para aumentar seu IT em 1 nível.",
@@ -161,5 +161,5 @@
 
    "Warp Drive": "Unidade de Dobra",
    "Effect: When you play a Space card, you pay 4 M€ less for it.": "Efeito: Ao jogar uma carta com ícone espacial, pague 4 M€ a menos por ela.",
-   "Requires 5 Science tags.": "Requer 5 ícones de ciência."
+   "Requires 5 science tags.": "Requer 5 ícones de ciência."
 }

@@ -13,8 +13,8 @@
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Richiede almeno 3 tessere Oceano. Diminuisci sia la tua Produzione di M€ di 1 livello sia una qualunque Produzione di Calore di 1 livello. Incrementa la tua Produzione di Piante di 2 livelli.",
 
     "Search for Life": "Ricerca della Vita",
-    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Azione: spendi 1 M€ per rivelare la prima carta del mazzo di pesca. Se tale carta contiene un simbolo Microbo, aggiungi una risorsa Scienza su questa carta. Poi, scarta la carta.",
-    "3 VPs if you have one or more Science resources here.": "Il livello di Ossigeno deve essere minore o uguale al 6%. 3 PV se hai una o più risorse Scienza su questa carta.",
+    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a science resource here.": "Azione: spendi 1 M€ per rivelare la prima carta del mazzo di pesca. Se tale carta contiene un simbolo Microbo, aggiungi una risorsa Scienza su questa carta. Poi, scarta la carta.",
+    "3 VPs if you have one or more science resources here.": "Il livello di Ossigeno deve essere minore o uguale al 6%. 3 PV se hai una o più risorse Scienza su questa carta.",
 
     "Inventors Guild": "Associazione degli Inventori",
     "Action: Look at the top card and either buy it or discard it": "Azione: guarda la prima carta del mazzo e comprala, oppure scartala.",
@@ -23,13 +23,13 @@
     "Action: Spend 1 energy to gain 1 M€ for each City tile ON MARS.": "Azione: spendi una risorsa Energia per ottenere 1 M€ per ogni tessera Città SU MARTE.",
 
     "Asteroid": "Asteroide",
-    "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "Incrementa la Temperatura di 1 livello e ottieni 2 risorse Titanio. Rimuovi fino a 3 Piante da un qualunque giocatore.",
+    "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Incrementa la Temperatura di 1 livello e ottieni 2 risorse Titanio. Rimuovi fino a 3 Piante da un qualunque giocatore.",
 
     "Comet": "Cometa",
-    "Raise temperature 1 step and place an ocean tile. Remove up to 3 Plants from any player.": "Incrementa la Temperatura di 1 livello e colloca una tessera Oceano. Rimuovi fino a 3 Piante da un qualunque giocatore.",
+    "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.": "Incrementa la Temperatura di 1 livello e colloca una tessera Oceano. Rimuovi fino a 3 Piante da un qualunque giocatore.",
 
     "Big Asteroid": "Grande Asteroide",
-    "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "Incrementa la Temperatura di 2 livelli e guadagna 4 risorse Titanio. Rimuovi fino a 4 Piante da un qualunque giocatore.",
+    "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Incrementa la Temperatura di 2 livelli e guadagna 4 risorse Titanio. Rimuovi fino a 4 Piante da un qualunque giocatore.",
 
     "Water Import from Europa": "Importazione d'Acqua da Europa",
     "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Azione: paga 12 M€ per collocare una tessera Oceano. PUOI usare il Titanio, come se stessi giocando una carta Spazio.",
@@ -83,7 +83,7 @@
     "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your M€ production 2 steps.": "Richiede una Temperatura di -12°C o superiore. Aggiungi 1 Animale AD UNA QUALUNQUE CARTA ANIMALE. Ottieni 3 Piante. Incrementa la tua Produzione di M€ di 2 livelli.",
 
     "Interstellar Colony Ship": "Nave Interstellare Coloniale",
-    "Requires that you have 5 Science tags.":"Richiede 5 simboli Scienza.",
+    "Requires that you have 5 science tags.":"Richiede 5 simboli Scienza.",
 
     "Security Fleet": "Flotta di Difesa",
     "Action: Spend 1 titanium to add 1 fighter resource to this card.": "Azione: spendi 1 risorsa Titanio per aggiungere 1 risorsa Caccia a questa carta.",
@@ -107,12 +107,12 @@
 
 
     "GHG Producing Bacteria": "Batteri Produttori di Gas Serra",
-    "Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.": "Azione: aggiungi 1 Microbo a questa carta.",
-    "(Action: Remove 2 Microbes to raise temperature 1 step.)":"(Azione: rimuovi 2 Microbi da questa carta per aumentare la Temperatura di 1 livello.)",
+    "Action: Add 1 Microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Azione: aggiungi 1 Microbo a questa carta.",
+    "(Action: Remove 2 microbes to raise temperature 1 step.)":"(Azione: rimuovi 2 Microbi da questa carta per aumentare la Temperatura di 1 livello.)",
     "Requires 4% oxygen.": "Richiede almeno il 4% di Ossigeno.",
 
     "Ants": "Formiche",
-    "Action: Remove 1 Microbe from any card to add 1 to this card.": "Azione: rimuovi 1 Microbo da una qualunque carta per aggiungerlo su questa carta.",
+    "Action: Remove 1 microbe from any card to add 1 to this card.": "Azione: rimuovi 1 Microbo da una qualunque carta per aggiungerlo su questa carta.",
     "Requires 4% oxygen. 1 VP per 2 Microbes on this card.": "Richiede almeno il 4% di Ossigeno. 1 PV per ogni coppia di Microbi su questa carta.",
     "1 VP per 2 Microbes on this card.":"1 PV per ogni coppia di Microbi su questa carta.",
 
@@ -126,7 +126,7 @@
     "Effect: When any City tile is placed, gain 2 M€.": "Effetto: quando viene collocata una qualunque Città, ottieni 2 M€.",
 
     "Deimos Down": "Caduta di Deimos",
-    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.": "Incrementa la Temperatura di 3 livelli e ottieni 4 risorse Acciaio. Rimuovi fino a 8 Piante da un qualunque giocatore.",
+    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Incrementa la Temperatura di 3 livelli e ottieni 4 risorse Acciaio. Rimuovi fino a 8 Piante da un qualunque giocatore.",
 
     "Asteroid Mining": "Industria Mineraria di Asteroidi",
     "Increase your titanium production 2 steps.": "Incrementa la tua Produzione di Titanio di 2 livelli.",
@@ -144,10 +144,10 @@
     "Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Diminuisci la tua produzione di M€ di 2 livelli e incrementa la tua Produzione di Energia di 3 livelli.",
 
     "Lightning Harvest": "Raccolta Fulmini",
-    "Requires 3 Science tags. Increase your energy production and your M€ production one step each.": "Richiede 3 simboli Scienza. Incrementa la tua Produzione di Energia e di M€ di 1 livello ciascuna.",
+    "Requires 3 science tags. Increase your energy production and your M€ production one step each.": "Richiede 3 simboli Scienza. Incrementa la tua Produzione di Energia e di M€ di 1 livello ciascuna.",
 
     "Algae": "Alghe",
-    "Requires 5 ocean tiles. Gain 1 Plant and increase your plant production 2 steps.": "Richiede almeno 5 tessere Oceano. Ottieni 1 Pianta; incrementa la tua Produzione di Piante di 2 livelli.",
+    "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.": "Richiede almeno 5 tessere Oceano. Ottieni 1 Pianta; incrementa la tua Produzione di Piante di 2 livelli.",
 
     "Adapted Lichen": "Lichene Adattato",
     "Increase your plant production 1 step.": "Incrementa la tua Produzione di Piante di 1 livello.",
@@ -164,7 +164,7 @@
 
     "Fish": "Pesce",
     "Action: Add 1 Animal to this card.": "Azione: aggiungi un Animale a questa carta.",
-    "(Requires +2 C° or warmer. Decrease any Plant production 1 step.)": "(Richiede una Temperatura maggiore o uguale a +2°C. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
+    "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "(Richiede una Temperatura maggiore o uguale a +2°C. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
     "1 VP for each Animal on this card.": "1 PV per ogni Animale su questa carta.",
 
 
@@ -173,12 +173,12 @@
 
     "Small Animals": "Piccoli Animali",
     "Action: Add 1 Animal to this card.": "Azione: aggiungi un Animale a questa carta.",
-    "(Requires 6% oxygen. Decrease any Plant production 1 step.)": "(Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
+    "(Requires 6% oxygen. Decrease any plant production 1 step.)": "(Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
     "1 VP per 2 Animals on this card.":"1 PV per ogni coppia di Animali su questa carta.",
 
 
     "Kelp Farming": "Coltivazione di Alghe",
-    "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 Plants.": "Richiede almeno 6 tessere Oceano. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 3 livelli. Ottieni 2 Piante.",
+    "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 plants.": "Richiede almeno 6 tessere Oceano. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 3 livelli. Ottieni 2 Piante.",
 
     "Mine": "Miniera",
     "Increase your steel production 1 step.": "Incrementa la tua Produzione di Acciaio di 1 livello.",
@@ -193,7 +193,7 @@
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Richiede una Temperatura maggiore o uguale a +4°C. Colloca 1 tessera Vegetazione SU UN'AREA RISERVATA AD UNA TESSERA OCEANO e incrementa di 1 il livello di Ossigeno. Ignora le normali restrizioni di piazzamento.",
 
     "Trees": "Alberi",
-    "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 Plant.": "Richiede una Temperatura maggiore o uguale a -4°C. Incrementa la tua Produzione di Piante di 3 livelli. Ottieni 1 Pianta.",
+    "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.": "Richiede una Temperatura maggiore o uguale a -4°C. Incrementa la tua Produzione di Piante di 3 livelli. Ottieni 1 Pianta.",
 
     "Great Escarpment Consortium": "Consorzio della Grande Scarpata",
     "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.": "Richiede che tu abbia una Produzione di Acciaio non nulla. Diminuisci una qualunque Produzione di Acciaio di 1 livello e incrementa la tua di 1 livello.",
@@ -362,7 +362,7 @@
     "Increase your energy production 2 steps.": "Incrementa la tua Produzione di Energia di 2 livelli.",
 
     "Farming": "Coltivazione",
-    "(Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 Plants.)": "(Richiede una Temperatura maggiore o uguale a +4°C. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 2 livelli. Ottieni 2 Piante.)",
+    "(Requires +4° C or warmer. Increase your M€ production 2 steps and your plant production 2 steps. Gain 2 plants.)": "(Richiede una Temperatura maggiore o uguale a +4°C. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 2 livelli. Ottieni 2 Piante.)",
 
     "Dust Seals": "Guarnizioni Antipolvere",
     "Requires 3 or less ocean tiles.": "Richiede un numero di tessere Oceano pari o inferiore a 3.",
@@ -395,7 +395,7 @@
     "Requires 4% oxygen. Increase your plant production 1 step for every 2 Microbe tags you have, including this.": "Richiede almeno il 4% di Ossigeno. Incrementa la tua Produzione di Piante di 1 livello per ogni coppia di simboli Microbo che possiedi, incluso questo.",
 
     "Decomposers": "Decompositori",
-    "Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.": "Effetto: quando giochi un simbolo Animale, Pianta o Microbo, incluso questo, aggiungi 1 Microbo a questa carta.",
+    "Effect: When you play an animal, plant, or microbe tag, including this, add a microbe to this card.": "Effetto: quando giochi un simbolo Animale, Pianta o Microbo, incluso questo, aggiungi 1 Microbo a questa carta.",
     "(Requires 3% oxygen.)": "(Richiede almeno il 3% di Ossigeno.)",
     "1 VP per 3 Microbes on this card.": "1 PV ogni 3 Microbi su questa carta.",
 
@@ -413,7 +413,7 @@
 
     "Advanced Ecosystems": "Ecosistemi Avanzati",
     "Plant Animal Microbe": "Pianta Animale Microbo",
-    "Requires a Plant tag, a Microbe tag, and an Animal tag.": "Richiede almeno un simbolo Pianta, un simbolo Microbo e un simbolo Animale.",
+    "Requires a plant tag, a aicrobe tag, and an animal tag.": "Richiede almeno un simbolo Pianta, un simbolo Microbo e un simbolo Animale.",
 
     "Great Dam": "Grande Diga",
     "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Richiede almeno 4 tessere Oceano. Incrementa la tua Produzione di Energia di 2 livelli.",
@@ -436,7 +436,7 @@
     "Titanium Mine": "Miniera di Titanio",
 
     "Tectonic Stress Power": "Energia da Faglia Tettonica",
-    "Requires 2 Science tags. Increase your energy production 3 steps.": "Richiede 2 simboli Scienza. Incrementa la tua Produzione di Energia di 3 livelli.",
+    "Requires 2 science tags. Increase your energy production 3 steps.": "Richiede 2 simboli Scienza. Incrementa la tua Produzione di Energia di 3 livelli.",
 
     "Nitrophilic Moss": "Muschio Nitrofilo",
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Richiede almeno 3 tessere Oceano. Inoltre, scarta 2 Piante. Incrementa la tua Produzione di Piante di 2 livelli.",
@@ -476,9 +476,9 @@
     "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Effetto: dopo aver pagato per un progetto Standard, con l'eccezione della Vendita Brevetti, ottieni 3 M€.",
 
     "Nitrite Reducing Bacteria": "Batteri Denitrificanti",
-    "Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.": "Azione: aggiungi 1 Microbo a questa carta, oppure rimuovi 3 Microbi per incrementare il tuo TT di 1 livello.",
-    "(Action: Remove 3 Microbes to increase your TR 1 step.)": "(Azione: rimuovi 3 Microbi per incrementare il tuo TT di 1 livello.)",
-    "Add 3 Microbes to this card.": "Aggiungi 3 Microbi a questa carta.",
+    "Action: Add 1 Microbe to this card, or remove 3 microbes to increase your TR 1 step.": "Azione: aggiungi 1 Microbo a questa carta, oppure rimuovi 3 Microbi per incrementare il tuo TT di 1 livello.",
+    "(Action: Remove 3 microbes to increase your TR 1 step.)": "(Azione: rimuovi 3 Microbi per incrementare il tuo TT di 1 livello.)",
+    "Add 3 microbes to this card.": "Aggiungi 3 Microbi a questa carta.",
 
     "Industrial Microbes": "Microbi Industriali",
     "Increase your energy production and your steel production 1 step each.": "Incrementa la tua Produzione di Energia e la tua Produzione di Acciaio di 1 livello ciascuna.",
@@ -487,7 +487,7 @@
   "Requires -24 C or warmer. Increase your plant production 1 step.": "Richiede una Temperatura maggiore o uguale a -24°C. Incrementa la tua Produzione di Piante di 1 livello.",
 
   "Power Supply Consortium": "Consorzio Centrali Elettriche",
-  "Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.": "Richiede 2 simboli Potenza. Diminuisci una qualunque Produzione di Energia di 1 livello e incrementa la tua di 1 livello.",
+  "Requires 2 Power tags. Decrease any energy production 1 step and increase your own 1 step.": "Richiede 2 simboli Potenza. Diminuisci una qualunque Produzione di Energia di 1 livello e incrementa la tua di 1 livello.",
 
   "Convoy From Europa": "Convoglio da Europa",
   "Place 1 ocean tile and draw 1 card.": "Colloca una tessera Oceano e pesca 1 carta.",
@@ -496,7 +496,7 @@
   "Increase your heat production 1 step and gain 3 heat.": "Aumenta la tua Produzione di Calore di 1 livello e ottieni 3 risorse Calore.",
 
   "Imported Nitrogen": "Azoto Importato",
-  "Raise your TR 1 step and gain 4 Plants. Add 3 Microbes to ANOTHER card and 2 Animals to ANOTHER card.": "Incrementa di 1 livello il tuo TT e ottieni 4 Piante. Aggiungi 3 Microbi ad UN'ALTRA carta e 2 Animali ad UN'ALTRA carta.",
+  "Raise your TR 1 step and gain 4 Plants. Add 3 microbes to ANOTHER card and 2 Animals to ANOTHER card.": "Incrementa di 1 livello il tuo TT e ottieni 4 Piante. Aggiungi 3 Microbi ad UN'ALTRA carta e 2 Animali ad UN'ALTRA carta.",
 
   "Micro-Mills": "Micro-Mulini",
   "Increase your heat production 1 step.": "Incrementa la tua Produzione di Calore di 1 livello.",
@@ -515,10 +515,10 @@
   "Requires 7% oxygen. Increase your energy production 1 step.": "Richiede almeno il 7% di Ossigeno. Incrementa la tua Produzione di Energia di 1 livello.",
 
   "Tundra Farming": "Coltivazione Tundra",
-  "(Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 Plant.)": "(Richiede una Temperatura maggiore o uguale a -6°C. Incrementa la tua Produzione di Piante di 1 livello e la tua Produzione di M€ di 2 livelli. Ottieni 1 Pianta.)",
+  "(Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.)": "(Richiede una Temperatura maggiore o uguale a -6°C. Incrementa la tua Produzione di Piante di 1 livello e la tua Produzione di M€ di 2 livelli. Ottieni 1 Pianta.)",
 
   "Aerobraked Ammonia Asteroid": "Asteroide Ammonizzato Aerofrenato",
-  "(Increase your heat production 3 steps and your plant productions 1 step. Add 2 Microbes to ANOTHER card.)": "(Aggiungi 2 Microbi ad UN'ALTRA carta. Aumenta la tua Produzione di Calore di 3 livelli e la tua Produzione di Piante di 1 livello.)",
+  "(Increase your heat production 3 steps and your plant productions 1 step. Add 2 microbes to ANOTHER card.)": "(Aggiungi 2 Microbi ad UN'ALTRA carta. Aumenta la tua Produzione di Calore di 3 livelli e la tua Produzione di Piante di 1 livello.)",
 
   "Magnetic Field Dome": "Cupola di Campo Magnetico",
   "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.": "Diminuisci la tua Produzione di Energia di 2 livelli e incrementa la tua Produzione di Piante di 1 livello. Incrementa il tuo TT di 1 livello.",
@@ -561,7 +561,7 @@
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 3 livelli. Colloca una tessera Città.",
 
   "Biomass Combustors": "Combustori di Biomassa",
-  "Requires 6% oxygen. Decrease any Plant production 1 step and increase your energy production 2 steps.": "Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello e incrementa la tua Produzione di Energia di 2 livelli.",
+  "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello e incrementa la tua Produzione di Energia di 2 livelli.",
 
   "Livestock": "Bestiame",
   "(Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps)": "(Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.)",
@@ -569,7 +569,7 @@
   "(Action: Add 1 Animal to this card.)": "(Azione: aggiungi un Animale a questa carta.)",
 
   "Olympus Conference": "Conferenza su Olympus Mons",
-  "When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.": "Quando giochi una carta con un simbolo Scienza, inclusa questa, aggiungi 1 risorsa Scienza a questa carta, o rimuovi 1 risorsa Scienza da questa carta per pescare 1 carta dal mazzo.",
+  "When you play a Science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Quando giochi una carta con un simbolo Scienza, inclusa questa, aggiungi 1 risorsa Scienza a questa carta, o rimuovi 1 risorsa Scienza da questa carta per pescare 1 carta dal mazzo.",
 
   "Rad-Suits": "Tute Anti-Radiazioni",
   "Requires two cities in play. Increase your M€ up 1 step.": "Richiede che ci siano in gioco almeno 2 Città. Incrementa la tua Produzione di M€ di 1 livello.",
@@ -593,7 +593,7 @@
   "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": "Guarda le prime 3 carte del mazzo. Aggiungine 1 alla tua mano e scarta le altre 2.",
 
   "Plantation": "Piantagione",
-  "Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.": "Richiede 2 simboli Scienza. Colloca una tessera Vegetazione e incrementa l'Ossigeno di 1 livello.",
+  "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Richiede 2 simboli Scienza. Colloca una tessera Vegetazione e incrementa l'Ossigeno di 1 livello.",
 
   "Power Infrastructure": "Infrastrutture per l'Energia",
   "Action: Spend any amount of Energy and gain that amount of M€.": "Azione: spendi un qualunque ammontare di Energia per ottenere la medesima quantità di M€.",
@@ -618,7 +618,7 @@
   "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "Diminuisci la tua Produzione di Energia di 1 livello e la tua Produzione di M€ di 2 livelli. Colloca 1 tessera Città.",
 
   "Energy Tapping": "Intercettazione di Energia",
-  "Decrease any Energy production 1 step and increase your own 1 step.": "Diminuisci una qualunque Produzione di Energia di 1 livello e incrementa la tua di 1 livello.",
+  "Decrease any energy production 1 step and increase your own 1 step.": "Diminuisci una qualunque Produzione di Energia di 1 livello e incrementa la tua di 1 livello.",
 
   "Underground Detonations": "Detonazioni Sotterranee",
   "Action: Spend 10 M€ to increase your heat production 2 steps.": "Azione: spendi 10 M€ per incrementare la tua Produzione di Calore di 2 livelli.",
@@ -644,7 +644,7 @@
   "5 Science": "5 simboli Scienza",
   "(Effect: Draw 2 cards.)": "(Azione: pesca 2 carte.)",
 
-  "Requires 3 Science tags to play. Decrease your energy production 1 step.": "Richiede 3 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello.",
+  "Requires 3 science tags to play. Decrease your energy production 1 step.": "Richiede 3 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello.",
 
   "HYDROGEN TO VENUS":"Idrogeno per Venere",
 

@@ -35,7 +35,7 @@ export class RedSpotObservatory extends Card implements IProjectCard {
           b.cards(2);
         }),
         description: {
-          text: 'Requires 3 Science tags. Draw 2 cards.',
+          text: 'Requires 3 science tags. Draw 2 cards.',
           align: 'left',
         },
       },

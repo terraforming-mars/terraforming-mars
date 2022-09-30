@@ -27,7 +27,7 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
             eb.empty().startAction.microbes(2, {digit}).slash().data({amount: 2, digit}).slash().floaters(2, {digit}).asterix();
           });
         }),
-        description: 'Requires 4 Science tags.',
+        description: 'Requires 4 science tags.',
       },
     });
   }

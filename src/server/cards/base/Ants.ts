@@ -29,7 +29,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
         cardNumber: '035',
         description: 'Requires 4% oxygen.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 Microbe from any card to add 1 to this card.', (eb) => {
+          b.action('Remove 1 microbe from any card to add 1 to this card.', (eb) => {
             eb.microbes(1, {all}).startAction.microbes(1);
           }).br;
           b.vpText('1 VP per 2 Microbes on this card.');

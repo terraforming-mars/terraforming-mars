@@ -10,7 +10,7 @@
     "Increase your energy production 1 step. Increase temperature 1 step.": "Incrementa la tua Produzione di Energia di 1 livello. Incrementa la Temperatura di 1 livello.",
 
     "Cloud Seeding": "Inseminazione Nuvole",
-    "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Richiede almeno 3 tessere Oceano. Diminuisci sia la tua Produzione di M€ di 1 livello sia una qualunque Produzione di Calore di 1 livello. Incrementa la tua Produzione di Piante di 2 livelli.",
+    "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Richiede almeno 3 tessere Oceano. Diminuisci sia la tua Produzione di M€ di 1 livello sia una qualunque Produzione di Calore di 1 livello. Incrementa la tua Produzione di Piante di 2 livelli.",
 
     "Search for Life": "Ricerca della Vita",
     "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Azione: spendi 1 M€ per rivelare la prima carta del mazzo di pesca. Se tale carta contiene un simbolo Microbo, aggiungi una risorsa Scienza su questa carta. Poi, scarta la carta.",
@@ -120,7 +120,7 @@
     "(Raise your terraforming rating 2 steps.)": "(Incrementa il tuo TT di 2 livelli.)",
 
     "Nitrogen-Rich Asteroid": "Asteroide Ricco di Azoto",
-    "Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.": "Incrementa il tuo TT di 2 livelli e la Temperatura di 1 livello. Incrementa la tua Produzione di Piante di 1 livello, oppure di 4 livelli se possiedi almeno 3 simboli Pianta.",
+    "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 Plant tags.": "Incrementa il tuo TT di 2 livelli e la Temperatura di 1 livello. Incrementa la tua Produzione di Piante di 1 livello, oppure di 4 livelli se possiedi almeno 3 simboli Pianta.",
 
     "Rover Construction": "Costruzione del Rover",
     "Effect: When any City tile is placed, gain 2 M€.": "Effetto: quando viene collocata una qualunque Città, ottieni 2 M€.",
@@ -132,10 +132,10 @@
     "Increase your titanium production 2 steps.": "Incrementa la tua Produzione di Titanio di 2 livelli.",
 
     "Food Factory": "Fabbrica di Cibo",
-    "(Decrease your Plant production 1 step and increase your M€ production 4 steps)": "Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
+    "(Decrease your plant production 1 step and increase your M€ production 4 steps)": "Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
 
     "ArchaeBacteria": "Archeobatteri",
-    "It must be -18 C or colder. Increase your Plant production 1 step.": "La temperatura deve essere minore o uguale a -18°C. Incrementa la tua Produzione di Piante di 1 livello.",
+    "It must be -18 C or colder. Increase your plant production 1 step.": "La temperatura deve essere minore o uguale a -18°C. Incrementa la tua Produzione di Piante di 1 livello.",
 
     "Carbonate Processing": "Lavorazione del Carbonato",
     "Decrease your energy production 1 step and increase your heat production 3 steps.": "Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di Calore di 3 livelli.",
@@ -147,10 +147,10 @@
     "Requires 3 Science tags. Increase your energy production and your M€ production one step each.": "Richiede 3 simboli Scienza. Incrementa la tua Produzione di Energia e di M€ di 1 livello ciascuna.",
 
     "Algae": "Alghe",
-    "Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.": "Richiede almeno 5 tessere Oceano. Ottieni 1 Pianta; incrementa la tua Produzione di Piante di 2 livelli.",
+    "Requires 5 ocean tiles. Gain 1 Plant and increase your plant production 2 steps.": "Richiede almeno 5 tessere Oceano. Ottieni 1 Pianta; incrementa la tua Produzione di Piante di 2 livelli.",
 
     "Adapted Lichen": "Lichene Adattato",
-    "Increase your Plant production 1 step.": "Incrementa la tua Produzione di Piante di 1 livello.",
+    "Increase your plant production 1 step.": "Incrementa la tua Produzione di Piante di 1 livello.",
 
     "Tardigrades": "Tardigradi",
     "Action: Add 1 Microbe to this card.": "Azione: aggiungi 1 Microbo a questa carta.",
@@ -178,7 +178,7 @@
 
 
     "Kelp Farming": "Coltivazione di Alghe",
-    "Requires 6 ocean tiles. Increase your M€ production 2 steps and your Plant production 3 steps. Gain 2 Plants.": "Richiede almeno 6 tessere Oceano. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 3 livelli. Ottieni 2 Piante.",
+    "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 Plants.": "Richiede almeno 6 tessere Oceano. Incrementa la tua Produzione di M€ di 2 livelli e la tua Produzione di Piante di 3 livelli. Ottieni 2 Piante.",
 
     "Mine": "Miniera",
     "Increase your steel production 1 step.": "Incrementa la tua Produzione di Acciaio di 1 livello.",
@@ -193,7 +193,7 @@
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Richiede una Temperatura maggiore o uguale a +4°C. Colloca 1 tessera Vegetazione SU UN'AREA RISERVATA AD UNA TESSERA OCEANO e incrementa di 1 il livello di Ossigeno. Ignora le normali restrizioni di piazzamento.",
 
     "Trees": "Alberi",
-    "Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.": "Richiede una Temperatura maggiore o uguale a -4°C. Incrementa la tua Produzione di Piante di 3 livelli. Ottieni 1 Pianta.",
+    "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 Plant.": "Richiede una Temperatura maggiore o uguale a -4°C. Incrementa la tua Produzione di Piante di 3 livelli. Ottieni 1 Pianta.",
 
     "Great Escarpment Consortium": "Consorzio della Grande Scarpata",
     "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.": "Richiede che tu abbia una Produzione di Acciaio non nulla. Diminuisci una qualunque Produzione di Acciaio di 1 livello e incrementa la tua di 1 livello.",
@@ -392,7 +392,7 @@
     "Requires 5% oxygen. Increase your M€ production 1 step for each City tile ON MARS.": "Richiede almeno il 5% di Ossigeno. Incrementa la tua Produzione di M€ di 1 livello per ogni Città SU MARTE.",
 
     "Worms": "Vermi",
-    "Requires 4% oxygen. Increase your Plant production 1 step for every 2 Microbe tags you have, including this.": "Richiede almeno il 4% di Ossigeno. Incrementa la tua Produzione di Piante di 1 livello per ogni coppia di simboli Microbo che possiedi, incluso questo.",
+    "Requires 4% oxygen. Increase your plant production 1 step for every 2 Microbe tags you have, including this.": "Richiede almeno il 4% di Ossigeno. Incrementa la tua Produzione di Piante di 1 livello per ogni coppia di simboli Microbo che possiedi, incluso questo.",
 
     "Decomposers": "Decompositori",
     "Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.": "Effetto: quando giochi un simbolo Animale, Pianta o Microbo, incluso questo, aggiungi 1 Microbo a questa carta.",
@@ -446,7 +446,7 @@
     "(Requires 8% oxygen. +1 animal to this card. -1 any plant production)": "(Richiede almeno l'8% di Ossigeno. Aggiungi 1 Animale a questa carta. Diminuisci una qualunque Produzione di Piante di 1 livello. 1 PV per ogni coppia di Animali su questa carta.)",
 
     "Insects": "Insetti",
-    "Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.": "Richiede almeno il 6% di Ossigeno. Incrementa la tua Produzione di Piante di 1 livello per ogni simbolo Pianta che possiedi.",
+    "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "Richiede almeno il 6% di Ossigeno. Incrementa la tua Produzione di Piante di 1 livello per ogni simbolo Pianta che possiedi.",
 
     "CEO's Favorite Project": "Progetto Preferito del CEO",
     "Add 1 resource to a card with at least 1 resource on it": "Aggiungi 1 risorsa a una carta che contenga almeno 1 risorsa.",
@@ -470,7 +470,7 @@
     "Requires 0° C or warmer.": "Richiede una temperatura maggiore o uguale a 0°C.",
 
     "Designed Micro-organisms": "Microorganismi Programmati",
-    "It must be -14 C or colder. Increase your Plant production 2 steps.": "La Temperatura deve essere minore o uguale a -14°C. Incrementa la tua Produzione di Piante di 2 livelli.",
+    "It must be -14 C or colder. Increase your plant production 2 steps.": "La Temperatura deve essere minore o uguale a -14°C. Incrementa la tua Produzione di Piante di 2 livelli.",
 
     "Standard Technology": "Tecnologia Standard",
     "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Effetto: dopo aver pagato per un progetto Standard, con l'eccezione della Vendita Brevetti, ottieni 3 M€.",
@@ -484,7 +484,7 @@
     "Increase your energy production and your steel production 1 step each.": "Incrementa la tua Produzione di Energia e la tua Produzione di Acciaio di 1 livello ciascuna.",
 
   "Lichen": "Lichene",
-  "Requires -24 C or warmer. Increase your Plant production 1 step.": "Richiede una Temperatura maggiore o uguale a -24°C. Incrementa la tua Produzione di Piante di 1 livello.",
+  "Requires -24 C or warmer. Increase your plant production 1 step.": "Richiede una Temperatura maggiore o uguale a -24°C. Incrementa la tua Produzione di Piante di 1 livello.",
 
   "Power Supply Consortium": "Consorzio Centrali Elettriche",
   "Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.": "Richiede 2 simboli Potenza. Diminuisci una qualunque Produzione di Energia di 1 livello e incrementa la tua di 1 livello.",
@@ -502,7 +502,7 @@
   "Increase your heat production 1 step.": "Incrementa la tua Produzione di Calore di 1 livello.",
 
   "Magnetic Field Generators": "Generatori di Campo Magnetico",
-  "(Decrease your energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.)": "Diminuisci la tua Produzione di Energia di 4 livelli e incrementa la tua Produzione di Piante di 2 livelli. Incrementa il tuo TT di 3 livelli.",
+  "(Decrease your energy production 4 steps and increase your plant production 2 step. Raise your TR 3 step.)": "Diminuisci la tua Produzione di Energia di 4 livelli e incrementa la tua Produzione di Piante di 2 livelli. Incrementa il tuo TT di 3 livelli.",
 
   "Shuttles": "Navette",
   "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Richiede almeno il 5% di Ossigeno. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.",
@@ -515,13 +515,13 @@
   "Requires 7% oxygen. Increase your energy production 1 step.": "Richiede almeno il 7% di Ossigeno. Incrementa la tua Produzione di Energia di 1 livello.",
 
   "Tundra Farming": "Coltivazione Tundra",
-  "(Requires -6° C or warmer. Increase your Plant production 1 step and your M€ production 2 steps. Gain 1 Plant.)": "(Richiede una Temperatura maggiore o uguale a -6°C. Incrementa la tua Produzione di Piante di 1 livello e la tua Produzione di M€ di 2 livelli. Ottieni 1 Pianta.)",
+  "(Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 Plant.)": "(Richiede una Temperatura maggiore o uguale a -6°C. Incrementa la tua Produzione di Piante di 1 livello e la tua Produzione di M€ di 2 livelli. Ottieni 1 Pianta.)",
 
   "Aerobraked Ammonia Asteroid": "Asteroide Ammonizzato Aerofrenato",
-  "(Increase your heat production 3 steps and your Plant productions 1 step. Add 2 Microbes to ANOTHER card.)": "(Aggiungi 2 Microbi ad UN'ALTRA carta. Aumenta la tua Produzione di Calore di 3 livelli e la tua Produzione di Piante di 1 livello.)",
+  "(Increase your heat production 3 steps and your plant productions 1 step. Add 2 Microbes to ANOTHER card.)": "(Aggiungi 2 Microbi ad UN'ALTRA carta. Aumenta la tua Produzione di Calore di 3 livelli e la tua Produzione di Piante di 1 livello.)",
 
   "Magnetic Field Dome": "Cupola di Campo Magnetico",
-  "Decrease your energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "Diminuisci la tua Produzione di Energia di 2 livelli e incrementa la tua Produzione di Piante di 1 livello. Incrementa il tuo TT di 1 livello.",
+  "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.": "Diminuisci la tua Produzione di Energia di 2 livelli e incrementa la tua Produzione di Piante di 1 livello. Incrementa il tuo TT di 1 livello.",
 
   "Pets": "Animali Domestici",
   "Animals may not be removed from this card": "Gli Animali non possono essere rimossi da questa carta.",
@@ -549,7 +549,7 @@
   "Decrease any heat production 2 steps and increase your energy production 1 step.": "Diminuisci una qualunque Produzione di Calore di 2 livelli e incrementa la tua Produzione di Energia di 1 livello.",
 
   "Soil Factory": "Fabbrica di Concime",
-  "Decrease your energy production 1 step and increase your Plant production 1 step.": "Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di Piante di 1 livello.",
+  "Decrease your energy production 1 step and increase your plant production 1 step.": "Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di Piante di 1 livello.",
 
   "Fuel Factory": "Fabbrica di Carburante",
   "Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each.": "Diminuisci la tua Produzione di Energia di 1 livello e incrementa le tue Produzioni di Titanio e di M€ di 1 livello ciascuna.",
@@ -564,7 +564,7 @@
   "Requires 6% oxygen. Decrease any Plant production 1 step and increase your energy production 2 steps.": "Richiede almeno il 6% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 1 livello e incrementa la tua Produzione di Energia di 2 livelli.",
 
   "Livestock": "Bestiame",
-  "(Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps)": "(Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.)",
+  "(Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps)": "(Richiede almeno il 9% di Ossigeno. Diminuisci la tua Produzione di Piante di 1 livello e incrementa la tua Produzione di M€ di 2 livelli.)",
   "1 VP for each Animal on this card.": "1 PV per ogni Animale su questa carta.",
   "(Action: Add 1 Animal to this card.)": "(Azione: aggiungi un Animale a questa carta.)",
 

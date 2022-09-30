@@ -27,7 +27,7 @@ export class MagneticFieldDome extends Card implements IProjectCard {
           });
           b.tr(1);
         }),
-        description: 'Decrease your energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.',
+        description: 'Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.',
       },
     });
   }

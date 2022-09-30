@@ -22,7 +22,7 @@ export class DesignedMicroOrganisms extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.temperature(-14, {max})),
       metadata: {
         cardNumber: '155',
-        description: 'It must be -14 C or colder. Increase your Plant production 2 steps.',
+        description: 'It must be -14 C or colder. Increase your plant production 2 steps.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(2));
         }),

@@ -10,6 +10,11 @@ export interface ICardRenderRoot extends CardComponent {
   readonly is: 'root';
   rows: Array<Array<ItemType>>,
 }
+
+export function isICardRenderRoot(item: ItemType): item is ICardRenderRoot {
+  return typeof(item) !== 'string' && item?.is === 'root';
+}
+
 export interface ICardRenderSymbol extends CardComponent {
   type: CardRenderSymbolType;
   size: Size;

@@ -100,6 +100,11 @@ export class Deck<T extends ICard> {
     this.discardPile.push(card);
   }
 
+  // For Junk Ventures
+  public shuffleDiscardPile(): void {
+    Deck.shuffle(this.discardPile, this.random);
+  }
+
   public moveToTop(customList: Array<CardName> | undefined) {
     const list = (customList || []).slice();
     while (list.length > 0) {

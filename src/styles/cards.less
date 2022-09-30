@@ -98,25 +98,34 @@
     box-shadow: 0 0 2px 1px black;
 }
 
+.filterDiv.card-container {
+    margin-top: 20px;
+}
+
 input[type="checkbox"]:checked + .filterDiv,
 input[type="radio"]:checked + .filterDiv {
-    box-shadow: 0 0 0 2px #303030, 0 0 0px 6px #c97e23;
+    box-shadow: 0 0 0 1px #303030, 0 0 0px 5px #c97e23;
 }
 
 input[type="checkbox"]:checked + .filterDiv::after,
 input[type="radio"]:checked + .filterDiv::after {
     content: "✓";
     position: absolute;
-    width: calc(100% + 12px);
-    height: 50px;
-    line-height: 50px;
-    top: 50%;
-    left: -6px;
+    width: 90px;
+    height: 18px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    top: -27px;
+    left: calc(50% - 45px);
     text-align: center;
     font-weight: bold;
-    font-size: 36px;
-    background: linear-gradient(to right, #c97e23bb, #e28c22bb, #c97e23bb);
+    font-size: 13px;
+    background: #c97e23;
     color: black;
+    z-index: 1;
 }
 
 .filterDiv3 {
@@ -1408,6 +1417,7 @@ input[type="radio"]:checked + .filterDiv::after {
     );
     border-radius: 7px 7px 2px 2px;
     text-transform: uppercase;
+    z-index: 2;
 }
 
 .corporationEffectBox {
@@ -2712,6 +2722,7 @@ input[type="radio"]:checked + .filterDiv::after {
                     background-color: white;
                     /* margin-top: -6px; */
                     filter: brightness(0.9);
+                    z-index: 2;
                 }
             }
         }

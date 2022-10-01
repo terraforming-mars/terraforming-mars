@@ -72,7 +72,7 @@
     "(It must be -12 C or colder to play. Gain 1 plant.)": "(Per poter giocare questa carta, la Temperatura deve essere minore o uguale a -12°C. Ottieni 1 Pianta.)",
 
     "Predators": "Predatori",
-    "Action: Remove 1 animal from any card and add it to this card.": "Azione: rimuovi 1 animale da una qualunque carta e aggiungilo a questa carta.",
+    "Action: Remove 1 animal from any card and add it to this card.": "Azione: rimuovi 1 Animale da una qualunque carta e aggiungilo a questa carta.",
     "(Requires 11% oxygen.)": "(Richiede che il livello di Ossigeno sia almeno dell'11%.)",
     "1 VP per Animal on this card.":"1 PV per ogni Animale su questa carta.",
 
@@ -80,7 +80,7 @@
     "Effect: When you play a Space card, you pay 2 M€ less for it.": "Effetto: quando giochi una carta Spazio, la paghi 2 M€ in meno.",
 
     "Eos Chasma National Park": "Parco Nazionale dell'Eos Chasma",
-    "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": "Richiede una Temperatura di -12°C o superiore. Aggiungi 1 animale AD UNA QUALUNQUE CARTA ANIMALE. Ottieni 3 Piante. Incrementa la tua Produzione di M€ di 2 livelli.",
+    "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": "Richiede una Temperatura di -12°C o superiore. Aggiungi 1 Animale AD UNA QUALUNQUE CARTA ANIMALE. Ottieni 3 Piante. Incrementa la tua Produzione di M€ di 2 livelli.",
 
     "Interstellar Colony Ship": "Nave Interstellare Coloniale",
     "Requires that you have 5 science tags.":"Richiede 5 simboli Scienza.",
@@ -225,7 +225,7 @@
     "(Effect: Each steel you have is worth 1 M€ extra.)": "(Effetto: ogni risorsa Acciaio in tuo possesso vale 1 M€ in più.)",
 
     "Birds": "Uccelli",
-    "Action: Add an animal to this card.": "Azione: aggiungi 1 animale a questa carta.",
+    "Action: Add an animal to this card.": "Azione: aggiungi 1 Animale a questa carta.",
     "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.": "Richiede almeno il 13% di Ossigeno. Diminuisci una qualunque Produzione di Piante di 2 livelli. 1 PV per ogni Animale su questa carta.",
 
     "Mars University": "Università di Marte",
@@ -442,8 +442,8 @@
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Richiede almeno 3 tessere Oceano. Inoltre, scarta 2 Piante. Incrementa la tua Produzione di Piante di 2 livelli.",
 
     "Herbivores": "Erbivori",
-    "Effect: When you place a greenery tile, add an Animal to this card.": "Effetto: quando collochi una tessera Vegetazione, aggiungi 1 animale a questa carta.",
-    "(Requires 8% oxygen. +1 animal to this card. -1 any plant production)": "(Richiede almeno l'8% di Ossigeno. Aggiungi 1 animale a questa carta. Diminuisci una qualunque Produzione di Piante di 1 livello. 1 PV per ogni coppia di Animali su questa carta.)",
+    "Effect: When you place a greenery tile, add an Animal to this card.": "Effetto: quando collochi una tessera Vegetazione, aggiungi 1 Animale a questa carta.",
+    "(Requires 8% oxygen. +1 animal to this card. -1 any plant production)": "(Richiede almeno l'8% di Ossigeno. Aggiungi 1 Animale a questa carta. Diminuisci una qualunque Produzione di Piante di 1 livello. 1 PV per ogni coppia di Animali su questa carta.)",
 
     "Insects": "Insetti",
     "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "Richiede almeno il 6% di Ossigeno. Incrementa la tua Produzione di Piante di 1 livello per ogni simbolo Pianta che possiedi.",
@@ -526,7 +526,7 @@
   "Pets": "Animali Domestici",
   "Animals may not be removed from this card": "Gli Animali non possono essere rimossi da questa carta.",
   "Effect: When any city tile is placed, add an Animal to this card.": "Effetto: quando viene collocata una qualunque Città, aggiungi un Animale a questa carta.",
-  "(Add 1 animal to this card.)": "(Aggiungi 1 animale a questa carta.)",
+  "(Add 1 animal to this card.)": "(Aggiungi 1 Animale a questa carta.)",
   "1 VP per 2 animals here.": "1 PV per ogni coppia di Animali su questa carta.",
 
   "Protected Habitats": "Habitat Protetti",

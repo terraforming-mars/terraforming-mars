@@ -2061,7 +2061,7 @@
   },
   {
     "module": "base",
-    "name": "Designed Micro-organisms",
+    "name": "Designed Microorganisms",
     "tags": [
       "science",
       "microbe"
@@ -13644,7 +13644,7 @@
   },
   {
     "module": "corpera",
-    "name": "Inventors Guild",
+    "name": "Inventors' Guild",
     "tags": [
       "science"
     ],
@@ -26559,7 +26559,7 @@
   },
   {
     "module": "colonies",
-    "name": "Cryo Sleep",
+    "name": "Cryo-Sleep",
     "tags": [
       "science"
     ],
@@ -28483,7 +28483,7 @@
   },
   {
     "module": "colonies",
-    "name": "Refugee Camp",
+    "name": "Refugee Camps",
     "tags": [
       "earth"
     ],
@@ -31470,7 +31470,7 @@
   },
   {
     "module": "prelude",
-    "name": "Allied Banks",
+    "name": "Allied Bank",
     "tags": [
       "earth"
     ],

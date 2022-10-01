@@ -42,8 +42,8 @@
     "Plant Microbe Animal": "植物标志 微生物标志 动物标志",
     "Plant Animal Microbe": "植物标志 动物标志 微生物标志",
     "9 Resource types": "9种资源类型",
-    "3 Floaters": "3 漂浮物",
-    "5 Floaters": "5 漂浮物",
+    "3 floaters": "3 漂浮物",
+    "5 floaters": "5 漂浮物",
     "Forest": "森林",
     "City": "城市",
     "2 Cities": "2 城市",
@@ -172,7 +172,7 @@
     "Sell": "卖",
     "Colony City": "殖民地城市",
     "max 1 Colony": "最多 1 殖民地",
-    
+
     "colony":"殖民地",
     "awards":"奖励",
     "flip" :"翻转",

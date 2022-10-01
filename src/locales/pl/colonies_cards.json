@@ -60,7 +60,7 @@
     "Jupiter Floating Station": "Stacja Dryfowa na Jowiszu",
     "Action: Add 1 floater to a JOVIAN CARD.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza.",
     "Action: Gain 1 M€ for every floater here [MAX 4].": "Akcja: Otrzymaj 1 M€ za każdą znajdującą się na tej karcie jednostkę dryfowców (max 4).",
-    "Requires 3 Science tags.": "Musisz posiadać przynajmniej 3 symbole nauki.",
+    "Requires 3 science tags.": "Musisz posiadać przynajmniej 3 symbole nauki.",
 
     "Luna Governor": "Gubernator Księżyca",
     "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Musisz posiadać przynajmniej 3 symbole Ziemi. Podnieś swoją produkcję M€ o 2 poziomy.",
@@ -98,11 +98,11 @@
     "Gain all your colony bonuses.": "OTRZYMUJESZ PREMIĘ KOLONIALNĄ ZA WSZYSTKIE SWOJE KOLONIE.",
 
     "Quantum Communications": "Komunikacja Kwantowa",
-    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję M€ o 1 poziom za każdą kolonię w grze.",
+    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję M€ o 1 poziom za każdą kolonię w grze.",
 
     "Red Spot Observatory": "Obserwatorium Wielkiej Czerwonej Plamy",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Akcja: Umieść na tej karcie 1 jednostkę dryfowców albo wydaj 1 jednostkę dryfowców z tej karty, aby dobrać 1 kartę.",
-    "Requires 3 Science tags. Draw 2 cards.": "Musisz posiadać przynajmniej 3 symbole nauki. Dobierz 2 karty.",
+    "Requires 3 science tags. Draw 2 cards.": "Musisz posiadać przynajmniej 3 symbole nauki. Dobierz 2 karty.",
 
     "Refugee Camps": "Obozy Uchodźców",
     "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Akcja: Obniż swoją produkcję M€ o 1 poziom aby umieścić na tej karcie 1 jednostkę obozów.",
@@ -138,7 +138,7 @@
     "Sub-zero Salt Fish": "Słonowodne Ryby Zimnolubne",
     "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
     "1 VP per 2 Animals on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
-    "Requires -6 C. Decrease any Plant production 1 step.": "Temperatura musi być równa albo wyższa niż -6°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
+    "Requires -6 C. Decrease any plant production 1 step.": "Temperatura musi być równa albo wyższa niż -6°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Titan Air-scrapping": "Zagarnianie Atmosfery na Tytanie",
     "Action: Spend 1 titanium to add 2 floaters here.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
@@ -164,5 +164,5 @@
 
     "Warp Drive": "Napęd Warp",
     "Effect: When you play a Space card, you pay 4 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 4 M€ mniej.",
-    "Requires 5 Science tags.": "Musisz posiadać przynajmniej 5 symboli nauki."
+    "Requires 5 science tags.": "Musisz posiadać przynajmniej 5 symboli nauki."
 }

@@ -28,7 +28,7 @@ export class ForcedPrecipitation extends Card implements IActionCard {
             eb.megacredits(2).startAction.floaters(1);
           }).br;
           b.or().br;
-          b.action('Spend 2 Floaters here to increase Venus 1 step.', (eb) => {
+          b.action('Spend 2 floaters here to increase Venus 1 step.', (eb) => {
             eb.floaters(2).startAction.venus(1);
           });
         }),

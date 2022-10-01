@@ -38,7 +38,7 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard {
           b.vpText('1 VP per 2 Animals on this card.');
         }),
         description: {
-          text: 'Requires 6% oxygen. Decrease any Plant production 1 step.',
+          text: 'Requires 6% oxygen. Decrease any plant production 1 step.',
           align: 'left',
         },
       },

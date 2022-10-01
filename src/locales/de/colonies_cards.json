@@ -59,7 +59,7 @@
     "Jupiter Floating Station": "Jupiter-Schweber-Station",
     "Action: Add 1 floater to a JOVIAN CARD.": "AKTION: Füge einer JUPITER-KARTE einen Schweber hinzu.",
     "Action: Gain 1 M€ for every floater here [MAX 4].": "AKTION: Erhalte 1 M€ für jeden Schweber auf dieser Karte [max. 4].",
-    "Requires 3 Science tags.": "Erfordert 3 Wissenschaftssymbole.",
+    "Requires 3 science tags.": "Erfordert 3 Wissenschaftssymbole.",
 
     "Luna Governor": "Gouverneur des Mondes",
     "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Erfordert 3 Erdsymbole. Erhöhe deine M€-Produktion um 2.",
@@ -97,11 +97,11 @@
     "Gain all your colony bonuses.": "Erhalte alle deine Kolonie-Boni.",
 
     "Quantum Communications": "Quantenkommunikation",
-    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Erfordert 4 Wissenschaftssymbole. Erhöhe deine M€-Produktion um 1 für jede Kolonie im Spiel.",
+    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Erfordert 4 Wissenschaftssymbole. Erhöhe deine M€-Produktion um 1 für jede Kolonie im Spiel.",
 
     "Red Spot Observatory": "Roter-Fleck-Observatorium",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "AKTION: Füge dieser Karte einen Schweber hinzu oder entferne einen Schweber von dieser Karte, um eine Karte zu ziehen.",
-    "Requires 3 Science tags. Draw 2 cards.": "Erfordert 3 Wissenschaftssymbole. Ziehe 2 Karten.",
+    "Requires 3 science tags. Draw 2 cards.": "Erfordert 3 Wissenschaftssymbole. Ziehe 2 Karten.",
 
     "Refugee Camps": "Flüchtlingslager",
     "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "AKTION: Senke deine M€-Produktion um 1, um dieser Karte eine Lager-Ressource hinzuzufügen",
@@ -136,7 +136,7 @@
     "Sub-zero Salt Fish": "Eis-Salzwasserfisch",
     "Action: Add 1 Animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
     "1 VP per 2 Animals on this card.": "1 SP für jedes zweite Tier auf dieser Karte.",
-    "Requires -6 C. Decrease any Plant production 1 step.": "Erfordert -6 °C. Senke eine beliebige Pflanzen-Produktion um 1.",
+    "Requires -6 C. Decrease any plant production 1 step.": "Erfordert -6 °C. Senke eine beliebige Pflanzen-Produktion um 1.",
 
     "Titan Air-scrapping": "Titan-Luft-Recycling",
     "Action: Spend 1 titanium to add 2 floaters here.": "AKTION: Bezahle 1 Titan, um dieser Karte 2 Schweber hinzuzufügen.",
@@ -161,5 +161,5 @@
 
     "Warp Drive": "Warp-Antrieb",
     "Effect: When you play a Space card, you pay 4 M€ less for it.": "EFFEKT: Wenn du eine Weltraumkarte spielst, zahle 4 M€ weniger für sie.",
-    "Requires 5 Science tags.": "Erfordert 5 Wissenschaftssymbole."
+    "Requires 5 science tags.": "Erfordert 5 Wissenschaftssymbole."
 }

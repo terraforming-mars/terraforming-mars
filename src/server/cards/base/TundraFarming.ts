@@ -28,7 +28,7 @@ export class TundraFarming extends Card implements IProjectCard {
             pb.plants(1).megacredits(2);
           }).plants(1);
         }),
-        description: 'Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 Plant.',
+        description: 'Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.',
       },
     });
   }

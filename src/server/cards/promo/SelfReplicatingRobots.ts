@@ -32,7 +32,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
           }).br;
           b.text('Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.', Size.TINY, true);
         }),
-        description: 'Requires 2 Science tags.',
+        description: 'Requires 2 science tags.',
       },
     });
   }

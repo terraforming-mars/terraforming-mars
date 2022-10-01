@@ -264,7 +264,7 @@ export const BASE_CARD_MANIFEST = new ModuleManifest({
     [CardName.DECOMPOSERS]: {Factory: Decomposers},
     [CardName.DEEP_WELL_HEATING]: {Factory: DeepWellHeating},
     [CardName.DEIMOS_DOWN]: {Factory: DeimosDown},
-    [CardName.DESIGNED_MICRO_ORGANISMS]: {Factory: DesignedMicroOrganisms},
+    [CardName.DESIGNED_MICROORGANISMS]: {Factory: DesignedMicroOrganisms},
     [CardName.DOMED_CRATER]: {Factory: DomedCrater},
     [CardName.DUST_SEALS]: {Factory: DustSeals},
     [CardName.ECOLOGICAL_ZONE]: {Factory: EcologicalZone},

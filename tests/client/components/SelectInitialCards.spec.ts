@@ -37,13 +37,13 @@ describe('SelectInitialCards', function() {
   });
 
   it('Cannot save with only one prelude', async function() {
-    const component = createComponent([CardName.ECOLINE], [CardName.ANTS], [CardName.ALLIED_BANKS]);
+    const component = createComponent([CardName.ECOLINE], [CardName.ANTS], [CardName.ALLIED_BANK]);
     expect(component).not.is.undefined;
 
     const selectCards = component.findAllComponents({name: 'select-card'});
     expect(selectCards.length).to.eq(3);
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANK]);
     selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
     await component.vm.$nextTick();
 
@@ -55,7 +55,7 @@ describe('SelectInitialCards', function() {
     const component = createComponent(
       [CardName.ECOLINE],
       [CardName.ANTS],
-      [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+      [CardName.ALLIED_BANK, CardName.SUPPLY_DROP]);
     expect(component).not.is.undefined;
 
     const button = getButton(component);
@@ -68,7 +68,7 @@ describe('SelectInitialCards', function() {
     await component.vm.$nextTick();
     expect(button.attributes().disabled).eq('disabled');
 
-    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANK, CardName.SUPPLY_DROP]);
 
     await component.vm.$nextTick();
     expect(button.attributes().disabled).is.undefined;
@@ -78,7 +78,7 @@ describe('SelectInitialCards', function() {
 
     await button.trigger('click');
 
-    expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP], [CardName.ANTS]]);
+    expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ALLIED_BANK, CardName.SUPPLY_DROP], [CardName.ANTS]]);
 
     await component.vm.$nextTick();
     const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
@@ -105,11 +105,11 @@ describe('SelectInitialCards', function() {
     const component = createComponent(
       [CardName.ECOLINE],
       [CardName.ANTS],
-      [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+      [CardName.ALLIED_BANK, CardName.SUPPLY_DROP]);
 
     const selectCards = component.findAllComponents({name: 'select-card'});
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS, CardName.SUPPLY_DROP]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANK, CardName.SUPPLY_DROP]);
     await component.vm.$nextTick();
     const button = getButton(component);
     await button.trigger('click');

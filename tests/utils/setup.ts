@@ -3,6 +3,10 @@ import {IDatabase} from '../../src/server/database/IDatabase';
 import {SerializedGame} from '../../src/server/SerializedGame';
 import {IGameLoader} from '../../src/server/database/IGameLoader';
 import {GameLoader} from '../../src/server/database/GameLoader';
+import {registerBehaviorExecutor} from '../../src/server/behavior/BehaviorExecutor';
+import {Behaviors} from '../../src/server/behavior/Behaviors';
+
+registerBehaviorExecutor(new Behaviors());
 
 const FAKE_DATABASE: IDatabase = {
   cleanGame: () => Promise.resolve(),
@@ -43,4 +47,3 @@ export function setTestGameLoader(gameLoader: IGameLoader) {
   gameLoaderUnderTest = gameLoader;
 }
 GameLoader.getInstance = () => gameLoaderUnderTest;
-

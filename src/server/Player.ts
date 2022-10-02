@@ -67,6 +67,7 @@ import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {Behaviors} from './behavior/Behaviors';
+import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 
 /**
  * Behavior when playing a card:
@@ -1477,7 +1478,7 @@ export class Player {
   // TODO(kberg): After migration, see if this can become private again.
   // Or perhaps moved into card?
   public canAffordCard(card: IProjectCard): boolean {
-    const trSource: TRSource | DynamicTRSource | undefined = card.tr || (card.behavior !== undefined ? Behaviors.toTRSource(card.behavior) : undefined);
+    const trSource: TRSource | DynamicTRSource | undefined = card.tr || (card.behavior !== undefined ? getBehaviorExecutor().toTRSource(card.behavior) : undefined);
     return this.canAfford(
       this.getCardCost(card),
       {

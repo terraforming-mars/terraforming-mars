@@ -16,7 +16,7 @@ import {Route} from './routes/Route';
 import {processRequest} from './requestProcessor';
 import {timeAsync} from './utils/timer';
 import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
-import {Behaviors} from './behavior/Behaviors';
+import {Executor} from './behavior/Executor';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -78,7 +78,7 @@ async function start() {
     app: 'terraforming-mars-app',
   });
   prometheus.collectDefaultMetrics();
-  registerBehaviorExecutor(new Behaviors());
+  registerBehaviorExecutor(new Executor());
 
   const server = createServer();
 

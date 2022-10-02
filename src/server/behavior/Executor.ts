@@ -20,7 +20,7 @@ import {Counter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
 import {BehaviorExecutor} from './BehaviorExecutor';
 
-export class Behaviors implements BehaviorExecutor {
+export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: Player, card: ICard) {
     const ctx = new Counter(player, card);
 

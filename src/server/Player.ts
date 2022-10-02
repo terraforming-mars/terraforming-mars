@@ -66,7 +66,6 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
-import {Behaviors} from './behavior/Behaviors';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 
 /**

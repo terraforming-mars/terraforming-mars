@@ -17,7 +17,6 @@ import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
 import {Player} from '../Player';
 import {Behavior} from './Behavior';
 import {Counter} from './Counter';
-import {Turmoil} from '../turmoil/Turmoil';
 import {BehaviorExecutor} from './BehaviorExecutor';
 
 export class Executor implements BehaviorExecutor {
@@ -166,13 +165,6 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.greenery !== undefined) {
       player.game.defer(new PlaceGreeneryTile(player));
-    }
-
-    if (behavior.turmoil) {
-      const turmoil = Turmoil.getTurmoil(player.game);
-      if (behavior.turmoil.influenceBonus === 1) {
-        turmoil.addInfluenceBonus(player);
-      }
     }
 
     // TODO(kberg): Add canPlay for these behaviors.

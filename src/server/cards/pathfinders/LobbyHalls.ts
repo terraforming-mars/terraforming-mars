@@ -5,10 +5,8 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
-import {Turmoil} from '../../turmoil/Turmoil';
 
 export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
   constructor() {
@@ -19,6 +17,7 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
 
       behavior: {
         production: {megacredits: 2},
+        turmoil: {sendDelegates: {count: 1}},
       },
 
       metadata: {
@@ -40,10 +39,6 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
 
   public override bespokePlay(player: Player) {
     player.game.defer(new DeclareCloneTag(player, this));
-    const turmoil = Turmoil.getTurmoil(player.game);
-    if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {
-      player.game.defer(new SendDelegateToArea(player, undefined, {source: 'reserve'}));
-    }
     return undefined;
   }
 }

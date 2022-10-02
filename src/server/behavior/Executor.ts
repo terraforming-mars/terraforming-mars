@@ -19,6 +19,7 @@ import {Behavior} from './Behavior';
 import {Counter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
 import {BehaviorExecutor} from './BehaviorExecutor';
+import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: Player, card: ICard) {
@@ -52,12 +53,24 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.city !== undefined) {
       if (behavior.city.space === undefined) {
-        return player.game.board.getAvailableSpacesForCity(player).length > 0;
+        if (player.game.board.getAvailableSpacesForCity(player).length === 0) {
+          return false;
+        }
       }
     }
 
     if (behavior.greenery !== undefined) {
-      return player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+      if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) {
+        return false;
+      }
+    }
+
+    if (behavior.turmoil) {
+      if (behavior.turmoil.sendDelegates) {
+        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve') >= behavior.turmoil.sendDelegates.count) {
+          return false;
+        }
+      }
     }
     return true;
   }
@@ -172,6 +185,17 @@ export class Executor implements BehaviorExecutor {
       const turmoil = Turmoil.getTurmoil(player.game);
       if (behavior.turmoil.influenceBonus === 1) {
         turmoil.addInfluenceBonus(player);
+      }
+
+      if (behavior.turmoil.sendDelegates) {
+        const sendDelegates = behavior.turmoil.sendDelegates;
+        if (sendDelegates.manyParties) {
+          for (let i = 0; i < 4; i++) {
+            player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: 'reserve'}));
+          }
+        } else {
+          player.game.defer(new SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, {count: sendDelegates.count, source: 'reserve'}));
+        }
       }
     }
 

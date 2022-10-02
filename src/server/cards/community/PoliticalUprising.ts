@@ -3,7 +3,6 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {TURMOIL_CARD_MANIFEST} from '../turmoil/TurmoilCardManifest';
-import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardManifest} from '../ModuleManifest';
@@ -12,6 +11,10 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.POLITICAL_UPRISING,
+
+      behavior: {
+        turmoil: {sendDelegates: {count: 4, manyParties: true}},
+      },
 
       metadata: {
         cardNumber: 'Y03',
@@ -26,10 +29,6 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     this.drawTurmoilCard(player);
-
-    for (let i = 0; i < 4; i++) {
-      player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: 'reserve'}));
-    }
 
     return undefined;
   }

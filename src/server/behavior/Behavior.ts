@@ -83,6 +83,10 @@ export interface Behavior {
 
   turmoil?: {
     influenceBonus?: 1,
+    sendDelegates?: {
+      count: number,
+      manyParties?: boolean,
+    },
   },
 
   moon?: {

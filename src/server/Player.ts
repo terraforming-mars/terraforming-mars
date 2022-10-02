@@ -1,7 +1,6 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
-import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
@@ -19,7 +18,6 @@ import {LogMessageDataType} from '../common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from '../common/turmoil/PartyName';
-import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from '../common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resources} from '../common/Resources';
@@ -1901,12 +1899,13 @@ export class Player {
     const result: SerializedPlayer = {
       id: this.id,
       corporations: this.corporations.map((corporation) => {
-        return {
+        const serialized = {
           name: corporation.name,
           resourceCount: corporation.resourceCount,
-          allTags: corporation instanceof Aridor ? Array.from(corporation.allTags) : [],
-          isDisabled: corporation instanceof PharmacyUnion && corporation.isDisabled,
+          isDisabled: false,
         };
+        corporation.serialize?.(serialized);
+        return serialized;
       }),
       // Used only during set-up
       pickedCorporationCard: this.pickedCorporationCard?.name,
@@ -2055,16 +2054,7 @@ export class Player {
         if (corporation.resourceCount !== undefined) {
           card.resourceCount = corporation.resourceCount;
         }
-        if (card instanceof Aridor) {
-          if (corporation.allTags !== undefined) {
-            card.allTags = new Set(corporation.allTags);
-          } else {
-            console.warn('did not find allTags for ARIDOR');
-          }
-        }
-        if (card instanceof PharmacyUnion) {
-          card.isDisabled = Boolean(corporation.isDisabled);
-        }
+        card.deserialize?.(corporation);
         player.corporations.push(card);
       }
     }

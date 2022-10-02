@@ -222,6 +222,7 @@ describe('Player', function() {
       titaniumValue: 13,
       steelValue: 14,
       canUseHeatAsMegaCredits: false,
+      canUseTitaniumAsMegacredits: false,
       actionsTakenThisRound: 15,
       actionsTakenThisGame: 30,
       actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],

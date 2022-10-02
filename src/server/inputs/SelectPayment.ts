@@ -15,6 +15,7 @@ export class SelectPayment implements PlayerInput {
         public canUseHeat: boolean,
         public canUseSeeds: boolean,
         public canUseData: boolean,
+        public canUseLunaTradeFederationTitanium: boolean,
         public amount: number,
         public cb: (payment: Payment) => PlayerInput | undefined,
   ) {

@@ -14,6 +14,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsThisGeneration: Array<CardName>;
     beginner: boolean;
     canUseHeatAsMegaCredits: boolean;
+    canUseTitaniumAsMegacredits: boolean;
     cardCost: number;
     cardDiscount: number;
     cardsInHand: Array<CardName>;

@@ -60,7 +60,7 @@ import {LunaSenate} from './LunaSenate';
 import {LunaStagingStation} from './LunaStagingStation';
 import {LunaTradeStation} from './LunaTradeStation';
 import {LunaTrainStation} from './LunaTrainStation';
-// import {LunaTradeFederation} from './LunaTradeFederation';
+import {LunaTradeFederation} from './LunaTradeFederation';
 import {MareImbriumMine} from './MareImbriumMine';
 import {MareNectarisMine} from './MareNectarisMine';
 import {MareNubiumMine} from './MareNubiumMine';
@@ -216,7 +216,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.LUNA_FIRST_INCORPORATED]: {Factory: LunaFirstIncorporated, compatibility: 'moon'},
     [CardName.THE_GRAND_LUNA_CAPITAL_GROUP]: {Factory: TheGrandLunaCapitalGroup, compatibility: 'moon'},
     [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS]: {Factory: IntragenSanctuaryHeadquarters, compatibility: 'moon'},
-    // [CardName.LUNA_TRADE_FEDERATION]: {Factory: LunaTradeFederation},
+    [CardName.LUNA_TRADE_FEDERATION]: {Factory: LunaTradeFederation, compatibility: 'moon'},
     [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE]: {Factory: TheArchaicFoundationInstitute, compatibility: 'moon'},
   },
   standardProjects: {

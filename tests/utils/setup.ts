@@ -4,9 +4,9 @@ import {SerializedGame} from '../../src/server/SerializedGame';
 import {IGameLoader} from '../../src/server/database/IGameLoader';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {registerBehaviorExecutor} from '../../src/server/behavior/BehaviorExecutor';
-import {Behaviors} from '../../src/server/behavior/Behaviors';
+import {Executor} from '../../src/server/behavior/Executor';
 
-registerBehaviorExecutor(new Behaviors());
+registerBehaviorExecutor(new Executor());
 
 const FAKE_DATABASE: IDatabase = {
   cleanGame: () => Promise.resolve(),

@@ -34,7 +34,7 @@ export class MaxwellBase extends Card implements IActionCard {
           b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
         }),
         description: {
-          text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.',
+          text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.',
           align: 'left',
         },
       },

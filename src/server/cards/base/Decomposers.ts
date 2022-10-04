@@ -33,7 +33,7 @@ export class Decomposers extends Card implements IProjectCard {
             be.microbes(1, {played});
             be.startEffect.microbes(1);
           }).br;
-          b.vpText('1 VP per 3 Microbes on this card.');
+          b.vpText('1 VP per 3 microbes on this card.');
         }),
       },
     });

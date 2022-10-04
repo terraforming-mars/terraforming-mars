@@ -19,7 +19,7 @@ export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.GLOBAL_DUST_STORM,
-      description: 'Lose all heat. Lose 2 M€ for each Building tag (max 5, then reduced by influence).',
+      description: 'Lose all heat. Lose 2 M€ for each building tag (max 5, then reduced by influence).',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.GREENS,
       renderData: RENDER_DATA,

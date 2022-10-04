@@ -17,7 +17,7 @@ export class Riots extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.RIOTS,
-      description: 'Lose 4 M€ for each City tile (max 5, then reduced by influence).',
+      description: 'Lose 4 M€ for each city tile (max 5, then reduced by influence).',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.REDS,
       renderData: RENDER_DATA,

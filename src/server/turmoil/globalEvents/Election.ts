@@ -20,7 +20,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.ELECTION,
-      description: 'Count your influence plus Building tags and City tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).',
+      description: 'Count your influence plus building tags and city tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.MARS,
       renderData: RENDER_DATA,

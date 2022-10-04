@@ -34,7 +34,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
           b.animals(2, {digit}).asterix().br;
           b.oceans(1);
         }),
-        description: 'Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.',
+        description: 'Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.',
       },
     });
   }

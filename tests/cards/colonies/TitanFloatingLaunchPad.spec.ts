@@ -113,7 +113,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(payAction.options).has.length(1);
 
     const floaterOption = cast(payAction, OrOptions).options[0];
-    expect(floaterOption.title).to.match(/Pay 1 Floater/);
+    expect(floaterOption.title).to.match(/Pay 1 floater/);
 
     floaterOption.cb();
     tradeAction.options[1].cb(luna);

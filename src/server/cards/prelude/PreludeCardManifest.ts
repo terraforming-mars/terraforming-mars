@@ -69,7 +69,7 @@ export const PRELUDE_CARD_MANIFEST = new ModuleManifest({
   },
 
   preludeCards: {
-    [CardName.ALLIED_BANKS]: {Factory: AlliedBanks},
+    [CardName.ALLIED_BANK]: {Factory: AlliedBanks},
     [CardName.BIOSPHERE_SUPPORT]: {Factory: BiosphereSupport},
     [CardName.AQUIFER_TURBINES]: {Factory: AquiferTurbines},
     [CardName.MOHOLE_EXCAVATION]: {Factory: MoholeExcavation},

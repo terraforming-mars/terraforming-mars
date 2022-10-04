@@ -61,7 +61,8 @@ export class Counter {
     }
 
     if (countable.greeneries !== undefined) {
-      sum += game.getGreeneriesCount();
+      const p = (countable.all === false) ? player : undefined;
+      sum += game.getGreeneriesCount(p);
     }
     if (countable.tag !== undefined) {
       const tag = countable.tag;

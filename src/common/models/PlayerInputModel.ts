@@ -17,6 +17,7 @@ export interface PlayerInputModel {
     canUseTitanium: boolean | undefined;
     canUseSeeds: boolean | undefined;
     canUseData: boolean | undefined;
+    canUseLunaTradeFederationTitanium: boolean | undefined;
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputType;
     options: Array<PlayerInputModel> | undefined;

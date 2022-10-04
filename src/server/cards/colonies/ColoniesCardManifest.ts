@@ -94,7 +94,7 @@ export const COLONIES_CARD_MANIFEST = new ModuleManifest({
     [CardName.RED_SPOT_OBSERVATORY]: {Factory: RedSpotObservatory},
     [CardName.RESEARCH_COLONY]: {Factory: ResearchColony},
     [CardName.RIM_FREIGHTERS]: {Factory: RimFreighters},
-    [CardName.REFUGEE_CAMP]: {Factory: RefugeeCamps},
+    [CardName.REFUGEE_CAMPS]: {Factory: RefugeeCamps},
     [CardName.SOLAR_PROBE]: {Factory: SolarProbe},
     [CardName.SOLAR_REFLECTORS]: {Factory: SolarReflectors},
     [CardName.SKY_DOCKS]: {Factory: SkyDocks},

@@ -8,7 +8,7 @@
             <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
             <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
             <Button title="copy" size="tiny" @click="copyUrl(player.id)"/>
-            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Playable link for</span> {{player.name}} <span v-i18n>copied to clipboard</span> <span class="dismissed" @click="setCopiedIdToDefault" v-i18n>dismiss</span></span>
+            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
           </li>
           <li v-if="game !== undefined && game.spectatorId">
             <p/>

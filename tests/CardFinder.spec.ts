@@ -10,10 +10,14 @@ describe('CardFinder', function() {
     expect(new CardFinder().getProjectCardByName(CardName.ECOLINE)).is.undefined;
   });
   it('findProjectCardByName prelude: success', function() {
-    expect(new CardFinder().getProjectCardByName(CardName.ALLIED_BANKS)?.name).eq(CardName.ALLIED_BANKS);
+    expect(new CardFinder().getProjectCardByName(CardName.ALLIED_BANK)?.name).eq(CardName.ALLIED_BANK);
   });
   // Dont' remove this test. It's a placeholder for card renames.
   it('finds renamed cards', function() {
-    // expect(new CardFinder().getProjectCardByName('Earth Embasy' as CardName)?.name).to.equal(CardName.EARTH_EMBASSY);
+    expect(new CardFinder().getProjectCardByName('Designed Micro-organisms'as CardName)?.name).to.equal(CardName.DESIGNED_MICROORGANISMS);
+    expect(new CardFinder().getProjectCardByName('Refugee Camp' as CardName)?.name).to.equal(CardName.REFUGEE_CAMPS);
+    expect(new CardFinder().getProjectCardByName('Allied Banks' as CardName)?.name).to.equal(CardName.ALLIED_BANK);
+    expect(new CardFinder().getProjectCardByName('Inventors Guild' as CardName)?.name).to.equal(CardName.INVENTORS_GUILD);
+    expect(new CardFinder().getProjectCardByName('Cryo Sleep' as CardName)?.name).to.equal(CardName.CRYO_SLEEP);
   });
 });

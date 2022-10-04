@@ -29,7 +29,7 @@
     "3 VPs if you have one or more science resources here.": "这张牌至少有1个科研资源方块时，获得3分。",
     "Oxygen must be 6% or less.":"氧气必须在6%或者以下",
 
-    "Inventors Guild": "发明者指南",
+    "Inventors' Guild": "发明者指南",
     "Action: Look at the top card and either buy it or discard it": "行动：查看计划卡牌库顶的牌，你可以买它或者弃掉它",
 
     "Martian Rails": "火星高铁",
@@ -493,7 +493,7 @@
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "行动： 花费8个热能资源，增加你的改造度(TR) 1级。",
     "Requires 0° C or warmer.": "需要火星温度至少0度。",
 
-    "Designed Micro-organisms": "创造微生物",
+    "Designed Microorganisms": "创造微生物",
     "It must be -14 C or colder. Increase your plant production 2 steps.": "火星温度不高于-14度。增加你的植物产量2级。",
 
     "Standard Technology": "标准技术",

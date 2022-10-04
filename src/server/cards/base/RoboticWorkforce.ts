@@ -9,8 +9,8 @@ import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
-import {Behaviors} from '../../behavior/Behaviors';
 import {Behavior} from '../../behavior/Behavior';
+import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
@@ -59,7 +59,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     if (card.behavior !== undefined) {
       const productionBehavior = this.productionBehavior(card.behavior);
       if (Object.keys(productionBehavior).length > 0) {
-        return Behaviors.canExecute(productionBehavior, player, card);
+        return getBehaviorExecutor().canExecute(productionBehavior, player, card);
       }
     }
 
@@ -89,7 +89,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       if (card.produce) {
         card.produce(player);
       } else if (card.behavior !== undefined) {
-        Behaviors.execute(this.productionBehavior(card.behavior), player, card);
+        getBehaviorExecutor().execute(this.productionBehavior(card.behavior), player, card);
       }
       return undefined;
     });

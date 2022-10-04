@@ -224,6 +224,7 @@ export class Server {
       min: undefined,
       canUseSteel: undefined,
       canUseTitanium: undefined,
+      canUseLunaTradeFederationTitanium: undefined,
       canUseHeat: undefined,
       canUseSeeds: undefined,
       canUseData: undefined,
@@ -264,6 +265,7 @@ export class Server {
       playerInputModel.microbes = player.getSpendableMicrobes();
       playerInputModel.floaters = player.getSpendableFloaters();
       playerInputModel.canUseHeat = player.canUseHeatAsMegaCredits;
+      playerInputModel.canUseLunaTradeFederationTitanium = player.canUseTitaniumAsMegacredits;
       playerInputModel.science = player.getSpendableScienceResources();
       playerInputModel.seeds = player.getSpendableSeedResources();
       break;
@@ -289,6 +291,7 @@ export class Server {
       playerInputModel.canUseSteel = sp.canUseSteel;
       playerInputModel.canUseTitanium = sp.canUseTitanium;
       playerInputModel.canUseHeat = sp.canUseHeat;
+      playerInputModel.canUseLunaTradeFederationTitanium = sp.canUseLunaTradeFederationTitanium;
       playerInputModel.canUseSeeds = sp.canUseSeeds;
       playerInputModel.seeds = player.getSpendableSeedResources();
       playerInputModel.canUseData = sp.canUseData;

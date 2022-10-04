@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 export class AlliedBanks extends PreludeCard {
   constructor() {
     super({
-      name: CardName.ALLIED_BANKS,
+      name: CardName.ALLIED_BANK,
       tags: [Tag.EARTH],
 
       behavior: {

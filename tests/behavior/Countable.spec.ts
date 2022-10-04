@@ -4,7 +4,7 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
-import {cast, fakeCard, maxOutOceans} from '../TestingUtils';
+import {addCity, addGreenery, cast, fakeCard, maxOutOceans} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
@@ -107,8 +107,7 @@ describe('Counter', () => {
 
     expect(count()).deep.eq({'': 1, 'onmars': 0, 'offmars': 1, 'everywhere': 1});
 
-    const landSpace = game.board.getAvailableSpacesForCity(player)[0];
-    game.addCityTile(player, landSpace.id, SpaceType.LAND);
+    addCity(player);
 
     expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
 
@@ -122,22 +121,48 @@ describe('Counter', () => {
     selectSpace.cb(oceanSpace);
 
     expect(count()).deep.eq({'': 3, 'onmars': 2, 'offmars': 1, 'everywhere': 3});
+
+    // Even if added by another player
+    addCity(player2);
+
+    expect(count()).deep.eq({'': 4, 'onmars': 3, 'offmars': 1, 'everywhere': 4});
+  });
+
+  it('count cities that you own', () => {
+    const count = (player: TestPlayer) => new Counter(player, fake).count({cities: {}, all: false});
+
+    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+
+    expect(count(player)).eq(1);
+    expect(count(player2)).eq(0);
+
+    const landSpace = game.board.getAvailableSpacesForCity(player)[0];
+    game.addCityTile(player, landSpace.id, SpaceType.LAND);
+
+    expect(count(player)).eq(2);
+    expect(count(player2)).eq(0);
+
+    const landSpace2 = game.board.getAvailableSpacesForCity(player2)[0];
+    game.addCityTile(player2, landSpace2.id, SpaceType.LAND);
+
+    expect(count(player)).eq(2);
+    expect(count(player2)).eq(1);
   });
 
   it('count greeneries', () => {
     const counter = new Counter(player, fake);
     expect(counter.count({greeneries: {}})).eq(0);
 
-    const greenerySpaces = game.board.getAvailableSpacesForGreenery(player);
-    game.addGreenery(player, greenerySpaces[0].id);
+    addGreenery(player);
 
     expect(counter.count({greeneries: {}})).eq(1);
 
-    game.addGreenery(player, greenerySpaces[1].id);
+    addGreenery(player);
 
     expect(counter.count({greeneries: {}})).eq(2);
 
-    game.addGreenery(player, greenerySpaces[2].id);
+    // Even if played by another player
+    addGreenery(player2);
 
     expect(counter.count({greeneries: {}})).eq(3);
 
@@ -147,6 +172,25 @@ describe('Counter', () => {
     const selectSpace = cast(wetlands.play(player), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(counter.count({greeneries: {}})).eq(4);
+  });
+
+  it('count greeneries that you ownown', () => {
+    const count = (player: TestPlayer) => new Counter(player, fake).count({greeneries: {}, all: false});
+
+    addGreenery(player);
+
+    expect(count(player)).eq(1);
+    expect(count(player2)).eq(0);
+
+    addGreenery(player);
+
+    expect(count(player)).eq(2);
+    expect(count(player2)).eq(0);
+
+    addGreenery(player2);
+
+    expect(count(player)).eq(2);
+    expect(count(player2)).eq(1);
   });
 
   it('count oceans', () => {

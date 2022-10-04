@@ -13,6 +13,7 @@
       :value="player.steelValue"
       :resourceProtection="player.protectedResources.steel"
       :productionProtection="player.protectedProduction.steel"/>
+    <!-- TODO LUNA TRADE FEDERATION -->
     <player-resource
       :type="resources.TITANIUM"
       :count="player.titanium"
@@ -62,6 +63,7 @@ export default Vue.extend({
     };
   },
   methods: {
+    // TODO LUNA TRADE FEDERATION
     canUseHeatAsMegaCredits(): boolean {
       return this.player.tableau.some((card) => card.name === CardName.HELION);
     },

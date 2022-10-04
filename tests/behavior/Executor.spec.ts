@@ -3,7 +3,7 @@ import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
-import {Behaviors} from '../../src/server/behavior/Behaviors';
+import {Executor} from '../../src/server/behavior/Executor';
 import {Units} from '../../src/common/Units';
 import {Payment} from '../../src/common/inputs/Payment';
 import {Resources} from '../../src/common/Resources';
@@ -40,6 +40,7 @@ describe('Behaviors', () => {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let fake: IProjectCard;
+  let executor: Executor;
 
   beforeEach(() => {
     game = newTestGame(3, {venusNextExtension: true});
@@ -51,11 +52,12 @@ describe('Behaviors', () => {
     player3.popSelectInitialCards();
 
     fake = fakeCard({});
+    executor = new Executor();
   });
 
   it('production - simple', () => {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    Behaviors.execute({production: {megacredits: 2}}, player, fake);
+    executor.execute({production: {megacredits: 2}}, player, fake);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 
@@ -63,42 +65,42 @@ describe('Behaviors', () => {
     const behavior = {production: {megacredits: 2, steel: -1}};
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
-    expect(Behaviors.canExecute(behavior, player, fake)).is.false;
+    expect(executor.canExecute(behavior, player, fake)).is.false;
 
     player.production.add(Resources.STEEL, 1);
 
-    expect(Behaviors.canExecute(behavior, player, fake)).is.true;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
 
-    Behaviors.execute(behavior, player, fake);
+    executor.execute(behavior, player, fake);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2, steel: 0}));
   });
 
   it('production - simple', () => {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    Behaviors.execute({production: {megacredits: 2}}, player, fake);
+    executor.execute({production: {megacredits: 2}}, player, fake);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 
   it('stock - simple', () => {
     player.steel = 2;
     player.heat = 5;
-    Behaviors.execute({stock: {steel: 3, heat: 2}}, player, fake);
+    executor.execute({stock: {steel: 3, heat: 2}}, player, fake);
     expect(asUnits(player)).deep.eq(Units.of({steel: 5, heat: 7}));
   });
 
   it('steelValue', () => {
     expect(player.payingAmount(Payment.of({steel: 4}), {steel: true})).eq(8);
-    Behaviors.execute({steelValue: 1}, player, fake);
+    executor.execute({steelValue: 1}, player, fake);
     expect(player.payingAmount(Payment.of({steel: 4}), {steel: true})).eq(12);
-    Behaviors.onDiscard({steelValue: 1}, player, fake);
+    executor.onDiscard({steelValue: 1}, player, fake);
     expect(player.payingAmount(Payment.of({steel: 4}), {steel: true})).eq(8);
   });
 
   it('titaniumValue', () => {
     expect(player.payingAmount(Payment.of({titanium: 4}), {titanium: true})).eq(12);
-    Behaviors.execute({titanumValue: 1}, player, fake);
+    executor.execute({titanumValue: 1}, player, fake);
     expect(player.payingAmount(Payment.of({titanium: 4}), {titanium: true})).eq(16);
-    Behaviors.onDiscard({titanumValue: 1}, player, fake);
+    executor.onDiscard({titanumValue: 1}, player, fake);
     expect(player.payingAmount(Payment.of({titanium: 4}), {titanium: true})).eq(12);
   });
 
@@ -109,16 +111,16 @@ describe('Behaviors', () => {
     player.plants = 7;
     expect(game.canPlaceGreenery(player)).is.false;
 
-    Behaviors.execute({greeneryDiscount: 1}, player, fake);
+    executor.execute({greeneryDiscount: 1}, player, fake);
     expect(game.canPlaceGreenery(player)).is.true;
 
     player.plants = 6;
     expect(game.canPlaceGreenery(player)).is.false;
 
-    Behaviors.execute({greeneryDiscount: 1}, player, fake);
+    executor.execute({greeneryDiscount: 1}, player, fake);
     expect(game.canPlaceGreenery(player)).is.true;
 
-    Behaviors.onDiscard({greeneryDiscount: 1}, player, fake);
+    executor.onDiscard({greeneryDiscount: 1}, player, fake);
     expect(game.canPlaceGreenery(player)).is.false;
 
     player.plants = 7;
@@ -128,14 +130,14 @@ describe('Behaviors', () => {
   it('drawCard - simple', () => {
     expect(player.cardsInHand).has.length(0);
     player.megaCredits = 5;
-    Behaviors.execute({drawCard: 3}, player, fake);
+    executor.execute({drawCard: 3}, player, fake);
     expect(player.cardsInHand).has.length(3);
     expect(player.megaCredits).eq(5);
   });
 
   it('drawCard, resource type', () => {
     expect(player.cardsInHand).has.length(0);
-    Behaviors.execute({drawCard: {count: 3, resource: CardResource.MICROBE}}, player, fake);
+    executor.execute({drawCard: {count: 3, resource: CardResource.MICROBE}}, player, fake);
     expect(player.cardsInHand).has.length(3);
     expect(player.cardsInHand[0].resourceType).eq(CardResource.MICROBE);
     expect(player.cardsInHand[1].resourceType).eq(CardResource.MICROBE);
@@ -144,7 +146,7 @@ describe('Behaviors', () => {
 
   it('drawCard, tag', () => {
     expect(player.cardsInHand).has.length(0);
-    Behaviors.execute({drawCard: {count: 3, tag: Tag.BUILDING}}, player, fake);
+    executor.execute({drawCard: {count: 3, tag: Tag.BUILDING}}, player, fake);
     expect(player.cardsInHand).has.length(3);
     expect(player.cardsInHand[0].tags).contains(Tag.BUILDING);
     expect(player.cardsInHand[1].tags).contains(Tag.BUILDING);
@@ -154,7 +156,7 @@ describe('Behaviors', () => {
   it('drawCard, type and tag', () => {
     expect(player.cardsInHand).has.length(0);
     player.megaCredits = 5;
-    Behaviors.execute({drawCard: {count: 3, tag: Tag.SPACE, type: CardType.EVENT}}, player, fake);
+    executor.execute({drawCard: {count: 3, tag: Tag.SPACE, type: CardType.EVENT}}, player, fake);
     expect(player.cardsInHand).has.length(3);
     expect(player.cardsInHand[0].tags).contains(Tag.SPACE);
     expect(player.cardsInHand[1].tags).contains(Tag.SPACE);
@@ -169,7 +171,7 @@ describe('Behaviors', () => {
     expect(player.cardsInHand).has.length(0);
     player.megaCredits = 5;
 
-    Behaviors.execute({drawCard: {count: 3, tag: Tag.SPACE, type: CardType.EVENT, keep: 2}}, player, fake);
+    executor.execute({drawCard: {count: 3, tag: Tag.SPACE, type: CardType.EVENT, keep: 2}}, player, fake);
 
     runAllActions(game);
 
@@ -186,7 +188,7 @@ describe('Behaviors', () => {
   it('drawCard, pay', () => {
     expect(player.cardsInHand).has.length(0);
     player.megaCredits = 5;
-    Behaviors.execute({drawCard: {count: 1, pay: true}}, player, fake);
+    executor.execute({drawCard: {count: 1, pay: true}}, player, fake);
 
     runAllActions(game);
 
@@ -201,7 +203,7 @@ describe('Behaviors', () => {
   it('drawCard - countable', () => {
     expect(player.cardsInHand).has.length(0);
     player.tagsForTest = {animal: 2, wild: 1};
-    Behaviors.execute({drawCard: {count: {tag: Tag.ANIMAL}}}, player, fake);
+    executor.execute({drawCard: {count: {tag: Tag.ANIMAL}}}, player, fake);
     expect(player.cardsInHand).has.length(3);
   });
 
@@ -212,27 +214,27 @@ describe('Behaviors', () => {
 
     expect(levels()).deep.eq([-30, 0, 0]);
 
-    Behaviors.execute({global: {temperature: 2}}, player, fake);
+    executor.execute({global: {temperature: 2}}, player, fake);
     expect(levels()).deep.eq([-26, 0, 0]);
 
-    Behaviors.execute({global: {oxygen: 1}}, player, fake);
+    executor.execute({global: {oxygen: 1}}, player, fake);
     expect(levels()).deep.eq([-26, 1, 0]);
 
-    Behaviors.execute({global: {venus: 1}}, player, fake);
+    executor.execute({global: {venus: 1}}, player, fake);
     expect(levels()).deep.eq([-26, 1, 2]);
 
-    Behaviors.execute({global: {temperature: 1, oxygen: 2, venus: 3}}, player, fake);
+    executor.execute({global: {temperature: 1, oxygen: 2, venus: 3}}, player, fake);
     expect(levels()).deep.eq([-24, 3, 8]);
   });
 
   it('tr', () => {
     expect(player.getTerraformRating()).eq(20);
 
-    Behaviors.execute({tr: 2}, player, fake);
+    executor.execute({tr: 2}, player, fake);
 
     expect(player.getTerraformRating()).eq(22);
 
-    Behaviors.execute({tr: -1}, player, fake);
+    executor.execute({tr: -1}, player, fake);
 
     expect(player.getTerraformRating()).eq(21);
   });
@@ -240,7 +242,7 @@ describe('Behaviors', () => {
   it('add resources to specific card', () => {
     const tardigrades = new Tardigrades();
     tardigrades.resourceCount = 2;
-    Behaviors.execute({addResources: 3}, player, tardigrades);
+    executor.execute({addResources: 3}, player, tardigrades);
     runAllActions(game);
 
     expect(tardigrades.resourceCount).eq(5);
@@ -250,7 +252,7 @@ describe('Behaviors', () => {
     const tardigrades = new Tardigrades();
     tardigrades.resourceCount = 2;
     player.tagsForTest = {moon: 7};
-    Behaviors.execute({addResources: {tag: Tag.MOON, per: 3}}, player, tardigrades);
+    executor.execute({addResources: {tag: Tag.MOON, per: 3}}, player, tardigrades);
     runAllActions(game);
 
     expect(tardigrades.resourceCount).eq(4);
@@ -294,7 +296,7 @@ describe('Behaviors', () => {
     });
 
     // No floater cards.
-    Behaviors.execute({addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER}}, player, fake);
+    executor.execute({addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER}}, player, fake);
     runAllActions(game);
 
     expect(player.popWaitingFor()).is.undefined;
@@ -306,7 +308,7 @@ describe('Behaviors', () => {
     });
 
     // One animal card. Auto-populated.
-    Behaviors.execute({addResourcesToAnyCard: {count: 2, type: CardResource.ANIMAL}}, player, fake);
+    executor.execute({addResourcesToAnyCard: {count: 2, type: CardResource.ANIMAL}}, player, fake);
     runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
 
@@ -318,7 +320,7 @@ describe('Behaviors', () => {
     });
 
     // Three microbe cards. Player is asked to choose.
-    Behaviors.execute({addResourcesToAnyCard: {count: 1, type: CardResource.MICROBE}}, player, fake);
+    executor.execute({addResourcesToAnyCard: {count: 1, type: CardResource.MICROBE}}, player, fake);
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard);
 
@@ -345,7 +347,7 @@ describe('Behaviors', () => {
     expect(livestock.resourceCount).eq(0);
 
     // Count microbe tags, add that many resources to livestock. What a crazy idea. :D
-    Behaviors.execute({addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.ANIMAL}}, player, fake);
+    executor.execute({addResourcesToAnyCard: {count: {tag: Tag.MICROBE}, type: CardResource.ANIMAL}}, player, fake);
     runAllActions(game);
 
     expect(livestock.resourceCount).eq(3);
@@ -357,7 +359,7 @@ describe('Behaviors', () => {
     const nitriteReducingBacteria = new NitriteReducingBacteria(); // Microbe tag with microbes
     player.playedCards.push(aerialMappers, dirigibles, nitriteReducingBacteria);
 
-    Behaviors.execute({addResourcesToAnyCard: {count: 1, tag: Tag.VENUS}}, player, fake);
+    executor.execute({addResourcesToAnyCard: {count: 1, tag: Tag.VENUS}}, player, fake);
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
@@ -367,7 +369,7 @@ describe('Behaviors', () => {
   });
 
   it('decrease any production - cannot execute with zero targets', () => {
-    expect(Behaviors.canExecute({decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}}, player, fake)).is.false;
+    expect(executor.canExecute({decreaseAnyProduction: {count: 2, type: Resources.TITANIUM}}, player, fake)).is.false;
   });
 
   it('decrease any production - standard', () => {
@@ -375,9 +377,9 @@ describe('Behaviors', () => {
     player.production.add(Resources.TITANIUM, 3);
     player2.production.add(Resources.TITANIUM, 2);
     player3.production.add(Resources.TITANIUM, 2);
-    expect(Behaviors.canExecute(behavior, player, fake)).is.true;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
 
-    Behaviors.execute(behavior, player, fake);
+    executor.execute(behavior, player, fake);
     runAllActions(game);
     const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
 

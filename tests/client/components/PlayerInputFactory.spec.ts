@@ -14,6 +14,7 @@ const baseInput = {
   canUseHeat: undefined,
   canUseSteel: undefined,
   canUseTitanium: undefined,
+  canUseLunaTradeFederationTitanium: undefined,
   canUseSeeds: undefined,
   canUseData: undefined,
   cards: undefined,

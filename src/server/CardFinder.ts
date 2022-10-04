@@ -8,10 +8,17 @@ import {ALL_MODULE_MANIFESTS} from './cards/AllCards';
 
 const CARD_RENAMES = new Map<string, CardName>([
   // When renaming a card, add the old name here (like the example below), and add a TODO (like the example below)
-  // And remember to add a test in Deck.spec.ts.
+  // And remember to add a test in CardFinder.spec.ts.
 
   // TODO(yournamehere): remove after 2021-04-05
   // ['Earth Embasy', CardName.EARTH_EMBASSY],
+
+  // TODO(kberg): remove after 2022-11-01
+  ['Designed Micro-organisms', CardName.DESIGNED_MICROORGANISMS],
+  ['Refugee Camp', CardName.REFUGEE_CAMPS],
+  ['Allied Banks', CardName.ALLIED_BANK],
+  ['Inventors Guild', CardName.INVENTORS_GUILD],
+  ['Cryo Sleep', CardName.CRYO_SLEEP],
 ]);
 
 export class CardFinder {

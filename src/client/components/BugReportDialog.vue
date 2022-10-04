@@ -1,17 +1,17 @@
 <template>
   <dialog ref="dialog" class="bug-dialog">
-    <p class="center">Copy the text below and then paste it in<br>
-        a <a href="https://github.com/terraforming-mars/terraforming-mars/issues/new?template=from-heroku.md" target="_blank">GitHub issue</a>
-      or the <a href="https://discord.com/channels/737945098695999559/742721510376210583" target="_blank">#bug-reports Discord channel</a>
+    <p class="center"><span v-i18n>Copy the text below and then paste it in</span><br>
+        <a href="https://github.com/terraforming-mars/terraforming-mars/issues/new?template=from-heroku.md" target="_blank"  v-i18n>a GitHub issue</a>
+        <span v-i18n>or the</span> <a href="https://discord.com/channels/737945098695999559/742721510376210583" target="_blank"  v-i18n>#bug-reports Discord channel</a>
     </p>
     <textarea ref="textarea" readonly rows="6" cols = "50" v-model="message"></textarea>
     <div class="dialog-menu centered-content">
       <div>
-        <button class="btn btn-lg btn-primary" @click="copyTextArea">Copy to Clipboard</button>
-        <div :class="{ center: true, invisible: !showCopied }">Copied!</div>
+        <button class="btn btn-lg btn-primary" @click="copyTextArea" v-i18n>Copy to Clipboard</button>
+        <div :class="{ center: true, invisible: !showCopied }" v-i18n>Copied!</div>
       </div>
       <form method="dialog">
-        <button class="btn btn-lg">Close</button>
+        <button class="btn btn-lg" v-i18n>Close</button>
       </form>
     </div>
   </dialog>

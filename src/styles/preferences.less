@@ -297,6 +297,17 @@
     margin: -0px -10px -15px -10px;
 }
 
+/*Selection check box room for smaller cards */
+.preferences_small_cards input[type="checkbox"] + .filterDiv.card-container,
+.preferences_small_cards input[type="radio"] + .filterDiv.card-container{
+    margin-top: -8px;
+}
+
+.preferences_small_cards input[type="checkbox"] + .filterDiv.card-standard-project,
+.preferences_small_cards input[type="radio"] + .filterDiv.card-standard-project{
+    margin-top: 0px;
+}
+
 .preferences_small_cards input[type="checkbox"]:checked + .filterDiv,
 .preferences_small_cards input[type="radio"]:checked + .filterDiv {
     transform: scale(0.8);

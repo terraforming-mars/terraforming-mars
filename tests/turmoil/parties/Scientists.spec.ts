@@ -26,7 +26,7 @@ describe('Scientists', function() {
     scientists = new Scientists();
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Science tag you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each science tag you have', function() {
     player.playedCards.push(new SearchForLife());
 
     const bonus = SCIENTISTS_BONUS_1;
@@ -34,7 +34,7 @@ describe('Scientists', function() {
     expect(player.megaCredits).to.eq(1);
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Science tag you have, with Habitat Marte', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each science tag you have, with Habitat Marte', function() {
     player.setCorporationForTest(new HabitatMarte());
     player.playedCards.push(new SearchForLife(), new DesignedOrganisms());
 

@@ -88,7 +88,7 @@
   "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.":"放置1片海洋并提升1点温度。获得3个植物。",
 
   "Orbital Cleanup":"轨道清洁",
-  "Action: Gain 1 M€ per Science tag you have.":"行动：每有一个科学标志，获得1点金钱。",
+  "Action: Gain 1 M€ per science tag you have.":"行动：每有一个科学标志，获得1点金钱。",
   "Decrease your M€ production 2 steps.":"减少2点金钱产量。",
 
   "Penguin":"企鹅",
@@ -133,8 +133,8 @@
   "Arcadian":"阿卡迪亚",
   "Communities":"社区",
   "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":"你起始拥有40 M€和10个钢铁。作为游戏中的你的第一个行动，你必须你的一个玩家标志放置在一个非海洋保留区.",
-  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":"行动：将你的一个玩家标志放置在一个非保留区，并且和你的至少一个板块或者玩家标志相邻。",
-  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€":"效果：只有你能在拥有你的玩家标志的位置放置板块，当你如此做后，获得3 M€，",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.":"行动：将你的一个玩家标志放置在一个非保留区，并且和你的至少一个板块或者玩家标志相邻。",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.":"效果：只有你能在拥有你的玩家标志的位置放置板块，当你如此做后，获得3 M€，",
 
   "Astrodrill":"天体钻井",
   "You start with 35 M€ and 3 asteroid resources.":"起始获得35 M€和3个小行星资源。",

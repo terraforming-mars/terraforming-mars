@@ -30,7 +30,7 @@ export class MartianNatureWonders extends Card implements IProjectCard {
           b.data({amount: 2}).asterix();
         }),
         description: 'Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. ' +
-        'Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card',
+        'Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.',
       },
     });
   }

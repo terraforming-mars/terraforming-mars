@@ -17,7 +17,7 @@ export class Ringcom extends Card implements ICorporationCard {
       tags: [Tag.JOVIAN],
       startingMegaCredits: 39,
 
-      initialActionText: 'Draw 2 cards with a jovian tag',
+      initialActionText: 'Draw 2 cards with a Jovian tag',
 
       behavior: {
         production: {megacredits: 3},
@@ -25,13 +25,13 @@ export class Ringcom extends Card implements ICorporationCard {
 
       metadata: {
         cardNumber: 'PfC4',
-        description: 'You start with 39 M€ and 3 M€ production. As your first action, draw 2 cards with a jovian tag.',
+        description: 'You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(39).production((pb) => pb.megacredits(3));
           b.cards(2, {secondaryTag: Tag.JOVIAN});
           b.corpBox('effect', (ce) => {
-            ce.effect('When any player plays a card with a jovian tag (including this) gain 1 titanium.', (eb) => {
+            ce.effect('When any player plays a card with a Jovian tag (including this) gain 1 titanium.', (eb) => {
               eb.jovian({all, played}).startEffect.titanium(1);
             });
           });

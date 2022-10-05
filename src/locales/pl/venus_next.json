@@ -6,7 +6,7 @@
   "Requires Venus 12% and that you spend 1 floater from any card.":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 12%. Usuń 1 jednostkę dryfowców z dowolnej karty.",
 
   "Venusian Plants":"Wenusjańskie Rośliny",
-  "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 animal to ANOTHER VENUS CARD":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 16%. Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść 1 jednostkę mikrobów albo zwierząt na innej karcie z symbolem Wenus.",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 16%. Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść 1 jednostkę mikrobów albo zwierząt na innej karcie z symbolem Wenus.",
 
   "Extremophiles":"Ekstremofile",
   "Action: Add 1 microbe to ANY card.":"Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie.",
@@ -26,15 +26,15 @@
 
   "Sulphur-Eating Bacteria":"Siarkożerne Bakterie",
   "Action: add 1 Microbe to this card.":"Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
-  "Action: Spend any number of Microbes here to gain triple amount of MC.":"Akcja: Usuń z tej karty dowolną liczbę jednostek mikrobów, żeby otrzymać 3 razy tyle M€.",
+  "Action: Spend any number of microbes here to gain triple amount of M€.":"Akcja: Usuń z tej karty dowolną liczbę jednostek mikrobów, żeby otrzymać 3 razy tyle M€.",
   "Requires Venus 6%":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 6%.",
 
   "Venus Waystation":"Wenusjańska Stacja Tranzytowa",
   "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus, płacisz za nią o 2 M€ mniej.",
 
   "Thermophiles":"Termofile",
-  "Action: Add 1 Microbe to ANY Venus CARD.":"Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie z symbolem Wenus.",
-  "Action: Spend 2 Microbes here to raise Venus 1 step.":"Akcja: Usuń z tej karty 2 jednostki mikrobów i podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
+  "Action: Add 1 microbe to ANY Venus CARD.":"Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie z symbolem Wenus.",
+  "Action: Spend 2 microbes here to raise Venus 1 step.":"Akcja: Usuń z tej karty 2 jednostki mikrobów i podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
 
   "Sponsored Academies":"Ufundowanie Akademii",
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.":"Odrzuć z ręki 1 kartę, a następnie dobierz 3 karty. Każdy z przeciwników dobiera po 1 karcie.",
@@ -121,7 +121,7 @@
 
   "Freyja Biodomes":"Biokopuły we Freyja Montes",
   "10% Venus":"10% Wenus",
-  "Requires 10% on the Venus track. Add 2 Microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 10%. Umieść 2 jednostki mikrobów albo 2 jednostki zwierząt na innej karcie z symbolem Wenus. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
+  "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 10%. Umieść 2 jednostki mikrobów albo 2 jednostki zwierząt na innej karcie z symbolem Wenus. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
 
   "Giant Solar Shade":"Olbrzymia Osłona Przeciwsłoneczna",
   "Raise Venus 3 steps.":"Podnieś Współczynnik Terraformacji Wenus o 3 poziomy.",
@@ -137,7 +137,7 @@
   "Requires Venus 8%. Increase your titanium production 1 step.":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 8%. Podnieś swoją produkcję tytanu o 1 poziom.",
 
   "Luna Metropolis":"Metropolia Księżycowa",
-  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA":"Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Ziemi (z tym włącznie). Umieść obszar miasta na planszy Wenus, na polu zarezerwowanym dla Metropolii Księżycowej.",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.":"Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Ziemi (z tym włącznie). Umieść obszar miasta na planszy Wenus, na polu zarezerwowanym dla Metropolii Księżycowej.",
 
   "Local Shading":"Miejscowe Zacienienie",
   "Action: Add 1 floater to this card.":"Akcja: Umieść na tej karcie 1 jednostkę dryfowców.",
@@ -161,7 +161,7 @@
 
   "Venusian Animals":"Wenusjańskie Zwierzęta",
   "18% Venus":"18% Wenus",
-  "Effect: When you play a Science tag, including this, add 1 animal to this card.":"Efekt trwały: Gdy zagrywasz kartę z symbolem albo symbolami nauki (z tą włącznie), umieść na tej karcie 1 jednostkę zwierząt za każdy taki symbol.",
+  "Effect: When you play a science tag, including this, add 1 animal to this card.":"Efekt trwały: Gdy zagrywasz kartę z symbolem albo symbolami nauki (z tą włącznie), umieść na tej karcie 1 jednostkę zwierząt za każdy taki symbol.",
   "Requires Venus 18%":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 18%.",
 
   "Venus Magnetizer":"Magnetyzacja Wenus",

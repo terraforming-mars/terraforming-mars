@@ -1,8 +1,8 @@
 {
   "Adhai High Orbit Constructions": "Adhai High Orbit Konstruktionen",
   "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(EFFEKT: Wenn du eine Karte mit Weltraumsymbol aber ohne Planetensymbol ausspielst (einschließlich dieser), füge dieser Karte 1 Orbital hinzu.)",
-  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the standard colony project or trade action costs 1M€ less.)": "(EFFEKT: Wenn du eine Karte mit Weltraumsymbol aber ohne Planetensymbol ausspielst, das Kolonie-Standardprojekt nutzt oder handelst, bezahlst du je 2 Orbitale auf dieser Karte 1 M€ weniger.)",
-  "(You start with 43 M€)": "(Du beginnst mit 43 M€.)",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "(EFFEKT: Wenn du eine Karte mit Weltraumsymbol aber ohne Planetensymbol ausspielst, das Kolonie-Standardprojekt nutzt oder handelst, bezahlst du je 2 Orbitale auf dieser Karte 1 M€ weniger.)",
+  "(You start with 43 M€.)": "(Du beginnst mit 43 M€.)",
 
   "Ambient": "Ambient",
   "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "(EFFEKT: Wenn du ein Venussymbol ausspielst (einschließlich dieses), erhöhe deine Wärme-Produktion um 1.)",
@@ -19,7 +19,7 @@
   "(You start with 42 M€. As your first action, draw 2 cards with a microbe tag.)": "(Du beginnst mit 42 M€. Ziehe 2 Karten mit Mikroben-Grafik. 1 SP je 3 Mikroben auf dieser Karte.)",
 
   "Chimera": "Chimera",
-  "(Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming Milestones and Awards, both symbols count as one. (Other wild tags still do not count toward Awards.))": "(EFFEKT: Wenn Du eine Aktion ausführst, zählen deine Jokersymbole jedes Mal als Symbole deiner Wahl. Für die Beanspruchung von Meilensteinen und Auszeichnungen zählen beide Symbole nur als eines.)",
+  "(Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward Awards.))": "(EFFEKT: Wenn Du eine Aktion ausführst, zählen deine Jokersymbole jedes Mal als Symbole deiner Wahl. Für die Beanspruchung von Meilensteinen und Auszeichnungen zählen beide Symbole nur als eines.)",
   "(You start with 36 M€, 1 steel, and 1 titanium.)": "(Du beginnst mit 36 M€, 1 Stahl und 1 Titan.)",
 
   "Collegium Copernicus": "Kollegium Kopernikus",
@@ -49,13 +49,13 @@
   "(You start with 32 M€. As your first action, place an ocean tile.)": "(Du beginnst mit 40 M€. Als deine erste Aktion im Spiel, platziere ein Ozeanplättchen.)",
 
   "RingCom": "RingCom",
-  "(Effect: When any player plays a card with a jovian tag (including this) gain 1 titanium.)": "(EFFEKT: Immer wenn ein Jupitersymbol ins Spiel kommt (einschließlich dieses), erhalte 1 Titan.)",
-  "(You start with 39 M€ and 3 M€ production. As your first action, draw 2 cards with a jovian tag.)": "(Du beginnst mit 39 M€. Erhöhe deine M€-Produktion um 3. Ziehe 2 Jupiterkarten.)",
+  "(Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.)": "(EFFEKT: Immer wenn ein Jupitersymbol ins Spiel kommt (einschließlich dieses), erhalte 1 Titan.)",
+  "(You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.)": "(Du beginnst mit 39 M€. Erhöhe deine M€-Produktion um 3. Ziehe 2 Jupiterkarten.)",
 
   "Robin Haulings": "Robin Haulings",
   "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(EFFEKT: Wenn du ein Venussymbol ausspielst (einschließlich dieses), füge einer beliebigen Karte 1 Schweber hinzu.)",
   "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(AKTION: Entferne 3 Schweber von dieser Karte, um Venus um 2% ODER den Sauerstoffgehalt um 1% zu erhöhen.)",
-  "(You start with 39 M€)": "(Du beginnst mit 39 M€.)",
+  "(You start with 39 M€.)": "(Du beginnst mit 39 M€.)",
 
   "Soylent Seedling Systems": "Soylent-Setzlingssysteme",
   "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(EFFEKT: Wenn du ein Grünflchenplättchen platzierst, füge dieser Karte 1 Saatgut hinzu.)",

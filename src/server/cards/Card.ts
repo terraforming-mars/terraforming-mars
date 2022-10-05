@@ -19,7 +19,7 @@ import {PlayerInput} from '../PlayerInput';
 import {isICorporationCard} from './corporation/ICorporationCard';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
-import {Behaviors} from '../behavior/Behaviors';
+import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 
 type ReserveUnits = Units & {deduct: boolean};
 /* External representation of card properties. */
@@ -152,7 +152,7 @@ export abstract class Card {
     if (this.requirements?.satisfies(player) === false) {
       return false;
     }
-    if (this.behavior !== undefined && !Behaviors.canExecute(this.behavior, player, this)) {
+    if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
       return false;
     }
     return this.bespokeCanPlay(player);
@@ -168,7 +168,7 @@ export abstract class Card {
       player.deductUnits(adjustedReserveUnits);
     }
     if (this.behavior !== undefined) {
-      Behaviors.execute(this.behavior, player, this);
+      getBehaviorExecutor().execute(this.behavior, player, this);
     }
     return this.bespokePlay(player);
   }
@@ -179,7 +179,7 @@ export abstract class Card {
 
   public onDiscard(player: Player): void {
     if (this.behavior !== undefined) {
-      Behaviors.onDiscard(this.behavior, player, this);
+      getBehaviorExecutor().onDiscard(this.behavior, player, this);
     }
     this.bespokeOnDiscard(player);
   }

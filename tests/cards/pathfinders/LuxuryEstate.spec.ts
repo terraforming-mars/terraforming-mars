@@ -50,5 +50,11 @@ describe('LuxuryEstate', function() {
     addCity(player2);
     card.play(player);
     expect(player.titanium).eq(3);
+
+    // Other player's greeneries don't count.
+    player.titanium = 0;
+    addGreenery(player2);
+    card.play(player);
+    expect(player.titanium).eq(3);
   });
 });

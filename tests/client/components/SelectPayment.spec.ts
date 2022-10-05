@@ -266,6 +266,51 @@ describe('SelectPayment', () => {
     tester.expectValue('heat', 5);
   });
 
+  it('Luna Trade Federation: Can use titanium by default', async () => {
+    const wrapper = setupBill(
+      10,
+      {
+        megaCredits: 10, titanium: 2, titaniumValue: 4,
+      },
+      {canUseLunaTradeFederationTitanium: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 10);
+    tester.expectValue('titanium', 0);
+
+    await tester.clickMax('titanium');
+
+    tester.expectValue('megaCredits', 4);
+    tester.expectValue('titanium', 2);
+  });
+
+  it('Luna Trade Federation: Can use titanium at normal rate when canUseTitanium is true', async () => {
+    const wrapper = setupBill(
+      10,
+      {
+        megaCredits: 10, titanium: 2, titaniumValue: 4,
+      },
+      {canUseLunaTradeFederationTitanium: true, canUseTitanium: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 2);
+    tester.expectValue('titanium', 2);
+
+    await(tester.clickMinus('titanium'));
+
+    tester.expectValue('megaCredits', 6);
+    tester.expectValue('titanium', 1);
+
+    await tester.clickMax('titanium');
+
+    tester.expectValue('megaCredits', 2);
+    tester.expectValue('titanium', 2);
+  });
+
   const setupBill = function(
     amount: number,
     playerFields: Partial<PublicPlayerModel>,

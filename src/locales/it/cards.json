@@ -16,7 +16,7 @@
     "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Azione: spendi 1 M€ per rivelare la prima carta del mazzo di pesca. Se tale carta contiene un simbolo Microbo, aggiungi una risorsa Scienza su questa carta. Poi, scarta la carta.",
     "3 VPs if you have one or more science resources here.": "Il livello di Ossigeno deve essere minore o uguale al 6%. 3 PV se hai una o più risorse Scienza su questa carta.",
 
-    "Inventors Guild": "Associazione degli Inventori",
+    "Inventors' Guild": "Associazione degli Inventori",
     "Action: Look at the top card and either buy it or discard it": "Azione: guarda la prima carta del mazzo e comprala, oppure scartala.",
 
     "Martian Rails": "Ferrovie Marziane",
@@ -469,7 +469,7 @@
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "Azione: spendi 8 risorse Calore per incrementare il tuo TT di 1 livello.",
     "Requires 0° C or warmer.": "Richiede una temperatura maggiore o uguale a 0°C.",
 
-    "Designed Micro-organisms": "Microorganismi Programmati",
+    "Designed Microorganisms": "Microorganismi Programmati",
     "It must be -14 C or colder. Increase your plant production 2 steps.": "La Temperatura deve essere minore o uguale a -14°C. Incrementa la tua Produzione di Piante di 2 livelli.",
 
     "Standard Technology": "Tecnologia Standard",

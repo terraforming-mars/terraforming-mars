@@ -18,6 +18,7 @@ describe('ShiftAresGlobalParameters', function() {
     min: undefined,
     canUseSteel: undefined,
     canUseTitanium: undefined,
+    canUseLunaTradeFederationTitanium: undefined,
     canUseHeat: undefined,
     canUseSeeds: undefined,
     canUseData: undefined,

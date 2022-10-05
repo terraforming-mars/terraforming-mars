@@ -17,9 +17,10 @@ import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
 import {Player} from '../Player';
 import {Behavior} from './Behavior';
 import {Counter} from './Counter';
+import {BehaviorExecutor} from './BehaviorExecutor';
 
-export class Behaviors {
-  public static canExecute(behavior: Behavior, player: Player, card: ICard) {
+export class Executor implements BehaviorExecutor {
+  public canExecute(behavior: Behavior, player: Player, card: ICard) {
     const ctx = new Counter(player, card);
 
     if (behavior.production && !player.production.canAdjust(ctx.countUnits(behavior.production))) {
@@ -60,7 +61,7 @@ export class Behaviors {
     return true;
   }
 
-  public static execute(behavior: Behavior, player: Player, card: ICard) {
+  public execute(behavior: Behavior, player: Player, card: ICard) {
     const ctx = new Counter(player, card);
     if (behavior.production !== undefined) {
       const units = ctx.countUnits(behavior.production);
@@ -208,7 +209,7 @@ export class Behaviors {
     }
   }
 
-  public static onDiscard(behavior: Behavior, player: Player, _card: ICard) {
+  public onDiscard(behavior: Behavior, player: Player, _card: ICard) {
     if (behavior.steelValue === 1) {
       player.decreaseSteelValue();
     }
@@ -236,7 +237,7 @@ export class Behaviors {
     }
   }
 
-  public static toTRSource(behavior: Behavior): TRSource {
+  public toTRSource(behavior: Behavior): TRSource {
     const trSource: TRSource = {
       tr: behavior.tr,
 

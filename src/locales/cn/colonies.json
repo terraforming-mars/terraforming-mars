@@ -92,7 +92,7 @@
   "2 Earth": "2 地球",
   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点M€产量 获得4块钱",
 
-  "Refugee Camp": "难民营",
+  "Refugee Camps": "难民营",
   "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "行动：降低自身1点M€产量，增加1点营地资源到此卡上",
   "1 VP for each camp resource on this card.": "每1点营地资源，获得1VP",
 
@@ -137,7 +137,7 @@
   "Corona Extractor":"日冕提取器",
   "4 Science":"4个科技标志",
 
-  "Cryo Sleep":"低温睡眠",
+  "Cryo-Sleep":"低温睡眠",
   "Effect: When you trade, you pay 1 less resource for it.":"效果：当你交易时，你少支付1个资源。",
 
   "Ecology Research":"生态学研究",

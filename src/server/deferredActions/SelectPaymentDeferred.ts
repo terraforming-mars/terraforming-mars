@@ -33,6 +33,10 @@ export class SelectPaymentDeferred extends DeferredAction {
     if (this.options.canUseTitanium && this.player.titanium > 0) {
       return false;
     }
+    // HOOK: Luna Trade Federation
+    if (this.player.isCorporation(CardName.LUNA_TRADE_FEDERATION) && this.player.titanium > 0) {
+      return false;
+    }
     if (this.options.canUseSeeds && (this.player.getCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)?.resourceCount ?? 0) > 0) {
       return false;
     }
@@ -60,6 +64,7 @@ export class SelectPaymentDeferred extends DeferredAction {
       this.player.canUseHeatAsMegaCredits,
       this.options.canUseSeeds || false,
       this.options.canUseData || false,
+      this.player.canUseTitaniumAsMegacredits,
       this.amount,
       (payment: Payment) => {
         if (!this.player.canSpend(payment)) {

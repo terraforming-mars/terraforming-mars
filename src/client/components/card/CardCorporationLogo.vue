@@ -148,6 +148,7 @@ const imageOnlyLogos: Map<CardName, string> = new Map([
   [CardName.LUNA_FIRST_INCORPORATED, 'card-luna-first-incorporated-logo'],
   [CardName.THE_GRAND_LUNA_CAPITAL_GROUP, 'card-the-grand-luna-capital-group-logo'],
   [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, 'card-intragen-sanctuary-headquarters-logo'],
+  [CardName.LUNA_TRADE_FEDERATION, 'card-luna-trade-federation-logo'],
   [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, 'card-the-archaic-foundation-institute-logo'],
   [CardName.POLARIS, 'card-polaris-logo'],
   [CardName.RINGCOM, 'card-ringcom-logo'],

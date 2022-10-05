@@ -541,6 +541,48 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse).deep.eq(Payment.of({heat: 4, megaCredits: 6}));
   });
 
+  it('Luna Trade Federation: Can use titanium by default', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.BIRDS, 10,
+      {megaCredits: 10, titanium: 2, titaniumValue: 4},
+      {canUseLunaTradeFederationTitanium: true, canUseTitanium: false});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 10);
+    tester.expectValue('titanium', 0);
+
+    await tester.clickMax('titanium');
+
+    tester.expectValue('megaCredits', 4);
+    tester.expectValue('titanium', 2);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(Payment.of({titanium: 2, megaCredits: 4}));
+  });
+
+  it('Luna Trade Federation: Can use titanium at normal rate when canUseTitanium is true', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.SPACE_ELEVATOR, 27,
+      {megaCredits: 15, titanium: 5, titaniumValue: 4},
+      {canUseLunaTradeFederationTitanium: true, canUseTitanium: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('megaCredits', 15);
+    tester.expectValue('titanium', 3);
+
+    await tester.clickMax('titanium');
+
+    tester.expectValue('megaCredits', 7);
+    tester.expectValue('titanium', 5);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(Payment.of({titanium: 5, megaCredits: 7}));
+  });
+
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,

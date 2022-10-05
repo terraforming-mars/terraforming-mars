@@ -12,7 +12,7 @@ export class HeatTrappers extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.HEAT_TRAPPERS,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 6,
       victoryPoints: -1,
 

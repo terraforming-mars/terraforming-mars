@@ -10,7 +10,7 @@ export class GeothermalPower extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.GEOTHERMAL_POWER,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 11,
 
       behavior: {

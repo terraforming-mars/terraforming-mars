@@ -10,7 +10,7 @@ export class FieldCappedCity extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.FIELD_CAPPED_CITY,
-      tags: [Tag.CITY, Tag.BUILDING, Tag.ENERGY],
+      tags: [Tag.CITY, Tag.BUILDING, Tag.POWER],
       cost: 29,
 
       behavior: {

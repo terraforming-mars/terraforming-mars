@@ -48,7 +48,7 @@ describe('HighTempSuperconductors', function() {
     player.megaCredits = 10;
     expect(player.canPlay(cost10)).is.true;
 
-    const cost10WithTag = fakeCard({cost: 10, tags: [Tag.ENERGY]});
+    const cost10WithTag = fakeCard({cost: 10, tags: [Tag.POWER]});
     player.megaCredits = 6;
     expect(player.canPlay(cost10WithTag)).is.false;
     player.megaCredits = 7;

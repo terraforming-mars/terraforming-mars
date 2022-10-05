@@ -17,7 +17,7 @@ export class SolarFarm extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SOLAR_FARM,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 12,
 
       metadata: {

@@ -51,7 +51,7 @@ const ORDER: Array<InterfaceTagsType> = [
   Tag.BUILDING,
   Tag.SPACE,
   Tag.SCIENCE,
-  Tag.ENERGY,
+  Tag.POWER,
   Tag.EARTH,
   Tag.JOVIAN,
   Tag.VENUS,

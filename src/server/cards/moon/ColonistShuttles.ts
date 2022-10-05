@@ -22,7 +22,7 @@ export class ColonistShuttles extends Card {
       },
 
       metadata: {
-        description: 'Spend 1 titanium. Raise the Habitat Rate 1 step. Gain 2M€ for each habitat tile on The Moon.',
+        description: 'Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.',
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonHabitatRate().br;

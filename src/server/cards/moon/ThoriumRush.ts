@@ -25,7 +25,7 @@ export class ThoriumRush extends Card implements IProjectCard {
 
       metadata: {
         description: 'Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. ' +
-        'Raise the Habitat Rate, Mining Rate and Logistic Rate 1 step.',
+        'Raise the habitat rate, mining rate and logistic rate 1 step.',
         cardNumber: 'M56',
         renderData: CardRenderer.builder((b) => {
           b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE})

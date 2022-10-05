@@ -18,7 +18,7 @@ export class CoreMine extends PreludeCard implements IProjectCard {
       },
       tilesBuilt: [TileType.MOON_MINE],
       metadata: {
-        description: 'Place a mine tile on The Moon and raise the Mining Rate 1 step. Increase your titanium production 1 step.',
+        description: 'Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.titanium(1)).moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE});

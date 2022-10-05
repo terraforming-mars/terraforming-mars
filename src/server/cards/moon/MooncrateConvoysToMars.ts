@@ -23,7 +23,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
 
       metadata: {
         description: 'Requires that Mars First are ruling or that you have 2 delegates there. ' +
-          'Raise the Logistic Rate 1 step. All players may sell their steel resources for 3M€ each.',
+          'Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.',
         cardNumber: 'M60',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate().br;

@@ -12,7 +12,7 @@ export class EnergySaving extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ENERGY_SAVING,
-      tags: [Tag.ENERGY],
+      tags: [Tag.POWER],
       cost: 15,
 
       behavior: {

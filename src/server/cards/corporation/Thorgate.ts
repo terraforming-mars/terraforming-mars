@@ -11,14 +11,14 @@ export class Thorgate extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THORGATE,
-      tags: [Tag.ENERGY],
+      tags: [Tag.POWER],
       startingMegaCredits: 48,
 
       behavior: {
         production: {energy: 1},
       },
 
-      cardDiscount: {tag: Tag.ENERGY, amount: 3},
+      cardDiscount: {tag: Tag.POWER, amount: 3},
       metadata: {
         cardNumber: 'R13',
         description: 'You start with 1 energy production and 48 M€.',

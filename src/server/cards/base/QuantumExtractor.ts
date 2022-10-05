@@ -12,7 +12,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.QUANTUM_EXTRACTOR,
-      tags: [Tag.SCIENCE, Tag.ENERGY],
+      tags: [Tag.SCIENCE, Tag.POWER],
       cost: 13,
 
       behavior: {

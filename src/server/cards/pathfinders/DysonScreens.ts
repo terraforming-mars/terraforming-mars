@@ -17,7 +17,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DYSON_SCREENS,
-      tags: [Tag.SCIENCE, Tag.VENUS, Tag.ENERGY, Tag.SPACE],
+      tags: [Tag.SCIENCE, Tag.VENUS, Tag.POWER, Tag.SPACE],
       cost: 28,
       victoryPoints: 1,
 

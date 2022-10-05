@@ -10,7 +10,7 @@ export class FueledGenerators extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.FUELED_GENERATORS,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 1,
 
       behavior: {

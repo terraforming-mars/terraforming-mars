@@ -16,10 +16,10 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.POWER_SUPPLY_CONSORTIUM,
-      tags: [Tag.ENERGY],
+      tags: [Tag.POWER],
       cost: 5,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.ENERGY, 2)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.POWER, 2)),
       metadata: {
         cardNumber: '160',
         renderData: CardRenderer.builder((b) => {

@@ -26,7 +26,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
         description: 'Requires 4% oxygen.',
         cardNumber: '034',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Microbe to this card.', (eb) => {
+          b.action('Add 1 microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
           b.or().br;

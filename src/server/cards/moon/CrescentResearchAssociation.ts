@@ -23,7 +23,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(50).br;
-          b.effect('When you play a moon tag, you pay 1 M€ less for each Moon tag you have.', (eb) => {
+          b.effect('When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.', (eb) => {
             eb.moon().startEffect.megacredits(1).slash().moon();
           });
         }),

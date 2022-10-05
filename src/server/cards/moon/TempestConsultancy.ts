@@ -23,7 +23,7 @@ export class TempestConsultancy extends Card implements ICorporationCard {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(37).delegates(1).delegates(1).br;
-          b.action('Place 1 delegate in any party for every 5 moon tags you have [max 3.]', (eb) => {
+          b.action('Place 1 delegate in any party for every 5 Moon tags you have [max 3.]', (eb) => {
             eb.empty().startAction.delegates(1).text('(max 3)', Size.SMALL).slash().text('5 ').moon();
           }).br;
           b.effect('When your delegate becomes the chairman, increase your TR 1 step.', (eb) => {

@@ -26,11 +26,11 @@ export class Thermophiles extends Card implements IActionCard {
       metadata: {
         cardNumber: '253',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Microbe to ANY Venus CARD.', (eb) => {
+          b.action('Add 1 microbe to ANY Venus CARD.', (eb) => {
             eb.empty().startAction.microbes(1, {secondaryTag: Tag.VENUS});
           }).br;
           b.or().br;
-          b.action('Spend 2 Microbes here to raise Venus 1 step.', (eb) => {
+          b.action('Spend 2 microbes here to raise Venus 1 step.', (eb) => {
             eb.microbes(2).startAction.venus(1);
           });
         }),

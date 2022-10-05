@@ -25,7 +25,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
             ab.empty().startAction.science(1).asterix();
           }).br;
           b.or().br;
-          b.action('Add 2 Data to ANY card.', (ab) => {
+          b.action('Add 2 data to ANY card.', (ab) => {
             ab.empty().startAction.data({amount: 2}).asterix();
           });
         }),

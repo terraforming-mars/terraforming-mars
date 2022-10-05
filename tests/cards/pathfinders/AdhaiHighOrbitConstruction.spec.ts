@@ -65,7 +65,7 @@ describe('AdhaiHighOrbitConstructions', function() {
     expect(card.getCardDiscount(player, new SolarWindPower())).eq(3); // Science, Space, Power
   });
 
-  it('standard colony project', function() {
+  it('STANDARD COLONY PROJECT', function() {
     const colonyStandardProject = new BuildColonyStandardProject();
 
     player.megaCredits = 15;

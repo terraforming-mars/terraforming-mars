@@ -28,7 +28,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
             eb.plants(1).startAction.animals(1);
           });
         }),
-        description: 'Requires 3 oceans on Mars. 1 VP per 2 animals on this card',
+        description: 'Requires 3 oceans on Mars. 1 VP per 2 animals on this card.',
       },
     });
   }

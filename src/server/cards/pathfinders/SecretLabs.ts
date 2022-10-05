@@ -31,7 +31,7 @@ export class SecretLabs extends Card implements IProjectCard {
           b.oceans(1).microbes(2, {digit}).asterix().or().temperature(1).br;
           b.plants(3, {digit}).or().oxygen(1).floaters(2, {digit}).asterix().br;
         }),
-        description: 'Requires 1 Science tag and 1 Jovian tag. ' +
+        description: 'Requires 1 science tag and 1 Jovian tag. ' +
           'Place an ocean tile. Add 2 microbes to ANY card. ' +
           'OR Raise temperature 1 step. Gain 3 plants. ' +
           'OR Raise oxygen level 1 step. Add 2 floaters to ANY card.',

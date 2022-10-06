@@ -43,7 +43,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
       Tag.BUILDING,
       Tag.SPACE,
       Tag.SCIENCE,
-      Tag.ENERGY,
+      Tag.POWER,
       Tag.PLANT,
       Tag.MICROBE,
       Tag.ANIMAL,

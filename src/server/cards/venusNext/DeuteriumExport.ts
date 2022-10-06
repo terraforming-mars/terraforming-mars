@@ -16,7 +16,7 @@ export class DeuteriumExport extends Card implements IActionCard {
     super({
       name: CardName.DEUTERIUM_EXPORT,
       cardType: CardType.ACTIVE,
-      tags: [Tag.SPACE, Tag.VENUS, Tag.ENERGY],
+      tags: [Tag.SPACE, Tag.VENUS, Tag.POWER],
       cost: 11,
       resourceType: CardResource.FLOATER,
 

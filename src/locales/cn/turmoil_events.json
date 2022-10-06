@@ -29,7 +29,7 @@
   "Decrease temperature 2 steps. Draw 1 card per influence.": "降低火星温度2级。每有1点影响力,抽1张牌",
   "Lose 3 M€ for each space tag (max 5, then reduced by influence).": "每有1个空间标志,损失3 M€。(最多计算5个标志,每有1点影响力少算1个)",
   "Lose 3 M€ for each blue card (max 5, then reduced by influence).": "每打出过1张蓝色卡,损失3 M€。(最多计算5张,每有1点影响力少算1张)",
-  "Gain 2 M€ for each Science tag (max 5) and influence.": "每有1个科学标志(最多5个)和影响力,获得2 M€",
+  "Gain 2 M€ for each science tag (max 5) and influence.": "每有1个科学标志(最多5个)和影响力,获得2 M€",
   "All cards with resources on them gain 1 resource. Draw 1 card for each influence.": "在每个拥有资源的卡牌上增加一个资源。每有1点影响力抽1张牌",
   "Gain 2 M€ for each city tile (max 5) and influence.": "每有1个城市板块(最多5个)和影响力,获得2 M€",
   "Increase temperature 2 steps. Increase heat production 1 step per influence.": "提升火星温度2级。每有1点影响力,提升1级热能产量",

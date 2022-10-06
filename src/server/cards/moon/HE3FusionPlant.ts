@@ -12,7 +12,7 @@ export class HE3FusionPlant extends Card implements IProjectCard {
     super({
       name: CardName.HE3_FUSION_PLANT,
       cardType: CardType.AUTOMATED,
-      tags: [Tag.ENERGY, Tag.ENERGY, Tag.MOON],
+      tags: [Tag.POWER, Tag.POWER, Tag.MOON],
       cost: 12,
 
       behavior: {

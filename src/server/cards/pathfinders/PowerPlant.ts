@@ -11,7 +11,7 @@ export class PowerPlant extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.POWER_PLANT_PATHFINDERS,
       cost: 13,
-      tags: [Tag.MARS, Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.MARS, Tag.POWER, Tag.BUILDING],
 
       behavior: {
         production: {heat: 2, energy: 1},

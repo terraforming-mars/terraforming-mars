@@ -11,7 +11,7 @@ export class TectonicStressPower extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.TECTONIC_STRESS_POWER,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 18,
 
       behavior: {

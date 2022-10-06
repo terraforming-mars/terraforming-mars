@@ -20,7 +20,7 @@ export class Tags {
       {tag: Tag.BUILDING, count: this.count(Tag.BUILDING, 'raw')},
       {tag: Tag.CITY, count: this.count(Tag.CITY, 'raw')},
       {tag: Tag.EARTH, count: this.count(Tag.EARTH, 'raw')},
-      {tag: Tag.ENERGY, count: this.count(Tag.ENERGY, 'raw')},
+      {tag: Tag.POWER, count: this.count(Tag.POWER, 'raw')},
       {tag: Tag.JOVIAN, count: this.count(Tag.JOVIAN, 'raw')},
       {tag: Tag.MARS, count: this.count(Tag.MARS, 'raw')},
       {tag: Tag.MICROBE, count: this.count(Tag.MICROBE, 'raw')},

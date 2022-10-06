@@ -14,7 +14,7 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.SPACE_MIRRORS,
-      tags: [Tag.ENERGY, Tag.SPACE],
+      tags: [Tag.POWER, Tag.SPACE],
       cost: 3,
 
       metadata: {

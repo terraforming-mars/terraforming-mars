@@ -27,7 +27,7 @@ export class PrefabricationofHumanHabitats extends Card implements IProjectCard 
             eb.city({size: Size.MEDIUM, played}).startEffect.megacredits(-2);
           });
           b.br;
-          b.effect('The City standard project costs 2M€ less. STEEL MAY BE USED as if you were playing a Building card.', (eb) => {
+          b.effect('The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.', (eb) => {
             eb.city().asterix().startEffect.megacredits(23).openBrackets.steel(1).closeBrackets;
           });
         }),

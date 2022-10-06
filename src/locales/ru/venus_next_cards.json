@@ -51,7 +51,7 @@
     "Action: Spend 2 floaters here to increase Venus 1 step.": "Действие: Потратьте 2 аэростата, чтобы увеличить шкалу Венеры на 1",
 
     "Freyja Biodomes": "Биокуполы Фрейя",
-    "Requires 10% on the Venus track. Add 2 Microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Требование: 10% на шкале Венеры или выше. Добавьте 2 микроба или 2 животных на другую карту Венеры. Уменьшите своё производство энергии на 1 и увеличьте свое производсто МС на 2",
+    "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Требование: 10% на шкале Венеры или выше. Добавьте 2 микроба или 2 животных на другую карту Венеры. Уменьшите своё производство энергии на 1 и увеличьте свое производсто МС на 2",
 
     "GHG Import From Venus": "Углекислый газ с Венеры",
     "Raise Venus 1 step. Increase your heat production 3 steps.": "Увеличьте шкалу Венеры на 1. Увеличьте своё производство тепла на 3",
@@ -79,7 +79,7 @@
     "Action: add 1 floater to this card, or spend 1 floater here to raise your M€ production 1 step": "Действие: добавьте 1 аэростат на эту карту или потратьте 1 аэростат с этой карты, чтобы увеличить свое производство МС на 1",
 
     "Luna Metropolis": "Лунный мегаполис",
-    "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA": "Увеличьте свое производство МС на 1 за каждую вашу метку Земли, включая эту. Выложите жетон города на область Лунный мегаполис",
+    "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Увеличьте свое производство МС на 1 за каждую вашу метку Земли, включая эту. Выложите жетон города на область Лунный мегаполис",
 
     "Luxury Foods": "Деликатесы",
     "Venus Earth Jovian": "Венера, Земля, Юпитер",
@@ -125,21 +125,21 @@
 
     "Stratospheric Birds": "Птицы в стратосфере",
     "Action: Add 1 animal to this card.": "Действие: добавьте 1 животное на эту карту",
-    "Requires Venus 12% and that you spend 1 floater from any card. 1 VP for each Animal on this card.": "Требование: 12% на шкале Венеры или выше. Потратьте 1 аэростат с любой своей карты. 1 ПО за каждое животное на этой карте",
+    "Requires Venus 12% and that you spend 1 floater from any card. 1 VP for each animal on this card.": "Требование: 12% на шкале Венеры или выше. Потратьте 1 аэростат с любой своей карты. 1 ПО за каждое животное на этой карте",
 
     "Sulphur Exports": "Экспорт серы",
     "Increase Venus 1 step. Increase your M€ production1 step for each Venus tag you have, including this.": "Увеличьте шкалу Венеры на 1. Увеличьте свое производство МС на 1 за каждую вашу метку Венеры, включая эту",
 
     "Sulphur-Eating Bacteria": "СФ-бактерии",
-    "Action: Spend any number of Microbes here to gain triple amount of MC.": "Действие: потратьте любое количество микробов с этой карты, чтобы получить втрое больше МС",
+    "Action: Spend any number of microbes here to gain triple amount of M€.": "Действие: потратьте любое количество микробов с этой карты, чтобы получить втрое больше МС",
     "Requires Venus 6%": "Требование: 6% на шкале Венеры или выше",
 
     "Terraforming Contract": "Работа по контракту",
     "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Требование: ваш РТ должен быть не меньше 25. Увеличьте свое производство МС на 4",
 
     "Thermophiles": "Термофилы",
-    "Action: Add 1 Microbe to ANY Venus CARD.": "Действие: добавьте 1 микроба на любую карту Венеры",
-    "Action: Spend 2 Microbes here to raise Venus 1 step.": "Действие: потратьте 2 микробов с этой карты, чтобы увеличить шкалу Венеры на 1",
+    "Action: Add 1 microbe to ANY Venus CARD.": "Действие: добавьте 1 микроба на любую карту Венеры",
+    "Action: Spend 2 microbes here to raise Venus 1 step.": "Действие: потратьте 2 микробов с этой карты, чтобы увеличить шкалу Венеры на 1",
 
     "Water to Venus": "Поставки воды на Венеру",
     "Raise Venus 1 step.": "Увеличьте шкалу Венеры на 1",
@@ -158,8 +158,8 @@
     "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Эффект: разыгрывая карту с меткой Венеры, платите за нее на 2 МС меньше",
 
     "Venusian Animals": "Животные на Венере",
-    "Effect: When you play a Science tag, including this, add 1 animal to this card.": "Эффект: разыгрывая метку открытия, включая эту, добавляйте 1 животное на эту карту",
-    "1 VP per Animal on this card.": "1 ПО за каждое животное на этой карте",
+    "Effect: When you play a science tag, including this, add 1 animal to this card.": "Эффект: разыгрывая метку открытия, включая эту, добавляйте 1 животное на эту карту",
+    "1 VP per animal on this card.": "1 ПО за каждое животное на этой карте",
     "Requires Venus 18%": "Требование: 18% на шкале Венеры или выше",
 
     "Venusian Insects": "Насекомые на Венере",
@@ -168,7 +168,7 @@
     "Requires Venus 12%.": "Требование: 12% на шкале Венеры или выше",
 
     "Venusian Plants": "Растения на Венере",
-    "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 animal to ANOTHER VENUS CARD": "Требование: 16% на шкале Венеры или выше. Увеличьте шкалу Венеры на 1. Добавьте 1 микроба или животное на другую карту Венеры",
+    "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD": "Требование: 16% на шкале Венеры или выше. Увеличьте шкалу Венеры на 1. Добавьте 1 микроба или животное на другую карту Венеры",
 
     "5 floaters": "5 Аэростатов",
     "Venus Venus": "2 метки Венеры",

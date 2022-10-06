@@ -17,7 +17,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.GREAT_DAM_PROMO,
       cost: 15,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
 
       behavior: {
         production: {energy: 2},

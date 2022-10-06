@@ -11,7 +11,7 @@ export class Windmills extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.WINDMILLS,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 6,
 
       behavior: {

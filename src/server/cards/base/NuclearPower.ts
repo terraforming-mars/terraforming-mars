@@ -10,7 +10,7 @@ export class NuclearPower extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.NUCLEAR_POWER,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 10,
 
       behavior: {

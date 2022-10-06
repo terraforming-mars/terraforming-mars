@@ -17,7 +17,7 @@ export class Playwrights extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,
-      tags: [Tag.ENERGY],
+      tags: [Tag.POWER],
       startingMegaCredits: 38,
       cardType: CardType.CORPORATION,
 
@@ -27,7 +27,7 @@ export class Playwrights extends Card implements ICorporationCard {
 
       metadata: {
         cardNumber: 'R40',
-        description: 'You start with 38 M€ and 1 Energy production.',
+        description: 'You start with 38 M€ and 1 energy production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(38).production((pb) => pb.energy(1));

@@ -32,7 +32,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
           b.action('Remove 1 microbe from any card to add 1 to this card.', (eb) => {
             eb.microbes(1, {all}).startAction.microbes(1);
           }).br;
-          b.vpText('1 VP per 2 Microbes on this card.');
+          b.vpText('1 VP per 2 microbes on this card.');
         }),
       },
     });

@@ -13,7 +13,7 @@ export class CoronaExtractor extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.CORONA_EXTRACTOR,
       cost: 10,
-      tags: [Tag.SPACE, Tag.ENERGY],
+      tags: [Tag.SPACE, Tag.POWER],
 
       behavior: {
         production: {energy: 4},

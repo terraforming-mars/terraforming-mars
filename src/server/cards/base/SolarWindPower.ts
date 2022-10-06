@@ -10,7 +10,7 @@ export class SolarWindPower extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SOLAR_WIND_POWER,
-      tags: [Tag.SCIENCE, Tag.SPACE, Tag.ENERGY],
+      tags: [Tag.SCIENCE, Tag.SPACE, Tag.POWER],
       cost: 11,
 
       behavior: {

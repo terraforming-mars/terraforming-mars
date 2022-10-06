@@ -12,7 +12,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.QUANTUM_EXTRACTOR,
-      tags: [Tag.SCIENCE, Tag.ENERGY],
+      tags: [Tag.SCIENCE, Tag.POWER],
       cost: 13,
 
       behavior: {
@@ -24,7 +24,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
       metadata: {
         cardNumber: '079',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
+          b.effect('When you play a space card, you pay 2 M€ less for it.', (eb) => {
             eb.space({played}).startEffect.megacredits(-2);
           }).br;
           b.production((pb) => pb.energy(4, {digit}));

@@ -31,7 +31,7 @@ export class LunarEmbassy extends Card implements IProjectCard {
             .br
             .cards(1).city().asterix().br;
         }),
-        description: 'Increase your M€ production 3 steps, and plant production 1 step for every 2 earth tags (including this.) ' +
+        description: 'Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) ' +
           'Draw a card. Place a city tile ON THE RESERVED AREA.',
       },
     });

@@ -6,7 +6,7 @@
   "Requires Venus 12% and that you spend 1 floater from any card.": "Requer 12% na terraformação de Vênus. Gaste 1 flutuador de qualquer carta. 1 PV por cada animal nesta carta.",
 
   "Venusian Plants": "Plantas Venusianas",
-  "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 animal to ANOTHER VENUS CARD": "Requer 16% na terraformação de Vênus. Aumente a terraformação de Vênus em 1 nível. Adicione 1 micróbio ou 1 animal a OUTRA CARTA DE VÊNUS.",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD": "Requer 16% na terraformação de Vênus. Aumente a terraformação de Vênus em 1 nível. Adicione 1 micróbio ou 1 animal a OUTRA CARTA DE VÊNUS.",
 
   "Extremophiles": "Extremófilos",
   "Action: Add 1 microbe to ANY card.": "Ação: adicione 1 micróbio à qualquer carta.",
@@ -25,15 +25,15 @@
   "Requires Venus 12%.": "Requer 12% na terraformação de Vênus.",
 
   "Sulphur-Eating Bacteria": "Bactéria Devoradora de Enxofre",
-  "Action: Spend any number of Microbes here to gain triple amount of M€.": "Ação: Gaste qualquer número de micróbios nesta carta para ganhar o triplo de M€.",
+  "Action: Spend any number of microbes here to gain triple amount of M€.": "Ação: Gaste qualquer número de micróbios nesta carta para ganhar o triplo de M€.",
   "Requires Venus 6%": "Requer 6% na terraformação de Vênus.",
 
   "Venus Waystation": "Estação de Passagem de Vênus",
   "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Efeito: quando jogar uma carta com ícone de Vênus, pague 2 M€ a menos por ela.",
 
   "Thermophiles": "Termófilos",
-  "Action: Add 1 Microbe to ANY VENUS CARD.": "Ação: adicione 1 micróbio à qualquer CARTA DE VÊNUS.",
-  "Action: Spend 2 Microbes here to raise Venus 1 step.": "Ação: Gaste 2 micróbios nesta carta para aumentar a terraformação de Vênus em 1 nível.",
+  "Action: Add 1 microbe to ANY VENUS CARD.": "Ação: adicione 1 micróbio à qualquer CARTA DE VÊNUS.",
+  "Action: Spend 2 microbes here to raise Venus 1 step.": "Ação: Gaste 2 micróbios nesta carta para aumentar a terraformação de Vênus em 1 nível.",
 
   "Sponsored Academies": "Academias Patrocinadas",
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Descarte 1 carta de a sua mão e compre 3 cartas. Todos os OPONENTES recebem uma carta.",
@@ -119,7 +119,7 @@
 
   "Freyja Biodomes": "Biodomos de Freya",
   "10% Venus": "10% Vênus",
-  "Requires 10% on the Venus track. Add 2 Microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Requer 10% na terraformação de Vênus. Adicione 2 micróbios ou 2 animais à qualquer OUTRA CARTA DE VÊNUS. Reduza a sua produção de energía em 1 nível e aumente a sua produção de M€ em 2 níveis.",
+  "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Requer 10% na terraformação de Vênus. Adicione 2 micróbios ou 2 animais à qualquer OUTRA CARTA DE VÊNUS. Reduza a sua produção de energía em 1 nível e aumente a sua produção de M€ em 2 níveis.",
 
   "Giant Solar Shade": "Proteção Solar Gigante",
   "Raise Venus 3 steps.": "Aumente a terraformação de Vênus em 3 níveis.",
@@ -135,7 +135,7 @@
   "Requires Venus 8%. Increase your titanium production 1 step.": "Requer 8% na terraformação de Vênus. Aumente a sua produção de titânio em 1 nível.",
 
   "Luna Metropolis": "Metrópolis Luna",
-  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA": "Aumente a sua produção de M€ em 1 nível para cada ícone de Terra que tiver, incluindo este. Coloque uma cidade NA ÁREA RESERVADA.",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Aumente a sua produção de M€ em 1 nível para cada ícone de Terra que tiver, incluindo este. Coloque uma cidade NA ÁREA RESERVADA.",
 
   "Local Shading": "Sombra Local",
   "Action: Spend 1 floater here to raise your M€ production 1 step.": "Ação: Gaste 1 flutuador desta carta para aumentar a sua produção de M€ em 1 nível.",
@@ -158,7 +158,7 @@
 
   "Venusian Animals": "Animais Venusianos",
   "18% Venus": "18% Vênus",
-  "Effect: When you play a Science tag, including this, add 1 animal to this card.": "Efeito: quando jogar um ícone de Ciência, incluindo este, adicione 1 animal à esta carta.",
+  "Effect: When you play a science tag, including this, add 1 animal to this card.": "Efeito: quando jogar um ícone de Ciência, incluindo este, adicione 1 animal à esta carta.",
   "Requires Venus 18%": "Requer 18% na terraformação de Vênus.",
 
   "Venus Magnetizer": "Magnetizador de Vênus",

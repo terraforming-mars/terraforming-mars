@@ -20,7 +20,7 @@ export class AIControlledMineNetwork extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),
       metadata: {
-        description: 'Requires Logistic Rate to be 2 or higher. Raise the Logistic Rate 1 step',
+        description: 'Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step',
         cardNumber: 'M32',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate();

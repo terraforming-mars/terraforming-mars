@@ -38,11 +38,11 @@ export class LunaMiningHub extends Card {
           align: 'left',
         },
         renderData: CardRenderer.builder((b) => {
-          b.text('Requires a Mining Rate of 5 or higher.', Size.TINY, false, false).br;
+          b.text('Requires a mining rate of 5 or higher.', Size.TINY, false, false).br;
           b.minus().steel(1).minus().titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
           b.text('Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.', Size.TINY, false, false).br;
           b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: Size.SMALL});
-          b.text('Place this tile on The Moon and raise the Mining Rate 1 step.', Size.TINY, false, false);
+          b.text('Place this tile on The Moon and raise the mining rate 1 step.', Size.TINY, false, false);
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },

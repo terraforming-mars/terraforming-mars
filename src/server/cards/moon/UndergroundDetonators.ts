@@ -17,7 +17,7 @@ export class UndergroundDetonators extends Card implements IProjectCard {
       },
 
       metadata: {
-        description: 'Gain 1 steel and 1 titanium. Raise the Mining Rate 1 step.',
+        description: 'Gain 1 steel and 1 titanium. Raise the mining rate 1 step.',
         cardNumber: 'M34',
         renderData: CardRenderer.builder((b) => {
           b.steel(1).titanium(1);

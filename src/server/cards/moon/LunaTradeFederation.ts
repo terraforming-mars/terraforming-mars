@@ -28,7 +28,7 @@ export class LunaTradeFederation extends Card implements ICorporationCard {
       },
 
       metadata: {
-        description: 'You start with 15 M€ and 10 titanium. As your first action, place a mine tile on The Moon and raise the Mining Rate 1 step.',
+        description: 'You start with 15 M€ and 10 titanium. As your first action, place a mine tile on The Moon and raise the mining rate 1 step.',
         cardNumber: 'MC9',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(15).titanium(10).moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).br;

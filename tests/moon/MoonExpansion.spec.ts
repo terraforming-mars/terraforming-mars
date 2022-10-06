@@ -172,7 +172,7 @@ describe('MoonExpansion', () => {
   });
 
   it('Moon parameters are global parameters', () => {
-    const card = new LunaMiningHub(); // Requires the mining rate 5.
+    const card = new LunaMiningHub(); // requires mining rate 5.
     const specialDesign = new SpecialDesign();
 
     player.cardsInHand = [card];

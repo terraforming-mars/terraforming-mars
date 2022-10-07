@@ -153,7 +153,7 @@ describe('AnOfferYouCantRefuse', () => {
 
   function clearParties() {
     turmoil.parties.forEach((party) => {
-      turmoil.delegateReserve.push(...party.delegates.values());
+      party.delegates.forEachMultiplicity((count, key) => turmoil.delegateReserve.add(key, count));
       party.delegates.clear();
       party.partyLeader = undefined;
     });

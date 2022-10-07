@@ -46,10 +46,10 @@ export class Turmoil {
   public chairman: undefined | PlayerId | NeutralPlayer = undefined;
   public rulingParty: IParty;
   public dominantParty: IParty;
-  public lobby: Set<PlayerId> = new Set<PlayerId>();
-  public delegateReserve: Array<PlayerId | NeutralPlayer> = [];
-  public parties: Array<IParty> = ALL_PARTIES.map((cf) => new cf.Factory());
-  public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
+  public lobby = new Set<PlayerId>();
+  public delegateReserve = new MultiSet<PlayerId | NeutralPlayer>();
+  public parties = ALL_PARTIES.map((cf) => new cf.Factory());
+  public playersInfluenceBonus = new Map<string, number>();
   public readonly globalEventDealer: GlobalEventDealer;
   public distantGlobalEvent: IGlobalEvent | undefined;
   public comingGlobalEvent: IGlobalEvent | undefined;
@@ -84,13 +84,13 @@ export class Turmoil {
       turmoil.lobby.add(player.id);
       // Begin with six delegates in the delegate reserve
       for (let i = 0; i < PLAYER_DELEGATES_COUNT - 1; i++) {
-        turmoil.delegateReserve.push(player.id);
+        turmoil.delegateReserve.add(player.id);
       }
     });
 
     // Begin with 13 neutral delegates in the reserve
     for (let i = 0; i < 13; i++) {
-      turmoil.delegateReserve.push('NEUTRAL');
+      turmoil.delegateReserve.add('NEUTRAL');
     }
 
     turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties);
@@ -155,10 +155,10 @@ export class Turmoil {
     if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && source === 'lobby') {
       this.lobby.delete(playerId);
     } else {
-      const index = this.delegateReserve.indexOf(playerId);
-      if (index > -1) {
-        this.delegateReserve.splice(index, 1);
+      if (this.delegateReserve.has(playerId)) {
+        this.delegateReserve.remove(playerId);
       } else {
+        // TODO(kberg): throw?
         console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
         return;
       }
@@ -170,7 +170,7 @@ export class Turmoil {
   // Use to remove a delegate from a specific party
   public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game): void {
     const party = this.getPartyByName(partyName);
-    this.delegateReserve.push(playerId);
+    this.delegateReserve.add(playerId);
     party.removeDelegate(playerId, game);
     this.checkDominantParty();
   }
@@ -183,7 +183,7 @@ export class Turmoil {
     partyName: PartyName,
     game: Game): void {
     const party = this.getPartyByName(partyName);
-    this.delegateReserve.push(outgoingPlayerId);
+    this.delegateReserve.add(outgoingPlayerId);
     party.removeDelegate(outgoingPlayerId, game);
     this.sendDelegateToParty(incomingPlayerId, partyName, game, source);
   }
@@ -259,15 +259,14 @@ export class Turmoil {
 
     // 3.c - Fill the lobby
     this.lobby.forEach((playerId) => {
-      this.delegateReserve.push(playerId);
+      this.delegateReserve.add(playerId);
     });
     this.lobby = new Set<PlayerId>();
 
     game.getPlayersInGenerationOrder().forEach((player) => {
       if (this.hasDelegatesInReserve(player.id)) {
-        const index = this.delegateReserve.indexOf(player.id);
-        if (index > -1) {
-          this.delegateReserve.splice(index, 1);
+        if (this.delegateReserve.has(player.id)) {
+          this.delegateReserve.remove(player.id);
         }
         this.lobby.add(player.id);
       }
@@ -302,16 +301,19 @@ export class Turmoil {
 
     // Change the chairman
     if (this.chairman) {
-      this.delegateReserve.push(this.chairman);
+      this.delegateReserve.add(this.chairman);
     }
 
     const newChariman = this.rulingParty.partyLeader || 'NEUTRAL';
 
+    // Fill the delegate reserve with everyone except the party leader
     if (this.rulingParty.partyLeader !== undefined) {
       this.rulingParty.delegates.remove(this.rulingParty.partyLeader);
     }
-    // Fill the delegate reserve with everyone except the party leader
-    this.delegateReserve = this.delegateReserve.concat(Array.from(this.rulingParty.delegates.values()));
+    this.rulingParty.delegates.forEachMultiplicity((count, playerId) => {
+      this.delegateReserve.add(playerId, count);
+    });
+
 
     // Clean the party
     this.rulingParty.partyLeader = undefined;
@@ -442,7 +444,7 @@ export class Turmoil {
 
   // Return number of delegates
   public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer, source: 'lobby' | 'reserve' | 'both'): number {
-    const delegatesInReserve = this.delegateReserve.filter((p) => p === playerId).length;
+    const delegatesInReserve = this.delegateReserve.get(playerId);
     const delegatesInLobby = (playerId !== 'NEUTRAL' && this.lobby.has(playerId)) ? 1: 0;
 
     switch (source) {
@@ -478,7 +480,7 @@ export class Turmoil {
       rulingParty: this.rulingParty.name,
       dominantParty: this.dominantParty.name,
       lobby: Array.from(this.lobby),
-      delegateReserve: this.delegateReserve,
+      delegateReserve: Array.from(this.delegateReserve.values()),
       parties: this.parties.map((p) => {
         return {
           name: p.name,
@@ -504,7 +506,7 @@ export class Turmoil {
 
     turmoil.lobby = new Set(d.lobby);
 
-    turmoil.delegateReserve = d.delegateReserve;
+    turmoil.delegateReserve = MultiSet.from(d.delegateReserve);
 
     turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData);
 

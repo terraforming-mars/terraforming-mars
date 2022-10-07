@@ -32,7 +32,7 @@ describe('LobbyHalls', function() {
   });
 
   it('play, not enough delegates', () => {
-    turmoil.delegateReserve = [];
+    turmoil.delegateReserve.clear();
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
     card.play(player);

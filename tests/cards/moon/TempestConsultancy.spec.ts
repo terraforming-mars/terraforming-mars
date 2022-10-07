@@ -36,7 +36,7 @@ describe('TempestConsultancy', () => {
   it('cannot act, not enough delegates', () => {
     player.tagsForTest = {moon: 5};
     expect(card.canAct(player)).is.true;
-    turmoil.delegateReserve = [];
+    turmoil.delegateReserve.clear();
     expect(card.canAct(player)).is.false;
   });
 
@@ -72,7 +72,8 @@ describe('TempestConsultancy', () => {
 
   it('action, 3 delegates, only 2 available', () => {
     player.tagsForTest = {moon: 16};
-    turmoil.delegateReserve = [player.id, player.id];
+    turmoil.delegateReserve.clear();
+    turmoil.delegateReserve.add(player.id, 2);
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(2);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;

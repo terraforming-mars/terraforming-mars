@@ -84,7 +84,7 @@ describe('Turmoil', function() {
   it('Do not send delegate from reserve when reserve is empty', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     greens.delegates.clear();
-    turmoil.delegateReserve = [];
+    turmoil.delegateReserve.clear();
 
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
     expect(greens.delegates.size).eq(0);
@@ -696,9 +696,9 @@ describe('Turmoil', function() {
     expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');
     expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
     expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
-    expect(t.delegateReserve).deep.eq(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
+    expect(Array.from(t.delegateReserve.values())).to.have.members(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
     expect(t.rulingParty!.description).eq('Want to see a new Earth as soon as possible.');
-    expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
+    expect(t.getPartyByName(PartyName.KELVINISTS).description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
   });
 
   function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {

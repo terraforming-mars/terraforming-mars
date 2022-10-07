@@ -28,7 +28,7 @@ describe('DeclarationOfIndependence', function() {
     player.tagsForTest = {mars: 6};
     expect(player.canPlay(card)).is.true;
 
-    turmoil.delegateReserve = [];
+    turmoil.delegateReserve.clear();
     expect(player.canPlay(card)).is.false;
   });
 

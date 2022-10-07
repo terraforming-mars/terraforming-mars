@@ -36,10 +36,12 @@ describe('LunaPoliticalInstitute', () => {
   });
 
   it('can act', () => {
-    turmoil.delegateReserve = [player.id];
+    turmoil.delegateReserve.clear();
+    turmoil.delegateReserve.add(player.id);
     expect(card.canAct(player)).is.true;
 
-    turmoil.delegateReserve = ['NEUTRAL'];
+    turmoil.delegateReserve.clear();
+    turmoil.delegateReserve.add('NEUTRAL');
     expect(card.canAct(player)).is.false;
   });
 

@@ -56,7 +56,7 @@ import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {SeededRandom} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
-import {Multiset} from './utils/Multiset';
+import {MultiSet} from 'mnemonist';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {PathfindersData} from './pathfinders/PathfindersData';
@@ -1340,8 +1340,8 @@ export class Game implements Logger {
   }
 
   public grantSpaceBonuses(player: Player, space: ISpace) {
-    const bonuses = new Multiset(space.bonus);
-    bonuses.entries().forEach(([bonus, count]) => {
+    const bonuses = MultiSet.from(space.bonus);
+    bonuses.forEachMultiplicity((count: number, bonus: SpaceBonus) => {
       this.grantSpaceBonus(player, bonus, count);
     });
   }

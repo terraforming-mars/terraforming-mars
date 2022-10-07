@@ -83,15 +83,11 @@ export class Turmoil {
       // Begin with one delegate in the lobby
       turmoil.lobby.add(player.id);
       // Begin with six delegates in the delegate reserve
-      for (let i = 0; i < PLAYER_DELEGATES_COUNT - 1; i++) {
-        turmoil.delegateReserve.add(player.id);
-      }
+      turmoil.delegateReserve.add(player.id, PLAYER_DELEGATES_COUNT);
     });
 
     // Begin with 13 neutral delegates in the reserve
-    for (let i = 0; i < 13; i++) {
-      turmoil.delegateReserve.add('NEUTRAL');
-    }
+    turmoil.delegateReserve.add('NEUTRAL', 13);
 
     turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties);
     // Note: this call relies on an instance of Game that will not be fully formed.

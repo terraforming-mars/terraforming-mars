@@ -33,17 +33,15 @@ export class SendDelegateToArea extends DeferredAction {
     let parties = this.turmoil.parties;
     if (this.options.replace) {
       parties = this.turmoil.parties.filter((party) => {
-        if (party.delegates.length < 2) return false;
+        if (party.delegates.size < 2) return false;
 
         for (const delegate of party.delegates) {
           if (delegate !== this.options.replace) continue;
           if (delegate !== party.partyLeader) return true;
-          return party.delegates.filter((delegate) => delegate === this.options.replace).length > 1;
+          return party.delegates.get(this.options.replace) > 1;
         }
         return false;
       });
-    } else {
-      parties = this.turmoil.parties;
     }
 
     return parties.map((party) => party.name);

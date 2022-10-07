@@ -36,7 +36,6 @@ import {DarksideMeteorBombardment} from '../../src/server/cards/moon/DarksideMet
 import {LunaStagingStation} from '../../src/server/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TileType} from '../../src/common/TileType';
-import {PlayerId} from '../../src/common/Types';
 
 describe('Turmoil', function() {
   let player: TestPlayer;
@@ -60,60 +59,57 @@ describe('Turmoil', function() {
 
   it('Correctly send delegate from the lobby', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
-    greens.delegates = [];
+    greens.delegates.clear();
 
     expect(turmoil.lobby).contains(player.id);
 
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
 
-    expect(greens.delegates).has.lengthOf(1);
-    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
+    expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
     expect(turmoil.lobby).does.not.contain(player.id);
   });
 
   it('Correctly send delegate from the reserve', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
-    greens.delegates = [];
+    greens.delegates.clear();
     expect(turmoil.lobby).contains(player.id);
 
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
 
-    expect(greens.delegates).has.lengthOf(1);
-    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
+    expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
     expect(turmoil.lobby).contains(player.id);
   });
 
 
   it('Do not send delegate from reserve when reserve is empty', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
-    greens.delegates = [];
+    greens.delegates.clear();
     turmoil.delegateReserve = [];
 
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
-    expect(greens.delegates).has.lengthOf(0);
+    expect(greens.delegates.size).eq(0);
   });
 
   it('Counts influence correctly for dominant party', function() {
-    turmoil.parties.forEach((party) => party.delegates = []);
+    turmoil.parties.forEach((party) => party.delegates.clear());
 
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    expect(greens.delegates).has.lengthOf(1);
+    expect(greens.delegates.size).eq(1);
 
     // 1 influence: Leader of dominant party
-    expect(game.getPlayerById(greens.delegates[0] as PlayerId)).to.eq(player);
-    const greensPartyLeader = game.getPlayerById(greens.partyLeader as PlayerId);
-    expect(greensPartyLeader).to.eq(player);
+    expect(Array.from(greens.delegates.values())).to.deep.eq([player.id]);
+    expect(greens.partyLeader).to.eq(player.id);
     expect(turmoil.getPlayerInfluence(player)).to.eq(1);
 
     // 2 influence: Leader of dominant party + at least 1 non-leader delegate in party
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    expect(greens.delegates).has.lengthOf(2);
+    expect(greens.delegates.size).eq(2);
     expect(turmoil.getPlayerInfluence(player)).to.eq(2);
   });
 
   it('Chairman gives 1 influence', function() {
-    turmoil.parties.forEach((party) => party.delegates = []);
+    turmoil.parties.forEach((party) => party.delegates.clear());
     turmoil.chairman = player.id;
     expect(turmoil.getPlayerInfluence(player)).to.eq(1);
   });
@@ -121,8 +117,8 @@ describe('Turmoil', function() {
   it('Correctly set dominant party', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     const reds = turmoil.getPartyByName(PartyName.REDS)!;
-    greens.delegates = [];
-    reds.delegates = [];
+    greens.delegates.clear();
+    reds.delegates.clear();
 
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
@@ -143,13 +139,13 @@ describe('Turmoil', function() {
     turmoil.sendDelegateToParty(player.id, party.name, game);
     turmoil.sendDelegateToParty(player.id, party.name, game);
     turmoil.sendDelegateToParty(player.id, party.name, game);
-    expect(game.getPlayerById(party.partyLeader as PlayerId)).to.eq(player);
+    expect(party.partyLeader).to.eq(player.id);
   });
 
   it('Correctly run end of generation', function() {
     // Eliminate the flaky cases where the current global event sends delegates to
     // parties, changing the dominant party outcome.
-    turmoil.parties.forEach((p) => p.delegates = []);
+    turmoil.parties.forEach((p) => p.delegates.clear());
 
     player.setTerraformRating(20);
     player2.setTerraformRating(21);
@@ -166,7 +162,7 @@ describe('Turmoil', function() {
     turmoil.endGeneration(game);
     runAllActions(game);
 
-    expect(game.getPlayerById(turmoil.chairman! as PlayerId)).to.eq(player);
+    expect(turmoil.chairman).to.eq(player.id);
     // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman
     expect(player.getTerraformRating()).to.eq(21);
     expect(player2.getTerraformRating()).to.eq(20);
@@ -655,10 +651,14 @@ describe('Turmoil', function() {
   it('serializes and deserializes keeping players', function() {
     // Party delegates have to be explicitly set since game set-up draws a global event which
     // adds delegates to a party. So parties[0] can be empty or not depending on the draw.
-    turmoil.parties[0].delegates = ['NEUTRAL', 'NEUTRAL', 'p-fancy-pants'];
+    const party = turmoil.parties[0];
+    party.delegates.add('NEUTRAL', 2);
+    party.delegates.add('p-fancy-pants');
+    party.partyLeader = 'p-leader';
     const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
     const deserialized = Turmoil.deserialize(serialized);
-    expect(deserialized.parties[0].getPresentPlayers()).to.have.members(['NEUTRAL', 'p-fancy-pants']);
+    expect(Array.from(deserialized.parties[0].delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', 'p-fancy-pants']);
+    expect(deserialized.parties[0].partyLeader).eq('p-leader');
   });
 
   it('deserialization', () => {

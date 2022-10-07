@@ -39,8 +39,14 @@ export class AnOfferYouCantRefuse extends Card {
     const hasDelegate = turmoil.hasDelegatesInReserve(player.id) || turmoil.lobby.has(player.id);
     if (!hasDelegate) return false;
 
-    return turmoil.parties.some((party) =>
-      party.delegates.some((delegate) => this.isReplaceableDelegate(delegate, player, party)));
+    for (const party of turmoil.parties) {
+      for (const delegate of party.delegates.keys()) {
+        if (this.isReplaceableDelegate(delegate, player, party)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   private moveToAnotherParty(game: Game, from: PartyName, delegate: PlayerId): OrOptions {
@@ -69,22 +75,22 @@ export class AnOfferYouCantRefuse extends Card {
     const turmoil = Turmoil.getTurmoil(game);
     const orOptions = new OrOptions();
 
-    turmoil.parties.forEach((party) => {
-      party.getPresentPlayers() // getPresentPlayers removes duplicates.
-        .forEach((delegate) => {
-          if (!this.isReplaceableDelegate(delegate, player, party)) return;
+    for (const party of turmoil.parties) {
+      for (const delegate of party.delegates.keys()) {
+        if (!this.isReplaceableDelegate(delegate, player, party)) {
+          continue;
+        }
 
-          const playerName = game.getPlayerById(delegate).name;
-          const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
-            const source = turmoil.hasDelegatesInReserve(player.id) ? 'reserve' : 'lobby';
-            turmoil.replaceDelegateFromParty(delegate, player.id, source, party.name, game);
-            turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
-            return this.moveToAnotherParty(game, party.name, player.id);
-          });
-          orOptions.options.push(option);
+        const playerName = game.getPlayerById(delegate).name;
+        const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
+          const source = turmoil.hasDelegatesInReserve(player.id) ? 'reserve' : 'lobby';
+          turmoil.replaceDelegateFromParty(delegate, player.id, source, party.name, game);
+          turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
+          return this.moveToAnotherParty(game, party.name, player.id);
         });
-    });
-
+        orOptions.options.push(option);
+      }
+    }
     return orOptions;
   }
 }

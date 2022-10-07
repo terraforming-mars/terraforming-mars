@@ -70,12 +70,12 @@ describe('LobbyHalls', function() {
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
-    expect(marsFirst.getDelegates(player.id)).eq(0);
+    expect(marsFirst.delegates.get(player.id)).eq(0);
 
     const options = cast(action.execute(), SelectPartyToSendDelegate);
     options.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(5);
-    expect(marsFirst.getDelegates(player.id)).eq(1);
+    expect(marsFirst.delegates.get(player.id)).eq(1);
   }
 });

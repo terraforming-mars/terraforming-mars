@@ -19,6 +19,7 @@ import {CardName} from '../../common/cards/CardName';
 import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectOption} from '../inputs/SelectOption';
 import {OrOptions} from '../inputs/OrOptions';
+import {MultiSet} from 'mnemonist';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -191,10 +192,10 @@ export class Turmoil {
   public checkDominantParty(): void {
     // If there is a dominant party
     const sortParties = [...this.parties].sort(
-      (p1, p2) => p2.delegates.length - p1.delegates.length,
+      (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
-    const max = sortParties[0].delegates.length;
-    if (this.dominantParty.delegates.length !== max) {
+    const max = sortParties[0].delegates.size;
+    if (this.dominantParty.delegates.size !== max) {
       this.setNextPartyAsDominant(this.dominantParty);
     }
   }
@@ -202,9 +203,9 @@ export class Turmoil {
   // Function to get next dominant party taking into account the clockwise order
   public setNextPartyAsDominant(currentDominantParty: IParty) {
     const sortParties = [...this.parties].sort(
-      (p1, p2) => p2.delegates.length - p1.delegates.length,
+      (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
-    const max = sortParties[0].delegates.length;
+    const max = sortParties[0].delegates.size;
 
     const currentIndex = this.parties.indexOf(currentDominantParty);
 
@@ -225,7 +226,7 @@ export class Turmoil {
     const partiesOrdered = partiesToCheck.reverse();
 
     partiesOrdered.some((newParty) => {
-      if (newParty.delegates.length === max) {
+      if (newParty.delegates.size === max) {
         this.dominantParty = newParty;
         return true;
       }
@@ -307,16 +308,14 @@ export class Turmoil {
     const newChariman = this.rulingParty.partyLeader || 'NEUTRAL';
 
     if (this.rulingParty.partyLeader !== undefined) {
-      const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader);
-      // Remove the party leader from the delegates array
-      this.rulingParty.delegates.splice(index, 1);
+      this.rulingParty.delegates.remove(this.rulingParty.partyLeader);
     }
-    // Fill the delegate reserve
-    this.delegateReserve = this.delegateReserve.concat(this.rulingParty.delegates);
+    // Fill the delegate reserve with everyone except the party leader
+    this.delegateReserve = this.delegateReserve.concat(Array.from(this.rulingParty.delegates.values()));
 
     // Clean the party
     this.rulingParty.partyLeader = undefined;
-    this.rulingParty.delegates = [];
+    this.rulingParty.delegates.clear();
 
     this.setNewChairman(newChariman, game, /* setAgenda*/ true);
   }
@@ -397,7 +396,7 @@ export class Turmoil {
 
     const dominantParty : IParty = this.dominantParty;
     const isPartyLeader = dominantParty.partyLeader === player.id;
-    const delegateCount = dominantParty.delegates.filter((delegate) => delegate === player.id).length;
+    const delegateCount = dominantParty.delegates.get(player.id);
 
     if (isPartyLeader) {
       influence++;
@@ -433,7 +432,7 @@ export class Turmoil {
     }
 
     const party = this.getPartyByName(partyName);
-    return party.getDelegates(player.id) >= 2;
+    return party.delegates.count(player.id) >= 2;
   }
 
   // List players present in the reserve
@@ -483,7 +482,7 @@ export class Turmoil {
       parties: this.parties.map((p) => {
         return {
           name: p.name,
-          delegates: p.delegates,
+          delegates: Array.from(p.delegates.values()),
           partyLeader: p.partyLeader,
         };
       }),
@@ -511,7 +510,7 @@ export class Turmoil {
 
     d.parties.forEach((sp) => {
       const tp = turmoil.getPartyByName(sp.name);
-      tp.delegates = sp.delegates;
+      tp.delegates = MultiSet.from(sp.delegates);
       tp.partyLeader = sp.partyLeader;
     });
 

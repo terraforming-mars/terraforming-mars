@@ -15,7 +15,7 @@ describe('RedTourismWave', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const reds = game.turmoil!.getPartyByName(PartyName.REDS)!;
-    reds.delegates.push(player.id, player.id);
+    reds.delegates.add(player.id, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const tharsis = game.board.getSpace(SpaceName.THARSIS_THOLUS);

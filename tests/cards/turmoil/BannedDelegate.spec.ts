@@ -37,7 +37,7 @@ describe('Banned Delegate', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
-    const initialDelegatesCount = greens.delegates.length;
+    const initialDelegatesCount = greens.delegates.size;
 
     const result = card.play(player);
 
@@ -50,6 +50,6 @@ describe('Banned Delegate', function() {
       orOptions.options.forEach((option) => option.cb(cast(option, SelectDelegate).players[0]));
     }
 
-    expect(greens.delegates).has.lengthOf(initialDelegatesCount - 1);
+    expect(greens.delegates.size).eq(initialDelegatesCount - 1);
   });
 });

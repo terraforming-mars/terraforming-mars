@@ -22,9 +22,9 @@ describe('ParadigmBreakdown', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player.id);
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     const asteroid = new Asteroid();
     const dustSeals = new DustSeals();

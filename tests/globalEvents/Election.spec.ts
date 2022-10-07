@@ -25,7 +25,7 @@ describe('Election', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     expect(card.getScore(player, turmoil, game)).eq(1);
     expect(card.getScore(player2, turmoil, game)).eq(4);

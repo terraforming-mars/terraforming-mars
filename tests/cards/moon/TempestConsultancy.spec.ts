@@ -45,14 +45,14 @@ describe('TempestConsultancy', () => {
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
-    expect(marsFirst.getDelegates(player.id)).eq(0);
+    expect(marsFirst.delegates.get(player.id)).eq(0);
     card.action(player);
     const action = player.game.deferredActions.pop() as SendDelegateToArea;
     const options = action.execute();
     options!.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(5);
-    expect(marsFirst.getDelegates(player.id)).eq(1);
+    expect(marsFirst.delegates.get(player.id)).eq(1);
   });
 
   it('action, 3 delegates', () => {
@@ -60,14 +60,14 @@ describe('TempestConsultancy', () => {
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
-    expect(marsFirst.getDelegates(player.id)).eq(0);
+    expect(marsFirst.delegates.get(player.id)).eq(0);
     card.action(player);
     const action = player.game.deferredActions.pop() as SendDelegateToArea;
     const options = action.execute();
     options!.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(3);
-    expect(marsFirst.getDelegates(player.id)).eq(3);
+    expect(marsFirst.delegates.get(player.id)).eq(3);
   });
 
   it('action, 3 delegates, only 2 available', () => {
@@ -76,7 +76,7 @@ describe('TempestConsultancy', () => {
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(2);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
-    expect(marsFirst.getDelegates(player.id)).eq(0);
+    expect(marsFirst.delegates.get(player.id)).eq(0);
 
     card.action(player);
 
@@ -85,7 +85,7 @@ describe('TempestConsultancy', () => {
     options!.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(0);
-    expect(marsFirst.getDelegates(player.id)).eq(2);
+    expect(marsFirst.delegates.get(player.id)).eq(2);
   });
 
   it('new chairman', () => {

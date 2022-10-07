@@ -95,17 +95,11 @@ function getParties(game: Game): Array<PartyModel> {
     (turmoil) => {
       return turmoil.parties.map(function(party) {
         const delegates: Array<DelegatesModel> = [];
-        party.getPresentPlayers().forEach((player) => {
-          const number = party.getDelegates(player);
-          if (player !== 'NEUTRAL') {
-            delegates.push({
-              color: game.getPlayerById(player).color,
-              number: number,
-            });
-          } else {
-            delegates.push({color: Color.NEUTRAL, number: number});
-          }
-        });
+        for (const player of party.delegates.keys()) {
+          const number = party.delegates.count(player);
+          const color = player === 'NEUTRAL' ? Color.NEUTRAL : game.getPlayerById(player).color;
+          delegates.push({color, number});
+        }
         let partyLeader;
         if (party.partyLeader) {
           if (party.partyLeader === 'NEUTRAL') {

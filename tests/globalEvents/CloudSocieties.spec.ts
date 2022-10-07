@@ -16,7 +16,7 @@ describe('CloudSocieties', function() {
     turmoil.chairman = player.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player.id;
-    turmoil.dominantParty.delegates.push(player.id);
+    turmoil.dominantParty.delegates.add(player.id);
     card.resolve(game, turmoil);
     game.deferredActions.runNext();
     expect(player.playedCards[0].resourceCount).to.eq(3);

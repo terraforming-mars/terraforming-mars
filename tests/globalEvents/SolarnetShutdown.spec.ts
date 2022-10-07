@@ -25,8 +25,8 @@ describe('SolarnetShutdown', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(7);

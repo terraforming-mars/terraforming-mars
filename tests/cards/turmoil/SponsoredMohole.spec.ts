@@ -11,7 +11,7 @@ describe('SponsoredMohole', function() {
     const player = getTestPlayer(game, 0);
     expect(card.canPlay(player)).is.not.true;
 
-    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;
+    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS);
     kelvinists.delegates.push(player.id, player.id);
     expect(card.canPlay(player)).is.true;
 

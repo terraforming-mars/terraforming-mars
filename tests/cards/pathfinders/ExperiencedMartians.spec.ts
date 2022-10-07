@@ -41,7 +41,7 @@ describe('ExperiencedMartians', function() {
 
     expect(game.deferredActions.length).eq(1);
 
-    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     expect(marsFirst.getDelegates(player.id)).eq(0);

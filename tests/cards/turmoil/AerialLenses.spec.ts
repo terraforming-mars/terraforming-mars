@@ -24,7 +24,7 @@ describe('AerialLenses', function() {
   it('Can play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;
+    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS);
     kelvinists.delegates.push(player.id, player.id);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });

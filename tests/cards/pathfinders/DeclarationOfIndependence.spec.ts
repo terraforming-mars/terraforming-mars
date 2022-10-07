@@ -36,7 +36,7 @@ describe('DeclarationOfIndependence', function() {
   it('play', function() {
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
-    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     expect(marsFirst.getDelegates(player.id)).eq(0);
     card.play(player);
     runAllActions(player.game);

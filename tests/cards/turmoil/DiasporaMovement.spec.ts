@@ -26,7 +26,7 @@ describe('DiasporaMovement', function() {
 
     game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
-    reds = turmoil.getPartyByName(PartyName.REDS)!;
+    reds = turmoil.getPartyByName(PartyName.REDS);
   });
 
   it('Can not play', function() {

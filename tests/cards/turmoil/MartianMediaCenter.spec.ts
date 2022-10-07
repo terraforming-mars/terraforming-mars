@@ -12,7 +12,7 @@ describe('MartianMediaCenter', function() {
 
     expect(card.canPlay(player)).is.not.true;
 
-    const mars = game.turmoil!.getPartyByName(PartyName.MARS)!;
+    const mars = game.turmoil!.getPartyByName(PartyName.MARS);
     mars.delegates.push(player.id, player.id);
     expect(card.canPlay(player)).is.true;
 

@@ -14,7 +14,7 @@ export function assertSendDelegateToArea(player: Player, action: DeferredAction)
 
   const game = player.game;
   const turmoil = game.turmoil!;
-  const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+  const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
   const delegatesInReserve = turmoil.getAvailableDelegateCount(player.id, 'reserve');
   const delegatesInParty = marsFirst.getDelegates(player.id);

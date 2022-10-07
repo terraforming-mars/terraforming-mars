@@ -34,7 +34,7 @@ describe('Banned Delegate', function() {
     turmoil.chairman = player.id;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
     const initialDelegatesCount = greens.delegates.length;

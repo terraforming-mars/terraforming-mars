@@ -16,7 +16,7 @@ describe('VoteOfNoConfidence', function() {
     turmoil.chairman = 'NEUTRAL';
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-    const greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
+    const greens = game.turmoil!.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player.id;
     expect(player.canPlayIgnoringCost(card)).is.true;
 

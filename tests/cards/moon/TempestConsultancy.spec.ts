@@ -44,7 +44,7 @@ describe('TempestConsultancy', () => {
     player.tagsForTest = {moon: 5};
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
-    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     expect(marsFirst.getDelegates(player.id)).eq(0);
     card.action(player);
     const action = player.game.deferredActions.pop() as SendDelegateToArea;
@@ -59,7 +59,7 @@ describe('TempestConsultancy', () => {
     player.tagsForTest = {moon: 16};
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
-    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     expect(marsFirst.getDelegates(player.id)).eq(0);
     card.action(player);
     const action = player.game.deferredActions.pop() as SendDelegateToArea;
@@ -75,7 +75,7 @@ describe('TempestConsultancy', () => {
     turmoil.delegateReserve = [player.id, player.id];
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(2);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
-    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     expect(marsFirst.getDelegates(player.id)).eq(0);
 
     card.action(player);
@@ -105,7 +105,7 @@ describe('TempestConsultancy', () => {
     player.setCorporationForTest(card);
     turmoil.chairman = 'NEUTRAL';
 
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player.id;
 
     expect(player.getTerraformRating()).to.eq(20);

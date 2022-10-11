@@ -215,14 +215,14 @@ class RedsPolicy03 implements Policy {
           }
 
           if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon Habitat Rate', 'Confirm', () => {
+            orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm', () => {
               MoonExpansion.lowerHabitatRate(player, 1);
               return undefined;
             }));
           }
 
           if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon Mining Rate', 'Confirm', () => {
+            orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm', () => {
               MoonExpansion.lowerMiningRate(player, 1);
               return undefined;
             }));

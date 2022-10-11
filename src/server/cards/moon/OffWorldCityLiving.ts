@@ -24,7 +24,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
 
       metadata: {
         // Check the card for a clever icon.
-        description: 'Increase your M€ production 1 step per city tile NOT ON MARS. Increase Habitat Rate 1 step.',
+        description: 'Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.',
         cardNumber: 'M53',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).slash().city({all, secondaryTag: Tag.SPACE}).br;

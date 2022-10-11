@@ -14,7 +14,7 @@ describe('RedTourismWave', function() {
     const player = getTestPlayer(game, 0);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-    const reds = game.turmoil!.getPartyByName(PartyName.REDS)!;
+    const reds = game.turmoil!.getPartyByName(PartyName.REDS);
     reds.delegates.add(player.id, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 

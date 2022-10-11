@@ -19,7 +19,7 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
       },
 
       metadata: {
-        description: 'Place a habitat tile on The Moon and raise the Habitat Rate 1 step. Increase your M€ production 1 step.',
+        description: 'Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});

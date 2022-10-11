@@ -15,7 +15,7 @@ export enum RequirementType {
     PRODUCTION = 'production',
     PARTY = 'party',
     REMOVED_PLANTS = 'Removed plants',
-    HABITAT_RATE = 'Habitat Rate',
+    HABITAT_RATE = 'habitat rate',
     MINING_RATE = 'Mining rate',
     LOGISTIC_RATE = 'Logistic rate',
     HABITAT_TILES = 'Habitat tiles',

@@ -58,7 +58,7 @@ describe('Turmoil', function() {
   });
 
   it('Correctly send delegate from the lobby', function() {
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.delegates.clear();
 
     expect(turmoil.lobby).contains(player.id);
@@ -70,7 +70,7 @@ describe('Turmoil', function() {
   });
 
   it('Correctly send delegate from the reserve', function() {
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.delegates.clear();
     expect(turmoil.lobby).contains(player.id);
 
@@ -82,7 +82,7 @@ describe('Turmoil', function() {
 
 
   it('Do not send delegate from reserve when reserve is empty', function() {
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.delegates.clear();
     turmoil.delegateReserve.clear();
 
@@ -93,7 +93,7 @@ describe('Turmoil', function() {
   it('Counts influence correctly for dominant party', function() {
     turmoil.parties.forEach((party) => party.delegates.clear());
 
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     expect(greens.delegates.size).eq(1);
 
@@ -115,8 +115,8 @@ describe('Turmoil', function() {
   });
 
   it('Correctly set dominant party', function() {
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
-    const reds = turmoil.getPartyByName(PartyName.REDS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
+    const reds = turmoil.getPartyByName(PartyName.REDS);
     greens.delegates.clear();
     reds.delegates.clear();
 
@@ -135,7 +135,7 @@ describe('Turmoil', function() {
   });
 
   it('Correctly set party leader', function() {
-    const party = turmoil.getPartyByName(PartyName.GREENS)!;
+    const party = turmoil.getPartyByName(PartyName.GREENS);
     turmoil.sendDelegateToParty(player.id, party.name, game);
     turmoil.sendDelegateToParty(player.id, party.name, game);
     turmoil.sendDelegateToParty(player.id, party.name, game);

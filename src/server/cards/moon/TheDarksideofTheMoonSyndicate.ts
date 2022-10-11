@@ -7,7 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Multiset} from '../../utils/Multiset';
+import {MultiSet} from 'mnemonist';
 import {Resources} from '../../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -90,13 +90,13 @@ export class TheDarksideofTheMoonSyndicate extends Card implements ICorporationC
     }
     const game = activePlayer.game;
     if (MoonExpansion.MOON_TILES.has(space.tile.tileType)) {
-      const costs = new Multiset<Player>();
+      const costs = new MultiSet<Player>();
       MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
         if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
           costs.add(space.player, 2);
         }
       });
-      costs.entries().forEach(([target, qty]) => {
+      costs.forEachMultiplicity((qty, target) => {
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);

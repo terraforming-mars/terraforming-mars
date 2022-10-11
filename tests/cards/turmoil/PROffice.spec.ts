@@ -17,7 +17,7 @@ describe('PROffice', function() {
 
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-    const unity = game.turmoil!.getPartyByName(PartyName.UNITY)!;
+    const unity = game.turmoil!.getPartyByName(PartyName.UNITY);
     unity.delegates.add(player.id, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 

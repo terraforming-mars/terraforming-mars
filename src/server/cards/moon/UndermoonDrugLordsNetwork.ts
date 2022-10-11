@@ -19,7 +19,7 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
       },
 
       metadata: {
-        description: 'Increase your M€ production 1 step per 2 steps of Habitat Rate.',
+        description: 'Increase your M€ production 1 step per 2 steps of habitat rate.',
         cardNumber: 'M81',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {

@@ -64,13 +64,12 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
   }
 
   private spendResource(player: Player, amount: number) {
-    player.removeResourceFrom(this, amount);
+    player.removeResourceFrom(this, amount, {log: false});
 
     const megaCreditsGained = 3 * amount;
     player.megaCredits += megaCreditsGained;
 
-    const logText = 'gain ' + megaCreditsGained + ' M€';
-    LogHelper.logRemoveResource(player, this, amount, logText);
+    LogHelper.logRemoveResource(player, this, amount, `gain ${megaCreditsGained} M€`);
     return undefined;
   }
 }

@@ -16,7 +16,7 @@ describe('ParliamentHall', function() {
 
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-    const mars = game.turmoil!.getPartyByName(PartyName.MARS)!;
+    const mars = game.turmoil!.getPartyByName(PartyName.MARS);
     mars.delegates.add(player.id, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 

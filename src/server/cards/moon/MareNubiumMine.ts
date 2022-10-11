@@ -24,7 +24,7 @@ export class MareNubiumMine extends Card {
       reserveUnits: {titanium: 1},
 
       metadata: {
-        description: 'Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.',
+        description: 'Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.',
         cardNumber: 'M02',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1);

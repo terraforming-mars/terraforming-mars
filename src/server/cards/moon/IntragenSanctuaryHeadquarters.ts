@@ -30,7 +30,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
 
       metadata: {
         description: 'You start with 38 M€. ' +
-        'As your first action, place a habitat tile on The Moon and raise the Habitat Rate 1 step. 1 VP for every 2 animals on this card.',
+        'As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).br;

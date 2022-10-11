@@ -22,14 +22,14 @@ describe('PoliticalAlliance', function() {
   });
 
   it('Can not play', function() {
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player.id;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
-    const reds = turmoil.getPartyByName(PartyName.REDS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
+    const reds = turmoil.getPartyByName(PartyName.REDS);
     greens.partyLeader = player.id;
     reds.partyLeader = player.id;
     expect(player.canPlayIgnoringCost(card)).is.true;

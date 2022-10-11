@@ -21,7 +21,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.habitatRate(4)),
 
       metadata: {
-        description: 'Requires 4 Habitat Rate. All players pay 3M€ for each habitat tile they own.',
+        description: 'Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.',
         cardNumber: 'M51',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(3, {all}).slash().moonHabitat({size: Size.SMALL, all});

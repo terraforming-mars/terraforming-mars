@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CulturalMetropolis} from '../../../src/server/cards/turmoil/CulturalMetropolis';
-import {PLAYER_DELEGATES_COUNT} from '../../../src/common/constants';
+import {RESERVE_DELEGATES_COUNT} from '../../../src/common/constants';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
@@ -43,7 +43,7 @@ describe('Cultural Metropolis', function() {
     player.production.add(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
-    for (let i = 0; i < PLAYER_DELEGATES_COUNT - 4; i++) {
+    for (let i = 0; i < RESERVE_DELEGATES_COUNT - 4; i++) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     }
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(2);

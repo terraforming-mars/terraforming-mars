@@ -8,7 +8,7 @@ import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
-import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../../common/constants';
+import {MAX_COLONY_TRACK_POSITION, RESERVE_DELEGATES_COUNT} from '../../common/constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
@@ -257,7 +257,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         Turmoil.ifTurmoil(game, (turmoil) => {
-          let partyDelegateCount = PLAYER_DELEGATES_COUNT - turmoil.getAvailableDelegateCount(player.id, 'reserve');
+          let partyDelegateCount = RESERVE_DELEGATES_COUNT - turmoil.getAvailableDelegateCount(player.id, 'reserve');
           if (turmoil.lobby.has(player.id)) partyDelegateCount--;
           if (turmoil.chairman === player.id) partyDelegateCount--;
 

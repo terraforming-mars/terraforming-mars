@@ -33,18 +33,15 @@ export class ColoniesHandler {
    * method.
    */
   public static maybeActivateColony(colony: IColony, card: ICard): boolean {
-    if (colony.isActive === true) {
-      return true;
-    }
-    if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
-      colony.isActive = true;
-      return true;
-    }
+    if (colony.isActive !== true) {
+      if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === card.resourceType) {
+        colony.isActive = true;
+      }
 
-    if (colony.name === ColonyName.VENUS && card.tags.includes(Tag.VENUS)) {
-      colony.isActive = true;
-      return true;
+      if (colony.name === ColonyName.VENUS && card.tags.includes(Tag.VENUS) && card.resourceType !== undefined) {
+        colony.isActive = true;
+      }
     }
-    return false;
+    return colony.isActive;
   }
 }

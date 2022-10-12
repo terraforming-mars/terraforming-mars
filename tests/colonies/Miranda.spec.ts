@@ -38,7 +38,7 @@ describe('Miranda', function() {
     miranda.addColony(player);
     runAllActions(game);
     // Should directly add to Pets, since there's no other target
-    expect(pets.resourceCount).to.eq(2); // Pets starts with 1 resource
+    expect(pets.resourceCount).to.eq(2);
   });
 
   it('Should trade', function() {

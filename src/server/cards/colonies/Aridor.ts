@@ -11,6 +11,7 @@ import {SelectColony} from '../../inputs/SelectColony';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {SerializedCard} from '@/server/SerializedCard';
 
 export class Aridor extends Card implements ICorporationCard {
   constructor() {
@@ -83,5 +84,13 @@ export class Aridor extends Card implements ICorporationCard {
       }
     }
     return undefined;
+  }
+
+  public serialize(serialized: SerializedCard) {
+    serialized.allTags = Array.from(this.allTags);
+  }
+
+  public deserialize(serialized: SerializedCard) {
+    this.allTags = new Set(serialized.allTags);
   }
 }

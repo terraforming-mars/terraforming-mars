@@ -16,6 +16,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
+import {Player} from '../../../src/server/Player';
 
 describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
@@ -191,5 +192,28 @@ describe('PharmacyUnion', function() {
     player.playCard(new Virus());
     runAllActions(player.game);
     expect(player.megaCredits).eq(3);
+  });
+
+  it('serialization test for Player with Pharmacy Union, when false', () => {
+    card.play(player);
+    card.isDisabled = false;
+    const serializedPlayer = player.serialize();
+
+    expect(serializedPlayer.corporations?.[0].isDisabled).is.false;
+
+    const reserializedPlayer = Player.deserialize(serializedPlayer);
+    const reserializedPharmacyUnion = cast(reserializedPlayer.corporations?.[0], PharmacyUnion);
+    expect(reserializedPharmacyUnion.isDisabled).is.false;
+  });
+
+  it('serialization test for Player with Pharmacy Union, when true', () => {
+    card.isDisabled = true;
+    const serializedPlayer = player.serialize();
+
+    expect(serializedPlayer.corporations?.[0].isDisabled).is.true;
+
+    const reserializedPlayer = Player.deserialize(serializedPlayer);
+    const reserializedPharmacyUnion = cast(reserializedPlayer.corporations?.[0], PharmacyUnion);
+    expect(reserializedPharmacyUnion.isDisabled).is.true;
   });
 });

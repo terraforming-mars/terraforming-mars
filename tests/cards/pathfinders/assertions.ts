@@ -16,13 +16,13 @@ export function assertSendDelegateToArea(player: Player, action: DeferredAction)
   const turmoil = game.turmoil!;
   const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
-  const delegatesInReserve = turmoil.getAvailableDelegateCount(player.id, 'reserve');
+  const delegatesInReserve = turmoil.getAvailableDelegateCount(player.id);
   const delegatesInParty = marsFirst.delegates.get(player.id);
 
   const options = cast(sendDelegate.execute(), SelectPartyToSendDelegate);
   options.cb(marsFirst.name);
 
-  expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(delegatesInReserve - 1);
+  expect(turmoil.getAvailableDelegateCount(player.id)).eq(delegatesInReserve - 1);
   expect(marsFirst.delegates.get(player.id)).eq(delegatesInParty + 1);
 }
 

@@ -38,7 +38,7 @@ export class Recruitment extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new SendDelegateToArea(player, 'Select which Neutral delegate to remove', {replace: 'NEUTRAL', source: 'reserve'}));
+    player.game.defer(new SendDelegateToArea(player, 'Select which Neutral delegate to remove', {replace: 'NEUTRAL'}));
     return undefined;
   }
 }

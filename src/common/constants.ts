@@ -29,7 +29,8 @@ export const ENERGY_TRADE_COST = 3;
 export const TITANIUM_TRADE_COST = 3;
 
 // Turmoil
-export const RESERVE_DELEGATES_COUNT = 6;
+export const RESERVE_DELEGATES_COUNT = 7;
+export const NEUTRAL_DELEGATES_COUNT = 13;
 export const REDS_RULING_POLICY_COST = 3;
 export const POLITICAL_AGENDAS_MAX_ACTION_USES = 3;
 

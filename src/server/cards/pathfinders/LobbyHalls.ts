@@ -41,8 +41,8 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
   public override bespokePlay(player: Player) {
     player.game.defer(new DeclareCloneTag(player, this));
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {
-      player.game.defer(new SendDelegateToArea(player, undefined, {source: 'reserve'}));
+    if (turmoil.getAvailableDelegateCount(player.id) > 0) {
+      player.game.defer(new SendDelegateToArea(player));
     }
     return undefined;
   }

@@ -61,7 +61,7 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
       );
     }));
 
-    player.game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', {count: 2, source: 'reserve'}));
+    player.game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', {count: 2}));
     return undefined;
   }
 }

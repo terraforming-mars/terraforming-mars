@@ -50,6 +50,9 @@ describe('Turmoil', function() {
     game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     game.phase = Phase.ACTION;
     turmoil = game.turmoil!;
+    // Eliminate the flaky cases where the current global event sends delegates to
+    // parties, changing the dominant party outcome.
+    turmoil.parties.forEach((p) => p.delegates.clear());
   });
 
   it('Should initialize with right defaults', function() {
@@ -143,10 +146,6 @@ describe('Turmoil', function() {
   });
 
   it('Correctly run end of generation', function() {
-    // Eliminate the flaky cases where the current global event sends delegates to
-    // parties, changing the dominant party outcome.
-    turmoil.parties.forEach((p) => p.delegates.clear());
-
     player.setTerraformRating(20);
     player2.setTerraformRating(21);
 

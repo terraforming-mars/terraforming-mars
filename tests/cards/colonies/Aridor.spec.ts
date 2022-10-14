@@ -7,6 +7,9 @@ import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 import {Game} from '../../../src/server/Game';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
+import {Tag} from '../../../src/common/cards/Tag';
+import {Player} from '../../../src/server/Player';
+import {cast} from '../../TestingUtils';
 
 let card: Aridor;
 let game: Game;
@@ -82,5 +85,23 @@ describe('Aridor', function() {
 
     expect(game.colonies).includes(venus);
     expect(venus.isActive).is.true;
+  });
+
+  it('serialization test for Player with Aridor', () => {
+    card.play(player);
+    card.onCardPlayed(player, new Predators());
+    card.onCardPlayed(player2, new ResearchOutpost());
+    card.onCardPlayed(player, new ResearchOutpost());
+
+    expect(Array.from(card.allTags)).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
+
+    const serializedPlayer = player.serialize();
+
+    expect(serializedPlayer.corporations?.[0].allTags).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
+
+    const reserializedPlayer = Player.deserialize(serializedPlayer);
+    const reserializedAridor = cast(reserializedPlayer.corporations?.[0], Aridor);
+
+    expect(Array.from(reserializedAridor.allTags)).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
   });
 });

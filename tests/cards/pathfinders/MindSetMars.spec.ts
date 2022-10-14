@@ -59,11 +59,12 @@ describe('MindSetMars', function() {
   it('play delegates', () => {
     card.resourceCount = 3;
 
-    turmoil.delegateReserve = [];
+    turmoil.delegateReserve.clear();
     card.action(player);
     expect(game.deferredActions.length).eq(0);
 
-    turmoil.delegateReserve = [player.id, player.id, player.id];
+    turmoil.delegateReserve.clear();
+    turmoil.delegateReserve.add(player.id, 3);
     cast(card.action(player), SelectOption).cb();
     expect(game.deferredActions.length).eq(1);
     assertSendDelegateToArea(player, game.deferredActions.pop()!);
@@ -73,7 +74,7 @@ describe('MindSetMars', function() {
   it('play city', () => {
     card.resourceCount = 7;
 
-    turmoil.delegateReserve = [];
+    turmoil.delegateReserve.clear();
     cast(card.action(player), SelectOption).cb();
     expect(game.deferredActions.length).eq(1);
     assertPlaceCityTile(player, game.deferredActions.pop()!);
@@ -83,7 +84,7 @@ describe('MindSetMars', function() {
   it('both are available, place delegates', () => {
     card.resourceCount = 7;
 
-    turmoil.delegateReserve = [player.id, player.id, player.id];
+    turmoil.delegateReserve.add(player.id, 3);
     const options = cast(card.action(player), OrOptions);
     expect(options.options).has.length(2);
 
@@ -98,7 +99,7 @@ describe('MindSetMars', function() {
   it('both are available, place a city', () => {
     card.resourceCount = 7;
 
-    turmoil.delegateReserve = [player.id, player.id, player.id];
+    turmoil.delegateReserve.add(player.id, 3);
     const options = cast(card.action(player), OrOptions);
     expect(options.options).has.length(2);
 

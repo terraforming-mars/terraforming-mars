@@ -31,7 +31,7 @@ describe('PoliticalUprising', function() {
 
     const turmoil = game.turmoil!;
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
-    expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(4);
+    expect(marsFirst.delegates.get(player.id)).eq(4);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 });

@@ -30,8 +30,8 @@ describe('Pallas', function() {
     player.popSelectInitialCards();
     player2.popSelectInitialCards();
 
-    greens.delegates = [];
-    scientists.delegates = [];
+    greens.delegates.clear();
+    scientists.delegates.clear();
   });
 
   it('Should build', function() {
@@ -52,23 +52,23 @@ describe('Pallas', function() {
     pallas.trackPosition = 4; // Send 2 delegates
     pallas.trade(player);
 
-    expect(greens.delegates).is.empty;
-    expect(scientists.delegates).is.empty;
+    expect(greens.delegates.size).eq(0);
+    expect(scientists.delegates.size).eq(0);
 
     runAllActions(game);
 
     const selectParty = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
     selectParty.cb(PartyName.GREENS);
-    expect(greens.delegates).deep.eq([player.id]);
-    expect(scientists.delegates).is.empty;
+    expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
+    expect(scientists.delegates.size).eq(0);
 
     runAllActions(game);
 
     const selectParty2 = cast(player.popWaitingFor(), SelectPartyToSendDelegate);
     selectParty2.cb(PartyName.SCIENTISTS);
 
-    expect(greens.delegates).deep.eq([player.id]);
-    expect(scientists.delegates).deep.eq([player.id]);
+    expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
+    expect(Array.from(scientists.delegates.values())).deep.eq([player.id]);
 
     runAllActions(game);
 

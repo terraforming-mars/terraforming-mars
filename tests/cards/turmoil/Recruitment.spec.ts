@@ -11,7 +11,7 @@ describe('Recruitment', function() {
     const player = getTestPlayer(game, 0);
 
     game.turmoil!.parties.forEach((party) => {
-      party.delegates = [];
+      party.delegates.clear();
     });
     expect(card.canPlay(player)).is.not.true;
 

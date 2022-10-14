@@ -14,7 +14,7 @@ describe('GMOContract', function() {
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
     const greens = turmoil.getPartyByName(PartyName.GREENS);
-    greens.delegates.push(player.id, player.id);
+    greens.delegates.add(player.id, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
     card.onCardPlayed(player, card);

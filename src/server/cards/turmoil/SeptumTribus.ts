@@ -39,7 +39,7 @@ export class SeptumTribus extends Card implements IActionCard, ICorporationCard 
 
   public action(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    const partiesWithPresence = turmoil.parties.filter((party) => party.delegates.includes(player.id));
+    const partiesWithPresence = turmoil.parties.filter((party) => party.delegates.has(player.id));
     player.addResource(Resources.MEGACREDITS, partiesWithPresence.length * 2, {log: true});
 
     return undefined;

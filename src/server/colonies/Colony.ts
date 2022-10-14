@@ -257,7 +257,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         Turmoil.ifTurmoil(game, (turmoil) => {
-          const partyDelegateCount = turmoil.parties.map((party) => party.delegates.filter((p) => p === player.id).length).reduce((a, b) => a + b, 0);
+          const partyDelegateCount = turmoil.parties.map((party) => party.delegates.get(player.id)).reduce((a, b) => a + b, 0);
           player.addResource(Resources.MEGACREDITS, partyDelegateCount, {log: true});
         });
         break;

@@ -11,6 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
 import {all} from '../Options';
+import {MultiSet} from 'mnemonist';
 
 export class BannedDelegate extends Card implements IProjectCard {
   constructor() {
@@ -35,23 +36,23 @@ export class BannedDelegate extends Card implements IProjectCard {
     const orOptions: Array<SelectDelegate> = [];
     // Take each party having more than just the party leader in the area
     turmoil.parties.forEach((party) => {
-      if (party.delegates.length > 1) {
+      if (party.delegates.size > 1) {
         // Remove the party leader from available choices
-        const delegates = party.delegates.slice();
+        const copy = MultiSet.from(party.delegates);
         if (party.partyLeader !== undefined) {
-          delegates.splice(party.delegates.indexOf(party.partyLeader), 1);
+          copy.remove(party.partyLeader);
         } else {
+          // This wouldn't happen normally.
           throw new Error(`partyLeader not defined for ${player.game.id}`);
         }
-        const playersId = Array.from(new Set<PlayerId | NeutralPlayer>(delegates));
         const players: Array<Player | NeutralPlayer> = [];
-        playersId.forEach((playerId) => {
+        for (const playerId of copy) {
           if (playerId === 'NEUTRAL') {
             players.push('NEUTRAL');
           } else {
             players.push(player.game.getPlayerById(playerId));
           }
-        });
+        }
 
         if (players.length > 0) {
           const selectDelegate = new SelectDelegate(players, 'Select player delegate to remove from ' + party.name + ' party', (selectedPlayer: Player | NeutralPlayer) => {

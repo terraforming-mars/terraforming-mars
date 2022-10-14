@@ -668,7 +668,12 @@ describe('Turmoil', function() {
     party.delegates.add('p-fancy-pants');
     party.partyLeader = 'p-leader';
     const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
+
+    // This assertion ensures that the expectations in deserialization work as expected.
+    expect(serialized.lobby).is.undefined;
+
     const deserialized = Turmoil.deserialize(serialized, players);
+
     expect(Array.from(deserialized.parties[0].delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', 'p-fancy-pants']);
     expect(deserialized.parties[0].partyLeader).eq('p-leader');
   });
@@ -684,8 +689,8 @@ describe('Turmoil', function() {
       'chairman': 'NEUTRAL',
       'rulingParty': 'Greens',
       'dominantParty': 'Unity',
-      'lobby': ['blue-id'],
-      'delegateReserve': ['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL'],
+      'usedFreeDelegateAction': ['p-blue-id'],
+      'delegateReserve': ['p-blue-id', 'p-red-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL'],
       'parties': [
         {'name': 'Mars First', 'delegates': []},
         {'name': 'Scientists', 'delegates': []},
@@ -705,8 +710,14 @@ describe('Turmoil', function() {
         'discarded': ['Pandemic']},
       'distantGlobalEvent': 'Eco Sabotage',
       'comingGlobalEvent': 'Celebrity Leaders',
-      'politicalAgendasData': {'thisAgenda': {'bonusId': 'none', 'policyId': 'none'}},
-    };
+      'politicalAgendasData': {
+        'thisAgenda': {
+          'bonusId': 'none', 'policyId': 'none',
+        },
+        'agendas': [],
+        'agendaStyle': 'Random',
+      },
+    } as SerializedTurmoil;
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s, players);
 
@@ -714,9 +725,57 @@ describe('Turmoil', function() {
     expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');
     expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
     expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
-    expect(Array.from(t.delegateReserve.values())).to.have.members(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
+    expect(Array.from(t.delegateReserve.values())).to.have.members(['p-blue-id', 'p-red-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL']);
+    expect(Array.from(t.usedFreeDelegateAction.values())).has.members(['p-blue-id']);
     expect(t.rulingParty!.description).eq('Want to see a new Earth as soon as possible.');
     expect(t.getPartyByName(PartyName.KELVINISTS).description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
+  });
+
+  it('deserialization with legacy lobby', () => {
+    const players = [
+      TestPlayer.BLUE.newPlayer(),
+      TestPlayer.RED.newPlayer(),
+      TestPlayer.GREEN.newPlayer(),
+    ];
+
+    const json = {
+      'chairman': 'NEUTRAL',
+      'rulingParty': 'Greens',
+      'dominantParty': 'Unity',
+      'lobby': ['p-green-id', 'p-red-id'],
+      'delegateReserve': ['p-blue-id', 'p-red-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL'],
+      'parties': [
+        {'name': 'Mars First', 'delegates': []},
+        {'name': 'Scientists', 'delegates': []},
+        {'name': 'Unity', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
+        {'name': 'Greens', 'delegates': ['NEUTRAL'], 'partyLeader': 'NEUTRAL'},
+        {'name': 'Reds', 'delegates': []},
+        {'name': 'Kelvinists', 'delegates': []},
+      ],
+      'playersInfluenceBonus': [],
+      'globalEventDealer': {
+        'deck': [
+          'Solar Flare',
+          'Spin-Off Products',
+          'Dry Deserts',
+          'Mud Slides',
+          'Productivity'],
+        'discarded': ['Pandemic']},
+      'distantGlobalEvent': 'Eco Sabotage',
+      'comingGlobalEvent': 'Celebrity Leaders',
+      'politicalAgendasData': {
+        'thisAgenda': {
+          'bonusId': 'none', 'policyId': 'none',
+        },
+        'agendas': [],
+        'agendaStyle': 'Random',
+      },
+    } as SerializedTurmoil;
+    const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
+    const t = Turmoil.deserialize(s, players);
+
+    expect(Array.from(t.delegateReserve.values())).to.have.members(['p-blue-id', 'p-red-id', 'p-red-id', 'p-green-id', 'p-green-id', 'NEUTRAL', 'NEUTRAL']);
+    expect(Array.from(t.usedFreeDelegateAction.values())).has.members(['p-blue-id']);
   });
 
   function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {

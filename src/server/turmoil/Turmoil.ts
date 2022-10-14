@@ -12,7 +12,7 @@ import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {SerializedTurmoil} from './SerializedTurmoil';
-import {RESERVE_DELEGATES_COUNT} from '../../common/constants';
+import {DELEGATES_PER_PLAYER} from '../../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../../common/turmoil/Types';
 import {CardName} from '../../common/cards/CardName';
@@ -83,7 +83,7 @@ export class Turmoil {
       // Begin with one delegate in the lobby
       turmoil.lobby.add(player.id);
       // Begin with six delegates in the delegate reserve
-      turmoil.delegateReserve.add(player.id, RESERVE_DELEGATES_COUNT);
+      turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER - 1);
     });
 
     // Begin with 13 neutral delegates in the reserve

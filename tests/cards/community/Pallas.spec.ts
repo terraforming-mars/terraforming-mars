@@ -30,8 +30,8 @@ describe('Pallas', function() {
     player.popSelectInitialCards();
     player2.popSelectInitialCards();
 
-    greens.delegates = [];
-    scientists.delegates = [];
+    greens.delegates.clear();
+    scientists.delegates.clear();
   });
 
   it('Should build', function() {

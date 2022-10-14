@@ -82,8 +82,6 @@ export class Turmoil {
     game.getPlayersInGenerationOrder().forEach((player) => {
       turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER);
     });
-
-    // Begin with 13 neutral delegates in the reserve
     turmoil.delegateReserve.add('NEUTRAL', DELEGATES_FOR_NEUTRAL_PLAYER);
 
     turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties);
@@ -144,9 +142,6 @@ export class Turmoil {
     partyName: PartyName,
     game: Game): void {
     const party = this.getPartyByName(partyName);
-    // if (playerId !== 'NEUTRAL' && this.lobby.has(playerId)) {
-    //   this.lobby.delete(playerId);
-    // } else {
     if (this.delegateReserve.has(playerId)) {
       this.delegateReserve.remove(playerId);
     } else {
@@ -154,7 +149,6 @@ export class Turmoil {
       console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
       return;
     }
-    // }
     party.sendDelegate(playerId, game);
     this.checkDominantParty();
   }
@@ -419,6 +413,11 @@ export class Turmoil {
   // Return number of delegates
   public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer): number {
     return this.delegateReserve.get(playerId);
+  }
+
+  // List players present in the reserve
+  public getPresentPlayersInReserve(): Array<PlayerId | NeutralPlayer> {
+    return Array.from(new Set(this.delegateReserve));
   }
 
   // Check if player has delegates available

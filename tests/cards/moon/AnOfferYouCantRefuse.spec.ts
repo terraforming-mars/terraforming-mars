@@ -75,7 +75,7 @@ describe('AnOfferYouCantRefuse', () => {
     const switchParties = cast(options.options[2].cb(), OrOptions);
 
     expect(turmoil.getAvailableDelegateCount(player.id)).eq(6);
-    // TODO(kberg): rewrite this test, because it shouldn't be possible for red to have 7 delegates.
+    // TODO(kberg): rewrite this test, because it shouldn't be possible for red to have this many delegates.
     expect(turmoil.getAvailableDelegateCount(redPlayer.id)).eq(8);
     expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
 

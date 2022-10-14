@@ -53,7 +53,7 @@ describe('Turmoil', function() {
     // Eliminate the flaky cases where the current global event sends delegates to
     // parties, changing the dominant party outcome.
     turmoil.parties.forEach((p) => p.delegates.clear());
-    turmoil.delegateReserve.set('NEUTRAL', constants.NEUTRAL_DELEGATES_COUNT);
+    turmoil.delegateReserve.set('NEUTRAL', constants.DELEGATES_FOR_NEUTRAL_PLAYER);
   });
 
   it('Should initialize with right defaults', function() {

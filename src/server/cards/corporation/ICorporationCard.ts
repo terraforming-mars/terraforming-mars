@@ -2,6 +2,7 @@ import {ICard} from '../ICard';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardType} from '../../../common/cards/CardType';
+import {SerializedCard} from '../../SerializedCard';
 
 export interface ICorporationCard extends ICard {
   initialActionText?: string;
@@ -11,6 +12,9 @@ export interface ICorporationCard extends ICard {
   onCorpCardPlayed?: (player: Player, card: ICorporationCard) => PlayerInput | undefined;
   onProductionPhase?: (player: Player) => undefined; // For Pristar
   isDisabled?: boolean;
+
+  serialize?(serialized: SerializedCard): void;
+  deserialize?(serialized: SerializedCard): void;
 }
 
 export function isICorporationCard(card: ICard): card is ICorporationCard {

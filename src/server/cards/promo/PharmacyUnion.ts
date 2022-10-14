@@ -13,6 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resources} from '../../../common/Resources';
 import {all, digit, played} from '../Options';
+import {SerializedCard} from '@/server/SerializedCard';
 
 export class PharmacyUnion extends Card implements ICorporationCard {
   constructor() {
@@ -171,5 +172,13 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     }
 
     return undefined;
+  }
+
+  public serialize(serialized: SerializedCard) {
+    serialized.isDisabled = this.isDisabled;
+  }
+
+  public deserialize(serialized: SerializedCard) {
+    this.isDisabled = Boolean(serialized.isDisabled);
   }
 }

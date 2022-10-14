@@ -12,7 +12,7 @@ import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {SerializedTurmoil} from './SerializedTurmoil';
-import {NEUTRAL_DELEGATES_COUNT, RESERVE_DELEGATES_COUNT} from '../../common/constants';
+import {DELEGATES_FOR_NEUTRAL_PLAYER, DELEGATES_PER_PLAYER} from '../../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../../common/turmoil/Types';
 import {CardName} from '../../common/cards/CardName';
@@ -80,11 +80,11 @@ export class Turmoil {
     turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
     game.getPlayersInGenerationOrder().forEach((player) => {
-      turmoil.delegateReserve.add(player.id, RESERVE_DELEGATES_COUNT);
+      turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER);
     });
 
     // Begin with 13 neutral delegates in the reserve
-    turmoil.delegateReserve.add('NEUTRAL', NEUTRAL_DELEGATES_COUNT);
+    turmoil.delegateReserve.add('NEUTRAL', DELEGATES_FOR_NEUTRAL_PLAYER);
 
     turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties);
     // Note: this call relies on an instance of Game that will not be fully formed.

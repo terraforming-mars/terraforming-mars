@@ -684,7 +684,7 @@ export class Player {
     }
   }
 
-  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean, logZero?: boolean} = 1): void {
+  public addResourceTo(card: ICard, options: number | {qty?: number, log: boolean, logZero?: boolean} = 1): void {
     const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
 
     if (card.resourceCount !== undefined) {
@@ -1813,18 +1813,20 @@ export class Player {
 
     // If you can pay to add a delegate to a party.
     Turmoil.ifTurmoil(this.game, (turmoil) => {
-      let sendDelegate;
-      if (turmoil.lobby.has(this.id)) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && turmoil.hasDelegatesInReserve(this.id)) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
-      } else if (this.canAfford(5) && turmoil.hasDelegatesInReserve(this.id)) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
-      }
-      if (sendDelegate) {
-        const input = sendDelegate.execute();
-        if (input !== undefined) {
-          action.options.push(input);
+      if (turmoil.hasDelegatesInReserve(this.id)) {
+        let sendDelegate;
+        if (!turmoil.usedFreeDelegateAction.has(this.id)) {
+          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
+        } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3)) {
+          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
+        } else if (this.canAfford(5)) {
+          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
+        }
+        if (sendDelegate) {
+          const input = sendDelegate.execute();
+          if (input !== undefined) {
+            action.options.push(input);
+          }
         }
       }
     });

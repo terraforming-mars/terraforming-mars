@@ -13,11 +13,14 @@ import {Player} from '../src/server/Player';
 import {Color} from '../src/common/Color';
 import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
-import {formatLogMessage, testGameOptions} from './TestingUtils';
+import {cast, formatLogMessage, getSendADelegateOption, runAllActions, testGameOptions} from './TestingUtils';
 import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/server/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/server/cards/base/Pets';
 import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventName';
+import {TestPlayer} from './TestPlayer';
+import {SelectPartyToSendDelegate} from '../src/server/inputs/SelectPartyToSendDelegate';
+import {PartyName} from '../src/common/turmoil/PartyName';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -765,6 +768,42 @@ describe('Player', function() {
           'amount': -12,
         },
       });
+  });
+
+  it('Turmoil player action', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+
+    const turmoil = game.turmoil!;
+
+    expect(turmoil.usedFreeDelegateAction.has(player.id)).is.false;
+
+    const freeLobbyAction = cast(getSendADelegateOption(player), SelectPartyToSendDelegate);
+
+    expect(freeLobbyAction.title).eq('Send a delegate in an area (from lobby)');
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(0);
+
+    freeLobbyAction.cb(PartyName.KELVINISTS);
+    runAllActions(game);
+
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(1);
+
+    // Now the free lobby action is used, only the 5MC option is available.
+    player.megaCredits = 4;
+    expect(turmoil.usedFreeDelegateAction.has(player.id)).is.true;
+    expect(getSendADelegateOption(player)).is.undefined;
+
+    player.megaCredits = 5;
+    const selectParty = cast(getSendADelegateOption(player), SelectPartyToSendDelegate);
+
+    expect(selectParty.title).eq('Send a delegate in an area (5 M€)');
+
+    selectParty.cb(PartyName.KELVINISTS);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(0);
+    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player.id)).eq(2);
   });
 });
 

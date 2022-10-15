@@ -36,8 +36,9 @@ export class AnOfferYouCantRefuse extends Card {
   // You can play this if you have an available delegate, and if there are non-neutral non-leader delegates available to swap with.
   public override bespokeCanPlay(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    const hasDelegate = turmoil.hasDelegatesInReserve(player.id) || turmoil.lobby.has(player.id);
-    if (!hasDelegate) return false;
+    if (!turmoil.hasDelegatesInReserve(player.id)) {
+      return false;
+    }
 
     for (const party of turmoil.parties) {
       for (const delegate of party.delegates.keys()) {
@@ -61,7 +62,7 @@ export class AnOfferYouCantRefuse extends Card {
       } else {
         orOptions.options.push(new SelectOption(party.name, 'Select', () => {
           turmoil.removeDelegateFromParty(delegate, from, game);
-          turmoil.sendDelegateToParty(delegate, party.name, game, 'reserve');
+          turmoil.sendDelegateToParty(delegate, party.name, game);
           return undefined;
         }));
       }
@@ -83,8 +84,7 @@ export class AnOfferYouCantRefuse extends Card {
 
         const playerName = game.getPlayerById(delegate).name;
         const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
-          const source = turmoil.hasDelegatesInReserve(player.id) ? 'reserve' : 'lobby';
-          turmoil.replaceDelegateFromParty(delegate, player.id, source, party.name, game);
+          turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
           turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
           return this.moveToAnotherParty(game, party.name, player.id);
         });

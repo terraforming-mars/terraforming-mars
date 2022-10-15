@@ -44,7 +44,7 @@ export class Incite extends Card implements ICorporationCard {
 
   public initialAction(player: Player) {
     const title = 'Incite first action - Select where to send two delegates';
-    player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
+    player.game.defer(new SendDelegateToArea(player, title, {count: 2}));
 
     return undefined;
   }

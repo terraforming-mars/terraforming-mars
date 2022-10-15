@@ -15,7 +15,8 @@ export type SerializedTurmoil = {
     chairman: undefined | PlayerId | NeutralPlayer;
     rulingParty: PartyName;
     dominantParty: PartyName;
-    lobby: Array<PlayerId>;
+    lobby?: Array<PlayerId>;
+    usedFreeDelegateAction?: Array<PlayerId>;
     delegateReserve: Array<PlayerId | NeutralPlayer>;
     parties: Array<SerializedParty>;
     playersInfluenceBonus: Array<[string, number]>;

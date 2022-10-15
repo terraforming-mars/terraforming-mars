@@ -12,7 +12,7 @@ import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {SerializedTurmoil} from './SerializedTurmoil';
-import {DELEGATES_PER_PLAYER} from '../../common/constants';
+import {DELEGATES_FOR_NEUTRAL_PLAYER, DELEGATES_PER_PLAYER} from '../../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../../common/turmoil/Types';
 import {CardName} from '../../common/cards/CardName';
@@ -46,7 +46,7 @@ export class Turmoil {
   public chairman: undefined | PlayerId | NeutralPlayer = undefined;
   public rulingParty: IParty;
   public dominantParty: IParty;
-  public lobby = new Set<PlayerId>();
+  public usedFreeDelegateAction = new Set<PlayerId>();
   public delegateReserve = new MultiSet<PlayerId | NeutralPlayer>();
   public parties = ALL_PARTIES.map((cf) => new cf.Factory());
   public playersInfluenceBonus = new Map<string, number>();
@@ -80,14 +80,9 @@ export class Turmoil {
     turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
     game.getPlayersInGenerationOrder().forEach((player) => {
-      // Begin with one delegate in the lobby
-      turmoil.lobby.add(player.id);
-      // Begin with six delegates in the delegate reserve
-      turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER - 1);
+      turmoil.delegateReserve.add(player.id, DELEGATES_PER_PLAYER);
     });
-
-    // Begin with 13 neutral delegates in the reserve
-    turmoil.delegateReserve.add('NEUTRAL', 13);
+    turmoil.delegateReserve.add('NEUTRAL', DELEGATES_FOR_NEUTRAL_PLAYER);
 
     turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties);
     // Note: this call relies on an instance of Game that will not be fully formed.
@@ -145,19 +140,14 @@ export class Turmoil {
   public sendDelegateToParty(
     playerId: PlayerId | NeutralPlayer,
     partyName: PartyName,
-    game: Game,
-    source: 'lobby' | 'reserve' = 'lobby'): void {
+    game: Game): void {
     const party = this.getPartyByName(partyName);
-    if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && source === 'lobby') {
-      this.lobby.delete(playerId);
+    if (this.delegateReserve.has(playerId)) {
+      this.delegateReserve.remove(playerId);
     } else {
-      if (this.delegateReserve.has(playerId)) {
-        this.delegateReserve.remove(playerId);
-      } else {
-        // TODO(kberg): throw?
-        console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
-        return;
-      }
+      // TODO(kberg): throw?
+      console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
+      return;
     }
     party.sendDelegate(playerId, game);
     this.checkDominantParty();
@@ -175,13 +165,12 @@ export class Turmoil {
   public replaceDelegateFromParty(
     outgoingPlayerId: PlayerId | NeutralPlayer,
     incomingPlayerId: PlayerId | NeutralPlayer,
-    source: 'lobby' | 'reserve' = 'lobby',
     partyName: PartyName,
     game: Game): void {
     const party = this.getPartyByName(partyName);
     this.delegateReserve.add(outgoingPlayerId);
     party.removeDelegate(outgoingPlayerId, game);
-    this.sendDelegateToParty(incomingPlayerId, partyName, game, source);
+    this.sendDelegateToParty(incomingPlayerId, partyName, game);
   }
 
   // Check dominant party
@@ -254,19 +243,7 @@ export class Turmoil {
     this.setNextPartyAsDominant(this.rulingParty);
 
     // 3.c - Fill the lobby
-    this.lobby.forEach((playerId) => {
-      this.delegateReserve.add(playerId);
-    });
-    this.lobby = new Set<PlayerId>();
-
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      if (this.hasDelegatesInReserve(player.id)) {
-        if (this.delegateReserve.has(player.id)) {
-          this.delegateReserve.remove(player.id);
-        }
-        this.lobby.add(player.id);
-      }
-    });
+    this.usedFreeDelegateAction.clear();
 
     // 4 - Changing Time
     if (this.currentGlobalEvent) {
@@ -433,29 +410,19 @@ export class Turmoil {
     return party.delegates.count(player.id) >= 2;
   }
 
+  // Return number of delegates
+  public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer): number {
+    return this.delegateReserve.get(playerId);
+  }
+
   // List players present in the reserve
   public getPresentPlayersInReserve(): Array<PlayerId | NeutralPlayer> {
     return Array.from(new Set(this.delegateReserve));
   }
 
-  // Return number of delegates
-  public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer, source: 'lobby' | 'reserve' | 'both'): number {
-    const delegatesInReserve = this.delegateReserve.get(playerId);
-    const delegatesInLobby = (playerId !== 'NEUTRAL' && this.lobby.has(playerId)) ? 1: 0;
-
-    switch (source) {
-    case 'lobby':
-      return delegatesInLobby;
-    case 'reserve':
-      return delegatesInReserve;
-    case 'both':
-      return delegatesInLobby + delegatesInReserve;
-    }
-  }
-
   // Check if player has delegates available
   public hasDelegatesInReserve(playerId: PlayerId | NeutralPlayer): boolean {
-    return this.getAvailableDelegateCount(playerId, 'reserve') > 0;
+    return this.getAvailableDelegateCount(playerId) > 0;
   }
 
   // Get Victory Points
@@ -475,7 +442,7 @@ export class Turmoil {
       chairman: this.chairman,
       rulingParty: this.rulingParty.name,
       dominantParty: this.dominantParty.name,
-      lobby: Array.from(this.lobby),
+      usedFreeDelegateAction: Array.from(this.usedFreeDelegateAction),
       delegateReserve: Array.from(this.delegateReserve.values()),
       parties: this.parties.map((p) => {
         return {
@@ -496,13 +463,25 @@ export class Turmoil {
     return result;
   }
 
-  public static deserialize(d: SerializedTurmoil): Turmoil {
+  public static deserialize(d: SerializedTurmoil, playerIds: Array<Player>): Turmoil {
     const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
     const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer);
 
-    turmoil.lobby = new Set(d.lobby);
+    turmoil.usedFreeDelegateAction = new Set(d.usedFreeDelegateAction);
 
     turmoil.delegateReserve = MultiSet.from(d.delegateReserve);
+
+    if (d.lobby !== undefined) {
+      turmoil.usedFreeDelegateAction.clear();
+      const legacyLobby = new Set(d.lobby);
+      for (const player of playerIds) {
+        if (legacyLobby.has(player.id)) {
+          turmoil.delegateReserve.add(player.id);
+        } else {
+          turmoil.usedFreeDelegateAction.add(player.id);
+        }
+      }
+    }
 
     turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData);
 

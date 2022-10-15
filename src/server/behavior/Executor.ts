@@ -67,7 +67,7 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.turmoil) {
       if (behavior.turmoil.sendDelegates) {
-        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve') >= behavior.turmoil.sendDelegates.count) {
+        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) >= behavior.turmoil.sendDelegates.count) {
           return false;
         }
       }
@@ -190,11 +190,11 @@ export class Executor implements BehaviorExecutor {
       if (behavior.turmoil.sendDelegates) {
         const sendDelegates = behavior.turmoil.sendDelegates;
         if (sendDelegates.manyParties) {
-          for (let i = 0; i < 4; i++) {
-            player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: 'reserve'}));
+          for (let i = 0; i < sendDelegates.count; i++) {
+            player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate'));
           }
         } else {
-          player.game.defer(new SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, {count: sendDelegates.count, source: 'reserve'}));
+          player.game.defer(new SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, {count: sendDelegates.count}));
         }
       }
     }

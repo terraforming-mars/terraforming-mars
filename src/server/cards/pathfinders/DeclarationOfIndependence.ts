@@ -17,7 +17,7 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
       victoryPoints: 4,
 
       behavior: {
-        turmoil: {sendDelegates: {count: 2, source: 'reserve'}},
+        turmoil: {sendDelegates: {count: 2}},
       },
 
       metadata: {

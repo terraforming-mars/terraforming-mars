@@ -45,7 +45,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
 
   public action(player: Player) {
     player.game.defer(new SelectPaymentDeferred(player, 3, {title: 'Select how to pay for Martian Media Center action'}));
-    player.game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', {source: 'reserve'}));
+    player.game.defer(new SendDelegateToArea(player));
     return undefined;
   }
 }

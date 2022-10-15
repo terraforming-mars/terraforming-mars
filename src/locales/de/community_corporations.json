@@ -19,7 +19,7 @@
     "You start with 120 M€. Lower your TR 7 steps.": "Du beginnst mit 120 M€. Senke deine TW um 7."
     
     "Curosity II": "Curosity II",
-    "You start with 40 M€ and 2 steel production.": "Du beginnst mit 40 M€ und einer Stahl-Produktion von 2."
+    "You start with 40 M€ and 2 steel production.": "Du beginnst mit 40 M€ und einer Stahl-Produktion von 2.",
     "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "EFFEKT: Wenn du ein Plättchen auf ein Gebiet platzierst, das einen RESSOURCEN-Platzierungsbonus hat, oder auf ein anderes Plättchen, darfst du 2 M€ zahlen, um eine Karte zu ziehen.",
     
     "Junk Ventures": "Schrott-Ventures",
@@ -28,6 +28,5 @@
     
     "UNITED NATIONS MISSION ONE": "VEREINTEN NATIONEN, MISSION ONE",
     "You start with 39 M€. Increase your TR 1 step.": "Du beginnst mit 39 M€. Erhöhe deinen TR um 1."
-    "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "EFFEKT: Wenn ein Spieler eine Aktion durchführt oder eine Karte ausspielt, die den TR erhöht, einschließlich dieser, erhält er 1 M€ für jeden Schritt.",
-
+    "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "EFFEKT: Wenn ein Spieler eine Aktion durchführt oder eine Karte ausspielt, die den TR erhöht, einschließlich dieser, erhält er 1 M€ für jeden Schritt."
 }

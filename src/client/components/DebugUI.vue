@@ -129,7 +129,7 @@ import {allGlobalEventNames, getGlobalEvent, getGlobalEventModel, getGlobalEvent
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import Colony from '@/client/components/colonies/Colony.vue';
-import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES} from '@/common/colonies/AllColonies';
+import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
@@ -379,7 +379,7 @@ export default Vue.extend({
       return this.sort(Array.from(allGlobalEventNames()));
     },
     getAllColonyNames() {
-      return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES);
+      return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).concat(PATHFINDERS_COLONY_NAMES);
     },
     getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
       return getGlobalEventModel(globalEventName);

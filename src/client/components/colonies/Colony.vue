@@ -1,5 +1,5 @@
 <template>
-    <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
+    <div class="filterDiv colony-card colonies" :class="backgroundClass" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
@@ -185,6 +185,9 @@ export default Vue.extend({
     colonyResourceClass(): string {
       const resource = this.metadata.resourceType;
       return resource?.toString()?.toLowerCase() ?? '';
+    },
+    backgroundClass(): string {
+      return this.colony.name.replace(' ', '-') + '-background';
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;

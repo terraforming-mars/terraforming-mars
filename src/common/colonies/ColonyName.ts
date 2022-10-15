@@ -12,7 +12,9 @@ export enum ColonyName {
     TRITON = 'Triton',
 
     // Community
-    // If you add a community colony, update GameSetup.includesCommunityColonies and ColonyDescription
+    // If you add a community colony, update
+    // GameSetup.includesCommunityColonies
+    // ColonyDescription
     IAPETUS = 'Iapetus',
     MERCURY = 'Mercury',
     HYGIEA = 'Hygiea',
@@ -20,4 +22,9 @@ export enum ColonyName {
     VENUS = 'Venus',
     LEAVITT = 'Leavitt',
     PALLAS = 'Pallas',
+
+    // Pathfinders
+    LEAVITT_II = 'Leavitt II',
+    IAPETUS_II = 'Iapetus II',
+
 }

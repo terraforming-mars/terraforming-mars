@@ -1004,6 +1004,10 @@ input[type="radio"]:checked + .filterDiv::after {
     filter: brightness(0.9);
 }
 
+.megacredits {
+    // TODO(kberg): replace money with megacredits as the resource type is 'megacredits'
+  &:extend(.money);
+}
 .money {
     font-family: Prototype;
     color: black;
@@ -1026,6 +1030,7 @@ input[type="radio"]:checked + .filterDiv::after {
     background-image: url(./assets/resources/titanium.png);
 }
 
+/* TODO(kberg): Remove plant, as the resource type in the game is the string "plants" */
 .plant {
     background-image: url(./assets/resources/plant.png);
 }
@@ -1077,6 +1082,9 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .pristar {
     background-image: url(./assets/resources/preservation.png);
+}
+.data {
+    background-image: url(./assets/resources/data.png);
 }
 
 .card {

@@ -19,4 +19,6 @@ export const COLONY_DESCRIPTIONS: Map<ColonyName, string> = new Map([
   [ColonyName.VENUS, 'Venus'],
   [ColonyName.LEAVITT, 'Science'],
   [ColonyName.PALLAS, 'Politics'],
+  [ColonyName.LEAVITT_II, 'Science & Clone Tags'],
+  [ColonyName.IAPETUS_II, 'Data'],
 ]);

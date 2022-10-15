@@ -1,9 +1,9 @@
 {
-    "Allied Banks": "연합 은행",
+    "Allied Bank": "연합 은행",
     "Increase your M€ production 4 steps. Gain 3 M€.": "메가크레딧 생산력 4 증가. 3 M€ 획득.",
 
     "Aquifer Turbines": "대수층 수력터빈",
-    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "해양 타일 1장 배치. 에너지 생산력 2 증가. 3 M€ 제거.",
+    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "해양 타일 1장 배치. 에너지 생산력 2 증가. 3 M€ 제거.",
 
     "Biofuels": "바이오 연료",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "식물 생산력 1 증가. 에너지 생산력 1 증가. 식물 자원 2개 획득.",
@@ -33,16 +33,16 @@
     "Play a card from hand, reducing its cost by 25 M€": "추진 비용을 25 M€ 할인해서, 즉시 손에 카드 1장 사용.",
 
     "Experimental Forest": "시험림",
-    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "녹지 타일 1개 배치. 프로젝트 덱 공개 후, 식물 카드 2장 획득. 나머지 카드는 버림.",
+    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "녹지 타일 1개 배치. 프로젝트 덱 공개 후, 식물 카드 2장 획득. 나머지 카드는 버림.",
 
     "Galilean Mining": "갈릴레이 위성 채굴시설",
     "Increase your titanium production 2 steps. Pay 5 M€.": "티타늄 생산력 2 증가. 5 M€ 제거.",
 
     "Great Aquifer": "대규모 대수층",
-    "Place 2 Ocean tiles.": "해양 타일 2장 배치.",
+    "Place 2 ocean tiles.": "해양 타일 2장 배치.",
 
     "Huge Asteroid": "초대형 소행성",
-    "Increase Temperature 3 steps. Pay 5 M€.": "기온 3단계 상승. 5 M€ 제거.",
+    "Increase temperature 3 steps. Pay 5 M€.": "기온 3단계 상승. 5 M€ 제거.",
 
     "Io Research Outpost": "이오 연구 전진기지",
     "Increase your titanium production 1 step. Draw a card.": "티타늄 생산력 1 증가. 카드 1장 획득.",
@@ -75,7 +75,7 @@
     "Increase your titanium production 1 step. Gain 4 titanium.": "티타늄 생산력 1 증가. 티타늄 자원 4개 획득.",
 
     "Polar Industries": "극지 공업단지",
-    "Increase your heat production 2 steps. Place an Ocean tile.": "해양 타일 1장 배치. 열 생산력 2 증가.",
+    "Increase your heat production 2 steps. Place an ocean tile.": "해양 타일 1장 배치. 열 생산력 2 증가.",
 
     "Power Generation": "발전 시설",
 
@@ -83,7 +83,7 @@
     "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "메가크레딧 생산력 1 증가. 카드 3장 획득.",
 
     "Self-Sufficient Settlement": "자급자족형 정착지",
-    "Increase your M€ production 2 steps. Place a City tile.": "도시 타일 1장 배치. 메가크레딧 생산력 2 증가.",
+    "Increase your M€ production 2 steps. Place a city tile.": "도시 타일 1장 배치. 메가크레딧 생산력 2 증가.",
 
     "Smelting Plant": "제련 시설",
     "Raise oxygen 2 steps. Gain 5 steel.": "산소 농도 2% 상승. 강철 자원 5개 획득.",

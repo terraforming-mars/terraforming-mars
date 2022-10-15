@@ -50,8 +50,8 @@ export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'fl
 export type Unit = typeof unit[number];
 
 export const PaymentWidgetMixin = {
-  'name': 'PaymentWidgetMixin',
-  'methods': {
+  name: 'PaymentWidgetMixin',
+  methods: {
     // Please don't copy this pattern. This
     // is being used as an interim solution
     // until there is better typing on the
@@ -61,12 +61,22 @@ export const PaymentWidgetMixin = {
     },
     getMegaCreditsMax(): number {
       const model = this.asModel();
-      return Math.min(model.playerView.thisPlayer.megaCredits, model.$data.cost);
+      return Math.min(model.playerView.thisPlayer.megaCredits, model.cost);
+    },
+    canUseTitanium(): boolean {
+      throw new Error('Should be overridden');
+    },
+    canUseLunaTradeFederationTitanium(): boolean {
+      throw new Error('Should be overridden');
+    },
+    canUseLunaTradeFederationTitaniumOnly(): boolean {
+      return this.canUseTitanium() !== true && this.canUseLunaTradeFederationTitanium();
     },
     getResourceRate(resourceName: Unit): number {
       switch (resourceName) {
       case 'titanium':
-        return this.asModel().playerView.thisPlayer.titaniumValue;
+        const v = this.asModel().playerView.thisPlayer.titaniumValue;
+        return this.canUseLunaTradeFederationTitaniumOnly() === true ? v - 1 : v;
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;
       case 'microbes':
@@ -137,7 +147,8 @@ export const PaymentWidgetMixin = {
         throw new Error(`can not setMaxValue for ${target} on this`);
       }
       const cost: number = this.asModel().$data.cost;
-      const amountNeed = Math.floor(cost / this.getResourceRate(target));
+      const resourceRate = this.getResourceRate(target);
+      const amountNeed = Math.floor(cost / resourceRate);
       const amountHave: number = this.getAmount(target);
 
       while (currentValue < amountHave && currentValue < amountNeed) {

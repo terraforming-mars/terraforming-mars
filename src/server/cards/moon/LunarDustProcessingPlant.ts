@@ -20,7 +20,7 @@ export class LunarDustProcessingPlant extends Card implements IProjectCard {
       },
 
       metadata: {
-        description: 'Spend 1 titanium. Raise the Logistic Rate 1 step.',
+        description: 'Spend 1 titanium. Raise the logistic rate 1 step.',
         cardNumber: 'M17',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you place a road tile on The Moon, you spend no steel on it.', (eb) => {

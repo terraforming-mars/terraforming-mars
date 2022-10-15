@@ -1,0 +1,82 @@
+import {expect} from 'chai';
+import {Venus} from '../../../src/server/cards/community/Venus';
+import {Game} from '../../../src/server/Game';
+import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {TerraformingControlStation} from '../../../src/server/cards/pathfinders/TerraformingControlStation';
+import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
+import {runAllActions} from '../../TestingUtils';
+import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
+
+describe('Venus', function() {
+  let venus: Venus;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
+  let localShading: LocalShading;
+
+
+  beforeEach(function() {
+    venus = new Venus();
+    game = newTestGame(2, {venusNextExtension: true, coloniesExtension: true});
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
+    game.colonies.push(venus);
+    localShading = new LocalShading();
+    player.popSelectInitialCards();
+    player2.popSelectInitialCards();
+  });
+
+  it('Should activate', function() {
+    // Terraforming Control Station has a Venus tag but no resources.
+    const terraformingControlStation = new TerraformingControlStation();
+    player.playCard(terraformingControlStation);
+    expect(venus.isActive).is.false;
+    player.playCard(localShading);
+    expect(venus.isActive).is.true;
+  });
+
+  it('Should build', function() {
+    player.playCard(localShading);
+
+    expect(game.getVenusScaleLevel()).eq(0);
+    expect(player.getTerraformRating()).eq(20);
+
+    venus.addColony(player);
+
+    expect(game.getVenusScaleLevel()).eq(2);
+    expect(player.getTerraformRating()).eq(21);
+  });
+
+  it('Should trade', function() {
+    player.playCard(localShading);
+    runAllActions(game);
+    venus.trackPosition = 4;
+    venus.trade(player);
+
+    runAllActions(game);
+
+    expect(player.popWaitingFor()).is.undefined;
+    expect(localShading.resourceCount).to.eq(2);
+  });
+
+  it('Should give trade bonus', function() {
+    player.playCard(localShading);
+    runAllActions(game);
+
+    const thermophiles = new Thermophiles();
+    player2.playCard(thermophiles);
+    runAllActions(game);
+
+    venus.addColony(player);
+    runAllActions(game);
+
+    venus.trackPosition = 4;
+
+    venus.trade(player2);
+    runAllActions(game); // Gain Trade & Bonus
+
+    expect(localShading.resourceCount).to.eq(1);
+    expect(thermophiles.resourceCount).to.eq(2);
+  });
+});

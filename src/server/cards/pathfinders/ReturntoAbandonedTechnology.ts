@@ -19,7 +19,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf22',
         renderData: CardRenderer.builder((b) => {
-          b.text('Draw the top 4 cards from the discard deck. Choose 2 to keep and discard the rest.', Size.SMALL).br;
+          b.text('Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.', Size.SMALL).br;
         }),
       },
     });

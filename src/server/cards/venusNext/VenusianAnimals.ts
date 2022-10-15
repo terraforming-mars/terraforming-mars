@@ -24,10 +24,10 @@ export class VenusianAnimals extends Card implements IProjectCard {
       metadata: {
         cardNumber: '259',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Science tag, including this, add 1 Animal to this card.', (eb)=> {
+          b.effect('When you play a science tag, including this, add 1 animal to this card.', (eb)=> {
             eb.science(1, {played}).startEffect.animals(1);
           }).br;
-          b.vpText('1 VP per Animal on this card.');
+          b.vpText('1 VP per animal on this card.');
         }),
         description: 'Requires Venus 18%',
       },

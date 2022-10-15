@@ -24,7 +24,7 @@ export class MarsFirst extends Party implements IParty {
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
 class MarsFirstBonus01 implements Bonus {
   readonly id = 'mb01' as const;
-  readonly description = 'Gain 1 M€ for each Building tag you have';
+  readonly description = 'Gain 1 M€ for each building tag you have';
   readonly isDefault = true;
 
   getScore(player: Player) {
@@ -69,7 +69,7 @@ class MarsFirstPolicy01 implements Policy {
 
 class MarsFirstPolicy02 implements Policy {
   readonly id = 'mfp02' as const;
-  readonly description = 'When you play a Building tag, gain 2 M€';
+  readonly description = 'When you play a building tag, gain 2 M€';
   readonly isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {

@@ -19,7 +19,7 @@ export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.SPINOFF_PRODUCTS,
-      description: 'Gain 2 M€ for each Science tag (max 5) and influence.',
+      description: 'Gain 2 M€ for each science tag (max 5) and influence.',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.SCIENTISTS,
       renderData: RENDER_DATA,

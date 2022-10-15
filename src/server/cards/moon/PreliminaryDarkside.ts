@@ -23,7 +23,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
       },
 
       metadata: {
-        description: 'Gain 3 titanium or 4 steel. Raise the Mining Rate 1 step.',
+        description: 'Gain 3 titanium or 4 steel. Raise the mining rate 1 step.',
         cardNumber: 'M63',
         renderData: CardRenderer.builder((b) => {
           b.titanium(3, {digit}).or().steel(4, {digit}).br;

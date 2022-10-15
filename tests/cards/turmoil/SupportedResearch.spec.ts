@@ -11,8 +11,8 @@ describe('SupportedResearch', function() {
     const player = getTestPlayer(game, 0);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 
-    const scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS)!;
-    scientists.delegates.push(player.id, player.id);
+    const scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS);
+    scientists.delegates.add(player.id, 2);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);

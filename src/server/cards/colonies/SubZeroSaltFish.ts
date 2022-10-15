@@ -30,11 +30,11 @@ export class SubZeroSaltFish extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C42',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Animal to this card.', (eb) => {
+          b.action('Add 1 animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
           b.production((pb) => pb.minus().plants(1, {all})).br;
-          b.vpText('1 VP per 2 Animals on this card.');
+          b.vpText('1 VP per 2 animals on this card.');
         }),
         description: {
           text: 'Requires -6 C. Decrease any plant production 1 step.',

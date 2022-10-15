@@ -8,7 +8,7 @@
 
   "Anthozoa": "Anthozoa",
   "(Action: Spend 1 plant to add an animal to this card.)": "(AKTION: Verbrauche 1 Pflanze, um dieser Karte 1 Tier hinzuzufügen.)",
-  "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card)": "(Benötigt 3 Ozeanplättchen. 1 SP je 2 Tiere auf dieser Karte.)",
+  "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "(Benötigt 3 Ozeanplättchen. 1 SP je 2 Tiere auf dieser Karte.)",
 
   "Asteroid Resources": "Asteroiden-Ressorcen",
   "(Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.)": "(Verbrauche 3 Energie. Erhöhe deine Stahl- und Titan-Produktion um 1 ODER platziere ein Ozeanplättchen und erhalte 2 Stahl und 1 Titan.)",
@@ -27,7 +27,7 @@
   "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "Erhöhe deine Energie-Produktion um 1 je Kolonie im Spiel. Füge einer Karte 2 Schweber hinzu ODER füge einer Karte 3 Daten hinzu.)",
 
   "Ceres Spaceport": "Ceres Raumhafen",
-  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reserviertem Gebiet. Platziere ein Ozeanplättchen. Erhöhe deine Titan-Produktion um 1 je 2 eigene Jupitersymbole (einschließlich diese). Erhöhe deine M€-Produktion um 2.)",
+  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reserviertem Gebiet. Platziere ein Ozeanplättchen. Erhöhe deine Titan-Produktion um 1 je 2 eigene Jupitersymbole (einschließlich diese). Erhöhe deine M€-Produktion um 2.)",
 
   "Charity Donation": "Wohltätige Spende",
   "(Reveal cards from the deck equal to the player count plus 1. In player order starting with you, each player takes one card in hand. Discard the remaining card.)": "(Decke 1 Karte mehr auf als Spieler am Spiel teilnehmen. Beginnend bei dir wählt der Reihe nach jeder Spieler eine davon und nimmt sie auf die Hand. Werfe die letzte Karte ab.) ",
@@ -117,7 +117,7 @@
   "(Increase your M€ production 2 steps. Place 1 delegate from reserve in any party.)": "(Erhöhe deine M€-Produktion um 2. Setzte 1 Deligierten in eine beliebige Partei.)",
 
   "Lunar Embassy": "Mondbotschaft",
-  "(Increase your M€ production 3 steps, and plant production 1 step for every 2 earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reservierten Gebiet. Erhöhe deine Planzen-Produktion um 1 je 2 eigene Erdsymbole (einschließlich dieses). Erhöhe deine M€-Produktion um 3.)",
+  "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reservierten Gebiet. Erhöhe deine Planzen-Produktion um 1 je 2 eigene Erdsymbole (einschließlich dieses). Erhöhe deine M€-Produktion um 3.)",
 
   "Luxury Estate": "Luxusvillen",
   "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "(Benötigt Sauerstoffgehalt von 7% oder mehr. Erhalte 1 Titan je eigenes Stadtplättchen und je eigenes Grünflächenplättchen.)",
@@ -133,7 +133,7 @@
   "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(Benötigt 1 eigene Stadt auf dem Mars. Erhöhe deine M€-Produktion um 1 je eigenes Marssymbol (einschließlich dieses).)",
 
   "Martian Nature Wonders": "Mars Naturerbe",
-  "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card)": "(Reserviere ein Gebiet auf dem Mars und erhalte den Platzierungsbonus. Auf diesem Gebiet darf kein Plättchen platziert werden. Füge einer beliebigen Karte 2 Daten hinzu.)",
+  "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(Reserviere ein Gebiet auf dem Mars und erhalte den Platzierungsbonus. Auf diesem Gebiet darf kein Plättchen platziert werden. Füge einer beliebigen Karte 2 Daten hinzu.)",
 
   "Martian Repository": "Datenbank",
   "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(EFFEKT: Wenn du ein Wissenschafts- oder Marssymbol ausspielst (einschließlich diese), füge dieser Karte 1 Datenressource hinzu.)",
@@ -172,7 +172,7 @@
 
   "Prefabrication of Human Habitats": "Vorgefertigte Wohnungen",
   "(Effect: Cards with a city tag cost 2M€ less.)": "(EFFEKT: Wenn du ein Stadtsymbol ausspielst, bezahlst du 2 M€ weniger.)",
-  "(Effect: The City standard project costs 2M€ less. STEEL MAY BE USED as if you were playing a Building card.)": "(EFFEKT: Wenn du das Stadt-Standardprojekt nutzt, bezahlst du 2 M€ weniger. Du darfst das Stadt-Standardprojekt mit Stahl bezahlen.)",
+  "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(EFFEKT: Wenn du das Stadt-Standardprojekt nutzt, bezahlst du 2 M€ weniger. Du darfst das Stadt-Standardprojekt mit Stahl bezahlen.)",
   "-": "(EFFEKT: Wenn du ein Stadtsymbol ausspielst oder das Stadt-Standardprojekt nutzt, bezahlst du 2 M€ weniger. Du darfst das Stadt-Standardprojekt mit Stahl bezahlen.)",
   "(Requires that you have steel production.)": "(Benötigt eigene Stahlproduktion.)",
 
@@ -190,13 +190,13 @@
   "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space next to this tile (Ares hazards don't count.))": "(Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 2. PLatziere dieses Plättchen nicht angrenzend zu Grünflächenplättchen. Es dürfen keine Grünflächenplättchen angrenzend an dieses Plättchen platziert werden. 1 SP je angrenzendes leeres Feld.) ",
 
   "Return to Abandoned Technology": "Aufgegebene Ideen recyclen",
-  "Draw the top 4 cards from the discard deck. Choose 2 to keep and discard the rest.": "(Schaue die obersten 4 Karten des Ablagestapels an. Behalte 2 davon und wirf die anderen beiden ab.)",
+  "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "(Schaue die obersten 4 Karten des Ablagestapels an. Behalte 2 davon und wirf die anderen beiden ab.)",
 
   "Rich Deposits": "Reiche Vorkommen",
   "(Requires 2 science tags. Increase your steel production 3 steps.)": "(Benötigt 2 eigene Wissenschaftssymbole. Erhöhe deine Stahl-Produktion um 3.)",
 
   "Secret Labs": "Geheimlabor",
-  "(Requires 1 Science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.)": "(Benötigt 1 eigenes Wissenschafts- und Jupitersymbol. Platziere 1 Ozeanplättchen und erhalte 2 Mikroben ODER erhöhe die Temperatur um 2°C und erhalte 3 Pflanzen ODER erhöhe den Sauerstoffgehalt um 1% und erhalte 2 Schweber.)",
+  "(Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.)": "(Benötigt 1 eigenes Wissenschafts- und Jupitersymbol. Platziere 1 Ozeanplättchen und erhalte 2 Mikroben ODER erhöhe die Temperatur um 2°C und erhalte 3 Pflanzen ODER erhöhe den Sauerstoffgehalt um 1% und erhalte 2 Schweber.)",
 
   "Small Comet": "Kleiner Komet",
   "(Every player loses 2 plants. Raise the temperature 1 step. Raise the oxygen 1 step. Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Gain 1 titanium.)": "(Erhöhe die Temperatur um 2°C. Erhöhe den Sauerstoffgehalt um 1%. Platziere ein Ozeanplättchen auf einem nicht reservierten Gebiet. Erhalte 1 Titan. Alle Spieler verlieren 2 Pflanzen.)",
@@ -208,8 +208,8 @@
   "(Gain 1 TR for every 2 Mars tags you have (including this one.))": "(Erhöhe deinen TW um 1 je 2 eigene Marssymbole (einschließlich dieses).)",
 
   "Soil Detoxification": "Bodenentgiftung",
-  "(Effect: Using the Greenery standard action costs 1 plant less.)": "(EFFEKT: Wenn du ein Grünflächenplätttchen platzierst, verbrauchst du 1 Pflanze weniger.)",
-  "(Requires Greens are ruling or you have 2 delegates there. Increase your plant production 1 step)": "(Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Erhöhe deine Pflanzen-Produktion um 1.)",
+  "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(EFFEKT: Wenn du ein Grünflächenplätttchen platzierst, verbrauchst du 1 Pflanze weniger.)",
+  "(Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step)": "(Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Erhöhe deine Pflanzen-Produktion um 1.)",
 
   "Solar Storm": "Sonnensturm",
   "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Erhöhe die Temperatur um 2°C. Erhöhe deine Wärme-Produktion um 1. Entferne bis zu 3 Daten von einem anderen Spieler. Alle Spieler verlieren 2 Pflanzen.)",

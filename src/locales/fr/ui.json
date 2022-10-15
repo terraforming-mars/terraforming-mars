@@ -301,7 +301,7 @@
     "Polar Explorer": "Polaire",
     "Requires that you have 3 tiles on the two bottom rows": "Nécessite de posséder au moins 3 tuiles sur les pôles (2 lignes du bas)",
     "Rim Settler": "Frontalier",
-    "Requires that you have 3 jovian tags": "Nécessite d'avoir au moins 3 badges Jovien",
+    "Requires that you have 3 Jovian tags": "Nécessite d'avoir au moins 3 badges Jovien",
     "Specialist": "Spécialiste",
     "Requires that you have at least 10 in production of any resource": "Nécessite qu'une production soit au moins de 10",
     "Tactician": "Tacticien",
@@ -492,5 +492,15 @@
     "Yes": "Oui",
     "No": "Non",
     "Don't show this again": "Ne plus afficher le message",
-    "Mars is Terraformed!": "Mars est terraformé !"
+    "Mars is Terraformed!": "Mars est terraformé !",
+    "Copy the text below and then paste it in": "Copiez le texte ci-dessous et collez-le soit",
+    "a GitHub issue": "dans une issue GitHub",
+    "or the": "ou sur le",
+    "#bug-reports Discord channel": "canal Discord #bug-reports",
+    "Copy to Clipboard": "Copier dans le presse-papier",
+    "Close": "Fermer",
+    "Spend 1 plant to gain 7 M€": "Dépenser 1 plante pour gagner 7 M€",
+    "Spend plant": "Dépenser la plante",
+    "Spend 1 steel to gain 7 M€": "Dépenser 1 plante pour gagner 7 M€",
+    "Spend steel": "Dépenser l'acier"
 }

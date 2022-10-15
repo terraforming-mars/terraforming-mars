@@ -18,7 +18,7 @@ export class Pandemic extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.PANDEMIC,
-      description: 'Lose 3 M€ for each Building tag (max 5, then reduced by influence).',
+      description: 'Lose 3 M€ for each building tag (max 5, then reduced by influence).',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.MARS,
       renderData: RENDER_DATA,

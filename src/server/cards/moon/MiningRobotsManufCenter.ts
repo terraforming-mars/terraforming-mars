@@ -18,7 +18,7 @@ export class MiningRobotsManufCenter extends Card {
       },
 
       metadata: {
-        description: 'Spend 1 titanium. Raise the Mining Rate 2 steps.',
+        description: 'Spend 1 titanium. Raise the mining rate 2 steps.',
         cardNumber: 'M23',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;

@@ -8,7 +8,7 @@ import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
-import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../../common/constants';
+import {MAX_COLONY_TRACK_POSITION} from '../../common/constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
@@ -233,6 +233,12 @@ export abstract class Colony implements IColony {
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;
 
+      case ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG:
+        player.scienceTagCount += 2;
+        player.playCard(new ScienceTagCard(), undefined, 'nothing');
+        game.log('${0} gained 2 Science tags', (b) => b.player(player));
+        break;
+
       case ColonyBenefit.GAIN_INFLUENCE:
         Turmoil.ifTurmoil(game, (turmoil) => {
           turmoil.addInfluenceBonus(player);
@@ -257,10 +263,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         Turmoil.ifTurmoil(game, (turmoil) => {
-          let partyDelegateCount = PLAYER_DELEGATES_COUNT - turmoil.getAvailableDelegateCount(player.id, 'reserve');
-          if (turmoil.lobby.has(player.id)) partyDelegateCount--;
-          if (turmoil.chairman === player.id) partyDelegateCount--;
-
+          const partyDelegateCount = turmoil.parties.map((party) => party.delegates.get(player.id)).reduce((a, b) => a + b, 0);
           player.addResource(Resources.MEGACREDITS, partyDelegateCount, {log: true});
         });
         break;

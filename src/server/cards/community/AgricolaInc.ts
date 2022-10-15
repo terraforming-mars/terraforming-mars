@@ -38,7 +38,7 @@ export class AgricolaInc extends Card implements ICorporationCard {
   }
 
   public override getVictoryPoints(player: Player): number {
-    const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.ENERGY, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
+    const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.POWER, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
     if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);
 
     const playerTags : ITagCount[] = player.tags.getAllTags();

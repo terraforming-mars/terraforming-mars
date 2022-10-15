@@ -11,7 +11,7 @@ export class GreatDam extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.GREAT_DAM,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 12,
 
       behavior: {

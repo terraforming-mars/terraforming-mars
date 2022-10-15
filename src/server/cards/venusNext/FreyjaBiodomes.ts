@@ -32,7 +32,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
           b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
         }),
         description: {
-          text: 'Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, M€ +2.',
+          text: 'Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.',
           align: 'left',
         },
       },

@@ -12,15 +12,15 @@
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Na planszy muszą się znajdować przynajmniej 3 obszary oceanów. Obniż swoją produkcję M€ i produkcję ciepła dowolnego gracza o 1 poziom. Podnieś swoją produkcję roślinności o 2 poziomy.",
 
     "Search For Life": "Poszukiwania Życia",
-    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a science resource here.": "Akcja: Zapłać 1 M€, żeby odkryć i odrzucić wierzchnią kartę z talii. Jeśli odkryjesz kartę z symbolem mikrobów, umieść tu 1 jednostkę nauki.",
+    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "Akcja: Zapłać 1 M€, żeby odkryć i odrzucić wierzchnią kartę z talii. Jeśli odkryjesz kartę z symbolem mikrobów, umieść tu 1 jednostkę nauki.",
     "3 VPs if you have one or more science resources here.": "Jeśli na tej karcie znajduje się przynajmniej 1 jednostka nauki, otrzymujesz 3 PZ",
     "Oxygen must be 6% or less.": "Poziom Tlenu musi wynosić maximum 6%.",
 
-    "Inventors Guild": "Gildia Wynalazców",
+    "Inventors' Guild": "Gildia Wynalazców",
     "Action: Look at the top card and either buy it or discard it": "AKCJA: PODEJRZYJ WIERZCHNIĄ KARTĘ Z TALII PROJEKTÓW, A NASTĘPNIE KUP JĄ ALBO ODRZUĆ.",
 
     "Martian Rails": "Kolej Marsjańska",
-    "Action: Spend 1 energy to gain 1 M€ for each City tile ON MARS.": "Akcja: Wydaj 1 jednostkę energii, żeby otrzymać po 1 jednostce M€ za każdy obszar miasta NA POWIERZCHNI PLANETY",
+    "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Akcja: Wydaj 1 jednostkę energii, żeby otrzymać po 1 jednostce M€ za każdy obszar miasta NA POWIERZCHNI PLANETY",
 
     "Capital": "Stolica",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "Na planszy muszą się znajdować przynajmniej 4 obszary oceanów. Umieść ten obszar na planszy. Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję M€ o 5 poziomów.",
@@ -36,7 +36,7 @@
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Podnieś Temperaturę o 4°C. Otrzymujesz 4 jednostki tytanu. Usuń do 4 jednostek roślinności dowolnego gracza.",
 
     "Water Import From Europa": "Import Wody z Europy",
-    "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Akcja: Zapłać 12 M€, żeby umieścić na planszy obszar oceanu. Możesz użyć jednostek tytanu, tak jakbyś zagrywał kartę z symbolem przestrzeni kosmicznej.",
+    "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "Akcja: Zapłać 12 M€, żeby umieścić na planszy obszar oceanu. Możesz użyć jednostek tytanu, tak jakbyś zagrywał kartę z symbolem przestrzeni kosmicznej.",
     "1 VP for each Jovian tag you have.": "Otrzymujesz po 1 PZ za każdy posiadany symbol Jowisza.",
 
     "Space Elevator": "Winda Kosmiczna",
@@ -50,23 +50,23 @@
     "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "Akcja: Obniż swoją produkcję energii o 1 poziom, żeby podnieść swój współczynnik terraformacji o 1 poziom.",
 
     "Domed Crater": "Zadaszony Krater",
-    "Oxygen must be 7% or less. Gain 3 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Poziom Tlenu musi być równy albo niższy niż 7%. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy.",
+    "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Poziom Tlenu musi być równy albo niższy niż 7%. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy.",
 
     "Noctis City": "Noctis City",
-    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy. Umieść obszar miasta na planszy, na polu zarezerwowanym dla Noctis City, ignorując normalne ograniczenia umieszczania obszarów.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.": "Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy. Umieść obszar miasta na planszy, na polu zarezerwowanym dla Noctis City, ignorując normalne ograniczenia umieszczania obszarów.",
 
     "Methane From Titan": "Metan z Tytana",
     "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.": "Poziom Tlenu musi być równy albo wyższy niż 2%. Podnieś swoją produkcję ciepła i roślinności o 2 poziomy.",
 
     "Imported Hydrogen": "Importowany Wodór",
-    "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "Otrzymujesz 3 jednostki roślinności ALBO umieść na innej karcie 3 jednostki mikrobów ALBO 2 jednostki zwierząt. Umieść na planszy obszar oceanu.",
+    "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Otrzymujesz 3 jednostki roślinności ALBO umieść na innej karcie 3 jednostki mikrobów ALBO 2 jednostki zwierząt. Umieść na planszy obszar oceanu.",
 
     "Research Outpost": "Placówka Naukowa",
     "Effect: When you play a card, you pay 1 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 1 M€ mniej.",
     "Place a city tile NEXT TO NO OTHER TILE.": "Umieść obszar miasta na planszy, na polu, które NIE SĄSIADUJE z innymi umieszczonymi już obszarami.",
 
     "Phobos Space Haven": "Kosmiczna Przystań na Fobosie",
-    "Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA.": "Podnieś swoją produkcję tytanu o 1 poziom. Umieść obszar miasta na planszy, na polu zarezerwowanym dla Kosmicznej Przystani na Fobosie.",
+    "Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": "Podnieś swoją produkcję tytanu o 1 poziom. Umieść obszar miasta na planszy, na polu zarezerwowanym dla Kosmicznej Przystani na Fobosie.",
 
     "Black Polar Dust": "Czarny Pył Polarny",
     "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": "Umieść na planszy obszar oceanu. Obniż swoją produkcję M€ o 2 poziomy i podnieś swoją produkcję ciepła o 3 poziomy.",
@@ -76,14 +76,14 @@
     "It must be -12 C or colder to play. Gain 1 plant.": "Temperatura musi być równa albo niższa niż -12°C. Otrzymujesz 1 jednostkę roślinności.",
 
     "Predators": "Drapieżniki",
-    "Action: Remove 1 Animal from any card and add it to this card.": "Akcja: Usuń 1 jednostkę zwierząt z innej karty dowolnego gracza i umieść ją na tej karcie.",
+    "Action: Remove 1 animal from any card and add it to this card.": "Akcja: Usuń 1 jednostkę zwierząt z innej karty dowolnego gracza i umieść ją na tej karcie.",
     "Requires 11% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 11%.",
 
     "Space Station": "Stacja Kosmiczna",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
+    "Effect: When you play a space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
 
     "Eos Chasma National Park": "Park Narodowy w Eos Chasma",
-    "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your M€ production 2 steps.": "Temperatura musi być równa albo wyższa niż -12°C. Umieść 1 jednostkę zwierząt na dowolnej karcie z symbolem zwierząt. Otrzymujesz 3 jednostki roślinności. Podnieś swoją produkcję M€ o 2 poziomy.",
+    "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": "Temperatura musi być równa albo wyższa niż -12°C. Umieść 1 jednostkę zwierząt na dowolnej karcie z symbolem zwierząt. Otrzymujesz 3 jednostki roślinności. Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Interstellar Colony Ship": "Międzygwiezdny Statek Kolonizacyjny",
     "Requires that you have 5 science tags.": "Musisz mieć 4 symboli Nauki.",
@@ -93,39 +93,39 @@
     "1 VP for each fighter resource on this card.": "Otrzymujesz po 1 PZ za każdą znajdującą się na tej karcie jednostkę myśliwców.",
 
     "Cupola City": "Miasto pod Kopułą",
-    "Oxygen must be 9% or less. Place a City tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Poziom Tlenu musi być równy albo niższy niż 9%. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy.",
+    "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Poziom Tlenu musi być równy albo niższy niż 9%. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy.",
 
     "Lunar Beam": "Wiązka z Księżyca",
     "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Obniż swoją produkcję M€ o 2 poziomy i podnieś swoją produkcję ciepła i energii o 2 poziomy.",
 
     "Optimal Aerobraking": "Optymalne Hamowanie Aerodynamiczne",
-    "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia z symbolem przestrzeni kosmicznej, otrzymujesz 3 M€ i 3 jednostki ciepła.",
+    "Effect: When you play a space event, you gain 3 M€ and 3 heat.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia z symbolem przestrzeni kosmicznej, otrzymujesz 3 M€ i 3 jednostki ciepła.",
 
     "Underground City": "Podziemne miasto",
-    "Place a City tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 2 poziomy i podnieś swoją produkcję stali o 2 poziomy.",
+    "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 2 poziomy i podnieś swoją produkcję stali o 2 poziomy.",
 
     "Regolith Eaters": "Bakterie Regolitożerne",
-    "Action: Add 1 Microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
-    "Action: Remove 2 Microbes from this card to raise oxygen level 1 step.": "Akcja: Usuń z tej karty 2 jednostki mikrobów i podnieś Poziom Tlenu o 1%.",
+    "Action: Add 1 microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
+    "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "Akcja: Usuń z tej karty 2 jednostki mikrobów i podnieś Poziom Tlenu o 1%.",
 
     "GHG Producing Bacteria": "Bakterie Produkujące Gazy Cieplarniane",
-    "Action: Add 1 Microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów albo usuń z tej karty 2 jednostki mikrobów i podnieś Temperaturę o 2°C.",
+    "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów albo usuń z tej karty 2 jednostki mikrobów i podnieś Temperaturę o 2°C.",
     "Action: Remove 2 microbes to raise temperature 1 step.": "Akcja: Usuń z tej karty 2 jednostki mikrobów i podnieś Temperaturę o 2°C.",
     "Requires 4% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 4%.",
 
     "Ants": "Mrówki",
     "Action: Remove 1 microbe from any card to add 1 to this card.": "Akcja: Usuń do 1 jednostkę mikrobów z innej karty dowolnego gracza i umieść ją na tej karcie.",
-    "1 VP per 2 Microbes on this card.": "1 PZ za każde 2 mikroby na tej karcie",
+    "1 VP per 2 microbes on this card.": "1 PZ za każde 2 mikroby na tej karcie",
     "Requires 4% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 4%.",
 
     "Release of Inert Gases": "Wypuszczenie Gazów Obojętnych",
     "Raise your terraforming rating 2 steps.": "Podnieś swój współczynnik terraformacji o 2.",
 
     "Nitrogen-Rich Asteroid": "Asteroida Bogata w Azot",
-    "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 Plant tags.": "Podnieś swój współczynnik terraformacji o 2. Podnieś Temperaturę o 2°C. Podnieś swoją produkcję roślinności o 1 poziom albo, jesli posiadasz 3 symbole roślinności, o 4 poziomy.",
+    "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "Podnieś swój współczynnik terraformacji o 2. Podnieś Temperaturę o 2°C. Podnieś swoją produkcję roślinności o 1 poziom albo, jesli posiadasz 3 symbole roślinności, o 4 poziomy.",
 
     "Rover Construction": "Fabryka Łazików",
-    "Effect: When any City tile is placed, gain 2 M€.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta, otrzymujesz 2 M€.",
+    "Effect: When any city tile is placed, gain 2 M€.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta, otrzymujesz 2 M€.",
 
     "Deimos Down": "Upadek Deimosa",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Podnieś Temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 8 jednostek roślinności dowolnego gracza.",
@@ -158,7 +158,7 @@
     "Increase your plant production 1 step.": "Podnieś swoją produkcję roślinności o 1 poziom.",
 
     "Tardigrades": "Niesporczaki",
-    "Action: Add 1 Microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
+    "Action: Add 1 microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
     "1 VP per 4 Microbes on this card.": "Otrzymujesz po 1 PZ za każde 4 znajdujące się na tej karcie jednostki mikrobów.",
 
     "Virus": "Wirus",
@@ -168,14 +168,14 @@
     "Increase your M€ production 1 step for each Earth tag you have.": "Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Ziemi.",
 
     "Fish": "Ryby",
-    "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
+    "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
     "Requires +2 C° or warmer. Decrease any plant production 1 step.": "Temperatura musi być równa albo wyższa niż 2°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Lake Marineris": "Jezioro Marineris",
     "Requires 0° C or warmer. Place 2 ocean tiles.": "Temperatura musi być równa albo wyższa niż 0°C. Umieść na planszy 2 obszary oceanów.",
 
     "Small Animals": "Małe Zwierzęta",
-    "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
+    "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
     "Requires 6% oxygen. Decrease any plant production 1 step.": "Poziom Tlenu musi być równy albo wyższy niż 6%. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Kelp Farming": "Farmy Wodorostów",
@@ -188,7 +188,7 @@
     "Increase your titanium production 1 step.": "Podnieś swoją produkcję tytanu o 1 poziom.",
 
     "Beam From A Thorium Asteroid": "Wiązka z Asteroidy Bogatej w Tor",
-    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each": "Musisz posiadać przynajmniej 1 symbol Jowisza. Podnieś swoją produkcję ciepła i energii o 3 poziomy.",
+    "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.": "Musisz posiadać przynajmniej 1 symbol Jowisza. Podnieś swoją produkcję ciepła i energii o 3 poziomy.",
 
     "Mangrove": "Namorzyny",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Temperatura musi być równa albo wyższa niż 4°C. Umieść obszar zieleni na planszy, na polu ZAREZERWOWANYM DLA OCEANÓW, ignorując normalne ograniczenia umieszczania obszarów.",
@@ -233,10 +233,10 @@
 
     "Birds": "Ptaki",
     "Action: Add an animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
-    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.": "Poziom Tlenu musi być równy albo wyższy niż 13%. Obniż produkcję roślinności dowolnego gracza o 2 poziomy. Otrzymujesz po 1 PZ za każdą znajdującą się na tej karcie jednostkę zwierząt.",
+    "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Poziom Tlenu musi być równy albo wyższy niż 13%. Obniż produkcję roślinności dowolnego gracza o 2 poziomy. Otrzymujesz po 1 PZ za każdą znajdującą się na tej karcie jednostkę zwierząt.",
 
     "Mars University": "Uniwersytet Marsjański",
-    "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem nauki (z tą włącznie), za każdy symbol nauki na zagrywanej karcie możesz odrzucić kartę z ręki i dobrać nową kartę.",
+    "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem nauki (z tą włącznie), za każdy symbol nauki na zagrywanej karcie możesz odrzucić kartę z ręki i dobrać nową kartę.",
 
     "Viral Enhancers": "Wirusy Wspomagające",
     "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Efekt trwały: Gdy zagrywasz kartę z symbolem roślinności, mikrobów lub zwierząt (z tą włącznie), otrzymujesz 1 jednostkę roślinności albo umieszczasz 1 jednostkę danych zasobów za każdy symbol na zagranej karcie.",
@@ -254,7 +254,7 @@
     "Place 2 ocean tiles.": "Umieść na planszy 2 obszary oceanów.",
 
     "Quantum Extractor": "Ekstraktor Kwantowy",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
+    "Effect: When you play a space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję energii o 4 poziomy.",
 
     "Giant Ice Asteroid": "Gigantyczna Asteroida Lodowa",
@@ -302,7 +302,7 @@
     "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.": "Temperatura musi być równa albo wyższa niż -10°C. Podnieś swoją produkcję roślinności o 2 poziomy. Otrzymujesz 2 jednostki roślinności.",
 
     "Mass Converter": "Konwerter Masy",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
+    "Effect: When you play a space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
     "Requires 5 science tags. Increase your energy production 6 steps.": "Musisz posiadać przynajmniej 5 symboli nauki. Podnieś swoją produkcję energii o 6 poziomów.",
 
     "Physics Complex": "Kompleks Fizyki Jądrowej",
@@ -346,7 +346,7 @@
     "Gain 1 M€ for each event EVER PLAYED by all players.": "Otrzymujesz po 1 M€ za każde wydarzenie zagrane do tej pory przez wszystkich graczy.",
 
     "Open City": "Nieosłonięte Miasto",
-    "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Poziom Tlenu musi być równy albo wyższy niż 12%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 4 poziomy. Otrzymujesz 2 jednostki roślinności. Umieść na planszy obszar miasta.",
+    "Requires 12% oxygen. Gain 2 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Poziom Tlenu musi być równy albo wyższy niż 12%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 4 poziomy. Otrzymujesz 2 jednostki roślinności. Umieść na planszy obszar miasta.",
 
     "Media Group": "Grupa Medialna",
     "Effect: After you play an event card, you gain 3 M€.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia, otrzymujesz 3 M€.",
@@ -413,22 +413,22 @@
 
     "Ecological Zone": "Strefa Ekologiczna",
     "Effect: When you play an animal or plant tag (including these), add an animal to this card.": "Efekt trwały: Za każdy zagrywany przez Ciebie symbol zwierząt lub roślinności (z tymi włącznie), umieść 1 jednostkę zwierząt na tej karcie.",
-    "1 VP per 2 Animals on this card.": "Otrzymujesz po 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
-    "Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.": "Musisz posiadać przynajmniej 1 obszar zieleni. Umieść ten obszar na polu sąsiadującym z obszarem zieleni. Otrzymujesz po 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
+    "1 VP per 2 animals on this card.": "Otrzymujesz po 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
+    "Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 animals on this card.": "Musisz posiadać przynajmniej 1 obszar zieleni. Umieść ten obszar na polu sąsiadującym z obszarem zieleni. Otrzymujesz po 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
 
     "Zeppelins": "Sterowce",
-    "Requires 5% oxygen. Increase your M€ production 1 step for each City tile ON MARS.": "Poziom Tlenu musi być równy albo wyższy niż 5%. Podnieś swoją produkcję M€ o 1 poziom za każdy obszar miasta na Marsie.",
+    "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Poziom Tlenu musi być równy albo wyższy niż 5%. Podnieś swoją produkcję M€ o 1 poziom za każdy obszar miasta na Marsie.",
 
     "Worms": "Dżdżownice",
-    "Requires 4% oxygen. Increase your plant production 1 step for every 2 Microbe tags you have, including this.": "Poziom Tlenu musi być równy albo wyższy niż 4%. Podnieś swoją produkcję roślinności o 1 poziom za każde 2 posiadane symbole mikrobów (z tym włącznie).",
+    "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "Poziom Tlenu musi być równy albo wyższy niż 4%. Podnieś swoją produkcję roślinności o 1 poziom za każde 2 posiadane symbole mikrobów (z tym włącznie).",
 
     "Decomposers": "Reducenci",
     "Effect: When you play an animal, plant, or microbe tag, including this, add a microbe to this card.": "Efekt trwały: Gdy zagrywasz kartę roślinności, mikrobów albo zwierząt (z tą włącznie), za każdy z tych symboli na zagrywanej karcie umieść na tej karcie 1 jednostkę mikrobów.",
-    "1 VP per 3 Microbes on this card.": "Otrzymujesz po 1 PZ za każde 3 jednostki mikrobów znajdujące się na tej karcie.",
+    "1 VP per 3 microbes on this card.": "Otrzymujesz po 1 PZ za każde 3 jednostki mikrobów znajdujące się na tej karcie.",
     "Requires 3% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 3%.",
 
     "Fusion Power": "Energia Termojądrowa",
-    "Requires 2 Power tags. Increase your energy production 3 steps.": "Musisz posiadać przynajmniej 2 symbole energii. Podnieś swoją produkcję energii o 3 poziomy.",
+    "Requires 2 power tags. Increase your energy production 3 steps.": "Musisz posiadać przynajmniej 2 symbole energii. Podnieś swoją produkcję energii o 3 poziomy.",
 
     "Symbiotic Fungus": "Grzyby Symbiotyczne",
     "Action: Add a microbe to ANOTHER card.": "Akcja: Umieść na innej karcie 1 jednostkę mikrobów.",
@@ -464,7 +464,7 @@
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Umieść ten obszar na polu zarezerwowanym dla oceanu. Podnieś swoją produkcję ciepła o 4 poziomy.",
 
     "Large Convoy": "Duży Konwój",
-    "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.": "Umieść na planszy obszar oceanu i dobierz 2 karty. Umieść na innej karcie 4 jednostki zwierząt ALBO otrzymaj 5 jednostek roślinności.",
+    "Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.": "Umieść na planszy obszar oceanu i dobierz 2 karty. Umieść na innej karcie 4 jednostki zwierząt ALBO otrzymaj 5 jednostek roślinności.",
 
     "Titanium Mine": "Kopalnia Tytanu",
     "Increase your titanium 1 step.": "Podnieś swoją produkcję tytanu o 1 poziom.",
@@ -476,8 +476,8 @@
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Na planszy muszą znajdować się przynajmniej 3 obszary oceanów.",
 
     "Herbivores": "Roślinożercy",
-    "Effect: When you place a greenery tile, add an Animal to this card.": "Efekt trwały: Za każdym razem, gdy umieścisz na planszy obszar zieleni, umieść na tej karcie 1 jednostkę zwierząt.",
-    "1 VP per 2 Animals on this card.": "1 PZ za każde 2 jednostki zwierząt na tej karcie.",
+    "Effect: When you place a greenery tile, add an animal to this card.": "Efekt trwały: Za każdym razem, gdy umieścisz na planszy obszar zieleni, umieść na tej karcie 1 jednostkę zwierząt.",
+    "1 VP per 2 animals on this card.": "1 PZ za każde 2 jednostki zwierząt na tej karcie.",
     "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Poziom Tlenu musi być równy albo wyższy niż 8%. Umieść na tej karcie 1 jednostkę zwierząt. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Insects": "Insekty",
@@ -503,14 +503,14 @@
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "Akcja: Wydaj 8 jednostek ciepła, żeby podnieść swój współczynnik terraformacji o 1.",
     "Requires 0° C or warmer.": "Temperatura musi być równa albo wyższa o 0°C.",
 
-    "Designed Micro-organisms": "Zaprojektowane Mikroorganizmy",
+    "Designed Microorganisms": "Zaprojektowane Mikroorganizmy",
     "It must be -14 C or colder. Increase your plant production 2 steps.": "Temperatura musi być równa albo niższa niż -14°C. Podnieś swoją produkcję roślinności o 2 poziomy.",
 
     "Standard Technology": "Standardowa Technologia",
     "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "Efekt trwały: Za każdym razem, gdy zapłacisz za projekt standardowy (nie licząc sprzedaży patentów), otrzymasz 3 M€.",
 
     "Nitrite Reducing Bacteria": "Bakterie Rozkładające Azotany",
-    "Action: Add 1 Microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
+    "Action: Add 1 microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
     "Action: Remove 3 microbes to increase your TR 1 step.": "Akcja: Usuń z tej karty 3 jednostki mikrobów i podnieś o 1 swój współczynnik terraformacji.",
     "Add 3 microbes to this card.": "Umieść na tej karcie 3 jednostki mikrobów.",
 
@@ -521,7 +521,7 @@
     "Requires -24 C or warmer. Increase your plant production 1 step.": "Temperatura musi być równa lub wyższa niż -24°C. Podnieś swoją produkcję roślinności o 1 poziom.",
 
     "Power Supply Consortium": "Konsorcjum Energetyczne",
-    "Requires 2 Power tags. Decrease any energy production 1 step and increase your own 1 step.": "Musisz posiadać przynajmniej 2 symbole energii. Obniż produkcję energii dowolnego gracza o 1 poziom. Podnieś swoją produkcję energii o 1 poziom.",
+    "Requires 2 power tags. Decrease any energy production 1 step and increase your own 1 step.": "Musisz posiadać przynajmniej 2 symbole energii. Obniż produkcję energii dowolnego gracza o 1 poziom. Podnieś swoją produkcję energii o 1 poziom.",
 
     "Convoy From Europa": "Konwój z Europy",
     "Place 1 ocean tile and draw 1 card.": "Umieść na planszy obszar oceanu i dobierz 1 kartę.",
@@ -530,7 +530,7 @@
     "Increase your heat production 1 step and gain 3 heat.": "Podnieś swoją produkcję ciepła o 1 poziom. Otrzymujesz 3 jednostki ciepła.",
 
     "Imported Nitrogen": "Importowany Azot",
-    "Raise your TR 1 step and gain 4 Plants. Add 3 microbes to ANOTHER card and 2 Animals to ANOTHER card.": "Podnieś swój współczynnik terraformacji o 1. Otrzymujesz 4 jednostki roślinności. Umieść na innej karcie do 3 jednostek mikrobów. Umieść na innej karcie do 2 jednostek zwierząt.",
+    "Raise your TR 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.": "Podnieś swój współczynnik terraformacji o 1. Otrzymujesz 4 jednostki roślinności. Umieść na innej karcie do 3 jednostek mikrobów. Umieść na innej karcie do 2 jednostek zwierząt.",
 
     "Micro-Mills": "Mikrowiatraki",
     "Increase your heat production 1 step.": "Podnieś swoją produkcję ciepła o 1 poziom.",
@@ -539,7 +539,7 @@
     "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3.",
 
     "Shuttles": "Promy",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
+    "Effect: When you play a space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
     "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Poziom Tlenu musi być równy albo wyższy niż 5%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Import of Advanced GHG": "Zaawansowane Gazy Cieplarniane",
@@ -559,9 +559,9 @@
 
     "Pets": "Zwierzęta Domowe",
     "Animals may not be removed from this card": "Z TEJ KARTY NIE MOŻNA USUWAĆ JEDNOSTEK ZWIERZĄT.",
-    "1 VP per 2 Animals here.": "Otrzymujesz po 1 PZ za każde 2 znajdujące się na tej karcie jednostki zwierząt.",
-    "Effect: When any City tile is placed, add an Animal to this card.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta, umieść na tej karcie 1 jednostkę zwierząt.",
-    "Add 1 Animal to this card.": "Umieść na tej karcie 1 jednostkę zwierząt.",
+    "1 VP per 2 animals here.": "Otrzymujesz po 1 PZ za każde 2 znajdujące się na tej karcie jednostki zwierząt.",
+    "Effect: When any city tile is placed, add an animal to this card.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta, umieść na tej karcie 1 jednostkę zwierząt.",
+    "Add 1 animal to this card.": "Umieść na tej karcie 1 jednostkę zwierząt.",
 
     "Protected Habitats": "Chronione Siedliska",
     "Opponents may not remove your": "PRZECIWNICY NIE MOGĄ USUWAĆ TWOICH",
@@ -573,10 +573,10 @@
     "Increase your M€ production 1 step for each space tag you have, including this one.": "Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol przestrzeni kosmicznej (z tym włącznie).",
 
     "Noctis Farming": "Rolnictwo w Noctis Labyrinthus",
-    "Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 Plants.": "Temperatura musi być równa albo wyższa niż -20°C. Podnieś swoją produkcję M€ o 1 poziom. Otrzymujesz 2 jednostki roślinności.",
+    "Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 plants.": "Temperatura musi być równa albo wyższa niż -20°C. Podnieś swoją produkcję M€ o 1 poziom. Otrzymujesz 2 jednostki roślinności.",
 
     "Water Splitting Plant": "Zakład Elektrolizy",
-    "Action: Spend 3 Energy to raise oxygen 1 step.": "Akcja: Wydaj 3 jednostki energii, żeby podnieść Poziom Tlenu o 1%.",
+    "Action: Spend 3 energy to raise oxygen 1 step.": "Akcja: Wydaj 3 jednostki energii, żeby podnieść Poziom Tlenu o 1%.",
     "Requires 2 ocean tiles.": "Na planszy muszą się znajdować przynajmniej dwa obszary oceanów.",
 
     "Heat Trappers": "Pułapki Cieplne",
@@ -592,7 +592,7 @@
     "Requires +2 C or warmer. Place 1 ocean tile.": "Temperatura musi być równa albo wyższa niż 2°C. Umieść na planszy obszar oceanu.",
 
     "Corporate Stronghold": "Siedziba Korporacji",
-    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a City tile.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść na planszy obszar miasta.",
+    "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść na planszy obszar miasta.",
 
     "Biomass Combustors": "Spalarnia Biomasy",
     "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Poziom Tlenu musi być równy albo wyższy niż 6%. Obniż produkcję roślinności dowolnego gracza o 1 poziom. Podnieś swoją produkcję energii o 2 poziomy.",
@@ -601,22 +601,22 @@
     "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Poziom Tlenu musi być równy albo wyższy niż 9%. Obniż swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Olympus Conference": "Konferencja Olimpijska",
-    "When you play a Science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Gdy zagrywasz kartę z symbolem nauki (z tą włącznie), za każdy symbol nauki na zagrywanej karcie, umieść na tej karcie 1 jednostkę nauki albo usuń z tej karty 1 jednostkę nauki i dobierz kartę.",
+    "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "Gdy zagrywasz kartę z symbolem nauki (z tą włącznie), za każdy symbol nauki na zagrywanej karcie, umieść na tej karcie 1 jednostkę nauki albo usuń z tej karty 1 jednostkę nauki i dobierz kartę.",
 
     "Rad-Suits": "Kombinezony Ochronne",
     "Requires two cities in play. Increase your M€ production 1 step.": "Na planszy muszą się znajdować przynajmniej 2 obszary miast. Podnieś swoją produkcję M€ o 1 poziom.",
 
     "Aquifer Pumping": "Pompa Warstwy Wodonośnej",
-    "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.": "Akcja: Wydaj 8 M€, żeby umieścić na planszy obszar oceanu. Możesz użyć jednostek stali, tak jakbyś zagrywał kartę z symbolem budowli.",
+    "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "Akcja: Wydaj 8 M€, żeby umieścić na planszy obszar oceanu. Możesz użyć jednostek stali, tak jakbyś zagrywał kartę z symbolem budowli.",
 
     "Flooding": "Powódź Kontrolowana",
     "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Umieść na planszy obszar oceanu. JEŚLI UMIESZCZONY OBSZAR SĄSIADUJE Z INNYMI OBSZARAMI, MOŻESZ USUNĄĆ JEDNEMU Z ICH WŁAŚCICIELI DO 4 M€.",
 
     "Energy Saving": "Oszczędzanie Energii",
-    "Increase your energy production 1 step for each City tile in play.": "Podnieś swoją produkcję energii o 1 poziom za każdy obszar miasta na planszy.",
+    "Increase your energy production 1 step for each city tile in play.": "Podnieś swoją produkcję energii o 1 poziom za każdy obszar miasta na planszy.",
 
     "Local Heat Trapping": "Lokalne Pułapki Ciepła",
-    "Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.": "Wydaj 5 jednostek ciepła, żeby otrzymać 4 jednostki roślinności ALBO umieścić na innej karcie 2 jednostki zwierząt.",
+    "Spend 5 heat to gain either 4 plants, or to add 2 animals to ANOTHER card.": "Wydaj 5 jednostek ciepła, żeby otrzymać 4 jednostki roślinności ALBO umieścić na innej karcie 2 jednostki zwierząt.",
 
     "Permafrost Extraction": "Wydobycie Wiecznej Zmarzliny",
     "Requires -8 C or warmer. Place 1 ocean tile.": "Temperatura musi być równa albo wyższa niż -8°C. Umieść na planszy obszar oceanu.",
@@ -648,8 +648,8 @@
     "Place this tile.": "Umieść ten obszar na planszy.",
 
     "Immigrant City": "Miasto Imigrantów",
-    "Effect: When a City tile is placed, including this, increase your M€ production 1 step.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta (z tym włącznie), podnieś swoją produkcję M€ o 1 poziom.",
-    "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a City tile.": "Obniż swoją produkcję energii o 1 poziom. Obniż swoją produkcję M€ o 2 poziomy. Umieść na planszy obszar miasta.",
+    "Effect: When a city tile is placed, including this, increase your M€ production 1 step.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta (z tym włącznie), podnieś swoją produkcję M€ o 1 poziom.",
+    "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.": "Obniż swoją produkcję energii o 1 poziom. Obniż swoją produkcję M€ o 2 poziomy. Umieść na planszy obszar miasta.",
 
     "Energy Tapping": "Podpięcie do Sieci",
     "Decrease any energy production 1 step and increase your own 1 step.": "Obniż produkcję energii dowolnego gracza o 1 poziom. Podnieś swoją produkcję energii o 1 poziom.",
@@ -670,7 +670,7 @@
     "The next card you play this generation is +2 or -2 steps in global requirements, your choice.": "Zagrywając następną kartę w tym pokoleniu, możesz traktować wybrane Wskaźniki Globalne tak, jakby były o 2 poziomy wyższe albo niższe.",
 
     "Medical Lab": "Laboratorium Medyczne",
-    "Increase your M€ production 1 step for every 2 Building tags you have, including this.": "Podnieś swoją produkcję M€ o 1 poziom za każde 2 posiadane symbole budowli (z tym włącznie).",
+    "Increase your M€ production 1 step for every 2 building tags you have, including this.": "Podnieś swoją produkcję M€ o 1 poziom za każde 2 posiadane symbole budowli (z tym włącznie).",
 
     "AI Central": "Centrala SI",
     "Action: Draw 2 cards.": "Akcja: Dobierz 2 karty.",

@@ -25,16 +25,17 @@
 import Vue from 'vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
-import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES} from '@/common/colonies/AllColonies';
+import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
 
 type Data = {
   allColonies: Array<ColonyName>,
   officialColonies: Array<ColonyName>,
   communityColonies: Array<ColonyName>,
+  pathfindersColonies: Array<ColonyName>,
   selectedColonies: Array<ColonyName>,
   modules: Array<ColonyModule>,
 }
-type ColonyModule = 'colonies' | 'community';
+type ColonyModule = 'colonies' | 'community' | 'pathfinders';
 type Group = ColonyModule | 'All';
 
 export default Vue.extend({
@@ -49,20 +50,26 @@ export default Vue.extend({
     turmoil: {
       type: Boolean,
     },
+    pathfinders: {
+      type: Boolean,
+    },
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
     const communityColonies = [...COMMUNITY_COLONY_NAMES].sort();
+    const pathfindersColonies = [...PATHFINDERS_COLONY_NAMES].sort();
 
     const data: Data = {
       allColonies: officialColonies.concat(communityColonies),
       officialColonies,
       communityColonies,
+      pathfindersColonies,
       selectedColonies: [
         ...officialColonies,
         ...this.communityCardsOption ? communityColonies: [],
+        ...this.pathfinders ? pathfindersColonies: [],
       ],
-      modules: ['colonies', 'community'],
+      modules: ['colonies', 'community', 'pathfinders'],
     };
     return data;
   },
@@ -121,11 +128,13 @@ export default Vue.extend({
     title(module: ColonyModule) {
       if (module === 'colonies') return 'Official';
       if (module === 'community') return 'Community';
+      if (module === 'pathfinders') return 'Pathfinders';
       return module;
     },
     getColonies(module: ColonyModule) {
       if (module === 'colonies') return this.officialColonies;
       if (module === 'community') return this.communityColonies;
+      if (module === 'pathfinders') return this.pathfindersColonies;
       return [];
     },
   },
@@ -147,7 +156,7 @@ export default Vue.extend({
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.VENUS);
-        } else if (this.selectedColonies.find((c) => c === ColonyName.VENUS) === undefined) {
+        } else if (!this.selectedColonies.includes(ColonyName.VENUS)) {
           this.selectedColonies.push(ColonyName.VENUS);
         }
       }
@@ -156,10 +165,23 @@ export default Vue.extend({
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
-        } else if (this.selectedColonies.find((c) => c === ColonyName.PALLAS) === undefined) {
+        } else if (!this.selectedColonies.includes(ColonyName.PALLAS)) {
           this.selectedColonies.push(ColonyName.PALLAS);
         }
       }
+    },
+    pathfinders(_enabled) {
+      // if (enabled === true) {
+      //   if (this.selectedColonies.includes(ColonyName.LEAVITT)) {
+      //     this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.LEAVITT);
+      //     this.selectedColonies.push(ColonyName.LEAVITT_II);
+      //   }
+      // } else {
+      //   if (this.selectedColonies.includes(ColonyName.LEAVITT_II)) {
+      //     this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.LEAVITT_II);
+      //     this.selectedColonies.push(ColonyName.LEAVITT);
+      //   }
+      // }
     },
   },
 });

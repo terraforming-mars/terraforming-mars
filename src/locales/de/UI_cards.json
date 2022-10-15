@@ -188,10 +188,9 @@
     "play": "spielen",
     "replay": "nochmal spielen",
 
-    "1 VP for each Animal on this card.": "1 SP für jedes Tier auf dieser Karte.",
     "1 VP for each animal on this card.": "1 SP für jedes Tier auf dieser Karte.",
-    "1 VP per Animal on this card.": "1 SP für jedes Tier auf dieser Karte.",
-    "1 VP per 2 Animals on this card.": "1 SP für jedes zweite Tier auf dieser Karte.",
+    "1 VP per animal on this card.": "1 SP für jedes Tier auf dieser Karte.",
+    "1 VP per 2 animals on this card.": "1 SP für jedes zweite Tier auf dieser Karte.",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} platzierte \"${1}\" auf (${2}, ${3}."
 }

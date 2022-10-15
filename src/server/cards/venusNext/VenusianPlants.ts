@@ -33,7 +33,7 @@ export class VenusianPlants extends Card implements IProjectCard {
           b.or().nbsp.animals(1, {secondaryTag: Tag.VENUS});
         }),
         description: {
-          text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD',
+          text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD',
           align: 'left',
         },
       },

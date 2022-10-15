@@ -11,7 +11,7 @@ export class LunarIndustryComplex extends Card implements IProjectCard {
     super({
       name: CardName.LUNAR_INDUSTRY_COMPLEX,
       cardType: CardType.AUTOMATED,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 28,
 
       behavior: {
@@ -21,7 +21,7 @@ export class LunarIndustryComplex extends Card implements IProjectCard {
       reserveUnits: {titanium: 2},
 
       metadata: {
-        description: 'Spend 2 Titanium. Place a mine tile on The Moon and raise the Mining Rate 1 step. ' +
+        description: 'Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. ' +
           'Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.',
         cardNumber: 'M74',
         renderData: CardRenderer.builder((b) => {

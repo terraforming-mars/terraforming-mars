@@ -29,10 +29,10 @@
 
   "Stratospheric Birds":"Uccelli Stratosferici",
   "Action: Add 1 animal to this card.":"Azione: aggiungi 1 Animale a questa carta.",
-  "Requires Venus 12% and that you spend 1 Floater from any card.":"Richiede che Venere sia almeno al 12% e che tu scarti 1 Galleggiante da una qualunque carta. 1 PV per ogni Animale su questa carta.",
+  "Requires Venus 12% and that you spend 1 floater from any card.":"Richiede che Venere sia almeno al 12% e che tu scarti 1 Galleggiante da una qualunque carta. 1 PV per ogni Animale su questa carta.",
 
   "Venusian Plants":"Piante Venusiane",
-  "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD).":"Richiede che Venere sia almeno al 16%. Incrementa Venere di 1 livello. Aggiungi 1 Microbo o 1 Animale ad UN'ALTRA CARTA DI TIPO VENERE.",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD).":"Richiede che Venere sia almeno al 16%. Incrementa Venere di 1 livello. Aggiungi 1 Microbo o 1 Animale ad UN'ALTRA CARTA DI TIPO VENERE.",
 
   "Extremophiles":"Estremofili",
   "Action: Add 1 microbe to ANY card.":"Azione: aggiungi 1 Microbo ad una carta QUALSIASI.",
@@ -52,7 +52,7 @@
   "Requires Venus 12%.":"Richiede che Venere sia almeno al 12%.",
 
   "Sulphur-Eating Bacteria":"Batteri Mangiatori di Zolfo",
-  "Action: Spend any number of Microbes here to gain triple amount of M€.":"Azione: aggiungi 1 Microbo a questa carta, oppure scarta un qualunque numero di Microbi da questa carta per ottenere una quantità tripla di M€.",
+  "Action: Spend any number of microbes here to gain triple amount of M€.":"Azione: aggiungi 1 Microbo a questa carta, oppure scarta un qualunque numero di Microbi da questa carta per ottenere una quantità tripla di M€.",
   "Requires Venus 6%).":"Richiede che Venere sia almeno al 6%.",
 
   "Venus Waystation":"Stazione Intermedia di Venere",
@@ -61,12 +61,12 @@
 
   "Action: Add 1 resource to ANOTHER VENUS CARD).":"Azione: aggiungi 1 risorsa AD UN'ALTRA CARTA DI TIPO VENERE.",
   "Requires Venus 12%. Decrease your energy production 1 step.)":"Richiede almeno il 12% di Venere. Diminuisci la tua Produzione di Energia di 1 livello.",
-  "Place a City tile ON THE":"Colloca una tessera Città SULL'",
+  "Place a city tile ON THE":"Colloca una tessera Città SULL'",
   "(RESERVED AREA.)":"AREA RISERVATA",
 
   "Thermophiles":"Termofili",
-  "Action: Add 1 Microbe to ANY Venus CARD.":"Azione: aggiungi 1 Microbo AD UNA QUALUNQUE CARTA DI TIPO VENERE.",
-  "Action: Spend 2 Microbes here to raise Venus 1 step.":"Azione: rimuovi 2 Microbi da questa carta per incrementare Venere di 1 livello.",
+  "Action: Add 1 microbe to ANY Venus CARD.":"Azione: aggiungi 1 Microbo AD UNA QUALUNQUE CARTA DI TIPO VENERE.",
+  "Action: Spend 2 microbes here to raise Venus 1 step.":"Azione: rimuovi 2 Microbi da questa carta per incrementare Venere di 1 livello.",
 
   "Sponsored Academies":"Istituti Sponsorizzati",
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.":"Scarta una carta dalla tua mano e POI pesca 3 carte. Tutti i giocatori avversari pescano 1 carta.",
@@ -107,7 +107,7 @@
   "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3 M€ each.":"Effetto: quando giochi un simbolo Venere, i Galleggianti collocati su questa carta possono essere usati per pagare, e ciascuno vale 3 M€.",
 
   "Floating Habs":"Abitazioni Fluttuanti",
-  "Action: Spend 2 M€ to add 1 Floater to ANY card":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante ad una carta QUALUNQUE.",
+  "Action: Spend 2 M€ to add 1 floater to ANY card":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante ad una carta QUALUNQUE.",
   "Requires 2 science tags. 1 VP for every 2nd Floater on this card).":"Richiede 2 simboli Scienza. 1 PV per ogni coppia di Galleggianti su questa carta.",
   "Requires 2 science tags.":"Richiede 2 simboli Scienza.",
   "1 VP for every 2nd Floater on this card.":"1 PV per ogni coppia di Galleggianti su questa carta.",
@@ -119,7 +119,7 @@
   "Water to Venus":"Acqua per Venere",
   "Raise Venus 1 step.":"Incrementa Venere di 1 livello.",
 
-  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA).":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso, incluso questo. Colloca una tessera Città SULL'AREA RISERVATA.",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.).":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso, incluso questo. Colloca una tessera Città SULL'AREA RISERVATA.",
 
   "Sky Docks":"Stazioni Spaziali",
   "Requires 2 Earth tags. Gain 1 Trade Fleet.":"Richiede 2 simboli Terra. Ottieni 1 Flotta Commerciale.",
@@ -139,7 +139,7 @@
 
   "Aerosport Tournament":"Torneo Sport Aerospaziali",
   "5 floaters":"5 Galleggianti",
-  "Requires that you have 5 floaters. Gain 1 M€ per each City tile in play.":"Richiede di possedere 5 simboli Galleggiante. Ottieni 1 M€ per ogni tessera Città in gioco.",
+  "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.":"Richiede di possedere 5 simboli Galleggiante. Ottieni 1 M€ per ogni tessera Città in gioco.",
 
   "Air-Scrapping Expedition":"Spedizione per Frammentazione dell'Aria",
   "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.":"Incrementa Venere di 1 livello. Aggiungi 3 Galleggianti AD UNA QUALUNQUE CARTA Venere.",
@@ -154,7 +154,7 @@
 
   "Dawn City":"Dawn City",
   "4 Science":"4 simboli Scienza",
-  "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.":"Richiede 4 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello. Incrementa la tua Produzione di Titanio di 1 livello. Colloca una tessera Città SULL'AREA RISERVATA.",
+  "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.":"Richiede 4 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello. Incrementa la tua Produzione di Titanio di 1 livello. Colloca una tessera Città SULL'AREA RISERVATA.",
 
   "Deuterium Export":"Esportazione di Deuterio",
   "Action: Add 1 floater to this card.":"Azione: aggiungi 1 Galleggiante a questa carta.",
@@ -168,18 +168,18 @@
 
   "Requires 2 science tags. 1 VP for every 3rd Microbe on this card":"Richiede 2 simboli Scienza. 1 PV per ogni tre Microbi su questa carta.",
 
-  "Action: spend 2 M€ to add 1 Floater to ANY card":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante ad una carta QUALSIASI.",
+  "Action: spend 2 M€ to add 1 floater to ANY card":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante ad una carta QUALSIASI.",
 
   "Requires 2 science tags. 1 VP for every 2nd Floater on this card":"Richiede 2 simboli Scienza. 1 PV per ogni coppia di Galleggianti su questa carta.",
 
   "Forced Precipitation":"Precipitazioni Forzate",
-  "Action: Spend 2 M€ to add 1 Floater to THIS card.":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante a questa carta.",
+  "Action: Spend 2 M€ to add 1 floater to THIS card.":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante a questa carta.",
   "Action: Spend 2 floaters here to increase Venus 1 step.":"Azione: rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
 
   "Freyja Biodomes":"Biocupole di Freyja",
 
   "10% Venus":"10% di Venere",
-  "Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, M€ +2.":"Richiede almeno il 10% di Venere. Aggiungi 2 Microbi o 2 Animali AD 1 QUALUNQUE CARTA CON IL SIMBOLO VENERE. Diminuisci la tua Produzione di Energia di 1 livello, e incrementa la tua Produzione di M€ di 2 livelli.",
+  "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.":"Richiede almeno il 10% di Venere. Aggiungi 2 Microbi o 2 Animali AD 1 QUALUNQUE CARTA CON IL SIMBOLO VENERE. Diminuisci la tua Produzione di Energia di 1 livello, e incrementa la tua Produzione di M€ di 2 livelli.",
 
   "Giant Solar Shade":"Schermo Solare Gigante",
   "Raise Venus 3 steps.":"Incrementa Venere di 3 livelli.",
@@ -187,7 +187,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps":"Incrementa Venere di 1 livello. Incrementa la tua Produzione di Calore di 3 livelli.",
 
   "Gyropolis":"Gyropolis",
-  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a City tile.":"Diminuisci la tua Produzione di Energia di 2 livelli. Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Venere e Terra che possiedi. Colloca una tessera Città.",
+  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.":"Diminuisci la tua Produzione di Energia di 2 livelli. Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Venere e Terra che possiedi. Colloca una tessera Città.",
 
   "Raise Venus 1 step. Add 1 floater to A Venus CARD for each Jovian tag you have":"Incrementa Venere di 1 livello. Aggiungi 1 Galleggiante ad una CARTA Venere per ogni simbolo Gioviano in tuo possesso.",
   "Io Sulphur Research":"Ricerca sullo Zolfo di Io",
@@ -200,7 +200,7 @@
   "Action: Spend 1 titanium to add 2 floaters here, OR spend 2 floaters here to raise Venus 1 step":"Azione: spendi 1 Titanio per aggiungere 2 Galleggianti a questa carta, OPPURE rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
 
   "Luna Metropolis":"Luna Metropolis",
-  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso, incluso questo. Colloca una tessera Città SULL'AREA RISERVATA.",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso, incluso questo. Colloca una tessera Città SULL'AREA RISERVATA.",
 
   "Local Shading":"Schermatura Locale",
   "Action: Add 1 floater to this card.":"Azione: aggiungi 1 Galleggiante a questa carta.",
@@ -208,7 +208,7 @@
 
   "Maxwell Base":"Base Maxwell",
   "Action: Add 1 resource to ANOTHER VENUS CARD.":"Azione: aggiungi 1 risorsa AD UN'ALTRA CARTA DI TIPO VENERE.",
-  "Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.":"Richiede almeno il 12% di Venere. Diminuisci la tua Produzione di Energia di 1 livello. Colloca una tessera Città SULL'AREA RISERVATA.",
+  "Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.":"Richiede almeno il 12% di Venere. Diminuisci la tua Produzione di Energia di 1 livello. Colloca una tessera Città SULL'AREA RISERVATA.",
 
 
   "max 14% Venus":"Massimo 14% di Venere",
@@ -226,16 +226,16 @@
 
   "Stratopolis":"Stratopolis",
   "Action: Add 2 floaters to ANY VENUS CARD.":"Azione: aggiungi 2 Galleggianti ad una QUALUNQUE CARTA DI TIPO VENERE.",
-  "Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA)":"Richiede 2 simboli Scienza. Incrementa la tua Produzione di M€ di 2 livelli. Colloca una tessera Città SULL'AREA RISERVATA.",
+  "Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA)":"Richiede 2 simboli Scienza. Incrementa la tua Produzione di M€ di 2 livelli. Colloca una tessera Città SULL'AREA RISERVATA.",
   "1 VP for every 3rd Floater on this card.":"1 PV per ogni terna di Galleggianti su questa carta.",
 
   "12% Venus":"12% di Venere",
 
   "6% Venus":"6% di Venere",
 
-  "Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of M€":"Azione: aggiungi 1 Microbo a questa carta, oppure rimuovi un qualunque numero di Microbi da questa carta per ottenere una quantità tripla di M€.",
+  "Action: add 1 Microbe to this card, or spend any number of microbes here to gain triple amount of M€":"Azione: aggiungi 1 Microbo a questa carta, oppure rimuovi un qualunque numero di Microbi da questa carta per ottenere una quantità tripla di M€.",
   "Requires Venus 6%":"Richiede che Venere sia almeno al 6%.",
-  "Action: add 1 Microbe to ANY Venus CARD or spend 2 Microbes here to raise Venus 1 step":"Azione: aggiungi 1 Microbo ad UNA QUALUNQUE CARTA DI TIPO VENERE, oppure rimuovi 2 Microbi da questa carta per incrementare Venere di 1 livello.",
+  "Action: add 1 Microbe to ANY Venus CARD or spend 2 microbes here to raise Venus 1 step":"Azione: aggiungi 1 Microbo ad UNA QUALUNQUE CARTA DI TIPO VENERE, oppure rimuovi 2 Microbi da questa carta per incrementare Venere di 1 livello.",
 
   "Venus Governor":"Governatore di Venere",
   "2 Venus":"2 Venere",
@@ -243,11 +243,11 @@
 
   "Venusian Animals":"Animali Venusiani",
   "18% Venus":"18% di Venere",
-  "Effect: When you play a Science tag, including this, add 1 Animal to this card.":"Effetto: quando giochi un simbolo Scienza, incluso questo, aggiungi 1 Animale a questa carta.",
+  "Effect: When you play a science tag, including this, add 1 animal to this card.":"Effetto: quando giochi un simbolo Scienza, incluso questo, aggiungi 1 Animale a questa carta.",
   "Requires Venus 18%":"Richiede che Venere sia almeno al 18%.",
 
   "16% Venus":"16% di Venere",
-  "Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD":"Richiede che Venere sia almeno al 16%. Incrementa Venere di 1 livello. Aggiungi 1 Microbo o 1 Animale ad UN'ALTRA CARTA DI TIPO VENERE.",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD":"Richiede che Venere sia almeno al 16%. Incrementa Venere di 1 livello. Aggiungi 1 Microbo o 1 Animale ad UN'ALTRA CARTA DI TIPO VENERE.",
 
   "Venus Magnetizer":"Magnetizzatore di Venere",
   "Action: Decrease your energy production 1 step to raise Venus 1 step.":"Azione: diminuisci la tua Produzione di Energia di 1 livello per incrementare Venere di 1 livello.",

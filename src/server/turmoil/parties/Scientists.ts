@@ -19,7 +19,7 @@ export class Scientists extends Party implements IParty {
 class ScientistsBonus01 implements Bonus {
   readonly id = 'sb01' as const;
   readonly isDefault = true;
-  readonly description = 'Gain 1 M€ for each Science tag you have';
+  readonly description = 'Gain 1 M€ for each science tag you have';
 
   getScore(player: Player) {
     return player.tags.count(Tag.SCIENCE, 'raw-pf');

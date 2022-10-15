@@ -1,7 +1,6 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
-import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from '../common/cards/CardName';
@@ -19,7 +18,6 @@ import {LogMessageDataType} from '../common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from '../common/turmoil/PartyName';
-import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from '../common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resources} from '../common/Resources';
@@ -66,7 +64,6 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
-import {Executor} from './behavior/Behaviors';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 
 /**
@@ -110,6 +107,8 @@ export class Player {
   private steelValue: number = 2;
   // Helion
   public canUseHeatAsMegaCredits: boolean = false;
+  // Luna Trade Federation
+  public canUseTitaniumAsMegacredits: boolean = false;
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
@@ -138,7 +137,7 @@ export class Player {
   public oceanBonus: number = constants.OCEAN_BONUS;
 
   // Custom cards
-  // Leavitt Station.
+  // Community Leavitt Station and Pathfinders Leavitt Station
   // TODO(kberg): move scienceTagCount to Tags?
   public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41
@@ -963,7 +962,10 @@ export class Player {
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
    */
   public spendableMegacredits(): number {
-    return this.megaCredits + (this.canUseHeatAsMegaCredits ? this.availableHeat() : 0);
+    let total = this.megaCredits;
+    if (this.canUseHeatAsMegaCredits) total += this.availableHeat();
+    if (this.canUseTitaniumAsMegacredits) total += this.titanium * (this.titaniumValue - 1);
+    return total;
   }
 
   public runResearchPhase(draftVariant: boolean): void {
@@ -1564,6 +1566,12 @@ export class Player {
       data: options?.data ?? false,
     };
 
+    // HOOK: Luna Trade Federation
+    if (usable.titanium === false && payment.titanium > 0 && this.isCorporation(CardName.LUNA_TRADE_FEDERATION)) {
+      usable.titanium = true;
+      multiplier.titanium -= 1;
+    }
+
     let totalToPay = 0;
     for (const key of PAYMENT_KEYS) {
       if (usable[key]) totalToPay += payment[key] * multiplier[key];
@@ -1572,8 +1580,10 @@ export class Player {
     return totalToPay;
   }
 
-  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
-  // and additionally pay the reserveUnits (no replaces here)
+  /**
+   * Returns `true` if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
+   * and additionally pay the reserveUnits (no replaces here)
+   */
   public canAfford(cost: number, options?: CanAffordOptions) {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (!this.hasUnits(reserveUnits)) {
@@ -1902,12 +1912,13 @@ export class Player {
     const result: SerializedPlayer = {
       id: this.id,
       corporations: this.corporations.map((corporation) => {
-        return {
+        const serialized = {
           name: corporation.name,
           resourceCount: corporation.resourceCount,
-          allTags: corporation instanceof Aridor ? Array.from(corporation.allTags) : [],
-          isDisabled: corporation instanceof PharmacyUnion && corporation.isDisabled,
+          isDisabled: false,
         };
+        corporation.serialize?.(serialized);
+        return serialized;
       }),
       // Used only during set-up
       pickedCorporationCard: this.pickedCorporationCard?.name,
@@ -1933,6 +1944,7 @@ export class Player {
       steelValue: this.steelValue,
       // Helion
       canUseHeatAsMegaCredits: this.canUseHeatAsMegaCredits,
+      canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
@@ -1994,6 +2006,8 @@ export class Player {
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
+    // TODO(kberg): remove ?? false by 2022-12-01
+    player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits ?? false;
     player.cardCost = d.cardCost;
     player.colonies.cardDiscount = d.cardDiscount;
     player.colonies.tradeDiscount = d.colonyTradeDiscount;
@@ -2056,16 +2070,7 @@ export class Player {
         if (corporation.resourceCount !== undefined) {
           card.resourceCount = corporation.resourceCount;
         }
-        if (card instanceof Aridor) {
-          if (corporation.allTags !== undefined) {
-            card.allTags = new Set(corporation.allTags);
-          } else {
-            console.warn('did not find allTags for ARIDOR');
-          }
-        }
-        if (card instanceof PharmacyUnion) {
-          card.isDisabled = Boolean(corporation.isDisabled);
-        }
+        card.deserialize?.(corporation);
         player.corporations.push(card);
       }
     }

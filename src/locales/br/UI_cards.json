@@ -183,10 +183,9 @@
     "play": "jogar",
     "replay": "jogar novamente",
 
-    "1 VP for each Animal on this card.": "1 PV por cada Animal nesta carta.",
-    "1 VP for each animal on this card.": "1 PV por cada animal nesta carta.",
-    "1 VP per Animal on this card.": "1 PV por Animal nesta carta.",
-    "1 VP per 2 Animals on this card.": "1 PV cada 2 Animais nesta carta.",
+    "1 VP for each animal on this card.": "1 PV por cada Animal nesta carta.",
+    "1 VP per animal on this card.": "1 PV por Animal nesta carta.",
+    "1 VP per 2 animals on this card.": "1 PV cada 2 Animais nesta carta.",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} colocou \"${1}\" um tile em (${2}, ${3}"
 }

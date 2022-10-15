@@ -41,10 +41,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    const index = turmoil.delegateReserve.indexOf(player.id);
-    if (index > -1) {
-      turmoil.delegateReserve.splice(index, 1);
-    }
+    turmoil.delegateReserve.remove(player.id);
     turmoil.setNewChairman(player.id, player.game, /* setAgenda */ false);
     return undefined;
   }

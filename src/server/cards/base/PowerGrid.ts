@@ -11,11 +11,11 @@ export class PowerGrid extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.POWER_GRID,
-      tags: [Tag.ENERGY],
+      tags: [Tag.POWER],
       cost: 18,
 
       behavior: {
-        production: {energy: {tag: Tag.ENERGY}},
+        production: {energy: {tag: Tag.POWER}},
       },
 
       metadata: {

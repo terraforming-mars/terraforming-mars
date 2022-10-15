@@ -25,7 +25,7 @@ describe('MicrogravityHealthProblems', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
     player.megaCredits = 20;
     player2.megaCredits = 20;
     card.resolve(game, turmoil);

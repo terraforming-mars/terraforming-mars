@@ -63,7 +63,7 @@
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.":"Disminuye tu producción de energía 3 niveles y aumenta tu producción de plantas 2 niveles. Obtén 3 VT. Coloca esta loseta.",
 
   "Orbital Cleanup":"Limpieza orbital",
-  "Action: Gain 1 M€ per Science tag you have.":"Acción: obtén 1 M€ por cada símbolo de ciencia que poseas.",
+  "Action: Gain 1 M€ per science tag you have.":"Acción: obtén 1 M€ por cada símbolo de ciencia que poseas.",
   "Decrease your M€ production 2 steps.":"Disminuye tu producción de M€ 2 niveles.",
 
   "Law Suit":"Litigio",
@@ -89,7 +89,7 @@
   "Increase your M€ production 1 step per different tag you have in play, including this.":"Aumenta tu producción de M€ 1 nivel por cada símbolo diferente que tengas en juego, incluyendo este.",
 
   "Penguins": "Pingüinos",
-  "Action: Add 1 Animal to this card.": "Acción: Añade 1 animal a esta carta.",
+  "Action: Add 1 animal to this card.": "Acción: Añade 1 animal a esta carta.",
   "Requires 8 oceans.": "Requiere 8 océanos. 1 PV por cada animal en esta carta.",
 
   "Snow Algae":"Sandía de Nieve",
@@ -129,8 +129,8 @@
   "Arcadian": "Arcadia",
   "Communities": "Comunidades",
   "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Comienza con 40 M€ y 10 de acero. COMO PRIMERA ACCIÓN, COLOCA UNA COMUNIDAD [MARCADOR DE JUGADOR] EN UN ÁREA NO RESERVADA.",
-  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "ACCIÓN: COLOCA UNA COMUNIDAD (MARCADOR DE JUGADOR) EN UN ÁREA NO RESERVADA ADYACENTE A UNA DE TUS LOSETAS O ÁREAS MARCADAS",
-  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "EFECTO: LAS ÁREAS MARCADAS ESTÁN RESERVADAS PARA TI. CUANDO COLOQUES UNA LOSETA EN ELLAS, GANA 3 M€",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "ACCIÓN: COLOCA UNA COMUNIDAD (MARCADOR DE JUGADOR) EN UN ÁREA NO RESERVADA ADYACENTE A UNA DE TUS LOSETAS O ÁREAS MARCADAS",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "EFECTO: LAS ÁREAS MARCADAS ESTÁN RESERVADAS PARA TI. CUANDO COLOQUES UNA LOSETA EN ELLAS, GANA 3 M€",
 
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Comienza con 44 M€. Como primera acción, revela cartas hasta que hayas revelado una carta de tipo microbio. Róbala y descarta el resto.",
   "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efecto: cuando se juega una carta de tipo microbio, incluida esta, ESE JUGADOR gana 2 M€, o le añade un microbio a ESA carta, y tú ganas 2 M€.",

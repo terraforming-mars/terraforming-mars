@@ -20,7 +20,7 @@ export class MiningComplex extends PreludeCard {
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
 
       metadata: {
-        description: 'Place a mine tile on The Moon and raise the Mining Rate 1 step. ' +
+        description: 'Place a mine tile on The Moon and raise the mining rate 1 step. ' +
         'Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. ' +
         'Pay 7 M€.',
         cardNumber: '',

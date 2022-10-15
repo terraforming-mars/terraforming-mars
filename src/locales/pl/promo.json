@@ -60,7 +60,7 @@
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "",
 
   "Orbital Cleanup": "Sprzątanie Orbitalne",
-  "Action: Gain 1 M€ per Science tag you have.": "Akcja: Otrzymujesz 1 M€ za każdy posiadany symbol nauki.",
+  "Action: Gain 1 M€ per science tag you have.": "Akcja: Otrzymujesz 1 M€ za każdy posiadany symbol nauki.",
   "Decrease your M€ production 2 steps.": "Obniż swoją produkcję M€ o 2 poziomy.",
 
   "Law Suit": "Pozew",
@@ -86,7 +86,7 @@
   "Increase your M€ production 1 step per different tag you have in play, including this.": "Podnieś swoją produkcję M€ o tyle poziomów, ile różnych symboli posiadasz (włącznie z tym).",
 
   "Penguins": "Pingwiny",
-  "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
+  "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
   "Requires 8 oceans.": "Wymagania: Na planszy musi znajdować się przynajmniej 8 obszarów oceanów.",
 
   "Snow Algae": "Zawłotnia śnieżna",
@@ -126,8 +126,8 @@
   "Arcadian": "Wspólnota",
   "Communities": "Arkadyjska",
   "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Rozpoczynasz grę z 10 M€ i 10 jednostkami stali. W ramach swojej pierwszej akcji w grze umieść na niezarezerwowanym polu na planszy znacznik wspólnoty (Twój znacznik gracza).",
-  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "Akcja: Umieść znacznik wspólnoty (Twój znacznik gracza) na niezarezerwowanym polu na planszy sąsiadującym z Twoim obszarem albo innym znacznikiem wspólnoty.",
-  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "Pola ze znacznikami wspólnoty są dla Ciebie zarezerwowane. Gdy umieszczasz na nich dowolny obszar, otrzymujesz 3 M€.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "Akcja: Umieść znacznik wspólnoty (Twój znacznik gracza) na niezarezerwowanym polu na planszy sąsiadującym z Twoim obszarem albo innym znacznikiem wspólnoty.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "Pola ze znacznikami wspólnoty są dla Ciebie zarezerwowane. Gdy umieszczasz na nich dowolny obszar, otrzymujesz 3 M€.",
 
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Warunki początkowe: Rozpoczynasz grę z 44 M€. W ramach swojej pierwszej akcji odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz karty z symbolem mikrobów. Weź tę kartę do ręki, resztę odrzuć.",
   "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem mikrobów (z tą włącznie), ten gracz otrzymuje 2 M€ albo umieszcza 1 jednostkę mikrobów na zagranej karcie, a Ty dodatkowo otrzymujesz 2 M€ za każdy symbol mikrobów na zagranej karcie.",

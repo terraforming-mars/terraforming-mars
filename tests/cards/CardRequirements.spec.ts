@@ -151,7 +151,7 @@ describe('CardRequirements', function() {
   it('satisfies properly for partyLeaders', function() {
     const requirements = CardRequirements.builder((b) => b.partyLeaders(1));
     expect(requirements.satisfies(player)).eq(false);
-    const greens = player.game.turmoil!.getPartyByName(PartyName.GREENS)!;
+    const greens = player.game.turmoil!.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player.id;
     expect(requirements.satisfies(player)).eq(true);
   });

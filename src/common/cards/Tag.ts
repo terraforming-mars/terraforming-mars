@@ -2,7 +2,7 @@ export enum Tag {
     BUILDING = 'building',
     SPACE = 'space',
     SCIENCE = 'science',
-    ENERGY = 'power',
+    POWER = 'power',
     EARTH = 'earth',
     JOVIAN = 'jovian',
     VENUS = 'venus',

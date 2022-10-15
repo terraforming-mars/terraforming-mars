@@ -92,7 +92,7 @@
   "2 Earth": "2 地球",
   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点M€产量 获得4块钱",
 
-  "Refugee Camp": "难民营",
+  "Refugee Camps": "难民营",
   "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "行动：降低自身1点M€产量，增加1点营地资源到此卡上",
   "1 VP for each camp resource on this card.": "每1点营地资源，获得1VP",
 
@@ -137,7 +137,7 @@
   "Corona Extractor":"日冕提取器",
   "4 Science":"4个科技标志",
 
-  "Cryo Sleep":"低温睡眠",
+  "Cryo-Sleep":"低温睡眠",
   "Effect: When you trade, you pay 1 less resource for it.":"效果：当你交易时，你少支付1个资源。",
 
   "Ecology Research":"生态学研究",
@@ -186,7 +186,7 @@
   "Solar Probe":"太阳探测器",
   "Draw 1 card for every 3 science tags you have, including this.":"每有3个科技标志（包括此牌），便摸1张牌。",
   "Space Port":"太空港",
-  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.":"需求：1块殖民地。你的电力产量-1，金钱产量+4。放置1座城市。获得1艘贸易飞船。",
+  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.":"需求：1块殖民地。你的电力产量-1，金钱产量+4。放置1座城市。获得1艘贸易飞船。",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"需求：1块殖民地。放置1块殖民地。可以放在你已经拥有殖民地的那块殖民地板块上。获得1艘贸易飞船。每有2块殖民地算1分。",
   "Spin-off Department":"副产品部门",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.":"效果：打出1张原始费用为20或更多的牌时，摸1张牌。",
@@ -198,7 +198,7 @@
   "Titan Floating Launch-Pad":"土卫六漂浮发射台",
   "Colony City":"殖民地城市",
   "Warp Drive":"曲率引擎",
-  "Effect: When you play a Space card, you pay 4 M€ less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
+  "Effect: When you play a space card, you pay 4 M€ less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
   "Requires 5 science tags.":"需求：5个科技标志。",
 
   "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果： 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡",

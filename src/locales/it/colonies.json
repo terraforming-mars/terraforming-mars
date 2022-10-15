@@ -88,7 +88,7 @@
   "2 Earth": "2 Terra",
   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Richiede 2 simboli Terra. Incrementa la tua Produzione di M€ di 2 livelli e ottieni 4 M€.",
 
-  "Refugee Camp": "Campi dei Rifugiati",
+  "Refugee Camps": "Campi dei Rifugiati",
   "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Azione: diminuisci la tua Produzione di M€ di 1 livello per aggiungere una risorsa Campo a questa carta.",
   "1 VP for each camp resource on this card.": "1 PV per ogni risorsa Campo su questa carta.",
 
@@ -133,7 +133,7 @@
   "Corona Extractor":"Estrattore della Corona",
   "4 Science":"4 Scienza",
 
-  "Cryo Sleep":"Crio-Sonno",
+  "Cryo-Sleep":"Crio-Sonno",
   "Effect: When you trade, you pay 1 less resource for it.":"Effetto: quando commerci, paghi 1 risorsa in meno.",
 
   "Ecology Research":"Ricerca Ecologica",
@@ -182,7 +182,7 @@
   "Solar Probe":"Sonda Solare",
   "Draw 1 card for every 3 science tags you have, including this.":"Pesca una carta per ogni terna di simboli Scienza che possiedi in gioco, incluso questo.",
   "Space Port":"Spazioporto",
-  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Ottieni 1 Flotta Commerciale. Colloca 1 tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
+  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Ottieni 1 Flotta Commerciale. Colloca 1 tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale. 1 PV per ogni coppia di Colonie in gioco.",
   "Spin-off Department":"Dipartimento Spin-Off",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20 M€ OR MORE, draw a card.":"Effetto: QUANDO GIOCHI UNA CARTA CON UN COSTO DI PARTENZA MAGGIORE O UGUALE A 20 M€, pesca una carta.",
@@ -194,7 +194,7 @@
   "Titan Floating Launch-Pad":"Piattaforma di Lancio",
   "Colony City":"Colonia Città",
   "Warp Drive":"Motore a Curvatura",
-  "Effect: When you play a Space card, you pay 4 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Spazio, la paghi 4 M€ in meno.",
+  "Effect: When you play a space card, you pay 4 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Spazio, la paghi 4 M€ in meno.",
   "Requires 5 science tags.":"Richiede 5 simboli Scienza.",
 
   "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 Animale a questa carta.",

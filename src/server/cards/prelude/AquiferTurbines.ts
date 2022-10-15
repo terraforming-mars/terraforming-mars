@@ -9,7 +9,7 @@ export class AquiferTurbines extends PreludeCard {
   constructor() {
     super({
       name: CardName.AQUIFER_TURBINES,
-      tags: [Tag.ENERGY],
+      tags: [Tag.POWER],
 
       behavior: {
         production: {energy: 2},
@@ -24,7 +24,7 @@ export class AquiferTurbines extends PreludeCard {
           b.oceans(1).production((pb) => pb.energy(2)).br;
           b.megacredits(-3);
         }),
-        description: 'Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.',
+        description: 'Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.',
       },
     });
   }

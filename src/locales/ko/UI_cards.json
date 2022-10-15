@@ -193,10 +193,9 @@
     "replay": "재추진",
     "Invert": "반전",
 
-    "1 VP for each Animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
     "1 VP for each animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
-    "1 VP per Animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
-    "1 VP per 2 Animals on this card.": "해당 카드에 있는 동물 자원 2개당 1점.",
+    "1 VP per animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
+    "1 VP per 2 animals on this card.": "해당 카드에 있는 동물 자원 2개당 1점.",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} 플레이어가 \"${1}\" 타일 배치 (${2}, ${3}"
 }

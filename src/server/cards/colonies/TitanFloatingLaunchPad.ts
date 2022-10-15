@@ -95,7 +95,7 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
   }
 
   public optionText() {
-    return 'Pay 1 Floater (use Titan Floating Launch-pad action)';
+    return 'Pay 1 floater (use Titan Floating Launch-pad action)';
   }
 
   public trade(colony: IColony) {

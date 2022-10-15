@@ -35,8 +35,8 @@ export default Vue.extend({
   components: {
     Button,
   },
-  data() {
-    const model: SelectPaymentModel = {
+  data(): SelectPaymentModel {
+    return {
       cost: 0,
       heat: 0,
       megaCredits: 0,
@@ -48,7 +48,6 @@ export default Vue.extend({
       data: 0,
       warning: undefined,
     };
-    return model;
   },
   mounted() {
     Vue.nextTick(() => {
@@ -130,6 +129,9 @@ export default Vue.extend({
     },
     canUseTitanium() {
       return this.playerinput.canUseTitanium && this.thisPlayer.titanium > 0;
+    },
+    canUseLunaTradeFederationTitanium() {
+      return this.playerinput.canUseLunaTradeFederationTitanium && this.thisPlayer.titanium > 0;
     },
     canUseSeeds() {
       return this.playerinput.canUseSeeds && (this.playerinput.seeds ?? 0 > 0);
@@ -216,7 +218,7 @@ export default Vue.extend({
       <Button type="max" @click="setMaxValue('steel')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group" v-if="playerinput.canUseTitanium">
+    <div class="payments_type input-group" v-if="playerinput.canUseTitanium || canUseLunaTradeFederationTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <Button type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />

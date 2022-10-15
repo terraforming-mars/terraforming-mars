@@ -25,7 +25,7 @@ export class OrbitalCleanup extends Card implements IProjectCard {
         cardNumber: 'X08',
 
         renderData: CardRenderer.builder((b) => {
-          b.action('Gain 1 M€ per Science tag you have.', (eb) => {
+          b.action('Gain 1 M€ per science tag you have.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().science(1, {played});
           }).br;
           b.production((pb) => {

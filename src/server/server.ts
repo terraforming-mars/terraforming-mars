@@ -16,7 +16,7 @@ import {Route} from './routes/Route';
 import {processRequest} from './requestProcessor';
 import {timeAsync} from './utils/timer';
 import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
-import {Executor} from './behavior/Behaviors';
+import {Executor} from './behavior/Executor';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);

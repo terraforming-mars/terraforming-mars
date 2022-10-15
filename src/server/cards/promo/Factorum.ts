@@ -16,7 +16,7 @@ export class Factorum extends Card implements IActionCard, ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.FACTORUM,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       startingMegaCredits: 37,
 
       behavior: {

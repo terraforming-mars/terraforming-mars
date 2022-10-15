@@ -7,7 +7,7 @@ import {GameOptions} from '../GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {AgendaStyle} from '../../common/turmoil/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
-import {Multiset} from '../utils/Multiset';
+import {MultiSet} from 'mnemonist';
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) {
@@ -69,7 +69,7 @@ function calc(params: URLSearchParams): string {
     options.randomMA = RandomMAOptionType.UNLIMITED;
     break;
   }
-  const results: Multiset<string> = new Multiset();
+  const results = new MultiSet<string>();
   for (let nth = 1; nth <= runs; nth++) {
     if (nth % 100 === 0) {
       console.log(`#${nth}`);
@@ -84,7 +84,7 @@ function calc(params: URLSearchParams): string {
     }
   }
 
-  const copy = new Array(...results.entries());
+  const copy: Array<[string, number]> = new Array(...results.multiplicities());
   copy.sort((a, b) => b[1] - a[1]);
   return 'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n');
 }

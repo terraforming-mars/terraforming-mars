@@ -183,10 +183,9 @@
     "play": "Juega",
     "replay": "Otra vez",
 
-    "1 VP for each Animal on this card.": "1 PV por cada Animal en esta carta.",
     "1 VP for each animal on this card.": "1 PV por cada Animal en esta carta.",
-    "1 VP per Animal on this card.": "1 PV por Animal en esta carta.",
-    "1 VP per 2 Animals on this card.": "1 PV por cada 2 Animales en esta carta.",
+    "1 VP per animal on this card.": "1 PV por Animal en esta carta.",
+    "1 VP per 2 animals on this card.": "1 PV por cada 2 Animales en esta carta.",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} ha colocado \"${1}\" loseta en (${2}, ${3}"
 }

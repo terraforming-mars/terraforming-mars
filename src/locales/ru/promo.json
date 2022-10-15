@@ -70,7 +70,7 @@
     "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл",
 
     "Orbital Cleanup": "Очистка орбиты",
-    "Action: Gain 1 M€ per Science tag you have.": "Действие: Получите 1 МС за каждую свою метку Науки",
+    "Action: Gain 1 M€ per science tag you have.": "Действие: Получите 1 МС за каждую свою метку Науки",
     "Decrease your M€ production 2 steps.": "Уменьшите своё производство МС на 2",
 
     "Law Suit": "Судебный иск",
@@ -100,7 +100,7 @@
 
     "Penguins": "Пингвины",
     "8 Oceans": "8 океанов",
-    "Action: Add 1 Animal to this card.": "Действие: добавьте сюда одно животное",
+    "Action: Add 1 animal to this card.": "Действие: добавьте сюда одно животное",
     "Requires 8 oceans.": "Требует 8 океанов",
     "1 VP for each animal on this card.": "1 ПО за каждое животное на этой карте",
 
@@ -162,9 +162,9 @@
     "Arcadian Communities": "Arcadian Communities",
     "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":
     "Вы начинаете c 37 МС и 10 стали. Первым действием разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте на карте",
-    "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":
+    "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.":
     "Действие: Разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте по соседству c другим вашим тайлом или СООБЩЕСТОВОМ",
-    "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€":
+    "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.":
     "Эффект: Никто кроме вас не может размещать тайлы на места с вашими СООБЩЕСВАМИ. Когда вы размещаете тайл в таком месте получайте 3 M€",
 
     "Astrodrill": "Astrodrill",

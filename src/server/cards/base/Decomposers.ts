@@ -33,18 +33,19 @@ export class Decomposers extends Card implements IProjectCard {
             be.microbes(1, {played});
             be.startEffect.microbes(1);
           }).br;
-          b.vpText('1 VP per 3 Microbes on this card.');
+          b.vpText('1 VP per 3 microbes on this card.');
         }),
       },
     });
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length);
+    const qty = card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length;
+    player.addResourceTo(this, {qty, log: true});
   }
   public override bespokePlay(player: Player) {
     // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
     if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
-      player.addResourceTo(this, 2);
+      player.addResourceTo(this, {qty: 2, log: true});
     }
     return undefined;
   }

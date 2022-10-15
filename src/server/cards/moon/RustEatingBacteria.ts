@@ -24,10 +24,10 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
       metadata: {
         cardNumber: 'M88',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 steel to add 2 Microbes here.', (eb) => {
+          b.action('Spend 1 steel to add 2 microbes here.', (eb) => {
             eb.startAction.steel(1).arrow().microbes(2);
           }).br;
-          b.vpText('1 VP per 3 Microbes here.');
+          b.vpText('1 VP per 3 microbes here.');
         }),
       },
     });

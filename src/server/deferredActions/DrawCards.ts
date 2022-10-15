@@ -9,9 +9,9 @@ import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
 
 enum LogType {
-  DREW='drew',
-  BOUGHT='bought',
-  DREW_VERBOSE='drew_verbose',
+  DREW = 'drew',
+  BOUGHT = 'bought',
+  DREW_VERBOSE = 'drew_verbose',
 }
 
 export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends DeferredAction {
@@ -46,8 +46,18 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
   }
 
   public static keepAll(player: Player, count: number = 1, options?: DrawCards.DrawOptions): DrawCards<undefined> {
-    return new DrawCards(player, count, options, (cards) =>
-      DrawCards.keep(player, cards, options === undefined ? LogType.DREW : LogType.DREW_VERBOSE));
+    return new DrawCards(player, count, options, (cards) => {
+      let verbosity: LogType = LogType.DREW;
+      if (options !== undefined) {
+        if (options.tag !== undefined ||
+          options.resource !== undefined ||
+          options.cardType !== undefined ||
+          options.include !== undefined) {
+          verbosity = LogType.DREW_VERBOSE;
+        }
+      }
+      return DrawCards.keep(player, cards, verbosity);
+    });
   }
 
   public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions): DrawCards<SelectCard<IProjectCard>> {

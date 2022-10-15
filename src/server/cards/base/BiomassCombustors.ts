@@ -13,7 +13,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.BIOMASS_COMBUSTORS,
-      tags: [Tag.ENERGY, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 4,
       victoryPoints: -1,
 

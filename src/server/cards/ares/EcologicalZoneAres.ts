@@ -22,7 +22,7 @@ export class EcologicalZoneAres extends EcologicalZone {
             eb.animals(1, {played}).slash().plants(1, {played}).startEffect;
             eb.animals(1).tile(TileType.ECOLOGICAL_ZONE, false, true);
           }).br;
-          b.vpText('The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 Animals on this card.');
+          b.vpText('The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.');
         }),
       },
     );

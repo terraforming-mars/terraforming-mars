@@ -11,7 +11,7 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
     super({
       name: CardName.ORBITAL_POWER_GRID,
       cardType: CardType.AUTOMATED,
-      tags: [Tag.ENERGY, Tag.SPACE],
+      tags: [Tag.POWER, Tag.SPACE],
       cost: 19,
       victoryPoints: 1,
 

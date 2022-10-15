@@ -32,14 +32,14 @@ export class Pets extends Card implements IProjectCard {
       metadata: {
         cardNumber: '172',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When any City tile is placed, add an Animal to this card.', (eb) => {
+          b.effect('When any city tile is placed, add an animal to this card.', (eb) => {
             eb.city({size: Size.SMALL, all}).startEffect.animals(1);
           }).br;
           b.animals(1).br;
           b.text('Animals may not be removed from this card', Size.SMALL, true).br;
-          b.vpText('1 VP per 2 Animals here.');
+          b.vpText('1 VP per 2 animals here.');
         }),
-        description: {text: 'Add 1 Animal to this card.', align: 'left'},
+        description: {text: 'Add 1 animal to this card.', align: 'left'},
       },
     });
   }

@@ -32,7 +32,7 @@ export class Recruitment extends Card implements IProjectCard {
     }
 
     return turmoil.parties.some((party) => {
-      const neutralDelegates = party.getDelegates('NEUTRAL');
+      const neutralDelegates = party.delegates.count('NEUTRAL');
       return neutralDelegates > 1 || (neutralDelegates === 1 && party.partyLeader !== 'NEUTRAL');
     });
   }

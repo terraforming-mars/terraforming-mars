@@ -10,7 +10,7 @@ import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
 import {Tile} from '../Tile';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
 import {AdjacencyCost} from './AdjacencyCost';
-import {Multiset} from '../utils/Multiset';
+import {MultiSet} from 'mnemonist';
 import {Phase} from '../../common/Phase';
 import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
@@ -84,7 +84,7 @@ export class AresHandler {
       }
     };
 
-    const bonuses = new Multiset<SpaceBonus>();
+    const bonuses = new MultiSet<SpaceBonus>();
 
     adjacentSpace.adjacency.bonus.forEach((bonus) => {
       bonuses.add(bonus);
@@ -111,7 +111,9 @@ export class AresHandler {
       }
     });
 
-    const bonusText = bonuses.entries().map((elem) => `${elem[1]} ${SpaceBonus.toString(elem[0])}`).join(', ');
+    const bonusText = Array.from(bonuses.multiplicities())
+      .map(([bonus, count]) => `${count} ${SpaceBonus.toString(bonus)}`)
+      .join(', ');
     const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile.tileType) : 'no tile';
     player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 

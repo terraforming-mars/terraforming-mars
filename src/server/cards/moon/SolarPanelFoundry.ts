@@ -13,13 +13,13 @@ export class SolarPanelFoundry extends Card implements IActionCard, IProjectCard
     super({
       name: CardName.SOLAR_PANEL_FOUNDRY,
       cardType: CardType.ACTIVE,
-      tags: [Tag.ENERGY, Tag.MOON, Tag.BUILDING],
+      tags: [Tag.POWER, Tag.MOON, Tag.BUILDING],
       cost: 11,
 
       metadata: {
         cardNumber: 'M89',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 2 steel to increase your Energy Production 1 step.',
+          b.action('Spend 2 steel to increase your energy production 1 step.',
             (eb) => eb.startAction.steel(2).arrow().production((pb) => pb.energy(1)));
         }),
       },

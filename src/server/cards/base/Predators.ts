@@ -28,10 +28,10 @@ export class Predators extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: '024',
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
+          b.action('Remove 1 animal from any card and add it to this card.', (eb) => {
             eb.animals(1, {all}).startAction.animals(1);
           }).br;
-          b.vpText('1 VP per Animal on this card.');
+          b.vpText('1 VP per animal on this card.');
         }),
         description: 'Requires 11% oxygen.',
       },

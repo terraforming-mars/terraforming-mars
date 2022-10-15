@@ -8,6 +8,7 @@ import {InputResponse} from '../../common/inputs/InputResponse';
 export class SelectDelegate implements PlayerInput {
   public readonly inputType = PlayerInputType.SELECT_DELEGATE;
   public buttonLabel: string = 'Save';
+  // TODO(kberg): is there any reason to not just accept IDs?
   constructor(public players: Array<Player | NeutralPlayer>, public title: string | Message, public cb: (player: Player | NeutralPlayer) => PlayerInput | undefined) {
   }
 

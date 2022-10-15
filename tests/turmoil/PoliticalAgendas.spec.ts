@@ -37,7 +37,7 @@ describe('PoliticalAgendas', function() {
       expect(PoliticalAgendas.currentAgenda(turmoil).bonusId).eq('gb01');
       expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('gp01');
 
-      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
       turmoil.chairman = player2.id;
       PoliticalAgendas.setNextAgenda(turmoil, game);
@@ -61,7 +61,7 @@ describe('PoliticalAgendas', function() {
 
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'gb02', policyId: 'gp02'});
 
-      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
       turmoil.chairman = player2.id;
 
@@ -97,7 +97,7 @@ describe('PoliticalAgendas', function() {
       expect(PoliticalAgendas.currentAgenda(turmoil).bonusId).eq('gb02');
       expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('gp02');
 
-      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
       turmoil.chairman = 'NEUTRAL';
       PoliticalAgendas.setNextAgenda(turmoil, game);

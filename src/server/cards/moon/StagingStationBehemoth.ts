@@ -19,7 +19,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
       },
 
       metadata: {
-        description: 'Gain 2 trade fleets. Raise the Logistic Rate 1 step.',
+        description: 'Gain 2 Trade Fleets. Raise the logistic rate 1 step.',
         cardNumber: 'M68',
         renderData: CardRenderer.builder((b) => {
           b.tradeFleet().tradeFleet().moonLogisticsRate();

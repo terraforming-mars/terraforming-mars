@@ -32,7 +32,7 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
 
       metadata: {
         description: {
-          text: 'You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the Habitat Rate 1 step.',
+          text: 'You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.',
           align: 'left',
         },
         cardNumber: 'MC7',

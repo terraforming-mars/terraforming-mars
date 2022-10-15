@@ -173,6 +173,9 @@ export default Vue.extend({
       if (megacreditBalance > 0 && this.canUseTitanium()) {
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
       }
+      if (megacreditBalance > 0 && this.canUseTitanium() === false && this.canUseLunaTradeFederationTitanium()) {
+        this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue - 1, true);
+      }
 
       this.available.heat = Math.max(this.availableHeat() - this.card.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUseHeat()) {
@@ -211,6 +214,9 @@ export default Vue.extend({
         }
       }
       return false;
+    },
+    canUseLunaTradeFederationTitanium() {
+      return this.card !== undefined && this.available.titanium > 0 && this.playerinput.canUseLunaTradeFederationTitanium === true;
     },
     canUseMicrobes() {
       // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
@@ -271,7 +277,7 @@ export default Vue.extend({
       return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
     },
     showReserveTitaniumWarning(): boolean {
-      return this.card?.reserveUnits?.titanium > 0 && this.canUseTitanium();
+      return this.card?.reserveUnits?.titanium > 0 && (this.canUseTitanium() || this.canUseLunaTradeFederationTitanium());
     },
     showReserveHeatWarning(): boolean {
       return this.card?.reserveUnits?.heat > 0 && this.canUseHeat();
@@ -362,7 +368,7 @@ export default Vue.extend({
     (Some steel is unavailable here in reserve for the project card.)
     </div>
 
-    <div class="payments_type input-group" v-if="canUseTitanium()">
+    <div class="payments_type input-group" v-if="canUseTitanium() || canUseLunaTradeFederationTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <Button type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />

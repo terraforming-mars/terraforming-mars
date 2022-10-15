@@ -1,9 +1,9 @@
 {
-    "Allied Banks": "Banco aliado",
+    "Allied Bank": "Banco aliado",
     "Increase your M€ production 4 steps. Gain 3 M€.": "Aumenta tu producción de М€ 4 niveles. Obtén 3 М€.",
 
     "Aquifer Turbines": "Turbinas acuíferas",
-    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Coloca una loseta de océano. Aumenta tu producción de energía 2 niveles. Pierde 3 М€.",
+    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Coloca una loseta de océano. Aumenta tu producción de energía 2 niveles. Pierde 3 М€.",
 
     "Biofuels": "Biocombustibles",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "Aumenta tu producción de plantas y de energía 1 nivel cada una. Obtén 2 plantas.",
@@ -33,16 +33,16 @@
     "Play a card from hand, reducing its cost by 25 M€": "Juega una carta de tu mano reduciendo su coste en 25М€.",
 
     "Experimental Forest": "Bosque Experimental",
-    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Coloca una loseta de vegetación e incrementa el oxígeno 1 nivel. Revela cartas del mazo hasta que hayas descubierto 2 cartas con símolos de planta. Toma estas dos cartas para tu mano y descarta el resto.",
+    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Coloca una loseta de vegetación e incrementa el oxígeno 1 nivel. Revela cartas del mazo hasta que hayas descubierto 2 cartas con símolos de planta. Toma estas dos cartas para tu mano y descarta el resto.",
 
     "Galilean Mining": "Mineria galileana",
     "Increase your titanium production 2 steps. Pay 5 M€.": "Aumenta tu producción de titanio 2 niveles. Pierde 5 М€.",
 
     "Great Aquifer": "Gran acuífero",
-    "Place 2 Ocean tiles.": "Coloca 2 losetas de océano.",
+    "Place 2 ocean tiles.": "Coloca 2 losetas de océano.",
 
     "Huge Asteroid": "Asteroide gigante",
-    "Increase Temperature 3 steps. Pay 5 M€.": "Aumenta la temperatura 3 niveles. Pierde 5 М€.",
+    "Increase temperature 3 steps. Pay 5 M€.": "Aumenta la temperatura 3 niveles. Pierde 5 М€.",
 
     "Io Research Outpost": "Puesto de investigación en IO",
     "Increase your titanium production 1 step. Draw a card.": "Aumenta tu producción de titanio 1 nivel. Roba 1 carta.",
@@ -75,7 +75,7 @@
     "Increase your titanium production 1 step. Gain 4 titanium.": "Aumenta tu producción de titanio 1 nivel. Gana 4 de titanio.",
 
     "Polar Industries": "Industrias polares",
-    "Increase your heat production 2 steps. Place an Ocean tile.": "Coloca 1 loseta de océano. Aumenta tu producción de calor 2 niveles.",
+    "Increase your heat production 2 steps. Place an ocean tile.": "Coloca 1 loseta de océano. Aumenta tu producción de calor 2 niveles.",
 
     "Power Generation": "Generación de energía",
     "Increase your energy production 3 steps.": "Aumenta tu producción de energía 3 niveles.",
@@ -84,7 +84,7 @@
     "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Roba 3 cartas y aumenta tu producción de М€ 1 nivel. Tras jugar esta carta, al realizar una acción, el símbolo sin definir es un símbolo a tu elección.",
 
     "Self-Sufficient Settlement": "Asentamiento autosuficiente",
-    "Increase your M€ production 2 steps. Place a City tile.": "Coloca una loseta de ciudad. Aumenta tu producción de М€ 2 niveles.",
+    "Increase your M€ production 2 steps. Place a city tile.": "Coloca una loseta de ciudad. Aumenta tu producción de М€ 2 niveles.",
 
     "Smelting Plant": "Planta de fundición",
     "Raise oxygen 2 steps. Gain 5 steel.": "Aumenta el oxígeno 2 niveles. Obtén 5 de acero.",

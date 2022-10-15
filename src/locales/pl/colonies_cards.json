@@ -19,7 +19,7 @@
     "Corona Extractor": "Ekstraktor Korony",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję energii o 4 poziomy.",
 
-    "Cryo Sleep": "Hibernacja",
+    "Cryo-Sleep": "Hibernacja",
     "Effect: When you trade, you pay 1 less resource for it.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, płacisz o 1 jednostkę zasobów mniej.",
 
     "Earth Elevator": "Winda Orbitalna",
@@ -104,7 +104,7 @@
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Akcja: Umieść na tej karcie 1 jednostkę dryfowców albo wydaj 1 jednostkę dryfowców z tej karty, aby dobrać 1 kartę.",
     "Requires 3 science tags. Draw 2 cards.": "Musisz posiadać przynajmniej 3 symbole nauki. Dobierz 2 karty.",
 
-    "Refugee Camp": "Obozy Uchodźców",
+    "Refugee Camps": "Obozy Uchodźców",
     "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Akcja: Obniż swoją produkcję M€ o 1 poziom aby umieścić na tej karcie 1 jednostkę obozów.",
     "1 VP for each camp resource on this card.": "Otrzymujesz 1 PZ za każdą jednostkę obozów znajdującą się na tej karcie.",
 
@@ -125,7 +125,7 @@
     "Increase your heat production 5 steps.": "Podnieś swoją produkcję ciepła o 5 poziomów.",
 
     "Space Port": "Kosmoport",
-    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Otrzymujesz 1 flotę handlową. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 4 poziomy.",
+    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Otrzymujesz 1 flotę handlową. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 4 poziomy.",
 
     "Space Port Colony": "Kolonia z Kosmoportem",
     "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Umieść 1 kolonię na kaflu obiektu. Możesz ją umieścić na obiekcie, na którym masz już kolonię. Otrzymujesz 1 flotę handlową.",
@@ -136,8 +136,8 @@
     "Increase your M€ production 2 steps.": "Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Sub-zero Salt Fish": "Słonowodne Ryby Zimnolubne",
-    "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
-    "1 VP per 2 Animals on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
+    "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
+    "1 VP per 2 animals on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
     "Requires -6 C. Decrease any plant production 1 step.": "Temperatura musi być równa albo wyższa niż -6°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Titan Air-scrapping": "Zagarnianie Atmosfery na Tytanie",
@@ -163,6 +163,6 @@
     "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Musisz posiadać przynajmniej 1 obszar miasta i 1 kolonię. Podnieś swoją produkcję roślinności o 1 poziom i umieść 2 jednostki mikrobów na dowolnej karcie.",
 
     "Warp Drive": "Napęd Warp",
-    "Effect: When you play a Space card, you pay 4 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 4 M€ mniej.",
+    "Effect: When you play a space card, you pay 4 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 4 M€ mniej.",
     "Requires 5 science tags.": "Musisz posiadać przynajmniej 5 symboli nauki."
 }

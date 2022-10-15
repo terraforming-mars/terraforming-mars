@@ -18,7 +18,7 @@ export class TitaniumExtractionCenter extends Card {
       },
 
       metadata: {
-        description: 'Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of Mining Rate.',
+        description: 'Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.',
         cardNumber: 'M26',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).br;

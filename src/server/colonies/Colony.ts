@@ -233,6 +233,12 @@ export abstract class Colony implements IColony {
         game.log('${0} gained 1 Science tag', (b) => b.player(player));
         break;
 
+      case ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG:
+        player.scienceTagCount += 2;
+        player.playCard(new ScienceTagCard(), undefined, 'nothing');
+        game.log('${0} gained 2 Science tags', (b) => b.player(player));
+        break;
+
       case ColonyBenefit.GAIN_INFLUENCE:
         Turmoil.ifTurmoil(game, (turmoil) => {
           turmoil.addInfluenceBonus(player);

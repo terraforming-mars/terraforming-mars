@@ -137,7 +137,7 @@ export class Player {
   public oceanBonus: number = constants.OCEAN_BONUS;
 
   // Custom cards
-  // Leavitt Station.
+  // Community Leavitt Station and Pathfinders Leavitt Station
   // TODO(kberg): move scienceTagCount to Tags?
   public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41

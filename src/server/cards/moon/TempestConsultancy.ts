@@ -36,24 +36,24 @@ export class TempestConsultancy extends Card implements ICorporationCard {
 
   public initialAction(player: Player) {
     const title = 'Tempest Consultancy first action - Select where to send two delegates';
-    player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
+    player.game.defer(new SendDelegateToArea(player, title, {count: 2}));
 
     return undefined;
   }
 
   public canAct(player: Player) {
-    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve') > 0;
+    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) > 0;
   }
 
   public action(player: Player) {
     let count = Math.floor(player.tags.count(Tag.MOON) / 5);
     count = Math.min(count, 3);
-    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve'));
+    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id));
     if (count > 0) {
       player.game.defer(new SendDelegateToArea(
         player,
         `Select a party to send ${count} delegate(s) to`,
-        {count: count, source: 'reserve'}));
+        {count: count}));
     }
     return undefined;
   }

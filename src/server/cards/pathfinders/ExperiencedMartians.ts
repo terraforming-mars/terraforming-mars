@@ -25,7 +25,7 @@ export class ExperiencedMartians extends PreludeCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.game.defer(new SendDelegateToArea(player, undefined, {count: 1, source: 'reserve'}));
+    player.game.defer(new SendDelegateToArea(player));
     return undefined;
   }
 }

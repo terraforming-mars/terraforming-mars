@@ -1636,7 +1636,7 @@ export class Game implements Logger {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil);
+      game.turmoil = Turmoil.deserialize(d.turmoil, players);
     }
 
     // Reload moon elements if needed

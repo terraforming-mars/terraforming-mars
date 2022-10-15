@@ -78,9 +78,9 @@ describe('Pallas', function() {
   it('Should give trade bonus', function() {
     pallas.addColony(player);
     player.megaCredits = 0;
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
-    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game, 'reserve');
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     pallas.trade(player2); // player2 is trading. But player(1) is getting the MC
     runAllActions(game);
     const sendDelegates = cast(player2.popWaitingFor(), SelectPartyToSendDelegate);
@@ -94,9 +94,9 @@ describe('Pallas', function() {
     pallas.addColony(player);
     player.megaCredits = 0;
     pallas.trackPosition = 2; // Send 1 delegate
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
-    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game, 'reserve');
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
     pallas.trade(player); // player(1) is trading and gaining the mc.
     runAllActions(game);
     const sendDelegates = cast(player.popWaitingFor(), SelectPartyToSendDelegate);

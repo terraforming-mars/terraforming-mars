@@ -29,11 +29,11 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: Player) {
-    return Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve') >= 2;
+    return Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) >= 2;
   }
   public override bespokePlay(player: Player) {
     const title = 'Select a party to place 2 delegates.';
-    player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
+    player.game.defer(new SendDelegateToArea(player, title, {count: 2}));
     return undefined;
   }
 }

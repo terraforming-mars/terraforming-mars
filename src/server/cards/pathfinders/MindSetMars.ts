@@ -52,7 +52,7 @@ export class MindSetMars extends Card implements ICorporationCard {
 
   private canAddDelegate(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0;
+    return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player.id) > 0;
   }
 
   private canAddCity(player: Player) {
@@ -68,7 +68,7 @@ export class MindSetMars extends Card implements ICorporationCard {
     if (this.canAddDelegate(player)) {
       options.options.push(new SelectOption('Spend 2 agendas to add a delegate to any party', 'OK', () => {
         player.removeResourceFrom(this, 2);
-        player.game.defer(new SendDelegateToArea(player, 'Select a party', {count: 1, source: 'reserve'}));
+        player.game.defer(new SendDelegateToArea(player));
         return undefined;
       }));
     }

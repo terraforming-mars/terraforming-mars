@@ -160,3 +160,9 @@ export function finishGeneration(game: Game): void {
     throw new Error('expected new generation');
   }
 }
+
+export function getSendADelegateOption(player: Player) {
+  return player.getActions().options.find(
+    (option) => option.title.toString().startsWith('Send a delegate'));
+}
+

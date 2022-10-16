@@ -26,22 +26,16 @@ describe('LobbyHalls', function() {
     turmoil = game.turmoil!;
   });
 
-  it('play', function() {
-    card.play(player);
-    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
-  });
-
-  it('play, not enough delegates', () => {
+  it('cannot play, not enough delegates', () => {
     turmoil.delegateReserve.clear();
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('play', function() {
     card.play(player);
-
-    // Only one available action
-    expect(game.deferredActions.length).eq(1);
-
-    // First action is define a clone tag
-    assertCloneTagAction(game.deferredActions.pop()!);
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 
   it('play, has a delegate', () => {

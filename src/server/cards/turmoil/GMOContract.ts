@@ -34,7 +34,7 @@ export class GMOContract extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    const amount = card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length;
+    const amount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (amount > 0) {
       player.game.defer(
         new SimpleDeferredAction(player, () => {

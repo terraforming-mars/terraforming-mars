@@ -39,7 +39,7 @@ export class Decomposers extends Card implements IProjectCard {
     });
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    const qty = card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT || tag === Tag.MICROBE).length;
+    const qty = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     player.addResourceTo(this, {qty, log: true});
   }
   public override bespokePlay(player: Player) {

@@ -410,6 +410,7 @@
                   v-on:colonies-list-changed="updatecustomColonies"
                   v-bind:venusNext="venusNext"
                   v-bind:turmoil="turmoil"
+                  v-bind:pathfinders="pathfindersExpansion"
                   v-bind:communityCardsOption="communityCardsOption"
               ></ColoniesFilter>
             </div>

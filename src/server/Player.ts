@@ -697,8 +697,10 @@ export class Player {
       }
     }
 
-    for (const playedCard of this.tableau) {
-      playedCard.onResourceAdded?.(this, card, count);
+    if (count > 0) {
+      for (const playedCard of this.tableau) {
+        playedCard.onResourceAdded?.(this, card, count);
+      }
     }
   }
 

@@ -240,7 +240,7 @@
                   <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
                   <a name="moonBoard" class="player_home_anchor"></a>
-                  <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
+                  <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"></MoonBoard>
 
               </div>
           </details>
@@ -293,9 +293,9 @@ import StackedCards from '@/client/components/StackedCards.vue';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
+import {nextTileView, TileView} from './board/TileView';
 
 import * as raw_settings from '@/genfiles/settings.json';
-import {nextTileView, TileView} from './board/TileView';
 
 export interface PlayerHomeModel {
   showActiveCards: boolean;

@@ -59,7 +59,7 @@ export class EcologicalZone extends Card implements IProjectCard {
     return this.getAvailableSpaces(player).length > 0;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    const qty = card.tags.filter((tag) => tag === Tag.ANIMAL || tag === Tag.PLANT).length;
+    const qty = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT]);
     player.addResourceTo(this, {qty, log: true});
   }
   public override bespokePlay(player: Player) {

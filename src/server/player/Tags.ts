@@ -105,16 +105,17 @@ export class Tags {
     }
     return false;
   }
-  public cardTagCount(card: ICard, target: Tag): number {
+  public cardTagCount(card: ICard, target: Tag | Array<Tag>): number {
     let count = 0;
     for (const tag of card.tags) {
-      if (tag === target) count++;
-      if (tag === Tag.MARS && target === Tag.SCIENCE &&
+      if (tag === target) {
+        count++;
+      } else if (Array.isArray(target) && target.includes(tag)) {
+        count++;
+      } else if (tag === Tag.MARS && target === Tag.SCIENCE &&
         this.player.isCorporation(CardName.HABITAT_MARTE)) {
         count++;
-      }
-      if (tag === Tag.MOON &&
-        target === Tag.EARTH &&
+      } else if (tag === Tag.MOON && target === Tag.EARTH &&
         this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
         count++;
       }

@@ -1,11 +1,12 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {HeavyDutyRovers} from '../../../src/server/cards/moon/HeavyDutyRovers';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TileType} from '../../../src/common/TileType';
+import {SpaceId} from '../../../src/common/Types';
+import {Player} from '../../../src/server/Player';
+import {getTestPlayer, getTestPlayers, newTestGame} from '../../TestGame';
 
 describe('HeavyDutyRovers', () => {
   let player: TestPlayer;
@@ -13,8 +14,8 @@ describe('HeavyDutyRovers', () => {
   let moonData: IMoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
+    const game = newTestGame(1, {moonExpansion: true});
+    player = getTestPlayer(game, 0);
     card = new HeavyDutyRovers();
     moonData = MoonExpansion.moonData(game);
   });
@@ -39,6 +40,44 @@ describe('HeavyDutyRovers', () => {
     expect(player.megaCredits).eq(8);
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
+  });
+
+  it('issues/5065', () => {
+    const game = newTestGame(3, {moonExpansion: true});
+    const [player, player2, player3] = getTestPlayers(game);
+    moonData = MoonExpansion.moonData(game);
+
+    function addTile(spaceId: SpaceId, tileType: TileType, p: Player = player) {
+      moonData.moon.getSpace(spaceId)!.tile = {tileType};
+      moonData.moon.getSpace(spaceId).player = p;
+    }
+
+    player.megaCredits = 0;
+    moonData.logisticRate = 0;
+
+    addTile('m02', TileType.MOON_ROAD);
+    addTile('m03', TileType.MOON_ROAD);
+    addTile('m05', TileType.MOON_MINE);
+
+    addTile('m06', TileType.MOON_MINE);
+    addTile('m07', TileType.LUNAR_MINE_URBANIZATION);
+    addTile('m08', TileType.MOON_ROAD);
+    addTile('m09', TileType.MOON_ROAD);
+
+    addTile('m12', TileType.MOON_ROAD);
+    addTile('m13', TileType.MOON_ROAD);
+    addTile('m14', TileType.LUNAR_MINE_URBANIZATION);
+
+    addTile('m29', TileType.MOON_ROAD, player2);
+    addTile('m31', TileType.MOON_HABITAT);
+
+    addTile('m33', TileType.MOON_ROAD, player2);
+    addTile('m34', TileType.MOON_MINE, player2);
+    addTile('m35', TileType.MOON_MINE, player3);
+
+    card.play(player);
+
+    expect(player.megaCredits).eq(20);
   });
 });
 

@@ -14,7 +14,7 @@
   "(Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.)": "(Verbrauche 3 Energie. Erhöhe deine Stahl- und Titan-Produktion um 1 ODER platziere ein Ozeanplättchen und erhalte 2 Stahl und 1 Titan.)",
 
   "Botanical Experience": "Botanische Expertise",
-  "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.)(EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.)(EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(EFFEKT: Immer wenn ein Grünfächenplättchen platziert wird, füge dieser Karte 1 Datenressource hinzu.)(EFFEKT: Befinden sich 3 Daten auf dieser Karte, entferne diese um deine Pflanzen-Produktion um 1 zu erhöhen.)(EFFEKT: Durch Ereigniskarten verlierst du nur noch halb so viele Pflanzen (abgerundet).)",
+  "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) (EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) (EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(EFFEKT: Immer wenn ein Grünfächenplättchen platziert wird, füge dieser Karte 1 Datenressource hinzu.)(EFFEKT: Befinden sich 3 Daten auf dieser Karte, entferne diese um deine Pflanzen-Produktion um 1 zu erhöhen.)(EFFEKT: Durch Ereigniskarten verlierst du nur noch halb so viele Pflanzen (abgerundet).)",
   "(Requires one greenery tile on Mars.)": "(Benötigt 1 Grünflächenplättchen auf dem Mars.)",
 
   "Breeding Farms": "Aufzuchtbetriebe",
@@ -28,8 +28,9 @@
   "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "Ziehe 1 Karte. Platziere ein Stadtplättchen auf dem reserviertem Gebiet. Platziere ein Ozeanplättchen. Erhöhe deine Titan-Produktion um 1 je 2 eigene Jupitersymbole (einschließlich diese). Erhöhe deine M€-Produktion um 2.)",
 
   "Charity Donation": "Wohltätige Spende",
-  "Reveal cards from the deck equal to the player count plus 1. In player order starting with you, each player takes one card in hand. Discard the remaining card.": "Decke 1 Karte mehr auf als Spieler am Spiel teilnehmen. Beginnend bei dir wählt der Reihe nach jeder Spieler eine davon und nimmt sie auf die Hand. Werfe die letzte Karte ab. ",
-
+  "Reveal cards from the deck equal to the player count plus 1.": "Decke 1 Karte mehr auf als Spieler am Spiel teilnehmen.",
+  "In player order starting with you, each player takes one card in hand. Discard the remaining card.":  "Beginnend bei dir wählt der Reihe nach jeder Spieler eine davon und nimmt sie auf die Hand. Werfe die letzte Karte ab.",
+   
   "Communication Center": "Kommunikationszentrum",
   "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(EFFEKT: Immer wenn eine Ereigniskarte gespielt wird, füge dieser Karte 1 Datenressource hinzu.",
   "(Effect: Remove 3 data to draw a card automatically.)": "(EFFEKT: Befinden sich 3 Daten auf dieser Karte, entferne diese um eine Karte zu ziehen.)",
@@ -87,7 +88,7 @@
 
   "Floater-Urbanism": "Schweber-Urbanismus",
   "(Action: Remove 1 floater from any card and add 1 Venusian habitat on this card.)": "(AKTION: Verbrauche 1 Schweber, um dieser Karte 1 Venus-Habitat hinzuzufügen.)",
-  "(1 VP for every Venusian habitat on this card.)": "(1 SP je Venus-Habitat auf dieser Karte.)",
+  "1 VP for every Venusian habitat on this card.": "(1 SP je Venus-Habitat auf dieser Karte.)",
   "(Requires 4 Venus tags.)": "(Benötigt 4 eigene Venussymbole.)",
 
   "Geological Expedition": "Geologische Expedition",
@@ -172,7 +173,6 @@
   "Prefabrication of Human Habitats": "Vorgefertigte Wohnungen",
   "(Effect: Cards with a city tag cost 2M€ less.)": "(EFFEKT: Wenn du ein Stadtsymbol ausspielst, bezahlst du 2 M€ weniger.)",
   "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(EFFEKT: Wenn du das Stadt-Standardprojekt nutzt, bezahlst du 2 M€ weniger. Du darfst das Stadt-Standardprojekt mit Stahl bezahlen.)",
-  "-": "(EFFEKT: Wenn du ein Stadtsymbol ausspielst oder das Stadt-Standardprojekt nutzt, bezahlst du 2 M€ weniger. Du darfst das Stadt-Standardprojekt mit Stahl bezahlen.)",
   "(Requires that you have steel production.)": "(Benötigt eigene Stahlproduktion.)",
 
   "Private Security": "Privater Sicherheitsdienst",
@@ -233,12 +233,13 @@
 
   "Terraforming Robots": "Terraforming-Roboter",
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, füge dieser Karte 1 Roboter hinzu.)",
-  "(Requires 4 science tags. 1 VP for every specialized robot on this card.)": "(Benötigt 4 eigene Wissenschaftssymbole. 1 SP je Roboter auf dieser Karte.)",
+  "(1 VP for every specialized robot on this card.)": "(1 SP je Roboter auf dieser Karte.)",
+  "(Requires 4 science tags.)": "(Benötigt 4 eigene Wissenschaftssymbole.)",
 
   "Venera Base": "Venera Basis",
   "(Action: Add 1 floater to ANY Venus card)": "(AKTION: Füge einer beliebigen Venuskarte 1 Schweber hinzu.)",
   "1 VP per 2 Venus tags you have.": "1 SP je 2 eigene Venussysmbole.",
-  "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA. 1 VP per 2 Venus tags you have.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Erhöhe deine M€-Produktion um 3. Platziere ein Stadtplättchen auf dem reservierten Gebiet. 1 SP je 2 eigene Venussymbole.",
+  "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Erhöhe deine M€-Produktion um 3. Platziere ein Stadtplättchen auf dem reservierten Gebiet.",
   
   "Wetlands": "Feuchtgebiete",
   "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Benötigt 2 Ozeanplättchen. Verbrauche 4 Pflanzen. Erhöhe den Sauerstoffgehalt um 1%. Erhöhe deinen TW um 1. Platziere dieses Plättchen angrenzend an 2 Ozeanplättchen.)",

@@ -3,6 +3,9 @@
     <div :class="tileClass" data-test="tile"/>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
+    <template v-if="tileView === 'coords'">
+      <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
+    </template>
     <div
       v-if="space.color !== undefined && tileView === 'show'"
       class="board-cube"

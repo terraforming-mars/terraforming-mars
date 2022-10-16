@@ -259,14 +259,14 @@ export class MoonExpansion {
 
   // Use this to test whether a space has a given moon tile type rather than
   // testing tiletype directly. It takes into account Lunar Mine Urbanization.
-  public static spaceHasType(space: ISpace, type: TileType): boolean {
+  public static spaceHasType(space: ISpace, type: TileType, upgradedTiles: boolean = true): boolean {
     if (space.tile === undefined) {
       return false;
     }
     if (space.tile.tileType === type) {
       return true;
     }
-    if (space.tile.tileType === TileType.LUNAR_MINE_URBANIZATION) {
+    if (upgradedTiles && space.tile.tileType === TileType.LUNAR_MINE_URBANIZATION) {
       return type === TileType.MOON_HABITAT || type === TileType.MOON_MINE;
     }
     return false;
@@ -283,7 +283,8 @@ export class MoonExpansion {
     tileType?: TileType,
     options?: {
       surfaceOnly?: boolean,
-      ownedBy? : Player
+      ownedBy? : Player,
+      upgradedTiles?: boolean,
     }): Array<ISpace> {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return moonData.moon.spaces.filter(
@@ -293,7 +294,7 @@ export class MoonExpansion {
           }
           let include = true;
           if (tileType) {
-            include = MoonExpansion.spaceHasType(space, tileType);
+            include = MoonExpansion.spaceHasType(space, tileType, options?.upgradedTiles);
           }
           if (include && options?.surfaceOnly) {
             include = space.spaceType !== SpaceType.COLONY;

@@ -39,9 +39,13 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: Player): boolean {
+    return MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player, upgradedTiles: false}).length > 0;
+  }
+
   public override bespokePlay(player: Player) {
-    const tiles = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player});
-    return new SelectSpace('Select one of your mines to upgrade', tiles, (space) => {
+    const spaces = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player, upgradedTiles: false});
+    return new SelectSpace('Select one of your mines to upgrade', spaces, (space) => {
       if (space.tile === undefined) {
         throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
       }

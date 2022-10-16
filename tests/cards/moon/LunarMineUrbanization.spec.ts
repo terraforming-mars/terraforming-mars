@@ -25,6 +25,8 @@ describe('LunarMineUrbanization', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
+    expect(player.getPlayableCards()).does.not.include(card);
+
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
     space.tile = {tileType: TileType.MOON_MINE};
@@ -56,6 +58,53 @@ describe('LunarMineUrbanization', () => {
     expect(space.tile!.tileType).eq(TileType.LUNAR_MINE_URBANIZATION);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([space]);
+    expect(moonData.colonyRate).eq(1);
+    expect(player.getTerraformRating()).eq(15);
+  });
+
+  it('can play, compatible with Odyssey', () => {
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    const [space, nextSpace] = moonData.moon.getAvailableSpacesOnLand(player);
+
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    space.tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
+    space.player = player;
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    nextSpace.tile = {tileType: TileType.MOON_MINE};
+    nextSpace.player = player;
+
+    expect(player.getPlayableCards()).does.include(card);
+  });
+
+  it('play, compatible with Odyssey', () => {
+    const [priorLMUSpace, space] = moonData.moon.getAvailableSpacesOnLand(player);
+
+    priorLMUSpace.tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
+    priorLMUSpace.player = player;
+
+    space.tile = {tileType: TileType.MOON_MINE};
+    space.player = player;
+
+    player.production.override({megacredits: 0});
+    moonData.colonyRate = 0;
+    expect(player.getTerraformRating()).eq(14);
+    player.titanium = 1;
+
+    const action = cast(card.play(player), SelectSpace);
+
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([priorLMUSpace, space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([priorLMUSpace]);
+    expect(player.production.megacredits).eq(1);
+
+    action.cb(space);
+
+    expect(space.tile!.tileType).eq(TileType.LUNAR_MINE_URBANIZATION);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([priorLMUSpace, space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([priorLMUSpace, space]);
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });

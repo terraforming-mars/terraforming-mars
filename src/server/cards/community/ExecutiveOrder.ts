@@ -61,6 +61,7 @@ export class ExecutiveOrder extends PreludeCard implements IProjectCard {
       );
     }));
 
+    // This gets played -- after -- drawing the global event, so don't turn it into Behavior yet.
     player.game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', {count: 2}));
     return undefined;
   }

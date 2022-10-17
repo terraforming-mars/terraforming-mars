@@ -32,6 +32,7 @@ export interface Behavior {
   removeAnyPlants?: number,
 
   /** Gain units of TR */
+  // TODO(kberg) permit losing TR for TerralabsResearch
   tr?: number;
 
   /** Raise certain global parameters. */
@@ -79,6 +80,14 @@ export interface Behavior {
     /** When trading increase the colony track this many steps. */
     tradeOffset?: number,
   }
+
+  turmoil?: {
+    influenceBonus?: 1,
+    sendDelegates?: {
+      count: number,
+      manyParties?: boolean,
+    },
+  },
 
   moon?: {
     /** Places a habitat tile and also raises the habitat rate */

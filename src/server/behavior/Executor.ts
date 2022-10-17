@@ -17,6 +17,8 @@ import {PlaceSpecialMoonTile} from '../moon/PlaceSpecialMoonTile';
 import {Player} from '../Player';
 import {Behavior} from './Behavior';
 import {Counter} from './Counter';
+import {Turmoil} from '../turmoil/Turmoil';
+import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {BehaviorExecutor} from './BehaviorExecutor';
 
 export class Executor implements BehaviorExecutor {
@@ -51,12 +53,24 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.city !== undefined) {
       if (behavior.city.space === undefined) {
-        return player.game.board.getAvailableSpacesForCity(player).length > 0;
+        if (player.game.board.getAvailableSpacesForCity(player).length === 0) {
+          return false;
+        }
       }
     }
 
     if (behavior.greenery !== undefined) {
-      return player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+      if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) {
+        return false;
+      }
+    }
+
+    if (behavior.turmoil) {
+      if (behavior.turmoil.sendDelegates) {
+        if (Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) < behavior.turmoil.sendDelegates.count) {
+          return false;
+        }
+      }
     }
     return true;
   }
@@ -165,6 +179,24 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.greenery !== undefined) {
       player.game.defer(new PlaceGreeneryTile(player));
+    }
+
+    if (behavior.turmoil) {
+      const turmoil = Turmoil.getTurmoil(player.game);
+      if (behavior.turmoil.influenceBonus === 1) {
+        turmoil.addInfluenceBonus(player);
+      }
+
+      if (behavior.turmoil.sendDelegates) {
+        const sendDelegates = behavior.turmoil.sendDelegates;
+        if (sendDelegates.manyParties) {
+          for (let i = 0; i < sendDelegates.count; i++) {
+            player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate'));
+          }
+        } else {
+          player.game.defer(new SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, {count: sendDelegates.count}));
+        }
+      }
     }
 
     // TODO(kberg): Add canPlay for these behaviors.

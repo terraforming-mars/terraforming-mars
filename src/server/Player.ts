@@ -1430,7 +1430,7 @@ export class Player {
       action.buttonLabel = 'Confirm';
       action.options.push(
         new SelectSpace(
-          'Select space for greenery',
+          'Select space for greenery tile',
           this.game.board.getAvailableSpacesForGreenery(this), (space) => {
             // Do not raise oxygen or award TR for final greenery placements
             this.game.addGreenery(this, space.id, false);

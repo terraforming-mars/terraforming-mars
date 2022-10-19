@@ -35,6 +35,6 @@ export class GreeneryStandardProject extends StandardProjectCard {
   }
 
   actionEssence(player: Player): void {
-    player.game.defer(new PlaceGreeneryTile(player, 'Select space for greenery'));
+    player.game.defer(new PlaceGreeneryTile(player));
   }
 }

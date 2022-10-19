@@ -1235,8 +1235,9 @@ export class Game implements Logger {
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
   public addTile(
-    player: Player, spaceType: SpaceType,
-    space: ISpace, tile: Tile): void {
+    player: Player,
+    space: ISpace,
+    tile: Tile): void {
     // Part 1, basic validation checks.
 
     if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion)) {
@@ -1246,15 +1247,6 @@ export class Game implements Logger {
     // Land claim a player can claim land for themselves
     if (space.player !== undefined && space.player !== player) {
       throw new Error('This space is land claimed by ' + space.player.name);
-    }
-
-    let validSpaceType = space.spaceType === spaceType;
-    if (space.spaceType === SpaceType.COVE && (spaceType === SpaceType.LAND || spaceType === SpaceType.OCEAN)) {
-      // Cove is a valid type for land and also ocean.
-      validSpaceType = true;
-    }
-    if (!validSpaceType) {
-      throw new Error(`Select a valid location: ${space.spaceType} is not ${spaceType}`);
     }
 
     if (!AresHandler.canCover(space, tile)) {
@@ -1310,7 +1302,7 @@ export class Game implements Logger {
         AresHandler.earnAdjacencyBonuses(aresData, player, space);
       });
 
-      TurmoilHandler.resolveTilePlacementBonuses(player, spaceType);
+      TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
 
       if (arcadianCommunityBonus) {
         this.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));
@@ -1404,9 +1396,8 @@ export class Game implements Logger {
 
   public addGreenery(
     player: Player, spaceId: SpaceId,
-    spaceType: SpaceType = SpaceType.LAND,
     shouldRaiseOxygen: boolean = true): undefined {
-    this.addTile(player, spaceType, this.board.getSpace(spaceId), {
+    this.addTile(player, this.board.getSpace(spaceId), {
       tileType: TileType.GREENERY,
     });
     // Turmoil Greens ruling policy
@@ -1417,10 +1408,10 @@ export class Game implements Logger {
   }
 
   public addCityTile(
-    player: Player, spaceId: SpaceId, spaceType: SpaceType = SpaceType.LAND,
+    player: Player, spaceId: SpaceId,
     cardName: CardName | undefined = undefined): void {
     const space = this.board.getSpace(spaceId);
-    this.addTile(player, spaceType, space, {
+    this.addTile(player, space, {
       tileType: TileType.CITY,
       card: cardName,
     });
@@ -1435,12 +1426,10 @@ export class Game implements Logger {
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 
-  public addOceanTile(
-    player: Player, spaceId: SpaceId,
-    spaceType: SpaceType = SpaceType.OCEAN): void {
+  public addOceanTile(player: Player, spaceId: SpaceId): void {
     if (this.canAddOcean() === false) return;
 
-    this.addTile(player, spaceType, this.board.getSpace(spaceId), {
+    this.addTile(player, this.board.getSpace(spaceId), {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {

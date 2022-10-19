@@ -54,7 +54,7 @@ export class NewVenice extends Card implements IProjectCard {
           card: this.name,
           covers: space.tile,
         };
-        player.game.addTile(player, space.spaceType, space, tile);
+        player.game.addTile(player, space, tile);
         return undefined;
       },
     );

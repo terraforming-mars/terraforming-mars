@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
@@ -19,7 +18,7 @@ export class LunarEmbassy extends Card implements IProjectCard {
 
       behavior: {
         drawCard: 1,
-        city: {space: SpaceName.LUNAR_EMBASSY, type: SpaceType.COLONY},
+        city: {space: SpaceName.LUNAR_EMBASSY},
         production: {megacredits: 3, plants: {tag: Tag.EARTH, per: 2}},
       },
 

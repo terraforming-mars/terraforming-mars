@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {EstateDealer} from '../../src/server/awards/EstateDealer';
-import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
 
@@ -19,7 +18,7 @@ describe('EstateDealer', function() {
     game.addGreenery(player, '35');
     expect(award.getScore(player)).to.eq(1);
 
-    game.addGreenery(player2, '28', SpaceType.OCEAN); // Greenery on ocean space
+    game.addGreenery(player2, '28'); // Greenery on ocean space
     expect(award.getScore(player)).to.eq(1);
 
     // This tile should not count
@@ -42,7 +41,7 @@ describe('EstateDealer', function() {
     game.addGreenery(player, '35');
     expect(award.getScore(player)).to.eq(1);
 
-    game.addGreenery(player2, '28', SpaceType.OCEAN); // Greenery on ocean space
+    game.addGreenery(player2, '28'); // Greenery on ocean space
     expect(award.getScore(player)).to.eq(1);
 
     // This tile should not count

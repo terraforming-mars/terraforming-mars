@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -18,7 +17,7 @@ export class GanymedeColony extends Card implements IProjectCard {
 
       victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
       behavior: {
-        city: {space: SpaceName.GANYMEDE_COLONY, type: SpaceType.COLONY},
+        city: {space: SpaceName.GANYMEDE_COLONY},
       },
 
       metadata: {

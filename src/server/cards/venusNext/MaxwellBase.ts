@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {IActionCard, ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -22,7 +21,7 @@ export class MaxwellBase extends Card implements IActionCard {
       victoryPoints: 3,
       behavior: {
         production: {energy: -1},
-        city: {space: SpaceName.MAXWELL_BASE, type: SpaceType.COLONY},
+        city: {space: SpaceName.MAXWELL_BASE},
       },
 
       metadata: {

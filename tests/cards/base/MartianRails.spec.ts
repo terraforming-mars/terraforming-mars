@@ -3,7 +3,6 @@ import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {SpaceName} from '../../../src/server/SpaceName';
-import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianRails', () => {
@@ -36,7 +35,7 @@ describe('MartianRails', () => {
   it('Ignores cities off Mars', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
-    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+    game.addCityTile(player, SpaceName.GANYMEDE_COLONY);
 
     card.action(player);
     expect(player.energy).to.eq(0);

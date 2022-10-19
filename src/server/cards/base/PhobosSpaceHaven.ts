@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -18,7 +17,7 @@ export class PhobosSpaceHaven extends Card implements IProjectCard {
 
       behavior: {
         production: {titanium: 1},
-        city: {space: SpaceName.PHOBOS_SPACE_HAVEN, type: SpaceType.COLONY},
+        city: {space: SpaceName.PHOBOS_SPACE_HAVEN},
       },
 
       metadata: {

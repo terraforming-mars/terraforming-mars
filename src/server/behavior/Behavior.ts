@@ -7,7 +7,6 @@ import {Tag} from '../../common/cards/Tag';
 // import {CardResource} from '../../common/CardResource';
 // import {TileType} from '../../common/TileType';
 import {SpaceId} from '../../common/Types';
-import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {TileType} from '../../common/TileType';
 import {NoAttributes} from './NoAttributes';
@@ -42,7 +41,7 @@ export interface Behavior {
     venus?: 3 | 2 | 1 | -1;
   },
 
-  city?: {space?: SpaceId, type?: SpaceType},
+  city?: {space?: SpaceId},
   /** Places a greenery tile and also raises the oxygen. */
   greenery?: NoAttributes,
   ocean?: NoAttributes,

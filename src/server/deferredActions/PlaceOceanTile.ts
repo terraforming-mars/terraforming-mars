@@ -1,7 +1,6 @@
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
-import {SpaceType} from '../../common/boards/SpaceType';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class PlaceOceanTile extends DeferredAction {
@@ -21,7 +20,7 @@ export class PlaceOceanTile extends DeferredAction {
       this.title,
       this.player.game.board.getAvailableSpacesForOcean(this.player),
       (space: ISpace) => {
-        this.player.game.addOceanTile(this.player, space.id, SpaceType.OCEAN);
+        this.player.game.addOceanTile(this.player, space.id);
         return undefined;
       },
     );

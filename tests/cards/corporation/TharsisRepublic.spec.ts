@@ -49,7 +49,7 @@ describe('TharsisRepublic', function() {
   });
 
   it('Does not give MC production for own city off Mars', function() {
-    game.addTile(player, SpaceType.COLONY, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
+    game.addTile(player, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
       tileType: TileType.CITY,
     });
     runAllActions(game);

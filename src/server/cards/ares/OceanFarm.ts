@@ -47,7 +47,7 @@ export class OceanFarm extends Card implements IProjectCard {
           card: this.name,
           covers: space.tile,
         };
-        player.game.addTile(player, space.spaceType, space, tile);
+        player.game.addTile(player, space, tile);
         space.adjacency = {bonus: [SpaceBonus.PLANT]};
         return undefined;
       },

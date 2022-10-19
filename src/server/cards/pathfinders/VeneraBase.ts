@@ -11,7 +11,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 
 export class VeneraBase extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -26,7 +25,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
 
       behavior: {
         production: {megacredits: 3},
-        city: {space: SpaceName.VENERA_BASE, type: SpaceType.COLONY},
+        city: {space: SpaceName.VENERA_BASE},
       },
 
       metadata: {

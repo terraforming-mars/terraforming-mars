@@ -79,7 +79,7 @@ describe('EcologicalSurvey', () => {
     animalCard.resourceCount = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
 
     expect(player.megaCredits).eq(2);
@@ -113,7 +113,7 @@ describe('EcologicalSurvey', () => {
       SpaceBonus.HEAT,
     ],
     player.playedCards = [card];
-    game.addTile(player, SpaceType.LAND, space, {tileType: TileType.RESTRICTED_AREA});
+    game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
 
     runAllActions(game);
 
@@ -149,7 +149,7 @@ describe('EcologicalSurvey', () => {
     game.board.spaces[5].bonus = [];
 
     player.plants = 0;
-    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    game.addTile(player, game.board.spaces[5], {tileType: TileType.OCEAN});
     runAllActions(game);
     expect(player.plants).eq(3);
   });
@@ -165,7 +165,7 @@ describe('EcologicalSurvey', () => {
 
     game.phase = Phase.SOLAR;
     player.plants = 0;
-    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    game.addTile(player, game.board.spaces[5], {tileType: TileType.OCEAN});
     runAllActions(game);
     expect(player.plants).eq(2);
   });
@@ -177,7 +177,7 @@ describe('EcologicalSurvey', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     space.bonus = [SpaceBonus.MICROBE],
 
-    game.addTile(player, SpaceType.LAND, space, {tileType: TileType.RESTRICTED_AREA});
+    game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
     runAllActions(game);
 
     const msg = game.gameLog.pop()!;

@@ -28,7 +28,7 @@ describe('MiningRights', () => {
   it('Cannot play if no available spaces', () => {
     for (const land of game.board.getAvailableSpacesOnLand(player)) {
       if (land.bonus.includes(SpaceBonus.STEEL) || land.bonus.includes(SpaceBonus.TITANIUM)) {
-        game.addTile(player, land.spaceType, land, {tileType: TileType.MINING_RIGHTS});
+        game.addTile(player, land, {tileType: TileType.MINING_RIGHTS});
       }
     }
     expect(card.canPlay(player)).is.not.true;

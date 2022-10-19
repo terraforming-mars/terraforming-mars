@@ -37,53 +37,53 @@ describe('Philares', () => {
   });
 
   it('No bonus when placing next to self', () => {
-    game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
-    game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
   });
 
   it('bonus when placing next to opponent', () => {
-    game.addTile(otherPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
-    game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
   });
 
   it('bonus when opponent places next to you', () => {
-    game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
   });
 
   it('placing ocean tile does not grant bonus', () => {
-    game.addTile(otherPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
     adjacentSpace.spaceType = SpaceType.OCEAN; // Make this space an ocean space.
-    game.addTile(philaresPlayer, SpaceType.OCEAN, adjacentSpace, {tileType: TileType.OCEAN});
+    game.addTile(philaresPlayer, adjacentSpace, {tileType: TileType.OCEAN});
     expect(game.deferredActions).has.length(0);
   });
 
   it('ocean tile next to yours does not grant bonus', () => {
     space.spaceType = SpaceType.OCEAN; // Make this space an ocean space.
-    game.addTile(otherPlayer, SpaceType.OCEAN, space, {tileType: TileType.OCEAN});
+    game.addTile(otherPlayer, space, {tileType: TileType.OCEAN});
     expect(game.deferredActions).has.length(0);
-    game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
   });
 
   it('No adjacency bonus during WGT', () => {
-    game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
     game.phase = Phase.SOLAR;
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
   });
 
   it('one tile one bonus', () => {
-    game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     const action = game.deferredActions.pop();
     const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
@@ -94,8 +94,8 @@ describe('Philares', () => {
   });
 
   it('one tile one bonus - player is greedy', () => {
-    game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     const action = game.deferredActions.pop();
     const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.
@@ -106,10 +106,10 @@ describe('Philares', () => {
   });
 
   it('Multiple bonuses when placing next to multiple tiles', () => {
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace2, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
-    game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
     const action = game.deferredActions.pop();
     const options = cast(action?.execute(), AndOptions);
@@ -122,10 +122,10 @@ describe('Philares', () => {
   });
 
   it('Multiple bonuses when opponent places next to multiple of your tiles', () => {
-    game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
-    game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, adjacentSpace2, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
-    game.addTile(otherPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
     const action = game.deferredActions.pop();
     const options = cast(action?.execute(), AndOptions);
@@ -138,9 +138,9 @@ describe('Philares', () => {
   });
 
   it('two tiles two bonuses - player is greedy', () => {
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
-    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
-    game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace2, {tileType: TileType.GREENERY});
+    game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     const action = game.deferredActions.pop();
     const options = cast(action?.execute(), AndOptions);
     // Options are ordered 0-5, MC to heat.

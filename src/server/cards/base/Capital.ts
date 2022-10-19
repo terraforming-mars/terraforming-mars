@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
@@ -67,7 +66,7 @@ export class Capital extends Card implements IProjectCard {
       'Select space for special city tile',
       player.game.board.getAvailableSpacesForCity(player),
       (space: ISpace) => {
-        player.game.addTile(player, SpaceType.LAND, space, {
+        player.game.addTile(player, space, {
           tileType: TileType.CAPITAL,
           card: this.name,
         });

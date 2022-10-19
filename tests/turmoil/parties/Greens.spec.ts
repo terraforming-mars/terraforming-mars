@@ -57,7 +57,7 @@ describe('Greens', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[1].id);
 
     const emptySpace: ISpace = game.board.spaces.find((space) => space.spaceType === SpaceType.LAND && space.bonus.length === 0) as ISpace;
-    game.addTile(player, emptySpace.spaceType, emptySpace, {tileType: TileType.NATURAL_PRESERVE});
+    game.addTile(player, emptySpace, {tileType: TileType.NATURAL_PRESERVE});
     expect(player.plants).to.eq(1);
   });
 

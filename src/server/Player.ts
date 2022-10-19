@@ -33,7 +33,6 @@ import {SelectSpace} from './inputs/SelectSpace';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
-import {SpaceType} from '../common/boards/SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
@@ -820,7 +819,7 @@ export class Player {
         new SelectSpace(
           'Add an ocean',
           game.board.getAvailableSpacesForOcean(this), (space) => {
-            game.addOceanTile(this, space.id, SpaceType.OCEAN);
+            game.addOceanTile(this, space.id);
             game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
             return undefined;
           },
@@ -1434,7 +1433,7 @@ export class Player {
           'Select space for greenery',
           this.game.board.getAvailableSpacesForGreenery(this), (space) => {
             // Do not raise oxygen or award TR for final greenery placements
-            this.game.addGreenery(this, space.id, SpaceType.LAND, false);
+            this.game.addGreenery(this, space.id, false);
             this.deductResource(Resources.PLANTS, this.plantsNeededForGreenery);
 
             this.takeActionForFinalGreenery();

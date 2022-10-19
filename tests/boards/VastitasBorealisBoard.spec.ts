@@ -33,7 +33,7 @@ describe('VastitasBorealisBoard', function() {
     expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).includes(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
     expect(game.getTemperature()).eq(-30);
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.CITY});
+    game.addTile(player, space, {tileType: TileType.CITY});
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);

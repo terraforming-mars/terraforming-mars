@@ -21,7 +21,7 @@ describe('NaturalPreserve', () => {
   it('Cannot play if no spaces available', () => {
     const lands = game.board.getAvailableSpacesOnLand(player);
     for (const land of lands) {
-      game.addTile(player, land.spaceType, land, {tileType: TileType.NATURAL_PRESERVE});
+      game.addTile(player, land, {tileType: TileType.NATURAL_PRESERVE});
     }
 
     expect(card.canPlay(player)).is.not.true;

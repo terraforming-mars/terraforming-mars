@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -20,7 +19,7 @@ export class DawnCity extends Card implements IProjectCard {
       victoryPoints: 3,
       behavior: {
         production: {energy: -1, titanium: 1},
-        city: {space: SpaceName.DAWN_CITY, type: SpaceType.COLONY},
+        city: {space: SpaceName.DAWN_CITY},
       },
 
       metadata: {

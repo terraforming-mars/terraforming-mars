@@ -120,7 +120,7 @@ describe('Wetlands', function() {
     const spaces = game.board.getAvailableSpacesOnLand(player);
     // this is an awkward hack, but because this is using emptyboard, no spaces are dedicated for ocean.
     for (let idx = 0; idx <= 8; idx++) {
-      game.addOceanTile(player, spaces[idx].id, SpaceType.LAND);
+      game.addOceanTile(player, spaces[idx].id);
     }
     (game as any).temperature = MAX_TEMPERATURE;
     (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;

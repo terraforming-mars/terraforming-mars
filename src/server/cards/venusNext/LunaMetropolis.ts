@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -19,7 +18,7 @@ export class LunaMetropolis extends Card implements IProjectCard {
       victoryPoints: 2,
       behavior: {
         production: {megacredits: {tag: Tag.EARTH}},
-        city: {space: SpaceName.LUNA_METROPOLIS, type: SpaceType.COLONY},
+        city: {space: SpaceName.LUNA_METROPOLIS},
       },
 
       metadata: {

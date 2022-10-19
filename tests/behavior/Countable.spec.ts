@@ -9,7 +9,6 @@ import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {SpaceName} from '../../src/server/SpaceName';
-import {SpaceType} from '../../src/common/boards/SpaceType';
 import {OceanCity} from '../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {Wetlands} from '../../src/server/cards/pathfinders/Wetlands';
@@ -103,7 +102,7 @@ describe('Counter', () => {
     }
     expect(count()).deep.eq({'': 0, 'onmars': 0, 'offmars': 0, 'everywhere': 0});
 
-    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+    game.addCityTile(player, SpaceName.GANYMEDE_COLONY);
 
     expect(count()).deep.eq({'': 1, 'onmars': 0, 'offmars': 1, 'everywhere': 1});
 
@@ -113,7 +112,7 @@ describe('Counter', () => {
 
     const oceanCity = new OceanCity();
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addOceanTile(player, oceanSpace.id, SpaceType.OCEAN);
+    game.addOceanTile(player, oceanSpace.id);
 
     expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
 
@@ -131,19 +130,19 @@ describe('Counter', () => {
   it('count cities that you own', () => {
     const count = (player: TestPlayer) => new Counter(player, fake).count({cities: {}, all: false});
 
-    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+    game.addCityTile(player, SpaceName.GANYMEDE_COLONY);
 
     expect(count(player)).eq(1);
     expect(count(player2)).eq(0);
 
     const landSpace = game.board.getAvailableSpacesForCity(player)[0];
-    game.addCityTile(player, landSpace.id, SpaceType.LAND);
+    game.addCityTile(player, landSpace.id);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(0);
 
     const landSpace2 = game.board.getAvailableSpacesForCity(player2)[0];
-    game.addCityTile(player2, landSpace2.id, SpaceType.LAND);
+    game.addCityTile(player2, landSpace2.id);
 
     expect(count(player)).eq(2);
     expect(count(player2)).eq(1);

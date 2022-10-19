@@ -103,7 +103,7 @@ describe('Kelvinists', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, KELVINISTS_POLICY_4.id);
 
     const emptySpace: ISpace = game.board.spaces.find((space) => space.bonus.length === 0) as ISpace;
-    game.addTile(player, emptySpace.spaceType, emptySpace, {tileType: TileType.CITY});
+    game.addTile(player, emptySpace, {tileType: TileType.CITY});
     expect(player.heat).to.eq(2);
   });
 });

@@ -10,7 +10,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {IActionCard} from '../ICard';
 import {digit} from '../Options';
-import {SpaceType} from '../../../common/boards/SpaceType';
 
 export class DysonScreens extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -25,7 +24,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
         production: {energy: 2, heat: 2},
         drawCard: 1,
         global: {temperature: 1},
-        city: {space: SpaceName.DYSON_SCREENS, type: SpaceType.COLONY},
+        city: {space: SpaceName.DYSON_SCREENS},
       },
 
       metadata: {

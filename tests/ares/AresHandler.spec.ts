@@ -44,7 +44,7 @@ describe('AresHandler', function() {
   it('Get adjacency bonus', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};
-    game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
+    game.addTile(otherPlayer, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
     player.megaCredits = 0;
     player.cardsInHand = [];
@@ -52,7 +52,7 @@ describe('AresHandler', function() {
     otherPlayer.cardsInHand = [];
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     // player who placed next to Restricted area gets a card, but no money.
     expect(player.megaCredits).is.eq(0);
@@ -128,13 +128,13 @@ describe('AresHandler', function() {
   it('Pay Adjacency Costs', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [], cost: 2};
-    game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+    game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
 
     player.megaCredits = 2;
     otherPlayer.megaCredits = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     // player who placed next to Nuclear zone, loses two money.
@@ -147,14 +147,14 @@ describe('AresHandler', function() {
   it('Can\'t afford adjacency costs', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [], cost: 2};
-    game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+    game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
 
     otherPlayer.megaCredits = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
 
     expect(() => {
-      game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+      game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     }).to.throw(/Placing here costs 2 M€/);
   });
 
@@ -167,11 +167,11 @@ describe('AresHandler', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     expect(() => {
-      game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+      game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     }).to.throw(/Placing here costs 1 units of production/);
 
     player.production.add(Resources.PLANTS, 7);
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(1);
@@ -188,13 +188,13 @@ describe('AresHandler', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     try {
-      game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+      game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     } catch (err) {
       expect((err as any).toString()).includes('Placing here costs 2 units of production');
     }
 
     player.production.add(Resources.PLANTS, 7);
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     runAllActions(game);
     const input = cast(player.getWaitingFor(), SelectProductionToLose);
@@ -210,7 +210,7 @@ describe('AresHandler', function() {
     const before = player.production.asUnits();
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.OCEAN});
+    game.addTile(player, adjacentSpace, {tileType: TileType.OCEAN});
     expect(game.deferredActions.peek()).is.undefined;
 
     const after = player.production.asUnits();
@@ -223,7 +223,7 @@ describe('AresHandler', function() {
     player.megaCredits = 8;
     expect(player.getTerraformRating()).eq(20);
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+    game.addTile(player, space, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     expect(space.tile!.tileType).eq(TileType.GREENERY);
@@ -237,7 +237,7 @@ describe('AresHandler', function() {
     player.megaCredits = 16;
     expect(player.getTerraformRating()).eq(20);
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+    game.addTile(player, space, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     expect(space.tile!.tileType).eq(TileType.GREENERY);
@@ -398,7 +398,7 @@ describe('AresHandler', function() {
 
     game.addOceanTile(otherPlayer, spaceId);
     // Placing an Ocean City on top of the ocean will not grant player plants.
-    game.addTile(player, SpaceType.OCEAN, space, {tileType: TileType.OCEAN_CITY});
+    game.addTile(player, space, {tileType: TileType.OCEAN_CITY});
 
     expect(otherPlayer.plants).greaterThan(0);
     expect(player.plants).eq(0);
@@ -407,7 +407,7 @@ describe('AresHandler', function() {
   it('No adjacency bonuses during WGT', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};
-    game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
+    game.addTile(otherPlayer, firstSpace, {tileType: TileType.RESTRICTED_AREA});
     game.phase = Phase.SOLAR;
 
     player.megaCredits = 0;
@@ -416,7 +416,7 @@ describe('AresHandler', function() {
     otherPlayer.cardsInHand = [];
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     // Neither player gets money or a card.
     expect(player.megaCredits).is.eq(0);
@@ -428,14 +428,14 @@ describe('AresHandler', function() {
   it('No adjacency costs during WGT', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [], cost: 2};
-    game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+    game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
     game.phase = Phase.SOLAR;
 
     player.megaCredits = 2;
     otherPlayer.megaCredits = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     // player who placed next to Nuclear zone, loses nothing.
     expect(player.megaCredits).is.eq(2);
@@ -447,7 +447,7 @@ describe('AresHandler', function() {
     game.phase = Phase.SOLAR;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
 
     // Not asking you which production to lose.
     expect(game.deferredActions).has.lengthOf(0);
@@ -460,7 +460,7 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
     game.phase = Phase.SOLAR;
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+    game.addTile(player, space, {tileType: TileType.GREENERY});
 
     expect(space.tile!.tileType).eq(TileType.GREENERY);
 

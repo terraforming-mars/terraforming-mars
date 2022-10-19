@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -32,7 +31,7 @@ export class Mangrove extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     return new SelectSpace('Select ocean space for greenery tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      return player.game.addGreenery(player, space.id, SpaceType.OCEAN);
+      return player.game.addGreenery(player, space.id);
     });
   }
 }

@@ -63,7 +63,7 @@ describe('Steelaris', function() {
     expect(player.plants).eq(0);
     expect(player.steel).eq(0);
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.NUCLEAR_ZONE});
+    game.addTile(player, space, {tileType: TileType.NUCLEAR_ZONE});
     runAllActions(game);
 
     expect(player.plants).eq(1);
@@ -77,7 +77,7 @@ describe('Steelaris', function() {
     expect(player.plants).eq(0);
     expect(player.steel).eq(0);
 
-    game.addTile(player2, space.spaceType, space, {tileType: TileType.NUCLEAR_ZONE});
+    game.addTile(player2, space, {tileType: TileType.NUCLEAR_ZONE});
     runAllActions(game);
 
     expect(player.plants).eq(1);

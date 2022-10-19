@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -17,7 +16,7 @@ export class StanfordTorus extends Card implements IProjectCard {
       victoryPoints: 2,
 
       behavior: {
-        city: {space: SpaceName.STANFORD_TORUS, type: SpaceType.COLONY},
+        city: {space: SpaceName.STANFORD_TORUS},
       },
 
       metadata: {

@@ -64,7 +64,7 @@ describe('MudSlides', function() {
       covers: spaces.second.tile,
     };
     game.gameOptions.aresExtension = true;
-    player.game.addTile(player, spaces.second.spaceType, spaces.second, tile);
+    player.game.addTile(player, spaces.second, tile);
 
     player.megaCredits = 10;
 

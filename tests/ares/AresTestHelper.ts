@@ -36,11 +36,11 @@ export class AresTestHelper {
     // tile types in this test are irrelevant.
     const firstSpace = player.game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [bonus]};
-    player.game.addTile(player, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
+    player.game.addTile(player, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
     expect(player.getResource(Resources.MEGACREDITS)).is.eq(0);
     const adjacentSpace = player.game.board.getAdjacentSpaces(firstSpace)[0];
-    player.game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    player.game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
     expect(player.getResource(Resources.MEGACREDITS)).is.eq(expectedMc);
   }
 

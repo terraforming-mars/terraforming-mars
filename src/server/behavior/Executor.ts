@@ -172,7 +172,7 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.city !== undefined) {
       if (behavior.city.space !== undefined) {
-        player.game.addCityTile(player, behavior.city.space, behavior.city.type);
+        player.game.addCityTile(player, behavior.city.space);
       } else {
         player.game.defer(new PlaceCityTile(player));
       }

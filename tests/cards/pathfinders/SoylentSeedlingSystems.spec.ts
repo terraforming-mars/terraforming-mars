@@ -9,7 +9,6 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('SoylentSeedlingSystems', function() {
   let soylent: SoylentSeedlingSystems;
@@ -88,7 +87,6 @@ describe('SoylentSeedlingSystems', function() {
     expect(celestic.resourceCount).eq(0);
     player.game.addTile(
       player,
-      SpaceType.LAND,
       player.game.board.getAvailableSpacesOnLand(player)[0],
       {tileType: TileType.WETLANDS});
     expect(soylent.resourceCount).eq(1);

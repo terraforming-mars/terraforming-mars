@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -38,7 +37,7 @@ export class ArtificialLake extends Card implements IProjectCard {
     if (!player.game.canAddOcean()) return undefined;
 
     return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
-      player.game.addOceanTile(player, space.id, SpaceType.LAND);
+      player.game.addOceanTile(player, space.id);
       return undefined;
     });
   }

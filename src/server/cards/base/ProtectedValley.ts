@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -38,7 +37,7 @@ export class ProtectedValley extends Card implements IProjectCard {
       'Select space reserved for ocean to place greenery tile',
       player.game.board.getAvailableSpacesForOcean(player),
       (space: ISpace) => {
-        return player.game.addGreenery(player, space.id, SpaceType.OCEAN);
+        return player.game.addGreenery(player, space.id);
       },
     );
   }

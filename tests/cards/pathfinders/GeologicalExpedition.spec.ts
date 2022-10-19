@@ -13,7 +13,6 @@ import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('GeologicalExpedition', function() {
   let card: GeologicalExpedition;
@@ -45,7 +44,7 @@ describe('GeologicalExpedition', function() {
   });
 
   it('City tile on a space colony, no bonus', () => {
-    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+    game.addCityTile(player, SpaceName.GANYMEDE_COLONY);
 
     expect(game.board.getSpace(SpaceName.GANYMEDE_COLONY).tile?.tileType).eq(TileType.CITY);
 

@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {all} from '../Options';
 
@@ -48,7 +47,7 @@ export class SmallComet extends Card implements IProjectCard {
     });
     if (player.game.canAddOcean()) {
       return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
-        player.game.addOceanTile(player, space.id, SpaceType.LAND);
+        player.game.addOceanTile(player, space.id);
         return undefined;
       });
     }

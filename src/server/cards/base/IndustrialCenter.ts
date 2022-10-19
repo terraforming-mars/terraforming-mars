@@ -48,7 +48,7 @@ export class IndustrialCenter extends Card implements IActionCard, IProjectCard 
   }
   public override bespokePlay(player: Player) {
     return new SelectSpace('Select space adjacent to a city tile', this.getAvailableSpaces(player), (space: ISpace) => {
-      player.game.addTile(player, space.spaceType, space, {tileType: TileType.INDUSTRIAL_CENTER});
+      player.game.addTile(player, space, {tileType: TileType.INDUSTRIAL_CENTER});
       space.adjacency = this.adjacencyBonus;
       return undefined;
     });

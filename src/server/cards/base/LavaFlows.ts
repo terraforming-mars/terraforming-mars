@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
@@ -49,7 +48,7 @@ export class LavaFlows extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     player.game.increaseTemperature(player, 2);
     return new SelectSpace('Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons', LavaFlows.getVolcanicSpaces(player), (space: ISpace) => {
-      player.game.addTile(player, SpaceType.LAND, space, {tileType: TileType.LAVA_FLOWS});
+      player.game.addTile(player, space, {tileType: TileType.LAVA_FLOWS});
       space.adjacency = this.adjacencyBonus;
       return undefined;
     });

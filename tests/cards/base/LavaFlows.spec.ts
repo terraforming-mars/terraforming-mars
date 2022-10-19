@@ -3,7 +3,6 @@ import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {SpaceName} from '../../../src/server/SpaceName';
-import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {cast, resetBoard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -25,9 +24,9 @@ describe('LavaFlows', function() {
   });
 
   it('Cannot play if no available spaces', function() {
-    game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpace(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
     expect(card.canPlay(player)).is.true;
 

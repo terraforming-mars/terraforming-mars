@@ -698,7 +698,7 @@ describe('Game', () => {
     expect(player.plants).eq(0);
     expect(player.titanium).eq(0);
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+    game.addTile(player, space, {tileType: TileType.GREENERY});
 
     expect(player.cardsInHand).has.length(4);
     expect(player.plants).eq(1);

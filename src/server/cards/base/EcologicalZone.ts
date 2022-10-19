@@ -72,7 +72,7 @@ export class EcologicalZone extends Card implements IProjectCard {
       'Select space next to greenery for special tile',
       this.getAvailableSpaces(player),
       (requestedSpace: ISpace) => {
-        player.game.addTile(player, requestedSpace.spaceType, requestedSpace, {
+        player.game.addTile(player, requestedSpace, {
           tileType: TileType.ECOLOGICAL_ZONE,
         });
         requestedSpace.adjacency = this.adjacencyBonus;

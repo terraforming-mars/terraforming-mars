@@ -34,7 +34,7 @@ describe('ArabiaTerraBoard', function() {
     const availableSpaces = board.getAvailableSpacesForOcean(player);
 
     expect(availableSpaces).includes(coveSpace);
-    game.addTile(player, coveSpace.spaceType, coveSpace, {tileType: TileType.OCEAN});
+    game.addTile(player, coveSpace, {tileType: TileType.OCEAN});
 
     // No further assertions. addTile not throwing is enough.
   });
@@ -44,7 +44,7 @@ describe('ArabiaTerraBoard', function() {
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
 
     expect(availableSpaces).includes(coveSpace);
-    game.addTile(player, coveSpace.spaceType, coveSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, coveSpace, {tileType: TileType.GREENERY});
 
     // No further assertions. addTile not throwing is enough.
   });
@@ -54,7 +54,7 @@ describe('ArabiaTerraBoard', function() {
     player.playedCards.push(card);
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.DATA))!;
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.CITY});
+    game.addTile(player, space, {tileType: TileType.CITY});
     runAllActions(game);
 
     // one map space has data, and it has two of them.
@@ -67,7 +67,7 @@ describe('ArabiaTerraBoard', function() {
     // one map space has science, and it has one of them.
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.SCIENCE))!;
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.CITY});
+    game.addTile(player, space, {tileType: TileType.CITY});
     runAllActions(game);
 
     expect(card.resourceCount).eq(1);
@@ -77,7 +77,7 @@ describe('ArabiaTerraBoard', function() {
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.ENERGY_PRODUCTION))!;
     expect(player.production.energy).eq(0);
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.CITY});
+    game.addTile(player, space, {tileType: TileType.CITY});
     runAllActions(game);
 
     expect(player.production.energy).eq(1);
@@ -89,7 +89,7 @@ describe('ArabiaTerraBoard', function() {
     // one map space has microbes, and it has two of them.
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.MICROBE))!;
 
-    game.addTile(player, space.spaceType, space, {tileType: TileType.CITY});
+    game.addTile(player, space, {tileType: TileType.CITY});
     runAllActions(game);
 
     expect(card.resourceCount).eq(2);

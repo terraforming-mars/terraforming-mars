@@ -30,7 +30,7 @@ describe('MiningArea', function() {
         const adjacents = game.board.getAdjacentSpaces(land);
         for (const adjacent of adjacents) {
           if (adjacent.tile === undefined && adjacent.bonus.length === 0) {
-            game.addTile(player, adjacent.spaceType, adjacent, {tileType: TileType.MINING_AREA});
+            game.addTile(player, adjacent, {tileType: TileType.MINING_AREA});
           }
         }
       }

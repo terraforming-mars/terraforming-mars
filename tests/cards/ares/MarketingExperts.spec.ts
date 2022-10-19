@@ -2,7 +2,6 @@ import {MarketingExperts} from '../../../src/server/cards/ares/MarketingExperts'
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {expect} from 'chai';
-import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -37,13 +36,13 @@ describe('MarketingExperts', function() {
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};
-    game.addTile(player, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
+    game.addTile(player, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
     expect(player.megaCredits).is.eq(0);
     expect(otherPlayer.megaCredits).is.eq(0);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(otherPlayer, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
 
     expect(player.megaCredits).is.eq(2);
     expect(otherPlayer.megaCredits).is.eq(0);

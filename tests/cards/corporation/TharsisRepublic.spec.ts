@@ -3,7 +3,7 @@ import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepu
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions} from '../../TestingUtils';
+import {addCityTile, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TharsisRepublic', function() {
@@ -33,7 +33,7 @@ describe('TharsisRepublic', function() {
   });
 
   it('Gives 3 M€ and MC production for own city on Mars', function() {
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addCityTile(player);
     runAllActions(game);
 
     expect(player.megaCredits).to.eq(3);
@@ -41,7 +41,7 @@ describe('TharsisRepublic', function() {
   });
 
   it('Gives MC production only for other player\'s city on Mars', function() {
-    game.addCityTile(player2, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addCityTile(player2);
     runAllActions(game);
 
     expect(player.megaCredits).to.eq(0);

@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {addCityTile} from '../../TestingUtils';
 import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
@@ -8,13 +9,12 @@ import {TestPlayer} from '../../TestPlayer';
 describe('MartianRails', () => {
   let card: MartianRails;
   let player: Player;
-  let game: Game;
 
   beforeEach(() => {
     card = new MartianRails();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player);
+    Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Can not act without energy', () => {
@@ -25,7 +25,7 @@ describe('MartianRails', () => {
   it('Should act', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addCityTile(player);
 
     card.action(player);
     expect(player.energy).to.eq(0);
@@ -35,7 +35,7 @@ describe('MartianRails', () => {
   it('Ignores cities off Mars', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
-    game.addCityTile(player, SpaceName.GANYMEDE_COLONY);
+    addCityTile(player, SpaceName.GANYMEDE_COLONY);
 
     card.action(player);
     expect(player.energy).to.eq(0);

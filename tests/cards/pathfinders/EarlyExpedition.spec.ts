@@ -38,11 +38,11 @@ describe('EarlyExpedition', function() {
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
     player.playedCards = [lunarObservationPost];
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
     runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
     expect(player.production.asUnits()).eql(Units.of({megacredits: 3}));
-    expect(lunarObservationPost.resourceCount).eq(1);
 
     let tiles = 0;
     selectSpace.availableSpaces.forEach((space) => {
@@ -51,5 +51,11 @@ describe('EarlyExpedition', function() {
       });
     });
     expect(tiles).eq(0);
+
+    selectSpace.cb(selectSpace.availableSpaces[0]);
+
+    runAllActions(game);
+
+    expect(lunarObservationPost.resourceCount).eq(1);
   });
 });

@@ -86,7 +86,7 @@ describe('NewVenice', function() {
     const citySpace = game.board
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
-    game.addCityTile(player, citySpace.id);
+    game.addCityTile(player, citySpace);
 
     const action = cast(card.play(player), SelectSpace);
 
@@ -105,7 +105,7 @@ describe('NewVenice', function() {
 
     expect(player.megaCredits).eq(0);
 
-    game.addGreenery(player, greenery.id);
+    game.addGreenery(player, greenery);
 
     expect(player.megaCredits).eq(2);
   });
@@ -120,7 +120,7 @@ describe('NewVenice', function() {
 
     expect(player.getVictoryPoints().city).eq(0);
 
-    game.addGreenery(player, greenery.id);
+    game.addGreenery(player, greenery);
 
     expect(player.getVictoryPoints().city).eq(1);
   });
@@ -142,7 +142,7 @@ describe('NewVenice', function() {
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
 
     // And now adds the tile.
-    game.addOceanTile(player, oceanSpace.id);
+    game.addOceanTile(player, oceanSpace);
     const action = cast(card.play(player), SelectSpace);
 
     action.cb(oceanSpace);
@@ -157,7 +157,7 @@ describe('NewVenice', function() {
     })[0];
 
     player.plants = 3;
-    game.addOceanTile(player, oceanSpace.id);
+    game.addOceanTile(player, oceanSpace);
     expect(player.plants).eq(4);
 
     const action = cast(card.play(player), SelectSpace);

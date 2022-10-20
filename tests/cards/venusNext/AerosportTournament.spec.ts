@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {addCityTile} from '../../TestingUtils';
 import {AerosportTournament} from '../../../src/server/cards/venusNext/AerosportTournament';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {getTestPlayer, newTestGame} from '../../TestGame';
@@ -18,7 +19,7 @@ describe('AerosportTournament', function() {
     corp.action(player);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    game.addCityTile(player, '03');
+    addCityTile(player, '03');
 
     const play = card.play(player);
     expect(play).is.undefined;

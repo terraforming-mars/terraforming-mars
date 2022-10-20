@@ -28,7 +28,7 @@ describe('CuriosityII', function() {
 
   it('Can pay 2 M€ to draw card when placing a tile on a non-empty space', function() {
     const nonEmptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length > 0)!;
-    game.addCityTile(player, nonEmptySpace.id);
+    game.addCityTile(player, nonEmptySpace);
     player.cardsInHand = [];
 
     expect(game.deferredActions.length).to.eq(1);
@@ -46,7 +46,7 @@ describe('CuriosityII', function() {
 
   it('Does not trigger when placing a tile on an empty space', function() {
     const emptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length === 0)!;
-    game.addCityTile(player, emptySpace.id);
+    game.addCityTile(player, emptySpace);
     runAllActions(game);
 
     expect(player.cardsInHand).is.empty;
@@ -55,7 +55,7 @@ describe('CuriosityII', function() {
 
   it('Does not trigger when opponent places a tile', function() {
     const nonEmptySpace = game.board.getAvailableSpacesOnLand(player2).find((space) => space.bonus.length > 0)!;
-    game.addCityTile(player2, nonEmptySpace.id);
+    game.addCityTile(player2, nonEmptySpace);
     runAllActions(game);
 
     expect(player.cardsInHand).is.empty;

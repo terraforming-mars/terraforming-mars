@@ -5,20 +5,21 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('SmallComet', function() {
   let card: SmallComet;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new SmallComet();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     player3 = TestPlayer.GREEN.newPlayer();
-    Game.newInstance('gameid', [player, player2, player3], player);
+    game = Game.newInstance('gameid', [player, player2, player3], player);
   });
 
   it('play', function() {
@@ -28,7 +29,10 @@ describe('SmallComet', function() {
     player2.plants = 15;
     player3.plants = 400;
 
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+
 
     expect(player.getTerraformRating()).eq(22);
     expect(player.game.getTemperature()).eq(-28);

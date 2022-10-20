@@ -8,7 +8,7 @@ import * as constants from '../src/common/constants';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {cast, forceGenerationEnd, maxOutOceans, runAllActions, testGameOptions} from './TestingUtils';
+import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, runAllActions, testGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resources} from '../src/common/Resources';
@@ -59,8 +59,8 @@ describe('Game', () => {
     const player3 = TestPlayer.YELLOW.newPlayer();
     const game = Game.newInstance('gameid', [player, player2, player3], player);
 
-    game.addCityTile(player, SpaceName.ARSIA_MONS);
-    game.addGreenery(player, SpaceName.PAVONIS_MONS);
+    addCity(player, SpaceName.ARSIA_MONS);
+    addGreenery(player, SpaceName.PAVONIS_MONS);
 
     // Claim milestone
     const milestone = new Mayor();
@@ -531,7 +531,7 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-oceanz', [player], player);
     const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
-    game.addOceanTile(player, spaceId);
+    addOcean(player, spaceId);
 
     const space: ISpace = game.board.getSpace(spaceId);
     expect(space.player).is.undefined;

@@ -6,7 +6,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {cast, maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -25,7 +25,9 @@ describe('ArtificialLake', function() {
   });
 
   it('Should play', function() {
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
 
     action.availableSpaces.forEach((space) => {
       expect(space.spaceType).to.eq(SpaceType.LAND);
@@ -45,7 +47,7 @@ describe('ArtificialLake', function() {
     // Set oceans count to the max value
     for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
       if (game.board.getOceanCount() < constants.MAX_OCEAN_TILES) {
-        game.addOceanTile(player, space.id);
+        game.addOceanTile(player, space);
       }
     }
 

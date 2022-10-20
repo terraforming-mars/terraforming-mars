@@ -60,7 +60,7 @@ describe('OceanSanctuary', function() {
 
     expect(otherPlayer.megaCredits).eq(0);
 
-    game.addGreenery(otherPlayer, greenery.id);
+    game.addGreenery(otherPlayer, greenery);
 
     expect(otherPlayer.megaCredits).eq(2);
   });
@@ -76,7 +76,7 @@ describe('OceanSanctuary', function() {
     })[0];
 
     player.plants = 0;
-    game.addOceanTile(player, oceanSpace.id);
+    game.addOceanTile(player, oceanSpace);
     expect(player.plants).eq(1);
 
     const action = cast(card.play(player), SelectSpace);

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {LavaFlows} from '../base/LavaFlows';
 import {CardName} from '../../../common/cards/CardName';
 import {BoardName} from '../../../common/boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
@@ -38,10 +37,10 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
   private getSpacesForCity(player: Player) {
     if (player.game.gameOptions.boardName === BoardName.HELLAS) {
       // https://boardgamegeek.com/thread/1953628/article/29627211#29627211
-      return player.game.board.getAvailableSpacesForCity(player);
+      return player.game.board.getAvailableSpacesForType(player, 'city');
     }
 
-    return LavaFlows.getVolcanicSpaces(player);
+    return player.game.board.getAvailableSpacesForType(player, 'volcanic');
   }
 
   public override bespokeCanPlay(player: Player): boolean {
@@ -49,11 +48,13 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceCityTile(
-      player,
-      'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
-      this.getSpacesForCity(player),
-    ));
+    player.game.defer(
+      new PlaceCityTile(
+        player,
+        {
+          spaces: this.getSpacesForCity(player),
+          title: 'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
+        }));
     return undefined;
   }
 }

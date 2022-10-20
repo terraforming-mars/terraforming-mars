@@ -16,6 +16,7 @@ import {Reds} from '../src/server/turmoil/parties/Reds';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
+import {SpaceId} from '../src/common/Types';
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
@@ -30,21 +31,35 @@ export function maxOutOceans(player: Player, toValue: number = 0): Array<ISpace>
   return oceans;
 }
 
-export function addGreenery(player: Player): ISpace {
-  const space = player.game.board.getAvailableSpacesForGreenery(player)[0];
-  player.game.addGreenery(player, space.id);
+export function addGreenery(player: Player, spaceId?: SpaceId): ISpace {
+  const space = spaceId ?
+    player.game.board.getSpace(spaceId) :
+    player.game.board.getAvailableSpacesForGreenery(player)[0];
+  player.game.addGreenery(player, space);
   return space;
 }
 
-export function addOcean(player: Player): ISpace {
-  const space = player.game.board.getAvailableSpacesForOcean(player)[0];
-  player.game.addOceanTile(player, space.id);
+export function addOceanTile(player: Player, spaceId?: SpaceId): ISpace {
+  return addOcean(player, spaceId);
+}
+
+export function addOcean(player: Player, spaceId?: SpaceId): ISpace {
+  const space = spaceId ?
+    player.game.board.getSpace(spaceId) :
+    player.game.board.getAvailableSpacesForOcean(player)[0];
+  player.game.addOceanTile(player, space);
   return space;
 }
 
-export function addCity(player: Player): ISpace {
-  const space = player.game.board.getAvailableSpacesForCity(player)[0];
-  player.game.addCityTile(player, space.id);
+export function addCityTile(player: Player, spaceId?: SpaceId): ISpace {
+  return addCity(player, spaceId);
+}
+
+export function addCity(player: Player, spaceId?: SpaceId): ISpace {
+  const space = spaceId ?
+    player.game.board.getSpace(spaceId) :
+    player.game.board.getAvailableSpacesForCity(player)[0];
+  player.game.addCityTile(player, space);
   return space;
 }
 

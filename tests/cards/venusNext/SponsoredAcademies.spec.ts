@@ -10,7 +10,7 @@ import {DrawCards} from '../../../src/server/deferredActions/DrawCards';
 import {cast, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, getTestPlayers, newTestGame} from '../../TestGame';
 import {Game} from '../../../src/server/Game';
-import {TestPlayer} from 'tests/TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('SponsoredAcademies', function() {

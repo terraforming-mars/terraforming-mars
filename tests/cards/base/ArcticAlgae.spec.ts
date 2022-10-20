@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
 import {Game} from '../../../src/server/Game';
-import {runNextAction} from '../../TestingUtils';
+import {addOcean, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ArcticAlgae', function() {
@@ -27,7 +27,7 @@ describe('ArcticAlgae', function() {
     expect(player.plants).to.eq(1);
     player.playedCards.push(card);
 
-    game.addOceanTile(player2, game.board.getAvailableSpacesForOcean(player2)[0].id);
+    addOcean(player2);
     runNextAction(game);
     expect(player.plants).to.eq(3);
   });

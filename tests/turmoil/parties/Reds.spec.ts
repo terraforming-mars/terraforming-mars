@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, runAllActions, testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, runAllActions, testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
 import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -71,7 +71,7 @@ describe('Reds', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[1].id);
 
     player.megaCredits = 3;
-    game.addGreenery(player, '10');
+    addGreenery(player, '10');
     runAllActions(game);
     expect(player.megaCredits).to.eq(0);
   });

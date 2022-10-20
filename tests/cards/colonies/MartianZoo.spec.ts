@@ -22,8 +22,8 @@ describe('MartianZoo', function() {
 
   it('Should play', function() {
     const lands = player.game.board.getAvailableSpacesOnLand(player);
-    player.game.addCityTile(player, lands[0].id);
-    player.game.addCityTile(player, lands[1].id);
+    player.game.addCityTile(player, lands[0]);
+    player.game.addCityTile(player, lands[1]);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const action = card.play(player);

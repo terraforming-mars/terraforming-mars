@@ -26,7 +26,7 @@ describe('EcologicalZone', function() {
 
   it('Should play', function() {
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    game.addGreenery(player, landSpace.id);
+    game.addGreenery(player, landSpace);
     expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), SelectSpace);
@@ -45,7 +45,7 @@ describe('EcologicalZone', function() {
     game.phase = Phase.PRELUDES;
 
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    game.addGreenery(player, landSpace.id);
+    game.addGreenery(player, landSpace);
 
     const ecoExpertCard = new EcologyExperts();
     player.playCard(ecoExpertCard);

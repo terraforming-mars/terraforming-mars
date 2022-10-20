@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../../src/server/turmoil/parties/MarsFirst';
 import {Mine} from '../../../src/server/cards/base/Mine';
@@ -31,7 +31,7 @@ describe('MarsFirst', function() {
   });
 
   it('Ruling bonus 2: Gain 1 M€ for each tile you have ON MARS', function() {
-    game.addGreenery(player, '11');
+    addGreenery(player, '11');
 
     const bonus = MARS_FIRST_BONUS_2;
     bonus.grant(game);
@@ -41,7 +41,7 @@ describe('MarsFirst', function() {
   it('Ruling policy 1: When you place a tile ON MARS, gain 1 steel', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
 
-    game.addGreenery(player, '11');
+    addGreenery(player, '11');
     expect(player.steel).to.eq(1);
   });
 

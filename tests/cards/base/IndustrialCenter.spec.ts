@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {addCityTile, cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('IndustrialCenter', function() {
@@ -33,7 +33,7 @@ describe('IndustrialCenter', function() {
   });
 
   it('Should play', function() {
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addCityTile(player);
     expect(game.getCitiesOnMarsCount()).to.eq(1);
 
     const action = cast(card.play(player), SelectSpace);

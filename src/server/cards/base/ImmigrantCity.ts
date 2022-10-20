@@ -54,7 +54,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space.id);
+      player.game.addCityTile(player, space);
       player.game.defer(new LoseProduction(player, Resources.ENERGY, {count: 1}));
       player.game.defer(new LoseProduction(player, Resources.MEGACREDITS, {count: 2}));
       return undefined;

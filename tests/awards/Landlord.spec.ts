@@ -11,7 +11,7 @@ import {EmptyBoard} from '../ares/EmptyBoard';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
-import {cast, testGameOptions} from '../TestingUtils';
+import {addCityTile, addGreenery, cast, testGameOptions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('Landlord', () => {
@@ -30,22 +30,22 @@ describe('Landlord', () => {
   it('Simple test', () => {
     expect(award.getScore(player)).to.eq(0);
 
-    game.addCityTile(player, SpaceName.NOCTIS_CITY);
+    addCityTile(player, SpaceName.NOCTIS_CITY);
     expect(award.getScore(player)).to.eq(1);
 
-    game.addGreenery(player, '35');
+    addGreenery(player, '35');
     expect(award.getScore(player)).to.eq(2);
   });
 
   it('Includes The Moon', () => {
-    const game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({moonExpansion: true}));
+    Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({moonExpansion: true}));
 
     expect(award.getScore(player)).to.eq(0);
 
-    game.addCityTile(player, SpaceName.NOCTIS_CITY);
+    addCityTile(player, SpaceName.NOCTIS_CITY);
     expect(award.getScore(player)).to.eq(1);
 
-    game.addGreenery(player, '35');
+    addGreenery(player, '35');
     expect(award.getScore(player)).to.eq(2);
 
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_IMBRIUM);

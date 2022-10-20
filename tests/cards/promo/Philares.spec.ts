@@ -11,7 +11,8 @@ import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('Philares', () => {
   let card: Philares;
@@ -152,15 +153,16 @@ describe('Philares', () => {
   });
 
   it('Should take initial action', function() {
-    const action = card.initialAction(philaresPlayer);
-    expect(action).is.not.undefined;
+    expect(card.initialAction(philaresPlayer)).is.undefined;
+    runAllActions(game);
 
+    const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);
     action.cb(action.availableSpaces[0]);
     expect(philaresPlayer.getTerraformRating()).to.eq(21);
   });
 
   it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', function() {
-    game.addGreenery(philaresPlayer, space.id);
+    game.addGreenery(philaresPlayer, space);
 
     // Max out all global parameters
     (game as any).temperature = MAX_TEMPERATURE;
@@ -179,7 +181,7 @@ describe('Philares', () => {
     // Don't place a greenery using the callback; add it directly via game.addGreenery() instead
     // Workaround for test since the greenery placement option auto resolves deferred action
     firstPlayerGreeneryPlacement.options[1].cb();
-    game.addGreenery(otherPlayer, adjacentSpace.id);
+    game.addGreenery(otherPlayer, adjacentSpace);
     expect(game.deferredActions).has.lengthOf(1);
 
     // Philares player gains plant and can subsequently place a greenery

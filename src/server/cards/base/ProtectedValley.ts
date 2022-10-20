@@ -3,10 +3,9 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 
 export class ProtectedValley extends Card implements IProjectCard {
   constructor() {
@@ -33,12 +32,7 @@ export class ProtectedValley extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    return new SelectSpace(
-      'Select space reserved for ocean to place greenery tile',
-      player.game.board.getAvailableSpacesForOcean(player),
-      (space: ISpace) => {
-        return player.game.addGreenery(player, space.id);
-      },
-    );
+    player.game.defer(new PlaceGreeneryTile(player, 'ocean'));
+    return undefined;
   }
 }

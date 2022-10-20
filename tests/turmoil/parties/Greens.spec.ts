@@ -3,7 +3,7 @@ import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {ISpace} from '../../../src/server/boards/ISpace';
-import {cast, testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/server/turmoil/parties/Greens';
 import {Lichen} from '../../../src/server/cards/base/Lichen';
@@ -49,7 +49,7 @@ describe('Greens', function() {
   it('Ruling policy 1: When you place a greenery tile, gain 4 MC', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[0].id);
 
-    game.addGreenery(player, '10');
+    addGreenery(player, '10');
     expect(player.megaCredits).to.eq(4);
   });
 

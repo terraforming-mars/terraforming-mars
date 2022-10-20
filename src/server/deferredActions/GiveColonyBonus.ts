@@ -2,11 +2,13 @@ import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
-import {Multiset} from '../utils/Multiset';
+import {MultiSet} from 'mnemonist';
 
 export class GiveColonyBonus extends DeferredAction {
   public cb: () => void = () => {};
-  private waitingFor: Multiset<PlayerId> = new Multiset<PlayerId>();
+  private waitingFor = new MultiSet<PlayerId>();
+  private playersWithBonuses = new Set<PlayerId>();
+
   constructor(
     player: Player,
     public colony: IColony,
@@ -25,14 +27,15 @@ export class GiveColonyBonus extends DeferredAction {
       if (!this.selfish) {
         // Normal behavior; colony owners get their bonuses.
         this.waitingFor.add(playerId);
+        this.playersWithBonuses.add(playerId);
       } else {
         // Selfish behavior, `player` gets all the colony bonuses.
         this.waitingFor.add(this.player.id);
+        this.playersWithBonuses.add(this.player.id);
       }
     }
 
-    for (const entry of this.waitingFor.entries()) {
-      const playerId = entry[0];
+    for (const playerId of this.waitingFor.keys()) {
       const bonusPlayer = this.player.game.getPlayerById(playerId);
       this.giveColonyBonus(bonusPlayer);
     }
@@ -42,7 +45,7 @@ export class GiveColonyBonus extends DeferredAction {
 
   private giveColonyBonus(player: Player): void {
     if (this.waitingFor.get(player.id) ?? 0 > 0) {
-      this.waitingFor.subtract(player.id);
+      this.waitingFor.remove(player.id);
       const input = this.colony.giveColonyBonus(player, true);
       if (input !== undefined) {
         player.setWaitingFor(input, () => this.giveColonyBonus(player));
@@ -50,13 +53,13 @@ export class GiveColonyBonus extends DeferredAction {
         this.giveColonyBonus(player);
       }
     } else {
-      this.waitingFor.remove(player.id);
+      this.playersWithBonuses.delete(player.id);
       this.doneGettingBonus();
     }
   }
 
   private doneGettingBonus(): void {
-    if (this.waitingFor.entries().length === 0) {
+    if (this.playersWithBonuses.size === 0) {
       this.cb();
     }
   }

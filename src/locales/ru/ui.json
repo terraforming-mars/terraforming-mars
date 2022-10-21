@@ -165,7 +165,6 @@
 
     "Place any final greenery from plants": "Выполнить финальное озеленение",
     "Don't place a greenery": "Не выполнять финального озеленения",
-    "Select space for greenery": "Выбрать место для озеленения",
     "Player ${0} name": "Имя игрока ${0}",
 
     "Select corporation": "Выбрать корпорацию",
@@ -179,7 +178,6 @@
     "Commercial District: 1 VP per adjacent city tile": "Коммерческий район: 1 ПО за каждый смежный город",
     "Stanford Torus": "Стэнфордский тор",
     "Select space on Mars for city tile": "Выберите место на карте, чтобы построить на нём город",
-    "Select space for ocean": "Выберите место для размещения океана",
     "Select space for city tile": "Выберите место для размещения города",
     "Select space for greenery tile": "Выберите место для размещения озеленения",
     "Initial Draft rounds:": "Раундов драфта стартовых карт:",

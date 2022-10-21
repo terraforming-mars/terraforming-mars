@@ -320,13 +320,11 @@
 
     "Place any final greenery from plants": "Converter as plantas restantes em vegetações:",
     "Don't place a greenery": "Não colocar vegetação",
-    "Select space for greenery": "Escolha uma área para vegetação",
 
     "City: 1 VP per adjacent greenery": "Cidade: 1 PV por tile de vegetação adjacente",
     "Greenery: 1 VP": "Vegetação: 1 PV",
     "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por tile de cidade adjacente",
     "Select space on Mars for city tile": "Escolha uma área em Marte para o tile de cidade",
-    "Select space for ocean": "Escolha uma área para o tile de oceano",
 
     "Unable to reach the server. The server may be restarting or down for maintenance.": "Não foi possível acessar o servidor, que pode estar reiniciando ou desligado para manutenção.",
     "Unable to restore game ${game_id}": "Não foi possível recuperar partida ${game_id}",

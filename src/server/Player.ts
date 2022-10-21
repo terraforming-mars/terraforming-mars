@@ -819,7 +819,7 @@ export class Player {
         new SelectSpace(
           'Add an ocean',
           game.board.getAvailableSpacesForOcean(this), (space) => {
-            game.addOceanTile(this, space.id);
+            game.addOceanTile(this, space);
             game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
             return undefined;
           },
@@ -1433,7 +1433,7 @@ export class Player {
           'Select space for greenery tile',
           this.game.board.getAvailableSpacesForGreenery(this), (space) => {
             // Do not raise oxygen or award TR for final greenery placements
-            this.game.addGreenery(this, space.id, false);
+            this.game.addGreenery(this, space, false);
             this.deductResource(Resources.PLANTS, this.plantsNeededForGreenery);
 
             this.takeActionForFinalGreenery();

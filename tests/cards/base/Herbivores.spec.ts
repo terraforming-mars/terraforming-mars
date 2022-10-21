@@ -3,7 +3,7 @@ import {Herbivores} from '../../../src/server/cards/base/Herbivores';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
-import {cast, runAllActions, runNextAction} from '../../TestingUtils';
+import {addGreenery, cast, runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Herbivores', () => {
@@ -61,12 +61,12 @@ describe('Herbivores', () => {
     player.playedCards.push(card);
     expect(card.resourceCount).to.eq(0);
 
-    game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addGreenery(player);
+    addGreenery(player);
     runAllActions(game);
     expect(card.resourceCount).to.eq(2);
 
-    game.addGreenery(player2, game.board.getAvailableSpacesOnLand(player2)[0].id);
+    addGreenery(player2);
     runNextAction(game);
     expect(card.resourceCount).to.eq(2); // i.e. not changed
 

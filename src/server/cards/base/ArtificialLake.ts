@@ -3,8 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -34,11 +33,7 @@ export class ArtificialLake extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    if (!player.game.canAddOcean()) return undefined;
-
-    return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
-      player.game.addOceanTile(player, space.id);
-      return undefined;
-    });
+    player.game.defer(new PlaceOceanTile(player, {type: 'land'}));
+    return undefined;
   }
 }

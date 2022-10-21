@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Game} from '../../../src/server/Game';
-import {runAllActions} from '../../TestingUtils';
+import {addCityTile, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Pets', function() {
@@ -15,7 +15,7 @@ describe('Pets', function() {
     expect(action).is.undefined;
     player.addResourceTo(card, 4);
     expect(card.getVictoryPoints()).to.eq(2);
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addCityTile(player);
     runAllActions(game);
     expect(card.resourceCount).to.eq(6);
   });

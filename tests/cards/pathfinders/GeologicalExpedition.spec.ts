@@ -7,7 +7,7 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 import {ISpace} from '../../../src/server/boards/ISpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {addCityTile, cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
 import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -35,7 +35,7 @@ describe('GeologicalExpedition', function() {
   });
 
   it('no bonuses, gain 1 steel', () => {
-    game.addCityTile(player, space.id);
+    game.addCityTile(player, space);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({steel: 1}));
     expect(microbeCard.resourceCount).eq(0);
@@ -44,7 +44,7 @@ describe('GeologicalExpedition', function() {
   });
 
   it('City tile on a space colony, no bonus', () => {
-    game.addCityTile(player, SpaceName.GANYMEDE_COLONY);
+    addCityTile(player, SpaceName.GANYMEDE_COLONY);
 
     expect(game.board.getSpace(SpaceName.GANYMEDE_COLONY).tile?.tileType).eq(TileType.CITY);
 
@@ -56,7 +56,7 @@ describe('GeologicalExpedition', function() {
 
   it('one resource, gain it', () => {
     space.bonus = [SpaceBonus.TITANIUM];
-    game.addCityTile(player, space.id);
+    game.addCityTile(player, space);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 2}));
     expect(microbeCard.resourceCount).eq(0);
@@ -67,7 +67,7 @@ describe('GeologicalExpedition', function() {
   it('one resource, one non-resource', () => {
     player.cardsInHand = [];
     space.bonus = [SpaceBonus.HEAT, SpaceBonus.DRAW_CARD];
-    game.addCityTile(player, space.id);
+    game.addCityTile(player, space);
 
     expect(player.cardsInHand).has.length(1);
     expect(player.getResourcesForTest()).deep.eq(Units.of({heat: 2}));
@@ -79,7 +79,7 @@ describe('GeologicalExpedition', function() {
   it('one non-resource, no bonus', () => {
     player.cardsInHand = [];
     space.bonus = [SpaceBonus.DRAW_CARD];
-    game.addCityTile(player, space.id);
+    game.addCityTile(player, space);
 
     expect(player.cardsInHand).has.length(1);
     expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
@@ -88,7 +88,7 @@ describe('GeologicalExpedition', function() {
 
   it('three identical resources', () => {
     space.bonus = [SpaceBonus.HEAT, SpaceBonus.HEAT, SpaceBonus.HEAT];
-    game.addCityTile(player, space.id);
+    game.addCityTile(player, space);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({heat: 4}));
     expect(player.getWaitingFor()).is.undefined;
@@ -96,7 +96,7 @@ describe('GeologicalExpedition', function() {
 
   it('card resource', () => {
     space.bonus = [SpaceBonus.SCIENCE];
-    game.addCityTile(player, space.id);
+    game.addCityTile(player, space);
     runAllActions(game);
 
     expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
@@ -106,7 +106,7 @@ describe('GeologicalExpedition', function() {
 
   it('variety', () => {
     space.bonus = [SpaceBonus.MICROBE, SpaceBonus.PLANT, SpaceBonus.HEAT];
-    game.addCityTile(player, space.id);
+    game.addCityTile(player, space);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1, heat: 1}));
 

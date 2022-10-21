@@ -7,7 +7,7 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {cast, maxOutOceans} from '../../TestingUtils';
+import {addGreenery, cast, maxOutOceans} from '../../TestingUtils';
 
 describe('Flooding', function() {
   let card: Flooding;
@@ -31,7 +31,7 @@ describe('Flooding', function() {
     oceans[0].tile = undefined;
     for (const adjacentSpace of adjacentSpaces) {
       if (adjacentSpace.spaceType === SpaceType.LAND) {
-        game.addGreenery(player2, adjacentSpace.id);
+        game.addGreenery(player2, adjacentSpace);
         break;
       }
     }
@@ -54,8 +54,8 @@ describe('Flooding', function() {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     const action = cast(card.play(player), SelectSpace);
 
-    game.addGreenery(player, '03');
-    game.addGreenery(player2, '05');
+    addGreenery(player, '03');
+    addGreenery(player2, '05');
 
     const subAction = cast(action.cb(oceanSpaces[0]), OrOptions);
     expect(subAction.options).has.lengthOf(2);

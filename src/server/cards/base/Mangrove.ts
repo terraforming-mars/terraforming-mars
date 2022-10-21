@@ -3,12 +3,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 
 export class Mangrove extends Card implements IProjectCard {
   constructor() {
@@ -30,8 +29,7 @@ export class Mangrove extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    return new SelectSpace('Select ocean space for greenery tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      return player.game.addGreenery(player, space.id);
-    });
+    player.game.defer(new PlaceGreeneryTile(player, 'ocean'));
+    return undefined;
   }
 }

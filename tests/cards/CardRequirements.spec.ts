@@ -121,9 +121,9 @@ describe('CardRequirements', function() {
   it('satisfies properly for cities', function() {
     const requirements = CardRequirements.builder((b) => b.cities(2, {all: true}));
     expect(requirements.satisfies(player)).eq(false);
-    player.game.addCityTile(player2, player.game.board.getAvailableSpacesForCity(player)[0].id);
+    player.game.addCityTile(player2, player.game.board.getAvailableSpacesForCity(player)[0]);
     expect(requirements.satisfies(player)).eq(false);
-    player.game.addCityTile(player, player.game.board.getAvailableSpacesForCity(player)[0].id);
+    player.game.addCityTile(player, player.game.board.getAvailableSpacesForCity(player)[0]);
     expect(requirements.satisfies(player)).eq(true);
   });
 

@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 import {ISpace} from '../../boards/ISpace';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
@@ -41,14 +41,8 @@ export class Philares extends Card implements ICorporationCard {
   }
 
   public initialAction(player: Player) {
-    return new SelectSpace('Select space for greenery tile',
-      player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-        player.game.addGreenery(player, space.id);
-
-        player.game.log('${0} placed a Greenery tile', (b) => b.player(player));
-
-        return undefined;
-      });
+    player.game.defer(new PlaceGreeneryTile(player));
+    return undefined;
   }
 
   private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {

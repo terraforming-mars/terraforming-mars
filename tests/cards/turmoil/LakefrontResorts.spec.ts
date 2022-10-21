@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {LakefrontResorts} from '../../../src/server/cards/turmoil/LakefrontResorts';
-import {runAllActions} from '../../TestingUtils';
+import {addOceanTile, runAllActions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('LakefrontResorts', function() {
@@ -11,8 +11,8 @@ describe('LakefrontResorts', function() {
     const play = card2.play(player);
     expect(play).is.undefined;
     player.setCorporationForTest(card2);
-    game.addOceanTile(player, '06');
-    game.addOceanTile(player, '07');
+    addOceanTile(player, '06');
+    addOceanTile(player, '07');
     runAllActions(game);
 
     expect(player.production.megacredits).to.eq(2);

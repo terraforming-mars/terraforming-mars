@@ -7,6 +7,7 @@ import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {PlacementType} from './PlacementType';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -124,6 +125,18 @@ export abstract class Board {
     return this.getOceanSpaces(include).length;
   }
 
+  public getAvailableSpacesForType(player: Player, type: PlacementType) {
+    switch (type) {
+    case 'land': return this.getAvailableSpacesOnLand(player);
+    case 'ocean': return this.getAvailableSpacesForOcean(player);
+    case 'greenery': return this.getAvailableSpacesForGreenery(player);
+    case 'city': return this.getAvailableSpacesForCity(player);
+    case 'isolated': return this.getAvailableIsolatedSpaces(player);
+    case 'volcanic': return this.getAvailableVolcanicSpaces(player);
+    default: throw new Error('unknown type');
+    }
+  }
+
   /*
    * Returns spaces on the board with ocean tiless.
    *
@@ -204,6 +217,21 @@ export abstract class Board {
     });
 
     return landSpaces;
+  }
+
+  public getAvailableIsolatedSpaces(player: Player) {
+    return this.getAvailableSpacesOnLand(player)
+      .filter(nextToNoOtherTileFn(this));
+  }
+
+  public getAvailableVolcanicSpaces(player: Player) {
+    const volcanicSpaceIds = this.getVolcanicSpaceIds();
+
+    const spaces = this.getAvailableSpacesOnLand(player);
+    if (volcanicSpaceIds.length > 0) {
+      return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
+    }
+    return spaces;
   }
 
   // What's the difference between this and getAvailableSpacesOnLand?

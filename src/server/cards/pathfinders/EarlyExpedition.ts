@@ -7,15 +7,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardResource} from '../../../common/CardResource';
-import {nextToNoOtherTileFn} from '../../boards/Board';
-import {ISpace} from '../../boards/ISpace';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {max} from '../Options';
 
 export class EarlyExpedition extends Card implements IProjectCard {
-  // This card repeats the NEXT TO NO OTHER TILE behavior from Research Outpost, and Philares
-  // has some similar code. Time for code reduction.
-
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
@@ -41,19 +36,12 @@ export class EarlyExpedition extends Card implements IProjectCard {
     });
   }
 
-  private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
-      .filter(nextToNoOtherTileFn(player.game.board));
-  }
-
   public override bespokeCanPlay(player: Player) {
-    return this.getAvailableSpaces(player).length > 0;
+    return player.game.board.getAvailableSpacesForType(player, 'isolated').length > 0;
   }
 
   public override bespokePlay(player: Player) {
-    return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (space: ISpace) => {
-      player.game.addCityTile(player, space.id);
-      return undefined;
-    });
+    player.game.defer(new PlaceCityTile(player, {type: 'isolated'}));
+    return undefined;
   }
 }

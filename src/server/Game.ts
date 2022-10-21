@@ -26,7 +26,7 @@ import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
 import {Player} from './Player';
-import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
+import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from '../common/CardResource';
 import {Resources} from '../common/Resources';
@@ -1169,7 +1169,7 @@ export class Game implements Logger {
 
     // BONUS FOR OCEAN TILE AT 0
     if (this.temperature < 0 && this.temperature + steps * 2 >= 0) {
-      this.defer(new PlaceOceanTile(player, 'Select space for ocean from temperature increase'));
+      this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from temperature increase'}));
     }
 
     this.temperature += steps * 2;
@@ -1271,7 +1271,7 @@ export class Game implements Logger {
         this.canAddOcean() &&
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
-        this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
+        this.defer(new PlaceOceanTile(player, {title: 'Select space for ocean from placement bonus'}));
         this.defer(new SelectPaymentDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
@@ -1395,22 +1395,21 @@ export class Game implements Logger {
   }
 
   public addGreenery(
-    player: Player, spaceId: SpaceId,
+    player: Player, space: ISpace,
     shouldRaiseOxygen: boolean = true): undefined {
-    this.addTile(player, this.board.getSpace(spaceId), {
+    this.addTile(player, space, {
       tileType: TileType.GREENERY,
     });
     // Turmoil Greens ruling policy
-    PartyHooks.applyGreensRulingPolicy(player, this.board.getSpace(spaceId));
+    PartyHooks.applyGreensRulingPolicy(player, space);
 
     if (shouldRaiseOxygen) this.increaseOxygenLevel(player, 1);
     return undefined;
   }
 
   public addCityTile(
-    player: Player, spaceId: SpaceId,
+    player: Player, space: ISpace,
     cardName: CardName | undefined = undefined): void {
-    const space = this.board.getSpace(spaceId);
     this.addTile(player, space, {
       tileType: TileType.CITY,
       card: cardName,
@@ -1426,10 +1425,10 @@ export class Game implements Logger {
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 
-  public addOceanTile(player: Player, spaceId: SpaceId): void {
+  public addOceanTile(player: Player, space: ISpace): void {
     if (this.canAddOcean() === false) return;
 
-    this.addTile(player, this.board.getSpace(spaceId), {
+    this.addTile(player, space, {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {

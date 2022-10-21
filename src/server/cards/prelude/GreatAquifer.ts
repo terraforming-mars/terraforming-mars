@@ -19,8 +19,8 @@ export class GreatAquifer extends PreludeCard {
     });
   }
   public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
-    player.game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
+    player.game.defer(new PlaceOceanTile(player, {title: 'Select space for first ocean'}));
+    player.game.defer(new PlaceOceanTile(player, {title: 'Select space for second ocean'}));
     return undefined;
   }
 }

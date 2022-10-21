@@ -23,7 +23,7 @@ describe('EcologicalZoneAres', function() {
 
   it('Should play', function() {
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    game.addGreenery(player, landSpace.id);
+    game.addGreenery(player, landSpace);
     expect(card.canPlay(player)).is.true;
 
     const action = cast(card.play(player), SelectSpace);

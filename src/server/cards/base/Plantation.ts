@@ -3,11 +3,10 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 
 export class Plantation extends Card implements IProjectCard {
   constructor() {
@@ -30,12 +29,11 @@ export class Plantation extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: Player): boolean {
-    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
+    return player.game.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
   public override bespokePlay(player: Player) {
-    return new SelectSpace('Select space for greenery tile', player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-      return player.game.addGreenery(player, space.id);
-    });
+    player.game.defer(new PlaceGreeneryTile(player));
+    return undefined;
   }
 }

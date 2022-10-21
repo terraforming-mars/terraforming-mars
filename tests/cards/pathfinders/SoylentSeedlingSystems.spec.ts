@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {fakeCard} from '../../TestingUtils';
+import {addGreenery, fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
@@ -31,7 +31,7 @@ describe('SoylentSeedlingSystems', function() {
   it('on greenery placed', () => {
     expect(soylent.resourceCount).eq(0);
     expect(celestic.resourceCount).eq(0);
-    game.addGreenery(player, game.board.getAvailableSpacesForGreenery(player)[0]!.id);
+    addGreenery(player);
     expect(soylent.resourceCount).eq(1);
     expect(celestic.resourceCount).eq(0);
   });
@@ -39,7 +39,7 @@ describe('SoylentSeedlingSystems', function() {
   it('on greenery placed by other player', () => {
     expect(soylent.resourceCount).eq(0);
     expect(celestic.resourceCount).eq(0);
-    game.addGreenery(player2, game.board.getAvailableSpacesForGreenery(player)[0]!.id);
+    addGreenery(player2);
     expect(soylent.resourceCount).eq(0);
     expect(celestic.resourceCount).eq(0);
   });

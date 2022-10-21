@@ -47,7 +47,7 @@ export class ConvertPlants extends StandardActionCard {
       player.game.board.getAvailableSpacesForGreenery(player),
       (space: ISpace) => {
         this.actionUsed(player);
-        player.game.addGreenery(player, space.id);
+        player.game.addGreenery(player, space);
         player.plants -= player.plantsNeededForGreenery;
         return undefined;
       },

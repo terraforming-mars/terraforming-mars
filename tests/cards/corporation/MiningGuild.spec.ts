@@ -56,7 +56,7 @@ describe('MiningGuild', () => {
   it('Gives steel production bonus when placing ocean tile', () => {
     game.board.getSpaces(SpaceType.OCEAN, player).forEach((space) => {
       if (space.bonus.includes(SpaceBonus.TITANIUM) || space.bonus.includes(SpaceBonus.STEEL)) {
-        game.addOceanTile(player, space.id);
+        game.addOceanTile(player, space);
       }
     });
     // There are two spaces on the main board that grant titanium or steel.
@@ -85,7 +85,7 @@ describe('MiningGuild', () => {
 
   it('Does not give bonus when overplacing', () => {
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => space.bonus.includes(SpaceBonus.STEEL))!;
-    game.addOceanTile(player, space.id);
+    game.addOceanTile(player, space);
     runAllActions(game);
     expect(player.production.steel).to.eq(1);
 

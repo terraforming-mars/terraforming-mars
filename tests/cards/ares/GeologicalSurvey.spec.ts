@@ -144,14 +144,14 @@ describe('GeologicalSurvey', () => {
 
     resetBoard(game);
 
-    game.addGreenery(player, '11');
+    addGreenery(player, '11');
     runAllActions(game);
     expect(player.steel).eq(0);
 
     resetBoard(game);
 
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
-    game.addGreenery(player, '11');
+    addGreenery(player, '11');
     runAllActions(game);
     expect(player.steel).eq(2);
   });

@@ -4,6 +4,7 @@ import {Resources} from '../../src/common/Resources';
 import {Riots} from '../../src/server/turmoil/globalEvents/Riots';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
+import {addCityTile} from '../TestingUtils';
 
 describe('Riots', function() {
   it('resolve play', function() {
@@ -12,7 +13,7 @@ describe('Riots', function() {
     const game = Game.newInstance('gameid', [player], player);
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addCityTile(player);
     player.addResource(Resources.MEGACREDITS, 10);
     card.resolve(game, turmoil);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);

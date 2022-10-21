@@ -16,7 +16,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {resetBoard, setCustomGameOptions, runNextAction, cast, runAllActions} from '../../TestingUtils';
+import {resetBoard, setCustomGameOptions, runNextAction, cast, runAllActions, addCityTile, addOceanTile} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -241,11 +241,11 @@ describe('RoboticWorkforce', () => {
 
         // place some tiles
         resetBoard(game);
-        game.addCityTile(player, '17');
-        game.addCityTile(player, '19');
-        game.addOceanTile(player, '32');
-        game.addOceanTile(player, '33');
-        game.addOceanTile(player, '34');
+        addCityTile(player, '17');
+        addCityTile(player, '19');
+        addOceanTile(player, '32');
+        addOceanTile(player, '33');
+        addOceanTile(player, '34');
 
         // Some moon cards need steel and titanium
         player.steel = 2;

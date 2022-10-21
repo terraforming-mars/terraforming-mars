@@ -30,7 +30,7 @@ describe('BotanicalExperience', function() {
   it('canPlay', () => {
     expect(player.canPlayIgnoringCost(card)).is.false;
 
-    game.addGreenery(otherPlayer, space.id);
+    game.addGreenery(otherPlayer, space);
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 

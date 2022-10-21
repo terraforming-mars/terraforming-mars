@@ -31,14 +31,14 @@ describe('UrbanizedArea', function() {
   });
 
   it('Can not play without available space between two cities', function() {
-    game.addCityTile(player, lands[0].id);
+    game.addCityTile(player, lands[0]);
     player.production.add(Resources.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    game.addCityTile(player, lands[0].id);
-    game.addCityTile(player, lands[1].id);
+    game.addCityTile(player, lands[0]);
+    game.addCityTile(player, lands[1]);
 
     player.production.add(Resources.ENERGY, 1);
     expect(player.simpleCanPlay(card)).is.true;

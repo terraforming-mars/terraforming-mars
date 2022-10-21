@@ -3,7 +3,7 @@ import {StripMine} from '../../src/server/cards/base/StripMine';
 import {Election} from '../../src/server/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
-import {fakeCard} from '../TestingUtils';
+import {addCityTile, fakeCard} from '../TestingUtils';
 import {Tag} from '../../src/common/cards/Tag';
 
 describe('Election', function() {
@@ -21,7 +21,7 @@ describe('Election', function() {
     player.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
-    game.addCityTile(player3, game.board.getAvailableSpacesOnLand(player3)[0].id);
+    addCityTile(player3);
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;

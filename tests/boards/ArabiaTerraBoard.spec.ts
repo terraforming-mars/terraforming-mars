@@ -1,12 +1,10 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
 import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
-import {SeededRandom} from '../../src/server/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {testGameOptions, runAllActions, cast} from '../TestingUtils';
 import {BoardName} from '../../src/common/boards/BoardName';
@@ -23,10 +21,10 @@ describe('ArabiaTerraBoard', function() {
   let player2: Player;
 
   beforeEach(function() {
-    board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameId', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA}));
+    board = cast(game.board, ArabiaTerraBoard);
   });
 
   it('Can place an ocean in a cove', () => {
@@ -107,6 +105,7 @@ describe('ArabiaTerraBoard', function() {
 
     player.game.addOceanTile(player, space);
 
-    expect(player.game.board.getSpace(space.id).tile?.tileType).equals(TileType.OCEAN);
+    const s2 = player.game.board.getSpace(space.id);
+    expect(s2.tile?.tileType).equals(TileType.OCEAN);
   });
 });

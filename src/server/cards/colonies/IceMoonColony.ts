@@ -33,7 +33,7 @@ export class IceMoonColony extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
+    player.game.defer(new PlaceOceanTile(player));
     return undefined;
   }
 }

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,6 +17,10 @@ export class ArtificialLake extends Card implements IProjectCard {
       tr: {oceans: 1},
       victoryPoints: 1,
 
+      behavior: {
+        ocean: {on: 'land'},
+      },
+
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
         description: 'Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.',
@@ -28,12 +31,8 @@ export class ArtificialLake extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: Player) {
+    // This is not covered in executor.
     if (!player.game.canAddOcean()) return true; // Card is playable, it just has no effect.
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player, {type: 'land'}));
-    return undefined;
   }
 }

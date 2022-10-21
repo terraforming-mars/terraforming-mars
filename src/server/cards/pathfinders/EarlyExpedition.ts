@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -7,7 +6,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardResource} from '../../../common/CardResource';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {max} from '../Options';
 
 export class EarlyExpedition extends Card implements IProjectCard {
@@ -22,6 +20,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
       behavior: {
         production: {energy: -1, megacredits: 3},
         addResourcesToAnyCard: {type: CardResource.DATA, count: 1},
+        city: {on: 'isolated'},
       },
 
       metadata: {
@@ -34,14 +33,5 @@ export class EarlyExpedition extends Card implements IProjectCard {
           'Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.',
       },
     });
-  }
-
-  public override bespokeCanPlay(player: Player) {
-    return player.game.board.getAvailableSpacesForType(player, 'isolated').length > 0;
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceCityTile(player, {type: 'isolated'}));
-    return undefined;
   }
 }

@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {Tag} from '../../../common/cards/Tag';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {all} from '../Options';
 
 export class SmallComet extends Card implements IProjectCard {
@@ -21,6 +20,7 @@ export class SmallComet extends Card implements IProjectCard {
       behavior: {
         stock: {titanium: 1},
         global: {temperature: 1, oxygen: 1},
+        ocean: {on: 'land'},
       },
 
       metadata: {
@@ -45,7 +45,6 @@ export class SmallComet extends Card implements IProjectCard {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
       }
     });
-    game.defer(new PlaceOceanTile(player, {type: 'land'}));
     return undefined;
   }
 }

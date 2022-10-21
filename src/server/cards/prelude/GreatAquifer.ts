@@ -1,13 +1,15 @@
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class GreatAquifer extends PreludeCard {
   constructor() {
     super({
       name: CardName.GREAT_AQUIFER,
+
+      behavior: {
+        ocean: {count: 2},
+      },
 
       metadata: {
         cardNumber: 'P13',
@@ -17,11 +19,6 @@ export class GreatAquifer extends PreludeCard {
         description: 'Place 2 ocean tiles.',
       },
     });
-  }
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceOceanTile(player, {title: 'Select space for first ocean'}));
-    player.game.defer(new PlaceOceanTile(player, {title: 'Select space for second ocean'}));
-    return undefined;
   }
 }
 

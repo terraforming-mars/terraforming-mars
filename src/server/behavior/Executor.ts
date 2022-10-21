@@ -53,14 +53,14 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.city !== undefined) {
       if (behavior.city.space === undefined) {
-        if (player.game.board.getAvailableSpacesForCity(player).length === 0) {
+        if (player.game.board.getAvailableSpacesForType(player, behavior.city.on ?? 'city').length === 0) {
           return false;
         }
       }
     }
 
     if (behavior.greenery !== undefined) {
-      if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery').length === 0) {
         return false;
       }
     }
@@ -168,18 +168,23 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.ocean !== undefined) {
-      player.game.defer(new PlaceOceanTile(player));
+      if (behavior.ocean.count === 2) {
+        player.game.defer(new PlaceOceanTile(player, {title: 'Select space for first ocean'}));
+        player.game.defer(new PlaceOceanTile(player, {title: 'Select space for second ocean'}));
+      } else {
+        player.game.defer(new PlaceOceanTile(player, {on: behavior.ocean.on}));
+      }
     }
     if (behavior.city !== undefined) {
       if (behavior.city.space !== undefined) {
         const space = player.game.board.getSpace(behavior.city.space);
         player.game.addCityTile(player, space);
       } else {
-        player.game.defer(new PlaceCityTile(player));
+        player.game.defer(new PlaceCityTile(player, {on: behavior.city.on}));
       }
     }
     if (behavior.greenery !== undefined) {
-      player.game.defer(new PlaceGreeneryTile(player));
+      player.game.defer(new PlaceGreeneryTile(player, behavior.greenery.on));
     }
 
     if (behavior.turmoil) {

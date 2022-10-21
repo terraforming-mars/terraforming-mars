@@ -8,7 +8,7 @@ export class PlaceCityTile extends DeferredAction {
   constructor(
     player: Player,
     private options?: {
-      type?: PlacementType,
+      on?: PlacementType,
       title?: string,
       spaces?: Array<ISpace>,
     }) {
@@ -16,7 +16,7 @@ export class PlaceCityTile extends DeferredAction {
   }
 
   public execute() {
-    const type = this.options?.type || 'city';
+    const type = this.options?.on || 'city';
     const spaces = this.options?.spaces || this.player.game.board.getAvailableSpacesForType(this.player, type);
     const title = this.options?.title ?? this.getTitle(type);
 

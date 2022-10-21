@@ -7,13 +7,13 @@ import {PlacementType} from '../boards/PlacementType';
 export class PlaceGreeneryTile extends DeferredAction {
   constructor(
     player: Player,
-    private type: PlacementType = 'greenery',
+    private on: PlacementType = 'greenery',
   ) {
     super(player, Priority.DEFAULT);
   }
 
   public execute() {
-    const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, this.type);
+    const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, this.on);
     if (availableSpaces.length === 0) {
       return undefined;
     }
@@ -29,10 +29,10 @@ export class PlaceGreeneryTile extends DeferredAction {
   }
 
   private getTitle() {
-    switch (this.type) {
+    switch (this.on) {
     case 'greenery': return 'Select space for greenery tile';
     case 'ocean': return 'Select space reserved for ocean to place greenery tile';
-    default: throw new Error('unhandled type; ' + this.type);
+    default: throw new Error('unhandled type; ' + this.on);
     }
   }
 }

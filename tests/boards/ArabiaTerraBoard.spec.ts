@@ -105,7 +105,6 @@ describe('ArabiaTerraBoard', function() {
 
     player.game.addOceanTile(player, space);
 
-    const s2 = player.game.board.getSpace(space.id);
-    expect(s2.tile?.tileType).equals(TileType.OCEAN);
+    expect(space.tile?.tileType).equals(TileType.OCEAN);
   });
 });

@@ -24,7 +24,7 @@ describe('ArabiaTerraBoard', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameId', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA}));
-    board = cast(game.board, ArabiaTerraBoard);
+    board = game.board as ArabiaTerraBoard;
   });
 
   it('Can place an ocean in a cove', () => {

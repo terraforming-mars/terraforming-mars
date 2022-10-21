@@ -307,7 +307,7 @@ export abstract class Colony implements IColony {
         break;
 
       case ColonyBenefit.PLACE_OCEAN_TILE:
-        action = new PlaceOceanTile(player, 'Select ocean space for ' + this.name + ' colony');
+        action = new PlaceOceanTile(player);
         break;
 
       case ColonyBenefit.STEAL_RESOURCES:

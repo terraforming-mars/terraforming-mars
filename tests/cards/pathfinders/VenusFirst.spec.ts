@@ -3,11 +3,11 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {VenusFirst} from '../../../src/server/cards/pathfinders/VenusFirst';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusFirst', function() {
   let card: VenusFirst;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

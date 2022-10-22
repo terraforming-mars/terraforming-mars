@@ -7,7 +7,6 @@ import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBa
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
@@ -16,7 +15,7 @@ import {cast} from '../../TestingUtils';
 
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let deuteriumExport: DeuteriumExport;
 

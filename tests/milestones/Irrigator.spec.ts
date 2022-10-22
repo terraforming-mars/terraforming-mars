@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {Irrigator} from '../../src/server/milestones/Irrigator';
-import {Player} from '../../src/server/Player';
 import {addCityTile, addGreenery, maxOutOceans} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Irrigator', () => {
   let milestone: Irrigator;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(() => {
     milestone = new Irrigator();

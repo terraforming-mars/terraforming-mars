@@ -9,8 +9,8 @@ import {AgendaStyle} from '../../src/common/turmoil/Types';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 describe('PoliticalAgendas', function() {
-  let player1: Player;
-  let player2: Player;
+  let player1: TestPlayer;
+  let player2: TestPlayer;
   let randomElement: (list: Array<any>) => any;
 
   beforeEach(() => {
@@ -52,10 +52,11 @@ describe('PoliticalAgendas', function() {
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
       let game = Game.newInstance('gameid', [player1, player2], player1, testGameOptions({turmoilExtension: true, politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let newPlayer2: Player = player2;
       if (deserialize) {
         game = Game.deserialize(game.serialize());
         // Get a new copy of player2 who will have a different set of waitingFor.
-        player2 = game.getPlayerById(player2.id);
+        newPlayer2 = game.getPlayerById(player2.id);
       }
       const turmoil = game.turmoil!;
 
@@ -63,7 +64,7 @@ describe('PoliticalAgendas', function() {
 
       const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
-      turmoil.chairman = player2.id;
+      turmoil.chairman = newPlayer2.id;
 
       PoliticalAgendas.setNextAgenda(turmoil, game);
       runAllActions(game);
@@ -71,7 +72,7 @@ describe('PoliticalAgendas', function() {
       // The new ruling party is lined up.
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb02', policyId: 'kp02'});
 
-      const waitingFor = cast(player2.getWaitingFor(), OrOptions);
+      const waitingFor = cast(newPlayer2.getWaitingFor(), OrOptions);
       const bonusOptions = cast(waitingFor.options[0], OrOptions);
       bonusOptions.options[0].cb();
 

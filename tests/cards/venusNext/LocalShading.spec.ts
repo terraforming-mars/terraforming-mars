@@ -1,13 +1,13 @@
 import {expect} from 'chai';
+import {TestPlayer} from '../../TestPlayer';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
 describe('LocalShading', function() {
   let card: LocalShading;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new LocalShading();

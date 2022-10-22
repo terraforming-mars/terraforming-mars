@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {CarbonateProcessing} from '../../../src/server/cards/base/CarbonateProcessing';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('CarbonateProcessing', function() {
   let card: CarbonateProcessing;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CarbonateProcessing();

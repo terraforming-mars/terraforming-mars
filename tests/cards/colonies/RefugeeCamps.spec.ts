@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RefugeeCamps', function() {
   let card: RefugeeCamps;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new RefugeeCamps();

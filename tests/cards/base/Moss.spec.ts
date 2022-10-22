@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {Moss} from '../../../src/server/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Moss', function() {
   let card: Moss;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Moss();

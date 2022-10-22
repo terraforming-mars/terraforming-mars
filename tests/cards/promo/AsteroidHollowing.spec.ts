@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {AsteroidHollowing} from '../../../src/server/cards/promo/AsteroidHollowing';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AsteroidHollowing', function() {
   let card: AsteroidHollowing;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AsteroidHollowing();

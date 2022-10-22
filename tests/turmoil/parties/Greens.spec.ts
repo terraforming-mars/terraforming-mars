@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {ISpace} from '../../../src/server/boards/ISpace';
@@ -14,7 +13,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('Greens', function() {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let greens: Greens;

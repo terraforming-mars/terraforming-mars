@@ -4,12 +4,11 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {DiversitySupport} from '../../../src/server/cards/promo/DiversitySupport';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DiversitySupport', function() {
   let card: DiversitySupport;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new DiversitySupport();

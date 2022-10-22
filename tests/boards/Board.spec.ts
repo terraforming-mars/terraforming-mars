@@ -15,8 +15,8 @@ import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {
   let board: OriginalBoard;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));

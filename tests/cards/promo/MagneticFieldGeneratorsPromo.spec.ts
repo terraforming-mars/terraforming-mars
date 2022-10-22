@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {MagneticFieldGeneratorsPromo} from '../../../src/server/cards/promo/MagneticFieldGeneratorsPromo';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('MagneticFieldGeneratorsPromo', function() {
   let card: MagneticFieldGeneratorsPromo;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsPromo();

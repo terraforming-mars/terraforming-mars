@@ -4,14 +4,13 @@ import {Diversifier} from '../../src/server/milestones/Diversifier';
 import {ResearchNetwork} from '../../src/server/cards/prelude/ResearchNetwork';
 import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
 import {Leavitt} from '../../src/server/cards/community/Leavitt';
 import {testGameOptions} from '../TestingUtils';
 import {AntiGravityTechnology} from '../../src/server/cards/base/AntiGravityTechnology';
 
 describe('Diversifier', function() {
   let milestone: Diversifier;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(() => {
     milestone = new Diversifier();

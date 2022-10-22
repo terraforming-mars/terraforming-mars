@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {UndergroundDetonators} from '../../../src/server/cards/moon/UndergroundDetonators';
@@ -8,7 +7,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 
 describe('UndergroundDetonators', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: UndergroundDetonators;
   let moonData: IMoonData;
 

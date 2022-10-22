@@ -4,14 +4,13 @@ import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Pluto} from '../../src/server/colonies/Pluto';
 import {Game} from '../../src/server/Game';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
-import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Pluto', function() {
   let pluto: Pluto;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

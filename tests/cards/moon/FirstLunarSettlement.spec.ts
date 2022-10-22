@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {FirstLunarSettlement} from '../../../src/server/cards/moon/FirstLunarSettlement';
@@ -10,7 +9,7 @@ import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTil
 
 describe('FirstLunarSettlement', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: FirstLunarSettlement;
 

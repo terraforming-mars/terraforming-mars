@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {SpaceMirrors} from '../../../src/server/cards/base/SpaceMirrors';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SpaceMirrors', function() {
   let card: SpaceMirrors;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

@@ -6,14 +6,13 @@ import {Game} from '../../../src/server/Game';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('DirectedImpactors', function() {
   let card: DirectedImpactors;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

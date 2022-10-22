@@ -5,12 +5,11 @@ import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {EcologyExperts} from '../../../src/server/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Decomposers', function() {
   let card: Decomposers;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

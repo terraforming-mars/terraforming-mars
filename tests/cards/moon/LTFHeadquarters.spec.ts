@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {LTFHeadquarters} from '../../../src/server/cards/moon/LTFHeadquarters';
 import {expect} from 'chai';
@@ -9,7 +8,7 @@ import {BuildColony} from '../../../src/server/deferredActions/BuildColony';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('LTFHeadquarters', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: LTFHeadquarters;
   let moonData: IMoonData;
 

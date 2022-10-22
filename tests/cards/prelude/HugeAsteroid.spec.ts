@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('HugeAsteroid', function() {
   let card: HugeAsteroid;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

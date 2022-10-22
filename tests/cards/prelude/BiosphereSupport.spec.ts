@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('BiosphereSupport', function() {
   let card: BiosphereSupport;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new BiosphereSupport();

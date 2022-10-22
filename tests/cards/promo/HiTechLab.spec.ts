@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {HiTechLab} from '../../../src/server/cards/promo/HiTechLab';
 import {Game} from '../../../src/server/Game';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('HiTechLab', function() {
   let card: HiTechLab;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new HiTechLab();

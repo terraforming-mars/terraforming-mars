@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {DesperateMeasures} from '../../../src/server/cards/ares/DesperateMeasures';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
@@ -10,7 +9,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('DesperateMeasures', function() {
   let card: DesperateMeasures;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

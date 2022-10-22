@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
 import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllCards';
 import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
@@ -8,7 +7,7 @@ import {CardManifest} from '../../src/server/cards/ModuleManifest';
 import {ICard} from '../../src/server/cards/ICard';
 
 describe('CardMetadata', function() {
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

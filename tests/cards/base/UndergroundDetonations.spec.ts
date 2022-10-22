@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {UndergroundDetonations} from '../../../src/server/cards/base/UndergroundDetonations';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('UndergroundDetonations', function() {
   let card: UndergroundDetonations;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

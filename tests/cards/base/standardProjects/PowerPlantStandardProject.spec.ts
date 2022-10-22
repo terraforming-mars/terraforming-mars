@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {PowerPlantStandardProject} from '../../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
-import {Player} from '../../../../src/server/Player';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {StandardTechnology} from '../../../../src/server/cards/base/StandardTechnology';
 
 describe('PowerPlantStandardProjects', function() {
   let card: PowerPlantStandardProject;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

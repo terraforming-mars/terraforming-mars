@@ -6,13 +6,12 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
   let card: AsteroidRights;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AsteroidRights();

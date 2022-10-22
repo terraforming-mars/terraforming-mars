@@ -7,12 +7,11 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {HydrogenToVenus} from '../../../src/server/cards/venusNext/HydrogenToVenus';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('HydrogenToVenus', function() {
   let card: HydrogenToVenus;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

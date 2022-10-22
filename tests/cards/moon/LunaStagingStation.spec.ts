@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaStagingStation} from '../../../src/server/cards/moon/LunaStagingStation';
@@ -8,7 +7,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 
 describe('LunaStagingStation', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: LunaStagingStation;
   let moonData: IMoonData;
 

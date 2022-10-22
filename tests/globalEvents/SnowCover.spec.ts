@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {MAX_TEMPERATURE} from '../../src/common/constants';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
 import {SnowCover} from '../../src/server/turmoil/globalEvents/SnowCover';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -9,8 +8,8 @@ import {TestPlayer} from '../TestPlayer';
 
 describe('SnowCover', function() {
   let card: SnowCover;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 

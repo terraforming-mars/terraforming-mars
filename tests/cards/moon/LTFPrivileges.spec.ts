@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
@@ -8,7 +7,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 
 describe('LTFPrivileges', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: LTFPrivileges;
 
   beforeEach(() => {

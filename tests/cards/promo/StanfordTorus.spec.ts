@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {StanfordTorus} from '../../../src/server/cards/promo/StanfordTorus';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('StanfordTorus', function() {
   let card: StanfordTorus;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new StanfordTorus();

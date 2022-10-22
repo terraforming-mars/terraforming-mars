@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {FusionPower} from '../../../src/server/cards/base/FusionPower';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('FusionPower', function() {
   let card: FusionPower;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new FusionPower();

@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {AquiferPumping, OCEAN_COST} from '../../../src/server/cards/base/AquiferPumping';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {maxOutOceans, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
@@ -11,7 +10,7 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 
 describe('AquiferPumping', function() {
   let card: AquiferPumping;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

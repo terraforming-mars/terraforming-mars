@@ -3,7 +3,6 @@ import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTra
 import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
 import {DiasporaMovement} from '../../../src/server/cards/turmoil/DiasporaMovement';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -13,8 +12,8 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('DiasporaMovement', function() {
   let card: DiasporaMovement;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let reds: IParty;

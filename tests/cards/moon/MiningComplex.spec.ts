@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningComplex} from '../../../src/server/cards/moon/MiningComplex';
@@ -12,7 +11,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('MiningComplex', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: MiningComplex;
 

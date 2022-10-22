@@ -5,14 +5,13 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Game} from '../../../src/server/Game';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TradingColony', function() {
   let card: TradingColony;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

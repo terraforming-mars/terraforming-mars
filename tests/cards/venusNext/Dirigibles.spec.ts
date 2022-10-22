@@ -4,12 +4,11 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Dirigibles', function() {
   let card: Dirigibles;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Dirigibles();

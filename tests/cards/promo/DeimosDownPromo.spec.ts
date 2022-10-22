@@ -4,13 +4,12 @@ import {DeimosDownPromo} from '../../../src/server/cards/promo/DeimosDownPromo';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DeimosDownPromo', function() {
   let card: DeimosDownPromo;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new DeimosDownPromo();

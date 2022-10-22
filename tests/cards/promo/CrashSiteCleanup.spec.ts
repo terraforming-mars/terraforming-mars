@@ -4,12 +4,11 @@ import {CrashSiteCleanup} from '../../../src/server/cards/promo/CrashSiteCleanup
 import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CrashSiteCleanup', function() {
   let card: CrashSiteCleanup;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CrashSiteCleanup();

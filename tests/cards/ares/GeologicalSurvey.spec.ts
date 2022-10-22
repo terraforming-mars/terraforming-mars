@@ -18,7 +18,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
-  let player: Player;
+  let player: TestPlayer;
   let redPlayer : Player;
   let game: Game;
 

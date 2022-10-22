@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {VenusFirst} from '../../../src/server/cards/community/VenusFirst';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusFirst', function() {
   let card: VenusFirst;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

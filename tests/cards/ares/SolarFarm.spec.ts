@@ -3,7 +3,6 @@ import {AresHandler} from '../../../src/server/ares/AresHandler';
 import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
@@ -12,7 +11,7 @@ import {cast} from '../../TestingUtils';
 
 describe('SolarFarm', function() {
   let card: SolarFarm;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

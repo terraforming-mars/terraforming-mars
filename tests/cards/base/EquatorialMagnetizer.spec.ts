@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {EquatorialMagnetizer} from '../../../src/server/cards/base/EquatorialMagnetizer';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EquatorialMagnetizer', function() {
   let card: EquatorialMagnetizer;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new EquatorialMagnetizer();

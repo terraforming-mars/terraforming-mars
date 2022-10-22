@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
@@ -12,7 +11,7 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 
 describe('ThoriumRush', () => {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let card: ThoriumRush;
   let moonData: IMoonData;

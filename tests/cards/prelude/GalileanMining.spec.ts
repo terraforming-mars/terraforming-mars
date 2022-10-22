@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GalileanMining', function() {
   let card: GalileanMining;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

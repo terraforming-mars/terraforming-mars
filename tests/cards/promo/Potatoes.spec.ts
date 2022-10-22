@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/server/cards/promo/Potatoes';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Potatoes', function() {
   let card: Potatoes;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Potatoes();

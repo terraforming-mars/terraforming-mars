@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {Inventrix} from '../../../src/server/cards/corporation/Inventrix';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Inventrix', function() {
   let card: Inventrix;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Inventrix();

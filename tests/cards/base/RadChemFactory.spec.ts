@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {RadChemFactory} from '../../../src/server/cards/base/RadChemFactory';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RadChemFactory', function() {
   let card: RadChemFactory;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new RadChemFactory();

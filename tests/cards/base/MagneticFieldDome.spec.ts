@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {MagneticFieldDome} from '../../../src/server/cards/base/MagneticFieldDome';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MagneticFieldDome', function() {
   let card: MagneticFieldDome;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new MagneticFieldDome();

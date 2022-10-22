@@ -8,13 +8,12 @@ import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplicatingRobots';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {ICard} from '../../../src/server/cards/ICard';
 
 describe('CEOsFavoriteProject', function() {
   let card: CEOsFavoriteProject;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CEOsFavoriteProject();

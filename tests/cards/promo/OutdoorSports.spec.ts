@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {OutdoorSports} from '../../../src/server/cards/promo/OutdoorSports';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {ISpace} from '../../../src/server/boards/ISpace';
 
 describe('OutdoorSports', function() {
   let card: OutdoorSports;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let oceanSpace: ISpace;
   let spaceNextToOcean: ISpace;
   let spaceNotNextToOcean: ISpace;

@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3ProductionQuotas} from '../../../src/server/cards/moon/HE3ProductionQuotas';
@@ -11,7 +10,7 @@ import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
 describe('HE3ProductionQuotas', () => {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let card: HE3ProductionQuotas;
   let moonData: IMoonData;

@@ -3,7 +3,6 @@ import {BannedDelegate} from '../../../src/server/cards/turmoil/BannedDelegate';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectDelegate} from '../../../src/server/inputs/SelectDelegate';
-import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {cast, testGameOptions} from '../../TestingUtils';
@@ -11,8 +10,8 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('Banned Delegate', function() {
   let card: BannedDelegate;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 

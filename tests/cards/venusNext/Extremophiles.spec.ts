@@ -5,12 +5,11 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Extremophiles', function() {
   let card: Extremophiles;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Extremophiles();

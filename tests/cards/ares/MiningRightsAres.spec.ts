@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -11,7 +10,7 @@ import {runAllActions, cast} from '../../TestingUtils';
 
 describe('MiningRightsAres', function() {
   let card: MiningRightsAres;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

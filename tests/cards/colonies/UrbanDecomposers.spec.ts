@@ -6,14 +6,13 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('UrbanDecomposers', function() {
   let card: UrbanDecomposers;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let luna: Luna;
 

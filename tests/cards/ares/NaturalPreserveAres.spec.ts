@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -11,7 +10,7 @@ import {cast} from '../../TestingUtils';
 
 describe('NaturalPreserveAres', function() {
   let card: NaturalPreserveAres;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new NaturalPreserveAres();

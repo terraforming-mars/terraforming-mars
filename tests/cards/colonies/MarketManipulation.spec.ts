@@ -10,13 +10,13 @@ import {Europa} from './../../../src/server/colonies/Europa';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 import {Callisto} from '../../../src/server/colonies/Callisto';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {cast} from '../../TestingUtils';
 
 describe('MarketManipulation', function() {
   let card: MarketManipulation;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

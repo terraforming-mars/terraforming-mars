@@ -1,11 +1,10 @@
 import {Capitalist} from '../../src/server/milestones/Capitalist';
-import {Player} from '../../src/server/Player';
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Capitalist', () => {
   let milestone: Capitalist;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(() => {
     milestone = new Capitalist();

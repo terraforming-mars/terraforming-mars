@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
@@ -11,7 +10,7 @@ import {cast} from '../../TestingUtils';
 
 describe('CommercialDistrictAres', function() {
   let card: CommercialDistrictAres;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CommercialDistrictAres();

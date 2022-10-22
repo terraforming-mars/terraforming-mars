@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {GreatDamPromo} from '../../../src/server/cards/promo/GreatDamPromo';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GreatDamPromo', function() {
   let card: GreatDamPromo;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new GreatDamPromo();

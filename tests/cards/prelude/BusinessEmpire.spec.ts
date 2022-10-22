@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessEmpire', function() {
   let card: BusinessEmpire;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

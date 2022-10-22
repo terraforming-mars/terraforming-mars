@@ -5,14 +5,13 @@ import {FreyjaBiodomes} from '../../../src/server/cards/venusNext/FreyjaBiodomes
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('FreyjaBiodomes', function() {
   let card: FreyjaBiodomes;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

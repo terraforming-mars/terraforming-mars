@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 import {MagneticShield} from '../../../src/server/cards/promo/MagneticShield';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MagneticShield', function() {
   let card: MagneticShield;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new MagneticShield();

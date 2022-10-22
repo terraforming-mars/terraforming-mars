@@ -133,7 +133,8 @@ export abstract class Board {
     case 'city': return this.getAvailableSpacesForCity(player);
     case 'isolated': return this.getAvailableIsolatedSpaces(player);
     case 'volcanic': return this.getAvailableVolcanicSpaces(player);
-    default: throw new Error('unknown type');
+    case 'upgradeable-ocean': return this.getOceanSpaces({upgradedOceans: false});
+    default: throw new Error('unknown type ' + type);
     }
   }
 

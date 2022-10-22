@@ -4,7 +4,7 @@ import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
-import {addCity, addGreenery, cast, fakeCard, maxOutOceans} from '../TestingUtils';
+import {addCity, addGreenery, cast, fakeCard, maxOutOceans, runAllActions} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
@@ -116,7 +116,9 @@ describe('Counter', () => {
 
     expect(count()).deep.eq({'': 2, 'onmars': 1, 'offmars': 1, 'everywhere': 2});
 
-    const selectSpace = cast(oceanCity.play(player), SelectSpace);
+    oceanCity.play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     selectSpace.cb(oceanSpace);
 
     expect(count()).deep.eq({'': 3, 'onmars': 2, 'offmars': 1, 'everywhere': 3});

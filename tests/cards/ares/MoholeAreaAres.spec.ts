@@ -6,7 +6,7 @@ import {MoholeAreaAres} from '../../../src/server/cards/ares/MoholeAreaAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MoholeAreaAres', function() {
   it('Should play', function() {
@@ -14,8 +14,10 @@ describe('MoholeAreaAres', function() {
     const player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
-    const action = cast(card.play(player), SelectSpace);
+    const game = Game.newInstance('gameid', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
 

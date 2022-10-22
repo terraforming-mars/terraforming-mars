@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('NaturalPreserve', () => {
   let card: NaturalPreserve;
@@ -39,7 +39,9 @@ describe('NaturalPreserve', () => {
 
   it('Should play', () => {
     expect(card.canPlay(player)).is.true;
-    const action = cast(card.play(player), SelectSpace);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
     expect(player.production.megacredits).to.eq(1);

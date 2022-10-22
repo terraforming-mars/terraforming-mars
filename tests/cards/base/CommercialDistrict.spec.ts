@@ -5,7 +5,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('CommercialDistrict', function() {
   let card: CommercialDistrict;
@@ -27,7 +27,9 @@ describe('CommercialDistrict', function() {
     player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(action.availableSpaces[0]);
 
     expect(player.production.energy).to.eq(0);

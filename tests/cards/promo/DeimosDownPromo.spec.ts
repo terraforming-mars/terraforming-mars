@@ -16,7 +16,7 @@ describe('DeimosDownPromo', function() {
     card = new DeimosDownPromo();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Should play without plants', function() {
@@ -48,7 +48,7 @@ describe('DeimosDownPromo', function() {
   });
 
   it('Works fine in solo mode', function() {
-    Game.newInstance('gameid', [player], player);
+    game = Game.newInstance('gameid', [player], player);
 
     player.plants = 15;
     expect(card.play(player)).is.undefined;

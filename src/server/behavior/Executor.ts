@@ -193,6 +193,18 @@ export class Executor implements BehaviorExecutor {
     if (behavior.greenery !== undefined) {
       player.game.defer(new PlaceGreeneryTile(player, behavior.greenery.on));
     }
+    if (behavior.tile !== undefined) {
+      const tile = behavior.tile;
+      player.game.defer(new PlaceTile(player, {
+        tile: {
+          tileType: tile.type,
+          card: card.name,
+        },
+        on: tile.on,
+        title: tile.title,
+        adjacencyBonus: tile.adjacencyBonus,
+      }));
+    }
 
     if (behavior.turmoil) {
       const turmoil = Turmoil.getTurmoil(player.game);

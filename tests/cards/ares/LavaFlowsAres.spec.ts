@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
-import {cast, resetBoard} from '../../TestingUtils';
+import {cast, resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LavaFlowsAres} from '../../../src/server/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -22,7 +22,9 @@ describe('LavaFlowsAres', function() {
   });
 
   it('Should play', function() {
-    const action = cast(card.play(player), SelectSpace);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
 

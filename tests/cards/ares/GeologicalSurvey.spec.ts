@@ -166,7 +166,10 @@ describe('GeologicalSurvey', () => {
     game.simpleAddTile(redPlayer, space, {tileType: TileType.OCEAN});
 
     player.heat = 0;
-    const selectSpace = cast(new OceanCity().play(player), SelectSpace);
+    new OceanCity().play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
     selectSpace.cb(space);
     runAllActions(game);
     expect(player.heat).eq(0);

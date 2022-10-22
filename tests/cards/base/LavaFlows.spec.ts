@@ -3,7 +3,7 @@ import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
 import {Game} from '../../../src/server/Game';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
-import {cast, resetBoard} from '../../TestingUtils';
+import {cast, resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
@@ -37,27 +37,45 @@ describe('LavaFlows', function() {
   it('All land spaces are available on Hellas', function() {
     // With two players, there's no solo setup, so all spaces will be available.
     const game = newTestGame(2, {boardName: BoardName.HELLAS});
-    const player = game.getPlayersInGenerationOrder()[0];
+    const player = game.getPlayersInGenerationOrder()[0] as TestPlayer;
 
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesOnLand(player));
   });
 
   it('Ares hazards do not disrupt Lava Flow space selection', function() {
-    expect(cast(card.play(player), SelectSpace).availableSpaces).has.length(4);
-    expect(cast(card.play(player), SelectSpace).availableSpaces.map((space) => space.id))
+    card.play(player);
+    runAllActions(game);
+    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces).has.length(4);
+
+    card.play(player);
+    runAllActions(game);
+    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces.map((space) => space.id))
       .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS, SpaceName.THARSIS_THOLUS]);
 
     game.board.getSpace(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.EROSION_MILD, protectedHazard: false};
-    expect(cast(card.play(player), SelectSpace).availableSpaces).has.length(4);
+
+    card.play(player);
+    runAllActions(game);
+    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces).has.length(4);
+
     game.board.getSpace(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.CITY};
-    expect(cast(card.play(player), SelectSpace).availableSpaces).has.length(3);
-    expect(cast(card.play(player), SelectSpace).availableSpaces.map((space) => space.id))
+    card.play(player);
+    runAllActions(game);
+    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces).has.length(3);
+
+    card.play(player);
+    runAllActions(game);
+    expect(cast(player.popWaitingFor(), SelectSpace).availableSpaces.map((space) => space.id))
       .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS]);
   });
 
   it('Should play', function() {
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
 

@@ -10,7 +10,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('BiofertilizerFacility', function() {
   let card: BiofertilizerFacility;
@@ -44,7 +44,9 @@ describe('BiofertilizerFacility', function() {
     expect(game.deferredActions).has.lengthOf(0);
 
     expect(card.canPlay(player)).is.true;
-    const action = cast(card.play(player), SelectSpace);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     expect(player.production.plants).is.eq(1);
 
     const citySpace = game.board.getAvailableSpacesForCity(player)[0];

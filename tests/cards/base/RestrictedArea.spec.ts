@@ -3,7 +3,7 @@ import {RestrictedArea} from '../../../src/server/cards/base/RestrictedArea';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('RestrictedArea', function() {
@@ -24,7 +24,9 @@ describe('RestrictedArea', function() {
   });
 
   it('Should play', function() {
-    const action = cast(card.play(player), SelectSpace);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
 

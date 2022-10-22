@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
@@ -7,7 +6,7 @@ import {expect} from 'chai';
 
 describe('LunarObservationPost', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let card: LunarObservationPost;
 
   beforeEach(() => {

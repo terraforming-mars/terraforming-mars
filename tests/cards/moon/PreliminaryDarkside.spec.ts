@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {PreliminaryDarkside} from '../../../src/server/cards/moon/PreliminaryDarkside';
@@ -7,7 +6,7 @@ import {expect} from 'chai';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('PreliminaryDarkside', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: PreliminaryDarkside;
 
   beforeEach(() => {

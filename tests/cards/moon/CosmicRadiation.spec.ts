@@ -9,8 +9,8 @@ import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 
 describe('CosmicRadiation', () => {
-  let player1: Player;
-  let player2: Player;
+  let player1: TestPlayer;
+  let player2: TestPlayer;
   let player3: TestPlayer;
   let card: CosmicRadiation;
   let moonData: IMoonData;

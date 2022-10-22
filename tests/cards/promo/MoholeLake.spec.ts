@@ -7,12 +7,11 @@ import {MoholeLake} from '../../../src/server/cards/promo/MoholeLake';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MoholeLake', function() {
   let card: MoholeLake;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new MoholeLake();

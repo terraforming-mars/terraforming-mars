@@ -8,12 +8,11 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImportedNitrogen', function() {
   let card: ImportedNitrogen;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

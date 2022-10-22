@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {cast, resetBoard} from '../../TestingUtils';
@@ -11,7 +10,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('LavaFlowsAres', function() {
   let card: LavaFlowsAres;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

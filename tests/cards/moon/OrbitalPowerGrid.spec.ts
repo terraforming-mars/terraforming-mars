@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OrbitalPowerGrid} from '../../../src/server/cards/moon/OrbitalPowerGrid';
@@ -8,7 +7,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('OrbitalPowerGrid', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: OrbitalPowerGrid;
 
   beforeEach(() => {

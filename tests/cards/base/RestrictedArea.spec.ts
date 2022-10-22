@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {RestrictedArea} from '../../../src/server/cards/base/RestrictedArea';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
@@ -9,7 +8,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('RestrictedArea', function() {
   let card: RestrictedArea;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

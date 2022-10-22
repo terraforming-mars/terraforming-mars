@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
 describe('BigAsteroid', function() {
   let card: BigAsteroid;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

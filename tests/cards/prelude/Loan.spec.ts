@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {Loan} from '../../../src/server/cards/prelude/Loan';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Loan', function() {
   let card: Loan;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Loan();

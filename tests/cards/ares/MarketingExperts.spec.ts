@@ -10,7 +10,7 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('MarketingExperts', function() {
   let card: MarketingExperts;
-  let player: Player;
+  let player: TestPlayer;
   let otherPlayer: Player;
   let game: Game;
 

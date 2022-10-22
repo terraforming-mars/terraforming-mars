@@ -1,12 +1,11 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RustEatingBacteria} from '../../../src/server/cards/moon/RustEatingBacteria';
 import {expect} from 'chai';
 
 describe('RustEatingBacteria', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: RustEatingBacteria;
 
   beforeEach(() => {

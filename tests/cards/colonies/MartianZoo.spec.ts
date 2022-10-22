@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianZoo', function() {
   let card: MartianZoo;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new MartianZoo();

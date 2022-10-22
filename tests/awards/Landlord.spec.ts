@@ -15,7 +15,7 @@ import {addCityTile, addGreenery, cast, testGameOptions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('Landlord', () => {
-  let player: Player;
+  let player: TestPlayer;
   let otherPlayer: Player;
   let game: Game;
   const award = new Landlord();

@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {CulturalMetropolis} from '../../../src/server/cards/turmoil/CulturalMetropolis';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -12,8 +11,8 @@ import {TileType} from '../../../src/common/TileType';
 
 describe('Cultural Metropolis', function() {
   let card: CulturalMetropolis;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 

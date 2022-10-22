@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {UrbanizedArea} from '../../../src/server/cards/base/UrbanizedArea';
 import {Game} from '../../../src/server/Game';
 import {ISpace} from '../../../src/server/boards/ISpace';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
@@ -12,7 +11,7 @@ import {cast} from '../../TestingUtils';
 
 describe('UrbanizedArea', function() {
   let card: UrbanizedArea;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let lands: ISpace[];
 

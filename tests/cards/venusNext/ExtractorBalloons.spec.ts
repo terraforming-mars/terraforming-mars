@@ -3,12 +3,11 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ExtractorBalloons', function() {
   let card: ExtractorBalloons;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

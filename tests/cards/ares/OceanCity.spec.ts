@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
@@ -14,7 +13,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('OceanCity', function() {
   let card: OceanCity;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

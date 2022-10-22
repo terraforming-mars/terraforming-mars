@@ -5,13 +5,12 @@ import {GalileanWaystation} from '../../../src/server/cards/colonies/GalileanWay
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GalileanWaystation', function() {
   let card: GalileanWaystation;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new GalileanWaystation();

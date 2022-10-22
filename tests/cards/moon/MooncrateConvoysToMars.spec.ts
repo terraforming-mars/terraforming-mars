@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MooncrateConvoysToMars} from '../../../src/server/cards/moon/MooncrateConvoysToMars';
@@ -12,8 +11,8 @@ import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
 
 describe('MooncrateConvoysToMars', () => {
   let game: Game;
-  let player1: Player;
-  let player2: Player;
+  let player1: TestPlayer;
+  let player2: TestPlayer;
   let player3: TestPlayer;
   let moonData: IMoonData;
   let card: MooncrateConvoysToMars;

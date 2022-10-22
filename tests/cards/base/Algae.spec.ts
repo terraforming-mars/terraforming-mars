@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Algae} from '../../../src/server/cards/base/Algae';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Algae', function() {
   let card: Algae;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

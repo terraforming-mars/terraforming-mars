@@ -7,13 +7,12 @@ import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplica
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 
 describe('SelfReplicatingRobots', function() {
   let card: SelfReplicatingRobots;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SelfReplicatingRobots();

@@ -4,13 +4,12 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {OrbitalCleanup} from '../../../src/server/cards/promo/OrbitalCleanup';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('OrbitalCleanup', function() {
   let card: OrbitalCleanup;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new OrbitalCleanup();

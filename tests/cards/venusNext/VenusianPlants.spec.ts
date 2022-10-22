@@ -5,12 +5,11 @@ import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnima
 import {VenusianPlants} from '../../../src/server/cards/venusNext/VenusianPlants';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusianPlants', function() {
   let card: VenusianPlants;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

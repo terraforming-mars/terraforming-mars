@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Tardigrades', function() {
   let card: Tardigrades;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Tardigrades();

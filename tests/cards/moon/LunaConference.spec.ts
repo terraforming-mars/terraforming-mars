@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaConference} from '../../../src/server/cards/moon/LunaConference';
@@ -11,7 +10,7 @@ import {Scientists} from '../../../src/server/turmoil/parties/Scientists';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
 describe('LunaConference', () => {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let card: LunaConference;
   let moonData: IMoonData;

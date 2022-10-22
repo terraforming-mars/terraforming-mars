@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
@@ -9,7 +8,7 @@ import {Mine} from '../../../src/server/cards/base/Mine';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('MarsFirst', function() {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let marsFirst: MarsFirst;

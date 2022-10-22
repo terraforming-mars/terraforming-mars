@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {GHGFactories} from '../../../src/server/cards/base/GHGFactories';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('GHGFactories', function() {
   let card: GHGFactories;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new GHGFactories();

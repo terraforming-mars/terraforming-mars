@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {DevelopmentCenter} from '../../../src/server/cards/base/DevelopmentCenter';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DevelopmentCenter', function() {
   let card: DevelopmentCenter;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new DevelopmentCenter();

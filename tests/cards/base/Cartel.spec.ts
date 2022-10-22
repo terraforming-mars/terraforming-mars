@@ -4,12 +4,11 @@ import {ImportedHydrogen} from '../../../src/server/cards/base/ImportedHydrogen'
 import {InterstellarColonyShip} from '../../../src/server/cards/base/InterstellarColonyShip';
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Cartel', function() {
   let card: Cartel;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

@@ -6,12 +6,11 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerialMappers', function() {
   let card: AerialMappers;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AerialMappers();

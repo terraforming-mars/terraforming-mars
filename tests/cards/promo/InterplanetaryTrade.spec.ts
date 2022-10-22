@@ -11,12 +11,11 @@ import {InterplanetaryTrade} from '../../../src/server/cards/promo/Interplanetar
 import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InterplanetaryTrade', function() {
   let card: InterplanetaryTrade;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

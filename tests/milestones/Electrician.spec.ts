@@ -6,12 +6,11 @@ import {ResearchCoordination} from '../../src/server/cards/prelude/ResearchCoord
 import {FieldCappedCity} from '../../src/server/cards/promo/FieldCappedCity';
 import {Game} from '../../src/server/Game';
 import {Electrician} from '../../src/server/milestones/Electrician';
-import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Electrician', () => {
   let milestone: Electrician;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(() => {
     milestone = new Electrician();

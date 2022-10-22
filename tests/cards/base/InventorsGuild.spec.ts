@@ -4,12 +4,11 @@ import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('InventorsGuild', function() {
   let card: InventorsGuild;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {TradeAdvance} from '../../../src/server/cards/community/TradeAdvance';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TradeAdvance', function() {
   let card: TradeAdvance;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

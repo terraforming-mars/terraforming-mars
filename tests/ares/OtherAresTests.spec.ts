@@ -8,7 +8,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
 import {addOcean} from '../TestingUtils';
 
 describe('OtherAresTests', function() {
-  let player: Player;
+  let player: TestPlayer;
   let otherPlayer: Player;
   let game: Game;
 

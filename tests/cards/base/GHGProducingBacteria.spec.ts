@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('GHGProducingBacteria', () => {
   let card: GHGProducingBacteria;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {

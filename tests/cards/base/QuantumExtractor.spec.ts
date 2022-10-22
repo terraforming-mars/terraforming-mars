@@ -3,12 +3,11 @@ import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {QuantumExtractor} from '../../../src/server/cards/base/QuantumExtractor';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('QuantumExtractor', function() {
   let card: QuantumExtractor;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new QuantumExtractor();

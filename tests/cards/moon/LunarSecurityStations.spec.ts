@@ -12,7 +12,7 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('LunarSecurityStations', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let opponent1: Player;
   let opponent2: Player;
   let moonData: IMoonData;

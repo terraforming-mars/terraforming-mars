@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OffWorldCityLiving} from '../../../src/server/cards/moon/OffWorldCityLiving';
@@ -10,7 +9,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('OffWorldCityLiving', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: OffWorldCityLiving;
   let moonData: IMoonData;
 

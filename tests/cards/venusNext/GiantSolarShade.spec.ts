@@ -9,7 +9,7 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 let card: GiantSolarShade;
-let player: Player;
+let player: TestPlayer;
 let redPlayer: Player;
 let game: Game;
 

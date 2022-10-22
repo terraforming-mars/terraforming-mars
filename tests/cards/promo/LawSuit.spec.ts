@@ -2,15 +2,14 @@ import {expect} from 'chai';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 import {Game} from '../../../src/server/Game';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('LawSuit', () => {
   let card: LawSuit;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(() => {
     card = new LawSuit();

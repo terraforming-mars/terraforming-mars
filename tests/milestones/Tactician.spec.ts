@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Tactician} from '../../src/server/milestones/Tactician';
-import {Player} from '../../src/server/Player';
 import {Virus} from '../../src/server/cards/base/Virus';
 import {RoboticWorkforce} from '../../src/server/cards/base/RoboticWorkforce';
 import {RestrictedArea} from '../../src/server/cards/base/RestrictedArea';
@@ -28,7 +27,7 @@ import {TestPlayer} from '../TestPlayer';
 
 describe('Tactician', function() {
   let milestone: Tactician;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     milestone = new Tactician();

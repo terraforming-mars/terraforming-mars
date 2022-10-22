@@ -3,13 +3,12 @@ import {cast} from '../../TestingUtils';
 import {MiningExpedition} from '../../../src/server/cards/base/MiningExpedition';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MiningExpedition', function() {
   let card: MiningExpedition;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

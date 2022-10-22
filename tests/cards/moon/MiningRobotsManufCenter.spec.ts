@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MiningRobotsManufCenter} from '../../../src/server/cards/moon/MiningRobotsManufCenter';
@@ -9,7 +8,7 @@ import {expect} from 'chai';
 
 describe('MiningRobotsManufCenter', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: MiningRobotsManufCenter;
 

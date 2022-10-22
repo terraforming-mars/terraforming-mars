@@ -1,15 +1,14 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {Generalist} from '../../src/server/milestones/Generalist';
-import {Player} from '../../src/server/Player';
 import {Resources} from '../../src/common/Resources';
 import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 
 describe('Generalist', function() {
   let milestone: Generalist;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let resources: Resources[];
 
   beforeEach(function() {

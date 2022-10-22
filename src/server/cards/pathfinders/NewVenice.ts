@@ -1,7 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
@@ -20,6 +18,11 @@ export class NewVenice extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: 1, megacredits: 2},
+        tile: {
+          type: TileType.OCEAN_CITY,
+          on: 'upgradeable-ocean',
+          title: 'Select space for New Venice',
+        },
       },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
@@ -44,19 +47,6 @@ export class NewVenice extends Card implements IProjectCard {
 
   public override bespokePlay(player: Player) {
     player.plants -= 2;
-
-    return new SelectSpace(
-      'Select space for New Venice',
-      player.game.board.getOceanSpaces({upgradedOceans: false}),
-      (space: ISpace) => {
-        const tile = {
-          tileType: TileType.OCEAN_CITY,
-          card: this.name,
-          covers: space.tile,
-        };
-        player.game.addTile(player, space, tile);
-        return undefined;
-      },
-    );
+    return undefined;
   }
 }

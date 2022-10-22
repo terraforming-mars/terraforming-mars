@@ -2,10 +2,7 @@ import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
@@ -28,20 +25,16 @@ export class MoholeArea extends Card implements IProjectCard {
       name,
       tags: [Tag.BUILDING],
       cost: 20,
-      adjacencyBonus,
       metadata,
 
       behavior: {
         production: {heat: 4},
+        tile: {
+          type: TileType.MOHOLE_AREA,
+          on: 'ocean',
+          adjacencyBonus: adjacencyBonus,
+        },
       },
-    });
-  }
-
-  public override bespokePlay(player: Player) {
-    return new SelectSpace('Select an ocean space for special tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      player.game.addTile(player, space, {tileType: TileType.MOHOLE_AREA});
-      space.adjacency = this.adjacencyBonus;
-      return undefined;
     });
   }
 }

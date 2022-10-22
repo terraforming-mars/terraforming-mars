@@ -2,11 +2,8 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
-import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 
@@ -22,6 +19,10 @@ export class DeimosDownPromo extends Card implements IProjectCard {
         stock: {steel: 4},
         global: {temperature: 3},
         removeAnyPlants: 6,
+        tile: {
+          type: TileType.DEIMOS_DOWN,
+          on: 'city',
+        },
       },
 
       metadata: {
@@ -33,19 +34,6 @@ export class DeimosDownPromo extends Card implements IProjectCard {
           b.steel(4, {digit}).nbsp.minus().plants(-6, {all});
         }),
       },
-    });
-  }
-
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.game.board.getAvailableSpacesForCity(player).length > 0;
-  }
-
-  public override bespokePlay(player: Player) {
-    const availableSpaces = player.game.board.getAvailableSpacesForCity(player);
-
-    return new SelectSpace('Select space for tile', availableSpaces, (space: ISpace) => {
-      player.game.addTile(player, space, {tileType: TileType.DEIMOS_DOWN});
-      return undefined;
     });
   }
 }

@@ -9,8 +9,9 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('DeimosDownPromo', function() {
   let card: DeimosDownPromo;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new DeimosDownPromo();
@@ -20,7 +21,9 @@ describe('DeimosDownPromo', function() {
   });
 
   it('Should play without plants', function() {
-    cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
     expect(player.steel).to.eq(4);
     const input = player.game.deferredActions.peek()!.execute();
@@ -30,7 +33,9 @@ describe('DeimosDownPromo', function() {
   it('Can remove plants', function() {
     player2.plants = 5;
 
-    cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
     expect(player.steel).to.eq(4);
 
@@ -47,7 +52,9 @@ describe('DeimosDownPromo', function() {
     Game.newInstance('gameid', [player], player);
 
     player.plants = 15;
-    cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace);
 
     expect(player.game.getTemperature()).to.eq(-24);
     expect(player.steel).to.eq(4);

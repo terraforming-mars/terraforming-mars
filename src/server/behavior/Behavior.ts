@@ -11,6 +11,7 @@ import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {TileType} from '../../common/TileType';
 import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
+import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 
 /** A set of steps that an action can perform in any specific order. */
 
@@ -52,6 +53,13 @@ export interface Behavior {
   ocean?: {
     count?: 2,
     on?: PlacementType,
+  },
+
+  tile?: {
+    type: TileType,
+    on: PlacementType,
+    adjacencyBonus?: AdjacencyBonus,
+    title?: string,
   },
 
   /** Remove plants from any player. Typical for asteroid cards. */

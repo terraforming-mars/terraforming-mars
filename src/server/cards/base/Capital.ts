@@ -4,8 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
@@ -39,19 +37,21 @@ export class Capital extends Card implements IProjectCard {
       name,
       tags: [Tag.CITY, Tag.BUILDING],
       cost: 26,
-      adjacencyBonus,
 
       behavior: {
         production: {energy: -2, megacredits: 5},
+        tile: {
+          type: TileType.CAPITAL,
+          on: 'city',
+          title: 'Select space for special city tile',
+          adjacencyBonus: adjacencyBonus,
+        },
       },
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       victoryPoints: 'special',
       metadata,
     });
-  }
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
     const usedSpace = player.game.board.getSpaceByTileCard(this.name);
@@ -60,19 +60,5 @@ export class Capital extends Card implements IProjectCard {
         .filter((s) => Board.isOceanSpace(s)).length;
     }
     return 0;
-  }
-  public override bespokePlay(player: Player) {
-    return new SelectSpace(
-      'Select space for special city tile',
-      player.game.board.getAvailableSpacesForCity(player),
-      (space: ISpace) => {
-        player.game.addTile(player, space, {
-          tileType: TileType.CAPITAL,
-          card: this.name,
-        });
-        space.adjacency = this.adjacencyBonus;
-        return undefined;
-      },
-    );
   }
 }

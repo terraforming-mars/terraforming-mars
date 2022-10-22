@@ -5,8 +5,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
@@ -31,21 +29,18 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       name,
       tags: [Tag.SCIENCE],
       cost: 11,
-      adjacencyBonus,
 
+      behavior: {
+        tile: {
+          type: TileType.RESTRICTED_AREA,
+          on: 'land',
+          adjacencyBonus: adjacencyBonus,
+        },
+      },
       metadata,
     });
   }
-  public override bespokeCanPlay(player: Player): boolean {
-    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
-  }
-  public override bespokePlay(player: Player) {
-    return new SelectSpace('Select space for tile', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
-      player.game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
-      space.adjacency = this.adjacencyBonus;
-      return undefined;
-    });
-  }
+
   public canAct(player: Player): boolean {
     return player.canAfford(2);
   }

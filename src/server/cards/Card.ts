@@ -24,6 +24,7 @@ import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 type ReserveUnits = Units & {deduct: boolean};
 /* External representation of card properties. */
 export interface StaticCardProperties {
+  /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
   behavior?: Behavior | undefined;
   cardCost?: number;

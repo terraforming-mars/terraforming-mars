@@ -8,13 +8,12 @@ import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
 import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NewPartner', function() {
   let card: NewPartner;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {

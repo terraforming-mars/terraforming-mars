@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
+import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('LunarBeam', function() {
   let card: LunarBeam;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new LunarBeam();

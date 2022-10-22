@@ -1,11 +1,11 @@
 import {expect} from 'chai';
+import {TestPlayer} from '../../TestPlayer';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
-import {Player} from '../../../src/server/Player';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SpaceHotels', function() {
   let card: SpaceHotels;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SpaceHotels();

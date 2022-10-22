@@ -4,15 +4,14 @@ import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
 import {Titan} from '../../src/server/colonies/Titan';
 import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 
 describe('Titan', function() {
   let titan: Titan;
   let aerialMappers: AerialMappers;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

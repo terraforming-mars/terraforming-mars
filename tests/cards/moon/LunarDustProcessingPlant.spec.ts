@@ -1,7 +1,6 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarDustProcessingPlant} from '../../../src/server/cards/moon/LunarDustProcessingPlant';
@@ -12,7 +11,7 @@ import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadSt
 
 describe('LunarDustProcessingPlant', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: LunarDustProcessingPlant;
 

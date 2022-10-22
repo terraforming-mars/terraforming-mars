@@ -4,14 +4,13 @@ import {BioPrintingFacility} from '../../../src/server/cards/promo/BioPrintingFa
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('BioPrintingFacility', function() {
   let card: BioPrintingFacility;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new BioPrintingFacility();

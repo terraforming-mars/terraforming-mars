@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
-import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
@@ -17,8 +16,8 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 describe('ArabiaTerraBoard', function() {
   let board: ArabiaTerraBoard;
   let game: Game;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();

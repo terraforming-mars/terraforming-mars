@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {ConvertHeat} from '../../../../src/server/cards/base/standardActions/ConvertHeat';
 import {Phase} from '../../../../src/common/Phase';
-import {Player} from '../../../../src/server/Player';
 import {testGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
@@ -11,7 +10,7 @@ import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 
 describe('ConvertHeat', function() {
   let card: ConvertHeat;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new ConvertHeat();

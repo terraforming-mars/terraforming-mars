@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SmallAnimals', function() {
   let card: SmallAnimals;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

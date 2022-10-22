@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('DeuteriumExport', function() {
   let card: DeuteriumExport;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new DeuteriumExport();

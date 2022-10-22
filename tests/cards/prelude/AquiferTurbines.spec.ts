@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {AquiferTurbines} from '../../../src/server/cards/prelude/AquiferTurbines';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AquiferTurbines', function() {
   let card: AquiferTurbines;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

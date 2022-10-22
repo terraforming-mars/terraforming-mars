@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {WaterSplittingPlant} from '../../../src/server/cards/base/WaterSplittingPlant';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('WaterSplittingPlant', function() {
   let card: WaterSplittingPlant;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

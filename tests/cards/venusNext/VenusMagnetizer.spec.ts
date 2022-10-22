@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {VenusMagnetizer} from '../../../src/server/cards/venusNext/VenusMagnetizer';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusMagnetizer', function() {
   let card: VenusMagnetizer;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {Luna} from '../../src/server/colonies/Luna';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Luna', function() {
   let luna: Luna;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

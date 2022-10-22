@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../src/server/Player';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/server/Game';
 import {MarsFirst} from '../../src/server/turmoil/parties/MarsFirst';
@@ -39,7 +38,7 @@ import {TileType} from '../../src/common/TileType';
 
 describe('Turmoil', function() {
   let player: TestPlayer;
-  let player2: Player;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 

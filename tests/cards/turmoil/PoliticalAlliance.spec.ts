@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {PoliticalAlliance} from '../../../src/server/cards/turmoil/PoliticalAlliance';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {testGameOptions} from '../../TestingUtils';
@@ -9,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('PoliticalAlliance', function() {
   let card: PoliticalAlliance;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 

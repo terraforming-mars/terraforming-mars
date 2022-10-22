@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SmallDutyRovers} from '../../../src/server/cards/moon/SmallDutyRovers';
@@ -9,7 +8,7 @@ import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 
 describe('SmallDutyRovers', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: SmallDutyRovers;
   let moonData: IMoonData;
 

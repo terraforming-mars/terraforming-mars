@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {RegoPlastics} from '../../../src/server/cards/promo/RegoPlastics';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 
 describe('RegoPlastics', function() {
   let card: RegoPlastics;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new RegoPlastics();

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Birds} from '../../../src/server/cards/base/Birds';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Resources} from '../../../src/common/Resources';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
@@ -9,8 +8,8 @@ import {cast} from '../../TestingUtils';
 
 describe('Birds', function() {
   let card: Birds;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new Birds();

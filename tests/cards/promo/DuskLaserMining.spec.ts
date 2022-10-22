@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {DuskLaserMining} from '../../../src/server/cards/promo/DuskLaserMining';
-import {Player} from '../../../src/server/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('DuskLaserMining', function() {
   let card: DuskLaserMining;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new DuskLaserMining();

@@ -1,12 +1,11 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {runNextAction, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ProcessorFactory} from '../../../src/server/cards/moon/ProcessorFactory';
 import {expect} from 'chai';
 
 describe('ProcessorFactory', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: ProcessorFactory;
 
   beforeEach(() => {

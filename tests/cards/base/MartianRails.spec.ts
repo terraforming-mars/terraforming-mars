@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {addCityTile} from '../../TestingUtils';
 import {MartianRails} from '../../../src/server/cards/base/MartianRails';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MartianRails', () => {
   let card: MartianRails;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(() => {
     card = new MartianRails();

@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
 import {IndustrialCenterAres} from '../../../src/server/cards/ares/IndustrialCenterAres';
@@ -11,7 +10,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('IndustrialCenterAres', function() {
   let card: IndustrialCenterAres;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

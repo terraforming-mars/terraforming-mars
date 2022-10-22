@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {WeGrowAsOne} from '../../../src/server/cards/moon/WeGrowAsOne';
@@ -8,7 +7,7 @@ import {Unity} from '../../../src/server/turmoil/parties/Unity';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
 describe('WeGrowAsOne', () => {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let card: WeGrowAsOne;
 

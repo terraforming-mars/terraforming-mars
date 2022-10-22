@@ -5,7 +5,6 @@ import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -17,7 +16,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 
 describe('MaxwellBase', function() {
   let card: MaxwellBase;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

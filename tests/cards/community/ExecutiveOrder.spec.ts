@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
@@ -10,7 +9,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('ExecutiveOrder', function() {
   let card: ExecutiveOrder;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {

@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IntragenSanctuaryHeadquarters} from '../../../src/server/cards/moon/IntragenSanctuaryHeadquarters';
@@ -8,8 +7,8 @@ import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
 
 describe('IntragenSanctuaryHeadquarters', () => {
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let card: IntragenSanctuaryHeadquarters;
 
   beforeEach(() => {

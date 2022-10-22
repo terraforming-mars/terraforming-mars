@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {ConvertPlants} from '../../../../src/server/cards/base/standardActions/ConvertPlants';
 import {Phase} from '../../../../src/common/Phase';
-import {Player} from '../../../../src/server/Player';
 import {testGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
@@ -11,7 +10,7 @@ import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 
 describe('ConvertPlants', function() {
   let card: ConvertPlants;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new ConvertPlants();

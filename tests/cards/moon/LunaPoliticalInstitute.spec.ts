@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {cast, fakeCard, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaPoliticalInstitute} from '../../../src/server/cards/moon/LunaPoliticalInstitute';
@@ -10,7 +9,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('LunaPoliticalInstitute', () => {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let card: LunaPoliticalInstitute;
   let turmoil: Turmoil;

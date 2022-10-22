@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {Lichen} from '../../../src/server/cards/base/Lichen';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Lichen', function() {
   let card: Lichen;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

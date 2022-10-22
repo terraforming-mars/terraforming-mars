@@ -1,12 +1,11 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusSolarArrays} from '../../../src/server/cards/moon/CopernicusSolarArrays';
 import {expect} from 'chai';
 
 describe('CopernicusSolarArrays', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: CopernicusSolarArrays;
 
   beforeEach(() => {

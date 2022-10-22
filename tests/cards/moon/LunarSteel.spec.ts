@@ -1,12 +1,11 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarSteel} from '../../../src/server/cards/moon/LunarSteel';
 import {expect} from 'chai';
 
 describe('LunarSteel', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: LunarSteel;
 
   beforeEach(() => {

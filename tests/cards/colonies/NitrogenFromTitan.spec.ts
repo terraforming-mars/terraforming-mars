@@ -6,12 +6,11 @@ import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFl
 import {ICard} from '../../../src/server/cards/ICard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrogenFromTitan', function() {
   let card: NitrogenFromTitan;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

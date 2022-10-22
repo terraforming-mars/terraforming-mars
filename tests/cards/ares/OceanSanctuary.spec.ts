@@ -13,7 +13,7 @@ import {runAllActions} from '../../TestingUtils';
 
 describe('OceanSanctuary', function() {
   let card: OceanSanctuary;
-  let player: Player;
+  let player: TestPlayer;
   let otherPlayer: Player;
   let game: Game;
 

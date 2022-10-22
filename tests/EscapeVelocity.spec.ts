@@ -1,12 +1,12 @@
-import {Player} from '../src/server/Player';
-import {Game} from '../src/server/Game';
 import {expect} from 'chai';
+import {TestPlayer} from './TestPlayer';
+import {Game} from '../src/server/Game';
 import {Timer} from '../src/common/Timer';
 import {FakeClock} from './common/FakeClock';
 import {getTestPlayer, newTestGame} from './TestGame';
 
 let game: Game;
-let player: Player;
+let player: TestPlayer;
 let clock: FakeClock;
 let timer: Timer;
 

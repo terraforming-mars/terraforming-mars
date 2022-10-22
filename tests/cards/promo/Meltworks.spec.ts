@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {Meltworks} from '../../../src/server/cards/promo/Meltworks';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Meltworks', function() {
   let card: Meltworks;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Meltworks();

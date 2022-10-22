@@ -7,13 +7,12 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EcologyResearch', function() {
   let card: EcologyResearch;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let colony1: Luna;
 

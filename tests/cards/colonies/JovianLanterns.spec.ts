@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('JovianLanterns', function() {
   let card: JovianLanterns;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new JovianLanterns();

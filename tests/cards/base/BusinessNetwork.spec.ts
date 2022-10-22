@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resources} from '../../../src/common/Resources';
@@ -9,7 +8,7 @@ import {cast} from '../../TestingUtils';
 
 describe('BusinessNetwork', function() {
   let card: BusinessNetwork;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

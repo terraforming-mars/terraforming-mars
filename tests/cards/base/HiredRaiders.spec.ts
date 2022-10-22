@@ -3,13 +3,12 @@ import {cast} from '../../TestingUtils';
 import {HiredRaiders} from '../../../src/server/cards/base/HiredRaiders';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('HiredRaiders', function() {
   let card: HiredRaiders;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new HiredRaiders();

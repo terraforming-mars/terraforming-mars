@@ -2,13 +2,12 @@ import {expect} from 'chai';
 import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/AsteroidDeflectionSystem';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AsteroidDeflectionSystem', function() {
   let card: AsteroidDeflectionSystem;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AsteroidDeflectionSystem();

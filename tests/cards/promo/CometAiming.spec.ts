@@ -4,13 +4,12 @@ import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('CometAiming', function() {
   let card: CometAiming;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CometAiming();

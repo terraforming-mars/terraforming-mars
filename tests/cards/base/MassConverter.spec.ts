@@ -2,14 +2,13 @@ import {expect} from 'chai';
 import {MassConverter} from '../../../src/server/cards/base/MassConverter';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('MassConverter', function() {
   let card: MassConverter;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new MassConverter();

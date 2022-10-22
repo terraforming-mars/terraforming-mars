@@ -11,7 +11,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('MetallicAsteroid', function() {
   let card: MetallicAsteroid;
-  let player: Player;
+  let player: TestPlayer;
   let otherPlayer: Player;
   let game: Game;
 

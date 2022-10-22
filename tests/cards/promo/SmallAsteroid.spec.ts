@@ -2,15 +2,14 @@ import {expect} from 'chai';
 import {SmallAsteroid} from '../../../src/server/cards/promo/SmallAsteroid';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('SmallAsteroid', function() {
   let card: SmallAsteroid;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(function() {
     card = new SmallAsteroid();

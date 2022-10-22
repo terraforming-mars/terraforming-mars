@@ -1,5 +1,4 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SphereHabitats} from '../../../src/server/cards/moon/SphereHabitats';
@@ -7,7 +6,7 @@ import {expect} from 'chai';
 import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
 
 describe('SphereHabitats', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: SphereHabitats;
 
   beforeEach(() => {

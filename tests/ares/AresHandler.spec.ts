@@ -29,7 +29,7 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
 describe('AresHandler', function() {
-  let player: Player;
+  let player: TestPlayer;
   let otherPlayer: Player;
   let game: Game;
 

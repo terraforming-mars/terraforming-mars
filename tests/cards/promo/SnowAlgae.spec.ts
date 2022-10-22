@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {SnowAlgae} from '../../../src/server/cards/promo/SnowAlgae';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SnowAlgae', function() {
   let card: SnowAlgae;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SnowAlgae();

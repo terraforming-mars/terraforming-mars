@@ -3,12 +3,11 @@ import {cast} from '../../TestingUtils';
 import {ForcedPrecipitation} from '../../../src/server/cards/venusNext/ForcedPrecipitation';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ForcedPrecipitation', function() {
   let card: ForcedPrecipitation;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

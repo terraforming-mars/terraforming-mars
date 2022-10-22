@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {StripMine} from '../../../src/server/cards/base/StripMine';
 import {Game} from '../../../src/server/Game';
 import {Phase} from '../../../src/common/Phase';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
@@ -12,7 +11,7 @@ import {TestPlayer} from '../../TestPlayer';
 
 describe('StripMine', function() {
   let card: StripMine;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 

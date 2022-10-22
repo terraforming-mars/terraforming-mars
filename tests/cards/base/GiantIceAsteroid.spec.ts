@@ -9,8 +9,8 @@ import {cast} from '../../TestingUtils';
 
 describe('GiantIceAsteroid', function() {
   let card: GiantIceAsteroid;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let player3:Player;
   let game: Game;
 

@@ -34,7 +34,7 @@ function asUnits(player: Player): Units {
   };
 }
 
-describe('Behaviors', () => {
+describe('Executor', () => {
   let game: Game;
   let player: TestPlayer;
   let player2: TestPlayer;

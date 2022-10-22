@@ -1,11 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
 
 export class ProtectedValley extends Card implements IProjectCard {
   constructor() {
@@ -18,6 +16,7 @@ export class ProtectedValley extends Card implements IProjectCard {
 
       behavior: {
         production: {megacredits: 2},
+        greenery: {on: 'ocean'},
       },
 
       metadata: {
@@ -29,10 +28,5 @@ export class ProtectedValley extends Card implements IProjectCard {
         description: 'Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    player.game.defer(new PlaceGreeneryTile(player, 'ocean'));
-    return undefined;
   }
 }

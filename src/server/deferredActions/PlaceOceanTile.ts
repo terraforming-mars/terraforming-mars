@@ -8,7 +8,7 @@ export class PlaceOceanTile extends DeferredAction {
   constructor(
     player: Player,
     private options?: {
-      type?: PlacementType,
+      on?: PlacementType,
       title?: string,
     }) {
     super(player, Priority.PLACE_OCEAN_TILE);
@@ -19,9 +19,9 @@ export class PlaceOceanTile extends DeferredAction {
       return undefined;
     }
 
-    const type = this.options?.type || 'ocean';
-    const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, type);
-    const title = this.options?.title ?? this.getTitle(type);
+    const on = this.options?.on || 'ocean';
+    const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
+    const title = this.options?.title ?? this.getTitle(on);
 
     return new SelectSpace(
       title,

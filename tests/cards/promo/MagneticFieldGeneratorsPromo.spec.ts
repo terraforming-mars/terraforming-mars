@@ -4,17 +4,18 @@ import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('MagneticFieldGeneratorsPromo', function() {
   let card: MagneticFieldGeneratorsPromo;
   let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsPromo();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Cannot play without enough energy production', function() {
@@ -26,7 +27,9 @@ describe('MagneticFieldGeneratorsPromo', function() {
     player.production.add(Resources.ENERGY, 4);
     expect(player.simpleCanPlay(card)).is.true;
 
-    cast(card.play(player), SelectSpace);
+    card.play(player);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace);
     expect(player.production.energy).to.eq(0);
     expect(player.production.plants).to.eq(2);
     expect(player.getTerraformRating()).to.eq(23);

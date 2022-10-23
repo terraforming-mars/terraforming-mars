@@ -1,8 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
@@ -21,6 +18,12 @@ export class OceanFarm extends Card implements IProjectCard {
 
       behavior: {
         production: {plants: 1, heat: 1},
+        tile: {
+          type: TileType.OCEAN_FARM,
+          on: 'upgradeable-ocean',
+          title: 'Select space for Ocean Farm',
+          adjacencyBonus: {bonus: [SpaceBonus.PLANT]},
+        },
       },
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
@@ -35,22 +38,5 @@ export class OceanFarm extends Card implements IProjectCard {
         description: 'Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    return new SelectSpace(
-      'Select space for Ocean Farm',
-      player.game.board.getOceanSpaces({upgradedOceans: false}),
-      (space: ISpace) => {
-        const tile = {
-          tileType: TileType.OCEAN_FARM,
-          card: this.name,
-          covers: space.tile,
-        };
-        player.game.addTile(player, space, tile);
-        space.adjacency = {bonus: [SpaceBonus.PLANT]};
-        return undefined;
-      },
-    );
   }
 }

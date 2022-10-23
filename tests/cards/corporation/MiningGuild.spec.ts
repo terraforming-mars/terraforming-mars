@@ -90,7 +90,9 @@ describe('MiningGuild', () => {
     expect(player.production.steel).to.eq(1);
 
     const oceanCity = new OceanCity();
-    const selectSpace = cast(oceanCity.play(player), SelectSpace);
+    oceanCity.play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     selectSpace.cb(space);
 
     expect(space.tile?.tileType).equal(TileType.OCEAN_CITY);

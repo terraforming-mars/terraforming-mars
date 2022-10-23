@@ -20,6 +20,7 @@ import {Counter} from './Counter';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {BehaviorExecutor} from './BehaviorExecutor';
+import {PlaceTile} from '../deferredActions/PlaceTile';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: Player, card: ICard) {
@@ -61,6 +62,12 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.greenery !== undefined) {
       if (player.game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery').length === 0) {
+        return false;
+      }
+    }
+
+    if (behavior.tile !== undefined) {
+      if (player.game.board.getAvailableSpacesForType(player, behavior.tile.on).length === 0) {
         return false;
       }
     }
@@ -185,6 +192,18 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.greenery !== undefined) {
       player.game.defer(new PlaceGreeneryTile(player, behavior.greenery.on));
+    }
+    if (behavior.tile !== undefined) {
+      const tile = behavior.tile;
+      player.game.defer(new PlaceTile(player, {
+        tile: {
+          tileType: tile.type,
+          card: card.name,
+        },
+        on: tile.on,
+        title: tile.title,
+        adjacencyBonus: tile.adjacencyBonus,
+      }));
     }
 
     if (behavior.turmoil) {

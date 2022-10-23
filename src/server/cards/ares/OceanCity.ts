@@ -1,8 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -20,6 +17,11 @@ export class OceanCity extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1, megacredits: 3},
+        tile: {
+          type: TileType.OCEAN_CITY,
+          on: 'upgradeable-ocean',
+          title: 'Select space for Ocean City',
+        },
       },
 
       requirements: CardRequirements.builder((b) => b.oceans(6)),
@@ -34,21 +36,5 @@ export class OceanCity extends Card implements IProjectCard {
         description: 'Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    return new SelectSpace(
-      'Select space for Ocean City',
-      player.game.board.getOceanSpaces({upgradedOceans: false}),
-      (space: ISpace) => {
-        const tile = {
-          tileType: TileType.OCEAN_CITY,
-          card: this.name,
-          covers: space.tile,
-        };
-        player.game.addTile(player, space, tile);
-        return undefined;
-      },
-    );
   }
 }

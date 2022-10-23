@@ -67,8 +67,10 @@ describe('CuriosityII', function() {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player2).find((space) => space.bonus.length === 0)!;
     game.board.getSpace(oceanSpace.id).tile = {tileType: TileType.OCEAN};
 
-    const oceanCity = new OceanSanctuary();
-    const action = cast(oceanCity.play(player), SelectSpace);
+    const oceanSanctuary = new OceanSanctuary();
+    oceanSanctuary.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
 
     runAllActions(game);

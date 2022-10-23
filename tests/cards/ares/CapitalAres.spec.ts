@@ -8,7 +8,7 @@ import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('CapitalAres', function() {
   let card: CapitalAres;
@@ -30,7 +30,9 @@ describe('CapitalAres', function() {
     player.production.add(Resources.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(5);
 

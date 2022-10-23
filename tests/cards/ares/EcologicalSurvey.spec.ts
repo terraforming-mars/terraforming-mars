@@ -134,7 +134,10 @@ describe('EcologicalSurvey', () => {
     game.simpleAddTile(redPlayer, space, {tileType: TileType.OCEAN});
 
     player.plants = 0;
-    const selectSpace = cast(new OceanCity().play(player), SelectSpace);
+    new OceanCity().play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
     selectSpace.cb(space);
     expect(player.plants).eq(0);
   });

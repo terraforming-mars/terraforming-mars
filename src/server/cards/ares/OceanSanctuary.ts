@@ -1,9 +1,6 @@
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
@@ -26,6 +23,12 @@ export class OceanSanctuary extends Card implements IProjectCard {
 
       behavior: {
         addResources: 1,
+        tile: {
+          type: TileType.OCEAN_SANCTUARY,
+          on: 'upgradeable-ocean',
+          title: 'Select space for Ocean Sanctuary',
+          adjacencyBonus: {bonus: [SpaceBonus.ANIMAL]},
+        },
       },
 
       metadata: {
@@ -37,21 +40,5 @@ export class OceanSanctuary extends Card implements IProjectCard {
         description: 'Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    return new SelectSpace(
-      'Select space for Ocean Sanctuary',
-      player.game.board.getOceanSpaces({upgradedOceans: false}),
-      (space: ISpace) => {
-        const tile = {
-          tileType: TileType.OCEAN_SANCTUARY,
-          card: this.name,
-          covers: space.tile,
-        };
-        player.game.addTile(player, space, tile);
-        space.adjacency = {bonus: [SpaceBonus.ANIMAL]};
-        return undefined;
-      });
   }
 }

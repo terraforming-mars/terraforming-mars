@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../../common/Resources';
@@ -21,10 +20,13 @@ export class LunaTradeFederation extends Card implements ICorporationCard {
       name: CardName.LUNA_TRADE_FEDERATION,
       tags: [Tag.MOON, Tag.SPACE],
       startingMegaCredits: 15,
-      initialActionText: 'Place a mine tile',
 
       behavior: {
         stock: {titanium: 10},
+      },
+      firstAction: {
+        text: 'Place a mine tile on The Moon.',
+        moon: {mineTile: {}},
       },
 
       metadata: {
@@ -46,11 +48,6 @@ export class LunaTradeFederation extends Card implements ICorporationCard {
 
   public override bespokePlay(player: Player) {
     player.canUseTitaniumAsMegacredits = true;
-    return undefined;
-  }
-
-  public initialAction(player: Player) {
-    player.game.defer(new PlaceMoonMineTile(player));
     return undefined;
   }
 

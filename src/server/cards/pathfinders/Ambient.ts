@@ -11,7 +11,6 @@ import {IProjectCard} from '../IProjectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
-import {LogHelper} from '../../LogHelper';
 
 export class Ambient extends Card implements ICorporationCard {
   constructor() {
@@ -21,7 +20,11 @@ export class Ambient extends Card implements ICorporationCard {
       tags: [Tag.VENUS],
       startingMegaCredits: 38,
 
-      initialActionText: 'Raise the Venus scale 2 steps.',
+      firstAction: {
+        text: 'Raise the Venus scale 2 steps.',
+        //     LogHelper.logVenusIncrease(player, actual);
+        global: {venus: 2},
+      },
 
       metadata: {
         cardNumber: 'PfC3',
@@ -42,12 +45,6 @@ export class Ambient extends Card implements ICorporationCard {
 
   public override bespokePlay(player: Player) {
     this.onCorpCardPlayed(player, this);
-    return undefined;
-  }
-
-  public initialAction(player: Player) {
-    const actual = player.game.increaseVenusScaleLevel(player, 2);
-    LogHelper.logVenusIncrease(player, actual);
     return undefined;
   }
 

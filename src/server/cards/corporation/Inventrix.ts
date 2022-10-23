@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -12,8 +11,12 @@ export class Inventrix extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.INVENTRIX,
       tags: [Tag.SCIENCE],
-      initialActionText: 'Draw 3 cards',
       startingMegaCredits: 45,
+
+      firstAction: {
+        text: 'Draw 3 cards',
+        drawCard: 3,
+      },
 
       metadata: {
         cardNumber: 'R43',
@@ -29,10 +32,6 @@ export class Inventrix extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public initialAction(player: Player) {
-    player.drawCard(3);
-    return undefined;
   }
   public getRequirementBonus(): number {
     return 2;

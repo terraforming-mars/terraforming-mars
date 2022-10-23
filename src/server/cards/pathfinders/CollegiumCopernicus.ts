@@ -32,7 +32,10 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
         addResourcesToAnyCard: {count: 1, type: CardResource.DATA},
       },
 
-      initialActionText: 'Draw 2 cards with a science tag',
+      firstAction: {
+        text: 'Draw 2 cards with a science tag',
+        drawCard: {count: 2, tag: Tag.SCIENCE},
+      },
 
       metadata: {
         cardNumber: 'PfC4',
@@ -49,11 +52,6 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
         }),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tag.SCIENCE});
-    return undefined;
   }
 
   public onCorpCardPlayed(player: Player, card: ICorporationCard) {

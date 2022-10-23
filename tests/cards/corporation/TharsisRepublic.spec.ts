@@ -3,8 +3,9 @@ import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepu
 import {Game} from '../../../src/server/Game';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {addCityTile, runAllActions} from '../../TestingUtils';
+import {addCityTile, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('TharsisRepublic', function() {
   let card: TharsisRepublic;
@@ -22,8 +23,9 @@ describe('TharsisRepublic', function() {
   });
 
   it('Should take initial action', function() {
-    const action = card.initialAction(player);
-    expect(action).is.not.undefined;
+    player.runInitialAction(card);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(action.availableSpaces[0]);
     runAllActions(game);
 

@@ -128,7 +128,8 @@ describe('CollegiumCopernicus', function() {
 
   it('initialAction', function() {
     expect(player.cardsInHand).is.empty;
-    card.initialAction(player);
+    player.runInitialAction(card);
+    runAllActions(game);
     expect(player.cardsInHand).has.length(2);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SCIENCE))).has.length(2);
   });

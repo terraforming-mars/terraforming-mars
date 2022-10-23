@@ -22,7 +22,7 @@ describe('Polaris', function() {
   });
 
   it('initial action', function() {
-    card.initialAction(player);
+    player.runInitialAction(card);
     runAllActions(game);
     const selectSpace = cast(player.getWaitingFor(), SelectSpace);
     const space = game.board.getSpace('06');

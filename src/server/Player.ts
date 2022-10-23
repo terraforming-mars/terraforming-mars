@@ -1190,11 +1190,6 @@ export class Player {
     }
   }
 
-  /** @deprecated use card.play */
-  public simplePlay(card: IProjectCard | ICorporationCard) {
-    return card.play(this);
-  }
-
   public onCardPlayed(card: IProjectCard) {
     if (card.cardType === CardType.PROXY) {
       return;
@@ -1278,8 +1273,10 @@ export class Player {
       const diff = this.cardsInHand.length * this.cardCost;
       this.deductResource(Resources.MEGACREDITS, diff);
     }
-    this.simplePlay(corporationCard);
-    if (corporationCard.initialAction !== undefined) this.pendingInitialActions.push(corporationCard);
+    corporationCard.play(this);
+    if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
+      this.pendingInitialActions.push(corporationCard);
+    }
     this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     if (additionalCorp === false) {
       this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(this.cardsInHand.length));
@@ -1721,14 +1718,7 @@ export class Player {
             }],
           },
           corp.initialActionText, () => {
-            game.defer(new SimpleDeferredAction(this, () => {
-              if (corp.initialAction) {
-                return corp.initialAction(this);
-              } else {
-                return undefined;
-              }
-            }));
-
+            this.runInitialAction(corp);
             this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
             return undefined;
           });
@@ -1751,6 +1741,18 @@ export class Player {
       this.incrementActionsTaken();
       this.takeAction();
     });
+  }
+
+  // TODO(kberg): move to Card
+  public runInitialAction(corp: ICorporationCard) {
+    this.game.defer(new SimpleDeferredAction(this, () => {
+      if (corp.initialAction) {
+        return corp.initialAction(this);
+      } else if (corp.firstAction !== undefined) {
+        getBehaviorExecutor().execute(corp.firstAction, this, corp);
+      }
+      return undefined;
+    }));
   }
 
   private incrementActionsTaken(): void {

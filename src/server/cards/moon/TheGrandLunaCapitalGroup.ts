@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceId} from '../../../common/Types';
@@ -23,11 +22,15 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
       name: CardName.THE_GRAND_LUNA_CAPITAL_GROUP,
       tags: [Tag.CITY, Tag.MOON],
       startingMegaCredits: 32,
-      initialActionText: 'Place a colony tile',
       victoryPoints: 'special',
 
       behavior: {
         stock: {titanium: 1},
+      },
+
+      firstAction: {
+        text: 'Place a habitat tile',
+        moon: {habitatTile: {}},
       },
 
       metadata: {
@@ -48,11 +51,6 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
         victoryPoints: CardRenderDynamicVictoryPoints.moonHabitatTile(1),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    player.game.defer(new PlaceMoonHabitatTile(player));
-    return undefined;
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {

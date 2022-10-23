@@ -7,7 +7,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {ISpace} from '../../boards/ISpace';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -22,7 +21,10 @@ export class Polaris extends Card implements ICorporationCard {
       tags: [Tag.SPACE],
       startingMegaCredits: 32,
 
-      initialActionText: 'Place your initial ocean.',
+      firstAction: {
+        text: 'Place your initial ocean.',
+        ocean: {},
+      },
 
       metadata: {
         cardNumber: 'PfC1',
@@ -40,11 +42,6 @@ export class Polaris extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    player.game.defer(new PlaceOceanTile(player));
-    return undefined;
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {

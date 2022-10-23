@@ -19,7 +19,6 @@ export class Incite extends Card implements ICorporationCard {
       },
       firstAction: {
         text: 'Place 2 delegates in one party',
-        //     const title = 'Incite first action - Select where to send two delegates';
         turmoil: {sendDelegates: {count: 2}},
       },
 

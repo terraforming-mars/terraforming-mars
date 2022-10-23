@@ -26,9 +26,6 @@ export class TharsisRepublic extends Card implements ICorporationCard {
       firstAction: {
         text: 'Place a city tile',
         city: {},
-        /**
-    return new SelectSpace('Select space on Mars for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-         */
       },
 
       metadata: {

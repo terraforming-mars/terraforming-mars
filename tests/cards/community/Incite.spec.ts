@@ -36,10 +36,10 @@ describe('Incite', function() {
   });
 
   it('Can perform initial action', function() {
-    card.initialAction(player);
-    expect(game.deferredActions).has.lengthOf(1);
+    player.runInitialAction(card);
+    runAllActions(game);
 
-    const sendDelegate = cast(game.deferredActions.peek()!.execute(), SelectPartyToSendDelegate);
+    const sendDelegate = cast(player.getWaitingFor(), SelectPartyToSendDelegate);
     sendDelegate.cb(PartyName.MARS);
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);

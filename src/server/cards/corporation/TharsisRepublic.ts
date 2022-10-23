@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../../common/Resources';
@@ -22,8 +21,12 @@ export class TharsisRepublic extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.THARSIS_REPUBLIC,
       tags: [Tag.BUILDING],
-      initialActionText: 'Place a city tile',
       startingMegaCredits: 40,
+
+      firstAction: {
+        text: 'Place a city tile',
+        city: {},
+      },
 
       metadata: {
         cardNumber: 'R31',
@@ -40,14 +43,6 @@ export class TharsisRepublic extends Card implements ICorporationCard {
           });
         }),
       },
-    });
-  }
-
-  public initialAction(player: Player) {
-    return new SelectSpace('Select space on Mars for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space);
-      player.game.log('${0} placed a city tile', (b) => b.player(player));
-      return undefined;
     });
   }
 

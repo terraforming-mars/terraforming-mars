@@ -24,10 +24,14 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
       tags: [Tag.EARTH],
       startingMegaCredits: 39,
       cardType: CardType.CORPORATION,
-      initialActionText: 'Draw a blue card',
 
       behavior: {
         stock: {steel: 1, titanium: 1},
+      },
+
+      firstAction: {
+        text: 'Draw a blue card',
+        drawCard: {count: 1, type: CardType.ACTIVE},
       },
 
       metadata: {
@@ -50,11 +54,6 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(1, {cardType: CardType.ACTIVE});
-    return undefined;
   }
 
   private getEligibleCards(player: Player) {

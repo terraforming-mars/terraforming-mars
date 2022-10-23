@@ -16,7 +16,11 @@ export class TempestConsultancy extends Card implements ICorporationCard {
       name: CardName.TEMPEST_CONSULTANCY,
       tags: [Tag.MOON],
       startingMegaCredits: 37,
-      initialActionText: 'Place 2 delegates in one party',
+
+      firstAction: {
+        text: 'Place 2 delegates in one party',
+        turmoil: {sendDelegates: {count: 2}},
+      },
 
       metadata: {
         description: 'You start with 37 M€. As your first action, place 2 delegates in one party.',

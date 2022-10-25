@@ -15,7 +15,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   }
   const url = new URL(req.url, `http://localhost`);
   if (url.pathname === '/') {
-    fs.readFile('src/tools/analyze_ma.html', (err, data) => {
+    fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
       if (err) {
         res.writeHead(500);
         res.write('Internal server error ' + err);

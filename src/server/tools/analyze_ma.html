@@ -10,6 +10,7 @@
       <label for="venus">Venus: </label><input type="checkbox" id="venus" name="venus"><br/>
       <label for="ares">Ares: </label><input type="checkbox" id="ares" name="ares"><br/>
       <label for="moon">The Moon: </label><input type="checkbox" id="moon" name="moon"><br/>
+      <label for="fan-maps">Fan maps: </label><input type="checkbox" id="fan-maps" name="fan-maps"><br/>
 
       <input type="radio" id="none" name="type" value="NONE"><label for="none">None</label>&nbsp;
       <input type="radio" id="limited" name="type" value="LIMITED" checked><label for="limited">Limited</label>&nbsp;
@@ -41,6 +42,7 @@
         url = url + "&venus=" + d3.select("#venus").property("checked");
         url = url + "&ares=" + d3.select("#ares").property("checked");
         url = url + "&moon=" + d3.select("#moon").property("checked");
+        url = url + "&fan-maps=" + d3.select("#fan-maps").property("checked");
         url = url + "&type=" + d3.select('input[name="type"]:checked').node().value
 
         d3.csv(url, (data) => process(svg, data));

@@ -6,10 +6,11 @@ import Awards from '@/client/components/Awards.vue';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
+import {AwardName} from '@/common/ma/AwardName';
 
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
-    name: `Award ${id} name`,
+    name: `Award ${id} name` as AwardName,
     description: `Award ${id} description`,
     player_name: funded ? 'Foo' : '',
     player_color: funded ? 'red': '',

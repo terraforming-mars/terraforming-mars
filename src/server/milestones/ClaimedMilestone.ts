@@ -2,6 +2,7 @@
 import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
 import {IMilestone} from './IMilestone';
+import {MilestoneName} from '../../common/ma/MilestoneName';
 
 export type ClaimedMilestone = {
   milestone: IMilestone;
@@ -9,7 +10,7 @@ export type ClaimedMilestone = {
 }
 
 export type SerializedClaimedMilestone = {
-  name?: string;
+  name?: MilestoneName;
   playerId?: PlayerId;
 }
 

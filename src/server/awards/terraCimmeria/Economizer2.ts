@@ -2,7 +2,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {IAward} from '../IAward';
 
-export class Economizer implements IAward {
+export class Economizer2 implements IAward {
   public readonly name = 'T. Economizer';
   public readonly description = 'Most cards in play costing 10 M€ or less';
 

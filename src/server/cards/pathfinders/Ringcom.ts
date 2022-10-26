@@ -17,11 +17,15 @@ export class Ringcom extends Card implements ICorporationCard {
       tags: [Tag.JOVIAN],
       startingMegaCredits: 39,
 
-      initialActionText: 'Draw 2 cards with a Jovian tag',
-
       behavior: {
         production: {megacredits: 3},
       },
+
+      firstAction: {
+        text: 'Draw 2 cards with a Jovian tag',
+        drawCard: {count: 2, tag: Tag.JOVIAN},
+      },
+
 
       metadata: {
         cardNumber: 'PfC4',
@@ -43,11 +47,6 @@ export class Ringcom extends Card implements ICorporationCard {
   public override bespokePlay(player: Player) {
     // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
     this.onCardPlayed(player, this);
-    return undefined;
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tag.JOVIAN});
     return undefined;
   }
 

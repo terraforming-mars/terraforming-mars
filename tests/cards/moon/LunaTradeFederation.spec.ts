@@ -41,7 +41,7 @@ describe('LunaTradeFederation', () => {
     expect(moonData.miningRate).eq(0);
     expect(player.getTerraformRating()).eq(20);
 
-    lunaTradeFederation.initialAction(player);
+    player.runInitialAction(lunaTradeFederation);
 
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);

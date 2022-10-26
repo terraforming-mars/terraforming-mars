@@ -1,4 +1,5 @@
 import {Color} from '../Color';
+import {MilestoneName} from '../ma/MilestoneName';
 
 export type MilestoneScore = {
     playerColor: Color;
@@ -6,7 +7,7 @@ export type MilestoneScore = {
 }
 
 export type ClaimedMilestoneModel = {
-    name: string;
+    name: MilestoneName;
     description: string;
     player_name: string;
     player_color: string;

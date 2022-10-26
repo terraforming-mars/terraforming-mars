@@ -153,7 +153,7 @@ describe('Philares', () => {
   });
 
   it('Should take initial action', function() {
-    expect(card.initialAction(philaresPlayer)).is.undefined;
+    philaresPlayer.runInitialAction(card);
     runAllActions(game);
 
     const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);

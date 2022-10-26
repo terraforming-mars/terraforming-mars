@@ -33,7 +33,7 @@ import {Engineer} from './amazonisPlanitia/Engineer';
 import {Historian} from './amazonisPlanitia/Historian';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
-import {Economizer} from './terraCimmeria/Economizer';
+import {Economizer2} from './terraCimmeria/Economizer2';
 import {Politician} from './terraCimmeria/Politician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
@@ -94,7 +94,7 @@ export const ARABIA_TERRA_AWARDS = [
 
 export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
   new Biologist(),
-  new Economizer(),
+  new Economizer2(),
   new Politician(),
   new Urbanist(),
   new Warmonger(),

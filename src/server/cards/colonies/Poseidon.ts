@@ -1,9 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -13,8 +11,12 @@ export class Poseidon extends Card implements ICorporationCard {
       name: CardName.POSEIDON,
       startingMegaCredits: 45,
       cardType: CardType.CORPORATION,
-      initialActionText: 'Place a colony',
 
+      firstAction: {
+        text: 'Place a colony',
+        // title: 'Poseidon first action - Select where to build colony
+        colonies: {buildColony: {}},
+      },
       metadata: {
         cardNumber: 'R02',
         description: 'You start with 45 M€. As your first action, place a colony.',
@@ -29,15 +31,5 @@ export class Poseidon extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    if (player.game.gameOptions.coloniesExtension) {
-      player.game.defer(new BuildColony(player, {title: 'Poseidon first action - Select where to build colony'}));
-      return undefined;
-    } else {
-      console.warn('Colonies extension isn\'t selected.');
-      return undefined;
-    }
   }
 }

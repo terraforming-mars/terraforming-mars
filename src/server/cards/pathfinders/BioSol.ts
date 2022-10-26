@@ -19,7 +19,10 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
       resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 3),
 
-      initialActionText: 'Draw 2 cards with a microbe tag',
+      firstAction: {
+        text: 'Draw 2 cards with a microbe tag',
+        drawCard: {count: 2, tag: Tag.MICROBE},
+      },
 
       metadata: {
         cardNumber: 'PfC14',
@@ -32,11 +35,6 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
         }),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tag.MICROBE});
-    return undefined;
   }
 
   public canAct() {

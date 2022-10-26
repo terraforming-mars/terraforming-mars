@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {fakeCard} from '../../TestingUtils';
+import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('Ringcom', function() {
@@ -36,7 +36,8 @@ describe('Ringcom', function() {
     const d = fakeCard({name: 'D' as CardName, tags: [Tag.JOVIAN]});
     game.projectDeck.drawPile.push(a, b, c, d);
 
-    card.initialAction(player);
+    player.runInitialAction(card);
+    runAllActions(game);
 
     expect(player.cardsInHand).has.members([a, d]);
   });

@@ -14,7 +14,11 @@ export class MorningStarInc extends Card implements ICorporationCard {
       tags: [Tag.VENUS],
       startingMegaCredits: 50,
       cardType: CardType.CORPORATION,
-      initialActionText: 'Draw 3 Venus-tag cards',
+
+      firstAction: {
+        text: 'Draw 3 cards with a Venus tag',
+        drawCard: {count: 3, tag: Tag.VENUS},
+      },
 
       metadata: {
         cardNumber: 'R06',
@@ -29,11 +33,6 @@ export class MorningStarInc extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(3, {tag: Tag.VENUS});
-    return undefined;
   }
 
   public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {

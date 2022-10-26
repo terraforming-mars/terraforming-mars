@@ -35,7 +35,7 @@ describe('Vitor', function() {
 
   it('No initial action for solo games', function() {
     Game.newInstance('gameid', [player], player);
-    const action = card.initialAction(player);
+    const action = player.runInitialAction(card);
     expect(action).is.undefined;
   });
 

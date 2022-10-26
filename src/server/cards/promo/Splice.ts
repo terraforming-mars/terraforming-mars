@@ -20,7 +20,11 @@ export class Splice extends Card implements ICorporationCard {
       name: CardName.SPLICE,
       tags: [Tag.MICROBE],
       startingMegaCredits: 48, // 44 + 4 as card resolution when played
-      initialActionText: 'Draw a card with a microbe tag',
+
+      firstAction: {
+        text: 'Draw a card with a microbe tag',
+        drawCard: {count: 1, tag: Tag.MICROBE},
+      },
 
       metadata: {
         cardNumber: 'R28',
@@ -42,11 +46,6 @@ export class Splice extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(1, {tag: Tag.MICROBE});
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {

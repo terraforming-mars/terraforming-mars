@@ -3,10 +3,12 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {CardType} from '../../../common/cards/CardType';
 import {SerializedCard} from '../../SerializedCard';
+import {Behavior} from '../../behavior/Behavior';
 
 export interface ICorporationCard extends ICard {
   initialActionText?: string;
   initialAction?: (player: Player) => PlayerInput | undefined;
+  firstAction?: Behavior,
   startingMegaCredits: number;
   cardCost?: number;
   onCorpCardPlayed?: (player: Player, card: ICorporationCard) => PlayerInput | undefined;

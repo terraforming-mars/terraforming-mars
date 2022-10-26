@@ -7,11 +7,12 @@ import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
+import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
 
+const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
-    name: `Award ${id} name` as AwardName,
-    description: `Award ${id} description`,
+    name: names[id - 1],
     player_name: funded ? 'Foo' : '',
     player_color: funded ? 'red': '',
     scores: [],
@@ -215,17 +216,19 @@ describe('Awards', () => {
       propsData: {awards, showScores: true},
     });
 
-    expect(wrapper.text()).to.not.include(awards[0].description);
-    expect(wrapper.text()).to.not.include(awards[1].description);
+    const award0Description = getMilestoneAwardDescription(awards[0].name);
+    const award1Description = getMilestoneAwardDescription(awards[1].name);
+    expect(wrapper.text()).to.not.include(award0Description);
+    expect(wrapper.text()).to.not.include(award1Description);
 
     await wrapper.find('[data-test=toggle-description]').trigger('click');
 
-    expect(wrapper.text()).to.include(awards[0].description);
-    expect(wrapper.text()).to.include(awards[1].description);
+    expect(wrapper.text()).to.include(award0Description);
+    expect(wrapper.text()).to.include(award1Description);
 
     await wrapper.find('[data-test=toggle-description]').trigger('click');
 
-    expect(wrapper.text()).to.not.include(awards[0].description);
-    expect(wrapper.text()).to.not.include(awards[1].description);
+    expect(wrapper.text()).to.not.include(award0Description);
+    expect(wrapper.text()).to.not.include(award1Description);
   });
 });

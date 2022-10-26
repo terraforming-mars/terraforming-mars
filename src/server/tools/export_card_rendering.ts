@@ -14,6 +14,9 @@ import {isPreludeCard} from '../cards/prelude/IPreludeCard';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
+import {ALL_MILESTONES} from '../milestones/Milestones';
+import {ALL_AWARDS} from '../awards/Awards';
+import {MilestoneAwardMetadata} from '@/common/ma/MilestoneAwardMetadata';
 
 class ProjectCardProcessor {
   public static json: Array<ClientCard> = [];
@@ -128,6 +131,26 @@ class ColoniesProcessor {
   }
 }
 
+class MAProcessor {
+  public static json: Array<MilestoneAwardMetadata> = [];
+  public static makeJson() {
+    ALL_MILESTONES.forEach((entry) => {
+      MAProcessor.processEntry(entry);
+    });
+
+    ALL_AWARDS.forEach((entry) => {
+      MAProcessor.processEntry(entry);
+    });
+  }
+
+  private static processEntry(metadata: {name: string, description: string}) {
+    MAProcessor.json.push({
+      name: metadata.name,
+      description: metadata.description,
+    });
+  }
+}
+
 if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
@@ -135,7 +158,9 @@ if (!fs.existsSync('src/genfiles')) {
 ProjectCardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();
+MAProcessor.makeJson();
 
 fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(ProjectCardProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/ma.json', JSON.stringify(MAProcessor.json, null, 2));

@@ -8,7 +8,6 @@ export type MilestoneScore = {
 
 export type ClaimedMilestoneModel = {
     name: MilestoneName;
-    description: string;
     player_name: string;
     player_color: string;
     scores: Array<MilestoneScore>;

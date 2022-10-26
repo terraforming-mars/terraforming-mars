@@ -11,12 +11,13 @@ function createAward(
 ): FundedAwardModel {
   return {
     name: `Cosmic Settler`,
-    description: `Award description`,
     player_name: funded ? 'Foo' : '',
     player_color: funded ? 'red': '',
     scores,
   };
 }
+
+const DESCRIPTION = 'Having the most city tiles not on Mars';
 
 describe('Award', () => {
   it('shows passed award', () => {
@@ -36,7 +37,7 @@ describe('Award', () => {
       propsData: {award},
     });
 
-    expect(wrapper.text()).to.not.include(award.description);
+    expect(wrapper.text()).to.not.include(DESCRIPTION);
   });
 
   it(`doesn't show scores`, () => {

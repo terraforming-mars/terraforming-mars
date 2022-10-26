@@ -169,7 +169,6 @@ export class Server {
         player_name: claimed === undefined ? '' : claimed.player.name,
         player_color: claimed === undefined ? '' : claimed.player.color,
         name: milestone.name,
-        description: milestone.description,
         scores,
       });
     }
@@ -198,7 +197,6 @@ export class Server {
         player_name: funded === undefined ? '' : funded.player.name,
         player_color: funded === undefined ? '' : funded.player.color,
         name: award.name,
-        description: award.description,
         scores: scores,
       });
     }

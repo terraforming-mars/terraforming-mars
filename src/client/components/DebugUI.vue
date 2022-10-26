@@ -117,7 +117,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="milestoneName in allMilestoneNames" :key="milestoneName">
               <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <milestone :milestone="milestoneModel(milestoneName)" :showDescription="false"></milestone>
+                <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="awardName in allAwardNames" :key="awardName">
               <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <award :award="awardModel(awardName)" :showDescription="false"></award>
+                <award :award="awardModel(awardName)" :showDescription="true"></award>
               </div>
             </div>
           </div>
@@ -519,7 +519,6 @@ export default Vue.extend({
     milestoneModel(milestoneName: MilestoneName): ClaimedMilestoneModel {
       return {
         name: milestoneName,
-        description: 'blah',
         player_name: '',
         player_color: '',
         scores: [],
@@ -528,7 +527,6 @@ export default Vue.extend({
     awardModel(awardName: AwardName): FundedAwardModel {
       return {
         name: awardName,
-        description: 'blah',
         player_name: '',
         player_color: '',
         scores: [],

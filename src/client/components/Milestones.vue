@@ -40,7 +40,7 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 
 
 export default Vue.extend({
-  name: 'Milestone',
+  name: 'Milestones',
   props: {
     milestones_list: {
       type: Array as () => Array<ClaimedMilestoneModel>,

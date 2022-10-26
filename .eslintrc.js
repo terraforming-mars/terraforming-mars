@@ -52,6 +52,7 @@ module.exports = { // eslint-disable-line no-undef
         'bonus',
         'colony',
         'Milestone',
+        'Milestones',
         'party',
         'Party',
         'sidebar',

@@ -53,7 +53,7 @@
               <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
               <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
-                  <Milestone :milestones_list="game.milestones" />
+                  <Milestones :milestones_list="game.milestones" />
                   <Awards :awards="game.awards" show-scores/>
               </div>
           </div>
@@ -204,7 +204,7 @@
           <dynamic-title title="Game details" :color="thisPlayer.color"/>
 
           <div class="player_home_block" v-if="playerView.players.length > 1">
-              <Milestone :show_scores="false" :milestones_list="game.milestones" />
+              <Milestones :show_scores="false" :milestones_list="game.milestones" />
               <Awards :awards="game.awards" />
           </div>
 
@@ -271,7 +271,7 @@ import Vue from 'vue';
 
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';
-import Milestone from '@/client/components/Milestone.vue';
+import Milestones from '@/client/components/Milestones.vue';
 import Awards from '@/client/components/Awards.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
@@ -356,7 +356,7 @@ export default Vue.extend({
     Card,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
-    Milestone,
+    Milestones,
     Awards,
     'sidebar': Sidebar,
     'colony': Colony,

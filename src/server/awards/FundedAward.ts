@@ -1,13 +1,15 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';
+import {AwardName} from '../../common/ma/AwardName';
+
 export type FundedAward = {
   award: IAward;
   player: Player;
 }
 
 export type SerializedFundedAward = {
-  name?: string;
+  name?: AwardName;
   playerId?: PlayerId;
 }
 

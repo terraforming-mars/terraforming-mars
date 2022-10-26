@@ -28,12 +28,9 @@ export default Vue.extend({
       type: Boolean,
       default: true,
     },
-  },
-  data() {
-    return {
-      showDescription: Boolean,
-      default: false,
-    };
+    showDescription: {
+      type: Boolean,
+    },
   },
   computed: {
     nameCss(): string {

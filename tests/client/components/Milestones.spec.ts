@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
-import Milestone from '@/client/components/Milestone.vue';
+import Milestones from '@/client/components/Milestones.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 
-describe('Milestone', function() {
+describe('Milestones', function() {
   const mockMilestone: ClaimedMilestoneModel = {
     name: 'Farmer',
     description: 'a test',
@@ -14,7 +14,7 @@ describe('Milestone', function() {
   };
 
   it('shows list and milestones', async function() {
-    const milestone = mount(Milestone, {
+    const milestone = mount(Milestones, {
       localVue: getLocalVue(),
       propsData: {
         milestones_list: [

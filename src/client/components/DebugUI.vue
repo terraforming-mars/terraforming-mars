@@ -110,6 +110,33 @@
           </div>
         </template>
       </section>
+
+      <section>
+        <h2 v-i18n>Milestones</h2>
+        <template v-if="types.milestones">
+          <div class="player_home_colony_cont">
+            <div class="player_home_colony" v-for="milestoneName in allMilestoneNames" :key="milestoneName">
+              <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
+                <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
+              </div>
+            </div>
+          </div>
+        </template>
+      </section>
+
+      <section>
+        <h2 v-i18n>Awards</h2>
+        <template v-if="types.awards">
+          <div class="player_home_colony_cont">
+            <div class="player_home_colony" v-for="awardName in allAwardNames" :key="awardName">
+              <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
+                <award :award="awardModel(awardName)" :showDescription="true"></award>
+              </div>
+            </div>
+          </div>
+        </template>
+      </section>
+
       <div class="free-floating-preferences-icon">
         <preferences-icon></preferences-icon>
       </div>
@@ -142,6 +169,12 @@ import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 import {isICardRenderCorpBoxAction, isICardRenderCorpBoxEffect, isICardRenderEffect, isICardRenderItem, isICardRenderProductionBox, isICardRenderRoot} from '@/common/cards/render/Types';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {translateText} from '@/client/directives/i18n';
+import {MilestoneName, milestoneNames} from '@/common/ma/MilestoneName';
+import {AwardName, awardNames} from '@/common/ma/AwardName';
+import Milestone from '@/client/components/Milestone.vue';
+import Award from '@/client/components/Award.vue';
+import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
+import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -160,7 +193,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
 // TODO(kberg): make this  use suffixModules.
 const ALL_MODULES = 'bcpvCt*ramP';
 
-type TypeOptions = CardType | 'colonyTiles' | 'globalEvents';
+type TypeOptions = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOptions = Tag | 'none';
 
 export interface DebugUIModel {
@@ -231,6 +264,8 @@ export default Vue.extend({
     Card,
     GlobalEvent,
     Colony,
+    Milestone,
+    Award,
     PreferencesIcon,
   },
   data(): DebugUIModel {
@@ -262,6 +297,8 @@ export default Vue.extend({
         proxy: false,
         globalEvents: true,
         colonyTiles: true,
+        milestones: true,
+        awards: true,
       },
       tags: {
         building: true,
@@ -311,6 +348,8 @@ export default Vue.extend({
         CardType.STANDARD_PROJECT,
         'colonyTiles',
         'globalEvents',
+        'milestones',
+        'awards',
       ];
     },
     allTags(): Array<Tag | 'none'> {
@@ -321,6 +360,12 @@ export default Vue.extend({
         }
       }
       return results.concat('none');
+    },
+    allMilestoneNames(): ReadonlyArray<MilestoneName> {
+      return milestoneNames;
+    },
+    allAwardNames(): ReadonlyArray<AwardName> {
+      return awardNames;
     },
   },
   methods: {
@@ -469,6 +514,22 @@ export default Vue.extend({
         name: colonyName,
         trackPosition: 0,
         visitor: undefined,
+      };
+    },
+    milestoneModel(milestoneName: MilestoneName): ClaimedMilestoneModel {
+      return {
+        name: milestoneName,
+        player_name: '',
+        player_color: '',
+        scores: [],
+      };
+    },
+    awardModel(awardName: AwardName): FundedAwardModel {
+      return {
+        name: awardName,
+        player_name: '',
+        player_color: '',
+        scores: [],
       };
     },
   },

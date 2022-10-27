@@ -7,7 +7,6 @@ import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 describe('Milestones', function() {
   const mockMilestone: ClaimedMilestoneModel = {
     name: 'Farmer',
-    description: 'a test',
     player_name: 'foo',
     player_color: 'blue',
     scores: [],

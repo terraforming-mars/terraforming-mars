@@ -1,7 +1,7 @@
 import {IColony} from './IColony';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {Random} from '../Random';
-import {BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES} from './ColonyManifest';
+import {BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES, PATHFINDERS_COLONIES_TILES} from './ColonyManifest';
 import {GameOptions} from '../GameOptions';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
@@ -17,9 +17,11 @@ export class ColonyDealer {
   constructor(private rng: Random, private gameOptions: GameOptions) {
     let colonyTiles = BASE_COLONIES_TILES;
 
-    if (ColonyDealer.includesCommunityColonies(this.gameOptions)) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
-    if (!this.gameOptions.venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
-    if (!this.gameOptions.turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
+    if (ColonyDealer.includesCommunityColonies(gameOptions)) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
+    if (gameOptions.pathfindersExpansion || gameOptions.moonExpansion) colonyTiles = colonyTiles.concat(PATHFINDERS_COLONIES_TILES);
+    if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II); // Leavitt II isn't built yet but this is pre-emptive
+    if (!gameOptions.venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
+    if (!gameOptions.turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
     this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
   }
 

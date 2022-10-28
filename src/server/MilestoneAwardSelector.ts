@@ -28,7 +28,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, THARSIS_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -304,8 +304,8 @@ export namespace MilestoneAwardSelector {
     switch (gameOptions.randomMA) {
     case RandomMAOptionType.NONE:
       switch (gameOptions.boardName) {
-      case BoardName.ORIGINAL:
-        push(ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
+      case BoardName.THARSIS:
+        push(THARSIS_MILESTONES, ORIGINAL_AWARDS);
         break;
       case BoardName.HELLAS:
         push(HELLAS_MILESTONES, HELLAS_AWARDS);
@@ -374,7 +374,7 @@ export namespace MilestoneAwardSelector {
 
     const toName = (e: {name: string}) => e.name;
 
-    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+    const candidateMilestones = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
     const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
     if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {

@@ -8,8 +8,8 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {GameOptions} from '../GameOptions';
 
-export class OriginalBoard extends Board {
-  public static newInstance(gameOptions: GameOptions, rng: Random): OriginalBoard {
+export class TharsisBoard extends Board {
+  public static newInstance(gameOptions: GameOptions, rng: Random): TharsisBoard {
     const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
     const PLANT = SpaceBonus.PLANT;
@@ -42,11 +42,11 @@ export class OriginalBoard extends Board {
       builder.shuffle(rng, SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
     const spaces = builder.build();
-    return new OriginalBoard(spaces);
+    return new TharsisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): OriginalBoard {
-    return new OriginalBoard(Board.deserializeSpaces(board.spaces, players));
+  public static deserialize(board: SerializedBoard, players: Array<Player>): TharsisBoard {
+    return new TharsisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
   public override getNonReservedLandSpaces(): Array<ISpace> {

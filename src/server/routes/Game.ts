@@ -112,6 +112,7 @@ export class GameHandler extends Handler {
             startingCorporations: gameReq.startingCorporations,
             shuffleMapOption: gameReq.shuffleMapOption,
             randomMA: gameReq.randomMA,
+            includeFanMA: gameReq.includeFanMA,
             soloTR: gameReq.soloTR,
             customCorporationsList: gameReq.customCorporationsList,
             bannedCards: gameReq.bannedCards,

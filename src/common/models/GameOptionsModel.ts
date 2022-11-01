@@ -18,6 +18,7 @@ export type GameOptionsModel = {
   escapeVelocityPeriod?: number,
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
+  includeFanMA: boolean,
   includeVenusMA: boolean,
   initialDraftVariant: boolean,
   moonExpansion: boolean,

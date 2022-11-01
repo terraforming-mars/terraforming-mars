@@ -64,6 +64,7 @@ describe('ApiGame', () => {
           'escapeVelocityPeriod': 2,
           'escapeVelocityThreshold': 30,
           'fastModeOption': false,
+          'includeFanMA': false,
           'includeVenusMA': true,
           'initialDraftVariant': false,
           'moonExpansion': false,

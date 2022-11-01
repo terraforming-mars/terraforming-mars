@@ -316,6 +316,13 @@
                                 </label>
                             </template>
 
+                            <template v-if="randomMA !== RandomMAOptionType.NONE">
+                              <input type="checkbox" v-model="includeFanMA" id="fanMA-checkbox">
+                              <label for="fanMA-checkbox">
+                                  <span v-i18n>Include fan Milestones/Awards</span>
+                              </label>
+                            </template>
+
                             <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
                             <label for="realTimeVP-checkbox">
                                 <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
@@ -503,6 +510,7 @@ export interface CreateGameModel {
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
     includeVenusMA: boolean;
+    includeFanMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
     clonedGameId: GameId | undefined;
@@ -589,6 +597,7 @@ export default (Vue as WithRefs<Refs>).extend({
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,
+      includeFanMA: false,
       startingCorporations: 2,
       soloTR: false,
       clonedGameId: undefined,
@@ -638,6 +647,9 @@ export default (Vue as WithRefs<Refs>).extend({
   computed: {
     RandomBoardOption(): typeof RandomBoardOption {
       return RandomBoardOption;
+    },
+    RandomMAOptionType(): typeof RandomMAOptionType {
+      return RandomMAOptionType;
     },
   },
   methods: {
@@ -937,6 +949,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const fastModeOption = component.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
       const includeVenusMA = component.includeVenusMA;
+      const includeFanMA = component.includeFanMA;
       const startingCorporations = component.startingCorporations;
       const soloTR = component.soloTR;
       // const beginnerOption = component.beginnerOption;
@@ -1078,6 +1091,7 @@ export default (Vue as WithRefs<Refs>).extend({
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeVenusMA,
+        includeFanMA,
         startingCorporations,
         soloTR,
         clonedGamedId,

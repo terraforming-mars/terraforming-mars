@@ -2,7 +2,7 @@ require('dotenv').config();
 
 import * as http from 'http';
 import * as fs from 'fs';
-import {MilestoneAwardSelector} from '../MilestoneAwardSelector';
+import {chooseMilestonesAndAwards} from '../MilestoneAwardSelector';
 import {GameOptions} from '../GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {AgendaStyle} from '../../common/turmoil/Types';
@@ -75,7 +75,7 @@ function calc(params: URLSearchParams): string {
       console.log(`#${nth}`);
     }
     try {
-      const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(options);
+      const mas = chooseMilestonesAndAwards(options);
       mas.awards.forEach((award) => results.add(award.name));
       mas.milestones.forEach((milestone) => results.add(milestone.name));
     } catch (err) {
@@ -109,6 +109,7 @@ function simpleGameOptions(): GameOptions {
     draftVariant: false,
     corporationsDraft: false,
     initialDraftVariant: false,
+    includeFanMA: false,
     startingCorporations: 0,
     shuffleMapOption: false,
     soloTR: false,

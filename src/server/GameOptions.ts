@@ -40,6 +40,7 @@ export type GameOptions = {
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
+  includeFanMA: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
@@ -76,6 +77,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   fastModeOption: false,
   includeVenusMA: true,
+  includeFanMA: false,
   initialDraftVariant: false,
   moonExpansion: false,
   moonStandardProjectVariant: false,

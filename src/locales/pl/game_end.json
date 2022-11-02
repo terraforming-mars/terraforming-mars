@@ -1,8 +1,9 @@
 {
+    "Terraforming Mars - Game finished!": "Terraformacja Marsa - Gra zakończona!",
     "Sorry, you lose.": "Niestety, przegrałeś/aś.",
     "Next time you will get more luck!": "Kolejnym razem na pewno pójdzie lepiej!",
     "Also, take into account these small hints to win:": "Weź pod uwagę te drobne wskazówki:",
-    "Concentrate more on Global parameters, not on Victory Points": "Skup się bardziej na Wskaźnikach Globalnych zamiast Punktów Zwycięstwa",
+    "Concentrate more on Global parameters, not on Victory Points": "Skup się bardziej na Wskaźnikach Globalnych zamiast Punktach Zwycięstwa",
     "Don't be greedy with card selection": "Nie przesadzaj z dobieraniem kart",
     "Try to increase heat production, not Megacredits": "Postaraj się zwiększać produkcję ciepła, nie Megakredytów",
     "Try starting with the Beginner corporation": "Spróbuj zacząć z korporacją dla początkujących",
@@ -15,6 +16,7 @@
     "+ Victory Points?": "+ Punktów Zwycięstwa?",
 
     "Victory points breakdown after": "Analiza punktów zwycięstwa po",
+    "Victory points details": "Szczegóły punktów zwycięstwa",
     "generations": "pokoleniach",
     "Player": "Gracz",
     "Corporation": "Korporacja",
@@ -24,4 +26,5 @@
     "Victory points details for": "Szczegóły punktów zwycięstwa u:",
     "Final situation on the board": "Końcowa sytuacja na planszy",
     "Final game log": "Finalny dziennik gry"
+    "Go to main page": "Przejdź na stronę główną"
 }

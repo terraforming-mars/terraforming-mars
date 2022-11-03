@@ -2,7 +2,7 @@ require('dotenv').config();
 
 import * as http from 'http';
 import * as fs from 'fs';
-import {chooseMilestonesAndAwards} from '../MilestoneAwardSelector';
+import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
 import {GameOptions} from '../GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {AgendaStyle} from '../../common/turmoil/Types';

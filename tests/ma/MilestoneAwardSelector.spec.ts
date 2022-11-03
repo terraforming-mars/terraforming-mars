@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/server/awards/Awards';
-import {IAward} from '../src/server/awards/IAward';
-import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../src/server/MilestoneAwardSelector';
-import {IMilestone} from '../src/server/milestones/IMilestone';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/server/milestones/Milestones';
-import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
-import {testGameOptions} from './TestingUtils';
-import {intersection} from '../src/common/utils/utils';
+import {ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../../src/server/awards/Awards';
+import {IAward} from '../../src/server/awards/IAward';
+import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
+import {IMilestone} from '../../src/server/milestones/IMilestone';
+import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../../src/server/milestones/Milestones';
+import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
+import {testGameOptions} from '../TestingUtils';
+import {intersection} from '../../src/common/utils/utils';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
   return list.map((e) => e.name);

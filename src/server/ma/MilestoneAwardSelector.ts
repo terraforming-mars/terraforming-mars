@@ -1,247 +1,26 @@
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
-import {Banker} from './awards/Banker';
-import {Benefactor} from './awards/Benefactor';
-import {Celebrity} from './awards/Celebrity';
-import {Contractor} from './awards/Contractor';
-import {Cultivator} from './awards/Cultivator';
-import {DesertSettler} from './awards/DesertSettler';
-import {Entrepreneur} from './awards/Entrepreneur';
-import {EstateDealer} from './awards/EstateDealer';
-import {Excentric} from './awards/Excentric';
-import {IAward} from './awards/IAward';
-import {Industrialist} from './awards/Industrialist';
-import {Landlord} from './awards/Landlord';
-import {Magnate} from './awards/Magnate';
-import {Miner} from './awards/Miner';
-import {Scientist} from './awards/Scientist';
-import {SpaceBaron} from './awards/SpaceBaron';
-import {Thermalist} from './awards/Thermalist';
-import {Venuphile} from './awards/Venuphile';
-import {BoardName} from '../common/boards/BoardName';
-import {GameOptions} from './GameOptions';
-import {Builder} from './milestones/Builder';
-import {Diversifier} from './milestones/Diversifier';
-import {Ecologist} from './milestones/Ecologist';
-import {Energizer} from './milestones/Energizer';
-import {Gardener} from './milestones/Gardener';
-import {Generalist} from './milestones/Generalist';
-import {Hoverlord} from './milestones/Hoverlord';
-import {IMilestone} from './milestones/IMilestone';
-import {Mayor} from './milestones/Mayor';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
-import {Networker} from './milestones/Networker';
-import {Planner} from './milestones/Planner';
-import {PolarExplorer} from './milestones/PolarExplorer';
-import {RimSettler} from './milestones/RimSettler';
-import {Specialist} from './milestones/Specialist';
-import {Tactician} from './milestones/Tactician';
-import {Terraformer} from './milestones/Terraformer';
-import {Tycoon} from './milestones/Tycoon';
-import {FullMoon} from './moon/FullMoon';
-import {Lunarchitect} from './moon/Lunarchitect';
-import {LunarMagnate} from './moon/LunarMagnate';
-import {OneGiantStep} from './moon/OneGiantStep';
-import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
-import {Adapter} from './awards/Adapter';
-import {Edgedancer} from './awards/Edgedancer';
-import {Naturalist} from './awards/Naturalist';
-import {Irrigator} from './milestones/Irrigator';
-import {Smith} from './milestones/Smith';
-import {Tradesman} from './milestones/Tradesman';
-import {Voyager} from './awards/Voyager';
-import {inplaceShuffle} from './utils/shuffle';
-import {UnseededRandom} from './Random';
-import {MilestoneName} from '../common/ma/MilestoneName';
-import {AwardName} from '../common/ma/AwardName';
-import {inplaceRemove} from '../common/utils/utils';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../awards/Awards';
+import {IAward} from '../awards/IAward';
+import {BoardName} from '../../common/boards/BoardName';
+import {GameOptions} from '../GameOptions';
+import {IMilestone} from '../milestones/IMilestone';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../milestones/Milestones';
+import {FullMoon} from '../moon/FullMoon';
+import {Lunarchitect} from '../moon/Lunarchitect';
+import {LunarMagnate} from '../moon/LunarMagnate';
+import {OneGiantStep} from '../moon/OneGiantStep';
+import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
+import {inplaceShuffle} from '../utils/shuffle';
+import {UnseededRandom} from '../Random';
+import {MilestoneName} from '../../common/ma/MilestoneName';
+import {AwardName} from '../../common/ma/AwardName';
+import {inplaceRemove} from '../../common/utils/utils';
+import {synergies} from './MilestoneAwardSynergies';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<IMilestone>,
   awards: Array<IAward>
 }
 
-// This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
-// and also "Y|X"; it just makes searching slightly faster. There will also be entries of the type "X|X".
-//
-// I honestly don't remember why "X|X" is useful, and it's possible it's no longer necessary. That's
-// something that should be carefully conisdered and possibly removed, and not just propagated because
-// it's what we had to begin with. In other words, someone figure out why, and preserve it, and document
-// why, or be certain it's unnecessary and remove this paragraph and the code below that sets "X|X" to 1000.
-//
-class SynergyMap {
-  private readonly map: Map<string, number> = new Map();
-  public set(a: string, b: string, weight: number): void {
-    this.map.set(a + '|' + b, weight);
-    this.map.set(b + '|' + a, weight);
-  }
-
-  public get(a: string, b: string) {
-    return this.map.get(a + '|' + b) || 0;
-  }
-}
-
-class Synergies {
-  public static map: SynergyMap = Synergies.makeMap();
-
-  private constructor() {
-  }
-
-  private static makeMap(): SynergyMap {
-    const synergies = new SynergyMap();
-
-      // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
-      // and the Benefactor award is given to the player with the highets TR. Their synergy weight is 9, very high.
-      function bind(A: { new(): IMilestone | IAward }, B: { new(): IMilestone | IAward }, weight: number):void;
-      function bind(a: string, b: string, weight: number):void;
-      function bind(A: any, B: any, weight: number):void {
-        if (typeof A === 'string') {
-          synergies.set(A, B, weight);
-        } else {
-          synergies.set(new A().name, new B().name, weight);
-        }
-      }
-
-      Milestones.ALL.forEach((ma) => {
-        bind(ma.name, ma.name, 1000);
-      });
-      Awards.ALL.forEach((ma) => {
-        bind(ma.name, ma.name, 1000);
-      });
-
-      bind(Terraformer, Benefactor, 9);
-      bind(Gardener, Cultivator, 9);
-      bind(Builder, Contractor, 9);
-      bind(Networker, Entrepreneur, 9);
-      bind(OneGiantStep, FullMoon, 9);
-      bind(Lunarchitect, LunarMagnate, 9);
-      bind(OneGiantStep, Lunarchitect, 9);
-      bind(FullMoon, LunarMagnate, 9);
-      bind(EstateDealer, Cultivator, 8);
-      bind(Landlord, Cultivator, 8);
-      bind(Landlord, DesertSettler, 7);
-      bind(Landlord, EstateDealer, 7);
-      bind(DesertSettler, Cultivator, 7);
-      bind(Miner, Industrialist, 7);
-      bind(OneGiantStep, LunarMagnate, 7);
-      bind(Lunarchitect, FullMoon, 7);
-      bind(Energizer, Industrialist, 6);
-      bind(Gardener, Landlord, 6);
-      bind(Mayor, Landlord, 6);
-      bind(Mayor, Cultivator, 6);
-      bind(Gardener, EstateDealer, 5);
-      bind(Builder, Magnate, 5);
-      bind(Tycoon, Magnate, 5);
-      bind(PolarExplorer, DesertSettler, 5);
-      bind(Hoverlord, Excentric, 5);
-      bind(Hoverlord, Venuphile, 5);
-      bind(DesertSettler, EstateDealer, 5);
-      bind(Builder, Tycoon, 4);
-      bind(Specialist, Energizer, 4);
-      bind(Mayor, PolarExplorer, 4);
-      bind(Mayor, DesertSettler, 4);
-      bind(Mayor, EstateDealer, 4);
-      bind(Gardener, PolarExplorer, 4);
-      bind(Gardener, DesertSettler, 4);
-      bind(Ecologist, Excentric, 4);
-      bind(PolarExplorer, Landlord, 4);
-      bind(Mayor, Gardener, 3);
-      bind(Tycoon, Excentric, 3);
-      bind(PolarExplorer, Cultivator, 3);
-      bind(Energizer, Thermalist, 3);
-      bind(RimSettler, SpaceBaron, 3);
-      bind(Celebrity, SpaceBaron, 3);
-      bind(Benefactor, Cultivator, 3);
-      bind(Gardener, Benefactor, 2);
-      bind(Specialist, Banker, 2);
-      bind(Ecologist, Tycoon, 2);
-      bind(Ecologist, Diversifier, 2);
-      bind(Tycoon, Scientist, 2);
-      bind(Tycoon, Contractor, 2);
-      bind(Tycoon, Venuphile, 2);
-      bind(PolarExplorer, EstateDealer, 2);
-      bind(RimSettler, Celebrity, 2);
-      bind(Scientist, Magnate, 2);
-      bind(Magnate, SpaceBaron, 2);
-      bind(Excentric, Venuphile, 2);
-      bind(Terraformer, Cultivator, 2);
-      bind(Terraformer, Gardener, 2);
-      bind(Builder, Miner, 1);
-      bind(Builder, Industrialist, 1);
-      bind(Planner, Scientist, 1);
-      bind(Generalist, Miner, 1);
-      bind(Specialist, Thermalist, 1);
-      bind(Specialist, Miner, 1);
-      bind(Specialist, Industrialist, 1);
-      bind(Ecologist, Cultivator, 1);
-      bind(Ecologist, Magnate, 1);
-      bind(Tycoon, Diversifier, 1);
-      bind(Tycoon, Tactician, 1);
-      bind(Tycoon, RimSettler, 1);
-      bind(Tycoon, SpaceBaron, 1);
-      bind(Diversifier, Magnate, 1);
-      bind(Tactician, Scientist, 1);
-      bind(Tactician, Magnate, 1);
-      bind(RimSettler, Magnate, 1);
-      bind(Banker, Benefactor, 1);
-      bind(Celebrity, Magnate, 1);
-      bind(DesertSettler, Benefactor, 1);
-      bind(EstateDealer, Benefactor, 1);
-      bind(Terraformer, Landlord, 1);
-      bind(Terraformer, Thermalist, 1);
-      bind(Terraformer, DesertSettler, 1);
-      bind(Terraformer, EstateDealer, 1);
-      bind(Gardener, Ecologist, 1);
-
-      // Vastitas Borealis
-      bind(Smith, Generalist, 2);
-      bind(Smith, Specialist, 5);
-      bind(Smith, RimSettler, 3);
-      bind(Smith, Miner, 8);
-      bind(Smith, Industrialist, 5);
-
-      bind(Tradesman, Ecologist, 6);
-      bind(Tradesman, Diversifier, 3);
-      bind(Tradesman, Hoverlord, 6);
-      bind(Tradesman, Excentric, 8);
-      bind(Tradesman, Venuphile, 4);
-
-      bind(Irrigator, Mayor, 3);
-      bind(Irrigator, Gardener, 3);
-      bind(Irrigator, PolarExplorer, 3);
-      bind(Irrigator, Landlord, 4);
-      bind(Irrigator, DesertSettler, 5);
-      bind(Irrigator, EstateDealer, 9);
-      bind(Irrigator, Cultivator, 4);
-
-      bind(Adapter, Ecologist, 2);
-      bind(Adapter, Tactician, 3);
-      bind(Adapter, Scientist, 5);
-
-      bind(Edgedancer, Mayor, 2);
-      bind(Edgedancer, Gardener, 4);
-      bind(Edgedancer, PolarExplorer, 5);
-      bind(Edgedancer, DesertSettler, 5);
-      bind(Edgedancer, EstateDealer, 1);
-      bind(Edgedancer, Cultivator, 4);
-      bind(Edgedancer, Irrigator, 1);
-
-      bind(Naturalist, Terraformer, 3);
-      bind(Naturalist, Gardener, 2);
-      bind(Naturalist, Generalist, 2);
-      bind(Naturalist, Specialist, 1);
-      bind(Naturalist, Landlord, 4);
-      bind(Naturalist, Thermalist, 6);
-      bind(Naturalist, DesertSettler, 1);
-      bind(Naturalist, EstateDealer, 1);
-      bind(Naturalist, Benefactor, 5);
-      bind(Naturalist, Cultivator, 3);
-      bind(Naturalist, Edgedancer, 1);
-
-      bind(Voyager, RimSettler, 9);
-
-      return synergies;
-  }
-}
 
 // Function to compute max synergy of a given set of milestones and awards.
 // Exported for testing
@@ -249,7 +28,7 @@ export function maximumSynergy(names: Array<string>) : number {
   let max = 0;
   for (let i = 0; i < names.length - 1; i++) {
     for (let j = i + 1; j < names.length; j++) {
-      const synergy = Synergies.map.get(names[i], names[j]);
+      const synergy = synergies.get(names[i], names[j]);
       max = Math.max(synergy, max);
     }
   }
@@ -460,7 +239,7 @@ export function verifySynergyRules(
   let numberOfHigh = 0;
   for (let i = 0; i < mas.length - 1; i++) {
     for (let j = i + 1; j < mas.length; j++) {
-      const synergy = Synergies.map.get(mas[i], mas[j]);
+      const synergy = synergies.get(mas[i], mas[j]);
       max = Math.max(synergy, max);
       totalSynergy += synergy;
       if (synergy >= constraints.highThreshold) numberOfHigh++;
@@ -497,7 +276,7 @@ class Accumulator {
 
     // Find the maximum synergy of this new item compared to the others
     this.milestones.concat(this.awards).forEach((ma) => {
-      const synergy = Synergies.map.get(ma, candidate);
+      const synergy = synergies.get(ma, candidate);
       totalSynergy += synergy;
       if (synergy >= this.constraints.highThreshold) {
         highCount++;

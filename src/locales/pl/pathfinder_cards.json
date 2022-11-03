@@ -1,14 +1,14 @@
 {
   "Advanced Power Grid": "Zaawansowana Sieć Energetyczna",
-  "(Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.)": "Podnieś swoją produkcję energii o 2 poziomy. Podnieś swoja produkcję M€ o 1 poziom za każdy posiadany symbol Energii (z tym włacznie)",
+  "(Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.)": "Podnieś swoją produkcję energii o 2 poziomy. Podnieś swoja produkcję M€ o 1 poziom za każdy posiadany symbol Energii (z tym włącznie)",
 
   "Agro-Drones": "Gro-Drony",
-  "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "Akcja: Wydaj po 1 jednostce stali i energii aby otrzymać 3 jednostki roślinności.",
+  "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "Akcja: Wydaj po 1 jednostce stali i energii, aby otrzymać 3 jednostki roślinności.",
   "(Requires -18° C or warmer.)": "(Temperatura musi wynosić co najmniej -18°C.)",
 
   "Anthozoa": "Koralowce",
   "(Action: Spend 1 plant to add an animal to this card.)": "Akcja: Wydaj 1 jednostkę roślinności, aby umieścić 1 jednostkę zwierząt na tej karcie.",
-  "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "Na planszy muszą zanjdować sie co najmniej 3 obszary oceanów. Otrzymujesz 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
+  "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "Na planszy muszą znajdować sie co najmniej 3 obszary oceanów. Otrzymujesz 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
 
   "Asteroid Resources": "Górnictwo Kosmiczne",
   "(Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.)": "Wydaj 3 jednostki energii. Podnieś swoją produkcję stali i tytanu o 1 poziom lub umieść na planszy obszar oceanu i otrzymujesz 2 jednostki stali i 1 jednostkę tytanu.",
@@ -20,14 +20,14 @@
   "(Requires one greenery tile on Mars.)": "Na planszy musi znajdować się co najmniej 1 obszar zieleni.",
 
   "Breeding Farms": "Zakłady Hodowlane",
-  "(Action: Spend 1 plant to add 1 animal to ANY card.)": "Akcja: Wydaj 1 jednostkę roślinności aby umieścić 1 jednostkę zwierząt na dowolnej karcie.",
+  "(Action: Spend 1 plant to add 1 animal to ANY card.)": "Akcja: Wydaj 1 jednostkę roślinności, aby umieścić 1 jednostkę zwierząt na dowolnej karcie.",
   "(Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.)": "Musisz posiadać co najmniej 1 symbol Nauki i Zwierząt. Podnieś temperaturę o 1 poziom.",
 
   "Cassini Station": "Orbitalna Stacja Cassini",
-  "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "Podnieś swoją produkcję energii o 1 poziom za kazdą kolonię w grze. Umieść 2 jednostki dryfowców lub 3 jednostki danych na dowolnej karcie.",
+  "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "Podnieś swoją produkcję energii o 1 poziom za każdą kolonię w grze. Umieść 2 jednostki dryfowców lub 3 jednostki danych na dowolnej karcie.",
 
   "Ceres Spaceport": "Port Kosmiczny na Ceres",
-  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "Podnieś swoją produkcję M€ o 2 poziomy. Podnieś swoją produkcję tytanu o 1 poziom za każde poziadane 2 symbole Jowisza (z tymi włącznie). Dobierz 1 kartę. Umieść obszar oceanu na planszy. Umieść obszar miasta na zarezerwowanym polu.",
+  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "Podnieś swoją produkcję M€ o 2 poziomy. Podnieś swoją produkcję tytanu o 1 poziom za każde posiadane 2 symbole Jowisza (z tymi włącznie). Dobierz 1 kartę. Umieść obszar oceanu na planszy. Umieść obszar miasta na zarezerwowanym polu.",
 
   "Charity Donation": "Darowizna Charytatywna",
   "Reveal cards from the deck equal to the player count plus 1.": "Dobierz z talii projektów o 1 kartę więcej niż jest graczy w grze.",
@@ -35,21 +35,21 @@
    
   "Communication Center": "Centrum Komunikacji",
   "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "Efekt trwały: Gdy którykolwiek z graczy zagrywa kartę wydarzenia, umieść na tej karcie 1 jednostkę danych.",
-  "(Effect: Remove 3 data to draw a card automatically.)": "Każde 3 jednostki danych z tej karty są automatycznie wydawane aby dobrać kartę.",
+  "(Effect: Remove 3 data to draw a card automatically.)": "Każde 3 jednostki danych z tej karty są automatycznie wydawane, aby dobrać kartę.",
   "(Decrease your energy production 1 step. Place 2 data on this card.)": "Obniż swoją produkcję energii o 1 poziom. Umieść na tej karcie 2 jednostki danych.",
 
   "Controlled Bloom": "Kontrolowane Kwitnienie",
-  "(Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.)": "Na planszy muszą znajdowaś się co najmniej 3 obszary oceanów. Umieść 3 jednostki mikrobów na dowolnej karcie. Otrzymujesz 3 jednostki roślinności.",
+  "(Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.)": "Na planszy muszą znajdować się co najmniej 3 obszary oceanów. Umieść 3 jednostki mikrobów na dowolnej karcie. Otrzymujesz 3 jednostki roślinności.",
 
   "Coordinated Raid": "Skoordynowany Nalot",
   "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "W grze musi znajdować się co najmniej 1 kolonia. Wykonaj akcję handlu z dowolnym obiektem za darmo. Zbierz premię kolonialną za wszystkie kolonie na tym obiekcie. Inni gracze nie otrzymują premii kolonialnej z tej akcji.",
 
   "Cryptocurrency": "Kryptowaluty",
-  "(Action: Spend 1 energy to add 1 data to this card.)": "Akcja: Wydaj 1 jednostkę energii aby umieścić 1 jednostkę danych na tej karcie.",
+  "(Action: Spend 1 energy to add 1 data to this card.)": "Akcja: Wydaj 1 jednostkę energii, aby umieścić 1 jednostkę danych na tej karcie.",
   "(Action: Remove all data from this card to gain 3M€ per data removed.)": "Akcja: Wydaj wszystkie jednostki danych z tej karty, aby otrzymać po 3 M€ za każdą z nich.",
 
   "Cultivation of Venus": "Kultywacja Wenus",
-  "(Action: Spend 3 plants to raise Venus 1 step.)": "Akcja: Wydaj 3 jednostki roślinności aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
+  "(Action: Spend 3 plants to raise Venus 1 step.)": "Akcja: Wydaj 3 jednostki roślinności, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
   "(1 VP for every 2 Venus tags you own.)": "Otrzymujesz 1 PZ za każde 2 symbole Wenus które posiadasz.",
 
   "Cyanobacteria": "Cyjanobakterie",
@@ -72,7 +72,7 @@
   "(Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.)": "Podnieś temperaturę o 1 poziom. Dobierz 1 kartę. Umieść obszar miasta na zarezerwowanym polu. Podnieś swoją produkcję energii i ciepła o 2 poziomy.",
   
   "Early Expedition": "Wczesna Ekspedycja",
-  "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "Temperatura wynosi co najwyżej 18°C. Obniż swoją produkcję energii o 1 pzoiom i podnieś swoją produkcję M€ o 3 poziomy. Umieść 1 jednostkę danych na dowolnej karcie. Umieść obszar miasta na planszy na polu niesąsiadującym z żadnym innym obszarem.",
+  "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "Temperatura wynosi co najwyżej 18°C. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy. Umieść 1 jednostkę danych na dowolnej karcie. Umieść obszar miasta na planszy na polu niesąsiadującym z żadnym innym obszarem.",
 
   "Economic Espionage": "Szpiegostwo Gospodarcze",
   "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "Akcja: Wydaj 2 M€ aby umieścić 1 jednostkę danych na dowolnej karcie.",
@@ -82,14 +82,14 @@
   "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "Podnieś rozwój społeczeństwa o najniższym poziomie o 3 poziomy (w przypadku remisu podnieś wszystkie najniższe tory o 2). Podnieś swoją produkcję M€ o 1 poziom.",
 
   "Expedition to the Surface - Venus": "Ekspedycja na Powierzchnię Wenus",
-  "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "Dobierz 2 karty. Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Otrzymujesz po 1 M€ za każdy posiadany symbol Wenus (z tym włacznie)",
+  "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "Dobierz 2 karty. Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Otrzymujesz po 1 M€ za każdy posiadany symbol Wenus (z tym włącznie)",
 
   "Flat Mars Theory": "Teoria Płaskiego Marsa",
   "GENERATION": "Pokolenie",
   "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "Musisz posiadać co najwyżej 1 symbol Nauki. Podnieś swoją produkcję M€ o 1 poziom za każde rozpoczęte do tej pory pokolenie.",
 
   "Floater-Urbanism": "Urbanizacja Dryfowców",
-  "(Action: Remove 1 floater from any card and add 1 Venusian habitat on this card.)": "Akcja: Usuń 1 jednostkę dryfowców z dowolnej swojej karty aby umieścić 1 jednostkę wenusjańskich habitatów na tej karcie.",
+  "(Action: Remove 1 floater from any card and add 1 Venusian habitat on this card.)": "Akcja: Usuń 1 jednostkę dryfowców z dowolnej swojej karty, aby umieścić 1 jednostkę wenusjańskich habitatów na tej karcie.",
   "1 VP for every Venusian habitat on this card.": "Otrzymujesz po 1 PZ za każdą jednostkę wenusjańskich habitatów na tej karcie.",
   "(Requires 4 Venus tags.)": "Musisz posiadać co najmniej 4 symbole Wenus.",
 
@@ -119,7 +119,7 @@
   "(Increase your M€ production 2 steps. Place 1 delegate from reserve in any party.)": "Podnieś swoją produkcję M€ o 2 poziomy. Umieść 1 delegata z rezerwy w wybranej partii",
 
   "Lunar Embassy": "Ambasada na Księżycu",
-  "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "Podnieś swoją produkcję M€ o 3 poziomy. Podnieś swoją produkcję roślinności o 1 poziom za każdy posiadany symbol Ziemi (z tym włacznie). Dobierz kartę. Umieść obszar miasta na zarezerwowanym polu.",
+  "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "Podnieś swoją produkcję M€ o 3 poziomy. Podnieś swoją produkcję roślinności o 1 poziom za każdy posiadany symbol Ziemi (z tym włącznie). Dobierz kartę. Umieść obszar miasta na zarezerwowanym polu.",
 
   "Luxury Estate": "Luksusowe Posiadłości",
   "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "Poziom tlenu musi wynosić co najmniej 7%. Otrzymujesz 1 jednostkę tytanu za każdy posiadany obszar miasta i zieleni.",
@@ -135,10 +135,10 @@
   "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "Musisz posiadać co najmniej 1 obszar miasta na planszy Marsa. Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Marsa (z tym włącznie).",
 
   "Martian Nature Wonders": "Marsjańskie Cuda Natury",
-  "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "Umieść znacznik neutralnego gracza na dowolnym niezarezerwowanym polu na planszy Marsa. Otrzymujesz wszystkie bonusy z tego pola, ale nie bonusy za sąsiedztwo. Do końca gry żaden obszar nie moze być umieszczony na tym polu. Umieść 2 jednostki danych na dowolnej karcie.",
+  "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "Umieść znacznik neutralnego gracza na dowolnym niezarezerwowanym polu na planszy Marsa. Otrzymujesz wszystkie bonusy z tego pola, ale nie bonusy za sąsiedztwo. Do końca gry żaden obszar nie może być umieszczony na tym polu. Umieść 2 jednostki danych na dowolnej karcie.",
 
   "Martian Repository": "Repozytorium Marsjańskie",
-  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "Efekt trwały: za każdym razem gdy zagrywasz kartę z symbolem Nauki lub Marsa (z tymi włącznie) umieść 1 jednostkę danych na tej karcie.",
+  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "Efekt trwały: za każdym razem, gdy zagrywasz kartę z symbolem Nauki lub Marsa (z tymi włącznie) umieść 1 jednostkę danych na tej karcie.",
   "(Decrease your energy production 1 step. 1 VP for every 3 data here.)": "Obniż swoją produkcję energii o 1 poziom. Otrzymujesz 1 PZ za każde 3 jednostki danych na tej karcie.",
 
   "Microbiology Patents": "Patenty Mikrobiologiczne",
@@ -158,16 +158,16 @@
   "(Increase your plant production by 2. Gain 1 plant.)": "Podnieś swoją produkcję roślinności o 2 poziomy. Otrzymujesz 1 jednostkę roślinności.",
 
   "Oumuamua Type Object Survey": "Przechwycenie Obiektu Typu Oumuamua",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Dobierz 2 odkryte karty. Jeśli pierwsza z nich posiada symbol Nauki lub Mikrobów zagraj ją za darmo ignorując wymagania. Jeśli nie, ale posiada symboli Przestrzeni Kosmicznej zwiększ swoją produkcję energii o 3 poziomy. Jeśli pierwsza karta nie posiada żadnego z wymienionych symboli zastosuj tą zasadę do drugiej karty.",
+  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Dobierz 2 odkryte karty. Jeśli pierwsza z nich posiada symbol Nauki lub Mikrobów zagraj ją za darmo ignorując wymagania. Jeśli nie, ale posiada symboli Przestrzeni Kosmicznej, podnieś swoją produkcję energii o 3 poziomy. Jeśli pierwsza karta nie posiada żadnego z wymienionych symboli zastosuj tą zasadę do drugiej karty.",
   "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "Musisz posiadać co najmniej 1 symbol Nauki i Przestrzeni Kosmicznej. Umieść 2 jednostki danych na dowolnej karcie.",
 
   "Ozone Generators": "Generatory Ozonu",
-  "(Action: Spend 3 energy to gain 1 TR.)": "Akcja: Wydaj 3 jednostki energii aby posnieść swój WT o 1 poziom.",
+  "(Action: Spend 3 energy to gain 1 TR.)": "Akcja: Wydaj 3 jednostki energii, aby podnieść swój WT o 1 poziom.",
   "(Requires 6% Oxygen.)": "Poziom tlenu musi wynosić co najmniej 6%.",
 
   "Pollinators": "Zapylacze",
   "(Action: Add 1 animal on this card)": "Akcja: Umieść 1 jednostkę zwierząt na tej karcie.",
-  "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "Musisz posiadać przyn ajmniej 3 symbole Roślinności. Podnieś swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
+  "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "Musisz posiadać przynajmniej 3 symbole Roślinności. Podnieś swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
 
   "Power Plant": "Elektrociepłownia",
   "(Increase your heat production 2 steps and your energy production 1 step.)": "Podnieś swoją produkcję ciepła o 2 poziomy. Podnieś swoją produkcję energii o 1 poziom.",
@@ -219,14 +219,14 @@
   "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi, Marsa i Jowisza. Umieść 2 jednostki danych na dowolnej karcie. Otrzymujesz 1 PZ za każde 6 jednostek danych na tej karcie.",
 
   "Space Debris Cleaning Operation": "Deorbitacja Śmieci Kosmicznych",
-  "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "Musisz posiadać co najmniej 4 symbole Przestrzeni Kosmicznej. Otrzymujesz 3 jednostki tytanu. Umieść 1 wybraną jednostkę (oprócz zwierząt i nauki) na dowolnej karcie. Umieść 1 jednostkę danych na dowolnej karcie. Dobierz 1 kartę.",
+  "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "Musisz posiadać co najmniej 4 symbole Przestrzeni Kosmicznej. Otrzymujesz 3 jednostki tytanu. Umieść 1 wybraną jednostkę (oprócz Zwierząt i nauki) na dowolnej karcie. Umieść 1 jednostkę danych na dowolnej karcie. Dobierz 1 kartę.",
 
   "Space Relay": "Przekaźnik Kosmiczny",
-  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "Efekt trwały: Za każdym razem gdy zagrywasz kartę z symbolem Jowisza (z tą włącznie) dobierz 1 kartę.",
+  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "Efekt trwały: Za każdym razem, gdy zagrywasz kartę z symbolem Jowisza (z tą włącznie) dobierz 1 kartę.",
   "(Erhöhe deine M€-Produktion um 1 Schritt.)": "Podnieś swoją produkcję M€ o 1 poziom.",
 
   "Specialized Settlement": "Wyspecjalizowana Osada",
-  "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.)": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść obszar miasta na planszy. Jesli na polu tego miasta znajduje się premia do zasobów podnieś produkcję jednego z tych zasobów o 1 poziom.",
+  "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.)": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść obszar miasta na planszy. JeŚli na polu tego miasta znajduje się premia do zasobów podnieś produkcję jednego z tych zasobów o 1 poziom.",
 
   "Terraforming Control Station": "Stacja Kontroli Terraformacji",
   "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus lub Marsa płacisz o 2 M€ mniej za każdy z tych symboli.",
@@ -235,7 +235,6 @@
   "Terraforming Robots": "Roboty Terraformujące",
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Marsa umieść 1 jednostkę wyspecjalizowanych robotów na tej karcie.",
   "(1 VP for every specialized robot on this card.)": "Otrzymujesz 1 PZ za każdą jednostkę wyspecjalizowanych robotów na tej karcie.",
-  "(Requires 4 science tags.)": "Musisz posiadać co najmniej 4 symbole Nauki.",
 
   "Venera Base": "Baza Wenera",
   "(Action: Add 1 floater to ANY Venus card)": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Wenus.",
@@ -243,6 +242,6 @@
   "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Jedność musi być partią rządzącą lub musisz posiadać co najmniej 2 delegatów w tej partii. Podnieś swoją produkcję M€ o 3 poziomy. Umieść obszar miasta na zarezerwowanym polu.",
   
   "Wetlands": "Mokradła",
-  "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "Na planszy muszą znajdować się co najmniej 2 obszary oceanów. Wydaj 4 jednostki roślinności. Umieść ten obszar specjalny na niezarezerwowanym polu sąsiadującym z co najmniej 2 obszarami oceanów. Podnieś poziom tlenu o 1 poziom. Podnieś swów WT o 1 poziom.",
+  "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "Na planszy muszą znajdować się co najmniej 2 obszary oceanów. Wydaj 4 jednostki roślinności. Umieść ten obszar specjalny na niezarezerwowanym polu sąsiadującym z co najmniej 2 obszarami oceanów. Podnieś poziom tlenu o 1 poziom. Podnieś swój WT o 1 poziom.",
   "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "Obszar mokradeł liczy się jako obszar zieleni i oceanu jednocześnie, jednak nie liczy się do limitu 9 oceanów i nie może zostać przykryty."
 }

@@ -9,14 +9,14 @@
     "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Jedność musi być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Obniż swoją produkcję energii 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść na planszy obszar miasta. Umieść 2 znaczniki swoich delegatów w 1 partii.",
     
 	"Diaspora Movement": "Migracje diasporyczne",
-    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "Czerwoni muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Otrzymujesz 1 M€ za każdy symbol Jowisza w grze (z tym włącznie)",
+    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "Czerwoni muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Otrzymujesz 1 M€ za każdy symbol Jowisza w grze (z tym włącznie).",
     
 	"Event Analysts": "Analitycy wydarzeń",
     "Effect: You have +1 influence.": "Efekt trwały: Masz 1 dodatkowy punkt wpływów.",
     "Requires that Scientists are ruling or that you have 2 delegates there.": "Naukowcy muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii.",
     
 	"GMO Contract": "Kontrakt na GMO",
-    "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Roślinności, mikrobów lub zwierząt (z tą włącznie), otrzymujesz 2 M€ za każdy z tych symboli na zagranej karcie.",
+    "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Roślinności, mikrobów lub Zwierząt (z tą włącznie), otrzymujesz 2 M€ za każdy z tych symboli na zagranej karcie.",
     "Requires that Greens are ruling or that you have 2 delegates there.": "Zieloni muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii.",
     
 	"Martian Media Center": "Marsjańskie centrum informacyjne",
@@ -36,7 +36,7 @@
     "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Zamień 1 znacznik neutralnego delegata niebędącego liderem na znacznik Twojego delegata z rezerwy.",
     
 	"Red Tourism Wave": "Turyści na Marsie",
-    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "Czerwoni muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Otrzymujesz 1 M€ za każdy pusty obszar sądiadujący z twoimi obszarami.",
+    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "Czerwoni muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Otrzymujesz 1 M€ za każdy pusty obszar sąsiadujący z twoimi obszarami.",
     
 	"Sponsored Mohole": "Sponsorowany Mohole",
     "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "Kelwiniści muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Podnieś swoją produkcję ciepła o 2 poziomy.",
@@ -45,7 +45,7 @@
     "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "Naukowcy muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Dobierz 2 karty.",
     
 	"Wildlife Dome": "Natura pod kopułą",
-    "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "Zieloni muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Umieść na planszy obszar zieleni i podnieś poziom tlenu o 1%.",
+    "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "Zieloni muszą być partią rządzącą lub musisz mieć co najmniej 2 delegatów w tej partii. Umieść na planszy obszar zieleni i podnieś poziom tlenu o 1 poziom.",
     
 	"Vote Of No Confidence": "Wotum nieufności",
     "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Twój delegat musi być liderem dowolnej partii, a obecny przewodniczący musi być neutralny. Usuń znacznik neutralnego przewodniczącego i umieść na jego miejsce znacznik swojego delegata z rezerwy. Podnieś swój WT o 1 poziom.",

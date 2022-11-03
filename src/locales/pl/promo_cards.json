@@ -28,7 +28,7 @@
     
 	"Magnetic Shield": "Tarcza Magnetyczna",
     "3 Power": "3 symbole Energii",
-    "(Requires 3 power tags. Raise your TR 4 steps.)": "Musisz posiadać co najmniej 3 symbole Energii. Podnieś swoj WT o 4 poziomy.",
+    "(Requires 3 power tags. Raise your TR 4 steps.)": "Musisz posiadać co najmniej 3 symbole Energii. Podnieś swój WT o 4 poziomy.",
     
 	"Meltworks": "Wytapialnia",
     "Action: Spend 5 heat to gain 3 steel.": "Akcja: Wydaj 5 jednostek ciepła, aby otrzymać 3 jednostki stali.",
@@ -39,7 +39,7 @@
     
 	"Diversity Support": "Wspieranie Różnorodności",
     "9 Resource types": "9 typów zasobów",
-    "(Requires that you have 9 different types of resources. Gain 1 TR.)": "Musisz posiadać 9 różnych jednostek zasobów. Zwiększ swój WT o 1 poziom.",
+    "(Requires that you have 9 different types of resources. Gain 1 TR.)": "Musisz posiadać 9 różnych jednostek zasobów. Podnieś swój WT o 1 poziom.",
     
 	"Topsoil Contract": "Kontrakt Glebotwórczy",
     "(Effect: When you gain a microbe to ANY CARD, also gain 1 M€.)": "Efekt trwały: Gdy umieszczasz jednostkę mikrobów na dowolnej karcie otrzymujesz 1 M€.",
@@ -49,7 +49,7 @@
     "(Gain 4 plants and add 4 microbes to ANOTHER CARD.)": "Otrzymujesz 4 jednostki roślinności. Umieść 4 jednostki mikrobów na dowolnej karcie.",
     
 	"Asteroid Deflection System": "Zakrzywianie Trajektorii Asteroid",
-    "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)": "Akcja: Odkryj i odrzuć kartę. Jeśli ma symboli Przestrzeni Kosmicznej, umieść 1 jednostę asteroid na tej karcie.",
+    "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)": "Akcja: Odkryj i odrzuć kartę. Jeśli ma symboli Przestrzeni Kosmicznej, umieść 1 jednostkę asteroid na tej karcie.",
     "opponents may not remove your plants": "Przeciwnicy nie mogą usuwać Twoich jednostek roślinności.",
     "(Decrease your energy production 1 step. 1VP per asteroid on this card.)": "Obniż swoją produkcję energii o 1 poziom. Otrzymujesz 1 PZ za każdą jednostkę asteroid na tej karcie.",
     
@@ -130,7 +130,7 @@
     "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Akcja: Wydaj 2*X M€, aby otrzymać X jednostek energii lub obniż swoją produkcję energii o 1 poziom, aby otrzymać 8 M€.",
     
 	"Bactoviral Research": "Badania Baktowirusowe",
-    "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Pociągnij 1 kartę. Wybierz 1 z zagranych kart i dodaj na nią 1 jednostę mikrobów za każdy posiadany symbol Nauki, ten włącnie.)",
+    "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Pociągnij 1 kartę. Wybierz 1 z zagranych kart i dodaj na nią 1 jednostkę mikrobów za każdy posiadany symbol Nauki, ten włącznie.)",
     
 	"Bio Printing Facility": "Ośrodek bio drukowania",
     "(Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.)": "(Akcja: Wydaj 2 jednostki energii by otrzymac 2 jednostki roślinności lub dodaj jednostkę zwierząt na inną kartę.)",

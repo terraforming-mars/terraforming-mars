@@ -13,7 +13,7 @@
    "Gain 1 M€ for every 3 cards in hand": "Otrzymujesz 1 M€ za każde 3 karty na ręce.",
    "Select a Scientists policy.": "Wybierz program polityczny partii Naukowcy.",
    "Your global requirements are +/- 2 steps": "Możesz traktować wskaźniki globalne jakby były o 2 poziomy większe lub mniejsze.",
-   "When you raise a global parameter, draw a card per step raised": "Kiedy zwiększasz wskaźnik globalny, dobierz 1 kartę za każdy podniesiony poziom.",
+   "When you raise a global parameter, draw a card per step raised": "Kiedy podnosisz wskaźnik globalny, dobierz 1 kartę za każdy podniesiony poziom.",
    "Cards with Science tag requirements may be played with 1 less Science tag": "Karty wymagające symboli Nauki, wymagają o 1 symbol Nauki mniej.",
 
    "Select a Unity bonus.": "Wybierz bonus partii Jedność.",
@@ -31,7 +31,7 @@
    "Select a Greens policy.": "Wybierz program polityczny partii Zieloni.",
    "When you place a greenery tile, gain 4 M€": "Kiedy umieszczasz obszar zieleni na powierzchni Marsa otrzymujesz 4 M€.",
    "When you place a tile, gain 1 plant": "Kiedy umieszczasz dowolny obszar na planszy, otrzymujesz 1 jednostkę roślinności.",
-   "When you play an animal, plant or microbe tag, gain 2 M€": "Kiedy zaqgrywasz kartę z symbolem Zwierząt, Roślin lub Mikrobów, otrzymujesz 2 M€.",
+   "When you play an animal, plant or microbe tag, gain 2 M€": "Kiedy zagrywasz kartę z symbolem Zwierząt, Roślin lub Mikrobów, otrzymujesz 2 M€.",
    "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Wydaj 5 M€, aby otrzymać 3 jednostki roślinności lub umieścić 2 jednostki mikrobów na dowolnej karcie.",
 
    "Select a Reds bonus.": "Wybierz bonus partii Czerwoni.",
@@ -41,14 +41,14 @@
    "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "Każdy gracz, który wykonuje akcję, która podnosi jego poziom WT MUSI zapłacić 3 M€ za każdy podnoszony poziom.",
    "When you place a tile, pay 3 M€ or as much as possible": "Każdy gracz, który umieszcza dowolny obszar na planszy, musi zapłacić 3 M€ lub tyle ile jest w stanie.",
    "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "Wydaj 4 M€, aby obniżyć dowolny wskaźnik globalny, który nie jest maksymalny o 1 poziom (nie otrzymujesz po raz kolejny bonusów).",
-   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Kiedy zwiększasz dowolny wskaźnik globalny, musisz obniżyć swoją produkcję M€ o 1 za każdy zwiększany poziom (jeśli to możliwe).",
+   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Kiedy podnosisz dowolny wskaźnik globalny, musisz obniżyć swoją produkcję M€ o 1 za każdy podniesiony poziom (jeśli to możliwe).",
 
    "Select a Kelvinists bonus.": "Wybierz bonus partii Kelwiniści.",
    "Gain 1 M€ for each heat production you have": "Otrzymujesz 1 M€ za każdy posiadany poziom produkcji ciepła.",
    "Gain 1 heat for each heat production you have": "Otrzymujesz 1 jednostkę ciepła za każdy posiadany poziom produkcji ciepła.",
    "Select a Kelvinists policy.": "Wybierz program polityczny partii Kelwiniści.",
    "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Wydaj 10 M€, aby podnieść produkcję energii i ciepła o 1 poziom.",
-   "When you raise temperature, gain 3 M€ per step raised": "Kiedy zwiększasz poziom temperatury otrzymujesz 3 M€ za każdy podniesiony poziom.",
-   "Convert 6 heat into temperature (Turmoil Kelvinists)": "Wydaj 6 jednostek ciepła, aby zwiększyć temperaturę o 1 poziom.",
+   "When you raise temperature, gain 3 M€ per step raised": "Kiedy podnosisz poziom temperatury otrzymujesz 3 M€ za każdy podniesiony poziom.",
+   "Convert 6 heat into temperature (Turmoil Kelvinists)": "Wydaj 6 jednostek ciepła, aby podnieść temperaturę o 1 poziom.",
    "When you place a tile, gain 2 heat": "Kiedy umieszczasz dowolny obszar na planszy, otrzymujesz 2 jednostki ciepła."
  }

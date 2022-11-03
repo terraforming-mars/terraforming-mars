@@ -1,12 +1,12 @@
 {
   "Adhai High Orbit Constructions": "Adhai High Orbit Constructions",
   "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Przestrzeni Kosmicznej ale bez symbolu Planety umieść na tej karcie 1 jednostkę orbitali.",
-  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "Za każde 2 jednostki orbitali na tej karcie zagranie karty z symbolem Przestrzeni Kosmicznek, ale bez symbolu Planety, Projekt standardowy Kolonia i akcja handlu kosztują o 1 M€ mniej.",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "Za każde 2 jednostki orbitali na tej karcie zagranie karty z symbolem Przestrzeni Kosmicznej, ale bez symbolu Planety, Projekt standardowy Kolonia i akcja handlu kosztują o 1 M€ mniej.",
   "(You start with 43 M€.)": "Rozpoczynasz grę z 43 M€",
 
   "Ambient": "Ambient",
   "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus (z tą włącznie) podnieś swoją produkcję ciepła o 1 poziom.",
-  "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "Akcja: Po osiągnięciu maksymalnego poziomu temperatury możesz wydać 8 jednostek ciepła aby zwiększyć swój WT o 1 poziom. Możesz powtarzać tę akcję.",
+  "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "Akcja: Po osiągnięciu maksymalnego poziomu temperatury możesz wydać 8 jednostek ciepła, aby podnieść swój WT o 1 poziom. Możesz powtarzać tę akcję.",
   "(You start with 38 M€. As your first action, raise the Venus scale 2 steps.)": "Rozpoczynasz grę z 38 M€. W ramach pierwszej akcji podnieś Współczynnik Terraformacji Wenus o 2 poziomy.",
 
   "AURORAI": "AURORAI",
@@ -23,12 +23,12 @@
   "(You start with 36 M€, 1 steel, and 1 titanium.)": "Rozpoczynasz grę z 36 M€, 1 jednostką stali i 1 jednostką tytanu.",
 
   "Collegium Copernicus": "Collegium Copernicus",
-  "(Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Nauki (z tą włacznie) umieść 1 jednostkę danych na dowolnej karcie.",
+  "(Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Nauki (z tą włącznie) umieść 1 jednostkę danych na dowolnej karcie.",
   "(Action: Spend 3 data from this card to trade.)": "Akcja: Wydaj 3 jednostki danych z tej karty, aby wykonać akcję handlu z obiektem.",
   "(You start with 33 M€. As your first action, draw 2 cards with a science tag.)": "Rozpoczynasz grę z  33 M€. W ramach pierwszej akcji dobierz 2 karty z symbolem Nauki.",
 
   "Habitat Marte": "Habitat Marte",
-  "(Effect: Mars tags also count as science tags.)": "Efekt trwały: Zagrane przez Ciebie symbole Marsa mozesz traktować jako symbole Nauki.",
+  "(Effect: Mars tags also count as science tags.)": "Efekt trwały: Zagrane przez Ciebie symbole Marsa możesz traktować jako symbole Nauki.",
   "(You start with 40 M€)": "Rozpoczynasz grę z 40 M€.",
 
   "Mars Dierct": "Mars Dierct",
@@ -36,13 +36,13 @@
   "(You start with 56 M€.)": "Rozpoczynasz grę z 56 M€.",
   
   "Martian Insurance Group": "Marsjańska Grupa Ubezpieczeniowa",
-  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "Efekt trwały: Gdy zagrywasz kartę wydarzenia podnieś swoją produjcję M€ o 1 poziom.",
+  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "Efekt trwały: Gdy zagrywasz kartę wydarzenia podnieś swoją produkcję M€ o 1 poziom.",
   "(You start with 42 M€ and 1 M€ production.)": "Rozpoczynasz grę z 42 M€. Podnieś swoją produkcję M€ o 1 poziom.",
 
   "MindSet Mars": "MindSet Mars",
   "(Action: When you play a card with a building tag, add 1 agenda on this card.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Budowli umieść 1 jednostkę agendy na tej karcie.",
-  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "Akcja: Wydaj 2 jednostki agendy z tej karty aby umieścić 1 delegata z rezerwy w dowolnej partii.",
-  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "Akcja: Wydaj 5 jednostek zagendy z tej karty aby umieścić obszar miasta na planszy.",
+  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "Akcja: Wydaj 2 jednostki agendy z tej karty, aby umieścić 1 delegata z rezerwy w dowolnej partii.",
+  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "Akcja: Wydaj 5 jednostek agendy z tej karty, aby umieścić obszar miasta na planszy.",
   "(You start with 44 M€ and 1 agenda resource to this card.)": "Rozpoczynasz grę z 44 M€. Umieść 1 jednostkę agendy na tej karcie.",
 
   "Polaris": "Polaris",

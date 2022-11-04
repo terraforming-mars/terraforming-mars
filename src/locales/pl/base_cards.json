@@ -28,6 +28,7 @@
     
 	"Research Grant": "Grant badawczy",
     "Gain 8 M€.": "Otrzymujesz 8 M€.",
+    "Increase your energy production 1 step. Gain 14 M€.": "Podnieś swoją produkcję energii o 1 poziom. Otrzymujesz 14 M€.",
     
 	"Trade Advance": "Zaliczka handlowa",
     "Trade all colonies with": "Handluj ze wszystkimi obiektami z",
@@ -157,7 +158,7 @@
     "Increase your titanium production 2 steps.": "Podnieś swoją produkcję tytanu o 2 poziomy.",
     
 	"Food Factory": "Fabryka Żywności",
-    "Decrease your plant production 1 step and increase your M€ production 4 steps.": "Obniż swoją produkcję roślinności o 1 poziom i podnieś swoją produkcję M€ o 4 poziomy.",
+    "(Decrease your plant production 1 step and increase your M€ production 4 steps.)": "Obniż swoją produkcję roślinności o 1 poziom i podnieś swoją produkcję M€ o 4 poziomy.",
     
 	"Archaebacteria": "Archaeen",
     "It must be -18 C or colder. Increase your plant production 1 step.": "Temperatura musi być równa lub niższa niż -18°C. Podnieś swoją produkcję roślinności o 1 poziom.",
@@ -192,7 +193,7 @@
     
 	"Fish": "Ryby",
     "(Action: Add 1 animal to this card.)": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
-    "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "(Temperatura musi wynosić co najmniej 2°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.)",
+    "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "Temperatura musi wynosić co najmniej 2°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
     "1 VP for each animal on this card.": "1 PZ za każdą jednostkę zwierząt na tej karcie.",
     
 	"Lake Marineris": "Jezioro Marineris",
@@ -209,7 +210,7 @@
     
 	"Vesta Shipyard": "Stocznia na Weście",
     "Beam From A Thorium Asteroid": "Wiązka z Asteroidy Bogatej w Tor",
-    "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)": "(Musisz posiadać co najmniej 1 symbol Jowisza. Podnieś swoją produkcję ciepła i energii o 3 poziomy.)",
+    "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)": "Musisz posiadać co najmniej 1 symbol Jowisza. Podnieś swoją produkcję ciepła i energii o 3 poziomy.",
     
 	"Mangrove": "Namorzyny",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Temperatura musi wynosić co najmniej 4°C. Umieść obszar zieleni na planszy, na polu zarezerwowanym dla oceanów, ignorując normalne ograniczenia umieszczania obszarów.",
@@ -428,6 +429,8 @@
     "(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Zwierząt, lub Roślinności (z tą włącznie), za każdy z tych symboli na zagrywanej karcie umieść na tej karcie 1 jednostkę zwierząt.",
     "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "Musisz posiadać co najmniej 1 obszar zieleni. Umieść ten obszar specjalny na polu sąsiadującym z obszarem zieleni.",
     "1 VP per 2 animals on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
+	"THE TILE GRANTS AN ADJACENCY BONUS OF 1 ANIMAL. 1 VP PER 2 ANIMALS ON THIS CARD.": "Umieszczony obszar zapewnia premię za sąsiedztwo dającą 1 jednostkę zwierząt. Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
+    
     
 	"Zeppelins": "Sterowce",
     "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Poziom tlenu musi wynosić co najmniej 5%. Podnieś swoją produkcję M€ o 1 poziom za każdy obszar miasta na powierzchni Marsa.",

@@ -201,6 +201,11 @@
   "Action: Add 1 science resource here for each Moon tag you have.": "Akcja: Umieść na tej karcie po 1 jednostce nauki za każdy posiadany symbol Księżyca.",
   "Luna Ecumenopolis": "Księżycowe Ekumenopolis",
   "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Wydaj 2 jednostki tytanu. Umieść na planszy 2 obszary habitatów sąsiadująco z 2 istniejącymi habitatami. Podnieś swój WT o 1 poziom za każde osiągnięte 2 poziomy WK Księżyca.",
+  "(Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Księżyca, jednostki nauki z tej karty mogą być użyte jako 1 M€ każda.",
+  "An Offer You Can't Refuse": "Oferta nie do odrzucenia",
+  "Exchange a NON-NEUTRAL NON-LEADER delegate with one of your own from the reserve. You may then move your delegate to another party.": "Wymień nie neutralnego, nie będącego liderem, delegata nie na swojego delegata z rezerwy. Następnie możesz przenieść swoich delegatów do innej partii.",
+  
+  
   "Steal": "Ukradnij",
   "habitat rate": "Współczynnik Kolonizacji (WK)",
   "Mining rate": "Współczynnik Górnictwa (WG)",

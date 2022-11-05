@@ -32,7 +32,7 @@ import Button from '@/client/components/common/Button.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
 import {PlayerInputType} from '@/common/input/PlayerInputType';
 
 let unique = 0;
@@ -50,7 +50,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: OrOptionsResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -84,14 +84,14 @@ export default Vue.extend({
     playerFactorySaved() {
       const idx = this.playerinput.options?.indexOf(this.selectedOption);
       if (idx === undefined || idx === -1) {
-        throw new Error('option not found!');
+        throw new Error('option not found');
       }
       return (out: InputResponse) => {
-        const copy = [[String(idx)]];
-        for (const row of out) {
-          copy.push(row.slice());
-        }
-        this.onsave(copy);
+        this.onsave({
+          type: 'or',
+          index: idx,
+          response: out,
+        });
       };
     },
     saveData() {

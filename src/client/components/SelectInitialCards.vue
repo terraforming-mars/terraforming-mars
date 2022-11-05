@@ -42,7 +42,7 @@ import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {getPreferences, Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tag} from '@/common/cards/Tag';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {AndOptionsResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
 import Colony from '@/client/components/colonies/Colony.vue';
 
@@ -69,7 +69,7 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: AndOptionsResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -203,15 +203,27 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     saveData() {
-      const result: InputResponse = [];
-      result.push([]);
+      const result: AndOptionsResponse = {
+        type: 'and',
+        responses: [],
+      };
+
       if (this.selectedCorporations.length === 1) {
-        result[0].push(this.selectedCorporations[0]);
+        result.responses.push({
+          type: 'card',
+          cards: [this.selectedCorporations[0]],
+        });
       }
       if (this.hasPrelude) {
-        result.push(this.selectedPreludes);
+        result.responses.push({
+          type: 'card',
+          cards: this.selectedPreludes,
+        });
       }
-      result.push(this.selectedCards);
+      result.responses.push({
+        type: 'card',
+        cards: this.selectedCards,
+      });
       this.onsave(result);
     },
     cardsChanged(cards: Array<CardName>) {

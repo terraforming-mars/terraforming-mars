@@ -1,7 +1,7 @@
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {Message} from '../../common/logs/Message';
-import {InputResponse} from '../../common/inputs/InputResponse';
+import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class OrOptions implements PlayerInput {
@@ -19,14 +19,13 @@ export class OrOptions implements PlayerInput {
   }
 
   public process(input: InputResponse, player: Player) {
-    // input length is variable, can't test it with checkInputLength
-    if (input.length === 0 || input[0].length !== 1) {
-      throw new Error('Incorrect options provided');
+    if (!isOrOptionsResponse(input)) {
+      throw new Error('Not a valid OrOptionsResponse');
     }
-    const optionIndex = parseInt(input[0][0]);
-    const selectedOptionInput = input.slice(1);
-
-    player.runInput(selectedOptionInput, this.options[optionIndex]);
+    if (this.options.length <= input.index) {
+      throw new Error('Invalid index');
+    }
+    player.runInput(input.response, this.options[input.index]);
     return this.cb();
   }
 }

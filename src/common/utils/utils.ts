@@ -41,3 +41,7 @@ export function inplaceRemove<T>(array: Array<T>, element: T) {
     array.splice(idx, 1);
   }
 }
+
+export function sum(array: Array<number>): number {
+  return array.reduce((a, b) => a + b, 0);
+}

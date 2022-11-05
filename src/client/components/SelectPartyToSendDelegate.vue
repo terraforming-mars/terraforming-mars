@@ -18,7 +18,7 @@ import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import Party from '@/client/components/Party.vue';
 import {PartyName} from '@/common/turmoil/PartyName';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectPartyResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectPartyToSendDelegate',
@@ -27,7 +27,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectPartyResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -38,18 +38,13 @@ export default Vue.extend({
   },
   data() {
     return {
-      selectedParty: undefined as string | undefined,
+      selectedParty: undefined as PartyName | undefined,
     };
   },
   components: {Button, Party},
   methods: {
     saveData() {
-      const result: string[][] = [];
-      result.push([]);
-      if (this.selectedParty !== undefined) {
-        result[0].push(this.selectedParty);
-      }
-      this.onsave(result);
+      this.onsave({type: 'party', partyName: this.selectedParty});
     },
     isDominant(partyName: PartyName): boolean {
       return partyName === this.playerinput.turmoil?.dominant;

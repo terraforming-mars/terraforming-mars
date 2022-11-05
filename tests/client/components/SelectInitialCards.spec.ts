@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
 
@@ -11,7 +11,7 @@ let savedData: InputResponse | undefined;
 
 describe('SelectInitialCards', function() {
   beforeEach(() => {
-    savedData = [];
+    savedData = undefined;
   });
 
   it('saves data without prelude', async function() {
@@ -33,7 +33,10 @@ describe('SelectInitialCards', function() {
 
     await button.trigger('click');
 
-    expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ANTS]]);
+    expect(savedData).to.deep.eq({type: 'and', responses: [
+      {type: 'card', cards: [CardName.ECOLINE]},
+      {type: 'card', cards: [CardName.ANTS]},
+    ]});
   });
 
   it('Cannot save with only one prelude', async function() {
@@ -78,7 +81,11 @@ describe('SelectInitialCards', function() {
 
     await button.trigger('click');
 
-    expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ALLIED_BANK, CardName.SUPPLY_DROP], [CardName.ANTS]]);
+    expect(savedData).to.deep.eq({type: 'and', responses: [
+      {type: 'card', cards: [CardName.ECOLINE]},
+      {type: 'card', cards: [CardName.ALLIED_BANK, CardName.SUPPLY_DROP]},
+      {type: 'card', cards: [CardName.ANTS]},
+    ]});
 
     await component.vm.$nextTick();
     const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
@@ -94,7 +101,7 @@ describe('SelectInitialCards', function() {
     const button = getButton(component);
     await button.trigger('click');
 
-    expect(savedData).is.empty;
+    expect(savedData).is.undefined;
 
     await component.vm.$nextTick();
     const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
@@ -113,7 +120,7 @@ describe('SelectInitialCards', function() {
     await component.vm.$nextTick();
     const button = getButton(component);
     await button.trigger('click');
-    expect(savedData).is.empty;
+    expect(savedData).is.undefined;
 
     await component.vm.$nextTick();
     const confirmationDialog = component.vm.$refs.confirmation as InstanceType<typeof ConfirmDialog>;
@@ -157,7 +164,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
         title: 'foo',
         options,
       },
-      onsave: function(data: Array<Array<string>>) {
+      onsave: function(data: AndOptionsResponse) {
         savedData = data;
       },
       showsave: true,

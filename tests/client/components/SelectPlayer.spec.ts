@@ -9,7 +9,7 @@ import {InputResponse} from '@/common/inputs/InputResponse';
 
 describe('SelectPlayer', () => {
   let wrapper: Wrapper<any>;
-  let response: InputResponse = [];
+  let response: InputResponse | undefined = undefined;
 
   const players: Array<Partial<PublicPlayerModel>> = [
     {name: 'alpha', color: Color.BLUE},
@@ -65,22 +65,22 @@ describe('SelectPlayer', () => {
     clickInput(inputs.at(0));
     expect(wrapper.vm.$data.selectedPlayer).eq('red');
     clickButton();
-    expect(response).deep.eq([['red']]);
+    expect(response).deep.eq({type: 'player', player: 'red'});
 
     clickInput(inputs.at(1));
     expect(wrapper.vm.$data.selectedPlayer).eq('yellow');
     clickButton();
-    expect(response).deep.eq([['yellow']]);
+    expect(response).deep.eq({type: 'player', player: 'yellow'});
 
     clickInput(inputs.at(2));
     expect(wrapper.vm.$data.selectedPlayer).eq('green');
     clickButton();
-    expect(response).deep.eq([['green']]);
+    expect(response).deep.eq({type: 'player', player: 'green'});
 
     clickInput(inputs.at(3));
     expect(wrapper.vm.$data.selectedPlayer).eq('blue');
     clickButton();
-    expect(response).deep.eq([['blue']]);
+    expect(response).deep.eq({type: 'player', player: 'blue'});
   });
 
   async function clickInput(input: Wrapper<any>) {

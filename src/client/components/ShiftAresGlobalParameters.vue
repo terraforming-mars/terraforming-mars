@@ -45,7 +45,7 @@
 import Vue from 'vue';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {ShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'ShiftAresGlobalParameters',
@@ -54,7 +54,7 @@ export default Vue.extend({
       type: Object as () => Required<Pick<PlayerInputModel, 'aresData' | 'buttonLabel'>>,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: ShiftAresGlobalParametersResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -83,9 +83,7 @@ export default Vue.extend({
         oxygenDelta: this.$data.oxygenDelta,
       };
 
-      this.onsave([[
-        JSON.stringify(response),
-      ]]);
+      this.onsave({type: 'aresGlobalParameters', response});
     },
   },
 });

@@ -23,7 +23,7 @@ import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import GoToMap from '@/client/components/waitingFor/GoToMap.vue';
 
@@ -38,7 +38,7 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectSpaceResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -145,7 +145,7 @@ export default (Vue as WithRefs<Refs>).extend({
         this.$data.warning = 'Must select a space';
         return;
       }
-      this.onsave([[this.$data.spaceId]]);
+      this.onsave({type: 'space', spaceId: this.$data.spaceId});
     },
   },
   mounted() {

@@ -14,7 +14,7 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectProjectCardToPlay',
@@ -26,7 +26,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectProjectCardToPlayResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -324,19 +324,21 @@ export default Vue.extend({
         const diff = totalSpent - this.cost;
 
         if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.onsave([[
-            this.card.name,
-            JSON.stringify(payment),
-          ]]);
+          this.onsave({
+            type: 'projectCard',
+            card: this.card.name,
+            payment: payment,
+          });
         } else {
           this.warning = 'Please adjust payment amount';
           return;
         }
       } else {
-        this.onsave([[
-          this.card.name,
-          JSON.stringify(payment),
-        ]]);
+        this.onsave({
+          type: 'projectCard',
+          card: this.card.name,
+          payment: payment,
+        });
       }
     },
   },

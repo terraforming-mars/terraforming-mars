@@ -1,0 +1,19 @@
+PROTOTYPE v2.0; May 7, 2001
+Windows TrueType font, free for personal use
+Homepage: http://members.aol.com/disneyfonts/pt.html
+
+Please include this Prototype.txt file with any redistribution.
+
+INSTALLATION: To install any TrueType font, simply copy it to your Windows\Fonts folder.
+
+
+PROTOTYPE is an original font based on the signage typeface used at Walt Disney World's Epcot theme park. It can also be seen on the monorails and in Disneyland's Tomorrowland.
+
+v2.0 includes the full character set -- all capitals and lowercase, punctuation, numbers, symbols, and international characters. All of the "missing" characters have been redrawn to emulate the "Prototype" look as closely as possible. 
+
+Thanks to Fudgie (loranges.com) for all of his help with gathering photos and testing the prototype Prototype.
+
+Thanks also to Scott Terek for sending samples and photographing "the elusive Q"!
+
+
+Comments, questions, complaints, love notes - please send them to jcmagic@yahoo.com.

@@ -18,17 +18,18 @@
     "Mercury": "Merkury",
     "Pallas": "Pallas",
 
-    "Select colony tile to remove": "Wybierz kafel obiektu, który chcesz odrzucić",
+    "Select colony tile to remove": "Wybierz obiekt, który chcesz odrzucić",
     "Colony Bonus": "Premia Kolonialna",
     "Trade Income": "Dochód z Handlu",
-    "Select where to build a colony": "Wybierz kolonię",
+    "Select where to build a colony": "Wybierz obiekt, na którym chcesz umieścić kolonię",
     "Remove colony": "Odrzuć kolonię",
 
-    "Trade Income: Gain the indicated production": "Dochód z Handlu: Zwiększ poziom przedstawionej produkcji",
-    "REVEAL TOP CARD OF DECK. BUY OR DISCARD IT.": "ODKRYJ WIERZCHNIĄ KARTĘ Z TALII PROJEKTÓW. KUP JĄ ALBO ODRZUĆ.",
-    "TRADE INCOME: DRAW X CARDS AND KEEP 1": "DOCHÓD Z HANDLU: DOBIERZ X KART I ZACHOWAJ 1",
-    "TRADE INCOME: STEAL 3 INDICATED RESOURCES": "DOCHÓD Z HANDLU: UKRADNIJ 3 PRZEDSTAWIONE SUROWCE",
-    "COPY TRADE": "SKOPIUJ HANDEL",
+    "Colony Fee": "Opłata Kolonialna",
+    "Trade Income: Gain the indicated production": "Dochód z Handlu: Podnieś poziom przedstawionej produkcji",
+    "REVEAL TOP CARD OF DECK. BUY OR DISCARD IT.": "Odkryj wierzchnią kartę z talii projektów. Kup ją lub odrzuć.",
+    "TRADE INCOME: DRAW X CARDS AND KEEP 1": "Dochód z Handlu: dobierz X kart i zatrzymaj 1.",
+    "TRADE INCOME: STEAL 3 INDICATED RESOURCES": "Dochód z Handlu: ukradnij 3 przedstawione zasoby.",
+    "COPY TRADE": "Skopiuj handel",
     "Party": "Partia",
 
     "Select one option": "Wybierz jedną z dostępnych opcji",
@@ -38,7 +39,7 @@
     "Europa - (Production)": "Europa - (Produkcja)",
     "Ganymede - (Plants)": "Ganimedes - (Roślinność)",
     "Io - (Heat)": "Iо - (Ciepło)",
-    "Luna - (MegaCredits)": "Księżyc - (MegaKredyty)",
+    "Luna - (MegaCredits)": "Księżyc - (M€)",
     "Miranda - (Animals)": "Miranda - (Zwierzęta)",
     "Pluto - (Cards)": "Pluton - (Karty)",
     "Titan - (Floaters)": "Tytan - (Dryfowce)",
@@ -49,5 +50,6 @@
     "Hygiea - (Attack)": "Hygiea - (Atak)",
     "Iapetus - (TR)": "Japet - (WT)",
     "Mercury - (Production)": "Merkury - (Produkcja)",
-    "Pallas - (Politics)": "Pallas - (Polityka)"
+    "Pallas - (Politics)": "Pallas - (Polityka)",
+	"Iapetus II - (Data)": "Iapetus II - (Dane)"
 }

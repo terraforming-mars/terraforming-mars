@@ -336,10 +336,10 @@
                               </label>
                             </template>
 
-                            <div class="create-game-subsection-label" v-i18n>Variants</div>
+                            <div class="create-game-subsection-label" v-i18n>Multiplayer Variants</div>
 
                             <template v-if="prelude">
-                              <input type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
+                              <input title="Always gain the Merger Prelude card (will be given post-draft)" type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
                               <label for="twoCorps-checkbox">
                                     <div class="create-game-expansion-icon expansion-icon-prelude"></div>
                                     <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" target="_blank">&#9432;</a>

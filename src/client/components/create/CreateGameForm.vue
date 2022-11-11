@@ -258,8 +258,24 @@
                         </div>
 
                         <div class="create-game-page-column" v-if="playersCount > 1">
+
                             <h4 v-i18n>Multiplayer Options</h4>
 
+                            <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
+                            <label for="randomFirstPlayer-checkbox">
+                                <span v-i18n>Random first player</span>
+                            </label>
+
+                            <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
+                            <label for="realTimeVP-checkbox">
+                                <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
+                            <label for="fastMode-checkbox">
+                                <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+                            <div class="create-game-subsection-label" v-i18n>Drafting</div>
                             <div class="create-game-page-column-row">
                                 <div>
                                 <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
@@ -279,11 +295,8 @@
                             <label for="corporationsDraft-checkbox">
                                 <span v-i18n>Corporations Draft</span>
                             </label>
-                            <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
-                            <label for="randomFirstPlayer-checkbox">
-                                <span v-i18n>Random first player</span>
-                            </label>
 
+                            <div class="create-game-subsection-label" v-i18n>Milestones/Awards</div>
                             <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
                             <label for="randomMA-checkbox">
                                 <span v-i18n>Random Milestones/Awards</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
@@ -323,15 +336,19 @@
                               </label>
                             </template>
 
-                            <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
-                            <label for="realTimeVP-checkbox">
-                                <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
+                            <div class="create-game-subsection-label" v-i18n>Multiplayer Variants</div>
 
-                            <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
-                            <label for="fastMode-checkbox">
-                                <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
+                            <template v-if="prelude">
+                              <input type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
+                              <!-- We really need a warning here if there arent enough corps for everyone in the game.
+                                  eg: pCount * (startingCorporations+4) > 'Number of Corps in all activated Expansions' - 'Excluded Corps'
+                              -->
+                              <label for="twoCorps-checkbox" title="Always gain the Merger Prelude card (will be given post-draft)">
+                                    <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                                    <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" target="_blank">&#9432;</a>
+                              </label>
+                            </template>
+
                         </div>
 
                         <div class="create-game-players-cont">
@@ -523,6 +540,7 @@ export interface CreateGameModel {
     escapeVelocityThreshold: number;
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
+    twoCorpsVariant: boolean;
 }
 
 type Refs = {
@@ -610,6 +628,7 @@ export default (Vue as WithRefs<Refs>).extend({
       escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
       escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
       escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
+      twoCorpsVariant: false,
     };
   },
   components: {
@@ -959,6 +978,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const escapeVelocityThreshold = component.escapeVelocityMode ? component.escapeVelocityThreshold : undefined;
       const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
       const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
+      const twoCorpsVariant = component.twoCorpsVariant;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1109,6 +1129,7 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityThreshold,
         escapeVelocityPeriod,
         escapeVelocityPenalty,
+        twoCorpsVariant,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

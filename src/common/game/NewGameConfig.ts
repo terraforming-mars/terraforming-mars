@@ -76,4 +76,5 @@ export interface NewGameConfig {
   escapeVelocityThreshold: number | undefined;
   escapeVelocityPeriod: number | undefined;
   escapeVelocityPenalty: number | undefined;
+  twoCorpsVariant: boolean,
 }

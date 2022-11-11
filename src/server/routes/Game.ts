@@ -126,6 +126,7 @@ export class GameHandler extends Handler {
             escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
             escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
             escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
+            twoCorpsVariant: gameReq.twoCorpsVariant,
           };
 
           let game: Game;

@@ -6,6 +6,9 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {SelectCard} from './SelectCard';
+import {Merger} from '../cards/promo/Merger';
+import {CardName} from '../CardName';
+
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
   public override inputType = PlayerInputType.SELECT_INITIAL_CARDS;
@@ -30,6 +33,16 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         }, {min: 1, max: 1},
       ),
     );
+
+    // Give each player Merger in this variant, or an extra prelude if they already have Merger
+    if (player.game.gameOptions.twoCorpsVariant) {
+      if (!player.dealtPreludeCards.some((card) => card.name === CardName.MERGER)) {
+        player.dealtPreludeCards.push(new Merger());
+      } else {
+        // player.dealtPreludeCards.push(player.game.dealer.dealPreludeCard());
+        player.dealtPreludeCards.push(player.game.preludeDeck.draw(player.game));
+      }
+    
 
     if (player.game.gameOptions.preludeExtension) {
       this.options.push(

@@ -623,6 +623,15 @@ export class Game implements Logger {
 
   private gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
+    
+    // As each player who doesn't have Merger is dealt Merger in SelectInitialCards.ts,
+    // remove it from the deck to avoid possible conflicts (e.g. Valley Trust / New Partner)
+    ////! TODO: Figure out how dealer works in this implementation, and how to filter out MERGER
+    // if (this.gameOptions.twoCorpsVariant) {
+    //   const dealer = Dealer.deserialize() //.deserialize(d.dealer);
+    //   dealer.preludeDeck = dealer.preludeDeck.filter((c) => c.name !== CardName.MERGER);
+    // }
+
     this.save();
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {

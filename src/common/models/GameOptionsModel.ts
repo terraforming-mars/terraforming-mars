@@ -38,4 +38,5 @@ export type GameOptionsModel = {
   turmoilExtension: boolean,
   venusNextExtension: boolean,
   undoOption: boolean,
+  twoCorpsVariant: boolean,
 }

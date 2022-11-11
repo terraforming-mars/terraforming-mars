@@ -339,8 +339,11 @@
                             <div class="create-game-subsection-label" v-i18n>Multiplayer Variants</div>
 
                             <template v-if="prelude">
-                              <input title="Always gain the Merger Prelude card (will be given post-draft)" type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
-                              <label for="twoCorps-checkbox">
+                              <input type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
+                              <!-- We really need a warning here if there arent enough corps for everyone in the game.
+                                  eg: pCount * (startingCorporations+4) > 'Number of Corps in all activated Expansions' - 'Excluded Corps'
+                              -->
+                              <label for="twoCorps-checkbox" title="Always gain the Merger Prelude card (will be given post-draft)">
                                     <div class="create-game-expansion-icon expansion-icon-prelude"></div>
                                     <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" target="_blank">&#9432;</a>
                               </label>
@@ -538,7 +541,6 @@ export interface CreateGameModel {
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
     twoCorpsVariant: boolean;
-
 }
 
 type Refs = {

@@ -907,7 +907,7 @@ export class Player {
       'Select two cards to keep and pass the rest to ${0}';
     
     if (this.game.gameOptions.twoCorpsVariant) {
-      tmpmsg += tmpmsg.concat(' (an additional Merger Prelude will be drawn at the end of all drafting)')
+      tmpmsg = tmpmsg.concat(' (an additional Merger Prelude will be drawn at the end of all drafting)')
     }
 
     const message = tmpmsg

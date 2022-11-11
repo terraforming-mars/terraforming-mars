@@ -7,7 +7,7 @@ import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
-import {CardName} from '../CardName';
+import {CardName} from '../../common/cards/CardName';
 
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
@@ -42,7 +42,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         // player.dealtPreludeCards.push(player.game.dealer.dealPreludeCard());
         player.dealtPreludeCards.push(player.game.preludeDeck.draw(player.game));
       }
-    
+    }
 
     if (player.game.gameOptions.preludeExtension) {
       this.options.push(

@@ -339,7 +339,7 @@
                             <div class="create-game-subsection-label" v-i18n>Variants</div>
 
                             <template v-if="prelude">
-                              <input type="checkbox" v-model="includeFanMA" id="twoCorps-checkbox">
+                              <input type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
                               <label for="twoCorps-checkbox">
                                     <div class="create-game-expansion-icon expansion-icon-prelude"></div>
                                     <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" target="_blank">&#9432;</a>

@@ -627,7 +627,7 @@ export class Game implements Logger {
     // As each player who doesn't have Merger is dealt Merger in SelectInitialCards.ts,
     // remove it from the deck to avoid possible conflicts (e.g. Valley Trust / New Partner)
     if (this.gameOptions.twoCorpsVariant) {
-      this.preludeDeck = this.preludeDeck.filter((c) => c.name !== CardName.MERGER);
+      this.preludeDeck.drawPile = this.preludeDeck.drawPile.filter((c) => c.name !== CardName.MERGER);
     }
 
     this.save();

@@ -55,8 +55,8 @@
       </template>
 
       <span class="colony-background-color">
-        <template v-if="colony.name !== ColonyName.TITANIA" v-i18n>Colony Bonus</template>
-        <template v-else v-i18n>Colony Fee</template>
+        <template v-if="colony.name !== ColonyName.TITANIA"><span v-i18n>Bonus</span></template>
+        <template v-else><span v-i18n>Colony Fee</span></template>
       </span>
 
       <br>

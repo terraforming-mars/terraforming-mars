@@ -38,13 +38,13 @@
       <div v-if="colony.name === ColonyName.VENUS" class="resource wild" style="margin:15px 10px 10px 20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
 
       <div v-if="colony.name === ColonyName.PALLAS" style="display:inline-block">
-        <div class="resource money">1</div> / party <div class="delegate"></div>
+        <div class="resource money">1</div> <span v-i18n>/ party</span> <div class="delegate"></div>
       </div>
 
       <template v-if="colony.name === ColonyName.LEAVITT">
-        <span style="display: inline-block;margin-left: 10px;font-size: 14px;">REVEAL TOP CARD OF DECK.</span>
+        <span style="display: inline-block;margin-left: 10px;font-size: 14px;" v-i18n>REVEAL TOP CARD OF DECK.</span>
         <span><br></span>
-        <span style="font-size: 14px; margin-left: 10px;">BUY OR DISCARD IT.</span>
+        <span style="font-size: 14px; margin-left: 10px;" v-i18n>BUY OR DISCARD IT.</span>
       </template>
 
       <template v-if="colony.name === ColonyName.PLUTO">
@@ -55,12 +55,8 @@
       </template>
 
       <span class="colony-background-color">
-        <template v-if="colony.name !== ColonyName.TITANIA">
-          Colony Bonus
-        </template>
-        <template v-else>
-          Colony Fee
-        </template>
+        <template v-if="colony.name !== ColonyName.TITANIA"><span v-i18n>Bonus</span></template>
+        <template v-else><span v-i18n>Colony Fee</span></template>
       </span>
 
       <br>
@@ -86,30 +82,22 @@
       <div v-if="colony.name === ColonyName.VENUS" class="white-x" style="margin-left:45px; margin-bottom:4px;"></div>
       <div v-if="colony.name === ColonyName.VENUS" class="resource wild" style="margin:10px 10px 10px -20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
       <div v-if="colony.name === ColonyName.LEAVITT" class="resource card" style="margin-left:5px;transform: scale(0.8)"></div>
-      <span v-if="colony.name !== ColonyName.EUROPA && colony.name !== ColonyName.PLUTO && colony.name !== ColonyName.MERCURY && colony.name !== ColonyName.IAPETUS && colony.name !== ColonyName.HYGIEA && colony.name !== ColonyName.TITANIA && colony.name !== ColonyName.LEAVITT && colony.name !== ColonyName.PALLAS" class="colony-background-color">
-        Trade Income
-      </span>
-      <span v-if="colony.name === ColonyName.PLUTO" class="colony-background-color" style="position:relative; top:-3px">
-        Trade Income
-      </span>
-      <span v-if="colony.name === ColonyName.EUROPA" class="colony-background-color" style="margin-left: 3px;position: relative;top: -12px;">
-        Trade Income: Gain the indicated production
-      </span>
-      <span v-if="colony.name === ColonyName.IAPETUS" class="colony-background-color" style="position:relative;top:-8px;left:30px">
-        Trade Income
-      </span>
-      <span v-if="colony.name === ColonyName.TITANIA || colony.name === ColonyName.PALLAS" class="colony-background-color" style="position:relative;top:-14px;left:12px">
-        Trade Income
-      </span>
-      <span v-if="colony.name === ColonyName.MERCURY" class="colony-background-color" style="margin-left: 3px;">
-        Trade Income
-      </span>
-      <span v-if="colony.name === ColonyName.HYGIEA" class="colony-background-color" style="margin-left: 3px;">
-        Trade Income: Steal 3 indicated resources
-      </span>
-      <span v-if="colony.name === ColonyName.LEAVITT" class="colony-background-color" style="margin-left: 3px;">
-        Trade Income: Draw X cards and keep 1
-      </span>
+      <span v-if="colony.name !== ColonyName.EUROPA && colony.name !== ColonyName.PLUTO && colony.name !== ColonyName.MERCURY && colony.name !== ColonyName.IAPETUS && colony.name !== ColonyName.HYGIEA && colony.name !== ColonyName.TITANIA && colony.name !== ColonyName.LEAVITT && colony.name !== ColonyName.PALLAS" class="colony-background-color"
+      v-i18n>Trade Income</span>
+      <span v-if="colony.name === ColonyName.PLUTO" class="colony-background-color" style="position:relative; top:-3px"
+      v-i18n>Trade Income</span>
+      <span v-if="colony.name === ColonyName.EUROPA" class="colony-background-color" style="margin-left: 3px;position: relative;top: -12px;"
+      v-i18n>Trade Income: Gain the indicated production</span>
+      <span v-if="colony.name === ColonyName.IAPETUS" class="colony-background-color" style="position:relative;top:-8px;left:30px"
+      v-i18n>Trade Income</span>
+      <span v-if="colony.name === ColonyName.TITANIA || colony.name === ColonyName.PALLAS" class="colony-background-color" style="position:relative;top:-14px;left:12px"
+      v-i18n>Trade Income</span>
+      <span v-if="colony.name === ColonyName.MERCURY" class="colony-background-color" style="margin-left: 3px;"
+      v-i18n>Trade Income</span>
+      <span v-if="colony.name === ColonyName.HYGIEA" class="colony-background-color" style="margin-left: 3px;"
+      v-i18n>Trade Income: Steal 3 indicated resources</span>
+      <span v-if="colony.name === ColonyName.LEAVITT" class="colony-background-color" style="margin-left: 3px;"
+      v-i18n>Trade Income: Draw X cards and keep 1</span>
 
     <colony-row :metadata="metadata"></colony-row>
     <colony-trade-row :metadata="metadata"></colony-trade-row>

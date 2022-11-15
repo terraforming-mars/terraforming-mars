@@ -79,11 +79,11 @@
     "Requires 2 science tags.": "Musisz posiadać co najmniej 2 symbole Nauki.",
 
     "Hydrogen to Venus": "Wodór dla Wenus",
-    "Raise Venus 1 step. Add 1 floater to A Venus CARD for each Jovian tag you have.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść po 1 jednostce dryfowców na dowolnej karcie z symbolem Wenus za każdy posiadany symbol Jowisza.",
+    "Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść po 1 jednostce dryfowców na dowolnej karcie z symbolem Wenus za każdy posiadany symbol Jowisza.",
 
     "Water to Venus": "Woda dla Wenus",
     "Raise Venus 1 step.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
-	
+
     "GHG Import From Venus": "Import Gazów Cieplarnianych z Wenus",
     "Raise Venus 1 step. Increase your heat production 3 steps.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Podnieś swoją produkcję ciepła o 3 poziomy.",
 
@@ -129,7 +129,7 @@
 
     "Gyropolis": " Żyropolis",
     "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.": "Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Ziemi i Wenus.",
-	
+
     "Io Sulphur Research": "Badania nad Siarką na IO",
     "Draw 1 card, or draw 3 if you have at least 3 Venus tags.": "Dobierz 1 kartę (lub 3 karty, jeśli posiadasz co najmniej 3 symbole Wenus).",
 
@@ -146,7 +146,7 @@
     "Maxwell Base": "Baza Maxwella",
     "Action: Add 1 resource to ANOTHER VENUS CARD.": "Akcja: Umieść 1 wybraną jednostkę na innej karcie z symbolem Wenus.",
     "Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 12%. Obniż swoją produkcję energii o 1 poziom. Umieść obszar miasta na zarezerwowanym polu.",
-	
+
     "Sister Planet Support": "Wsparcie Siostrzanej Planety",
     "Venus Earth": "Wenus Ziemia",
     "Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Musisz posiadać co najmniej po 1 symbolu Wenus i Ziemi. Podnieś swoją produkcję M€ o 3 poziomy.",

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/server/awards/Awards';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../src/server/awards/Awards';
 import {IAward} from '../src/server/awards/IAward';
 import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../src/server/MilestoneAwardSelector';
 import {IMilestone} from '../src/server/milestones/IMilestone';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/server/milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../src/server/milestones/Milestones';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {testGameOptions} from './TestingUtils';
 import {intersection} from '../src/common/utils/utils';
@@ -103,9 +103,38 @@ describe('MilestoneAwardSelector', () => {
       testGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true}));
   });
 
+  it('Do not select fan milestones or awards when that feature is disabled', () => {
+    const avoidedAwards = [
+      ...ARES_AWARDS,
+      ...MOON_AWARDS,
+      ...AMAZONIS_PLANITIA_AWARDS,
+      ...ARABIA_TERRA_AWARDS,
+      ...TERRA_CIMMERIA_AWARDS,
+      ...VASTITAS_BOREALIS_AWARDS].map((a) => a.name);
+    const avoidedMilestones = [
+      ...ARES_MILESTONES,
+      ...MOON_MILESTONES,
+      ...AMAZONIS_PLANITIA_MILESTONES,
+      ...ARABIA_TERRA_MILESTONES,
+      ...TERRA_CIMMERIA_MILESTONES,
+      ...VASTITAS_BOREALIS_MILESTONES].map((a) => a.name);
+    for (let idx = 0; idx < 10000; idx++) {
+      const mas = chooseMilestonesAndAwards(
+        testGameOptions({
+          randomMA: RandomMAOptionType.UNLIMITED,
+          includeFanMA: false,
+        }));
+
+      expect(intersection(mas.awards.map((award) => award.name), avoidedAwards)).is.empty;
+      expect(intersection(mas.milestones.map((milestone) => milestone.name), avoidedMilestones)).is.empty;
+    }
+  });
+
   it('Do not select expansion milestones or awards when they are not selected', () => {
-    const avoidedAwards = [...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS, ...ARABIA_TERRA_AWARDS].map((a) => a.name);
-    const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES, ...ARABIA_TERRA_MILESTONES].map((m) => m.name);
+    const avoidedAwards = toNames([...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS]);
+    const avoidedMilestones = toNames([...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES]);
+    avoidedMilestones.push('Pioneer', 'Martian', 'Colonizer');
+    avoidedAwards.push('Politician');
     for (let idx = 0; idx < 10000; idx++) {
       const mas = chooseMilestonesAndAwards(
         testGameOptions({
@@ -113,10 +142,13 @@ describe('MilestoneAwardSelector', () => {
           venusNextExtension: false,
           aresExtension: false,
           moonExpansion: false,
+          coloniesExtension: false,
+          turmoilExtension: false,
+          includeFanMA: true,
         }));
 
-      expect(intersection(mas.awards.map((award) => award.name), avoidedAwards)).is.empty;
-      expect(intersection(mas.milestones.map((milestone) => milestone.name), avoidedMilestones)).is.empty;
+      expect(intersection(toNames(mas.awards), avoidedAwards)).is.empty;
+      expect(intersection(toNames(mas.milestones), avoidedMilestones)).is.empty;
     }
   });
 });

@@ -1,8 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
-import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -19,6 +17,7 @@ export class HydrogenToVenus extends Card implements IProjectCard {
 
       behavior: {
         global: {venus: 1},
+        addResourcesToAnyCard: {count: {tag: Tag.JOVIAN}, type: CardResource.FLOATER, tag: Tag.VENUS},
       },
 
       metadata: {
@@ -30,27 +29,5 @@ export class HydrogenToVenus extends Card implements IProjectCard {
         description: 'Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.',
       },
     });
-  }
-
-  public override bespokePlay(player: Player) {
-    const jovianTags = player.tags.count(Tag.JOVIAN);
-    const floatersCards = player.getResourceCards(CardResource.FLOATER).filter((card) => card.tags.includes(Tag.VENUS));
-    if (jovianTags > 0) {
-      if (floatersCards.length === 1) {
-        player.addResourceTo(floatersCards[0], {qty: jovianTags, log: true});
-      }
-      if (floatersCards.length > 1) {
-        return new SelectCard(
-          'Select card to add ' + jovianTags + ' floater(s)',
-          'Add floater(s)',
-          floatersCards,
-          ([card]) => {
-            player.addResourceTo(card, {qty: jovianTags, log: true});
-            return undefined;
-          },
-        );
-      }
-    }
-    return undefined;
   }
 }

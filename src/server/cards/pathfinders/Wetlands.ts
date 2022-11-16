@@ -50,7 +50,7 @@ export class Wetlands extends Card implements IProjectCard {
     const spacesNextToRedCity = redCity ?
       board.getAdjacentSpaces(redCity) :
       [];
-    return board.getNonReservedLandSpaces()
+    return board.getAvailableSpacesOnLand(player)
       .filter((space) => adjacentOceans(space) >= 2)
       .filter((space) => !spacesNextToRedCity.includes(space));
   }

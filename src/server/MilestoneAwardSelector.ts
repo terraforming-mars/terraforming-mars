@@ -54,6 +54,8 @@ import {UnseededRandom} from './Random';
 import {MilestoneName} from '../common/ma/MilestoneName';
 import {AwardName} from '../common/ma/AwardName';
 import {inplaceRemove} from '../common/utils/utils';
+import {Colonizer} from './milestones/amazonisPlanitia/Colonizer';
+import {Pioneer} from './milestones/Pioneer';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<IMilestone>,
@@ -237,7 +239,9 @@ class Synergies {
       bind(Naturalist, Cultivator, 3);
       bind(Naturalist, Edgedancer, 1);
 
+      // Start of fan synergies:
       bind(Voyager, RimSettler, 9);
+      bind(Pioneer, Colonizer, 9);
 
       return synergies;
   }
@@ -369,8 +373,6 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     return e.name;
   }
 
-  // map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
-
   const candidateMilestones: Array<MilestoneName> = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
   const candidateAwards: Array<AwardName> = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
@@ -400,14 +402,14 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
       ...TERRA_CIMMERIA_AWARDS.map(toName),
       ...VASTITAS_BOREALIS_AWARDS.map(toName));
 
-    if (!gameOptions.pathfindersExpansion) {
+    if (gameOptions.pathfindersExpansion !== true) {
       inplaceRemove(candidateMilestones, 'Martian');
     }
-    if (!gameOptions.coloniesExtension) {
+    if (gameOptions.coloniesExtension !== true) {
       inplaceRemove(candidateMilestones, 'Colonizer');
-      inplaceRemove(candidateAwards, 'Pioneer');
+      inplaceRemove(candidateMilestones, 'Pioneer');
     }
-    if (!gameOptions.turmoilExtension) {
+    if (gameOptions.turmoilExtension !== true) {
       inplaceRemove(candidateAwards, 'Politician');
     }
   }

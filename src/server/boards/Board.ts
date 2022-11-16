@@ -235,7 +235,9 @@ export abstract class Board {
     return spaces;
   }
 
-  // What's the difference between this and getAvailableSpacesOnLand?
+  /**
+   * Almost the same as getAvailableSpacesOnLand, but doesn't apply to any player.
+   */
   public getNonReservedLandSpaces(): Array<ISpace> {
     return this.spaces.filter((space) => {
       return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&

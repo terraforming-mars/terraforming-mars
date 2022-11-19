@@ -6,6 +6,7 @@ import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';
 import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {InputResponse} from '@/common/inputs/InputResponse';
+import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 
 describe('AndOptions', function() {
   it('saves the options', async function() {
@@ -32,11 +33,14 @@ describe('AndOptions', function() {
         showsave: true,
         showtitle: true,
       },
+      components: {
+        'player-input-factory': PlayerInputFactory,
+      },
     });
     const buttons = component.findAllComponents({name: 'Button'});
     await buttons.at(0).findAllComponents({
       name: 'button',
     }).at(0).trigger('click');
-    expect(savedData).to.deep.eq([['1'], ['1']]);
+    expect(savedData).to.deep.eq({type: 'and', responses: [{type: 'option'}, {type: 'option'}]});
   });
 });

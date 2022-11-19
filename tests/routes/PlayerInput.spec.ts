@@ -9,6 +9,8 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {UndoActionOption} from '../../src/server/inputs/UndoActionOption';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {cast} from '../TestingUtils';
+import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
+import {CardName} from '../../src/common/cards/CardName';
 
 describe('PlayerInput', function() {
   let scaffolding: RouteTestScaffolding;
@@ -37,14 +39,15 @@ describe('PlayerInput', function() {
 
     await scaffolding.ctx.gameLoader.add(game);
 
-    player.process([['1'], ['Power Plant:SP']]);
+    player.process({type: 'or', index: 1, response: {type: 'card', cards: [CardName.POWER_PLANT_STANDARD_PROJECT]}});
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.resolve(undo);
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
-      req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
+      const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
+      req.emit('data', JSON.stringify(orOptionsResponse));
       req.emit('end');
     });
     await Promise.all(([emit, post]));
@@ -64,14 +67,15 @@ describe('PlayerInput', function() {
 
     await scaffolding.ctx.gameLoader.add(game);
 
-    player.process([['1'], ['Power Plant:SP']]);
+    player.process(<OrOptionsResponse>{type: 'or', index: 1, response: {type: 'card', cards: [CardName.POWER_PLANT_STANDARD_PROJECT]}});
     const options = cast(player.getWaitingFor(), OrOptions);
     options.options.push(new UndoActionOption());
     scaffolding.ctx.gameLoader.restoreGameAt = (_gameId: string, _lastSaveId: number) => Promise.reject(new Error('error'));
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
     const emit = Promise.resolve().then(() => {
-      scaffolding.req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
+      const orOptionsResponse: OrOptionsResponse = {type: 'or', index: options.options.length - 1, response: {type: 'option'}};
+      scaffolding.req.emit('data', JSON.stringify(orOptionsResponse));
       scaffolding.req.emit('end');
     });
     await Promise.all(([emit, post]));

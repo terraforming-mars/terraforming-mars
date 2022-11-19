@@ -15,7 +15,12 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectAmountResponse} from '@/common/inputs/InputResponse';
+
+interface DataModel {
+  // Why is amount type string?
+  amount: string;
+}
 
 export default Vue.extend({
   name: 'SelectAmount',
@@ -27,7 +32,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectAmountResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -36,14 +41,14 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data() {
+  data(): DataModel {
     return {
       amount: this.playerinput.maxByDefault ? String(this.playerinput.max) : String(this.playerinput.min),
     };
   },
   methods: {
     saveData() {
-      this.onsave([[String(parseInt(this.amount))]]);
+      this.onsave({type: 'amount', amount: parseInt(this.amount)});
     },
     setMaxValue() {
       this.amount = String(this.playerinput.max);

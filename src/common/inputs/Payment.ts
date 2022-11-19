@@ -30,19 +30,6 @@ export function isPayment(obj: unknown): obj is Payment {
     h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
 }
 
-export function jsonToPayment(json: string): Payment {
-  try {
-    const payment: unknown = JSON.parse(json);
-    if (!isPayment(payment)) {
-      console.error('Not type Payment: ' + json);
-      throw new Error('input is not Payment');
-    }
-    return payment;
-  } catch (err) {
-    throw new Error('Unable to parse input as Payment ' + err);
-  }
-}
-
 export namespace Payment {
   export const EMPTY: Readonly<Payment> = {
     heat: 0, megaCredits: 0, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, seeds: 0, data: 0,

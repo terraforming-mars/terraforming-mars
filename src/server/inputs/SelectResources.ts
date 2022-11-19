@@ -2,10 +2,11 @@ import {Player} from '../Player';
 import {AndOptions} from './AndOptions';
 import {SelectAmount} from './SelectAmount';
 import {Units} from '../../common/Units';
+import {sum} from '../../common/utils/utils';
 
 export class SelectResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {
-    const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
+    const selectMegacredits = new SelectAmount('Megacredits', 'Select', (amount: number) => {
       units.megacredits = amount;
       return undefined;
     }, 0, count);
@@ -29,27 +30,23 @@ export class SelectResources extends AndOptions {
       units.heat = amount;
       return undefined;
     }, 0, count);
-    return [selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat];
+    return [selectMegacredits, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat];
   }
   constructor(
     public player: Player,
     public count: number,
     public override title: string,
+    // this isn't actually used as a paramteter, but  this class
+    // is kind of strangely structered. If you can refactor this,
+    // please do.
     private units = Units.of({})) {
     super(
       () => {
-        const array = [
-          units.megacredits,
-          units.steel,
-          units.titanium,
-          units.plants,
-          units.energy,
-          units.heat];
-        if (array.find((count) => count < 0)) {
-          throw new Error('No resource amount may be negative.');
+        const array = Object.values(units);
+        if (array.some((count) => count < 0)) {
+          throw new Error('All units must be positive');
         }
-        const sum = array.reduce((a, b) => a + b, 0);
-        if (sum !== this.count) {
+        if (sum(array) !== this.count) {
           throw new Error(`Select ${this.count} resources.`);
         }
 

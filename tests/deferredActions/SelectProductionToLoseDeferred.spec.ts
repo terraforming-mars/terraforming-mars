@@ -6,7 +6,7 @@ import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/server/Game';
 import {newTestGame, getTestPlayer} from '../TestGame';
 
-describe('SelectProductionToLose', function() {
+describe('SelectProductionToLoseDeferred', function() {
   let game: Game;
   let player: TestPlayer;
 
@@ -48,8 +48,7 @@ describe('SelectProductionToLose', function() {
     const deferred = new SelectProductionToLoseDeferred(player, count);
     const sptl = deferred.execute();
 
-    const input = JSON.stringify(Units.of(units));
-    player.runInput([[input]], sptl);
+    player.runInput({type: 'productionToLose', units: Units.of(units)}, sptl);
   }
 });
 

@@ -425,28 +425,28 @@ describe('Game', () => {
 
     // Skipping plants placement. Option 1 is "Don't place plants".
     // This weird input is what would come from the server, and indicates "Don't place plants".
-    player3.process([['1'], []]);
+    player3.process({type: 'or', index: 1, response: {type: 'option'}});
 
     expect(player1.getWaitingFor()).is.undefined;
     expect(player2.getWaitingFor()).is.undefined;
     expect(player3.getWaitingFor()).is.undefined;
     expect(player4.getWaitingFor()).is.not.undefined;
 
-    player4.process([['1'], []]);
+    player4.process({type: 'or', index: 1, response: {type: 'option'}});
 
     expect(player1.getWaitingFor()).is.not.undefined;
     expect(player2.getWaitingFor()).is.undefined;
     expect(player3.getWaitingFor()).is.undefined;
     expect(player4.getWaitingFor()).is.undefined;
 
-    player1.process([['1'], []]);
+    player1.process({type: 'or', index: 1, response: {type: 'option'}});
 
     expect(player1.getWaitingFor()).is.undefined;
     expect(player2.getWaitingFor()).is.not.undefined;
     expect(player3.getWaitingFor()).is.undefined;
     expect(player4.getWaitingFor()).is.undefined;
 
-    player2.process([['1'], []]);
+    player2.process({type: 'or', index: 1, response: {type: 'option'}});
 
     expect(player1.getWaitingFor()).is.undefined;
     expect(player2.getWaitingFor()).is.undefined;
@@ -482,7 +482,7 @@ describe('Game', () => {
 
     // Skipping plants placement. Option 1 is "Don't place plants".
     // This weird input is what would come from the server, and indicates "Don't place plants".
-    player4.process([['1'], []]);
+    player4.process({type: 'or', index: 1, response: {type: 'option'}});
 
     // After that, player 1 has plants.
     expect(player1.getWaitingFor()).is.not.undefined;
@@ -490,7 +490,7 @@ describe('Game', () => {
     expect(player3.getWaitingFor()).is.undefined;
     expect(player4.getWaitingFor()).is.undefined;
 
-    player1.process([['1'], []]);
+    player1.process({type: 'or', index: 1, response: {type: 'option'}});
 
     // But player 2 doesn't, and so the game is over.
     expect(game.phase).eq(Phase.END);

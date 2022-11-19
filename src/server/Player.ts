@@ -743,15 +743,6 @@ export class Player {
     this.defer(result, Priority.DEFAULT);
   }
 
-  public checkInputLength(input: InputResponse, length: number, firstOptionLength?: number) {
-    if (input.length !== length) {
-      throw new Error('Incorrect options provided');
-    }
-    if (firstOptionLength !== undefined && input[0].length !== firstOptionLength) {
-      throw new Error('Incorrect options provided (nested)');
-    }
-  }
-
   public runInput(input: InputResponse, pi: PlayerInput): void {
     this.deferInputCb(pi.process(input, this));
   }

@@ -16,6 +16,7 @@ import AdminHome from '@/client/components/admin/AdminHome.vue';
 import {$t} from '@/client/directives/i18n';
 
 import * as constants from '@/common/constants';
+import * as paths from '@/common/app/paths';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
@@ -218,19 +219,19 @@ export const mainAppSettings = {
       };
       xhr.responseType = 'json';
       xhr.send();
-    } else if (currentPathname === '/games-overview') {
+    } else if (currentPathname === paths.GAMES_OVERVIEW) {
       app.screen = 'games-overview';
-    } else if (currentPathname === '/new-game') {
+    } else if (currentPathname === paths.NEW_GAME) {
       app.screen = 'create-game-form';
-    } else if (currentPathname === '/load') {
+    } else if (currentPathname === paths.LOAD) {
       app.screen = 'load';
-    } else if (currentPathname === '/cards') {
+    } else if (currentPathname === paths.CARDS) {
       app.screen = 'cards';
-    } else if (currentPathname === '/help') {
+    } else if (currentPathname === paths.HELP) {
       app.screen = 'help';
-    } else if (currentPathname === '/spectator') {
+    } else if (currentPathname === paths.SPECTATOR) {
       app.updateSpectator();
-    } else if (currentPathname === '/admin') {
+    } else if (currentPathname === paths.ADMIN) {
       app.screen = 'admin';
     } else {
       app.screen = 'start-screen';

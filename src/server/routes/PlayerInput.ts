@@ -75,12 +75,7 @@ export class PlayerInput extends Handler {
     ctx.route.writeJson(res, Server.getPlayerModel(player));
   }
 
-  private processInput(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
-    ctx: Context,
-    player: Player,
-  ): Promise<void> {
+  private processInput(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: Player): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {

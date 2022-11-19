@@ -38,6 +38,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
+import * as paths from '@/common/app/paths';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
@@ -289,7 +290,8 @@ export default Vue.extend({
 
       const xhr = new XMLHttpRequest();
       logRequest = xhr;
-      xhr.open('GET', `/api/game/logs?id=${this.id}&generation=${generation}`);
+
+      xhr.open('GET', `${paths.API_GAME_LOGS}?id=${this.id}&generation=${generation}`);
       xhr.onerror = () => {
         console.error('error updating messages, unable to reach server');
       };

@@ -219,9 +219,11 @@ export class Game implements Logger {
       game.aresData = AresSetup.initialData(gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = chooseMilestonesAndAwards(gameOptions);
-    game.milestones = milestonesAwards.milestones;
-    game.awards = milestonesAwards.awards;
+    if (players.length > 1) {
+      const milestonesAwards = chooseMilestonesAndAwards(gameOptions);
+      game.milestones = milestonesAwards.milestones;
+      game.awards = milestonesAwards.awards;
+    }
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {

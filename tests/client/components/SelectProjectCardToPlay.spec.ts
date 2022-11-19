@@ -589,7 +589,7 @@ describe('SelectProjectCardToPlay', () => {
     cardCost: number,
     playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<PlayerInputModel>,
-    reserveUnits: Units = Units.EMPTY) {
+    reserveUnits: Partial<Units> = {}) {
     const thisPlayer: Partial<PublicPlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       steel: 0,

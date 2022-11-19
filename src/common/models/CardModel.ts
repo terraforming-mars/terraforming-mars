@@ -15,7 +15,7 @@ export interface CardModel {
     cardType: CardType;
     isDisabled: boolean; // Used with Pharmacy Union
     warning?: string | Message;
-    reserveUnits: Readonly<Units>; // Written for The Moon, but useful in other contexts.
+    reserveUnits: Readonly<Partial<Units>>; // Written for The Moon, but useful in other contexts.
     bonusResource?: Array<Resources>; // Used with the Mining cards and Robotic Workforce
     cloneTag?: Tag; // Used with Pathfinders
     startingMegacredits?: number;

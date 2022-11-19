@@ -26,10 +26,7 @@ import {TileType} from '../../common/TileType';
 import {Phase} from '../../common/Phase';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
-import {
-  ClaimedMilestoneModel,
-  MilestoneScore,
-} from '../../common/models/ClaimedMilestoneModel';
+import {ClaimedMilestoneModel, MilestoneScore} from '../../common/models/ClaimedMilestoneModel';
 import {FundedAwardModel, AwardScore} from '../../common/models/FundedAwardModel';
 import {getTurmoilModel} from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
@@ -142,7 +139,7 @@ export class Server {
         calculatedCost: player.getCardCost(targetCard.card),
         cardType: CardType.ACTIVE,
         isDisabled: false,
-        reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
+        reserveUnits: {},
         isSelfReplicatingRobotsCard: true,
       };
       return model;
@@ -357,7 +354,7 @@ export class Server {
     options: {
       showResources?: boolean,
       showCalculatedCost?: boolean,
-      reserveUnits?: Array<Units>,
+      reserveUnits?: Array<Partial<Units>>,
       enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
     } = {},
   ): Array<CardModel> {
@@ -381,7 +378,7 @@ export class Server {
         cardType: card.cardType,
         isDisabled: isDisabled,
         warning: card.warning,
-        reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
+        reserveUnits: Units.partial(options.reserveUnits ? options.reserveUnits[index] : {}),
         bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
         discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,

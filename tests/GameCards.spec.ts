@@ -65,5 +65,26 @@ describe('GameCards', function() {
       expect(preludeDeck.includes(preludeCard)).is.not.true;
     });
   });
+
+  it('excludes the Merger prelude if twoCorpVariant is being used ', function() {
+    const gameOptions = testGameOptions({
+      corporateEra: true,
+      preludeExtension: false,
+      venusNextExtension: false,
+      coloniesExtension: false,
+      turmoilExtension: false,
+      promoCardsOption: false,
+      communityCardsOption: true,
+      aresExtension: false,
+    });
+
+    const preludeDeck = new GameCards(gameOptions).getPreludeCards();
+
+    const communityPreludes = CardManifest.keys(COMMUNITY_CARD_MANIFEST.preludeCards);
+    communityPreludes.forEach((preludeName) => {
+      const preludeCard = new CardFinder().getPreludeByName(preludeName)!;
+      expect(preludeDeck.includes(preludeCard)).is.not.true;
+    });
+  });
 });
 

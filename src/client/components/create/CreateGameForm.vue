@@ -999,7 +999,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check custom corp. count
       if (customCorporations.length > 0) {
-        if (!this.twoCorpsVariant)
+        if (!this.twoCorpsVariant) {
           let neededCorpsCount = players.length * startingCorporations;
           if (this.prelude && this.promoCardsOption) neededCorpsCount += 4;
         } else {

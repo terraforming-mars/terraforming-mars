@@ -106,7 +106,7 @@ export class GameCards {
     if (preludes.length === 0) {
       preludes = this.instantiate(PRELUDE_CARD_MANIFEST.preludeCards);
     }
-    preludes = this.addCustomCards(preludes, this.gameOptions.customPreludes);\
+    preludes = this.addCustomCards(preludes, this.gameOptions.customPreludes);
 
     if (this.gameOptions.twoCorpsVariant) {
       // As each player who doesn't have Merger is dealt Merger in SelectInitialCards.ts,

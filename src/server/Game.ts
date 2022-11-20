@@ -623,7 +623,7 @@ export class Game implements Logger {
 
   private gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
-    
+
     // As each player who doesn't have Merger is dealt Merger in SelectInitialCards.ts,
     // remove it from the deck to avoid possible conflicts (e.g. Valley Trust / New Partner)
     if (this.gameOptions.twoCorpsVariant) {

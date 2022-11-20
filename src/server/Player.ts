@@ -905,12 +905,12 @@ export class Player {
     let tmpmsg = cardsToKeep === 1 ?
       'Select a card to keep and pass the rest to ${0}' :
       'Select two cards to keep and pass the rest to ${0}';
-    
+
     if (this.game.gameOptions.twoCorpsVariant) {
-      tmpmsg = tmpmsg.concat(' (an additional Merger Prelude will be drawn at the end of all drafting)')
+      tmpmsg = tmpmsg.concat(' (an additional Merger Prelude will be drawn at the end of all drafting)');
     }
 
-    const message = tmpmsg
+    const message = tmpmsg;
 
     this.setWaitingFor(
       new SelectCard({

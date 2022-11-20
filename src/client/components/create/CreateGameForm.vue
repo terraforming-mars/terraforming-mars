@@ -208,6 +208,14 @@
                               <span v-i18n>min</span>
                             </label>
 
+                            <template v-if="prelude">
+                              <input type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
+                              <label for="twoCorps-checkbox" title="Always gain the Merger Prelude card (will be given post-draft)">
+                                    <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                                    <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" target="_blank">&#9432;</a>
+                              </label>
+                            </template>
+
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
                             <label for="shuffleMap-checkbox">
                                     <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
@@ -332,14 +340,6 @@
                             <label for="fastMode-checkbox">
                                 <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-
-                            <template v-if="prelude">
-                              <input type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
-                              <label for="twoCorps-checkbox" title="Always gain the Merger Prelude card (will be given post-draft)">
-                                    <div class="create-game-expansion-icon expansion-icon-prelude"></div>
-                                    <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" target="_blank">&#9432;</a>
-                              </label>
-                            </template>
                         </div>
 
                         <div class="create-game-players-cont">

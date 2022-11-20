@@ -999,15 +999,16 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check custom corp. count
       if (customCorporations.length > 0) {
+        let neededCorpsCount = 0
         if (!this.twoCorpsVariant) {
-          let neededCorpsCount = players.length * startingCorporations;
+          neededCorpsCount = players.length * startingCorporations;
           if (this.prelude && this.promoCardsOption) neededCorpsCount += 4;
         } else {
           // Add an additional 4 for the Merger prelude
           // Everyone-Merger needs an additional 4 corps per player
           //  NB: This will not cover the case when no custom corp list is set!
           //  It _can_ come about if  the number of corps included in all expansions is still not enough.
-          let neededCorpsCount = (players.length * startingCorporations) + (players.length * 4);
+          neededCorpsCount = (players.length * startingCorporations) + (players.length * 4);
         }
 
         if (customCorporations.length < neededCorpsCount) {

@@ -1012,7 +1012,7 @@ export default (Vue as WithRefs<Refs>).extend({
         }
 
         if (customCorporations.length < neededCorpsCount) {
-          window.alert(translateTextWithParams('Must select more corporations (${0}/${0})', [customCorporations.length, neededCorpsCount.toString()]));
+          window.alert(translateTextWithParams('Must select more corporations (${0}/${0})', [customCorporations.length.toString(), neededCorpsCount.toString()]));
           return;
         }
       }

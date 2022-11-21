@@ -208,6 +208,14 @@
                               <span v-i18n>min</span>
                             </label>
 
+                            <template v-if="prelude">
+                              <input type="checkbox" v-model="twoCorpsVariant" id="twoCorps-checkbox">
+                              <label for="twoCorps-checkbox" title="Always gain the Merger Prelude card (will be given post-draft)">
+                                    <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                                    <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" target="_blank">&#9432;</a>
+                              </label>
+                            </template>
+
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
                             <label for="shuffleMap-checkbox">
                                     <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
@@ -523,6 +531,7 @@ export interface CreateGameModel {
     escapeVelocityThreshold: number;
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
+    twoCorpsVariant: boolean;
 }
 
 type Refs = {
@@ -610,6 +619,7 @@ export default (Vue as WithRefs<Refs>).extend({
       escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
       escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
       escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
+      twoCorpsVariant: false,
     };
   },
   components: {
@@ -959,6 +969,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const escapeVelocityThreshold = component.escapeVelocityMode ? component.escapeVelocityThreshold : undefined;
       const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
       const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
+      const twoCorpsVariant = component.twoCorpsVariant;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -985,7 +996,18 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check custom corp count
       if (component.showCorporationList && customCorporations.length > 0) {
-        const neededCorpsCount = players.length * startingCorporations;
+        let neededCorpsCount = 0;
+        if (this.twoCorpsVariant) {
+          // Add an additional 4 for the Merger prelude
+          // Everyone-Merger needs an additional 4 corps per player
+          //  NB: This will not cover the case when no custom corp list is set!
+          //  It _can_ come about if  the number of corps included in all expansions is still not enough.
+          neededCorpsCount = (players.length * startingCorporations) + (players.length * 4);
+        } else {
+          neededCorpsCount = players.length * startingCorporations;
+          // Merger Prelude alone needs 4 additional preludes
+          if (this.prelude && this.promoCardsOption) neededCorpsCount += 4;
+        }
         if (customCorporations.length < neededCorpsCount) {
           window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
           return;
@@ -1109,6 +1131,7 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityThreshold,
         escapeVelocityPeriod,
         escapeVelocityPenalty,
+        twoCorpsVariant,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

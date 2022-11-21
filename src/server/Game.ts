@@ -625,7 +625,9 @@ export class Game implements Logger {
 
   private gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
+
     this.save();
+
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
         player.setWaitingFor(this.pickCorporationCard(player));

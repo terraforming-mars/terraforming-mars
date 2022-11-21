@@ -84,6 +84,7 @@ describe('ApiGame', () => {
           'turmoilExtension': false,
           'undoOption': false,
           'venusNextExtension': false,
+          'twoCorpsVariant': false,
         },
       },
     );

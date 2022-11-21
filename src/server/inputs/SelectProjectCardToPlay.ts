@@ -1,11 +1,11 @@
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {jsonToPayment, Payment} from '../../common/inputs/Payment';
+import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, Player} from '../Player';
-import {InputResponse} from '../../common/inputs/InputResponse';
+import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 
 export class SelectProjectCardToPlay implements PlayerInput {
   public readonly inputType = PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY;
@@ -25,22 +25,25 @@ export class SelectProjectCardToPlay implements PlayerInput {
     });
   }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 2);
-    const cardName = input[0][0];
-    const cardData = PlayerInput.getCard(this.cards, cardName);
+  public process(input: InputResponse) {
+    if (!isSelectProjectCardToPlayResponse(input)) {
+      throw new Error('Not a valid SelectProjectCardToPlayResponse');
+    }
+    if (!isPayment(input.payment)) {
+      throw new Error('payment is not a valid type');
+    }
+    const cardData = PlayerInput.getCard(this.cards, input.card);
     const card: IProjectCard = cardData.card;
-    const payment: Payment = jsonToPayment(input[0][1]);
     const reserveUnits = this.reserveUnits[cardData.idx];
     // These are not used for safety but do help give a better error message
     // to the user
-    if (reserveUnits.steel + payment.steel > player.steel) {
-      throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
+    if (reserveUnits.steel + input.payment.steel > this.player.steel) {
+      throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${input.card}`);
     }
-    if (reserveUnits.titanium + payment.titanium > player.titanium) {
-      throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
+    if (reserveUnits.titanium + input.payment.titanium > this.player.titanium) {
+      throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${input.card}`);
     }
-    this.cb(card, payment);
+    this.cb(card, input.payment);
     return undefined;
   }
 

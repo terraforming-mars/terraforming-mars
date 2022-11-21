@@ -2,8 +2,7 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {InputResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
 
 export class SelectAmount implements PlayerInput {
   public readonly inputType = PlayerInputType.SELECT_AMOUNT;
@@ -18,18 +17,19 @@ export class SelectAmount implements PlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 1);
-    const amount = parseInt(input[0][0]);
-    if (isNaN(amount)) {
+  public process(input: InputResponse) {
+    if (!isSelectAmountResponse(input)) {
+      throw new Error('Not a valid SelectAmountResponse');
+    }
+    if (isNaN(input.amount)) {
       throw new Error('Amount is not a number');
     }
-    if (amount > this.max) {
+    if (input.amount > this.max) {
       throw new Error('Amount provided too high (max ' + String(this.max) + ')');
     }
-    if (amount < this.min) {
+    if (input.amount < this.min) {
       throw new Error('Amount provided too low (min ' + String(this.min) + ')');
     }
-    return this.cb(amount);
+    return this.cb(input.amount);
   }
 }

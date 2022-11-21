@@ -3,8 +3,7 @@ import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {CardName} from '../../common/cards/CardName';
-import {InputResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 
 export type Options = {
   max: number,
@@ -36,16 +35,18 @@ export class SelectCard<T extends ICard> implements PlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1);
-    if (input[0].length < this.config.min) {
+  public process(input: InputResponse) {
+    if (!isSelectCardResponse(input)) {
+      throw new Error('Not a valid SelectCardResponse');
+    }
+    if (input.cards.length < this.config.min) {
       throw new Error('Not enough cards selected');
     }
-    if (input[0].length > this.config.max) {
+    if (input.cards.length > this.config.max) {
       throw new Error('Too many cards selected');
     }
     const cards: Array<T> = [];
-    for (const cardName of input[0]) {
+    for (const cardName of input.cards) {
       const {card, idx} = PlayerInput.getCard(this.cards, cardName);
       cards.push(card);
       if (this.config.enabled?.[idx] === false) {

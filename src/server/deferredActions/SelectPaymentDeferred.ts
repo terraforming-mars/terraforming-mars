@@ -80,7 +80,7 @@ export class SelectPaymentDeferred extends DeferredAction {
           data: this.options.canUseData,
         });
         if (amountPaid < this.amount) {
-          throw new Error('Did not spend enough to pay for standard project');
+          throw new Error('Did not spend enough');
         }
         this.player.pay(payment);
         this.options.afterPay?.();

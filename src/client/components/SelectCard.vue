@@ -36,7 +36,7 @@ import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectCardResponse} from '@/common/inputs/InputResponse';
 
 interface Owner {
   name: string;
@@ -59,7 +59,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectCardResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -131,7 +131,7 @@ export default Vue.extend({
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
     saveData() {
-      this.onsave([this.getData()]);
+      this.onsave({type: 'card', cards: this.getData()});
     },
     getCardBoxClass(card: CardModel): string {
       if (this.playerinput.showOwner && this.getOwner(card) !== undefined) {

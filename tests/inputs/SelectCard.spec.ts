@@ -3,12 +3,10 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {AquiferPumping} from '../../src/server/cards/base/AquiferPumping';
 import {RoboticWorkforce} from '../../src/server/cards/base/RoboticWorkforce';
 import {IoMiningIndustries} from '../../src/server/cards/base/IoMiningIndustries';
-import {TestPlayer} from '../TestPlayer';
 import {ICard} from '../../src/server/cards/ICard';
 import {CardName} from '../../src/common/cards/CardName';
 
 describe('SelectCard', function() {
-  let player: TestPlayer;
   let aquiferPumping: ICard;
   let roboticWorkforce: ICard;
   let ioMiningIndustries: ICard;
@@ -19,7 +17,6 @@ describe('SelectCard', function() {
   };
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
     aquiferPumping = new AquiferPumping();
     roboticWorkforce = new RoboticWorkforce();
     ioMiningIndustries = new IoMiningIndustries();
@@ -34,10 +31,10 @@ describe('SelectCard', function() {
       cb,
     );
 
-    player.runInput([[CardName.AQUIFER_PUMPING]], selectCards);
+    selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING]});
     expect(selected).deep.eq([aquiferPumping]);
 
-    player.runInput([[CardName.IO_MINING_INDUSTRIES]], selectCards);
+    selectCards.process({type: 'card', cards: [CardName.IO_MINING_INDUSTRIES]});
     expect(selected).deep.eq([ioMiningIndustries]);
   });
 
@@ -49,7 +46,7 @@ describe('SelectCard', function() {
       cb,
     );
 
-    expect(() => player.runInput([[CardName.DIRECTED_IMPACTORS]], selectCards))
+    expect(() => selectCards.process({type: 'card', cards: [CardName.DIRECTED_IMPACTORS]}))
       .to.throw(Error, /Card Directed Impactors not found/);
   });
 
@@ -62,13 +59,13 @@ describe('SelectCard', function() {
       {enabled: [true, false, true]},
     );
 
-    player.runInput([[CardName.AQUIFER_PUMPING]], selectCards);
+    selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING]});
     expect(selected).deep.eq([aquiferPumping]);
 
-    player.runInput([[CardName.IO_MINING_INDUSTRIES]], selectCards);
+    selectCards.process({type: 'card', cards: [CardName.IO_MINING_INDUSTRIES]});
     expect(selected).deep.eq([ioMiningIndustries]);
 
-    expect(() => player.runInput([[CardName.ROBOTIC_WORKFORCE]], selectCards))
+    expect(() => selectCards.process({type: 'card', cards: [CardName.ROBOTIC_WORKFORCE]}))
       .to.throw(Error, /Robotic Workforce is not available/);
   });
 });

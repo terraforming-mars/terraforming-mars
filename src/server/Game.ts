@@ -54,7 +54,7 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {SeededRandom} from './Random';
-import {MilestoneAwardSelector} from './MilestoneAwardSelector';
+import {chooseMilestonesAndAwards} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {MultiSet} from 'mnemonist';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
@@ -219,9 +219,11 @@ export class Game implements Logger {
       game.aresData = AresSetup.initialData(gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);
-    game.milestones = milestonesAwards.milestones;
-    game.awards = milestonesAwards.awards;
+    if (players.length > 1) {
+      const milestonesAwards = chooseMilestonesAndAwards(gameOptions);
+      game.milestones = milestonesAwards.milestones;
+      game.awards = milestonesAwards.awards;
+    }
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
@@ -623,7 +625,9 @@ export class Game implements Logger {
 
   private gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
+
     this.save();
+
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
         player.setWaitingFor(this.pickCorporationCard(player));

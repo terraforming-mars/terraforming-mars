@@ -11,6 +11,8 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Player} from '../../../src/server/Player';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {InputResponse} from '../../../src/common/inputs/InputResponse';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 let card: Aridor;
 let game: Game;
@@ -50,10 +52,11 @@ describe('Aridor', function() {
     expect(game.colonies).does.not.include(discardedColony);
     expect(game.colonies).has.length(5);
 
-    expect(() => player.process([[]])).to.throw('Incorrect options provided (nested)');
-    expect(() => player.process([[colonyInPlay.name]])).to.throw(/Colony .* is not a discarded colony/);
+    expect(() => player.process(<InputResponse>{})).to.throw(/Not a valid SelectColonyResponse/);
+    expect(() => player.process(<InputResponse>{type: 'colony', colonyName: undefined as unknown as ColonyName})).to.throw(/No colony selected/);
+    expect(() => player.process({type: 'colony', colonyName: colonyInPlay.name})).to.throw(/Colony .* not found/);
 
-    player.process([[discardedColony.name]]);
+    player.process({type: 'colony', colonyName: discardedColony.name});
 
     expect(game.colonies).includes(discardedColony);
     expect(game.colonies).has.length(6);

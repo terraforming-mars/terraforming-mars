@@ -46,7 +46,7 @@ describe('CharityDonation', function() {
 
     expect(selectCard2.cards).deep.eq([acquiredCompany, beamFromAThoriumAsteroid, ceosFavoriteProject, decomposers]);
 
-    player2.process([[beamFromAThoriumAsteroid.name]]);
+    player2.process({type: 'card', cards: [beamFromAThoriumAsteroid.name]});
 
     runAllActions(game);
 
@@ -56,7 +56,7 @@ describe('CharityDonation', function() {
 
     expect(selectCard3.cards).deep.eq([acquiredCompany, ceosFavoriteProject, decomposers]);
 
-    player3.process([[decomposers.name]]);
+    player3.process({type: 'card', cards: [decomposers.name]});
 
     runAllActions(game);
 
@@ -66,7 +66,7 @@ describe('CharityDonation', function() {
 
     expect(selectCard1.cards).deep.eq([acquiredCompany, ceosFavoriteProject]);
 
-    player1.process([[acquiredCompany.name]]);
+    player1.process({type: 'card', cards: [acquiredCompany.name]});
 
     runAllActions(game);
 

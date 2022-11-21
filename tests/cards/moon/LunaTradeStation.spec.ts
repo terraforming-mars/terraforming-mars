@@ -45,7 +45,7 @@ describe('LunaTradeStation', () => {
 
   it('action', () => {
     player.megaCredits = 0;
-    const spaces = moonData.moon.getNonReservedLandSpaces();
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
     card.action(player);
     expect(player.megaCredits).eq(0);

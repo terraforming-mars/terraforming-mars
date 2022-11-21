@@ -336,15 +336,15 @@ describe('Colony', function() {
     expect(callbackWasCalled).to.be.false;
 
     cast(player.getWaitingFor()!, SelectCard<IProjectCard>);
-    player.process([['Dust Seals']]); // Discard a card
+    player.process({type: 'card', cards: [CardName.DUST_SEALS]}); // Discard a card
     expect(callbackWasCalled).to.be.false;
 
     cast(player2.getWaitingFor()!, SelectCard<IProjectCard>);
-    player2.process([['Dust Seals']]); // Discard a card
+    player2.process({type: 'card', cards: [CardName.DUST_SEALS]}); // Discard a card
     expect(callbackWasCalled).to.be.false;
 
     cast(player3.getWaitingFor()!, SelectCard<IProjectCard>);
-    player3.process([['Dust Seals']]); // Discard a card
+    player3.process({type: 'card', cards: [CardName.DUST_SEALS]}); // Discard a card
     expect(callbackWasCalled).to.be.true;
   });
 

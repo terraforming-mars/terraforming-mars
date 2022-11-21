@@ -26,10 +26,7 @@ import {TileType} from '../../common/TileType';
 import {Phase} from '../../common/Phase';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
-import {
-  ClaimedMilestoneModel,
-  MilestoneScore,
-} from '../../common/models/ClaimedMilestoneModel';
+import {ClaimedMilestoneModel, MilestoneScore} from '../../common/models/ClaimedMilestoneModel';
 import {FundedAwardModel, AwardScore} from '../../common/models/FundedAwardModel';
 import {getTurmoilModel} from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
@@ -48,6 +45,7 @@ import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
+import {AresHandler} from '../ares/AresHandler';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -141,7 +139,7 @@ export class Server {
         calculatedCost: player.getCardCost(targetCard.card),
         cardType: CardType.ACTIVE,
         isDisabled: false,
-        reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
+        reserveUnits: {},
         isSelfReplicatingRobotsCard: true,
       };
       return model;
@@ -342,7 +340,9 @@ export class Server {
       };
       break;
     case PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS:
-      playerInputModel.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
+      AresHandler.ifAres((waitingFor as ShiftAresGlobalParameters).player.game, (aresData) => {
+        playerInputModel.aresData = aresData;
+      });
       break;
     }
     return playerInputModel;
@@ -354,7 +354,7 @@ export class Server {
     options: {
       showResources?: boolean,
       showCalculatedCost?: boolean,
-      reserveUnits?: Array<Units>,
+      reserveUnits?: Array<Partial<Units>>,
       enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
     } = {},
   ): Array<CardModel> {
@@ -378,7 +378,7 @@ export class Server {
         cardType: card.cardType,
         isDisabled: isDisabled,
         warning: card.warning,
-        reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
+        reserveUnits: Units.partial(options.reserveUnits ? options.reserveUnits[index] : {}),
         bonusResource: isIProjectCard(card) ? card.bonusResource : undefined,
         discount: discount,
         cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
@@ -551,6 +551,7 @@ export class Server {
       escapeVelocityPeriod: options.escapeVelocityPeriod,
       escapeVelocityPenalty: options.escapeVelocityPenalty,
       fastModeOption: options.fastModeOption,
+      includeFanMA: options.includeFanMA,
       includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,
       moonExpansion: options.moonExpansion,
@@ -570,6 +571,7 @@ export class Server {
       turmoilExtension: options.turmoilExtension,
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
+      twoCorpsVariant: options.twoCorpsVariant,
     };
   }
 

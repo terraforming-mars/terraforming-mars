@@ -18,6 +18,7 @@ export type GameOptionsModel = {
   escapeVelocityPeriod?: number,
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
+  includeFanMA: boolean,
   includeVenusMA: boolean,
   initialDraftVariant: boolean,
   moonExpansion: boolean,
@@ -37,4 +38,5 @@ export type GameOptionsModel = {
   turmoilExtension: boolean,
   venusNextExtension: boolean,
   undoOption: boolean,
+  twoCorpsVariant: boolean,
 }

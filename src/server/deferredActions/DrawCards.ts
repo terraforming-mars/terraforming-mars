@@ -86,13 +86,18 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends D
   public static choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
     let max = options.keepMax || cards.length;
     if (options.paying) {
-      max = Math.min(max, Math.floor(player.spendableMegacredits() / player.cardCost));
+      const spendableMegacredits = player.spendableMegacredits();
+      const affordableCards = Math.floor(spendableMegacredits / player.cardCost);
+      max = Math.min(max, affordableCards);
     }
     const min = options.paying ? 0 : options.keepMax;
     const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
       `Select ${max} card(s) to keep`;
     const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
     const cb = (selected: Array<IProjectCard>) => {
+      if (selected.length > max) {
+        throw new Error('Selected too many cards');
+      }
       if (options.paying && selected.length > 0) {
         const cost = selected.length * player.cardCost;
         player.game.defer(

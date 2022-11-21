@@ -62,6 +62,7 @@ export interface NewGameConfig {
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
+  includeFanMA: boolean,
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
@@ -75,4 +76,5 @@ export interface NewGameConfig {
   escapeVelocityThreshold: number | undefined;
   escapeVelocityPeriod: number | undefined;
   escapeVelocityPenalty: number | undefined;
+  twoCorpsVariant: boolean,
 }

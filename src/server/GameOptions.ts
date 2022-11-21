@@ -61,7 +61,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
   aresExtension: false,
   aresHazards: true,
-  boardName: BoardName.ORIGINAL,
+  boardName: BoardName.THARSIS,
   bannedCards: [],
   clonedGamedId: undefined,
   coloniesExtension: false,

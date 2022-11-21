@@ -72,7 +72,6 @@ export default Vue.extend({
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
-      reserveUnits: Units.of(card.reserveUnits),
     };
   },
   components: {
@@ -165,12 +164,12 @@ export default Vue.extend({
         this.science = deductUnits(this.playerinput.science, 1);
       }
 
-      this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
+      this.available.steel = Math.max(this.thisPlayer.steel - this.card.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUseSteel()) {
         this.steel = deductUnits(this.available.steel, this.thisPlayer.steelValue, true);
       }
 
-      this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
+      this.available.titanium = Math.max(this.thisPlayer.titanium - this.card.reserveUnits.titanium, 0);
       if (megacreditBalance > 0 && this.canUseTitanium()) {
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
       }
@@ -178,7 +177,7 @@ export default Vue.extend({
         this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue - 1, true);
       }
 
-      this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
+      this.available.heat = Math.max(this.availableHeat() - this.card.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.available.heat, 1);
       }
@@ -201,7 +200,7 @@ export default Vue.extend({
       return this.playerinput.canUseHeat === true && this.availableHeat() > 0;
     },
     canUseSteel() {
-      if (this.available.steel > 0) {
+      if (this.card !== undefined && this.available.steel > 0) {
         if (this.tags.includes(Tag.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
@@ -209,7 +208,7 @@ export default Vue.extend({
       return false;
     },
     canUseTitanium() {
-      if (this.available.titanium > 0) {
+      if (this.card !== undefined && this.available.titanium > 0) {
         if (this.tags.includes(Tag.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
@@ -217,11 +216,11 @@ export default Vue.extend({
       return false;
     },
     canUseLunaTradeFederationTitanium() {
-      return this.available.titanium > 0 && this.playerinput.canUseLunaTradeFederationTitanium === true;
+      return this.card !== undefined && this.available.titanium > 0 && this.playerinput.canUseLunaTradeFederationTitanium === true;
     },
     canUseMicrobes() {
       // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
-      if ((this.playerinput.microbes ?? 0) > 0) {
+      if (this.card !== undefined && (this.playerinput.microbes ?? 0) > 0) {
         if (this.tags.includes(Tag.PLANT)) {
           return true;
         }
@@ -230,7 +229,7 @@ export default Vue.extend({
     },
     canUseFloaters() {
       // FYI Floaters are limited to the DIRIGIBLES card.
-      if ((this.playerinput.floaters ?? 0) > 0) {
+      if (this.card !== undefined && (this.playerinput.floaters ?? 0) > 0) {
         if (this.tags.includes(Tag.VENUS)) {
           return true;
         }
@@ -239,7 +238,7 @@ export default Vue.extend({
     },
     canUseScience() {
       // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
-      if ((this.playerinput.science ?? 0) > 0) {
+      if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
         if (this.tags.includes(Tag.MOON)) {
           return true;
         }
@@ -249,7 +248,7 @@ export default Vue.extend({
     canUseSeeds() {
       // FYI Seed Resources are limited to the Soylent Seedling Systems corp card, which allows spending its
       // resources for plant cards and the standard greenery project.
-      if ((this.playerinput.seeds ?? 0) > 0) {
+      if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
         if (this.tags.includes(Tag.PLANT)) {
           return true;
         }
@@ -263,7 +262,6 @@ export default Vue.extend({
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
-      this.reserveUnits = Units.of(this.card.reserveUnits);
 
       this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
@@ -273,16 +271,16 @@ export default Vue.extend({
       return this.warning !== undefined;
     },
     hasCardWarning(): boolean {
-      return this.card.warning !== undefined;
+      return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveSteelWarning(): boolean {
-      return this.reserveUnits.steel > 0 && this.canUseSteel();
+      return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
     },
     showReserveTitaniumWarning(): boolean {
-      return this.reserveUnits.titanium > 0 && (this.canUseTitanium() || this.canUseLunaTradeFederationTitanium());
+      return this.card?.reserveUnits?.titanium > 0 && (this.canUseTitanium() || this.canUseLunaTradeFederationTitanium());
     },
     showReserveHeatWarning(): boolean {
-      return this.reserveUnits.heat > 0 && this.canUseHeat();
+      return this.card?.reserveUnits?.heat > 0 && this.canUseHeat();
     },
     saveData() {
       const payment: Payment = {

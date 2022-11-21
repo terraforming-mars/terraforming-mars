@@ -32,7 +32,6 @@ export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
   science: number;
   seeds: number;
   available: Units;
-  reserveUnits: Units;
 }
 
 export interface PaymentWidgetModel extends SelectPaymentModel {

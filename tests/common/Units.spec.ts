@@ -66,33 +66,4 @@ describe('Units', () => {
       heat: 1,
     });
   });
-
-  // todo: test for isUnits, isEmpty
-
-  it('negative', () => {
-    expect(Units.negative(Units.EMPTY)).deep.eq(Units.EMPTY);
-    expect(Units.negative(Units.of({
-      megacredits: -2,
-      steel: -1,
-      titanium: 0,
-      plants: 1,
-      energy: 2,
-      heat: 3,
-    }))).deep.eq(Units.of({
-      megacredits: 2,
-      steel: 1,
-      titanium: 0,
-      plants: -1,
-      energy: -2,
-      heat: -3,
-    }));
-  });
-
-  it('partial', () => {
-    expect(Units.partial({})).deep.eq({});
-    expect(Units.partial({megacredits: 0})).deep.eq({});
-    expect(Units.partial({megacredits: undefined})).deep.eq({});
-    expect(Units.partial({megacredits: 1})).deep.eq({megacredits: 1});
-    expect(Units.partial({megacredits: -1})).deep.eq({megacredits: -1});
-  });
 });

@@ -34,14 +34,9 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
       ),
     );
 
-    // Give each player Merger in this variant, or an extra prelude if they already have Merger
+    // Give each player Merger in this variant
     if (player.game.gameOptions.twoCorpsVariant) {
-      if (!player.dealtPreludeCards.some((card) => card.name === CardName.MERGER)) {
-        player.dealtPreludeCards.push(new Merger());
-      } else {
-        // player.dealtPreludeCards.push(player.game.dealer.dealPreludeCard());
-        player.dealtPreludeCards.push(player.game.preludeDeck.draw(player.game));
-      }
+      player.dealtPreludeCards.push(new Merger());
     }
 
     if (player.game.gameOptions.preludeExtension) {

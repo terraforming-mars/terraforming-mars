@@ -58,17 +58,13 @@ export namespace Units {
   }
 
   export function negative(units: Units): Units {
-    // "-0" is a different value than "0" in Javascript.
-    // This prefvents -0.
-    const neg = (n: number) => n === 0 ? 0 : -n;
-
     return {
-      megacredits: neg(units.megacredits),
-      steel: neg(units.steel),
-      titanium: neg(units.titanium),
-      plants: neg(units.plants),
-      energy: neg(units.energy),
-      heat: neg(units.heat),
+      megacredits: -units.megacredits,
+      steel: -units.steel,
+      titanium: -units.titanium,
+      plants: -units.plants,
+      energy: -units.energy,
+      heat: -units.heat,
     };
   }
 
@@ -80,16 +76,5 @@ export namespace Units {
       (u.plants ?? 0) === 0 &&
       (u.energy ?? 0) === 0 &&
       (u.heat ?? 0) === 0;
-  }
-
-  export function partial(u: Partial<Units>) : Partial<Units> {
-    const partial: Partial<Units> = {};
-    for (const key of keys) {
-      const value = u[key];
-      if (value) {
-        partial[key] = value;
-      }
-    }
-    return partial;
   }
 }

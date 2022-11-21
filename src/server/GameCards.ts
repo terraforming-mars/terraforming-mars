@@ -114,7 +114,7 @@ export class GameCards {
       preludes = preludes.filter((c) => c.name !== CardName.MERGER);
     }
 
-    return preludes
+    return preludes;
   }
 
   private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {

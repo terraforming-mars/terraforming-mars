@@ -996,7 +996,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check custom corp count
       if (component.showCorporationList && customCorporations.length > 0) {
-        let neededCorpsCount = 0
+        let neededCorpsCount = 0;
         if (this.twoCorpsVariant) {
           // Add an additional 4 for the Merger prelude
           // Everyone-Merger needs an additional 4 corps per player

@@ -579,9 +579,9 @@ export default (Vue as WithRefs<Refs>).extend({
       customCorporations: [],
       customPreludes: [],
       bannedCards: [],
-      board: BoardName.ORIGINAL,
+      board: BoardName.THARSIS,
       boards: [
-        BoardName.ORIGINAL,
+        BoardName.THARSIS,
         BoardName.HELLAS,
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
@@ -831,7 +831,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     getBoardColorClass(boardName: string): string {
-      if (boardName === BoardName.ORIGINAL) {
+      if (boardName === BoardName.THARSIS) {
         return 'create-game-board-hexagon create-game-tharsis';
       } else if (boardName === BoardName.HELLAS) {
         return 'create-game-board-hexagon create-game-hellas';
@@ -872,7 +872,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     boardHref(boardName: BoardName | RandomBoardOption) {
       const options: Record<BoardName | RandomBoardOption, string> = {
-        [BoardName.ORIGINAL]: 'tharsis',
+        [BoardName.THARSIS]: 'tharsis',
         [BoardName.HELLAS]: 'hellas',
         [BoardName.ELYSIUM]: 'elysium',
         [BoardName.ARABIA_TERRA]: 'arabia-terra',

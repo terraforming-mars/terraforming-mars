@@ -11,7 +11,7 @@ import {Tile} from '../../src/server/Tile';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {Resources} from '../../src/common/Resources';
 import {SelectProductionToLose} from '../../src/server/inputs/SelectProductionToLose';
-import {OriginalBoard} from '../../src/server/boards/OriginalBoard';
+import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {DesperateMeasures} from '../../src/server/cards/ares/DesperateMeasures';
 import {Decomposers} from '../../src/server/cards/base/Decomposers';
 import {EnergyTapping} from '../../src/server/cards/base/EnergyTapping';
@@ -388,7 +388,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+    game.board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

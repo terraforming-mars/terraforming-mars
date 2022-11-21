@@ -1,4 +1,4 @@
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, THARSIS_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -28,7 +28,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, THARSIS_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -301,8 +301,8 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   switch (gameOptions.randomMA) {
   case RandomMAOptionType.NONE:
     switch (gameOptions.boardName) {
-    case BoardName.ORIGINAL:
-      push(ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
+    case BoardName.THARSIS:
+      push(THARSIS_MILESTONES, THARSIS_AWARDS);
       break;
     case BoardName.HELLAS:
       push(HELLAS_MILESTONES, HELLAS_AWARDS);
@@ -373,8 +373,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     return e.name;
   }
 
-  const candidateMilestones: Array<MilestoneName> = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
-  const candidateAwards: Array<AwardName> = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
+  const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+  const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
   if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
     candidateMilestones.push(...VENUS_MILESTONES.map(toName));

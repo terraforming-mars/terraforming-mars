@@ -89,7 +89,7 @@
             />
 
             <svg id="board_legend" height="550" width="630" class="board-legend">
-              <template v-if="boardName === BoardName.ORIGINAL">
+              <template v-if="boardName === BoardName.THARSIS">
                   <g id="ascraeus_mons" transform="translate(95, 192)">
                       <text class="board-caption">
                           <tspan dy="15">Ascraeus</tspan>

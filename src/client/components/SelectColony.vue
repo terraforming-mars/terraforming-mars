@@ -15,10 +15,11 @@ import Vue from 'vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectColonyResponse} from '@/common/inputs/InputResponse';
+import {ColonyName} from '@/common/colonies/ColonyName';
 
-type SelectColonyModel = {
-  selectedColony: string | undefined,
+type DataModel = {
+  selectedColony: ColonyName | undefined,
 };
 
 export default Vue.extend({
@@ -28,7 +29,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectColonyResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -37,7 +38,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data(): SelectColonyModel {
+  data(): DataModel {
     return {
       selectedColony: undefined,
     };
@@ -51,12 +52,9 @@ export default Vue.extend({
       return this.selectedColony !== undefined;
     },
     saveData() {
-      const result: string[][] = [];
-      result.push([]);
-      if (this.canSave()) {
-        result[0].push(this.selectedColony ?? '');
+      if (this.selectedColony !== undefined) {
+        this.onsave({type: 'colony', colonyName: this.selectedColony});
       }
-      this.onsave(result);
     },
   },
 });

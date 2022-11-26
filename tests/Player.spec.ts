@@ -21,20 +21,24 @@ import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventNam
 import {TestPlayer} from './TestPlayer';
 import {SelectPartyToSendDelegate} from '../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../src/common/turmoil/PartyName';
+import {InputResponse} from '../src/common/inputs/InputResponse';
+import {SelectPlayer} from '../src/server/inputs/SelectPlayer';
+import {SelectAmount} from '../src/server/inputs/SelectAmount';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
     const player = new Player('name', Color.BLUE, false, 0, 'p-blue');
     expect(player.corporations).is.empty;
   });
+
   it('Should throw error if nothing to process', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player);
     (player as any).setWaitingFor(undefined, undefined);
-    expect(function() {
-      player.process([]);
-    }).to.throw('Not waiting for anything');
+
+    expect(() => player.process({type: 'option'})).to.throw('Not waiting for anything');
   });
+
   it('Should run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
@@ -45,35 +49,34 @@ describe('Player', function() {
     player3.production.add(Resources.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player); //  Game.newInstance('gameid', [player, player2, player3], player));
-    if (action !== undefined) {
-      player.setWaitingFor(action);
-      player.process([[player2.id]]);
-      expect(player.production.energy).to.eq(1);
-    }
+    card.play(player);
+    runAllActions(player.game);
+    player.process({type: 'player', player: player2.color});
+    expect(player.production.energy).to.eq(1);
   });
+
   it('Should error with input for run select player for PowerSupplyConsortium', function() {
     const card = new PowerSupplyConsortium();
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player2 = new Player('red', Color.RED, false, 0, 'p-red');
+    Game.newInstance('gameid', [player, player2], player);
+    (player as any).setWaitingFor(undefined, undefined);
 
-    Game.newInstance('gameid', [player], player);
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new LunarBeam());
-    const action = card.play(player); // , Game.newInstance('gameid', [player, redPlayer], player));
-    if (action !== undefined) {
-      player.setWaitingFor(action);
-      expect(player.getWaitingFor()).is.not.undefined;
-      expect(function() {
-        player.process([[]]);
-      }).to.throw('Invalid players array provided');
-      expect(function() {
-        player.process([]);
-      }).to.throw('Incorrect options provided');
-      expect(function() {
-        player.process([['bar']]);
-      }).to.throw('Player not available');
-    }
+    player.production.add(Resources.ENERGY, 1);
+    player2.production.add(Resources.ENERGY, 1);
+
+    const action = card.play(player);
+    expect(action).is.undefined;
+    runAllActions(player.game);
+    cast(player.getWaitingFor(), SelectPlayer);
+
+    expect(() => player.process({} as InputResponse)).to.throw(/Not a valid SelectPlayerResponse/);
+    expect(() => player.process({type: 'option'})).to.throw(/Not a valid SelectPlayerResponse/);
+    expect(() => player.process({type: 'player', player: Color.YELLOW})).to.throw(/Player not available/);
   });
+
   it('Should run select amount for Insulation', function() {
     const card = new Insulation();
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
@@ -81,21 +84,13 @@ describe('Player', function() {
 
     player.production.add(Resources.HEAT, 2);
     Game.newInstance('gameid', [player, redPlayer], player);
-    const action = card.play(player); // Game.newInstance('gameid', [player, redPlayer], player));
-    expect(action).is.not.undefined;
-    if (action === undefined) return;
-    player.setWaitingFor(action);
-    expect(player.getWaitingFor()).is.not.undefined;
-    expect(function() {
-      player.process([[]]);
-    }).to.throw('Incorrect options provided');
-    expect(function() {
-      player.process([]);
-    }).to.throw('Incorrect options provided');
-    expect(function() {
-      player.process([['foobar']]);
-    }).to.throw('Amount is not a number');
-    player.process([['1']]);
+    player.defer(card.play(player));
+    runAllActions(player.game);
+    cast(player.getWaitingFor(), SelectAmount);
+
+    expect(() => player.process({} as InputResponse)).to.throw(/Not a valid SelectAmountResponse/);
+    expect(() => player.process({type: 'amount', amount: 'foobar' as unknown as number})).to.throw(/Amount is not a number/);
+    player.process({type: 'amount', amount: 1});
     expect(player.production.heat).to.eq(1);
     expect(player.production.megacredits).to.eq(1);
     expect(player.getWaitingFor()).is.undefined;
@@ -124,11 +119,11 @@ describe('Player', function() {
       return mockOption2;
     });
     player.setWaitingFor(mockOption, done);
-    player.process([['1']]);
+    player.process({type: 'option'});
     expect(player.getWaitingFor()).not.to.be.undefined;
-    player.process([['1']]);
+    player.process({type: 'option'});
     expect(player.getWaitingFor()).not.to.be.undefined;
-    player.process([['1']]);
+    player.process({type: 'option'});
     expect(player.getWaitingFor()).to.be.undefined;
   });
   it('Omits buffer gas for non solo games', function() {

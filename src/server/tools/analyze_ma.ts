@@ -125,9 +125,10 @@ function simpleGameOptions(): GameOptions {
     escapeVelocityThreshold: undefined,
     escapeVelocityPeriod: undefined,
     escapeVelocityPenalty: undefined,
+    twoCorpsVariant: false,
 
     // The options that can change, should be parameters.
-    boardName: BoardName.ORIGINAL,
+    boardName: BoardName.THARSIS,
     venusNextExtension: false,
     aresExtension: false,
     includeVenusMA: false,

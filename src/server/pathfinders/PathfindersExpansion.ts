@@ -175,7 +175,7 @@ export class PathfindersExpansion {
     case 'delegate':
       Turmoil.ifTurmoilElse(game,
         () => game.defer(new SendDelegateToArea(player)),
-        () => player.game.log('TODO: come up with some reward in place of Add Delegate.'));
+        () => player.addResource(Resources.MEGACREDITS, 3, {log: true}));
       break;
     case 'energy':
       player.addResource(Resources.ENERGY, 1, {log: true});

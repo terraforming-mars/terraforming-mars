@@ -10,7 +10,7 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'select-option',
@@ -19,7 +19,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectOptionResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -33,7 +33,7 @@ export default Vue.extend({
   },
   methods: {
     saveData() {
-      this.onsave([['1']]);
+      this.onsave({type: 'option'});
     },
   },
 });

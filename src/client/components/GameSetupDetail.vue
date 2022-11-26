@@ -101,7 +101,7 @@ export default Vue.extend({
     },
     getBoardColorClass(boardName: BoardName): string {
       switch (boardName) {
-      case BoardName.ORIGINAL:
+      case BoardName.THARSIS:
         return 'game-config board-tharsis map';
       case BoardName.HELLAS:
         return 'game-config board-hellas map';

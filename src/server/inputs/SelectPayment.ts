@@ -1,8 +1,8 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {jsonToPayment, Payment} from '../../common/inputs/Payment';
-import {InputResponse} from '../../common/inputs/InputResponse';
+import {isPayment, Payment} from '../../common/inputs/Payment';
+import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
 export class SelectPayment implements PlayerInput {
@@ -22,11 +22,17 @@ export class SelectPayment implements PlayerInput {
   }
 
   public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 1);
-    const payment: Payment = jsonToPayment(input[0][0]);
-    if (!player.canSpend(payment)) {
+    if (!isSelectPaymentResponse(input)) {
+      throw new Error('Not a valid SelectPaymentResponse');
+    }
+    if (!isPayment(input.payment)) {
+      throw new Error('payment is not a valid type');
+    }
+    // TODO(kberg): This is called here and in SelectPaymentDeferred.
+    // There's no reason for both.
+    if (!player.canSpend(input.payment)) {
       throw new Error('You do not have that many resources');
     }
-    return this.cb(payment);
+    return this.cb(input.payment);
   }
 }

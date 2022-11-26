@@ -2,8 +2,7 @@ import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {ISpace} from '../boards/ISpace';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {InputResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
 
 export class SelectSpace implements PlayerInput {
   public readonly inputType = PlayerInputType.SELECT_SPACE;
@@ -17,10 +16,12 @@ export class SelectSpace implements PlayerInput {
     }
   }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 1);
+  public process(input: InputResponse) {
+    if (!isSelectSpaceResponse(input)) {
+      throw new Error('Not a valid SelectSpaceResponse');
+    }
     const space = this.availableSpaces.find(
-      (space) => space.id === input[0][0],
+      (space) => space.id === input.spaceId,
     );
     if (space === undefined) {
       throw new Error('Space not available');

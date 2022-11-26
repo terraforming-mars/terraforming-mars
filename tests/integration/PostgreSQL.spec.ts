@@ -186,7 +186,7 @@ describeDatabaseSuite({
 
       // Taking an action triggers a save (when undo is enabled.)
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
       await db.awaitAllSaves();
 
       expect(await db.getStat('save-count')).eq(3);
@@ -200,7 +200,8 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(1);
 
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
 
       // It is now the second player's turn. This test doesn't care about what the
@@ -263,14 +264,16 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(1);
       expect(player.actionsTakenThisRound).eq(1);
 
       // Player's second action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(2);
       expect(player.actionsTakenThisRound).eq(2);
@@ -278,7 +281,8 @@ describeDatabaseSuite({
 
       // Player's third action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(3);
       expect(player.actionsTakenThisRound).eq(3);
@@ -286,7 +290,8 @@ describeDatabaseSuite({
 
       // Player's fourth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(4);
       expect(player.actionsTakenThisRound).eq(4);
@@ -294,7 +299,8 @@ describeDatabaseSuite({
 
       // Player's fifth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(5);
       expect(player.actionsTakenThisRound).eq(5);
@@ -339,14 +345,16 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(1);
       expect(player.actionsTakenThisRound).eq(1);
 
       // Player's second action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(2);
       expect(player.actionsTakenThisRound).eq(2);
@@ -354,7 +362,8 @@ describeDatabaseSuite({
 
       // Player's third action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(3);
       expect(player.actionsTakenThisRound).eq(3);
@@ -362,7 +371,8 @@ describeDatabaseSuite({
 
       // Player's fourth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(4);
       expect(player.actionsTakenThisRound).eq(4);
@@ -370,7 +380,8 @@ describeDatabaseSuite({
 
       // Player's fifth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(5);
       expect(player.actionsTakenThisRound).eq(5);

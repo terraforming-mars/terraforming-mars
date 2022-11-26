@@ -3,7 +3,8 @@ import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {Player} from '../Player';
 import {Units} from '../../common/Units';
-import {InputResponse} from '../../common/inputs/InputResponse';
+import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
+import {sum} from '../../common/utils/utils';
 
 export class SelectProductionToLose implements PlayerInput {
   public readonly inputType = PlayerInputType.SELECT_PRODUCTION_TO_LOSE;
@@ -18,29 +19,26 @@ export class SelectProductionToLose implements PlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
+  // TODO(kberg): Coul dmerge this with SelectResources, though it
+  // would take some work.
   public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 1);
-    const units: Units = this.parseUnitsJSON(input[0][0]);
-    if (!Units.keys.every((k) => units[k] >= 0)) {
+    if (!isSelectProductionToLoseResponse(input)) {
+      throw new Error('Not a valid SelectProductionToLoseResponse');
+    }
+    if (!Units.isUnits(input.units)) {
+      throw new Error('not a units object');
+    }
+    const array = Object.values(input.units);
+    if (array.some((count) => count < 0)) {
       throw new Error('All units must be positive');
     }
-    if (!player.production.canAdjust(Units.negative(units))) {
+    if (!player.production.canAdjust(Units.negative(input.units))) {
       throw new Error('You do not have those units');
     }
-    this.cb(units);
-    return undefined;
-  }
-
-  private parseUnitsJSON(json: string): Units {
-    try {
-      const units: unknown = JSON.parse(json);
-      if (!Units.isUnits(units)) {
-        throw new Error('not a units object');
-      }
-
-      return units;
-    } catch (err) {
-      throw new Error('Unable to parse Units input ' + err);
+    if (sum(array) !== this.unitsToLose) {
+      throw new Error(`Select ${this.unitsToLose} steps of production.`);
     }
+    this.cb(input.units);
+    return undefined;
   }
 }

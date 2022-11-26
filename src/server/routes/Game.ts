@@ -35,7 +35,7 @@ export class GameHandler extends Handler {
     if (board === RandomBoardOption.ALL) return allBoards;
     if (board === RandomBoardOption.OFFICIAL) {
       return allBoards.filter((name) => {
-        return name === BoardName.ORIGINAL ||
+        return name === BoardName.THARSIS ||
           name === BoardName.HELLAS ||
           name === BoardName.ELYSIUM;
       });
@@ -126,6 +126,7 @@ export class GameHandler extends Handler {
             escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
             escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
             escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
+            twoCorpsVariant: gameReq.twoCorpsVariant,
           };
 
           let game: Game;

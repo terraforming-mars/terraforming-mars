@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {OriginalBoard} from '../../src/server/boards/OriginalBoard';
+import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {Player} from '../../src/server/Player';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/server/boards/ISpace';
@@ -14,12 +14,12 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/GameOptions';
 import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {
-  let board: OriginalBoard;
+  let board: TharsisBoard;
   let player: TestPlayer;
   let player2: TestPlayer;
 
   beforeEach(function() {
-    board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+    board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
@@ -303,7 +303,7 @@ describe('Board', function() {
     const spaces = new MultiSet<string>();
     for (let idx = 0; idx < 4_000; idx++) {
       const seed = Math.random();
-      board = OriginalBoard.newInstance({
+      board = TharsisBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,
         shuffleMapOption: true,
       },

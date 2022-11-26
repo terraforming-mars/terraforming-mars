@@ -1,0 +1,183 @@
+{
+    "% Venus": "% terraformacji Wenus",
+
+    "Stratospheric Birds": "Ptaki Stratosferyczne",
+    "Action: Add 1 animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
+    "Requires Venus 12% and that you spend 1 floater from any card.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 12%. Wydaj 1 jednostkę dryfowców z dowolnej karty.",
+
+    "Venusian Plants": "Wenusjańskie Rośliny",
+    "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 16%. Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść 1 jednostkę mikrobów lub Zwierząt na innej karcie z symbolem Wenus.",
+
+    "Extremophiles": "Ekstremofile",
+    "Action: Add 1 microbe to ANY card.": "Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie.",
+    "1 VP for every 3rd Microbe on this card.": "Otrzymujesz 1 PZ za każde 3 jednostki mikrobów znajdujące się na tej karcie.",
+    "Requires 2 science tags.": "Musisz posiadać co najmniej 2 symbole Nauki.",
+
+    "Mining Quota": "Kontyngent Górniczy",
+    "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza. Podnieś swoją produkcję stali o 2 poziomy.",
+
+    "Corroder Suits": "Pancerze Antykorozyjne",
+    "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.": "Podnieś swoją produkcję M€ o 2 poziomy. Umieść 1, wybraną jednostkę, na dowolnej karcie z symbolem Wenus.",
+
+    "Venusian Insects": "Wenusjańskie Insekty",
+    "Action: add 1 Microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
+    "1 VP for every 2nd Microbe on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki mikrobów znajdujące się na tej karcie.",
+    "Requires Venus 12%.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 12%.",
+
+    "Sulphur-Eating Bacteria": "Bakterie Siarkowe",
+    "Action: add 1 Microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
+    "Action: Spend any number of microbes here to gain triple amount of M€.": "Akcja: Wydaj dowolną liczbę jednostek mikrobów z tej karty. Otrzymujesz 3 M€ za każdą wydaną jednostkę.",
+    "Requires Venus 6%": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 6%.",
+
+    "Venus Waystation": "Wenusjańska Stacja Tranzytowa",
+    "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus, płacisz za nią o 2 M€ mniej.",
+
+    "Thermophiles": "Termofile",
+    "Action: Add 1 microbe to ANY Venus CARD.": "Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie z symbolem Wenus.",
+    "Action: Spend 2 microbes here to raise Venus 1 step.": "Akcja: Wydaj 2 jednostki mikrobów z tej karty, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
+
+    "Sponsored Academies": "Ufundowanie Akademii",
+    "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Odrzuć z ręki 1 kartę, a następnie dobierz 3 karty. Każdy z przeciwników dobiera po 1 karcie.",
+
+    "Sulphur Exports": "Eksport Siarki",
+    "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Wenus (z tym włącznie).",
+
+    "Venus Soils": "Wenusjańskie Gleby",
+    "Raise Venus 1 step. Increase your plant production 1 step. Add 2 microbes to ANOTHER card": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Podnieś swoją produkcję roślinności o 1 poziom. Umieść 2 jednostki mikrobów na innej karcie.",
+
+    "Terraforming Contract": "Kontrakt na Terraformację",
+    "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Twój Współczynnik Terraformacji musi wynosić co najmniej 25. Podnieś swoją produkcję M€ o 4 poziomy.",
+
+    "Solarnet": "Solarnet",
+    "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza. Dobierz 2 karty.",
+
+    "Atalanta Planitia Lab": "Laboratorium Atlanta Planitia",
+    "Requires 3 science tags. Draw 2 cards.": "Musisz posiadać co najmniej 3 symbole Nauki. Dobierz 2 karty.",
+
+    "Rotator Impacts": "Rotacja Uderzeniowa",
+    "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Akcja: Wydaj 6 M€ (możesz użyć tytanu), aby umieścić na tej karcie 1 jednostkę asteroid.",
+    "Action: Spend 1 resource from this card to increase Venus 1 step.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
+    "Venus must be 14% or lower": "Współczynnik Terraformacji Wenus wynosi co najwyżej 14%.",
+
+    "Omnicourt": "Wszechsąd",
+    "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza. Podnieś swój WT o 2 poziomy.",
+
+    "Jet Stream Microscrappers": "Mikrouzdatniacze Strumieniowe",
+    "Action: Spend 1 titanium to add 2 floaters here": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
+    "Action: Spend 2 floaters here to raise Venus 1 step": "Akcja: Wydaj 2 jednostki dryfowców z tej karty, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
+
+    "Spin-Inducing Asteroid": "Ruch Asteroidy Wywołany Indukcją",
+    "Venus must be 10% or lower. Raise Venus 2 steps.": "Współczynnik Terraformacji Wenus wynosi co najwyżej 10%. Podnieś Współczynnik Terraformacji Wenus o 2 poziomy.",
+
+    "Dirigibles": "Sterowce",
+    "Action: Add 1 floater to ANY card": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie.",
+    "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus, do pokrycia kosztu możesz wydać jednostki dryfowców znajdujące się na tej karcie. Każda jednostka dryfowców jest warta 3 M€.",
+
+    "Floating Habs": "Dryfujące Jednostki Mieszkalne",
+    "Action: Spend 2 M€ to add 1 floater to ANY card": "Akcja: Wydaj 2 M€, aby umieścić 1 jednostkę dryfowców na dowolnej karcie.",
+    "1 VP for every 2nd Floater on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki dryfowców znajdujące się na tej karcie.",
+    "Requires 2 science tags.": "Musisz posiadać co najmniej 2 symbole Nauki.",
+
+    "Hydrogen to Venus": "Wodór dla Wenus",
+    "Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść po 1 jednostce dryfowców na dowolnej karcie z symbolem Wenus za każdy posiadany symbol Jowisza.",
+
+    "Water to Venus": "Woda dla Wenus",
+    "Raise Venus 1 step.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
+
+    "GHG Import From Venus": "Import Gazów Cieplarnianych z Wenus",
+    "Raise Venus 1 step. Increase your heat production 3 steps.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Podnieś swoją produkcję ciepła o 3 poziomy.",
+
+    "Aerial Mappers": "Mapowanie Przestworzy",
+    "Action: Add floater to ANY card.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie.",
+    "Action: Spend one floater here to draw 1 card.": "Akcja: Usuń 1 jednostkę dryfowców z tej karty, aby dobrać kartę.",
+
+    "Aerosport Tournament": "Turniej Aerosportowy",
+    "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Musisz posiadać co najmniej 5 jednostek dryfowców. Otrzymujesz po 1 M€ za każdy obszar miasta w grze.",
+
+    "Air-Scrapping Expedition": "Operacja Uzdatniania Atmosfery",
+    "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść 3 jednostki dryfowców na dowolnej karcie z symbolem Wenus.",
+
+    "Atmoscoop": "Zagarniacz Atmosfery",
+    "Requires 3 science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.": "Musisz posiadać co najmniej 3 symbole Nauki. Podnieś temperaturę lub WT Wenus o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie.",
+
+    "Comet for Venus": "Kometa dla Wenus",
+    "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.": "Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Usuń do 4 M€ dowolnego gracza posiadającego kartę z symbolem Wenus.",
+
+    "Dawn City": "Miasto Świtu",
+    "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.": "Musisz posiadać co najmniej 4 symbole Nauki. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom. Umieść obszar miasta na zarezerwowanym polu.",
+
+    "Deuterium Export": "Eksport Deuteru",
+    "Action: Add 1 floater to this card.": "Akcja: Umieść na tej karcie 1 jednostkę dryfowców.",
+    "Action: Spend 1 floater here to increase your energy production 1 step.": "Akcja: Wydaj 1 jednostkę dryfowców z tej karty, aby podnieść swoją produkcję energii o 1 poziom.",
+    "Remove 1 floater to raise energy production 1 step": "Wydaj 1 jednostkę dryfowców. Podnieś produkcję energii o 1 poziom",
+    "Remove floater": "Wydaj 1 jednostkę dryfowców",
+
+    "Extractor Balloons": "Balony Wydobywcze",
+    "Action: Remove 2 floaters here to raise Venus 1 step.": "Akcja: Wydaj 2 jednostki dryfowców z tej karty, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
+    "Add 3 floaters to this card": "Umieść 3 jednostki dryfowców na tej karcie.",
+
+    "Forced Precipitation": "Wymuszone Opady Atmosferyczne",
+    "Action: Spend 2 M€ to add 1 floater to THIS card.": "Akcja: Wydaj 2 M€, aby umieścić na tej karcie 1 jednostkę dryfowców.",
+    "Action: Spend 2 floaters here to increase Venus 1 step.": "Akcja: Wydaj 2 jednostki dryfowców z tej karty, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
+
+    "Freyja Biodomes": "Biokopuły we Freyja Montes",
+    "10% Venus": "10% Wenus",
+    "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 10%. Umieść 2 jednostki mikrobów lub 2 jednostki zwierząt na innej karcie z symbolem Wenus. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
+
+    "Giant Solar Shade": "Olbrzymia Osłona Przeciwsłoneczna",
+    "Raise Venus 3 steps.": "Podnieś WT Wenus o 3 poziomy.",
+
+    "Gyropolis": " Żyropolis",
+    "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.": "Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Ziemi i Wenus.",
+
+    "Io Sulphur Research": "Badania nad Siarką na IO",
+    "Draw 1 card, or draw 3 if you have at least 3 Venus tags.": "Dobierz 1 kartę (lub 3 karty, jeśli posiadasz co najmniej 3 symbole Wenus).",
+
+    "Ishtar Mining": "Górnictwo w Ishtar Terra",
+    "8% Venus": "8% Wenus",
+    "Requires Venus 8%. Increase your titanium production 1 step.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 8%. Podnieś swoją produkcję tytanu o 1 poziom.",
+
+    "Luna Metropolis": "Metropolia Księżycowa",
+    "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany symbol Ziemi (z tym włącznie). Umieść obszar miasta na zarezerwowanym polu.",
+
+    "Local Shading": "Miejscowe Zacienienie",
+    "Action: Spend 1 floater here to raise your M€ production 1 step.": "Akcja: Wydaj 1 jednostkę dryfowców z tej karty, aby podnieść swoją produkcję M€ o 1 poziom.",
+
+    "Maxwell Base": "Baza Maxwella",
+    "Action: Add 1 resource to ANOTHER VENUS CARD.": "Akcja: Umieść 1 wybraną jednostkę na innej karcie z symbolem Wenus.",
+    "Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 12%. Obniż swoją produkcję energii o 1 poziom. Umieść obszar miasta na zarezerwowanym polu.",
+
+    "Sister Planet Support": "Wsparcie Siostrzanej Planety",
+    "Venus Earth": "Wenus Ziemia",
+    "Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Musisz posiadać co najmniej po 1 symbolu Wenus i Ziemi. Podnieś swoją produkcję M€ o 3 poziomy.",
+
+    "Stratopolis": "Stratopolis",
+    "Action: Add 2 floaters to ANY VENUS CARD.": "Akcja: Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Wenus.",
+    "1 VP for every 3rd Floater on this card.": "Otrzymujesz 1 PZ za każde 3 jednostki dryfowców znajdujące się na tej karcie.",
+    "Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA": "Musisz posiadać co najmniej 2 symbole Nauki. Podnieś swoją produkcję M€ o 2 poziomy. Umieść obszar miasta na zarezerwowanym polu.",
+
+    "Venus Governor": "Gubernator Wenus",
+    "Requires 2 Venus tags. Increase your M€ production 2 steps.": "Musisz posiadać co najmniej 2 symbole Wenus. Podnieś swoją produkcję M€ o 2 poziomy.",
+
+    "Venusian Animals": "Wenusjańskie Zwierzęta",
+    "18% Venus": "18% Wenus",
+    "Effect: When you play a science tag, including this, add 1 animal to this card.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Nauki (z tą włącznie), umieść na tej karcie 1 jednostkę zwierząt za każdy taki symbol.",
+    "Requires Venus 18%": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 18%.",
+
+    "Venus Magnetizer": "Magnetyzacja Wenus",
+    "Action: Decrease your energy production 1 step to raise Venus 1 step.": "Akcja: Obniż swoją produkcję energii o 1 poziom, aby podnieść Współczynnik Terraformacji Wenus o 1 poziom.",
+    "Requires Venus 10%.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 10%.",
+
+    "Luxury Foods": "Wykwintne Jedzenie",
+    "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi i Jowisza.",
+
+    "Neutralizer Factory": "Fabryka Neutralizatorów",
+    "Requires Venus 10%. Increase the Venus track 1 step.": "Współczynnik Terraformacji Wenus musi wynosić co najmniej 10%. Podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
+
+    "Orbital Reflectors": "Reflektory Orbitalne",
+    "Raise Venus 2 steps. Increase your heat production 2 steps.": "Podnieś Współczynnik Terraformacji Wenus o 2 poziomy. Podnieś swoją produkcję ciepła o 2 poziomy.",
+
+    "Saturn Surfing": "Saturniański surfing",
+    "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "Akcja: Wydaj 1 jednostkę dryfowców z tej karty, aby otrzymać po 1 M€ za każdą znajdującą się na tej karcie jednostkę dryfowców, włączając usuniętą jednostkę (max 5).",
+    "Add 1 floater here for every Earth tag you have, including this.": "Umieść na tej karcie po 1 jednostce dryfowców za każdy posiadany symbol Ziemi (z tym włącznie)."
+}

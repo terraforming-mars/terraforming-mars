@@ -6,7 +6,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectPaymentResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectPayment',
@@ -18,7 +18,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectPaymentResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -200,7 +200,7 @@ export default Vue.extend({
           return;
         }
       }
-      this.onsave([[JSON.stringify(payment)]]);
+      this.onsave({type: 'payment', payment: payment});
     },
   },
 });

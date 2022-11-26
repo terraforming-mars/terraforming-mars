@@ -1,8 +1,7 @@
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {InputResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
 
 export class SelectOption implements PlayerInput {
   public readonly inputType = PlayerInputType.SELECT_OPTION;
@@ -13,7 +12,10 @@ export class SelectOption implements PlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
-  public process(_response: InputResponse, _player: Player): PlayerInput | undefined {
+  public process(response: InputResponse): PlayerInput | undefined {
+    if (!isSelectOptionResponse(response)) {
+      throw new Error('Not a valid SelectOptionResponse');
+    }
     return this.cb();
   }
 }

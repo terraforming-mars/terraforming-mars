@@ -48,6 +48,7 @@ import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
+import {AresHandler} from '../ares/AresHandler';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -342,7 +343,9 @@ export class Server {
       };
       break;
     case PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS:
-      playerInputModel.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
+      AresHandler.ifAres((waitingFor as ShiftAresGlobalParameters).player.game, (aresData) => {
+        playerInputModel.aresData = aresData;
+      });
       break;
     }
     return playerInputModel;
@@ -571,6 +574,7 @@ export class Server {
       turmoilExtension: options.turmoilExtension,
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
+      twoCorpsVariant: options.twoCorpsVariant,
     };
   }
 

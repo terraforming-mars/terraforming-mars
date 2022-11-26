@@ -157,4 +157,28 @@ describe('Wetlands', function() {
 
     expect(player.getVictoryPoints().city).eq(1);
   });
+
+  it('Wetlands works with land claim', function() {
+    player.plants = 7;
+    addOceanTile(player, '15');
+    addOceanTile(player, '16');
+    const claimedSpace = game.board.getSpace('09');
+    claimedSpace.player = player;
+
+    expect(card.canPlay(player)).is.true;
+    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
+
+    const action = card.play(player);
+    expect(player.plants).eq(3);
+
+    const selectSpace = cast(action, SelectSpace);
+    expect(selectSpace.availableSpaces.map(toSpaceId)).deep.eq(['09', '23']);
+
+    expect(game.getOxygenLevel()).eq(0);
+
+    const space = selectSpace.availableSpaces[0];
+    expect(space.id).eq(claimedSpace.id);
+    selectSpace.cb(space);
+    expect(space.tile?.tileType).eq(TileType.WETLANDS);
+  });
 });

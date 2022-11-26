@@ -1,9 +1,9 @@
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../awards/Awards';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, THARSIS_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../awards/Awards';
 import {IAward} from '../awards/IAward';
 import {BoardName} from '../../common/boards/BoardName';
 import {GameOptions} from '../GameOptions';
 import {IMilestone} from '../milestones/IMilestone';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, THARSIS_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../milestones/Milestones';
 import {FullMoon} from '../moon/FullMoon';
 import {Lunarchitect} from '../moon/Lunarchitect';
 import {LunarMagnate} from '../moon/LunarMagnate';
@@ -76,8 +76,8 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   switch (gameOptions.randomMA) {
   case RandomMAOptionType.NONE:
     switch (gameOptions.boardName) {
-    case BoardName.ORIGINAL:
-      push(ORIGINAL_MILESTONES, ORIGINAL_AWARDS);
+    case BoardName.THARSIS:
+      push(THARSIS_MILESTONES, THARSIS_AWARDS);
       break;
     case BoardName.HELLAS:
       push(HELLAS_MILESTONES, HELLAS_AWARDS);
@@ -150,8 +150,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
 
   // map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
 
-  const candidateMilestones: Array<MilestoneName> = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
-  const candidateAwards: Array<AwardName> = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
+  const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+  const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
   if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
     candidateMilestones.push(...VENUS_MILESTONES.map(toName));
@@ -184,14 +184,13 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     }
     if (!gameOptions.coloniesExtension) {
       inplaceRemove(candidateMilestones, 'Colonizer');
-      inplaceRemove(candidateAwards, 'Pioneer');
+      inplaceRemove(candidateMilestones, 'Pioneer');
     }
     if (!gameOptions.turmoilExtension) {
       inplaceRemove(candidateAwards, 'Politician');
     }
   }
 
-  // TODO(kberg): Find a way to add the Arabia Terra milestones and awards in.
   inplaceShuffle(candidateMilestones, UnseededRandom.INSTANCE);
   inplaceShuffle(candidateAwards, UnseededRandom.INSTANCE);
 

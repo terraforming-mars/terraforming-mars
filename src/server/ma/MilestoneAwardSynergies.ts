@@ -136,7 +136,9 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Naturalist', 'Cultivator', 3],
   ['Naturalist', 'Edgedancer', 1],
 
+  // Start of fan synergies:
   ['Voyager', 'Rim Settler', 9],
+  ['Pioneer', 'Colonizer', 9],
 ];
 
 // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"

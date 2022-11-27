@@ -477,6 +477,8 @@ import * as constants from '@/common/constants';
 import * as json_constants from '@/client/components/create/json';
 import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 
+const REVISED_COUNT_ALGORITHM = false;
+
 export interface CreateGameModel {
     constants: typeof constants;
     allOfficialExpansions: boolean;
@@ -996,17 +998,19 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check custom corp count
       if (component.showCorporationList && customCorporations.length > 0) {
-        let neededCorpsCount = 0;
-        if (this.twoCorpsVariant) {
-          // Add an additional 4 for the Merger prelude
-          // Everyone-Merger needs an additional 4 corps per player
-          //  NB: This will not cover the case when no custom corp list is set!
-          //  It _can_ come about if  the number of corps included in all expansions is still not enough.
-          neededCorpsCount = (players.length * startingCorporations) + (players.length * 4);
-        } else {
-          neededCorpsCount = players.length * startingCorporations;
-          // Merger Prelude alone needs 4 additional preludes
-          if (this.prelude && this.promoCardsOption) neededCorpsCount += 4;
+        let neededCorpsCount = players.length * startingCorporations;
+        if (REVISED_COUNT_ALGORITHM) {
+          if (this.twoCorpsVariant) {
+            // Add an additional 4 for the Merger prelude
+            // Everyone-Merger needs an additional 4 corps per player
+            //  NB: This will not cover the case when no custom corp list is set!
+            //  It _can_ come about if  the number of corps included in all expansions is still not enough.
+            neededCorpsCount = (players.length * startingCorporations) + (players.length * 4);
+          } else {
+            neededCorpsCount = players.length * startingCorporations;
+            // Merger Prelude alone needs 4 additional preludes
+            if (this.prelude && this.promoCardsOption) neededCorpsCount += 4;
+          }
         }
         if (customCorporations.length < neededCorpsCount) {
           window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));

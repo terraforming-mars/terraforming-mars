@@ -31,14 +31,24 @@ export function translateText(englishText: string): string {
 
   let translatedText = translations[englishText];
 
-  // Check if translated word is in brackets
   if (translatedText === undefined) {
+    // Check if translated word is in brackets
     const isTextInBrackets = englishText.startsWith('(') && englishText.endsWith(')');
 
     if (isTextInBrackets) {
       const translationAttempt = translations[englishText.slice(1, -1)];
       if (translationAttempt) {
         translatedText = `(${translationAttempt})`;
+      }
+    }
+
+    // Check if text contains duplicate card label at the end; if so remove that label
+    const isTextDuplicateCard = englishText.endsWith(':SP') || englishText.endsWith(':ares') ||
+      englishText.endsWith(':Pathfinders') || englishText.endsWith(':promo');
+    if (isTextDuplicateCard) {
+      const translationAttempt = translations[englishText.slice(0, englishText.lastIndexOf(':'))];
+      if (translationAttempt) {
+        translatedText = `${translationAttempt}`;
       }
     }
   }

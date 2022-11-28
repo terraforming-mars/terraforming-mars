@@ -3,9 +3,8 @@ require('dotenv').config();
 import * as http from 'http';
 import * as fs from 'fs';
 import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
-import {GameOptions} from '../GameOptions';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
-import {AgendaStyle} from '../../common/turmoil/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';
 
@@ -15,7 +14,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   }
   const url = new URL(req.url, `http://localhost`);
   if (url.pathname === '/') {
-    fs.readFile('src/tools/analyze_ma.html', (err, data) => {
+    fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
       if (err) {
         res.writeHead(500);
         res.write('Internal server error ' + err);
@@ -56,6 +55,9 @@ function calc(params: URLSearchParams): string {
   if (params.get('moon') === 'true') {
     options.moonExpansion = true;
   }
+  if (params.get('fan-maps') === 'true') {
+    options.includeFanMA = true;
+  }
 
   const type = params.get('type');
   switch (type) {
@@ -91,41 +93,12 @@ function calc(params: URLSearchParams): string {
 
 function simpleGameOptions(): GameOptions {
   return {
-    clonedGamedId: undefined,
-    undoOption: false,
-    showTimers: false,
-    fastModeOption: false,
-    showOtherPlayersVP: false,
-    corporateEra: false,
-    coloniesExtension: false,
-    preludeExtension: false,
-    turmoilExtension: false,
-    promoCardsOption: false,
-    communityCardsOption: false,
+    ...DEFAULT_GAME_OPTIONS,
     aresHazards: false,
-    politicalAgendasExtension: AgendaStyle.STANDARD,
-    solarPhaseOption: false,
-    removeNegativeGlobalEventsOption: false,
-    draftVariant: false,
-    corporationsDraft: false,
+    corporateEra: false,
     initialDraftVariant: false,
-    includeFanMA: false,
+    showTimers: false,
     startingCorporations: 0,
-    shuffleMapOption: false,
-    soloTR: false,
-    customCorporationsList: [],
-    bannedCards: [],
-    customColoniesList: [],
-    customPreludes: [],
-    requiresVenusTrackCompletion: false, // Venus must be completed to end the game
-    requiresMoonTrackCompletion: false, // Moon must be completed to end the game
-    moonStandardProjectVariant: false,
-    altVenusBoard: false,
-    escapeVelocityMode: false,
-    escapeVelocityThreshold: undefined,
-    escapeVelocityPeriod: undefined,
-    escapeVelocityPenalty: undefined,
-    twoCorpsVariant: false,
 
     // The options that can change, should be parameters.
     boardName: BoardName.THARSIS,
@@ -134,6 +107,7 @@ function simpleGameOptions(): GameOptions {
     includeVenusMA: false,
     moonExpansion: false,
     pathfindersExpansion: false,
+    includeFanMA: false,
     randomMA: RandomMAOptionType.NONE,
   };
 }

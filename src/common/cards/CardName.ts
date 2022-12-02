@@ -471,6 +471,7 @@ export enum CardName {
     NEW_PARTNER = 'New Partner',
     MERGER = 'Merger',
     CORPORATE_ARCHIVES = 'Corporate Archives',
+    DOUBLE_DOWN = 'Double Down',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',

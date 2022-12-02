@@ -1108,7 +1108,7 @@ export class Player {
     }
   }
 
-  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' = 'add'): undefined {
+  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: 'add' | 'discard' | 'nothing' | 'action-only' = 'add'): undefined {
     if (payment !== undefined) {
       this.pay(payment);
     }
@@ -1160,10 +1160,13 @@ export class Player {
     // Do nothing. Good for fake cards.
     case 'nothing':
       break;
+    // Do nothing, used for Double Down.
+    case 'action-only':
+      break;
     }
 
     // See DeclareCloneTag for why.
-    if (!selectedCard.tags.includes(Tag.CLONE)) {
+    if (!selectedCard.tags.includes(Tag.CLONE) && cardAction !== 'action-only') {
       this.onCardPlayed(selectedCard);
     }
 

@@ -71,6 +71,8 @@ export class GameCards {
         return gameOptions.coloniesExtension;
       case 'turmoil':
         return gameOptions.turmoilExtension;
+      case 'prelude':
+        return gameOptions.preludeExtension;
       case 'moon':
         return gameOptions.moonExpansion;
       case 'pathfinders':

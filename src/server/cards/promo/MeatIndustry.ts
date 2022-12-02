@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 import {ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
+import {Resources} from '../../../common/Resources';
 
 export class MeatIndustry extends Card implements IProjectCard {
   constructor() {
@@ -29,7 +30,7 @@ export class MeatIndustry extends Card implements IProjectCard {
 
   public onResourceAdded(player: Player, card: ICard, count: number) {
     if (card.resourceType === CardResource.ANIMAL) {
-      player.megaCredits += count * 2;
+      player.addResource(Resources.MEGACREDITS, count * 2, {log: true});
     }
   }
 }

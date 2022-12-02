@@ -2,7 +2,7 @@ require('dotenv').config();
 
 import * as http from 'http';
 import * as fs from 'fs';
-import {chooseMilestonesAndAwards} from '../MilestoneAwardSelector';
+import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
 import {GameOptions} from '../GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
 import {AgendaStyle} from '../../common/turmoil/Types';
@@ -125,9 +125,10 @@ function simpleGameOptions(): GameOptions {
     escapeVelocityThreshold: undefined,
     escapeVelocityPeriod: undefined,
     escapeVelocityPenalty: undefined,
+    twoCorpsVariant: false,
 
     // The options that can change, should be parameters.
-    boardName: BoardName.ORIGINAL,
+    boardName: BoardName.THARSIS,
     venusNextExtension: false,
     aresExtension: false,
     includeVenusMA: false,

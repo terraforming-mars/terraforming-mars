@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../src/server/awards/Awards';
-import {IAward} from '../src/server/awards/IAward';
-import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../src/server/MilestoneAwardSelector';
-import {IMilestone} from '../src/server/milestones/IMilestone';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../src/server/milestones/Milestones';
-import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
-import {testGameOptions} from './TestingUtils';
-import {intersection} from '../src/common/utils/utils';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, TERRA_CIMMERIA_AWARDS, THARSIS_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../../src/server/awards/Awards';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, TERRA_CIMMERIA_MILESTONES, THARSIS_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../../src/server/milestones/Milestones';
+import {IAward} from '../../src/server/awards/IAward';
+import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
+import {IMilestone} from '../../src/server/milestones/IMilestone';
+import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
+import {testGameOptions} from '../TestingUtils';
+import {intersection} from '../../src/common/utils/utils';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
   return list.map((e) => e.name);
@@ -18,7 +18,7 @@ describe('MilestoneAwardSelector', () => {
 
   it('Tharsis milestones and awards have high synergy', () => {
     // Gardener / Landlord have synergy 6.
-    expect(maximumSynergy(toNames([...ORIGINAL_MILESTONES, ...ORIGINAL_AWARDS]))).eq(6);
+    expect(maximumSynergy(toNames([...THARSIS_MILESTONES, ...THARSIS_AWARDS]))).eq(6);
   });
 
   it('Elysium milestones and awards have high synergy', () => {
@@ -38,7 +38,7 @@ describe('MilestoneAwardSelector', () => {
   it('Tharsis milestones and awards break limited synergy rules', () => {
     // Tharsis milestones and awards has total synergy of 21 and break the rules.
     expect(verifySynergyRules(
-      toNames([...ORIGINAL_MILESTONES, ...ORIGINAL_AWARDS]),
+      toNames([...THARSIS_MILESTONES, ...THARSIS_AWARDS]),
       LIMITED_SYNERGY)).eq(false);
   });
 

@@ -54,7 +54,7 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {SeededRandom} from './Random';
-import {chooseMilestonesAndAwards} from './MilestoneAwardSelector';
+import {chooseMilestonesAndAwards} from './ma/MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {MultiSet} from 'mnemonist';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
@@ -623,7 +623,9 @@ export class Game implements Logger {
 
   private gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
+
     this.save();
+
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
         player.setWaitingFor(this.pickCorporationCard(player));

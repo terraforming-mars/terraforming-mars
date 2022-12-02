@@ -1,12 +1,12 @@
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {expect} from 'chai';
-import {OriginalBoard} from '../../src/server/boards/OriginalBoard';
+import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {SeededRandom} from '../../src/server/Random';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 
-describe('OriginalBoard', function() {
+describe('TharsisBoard', function() {
   it('has error with input while calling getAdjacentSpaces', function() {
-    const board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+    const board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(function() {
       board.getAdjacentSpaces({
         x: 0,

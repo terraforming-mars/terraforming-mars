@@ -39,7 +39,7 @@ import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
 import {Zoologist2} from './amazonisPlanitia/Zoologist';
 
-export const ORIGINAL_AWARDS: Array<IAward> = [
+export const THARSIS_AWARDS: Array<IAward> = [
   new Landlord(),
   new Scientist(),
   new Banker(),
@@ -109,7 +109,7 @@ export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
 ];
 
 export const ALL_AWARDS: Array<IAward> = [
-  ...ORIGINAL_AWARDS,
+  ...THARSIS_AWARDS,
   ...ELYSIUM_AWARDS,
   ...HELLAS_AWARDS,
   ...VENUS_AWARDS,

@@ -39,7 +39,7 @@ import {Gambler} from './terraCimmeria/Gambler';
 import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 
-export const ORIGINAL_MILESTONES: Array<IMilestone> = [
+export const THARSIS_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
   new Mayor(),
   new Gardener(),
@@ -109,7 +109,7 @@ export const VASTITAS_BOREALIS_MILESTONES: Array<IMilestone> = [
 ];
 
 export const ALL_MILESTONES: Array<IMilestone> = [
-  ...ORIGINAL_MILESTONES,
+  ...THARSIS_MILESTONES,
   ...ELYSIUM_MILESTONES,
   ...HELLAS_MILESTONES,
   ...VENUS_MILESTONES,

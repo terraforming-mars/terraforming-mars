@@ -574,6 +574,7 @@ export class Server {
       turmoilExtension: options.turmoilExtension,
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
+      twoCorpsVariant: options.twoCorpsVariant,
     };
   }
 

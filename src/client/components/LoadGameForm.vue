@@ -6,6 +6,7 @@ import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {mainAppSettings} from '@/client/components/App';
 
 import * as constants from '@/common/constants';
+import * as paths from '@/common/app/paths';
 
 export default Vue.extend({
   name: 'LoadGameForm',
@@ -24,7 +25,7 @@ export default Vue.extend({
       const gameId = this.$data.gameId;
       const rollbackCount = this.$data.rollbackCount;
       const xhr = new XMLHttpRequest();
-      xhr.open('PUT', '/load_game');
+      xhr.open('PUT', paths.LOAD_GAME);
       xhr.onerror = function() {
         alert('Error loading game');
       };

@@ -166,6 +166,7 @@
 
 import Vue from 'vue';
 import * as constants from '@/common/constants';
+import * as paths from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
@@ -216,7 +217,7 @@ export default Vue.extend({
       if (id === undefined) {
         return undefined;
       }
-      return `/api/game/logs?id=${id}&full=true`;
+      return `${paths.API_GAME_LOGS}?id=${id}&full=true`;
     },
   },
   data() {

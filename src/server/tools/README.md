@@ -66,7 +66,7 @@ to get advice on setting up your `POSTGRES_HOST` environment variable.)
 Starts a local web server that you can use to get results of MA synergy. To run,
 
 ```sh
-npm run compile
+npm run build:server
 node build/src/server/tools/analyze_ma.js
 ```
 

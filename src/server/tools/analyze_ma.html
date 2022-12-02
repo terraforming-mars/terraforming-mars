@@ -24,7 +24,7 @@
     <script type="text/javascript">
       // set the dimensions and margins of the graph
       var margin = {top: 30, right: 30, bottom: 70, left: 60};
-      var width = 800 - margin.left - margin.right;
+      var width = 1200 - margin.left - margin.right;
       var height = 400 - margin.top - margin.bottom;
 
       function submit() {
@@ -63,7 +63,7 @@
 
         // Add Y axis
         var y = d3.scaleLinear()
-          .domain([0, d3.max(data.map((d) => d.count))])
+          .domain([0, Math.max(...data.map((d) => d.count))])
           .range([height, 0]);
         svg.append("g")
           .call(d3.axisLeft(y));

@@ -15,6 +15,7 @@ import {CuttingEdgeTechnology} from './CuttingEdgeTechnology';
 import {DeimosDownPromo} from './DeimosDownPromo';
 import {DirectedImpactors} from './DirectedImpactors';
 import {DiversitySupport} from './DiversitySupport';
+import {DoubleDown} from './DoubleDown';
 import {DuskLaserMining} from './DuskLaserMining';
 import {EnergyMarket} from './EnergyMarket';
 import {Factorum} from './Factorum';
@@ -102,6 +103,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.NEW_PARTNER]: {Factory: NewPartner},
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
+    [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
   },
 
   cardsToRemove: [

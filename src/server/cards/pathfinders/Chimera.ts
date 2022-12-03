@@ -26,7 +26,7 @@ export class Chimera extends Card implements ICorporationCard {
           b.corpBox('effect', (ce) => {
             ce.effect('When you perform an action, these wild tags count as any tags of your choice. ' +
               'For claiming milestones and funding awards, both symbols count as one. ' +
-              '(Other wild tags still do not count toward Awards.)',
+              '(Other wild tags still do not count toward awards.)',
             (ce) => ce.wild(2, {played}).startEffect.wild(2, {played}).slash().wild(1, {played}).asterix());
           });
         }),

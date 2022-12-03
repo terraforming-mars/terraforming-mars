@@ -7,7 +7,7 @@
     "Expansions": "Rozszerzenia",
     "Options": "Ustawienia",
     "Promos": "Karty promo",
-	
+
     "Starting Corporations": "Początkowe korporacje",
     "Corporations": "Korporacje",
     "Create Game": "Stwórz grę",
@@ -15,7 +15,7 @@
     "Your name": "Twoje imię",
     "Board": "Plansza",
     "Beginner?": "Początkujący?",
-	
+
     "Red": "Czerwony",
     "Green": "Zielony",
     "Yellow": "Żółty",
@@ -24,15 +24,15 @@
     "Purple": "Fioletowy",
     "Orange": "Pomarańczowy",
     "Pink": "Różowy",
-	
+
     "victoryPoints": "Punkty Zwycięstwa",
-    "terraformRating": "Współczynnik Terraformacji",	
-    "milestones": "Tytuł",	
+    "terraformRating": "Współczynnik Terraformacji",
+    "milestones": "Tytuł",
     "Claimed ": "Zdobyto ",
     " milestone": " tytuł",
     "greenery": "zieleń",
     "city": "miasto",
-	
+
     "tharsis": "Tharsis",
     "hellas": "Hellas",
     "elysium": "Elysium",
@@ -40,7 +40,7 @@
     "random all": "Losowa",
     "random": "Losowa",
     "GEN": "Pokolenie",
-	
+
     "Venus scale": "Współczynnik Terraformacji Wenus",
     "Generation Marker": "Wskaźnik pokolenia",
     "Ruling Party": "Partia rządząca",
@@ -74,10 +74,10 @@
     "of 14": "z 14",
     "You": "Ty",
     "you": "ty",
-	
+
     "researching": "badania",
     "Milestones": "Tytuły",
-	
+
     "Builder": "Konstruktor",
     "Having at least 8 building tags in play": "Gracz posiada co najmniej 8 symboli Budowli.",
     "Diversifier": "Dywersyfikator",
@@ -112,11 +112,11 @@
     "Requires that you have 15 project cards in play (blue and green cards)": "Gracz zagrał co najmniej 15 kart projektów aktywnych i natychmiastowych (niebieskich i zielonych).",
     "Businessperson": "Biznesmen",
     "Requires that you have 6 Earth tags in play": "Gracz posiada co najmniej 6 symboli Ziemi.",
-    "Capitalist": "Kapitalista", 
+    "Capitalist": "Kapitalista",
     "Have at least 64 M€": "Gracz posiada co najmniej 64 M€.",
-    "Colonizer": "Kolonizator", 
+    "Colonizer": "Kolonizator",
     "Have 4 colonies built": "Gracz posiada co najmniej 4 kolonie.",
-    "Collector": "Zbieracz", 
+    "Collector": "Zbieracz",
     "Have 3 sets of automated, active and event cards": "Gracz posiada co najmniej 3 komplety kart (karta natychmiastowa, aktywna i wydarzeń).",
     "Electrician": "Elektryk",
     "Have at least 4 Power tags": "Gracz posiada co najmniej 4 symbole Energii.",
@@ -142,7 +142,7 @@
     "Place three tiles adjacent to tiles that grants adjacency bonus": "Gracz posiada co najmniej 3 obszary sąsiadujące z obszarami zapewniającymi premię za sąsiedztwo (z żółtą ramką).",
     "One Giant Step": "Wielki Krok",
     "Have at least 6 moon tags in play": "Gracz posiada co najmniej 6 symboli Księżyca.",
-    "Pioneer": "Pionier", 
+    "Pioneer": "Pionier",
     "Requires that you have 3 colonies in play": "Gracz posiada co najmniej 3 kolonie.",
     "Smith": "Kowal",
     "Have a total of at least 7 steel and titanium production": "Gracz posiada łącznie co najmniej 7 poziomów produkcji stali i tytanu.",
@@ -156,8 +156,8 @@
     "Have at least 3 different types of non-standard resources": "Gracz posiada co najmniej 3 różne zasoby niestandardowe.",
     "Tropicalist": "Eksplorator Równika",
     "Have 3 tiles in the middle 3 equatorial rows": "Gracz posiada co najmniej 3 obszary przy równiku (3 środkowe rzędy planszy).",
-	
-    "Awards": "Nagrody",   
+
+    "Awards": "Nagrody",
     "Landlord": "Potentat Ziemski",
     "Owning the most tiles in play": "Gracz posiada najwięcej obszarów na planszy.",
     "Banker": "Bankier",
@@ -193,7 +193,7 @@
     "Entrepreneur": "Dobry Sąsiad",
     "Most tiles that grant adjacency bonuses": "Gracz posiada najwięcej obszarów zapewniających premię za sąsiedztwo.",
     "Full Moon": "Pełnia",
-    "Having the most moon tags in play.": "Gracz posiada najwięcej symboli Księżyca.",  
+    "Having the most moon tags in play.": "Gracz posiada najwięcej symboli Księżyca.",
     "Lunar Magnate": "Magnat Księżycowy",
     "Owning the most tiles on The Moon.": "Gracz posiada najwięcej obszarów na powierzchni Księżyca.",
     "Curator": "Kurator",
@@ -207,11 +207,11 @@
     "A. Zoologist": "Zaaw. Zoolog",
     "Most animal and microbe resources": "Gracz posiada łącznie najwięcej jednostek zwierząt i mikrobów.",
     "Biologist": "Biolog",
-    "Having the most Animal, Plant, and Microbe tags in play": "Gracz posiada łącznie najwięcej symboli Zwierząt, Roślin i Mikrobów.",
+    "Having the most animal, plant, and microbe tags in play": "Gracz posiada łącznie najwięcej symboli Zwierząt, Roślin i Mikrobów.",
     "T. Economizer": "Łowca Promocji",
     "Most cards in play costing 10 M€ or less": "Gracz zagrał najwięcej kart o koszcie nie większym niż 10 M€.",
     "Botanist": "Botanik",
-    "Having the highest plant production": "Gracz posiada największy poziom produkcji roślinności.",  
+    "Having the highest plant production": "Gracz posiada największy poziom produkcji roślinności.",
     "Coordinator": "Koordynator",
     "Having the most event cards in play": "Gracz zagrał najwięcej kart wydarzeń.",
     "Manufacturer": "Wytwórca",
@@ -235,7 +235,7 @@
     "Voyager": "Podróżnik",
     "Having the most Jovian tags in play": "Gracz posiada najwięcej symboli Jowisza.",
     "Cosmic Settler": "Kosmiczny Osadnik",
-    "Having the most city tiles not on Mars": "Gracz posiada najwięcej obszarów miast poza powierzchnią Marsa.",	
+    "Having the most city tiles not on Mars": "Gracz posiada najwięcej obszarów miast poza powierzchnią Marsa.",
 
     "Actions": "Akcje",
     "Hide active cards": "Ukryj aktywne karty",
@@ -258,7 +258,7 @@
     "Save": "Zapisz",
     "show tiles": "Pokaż obszary",
     "hide tiles": "Ukryj obszary",
-	
+
     "toggle tags view:": "Przełącz widok symboli:",
     "concise": "zwięzłe",
     "CONCISE": "zwięzłe",
@@ -272,7 +272,7 @@
     "Convert 8 heat into temperature": "Wydaj 8 jednostek ciepła, aby podnieść temperaturę",
     "Convert 8 plants into greenery": "Wydaj 8 jednostek roślinności, aby umieścić na planszy obszar zieleni",
     "Convert 7 plants into greenery": "Wydaj 7 jednostek roślinności, aby umieścić na planszy obszar zieleni",
-	
+
     "Colonies": "Kolonie",
     "funded by": "ufundowany przez:",
     "claimed by": "zdobyta przez:",
@@ -290,7 +290,7 @@
     "Undo last action": "Cofnij ostatnią akcję",
     "End Turn": "Zakończ turę",
     "Perform an action from a played card": "Wykonaj akcję z zagranej karty",
-	
+
     "Power plant (11 M€)": "Elektrownia (11 M€)",
     "Asteroid (14 M€)": "Asteroida (14 M€)",
     "Aquifer (18 M€)": "Nawodnienie (18 M€)",
@@ -305,7 +305,7 @@
     "Greenery": "Zieleń",
     "City": "Obszar miasta",
     "Buffer Gas": "Gaz buforowy",
-	
+
     "Pay 9 M€": "Wydaj 9 M€",
     "Pay 3 Energy": "Wydaj 3 jednostki energii",
     "Pay 3 Titanium": "Wydaj 3 jednostki tytanu",
@@ -368,7 +368,7 @@
     "Select space for special tile": "Wybierz pole do umieszczenia obszaru specjalnego",
     "Starting Megacredits:": "Startowe Megakredyty:",
     "After Preludes:": "Po preludiach:",
-	
+
     "Select a card to keep and pass the rest to ${0}": "Wybierz kartę, którą chcesz zatrzymać i przekaż resztę do ${0}",
     "Select two cards to keep and pass the rest to ${0}": "Wybierz dwie karty, które chcesz zatrzymać i przekaż resztę do ${0}",
     "Game Home": "Strona główna",
@@ -379,7 +379,7 @@
     "Select space for second ocean": "Wybierz pole do umieszczenia drugiego obszaru oceanu",
     "Select space for city tile": "Wybierz pole do umieszczenia obszaru miasta",
     "Select space for greenery tile": "Wybierz pole do umieszczenia obszaru zieleni",
-	
+
     "show": "Pokaż",
     "hide": "Ukryj",
     "Game Log": "Dziennik gry",
@@ -413,7 +413,7 @@
     "Place a city tile": "Umieść obszar miasta",
     "All": "Wszystkie",
     "None": "Żadne",
-	
+
     "Corporate Era": "Era Korporacyjna",
     "Randomize board tiles": "Losowe rozłożenie pól na planszy",
     "Set Predefined Game": "Ustaw predefiniowaną rozgrywkę",
@@ -426,7 +426,7 @@
     "vastitas borealis": "Vastitas Borealis",
     "amazonis p.": "Amazonis Planitia",
     "t. cimmeria": "Terra Cimmeria",
-	
+
     "Escape Velocity": "Prędkość ucieczki",
     "After ${0} min": "co ${0} minut",
     "After": "Co",
@@ -434,7 +434,7 @@
     "Reduce": "Zmniejsz",
     "VP every": "Wszystkie PZ",
     "Reduce ${0} VP every ${1} min": "Zmniejsz ${0} PZ co ${1} minut",
-	
+
     "Exclude some cards": "Wyklucz karty",
     "Custom Colonies list": "Niestandardowa lista kolonii",
     "Remove negative Global Events": "Usuń negatywne Wydarzenia globalne",
@@ -482,7 +482,7 @@
     "TR all": "WT bez limitu",
     "63 TR": "63 WT",
     "Ok": "OK",
-	
+
     "The number of available actions on active cards": "Liczba dostępnych akcji na aktywnych kartach",
     "Escape Velocity penalty": "Kara prędkości ucieczki",
     "Actions taken this game": "Liczba akcji podczas rozgrywki",

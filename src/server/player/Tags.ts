@@ -136,9 +136,11 @@ export class Tags {
     return tagCount;
   }
 
-  // Return the total number of tags assocaited with these types.
-  // Tag substitutions are included
-  public multipleCount(tags: Array<Tag>, mode: 'default' | 'milestones' = 'default'): number {
+  /**
+   * Return the total number of tags assocaited with these types.
+   * Tag substitutions are included
+    */
+  public multipleCount(tags: Array<Tag>, mode: 'default' | 'milestones' | 'awards' = 'default'): number {
     let tagCount = 0;
     tags.forEach((tag) => {
       tagCount += this.rawCount(tag, false);
@@ -149,10 +151,15 @@ export class Tags {
       tagCount += this.rawCount(Tag.MOON, false);
     }
 
-    tagCount += this.rawCount(Tag.WILD, false);
+    if (mode !== 'awards') {
+      tagCount += this.rawCount(Tag.WILD, false);
+      // Chimera has 2 wild tags but should only count as one for milestones.
+      if (this.player.isCorporation(CardName.CHIMERA) && mode === 'milestones') tagCount--;
+    } else {
+      // Chimera counts as one wild tag for awards
+      if (this.player.isCorporation(CardName.CHIMERA)) tagCount++;
+    }
 
-    // Chimera has 2 wild tags but should only count as one for milestones.
-    if (this.player.isCorporation(CardName.CHIMERA) && mode === 'milestones') tagCount--;
 
     return tagCount;
   }

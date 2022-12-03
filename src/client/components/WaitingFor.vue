@@ -13,8 +13,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-
-import {mainAppSettings} from '@/client/components/App';
+import {MainAppData, mainAppSettings} from '@/client/components/App';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -65,8 +64,9 @@ export default Vue.extend({
     },
     onsave(out: InputResponse) {
       const xhr = new XMLHttpRequest();
-      const root = this.$root as unknown as typeof mainAppSettings.data;
+      const root = this.$root as unknown as MainAppData;
       const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;

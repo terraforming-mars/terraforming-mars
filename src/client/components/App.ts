@@ -114,15 +114,15 @@ export const mainAppSettings = {
     },
     setVisibilityState(targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;
-      (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] = isVisible;
+      (this as unknown as MainAppData).componentsVisibility[targetVar] = isVisible;
     },
     getVisibilityState(targetVar: string): boolean {
-      return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
+      return (this as unknown as MainAppData).componentsVisibility[targetVar] ? true : false;
     },
     update(path: '/player' | '/spectator'): void {
       const currentPathname = window.location.pathname;
       const xhr = new XMLHttpRequest();
-      const app = this as unknown as typeof mainAppSettings.data;
+      const app = this as unknown as MainAppData;
 
       const url = '/api' + path + window.location.search.replace('&noredirect', '');
       xhr.open('GET', url);
@@ -186,7 +186,7 @@ export const mainAppSettings = {
     document.title = constants.APP_NAME;
     if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
     const currentPathname = window.location.pathname;
-    const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
+    const app = this as unknown as (MainAppData) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player') {
       app.updatePlayer();
     } else if (currentPathname === '/the-end') {

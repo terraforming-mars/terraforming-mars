@@ -77,11 +77,11 @@
     "Having at least 8 building tags in play": "Mindestens 8 eigene Gebäudesymbole im Spiel.",
     "Businessperson": "Geschäftsmann",
     "Requires that you have 6 Earth tags in play": "Benötigt mindestens 6 eigene Erd-Symbole im Spiel.",
-    "Capitalist": "Kapitalist", 
+    "Capitalist": "Kapitalist",
     "Have at least 64 M€": "Benötigt mindestens 64 M€-Ressourcen.",
-    "Colonizer": "Kolonisator", 
+    "Colonizer": "Kolonisator",
     "Have 4 colonies built": "Benötigt 4 Kolonien im Spiel.",
-    "Collector": "Sammler", 
+    "Collector": "Sammler",
     "Have 3 sets of automated, active and event cards": "Besitze 3 Sets aus automatischen, aktiven und Ereigniskarten.",
     "Diversifier": "Aufteiler",
     "Requires that you have 8 different tags in play": "Benötigt mindestens 8 unterschiediche, eigene Symbole im Spiel.",
@@ -123,7 +123,7 @@
     "Place three tiles adjacent to tiles that grants adjacency bonus": "Platziere drei Plättchen neben Plättchen, die einen Nachbarschaftsbonus gewähren.",
     "One Giant Step": "Großer Schritt",
     "Have at least 6 moon tags in play": "Benötigt mindestens 6 eigene Mond-Symbole im Spiel.",
-    "Pioneer": "Pionier", 
+    "Pioneer": "Pionier",
     "Requires that you have 3 colonies in play": "Benötigt 3 Kolonien im Spiel.",
     "Planner": "Planer",
     "Having at least 16 cards in your hand when you claim this milestone": "Mindestens 16 eigene Handkarten im Moment der Beanspruchung dieses Meilensteins.",
@@ -212,7 +212,7 @@
     "A. Zoologist": "A. Zoologe",
     "Most animal and microbe resources": "Die meisten Tier- und Mikroben-Ressourcen haben.",
     "Biologist": "Umweltschützer",
-    "Having the most Animal, Plant, and Microbe tags in play": "Die meisten Tier-, Pflanzen- und Mikroben-Symbole im Spiel (Ereigniskarten zählen nicht).",
+    "Having the most animal, plant, and microbe tags in play": "Die meisten Tier-, Pflanzen- und Mikroben-Symbole im Spiel (Ereigniskarten zählen nicht).",
     "T. Economizer": "Kleinunternehmer",
     "Most cards in play costing 10 M€ or less": "Die meisten ausgespielten Karten, die 10 M€ oder weniger kosten.",
     "Politician": "Politiker",
@@ -231,7 +231,7 @@
     "Most plant and heat production": "Die höchste Pflanzen- und Wärmeproduktion (in Summe) haben.",
     "Voyager": "Der Reisende",
     "Having the most Jovian tags in play": "Die meisten Jupiter-Symbole im Spiel (Ereigniskarten zählen nicht).",
-    
+
     "Actions": "Aktionen",
     "Hide active cards": "Verstecke aktive Karten",
     "Show active cards": "Zeige aktive Karten",
@@ -336,7 +336,7 @@
     "filter": "Filter",
     "Filter description": "Filter-Beschreibung",
     "Sort by ID": "Nach ID sortieren",
-    
+
     "Remove colony": "Kolonie entfernen",
     "Select colony tile to remove":  "Wähle Kolonieplättchen aus, das entfernt werden soll",
     "Select where to build the first colony": "Bestimme den Ort der ersten Kolonie",
@@ -364,7 +364,7 @@
 
     "Starting Megacredits:": "Startkapital:",
     "After Preludes:": "Nach Präludium:",
-    
+
     "Select a space with a steel or titanium bonus adjacent to one of your tiles": "Wähle ein Feld mit Stahl- oder Titan-Platzierungsbonus angrenzend zu deinen Plättchen",
     "Spend 3 M€ to draw a building card": "Bezahle 3 M€ um eine Karte mit Gebäude-Symbol zu ziehen",
     "Remove 2 microbes to raise temperature 1 step": "Entferne 2 Mikroben, um die Temperatur um 2 °C zu erhöhen",
@@ -478,7 +478,7 @@
     "Select card to add 1 floater(s)": "Wähle 1 Karte, um 1 Schweber hinzuzufügen",
     "Add resource": "Füge Ressourcen hinzu",
     "Select card to add 4 Floater(s)": "Wähle 1 Karte, um 4 Schweber hinzuzufügen",
-    
+
     "Choose 1 unit(s) of production to lose": "Wähle 1 Einheit Produktion, die verloren geht",
     "Choose 2 unit(s) of production to lose": "Wähle 2 Einheit Produktion, die verloren geht",
     "Which resource production would you prefer to decrease?": "Welche Produktionsart bevorzugst Du zu reduzieren?",
@@ -536,7 +536,7 @@
     "player aid": "Spielerhilfe",
     "Player Settings": "Spieler Aufbau",
     "Venus scale": "Venuswertung",
-    
+
     "Your selected cards:": "Deine ausgewählten Karten",
     "Place a city tile": "Platziere ein Stadtplättchen",
 
@@ -667,7 +667,7 @@
     "Select how to pay for milestone": "Wähle, wie du für den Meilenstein bezahlen möchtest",
     "Select how to pay for award": "Wähle, wie du für die Auszeichnung bezahlen möchtest",
     "Select how to pay for cards": "Wähle, wie du für die Karten bezahlen möchtest",
-      
+
     "Select how to pay for Power Plant standard project": "Wähle aus, wie du für das Standardprojekt Kraftwerk bezahlen möchtest",
     "Select how to pay for Asteroid standard project": "Wähle aus, wie du für das Standardprojekt Asteroid bezahlen möchtest",
     "Select how to pay for Aquifer standard project": "Wähle aus, wie du für das Standardprojekt Ozean bezahlen möchtest",

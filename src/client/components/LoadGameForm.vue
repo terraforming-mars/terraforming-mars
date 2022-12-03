@@ -3,7 +3,7 @@ import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
-import {mainAppSettings} from '@/client/components/App';
+import {MainAppData} from '@/client/components/App';
 
 import * as constants from '@/common/constants';
 import * as paths from '@/common/app/paths';
@@ -38,8 +38,8 @@ export default Vue.extend({
             return;
           } else {
             window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
-            (this.$root.$data as unknown as typeof mainAppSettings.data).game = response;
-            (this.$root.$data as unknown as typeof mainAppSettings.data).screen = 'game-home';
+            (this.$root.$data as unknown as MainAppData).game = response;
+            (this.$root.$data as unknown as MainAppData).screen = 'game-home';
           }
         } else {
           alert('Unexpected server response');

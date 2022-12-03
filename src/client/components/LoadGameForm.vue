@@ -7,6 +7,7 @@ import {mainAppSettings} from '@/client/components/App';
 
 import * as constants from '@/common/constants';
 import * as paths from '@/common/app/paths';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 
 export default Vue.extend({
   name: 'LoadGameForm',
@@ -30,7 +31,7 @@ export default Vue.extend({
         alert('Error loading game');
       };
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           const response = xhr.response as SimpleGameModel;
           if (response.players.length === 1) {
             window.location.href = '/player?id=' + response.players[0].id;

@@ -24,6 +24,7 @@ import {WaitingForModel} from '@/common/models/WaitingForModel';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import * as paths from '@/common/app/paths';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
@@ -75,7 +76,7 @@ export default Vue.extend({
       xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           root.screen = 'empty';
           root.playerView = xhr.response;
           root.playerkey++;
@@ -83,7 +84,7 @@ export default Vue.extend({
           if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
             (window).location = (window).location; // eslint-disable-line no-self-assign
           }
-        } else if (xhr.status === 400 && xhr.responseType === 'json') {
+        } else if (xhr.status === HTTPResponseCode.BAD_REQUEST && xhr.responseType === 'json') {
           showAlert(xhr.response.message);
         } else {
           showAlert('Unexpected response from server. Please try again.');
@@ -106,7 +107,7 @@ export default Vue.extend({
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
         xhr.onload = () => {
-          if (xhr.status === 200) {
+          if (xhr.status === HTTPResponseCode.OK) {
             const result = xhr.response as WaitingForModel;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.

@@ -17,6 +17,7 @@ import {$t} from '@/client/directives/i18n';
 
 import * as constants from '@/common/constants';
 import * as paths from '@/common/app/paths';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
@@ -130,7 +131,7 @@ export const mainAppSettings = {
       };
       xhr.onload = function() {
         try {
-          if (xhr.status === 200) {
+          if (xhr.status === HTTPResponseCode.OK) {
             const model = xhr.response as ViewModel;
             if (path === '/player') {
               app.playerView = model as PlayerViewModel;
@@ -206,7 +207,7 @@ export const mainAppSettings = {
         alert('Error getting game data');
       };
       xhr.onload = function() {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           window.history.replaceState(
             xhr.response,
             `${constants.APP_NAME} - Game`,

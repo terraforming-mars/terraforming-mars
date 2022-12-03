@@ -1,8 +1,8 @@
-import {isPlayerId} from '../../common/Types';
 import * as http from 'http';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
+import {getPlayerFromRequest} from './util';
 
 export class ApiPlayer extends Handler {
   public static readonly INSTANCE = new ApiPlayer();
@@ -12,27 +12,10 @@ export class ApiPlayer extends Handler {
   }
 
   public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
-    const playerId = ctx.url.searchParams.get('id');
-    if (playerId === null) {
-      ctx.route.badRequest(req, res, 'missing id parameter');
+    const player = await getPlayerFromRequest(req, res, ctx);
+    if (player === undefined) {
       return;
     }
-    if (!isPlayerId(playerId)) {
-      ctx.route.badRequest(req, res, 'invalid player id');
-      return;
-    }
-    const game = await ctx.gameLoader.getGame(playerId);
-    if (game === undefined) {
-      ctx.route.notFound(req, res);
-      return;
-    }
-    try {
-      const player = game.getPlayerById(playerId);
-      ctx.route.writeJson(res, Server.getPlayerModel(player));
-    } catch (err) {
-      console.warn(`unable to find player ${playerId}`, err);
-      ctx.route.notFound(req, res);
-      return;
-    }
+    ctx.route.writeJson(res, Server.getPlayerModel(player));
   }
 }

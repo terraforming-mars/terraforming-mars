@@ -6,7 +6,7 @@ import {Context} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 import {InputResponse} from '../../common/inputs/InputResponse';
-import {isPlayerId} from '../../common/Types';
+import {getPlayerFromRequest} from './util';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -15,31 +15,8 @@ export class PlayerInput extends Handler {
   }
 
   public override async post(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {
-    const playerId = ctx.url.searchParams.get('id');
-    if (playerId === null) {
-      ctx.route.badRequest(req, res, 'missing id parameter');
-      return;
-    }
-
-    if (!isPlayerId(playerId)) {
-      ctx.route.badRequest(req, res, 'invalid player id');
-      return;
-    }
-
-    // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
-    const game = await ctx.gameLoader.getGame(playerId);
-    if (game === undefined) {
-      ctx.route.notFound(req, res);
-      return;
-    }
-    let player: Player | undefined;
-    try {
-      player = game.getPlayerById(playerId);
-    } catch (err) {
-      console.warn(`unable to find player ${playerId}`, err);
-    }
+    const player = await getPlayerFromRequest(req, res, ctx);
     if (player === undefined) {
-      ctx.route.notFound(req, res);
       return;
     }
     return this.processInput(req, res, ctx, player);

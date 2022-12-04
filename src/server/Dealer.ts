@@ -8,6 +8,7 @@ import {LogHelper} from './LogHelper';
 import {Random, UnseededRandom} from './Random';
 import {Logger} from './logs/Logger';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import { ILeaderCard } from './cards/leaders/ILeaderCard';
 
 const INCOMPATIBLE_PRELUDES = [CardName.BY_ELECTION, CardName.THE_NEW_SPACE_RACE] as const;
 
@@ -16,7 +17,7 @@ export class Dealer {
   public preludeDeck: Array<IPreludeCard> = [];
   public discarded: Array<IProjectCard> = [];
   public corporationCards: Array<ICorporationCard> = [];
-  public leaderDeck: Array<IProjectCard> = [];
+  public leaderDeck: Array<ILeaderCard> = [];
   private random: Random;
 
   private constructor(random: Random) {

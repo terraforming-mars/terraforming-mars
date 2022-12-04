@@ -52,6 +52,35 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
       );
     }
 
+    if (player.game.gameOptions.preludeExtension) {
+      this.options.push(
+        new SelectCard(
+          'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
+          (preludeCards: Array<IProjectCard>) => {
+            if (preludeCards.length !== 2) {
+              throw new Error('Only select 2 preludes');
+            }
+            player.preludeCardsInHand.push(...preludeCards);
+            return undefined;
+          }, {min: 2, max: 2},
+        ),
+      );
+    }
+
+    if (player.game.gameOptions.leaderExtension) {
+      this.options.push(
+        new SelectCard(
+          'Select 1 Leader card', undefined, player.dealtLeaderCards,
+          (leaderCards: Array<IProjectCard>) => {
+            player.leaderCardsInHand.push(...leaderCards);
+            // LogHelper.logDrawnCards(player, leaderCards, true, LogType.KEPT);
+            return undefined;
+          },
+        ),
+      );
+    }
+
+
     this.options.push(
       new SelectCard(
         'Select initial cards to buy', undefined, player.dealtProjectCards,

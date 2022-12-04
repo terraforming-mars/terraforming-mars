@@ -754,7 +754,7 @@ export enum CardName {
     ADHAI_HIGH_ORBIT_CONSTRUCTIONS = 'Adhai High Orbit Constructions',
 
     // CEOs/Leader
-    ASIMOV = 'Asimov',
+    // ASIMOV = 'Asimov',
     ULRICH = 'Ulrich',
-    GRETA = 'Greta',
+    // GRETA = 'Greta',
 }

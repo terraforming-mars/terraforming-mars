@@ -575,6 +575,7 @@ export class Server {
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
       twoCorpsVariant: options.twoCorpsVariant,
+      leaderExtension: options.leaderExtension,
     };
   }
 

@@ -534,6 +534,7 @@ export interface CreateGameModel {
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
     twoCorpsVariant: boolean;
+    leaderExtension: boolean;
 }
 
 type Refs = {
@@ -622,6 +623,7 @@ export default (Vue as WithRefs<Refs>).extend({
       escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
       escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
       twoCorpsVariant: false,
+      leaderExtension: false,
     };
   },
   components: {
@@ -972,6 +974,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
       const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
       const twoCorpsVariant = component.twoCorpsVariant;
+      const leaderExtension = component.leaderExtension;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1136,6 +1139,7 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityPeriod,
         escapeVelocityPenalty,
         twoCorpsVariant,
+        leaderExtension: leaderExtension,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

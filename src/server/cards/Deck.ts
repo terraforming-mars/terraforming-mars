@@ -6,6 +6,7 @@ import {Random} from '../Random';
 import {ICard} from './ICard';
 import {ICorporationCard} from './corporation/ICorporationCard';
 import {IProjectCard} from './IProjectCard';
+import {ILeaderCard} from './leaders/ILeaderCard';
 import {inplaceShuffle} from '../utils/shuffle';
 import {Logger} from '../logs/Logger';
 import {IPreludeCard} from './prelude/IPreludeCard';
@@ -180,5 +181,19 @@ export class PreludeDeck extends Deck<IPreludeCard> {
     const deck = <Array<IPreludeCard>>cardFinder.preludesFromJSON(d.drawPile);
     const discarded = cardFinder.preludesFromJSON(d.discardPile);
     return new PreludeDeck(deck, discarded, random);
+  }
+}
+
+export class LeaderDeck extends Deck<ILeaderCard> {
+  public constructor(deck: Array<ILeaderCard>, discarded: Array<ILeaderCard>, random: Random) {
+    super('leader', deck, discarded, random);
+  }
+
+  public static deserialize(d: SerializedDeck, random: Random): Deck<ILeaderCard> {
+    const cardFinder = new CardFinder();
+
+    const deck = cardFinder.cardsFromJSON(d.drawPile);
+    const discarded = cardFinder.cardsFromJSON(d.discardPile);
+    return new LeaderDeck(deck, discarded, random);
   }
 }

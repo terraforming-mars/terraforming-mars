@@ -1,11 +1,10 @@
-import {MAX_OCEAN_TILES} from '@/common/constants'; 
+import {MAX_OCEAN_TILES} from '../../../common/constants'; 
 import {LeaderCard} from './LeaderCard';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
-
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
 

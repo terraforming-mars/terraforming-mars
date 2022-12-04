@@ -16,6 +16,7 @@ export class Dealer {
   public preludeDeck: Array<IPreludeCard> = [];
   public discarded: Array<IProjectCard> = [];
   public corporationCards: Array<ICorporationCard> = [];
+  public leaderDeck: Array<IProjectCard> = [];
   private random: Random;
 
   private constructor(random: Random) {
@@ -27,8 +28,9 @@ export class Dealer {
 
     dealer.deck = Dealer.shuffle(gameCards.getProjectCards(), random);
     dealer.corporationCards = gameCards.getCorporationCards();
-
     dealer.preludeDeck = Dealer.shuffle(gameCards.getPreludeCards(), random);
+    dealer.leaderDeck = Dealer.shuffle(gameCards.getLeaderCards());
+    
     // Special-case prelude deck: both The New Space Race and By-Election cannot
     // be used in the same game.
     const indexes = INCOMPATIBLE_PRELUDES.map((name) => dealer.preludeDeck.findIndex((c) => c.name === name));
@@ -107,6 +109,17 @@ export class Dealer {
     return result;
   }
 
+    // Leader deck does not need discard and reshuffle mecanisms
+    public dealLeaderCard(): IProjectCard {
+      const result: IProjectCard | undefined = this.leaderDeck.pop();
+      if (result === undefined) {
+        throw 'Unexpected empty leader deck';
+      }
+      // All Leader cards are expected to subclass IProjectCard
+      return result;
+    }
+  
+
   public getDeckSize(): number {
     return this.deck.length;
   }
@@ -124,6 +137,7 @@ export class Dealer {
     dealer.deck = cardFinder.cardsFromJSON(d.deck);
     dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
     dealer.preludeDeck = cardFinder.preludesFromJSON(d.preludeDeck);
+    dealer.leaderDeck = cardFinder.cardsFromJSON(d.leaderDeck);
     return dealer;
   }
 
@@ -133,6 +147,7 @@ export class Dealer {
       deck: this.deck.map((c) => c.name),
       discarded: this.discarded.map((c) => c.name),
       preludeDeck: this.preludeDeck.map((c) => c.name),
+      leaderDeck: this.leaderDeck.map((c) => c.name),
     };
   }
 }

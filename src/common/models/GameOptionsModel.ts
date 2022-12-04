@@ -21,7 +21,7 @@ export type GameOptionsModel = {
   includeFanMA: boolean,
   includeVenusMA: boolean,
   initialDraftVariant: boolean,
-  leaderExtension: boolean;
+  leaderExtension: boolean,
   moonExpansion: boolean,
   pathfindersExpansion: boolean,
   preludeExtension: boolean,

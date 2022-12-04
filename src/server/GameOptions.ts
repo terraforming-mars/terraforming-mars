@@ -32,6 +32,7 @@ export type GameOptions = {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
+  leaderExtension: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -80,6 +81,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   includeVenusMA: true,
   includeFanMA: false,
   initialDraftVariant: false,
+  leaderExtension: false,
   moonExpansion: false,
   moonStandardProjectVariant: false,
   pathfindersExpansion: false,

@@ -37,6 +37,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     heatProduction: number;
     id: PlayerId;
     lastCardPlayed?: CardName;
+    leaderCardsInHand: Array<CardName>;
     megaCreditProduction: number;
     megaCredits: number;
     name: string;

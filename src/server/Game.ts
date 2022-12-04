@@ -66,7 +66,7 @@ import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
-import {CorporationDeck, PreludeDeck, ProjectDeck} from './cards/Deck';
+import {CorporationDeck, PreludeDeck, ProjectDeck, LeaderDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 
 export interface Score {
@@ -88,6 +88,7 @@ export class Game implements Logger {
   public phase: Phase = Phase.RESEARCH;
   public projectDeck: ProjectDeck;
   public preludeDeck: PreludeDeck;
+  public leaderDeck: LeaderDeck;
   public corporationDeck: CorporationDeck;
   public board: Board;
 
@@ -146,7 +147,8 @@ export class Game implements Logger {
     board: Board,
     projectDeck: ProjectDeck,
     corporationDeck: CorporationDeck,
-    preludeDeck: PreludeDeck) {
+    preludeDeck: PreludeDeck,
+    leaderDeck: LeaderDeck) {
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -168,6 +170,7 @@ export class Game implements Logger {
     this.projectDeck = projectDeck;
     this.corporationDeck = corporationDeck;
     this.preludeDeck = preludeDeck;
+    this.leaderDeck = leaderDeck;
     this.board = board;
 
     this.players.forEach((player) => {
@@ -199,6 +202,12 @@ export class Game implements Logger {
     const preludeDeck = new PreludeDeck(gameCards.getPreludeCards(), [], rng);
     preludeDeck.shuffle(gameOptions.customPreludes);
 
+    const leaderDeck = new LeaderDeck(gameCards.getLeaderCards(), [], rng);
+    // todo: custom leader cards list
+    // leaderDeck.shuffle(gameOptions.customPreludes);
+    leaderDeck.shuffle();
+
+
     const activePlayer = firstPlayer.id;
 
     // Single player game player starts with 14TR
@@ -212,7 +221,7 @@ export class Game implements Logger {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, leaderDeck);
     game.spectatorId = spectatorId;
     // Initialize Ares data
     if (gameOptions.aresExtension) {
@@ -284,7 +293,8 @@ export class Game implements Logger {
         gameOptions.venusNextExtension ||
         gameOptions.coloniesExtension ||
         gameOptions.turmoilExtension ||
-        gameOptions.initialDraftVariant) {
+        gameOptions.initialDraftVariant ||
+        gameOptions.leaderExtension) {
         if (gameOptions.corporationsDraft === false) {
           for (let i = 0; i < gameOptions.startingCorporations; i++) {
             player.dealtCorporationCards.push(corporationDeck.draw(game));
@@ -301,6 +311,12 @@ export class Game implements Logger {
             player.dealtPreludeCards.push(prelude);
           }
         }
+        if (gameOptions.leaderExtension) {
+          for (let i = 0; i < constants.LEADER_CARDS_DEALT_PER_PLAYER; i++) {
+            player.dealtLeaderCards.push(leaderDeck.draw(game));
+          }
+        }
+        
       } else {
         game.playerHasPickedCorporationCard(player, new BeginnerCorporation());
       }
@@ -1570,12 +1586,14 @@ export class Game implements Logger {
     let projectDeck: ProjectDeck;
     let corporationDeck: CorporationDeck;
     let preludeDeck: PreludeDeck;
+    let leaderDeck: LeaderDeck;
     // Rebuild dealer object to be sure that cards are in the same order
     if (d.dealer !== undefined) {
       const dealer = Dealer.deserialize(d.dealer);
       projectDeck = new ProjectDeck(dealer.deck, dealer.discarded, rng);
       corporationDeck = new CorporationDeck(dealer.corporationCards, [], rng);
       preludeDeck = new PreludeDeck(dealer.preludeDeck, [], rng);
+      leaderDeck = new LeaderDeck(dealer.preludeDeck, [], rng);
     } else {
       // TODO(kberg): Delete this conditional when `d.dealer` is removed.
       if (d.projectDeck === undefined || d.corporationDeck === undefined || d.preludeDeck === undefined) {
@@ -1584,9 +1602,10 @@ export class Game implements Logger {
       projectDeck = ProjectDeck.deserialize(d.projectDeck, rng);
       corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
       preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
+      leaderDeck = LeaderDeck.deserialize(d.preludeDeck, rng);
     }
 
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, leaderDeck);
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];

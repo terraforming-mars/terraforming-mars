@@ -8,6 +8,7 @@ import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
+import {LEADER_CARD_MANIFEST} from './cards/leaders/LeaderCardManifest';
 import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
@@ -19,6 +20,7 @@ import {IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {CardFinder} from './CardFinder';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {ILeaderCard} from './cards/leaders/ILeaderCard';
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
@@ -53,6 +55,7 @@ export class GameCards {
       [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
       [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
+      [gameOptions.leaderExtension, LEADER_CARD_MANIFEST],
     ];
 
     this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);
@@ -117,6 +120,15 @@ export class GameCards {
     }
 
     return preludes;
+  }
+  public getLeaderCards() {
+    let leaders = this.getCards<ILeaderCard>('leaderCards');
+    // todo: Support customer CEO list
+    if (leaders.length === 0) {
+      leaders = this.instantiate(LEADER_CARD_MANIFEST.preludeCards);
+    }
+    // leaders = this.addCustomCards(leaders, this.gameOptions.customLeaders);
+    return leaders;
   }
 
   private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {

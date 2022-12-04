@@ -119,8 +119,10 @@ export class Player {
   public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
+  public dealtLeaderCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IProjectCard> = [];
+  public leaderCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
   public draftedCorporations: Array<ICorporationCard> = [];
@@ -1129,10 +1131,14 @@ export class Player {
       // Remove card from hand
       const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
       const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
+      const leaderCardIndex = this.leaderCardsInHand.findIndex((card) => card.name === selectedCard.name);
+
       if (projectCardIndex !== -1) {
         this.cardsInHand.splice(projectCardIndex, 1);
       } else if (preludeCardIndex !== -1) {
         this.preludeCardsInHand.splice(preludeCardIndex, 1);
+      } else if (leaderCardIndex !== -1) {
+        this.leaderCardsInHand.splice(leaderCardIndex, 1);
       }
 
       // Remove card from Self Replicating Robots
@@ -1682,6 +1688,18 @@ export class Player {
       game.phase = Phase.ACTION;
     }
 
+    // Leader cards have to be played right after Preludes
+    if (this.leaderCardsInHand.length > 0) {
+      this.leaderCardsInHand.forEach((card) => {
+        if (!this.playedCards.includes(card)) {
+          this.playCard(card);
+        }
+      });
+    } else {
+      game.phase = Phase.ACTION;
+    }
+
+
     if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
       this.actionsTakenThisRound = 0;
       game.playerIsFinishedTakingActions();
@@ -1955,6 +1973,7 @@ export class Player {
       dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
       cardsInHand: this.cardsInHand.map((c) => c.name),
       preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
+      leaderCardsInHand: this.leaderCardsInHand.map((c) => c.name),
       playedCards: this.playedCards.map(serializeProjectCard),
       draftedCards: this.draftedCards.map((c) => c.name),
       cardCost: this.cardCost,
@@ -2084,6 +2103,7 @@ export class Player {
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
+    player.leaderCardsInHand = cardFinder.cardsFromJSON(d.leaderCardsInHand);
     player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 

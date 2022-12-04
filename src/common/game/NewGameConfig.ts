@@ -55,6 +55,7 @@ export interface NewGameConfig {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
+  leaderExtension: boolean;
 
   // Variants
   draftVariant: boolean;

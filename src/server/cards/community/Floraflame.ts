@@ -50,20 +50,22 @@ export class Floraflame extends Card implements ICorporationCard {
     return undefined;
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (card.tags.includes(Tag.BUILDING)) {
-      player.game.getPlayers().forEach((p) => {
-        if (p.isCorporation(this.name)) {
-          p.addResource(Resources.ENERGY, 2, {log: true});
-        }
-      });
+  public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
+    if (player.isCorporation(this.name)) {
+      const tagCount = player.tags.cardTagCount(card, Tag.BUILDING);
+      if (tagCount > 0) {
+        player.addResource(Resources.ENERGY, 2, {log: true});
+      }
     }
-    if (card.tags.includes(Tag.PLANT)) {
-      player.game.getPlayers().forEach((p) => {
-        if (p.isCorporation(this.name)) {
-          p.addResource(Resources.PLANTS, 1, {log: true});
-        }
-      });
+
+    if (player.isCorporation(this.name)) {
+      const tagCount = player.tags.cardTagCount(card, Tag.PLANT);
+      if (tagCount > 0) {
+        player.addResource(Resources.PLANTS, 1, {log: true});
+      }
     }
+
+    return undefined;
   }
+
 }

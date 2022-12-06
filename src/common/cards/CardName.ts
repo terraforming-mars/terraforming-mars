@@ -94,6 +94,7 @@ export enum CardName {
     FLOATER_PROTOTYPES = 'Floater Prototypes',
     FLOATER_TECHNOLOGY = 'Floater Technology',
     FLOODING = 'Flooding',
+    FLORAFLAME = 'Floraflame',
     FOOD_FACTORY = 'Food Factory',
     FUEL_FACTORY = 'Fuel Factory',
     FUELED_GENERATORS = 'Fueled Generators',

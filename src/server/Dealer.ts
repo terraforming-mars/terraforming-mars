@@ -8,7 +8,7 @@ import {LogHelper} from './LogHelper';
 import {Random, UnseededRandom} from './Random';
 import {Logger} from './logs/Logger';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import { ILeaderCard } from './cards/leaders/ILeaderCard';
+import {ILeaderCard} from './cards/leaders/ILeaderCard';
 
 const INCOMPATIBLE_PRELUDES = [CardName.BY_ELECTION, CardName.THE_NEW_SPACE_RACE] as const;
 
@@ -111,12 +111,12 @@ export class Dealer {
   }
 
     // Leader deck does not need discard and reshuffle mecanisms
-    public dealLeaderCard(): IProjectCard {
-      const result: IProjectCard | undefined = this.leaderDeck.pop();
+    public dealLeaderCard(): ILeaderCard {
+      const result: ILeaderCard | undefined = this.leaderDeck.pop();
       if (result === undefined) {
-        throw 'Unexpected empty leader deck';
+        throw new Error('Unexpected empty leader deck');
       }
-      // All Leader cards are expected to subclass IProjectCard
+      // All Leader cards are expected to subclass ILeaderCard
       return result;
     }
   

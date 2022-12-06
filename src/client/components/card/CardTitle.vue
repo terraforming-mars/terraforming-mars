@@ -47,6 +47,8 @@ export default Vue.extend({
         classes.push('background-color-events');
       } else if (this.type === CardType.PRELUDE) {
         classes.push('background-color-prelude');
+      } else if (this.type === CardType.LEADER) {
+        classes.push('background-color-leader');
       } else if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
         classes.push('background-color-standard-project');
       }

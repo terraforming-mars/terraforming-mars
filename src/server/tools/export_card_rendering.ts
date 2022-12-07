@@ -25,7 +25,7 @@ class ProjectCardProcessor {
   }
 
   private static processManifest(manifest: ModuleManifest) {
-    for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.standardActions, manifest.standardProjects]) {
+    for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.standardActions, manifest.standardProjects, manifest.leaderCards]) {
       ProjectCardProcessor.processDeck(manifest.module, cardManifest);
     }
   }

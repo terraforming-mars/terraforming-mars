@@ -313,11 +313,11 @@ export class Game implements Logger {
         }
         if (gameOptions.leaderExtension) {
           for (let i = 0; i < constants.LEADER_CARDS_DEALT_PER_PLAYER; i++) {
-            const leadercard = leaderDeck.draw(game)
+            const leadercard = leaderDeck.draw(game);
+            console.log('dealt', leadercard.name);
             player.dealtLeaderCards.push(leadercard);
           }
         }
-        
       } else {
         game.playerHasPickedCorporationCard(player, new BeginnerCorporation());
       }

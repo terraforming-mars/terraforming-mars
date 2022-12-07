@@ -197,7 +197,7 @@
                   <Card :card="card"/>
                 </div>
               </template>
-              <template v-if="player.gameOptions.leadersExpansion">
+              <template v-if="game.gameOptions.leadersExpansion">
                 <div v-for="card in playerView.leaderCardsInHand" :key="card.name" class="cardbox">
                 <Card :card="card"/>
                 </div>

@@ -75,11 +75,14 @@ export interface PlayerViewModel extends ViewModel {
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
+  dealtLeaderCards: Array<CardModel>;
   draftedCorporations: Array<CardModel>;
   draftedCards: Array<CardModel>;
   id: PlayerId;
+  leaderCardsInHand: Array<CardModel>;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   preludeCardsInHand: Array<CardModel>;
+  // pickedLeaderCard: Array<CardModel>; // Why Array?
   thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;
 }

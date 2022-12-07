@@ -66,23 +66,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
           }, {min: 1, max: 1},
         ),
       );
-  
-      // this.options.push(
-      //   new SelectCard(
-      //     'Select 1 CEO card', undefined, player.dealtLeaderCards,
-      //     (leaderCards: Array<ILeaderCard>) => {
-      //       if (leaderCards.length !== 1) {
-      //         throw new Error('Only select 1 CEO');
-      //       }
-      //       player.leaderCardsInHand.push(...leaderCards);
-      //       corporation = cards[0];
-      //       // LogHelper.logDrawnCards(player, leaderCards, true, LogType.KEPT);
-      //       return undefined;
-      //     }, {min: 1, max: 1},
-      //   ),
-      // );
     }
-
 
     this.options.push(
       new SelectCard(

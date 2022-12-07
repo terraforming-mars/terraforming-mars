@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 
 // import {Apollo} from './Apollo';
-// import {Asimov} from './Asimov';
+import {Asimov} from './Asimov';
 // import {Bjorn} from './Bjorn';
 // import {Caesar} from './Caesar';
 // import {Clarke} from './Clarke';
@@ -12,8 +12,8 @@ import {ModuleManifest} from '../ModuleManifest';
 // import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 // import {Gordon} from './Gordon';
-// import {Greta} from './Greta';
-// import {HAL9000} from './HAL9000';
+import {Greta} from './Greta';
+import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
 // import {Ingrid} from './Ingrid';
 // import {Jansson} from './Jansson';
@@ -41,7 +41,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
   module: 'leader',
   leaderCards: {
     // [CardName.APOLLO]: {Factory: Apollo, compatibility: GameModule.Moon},
-    // [CardName.ASIMOV]: {Factory: Asimov},
+    [CardName.ASIMOV]: {Factory: Asimov},
     // [CardName.BJORN]: {Factory: Bjorn},
     // [CardName.CAESAR]: {Factory: Caesar, compatibility: GameModule.Ares},
     // [CardName.CLARKE]: {Factory: Clarke},
@@ -51,8 +51,8 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: GameModule.Ares},
     // [CardName.GORDON]: {Factory: Gordon},
-    // [CardName.GRETA]: {Factory: Greta},
-    // [CardName.HAL9000]: {Factory: HAL9000},
+    [CardName.GRETA]: {Factory: Greta},
+    [CardName.HAL9000]: {Factory: HAL9000},
     // [CardName.HUAN]: {Factory: Huan, compatibility: GameModule.Colonies},
     // [CardName.INGRID]: {Factory: Ingrid},
     // [CardName.JANSSON]: {Factory: Jansson},

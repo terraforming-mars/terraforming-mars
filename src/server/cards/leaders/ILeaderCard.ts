@@ -4,8 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 
 export interface ILeaderCard extends ICard {
   canPlay: (player: Player) => boolean;
-  cost: number;
-  
+  cost: number;  
   isDisabled?: boolean;
   opgActionIsActive?: boolean;
   generationUsed?: number;

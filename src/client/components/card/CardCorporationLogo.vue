@@ -131,6 +131,15 @@
     <template v-else-if="title ===  CardName.OUT_OF_THIS_WORLD">
       <div class="card-out-of-this-world-logo">OUT OF THIS WORLD</div>
     </template>
+    <template v-else-if="title ===  CardName.FLORAFLAME">
+      <div class="card-floraflame-logo">FloraFlame</div>
+    </template>
+    <template v-else-if="(title ===  CardName.LTL_LOGISTICS)">
+      <div class="card-ltl-logistics-logo">LTL Logistics</div>
+    </template>
+    <template v-else-if="(title ===  CardName.BORING_COMPANY)">
+      <div class="card-boring-company-logo">Boring<br/>Company</div>
+    </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>

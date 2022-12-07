@@ -84,9 +84,9 @@
           </div>
 
           <a name="cards" class="player_home_anchor"></a>
-          <div class="player_home_block player_home_block--hand" v-if="playerView.cardsInHand.length + playerView.preludeCardsInHand.length + player.leaderCardsInHand.length > 0" id="shortkey-hand">
-              <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + playerView.preludeCardsInHand.length + player.leaderCardsInHand.length).toString()" />
-              <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(player.leaderCardsInHand, playerView.cardsInHand)" />
+          <div class="player_home_block player_home_block--hand" v-if="playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.leaderCardsInHand.length > 0" id="shortkey-hand">
+              <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + playerView.preludeCardsInHand.length + playerView.leaderCardsInHand.length).toString()" />
+              <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.leaderCardsInHand, playerView.cardsInHand)" />
           </div>
 
           <div class="player_home_block player_home_block--cards">
@@ -198,7 +198,7 @@
                 </div>
               </template>
               <template v-if="player.gameOptions.leadersExpansion">
-                <div v-for="card in player.leaderCardsInHand" :key="card.name" class="cardbox">
+                <div v-for="card in playerView.leaderCardsInHand" :key="card.name" class="cardbox">
                 <Card :card="card"/>
                 </div>
               </template>

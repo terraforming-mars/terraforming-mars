@@ -80,6 +80,8 @@ export class GameCards {
         return gameOptions.moonExpansion;
       case 'pathfinders':
         return gameOptions.pathfindersExpansion;
+      case 'leader':
+        return gameOptions.leaderExtension;
       default:
         throw new Error(`Unhandled expansion type ${expansion}`);
       }

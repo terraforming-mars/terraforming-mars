@@ -17,6 +17,7 @@ import {ExecutiveOrder} from './ExecutiveOrder';
 import {UnitedNationsMissionOne} from './UnitedNationsMissionOne';
 import {JunkVentures} from './JunkVentures';
 import {Floraflame} from './Floraflame';
+import {LTLLogistics} from './LTLLogistics';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',
@@ -30,6 +31,7 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.UNITED_NATIONS_MISSION_ONE]: {Factory: UnitedNationsMissionOne},
     [CardName.JUNK_VENTURES]: {Factory: JunkVentures},
     [CardName.FLORAFLAME]: {Factory: Floraflame},
+    [CardName.LTL_LOGISTICS]: {Factory: LTLLogistics},
   },
   preludeCards: {
     [CardName.RESEARCH_GRANT]: {Factory: ResearchGrant},

@@ -150,6 +150,7 @@ export enum CardName {
     LARGE_CONVOY = 'Large Convoy',
     LAVA_FLOWS = 'Lava Flows',
     LAVA_TUBE_SETTLEMENT = 'Lava Tube Settlement',
+    LTL_LOGISTICS = 'LTL Logistics',
     LICHEN = 'Lichen',
     LIGHTNING_HARVEST = 'Lightning Harvest',
     LIVESTOCK = 'Livestock',

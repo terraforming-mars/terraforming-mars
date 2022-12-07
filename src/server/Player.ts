@@ -64,6 +64,7 @@ import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
+import {LeaderCard} from './cards/leaders/LeaderCard';
 
 /**
  * Behavior when playing a card:
@@ -269,6 +270,12 @@ export class Player {
           corp.onIncreaseTerraformRating?.(this, player, steps);
         });
       });
+
+      // Greta CEO hook
+      if (this.cardIsInEffect(CardName.GRETA)) {
+        const greta = this.playedCards.find((card) => card.name === CardName.GRETA) as LeaderCard;
+        greta.onTRIncrease!(this);
+      }
     };
 
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {

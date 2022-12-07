@@ -44,6 +44,7 @@ export enum CardName {
     BIOMASS_COMBUSTORS = 'Biomass Combustors',
     BIRDS = 'Birds',
     BLACK_POLAR_DUST = 'Black Polar Dust',
+    BORING_COMPANY = 'Boring Company',
     BUILDING_INDUSTRIES = 'Building Industries',
     BUSHES = 'Bushes',
     BUSINESS_CONTACTS = 'Business Contacts',

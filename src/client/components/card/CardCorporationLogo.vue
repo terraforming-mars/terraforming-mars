@@ -134,6 +134,9 @@
     <template v-else-if="(title ===  CardName.LTL_LOGISTICS)">
       <div class="card-ltl-logistics-logo">LTL Logistics</div>
     </template>
+    <template v-else-if="(title ===  CardName.BORING_COMPANY)">
+      <div class="card-boring-company-logo">Boring<br/>Company</div>
+    </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>

@@ -1969,6 +1969,7 @@ export class Player {
       corporationInitialActionDone: undefined,
       // Cards
       dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
+      dealtLeaderCards: this.dealtLeaderCards.map((c) => c.name),
       dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
       dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
       cardsInHand: this.cardsInHand.map((c) => c.name),
@@ -2099,6 +2100,7 @@ export class Player {
     }
 
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
+    player.dealtLeaderCards = cardFinder.cardsFromJSON(d.dealtLeaderCards);
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);

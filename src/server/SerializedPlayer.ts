@@ -24,6 +24,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     color: Color;
     corporations: Array<SerializedCard> | undefined; // TODO(kberg): remove undefined once it's applied across the board.
     dealtCorporationCards: Array<CardName>;
+    dealtLeaderCards: Array<CardName>;
     dealtPreludeCards: Array<CardName>;
     dealtProjectCards: Array<CardName>;
     draftedCards: Array<CardName>;

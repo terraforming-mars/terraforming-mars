@@ -128,6 +128,9 @@
     <template v-else-if="title ===  CardName.CURIOSITY_II">
       <div class="card-curiosity-ii-logo">Curiosity II</div>
     </template>
+    <template v-else-if="title ===  CardName.OUT_OF_THIS_WORLD">
+      <div class="card-out-of-this-world-logo">OUT OF THIS WORLD</div>
+    </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>

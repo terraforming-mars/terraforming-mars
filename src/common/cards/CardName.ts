@@ -752,4 +752,5 @@ export enum CardName {
     MIND_SET_MARS = 'Mind Set Mars',
     HABITAT_MARTE = 'Habitat Marte',
     ADHAI_HIGH_ORBIT_CONSTRUCTIONS = 'Adhai High Orbit Constructions',
+    OUT_OF_THIS_WORLD = 'Out Of This World'
 }

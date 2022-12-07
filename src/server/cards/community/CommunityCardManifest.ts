@@ -1,3 +1,4 @@
+import { OutOfThisWorld } from './OutOfThisWorld';
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {AgricolaInc} from './AgricolaInc';
@@ -28,6 +29,7 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.MIDAS]: {Factory: Midas},
     [CardName.UNITED_NATIONS_MISSION_ONE]: {Factory: UnitedNationsMissionOne},
     [CardName.JUNK_VENTURES]: {Factory: JunkVentures},
+    [CardName.OUT_OF_THIS_WORLD]: {Factory: OutOfThisWorld},
   },
   preludeCards: {
     [CardName.RESEARCH_GRANT]: {Factory: ResearchGrant},

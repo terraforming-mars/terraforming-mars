@@ -746,15 +746,6 @@ export class Game implements Logger {
     this.gotoEndGeneration();
   }
 
-  private allPlayersHavePassed(): boolean {
-    for (const player of this.players) {
-      if (!this.hasPassedThisActionPhase(player)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   public playerHasPassed(player: Player): void {
     this.passedPlayers.add(player.id);
   }
@@ -930,21 +921,20 @@ export class Game implements Logger {
       return;
     }
 
-    if (this.allPlayersHavePassed()) {
-      this.gotoProductionPhase();
-      return;
-    }
+    const activePlayer = this.getPlayerById(this.activePlayer);
+    let nextPlayer = activePlayer;
+    do {
+      nextPlayer = this.getPlayerAfter(nextPlayer);
+      if (!this.hasPassedThisActionPhase(nextPlayer)) {
+        this.startActionsForPlayer(nextPlayer);
+        return;
+      }
+    } while (nextPlayer !== activePlayer);
 
-    const nextPlayer = this.getPlayerAfter(this.getPlayerById(this.activePlayer));
-
-    if (!this.hasPassedThisActionPhase(nextPlayer)) {
-      this.startActionsForPlayer(nextPlayer);
-    } else {
-      // Recursively find the next player
-      this.activePlayer = nextPlayer.id;
-      this.playerIsFinishedTakingActions();
-    }
+    // All players have passed.
+    this.gotoProductionPhase();
   }
+
 
   private gotoEndGame(): void {
     // Log id or cloned game id

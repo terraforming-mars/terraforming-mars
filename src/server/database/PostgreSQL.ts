@@ -268,8 +268,8 @@ export class PostgreSQL implements IDatabase {
       'pool-waiting-count': this.client.waitingCount,
       'save-count': this.statistics.saveCount,
       'save-error-count': this.statistics.saveErrorCount,
-      'save-confict-normal-count': this.statistics.saveConflictNormalCount,
-      'save-confict-undo-count': this.statistics.saveConflictUndoCount,
+      'save-conflict-normal-count': this.statistics.saveConflictNormalCount,
+      'save-conflict-undo-count': this.statistics.saveConflictUndoCount,
     };
 
     // TODO(kberg): return row counts

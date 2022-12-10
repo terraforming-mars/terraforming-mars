@@ -325,12 +325,7 @@ export class Game implements Logger {
       }
       // First player should be the last player
       const playerStartingCorporationsDraft = game.getPlayerBefore(firstPlayer);
-      if (playerStartingCorporationsDraft !== undefined) {
-        playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
-      } else {
-        // If for any reason, we don't have player before the first one.
-        firstPlayer.runDraftCorporationPhase(firstPlayer.name, game.corporationsToDraft);
-      }
+      playerStartingCorporationsDraft.runDraftCorporationPhase(playerStartingCorporationsDraft.name, game.corporationsToDraft);
     } else {
       game.gotoInitialPhase();
     }
@@ -610,13 +605,13 @@ export class Game implements Logger {
     this.players.forEach((player) => {
       player.needsToDraft = true;
       if (this.draftRound === 1 && !preludeDraft) {
-        player.runDraftPhase(initialDraft, this.getNextDraft(player).name);
+        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
-        player.runDraftPhase(initialDraft, this.getNextDraft(player).name, player.dealtPreludeCards);
+        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
       } else {
         const cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
         this.unDraftedCards.delete(this.getDraftCardsFrom(player));
-        player.runDraftPhase(initialDraft, this.getNextDraft(player).name, cards);
+        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, cards);
       }
     });
   }
@@ -751,15 +746,6 @@ export class Game implements Logger {
     this.gotoEndGeneration();
   }
 
-  private allPlayersHavePassed(): boolean {
-    for (const player of this.players) {
-      if (!this.hasPassedThisActionPhase(player)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   public playerHasPassed(player: Player): void {
     this.passedPlayers.add(player.id);
   }
@@ -858,14 +844,7 @@ export class Game implements Logger {
   // Function use to manage corporation draft way
   public playerIsFinishedWithDraftingCorporationPhase(player: Player, cards : Array<ICorporationCard>): void {
     const nextPlayer = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-    if (nextPlayer === undefined) {
-      throw new Error(`Cannot find player to pass for player ${player.id} in game ${this.id}`);
-    }
-
     const passTo = this.corporationsDraftDirection === 'after' ? this.getPlayerAfter(nextPlayer) : this.getPlayerBefore(nextPlayer);
-    if (passTo === undefined) {
-      throw new Error(`Cannot find player to pass for player ${nextPlayer.id} in game ${this.id}`);
-    }
 
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (cards.length > 1) {
@@ -894,57 +873,41 @@ export class Game implements Logger {
   }
 
   private getDraftCardsFrom(player: Player): PlayerId {
-    let nextPlayer: Player | undefined;
+    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
 
     // Change initial draft direction on second iteration
     if (this.generation === 1 && this.initialDraftIteration === 2) {
       nextPlayer = this.getPlayerBefore(player);
-    } else if (this.generation % 2 === 1) {
-      nextPlayer = this.getPlayerAfter(player);
-    } else {
-      nextPlayer = this.getPlayerBefore(player);
     }
 
-    if (nextPlayer !== undefined) {
-      return nextPlayer.id;
-    }
-    return player.id;
+    return nextPlayer.id;
   }
 
-  private getNextDraft(player: Player): Player {
-    let nextPlayer = this.getPlayerAfter(player);
-    if (this.generation%2 === 1) {
-      nextPlayer = this.getPlayerBefore(player);
-    }
+  private giveDraftCardsTo(player: Player): Player {
+    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
+
     // Change initial draft direction on second iteration
     if (this.initialDraftIteration === 2 && this.generation === 1) {
       nextPlayer = this.getPlayerAfter(player);
     }
-
-    if (nextPlayer !== undefined) {
-      return nextPlayer;
-    }
-    return player;
+    return nextPlayer;
   }
 
-  private getPlayerBefore(player: Player): Player | undefined {
+  private getPlayerBefore(player: Player): Player {
     const playerIndex = this.players.indexOf(player);
-
-    // The player was not found
     if (playerIndex === -1) {
-      return undefined;
+      throw new Error(`Player ${player.id} not in game ${this.id}`);
     }
 
     // Go to the end of the array if stand at the start
     return this.players[(playerIndex === 0) ? this.players.length - 1 : playerIndex - 1];
   }
 
-  private getPlayerAfter(player: Player): Player | undefined {
+  private getPlayerAfter(player: Player): Player {
     const playerIndex = this.players.indexOf(player);
 
-    // The player was not found
     if (playerIndex === -1) {
-      return undefined;
+      throw new Error(`Player ${player.id} not in game ${this.id}`);
     }
 
     // Go to the beginning of the array if we reached the end
@@ -958,27 +921,20 @@ export class Game implements Logger {
       return;
     }
 
-    if (this.allPlayersHavePassed()) {
-      this.gotoProductionPhase();
-      return;
-    }
+    const activePlayer = this.getPlayerById(this.activePlayer);
+    let nextPlayer = activePlayer;
+    do {
+      nextPlayer = this.getPlayerAfter(nextPlayer);
+      if (!this.hasPassedThisActionPhase(nextPlayer)) {
+        this.startActionsForPlayer(nextPlayer);
+        return;
+      }
+    } while (nextPlayer !== activePlayer);
 
-    const nextPlayer = this.getPlayerAfter(this.getPlayerById(this.activePlayer));
-
-    // Defensive coding to fail fast, if we don't find the next
-    // player we are in an unexpected game state
-    if (nextPlayer === undefined) {
-      throw new Error('Did not find player');
-    }
-
-    if (!this.hasPassedThisActionPhase(nextPlayer)) {
-      this.startActionsForPlayer(nextPlayer);
-    } else {
-      // Recursively find the next player
-      this.activePlayer = nextPlayer.id;
-      this.playerIsFinishedTakingActions();
-    }
+    // All players have passed.
+    this.gotoProductionPhase();
   }
+
 
   private gotoEndGame(): void {
     // Log id or cloned game id

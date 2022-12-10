@@ -164,14 +164,13 @@ export default Vue.extend({
       }
     },
     cardToHtml(cardType: CardType, cardName: string) {
-      const cardNameString = this.$t(cardName);
-      const suffixFreeCardName = cardNameString.split(':')[0];
+      const suffixFreeCardName = cardName.split(':')[0];
       const className = cardTypeToCss[cardType];
 
       if (className === undefined) {
         return suffixFreeCardName;
       }
-      return '<span class="log-card '+ className + '">' + suffixFreeCardName + '</span>';
+      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + '</span>';
     },
     messageDataToHTML(data: LogMessageData): string {
       if (data.type === undefined || data.value === undefined) {

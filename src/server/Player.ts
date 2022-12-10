@@ -1665,6 +1665,7 @@ export class Player {
 
       // If no playable prelude card in hand, end player turn
       if (this.getPlayablePreludeCards().length === 0) {
+        LogHelper.logDiscardedCards(game, this.preludeCardsInHand);
         this.preludeCardsInHand = [];
         game.playerIsFinishedTakingActions();
         return;

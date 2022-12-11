@@ -9,6 +9,9 @@ export interface IHandler {
 export type Context = {
   url: URL,
   route: Route,
-  serverId: string,
   gameLoader: IGameLoader,
+  ids: {
+    serverId: string,
+    statsId: string,
+  },
 }

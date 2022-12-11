@@ -1,5 +1,6 @@
 import * as http from 'http';
 import {escape} from 'html-escaper';
+import {Context} from './IHandler';
 
 export class Route {
   public badRequest(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
@@ -53,6 +54,14 @@ export class Route {
     res.write('Not authorized');
     res.end();
   }
+
+  public downgradeRedirect(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): void {
+    const url = new URL(ctx.url); // defensive copty
+    url.searchParams.set('serverId', ctx.ids.statsId);
+    res.writeHead(301, {Location: url.toString()});
+    res.end();
+  }
+
   public writeJson(res: http.ServerResponse, json: any, space?: string | number | undefined) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(json, undefined, space));

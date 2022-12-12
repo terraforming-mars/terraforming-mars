@@ -761,6 +761,7 @@ export enum CardName {
     HAL9000 = 'HAL 9000',
     KAREN = 'Karen',
     OSCAR = 'Oscar',
+    TATE = 'Tate',
     ULRICH = 'Ulrich',
     CAESAR = 'Caesar',
     GAIA = 'Gaia',

@@ -68,6 +68,8 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, LeaderDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
+import {Tag} from './../common/cards/Tag';
+
 
 export interface Score {
   corporation: String;
@@ -1222,6 +1224,30 @@ export class Game implements Logger {
       throw new Error('Player not found');
     }
     return player;
+  }
+
+  public getAllValidTags(): Array<Tag> {
+    const tags = [
+      Tag.BUILDING,
+      Tag.SPACE,
+      Tag.SCIENCE,
+      Tag.POWER,
+      Tag.EARTH,
+      Tag.JOVIAN,
+      Tag.PLANT,
+      Tag.MICROBE,
+      Tag.ANIMAL,
+      Tag.CITY,
+      Tag.WILD,
+      Tag.EVENT,
+      // Tag.CLONE,
+    ];
+
+    if (this.gameOptions.aresExtension) tags.push(Tag.MARS);
+    if (this.gameOptions.moonExpansion) tags.push(Tag.MOON);
+    if (this.gameOptions.venusNextExtension) tags.push(Tag.VENUS);
+
+    return tags;
   }
 
   public getCitiesOffMarsCount(player?: Player): number {

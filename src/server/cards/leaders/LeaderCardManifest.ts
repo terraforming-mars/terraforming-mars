@@ -5,7 +5,7 @@ import {ModuleManifest} from '../ModuleManifest';
 import {Asimov} from './Asimov';
 // import {Bjorn} from './Bjorn';
 // import {Caesar} from './Caesar';
-// import {Clarke} from './Clarke';
+import {Clarke} from './Clarke';
 // import {Duncan} from './Duncan';
 // import {Ender} from './Ender';
 // import {Faraday} from './Faraday';
@@ -44,7 +44,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.ASIMOV]: {Factory: Asimov},
     // [CardName.BJORN]: {Factory: Bjorn},
     // [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
-    // [CardName.CLARKE]: {Factory: Clarke},
+    [CardName.CLARKE]: {Factory: Clarke},
     // [CardName.DUNCAN]: {Factory: Duncan},
     // [CardName.ENDER]: {Factory: Ender},
     // [CardName.FARADAY]: {Factory: Faraday},

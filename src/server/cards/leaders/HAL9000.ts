@@ -1,111 +1,76 @@
-// import {Card} from '../Card';
-// import {LeaderCard} from './LeaderCard';
-// import {Player} from '../../Player';
-// import {CardName} from '../../../common/cards/CardName';
-// import {CardType} from '../../../common/cards/CardType';
-// import {CardRenderer} from '../render/CardRenderer';
-// import {PlayerInput} from '../../PlayerInput';
-// import {Resources} from '../../Resources';
+import { CardName } from '../../../common/cards/CardName';
+import { CardType } from '../../../common/cards/CardType';
+import { Player } from '../../Player';
+import { PlayerInput } from '../../PlayerInput';
+import { Card } from '../Card';
+import { CardRenderer } from '../render/CardRenderer';
+import { LeaderCard } from './LeaderCard';
 
-// export class HAL9000 extends Card implements LeaderCard {
-//   constructor() {
-//     super({
-//       name: CardName.HAL9000,
-//       cardType: CardType.LEADER,
-//       metadata: {
-//         cardNumber: 'L08',
-//         renderData: CardRenderer.builder((b) => {
-//           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
-//           b.br.br;
-//           b.minus().text('EACH').production((pb) => pb.wild(1)).nbsp().colon().wild(4).digit.asterix();
-//           b.br;
-//         }),
-//         description: 'Once per game, decrease each of your productions 1 step to gain 4 of that resource.',
-//       },
-//     });
-//   }
+import {digit} from '../Options';
+import { Resources } from '../../../common/Resources';
 
-//   public isDisabled = false;
+// import {digit} from '../Options';
 
-//   public play() {
-//     return undefined;
-//   }
-
-//   public canAct(): boolean {
-//     return this.isDisabled === false;
-//   }
-  
-//   public action(player: Player): PlayerInput | undefined {
-//     const decreasableProductions = [];
-//     if (player.getProduction(Resources.MEGACREDITS) > -5) decreasableProductions.push(Resources.MEGACREDITS);
-//     [Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
-//       if (player.getProduction(resource) > 0) decreasableProductions.push(resource);
-//     });
-
-//     decreasableProductions.forEach((production) => {
-//       player.addProduction(production, -1, {log: true});
-//       player.addResource(production, 4, {log: true});
-//     });
-
-//     this.isDisabled = true;
-//     return undefined;
-//   }
-// }
-
-
-
-
-
-
-
-
-
-import {MAX_OCEAN_TILES} from '../../../common/constants'; 
-import {LeaderCard} from './LeaderCard';
-import {Player} from '../../Player';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 
 export class HAL9000 extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.ULRICH,
+      name: CardName.HAL9000,
       cardType: CardType.LEADER,
       metadata: {
-        cardNumber: 'L21',
+        cardNumber: 'L08',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().oceans(1).colon().megacredits(4).multiplierWhite().slash().megacredits(15).asterix();
+          b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
+          b.br.br;
+          // b.minus().text('EACH').production((pb) => pb.wild(1)).nbsp.colon().wild(4).digit.asterix();
+          b.minus().text('EACH').production((pb) => pb.wild(1)).nbsp.colon().wild(4, {digit}).asterix();
+          b.br;
         }),
-        description: 'Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.',
+        description: 'Once per game, decrease each of your productions 1 step to gain 4 of that resource.',
       },
     });
   }
 
   public isDisabled = false;
 
-  public override play() {
-    return undefined;
-  }
+  // public play() {
+  //   return undefined;
+  // }
 
   public canAct(): boolean {
     return this.isDisabled === false;
   }
-
+  
   public action(player: Player): PlayerInput | undefined {
-    const game = player.game;
-    const oceansPlaced = game.board.getOceanCount()
-    if (oceansPlaced < MAX_OCEAN_TILES) {
-      const oceansPlaced = game.board.getOceanCount();
-      player.addResource(Resources.MEGACREDITS, oceansPlaced * 4, {log: true});
-    } else {
-      player.addResource(Resources.MEGACREDITS, 15, {log: true});
-    }
+    // I should probably be using 'player.production.canHaveProductionReduced()', but that may cause issues with 'protected' steel/titanium
+    // I'm pretty sure HAL isnt protected against itself
+    const decreasableProductions = [];
+    // if (player.production.megacredits > -5) decreasableProductions.push(Resources.MEGACREDITS);
+    // if (player.production.steel > 0) decreasableProductions.push(Resources.STEEL);
+    // if (player.production.titanium > 0) decreasableProductions.push(Resources.TITANIUM);
+    // if (player.production.plants > 0) decreasableProductions.push(Resources.PLANTS);
+    // if (player.production.energy > 0) decreasableProductions.push(Resources.ENERGY);
+    // if (player.production.heat > 0) decreasableProductions.push(Resources.HEAT);
+    if (player.production.megacredits > -5) {
+      player.addResource(Resources.MEGACREDITS, 4, {log: true});
+      player.production.adjust(units.megacredits, -1)
+    } 
+    if (player.production.steel > 0) decreasableProductions.push(Resources.STEEL);
+    if (player.production.titanium > 0) decreasableProductions.push(Resources.TITANIUM);
+    if (player.production.plants > 0) decreasableProductions.push(Resources.PLANTS);
+    if (player.production.energy > 0) decreasableProductions.push(Resources.ENERGY);
+    if (player.production.heat > 0) decreasableProductions.push(Resources.HEAT);
+
+    // decreasableProductions.forEach((production) => {
+    //   player.production
+    //   player.adjust(production, -1, {log: true});
+      
+    // });
 
     this.isDisabled = true;
     return undefined;
   }
 }
+
+
+

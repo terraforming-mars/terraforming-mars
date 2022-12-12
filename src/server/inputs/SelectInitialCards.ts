@@ -55,13 +55,13 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
 
     if (player.game.gameOptions.leaderExtension) {
       this.options.push(
-        new SelectCard<ILeaderCard>(
+        new SelectCard(
           'Select CEO', undefined, player.dealtLeaderCards,
-          (cards) => {
-            if (cards.length !== 1) {
+          (leaderCards: Array<ILeaderCard>) => {
+            if (leaderCards.length !== 1) {
               throw new Error('Only select 1 CEO');
             }
-            player.leaderCardsInHand.push(cards[0]);
+            player.leaderCardsInHand.push(leaderCards[0]);
             return undefined;
           }, {min: 1, max: 1},
         ),

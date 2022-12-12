@@ -17,7 +17,7 @@ import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
 // import {Ingrid} from './Ingrid';
 // import {Jansson} from './Jansson';
-// import {Karen} from './Karen';
+import {Karen} from './Karen';
 // import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
 // import {Musk} from './Musk';
@@ -56,7 +56,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.HUAN]: {Factory: Huan, compatibility: GameModule.Colonies},
     // [CardName.INGRID]: {Factory: Ingrid},
     // [CardName.JANSSON]: {Factory: Jansson},
-    // [CardName.KAREN]: {Factory: Karen, compatibility: GameModule.Prelude},
+    [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
     // [CardName.LOWELL]: {Factory: Lowell, compatibility: GameModule.Prelude},
     // [CardName.MARIA]: {Factory: Maria, compatibility: GameModule.Colonies},
     // [CardName.MUSK]: {Factory: Musk},

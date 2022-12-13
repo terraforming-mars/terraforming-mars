@@ -44,7 +44,7 @@ export class HAL9000 extends Card implements LeaderCard {
   public action(player: Player): PlayerInput | undefined {
     // I should probably be using 'player.production.canHaveProductionReduced()', but that may cause issues with 'protected' steel/titanium
     // I'm pretty sure HAL isnt protected against itself
-    const decreasableProductions = [];
+    // const decreasableProductions = [];
     // if (player.production.megacredits > -5) decreasableProductions.push(Resources.MEGACREDITS);
     // if (player.production.steel > 0) decreasableProductions.push(Resources.STEEL);
     // if (player.production.titanium > 0) decreasableProductions.push(Resources.TITANIUM);
@@ -53,13 +53,13 @@ export class HAL9000 extends Card implements LeaderCard {
     // if (player.production.heat > 0) decreasableProductions.push(Resources.HEAT);
     if (player.production.megacredits > -5) {
       player.addResource(Resources.MEGACREDITS, 4, {log: true});
-      player.production.adjust(units.megacredits, -1)
+      // player.production.adjust(Resources.MEGACREDITS, -1)
     } 
-    if (player.production.steel > 0) decreasableProductions.push(Resources.STEEL);
-    if (player.production.titanium > 0) decreasableProductions.push(Resources.TITANIUM);
-    if (player.production.plants > 0) decreasableProductions.push(Resources.PLANTS);
-    if (player.production.energy > 0) decreasableProductions.push(Resources.ENERGY);
-    if (player.production.heat > 0) decreasableProductions.push(Resources.HEAT);
+    // if (player.production.steel > 0) decreasableProductions.push(Resources.STEEL);
+    // if (player.production.titanium > 0) decreasableProductions.push(Resources.TITANIUM);
+    // if (player.production.plants > 0) decreasableProductions.push(Resources.PLANTS);
+    // if (player.production.energy > 0) decreasableProductions.push(Resources.ENERGY);
+    // if (player.production.heat > 0) decreasableProductions.push(Resources.HEAT);
 
     // decreasableProductions.forEach((production) => {
     //   player.production

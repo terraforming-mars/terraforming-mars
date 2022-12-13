@@ -43,16 +43,4 @@ export class Duncan extends Card implements LeaderCard {
     this.generationUsed = player.game.generation;
     return undefined;
   }
-
-  // public override getVictoryPoints(player: Player) {
-  //   let genused
-  //   if (this.generationUsed === -1) {
-  //     // If this was never used we have to score based on the current generation
-  //     // I dont actually want to set this.generationUsed in case this is called prior to game end
-  //     genused = player.game.generation;
-  //   } else {
-  //     genused = this.generationUsed
-  //   }
-  //   return 6 - genused
-  // }
 }

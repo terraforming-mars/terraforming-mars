@@ -40,8 +40,9 @@ export class Tate extends Card implements LeaderCard {
 
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
-    const tags = game.getAllValidTags();
 
+    // There's only one card with a Wild tag in the game right now... we shouldn't use that
+    const tags = game.getAllValidTags().filter(tag => tag !== Tag.WILD);
     const options = tags.map((tag) => {
       return new SelectOption('Search for ' + tag + ' tags', 'Search', () => {
         game.log('${0} searched for ${1} tags', (b) => b.player(player).string(tag));

@@ -1242,10 +1242,12 @@ export class Game implements Logger {
       Tag.EVENT,
       // Tag.CLONE,
     ];
-
-    if (this.gameOptions.aresExtension) tags.push(Tag.MARS);
+    
+    // On the players 'Tag Bar' VENUS is in between JOVIAN and PLANTS
+    // Lets insert it there
+    if (this.gameOptions.venusNextExtension) tags.splice(tags.indexOf(Tag.JOVIAN) + 1, 0, Tag.VENUS);
     if (this.gameOptions.moonExpansion) tags.push(Tag.MOON);
-    if (this.gameOptions.venusNextExtension) tags.push(Tag.VENUS);
+    if (this.gameOptions.aresExtension) tags.push(Tag.MARS);
 
     return tags;
   }

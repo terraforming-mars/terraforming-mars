@@ -755,6 +755,7 @@ export enum CardName {
 
     // CEOs/Leader
     ASIMOV = 'Asimov',
+    BJORN = 'Bjorn',
     CLARKE = 'Clarke',
     ENDER = 'Ender',
     GRETA = 'Greta',

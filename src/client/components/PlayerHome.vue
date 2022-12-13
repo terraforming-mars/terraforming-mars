@@ -111,6 +111,9 @@
               <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
               </div>
+              <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.LEADER])" :key="card.name" class="cardbox">
+                  <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
+              </div>
               <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
               </div>

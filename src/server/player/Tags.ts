@@ -57,7 +57,8 @@ export class Tags {
       tagCount += this.player.scienceTagCount;
     }
 
-    if (tag === Tag.WILD) {
+    if (tag == Tag.WILD || includeTagSubstitutions) {
+      // CEO Xavier hook
       tagCount += LeadersExpansion.getBonusWildTags(this.player);
     }
 

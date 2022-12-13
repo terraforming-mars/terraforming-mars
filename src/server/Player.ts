@@ -65,6 +65,8 @@ import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {LeaderCard} from './cards/leaders/LeaderCard';
+import {LeadersExpansion} from './cards/leaders/LeadersExpansion';
+
 
 /**
  * Behavior when playing a card:
@@ -785,6 +787,11 @@ export class Player {
     this.plants += this.production.plants;
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
+
+    // Leader OPG actions reset hook
+    this.playedCards
+      .filter((card) => card.cardType === CardType.LEADER)
+      .forEach((card) => (card as LeaderCard).opgActionIsActive = false);
   }
 
   private doneWorldGovernmentTerraforming(): void {

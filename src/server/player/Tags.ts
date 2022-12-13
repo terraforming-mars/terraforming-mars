@@ -8,6 +8,7 @@ import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorpor
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
+import {LeadersExpansion} from '../cards/leaders/LeadersExpansion';
 
 export class Tags {
   private player: Player;
@@ -56,6 +57,9 @@ export class Tags {
       tagCount += this.player.scienceTagCount;
     }
 
+    if (tag === Tag.WILD) {
+      tagCount += LeadersExpansion.getBonusWildTags(this.player);
+    }
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
@@ -159,7 +163,7 @@ export class Tags {
 
   // Counts the number of distinct tags
   public distinctCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
-    let wildTagCount = 0;
+    let wildTagCount: number = LeadersExpansion.getBonusWildTags(this.player);
     const uniqueTags = new Set<Tag>();
     const addTag = (tag: Tag) => {
       if (tag === Tag.WILD) {

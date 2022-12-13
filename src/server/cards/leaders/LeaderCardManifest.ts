@@ -9,7 +9,7 @@ import {Clarke} from './Clarke';
 // import {Duncan} from './Duncan';
 import {Ender} from './Ender';
 // import {Faraday} from './Faraday';
-// import {Floyd} from './Floyd';
+import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 // import {Gordon} from './Gordon';
 import {Greta} from './Greta';
@@ -48,7 +48,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.DUNCAN]: {Factory: Duncan},
     [CardName.ENDER]: {Factory: Ender},
     // [CardName.FARADAY]: {Factory: Faraday},
-    // [CardName.FLOYD]: {Factory: Floyd},
+    [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     // [CardName.GORDON]: {Factory: Gordon},
     [CardName.GRETA]: {Factory: Greta},

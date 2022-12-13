@@ -13,4 +13,5 @@ export interface LeaderCard extends IProjectCard {
   opgActionIsActive?: boolean;
   generationUsed?: number;
   onTRIncrease?: (player: Player) => undefined;
+  canAct: (player: Player) => boolean;
 }

@@ -230,6 +230,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.INFLUENCE, 1, options));
   }
 
+  public hazardTile(amount: number = 1, options?: ItemOptions | undefined): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.HAZARD_TILE, amount, options));
+  }
+
   public city(options?: ItemOptions) {
     const item = new CardRenderItem(CardRenderItemType.CITY, -1, options);
     item.size = options?.size ?? Size.MEDIUM;

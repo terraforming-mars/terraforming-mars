@@ -27,7 +27,7 @@ export class Karen extends Card implements LeaderCard {
 
   public isDisabled = false;
 
-  override play() {
+  public override play() {
     return undefined;
   }
 
@@ -56,6 +56,7 @@ export class Karen extends Card implements LeaderCard {
 
     return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
       if (card.canPlay === undefined || card.canPlay(player)) {
+        this.isDisabled = true;
         return player.playCard(card);
       } else {
         throw new Error('You cannot pay for this card');

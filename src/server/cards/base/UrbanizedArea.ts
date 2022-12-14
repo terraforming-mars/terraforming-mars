@@ -34,6 +34,9 @@ export class UrbanizedArea extends Card implements IProjectCard {
     });
   }
   private getAvailableSpaces(player: Player): Array<ISpace> {
+    // Gordon CEO can ignore placement restrictions for Cities+Greenery
+    if (player.cardIsInEffect(CardName.GORDON)) return player.game.board.getAvailableSpacesOnLand(player);
+
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }

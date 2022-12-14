@@ -169,6 +169,8 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+    // Gordon CEO can ignore placement restrictions for Cities+Greenery
+    if (player.cardIsInEffect(CardName.GORDON)) return this.getAvailableSpacesOnLand(player);
     // A city cannot be adjacent to another city
     return this.getAvailableSpacesOnLand(player).filter(
       (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
@@ -176,6 +178,9 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+    // Gordon CEO can ignore placement restrictions for Cities+Greenery
+    if (player.cardIsInEffect(CardName.GORDON)) return this.getAvailableSpacesOnLand(player);
+
     let spacesOnLand = this.getAvailableSpacesOnLand(player);
     // Spaces next to Red City are always unavialable.
     if (player.game.gameOptions.pathfindersExpansion === true) {

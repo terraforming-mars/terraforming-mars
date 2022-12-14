@@ -1,0 +1,59 @@
+import {expect} from "chai";
+import {TestPlayer} from '../../TestPlayer';
+
+import {Game} from "../../../src/server/Game";
+import {Player} from "../../../src/server/Player";
+import {SpaceType} from "../../../src/common/boards/SpaceType";
+import {TileType} from "../../../src/common/TileType";
+
+import {Gordon} from "../../../src/server/cards/leaders/Gordon";
+
+import {addGreenery, addCityTile, runAllActions} from '../../TestingUtils';
+
+
+
+describe('Gordon', function() {
+  let card: Gordon; let player: Player; let player2: Player; let game: Game;
+
+  beforeEach(() => {
+    card = new Gordon();
+    player = TestPlayer.BLUE.newPlayer();
+    player2 = TestPlayer.RED.newPlayer();
+    game = Game.newInstance('gameid', [player, player2], player);
+
+    player.playedCards.push(card);
+  });
+
+  it('Can place greenery tile on any available land space', function() {
+    addGreenery(player, '35');
+    expect(game.board.getAvailableSpacesForGreenery(player).length).greaterThan(6);
+  });
+
+  it('Gains 2 MC when placing city or greenery tile', function() {
+    player.megaCredits = 0;
+
+    addGreenery(player, '35');
+    game.deferredActions.runNext();
+    expect(player.megaCredits).eq(2);
+
+    addCityTile(player, '37');
+    game.deferredActions.runNext();
+    expect(player.megaCredits).eq(4);
+  });
+
+
+  it('Does not give MC production for city off Mars', function() {
+    game.addTile(player, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
+      tileType: TileType.CITY,
+    });
+    runAllActions(game);
+    expect(player.megaCredits).to.eq(0);
+  });
+
+
+  it('Does not gain MC when opponent places city or greenery tile', function() {
+    player.megaCredits = 0;
+    addGreenery(player2, '35');
+    expect(player.megaCredits).eq(0);
+  });
+});

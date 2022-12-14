@@ -5,6 +5,7 @@ import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ALL_MODULE_MANIFESTS} from './cards/AllCards';
+import {ILeaderCard} from './cards/leaders/ILeaderCard';
 
 const CARD_RENAMES = new Map<string, CardName>([
   // When renaming a card, add the old name here (like the example below), and add a TODO (like the example below)
@@ -58,9 +59,14 @@ export class CardFinder {
     return this.getCard(cardName, ['preludeCards']);
   }
 
+  public getLeaderByName(cardName: CardName): ILeaderCard | undefined {
+    return this.getCard(cardName, ['leaderCards']);
+  }
+
+
   public preludesFromJSON(cards: Array<CardName>): Array<IPreludeCard> {
     if (cards === undefined) {
-      console.warn('missing cards calling cardsFromJSON');
+      console.warn('missing cards calling preludesFromJSON');
       return [];
     }
     const result: Array<IPreludeCard> = [];
@@ -104,6 +110,23 @@ export class CardFinder {
         result.push(card);
       } else {
         console.warn(`corporation ${element} not found while loading game.`);
+      }
+    });
+    return result;
+  }
+
+  public leadersFromJson(cards: Array<CardName>): Array<ILeaderCard> {
+    if (cards === undefined) {
+      console.warn('missing cards calling leadersFromJson');
+      return [];
+    }
+    const result: Array<ILeaderCard> = [];
+    cards.forEach((element: CardName) => {
+      const card = this.getLeaderByName(element);
+      if (card !== undefined) {
+        result.push(card);
+      } else {
+        console.warn(`card ${element} not found while loading game.`);
       }
     });
     return result;

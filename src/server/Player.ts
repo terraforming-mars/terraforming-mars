@@ -2115,7 +2115,7 @@ export class Player {
     }
 
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
-    player.dealtLeaderCards = cardFinder.cardsFromJSON(d.dealtLeaderCards);
+    player.dealtLeaderCards = cardFinder.leadersFromJson(d.dealtLeaderCards);
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);

@@ -6,12 +6,23 @@ describe('CardFinder', function() {
   it('findProjectCardByName: success', function() {
     expect(new CardFinder().getProjectCardByName(CardName.AI_CENTRAL)?.name).eq(CardName.AI_CENTRAL);
   });
+
   it('findProjectCardByName: failure', function() {
     expect(new CardFinder().getProjectCardByName(CardName.ECOLINE)).is.undefined;
   });
+
   it('findProjectCardByName prelude: success', function() {
     expect(new CardFinder().getProjectCardByName(CardName.ALLIED_BANK)?.name).eq(CardName.ALLIED_BANK);
   });
+
+  it('getLeaderByName: success', function() {
+    expect(new CardFinder().getLeaderByName(CardName.ULRICH)?.name).eq(CardName.ULRICH);
+  });
+
+  it('getLeaderByName: failure', function() {
+    expect(new CardFinder().getLeaderByName(CardName.MICRO_MILLS)).is.undefined;
+  });
+
   // Dont' remove this test. It's a placeholder for card renames.
   it('finds renamed cards', function() {
     expect(new CardFinder().getProjectCardByName('Designed Micro-organisms'as CardName)?.name).to.equal(CardName.DESIGNED_MICROORGANISMS);

@@ -56,6 +56,10 @@ export abstract class Colony implements IColony {
       if (game.syndicatePirateRaider) {
         if (game.syndicatePirateRaider === this.visitor) {
           this.visitor = undefined;
+        } else {
+          // CEO Huan hook
+          const raider = game.getPlayerById(game.syndicatePirateRaider);
+          if (raider.cardIsInEffect(CardName.HUAN)) this.visitor = undefined;
         }
       } else {
         this.visitor = undefined;

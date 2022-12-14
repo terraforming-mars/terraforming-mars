@@ -203,8 +203,11 @@ abstract class Builder<T> {
   public trade(options?: ItemOptions): Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE, -1, options));
   }
-  public tradeFleet(): Builder<T> {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
+
+  public tradeFleet(options?: ItemOptions): Builder<T> {
+    const item = new CardRenderItem(CardRenderItemType.TRADE_FLEET, -1, options);
+    item.size = options?.size ?? Size.MEDIUM;
+    return this._appendToRow(item);
   }
 
   public colonies(amount: number = 1, options?: ItemOptions): Builder<T> {

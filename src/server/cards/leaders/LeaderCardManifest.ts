@@ -13,20 +13,19 @@ import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 import {Gordon} from './Gordon';
 import {Greta} from './Greta';
-import {HAL9000} from './HAL9000';
+// import {HAL9000} from './HAL9000';
 import {Huan} from './Huan';
 import {Ingrid} from './Ingrid';
 // import {Jansson} from './Jansson';
 import {Karen} from './Karen';
 // import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
-// import {Musk} from './Musk';
 // import {Naomi} from './Naomi';
 // import {Neil} from './Neil';
 import {Oscar} from './Oscar';
 // import {Petra} from './Petra';
 import {Quill} from './Quill';
-// import {Rogers} from './Rogers';
+import {Rogers} from './Rogers';
 // import {Ryu} from './Ryu';
 // import {Stefan} from './Stefan';
 import {Sweeney} from './Sweeney';
@@ -53,7 +52,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     [CardName.GORDON]: {Factory: Gordon},
     [CardName.GRETA]: {Factory: Greta},
-    [CardName.HAL9000]: {Factory: HAL9000},
+    // [CardName.HAL9000]: {Factory: HAL9000},
     [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},
     [CardName.INGRID]: {Factory: Ingrid},
     // [CardName.JANSSON]: {Factory: Jansson},
@@ -65,7 +64,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.OSCAR]: {Factory: Oscar, compatibility: 'turmoil'},
     // [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
     [CardName.QUILL]: {Factory: Quill, compatibility: 'venus'},
-    // [CardName.ROGERS]: {Factory: Rogers, compatibility: 'venus'},
+    [CardName.ROGERS]: {Factory: Rogers, compatibility: 'venus'},
     // [CardName.RYU]: {Factory: Ryu},
     // [CardName.STEFAN]: {Factory: Stefan},
     [CardName.SWEENEY]: {Factory: Sweeney},

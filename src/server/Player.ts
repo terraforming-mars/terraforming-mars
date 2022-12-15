@@ -66,6 +66,7 @@ import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {LeaderCard} from './cards/leaders/LeaderCard';
 import {LeadersExpansion} from './cards/leaders/LeadersExpansion';
+import {VanAllen} from './cards/leaders/VanAllen';
 
 
 /**
@@ -1346,7 +1347,10 @@ export class Player {
         player: this,
         milestone: milestone,
       });
-      this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+      const cost = this.cardIsInEffect(CardName.VANALLEN) ? 0 : MILESTONE_COST;
+      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
+      VanAllen.onMilestoneClaimed(this.game);  // Make sure to give Van Allen 3MC
+
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1794,7 +1798,9 @@ export class Player {
       'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';
 
-    if (this.canAfford(MILESTONE_COST) && !this.game.allMilestonesClaimed()) {
+    const canAffordMilestone = this.canAfford(MILESTONE_COST) || this.cardIsInEffect(CardName.VANALLEN);
+
+    if (canAffordMilestone && !this.game.allMilestonesClaimed()) {
       const remainingMilestones = new OrOptions();
       remainingMilestones.title = 'Claim a milestone';
       remainingMilestones.options = this.game.milestones

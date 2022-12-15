@@ -67,6 +67,7 @@ describe('ApiGame', () => {
           'includeFanMA': false,
           'includeVenusMA': true,
           'initialDraftVariant': false,
+          "leaderExtension": false,
           'moonExpansion': false,
           'pathfindersExpansion': false,
           'preludeExtension': false,

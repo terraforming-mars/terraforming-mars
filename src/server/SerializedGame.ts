@@ -33,6 +33,7 @@ export type SerializedGame = {
     projectDeck?: SerializedDeck,
     corporationDeck?: SerializedDeck,
     preludeDeck?: SerializedDeck,
+    leaderDeck?: SerializedDeck;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
     draftedPlayers: Array<PlayerId>;

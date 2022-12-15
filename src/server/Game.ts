@@ -397,6 +397,7 @@ export class Game implements Logger {
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
+      leaderDeck: this.leaderDeck.serialize(),
       milestones: this.milestones.map((m) => m.name),
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,

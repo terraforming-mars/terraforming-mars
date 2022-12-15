@@ -769,6 +769,7 @@ export enum CardName {
     TATE = 'Tate',
     ULRICH = 'Ulrich',
     XAVIER = 'Xavier',
+    SWEENEY = 'Sweeney',
     HUAN = 'Huan',
     CAESAR = 'Caesar',
     GAIA = 'Gaia',

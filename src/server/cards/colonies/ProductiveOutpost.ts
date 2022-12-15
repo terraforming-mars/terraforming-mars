@@ -24,12 +24,18 @@ export class ProductiveOutpost extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: Player) {
+    ProductiveOutpost.giveAllColonyBonuses(player);
+    return undefined;
+  }
+
+  public static giveAllColonyBonuses(player: Player) {
+    // This is split out as a seperate public function to allow CEO Yvonne to call it twice
+    // TODO: It may be cleaner to move it out into Player itself, or Colonies,
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
         // Not using GiveColonyBonus deferred action because it's only for the active player
         player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
       });
     });
-    return undefined;
   }
 }

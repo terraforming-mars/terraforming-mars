@@ -436,7 +436,7 @@
     "It must be -10 C or colder.": "조건: 기온 -10℃ 이하.",
 
     "Advanced Ecosystems": "발달된 생태계",
-    "Requires a plant tag, a aicrobe tag, and an animal tag.": "조건: 보유한 식물/미생물/동물 태그 각 1개 이상.",
+    "Requires a plant tag, a microbe tag, and an animal tag.": "조건: 보유한 식물/미생물/동물 태그 각 1개 이상.",
 
     "Great Dam": "대형 댐",
     "Requires 4 ocean tiles. Increase your energy production 2 steps.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2 증가.",

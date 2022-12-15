@@ -20,7 +20,7 @@ import {Ingrid} from './Ingrid';
 import {Karen} from './Karen';
 // import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
-// import {Naomi} from './Naomi';
+import {Naomi} from './Naomi';
 // import {Neil} from './Neil';
 import {Oscar} from './Oscar';
 // import {Petra} from './Petra';

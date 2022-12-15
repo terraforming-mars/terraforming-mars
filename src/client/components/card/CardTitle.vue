@@ -2,6 +2,7 @@
   <div :class="getMainClasses()">
     <div v-if="isPrelude()" class="prelude-label">prelude</div>
     <div v-if="isCorporation()" class="corporation-label">corporation</div>
+    <div v-if="isLeader()" class="leader-label">CEO</div>
     <CardCorporationLogo v-if="isCorporation()" :title="title"/>
     <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
   </div>
@@ -32,6 +33,9 @@ export default Vue.extend({
   methods: {
     isCorporation(): boolean {
       return this.type === CardType.CORPORATION;
+    },
+    isLeader(): boolean {
+      return this.type === CardType.LEADER;
     },
     isPrelude(): boolean {
       return this.type === CardType.PRELUDE;

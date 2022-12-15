@@ -195,6 +195,8 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.AGENDA) {
         classes.push('card-resource');
         classes.push('card-resource-agenda');
+      } else if (type === CardRenderItemType.ARROW_OPG) {
+        classes.push('card-arrow-opg');
       } else if (this.item.type === CardRenderItemType.MOON_HABITAT) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
           classes.push(sized('card-tile-lunar-colony-rate', this.item.size));

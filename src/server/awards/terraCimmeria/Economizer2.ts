@@ -1,6 +1,6 @@
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {IAward} from '../IAward';
+import {IAward, getAdditionalScore} from '../IAward';
 
 export class Economizer2 implements IAward {
   public readonly name = 'T. Economizer';
@@ -8,7 +8,7 @@ export class Economizer2 implements IAward {
 
   public getScore(player: Player): number {
     const validCardTypes = [CardType.ACTIVE, CardType.AUTOMATED];
-    return player.playedCards
-      .filter((card) => (card.cost <= 10) && validCardTypes.includes(card.cardType)).length;
+    const score = player.playedCards.filter((card) => (card.cost <= 10) && validCardTypes.includes(card.cardType)).length;
+    return score + getAdditionalScore(player); 
   }
 }

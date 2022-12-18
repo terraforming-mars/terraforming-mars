@@ -7,7 +7,7 @@ import {Database} from '../database/Database';
 export class ApiStats extends Handler {
   public static readonly INSTANCE = new ApiStats();
   private constructor() {
-    super({validateServerId: true});
+    super({validateStatsId: true});
   }
 
   public override async get(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): Promise<void> {

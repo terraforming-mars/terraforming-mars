@@ -16,9 +16,12 @@ export class RouteTestScaffolding {
     this.req = req as http.IncomingMessage;
     this.ctx = {
       route: new Route(),
-      serverId: '1',
       url: new URL('http://boo.com'),
       gameLoader: new FakeGameLoader(),
+      ids: {
+        serverId: '1',
+        statsId: '2',
+      },
     };
     if (!this.req.headers) this.req.headers = {};
   }

@@ -21,6 +21,7 @@ import {Route} from './routes/Route';
 import {PlayerInput} from './routes/PlayerInput';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
+import {serverId, statsId} from './server-ids';
 
 const handlers: Map<string, IHandler> = new Map(
   [
@@ -58,8 +59,7 @@ const handlers: Map<string, IHandler> = new Map(
 export function processRequest(
   req: http.IncomingMessage,
   res: http.ServerResponse,
-  route: Route,
-  serverId: string): void {
+  route: Route): void {
   if (req.method === 'HEAD') {
     res.end();
     return;
@@ -70,7 +70,7 @@ export function processRequest(
   }
 
   const url = new URL(req.url, `http://${req.headers.host}`);
-  const ctx = {url, route, serverId, gameLoader: GameLoader.getInstance()};
+  const ctx = {url, route, gameLoader: GameLoader.getInstance(), ids: {serverId, statsId}};
   const handler: IHandler | undefined = handlers.get(url.pathname);
 
   if (handler !== undefined) {

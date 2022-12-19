@@ -6,11 +6,8 @@ import { Card } from '../Card';
 import { CardRenderer } from '../render/CardRenderer';
 import { LeaderCard } from './LeaderCard';
 
-import {digit} from '../Options';
+import { digit } from '../Options';
 import { Resources } from '../../../common/Resources';
-
-// import {digit} from '../Options';
-
 
 export class HAL9000 extends Card implements LeaderCard {
   constructor() {
@@ -22,7 +19,6 @@ export class HAL9000 extends Card implements LeaderCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br.br;
-          // b.minus().text('EACH').production((pb) => pb.wild(1)).nbsp.colon().wild(4).digit.asterix();
           b.minus().text('EACH').production((pb) => pb.wild(1)).nbsp.colon().wild(4, {digit}).asterix();
           b.br;
         }),
@@ -33,39 +29,33 @@ export class HAL9000 extends Card implements LeaderCard {
 
   public isDisabled = false;
 
-  // public play() {
-  //   return undefined;
-  // }
+  public override play() {
+    return undefined;
+  }
 
   public canAct(): boolean {
     return this.isDisabled === false;
   }
   
   public action(player: Player): PlayerInput | undefined {
-    // I should probably be using 'player.production.canHaveProductionReduced()', but that may cause issues with 'protected' steel/titanium
-    // I'm pretty sure HAL isnt protected against itself
-    // const decreasableProductions = [];
-    // if (player.production.megacredits > -5) decreasableProductions.push(Resources.MEGACREDITS);
-    // if (player.production.steel > 0) decreasableProductions.push(Resources.STEEL);
-    // if (player.production.titanium > 0) decreasableProductions.push(Resources.TITANIUM);
-    // if (player.production.plants > 0) decreasableProductions.push(Resources.PLANTS);
-    // if (player.production.energy > 0) decreasableProductions.push(Resources.ENERGY);
-    // if (player.production.heat > 0) decreasableProductions.push(Resources.HEAT);
-    if (player.production.megacredits > -5) {
-      player.addResource(Resources.MEGACREDITS, 4, {log: true});
-      // player.production.adjust(Resources.MEGACREDITS, -1)
-    } 
-    // if (player.production.steel > 0) decreasableProductions.push(Resources.STEEL);
-    // if (player.production.titanium > 0) decreasableProductions.push(Resources.TITANIUM);
-    // if (player.production.plants > 0) decreasableProductions.push(Resources.PLANTS);
-    // if (player.production.energy > 0) decreasableProductions.push(Resources.ENERGY);
-    // if (player.production.heat > 0) decreasableProductions.push(Resources.HEAT);
-
-    // decreasableProductions.forEach((production) => {
-    //   player.production
-    //   player.adjust(production, -1, {log: true});
-      
-    // });
+    const prd = player.production
+    const resources = [
+      { productionName: prd.megacredits, resource: Resources.MEGACREDITS},
+      { productionName: prd.steel, resource: Resources.STEEL},
+      { productionName: prd.titanium, resource: Resources.TITANIUM},
+      { productionName: prd.plants, resource: Resources.PLANTS},
+      { productionName: prd.energy, resource: Resources.ENERGY},
+      { productionName: prd.heat, resource: Resources.HEAT},
+    ];
+    
+    for (const resource of resources) {
+      let minValue = 0;
+      if (resource.productionName === prd.megacredits) minValue = -5;
+      if (resource.productionName > minValue) {
+        player.production.add(resource.resource, -1, {log: true})
+        player.addResource(resource.resource, 4, {log: true});
+      }
+    }
 
     this.isDisabled = true;
     return undefined;

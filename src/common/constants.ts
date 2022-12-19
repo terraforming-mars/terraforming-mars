@@ -53,9 +53,11 @@ export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;
 export const DEFAULT_ESCAPE_VELOCITY_PERIOD = 2;
 export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 
+// Preludes
+export const PRELUDE_CARDS_DEALT_PER_PLAYER = 4;
+
 // CEOs/Leader
-export const LEADER_CARDS_DEALT_PER_PLAYER = 3;
-// export const LEADER_CARDS_DEALT_PER_PLAYER = 1;
+export const LEADER_CARDS_DEALT_PER_PLAYER = 4;
 export const ASIMOV_AWARD_BONUS = 2;
 
 export const LANGUAGES2 = {
@@ -86,4 +88,3 @@ export const LANGUAGES = [
 
 export const APP_NAME = 'Terraforming Mars';
 export const DISCORD_INVITE = 'https://discord.gg/afeyggbN6Y';
-export const PRELUDE_CARDS_DEALT_PER_PLAYER = 4;

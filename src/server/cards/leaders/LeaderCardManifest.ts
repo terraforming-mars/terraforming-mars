@@ -19,7 +19,7 @@ import {Ingrid} from './Ingrid';
 import {Jansson} from './Jansson';
 import {Karen} from './Karen';
 import {Lowell} from './Lowell';
-// import {Maria} from './Maria';
+import {Maria} from './Maria';
 import {Naomi} from './Naomi';
 // import {Neil} from './Neil';
 import {Oscar} from './Oscar';
@@ -58,7 +58,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.JANSSON]: {Factory: Jansson},
     [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
     [CardName.LOWELL]: {Factory: Lowell, compatibility: 'prelude'},
-    // [CardName.MARIA]: {Factory: Maria, compatibility: 'colonies'},
+    [CardName.MARIA]: {Factory: Maria, compatibility: 'colonies'},
     [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},
     // [CardName.NEIL]: {Factory: Neil, compatibility: 'moon'},
     [CardName.OSCAR]: {Factory: Oscar, compatibility: 'turmoil'},

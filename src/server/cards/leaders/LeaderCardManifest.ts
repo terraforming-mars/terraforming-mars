@@ -8,12 +8,12 @@ import {Caesar} from './Caesar';
 import {Clarke} from './Clarke';
 import {Duncan} from './Duncan';
 import {Ender} from './Ender';
-// import {Faraday} from './Faraday';
+import {Faraday} from './Faraday';
 import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 import {Gordon} from './Gordon';
 import {Greta} from './Greta';
-// import {HAL9000} from './HAL9000';
+import {HAL9000} from './HAL9000';
 import {Huan} from './Huan';
 import {Ingrid} from './Ingrid';
 // import {Jansson} from './Jansson';
@@ -26,7 +26,7 @@ import {Oscar} from './Oscar';
 // import {Petra} from './Petra';
 import {Quill} from './Quill';
 import {Rogers} from './Rogers';
-// import {Ryu} from './Ryu';
+import {Ryu} from './Ryu';
 import {Stefan} from './Stefan';
 import {Sweeney} from './Sweeney';
 import {Tate} from './Tate';
@@ -47,12 +47,12 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.CLARKE]: {Factory: Clarke},
     [CardName.DUNCAN]: {Factory: Duncan},
     [CardName.ENDER]: {Factory: Ender},
-    // [CardName.FARADAY]: {Factory: Faraday},
+    [CardName.FARADAY]: {Factory: Faraday},
     [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     [CardName.GORDON]: {Factory: Gordon},
     [CardName.GRETA]: {Factory: Greta},
-    // [CardName.HAL9000]: {Factory: HAL9000},
+    [CardName.HAL9000]: {Factory: HAL9000},
     [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},
     [CardName.INGRID]: {Factory: Ingrid},
     // [CardName.JANSSON]: {Factory: Jansson},
@@ -65,7 +65,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
     [CardName.QUILL]: {Factory: Quill, compatibility: 'venus'},
     [CardName.ROGERS]: {Factory: Rogers, compatibility: 'venus'},
-    // [CardName.RYU]: {Factory: Ryu},
+    [CardName.RYU]: {Factory: Ryu},
     [CardName.STEFAN]: {Factory: Stefan},
     [CardName.SWEENEY]: {Factory: Sweeney},
     [CardName.TATE]: {Factory: Tate},

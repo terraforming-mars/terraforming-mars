@@ -57,7 +57,9 @@ export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 export const PRELUDE_CARDS_DEALT_PER_PLAYER = 4;
 
 // CEOs/Leader
-export const LEADER_CARDS_DEALT_PER_PLAYER = 4;
+export const LEADER_CARDS_DEALT_PER_PLAYER = 3;
+export const LEADER_CARDS_DEALT_PER_PLAYER_MIN = 2;
+export const LEADER_CARDS_DEALT_PER_PLAYER_MAX = 5;
 export const ASIMOV_AWARD_BONUS = 2;
 
 export const LANGUAGES2 = {

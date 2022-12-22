@@ -139,6 +139,14 @@
                                 <div class="create-game-expansion-icon expansion-icon-leaders"></div>
                                 <span v-i18n>CEOs</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+                            <template v-if="leaderExtension">
+                              <label for="startingLeaders">
+                                <!-- startingLeadersMin: constants.LEADER_CARDS_DEALT_PER_PLAYER_MIN,
+                                startingLeadersMax: constants.LEADER_CARDS_DEALT_PER_PLAYER_MAX, -->
+                              <input type="number" class="create-game-leaders-count" :value=constants.LEADER_CARDS_DEALT_PER_PLAYER :min=constants.LEADER_CARDS_DEALT_PER_PLAYER_MIN :max=constants.LEADER_CARDS_DEALT_PER_PLAYER_MAX v-model="startingLeaders" id="startingLeaders-checkbox">
+                                  <span v-i18n>Starting CEOs</span>
+                              </label>
+                            </template>
 
                         </div>
 
@@ -542,6 +550,7 @@ export interface CreateGameModel {
     escapeVelocityPenalty: number;
     twoCorpsVariant: boolean;
     leaderExtension: boolean;
+    startingLeaders: number;
 }
 
 type Refs = {
@@ -631,6 +640,7 @@ export default (Vue as WithRefs<Refs>).extend({
       escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
       twoCorpsVariant: false,
       leaderExtension: false,
+      startingLeaders: constants.LEADER_CARDS_DEALT_PER_PLAYER,
     };
   },
   components: {
@@ -982,6 +992,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
       const twoCorpsVariant = component.twoCorpsVariant;
       const leaderExtension = component.leaderExtension;
+      const startingLeaders = component.startingLeaders;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1147,6 +1158,7 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityPenalty,
         twoCorpsVariant,
         leaderExtension: leaderExtension,
+        startingLeaders,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

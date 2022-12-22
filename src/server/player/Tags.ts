@@ -59,7 +59,7 @@ export class Tags {
 
     if (tag == Tag.WILD || includeTagSubstitutions) {
       // CEO Xavier hook
-      tagCount += leadersExtension.getBonusWildTags(this.player);
+      tagCount += LeadersExtension.getBonusWildTags(this.player);
     }
 
     if (includeTagSubstitutions) {
@@ -164,7 +164,7 @@ export class Tags {
 
   // Counts the number of distinct tags
   public distinctCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
-    let wildTagCount: number = leadersExtension.getBonusWildTags(this.player);
+    let wildTagCount: number = LeadersExtension.getBonusWildTags(this.player);
     const uniqueTags = new Set<Tag>();
     const addTag = (tag: Tag) => {
       if (tag === Tag.WILD) {

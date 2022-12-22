@@ -206,7 +206,6 @@ export class Game implements Logger {
 
     const leaderDeck = new LeaderDeck(gameCards.getLeaderCards(), [], rng);
     // todo: custom leader cards list
-    // leaderDeck.shuffle(gameOptions.customPreludes);
     leaderDeck.shuffle();
 
 
@@ -314,7 +313,7 @@ export class Game implements Logger {
           }
         }
         if (gameOptions.leaderExtension) {
-          for (let i = 0; i < constants.LEADER_CARDS_DEALT_PER_PLAYER; i++) {
+          for (let i = 0; i < gameOptions.startingLeaders; i++) {
             const leadercard = leaderDeck.draw(game);
             player.dealtLeaderCards.push(leadercard);
           }

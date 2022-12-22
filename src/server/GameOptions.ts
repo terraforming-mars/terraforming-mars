@@ -33,6 +33,7 @@ export type GameOptions = {
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
   leaderExtension: boolean;
+  startingLeaders: number;
 
   // Variants
   draftVariant: boolean;
@@ -82,6 +83,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   includeFanMA: false,
   initialDraftVariant: false,
   leaderExtension: false,
+  startingLeaders: constants.LEADER_CARDS_DEALT_PER_PLAYER,
   moonExpansion: false,
   moonStandardProjectVariant: false,
   pathfindersExpansion: false,

@@ -83,7 +83,7 @@ export class GameCards {
       case 'leader':
         return gameOptions.leaderExtension;
       case 'ares':
-        return gameOptions.leaderExtension;
+        return gameOptions.aresExtension;
       default:
         throw new Error(`Unhandled expansion type ${expansion}`);
       }

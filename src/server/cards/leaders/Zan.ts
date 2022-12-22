@@ -20,10 +20,10 @@ export class Zan extends Card implements LeaderCard {
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           // b.redsInactive().asterix();
-          b.text('NO REDs Bads!').asterix();
+          b.text('(NoRedsNeg)').asterix();
           b.br.br;
-          // b.opgArrow().text('ALL').delegates(1).colon().nbsp.nbsp.party(PartyName.REDS)();
-          b.opgArrow().text('ALL').delegates(1).colon().nbsp.nbsp.text('REDs!');;
+          // b.opgArrow().text('ALL').delegates(1).colon().nbsp.nbsp.party(PartyName.REDS);
+          b.opgArrow().text('ALL').delegates(1).colon().text('REDS');
         }),
         description: 'You are immune to Reds\' ruling policy. Once per game, place all your delegates in Reds.',
       },

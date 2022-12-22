@@ -1,5 +1,3 @@
-
-
 import { CardName } from '../../../common/cards/CardName';
 import { CardType } from '../../../common/cards/CardType';
 import { Player } from '../../Player';
@@ -8,7 +6,7 @@ import { Card } from '../Card';
 import { CardRenderer } from '../render/CardRenderer';
 import { LeaderCard } from './LeaderCard';
 
-import {Size} from '../../../common/cards/render/Size';
+// import {Size} from '../../../common/cards/render/Size';
 import {SelectProductionToLoseDeferred} from '../../deferredActions/SelectProductionToLoseDeferred';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
@@ -24,7 +22,8 @@ export class Caesar extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L33',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().colon().text('X').hazardTile(1, {size: Size.LARGE}).nbsp;
+          // b.opgArrow().colon().text('X').hazardTile(1, {size: Size.LARGE}).nbsp;
+          b.opgArrow().colon().text('X').hazardTile().nbsp;
           b.minus().production((pb) => pb.wild(1, {all})).asterix();
           b.br;
         }),

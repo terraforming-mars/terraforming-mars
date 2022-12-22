@@ -18,7 +18,7 @@ export class VanAllen extends Card implements LeaderCard {
         cardNumber: 'L22',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.text('MILESTONES: ').megacredits(0).megacredits(3).asterix();
+          b.text('MILESTONES: ').megacredits(0, {cancelled: true}).megacredits(3).asterix();
           b.br.br;
         }),
         description: 'You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.',

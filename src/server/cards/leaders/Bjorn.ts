@@ -7,7 +7,7 @@ import { CardRenderer } from '../render/CardRenderer';
 import { LeaderCard } from './LeaderCard';
 
 import { Resources } from '../../../common/Resources';
-import {multiplier} from '../Options';
+import { multiplier } from '../Options';
 
 export class Bjorn extends Card implements LeaderCard {
   constructor() {
@@ -41,7 +41,7 @@ export class Bjorn extends Card implements LeaderCard {
 
     targetPlayers.forEach((target) => {
       const qtyToSteal = Math.min(game.generation, target.megaCredits);
-      target.deductResource(Resources.MEGACREDITS, qtyToSteal, {log: true, from: player});
+      target.deductResource(Resources.MEGACREDITS, qtyToSteal, {log: true, from: player, stealing: true});
       player.addResource(Resources.MEGACREDITS, qtyToSteal);
     });
 

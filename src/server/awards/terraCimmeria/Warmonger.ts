@@ -59,5 +59,7 @@ export class Warmonger implements IAward {
     // Pathfinders
     CardName.DUST_STORM,
     CardName.SOLAR_STORM,
+    // Leaders
+    CardName.BJORN,
   ];
 }

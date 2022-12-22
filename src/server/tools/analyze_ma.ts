@@ -107,6 +107,7 @@ function simpleGameOptions(): GameOptions {
     includeVenusMA: false,
     moonExpansion: false,
     pathfindersExpansion: false,
+    leaderExtension: false,
     includeFanMA: false,
     randomMA: RandomMAOptionType.NONE,
   };

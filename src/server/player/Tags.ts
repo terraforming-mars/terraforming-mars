@@ -8,7 +8,7 @@ import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorpor
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
-import {LeadersExpansion} from '../cards/leaders/LeadersExpansion';
+import {LeadersExtension} from '../cards/leaders/LeadersExtension';
 
 export class Tags {
   private player: Player;
@@ -59,7 +59,7 @@ export class Tags {
 
     if (tag == Tag.WILD || includeTagSubstitutions) {
       // CEO Xavier hook
-      tagCount += LeadersExpansion.getBonusWildTags(this.player);
+      tagCount += leadersExtension.getBonusWildTags(this.player);
     }
 
     if (includeTagSubstitutions) {
@@ -164,7 +164,7 @@ export class Tags {
 
   // Counts the number of distinct tags
   public distinctCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
-    let wildTagCount: number = LeadersExpansion.getBonusWildTags(this.player);
+    let wildTagCount: number = leadersExtension.getBonusWildTags(this.player);
     const uniqueTags = new Set<Tag>();
     const addTag = (tag: Tag) => {
       if (tag === Tag.WILD) {

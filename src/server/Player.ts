@@ -65,7 +65,7 @@ import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {LeaderCard} from './cards/leaders/LeaderCard';
-import {LeadersExpansion} from './cards/leaders/LeadersExpansion';
+import {LeadersExtension} from './cards/leaders/LeadersExtension';
 import {VanAllen} from './cards/leaders/VanAllen';
 
 
@@ -518,7 +518,7 @@ export class Player {
     });
 
     this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
-    LeadersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
+    LeadersExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 

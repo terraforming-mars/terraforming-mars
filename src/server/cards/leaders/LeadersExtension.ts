@@ -4,7 +4,7 @@ import {LeaderCard} from "./LeaderCard";
 import {Player} from "../../Player";
 import {VictoryPointsBreakdown} from "../../VictoryPointsBreakdown";
 
-export class LeadersExpansion {
+export class LeadersExtension {
   public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {
     if (player.cardIsInEffect(CardName.DUNCAN)) {
       const card = player.playedCards.find((c) => c.name === CardName.DUNCAN) as LeaderCard;

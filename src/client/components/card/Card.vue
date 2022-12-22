@@ -110,7 +110,7 @@ export default Vue.extend({
     getReducedCost(): number | undefined {
       const cost = this.card.calculatedCost;
       const type = this.getCardType();
-      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
+      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION || type === CardType.LEADER ? undefined : cost;
     },
     getCardType(): CardType {
       return this.cardInstance.cardType;

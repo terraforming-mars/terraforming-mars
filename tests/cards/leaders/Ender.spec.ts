@@ -1,19 +1,22 @@
 import {expect} from "chai";
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {forceGenerationEnd} from "../../TestingUtils";
 import {TestPlayer} from '../../TestPlayer';
-
-import {MicroMills} from "../../../src/server/cards/base/MicroMills";
-import {Research} from "../../../src/server/cards/base/Research";
 
 import {SelectAmount} from "../../../src/server/inputs/SelectAmount";
 
 import {Ender} from "../../../src/server/cards/leaders/Ender";
 
+import {MicroMills} from "../../../src/server/cards/base/MicroMills";
+import {Research} from "../../../src/server/cards/base/Research";
+
+
 
 describe('Ender', function() {
-  let card: Ender; let player: Player; let player2: Player; let game: Game;
+  let card: Ender;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Ender();

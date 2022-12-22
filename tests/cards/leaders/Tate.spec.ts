@@ -1,6 +1,5 @@
 import {expect} from "chai";
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {forceGenerationEnd} from "../../TestingUtils";
 import {TestPlayer} from '../../TestPlayer';
 
@@ -11,7 +10,10 @@ import {OrOptions} from "../../../src/server/inputs/OrOptions";
 import {Tate} from "../../../src/server/cards/leaders/Tate";
 
 describe('Tate', function() {
-  let card: Tate; let player: Player; let player2: Player; let game: Game;
+  let card: Tate;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Tate();

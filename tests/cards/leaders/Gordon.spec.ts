@@ -1,8 +1,6 @@
 import {expect} from "chai";
 import {TestPlayer} from '../../TestPlayer';
-
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {SpaceType} from "../../../src/common/boards/SpaceType";
 import {TileType} from "../../../src/common/TileType";
 
@@ -13,7 +11,10 @@ import {addGreenery, addCityTile, runAllActions} from '../../TestingUtils';
 
 
 describe('Gordon', function() {
-  let card: Gordon; let player: Player; let player2: Player; let game: Game;
+  let card: Gordon;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Gordon();

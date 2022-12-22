@@ -1,20 +1,19 @@
 import {expect} from "chai";
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, forceGenerationEnd} from "../../TestingUtils";
 import {Clarke} from "../../../src/server/cards/leaders/Clarke";
 
 
 describe('Clarke', function() {
-  let card: Clarke; let player: Player; let player2: Player; let game: Game;
+  let card: Clarke;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Clarke();
     player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player], player);
-    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Can only act once per game', function() {

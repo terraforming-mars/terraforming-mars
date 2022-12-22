@@ -1,6 +1,5 @@
 import {expect} from "chai";
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd} from "../../TestingUtils";
 
@@ -10,7 +9,10 @@ import {AsteroidMining} from "../../../src/server/cards/base/AsteroidMining";
 
 
 describe('Floyd', function() {
-  let card: Floyd; let player: Player; let player2: Player; let game: Game;
+  let card: Floyd;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Floyd();

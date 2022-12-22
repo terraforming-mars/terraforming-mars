@@ -1,6 +1,5 @@
 import {expect} from "chai";
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {TestPlayer} from '../../TestPlayer';
 
 import {Xavier} from "../../../src/server/cards/leaders/Xavier";
@@ -12,7 +11,10 @@ import {SulphurExports} from "../../../src/server/cards/venusNext/SulphurExports
 
 
 describe('Xavier', function() {
-  let card: Xavier; let player: Player; let player2: Player; let game: Game;
+  let card: Xavier;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Xavier();

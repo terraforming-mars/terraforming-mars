@@ -1,13 +1,14 @@
 import {expect} from "chai";
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {forceGenerationEnd} from "../../TestingUtils";
 import {TestPlayer} from '../../TestPlayer';
 import {Duncan} from "../../../src/server/cards/leaders/Duncan";
 
 
 describe('Duncan', function() {
-  let card: Duncan; let player: Player; let player2: Player;
+  let card: Duncan;
+  let player: TestPlayer;
+  let player2: TestPlayer;
 
   beforeEach(() => {
     card = new Duncan();

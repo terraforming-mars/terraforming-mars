@@ -1,6 +1,5 @@
 import {expect} from "chai";
 import {Game} from "../../../src/server/Game";
-import {Player} from "../../../src/server/Player";
 import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
 import {TestPlayer} from '../../TestPlayer';
 
@@ -11,7 +10,10 @@ import {Oscar} from "../../../src/server/cards/leaders/Oscar";
 
 
 describe('Oscar', function() {
-  let card: Oscar; let player: Player; let player2: Player; let game: Game;
+  let card: Oscar;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Oscar();
@@ -39,4 +41,8 @@ describe('Oscar', function() {
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
+
+  // TODO (low hanging fruit):
+  // Test to see if action increases POLITICIAN Milestone
+
 });

@@ -767,12 +767,39 @@ export class Player {
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
     for (const playedCard of this.tableau) {
-      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
+      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && (playedCard.canAct(this) && playedCard.cardType !== CardType.LEADER)) {
         result.push(playedCard);
       }
     }
     return result;
   }
+
+  public getPlayableLeaderCards(): Array<ICard & IActionCard> {
+    const result: Array<ICard & IActionCard> = [];
+    for (const playedCard of this.tableau) {
+      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && (playedCard.canAct(this) && playedCard.cardType === CardType.LEADER)) {
+        result.push(playedCard);
+      }
+    }
+    return result;
+  }
+
+  // public getPlayableLeaderCards(): Array<ICard> {
+  //   const leader = this.playedCards.find((card) => card.cardType === CardType.LEADER) as IProjectCard;
+  //   return [leader];
+  // }
+  // public getPlayableLeaderCards(): Array<ILeaderCard & IActionCard> {
+  //   // This is set up to return an array because I can forsee a Prelude where you draw+play a second Leader.
+  //   const result: Array<ILeaderCard & IActionCard> = [];
+  //   // const leader = this.playedCards.find((card) => card.cardType === CardType.LEADER) as ICard & IActionCard;
+  //   for (const playedCard of this.tableau) {
+  //     // if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
+  //     if (isLeaderCard(playedCard) && playedCard.canAct()) {
+  //       result.push(playedCard);
+  //     }
+  //   }
+  //   return result;
+  // }
 
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
@@ -1256,6 +1283,27 @@ export class Player {
       }, {selectBlueCardAction: true},
     );
   }
+
+  private playLeaderAction(): PlayerInput {
+    return new SelectCard<ICard & IActionCard>(
+      'Use CEO once per game action',
+      'Take action',
+      this.getPlayableLeaderCards(),
+      ([card]) => {
+        this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
+        const action = card.action(this);
+        if (action !== undefined) {
+          this.game.defer(new SimpleDeferredAction(
+            this,
+            () => action,
+          ));
+        }
+        this.actionsThisGeneration.add(card.name);
+        return undefined;
+      }, {selectBlueCardAction: true},
+    );
+  }
+
 
   public playAdditionalCorporationCard(corporationCard: ICorporationCard): void {
     if (this.corporations.length === 0) {
@@ -1866,6 +1914,10 @@ export class Player {
         }
       }
     });
+
+    if (LeadersExtension.leaderActionIsUsable(this)) {
+      action.options.push(this.playLeaderAction());
+    }
 
     if (this.game.getPlayers().length > 1 &&
       this.actionsTakenThisRound > 0 &&

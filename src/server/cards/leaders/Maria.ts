@@ -64,6 +64,7 @@ export class Maria extends Card implements LeaderCard {
       } else {
         throw new Error(`Colony ${colony.name} is not a discarded colony`);
       }
+      this.isDisabled = true;
       return undefined;
     });
     return selectColony;
@@ -81,7 +82,6 @@ export class Maria extends Card implements LeaderCard {
       }
     }
   }
-
 }
 
   //   return new SelectColony('Select colony tile to add', 'Add colony tile', coloniesModel, (colonyName: ColonyName) => {

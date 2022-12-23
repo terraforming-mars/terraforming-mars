@@ -360,7 +360,7 @@ export class Game implements Logger {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      this.runDraftRound(true, false);
+      this.runDraftRound(true, false, false);
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -622,15 +622,17 @@ export class Game implements Logger {
     this.first = newFirstPlayer;
   }
 
-  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false): void {
+  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false, leaderDraft: boolean = false,): void {
     this.save();
     this.draftedPlayers.clear();
     this.players.forEach((player) => {
       player.needsToDraft = true;
-      if (this.draftRound === 1 && !preludeDraft) {
+      if (this.draftRound === 1 && (!preludeDraft && !leaderDraft)) {
         player.runDraftPhase(initialDraft, this.getNextDraft(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
         player.runDraftPhase(initialDraft, this.getNextDraft(player).name, player.dealtPreludeCards);
+      } else if (this.draftRound === 1 && leaderDraft) {
+        player.runDraftPhase(initialDraft, this.getNextDraft(player).name, player.dealtLeaderCards);
       } else {
         const cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
         this.unDraftedCards.delete(this.getDraftCardsFrom(player));
@@ -848,8 +850,17 @@ export class Game implements Logger {
         if (this.initialDraftIteration === 2) {
           player.dealtProjectCards = player.draftedCards;
           player.draftedCards = [];
-        } else if (this.initialDraftIteration === 3) {
+        } else if (this.initialDraftIteration === 3 && this.gameOptions.preludeExtension) {
+          // Yes Preludes
           player.dealtPreludeCards = player.draftedCards;
+          player.draftedCards = [];
+        } else if (this.initialDraftIteration === 3 && !this.gameOptions.preludeExtension) {
+          // No Preludes, Yes Leaders
+          player.dealtLeaderCards = player.draftedCards;
+          player.draftedCards = [];
+        } else if (this.initialDraftIteration === 4) {
+          // Yes Preludes, Yes Leaders
+          player.dealtLeaderCards = player.draftedCards;
           player.draftedCards = [];
         }
       }
@@ -860,14 +871,29 @@ export class Game implements Logger {
       return;
     }
 
+    // TODO: (Low Hanging Fruit)
+    // Gosh this is messy.
+    // I feel like we should be setting some kind of 'hasDraftedPreludes' or 'hasDraftedLeader' instead of this
+    // It would impact a lot of the code here, but I think there's value in it
     if (this.initialDraftIteration === 1) {
       this.initialDraftIteration++;
       this.draftRound = 1;
       this.runDraftRound(true);
     } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
+      // Yes Preludes
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound(true, true);
+      this.runDraftRound(true, true, false);
+    } else if (this.initialDraftIteration === 2 && (this.gameOptions.leaderExtension && !this.gameOptions.preludeExtension)) {
+      // No Preludes, Yes Leaders
+      this.initialDraftIteration++;
+      this.draftRound = 1;
+      this.runDraftRound(true, false, true);
+    } else if (this.initialDraftIteration === 3 && (this.gameOptions.leaderExtension && this.gameOptions.preludeExtension)) {
+      // Yes Preludes, Yes Leaders
+      this.initialDraftIteration++;
+      this.draftRound = 1;
+      this.runDraftRound(true, false, true);
     } else {
       this.gotoInitialResearchPhase();
     }

@@ -33,21 +33,6 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
       ),
     );
 
-    if (player.game.gameOptions.leaderExtension) {
-      this.options.push(
-        new SelectCard(
-          'Select CEO', undefined, player.dealtLeaderCards,
-          (leaderCards: Array<ILeaderCard>) => {
-            if (leaderCards.length !== 1) {
-              throw new Error('Only select 1 CEO');
-            }
-            player.leaderCardsInHand.push(leaderCards[0]);
-            return undefined;
-          }, {min: 1, max: 1},
-        ),
-      );
-    }
-
     // Give each player Merger in this variant
     if (player.game.gameOptions.twoCorpsVariant) {
       player.dealtPreludeCards.push(new Merger());
@@ -64,6 +49,21 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
             player.preludeCardsInHand.push(...preludeCards);
             return undefined;
           }, {min: 2, max: 2},
+        ),
+      );
+    }
+
+    if (player.game.gameOptions.leaderExtension) {
+      this.options.push(
+        new SelectCard(
+          'Select CEO', undefined, player.dealtLeaderCards,
+          (leaderCards: Array<ILeaderCard>) => {
+            if (leaderCards.length !== 1) {
+              throw new Error('Only select 1 CEO');
+            }
+            player.leaderCardsInHand.push(leaderCards[0]);
+            return undefined;
+          }, {min: 1, max: 1},
         ),
       );
     }

@@ -789,4 +789,7 @@ export enum CardName {
     GAIA = 'Gaia',
     NEIL = 'Neil',
     APOLLO = 'Apollo',
+
+    // CEO Preludes
+    JOINT_VENTURE = 'Joint Venture', // Two-CEO Prelude
 }

@@ -37,6 +37,8 @@ import {Xavier} from './Xavier';
 import {Yvonne} from './Yvonne';
 import {Zan} from './Zan';
 
+import {JointVenture} from './JointVenture'
+
 export const LEADER_CARD_MANIFEST = new ModuleManifest({
   module: 'leader',
   leaderCards: {
@@ -75,5 +77,8 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.XAVIER]: {Factory: Xavier, compatibility: 'prelude'},
     [CardName.YVONNE]: {Factory: Yvonne, compatibility: 'colonies'},
     [CardName.ZAN]: {Factory: Zan, compatibility: 'turmoil'},
+  },
+  preludeCards: {
+    [CardName.JOINT_VENTURE]: {Factory: JointVenture, compatibility: 'prelude'},
   },
 });

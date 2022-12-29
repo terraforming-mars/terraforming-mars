@@ -774,7 +774,7 @@ export class Player {
     return result;
   }
 
-  public getPlayableLeaderCards(): Array<ICard & IActionCard> {
+  public getUsableOPGLeaderCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
     for (const playedCard of this.tableau) {
       if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && (playedCard.canAct(this) && playedCard.cardType === CardType.LEADER)) {
@@ -783,23 +783,6 @@ export class Player {
     }
     return result;
   }
-
-  // public getPlayableLeaderCards(): Array<ICard> {
-  //   const leader = this.playedCards.find((card) => card.cardType === CardType.LEADER) as IProjectCard;
-  //   return [leader];
-  // }
-  // public getPlayableLeaderCards(): Array<ILeaderCard & IActionCard> {
-  //   // This is set up to return an array because I can forsee a Prelude where you draw+play a second Leader.
-  //   const result: Array<ILeaderCard & IActionCard> = [];
-  //   // const leader = this.playedCards.find((card) => card.cardType === CardType.LEADER) as ICard & IActionCard;
-  //   for (const playedCard of this.tableau) {
-  //     // if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(this)) {
-  //     if (isLeaderCard(playedCard) && playedCard.canAct()) {
-  //       result.push(playedCard);
-  //     }
-  //   }
-  //   return result;
-  // }
 
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
@@ -1052,6 +1035,19 @@ export class Player {
     );
   }
 
+  private playLeaderCard(): PlayerInput {
+    const leaderCards = this.getPlayableLeaderCards();
+    return new SelectCard(
+      'Select CEO to play',
+      'Play',
+      leaderCards,
+      ([card]) => {
+        return this.playCard(card);
+      },
+    );
+  }
+
+
   private paymentOptionsForCard(card: IProjectCard): Payment.Options {
     return {
       steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
@@ -1284,11 +1280,11 @@ export class Player {
     );
   }
 
-  private playLeaderAction(): PlayerInput {
+  private playLeaderOPGAction(): PlayerInput {
     return new SelectCard<ICard & IActionCard>(
       'Use CEO once per game action',
       'Take action',
-      this.getPlayableLeaderCards(),
+      this.getUsableOPGLeaderCards(),
       ([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
         const action = card.action(this);
@@ -1529,6 +1525,10 @@ export class Player {
     return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
   }
 
+  private getPlayableLeaderCards(): Array<IProjectCard> {
+    return this.leaderCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
+  }
+
   public getPlayableCards(): Array<IProjectCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
@@ -1732,40 +1732,53 @@ export class Player {
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
     // if (saveBeforeTakingAction) game.save();
 
-    // Prelude cards have to be played first
-    if (this.preludeCardsInHand.length > 0) {
-      game.phase = Phase.PRELUDES;
+    if (this.preludeCardsInHand.length === 0 && this.leaderCardsInHand.length === 0 ) {
+      game.phase = Phase.ACTION;
+    } else {
+      // Prelude cards have to be played first
+      if (this.preludeCardsInHand.length > 0) {
+        game.phase = Phase.PRELUDES;
 
-      // If no playable prelude card in hand, end player turn
-      if (this.getPlayablePreludeCards().length === 0) {
-        this.preludeCardsInHand = [];
-        game.playerIsFinishedTakingActions();
+        // If no playable prelude card in hand, end player turn
+        if (this.getPlayablePreludeCards().length === 0) {
+          this.preludeCardsInHand = [];
+          game.playerIsFinishedTakingActions();
+          return;
+        }
+
+        this.setWaitingFor(this.playPreludeCard(), () => {
+          if (this.preludeCardsInHand.length === 1) {
+            this.takeAction();
+          } else {
+            game.playerIsFinishedTakingActions();
+          }
+        });
         return;
       }
 
-      this.setWaitingFor(this.playPreludeCard(), () => {
-        if (this.preludeCardsInHand.length === 1) {
-          this.takeAction();
-        } else {
-          game.playerIsFinishedTakingActions();
-        }
-      });
-      return;
-    } else {
-      game.phase = Phase.ACTION;
-    }
-
-    // Leader cards have to be played right after Preludes
-    if (this.leaderCardsInHand.length > 0) {
-      this.leaderCardsInHand.forEach((card) => {
-        if (!this.playedCards.includes(card)) {
+      // Leader cards have to be played first, as 'free' actions. We play ALL leader cards here, even if the player has more than 2
+      // CEOs are played 'automatically' after Preludes, like Corporations.  They're free actions.
+      //  After they've been played, automatically proceed to the players actual turn.
+      if (this.leaderCardsInHand.length > 0) {
+        game.phase = Phase.LEADERS;
+        if (this.getPlayableLeaderCards().length === 0) {
+          // If no playable leader card in hand, proceed with the players regular turn
+          this.leaderCardsInHand = [];
+          return;
+        } else if (this.leaderCardsInHand.length === 1) {
+          // Automatically play if only one leader card is in hand
+          const card = this.leaderCardsInHand[0];
           this.playCard(card);
+        } else {
+          this.setWaitingFor(this.playLeaderCard(), () => {
+            if (this.leaderCardsInHand.length === 1) {
+              this.takeAction();
+            }
+          });
+          return;
         }
-      });
-    } else {
-      game.phase = Phase.ACTION;
+      }
     }
-
 
     if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
       this.actionsTakenThisRound = 0;
@@ -1916,7 +1929,7 @@ export class Player {
     });
 
     if (LeadersExtension.leaderActionIsUsable(this)) {
-      action.options.push(this.playLeaderAction());
+      action.options.push(this.playLeaderOPGAction());
     }
 
     if (this.game.getPlayers().length > 1 &&

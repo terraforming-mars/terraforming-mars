@@ -10,7 +10,7 @@ import {Duncan} from './Duncan';
 import {Ender} from './Ender';
 import {Faraday} from './Faraday';
 import {Floyd} from './Floyd';
-// import {Gaia} from './Gaia';
+import {Gaia} from './Gaia';
 import {Gordon} from './Gordon';
 import {Greta} from './Greta';
 import {HAL9000} from './HAL9000';
@@ -21,9 +21,9 @@ import {Karen} from './Karen';
 import {Lowell} from './Lowell';
 import {Maria} from './Maria';
 import {Naomi} from './Naomi';
-// import {Neil} from './Neil';
+import {Neil} from './Neil';
 import {Oscar} from './Oscar';
-// import {Petra} from './Petra';
+import {Petra} from './Petra';
 import {Quill} from './Quill';
 import {Rogers} from './Rogers';
 import {Ryu} from './Ryu';
@@ -38,6 +38,7 @@ import {Yvonne} from './Yvonne';
 import {Zan} from './Zan';
 
 import {JointVenture} from './JointVenture'
+import {BoardOfDirectors} from './BoardOfDirectors';
 
 export const LEADER_CARD_MANIFEST = new ModuleManifest({
   module: 'leader',
@@ -51,7 +52,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.ENDER]: {Factory: Ender},
     [CardName.FARADAY]: {Factory: Faraday},
     [CardName.FLOYD]: {Factory: Floyd},
-    // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
+    [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     [CardName.GORDON]: {Factory: Gordon},
     [CardName.GRETA]: {Factory: Greta},
     [CardName.HAL9000]: {Factory: HAL9000},
@@ -62,9 +63,9 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.LOWELL]: {Factory: Lowell, compatibility: 'prelude'},
     [CardName.MARIA]: {Factory: Maria, compatibility: 'colonies'},
     [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},
-    // [CardName.NEIL]: {Factory: Neil, compatibility: 'moon'},
+    [CardName.NEIL]: {Factory: Neil, compatibility: 'moon'},
     [CardName.OSCAR]: {Factory: Oscar, compatibility: 'turmoil'},
-    // [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
+    [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
     [CardName.QUILL]: {Factory: Quill, compatibility: 'venus'},
     [CardName.ROGERS]: {Factory: Rogers, compatibility: 'venus'},
     [CardName.RYU]: {Factory: Ryu},
@@ -80,5 +81,8 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
   },
   preludeCards: {
     [CardName.JOINT_VENTURE]: {Factory: JointVenture, compatibility: 'prelude'},
+  },
+  corporationCards: {
+    [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
   },
 });

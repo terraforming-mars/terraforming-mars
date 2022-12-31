@@ -3,10 +3,13 @@ import {Game} from "../../../src/server/Game";
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from "../../../src/server/turmoil/Turmoil";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
 import {TestPlayer} from '../../TestPlayer';
-import {testGameOptions} from '../../TestingUtils';
+// import {testGameOptions} from '../../TestingUtils';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {getTestPlayer} from '../../TestGame';
+
+import {newTestGame} from '../../TestGame';
 
 import {Petra} from "../../../src/server/cards/leaders/Petra";
 
@@ -16,26 +19,55 @@ describe('Petra', function() {
   let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
-  let reds: IParty;
-  let scientists: IParty;
+  let mars: IParty;
+  let unity: IParty;
   let greens: IParty;
+  let scientists: IParty;
+  let reds: IParty;
+  let kelvinists: IParty;
   
+
   beforeEach(function() {
     card = new Petra();
     player = TestPlayer.BLUE.newPlayer();
 
-    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
+    const gameOptions = setCustomGameOptions();
+    game = Game.newInstance('gameid', [player], player, gameOptions);
+
     turmoil = game.turmoil!;
-    reds = turmoil.getPartyByName(PartyName.REDS)!;
     scientists = turmoil.getPartyByName(PartyName.SCIENTISTS)!;
     greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    reds = turmoil.getPartyByName(PartyName.REDS)!;
+
+    unity = turmoil.getPartyByName(PartyName.UNITY)!;
+    mars = turmoil.getPartyByName(PartyName.MARS)!;
+    kelvinists = turmoil.getPartyByName(PartyName.KELVINISTS)!;
 
     // Manually set up 5 neutral delegates (4 in parties + chairman)
+      turmoil.parties.forEach((party) => {
+        party.delegates.forEachMultiplicity((count, key) => turmoil.delegateReserve.add(key, count));
+        party.delegates.clear();
+        party.partyLeader = undefined;
+      });
+
     turmoil.chairman = "NEUTRAL";
     turmoil.sendDelegateToParty("NEUTRAL", scientists.name, game);
     turmoil.sendDelegateToParty("NEUTRAL", scientists.name, game);
     turmoil.sendDelegateToParty("NEUTRAL", greens.name, game);
     turmoil.sendDelegateToParty("NEUTRAL", reds.name, game);
+  });
+
+  it('Initial sanity check', function() {
+    expect(unity.delegates.count("NEUTRAL")).eq(0);
+    expect(mars.delegates.count("NEUTRAL")).eq(0);
+    expect(kelvinists.delegates.count("NEUTRAL")).eq(0);
+
+    expect(turmoil.chairman).eq("NEUTRAL");
+    expect(scientists.delegates.count("NEUTRAL")).eq(2);
+    expect(scientists.partyLeader).eq("NEUTRAL");
+    expect(greens.delegates.count("NEUTRAL")).eq(1);
+    expect(greens.partyLeader).eq("NEUTRAL");
+    expect(reds.delegates.count("NEUTRAL")).eq(1);
   });
 
   it('Can act', function() {

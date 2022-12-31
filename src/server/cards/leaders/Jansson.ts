@@ -6,9 +6,6 @@ import { Card } from '../Card';
 import { CardRenderer } from '../render/CardRenderer';
 import { LeaderCard } from './LeaderCard';
 
-// import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-// import {MultiSet} from 'mnemonist';
-
 export class Jansson extends Card implements LeaderCard {
   constructor() {
     super({

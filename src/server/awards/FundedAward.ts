@@ -1,4 +1,3 @@
-// import {IAward, getAdditionalScore} from './IAward';
 import {IAward} from './IAward';
 import {Player} from '../Player';
 import {PlayerId} from '../../common/Types';

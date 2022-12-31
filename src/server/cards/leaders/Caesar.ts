@@ -6,7 +6,6 @@ import { Card } from '../Card';
 import { CardRenderer } from '../render/CardRenderer';
 import { LeaderCard } from './LeaderCard';
 
-// import {Size} from '../../../common/cards/render/Size';
 import {SelectProductionToLoseDeferred} from '../../deferredActions/SelectProductionToLoseDeferred';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';

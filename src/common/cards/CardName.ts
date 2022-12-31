@@ -770,7 +770,7 @@ export enum CardName {
     MARIA = 'Maria',
     NAOMI = 'Naomi',
     OSCAR = 'Oscar',
-    // PETRA = 'Petra',
+    PETRA = 'Petra',
     QUILL = 'Quill',
     ROGERS = 'Rogers',
     STEFAN = 'Stefan',

@@ -1,12 +1,3 @@
-// import {Colony} from '../../colonies/Colony';
-// import {ColonyModel} from '../../models/ColonyModel';
-// import {ColonyName} from '../../colonies/ColonyName';
-// import {SelectColony} from '../../inputs/SelectColony';
-// import {DeferredAction} from '../../deferredActions/DeferredAction';
-// import {Aridor} from '../colonies/Aridor';
-// import {ColonyDealer} from '../../colonies/ColonyDealer';
-// import {Tags} from '../Tags';
-
 import { CardName } from '../../../common/cards/CardName';
 import { CardType } from '../../../common/cards/CardType';
 import { Player } from '../../Player';

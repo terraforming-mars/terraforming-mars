@@ -1,6 +1,7 @@
 
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
+import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -9,18 +10,25 @@ import {LogHelper} from '../../LogHelper';
 import {LeaderDeck} from '../Deck';
 import {ILeaderCard} from './ILeaderCard';
 
-export class JointVenture extends PreludeCard {
+export class JointVenture extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.JOINT_VENTURE,
 
+      behavior: {
+        production: {megacredits: 1},
+        tr: -1,
+      },
+
       metadata: {
         cardNumber: 'LP01',
         renderData: CardRenderer.builder((b) => {
-          b.text('CEO').asterix();
+          b.plus().text('CEO').asterix().br;
+          b.production((pb) => {
+            pb.megacredits(1);
+          }).nbsp.nbsp.nbsp.minus().tr(-1).br;
         }),
-        description: 'Draw 3 CEO cards. Choose one and discard the others. The chosen CEO will be played in addition to your existing CEO.',
-        victoryPoints: -1,
+        description: 'Draw 3 CEO cards. Choose one and discard the others. The chosen CEO will be played in addition to your existing CEO. Increase your M€ production 1 step. Decrease your TR 1 step.',
       },
     });
   }
@@ -31,7 +39,7 @@ export class JointVenture extends PreludeCard {
     const dealtLeaders = JointVenture.dealLeaders(player, game.leaderDeck);
 
     game.defer(new SimpleDeferredAction(player, () => {
-      return new SelectCard('Choose CEO card to play', 'Play', dealtLeaders, ([card]) => {
+      return new SelectCard('Choose an additional CEO Card', 'Play', dealtLeaders, ([card]) => {
         player.leaderCardsInHand.push(card);
         return undefined;
       });
@@ -47,7 +55,7 @@ export class JointVenture extends PreludeCard {
       }
     } catch (err) {
       // Error will only occur if the deck is empty.  This may happen in very large player games
-      player.game.log('Not enough CEOs while resolving ${0}', (b) => b.cardName(CardName.JOINT_VENTURE));
+      throw new Error('Not enough CEOs while resolving Joint Venture');
     }
     LogHelper.logDrawnCards(player, cards, /* privateMessage= */true);
     return cards;

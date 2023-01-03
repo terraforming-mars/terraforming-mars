@@ -9,5 +9,5 @@ export enum Phase {
     PRELUDES = 'preludes',
     SOLAR = 'solar',
     INTERGENERATION = 'intergeneration',
-    LEADERS = 'leaders' // CEO Auto-play phase
+    LEADERS = 'leaders', // CEO Auto-play phase
 }

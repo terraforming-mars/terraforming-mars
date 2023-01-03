@@ -792,4 +792,7 @@ export enum CardName {
 
     // CEO Preludes
     JOINT_VENTURE = 'Joint Venture', // Two-CEO Prelude
+
+    // CEO Corps
+    BOARD_OF_DIRECTORS = 'Board of Directors',
 }

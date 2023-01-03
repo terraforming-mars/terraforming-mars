@@ -1035,17 +1035,17 @@ export class Player {
     );
   }
 
-  private playLeaderCard(): PlayerInput {
-    const leaderCards = this.getPlayableLeaderCards();
-    return new SelectCard(
-      'Select CEO to play',
-      'Play',
-      leaderCards,
-      ([card]) => {
-        return this.playCard(card);
-      },
-    );
-  }
+  // private playLeaderCard(): PlayerInput {
+  //   const leaderCards = this.getPlayableLeaderCards();
+  //   return new SelectCard(
+  //     'Select CEO to play',
+  //     'Play',
+  //     leaderCards,
+  //     ([card]) => {
+  //       return this.playCard(card);
+  //     },
+  //   );
+  // }
 
 
   private paymentOptionsForCard(card: IProjectCard): Payment.Options {
@@ -1734,51 +1734,60 @@ export class Player {
 
     if (this.preludeCardsInHand.length === 0 && this.leaderCardsInHand.length === 0 ) {
       game.phase = Phase.ACTION;
-    } else {
+    } else if (this.preludeCardsInHand.length > 0) {
       // Prelude cards have to be played first
-      if (this.preludeCardsInHand.length > 0) {
-        game.phase = Phase.PRELUDES;
+      game.phase = Phase.PRELUDES;
 
-        // If no playable prelude card in hand, end player turn
-        if (this.getPlayablePreludeCards().length === 0) {
-          this.preludeCardsInHand = [];
-          game.playerIsFinishedTakingActions();
-          return;
-        }
-
-        this.setWaitingFor(this.playPreludeCard(), () => {
-          if (this.preludeCardsInHand.length === 1) {
-            this.takeAction();
-          } else {
-            game.playerIsFinishedTakingActions();
-          }
-        });
+      // If no playable prelude card in hand, end player turn
+      if (this.getPlayablePreludeCards().length === 0) {
+        this.preludeCardsInHand = [];
+        game.playerIsFinishedTakingActions();
         return;
       }
 
-      // Leader cards have to be played first, as 'free' actions. We play ALL leader cards here, even if the player has more than 2
-      // CEOs are played 'automatically' after Preludes, like Corporations.  They're free actions.
-      //  After they've been played, automatically proceed to the players actual turn.
-      if (this.leaderCardsInHand.length > 0) {
-        game.phase = Phase.LEADERS;
-        if (this.getPlayableLeaderCards().length === 0) {
-          // If no playable leader card in hand, proceed with the players regular turn
-          this.leaderCardsInHand = [];
-          return;
-        } else if (this.leaderCardsInHand.length === 1) {
-          // Automatically play if only one leader card is in hand
-          const card = this.leaderCardsInHand[0];
-          this.playCard(card);
+      this.setWaitingFor(this.playPreludeCard(), () => {
+        if (this.preludeCardsInHand.length === 1) {
+          this.takeAction();
         } else {
-          this.setWaitingFor(this.playLeaderCard(), () => {
-            if (this.leaderCardsInHand.length === 1) {
-              this.takeAction();
-            }
-          });
-          return;
+          game.playerIsFinishedTakingActions();
         }
+      });
+      return;
+    } else if (this.leaderCardsInHand.length > 0) {
+      // Leader cards have to be played following preludes.
+      // These are 'free' actions. We play ALL leader cards here, even if the player has more than 2.
+      // After they've been played we proceed to the players actual turn
+      game.phase = Phase.LEADERS;
+      const playableLeaderCards = this.getPlayableLeaderCards();
+      for (var i = playableLeaderCards.length - 1; i >= 0; i--) {
+        // start from the end of the list and work backwards, we're removing items as we go.
+        const card = this.leaderCardsInHand[i];
+        this.playCard(card);
       }
+      // Null out leaderCardsInHand, anything left was unplayable.
+      this.leaderCardsInHand = [];
+      this.takeAction(); // back to top
     }
+    // if (this.leaderCardsInHand.length > 0) {
+    //     while (this.leaderCardsInHand.length > 0) {
+    //       game.phase = Phase.LEADERS;
+    //       if (this.getPlayableLeaderCards().length === 0) {
+    //         // If no playable leader card in hand, proceed with the players regular turn
+    //         this.leaderCardsInHand = [];
+    //       } else if (this.leaderCardsInHand.length === 1) {
+    //         // Automatically play if only one leader card is in hand
+    //         const card = this.leaderCardsInHand[0];
+    //         this.playCard(card);
+    //       } else {
+    //         this.setWaitingFor(this.playLeaderCard(), () => {
+    //           if (this.leaderCardsInHand.length === 1) {
+    //             this.takeAction();
+    //           }
+    //         });
+    //       }
+    //     }
+    //   // }
+    // }
 
     if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
       this.actionsTakenThisRound = 0;

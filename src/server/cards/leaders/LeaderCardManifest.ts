@@ -27,6 +27,7 @@ import {Petra} from './Petra';
 import {Quill} from './Quill';
 import {Rogers} from './Rogers';
 import {Ryu} from './Ryu';
+import {Shara} from './Shara';
 import {Stefan} from './Stefan';
 import {Sweeney} from './Sweeney';
 import {Tate} from './Tate';
@@ -69,6 +70,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.QUILL]: {Factory: Quill, compatibility: 'venus'},
     [CardName.ROGERS]: {Factory: Rogers, compatibility: 'venus'},
     [CardName.RYU]: {Factory: Ryu},
+    [CardName.SHARA]: {Factory: Shara, compatibility: 'pathfinders'},
     [CardName.STEFAN]: {Factory: Stefan},
     [CardName.SWEENEY]: {Factory: Sweeney},
     [CardName.TATE]: {Factory: Tate},

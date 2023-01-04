@@ -71,6 +71,7 @@ export enum CardRenderItemType {
   SPECIALIZED_ROBOT = 'specialized-robot',
   AGENDA = 'mind-set-agenda',
   PLANETARY_TRACK = 'plantary-track',
+  CLONE = 'clone',
   SEED = 'seed',
   ORBITAL = 'orbital',
   GLOBAL_EVENT = 'global-event',

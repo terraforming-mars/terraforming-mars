@@ -166,10 +166,10 @@ export class PostgreSQL implements IDatabase {
     }
     console.log('Truncated purge to 1000 games.');
     // https://github.com/brianc/node-postgres/wiki/FAQ#11-how-do-i-build-a-where-foo-in--query-to-find-rows-matching-an-array-of-values
-    const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
-    console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
     const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
     console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
+    const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
+    console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
   }
 
   async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {

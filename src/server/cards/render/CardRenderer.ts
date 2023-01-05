@@ -408,6 +408,11 @@ abstract class Builder<T> {
     return this;
   }
 
+  public clone(amount: number, options?: ItemOptions): Builder<T> {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.CLONE, amount, options));
+    return this;
+  }
+
   public seed(): Builder<T> {
     this._appendToRow(new CardRenderItem(CardRenderItemType.SEED, 1));
     return this;

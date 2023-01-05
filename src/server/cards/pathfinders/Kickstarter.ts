@@ -29,7 +29,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
   public cloneTag: Tag = Tag.CLONE;
 
   public override get tags(): Array<Tag> {
-    return [this.cloneTag, this.cloneTag];
+    return [this.cloneTag];
   }
 
   public override bespokePlay(player: Player) {

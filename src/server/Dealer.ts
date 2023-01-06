@@ -110,17 +110,6 @@ export class Dealer {
     return result;
   }
 
-    // Leader deck does not need discard and reshuffle mecanisms
-    public dealLeaderCard(): ILeaderCard {
-      const result: ILeaderCard | undefined = this.leaderDeck.pop();
-      if (result === undefined) {
-        throw new Error('Unexpected empty leader deck');
-      }
-      // All Leader cards are expected to subclass ILeaderCard
-      return result;
-    }
-  
-
   public getDeckSize(): number {
     return this.deck.length;
   }

@@ -10,7 +10,7 @@
   "Luna First Incorporated": "Luna First Inc.",
   "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "EFFEKT: Wenn du eine beliebige Mondwertung erhöhst, erhöhe deine M€-Produktion um 1 pro erhöhten Schritt.",
   "Effect: When any player raises any Moon Rate, gain 1M€ per step.": "EFFEKT: Immer wenn ein beliebiger Spieler eine beliebige Mondwertung erhöht, erhalte 1 M€ pro erhöhten Schritt.",
-  "You start with 40 M€, 2 steel, and 2 titanium.": "Du beginnst mit 40 M€, 2 Stahl und 2 Titan.",
+  "You start with 40 M€, 1 steel, and 1 titanium.": "Du beginnst mit 40 M€, 1 Stahl und 1 Titan.",
 
   "Luna Hyperloop Corporation": "Luna Hyperloop",
   "Action: Gain 1 M€ for each road tile on The Moon.": "AKTION: Für jedes Straßenplättchen auf dem Mond erhalte 1 M€.",
@@ -32,9 +32,9 @@
   "You start with 55 M€.": "Du beginnst mit 55 M€. ",
   
   "Luna Trade Federation": "Mond Handelsföderation", 
-  "Effect: When any mine tile is placed on The Moon, raise your titanium production 1 step.": "EFFEKT: Immer wenn ein Minenplättchen auf dem Mond platziert wird, erhöhe deine Titan-Produktion um 1.",
-  "Effect: You may use titanium resources as 2M€ each.": "EFFEKT: Du darfst Titan als 2 M€ nutzen.",
-  "You start with 15 M€ and 10 titanium. As your first action, place a mine tile on The Moon and raise the Mining Rate 1 step.": "Du beginnst mit 15 M€ und 10 Titan. Als deine erste Aktion im Spiel platzierst du ein Minenplättchen auf dem Mond und erhöhst die Minenwertung um 1.",
+  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "EFFEKT: Wenn Du ein Minenplättchen auf dem Mond platzierst, erhöhe deine Titan-Produktion um 1.",
+  "EFFEKT: Du darfst Titan als 2 M€ nutzen.": "EFFEKT: Du darfst Titan als 2 M€ nutzen.",
+  "You start with 15 M€ and 10 titanium.": "Du beginnst mit 15 M€ und 10 Titan.",
 
   "The Darkside of The Moon Syndicate": "Mond-Syndikat der abgewandten Seite",
   "Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.": "AKTION: Bezahle 1 Titan, um 1 Syndikatsflotte auf dieser Karte hinzuzufügen ODER  entferne 1 Syndikatsflotte von dieser Karte, um einem beliebigen Gegner 8 M€ zu klauen.",

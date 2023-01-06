@@ -1647,7 +1647,7 @@ export class Game implements Logger {
       projectDeck = new ProjectDeck(dealer.deck, dealer.discarded, rng);
       corporationDeck = new CorporationDeck(dealer.corporationCards, [], rng);
       preludeDeck = new PreludeDeck(dealer.preludeDeck, [], rng);
-      leaderDeck = new LeaderDeck(dealer.preludeDeck, [], rng);
+      leaderDeck = new LeaderDeck(dealer.leaderDeck, [], rng);
     } else {
       // TODO(kberg): Delete this conditional when `d.dealer` is removed.
       if (d.projectDeck === undefined || d.corporationDeck === undefined || d.preludeDeck === undefined) {

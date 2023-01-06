@@ -46,8 +46,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
       Tag.POWER,
       Tag.PLANT,
       Tag.MICROBE,
-      Tag.ANIMAL,
-      Tag.EVENT];
+      Tag.ANIMAL];
 
     const options = tags.map((tag) => {
       return new SelectOption(tag, undefined, () => {

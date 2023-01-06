@@ -159,7 +159,7 @@ export class PostgreSQL implements IDatabase {
   async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
     const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < to_timestamp($1)', [dateToSeconds]);
-    const gameIds = selectResult.rows.map((row) => row.game_id);
+    const gameIds = selectResult.rows.slice(0, 1000).map((row) => row.game_id);
     console.log(`${gameIds.length} games to be purged.`);
     if (gameIds.length > 1000) {
       gameIds.length = 1000;

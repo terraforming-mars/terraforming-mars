@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClasses()">({{ getDescription() }})</div>
+  <div :class="getClasses()" v-i18n>({{ getDescription() }})</div>
 </template>
 
 <script lang="ts">

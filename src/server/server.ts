@@ -101,8 +101,11 @@ async function start() {
 
   server.listen(port);
 
-  console.log(`The secret serverId for this server is \x1b[1m${serverId}\x1b[0m.`);
-  console.log(`Adminsitrative routes can be found at admin?serverId=${serverId}`);
+  if (!process.env.SERVER_ID) {
+    console.log(`The secret serverId for this server is \x1b[1m${serverId}\x1b[0m.`);
+    console.log(`Adminsitrative routes can be found at admin?serverId=${serverId}`);
+  }
+  console.log('Server is ready.');
 }
 
 try {

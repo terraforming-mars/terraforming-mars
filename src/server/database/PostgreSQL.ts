@@ -157,15 +157,19 @@ export class PostgreSQL implements IDatabase {
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
   async purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
-    if (maxGameDays) {
-      const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
-      const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < $1', [dateToSeconds]);
-      const gameIds = selectResult.rows.map((row) => row.game_id);
-      const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id in ANY($1)', [gameIds]);
-      console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
-      const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id in ANY($1)', [gameIds]);
-      console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+    const dateToSeconds = daysAgoToSeconds(maxGameDays, 10);
+    const selectResult = await this.client.query('SELECT DISTINCT game_id FROM games WHERE created_time < to_timestamp($1)', [dateToSeconds]);
+    const gameIds = selectResult.rows.slice(0, 1000).map((row) => row.game_id);
+    console.log(`${gameIds.length} games to be purged.`);
+    if (gameIds.length > 1000) {
+      gameIds.length = 1000;
     }
+    console.log('Truncated purge to 1000 games.');
+    // https://github.com/brianc/node-postgres/wiki/FAQ#11-how-do-i-build-a-where-foo-in--query-to-find-rows-matching-an-array-of-values
+    const deleteGamesResult = await this.client.query('DELETE FROM games WHERE game_id = ANY($1)', [gameIds]);
+    console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
+    const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
+    console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
   }
 
   async restoreGame(game_id: GameId, save_id: number): Promise<SerializedGame> {

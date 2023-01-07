@@ -948,9 +948,9 @@ export class Game implements Logger {
 
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
-      const corpname = player.corporations.length > 0 ? player.corporations[0].name : '';
+      const corporation = player.corporations.map((c) => c.name).join('|');
       const vpb = player.getVictoryPoints();
-      scores.push({corporation: corpname, playerScore: vpb.total});
+      scores.push({corporation: corporation, playerScore: vpb.total});
     });
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);

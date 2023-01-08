@@ -32,7 +32,7 @@ export class Playwrights extends Card implements ICorporationCard {
           b.br.br;
           b.megacredits(38).production((pb) => pb.energy(1));
           b.corpBox('action', (cb) => {
-            cb.action('Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
+            cb.action('Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
               // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
               // use 1000 as an id to tell Vue to render the '?'
               eb.megacredits(1000).startAction;

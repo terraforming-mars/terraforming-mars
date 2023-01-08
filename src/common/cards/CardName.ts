@@ -789,13 +789,4 @@ export enum CardName {
     GAIA = 'Gaia',
     NEIL = 'Neil',
     APOLLO = 'Apollo',
-
-    // Community Leader Cards
-    SHARA = 'Shara',
-
-    // CEO Preludes
-    JOINT_VENTURE = 'Joint Venture', // Two-CEO Prelude
-
-    // CEO Corps
-    BOARD_OF_DIRECTORS = 'Board of Directors',
 }

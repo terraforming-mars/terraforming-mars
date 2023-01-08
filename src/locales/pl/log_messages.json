@@ -223,10 +223,8 @@
     "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} usuwa ${2} jednostek z karty ${3} gracza ${2}",
 
     "${0} turned the clone tag on ${1} into a ${2} tag": "${0} przekształca uniwersalny symbol na ${1} w symbol ${2}",
-    "${0} raised the ${1} planetary track 1 step": "${0} podnosi znacznik na torze planetarnym ${1} o 1 poziom.",
-    "${0} raised the ${1} planetary track ${2} steps": "${0} podnosi znacznik na torze planetarnym ${2} o 2 poziomy.",
-    "Global Event ${0} raised the ${1} planetary track 1 step": "Wydarzenie globalne ${0} podniosło znacznik na torze planetarnym ${1} o 1 poziom.",
-    "Global Event ${0} raised the ${1} planetary track ${2} steps": "Wydarzenie globalne ${0} podniosło znacznik na torze planetarnym ${1} o 2 poziomy.",
+    "${0} raised the ${1} planetary track ${2} step(s)": "${0} podnosi znacznik na torze planetarnym ${2} o 2 poziom/y.",
+    "Global Event ${0} raised the ${1} planetary track ${2} step(s)": "Wydarzenie globalne ${0} podniosło znacznik na torze planetarnym ${1} o 2 poziom/y.",
     "${0} has the most ${1} tags and earns 1VP": "${0} posiada najwięcej symboli ${1} i otrzymuje 1 PZ",
     "${0} has the most ${1} tags and earns 2VP": "${0} posiada najwięcej symboli ${1} i otrzymuje 2 PZ",
     "The discard pile has been shuffled to form a new deck.": "Talia kart odrzuconych została przetasowana i powstała z niej nowa talia projektów.",

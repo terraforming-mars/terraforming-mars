@@ -285,6 +285,7 @@ export default Vue.extend({
         moon: true,
         promo: true,
         pathfinders: true,
+        leader: true,
       },
       types: {
         event: true,
@@ -299,6 +300,7 @@ export default Vue.extend({
         colonyTiles: true,
         milestones: true,
         awards: true,
+        leader: true,
       },
       tags: {
         building: true,

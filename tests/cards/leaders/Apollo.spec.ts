@@ -1,12 +1,12 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 
-import {Apollo} from "../../../src/server/cards/leaders/Apollo";
+import {Apollo} from '../../../src/server/cards/leaders/Apollo';
 
-import {IMoonData} from "../../../src/server/moon/IMoonData";
-import {MoonExpansion} from "../../../src/server/moon/MoonExpansion";
+import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
 describe('Apollo', function() {
   let card: Apollo;

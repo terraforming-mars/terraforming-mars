@@ -1,12 +1,12 @@
-import {expect} from "chai";
-import {ReleaseOfInertGases} from "../../../src/server/cards/base/ReleaseOfInertGases";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd, setCustomGameOptions, setRulingPartyAndRulingPolicy} from "../../TestingUtils";
+import {expect} from 'chai';
+import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 
-import {Zan} from "../../../src/server/cards/leaders/Zan";
+import {Zan} from '../../../src/server/cards/leaders/Zan';
 
 
 describe('Zan', function() {

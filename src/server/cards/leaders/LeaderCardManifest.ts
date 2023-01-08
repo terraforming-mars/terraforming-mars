@@ -38,7 +38,7 @@ import {Xavier} from './Xavier';
 import {Yvonne} from './Yvonne';
 import {Zan} from './Zan';
 
-import {JointVenture} from './JointVenture'
+import {JointVenture} from './JointVenture';
 import {BoardOfDirectors} from './BoardOfDirectors';
 
 export const LEADER_CARD_MANIFEST = new ModuleManifest({

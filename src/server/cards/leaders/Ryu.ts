@@ -1,10 +1,10 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 import {OrOptions} from '../../inputs/OrOptions';
 import {Resources} from '../../../common/Resources';
@@ -59,18 +59,18 @@ export class Ryu extends Card implements LeaderCard {
           (amount: number) => {
             const productionToIncrease =
               resources.filter((res) => res !== resourceToDecrease)
-              .map((res) => new SelectOption(`Increase ${res} production`, 'Select', () => {
+                .map((res) => new SelectOption(`Increase ${res} production`, 'Select', () => {
                   player.production.add(resourceToDecrease, -amount, {log: true});
                   // player.production.adjust()
                   player.production.add(res, amount, {log: true});
                   return undefined;
-              }));
+                }));
 
             return new OrOptions(...productionToIncrease);
           },
           1,
           maxDecreasableAmt,
-          true
+          true,
         );
       });
 

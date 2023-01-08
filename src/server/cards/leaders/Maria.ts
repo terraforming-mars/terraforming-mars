@@ -1,10 +1,10 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
@@ -75,39 +75,39 @@ export class Maria extends Card implements LeaderCard {
   }
 }
 
-  //   return new SelectColony('Select colony tile to add', 'Add colony tile', coloniesModel, (colonyName: ColonyName) => {
-  //     if (game.colonyDealer !== undefined) {
-  //       availableColonies.forEach((colony) => {
-  //         if (colony.name === colonyName) {
-  //           game.colonies.push(colony);
-  //           game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-  //           game.colonyDealer?.discardedColonies.splice(game.colonyDealer?.discardedColonies.indexOf(colony), 1);
-  //           game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
+//   return new SelectColony('Select colony tile to add', 'Add colony tile', coloniesModel, (colonyName: ColonyName) => {
+//     if (game.colonyDealer !== undefined) {
+//       availableColonies.forEach((colony) => {
+//         if (colony.name === colonyName) {
+//           game.colonies.push(colony);
+//           game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+//           game.colonyDealer?.discardedColonies.splice(game.colonyDealer?.discardedColonies.indexOf(colony), 1);
+//           game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
 
-  //           game.defer(new DeferredAction(player, () => {
-  //             Aridor.checkActivation(colony, game);
+//           game.defer(new DeferredAction(player, () => {
+//             Aridor.checkActivation(colony, game);
 
-  //             // Activate Venus colony
-  //             if (colony.name === ColonyName.VENUS) {
-  //               game.getPlayers().forEach((player) => {
-  //                 if (player.playedCards.some((card) => card.tags.includes(Tags.VENUS) && card.resourceType !== undefined)) {
-  //                   colony.isActive = true;
-  //                 }
-  //               })
-  //             }
+//             // Activate Venus colony
+//             if (colony.name === ColonyName.VENUS) {
+//               game.getPlayers().forEach((player) => {
+//                 if (player.playedCards.some((card) => card.tags.includes(Tags.VENUS) && card.resourceType !== undefined)) {
+//                   colony.isActive = true;
+//                 }
+//               })
+//             }
 
-  //             if (colony.isActive) colony.addColony(player);
-  //             this.isDisabled = true;
-  //             return undefined;
-  //           }));
+//             if (colony.isActive) colony.addColony(player);
+//             this.isDisabled = true;
+//             return undefined;
+//           }));
 
-  //           return undefined;
-  //         }
-  //         return undefined;
-  //       });
-  //       return undefined;
-  //     } else {
-  //       return undefined;
-  //     };
-  //   });
-  // }
+//           return undefined;
+//         }
+//         return undefined;
+//       });
+//       return undefined;
+//     } else {
+//       return undefined;
+//     };
+//   });
+// }

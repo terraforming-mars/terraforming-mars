@@ -7,7 +7,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
-import { ILeaderCard } from './ILeaderCard';
+import {ILeaderCard} from './ILeaderCard';
 
 export class BoardOfDirectors extends Card implements ICorporationCard {
   constructor() {
@@ -33,7 +33,7 @@ export class BoardOfDirectors extends Card implements ICorporationCard {
   public initialAction(player: Player) {
     const game = player.game;
     game.log('${0} used Board of Directors first action', (b) => b.player(player));
-    let leaderCardsDrawn: Array<IProjectCard> = [];
+    const leaderCardsDrawn: Array<IProjectCard> = [];
     for (let i = 0; i < 5; i++) {
       leaderCardsDrawn.push(game.leaderDeck.draw(game));
     }
@@ -46,9 +46,9 @@ export class BoardOfDirectors extends Card implements ICorporationCard {
         }
         player.playCard(leaderCards[0]);
         player.playCard(leaderCards[1]);
-        leaderCardsDrawn.forEach(card => game.leaderDeck.discard(card));
+        leaderCardsDrawn.forEach((card) => game.leaderDeck.discard(card));
         return undefined;
       }, {min: 2, max: 2},
-    )
+    );
   }
 }

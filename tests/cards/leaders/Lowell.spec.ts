@@ -1,14 +1,14 @@
-import {expect} from "chai";
-import {LightningHarvest} from "../../../src/server/cards/base/LightningHarvest";
-import {Research} from "../../../src/server/cards/base/Research";
-import {CardType} from "../../../src/common/cards/CardType";
-import {ICard} from "../../../src/server/cards/ICard";
-import {Game} from "../../../src/server/Game";
-import {SelectCard} from "../../../src/server/inputs/SelectCard";
-import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
+import {expect} from 'chai';
+import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
+import {Research} from '../../../src/server/cards/base/Research';
+import {CardType} from '../../../src/common/cards/CardType';
+import {ICard} from '../../../src/server/cards/ICard';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Lowell} from "../../../src/server/cards/leaders/Lowell";
+import {Lowell} from '../../../src/server/cards/leaders/Lowell';
 
 
 describe('Lowell', function() {
@@ -21,7 +21,7 @@ describe('Lowell', function() {
     card = new Lowell();
     player = TestPlayer.BLUE.newPlayer();
     player.megaCredits = 8;
-    player2 = TestPlayer.RED.newPlayer()
+    player2 = TestPlayer.RED.newPlayer();
     const gameOptions = setCustomGameOptions({leaderExtension: true});
     game = Game.newInstance('gameid', [player, player2], player, gameOptions );
   });

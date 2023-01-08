@@ -11,7 +11,6 @@
 // import {Maria} from "../../../src/server/cards/leaders/Maria";
 
 
-
 // describe('Maria', function() {
 //   let card: Maria;
 //   let player: TestPlayer;
@@ -27,7 +26,7 @@
 //   it('Can act', function() {
 //     expect(card.canAct(player)).is.true;
 //   });
-  
+
 //   it('Takes action generation 1', function() {
 //     // const selectColony = card.action(player) as SelectColony;
 //     const colonyInPlay = game.colonies[0];
@@ -52,11 +51,10 @@
 
 //     const selectColony = card.action(player) as SelectColony;
 //     expect(selectColony.colonies).has.length(4);
-    
+
 //     selectColony.cb(selectColony.colonies[0]);
 //     // expect(player.playedCards.filter((card) => card.cardType === SpaceType.COLONY)).has.length(1);
 //   });
-
 
 
 //   it('Can only act once per game', function() {

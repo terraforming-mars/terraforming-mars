@@ -1,9 +1,9 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 import {played} from '../Options';
 
 export class Xavier extends Card implements LeaderCard {

@@ -1,12 +1,11 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-import {Turmoil} from "../../../src/server/turmoil/Turmoil";
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 
-import {Oscar} from "../../../src/server/cards/leaders/Oscar";
-
+import {Oscar} from '../../../src/server/cards/leaders/Oscar';
 
 
 describe('Oscar', function() {
@@ -44,5 +43,4 @@ describe('Oscar', function() {
 
   // TODO (low hanging fruit):
   // Test to see if action increases POLITICIAN Milestone
-
 });

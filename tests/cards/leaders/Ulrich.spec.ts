@@ -1,7 +1,7 @@
-import {expect} from "chai";
-import {Ulrich} from "../../../src/server/cards/leaders/Ulrich";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd, maxOutOceans} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Ulrich} from '../../../src/server/cards/leaders/Ulrich';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 

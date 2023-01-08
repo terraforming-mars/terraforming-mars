@@ -1,14 +1,14 @@
-import {expect} from "chai";
-import {Research} from "../../../src/server/cards/base/Research";
-import {SpecialDesign} from "../../../src/server/cards/base/SpecialDesign";
-import {TransNeptuneProbe} from "../../../src/server/cards/base/TransNeptuneProbe";
-import {LunaGovernor} from "../../../src/server/cards/colonies/LunaGovernor";
-import {Faraday} from "../../../src/server/cards/leaders/Faraday";
-import {Game} from "../../../src/server/Game";
-import {OrOptions} from "../../../src/server/inputs/OrOptions";
+import {expect} from 'chai';
+import {Research} from '../../../src/server/cards/base/Research';
+import {SpecialDesign} from '../../../src/server/cards/base/SpecialDesign';
+import {TransNeptuneProbe} from '../../../src/server/cards/base/TransNeptuneProbe';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {Faraday} from '../../../src/server/cards/leaders/Faraday';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
-import { OlympusConference } from "@/server/cards/base/OlympusConference";
+import {OlympusConference} from '@/server/cards/base/OlympusConference';
 
 
 describe('Faraday', function() {
@@ -36,7 +36,7 @@ describe('Faraday', function() {
 
     // 5 tags: Draw a card with a Science tag
     player.playCard(new TransNeptuneProbe());
-    
+
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb();
     game.deferredActions.runAll(() => {});
@@ -50,7 +50,7 @@ describe('Faraday', function() {
     player.playedCards.push(new Research());
     player.playedCards.push(new Research());
     player.playCard(new TransNeptuneProbe());
-    
+
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[1].cb();
     game.deferredActions.runAll(() => {});
@@ -78,7 +78,7 @@ describe('Faraday', function() {
 
     // 6 tags: Draw a card with a Earth tag
     player.playCard(new LunaGovernor());
-    
+
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb();
     game.deferredActions.runAll(() => {});
@@ -99,11 +99,11 @@ describe('Faraday', function() {
 
   //   // 6 tags: Draw a card with a Earth tag
   //   player.playCard(new OlympusConference());
-    
+
   //   const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
   //   orOptions.options[0].cb();
   //   game.deferredActions.runAll(() => {});
-    
+
 
   //   expect(player.cardsInHand).has.length(1);
   //   expect(player.cardsInHand[0].tags.includes(Tag.EARTH)).is.true;

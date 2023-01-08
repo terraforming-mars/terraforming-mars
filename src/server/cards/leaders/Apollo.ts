@@ -10,22 +10,22 @@ import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
 export class Apollo extends Card implements LeaderCard {
-    constructor() {
+  constructor() {
     super({
-        name: CardName.APOLLO,
-        cardType: CardType.LEADER,
-        metadata: {
+      name: CardName.APOLLO,
+      cardType: CardType.LEADER,
+      metadata: {
         cardNumber: 'L35',
         renderData: CardRenderer.builder((b) => {
-            b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
-            b.br.br;
-            b.moonHabitat({all}).moonMine({all}).moonRoad({all}).nbsp.colon().megacredits(3);
-            b.br.br;
+          b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
+          b.br.br;
+          b.moonHabitat({all}).moonMine({all}).moonRoad({all}).nbsp.colon().megacredits(3);
+          b.br.br;
         }),
         description: 'Once per game, gain 3 M€ for each tile on The Moon.',
-        },
+      },
     });
-  }  
+  }
 
   public isDisabled = false;
 
@@ -38,7 +38,7 @@ export class Apollo extends Card implements LeaderCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    const moonSpacesCount = MoonExpansion.spaces(player.game, undefined, {surfaceOnly: true}).length
+    const moonSpacesCount = MoonExpansion.spaces(player.game, undefined, {surfaceOnly: true}).length;
     player.addResource(Resources.MEGACREDITS, moonSpacesCount * 3, {log: true});
     this.isDisabled = true;
     return undefined;

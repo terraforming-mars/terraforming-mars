@@ -31,7 +31,7 @@ export class Dealer {
     dealer.corporationCards = gameCards.getCorporationCards();
     dealer.preludeDeck = Dealer.shuffle(gameCards.getPreludeCards(), random);
     dealer.leaderDeck = Dealer.shuffle(gameCards.getLeaderCards());
-    
+
     // Special-case prelude deck: both The New Space Race and By-Election cannot
     // be used in the same game.
     const indexes = INCOMPATIBLE_PRELUDES.map((name) => dealer.preludeDeck.findIndex((c) => c.name === name));

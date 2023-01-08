@@ -1,12 +1,12 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
-import {OrOptions} from "../../../src/server/inputs/OrOptions";
-import {SelectAmount} from "../../../src/server/inputs/SelectAmount";
-import {Resources} from "../../../src/common/Resources";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {Resources} from '../../../src/common/Resources';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-import {Ryu} from "../../../src/server/cards/leaders/Ryu";
+import {Ryu} from '../../../src/server/cards/leaders/Ryu';
 
 
 describe('Ryu', function() {
@@ -30,7 +30,7 @@ describe('Ryu', function() {
       .forEach((res) => player.production.add(res, -5));
 
     expect(card.canAct(player)).is.false;
-  })
+  });
 
   it('Takes action in Gen 1', function() {
     expect(card.canAct(player)).is.true;
@@ -40,7 +40,7 @@ describe('Ryu', function() {
     expect(selectProductionToDecrease.options).has.length(3);
 
     // Select amount of M€ prod to lose - Gen 1
-    let selectAmount = selectProductionToDecrease.options[0].cb() as SelectAmount;
+    const selectAmount = selectProductionToDecrease.options[0].cb() as SelectAmount;
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(3);
   });
@@ -66,7 +66,7 @@ describe('Ryu', function() {
     expect(selectAmount.max).eq(4);
 
     // Swap 4 Heat prod for Ti prod
-    const selectProductionToIncrease = selectAmount.cb(4) as OrOptions;;
+    const selectProductionToIncrease = selectAmount.cb(4) as OrOptions;
     expect(selectProductionToIncrease.options).has.length(5);
     selectProductionToIncrease.options[2].cb();
 

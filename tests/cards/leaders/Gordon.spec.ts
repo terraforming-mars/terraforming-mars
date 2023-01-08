@@ -1,13 +1,12 @@
-import {expect} from "chai";
+import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from "../../../src/server/Game";
-import {SpaceType} from "../../../src/common/boards/SpaceType";
-import {TileType} from "../../../src/common/TileType";
+import {Game} from '../../../src/server/Game';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {TileType} from '../../../src/common/TileType';
 
-import {Gordon} from "../../../src/server/cards/leaders/Gordon";
+import {Gordon} from '../../../src/server/cards/leaders/Gordon';
 
 import {addGreenery, addCityTile, runAllActions} from '../../TestingUtils';
-
 
 
 describe('Gordon', function() {

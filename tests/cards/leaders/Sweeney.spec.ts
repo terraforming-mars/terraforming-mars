@@ -1,14 +1,14 @@
-import {expect} from "chai";
-import {Cartel} from "../../../src/server/cards/base/Cartel";
-import {EarthOffice} from "../../../src/server/cards/base/EarthOffice";
-import {LunaGovernor} from "../../../src/server/cards/colonies/LunaGovernor";
-import {IProjectCard} from "../../../src/server/cards/IProjectCard";
-import {Sweeney} from "../../../src/server/cards/leaders/Sweeney";
+import {expect} from 'chai';
+import {Cartel} from '../../../src/server/cards/base/Cartel';
+import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
+import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {Sweeney} from '../../../src/server/cards/leaders/Sweeney';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from "../../../src/server/Game";
-import {SelectAmount} from "../../../src/server/inputs/SelectAmount";
-import {SelectCard} from "../../../src/server/inputs/SelectCard";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {Game} from '../../../src/server/Game';
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 

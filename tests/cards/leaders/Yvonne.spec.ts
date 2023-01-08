@@ -1,14 +1,14 @@
-import { expect } from "chai";
-import { Yvonne } from "../../../src/server/cards/leaders/Yvonne";
-import { Callisto } from '../../../src/server/colonies/Callisto';
-import { Ceres } from "../../../src/server/colonies/Ceres";
-import { Triton } from "../../../src/server/colonies/Triton";
-import { Game } from "../../../src/server/Game";
-import { forceGenerationEnd, setCustomGameOptions } from "../../TestingUtils";
-import { TestPlayer } from '../../TestPlayer';
+import {expect} from 'chai';
+import {Yvonne} from '../../../src/server/cards/leaders/Yvonne';
+import {Callisto} from '../../../src/server/colonies/Callisto';
+import {Ceres} from '../../../src/server/colonies/Ceres';
+import {Triton} from '../../../src/server/colonies/Triton';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 
 
-describe('Yvonne', function () {
+describe('Yvonne', function() {
   let card: Yvonne;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -18,7 +18,7 @@ describe('Yvonne', function () {
     card = new Yvonne();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({ coloniesExtension: true });
+    const gameOptions = setCustomGameOptions({coloniesExtension: true});
     game = Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     // Setup some colonies that can be built independently of cards
@@ -32,11 +32,11 @@ describe('Yvonne', function () {
     triton.addColony(player);
   });
 
-  it('Can act', function () {
+  it('Can act', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action', function () {
+  it('Takes action', function() {
     card.action(player);
     expect(game.deferredActions).has.length(1);
 
@@ -46,7 +46,7 @@ describe('Yvonne', function () {
     expect(player.titanium).eq(5); // 3 from placement + 2 from OPG action
   });
 
-  it('Can only act once per game', function () {
+  it('Can only act once per game', function() {
     card.action(player);
     game.deferredActions.runAll(() => { });
     forceGenerationEnd(game);

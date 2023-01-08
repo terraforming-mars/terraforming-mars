@@ -1,7 +1,7 @@
-import {expect} from "chai";
-import {Huan} from "../../../src/server/cards/leaders/Huan";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Huan} from '../../../src/server/cards/leaders/Huan';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Huan', function() {

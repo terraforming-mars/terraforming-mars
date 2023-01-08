@@ -1,11 +1,11 @@
-import {expect} from "chai";
-import {CardType} from "../../../src/common/cards/CardType";
-import {IProjectCard} from "../../../src/server/cards/IProjectCard";
-import {Karen} from "../../../src/server/cards/leaders/Karen";
-import {GalileanMining} from "../../../src/server/cards/prelude/GalileanMining";
-import {Game} from "../../../src/server/Game";
-import {SelectCard} from "../../../src/server/inputs/SelectCard";
-import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
+import {expect} from 'chai';
+import {CardType} from '../../../src/common/cards/CardType';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {Karen} from '../../../src/server/cards/leaders/Karen';
+import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 
@@ -32,7 +32,7 @@ describe('Karen', function() {
   it('Takes action', function() {
     const selectCard = card.action(player) as SelectCard<IProjectCard>;
     expect(selectCard.cards).has.length(1);
-    
+
     selectCard.cb([selectCard.cards[0]]);
     expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
   });
@@ -45,7 +45,7 @@ describe('Karen', function() {
 
     const selectCard = card.action(player) as SelectCard<IProjectCard>;
     expect(selectCard.cards).has.length(4);
-    
+
     selectCard.cb([selectCard.cards[0]]);
     expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
   });

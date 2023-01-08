@@ -1,13 +1,13 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
-import { Resources } from '../../../common/Resources';
-import { MAX_OCEAN_TILES } from '../../../common/constants';
+import {Resources} from '../../../common/Resources';
+import {MAX_OCEAN_TILES} from '../../../common/constants';
 import {multiplier} from '../Options';
 
 export class Ulrich extends Card implements LeaderCard {
@@ -37,10 +37,10 @@ export class Ulrich extends Card implements LeaderCard {
 
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
-    let oceansPlaced = game.board.getOceanCount()
-    let bonus_credits = 15  // Default to 15, this happens if all oceans have been placed
+    const oceansPlaced = game.board.getOceanCount();
+    let bonus_credits = 15; // Default to 15, this happens if all oceans have been placed
     if (oceansPlaced < MAX_OCEAN_TILES) {
-      bonus_credits = oceansPlaced * 4
+      bonus_credits = oceansPlaced * 4;
     }
     player.addResource(Resources.MEGACREDITS, bonus_credits, {log: true});
     this.isDisabled = true;

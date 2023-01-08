@@ -1,13 +1,13 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-import {ICard} from "../../../src/server/cards/ICard";
-import {SelectCard} from "../../../src/server/inputs/SelectCard";
-import {OrOptions} from "../../../src/server/inputs/OrOptions";
+import {ICard} from '../../../src/server/cards/ICard';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
-import {Tate} from "../../../src/server/cards/leaders/Tate";
+import {Tate} from '../../../src/server/cards/leaders/Tate';
 
 describe('Tate', function() {
   let card: Tate;

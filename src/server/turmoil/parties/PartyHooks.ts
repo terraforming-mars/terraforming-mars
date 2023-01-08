@@ -8,7 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {GREENS_POLICY_1} from './Greens';
 import {PoliticalAgendas} from '../PoliticalAgendas';
 import {Turmoil} from '../Turmoil';
-import { CardName } from '../../../common/cards/CardName';
+import {CardName} from '../../../common/cards/CardName';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {

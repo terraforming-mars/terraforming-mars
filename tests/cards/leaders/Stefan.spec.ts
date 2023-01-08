@@ -1,11 +1,11 @@
-import {expect} from "chai";
-import {MicroMills} from "../../../src/server/cards/base/MicroMills";
-import {Research} from "../../../src/server/cards/base/Research";
-import {IProjectCard} from "../../../src/server/cards/IProjectCard";
-import {Stefan} from "../../../src/server/cards/leaders/Stefan";
-import {Game} from "../../../src/server/Game";
-import {SelectCard} from "../../../src/server/inputs/SelectCard";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {expect} from 'chai';
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {Research} from '../../../src/server/cards/base/Research';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {Stefan} from '../../../src/server/cards/leaders/Stefan';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 

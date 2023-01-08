@@ -4,13 +4,13 @@ import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../../common/TileType';
 import {ICard} from '../ICard';
 
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -58,7 +58,7 @@ export class Gaia extends Card implements LeaderCard {
         .forEach((space) => {
           board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
             this.grantAdjacencyBonus(adjacentSpace, player);
-          });   
+          });
         });
     });
 
@@ -98,21 +98,21 @@ export class Gaia extends Card implements LeaderCard {
     adjacentSpace.adjacency.bonus.forEach((bonus) => {
       bonuses.add(bonus);
       switch (bonus) {
-        case SpaceBonus.ANIMAL:
-          addResourceToCard(player, CardResource.ANIMAL, 'animal');
-          break;
-        case SpaceBonus.MEGACREDITS:
-          player.megaCredits++;
-          break;
-        case SpaceBonus.ENERGY:
-          player.energy++;
-          break;
-        case SpaceBonus.MICROBE:
-          addResourceToCard(player, CardResource.MICROBE, 'microbe');
-          break;
-        default:
-          player.game.grantSpaceBonus(player, bonus);
-          break;
+      case SpaceBonus.ANIMAL:
+        addResourceToCard(player, CardResource.ANIMAL, 'animal');
+        break;
+      case SpaceBonus.MEGACREDITS:
+        player.megaCredits++;
+        break;
+      case SpaceBonus.ENERGY:
+        player.energy++;
+        break;
+      case SpaceBonus.MICROBE:
+        addResourceToCard(player, CardResource.MICROBE, 'microbe');
+        break;
+      default:
+        player.game.grantSpaceBonus(player, bonus);
+        break;
       }
     });
 

@@ -1,13 +1,13 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
-import { Resources } from '../../../common/Resources';
-import { multiplier } from '../Options';
+import {Resources} from '../../../common/Resources';
+import {multiplier} from '../Options';
 
 export class Bjorn extends Card implements LeaderCard {
   constructor() {

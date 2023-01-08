@@ -9,6 +9,6 @@ export class Economizer2 implements IAward {
   public getScore(player: Player): number {
     const validCardTypes = [CardType.ACTIVE, CardType.AUTOMATED];
     const score = player.playedCards.filter((card) => (card.cost <= 10) && validCardTypes.includes(card.cardType)).length;
-    return score + getAdditionalScore(player); 
+    return score + getAdditionalScore(player);
   }
 }

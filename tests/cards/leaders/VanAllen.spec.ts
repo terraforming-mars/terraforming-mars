@@ -1,6 +1,6 @@
-import {expect} from "chai";
-import {VanAllen} from "../../../src/server/cards/leaders/VanAllen";
-import {Game} from "../../../src/server/Game";
+import {expect} from 'chai';
+import {VanAllen} from '../../../src/server/cards/leaders/VanAllen';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
 
@@ -23,7 +23,7 @@ describe('Van Allen', function() {
     player.megaCredits = 7;
     player.setTerraformRating(35); // Can claim Terraformer milestone
 
-    const claimMilestoneAction = player.getActions().options.find((option) => option.title == "Claim a milestone");
+    const claimMilestoneAction = player.getActions().options.find((option) => option.title === 'Claim a milestone');
     expect(claimMilestoneAction).is.not.undefined;
 
     claimMilestoneAction!.options![0].cb();

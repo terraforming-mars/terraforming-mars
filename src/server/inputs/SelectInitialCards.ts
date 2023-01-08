@@ -7,7 +7,7 @@ import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
-import { ILeaderCard } from '../cards/leaders/ILeaderCard';
+import {ILeaderCard} from '../cards/leaders/ILeaderCard';
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
   public override inputType = PlayerInputType.SELECT_INITIAL_CARDS;

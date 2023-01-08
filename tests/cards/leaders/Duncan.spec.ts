@@ -1,8 +1,8 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Duncan} from "../../../src/server/cards/leaders/Duncan";
+import {Duncan} from '../../../src/server/cards/leaders/Duncan';
 
 
 describe('Duncan', function() {

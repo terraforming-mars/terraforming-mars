@@ -1,7 +1,7 @@
-import {expect} from "chai";
-import {HAL9000} from "../../../src/server/cards/leaders/HAL9000";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {expect} from 'chai';
+import {HAL9000} from '../../../src/server/cards/leaders/HAL9000';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 
@@ -30,7 +30,7 @@ describe('HAL 9000', function() {
     expect(player.production.titanium).eq(1);
     expect(player.production.energy).eq(1);
     expect(player.production.heat).eq(1);
-    
+
     card.action(player);
 
     expect(player.production.plants).eq(0);

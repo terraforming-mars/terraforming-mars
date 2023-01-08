@@ -1,16 +1,16 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 import {played} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
-import { multiplier } from '../Options';
+import {multiplier} from '../Options';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from '../pathfinders/ICloneTagCard';
-import { Resources } from '../../../common/Resources';
+import {Resources} from '../../../common/Resources';
 import {PathfindersData} from '../../pathfinders/PathfindersData';
 import {PlanetaryTag} from '../../pathfinders/PathfindersExpansion';
 
@@ -59,18 +59,18 @@ export class Shara extends Card implements LeaderCard, ICloneTagCard {
       new DeclareCloneTag(
         player,
         this,
-      )
+      ),
     );
     this.isDisabled = true;
     player.game.defer(new SimpleDeferredAction(
       player,
       () => {
-        new DeclareCloneTag(player,this);
+        new DeclareCloneTag(player, this);
         const planetTag = this.cloneTag as PlanetaryTag;
         const value = PathfindersData.getValue(data, planetTag);
-        player.addResource(Resources.MEGACREDITS, value, {log: true});    
+        player.addResource(Resources.MEGACREDITS, value, {log: true});
         return undefined;
-      }
+      },
     ));
     return undefined;
   }

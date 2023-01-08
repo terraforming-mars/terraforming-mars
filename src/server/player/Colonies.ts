@@ -151,7 +151,7 @@ export class Colonies {
           // Just make the game think that the player has already traded the maximum amount
           // for this generation
           player.colonies.tradesThisGeneration = 50;
-        })
+        });
       }
       this.tradesThisGeneration = 0;
     }

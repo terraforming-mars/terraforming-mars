@@ -1,10 +1,10 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 import {PartyName} from '../../../common/turmoil/PartyName';
 
 import {Turmoil} from '../../turmoil/Turmoil';
@@ -44,7 +44,7 @@ export class Zan extends Card implements LeaderCard {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
     // const reserveDelegates = turmoil.delegateReserve.filter((d) => d === player.id).length;
-    const reserveDelegates = turmoil.getAvailableDelegateCount(player.id)
+    const reserveDelegates = turmoil.getAvailableDelegateCount(player.id);
     for (let i = 0; i < reserveDelegates; i++) {
       game.defer(new SimpleDeferredAction(player, () => {
         turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);

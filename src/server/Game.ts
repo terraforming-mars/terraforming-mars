@@ -622,7 +622,7 @@ export class Game implements Logger {
     this.first = newFirstPlayer;
   }
 
-  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false, leaderDraft: boolean = false,): void {
+  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false, leaderDraft: boolean = false): void {
     this.save();
     this.draftedPlayers.clear();
     this.players.forEach((player) => {
@@ -1267,7 +1267,7 @@ export class Game implements Logger {
       Tag.EVENT,
       // Tag.CLONE,
     ];
-    
+
     // On the players 'Tag Bar' VENUS is in between JOVIAN and PLANTS
     // Lets insert it there
     if (this.gameOptions.venusNextExtension) tags.splice(tags.indexOf(Tag.JOVIAN) + 1, 0, Tag.VENUS);

@@ -8,7 +8,7 @@ import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorpor
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
-import {LeadersExtension} from '../cards/leaders/LeadersExtension';
+import {LeadersExtension} from '../LeadersExtension';
 
 export class Tags {
   private player: Player;
@@ -57,7 +57,7 @@ export class Tags {
       tagCount += this.player.scienceTagCount;
     }
 
-    if (tag == Tag.WILD || includeTagSubstitutions) {
+    if (tag === Tag.WILD || includeTagSubstitutions) {
       // CEO Xavier hook
       tagCount += LeadersExtension.getBonusWildTags(this.player);
     }

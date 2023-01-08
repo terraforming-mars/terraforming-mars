@@ -1,8 +1,8 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, forceGenerationEnd} from "../../TestingUtils";
-import {Clarke} from "../../../src/server/cards/leaders/Clarke";
+import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
+import {Clarke} from '../../../src/server/cards/leaders/Clarke';
 
 
 describe('Clarke', function() {

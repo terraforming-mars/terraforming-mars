@@ -7,6 +7,6 @@ export class Coordinator implements IAward {
   public readonly description = 'Having the most event cards in play';
   public getScore(player: Player): number {
     const score = player.getCardsByCardType(CardType.EVENT).length;
-    return score + getAdditionalScore(player)
+    return score + getAdditionalScore(player);
   }
 }

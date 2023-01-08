@@ -1,14 +1,14 @@
-import {expect} from "chai";
-import {NaturalPreserveAres} from "../../../src/server/cards/ares/NaturalPreserveAres";
-import {Game} from "../../../src/server/Game";
-import { TileType } from "../../../src/common/TileType";
-import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
-import { EmptyBoard } from "../../ares/EmptyBoard";
-import {forceGenerationEnd, cast, runAllActions} from "../../TestingUtils";
+import {expect} from 'chai';
+import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
+import {Game} from '../../../src/server/Game';
+import {TileType} from '../../../src/common/TileType';
+import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {EmptyBoard} from '../../ares/EmptyBoard';
+import {forceGenerationEnd, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
-import {Gaia} from "../../../src/server/cards/leaders/Gaia";
+import {Gaia} from '../../../src/server/cards/leaders/Gaia';
 
 
 describe('Gaia', function() {

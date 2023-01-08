@@ -1,11 +1,11 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {forceGenerationEnd} from "../../TestingUtils";
-import {Bjorn} from "../../../src/server/cards/leaders/Bjorn";
+import {forceGenerationEnd} from '../../TestingUtils';
+import {Bjorn} from '../../../src/server/cards/leaders/Bjorn';
 
 describe('Bjorn', function() {
-  let card: Bjorn; 
+  let card: Bjorn;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: Game;

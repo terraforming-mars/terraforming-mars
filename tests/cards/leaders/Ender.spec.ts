@@ -1,15 +1,14 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-import {SelectAmount} from "../../../src/server/inputs/SelectAmount";
+import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 
-import {Ender} from "../../../src/server/cards/leaders/Ender";
+import {Ender} from '../../../src/server/cards/leaders/Ender';
 
-import {MicroMills} from "../../../src/server/cards/base/MicroMills";
-import {Research} from "../../../src/server/cards/base/Research";
-
+import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {Research} from '../../../src/server/cards/base/Research';
 
 
 describe('Ender', function() {

@@ -1,8 +1,8 @@
-import {expect} from "chai";
-import {Ingrid} from "../../../src/server/cards/leaders/Ingrid";
-import {Game} from "../../../src/server/Game";
-import {Phase} from "../../../src/common/Phase";
-import {forceGenerationEnd, addGreenery, addOcean, addCityTile} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Ingrid} from '../../../src/server/cards/leaders/Ingrid';
+import {Game} from '../../../src/server/Game';
+import {Phase} from '../../../src/common/Phase';
+import {forceGenerationEnd, addGreenery, addOcean, addCityTile} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceName} from '../../../src/server/SpaceName';
 

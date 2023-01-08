@@ -1,10 +1,10 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 import {Tag} from '../../../common/cards/Tag';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -42,12 +42,12 @@ export class Tate extends Card implements LeaderCard {
     const game = player.game;
 
     // There's only one card with a Wild tag in the game right now... we shouldn't use that
-    // Also remove Event tags.  
+    // Also remove Event tags.
     const excludedTags = [
       Tag.WILD,
       Tag.EVENT,
-    ]
-    const tags = game.getAllValidTags().filter(tag => !excludedTags.includes(tag));
+    ];
+    const tags = game.getAllValidTags().filter((tag) => !excludedTags.includes(tag));
     const options = tags.map((tag) => {
       return new SelectOption('Search for ' + tag + ' tags', 'Search', () => {
         game.log('${0} searched for ${1} tags', (b) => b.player(player).string(tag));

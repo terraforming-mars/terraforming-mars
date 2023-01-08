@@ -1,17 +1,17 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SelectAmount} from '../../inputs/SelectAmount';
 
 import {Tag} from '../../../common/cards/Tag';
 import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
-import { Resources } from '../../../common/Resources';
+import {Resources} from '../../../common/Resources';
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 
@@ -69,15 +69,15 @@ export class Sweeney extends Card implements LeaderCard {
                 // LogHelper.logPlayerDiscardedCards(player, foundCards);
                 return undefined;
               },
-              {min: amount, max: amount})
+              {min: amount, max: amount});
           },
-        )
+        );
         player.game.defer(discardEarthCards, Priority.DISCARD_AND_DRAW);
         player.game.defer(DrawCards.keepAll(player, amount, {tag: Tag.SPACE}));
         player.addResource(Resources.TITANIUM, 6 + amount);
         this.isDisabled = true;
         return undefined;
-      }, 
+      },
       0,
       max,
     );

@@ -1,10 +1,10 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
-import {OrOptions} from "../../../src/server/inputs/OrOptions";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {forceGenerationEnd} from "../../TestingUtils";
+import {forceGenerationEnd} from '../../TestingUtils';
 
-import {Asimov} from "../../../src/server/cards/leaders/Asimov";
+import {Asimov} from '../../../src/server/cards/leaders/Asimov';
 
 describe('Asimov', function() {
   let card: Asimov;
@@ -33,8 +33,8 @@ describe('Asimov', function() {
 
   it('Cannot act if all awards are already funded', function() {
     game.fundAward(player2, game.awards[0]);
-    game.fundAward(player2, game.awards[1])
-    game.fundAward(player2, game.awards[2])
+    game.fundAward(player2, game.awards[1]);
+    game.fundAward(player2, game.awards[2]);
 
     expect(card.canAct(player)).is.false;
   });

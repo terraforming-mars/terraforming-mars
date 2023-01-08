@@ -1,11 +1,11 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {forceGenerationEnd} from "../../TestingUtils";
+import {forceGenerationEnd} from '../../TestingUtils';
 
-import {Floyd} from "../../../src/server/cards/leaders/Floyd";
+import {Floyd} from '../../../src/server/cards/leaders/Floyd';
 
-import {AsteroidMining} from "../../../src/server/cards/base/AsteroidMining";
+import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
 
 
 describe('Floyd', function() {

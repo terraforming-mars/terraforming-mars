@@ -1,10 +1,10 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 import {IProjectCard} from '../IProjectCard';
 import {Size} from '../../../common/cards/render/Size';
@@ -51,11 +51,11 @@ export class Faraday extends Card implements LeaderCard {
     const excludedTags = [
       Tag.WILD,
       Tag.EVENT,
-    ]
+    ];
     const game = player.game;
     const validTags = game.getAllValidTags()
       .filter((item) => !excludedTags.includes(item))
-      .filter((item) => card.tags.includes(item));  // filter for tags that are on the card we just played
+      .filter((item) => card.tags.includes(item)); // filter for tags that are on the card we just played
 
     if (card.tags.length === 0) return;
 
@@ -81,21 +81,21 @@ export class Faraday extends Card implements LeaderCard {
       //   Modulo #1 > Modulo#2 (4>1), so we crossed a threshold of 5
       // NB: This wont work if we ever have a card with >=5 tags... please dont make one of those.
 
-      const playerTagCount = player.tags.count(tag, 'raw');   // Raw, no 'wild' Tags
-      const cardTagCount = card.tags.filter(cardTag => cardTag === tag).length;
-      const playerTagCountWithoutCard = playerTagCount - cardTagCount;   
+      const playerTagCount = player.tags.count(tag, 'raw'); // Raw, no 'wild' Tags
+      const cardTagCount = card.tags.filter((cardTag) => cardTag === tag).length;
+      const playerTagCountWithoutCard = playerTagCount - cardTagCount;
 
       if (playerTagCountWithoutCard%5 > playerTagCount%5) {
         player.game.defer(new SimpleDeferredAction(player, () => this.effectOptions(player, tag)));
       }
-    })
+    });
   }
 
   public effectOptions(player: Player, tag: Tag) {
     return new OrOptions(
       new SelectOption(`Pay 2 M€ to draw a ${tag} card`, 'Confirm', () => {
         player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for card'}));
-        player.drawCard(1, {tag: tag})
+        player.drawCard(1, {tag: tag});
         return undefined;
       }),
       new SelectOption('Do nothing', 'Confirm', () => {

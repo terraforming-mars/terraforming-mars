@@ -1,11 +1,11 @@
-import {expect} from "chai";
-import {Rogers} from "../../../src/server/cards/leaders/Rogers";
-import {IshtarMining} from "../../../src/server/cards/venusNext/IshtarMining";
-import {LocalShading} from "../../../src/server/cards/venusNext/LocalShading";
-import {VenusGovernor} from "../../../src/server/cards/venusNext/VenusGovernor";
-import {VenusianAnimals} from "../../../src/server/cards/venusNext/VenusianAnimals";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Rogers} from '../../../src/server/cards/leaders/Rogers';
+import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
+import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
+import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
+import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 

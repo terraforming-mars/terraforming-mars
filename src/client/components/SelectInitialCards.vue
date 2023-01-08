@@ -324,8 +324,10 @@ export default (Vue as WithRefs<Refs>).extend({
       return option;
     },
     leadersCardOption() {
-      let counter = 1
-      if (this.hasPrelude === true) { counter += 1 }
+      let counter = 1;
+      if (this.hasPrelude === true) {
+        counter += 1;
+      }
       const option = getOption(this.playerinput.options, counter);
       if (getPreferences().experimental_ui) {
         option.max = undefined;
@@ -333,15 +335,19 @@ export default (Vue as WithRefs<Refs>).extend({
       return option;
     },
     projectCardOption() {
-      let counter = 1
-      if (this.hasPrelude === true) { counter += 1 }
-      if (this.hasLeaders === true) { counter += 1 }
+      let counter = 1;
+      if (this.hasPrelude === true) {
+        counter += 1;
+      }
+      if (this.hasLeaders === true) {
+        counter += 1;
+      }
       const option = getOption(this.playerinput.options, counter);
       if (getPreferences().experimental_ui) {
         option.max = undefined;
       }
       return option;
-      //Old Notes, remove if this works:
+      // Old Notes, remove if this works:
       //   // Compiler won't accept this method using this.hasPrelude, despite documentation saying I can.
       //   return getOption(this.playerinput.options, this.playerinput.options?.length === 3 ? 2 : 1);
     },

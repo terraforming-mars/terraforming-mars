@@ -1,6 +1,5 @@
 import {ICard} from '../ICard';
-import {Player} from '../../Player'
-import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
 
 export interface ILeaderCard extends ICard {
   canPlay: (player: Player) => boolean;
@@ -11,6 +10,3 @@ export interface ILeaderCard extends ICard {
   onTRIncrease?: (player: Player) => undefined;
 }
 
-export function isLeaderCard(card: ICard): card is ILeaderCard {
-  return card.cardType === CardType.LEADER;
-}

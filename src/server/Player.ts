@@ -64,8 +64,9 @@ import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
-import {LeaderCard} from './cards/leaders/LeaderCard';
-import {LeadersExtension} from './cards/leaders/LeadersExtension';
+import {LeaderCard, isLeaderCard} from './cards/leaders/LeaderCard';
+import {ILeaderCard} from './cards/leaders/ILeaderCard';
+import {LeadersExtension} from './LeadersExtension';
 import {VanAllen} from './cards/leaders/VanAllen';
 
 
@@ -546,6 +547,18 @@ export class Player {
   public cardIsInEffect(cardName: CardName): boolean {
     return this.playedCards.some(
       (playedCard) => playedCard.name === cardName);
+  }
+
+  public getPlayedCard(cardName: CardName): IProjectCard | undefined {
+    return this.playedCards.find((playedCard) => playedCard.name === cardName);
+  }
+
+  public getLeader(cardName: CardName): ILeaderCard | undefined {
+    const card = this.getPlayedCard(cardName);
+    if (card !== undefined) {
+      return isLeaderCard(card) ? card : undefined;
+    }
+    return undefined;
   }
 
   public hasProtectedHabitats(): boolean {
@@ -1393,7 +1406,7 @@ export class Player {
       });
       const cost = this.cardIsInEffect(CardName.VANALLEN) ? 0 : MILESTONE_COST;
       this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
-      VanAllen.onMilestoneClaimed(this.game);  // Make sure to give Van Allen 3MC
+      VanAllen.onMilestoneClaimed(this.game); // Make sure to give Van Allen 3MC
 
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
@@ -1759,7 +1772,7 @@ export class Player {
       // After they've been played we proceed to the players actual turn
       game.phase = Phase.LEADERS;
       const playableLeaderCards = this.getPlayableLeaderCards();
-      for (var i = playableLeaderCards.length - 1; i >= 0; i--) {
+      for (let i = playableLeaderCards.length - 1; i >= 0; i--) {
         // start from the end of the list and work backwards, we're removing items as we go.
         const card = this.leaderCardsInHand[i];
         this.playCard(card);

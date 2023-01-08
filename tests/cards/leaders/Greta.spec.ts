@@ -1,12 +1,12 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-import {Greta} from "../../../src/server/cards/leaders/Greta";
+import {Greta} from '../../../src/server/cards/leaders/Greta';
 
-import {Omnicourt} from "../../../src/server/cards/venusNext/Omnicourt";
-import {BigAsteroid} from "../../../src/server/cards/base/BigAsteroid";
+import {Omnicourt} from '../../../src/server/cards/venusNext/Omnicourt';
+import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 
 
 describe('Greta', function() {

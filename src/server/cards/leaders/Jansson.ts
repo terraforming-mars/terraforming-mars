@@ -1,10 +1,10 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 export class Jansson extends Card implements LeaderCard {
   constructor() {
@@ -32,14 +32,14 @@ export class Jansson extends Card implements LeaderCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-		const spaces = player.game.board.spaces.filter((space) => space.tile !== undefined && space.player === player);
-		spaces.forEach((space) => {
-			player.game.grantSpaceBonuses(player, space);
-		});
+    const spaces = player.game.board.spaces.filter((space) => space.tile !== undefined && space.player === player);
+    spaces.forEach((space) => {
+      player.game.grantSpaceBonuses(player, space);
+    });
 
-		this.isDisabled = true;
+    this.isDisabled = true;
 
-		return undefined;
+    return undefined;
   }
 }
 

@@ -1,14 +1,14 @@
-import {expect} from "chai";
-import {ICard} from "../../../src/server/cards/ICard";
-import {Game} from "../../../src/server/Game";
-import {SelectCard} from "../../../src/server/inputs/SelectCard";
-import {forceGenerationEnd, setCustomGameOptions} from "../../TestingUtils";
+import {expect} from 'chai';
+import {ICard} from '../../../src/server/cards/ICard';
+import {Game} from '../../../src/server/Game';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-import {LocalShading} from "../../../src/server/cards/venusNext/LocalShading";
-import {Dirigibles} from "../../../src/server/cards/venusNext/Dirigibles";
+import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
+import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 
-import {Quill} from "../../../src/server/cards/leaders/Quill";
+import {Quill} from '../../../src/server/cards/leaders/Quill';
 
 
 describe('Quill', function() {
@@ -28,7 +28,7 @@ describe('Quill', function() {
   it('Can act', function() {
     expect(card.canAct()).is.true;
   });
-  
+
   it('Takes action', function() {
     const dirigibles = new Dirigibles();
     const localShading = new LocalShading();

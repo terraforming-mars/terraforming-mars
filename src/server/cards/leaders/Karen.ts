@@ -1,10 +1,10 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
@@ -47,7 +47,7 @@ export class Karen extends Card implements LeaderCard {
         cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
         player.game.log('${0} was discarded as ${1} could not afford to pay for it', (b) => b.card(card).player(player));
       }
-    })
+    });
 
     if (cardsDrawn.length === 0) {
       player.game.log('${0} drew no playable prelude cards', (b) => b.player(player));

@@ -13,5 +13,5 @@ export interface IAward {
 export function getAdditionalScore(player: Player): number {
   let score = 0;
   if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
-  return score
+  return score;
 }

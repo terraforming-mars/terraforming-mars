@@ -7,7 +7,7 @@ import {ICard} from './ICard';
 import {IStandardProjectCard} from './IStandardProjectCard';
 import {IStandardActionCard} from './IStandardActionCard';
 import {IPreludeCard} from './prelude/IPreludeCard';
-import {ILeaderCard } from './leaders/ILeaderCard';
+import {ILeaderCard} from './leaders/ILeaderCard';
 
 export type CardManifest<T extends ICard> = Partial<Record<CardName, ICardFactory<T>>>;
 

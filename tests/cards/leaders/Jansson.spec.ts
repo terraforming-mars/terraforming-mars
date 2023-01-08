@@ -1,7 +1,7 @@
-import {expect} from "chai";
-import {Jansson} from "../../../src/server/cards/leaders/Jansson";
-import {Game} from "../../../src/server/Game";
-import {forceGenerationEnd, addGreenery} from "../../TestingUtils";
+import {expect} from 'chai';
+import {Jansson} from '../../../src/server/cards/leaders/Jansson';
+import {Game} from '../../../src/server/Game';
+import {forceGenerationEnd, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 

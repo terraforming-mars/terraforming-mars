@@ -1,13 +1,13 @@
-import {expect} from "chai";
-import {Game} from "../../../src/server/Game";
+import {expect} from 'chai';
+import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 
-import {Xavier} from "../../../src/server/cards/leaders/Xavier";
-import {Cartel} from "../../../src/server/cards/base/Cartel";
-import {GeneRepair} from "../../../src/server/cards/base/GeneRepair";
-import {LightningHarvest} from "../../../src/server/cards/base/LightningHarvest";
-import {SearchForLife} from "../../../src/server/cards/base/SearchForLife";
-import {SulphurExports} from "../../../src/server/cards/venusNext/SulphurExports";
+import {Xavier} from '../../../src/server/cards/leaders/Xavier';
+import {Cartel} from '../../../src/server/cards/base/Cartel';
+import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
+import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
+import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
+import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports';
 
 
 describe('Xavier', function() {
@@ -37,7 +37,7 @@ describe('Xavier', function() {
     expect(lightningHarvest.canPlay(player)).is.true;
     lightningHarvest.play(player);
     expect(geneRepair.canPlay(player)).is.true;
-    
+
     // Bonus wild tags are lost next generation
     game.deferredActions.runAll(() => {});
     expect(card.isDisabled).is.true;
@@ -56,7 +56,7 @@ describe('Xavier', function() {
     // Resolve payment - 2 wild tags count for production effect
     sulphurExports.play(player);
     expect(player.production.megacredits).to.eq(3);
-    
+
     // Bonus wild tags are lost next generation
     game.deferredActions.runAll(() => {});
     expect(card.isDisabled).is.true;

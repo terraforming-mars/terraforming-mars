@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {LeaderCard} from './LeaderCard';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,7 +10,7 @@ import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectPartyToSendDelegate} from '../../inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resources} from '../../../common/Resources';
-import { Size } from '../../../common/cards/render/Size';
+import {Size} from '../../../common/cards/render/Size';
 
 export class Petra extends Card implements LeaderCard {
   constructor() {
@@ -45,11 +45,11 @@ export class Petra extends Card implements LeaderCard {
 
     let numNeutralDelegates = 0;
     for (const party of turmoil.parties) {
-      numNeutralDelegates += party.delegates.count("NEUTRAL");
+      numNeutralDelegates += party.delegates.count('NEUTRAL');
     }
-    if (turmoil.chairman === "NEUTRAL") numNeutralDelegates += 1;
+    if (turmoil.chairman === 'NEUTRAL') numNeutralDelegates += 1;
 
-    let playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player.id);
+    const playerTotalDelegateCount = turmoil.getAvailableDelegateCount(player.id);
 
     return playerTotalDelegateCount >= numNeutralDelegates;
   }
@@ -61,12 +61,12 @@ export class Petra extends Card implements LeaderCard {
 
     // Replace all neutral delegates in all parties
     for (const party of turmoil.parties) {
-      const neutralDelegates = party.delegates.count('NEUTRAL')
+      const neutralDelegates = party.delegates.count('NEUTRAL');
       for (let i = 0; i < neutralDelegates; i++) {
         // Add the delegate _before_ removing the Neutral, otherwise we can get errors when it
         // attempts to find the new party leader if there are no remaining members.
         turmoil.sendDelegateToParty(player.id, party.name, player.game);
-        turmoil.removeDelegateFromParty('NEUTRAL', party.name, player.game)
+        turmoil.removeDelegateFromParty('NEUTRAL', party.name, player.game);
         // This would be nice to use, but is generating errors for similar reasons to above::
         // turmoil.replaceDelegateFromParty('NEUTRAL', player.id, party.name, player.game);
 
@@ -77,7 +77,7 @@ export class Petra extends Card implements LeaderCard {
     }
 
     // Replace chairman if it is neutral
-    if (turmoil.chairman === "NEUTRAL") {
+    if (turmoil.chairman === 'NEUTRAL') {
       turmoil.setNewChairman(player.id, player.game, /* setAgenda */ false);
       turmoil.delegateReserve.remove(player.id);
       count += 1;

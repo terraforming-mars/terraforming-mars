@@ -1,13 +1,13 @@
-import { CardName } from '../../../common/cards/CardName';
-import { CardType } from '../../../common/cards/CardType';
-import { Player } from '../../Player';
-import { PlayerInput } from '../../PlayerInput';
-import { Card } from '../Card';
-import { CardRenderer } from '../render/CardRenderer';
-import { LeaderCard } from './LeaderCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
 
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import { CardResource } from '../../../common/CardResource';
+import {CardResource} from '../../../common/CardResource';
 
 export class Will extends Card implements LeaderCard {
   constructor() {
@@ -34,7 +34,7 @@ export class Will extends Card implements LeaderCard {
   }
 
   public canAct(): boolean {
-   return this.isDisabled === false;
+    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {

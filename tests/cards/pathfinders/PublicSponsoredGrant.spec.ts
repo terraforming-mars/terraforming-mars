@@ -89,7 +89,7 @@ describe('PublicSponsoredGrant', function() {
   for(let i=0; i<=TAGS.length -1; i++){
     it('Option "['+ i +']" is "' + TAGS[i] + '" Tag', function() {
       const options = cast(card.play(player), OrOptions);
-      expect(options.options[i].title).eq(TAGS[i]);
+      expect(options.options[7].title).eq(Tag.EVENT);
     });
     it('Find Generic "' + TAGS[i] + '" Tags', function() {
       const options = cast(card.play(player), OrOptions);

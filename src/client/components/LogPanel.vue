@@ -73,6 +73,7 @@ const cardTypeToCss: Record<CardType, string | undefined> = {
   active: 'background-color-active',
   automated: 'background-color-automated',
   prelude: 'background-color-prelude',
+  leader: 'background-color-leader',
   standard_project: 'background-color-standard-project',
   standard_action: 'background-color-standard-project',
   proxy: undefined,

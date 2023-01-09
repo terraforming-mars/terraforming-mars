@@ -299,6 +299,7 @@ export default Vue.extend({
         colonyTiles: true,
         milestones: true,
         awards: true,
+        leader: true,
       },
       tags: {
         building: true,

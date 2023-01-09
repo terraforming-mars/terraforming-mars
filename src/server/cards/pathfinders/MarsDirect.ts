@@ -23,7 +23,7 @@ export class MarsDirect extends Card implements ICorporationCard {
         description: 'You start with 52 M€.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(56).br;
+          b.megacredits(52).br;
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.', (eb) => {
               eb.mars(1, {played}).startEffect.megacredits(1).slash().mars(1, {played});

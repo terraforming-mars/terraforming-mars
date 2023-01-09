@@ -7,7 +7,7 @@ export interface LeaderCard extends IProjectCard {
   // TODO: Rename to something that indicates that it's usable even when this value is true.
   /** When true, the card cannot be activated again. */
   isDisabled?: boolean;
-  
+
   /** If this card is active this generation. */
   opgActionIsActive?: boolean;
 

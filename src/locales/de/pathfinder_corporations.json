@@ -69,6 +69,6 @@
 
   "Odyssey": "Odyssey",
   "(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)": "(EFFEKT: Deine Ereigniskarten bleiben offen bis zum Spielende. Du kannst deren Symbole normal nutzen)",
-  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less, after which discard that card.)": "(AKTION: Du kannst eine bereits gespielte (offene) Ereigniskarte mit Kosten 16M€ oder weniger erneut spielen. Danach wirfst du diese Karte ab.)",
+  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.)": "(AKTION: Du kannst eine bereits gespielte (offene) Ereigniskarte mit Kosten 16M€ oder weniger erneut spielen (inklusive Ereigniskarten, die Spezialplättchen legen). Danach wirfst du diese Karte ab.)",
   "(You start with 33 M€.)": "(Du beginnst mit 33 M€.)"
 }

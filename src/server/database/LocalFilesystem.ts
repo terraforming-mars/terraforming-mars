@@ -11,9 +11,12 @@ const defaultDbFolder = path.resolve(process.cwd(), './db/files');
 export class LocalFilesystem implements IDatabase {
   protected readonly dbFolder: string;
   private readonly historyFolder: string;
+  private readonly completedFolder: string;
+
   constructor(dbFolder: string = defaultDbFolder) {
     this.dbFolder = dbFolder;
     this.historyFolder = path.resolve(dbFolder, 'history');
+    this.completedFolder = path.resolve(dbFolder, 'completed');
   }
 
   public initialize(): Promise<void> {
@@ -23,6 +26,9 @@ export class LocalFilesystem implements IDatabase {
     }
     if (!existsSync(this.historyFolder)) {
       mkdirSync(this.historyFolder);
+    }
+    if (!existsSync(this.completedFolder)) {
+      mkdirSync(this.completedFolder);
     }
     return Promise.resolve();
   }
@@ -34,6 +40,10 @@ export class LocalFilesystem implements IDatabase {
   private historyFilename(gameId: string, saveId: number) {
     const saveIdString = saveId.toString().padStart(5, '0');
     return path.resolve(this.historyFolder, `${gameId}-${saveIdString}.json`);
+  }
+
+  private completedFilename(gameId: string) {
+    return path.resolve(this.completedFolder, `${gameId}.json`);
   }
 
   saveGame(game: Game): Promise<void> {
@@ -130,8 +140,10 @@ export class LocalFilesystem implements IDatabase {
     throw new Error('Does not work');
   }
 
-  saveGameResults(_gameId: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
-    // Not implemented
+  saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
+    const obj = {gameId, players, generations, gameOptions, scores};
+    const text = JSON.stringify(obj, null, 2);
+    writeFileSync(this.completedFilename(gameId), text);
   }
 
   cleanGame(_gameId: GameId): Promise<void> {

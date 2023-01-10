@@ -414,6 +414,14 @@ export class Player {
     }
   }
 
+  public stealResource(resource: Resources, qty: number, from: Player) {
+    const qtyToSteal = Math.min(this.getResource(resource), qty);
+    if (qtyToSteal > 0) {
+      this.deductResource(resource, qtyToSteal, {log: true, from: from, stealing: true});
+      from.addResource(resource, qtyToSteal);
+    }
+  }
+
   // Returns true when the player has the supplied units in its inventory.
   public hasUnits(units: Units): boolean {
     return this.megaCredits - units.megacredits >= 0 &&

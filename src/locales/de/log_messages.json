@@ -293,7 +293,7 @@
 
     "${0} gained ${1} TR": "${0} erhielt ${1} TW",
     "${0} lost ${1} TR": "${0} verlor ${1} TW",
-    "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} entfernte ${2} Ressource(n) von ${2}s ${3}",
+    "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}'s ${3}",
 
     "earth": "Erd",
     "venus": "Venus",

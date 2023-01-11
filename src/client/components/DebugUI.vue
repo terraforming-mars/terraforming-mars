@@ -188,6 +188,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ares: 'a',
   moon: 'm',
   pathfinders: 'P',
+  leader: 'l',
 };
 
 // TODO(kberg): make this  use suffixModules.
@@ -469,6 +470,7 @@ export default Vue.extend({
       case 'community': return 'Community';
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
+      case 'leader': return 'CEOs';
       }
     },
     filterByTags(card: ClientCard): boolean {

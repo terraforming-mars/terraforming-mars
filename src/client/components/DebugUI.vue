@@ -286,6 +286,7 @@ export default Vue.extend({
         moon: true,
         promo: true,
         pathfinders: true,
+        leader: true,
       },
       types: {
         event: true,

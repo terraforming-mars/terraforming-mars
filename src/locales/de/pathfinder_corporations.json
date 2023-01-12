@@ -33,7 +33,7 @@
 
   "Mars Dierct": "Mars Dierkt",
   "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, bezahle 1 M€ weniger je eigenes Marssymbol. ",
-  "(You start with 56 M€.)": "(Du beginnst mit 56 M€.)",
+  "(You start with 52 M€.)": "(Du beginnst mit 52 M€.)",
 
   "Martian Insurance Group": "Mars Versicherungsgruppe",
   "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "EFFEKT: Nachdem du eine Ereigniskarte ausgespielt hast, erhöhe deine M€-Produktion um 1.)",
@@ -69,6 +69,6 @@
 
   "Odyssey": "Odyssey",
   "(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)": "(EFFEKT: Deine Ereigniskarten bleiben offen bis zum Spielende. Du kannst deren Symbole normal nutzen)",
-  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less, after which discard that card.)": "(AKTION: Du kannst eine bereits gespielte (offene) Ereigniskarte mit Kosten 16M€ oder weniger erneut spielen. Danach wirfst du diese Karte ab.)",
+  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.)": "(AKTION: Du kannst eine bereits gespielte (offene) Ereigniskarte mit Kosten 16M€ oder weniger erneut spielen (inklusive Ereigniskarten, die Spezialplättchen legen). Danach wirfst du diese Karte ab.)",
   "(You start with 33 M€.)": "(Du beginnst mit 33 M€.)"
 }

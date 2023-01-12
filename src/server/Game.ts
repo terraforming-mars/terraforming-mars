@@ -746,6 +746,15 @@ export class Game implements Logger {
     this.gotoEndGeneration();
   }
 
+  private allPlayersHavePassed(): boolean {
+    for (const player of this.players) {
+      if (!this.hasPassedThisActionPhase(player)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public playerHasPassed(player: Player): void {
     this.passedPlayers.add(player.id);
   }
@@ -921,20 +930,21 @@ export class Game implements Logger {
       return;
     }
 
-    const activePlayer = this.getPlayerById(this.activePlayer);
-    let nextPlayer = activePlayer;
-    do {
-      nextPlayer = this.getPlayerAfter(nextPlayer);
-      if (!this.hasPassedThisActionPhase(nextPlayer)) {
-        this.startActionsForPlayer(nextPlayer);
-        return;
-      }
-    } while (nextPlayer !== activePlayer);
+    if (this.allPlayersHavePassed()) {
+      this.gotoProductionPhase();
+      return;
+    }
 
-    // All players have passed.
-    this.gotoProductionPhase();
+    const nextPlayer = this.getPlayerAfter(this.getPlayerById(this.activePlayer));
+
+    if (!this.hasPassedThisActionPhase(nextPlayer)) {
+      this.startActionsForPlayer(nextPlayer);
+    } else {
+      // Recursively find the next player
+      this.activePlayer = nextPlayer.id;
+      this.playerIsFinishedTakingActions();
+    }
   }
-
 
   private gotoEndGame(): void {
     // Log id or cloned game id
@@ -948,9 +958,9 @@ export class Game implements Logger {
 
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
-      const corpname = player.corporations.length > 0 ? player.corporations[0].name : '';
+      const corporation = player.corporations.map((c) => c.name).join('|');
       const vpb = player.getVictoryPoints();
-      scores.push({corporation: corpname, playerScore: vpb.total});
+      scores.push({corporation: corporation, playerScore: vpb.total});
     });
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);

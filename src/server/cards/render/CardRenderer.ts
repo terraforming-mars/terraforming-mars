@@ -387,6 +387,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
   }
 
+  public opgArrow(): Builder<T> {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.ARROW_OPG));
+  }
+
   public mars(amount: number, options?: ItemOptions): Builder<T> {
     this._appendToRow(new CardRenderItem(CardRenderItemType.MARS, amount, options));
     return this;

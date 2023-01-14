@@ -1,18 +1,17 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
 
-export class SelectDelegate implements PlayerInput {
-  public readonly inputType = PlayerInputType.SELECT_DELEGATE;
-  public buttonLabel: string = 'Save';
+export class SelectDelegate extends BasePlayerInput {
   // TODO(kberg): is there any reason to not just accept IDs?
   constructor(
     public players: Array<Player | NeutralPlayer>,
-    public title: string | Message,
+    title: string | Message,
     public cb: (player: Player | NeutralPlayer) => PlayerInput | undefined) {
+    super(PlayerInputType.SELECT_DELEGATE, title);
   }
 
   public process(input: InputResponse) {

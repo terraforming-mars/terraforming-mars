@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {ColonizerTrainingCamp} from '../../src/server/cards/base/ColonizerTrainingCamp';
 import {InventorsGuild} from '../../src/server/cards/base/InventorsGuild';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {SolarnetShutdown} from '../../src/server/turmoil/globalEvents/SolarnetShutdown';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -29,7 +28,7 @@ describe('SolarnetShutdown', function() {
     turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(7);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(10);
+    expect(player.megaCredits).to.eq(7);
+    expect(player2.megaCredits).to.eq(10);
   });
 });

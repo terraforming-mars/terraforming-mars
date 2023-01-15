@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Manutech', function() {
@@ -28,6 +27,6 @@ describe('Manutech', function() {
     player.megaCredits = 11;
     new PowerPlantStandardProject().action(player);
     game.deferredActions.pop()!.execute();
-    expect(player.getResource(Resources.ENERGY)).to.eq(1);
+    expect(player.energy).to.eq(1);
   });
 });

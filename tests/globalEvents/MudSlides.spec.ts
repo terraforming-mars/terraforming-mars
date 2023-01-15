@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
@@ -33,7 +32,7 @@ describe('MudSlides', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.megaCredits).to.eq(6);
   });
 
   it('resolve play with overplaced tiles', function() {
@@ -70,6 +69,6 @@ describe('MudSlides', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.megaCredits).to.eq(6);
   });
 });

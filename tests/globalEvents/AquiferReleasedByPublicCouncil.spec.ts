@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {AquiferReleasedByPublicCouncil} from '../../src/server/turmoil/globalEvents/AquiferReleasedByPublicCouncil';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -23,9 +22,9 @@ describe('AquiferReleasedByPublicCouncil', function() {
     turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.STEEL)).to.eq(1);
-    expect(player2.getResource(Resources.STEEL)).to.eq(3);
-    expect(player.getResource(Resources.PLANTS)).to.eq(1);
-    expect(player2.getResource(Resources.PLANTS)).to.eq(3);
+    expect(player.steel).to.eq(1);
+    expect(player2.steel).to.eq(3);
+    expect(player.plants).to.eq(1);
+    expect(player2.plants).to.eq(3);
   });
 });

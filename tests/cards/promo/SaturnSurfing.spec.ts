@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {SaturnSurfing} from '../../../src/server/cards/promo/SaturnSurfing';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
@@ -49,7 +48,7 @@ describe('SaturnSurfing', function() {
     expect(card.canAct()).is.true;
     card.action(player);
     expect(card.resourceCount).to.eq(2);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.megaCredits).to.eq(3);
   });
 
   it('Should give victory points', function() {

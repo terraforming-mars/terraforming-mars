@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Player} from '../../src/server/Player';
-import {Resources} from '../../src/common/Resources';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/server/boards/ISpace';
@@ -38,10 +37,10 @@ export class AresTestHelper {
     firstSpace.adjacency = {bonus: [bonus]};
     player.game.addTile(player, firstSpace, {tileType: TileType.RESTRICTED_AREA});
 
-    expect(player.getResource(Resources.MEGACREDITS)).is.eq(0);
+    expect(player.megaCredits).is.eq(0);
     const adjacentSpace = player.game.board.getAdjacentSpaces(firstSpace)[0];
     player.game.addTile(player, adjacentSpace, {tileType: TileType.GREENERY});
-    expect(player.getResource(Resources.MEGACREDITS)).is.eq(expectedMc);
+    expect(player.megaCredits).is.eq(expectedMc);
   }
 
   public static getHazards(player: Player): Array<ISpace> {

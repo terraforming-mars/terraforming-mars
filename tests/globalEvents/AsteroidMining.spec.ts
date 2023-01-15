@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {MethaneFromTitan} from '../../src/server/cards/base/MethaneFromTitan';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {AsteroidMining} from '../../src/server/turmoil/globalEvents/AsteroidMining';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -27,7 +26,7 @@ describe('AsteroidMining', function() {
     turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.TITANIUM)).to.eq(1);
-    expect(player2.getResource(Resources.TITANIUM)).to.eq(5);
+    expect(player.titanium).to.eq(1);
+    expect(player2.titanium).to.eq(5);
   });
 });

@@ -34,7 +34,7 @@ describe('OrbitalCleanup', function() {
     player.playedCards.push(new ResearchCoordination());
 
     card.action(player);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.megaCredits).to.eq(4);
   });
 
   it('Should give victory points', function() {

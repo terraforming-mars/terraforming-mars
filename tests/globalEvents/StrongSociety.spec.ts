@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {StrongSociety} from '../../src/server/turmoil/globalEvents/StrongSociety';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -23,7 +22,7 @@ describe('StrongSociety', function() {
     turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(2);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.megaCredits).to.eq(2);
+    expect(player2.megaCredits).to.eq(6);
   });
 });

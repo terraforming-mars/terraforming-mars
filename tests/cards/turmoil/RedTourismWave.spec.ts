@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {RedTourismWave} from '../../../src/server/cards/turmoil/RedTourismWave';
-import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -22,6 +21,6 @@ describe('RedTourismWave', function() {
     const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
     game.addCityTile(player, lands[0]);
     card.play(player);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.megaCredits).to.eq(3);
   });
 });

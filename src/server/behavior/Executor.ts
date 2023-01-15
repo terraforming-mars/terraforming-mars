@@ -79,6 +79,27 @@ export class Executor implements BehaviorExecutor {
         }
       }
     }
+
+    if (behavior.moon !== undefined) {
+      const moon = behavior.moon;
+      const moonData = MoonExpansion.moonData(player.game);
+      if (moon.habitatTile !== undefined && moon.habitatTile.space === undefined) {
+        if (moonData.moon.getAvailableSpacesOnLand(player).length === 0) {
+          return false;
+        }
+      }
+      if (moon.mineTile !== undefined && moon.mineTile.space === undefined) {
+        if (moonData.moon.getAvailableSpacesForMine(player).length === 0) {
+          return false;
+        }
+      }
+      if (moon.roadTile !== undefined && moon.roadTile.space === undefined) {
+        if (moonData.moon.getAvailableSpacesOnLand(player).length === 0) {
+          return false;
+        }
+      }
+    }
+
     return true;
   }
 
@@ -224,7 +245,6 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
-    // TODO(kberg): Add canPlay for these behaviors.
     if (behavior.moon !== undefined) {
       const moon = behavior.moon;
       if (moon.habitatTile !== undefined) {

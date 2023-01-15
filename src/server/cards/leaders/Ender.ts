@@ -38,7 +38,7 @@ export class Ender extends Card implements LeaderCard {
 
   public action(player: Player): PlayerInput | undefined {
     const max = Math.min(player.cardsInHand.length, player.game.generation * 2);
-
+    // TODO(d-little): Replace with SelectCard.
     return new SelectAmount(
       'Select number of cards to discard',
       'Discard cards',

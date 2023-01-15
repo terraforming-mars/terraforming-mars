@@ -20,7 +20,7 @@ export class Karen extends Card implements LeaderCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('X').prelude().asterix();
         }),
-        description: 'Once per game, draw Prelude cards equal to the current generation number and choose one to play.',
+        description: 'Once per game, draw Prelude cards equal to the current generation number and choose one to play, and discard the rest.',
       },
     });
   }
@@ -38,19 +38,19 @@ export class Karen extends Card implements LeaderCard {
   public action(player: Player): PlayerInput | undefined {
     const cardsDrawn: Array<IProjectCard> = [];
     const game = player.game;
-    for (let i = 0; i < player.game.generation; i++) {
+    for (let i = 0; i < game.generation; i++) {
       cardsDrawn.push(game.preludeDeck.draw(game));
     }
 
     cardsDrawn.forEach((card) => {
-      if (card.canPlay !== undefined && card.canPlay(player) === false ) {
+      if (card.canPlay?.(player) === false) {
         cardsDrawn.splice(cardsDrawn.indexOf(card), 1);
-        player.game.log('${0} was discarded as ${1} could not afford to pay for it', (b) => b.card(card).player(player));
+        game.log('${0} was discarded as ${1} could not play it,', (b) => b.card(card).player(player));
       }
     });
 
     if (cardsDrawn.length === 0) {
-      player.game.log('${0} drew no playable prelude cards', (b) => b.player(player));
+      game.log('${0} drew no playable prelude cards', (b) => b.player(player));
       return undefined;
     }
 

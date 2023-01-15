@@ -3,7 +3,6 @@ import {HAL9000} from '../../../src/server/cards/leaders/HAL9000';
 import {Game} from '../../../src/server/Game';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('HAL 9000', function() {
   let card: HAL9000;
@@ -15,37 +14,20 @@ describe('HAL 9000', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player);
-    player.production.add(Resources.PLANTS, 0);
-    player.production.add(Resources.MEGACREDITS, -1);
-    player.production.add(Resources.STEEL, 1);
-    player.production.add(Resources.TITANIUM, 1);
-    player.production.add(Resources.ENERGY, 1);
-    player.production.add(Resources.HEAT, 1);
+    player.production.adjust({plants: 0, megacredits: -1, steel: 1, titanium: 1, energy: 1, heat: 1});
   });
 
   it('Takes OPG action', function() {
-    expect(player.production.plants).eq(0);
-    expect(player.production.megacredits).eq(-1);
-    expect(player.production.steel).eq(1);
-    expect(player.production.titanium).eq(1);
-    expect(player.production.energy).eq(1);
-    expect(player.production.heat).eq(1);
-
+    // Sanity check our production is as expected before taking the action
+    expect(player.production.asUnits()).deep.eq({plants: 0, megacredits: -1, steel: 1, titanium: 1, energy: 1, heat: 1});
     card.action(player);
-
-    expect(player.production.plants).eq(0);
+    expect(player.production.asUnits()).deep.eq({plants: 1, megacredits: -2, steel: 0, titanium: 0, energy: 0, heat: 0});
     expect(player.plants).eq(0);
-
     expect(player.megaCredits).eq(4);
-    expect(player.production.megacredits).eq(-2);
     expect(player.steel).eq(4);
-    expect(player.production.steel).eq(0);
     expect(player.titanium).eq(4);
-    expect(player.production.titanium).eq(0);
     expect(player.energy).eq(4);
-    expect(player.production.energy).eq(0);
     expect(player.heat).eq(4);
-    expect(player.production.heat).eq(0);
   });
 
   it('Can only act once per game', function() {

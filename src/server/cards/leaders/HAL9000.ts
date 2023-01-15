@@ -7,7 +7,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {LeaderCard} from './LeaderCard';
 
 import {digit} from '../Options';
-import {Resources} from '../../../common/Resources';
+// import {Resources} from '../../../common/Resources';
+import {Units} from '../../../common/Units';
 
 export class HAL9000 extends Card implements LeaderCard {
   constructor() {
@@ -38,22 +39,15 @@ export class HAL9000 extends Card implements LeaderCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    const prd = player.production;
-    const resources = [
-      {productionName: prd.megacredits, resource: Resources.MEGACREDITS},
-      {productionName: prd.steel, resource: Resources.STEEL},
-      {productionName: prd.titanium, resource: Resources.TITANIUM},
-      {productionName: prd.plants, resource: Resources.PLANTS},
-      {productionName: prd.energy, resource: Resources.ENERGY},
-      {productionName: prd.heat, resource: Resources.HEAT},
-    ];
-
-    for (const resource of resources) {
-      let minValue = 0;
-      if (resource.productionName === prd.megacredits) minValue = -5;
-      if (resource.productionName > minValue) {
-        player.production.add(resource.resource, -1, {log: true});
-        player.addResource(resource.resource, 4, {log: true});
+    // For every Unit type, see if we can adjust production of that resource by -1
+    // If we can, make said adjustment, and give the player 4 of that production resource
+    for (const type of Units.keys) {
+      const adjustment = Units.of({});
+      adjustment[type] = -1;
+      if (player.production.canAdjust(adjustment)) {
+        player.production.adjust(adjustment, {log: true});
+        adjustment[type] = 4;
+        player.addUnits(adjustment, {log: true});
       }
     }
 

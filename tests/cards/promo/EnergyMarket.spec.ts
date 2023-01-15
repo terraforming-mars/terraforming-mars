@@ -66,6 +66,6 @@ describe('EnergyMarket', function() {
     expect(result).is.undefined;
 
     expect(player.production.energy).to.eq(0);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(8);
+    expect(player.megaCredits).to.eq(8);
   });
 });

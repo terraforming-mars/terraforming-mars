@@ -4,7 +4,6 @@ import {DustSeals} from '../../src/server/cards/base/DustSeals';
 import {PowerPlant} from '../../src/server/cards/base/PowerPlant';
 import {Game} from '../../src/server/Game';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
-import {Resources} from '../../src/common/Resources';
 import {ParadigmBreakdown} from '../../src/server/turmoil/globalEvents/ParadigmBreakdown';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -49,8 +48,8 @@ describe('ParadigmBreakdown', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0]).to.eq(dustSeals);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(12);
+    expect(player.megaCredits).to.eq(12);
     expect(player2.cardsInHand).has.lengthOf(0);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(16);
+    expect(player2.megaCredits).to.eq(16);
   });
 });

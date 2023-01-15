@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {EcoSabotage} from '../../src/server/turmoil/globalEvents/EcoSabotage';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -21,7 +20,7 @@ describe('EcoSabotage', function() {
     player.plants = 5;
     player2.plants = 5;
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.PLANTS)).to.eq(3);
-    expect(player2.getResource(Resources.PLANTS)).to.eq(5);
+    expect(player.plants).to.eq(3);
+    expect(player2.plants).to.eq(5);
   });
 });

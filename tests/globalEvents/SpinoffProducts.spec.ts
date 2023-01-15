@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Research} from '../../src/server/cards/base/Research';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {SpinoffProducts} from '../../src/server/turmoil/globalEvents/SpinoffProducts';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -38,8 +37,8 @@ describe('SpinoffProducts', function() {
     turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(4);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(14);
+    expect(player.megaCredits).to.eq(4);
+    expect(player2.megaCredits).to.eq(14);
   });
 
   it('resolve play, with Habitat Marte', function() {
@@ -55,6 +54,6 @@ describe('SpinoffProducts', function() {
     card.resolve(game, turmoil);
 
     // This includes Habitat Marte itself, which has a Mars tag.
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(10);
+    expect(player.megaCredits).to.eq(10);
   });
 });

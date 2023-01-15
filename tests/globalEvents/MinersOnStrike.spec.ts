@@ -25,7 +25,7 @@ describe('MinersOnStrike', function() {
     turmoil.dominantParty.partyLeader = player2.id;
     turmoil.dominantParty.delegates.add(player2.id);
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.TITANIUM)).to.eq(4);
-    expect(player2.getResource(Resources.TITANIUM)).to.eq(5);
+    expect(player.titanium).to.eq(4);
+    expect(player2.titanium).to.eq(5);
   });
 });

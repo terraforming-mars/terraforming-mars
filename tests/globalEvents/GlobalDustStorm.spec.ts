@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {StripMine} from '../../src/server/cards/base/StripMine';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {GlobalDustStorm} from '../../src/server/turmoil/globalEvents/GlobalDustStorm';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -26,8 +25,8 @@ describe('GlobalDustStorm', function() {
     player2.megaCredits = 10;
     player.heat = 7;
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(8);
-    expect(player.getResource(Resources.HEAT)).to.eq(0);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(10);
+    expect(player.megaCredits).to.eq(8);
+    expect(player.heat).to.eq(0);
+    expect(player2.megaCredits).to.eq(10);
   });
 });

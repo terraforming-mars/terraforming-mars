@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {PROffice} from '../../../src/server/cards/turmoil/PROffice';
-import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGameOptions} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
@@ -23,7 +22,7 @@ describe('PROffice', function() {
 
     player.playedCards.push(card2, card3);
     card.play(player);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.megaCredits).to.eq(3);
     expect(player.getTerraformRating()).to.eq(15);
   });
 });

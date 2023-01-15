@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {GenerousFunding} from '../../src/server/turmoil/globalEvents/GenerousFunding';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -27,8 +26,8 @@ describe('GenerousFunding', function() {
     player2.setTerraformRating(50);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(14);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(26);
+    expect(player.megaCredits).to.eq(14);
+    expect(player2.megaCredits).to.eq(26);
   });
 
   it('no negative mc give out if TR lower than 15', function() {
@@ -51,7 +50,7 @@ describe('GenerousFunding', function() {
     player2.setTerraformRating(50);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(10);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(26);
+    expect(player.megaCredits).to.eq(10);
+    expect(player2.megaCredits).to.eq(26);
   });
 });

@@ -36,7 +36,7 @@ describe('SmallAsteroid', function() {
     player.addResource(Resources.PLANTS, 3);
     Game.newInstance('gameid', [player], player);
     card.play(player);
-    expect(player.getResource(Resources.PLANTS)).to.eq(3);
+    expect(player.plants).to.eq(3);
   });
 
   it('Works correctly with multiple targets', function() {

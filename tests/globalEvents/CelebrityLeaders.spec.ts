@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Virus} from '../../src/server/cards/base/Virus';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {CelebrityLeaders} from '../../src/server/turmoil/globalEvents/CelebrityLeaders';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -30,7 +29,7 @@ describe('CelebrityLeaders', function() {
     player2.megaCredits = 10;
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(12);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(20);
+    expect(player.megaCredits).to.eq(12);
+    expect(player2.megaCredits).to.eq(20);
   });
 });

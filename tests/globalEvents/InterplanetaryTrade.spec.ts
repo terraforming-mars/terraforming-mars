@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {MethaneFromTitan} from '../../src/server/cards/base/MethaneFromTitan';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {InterplanetaryTrade} from '../../src/server/turmoil/globalEvents/InterplanetaryTrade';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -27,7 +26,7 @@ describe('InterplanetaryTrade', function() {
     turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(2);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(10);
+    expect(player.megaCredits).to.eq(2);
+    expect(player2.megaCredits).to.eq(10);
   });
 });

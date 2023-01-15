@@ -3,7 +3,6 @@ import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTra
 import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
 import {DiasporaMovement} from '../../../src/server/cards/turmoil/DiasporaMovement';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -41,6 +40,6 @@ describe('DiasporaMovement', function() {
     player.playedCards.push(new ColonizerTrainingCamp());
     player2.playedCards.push(new MethaneFromTitan());
     card.play(player);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.megaCredits).to.eq(3);
   });
 });

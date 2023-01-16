@@ -6,10 +6,7 @@ import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {CardName} from '../../src/common/cards/CardName';
 import {ConstRandom, UnseededRandom} from '../../src/server/Random';
-import {newTestGame} from '../TestGame';
-import {Game} from '../../src/server/Game';
 import {ICard} from '../../src/server/cards/ICard';
-import {Dealer} from '../../src/server/Dealer';
 
 function name(card: ICard): CardName {
   return card.name;
@@ -75,98 +72,5 @@ describe('PreludeDeck', function() {
 
     expect(deck.drawPile).to.deep.eq(deserialized.drawPile);
     expect(deck.discardPile).to.deep.eq(deserialized.discardPile);
-  });
-
-  it('deserializing game with a Dealer', () => {
-    const game = newTestGame(1);
-    const serialized = game.serialize();
-    serialized.projectDeck = undefined;
-    serialized.preludeDeck = undefined;
-    serialized.corporationDeck = undefined;
-    serialized.dealer = {
-      corporationCards: [
-        CardName.CREDICOR,
-        CardName.ECOLINE,
-        CardName.HELION,
-        CardName.INTERPLANETARY_CINEMATICS,
-        CardName.INVENTRIX,
-        CardName.VITOR,
-      ],
-      deck: [
-        CardName.GREAT_DAM,
-        CardName.SUBTERRANEAN_RESERVOIR,
-        CardName.LAKE_MARINERIS,
-        CardName.NOCTIS_CITY,
-        CardName.COMET,
-        CardName.GREENHOUSES,
-        CardName.OPEN_CITY,
-        CardName.MOSS,
-        CardName.BIRDS,
-      ],
-      discarded: [
-        CardName.EOS_CHASMA_NATIONAL_PARK,
-        CardName.SMALL_ANIMALS,
-        CardName.FISH,
-        CardName.BUSINESS_NETWORK,
-        CardName.IO_MINING_INDUSTRIES,
-      ],
-      preludeDeck: [
-        CardName.SMELTING_PLANT,
-        CardName.POLAR_INDUSTRIES,
-        CardName.BIOLAB,
-        CardName.ECOLOGY_EXPERTS,
-        CardName.LOAN,
-        CardName.MOHOLE_EXCAVATION,
-        CardName.SELF_SUFFICIENT_SETTLEMENT,
-      ],
-    };
-    const game2 = Game.deserialize(serialized);
-    expect(game2.hasOwnProperty('dealer')).is.false;
-
-    expect(game2.projectDeck.drawPile.map(name)).deep.eq([
-      CardName.GREAT_DAM,
-      CardName.SUBTERRANEAN_RESERVOIR,
-      CardName.LAKE_MARINERIS,
-      CardName.NOCTIS_CITY,
-      CardName.COMET,
-      CardName.GREENHOUSES,
-      CardName.OPEN_CITY,
-      CardName.MOSS,
-      CardName.BIRDS,
-    ]);
-    expect(game2.projectDeck.discardPile.map(name)).deep.eq([
-      CardName.EOS_CHASMA_NATIONAL_PARK,
-      CardName.SMALL_ANIMALS,
-      CardName.FISH,
-      CardName.BUSINESS_NETWORK,
-      CardName.IO_MINING_INDUSTRIES,
-    ]);
-
-    expect(game2.corporationDeck.drawPile.map(name)).deep.eq([
-      CardName.CREDICOR,
-      CardName.ECOLINE,
-      CardName.HELION,
-      CardName.INTERPLANETARY_CINEMATICS,
-      CardName.INVENTRIX,
-      CardName.VITOR]);
-    expect(game2.corporationDeck.discardPile).is.empty;
-
-    expect(game2.preludeDeck.drawPile.map(name)).deep.eq([
-      CardName.SMELTING_PLANT,
-      CardName.POLAR_INDUSTRIES,
-      CardName.BIOLAB,
-      CardName.ECOLOGY_EXPERTS,
-      CardName.LOAN,
-      CardName.MOHOLE_EXCAVATION,
-      CardName.SELF_SUFFICIENT_SETTLEMENT,
-    ]);
-    expect(game2.preludeDeck.discardPile).is.empty;
-
-    const dealer = Dealer.deserialize(serialized.dealer);
-    expect(dealer.dealCard(game).name).eq(CardName.BIRDS);
-    expect(game2.projectDeck.draw(game).name).eq(CardName.BIRDS);
-
-    expect(dealer.dealPreludeCard().name).eq(CardName.SELF_SUFFICIENT_SETTLEMENT);
-    expect(game2.preludeDeck.draw(game).name).eq(CardName.SELF_SUFFICIENT_SETTLEMENT);
   });
 });

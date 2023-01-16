@@ -11,7 +11,6 @@ import {IColony} from './colonies/IColony';
 import {Color} from '../common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Database} from './database/Database';
-import {Dealer} from './Dealer';
 import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
@@ -1533,24 +1532,9 @@ export class Game implements Logger {
 
     const rng = new SeededRandom(d.seed, d.currentSeed);
 
-    let projectDeck: ProjectDeck;
-    let corporationDeck: CorporationDeck;
-    let preludeDeck: PreludeDeck;
-    // Rebuild dealer object to be sure that cards are in the same order
-    if (d.dealer !== undefined) {
-      const dealer = Dealer.deserialize(d.dealer);
-      projectDeck = new ProjectDeck(dealer.deck, dealer.discarded, rng);
-      corporationDeck = new CorporationDeck(dealer.corporationCards, [], rng);
-      preludeDeck = new PreludeDeck(dealer.preludeDeck, [], rng);
-    } else {
-      // TODO(kberg): Delete this conditional when `d.dealer` is removed.
-      if (d.projectDeck === undefined || d.corporationDeck === undefined || d.preludeDeck === undefined) {
-        throw new Error('Wow');
-      }
-      projectDeck = ProjectDeck.deserialize(d.projectDeck, rng);
-      corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
-      preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
-    }
+    const projectDeck = ProjectDeck.deserialize(d.projectDeck, rng);
+    const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
+    const preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
 
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
     game.spectatorId = d.spectatorId;

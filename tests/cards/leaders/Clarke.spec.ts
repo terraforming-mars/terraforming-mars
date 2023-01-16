@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
 import {Clarke} from '../../../src/server/cards/leaders/Clarke';
-
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Clarke', function() {
   let card: Clarke;
@@ -12,8 +12,8 @@ describe('Clarke', function() {
 
   beforeEach(() => {
     card = new Clarke();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can only act once per game', function() {

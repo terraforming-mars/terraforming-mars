@@ -1,19 +1,17 @@
 import {expect} from 'chai';
 import {HAL9000} from '../../../src/server/cards/leaders/HAL9000';
-import {Game} from '../../../src/server/Game';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('HAL 9000', function() {
   let card: HAL9000;
   let player: TestPlayer;
-  let player2: TestPlayer;
 
   beforeEach(() => {
     card = new HAL9000();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    const game = newTestGame(2);
+    player = getTestPlayer(game, 0);
     player.production.adjust({plants: 0, megacredits: -1, steel: 1, titanium: 1, energy: 1, heat: 1});
   });
 

@@ -5,23 +5,21 @@ import {Karen} from '../../../src/server/cards/leaders/Karen';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
+import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Karen', function() {
   let card: Karen;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Karen();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({preludeExtension: true});
-    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
+    game = newTestGame(2, {preludeExtension: true});
+    player = getTestPlayer(game, 0);
 
+    // This ensures that preludes which cost MC are affordable.
     player.megaCredits = 20;
   });
 
@@ -30,7 +28,7 @@ describe('Karen', function() {
   });
 
   it('Takes action', function() {
-    const selectCard = card.action(player) as SelectCard<IProjectCard>;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     expect(selectCard.cards).has.length(1);
 
     selectCard.cb([selectCard.cards[0]]);
@@ -39,11 +37,11 @@ describe('Karen', function() {
 
   it('Takes action in Generation 4', function() {
     for (let i = 0; i < 3; i++) {
-      game.deferredActions.runAll(() => {});
+      runAllActions(game);
       forceGenerationEnd(game);
     }
 
-    const selectCard = card.action(player) as SelectCard<IProjectCard>;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     expect(selectCard.cards).has.length(4);
 
     selectCard.cb([selectCard.cards[0]]);
@@ -60,7 +58,7 @@ describe('Karen', function() {
   });
 
   it('Can only act once per game', function() {
-    const selectCard = card.action(player) as SelectCard<IProjectCard>;
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
     selectCard.cb([selectCard.cards[0]]);
     forceGenerationEnd(game);
 

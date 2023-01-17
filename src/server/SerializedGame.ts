@@ -5,7 +5,6 @@ import {SerializedFundedAward} from './awards/FundedAward';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
-import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {GameOptions} from './GameOptions';
@@ -26,13 +25,8 @@ export type SerializedGame = {
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
     corporationsDraftDirection: 'before' | 'after';
+    corporationDeck: SerializedDeck,
     corporationsToDraft: Array<CardName>;
-    // TODO(kberg): Remove dealer, and make the 3 decks non-optional by 2022-12-01.
-    // Also, move (project,corporation,prelude)Deck to their lexicographical position once `dealer is gone.
-    dealer?: SerializedDealer;
-    projectDeck?: SerializedDeck,
-    corporationDeck?: SerializedDeck,
-    preludeDeck?: SerializedDeck,
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
     draftedPlayers: Array<PlayerId>;
@@ -53,6 +47,8 @@ export type SerializedGame = {
     passedPlayers: Array<PlayerId>;
     phase: Phase;
     players: Array<SerializedPlayer>;
+    preludeDeck: SerializedDeck,
+    projectDeck: SerializedDeck,
     researchedPlayers: Array<PlayerId>;
     seed: number;
     someoneHasRemovedOtherPlayersPlants: boolean;

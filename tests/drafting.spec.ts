@@ -1,7 +1,6 @@
 import {CardFinder} from '../src/server/CardFinder';
 import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
-// import {Dealer} from '../src/server/Dealer';
 import {expect} from 'chai';
 import {Game} from '../src/server/Game';
 import {getTestPlayer, newTestGame} from './TestGame';

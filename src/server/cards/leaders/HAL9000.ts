@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {LeaderCard} from './LeaderCard';
 
 import {digit} from '../Options';
-// import {Resources} from '../../../common/Resources';
 import {Units} from '../../../common/Units';
 
 export class HAL9000 extends Card implements LeaderCard {

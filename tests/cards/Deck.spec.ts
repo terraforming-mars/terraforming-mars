@@ -1,7 +1,5 @@
 import {expect} from 'chai';
-// import {Dealer} from '../../src/server/Dealer';
 import {PreludeDeck} from '../../src/server/cards/Deck';
-// import {setCustomGameOptions} from '../TestingUtils';
 import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {CardName} from '../../src/common/cards/CardName';

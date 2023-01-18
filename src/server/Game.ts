@@ -1600,8 +1600,7 @@ export class Game implements Logger {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
 
-    // TODO(kberg): remove `?? []` by 2022-09-01
-    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
+    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft);
     game.corporationsDraftDirection = d.corporationsDraftDirection ?? false;
 
     game.lastSaveId = d.lastSaveId;

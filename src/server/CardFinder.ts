@@ -12,13 +12,6 @@ const CARD_RENAMES = new Map<string, CardName>([
 
   // TODO(yournamehere): remove after 2021-04-05
   // ['Earth Embasy', CardName.EARTH_EMBASSY],
-
-  // TODO(kberg): remove after 2022-11-01
-  ['Designed Micro-organisms', CardName.DESIGNED_MICROORGANISMS],
-  ['Refugee Camp', CardName.REFUGEE_CAMPS],
-  ['Allied Banks', CardName.ALLIED_BANK],
-  ['Inventors Guild', CardName.INVENTORS_GUILD],
-  ['Cryo Sleep', CardName.CRYO_SLEEP],
 ]);
 
 export class CardFinder {

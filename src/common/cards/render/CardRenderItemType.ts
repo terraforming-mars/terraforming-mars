@@ -46,8 +46,6 @@ export enum CardRenderItemType {
   EMPTY_TILE_SPECIAL = 'empty_tile_special',
   SELF_REPLICATING = 'self_replicating',
   MULTIPLIER_WHITE = 'multiplier_white',
-  // TODO(kberg): remove by 2022-10-01
-  PROJECT_REQUIREMENTS = 'project_requirements',
   IGNORE_GLOBAL_REQUIREMENTS = 'ignore_global_requirements',
   PRELUDE = 'prelude',
   AWARD = 'award',

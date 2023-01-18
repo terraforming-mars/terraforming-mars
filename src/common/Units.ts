@@ -1,8 +1,6 @@
 // A representation of a value associated with each standard resource type.
 // Could be a player's inventory, or their production, or just a way to pass several resource-related values
 
-// import {Player} from './Player';
-
 // Units represents any value of each standard unit.
 // Could be positive or negative, depending on how it's used.
 export interface Units {

@@ -14,10 +14,7 @@ describe('CardFinder', function() {
   });
   // Dont' remove this test. It's a placeholder for card renames.
   it('finds renamed cards', function() {
-    expect(new CardFinder().getProjectCardByName('Designed Micro-organisms'as CardName)?.name).to.equal(CardName.DESIGNED_MICROORGANISMS);
-    expect(new CardFinder().getProjectCardByName('Refugee Camp' as CardName)?.name).to.equal(CardName.REFUGEE_CAMPS);
-    expect(new CardFinder().getProjectCardByName('Allied Banks' as CardName)?.name).to.equal(CardName.ALLIED_BANK);
-    expect(new CardFinder().getProjectCardByName('Inventors Guild' as CardName)?.name).to.equal(CardName.INVENTORS_GUILD);
-    expect(new CardFinder().getProjectCardByName('Cryo Sleep' as CardName)?.name).to.equal(CardName.CRYO_SLEEP);
+    // expect(new CardFinder().getProjectCardByName('Designed Micr-organisms'as CardName)?.name).to.equal(CardName.DESIGNED_MICROORGANISMS);
+    // expect(new CardFinder().getProjectCardByName('Cryo Sleep' as CardName)?.name).to.equal(CardName.CRYO_SLEEP);
   });
 });

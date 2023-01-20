@@ -136,6 +136,29 @@ describe('Game', () => {
     expect(player.getTerraformRating()).to.eq(initialTR + 1);
   });
 
+  it('Disallows to set temperature below the allowed minimum', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-id', [player], player);
+
+    (game as any).temperature = constants.MIN_TEMPERATURE;
+
+    game.increaseTemperature(player, -1);
+    expect(game.getTemperature()).to.eq(constants.MIN_TEMPERATURE);
+
+    game.increaseTemperature(player, -2);
+    expect(game.getTemperature()).to.eq(constants.MIN_TEMPERATURE);
+  });
+
+  it('Allows to reduce temperature when at maximum', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('game-id', [player], player);
+
+    (game as any).temperature = constants.MAX_TEMPERATURE;
+    game.increaseTemperature(player, -1);
+
+    expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE - 2);
+  });
+
   it('Disallows to set oxygenLevel more than allowed maximum', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();

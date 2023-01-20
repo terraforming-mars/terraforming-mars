@@ -1,24 +1,24 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
-export class SelectPayment implements PlayerInput {
-  public readonly inputType = PlayerInputType.SELECT_PAYMENT;
-  public buttonLabel: string = 'Pay'; // no input button
+export class SelectPayment extends BasePlayerInput {
   constructor(
-        public title: string | Message,
-        public canUseSteel: boolean,
-        public canUseTitanium: boolean,
-        public canUseHeat: boolean,
-        public canUseSeeds: boolean,
-        public canUseData: boolean,
-        public canUseLunaTradeFederationTitanium: boolean,
-        public amount: number,
-        public cb: (payment: Payment) => PlayerInput | undefined,
+    title: string | Message,
+    public canUseSteel: boolean,
+    public canUseTitanium: boolean,
+    public canUseHeat: boolean,
+    public canUseSeeds: boolean,
+    public canUseData: boolean,
+    public canUseLunaTradeFederationTitanium: boolean,
+    public amount: number,
+    public cb: (payment: Payment) => PlayerInput | undefined,
   ) {
+    super(PlayerInputType.SELECT_PAYMENT, title);
+    this.buttonLabel = 'Pay'; // no input button
   }
 
   public process(input: InputResponse, player: Player) {

@@ -19,13 +19,24 @@ export interface PlayerInput {
     maxByDefault?: boolean;
 }
 
-export namespace PlayerInput {
-  export function getCard<T extends ICard>(cards: Array<T>, cardName: string): {card: T, idx: number} {
-    const idx = cards.findIndex((card) => card.name === cardName);
-    if (idx === -1) {
-      throw new Error(`Card ${cardName} not found`);
-    }
-    const card = cards[idx];
-    return {card, idx};
+export abstract class BasePlayerInput implements PlayerInput {
+  public readonly inputType: PlayerInputType;
+  public buttonLabel: string = 'Save';
+  public title: string | Message;
+  public abstract cb(...item: any): PlayerInput | undefined;
+  public abstract process(response: InputResponse, player: Player): PlayerInput | undefined;
+
+  constructor(inputType: PlayerInputType, title: string | Message = '') {
+    this.inputType = inputType;
+    this.title = title;
   }
+}
+
+export function getCardFromPlayerInput<T extends ICard>(cards: Array<T>, cardName: string): {card: T, idx: number} {
+  const idx = cards.findIndex((card) => card.name === cardName);
+  if (idx === -1) {
+    throw new Error(`Card ${cardName} not found`);
+  }
+  const card = cards[idx];
+  return {card, idx};
 }

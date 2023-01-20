@@ -1,20 +1,15 @@
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
-import {Message} from '../../common/logs/Message';
 import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
 
-export class OrOptions implements PlayerInput {
+export class OrOptions extends BasePlayerInput {
   public cb(): PlayerInput | undefined {
     return undefined;
   }
-  public title: string | Message = 'Select one option';
-  public buttonLabel: string = 'Save';
   public options: Array<PlayerInput>;
-  public readonly inputType = PlayerInputType.OR_OPTIONS;
-  constructor(
-    ...options: Array<PlayerInput>
-  ) {
+  constructor(...options: Array<PlayerInput>) {
+    super(PlayerInputType.OR_OPTIONS, 'Select one option');
     this.options = options;
   }
 

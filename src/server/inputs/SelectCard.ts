@@ -1,6 +1,6 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, getCardFromPlayerInput, PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
@@ -13,17 +13,17 @@ export type Options = {
   played: boolean | CardName.SELF_REPLICATING_ROBOTS // Default is true. If true, then shows resources on those cards. If false than shows discounted price.
   showOwner: boolean, // Default is false. If true then show the name of the card owner below.
 }
-export class SelectCard<T extends ICard> implements PlayerInput {
-  public readonly inputType: PlayerInputType = PlayerInputType.SELECT_CARD;
+export class SelectCard<T extends ICard> extends BasePlayerInput {
   public config: Options;
 
   constructor(
-        public title: string | Message,
-        public buttonLabel: string = 'Save',
-        public cards: Array<T>,
-        public cb: (cards: Array<T>) => PlayerInput | undefined,
-        config?: Partial<Options>,
+    title: string | Message,
+    buttonLabel: string = 'Save',
+    public cards: Array<T>,
+    public cb: (cards: Array<T>) => PlayerInput | undefined,
+    config?: Partial<Options>,
   ) {
+    super(PlayerInputType.SELECT_CARD, title);
     this.config = {
       max: config?.max ?? 1,
       min: config?.min ?? 1,
@@ -47,7 +47,7 @@ export class SelectCard<T extends ICard> implements PlayerInput {
     }
     const cards: Array<T> = [];
     for (const cardName of input.cards) {
-      const {card, idx} = PlayerInput.getCard(this.cards, cardName);
+      const {card, idx} = getCardFromPlayerInput(this.cards, cardName);
       cards.push(card);
       if (this.config.enabled?.[idx] === false) {
         throw new Error(`${cardName} is not available`);

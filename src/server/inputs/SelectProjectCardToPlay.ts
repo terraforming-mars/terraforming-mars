@@ -1,4 +1,4 @@
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, getCardFromPlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -7,10 +7,7 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, Player} from '../Player';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 
-export class SelectProjectCardToPlay implements PlayerInput {
-  public readonly inputType = PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY;
-  public title = 'Play project card';
-  public buttonLabel: string = 'Play card';
+export class SelectProjectCardToPlay extends BasePlayerInput {
   public reserveUnits: Array<Units>;
 
   constructor(
@@ -20,6 +17,8 @@ export class SelectProjectCardToPlay implements PlayerInput {
       action?: CardAction,
       cb?: (cardToPlay: IProjectCard) => void,
     }) {
+    super(PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY, 'Play project card');
+    this.buttonLabel = 'Play card';
     this.reserveUnits = this.cards.map((card) => {
       return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
     });
@@ -32,7 +31,7 @@ export class SelectProjectCardToPlay implements PlayerInput {
     if (!isPayment(input.payment)) {
       throw new Error('payment is not a valid type');
     }
-    const cardData = PlayerInput.getCard(this.cards, input.card);
+    const cardData = getCardFromPlayerInput(this.cards, input.card);
     const card: IProjectCard = cardData.card;
     const reserveUnits = this.reserveUnits[cardData.idx];
     // These are not used for safety but do help give a better error message

@@ -12,7 +12,7 @@ export class SelectAmount extends BasePlayerInput {
     public max: number,
     public maxByDefault?: boolean,
   ) {
-    super(PlayerInputType.SELECT_CARD, title);
+    super(PlayerInputType.SELECT_AMOUNT, title);
     this.buttonLabel = buttonLabel;
   }
 

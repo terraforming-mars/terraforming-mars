@@ -3,6 +3,7 @@ import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {ISpace} from '../boards/ISpace';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
+import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 
 export class SelectSpace extends BasePlayerInput {
   constructor(
@@ -13,6 +14,10 @@ export class SelectSpace extends BasePlayerInput {
     if (availableSpaces.length === 0) {
       throw new Error('No available spaces');
     }
+  }
+
+  public override toModel(model: PlayerInputModel) {
+    model.availableSpaces = this.availableSpaces.map((space) => space.id);
   }
 
   public process(input: InputResponse) {

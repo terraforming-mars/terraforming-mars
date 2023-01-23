@@ -4,6 +4,7 @@ import {Player} from '../Player';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
+import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 
 export class SelectDelegate extends BasePlayerInput {
   // TODO(kberg): is there any reason to not just accept IDs?
@@ -12,6 +13,12 @@ export class SelectDelegate extends BasePlayerInput {
     title: string | Message,
     public cb: (player: Player | NeutralPlayer) => PlayerInput | undefined) {
     super(PlayerInputType.SELECT_DELEGATE, title);
+  }
+
+  public override toModel(model: PlayerInputModel, _player: Player) {
+    model.players = this.players.map(
+      (player) => (player === 'NEUTRAL') ? 'NEUTRAL' : player.color,
+    );
   }
 
   public process(input: InputResponse) {

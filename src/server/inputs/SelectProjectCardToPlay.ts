@@ -6,6 +6,8 @@ import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, Player} from '../Player';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
+import {PlayerInputModel} from '../../common/models/PlayerInputModel';
+import {CardModels} from '../models/CardModels';
 
 export class SelectProjectCardToPlay extends BasePlayerInput {
   public reserveUnits: Array<Units>;
@@ -22,6 +24,16 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     this.reserveUnits = this.cards.map((card) => {
       return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
     });
+  }
+
+  public override toModel(model: PlayerInputModel, player: Player) {
+    model.cards = CardModels.getCards(player, this.cards, {showCalculatedCost: true, reserveUnits: this.reserveUnits});
+    model.microbes = player.getSpendableMicrobes();
+    model.floaters = player.getSpendableFloaters();
+    model.canUseHeat = player.canUseHeatAsMegaCredits;
+    model.canUseLunaTradeFederationTitanium = player.canUseTitaniumAsMegacredits;
+    model.science = player.getSpendableScienceResources();
+    model.seeds = player.getSpendableSeedResources();
   }
 
   public process(input: InputResponse) {

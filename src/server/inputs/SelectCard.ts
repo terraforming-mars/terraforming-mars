@@ -4,6 +4,9 @@ import {BasePlayerInput, getCardFromPlayerInput, PlayerInput} from '../PlayerInp
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {CardName} from '../../common/cards/CardName';
 import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
+import {Player} from '../Player';
+import {PlayerInputModel} from '../../common/models/PlayerInputModel';
+import {CardModels} from '../models/CardModels';
 
 export type Options = {
   max: number,
@@ -33,6 +36,19 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
       showOwner: config?.showOwner ?? false,
     };
     this.buttonLabel = buttonLabel;
+  }
+
+  public override toModel(model: PlayerInputModel, player: Player) {
+    model.cards = CardModels.getCards(player, this.cards, {
+      showCalculatedCost: this.config.played === false || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
+      showResources: this.config.played === true || this.config.played === CardName.SELF_REPLICATING_ROBOTS,
+      enabled: this.config.enabled,
+    });
+    model.max = this.config.max;
+    model.min = this.config.min;
+    model.showOnlyInLearnerMode = this.config.enabled?.every((p: boolean) => p === false);
+    model.selectBlueCardAction = this.config.selectBlueCardAction;
+    model.showOwner = this.config.showOwner === true;
   }
 
   public process(input: InputResponse) {

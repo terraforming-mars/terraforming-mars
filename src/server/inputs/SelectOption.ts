@@ -12,6 +12,10 @@ export class SelectOption extends BasePlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
+  public toModel() {
+    // No additional model material for SelectOpiton.
+  }
+
   public process(response: InputResponse): PlayerInput | undefined {
     if (!isSelectOptionResponse(response)) {
       throw new Error('Not a valid SelectOptionResponse');

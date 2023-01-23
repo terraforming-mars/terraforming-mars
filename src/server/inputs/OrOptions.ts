@@ -1,16 +1,15 @@
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
+import {OptionsInput} from './OptionsInput';
 
-export class OrOptions extends BasePlayerInput {
+export class OrOptions extends OptionsInput {
   public cb(): PlayerInput | undefined {
     return undefined;
   }
-  public options: Array<PlayerInput>;
   constructor(...options: Array<PlayerInput>) {
-    super(PlayerInputType.OR_OPTIONS, 'Select one option');
-    this.options = options;
+    super(PlayerInputType.OR_OPTIONS, options, 'Select one option');
   }
 
   public process(input: InputResponse, player: Player) {

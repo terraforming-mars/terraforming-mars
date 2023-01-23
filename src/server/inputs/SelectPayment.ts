@@ -4,6 +4,7 @@ import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {isPayment, Payment} from '../../common/inputs/Payment';
 import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
+import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 
 export class SelectPayment extends BasePlayerInput {
   constructor(
@@ -19,6 +20,18 @@ export class SelectPayment extends BasePlayerInput {
   ) {
     super(PlayerInputType.SELECT_PAYMENT, title);
     this.buttonLabel = 'Pay'; // no input button
+  }
+
+  public override toModel(model: PlayerInputModel, player: Player) {
+    model.amount = this.amount;
+    model.canUseSteel = this.canUseSteel;
+    model.canUseTitanium = this.canUseTitanium;
+    model.canUseHeat = this.canUseHeat;
+    model.canUseLunaTradeFederationTitanium = this.canUseLunaTradeFederationTitanium;
+    model.canUseSeeds = this.canUseSeeds;
+    model.seeds = player.getSpendableSeedResources();
+    model.canUseData = this.canUseData;
+    model.data = player.getSpendableData();
   }
 
   public process(input: InputResponse, player: Player) {

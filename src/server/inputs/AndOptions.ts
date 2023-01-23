@@ -1,13 +1,12 @@
-import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isAndOptionsResponse} from '../../common/inputs/InputResponse';
 import {Player} from '../Player';
+import {OptionsInput} from './OptionsInput';
 
-export class AndOptions extends BasePlayerInput {
-  public options: Array<PlayerInput>;
+export class AndOptions extends OptionsInput {
   constructor(public cb: () => PlayerInput | undefined, ...options: Array<PlayerInput>) {
-    super(PlayerInputType.AND_OPTIONS);
-    this.options = options;
+    super(PlayerInputType.AND_OPTIONS, options);
   }
 
   public process(input: InputResponse, player: Player) {

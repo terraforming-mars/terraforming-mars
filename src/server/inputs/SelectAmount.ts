@@ -2,6 +2,7 @@ import {Message} from '../../common/logs/Message';
 import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
+import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 
 export class SelectAmount extends BasePlayerInput {
   constructor(
@@ -14,6 +15,12 @@ export class SelectAmount extends BasePlayerInput {
   ) {
     super(PlayerInputType.SELECT_CARD, title);
     this.buttonLabel = buttonLabel;
+  }
+
+  public override toModel(model: PlayerInputModel) {
+    model.min = this.min;
+    model.max = this.max;
+    model.maxByDefault = this.maxByDefault;
   }
 
   public process(input: InputResponse) {

@@ -24,6 +24,7 @@ import {PartyName} from '../src/common/turmoil/PartyName';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {SelectPlayer} from '../src/server/inputs/SelectPlayer';
 import {SelectAmount} from '../src/server/inputs/SelectAmount';
+import {OrOptions} from '../src/server/inputs/OrOptions';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -802,7 +803,7 @@ describe('Player', function() {
 });
 
 function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
-  return player.getWaitingFor()!.options!.map((o) => o.title as string).map(titlesToGlobalParameter);
+  return cast(player.getWaitingFor(), OrOptions).options!.map((o) => o.title as string).map(titlesToGlobalParameter);
 }
 
 function titlesToGlobalParameter(title: string): GlobalParameter {

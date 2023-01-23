@@ -5,6 +5,7 @@ import {Player} from '../Player';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
+import {PlayerInputModel} from '../../common/models/PlayerInputModel';
 
 export class SelectProductionToLose extends BasePlayerInput {
   constructor(
@@ -18,7 +19,22 @@ export class SelectProductionToLose extends BasePlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
-  // TODO(kberg): Coul dmerge this with SelectResources, though it
+  public override toModel(model: PlayerInputModel) {
+    model.payProduction = {
+      cost: this.unitsToLose,
+      // TODO(kberg): change to units: player.production.asUnits();
+      units: {
+        megacredits: this.player.production.megacredits,
+        steel: this.player.production.steel,
+        titanium: this.player.production.titanium,
+        plants: this.player.production.plants,
+        energy: this.player.production.energy,
+        heat: this.player.production.heat,
+      },
+    };
+  }
+
+  // TODO(kberg): Couldmerge this with SelectResources, though it
   // would take some work.
   public process(input: InputResponse, player: Player) {
     if (!isSelectProductionToLoseResponse(input)) {

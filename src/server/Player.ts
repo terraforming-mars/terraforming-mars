@@ -875,13 +875,15 @@ export class Player {
     }
   }
 
-  /*
+  /**
+   * Ask the player to draft from a set of cards.
+   *
    * @param initialDraft when true, this is part of the first generation draft.
    * @param playerName  The player _this_ player passes remaining cards to.
    * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
    *   step in the draft, and cards have to be dealt.
    */
-  public runDraftPhase(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
+  public askPlayerToDraft(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
     let cardsToKeep = 1;
 
     let cards: Array<IProjectCard> = [];

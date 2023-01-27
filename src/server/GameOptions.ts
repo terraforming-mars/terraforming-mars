@@ -32,7 +32,7 @@ export type GameOptions = {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
-  leadersExpansion: boolean;
+  leadersExtension: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -86,7 +86,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   moonExpansion: false,
   moonStandardProjectVariant: false,
   pathfindersExpansion: false,
-  leadersExpansion: false,
+  leadersExtension: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,

@@ -123,6 +123,8 @@ export class GameHandler extends Handler {
             escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
             escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
             twoCorpsVariant: gameReq.twoCorpsVariant,
+            leadersExtension: gameReq.leadersExtension,
+            customLeaders: gameReq.customLeaders,
           };
 
           let game: Game;

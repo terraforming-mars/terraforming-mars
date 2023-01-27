@@ -5,11 +5,11 @@ import {ModuleManifest} from '../ModuleManifest';
 // import {Asimov} from './Asimov';
 // import {Bjorn} from './Bjorn';
 // import {Caesar} from './Caesar';
-// import {Clarke} from './Clarke';
+import {Clarke} from './Clarke';
 // import {Duncan} from './Duncan';
-// import {Ender} from './Ender';
+import {Ender} from './Ender';
 // import {Faraday} from './Faraday';
-// import {Floyd} from './Floyd';
+import {Floyd} from './Floyd';
 // import {Gaia} from './Gaia';
 // import {Gordon} from './Gordon';
 // import {Greta} from './Greta';
@@ -17,7 +17,7 @@ import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
 // import {Ingrid} from './Ingrid';
 // import {Jansson} from './Jansson';
-// import {Karen} from './Karen';
+import {Karen} from './Karen';
 // import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
 // import {Naomi} from './Naomi';
@@ -45,11 +45,11 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.ASIMOV]: {Factory: Asimov},
     // [CardName.BJORN]: {Factory: Bjorn},
     // [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
-    // [CardName.CLARKE]: {Factory: Clarke},
+    [CardName.CLARKE]: {Factory: Clarke},
     // [CardName.DUNCAN]: {Factory: Duncan},
-    // [CardName.ENDER]: {Factory: Ender},
+    [CardName.ENDER]: {Factory: Ender},
     // [CardName.FARADAY]: {Factory: Faraday},
-    // [CardName.FLOYD]: {Factory: Floyd},
+    [CardName.FLOYD]: {Factory: Floyd},
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     // [CardName.GORDON]: {Factory: Gordon},
     // [CardName.GRETA]: {Factory: Greta},
@@ -57,7 +57,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},
     // [CardName.INGRID]: {Factory: Ingrid},
     // [CardName.JANSSON]: {Factory: Jansson},
-    // [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
+    [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
     // [CardName.LOWELL]: {Factory: Lowell, compatibility: 'prelude'},
     // [CardName.MARIA]: {Factory: Maria, compatibility: 'colonies'},
     // [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},

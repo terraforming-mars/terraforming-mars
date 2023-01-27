@@ -55,6 +55,7 @@ export interface NewGameConfig {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
+  leadersExtension: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -77,4 +78,5 @@ export interface NewGameConfig {
   escapeVelocityPeriod: number | undefined;
   escapeVelocityPenalty: number | undefined;
   twoCorpsVariant: boolean,
+  customLeaders: Array<CardName>;
 }

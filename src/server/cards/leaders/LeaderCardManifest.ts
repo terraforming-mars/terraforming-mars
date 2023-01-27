@@ -1,4 +1,4 @@
-// import {CardName} from '../../../common/cards/CardName';
+import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 
 // import {Apollo} from './Apollo';
@@ -13,7 +13,7 @@ import {ModuleManifest} from '../ModuleManifest';
 // import {Gaia} from './Gaia';
 // import {Gordon} from './Gordon';
 // import {Greta} from './Greta';
-// import {HAL9000} from './HAL9000';
+import {HAL9000} from './HAL9000';
 // import {Huan} from './Huan';
 // import {Ingrid} from './Ingrid';
 // import {Jansson} from './Jansson';
@@ -53,7 +53,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.GAIA]: {Factory: Gaia, compatibility: 'ares'},
     // [CardName.GORDON]: {Factory: Gordon},
     // [CardName.GRETA]: {Factory: Greta},
-    // [CardName.HAL9000]: {Factory: HAL9000},
+    [CardName.HAL9000]: {Factory: HAL9000},
     // [CardName.HUAN]: {Factory: Huan, compatibility: 'colonies'},
     // [CardName.INGRID]: {Factory: Ingrid},
     // [CardName.JANSSON]: {Factory: Jansson},

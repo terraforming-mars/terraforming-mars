@@ -4,6 +4,7 @@ import {COLONIES_CARD_MANIFEST} from './colonies/ColoniesCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './community/CommunityCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './prelude/PreludeCardManifest';
 import {PROMO_CARD_MANIFEST} from './promo/PromoCardManifest';
+import {LEADER_CARD_MANIFEST} from './leaders/LeaderCardManifest';
 import {
   BASE_CARD_MANIFEST,
   CORP_ERA_CARD_MANIFEST,
@@ -20,6 +21,7 @@ export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   VENUS_CARD_MANIFEST,
   COLONIES_CARD_MANIFEST,
   PRELUDE_CARD_MANIFEST,
+  LEADER_CARD_MANIFEST,
   TURMOIL_CARD_MANIFEST,
   COMMUNITY_CARD_MANIFEST,
   ARES_CARD_MANIFEST,

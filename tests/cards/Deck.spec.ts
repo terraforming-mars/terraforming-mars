@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PreludeDeck} from '../../src/server/cards/Deck';
+import {PreludeDeck, LeaderDeck} from '../../src/server/cards/Deck';
 import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {CardName} from '../../src/common/cards/CardName';
@@ -67,6 +67,45 @@ describe('PreludeDeck', function() {
     const deserialized = PreludeDeck.deserialize(serialized, UnseededRandom.INSTANCE);
     expect(deserialized.drawPile).has.length(33);
     expect(deserialized.discardPile).has.length(2);
+
+    expect(deck.drawPile).to.deep.eq(deserialized.drawPile);
+    expect(deck.discardPile).to.deep.eq(deserialized.discardPile);
+  });
+});
+
+describe('LeaderDeck', function() {
+  const random = new UnseededRandom();
+
+  it('serialization compatibility', () => {
+    const deck = new LeaderDeck(new GameCards(
+      {...DEFAULT_GAME_OPTIONS,
+        leadersExtension: true,
+        preludeExtension: true,
+      }).getLeaderCards(), [], random);
+
+    const logger = {
+      log: () => {},
+    };
+
+    // TODO: Once CEOs is deployed, we can hard-value these deckLength checks.
+    // But while we're constantly adding CEOs we cannot expect the drawPile to have a static length
+    // Instead, I'm getting the length of the deck prior to the draws, and just making sure it shrinks after we draw.
+    const drawCardsCount = 3;
+    const deckLength = deck.drawPile.length - drawCardsCount;
+    for (let i = 0; i < drawCardsCount; i++) {
+      deck.discard(deck.draw(logger));
+    }
+
+    expect(deck.drawPile).has.length(deckLength);
+    expect(deck.discardPile).has.length(drawCardsCount);
+
+    const serialized = deck.serialize();
+    expect(serialized.drawPile).has.length(deckLength);
+    expect(serialized.discardPile).has.length(drawCardsCount);
+
+    const deserialized = LeaderDeck.deserialize(serialized, UnseededRandom.INSTANCE);
+    expect(deserialized.drawPile).has.length(deckLength);
+    expect(deserialized.discardPile).has.length(drawCardsCount);
 
     expect(deck.drawPile).to.deep.eq(deserialized.drawPile);
     expect(deck.discardPile).to.deep.eq(deserialized.discardPile);

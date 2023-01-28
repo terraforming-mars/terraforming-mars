@@ -20,6 +20,10 @@
         </ul>
 
         <div class="spacing-setup"></div>
+
+        <purge-warning :expectedPurgeTimeMs="game.expectedPurgeTimeMs"></purge-warning>
+
+        <div class="spacing-setup"></div>
         <div v-if="game !== undefined">
           <h1 v-i18n>Game settings</h1>
           <game-setup-detail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"></game-setup-detail>
@@ -32,6 +36,7 @@
 import Vue from 'vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Button from '@/client/components/common/Button.vue';
+import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {SpectatorId, PlayerId} from '@/common/Types';
@@ -63,6 +68,7 @@ export default Vue.extend({
   components: {
     Button,
     'game-setup-detail': GameSetupDetail,
+    PurgeWarning,
   },
   data() {
     return {

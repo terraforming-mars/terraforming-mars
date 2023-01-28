@@ -36,9 +36,12 @@ describe('ApiGame', () => {
     scaffolding.url = '/api/game?id=game-valid-id';
     await scaffolding.get(ApiGame.INSTANCE, res);
     // This test is probably brittle.
-    expect(JSON.parse(res.content)).deep.eq(
+    const json = JSON.parse(res.content);
+    json.expectedPurgeTimeMs = -1;
+    expect(json).deep.eq(
       {
         'activePlayer': 'black',
+        'expectedPurgeTimeMs': -1,
         'id': 'game-valid-id',
         'lastSoloGeneration': 14,
         'phase': 'research',

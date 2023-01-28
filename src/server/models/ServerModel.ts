@@ -64,6 +64,7 @@ export class Server {
       spectatorId: game.spectatorId,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       lastSoloGeneration: game.lastSoloGeneration(),
+      expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
     };
   }
 
@@ -76,6 +77,7 @@ export class Server {
       colonies: this.getColonies(game, game.colonies),
       deckSize: game.projectDeck.drawPile.length,
       discardedColonies: this.getColonies(game, game.discardedColonies, /* showTrackPosition */ false),
+      expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
       gameAge: game.gameAge,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),

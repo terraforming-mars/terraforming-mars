@@ -174,7 +174,7 @@ describe('Philares', () => {
     otherPlayer.plants = 8;
 
     // First player final greenery placement, done adjacent to one of Philares' tiles
-    game.gotoFinalGreeneryPlacement();
+    game.takeNextFinalGreeneryAction();
     const firstPlayerGreeneryPlacement = cast(otherPlayer.getWaitingFor(), OrOptions);
 
     // Option 1 is 'Don't place a greenery'
@@ -192,7 +192,7 @@ describe('Philares', () => {
     philaresPlayerResourceSelection.cb();
     expect(philaresPlayer.plants).to.eq(8);
     philaresPlayer.popWaitingFor();
-    game.gotoFinalGreeneryPlacement();
+    game.takeNextFinalGreeneryAction();
     const finalGreeneryPlacement = cast(philaresPlayer.getWaitingFor(), OrOptions);
     expect(game.phase).eq(Phase.RESEARCH);
     finalGreeneryPlacement.options[1].cb();

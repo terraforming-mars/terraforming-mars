@@ -41,8 +41,7 @@ export class Bjorn extends Card implements LeaderCard {
 
     targetPlayers.forEach((target) => {
       const qtyToSteal = Math.min(game.generation, target.megaCredits);
-      target.deductResource(Resources.MEGACREDITS, qtyToSteal, {log: true, from: player, stealing: true});
-      player.addResource(Resources.MEGACREDITS, qtyToSteal);
+      target.stealResource(Resources.MEGACREDITS, qtyToSteal, player);
     });
 
     this.isDisabled = true;

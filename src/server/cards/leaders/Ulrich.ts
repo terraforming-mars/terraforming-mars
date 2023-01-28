@@ -38,11 +38,8 @@ export class Ulrich extends Card implements LeaderCard {
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
     const oceansPlaced = game.board.getOceanCount();
-    let bonus_credits = 15; // Default to 15, this happens if all oceans have been placed
-    if (oceansPlaced < MAX_OCEAN_TILES) {
-      bonus_credits = oceansPlaced * 4;
-    }
-    player.addResource(Resources.MEGACREDITS, bonus_credits, {log: true});
+    const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
+    player.addResource(Resources.MEGACREDITS, bonusCredits, {log: true});
     this.isDisabled = true;
     return undefined;
   }

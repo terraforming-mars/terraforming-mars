@@ -14,12 +14,14 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 describe('Naomi', function() {
   let card: Naomi;
   let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Naomi();
-    game = newTestGame(1, {leadersExtension: true, coloniesExtension: true});
+    game = newTestGame(2, {leadersExtension: true, coloniesExtension: true});
     player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
     // Setup some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres()];
   });
@@ -34,6 +36,14 @@ describe('Naomi', function() {
     game.colonies[1].addColony(player);
     expect(player.energy).to.eq(4);
     expect(player.megaCredits).to.eq(4);
+
+    // Player2 here is just a sanity check, _and_ is necessary for the colony count
+    game.colonies[0].addColony(player2);
+    expect(player2.energy).to.eq(0);
+    expect(player2.megaCredits).to.eq(0);
+    game.colonies[1].addColony(player2);
+    expect(player2.energy).to.eq(0);
+    expect(player2.megaCredits).to.eq(0);
   });
 
   it('Takes action', function() {

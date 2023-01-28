@@ -224,7 +224,6 @@ describe('Player', function() {
       actionsTakenThisRound: 15,
       actionsTakenThisGame: 30,
       actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
-      corporationInitialActionDone: false,
       pendingInitialActions: [],
       dealtCorporationCards: [CardName.THARSIS_REPUBLIC],
       dealtProjectCards: [CardName.FLOATER_LEASING, CardName.BUTTERFLY_EFFECT],

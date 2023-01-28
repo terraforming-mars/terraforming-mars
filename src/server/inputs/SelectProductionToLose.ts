@@ -1,21 +1,20 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {Player} from '../Player';
 import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
 
-export class SelectProductionToLose implements PlayerInput {
-  public readonly inputType = PlayerInputType.SELECT_PRODUCTION_TO_LOSE;
-
+export class SelectProductionToLose extends BasePlayerInput {
   constructor(
-        public title: string | Message,
-        public unitsToLose: number,
-        public player: Player,
-        public cb: (units: Units) => PlayerInput | undefined,
-        public buttonLabel: string = 'Save',
+    title: string | Message,
+    public unitsToLose: number,
+    public player: Player,
+    public cb: (units: Units) => PlayerInput | undefined,
+    buttonLabel: string = 'Save',
   ) {
+    super(PlayerInputType.SELECT_PRODUCTION_TO_LOSE, title);
     this.buttonLabel = buttonLabel;
   }
 

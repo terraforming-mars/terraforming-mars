@@ -77,7 +77,7 @@ describe('SpecializedSettlement', function() {
     singleResourceTest(
       SpaceBonus.ENERGY,
       {energy: 1},
-      {energy: 0, megacredits: 3});
+      {energy: 1, megacredits: 3});
     expect(player.popWaitingFor()).is.undefined;
   });
 
@@ -155,7 +155,7 @@ describe('SpecializedSettlement', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
-  function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, resources: Partial<Units>, production: Partial<Units>) {
+  function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
     player.production.override({energy: 1});
     const action = card.play(player);
 
@@ -168,7 +168,7 @@ describe('SpecializedSettlement', function() {
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(space.player).eq(player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of(resources));
+    expect(player.getResourcesForTest()).deep.eq(Units.of(stock));
 
     runAllActions(game);
 

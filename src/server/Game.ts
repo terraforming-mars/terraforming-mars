@@ -604,13 +604,14 @@ export class Game implements Logger {
     this.players.forEach((player) => {
       player.needsToDraft = true;
       if (this.draftRound === 1 && !preludeDraft) {
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
       } else {
-        const cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-        this.unDraftedCards.delete(this.getDraftCardsFrom(player));
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, cards);
+        const draftCardsFrom = this.getDraftCardsFrom(player).id;
+        const cards = this.unDraftedCards.get(draftCardsFrom);
+        this.unDraftedCards.delete(draftCardsFrom);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, cards);
       }
     });
   }
@@ -814,7 +815,7 @@ export class Game implements Logger {
 
     // Push last card for each player
     this.players.forEach((player) => {
-      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player).id);
       if (lastCards !== undefined) {
         player.draftedCards.push(...lastCards);
       }
@@ -880,25 +881,22 @@ export class Game implements Logger {
     this.gotoInitialPhase();
   }
 
-  private getDraftCardsFrom(player: Player): PlayerId {
-    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-
-    // Change initial draft direction on second iteration
+  private getDraftCardsFrom(player: Player): Player {
+    // Special-case for the initial draft direction on second iteration
     if (this.generation === 1 && this.initialDraftIteration === 2) {
-      nextPlayer = this.getPlayerBefore(player);
+      return this.getPlayerBefore(player);
     }
 
-    return nextPlayer.id;
+    return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
   }
 
   private giveDraftCardsTo(player: Player): Player {
-    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-
-    // Change initial draft direction on second iteration
+    // Special-case for the initial draft direction on second iteration
     if (this.initialDraftIteration === 2 && this.generation === 1) {
-      nextPlayer = this.getPlayerAfter(player);
+      return this.getPlayerAfter(player);
     }
-    return nextPlayer;
+
+    return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
   }
 
   private getPlayerBefore(player: Player): Player {
@@ -1600,8 +1598,7 @@ export class Game implements Logger {
       game.unDraftedCards.set(unDraftedCard[0], cardFinder.cardsFromJSON(unDraftedCard[1]));
     });
 
-    // TODO(kberg): remove `?? []` by 2022-09-01
-    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft ?? []);
+    game.corporationsToDraft = cardFinder.corporationCardsFromJSON(d.corporationsToDraft);
     game.corporationsDraftDirection = d.corporationsDraftDirection ?? false;
 
     game.lastSaveId = d.lastSaveId;

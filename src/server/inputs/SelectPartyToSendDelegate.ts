@@ -1,18 +1,20 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
 
 // TODO(kberg): Rename to SelectParty
-export class SelectPartyToSendDelegate implements PlayerInput {
-  public readonly inputType = PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE;
+export class SelectPartyToSendDelegate extends BasePlayerInput {
   constructor(
-        public title: string | Message,
-        public buttonLabel: string = 'Send delegate',
-        public availableParties: PartyName[],
-        public cb: (party: PartyName) => undefined,
-  ) {}
+    title: string | Message,
+    buttonLabel: string = 'Send delegate',
+    public availableParties: PartyName[],
+    public cb: (party: PartyName) => undefined,
+  ) {
+    super(PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE, title);
+    this.buttonLabel = buttonLabel;
+  }
 
   public process(input: InputResponse) {
     if (!isSelectPartyResponse(input)) {

@@ -47,11 +47,11 @@ export class Merger extends PreludeCard {
             game.corporationDeck.discard(corp);
           }
         });
+        game.defer(new SelectPaymentDeferred(player, Merger.mergerCost, {title: 'Select how to pay for Merger'}));
         return undefined;
       },
       {enabled: enabled});
     }));
-    game.defer(new SelectPaymentDeferred(player, Merger.mergerCost, {title: 'Select how to pay for Merger'}));
     return undefined;
   }
 

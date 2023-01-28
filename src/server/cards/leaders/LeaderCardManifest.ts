@@ -3,7 +3,7 @@ import {ModuleManifest} from '../ModuleManifest';
 
 // import {Apollo} from './Apollo';
 // import {Asimov} from './Asimov';
-// import {Bjorn} from './Bjorn';
+import {Bjorn} from './Bjorn';
 // import {Caesar} from './Caesar';
 import {Clarke} from './Clarke';
 // import {Duncan} from './Duncan';
@@ -20,7 +20,7 @@ import {HAL9000} from './HAL9000';
 import {Karen} from './Karen';
 // import {Lowell} from './Lowell';
 // import {Maria} from './Maria';
-// import {Naomi} from './Naomi';
+import {Naomi} from './Naomi';
 // import {Neil} from './Neil';
 // import {Oscar} from './Oscar';
 // import {Petra} from './Petra';
@@ -30,7 +30,7 @@ import {Karen} from './Karen';
 // import {Stefan} from './Stefan';
 // import {Sweeney} from './Sweeney';
 // import {Tate} from './Tate';
-// import {Ulrich} from './Ulrich';
+import {Ulrich} from './Ulrich';
 // import {VanAllen} from './VanAllen';
 // import {Will} from './Will';
 // import {Xavier} from './Xavier';
@@ -43,7 +43,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
   leaderCards: {
     // [CardName.APOLLO]: {Factory: Apollo, compatibility: 'moon'},
     // [CardName.ASIMOV]: {Factory: Asimov},
-    // [CardName.BJORN]: {Factory: Bjorn},
+    [CardName.BJORN]: {Factory: Bjorn},
     // [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
     [CardName.CLARKE]: {Factory: Clarke},
     // [CardName.DUNCAN]: {Factory: Duncan},
@@ -60,7 +60,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     [CardName.KAREN]: {Factory: Karen, compatibility: 'prelude'},
     // [CardName.LOWELL]: {Factory: Lowell, compatibility: 'prelude'},
     // [CardName.MARIA]: {Factory: Maria, compatibility: 'colonies'},
-    // [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},
+    [CardName.NAOMI]: {Factory: Naomi, compatibility: 'colonies'},
     // [CardName.NEIL]: {Factory: Neil, compatibility: 'moon'},
     // [CardName.OSCAR]: {Factory: Oscar, compatibility: 'turmoil'},
     // [CardName.PETRA]: {Factory: Petra, compatibility: 'turmoil'},
@@ -70,7 +70,7 @@ export const LEADER_CARD_MANIFEST = new ModuleManifest({
     // [CardName.STEFAN]: {Factory: Stefan},
     // [CardName.SWEENEY]: {Factory: Sweeney},
     // [CardName.TATE]: {Factory: Tate},
-    // [CardName.ULRICH]: {Factory: Ulrich},
+    [CardName.ULRICH]: {Factory: Ulrich},
     // [CardName.VANALLEN]: {Factory: VanAllen},
     // [CardName.WILL]: {Factory: Will, compatibility: 'venus'},
     // [CardName.XAVIER]: {Factory: Xavier, compatibility: 'prelude'},

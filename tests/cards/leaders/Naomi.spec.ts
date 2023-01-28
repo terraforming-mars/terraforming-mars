@@ -14,14 +14,12 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 describe('Naomi', function() {
   let card: Naomi;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Naomi();
-    game = newTestGame(2, {leadersExtension: true, coloniesExtension: true});
+    game = newTestGame(1, {leadersExtension: true, coloniesExtension: true});
     player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
     // Setup some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres()];
   });

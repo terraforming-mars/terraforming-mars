@@ -90,13 +90,10 @@ describe('GameCards', function() {
       preludeExtension: true,
       moonExpansion: false,
     });
-
     const leaderNames = new GameCards(gameOptions).getLeaderCards().map((c) => c.name);
     expect(leaderNames).to.contain(CardName.FLOYD); // Yes generic Leader
     expect(leaderNames).to.contain(CardName.KAREN); // Yes Prelude
     expect(leaderNames).not.to.contain(CardName.NEIL); // No Moon
-
   });
-
 });
 

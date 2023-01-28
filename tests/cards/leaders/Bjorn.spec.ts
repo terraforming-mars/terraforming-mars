@@ -2,8 +2,9 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd} from '../../TestingUtils';
-import {Bjorn} from '../../../src/server/cards/leaders/Bjorn';
 import {getTestPlayer, newTestGame} from '../../TestGame';
+import {Bjorn} from '../../../src/server/cards/leaders/Bjorn';
+import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 
 
 describe('Bjorn', function() {
@@ -93,5 +94,25 @@ describe('Bjorn', function() {
     expect(player2.megaCredits).eq(2);
     expect(player3.megaCredits).eq(3);
     expect(player4.megaCredits).eq(4);
+  });
+
+  it('Takes OPG action, players that lost money can play Law Suit', () => {
+    game.generation = 10;
+    player.megaCredits = 5;
+    player2.megaCredits = 50;
+    player3.megaCredits = 0;
+    player4.megaCredits = 7;
+
+    const lawsuit = new LawSuit();
+    expect(lawsuit.canPlay(player)).is.not.true;
+    expect(lawsuit.canPlay(player2)).is.not.true;
+    expect(lawsuit.canPlay(player3)).is.not.true;
+    expect(lawsuit.canPlay(player4)).is.not.true;
+
+    card.action(player);
+    expect(lawsuit.canPlay(player)).is.not.true;
+    expect(lawsuit.canPlay(player2)).is.true;
+    expect(lawsuit.canPlay(player3)).is.not.true;
+    expect(lawsuit.canPlay(player4)).is.true;
   });
 });

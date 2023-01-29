@@ -1,0 +1,106 @@
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {LeaderCard} from './LeaderCard';
+import {inplaceShuffle} from '../../utils/shuffle';
+import {UnseededRandom} from '../../../server/Random';
+
+import {IAward} from '../../awards/IAward';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Size} from '../../../common/cards/render/Size';
+
+import {ALL_AWARDS} from '../../awards/Awards';
+
+
+export class Asimov extends Card implements LeaderCard {
+  constructor() {
+    super({
+      name: CardName.ASIMOV,
+      cardType: CardType.LEADER,
+      metadata: {
+        cardNumber: 'L01',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br;
+          b.award().nbsp.colon().text('+2', Size.LARGE);
+          b.br.br.br;
+          b.opgArrow().text('10-X').award().asterix();
+        }),
+        description: 'You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.',
+      },
+    });
+  }
+
+  public isDisabled = false;
+
+  public override play() {
+    return undefined;
+  }
+
+  public canAct(player: Player): boolean {
+    if (player.game.isSoloMode()) return false; // Awards are disabled in solo mode
+    return !player.game.allAwardsFunded() && this.isDisabled === false;
+  }
+
+  public action(player: Player): PlayerInput | undefined {
+    const game = player.game;
+    const awardCount = Math.max(1, 10 - game.generation);
+    const validAwards = this.getValidAwards(player);
+    inplaceShuffle(validAwards, UnseededRandom.INSTANCE);
+
+    const freeAward = new OrOptions();
+    freeAward.title = 'Select award to put into play and fund';
+    freeAward.buttonLabel = 'Confirm';
+
+    freeAward.options = validAwards.slice(0, awardCount).map((award) => this.selectAwardToFund(player, award));
+    freeAward.options.push(
+      new SelectOption('Do nothing', 'Confirm', () => {
+        game.log('${0} chose not to fund any award', (b) => b.player(player));
+        this.isDisabled = true;
+        return undefined;
+      }),
+    );
+
+    return freeAward;
+  }
+
+  private selectAwardToFund(player: Player, award: IAward): SelectOption {
+    // Get the players and store them in a non-read-only array:
+    const players = [...player.game.getPlayers()];
+    // Sort the players by score:
+    let title = 'Fund ' + award.name + ' award' + ' [';
+    title += players
+      .sort((a, b) => award.getScore(b) - award.getScore(a))
+      .map((player) => player.name + ': ' + award.getScore(player))
+      .join(' / ');
+    title += ']';
+
+    return new SelectOption(title, 'Confirm', () => {
+      player.game.awards.push(award);
+      player.game.fundAward(player, award);
+      this.isDisabled = true;
+      return undefined;
+    });
+  }
+
+  private getValidAwards(player: Player): Array<IAward> {
+    // NB: This makes no effort to maintain Award synergy.
+    const gameOptions = player.game.gameOptions;
+    const validAwards = ALL_AWARDS.filter((award) => {
+      // Remove awards already in the game
+      if (player.game.awards.includes(award)) return false;
+      // Remove awards that require unused variants/expansions
+      if (!gameOptions.venusNextExtension && award.name === 'Venuphile') return false;
+      if (!gameOptions.turmoilExtension && award.name === 'Politician') return false;
+      if (!gameOptions.aresExtension && award.name === 'Entrepreneur') return false;
+      if (!gameOptions.moonExpansion && award.name === 'Full Moon') return false;
+      if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate') return false;
+      return true;
+    });
+    if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');
+    return validAwards;
+  }
+}

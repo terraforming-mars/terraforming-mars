@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {IAward} from '../IAward';
+import {IAward, getAdditionalScore} from '../IAward';
 
 export class Warmonger implements IAward {
   public readonly name = 'Warmonger';
@@ -8,7 +8,8 @@ export class Warmonger implements IAward {
 
   public getScore(player: Player): number {
     const cardNames = player.playedCards.map((card) => card.name);
-    return cardNames.filter((name) => Warmonger.attackCards.includes(name)).length;
+    const score = cardNames.filter((name) => Warmonger.attackCards.includes(name)).length;
+    return score + getAdditionalScore(player);
   }
 
   private static attackCards = [

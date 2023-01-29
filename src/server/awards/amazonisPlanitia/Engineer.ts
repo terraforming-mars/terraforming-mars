@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
-import {IAward} from '../IAward';
+import {IAward, getAdditionalScore} from '../IAward';
 
 export class Engineer implements IAward {
   public readonly name = 'Engineer';
@@ -21,7 +21,7 @@ export class Engineer implements IAward {
       return false;
     }).length;
 
-    return score;
+    return score + getAdditionalScore(player);
   }
 
   // public for testing.

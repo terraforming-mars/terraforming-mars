@@ -1,6 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {IAward} from '../IAward';
+import {IAward, getAdditionalScore} from '../IAward';
 
 export class Curator implements IAward {
   public readonly name = 'Curator';
@@ -16,8 +16,7 @@ export class Curator implements IAward {
         if (count > max) max = count;
       }
     }
-    // if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
-    return max;
+    return max + getAdditionalScore(player);
   }
 }

@@ -1,4 +1,4 @@
-import {IAward} from './IAward';
+import {IAward, getAdditionalScore} from './IAward';
 import {Player} from '../Player';
 
 export class Excentric implements IAward {
@@ -11,6 +11,6 @@ export class Excentric implements IAward {
       score += card.resourceCount;
     });
 
-    return score;
+    return score + getAdditionalScore(player);
   }
 }

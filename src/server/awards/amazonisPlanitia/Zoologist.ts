@@ -1,6 +1,6 @@
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
-import {IAward} from '../IAward';
+import {IAward, getAdditionalScore} from '../IAward';
 
 export class Zoologist2 implements IAward {
   public readonly name = 'A. Zoologist';
@@ -14,6 +14,6 @@ export class Zoologist2 implements IAward {
       score += card.resourceCount;
     });
 
-    return score;
+    return score + getAdditionalScore(player);
   }
 }

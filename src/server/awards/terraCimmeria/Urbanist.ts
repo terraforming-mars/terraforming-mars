@@ -1,7 +1,7 @@
 import {Board} from '../../boards/Board';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
-import {IAward} from '../IAward';
+import {IAward, getAdditionalScore} from '../IAward';
 
 export class Urbanist implements IAward {
   public readonly name = 'Urbanist';
@@ -20,6 +20,6 @@ export class Urbanist implements IAward {
       }
     });
 
-    return score;
+    return score + getAdditionalScore(player);
   }
 }

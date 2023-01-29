@@ -1,4 +1,4 @@
-import {IAward} from './IAward';
+import {IAward, getAdditionalScore} from './IAward';
 import {Player} from '../Player';
 
 export class Naturalist implements IAward {
@@ -6,6 +6,7 @@ export class Naturalist implements IAward {
   public readonly description = 'Most plant and heat production';
 
   public getScore(player: Player): number {
-    return player.production.heat + player.production.plants;
+    const score = player.production.heat + player.production.plants;
+    return score + getAdditionalScore(player);
   }
 }

@@ -1,4 +1,4 @@
-import {IAward} from './IAward';
+import {IAward, getAdditionalScore} from './IAward';
 import {Player} from '../Player';
 import {TileType, isHazardTileType} from '../../common/TileType';
 import {MoonExpansion} from '../moon/MoonExpansion';
@@ -16,7 +16,7 @@ export class Landlord implements IAward {
       (moonData) => moonData.moon.spaces.filter(
         (space) => space.tile !== undefined && space.player === player).length,
       () => 0);
-
-    return marsSpaces + moonSpaces;
+    const score = marsSpaces + moonSpaces;
+    return score + getAdditionalScore(player);
   }
 }

@@ -1,4 +1,4 @@
-import {PlayerId} from '@/common/Types';
+import {PlayerId} from '../../common/Types';
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {IAward} from './IAward';

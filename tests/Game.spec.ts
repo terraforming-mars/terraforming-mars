@@ -416,7 +416,7 @@ describe('Game', () => {
       p.plants = 8;
     });
 
-    game.gotoFinalGreeneryPlacement();
+    game.takeNextFinalGreeneryAction();
 
     expect(player1.getWaitingFor()).is.undefined;
     expect(player2.getWaitingFor()).is.undefined;
@@ -471,7 +471,7 @@ describe('Game', () => {
     player1.plants = 8;
     player4.plants = 8;
 
-    game.gotoFinalGreeneryPlacement();
+    game.takeNextFinalGreeneryAction();
 
     // Even though player 3 is first player, they have no plants. So player 4 goes.
 

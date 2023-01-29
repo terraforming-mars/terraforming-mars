@@ -670,7 +670,7 @@ export class Game implements Logger {
 
     if (this.gameIsOver()) {
       this.log('Final greenery placement', (b) => b.forNewGeneration());
-      this.gotoFinalGreeneryPlacement();
+      this.takeNextFinalGreeneryAction();
       return;
     } else {
       this.players.forEach((player) => {
@@ -981,14 +981,15 @@ export class Game implements Logger {
   public playerIsDoneWithGame(player: Player): void {
     this.donePlayers.add(player.id);
     // Go back in to find someone else to play final greeneries.
-    this.gotoFinalGreeneryPlacement();
+    this.takeNextFinalGreeneryAction();
   }
 
-  // Well, this isn't just "go to the final greenery placement". It finds the next player
-  // who might be able to place a final greenery.
-  // Rename to takeNextFinalGreeneryAction?
-
-  public /* for testing */ gotoFinalGreeneryPlacement(): void {
+  /**
+   * Find the next player who might be able to place a final greenery and ask them.
+   *
+   * If nobody can add a greenery, end the game.
+   */
+  public /* for testing */ takeNextFinalGreeneryAction(): void {
     for (const player of this.getPlayersInGenerationOrder()) {
       if (this.donePlayers.has(player.id)) {
         continue;
@@ -997,6 +998,7 @@ export class Game implements Logger {
       // You many not place greeneries in solo mode unless you have already won the game
       // (e.g. completed global parameters, reached TR63.)
       if (this.isSoloMode() && !this.isSoloModeWin()) {
+        this.log('Final greenery phase is skipped since you did not complete the win condition.', (b) => b.forNewGeneration());
         continue;
       }
 

@@ -3,8 +3,9 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
+import {ASIMOV_AWARD_BONUS} from '../../../src/common/constants';
 
-import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {cast, forceGenerationEnd} from '../../TestingUtils';
 import {Asimov} from '../../../src/server/cards/leaders/Asimov';
 
 describe('Asimov', function() {
@@ -20,7 +21,7 @@ describe('Asimov', function() {
     player2 = getTestPlayer(game, 1);
   });
 
-  it('Has +2 score on all awards', function() {
+  it('Has +ASIMOV_AWARD_BONUS score on all awards', function() {
     // Sanity check that the number of awards in the game is not-0
     expect(game.awards).length.greaterThan(0);
     // Sanity check that we have no bonuses before we play Asimov
@@ -30,7 +31,7 @@ describe('Asimov', function() {
     // Play Asimov, get a bonus
     player.playedCards.push(card);
     game.awards.forEach((award) => {
-      expect(award.getScore(player)).eq(2);
+      expect(award.getScore(player)).eq(ASIMOV_AWARD_BONUS);
     });
   });
 

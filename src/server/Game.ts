@@ -67,6 +67,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
+import {addDays, dayStringToDays} from './database/utils.ts';
 
 export interface Score {
   corporation: String;
@@ -79,6 +80,7 @@ export class Game implements Logger {
   public rng: SeededRandom;
   public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
+  public createdTime: Date = new Date(0);
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
   public undoCount: number = 0; // Each undo increases it
@@ -213,6 +215,8 @@ export class Game implements Logger {
 
     const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
     game.spectatorId = spectatorId;
+    // This evaluation of created time doesn't match what's stored in the database, but that's fine.
+    game.createdTime = new Date();
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresHazards, players);
@@ -359,6 +363,7 @@ export class Game implements Logger {
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies.map((colony) => colony.serialize()),
       corporationDeck: this.corporationDeck.serialize(),
+      createdTimeMs: this.createdTime.getTime(),
       currentSeed: this.rng.current,
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
@@ -1519,6 +1524,14 @@ export class Game implements Logger {
     return space;
   }
 
+  public expectedPurgeTimeMs(): number {
+    if (this.createdTime.getTime() === 0) {
+      return 0;
+    }
+    const days = dayStringToDays(process.env.MAX_GAME_DAYS, 10);
+    return addDays(this.createdTime, days).getTime();
+  }
+
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
     gameOptions.bannedCards = gameOptions.bannedCards ?? [];
@@ -1538,6 +1551,8 @@ export class Game implements Logger {
 
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
     game.spectatorId = d.spectatorId;
+    // TODO(kberg): remove ?? 0 by 2023-03-15
+    game.createdTime = new Date(d.createdTimeMs ?? 0);
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone | string) => {

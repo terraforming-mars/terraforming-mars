@@ -27,6 +27,7 @@ export type SerializedGame = {
     corporationsDraftDirection: 'before' | 'after';
     corporationDeck: SerializedDeck,
     corporationsToDraft: Array<CardName>;
+    createdTimeMs: number;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
     draftedPlayers: Array<PlayerId>;

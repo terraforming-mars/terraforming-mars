@@ -719,10 +719,23 @@ describe('Game', () => {
     game.pathfindersData = undefined;
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
-    expect(serializedKeys).not.include('rng');
+
+    const unserializedFieldsInGame = ['rng', 'discardedColonies', 'monsInsuranceOwner', 'createdTime'];
+    const serializedValuesNotInGame = ['seed', 'currentSeed', 'createdTimeMs'];
+
     const gameKeys = Object.keys(game);
-    expect(serializedKeys.concat('rng', 'discardedColonies', 'monsInsuranceOwner').sort())
-      .deep.eq(gameKeys.concat('seed', 'currentSeed').sort());
+
+    for (const field of unserializedFieldsInGame) {
+      expect(serializedKeys).does.not.include(field);
+      expect(gameKeys).does.include(field);
+    }
+    for (const field of serializedValuesNotInGame) {
+      expect(gameKeys).does.not.include(field);
+      expect(serializedKeys).does.include(field);
+    }
+
+    expect(serializedKeys.concat(...unserializedFieldsInGame).sort())
+      .deep.eq(gameKeys.concat(...serializedValuesNotInGame).sort());
   });
 
   it('deserializing a game without moon data still loads', () => {

@@ -120,9 +120,9 @@ export class Player {
 
   // Cards
   public dealtCorporationCards: Array<ICorporationCard> = [];
-  public dealtProjectCards: Array<IProjectCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
   public dealtLeaderCards: Array<IProjectCard> = [];
+  public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IProjectCard> = [];
   public leaderCardsInHand: Array<IProjectCard> = [];
@@ -2028,9 +2028,9 @@ export class Player {
       pendingInitialActions: this.pendingInitialActions.map((c) => c.name),
       // Cards
       dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
+      dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
       dealtLeaderCards: this.dealtLeaderCards.map((c) => c.name),
       dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
-      dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
       cardsInHand: this.cardsInHand.map((c) => c.name),
       preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
       leaderCardsInHand: this.leaderCardsInHand.map((c) => c.name),
@@ -2153,8 +2153,8 @@ export class Player {
 
     player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
-    player.dealtLeaderCards = cardFinder.leadersFromJSON(d.dealtLeaderCards);
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
+    player.dealtLeaderCards = cardFinder.leadersFromJSON(d.dealtLeaderCards);
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);

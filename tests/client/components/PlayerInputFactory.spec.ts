@@ -32,6 +32,7 @@ const baseInput = {
   coloniesModel: undefined,
   selectBlueCardAction: false,
   availableParties: undefined,
+  showReset: false,
 };
 
 const typesToTest: PlayerInputModel[] = [

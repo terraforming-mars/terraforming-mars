@@ -59,10 +59,10 @@ export class LocalFilesystem implements IDatabase {
     writeFileSync(this.historyFilename(serializedGame.id, serializedGame.lastSaveId), text);
   }
 
-  getGame(game_id: GameId): Promise<SerializedGame> {
+  getGame(gameId: GameId): Promise<SerializedGame> {
     try {
-      console.log(`Loading ${game_id}`);
-      const text = readFileSync(this.filename(game_id));
+      console.log(`Loading ${gameId}`);
+      const text = readFileSync(this.filename(gameId));
       const serializedGame = JSON.parse(text.toString());
       return Promise.resolve(serializedGame);
     } catch (e) {

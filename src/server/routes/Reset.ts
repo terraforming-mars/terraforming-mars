@@ -60,14 +60,11 @@ export class Reset extends Handler {
       return;
     }
 
-    /*
-     * The `lastSaveId` property is incremented during every `takeAction`. So to load the last one, decrement by one.
-     */
-    const lastSaveId = player.game.lastSaveId - 1;
     try {
-      const game = await ctx.gameLoader.restoreGameAt(player.game.id, lastSaveId);
+      const game = await ctx.gameLoader.getGame(player.game.id, /** force reload */ true);
       if (game !== undefined) {
         const reloadedPlayer = game.getPlayerById(player.id);
+        game.inputsThisRound = 0;
         ctx.route.writeJson(res, Server.getPlayerModel(reloadedPlayer));
         return;
       }

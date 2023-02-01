@@ -113,6 +113,7 @@ export class Server {
       cardsInHand: this.getCards(player, player.cardsInHand, {showCalculatedCost: true}),
       dealtCorporationCards: this.getCards(player, player.dealtCorporationCards),
       dealtPreludeCards: this.getCards(player, player.dealtPreludeCards),
+      dealtLeaderCards: this.getCards(player, player.dealtLeaderCards),
       dealtProjectCards: this.getCards(player, player.dealtProjectCards),
       draftedCorporations: this.getCards(player, player.draftedCorporations),
       draftedCards: this.getCards(player, player.draftedCards, {showCalculatedCost: true}),
@@ -120,6 +121,7 @@ export class Server {
       id: player.id,
       pickedCorporationCard: player.pickedCorporationCard ? this.getCards(player, [player.pickedCorporationCard]) : [],
       preludeCardsInHand: this.getCards(player, player.preludeCardsInHand),
+      leaderCardsInHand: this.getCards(player, player.leaderCardsInHand),
       thisPlayer: thisPlayer,
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
       players: players,
@@ -559,6 +561,7 @@ export class Server {
       includeFanMA: options.includeFanMA,
       includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,
+      leadersExtension: options.leadersExtension,
       moonExpansion: options.moonExpansion,
       pathfindersExpansion: options.pathfindersExpansion,
       preludeExtension: options.preludeExtension,
@@ -574,9 +577,9 @@ export class Server {
       requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
       turmoilExtension: options.turmoilExtension,
-      venusNextExtension: options.venusNextExtension,
-      undoOption: options.undoOption,
       twoCorpsVariant: options.twoCorpsVariant,
+      venusNextExtension: options.venusNextExtension,
+      undoOption: options.undoOption,      
     };
   }
 

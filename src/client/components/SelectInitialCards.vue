@@ -14,6 +14,7 @@
       </div>
     </div>
     <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
+    <SelectCard v-if="hasLeaders" :playerView="playerView" :playerinput="leadersCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="leadersChanged" />
     <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <template v-if="this.selectedCorporations.length === 1">
       <div><span v-i18n>Starting Megacredits:</span> <div class="megacredits">{{getStartingMegacredits()}}</div></div>
@@ -55,6 +56,8 @@ type SelectInitialCardsModel = {
   // End result will be a single corporation, but the player may select multiple while deciding what to keep.
   selectedCorporations: Array<CardName>,
   selectedPreludes: Array<CardName>,
+  // End result will be a single CEO/Leader, but the player may select multiple while deciding what to keep.
+  selectedLeaders: Array<CardName>,
   valid: boolean,
   warning: string | undefined,
 }
@@ -93,6 +96,7 @@ export default (Vue as WithRefs<Refs>).extend({
       selectedCards: [],
       selectedCorporations: [],
       selectedPreludes: [],
+      selectedLeaders: [],
       valid: false,
       warning: undefined,
     };
@@ -220,6 +224,14 @@ export default (Vue as WithRefs<Refs>).extend({
           cards: this.selectedPreludes,
         });
       }
+      if (this.hasLeaders) {
+        if (this.selectedLeaders.length === 1) {
+          result.responses.push({
+            type: 'card',
+            cards: [this.selectedLeaders[0]],
+          });
+        }
+      }
       result.responses.push({
         type: 'card',
         cards: this.selectedCards,
@@ -236,6 +248,10 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;
+      this.validate();
+    },
+    leadersChanged(cards: Array<CardName>) {
+      this.selectedLeaders = cards;
       this.validate();
     },
     calcuateWarning(): boolean {
@@ -256,6 +272,16 @@ export default (Vue as WithRefs<Refs>).extend({
         }
         if (this.selectedPreludes.length > 2) {
           this.warning = 'You selected too many preludes';
+          return false;
+        }
+      }
+      if (this.hasLeaders) {
+        if (this.selectedLeaders.length < 1) {
+          this.warning = 'Select 1 CEO';
+          return false;
+        }
+        if (this.selectedLeaders.length > 1) {
+          this.warning = 'You selected too many CEOs';
           return false;
         }
       }
@@ -285,7 +311,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.playerView.game.gameOptions.preludeExtension === true;
     },
     hasLeaders() {
-      return this.playerView.game.gameOptions.leaderExtension === true;
+      return this.playerView.game.gameOptions.leadersExtension === true;
     },
     corpCardOption() {
       const option = getOption(this.playerinput.options, 0);
@@ -297,6 +323,17 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     preludeCardOption() {
       const option = getOption(this.playerinput.options, 1);
+      if (getPreferences().experimental_ui) {
+        option.max = undefined;
+      }
+      return option;
+    },
+    leadersCardOption() {
+      let counter = 1;
+      if (this.hasPrelude === true) {
+        counter += 1;
+      }
+      const option = getOption(this.playerinput.options, counter);
       if (getPreferences().experimental_ui) {
         option.max = undefined;
       }

@@ -21,6 +21,7 @@ export type GameOptionsModel = {
   includeFanMA: boolean,
   includeVenusMA: boolean,
   initialDraftVariant: boolean,
+  leadersExtension: boolean,
   moonExpansion: boolean,
   pathfindersExpansion: boolean,
   preludeExtension: boolean,
@@ -36,7 +37,7 @@ export type GameOptionsModel = {
   requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
   turmoilExtension: boolean,
+  twoCorpsVariant: boolean,
   venusNextExtension: boolean,
   undoOption: boolean,
-  twoCorpsVariant: boolean,
 }

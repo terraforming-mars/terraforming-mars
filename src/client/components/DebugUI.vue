@@ -85,6 +85,13 @@
       </section>
       <br>
       <section class="debug-ui-cards-list">
+          <h2 v-i18n>CEOs</h2>
+          <div class="cardbox" v-for="card in getAllLeaderCards()" :key="card">
+              <Card v-if="showCard(card)" :card="{'name': card}" />
+          </div>
+      </section>
+      <br>
+      <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
         <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
             <Card v-if="showCard(card)" :card="{'name': card}" />
@@ -421,6 +428,10 @@ export default Vue.extend({
     },
     getAllPreludeCards() {
       const names = getCards(byType(CardType.PRELUDE)).map(toName);
+      return this.sort(names);
+    },
+    getAllLeaderCards() {
+      const names = getCards(byType(CardType.LEADER)).map(toName);
       return this.sort(names);
     },
     getAllGlobalEvents() {

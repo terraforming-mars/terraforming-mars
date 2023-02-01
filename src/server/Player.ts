@@ -1281,12 +1281,7 @@ export class Player {
       ([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
         const action = card.action(this);
-        if (action !== undefined) {
-          this.game.defer(new SimpleDeferredAction(
-            this,
-            () => action,
-          ));
-        }
+        this.defer(action);
         this.actionsThisGeneration.add(card.name);
         return undefined;
       }, {selectBlueCardAction: true},

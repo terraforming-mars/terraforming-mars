@@ -1740,9 +1740,8 @@ export class Player {
       });
       return;
     } else if (this.leaderCardsInHand.length > 0) {
-      // Leader cards have to be played following prelude phase.
-      // These are 'free' actions. We play ALL leader cards here, even if the player has more than 1.
-      // After they've been played we proceed to the players actual turn
+      // The Leader phase occurs between the Prelude phase and before the Action phase.
+      // All leader cards are played before players take their first normal actions.
       game.phase = Phase.LEADERS;
       const playableLeaderCards = this.getPlayableLeaderCards();
       for (let i = playableLeaderCards.length - 1; i >= 0; i--) {

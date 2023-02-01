@@ -1513,7 +1513,7 @@ export class Player {
   }
 
   private getPlayableLeaderCards(): Array<IProjectCard> {
-    return this.leaderCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
+    return this.leaderCardsInHand.filter((card) => card.canPlay?.(this) === true);
   }
 
   public getPlayableCards(): Array<IProjectCard> {

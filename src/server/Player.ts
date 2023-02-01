@@ -64,6 +64,9 @@ import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
+import {LeadersExtension} from './LeadersExtension';
+import {LeaderCard} from './cards/leaders/LeaderCard';
+// import {VanAllen} from './cards/leaders/VanAllen';
 
 /**
  * Behavior when playing a card:
@@ -119,8 +122,10 @@ export class Player {
   public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
+  public dealtLeaderCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IProjectCard> = [];
+  public leaderCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
   public draftedCorporations: Array<ICorporationCard> = [];
@@ -267,6 +272,11 @@ export class Player {
           corp.onIncreaseTerraformRating?.(this, player, steps);
         });
       });
+      // Greta CEO hook
+      // if (this.cardIsInEffect(CardName.GRETA)) {
+      //   const greta = this.playedCards.find((card) => card.name === CardName.GRETA) as LeaderCard;
+      //   greta.onTRIncrease!(this);
+      // }
     };
 
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
@@ -514,6 +524,8 @@ export class Player {
     });
 
     this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
+    // calculateVictoryPoints for CEO Duncan
+    // LeadersExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 
@@ -769,6 +781,16 @@ export class Player {
     return result;
   }
 
+  public getUsableOPGLeaderCards(): Array<ICard & IActionCard> {
+    const result: Array<ICard & IActionCard> = [];
+    for (const card of this.getPlayableActionCards()) {
+      if (card.cardType === CardType.LEADER) {
+        result.push(card);
+      }
+    }
+    return result;
+  }
+
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
@@ -784,6 +806,10 @@ export class Player {
     this.plants += this.production.plants;
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
+    // Turn off Leader OPG actions that were activated this generation
+    this.playedCards
+      .filter((card) => card.cardType === CardType.LEADER)
+      .forEach((card) => (card as LeaderCard).opgActionIsActive = false);
   }
 
   private doneWorldGovernmentTerraforming(): void {
@@ -1245,6 +1271,26 @@ export class Player {
     );
   }
 
+  private playLeaderOPGAction(): PlayerInput {
+    return new SelectCard<ICard & IActionCard>(
+      'Use CEO once per game action',
+      'Take action',
+      this.getUsableOPGLeaderCards(),
+      ([card]) => {
+        this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
+        const action = card.action(this);
+        if (action !== undefined) {
+          this.game.defer(new SimpleDeferredAction(
+            this,
+            () => action,
+          ));
+        }
+        this.actionsThisGeneration.add(card.name);
+        return undefined;
+      }, {selectBlueCardAction: true},
+    );
+  }
+
   public playAdditionalCorporationCard(corporationCard: ICorporationCard): void {
     if (this.corporations.length === 0) {
       throw new Error('Cannot add additional corporation when it does not have a starting corporation.');
@@ -1335,7 +1381,10 @@ export class Player {
         player: this,
         milestone: milestone,
       });
-      this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+      // VanAllen CEO Hook for Milestones
+      const cost = this.cardIsInEffect(CardName.VANALLEN) ? 0 : MILESTONE_COST;
+      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
+      // VanAllen.onMilestoneClaimed(this.game); // Make sure to give Van Allen 3MC
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -1464,6 +1513,10 @@ export class Player {
 
   private getPlayablePreludeCards(): Array<IProjectCard> {
     return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
+  }
+
+  private getPlayableLeaderCards(): Array<IProjectCard> {
+    return this.leaderCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
   }
 
   public getPlayableCards(): Array<IProjectCard> {
@@ -1689,6 +1742,20 @@ export class Player {
         }
       });
       return;
+    } else if (this.leaderCardsInHand.length > 0) {
+      // Leader cards have to be played following prelude phase.
+      // These are 'free' actions. We play ALL leader cards here, even if the player has more than 1.
+      // After they've been played we proceed to the players actual turn
+      game.phase = Phase.LEADERS;
+      const playableLeaderCards = this.getPlayableLeaderCards();
+      for (let i = playableLeaderCards.length - 1; i >= 0; i--) {
+        // start from the end of the list and work backwards, we're removing items as we go.
+        const card = this.leaderCardsInHand[i];
+        this.playCard(card);
+      }
+      // Null out leaderCardsInHand, anything left was unplayable.
+      this.leaderCardsInHand = [];
+      this.takeAction(); // back to top
     } else {
       game.phase = Phase.ACTION;
     }
@@ -1839,6 +1906,10 @@ export class Player {
       }
     });
 
+    if (LeadersExtension.leaderActionIsUsable(this)) {
+      action.options.push(this.playLeaderOPGAction());
+    }
+
     if (this.game.getPlayers().length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
@@ -1961,10 +2032,12 @@ export class Player {
       pendingInitialActions: this.pendingInitialActions.map((c) => c.name),
       // Cards
       dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
+      dealtLeaderCards: this.dealtLeaderCards.map((c) => c.name),
       dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
       dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
       cardsInHand: this.cardsInHand.map((c) => c.name),
       preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
+      leaderCardsInHand: this.leaderCardsInHand.map((c) => c.name),
       playedCards: this.playedCards.map(serializeProjectCard),
       draftedCards: this.draftedCards.map((c) => c.name),
       cardCost: this.cardCost,
@@ -2084,10 +2157,12 @@ export class Player {
 
     player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
+    player.dealtLeaderCards = cardFinder.leadersFromJSON(d.dealtLeaderCards);
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
+    player.leaderCardsInHand = cardFinder.leadersFromJSON(d.leaderCardsInHand);
     player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 

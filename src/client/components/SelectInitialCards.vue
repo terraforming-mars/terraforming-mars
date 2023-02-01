@@ -277,7 +277,15 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },
     hasPrelude() {
-      return this.playerinput.options?.length === 3;
+      // Was previously this:
+      // return this.playerinput.options?.length === 3;
+      // Have kept these here for notes as it may be game breaking.
+      // I'm unsure why we check options length instead of preludeExtension gameOptions
+      // But, now that Leaders is in the game, options length can be 3 when leaders is on but preludes is off.
+      return this.playerView.game.gameOptions.preludeExtension === true;
+    },
+    hasLeaders() {
+      return this.playerView.game.gameOptions.leaderExtension === true;
     },
     corpCardOption() {
       const option = getOption(this.playerinput.options, 0);

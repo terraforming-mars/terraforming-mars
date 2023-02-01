@@ -1373,9 +1373,11 @@ export class Player {
         milestone: milestone,
       });
       // VanAllen CEO Hook for Milestones
-      const cost = this.cardIsInEffect(CardName.VANALLEN) ? 0 : MILESTONE_COST;
-      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
-      // VanAllen.onMilestoneClaimed(this.game); // Make sure to give Van Allen 3MC
+      if (this.cardIsInEffect(CardName.VANALLEN)) {
+        this.addResource(Resources.MEGACREDITS, 3, {log: true});
+      } else {
+        this.game.defer(new SelectPaymentDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+      }
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });

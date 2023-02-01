@@ -65,7 +65,7 @@ import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {LeadersExtension} from './LeadersExtension';
-import {LeaderCard} from './cards/leaders/LeaderCard';
+import {isLeaderCard} from './cards/leaders/LeaderCard';
 // import {VanAllen} from './cards/leaders/VanAllen';
 
 /**
@@ -807,9 +807,11 @@ export class Player {
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
     // Turn off Leader OPG actions that were activated this generation
-    this.playedCards
-      .filter((card) => card.cardType === CardType.LEADER)
-      .forEach((card) => (card as LeaderCard).opgActionIsActive = false);
+    for (const card of this.playedCards) {
+      if (isLeaderCard(card)) {
+        card.opgActionIsActive = false;
+      }
+    }
   }
 
   private doneWorldGovernmentTerraforming(): void {

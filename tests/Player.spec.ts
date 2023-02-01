@@ -226,6 +226,8 @@ describe('Player', function() {
       actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
       pendingInitialActions: [],
       dealtCorporationCards: [CardName.THARSIS_REPUBLIC],
+      dealtLeaderCards: [CardName.KAREN],
+      leaderCardsInHand: [],
       dealtProjectCards: [CardName.FLOATER_LEASING, CardName.BUTTERFLY_EFFECT],
       dealtPreludeCards: [CardName.MOHOLE_EXCAVATION, CardName.LAVA_TUBE_SETTLEMENT],
       cardsInHand: [CardName.EARTH_ELEVATOR, CardName.DUST_SEALS],

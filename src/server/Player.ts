@@ -782,13 +782,7 @@ export class Player {
   }
 
   public getUsableOPGLeaderCards(): Array<ICard & IActionCard> {
-    const result: Array<ICard & IActionCard> = [];
-    for (const card of this.getPlayableActionCards()) {
-      if (card.cardType === CardType.LEADER) {
-        result.push(card);
-      }
-    }
-    return result;
+    return this.getPlayableActionCards().filter((card) => isLeaderCard(card))
   }
 
   public runProductionPhase(): void {

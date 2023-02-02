@@ -7,7 +7,7 @@ require('console-stamp')(
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
-import * as raw_settings from './genfiles/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 import * as prometheus from 'prom-client';
 
 import {Database} from './database/Database';

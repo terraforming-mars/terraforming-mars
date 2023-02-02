@@ -4,9 +4,9 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ASIMOV_AWARD_BONUS} from '../../../src/common/constants';
-
 import {cast, forceGenerationEnd} from '../../TestingUtils';
 import {Asimov} from '../../../src/server/cards/leaders/Asimov';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('Asimov', function() {
   let card: Asimov;
@@ -21,7 +21,7 @@ describe('Asimov', function() {
     player2 = getTestPlayer(game, 1);
   });
 
-  it('Has +ASIMOV_AWARD_BONUS score on all awards', function() {
+  it('Has +ASIMOV_AWARD_BONUS ('+ASIMOV_AWARD_BONUS+') score on all awards', function() {
     // Sanity check that the number of awards in the game is not-0
     expect(game.awards).length.greaterThan(0);
     // Sanity check that we have no bonuses before we play Asimov

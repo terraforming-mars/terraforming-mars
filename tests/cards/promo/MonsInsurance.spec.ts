@@ -135,8 +135,7 @@ describe('MonsInsurance - Solo', () => {
     card.play(player);
     player.setCorporationForTest(card);
 
-    // Get rid of selectInitialCards
-    player.popWaitingFor();
+    player.popSelectInitialCards();
   });
 
   it('Should play', () => {

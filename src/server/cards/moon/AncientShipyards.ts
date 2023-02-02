@@ -45,7 +45,7 @@ export class AncientShipyards extends Card {
       p.stealResource(Resources.MEGACREDITS, 2, player);
     }
     if (game.isSoloMode()) {
-      player.addResource(Resources.MEGACREDITS, 2);
+      player.addResource(Resources.MEGACREDITS, 8);
     }
     player.addResourceTo(this, 1);
     return undefined;

@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import * as raw_translations from '../genfiles/translations.json';
+import * as raw_translations from '../../genfiles/translations.json';
 
 const LOCALES_DIR = path.resolve('./src/locales/');
 const locales: Array<string> = [];

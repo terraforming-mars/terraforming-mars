@@ -47,7 +47,7 @@ describe('EnergyTapping', function() {
 
   it('Playable in solo mode', function() {
     const game = Game.newInstance('gameid', [player], player);
-    player.popWaitingFor(); // Eliminate SelectInitialCards
+    player.popSelectInitialCards();
     card.play(player);
 
     runAllActions(game);

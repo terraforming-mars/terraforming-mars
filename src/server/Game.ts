@@ -67,6 +67,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from './GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
+import {addDays, dayStringToDays} from './database/utils.ts';
 
 export interface Score {
   corporation: String;
@@ -79,6 +80,7 @@ export class Game implements Logger {
   public rng: SeededRandom;
   public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
+  public createdTime: Date = new Date(0);
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
   public undoCount: number = 0; // Each undo increases it
@@ -215,6 +217,8 @@ export class Game implements Logger {
 
     const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
     game.spectatorId = spectatorId;
+    // This evaluation of created time doesn't match what's stored in the database, but that's fine.
+    game.createdTime = new Date();
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresHazards, players);
@@ -361,6 +365,7 @@ export class Game implements Logger {
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies.map((colony) => colony.serialize()),
       corporationDeck: this.corporationDeck.serialize(),
+      createdTimeMs: this.createdTime.getTime(),
       currentSeed: this.rng.current,
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
@@ -606,13 +611,14 @@ export class Game implements Logger {
     this.players.forEach((player) => {
       player.needsToDraft = true;
       if (this.draftRound === 1 && !preludeDraft) {
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
       } else {
-        const cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-        this.unDraftedCards.delete(this.getDraftCardsFrom(player));
-        player.runDraftPhase(initialDraft, this.giveDraftCardsTo(player).name, cards);
+        const draftCardsFrom = this.getDraftCardsFrom(player).id;
+        const cards = this.unDraftedCards.get(draftCardsFrom);
+        this.unDraftedCards.delete(draftCardsFrom);
+        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, cards);
       }
     });
   }
@@ -671,7 +677,7 @@ export class Game implements Logger {
 
     if (this.gameIsOver()) {
       this.log('Final greenery placement', (b) => b.forNewGeneration());
-      this.gotoFinalGreeneryPlacement();
+      this.takeNextFinalGreeneryAction();
       return;
     } else {
       this.players.forEach((player) => {
@@ -816,7 +822,7 @@ export class Game implements Logger {
 
     // Push last card for each player
     this.players.forEach((player) => {
-      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player).id);
       if (lastCards !== undefined) {
         player.draftedCards.push(...lastCards);
       }
@@ -882,25 +888,22 @@ export class Game implements Logger {
     this.gotoInitialPhase();
   }
 
-  private getDraftCardsFrom(player: Player): PlayerId {
-    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-
-    // Change initial draft direction on second iteration
+  private getDraftCardsFrom(player: Player): Player {
+    // Special-case for the initial draft direction on second iteration
     if (this.generation === 1 && this.initialDraftIteration === 2) {
-      nextPlayer = this.getPlayerBefore(player);
+      return this.getPlayerBefore(player);
     }
 
-    return nextPlayer.id;
+    return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
   }
 
   private giveDraftCardsTo(player: Player): Player {
-    let nextPlayer = this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-
-    // Change initial draft direction on second iteration
+    // Special-case for the initial draft direction on second iteration
     if (this.initialDraftIteration === 2 && this.generation === 1) {
-      nextPlayer = this.getPlayerAfter(player);
+      return this.getPlayerAfter(player);
     }
-    return nextPlayer;
+
+    return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
   }
 
   private getPlayerBefore(player: Player): Player {
@@ -994,14 +997,15 @@ export class Game implements Logger {
   public playerIsDoneWithGame(player: Player): void {
     this.donePlayers.add(player.id);
     // Go back in to find someone else to play final greeneries.
-    this.gotoFinalGreeneryPlacement();
+    this.takeNextFinalGreeneryAction();
   }
 
-  // Well, this isn't just "go to the final greenery placement". It finds the next player
-  // who might be able to place a final greenery.
-  // Rename to takeNextFinalGreeneryAction?
-
-  public /* for testing */ gotoFinalGreeneryPlacement(): void {
+  /**
+   * Find the next player who might be able to place a final greenery and ask them.
+   *
+   * If nobody can add a greenery, end the game.
+   */
+  public /* for testing */ takeNextFinalGreeneryAction(): void {
     for (const player of this.getPlayersInGenerationOrder()) {
       if (this.donePlayers.has(player.id)) {
         continue;
@@ -1010,6 +1014,7 @@ export class Game implements Logger {
       // You many not place greeneries in solo mode unless you have already won the game
       // (e.g. completed global parameters, reached TR63.)
       if (this.isSoloMode() && !this.isSoloModeWin()) {
+        this.log('Final greenery phase is skipped since you did not complete the win condition.', (b) => b.forNewGeneration());
         continue;
       }
 
@@ -1530,6 +1535,14 @@ export class Game implements Logger {
     return space;
   }
 
+  public expectedPurgeTimeMs(): number {
+    if (this.createdTime.getTime() === 0) {
+      return 0;
+    }
+    const days = dayStringToDays(process.env.MAX_GAME_DAYS, 10);
+    return addDays(this.createdTime, days).getTime();
+  }
+
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
     gameOptions.bannedCards = gameOptions.bannedCards ?? [];
@@ -1550,6 +1563,8 @@ export class Game implements Logger {
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
+    // TODO(kberg): remove ?? 0 by 2023-03-15
+    game.createdTime = new Date(d.createdTimeMs ?? 0);
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone | string) => {

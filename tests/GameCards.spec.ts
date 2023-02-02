@@ -82,5 +82,18 @@ describe('GameCards', function() {
     const preludeDeck = new GameCards(gameOptions).getPreludeCards();
     expect(preludeDeck).to.not.contain(CardName.MERGER);
   });
+
+  it('Leaders: Includes/Excludes specific CEOs if those expansions are/are not selected ', function() {
+    const gameOptions = testGameOptions({
+      corporateEra: true,
+      leadersExtension: true,
+      preludeExtension: true,
+      moonExpansion: false,
+    });
+    const leaderNames = new GameCards(gameOptions).getLeaderCards().map((c) => c.name);
+    expect(leaderNames).to.contain(CardName.FLOYD); // Yes generic Leader
+    expect(leaderNames).to.contain(CardName.KAREN); // Yes Prelude
+    expect(leaderNames).not.to.contain(CardName.NEIL); // No Moon
+  });
 });
 

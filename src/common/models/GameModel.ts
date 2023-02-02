@@ -20,6 +20,7 @@ export type GameModel = {
   discardedColonies: Array<ColonyModel>; // TODO(kberg): Replace with Array<ColonyName>
   corporationsToDraft: Array<CardModel>;
   deckSize: number;
+  expectedPurgeTimeMs: number;
   gameAge: number;
   gameOptions: GameOptionsModel;
   generation: number;

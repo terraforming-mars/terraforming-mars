@@ -12,6 +12,7 @@ export type SimpleGameModel = {
     spectatorId: SpectatorId | undefined;
     gameOptions: GameOptionsModel;
     lastSoloGeneration: number;
+    expectedPurgeTimeMs: number;
 }
 
 type SimplePlayerModel = {

@@ -49,6 +49,7 @@ import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {AresHandler} from '../ares/AresHandler';
+import {AwardScorer} from '../awards/AwardScorer';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -64,6 +65,7 @@ export class Server {
       spectatorId: game.spectatorId,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       lastSoloGeneration: game.lastSoloGeneration(),
+      expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
     };
   }
 
@@ -76,6 +78,7 @@ export class Server {
       colonies: this.getColonies(game, game.colonies),
       deckSize: game.projectDeck.drawPile.length,
       discardedColonies: this.getColonies(game, game.discardedColonies, /* showTrackPosition */ false),
+      expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
       gameAge: game.gameAge,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       generation: game.getGeneration(),
@@ -178,19 +181,17 @@ export class Server {
   }
 
   public static getAwards(game: Game): Array<FundedAwardModel> {
-    const allAwards = game.awards;
     const fundedAwards = game.fundedAwards;
     const awardModels: Array<FundedAwardModel> = [];
 
-    for (const award of allAwards) {
-      const funded = fundedAwards.find(
-        (a) => a.award.name === award.name,
-      );
+    for (const award of game.awards) {
+      const funded = fundedAwards.find((a) => a.award.name === award.name);
+      const scorer = new AwardScorer(game, award);
       let scores: Array<AwardScore> = [];
       if (fundedAwards.length < 3 || funded !== undefined) {
         scores = game.getPlayers().map((player) => ({
           playerColor: player.color,
-          playerScore: award.getScore(player),
+          playerScore: scorer.get(player),
         }));
       }
 

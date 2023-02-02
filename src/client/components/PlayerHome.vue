@@ -263,6 +263,7 @@
       <div v-if="game.spectatorId">
         <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
       </div>
+      <purge-warning :expectedPurgeTimeMs="playerView.game.expectedPurgeTimeMs"></purge-warning>
   </div>
 </template>
 
@@ -290,6 +291,7 @@ import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
+import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
@@ -367,6 +369,7 @@ export default Vue.extend({
     MoonBoard,
     PlanetaryTracks,
     'stacked-cards': StackedCards,
+    PurgeWarning,
   },
   mixins: [PlayerMixin],
   methods: {

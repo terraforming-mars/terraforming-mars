@@ -17,7 +17,7 @@ describe('GreatEscarpmentConsortium', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
-    player.popWaitingFor(); // Remove SelectInitialCards
+    player.popSelectInitialCards();
   });
 
   it('Cannot play without steel production', function() {
@@ -56,7 +56,7 @@ describe('GreatEscarpmentConsortium', function() {
 
   it('Can play in solo - will not reduce own production', function() {
     const game = Game.newInstance('gameid', [player], player);
-    player.popWaitingFor(); // Remove SelectInitialCards
+    player.popSelectInitialCards();
     player.production.add(Resources.STEEL, 1);
     expect(player.production.steel).to.eq(1);
 

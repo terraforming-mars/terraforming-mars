@@ -1,7 +1,7 @@
 import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
-import {PlayerId, GameId, SpectatorId, isGameId} from '../../common/Types';
+import {PlayerId, GameId, SpectatorId, isGameId, ParticipantId} from '../../common/Types';
 import {IGameLoader} from './IGameLoader';
 import {GameIdLedger} from './IDatabase';
 import {Cache} from './Cache';
@@ -75,7 +75,7 @@ export class GameLoader implements IGameLoader {
 
   public async getIds(): Promise<Array<GameIdLedger>> {
     const d = await this.cache.getGames();
-    const map = new MultiMap<GameId, SpectatorId | PlayerId>();
+    const map = new MultiMap<GameId, ParticipantId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
     const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
     return arry.map(([gameId, participantIds]) => ({gameId, participantIds}));

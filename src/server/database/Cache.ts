@@ -1,5 +1,5 @@
 import {Game} from '../Game';
-import {PlayerId, GameId, SpectatorId} from '../../common/Types';
+import {GameId, ParticipantId} from '../../common/Types';
 import {once} from 'events';
 import {EventEmitter} from 'events';
 import * as prometheus from 'prom-client';
@@ -23,7 +23,7 @@ const metrics = {
 export class Cache extends EventEmitter {
   private loaded = false;
   private readonly games = new Map<GameId, Game | undefined>();
-  private readonly participantIds = new Map<SpectatorId | PlayerId, GameId>();
+  private readonly participantIds = new Map<ParticipantId, GameId>();
   private readonly db = Database.getInstance();
 
   /** Map of game IDs and the time they were scheduled for eviction */
@@ -41,7 +41,7 @@ export class Cache extends EventEmitter {
     const game = await this.db.getGame(gameId);
     if (this.games.get(gameId) === undefined) {
       this.games.set(gameId, undefined);
-      const participantIds: Array<SpectatorId | PlayerId> = [];
+      const participantIds: Array<ParticipantId> = [];
       if (game.spectatorId !== undefined) {
         this.participantIds.set(game.spectatorId, gameId);
         participantIds.push(game.spectatorId);
@@ -99,7 +99,7 @@ export class Cache extends EventEmitter {
     }
   }
 
-  public async getGames(): Promise<{games:Map<GameId, Game | undefined>, participantIds:Map<SpectatorId | PlayerId, GameId>}> {
+  public async getGames(): Promise<{games:Map<GameId, Game | undefined>, participantIds:Map<ParticipantId, GameId>}> {
     if (!this.loaded) {
       await once(this, 'loaded');
     }

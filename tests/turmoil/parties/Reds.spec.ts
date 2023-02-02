@@ -98,7 +98,7 @@ describe('Reds', function() {
     const gameOptions = testGameOptions({turmoilExtension: true, moonExpansion: true});
     game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
     turmoil = game.turmoil!;
-    player.popWaitingFor(); // Remove SelectInitialCards
+    player.popSelectInitialCards();
 
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[2].id);
 

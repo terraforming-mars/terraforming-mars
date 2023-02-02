@@ -33,6 +33,9 @@ export class SelectCard<T extends ICard> extends BasePlayerInput {
       showOwner: config?.showOwner ?? false,
     };
     this.buttonLabel = buttonLabel;
+    if (cards.length < this.config.min) {
+      throw new Error(`Cannot select at least ${this.config.min} cards when provided ${cards.length} cards.`);
+    }
   }
 
   public process(input: InputResponse) {

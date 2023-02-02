@@ -38,6 +38,23 @@ describe('SelectCard', function() {
     expect(selected).deep.eq([ioMiningIndustries]);
   });
 
+  it('Cannot create if not enough cards are available', () => {
+    expect(() => new SelectCard(
+      'Select card',
+      'Save',
+      [],
+      cb,
+    )).to.throw(/Cannot select at least 1 cards when provided 0 cards.'/);
+
+    expect(() => new SelectCard(
+      'Select card',
+      'Save',
+      [aquiferPumping],
+      cb,
+      {min: 2},
+    )).to.throw(/Cannot select at least 2 cards when provided 1 cards./);
+  });
+
   it('Cannot select unavailable card', function() {
     const selectCards = new SelectCard(
       'Select card',

@@ -7,6 +7,7 @@ export enum Phase {
     CORPORATIONDRAFTING = 'corporation_drafting',
     DRAFTING = 'drafting',
     PRELUDES = 'preludes',
+    LEADERS = 'leaders',
     SOLAR = 'solar',
     INTERGENERATION = 'intergeneration',
 }

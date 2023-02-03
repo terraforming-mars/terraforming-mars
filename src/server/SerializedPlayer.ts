@@ -24,7 +24,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     color: Color;
     corporations: Array<SerializedCard>;
     dealtCorporationCards: Array<CardName>;
-    dealtLeaderCards: Array<CardName>;
+    dealtCeoCards: Array<CardName>;
     dealtPreludeCards: Array<CardName>;
     dealtProjectCards: Array<CardName>;
     draftedCards: Array<CardName>;
@@ -38,7 +38,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     heatProduction: number;
     id: PlayerId;
     lastCardPlayed?: CardName;
-    leaderCardsInHand: Array<CardName>;
+    ceoCardsInHand: Array<CardName>;
     megaCreditProduction: number;
     megaCredits: number;
     name: string;

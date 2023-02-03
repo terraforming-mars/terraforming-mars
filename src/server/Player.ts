@@ -121,11 +121,11 @@ export class Player {
   // Cards
   public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
-  public dealtLeaderCards: Array<IProjectCard> = [];
+  public dealtCeoCards: Array<IProjectCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IProjectCard> = [];
-  public leaderCardsInHand: Array<IProjectCard> = [];
+  public ceoCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
   public draftedCorporations: Array<ICorporationCard> = [];
@@ -781,7 +781,7 @@ export class Player {
     return result;
   }
 
-  public getUsableOPGLeaderCards(): Array<ICard & IActionCard> {
+  public getUsableOPGCeoCards(): Array<ICard & IActionCard> {
     return this.getPlayableActionCards().filter((card) => isLeaderCard(card));
   }
 
@@ -1267,11 +1267,11 @@ export class Player {
     );
   }
 
-  private playLeaderOPGAction(): PlayerInput {
+  private playCeoOPGAction(): PlayerInput {
     return new SelectCard<ICard & IActionCard>(
       'Use CEO once per game action',
       'Take action',
-      this.getUsableOPGLeaderCards(),
+      this.getUsableOPGCeoCards(),
       ([card]) => {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(card));
         const action = card.action(this);
@@ -1508,8 +1508,8 @@ export class Player {
     return this.preludeCardsInHand.filter((card) => card.canPlay === undefined || card.canPlay(this));
   }
 
-  private getPlayableLeaderCards(): Array<IProjectCard> {
-    return this.leaderCardsInHand.filter((card) => card.canPlay?.(this) === true);
+  private getPlayableCeoCards(): Array<IProjectCard> {
+    return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
   }
 
   public getPlayableCards(): Array<IProjectCard> {
@@ -1735,18 +1735,18 @@ export class Player {
         }
       });
       return;
-    } else if (this.leaderCardsInHand.length > 0) {
+    } else if (this.ceoCardsInHand.length > 0) {
       // The Leader phase occurs between the Prelude phase and before the Action phase.
       // All leader cards are played before players take their first normal actions.
       game.phase = Phase.LEADERS;
-      const playableLeaderCards = this.getPlayableLeaderCards();
-      for (let i = playableLeaderCards.length - 1; i >= 0; i--) {
+      const playableCeoCards = this.getPlayableCeoCards();
+      for (let i = playableCeoCards.length - 1; i >= 0; i--) {
         // start from the end of the list and work backwards, we're removing items as we go.
-        const card = this.leaderCardsInHand[i];
+        const card = this.ceoCardsInHand[i];
         this.playCard(card);
       }
-      // Null out leaderCardsInHand, anything left was unplayable.
-      this.leaderCardsInHand = [];
+      // Null out ceoCardsInHand, anything left was unplayable.
+      this.ceoCardsInHand = [];
       this.takeAction(); // back to top
     } else {
       game.phase = Phase.ACTION;
@@ -1899,7 +1899,7 @@ export class Player {
     });
 
     if (LeadersExtension.leaderActionIsUsable(this)) {
-      action.options.push(this.playLeaderOPGAction());
+      action.options.push(this.playCeoOPGAction());
     }
 
     if (this.game.getPlayers().length > 1 &&
@@ -2025,11 +2025,11 @@ export class Player {
       // Cards
       dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
       dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
-      dealtLeaderCards: this.dealtLeaderCards.map((c) => c.name),
+      dealtCeoCards: this.dealtCeoCards.map((c) => c.name),
       dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
       cardsInHand: this.cardsInHand.map((c) => c.name),
       preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
-      leaderCardsInHand: this.leaderCardsInHand.map((c) => c.name),
+      ceoCardsInHand: this.ceoCardsInHand.map((c) => c.name),
       playedCards: this.playedCards.map(serializeProjectCard),
       draftedCards: this.draftedCards.map((c) => c.name),
       cardCost: this.cardCost,
@@ -2150,11 +2150,11 @@ export class Player {
     player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
-    player.dealtLeaderCards = cardFinder.leadersFromJSON(d.dealtLeaderCards);
+    player.dealtCeoCards = cardFinder.leadersFromJSON(d.dealtCeoCards);
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
-    player.leaderCardsInHand = cardFinder.leadersFromJSON(d.leaderCardsInHand);
+    player.ceoCardsInHand = cardFinder.leadersFromJSON(d.ceoCardsInHand);
     player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 

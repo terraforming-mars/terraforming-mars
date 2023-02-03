@@ -3,7 +3,7 @@ import {Game} from '../Game';
 import {Player} from '../Player';
 import {IAward} from './IAward';
 import {CardName} from '../../common/cards/CardName';
-import {ASIMOV_AWARD_BONUS} from '../../common/constants'
+import {ASIMOV_AWARD_BONUS} from '../../common/constants';
 
 export class AwardScorer {
   private scores: Map<PlayerId, number> = new Map();

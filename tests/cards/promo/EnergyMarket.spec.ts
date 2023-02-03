@@ -15,7 +15,7 @@ describe('EnergyMarket', function() {
     card = new EnergyMarket();
     player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player);
-    player.popWaitingFor(); // Removing SelectInitialCards
+    player.popSelectInitialCards();
   });
 
   it('Can not act', function() {

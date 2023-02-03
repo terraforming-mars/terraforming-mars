@@ -67,6 +67,8 @@ import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {LeadersExtension} from './LeadersExtension';
 import {isLeaderCard} from './cards/leaders/LeaderCard';
 // import {VanAllen} from './cards/leaders/VanAllen';
+import {AwardScorer} from './awards/AwardScorer';
+import {FundedAward} from './awards/FundedAward';
 
 /**
  * Behavior when playing a card:
@@ -1392,40 +1394,48 @@ export class Player {
   }
 
   private giveAwards(vpb: VictoryPointsBreakdown): void {
+    // Awards are disabled for 1 player games
+    if (this.game.isSoloMode()) return;
+
+    const maybeSetVP = (player: Player, fundedAward: FundedAward, vps: number, place: '1st' | '2nd') => {
+      if (player.id === this.id) {
+        vpb.setVictoryPoints(
+          'awards',
+          vps,
+          `${place} place for ${fundedAward.award.name} award (funded by ${fundedAward.player.name})`);
+      }
+    };
+
     this.game.fundedAwards.forEach((fundedAward) => {
-      // Awards are disabled for 1 player games
-      if (this.game.isSoloMode()) return;
-
+      const award = fundedAward.award;
+      const scorer = new AwardScorer(this.game, award);
       const players: Array<Player> = this.game.getPlayers().slice();
-      players.sort(
-        (p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1),
-      );
+      players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
 
-      // We have one rank 1 player
-      if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-        if (players[0].id === this.id) vpb.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+      // There is one rank 1 player
+      if (scorer.get(players[0]) > scorer.get(players[1])) {
+        maybeSetVP(players[0], fundedAward, 5, '1st');
         players.shift();
 
         if (players.length > 1) {
-          // We have one rank 2 player
-          if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-            if (players[0].id === this.id) vpb.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
-
-          // We have at least two rank 2 players
+          // There is one rank 2 player
+          if (scorer.get(players[0]) > scorer.get(players[1])) {
+            maybeSetVP(players[0], fundedAward, 2, '2nd');
           } else {
-            const score = fundedAward.award.getScore(players[0]);
-            while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-              if (players[0].id === this.id) vpb.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+            // There are at least two rank 2 players
+            const score = scorer.get(players[0]);
+            while (players.length > 0 && scorer.get(players[0]) === score) {
+              maybeSetVP(players[0], fundedAward, 2, '2nd');
               players.shift();
             }
           }
         }
 
-      // We have at least two rank 1 players
+      // There are at least two rank 1 players
       } else {
-        const score = fundedAward.award.getScore(players[0]);
-        while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-          if (players[0].id === this.id) vpb.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+        const score = scorer.get(players[0]);
+        while (players.length > 0 && scorer.get(players[0]) === score) {
+          maybeSetVP(players[0], fundedAward, 5, '1st');
           players.shift();
         }
       }

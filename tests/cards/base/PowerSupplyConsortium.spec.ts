@@ -17,7 +17,7 @@ describe('PowerSupplyConsortium', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
-    player.popWaitingFor(); // Remove SelectInitialCards
+    player.popSelectInitialCards();
   });
 
   it('Cannot play without power tags', function() {
@@ -66,7 +66,7 @@ describe('PowerSupplyConsortium', function() {
   it('Can play in solo mode if have enough power tags', function() {
     const soloPlayer = TestPlayer.BLUE.newPlayer();
     const soloGame = Game.newInstance('gameid2', [soloPlayer], soloPlayer);
-    soloPlayer.popWaitingFor(); // Remove SelectInitialCards
+    soloPlayer.popSelectInitialCards();
     soloPlayer.playedCards.push(card, card);
     expect(card.canPlay(soloPlayer)).is.true;
 

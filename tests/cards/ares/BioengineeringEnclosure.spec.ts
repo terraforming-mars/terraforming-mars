@@ -19,8 +19,8 @@ describe('BioengineeringEnclosure', function() {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
     game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
-    game.deferredActions.pop(); // Removing SelectInitialCards.
     player = getTestPlayer(game, 0);
+    player.popSelectInitialCards();
   });
 
   it('Can not play without a science tag', () => {

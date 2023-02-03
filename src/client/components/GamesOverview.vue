@@ -17,7 +17,7 @@ import * as constants from '@/common/constants';
 import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
-import {GameId, PlayerId, SpectatorId} from '@/common/Types';
+import {GameId, ParticipantId} from '@/common/Types';
 
 type FetchStatus = {
   id: GameId;
@@ -29,7 +29,7 @@ type DataModel = {
 };
 
 // Copied from routes/Game.ts and probably IDatabase. Should be centralized I suppose
-type Response = {gameId: GameId, participants: Array<SpectatorId | PlayerId>};
+type Response = {gameId: GameId, participants: Array<ParticipantId>};
 
 export default Vue.extend({
   name: 'games-overview',

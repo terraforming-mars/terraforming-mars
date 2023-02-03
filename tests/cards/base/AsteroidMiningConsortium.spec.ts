@@ -17,7 +17,7 @@ describe('AsteroidMiningConsortium', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player);
-    player.popWaitingFor(); // Remove SelectInitialCards.
+    player.popSelectInitialCards();
   });
 
   it('Cannot play if no titanium production', function() {

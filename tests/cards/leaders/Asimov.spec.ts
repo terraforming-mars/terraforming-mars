@@ -6,7 +6,8 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ASIMOV_AWARD_BONUS} from '../../../src/common/constants';
 import {cast, forceGenerationEnd} from '../../TestingUtils';
 import {Asimov} from '../../../src/server/cards/leaders/Asimov';
-import {CardName} from '../../../src/common/cards/CardName';
+import {FundedAwardModel} from '../../../src/common/models/FundedAwardModel';
+import {Server} from '../../../src/server/models/ServerModel';
 
 describe('Asimov', function() {
   let card: Asimov;
@@ -21,17 +22,27 @@ describe('Asimov', function() {
     player2 = getTestPlayer(game, 1);
   });
 
-  it('Has +ASIMOV_AWARD_BONUS ('+ASIMOV_AWARD_BONUS+') score on all awards', function() {
+  it('Asimov award bonuses', () => {
     // Sanity check that the number of awards in the game is not-0
     expect(game.awards).length.greaterThan(0);
-    // Sanity check that we have no bonuses before we play Asimov
-    game.awards.forEach((award) => {
-      expect(award.getScore(player)).eq(0);
+
+    function score(model: FundedAwardModel, p: TestPlayer): number {
+      return model.scores.find((s) => s.playerColor === p.color)!.playerScore;
+    }
+
+    const awardModel = Server.getAwards(game);
+    // Sanity check that there are no bonuses before we playing Asimov
+    awardModel.forEach((award) => {
+      expect(score(award, player), 'for ' + award.name).eq(0);
+      expect(score(award, player2), 'for ' + award.name).eq(0);
     });
+
     // Play Asimov, get a bonus
     player.playedCards.push(card);
-    game.awards.forEach((award) => {
-      expect(award.getScore(player)).eq(ASIMOV_AWARD_BONUS);
+    const awardModel2 = Server.getAwards(game);
+    awardModel2.forEach((award) => {
+      expect(score(award, player), 'for ' + award.name).eq(ASIMOV_AWARD_BONUS);
+      expect(score(award, player2), 'for ' + award.name).eq(0);
     });
   });
 

@@ -324,9 +324,8 @@ export default (Vue as WithRefs<Refs>).extend({
       return option;
     },
     ceoCardOption() {
-      let counter = 1;
-      if (this.hasPrelude === true) counter += 1;
-      const option = getOption(this.playerinput.options, counter);
+      const idx = (this.hasPrelude) ? 2 : 1;
+      const option = getOption(this.playerinput.options, idx);
       if (getPreferences().experimental_ui) {
         option.max = undefined;
       }

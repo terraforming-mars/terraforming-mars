@@ -802,7 +802,7 @@ export class Player {
     this.plants += this.production.plants;
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
-    // Turn off Leader OPG actions that were activated this generation
+    // Turn off CEO OPG actions that were activated this generation
     for (const card of this.playedCards) {
       if (isCeoCard(card)) {
         card.opgActionIsActive = false;

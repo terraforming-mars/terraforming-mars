@@ -60,7 +60,7 @@ import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {PlayerId, SpectatorId} from '@/common/Types';
+import {ParticipantId} from '@/common/Types';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyModel} from '@/common/models/ColonyModel';
@@ -122,7 +122,7 @@ export default Vue.extend({
   name: 'log-panel',
   props: {
     id: {
-      type: String as () => PlayerId | SpectatorId,
+      type: String as () => ParticipantId,
     },
     generation: {
       type: Number,

@@ -39,7 +39,7 @@ import Button from '@/client/components/common/Button.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
-import {SpectatorId, PlayerId} from '@/common/Types';
+import {ParticipantId} from '@/common/Types';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is
@@ -99,13 +99,13 @@ export default Vue.extend({
     getPlayerCubeColorClass(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg');
     },
-    getHref(playerId: PlayerId | SpectatorId): string {
+    getHref(playerId: ParticipantId): string {
       if (playerId === this.game.spectatorId) {
         return `/spectator?id=${playerId}`;
       }
       return `/player?id=${playerId}`;
     },
-    copyUrl(playerId: PlayerId | SpectatorId | undefined): void {
+    copyUrl(playerId: ParticipantId | undefined): void {
       if (playerId === undefined) return;
       copyToClipboard(window.location.origin + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;

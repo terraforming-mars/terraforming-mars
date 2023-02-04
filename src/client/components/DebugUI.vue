@@ -523,16 +523,16 @@ export default Vue.extend({
     milestoneModel(milestoneName: MilestoneName): ClaimedMilestoneModel {
       return {
         name: milestoneName,
-        player_name: '',
-        player_color: '',
+        playerName: '',
+        playerColor: '',
         scores: [],
       };
     },
     awardModel(awardName: AwardName): FundedAwardModel {
       return {
         name: awardName,
-        player_name: '',
-        player_color: '',
+        playerName: '',
+        playerColor: '',
         scores: [],
       };
     },

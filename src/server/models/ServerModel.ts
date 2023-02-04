@@ -112,6 +112,7 @@ export class Server {
 
     return {
       cardsInHand: this.getCards(player, player.cardsInHand, {showCalculatedCost: true}),
+      ceoCardsInHand: this.getCards(player, player.ceoCardsInHand),
       dealtCorporationCards: this.getCards(player, player.dealtCorporationCards),
       dealtPreludeCards: this.getCards(player, player.dealtPreludeCards),
       dealtCeoCards: this.getCards(player, player.dealtCeoCards),
@@ -122,7 +123,6 @@ export class Server {
       id: player.id,
       pickedCorporationCard: player.pickedCorporationCard ? this.getCards(player, [player.pickedCorporationCard]) : [],
       preludeCardsInHand: this.getCards(player, player.preludeCardsInHand),
-      ceoCardsInHand: this.getCards(player, player.ceoCardsInHand),
       thisPlayer: thisPlayer,
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
       players: players,

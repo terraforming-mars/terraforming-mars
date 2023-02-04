@@ -170,8 +170,8 @@ export class Server {
       }
 
       milestoneModels.push({
-        player_name: claimed === undefined ? '' : claimed.player.name,
-        player_color: claimed === undefined ? '' : claimed.player.color,
+        playerName: claimed === undefined ? '' : claimed.player.name,
+        playerColor: claimed === undefined ? '' : claimed.player.color,
         name: milestone.name,
         scores,
       });
@@ -196,8 +196,8 @@ export class Server {
       }
 
       awardModels.push({
-        player_name: funded === undefined ? '' : funded.player.name,
-        player_color: funded === undefined ? '' : funded.player.color,
+        playerName: funded === undefined ? '' : funded.player.name,
+        playerColor: funded === undefined ? '' : funded.player.color,
         name: award.name,
         scores: scores,
       });

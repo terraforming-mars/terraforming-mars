@@ -5,14 +5,14 @@ import {ITagCount} from '../cards/ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
-import {PlayerId, SpectatorId} from '../Types';
+import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
 import {Resources} from '../Resources';
 
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id?: PlayerId | SpectatorId;
+  id?: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
 }
 

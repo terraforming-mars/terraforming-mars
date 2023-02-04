@@ -1,6 +1,6 @@
 <template>
-  <div :title="$t('press to show or hide the description')" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
-      <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
+  <div :title="$t('press to show or hide the description')" :class="milestone.playerName ? 'ma-block pwned-item': 'ma-block'">
+      <div class="ma-player" v-if="milestone.playerName"><i :title="milestone.playerName" :class="'board-cube board-cube--'+milestone.playerColor" /></div>
       <div class="ma-name--milestones" :class="nameCss">
           <span v-i18n>{{milestone.name}}</span>
           <div v-if="show_scores" class="ma-scores player_home_block--milestones-and-awards-scores">

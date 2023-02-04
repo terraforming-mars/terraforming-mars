@@ -55,7 +55,7 @@ export class GameCards {
       [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
       [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
-      [gameOptions.ceoExtension, CEO_CARD_MANIFEST], // TODO: Rename to CEO_CARD_MANIFEST
+      [gameOptions.ceoExtension, CEO_CARD_MANIFEST],
     ];
 
     this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);

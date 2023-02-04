@@ -936,13 +936,6 @@ export class Game implements Logger {
 
     this.inputsThisRound = 0;
 
-    // // Find the next player who has not passed.
-    // const thisPlayer = this.getPlayerById(this.activePlayer);
-    // for (let nextPlayer = this.getPlayerAfter(thisPlayer);
-    //   nextPlayer !== thisPlayer && this.hasPassedThisActionPhase(nextPlayer);
-    //   nextPlayer = this.getPlayerAfter(thisPlayer)) { // eslint-disable-line no-empty
-    // }
-
     // This next section can be done more simply.
     if (this.allPlayersHavePassed()) {
       this.gotoProductionPhase();

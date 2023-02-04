@@ -1,8 +1,8 @@
 <template>
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
-    <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.game.gameOptions.undoOption === true">
-      <div class="reset" @click="reset">Reset This Action (prototype)</div>
+    <template v-if="waitingfor !== undefined && waitingfor.showReset">
+      <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
     </template>
     <player-input-factory :players="players"
                           :playerView="playerView"

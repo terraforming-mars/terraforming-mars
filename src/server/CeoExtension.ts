@@ -1,9 +1,9 @@
 import {Player} from './Player';
-import {isLeaderCard} from './cards/leaders/LeaderCard';
+import {isCeoCard} from './cards/ceos/CeoCard';
 // import {CardName} from '../common/cards/CardName';
 // import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 
-export class LeadersExtension {
+export class CeoExtension {
   // public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {
   //   const duncan = player.getLeader(CardName.DUNCAN);
   //   if (duncan?.isDisabled === true && duncan.generationUsed !== undefined) {
@@ -19,9 +19,9 @@ export class LeadersExtension {
   //   return 0;
   // }
 
-  public static leaderActionIsUsable(player: Player): boolean {
+  public static ceoActionIsUsable(player: Player): boolean {
     for (const card of player.playedCards) {
-      if (isLeaderCard(card)) {
+      if (isCeoCard(card)) {
         return card.canAct?.(player);
       }
     }

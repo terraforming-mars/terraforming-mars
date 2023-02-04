@@ -38,9 +38,9 @@ import {Ulrich} from './Ulrich';
 // import {Zan} from './Zan';
 
 
-export const LEADER_CARD_MANIFEST = new ModuleManifest({
-  module: 'leader',
-  leaderCards: {
+export const CEO_CARD_MANIFEST = new ModuleManifest({
+  module: 'ceo',
+  ceoCards: {
     // [CardName.APOLLO]: {Factory: Apollo, compatibility: 'moon'},
     // [CardName.ASIMOV]: {Factory: Asimov},
     [CardName.BJORN]: {Factory: Bjorn},

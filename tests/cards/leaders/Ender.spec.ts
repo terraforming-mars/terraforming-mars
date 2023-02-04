@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
-import {Ender} from '../../../src/server/cards/leaders/Ender';
+import {Ender} from '../../../src/server/cards/ceos/Ender';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Research} from '../../../src/server/cards/base/Research';
 import {getTestPlayer, newTestGame} from '../../TestGame';

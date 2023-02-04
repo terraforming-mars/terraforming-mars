@@ -14,7 +14,7 @@
       </div>
     </div>
     <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
-    <SelectCard v-if="hasLeaders" :playerView="playerView" :playerinput="leadersCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="leadersChanged" />
+    <SelectCard v-if="hasCeo" :playerView="playerView" :playerinput="ceoCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="ceosChanged" />
     <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <template v-if="this.selectedCorporations.length === 1">
       <div><span v-i18n>Starting Megacredits:</span> <div class="megacredits">{{getStartingMegacredits()}}</div></div>
@@ -56,8 +56,8 @@ type SelectInitialCardsModel = {
   // End result will be a single corporation, but the player may select multiple while deciding what to keep.
   selectedCorporations: Array<CardName>,
   selectedPreludes: Array<CardName>,
-  // End result will be a single CEO/Leader, but the player may select multiple while deciding what to keep.
-  selectedLeaders: Array<CardName>,
+  // End result will be a single CEO, but the player may select multiple while deciding what to keep.
+  selectedCeos: Array<CardName>,
   valid: boolean,
   warning: string | undefined,
 }
@@ -96,7 +96,7 @@ export default (Vue as WithRefs<Refs>).extend({
       selectedCards: [],
       selectedCorporations: [],
       selectedPreludes: [],
-      selectedLeaders: [],
+      selectedCeos: [],
       valid: false,
       warning: undefined,
     };
@@ -224,11 +224,11 @@ export default (Vue as WithRefs<Refs>).extend({
           cards: this.selectedPreludes,
         });
       }
-      if (this.hasLeaders) {
-        if (this.selectedLeaders.length === 1) {
+      if (this.hasCeo) {
+        if (this.selectedCeos.length === 1) {
           result.responses.push({
             type: 'card',
-            cards: [this.selectedLeaders[0]],
+            cards: [this.selectedCeos[0]],
           });
         }
       }
@@ -250,8 +250,8 @@ export default (Vue as WithRefs<Refs>).extend({
       this.selectedPreludes = cards;
       this.validate();
     },
-    leadersChanged(cards: Array<CardName>) {
-      this.selectedLeaders = cards;
+    ceosChanged(cards: Array<CardName>) {
+      this.selectedCeos = cards;
       this.validate();
     },
     calcuateWarning(): boolean {
@@ -275,12 +275,12 @@ export default (Vue as WithRefs<Refs>).extend({
           return false;
         }
       }
-      if (this.hasLeaders) {
-        if (this.selectedLeaders.length < 1) {
+      if (this.hasCeo) {
+        if (this.selectedCeos.length < 1) {
           this.warning = 'Select 1 CEO';
           return false;
         }
-        if (this.selectedLeaders.length > 1) {
+        if (this.selectedCeos.length > 1) {
           this.warning = 'You selected too many CEOs';
           return false;
         }
@@ -307,11 +307,11 @@ export default (Vue as WithRefs<Refs>).extend({
       // return this.playerinput.options?.length === 3;
       // Have kept these here for notes as it may be game breaking.
       // I'm unsure why we check options length instead of preludeExtension gameOptions
-      // But, now that Leaders is in the game, options length can be 3 when leaders is on but preludes is off.
+      // But, now that CEOs is in the game, options length can be 3 when CEOs is on but preludes is off.
       return this.playerView.game.gameOptions.preludeExtension === true;
     },
-    hasLeaders() {
-      return this.playerView.game.gameOptions.leadersExtension === true;
+    hasCeo() {
+      return this.playerView.game.gameOptions.ceoExtension === true;
     },
     corpCardOption() {
       const option = getOption(this.playerinput.options, 0);
@@ -328,7 +328,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
       return option;
     },
-    leadersCardOption() {
+    ceoCardOption() {
       let counter = 1;
       if (this.hasPrelude === true) {
         counter += 1;

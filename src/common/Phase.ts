@@ -7,7 +7,6 @@ export enum Phase {
     CORPORATIONDRAFTING = 'corporation_drafting',
     DRAFTING = 'drafting',
     PRELUDES = 'preludes',
-    LEADERS = 'leaders', // This remains while we rename things to CEOs
     CEOS = 'ceos',
     SOLAR = 'solar',
     INTERGENERATION = 'intergeneration',

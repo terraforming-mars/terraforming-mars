@@ -10,7 +10,6 @@ export const GAME_MODULES = [
   'ares',
   'moon',
   'pathfinders',
-  'leader', // This remains while we rename things to CEOs
   'ceo',
 ] as const;
 export type GameModule = typeof GAME_MODULES[number];

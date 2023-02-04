@@ -4,15 +4,15 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
+import {CeoCard} from './CeoCard';
 
 import {Resources} from '../../../common/Resources';
 
-export class Clarke extends Card implements LeaderCard {
+export class Clarke extends Card implements CeoCard {
   constructor() {
     super({
       name: CardName.CLARKE,
-      cardType: CardType.LEADER,
+      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L03',
         renderData: CardRenderer.builder((b) => {

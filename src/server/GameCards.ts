@@ -55,7 +55,7 @@ export class GameCards {
       [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
       [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
-      [gameOptions.leadersExtension, LEADER_CARD_MANIFEST],
+      [gameOptions.ceoExtension, LEADER_CARD_MANIFEST], // TODO: Rename to CEO_CARD_MANIFEST
     ];
 
     this.moduleManifests = manifests.filter((a) => a[0]).map((a) => a[1]);
@@ -80,8 +80,8 @@ export class GameCards {
         return gameOptions.moonExpansion;
       case 'pathfinders':
         return gameOptions.pathfindersExpansion;
-      case 'leader':
-        return gameOptions.leadersExtension;
+      case 'ceo':
+        return gameOptions.ceoExtension;
       default:
         throw new Error(`Unhandled expansion type ${expansion}`);
       }
@@ -125,9 +125,10 @@ export class GameCards {
   }
 
   public getLeaderCards() {
-    let leaders = this.getCards<ILeaderCard>('leaderCards');
-    leaders = this.addCustomCards(leaders, this.gameOptions.customLeaders);
-    return leaders;
+    // TODO: Rename this to getCeoCards
+    let ceos = this.getCards<ILeaderCard>('leaderCards');
+    ceos = this.addCustomCards(ceos, this.gameOptions.customCeos);
+    return ceos;
   }
 
   private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {

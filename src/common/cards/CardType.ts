@@ -5,6 +5,7 @@ export enum CardType {
     PRELUDE = 'prelude',
     CORPORATION = 'corporation',
     LEADER = 'leader',
+    CEOs = 'ceos',
     STANDARD_PROJECT = 'standard_project',
     STANDARD_ACTION = 'standard_action',
     // Proxy cards are not real cards, but for operations that need a card-like behavior.

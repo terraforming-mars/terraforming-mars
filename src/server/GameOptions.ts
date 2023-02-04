@@ -32,7 +32,7 @@ export type GameOptions = {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
-  leadersExtension: boolean;
+  ceoExtension: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -47,7 +47,7 @@ export type GameOptions = {
   bannedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
-  customLeaders: Array<CardName>;
+  customCeos: Array<CardName>;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
@@ -73,7 +73,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customColoniesList: [],
   customCorporationsList: [],
   customPreludes: [],
-  customLeaders: [],
+  customCeos: [],
   draftVariant: false,
   escapeVelocityMode: false, // When true, escape velocity is enabled.
   escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
@@ -86,7 +86,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   moonExpansion: false,
   moonStandardProjectVariant: false,
   pathfindersExpansion: false,
-  leadersExtension: false,
+  ceoExtension: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,

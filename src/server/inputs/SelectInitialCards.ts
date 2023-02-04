@@ -6,11 +6,13 @@ import {Player} from '../Player';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
+import {CardName} from '../../common/cards/CardName';
 
 export class SelectInitialCards extends AndOptions {
   public override readonly inputType = PlayerInputType.SELECT_INITIAL_CARDS;
-  constructor(player: Player, cb: (corporation: ICorporationCard) => undefined) {
+  constructor(private player: Player, cb: (corporation: ICorporationCard) => undefined) {
     super(() => {
+      this.completed(corporation);
       cb(corporation);
       return undefined;
     });
@@ -60,5 +62,28 @@ export class SelectInitialCards extends AndOptions {
         }, {min: 0, max: 10},
       ),
     );
+  }
+
+  private completed(corporation: ICorporationCard) {
+    const player = this.player;
+    // Check for negative M€
+    const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
+    if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
+      player.cardsInHand = [];
+      player.preludeCardsInHand = [];
+      throw new Error('Too many cards selected');
+    }
+    // discard all unpurchased cards
+    player.dealtProjectCards.forEach((card) => {
+      if (player.cardsInHand.includes(card) === false) {
+        player.game.projectDeck.discard(card);
+      }
+    });
+
+    player.dealtCorporationCards.forEach((card) => {
+      if (card.name !== corporation.name) {
+        player.game.corporationDeck.discard(card);
+      }
+    });
   }
 }

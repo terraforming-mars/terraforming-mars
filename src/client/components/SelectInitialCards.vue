@@ -14,7 +14,6 @@
       </div>
     </div>
     <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
-    <SelectCard v-if="hasCeo" :playerView="playerView" :playerinput="ceoCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="ceosChanged" />
     <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <template v-if="this.selectedCorporations.length === 1">
       <div><span v-i18n>Starting Megacredits:</span> <div class="megacredits">{{getStartingMegacredits()}}</div></div>
@@ -56,8 +55,6 @@ type SelectInitialCardsModel = {
   // End result will be a single corporation, but the player may select multiple while deciding what to keep.
   selectedCorporations: Array<CardName>,
   selectedPreludes: Array<CardName>,
-  // End result will be a single CEO, but the player may select multiple while deciding what to keep.
-  selectedCeos: Array<CardName>,
   valid: boolean,
   warning: string | undefined,
 }
@@ -96,7 +93,6 @@ export default (Vue as WithRefs<Refs>).extend({
       selectedCards: [],
       selectedCorporations: [],
       selectedPreludes: [],
-      selectedCeos: [],
       valid: false,
       warning: undefined,
     };
@@ -224,14 +220,6 @@ export default (Vue as WithRefs<Refs>).extend({
           cards: this.selectedPreludes,
         });
       }
-      if (this.hasCeo) {
-        if (this.selectedCeos.length === 1) {
-          result.responses.push({
-            type: 'card',
-            cards: [this.selectedCeos[0]],
-          });
-        }
-      }
       result.responses.push({
         type: 'card',
         cards: this.selectedCards,
@@ -248,10 +236,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;
-      this.validate();
-    },
-    ceosChanged(cards: Array<CardName>) {
-      this.selectedCeos = cards;
       this.validate();
     },
     calcuateWarning(): boolean {
@@ -275,16 +259,6 @@ export default (Vue as WithRefs<Refs>).extend({
           return false;
         }
       }
-      if (this.hasCeo) {
-        if (this.selectedCeos.length < 1) {
-          this.warning = 'Select 1 CEO';
-          return false;
-        }
-        if (this.selectedCeos.length > 1) {
-          this.warning = 'You selected too many CEOs';
-          return false;
-        }
-      }
       if (this.selectedCards.length === 0) {
         this.warning = 'You haven\'t selected any project cards';
         return true;
@@ -303,12 +277,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },
     hasPrelude() {
-      // return this.playerView.game.gameOptions.preludeExtension === true;
-      return this.playerView.dealtPreludeCards.length > 0;
-    },
-    hasCeo() {
-      // return this.playerView.game.gameOptions.ceoExtension === true;
-      return this.playerView.dealtCeoCards.length > 0;
+      return this.playerinput.options?.length === 3;
     },
     corpCardOption() {
       const option = getOption(this.playerinput.options, 0);
@@ -325,21 +294,9 @@ export default (Vue as WithRefs<Refs>).extend({
       }
       return option;
     },
-    ceoCardOption() {
-      const idx = (this.hasPrelude) ? 2 : 1;
-      const option = getOption(this.playerinput.options, idx);
-      if (getPreferences().experimental_ui) {
-        option.max = undefined;
-      }
-      return option;
-    },
     projectCardOption() {
-      const idx = 1 + (this.hasPrelude ? 1 : 0) + (this.hasCeo ? 1 : 0);
-      const option = getOption(this.playerinput.options, idx);
-      if (getPreferences().experimental_ui) {
-        option.max = undefined;
-      }
-      return option;
+      // Compiler won't accept this method using this.hasPrelude, despite documentation saying I can.
+      return getOption(this.playerinput.options, this.playerinput.options?.length === 3 ? 2 : 1);
     },
   },
   mounted() {

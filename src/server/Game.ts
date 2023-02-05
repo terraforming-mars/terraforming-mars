@@ -562,23 +562,10 @@ export class Game implements Logger {
     }
   }
 
-  private pickCorporationCard(player: Player): PlayerInput {
+  private selectInitialCards(player: Player): PlayerInput {
     return new SelectInitialCards(player, (corporation: ICorporationCard) => {
-      // Check for negative M€
-      const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
-      if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
-        player.cardsInHand = [];
-        player.preludeCardsInHand = [];
-        throw new Error('Too many cards selected');
-      }
-      // discard all unpurchased cards
-      player.dealtProjectCards.forEach((card) => {
-        if (player.cardsInHand.includes(card) === false) {
-          this.projectDeck.discard(card);
-        }
-      });
-
-      this.playerHasPickedCorporationCard(player, corporation); return undefined;
+      this.playerHasPickedCorporationCard(player, corporation);
+      return undefined;
     });
   }
 
@@ -629,7 +616,7 @@ export class Game implements Logger {
 
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
-        player.setWaitingFor(this.pickCorporationCard(player));
+        player.setWaitingFor(this.selectInitialCards(player));
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {

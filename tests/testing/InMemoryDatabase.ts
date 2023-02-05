@@ -2,7 +2,7 @@ import {Game, Score} from '../../src/server/Game';
 import {GameOptions} from '../../src/server/GameOptions';
 import {SerializedGame} from '../../src/server/SerializedGame';
 import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
-import {GameId, PlayerId, SpectatorId} from '../../src/common/Types';
+import {GameId, ParticipantId} from '../../src/common/Types';
 
 export class InMemoryDatabase implements IDatabase {
   public data: Map<GameId, Array<SerializedGame>> = new Map();
@@ -20,7 +20,7 @@ export class InMemoryDatabase implements IDatabase {
       return game;
     }
   }
-  getGameId(_id: PlayerId | SpectatorId): Promise<GameId> {
+  getGameId(_id: ParticipantId): Promise<GameId> {
     throw new Error('Method not implemented.');
   }
   getSaveIds(gameId: GameId): Promise<number[]> {
@@ -87,7 +87,7 @@ export class InMemoryDatabase implements IDatabase {
     const entries: Array<GameIdLedger> = [];
     this.data.forEach((games, gameId) => {
       const firstSave = games[0];
-      const participantIds: Array<PlayerId | SpectatorId> = firstSave.players.map((p) => p.id);
+      const participantIds: Array<ParticipantId> = firstSave.players.map((p) => p.id);
       if (firstSave.spectatorId) participantIds.push(firstSave.spectatorId);
       entries.push({gameId, participantIds});
     });

@@ -332,8 +332,8 @@ export default (Vue as WithRefs<Refs>).extend({
       return option;
     },
     projectCardOption() {
-      const index = 1 + (this.hasPrelude ? 1 : 0) + (this.hasCeo ? 1 : 0);
-      const option = getOption(this.playerinput.options, index);
+      const idx = 1 + (this.hasPrelude ? 1 : 0) + (this.hasCeo ? 1 : 0);
+      const option = getOption(this.playerinput.options, idx);
       if (getPreferences().experimental_ui) {
         option.max = undefined;
       }

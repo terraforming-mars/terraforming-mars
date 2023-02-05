@@ -303,10 +303,12 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },
     hasPrelude() {
-      return this.playerView.game.gameOptions.preludeExtension === true;
+      // return this.playerView.game.gameOptions.preludeExtension === true;
+      return this.playerView.dealtPreludeCards.length > 0;
     },
     hasCeo() {
-      return this.playerView.game.gameOptions.ceoExtension === true;
+      // return this.playerView.game.gameOptions.ceoExtension === true;
+      return this.playerView.dealtCeoCards.length > 0;
     },
     corpCardOption() {
       const option = getOption(this.playerinput.options, 0);

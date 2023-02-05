@@ -2,12 +2,12 @@
   <div id="player-home" :class="(game.turmoil ? 'with-turmoil': '')">
       <top-bar :playerView="playerView" />
 
-      <div v-if="game.phase === 'end'">
-          <div class="player_home_block">
-              <DynamicTitle title="This game is over!" :color="thisPlayer.color"/>
-              <a :href="'/the-end?id='+ playerView.id" v-i18n>Go to game results</a>
-          </div>
-      </div>
+    <div v-if="game.phase === 'end'">
+        <div class="player_home_block">
+            <DynamicTitle title="This game is over!" :color="thisPlayer.color"/>
+            <a :href="'the-end?id='+ playerView.id" v-i18n>Go to game results</a>
+        </div>
+    </div>
 
       <sidebar v-trim-whitespace
         :acting_player="isPlayerActing(playerView)"

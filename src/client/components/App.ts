@@ -120,11 +120,11 @@ export const mainAppSettings = {
       return (this as unknown as MainAppData).componentsVisibility[targetVar] ? true : false;
     },
     update(path: '/player' | '/spectator'): void {
-      const currentPathname = window.location.pathname;
+      const currentPathname = getCurrentPath();
       const xhr = new XMLHttpRequest();
       const app = this as unknown as MainAppData;
 
-      const url = '/api' + path + window.location.search.replace('&noredirect', '');
+      const url = 'api' + path + window.location.search.replace('&noredirect', '');
       xhr.open('GET', url);
       xhr.onerror = function() {
         alert('Error getting game data');
@@ -148,7 +148,7 @@ export const mainAppSettings = {
                 window.history.replaceState(
                   xhr.response,
                   `${constants.APP_NAME} - Player`,
-                  '/the-end?id=' + model.id,
+                  'the-end?id=' + model.id,
                 );
               }
             } else {
@@ -161,7 +161,7 @@ export const mainAppSettings = {
                 window.history.replaceState(
                   xhr.response,
                   `${constants.APP_NAME} - Game`,
-                  path + '?id=' + model.id,
+                  path.substring(1) + '?id=' + model.id,
                 );
               }
             }
@@ -185,7 +185,7 @@ export const mainAppSettings = {
   mounted() {
     document.title = constants.APP_NAME;
     if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
-    const currentPathname = window.location.pathname;
+    const currentPathname = getCurrentPath();
     const app = this as unknown as (MainAppData) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player') {
       app.updatePlayer();
@@ -202,7 +202,7 @@ export const mainAppSettings = {
     } else if (currentPathname === '/game') {
       app.screen = 'game-home';
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', '/api/game' + window.location.search);
+      xhr.open('GET', 'api/game' + window.location.search);
       xhr.onerror = function() {
         alert('Error getting game data');
       };
@@ -239,3 +239,8 @@ export const mainAppSettings = {
     }
   },
 };
+
+function getCurrentPath() {
+  // Leave only the last part of /path
+  return window.location.pathname.replace(/.*\//g, "/");
+}

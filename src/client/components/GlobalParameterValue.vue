@@ -3,7 +3,7 @@
   <div :class="getIconClass()"></div>
   <div class="global_params_value">
     <div v-if="isMax()">
-      <img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
+      <img src="assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
     </div>
     <div v-else>
       {{value}}{{suffix()}}

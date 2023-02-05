@@ -73,7 +73,7 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
+      xhr.open('POST', paths.PLAYER_INPUT.substring(1) + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
         if (xhr.status === HTTPResponseCode.OK) {
@@ -117,7 +117,7 @@ export default Vue.extend({
                 Notification.requestPermission();
               } else if (Notification.permission === 'granted') {
                 const notificationOptions = {
-                  icon: '/favicon.ico',
+                  icon: 'favicon.ico',
                   body: 'It\'s your turn!',
                 };
                 const notificationTitle = constants.APP_NAME;

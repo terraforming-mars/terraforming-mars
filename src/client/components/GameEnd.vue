@@ -7,7 +7,7 @@
                   <div class="game_end_success">
                       <h2 v-i18n>You win!</h2>
                       <div class="game_end_solo_img">
-                          <img src="/assets/solo_win.png" />
+                          <img src="assets/solo_win.png" />
                       </div>
                       <div class="game_end_notice">
                         <span v-i18n>But it isn't the reason to stop making Mars better.</span>
@@ -36,7 +36,7 @@
               </div>
           </div>
           <div class="game_end_go_home">
-              <a href="/">
+              <a href=".">
                   <Button size="big" type="back" />
                   <span  v-i18n>Go to main page</span>
               </a>
@@ -69,7 +69,7 @@
                   <tbody>
                       <tr v-for="p in getSortedPlayers()" :key="p.color" :class="getEndGamePlayerRowColorClass(p.color)">
                           <td>
-                            <a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a>
+                            <a :href="'player?id='+p.id+'&noredirect'">{{ p.name }}</a>
                             <div class="column-corporation"><span v-i18n>{{ getCorporationName(p) }}</span></div>
                           </td>
                           <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
@@ -99,7 +99,7 @@
               <div class="game-end-flexrow">
                   <div v-for="p in getSortedPlayers()" :key="p.color" class="game-end-column">
                       <div class="game-end-winer-scorebreak-player-title">
-                          <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
+                          <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
                       </div>
                       <div v-for="v in p.victoryPointsBreakdown.detailsCards" :key="v.cardName">
                         <div class="game-end-column-row">
@@ -217,7 +217,7 @@ export default Vue.extend({
       if (id === undefined) {
         return undefined;
       }
-      return `${paths.API_GAME_LOGS}?id=${id}&full=true`;
+      return `${paths.API_GAME_LOGS.substring(1)}?id=${id}&full=true`;
     },
   },
   data() {

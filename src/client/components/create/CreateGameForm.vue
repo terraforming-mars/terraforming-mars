@@ -1068,7 +1068,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Clone game checks
       if (component.clonedGameId !== undefined && component.seededGame) {
-        const gameData = await fetch('/api/cloneablegame?id=' + component.clonedGameId)
+        const gameData = await fetch('api/cloneablegame?id=' + component.clonedGameId)
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -1153,7 +1153,7 @@ export default (Vue as WithRefs<Refs>).extend({
       if (dataToSend === undefined) return;
       const onSuccess = (json: any) => {
         if (json.players.length === 1) {
-          window.location.href = '/player?id=' + json.players[0].id;
+          window.location.href = 'player?id=' + json.players[0].id;
           return;
         } else {
           window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
@@ -1162,7 +1162,7 @@ export default (Vue as WithRefs<Refs>).extend({
         }
       };
 
-      fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch('game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
         .then((response) => response.text())
         .then((text) => {
           try {

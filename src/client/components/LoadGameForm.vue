@@ -34,7 +34,7 @@ export default Vue.extend({
         if (xhr.status === HTTPResponseCode.OK) {
           const response = xhr.response as SimpleGameModel;
           if (response.players.length === 1) {
-            window.location.href = '/player?id=' + response.players[0].id;
+            window.location.href = 'player?id=' + response.players[0].id;
             return;
           } else {
             window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);

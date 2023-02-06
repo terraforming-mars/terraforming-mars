@@ -283,6 +283,7 @@ export class Game implements Logger {
 
       if (!player.beginner ||
         // Bypass beginner choice if any extension is choosen
+        gameOptions.ceoExtension ||
         gameOptions.preludeExtension ||
         gameOptions.venusNextExtension ||
         gameOptions.coloniesExtension ||

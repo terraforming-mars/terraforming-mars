@@ -12,8 +12,8 @@ describe('CardFinder', function() {
   it('getProjectCardByName prelude: success', function() {
     expect(new CardFinder().getProjectCardByName(CardName.ALLIED_BANK)?.name).eq(CardName.ALLIED_BANK);
   });
-  it('getLeaderByName leader: success', function() {
-    expect(new CardFinder().getLeaderByName(CardName.HAL9000)?.name).eq(CardName.HAL9000);
+  it('getCeoByName ceo: success', function() {
+    expect(new CardFinder().getCeoByName(CardName.HAL9000)?.name).eq(CardName.HAL9000);
   });
   // Dont' remove this test. It's a placeholder for card renames.
   it('finds renamed cards', function() {

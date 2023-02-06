@@ -112,8 +112,10 @@ export class Server {
 
     return {
       cardsInHand: this.getCards(player, player.cardsInHand, {showCalculatedCost: true}),
+      ceoCardsInHand: this.getCards(player, player.ceoCardsInHand),
       dealtCorporationCards: this.getCards(player, player.dealtCorporationCards),
       dealtPreludeCards: this.getCards(player, player.dealtPreludeCards),
+      dealtCeoCards: this.getCards(player, player.dealtCeoCards),
       dealtProjectCards: this.getCards(player, player.dealtProjectCards),
       draftedCorporations: this.getCards(player, player.draftedCorporations),
       draftedCards: this.getCards(player, player.draftedCards, {showCalculatedCost: true}),
@@ -545,6 +547,7 @@ export class Server {
       aresExtension: options.aresExtension,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
+      ceoExtension: options.ceoExtension,
       coloniesExtension: options.coloniesExtension,
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
@@ -573,9 +576,9 @@ export class Server {
       requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
       turmoilExtension: options.turmoilExtension,
+      twoCorpsVariant: options.twoCorpsVariant,
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
-      twoCorpsVariant: options.twoCorpsVariant,
     };
   }
 

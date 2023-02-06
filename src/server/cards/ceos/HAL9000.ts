@@ -4,16 +4,16 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
+import {CeoCard} from './CeoCard';
 
 import {digit} from '../Options';
 import {Units} from '../../../common/Units';
 
-export class HAL9000 extends Card implements LeaderCard {
+export class HAL9000 extends Card implements CeoCard {
   constructor() {
     super({
       name: CardName.HAL9000,
-      cardType: CardType.LEADER,
+      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L08',
         renderData: CardRenderer.builder((b) => {

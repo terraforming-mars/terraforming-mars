@@ -7,6 +7,8 @@ import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
+import {ICeoCard} from '../cards/ceos/ICeoCard';
+
 
 export class SelectInitialCards extends AndOptions {
   public override readonly inputType = PlayerInputType.SELECT_INITIAL_CARDS;
@@ -49,6 +51,21 @@ export class SelectInitialCards extends AndOptions {
             player.preludeCardsInHand.push(...preludeCards);
             return undefined;
           }, {min: 2, max: 2},
+        ),
+      );
+    }
+
+    if (player.game.gameOptions.ceoExtension) {
+      this.options.push(
+        new SelectCard(
+          'Select CEO', undefined, player.dealtCeoCards,
+          (leaderCards: Array<ICeoCard>) => {
+            if (leaderCards.length !== 1) {
+              throw new Error('Only select 1 CEO');
+            }
+            player.ceoCardsInHand.push(leaderCards[0]);
+            return undefined;
+          }, {min: 1, max: 1},
         ),
       );
     }

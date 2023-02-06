@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
-import {Clarke} from '../../../src/server/cards/leaders/Clarke';
+import {Clarke} from '../../../src/server/cards/ceos/Clarke';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Clarke', function() {

@@ -64,9 +64,9 @@ import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
-import {LeadersExtension} from './LeadersExtension';
-import {isLeaderCard} from './cards/leaders/LeaderCard';
-// import {VanAllen} from './cards/leaders/VanAllen';
+import {CeoExtension} from './CeoExtension';
+import {isCeoCard} from './cards/ceos/CeoCard';
+// import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
 
@@ -276,7 +276,7 @@ export class Player {
       });
       // Greta CEO hook
       // if (this.cardIsInEffect(CardName.GRETA)) {
-      //   const greta = this.playedCards.find((card) => card.name === CardName.GRETA) as LeaderCard;
+      //   const greta = this.playedCards.find((card) => card.name === CardName.GRETA) as CeoCard;
       //   greta.onTRIncrease!(this);
       // }
     };
@@ -527,7 +527,7 @@ export class Player {
 
     this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
     // calculateVictoryPoints for CEO Duncan
-    // LeadersExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
+    // CeoExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 
@@ -784,7 +784,7 @@ export class Player {
   }
 
   public getUsableOPGCeoCards(): Array<ICard & IActionCard> {
-    return this.getPlayableActionCards().filter((card) => isLeaderCard(card));
+    return this.getPlayableActionCards().filter((card) => isCeoCard(card));
   }
 
   public runProductionPhase(): void {
@@ -802,9 +802,9 @@ export class Player {
     this.plants += this.production.plants;
 
     this.corporations.forEach((card) => card.onProductionPhase?.(this));
-    // Turn off Leader OPG actions that were activated this generation
+    // Turn off CEO OPG actions that were activated this generation
     for (const card of this.playedCards) {
-      if (isLeaderCard(card)) {
+      if (isCeoCard(card)) {
         card.opgActionIsActive = false;
       }
     }
@@ -1746,9 +1746,9 @@ export class Player {
       });
       return;
     } else if (this.ceoCardsInHand.length > 0) {
-      // The Leader phase occurs between the Prelude phase and before the Action phase.
-      // All leader cards are played before players take their first normal actions.
-      game.phase = Phase.LEADERS;
+      // The CEO phase occurs between the Prelude phase and before the Action phase.
+      // All CEO cards are played before players take their first normal actions.
+      game.phase = Phase.CEOS;
       const playableCeoCards = this.getPlayableCeoCards();
       for (let i = playableCeoCards.length - 1; i >= 0; i--) {
         // start from the end of the list and work backwards, we're removing items as we go.
@@ -1908,7 +1908,7 @@ export class Player {
       }
     });
 
-    if (LeadersExtension.leaderActionIsUsable(this)) {
+    if (CeoExtension.ceoActionIsUsable(this)) {
       action.options.push(this.playCeoOPGAction());
     }
 
@@ -2160,11 +2160,11 @@ export class Player {
     player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
-    player.dealtCeoCards = cardFinder.leadersFromJSON(d.dealtCeoCards);
+    player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
-    player.ceoCardsInHand = cardFinder.leadersFromJSON(d.ceoCardsInHand);
+    player.ceoCardsInHand = cardFinder.ceosFromJSON(d.ceoCardsInHand);
     player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 

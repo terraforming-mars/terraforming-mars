@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {forceGenerationEnd, setCustomGameOptions} from '../../TestingUtils';
+import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 import {Apollo} from '../../../src/server/cards/ceos/Apollo';

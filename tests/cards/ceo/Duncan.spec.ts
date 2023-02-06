@@ -9,14 +9,12 @@ import {Duncan} from '../../../src/server/cards/ceos/Duncan';
 describe('Duncan', function() {
   let card: Duncan;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Duncan();
     game = newTestGame(4, {ceoExtension: true, moonExpansion: true});
     player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
     player.playedCards.push(card);
   });
 

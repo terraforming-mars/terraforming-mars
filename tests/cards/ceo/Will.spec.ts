@@ -16,14 +16,12 @@ import {Will} from '../../../src/server/cards/ceos/Will';
 describe('Will', function() {
   let card: Will;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Will();
     game = newTestGame(4, {ceoExtension: true});
     player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
     player.playedCards.push(card);
   });
 

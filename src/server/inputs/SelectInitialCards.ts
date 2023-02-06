@@ -1,4 +1,3 @@
-
 import {AndOptions} from './AndOptions';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -8,6 +7,7 @@ import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
 import {ICeoCard} from '../cards/ceos/ICeoCard';
+import * as titles from '../../common/inputs/SelectInitialCards';
 
 
 export class SelectInitialCards extends AndOptions {
@@ -24,7 +24,7 @@ export class SelectInitialCards extends AndOptions {
 
     this.options.push(
       new SelectCard<ICorporationCard>(
-        'Select corporation', undefined, player.dealtCorporationCards,
+        titles.SELECT_CORPORATION_TITLE, undefined, player.dealtCorporationCards,
         (cards) => {
           if (cards.length !== 1) {
             throw new Error('Only select 1 corporation card');
@@ -43,7 +43,7 @@ export class SelectInitialCards extends AndOptions {
     if (player.game.gameOptions.preludeExtension) {
       this.options.push(
         new SelectCard(
-          'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
+          titles.SELECT_PRELUDE_TITLE, undefined, player.dealtPreludeCards,
           (preludeCards: Array<IProjectCard>) => {
             if (preludeCards.length !== 2) {
               throw new Error('Only select 2 preludes');
@@ -58,7 +58,7 @@ export class SelectInitialCards extends AndOptions {
     if (player.game.gameOptions.ceoExtension) {
       this.options.push(
         new SelectCard(
-          'Select CEO', undefined, player.dealtCeoCards,
+          titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards,
           (leaderCards: Array<ICeoCard>) => {
             if (leaderCards.length !== 1) {
               throw new Error('Only select 1 CEO');
@@ -72,7 +72,7 @@ export class SelectInitialCards extends AndOptions {
 
     this.options.push(
       new SelectCard(
-        'Select initial cards to buy', undefined, player.dealtProjectCards,
+        titles.SELECT_PROJECTS_TITLE, undefined, player.dealtProjectCards,
         (cards) => {
           player.cardsInHand.push(...cards);
           return undefined;

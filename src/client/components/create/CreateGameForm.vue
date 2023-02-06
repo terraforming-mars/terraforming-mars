@@ -1156,7 +1156,7 @@ export default (Vue as WithRefs<Refs>).extend({
           window.location.href = 'player?id=' + json.players[0].id;
           return;
         } else {
-          window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
+          window.history.replaceState(json, `${constants.APP_NAME} - Game`, 'game?id=' + json.id);
           (this as any).$root.$data.game = json;
           (this as any).$root.$data.screen = 'game-home';
         }

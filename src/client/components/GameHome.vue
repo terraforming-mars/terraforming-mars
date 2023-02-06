@@ -107,7 +107,9 @@ export default Vue.extend({
     },
     copyUrl(playerId: ParticipantId | undefined): void {
       if (playerId === undefined) return;
-      copyToClipboard(window.location.origin + this.getHref(playerId));
+
+      const path = window.location.href.replace(/game\?id=.*/, "");
+      copyToClipboard(path + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
     },
     isPlayerUrlCopied(playerId: string): boolean {

@@ -211,7 +211,7 @@ export const mainAppSettings = {
           window.history.replaceState(
             xhr.response,
             `${constants.APP_NAME} - Game`,
-            '/game?id=' + xhr.response.id,
+            'game?id=' + xhr.response.id,
           );
           app.game = xhr.response as SimpleGameModel;
         } else {

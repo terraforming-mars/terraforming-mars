@@ -3,6 +3,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
 import {Ants} from '../../../src/server/cards/base/Ants';
@@ -20,10 +21,9 @@ describe('Will', function() {
 
   beforeEach(() => {
     card = new Will();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    game = Game.newInstance('gameid', [player, player2], player);
+    game = newTestGame(4, {ceoExtension: true});
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
     player.playedCards.push(card);
   });
 

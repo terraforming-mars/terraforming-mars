@@ -69,6 +69,7 @@ import {isCeoCard} from './cards/ceos/CeoCard';
 // import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
+import {ICeoCard} from './cards/ceos/ICeoCard';
 
 /**
  * Behavior when playing a card:
@@ -205,6 +206,10 @@ export class Player {
 
   public getCorporation(corporationName: CardName): ICorporationCard | undefined {
     return this.corporations.find((c) => c.name === corporationName);
+  }
+
+  public getCeo(ceoName: CardName): ICeoCard | undefined {
+    return this.playedCards.find((c) => c.name === ceoName);
   }
 
   public getCorporationOrThrow(corporationName: CardName): ICorporationCard {
@@ -526,10 +531,9 @@ export class Player {
     });
 
     this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
-    // calculateVictoryPoints for CEO Duncan
-    // CeoExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
+    CeoExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
 
     // Escape velocity VP penalty
     if (this.game.gameOptions.escapeVelocityMode) {

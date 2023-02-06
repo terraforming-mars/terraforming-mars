@@ -26,7 +26,7 @@ export default Vue.extend({
       const gameId = this.$data.gameId;
       const rollbackCount = this.$data.rollbackCount;
       const xhr = new XMLHttpRequest();
-      xhr.open('PUT', paths.LOAD_GAME);
+      xhr.open('PUT', paths.LOAD_GAME.substring(1));
       xhr.onerror = function() {
         alert('Error loading game');
       };

@@ -1376,6 +1376,17 @@ export class Game implements Logger {
     });
   }
 
+  public addHazardTile(
+    player: Player, space: ISpace, hazardType: TileType): void {
+    this.addTile(
+      player,
+      space,
+      {
+        tileType: hazardType,
+      },
+    );
+  }
+
   public canAddOcean(): boolean {
     return this.board.getOceanCount() < constants.MAX_OCEAN_TILES;
   }

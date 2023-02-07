@@ -69,6 +69,7 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 // import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
+import {ICeoCard} from './cards/ceos/ICeoCard';
 
 /**
  * Behavior when playing a card:
@@ -205,6 +206,10 @@ export class Player {
 
   public getCorporation(corporationName: CardName): ICorporationCard | undefined {
     return this.corporations.find((c) => c.name === corporationName);
+  }
+
+  public getCeo(ceoName: CardName): ICeoCard | undefined {
+    return this.playedCards.find((c) => c.name === ceoName);
   }
 
   public getCorporationOrThrow(corporationName: CardName): ICorporationCard {
@@ -1872,15 +1877,12 @@ export class Player {
     TurmoilHandler.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
-      action.options.push(
-        this.playActionCard(),
-      );
+      action.options.push(this.playActionCard());
     }
 
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(
-        new SelectProjectCardToPlay(this, playableCards));
+      action.options.push(new SelectProjectCardToPlay(this, playableCards));
     }
 
     const coloniesTradeAction = this.colonies.coloniesTradeAction();
@@ -1916,9 +1918,7 @@ export class Player {
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
       this.allOtherPlayersHavePassed() === false) {
-      action.options.push(
-        this.endTurnOption(),
-      );
+      action.options.push(this.endTurnOption());
     }
 
     const fundingCost = this.game.getAwardFundingCost();

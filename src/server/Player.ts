@@ -65,11 +65,10 @@ import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {CeoExtension} from './CeoExtension';
-import {isCeoCard} from './cards/ceos/CeoCard';
+import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 // import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
-import {ICeoCard} from './cards/ceos/ICeoCard';
 
 /**
  * Behavior when playing a card:
@@ -124,7 +123,7 @@ export class Player {
   // Cards
   public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
-  public dealtCeoCards: Array<IProjectCard> = [];
+  public dealtCeoCards: Array<ICeoCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IProjectCard> = [];
@@ -209,7 +208,8 @@ export class Player {
   }
 
   public getCeo(ceoName: CardName): ICeoCard | undefined {
-    return this.playedCards.find((c) => c.name === ceoName);
+    const card = this.playedCards.find((c) => c.name === ceoName);
+    return (card !== undefined && isCeoCard(card)) ? card : undefined;
   }
 
   public getCorporationOrThrow(corporationName: CardName): ICorporationCard {

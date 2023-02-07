@@ -4,12 +4,12 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 
 import {digit} from '../Options';
 import {Units} from '../../../common/Units';
 
-export class HAL9000 extends Card implements CeoCard {
+export class HAL9000 extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.HAL9000,

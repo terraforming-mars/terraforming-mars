@@ -4,13 +4,13 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {multiplier} from '../Options';
 
-export class Floyd extends Card implements CeoCard {
+export class Floyd extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.FLOYD,

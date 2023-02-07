@@ -11,14 +11,12 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 describe('Zan', function() {
   let card: Zan;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Zan();
     game = newTestGame(2, {ceoExtension: true, turmoilExtension: true});
     player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
 
     player.playedCards.push(card);
   });

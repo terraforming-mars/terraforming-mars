@@ -24,7 +24,7 @@ describe('Karen', function() {
   });
 
   it('Can act', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Takes action', function() {
@@ -63,6 +63,6 @@ describe('Karen', function() {
     forceGenerationEnd(game);
 
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

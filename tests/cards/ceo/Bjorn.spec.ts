@@ -28,7 +28,7 @@ describe('Bjorn', function() {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 
   it('Takes OPG action, Everyone is richer than me, and has more MC than Current Generation.  Steal the maximum amount of MC', function() {

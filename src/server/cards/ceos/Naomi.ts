@@ -1,21 +1,17 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICeoCard} from './ICeoCard';
-
+import {CeoCard} from './CeoCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_COLONY_TRACK_POSITION} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 
-export class Naomi extends Card implements ICeoCard {
+export class Naomi extends CeoCard {
   constructor() {
     super({
       name: CardName.NAOMI,
-      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L14',
         renderData: CardRenderer.builder((b) => {
@@ -29,15 +25,12 @@ export class Naomi extends Card implements ICeoCard {
     });
   }
 
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
+    if (!super.canAct(player)) {
+      return false;
+    }
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-    return openColonies.length > 0 && this.isDisabled === false;
+    return openColonies.length > 0;
   }
 
   public action(player: Player): PlayerInput | undefined {

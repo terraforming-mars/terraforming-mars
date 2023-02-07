@@ -1,6 +1,6 @@
 import {Player} from './Player';
 import {isCeoCard} from './cards/ceos/CeoCard';
-// import {CardName} from '../common/cards/CardName';
+import {CardName} from '../common/cards/CardName';
 // import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 
 export class CeoExtension {
@@ -11,13 +11,10 @@ export class CeoExtension {
   //   }
   // }
 
-  // public static getBonusWildTags(player: Player) {
-  //   const xavier = player.getCeo(CardName.XAVIER);
-  //   if (xavier?.opgActionIsActive === true) {
-  //     return 2;
-  //   }
-  //   return 0;
-  // }
+  public static getBonusWildTags(player: Player) {
+    const xavier = player.getCeo(CardName.XAVIER);
+    return xavier?.opgActionIsActive === true ? 2 : 0;
+  }
 
   public static ceoActionIsUsable(player: Player): boolean {
     for (const card of player.playedCards) {

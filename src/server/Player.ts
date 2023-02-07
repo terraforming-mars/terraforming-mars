@@ -1877,15 +1877,12 @@ export class Player {
     TurmoilHandler.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
-      action.options.push(
-        this.playActionCard(),
-      );
+      action.options.push(this.playActionCard());
     }
 
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(
-        new SelectProjectCardToPlay(this, playableCards));
+      action.options.push(new SelectProjectCardToPlay(this, playableCards));
     }
 
     const coloniesTradeAction = this.colonies.coloniesTradeAction();
@@ -1921,9 +1918,7 @@ export class Player {
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
       this.allOtherPlayersHavePassed() === false) {
-      action.options.push(
-        this.endTurnOption(),
-      );
+      action.options.push(this.endTurnOption());
     }
 
     const fundingCost = this.game.getAwardFundingCost();

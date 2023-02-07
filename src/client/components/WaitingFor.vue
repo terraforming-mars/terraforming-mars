@@ -73,7 +73,7 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('POST', paths.PLAYER_INPUT.substring(1) + '?id=' + this.playerView.id);
+      xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
         if (xhr.status === HTTPResponseCode.OK) {
@@ -102,7 +102,7 @@ export default Vue.extend({
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', paths.API_WAITING_FOR.substring(1) + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
+        xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
         xhr.onerror = function() {
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };

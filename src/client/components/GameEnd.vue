@@ -217,7 +217,7 @@ export default Vue.extend({
       if (id === undefined) {
         return undefined;
       }
-      return `${paths.API_GAME_LOGS.substring(1)}?id=${id}&full=true`;
+      return `${paths.API_GAME_LOGS}?id=${id}&full=true`;
     },
   },
   data() {

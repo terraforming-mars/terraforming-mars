@@ -292,7 +292,7 @@ export default Vue.extend({
       const xhr = new XMLHttpRequest();
       logRequest = xhr;
 
-      xhr.open('GET', `${paths.API_GAME_LOGS.substring(1)}?id=${this.id}&generation=${generation}`);
+      xhr.open('GET', `${paths.API_GAME_LOGS}?id=${this.id}&generation=${generation}`);
       xhr.onerror = () => {
         console.error('error updating messages, unable to reach server');
       };

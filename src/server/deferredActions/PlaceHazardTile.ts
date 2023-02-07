@@ -4,14 +4,12 @@ import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
 import {_AresHazardPlacement} from '../ares/AresHazards';
 import {TileType} from '../../common/TileType';
-import {PlacementType} from '../boards/PlacementType';
 
 export class PlaceHazardTile extends DeferredAction {
   constructor(
     player: Player,
     public hazardType: TileType.DUST_STORM_MILD | TileType.EROSION_MILD,
     private options?: {
-      on?: PlacementType,
       title?: string,
     }) {
     super(player, Priority.DEFAULT);

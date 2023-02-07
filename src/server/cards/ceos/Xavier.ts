@@ -3,10 +3,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 import {played} from '../Options';
 
-export class Xavier extends Card implements CeoCard {
+export class Xavier extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.XAVIER,

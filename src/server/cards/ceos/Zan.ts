@@ -4,12 +4,12 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 import {PartyName} from '../../../common/turmoil/PartyName';
 
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class Zan extends Card implements CeoCard {
+export class Zan extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.ZAN,

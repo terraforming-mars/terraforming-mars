@@ -6,12 +6,12 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
 
-export class Yvonne extends Card implements CeoCard {
+export class Yvonne extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.YVONNE,

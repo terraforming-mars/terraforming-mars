@@ -69,7 +69,6 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 // import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
-import {ICeoCard} from './cards/ceos/ICeoCard';
 
 /**
  * Behavior when playing a card:

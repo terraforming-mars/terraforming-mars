@@ -207,6 +207,11 @@ export class Player {
     return this.corporations.find((c) => c.name === corporationName);
   }
 
+  public getCeo(ceoName: CardName): ICeoCard | undefined {
+    const card = this.playedCards.find((c) => c.name === ceoName);
+    return (card !== undefined && isCeoCard(card)) ? card : undefined;
+  }
+
   public getCorporationOrThrow(corporationName: CardName): ICorporationCard {
     const corporation = this.getCorporation(corporationName);
     if (corporation === undefined) {

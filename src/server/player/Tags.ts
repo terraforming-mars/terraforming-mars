@@ -7,6 +7,7 @@ import {Tag} from '../../common/cards/Tag';
 import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
+import {CeoExtension} from '../CeoExtension';
 import {Player} from '../Player';
 
 export class Tags {
@@ -56,6 +57,10 @@ export class Tags {
       tagCount += this.player.scienceTagCount;
     }
 
+    if (tag === Tag.WILD || includeTagSubstitutions) {
+      // CEO Xavier hook
+      tagCount += CeoExtension.getBonusWildTags(this.player);
+    }
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
@@ -166,7 +171,7 @@ export class Tags {
 
   // Counts the number of distinct tags
   public distinctCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tag): number {
-    let wildTagCount = 0;
+    let wildTagCount: number = CeoExtension.getBonusWildTags(this.player);
     const uniqueTags = new Set<Tag>();
     const addTag = (tag: Tag) => {
       if (tag === Tag.WILD) {

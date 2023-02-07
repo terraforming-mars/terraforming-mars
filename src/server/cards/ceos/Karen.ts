@@ -4,13 +4,13 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 
 
-export class Karen extends Card implements CeoCard {
+export class Karen extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.KAREN,

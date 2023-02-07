@@ -4,14 +4,14 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_COLONY_TRACK_POSITION} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 
-export class Naomi extends Card implements CeoCard {
+export class Naomi extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.NAOMI,

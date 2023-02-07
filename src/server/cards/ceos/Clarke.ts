@@ -4,11 +4,11 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {ICeoCard} from './ICeoCard';
 
 import {Resources} from '../../../common/Resources';
 
-export class Clarke extends Card implements CeoCard {
+export class Clarke extends Card implements ICeoCard {
   constructor() {
     super({
       name: CardName.CLARKE,

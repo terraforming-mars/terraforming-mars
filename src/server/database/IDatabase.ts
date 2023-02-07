@@ -100,7 +100,7 @@ export interface IDatabase {
     /**
      * Deletes the last `rollbackCount` saves of the specified game.
      *
-     * Accessible by the administrative API to roll back a broken game.
+     * Used as part of undo, reset, and via API to roll back a broken game.
      */
     deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void>;
 

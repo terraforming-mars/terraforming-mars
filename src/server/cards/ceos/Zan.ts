@@ -25,7 +25,7 @@ export class Zan extends Card implements CeoCard {
           // b.opgArrow().text('ALL').delegates(1).colon().nbsp.nbsp.party(PartyName.REDS);
           b.opgArrow().text('ALL').delegates(1).colon().text('REDS');
         }),
-        description: 'You are immune to Reds\' ruling policy. Once per game, place all your delegates in Reds.',
+        description: 'You are immune to Reds\' ruling policy. Once per game, place all of your available delegates in Reds.',
       },
     });
   }
@@ -43,15 +43,9 @@ export class Zan extends Card implements CeoCard {
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
-    // const reserveDelegates = turmoil.delegateReserve.filter((d) => d === player.id).length;
-    const reserveDelegates = turmoil.getAvailableDelegateCount(player.id);
-    for (let i = 0; i < reserveDelegates; i++) {
-      game.defer(new SimpleDeferredAction(player, () => {
-        turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
-        return undefined;
-      }));
+    while (turmoil.getAvailableDelegateCount(player.id) > 0) {
+      turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
     }
-
     this.isDisabled = true;
     return undefined;
   }

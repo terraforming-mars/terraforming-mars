@@ -39,8 +39,8 @@ export class PartyHooks {
         policyId = rulingParty.policies[0].id;
       }
 
-      // Hook for CEO Leader Zan's effect (Skip all Reds Policy effects)
-      if (player.cardIsInEffect(CardName.ZAN) && policyId.startsWith('r')) return false;
+      // Hook for CEO Zan's effect (Skip all Reds Policy effects)
+      if (partyName === PartyName.REDS && player.cardIsInEffect(CardName.ZAN)) return false;
 
       const currentPolicyId: PolicyId = PoliticalAgendas.currentAgenda(turmoil).policyId;
 

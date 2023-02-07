@@ -8,7 +8,6 @@ import {CeoCard} from './CeoCard';
 import {PartyName} from '../../../common/turmoil/PartyName';
 
 import {Turmoil} from '../../turmoil/Turmoil';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 
 export class Zan extends Card implements CeoCard {
   constructor() {

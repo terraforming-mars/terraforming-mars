@@ -412,7 +412,7 @@ export class Server {
       fleetSize: player.colonies.getFleetSize(),
       heat: player.heat,
       heatProduction: player.production.heat,
-      id: game.phase === Phase.END ? player.id : player.color,
+      id: game.phase === Phase.END ? player.id : undefined,
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
       isActive: player.id === game.activePlayer,
       lastCardPlayed: player.lastCardPlayed,

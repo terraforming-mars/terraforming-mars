@@ -34,7 +34,7 @@ import {Ulrich} from './Ulrich';
 // import {VanAllen} from './VanAllen';
 // import {Will} from './Will';
 import {Xavier} from './Xavier';
-// import {Yvonne} from './Yvonne';
+import {Yvonne} from './Yvonne';
 import {Zan} from './Zan';
 
 
@@ -74,7 +74,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     // [CardName.VANALLEN]: {Factory: VanAllen},
     // [CardName.WILL]: {Factory: Will, compatibility: 'venus'},
     [CardName.XAVIER]: {Factory: Xavier, compatibility: 'prelude'},
-    // [CardName.YVONNE]: {Factory: Yvonne, compatibility: 'colonies'},
+    [CardName.YVONNE]: {Factory: Yvonne, compatibility: 'colonies'},
     [CardName.ZAN]: {Factory: Zan, compatibility: 'turmoil'},
   },
 });

@@ -4,17 +4,17 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
+import {CeoCard} from './CeoCard';
 
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {multiplier} from '../Options';
 
-export class Floyd extends Card implements LeaderCard {
+export class Floyd extends Card implements CeoCard {
   constructor() {
     super({
       name: CardName.FLOYD,
-      cardType: CardType.LEADER,
+      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L06',
         renderData: CardRenderer.builder((b) => {

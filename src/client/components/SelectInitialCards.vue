@@ -45,6 +45,7 @@ import {Tag} from '@/common/cards/Tag';
 import {AndOptionsResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
 import Colony from '@/client/components/colonies/Colony.vue';
+import * as titles from '@/common/inputs/SelectInitialCards';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -280,7 +281,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.playerinput.options?.length === 3;
     },
     corpCardOption() {
-      const option = getOption(this.playerinput.options, 0);
+      const option = getOption(this.playerinput.options, titles.SELECT_CORPORATION_TITLE);
       if (getPreferences().experimental_ui) {
         option.min = 1;
         option.max = undefined;
@@ -288,15 +289,14 @@ export default (Vue as WithRefs<Refs>).extend({
       return option;
     },
     preludeCardOption() {
-      const option = getOption(this.playerinput.options, 1);
+      const option = getOption(this.playerinput.options, titles.SELECT_PRELUDE_TITLE);
       if (getPreferences().experimental_ui) {
         option.max = undefined;
       }
       return option;
     },
     projectCardOption() {
-      // Compiler won't accept this method using this.hasPrelude, despite documentation saying I can.
-      return getOption(this.playerinput.options, this.playerinput.options?.length === 3 ? 2 : 1);
+      return getOption(this.playerinput.options, titles.SELECT_PROJECTS_TITLE);
     },
   },
   mounted() {
@@ -304,8 +304,8 @@ export default (Vue as WithRefs<Refs>).extend({
   },
 });
 
-function getOption(options: Array<PlayerInputModel> | undefined, idx: number): PlayerInputModel {
-  const option = options?.[idx];
+function getOption(options: Array<PlayerInputModel> | undefined, title: string): PlayerInputModel {
+  const option = options?.find((option) => option.title === title);
   if (option === undefined) {
     throw new Error('invalid input, missing option');
   }

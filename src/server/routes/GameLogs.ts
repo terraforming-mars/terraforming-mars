@@ -1,6 +1,6 @@
 import {LogMessage} from '../../common/logs/LogMessage';
 import {LogMessageType} from '../../common/logs/LogMessageType';
-import {PlayerId, SpectatorId} from '../../common/Types';
+import {ParticipantId} from '../../common/Types';
 import {Game} from '../Game';
 import {Phase} from '../../common/Phase';
 import {Log} from '../../common/logs/Log';
@@ -25,7 +25,7 @@ export class GameLogs {
     return newMessages;
   }
 
-  public getLogsForGameView(playerId: PlayerId | SpectatorId, game: Game, generation: string | null): Array<LogMessage> {
+  public getLogsForGameView(playerId: ParticipantId, game: Game, generation: string | null): Array<LogMessage> {
     const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
 
     // for most recent generation pull last 50 log messages

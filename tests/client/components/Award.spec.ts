@@ -11,8 +11,8 @@ function createAward(
 ): FundedAwardModel {
   return {
     name: `Cosmic Settler`,
-    player_name: funded ? 'Foo' : '',
-    player_color: funded ? 'red': '',
+    playerName: funded ? 'Foo' : '',
+    playerColor: funded ? Color.RED: '',
     scores,
   };
 }
@@ -118,7 +118,7 @@ describe('Award', () => {
       propsData: {award},
     });
 
-    expect(wrapper.find(`.board-cube--${award.player_color}`).exists()).to.be.true;
+    expect(wrapper.find(`.board-cube--${award.playerColor}`).exists()).to.be.true;
   });
 
   it(`creates correct css class from award's name`, () => {

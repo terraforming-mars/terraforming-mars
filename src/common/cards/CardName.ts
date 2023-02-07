@@ -753,7 +753,7 @@ export enum CardName {
     HABITAT_MARTE = 'Habitat Marte',
     ADHAI_HIGH_ORBIT_CONSTRUCTIONS = 'Adhai High Orbit Constructions',
 
-    // CEOs/Leader
+    // CEOs
     ASIMOV = 'Asimov',
     BJORN = 'Bjorn',
     CLARKE = 'Clarke',

@@ -4,18 +4,18 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
+import {CeoCard} from './CeoCard';
 
 import {Priority} from '../../deferredActions/DeferredAction';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SelectAmount} from '../../inputs/SelectAmount';
 
-export class Ender extends Card implements LeaderCard {
+export class Ender extends Card implements CeoCard {
   constructor() {
     super({
       name: CardName.ENDER,
-      cardType: CardType.LEADER,
+      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L05',
         renderData: CardRenderer.builder((b) => {

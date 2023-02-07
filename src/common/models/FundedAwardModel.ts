@@ -9,7 +9,7 @@ export type AwardScore = {
 
 export type FundedAwardModel = {
   name: AwardName;
-  player_name: string;
-  player_color: string;
+  playerName: string;
+  playerColor: Color | '';
   scores: Array<AwardScore>;
 }

@@ -112,8 +112,10 @@ export class Server {
 
     return {
       cardsInHand: this.getCards(player, player.cardsInHand, {showCalculatedCost: true}),
+      ceoCardsInHand: this.getCards(player, player.ceoCardsInHand),
       dealtCorporationCards: this.getCards(player, player.dealtCorporationCards),
       dealtPreludeCards: this.getCards(player, player.dealtPreludeCards),
+      dealtCeoCards: this.getCards(player, player.dealtCeoCards),
       dealtProjectCards: this.getCards(player, player.dealtProjectCards),
       draftedCorporations: this.getCards(player, player.draftedCorporations),
       draftedCards: this.getCards(player, player.draftedCards, {showCalculatedCost: true}),
@@ -170,8 +172,8 @@ export class Server {
       }
 
       milestoneModels.push({
-        player_name: claimed === undefined ? '' : claimed.player.name,
-        player_color: claimed === undefined ? '' : claimed.player.color,
+        playerName: claimed === undefined ? '' : claimed.player.name,
+        playerColor: claimed === undefined ? '' : claimed.player.color,
         name: milestone.name,
         scores,
       });
@@ -196,8 +198,8 @@ export class Server {
       }
 
       awardModels.push({
-        player_name: funded === undefined ? '' : funded.player.name,
-        player_color: funded === undefined ? '' : funded.player.color,
+        playerName: funded === undefined ? '' : funded.player.name,
+        playerColor: funded === undefined ? '' : funded.player.color,
         name: award.name,
         scores: scores,
       });
@@ -546,6 +548,7 @@ export class Server {
       aresExtension: options.aresExtension,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
+      ceoExtension: options.ceoExtension,
       coloniesExtension: options.coloniesExtension,
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
@@ -574,9 +577,9 @@ export class Server {
       requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
       turmoilExtension: options.turmoilExtension,
+      twoCorpsVariant: options.twoCorpsVariant,
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
-      twoCorpsVariant: options.twoCorpsVariant,
     };
   }
 

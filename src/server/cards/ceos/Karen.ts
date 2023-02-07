@@ -4,17 +4,17 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
+import {CeoCard} from './CeoCard';
 
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 
 
-export class Karen extends Card implements LeaderCard {
+export class Karen extends Card implements CeoCard {
   constructor() {
     super({
       name: CardName.KAREN,
-      cardType: CardType.LEADER,
+      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L11',
         renderData: CardRenderer.builder((b) => {

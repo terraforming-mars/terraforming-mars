@@ -4,23 +4,23 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
+import {CeoCard} from './CeoCard';
 
 import {Resources} from '../../../common/Resources';
+import {MAX_OCEAN_TILES} from '../../../common/constants';
 import {multiplier} from '../Options';
 
-export class Bjorn extends Card implements LeaderCard {
+export class Ulrich extends Card implements CeoCard {
   constructor() {
     super({
-      name: CardName.BJORN,
-      cardType: CardType.LEADER,
+      name: CardName.ULRICH,
+      cardType: CardType.CEO,
       metadata: {
-        cardNumber: 'L02',
+        cardNumber: 'L21',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('STEAL').megacredits(0, {multiplier}).asterix();
-          b.br;
+          b.opgArrow().oceans(1).colon().megacredits(4, {multiplier}).slash().megacredits(15).asterix();
         }),
-        description: 'Once per game, steal X M€ from each player that has more M€ than you, where X is the current generation number.',
+        description: 'Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.',
       },
     });
   }
@@ -37,13 +37,9 @@ export class Bjorn extends Card implements LeaderCard {
 
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
-    const targetPlayers = game.getPlayers().filter((p) => p.id !== player.id && p.megaCredits > player.megaCredits);
-
-    targetPlayers.forEach((target) => {
-      const qtyToSteal = Math.min(game.generation, target.megaCredits);
-      target.stealResource(Resources.MEGACREDITS, qtyToSteal, player);
-    });
-
+    const oceansPlaced = game.board.getOceanCount();
+    const bonusCredits = oceansPlaced < MAX_OCEAN_TILES ? (oceansPlaced * 4) : 15;
+    player.addResource(Resources.MEGACREDITS, bonusCredits, {log: true});
     this.isDisabled = true;
     return undefined;
   }

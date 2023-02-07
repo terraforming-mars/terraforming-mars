@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PreludeDeck, LeaderDeck} from '../../src/server/cards/Deck';
+import {PreludeDeck, CeoDeck} from '../../src/server/cards/Deck';
 import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/GameOptions';
 import {CardName} from '../../src/common/cards/CardName';
@@ -73,15 +73,15 @@ describe('PreludeDeck', function() {
   });
 });
 
-describe('LeaderDeck', function() {
+describe('CeoDeck', function() {
   const random = new UnseededRandom();
 
   it('serialization compatibility', () => {
-    const deck = new LeaderDeck(new GameCards(
+    const deck = new CeoDeck(new GameCards(
       {...DEFAULT_GAME_OPTIONS,
-        leadersExtension: true,
+        ceoExtension: true,
         preludeExtension: true,
-      }).getLeaderCards(), [], random);
+      }).getCeoCards(), [], random);
 
     const logger = {
       log: () => {},
@@ -103,7 +103,7 @@ describe('LeaderDeck', function() {
     expect(serialized.drawPile).has.length(deckLength);
     expect(serialized.discardPile).has.length(drawCardsCount);
 
-    const deserialized = LeaderDeck.deserialize(serialized, UnseededRandom.INSTANCE);
+    const deserialized = CeoDeck.deserialize(serialized, UnseededRandom.INSTANCE);
     expect(deserialized.drawPile).has.length(deckLength);
     expect(deserialized.discardPile).has.length(drawCardsCount);
 

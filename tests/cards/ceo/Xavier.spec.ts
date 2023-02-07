@@ -14,14 +14,12 @@ import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports
 describe('Xavier', function() {
   let card: Xavier;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Xavier();
     game = newTestGame(2, {ceoExtension: true});
     player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
     player.playedCards.push(card, new SearchForLife());
   });
 

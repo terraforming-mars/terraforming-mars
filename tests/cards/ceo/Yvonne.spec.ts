@@ -63,7 +63,7 @@ describe('Yvonne', function() {
     // Sanity check before OPG
     expect(player2.energy).eq(0);
     expect(player2.steel).eq(0);
-    expect(player2.titanium).eq(0);    
+    expect(player2.titanium).eq(0);
     card.action(player);
     game.deferredActions.runAll(() => { });
     expect(player2.energy).eq(0);

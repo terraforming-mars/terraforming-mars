@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
-import {Floyd} from '../../../src/server/cards/leaders/Floyd';
+import {Floyd} from '../../../src/server/cards/ceos/Floyd';
 import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 

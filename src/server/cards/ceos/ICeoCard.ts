@@ -1,9 +1,9 @@
+import {ICard} from '../ICard';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {ICard} from '../ICard';
 
-export interface LeaderCard extends IProjectCard {
+export interface ICeoCard extends IProjectCard {
   // TODO: Rename to something that indicates that it's usable even when this value is true.
   /** When true, the card cannot be activated again. */
   isDisabled?: boolean;
@@ -14,9 +14,9 @@ export interface LeaderCard extends IProjectCard {
   /** The generation the card was activated. Used for Duncan. */
   generationUsed?: number;
 
-  canAct: (player: Player) => boolean;
+  canAct(player: Player): boolean;
 }
 
-export function isLeaderCard(card: ICard): card is LeaderCard {
-  return card.cardType === CardType.LEADER;
+export function isCeoCard(card: ICard): card is ICeoCard {
+  return card.cardType === CardType.CEO;
 }

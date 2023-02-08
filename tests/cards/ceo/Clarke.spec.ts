@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, forceGenerationEnd} from '../../TestingUtils';
-import {Clarke} from '../../../src/server/cards/leaders/Clarke';
+import {Clarke} from '../../../src/server/cards/ceos/Clarke';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('Clarke', function() {
@@ -17,14 +17,14 @@ describe('Clarke', function() {
   });
 
   it('Can only act once per game', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
 
     card.action(player);
     runAllActions(game);
     forceGenerationEnd(game);
 
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 
   it('Takes action', function() {

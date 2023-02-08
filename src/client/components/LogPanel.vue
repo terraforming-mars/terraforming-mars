@@ -73,7 +73,7 @@ const cardTypeToCss: Record<CardType, string | undefined> = {
   active: 'background-color-active',
   automated: 'background-color-automated',
   prelude: 'background-color-prelude',
-  leader: 'background-color-leader',
+  ceo: 'background-color-ceo',
   standard_project: 'background-color-standard-project',
   standard_action: 'background-color-standard-project',
   proxy: undefined,
@@ -181,7 +181,7 @@ export default Vue.extend({
       switch (data.type) {
       case LogMessageDataType.PLAYER:
         for (const player of this.players) {
-          if (data.value === player.color || data.value === player.id) {
+          if (data.value === player.color) {
             return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
           }
         }

@@ -4,7 +4,7 @@ import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {ILeaderCard} from './cards/leaders/ILeaderCard';
+import {ICeoCard} from './cards/ceos/ICeoCard';
 import {ALL_MODULE_MANIFESTS} from './cards/AllCards';
 
 const CARD_RENAMES = new Map<string, CardName>([
@@ -33,7 +33,7 @@ export class CardFinder {
   }
 
   public getCardByName(cardName: CardName): ICard | undefined {
-    return this.getCard(cardName, ['corporationCards', 'projectCards', 'preludeCards', 'leaderCards']);
+    return this.getCard(cardName, ['corporationCards', 'projectCards', 'preludeCards', 'ceoCards']);
   }
 
   public getCorporationCardByName(cardName: CardName): ICorporationCard | undefined {
@@ -52,8 +52,8 @@ export class CardFinder {
     return this.getCard(cardName, ['preludeCards']);
   }
 
-  public getLeaderByName(cardName: CardName): ILeaderCard | undefined {
-    return this.getCard(cardName, ['leaderCards']);
+  public getCeoByName(cardName: CardName): ICeoCard | undefined {
+    return this.getCard(cardName, ['ceoCards']);
   }
 
   public preludesFromJSON(cards: Array<CardName>): Array<IPreludeCard> {
@@ -73,14 +73,14 @@ export class CardFinder {
     return result;
   }
 
-  public leadersFromJSON(cards: Array<CardName>): Array<ILeaderCard> {
+  public ceosFromJSON(cards: Array<CardName>): Array<ICeoCard> {
     if (cards === undefined) {
-      console.warn('missing cards calling leadersFromJSON');
+      console.warn('missing cards calling ceosFromJSON');
       return [];
     }
-    const result: Array<ILeaderCard> = [];
+    const result: Array<ICeoCard> = [];
     cards.forEach((element: CardName) => {
-      const card = this.getLeaderByName(element);
+      const card = this.getCeoByName(element);
       if (card !== undefined) {
         result.push(card);
       } else {

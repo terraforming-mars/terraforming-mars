@@ -22,6 +22,7 @@ import {PlayerInput} from './routes/PlayerInput';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 import {serverId, statsId} from './server-ids';
+import {Reset} from './routes/Reset';
 
 const handlers: Map<string, IHandler> = new Map(
   [
@@ -49,6 +50,7 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
     [paths.PLAYER_INPUT, PlayerInput.INSTANCE],
+    [paths.RESET, Reset.INSTANCE],
     [paths.SPECTATOR, ServeApp.INSTANCE],
     ['styles.css', ServeAsset.INSTANCE],
     ['sw.js', ServeAsset.INSTANCE],

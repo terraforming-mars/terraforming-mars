@@ -3,7 +3,7 @@ import {Game} from '../../../src/server/Game';
 import {forceGenerationEnd, maxOutOceans} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {Ulrich} from '../../../src/server/cards/leaders/Ulrich';
+import {Ulrich} from '../../../src/server/cards/ceos/Ulrich';
 
 describe('Ulrich', function() {
   let card: Ulrich;
@@ -13,13 +13,13 @@ describe('Ulrich', function() {
 
   beforeEach(() => {
     card = new Ulrich();
-    game = newTestGame(2, {leadersExtension: true});
+    game = newTestGame(2, {ceoExtension: true});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
   });
 
   it('Can act', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Takes action: Some Oceans Placed, 4MC per Ocean', function() {
@@ -39,6 +39,6 @@ describe('Ulrich', function() {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

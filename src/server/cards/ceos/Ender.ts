@@ -1,21 +1,17 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
-
+import {CeoCard} from './CeoCard';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SelectAmount} from '../../inputs/SelectAmount';
 
-export class Ender extends Card implements LeaderCard {
+export class Ender extends CeoCard {
   constructor() {
     super({
       name: CardName.ENDER,
-      cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L05',
         renderData: CardRenderer.builder((b) => {
@@ -26,14 +22,11 @@ export class Ender extends Card implements LeaderCard {
     });
   }
 
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(player: Player): boolean {
-    return player.cardsInHand.length > 0 && this.isDisabled === false;
+  public override canAct(player: Player): boolean {
+    if (!super.canAct(player)) {
+      return false;
+    }
+    return player.cardsInHand.length > 0;
   }
 
   public action(player: Player): PlayerInput | undefined {

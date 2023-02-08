@@ -29,6 +29,7 @@ import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
+import {SerializedGame} from '@/server/SerializedGame';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -720,8 +721,17 @@ describe('Game', () => {
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
 
-    const unserializedFieldsInGame = ['rng', 'discardedColonies', 'monsInsuranceOwner', 'createdTime'];
-    const serializedValuesNotInGame = ['seed', 'currentSeed', 'createdTimeMs'];
+    const unserializedFieldsInGame: Array<keyof Game> = [
+      'rng',
+      'discardedColonies',
+      'monsInsuranceOwner',
+      'createdTime',
+      'inputsThisRound',
+      'resettable'];
+    const serializedValuesNotInGame: Array<keyof SerializedGame> = [
+      'seed',
+      'currentSeed',
+      'createdTimeMs'];
 
     const gameKeys = Object.keys(game);
 

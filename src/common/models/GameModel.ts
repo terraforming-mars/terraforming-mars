@@ -41,4 +41,5 @@ export type GameModel = {
   turmoil: TurmoilModel | undefined;
   undoCount: number;
   venusScaleLevel: number;
+  experimentalReset?: boolean;
 }

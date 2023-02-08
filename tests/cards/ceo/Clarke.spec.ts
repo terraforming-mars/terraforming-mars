@@ -17,14 +17,14 @@ describe('Clarke', function() {
   });
 
   it('Can only act once per game', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
 
     card.action(player);
     runAllActions(game);
     forceGenerationEnd(game);
 
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 
   it('Takes action', function() {

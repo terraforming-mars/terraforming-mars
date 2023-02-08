@@ -1,22 +1,38 @@
-import {Player} from '../../Player';
-import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {ICard} from '../ICard';
+import {ICardMetadata} from '../../../common/cards/ICardMetadata';
+import {CardName} from '../../../common/cards/CardName';
+import {Tag} from '../../../common/cards/Tag';
+import {ICeoCard} from './ICeoCard';
+import {Player} from '../../../server/Player';
 
-export interface CeoCard extends IProjectCard {
-  // TODO: Rename to something that indicates that it's usable even when this value is true.
-  /** When true, the card cannot be activated again. */
-  isDisabled?: boolean;
-
-  /** If this card is active this generation. */
-  opgActionIsActive?: boolean;
-
-  /** The generation the card was activated. Used for Duncan. */
-  generationUsed?: number;
-
-  canAct: (player: Player) => boolean;
+interface StaticCeoProperties {
+    metadata: ICardMetadata;
+    name: CardName;
+    tags?: Array<Tag>;
 }
 
-export function isCeoCard(card: ICard): card is CeoCard {
-  return card.cardType === CardType.CEO;
+export abstract class CeoCard extends Card implements ICeoCard {
+  public isDisabled = false;
+
+  constructor(properties: StaticCeoProperties) {
+    super({
+      cardType: CardType.CEO,
+      name: properties.name,
+      tags: properties.tags,
+      metadata: properties.metadata,
+    });
+  }
+
+  public canAct(_player: Player): boolean {
+    return this.isDisabled === false;
+  }
+
+  public override play(_player: Player) {
+    return undefined;
+  }
+
+  public override get cardType(): CardType.CEO {
+    return CardType.CEO;
+  }
 }

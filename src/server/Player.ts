@@ -65,7 +65,7 @@ import {Production} from './player/Production';
 import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {CeoExtension} from './CeoExtension';
-import {isCeoCard} from './cards/ceos/CeoCard';
+import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 // import {VanAllen} from './cards/ceos/VanAllen';
 import {AwardScorer} from './awards/AwardScorer';
 import {FundedAward} from './awards/FundedAward';
@@ -124,7 +124,7 @@ export class Player {
   // Cards
   public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
-  public dealtCeoCards: Array<IProjectCard> = [];
+  public dealtCeoCards: Array<ICeoCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IProjectCard> = [];
@@ -209,7 +209,8 @@ export class Player {
   }
 
   public getCeo(ceoName: CardName): ICeoCard | undefined {
-    return this.playedCards.find((c) => c.name === ceoName);
+    const card = this.playedCards.find((c) => c.name === ceoName);
+    return (card !== undefined && isCeoCard(card)) ? card : undefined;
   }
 
   public getCorporationOrThrow(corporationName: CardName): ICorporationCard {
@@ -1724,8 +1725,6 @@ export class Player {
       return;
     }
 
-    const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed();
-
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
     // if (saveBeforeTakingAction) game.save();
 
@@ -1766,8 +1765,9 @@ export class Player {
       game.phase = Phase.ACTION;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
+    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= 2)) {
       this.actionsTakenThisRound = 0;
+      game.resettable = true;
       game.playerIsFinishedTakingActions();
       return;
     }
@@ -1821,7 +1821,7 @@ export class Player {
     });
   }
 
-  // TODO(kberg): move to Card
+  // TODO(kberg): perhaps move to Card
   public runInitialAction(corp: ICorporationCard) {
     this.game.defer(new SimpleDeferredAction(this, () => {
       if (corp.initialAction) {
@@ -1876,15 +1876,12 @@ export class Player {
     TurmoilHandler.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
-      action.options.push(
-        this.playActionCard(),
-      );
+      action.options.push(this.playActionCard());
     }
 
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
-      action.options.push(
-        new SelectProjectCardToPlay(this, playableCards));
+      action.options.push(new SelectProjectCardToPlay(this, playableCards));
     }
 
     const coloniesTradeAction = this.colonies.coloniesTradeAction();
@@ -1920,9 +1917,7 @@ export class Player {
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
       this.allOtherPlayersHavePassed() === false) {
-      action.options.push(
-        this.endTurnOption(),
-      );
+      action.options.push(this.endTurnOption());
     }
 
     const fundingCost = this.game.getAwardFundingCost();
@@ -1993,6 +1988,7 @@ export class Player {
     this.timer.start();
     this.waitingFor = input;
     this.waitingForCb = cb;
+    this.game.inputsThisRound++;
   }
 
   public serialize(): SerializedPlayer {

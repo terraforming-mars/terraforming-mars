@@ -1,19 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICeoCard} from './ICeoCard';
+import {CeoCard} from './CeoCard';
 import {PartyName} from '../../../common/turmoil/PartyName';
-
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class Zan extends Card implements ICeoCard {
+export class Zan extends CeoCard {
   constructor() {
     super({
       name: CardName.ZAN,
-      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L26',
         renderData: CardRenderer.builder((b) => {
@@ -27,16 +23,6 @@ export class Zan extends Card implements ICeoCard {
         description: 'You are immune to Reds\' ruling policy. Once per game, place all of your available delegates in Reds.',
       },
     });
-  }
-
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {

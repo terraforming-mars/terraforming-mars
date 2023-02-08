@@ -57,6 +57,6 @@ describe('Zan', function() {
     forceGenerationEnd(game);
 
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

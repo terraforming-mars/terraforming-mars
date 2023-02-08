@@ -19,7 +19,7 @@ describe('Ulrich', function() {
   });
 
   it('Can act', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Takes action: Some Oceans Placed, 4MC per Ocean', function() {
@@ -39,6 +39,6 @@ describe('Ulrich', function() {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

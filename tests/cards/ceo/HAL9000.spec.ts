@@ -32,6 +32,6 @@ describe('HAL 9000', function() {
     card.action(player);
     forceGenerationEnd(player.game);
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

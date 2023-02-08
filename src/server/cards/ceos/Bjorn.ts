@@ -1,19 +1,16 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICeoCard} from './ICeoCard';
+import {CeoCard} from './CeoCard';
 
 import {Resources} from '../../../common/Resources';
 import {multiplier} from '../Options';
 
-export class Bjorn extends Card implements ICeoCard {
+export class Bjorn extends CeoCard {
   constructor() {
     super({
       name: CardName.BJORN,
-      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L02',
         renderData: CardRenderer.builder((b) => {
@@ -23,16 +20,6 @@ export class Bjorn extends Card implements ICeoCard {
         description: 'Once per game, steal X M€ from each player that has more M€ than you, where X is the current generation number.',
       },
     });
-  }
-
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {

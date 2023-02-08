@@ -23,7 +23,10 @@ export class Yvonne extends CeoCard {
 
 
   public override canAct(player: Player): boolean {
-    return player.game.gameOptions.coloniesExtension === true && super.canAct(player);
+    if (!super.canAct(player)) {
+      return false;
+    }
+    return player.game.gameOptions.coloniesExtension === true;
   }
 
   public action(player: Player): PlayerInput | undefined {

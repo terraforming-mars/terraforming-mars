@@ -244,6 +244,7 @@ export class Server {
       selectBlueCardAction: false,
       availableParties: undefined,
       turmoil: undefined,
+      showReset: player.game.inputsThisRound > 0 && player.game.resettable === true && player.game.phase === Phase.ACTION,
     };
     switch (waitingFor.inputType) {
     case PlayerInputType.AND_OPTIONS:

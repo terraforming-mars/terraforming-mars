@@ -1725,8 +1725,6 @@ export class Player {
       return;
     }
 
-    const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed();
-
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
     // if (saveBeforeTakingAction) game.save();
 
@@ -1767,8 +1765,9 @@ export class Player {
       game.phase = Phase.ACTION;
     }
 
-    if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
+    if (game.hasPassedThisActionPhase(this) || (this.allOtherPlayersHavePassed() === false && this.actionsTakenThisRound >= 2)) {
       this.actionsTakenThisRound = 0;
+      game.resettable = true;
       game.playerIsFinishedTakingActions();
       return;
     }
@@ -1822,7 +1821,7 @@ export class Player {
     });
   }
 
-  // TODO(kberg): move to Card
+  // TODO(kberg): perhaps move to Card
   public runInitialAction(corp: ICorporationCard) {
     this.game.defer(new SimpleDeferredAction(this, () => {
       if (corp.initialAction) {
@@ -1989,6 +1988,7 @@ export class Player {
     this.timer.start();
     this.waitingFor = input;
     this.waitingForCb = cb;
+    this.game.inputsThisRound++;
   }
 
   public serialize(): SerializedPlayer {

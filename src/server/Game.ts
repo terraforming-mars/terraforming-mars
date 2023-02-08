@@ -84,6 +84,8 @@ export class Game implements Logger {
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
   public undoCount: number = 0; // Each undo increases it
+  public inputsThisRound = 0;
+  public resettable: boolean = false;
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
@@ -920,13 +922,15 @@ export class Game implements Logger {
       return;
     }
 
+    this.inputsThisRound = 0;
+
+    // This next section can be done more simply.
     if (this.allPlayersHavePassed()) {
       this.gotoProductionPhase();
       return;
     }
 
     const nextPlayer = this.getPlayerAfter(this.getPlayerById(this.activePlayer));
-
     if (!this.hasPassedThisActionPhase(nextPlayer)) {
       this.startActionsForPlayer(nextPlayer);
     } else {
@@ -1538,6 +1542,7 @@ export class Game implements Logger {
     const preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
 
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck);
+    game.resettable = true;
     game.spectatorId = d.spectatorId;
     // TODO(kberg): remove ?? 0 by 2023-03-15
     game.createdTime = new Date(d.createdTimeMs ?? 0);

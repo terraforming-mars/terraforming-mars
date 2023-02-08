@@ -18,5 +18,6 @@ export const LOAD_GAME = '/load_game' as const;
 export const NEW_GAME = '/new-game' as const;
 export const PLAYER = '/player' as const;
 export const PLAYER_INPUT = '/player/input' as const;
+export const RESET = '/reset' as const;
 export const SPECTATOR = '/spectator' as const;
 export const THE_END = '/the-end' as const;

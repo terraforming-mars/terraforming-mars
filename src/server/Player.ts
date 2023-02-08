@@ -531,10 +531,9 @@ export class Player {
     });
 
     this.colonies.calculateVictoryPoints(victoryPointsBreakdown);
-    // calculateVictoryPoints for CEO Duncan
-    // CeoExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
+    CeoExtension.calculateVictoryPoints(this, victoryPointsBreakdown);
 
     // Escape velocity VP penalty
     if (this.game.gameOptions.escapeVelocityMode) {

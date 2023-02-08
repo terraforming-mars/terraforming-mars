@@ -1,19 +1,18 @@
-import {Card} from '../Card';
-import {CeoCard} from './CeoCard';
-import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
+import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class Apollo extends Card implements CeoCard {
+
+export class Apollo extends CeoCard {
   constructor() {
     super({
       name: CardName.APOLLO,
-      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L35',
         renderData: CardRenderer.builder((b) => {
@@ -25,16 +24,6 @@ export class Apollo extends Card implements CeoCard {
         description: 'Once per game, gain 3 M€ for each tile on The Moon.',
       },
     });
-  }
-
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {

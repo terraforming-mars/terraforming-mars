@@ -1,19 +1,16 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 
-export class Will extends Card implements CeoCard {
+export class Will extends CeoCard {
   constructor() {
     super({
       name: CardName.WILL,
-      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L23',
         renderData: CardRenderer.builder((b) => {
@@ -25,16 +22,6 @@ export class Will extends Card implements CeoCard {
         description: 'Once per game, add the following resources to your cards: 2 animals, 2 microbes, 1 science, 1 floater, 1 asteroid, 1 wild.',
       },
     });
-  }
-
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {

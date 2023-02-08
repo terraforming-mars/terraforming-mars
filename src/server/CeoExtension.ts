@@ -1,7 +1,7 @@
 import {Player} from './Player';
 import {isCeoCard} from './cards/ceos/ICeoCard';
 import {CardName} from '../common/cards/CardName';
-// import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 
 export class CeoExtension {
   public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {

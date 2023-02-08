@@ -24,8 +24,11 @@ describe('Apollo', function() {
     moonData = MoonExpansion.moonData(game);
   });
 
-  it('Can act', function() {
-    expect(card.canAct()).is.true;
+  it('Can only act once per game', function() {
+    card.action(player);
+    forceGenerationEnd(game);
+    expect(card.isDisabled).is.true;
+    expect(card.canAct(player)).is.false;
   });
 
   it('Takes action: Gains 3 M€ for each Moon tile', function() {
@@ -36,12 +39,5 @@ describe('Apollo', function() {
 
     card.action(player);
     expect(player.megaCredits).eq(9);
-  });
-
-  it('Can only act once per game', function() {
-    card.action(player);
-    forceGenerationEnd(game);
-    expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
   });
 });

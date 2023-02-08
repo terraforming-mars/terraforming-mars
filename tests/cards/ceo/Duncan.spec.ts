@@ -18,6 +18,13 @@ describe('Duncan', function() {
     player.playedCards.push(card);
   });
 
+  it('Can only act once per game', function() {
+    card.action(player);
+    forceGenerationEnd(game);
+    expect(card.isDisabled).is.true;
+    expect(card.canAct(player)).is.false;
+  });
+
   it('Has 5 VP and 4 MC in gen 1', function() {
     card.action(player);
     expect(player.getVictoryPoints().total).eq(25);
@@ -42,12 +49,5 @@ describe('Duncan', function() {
 
   it('Does not affect VP if OPG action not used yet', function() {
     expect(player.getVictoryPoints().total).eq(20);
-  });
-
-  it('Can only act once per game', function() {
-    card.action(player);
-    forceGenerationEnd(player.game);
-    expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
   });
 });

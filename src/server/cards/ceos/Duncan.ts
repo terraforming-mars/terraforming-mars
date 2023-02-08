@@ -1,8 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
@@ -11,11 +9,10 @@ import {multiplier} from '../Options';
 
 
 // TODO: Does Duncan trigger Vitor?
-export class Duncan extends Card implements CeoCard {
+export class Duncan extends CeoCard {
   constructor() {
     super({
       name: CardName.DUNCAN,
-      cardType: CardType.CEO,
       metadata: {
         cardNumber: 'L04',
         renderData: CardRenderer.builder((b) => {
@@ -27,15 +24,7 @@ export class Duncan extends Card implements CeoCard {
     });
   }
 
-  public isDisabled = false;
   public generationUsed = -1;
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return this.isDisabled === false;
-  }
 
   public action(player: Player): PlayerInput | undefined {
     player.addResource(Resources.MEGACREDITS, 4 * player.game.generation, {log: true});

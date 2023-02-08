@@ -26,6 +26,13 @@ describe('Will', function() {
     player.playedCards.push(card);
   });
 
+  it('Can only act once per game', function() {
+    card.action(player);
+    forceGenerationEnd(game);
+    expect(card.isDisabled).is.true;
+    expect(card.canAct(player)).is.false;
+  });
+
   it('Takes OPG action', function() {
     const birds = new Birds();
     const ants = new Ants();
@@ -78,13 +85,5 @@ describe('Will', function() {
     // We should have drawn a card here
     expect(comms.resourceCount).eq(0);
     expect(player.cardsInHand.length).to.eq(1);
-  });
-
-  it('Can only act once per game', function() {
-    card.action(player);
-    forceGenerationEnd(game);
-
-    expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
   });
 });

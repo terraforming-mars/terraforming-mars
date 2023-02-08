@@ -58,7 +58,7 @@ export class Route {
   public downgradeRedirect(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context): void {
     const url = new URL(ctx.url); // defensive copty
     url.searchParams.set('serverId', ctx.ids.statsId);
-    res.writeHead(301, {Location: url.toString()});
+    res.writeHead(301, {Location: url.pathname + url.search});
     res.end();
   }
 

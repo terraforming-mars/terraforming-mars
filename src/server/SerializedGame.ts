@@ -20,6 +20,7 @@ export type SerializedGame = {
     aresData?: AresData;
     awards: Array<string>;
     board: SerializedBoard;
+    ceoDeck: SerializedDeck;
     currentSeed: number;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;

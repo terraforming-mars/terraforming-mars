@@ -84,9 +84,10 @@
           </div>
 
           <a name="cards" class="player_home_anchor"></a>
-          <div class="player_home_block player_home_block--hand" v-if="playerView.cardsInHand.length + playerView.preludeCardsInHand.length > 0" id="shortkey-hand">
-              <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + playerView.preludeCardsInHand.length).toString()" />
-              <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.cardsInHand)" />
+          <div class="player_home_block player_home_block--hand" v-if="playerView.cardsInHand.length + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length > 0" id="shortkey-hand">
+              <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + playerView.preludeCardsInHand.length + playerView.ceoCardsInHand.length).toString()" />
+              <!-- <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.ceoCardsInHand).concat(playerView.cardsInHand)" /> -->
+              <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.cardsInHand, playerView.ceoCardsInHand)" />
           </div>
 
           <div class="player_home_block player_home_block--cards">
@@ -109,6 +110,9 @@
                   <div class="text-overview" v-i18n>[ toggle cards filters ]</div>
               </div>
               <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
+                  <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
+              </div>
+              <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)"/>
               </div>
               <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
@@ -153,6 +157,9 @@
               <div v-for="card in playerView.dealtPreludeCards" :key="card.name" class="cardbox">
                 <Card :card="card"/>
               </div>
+              <div v-for="card in playerView.dealtCeoCards" :key="card.name" class="cardbox">
+                <Card :card="card"/>
+              </div>
               <div v-for="card in playerView.dealtProjectCards" :key="card.name" class="cardbox">
                 <Card :card="card"/>
               </div>
@@ -165,6 +172,10 @@
             </div>
 
             <div v-for="card in playerView.dealtPreludeCards" :key="card.name" class="cardbox">
+              <Card :card="card"/>
+            </div>
+
+            <div v-for="card in playerView.dealtCeoCards" :key="card.name" class="cardbox">
               <Card :card="card"/>
             </div>
 
@@ -188,6 +199,11 @@
               <template v-if="game.gameOptions.preludeExtension">
                 <div v-for="card in playerView.preludeCardsInHand" :key="card.name" class="cardbox">
                   <Card :card="card"/>
+                </div>
+              </template>
+              <template v-if="game.gameOptions.ceoExtension">
+                <div v-for="card in playerView.ceoCardsInHand" :key="card.name" class="cardbox">
+                <Card :card="card"/>
                 </div>
               </template>
             </div>

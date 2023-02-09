@@ -68,7 +68,6 @@ import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, dayStringToDays} from './database/utils.ts';
-import {ICeoCard} from './cards/ceos/ICeoCard';
 
 export interface Score {
   corporation: String;
@@ -359,7 +358,7 @@ export class Game implements Logger {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      this.runDraftRound(true, false, false);
+      this.runDraftRound(true, false);
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -609,17 +608,15 @@ export class Game implements Logger {
     this.first = newFirstPlayer;
   }
 
-  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false, ceoDraft: boolean = false): void {
+  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false): void {
     this.save();
     this.draftedPlayers.clear();
     this.players.forEach((player) => {
       player.needsToDraft = true;
-      if (this.draftRound === 1 && (!preludeDraft && !ceoDraft)) {
+      if (this.draftRound === 1 && !preludeDraft) {
         player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name);
       } else if (this.draftRound === 1 && preludeDraft) {
         player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, player.dealtPreludeCards);
-      } else if (this.draftRound === 1 && ceoDraft) {
-        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player).name, player.dealtCeoCards);
       } else {
         const draftCardsFrom = this.getDraftCardsFrom(player).id;
         const cards = this.unDraftedCards.get(draftCardsFrom);
@@ -838,19 +835,8 @@ export class Game implements Logger {
         if (this.initialDraftIteration === 2) {
           player.dealtProjectCards = player.draftedCards;
           player.draftedCards = [];
-        } else if (this.initialDraftIteration === 3 && this.gameOptions.preludeExtension) {
-          // Yes Preludes
+        } else if (this.initialDraftIteration === 3) {
           player.dealtPreludeCards = player.draftedCards;
-          player.draftedCards = [];
-        } else if (this.initialDraftIteration === 3 && !this.gameOptions.preludeExtension) {
-          // No Preludes, Yes CEOs
-          // !! NOTICE: This is almost certainly wrong.  I assume it is VERY BAD to typecast here
-          player.dealtCeoCards = player.draftedCards as ICeoCard[];
-          player.draftedCards = [];
-        } else if (this.initialDraftIteration === 4) {
-          // Yes Preludes, Yes CEOs
-          // !! NOTICE: This is almost certainly wrong.  I assume it is VERY BAD to typecast here
-          player.dealtCeoCards = player.draftedCards as ICeoCard[];
           player.draftedCards = [];
         }
       }
@@ -861,29 +847,14 @@ export class Game implements Logger {
       return;
     }
 
-    // TODO: (Low Hanging Fruit)
-    // Gosh this is messy.
-    // I feel like we should be setting some kind of 'hasDraftedPreludes' or 'hasDraftedLeader' instead of this
-    // It would impact a lot of the code here, but I think there's value in it
     if (this.initialDraftIteration === 1) {
       this.initialDraftIteration++;
       this.draftRound = 1;
       this.runDraftRound(true);
     } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
-      // Yes Preludes
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound(true, true, false);
-    } else if (this.initialDraftIteration === 2 && (this.gameOptions.ceoExtension && !this.gameOptions.preludeExtension)) {
-      // No Preludes, Yes CEOs
-      this.initialDraftIteration++;
-      this.draftRound = 1;
-      this.runDraftRound(true, false, true);
-    } else if (this.initialDraftIteration === 3 && (this.gameOptions.ceoExtension && this.gameOptions.preludeExtension)) {
-      // Yes Preludes, Yes CEOs
-      this.initialDraftIteration++;
-      this.draftRound = 1;
-      this.runDraftRound(true, false, true);
+      this.runDraftRound(true, true);
     } else {
       this.gotoInitialResearchPhase();
     }

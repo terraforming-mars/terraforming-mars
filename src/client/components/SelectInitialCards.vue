@@ -8,8 +8,8 @@
     <div v-if="playerCanChooseAridor" class="player_home_colony_cont">
       <div v-i18n>These are the colony tiles Aridor may choose from:</div>
       <div class="discarded-colonies-for-aridor">
-        <div class="player_home_colony small_colony" v-for="colony in playerView.game.discardedColonies" :key="colony.name">
-          <colony :colony="colony"></colony>
+        <div class="player_home_colony small_colony" v-for="colonyName in playerView.game.discardedColonies" :key="colonyName">
+          <colony :colony="getColony(colonyName)"></colony>
         </div>
       </div>
     </div>
@@ -46,6 +46,8 @@ import {Tag} from '@/common/cards/Tag';
 import {AndOptionsResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
 import Colony from '@/client/components/colonies/Colony.vue';
+import {ColonyName} from '@/common/colonies/ColonyName';
+import {ColonyModel} from '@/common/models/ColonyModel';
 import * as titles from '@/common/inputs/SelectInitialCards';
 
 type Refs = {
@@ -291,6 +293,16 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     confirmSelection() {
       this.saveData();
+    },
+    // TODO(kberg): Duplicate of LogPanel.getColony
+    getColony(colonyName: ColonyName): ColonyModel {
+      return {
+        colonies: [],
+        isActive: false,
+        name: colonyName,
+        trackPosition: 0,
+        visitor: undefined,
+      };
     },
   },
   computed: {

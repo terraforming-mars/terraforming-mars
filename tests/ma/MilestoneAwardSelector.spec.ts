@@ -6,10 +6,20 @@ import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynerg
 import {IMilestone} from '../../src/server/milestones/IMilestone';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {testGameOptions} from '../TestingUtils';
-import {intersection} from '../../src/common/utils/utils';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
   return list.map((e) => e.name);
+}
+
+/**
+ * Returns a new array consisting of elements only in both a and b.
+ *
+ * @param {Array<T>} a: the first array
+ * @param {Array<T>} b: the second array
+ * @return {Array<T>} the intersection of both array elements
+ */
+function intersection<T>(a: Array<T>, b: Array<T>): Array<T> {
+  return a.filter((e) => b.includes(e));
 }
 
 describe('MilestoneAwardSelector', () => {

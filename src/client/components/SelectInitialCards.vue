@@ -227,6 +227,12 @@ export default (Vue as WithRefs<Refs>).extend({
           cards: this.selectedPreludes,
         });
       }
+      if (this.hasCeo) {
+        result.responses.push({
+          type: 'card',
+          cards: this.selectedCeos,
+        });
+      }
       result.responses.push({
         type: 'card',
         cards: this.selectedCards,

@@ -844,12 +844,12 @@ export class Game implements Logger {
           player.draftedCards = [];
         } else if (this.initialDraftIteration === 3 && !this.gameOptions.preludeExtension) {
           // No Preludes, Yes CEOs
-          //!! NOTICE: This is almost certainly wrong.  I assume it is VERY BAD to typecast here
+          // !! NOTICE: This is almost certainly wrong.  I assume it is VERY BAD to typecast here
           player.dealtCeoCards = player.draftedCards as ICeoCard[];
           player.draftedCards = [];
         } else if (this.initialDraftIteration === 4) {
           // Yes Preludes, Yes CEOs
-          //!! NOTICE: This is almost certainly wrong.  I assume it is VERY BAD to typecast here
+          // !! NOTICE: This is almost certainly wrong.  I assume it is VERY BAD to typecast here
           player.dealtCeoCards = player.draftedCards as ICeoCard[];
           player.draftedCards = [];
         }
@@ -887,7 +887,6 @@ export class Game implements Logger {
     } else {
       this.gotoInitialResearchPhase();
     }
-
   }
 
   // Function use to manage corporation draft way

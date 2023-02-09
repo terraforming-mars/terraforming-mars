@@ -21,7 +21,7 @@ describe('Will', function() {
 
   beforeEach(() => {
     card = new Will();
-    game = newTestGame(4, {ceoExtension: true});
+    game = newTestGame(1, {ceoExtension: true});
     player = getTestPlayer(game, 0);
     player.playedCards.push(card);
   });

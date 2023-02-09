@@ -242,5 +242,5 @@ export const mainAppSettings = {
 
 function getCurrentPath() {
   // Leave only the last part of /path
-  return window.location.pathname.replace(/.*\//g, "");
+  return window.location.pathname.replace(/.*\//g, '');
 }

@@ -1,4 +1,7 @@
+import {MilestoneName} from './MilestoneName';
+import {AwardName} from './AwardName';
+
 export type MilestoneAwardMetadata = {
-  name: string,
+  name: MilestoneName | AwardName,
   description: string,
 };

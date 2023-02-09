@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Satellites} from '../../../src/server/cards/base/Satellites';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 
@@ -13,9 +12,9 @@ describe('Satellites', function() {
     player.game = game;
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     player.playedCards.push(card);
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.production.megacredits).to.eq(3);
   });
 });

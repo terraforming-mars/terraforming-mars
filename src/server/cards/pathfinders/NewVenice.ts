@@ -1,24 +1,29 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class NewVenice extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.NEW_VENICE,
-      tags: [Tags.MARS, Tags.ENERGY, Tags.BUILDING, Tags.CITY],
+      tags: [Tag.MARS, Tag.POWER, Tag.BUILDING, Tag.CITY],
       cost: 21,
-      productionBox: Units.of({energy: 1, megacredits: 2}),
+
+      behavior: {
+        production: {energy: 1, megacredits: 2},
+        tile: {
+          type: TileType.OCEAN_CITY,
+          on: 'upgradeable-ocean',
+          title: 'Select space for New Venice',
+        },
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {
@@ -35,26 +40,13 @@ export class NewVenice extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return super.canPlay(player) && (player.plants >= 2);
+  // TODO(kberg): use reserveUnits for plants.
+  public override bespokeCanPlay(player: Player): boolean {
+    return player.plants >= 2;
   }
 
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+  public override bespokePlay(player: Player) {
     player.plants -= 2;
-
-    return new SelectSpace(
-      'Select space for New Venice',
-      player.game.board.getOceanSpaces({upgradedOceans: false}),
-      (space: ISpace) => {
-        const tile = {
-          tileType: TileType.OCEAN_CITY,
-          card: this.name,
-          covers: space.tile,
-        };
-        player.game.addTile(player, space.spaceType, space, tile);
-        return undefined;
-      },
-    );
+    return undefined;
   }
 }

@@ -7,14 +7,12 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EcologyResearch', function() {
   let card: EcologyResearch;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let colony1: Luna;
 
@@ -22,7 +20,7 @@ describe('EcologyResearch', function() {
     card = new EcologyResearch();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    const gameOptions = testGameOptions({coloniesExtension: true});
     game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();
@@ -33,7 +31,7 @@ describe('EcologyResearch', function() {
   it('Should play without targets', function() {
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 
@@ -53,7 +51,7 @@ describe('EcologyResearch', function() {
 
     expect(tardigrades.resourceCount).to.eq(2);
     expect(fish.resourceCount).to.eq(1);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 
   it('Should play with multiple targets', function() {
@@ -65,10 +63,10 @@ describe('EcologyResearch', function() {
     expect(game.deferredActions).has.lengthOf(1);
 
     // add two microbes to Ants
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([ants]);
 
     expect(ants.resourceCount).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 });

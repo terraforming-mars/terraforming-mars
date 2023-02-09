@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,12 +13,12 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Ants extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Ants extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ANTS,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 9,
 
       resourceType: CardResource.MICROBE,
@@ -29,19 +29,13 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
         cardNumber: '035',
         description: 'Requires 4% oxygen.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 Microbe from any card to add 1 to this card.', (eb) => {
+          b.action('Remove 1 microbe from any card to add 1 to this card.', (eb) => {
             eb.microbes(1, {all}).startAction.microbes(1);
           }).br;
-          b.vpText('1 VP per 2 Microbes on this card.');
+          b.vpText('1 VP per 2 microbes on this card.');
         }),
       },
     });
-  }
-
-  public override resourceCount = 0;
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

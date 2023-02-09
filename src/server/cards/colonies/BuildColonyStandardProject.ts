@@ -46,6 +46,6 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   }
 
   actionEssence(player: Player): void {
-    player.game.defer(new BuildColony(player, false, 'Select colony'));
+    player.game.defer(new BuildColony(player));
   }
 }

@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Luna} from '../../src/server/colonies/Luna';
 import {Triton} from '../../src/server/colonies/Triton';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {JovianTaxRights} from '../../src/server/turmoil/globalEvents/JovianTaxRights';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -26,13 +25,13 @@ describe('JovianTaxRights', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.TITANIUM)).to.eq(0);
-    expect(player2.getResource(Resources.TITANIUM)).to.eq(3);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.titanium).to.eq(0);
+    expect(player2.titanium).to.eq(3);
+    expect(player.production.megacredits).to.eq(0);
+    expect(player2.production.megacredits).to.eq(2);
   });
 });

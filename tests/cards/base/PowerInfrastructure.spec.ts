@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {PowerInfrastructure} from '../../../src/server/cards/base/PowerInfrastructure';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PowerInfrastructure', function() {
   let card: PowerInfrastructure;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new PowerInfrastructure();

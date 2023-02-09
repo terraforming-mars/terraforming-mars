@@ -24,7 +24,7 @@ describe('InterstellarColonyShip', function() {
     player.playedCards.push(new Research(), new Research(), new GeneRepair());
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play();
+    card.play(player);
     expect(card.getVictoryPoints()).to.eq(4);
   });
 });

@@ -1,13 +1,13 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 
 export class Electrician implements IMilestone {
-  public name: string = 'Electrician';
-  public description: string = 'Have at least 4 Power tags';
+  public readonly name = 'Electrician';
+  public readonly description = 'Have at least 4 Power tags';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.ENERGY);
+    return player.tags.count(Tag.POWER, 'milestone');
   }
 
   public canClaim(player: Player): boolean {

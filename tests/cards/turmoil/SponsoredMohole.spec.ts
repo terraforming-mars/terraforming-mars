@@ -1,25 +1,21 @@
 import {expect} from 'chai';
 import {SponsoredMohole} from '../../../src/server/cards/turmoil/SponsoredMohole';
-import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {testGameOptions} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SponsoredMohole', function() {
   it('Should play', function() {
     const card = new SponsoredMohole();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
+    const player = getTestPlayer(game, 0);
+    expect(card.canPlay(player)).is.not.true;
 
-    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;
-    kelvinists.delegates.push(player.id, player.id);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS);
+    kelvinists.delegates.add(player.id, 2);
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
   });
 });

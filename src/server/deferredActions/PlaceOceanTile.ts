@@ -1,14 +1,16 @@
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
-import {SpaceType} from '../../common/boards/SpaceType';
 import {DeferredAction, Priority} from './DeferredAction';
+import {PlacementType} from '../boards/PlacementType';
 
 export class PlaceOceanTile extends DeferredAction {
   constructor(
     player: Player,
-    public title: string = 'Select space for ocean tile',
-  ) {
+    private options?: {
+      on?: PlacementType,
+      title?: string,
+    }) {
     super(player, Priority.PLACE_OCEAN_TILE);
   }
 
@@ -17,13 +19,26 @@ export class PlaceOceanTile extends DeferredAction {
       return undefined;
     }
 
+    const on = this.options?.on || 'ocean';
+    const availableSpaces = this.player.game.board.getAvailableSpacesForType(this.player, on);
+    const title = this.options?.title ?? this.getTitle(on);
+
     return new SelectSpace(
-      this.title,
-      this.player.game.board.getAvailableSpacesForOcean(this.player),
+      title,
+      availableSpaces,
       (space: ISpace) => {
-        this.player.game.addOceanTile(this.player, space.id, SpaceType.OCEAN);
+        this.player.game.addOceanTile(this.player, space);
         return undefined;
       },
     );
+  }
+
+  private getTitle(type: PlacementType) {
+    switch (type) {
+    case 'ocean': return 'Select space for ocean tile';
+    case 'land': return 'Select a land space to place an ocean tile';
+    // case '': return 'Select space reserved for ocean to place greenery tile';
+    default: throw new Error('unhandled type; ' + type);
+    }
   }
 }

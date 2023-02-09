@@ -1,19 +1,22 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class GHGImportFromVenus extends Card {
+export class GHGImportFromVenus extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GHG_IMPORT_FROM_VENUS,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE, Tags.VENUS],
+      tags: [Tag.SPACE, Tag.VENUS],
       cost: 23,
-      tr: {venus: 1},
+
+      behavior: {
+        production: {heat: 3},
+        global: {venus: 1},
+      },
 
       metadata: {
         description: 'Raise Venus 1 step. Increase your heat production 3 steps.',
@@ -25,11 +28,5 @@ export class GHGImportFromVenus extends Card {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.HEAT, 3);
-    player.game.increaseVenusScaleLevel(player, 1);
-    return undefined;
   }
 }

@@ -1,21 +1,20 @@
 import {expect} from 'chai';
 import {EarlySettlement} from '../../../src/server/cards/prelude/EarlySettlement';
-import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('EarlySettlement', function() {
   it('Should play', function() {
     const card = new EarlySettlement();
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player);
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
 
     card.play(player);
-    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
+    const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
 
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
     expect(selectSpace.availableSpaces[0].player).to.eq(player);
     expect(selectSpace.availableSpaces[0].tile).is.not.undefined;

@@ -3,12 +3,11 @@ import {cast} from '../../TestingUtils';
 import {SulphurEatingBacteria} from '../../../src/server/cards/venusNext/SulphurEatingBacteria';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SulphurEatingBacteria', function() {
   let card: SulphurEatingBacteria;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -26,7 +25,7 @@ describe('SulphurEatingBacteria', function() {
   it('Should play', function() {
     (game as any).venusScaleLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.true;
-    expect(card.play()).is.undefined;
+    expect(card.play(player)).is.undefined;
   });
 
   it('Should act - both actions available', function() {

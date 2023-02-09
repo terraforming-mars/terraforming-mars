@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Windmills} from '../../../src/server/cards/base/Windmills';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('Windmills', function() {
   let card: Windmills;
@@ -18,14 +17,14 @@ describe('Windmills', function() {
 
   it('Can not play', function() {
     (game as any).oxygenLevel = 6;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
   it('Should play', function() {
     (game as any).oxygenLevel = 7;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

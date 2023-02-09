@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('PhysicsComplex', function() {
   let card: PhysicsComplex;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new PhysicsComplex();
@@ -13,7 +12,7 @@ describe('PhysicsComplex', function() {
   });
 
   it('Can not act', function() {
-    card.play();
+    card.play(player);
     player.energy = 5;
     expect(card.canAct(player)).is.not.true;
   });

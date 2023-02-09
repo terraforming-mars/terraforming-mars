@@ -1,18 +1,15 @@
 import {expect} from 'chai';
 import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports';
-import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SulphurExports', function() {
   it('Should play', function() {
     const card = new SulphurExports();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    const game = newTestGame(2);
+    const player = getTestPlayer(game, 0);
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

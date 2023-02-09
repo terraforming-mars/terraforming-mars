@@ -2,7 +2,6 @@ import {Player} from '../Player';
 import {Resources} from '../../common/Resources';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
-import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 export type Options = {
   count: number,
@@ -23,7 +22,7 @@ export class DecreaseAnyProduction extends DeferredAction {
 
   public execute() {
     if (this.player.game.isSoloMode()) {
-      MonsInsurance.resolveInsuranceInSoloGame(this.player);
+      this.player.resolveInsuranceInSoloGame();
       return undefined;
     }
 
@@ -34,7 +33,7 @@ export class DecreaseAnyProduction extends DeferredAction {
     }
 
     if (candidates.length === 1 && candidates[0] !== this.player) {
-      candidates[0].addProduction(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+      candidates[0].production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
       return undefined;
     }
 
@@ -43,7 +42,7 @@ export class DecreaseAnyProduction extends DeferredAction {
       this.title,
       'Decrease',
       (found: Player) => {
-        found.addProduction(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
+        found.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
         return undefined;
       },
     );

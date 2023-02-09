@@ -1,16 +1,16 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {FloaterTechnology} from '../../../src/server/cards/colonies/FloaterTechnology';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('FloaterTechnology', function() {
   let card: FloaterTechnology;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -21,7 +21,7 @@ describe('FloaterTechnology', function() {
   });
 
   it('Can play', function() {
-    const result = card.play();
+    const result = card.play(player);
     expect(result).is.undefined;
   });
 
@@ -49,7 +49,7 @@ describe('FloaterTechnology', function() {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([floatingHabs]);
     expect(floatingHabs.resourceCount).to.eq(1);
     expect(dirigibles.resourceCount).to.eq(0);

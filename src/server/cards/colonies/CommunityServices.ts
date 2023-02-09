@@ -26,8 +26,8 @@ export class CommunityServices extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
+  public override bespokePlay(player: Player) {
+    player.production.add(Resources.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
     return undefined;
   }
 }

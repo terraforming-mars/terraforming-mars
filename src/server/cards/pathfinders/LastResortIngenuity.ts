@@ -22,10 +22,6 @@ export class LastResortIngenuity extends Card implements IProjectCard {
       },
     });
   }
-
-  // Behavior in player.canUseSteel, player.canUseTitanium, and SelectHowToPayForProjectCard.
-  public play() {
-    return undefined;
-  }
+  // Behavior in player.canUseSteel, player.canUseTitanium, and SelectPaymentDeferred.
 }
 

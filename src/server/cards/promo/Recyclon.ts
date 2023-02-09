@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
@@ -8,21 +8,23 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {IResourceCard} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit, played} from '../Options';
 
-export class Recyclon extends Card implements ICorporationCard, IResourceCard {
+export class Recyclon extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.RECYCLON,
-      tags: [Tags.MICROBE, Tags.BUILDING],
+      tags: [Tag.MICROBE, Tag.BUILDING],
       startingMegaCredits: 38,
       resourceType: CardResource.MICROBE,
-      productionBox: Units.of({steel: 1}),
+
+      behavior: {
+        production: {steel: 1},
+        addResources: 1,
+      },
 
       metadata: {
         cardNumber: 'R26',
@@ -40,15 +42,9 @@ export class Recyclon extends Card implements ICorporationCard, IResourceCard {
       },
     });
   }
-  public override resourceCount = 0;
 
-  public play(player: Player) {
-    player.addProduction(Resources.STEEL, 1);
-    player.addResourceTo(this);
-    return undefined;
-  }
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING) === false || !player.isCorporation(this.name)) {
+    if (card.tags.includes(Tag.BUILDING) === false || !player.isCorporation(this.name)) {
       return undefined;
     }
     if (this.resourceCount < 2) {
@@ -63,7 +59,7 @@ export class Recyclon extends Card implements ICorporationCard, IResourceCard {
 
     const spendResource = new SelectOption('Remove 2 microbes on this card and increase plant production 1 step', 'Remove microbes', () => {
       player.removeResourceFrom(this, 2);
-      player.addProduction(Resources.PLANTS, 1);
+      player.production.add(Resources.PLANTS, 1);
       return undefined;
     });
     return new OrOptions(spendResource, addResource);

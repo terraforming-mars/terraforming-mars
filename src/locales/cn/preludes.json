@@ -21,7 +21,7 @@
   "TRUST":"信托",
   "Valley Trust":"莱瓦信托",
   "prel":"前序",
-  "Effect: When you play a Science tag, you pay 2M€ less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2 M€。",
+  "Effect: When you play a science tag, you pay 2M€ less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2 M€。",
   "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37 M€，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
 
   "VIT":"维特尔",
@@ -36,7 +36,7 @@
   "Increase your steel production 1 step.":"增加你的钢铁产量1级。",
 
   "Lava Tube Settlement":"熔岩管殖民",
-  "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"减少1点电力产量，提升2点金钱产量。放置一个城市板块到火山区，忽视相邻规则",
+  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.":"减少1点电力产量，提升2点金钱产量。放置一个城市板块到火山区，忽视相邻规则",
 
   "Martian Survey":"调查火星",
   "Oxygen must be 4% or lower. Draw two cards.":"氧气浓度≤4%.抽两张卡",
@@ -56,11 +56,11 @@
   "Requires 2 Earth tags. Increase M€ production 4 steps.":"需要两个地球图标.增加4点M€产量",
 
 
-  "Allied Banks": "联合银行",
+  "Allied Bank": "联合银行",
   "Increase your M€ production 4 steps. Gain 3 M€.": "提升4级M€产量,获得3 M€。",
 
   "Aquifer Turbines": "含水层涡轮机",
-  "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "放置一个海洋。提升你的电力产量2级,支付3 M€。",
+  "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "放置一个海洋。提升你的电力产量2级,支付3 M€。",
 
   "Biofuels": "生物燃料",
   "Increase your energy and plant production 1 step. Gain 2 plants.": "提升你的电力和植物产量1级,获得2植物资源。",
@@ -90,16 +90,16 @@
   "Play a card from hand, reducing its cost by 25 M€": "以降低 25M€ 的价格打出一张手牌",
 
   "Experimental Forest": "实验林场",
-  "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "放置1个森林板块。不断展示牌库顶的牌,直到有两张带有植物标志的牌。把这两张牌加入你的手牌,并弃掉剩余的牌。",
+  "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "放置1个森林板块。不断展示牌库顶的牌,直到有两张带有植物标志的牌。把这两张牌加入你的手牌,并弃掉剩余的牌。",
 
   "Galilean Mining": "伽利略矿业",
   "Increase your titanium production 2 steps. Pay 5 M€.": "提升钛产量2级,支付5 M€。",
 
   "Great Aquifer": "大型含水层",
-  "Place 2 Ocean tiles.": "放置2块海洋板块。",
+  "Place 2 ocean tiles.": "放置2块海洋板块。",
 
   "Huge Asteroid": "巨型小行星",
-  "Increase Temperature 3 steps. Pay 5 M€.": "提升火星温度3级,支付 5 M€.。",
+  "Increase temperature 3 steps. Pay 5 M€.": "提升火星温度3级,支付 5 M€.。",
 
   "Io Research Outpost": "木卫一研究前哨",
   "Increase your titanium production 1 step. Draw a card.": "提升钛产量1级,抽1张卡。",
@@ -132,7 +132,7 @@
   "Increase your titanium production 1 step. Gain 4 titanium.": "提升你的钛产量1级,获得4个钛资源。",
 
   "Polar Industries": "极地工业",
-  "Increase your heat production 2 steps. Place an Ocean tile.": "提升你的热能产量2级,放置1个海洋板块。",
+  "Increase your heat production 2 steps. Place an ocean tile.": "提升你的热能产量2级,放置1个海洋板块。",
 
   "Power Generation": "发电",
   "Increase your energy production 3 steps.": "提升你的电力产量3级。",
@@ -141,13 +141,13 @@
   "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "提升你的M€产量1级,抽3张牌。",
 
   "Self-Sufficient Settlement": "自给自足的据点",
-  "Increase your money production 2 steps. Place a City tile.": "提升你的M€产量2级,放置1个城市板块。",
+  "Increase your M€ production 2 steps. Place a city tile.": "提升你的M€产量2级,放置1个城市板块。",
 
   "Smelting Plant": "冶炼厂",
   "Raise oxygen 2 steps. Gain 5 steel.": "提升火星的氧气浓度2级,获得5个钢铁资源。",
 
   "Society Support": "社会支援",
-  "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "提升你的植物产量、电力产量和热能产量1级,降低你的M€产量1级。",
+  "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "提升你的植物产量、电力产量和热能产量1级,降低你的M€产量1级。",
 
   "Supplier": "供应商",
   "Increase your energy production 2 steps. Gain 4 steel.": "提升你的电力产量2级,获得4个钢铁资源。",

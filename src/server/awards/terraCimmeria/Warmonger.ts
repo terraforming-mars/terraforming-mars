@@ -3,8 +3,8 @@ import {Player} from '../../Player';
 import {IAward} from '../IAward';
 
 export class Warmonger implements IAward {
-  public name: string = 'Warmonger';
-  public description: string = 'Most cards that reduce other players\' resources or production';
+  public readonly name = 'Warmonger';
+  public readonly description = 'Most cards that reduce other players\' resources or production';
 
   public getScore(player: Player): number {
     const cardNames = player.playedCards.map((card) => card.name);
@@ -58,5 +58,7 @@ export class Warmonger implements IAward {
     // Pathfinders
     CardName.DUST_STORM,
     CardName.SOLAR_STORM,
+    // CEOs
+    CardName.BJORN,
   ];
 }

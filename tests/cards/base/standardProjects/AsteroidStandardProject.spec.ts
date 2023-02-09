@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {setCustomGameOptions, runAllActions} from '../../../TestingUtils';
+import {testGameOptions, runAllActions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -48,7 +48,7 @@ describe('AsteroidStandardProject', function() {
 
   it('Can not act with reds', () => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, setCustomGameOptions({turmoilExtension: true}));
+    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

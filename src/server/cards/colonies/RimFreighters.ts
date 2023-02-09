@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -10,9 +9,13 @@ export class RimFreighters extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 4,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.RIM_FREIGHTERS,
       cardType: CardType.ACTIVE,
+
+      behavior: {
+        colonies: {tradeDiscount: 1},
+      },
 
       metadata: {
         cardNumber: 'C35',
@@ -23,14 +26,5 @@ export class RimFreighters extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.colonyTradeDiscount++;
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonyTradeDiscount--;
   }
 }

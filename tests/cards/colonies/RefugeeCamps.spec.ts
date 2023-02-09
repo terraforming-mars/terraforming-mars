@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RefugeeCamps', function() {
   let card: RefugeeCamps;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new RefugeeCamps();
@@ -14,7 +13,7 @@ describe('RefugeeCamps', function() {
   });
 
   it('Should play', function() {
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
 
     player.addResourceTo(card, 5);
@@ -22,7 +21,7 @@ describe('RefugeeCamps', function() {
   });
 
   it('Can not act', function() {
-    player.addProduction(Resources.MEGACREDITS, -5);
+    player.production.add(Resources.MEGACREDITS, -5);
     expect(card.canAct(player)).is.not.true;
   });
 

@@ -1,15 +1,13 @@
 import {expect} from 'chai';
 import {Callisto} from '../../src/server/colonies/Callisto';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
-import {Resources} from '../../src/common/Resources';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Callisto', function() {
   let callisto: Callisto;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -23,8 +21,8 @@ describe('Callisto', function() {
 
   it('Should build', function() {
     callisto.addColony(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player2.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(1);
+    expect(player2.production.energy).to.eq(0);
   });
 
   it('Should trade', function() {
@@ -39,8 +37,8 @@ describe('Callisto', function() {
     callisto.trade(player2);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-    expect(player2.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(1);
+    expect(player2.production.energy).to.eq(0);
     expect(player.energy).to.eq(3);
     expect(player2.energy).to.eq(2);
   });

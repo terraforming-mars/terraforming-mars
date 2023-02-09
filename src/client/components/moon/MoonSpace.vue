@@ -3,6 +3,9 @@
     <div :class="tileClass" data-test="tile"/>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus v-if="space.tileType === undefined || tileView === 'hide'" :bonus="space.bonus" />
+    <template v-if="tileView === 'coords'">
+      <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
+    </template>
     <div
       v-if="space.color !== undefined && tileView === 'show'"
       class="board-cube"
@@ -20,7 +23,7 @@ import {TileView} from '../board/TileView';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.MOON_ROAD, 'road'],
-  [TileType.MOON_COLONY, 'colony'],
+  [TileType.MOON_HABITAT, 'colony'],
   [TileType.MOON_MINE, 'mine'],
   [TileType.LUNA_TRADE_STATION, 'luna-trade-station'],
   [TileType.LUNA_MINING_HUB, 'luna-mining-hub'],
@@ -83,7 +86,7 @@ export default Vue.extend({
 
       if (tileType !== undefined) {
         switch (this.space.tileType) {
-        case TileType.MOON_COLONY:
+        case TileType.MOON_HABITAT:
           css += ' board-space-tile--colony';
           break;
         case TileType.MOON_ROAD:

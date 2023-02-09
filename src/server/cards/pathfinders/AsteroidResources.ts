@@ -4,9 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
-import {Units} from '../../../common/Units';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -19,8 +18,8 @@ export class AsteroidResources extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.ASTEROID_RESOURCES,
       cost: 17,
-      tags: [Tags.JOVIAN, Tags.SPACE],
-      reserveUnits: Units.of({energy: 3}),
+      tags: [Tag.JOVIAN, Tag.SPACE],
+      reserveUnits: {energy: 3},
       victoryPoints: 1,
 
       metadata: {
@@ -36,15 +35,15 @@ export class AsteroidResources extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return player.hasUnits(this.reserveUnits);
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const options = new OrOptions(
       new SelectOption('Increase your steel and titanium production 1 step.', 'Select', () => {
         player.deductUnits(this.reserveUnits);
-        player.addProduction(Resources.STEEL, 1, {log: true});
-        player.addProduction(Resources.TITANIUM, 1, {log: true});
+        player.production.add(Resources.STEEL, 1, {log: true});
+        player.production.add(Resources.TITANIUM, 1, {log: true});
         return undefined;
       }),
       new SelectOption('Place an ocean, and gain 2 steel and one titanium.', 'Select', () => {

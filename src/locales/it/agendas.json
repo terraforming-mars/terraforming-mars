@@ -1,15 +1,15 @@
 {
    "Select a Mars First bonus.":"Seleziona un bonus Prima Marte!.",
-   "Gain 1 M€ for each Building tag you have":"Guadagna 1 M€ per ogni simbolo Edificio posseduto",
+   "Gain 1 M€ for each building tag you have":"Guadagna 1 M€ per ogni simbolo Edificio posseduto",
    "Gain 1 M€ for each tile you have ON MARS":"Guadagna 1 M€ per ogni tessera che hai SU MARTE",
    "Select a Mars First policy.":"Seleziona una linea di governo Prima Marte!.",
    "When you place a tile ON MARS, gain 1 steel":"Quando piazzi una tessera SU MARTE guadagni 1 Acciaio",
-   "When you play a Building tag, gain 2 M€":"Quando giochi un simbolo Edificio guadagni 2 M€",
+   "When you play a building tag, gain 2 M€":"Quando giochi un simbolo Edificio guadagni 2 M€",
    "Your steel resources are worth 1 M€ extra":"Le tue risorse Acciaio valgono 1 M€ extra",
    "Spend 4 M€ to draw a Building card (Turmoil Mars First)":"Spendi 4 M€ per pescare una carta Edificio",
 
    "Select a Scientists bonus.":"Seleziona un bonus Scienziati.",
-   "Gain 1 M€ for each Science tag you have":"Guadagna 1 M€ per ogni simbolo Scienza posseduto",
+   "Gain 1 M€ for each science tag you have":"Guadagna 1 M€ per ogni simbolo Scienza posseduto",
    "Gain 1 M€ for every 3 cards in hand":"Guadagna 1 M€ per ogni 3 carte in mano",
    "Select a Scientists policy.":"Seleziona una linea di governo Scienziati.",
    "Your global requirements are +/- 2 steps":"I tuoi Parametri Globali hanno +2 oppure -2 livelli a tua scelta",
@@ -44,10 +44,10 @@
    "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible":"Quando alzi un Parametro Globale diminuisci la tua Produzione di M€ di 1 livello per ogni livello alzato, se possibile",
 
    "Select a Kelvinists bonus.":"Seleziona un bonus Kelvinisti.",
-   "Gain 1 M€ for each Heat production you have":"Guadagna 1 M€ per ogni livello di Produzione di Calore posseduto",
-   "Gain 1 heat for each Heat production you have":"Guadagna 1 Calore per ogni livello di Produzione di Calore posseduto",
+   "Gain 1 M€ for each heat production you have":"Guadagna 1 M€ per ogni livello di Produzione di Calore posseduto",
+   "Gain 1 heat for each heat production you have":"Guadagna 1 Calore per ogni livello di Produzione di Calore posseduto",
    "Select a Kelvinists policy.":"Seleziona una linea di governo Kelvinisti.",
-   "Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)":"Paga 10 M€ per aumentare di 1 livello le tue Produzioni di Energia e Calore",
+   "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)":"Paga 10 M€ per aumentare di 1 livello le tue Produzioni di Energia e Calore",
    "When you raise temperature, gain 3 M€ per step raised":"Quando alzi la Temperatura guadagni 3 M€ per ogni livello alzato",
    "Convert 6 heat into temperature (Turmoil Kelvinists)":"Converti 6 Calore in un livello di Temperatura",
    "When you place a tile, gain 2 heat":"Quando piazzi una tessera guadagni 2 Calore"

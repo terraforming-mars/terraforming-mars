@@ -4,12 +4,11 @@ import {Cartel} from '../../../src/server/cards/base/Cartel';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {Teractor} from '../../../src/server/cards/corporation/Teractor';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Teractor', function() {
   let card: Teractor;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Teractor();
@@ -17,7 +16,7 @@ describe('Teractor', function() {
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

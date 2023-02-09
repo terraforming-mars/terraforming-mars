@@ -1,24 +1,20 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MicrosingularityPlant} from '../../../src/server/cards/moon/MicrosingularityPlant';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('MicrosingularityPlant', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: MicrosingularityPlant;
   let moonData: IMoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new MicrosingularityPlant();
     moonData = MoonExpansion.moonData(game);
   });
@@ -30,8 +26,8 @@ describe('MicrosingularityPlant', () => {
     const space1 = moonData.moon.getAvailableSpacesOnLand(player)[0];
     const space2 = moonData.moon.getAvailableSpacesOnLand(player)[1];
 
-    space1.tile = {tileType: TileType.MOON_COLONY};
-    space2.tile = {tileType: TileType.MOON_COLONY};
+    space1.tile = {tileType: TileType.MOON_HABITAT};
+    space2.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.include(card);
 
     space2.tile = {tileType: TileType.MOON_ROAD};
@@ -39,11 +35,11 @@ describe('MicrosingularityPlant', () => {
   });
 
   it('play', () => {
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(player.production.energy).eq(0);
 
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).eq(2);
+    expect(player.production.energy).eq(2);
   });
 });
 

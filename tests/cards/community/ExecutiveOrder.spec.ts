@@ -1,9 +1,7 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
-import {GameOptions} from '../../../src/server/GameOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {ExecutiveOrder} from '../../../src/server/cards/community/ExecutiveOrder';
 import {SelectPartyToSendDelegate} from '../../../src/server/inputs/SelectPartyToSendDelegate';
@@ -11,7 +9,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('ExecutiveOrder', function() {
   let card: ExecutiveOrder;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
@@ -19,8 +17,7 @@ describe('ExecutiveOrder', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions() as GameOptions;
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({turmoilExtension: true}));
   });
 
   it('Should play', function() {
@@ -33,9 +30,9 @@ describe('ExecutiveOrder', function() {
     selectGlobalEvent.options[0].cb();
     expect(turmoil.currentGlobalEvent).is.not.undefined;
 
-    const selectParty = game.deferredActions.pop()!.execute() as SelectPartyToSendDelegate;
+    const selectParty = cast(game.deferredActions.pop()!.execute(), SelectPartyToSendDelegate);
     selectParty.cb(PartyName.MARS);
-    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
-    expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(2);
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
+    expect(marsFirst.delegates.get(player.id)).eq(2);
   });
 });

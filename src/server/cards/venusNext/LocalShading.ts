@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -10,33 +10,28 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class LocalShading extends Card implements IActionCard, IResourceCard {
+export class LocalShading extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.LOCAL_SHADING,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 4,
       resourceType: CardResource.FLOATER,
 
       metadata: {
         cardNumber: '235',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Floater to this card.', (eb) => {
+          b.action('Add 1 floater to this card.', (eb) => {
             eb.empty().startAction.floaters(1);
           }).br;
           b.or().br;
-          b.action('Spend 1 Floater here to raise your M€ production 1 step.', (eb) => {
+          b.action('Spend 1 floater here to raise your M€ production 1 step.', (eb) => {
             eb.floaters(1).startAction.production((pb) => pb.megacredits(1));
           });
         }),
       },
     });
-  }
-  public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
   }
   public canAct(): boolean {
     return true;
@@ -65,7 +60,7 @@ export class LocalShading extends Card implements IActionCard, IResourceCard {
 
   private spendResource(player: Player) {
     player.removeResourceFrom(this);
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

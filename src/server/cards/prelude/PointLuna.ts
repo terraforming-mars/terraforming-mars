@@ -1,8 +1,7 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,8 +13,13 @@ export class PointLuna extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.POINT_LUNA,
-      tags: [Tags.SPACE, Tags.EARTH],
+      tags: [Tag.SPACE, Tag.EARTH],
       startingMegaCredits: 38,
+
+      behavior: {
+        production: {titanium: 1},
+        drawCard: 1,
+      },
 
       metadata: {
         cardNumber: 'R10',
@@ -37,15 +41,12 @@ export class PointLuna extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard) {
-    const tagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
-    if (player.isCorporation(this.name) && card.tags.includes(Tags.EARTH)) {
-      player.drawCard(tagCount);
+    if (player.isCorporation(this.name)) {
+      const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
+      if (tagCount > 0) {
+        player.drawCard(tagCount);
+      }
     }
-    return undefined;
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, 1);
-    player.drawCard();
     return undefined;
   }
 }

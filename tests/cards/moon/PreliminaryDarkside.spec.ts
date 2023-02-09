@@ -1,20 +1,17 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {PreliminaryDarkside} from '../../../src/server/cards/moon/PreliminaryDarkside';
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('PreliminaryDarkside', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: PreliminaryDarkside;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new PreliminaryDarkside();
   });
 

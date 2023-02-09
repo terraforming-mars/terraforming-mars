@@ -58,7 +58,7 @@
     "Polar Explorer": "Полярник",
     "Requires that you have 3 tiles on the two bottom rows": "Выложите хотя бы 3 жетона на два нижних ряда",
     "Rim Settler": "Пионер",
-    "Requires that you have 3 jovian tags": "На ваших картах должно быть не менее 3 меток Юпитера",
+    "Requires that you have 3 Jovian tags": "На ваших картах должно быть не менее 3 меток Юпитера",
     "Specialist": "Специалист",
     "Requires that you have at least 10 in production of any resource": "Увеличьте уровень любого производства хотя бы до 10",
     "Tactician": "Тактик",
@@ -165,7 +165,6 @@
 
     "Place any final greenery from plants": "Выполнить финальное озеленение",
     "Don't place a greenery": "Не выполнять финального озеленения",
-    "Select space for greenery": "Выбрать место для озеленения",
     "Player ${0} name": "Имя игрока ${0}",
 
     "Select corporation": "Выбрать корпорацию",
@@ -178,8 +177,6 @@
     "Greenery: 1 VP": "Озеленение: 1 ПО владельцу",
     "Commercial District: 1 VP per adjacent city tile": "Коммерческий район: 1 ПО за каждый смежный город",
     "Stanford Torus": "Стэнфордский тор",
-    "Select space on Mars for city tile": "Выберите место на карте, чтобы построить на нём город",
-    "Select space for ocean": "Выберите место для размещения океана",
     "Select space for city tile": "Выберите место для размещения города",
     "Select space for greenery tile": "Выберите место для размещения озеленения",
     "Initial Draft rounds:": "Раундов драфта стартовых карт:",

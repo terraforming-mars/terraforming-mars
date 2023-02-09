@@ -5,7 +5,6 @@ import {EccentricSponsor} from '../../../src/server/cards/prelude/EccentricSpons
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('CommunityServices', function() {
@@ -21,7 +20,7 @@ describe('CommunityServices', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(card.getVictoryPoints()).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
   it('Wild Tags', function() {
     const card = new CommunityServices();
@@ -35,6 +34,6 @@ describe('CommunityServices', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(card.getVictoryPoints()).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.megacredits).to.eq(4);
   });
 });

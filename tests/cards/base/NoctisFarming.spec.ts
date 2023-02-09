@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('NoctisFarming', function() {
   let card: NoctisFarming;
@@ -17,15 +16,15 @@ describe('NoctisFarming', function() {
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = -20;
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.plants).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);

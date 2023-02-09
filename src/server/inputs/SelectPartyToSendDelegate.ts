@@ -1,26 +1,31 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {BasePlayerInput} from '../PlayerInput';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {InputResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
 
 // TODO(kberg): Rename to SelectParty
-export class SelectPartyToSendDelegate implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE;
+export class SelectPartyToSendDelegate extends BasePlayerInput {
   constructor(
-        public title: string | Message,
-        public buttonLabel: string = 'Send delegate',
-        public availableParties: PartyName[],
-        public cb: (party: PartyName) => undefined,
-  ) {}
+    title: string | Message,
+    buttonLabel: string = 'Send delegate',
+    public availableParties: PartyName[],
+    public cb: (party: PartyName) => undefined,
+  ) {
+    super(PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE, title);
+    this.buttonLabel = buttonLabel;
+  }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 1);
-    const party: PartyName = (input[0][0]) as PartyName;
-    if (party === undefined) {
+  public process(input: InputResponse) {
+    if (!isSelectPartyResponse(input)) {
+      throw new Error('Not a valid SelectPartyResponse');
+    }
+    if (input.partyName === undefined) {
       throw new Error('No party selected');
     }
-    return this.cb(party);
+    if (!this.availableParties.includes(input.partyName)) {
+      throw new Error('Invalid party selected');
+    }
+    return this.cb(input.partyName);
   }
 }

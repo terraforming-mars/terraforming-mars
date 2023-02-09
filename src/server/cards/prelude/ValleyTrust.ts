@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
@@ -14,11 +14,11 @@ export class ValleyTrust extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.VALLEY_TRUST,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       startingMegaCredits: 37,
       initialActionText: 'Draw 3 Prelude cards, and play one of them',
 
-      cardDiscount: {tag: Tags.SCIENCE, amount: 2},
+      cardDiscount: {tag: Tag.SCIENCE, amount: 2},
       metadata: {
         cardNumber: 'R34',
         description: 'You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.',
@@ -26,7 +26,7 @@ export class ValleyTrust extends Card implements ICorporationCard {
           b.br.br;
           b.megacredits(37).nbsp.prelude().asterix();
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a Science tag, you pay 2M€ less for it.', (eb) => {
+            ce.effect('When you play a science tag, you pay 2M€ less for it.', (eb) => {
               eb.science(1, {played}).startEffect.megacredits(-2);
             });
           });
@@ -35,17 +35,17 @@ export class ValleyTrust extends Card implements ICorporationCard {
     });
   }
 
-
   public override getCardDiscount(player: Player, card: IProjectCard) {
     // TODO(chosta) -> improve once the discounts property is given a go
-    return player.cardTagCount(card, Tags.SCIENCE) * 2;
+    return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
   }
 
   public initialAction(player: Player) {
+    const game = player.game;
     const cardsDrawn: Array<IProjectCard> = [
-      player.game.dealer.dealPreludeCard(),
-      player.game.dealer.dealPreludeCard(),
-      player.game.dealer.dealPreludeCard(),
+      game.preludeDeck.draw(game),
+      game.preludeDeck.draw(game),
+      game.preludeDeck.draw(game),
     ];
 
     return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, ([card]) => {
@@ -55,9 +55,5 @@ export class ValleyTrust extends Card implements ICorporationCard {
         throw new Error('You cannot pay for this card');
       }
     });
-  }
-
-  public play() {
-    return undefined;
   }
 }

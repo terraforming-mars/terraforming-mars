@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {cast, runAllActions} from '../../TestingUtils';
 import {RegolithEaters} from '../../../src/server/cards/base/RegolithEaters';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -6,18 +7,20 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
+import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
+import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 
 describe('BactoviralResearch', function() {
   let card: BactoviralResearch;
-  let player: Player;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new BactoviralResearch();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
   });
 
   it('Should play with multiple microbe cards', function() {
@@ -26,24 +29,51 @@ describe('BactoviralResearch', function() {
     const card4 = new Tardigrades();
     player.playedCards.push(card2, card3, card4);
 
-    const action = card.play(player) as SelectCard<ICard>;
-    expect(action).instanceOf(SelectCard);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectCard<ICard>);
     action.cb([card3]);
     expect(card3.resourceCount).to.eq(4);
     expect(player.cardsInHand.length).to.eq(1);
   });
 
   it('Should play with single microbe card', function() {
-    const card2 = new RegolithEaters();
-    player.playedCards.push(card2);
-    card.play(player) as SelectCard<ICard>;
-    expect(card2.resourceCount).to.eq(2);
+    const microbeCard = new RegolithEaters();
+    player.playedCards.push(microbeCard);
+    expect(card.play(player)).is.undefined;
+
+    runAllActions(game);
+
+    expect(microbeCard.resourceCount).to.eq(2);
     expect(player.cardsInHand.length).to.eq(1);
   });
 
   it('Should play with no microbe cards', function() {
-    const action = card.play(player);
-    expect(action).is.undefined;
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+
+    expect(player.cardsInHand.length).to.eq(1);
+  });
+
+  it('Should ignore non-microbe cards', () => {
+    const securityFleetCard = new SecurityFleet();
+    player.playedCards.push(securityFleetCard);
+    expect(card.play(player)).is.undefined;
+
+    runAllActions(game);
+
+    expect(securityFleetCard.resourceCount).to.eq(0);
+    expect(player.cardsInHand.length).to.eq(1);
+  });
+
+  it('Should ignore cards with microbe tags but does not collect microbe resources.', () => {
+    const pharmacyUnion = new PharmacyUnion();
+    player.corporations.push(pharmacyUnion);
+    expect(card.play(player)).is.undefined;
+
+    runAllActions(game);
+
+    expect(pharmacyUnion.resourceCount).to.eq(0);
     expect(player.cardsInHand.length).to.eq(1);
   });
 });

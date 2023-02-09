@@ -4,10 +4,10 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -16,16 +16,16 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 
 export class Reds extends Party implements IParty {
-  name = PartyName.REDS;
-  description = 'Wishes to preserve the red planet.';
-  bonuses = [REDS_BONUS_1, REDS_BONUS_2];
-  policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
+  readonly name = PartyName.REDS;
+  readonly description = 'Wishes to preserve the red planet.';
+  readonly bonuses = [REDS_BONUS_1, REDS_BONUS_2];
+  readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
 class RedsBonus01 implements Bonus {
-  id = 'rb01' as const;
-  description = 'The player(s) with the lowest TR gains 1 TR';
-  isDefault = true;
+  readonly id = 'rb01' as const;
+  readonly description = 'The player(s) with the lowest TR gains 1 TR';
+  readonly isDefault = true;
 
   getScore(player: Player) {
     const game = player.game;
@@ -51,9 +51,9 @@ class RedsBonus01 implements Bonus {
 }
 
 class RedsBonus02 implements Bonus {
-  id = 'rb02' as const;
-  description = 'The player(s) with the highest TR loses 1 TR';
-  isDefault = false;
+  readonly id = 'rb02' as const;
+  readonly description = 'The player(s) with the highest TR loses 1 TR';
+  readonly isDefault = false;
 
   getScore(player: Player) {
     const game = player.game;
@@ -79,31 +79,31 @@ class RedsBonus02 implements Bonus {
 }
 
 class RedsPolicy01 implements Policy {
-  id = 'rp01' as const;
-  isDefault = true;
-  description: string = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
+  readonly id = 'rp01' as const;
+  readonly isDefault = true;
+  readonly description = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
 class RedsPolicy02 implements Policy {
-  id = 'rp02' as const;
-  description: string = 'When you place a tile, pay 3 M€ or as much as possible';
-  isDefault = false;
+  readonly id = 'rp02' as const;
+  readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
+  readonly isDefault = false;
 
   onTilePlaced(player: Player) {
-    let amountPlayerHas: number = player.megaCredits;
+    let amountPlayerHas = player.megaCredits;
     if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
-      player.game.defer(new SelectHowToPayDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
+      player.game.defer(new SelectPaymentDeferred(player, amountToPay, {title: 'Select how to pay for tile placement'}));
     }
   }
 }
 
 class RedsPolicy03 implements Policy {
-  id = 'rp03' as const;
-  description: string = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
-  isDefault = false;
+  readonly id = 'rp03' as const;
+  readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
+  readonly isDefault = false;
 
   private canDecrease(game: Game, parameter: GlobalParameter) {
     switch (parameter) {
@@ -118,10 +118,10 @@ class RedsPolicy03 implements Policy {
     case GlobalParameter.VENUS:
       const venusScaleLevel = game.getVenusScaleLevel();
       return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
-    case GlobalParameter.MOON_COLONY_RATE:
+    case GlobalParameter.MOON_HABITAT_RATE:
       return MoonExpansion.ifElseMoon(game, (moonData) => {
         const rate = moonData.colonyRate;
-        return rate > 0 && rate !== MAXIMUM_COLONY_RATE;
+        return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
       },
       () => false);
     case GlobalParameter.MOON_LOGISTICS_RATE:
@@ -171,7 +171,7 @@ class RedsPolicy03 implements Policy {
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectHowToPayDeferred(
+    game.defer(new SelectPaymentDeferred(
       player,
       4,
       {
@@ -214,15 +214,15 @@ class RedsPolicy03 implements Policy {
             }));
           }
 
-          if (this.canDecrease(game, GlobalParameter.MOON_COLONY_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon Colony Rate', 'Confirm', () => {
-              MoonExpansion.lowerColonyRate(player, 1);
+          if (this.canDecrease(game, GlobalParameter.MOON_HABITAT_RATE)) {
+            orOptions.options.push(new SelectOption('Decrease Moon habitat rate', 'Confirm', () => {
+              MoonExpansion.lowerHabitatRate(player, 1);
               return undefined;
             }));
           }
 
           if (this.canDecrease(game, GlobalParameter.MOON_MINING_RATE)) {
-            orOptions.options.push(new SelectOption('Decrease Moon Mining Rate', 'Confirm', () => {
+            orOptions.options.push(new SelectOption('Decrease Moon mining rate', 'Confirm', () => {
               MoonExpansion.lowerMiningRate(player, 1);
               return undefined;
             }));
@@ -248,9 +248,9 @@ class RedsPolicy03 implements Policy {
 }
 
 class RedsPolicy04 implements Policy {
-  id = 'rp04' as const;
-  description: string = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
-  isDefault = false;
+  readonly id = 'rp04' as const;
+  readonly description = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
+  readonly isDefault = false;
 }
 
 export const REDS_BONUS_1 = new RedsBonus01();

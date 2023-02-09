@@ -1,21 +1,20 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
 import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TerralabsResearch} from '../../../src/server/cards/turmoil/TerralabsResearch';
-import {Game} from '../../../src/server/Game';
-import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('TerralabsResearch', function() {
   it('Should play', function() {
     const card = new TerralabsResearch();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player);
-    const pi = player.getWaitingFor() as AndOptions;
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
+    const pi = cast(player.getWaitingFor(), SelectInitialCards);
     pi.options[0].cb([card]);
     pi.options[1].cb([card2, card2]);
     pi.cb();
@@ -26,10 +25,8 @@ describe('TerralabsResearch', function() {
     expect(player.getTerraformRating()).to.eq(13);
 
     player.playedCards.push(card3);
-    const action = card3.action(player);
-    expect(action).is.not.undefined;
-    expect(action).instanceOf(SelectCard);
-    (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+    const action = cast(card3.action(player), SelectCard);
+    action.cb([action.cards[0]]);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(11);
     expect(player.cardsInHand).has.lengthOf(3);

@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
-import {setCustomGameOptions} from '../TestingUtils';
+import {testGameOptions} from '../TestingUtils';
 import {ISpace} from '../../src/server/boards/ISpace';
 import {TileType} from '../../src/common/TileType';
 
@@ -27,17 +26,17 @@ describe('MudSlides', function() {
 
   it('resolve play', function() {
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addCityTile(player, game.board.getAdjacentSpaces(oceanTile)[0].id);
-    game.addOceanTile(player, oceanTile.id);
+    game.addCityTile(player, game.board.getAdjacentSpaces(oceanTile)[0]);
+    game.addOceanTile(player, oceanTile);
     player.megaCredits = 10;
 
     card.resolve(game, turmoil);
 
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.megaCredits).to.eq(6);
   });
 
   it('resolve play with overplaced tiles', function() {
-    game = newTestGame(2, setCustomGameOptions({aresExtension: true, turmoilExtension: true}));
+    game = newTestGame(2, testGameOptions({aresExtension: true, turmoilExtension: true}));
     player = getTestPlayer(game, 0);
 
     // Find two adjacent ocean spaces
@@ -55,8 +54,8 @@ describe('MudSlides', function() {
 
     const spaces = adjacentOceans();
 
-    game.addOceanTile(player, spaces.first.id);
-    game.addOceanTile(player, spaces.second.id);
+    game.addOceanTile(player, spaces.first);
+    game.addOceanTile(player, spaces.second);
 
     // Add an ocean city on top of the second ocean.
     const tile = {
@@ -64,12 +63,12 @@ describe('MudSlides', function() {
       covers: spaces.second.tile,
     };
     game.gameOptions.aresExtension = true;
-    player.game.addTile(player, spaces.second.spaceType, spaces.second, tile);
+    player.game.addTile(player, spaces.second, tile);
 
     player.megaCredits = 10;
 
     card.resolve(game, turmoil);
 
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.megaCredits).to.eq(6);
   });
 });

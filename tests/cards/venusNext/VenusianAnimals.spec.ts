@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VenusianAnimals', function() {
   let card: VenusianAnimals;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -26,7 +25,7 @@ describe('VenusianAnimals', function() {
     (game as any).venusScaleLevel = 18;
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
 
     card.onCardPlayed(player, card);
     expect(card.resourceCount).to.eq(1);

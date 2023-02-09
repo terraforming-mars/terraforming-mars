@@ -1,21 +1,21 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AsteroidHollowing extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class AsteroidHollowing extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ASTEROID_HOLLOWING,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 16,
       resourceType: CardResource.ASTEROID,
 
@@ -32,11 +32,6 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
       },
     });
   }
-  public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
 
   public canAct(player: Player): boolean {
     return player.titanium > 0;
@@ -44,7 +39,7 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
 
   public action(player: Player) {
     player.deductResource(Resources.TITANIUM, 1);
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     player.addResourceTo(this, {log: true});
 
     return undefined;

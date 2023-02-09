@@ -39,6 +39,8 @@
       </div>
   </a>
 
+  <language-icon v-if="preferencesManager.values().experimental_ui"></language-icon>
+
   <div class="sidebar_item sidebar_item--info" :title="$t('Information panel')">
     <i class="sidebar_icon sidebar_icon--info"
       :class="{'sidebar_item--is-active': ui.gamesetup_detail_open}"
@@ -79,6 +81,7 @@ import MoonGlobalParameterValue from '@/client/components/moon/MoonGlobalParamet
 import {GlobalParameter} from '@/common/GlobalParameter';
 import {MoonModel} from '@/common/models/MoonModel';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
+import LanguageIcon from '@/client/components/LanguageIcon.vue';
 
 export default Vue.extend({
   name: 'sidebar',
@@ -128,6 +131,7 @@ export default Vue.extend({
     'global-parameter-value': GlobalParameterValue,
     MoonGlobalParameterValue,
     PreferencesIcon,
+    LanguageIcon,
   },
   data() {
     return {

@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,7 +13,7 @@ export class Steelworks extends Card implements IProjectCard, IActionCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.STEELWORKS,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 15,
 
       metadata: {
@@ -32,9 +32,7 @@ export class Steelworks extends Card implements IProjectCard, IActionCard {
   public action(player: Player) {
     player.energy -= 4;
     player.steel += 2;
-    return player.game.increaseOxygenLevel(player, 1);
-  }
-  public play() {
+    player.game.increaseOxygenLevel(player, 1);
     return undefined;
   }
 }

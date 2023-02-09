@@ -3,12 +3,11 @@ import {cast} from '../../TestingUtils';
 import {ForcedPrecipitation} from '../../../src/server/cards/venusNext/ForcedPrecipitation';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ForcedPrecipitation', function() {
   let card: ForcedPrecipitation;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -19,7 +18,7 @@ describe('ForcedPrecipitation', function() {
   });
 
   it('Should play', function() {
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
@@ -37,7 +36,6 @@ describe('ForcedPrecipitation', function() {
     expect(card.resourceCount).to.eq(2);
 
     const orOptions2 = cast(card.action(player), OrOptions);
-    expect(orOptions2 instanceof OrOptions).is.true;
     orOptions2.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

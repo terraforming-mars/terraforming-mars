@@ -5,9 +5,8 @@ import {Game} from './Game';
 import {GameOptions} from './GameOptions';
 import {GameId, PlayerId} from '../common/Types';
 import {HellasBoard} from './boards/HellasBoard';
-import {OriginalBoard} from './boards/OriginalBoard';
+import {TharsisBoard} from './boards/TharsisBoard';
 import {Player} from './Player';
-import {Resources} from '../common/Resources';
 import {Color} from '../common/Color';
 import {TileType} from '../common/TileType';
 import {Random} from './Random';
@@ -23,7 +22,7 @@ type BoardFactory = {
   deserialize: (board: SerializedBoard, players: Array<Player>) => Board;
 }
 const boards: Map<BoardName, BoardFactory> = new Map(
-  [[BoardName.ORIGINAL, OriginalBoard],
+  [[BoardName.THARSIS, TharsisBoard],
     [BoardName.HELLAS, HellasBoard],
     [BoardName.ELYSIUM, ElysiumBoard],
     [BoardName.AMAZONIS, AmazonisBoard],
@@ -33,23 +32,14 @@ const boards: Map<BoardName, BoardFactory> = new Map(
 );
 export class GameSetup {
   public static newBoard(gameOptions: GameOptions, rng: Random): Board {
-    const factory = boards.get(gameOptions.boardName) ?? OriginalBoard;
+    const factory = boards.get(gameOptions.boardName) ?? TharsisBoard;
     return factory.newInstance(gameOptions, rng);
   }
 
   public static deserializeBoard(players: Array<Player>, gameOptions: GameOptions, d: SerializedGame) {
     const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
-    const factory = boards.get(gameOptions.boardName) ?? OriginalBoard;
+    const factory = boards.get(gameOptions.boardName) ?? TharsisBoard;
     return factory.deserialize(d.board, playersForBoard);
-  }
-
-  public static setStartingProductions(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
-    player.addProduction(Resources.STEEL, 1);
-    player.addProduction(Resources.TITANIUM, 1);
-    player.addProduction(Resources.PLANTS, 1);
-    player.addProduction(Resources.ENERGY, 1);
-    player.addProduction(Resources.HEAT, 1);
   }
 
   public static neutralPlayerFor(gameId: GameId): Player {

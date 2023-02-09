@@ -4,7 +4,6 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../../common/cards/CardName';
-import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 export class StealResources extends DeferredAction {
   constructor(
@@ -16,14 +15,10 @@ export class StealResources extends DeferredAction {
     super(player, Priority.ATTACK_OPPONENT);
   }
 
-  // Set this when you want to get a callback when the steal is completed.
-  public stealComplete: () => void = () => {};
-
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.addResource(this.resource, this.count);
-      MonsInsurance.resolveInsuranceInSoloGame(this.player);
-      this.stealComplete();
+      this.player.resolveInsuranceInSoloGame();
       return undefined;
     }
 
@@ -53,7 +48,6 @@ export class StealResources extends DeferredAction {
         () => {
           candidate.deductResource(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
           this.player.addResource(this.resource, qtyToSteal);
-          this.stealComplete();
           return undefined;
         },
       );

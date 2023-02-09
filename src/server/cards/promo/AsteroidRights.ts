@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {LogHelper} from '../../LogHelper';
@@ -12,17 +12,21 @@ import {PlayerInput} from '../../PlayerInput';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AsteroidRights extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class AsteroidRights extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ASTEROID_RIGHTS,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tag.EARTH, Tag.SPACE],
       cost: 10,
       resourceType: CardResource.ASTEROID,
+
+      behavior: {
+        addResources: 2,
+      },
 
       metadata: {
         cardNumber: 'X31',
@@ -41,12 +45,6 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
         }),
       },
     });
-  }
-  public override resourceCount = 0;
-
-  public play() {
-    this.resourceCount = 2;
-    return undefined;
   }
 
   public canAct(player: Player): boolean {
@@ -67,20 +65,20 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
 
     const increaseMcProdOption = new SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step', 'Remove asteroid', () => {
       this.resourceCount--;
-      player.addProduction(Resources.MEGACREDITS, 1);
+      player.production.add(Resources.MEGACREDITS, 1);
       LogHelper.logRemoveResource(player, this, 1, 'increase M€ production 1 step');
       return undefined;
     });
 
     const addAsteroidToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
-      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
+      player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(this, {log: true});
 
       return undefined;
     });
 
     const addAsteroidOption = new SelectCard('Select card to add 1 asteroid', 'Add asteroid', asteroidCards, ([card]) => {
-      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
+      player.game.defer(new SelectPaymentDeferred(player, 1, {title: 'Select how to pay for asteroid'}));
       player.addResourceTo(card, {log: true});
 
       return undefined;

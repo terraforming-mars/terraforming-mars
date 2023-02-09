@@ -1,16 +1,18 @@
-import {Tags} from '../../../common/cards/Tags';
-import {Player} from '../../Player';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class DomeFarming extends PreludeCard {
+  public migrated = true;
   constructor() {
     super({
       name: CardName.DOME_FARMING,
-      tags: [Tags.PLANT, Tags.BUILDING],
-      productionBox: Units.of({megacredits: 2, plants: 1}),
+      tags: [Tag.PLANT, Tag.BUILDING],
+
+      behavior: {
+        production: {megacredits: 2, plants: 1},
+      },
 
       metadata: {
         cardNumber: 'P07',
@@ -21,9 +23,4 @@ export class DomeFarming extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
-    return undefined;
-  }
 }
-

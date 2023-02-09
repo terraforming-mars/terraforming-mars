@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -11,23 +11,23 @@ import {CardName} from '../../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RegolithEaters extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class RegolithEaters extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.REGOLITH_EATERS,
-      tags: [Tags.SCIENCE, Tags.MICROBE],
+      tags: [Tag.SCIENCE, Tag.MICROBE],
       cost: 13,
       resourceType: CardResource.MICROBE,
 
       metadata: {
         cardNumber: '033',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Microbe to this card.', (eb) => {
+          b.action('Add 1 microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
           b.or().br;
-          b.action('Remove 2 Microbes from this card to raise oxygen level 1 step.', (eb) => {
+          b.action('Remove 2 microbes from this card to raise oxygen level 1 step.', (eb) => {
             eb.microbes(2).startAction.oxygen(1);
           }).br;
         }),
@@ -35,11 +35,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
     });
   }
 
-  public override resourceCount = 0;
 
-  public play(_player: Player) {
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }
@@ -55,7 +51,8 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
       orOptions.options.push(new SelectOption('Remove 2 microbes to raise oxygen level 1 step', 'Remove microbes', () => {
         player.removeResourceFrom(this, 2);
         LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
-        return player.game.increaseOxygenLevel(player, 1);
+        player.game.increaseOxygenLevel(player, 1);
+        return undefined;
       }));
     }
 

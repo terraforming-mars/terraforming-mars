@@ -157,7 +157,7 @@ export const ActiveCardsSortingOrder: Map<CardName, number> = new Map([
   CardName.MAXWELL_BASE,
   CardName.MOHOLE_LAKE,
   CardName.SEARCH_FOR_LIFE,
-  CardName.REFUGEE_CAMP,
+  CardName.REFUGEE_CAMPS,
   CardName.SECURITY_FLEET,
 
   // Other passive cards

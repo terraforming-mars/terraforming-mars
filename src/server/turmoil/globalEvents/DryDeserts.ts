@@ -1,4 +1,5 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
@@ -8,7 +9,7 @@ import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDefe
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().oceans(1).br.wild(1).slash().influence();
+  b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
 });
 
 export class DryDeserts extends GlobalEvent implements IGlobalEvent {

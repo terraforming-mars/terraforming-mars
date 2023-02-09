@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
-import {Resources} from '../../../common/Resources';
 
 export class OutdoorSports extends Card implements IProjectCard {
   constructor() {
@@ -16,6 +15,10 @@ export class OutdoorSports extends Card implements IProjectCard {
       name: CardName.OUTDOOR_SPORTS,
       cost: 8,
       victoryPoints: 1,
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       requirements: CardRequirements.builder((b) => b.cities(1, {all, text: ' next to'}).oceans(1)),
       metadata: {
@@ -30,14 +33,9 @@ export class OutdoorSports extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     const board = player.game.board;
-    const oceans = board.getOceanSpaces( );
+    const oceans = board.getOceanSpaces({upgradedOceans: true, wetlands: true} );
     return oceans.some((ocean) => board.getAdjacentSpaces(ocean).some((space) => Board.isCitySpace(space)));
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
-    return undefined;
   }
 }

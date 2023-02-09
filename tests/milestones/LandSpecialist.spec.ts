@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
 import {LandSpecialist} from '../../src/server/milestones/LandSpecialist';
-import {setCustomGameOptions} from '../TestingUtils';
+import {testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {Board} from '../../src/server/boards/Board';
@@ -21,7 +21,7 @@ describe('LandSpecialist', function() {
     milestone = new LandSpecialist();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({boardName: BoardName.ARABIA_TERRA, moonExpansion: true}));
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({boardName: BoardName.ARABIA_TERRA, moonExpansion: true}));
     board = game.board;
     spaces = board.getAvailableSpacesOnLand(player);
   });
@@ -48,6 +48,7 @@ describe('LandSpecialist', function() {
     game.simpleAddTile(player, spaces[0], {tileType: TileType.CITY});
     game.simpleAddTile(player, spaces[1], {tileType: TileType.CITY});
     game.simpleAddTile(player, spaces[2], {tileType: TileType.GREENERY});
+    game.simpleAddTile(player, spaces[3], {tileType: TileType.EROSION_MILD});
     expect(milestone.getScore(player)).eq(0);
     expect(milestone.canClaim(player)).is.false;
   });
@@ -66,7 +67,7 @@ describe('LandSpecialist', function() {
     const moonSpaces = MoonExpansion.moonData(game).moon.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, moonSpaces[0], {tileType: TileType.MOON_MINE});
-    game.simpleAddTile(player, moonSpaces[1], {tileType: TileType.MOON_COLONY});
+    game.simpleAddTile(player, moonSpaces[1], {tileType: TileType.MOON_HABITAT});
     game.simpleAddTile(player, moonSpaces[2], {tileType: TileType.MOON_ROAD});
     expect(milestone.getScore(player)).eq(0);
     expect(milestone.canClaim(player)).is.false;

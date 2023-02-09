@@ -5,54 +5,79 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {cast, runAllActions} from '../../TestingUtils';
+import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 
 describe('CorroderSuits', function() {
   let card: CorroderSuits;
-  let player: Player;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new CorroderSuits();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    game = Game.newInstance('gameid', [player, redPlayer], player);
+    player.popSelectInitialCards();
   });
 
   it('Should play - no targets', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should play - single target', function() {
-    const card2 = new AerialMappers();
-    player.playedCards.push(card2);
+    const aerialMappers = new AerialMappers(); // Venus tag with Floaters
+    player.playedCards.push(aerialMappers);
 
     card.play(player);
-    expect(card2.resourceCount).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    runAllActions(game);
+
+    expect(aerialMappers.resourceCount).to.eq(1);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should play - multiple targets', function() {
-    const card2 = new AerialMappers();
-    const card3 = new Dirigibles();
-    player.playedCards.push(card2, card3);
+    const aerialMappers = new AerialMappers(); // Venus tag with Floaters
+    const dirigibles = new Dirigibles(); // Venus tag with Floaters
+    player.playedCards.push(aerialMappers, dirigibles);
 
-    const action = card.play(player);
-    expect(action).instanceOf(SelectCard);
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
 
-        action!.cb([card2]);
-        expect(card2.resourceCount).to.eq(1);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).includes(aerialMappers);
+    expect(selectCard.cards).includes(dirigibles);
+
+    selectCard.cb([aerialMappers]);
+    expect(aerialMappers.resourceCount).to.eq(1);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should play - specialized resource type', function() {
-    const card2 = new FloaterUrbanism();
-    player.playedCards.push(card2);
+    const floaterUrbanism = new FloaterUrbanism(); // Card from a fan expansion with a Venus tag and special resource type.
+    player.playedCards.push(floaterUrbanism);
 
     card.play(player);
-    expect(card2.resourceCount).to.eq(1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    runAllActions(game);
+
+    expect(floaterUrbanism.resourceCount).to.eq(1);
+    expect(player.production.megacredits).to.eq(2);
+  });
+
+  it('Ignore cards that do not have a Venus tag', () => {
+    const aerialMappers = new AerialMappers(); // Venus tag with Floaters
+    const dirigibles = new Dirigibles(); // Venus tag with Floaters
+    const nitriteReducingBacteria = new NitriteReducingBacteria(); // Microbe tag with microbes
+    player.playedCards.push(aerialMappers, dirigibles, nitriteReducingBacteria);
+
+    expect(card.play(player)).is.undefined;
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).does.not.include(nitriteReducingBacteria);
+    expect(selectCard.cards).includes(aerialMappers);
+    expect(selectCard.cards).includes(dirigibles);
   });
 });

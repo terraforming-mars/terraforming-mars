@@ -1,20 +1,23 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class UndergroundDetonators extends Card {
+export class UndergroundDetonators extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.UNDERGROUND_DETONATORS,
       cardType: CardType.EVENT,
       cost: 9,
-      tr: {moonMining: 1},
+
+      behavior: {
+        stock: {steel: 1, titanium: 1},
+        moon: {miningRate: 1},
+      },
 
       metadata: {
-        description: 'Gain 1 steel and 1 titanium. Raise the Mining Rate 1 step.',
+        description: 'Gain 1 steel and 1 titanium. Raise the mining rate 1 step.',
         cardNumber: 'M34',
         renderData: CardRenderer.builder((b) => {
           b.steel(1).titanium(1);
@@ -23,12 +26,5 @@ export class UndergroundDetonators extends Card {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.steel += 1;
-    player.titanium += 1;
-    MoonExpansion.raiseMiningRate(player);
-    return undefined;
   }
 }

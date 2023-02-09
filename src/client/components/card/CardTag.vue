@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 
 export default Vue.extend({
   name: 'CardTag',
@@ -18,7 +18,7 @@ export default Vue.extend({
     type: {
       type: String,
       required: true,
-      validator: (type: Tags) => Object.values(Tags).includes(type),
+      validator: (type: Tag) => Object.values(Tag).includes(type),
     },
   },
   methods: {

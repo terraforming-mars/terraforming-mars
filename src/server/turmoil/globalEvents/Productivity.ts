@@ -1,4 +1,5 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
@@ -23,7 +24,7 @@ export class Productivity extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.STEEL, Math.min(5, player.getProduction(Resources.STEEL)) + turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.addResource(Resources.STEEL, Math.min(5, player.production.steel) + turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }
 }

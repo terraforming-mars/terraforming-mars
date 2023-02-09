@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -18,7 +18,7 @@ export class Virus extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.VIRUS,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 1,
 
       metadata: {
@@ -27,11 +27,11 @@ export class Virus extends Card implements IProjectCard {
           b.minus().animals(2, {all, digit}).nbsp;
           b.or().nbsp.minus().plants(5, {all, digit});
         }),
-        description: 'Remove up to 2 Animals or 5 Plants from any player.',
+        description: 'Remove up to 2 animals or 5 plants from any player.',
       },
     });
   }
-  public play(player: Player): PlayerInput | undefined {
+  public override bespokePlay(player: Player): PlayerInput | undefined {
     if (player.game.isSoloMode()) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;

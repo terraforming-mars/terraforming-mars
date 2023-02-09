@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SearchForLife', function() {
   let card: SearchForLife;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -30,7 +29,7 @@ describe('SearchForLife', function() {
     (game as any).oxygenLevel = 6;
     expect(player.canPlayIgnoringCost(card)).is.true;
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
 
     expect(card.getVictoryPoints()).to.eq(0);
     player.addResourceTo(card);
@@ -41,8 +40,8 @@ describe('SearchForLife', function() {
   it('Should act', function() {
     player.playedCards.push(card);
 
-    while (game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] === Tags.MICROBE) === undefined ||
-               game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBE) === undefined) {
+    while (game.projectDeck.discardPile.find((c) => c.tags.length === 1 && c.tags[0] === Tag.MICROBE) === undefined ||
+               game.projectDeck.discardPile.find((c) => c.tags.length === 1 && c.tags[0] !== Tag.MICROBE) === undefined) {
       player.megaCredits = 1;
       card.action(player);
       game.deferredActions.runNext();

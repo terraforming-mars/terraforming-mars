@@ -16,9 +16,12 @@ export class RouteTestScaffolding {
     this.req = req as http.IncomingMessage;
     this.ctx = {
       route: new Route(),
-      serverId: '1',
       url: new URL('http://boo.com'),
       gameLoader: new FakeGameLoader(),
+      ids: {
+        serverId: '1',
+        statsId: '2',
+      },
     };
     if (!this.req.headers) this.req.headers = {};
   }
@@ -29,11 +32,11 @@ export class RouteTestScaffolding {
     this.ctx.url = new URL('http://boo.com' + headlessUri);
   }
 
-  public async get(handler: Handler, res: MockResponse): Promise<void> {
+  public get(handler: Handler, res: MockResponse): Promise<void> {
     return handler.get(this.req, res.hide(), this.ctx);
   }
 
-  public async post(handler: Handler, res: MockResponse) {
+  public post(handler: Handler, res: MockResponse) {
     return handler.post(this.req, res.hide(), this.ctx);
   }
 }

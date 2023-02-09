@@ -8,12 +8,11 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ImportedHydrogen', function() {
   let card: ImportedHydrogen;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new ImportedHydrogen();
@@ -34,8 +33,8 @@ describe('ImportedHydrogen', function() {
     action.options[0].cb();
     expect(player.plants).to.eq(3);
 
-    const selectAnimal = action.options[2] as SelectOption;
-    const selectMicrobe = action.options[1] as SelectCard<any>;
+    const selectAnimal = cast(action.options[2], SelectOption);
+    const selectMicrobe = cast(action.options[1], SelectCard);
 
     expect(selectMicrobe.cards).has.lengthOf(2);
     expect(selectMicrobe.cards[0]).to.eq(tardigrades);

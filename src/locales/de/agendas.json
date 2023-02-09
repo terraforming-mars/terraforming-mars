@@ -1,15 +1,15 @@
 {
    "Select a Mars First bonus.": "Wähle einen MARS-FIRST-Bonus",
-   "Gain 1 M€ for each Building tag you have": "Erhalte 1 M€ für jedes Gebäudesymbol, das du besitzt",
+   "Gain 1 M€ for each building tag you have": "Erhalte 1 M€ für jedes Gebäudesymbol, das du besitzt",
    "Gain 1 M€ for each tile you have ON MARS": "Erhalte 1 M€ für jedes Plättchen, das du AUF DEM MARS besitzt",
    "Select a Mars First policy.": "Wähle eine MARS-FIRST-Politik",
    "When you place a tile ON MARS, gain 1 steel": "Wenn du ein Plättchen AUF DEM MARS ablegst, erhalte 1 Stahl",
-   "When you play a Building tag, gain 2 M€": "Wenn du ein Gebäudesymbol spielst, erhalte 2 M€",
+   "When you play a building tag, gain 2 M€": "Wenn du ein Gebäudesymbol spielst, erhalte 2 M€",
    "Your steel resources are worth 1 M€ extra": "Deine Stahl-Ressourcen sind jeweils 1 M€ mehr wert",
    "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Zahle 4 M€, um eine Gebäudekarte zu ziehen (MARS-FIRST-Aufruhr)",
 
    "Select a Scientists bonus.": "Wähle einen FORSCHUNG-Bonus.",
-   "Gain 1 M€ for each Science tag you have": "Erhalte 1 M€ für jedes Wissenschaftssymbol, das du besitzt",
+   "Gain 1 M€ for each science tag you have": "Erhalte 1 M€ für jedes Wissenschaftssymbol, das du besitzt",
    "Gain 1 M€ for every 3 cards in hand": "Erhalte 1 M€ für jede dritte Karte in deiner Hand",
    "Select a Scientists policy.": "Wähle eine FORSCHUNG-Politik.",
    "Your global requirements are +/- 2 steps": "Deine globalen Bedinungen erhöhen/vermindern sich um 2 Stufen",
@@ -44,10 +44,10 @@
    "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Wenn du einen globalen Parameter erhöhst, vermindere deine M€-Produktion um 1 pro erhöhtem Schritt (wenn möglich)",
 
    "Select a Kelvinists bonus.": "Wähle einen KELVINISTEN-Bonus",
-   "Gain 1 M€ for each Heat production you have": "Erhalte 1 M€ für jeden Punkt deiner Wärme-Produktion",
-   "Gain 1 heat for each Heat production you have": "Erhalte 1 Wärme für jeden Punkt deiner Wärme-Produktion",
+   "Gain 1 M€ for each heat production you have": "Erhalte 1 M€ für jeden Punkt deiner Wärme-Produktion",
+   "Gain 1 heat for each heat production you have": "Erhalte 1 Wärme für jeden Punkt deiner Wärme-Produktion",
    "Select a Kelvinists policy.": "Wähle eine KELVINISTEN-Politik",
-   "Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)": "Zahle 10 M€, um deine Energie- und Wärme-Produktion um 1 zu erhöhen (KELVINISTEN-Aufruhr)",
+   "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Zahle 10 M€, um deine Energie- und Wärme-Produktion um 1 zu erhöhen (KELVINISTEN-Aufruhr)",
    "When you raise temperature, gain 3 M€ per step raised": "Wenn du die Temperatur erhöhst, erhalte 3 M€ pro erhöhtem Schritt",
    "Convert 6 heat into temperature (Turmoil Kelvinists)": "Setze 6 Wärme ein, um die Temperatur um 1 zu erhöhen",
    "When you place a tile, gain 2 heat": "Wenn du ein beliebiges Plättchen platzierst, erhalte 2 Wärme"

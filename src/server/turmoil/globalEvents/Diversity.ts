@@ -1,4 +1,5 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
@@ -23,7 +24,7 @@ export class Diversity extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      if (player.getDistinctTagCount('globalEvent') + turmoil.getPlayerInfluence(player) >= 9) {
+      if (player.tags.distinctCount('globalEvent') + turmoil.getPlayerInfluence(player) >= 9) {
         player.addResource(Resources.MEGACREDITS, 10, {log: true, from: this.name});
       }
     });

@@ -1,33 +1,38 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
-import {MoonCard} from './MoonCard';
-import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
+import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {digit} from '../Options';
 
-export class LunaTrainStation extends MoonCard {
+export class LunaTrainStation extends Card {
   constructor() {
     super({
       name: CardName.LUNA_TRAIN_STATION,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 20,
-      productionBox: Units.of({megacredits: 4}),
-      requirements: CardRequirements.builder((b) => b.logisticRate(5)),
-      reserveUnits: Units.of({steel: 2}),
-      tr: {moonLogistics: 1},
+      reserveUnits: {steel: 2},
       victoryPoints: 'special',
 
+      behavior: {
+        production: {megacredits: 4},
+        moon: {
+          tile: {type: TileType.LUNA_TRAIN_STATION, title: 'Select a space for Luna Train Station.'},
+          logisticsRate: 1,
+        },
+      },
+
+      requirements: CardRequirements.builder((b) => b.logisticRate(5)),
+
       metadata: {
-        description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +
-        'Increase your M€ production 4 steps. Place this tile on the Moon and raise the Logistic Rate 1 step. ' +
+        description: 'Requires a logistic rate of 5 or higher. Spend 2 steel. ' +
+        'Increase your M€ production 4 steps. Place this tile on The Moon and raise the logistic rate 1 step. ' +
         '2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.',
         cardNumber: 'M15',
         renderData: CardRenderer.builder((b) => {
@@ -38,17 +43,6 @@ export class LunaTrainStation extends MoonCard {
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
       },
     });
-  }
-
-  public override play(player: Player) {
-    super.play(player);
-    player.game.defer(new PlaceSpecialMoonTile(player, {
-      tileType: TileType.LUNA_TRAIN_STATION,
-      card: this.name,
-    },
-    'Select a space for Luna Train Station.'));
-    MoonExpansion.raiseLogisticRate(player);
-    return undefined;
   }
 
   public override getVictoryPoints(player: Player) {

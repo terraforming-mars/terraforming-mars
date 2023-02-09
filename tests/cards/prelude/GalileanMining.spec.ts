@@ -1,13 +1,11 @@
 import {expect} from 'chai';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GalileanMining', function() {
   let card: GalileanMining;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -27,10 +25,10 @@ describe('GalileanMining', function() {
 
     card.play(player);
 
-    // SelectHowToPayDeferred
+    // SelectPaymentDeferred
     game.deferredActions.runNext();
 
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
+    expect(player.production.titanium).to.eq(2);
   });
 });

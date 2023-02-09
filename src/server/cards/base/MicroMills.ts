@@ -1,8 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -13,6 +11,10 @@ export class MicroMills extends Card implements IProjectCard {
       name: CardName.MICRO_MILLS,
       cost: 3,
 
+      behavior: {
+        production: {heat: 1},
+      },
+
       metadata: {
         cardNumber: '164',
         renderData: CardRenderer.builder((b) => {
@@ -22,10 +24,4 @@ export class MicroMills extends Card implements IProjectCard {
       },
     });
   }
-
-  public play(player: Player) {
-    player.addProduction(Resources.HEAT, 1);
-    return undefined;
-  }
 }
-

@@ -6,13 +6,16 @@ import Awards from '@/client/components/Awards.vue';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
+import {AwardName} from '@/common/ma/AwardName';
+import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
+import {Color} from '@/common/Color';
 
+const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
-    name: `Award ${id} name`,
-    description: `Award ${id} description`,
-    player_name: funded ? 'Foo' : '',
-    player_color: funded ? 'red': '',
+    name: names[id - 1],
+    playerName: funded ? 'Foo' : '',
+    playerColor: funded ? Color.RED: '',
     scores: [],
   };
 }
@@ -71,7 +74,7 @@ describe('Awards', () => {
     expect(fundedAwards.text()).to.include(fundedAward.name);
     expect(fundedAwards.text()).to.not.include(notFundedAward.name);
 
-    const playerCube = fundedAwards.find(`[data-test-player-cube=${fundedAward.player_color}]`);
+    const playerCube = fundedAwards.find(`[data-test-player-cube=${fundedAward.playerColor}]`);
     expect(playerCube.exists()).to.be.true;
   });
 
@@ -214,17 +217,19 @@ describe('Awards', () => {
       propsData: {awards, showScores: true},
     });
 
-    expect(wrapper.text()).to.not.include(awards[0].description);
-    expect(wrapper.text()).to.not.include(awards[1].description);
+    const award0Description = getMilestoneAwardDescription(awards[0].name);
+    const award1Description = getMilestoneAwardDescription(awards[1].name);
+    expect(wrapper.text()).to.not.include(award0Description);
+    expect(wrapper.text()).to.not.include(award1Description);
 
     await wrapper.find('[data-test=toggle-description]').trigger('click');
 
-    expect(wrapper.text()).to.include(awards[0].description);
-    expect(wrapper.text()).to.include(awards[1].description);
+    expect(wrapper.text()).to.include(award0Description);
+    expect(wrapper.text()).to.include(award1Description);
 
     await wrapper.find('[data-test=toggle-description]').trigger('click');
 
-    expect(wrapper.text()).to.not.include(awards[0].description);
-    expect(wrapper.text()).to.not.include(awards[1].description);
+    expect(wrapper.text()).to.not.include(award0Description);
+    expect(wrapper.text()).to.not.include(award1Description);
   });
 });

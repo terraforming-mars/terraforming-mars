@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import * as raw_translations from '../genfiles/translations.json';
+import * as raw_translations from '../../genfiles/translations.json';
 
 const LOCALES_DIR = path.resolve('./src/locales/');
 const locales: Array<string> = [];
@@ -34,7 +34,7 @@ for (sourceString in raw_translations) {
   missingLocales = [];
   for (const localeName of localesToWarn) {
     const trans: string = (translations as any)[localeName];
-    if ( ! trans) {
+    if (!trans) {
       missingLocales.push(localeName);
     }
   }

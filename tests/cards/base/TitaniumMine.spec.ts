@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {TitaniumMine} from '../../../src/server/cards/base/TitaniumMine';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TitaniumMine', function() {
@@ -12,6 +11,6 @@ describe('TitaniumMine', function() {
     Game.newInstance('gameid', [player, redPlayer], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.titanium).to.eq(1);
   });
 });

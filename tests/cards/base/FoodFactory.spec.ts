@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {FoodFactory} from '../../../src/server/cards/base/FoodFactory';
-import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('FoodFactory', function() {
   let card: FoodFactory;
@@ -9,20 +10,21 @@ describe('FoodFactory', function() {
 
   beforeEach(function() {
     card = new FoodFactory();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.PLANTS, 1);
-    expect(card.canPlay(player)).is.true;
+    player.production.add(Resources.PLANTS, 1);
+    expect(player.simpleCanPlay(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.plants).to.eq(0);
+    expect(player.production.megacredits).to.eq(4);
 
     expect(card.getVictoryPoints()).to.eq(1);
   });

@@ -1,46 +1,49 @@
 import {expect} from 'chai';
 import {SpacePort} from '../../../src/server/cards/colonies/SpacePort';
-import {Ceres} from '../../../src/server/colonies/Ceres';
-import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
+import {cast, runAllActions} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
 describe('SpacePort', function() {
   let card: SpacePort;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SpacePort();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const game = newTestGame(2, {coloniesExtension: true, customColoniesList: [
+      ColonyName.CERES,
+      ColonyName.CALLISTO,
+      ColonyName.ENCELADUS,
+      ColonyName.EUROPA,
+      ColonyName.GANYMEDE,
+    ]});
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play without colony', function() {
-    player.addProduction(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.not.true;
+    player.production.add(Resources.ENERGY, 1);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Can not play without energy production', function() {
-    const colony = new Ceres();
-    colony.colonies.push(player.id);
-    player.game.colonies.push(colony);
-    expect(card.canPlay(player)).is.not.true;
+    player.game.colonies[0].colonies.push(player.id);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
-    const colony = new Ceres();
-    colony.colonies.push(player.id);
-    player.game.colonies.push(colony);
-    expect(card.canPlay(player)).is.true;
+    player.production.add(Resources.ENERGY, 1);
+    player.game.colonies[0].colonies.push(player.id);
+    expect(player.simpleCanPlay(card)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    expect(card.play(player)).is.undefined;
+    runAllActions(player.game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+
     action.cb(action.availableSpaces[0]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(4);
   });
 });

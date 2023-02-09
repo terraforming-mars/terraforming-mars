@@ -4,57 +4,41 @@ import {ISpace} from '../boards/ISpace';
 import {Message} from '../../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {ICardMetadata} from '../../common/cards/ICardMetadata';
-import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
-import {Units} from '../../common/Units';
 import {CardDiscount} from '../../common/cards/Types';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
+import {TileType} from '../../common/TileType';
+import {Behavior} from '../behavior/Behavior';
+import {TRSource} from '../../common/cards/TRSource';
 
-export interface IActionCard {
-    action: (player: Player) => PlayerInput | undefined;
-    canAct: (player: Player) => boolean;
+export interface IHasCheckLoops {
+    getCheckLoops(): number;
 }
 
-export function isIActionCard(object: any): object is IActionCard {
-  return object !== undefined && object.canAct !== undefined && object.action !== undefined;
-}
-
-export interface IResourceCard {
-    resourceCount: number;
-    resourceType?: CardResource;
+export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
+  return object.getCheckLoops !== undefined;
 }
 
 export namespace VictoryPoints {
   export function resource(points: number, per: number): IVictoryPoints {
     return {type: 'resource', points, per};
   }
-  export function tags(tag: Tags, points: number, per: number): IVictoryPoints {
+  export function tags(tag: Tag, points: number, per: number): IVictoryPoints {
     return {type: tag, points, per};
   }
 }
 
-// TRSource represents the ways an action will gain TR. This is used exclusively to compute
-// tax when Reds are in power.
-export interface TRSource {
-    oxygen?: number,
-    temperature?: number,
-    oceans?: number,
-    tr?: number,
-    venus?: number
-    moonColony?: number,
-    moonMining?: number,
-    moonLogistics?: number,
-  }
+export type DynamicTRSource = (player: Player) => TRSource;
 
-export interface ICard extends Partial<IActionCard>, IResourceCard {
+export interface ICard {
     name: CardName;
-    tags: Array<Tags>;
+    tags: Array<Tag>;
     play: (player: Player) => PlayerInput | undefined;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
     cardDiscount?: CardDiscount | Array<CardDiscount>;
@@ -63,9 +47,17 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
     victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => PlayerInput | undefined | void;
-    onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
+    onStandardProject?: (player: Player, project: ICard) => void;
     onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;
+    /**
+     * Called when anybody gains TR
+     *
+     * @param player the player gaining TR
+     * @param cardOwner the owner of this card
+     * @param steps the number of steps gained
+     */
+    onIncreaseTerraformRating?(player: Player, cardOwner: Player, steps: number): void;
 
     /**
      * Optional callback when a resource is added to this card.
@@ -77,13 +69,26 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
      */
     onResourceAdded?: (player: Player, playedCard: ICard, count: number) => void;
 
+    /** Used with IProjectCard only, I think. */
     cost?: number;
     cardType: CardType;
     requirements?: CardRequirements;
     metadata: ICardMetadata;
     warning?: string | Message;
-    productionBox?: Units;
+    behavior?: Behavior,
     produce?: (player: Player) => void;
-    tr?: TRSource,
+    tr?: TRSource | DynamicTRSource;
+    resourceCount: number;
+    resourceType?: CardResource;
+    /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
+    tilesBuilt?: Array<TileType>;
 }
 
+export interface IActionCard {
+  action: (player: Player) => PlayerInput | undefined;
+  canAct: (player: Player) => boolean;
+}
+
+export function isIActionCard(object: any): object is IActionCard {
+  return object !== undefined && object.canAct !== undefined && object.action !== undefined;
+}

@@ -27,9 +27,9 @@ describe('SpecializedSettlement', function() {
   });
 
   it('Can play', () => {
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     expect(player.canPlayIgnoringCost(card)).is.false;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
@@ -77,7 +77,7 @@ describe('SpecializedSettlement', function() {
     singleResourceTest(
       SpaceBonus.ENERGY,
       {energy: 1},
-      {energy: 0, megacredits: 3});
+      {energy: 1, megacredits: 3});
     expect(player.popWaitingFor()).is.undefined;
   });
 
@@ -108,10 +108,9 @@ describe('SpecializedSettlement', function() {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     expect(orOptions.options.map((option) => option.title)).deep.eq(['heat', 'steel', 'titanium']);
     orOptions.options[0].cb();
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
     expect(player.popWaitingFor()).is.undefined;
   });
-
 
   it('play - 3 different, then play Robotic Workforce', function() {
     singleResourceTest(
@@ -120,22 +119,24 @@ describe('SpecializedSettlement', function() {
       {energy: 0, megacredits: 3});
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[0].cb();
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
     expect(player.popWaitingFor()).is.undefined;
 
     player.playedCards = [card];
 
     const roboticWorkforce = new RoboticWorkforce();
+    expect(roboticWorkforce.canPlay(player)).is.false;
     expect(roboticWorkforce.play(player)).is.undefined;
-    player.setProductionForTest(Units.of({energy: 1}));
+
+    player.production.override(Units.of({energy: 1}));
     const selectCard = cast(roboticWorkforce.play(player), SelectCard);
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, heat: 1}));
   });
 
   it('play on hazard space', function() {
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     player.megaCredits = 8; // Placing on a mild hazard costs 8MC
 
     const hazardSpace = player.game.board.getAvailableSpacesForCity(player)[0];
@@ -151,14 +152,14 @@ describe('SpecializedSettlement', function() {
 
     runAllActions(game);
     expect(player.getResourcesForTest()).deep.eq(Units.of({}));
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
-  function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, resources: Partial<Units>, production: Partial<Units>) {
-    player.setProductionForTest({energy: 1});
+  function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, stock: Partial<Units>, production: Partial<Units>) {
+    player.production.override({energy: 1});
     const action = card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 0, megacredits: 3}));
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 3}));
 
     const selectSpace = cast(action, SelectSpace);
     const space = selectSpace.availableSpaces[0];
@@ -167,10 +168,10 @@ describe('SpecializedSettlement', function() {
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(space.player).eq(player);
-    expect(player.getResourcesForTest()).deep.eq(Units.of(resources));
+    expect(player.getResourcesForTest()).deep.eq(Units.of(stock));
 
     runAllActions(game);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of(production));
+    expect(player.production.asUnits()).deep.eq(Units.of(production));
   }
 });

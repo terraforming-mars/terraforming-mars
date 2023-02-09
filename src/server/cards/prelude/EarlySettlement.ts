@@ -1,18 +1,18 @@
-import {Tags} from '../../../common/cards/Tags';
-import {Player} from '../../Player';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class EarlySettlement extends PreludeCard {
   constructor() {
     super({
       name: CardName.EARLY_SETTLEMENT,
-      tags: [Tags.BUILDING, Tags.CITY],
-      productionBox: Units.of({plants: 1}),
+      tags: [Tag.BUILDING, Tag.CITY],
+
+      behavior: {
+        production: {plants: 1},
+        city: {},
+      },
 
       metadata: {
         cardNumber: 'P09',
@@ -23,10 +23,4 @@ export class EarlySettlement extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
-    player.game.defer(new PlaceCityTile(player));
-    return undefined;
-  }
 }
-

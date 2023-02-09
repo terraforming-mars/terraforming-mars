@@ -1,20 +1,23 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {played} from '../Options';
+import {IProjectCard} from '../IProjectCard';
 
-export class SulphurExports extends Card {
+export class SulphurExports extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SULPHUR_EXPORTS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS, Tags.SPACE],
+      tags: [Tag.VENUS, Tag.SPACE],
       cost: 21,
-      tr: {venus: 1},
+
+      behavior: {
+        global: {venus: 1},
+        production: {megacredits: {tag: Tag.VENUS}},
+      },
 
       metadata: {
         cardNumber: '250',
@@ -25,11 +28,5 @@ export class SulphurExports extends Card {
         description: 'Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.VENUS) + 1, {log: true});
-    player.game.increaseVenusScaleLevel(player, 1);
-    return undefined;
   }
 }

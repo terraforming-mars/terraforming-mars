@@ -1,15 +1,13 @@
 import {expect} from 'chai';
 import {Io} from '../../src/server/colonies/Io';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
-import {Resources} from '../../src/common/Resources';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Io', function() {
   let io: Io;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -23,8 +21,8 @@ describe('Io', function() {
 
   it('Should build', function() {
     io.addColony(player);
-    expect(player.getProduction(Resources.HEAT)).to.eq(1);
-    expect(player2.getProduction(Resources.HEAT)).to.eq(0);
+    expect(player.production.heat).to.eq(1);
+    expect(player2.production.heat).to.eq(0);
   });
 
   it('Should trade', function() {
@@ -39,8 +37,8 @@ describe('Io', function() {
     io.trade(player2);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.HEAT)).to.eq(1);
-    expect(player2.getProduction(Resources.HEAT)).to.eq(0);
+    expect(player.production.heat).to.eq(1);
+    expect(player2.production.heat).to.eq(0);
     expect(player.heat).to.eq(2);
     expect(player2.heat).to.eq(3);
   });

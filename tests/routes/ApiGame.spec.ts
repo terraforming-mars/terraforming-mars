@@ -36,9 +36,12 @@ describe('ApiGame', () => {
     scaffolding.url = '/api/game?id=game-valid-id';
     await scaffolding.get(ApiGame.INSTANCE, res);
     // This test is probably brittle.
-    expect(JSON.parse(res.content)).deep.eq(
+    const json = JSON.parse(res.content);
+    json.expectedPurgeTimeMs = -1;
+    expect(json).deep.eq(
       {
         'activePlayer': 'black',
+        'expectedPurgeTimeMs': -1,
         'id': 'game-valid-id',
         'lastSoloGeneration': 14,
         'phase': 'research',
@@ -53,7 +56,8 @@ describe('ApiGame', () => {
           'altVenusBoard': false,
           'aresExtension': false,
           'boardName': 'tharsis',
-          'cardsBlackList': [],
+          'bannedCards': [],
+          'ceoExtension': false,
           'coloniesExtension': false,
           'communityCardsOption': false,
           'corporateEra': true,
@@ -64,6 +68,7 @@ describe('ApiGame', () => {
           'escapeVelocityPeriod': 2,
           'escapeVelocityThreshold': 30,
           'fastModeOption': false,
+          'includeFanMA': false,
           'includeVenusMA': true,
           'initialDraftVariant': false,
           'moonExpansion': false,
@@ -83,6 +88,7 @@ describe('ApiGame', () => {
           'turmoilExtension': false,
           'undoOption': false,
           'venusNextExtension': false,
+          'twoCorpsVariant': false,
         },
       },
     );

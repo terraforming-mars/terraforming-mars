@@ -53,6 +53,9 @@ export default Vue.extend({
               <div v-for="card in getCardsByType(player.tableau, [CardType.CORPORATION])" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
               </div>
+              <div v-for="card in getCardsByType(player.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
+                  <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
+              </div>
 
               <div v-for="card in sortActiveCards(getCardsByType(player.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
                   <Card :card="card" :actionUsed="isCardActivated(card, player)"/>

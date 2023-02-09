@@ -22,17 +22,18 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.getCardsWithResources().length > 0 ||
            player.getSelfReplicatingRobotsTargetCards().length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
+    const cards = player.getCardsWithResources();
     const robotCards = player.getSelfReplicatingRobotsTargetCards();
     return new SelectCard(
       'Select card to add resource',
       'Add resource',
-      player.getCardsWithResources().concat(robotCards.map((c) => c.card)),
+      cards.concat(robotCards.map((c) => c.card)),
       ([card]) => {
         // if the user selected a robot card, handle it here:
         const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === card.name);
@@ -40,6 +41,9 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
           robotCard.resourceCount++;
           LogHelper.logAddResource(player, robotCard.card);
         } else {
+          if (!cards.includes(card)) {
+            throw new Error('Invalid card selection');
+          }
           player.addResourceTo(card, {log: true});
         }
         return undefined;
@@ -47,4 +51,3 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
     );
   }
 }
-

@@ -4,8 +4,9 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {maxOutOceans, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('MartianNatureWonders', function() {
   let card: MartianNatureWonders;
@@ -36,7 +37,7 @@ describe('MartianNatureWonders', function() {
     player.megaCredits = 0;
     player.steel = 0;
 
-    const selectSpace = card.play(player);
+    const selectSpace = cast(card.play(player), SelectSpace);
     selectSpace.cb(space);
     runAllActions(player.game);
 

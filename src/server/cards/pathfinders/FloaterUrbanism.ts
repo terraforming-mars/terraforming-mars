@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {IResourceCard, VictoryPoints} from '../ICard';
+import {VictoryPoints} from '../ICard';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
@@ -7,19 +7,19 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {SelectCard} from '../../inputs/SelectCard';
 
-export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, IResourceCard {
+export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.FLOATER_URBANISM,
       cost: 7,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       resourceType: CardResource.VENUSIAN_HABITAT,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS, 4)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS, 4)),
       victoryPoints: VictoryPoints.resource(1, 1),
 
       metadata: {
@@ -35,7 +35,6 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
     });
   }
 
-  public override resourceCount = 0;
 
   public canAct(player: Player) {
     return player.getResourceCount(CardResource.FLOATER) > 0;
@@ -60,9 +59,5 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
       return undefined;
     }
     return input;
-  }
-
-  public play() {
-    return undefined;
   }
 }

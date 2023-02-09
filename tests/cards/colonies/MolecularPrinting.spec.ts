@@ -3,8 +3,8 @@ import {MolecularPrinting} from '../../../src/server/cards/colonies/MolecularPri
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {addCityTile} from '../../TestingUtils';
 
 describe('MolecularPrinting', function() {
   it('Should play', function() {
@@ -20,11 +20,11 @@ describe('MolecularPrinting', function() {
 
     player.game.colonies.push(colonyTile1);
     player.game.colonies.push(colonyTile2);
-    player.game.addCityTile(player, '03');
+    addCityTile(player, '03');
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.megaCredits).to.eq(3);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

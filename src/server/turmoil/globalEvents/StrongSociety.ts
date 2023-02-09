@@ -1,4 +1,5 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
@@ -15,7 +16,7 @@ export class StrongSociety extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.STRONG_SOCIETY,
-      description: 'Gain 2 M€ for each City tile (max 5) and influence.',
+      description: 'Gain 2 M€ for each city tile (max 5) and influence.',
       revealedDelegate: PartyName.REDS,
       currentDelegate: PartyName.MARS,
       renderData: RENDER_DATA,

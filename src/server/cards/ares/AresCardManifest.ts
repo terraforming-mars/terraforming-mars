@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardManifest} from '../CardManifest';
+import {ModuleManifest} from '../ModuleManifest';
 import {BioengineeringEnclosure} from './BioengineeringEnclosure';
 import {BiofertilizerFacility} from './BiofertilizerFacility';
 import {ButterflyEffect} from './ButterflyEffect';
@@ -24,33 +24,33 @@ import {OceanSanctuary} from './OceanSanctuary';
 import {RestrictedAreaAres} from './RestrictedAreaAres';
 import {SolarFarm} from './SolarFarm';
 
-export const ARES_CARD_MANIFEST = new CardManifest({
+export const ARES_CARD_MANIFEST = new ModuleManifest({
   module: 'ares',
-  projectCards: [
-    {cardName: CardName.BIOENGINEERING_ENCLOSURE, Factory: BioengineeringEnclosure},
-    {cardName: CardName.BIOFERTILIZER_FACILITY, Factory: BiofertilizerFacility},
-    {cardName: CardName.BUTTERFLY_EFFECT, Factory: ButterflyEffect},
-    {cardName: CardName.CAPITAL_ARES, Factory: CapitalAres},
-    {cardName: CardName.COMMERCIAL_DISTRICT_ARES, Factory: CommercialDistrictAres},
-    {cardName: CardName.DESPERATE_MEASURES, Factory: DesperateMeasures},
-    {cardName: CardName.ECOLOGICAL_SURVEY, Factory: EcologicalSurvey},
-    {cardName: CardName.ECOLOGICAL_ZONE_ARES, Factory: EcologicalZoneAres},
-    {cardName: CardName.GEOLOGICAL_SURVEY, Factory: GeologicalSurvey},
-    {cardName: CardName.INDUSTRIAL_CENTER_ARES, Factory: IndustrialCenterAres},
-    {cardName: CardName.LAVA_FLOWS_ARES, Factory: LavaFlowsAres},
-    {cardName: CardName.MARKETING_EXPERTS, Factory: MarketingExperts},
-    {cardName: CardName.METALLIC_ASTEROID, Factory: MetallicAsteroid},
-    {cardName: CardName.MINING_AREA_ARES, Factory: MiningAreaAres},
-    {cardName: CardName.MINING_RIGHTS_ARES, Factory: MiningRightsAres},
-    {cardName: CardName.MOHOLE_AREA_ARES, Factory: MoholeAreaAres},
-    {cardName: CardName.NATURAL_PRESERVE_ARES, Factory: NaturalPreserveAres},
-    {cardName: CardName.NUCLEAR_ZONE_ARES, Factory: NuclearZoneAres},
-    {cardName: CardName.OCEAN_CITY, Factory: OceanCity},
-    {cardName: CardName.OCEAN_FARM, Factory: OceanFarm},
-    {cardName: CardName.OCEAN_SANCTUARY, Factory: OceanSanctuary},
-    {cardName: CardName.RESTRICTED_AREA_ARES, Factory: RestrictedAreaAres},
-    {cardName: CardName.SOLAR_FARM, Factory: SolarFarm},
-  ],
+  projectCards: {
+    [CardName.BIOENGINEERING_ENCLOSURE]: {Factory: BioengineeringEnclosure},
+    [CardName.BIOFERTILIZER_FACILITY]: {Factory: BiofertilizerFacility},
+    [CardName.BUTTERFLY_EFFECT]: {Factory: ButterflyEffect},
+    [CardName.CAPITAL_ARES]: {Factory: CapitalAres},
+    [CardName.COMMERCIAL_DISTRICT_ARES]: {Factory: CommercialDistrictAres},
+    [CardName.DESPERATE_MEASURES]: {Factory: DesperateMeasures},
+    [CardName.ECOLOGICAL_SURVEY]: {Factory: EcologicalSurvey},
+    [CardName.ECOLOGICAL_ZONE_ARES]: {Factory: EcologicalZoneAres},
+    [CardName.GEOLOGICAL_SURVEY]: {Factory: GeologicalSurvey},
+    [CardName.INDUSTRIAL_CENTER_ARES]: {Factory: IndustrialCenterAres},
+    [CardName.LAVA_FLOWS_ARES]: {Factory: LavaFlowsAres},
+    [CardName.MARKETING_EXPERTS]: {Factory: MarketingExperts},
+    [CardName.METALLIC_ASTEROID]: {Factory: MetallicAsteroid},
+    [CardName.MINING_AREA_ARES]: {Factory: MiningAreaAres},
+    [CardName.MINING_RIGHTS_ARES]: {Factory: MiningRightsAres},
+    [CardName.MOHOLE_AREA_ARES]: {Factory: MoholeAreaAres},
+    [CardName.NATURAL_PRESERVE_ARES]: {Factory: NaturalPreserveAres},
+    [CardName.NUCLEAR_ZONE_ARES]: {Factory: NuclearZoneAres},
+    [CardName.OCEAN_CITY]: {Factory: OceanCity},
+    [CardName.OCEAN_FARM]: {Factory: OceanFarm},
+    [CardName.OCEAN_SANCTUARY]: {Factory: OceanSanctuary},
+    [CardName.RESTRICTED_AREA_ARES]: {Factory: RestrictedAreaAres},
+    [CardName.SOLAR_FARM]: {Factory: SolarFarm},
+  },
   cardsToRemove: [
     CardName.CAPITAL,
     CardName.COMMERCIAL_DISTRICT,

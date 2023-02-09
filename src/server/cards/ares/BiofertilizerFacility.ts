@@ -1,31 +1,34 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class BiofertilizerFacility extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.BIOFERTILIZER_FACILITY,
-      tags: [Tags.MICROBE, Tags.BUILDING],
+      tags: [Tag.MICROBE, Tag.BUILDING],
       cost: 12,
-      productionBox: Units.of({plants: 1}),
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
+      behavior: {
+        production: {plants: 1},
+        addResourcesToAnyCard: {count: 2, type: CardResource.MICROBE},
+        tile: {
+          type: TileType.BIOFERTILIZER_FACILITY,
+          on: 'land',
+          adjacencyBonus: {bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE]},
+          title: 'Select space for Biofertilizer Facility tile',
+        },
+      },
+
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
       metadata: {
         description: 'Requires 1 science tag. Increase your plant production 1 step. ' +
                   'Add up to 2 microbes to ANY card. ' +
@@ -39,25 +42,5 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
-    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
-
-    return new SelectSpace(
-      'Select space for Biofertilizer Facility tile',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: ISpace) => {
-        player.game.addTile(player, SpaceType.LAND, space, {
-          tileType: TileType.BIOFERTILIZER_FACILITY,
-          card: this.name,
-        });
-        space.adjacency = {
-          bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE],
-        };
-        return undefined;
-      },
-    );
   }
 }

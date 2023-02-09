@@ -2,7 +2,7 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
@@ -10,25 +10,25 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
 import {Phase} from '../../../common/Phase';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 
 export class MarsFirst extends Party implements IParty {
-  name = PartyName.MARS;
-  description = 'Focused on Martian development and independence.';
-  bonuses = [MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2];
-  policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
+  readonly name = PartyName.MARS;
+  readonly description = 'Focused on Martian development and independence.';
+  readonly bonuses = [MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2];
+  readonly policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
 }
 
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
 class MarsFirstBonus01 implements Bonus {
-  id = 'mb01' as const;
-  description = 'Gain 1 M€ for each Building tag you have';
-  isDefault = true;
+  readonly id = 'mb01' as const;
+  readonly description = 'Gain 1 M€ for each building tag you have';
+  readonly isDefault = true;
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.BUILDING, 'raw');
+    return player.tags.count(Tag.BUILDING, 'raw');
   }
 
   grant(game: Game) {
@@ -39,9 +39,9 @@ class MarsFirstBonus01 implements Bonus {
 }
 
 class MarsFirstBonus02 implements Bonus {
-  id = 'mb02' as const;
-  description = 'Gain 1 M€ for each tile you have ON MARS';
-  isDefault = false;
+  readonly id = 'mb02' as const;
+  readonly description = 'Gain 1 M€ for each tile you have ON MARS';
+  readonly isDefault = false;
 
   getScore(player: Player) {
     const boardSpaces = player.game.board.spaces;
@@ -56,9 +56,9 @@ class MarsFirstBonus02 implements Bonus {
 }
 
 class MarsFirstPolicy01 implements Policy {
-  isDefault = true;
-  id = 'mfp01' as const;
-  description: string = 'When you place a tile ON MARS, gain 1 steel';
+  readonly isDefault = true;
+  readonly id = 'mfp01' as const;
+  readonly description = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
@@ -68,25 +68,25 @@ class MarsFirstPolicy01 implements Policy {
 }
 
 class MarsFirstPolicy02 implements Policy {
-  id = 'mfp02' as const;
-  description: string = 'When you play a Building tag, gain 2 M€';
-  isDefault = false;
+  readonly id = 'mfp02' as const;
+  readonly description = 'When you play a building tag, gain 2 M€';
+  readonly isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
+    if (card.tags.includes(Tag.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
   }
 }
 
 class MarsFirstPolicy03 implements Policy {
-  id = 'mfp03' as const;
-  description: string = 'Your steel resources are worth 1 M€ extra';
-  isDefault = false;
+  readonly id = 'mfp03' as const;
+  readonly description = 'Your steel resources are worth 1 M€ extra';
+  readonly isDefault = false;
 }
 
 class MarsFirstPolicy04 implements Policy {
-  id = 'mfp04' as const;
-  description: string = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
-  isDefault = false;
+  readonly id = 'mfp04' as const;
+  readonly description = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
+  readonly isDefault = false;
 
   canAct(player: Player) {
     return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
@@ -97,13 +97,13 @@ class MarsFirstPolicy04 implements Policy {
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectHowToPayDeferred(
+    game.defer(new SelectPaymentDeferred(
       player,
       4,
       {
         title: 'Select how to pay for Turmoil Mars First action',
         afterPay: () => {
-          player.drawCard(1, {tag: Tags.BUILDING});
+          player.drawCard(1, {tag: Tag.BUILDING});
         },
       },
     ));

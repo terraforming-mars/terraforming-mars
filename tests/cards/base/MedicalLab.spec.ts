@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('MedicalLab', function() {
@@ -12,10 +11,10 @@ describe('MedicalLab', function() {
     Game.newInstance('gameid', [player], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(0);
     player.playedCards.push(new Capital());
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

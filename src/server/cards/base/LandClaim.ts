@@ -24,16 +24,16 @@ export class LandClaim extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getNonReservedLandSpaces().length > 0;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getNonReservedLandSpaces(),
-      (foundSpace: ISpace) => {
-        foundSpace.player = player;
-        LogHelper.logBoardTileAction(player, foundSpace, 'land claim');
+      (space: ISpace) => {
+        space.player = player;
+        LogHelper.logBoardTileAction(player, space, 'land claim');
         return undefined;
       },
     );

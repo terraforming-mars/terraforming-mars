@@ -10,6 +10,8 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {Board} from '../../../src/server/boards/Board';
 import {Units} from '../../../src/common/Units';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast} from '../../TestingUtils';
 
 describe('RedCity', function() {
   let card: RedCity;
@@ -21,7 +23,7 @@ describe('RedCity', function() {
 
   beforeEach(function() {
     card = new RedCity();
-    game = newTestGame(2, {pathfindersExpansion: true});
+    game = newTestGame(2, {pathfindersExpansion: true, turmoilExtension: true});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
     turmoil = game.turmoil!;
@@ -32,16 +34,16 @@ describe('RedCity', function() {
     game.phase = Phase.ACTION;
     player.megaCredits = card.cost;
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.SCIENTISTS);
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
 
     expect(player.canPlay(card)).is.false;
 
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
 
     expect(player.canPlay(card)).is.false;
 
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);
 
     expect(player.canPlay(card)).is.true;
@@ -50,7 +52,7 @@ describe('RedCity', function() {
   it('cannot play when no spaces are available', () => {
     game.phase = Phase.ACTION;
     player.megaCredits = card.cost;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);
     expect(player.canPlay(card)).is.true;
 
@@ -85,9 +87,9 @@ describe('RedCity', function() {
 
   it('play', function() {
     const redCitySpace = board.getSpace('53');
-    player.setProductionForTest({energy: 1});
-    const action = card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 0, megacredits: 2}));
+    player.production.override({energy: 1});
+    const action = cast(card.play(player), SelectSpace);
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 0, megacredits: 2}));
     expect(action.availableSpaces).includes(redCitySpace);
 
     action.cb(redCitySpace);
@@ -98,8 +100,8 @@ describe('RedCity', function() {
 
   it('vps', function() {
     const redCitySpace = board.getSpace('53');
-    player.setProductionForTest({energy: 1});
-    card.play(player).cb(redCitySpace);
+    player.production.override({energy: 1});
+    cast(card.play(player), SelectSpace).cb(redCitySpace);
 
     expect(card.getVictoryPoints(player)).eq(4);
 
@@ -118,8 +120,8 @@ describe('RedCity', function() {
 
   it('cannot place greenery next to red city', function() {
     const redCitySpace = board.getSpace('53');
-    player.setProductionForTest({energy: 1});
-    card.play(player).cb(redCitySpace);
+    player.production.override({energy: 1});
+    cast(card.play(player), SelectSpace).cb(redCitySpace);
     const adjacentSpaces = board.getAdjacentSpaces(redCitySpace);
 
     // Nobody may place a greenery next to Red City.

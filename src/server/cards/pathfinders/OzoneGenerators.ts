@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 
 export class OzoneGenerators extends Card implements IProjectCard, IActionCard {
@@ -15,7 +15,7 @@ export class OzoneGenerators extends Card implements IProjectCard, IActionCard {
       cardType: CardType.ACTIVE,
       name: CardName.OZONE_GENERATORS,
       cost: 14,
-      tags: [Tags.MARS, Tags.SPACE],
+      tags: [Tag.MARS, Tag.SPACE],
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
 
       metadata: {
@@ -36,10 +36,6 @@ export class OzoneGenerators extends Card implements IProjectCard, IActionCard {
     player.deductResource(Resources.ENERGY, 3);
     player.increaseTerraformRating();
     player.game.log('${0} spent 3 energy to gain 1 TR', (b) => b.player(player));
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

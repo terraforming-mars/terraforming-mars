@@ -1,9 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -13,12 +12,19 @@ export class SpacePortColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 27,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.SPACE_PORT_COLONY,
       cardType: CardType.AUTOMATED,
 
       requirements: CardRequirements.builder((b) => b.colonies()),
       victoryPoints: 'special',
+
+      behavior: {
+        colonies: {
+          buildColony: {allowDuplicates: true},
+          addTradeFleet: 1,
+        },
+      },
 
       metadata: {
         cardNumber: 'C39',
@@ -32,14 +38,8 @@ export class SpacePortColony extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.game.defer(new BuildColony(player, true, 'Select colony for Space Port Colony'));
-    player.increaseFleetSize();
-    return undefined;
-  }
-
   public override getVictoryPoints(player: Player) {
-    let coloniesCount: number = 0;
+    let coloniesCount = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });

@@ -1,34 +1,33 @@
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {PlayerInput} from '../../PlayerInput';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardName} from '../../../common/cards/CardName';
-import {Tags} from '../../../common/cards/Tags';
-import {IProjectCard} from '../IProjectCard';
-import {Units} from '../../../common/Units';
+import {Tag} from '../../../common/cards/Tag';
+import {TileType} from '../../../common/TileType';
+import {Behavior} from '../../behavior/Behavior';
+import {IPreludeCard} from './IPreludeCard';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;
     name: CardName;
-    tags?: Array<Tags>;
+    tags?: Array<Tag>;
     startingMegacredits?: number;
-    productionBox?: Units;
+    tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
+    behavior?: Partial<Behavior>,
 }
 
-export abstract class PreludeCard extends Card implements IProjectCard {
+export abstract class PreludeCard extends Card implements IPreludeCard {
   constructor(properties: StaticPreludeProperties) {
     super({
+      behavior: properties.behavior,
       cardType: CardType.PRELUDE,
       name: properties.name,
       tags: properties.tags,
       metadata: properties.metadata,
-      productionBox: properties.productionBox,
       startingMegaCredits: properties.startingMegacredits,
     });
   }
-  public abstract play(player: Player): PlayerInput | undefined;
-  public override canPlay(_player: Player): boolean {
-    return true;
+  public override get cardType(): CardType.PRELUDE {
+    return CardType.PRELUDE;
   }
 }

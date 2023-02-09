@@ -30,7 +30,4 @@ export class IndenturedWorkers extends Card implements IProjectCard {
     }
     return 0;
   }
-  public play() {
-    return undefined;
-  }
 }

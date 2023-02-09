@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -21,10 +21,18 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PROJECT_WORKSHOP,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       startingMegaCredits: 39,
       cardType: CardType.CORPORATION,
-      initialActionText: 'Draw a blue card',
+
+      behavior: {
+        stock: {steel: 1, titanium: 1},
+      },
+
+      firstAction: {
+        text: 'Draw a blue card',
+        drawCard: {count: 1, type: CardType.ACTIVE},
+      },
 
       metadata: {
         cardNumber: 'R45',
@@ -46,17 +54,6 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.steel = 1;
-    player.titanium = 1;
-    return undefined;
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(1, {cardType: CardType.ACTIVE});
-    return undefined;
   }
 
   private getEligibleCards(player: Player) {

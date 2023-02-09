@@ -1,7 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
-import {Resources} from '../../../common/Resources';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {ITagCount} from '../../../common/cards/ITagCount';
@@ -14,11 +13,14 @@ export class AgricolaInc extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AGRICOLA_INC,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
       startingMegaCredits: 40,
       cardType: CardType.CORPORATION,
 
       victoryPoints: 'special',
+      behavior: {
+        production: {megacredits: 1, plants: 1},
+      },
 
       metadata: {
         cardNumber: 'R36',
@@ -35,18 +37,11 @@ export class AgricolaInc extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
-    player.addProduction(Resources.PLANTS, 1);
-
-    return undefined;
-  }
-
   public override getVictoryPoints(player: Player): number {
-    const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBE, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.BUILDING, Tags.ANIMAL];
-    if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
+    const scorableTags : Array<Tag> = [Tag.CITY, Tag.EARTH, Tag.POWER, Tag.JOVIAN, Tag.MICROBE, Tag.PLANT, Tag.SCIENCE, Tag.SPACE, Tag.BUILDING, Tag.ANIMAL];
+    if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tag.VENUS);
 
-    const playerTags : ITagCount[] = player.getAllTags();
+    const playerTags : ITagCount[] = player.tags.getAllTags();
     let points = 0;
 
     scorableTags.forEach((tag) => {

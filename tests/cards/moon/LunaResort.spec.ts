@@ -2,13 +2,10 @@ import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaResort} from '../../../src/server/cards/moon/LunaResort';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('LunaResort', () => {
   let game: Game;
@@ -18,7 +15,7 @@ describe('LunaResort', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new LunaResort();
   });
@@ -29,42 +26,42 @@ describe('LunaResort', () => {
 
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     player.titanium = 2;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.getPlayableCards()).does.include(card);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     player.titanium = 1;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.getPlayableCards()).does.not.include(card);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
-    spaces[1].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
+    spaces[1].tile = {tileType: TileType.MOON_HABITAT};
     player.titanium = 2;
-    player.setProductionForTest({energy: 0});
+    player.production.override({energy: 0});
     expect(player.getPlayableCards()).does.not.include(card);
 
-    spaces[0].tile = {tileType: TileType.MOON_COLONY};
+    spaces[0].tile = {tileType: TileType.MOON_HABITAT};
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
     player.titanium = 2;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     player.titanium = 3;
-    player.setProductionForTest({energy: 1, megacredits: 0});
+    player.production.override({energy: 1, megacredits: 0});
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.colonyRate).eq(0);
 
     card.play(player);
 
     expect(player.titanium).eq(1);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(3);
+    expect(player.production.energy).eq(0);
+    expect(player.production.megacredits).eq(3);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.colonyRate).eq(1);
   });

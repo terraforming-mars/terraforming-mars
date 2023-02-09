@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {RadSuits} from '../../../src/server/cards/base/RadSuits';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('RadSuits', function() {
   let card: RadSuits;
@@ -22,13 +21,13 @@ describe('RadSuits', function() {
 
   it('Should play', function() {
     const lands = game.board.getAvailableSpacesOnLand(player);
-    game.addCityTile(player, lands[0].id);
-    game.addCityTile(player, lands[1].id);
+    game.addCityTile(player, lands[0]);
+    game.addCityTile(player, lands[1]);
 
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

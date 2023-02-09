@@ -8,7 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
@@ -21,13 +21,13 @@ export abstract class MiningCard extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost,
       metadata,
     });
   }
   public bonusResource?: Array<Resources>;
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
   private isAres(): boolean {
@@ -66,11 +66,11 @@ export abstract class MiningCard extends Card implements IProjectCard {
 
   public produce(player: Player) {
     if (this.bonusResource && this.bonusResource.length === 1) {
-      player.addProduction(this.bonusResource[0], 1, {log: true});
+      player.production.add(this.bonusResource[0], 1, {log: true});
     }
   }
 
-  public play(player: Player): SelectSpace {
+  public override bespokePlay(player: Player): SelectSpace {
     return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: ISpace) => {
       const bonusResources = [];
       if (space.bonus.includes(SpaceBonus.STEEL)) {
@@ -84,10 +84,10 @@ export abstract class MiningCard extends Card implements IProjectCard {
         player, bonusResources,
         'Select a resource to gain 1 unit of production',
         (resource) => {
-          player.addProduction(resource, 1, {log: true});
+          player.production.add(resource, 1, {log: true});
           this.bonusResource = [resource];
           const spaceBonus = resource === Resources.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
-          player.game.addTile(player, space.spaceType, space, {tileType: this.getTileType(spaceBonus)});
+          player.game.addTile(player, space, {tileType: this.getTileType(spaceBonus)});
           space.adjacency = this.getAdjacencyBonus(spaceBonus);
         },
       ));

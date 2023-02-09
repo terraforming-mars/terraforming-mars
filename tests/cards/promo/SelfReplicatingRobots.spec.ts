@@ -7,13 +7,12 @@ import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplica
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 
 describe('SelfReplicatingRobots', function() {
   let card: SelfReplicatingRobots;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SelfReplicatingRobots();
@@ -47,13 +46,13 @@ describe('SelfReplicatingRobots', function() {
     player.cardsInHand.push(new HousePrinting());
 
     const action = cast(card.action(player), OrOptions);
-    action.options[0].cb([(action.options[0] as SelectCard<IProjectCard>).cards[0]]);
+    action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
     expect(card.targetCards[0].resourceCount).to.eq(2);
     expect(player.cardsInHand).deep.eq([earthOffice]);
     expect(card.targetCards).has.lengthOf(1);
 
     const action2 = cast(card.action(player), OrOptions);
-    action2.options[0].cb([(action2.options[0] as SelectCard<IProjectCard>).cards[0]]);
+    action2.options[0].cb([cast(action2.options[0], SelectCard<IProjectCard>).cards[0]]);
     expect(card.targetCards[0].resourceCount).to.eq(4);
   });
 });

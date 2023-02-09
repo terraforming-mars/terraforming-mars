@@ -1,14 +1,12 @@
 import {expect} from 'chai';
 import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
 describe('DeuteriumExport', function() {
   let card: DeuteriumExport;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new DeuteriumExport();
@@ -16,7 +14,7 @@ describe('DeuteriumExport', function() {
   });
 
   it('Should play', function() {
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
@@ -29,6 +27,6 @@ describe('DeuteriumExport', function() {
     const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.production.energy).to.eq(1);
   });
 });

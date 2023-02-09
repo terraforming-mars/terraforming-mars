@@ -2,15 +2,15 @@ import {expect} from 'chai';
 import {Player} from '../../src/server/Player';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/server/Game';
-import {cast, runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {cast, runAllActions, testGameOptions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
 import {AgendaStyle} from '../../src/common/turmoil/Types';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 describe('PoliticalAgendas', function() {
-  let player1: Player;
-  let player2: Player;
+  let player1: TestPlayer;
+  let player2: TestPlayer;
   let randomElement: (list: Array<any>) => any;
 
   beforeEach(() => {
@@ -28,7 +28,7 @@ describe('PoliticalAgendas', function() {
   deserialized.forEach((deserialize) => {
     const suffix = deserialize ? ', but deserialized' : '';
     it('Standard' + suffix, () => {
-      let game = Game.newInstance('gameid', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.STANDARD}));
+      let game = Game.newInstance('gameid', [player1, player2], player1, testGameOptions({turmoilExtension: true, politicalAgendasExtension: AgendaStyle.STANDARD}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -37,7 +37,7 @@ describe('PoliticalAgendas', function() {
       expect(PoliticalAgendas.currentAgenda(turmoil).bonusId).eq('gb01');
       expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('gp01');
 
-      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
       turmoil.chairman = player2.id;
       PoliticalAgendas.setNextAgenda(turmoil, game);
@@ -51,19 +51,20 @@ describe('PoliticalAgendas', function() {
       // For the neutral chairman to always pick the second item in the list.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('gameid', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let game = Game.newInstance('gameid', [player1, player2], player1, testGameOptions({turmoilExtension: true, politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let newPlayer2: Player = player2;
       if (deserialize) {
         game = Game.deserialize(game.serialize());
         // Get a new copy of player2 who will have a different set of waitingFor.
-        player2 = game.getPlayerById(player2.id);
+        newPlayer2 = game.getPlayerById(player2.id);
       }
       const turmoil = game.turmoil!;
 
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'gb02', policyId: 'gp02'});
 
-      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
-      turmoil.chairman = player2.id;
+      turmoil.chairman = newPlayer2.id;
 
       PoliticalAgendas.setNextAgenda(turmoil, game);
       runAllActions(game);
@@ -71,7 +72,7 @@ describe('PoliticalAgendas', function() {
       // The new ruling party is lined up.
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb02', policyId: 'kp02'});
 
-      const waitingFor = cast(player2.getWaitingFor(), OrOptions);
+      const waitingFor = cast(newPlayer2.getWaitingFor(), OrOptions);
       const bonusOptions = cast(waitingFor.options[0], OrOptions);
       bonusOptions.options[0].cb();
 
@@ -88,7 +89,7 @@ describe('PoliticalAgendas', function() {
       // For the neutral chairperson to always pick the second item.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('gameid', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let game = Game.newInstance('gameid', [player1, player2], player1, testGameOptions({turmoilExtension: true, politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -97,7 +98,7 @@ describe('PoliticalAgendas', function() {
       expect(PoliticalAgendas.currentAgenda(turmoil).bonusId).eq('gb02');
       expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('gp02');
 
-      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS);
       turmoil.rulingParty = newParty;
       turmoil.chairman = 'NEUTRAL';
       PoliticalAgendas.setNextAgenda(turmoil, game);

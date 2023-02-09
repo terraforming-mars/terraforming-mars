@@ -1,8 +1,8 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -14,11 +14,11 @@ import {Size} from '../../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resources} from '../../../common/Resources';
 
-export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard, IResourceCard {
+export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       startingMegaCredits: 48,
       resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,
@@ -41,12 +41,6 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
         }),
       },
     });
-  }
-
-  public override resourceCount = 0;
-
-  public play() {
-    return undefined;
   }
 
   public canAct(): boolean {
@@ -76,30 +70,31 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
     let heatAmount: number;
     let floaterAmount: number;
 
-    return new AndOptions(
+    const options = new AndOptions(
       () => {
         if (heatAmount + (floaterAmount * 2) < targetAmount) {
           throw new Error(`Need to pay ${targetAmount} heat`);
         }
         if (heatAmount > 0 && heatAmount - 1 + (floaterAmount * 2) >= targetAmount) {
-          throw new Error(`You cannot overspend heat`);
+          throw new Error('You cannot overspend heat');
         }
         if (floaterAmount > 0 && heatAmount + ((floaterAmount - 1) * 2) >= targetAmount) {
-          throw new Error(`You cannot overspend floaters`);
+          throw new Error('You cannot overspend floaters');
         }
-        const stormcraft = player.getCorporationOrThrow(this.name);
-        player.removeResourceFrom(stormcraft, floaterAmount);
+        player.removeResourceFrom(this, floaterAmount);
         player.deductResource(Resources.HEAT, heatAmount);
         return cb();
       },
-      new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {
+      new SelectAmount('Heat', 'Spend heat', (amount: number) => {
         heatAmount = amount;
         return undefined;
       }, 0, Math.min(player.heat, targetAmount)),
-      new SelectAmount('Select amount of floaters on corporation to spend', 'Spend floaters', (amount: number) => {
+      new SelectAmount('Stormcraft Incorporated Floaters (2 heat each)', 'Spend floaters', (amount: number) => {
         floaterAmount = amount;
         return undefined;
       }, 0, Math.min(this.resourceCount, Math.ceil(targetAmount / 2))),
     );
+    options.title = `Select how to spend ${targetAmount} heat`;
+    return options;
   }
 }

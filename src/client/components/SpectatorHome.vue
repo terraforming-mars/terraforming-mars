@@ -87,7 +87,7 @@ import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
-import Milestone from '@/client/components/Milestone.vue';
+import Milestone from '@/client/components/Milestones.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';

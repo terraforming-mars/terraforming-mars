@@ -43,7 +43,9 @@ describe('Cloner', function() {
     expect(game.rng.seed).eq(newGame.rng.seed);
     expect(game.gameAge).eq(newGame.gameAge);
     expect(game.undoCount).eq(newGame.undoCount);
-    expect(game.dealer, 'dealer').to.deep.eq(newGame.dealer);
+    expect(game.projectDeck, 'projectDeck').to.deep.eq(newGame.projectDeck);
+    expect(game.corporationDeck, 'corporationDeck').to.deep.eq(newGame.corporationDeck);
+    expect(game.preludeDeck, 'preludeDeck').to.deep.eq(newGame.preludeDeck);
     expect(game.milestones, 'milestones').to.deep.eq(newGame.milestones);
     expect(game.awards, 'awards').to.deep.eq(newGame.awards);
 

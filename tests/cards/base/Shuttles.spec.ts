@@ -24,19 +24,19 @@ describe('Shuttles', function() {
   });
 
   it('Can not play if oxygen level too low', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 4;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 5;
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(2);
 
     expect(card.getVictoryPoints()).to.eq(1);
 

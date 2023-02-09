@@ -33,13 +33,13 @@ import {Engineer} from './amazonisPlanitia/Engineer';
 import {Historian} from './amazonisPlanitia/Historian';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
-import {Economizer} from './terraCimmeria/Economizer';
+import {Economizer2} from './terraCimmeria/Economizer2';
 import {Politician} from './terraCimmeria/Politician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
 import {Zoologist2} from './amazonisPlanitia/Zoologist';
 
-export const ORIGINAL_AWARDS: Array<IAward> = [
+export const THARSIS_AWARDS: Array<IAward> = [
   new Landlord(),
   new Scientist(),
   new Banker(),
@@ -94,7 +94,7 @@ export const ARABIA_TERRA_AWARDS = [
 
 export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
   new Biologist(),
-  new Economizer(),
+  new Economizer2(),
   new Politician(),
   new Urbanist(),
   new Warmonger(),
@@ -109,7 +109,7 @@ export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
 ];
 
 export const ALL_AWARDS: Array<IAward> = [
-  ...ORIGINAL_AWARDS,
+  ...THARSIS_AWARDS,
   ...ELYSIUM_AWARDS,
   ...HELLAS_AWARDS,
   ...VENUS_AWARDS,

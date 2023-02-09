@@ -1,44 +1,39 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
-import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
-import {MoonCard} from './MoonCard';
+import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class TheWomb extends MoonCard {
+export class TheWomb extends Card {
   constructor() {
     super({
       name: CardName.THE_WOMB,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.CITY, Tags.MOON],
+      tags: [Tag.CITY, Tag.MOON],
       cost: 16,
-      productionBox: Units.of({energy: -2, megacredits: 4}),
-      reserveUnits: Units.of({titanium: 2}),
-      tr: {moonColony: 1},
+
+      behavior: {
+        production: {energy: -2, megacredits: 4},
+        moon: {
+          habitatTile: {},
+        },
+      },
+      reserveUnits: {titanium: 2},
 
       metadata: {
         description: 'Decrease your energy production 2 steps and increase your M€ production 4 steps. ' +
-          'Spend 2 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
+          'Spend 2 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.',
         cardNumber: 'M08',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(2).nbsp.megacredits(4);
           }).br;
-          b.minus().titanium(2).moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE});
+          b.minus().titanium(2).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),
       },
-    }, {
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
-  }
-
-  public override play(player: Player) {
-    super.play(player);
-    player.game.defer(new PlaceMoonColonyTile(player));
-    return undefined;
   }
 }

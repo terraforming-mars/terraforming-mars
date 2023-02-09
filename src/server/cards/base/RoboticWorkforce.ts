@@ -1,23 +1,23 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {Units} from '../../../common/Units';
 import {played} from '../Options';
+import {Behavior} from '../../behavior/Behavior';
+import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ROBOTIC_WORKFORCE,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 9,
       metadata: {
         cardNumber: '086',
@@ -29,39 +29,53 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       },
     });
   }
-  public override canPlay(player: Player): boolean {
-    return this.getAvailableCards(player).length > 0;
+
+  /**
+   * Returns a copy of behavior with just `production` and `decreaseAnyProduction` fields.
+   */
+  private productionBehavior(behavior: Behavior): Behavior {
+    const filtered: Behavior = {};
+    if (behavior.production !== undefined) {
+      filtered.production = behavior.production;
+    }
+    if (behavior.decreaseAnyProduction !== undefined) {
+      filtered.decreaseAnyProduction = behavior.decreaseAnyProduction;
+    }
+    return filtered;
   }
 
   private isCardApplicable(card: ICard, player: Player): boolean {
-    if (!card.tags.includes(Tags.BUILDING) && !card.tags.includes(Tags.WILD)) {
+    if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
       return false;
     }
-    if (card.name === CardName.BIOMASS_COMBUSTORS) {
-      return player.canReduceAnyProduction(Resources.PLANTS, 1);
-    } else if (card.name === CardName.HEAT_TRAPPERS) {
-      return player.canReduceAnyProduction(Resources.HEAT, 2);
-    } else if (card.name === CardName.GYROPOLIS) {
-      return player.getProduction(Resources.ENERGY) >= 2;
-    } else if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
-      return player.getProduction(Resources.ENERGY) >= 1;
+    if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
+      return player.production.energy >= 1;
     }
 
-    if (card.produce !== undefined) return true;
+    if (card.produce !== undefined) {
+      return true;
+    }
 
-    if (card.productionBox === undefined || card.productionBox === Units.EMPTY) return false;
+    if (card.behavior !== undefined) {
+      const productionBehavior = this.productionBehavior(card.behavior);
+      if (Object.keys(productionBehavior).length > 0) {
+        return getBehaviorExecutor().canExecute(productionBehavior, player, card);
+      }
+    }
 
-    return player.canAdjustProduction(card.productionBox);
+    // Card has no production box.
+    return false;
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
-    return [
-      ...player.playedCards.filter((card) => this.isCardApplicable(card, player)),
-      ...player.corporations.filter((card) => this.isCardApplicable(card, player)),
-    ];
+    return player.tableau.filter((card) => this.isCardApplicable(card, player));
   }
 
-  public play(player: Player) {
+  public override bespokeCanPlay(player: Player): boolean {
+    return this.getAvailableCards(player).length > 0;
+  }
+
+  public override bespokePlay(player: Player) {
     const availableCards = this.getAvailableCards(player);
 
     if (availableCards.length === 0) {
@@ -74,10 +88,8 @@ export class RoboticWorkforce extends Card implements IProjectCard {
 
       if (card.produce) {
         card.produce(player);
-      } else if (card.productionBox) {
-        player.adjustProduction(card.productionBox);
-      } else {
-        throw new Error(`Card ${card.name} is not a valid Robotic Workforce card.`);
+      } else if (card.behavior !== undefined) {
+        getBehaviorExecutor().execute(this.productionBehavior(card.behavior), player, card);
       }
       return undefined;
     });

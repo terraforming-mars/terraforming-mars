@@ -1,5 +1,5 @@
-PayProductionModel  // TODO(chosta): consolidate repetition into a reusable component.
 <template>
+  <!-- TODO(chosta): consolidate repetition into a reusable component. -->
   <div class="wf-component wf-component--select-production-to-lose">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
 
@@ -57,7 +57,7 @@ import Vue from 'vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
 
 interface SelectProductionToLoseModel {
     megacredits: number;
@@ -76,7 +76,7 @@ export default Vue.extend({
       type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectProductionToLoseResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -144,7 +144,7 @@ export default Vue.extend({
       this.$data[type] = newValue;
     },
     saveData() {
-      const htp: Units = {
+      const units: Units = {
         megacredits: this.$data.megacredits,
         steel: this.$data.steel,
         titanium: this.$data.titanium,
@@ -165,9 +165,7 @@ export default Vue.extend({
         return;
       }
 
-      this.onsave([[
-        JSON.stringify(htp),
-      ]]);
+      this.onsave({type: 'productionToLose', units});
     },
   },
 });

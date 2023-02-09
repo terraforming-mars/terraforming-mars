@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 
 import {LobbyHalls} from '../../src/server/cards/pathfinders/LobbyHalls';
-import {Tags} from '../../src/common/cards/Tags';
+import {Tag} from '../../src/common/cards/Tag';
 import {deserializeProjectCard, serializeProjectCard} from '../../src/server/cards/CardSerialization';
 import {CardFinder} from '../../src/server/CardFinder';
 import {cast} from '../TestingUtils';
@@ -14,27 +14,27 @@ describe('CardSerialization', function() {
   });
   it('undefiend clone tags serialize and deserialize', function() {
     const card = new LobbyHalls();
-    expect(card.tags).deep.eq([Tags.CLONE, Tags.BUILDING]);
+    expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
     const serializedCard = serializeProjectCard(card);
 
-    expect(serializedCard.cloneTag).eq(Tags.CLONE);
+    expect(serializedCard.cloneTag).eq(Tag.CLONE);
     const deserialized = deserializeProjectCard(serializedCard, cardFinder);
     const lobbyHalls = cast(deserialized, LobbyHalls);
-    expect(lobbyHalls.cloneTag).eq(Tags.CLONE);
-    expect(lobbyHalls.tags).deep.eq([Tags.CLONE, Tags.BUILDING]);
+    expect(lobbyHalls.cloneTag).eq(Tag.CLONE);
+    expect(lobbyHalls.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
   });
 
   it('defined clone tags serialize and deserialize', function() {
     const card = new LobbyHalls();
-    card.cloneTag = Tags.SCIENCE;
+    card.cloneTag = Tag.SCIENCE;
     const serializedCard = serializeProjectCard(card);
 
-    expect(serializedCard.cloneTag).eq(Tags.SCIENCE);
+    expect(serializedCard.cloneTag).eq(Tag.SCIENCE);
 
     const deserialized = deserializeProjectCard(serializedCard, cardFinder);
     const lobbyHalls = cast(deserialized, LobbyHalls);
-    expect(lobbyHalls.cloneTag).eq(Tags.SCIENCE);
-    expect(lobbyHalls.tags).deep.eq([Tags.SCIENCE, Tags.BUILDING]);
+    expect(lobbyHalls.cloneTag).eq(Tag.SCIENCE);
+    expect(lobbyHalls.tags).deep.eq([Tag.SCIENCE, Tag.BUILDING]);
   });
 });

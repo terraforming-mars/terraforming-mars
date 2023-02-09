@@ -9,7 +9,7 @@ import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/server/turmoil/parti
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {fakeCard, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 
 describe('HighTempSuperconductors', function() {
@@ -35,20 +35,20 @@ describe('HighTempSuperconductors', function() {
 
   it('play', function() {
     card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 2}));
+    expect(player.production.asUnits()).deep.eq(Units.of({energy: 2}));
   });
 
   it('discount power tag', function() {
     player.playedCards.push(card);
 
     // Not power tag
-    const cost10 = fakeCard({cost: 10, tags: [Tags.CITY]});
+    const cost10 = fakeCard({cost: 10, tags: [Tag.CITY]});
     player.megaCredits = 9;
     expect(player.canPlay(cost10)).is.false;
     player.megaCredits = 10;
     expect(player.canPlay(cost10)).is.true;
 
-    const cost10WithTag = fakeCard({cost: 10, tags: [Tags.ENERGY]});
+    const cost10WithTag = fakeCard({cost: 10, tags: [Tag.POWER]});
     player.megaCredits = 6;
     expect(player.canPlay(cost10WithTag)).is.false;
     player.megaCredits = 7;

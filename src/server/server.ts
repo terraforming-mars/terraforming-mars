@@ -7,25 +7,26 @@ require('console-stamp')(
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
-import * as raw_settings from './genfiles/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 import * as prometheus from 'prom-client';
 
 import {Database} from './database/Database';
-import {GameHandler} from './routes/Game';
+import {serverId} from './server-ids';
 import {Route} from './routes/Route';
 import {processRequest} from './requestProcessor';
 import {timeAsync} from './utils/timer';
+import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
+import {Executor} from './behavior/Executor';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
 });
 
-const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();
 
 function requestHandler(req: http.IncomingMessage, res: http.ServerResponse): void {
   try {
-    processRequest(req, res, route, serverId);
+    processRequest(req, res, route);
   } catch (error) {
     route.internalServerError(req, res, error);
   }
@@ -76,6 +77,7 @@ async function start() {
     app: 'terraforming-mars-app',
   });
   prometheus.collectDefaultMetrics();
+  registerBehaviorExecutor(new Executor());
 
   const server = createServer();
 
@@ -99,15 +101,11 @@ async function start() {
 
   server.listen(port);
 
-  console.log(
-    'The secret serverId for this server is \x1b[1m' +
-  serverId +
-  '\x1b[0m. Use it to access the following administrative routes:',
-  );
-  console.log(
-    '* Overview of existing games: /games-overview?serverId=' + serverId,
-  );
-  console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
+  if (!process.env.SERVER_ID) {
+    console.log(`The secret serverId for this server is \x1b[1m${serverId}\x1b[0m.`);
+    console.log(`Adminsitrative routes can be found at admin?serverId=${serverId}`);
+  }
+  console.log('Server is ready.');
 }
 
 try {

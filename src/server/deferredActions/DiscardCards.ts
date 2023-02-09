@@ -14,7 +14,7 @@ export class DiscardCards extends DeferredAction {
   public execute() {
     if (this.player.cardsInHand.length <= this.count) {
       const cards = this.player.cardsInHand.splice(0, this.player.cardsInHand.length);
-      cards.forEach((card) => this.player.game.dealer.discard(card));
+      cards.forEach((card) => this.player.game.projectDeck.discard(card));
       return undefined;
     }
     return new SelectCard(
@@ -24,7 +24,7 @@ export class DiscardCards extends DeferredAction {
       (cards) => {
         for (const card of cards) {
           this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
-          this.player.game.dealer.discard(card);
+          this.player.game.projectDeck.discard(card);
         }
         return undefined;
       },

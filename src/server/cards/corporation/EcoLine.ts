@@ -1,8 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
+import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,8 +11,14 @@ export class EcoLine extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.ECOLINE,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
       startingMegaCredits: 36,
+
+      behavior: {
+        production: {plants: 2},
+        stock: {plants: 3},
+        greeneryDiscount: 1,
+      },
 
       metadata: {
         cardNumber: 'R17',
@@ -30,11 +34,5 @@ export class EcoLine extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 2);
-    player.plants = 3;
-    player.plantsNeededForGreenery = 7;
-    return undefined;
   }
 }

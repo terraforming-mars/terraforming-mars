@@ -1,32 +1,43 @@
 import {ICard} from './cards/ICard';
-import {ICardFactory} from './cards/ICardFactory';
 import {IProjectCard} from './cards/IProjectCard';
-import {CardManifest} from './cards/CardManifest';
+import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
-import {Deck} from './Deck';
-import {PreludeCard} from './cards/prelude/PreludeCard';
-import {ALL_CARD_MANIFESTS} from './cards/AllCards';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {ICeoCard} from './cards/ceos/ICeoCard';
+import {ALL_MODULE_MANIFESTS} from './cards/AllCards';
+
+const CARD_RENAMES = new Map<string, CardName>([
+  // When renaming a card, add the old name here (like the example below), and add a TODO (like the example below)
+  // And remember to add a test in CardFinder.spec.ts.
+
+  // TODO(yournamehere): remove after 2021-04-05
+  // ['Earth Embasy', CardName.EARTH_EMBASSY],
+]);
 
 export class CardFinder {
-  private getCardByName<T extends ICard>(cardName: CardName, decks: (manifest: CardManifest) => Array<Deck<T>>): T | undefined {
-    let found : (ICardFactory<T> | undefined);
-    ALL_CARD_MANIFESTS.some((manifest) => {
-      decks(manifest).some((deck) => {
-        found = deck.findByCardName(cardName);
-        return found;
-      });
-      return found;
-    });
-    if (found !== undefined) {
-      return new found.Factory();
+  private getCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {
+    const standardizedCardName = CARD_RENAMES.get(cardName) || cardName;
+
+    for (const moduleManifest of ALL_MODULE_MANIFESTS) {
+      for (const manifestName of cardManifestNames) {
+        const cardManifest = <CardManifest<T>> moduleManifest[manifestName];
+        const factory = cardManifest[standardizedCardName];
+        if (factory !== undefined) {
+          return new factory.Factory();
+        }
+      }
     }
     console.warn(`card not found ${cardName}`);
     return undefined;
   }
 
+  public getCardByName(cardName: CardName): ICard | undefined {
+    return this.getCard(cardName, ['corporationCards', 'projectCards', 'preludeCards', 'ceoCards']);
+  }
+
   public getCorporationCardByName(cardName: CardName): ICorporationCard | undefined {
-    return this.getCardByName(cardName, (manifest) => [manifest.corporationCards]);
+    return this.getCard(cardName, ['corporationCards']);
   }
 
   // Function to return a card object by its name
@@ -34,11 +45,49 @@ export class CardFinder {
   // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
   //              another function, perhaps?
   public getProjectCardByName(cardName: CardName): IProjectCard | undefined {
-    return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards]);
+    return this.getCard(cardName, ['projectCards', 'preludeCards']);
   }
 
-  public getPreludeByName(cardName: CardName): PreludeCard | undefined {
-    return this.getCardByName(cardName, (manifest) => [manifest.preludeCards]);
+  public getPreludeByName(cardName: CardName): IPreludeCard | undefined {
+    return this.getCard(cardName, ['preludeCards']);
+  }
+
+  public getCeoByName(cardName: CardName): ICeoCard | undefined {
+    return this.getCard(cardName, ['ceoCards']);
+  }
+
+  public preludesFromJSON(cards: Array<CardName>): Array<IPreludeCard> {
+    if (cards === undefined) {
+      console.warn('missing cards calling cardsFromJSON');
+      return [];
+    }
+    const result: Array<IPreludeCard> = [];
+    cards.forEach((element: CardName) => {
+      const card = this.getPreludeByName(element);
+      if (card !== undefined) {
+        result.push(card);
+      } else {
+        console.warn(`card ${element} not found while loading game.`);
+      }
+    });
+    return result;
+  }
+
+  public ceosFromJSON(cards: Array<CardName>): Array<ICeoCard> {
+    if (cards === undefined) {
+      console.warn('missing cards calling ceosFromJSON');
+      return [];
+    }
+    const result: Array<ICeoCard> = [];
+    cards.forEach((element: CardName) => {
+      const card = this.getCeoByName(element);
+      if (card !== undefined) {
+        result.push(card);
+      } else {
+        console.warn(`card ${element} not found while loading game.`);
+      }
+    });
+    return result;
   }
 
   public cardsFromJSON(cards: Array<CardName>): Array<IProjectCard> {

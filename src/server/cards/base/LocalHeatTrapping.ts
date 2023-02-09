@@ -10,7 +10,6 @@ import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {digit} from '../Options';
 
 export class LocalHeatTrapping extends Card implements IProjectCard {
@@ -19,7 +18,8 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
-      reserveUnits: Units.of({heat: 5}),
+      // The 5 heat will be deducted in bespokePlay
+      reserveUnits: {heat: 5, deduct: false},
 
       metadata: {
         cardNumber: '190',
@@ -28,11 +28,11 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
           b.plus().plants(4, {digit});
           b.or().animals(2, {digit}).asterix();
         }),
-        description: 'Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.',
+        description: 'Spend 5 heat to gain either 4 plants, or to add 2 animals to ANOTHER card.',
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const animalCards: Array<ICard> = player.getResourceCards(CardResource.ANIMAL);
     const availableActions = new OrOptions();
 

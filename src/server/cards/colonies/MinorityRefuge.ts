@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -13,7 +13,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 5,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.MINORITY_REFUGE,
       cardType: CardType.AUTOMATED,
 
@@ -29,12 +29,12 @@ export class MinorityRefuge extends Card implements IProjectCard {
 
   public warning?: string;
 
-  public override canPlay(player: Player): boolean {
-    if (player.hasAvailableColonyTileToBuildOn() === false) {
+  public override bespokeCanPlay(player: Player): boolean {
+    if (player.colonies.getPlayableColonies().length === 0) {
       return false;
     }
 
-    const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
+    const megaCreditsProduction = player.production.megacredits;
     if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
       return true;
     } else if (megaCreditsProduction <= -4) {
@@ -52,12 +52,12 @@ export class MinorityRefuge extends Card implements IProjectCard {
     return true;
   }
 
-  public play(player: Player) {
-    const openColonies = player.getProduction(Resources.MEGACREDITS) <= -4 ?
+  public override bespokePlay(player: Player) {
+    const openColonies = player.production.megacredits <= -4 ?
       player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
       undefined;
-    player.game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge', openColonies));
-    player.addProduction(Resources.MEGACREDITS, -2);
+    player.game.defer(new BuildColony(player, {title: 'Select colony for Minority Refuge', colonies: openColonies}));
+    player.production.add(Resources.MEGACREDITS, -2);
     return undefined;
   }
 }

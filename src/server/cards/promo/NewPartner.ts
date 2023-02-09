@@ -1,15 +1,18 @@
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
-import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class NewPartner extends PreludeCard {
   constructor() {
     super({
       name: CardName.NEW_PARTNER,
+
+      behavior: {
+        production: {megacredits: 1},
+      },
 
       metadata: {
         cardNumber: 'P43',
@@ -21,12 +24,10 @@ export class NewPartner extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
-
-    const cardsDrawn: Array<IProjectCard> = [
-      player.game.dealer.dealPreludeCard(),
-      player.game.dealer.dealPreludeCard(),
+  public override bespokePlay(player: Player) {
+    const cardsDrawn: Array<IPreludeCard> = [
+      player.game.preludeDeck.draw(player.game),
+      player.game.preludeDeck.draw(player.game),
     ];
     player.game.log(
       'You drew ${0} and ${1}',

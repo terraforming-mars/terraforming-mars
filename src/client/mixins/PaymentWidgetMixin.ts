@@ -1,14 +1,15 @@
-// Common code for SelectHowToPay and SelectHowToPayForProjectCard
+// Common code for SelectPayment and SelectProjectCardToPlay
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {DATA_VALUE, SEED_VALUE} from '@/common/constants';
 import {CardResource} from '@/common/CardResource';
+import {getCard} from '../cards/ClientCardManifest';
 
-export interface SelectHowToPayModel {
+export interface SelectPaymentModel {
     card?: CardModel;
     cost: number;
     heat: number;
@@ -23,23 +24,23 @@ export interface SelectHowToPayModel {
     data?: number;
 }
 
-export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
+export interface SelectProjectCardToPlayModel extends SelectPaymentModel {
   cardName: CardName;
   card: CardModel;
   cards: Array<CardModel>;
-  tags: Array<Tags>
+  tags: Array<Tag>
   science: number;
   seeds: number;
   available: Units;
 }
 
-export interface PaymentWidgetModel extends SelectHowToPayModel {
+export interface PaymentWidgetModel extends SelectPaymentModel {
   cardName?: CardName;
   card?: CardModel;
   cards?: Array<CardModel>;
-  tags?: Array<Tags>;
+  tags?: Array<Tag>;
   available?: Units;
-  $data: SelectHowToPayModel | SelectHowToPayForProjectCardModel;
+  $data: SelectPaymentModel | SelectProjectCardToPlayModel;
   playerView: PlayerViewModel;
   playerinput: PlayerInputModel;
 }
@@ -49,23 +50,33 @@ export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'fl
 export type Unit = typeof unit[number];
 
 export const PaymentWidgetMixin = {
-  'name': 'PaymentWidgetMixin',
-  'methods': {
+  name: 'PaymentWidgetMixin',
+  methods: {
     // Please don't copy this pattern. This
     // is being used as an interim solution
     // until there is better typing on the
-    // SelectHowToPay components.
+    // SelectPayment components.
     asModel(): PaymentWidgetModel {
       return this as unknown as PaymentWidgetModel;
     },
     getMegaCreditsMax(): number {
       const model = this.asModel();
-      return Math.min(model.playerView.thisPlayer.megaCredits, model.$data.cost);
+      return Math.min(model.playerView.thisPlayer.megaCredits, model.cost);
+    },
+    canUseTitanium(): boolean {
+      throw new Error('Should be overridden');
+    },
+    canUseLunaTradeFederationTitanium(): boolean {
+      throw new Error('Should be overridden');
+    },
+    canUseLunaTradeFederationTitaniumOnly(): boolean {
+      return this.canUseTitanium() !== true && this.canUseLunaTradeFederationTitanium();
     },
     getResourceRate(resourceName: Unit): number {
       switch (resourceName) {
       case 'titanium':
-        return this.asModel().playerView.thisPlayer.titaniumValue;
+        const v = this.asModel().playerView.thisPlayer.titaniumValue;
+        return this.canUseLunaTradeFederationTitaniumOnly() === true ? v - 1 : v;
       case 'steel':
         return this.asModel().playerView.thisPlayer.steelValue;
       case 'microbes':
@@ -85,7 +96,6 @@ export const PaymentWidgetMixin = {
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${target} on this`);
       }
-
 
       const adjustedDelta = Math.min(delta, currentValue);
       if (adjustedDelta === 0) return;
@@ -137,7 +147,8 @@ export const PaymentWidgetMixin = {
         throw new Error(`can not setMaxValue for ${target} on this`);
       }
       const cost: number = this.asModel().$data.cost;
-      const amountNeed = Math.floor(cost / this.getResourceRate(target));
+      const resourceRate = this.getResourceRate(target);
+      const amountNeed = Math.floor(cost / resourceRate);
       const amountHave: number = this.getAmount(target);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
@@ -151,6 +162,9 @@ export const PaymentWidgetMixin = {
       const thisPlayer = model.playerView.thisPlayer;
       switch (target) {
       case 'heat':
+        amount = this.availableHeat();
+        break;
+
       case 'steel':
       case 'titanium':
       case 'megaCredits':
@@ -183,12 +197,22 @@ export const PaymentWidgetMixin = {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
         if (!thisPlayer.tableau.some((card) => {
-          return card.name !== CardName.DIRIGIBLES && card.resourceType === CardResource.FLOATER && (card.resources ?? 0) > 0;
+          return card.name !== CardName.DIRIGIBLES && getCard(card.name)?.resourceType === CardResource.FLOATER && (card.resources ?? 0) > 0;
         })) {
           amount = Math.max(amount - 1, 0);
         }
       }
       return amount;
     },
+    availableHeat(): number {
+      const model = this.asModel();
+      const thisPlayer = model.playerView.thisPlayer;
+      const stormcraft = thisPlayer.tableau.find((card) => card.name === CardName.STORMCRAFT_INCORPORATED);
+      if (stormcraft !== undefined && stormcraft.resources !== undefined) {
+        return thisPlayer.heat + (stormcraft.resources * 2);
+      }
+      return thisPlayer.heat;
+    },
+
   },
 };

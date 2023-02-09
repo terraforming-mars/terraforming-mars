@@ -1,4 +1,3 @@
-import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -9,6 +8,10 @@ export class SupplyDrop extends PreludeCard {
     super({
       name: CardName.SUPPLY_DROP,
 
+      behavior: {
+        stock: {titanium: 3, steel: 8, plants: 3},
+      },
+
       metadata: {
         cardNumber: 'P33',
         renderData: CardRenderer.builder((b) => {
@@ -17,12 +20,5 @@ export class SupplyDrop extends PreludeCard {
         description: 'Gain 3 titanium, 8 steel and 3 plants.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.titanium +=3;
-    player.steel +=8;
-    player.plants +=3;
-    return undefined;
   }
 }

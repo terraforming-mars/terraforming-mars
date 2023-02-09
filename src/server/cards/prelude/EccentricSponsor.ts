@@ -25,7 +25,7 @@ export class EccentricSponsor extends PreludeCard {
     return 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlayProjectCard(player));
     return undefined;
   }

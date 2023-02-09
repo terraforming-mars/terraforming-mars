@@ -1,8 +1,9 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../boards/Board';
@@ -19,7 +20,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.ELECTION,
-      description: 'Count your influence plus Building tags and City tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).',
+      description: 'Count your influence plus building tags and city tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.MARS,
       renderData: RENDER_DATA,
@@ -73,7 +74,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   }
 
   public getScore(player: Player, turmoil: Turmoil, game: Game) {
-    const score = player.getTagCount(Tags.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
+    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
 
     const cities = game.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.player === player,

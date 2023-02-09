@@ -1,21 +1,18 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('LTFPrivileges', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: LTFPrivileges;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new LTFPrivileges();
   });
 

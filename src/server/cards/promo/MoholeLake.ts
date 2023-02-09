@@ -1,13 +1,12 @@
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MoholeLake extends Card implements IActionCard, IProjectCard {
@@ -15,9 +14,14 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.MOHOLE_LAKE,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 31,
-      tr: {temperature: 1, oceans: 1},
+
+      behavior: {
+        stock: {plants: 3},
+        global: {temperature: 1},
+        ocean: {},
+      },
 
       metadata: {
         cardNumber: 'X27',
@@ -31,13 +35,6 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
         description: 'Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.game.increaseTemperature(player, 1);
-    player.game.defer(new PlaceOceanTile(player));
-    player.plants += 3;
-    return undefined;
   }
 
   public canAct(): boolean {

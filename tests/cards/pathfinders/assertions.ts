@@ -14,16 +14,16 @@ export function assertSendDelegateToArea(player: Player, action: DeferredAction)
 
   const game = player.game;
   const turmoil = game.turmoil!;
-  const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+  const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
-  const delegatesInReserve = turmoil.getAvailableDelegateCount(player.id, 'reserve');
-  const delegatesInParty = marsFirst.getDelegates(player.id);
+  const delegatesInReserve = turmoil.getAvailableDelegateCount(player.id);
+  const delegatesInParty = marsFirst.delegates.get(player.id);
 
   const options = cast(sendDelegate.execute(), SelectPartyToSendDelegate);
   options.cb(marsFirst.name);
 
-  expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(delegatesInReserve - 1);
-  expect(marsFirst.getDelegates(player.id)).eq(delegatesInParty + 1);
+  expect(turmoil.getAvailableDelegateCount(player.id)).eq(delegatesInReserve - 1);
+  expect(marsFirst.delegates.get(player.id)).eq(delegatesInParty + 1);
 }
 
 export function assertPlaceCityTile(player: Player, action: DeferredAction) {

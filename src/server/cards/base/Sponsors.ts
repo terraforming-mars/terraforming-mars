@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -12,8 +10,12 @@ export class Sponsors extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SPONSORS,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 6,
+
+      behavior: {
+        production: {megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '068',
@@ -23,9 +25,5 @@ export class Sponsors extends Card implements IProjectCard {
         description: 'Increase your M€ production 2 steps.',
       },
     });
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
-    return undefined;
   }
 }

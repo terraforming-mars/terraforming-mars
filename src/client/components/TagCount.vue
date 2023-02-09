@@ -9,14 +9,14 @@
 
 import Vue from 'vue';
 import Tag from '@/client/components/Tag.vue';
-import {Tags} from '@/common/cards/Tags';
+import {Tag as CardTag} from '@/common/cards/Tag';
 import {SpecialTags} from '@/client/cards/SpecialTags';
 
 export default Vue.extend({
   name: 'tag-count',
   props: {
     tag: {
-      type: String as () => Tags|SpecialTags|'escape',
+      type: String as () => CardTag|SpecialTags|'escape',
     },
     count: {
       type: Number,

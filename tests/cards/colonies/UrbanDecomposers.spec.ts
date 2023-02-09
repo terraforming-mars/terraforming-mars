@@ -6,27 +6,27 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('UrbanDecomposers', function() {
   let card: UrbanDecomposers;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
+  let luna: Luna;
 
   beforeEach(function() {
     card = new UrbanDecomposers();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, redPlayer], player);
+    luna = new Luna();
+    game.colonies.push(luna);
   });
 
   it('Can not play if player has no city', function() {
-    const colony = new Luna();
-    colony.colonies.push(player.id);
-    player.game.colonies.push(colony);
+    luna.colonies.push(player.id);
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -42,13 +42,11 @@ describe('UrbanDecomposers', function() {
     lands[0].player = player;
     lands[0].tile = {tileType: TileType.CITY};
 
-    const colony = new Luna();
-    colony.colonies.push(player.id);
-    player.game.colonies.push(colony);
+    luna.colonies.push(player.id);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 
   it('Should play with single target', function() {
@@ -61,7 +59,7 @@ describe('UrbanDecomposers', function() {
     game.deferredActions.pop();
     expect(input).is.undefined;
     expect(decomposers.resourceCount).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 
   it('Should play with multiple targets', function() {
@@ -73,9 +71,9 @@ describe('UrbanDecomposers', function() {
     expect(game.deferredActions).has.lengthOf(1);
 
     // add two microbes to Ants
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([ants]);
     expect(ants.resourceCount).to.eq(2);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 });

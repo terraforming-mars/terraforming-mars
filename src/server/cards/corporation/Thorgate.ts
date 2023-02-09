@@ -1,8 +1,6 @@
 import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
-import {Player} from '../../Player';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from './ICorporationCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,10 +11,14 @@ export class Thorgate extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THORGATE,
-      tags: [Tags.ENERGY],
+      tags: [Tag.POWER],
       startingMegaCredits: 48,
 
-      cardDiscount: {tag: Tags.ENERGY, amount: 3},
+      behavior: {
+        production: {energy: 1},
+      },
+
+      cardDiscount: {tag: Tag.POWER, amount: 3},
       metadata: {
         cardNumber: 'R13',
         description: 'You start with 1 energy production and 48 M€.',
@@ -32,11 +34,6 @@ export class Thorgate extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 1);
-    return undefined;
   }
 }
 

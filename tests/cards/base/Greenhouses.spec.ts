@@ -14,9 +14,9 @@ describe('Greenhouses', function() {
     expect(action).is.undefined;
     expect(player.plants).to.eq(0);
 
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    game.addCityTile(redPlayer, game.board.getAvailableSpacesOnLand(redPlayer)[0].id);
+    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
+    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0]);
+    game.addCityTile(redPlayer, game.board.getAvailableSpacesOnLand(redPlayer)[0]);
     card.play(player);
 
     expect(player.plants).to.eq(3);

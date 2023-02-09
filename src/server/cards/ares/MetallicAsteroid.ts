@@ -1,15 +1,10 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {Player} from '../../Player';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 
@@ -18,8 +13,20 @@ export class MetallicAsteroid extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.METALLIC_ASTEROID,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 13,
+
+      behavior: {
+        stock: {titanium: 1},
+        global: {temperature: 1},
+        removeAnyPlants: 4,
+        tile: {
+          type: TileType.METALLIC_ASTEROID,
+          on: 'land',
+          title: 'Select space for Metallic Asteroid tile',
+          adjacencyBonus: {bonus: [SpaceBonus.TITANIUM]},
+        },
+      },
 
       metadata: {
         cardNumber: 'A13',
@@ -30,20 +37,6 @@ export class MetallicAsteroid extends Card implements IProjectCard {
         }),
         description: 'Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.',
       },
-    });
-  }
-  public play(player: Player) {
-    player.titanium++;
-    player.game.increaseTemperature(player, 1);
-    player.game.defer(new RemoveAnyPlants(player, 4));
-
-    return new SelectSpace('Select space for Metallic Asteroid tile', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
-      player.game.addTile(player, SpaceType.LAND, space, {
-        tileType: TileType.METALLIC_ASTEROID,
-        card: this.name,
-      });
-      space.adjacency = {bonus: [SpaceBonus.TITANIUM]};
-      return undefined;
     });
   }
 }

@@ -1,20 +1,19 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {IResourceCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class TitanAirScrapping extends Card implements IProjectCard, IResourceCard {
+export class TitanAirScrapping extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 21,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       name: CardName.TITAN_AIRSCRAPPING,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
@@ -35,7 +34,6 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     });
   }
 
-  public override resourceCount: number = 0;
 
   public canAct(player: Player): boolean {
     if (player.titanium > 0) {
@@ -78,10 +76,6 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
   private spendResource(player: Player) {
     player.removeResourceFrom(this, 2);
     player.increaseTerraformRating();
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -11,10 +10,14 @@ export class SolarProbe extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 9,
-      tags: [Tags.SPACE, Tags.SCIENCE],
+      tags: [Tag.SPACE, Tag.SCIENCE],
       name: CardName.SOLAR_PROBE,
       cardType: CardType.EVENT,
       victoryPoints: 1,
+
+      behavior: {
+        drawCard: {count: {tag: Tag.SCIENCE, per: 3}},
+      },
 
       metadata: {
         cardNumber: 'C37',
@@ -24,10 +27,5 @@ export class SolarProbe extends Card implements IProjectCard {
         description: 'Draw 1 card for every 3 science tags you have, including this.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.drawCard(Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3));
-    return undefined;
   }
 }

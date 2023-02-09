@@ -3,8 +3,8 @@
   "Communities": "Gemeinden",
   "Arcadian Communities": "Arkadische Gemeinden",
   "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Du beginnst mit 40 M€ und 10 Stahl. ALS DEINE ERSTE AKTION, PLATZIERE EINE GEMEINDE [SPIELER-MARKER] AUF EIN NICHT-RESERVIERTES FELD.",
-  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "AKTION: Platziere eine Gemeinde (Spieler-Marker) auf einem unbesetzten Feld neben einem deiner Plättchen oder markierten Felder",
-  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "EFFEKT: Markierte Felder sind für dich reserviert. Wenn du dort ein Plättchen platzierst, erhalte 3 M€",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "AKTION: Platziere eine Gemeinde (Spieler-Marker) auf einem unbesetzten Feld neben einem deiner Plättchen oder markierten Felder",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "EFFEKT: Markierte Felder sind für dich reserviert. Wenn du dort ein Plättchen platzierst, erhalte 3 M€",
 
   "Astrodrill": "Astrodrill",
   "Astrodrill ENT": "Astrodrill",
@@ -45,5 +45,5 @@
   "TACTICAL GENOMICS": "TAKTISCHE GENTECHNIK",
   "Splice": "Splice",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Du beginnst mit 44 M€. Als deine erste Aktion, decke solange Karten auf, bis du ein Mikrobensymbol gefunden hast. Nehme diese Karte und wirf die anderen Karten ab.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "EFFEKT: Wenn ein Mikrobensymbol von einem beliebigen Spieler gespielt wird (inklusive disem), enthält DIESER SPIELER 2 M€ oder fügt eine Mikrobe zu DER GESPIELTEN Karte hinzu. Du erhältst 2 M€."
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "EFFEKT: Wenn ein Mikrobensymbol von einem beliebigen Spieler gespielt wird (inklusive disem), erhält JENER Spieler 2 M€ oder fügt JENER Karte 1 Mikrobe hinzu, UND du erhältst 2 M€."
 }

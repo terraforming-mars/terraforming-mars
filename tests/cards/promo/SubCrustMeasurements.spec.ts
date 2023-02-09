@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {SubCrustMeasurements} from '../../../src/server/cards/promo/SubCrustMeasurements';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SubCrustMeasurements', function() {
   let card: SubCrustMeasurements;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new SubCrustMeasurements();
@@ -24,7 +23,7 @@ describe('SubCrustMeasurements', function() {
     player.playedCards.push(new Research());
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    card.play();
+    card.play(player);
     expect(card.getVictoryPoints()).to.eq(2);
   });
 

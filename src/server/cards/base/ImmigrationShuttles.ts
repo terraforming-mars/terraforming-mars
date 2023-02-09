@@ -1,9 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -13,9 +12,13 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.IMMIGRATION_SHUTTLES,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tag.EARTH, Tag.SPACE],
       cost: 31,
       victoryPoints: 'special',
+
+      behavior: {
+        production: {megacredits: 5},
+      },
 
       metadata: {
         cardNumber: '198',
@@ -30,9 +33,5 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
   }
   public override getVictoryPoints(player: Player) {
     return Math.floor(player.game.getCitiesCount() / 3);
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 5);
-    return undefined;
   }
 }

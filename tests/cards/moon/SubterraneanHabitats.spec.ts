@@ -1,15 +1,13 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {TheWomb} from '../../../src/server/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
-import {MoonColonyStandardProject} from '../../../src/server/cards/moon/MoonColonyStandardProject';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
 
 describe('SubterraneanHabitats', () => {
   let game: Game;
@@ -19,7 +17,7 @@ describe('SubterraneanHabitats', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new SubterraneanHabitats();
   });
@@ -49,7 +47,7 @@ describe('SubterraneanHabitats', () => {
   it('effect', () => {
     // This test and the next show that The Womb needs 2 titanium.
     const theWomb = new TheWomb();
-    player.setProductionForTest({energy: 2});
+    player.production.override({energy: 2});
     player.titanium = 2;
     player.megaCredits = 1000;
 
@@ -68,7 +66,7 @@ describe('SubterraneanHabitats', () => {
     player.titanium = 1;
     player.megaCredits = 1000;
 
-    const projectCard = new MoonColonyStandardProject();
+    const projectCard = new MoonHabitatStandardProject();
     expect(projectCard.canAct(player)).is.true;
 
     player.titanium = 0;

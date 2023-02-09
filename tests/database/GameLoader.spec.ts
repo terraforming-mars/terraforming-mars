@@ -15,7 +15,7 @@ import {FakeClock} from '../common/FakeClock';
 
 class TestDatabase extends InMemoryDatabase {
   public failure: 'getGameIds' | 'getParticipants' | undefined = undefined;
-  public getGameSleep: number = 0;
+  public getGameSleep = 0;
 
   override async getGame(gameId: GameId): Promise<SerializedGame> {
     const game = await super.getGame(gameId);
@@ -156,7 +156,7 @@ describe('GameLoader', function() {
   it('waits for games to finish loading', async function() {
     // Set up a clean number of games;
     database.data.delete('gameid');
-    const numberOfGames : number = 10;
+    const numberOfGames = 10;
     for (let i = 0; i < numberOfGames; i++) {
       const player = new Player('name', Color.BLUE, false, 0, 'p-' + i as PlayerId);
       Game.newInstance('game-' + i as GameId, [player], player);
@@ -200,5 +200,31 @@ describe('GameLoader', function() {
     clock.millis = 105;
     instance.sweep();
     expect(await instance.isCached('gameid')).is.false;
+  });
+
+  it('restoreGameAt', async () => {
+    game.generation = 12;
+    game.save();
+
+    expect(game.lastSaveId).eq(2);
+
+    game.generation = 13;
+    game.save();
+
+    expect(game.lastSaveId).eq(3);
+    game.save();
+
+    game.generation = 14;
+    expect(game.lastSaveId).eq(4);
+
+    expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
+
+    const newGame = await instance.restoreGameAt(game.id, 2);
+
+    expect(newGame.generation).eq(13);
+    // This may seem strange, but what's happening is that the save id is
+    // incremented at the end of save(). It loads #2, and increments.
+    expect(newGame.lastSaveId).eq(3);
+    expect(await database.getSaveIds(game.id)).deep.eq([0, 1, 2]);
   });
 });

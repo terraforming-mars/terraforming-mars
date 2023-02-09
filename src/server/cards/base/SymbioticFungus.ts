@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
@@ -15,7 +15,7 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.SYMBIOTIC_FUNGUS,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 4,
 
       requirements: CardRequirements.builder((b) => b.temperature(-14)),
@@ -29,9 +29,6 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
         description: 'Requires -14 C° or warmer.',
       },
     });
-  }
-  public play() {
-    return undefined;
   }
   public canAct(): boolean {
     return true;

@@ -1,22 +1,22 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 
 export class MagneticFieldDome extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MAGNETIC_FIELD_DOME,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 5,
-      productionBox: Units.of({energy: -2, plants: 1}),
-      tr: {tr: 1},
+
+      behavior: {
+        production: {energy: -2, plants: 1},
+        tr: 1,
+      },
 
       metadata: {
         cardNumber: '171',
@@ -27,19 +27,8 @@ export class MagneticFieldDome extends Card implements IProjectCard {
           });
           b.tr(1);
         }),
-        description: 'Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.',
+        description: 'Decrease your energy production 2 steps and increase your plant production 1 step. Raise your TR 1 step.',
       },
     });
-  }
-
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2;
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.PLANTS, 1);
-    player.increaseTerraformRating();
-    return undefined;
   }
 }

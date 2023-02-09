@@ -1,10 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -13,12 +11,17 @@ export class Asteroid extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.ASTEROID,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 14,
-      tr: {temperature: 1},
+
+      behavior: {
+        stock: {titanium: 2},
+        global: {temperature: 1},
+        removeAnyPlants: 3,
+      },
 
       metadata: {
-        description: 'Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.',
+        description: 'Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.',
         cardNumber: '009',
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).br;
@@ -27,12 +30,5 @@ export class Asteroid extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.game.increaseTemperature(player, 1);
-    player.game.defer(new RemoveAnyPlants(player, 3));
-    player.titanium += 2;
-    return undefined;
   }
 }

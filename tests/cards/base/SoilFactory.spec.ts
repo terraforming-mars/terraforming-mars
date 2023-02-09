@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {SoilFactory} from '../../../src/server/cards/base/SoilFactory';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SoilFactory', function() {
   let card: SoilFactory;
@@ -9,7 +10,8 @@ describe('SoilFactory', function() {
 
   beforeEach(function() {
     card = new SoilFactory();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {
@@ -17,12 +19,12 @@ describe('SoilFactory', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.plants).to.eq(1);
 
     expect(card.getVictoryPoints()).to.eq(1);
   });

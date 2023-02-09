@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Penguins', function() {
   let card: Penguins;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Penguins();

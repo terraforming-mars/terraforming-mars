@@ -1,20 +1,16 @@
 import {expect} from 'chai';
 import {LunaMetropolis} from '../../../src/server/cards/venusNext/LunaMetropolis';
-import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {testGameOptions} from '../../TestingUtils';
 
 describe('LunaMetropolis', function() {
   it('Should play', function() {
     const card = new LunaMetropolis();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    const game = newTestGame(2, testGameOptions({venusNextExtension: true}));
+    const player = getTestPlayer(game, 0);
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

@@ -20,6 +20,6 @@ describe('HydrogenBombardment', function() {
     card.play(player);
     expect(game.getVenusScaleLevel()).to.eq(2);
     expect(player.megaCredits).eq(6);
-    expect(player.getProductionForTest()).deep.eq(Units.of({titanium: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({titanium: 1}));
   });
 });

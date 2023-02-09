@@ -1,12 +1,12 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {IAward} from '../IAward';
 
 export class Biologist implements IAward {
-  public name: string = 'Biologist';
-  public description: string = 'Having the most Animal, Plant, and Microbe tags in play';
+  public readonly name = 'Biologist';
+  public readonly description = 'Having the most animal, plant, and microbe tags in play';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.MICROBE, 'award') + player.getTagCount(Tags.PLANT, 'award') + player.getTagCount(Tags.ANIMAL, 'award');
+    return player.tags.multipleCount([Tag.MICROBE, Tag.PLANT, Tag.ANIMAL], 'awards');
   }
 }

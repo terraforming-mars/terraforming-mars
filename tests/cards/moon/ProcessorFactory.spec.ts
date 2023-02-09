@@ -1,19 +1,16 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {runNextAction, setCustomGameOptions} from '../../TestingUtils';
+import {runNextAction, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ProcessorFactory} from '../../../src/server/cards/moon/ProcessorFactory';
 import {expect} from 'chai';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('ProcessorFactory', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: ProcessorFactory;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new ProcessorFactory();
   });
 

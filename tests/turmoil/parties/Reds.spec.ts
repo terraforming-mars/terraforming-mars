@@ -2,15 +2,14 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, runAllActions, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, runAllActions, testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
 import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
-import {Resources} from '../../../src/common/Resources';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('Reds', function() {
   let player: TestPlayer;
-  let secondPlayer : TestPlayer;
+  let secondPlayer: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let reds: Reds;
@@ -18,8 +17,7 @@ describe('Reds', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     secondPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, secondPlayer], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     reds = new Reds();
   });
@@ -73,7 +71,7 @@ describe('Reds', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[1].id);
 
     player.megaCredits = 3;
-    game.addGreenery(player, '10');
+    addGreenery(player, '10');
     runAllActions(game);
     expect(player.megaCredits).to.eq(0);
   });
@@ -97,17 +95,17 @@ describe('Reds', function() {
 
   it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step: Moon', function() {
     // Reset the whole game infrastructure to include the Moon
-    const gameOptions = setCustomGameOptions({moonExpansion: true});
+    const gameOptions = testGameOptions({turmoilExtension: true, moonExpansion: true});
     game = Game.newInstance('gameid', [player, secondPlayer], player, gameOptions);
     turmoil = game.turmoil!;
-    player.popWaitingFor(); // Remove SelectInitialCards
+    player.popSelectInitialCards();
 
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[2].id);
 
     const redsPolicy = REDS_POLICY_3;
     player.megaCredits = 7;
 
-    MoonExpansion.raiseColonyRate(secondPlayer, 1);
+    MoonExpansion.raiseHabitatRate(secondPlayer, 1);
     MoonExpansion.raiseMiningRate(secondPlayer, 1);
     MoonExpansion.raiseLogisticRate(secondPlayer, 1);
 
@@ -128,6 +126,6 @@ describe('Reds', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[3].id);
 
     game.increaseOxygenLevel(player, 1);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+    expect(player.production.megacredits).to.eq(-1);
   });
 });

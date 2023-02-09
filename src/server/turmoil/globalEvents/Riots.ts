@@ -1,4 +1,5 @@
-import {GlobalEvent, IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
@@ -16,7 +17,7 @@ export class Riots extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.RIOTS,
-      description: 'Lose 4 M€ for each City tile (max 5, then reduced by influence).',
+      description: 'Lose 4 M€ for each city tile (max 5, then reduced by influence).',
       revealedDelegate: PartyName.MARS,
       currentDelegate: PartyName.REDS,
       renderData: RENDER_DATA,

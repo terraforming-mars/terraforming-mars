@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SmallAnimals', function() {
   let card: SmallAnimals;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -19,7 +18,7 @@ describe('SmallAnimals', function() {
   });
 
   it('Can not play if oxygen level too low', function() {
-    player2.addProduction(Resources.PLANTS, 1);
+    player2.production.add(Resources.PLANTS, 1);
     (game as any).oxygenLevel = 5;
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
@@ -37,14 +36,14 @@ describe('SmallAnimals', function() {
 
   it('Should play', function() {
     (game as any).oxygenLevel = 6;
-    player2.addProduction(Resources.PLANTS, 1);
+    player2.production.add(Resources.PLANTS, 1);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     player.playedCards.push(card);
     card.play(player);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
-    expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
+    expect(player2.production.plants).to.eq(0);
   });
 
   it('Gives victory points', function() {

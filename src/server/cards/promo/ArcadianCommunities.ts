@@ -18,6 +18,10 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
       startingMegaCredits: 40,
       initialActionText: 'Place a community (player marker) on a non-reserved area',
 
+      behavior: {
+        stock: {steel: 10},
+      },
+
       metadata: {
         cardNumber: 'R44',
         description: 'You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.',
@@ -25,9 +29,9 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
           b.br;
           b.megacredits(40).nbsp.steel(10, {digit}).nbsp.community().asterix();
           b.corpBox('action', (ce) => {
-            ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS', Size.TINY, true);
+            ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.', Size.TINY, true);
             ce.vSpace(Size.MEDIUM);
-            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€', Size.TINY, true);
+            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.', Size.TINY, true);
           });
         }),
       },
@@ -38,8 +42,8 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getAvailableSpacesOnLand(player),
-      (foundSpace: ISpace) => {
-        foundSpace.player = player;
+      (space: ISpace) => {
+        space.player = player;
 
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
 
@@ -69,15 +73,10 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     return new SelectSpace(
       'Select space for claim',
       this.getAvailableSpacesForMarker(player),
-      (foundSpace: ISpace) => {
-        foundSpace.player = player;
+      (space: ISpace) => {
+        space.player = player;
         return undefined;
       },
     );
-  }
-
-  public play(player: Player) {
-    player.steel = 10;
-    return undefined;
   }
 }

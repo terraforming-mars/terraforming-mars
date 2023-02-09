@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {RadChemFactory} from '../../../src/server/cards/base/RadChemFactory';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('RadChemFactory', function() {
   let card: RadChemFactory;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new RadChemFactory();
@@ -21,11 +20,11 @@ describe('RadChemFactory', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(0);
     expect(player.getTerraformRating()).to.eq(22);
   });
 });

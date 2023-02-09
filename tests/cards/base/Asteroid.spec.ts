@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Asteroid} from '../../../src/server/cards/base/Asteroid';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 
@@ -26,10 +25,10 @@ describe('Asteroid', function() {
 
     const orOptions = cast(player.getWaitingFor(), OrOptions);
     orOptions.options[1].cb(); // do nothing
-    expect(player2.getResource(Resources.PLANTS)).to.eq(2);
+    expect(player2.plants).to.eq(2);
 
     orOptions.options[0].cb(); // remove plants
-    expect(player2.getResource(Resources.PLANTS)).to.eq(0);
+    expect(player2.plants).to.eq(0);
 
     expect(player.titanium).to.eq(2);
     expect(game.getTemperature()).to.eq(-28);

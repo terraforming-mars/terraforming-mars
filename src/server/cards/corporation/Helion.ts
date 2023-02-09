@@ -1,8 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,8 +12,12 @@ export class Helion extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.HELION,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       startingMegaCredits: 42,
+
+      behavior: {
+        production: {heat: 3},
+      },
 
       metadata: {
         cardNumber: 'R18',
@@ -31,9 +34,8 @@ export class Helion extends Card implements ICorporationCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.canUseHeatAsMegaCredits = true;
-    player.addProduction(Resources.HEAT, 3);
     return undefined;
   }
 }

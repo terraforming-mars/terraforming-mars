@@ -1,8 +1,7 @@
 import {Card} from '../Card';
 import {ICorporationCard} from './ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
-import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../../common/Resources';
@@ -21,9 +20,13 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THARSIS_REPUBLIC,
-      tags: [Tags.BUILDING],
-      initialActionText: 'Place a city tile',
+      tags: [Tag.BUILDING],
       startingMegaCredits: 40,
+
+      firstAction: {
+        text: 'Place a city tile',
+        city: {},
+      },
 
       metadata: {
         cardNumber: 'R31',
@@ -43,14 +46,6 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     });
   }
 
-  public initialAction(player: Player) {
-    return new SelectSpace('Select space on Mars for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space.id);
-      player.game.log('${0} placed a City tile', (b) => b.player(player));
-      return undefined;
-    });
-  }
-
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       if (cardOwner.id === activePlayer.id) {
@@ -66,10 +61,10 @@ export class TharsisRepublic extends Card implements ICorporationCard {
     return;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     if (player.game.isSoloMode()) {
       // Get bonus for 2 neutral cities
-      player.addProduction(Resources.MEGACREDITS, 2);
+      player.production.add(Resources.MEGACREDITS, 2);
     }
     return undefined;
   }

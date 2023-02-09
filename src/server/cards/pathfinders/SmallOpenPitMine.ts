@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -16,7 +16,7 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.SMALL_OPEN_PIT_MINE,
       cost: 10,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
 
       metadata: {
         cardNumber: 'Pf31',
@@ -32,17 +32,17 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
     player.game.defer(new SimpleDeferredAction(player, () => {
       return new OrOptions(
         new SelectOption('Increase your steel production 2 steps', 'Increase', () => {
-          player.addProduction(Resources.STEEL, 2, {log: true});
+          player.production.add(Resources.STEEL, 2, {log: true});
           return undefined;
         }),
         new SelectOption('Increase your titanium production 1 step', 'Increase', () => {
-          player.addProduction(Resources.TITANIUM, 1, {log: true});
+          player.production.add(Resources.TITANIUM, 1, {log: true});
           return undefined;
         }));
     }));
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.produce(player);
     return undefined;
   }

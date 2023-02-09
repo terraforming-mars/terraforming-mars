@@ -1,26 +1,22 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('AristarchusRoadNetwork', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: AristarchusRoadNetwork;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new AristarchusRoadNetwork();
   });
@@ -36,23 +32,23 @@ describe('AristarchusRoadNetwork', () => {
 
   it('play', () => {
     player.steel = 2;
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
+    expect(player.production.megacredits).eq(2);
 
-    const deferredAction = game.deferredActions.peek() as PlaceMoonRoadTile;
+    const deferredAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
     const selectSpace = deferredAction.execute()!;
     const roadSpace = selectSpace.availableSpaces[0];
     expect(roadSpace.tile).is.undefined;
     expect(roadSpace.player).is.undefined;
     expect(moonData.logisticRate).eq(0);
 
-    deferredAction!.execute()!.cb(roadSpace);
+    deferredAction.execute()!.cb(roadSpace);
     expect(roadSpace.tile!.tileType).eq(TileType.MOON_ROAD);
     expect(roadSpace.player).eq(player);
 

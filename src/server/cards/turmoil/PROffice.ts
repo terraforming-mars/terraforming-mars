@@ -1,11 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
@@ -15,9 +13,13 @@ export class PROffice extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.PR_OFFICE,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 7,
-      tr: {tr: 1},
+
+      behavior: {
+        tr: 1,
+        stock: {megacredits: {tag: Tag.EARTH}},
+      },
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
       metadata: {
@@ -29,12 +31,5 @@ export class PROffice extends Card implements IProjectCard {
         description: 'Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.increaseTerraformRating();
-    const amount = player.getTagCount(Tags.EARTH) + 1;
-    player.addResource(Resources.MEGACREDITS, amount);
-    return undefined;
   }
 }

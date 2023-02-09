@@ -7,7 +7,7 @@ import {played} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
@@ -23,6 +23,10 @@ export class MindSetMars extends Card implements ICorporationCard {
       startingMegaCredits: 44,
       resourceType: CardResource.AGENDA,
 
+      behavior: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: 'PfC23',
         description: 'You start with 44 M€ and 1 agenda resource to this card.',
@@ -32,30 +36,23 @@ export class MindSetMars extends Card implements ICorporationCard {
           b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', Size.SMALL, false, false).br;
           b.agenda({amount: 2, digit: true}).arrow(Size.SMALL).delegates(1).nbsp;
           b.agenda({amount: 5, digit: true}).arrow(Size.SMALL).city().br;
-          b.text('(Action: Spend 2 agenda resources to place 1 delegate from the reserve in any party.)', Size.SMALL, false, false).br;
+          b.text('(Action: Spend 2 agenda resources to place 1 delegate in any party.)', Size.SMALL, false, false).br;
           b.text('(Action: Spend 5 agenda resources to place a city tile on Mars.)', Size.SMALL, false, false);
         }),
       },
     });
   }
 
-  public override resourceCount = 0;
-
-  public play() {
-    this.resourceCount++;
-    return undefined;
-  }
-
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (player.game.getCardPlayer(this.name) !== player) return;
-    if (card.tags.includes(Tags.BUILDING)) {
+    if (card.tags.includes(Tag.BUILDING)) {
       player.addResourceTo(this, {qty: 1, log: true});
     }
   }
 
   private canAddDelegate(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0;
+    return this.resourceCount >= 2 && turmoil.getAvailableDelegateCount(player.id) > 0;
   }
 
   private canAddCity(player: Player) {
@@ -71,7 +68,7 @@ export class MindSetMars extends Card implements ICorporationCard {
     if (this.canAddDelegate(player)) {
       options.options.push(new SelectOption('Spend 2 agendas to add a delegate to any party', 'OK', () => {
         player.removeResourceFrom(this, 2);
-        player.game.defer(new SendDelegateToArea(player, 'Select a party', {count: 1, source: 'reserve'}));
+        player.game.defer(new SendDelegateToArea(player));
         return undefined;
       }));
     }

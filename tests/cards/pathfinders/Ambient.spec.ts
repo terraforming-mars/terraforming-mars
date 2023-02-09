@@ -4,8 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
-import {Tags} from '../../../src/common/cards/Tags';
-import {Resources} from '../../../src/common/Resources';
+import {Tag} from '../../../src/common/cards/Tag';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -28,28 +27,29 @@ describe('Ambient', function() {
     expect(game.getVenusScaleLevel()).eq(0);
     expect(player.getTerraformRating()).eq(20);
 
-    card.initialAction(player);
+    player.runInitialAction(card);
+    runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(4);
     expect(player.getTerraformRating()).eq(22);
   });
 
   it('onCardPlayed', function() {
-    expect(player.getProduction(Resources.HEAT)).eq(0);
+    expect(player.production.heat).eq(0);
 
     card.onCardPlayed(player, fakeCard({tags: []}));
-    expect(player.getProduction(Resources.HEAT)).eq(0);
+    expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tags.EARTH]}));
-    expect(player.getProduction(Resources.HEAT)).eq(0);
+    card.onCardPlayed(player, fakeCard({tags: [Tag.EARTH]}));
+    expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tags.VENUS]}));
-    expect(player.getProduction(Resources.HEAT)).eq(1);
-    expect(player2.getProduction(Resources.HEAT)).eq(0);
+    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
+    expect(player.production.heat).eq(1);
+    expect(player2.production.heat).eq(0);
 
-    card.onCardPlayed(player2, fakeCard({tags: [Tags.VENUS]}));
-    expect(player.getProduction(Resources.HEAT)).eq(1);
-    expect(player2.getProduction(Resources.HEAT)).eq(0);
+    card.onCardPlayed(player2, fakeCard({tags: [Tag.VENUS]}));
+    expect(player.production.heat).eq(1);
+    expect(player2.production.heat).eq(0);
   });
 
   it('canAct', function() {

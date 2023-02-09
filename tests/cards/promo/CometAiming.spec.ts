@@ -4,13 +4,12 @@ import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 
 describe('CometAiming', function() {
   let card: CometAiming;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new CometAiming();
@@ -20,7 +19,7 @@ describe('CometAiming', function() {
   });
 
   it('Should play', function() {
-    expect(card.play()).is.undefined;
+    expect(card.play(player)).is.undefined;
   });
 
   it('Can not act', function() {
@@ -39,7 +38,7 @@ describe('CometAiming', function() {
 
     card.action(player);
     expect(player.game.deferredActions).has.lengthOf(1);
-    const selectSpace = player.game.deferredActions.peek()!.execute() as SelectSpace;
+    const selectSpace = cast(player.game.deferredActions.peek()!.execute(), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
   });

@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -17,18 +17,23 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     super({
       cardType: CardType.CORPORATION,
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       startingMegaCredits: 43,
       resourceType: CardResource.ORBITAL,
 
+      behavior: {
+        // This is the onCardPlayed effect.
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: 'PfC23',
-        description: 'You start with 43 M€',
+        description: 'You start with 43 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(43).nbsp.nbsp.space({played, secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).colon().orbital().br;
           b.text('(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)', Size.SMALL, false, false);
           b.br;
-          b.effect('For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the standard colony project or trade action costs 1M€ less.', (eb) => {
+          b.effect('For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.', (eb) => {
             eb.space({played, secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).slash(Size.SMALL).colonies(1, {size: Size.SMALL}).slash(Size.SMALL).trade({size: Size.SMALL})
               .startEffect
               .minus().megacredits(1).text('/2').orbital();
@@ -38,20 +43,14 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     });
   }
 
-  public override resourceCount = 0;
 
-  private matchingTags(tags: Array<Tags>): boolean {
-    let spaceTag: boolean = false;
+  private matchingTags(tags: Array<Tag>): boolean {
+    let spaceTag = false;
     for (const tag of tags) {
-      if (tag === Tags.SPACE) spaceTag = true;
+      if (tag === Tag.SPACE) spaceTag = true;
       if (isPlanetaryTag(tag)) return false;
     }
     return spaceTag;
-  }
-
-  public play(player: Player) {
-    player.addResourceTo(this, 1);
-    return undefined;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {

@@ -8,14 +8,12 @@ import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
 import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NewPartner', function() {
   let card: NewPartner;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
@@ -23,24 +21,23 @@ describe('NewPartner', function() {
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions({preludeExtension: true});
-    game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({preludeExtension: true}));
   });
 
   it('Should play with at least 1 playable prelude', function() {
-    game.dealer.preludeDeck.push(new SmeltingPlant(), new Donation());
+    game.preludeDeck.drawPile.push(new SmeltingPlant(), new Donation());
 
     const selectCard = cast(card.play(player), SelectCard);
     expect(selectCard.cards).has.length(2);
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(player.playedCards.every((card) => card.cardType === CardType.PRELUDE)).is.true;
   });
 
   it('Should play with only 1 playable prelude', function() {
     // In this test, only one card is playable. play() should still return SelectCard with
     // the one card, so the player sees their option.
-    game.dealer.preludeDeck.push(new HugeAsteroid(), new Donation());
+    game.preludeDeck.drawPile.push(new HugeAsteroid(), new Donation());
 
     const selectCard = cast(card.play(player), SelectCard);
     expect(selectCard.cards).has.length(1);
@@ -51,10 +48,10 @@ describe('NewPartner', function() {
     player.megaCredits = 0;
     // Both of these cards cost MC which the player does not have, and so
     // if the player plays this they just get the MC production.
-    game.dealer.preludeDeck.push(new HugeAsteroid(), new GalileanMining());
+    game.preludeDeck.drawPile.push(new HugeAsteroid(), new GalileanMining());
 
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

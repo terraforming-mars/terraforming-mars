@@ -1,24 +1,21 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, runAllActions, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TitaniumMarketMonopolists} from '../../../src/server/cards/moon/TitaniumMarketMonopolists';
 import {expect} from 'chai';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('TitaniumMarketMonopolists', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: TitaniumMarketMonopolists;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new TitaniumMarketMonopolists();
   });
@@ -76,6 +73,7 @@ describe('TitaniumMarketMonopolists', () => {
     expect(selectAmount.min).eq(1);
     expect(selectAmount.max).eq(3);
     selectAmount.cb(2);
+    runAllActions(game);
     expect(player.megaCredits).eq(3);
     expect(player.titanium).eq(2);
   });

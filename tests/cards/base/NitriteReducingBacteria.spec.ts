@@ -3,12 +3,11 @@ import {cast} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitriteReducingBacteria', function() {
   let card: NitriteReducingBacteria;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {

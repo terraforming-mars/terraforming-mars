@@ -1,9 +1,10 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -17,7 +18,7 @@ export class Pandemic extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.PANDEMIC,
-      description: 'Lose 3 M€ for each Building tag (max 5, then reduced by influence).',
+      description: 'Lose 3 M€ for each building tag (max 5, then reduced by influence).',
       revealedDelegate: PartyName.GREENS,
       currentDelegate: PartyName.MARS,
       renderData: RENDER_DATA,
@@ -25,7 +26,7 @@ export class Pandemic extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      const maxedSteelTags = Math.min(5, player.getTagCount(Tags.BUILDING, 'raw'));
+      const maxedSteelTags = Math.min(5, player.tags.count(Tag.BUILDING, 'raw'));
       player.deductResource(Resources.MEGACREDITS, 3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }

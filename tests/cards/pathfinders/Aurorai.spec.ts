@@ -6,8 +6,8 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
-import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
-import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('Aurorai', function() {
   let card: Aurorai;
@@ -61,15 +61,15 @@ describe('Aurorai', function() {
     expect(playerInput).is.undefined;
     runAllActions(game);
 
-    const selectHowToPay = cast(player.popWaitingFor(), SelectHowToPay);
-    expect(selectHowToPay.canUseData).is.true;
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    expect(selectPayment.canUseData).is.true;
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>
-      selectHowToPay.cb({...HowToPay.EMPTY, megaCredits: 4, data: 2}),
+      selectPayment.cb({...Payment.EMPTY, megaCredits: 4, data: 2}),
     ).to.throw(/Did not spend enough/);
 
-    selectHowToPay.cb({...HowToPay.EMPTY, megaCredits: 8, data: 2});
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 8, data: 2});
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
     expect(player.getSpendableData()).eq(1);

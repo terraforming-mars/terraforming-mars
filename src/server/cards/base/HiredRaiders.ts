@@ -29,7 +29,7 @@ export class HiredRaiders extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     if (player.game.isSoloMode()) {
       return new OrOptions(
         new SelectOption('Steal 2 steel', 'Steal steel', () => {

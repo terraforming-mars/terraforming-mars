@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -7,18 +7,18 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../../common/constants';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {max} from '../Options';
 
-export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
+export class RotatorImpacts extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.ROTATOR_IMPACTS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 6,
       resourceType: CardResource.ASTEROID,
 
@@ -36,11 +36,6 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
         description: 'Venus must be 14% or lower',
       },
     });
-  }
-  public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player): boolean {
@@ -72,7 +67,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
   }
 
   private addResource(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
+    player.game.defer(new SelectPaymentDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
     player.addResourceTo(this, {log: true});
     return undefined;
   }

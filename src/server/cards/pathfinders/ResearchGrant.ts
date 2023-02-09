@@ -3,15 +3,17 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
-import {Units} from '../../../common/Units';
+import {Tag} from '../../../common/cards/Tag';
 
 export class ResearchGrant extends PreludeCard {
   constructor() {
     super({
       name: CardName.RESEARCH_GRANT_PATHFINDERS,
-      tags: [Tags.SCIENCE, Tags.SCIENCE],
-      productionBox: Units.of({energy: 1}),
+      tags: [Tag.SCIENCE, Tag.SCIENCE],
+
+      behavior: {
+        production: {energy: 1},
+      },
       startingMegacredits: 14,
 
       metadata: {
@@ -24,8 +26,7 @@ export class ResearchGrant extends PreludeCard {
       },
     });
   }
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox, {log: true});
+  public override bespokePlay(player: Player) {
     player.addResource(Resources.MEGACREDITS, 14);
     return undefined;
   }

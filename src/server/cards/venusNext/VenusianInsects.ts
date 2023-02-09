@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -9,12 +9,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class VenusianInsects extends Card implements IActionCard, IResourceCard {
+export class VenusianInsects extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.VENUSIAN_INSECTS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS, Tags.MICROBE],
+      tags: [Tag.VENUS, Tag.MICROBE],
       cost: 5,
       resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 2),
@@ -23,7 +23,7 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
       metadata: {
         cardNumber: '260',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Microbe to this card.', (eb)=> {
+          b.action('Add 1 microbe to this card.', (eb)=> {
             eb.empty().startAction.microbes(1);
           }).br;
           b.vpText('1 VP for every 2nd Microbe on this card.');
@@ -31,11 +31,6 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
         description: 'Requires Venus 12%.',
       },
     });
-  }
-  public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
   }
   public canAct(): boolean {
     return true;

@@ -5,7 +5,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 
 export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
@@ -14,25 +14,25 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.RETURN_TO_ABANDONED_TECHNOLOGY,
       cost: 4,
-      tags: [Tags.MARS],
+      tags: [Tag.MARS],
 
       metadata: {
         cardNumber: 'Pf22',
         renderData: CardRenderer.builder((b) => {
-          b.text('Draw the top 4 cards from the discard deck. Choose 2 to keep and discard the rest.', Size.SMALL).br;
+          b.text('Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.', Size.SMALL).br;
         }),
       },
     });
   }
 
-  public override canPlay(player: Player) {
-    return player.game.dealer.discarded.length > 0;
+  public override bespokeCanPlay(player: Player) {
+    return player.game.projectDeck.discardPile.length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const cards: Array<IProjectCard> = [];
     for (let idx = 0; idx < 4; idx++) {
-      const card = player.game.dealer.discarded.pop();
+      const card = player.game.projectDeck.discardPile.pop();
       if (card === undefined) break;
       cards.push(card);
     }

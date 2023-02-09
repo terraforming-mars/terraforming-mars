@@ -4,7 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {SpaceName} from '../../../src/server/SpaceName';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 
 describe('LunarEmbassy', function() {
   let card: LunarEmbassy;
@@ -13,18 +13,18 @@ describe('LunarEmbassy', function() {
   beforeEach(function() {
     card = new LunarEmbassy();
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, setCustomGameOptions({pathfindersExpansion: true}));
+    Game.newInstance('gameid', [player], player, testGameOptions({pathfindersExpansion: true}));
   });
 
   it('play', function() {
-    player.setProductionForTest({});
+    player.production.override({});
     player.tagsForTest = {earth: 9};
     player.cardsInHand = [];
     expect(player.game.board.getSpace(SpaceName.LUNAR_EMBASSY).player).is.undefined;
 
     card.play(player);
 
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, plants: 5}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3, plants: 5}));
     expect(player.cardsInHand).has.length(1);
     expect(player.game.board.getSpace(SpaceName.LUNAR_EMBASSY).player?.id).eq(player.id);
   });

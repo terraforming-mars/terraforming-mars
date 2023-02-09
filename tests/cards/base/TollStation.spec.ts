@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TollStation', function() {
@@ -13,8 +12,8 @@ describe('TollStation', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     anotherPlayer.playedCards.push(card);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(0);
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 });

@@ -1,24 +1,20 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {DeepLunarMining} from '../../../src/server/cards/moon/DeepLunarMining';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('DeepLunarMining', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: DeepLunarMining;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new DeepLunarMining();
   });
@@ -34,14 +30,14 @@ describe('DeepLunarMining', () => {
 
   it('play', () => {
     player.titanium = 3;
-    expect(player.getProduction(Resources.TITANIUM)).eq(0);
+    expect(player.production.titanium).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.TITANIUM)).eq(2);
+    expect(player.production.titanium).eq(2);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
   });

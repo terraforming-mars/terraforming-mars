@@ -1,13 +1,11 @@
 import {expect} from 'chai';
 import {DesignedMicroOrganisms} from '../../../src/server/cards/base/DesignedMicroOrganisms';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DesignedMicroOrganisms', function() {
   let card: DesignedMicroOrganisms;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -31,6 +29,6 @@ describe('DesignedMicroOrganisms', function() {
     (game as any).temperature = -14;
     expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    expect(player.production.plants).to.eq(2);
   });
 });

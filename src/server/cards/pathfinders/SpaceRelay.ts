@@ -5,8 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
-import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {played} from '../Options';
 
 export class SpaceRelay extends Card implements IProjectCard {
@@ -15,7 +14,11 @@ export class SpaceRelay extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.SPACE_RELAY,
       cost: 13,
-      tags: [Tags.SPACE, Tags.JOVIAN],
+      tags: [Tag.SPACE, Tag.JOVIAN],
+
+      behavior: {
+        production: {megacredits: 1},
+      },
 
       metadata: {
         cardNumber: 'Pf33',
@@ -31,14 +34,9 @@ export class SpaceRelay extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: ICard) {
-    if (card.tags.includes(Tags.JOVIAN)) {
+    if (card.tags.includes(Tag.JOVIAN)) {
       player.drawCard();
     }
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
-    return undefined;
   }
 }
 

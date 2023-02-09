@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {SpaceRaceToMars} from '../../src/server/turmoil/globalEvents/SpaceRaceToMars';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
-import {Resources} from '../../src/common/Resources';
 import {TileType} from '../../src/common/TileType';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
@@ -32,8 +31,8 @@ describe('SpaceRaceToMars', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(1);
+    expect(player2.production.megacredits).eq(0);
   });
 
   it('cities do not count', function() {
@@ -42,8 +41,8 @@ describe('SpaceRaceToMars', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
   });
 
   it('Ocean City counts', function() {
@@ -52,8 +51,8 @@ describe('SpaceRaceToMars', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(1);
+    expect(player2.production.megacredits).eq(0);
   });
 
   it('Greenery does not count', function() {
@@ -62,8 +61,18 @@ describe('SpaceRaceToMars', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
+  });
+
+  it('Land-claimed hazard tile does not count', function() {
+    // Greenery won't doesn't change this card's reward.
+    game.simpleAddTile(player, spaces[3], {tileType: TileType.EROSION_SEVERE});
+
+    card.resolve(game, turmoil);
+
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
   });
 
   it('Other players special tile', function() {
@@ -71,17 +80,17 @@ describe('SpaceRaceToMars', function() {
 
     card.resolve(game, turmoil);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(1);
   });
 
   it('Energy bump', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player.id);
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
 

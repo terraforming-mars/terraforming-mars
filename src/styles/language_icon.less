@@ -1,0 +1,67 @@
+.language-switcher {
+  text-align: center;
+}
+
+.language-icon {
+  display: inline-block;
+  width: 44px;
+  height: 30px;
+  background: url(assets/flags_responsive.png) no-repeat;
+
+  &-for-switcher {
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 2px black;
+    transition: transform 0.15s;
+  }
+
+  &-for-sidebar {
+    transform: scale(.85);
+    margin-left: -4px;
+    margin-top: 3px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &--en {
+    background-position: 0 92.561983%;
+  }
+
+  &--de {
+    background-position: 0 22.31405%;
+  }
+
+  &--fr {
+    background-position: 0 29.752066%;
+  }
+
+  &--ru {
+    background-position: 0 75.206612%;
+  }
+
+  &--cn {
+    background-position: 0 19.005%;
+  }
+
+  &--pl {
+    background-position: 0 70.66%;
+  }
+
+  &--es {
+    background-position: 0 26.86%;
+  }
+
+  &--br {
+    background-position: 0 12%;
+  }
+
+  &--it {
+    background-position: 0 42.975207%;
+  }
+
+  &--ko {
+    background-position: 0 47.52%;
+  }
+}

@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {HiTechLab} from '../../../src/server/cards/promo/HiTechLab';
 import {Game} from '../../../src/server/Game';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('HiTechLab', function() {
   let card: HiTechLab;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new HiTechLab();
@@ -24,15 +24,14 @@ describe('HiTechLab', function() {
     player.addResource(Resources.ENERGY, 5);
     expect(card.canAct(player)).is.true;
 
-    const amount = card.action(player) as SelectAmount;
-    expect(amount instanceof SelectAmount).is.true;
+    const amount = cast(card.action(player), SelectAmount);
 
-        amount!.cb(3);
-        expect(player.getResource(Resources.ENERGY)).to.eq(2);
+    amount.cb(3);
+    expect(player.energy).to.eq(2);
   });
 
   it('Should give victory points', function() {
-    card.play();
+    card.play(player);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

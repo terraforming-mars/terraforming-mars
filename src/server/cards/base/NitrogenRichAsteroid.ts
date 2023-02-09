@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -13,9 +13,13 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.NITROGEN_RICH_ASTEROID,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 31,
-      tr: {tr: 2, temperature: 1},
+
+      behavior: {
+        global: {temperature: 1},
+        tr: 2,
+      },
 
       metadata: {
         cardNumber: '037',
@@ -26,18 +30,17 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
           }).br;
           b.tr(2).temperature(1);
         }),
-        description: 'Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.',
+        description: 'Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.',
       },
     });
   }
 
-  public play(player: Player) {
-    player.increaseTerraformRatingSteps(2);
-    if (player.getTagCount(Tags.PLANT) < 3) {
-      player.addProduction(Resources.PLANTS, 1, {log: true});
+  public override bespokePlay(player: Player) {
+    if (player.tags.count(Tag.PLANT) < 3) {
+      player.production.add(Resources.PLANTS, 1, {log: true});
     } else {
-      player.addProduction(Resources.PLANTS, 4, {log: true});
+      player.production.add(Resources.PLANTS, 4, {log: true});
     }
-    return player.game.increaseTemperature(player, 1);
+    return undefined;
   }
 }

@@ -1,10 +1,10 @@
-import {Multiset} from '../../../src/server/utils/Multiset';
+import {MultiSet} from 'mnemonist';
 import {fail} from 'assert';
 import {CardName} from '../../../src/common/cards/CardName';
 
 describe('CardName', () => {
   it('No duplicate card names', () => {
-    const counts: Multiset<string> = new Multiset();
+    const counts = new MultiSet<string>();
     const map: Array<[string, string]> = [];
     const errors: Array<string> = [];
 
@@ -15,20 +15,16 @@ describe('CardName', () => {
         counts.add(text);
       }
     }
-    const filtered = counts.entries().filter((count: [string, number]) => {
-      // count[0] = Enum String.
-      // count[1] = times that Enum String occurs.
-      const invalid = count[1] > 1;
-      if (invalid) {
-        const text = count[0];
-
-        // e[0] is ENUM_NAME and e[1] is Enum String.
-        map.filter((e) => e[1] === text)
-          .forEach((e) => errors.push(`${e[0]} => ${e[1]}`));
+    counts.forEachMultiplicity((count, readableName) => {
+      if (count > 1) {
+        map.forEach(([cardName, readable]) => {
+          if (readable === readableName) {
+            errors.push(`${cardName} => ${readableName}`);
+          }
+        });
       }
-      return invalid;
     });
-    if (filtered.length > 0) {
+    if (errors.length > 0) {
       fail('Duplicate card names found\n' + errors.join('\n'));
     }
   });

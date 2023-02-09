@@ -3,23 +3,25 @@ import {Player} from '../../Player';
 import {Units} from '../../../common/Units';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {MoonColonyStandardProject} from './MoonColonyStandardProject';
+import {MoonHabitatStandardProject} from './MoonHabitatStandardProject';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {TileType} from '../../../common/TileType';
 
-export class MoonColonyStandardProjectVariant2 extends MoonColonyStandardProject {
+export class MoonHabitatStandardProjectVariant2 extends MoonHabitatStandardProject {
   constructor() {
     super({
-      name: CardName.MOON_COLONY_STANDARD_PROJECT_V2,
+      name: CardName.MOON_HABITAT_STANDARD_PROJECT_V2,
       cost: 26,
       reserveUnits: Units.EMPTY,
-      tr: {moonColony: 1},
+      tr: {moonHabitat: 1},
+      tilesBuilt: [TileType.MOON_HABITAT],
 
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 26 M€ place a colony on the moon and raise your M€ production 1 step.', (eb) => {
-            eb.megacredits(26).startAction.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).production((pb) => pb.megacredits(1));
+          b.standardProject('Spend 26 M€ place a habitat on The Moon and raise your M€ production 1 step.', (eb) => {
+            eb.megacredits(26).startAction.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).production((pb) => pb.megacredits(1));
           }),
         ),
       },
@@ -38,11 +40,12 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
       cost: 23,
       reserveUnits: Units.EMPTY,
       tr: {moonMining: 1},
+      tilesBuilt: [TileType.MOON_MINE],
 
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 23 M€ to place a mine on the moon, raise the Mining Rate 1 step, and raise steel production 1 step.', (eb) => {
+          b.standardProject('Spend 23 M€ to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.', (eb) => {
             eb.megacredits(23).startAction.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).production((pb) => pb.steel(1));
           }),
         ),
@@ -62,6 +65,7 @@ export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
       cost: 21,
       reserveUnits: Units.EMPTY,
       tr: {moonLogistics: 1},
+      tilesBuilt: [TileType.MOON_ROAD],
 
       metadata: {
         cardNumber: '',

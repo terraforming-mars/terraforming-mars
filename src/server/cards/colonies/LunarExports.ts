@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,7 +14,7 @@ export class LunarExports extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 19,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tag.EARTH, Tag.SPACE],
       name: CardName.LUNAR_EXPORTS,
       cardType: CardType.AUTOMATED,
 
@@ -30,14 +30,14 @@ export class LunarExports extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new OrOptions(
       new SelectOption('Increase your M€ production by 5', 'Increase +MC', () => {
-        player.addProduction(Resources.MEGACREDITS, 5, {log: true});
+        player.production.add(Resources.MEGACREDITS, 5, {log: true});
         return undefined;
       }),
       new SelectOption('Increase your plant production by 2', 'Increase +plants', () => {
-        player.addProduction(Resources.PLANTS, 2, {log: true});
+        player.production.add(Resources.PLANTS, 2, {log: true});
         return undefined;
       }),
     );

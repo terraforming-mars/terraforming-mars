@@ -1,21 +1,20 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {IResourceCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
+export class RefugeeCamps extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 10,
-      tags: [Tags.EARTH],
-      name: CardName.REFUGEE_CAMP,
+      tags: [Tag.EARTH],
+      name: CardName.REFUGEE_CAMPS,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.CAMP,
       victoryPoints: VictoryPoints.resource(1, 1),
@@ -33,19 +32,14 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
     });
   }
 
-  public override resourceCount: number = 0;
 
   public canAct(player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) >= -4;
+    return player.production.megacredits >= -4;
   }
 
   public action(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, -1);
+    player.production.add(Resources.MEGACREDITS, -1);
     player.addResourceTo(this, 1);
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

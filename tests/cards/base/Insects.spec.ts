@@ -2,13 +2,11 @@ import {expect} from 'chai';
 import {Insects} from '../../../src/server/cards/base/Insects';
 import {Trees} from '../../../src/server/cards/base/Trees';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Insects', function() {
   let card: Insects;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -27,10 +25,10 @@ describe('Insects', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(0);
+    expect(player.production.plants).to.eq(0);
 
     player.playedCards.push(new Trees());
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 });

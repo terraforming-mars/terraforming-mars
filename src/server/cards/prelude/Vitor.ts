@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -15,7 +15,7 @@ export class Vitor extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.VITOR,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       startingMegaCredits: 48, // It's 45 + 3 when this corp is played
       initialActionText: 'Fund an award for free',
 
@@ -73,9 +73,5 @@ export class Vitor extends Card implements ICorporationCard {
     }
 
     player.megaCredits += 3;
-  }
-
-  public play(_player: Player) {
-    return undefined;
   }
 }

@@ -4,12 +4,9 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
-import {Units} from '../../../common/Units';
-import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
+import {Tag} from '../../../common/cards/Tag';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
-import {Turmoil} from '../../turmoil/Turmoil';
 
 export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
   constructor() {
@@ -17,32 +14,31 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
       cardType: CardType.AUTOMATED,
       name: CardName.LOBBY_HALLS,
       cost: 11,
-      productionBox: Units.of({megacredits: 2}),
+
+      behavior: {
+        production: {megacredits: 2},
+        turmoil: {sendDelegates: {count: 1}},
+      },
 
       metadata: {
         cardNumber: 'PfTBD',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).delegates(1);
         }),
-        // TODO(kberg): remove "from reserve" like Cultural Metropolis.
-        description: 'Increase your M€ production 2 steps. Place 1 delegate from reserve in any party.',
+        description: 'Increase your M€ production 2 steps. Place 1 delegate in any party.' +
+                     ' Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.',
       },
     });
   }
 
-  public cloneTag: Tags = Tags.CLONE;
+  public cloneTag: Tag = Tag.CLONE;
 
-  public override get tags(): Array<Tags> {
-    return [this.cloneTag, Tags.BUILDING];
+  public override get tags(): Array<Tag> {
+    return [this.cloneTag, Tag.BUILDING];
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new DeclareCloneTag(player, this));
-    player.adjustProduction(this.productionBox);
-    const turmoil = Turmoil.getTurmoil(player.game);
-    if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {
-      player.game.defer(new SendDelegateToArea(player, undefined, {source: 'reserve'}));
-    }
     return undefined;
   }
 }

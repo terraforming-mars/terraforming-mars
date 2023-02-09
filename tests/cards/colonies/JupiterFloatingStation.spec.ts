@@ -3,12 +3,11 @@ import {cast} from '../../TestingUtils';
 import {JupiterFloatingStation} from '../../../src/server/cards/colonies/JupiterFloatingStation';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('JupiterFloatingStation', function() {
   let card: JupiterFloatingStation;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new JupiterFloatingStation();
@@ -18,7 +17,7 @@ describe('JupiterFloatingStation', function() {
   });
 
   it('Should play', function() {
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

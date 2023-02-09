@@ -7,7 +7,8 @@ export type GameOptionsModel = {
   aresExtension: boolean,
   altVenusBoard: boolean,
   boardName: BoardName,
-  cardsBlackList: Array<CardName>;
+  bannedCards: Array<CardName>;
+  ceoExtension: boolean,
   coloniesExtension: boolean,
   communityCardsOption: boolean,
   corporateEra: boolean,
@@ -18,6 +19,7 @@ export type GameOptionsModel = {
   escapeVelocityPeriod?: number,
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
+  includeFanMA: boolean,
   includeVenusMA: boolean,
   initialDraftVariant: boolean,
   moonExpansion: boolean,
@@ -35,6 +37,7 @@ export type GameOptionsModel = {
   requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
   turmoilExtension: boolean,
+  twoCorpsVariant: boolean,
   venusNextExtension: boolean,
   undoOption: boolean,
 }

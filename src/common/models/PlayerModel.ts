@@ -5,15 +5,21 @@ import {ITagCount} from '../cards/ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
-import {PlayerId, SpectatorId} from '../Types';
+import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
+import {Resources} from '../Resources';
 
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id?: PlayerId | SpectatorId;
+  id?: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
 }
+
+// 'off': Resources (or production) are unprotected.
+// 'on': Resources (or production) are protected.
+// 'half': Half resources are protected when targeted. Applies to Botanical Experience.
+export type Protection = 'off' | 'on' | 'half';
 
 /** The public information about a player */
 export type PublicPlayerModel = {
@@ -32,8 +38,7 @@ export type PublicPlayerModel = {
   fleetSize: number;
   heat: number;
   heatProduction: number;
-  // TODO(kberg): this is removeable now.
-  id: string; // Color
+  id: PlayerId | undefined;
   influence: number;
   isActive: boolean;
   lastCardPlayed?: CardName;
@@ -45,7 +50,8 @@ export type PublicPlayerModel = {
   noTagsCount: number;
   plants: number;
   plantProduction: number;
-  plantsAreProtected: boolean;
+  protectedResources: Record<Resources, Protection>;
+  protectedProduction: Record<Resources, Protection>;
   tableau: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
@@ -68,9 +74,11 @@ export interface PlayerViewModel extends ViewModel {
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
+  dealtCeoCards: Array<CardModel>;
   draftedCorporations: Array<CardModel>;
   draftedCards: Array<CardModel>;
   id: PlayerId;
+  ceoCardsInHand: Array<CardModel>;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   preludeCardsInHand: Array<CardModel>;
   thisPlayer: PublicPlayerModel;

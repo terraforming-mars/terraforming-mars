@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {MoholeExcavation} from '../../../src/server/cards/prelude/MoholeExcavation';
-import {Resources} from '../../../src/common/Resources';
-import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('MoholeExcavation', function() {
   it('Should play', function() {
     const card = new MoholeExcavation();
-    const player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    const player = getTestPlayer(game, 0);
     const action = card.play(player);
     expect(action).is.undefined;
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
+    expect(player.production.heat).to.eq(2);
     expect(player.heat).to.eq(2);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
   });
 });

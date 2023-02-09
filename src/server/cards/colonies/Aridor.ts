@@ -1,8 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Game} from '../../Game';
-import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../../common/Resources';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
@@ -11,6 +10,8 @@ import {SelectColony} from '../../inputs/SelectColony';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {SerializedCard} from '../../SerializedCard';
+import {ICard} from '../ICard';
 
 export class Aridor extends Card implements ICorporationCard {
   constructor() {
@@ -35,7 +36,7 @@ export class Aridor extends Card implements ICorporationCard {
       },
     });
   }
-  public allTags = new Set<Tags>();
+  public allTags = new Set<Tag>();
   public initialAction(player: Player) {
     const game = player.game;
     if (game.discardedColonies.length === 0) return undefined;
@@ -67,24 +68,33 @@ export class Aridor extends Card implements ICorporationCard {
     }
   }
 
-  public onCardPlayed(player: Player, card: IProjectCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
+    return this.onCardPlayed(player, card);
+  }
+
+  public onCardPlayed(player: Player, card: ICard) {
     if (
       card.cardType === CardType.EVENT ||
-        card.tags.filter((tag) => tag !== Tags.WILD).length === 0 ||
-        !player.isCorporation(this.name)) {
+      card.tags.filter((tag) => tag !== Tag.WILD).length === 0 ||
+      !player.isCorporation(this.name)) {
       return undefined;
     }
 
-    for (const tag of card.tags.filter((tag) => tag !== Tags.WILD)) {
+    for (const tag of card.tags.filter((tag) => tag !== Tag.WILD)) {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {
-        player.addProduction(Resources.MEGACREDITS, 1, {log: true});
+        player.production.add(Resources.MEGACREDITS, 1, {log: true});
       }
     }
     return undefined;
   }
-  public play() {
-    return undefined;
+
+  public serialize(serialized: SerializedCard) {
+    serialized.allTags = Array.from(this.allTags);
+  }
+
+  public deserialize(serialized: SerializedCard) {
+    this.allTags = new Set(serialized.allTags);
   }
 }

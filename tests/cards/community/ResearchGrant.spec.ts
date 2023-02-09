@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {ResearchGrant} from '../../../src/server/cards/community/ResearchGrant';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ResearchGrant', function() {
   let card: ResearchGrant;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new ResearchGrant();

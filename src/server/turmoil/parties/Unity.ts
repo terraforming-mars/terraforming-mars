@@ -2,11 +2,11 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Resources} from '../../../common/Resources';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {Player} from '../../Player';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
@@ -17,7 +17,7 @@ import {CardResource} from '../../../common/CardResource';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
-  description: string = 'Wants to see humanity prosper in the whole solar system.';
+  description = 'Wants to see humanity prosper in the whole solar system.';
   bonuses = [UNITY_BONUS_1, UNITY_BONUS_2];
   policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }
@@ -28,8 +28,8 @@ class UnityBonus01 implements Bonus {
   isDefault = true;
 
   getScore(player: Player) {
-    const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
-    return tags.map((tag) => player.getTagCount(tag, 'raw')).reduce((acc, count) => acc + count, 0);
+    const tags = [Tag.VENUS, Tag.EARTH, Tag.JOVIAN];
+    return tags.map((tag) => player.tags.count(tag, 'raw')).reduce((acc, count) => acc + count, 0);
   }
 
   grant(game: Game) {
@@ -45,7 +45,7 @@ class UnityBonus02 implements Bonus {
   isDefault = false;
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.SPACE, 'raw');
+    return player.tags.count(Tag.SPACE, 'raw');
   }
 
   grant(game: Game) {
@@ -58,12 +58,12 @@ class UnityBonus02 implements Bonus {
 class UnityPolicy01 implements Policy {
   isDefault = true;
   id = 'up01' as const;
-  description: string = 'Your titanium resources are worth 1 M€ extra';
+  description = 'Your titanium resources are worth 1 M€ extra';
 }
 
 class UnityPolicy02 implements Policy {
   id = 'up02' as const;
-  description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
+  description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -75,7 +75,7 @@ class UnityPolicy02 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectHowToPayDeferred(
+    game.defer(new SelectPaymentDeferred(
       player,
       4,
       {
@@ -123,7 +123,7 @@ class UnityPolicy02 implements Policy {
 
 class UnityPolicy03 implements Policy {
   id = 'up03' as const;
-  description: string = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
+  description = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -135,13 +135,13 @@ class UnityPolicy03 implements Policy {
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectHowToPayDeferred(
+    game.defer(new SelectPaymentDeferred(
       player,
       4,
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          player.drawCard(1, {tag: Tags.SPACE});
+          player.drawCard(1, {tag: Tag.SPACE});
         },
       },
     ));
@@ -152,7 +152,7 @@ class UnityPolicy03 implements Policy {
 
 class UnityPolicy04 implements Policy {
   id = 'up04' as const;
-  description: string = 'Cards with Space tags cost 2 M€ less to play';
+  description = 'Cards with Space tags cost 2 M€ less to play';
   isDefault = false;
 }
 

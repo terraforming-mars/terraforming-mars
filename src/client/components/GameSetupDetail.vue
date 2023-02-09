@@ -29,9 +29,12 @@
 
             <li v-if="playerNumber > 1">
               <div class="setup-item" v-i18n>Milestones and Awards:</div>
-              <div v-if="isRandomMANone()" class="game-config generic" v-i18n>Board-defined</div>
-              <div v-if="isRandomMALimited()" class="game-config generic" v-i18n>Randomized with limited synergy</div>
-              <div v-if="isRandomMAUnlimited()" class="game-config generic" v-i18n>Full randomized</div>
+
+              <div v-if="gameOptions.randomMA === RandomMAOptionType.NONE" class="game-config generic" v-i18n>Board-defined</div>
+              <div v-if="gameOptions.randomMA === RandomMAOptionType.LIMITED" class="game-config generic" v-i18n>Randomized with limited synergy</div>
+              <div v-if="gameOptions.randomMA === RandomMAOptionType.UNLIMITED" class="game-config generic" v-i18n>Full randomized</div>
+              <div v-if="gameOptions.venusNextExtension && gameOptions.includeVenusMA" class="game-config generic" v-18n>Venus Milestone/Award</div>
+              <div v-if="gameOptions.randomMA !== RandomMAOptionType.NONE && gameOptions.includeFanMA" class="game-config generic" v-18n>Include fan Milestones/Awards</div>
             </li>
 
             <li v-if="playerNumber > 1">
@@ -66,7 +69,7 @@
               <div v-if="gameOptions.undoOption" class="game-config undo" v-i18n>undo</div>
             </li>
 
-            <li v-if="gameOptions.cardsBlackList.length > 0"><div class="setup-item" v-i18n>Banned cards:</div>{{ gameOptions.cardsBlackList.join(', ') }}</li>
+            <li v-if="gameOptions.bannedCards.length > 0"><div class="setup-item" v-i18n>Banned cards:</div>{{ gameOptions.bannedCards.join(', ') }}</li>
           </ul>
         </div>
 </template>
@@ -98,7 +101,7 @@ export default Vue.extend({
     },
     getBoardColorClass(boardName: BoardName): string {
       switch (boardName) {
-      case BoardName.ORIGINAL:
+      case BoardName.THARSIS:
         return 'game-config board-tharsis map';
       case BoardName.HELLAS:
         return 'game-config board-hellas map';
@@ -116,14 +119,10 @@ export default Vue.extend({
         return 'game-config board-other map';
       }
     },
-    isRandomMANone(): boolean {
-      return this.gameOptions.randomMA === RandomMAOptionType.NONE;
-    },
-    isRandomMALimited(): boolean {
-      return this.gameOptions.randomMA === RandomMAOptionType.LIMITED;
-    },
-    isRandomMAUnlimited(): boolean {
-      return this.gameOptions.randomMA === RandomMAOptionType.UNLIMITED;
+  },
+  computed: {
+    RandomMAOptionType(): typeof RandomMAOptionType {
+      return RandomMAOptionType;
     },
   },
 });

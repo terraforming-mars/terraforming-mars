@@ -1,13 +1,12 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Resources} from '../../../common/Resources';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -18,23 +17,27 @@ export class Playwrights extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,
-      tags: [Tags.ENERGY],
+      tags: [Tag.POWER],
       startingMegaCredits: 38,
       cardType: CardType.CORPORATION,
 
+      behavior: {
+        production: {energy: 1},
+      },
+
       metadata: {
         cardNumber: 'R40',
-        description: 'You start with 38 M€ and 1 Energy production.',
+        description: 'You start with 38 M€ and 1 energy production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(38).production((pb) => pb.energy(1));
           b.corpBox('action', (cb) => {
-            cb.action('Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
+            cb.action('Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
               // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
               // use 1000 as an id to tell Vue to render the '?'
               eb.megacredits(1000).startAction;
               eb.text('replay', Size.SMALL, true);
-              eb.nbsp.cards(1, {all, secondaryTag: Tags.EVENT});
+              eb.nbsp.cards(1, {all, secondaryTag: Tag.EVENT});
             });
           });
         }),
@@ -42,12 +45,8 @@ export class Playwrights extends Card implements ICorporationCard {
     });
   }
 
-  private checkLoops: number = 0;
-
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 1);
-    return undefined;
-  }
+  // For Project Inspection
+  private checkLoops = 0;
 
   public canAct(player: Player): boolean {
     const replayableEvents = this.getReplayableEvents(player);
@@ -71,7 +70,7 @@ export class Playwrights extends Card implements ICorporationCard {
         });
 
         const cost = player.getCardCost(selectedCard);
-        player.game.defer(new SelectHowToPayDeferred(
+        player.game.defer(new SelectPaymentDeferred(
           player,
           cost,
           {
@@ -112,16 +111,19 @@ export class Playwrights extends Card implements ICorporationCard {
     const playedEvents : IProjectCard[] = [];
 
     this.checkLoops++;
-    player.game.getPlayers().forEach((p) => {
-      playedEvents.push(...p.playedCards.filter((card) => {
-        return card.cardType === CardType.EVENT &&
-            // Can player.canPlay(card) replace this?
-            player.canAfford(player.getCardCost(card), {
-              reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
-            }) && player.canPlayIgnoringCost(card);
-      }));
-    });
-    this.checkLoops--;
+    try {
+      player.game.getPlayers().forEach((p) => {
+        playedEvents.push(...p.playedCards.filter((card) => {
+          return card.cardType === CardType.EVENT &&
+          // Can player.canPlay(card) replace this?
+          player.canAfford(player.getCardCost(card), {
+            reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
+          }) && player.canPlayIgnoringCost(card);
+        }));
+      });
+    } finally {
+      this.checkLoops--;
+    }
 
     return playedEvents;
   }

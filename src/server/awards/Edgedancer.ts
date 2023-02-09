@@ -3,8 +3,8 @@ import {Player} from '../Player';
 import {isHazardTileType} from '../../common/TileType';
 
 export class Edgedancer implements IAward {
-  public name: string = 'Edgedancer';
-  public description: string = 'Most tiles on the edges of the board';
+  public readonly name = 'Edgedancer';
+  public readonly description = 'Most tiles on the edges of the board';
 
   public getScore(player: Player): number {
     return player.game.board.spaces

@@ -1,6 +1,5 @@
 import {Card} from '../Card';
-import {Tags} from '../../../common/cards/Tags';
-import {Player} from '../../Player';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from './ICorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,8 +12,13 @@ export class PhoboLog extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.PHOBOLOG,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       startingMegaCredits: 23,
+
+      behavior: {
+        stock: {titanium: 10},
+        titanumValue: 1,
+      },
 
       metadata: {
         cardNumber: 'R09',
@@ -30,10 +34,5 @@ export class PhoboLog extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public play(player: Player) {
-    player.titanium = 10;
-    player.increaseTitaniumValue();
-    return undefined;
   }
 }

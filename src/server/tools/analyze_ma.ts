@@ -2,12 +2,11 @@ require('dotenv').config();
 
 import * as http from 'http';
 import * as fs from 'fs';
-import {MilestoneAwardSelector} from '../MilestoneAwardSelector';
-import {GameOptions} from '../GameOptions';
+import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../GameOptions';
 import {BoardName} from '../../common/boards/BoardName';
-import {AgendaStyle} from '../../common/turmoil/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
-import {Multiset} from '../utils/Multiset';
+import {MultiSet} from 'mnemonist';
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) {
@@ -15,7 +14,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   }
   const url = new URL(req.url, `http://localhost`);
   if (url.pathname === '/') {
-    fs.readFile('src/tools/analyze_ma.html', (err, data) => {
+    fs.readFile('src/server/tools/analyze_ma.html', (err, data) => {
       if (err) {
         res.writeHead(500);
         res.write('Internal server error ' + err);
@@ -56,6 +55,9 @@ function calc(params: URLSearchParams): string {
   if (params.get('moon') === 'true') {
     options.moonExpansion = true;
   }
+  if (params.get('fan-maps') === 'true') {
+    options.includeFanMA = true;
+  }
 
   const type = params.get('type');
   switch (type) {
@@ -69,13 +71,13 @@ function calc(params: URLSearchParams): string {
     options.randomMA = RandomMAOptionType.UNLIMITED;
     break;
   }
-  const results: Multiset<string> = new Multiset();
+  const results = new MultiSet<string>();
   for (let nth = 1; nth <= runs; nth++) {
     if (nth % 100 === 0) {
       console.log(`#${nth}`);
     }
     try {
-      const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(options);
+      const mas = chooseMilestonesAndAwards(options);
       mas.awards.forEach((award) => results.add(award.name));
       mas.milestones.forEach((milestone) => results.add(milestone.name));
     } catch (err) {
@@ -84,53 +86,28 @@ function calc(params: URLSearchParams): string {
     }
   }
 
-  const copy = new Array(...results.entries());
+  const copy: Array<[string, number]> = new Array(...results.multiplicities());
   copy.sort((a, b) => b[1] - a[1]);
   return 'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n');
 }
 
 function simpleGameOptions(): GameOptions {
   return {
-    clonedGamedId: undefined,
-    undoOption: false,
-    showTimers: false,
-    fastModeOption: false,
-    showOtherPlayersVP: false,
-    corporateEra: false,
-    coloniesExtension: false,
-    preludeExtension: false,
-    turmoilExtension: false,
-    promoCardsOption: false,
-    communityCardsOption: false,
+    ...DEFAULT_GAME_OPTIONS,
     aresHazards: false,
-    politicalAgendasExtension: AgendaStyle.STANDARD,
-    solarPhaseOption: false,
-    removeNegativeGlobalEventsOption: false,
-    draftVariant: false,
-    corporationsDraft: false,
+    corporateEra: false,
     initialDraftVariant: false,
+    showTimers: false,
     startingCorporations: 0,
-    shuffleMapOption: false,
-    soloTR: false,
-    customCorporationsList: [],
-    cardsBlackList: [],
-    customColoniesList: [],
-    requiresVenusTrackCompletion: false, // Venus must be completed to end the game
-    requiresMoonTrackCompletion: false, // Moon must be completed to end the game
-    moonStandardProjectVariant: false,
-    altVenusBoard: false,
-    escapeVelocityMode: false,
-    escapeVelocityThreshold: undefined,
-    escapeVelocityPeriod: undefined,
-    escapeVelocityPenalty: undefined,
 
     // The options that can change, should be parameters.
-    boardName: BoardName.ORIGINAL,
+    boardName: BoardName.THARSIS,
     venusNextExtension: false,
     aresExtension: false,
     includeVenusMA: false,
     moonExpansion: false,
     pathfindersExpansion: false,
+    includeFanMA: false,
     randomMA: RandomMAOptionType.NONE,
   };
 }

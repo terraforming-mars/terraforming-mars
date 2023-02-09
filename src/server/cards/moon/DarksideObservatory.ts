@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {MoonCards} from '../../moon/MoonCards';
@@ -15,17 +15,17 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
     super({
       name: CardName.DARKSIDE_OBSERVATORY,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 12,
 
       metadata: {
         cardNumber: 'M75',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]', (ab) => {
+          b.action('Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]', (ab) => {
             ab.empty().startAction.science(1).asterix();
           }).br;
           b.or().br;
-          b.action('Add 2 Data to ANY card.', (ab) => {
+          b.action('Add 2 data to ANY card.', (ab) => {
             ab.empty().startAction.data({amount: 2}).asterix();
           });
         }),
@@ -57,16 +57,12 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
     ];
 
     return new SelectCard(
-      'Select card to add EITHER 1 Science resource OR 2 Data resources',
+      'Select card to add EITHER 1 science resource OR 2 Data resources',
       'Add',
       playableCards,
       ([card]) => {
         this.addResource(card, player);
         return undefined;
       });
-  }
-
-  public play() {
-    return undefined;
   }
 }

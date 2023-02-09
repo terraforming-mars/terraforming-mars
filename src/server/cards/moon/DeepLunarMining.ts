@@ -1,25 +1,25 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
-import {MoonCard} from './MoonCard';
+import {Card} from '../Card';
 
-export class DeepLunarMining extends MoonCard {
+export class DeepLunarMining extends Card {
   constructor() {
     super({
       name: CardName.DEEP_LUNAR_MINING,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 18,
-      productionBox: Units.of({titanium: 2}),
-      reserveUnits: Units.of({titanium: 1}),
-      tr: {moonMining: 1},
+      reserveUnits: {titanium: 1},
+
+      behavior: {
+        production: {titanium: 2},
+        moon: {miningRate: 1},
+      },
 
       metadata: {
-        description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise the Mining Rate 1 step.',
+        description: 'Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.',
         cardNumber: 'M18',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).production((pb) => {
@@ -29,11 +29,5 @@ export class DeepLunarMining extends MoonCard {
         }),
       },
     });
-  }
-
-  public override play(player: Player) {
-    super.play(player);
-    MoonExpansion.raiseMiningRate(player);
-    return undefined;
   }
 }

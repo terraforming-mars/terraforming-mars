@@ -1,45 +1,35 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
-import {MoonCard} from './MoonCard';
+import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
-import {Resources} from '../../../common/Resources';
 import {all} from '../Options';
 
-export class ColonistShuttles extends MoonCard {
+export class ColonistShuttles extends Card {
   constructor() {
     super({
       name: CardName.COLONIST_SHUTTLES,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 12,
-      reserveUnits: Units.of({titanium: 1}),
-      tr: {moonColony: 1},
+      reserveUnits: {titanium: 1},
+
+      behavior: {
+        moon: {habitatRate: 1},
+        stock: {megacredits: {moon: {habitat: {}}, each: 2}},
+      },
 
       metadata: {
-        description: 'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.',
+        description: 'Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.',
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).moonColonyRate().br;
-          b.megacredits(2).slash().moonColony({size: Size.SMALL, all});
+          b.minus().titanium(1).moonHabitatRate().br;
+          b.megacredits(2).slash().moonHabitat({size: Size.SMALL, all});
         }),
       },
-    }, {
-      tilesBuilt: [TileType.MOON_COLONY],
+      tilesBuilt: [TileType.MOON_HABITAT],
     });
-  }
-
-  public override play(player: Player) {
-    super.play(player);
-    MoonExpansion.raiseColonyRate(player);
-    const surfaceColonies = MoonExpansion.spaces(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
-    player.addResource(Resources.MEGACREDITS, surfaceColonies * 2, {log: true});
-
-    return undefined;
   }
 }

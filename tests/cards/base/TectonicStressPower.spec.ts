@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {TectonicStressPower} from '../../../src/server/cards/base/TectonicStressPower';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('TectonicStressPower', function() {
   let card: TectonicStressPower;
@@ -10,19 +10,20 @@ describe('TectonicStressPower', function() {
 
   beforeEach(function() {
     card = new TectonicStressPower();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can not play', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new SearchForLife(), new SearchForLife());
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(3);
+    expect(player.production.energy).to.eq(3);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

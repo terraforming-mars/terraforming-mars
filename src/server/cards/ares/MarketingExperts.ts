@@ -1,10 +1,8 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MarketingExperts extends Card implements IProjectCard {
@@ -12,8 +10,12 @@ export class MarketingExperts extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.MARKETING_EXPERTS,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 5,
+
+      behavior: {
+        production: {megacredits: 1},
+      },
 
       metadata: {
         cardNumber: 'A12',
@@ -26,9 +28,5 @@ export class MarketingExperts extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step.',
       },
     });
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
-    return undefined;
   }
 }

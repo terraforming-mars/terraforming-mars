@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
@@ -15,11 +15,12 @@ export class MiningComplex extends PreludeCard {
   constructor() {
     super({
       name: CardName.MINING_COMPLEX,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       startingMegacredits: -7,
+      tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
 
       metadata: {
-        description: 'Place a mine tile on the Moon and raise the Mining Rate 1 step. ' +
+        description: 'Place a mine tile on The Moon and raise the mining rate 1 step. ' +
         'Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. ' +
         'Pay 7 M€.',
         cardNumber: '',
@@ -30,9 +31,11 @@ export class MiningComplex extends PreludeCard {
     });
   }
 
-  public tilesBuilt = [TileType.MOON_MINE, TileType.MOON_ROAD];
+  public override bespokeCanPlay(player: Player) {
+    return player.canAfford(7);
+  }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new PlaceMoonMineTile(player)
       .andThen((space) => {
         const moon = MoonExpansion.moonData(player.game).moon;
@@ -43,8 +46,9 @@ export class MiningComplex extends PreludeCard {
         player.game.defer(
           new PlaceMoonRoadTile(
             player,
+            availableRoadSpaces,
             'Select a space next to the mine for a road',
-            availableRoadSpaces));
+          ));
       }));
     player.deductResource(Resources.MEGACREDITS, 7);
     return undefined;

@@ -3,18 +3,16 @@ import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTra
 import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
 import {DiasporaMovement} from '../../../src/server/cards/turmoil/DiasporaMovement';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DiasporaMovement', function() {
   let card: DiasporaMovement;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let reds: IParty;
@@ -24,10 +22,9 @@ describe('DiasporaMovement', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
-    reds = turmoil.getPartyByName(PartyName.REDS)!;
+    reds = turmoil.getPartyByName(PartyName.REDS);
   });
 
   it('Can not play', function() {
@@ -43,6 +40,6 @@ describe('DiasporaMovement', function() {
     player.playedCards.push(new ColonizerTrainingCamp());
     player2.playedCards.push(new MethaneFromTitan());
     card.play(player);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.megaCredits).to.eq(3);
   });
 });

@@ -14,11 +14,6 @@ export default Vue.extend({
       type: Object as () => PublicPlayerModel | undefined,
     },
   },
-  methods: {
-  },
-  data() {
-    return {};
-  },
 });
 
 </script>

@@ -1,9 +1,10 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {played} from '../../cards/Options';
@@ -71,6 +72,6 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
     }
   }
   public getScore(player: Player, turmoil: Turmoil) {
-    return player.getTagCount(Tags.EARTH, 'raw') + turmoil.getPlayerInfluence(player);
+    return player.tags.count(Tag.EARTH, 'raw') + turmoil.getPlayerInfluence(player);
   }
 }

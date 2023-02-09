@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {MoonBoard} from '../../src/server/moon/MoonBoard';
-import {MoonSpaces} from '../../src/server/moon/MoonSpaces';
+import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 
 describe('MoonBoard', function() {
   let board: MoonBoard;

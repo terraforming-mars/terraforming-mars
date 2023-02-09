@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
 import {NitrogenRichAsteroid} from '../../../src/server/cards/base/NitrogenRichAsteroid';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrogenRichAsteroid', function() {
@@ -15,11 +14,11 @@ describe('NitrogenRichAsteroid', function() {
     expect(action).is.undefined;
     expect(player.getTerraformRating()).to.eq(23);
     expect(game.getTemperature()).to.eq(-28);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
     player.playedCards.push(new Bushes(), new Bushes(), new Bushes());
     card.play(player);
     expect(player.getTerraformRating()).to.eq(26);
     expect(game.getTemperature()).to.eq(-26);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(5);
+    expect(player.production.plants).to.eq(5);
   });
 });

@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -10,7 +10,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resources} from '../../../common/Resources';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
@@ -20,10 +19,14 @@ export class LargeConvoy extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.LARGE_CONVOY,
-      tags: [Tags.EARTH, Tags.SPACE],
+      tags: [Tag.EARTH, Tag.SPACE],
       cost: 36,
-      tr: {oceans: 1},
       victoryPoints: 2,
+
+      behavior: {
+        drawCard: 2,
+        ocean: {},
+      },
 
       metadata: {
         cardNumber: '143',
@@ -31,19 +34,16 @@ export class LargeConvoy extends Card implements IProjectCard {
           b.oceans(1).cards(2).br;
           b.plants(5, {digit}).or(Size.MEDIUM).animals(4, {digit}).asterix();
         }),
-        description: 'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
+        description: 'Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.',
       },
     });
   }
 
-  public play(player: Player): PlayerInput | undefined {
-    player.drawCard(2);
-
+  public override bespokePlay(player: Player): PlayerInput | undefined {
     const animalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
       player.addResource(Resources.PLANTS, 5, {log: true});
-      player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };
 
@@ -58,7 +58,6 @@ export class LargeConvoy extends Card implements IProjectCard {
       const targetAnimalCard = animalCards[0];
       availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
-        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else {
@@ -69,7 +68,6 @@ export class LargeConvoy extends Card implements IProjectCard {
           animalCards,
           ([card]) => {
             player.addResourceTo(card, {qty: 4, log: true});
-            player.game.defer(new PlaceOceanTile(player));
             return undefined;
           },
         ),

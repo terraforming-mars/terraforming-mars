@@ -6,7 +6,7 @@ import {TestPlayer} from '../TestPlayer';
 import {Game} from '../../src/server/Game';
 import {newTestGame, getTestPlayer} from '../TestGame';
 
-describe('SelectProductionToLose', function() {
+describe('SelectProductionToLoseDeferred', function() {
   let game: Game;
   let player: TestPlayer;
 
@@ -18,11 +18,11 @@ describe('SelectProductionToLose', function() {
   it('sanity test', function() {
     expect(() => cb({}, 1)).to.throw();
     cb({megacredits: 1}, 1);
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: -1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: -1}));
   });
 
   it('prevents taking too much production', function() {
-    player.setProductionForTest({megacredits: 5, heat: 10});
+    player.production.override({megacredits: 5, heat: 10});
     player.megaCredits = 100;
     player.heat = 100;
     expect(() => cb({megacredits: 12}, 12)).to.throw();
@@ -30,26 +30,25 @@ describe('SelectProductionToLose', function() {
   });
 
   it('prevents negative production', function() {
-    player.setProductionForTest({megacredits: 10, heat: 10});
+    player.production.override({megacredits: 10, heat: 10});
     player.megaCredits = 100;
     player.heat = 100;
     expect(() => cb({megacredits: 15, heat: 5, steel: -10}, 10)).to.throw();
   });
 
   it('allows taking enough production', function() {
-    player.setProductionForTest({megacredits: 10, heat: 10});
+    player.production.override({megacredits: 10, heat: 10});
     cb({megacredits: 5}, 5);
     cb({megacredits: 3, heat: 2}, 5);
     cb({megacredits: 2, heat: 8}, 10);
-    expect(player.getProductionForTest()).deep.eq(Units.of({}));
+    expect(player.production.asUnits()).deep.eq(Units.of({}));
   });
 
   function cb(units: Partial<Units>, count: number) {
     const deferred = new SelectProductionToLoseDeferred(player, count);
     const sptl = deferred.execute();
 
-    const input = JSON.stringify(Units.of(units));
-    player.runInput([[input]], sptl);
+    player.runInput({type: 'productionToLose', units: Units.of(units)}, sptl);
   }
 });
 

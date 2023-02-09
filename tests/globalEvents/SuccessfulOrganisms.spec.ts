@@ -18,14 +18,14 @@ describe('SuccessfulOrganisms', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
-    player.addProduction(Resources.PLANTS, 3);
-    player2.addProduction(Resources.PLANTS, 3);
+    player.production.add(Resources.PLANTS, 3);
+    player2.production.add(Resources.PLANTS, 3);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.PLANTS)).to.eq(3);
-    expect(player2.getResource(Resources.PLANTS)).to.eq(6);
+    expect(player.plants).to.eq(3);
+    expect(player2.plants).to.eq(6);
   });
 });

@@ -1,6 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IActionCard, ICard, isIActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
@@ -12,7 +12,7 @@ export class Viron extends Card implements ICard, ICorporationCard {
   constructor() {
     super({
       name: CardName.VIRON,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       startingMegaCredits: 48,
       cardType: CardType.CORPORATION,
 
@@ -34,10 +34,13 @@ export class Viron extends Card implements ICard, ICorporationCard {
 
   private getActionCards(player: Player): Array<IActionCard & ICard> {
     const result: Array<IActionCard & ICard> = [];
-    for (const playedCard of player.playedCards) {
+    for (const playedCard of player.tableau) {
+      if (playedCard === this) {
+        continue;
+      }
       if (isIActionCard(playedCard) &&
-                    player.getActionsThisGeneration().has(playedCard.name) &&
-                    playedCard.canAct(player)) {
+          player.getActionsThisGeneration().has(playedCard.name) &&
+          playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }
@@ -63,9 +66,5 @@ export class Viron extends Card implements ICard, ICorporationCard {
         return foundCard.action(player);
       },
     );
-  }
-
-  public play() {
-    return undefined;
   }
 }

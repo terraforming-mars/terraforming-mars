@@ -1,9 +1,10 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -18,7 +19,7 @@ export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.GLOBAL_DUST_STORM,
-      description: 'Lose all heat. Lose 2 M€ for each Building tag (max 5, then reduced by influence).',
+      description: 'Lose all heat. Lose 2 M€ for each building tag (max 5, then reduced by influence).',
       revealedDelegate: PartyName.KELVINISTS,
       currentDelegate: PartyName.GREENS,
       renderData: RENDER_DATA,
@@ -29,7 +30,7 @@ export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {
       if (player.heat > 0) {
         player.deductResource(Resources.HEAT, player.heat, {log: true, from: this.name});
       }
-      const maxedSteelTags = Math.min(5, player.getTagCount(Tags.BUILDING, 'raw'));
+      const maxedSteelTags = Math.min(5, player.tags.count(Tag.BUILDING, 'raw'));
       player.deductResource(Resources.MEGACREDITS, 2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }

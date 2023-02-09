@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -12,9 +10,13 @@ export class VestaShipyard extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.VESTA_SHIPYARD,
-      tags: [Tags.JOVIAN, Tags.SPACE],
+      tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 15,
       victoryPoints: 1,
+
+      behavior: {
+        production: {titanium: 1},
+      },
 
       metadata: {
         cardNumber: '057',
@@ -24,9 +26,5 @@ export class VestaShipyard extends Card implements IProjectCard {
         description: 'Increase your titanium production 1 step.',
       },
     });
-  }
-  public play(player: Player): undefined {
-    player.addProduction(Resources.TITANIUM, 1);
-    return undefined;
   }
 }

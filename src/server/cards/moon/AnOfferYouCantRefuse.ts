@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PlayerId} from '../../../common/Types';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ProjectCard} from '../ProjectCard';
+import {Card} from '../Card';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -12,7 +12,7 @@ import {Game} from '../../Game';
 import {IParty} from '../../turmoil/parties/IParty';
 import {all} from '../Options';
 
-export class AnOfferYouCantRefuse extends ProjectCard {
+export class AnOfferYouCantRefuse extends Card {
   constructor() {
     super({
       name: CardName.AN_OFFER_YOU_CANT_REFUSE,
@@ -34,13 +34,20 @@ export class AnOfferYouCantRefuse extends ProjectCard {
   }
 
   // You can play this if you have an available delegate, and if there are non-neutral non-leader delegates available to swap with.
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    const hasDelegate = turmoil.hasDelegatesInReserve(player.id) || turmoil.lobby.has(player.id);
-    if (!hasDelegate) return false;
+    if (!turmoil.hasDelegatesInReserve(player.id)) {
+      return false;
+    }
 
-    return turmoil.parties.some((party) =>
-      party.delegates.some((delegate) => this.isReplaceableDelegate(delegate, player, party)));
+    for (const party of turmoil.parties) {
+      for (const delegate of party.delegates.keys()) {
+        if (this.isReplaceableDelegate(delegate, player, party)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   private moveToAnotherParty(game: Game, from: PartyName, delegate: PlayerId): OrOptions {
@@ -55,7 +62,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
       } else {
         orOptions.options.push(new SelectOption(party.name, 'Select', () => {
           turmoil.removeDelegateFromParty(delegate, from, game);
-          turmoil.sendDelegateToParty(delegate, party.name, game, 'reserve');
+          turmoil.sendDelegateToParty(delegate, party.name, game);
           return undefined;
         }));
       }
@@ -64,27 +71,26 @@ export class AnOfferYouCantRefuse extends ProjectCard {
     return orOptions;
   }
 
-  public override play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
     const orOptions = new OrOptions();
 
-    turmoil.parties.forEach((party) => {
-      party.getPresentPlayers() // getPresentPlayers removes duplicates.
-        .forEach((delegate) => {
-          if (!this.isReplaceableDelegate(delegate, player, party)) return;
+    for (const party of turmoil.parties) {
+      for (const delegate of party.delegates.keys()) {
+        if (!this.isReplaceableDelegate(delegate, player, party)) {
+          continue;
+        }
 
-          const playerName = game.getPlayerById(delegate).name;
-          const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
-            const source = turmoil.hasDelegatesInReserve(player.id) ? 'reserve' : 'lobby';
-            turmoil.replaceDelegateFromParty(delegate, player.id, source, party.name, game);
-            turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
-            return this.moveToAnotherParty(game, party.name, player.id);
-          });
-          orOptions.options.push(option);
+        const playerName = game.getPlayerById(delegate).name;
+        const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
+          turmoil.replaceDelegateFromParty(delegate, player.id, party.name, game);
+          turmoil.checkDominantParty(); // Check dominance right after replacement (replace doesn't check dominance.)
+          return this.moveToAnotherParty(game, party.name, player.id);
         });
-    });
-
+        orOptions.options.push(option);
+      }
+    }
     return orOptions;
   }
 }

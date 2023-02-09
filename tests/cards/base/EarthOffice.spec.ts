@@ -3,12 +3,11 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('EarthOffice', function() {
   let card: EarthOffice;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new EarthOffice();
@@ -16,7 +15,7 @@ describe('EarthOffice', function() {
     const redPlayer = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, redPlayer], player);
 
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 

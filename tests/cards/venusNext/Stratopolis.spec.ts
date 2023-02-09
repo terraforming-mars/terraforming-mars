@@ -4,21 +4,18 @@ import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
   let card: Stratopolis;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new Stratopolis();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
+    Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({venusNextExtension: true}));
   });
 
   it('Can not play', function() {
@@ -30,7 +27,7 @@ describe('Stratopolis', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should act - single target', function() {
@@ -43,9 +40,9 @@ describe('Stratopolis', function() {
     const card2 = new AerialMappers();
     player.playedCards.push(card, card2);
 
-    const action = card.action(player);
-    expect(action).instanceOf(SelectCard);
-        action!.cb([card2]);
-        expect(card2.resourceCount).to.eq(2);
+    const action = cast(card.action(player), SelectCard);
+    action.cb([card2]);
+
+    expect(card2.resourceCount).to.eq(2);
   });
 });

@@ -11,15 +11,15 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
+import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import AndOptions from '@/client/components/AndOptions.vue';
 import OrOptions from '@/client/components/OrOptions.vue';
 import SelectAmount from '@/client/components/SelectAmount.vue';
 import SelectCard from '@/client/components/SelectCard.vue';
-import SelectHowToPay from '@/client/components/SelectHowToPay.vue';
-import SelectHowToPayForProjectCard from '@/client/components/SelectHowToPayForProjectCard.vue';
+import SelectPayment from '@/client/components/SelectPayment.vue';
+import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import SelectOption from '@/client/components/SelectOption.vue';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
@@ -58,8 +58,8 @@ export default Vue.component('player-input-factory', {
     'select-amount': SelectAmount,
     SelectCard,
     'select-option': SelectOption,
-    SelectHowToPay,
-    SelectHowToPayForProjectCard,
+    SelectPayment,
+    SelectProjectCardToPlay,
     SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
@@ -77,37 +77,37 @@ export default Vue.component('player-input-factory', {
       const canSave = (this.$children[0] as any).canSave;
       return canSave ? canSave() : true;
     },
-    getComponentName(inputType: PlayerInputTypes): string {
+    getComponentName(inputType: PlayerInputType): string {
       switch (inputType) {
-      case PlayerInputTypes.AND_OPTIONS:
+      case PlayerInputType.AND_OPTIONS:
         return 'and-options';
-      case PlayerInputTypes.SELECT_CARD:
+      case PlayerInputType.SELECT_CARD:
         return 'SelectCard';
-      case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
-        return 'SelectHowToPayForProjectCard';
-      case PlayerInputTypes.SELECT_INITIAL_CARDS:
+      case PlayerInputType.SELECT_PROJECT_CARD_TO_PLAY:
+        return 'SelectProjectCardToPlay';
+      case PlayerInputType.SELECT_INITIAL_CARDS:
         return 'SelectInitialCards';
-      case PlayerInputTypes.OR_OPTIONS:
+      case PlayerInputType.OR_OPTIONS:
         return 'or-options';
-      case PlayerInputTypes.SELECT_OPTION:
+      case PlayerInputType.SELECT_OPTION:
         return 'select-option';
-      case PlayerInputTypes.SELECT_HOW_TO_PAY:
-        return 'SelectHowToPay';
-      case PlayerInputTypes.SELECT_SPACE:
+      case PlayerInputType.SELECT_PAYMENT:
+        return 'SelectPayment';
+      case PlayerInputType.SELECT_SPACE:
         return 'select-space';
-      case PlayerInputTypes.SELECT_PLAYER:
+      case PlayerInputType.SELECT_PLAYER:
         return 'select-player';
-      case PlayerInputTypes.SELECT_AMOUNT:
+      case PlayerInputType.SELECT_AMOUNT:
         return 'select-amount';
-      case PlayerInputTypes.SELECT_DELEGATE:
+      case PlayerInputType.SELECT_DELEGATE:
         return 'select-party-player';
-      case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
+      case PlayerInputType.SELECT_PARTY_TO_SEND_DELEGATE:
         return 'select-party-to-send-delegate';
-      case PlayerInputTypes.SELECT_COLONY:
+      case PlayerInputType.SELECT_COLONY:
         return 'select-colony';
-      case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
+      case PlayerInputType.SELECT_PRODUCTION_TO_LOSE:
         return 'select-production-to-lose';
-      case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
+      case PlayerInputType.SHIFT_ARES_GLOBAL_PARAMETERS:
         return 'shift-ares-global-parameters';
       default:
         throw new Error('Unsupported input type: ' + inputType);

@@ -5,10 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {ISpace} from '../../boards/ISpace';
+import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
 
 export class SmallComet extends Card implements IProjectCard {
@@ -17,8 +14,14 @@ export class SmallComet extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SMALL_COMET,
       cost: 32,
-      tags: [Tags.MARS, Tags.SPACE],
+      tags: [Tag.MARS, Tag.SPACE],
       tr: {temperature: 1, oxygen: 1, oceans: 1},
+
+      behavior: {
+        stock: {titanium: 1},
+        global: {temperature: 1, oxygen: 1},
+        ocean: {on: 'land'},
+      },
 
       metadata: {
         cardNumber: 'Pf37',
@@ -35,21 +38,13 @@ export class SmallComet extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.game.getPlayers().forEach((p) => {
+  public override bespokePlay(player: Player) {
+    const game = player.game;
+    game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
       }
     });
-    player.game.increaseTemperature(player, 1);
-    player.game.increaseOxygenLevel(player, 1);
-    player.addResource(Resources.TITANIUM, 1);
-    if (player.game.canAddOcean()) {
-      return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
-        player.game.addOceanTile(player, space.id, SpaceType.LAND);
-        return undefined;
-      });
-    }
     return undefined;
   }
 }

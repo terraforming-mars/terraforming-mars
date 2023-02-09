@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Astrodrill} from '../../../src/server/cards/promo/Astrodrill';
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
@@ -17,10 +17,11 @@ describe('Astrodrill', function() {
     card = new Astrodrill();
     player = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player);
+    const game = Game.newInstance('gameid', [player, redPlayer], player);
 
-    card.play();
     player.setCorporationForTest(card);
+    card.play(player);
+    runAllActions(game);
   });
 
   it('Starts with 3 asteroid resources', function() {
@@ -54,7 +55,7 @@ describe('Astrodrill', function() {
     player.playedCards.push(cometAiming);
 
     const action = cast(card.action(player), OrOptions);
-    const addAsteroidOption = action.options[1] as SelectCard<ICard>;
+    const addAsteroidOption = cast(action.options[1], SelectCard<ICard>);
 
     const result = addAsteroidOption.cb([cometAiming]);
     expect(cometAiming.resourceCount).to.eq(1);

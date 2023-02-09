@@ -1,29 +1,24 @@
 import {expect} from 'chai';
 import {GMOContract} from '../../../src/server/cards/turmoil/GMOContract';
-import {Game} from '../../../src/server/Game';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {testGameOptions} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('GMOContract', function() {
   it('Should play', function() {
     const card = new GMOContract();
-    const player = TestPlayer.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    const game = Game.newInstance('gameid', [player], player, gameOptions);
+    const game = newTestGame(1, testGameOptions({turmoilExtension: true}));
+    const player = getTestPlayer(game, 0);
+    const turmoil = game.turmoil!;
 
-    if (game.turmoil !== undefined) {
-      game.turmoil.rulingParty = game.turmoil.getPartyByName(PartyName.REDS);
-      expect(player.canPlayIgnoringCost(card)).is.not.true;
-      const greens = game.turmoil.getPartyByName(PartyName.GREENS);
-      if (greens !== undefined) {
-        greens.delegates.push(player.id, player.id);
-        expect(player.canPlayIgnoringCost(card)).is.true;
-      }
-      card.play();
-      card.onCardPlayed(player, card);
-      game.deferredActions.runNext();
-      expect(player.megaCredits).to.eq(2);
-    }
+    turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
+    greens.delegates.add(player.id, 2);
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    card.play(player);
+    card.onCardPlayed(player, card);
+    game.deferredActions.runNext();
+    expect(player.megaCredits).to.eq(2);
   });
 });

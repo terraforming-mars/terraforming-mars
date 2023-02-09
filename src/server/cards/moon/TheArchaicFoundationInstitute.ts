@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
@@ -14,9 +14,13 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
     super({
       cardType: CardType.CORPORATION,
       name: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
-      tags: [Tags.MOON, Tags.MOON],
+      tags: [Tag.MOON, Tag.MOON],
       startingMegaCredits: 55,
       resourceType: CardResource.RESOURCE_CUBE,
+
+      behavior: {
+        addResources: 2,
+      },
 
       metadata: {
         description: 'You start with 55 M€.',
@@ -34,16 +38,9 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
     });
   }
 
-  public override resourceCount = 0;
-
-  public play() {
-    this.resourceCount += 2;
-    return undefined;
-  }
-
   public onCardPlayed(player: Player, card: IProjectCard): void {
     if (player.isCorporation(this.name)) {
-      const moonTags = card.tags.filter((t) => t === Tags.MOON);
+      const moonTags = card.tags.filter((t) => t === Tag.MOON);
       const count = moonTags.length;
       if (count > 0) {
         player.addResourceTo(this, count);

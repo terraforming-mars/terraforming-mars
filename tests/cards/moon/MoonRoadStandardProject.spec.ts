@@ -1,27 +1,24 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions, testRedsCosts} from '../../TestingUtils';
+import {cast, testGameOptions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadStandardProject';
 import {expect} from 'chai';
-import {SelectHowToPayDeferred} from '../../../src/server/deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Phase} from '../../../src/common/Phase';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('MoonRoadStandardProject', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: MoonRoadStandardProject;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new MoonRoadStandardProject();
   });
@@ -44,12 +41,12 @@ describe('MoonRoadStandardProject', () => {
 
   it('has discount', () => {
     card.action(player);
-    let payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
+    let payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     expect(payAction.amount).eq(18);
 
     player.playedCards.push(new MooncrateBlockFactory());
     card.action(player);
-    payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
+    payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     expect(payAction.amount).eq(14);
   });
 
@@ -58,14 +55,14 @@ describe('MoonRoadStandardProject', () => {
     expect(player.getTerraformRating()).eq(14);
 
     card.action(player);
-    const payAction = game.deferredActions.pop() as SelectHowToPayDeferred;
+    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
     payAction.options.afterPay!();
 
     expect(player.steel).eq(2);
     expect(moonData.logisticRate).eq(0);
 
-    const placeTileAction = game.deferredActions.peek() as PlaceMoonRoadTile;
-    placeTileAction!.execute()!.cb(moonData.moon.spaces[2]);
+    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
+    placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
@@ -74,7 +71,7 @@ describe('MoonRoadStandardProject', () => {
 
   it('can act when Reds are in power.', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
 

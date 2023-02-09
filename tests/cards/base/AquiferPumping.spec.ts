@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {AquiferPumping, OCEAN_COST} from '../../../src/server/cards/base/AquiferPumping';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {maxOutOceans, setCustomGameOptions} from '../../TestingUtils';
+import {maxOutOceans, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
@@ -11,7 +10,7 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 
 describe('AquiferPumping', function() {
   let card: AquiferPumping;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -22,7 +21,7 @@ describe('AquiferPumping', function() {
   });
 
   it('Should play', function() {
-    expect(card.play()).is.undefined;
+    expect(card.play(player)).is.undefined;
   });
 
   it('Should act', function() {
@@ -46,7 +45,7 @@ describe('AquiferPumping', function() {
 
   it('Cannot act if cannot afford reds tax', function() {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -68,7 +67,7 @@ describe('AquiferPumping', function() {
 
   it('Steel does not satisfy the reds tax', function() {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, setCustomGameOptions());
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 

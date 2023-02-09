@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {AnOfferYouCantRefuse} from '../../../src/server/cards/moon/AnOfferYouCantRefuse';
 import {TestPlayer} from '../../TestPlayer';
 import {NeutralPlayer, Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -8,8 +8,6 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PlayerId} from '../../../src/common/Types';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-
-const GAME_OPTIONS = setCustomGameOptions({moonExpansion: true, turmoilExtension: true});
 
 describe('AnOfferYouCantRefuse', () => {
   let player: TestPlayer;
@@ -24,7 +22,7 @@ describe('AnOfferYouCantRefuse', () => {
     player = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
     greenPlayer = TestPlayer.GREEN.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer, greenPlayer], player, GAME_OPTIONS);
+    game = Game.newInstance('gameid', [player, redPlayer, greenPlayer], player, testGameOptions({moonExpansion: true, turmoilExtension: true}));
     turmoil = game.turmoil!;
     parties = new Parties(turmoil);
     clearParties();
@@ -59,7 +57,8 @@ describe('AnOfferYouCantRefuse', () => {
     populateParty(parties.reds, 'NEUTRAL', redPlayer.id, 'NEUTRAL', redPlayer.id);
     expect(parties.reds.partyLeader).eq('NEUTRAL');
 
-    const options = card.play(player);
+    expect(card.canPlay(player)).is.true;
+    const options = cast(card.play(player), OrOptions);
     expect(options.options.map((option) => option.title)).deep.eq(
       [
         'Greens / player-red', // Option 0
@@ -69,15 +68,16 @@ describe('AnOfferYouCantRefuse', () => {
 
     // Now do a delegate exchange
     // Swap with Reds / red
-    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
-    expect(turmoil.getAvailableDelegateCount(redPlayer.id, 'reserve')).eq(6);
-    expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, redPlayer.id]);
+    expect(turmoil.getAvailableDelegateCount(player.id)).eq(7);
+    expect(turmoil.getAvailableDelegateCount(redPlayer.id)).eq(7);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, redPlayer.id]);
 
     const switchParties = cast(options.options[2].cb(), OrOptions);
 
-    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(5);
-    expect(turmoil.getAvailableDelegateCount(redPlayer.id, 'reserve')).eq(7);
-    expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
+    expect(turmoil.getAvailableDelegateCount(player.id)).eq(6);
+    // TODO(kberg): rewrite this test, because it shouldn't be possible for red to have this many delegates.
+    expect(turmoil.getAvailableDelegateCount(redPlayer.id)).eq(8);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
 
     // Now player may switch parties.
     expect(switchParties.options.map((option) => option.title)).deep.eq(
@@ -91,15 +91,15 @@ describe('AnOfferYouCantRefuse', () => {
       ]);
 
     // This is a repeat assertion from above but it makes the test easier to read.
-    expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
-    expect(parties.scientists.delegates).to.have.members([]);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
+    expect(Array.from(parties.scientists.delegates.values())).to.have.members([]);
     expect(parties.scientists.partyLeader).is.undefined;
 
     // Choose scientists
     switchParties.options[1].cb();
 
-    expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id]);
-    expect(parties.scientists.delegates).to.have.members([player.id]);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id]);
+    expect(Array.from(parties.scientists.delegates.values())).to.have.members([player.id]);
     expect(parties.scientists.partyLeader).eq(player.id);
   });
 
@@ -107,7 +107,7 @@ describe('AnOfferYouCantRefuse', () => {
     populateParty(parties.greens, player.id, redPlayer.id, greenPlayer.id);
     populateParty(parties.reds, 'NEUTRAL', redPlayer.id, 'NEUTRAL', redPlayer.id);
 
-    const options = card.play(player);
+    const options = cast(card.play(player), OrOptions);
     expect(options.options.map((option) => option.title)).deep.eq(
       [
         'Greens / player-red', // Option 0
@@ -117,14 +117,14 @@ describe('AnOfferYouCantRefuse', () => {
 
     // Now do a delegate exchange
     // Swap with Reds / red
-    expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, redPlayer.id]);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, redPlayer.id]);
     const switchParties = cast(options.options[2].cb(), OrOptions);
-    expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
 
     // Do not move
     switchParties.options[4].cb();
 
-    expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
   });
 
   it('play can change leadership twice', () => {
@@ -133,29 +133,29 @@ describe('AnOfferYouCantRefuse', () => {
     populateParty(parties.reds, 'NEUTRAL', player.id);
     expect(parties.reds.partyLeader).eq('NEUTRAL');
 
-    const options = card.play(player);
+    const options = cast(card.play(player), OrOptions);
     expect(options.options.map((option) => option.title)).deep.eq(['Greens / player-green']);
 
     // Now do a delegate exchange
     // Swap with Greens / green
     const switchParties = cast(options.options[0].cb(), OrOptions);
 
-    expect(parties.greens.delegates).to.have.members([redPlayer.id, player.id, player.id]);
+    expect(Array.from(parties.greens.delegates.values())).to.have.members([redPlayer.id, player.id, player.id]);
     expect(parties.greens.partyLeader).to.eq(player.id);
 
     // Now choose reds (option 4).
     switchParties.options[4].cb();
 
-    expect(parties.greens.delegates).to.have.members([redPlayer.id, player.id]);
+    expect(Array.from(parties.greens.delegates.values())).to.have.members([redPlayer.id, player.id]);
     expect(parties.greens.partyLeader).to.eq(player.id);
-    expect(parties.reds.delegates).to.have.members([player.id, player.id, 'NEUTRAL']);
+    expect(Array.from(parties.reds.delegates.values())).to.have.members([player.id, player.id, 'NEUTRAL']);
     expect(parties.reds.partyLeader).to.eq(player.id);
   });
 
   function clearParties() {
     turmoil.parties.forEach((party) => {
-      turmoil.delegateReserve.push(...party.delegates.filter((delegate) => delegate !== 'NEUTRAL'));
-      party.delegates = [];
+      party.delegates.forEachMultiplicity((count, key) => turmoil.delegateReserve.add(key, count));
+      party.delegates.clear();
       party.partyLeader = undefined;
     });
   }

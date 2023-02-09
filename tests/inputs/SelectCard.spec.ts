@@ -1,0 +1,72 @@
+import {expect} from 'chai';
+import {SelectCard} from '../../src/server/inputs/SelectCard';
+import {AquiferPumping} from '../../src/server/cards/base/AquiferPumping';
+import {RoboticWorkforce} from '../../src/server/cards/base/RoboticWorkforce';
+import {IoMiningIndustries} from '../../src/server/cards/base/IoMiningIndustries';
+import {ICard} from '../../src/server/cards/ICard';
+import {CardName} from '../../src/common/cards/CardName';
+
+describe('SelectCard', function() {
+  let aquiferPumping: ICard;
+  let roboticWorkforce: ICard;
+  let ioMiningIndustries: ICard;
+  let selected: Array<ICard>;
+  const cb = (cards: Array<ICard>) => {
+    selected = cards;
+    return undefined;
+  };
+
+  beforeEach(() => {
+    aquiferPumping = new AquiferPumping();
+    roboticWorkforce = new RoboticWorkforce();
+    ioMiningIndustries = new IoMiningIndustries();
+    selected = [];
+  });
+
+  it('Simple', function() {
+    const selectCards = new SelectCard(
+      'Select card',
+      'Save',
+      [aquiferPumping, ioMiningIndustries],
+      cb,
+    );
+
+    selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING]});
+    expect(selected).deep.eq([aquiferPumping]);
+
+    selectCards.process({type: 'card', cards: [CardName.IO_MINING_INDUSTRIES]});
+    expect(selected).deep.eq([ioMiningIndustries]);
+  });
+
+  it('Cannot select unavailable card', function() {
+    const selectCards = new SelectCard(
+      'Select card',
+      'Save',
+      [aquiferPumping, roboticWorkforce],
+      cb,
+    );
+
+    expect(() => selectCards.process({type: 'card', cards: [CardName.DIRECTED_IMPACTORS]}))
+      .to.throw(Error, /Card Directed Impactors not found/);
+  });
+
+  it('Throws error when selected card was not enabled', function() {
+    const selectCards = new SelectCard(
+      'Select card',
+      'Save',
+      [aquiferPumping, roboticWorkforce, ioMiningIndustries],
+      cb,
+      {enabled: [true, false, true]},
+    );
+
+    selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING]});
+    expect(selected).deep.eq([aquiferPumping]);
+
+    selectCards.process({type: 'card', cards: [CardName.IO_MINING_INDUSTRIES]});
+    expect(selected).deep.eq([ioMiningIndustries]);
+
+    expect(() => selectCards.process({type: 'card', cards: [CardName.ROBOTIC_WORKFORCE]}))
+      .to.throw(Error, /Robotic Workforce is not available/);
+  });
+});
+

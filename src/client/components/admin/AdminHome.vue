@@ -10,16 +10,18 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import * as paths from '@/common/app/paths';
 
 export default Vue.extend({
   name: 'admin-home',
   data() {
     return {
       paths: [
-        '/api/stats',
-        '/games-overview',
-        '/api/games',
-        '/api/metrics',
+        paths.API_STATS,
+        paths.GAMES_OVERVIEW,
+        paths.API_GAMES,
+        paths.API_METRICS,
+        paths.LOAD,
       ],
     };
   },

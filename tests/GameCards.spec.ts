@@ -1,14 +1,15 @@
 import {expect} from 'chai';
 import {COMMUNITY_CARD_MANIFEST} from '../src/server/cards/community/CommunityCardManifest';
 import {CardFinder} from '../src/server/CardFinder';
-import {setCustomGameOptions} from './TestingUtils';
+import {testGameOptions} from './TestingUtils';
 import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
+import {CardManifest} from '../src/server/cards/ModuleManifest';
 
 describe('GameCards', function() {
   it('correctly removes projectCardsToRemove', function() {
     // include corporate era
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = testGameOptions({
       corporateEra: false,
       preludeExtension: false,
       venusNextExtension: false,
@@ -25,7 +26,7 @@ describe('GameCards', function() {
 
   it('correctly separates 71 corporate era cards', function() {
     // include corporate era
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = testGameOptions({
       corporateEra: true,
       preludeExtension: false,
       venusNextExtension: false,
@@ -45,7 +46,7 @@ describe('GameCards', function() {
   });
 
   it('excludes expansion-specific preludes if those expansions are not selected ', function() {
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = testGameOptions({
       corporateEra: true,
       preludeExtension: false,
       venusNextExtension: false,
@@ -58,12 +59,41 @@ describe('GameCards', function() {
 
     const preludeDeck = new GameCards(gameOptions).getPreludeCards();
 
-    const turmoilPreludes: Array<CardName> = [];
-    COMMUNITY_CARD_MANIFEST.preludeCards.factories.forEach((cf) => turmoilPreludes.push(cf.cardName));
-    turmoilPreludes.forEach((preludeName) => {
+    const communityPreludes = CardManifest.keys(COMMUNITY_CARD_MANIFEST.preludeCards);
+    communityPreludes.forEach((preludeName) => {
       const preludeCard = new CardFinder().getPreludeByName(preludeName)!;
       expect(preludeDeck.includes(preludeCard)).is.not.true;
     });
+  });
+
+  it('correctly removes the Merger prelude card if twoCorpsVariant is being used ', function() {
+    const gameOptions = testGameOptions({
+      corporateEra: true,
+      preludeExtension: true,
+      venusNextExtension: false,
+      coloniesExtension: false,
+      turmoilExtension: false,
+      promoCardsOption: false,
+      communityCardsOption: false,
+      aresExtension: false,
+      twoCorpsVariant: true,
+    });
+
+    const preludeDeck = new GameCards(gameOptions).getPreludeCards();
+    expect(preludeDeck).to.not.contain(CardName.MERGER);
+  });
+
+  it('CEOs: Includes/Excludes specific CEOs if those expansions are/are not selected ', function() {
+    const gameOptions = testGameOptions({
+      ceoExtension: true,
+      corporateEra: true,
+      preludeExtension: true,
+      moonExpansion: false,
+    });
+    const ceoNames = new GameCards(gameOptions).getCeoCards().map((c) => c.name);
+    expect(ceoNames).to.contain(CardName.FLOYD); // Yes generic CEO
+    expect(ceoNames).to.contain(CardName.KAREN); // Yes Prelude
+    expect(ceoNames).not.to.contain(CardName.NEIL); // No Moon
   });
 });
 

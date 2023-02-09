@@ -1,26 +1,21 @@
 import {expect} from 'chai';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Resources} from '../../../src/common/Resources';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {cast, testGameOptions} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('UtopiaInvest', function() {
   it('Should play', function() {
     const card = new UtopiaInvest();
-    const player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions());
+    const game = newTestGame(2, testGameOptions({turmoilExtension: true}));
+    const player = getTestPlayer(game, 0);
     const play = card.play(player);
     expect(play).is.undefined;
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
-    const action = card.action(player);
-    expect(action).is.not.undefined;
-    expect(action).instanceOf(OrOptions);
+    expect(player.production.titanium).to.eq(1);
+    expect(player.production.steel).to.eq(1);
+    const action = cast(card.action(player), OrOptions);
     action.options[2].cb();
     expect(player.titanium).to.eq(4);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
+    expect(player.production.titanium).to.eq(0);
   });
 });

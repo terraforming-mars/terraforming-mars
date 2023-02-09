@@ -1,7 +1,6 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {Tag} from '../../../common/cards/Tag';
 import {ISpace} from '../../boards/ISpace';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
@@ -20,9 +19,13 @@ export class Philares extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.PHILARES,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       startingMegaCredits: 47,
-      initialActionText: 'Place a greenery tile and raise the oxygen 1 step',
+
+      firstAction: {
+        text: 'Place a greenery tile and raise the oxygen 1 step',
+        greenery: {},
+      },
 
       metadata: {
         cardNumber: 'R25',
@@ -40,24 +43,13 @@ export class Philares extends Card implements ICorporationCard {
     });
   }
 
-  public initialAction(player: Player) {
-    return new SelectSpace('Select space for greenery tile',
-      player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-        player.game.addGreenery(player, space.id);
-
-        player.game.log('${0} placed a Greenery tile', (b) => b.player(player));
-
-        return undefined;
-      });
-  }
-
   private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {
-    let megacreditsAmount: number = 0;
-    let steelAmount: number = 0;
-    let titaniumAmount: number = 0;
-    let plantsAmount: number = 0;
-    let energyAmount: number = 0;
-    let heatAmount: number = 0;
+    let megacreditsAmount = 0;
+    let steelAmount = 0;
+    let titaniumAmount = 0;
+    let plantsAmount = 0;
+    let energyAmount = 0;
+    let heatAmount = 0;
 
     const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
       megacreditsAmount = amount;
@@ -134,9 +126,5 @@ export class Philares extends Card implements ICorporationCard {
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
       );
     }
-  }
-
-  public play() {
-    return undefined;
   }
 }

@@ -3,9 +3,11 @@ import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
-import {mainAppSettings} from '@/client/components/App';
+import {MainAppData} from '@/client/components/App';
 
 import * as constants from '@/common/constants';
+import * as paths from '@/common/app/paths';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 
 export default Vue.extend({
   name: 'LoadGameForm',
@@ -24,20 +26,20 @@ export default Vue.extend({
       const gameId = this.$data.gameId;
       const rollbackCount = this.$data.rollbackCount;
       const xhr = new XMLHttpRequest();
-      xhr.open('PUT', '/load_game');
+      xhr.open('PUT', paths.LOAD_GAME);
       xhr.onerror = function() {
         alert('Error loading game');
       };
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           const response = xhr.response as SimpleGameModel;
           if (response.players.length === 1) {
             window.location.href = '/player?id=' + response.players[0].id;
             return;
           } else {
             window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
-            (this.$root.$data as unknown as typeof mainAppSettings.data).game = response;
-            (this.$root.$data as unknown as typeof mainAppSettings.data).screen = 'game-home';
+            (this.$root.$data as unknown as MainAppData).game = response;
+            (this.$root.$data as unknown as MainAppData).screen = 'game-home';
           }
         } else {
           alert('Unexpected server response');
@@ -60,7 +62,7 @@ export default Vue.extend({
       <div class="load-game-form load-game--block">
           <div class="container load-game-options">
               <div >
-                  <label for="gameId">Game Id to reload:</label><br/>
+                  <label for="gameId">Game, player, or spectator ID to reload:</label><br/>
                   <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
                   <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
                   <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>

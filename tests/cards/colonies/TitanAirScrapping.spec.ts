@@ -3,12 +3,11 @@ import {cast} from '../../TestingUtils';
 import {TitanAirScrapping} from '../../../src/server/cards/colonies/TitanAirScrapping';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('TitanAirScrapping', function() {
   let card: TitanAirScrapping;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new TitanAirScrapping();

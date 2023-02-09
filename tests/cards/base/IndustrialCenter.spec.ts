@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {IndustrialCenter} from '../../../src/server/cards/base/IndustrialCenter';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
+import {addCityTile, cast} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('IndustrialCenter', function() {
   let card: IndustrialCenter;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -28,18 +28,17 @@ describe('IndustrialCenter', function() {
     card.action(player);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
   });
 
   it('Should play', function() {
-    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    addCityTile(player);
     expect(game.getCitiesOnMarsCount()).to.eq(1);
 
-    const action = card.play(player);
-    const space = action!.availableSpaces[0];
-        action!.cb(space);
-        expect(space.tile).is.not.undefined;
-        expect(space.tile && space.tile.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
-        expect(space.adjacency?.bonus).eq(undefined);
+    const action = cast(card.play(player), SelectSpace);
+    const space = action.availableSpaces[0];
+    action.cb(space);
+    expect(space.tile?.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
+    expect(space.adjacency?.bonus).eq(undefined);
   });
 });

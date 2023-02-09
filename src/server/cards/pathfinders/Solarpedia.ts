@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard, VictoryPoints} from '../ICard';
@@ -15,11 +15,15 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
     super({
       name: CardName.SOLARPEDIA,
       cardType: CardType.ACTIVE,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 12,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.MARS).tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.MARS).tag(Tag.JOVIAN)),
       resourceType: CardResource.DATA,
       victoryPoints: VictoryPoints.resource(1, 6),
+
+      behavior: {
+        addResourcesToAnyCard: {type: CardResource.DATA, count: 2},
+      },
 
       metadata: {
         cardNumber: 'Pf54',
@@ -34,18 +38,11 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public override resourceCount = 0;
-
   public canAct() {
     return true;
   }
 
   public action(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
-    return undefined;
-  }
-
-  public play(player: Player) {
     player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return undefined;
   }

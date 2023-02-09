@@ -1,30 +1,31 @@
 import {expect} from 'chai';
 import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('LunarBeam', function() {
   let card: LunarBeam;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new LunarBeam();
-    player = TestPlayer.BLUE.newPlayer();
+    const game = newTestGame(1);
+    player = getTestPlayer(game, 0);
   });
 
   it('Can play', function() {
-    player.addProduction(Resources.MEGACREDITS, -4);
+    player.production.add(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
 
-    player.addProduction(Resources.MEGACREDITS, 1);
+    player.production.add(Resources.MEGACREDITS, 1);
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
-    expect(player.getProduction(Resources.HEAT)).to.eq(2);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.megacredits).to.eq(-2);
+    expect(player.production.heat).to.eq(2);
+    expect(player.production.energy).to.eq(2);
   });
 });

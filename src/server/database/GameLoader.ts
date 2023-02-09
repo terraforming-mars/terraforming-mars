@@ -1,7 +1,7 @@
 import * as prometheus from 'prom-client';
 import {Database} from './Database';
 import {Game} from '../Game';
-import {PlayerId, GameId, SpectatorId, isGameId} from '../../common/Types';
+import {PlayerId, GameId, SpectatorId, isGameId, ParticipantId} from '../../common/Types';
 import {IGameLoader} from './IGameLoader';
 import {GameIdLedger} from './IDatabase';
 import {Cache} from './Cache';
@@ -75,7 +75,7 @@ export class GameLoader implements IGameLoader {
 
   public async getIds(): Promise<Array<GameIdLedger>> {
     const d = await this.cache.getGames();
-    const map = new MultiMap<GameId, SpectatorId | PlayerId>();
+    const map = new MultiMap<GameId, ParticipantId>();
     d.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
     const arry: Array<[GameId, Array<PlayerId | SpectatorId>]> = Array.from(map.associations());
     return arry.map(([gameId, participantIds]) => ({gameId, participantIds}));
@@ -118,10 +118,17 @@ export class GameLoader implements IGameLoader {
   }
 
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<Game> {
+    const current = await this.getGame(gameId);
+    if (current === undefined) {
+      throw new Error('Cannot find game');
+    }
+    const currentSaveId = current.lastSaveId;
     const serializedGame = await Database.getInstance().restoreGame(gameId, saveId);
     const game = Game.deserialize(serializedGame);
-    // TODO(kberg): make deleteGameNbrSaves return a promise.
-    await Database.getInstance().deleteGameNbrSaves(gameId, 1);
+    const deletes = (currentSaveId - saveId) - 1;
+    if (deletes > 0) {
+      await Database.getInstance().deleteGameNbrSaves(gameId, deletes);
+    }
     await this.add(game);
     game.undoCount++;
     return game;

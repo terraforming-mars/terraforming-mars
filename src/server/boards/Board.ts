@@ -7,6 +7,7 @@ import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {PlacementType} from './PlacementType';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -124,6 +125,19 @@ export abstract class Board {
     return this.getOceanSpaces(include).length;
   }
 
+  public getAvailableSpacesForType(player: Player, type: PlacementType) {
+    switch (type) {
+    case 'land': return this.getAvailableSpacesOnLand(player);
+    case 'ocean': return this.getAvailableSpacesForOcean(player);
+    case 'greenery': return this.getAvailableSpacesForGreenery(player);
+    case 'city': return this.getAvailableSpacesForCity(player);
+    case 'isolated': return this.getAvailableIsolatedSpaces(player);
+    case 'volcanic': return this.getAvailableVolcanicSpaces(player);
+    case 'upgradeable-ocean': return this.getOceanSpaces({upgradedOceans: false});
+    default: throw new Error('unknown type ' + type);
+    }
+  }
+
   /*
    * Returns spaces on the board with ocean tiless.
    *
@@ -206,7 +220,24 @@ export abstract class Board {
     return landSpaces;
   }
 
-  // What's the difference between this and getAvailableSpacesOnLand?
+  public getAvailableIsolatedSpaces(player: Player) {
+    return this.getAvailableSpacesOnLand(player)
+      .filter(nextToNoOtherTileFn(this));
+  }
+
+  public getAvailableVolcanicSpaces(player: Player) {
+    const volcanicSpaceIds = this.getVolcanicSpaceIds();
+
+    const spaces = this.getAvailableSpacesOnLand(player);
+    if (volcanicSpaceIds.length > 0) {
+      return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
+    }
+    return spaces;
+  }
+
+  /**
+   * Almost the same as getAvailableSpacesOnLand, but doesn't apply to any player.
+   */
   public getNonReservedLandSpaces(): Array<ISpace> {
     return this.spaces.filter((space) => {
       return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
@@ -331,9 +362,13 @@ export function isSpecialTile(space: ISpace): boolean {
   case TileType.GREENERY:
   case TileType.OCEAN:
   case TileType.CITY:
-  case TileType.MOON_COLONY:
+  case TileType.MOON_HABITAT:
   case TileType.MOON_MINE:
   case TileType.MOON_ROAD:
+  case TileType.EROSION_MILD: // Hazard tiles are "special" but they don't count for the typical intent of what a special tile represents.
+  case TileType.EROSION_SEVERE:
+  case TileType.DUST_STORM_MILD:
+  case TileType.DUST_STORM_SEVERE:
   case undefined:
     return false;
   default:

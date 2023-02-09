@@ -1,6 +1,5 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {WaterTreatmentComplex} from '../../../src/server/cards/moon/WaterTreatmentComplex';
 import {expect} from 'chai';
@@ -8,16 +7,14 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('WaterTreatmentComplex', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: WaterTreatmentComplex;
   let moonData: IMoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new WaterTreatmentComplex();
     moonData = MoonExpansion.moonData(game);
   });
@@ -29,11 +26,11 @@ describe('WaterTreatmentComplex', () => {
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
     player.titanium = 1;
-    space.tile = {tileType: TileType.MOON_COLONY};
+    space.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
-    space.tile = {tileType: TileType.MOON_COLONY};
+    space.tile = {tileType: TileType.MOON_HABITAT};
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;

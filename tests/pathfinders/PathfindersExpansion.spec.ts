@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/server/pathfinders/PathfindersExpansion';
-import {Tags} from '../../src/common/cards/Tags';
+import {Tag} from '../../src/common/cards/Tag';
 import {fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
 import {Game} from '../../src/server/Game';
@@ -27,7 +27,7 @@ describe('PathfindersExpansion', function() {
   });
 
   it('Earth track', () => {
-    PathfindersExpansion.raiseTrack(Tags.EARTH, player1, 3);
+    PathfindersExpansion.raiseTrack(Tag.EARTH, player1, 3);
     runAllActions(game);
 
     expect(pathfindersData.earth).eq(3);
@@ -37,7 +37,7 @@ describe('PathfindersExpansion', function() {
     expect(player1.megaCredits).eq(0);
     expect(player2.megaCredits).eq(0);
 
-    PathfindersExpansion.raiseTrack(Tags.EARTH, player1, 3);
+    PathfindersExpansion.raiseTrack(Tag.EARTH, player1, 3);
     runAllActions(game);
 
     expect(pathfindersData.earth).eq(6);
@@ -55,7 +55,7 @@ describe('PathfindersExpansion', function() {
     player1.playedCards.push(floaterCard);
     player2.playedCards.push(floaterCard2);
 
-    PathfindersExpansion.raiseTrack(Tags.VENUS, player1, 3);
+    PathfindersExpansion.raiseTrack(Tag.VENUS, player1, 3);
     runAllActions(game);
 
     expect(pathfindersData.venus).eq(3);
@@ -75,7 +75,7 @@ describe('PathfindersExpansion', function() {
     expect(player1.getTerraformRating()).eq(20);
     expect(player2.getTerraformRating()).eq(20);
 
-    PathfindersExpansion.raiseTrack(Tags.VENUS, player2, 1);
+    PathfindersExpansion.raiseTrack(Tag.VENUS, player2, 1);
 
     // Player 2 gets the terraformiing bump
     expect(player1.getTerraformRating()).eq(20);
@@ -88,13 +88,13 @@ describe('PathfindersExpansion', function() {
 
   it('tags played after maximum have no effect', () => {
     pathfindersData.jovian = 13;
-    PathfindersExpansion.raiseTrack(Tags.JOVIAN, player1, 3);
+    PathfindersExpansion.raiseTrack(Tag.JOVIAN, player1, 3);
     expect(pathfindersData.jovian).eq(14);
   });
 
   it('played card', () => {
     expect(pathfindersData.earth).eq(0);
-    player1.playCard(fakeCard({name: 'A' as CardName, tags: [Tags.EARTH]}));
+    player1.playCard(fakeCard({name: 'A' as CardName, tags: [Tag.EARTH]}));
     expect(pathfindersData.earth).eq(1);
   });
   // TODO(kberg): not all rewards are tested.

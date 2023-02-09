@@ -1,7 +1,5 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
-import {Tags} from '../../../common/cards/Tags';
-import {Resources} from '../../../common/Resources';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -12,9 +10,13 @@ export class Aphrodite extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.APHRODITE,
-      tags: [Tags.PLANT, Tags.VENUS],
+      tags: [Tag.PLANT, Tag.VENUS],
       startingMegaCredits: 47,
       cardType: CardType.CORPORATION,
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       metadata: {
         cardNumber: 'R01',
@@ -30,10 +32,5 @@ export class Aphrodite extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
-    return undefined;
   }
 }

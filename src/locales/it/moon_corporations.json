@@ -1,20 +1,20 @@
 {
  "Crescent Research Association":"Crescent Research Association",
- "Effect: When you play a moon tag, you pay 1 M€ less for each Moon tag you have.":"Effetto: quando giochi una carta con un simbolo Luna, paghi 1 M€ in meno per ciascun simbolo Luna posseduto.",
+ "Effect: When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.":"Effetto: quando giochi una carta con un simbolo Luna, paghi 1 M€ in meno per ciascun simbolo Luna posseduto.",
  "You start with 50 M€. 1 VP for every 3 Moon tags you have.":"Inizi con 50 M€. 1 PV ogni 3 simboli Luna posseduti.",
 
   "Intragen Sanctuary Headquarters":"Intragen Sanctuary Headquarters",
  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)":"Effetto: quando un giocatore gioca una carta con un simbolo Animale (inclusa questa), aggiungi 1 Animale a questa carta.",
- "You start with 38 M€. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step. 1 VP for every 2 animals on this card.":"Inizi con 38 M€. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. 1 PV ogni 2 Animali su questa carta.",
+ "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.":"Inizi con 38 M€. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello. 1 PV ogni 2 Animali su questa carta.",
 
  "Luna First Incorporated":"Luna First Incorporated",
  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.":"Effetto: quando tu incrementi una qualsiasi Traccia Lunare, incrementa la tua Produzione di M€ di 1 livello.",
  "Effect: When any player raises any Moon Rate, gain 1 M€ per step.":"Effetto: quando un qualunque giocatore incrementa una qualsiasi Traccia Lunare, ottieni 1 M€ per ciascun livello.",
- "You start with 40 M€, 2 steel, and 2 Titanium.":"Inizi con 40 M€, 2 risorse Acciaio e 2 risorse Titanio.",
+ "You start with 40 M€, 2 steel, and 2 titanium.":"Inizi con 40 M€, 2 risorse Acciaio e 2 risorse Titanio.",
 
  "Luna Hyperloop Corporation":"Luna Hyperloop Corporation",
- "Action: Gain 1 M€ for each road tile on the Moon.":"Azione: ottieni 1 M€ per ogni tessera Strada sulla Luna.",
- "1 VP for each road tile on the Moon.":"1 PV per ogni tessera Strada sulla Luna.",
+ "Action: Gain 1 M€ for each road tile on The Moon.":"Azione: ottieni 1 M€ per ogni tessera Strada sulla Luna.",
+ "1 VP for each road tile on The Moon.":"1 PV per ogni tessera Strada sulla Luna.",
  "You start with 38 M€ and 4 steel.":"Inizi con 38 M€ e 4 risorse Acciaio.",
 
   "Nanotech Industries":"Nanotech Industries",
@@ -22,7 +22,7 @@
  "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.":"Inizi con 42 M€. Come prima azione, pesca 3 carte: scegline 2 da tenere in mano e scarta la terza. 1 PV ogni 2 risorse Scienza su questa carta.",
 
   "Tempest Consultancy":"Tempest Consultancy",
- "Action: Place 1 delegate in any party for every 5 moon tags you have [max 3.]":"Azione: colloca 1 Delegato su un qualunque Partito per ogni 5 simboli Luna posseduti [massimo 3].",
+ "Action: Place 1 delegate in any party for every 5 Moon tags you have [max 3.]":"Azione: colloca 1 Delegato su un qualunque Partito per ogni 5 simboli Luna posseduti [massimo 3].",
  "Effect: When your delegate becomes the chairman, increase your TR 1 step.":"Effetto: quando un tuo Delegato diventa Presidente, incrementa il tuo TT di 1 livello.",
  "You start with 37 M€. As your first action, place 2 delegates in one party.":"Inizi con 37 M€. Come prima azione, colloca 2 Delegati su un Partito.",
 
@@ -38,8 +38,8 @@
 
   "The Grand Luna Capital Group":"The Grand Luna Capital Group",
  "Effect: When you place a colony tile, gain 2 M€ for each adjacent colony tile.":"Effetto: quando collochi una tessera Colonia, ottieni 2 M€ per ogni tessera Colonia adiacente.",
- "1 VP for each colony tile adjacent to your colony tiles.":"1 PV per ogni tessera Colonia adiacente alle tue tessere Colonia.",
-  "You start with 32 M€ and 1 titanium. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.":"Inizi con 32 M€ e 1 risorsa Titanio. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello."
+ "1 VP for each habitat tile adjacent to your habitat tiles.":"1 PV per ogni tessera Colonia adiacente alle tue tessere Colonia.",
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.":"Inizi con 32 M€ e 1 risorsa Titanio. Come prima azione, colloca 1 tessera Colonia sulla Luna e incrementa la Traccia Colonie di 1 livello."
 
 
 }

@@ -1,8 +1,26 @@
+<template>
+  <div>
+    <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+    <div class="flex">
+      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
+      &nbsp;
+      <Button size="big" type="max" @click="setMaxValue" title="MAX" />
+      &nbsp;
+      <Button v-if="showsave === true" size="big" @click="saveData" :title="playerinput.buttonLabel" />
+    </div>
+  </div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import {SelectAmountResponse} from '@/common/inputs/InputResponse';
+
+interface DataModel {
+  // Why is amount type string?
+  amount: string;
+}
 
 export default Vue.extend({
   name: 'SelectAmount',
@@ -14,7 +32,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: InputResponse) => void,
+      type: Function as unknown as () => (out: SelectAmountResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -23,14 +41,14 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data() {
+  data(): DataModel {
     return {
       amount: this.playerinput.maxByDefault ? String(this.playerinput.max) : String(this.playerinput.min),
     };
   },
   methods: {
     saveData() {
-      this.onsave([[String(parseInt(this.amount))]]);
+      this.onsave({type: 'amount', amount: parseInt(this.amount)});
     },
     setMaxValue() {
       this.amount = String(this.playerinput.max);
@@ -38,13 +56,3 @@ export default Vue.extend({
   },
 });
 </script>
-<template>
-  <div>
-    <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-    <div class="flex">
-      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
-      <Button size="big" type="max" @click="setMaxValue" title="MAX" />
-      <Button v-if="showsave === true" size="big" @click="saveData" :title="playerinput.buttonLabel" />
-    </div>
-  </div>
-</template>

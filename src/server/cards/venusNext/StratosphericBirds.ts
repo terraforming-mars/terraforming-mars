@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -10,12 +10,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class StratosphericBirds extends Card implements IActionCard, IResourceCard {
+export class StratosphericBirds extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.STRATOSPHERIC_BIRDS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS, Tags.ANIMAL],
+      tags: [Tag.VENUS, Tag.ANIMAL],
       cost: 12,
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
@@ -28,17 +28,16 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
             eb.empty().startAction.animals(1);
           }).br;
           b.minus().floaters(1).br;
-          b.vpText('1 VP for each Animal on this card.');
+          b.vpText('1 VP for each animal on this card.');
         }),
         description: {
-          text: 'Requires Venus 12% and that you spend 1 Floater from any card.',
+          text: 'Requires Venus 12% and that you spend 1 floater from any card.',
           align: 'left',
         },
       },
     });
   }
-  public override resourceCount: number = 0;
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     const cardsWithFloater = player.getCardsWithResources(CardResource.FLOATER);
     if (cardsWithFloater.length === 0) return false;
 
@@ -52,7 +51,7 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
       return canPayForFloater;
     }
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.defer(new RemoveResourcesFromCard(player, CardResource.FLOATER, 1, true));
     return undefined;
   }

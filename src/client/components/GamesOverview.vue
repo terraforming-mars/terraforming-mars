@@ -1,7 +1,7 @@
 <template>
   <div id="games-overview">
-    <h1>{{ constants.APP_NAME }} — Games Overview</h1>
-      <p>The following games are available on this server:</p>
+    <h1 v-i18n>{{ constants.APP_NAME }} — Games Overview</h1>
+      <p v-i18n>The following games are available on this server:</p>
       <ul>
         <li v-for="entry in entries" :key="entry.id">
           <game-overview :id="entry.id" :game="entry.game" :status="entry.status"></game-overview>
@@ -14,9 +14,10 @@
 
 import Vue from 'vue';
 import * as constants from '@/common/constants';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
-import {GameId, PlayerId, SpectatorId} from '@/common/Types';
+import {GameId, ParticipantId} from '@/common/Types';
 
 type FetchStatus = {
   id: GameId;
@@ -28,7 +29,7 @@ type DataModel = {
 };
 
 // Copied from routes/Game.ts and probably IDatabase. Should be centralized I suppose
-type Response = {gameId: GameId, participants: Array<SpectatorId | PlayerId>};
+type Response = {gameId: GameId, participants: Array<ParticipantId>};
 
 export default Vue.extend({
   name: 'games-overview',
@@ -52,7 +53,7 @@ export default Vue.extend({
         alert('Error getting games data');
       };
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           const result = xhr.response;
           if (result instanceof Array) {
             result.forEach(function(response: Response) {
@@ -83,7 +84,7 @@ export default Vue.extend({
         this.getGame(idx + 1);
       };
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           const result = xhr.response;
           if (result instanceof Object) {
             const game = result as SimpleGameModel;

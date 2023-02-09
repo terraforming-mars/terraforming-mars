@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardResource} from '../../../common/CardResource';
 import {all, digit} from '../Options';
@@ -16,8 +16,12 @@ export class SolarStorm extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.SOLAR_STORM,
       cost: 12,
-      tags: [Tags.SPACE],
-      tr: {temperature: 1},
+      tags: [Tag.SPACE],
+
+      behavior: {
+        production: {heat: 1},
+        global: {temperature: 1},
+      },
 
       metadata: {
         cardNumber: 'Pf32',
@@ -31,8 +35,7 @@ export class SolarStorm extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.HEAT, 1);
+  public override bespokePlay(player: Player) {
     player.game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
@@ -40,7 +43,6 @@ export class SolarStorm extends Card implements IProjectCard {
     });
     player.game.defer(new RemoveResourcesFromCard(
       player, CardResource.DATA, 3, /* ownCards */ false, /* mandatory */ false));
-    player.game.increaseTemperature(player, 1);
     return undefined;
   }
 }

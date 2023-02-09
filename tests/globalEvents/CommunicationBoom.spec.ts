@@ -34,9 +34,9 @@ describe('CommunicationBoom', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player.id);
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
 
@@ -50,11 +50,8 @@ describe('CommunicationBoom', function() {
     expect(e.resourceCount).eq(2);
     expect(f.resourceCount).eq(2);
 
-    (player as any).waitingFor = undefined;
-    (player as any).waitingForCb = undefined;
-
-    (player2 as any).waitingFor = undefined;
-    (player2 as any).waitingForCb = undefined;
+    player.popWaitingFor();
+    player2.popWaitingFor();
 
     runAllActions(game);
 
@@ -72,7 +69,6 @@ describe('CommunicationBoom', function() {
 
     runAllActions(game);
 
-    expect(player.getWaitingFor()).instanceOf(AndOptions);
     const playerOptions2 = cast(player2.getWaitingFor(), AndOptions);
     expect(playerOptions2.options).has.length(2);
     expect(playerOptions2.options[0].title).contains(e.name);

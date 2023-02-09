@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {CardName} from '../../../common/cards/CardName';
@@ -15,7 +15,7 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
     super({
       cardType: CardType.ACTIVE,
       name: CardName.POWER_INFRASTRUCTURE,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 4,
 
       metadata: {
@@ -27,10 +27,6 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
         }),
       },
     });
-  }
-
-  public play(_player: Player) {
-    return undefined;
   }
   public canAct(player: Player): boolean {
     return player.energy > 0;

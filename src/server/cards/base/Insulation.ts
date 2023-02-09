@@ -27,21 +27,21 @@ export class Insulation extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
-    return player.getProduction(Resources.HEAT) >= 1;
+  public override bespokeCanPlay(player: Player) {
+    return player.production.heat >= 1;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectAmount(
       'Select amount of heat production to decrease',
       'Decrease',
       (amount: number) => {
-        player.addProduction(Resources.HEAT, -amount, {log: true});
-        player.addProduction(Resources.MEGACREDITS, amount, {log: true});
+        player.production.add(Resources.HEAT, -amount, {log: true});
+        player.production.add(Resources.MEGACREDITS, amount, {log: true});
         return undefined;
       },
       1,
-      player.getProduction(Resources.HEAT),
+      player.production.heat,
     );
   }
 }

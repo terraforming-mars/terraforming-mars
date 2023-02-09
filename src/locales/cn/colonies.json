@@ -18,7 +18,7 @@
   "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"任何殖民地放置时，包括这个，增加你的M€产量1级。",
 
   "STORM":"暴风",
-  "CRAFT":"舰",  
+  "CRAFT":"舰",
   "Stormcraft Incorporated":"暴风舰公司",
   "You start with 48 M€.":"起始获得48 M€",
   "Action: Add a floater to ANY card.":"行动：增加云资源到任意卡牌",
@@ -92,7 +92,7 @@
   "2 Earth": "2 地球",
   "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点M€产量 获得4块钱",
 
-  "Refugee Camp": "难民营",
+  "Refugee Camps": "难民营",
   "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "行动：降低自身1点M€产量，增加1点营地资源到此卡上",
   "1 VP for each camp resource on this card.": "每1点营地资源，获得1VP",
 
@@ -116,7 +116,7 @@
   "Add two floaters to ANOTHER card.":"放置2个云资源到另一张牌",
 
   "Airliners":"航空公司",
-  "3 Floaters":"3个云资源",
+  "3 floaters":"3个云资源",
   "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.":"需求：你有3个云资源。你的金钱产量+2，在任意卡牌上增加2个云资源。",
 
   "Air Raid":"空袭",
@@ -137,7 +137,7 @@
   "Corona Extractor":"日冕提取器",
   "4 Science":"4个科技标志",
 
-  "Cryo Sleep":"低温睡眠",
+  "Cryo-Sleep":"低温睡眠",
   "Effect: When you trade, you pay 1 less resource for it.":"效果：当你交易时，你少支付1个资源。",
 
   "Ecology Research":"生态学研究",
@@ -160,7 +160,7 @@
   "Jupiter Floating Station":"木星浮动站",
   "Action: Add 1 floater to a JOVIAN CARD.":"行动：在一张木星卡上+1云资源",
   "Action: Gain 1 M€ for every floater here [MAX 4].":"行动：获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
-  "Requires 3 Science tags.":"需求：3个科技标志。",
+  "Requires 3 science tags.":"需求：3个科技标志。",
 
   "Lunar Exports":"月球出口",
   "Increase your plant production 2 steps, or your M€ production 5 steps.":"你的植物产量+2，或你的金钱产量+5。",
@@ -179,27 +179,27 @@
   "max 1 Colony":"最多1块殖民地",
   "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.":"需求：你拥有不超过1块殖民地。金钱产量-2。放置1块殖民地。",
   "Quantum Communications":"量子通信",
-  "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.":"需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",
-  "Requires 3 Science tags. Draw 2 cards.":"需求：3个科技标志。抽2张牌。",
+  "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.":"需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",
+  "Requires 3 science tags. Draw 2 cards.":"需求：3个科技标志。抽2张牌。",
   "Rim Freighters":"里姆货船",
   "Refugee Camps":"难民营",
   "Solar Probe":"太阳探测器",
   "Draw 1 card for every 3 science tags you have, including this.":"每有3个科技标志（包括此牌），便摸1张牌。",
   "Space Port":"太空港",
-  "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.":"需求：1块殖民地。你的电力产量-1，金钱产量+4。放置1座城市。获得1艘贸易飞船。",
+  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.":"需求：1块殖民地。你的电力产量-1，金钱产量+4。放置1座城市。获得1艘贸易飞船。",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"需求：1块殖民地。放置1块殖民地。可以放在你已经拥有殖民地的那块殖民地板块上。获得1艘贸易飞船。每有2块殖民地算1分。",
   "Spin-off Department":"副产品部门",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.":"效果：打出1张原始费用为20或更多的牌时，摸1张牌。",
 
 
   "Sub-zero Salt Fish":"零下咸鱼",
-  "Requires -6 C. Decrease any Plant production 1 step.":"需求：-6℃。任何植物产量-1。",
+  "Requires -6 C. Decrease any plant production 1 step.":"需求：-6℃。任何植物产量-1。",
 
   "Titan Floating Launch-Pad":"土卫六漂浮发射台",
   "Colony City":"殖民地城市",
   "Warp Drive":"曲率引擎",
-  "Effect: When you play a Space card, you pay 4 M€ less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
-  "Requires 5 Science tags.":"需求：5个科技标志。",
+  "Effect: When you play a space card, you pay 4 M€ less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
+  "Requires 5 science tags.":"需求：5个科技标志。",
 
   "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果： 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡",
 
@@ -216,7 +216,7 @@
     "Triton":"海卫一",
     "Colony Bonus":"殖民地奖励",
     "Trade Income":"贸易收入",
-    "Select colony":"选择殖民地",
+    "Select where to build a colony":"选择殖民地",
     "Trade Income: Gain the indicated production":"贸易收入：获得指定的产量",
     "Callisto - (Energy)":"木卫四-（能量）",
     "Ceres - (Steel)":"谷神星-（钢铁）",

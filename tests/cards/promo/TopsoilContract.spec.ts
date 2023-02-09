@@ -1,26 +1,29 @@
 import {expect} from 'chai';
 import {TopsoilContract} from '../../../src/server/cards/promo/TopsoilContract';
-import {Player} from '../../../src/server/Player';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Game} from '../../../src/server/Game';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {TestPlayer} from '../../TestPlayer';
+import {runAllActions} from '../../TestingUtils';
 
 describe('TopsoilContract', function() {
   let card: TopsoilContract;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     card = new TopsoilContract();
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    game = Game.newInstance('gameid', [player, player2], player);
   });
 
   it('Can play', function() {
     card.play(player);
+    runAllActions(game);
+
     expect(player.plants).to.eq(3);
   });
 
@@ -35,6 +38,7 @@ describe('TopsoilContract', function() {
 
     const aerobrakedAmmoniaAsteroid = new AerobrakedAmmoniaAsteroid();
     aerobrakedAmmoniaAsteroid.play(player);
+    runAllActions(game);
     expect(tardigrades.resourceCount).to.eq(3);
     expect(player.megaCredits).to.eq(3);
 

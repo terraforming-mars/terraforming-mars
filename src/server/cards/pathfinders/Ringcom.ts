@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -14,20 +14,28 @@ export class Ringcom extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.RINGCOM,
-      tags: [Tags.JOVIAN],
+      tags: [Tag.JOVIAN],
       startingMegaCredits: 39,
 
-      initialActionText: 'Draw 2 cards with a jovian tag',
+      behavior: {
+        production: {megacredits: 3},
+      },
+
+      firstAction: {
+        text: 'Draw 2 cards with a Jovian tag',
+        drawCard: {count: 2, tag: Tag.JOVIAN},
+      },
+
 
       metadata: {
         cardNumber: 'PfC4',
-        description: 'You start with 39 M€ and 3 M€ production. As your first action, draw 2 cards with a jovian tag.',
+        description: 'You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(39).production((pb) => pb.megacredits(3));
-          b.cards(2, {secondaryTag: Tags.JOVIAN});
+          b.cards(2, {secondaryTag: Tag.JOVIAN});
           b.corpBox('effect', (ce) => {
-            ce.effect('When any player plays a card with a jovian tag (including this) gain 1 titanium.', (eb) => {
+            ce.effect('When any player plays a card with a Jovian tag (including this) gain 1 titanium.', (eb) => {
               eb.jovian({all, played}).startEffect.titanium(1);
             });
           });
@@ -36,15 +44,9 @@ export class Ringcom extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
+  public override bespokePlay(player: Player) {
     // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
     this.onCardPlayed(player, this);
-    return undefined;
-  }
-
-  public initialAction(player: Player) {
-    player.drawCard(2, {tag: Tags.JOVIAN});
     return undefined;
   }
 
@@ -54,7 +56,7 @@ export class Ringcom extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (card.tags.includes(Tags.JOVIAN)) {
+    if (card.tags.includes(Tag.JOVIAN)) {
       player.game.getPlayers().forEach((p) => {
         if (p.isCorporation(this.name)) {
           p.addResource(Resources.TITANIUM, 1, {log: true});

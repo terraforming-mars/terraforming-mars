@@ -1,23 +1,23 @@
 {
   "New Partner": "새로운 파트너",
   "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "메가크레딧 생산력 1 증가. 서곡 카드 2장 확인 후 1장을 골라 사용하고 다른 카드는 버림.",
-  
+
   "Small Asteroid": "소형 소행성",
   "Increase temperature 1 step. Remove up to 2 plants from any player.": "기온 1단계 상승. 아무 1명의 식물 자원 2개까지 제거.",
 
   "Self-replicating Robots": "자가복제 로봇",
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "행동: 손에 든 우주 또는 건물 카드 1장을 이 카드 위에 앞면으로 얹고 그 위에 자원 2개를 추가하거나, 또는 이 카드에 얹힌 카드 중 1장의 자원을 2배로 불림.",
   "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "지속효과: 여기 얹힌 카드들의 추진 비용은 각 카드 위에 놓인 자원 개수만큼 할인됨.",
-  
+
   "Snow Algae": "눈 조류",
-  "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.": "조건: 해양 타일 2장 이상.) (식물 생산력 1증가. 열 생산력 1증가.",
+  "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "조건: 해양 타일 2장 이상.) (식물 생산력 1증가. 열 생산력 1증가.",
 
   "Penguins": "펭귄",
   "Requires 8 oceans.": "조건: 해양 타일 8장 이상.",
   "Requires 8 oceans. 1 VP for each animal on this card.": "조건: 해양 타일 8장 이상.) (이 카드의 동물 자원 1개당 승점 1점.",
 
   "Dusk Laser Mining": "저물녘 레이저 채굴",
-  "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "조건: 보유한 과학 태그 2개 이상.) (에너지 생산력 1감소. 티타늄 생산력 1증가. 티타늄 자원 4개 획득.",
+  "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "조건: 보유한 과학 태그 2개 이상.) (에너지 생산력 1감소. 티타늄 생산력 1증가. 티타늄 자원 4개 획득.",
 
   "Project Inspection": "프로젝트 감독",
   "Use a card action that has been used this generation.": "자신의 카드 행동 중, 이번 세대에 이미 수행 된 것 하나를 다시 한 번 수행.",
@@ -37,11 +37,11 @@
   "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "이번 세대에 자신의 자원을 제거했거나 생산력을 감소시킨 다른 플레이어 1명에게서 3MC까지 강탈 이 카드를 그 플레이어의 사건형 카드 무더기에 엎어둠.",
 
   "Mercurian Alloys": "수성합금",
-  "Requires 2 Science tags.": "조건: 보유한 과학 태그 2개 이상.",
+  "Requires 2 science tags.": "조건: 보유한 과학 태그 2개 이상.",
   "Effect: Your titanium resources are worth 1 M€ extra.": "지속효과: 보유한 각 티타늄 자원의 가치 1MC 상승.",
 
   "Orbital Cleanup": "궤도청소",
-  "Action: Gain 1 M€ per Science tag you have.": "행동: 보유한 과학 태그 수만큼 MC 획득.",
+  "Action: Gain 1 M€ per science tag you have.": "행동: 보유한 과학 태그 수만큼 MC 획득.",
   "Decrease your M€ production 2 steps.": "메가크레딧 생산력 2감소.",
 
   "Political Alliance": "정치 동맹",
@@ -118,11 +118,11 @@
   "Meat Industry": "육류 가공 공장",
   "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "지속효과: 자신의 아무 카드 1장에 동물 자원을 추가할 때마다, 추가한 동물 자원 1개당 2MC 획득.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "에너지 생산력 4감소. 식물 생산력 2증가. 테라포밍 등급 3TR 상승. 빈 구역 한 곳에 타일 배치.",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "에너지 생산력 4감소. 식물 생산력 2증가. 테라포밍 등급 3TR 상승. 빈 구역 한 곳에 타일 배치.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 6개까지 제거. 도시 타일과 인접하지 않은 빈 구역 한 곳에 타일 배치.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 6개까지 제거. 도시 타일과 인접하지 않은 빈 구역 한 곳에 타일 배치.",
 
-  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2증가. 해양 타일과 인접한 빈 구역 한 곳에 타일 배치.",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "조건: 해양 타일 4장 이상.) (에너지 생산력 2증가. 해양 타일과 인접한 빈 구역 한 곳에 타일 배치.",
 
   "Asteroid Rights": "소행성 사용수익권",
   "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "행동: 1MC 소비해서 자신의 아무 카드 1장에 소행성 자원 1개 추가.",

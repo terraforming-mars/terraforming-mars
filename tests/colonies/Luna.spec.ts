@@ -1,15 +1,13 @@
 import {expect} from 'chai';
 import {Luna} from '../../src/server/colonies/Luna';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
-import {Resources} from '../../src/common/Resources';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 
 describe('Luna', function() {
   let luna: Luna;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -23,8 +21,8 @@ describe('Luna', function() {
 
   it('Should build', function() {
     luna.addColony(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(2);
+    expect(player2.production.megacredits).to.eq(0);
   });
 
   it('Should trade', function() {
@@ -39,8 +37,8 @@ describe('Luna', function() {
     luna.trade(player2);
     runAllActions(game);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(2);
+    expect(player2.production.megacredits).to.eq(0);
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(2);
   });

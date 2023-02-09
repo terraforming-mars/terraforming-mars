@@ -24,7 +24,7 @@ describe('Splice', function() {
 
   it('Should play', function() {
     const card2 = new Tardigrades();
-    const play = card.play();
+    const play = card.play(player);
     expect(play).is.undefined;
 
     player.setCorporationForTest(card);
@@ -42,7 +42,7 @@ describe('Splice', function() {
 
   it('Should play with multiple microbe tags', function() {
     const card2 = new PharmacyUnion();
-    const play = card.play();
+    const play = card.play(player);
     player.setCorporationForTest(card);
     const play2 = card2.play(player);
     player2.setCorporationForTest(card2);

@@ -57,7 +57,7 @@ describe('SurveyMission', () => {
   });
 
   it('Play', () => {
-    const selectSpace = card.play(player);
+    const selectSpace = cast(card.play(player), SelectSpace);
 
     // Available triplets are
     // 4, 5, 10
@@ -89,7 +89,7 @@ describe('SurveyMission', () => {
     expect(player.heat).eq(0);
     expect(player.plants).eq(0);
 
-    const selectSpace = card.play(player);
+    const selectSpace = cast(card.play(player), SelectSpace);
     const space = board.getSpace('04');
     space.bonus = [SpaceBonus.HEAT, SpaceBonus.PLANT];
     selectSpace.cb(space);
@@ -100,11 +100,11 @@ describe('SurveyMission', () => {
 
   it('Compatible with Mining Guild', () => {
     player.setCorporationForTest(new MiningGuild());
-    const selectSpace = card.play(player);
+    const selectSpace = cast(card.play(player), SelectSpace);
 
     expect(player.steel).eq(5); // Comes from playing the Prelude
     expect(player.plants).eq(0);
-    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+    expect(player.production.asUnits()).deep.eq(Units.EMPTY);
 
     const space = board.getSpace('04');
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.PLANT];
@@ -113,7 +113,7 @@ describe('SurveyMission', () => {
 
     expect(player.steel).eq(6);
     expect(player.plants).eq(1);
-    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });
   // TODO Hazards are playable, but you won't get anything.
   // TODO Arcadian communities should not interfere with Survey Mission.

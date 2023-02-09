@@ -1,13 +1,11 @@
 import {expect} from 'chai';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('BusinessEmpire', function() {
   let card: BusinessEmpire;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -26,10 +24,10 @@ describe('BusinessEmpire', function() {
     expect(card.canPlay(player)).is.true;
     card.play(player);
 
-    // SelectHowToPayDeferred
+    // SelectPaymentDeferred
     game.deferredActions.runNext();
 
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);
+    expect(player.production.megacredits).to.eq(6);
   });
 });

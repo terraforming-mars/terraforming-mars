@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,12 +16,12 @@ export class CosmicRadiation extends Card implements IProjectCard {
     super({
       name: CardName.COSMIC_RADIATION,
       cardType: CardType.EVENT,
-      tags: [Tags.MOON],
+      tags: [Tag.MOON],
       cost: 3,
 
       requirements: CardRequirements.builder((b) => b.miningRate(4)),
       metadata: {
-        description: 'Requires 4 Mining Rate. All players pay 4M€ for each mining tile they own.',
+        description: 'Requires 4 mining rate. All players pay 4M€ for each mining tile they own.',
         cardNumber: 'M52',
         renderData: CardRenderer.builder((b) => {
           b.minus().megacredits(4, {all}).slash().moonMine({size: Size.SMALL, all});
@@ -30,7 +30,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
     player.game.getPlayersInGenerationOrder().forEach((mineTileOwner) => {
       const owned = mines.filter((mine) => mine.player?.id === mineTileOwner.id).length;

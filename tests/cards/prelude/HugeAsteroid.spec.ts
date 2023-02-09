@@ -1,13 +1,11 @@
 import {expect} from 'chai';
 import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('HugeAsteroid', function() {
   let card: HugeAsteroid;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -28,11 +26,11 @@ describe('HugeAsteroid', function() {
 
     card.play(player);
 
-    // SelectHowToPayDeferred
+    // SelectPaymentDeferred
     game.deferredActions.runNext();
 
     expect(player.megaCredits).to.eq(0);
-    expect(player.getProduction(Resources.HEAT)).to.eq(1);
+    expect(player.production.heat).to.eq(1);
     expect(player.getTerraformRating()).to.eq(initialTR + 3);
   });
 });

@@ -1,8 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -14,7 +12,11 @@ export class TerraformingContract extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.TERRAFORMING_CONTRACT,
       cost: 8,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
+
+      behavior: {
+        production: {megacredits: 4},
+      },
 
       requirements: CardRequirements.builder((b) => b.tr(25)),
       metadata: {
@@ -25,9 +27,5 @@ export class TerraformingContract extends Card implements IProjectCard {
         description: 'Requires that you have at least 25 TR. Increase your M€ production 4 steps.',
       },
     });
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 4);
-    return undefined;
   }
 }

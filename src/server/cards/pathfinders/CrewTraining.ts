@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {Size} from '../../../common/cards/render/Size';
@@ -12,6 +12,10 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
   constructor() {
     super({
       name: CardName.CREW_TRAINING,
+
+      behavior: {
+        tr: 2,
+      },
 
       metadata: {
         cardNumber: 'P08',
@@ -26,20 +30,18 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
           b.tr(2);
         }),
         description: 'Choose a planet tag. This card counts as having 2 of that tag. ' +
-          'Raise the planetary influence track accordingly. Gain 2 TR.',
+          'Raise the corresponding planetary track 2 steps. Gain 2 TR.',
       },
     });
   }
 
-  public cloneTag: Tags = Tags.CLONE;
+  public cloneTag: Tag = Tag.CLONE;
 
-  public override get tags(): Array<Tags> {
+  public override get tags(): Array<Tag> {
     return [this.cloneTag, this.cloneTag];
   }
 
-  public play(player: Player) {
-    player.increaseTerraformRatingSteps(2);
-
+  public override bespokePlay(player: Player) {
     player.game.defer(new DeclareCloneTag(player, this));
     return undefined;
   }

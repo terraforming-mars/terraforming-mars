@@ -1,8 +1,6 @@
-import {Tags} from '../../../common/cards/Tags';
-import {Player} from '../../Player';
+import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -10,7 +8,11 @@ export class PowerGeneration extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.POWER_GENERATION,
-      tags: [Tags.ENERGY],
+      tags: [Tag.POWER],
+
+      behavior: {
+        production: {energy: 3},
+      },
 
       metadata: {
         cardNumber: 'P27',
@@ -20,9 +22,5 @@ export class PowerGeneration extends PreludeCard implements IProjectCard {
         description: 'Increase your energy production 3 steps.',
       },
     });
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 3);
-    return undefined;
   }
 }

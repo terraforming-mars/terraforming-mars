@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {Psychrophiles} from '../../../src/server/cards/prelude/Psychrophiles';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Psychrophiles', () => {
   let card: Psychrophiles;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
@@ -27,7 +26,7 @@ describe('Psychrophiles', () => {
 
   it('Should play', () => {
     expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
@@ -36,11 +35,11 @@ describe('Psychrophiles', () => {
   });
 
   it('Should act', () => {
-    expect(player.getMicrobesCanSpend()).to.eq(0);
+    expect(player.getSpendableMicrobes()).to.eq(0);
     player.playedCards.push(card);
 
     card.action(player);
     expect(player.getCardsWithResources()).has.lengthOf(1);
-    expect(player.getMicrobesCanSpend()).to.eq(1);
+    expect(player.getSpendableMicrobes()).to.eq(1);
   });
 });

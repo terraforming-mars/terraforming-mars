@@ -31,16 +31,12 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
       },
     });
   }
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
     return player.canAfford(4);
   }
 
   public action(player: Player) {
-    let minimum = player.getProduction(Resources.MEGACREDITS);
+    let minimum = player.production.megacredits;
     let lowest: Array<SelectOption> = [];
 
     [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
@@ -50,16 +46,16 @@ export class RobinsonIndustries extends Card implements IActionCard, ICorporatio
           'Select how to pay for Robinson Industries action.',
           () => {
             // Add production after payment, to prevent Manutech from being in the way.
-            player.addProduction(resource, 1, {log: true});
+            player.production.add(resource, 1, {log: true});
           });
         return undefined;
       });
 
-      if (player.getProduction(resource) < minimum) {
+      if (player.production[resource] < minimum) {
         lowest = [];
-        minimum = player.getProduction(resource);
+        minimum = player.production[resource];
       }
-      if (player.getProduction(resource) === minimum) lowest.push(option);
+      if (player.production[resource] === minimum) lowest.push(option);
     });
 
     const result = new OrOptions();

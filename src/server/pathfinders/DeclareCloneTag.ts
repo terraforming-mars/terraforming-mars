@@ -1,11 +1,9 @@
 import {Player} from '../Player';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
-import {ICard} from '../cards/ICard';
-import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../cards/IProjectCard';
 import {PlanetaryTag} from './PathfindersExpansion';
 
@@ -20,7 +18,7 @@ import {PlanetaryTag} from './PathfindersExpansion';
 export class DeclareCloneTag extends DeferredAction {
   public constructor(
     player: Player,
-    public card: ICard & ICloneTagCard,
+    public card: IProjectCard & ICloneTagCard,
     public cb: (tag: PlanetaryTag) => void = () => {},
     public title: string = '') {
     super(player, Priority.DECLARE_CLONE_TAG);
@@ -30,12 +28,12 @@ export class DeclareCloneTag extends DeferredAction {
   }
 
   public execute() {
-    const tags: Array<PlanetaryTag> = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];
+    const tags: Array<PlanetaryTag> = [Tag.EARTH, Tag.JOVIAN, Tag.MARS];
     if (this.player.game.gameOptions.venusNextExtension === true) {
-      tags.push(Tags.VENUS);
+      tags.push(Tag.VENUS);
     }
     if (this.player.game.gameOptions.moonExpansion === true) {
-      tags.push(Tags.MOON);
+      tags.push(Tag.MOON);
     }
 
     const options = tags.map((tag) => {
@@ -43,9 +41,7 @@ export class DeclareCloneTag extends DeferredAction {
         this.card.cloneTag = tag;
         this.player.game.log('${0} turned the clone tag on ${1} into a ${2} tag',
           (b) => b.player(this.player).card(this.card).string(tag));
-        if ([CardType.AUTOMATED, CardType.ACTIVE, CardType.EVENT, CardType.PRELUDE].includes(this.card.cardType)) {
-          this.player.onCardPlayed(this.card as unknown as IProjectCard);
-        }
+        this.player.onCardPlayed(this.card);
         this.cb(tag);
         return undefined;
       });

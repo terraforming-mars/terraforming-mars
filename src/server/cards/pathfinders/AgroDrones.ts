@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Resources} from '../../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class AgroDrones extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -15,7 +15,7 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
       cardType: CardType.ACTIVE,
       name: CardName.AGRO_DRONES,
       cost: 14,
-      tags: [Tags.PLANT, Tags.MARS],
+      tags: [Tag.PLANT, Tag.MARS],
 
       requirements: CardRequirements.builder((b) => b.temperature(-18)),
       metadata: {
@@ -39,10 +39,6 @@ export class AgroDrones extends Card implements IProjectCard, IActionCard {
     player.deductResource(Resources.ENERGY, 1);
     player.addResource(Resources.PLANTS, 3);
     player.game.log('${0} spent 1 steel and 1 energy to gain 3 plants.', (b) => b.player(player));
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

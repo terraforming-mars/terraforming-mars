@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
@@ -13,8 +11,12 @@ export class TollStation extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.TOLL_STATION,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 12,
+
+      behavior: {
+        production: {megacredits: {tag: Tag.SPACE, others: true}},
+      },
 
       metadata: {
         cardNumber: '099',
@@ -26,13 +28,5 @@ export class TollStation extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step for each space tag your OPPONENTS have.',
       },
     });
-  }
-  public play(player: Player) {
-    const amount = player.game.getPlayers()
-      .filter((aPlayer) => aPlayer !== player)
-      .map((opponent) => opponent.getTagCount(Tags.SPACE, 'raw'))
-      .reduce((a, c) => a + c, 0);
-    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
-    return undefined;
   }
 }

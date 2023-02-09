@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
 import {Game} from '../../../src/server/Game';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -21,7 +21,7 @@ describe('CrewTraining', function() {
 
   it('Should play', function() {
     expect(player.getTerraformRating()).eq(14);
-    expect(card.tags).deep.eq([Tags.CLONE, Tags.CLONE]);
+    expect(card.tags).deep.eq([Tag.CLONE, Tag.CLONE]);
 
     card.play(player);
 
@@ -29,11 +29,11 @@ describe('CrewTraining', function() {
 
     expect(game.deferredActions.length).eq(1);
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
-    const options = cast(action!.execute(), OrOptions);
+    const options = cast(action.execute(), OrOptions);
 
     expect(options.options[0].title).to.match(/earth/);
     expect(game.pathfindersData).deep.eq({
-      venus: 0,
+      venus: -1,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -44,13 +44,13 @@ describe('CrewTraining', function() {
     options.options[0].cb();
 
     expect(game.pathfindersData).deep.eq({
-      venus: 0,
+      venus: -1,
       earth: 2,
       mars: 0,
       jovian: 0,
       moon: -1,
       vps: [],
     });
-    expect(card.tags).deep.eq([Tags.EARTH, Tags.EARTH]);
+    expect(card.tags).deep.eq([Tag.EARTH, Tag.EARTH]);
   });
 });

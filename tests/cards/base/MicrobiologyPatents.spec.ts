@@ -11,13 +11,13 @@ describe('MicrobiologyPatents', function() {
     const game = newTestGame(1);
     const player = getTestPlayer(game, 0);
 
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
 
     card.onCardPlayed(player, new Virus());
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1}));
 
     card.onCardPlayed(player, new MicroMills());
-    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 1}));
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1}));
   });
 });

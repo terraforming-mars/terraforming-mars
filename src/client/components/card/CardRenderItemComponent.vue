@@ -13,7 +13,7 @@ import {generateClassString} from '@/common/utils/utils';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
-import {Tags} from '@/common/cards/Tags';
+import {Tag} from '@/common/cards/Tag';
 import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
@@ -96,6 +96,7 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.WILD) {
         classes.push('card-resource');
         classes.push('card-resource-wild');
+        if (this.item.cancelled === true) classes.push('card-private-security');
       } else if (type === CardRenderItemType.PRESERVATION) {
         classes.push('card-resource');
         classes.push('card-resource-preservation');
@@ -194,8 +195,10 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.AGENDA) {
         classes.push('card-resource');
         classes.push('card-resource-agenda');
-      } else if (this.item.type === CardRenderItemType.MOON_COLONY) {
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_COLONY_RATE) {
+      } else if (type === CardRenderItemType.ARROW_OPG) {
+        classes.push('card-arrow-opg');
+      } else if (this.item.type === CardRenderItemType.MOON_HABITAT) {
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
           classes.push(sized('card-tile-lunar-colony-rate', this.item.size));
         } else {
           classes.push(sized('card-tile-lunar-colony', this.item.size));
@@ -208,7 +211,7 @@ export default Vue.extend({
         return size !== undefined ? `${clazz}--${size}` : clazz;
       }
 
-      if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
+      if (this.item.type === CardRenderItemType.MOON_HABITAT_RATE) {
         classes.push('card-colony-rate');
         if (this.item.size !== undefined) classes.push(`card-colony-rate--${this.item.size}`);
       }
@@ -310,7 +313,7 @@ export default Vue.extend({
     },
     // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {
-      let result: string = '';
+      let result = '';
       // in case of symbols inside
       if (isICardRenderItem(this.item) && this.item.amountInside) {
         if (this.item.amount !== 0) {
@@ -321,24 +324,23 @@ export default Vue.extend({
         }
       }
 
-      const previouslyRendered: Array<Tags | AltSecondaryTag> = [
+      const previouslyRendered: Array<Tag | AltSecondaryTag> = [
         AltSecondaryTag.OXYGEN,
-        AltSecondaryTag.MOON_COLONY_RATE,
+        AltSecondaryTag.MOON_HABITAT_RATE,
         AltSecondaryTag.MOON_MINING_RATE,
         AltSecondaryTag.MOON_LOGISTICS_RATE,
       ];
       // Oxygen is handled specially separately.
-      if (this.item.secondaryTag !== undefined && !previouslyRendered.includes(this.item.secondaryTag)) {
-        const classes: string[] = ['card-icon'];
-        classes.push(`card-tag-${this.item.secondaryTag}`);
-        result += '<div class="' + generateClassString(classes) + '"></div>';
+      const secondaryTag = this.item.secondaryTag;
+      if (secondaryTag !== undefined && !previouslyRendered.includes(secondaryTag)) {
+        result += '<div class="card-icon card-tag-' + secondaryTag + '"></div>';
       }
       if (this.item.isPlate || this.item.text !== undefined) {
         result += this.item.text || 'n/a';
       }
       if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';
-      } else if (this.item.type === CardRenderItemType.PROJECT_REQUIREMENTS) {
+      } else if (this.item.type === CardRenderItemType.IGNORE_GLOBAL_REQUIREMENTS) {
         result += '<div class="card-project-requirements">';
         result += '<div class="card-x">x</div>';
         result += '<div class="card-requirements">Global Requirements</div>';
@@ -363,8 +365,7 @@ export default Vue.extend({
         result = '<div class="card-party-icon"></div>';
       }
       if (this.item.type === CardRenderItemType.AWARD) {
-        // iconography on card shows plural (awards)
-        result = '<span class="card-award-icon">awards</span>';
+        result = '<span class="card-award-icon">award</span>';
       }
       if (this.item.type === CardRenderItemType.VP) {
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
@@ -383,6 +384,9 @@ export default Vue.extend({
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
         result = '<div class="card-x">x</div>';
+      }
+      if (this.item.type === CardRenderItemType.WILD && this.item.cancelled === true) {
+        result = '<div class="card-x">✕</div>';
       }
 
       return result;

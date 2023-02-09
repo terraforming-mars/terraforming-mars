@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -16,7 +16,7 @@ export class LawSuit extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.LAW_SUIT,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       cost: 2,
       victoryPoints: 'special',
 
@@ -35,11 +35,11 @@ export class LawSuit extends Card implements IProjectCard {
     return player.game.getPlayersById(player.removingPlayers);
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return this.targets(player).length > 0;
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: Player) => {
       const amount = Math.min(3, suedPlayer.megaCredits);
       player.addResource(Resources.MEGACREDITS, amount);

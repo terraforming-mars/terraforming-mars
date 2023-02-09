@@ -72,7 +72,7 @@
     "Polar Explorer": "Explorador polar",
     "Requires that you have 3 tiles on the two bottom rows": "Requiere tener 3 losetas en las dos filas inferiores del tablero.",
     "Rim Settler": "Colono Exterior",
-    "Requires that you have 3 jovian tags": "Requiere tener 3 símbolos jovianos en juego.",
+    "Requires that you have 3 Jovian tags": "Requiere tener 3 símbolos jovianos en juego.",
     "Specialist": "Especialista",
     "Requires that you have at least 10 in production of any resource": "Requiere tener al menos 10 de producción de algún recurso.",
     "Tactician": "Táctico",
@@ -220,7 +220,6 @@
      "Select colony tile to remove":  "Selecciona loseta de colonia que deseas quitar",
      "Select where to build the first colony": "Selecciona donde quieres construir la primera colonia",
      "Select where to build the second colony": "Selecciona donde quieres construir la segunda colonia",
-     "Select ocean space for Europa colony":"Selecciona un área de océano para la colonia Europa",
      "The id of this game is S{0}": "El identificador de esta partida es S{0}",
      "Select": "Seleccionar",
      "Take": "Tomar",
@@ -319,11 +318,8 @@
 
     "Place any final greenery from plants": "Convertir las plantas restantes en vegataciones:",
     "Don't place a greenery": "NO colocar vegetación",
-    "Select space for greenery": "Colocar vegetación",
 
     "City: 1 VP per adjacent greenery": "Ciudad: 1 PV por loseta de vegetación adyacente",
     "Greenery: 1 VP": "Vegetación: 1 PV",
-    "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por loseta de ciudad adyacente",
-    "Select space on Mars for city tile": "Selecciona un área en Marte para una loseta de ciudad",
-    "Select space for ocean": "Selecciona un área para una loseta de océano"
+    "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por loseta de ciudad adyacente"
 }

@@ -1,22 +1,21 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {nextToNoOtherTileFn} from '../../boards/Board';
 
 export class ResearchOutpost extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.RESEARCH_OUTPOST,
-      tags: [Tags.SCIENCE, Tags.CITY, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.CITY, Tag.BUILDING],
       cost: 18,
+
+      behavior: {
+        city: {on: 'isolated'},
+      },
 
       cardDiscount: {amount: 1},
       metadata: {
@@ -29,20 +28,6 @@ export class ResearchOutpost extends Card implements IProjectCard {
         }),
         description: 'Place a city tile NEXT TO NO OTHER TILE.',
       },
-    });
-  }
-  private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
-      .filter(nextToNoOtherTileFn(player.game.board));
-  }
-  public override canPlay(player: Player): boolean {
-    return this.getAvailableSpaces(player).length > 0;
-  }
-
-  public play(player: Player): PlayerInput {
-    return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
-      player.game.addCityTile(player, foundSpace.id);
-      return undefined;
     });
   }
 }

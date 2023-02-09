@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {ArchaeBacteria} from '../../../src/server/cards/base/ArchaeBacteria';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 
 describe('ArchaeBacteria', function() {
   let card: ArchaeBacteria;
@@ -23,6 +22,6 @@ describe('ArchaeBacteria', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(player.production.plants).to.eq(1);
   });
 });

@@ -10,15 +10,19 @@ import {IActionCard} from '../ICard';
 import {all} from '../Options';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class LunaHyperloopCorporation extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.LUNA_HYPERLOOP_CORPORATION,
-      tags: [Tags.MOON, Tags.BUILDING],
+      tags: [Tag.MOON, Tag.BUILDING],
       startingMegaCredits: 38,
+
+      behavior: {
+        stock: {steel: 4},
+      },
 
       victoryPoints: 'special',
 
@@ -27,19 +31,14 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, ICorp
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).steel(4).br;
-          b.action('Gain 1 M€ for each road tile on the Moon.', (eb) => {
+          b.action('Gain 1 M€ for each road tile on The Moon.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().moonRoad({all});
           }).br,
-          b.vpText('1 VP for each road tile on the Moon.').br;
+          b.vpText('1 VP for each road tile on The Moon.').br;
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(1, true),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.steel += 4;
-    return undefined;
   }
 
   public canAct() {

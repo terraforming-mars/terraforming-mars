@@ -1,13 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../../common/TileType';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
@@ -15,16 +11,15 @@ import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Units} from '../../../common/Units';
 
 export class Capital extends Card implements IProjectCard {
   constructor(
-    name: CardName = CardName.CAPITAL,
+    name = CardName.CAPITAL,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
     metadata: ICardMetadata = {
       cardNumber: '008',
       description: {
-        text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.',
+        text: 'Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.',
         align: 'left',
       },
       renderData: CardRenderer.builder((b) => {
@@ -40,19 +35,23 @@ export class Capital extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 26,
-      adjacencyBonus,
-      productionBox: Units.of({energy: -2, megacredits: 5}),
+
+      behavior: {
+        production: {energy: -2, megacredits: 5},
+        tile: {
+          type: TileType.CAPITAL,
+          on: 'city',
+          title: 'Select space for special city tile',
+          adjacencyBonus: adjacencyBonus,
+        },
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       victoryPoints: 'special',
       metadata,
     });
-  }
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2 &&
-        player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public override getVictoryPoints(player: Player) {
     const usedSpace = player.game.board.getSpaceByTileCard(this.name);
@@ -61,21 +60,5 @@ export class Capital extends Card implements IProjectCard {
         .filter((s) => Board.isOceanSpace(s)).length;
     }
     return 0;
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, 5);
-    return new SelectSpace(
-      'Select space for special city tile',
-      player.game.board.getAvailableSpacesForCity(player),
-      (space: ISpace) => {
-        player.game.addTile(player, SpaceType.LAND, space, {
-          tileType: TileType.CAPITAL,
-          card: this.name,
-        });
-        space.adjacency = this.adjacencyBonus;
-        return undefined;
-      },
-    );
   }
 }

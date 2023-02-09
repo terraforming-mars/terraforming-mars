@@ -5,14 +5,14 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
-import {addOcean} from '../../TestingUtils';
+import {addOcean, cast, runAllActions} from '../../TestingUtils';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('OceanFarm', () => {
   let card: OceanFarm;
-  let player: Player;
+  let player: TestPlayer;
   let otherPlayer: Player;
   let game: Game;
 
@@ -25,27 +25,29 @@ describe('OceanFarm', () => {
 
   it('Can play', () => {
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Play', () => {
-    expect(player.getProduction(Resources.HEAT)).eq(0);
-    expect(player.getProduction(Resources.PLANTS)).eq(0);
+    expect(player.production.heat).eq(0);
+    expect(player.production.plants).eq(0);
 
     const oceanSpace = addOcean(player);
-    const action = card.play(player);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(player.getProduction(Resources.HEAT)).eq(1);
-    expect(player.getProduction(Resources.PLANTS)).eq(1);
+    expect(player.production.heat).eq(1);
+    expect(player.production.plants).eq(1);
 
     action.cb(oceanSpace);
 
@@ -56,13 +58,15 @@ describe('OceanFarm', () => {
 
   it('Ocean Farm counts as ocean for adjacency', () => {
     const oceanSpace = addOcean(player);
-    const action = card.play(player);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];
 
     expect(otherPlayer.megaCredits).eq(0);
 
-    game.addGreenery(otherPlayer, greenery.id);
+    game.addGreenery(otherPlayer, greenery);
 
     expect(otherPlayer.megaCredits).eq(2);
   });
@@ -73,10 +77,12 @@ describe('OceanFarm', () => {
     })[0];
 
     player.plants = 0;
-    game.addOceanTile(player, oceanSpace.id);
+    game.addOceanTile(player, oceanSpace);
     expect(player.plants).eq(1);
 
-    const action = card.play(player);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
 
     expect(player.plants).eq(1);
 

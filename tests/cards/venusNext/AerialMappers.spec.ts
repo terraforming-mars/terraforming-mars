@@ -6,12 +6,11 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AerialMappers', function() {
   let card: AerialMappers;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AerialMappers();
@@ -22,15 +21,14 @@ describe('AerialMappers', function() {
   });
 
   it('Should play', function() {
-    const action = card.play();
+    const action = card.play(player);
     expect(action).is.undefined;
   });
 
   it('Should act - multiple targets', function() {
     const card2 = new Dirigibles();
     player.playedCards.push(card2);
-    const action = card.action(player) as SelectCard<ICard>;
-    expect(action).instanceOf(SelectCard);
+    const action = cast(card.action(player), SelectCard<ICard>);
 
     action.cb([card]);
     expect(card.resourceCount).to.eq(1);

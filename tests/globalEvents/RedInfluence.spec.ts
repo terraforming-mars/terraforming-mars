@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {Resources} from '../../src/common/Resources';
 import {RedInfluence} from '../../src/server/turmoil/globalEvents/RedInfluence';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -21,14 +20,14 @@ describe('RedInfluence', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(4);
-    expect(player2.getResource(Resources.MEGACREDITS)).to.eq(4);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
-    expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(player.megaCredits).to.eq(4);
+    expect(player2.megaCredits).to.eq(4);
+    expect(player.production.megacredits).to.eq(0);
+    expect(player2.production.megacredits).to.eq(3);
   });
 
   it('Max 5', function() {
@@ -41,6 +40,6 @@ describe('RedInfluence', function() {
     player.megaCredits = 20;
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(5);
+    expect(player.megaCredits).to.eq(5);
   });
 });

@@ -13,11 +13,11 @@ describe('LeadershipSummit', function() {
     const game = Game.newInstance('gameid', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
-    turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS)!;
+    turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS);
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player.id);
 
     card.resolve(game, turmoil);
     expect(player.cardsInHand).has.lengthOf(1);

@@ -2,20 +2,11 @@
   <div class="awards_cont" v-trim-whitespace>
     <div class="awards">
       <div class="ma-title">
-        <a
-          @click.prevent="toggleList"
-          class="ma-clickable awards-padding"
-          href="#"
-          v-i18n
-          data-test="toggle-awards"
-        >
-          Awards
-        </a>
-
+        <a @click.prevent="toggleList" class="ma-clickable awards-padding" href="#" data-test="toggle-awards" v-i18n>Awards</a>
         <span
           v-for="award in fundedAwards"
           :key="award.name"
-          :title="award.player_name"
+          :title="award.playerName"
           class="milestone-award-inline paid"
           data-test="funded-awards"
         >
@@ -23,8 +14,8 @@
           <span class="ma-player-cube">
             <i
               class="board-cube"
-              :class="`board-cube--${award.player_color}`"
-              :data-test-player-cube="award.player_color"
+              :class="`board-cube--${award.playerColor}`"
+              :data-test-player-cube="award.playerColor"
             />
           </span>
         </span>
@@ -40,7 +31,7 @@
         </span>
       </div>
 
-      <span @click="toggleDescription" title="press to show or hide the description" data-test="toggle-description">
+      <span @click="toggleDescription" :title="$t('press to show or hide the description')" data-test="toggle-description">
         <div v-show="showAwards">
           <Award
             v-for="award in awards"
@@ -92,7 +83,7 @@ export default Vue.extend({
   },
   computed: {
     fundedAwards(): FundedAwardModel[] {
-      const isFunded = (award: FundedAwardModel) => !!award.player_name;
+      const isFunded = (award: FundedAwardModel) => !!award.playerName;
       return this.awards.filter(isFunded);
     },
     availableAwardSpots(): Number[] {

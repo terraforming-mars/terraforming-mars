@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -16,29 +16,31 @@ export class VenusianPlants extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.VENUSIAN_PLANTS,
       cost: 13,
-      tags: [Tags.VENUS, Tags.PLANT],
-      tr: {venus: 1},
+      tags: [Tag.VENUS, Tag.PLANT],
 
       requirements: CardRequirements.builder((b) => b.venus(16)),
       victoryPoints: 1,
+
+      behavior: {
+        global: {venus: 1},
+      },
 
       metadata: {
         cardNumber: '261',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br.br; // intentional double br
-          b.microbes(1, {secondaryTag: Tags.VENUS}).nbsp;
-          b.or().nbsp.animals(1, {secondaryTag: Tags.VENUS});
+          b.microbes(1, {secondaryTag: Tag.VENUS}).nbsp;
+          b.or().nbsp.animals(1, {secondaryTag: Tag.VENUS});
         }),
         description: {
-          text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD',
+          text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD',
           align: 'left',
         },
       },
     });
   }
 
-  public play(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 1);
+  public override bespokePlay(player: Player) {
     const cards = this.getResCards(player);
     if (cards.length === 0) return undefined;
 
@@ -61,6 +63,6 @@ export class VenusianPlants extends Card implements IProjectCard {
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(CardResource.MICROBE);
     resourceCards = resourceCards.concat(player.getResourceCards(CardResource.ANIMAL));
-    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
+    return resourceCards.filter((card) => card.tags.includes(Tag.VENUS));
   }
 }

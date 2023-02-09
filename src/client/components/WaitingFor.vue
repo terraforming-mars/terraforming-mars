@@ -1,6 +1,9 @@
 <template>
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
+    <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
+      <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
+    </template>
     <player-input-factory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -13,8 +16,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-
-import {mainAppSettings} from '@/client/components/App';
+import {MainAppData, mainAppSettings} from '@/client/components/App';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -23,6 +25,8 @@ import {WaitingForModel} from '@/common/models/WaitingForModel';
 
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
+import * as paths from '@/common/app/paths';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
@@ -61,20 +65,22 @@ export default Vue.extend({
       }
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
+    // TODO(kberg): use loadPlayerViewResponse.
     onsave(out: InputResponse) {
       const xhr = new XMLHttpRequest();
-      const root = this.$root as unknown as typeof mainAppSettings.data;
+      const root = this.$root as unknown as MainAppData;
       const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('POST', '/player/input?id=' + this.playerView.id);
+      xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           root.screen = 'empty';
           root.playerView = xhr.response;
           root.playerkey++;
@@ -82,7 +88,7 @@ export default Vue.extend({
           if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
             (window).location = (window).location; // eslint-disable-line no-self-assign
           }
-        } else if (xhr.status === 400 && xhr.responseType === 'json') {
+        } else if (xhr.status === HTTPResponseCode.BAD_REQUEST && xhr.responseType === 'json') {
           showAlert(xhr.response.message);
         } else {
           showAlert('Unexpected response from server. Please try again.');
@@ -94,18 +100,55 @@ export default Vue.extend({
         root.isServerSideRequestInProgress = false;
       };
     },
+    reset() {
+      const xhr = new XMLHttpRequest();
+      const root = this.$root as unknown as MainAppData;
+      if (root.isServerSideRequestInProgress) {
+        console.warn('Server request in progress');
+        return;
+      }
+
+      root.isServerSideRequestInProgress = true;
+      xhr.open('GET', paths.RESET + '?id=' + this.playerView.id);
+      xhr.responseType = 'json';
+      xhr.onload = () => {
+        this.loadPlayerViewResponse(xhr, root);
+      };
+      xhr.send();
+      xhr.onerror = function() {
+        root.isServerSideRequestInProgress = false;
+      };
+    },
+    loadPlayerViewResponse(xhr: XMLHttpRequest, root: MainAppData) {
+      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+      if (xhr.status === 200) {
+        root.screen = 'empty';
+        root.playerView = xhr.response;
+        root.playerkey++;
+        root.screen = 'player-home';
+        if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
+          (window).location = (window).location; // eslint-disable-line no-self-assign
+        }
+      } else if (xhr.status === 400 && xhr.responseType === 'json') {
+        showAlert(xhr.response.message);
+      } else {
+        showAlert('Unexpected response from server. Please try again.');
+      }
+      root.isServerSideRequestInProgress = false;
+    },
+
     waitForUpdate() {
       const vueApp = this;
       const root = this.$root as unknown as typeof mainAppSettings.methods;
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
+        xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
         xhr.onerror = function() {
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
         xhr.onload = () => {
-          if (xhr.status === 200) {
+          if (xhr.status === HTTPResponseCode.OK) {
             const result = xhr.response as WaitingForModel;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.

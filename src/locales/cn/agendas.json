@@ -1,15 +1,15 @@
 {
    "Select a Mars First bonus.":"选择火星之首党主席上台后的奖励.",
-   "Gain 1 M€ for each Building tag you have":"每个你拥有建筑标志使你获得 1 M€",
+   "Gain 1 M€ for each building tag you have":"每个你拥有建筑标志使你获得 1 M€",
    "Gain 1 M€ for each tile you have ON MARS":"火星上每有一个你拥有的板块，使你获得 1 M€",
    "Select a Mars First policy.":"选择火星之首党主席上台后的政策.",
    "When you place a tile ON MARS, gain 1 steel":"每在火星上放置1板块，获得 1 钢铁",
-   "When you play a Building tag, gain 2 M€":"当你打出一张建筑标志牌，获得 2 M€",
+   "When you play a building tag, gain 2 M€":"当你打出一张建筑标志牌，获得 2 M€",
    "Your steel resources are worth 1 M€ extra":"你的每个铁价值 +1 M€",
    "Spend 4 M€ to draw a Building card (Turmoil Mars First)":"花费 4 M€ 抽1张建筑标志牌",
 
    "Select a Scientists bonus.":"选择科学家党主席上台后的奖励.",
-   "Gain 1 M€ for each Science tag you have":"每个你拥有的科学标志，使你获得 1 M€",
+   "Gain 1 M€ for each science tag you have":"每个你拥有的科学标志，使你获得 1 M€",
    "Gain 1 M€ for every 3 cards in hand":"你每有三张手牌获 1 M€",
    "Select a Scientists policy.":"选择科学家党主席上台后的政策.",
    "Your global requirements are +/- 2 steps":"你的全球参数需求 +/- 2",
@@ -44,10 +44,10 @@
    "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible":"当你提升 1 全球参数，降低你的金钱产量 1 级（-5不用）",
 
    "Select a Kelvinists bonus.":"选择开尔文主义党主席上台后的奖励.",
-   "Gain 1 M€ for each Heat production you have":"你每 1 热产，获得 1 M€",
-   "Gain 1 heat for each Heat production you have":"你每 1 热产，获得 1 热资源",
+   "Gain 1 M€ for each heat production you have":"你每 1 热产，获得 1 M€",
+   "Gain 1 heat for each heat production you have":"你每 1 热产，获得 1 热资源",
    "Select a Kelvinists policy.":"选择开尔文主义党主席上台后的政策.",
-   "Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)":"花 10 M€提升 1 电产和 1 热产",
+   "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)":"花 10 M€提升 1 电产和 1 热产",
    "When you raise temperature, gain 3 M€ per step raised":"每提升 1 温度，获得 3 M€",
    "Convert 6 heat into temperature (Turmoil Kelvinists)":"变为每 6 热资源 提高温度",
    "When you place a tile, gain 2 heat":"每当你放置 1 板块，获得 2 热资源"

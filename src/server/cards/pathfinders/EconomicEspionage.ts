@@ -3,12 +3,12 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class EconomicEspionage extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -16,7 +16,7 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
       cardType: CardType.ACTIVE,
       name: CardName.ECONOMIC_ESPIONAGE,
       cost: 8,
-      tags: [Tags.EARTH],
+      tags: [Tag.EARTH],
       resourceType: CardResource.DATA,
       victoryPoints: VictoryPoints.resource(1, 3),
 
@@ -32,23 +32,18 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
     });
   }
 
-  public override resourceCount = 0;
 
   public canAct(player: Player) {
     return player.canAfford(2);
   }
 
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 2, {
+    player.game.defer(new SelectPaymentDeferred(player, 2, {
       title: 'Select how to pay for action',
       afterPay: () => {
         player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
       },
     }));
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

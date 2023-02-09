@@ -1,10 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -18,6 +15,11 @@ export class Airliners extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.floaters(3)),
       victoryPoints: 1,
 
+      behavior: {
+        production: {megacredits: 2},
+        addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER},
+      },
+
       metadata: {
         cardNumber: 'C01',
         description: 'Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.',
@@ -27,11 +29,5 @@ export class Airliners extends Card implements IProjectCard {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 2);
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
-    return undefined;
   }
 }

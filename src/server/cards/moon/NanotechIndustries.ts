@@ -1,6 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
@@ -8,7 +8,6 @@ import {CardResource} from '../../../common/CardResource';
 import {Player} from '../../Player';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
-import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
@@ -17,10 +16,14 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
     super({
       cardType: CardType.CORPORATION,
       name: CardName.NANOTECH_INDUSTRIES,
-      tags: [Tags.SCIENCE, Tags.MOON],
+      tags: [Tag.SCIENCE, Tag.MOON],
       startingMegaCredits: 42,
       resourceType: CardResource.SCIENCE,
-      initialActionText: 'Draw 3 cards and keep 2.',
+
+      firstAction: {
+        text: 'Draw 3 cards and keep 2.',
+        drawCard: {count: 3, keep: 2},
+      },
 
       victoryPoints: VictoryPoints.resource(1, 2),
 
@@ -36,16 +39,6 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
           '1 VP for every 2 science resources here.',
       },
     });
-  }
-
-  public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
-
-  public initialAction(player: Player): PlayerInput {
-    return player.drawCardKeepSome(3, {keepMax: 2});
   }
 
   public canAct() {

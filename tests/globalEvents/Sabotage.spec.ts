@@ -15,19 +15,19 @@ describe('Sabotage', function() {
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);
-    player.addProduction(Resources.ENERGY, 1);
-    player2.addProduction(Resources.STEEL, 3);
+    player.production.add(Resources.ENERGY, 1);
+    player2.production.add(Resources.STEEL, 3);
 
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
 
     card.resolve(game, turmoil);
-    expect(player.getResource(Resources.STEEL)).to.eq(0);
-    expect(player2.getResource(Resources.STEEL)).to.eq(3);
-    expect(player2.getProduction(Resources.STEEL)).to.eq(2);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.steel).to.eq(0);
+    expect(player2.steel).to.eq(3);
+    expect(player2.production.steel).to.eq(2);
+    expect(player.production.energy).to.eq(0);
   });
 });

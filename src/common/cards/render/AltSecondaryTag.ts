@@ -7,12 +7,12 @@ export enum AltSecondaryTag {
   // 'turmoil' => used in Political Uprising community prelude
   TURMOIL = 'turmoil',
   FLOATER = 'floater',
-  // 'blue' => used in Project Workshop
   BLUE = 'blue',
 
   MOON_MINING_RATE = 'moon-mine',
-  MOON_COLONY_RATE = 'moon-colony',
+  MOON_HABITAT_RATE = 'moon-colony',
   MOON_LOGISTICS_RATE = 'moon-road',
 
   NO_PLANETARY_TAG = 'no_planetary_tag',
+  WILD_RESOURCE = 'wild-resource',
 }

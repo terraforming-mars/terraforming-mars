@@ -5,7 +5,6 @@ import {SerializedFundedAward} from './awards/FundedAward';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
-import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {GameOptions} from './GameOptions';
@@ -14,21 +13,21 @@ import {LogMessage} from '../common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
+import {SerializedDeck} from './cards/SerializedDeck';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
     aresData?: AresData;
     awards: Array<string>;
     board: SerializedBoard;
-    // game.rng changes over the course of a game but isn't saved and serialized
-    // for instance, in the face of a redeal.
-    currentSeed: number | undefined; // TODO(kberg): Remove '|undefined' by 2022-06-01
+    currentSeed: number;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
     corporationsDraftDirection: 'before' | 'after';
+    corporationDeck: SerializedDeck,
     corporationsToDraft: Array<CardName>;
-    dealer: SerializedDealer;
+    createdTimeMs: number;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
     draftedPlayers: Array<PlayerId>;
@@ -49,6 +48,8 @@ export type SerializedGame = {
     passedPlayers: Array<PlayerId>;
     phase: Phase;
     players: Array<SerializedPlayer>;
+    preludeDeck: SerializedDeck,
+    projectDeck: SerializedDeck,
     researchedPlayers: Array<PlayerId>;
     seed: number;
     someoneHasRemovedOtherPlayersPlants: boolean;

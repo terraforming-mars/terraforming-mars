@@ -4,6 +4,7 @@ import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
 
 describe('ElectroCatapult', () => {
   let card: ElectroCatapult;
@@ -18,42 +19,41 @@ describe('ElectroCatapult', () => {
   });
 
   it('Cannot play without energy production', () => {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Cannot play if oxygen level too high', () => {
-    player.addProduction(Resources.ENERGY, 1);
+    player.production.add(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 9;
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     (game as any).oxygenLevel = 8;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    player.addProduction(Resources.ENERGY, 1);
-    card.play(player);
+    player.production.add(Resources.ENERGY, 1);
+    player.playCard(card);
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(0);
     expect(card.getVictoryPoints()).to.eq(1);
   });
   it('Should act', () => {
     player.plants = 1;
     player.steel = 1;
 
-    const action = card.action(player);
-    expect(action).instanceOf(OrOptions);
-    expect(action!.options).has.lengthOf(2);
+    const action = cast(card.action(player), OrOptions);
+    expect(action.options).has.lengthOf(2);
 
-        action!.options[0].cb();
-        expect(player.plants).to.eq(0);
-        expect(player.megaCredits).to.eq(7);
+    action.options[0].cb();
+    expect(player.plants).to.eq(0);
+    expect(player.megaCredits).to.eq(7);
 
-        action!.options[1].cb();
-        expect(player.steel).to.eq(0);
-        expect(player.megaCredits).to.eq(14);
+    action.options[1].cb();
+    expect(player.steel).to.eq(0);
+    expect(player.megaCredits).to.eq(14);
   });
 });

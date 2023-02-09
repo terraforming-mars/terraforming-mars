@@ -1,21 +1,21 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Penguins extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Penguins extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.PENGUINS,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 7,
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
@@ -24,7 +24,7 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
       metadata: {
         cardNumber: '212',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Animal to this card.', (eb) => {
+          b.action('Add 1 animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
           b.vpText('1 VP for each animal on this card.');
@@ -32,11 +32,6 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
         description: 'Requires 8 oceans.',
       },
     });
-  }
-  public override resourceCount = 0;
-
-  public play() {
-    return undefined;
   }
 
   public canAct(): boolean {

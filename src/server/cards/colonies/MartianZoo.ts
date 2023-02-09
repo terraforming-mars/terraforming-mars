@@ -1,21 +1,20 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
 import {all, played} from '../Options';
 
-export class MartianZoo extends Card implements IProjectCard, IResourceCard {
+export class MartianZoo extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 12,
-      tags: [Tags.ANIMAL, Tags.BUILDING],
+      tags: [Tag.ANIMAL, Tag.BUILDING],
       name: CardName.MARTIAN_ZOO,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.ANIMAL,
@@ -40,11 +39,11 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
     });
   }
 
-  public override resourceCount: number = 0;
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.EARTH)) {
-      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.EARTH).length);
+    const count = player.tags.cardTagCount(card, Tag.EARTH);
+    if (count > 0) {
+      player.addResourceTo(this, count);
     }
   }
 
@@ -54,10 +53,6 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
 
   public action(player: Player) {
     player.addResource(Resources.MEGACREDITS, this.resourceCount, {log: true});
-    return undefined;
-  }
-
-  public play() {
     return undefined;
   }
 }

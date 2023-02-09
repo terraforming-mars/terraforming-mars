@@ -59,8 +59,8 @@ export default Vue.extend({
       }
 
       let result: Array<PublicPlayerModel> = [];
-      let currentPlayerOffset: number = 0;
-      const currentPlayerIndex: number = playerIndex(
+      let currentPlayerOffset = 0;
+      const currentPlayerIndex = playerIndex(
         this.thisPlayer.color,
         this.players,
       );
@@ -95,7 +95,7 @@ export default Vue.extend({
         (p: PublicPlayerModel) => !this.playerView.game.passedPlayers.includes(p.color),
       );
 
-      const currentPlayerIndex: number = playerIndex(
+      const currentPlayerIndex = playerIndex(
         player.color,
         notPassedPlayers,
       );
@@ -124,13 +124,13 @@ export default Vue.extend({
         <div class="players-overview" v-if="hasPlayers()">
             <overview-settings />
             <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
-                <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
-                    <other-player v-if="thisPlayer === undefined || otherPlayer.id !== thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
+                <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.color">
+                    <other-player v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"
               :player="p"
-              :key="p.id"
+              :key="p.color"
               :playerView="playerView"
               :firstForGen="getIsFirstForGen(p)"
               :actionLabel="getActionLabel(p)"
@@ -139,7 +139,7 @@ export default Vue.extend({
             <player-info
               v-if="thisPlayer !== undefined"
               :player="thisPlayer"
-              :key="thisPlayer.id"
+              :key="thisPlayer.color"
               :playerView="playerView"
               :firstForGen="getIsFirstForGen(thisPlayer)"
               :actionLabel="getActionLabel(thisPlayer)"

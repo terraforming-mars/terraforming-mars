@@ -18,10 +18,11 @@ function getAllTranslations() {
 
       const files = fs.readdirSync(translationDir);
       files.forEach((file) => {
-        if ( file === undefined || ! file.endsWith('.json')) return;
+        if (file === undefined || !file.endsWith('.json')) return;
 
+        const filename = path.join(translationDir, file);
         try {
-          const dataJson = JSON.parse(fs.readFileSync(path.join(translationDir, file), 'utf8'));
+          const dataJson = JSON.parse(fs.readFileSync(filename, 'utf8'));
 
           for (const phrase in dataJson) {
             if (dataJson.hasOwnProperty(phrase)) {
@@ -32,7 +33,7 @@ function getAllTranslations() {
             }
           }
         } catch (e) {
-          throw new Error(`While parsing ${file}:` + e);
+          throw new Error(`While parsing ${filename}:` + e);
         }
       });
     }

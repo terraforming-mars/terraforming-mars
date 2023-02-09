@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
@@ -21,19 +21,19 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
         renderData: CardRenderer.builder((b) => {
           b.planetaryTrack().text('3');
         }),
-        description: 'Choose a planetary track and raise it 3 steps. This card counts as a card with a tag of the chosen planet.',
+        description: 'Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.',
       },
     });
   }
 
-  public cloneTag: Tags = Tags.CLONE;
+  public cloneTag: Tag = Tag.CLONE;
 
-  public override get tags(): Array<Tags> {
+  public override get tags(): Array<Tag> {
     return [this.cloneTag];
   }
 
-  public play(player: Player) {
-    player.adjustProduction(this.productionBox);
+  public override bespokePlay(player: Player) {
+    // player.production.adjust(this.productionBox); Why was this here? Remove it, I suppose.
     player.game.defer(
       new DeclareCloneTag(
         player,

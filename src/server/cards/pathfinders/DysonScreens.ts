@@ -1,11 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Size} from '../../../common/cards/render/Size';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../../common/Resources';
@@ -17,10 +16,16 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.DYSON_SCREENS,
-      tags: [Tags.SCIENCE, Tags.VENUS, Tags.ENERGY, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.VENUS, Tag.POWER, Tag.SPACE],
       cost: 28,
       victoryPoints: 1,
-      tr: {temperature: 1},
+
+      behavior: {
+        production: {energy: 2, heat: 2},
+        drawCard: 1,
+        global: {temperature: 1},
+        city: {space: SpaceName.DYSON_SCREENS},
+      },
 
       metadata: {
         cardNumber: 'Pf15',
@@ -42,18 +47,8 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
 
   public action(player: Player) {
     player.titanium -= 2;
-    player.addProduction(Resources.HEAT, 1);
-    player.addProduction(Resources.ENERGY, 1);
-    return undefined;
-  }
-
-  public play(player: Player) {
-    const game = player.game;
-    game.increaseTemperature(player, 1);
-    player.drawCard();
-    player.game.addCityTile(player, SpaceName.DYSON_SCREENS, SpaceType.COLONY);
-    player.addProduction(Resources.ENERGY, 2);
-    player.addProduction(Resources.HEAT, 2);
+    player.production.add(Resources.HEAT, 1);
+    player.production.add(Resources.ENERGY, 1);
     return undefined;
   }
 }

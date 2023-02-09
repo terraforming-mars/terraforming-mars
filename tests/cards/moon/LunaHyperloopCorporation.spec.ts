@@ -1,22 +1,19 @@
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaHyperloopCorporation} from '../../../src/server/cards/moon/LunaHyperloopCorporation';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('LunaHyperloopCorporation', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: LunaHyperloopCorporation;
   let moonData: IMoonData;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new LunaHyperloopCorporation();
     moonData = MoonExpansion.moonData(game);
   });
@@ -39,7 +36,7 @@ describe('LunaHyperloopCorporation', () => {
     expect(player.megaCredits).eq(3);
 
     player.megaCredits = 0;
-    MoonExpansion.addColonyTile(player, spaces[3].id);
+    MoonExpansion.addHabitatTile(player, spaces[3].id);
     card.action(player);
     expect(player.megaCredits).eq(3);
   });
@@ -62,7 +59,7 @@ describe('LunaHyperloopCorporation', () => {
     expect(card.getVictoryPoints(player)).eq(3);
 
     player.megaCredits = 0;
-    MoonExpansion.addColonyTile(player, spaces[3].id);
+    MoonExpansion.addHabitatTile(player, spaces[3].id);
     card.action(player);
     expect(card.getVictoryPoints(player)).eq(3);
   });

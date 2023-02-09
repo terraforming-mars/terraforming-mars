@@ -1,12 +1,12 @@
 import {Player} from '../../Player';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
@@ -14,7 +14,7 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.SPACE_MIRRORS,
-      tags: [Tags.ENERGY, Tags.SPACE],
+      tags: [Tag.POWER, Tag.SPACE],
       cost: 3,
 
       metadata: {
@@ -27,15 +27,12 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
       },
     });
   }
-  public play() {
-    return undefined;
-  }
   public canAct(player: Player): boolean {
     return player.canAfford(7);
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 7, {title: 'Select how to pay for action'}));
-    player.addProduction(Resources.ENERGY, 1);
+    player.game.defer(new SelectPaymentDeferred(player, 7, {title: 'Select how to pay for action'}));
+    player.production.add(Resources.ENERGY, 1);
     return undefined;
   }
 }

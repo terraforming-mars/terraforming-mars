@@ -1,20 +1,20 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
-import {InputResponse} from '../../common/inputs/InputResponse';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
+import {InputResponse, isSelectPlayerResponse} from '../../common/inputs/InputResponse';
 
-export class SelectPlayer implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PLAYER;
-  constructor(public players: Array<Player>, public title: string | Message, public buttonLabel: string = 'Save', public cb: (player: Player) => PlayerInput | undefined) {
+export class SelectPlayer extends BasePlayerInput {
+  constructor(public players: Array<Player>, title: string | Message, buttonLabel: string = 'Save', public cb: (player: Player) => PlayerInput | undefined) {
+    super(PlayerInputType.SELECT_PLAYER, title);
     this.buttonLabel = buttonLabel;
   }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 1);
-    const foundPlayer = this.players.find(
-      (player) => player.color === input[0][0] || player.id === input[0][0],
-    );
+  public process(input: InputResponse) {
+    if (!isSelectPlayerResponse(input)) {
+      throw new Error('Not a valid SelectPlayerResponse');
+    }
+    const foundPlayer = this.players.find((player) => player.color === input.player);
     if (foundPlayer === undefined) {
       throw new Error('Player not available');
     }

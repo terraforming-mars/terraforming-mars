@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
@@ -17,10 +17,14 @@ export class Ambient extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.AMBIENT,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       startingMegaCredits: 38,
 
-      initialActionText: 'Raise the Venus scale 2 steps.',
+      firstAction: {
+        text: 'Raise the Venus scale 2 steps.',
+        //     LogHelper.logVenusIncrease(player, actual);
+        global: {venus: 2},
+      },
 
       metadata: {
         cardNumber: 'PfC3',
@@ -39,13 +43,8 @@ export class Ambient extends Card implements ICorporationCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     this.onCorpCardPlayed(player, this);
-    return undefined;
-  }
-
-  public initialAction(player: Player) {
-    player.game.increaseVenusScaleLevel(player, 2);
     return undefined;
   }
 
@@ -55,8 +54,8 @@ export class Ambient extends Card implements ICorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
-    if (player.isCorporation(this.name) && card.tags.includes(Tags.VENUS)) {
-      player.addProduction(Resources.HEAT, 1, {log: true});
+    if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
+      player.production.add(Resources.HEAT, 1, {log: true});
     }
   }
 

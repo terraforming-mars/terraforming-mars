@@ -6,7 +6,7 @@ import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
-import {runAllActions, setCustomGameOptions} from '../TestingUtils';
+import {runAllActions, testGameOptions} from '../TestingUtils';
 import {Player} from '../../src/server/Player';
 import {GameLoader} from '../../src/server/database/GameLoader';
 
@@ -79,8 +79,8 @@ describeDatabaseSuite({
     'size-bytes-games': 'any',
     'size-bytes-game-results': 'any',
     'size-bytes-database': 'any',
-    'save-confict-normal-count': 0,
-    'save-confict-undo-count': 0,
+    'save-conflict-normal-count': 0,
+    'save-conflict-undo-count': 0,
     'save-count': 0,
     'save-error-count': 0,
     'size-bytes-participants': 'any',
@@ -152,7 +152,7 @@ describeDatabaseSuite({
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
       const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player, player2], player, setCustomGameOptions({draftVariant: false, undoOption: true}));
+      const game = Game.newInstance('gameid', [player, player2], player, testGameOptions({draftVariant: false, undoOption: true}));
       await db.awaitAllSaves();
 
       expect(await db.getStat('save-count')).eq(1);
@@ -186,21 +186,22 @@ describeDatabaseSuite({
 
       // Taking an action triggers a save (when undo is enabled.)
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
       await db.awaitAllSaves();
 
       expect(await db.getStat('save-count')).eq(3);
       expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2]);
       // This stat reports whether a game with undo enabled updates instead of inserts.
       // None are expected at this point.
-      expect(await db.getStat('save-confict-undo-count')).eq(0);
+      expect(await db.getStat('save-conflict-undo-count')).eq(0);
 
       // Player's second action
       expect(game.activePlayer).eq(player.id);
       expect(player.actionsTakenThisRound).eq(1);
 
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
 
       // It is now the second player's turn. This test doesn't care about what the
@@ -215,7 +216,7 @@ describeDatabaseSuite({
       expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
       // That's because one of those saves was an update instead of an insert.
       // Version 3 was saved twice.
-      expect(await db.getStat('save-confict-undo-count')).eq(1);
+      expect(await db.getStat('save-conflict-undo-count')).eq(1);
 
       // Of all the steps in this test, this is the one which will verify the broken undo
       // is repaired correctly. When it was broken, this was 5.
@@ -226,7 +227,7 @@ describeDatabaseSuite({
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
       const player2 = TestPlayer.RED.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player, player2], player2, setCustomGameOptions({draftVariant: false, undoOption: true}));
+      const game = Game.newInstance('gameid', [player, player2], player2, testGameOptions({draftVariant: false, undoOption: true}));
       await db.awaitAllSaves();
 
       // Move into the action phase by having both players complete their research.
@@ -263,14 +264,16 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(1);
       expect(player.actionsTakenThisRound).eq(1);
 
       // Player's second action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(2);
       expect(player.actionsTakenThisRound).eq(2);
@@ -278,7 +281,8 @@ describeDatabaseSuite({
 
       // Player's third action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(3);
       expect(player.actionsTakenThisRound).eq(3);
@@ -286,7 +290,8 @@ describeDatabaseSuite({
 
       // Player's fourth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(4);
       expect(player.actionsTakenThisRound).eq(4);
@@ -294,7 +299,8 @@ describeDatabaseSuite({
 
       // Player's fifth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(5);
       expect(player.actionsTakenThisRound).eq(5);
@@ -312,7 +318,7 @@ describeDatabaseSuite({
     it('undo works in solo', async () => {
       const db = dbFunction() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer(/** beginner */ true);
-      const game = Game.newInstance('gameid', [player], player, setCustomGameOptions({undoOption: true}));
+      const game = Game.newInstance('gameid', [player], player, testGameOptions({undoOption: true}));
       await db.awaitAllSaves();
 
       // Move into the action phase. This triggers a save.
@@ -339,14 +345,16 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(0);
 
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(1);
       expect(player.actionsTakenThisRound).eq(1);
 
       // Player's second action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(2);
       expect(player.actionsTakenThisRound).eq(2);
@@ -354,7 +362,8 @@ describeDatabaseSuite({
 
       // Player's third action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(3);
       expect(player.actionsTakenThisRound).eq(3);
@@ -362,7 +371,8 @@ describeDatabaseSuite({
 
       // Player's fourth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(4);
       expect(player.actionsTakenThisRound).eq(4);
@@ -370,7 +380,8 @@ describeDatabaseSuite({
 
       // Player's fifth action
       takeAction(player);
-      player.process([]);
+      player.process({type: 'option'});
+
       await db.awaitAllSaves();
       expect(player.megaCredits).eq(5);
       expect(player.actionsTakenThisRound).eq(5);

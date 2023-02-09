@@ -44,8 +44,8 @@
     "Plant Microbe Animal": "식물 미생물 동물",
     "Plant Animal Microbe": "식물 동물 미생물",
     "9 Resource types": "9종류의 자원",
-    "3 Floaters": "부양체 자원 3개",
-    "5 Floaters": "부양체 자원 5개",
+    "3 floaters": "부양체 자원 3개",
+    "5 floaters": "부양체 자원 5개",
     "Forest": "녹지 타일",
     "City": "도시 타일",
     "2 Cities": "도시 타일 2개",
@@ -192,11 +192,10 @@
     "play": "추진",
     "replay": "재추진",
     "Invert": "반전",
-    
-    "1 VP for each Animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
+
     "1 VP for each animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
-    "1 VP per Animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
-    "1 VP per 2 Animals on this card.": "해당 카드에 있는 동물 자원 2개당 1점.",
+    "1 VP per animal on this card.": "해당 카드에 있는 동물 자원 당 1점.",
+    "1 VP per 2 animals on this card.": "해당 카드에 있는 동물 자원 2개당 1점.",
 
     "${0} placed ${1} tile on (${2}, ${3}": "${0} 플레이어가 \"${1}\" 타일 배치 (${2}, ${3}"
 }

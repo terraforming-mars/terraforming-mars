@@ -4,7 +4,7 @@
  */
 import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
 import {Size} from '../../../common/cards/render/Size';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {ICardRenderItem} from '../../../common/cards/render/Types';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -14,7 +14,7 @@ export interface ItemOptions {
   all?: boolean;
   digit?: boolean;
   played?: boolean;
-  secondaryTag?: Tags | AltSecondaryTag;
+  secondaryTag?: Tag | AltSecondaryTag;
   multiplier?: boolean; /** Mark any amount to be a multiplier 'X' */
   cancelled?: boolean;
   over?: number; /** Used for global events. */
@@ -31,7 +31,7 @@ export class CardRenderItem implements ICardRenderItem {
   public isBold?: boolean;
   public isPlate?: boolean;
   public size?: Size;
-  public secondaryTag?: Tags | AltSecondaryTag;
+  public secondaryTag?: Tag | AltSecondaryTag;
   public multiplier?: boolean = false;
   public cancelled?: boolean = false;
   over?: number;

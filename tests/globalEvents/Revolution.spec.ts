@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {Sponsors} from '../../src/server/cards/base/Sponsors';
 import {Game} from '../../src/server/Game';
-import {Player} from '../../src/server/Player';
 import {Revolution} from '../../src/server/turmoil/globalEvents/Revolution';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -9,8 +8,8 @@ import {TestPlayer} from '../TestPlayer';
 
 describe('Revolution', function() {
   let card: Revolution;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 
@@ -26,7 +25,7 @@ describe('Revolution', function() {
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.push(player2.id);
+    turmoil.dominantParty.delegates.add(player2.id);
   });
 
   it('resolve play', function() {

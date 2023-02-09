@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -18,13 +18,17 @@ export class RobinHaulings extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.ROBIN_HAULINGS,
-      tags: [Tags.MARS, Tags.VENUS],
+      tags: [Tag.MARS, Tag.VENUS],
       startingMegaCredits: 39,
       resourceType: CardResource.FLOATER,
 
+      behavior: {
+        addResources: 1,
+      },
+
       metadata: {
         cardNumber: 'PfC9',
-        description: 'You start with 39 M€',
+        description: 'You start with 39 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(39).br;
           b.effect('Whenever you play a card with a Venus tag add 1 floater to ANY card.', (eb) => {
@@ -39,15 +43,8 @@ export class RobinHaulings extends Card implements ICorporationCard {
     });
   }
 
-  public override resourceCount = 0;
-
-  public play(player: Player) {
-    player.addResourceTo(this, 1);
-    return undefined;
-  }
-
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tags.VENUS)) {
+    if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
   }

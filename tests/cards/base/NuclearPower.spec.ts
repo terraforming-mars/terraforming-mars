@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {NuclearPower} from '../../../src/server/cards/base/NuclearPower';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NuclearPower', function() {
   let card: NuclearPower;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new NuclearPower();
@@ -17,14 +16,14 @@ describe('NuclearPower', function() {
   });
 
   it('Can not play', function() {
-    player.addProduction(Resources.MEGACREDITS, -4);
-    expect(card.canPlay(player)).is.not.true;
+    player.production.add(Resources.MEGACREDITS, -4);
+    expect(player.simpleCanPlay(card)).is.not.true;
   });
 
   it('Should play', function() {
-    expect(card.canPlay(player)).is.true;
+    expect(player.simpleCanPlay(card)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(3);
+    expect(player.production.megacredits).to.eq(-2);
+    expect(player.production.energy).to.eq(3);
   });
 });

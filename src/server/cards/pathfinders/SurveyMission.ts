@@ -2,7 +2,6 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
 import {Board} from '../../boards/Board';
 import {BoardType} from '../../boards/BoardType';
 import {ISpace} from '../../boards/ISpace';
@@ -15,6 +14,10 @@ export class SurveyMission extends PreludeCard {
   constructor() {
     super({
       name: CardName.SURVEY_MISSION,
+
+      behavior: {
+        stock: {steel: 5},
+      },
 
       metadata: {
         cardNumber: 'P07',
@@ -62,7 +65,7 @@ export class SurveyMission extends PreludeCard {
     return result;
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
     return this.validTriplets(player.game.board).length > 0;
   }
 
@@ -94,9 +97,7 @@ export class SurveyMission extends PreludeCard {
     });
   }
 
-  public play(player: Player) {
-    player.addResource(Resources.STEEL, 5);
-
+  public override bespokePlay(player: Player) {
     const triplets = this.validTriplets(player.game.board);
     return this.selectSpace(player, 0, triplets);
   }

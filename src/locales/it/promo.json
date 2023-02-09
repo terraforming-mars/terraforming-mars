@@ -6,18 +6,18 @@
   "Small Asteroid":"Piccolo Asteroide",
   "Increase temperature 1 step. Remove up to 2 plants from any player.":"Incrementa la Temperatura di 1 livello. Rimuovi fino a 2 Piante da un qualunque giocatore.",
   "Snow Algae":"Alghe della Neve",
-  "Requires 2 oceans. Increase your Plant production and your heat production 1 step each.":"Richiede almeno 2 tessere Oceano. Incrementa la tua Produzione di Piante e la tua Produzione di Calore di 1 livello ciascuna.",
+  "Requires 2 oceans. Increase your plant production and your heat production 1 step each.":"Richiede almeno 2 tessere Oceano. Incrementa la tua Produzione di Piante e la tua Produzione di Calore di 1 livello ciascuna.",
   "Dusk Laser Mining":"Estrazione Laser al Crepuscolo",
-  "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.":"Richiede 2 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di Titanio di 1 livello. Ottieni 4 risorse Titanio.",
+  "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.":"Richiede 2 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di Titanio di 1 livello. Ottieni 4 risorse Titanio.",
   "Mercurian Alloys":"Leghe da Mercurio",
   "Effect: Your titanium resources are worth 1 M€ extra.":"Effetto: le tue risorse Titanio valgono 1 M€ in più.",
-  "Requires 2 Science tags.":"Richiede 2 simboli Scienza.",
+  "Requires 2 science tags.":"Richiede 2 simboli Scienza.",
   "Rego Plastics":"Plastiche da Regolite",
   "Effect: Your steel resources are worth 1 M€ extra.":"Effetto: le tue risorse Acciaio valgono 1 M€ in più.",
   "Interplanetary Trade":"Commercio Interplanetario",
   "Increase your M€ production 1 step per different tag you have in play, including this.":"Incrementa la tua Produzione di M€ di 1 livello per ogni diverso tipo di simbolo che possiedi in gioco, incluso questo.",
   "Orbital Cleanup":"Pulizie Orbitali",
-  "Action: Gain 1 M€ per Science tag you have.":"Azione: ottieni 1 M€ per ogni simbolo Scienza in tuo possesso.",
+  "Action: Gain 1 M€ per science tag you have.":"Azione: ottieni 1 M€ per ogni simbolo Scienza in tuo possesso.",
   "Decrease your M€ production 2 steps.":"Diminuisci la tua Produzione di M€ di 2 livelli.",
   "Project Inspection":"Ispezione del Progetto",
   "USE A CARD ACTION THAT HAS BEEN USED THIS GENERATION":"USA UN'AZIONE DI UNA CARTA CHE SIA GIÀ STATA USATA DURANTE QUESTA GENERAZIONE.",
@@ -30,6 +30,6 @@
   "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.":"Ruba 3 M€ da un giocatore che abbia RIMOSSO TUE RISORSE O CHE ABBIA DIMINUITO UNA DELLE TUE PRODUZIONI durante questa Generazione. Colloca questa carta a faccia in giù NELLA PILA DEGLI EVENTI DI QUEL GIOCATORE.",
   "Stanford Torus":"Toro di Stanford",
   "Place a city tile IN SPACE, outside and separate from the planet.":"Colloca 1 tessera Città NELLO SPAZIO, in modo che sia all'esterno e separata dal pianeta."
-  
+
 
 }

@@ -1,11 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../../common/Resources';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 
 export class OrbitalLaboratories extends Card implements IProjectCard {
   constructor() {
@@ -13,7 +11,12 @@ export class OrbitalLaboratories extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.ORBITAL_LABORATORIES,
       cost: 18,
-      tags: [Tags.SCIENCE, Tags.PLANT, Tags.SPACE],
+      tags: [Tag.SCIENCE, Tag.PLANT, Tag.SPACE],
+
+      behavior: {
+        production: {plants: 2},
+        stock: {plants: 1},
+      },
 
       metadata: {
         cardNumber: 'Pf07',
@@ -23,13 +26,6 @@ export class OrbitalLaboratories extends Card implements IProjectCard {
         description: 'Increase your plant production by 2. Gain 1 plant.',
       },
     });
-  }
-
-
-  public play(player: Player) {
-    player.addResource(Resources.PLANTS, 1);
-    player.addProduction(Resources.PLANTS, 2);
-    return undefined;
   }
 }
 

@@ -1,9 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -13,8 +12,12 @@ export class Moss extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MOSS,
-      tags: [Tags.PLANT],
+      tags: [Tag.PLANT],
       cost: 4,
+
+      behavior: {
+        production: {plants: 1},
+      },
 
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       metadata: {
@@ -27,15 +30,14 @@ export class Moss extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
     const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
 
     return hasEnoughPlants;
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.plants--;
-    player.addProduction(Resources.PLANTS, 1);
     return undefined;
   }
 }

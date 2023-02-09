@@ -2,7 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,7 +15,7 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
     super({
       name: CardName.RUST_EATING_BACTERIA,
       cardType: CardType.ACTIVE,
-      tags: [Tags.MICROBE],
+      tags: [Tag.MICROBE],
       cost: 7,
 
       resourceType: CardResource.MICROBE,
@@ -24,20 +24,15 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
       metadata: {
         cardNumber: 'M88',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 steel to add 2 Microbes here.', (eb) => {
+          b.action('Spend 1 steel to add 2 microbes here.', (eb) => {
             eb.startAction.steel(1).arrow().microbes(2);
           }).br;
-          b.vpText('1 VP per 3 Microbes here.');
+          b.vpText('1 VP per 3 microbes here.');
         }),
       },
     });
   }
 
-  public override resourceCount = 0;
-
-  public play() {
-    return undefined;
-  }
 
   public canAct(player: Player) {
     return player.steel >= 1;

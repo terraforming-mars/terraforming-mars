@@ -1,5 +1,6 @@
 
 import {Color} from '../Color';
+import {AwardName} from '../ma/AwardName';
 
 export type AwardScore = {
   playerColor: Color;
@@ -7,9 +8,8 @@ export type AwardScore = {
 }
 
 export type FundedAwardModel = {
-  name: string;
-  description: string;
-  player_name: string;
-  player_color: string;
+  name: AwardName;
+  playerName: string;
+  playerColor: Color | '';
   scores: Array<AwardScore>;
 }

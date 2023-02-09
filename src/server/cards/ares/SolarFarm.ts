@@ -5,11 +5,10 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SolarFarm extends Card implements IProjectCard {
@@ -17,7 +16,7 @@ export class SolarFarm extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SOLAR_FARM,
-      tags: [Tags.ENERGY, Tags.BUILDING],
+      tags: [Tag.POWER, Tag.BUILDING],
       cost: 12,
 
       metadata: {
@@ -27,12 +26,12 @@ export class SolarFarm extends Card implements IProjectCard {
             pb.energy(1).slash().plants(1);
           }).asterix().nbsp.tile(TileType.SOLAR_FARM, false, true).br;
         }),
-        description: 'Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.',
+        description: 'Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.',
       },
     });
   }
 
-  public override canPlay(player: Player): boolean {
+  public override bespokeCanPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 
@@ -42,15 +41,15 @@ export class SolarFarm extends Card implements IProjectCard {
       throw new Error('Solar Farm space not found');
     }
     const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-    player.addProduction(Resources.ENERGY, plantsOnSpace, {log: true});
+    player.production.add(Resources.ENERGY, plantsOnSpace, {log: true});
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace(
       'Select space for Solar Farm tile',
       player.game.board.getAvailableSpacesOnLand(player),
       (space: ISpace) => {
-        player.game.addTile(player, SpaceType.LAND, space, {
+        player.game.addTile(player, space, {
           tileType: TileType.SOLAR_FARM,
           card: this.name,
         });

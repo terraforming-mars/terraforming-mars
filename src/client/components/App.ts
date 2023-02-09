@@ -16,6 +16,8 @@ import AdminHome from '@/client/components/admin/AdminHome.vue';
 import {$t} from '@/client/directives/i18n';
 
 import * as constants from '@/common/constants';
+import * as paths from '@/common/app/paths';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
@@ -112,15 +114,15 @@ export const mainAppSettings = {
     },
     setVisibilityState(targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;
-      (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] = isVisible;
+      (this as unknown as MainAppData).componentsVisibility[targetVar] = isVisible;
     },
     getVisibilityState(targetVar: string): boolean {
-      return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
+      return (this as unknown as MainAppData).componentsVisibility[targetVar] ? true : false;
     },
     update(path: '/player' | '/spectator'): void {
-      const currentPathname: string = window.location.pathname;
+      const currentPathname = window.location.pathname;
       const xhr = new XMLHttpRequest();
-      const app = this as unknown as typeof mainAppSettings.data;
+      const app = this as unknown as MainAppData;
 
       const url = '/api' + path + window.location.search.replace('&noredirect', '');
       xhr.open('GET', url);
@@ -129,7 +131,7 @@ export const mainAppSettings = {
       };
       xhr.onload = function() {
         try {
-          if (xhr.status === 200) {
+          if (xhr.status === HTTPResponseCode.OK) {
             const model = xhr.response as ViewModel;
             if (path === '/player') {
               app.playerView = model as PlayerViewModel;
@@ -183,8 +185,8 @@ export const mainAppSettings = {
   mounted() {
     document.title = constants.APP_NAME;
     if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
-    const currentPathname: string = window.location.pathname;
-    const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
+    const currentPathname = window.location.pathname;
+    const app = this as unknown as (MainAppData) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player') {
       app.updatePlayer();
     } else if (currentPathname === '/the-end') {
@@ -205,7 +207,7 @@ export const mainAppSettings = {
         alert('Error getting game data');
       };
       xhr.onload = function() {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           window.history.replaceState(
             xhr.response,
             `${constants.APP_NAME} - Game`,
@@ -218,19 +220,19 @@ export const mainAppSettings = {
       };
       xhr.responseType = 'json';
       xhr.send();
-    } else if (currentPathname === '/games-overview') {
+    } else if (currentPathname === paths.GAMES_OVERVIEW) {
       app.screen = 'games-overview';
-    } else if (currentPathname === '/new-game') {
+    } else if (currentPathname === paths.NEW_GAME) {
       app.screen = 'create-game-form';
-    } else if (currentPathname === '/load') {
+    } else if (currentPathname === paths.LOAD) {
       app.screen = 'load';
-    } else if (currentPathname === '/cards') {
+    } else if (currentPathname === paths.CARDS) {
       app.screen = 'cards';
-    } else if (currentPathname === '/help') {
+    } else if (currentPathname === paths.HELP) {
       app.screen = 'help';
-    } else if (currentPathname === '/spectator') {
+    } else if (currentPathname === paths.SPECTATOR) {
       app.updateSpectator();
-    } else if (currentPathname === '/admin') {
+    } else if (currentPathname === paths.ADMIN) {
       app.screen = 'admin';
     } else {
       app.screen = 'start-screen';

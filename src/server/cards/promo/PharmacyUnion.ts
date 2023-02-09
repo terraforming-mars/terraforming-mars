@@ -1,4 +1,4 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
@@ -13,6 +13,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resources} from '../../../common/Resources';
 import {all, digit, played} from '../Options';
+import {SerializedCard} from '@/server/SerializedCard';
 
 export class PharmacyUnion extends Card implements ICorporationCard {
   constructor() {
@@ -22,10 +23,15 @@ export class PharmacyUnion extends Card implements ICorporationCard {
       startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
       resourceType: CardResource.DISEASE,
 
+      behavior: {
+        drawCard: {count: 1, tag: Tag.SCIENCE},
+        addResources: 2,
+      },
+
       metadata: {
         cardNumber: 'R39',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(54).cards(1, {secondaryTag: Tags.SCIENCE});
+          b.megacredits(54).cards(1, {secondaryTag: Tag.SCIENCE});
           // blank space after MC is on purpose
           b.text('(You start with 54 M€ . Draw a Science card.)', Size.TINY, false, false);
           b.corpBox('effect', (ce) => {
@@ -44,20 +50,13 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     });
   }
 
-  public override resourceCount = 0;
   public isDisabled = false;
 
   public override get tags() {
     if (this.isDisabled) {
       return [];
     }
-    return [Tags.MICROBE, Tags.MICROBE];
-  }
-
-  public play(player: Player) {
-    this.resourceCount = 2;
-    player.drawCard(1, {tag: Tags.SCIENCE});
-    return undefined;
+    return [Tag.MICROBE, Tag.MICROBE];
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
@@ -74,8 +73,8 @@ export class PharmacyUnion extends Card implements ICorporationCard {
 
     const game = player.game;
 
-    const hasScienceTag = player.cardHasTag(card, Tags.SCIENCE);
-    const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
+    const hasScienceTag = player.tags.cardHasTag(card, Tag.SCIENCE);
+    const hasMicrobesTag = card.tags.includes(Tag.MICROBE);
     const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
 
     // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
@@ -112,7 +111,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     }
 
     if (isPharmacyUnion && hasScienceTag) {
-      const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
+      const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
       for (let i = 0; i < scienceTags; i++) {
         game.defer(new SimpleDeferredAction(
           player,
@@ -158,7 +157,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
       game.defer(new SimpleDeferredAction(
         player,
         () => {
-          const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBE).length;
+          const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tag.MICROBE).length;
           const player = game.getPlayers().find((p) => p.isCorporation(this.name));
           if (player === undefined) {
             throw new Error(`PharmacyUnion: did not find player for ${game.id}`);
@@ -173,5 +172,13 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     }
 
     return undefined;
+  }
+
+  public serialize(serialized: SerializedCard) {
+    serialized.isDisabled = this.isDisabled;
+  }
+
+  public deserialize(serialized: SerializedCard) {
+    this.isDisabled = Boolean(serialized.isDisabled);
   }
 }

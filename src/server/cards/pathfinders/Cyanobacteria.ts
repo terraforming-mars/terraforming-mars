@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 
@@ -14,8 +14,11 @@ export class Cyanobacteria extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.CYANOBACTERIA,
       cost: 12,
-      tags: [Tags.MICROBE, Tags.MARS],
-      tr: {oxygen: 1},
+      tags: [Tag.MICROBE, Tag.MARS],
+
+      behavior: {
+        global: {oxygen: 1},
+      },
 
       metadata: {
         cardNumber: 'Pf27',
@@ -28,8 +31,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    player.game.increaseOxygenLevel(player, 1);
+  public override bespokePlay(player: Player) {
     const microbes = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
     player.game.defer(new AddResourcesToCards(player, CardResource.MICROBE, microbes));
     return undefined;

@@ -18,8 +18,8 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {SelectHowToPay} from '../../../src/server/inputs/SelectHowToPay';
-import {HowToPay} from '../../../src/common/inputs/HowToPay';
+import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('ProjectWorkshop', function() {
   let card: ProjectWorkshop;
@@ -42,7 +42,8 @@ describe('ProjectWorkshop', function() {
     expect(player.steel).to.eq(1);
     expect(player.titanium).to.eq(1);
 
-    card.initialAction(player);
+    player.runInitialAction(card);
+    runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
@@ -72,7 +73,7 @@ describe('ProjectWorkshop', function() {
 
     card.action(player).cb();
     expect(player.playedCards).has.lengthOf(0);
-    expect(game.dealer.discarded.includes(advancedAlloys)).is.true;
+    expect(game.projectDeck.discardPile.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.getSteelValue()).to.eq(2);
     expect(player.getTitaniumValue()).to.eq(3);
@@ -89,8 +90,7 @@ describe('ProjectWorkshop', function() {
     player.playedCards.push(smallAnimals, extremophiles);
 
     const selectOption = cast(card.action(player), SelectOption);
-
-    const selectCard = selectOption.cb() as SelectCard<ICard>;
+    const selectCard = cast(selectOption.cb(), SelectCard<ICard>);
 
     selectCard.cb([smallAnimals]);
     expect(player.getTerraformRating()).to.eq(originalTR + 2);
@@ -172,7 +172,7 @@ describe('ProjectWorkshop', function() {
     runAllActions(game);
 
     expect(player.playedCards).has.members([smallAnimals, extremophiles]);
-    expect(game.dealer.discarded).contains(birds);
+    expect(game.projectDeck.discardPile).contains(birds);
     expect(player.getTerraformRating()).to.eq(originalTR + 1);
     expect(player.megaCredits).eq(2); // Spent 3MC for the reds tax.
   });
@@ -192,8 +192,8 @@ describe('ProjectWorkshop', function() {
 
     card.action(player).cb();
     runAllActions(game);
-    const howToPay = cast(player.popWaitingFor(), SelectHowToPay);
-    howToPay.cb({...HowToPay.EMPTY, megaCredits: 1, heat: 2});
+    const selectPayment = cast(player.popWaitingFor(), SelectPayment);
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(1);

@@ -1,22 +1,25 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class DarksideMeteorBombardment extends Card {
+export class DarksideMeteorBombardment extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.DARKSIDE_METEOR_BOMBARDMENT,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 20,
-      tr: {moonMining: 2},
+
+      behavior: {
+        stock: {steel: 2, titanium: 2},
+        moon: {miningRate: 2},
+      },
 
       metadata: {
-        description: 'Gain 2 steel and 2 titanium. Raise the Mining Rate 2 steps.',
+        description: 'Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.',
         cardNumber: 'M33',
         renderData: CardRenderer.builder((b) => {
           b.steel(2).titanium(2);
@@ -25,12 +28,5 @@ export class DarksideMeteorBombardment extends Card {
         }),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.steel += 2;
-    player.titanium += 2;
-    MoonExpansion.raiseMiningRate(player, 2);
-    return undefined;
   }
 }

@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,12 +10,12 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class PhysicsComplex extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class PhysicsComplex extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.PHYSICS_COMPLEX,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
+      tags: [Tag.SCIENCE, Tag.BUILDING],
       cost: 12,
 
       resourceType: CardResource.SCIENCE,
@@ -24,7 +24,7 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard, I
       metadata: {
         cardNumber: '095',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 6 Energy to add a science resource to this card.', (eb) => {
+          b.action('Spend 6 energy to add a science resource to this card.', (eb) => {
             eb.energy(6, {digit}).startAction.science();
           }).br;
           b.vpText('2 VP for each science resource on this card.');
@@ -33,11 +33,7 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard, I
     });
   }
 
-  public override resourceCount: number = 0;
 
-  public play() {
-    return undefined;
-  }
   public canAct(player: Player): boolean {
     return player.energy >= 6;
   }

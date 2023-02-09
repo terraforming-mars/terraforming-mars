@@ -4,7 +4,7 @@
           <h2 :class="getTitleClasses()">
               <span v-i18n>Game log</span>
           </h2>
-          <div class="log-gen-title">Gen: </div>
+          <div class="log-gen-title"  v-i18n>Gen: </div>
           <div class="log-gen-numbers">
             <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
               {{ n }}
@@ -20,13 +20,16 @@
           </div>
           <div class='debugid'>(debugid {{step}})</div>
         </div>
-        <div class="card-panel" v-if="cards.length > 0 || globalEventNames.length > 0">
+        <div class="card-panel" v-if="cardNames.length + globalEventNames.length + colonyNames.length > 0">
           <Button size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
-          <div id="log_panel_card" class="cardbox" v-for="card in cards" :key="card">
-            <Card :card="{name: card, resources: getResourcesOnCard(card)}"/>
+          <div id="log_panel_card" class="cardbox" v-for="cardName in cardNames.elements" :key="cardName">
+            <Card :card="{name: cardName, resources: getResourcesOnCard(cardName)}"/>
           </div>
-          <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames" :key="globalEventName">
+          <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames.elements" :key="globalEventName">
             <global-event :globalEvent="getGlobalEventModel(globalEventName)" type="prior" :showIcons="false"></global-event>
+          </div>
+          <div id="log_panel_card" class="cardbox" v-for="colonyName in colonyNames.elements" :key="colonyName">
+            <colony :colony="getColony(colonyName)"></colony>
           </div>
         </div>
       </div>
@@ -35,6 +38,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
+import * as paths from '@/common/app/paths';
+import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
@@ -55,7 +60,10 @@ import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {PlayerId, SpectatorId} from '@/common/Types';
+import {ParticipantId} from '@/common/Types';
+import {ColonyName} from '@/common/colonies/ColonyName';
+import Colony from '@/client/components/colonies/Colony.vue';
+import {ColonyModel} from '@/common/models/ColonyModel';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -65,6 +73,7 @@ const cardTypeToCss: Record<CardType, string | undefined> = {
   active: 'background-color-active',
   automated: 'background-color-automated',
   prelude: 'background-color-prelude',
+  ceo: 'background-color-ceo',
   standard_project: 'background-color-standard-project',
   standard_action: 'background-color-standard-project',
   proxy: undefined,
@@ -80,10 +89,31 @@ const translatableMessageDataTypes = new Set([
   LogMessageDataType.TILE_TYPE,
   LogMessageDataType.GLOBAL_EVENT]);
 
+class ToggleSet<T> {
+  public elements: Array<T> = [];
+  public toggle(item: T) {
+    const index = this.elements.indexOf(item);
+    if (index === -1) {
+      this.elements.push(item);
+    } else {
+      this.elements.splice(index, 1);
+    }
+  }
+
+  public get length() {
+    return this.elements.length;
+  }
+
+  public clear() {
+    return this.elements = [];
+  }
+}
+
 type LogPanelModel = {
   // temporary storage used when showing cards on the log line.
-  cards: Array<CardName>,
-  globalEventNames: Array<GlobalEventName>,
+  cardNames: ToggleSet<CardName>,
+  globalEventNames: ToggleSet<GlobalEventName>,
+  colonyNames: ToggleSet<ColonyName>,
   messages: Array<LogMessage>,
   selectedGeneration: number,
 };
@@ -92,7 +122,7 @@ export default Vue.extend({
   name: 'log-panel',
   props: {
     id: {
-      type: String as () => PlayerId | SpectatorId,
+      type: String as () => ParticipantId,
     },
     generation: {
       type: Number,
@@ -114,8 +144,9 @@ export default Vue.extend({
   },
   data(): LogPanelModel {
     return {
-      cards: [],
-      globalEventNames: [],
+      cardNames: new ToggleSet(),
+      globalEventNames: new ToggleSet(),
+      colonyNames: new ToggleSet(),
       messages: [],
       selectedGeneration: this.generation,
     };
@@ -124,6 +155,7 @@ export default Vue.extend({
     Button,
     Card,
     GlobalEvent,
+    Colony,
   },
   methods: {
     scrollToEnd() {
@@ -133,14 +165,13 @@ export default Vue.extend({
       }
     },
     cardToHtml(cardType: CardType, cardName: string) {
-      const cardNameString = this.$t(cardName);
-      const suffixFreeCardName = cardNameString.split(':')[0];
+      const suffixFreeCardName = cardName.split(':')[0];
       const className = cardTypeToCss[cardType];
 
       if (className === undefined) {
         return suffixFreeCardName;
       }
-      return '<span class="log-card '+ className + '">' + suffixFreeCardName + '</span>';
+      return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + '</span>';
     },
     messageDataToHTML(data: LogMessageData): string {
       if (data.type === undefined || data.value === undefined) {
@@ -150,7 +181,7 @@ export default Vue.extend({
       switch (data.type) {
       case LogMessageDataType.PLAYER:
         for (const player of this.players) {
-          if (data.value === player.color || data.value === player.id) {
+          if (data.value === player.color) {
             return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
           }
         }
@@ -173,6 +204,10 @@ export default Vue.extend({
       case LogMessageDataType.TILE_TYPE:
         const tileType: TileType = +data.value;
         return this.$t(TileType.toString(tileType));
+
+      case LogMessageDataType.COLONY:
+        const colonyName = data.value as ColonyName;
+        return '<span class="log-card background-color-colony">' + this.$t(colonyName) + '</span>';
 
       default:
         if (translatableMessageDataTypes.has(data.type)) {
@@ -227,31 +262,18 @@ export default Vue.extend({
           return;
         }
         if (data.type === LogMessageDataType.CARD) {
-          const cardName = data.value as CardName;
-          const index = this.cards.indexOf(cardName);
-          if (index === -1) {
-            this.cards.push(cardName);
-          } else {
-            this.cards.splice(index, 1);
-          }
-        }
-        if (data.type === LogMessageDataType.GLOBAL_EVENT) {
-          const globalEventName = data.value as GlobalEventName;
-          const index = this.globalEventNames.indexOf(globalEventName);
-          if (index === -1) {
-            this.globalEventNames.push(globalEventName);
-          } else {
-            this.globalEventNames.splice(index, 1);
-          }
+          this.cardNames.toggle(data.value as CardName);
+        } else if (data.type === LogMessageDataType.GLOBAL_EVENT) {
+          this.globalEventNames.toggle(data.value as GlobalEventName);
+        } else if (data.type === LogMessageDataType.COLONY) {
+          this.colonyNames.toggle(data.value as ColonyName);
         }
       });
     },
     hideMe() {
-      this.cards = [];
-      this.globalEventNames = [];
-    },
-    getCrossHtml() {
-      return '<i class=\'icon icon-cross\' />';
+      this.cardNames.clear();
+      this.globalEventNames.clear();
+      this.colonyNames.clear();
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {
@@ -269,12 +291,13 @@ export default Vue.extend({
 
       const xhr = new XMLHttpRequest();
       logRequest = xhr;
-      xhr.open('GET', `/api/game/logs?id=${this.id}&generation=${generation}`);
+
+      xhr.open('GET', `${paths.API_GAME_LOGS}?id=${this.id}&generation=${generation}`);
       xhr.onerror = () => {
         console.error('error updating messages, unable to reach server');
       };
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (xhr.status === HTTPResponseCode.OK) {
           messages.splice(0, messages.length);
           messages.push(...xhr.response);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
@@ -314,6 +337,16 @@ export default Vue.extend({
     },
     getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
       return getGlobalEventModel(globalEventName);
+    },
+    // TODO(kberg): getColony could have the actual game colony by changing this component's properties.
+    getColony(colonyName: ColonyName): ColonyModel {
+      return {
+        colonies: [],
+        isActive: false,
+        name: colonyName,
+        trackPosition: 0,
+        visitor: undefined,
+      };
     },
     getResourcesOnCard(cardName: CardName) {
       for (const player of this.players) {

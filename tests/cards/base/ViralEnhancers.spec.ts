@@ -7,12 +7,11 @@ import {Moss} from '../../../src/server/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('ViralEnhancers', function() {
   let card: ViralEnhancers;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -23,7 +22,7 @@ describe('ViralEnhancers', function() {
   });
 
   it('Should play', function() {
-    card.play();
+    card.play(player);
 
     const ants = new Ants();
     const birds = new Birds();
@@ -50,7 +49,7 @@ describe('ViralEnhancers', function() {
   });
 
   it('Should play for each tag', function() {
-    card.play();
+    card.play(player);
 
     const ecologicalZone = new EcologicalZone();
     card.onCardPlayed(player, ecologicalZone);

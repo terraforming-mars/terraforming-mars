@@ -86,7 +86,7 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
   [TileType.MOON_MINE, {
     tile: 'card-tile-lunar-mine',
   }],
-  [TileType.MOON_COLONY, {
+  [TileType.MOON_HABITAT, {
     tile: 'card-tile-lunar-colony',
   }],
   [TileType.MOON_ROAD, {

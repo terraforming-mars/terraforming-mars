@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Zeppelins} from '../../../src/server/cards/base/Zeppelins';
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 
 describe('Zeppelins', function() {
   let card: Zeppelins;
@@ -25,10 +24,10 @@ describe('Zeppelins', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const lands = game.board.getAvailableSpacesOnLand(player);
-    game.addCityTile(player, lands[0].id);
+    game.addCityTile(player, lands[0]);
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 });

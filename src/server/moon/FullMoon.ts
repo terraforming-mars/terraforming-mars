@@ -1,11 +1,11 @@
 import {IAward} from '../awards/IAward';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
 
 export class FullMoon implements IAward {
-  public name: string = 'Full Moon';
-  public description: string = 'Having the most moon tags in play.';
+  public readonly name = 'Full Moon';
+  public readonly description = 'Having the most moon tags in play.';
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.MOON, 'award');
+    return player.tags.count(Tag.MOON, 'award');
   }
 }

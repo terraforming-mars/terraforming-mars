@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {Card} from '../Card';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -14,12 +14,12 @@ import {LogHelper} from '../../LogHelper';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CometAiming extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class CometAiming extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.COMET_AIMING,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 17,
       resourceType: CardResource.ASTEROID,
 
@@ -36,11 +36,6 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
         }),
       },
     });
-  }
-  public override resourceCount = 0;
-
-  public play() {
-    return undefined;
   }
 
   private canPlaceOcean(player: Player) {

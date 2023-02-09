@@ -1,5 +1,5 @@
-import {IActionCard, IResourceCard} from '../ICard';
-import {Tags} from '../../../common/cards/Tags';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -11,33 +11,28 @@ import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class JetStreamMicroscrappers extends Card implements IActionCard, IResourceCard {
+export class JetStreamMicroscrappers extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.JET_STREAM_MICROSCRAPPERS,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS],
+      tags: [Tag.VENUS],
       cost: 12,
       resourceType: CardResource.FLOATER,
 
       metadata: {
         cardNumber: '234',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 titanium to add 2 Floaters here', (eb) => {
+          b.action('Spend 1 titanium to add 2 floaters here', (eb) => {
             eb.titanium(1).startAction.floaters(2);
           }).br;
           b.or().br;
-          b.action('Spend 2 Floaters here to raise Venus 1 step', (eb) => {
+          b.action('Spend 2 floaters here to raise Venus 1 step', (eb) => {
             eb.floaters(2).startAction.venus(1);
           });
         }),
       },
     });
-  }
-  public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player): boolean {
@@ -76,8 +71,8 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
 
   private spendResource(player: Player) {
     player.removeResourceFrom(this, 2);
-    player.game.increaseVenusScaleLevel(player, 1);
-    LogHelper.logVenusIncrease( player, 1);
+    const actual = player.game.increaseVenusScaleLevel(player, 1);
+    LogHelper.logVenusIncrease(player, actual);
     return undefined;
   }
 }

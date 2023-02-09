@@ -5,21 +5,23 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {IResourceCard} from '../ICard';
 import {Resources} from '../../../common/Resources';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class AtmoCollectors extends Card implements IProjectCard, IResourceCard {
+export class AtmoCollectors extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 15,
       name: CardName.ATMO_COLLECTORS,
       cardType: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
+
+      behavior: {
+        addResourcesToAnyCard: {type: CardResource.FLOATER, count: 2},
+      },
 
       metadata: {
         description: 'Add 2 floaters to ANY card.',
@@ -37,7 +39,6 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
     });
   }
 
-  public override resourceCount: number = 0;
 
   public canAct(): boolean {
     return true;
@@ -69,9 +70,5 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
         return undefined;
       }),
     );
-  }
-  public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
-    return undefined;
   }
 }

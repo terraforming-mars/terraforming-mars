@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -10,10 +9,14 @@ export class CryoSleep extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 10,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       name: CardName.CRYO_SLEEP,
       cardType: CardType.ACTIVE,
       victoryPoints: 1,
+
+      behavior: {
+        colonies: {tradeDiscount: 1},
+      },
 
       metadata: {
         cardNumber: 'C07',
@@ -22,14 +25,5 @@ export class CryoSleep extends Card implements IProjectCard {
         })),
       },
     });
-  }
-
-  public play(player: Player) {
-    player.colonyTradeDiscount++;
-    return undefined;
-  }
-
-  public onDiscard(player: Player): void {
-    player.colonyTradeDiscount--;
   }
 }

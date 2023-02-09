@@ -32,6 +32,7 @@ export type GameOptions = {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
+  ceoExtension: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -40,10 +41,13 @@ export type GameOptions = {
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
+  includeFanMA: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
-  cardsBlackList: Array<CardName>;
+  bannedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
+  customPreludes: Array<CardName>;
+  customCeos: Array<CardName>;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
@@ -52,21 +56,25 @@ export type GameOptions = {
   escapeVelocityThreshold?: number;
   escapeVelocityPeriod?: number;
   escapeVelocityPenalty?: number;
+  twoCorpsVariant: boolean;
 }
 
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
   aresExtension: false,
   aresHazards: true,
-  boardName: BoardName.ORIGINAL,
-  cardsBlackList: [],
+  boardName: BoardName.THARSIS,
+  bannedCards: [],
+  ceoExtension: false,
   clonedGamedId: undefined,
   coloniesExtension: false,
   communityCardsOption: false,
   corporateEra: true,
   corporationsDraft: false,
+  customCeos: [],
   customColoniesList: [],
   customCorporationsList: [],
+  customPreludes: [],
   draftVariant: false,
   escapeVelocityMode: false, // When true, escape velocity is enabled.
   escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
@@ -74,6 +82,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   fastModeOption: false,
   includeVenusMA: true,
+  includeFanMA: false,
   initialDraftVariant: false,
   moonExpansion: false,
   moonStandardProjectVariant: false,
@@ -94,4 +103,5 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   turmoilExtension: false,
   undoOption: false,
   venusNextExtension: false,
+  twoCorpsVariant: false,
 };

@@ -1,10 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
-import {BuildColony} from '../../deferredActions/BuildColony';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -12,10 +10,15 @@ export class IceMoonColony extends Card implements IProjectCard {
   constructor() {
     super({
       cost: 23,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       name: CardName.ICE_MOON_COLONY,
       cardType: CardType.AUTOMATED,
       tr: {oceans: 1},
+
+      behavior: {
+        colonies: {buildColony: {}},
+        ocean: {},
+      },
 
       metadata: {
         cardNumber: 'C15',
@@ -25,13 +28,7 @@ export class IceMoonColony extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    return player.hasAvailableColonyTileToBuildOn();
-  }
-
-  public play(player: Player) {
-    player.game.defer(new BuildColony(player, false, 'Select colony for Ice Moon Colony'));
-    player.game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
-    return undefined;
+  public override bespokeCanPlay(player: Player): boolean {
+    return player.colonies.getPlayableColonies().length > 0;
   }
 }

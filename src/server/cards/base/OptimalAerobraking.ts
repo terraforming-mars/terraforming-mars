@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -12,12 +12,12 @@ export class OptimalAerobraking extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.OPTIMAL_AEROBRAKING,
-      tags: [Tags.SPACE],
+      tags: [Tag.SPACE],
       cost: 7,
 
       metadata: {
         cardNumber: '031',
-        renderData: CardRenderer.builder((b) => b.effect('When you play a Space Event, you gain 3 M€ and 3 heat.', (be) => {
+        renderData: CardRenderer.builder((b) => b.effect('When you play a space event, you gain 3 M€ and 3 heat.', (be) => {
           be.space({played}).event({played}).startEffect.megacredits(3).heat(3);
         })),
       },
@@ -25,12 +25,9 @@ export class OptimalAerobraking extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.cardType === CardType.EVENT && card.tags.includes(Tags.SPACE)) {
+    if (card.cardType === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
       player.megaCredits += 3;
       player.heat += 3;
     }
-  }
-  public play() {
-    return undefined;
   }
 }

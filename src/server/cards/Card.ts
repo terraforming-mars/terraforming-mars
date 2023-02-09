@@ -4,39 +4,79 @@ import {CardType} from '../../common/cards/CardType';
 import {CardDiscount} from '../../common/cards/Types';
 import {AdjacencyBonus} from '../ares/AdjacencyBonus';
 import {CardResource} from '../../common/CardResource';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {Player} from '../Player';
+import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {CardRequirements} from './CardRequirements';
-import {TRSource} from './ICard';
+import {DynamicTRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
 import {IProjectCard} from './IProjectCard';
+import {MoonExpansion} from '../moon/MoonExpansion';
+import {PlayerInput} from '../PlayerInput';
+import {isICorporationCard} from './corporation/ICorporationCard';
+import {TileType} from '../../common/TileType';
+import {Behavior} from '../behavior/Behavior';
+import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 
+type ReserveUnits = Units & {deduct: boolean};
+type FirstActionBehavior = Behavior & {text: string};
+
+/* External representation of card properties. */
 export interface StaticCardProperties {
+  /** @deprecated use behavior */
   adjacencyBonus?: AdjacencyBonus;
+  behavior?: Behavior | undefined;
   cardCost?: number;
+  cardDiscount?: CardDiscount | Array<CardDiscount>;
   cardType: CardType;
   cost?: number;
   initialActionText?: string;
+  firstAction?: FirstActionBehavior;
   metadata: ICardMetadata;
   requirements?: CardRequirements;
   name: CardName;
+  reserveUnits?: Partial<ReserveUnits>,
   resourceType?: CardResource;
   startingMegaCredits?: number;
-  tags?: Array<Tags>;
-  productionBox?: Units;
-  cardDiscount?: CardDiscount | Array<CardDiscount>;
-  reserveUnits?: Units,
-  tr?: TRSource,
+  tags?: Array<Tag>;
+  tilesBuilt?: Array<TileType.MOON_HABITAT | TileType.MOON_MINE | TileType.MOON_ROAD>,
+  tr?: TRSource | DynamicTRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
-export const staticCardProperties = new Map<CardName, StaticCardProperties>();
+/*
+ * Internal representation of card properties.
+ */
+type Properties = Omit<StaticCardProperties, 'reserveUnits'> & {
+  reserveUnits?: ReserveUnits,
+};
 
+export const staticCardProperties = new Map<CardName, Properties>();
+
+/**
+ * Card is an implementation for most cards in the game, which provides one key features:
+ *
+ * 1. It stores key card properties into a static cache, which means that each instance of a card
+ *    consumes very little memory.
+ *
+ * 2. It's key behavior is to provide a lot of the `canPlay` and `play` behavior currently
+ *    in player.simpleCanPlay and player.simplePlay. These will eventually be removed and
+ *    put right in here.
+ *
+ * In order to implement this default behavior, Card subclasses should ideally not
+ * override `play` and `canPlay`. Instead, they should override `bespokeCanPlay` and
+ * `bespokePlay`, which provide bespoke, or custom hand-crafted play and canPlay
+ * behavior.
+ *
+ * If this seems counterintuitive, think about it this way: very little behavior should
+ * be custom-written for each card, _no_ common behavior should be custom-written for
+ * each card, either.
+ */
 export abstract class Card {
-  private readonly properties: StaticCardProperties;
+  private readonly properties: Properties;
   constructor(properties: StaticCardProperties) {
     let staticInstance = staticCardProperties.get(properties.name);
     if (staticInstance === undefined) {
@@ -44,21 +84,34 @@ export abstract class Card {
         throw new Error('must define startingMegaCredits for corporation cards');
       }
       if (properties.cost === undefined) {
-        if ([CardType.CORPORATION, CardType.PRELUDE, CardType.STANDARD_ACTION].includes(properties.cardType) === false) {
+        const noCostCardTypes = [
+          CardType.CORPORATION,
+          CardType.PRELUDE,
+          CardType.CEO,
+          CardType.STANDARD_ACTION,
+        ];
+        if (noCostCardTypes.includes(properties.cardType) === false) {
           throw new Error(`${properties.name} must have a cost property`);
         }
       }
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(properties);
 
-      staticCardProperties.set(properties.name, properties);
-      staticInstance = properties;
+      const p: Properties = {
+        ...properties,
+        reserveUnits: properties.reserveUnits === undefined ? undefined : {...Units.of(properties.reserveUnits), deduct: properties.reserveUnits.deduct ?? true},
+      };
+      staticCardProperties.set(properties.name, p);
+      staticInstance = p;
     }
     this.properties = staticInstance;
   }
   public resourceCount = 0;
   public get adjacencyBonus() {
     return this.properties.adjacencyBonus;
+  }
+  public get behavior() {
+    return this.properties.behavior;
   }
   public get cardCost() {
     return this.properties.cardCost;
@@ -70,7 +123,10 @@ export abstract class Card {
     return this.properties.cost === undefined ? 0 : this.properties.cost;
   }
   public get initialActionText() {
-    return this.properties.initialActionText;
+    return this.properties.initialActionText || this.properties.firstAction?.text;
+  }
+  public get firstAction() {
+    return this.properties.firstAction;
   }
   public get metadata() {
     return this.properties.metadata;
@@ -90,23 +146,58 @@ export abstract class Card {
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;
   }
-  public get productionBox(): Units {
-    return this.properties.productionBox || Units.EMPTY;
-  }
   public get cardDiscount() {
     return this.properties.cardDiscount;
   }
-  public get reserveUnits(): Units {
-    return this.properties.reserveUnits || Units.EMPTY;
+  public get reserveUnits(): ReserveUnits {
+    return this.properties.reserveUnits || {...Units.EMPTY, deduct: true};
   }
-  public get tr(): TRSource {
-    return this.properties.tr || {};
+  public get tr(): TRSource | DynamicTRSource | undefined {
+    return this.properties.tr;
   }
   public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
-  public canPlay(_player: Player) {
+  public get tilesBuilt(): Array<TileType> {
+    return this.properties.tilesBuilt || [];
+  }
+  public canPlay(player: Player) {
+    if (this.requirements?.satisfies(player) === false) {
+      return false;
+    }
+    if (this.behavior !== undefined && !getBehaviorExecutor().canExecute(this.behavior, player, this)) {
+      return false;
+    }
+    return this.bespokeCanPlay(player);
+  }
+
+  public bespokeCanPlay(_player: Player): boolean {
     return true;
+  }
+
+  public play(player: Player) {
+    if (!isICorporationCard(this) && this.reserveUnits.deduct === true) {
+      const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
+      player.deductUnits(adjustedReserveUnits);
+    }
+    if (this.behavior !== undefined) {
+      getBehaviorExecutor().execute(this.behavior, player, this);
+    }
+    return this.bespokePlay(player);
+  }
+
+  public bespokePlay(_player: Player): PlayerInput | undefined {
+    return undefined;
+  }
+
+  public onDiscard(player: Player): void {
+    if (this.behavior !== undefined) {
+      getBehaviorExecutor().onDiscard(this.behavior, player, this);
+    }
+    this.bespokeOnDiscard(player);
+  }
+
+  public bespokeOnDiscard(_player: Player): void {
   }
 
   // player is optional to support historical tests.
@@ -123,7 +214,7 @@ export abstract class Card {
         return vp1.points * Math.floor(this.resourceCount / vp1.per);
       } else {
         const tag = vp1.type;
-        const count = player?.getTagCount(tag, 'vps') ?? 0;
+        const count = player?.tags.count(tag, 'vps') ?? 0;
         return vp1.points * Math.floor(count / vp1.per);
       }
     }
@@ -156,10 +247,10 @@ export abstract class Card {
       break;
 
     case CardRenderItemType.JOVIAN:
-      units = player?.getTagCount(Tags.JOVIAN, 'vps');
+      units = player?.tags.count(Tag.JOVIAN, 'vps');
       break;
     case CardRenderItemType.MOON:
-      units = player?.getTagCount(Tags.MOON, 'vps');
+      units = player?.tags.count(Tag.MOON, 'vps');
       break;
     }
 

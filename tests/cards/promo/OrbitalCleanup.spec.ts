@@ -4,13 +4,12 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {OrbitalCleanup} from '../../../src/server/cards/promo/OrbitalCleanup';
 import {Game} from '../../../src/server/Game';
-import {Player} from '../../../src/server/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('OrbitalCleanup', function() {
   let card: OrbitalCleanup;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new OrbitalCleanup();
@@ -19,14 +18,14 @@ describe('OrbitalCleanup', function() {
   });
 
   it('Can not play if cannot decrease MC production', function() {
-    player.addProduction(Resources.MEGACREDITS, -4);
+    player.production.add(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
+    expect(player.production.megacredits).to.eq(-2);
   });
 
   it('Should act', function() {
@@ -35,7 +34,7 @@ describe('OrbitalCleanup', function() {
     player.playedCards.push(new ResearchCoordination());
 
     card.action(player);
-    expect(player.getResource(Resources.MEGACREDITS)).to.eq(4);
+    expect(player.megaCredits).to.eq(4);
   });
 
   it('Should give victory points', function() {

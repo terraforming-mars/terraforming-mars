@@ -1,8 +1,7 @@
 import {expect} from 'chai';
 import {ConvertHeat} from '../../../../src/server/cards/base/standardActions/ConvertHeat';
 import {Phase} from '../../../../src/common/Phase';
-import {Player} from '../../../../src/server/Player';
-import {setCustomGameOptions} from '../../../TestingUtils';
+import {testGameOptions} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {Game} from '../../../../src/server/Game';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
@@ -11,13 +10,13 @@ import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 
 describe('ConvertHeat', function() {
   let card: ConvertHeat;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new ConvertHeat();
     player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, setCustomGameOptions());
+    Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
   });
 
   it('Can not act without heat', function() {

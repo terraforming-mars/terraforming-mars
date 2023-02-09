@@ -47,8 +47,11 @@ export class PlayerInput extends Handler {
 
   private isWaitingForUndo(player: Player, entity: InputResponse): boolean {
     const waitingFor = player.getWaitingFor();
-    return entity.length > 0 && entity[0].length > 0 &&
-           waitingFor instanceof OrOptions && waitingFor.options[Number(entity[0][0])] instanceof UndoActionOption;
+    if (entity.type === 'or' && waitingFor instanceof OrOptions) {
+      const idx = entity.index;
+      return waitingFor.options[idx] instanceof UndoActionOption;
+    }
+    return false;
   }
 
   private async performUndo(_req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: Player): Promise<void> {
@@ -72,12 +75,7 @@ export class PlayerInput extends Handler {
     ctx.route.writeJson(res, Server.getPlayerModel(player));
   }
 
-  private processInput(
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
-    ctx: Context,
-    player: Player,
-  ): Promise<void> {
+  private processInput(req: http.IncomingMessage, res: http.ServerResponse, ctx: Context, player: Player): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {

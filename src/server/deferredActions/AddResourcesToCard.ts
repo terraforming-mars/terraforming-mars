@@ -2,12 +2,12 @@ import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {CardResource} from '../../common/CardResource';
 import {ICard} from '../cards/ICard';
-import {Tags} from '../../common/cards/Tags';
+import {Tag} from '../../common/cards/Tag';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export type Options = {
   count?: number;
-  restrictedTag?: Tags;
+  restrictedTag?: Tag;
   title?: string;
   filter?: (card: ICard) => boolean;
   log?: () => void;
@@ -48,8 +48,8 @@ export class AddResourcesToCard extends DeferredAction {
       title,
       count === 1 ? 'Add resource' : 'Add resources',
       cards,
-      (selected: Array<ICard>) => {
-        this.addResource(selected[0], count);
+      ([card]) => {
+        this.addResource(card, count);
         return undefined;
       },
     );

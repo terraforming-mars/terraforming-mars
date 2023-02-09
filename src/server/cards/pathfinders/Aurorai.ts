@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,9 +14,13 @@ export class Aurorai extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.AURORAI,
-      tags: [Tags.MARS],
+      tags: [Tag.MARS],
       startingMegaCredits: 33,
       resourceType: CardResource.DATA,
+
+      behavior: {
+        addResources: 2,
+      },
 
       metadata: {
         cardNumber: 'PfC9',
@@ -34,14 +38,9 @@ export class Aurorai extends Card implements ICorporationCard {
     });
   }
 
-  public override resourceCount = 0;
-
-  public play() {
-    this.resourceCount = 2;
-    return undefined;
-  }
-
-  public onIncreaseTerraformRating(player: Player, steps: number) {
-    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  public onIncreaseTerraformRating(player: Player, cardOwner: Player, steps: number) {
+    if (player === cardOwner) {
+      player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
+    }
   }
 }

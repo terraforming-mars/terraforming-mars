@@ -48,12 +48,12 @@
 
               <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-              <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
+              <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
 
               <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
               <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
-                  <Milestone :milestones_list="game.milestones" />
+                  <Milestones :milestones_list="game.milestones" />
                   <Awards :awards="game.awards" show-scores/>
               </div>
           </div>
@@ -204,7 +204,7 @@
           <dynamic-title title="Game details" :color="thisPlayer.color"/>
 
           <div class="player_home_block" v-if="playerView.players.length > 1">
-              <Milestone :show_scores="false" :milestones_list="game.milestones" />
+              <Milestones :show_scores="false" :milestones_list="game.milestones" />
               <Awards :awards="game.awards" />
           </div>
 
@@ -239,7 +239,8 @@
 
                   <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
-                  <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
+                  <a name="moonBoard" class="player_home_anchor"></a>
+                  <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"></MoonBoard>
 
               </div>
           </details>
@@ -262,6 +263,7 @@
       <div v-if="game.spectatorId">
         <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
       </div>
+      <purge-warning :expectedPurgeTimeMs="playerView.game.expectedPurgeTimeMs"></purge-warning>
   </div>
 </template>
 
@@ -270,7 +272,7 @@ import Vue from 'vue';
 
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';
-import Milestone from '@/client/components/Milestone.vue';
+import Milestones from '@/client/components/Milestones.vue';
 import Awards from '@/client/components/Awards.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
@@ -289,12 +291,13 @@ import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
+import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
+import {nextTileView, TileView} from './board/TileView';
 
 import * as raw_settings from '@/genfiles/settings.json';
-import {nextTileView, TileView} from './board/TileView';
 
 export interface PlayerHomeModel {
   showActiveCards: boolean;
@@ -355,7 +358,7 @@ export default Vue.extend({
     Card,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
-    Milestone,
+    Milestones,
     Awards,
     'sidebar': Sidebar,
     'colony': Colony,
@@ -366,6 +369,7 @@ export default Vue.extend({
     MoonBoard,
     PlanetaryTracks,
     'stacked-cards': StackedCards,
+    PurgeWarning,
   },
   mixins: [PlayerMixin],
   methods: {
@@ -373,24 +377,24 @@ export default Vue.extend({
     navigatePage(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
-        let idSuffix: string | undefined = undefined;
+        let id: string | undefined = undefined;
         switch (event.code) {
         case KeyboardNavigation.GAMEBOARD:
-          idSuffix = 'board';
+          id = 'shortkey-board';
           break;
         case KeyboardNavigation.PLAYERSOVERVIEW:
-          idSuffix = 'playersoverview';
+          id = 'shortkey-playersoverview';
           break;
         case KeyboardNavigation.HAND:
-          idSuffix = 'hand';
+          id = 'shortkey-hand';
           break;
         case KeyboardNavigation.COLONIES:
-          idSuffix = 'colonies';
+          id = 'shortkey-colonies';
           break;
         default:
           return;
         }
-        const el = document.getElementById('shortkey-' + idSuffix);
+        const el = document.getElementById(id);
         if (el) {
           event.preventDefault();
           el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});

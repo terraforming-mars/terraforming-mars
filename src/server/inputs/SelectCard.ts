@@ -1,10 +1,9 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
-import {CardName} from '@/common/cards/CardName';
-import {InputResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
+import {BasePlayerInput, getCardFromPlayerInput, PlayerInput} from '../PlayerInput';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
+import {CardName} from '../../common/cards/CardName';
+import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
 
 export type Options = {
   max: number,
@@ -14,17 +13,17 @@ export type Options = {
   played: boolean | CardName.SELF_REPLICATING_ROBOTS // Default is true. If true, then shows resources on those cards. If false than shows discounted price.
   showOwner: boolean, // Default is false. If true then show the name of the card owner below.
 }
-export class SelectCard<T extends ICard> implements PlayerInput {
-  public readonly inputType: PlayerInputTypes = PlayerInputTypes.SELECT_CARD;
+export class SelectCard<T extends ICard> extends BasePlayerInput {
   public config: Options;
 
   constructor(
-        public title: string | Message,
-        public buttonLabel: string = 'Save',
-        public cards: Array<T>,
-        public cb: (cards: Array<T>) => PlayerInput | undefined,
-        config?: Partial<Options>,
+    title: string | Message,
+    buttonLabel: string = 'Save',
+    public cards: Array<T>,
+    public cb: (cards: Array<T>) => PlayerInput | undefined,
+    config?: Partial<Options>,
   ) {
+    super(PlayerInputType.SELECT_CARD, title);
     this.config = {
       max: config?.max ?? 1,
       min: config?.min ?? 1,
@@ -36,20 +35,22 @@ export class SelectCard<T extends ICard> implements PlayerInput {
     this.buttonLabel = buttonLabel;
   }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1);
-    if (input[0].length < this.config.min) {
+  public process(input: InputResponse) {
+    if (!isSelectCardResponse(input)) {
+      throw new Error('Not a valid SelectCardResponse');
+    }
+    if (input.cards.length < this.config.min) {
       throw new Error('Not enough cards selected');
     }
-    if (input[0].length > this.config.max) {
+    if (input.cards.length > this.config.max) {
       throw new Error('Too many cards selected');
     }
     const cards: Array<T> = [];
-    for (const cardName of input[0]) {
-      const cardIndex = PlayerInput.getCard(this.cards, cardName);
-      cards.push(cardIndex.card);
-      if (this.config.enabled?.[cardIndex.idx] === false) {
-        throw new Error('Selected unavailable card');
+    for (const cardName of input.cards) {
+      const {card, idx} = getCardFromPlayerInput(this.cards, cardName);
+      cards.push(card);
+      if (this.config.enabled?.[idx] === false) {
+        throw new Error(`${cardName} is not available`);
       }
     }
     return this.cb(cards);

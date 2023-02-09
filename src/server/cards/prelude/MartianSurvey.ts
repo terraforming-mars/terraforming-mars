@@ -1,7 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -13,9 +12,13 @@ export class MartianSurvey extends Card implements IProjectCard {
     super({
       cardType: CardType.EVENT,
       name: CardName.MARTIAN_SURVEY,
-      tags: [Tags.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 9,
       victoryPoints: 1,
+
+      behavior: {
+        drawCard: 2,
+      },
 
       requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
       metadata: {
@@ -26,10 +29,5 @@ export class MartianSurvey extends Card implements IProjectCard {
         description: 'Oxygen must be 4% or lower. Draw two cards.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.drawCard(2);
-    return undefined;
   }
 }

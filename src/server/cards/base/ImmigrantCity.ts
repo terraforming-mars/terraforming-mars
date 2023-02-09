@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
@@ -12,7 +12,6 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
 import {all} from '../Options';
 
 export class ImmigrantCity extends Card implements IProjectCard {
@@ -20,27 +19,26 @@ export class ImmigrantCity extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.IMMIGRANT_CITY,
-      tags: [Tags.CITY, Tags.BUILDING],
+      tags: [Tag.CITY, Tag.BUILDING],
       cost: 13,
-      productionBox: Units.of({energy: -1, megacredits: -2}),
 
       metadata: {
         cardNumber: '200',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When a City tile is placed, including this, increase your M€ production 1 step.', (eb) => {
+          b.effect('When a city tile is placed, including this, increase your M€ production 1 step.', (eb) => {
             eb.city({all}).startEffect.production((pb) => pb.megacredits(1));
           }).br;
           b.production((pb) => pb.minus().energy(1).megacredits(-2)).city();
         }),
-        description: 'Decrease your Energy production 1 step and decrease your M€ production 2 steps. Place a City tile.',
+        description: 'Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.',
       },
     });
   }
 
-  public override canPlay(player: Player): boolean {
-    const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
+  public override bespokeCanPlay(player: Player): boolean {
+    const hasEnergyProduction = player.production.energy >= 1;
     const canPlaceCityOnMars = player.game.board.getAvailableSpacesForCity(player).length > 0;
-    const canDecreaseMcProduction = player.getProduction(Resources.MEGACREDITS) >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
+    const canDecreaseMcProduction = player.production.megacredits >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
 
     return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
   }
@@ -54,9 +52,9 @@ export class ImmigrantCity extends Card implements IProjectCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space.id);
+      player.game.addCityTile(player, space);
       player.game.defer(new LoseProduction(player, Resources.ENERGY, {count: 1}));
       player.game.defer(new LoseProduction(player, Resources.MEGACREDITS, {count: 2}));
       return undefined;

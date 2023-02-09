@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {digit, played} from '../Options';
 import {Resources} from '../../../common/Resources';
 import {Size} from '../../../common/cards/render/Size';
@@ -18,8 +18,8 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
       cost: 20,
-      tags: [Tags.SPACE, Tags.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 1).tag(Tags.SCIENCE, 1)),
+      tags: [Tag.SPACE, Tag.SCIENCE],
+      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 1).tag(Tag.SCIENCE, 1)),
 
       metadata: {
         cardNumber: 'Pf53',
@@ -44,11 +44,11 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
 
   private processCard(player: Player, card: IProjectCard): boolean {
     const tags = card.tags;
-    if (player.cardHasTag(card, Tags.SCIENCE) || player.cardHasTag(card, Tags.MICROBE)) {
+    if (player.tags.cardHasTag(card, Tag.SCIENCE) || player.tags.cardHasTag(card, Tag.MICROBE)) {
       player.playCard(card, undefined);
       return true;
-    } else if (tags.includes(Tags.SPACE)) {
-      player.addProduction(Resources.ENERGY, 3, {log: true});
+    } else if (tags.includes(Tag.SPACE)) {
+      player.production.add(Resources.ENERGY, 3, {log: true});
       this.keep(player, card);
       return true;
     } else {
@@ -57,10 +57,11 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     }
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     const game = player.game;
+    // TODO(kberg): Make sure this action occurs after the card play, in case the played card has data.
     game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
-    const cards = [game.dealer.dealCard(player.game), game.dealer.dealCard(player.game)];
+    const cards = [game.projectDeck.draw(player.game), game.projectDeck.draw(player.game)];
 
     player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0]).card(cards[1]));
     if (this.processCard(player, cards[0])) {

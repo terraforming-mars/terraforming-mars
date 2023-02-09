@@ -1,15 +1,14 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {testGameOptions, setRulingPartyAndRulingPolicy, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../../src/server/turmoil/parties/MarsFirst';
 import {Mine} from '../../../src/server/cards/base/Mine';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('MarsFirst', function() {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let marsFirst: MarsFirst;
@@ -17,13 +16,12 @@ describe('MarsFirst', function() {
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
     const otherPlayer = TestPlayer.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, gameOptions);
+    game = Game.newInstance('gameid', [player, otherPlayer], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     marsFirst = new MarsFirst();
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Building tag you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each building tag you have', function() {
     player.playedCards.push(new Mine());
 
     const bonus = MARS_FIRST_BONUS_1;
@@ -32,7 +30,7 @@ describe('MarsFirst', function() {
   });
 
   it('Ruling bonus 2: Gain 1 M€ for each tile you have ON MARS', function() {
-    game.addGreenery(player, '11');
+    addGreenery(player, '11');
 
     const bonus = MARS_FIRST_BONUS_2;
     bonus.grant(game);
@@ -42,11 +40,11 @@ describe('MarsFirst', function() {
   it('Ruling policy 1: When you place a tile ON MARS, gain 1 steel', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
 
-    game.addGreenery(player, '11');
+    addGreenery(player, '11');
     expect(player.steel).to.eq(1);
   });
 
-  it('Ruling policy 2: When you play a Building tag, gain 2 MC', function() {
+  it('Ruling policy 2: When you play a building tag, gain 2 MC', function() {
     setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[1].id);
 
     const mine = new Mine();
@@ -71,7 +69,7 @@ describe('MarsFirst', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);
-    expect(player.cardsInHand[0].tags.includes(Tags.BUILDING)).to.be.true;
+    expect(player.cardsInHand[0].tags.includes(Tag.BUILDING)).to.be.true;
     expect(marsFirstPolicy.canAct(player)).to.be.false;
   });
 });

@@ -3,12 +3,11 @@ import {cast} from '../../TestingUtils';
 import {AtmoCollectors} from '../../../src/server/cards/colonies/AtmoCollectors';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('AtmoCollectors', function() {
   let card: AtmoCollectors;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(function() {
     card = new AtmoCollectors();

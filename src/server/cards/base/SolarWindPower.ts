@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -12,8 +10,13 @@ export class SolarWindPower extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.SOLAR_WIND_POWER,
-      tags: [Tags.SCIENCE, Tags.SPACE, Tags.ENERGY],
+      tags: [Tag.SCIENCE, Tag.SPACE, Tag.POWER],
       cost: 11,
+
+      behavior: {
+        production: {energy: 1},
+        stock: {titanium: 2},
+      },
 
       metadata: {
         cardNumber: '077',
@@ -23,10 +26,5 @@ export class SolarWindPower extends Card implements IProjectCard {
         description: 'Increase your energy production 1 step and gain 2 titanium.',
       },
     });
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 1);
-    player.titanium += 2;
-    return undefined;
   }
 }

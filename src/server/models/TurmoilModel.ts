@@ -4,7 +4,7 @@ import {Game} from '../Game';
 import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {Turmoil} from '../turmoil/Turmoil';
-import {DelegatesModel, GlobalEventModel, PartyModel, PolicyUser, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
+import {DelegatesModel, GlobalEventModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
 
 export function getTurmoilModel(game: Game): TurmoilModel | undefined {
   return Turmoil.ifTurmoilElse(game, (turmoil) => {
@@ -21,21 +21,17 @@ export function getTurmoilModel(game: Game): TurmoilModel | undefined {
     const dominant = turmoil.dominantParty.name;
     const ruling = turmoil.rulingParty.name;
 
-    const lobby = Array.from(
-      turmoil.lobby,
-      (player) => game.getPlayerById(player).color,
-    );
-
-    const reserve = turmoil.getPresentPlayersInReserve().map((player) => {
-      const number = turmoil.getAvailableDelegateCount(player, 'reserve');
-      if (player !== 'NEUTRAL') {
-        return {
-          color: game.getPlayerById(player).color,
-          number: number,
-        };
-      } else {
-        return {color: Color.NEUTRAL, number: number};
+    const reserve: Array<DelegatesModel> = [];
+    const lobby: Array<Color> = [];
+    turmoil.delegateReserve.forEachMultiplicity((count, playerId) => {
+      const color = playerId === 'NEUTRAL' ? Color.NEUTRAL : game.getPlayerById(playerId).color;
+      if (playerId !== 'NEUTRAL') {
+        if (!turmoil.usedFreeDelegateAction.has(playerId)) {
+          count--;
+          lobby.push(color);
+        }
       }
+      reserve.push({color, number: count});
     });
 
     const distant = globalEventToModel(turmoil.distantGlobalEvent);
@@ -57,7 +53,7 @@ export function getTurmoilModel(game: Game): TurmoilModel | undefined {
         return {
           color: player.color,
           turmoilPolicyActionUsed: player.turmoilPolicyActionUsed,
-          politicalAgendasActionUsedCount: player.politicalAgendasActionUsedCount} as PolicyUser;
+          politicalAgendasActionUsedCount: player.politicalAgendasActionUsedCount};
       },
     );
 
@@ -95,17 +91,11 @@ function getParties(game: Game): Array<PartyModel> {
     (turmoil) => {
       return turmoil.parties.map(function(party) {
         const delegates: Array<DelegatesModel> = [];
-        party.getPresentPlayers().forEach((player) => {
-          const number = party.getDelegates(player);
-          if (player !== 'NEUTRAL') {
-            delegates.push({
-              color: game.getPlayerById(player).color,
-              number: number,
-            });
-          } else {
-            delegates.push({color: Color.NEUTRAL, number: number});
-          }
-        });
+        for (const player of party.delegates.keys()) {
+          const number = party.delegates.count(player);
+          const color = player === 'NEUTRAL' ? Color.NEUTRAL : game.getPlayerById(player).color;
+          delegates.push({color, number});
+        }
         let partyLeader;
         if (party.partyLeader) {
           if (party.partyLeader === 'NEUTRAL') {

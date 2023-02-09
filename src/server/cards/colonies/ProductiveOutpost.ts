@@ -23,7 +23,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
         // Not using GiveColonyBonus deferred action because it's only for the active player

@@ -1,4 +1,4 @@
-import {Tags} from '../cards/Tags';
+import {Tag} from '../cards/Tag';
 
 export interface IVictoryPointsBreakdown {
   terraformRating: number;
@@ -7,7 +7,7 @@ export interface IVictoryPointsBreakdown {
   greenery: number;
   city: number;
   escapeVelocity: number;
-  moonColonies: number;
+  moonHabitats: number;
   moonMines: number;
   moonRoads: number;
   planetaryTracks: number;
@@ -16,5 +16,5 @@ export interface IVictoryPointsBreakdown {
   detailsCards: Array<{cardName: string, victoryPoint: number}>;
   detailsMilestones: Array<string>;
   detailsAwards: Array<string>;
-  detailsPlanetaryTracks: Array<{tag: Tags, points: number}>;
+  detailsPlanetaryTracks: Array<{tag: Tag, points: number}>;
 }

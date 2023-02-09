@@ -1,15 +1,13 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {LunarMineUrbanization} from '../../../src/server/cards/moon/LunarMineUrbanization';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/common/Resources';
 import {VictoryPointsBreakdown} from '../../../src/server/VictoryPointsBreakdown';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('LunarMineUrbanization', () => {
   let player: TestPlayer;
@@ -18,7 +16,7 @@ describe('LunarMineUrbanization', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    const game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new LunarMineUrbanization();
     moonData = MoonExpansion.moonData(game);
   });
@@ -26,6 +24,8 @@ describe('LunarMineUrbanization', () => {
   it('can play', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
+
+    expect(player.getPlayableCards()).does.not.include(card);
 
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
@@ -42,22 +42,69 @@ describe('LunarMineUrbanization', () => {
     space.tile = {tileType: TileType.MOON_MINE};
     space.player = player;
 
-    player.setProductionForTest({megacredits: 0});
+    player.production.override({megacredits: 0});
     moonData.colonyRate = 0;
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
 
-    const action = card.play(player);
+    const action = cast(card.play(player), SelectSpace);
 
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
-    expect(MoonExpansion.spaces(player.game, TileType.MOON_COLONY)).eql([]);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([]);
+    expect(player.production.megacredits).eq(1);
 
     action.cb(space);
 
     expect(space.tile!.tileType).eq(TileType.LUNAR_MINE_URBANIZATION);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
-    expect(MoonExpansion.spaces(player.game, TileType.MOON_COLONY)).eql([space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([space]);
+    expect(moonData.colonyRate).eq(1);
+    expect(player.getTerraformRating()).eq(15);
+  });
+
+  it('can play, compatible with Odyssey', () => {
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    const [space, nextSpace] = moonData.moon.getAvailableSpacesOnLand(player);
+
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    space.tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
+    space.player = player;
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    nextSpace.tile = {tileType: TileType.MOON_MINE};
+    nextSpace.player = player;
+
+    expect(player.getPlayableCards()).does.include(card);
+  });
+
+  it('play, compatible with Odyssey', () => {
+    const [priorLMUSpace, space] = moonData.moon.getAvailableSpacesOnLand(player);
+
+    priorLMUSpace.tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
+    priorLMUSpace.player = player;
+
+    space.tile = {tileType: TileType.MOON_MINE};
+    space.player = player;
+
+    player.production.override({megacredits: 0});
+    moonData.colonyRate = 0;
+    expect(player.getTerraformRating()).eq(14);
+    player.titanium = 1;
+
+    const action = cast(card.play(player), SelectSpace);
+
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([priorLMUSpace, space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([priorLMUSpace]);
+    expect(player.production.megacredits).eq(1);
+
+    action.cb(space);
+
+    expect(space.tile!.tileType).eq(TileType.LUNAR_MINE_URBANIZATION);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([priorLMUSpace, space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([priorLMUSpace, space]);
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
@@ -65,23 +112,23 @@ describe('LunarMineUrbanization', () => {
   it('computeVictoryPoints', () => {
     const vps = new VictoryPointsBreakdown();
     function computeVps() {
-      vps.points.moonColonies = 0;
+      vps.points.moonHabitats = 0;
       vps.points.moonMines = 0;
       vps.points.moonRoads = 0;
       MoonExpansion.calculateVictoryPoints(player, vps);
       return {
-        colonies: vps.points.moonColonies,
+        habitats: vps.points.moonHabitats,
         mines: vps.points.moonMines,
         roads: vps.points.moonRoads,
       };
     }
 
-    expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
+    expect(computeVps()).eql({habitats: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
     MoonExpansion.calculateVictoryPoints(player, vps);
-    expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
+    expect(computeVps()).eql({habitats: 0, mines: 0, roads: 1});
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.LUNAR_MINE_URBANIZATION});
 
-    expect(computeVps()).eql({colonies: 1, mines: 1, roads: 1});
+    expect(computeVps()).eql({habitats: 1, mines: 1, roads: 1});
   });
 });

@@ -1,11 +1,9 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusTower} from '../../../src/server/cards/moon/CopernicusTower';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('CopernicusTower', () => {
   let player: TestPlayer;
@@ -13,7 +11,7 @@ describe('CopernicusTower', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new CopernicusTower();
   });
 
@@ -21,10 +19,10 @@ describe('CopernicusTower', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    player.setProductionForTest({titanium: 2});
+    player.production.override({titanium: 2});
     expect(player.getPlayableCards()).does.include(card);
 
-    player.setProductionForTest({titanium: 1});
+    player.production.override({titanium: 1});
     expect(player.getPlayableCards()).does.not.include(card);
   });
 

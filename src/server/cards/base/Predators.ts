@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
@@ -13,12 +13,12 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
-export class Predators extends Card implements IProjectCard, IActionCard, IResourceCard {
+export class Predators extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.PREDATORS,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 14,
 
       resourceType: CardResource.ANIMAL,
@@ -28,20 +28,14 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
       metadata: {
         cardNumber: '024',
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
+          b.action('Remove 1 animal from any card and add it to this card.', (eb) => {
             eb.animals(1, {all}).startAction.animals(1);
           }).br;
-          b.vpText('1 VP per Animal on this card.');
+          b.vpText('1 VP per animal on this card.');
         }),
         description: 'Requires 11% oxygen.',
       },
     });
-  }
-
-  public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
   }
 
   public canAct(player: Player): boolean {

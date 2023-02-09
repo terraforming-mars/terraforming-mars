@@ -1,9 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {VictoryPoints} from '../ICard';
@@ -13,9 +11,13 @@ export class IoMiningIndustries extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.IO_MINING_INDUSTRIES,
-      tags: [Tags.JOVIAN, Tags.SPACE],
+      tags: [Tag.JOVIAN, Tag.SPACE],
       cost: 41,
-      victoryPoints: VictoryPoints.tags(Tags.JOVIAN, 1, 1),
+      victoryPoints: VictoryPoints.tags(Tag.JOVIAN, 1, 1),
+
+      behavior: {
+        production: {titanium: 2, megacredits: 2},
+      },
 
       metadata: {
         cardNumber: '092',
@@ -26,11 +28,5 @@ export class IoMiningIndustries extends Card implements IProjectCard {
         description: 'Increase your titanium production 2 steps and your M€ production 2 steps.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, 2);
-    player.addProduction(Resources.MEGACREDITS, 2);
-    return undefined;
   }
 }

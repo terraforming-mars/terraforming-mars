@@ -3,16 +3,15 @@ import {BannedDelegate} from '../../../src/server/cards/turmoil/BannedDelegate';
 import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectDelegate} from '../../../src/server/inputs/SelectDelegate';
-import {Player} from '../../../src/server/Player';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Banned Delegate', function() {
   let card: BannedDelegate;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
 
@@ -21,8 +20,7 @@ describe('Banned Delegate', function() {
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player, player2], player, gameOptions);
+    game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
   });
 
@@ -35,10 +33,10 @@ describe('Banned Delegate', function() {
     turmoil.chairman = player.id;
     expect(player.canPlayIgnoringCost(card)).is.true;
 
-    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    const greens = turmoil.getPartyByName(PartyName.GREENS);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
-    const initialDelegatesCount = greens.delegates.length;
+    const initialDelegatesCount = greens.delegates.size;
 
     const result = card.play(player);
 
@@ -48,9 +46,9 @@ describe('Banned Delegate', function() {
       selectDelegate.cb(result.players[0]);
     } else {
       const orOptions = cast(result, OrOptions);
-      orOptions.options.forEach((option) => option.cb((option as SelectDelegate).players[0]));
+      orOptions.options.forEach((option) => option.cb(cast(option, SelectDelegate).players[0]));
     }
 
-    expect(greens.delegates).has.lengthOf(initialDelegatesCount - 1);
+    expect(greens.delegates.size).eq(initialDelegatesCount - 1);
   });
 });

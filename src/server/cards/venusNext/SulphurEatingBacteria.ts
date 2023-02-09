@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {PlayerInput} from '../../PlayerInput';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -14,12 +14,12 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {multiplier} from '../Options';
 
-export class SulphurEatingBacteria extends Card implements IActionCard, IResourceCard {
+export class SulphurEatingBacteria extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.SULPHUR_EATING_BACTERIA,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS, Tags.MICROBE],
+      tags: [Tag.VENUS, Tag.MICROBE],
       cost: 6,
       resourceType: CardResource.MICROBE,
 
@@ -27,22 +27,17 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
       metadata: {
         cardNumber: '251',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Microbe to this card.', (eb) => {
+          b.action('Add 1 microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
           b.or().br;
-          b.action('Spend any number of Microbes here to gain triple amount of MC.', (eb) => {
+          b.action('Spend any number of microbes here to gain triple amount of M€.', (eb) => {
             eb.text('x').microbes(1).startAction.megacredits(3, {multiplier});
           });
         }),
         description: 'Requires Venus 6%',
       },
     });
-  }
-  public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
   }
   public canAct(): boolean {
     return true;
@@ -69,13 +64,12 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
   }
 
   private spendResource(player: Player, amount: number) {
-    player.removeResourceFrom(this, amount);
+    player.removeResourceFrom(this, amount, {log: false});
 
     const megaCreditsGained = 3 * amount;
     player.megaCredits += megaCreditsGained;
 
-    const logText: string = 'gain ' + megaCreditsGained + ' M€';
-    LogHelper.logRemoveResource(player, this, amount, logText);
+    LogHelper.logRemoveResource(player, this, amount, `gain ${megaCreditsGained} M€`);
     return undefined;
   }
 }

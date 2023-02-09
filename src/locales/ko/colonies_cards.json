@@ -18,7 +18,7 @@
 
     "Corona Extractor": "코로나 추출기",
 
-    "Cryo Sleep": "냉동수면",
+    "Cryo-Sleep": "냉동수면",
     "Effect: When you trade, you pay 1 less resource for it.": "지속효과: 무역 사업 행동 시, 비용으로 지불하는 자원 1개 할인.",
 
     "Earth Elevator": "지구 궤도 엘리베이터",
@@ -59,7 +59,7 @@
     "Jupiter Floating Station": "목성 공중정거장",
     "Action: Add 1 floater to a JOVIAN CARD.": "행동: 자신의 아무 목성 카드 1장에 부양체 자원 1개 추가.",
     "Action: Gain 1 M€ for every floater here [MAX 4].": "행동: 이 카드에 부양체 자원 수만큼 메가크레딧 획득(최대 4M€).",
-    "Requires 3 Science tags.": "조건: 보유한 과학 태그 3개 이상.",
+    "Requires 3 science tags.": "조건: 보유한 과학 태그 3개 이상.",
 
     "Luna Governor": "달 총독",
     "Requires 3 Earth tags. Increase your M€ production 2 steps.": "조건: 보유한 지구 태그 3개 이상.) (메가크레딧 생산력 2 증가.",
@@ -97,13 +97,13 @@
     "Gain all your colony bonuses.": "즉시 자신의 모든 개척기지 보너스 획득.",
 
     "Quantum Communications": "양자 통신",
-    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "조건: 보유한 과학 태그 4개 이상.) (배치된 아무 개척기지 1개당 메가크레딧 생산력 1 증가.",
+    "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "조건: 보유한 과학 태그 4개 이상.) (배치된 아무 개척기지 1개당 메가크레딧 생산력 1 증가.",
 
     "Red Spot Observatory": "대적반 관측소",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "행동: 이 카드에 부양체 자원 1개 추가, 또는 이 카드에 부양체 자원 1개 소비해서 카드 1장 획득.",
-    "Requires 3 Science tags. Draw 2 cards.": "조건: .) (카드 2장 획득.",
+    "Requires 3 science tags. Draw 2 cards.": "조건: .) (카드 2장 획득.",
 
-    "Refugee Camp": "난민 구호소",
+    "Refugee Camps": "난민 구호소",
     "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "행동: 메가크레딧 생산력 1 감소시켜서, 이 카드에 캠프 자원 1개 추가.",
     "1 VP for each camp resource on this card.": "이 카드의 캠프 자원 1개당 승점 1점.",
 
@@ -122,7 +122,7 @@
     "Increase your heat production 5 steps.": "열 생산력 5 증가.",
 
     "Space Port": "우주항구",
-    "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.": "조건: 보유한 개척기지 1개 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 4 증가. 무역선단 1개 획득. 도시 타일 1장 배치.",
+    "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "조건: 보유한 개척기지 1개 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 4 증가. 무역선단 1개 획득. 도시 타일 1장 배치.",
 
     "Space Port Colony": "우주항구형 개척기지",
     "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "조건: 보유한 개척기지 1개 이상.) (개척기지 1개 배치. 이미 자기 개척기지가 있는 곳에도 배치할 수 있음. 무역선단 1개 획득.",
@@ -132,8 +132,8 @@
     "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "지속효과: 추진 비용의 기본값이 20M€ 이상인 카드를 추진할 때마다, 카드 1장 획득.",
 
     "Sub-zero Salt Fish": "냉동저항성 물고기",
-    "1 VP per 2 Animals on this card.": "이 카드의 동물 자원 2개당 승점 1점.",
-    "Requires -6 C. Decrease any Plant production 1 step.": "조건: 기온 -6 ℃ 이상.) (아무 1명의 식물 생산력 1 감소.",
+    "1 VP per 2 animals on this card.": "이 카드의 동물 자원 2개당 승점 1점.",
+    "Requires -6 C. Decrease any plant production 1 step.": "조건: 기온 -6 ℃ 이상.) (아무 1명의 식물 생산력 1 감소.",
 
     "Titan Air-scrapping": "타이탄 대기 감쇄",
     "Action: Spend 2 floaters here to increase your TR 1 step.": "행동: 이 카드에 부양체 자원 2개 소비해서 테라포밍 등급 1TR 상승.",
@@ -156,6 +156,6 @@
     "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "조건: 보유한 도시 타일 1장 및 개척기치 1개 이상.) (식물 생산력 1 증가. 자신의 아무 카드 1장에 미생물 자원 2개 추가.",
 
     "Warp Drive": "워프 드라이브",
-    "Effect: When you play a Space card, you pay 4 M€ less for it.": "지속효과: 우주 카드 사용 시, 우주 태그 1개마다 4M€ 할인.",
-    "Requires 5 Science tags.": "조건: 보유한 과학 태그 5개 이상."
+    "Effect: When you play a space card, you pay 4 M€ less for it.": "지속효과: 우주 카드 사용 시, 우주 태그 1개마다 4M€ 할인.",
+    "Requires 5 science tags.": "조건: 보유한 과학 태그 5개 이상."
 }

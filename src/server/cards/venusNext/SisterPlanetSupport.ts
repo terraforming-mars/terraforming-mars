@@ -1,21 +1,24 @@
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
 
-export class SisterPlanetSupport extends Card {
+export class SisterPlanetSupport extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SISTER_PLANET_SUPPORT,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.VENUS, Tags.EARTH],
+      tags: [Tag.VENUS, Tag.EARTH],
       cost: 7,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH)),
+      behavior: {
+        production: {megacredits: 3},
+      },
+
+      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH)),
       metadata: {
         cardNumber: '244',
         renderData: CardRenderer.builder((b) => {
@@ -24,10 +27,5 @@ export class SisterPlanetSupport extends Card {
         description: 'Requires Venus and Earth tags. Increase your M€ production 3 steps.',
       },
     });
-  }
-
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
-    return undefined;
   }
 }

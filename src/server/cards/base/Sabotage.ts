@@ -28,7 +28,7 @@ export class Sabotage extends Card implements IProjectCard {
       },
     });
   }
-  public play(player: Player) {
+  public override bespokePlay(player: Player) {
     if (player.game.isSoloMode()) return undefined;
 
     const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);

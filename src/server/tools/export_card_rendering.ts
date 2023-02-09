@@ -1,49 +1,53 @@
 require('dotenv').config();
 import * as fs from 'fs';
 
-import {ALL_CARD_MANIFESTS} from '../cards/AllCards';
-import {CardManifest} from '../cards/CardManifest';
+import {ALL_MODULE_MANIFESTS} from '../cards/AllCards';
+import {CardManifest, ModuleManifest} from '../cards/ModuleManifest';
 import {ICard} from '../cards/ICard';
-import {Deck} from '../Deck';
 import {GameModule} from '../../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {ALL_EVENTS, getGlobalEventModule} from '../turmoil/globalEvents/GlobalEventDealer';
 import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
 import {ClientCard} from '../../common/cards/ClientCard';
-import {CardType} from '../../common/cards/CardType';
-import {ICorporationCard} from '../cards/corporation/ICorporationCard';
-import {PreludeCard} from '../cards/prelude/PreludeCard';
+import {isICorporationCard} from '../cards/corporation/ICorporationCard';
+import {isPreludeCard} from '../cards/prelude/IPreludeCard';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
+import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
+import {ALL_MILESTONES} from '../milestones/Milestones';
+import {ALL_AWARDS} from '../awards/Awards';
+import {MilestoneAwardMetadata} from '@/common/ma/MilestoneAwardMetadata';
 
 class ProjectCardProcessor {
   public static json: Array<ClientCard> = [];
   public static makeJson() {
-    ALL_CARD_MANIFESTS.forEach(this.processManifest);
+    ALL_MODULE_MANIFESTS.forEach(this.processManifest);
   }
 
-  private static processManifest(manifest: CardManifest) {
-    for (const deck of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.standardActions, manifest.standardProjects]) {
-      ProjectCardProcessor.processDeck(manifest.module, deck);
+  private static processManifest(manifest: ModuleManifest) {
+    for (const cardManifest of [manifest.projectCards, manifest.corporationCards, manifest.preludeCards, manifest.standardActions, manifest.standardProjects]) {
+      ProjectCardProcessor.processDeck(manifest.module, cardManifest);
     }
   }
 
-  private static processDeck(module: GameModule, deck: Deck<ICard>) {
-    deck.factories.forEach((factory) => {
+  private static processDeck(module: GameModule, cardManifest: CardManifest<ICard>) {
+    for (const factory of CardManifest.values(cardManifest)) {
       ProjectCardProcessor.processCard(module, new factory.Factory(), factory.compatibility);
-    });
+    }
   }
 
   private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
     let startingMegaCredits = undefined;
     let cardCost = undefined;
-    if (card.cardType === CardType.PRELUDE) {
-      startingMegaCredits = (card as PreludeCard).startingMegaCredits;
+    if (isPreludeCard(card)) {
+      startingMegaCredits = card.startingMegaCredits;
     }
-    if (card.cardType === CardType.CORPORATION) {
-      startingMegaCredits = (card as ICorporationCard).startingMegaCredits;
-      cardCost = (card as ICorporationCard).cardCost;
+    if (isICorporationCard(card)) {
+      startingMegaCredits = card.startingMegaCredits;
+      cardCost = card.cardCost;
     }
+
+    const production = card.behavior?.production;
     const clientCard: ClientCard = {
       module: module,
       name: card.name,
@@ -55,7 +59,7 @@ class ProjectCardProcessor {
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,
-      productionBox: card.productionBox,
+      productionBox: Units.isUnits(production) ? Units.of(production) : Units.EMPTY, // Dynamic units aren't used on on the client side.
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,
@@ -127,6 +131,26 @@ class ColoniesProcessor {
   }
 }
 
+class MAProcessor {
+  public static json: Array<MilestoneAwardMetadata> = [];
+  public static makeJson() {
+    ALL_MILESTONES.forEach((entry) => {
+      MAProcessor.processEntry(entry);
+    });
+
+    ALL_AWARDS.forEach((entry) => {
+      MAProcessor.processEntry(entry);
+    });
+  }
+
+  private static processEntry(metadata: {name: string, description: string}) {
+    MAProcessor.json.push({
+      name: metadata.name,
+      description: metadata.description,
+    });
+  }
+}
+
 if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
@@ -134,7 +158,9 @@ if (!fs.existsSync('src/genfiles')) {
 ProjectCardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();
+MAProcessor.makeJson();
 
 fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(ProjectCardProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/ma.json', JSON.stringify(MAProcessor.json, null, 2));

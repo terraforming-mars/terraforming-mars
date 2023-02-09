@@ -1,33 +1,31 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../../common/input/PlayerInputTypes';
+import {BasePlayerInput, PlayerInput} from '../PlayerInput';
+import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {IColony} from '../colonies/IColony';
-import {InputResponse} from '../../common/inputs/InputResponse';
-import {Player} from '../Player';
-import {ColonyName} from '../../common/colonies/ColonyName';
-import {ColoniesHandler} from '../colonies/ColoniesHandler';
+import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
 
-export class SelectColony implements PlayerInput {
-  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_COLONY;
-
+export class SelectColony extends BasePlayerInput {
   constructor(
-        public title: string | Message,
-        public buttonLabel: string = 'Save',
-        public colonies: Array<IColony>,
-        public cb: (colony: IColony) => PlayerInput | undefined,
+    title: string | Message,
+    buttonLabel: string = 'Save',
+    public colonies: Array<IColony>,
+    public cb: (colony: IColony) => PlayerInput | undefined,
   ) {
+    super(PlayerInputType.SELECT_COLONY, title);
     this.buttonLabel = buttonLabel;
   }
 
-  public process(input: InputResponse, player: Player) {
-    player.checkInputLength(input, 1, 1);
-    const colonyName: ColonyName = (input[0][0]) as ColonyName;
-    if (colonyName === undefined) {
+  public process(input: InputResponse) {
+    if (!isSelectColonyResponse(input)) {
+      throw new Error('Not a valid SelectColonyResponse');
+    }
+    if (input.colonyName === undefined) {
       throw new Error('No colony selected');
     }
-    // TODO(kberg): this passes true because SelectColony sometimes loads discarded colonies
-    // but that can be a parameter, and that would be useful.
-    const colony = ColoniesHandler.getColony(player.game, colonyName, true);
+    const colony = this.colonies.find((c) => c.name === input.colonyName);
+    if (colony === undefined) {
+      throw new Error(`Colony ${input.colonyName} not found`);
+    }
     return this.cb(colony);
   }
 }

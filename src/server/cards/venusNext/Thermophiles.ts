@@ -1,6 +1,6 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {PlayerInput} from '../../PlayerInput';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardResource} from '../../../common/CardResource';
@@ -13,12 +13,12 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class Thermophiles extends Card implements IActionCard, IResourceCard {
+export class Thermophiles extends Card implements IActionCard {
   constructor() {
     super({
       name: CardName.THERMOPHILES,
       cardType: CardType.ACTIVE,
-      tags: [Tags.VENUS, Tags.MICROBE],
+      tags: [Tag.VENUS, Tag.MICROBE],
       cost: 9,
       resourceType: CardResource.MICROBE,
 
@@ -26,11 +26,11 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       metadata: {
         cardNumber: '253',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Microbe to ANY Venus CARD.', (eb) => {
-            eb.empty().startAction.microbes(1, {secondaryTag: Tags.VENUS});
+          b.action('Add 1 microbe to ANY Venus CARD.', (eb) => {
+            eb.empty().startAction.microbes(1, {secondaryTag: Tag.VENUS});
           }).br;
           b.or().br;
-          b.action('Spend 2 Microbes here to raise Venus 1 step.', (eb) => {
+          b.action('Spend 2 microbes here to raise Venus 1 step.', (eb) => {
             eb.microbes(2).startAction.venus(1);
           });
         }),
@@ -38,16 +38,11 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       },
     });
   }
-  public override resourceCount: number = 0;
-
-  public play() {
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }
   public action(player: Player) {
-    const venusMicrobeCards = player.getResourceCards(CardResource.MICROBE).filter((card) => card.tags.includes(Tags.VENUS));
+    const venusMicrobeCards = player.getResourceCards(CardResource.MICROBE).filter((card) => card.tags.includes(Tag.VENUS));
     const canRaiseVenus = this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
 
     // only 1 valid target and cannot remove 2 microbes - add to itself

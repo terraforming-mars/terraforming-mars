@@ -1,6 +1,4 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
@@ -14,6 +12,11 @@ export class Polyphemos extends Card implements ICorporationCard {
       startingMegaCredits: 50,
       cardType: CardType.CORPORATION,
       cardCost: 5,
+
+      behavior: {
+        production: {megacredits: 5},
+        stock: {titanium: 5},
+      },
 
       metadata: {
         cardNumber: 'R11',
@@ -29,10 +32,5 @@ export class Polyphemos extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 5);
-    player.titanium = 5;
-    return undefined;
   }
 }

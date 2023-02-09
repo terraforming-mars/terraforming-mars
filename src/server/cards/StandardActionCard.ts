@@ -19,15 +19,15 @@ export abstract class StandardActionCard extends Card implements IActionCard, IC
     });
   }
 
+  public override get cardType(): CardType.STANDARD_ACTION {
+    return CardType.STANDARD_ACTION;
+  }
+
   public abstract canAct(player: Player): boolean
 
   public abstract action(player: Player): PlayerInput | undefined
 
   protected actionUsed(player: Player) {
     player.game.log('${0} used ${1} standard action', (b) => b.player(player).card(this));
-  }
-
-  public play() {
-    return undefined;
   }
 }

@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/server/Game';
-import {fakeCard, setCustomGameOptions} from '../../TestingUtils';
+import {fakeCard, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/server/cards/moon/EarthEmbassy';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {LunaGovernor} from '../../../src/server/cards/colonies/LunaGovernor';
 import {BusinessNetwork} from '../../../src/server/cards/base/BusinessNetwork';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
+import {PointLuna} from '../../../src/server/cards/prelude/PointLuna';
 
 describe('EarthEmbassy', () => {
   let player: TestPlayer;
@@ -15,22 +15,22 @@ describe('EarthEmbassy', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     earthEmbassy = new EarthEmbassy();
   });
 
   it('play', () => {
-    const fake = fakeCard({tags: [Tags.EARTH, Tags.MOON, Tags.MOON]});
+    const fake = fakeCard({tags: [Tag.EARTH, Tag.MOON, Tag.MOON]});
 
     player.playedCards = [fake];
-    expect(player.getTagCount(Tags.EARTH, 'raw')).eq(1);
-    expect(player.getTagCount(Tags.EARTH, 'default')).eq(1);
+    expect(player.tags.count(Tag.EARTH, 'raw')).eq(1);
+    expect(player.tags.count(Tag.EARTH, 'default')).eq(1);
 
     // This changes the results because Earth Embassy has one earth tag and one moon tag.
     // [ Earth Embassy: earth/moon, Fake Card: earth/moon/moon ]
     player.playedCards.push(earthEmbassy);
-    expect(player.getTagCount(Tags.EARTH, 'raw')).eq(2);
-    expect(player.getTagCount(Tags.EARTH, 'default')).eq(5);
+    expect(player.tags.count(Tag.EARTH, 'raw')).eq(2);
+    expect(player.tags.count(Tag.EARTH, 'default')).eq(5);
   });
 
   it('Works for Luna Governor', () => {
@@ -40,6 +40,38 @@ describe('EarthEmbassy', () => {
     // Business Contacts has an earth tag.
     player.playedCards.push(earthEmbassy, new BusinessNetwork());
     expect(player.canPlayIgnoringCost(lunaGovernor)).is.true;
+  });
+
+  it('Works for Martian Zoo', () => {
+    const martianZoo = new MartianZoo();
+    player.playedCards.push(martianZoo);
+
+    const fake = fakeCard({tags: [Tag.EARTH, Tag.MOON, Tag.MOON]});
+    martianZoo.resourceCount = 0;
+    martianZoo.onCardPlayed(player, fake);
+
+    expect(martianZoo.resourceCount).eq(1);
+
+    player.playedCards.push(earthEmbassy);
+    martianZoo.resourceCount = 0;
+    martianZoo.onCardPlayed(player, fake);
+
+    expect(martianZoo.resourceCount).eq(3);
+  });
+
+  it('Works with Point Luna', () => {
+    const pointLuna = new PointLuna();
+    player.corporations.push(pointLuna);
+
+    const fake = fakeCard({tags: [Tag.MOON]});
+    pointLuna.onCardPlayed(player, fake);
+
+    expect(player.cardsInHand).has.length(0);
+
+    player.playedCards = [earthEmbassy];
+    pointLuna.onCardPlayed(player, fake);
+
+    expect(player.cardsInHand).has.length(1);
   });
 });
 

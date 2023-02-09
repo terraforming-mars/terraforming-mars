@@ -1,6 +1,6 @@
 import {Game} from '../src/server/Game';
 import {GameOptions} from '../src/server/GameOptions';
-import {setCustomGameOptions} from './TestingUtils';
+import {testGameOptions} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 
 export function newTestGame(count: number, customOptions?: Partial<GameOptions>, idSuffix = ''): Game {
@@ -17,10 +17,19 @@ export function newTestGame(count: number, customOptions?: Partial<GameOptions>,
 
   const options: GameOptions | undefined = customOptions === undefined ?
     undefined :
-    setCustomGameOptions(customOptions);
+    testGameOptions(customOptions);
   return Game.newInstance(`game-id${idSuffix}`, players, players[0], options);
 }
 
 export function getTestPlayer(game: Game, idx: number): TestPlayer {
-  return ((game as any).players[idx]) as TestPlayer;
+  const players = game.getPlayers();
+  const length = players.length;
+  if (idx >= length) {
+    throw new Error(`Invalid index ${idx} when game has ${length} players`);
+  }
+  return game.getPlayers()[idx] as TestPlayer;
+}
+
+export function getTestPlayers(game: Game): Array<TestPlayer> {
+  return game.getPlayers() as Array<TestPlayer>;
 }

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {ALL_CARD_MANIFESTS} from '../../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllCards';
 import {CapitalAres} from '../../../src/server/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';
@@ -10,13 +10,13 @@ import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 import {Game} from '../../../src/server/Game';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {resetBoard, setCustomGameOptions, runNextAction, cast} from '../../TestingUtils';
+import {resetBoard, runNextAction, cast, runAllActions, addCityTile, addOceanTile, testGameOptions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -26,11 +26,12 @@ import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/server/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
-import {CardType} from '../../../src/common/cards/CardType';
-import {ICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
+import {isICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
+import {isIProjectCard} from '../../../src/server/cards/IProjectCard';
 import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {CardManifest} from '../../../src/server/cards/ModuleManifest';
+import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -42,7 +43,7 @@ describe('RoboticWorkforce', () => {
     card = new RoboticWorkforce();
     player = TestPlayer.BLUE.newPlayer();
     redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
+    game = Game.newInstance('gameid', [player, redPlayer], player, testGameOptions({moonExpansion: true}));
   });
 
   it('Cannot play if no building cards to copy', () => {
@@ -54,7 +55,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(new FoodFactory());
     expect(card.canPlay(player)).is.not.true;
 
-    player.setProductionForTest({plants: 1});
+    player.production.override({plants: 1});
     expect(card.canPlay(player)).is.true;
   });
 
@@ -63,7 +64,7 @@ describe('RoboticWorkforce', () => {
     player.playedCards.push(new BiomassCombustors());
     expect(card.canPlay(player)).is.not.true;
 
-    redPlayer.setProductionForTest({plants: 1});
+    redPlayer.production.override({plants: 1});
     expect(card.canPlay(player)).is.true;
   });
 
@@ -73,7 +74,7 @@ describe('RoboticWorkforce', () => {
 
     const action = cast(card.play(player), SelectCard);
     action.cb([noctisFarming]);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
   });
 
   it('Should work with gyropolis', () => {
@@ -84,11 +85,11 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
 
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([gyropolis]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(2);
   });
 
   it('Should work with capital', () => {
@@ -98,11 +99,11 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([capital]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(5);
   });
 
   it('Should work with Capital (Ares expansion)', () => {
@@ -113,11 +114,11 @@ describe('RoboticWorkforce', () => {
     const action = card.play(player);
     expect(action).is.undefined; // Not enough energy production
 
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([capitalAres]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(5);
   });
 
   it('Should work with Solar Farm (Ares expansion)', () => {
@@ -129,16 +130,16 @@ describe('RoboticWorkforce', () => {
     expect(solarFarmSpace.bonus).has.lengthOf(2);
     expect(solarFarmSpace.bonus.every((b) => b === SpaceBonus.PLANT)).is.true;
 
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.production.energy).to.eq(0);
     const action = cast(solarFarm.play(player), SelectSpace);
     action.cb(solarFarmSpace);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+    expect(player.production.energy).to.eq(2);
 
     player.playedCards.push(solarFarm);
 
     const selectCard = cast(card.play(player), SelectCard);
     selectCard.cb([solarFarm]);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(4);
+    expect(player.production.energy).to.eq(4);
   });
 
   it('Should play with corporation cards', () => {
@@ -147,16 +148,17 @@ describe('RoboticWorkforce', () => {
 
     const action = cast(card.play(player), SelectCard);
 
-    expect(player.getProduction(Resources.STEEL)).to.eq(0);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
+    expect(player.production.steel).to.eq(0);
+    expect(player.production.titanium).to.eq(0);
     action.cb([corporationCard as any]);
-    expect(player.getProduction(Resources.STEEL)).to.eq(1);
-    expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+    expect(player.production.steel).to.eq(1);
+    expect(player.production.titanium).to.eq(1);
   });
 
   it('Should not work with Solar Wind Power (no building tag, but has production)', () => {
     player.playedCards.push(new SolarWindPower());
 
+    expect(card.canPlay(player)).is.false;
     const action = card.play(player);
     expect(action).is.undefined;
   });
@@ -164,6 +166,7 @@ describe('RoboticWorkforce', () => {
   it('Should not work with Mars University (building tag, no production)', () => {
     player.playedCards.push(new MarsUniversity());
 
+    expect(card.canPlay(player)).is.false;
     const action = card.play(player);
     expect(action).is.undefined;
   });
@@ -174,36 +177,51 @@ describe('RoboticWorkforce', () => {
     const action = cast(card.play(player), SelectCard);
 
     expect(action.cards[0]).eq(researchNetwork);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
+    expect(player.production.megacredits).to.eq(0);
     action.cb([researchNetwork]);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    expect(player.production.megacredits).to.eq(1);
+  });
+
+  it('Should work with Heat Trappers', () => {
+    const heatTrappers = new HeatTrappers();
+    player.playedCards.push(heatTrappers);
+    player.production.override(Units.of({heat: 1}));
+    redPlayer.production.override(Units.of({heat: 1}));
+
+    expect(card.canPlay(player)).is.false;
+
+    redPlayer.production.override(Units.of({heat: 2}));
+
+    expect(card.canPlay(player)).is.true;
+
+    const selectCard = cast(card.play(player), SelectCard);
+
+    expect(selectCard.cards).deep.eq([heatTrappers]);
+
+    selectCard.cb([heatTrappers]);
+    runAllActions(game);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({heat: 1, energy: 1}));
+    expect(redPlayer.production.asUnits()).deep.eq(Units.EMPTY);
   });
 
   describe('test all cards', () => {
-    ALL_CARD_MANIFESTS.forEach((manifest) => {
-      manifest.projectCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
+    ALL_MODULE_MANIFESTS.forEach((manifest) => {
+      const cards: CardManifest<ICard> = {...manifest.projectCards, ...manifest.preludeCards, ...manifest.corporationCards};
+      for (const [cardName, factory] of CardManifest.entries(cards)) {
+        it(cardName, () => {
+          const card = new factory!.Factory();
+          testCard(card);
         });
-      });
-      manifest.preludeCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
-        });
-      });
-      manifest.corporationCards.factories.forEach((c) => {
-        it(c.cardName, () => {
-          testCard(new c.Factory());
-        });
-      });
+      }
     });
 
     const testCard = function(card: ICard) {
       const researchCoordination = new ResearchCoordination();
-      const gameOptions = setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
+      const gameOptions = testGameOptions({turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true});
 
       let include = false;
-      if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILD)) && card.play !== undefined) {
+      if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
         // Solar Farm is a pain to test so let's just say it's fine
         if (card.name === CardName.SOLAR_FARM) {
           return;
@@ -213,8 +231,8 @@ describe('RoboticWorkforce', () => {
         player = TestPlayer.BLUE.newPlayer();
         redPlayer = TestPlayer.RED.newPlayer();
         game = Game.newInstance('gameid', [player, redPlayer], player, gameOptions);
-        player.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
-        redPlayer.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
+        player.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
+        redPlayer.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
 
         // Set Moon rates.
         game.moonData!.miningRate = 3;
@@ -223,11 +241,11 @@ describe('RoboticWorkforce', () => {
 
         // place some tiles
         resetBoard(game);
-        game.addCityTile(player, '17');
-        game.addCityTile(player, '19');
-        game.addOceanTile(player, '32');
-        game.addOceanTile(player, '33');
-        game.addOceanTile(player, '34');
+        addCityTile(player, '17');
+        addCityTile(player, '19');
+        addOceanTile(player, '32');
+        addOceanTile(player, '33');
+        addOceanTile(player, '34');
 
         // Some moon cards need steel and titanium
         player.steel = 2;
@@ -243,10 +261,10 @@ describe('RoboticWorkforce', () => {
           game.moonData!.moon.spaces[4].player = player;
         }
 
-        if (card.cardType === CardType.CORPORATION) {
-          (game as any).playCorporationCard(player, card as ICorporationCard);
-        } else {
-          player.playCard(card as IProjectCard);
+        if (isICorporationCard(card)) {
+          player.playCorporationCard(card);
+        } else if (isIProjectCard(card)) {
+          player.playCard(card);
         }
 
         // SelectSpace will trigger production changes in the right cards (e.g. Mining Rights)
@@ -260,18 +278,15 @@ describe('RoboticWorkforce', () => {
 
         // Now if any of the production changed, that means the card has a production change
         const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
-        include = productions.filter((prod) => player.getProduction(prod) !== 2).length > 0;
+        include = productions.filter((prod) => player.production[prod] !== 2).length > 0;
       }
-
-      const isEmpty = function(u: Units): boolean {
-        return u.megacredits === 0 && u.steel === 0 && u.titanium === 0 && u.plants === 0 && u.energy === 0 && u.heat === 0;
-      };
 
       console.log(`        ${card.name}: ${include}`);
       // The card must have a productionBox or produce method.
       if (include) {
         if (card.produce === undefined) {
-          if (card.productionBox === undefined || isEmpty(card.productionBox)) {
+          const production = card.behavior?.production;
+          if (production === undefined || (Units.isUnits(production) && Units.isEmpty(production))) {
             fail(card.name + ' should be registered for Robotic Workforce');
           }
         }

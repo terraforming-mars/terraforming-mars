@@ -1,26 +1,24 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {cast, setCustomGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
+import {cast, testGameOptions, setRulingPartyAndRulingPolicy} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/server/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPlanetSupport';
 import {VestaShipyard} from '../../../src/server/cards/base/VestaShipyard';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {Tags} from '../../../src/common/cards/Tags';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('Unity', function() {
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
   let turmoil: Turmoil;
   let unity: Unity;
 
   beforeEach(function() {
     player = TestPlayer.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('gameid', [player], player, gameOptions);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
     unity = new Unity();
   });
@@ -82,7 +80,7 @@ describe('Unity', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);
-    expect(player.cardsInHand[0].tags.includes(Tags.SPACE)).to.be.true;
+    expect(player.cardsInHand[0].tags.includes(Tag.SPACE)).to.be.true;
     expect(unityPolicy.canAct(player)).to.be.false;
   });
 

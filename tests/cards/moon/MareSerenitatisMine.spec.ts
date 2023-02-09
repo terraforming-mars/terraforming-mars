@@ -1,27 +1,23 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {cast, testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
-import {MoonSpaces} from '../../../src/server/moon/MoonSpaces';
+import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MareSerenitatisMine', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: MareSerenitatisMine;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new MareSerenitatisMine();
   });
@@ -33,8 +29,8 @@ describe('MareSerenitatisMine', () => {
   it('play', () => {
     player.titanium = 3;
     player.steel = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
-    expect(player.getProduction(Resources.TITANIUM)).eq(0);
+    expect(player.production.steel).eq(0);
+    expect(player.production.titanium).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
@@ -42,8 +38,8 @@ describe('MareSerenitatisMine', () => {
 
     expect(player.titanium).eq(1);
     expect(player.steel).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
-    expect(player.getProduction(Resources.TITANIUM)).eq(1);
+    expect(player.production.steel).eq(1);
+    expect(player.production.titanium).eq(1);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
@@ -51,13 +47,13 @@ describe('MareSerenitatisMine', () => {
     expect(mareSerenitatis.player).eq(player);
     expect(mareSerenitatis.tile!.tileType).eq(TileType.MOON_MINE);
 
-    const deferredAction = game.deferredActions.peek() as PlaceMoonRoadTile;
+    const deferredAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
     const roadSpace = deferredAction.spaces![0];
     expect(roadSpace.tile).is.undefined;
     expect(roadSpace.player).is.undefined;
     expect(moonData.logisticRate).eq(0);
 
-    deferredAction!.execute()!.cb(roadSpace);
+    deferredAction.execute()!.cb(roadSpace);
     expect(roadSpace.tile!.tileType).eq(TileType.MOON_ROAD);
     expect(roadSpace.player).eq(player);
     expect(moonData.logisticRate).eq(1);

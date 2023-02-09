@@ -6,21 +6,21 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardResource} from '../../../common/CardResource';
-import {ICard, IResourceCard} from '../ICard';
+import {ICard} from '../ICard';
 import {Resources} from '../../../common/Resources';
 
-export class BotanicalExperience extends Card implements IProjectCard, IResourceCard {
+export class BotanicalExperience extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.BOTANICAL_EXPERIENCE,
       cost: 14,
-      tags: [Tags.PLANT, Tags.MARS, Tags.SCIENCE],
+      tags: [Tag.PLANT, Tag.MARS, Tag.SCIENCE],
       requirements: CardRequirements.builder((b) => b.greeneries(1, {all})),
       resourceType: CardResource.DATA,
 
@@ -40,16 +40,11 @@ export class BotanicalExperience extends Card implements IProjectCard, IResource
     });
   }
 
-  public override resourceCount = 0;
 
   public onTilePlaced(cardOwner: Player, _activePlayer: Player, space: ISpace) {
     if (Board.isGreenerySpace(space)) {
       cardOwner.addResourceTo(this, 1);
     }
-  }
-
-  public play() {
-    return undefined;
   }
 
   public onResourceAdded(player: Player, playedCard: ICard) {
@@ -58,7 +53,7 @@ export class BotanicalExperience extends Card implements IProjectCard, IResource
       const delta = Math.floor(this.resourceCount / 3);
       const deducted = delta * 3;
       this.resourceCount -= deducted;
-      player.addProduction(Resources.PLANTS, delta, {log: false});
+      player.production.add(Resources.PLANTS, delta, {log: false});
       player.game.log('${0} removed ${1} data from ${2} to increase plant production ${3} steps.',
         (b) => b.player(player).number(deducted).card(this).number(delta));
     }

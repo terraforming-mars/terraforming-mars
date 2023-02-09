@@ -1,26 +1,22 @@
 import {Game} from '../../../src/server/Game';
 import {IMoonData} from '../../../src/server/moon/IMoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Player} from '../../../src/server/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaMiningHub} from '../../../src/server/cards/moon/LunaMiningHub';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/server/moon/PlaceSpecialMoonTile';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
-
 describe('LunaMiningHub', () => {
   let game: Game;
-  let player: Player;
+  let player: TestPlayer;
   let moonData: IMoonData;
   let card: LunaMiningHub;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    game = Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     moonData = MoonExpansion.moonData(game);
     card = new LunaMiningHub();
   });
@@ -53,21 +49,21 @@ describe('LunaMiningHub', () => {
   it('play', () => {
     player.titanium = 3;
     player.steel = 3;
-    expect(player.getProduction(Resources.STEEL)).eq(0);
+    expect(player.production.steel).eq(0);
     expect(player.getTerraformRating()).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
 
     expect(player.titanium).eq(2);
-    expect(player.getProduction(Resources.STEEL)).eq(1);
-    expect(player.getProduction(Resources.TITANIUM)).eq(1);
+    expect(player.production.steel).eq(1);
+    expect(player.production.titanium).eq(1);
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
     const placeTileAction = game.deferredActions.pop() as PlaceSpecialMoonTile;
     const space = moonData.moon.spaces[10];
-    placeTileAction!.execute()!.cb(space);
+    placeTileAction.execute()!.cb(space);
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);

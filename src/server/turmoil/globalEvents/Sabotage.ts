@@ -1,4 +1,5 @@
-import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Game} from '../../Game';
@@ -8,7 +9,7 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.minus().energy(1).steel(1)).br;
+  b.br.production((pb) => pb.minus().energy(1).steel(1)).nbsp.nbsp;
   b.steel(1).slash().nbsp.influence({size: Size.SMALL});
 });
 
@@ -25,11 +26,11 @@ export class Sabotage extends GlobalEvent implements IGlobalEvent {
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
       // This conditional isn't to prevent negative production, but to prevent misleading logging when the production diff is zero.
-      if (player.getProduction(Resources.ENERGY) >= 1) {
-        player.addProduction(Resources.ENERGY, -1, {log: true, from: this.name});
+      if (player.production.energy >= 1) {
+        player.production.add(Resources.ENERGY, -1, {log: true, from: this.name});
       }
-      if (player.getProduction(Resources.STEEL) >= 1) {
-        player.addProduction(Resources.STEEL, -1, {log: true, from: this.name});
+      if (player.production.steel >= 1) {
+        player.production.add(Resources.STEEL, -1, {log: true, from: this.name});
       }
       player.addResource(Resources.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });

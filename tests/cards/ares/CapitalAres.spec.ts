@@ -8,7 +8,7 @@ import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('CapitalAres', function() {
   let card: CapitalAres;
@@ -27,12 +27,14 @@ describe('CapitalAres', function() {
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
-    player.addProduction(Resources.ENERGY, 2);
+    player.production.add(Resources.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
-    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    expect(player.production.energy).to.eq(0);
+    expect(player.production.megacredits).to.eq(5);
 
     const citySpace = game.board.getAdjacentSpaces(oceanSpaces[0])[1];
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);

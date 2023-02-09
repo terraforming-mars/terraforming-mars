@@ -1,16 +1,16 @@
 import {expect} from 'chai';
+import {cast} from '../../TestingUtils';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {NitrogenFromTitan} from '../../../src/server/cards/colonies/NitrogenFromTitan';
 import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFloatingLaunchPad';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {Player} from '../../../src/server/Player';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('NitrogenFromTitan', function() {
   let card: NitrogenFromTitan;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -44,7 +44,7 @@ describe('NitrogenFromTitan', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = cast(game.deferredActions.peek()!.execute(), SelectCard<ICard>);
     selectCard.cb([jovianLanterns]);
     expect(jovianLanterns.resourceCount).to.eq(2);
   });

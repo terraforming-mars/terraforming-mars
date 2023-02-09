@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {Player} from '../../../src/server/Player';
 import {Game} from '../../../src/server/Game';
 import {TileType} from '../../../src/common/TileType';
-import {resetBoard} from '../../TestingUtils';
+import {cast, resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LavaFlowsAres} from '../../../src/server/cards/ares/LavaFlowsAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('LavaFlowsAres', function() {
   let card: LavaFlowsAres;
-  let player: Player;
+  let player: TestPlayer;
   let game: Game;
 
   beforeEach(function() {
@@ -22,11 +22,12 @@ describe('LavaFlowsAres', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player);
-    expect(action).is.not.undefined;
-
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
     const space = action.availableSpaces[0];
     action.cb(space);
+
     expect(space.tile && space.tile.tileType).to.eq(TileType.LAVA_FLOWS);
     expect(space.player).to.eq(player);
     expect(game.getTemperature()).to.eq(-26);

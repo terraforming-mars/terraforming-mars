@@ -1,20 +1,22 @@
 import {CardName} from '../../../common/cards/CardName';
-import {Player} from '../../Player';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
-import {Resources} from '../../../common/Resources';
+import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../../common/Units';
-import {MoonCard} from './MoonCard';
+import {Card} from '../Card';
 
-export class CopernicusSolarArrays extends MoonCard {
+export class CopernicusSolarArrays extends Card {
   constructor() {
     super({
       name: CardName.COPERNICUS_SOLAR_ARRAYS,
       cardType: CardType.AUTOMATED,
-      tags: [Tags.ENERGY, Tags.SPACE],
+      tags: [Tag.POWER, Tag.SPACE],
       cost: 8,
-      reserveUnits: Units.of({titanium: 1}),
+      reserveUnits: {titanium: 1},
+
+      behavior: {
+        production: {energy: 1},
+        stock: {heat: 2},
+      },
 
       metadata: {
         description: 'Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.',
@@ -28,12 +30,5 @@ export class CopernicusSolarArrays extends MoonCard {
         }),
       },
     });
-  }
-
-  public override play(player: Player) {
-    super.play(player);
-    player.heat += 2;
-    player.addProduction(Resources.ENERGY, 1, {log: true});
-    return undefined;
   }
 }

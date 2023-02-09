@@ -4,12 +4,13 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {BiofertilizerFacility} from '../../../src/server/cards/ares/BiofertilizerFacility';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Game} from '../../../src/server/Game';
-import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {cast, runAllActions} from '../../TestingUtils';
 
 describe('BiofertilizerFacility', function() {
   let card: BiofertilizerFacility;
@@ -28,7 +29,7 @@ describe('BiofertilizerFacility', function() {
   });
 
   it('Cannot play without a science tag', function() {
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Play', function() {
@@ -38,13 +39,15 @@ describe('BiofertilizerFacility', function() {
     player.playCard(microbeHost);
 
     // Initial expectations that will change after playing the card.
-    expect(player.getProduction(Resources.PLANTS)).is.eq(0);
+    expect(player.production.plants).is.eq(0);
     expect(microbeHost.resourceCount || 0).is.eq(0);
     expect(game.deferredActions).has.lengthOf(0);
 
-    expect(player.canPlayIgnoringCost(card)).is.true;
-    const action = card.play(player);
-    expect(player.getProduction(Resources.PLANTS)).is.eq(1);
+    expect(card.canPlay(player)).is.true;
+    card.play(player);
+    runAllActions(game);
+    const action = cast(player.popWaitingFor(), SelectSpace);
+    expect(player.production.plants).is.eq(1);
 
     const citySpace = game.board.getAvailableSpacesForCity(player)[0];
     action.cb(citySpace);

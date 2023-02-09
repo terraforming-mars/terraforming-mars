@@ -2,13 +2,13 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Player} from '../../Player';
 import {Resources} from '../../../common/Resources';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
@@ -17,7 +17,7 @@ export class EnergyMarket extends Card implements IProjectCard {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.ENERGY_MARKET,
-      tags: [Tags.ENERGY],
+      tags: [Tag.POWER],
       cost: 3,
 
       metadata: {
@@ -35,12 +35,8 @@ export class EnergyMarket extends Card implements IProjectCard {
     });
   }
 
-  public play() {
-    return undefined;
-  }
-
   public canAct(player: Player): boolean {
-    return player.canAfford(2) || player.getProduction(Resources.ENERGY) >= 1;
+    return player.canAfford(2) || player.production.energy >= 1;
   }
 
   private getEnergyOption(player: Player, availableMC: number): SelectAmount {
@@ -48,15 +44,13 @@ export class EnergyMarket extends Card implements IProjectCard {
       'Select amount of energy to gain',
       'Gain energy',
       (amount: number) => {
-        if (player.canUseHeatAsMegaCredits) {
-          player.addResource(Resources.ENERGY, amount);
-          player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
-        } else {
-          player.addResource(Resources.ENERGY, amount);
-          player.deductResource(Resources.MEGACREDITS, (amount * 2));
-        }
+        player.game.defer(new SelectPaymentDeferred(
+          player,
+          amount * 2,
+          {
+            afterPay: () => player.addResource(Resources.ENERGY, amount, {log: true}),
+          }));
 
-        player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
         return undefined;
       },
       1,
@@ -65,7 +59,7 @@ export class EnergyMarket extends Card implements IProjectCard {
   }
 
   private getMegacreditsOption(player: Player) {
-    player.addProduction(Resources.ENERGY, -1);
+    player.production.add(Resources.ENERGY, -1);
     player.addResource(Resources.MEGACREDITS, 8);
     player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
     return undefined;
@@ -73,7 +67,7 @@ export class EnergyMarket extends Card implements IProjectCard {
 
   public action(player: Player) {
     const availableMC = player.spendableMegacredits();
-    if (availableMC >= 2 && player.getProduction(Resources.ENERGY) >= 1) {
+    if (availableMC >= 2 && player.production.energy >= 1) {
       return new OrOptions(
         new SelectOption('Spend 2X M€ to gain X energy', 'Spend M€', () => {
           return this.getEnergyOption(player, availableMC);
@@ -84,7 +78,7 @@ export class EnergyMarket extends Card implements IProjectCard {
       );
     } else if (availableMC >= 2) {
       return this.getEnergyOption(player, availableMC);
-    } else if (player.getProduction(Resources.ENERGY) >= 1) {
+    } else if (player.production.energy >= 1) {
       return this.getMegacreditsOption(player);
     }
     return undefined;

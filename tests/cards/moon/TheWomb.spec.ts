@@ -1,12 +1,9 @@
 import {Game} from '../../../src/server/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {testGameOptions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TheWomb} from '../../../src/server/cards/moon/TheWomb';
 import {expect} from 'chai';
-import {Resources} from '../../../src/common/Resources';
-import {PlaceMoonColonyTile} from '../../../src/server/moon/PlaceMoonColonyTile';
-
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
 
 describe('TheWomb', () => {
   let player: TestPlayer;
@@ -14,7 +11,7 @@ describe('TheWomb', () => {
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, MOON_OPTIONS);
+    Game.newInstance('gameid', [player], player, testGameOptions({moonExpansion: true}));
     card = new TheWomb();
   });
 
@@ -23,29 +20,29 @@ describe('TheWomb', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 1;
-    player.setProductionForTest({energy: 2});
+    player.production.override({energy: 2});
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 2;
-    player.setProductionForTest({energy: 1});
+    player.production.override({energy: 1});
     expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 2;
-    player.setProductionForTest({energy: 2});
+    player.production.override({energy: 2});
     expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
-    player.setProductionForTest({energy: 2});
+    player.production.override({energy: 2});
     player.titanium = 2;
     expect(player.getTerraformRating()).eq(14);
 
     card.play(player);
 
     expect(player.titanium).eq(0);
-    expect(player.getProduction(Resources.ENERGY)).eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(4);
-    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
+    expect(player.production.energy).eq(0);
+    expect(player.production.megacredits).eq(4);
+    expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonHabitatTile);
   });
 });
 

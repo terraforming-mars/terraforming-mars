@@ -1,11 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ISpace} from '../../boards/ISpace';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../../common/boards/SpaceType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,10 +12,14 @@ export class ArtificialLake extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.ARTIFICIAL_LAKE,
-      tags: [Tags.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 15,
       tr: {oceans: 1},
       victoryPoints: 1,
+
+      behavior: {
+        ocean: {on: 'land'},
+      },
 
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
@@ -29,17 +30,9 @@ export class ArtificialLake extends Card implements IProjectCard {
     });
   }
 
-  public override canPlay(player: Player) {
+  public override bespokeCanPlay(player: Player) {
+    // This is not covered in executor.
     if (!player.game.canAddOcean()) return true; // Card is playable, it just has no effect.
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
-  }
-
-  public play(player: Player) {
-    if (!player.game.canAddOcean()) return undefined;
-
-    return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-      player.game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
-      return undefined;
-    });
   }
 }

@@ -1,56 +1,50 @@
-import {IActionCard, IResourceCard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../../../common/cards/Tags';
+import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../../common/Resources';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Livestock extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Livestock extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
       name: CardName.LIVESTOCK,
-      tags: [Tags.ANIMAL],
+      tags: [Tag.ANIMAL],
       cost: 13,
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.oxygen(9)),
 
+      behavior: {
+        production: {plants: -1, megacredits: 2},
+      },
+
       metadata: {
         cardNumber: '184',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Animal to this card.', (eb) => {
+          b.action('Add 1 animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
           b.production((pb) => {
             pb.minus().plants(1).nbsp.plus().megacredits(2);
           }).br;
-          b.vpText('1 VP for each Animal on this card.');
+          b.vpText('1 VP for each animal on this card.');
         }),
         description: {
-          text: 'Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps',
+          text: 'Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps',
           align: 'left',
         },
       },
     });
   }
 
-  public override resourceCount = 0;
-  public override canPlay(player: Player): boolean {
-    return player.getProduction(Resources.PLANTS) >= 1;
-  }
-  public play(player: Player) {
-    player.addProduction(Resources.PLANTS, -1);
-    player.addProduction(Resources.MEGACREDITS, 2);
-    return undefined;
-  }
   public canAct(): boolean {
     return true;
   }

@@ -25,8 +25,8 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).delegates(1);
         }),
-        // TODO(kberg): remove "from reserve" like Cultural Metropolis.
-        description: 'Increase your M€ production 2 steps. Place 1 delegate from reserve in any party.',
+        description: 'Increase your M€ production 2 steps. Place 1 delegate in any party.' +
+                     ' Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.',
       },
     });
   }

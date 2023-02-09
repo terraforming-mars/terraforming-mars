@@ -1,12 +1,12 @@
 import {Message} from '../../common/logs/Message';
-import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput, PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
 import {PlayerInputType} from '../../common/input/PlayerInputType';
 import {InputResponse, isSelectPlayerResponse} from '../../common/inputs/InputResponse';
 
-export class SelectPlayer implements PlayerInput {
-  public readonly inputType = PlayerInputType.SELECT_PLAYER;
-  constructor(public players: Array<Player>, public title: string | Message, public buttonLabel: string = 'Save', public cb: (player: Player) => PlayerInput | undefined) {
+export class SelectPlayer extends BasePlayerInput {
+  constructor(public players: Array<Player>, title: string | Message, buttonLabel: string = 'Save', public cb: (player: Player) => PlayerInput | undefined) {
+    super(PlayerInputType.SELECT_PLAYER, title);
     this.buttonLabel = buttonLabel;
   }
 

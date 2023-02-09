@@ -10,7 +10,7 @@ describe('ArtificialPhotosynthesis', () => {
     const card = new ArtificialPhotosynthesis();
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gameid', [player], player);
-    player.popWaitingFor(); // Remove SelectInitialCards.
+    player.popSelectInitialCards();
     const action = card.play(player);
     expect(action).is.undefined;
     runAllActions(game);

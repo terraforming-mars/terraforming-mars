@@ -1,6 +1,9 @@
 <template>
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
+    <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
+      <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
+    </template>
     <player-input-factory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -62,6 +65,7 @@ export default Vue.extend({
       }
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
+    // TODO(kberg): use loadPlayerViewResponse.
     onsave(out: InputResponse) {
       const xhr = new XMLHttpRequest();
       const root = this.$root as unknown as MainAppData;
@@ -96,6 +100,43 @@ export default Vue.extend({
         root.isServerSideRequestInProgress = false;
       };
     },
+    reset() {
+      const xhr = new XMLHttpRequest();
+      const root = this.$root as unknown as MainAppData;
+      if (root.isServerSideRequestInProgress) {
+        console.warn('Server request in progress');
+        return;
+      }
+
+      root.isServerSideRequestInProgress = true;
+      xhr.open('GET', paths.RESET + '?id=' + this.playerView.id);
+      xhr.responseType = 'json';
+      xhr.onload = () => {
+        this.loadPlayerViewResponse(xhr, root);
+      };
+      xhr.send();
+      xhr.onerror = function() {
+        root.isServerSideRequestInProgress = false;
+      };
+    },
+    loadPlayerViewResponse(xhr: XMLHttpRequest, root: MainAppData) {
+      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+      if (xhr.status === 200) {
+        root.screen = 'empty';
+        root.playerView = xhr.response;
+        root.playerkey++;
+        root.screen = 'player-home';
+        if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
+          (window).location = (window).location; // eslint-disable-line no-self-assign
+        }
+      } else if (xhr.status === 400 && xhr.responseType === 'json') {
+        showAlert(xhr.response.message);
+      } else {
+        showAlert('Unexpected response from server. Please try again.');
+      }
+      root.isServerSideRequestInProgress = false;
+    },
+
     waitForUpdate() {
       const vueApp = this;
       const root = this.$root as unknown as typeof mainAppSettings.methods;

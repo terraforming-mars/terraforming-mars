@@ -1,20 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
-
+import {CeoCard} from './CeoCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 
-
-export class Karen extends Card implements LeaderCard {
+export class Karen extends CeoCard {
   constructor() {
     super({
       name: CardName.KAREN,
-      cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L11',
         renderData: CardRenderer.builder((b) => {
@@ -23,16 +18,6 @@ export class Karen extends Card implements LeaderCard {
         description: 'Once per game, draw Prelude cards equal to the current generation number and choose one to play, and discard the rest.',
       },
     });
-  }
-
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {

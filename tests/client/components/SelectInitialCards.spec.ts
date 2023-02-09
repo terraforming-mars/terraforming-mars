@@ -6,6 +6,9 @@ import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
+import * as titles from '@/common/inputs/SelectInitialCards';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {CardModel} from '@/common/models/CardModel';
 
 let savedData: InputResponse | undefined;
 
@@ -135,19 +138,19 @@ function getButton(component: Wrapper<SelectInitialCards>) {
 
 function createComponent(corpCards: Array<CardName>, projectCards: Array<CardName>, preludeCards?: Array<CardName>) {
   const toObject = (cards: Array<CardName>) => cards.map((name) => {
-    return {name};
+    return {name} as CardModel;
   });
-  const options = [{
-    title: 'select corporation',
+  const options: Array<Partial<PlayerInputModel>> = [{
+    title: titles.SELECT_CORPORATION_TITLE,
     cards: toObject(corpCards),
   }, {
-    title: 'select cards',
+    title: titles.SELECT_PROJECTS_TITLE,
     cards: toObject(projectCards),
   }];
 
   if (preludeCards) {
     options.splice(1, 0, {
-      title: 'select prelude',
+      title: titles.SELECT_PRELUDE_TITLE,
       cards: toObject(preludeCards),
     });
   }
@@ -159,6 +162,12 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
         id: 'foo',
         dealtCorporationCards: [],
         thisPlayer: {actionsThisGeneration: []},
+        game: {
+          gameOptions: {
+            preludeExtension: false,
+            leadersExtension: false,
+          },
+        },
       },
       playerinput: {
         title: 'foo',

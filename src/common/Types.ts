@@ -1,6 +1,7 @@
 export type PlayerId = `p${string}`;
 export type GameId = `g${string}`;
 export type SpectatorId = `s${string}`;
+export type ParticipantId = PlayerId | SpectatorId;
 export type SpaceId = string;
 
 export function isPlayerId(object: any): object is PlayerId {

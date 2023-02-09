@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CardType} from '../../../src/common/cards/CardType';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Karen} from '../../../src/server/cards/leaders/Karen';
+import {Karen} from '../../../src/server/cards/ceos/Karen';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -24,7 +24,7 @@ describe('Karen', function() {
   });
 
   it('Can act', function() {
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
   });
 
   it('Takes action', function() {
@@ -63,6 +63,6 @@ describe('Karen', function() {
     forceGenerationEnd(game);
 
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

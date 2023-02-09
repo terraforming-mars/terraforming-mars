@@ -8,13 +8,14 @@ import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
 import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
+import {Color} from '@/common/Color';
 
 const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
     name: names[id - 1],
-    player_name: funded ? 'Foo' : '',
-    player_color: funded ? 'red': '',
+    playerName: funded ? 'Foo' : '',
+    playerColor: funded ? Color.RED: '',
     scores: [],
   };
 }
@@ -73,7 +74,7 @@ describe('Awards', () => {
     expect(fundedAwards.text()).to.include(fundedAward.name);
     expect(fundedAwards.text()).to.not.include(notFundedAward.name);
 
-    const playerCube = fundedAwards.find(`[data-test-player-cube=${fundedAward.player_color}]`);
+    const playerCube = fundedAwards.find(`[data-test-player-cube=${fundedAward.playerColor}]`);
     expect(playerCube.exists()).to.be.true;
   });
 

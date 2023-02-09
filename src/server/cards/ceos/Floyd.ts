@@ -1,20 +1,16 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
-
+import {CeoCard} from './CeoCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {multiplier} from '../Options';
 
-export class Floyd extends Card implements LeaderCard {
+export class Floyd extends CeoCard {
   constructor() {
     super({
       name: CardName.FLOYD,
-      cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L06',
         renderData: CardRenderer.builder((b) => {
@@ -28,14 +24,11 @@ export class Floyd extends Card implements LeaderCard {
     });
   }
 
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(player: Player): boolean {
-    return player.cardsInHand.length > 0 && this.isDisabled === false;
+  public override canAct(player: Player): boolean {
+    if (!super.canAct(player)) {
+      return false;
+    }
+    return player.cardsInHand.length > 0;
   }
 
   public action(player: Player): PlayerInput | undefined {

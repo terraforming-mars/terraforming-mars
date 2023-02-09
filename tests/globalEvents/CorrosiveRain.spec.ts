@@ -25,7 +25,7 @@ describe('CorrosiveRain', function() {
     player2 = TestPlayer.RED.newPlayer();
     game = Game.newInstance('gameid', [player, player2], player, testGameOptions({turmoilExtension: true}));
     turmoil = game.turmoil!;
-    player.popWaitingFor(); // To clear out the SelectInitialCards input.
+    player.popSelectInitialCards();
   });
 
   it('resolve play', function() {

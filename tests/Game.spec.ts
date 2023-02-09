@@ -29,6 +29,7 @@ import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
+import {SerializedGame} from '@/server/SerializedGame';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -416,7 +417,7 @@ describe('Game', () => {
       p.plants = 8;
     });
 
-    game.gotoFinalGreeneryPlacement();
+    game.takeNextFinalGreeneryAction();
 
     expect(player1.getWaitingFor()).is.undefined;
     expect(player2.getWaitingFor()).is.undefined;
@@ -471,7 +472,7 @@ describe('Game', () => {
     player1.plants = 8;
     player4.plants = 8;
 
-    game.gotoFinalGreeneryPlacement();
+    game.takeNextFinalGreeneryAction();
 
     // Even though player 3 is first player, they have no plants. So player 4 goes.
 
@@ -719,10 +720,32 @@ describe('Game', () => {
     game.pathfindersData = undefined;
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
-    expect(serializedKeys).not.include('rng');
+
+    const unserializedFieldsInGame: Array<keyof Game> = [
+      'rng',
+      'discardedColonies',
+      'monsInsuranceOwner',
+      'createdTime',
+      'inputsThisRound',
+      'resettable'];
+    const serializedValuesNotInGame: Array<keyof SerializedGame> = [
+      'seed',
+      'currentSeed',
+      'createdTimeMs'];
+
     const gameKeys = Object.keys(game);
-    expect(serializedKeys.concat('rng', 'discardedColonies', 'monsInsuranceOwner').sort())
-      .deep.eq(gameKeys.concat('seed', 'currentSeed').sort());
+
+    for (const field of unserializedFieldsInGame) {
+      expect(serializedKeys).does.not.include(field);
+      expect(gameKeys).does.include(field);
+    }
+    for (const field of serializedValuesNotInGame) {
+      expect(gameKeys).does.not.include(field);
+      expect(serializedKeys).does.include(field);
+    }
+
+    expect(serializedKeys.concat(...unserializedFieldsInGame).sort())
+      .deep.eq(gameKeys.concat(...serializedValuesNotInGame).sort());
   });
 
   it('deserializing a game without moon data still loads', () => {

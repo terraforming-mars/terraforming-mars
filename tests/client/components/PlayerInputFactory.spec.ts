@@ -7,6 +7,7 @@ import {CardModel} from '@/common/models/CardModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
+import {SELECT_CORPORATION_TITLE, SELECT_PROJECTS_TITLE} from '@/common/inputs/SelectInitialCards';
 
 const baseInput = {
   amount: undefined,
@@ -32,6 +33,7 @@ const baseInput = {
   coloniesModel: undefined,
   selectBlueCardAction: false,
   availableParties: undefined,
+  showReset: false,
 };
 
 const typesToTest: PlayerInputModel[] = [
@@ -70,8 +72,8 @@ const typesToTest: PlayerInputModel[] = [
     ...baseInput,
     inputType: PlayerInputType.SELECT_INITIAL_CARDS,
     options: [
-        {} as PlayerInputModel,
-        {} as PlayerInputModel,
+        {title: SELECT_CORPORATION_TITLE} as PlayerInputModel,
+        {title: SELECT_PROJECTS_TITLE} as PlayerInputModel,
     ],
   },
   {

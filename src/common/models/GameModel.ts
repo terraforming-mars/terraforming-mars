@@ -20,6 +20,7 @@ export type GameModel = {
   discardedColonies: Array<ColonyModel>; // TODO(kberg): Replace with Array<ColonyName>
   corporationsToDraft: Array<CardModel>;
   deckSize: number;
+  expectedPurgeTimeMs: number;
   gameAge: number;
   gameOptions: GameOptionsModel;
   generation: number;
@@ -40,4 +41,5 @@ export type GameModel = {
   turmoil: TurmoilModel | undefined;
   undoCount: number;
   venusScaleLevel: number;
+  experimentalReset?: boolean;
 }

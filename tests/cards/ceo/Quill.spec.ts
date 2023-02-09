@@ -5,7 +5,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-
+import {runAllActions, cast} from '../../TestingUtils';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 
@@ -45,7 +45,8 @@ describe('Quill', function() {
     expect(localShading.resourceCount).eq(2);
     expect(game.deferredActions).has.length(1);
 
-    const addFloaters = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    runAllActions(game);
+    const addFloaters = cast(player.popWaitingFor(), SelectCard<ICard>);
     addFloaters.cb([dirigibles]);
     expect(dirigibles.resourceCount).eq(4);
   });

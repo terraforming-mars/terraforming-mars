@@ -21,7 +21,7 @@ export class Ryu extends CeoCard {
           b.text('SWAP X+2').production((pb) => pb.wild(1));
           b.br.br;
         }),
-        description: 'Once per game, swap up to X+2 of ANY two productions, where X is the current generation number.',
+        description: 'Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.',
       },
     });
   }
@@ -79,8 +79,8 @@ export class Ryu extends CeoCard {
   }
 
   private productionIsDecreasable(player: Player, resource: Resources): boolean {
-    let min_production = 0;
-    if (resource === Resources.MEGACREDITS) min_production -= 5;
-    return player.production.get(resource) > min_production;
+    let minProduction = 0;
+    if (resource === Resources.MEGACREDITS) minProduction -= 5;
+    return player.production.get(resource) > minProduction;
   }
 }

@@ -2,14 +2,16 @@ import {expect} from 'chai';
 import {Cloner} from '../../src/server/database/Cloner';
 import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
-import {setCustomGameOptions} from '../TestingUtils';
+import {testGameOptions} from '../TestingUtils';
 import {Color} from '../../src/common/Color';
 
 describe('Cloner', function() {
   it('solo game preserved', () => {
     const player = new Player('old-player1', Color.YELLOW, true, 9, 'p-old-player1-id');
     const game = Game.newInstance(
-      'g-old-game-id', [player], player, setCustomGameOptions({}), -5179823149812374);
+      'g-old-game-id', [player], player, testGameOptions({
+        turmoilExtension: true,
+      }), -5179823149812374);
 
     const newPlayer = new Player('new-player1', Color.RED, false, 3, 'p-new-player1-id');
     const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
@@ -43,6 +45,7 @@ describe('Cloner', function() {
     expect(game.rng.seed).eq(newGame.rng.seed);
     expect(game.gameAge).eq(newGame.gameAge);
     expect(game.undoCount).eq(newGame.undoCount);
+    expect(game.projectDeck.discardPile, 'discardPile').to.deep.eq(newGame.projectDeck.discardPile);
     expect(game.projectDeck, 'projectDeck').to.deep.eq(newGame.projectDeck);
     expect(game.corporationDeck, 'corporationDeck').to.deep.eq(newGame.corporationDeck);
     expect(game.preludeDeck, 'preludeDeck').to.deep.eq(newGame.preludeDeck);

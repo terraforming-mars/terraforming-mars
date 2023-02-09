@@ -236,6 +236,11 @@
                             <label for="customCorps-checkbox">
                                 <span v-i18n>Custom Corporation list</span>
                             </label>
+							
+							<input type="checkbox" v-model="showPlayerCorporationList" id="playerCorps-checkbox">
+                            <label for="playerCorps-checkbox">
+                                <span v-i18n>Custom Corporation by player</span>
+                            </label>
 
                             <template v-if="prelude">
                               <input type="checkbox" v-model="showPreludesList" id="customPreludes-checkbox">
@@ -404,6 +409,108 @@
 
 
             <div class="create-game--block" v-if="showCorporationList">
+              <CorporationsFilter
+                  ref="corporationsFilter"
+                  v-on:corporation-list-changed="updatecustomCorporations"
+                  v-bind:corporateEra="corporateEra"
+                  v-bind:prelude="prelude"
+                  v-bind:venusNext="venusNext"
+                  v-bind:colonies="colonies"
+                  v-bind:turmoil="turmoil"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
+              ></CorporationsFilter>
+            </div>
+			
+			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 1">
+			  <h2>Player 1 </h2>
+              <CorporationsFilter
+                  ref="corporationsFilter"
+                  v-on:corporation-list-changed="updatecustomCorporations"
+                  v-bind:corporateEra="corporateEra"
+                  v-bind:prelude="prelude"
+                  v-bind:venusNext="venusNext"
+                  v-bind:colonies="colonies"
+                  v-bind:turmoil="turmoil"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
+              ></CorporationsFilter>
+            </div>
+			
+			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 2">
+			  <h2>Player 2 </h2>
+              <CorporationsFilter
+                  ref="corporationsFilter"
+                  v-on:corporation-list-changed="updatecustomCorporations"
+                  v-bind:corporateEra="corporateEra"
+                  v-bind:prelude="prelude"
+                  v-bind:venusNext="venusNext"
+                  v-bind:colonies="colonies"
+                  v-bind:turmoil="turmoil"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
+              ></CorporationsFilter>
+            </div>
+						
+			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 3">
+			  <h2>Player 3 </h2>
+              <CorporationsFilter
+                  ref="corporationsFilter"
+                  v-on:corporation-list-changed="updatecustomCorporations"
+                  v-bind:corporateEra="corporateEra"
+                  v-bind:prelude="prelude"
+                  v-bind:venusNext="venusNext"
+                  v-bind:colonies="colonies"
+                  v-bind:turmoil="turmoil"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
+              ></CorporationsFilter>
+            </div>
+						
+			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 4">
+			  <h2>Player 4 </h2>
+              <CorporationsFilter
+                  ref="corporationsFilter"
+                  v-on:corporation-list-changed="updatecustomCorporations"
+                  v-bind:corporateEra="corporateEra"
+                  v-bind:prelude="prelude"
+                  v-bind:venusNext="venusNext"
+                  v-bind:colonies="colonies"
+                  v-bind:turmoil="turmoil"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
+              ></CorporationsFilter>
+            </div>
+						
+			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 5">
+			  <h2>Player 5 </h2>
+              <CorporationsFilter
+                  ref="corporationsFilter"
+                  v-on:corporation-list-changed="updatecustomCorporations"
+                  v-bind:corporateEra="corporateEra"
+                  v-bind:prelude="prelude"
+                  v-bind:venusNext="venusNext"
+                  v-bind:colonies="colonies"
+                  v-bind:turmoil="turmoil"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
+              ></CorporationsFilter>
+            </div>
+						
+			<div class="create-game--block" v-if="showPlayerCorporationList && playersCount >= 6">
+			  <h2>Player 6 </h2>
               <CorporationsFilter
                   ref="corporationsFilter"
                   v-on:corporation-list-changed="updatecustomCorporations"

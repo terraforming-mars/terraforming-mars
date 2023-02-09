@@ -21,7 +21,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
         renderData: CardRenderer.builder((b) => {
           b.planetaryTrack().text('3');
         }),
-        description: 'Choose a planetary track and raise it 3 steps. This card counts as a card with a tag of the chosen planet.',
+        description: 'Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.',
       },
     });
   }

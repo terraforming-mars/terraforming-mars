@@ -30,7 +30,7 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
           b.tr(2);
         }),
         description: 'Choose a planet tag. This card counts as having 2 of that tag. ' +
-          'Raise the planetary influence track accordingly. Gain 2 TR.',
+          'Raise the corresponding planetary track 2 steps. Gain 2 TR.',
       },
     });
   }

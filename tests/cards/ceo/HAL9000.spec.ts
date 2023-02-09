@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {HAL9000} from '../../../src/server/cards/leaders/HAL9000';
+import {HAL9000} from '../../../src/server/cards/ceos/HAL9000';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
@@ -32,6 +32,6 @@ describe('HAL 9000', function() {
     card.action(player);
     forceGenerationEnd(player.game);
     expect(card.isDisabled).is.true;
-    expect(card.canAct()).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

@@ -87,7 +87,7 @@ export abstract class Card {
         const noCostCardTypes = [
           CardType.CORPORATION,
           CardType.PRELUDE,
-          CardType.LEADER,
+          CardType.CEO,
           CardType.STANDARD_ACTION,
         ];
         if (noCostCardTypes.includes(properties.cardType) === false) {

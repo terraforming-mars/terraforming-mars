@@ -1,18 +1,15 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {LeaderCard} from './LeaderCard';
+import {CeoCard} from './CeoCard';
 
 import {Resources} from '../../../common/Resources';
 
-export class Clarke extends Card implements LeaderCard {
+export class Clarke extends CeoCard {
   constructor() {
     super({
       name: CardName.CLARKE,
-      cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L03',
         renderData: CardRenderer.builder((b) => {
@@ -21,16 +18,6 @@ export class Clarke extends Card implements LeaderCard {
         description: 'Once per game, gain plants and heat equal to your production +4.',
       },
     });
-  }
-
-  public isDisabled = false;
-
-  public override play() {
-    return undefined;
-  }
-
-  public canAct(): boolean {
-    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {

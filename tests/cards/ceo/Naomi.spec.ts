@@ -6,7 +6,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 
-import {Naomi} from '../../../src/server/cards/leaders/Naomi';
+import {Naomi} from '../../../src/server/cards/ceos/Naomi';
 import {Callisto} from '../../../src/server/colonies/Callisto';
 import {Ceres} from '../../../src/server/colonies/Ceres';
 
@@ -19,7 +19,7 @@ describe('Naomi', function() {
 
   beforeEach(() => {
     card = new Naomi();
-    game = newTestGame(2, {leadersExtension: true, coloniesExtension: true});
+    game = newTestGame(2, {ceoExtension: true, coloniesExtension: true});
     player = getTestPlayer(game, 0);
     player2 = getTestPlayer(game, 1);
     // Setup some colonies that can be built independently of cards

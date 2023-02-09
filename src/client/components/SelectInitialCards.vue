@@ -14,6 +14,7 @@
       </div>
     </div>
     <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
+    <SelectCard v-if="hasCeo" :playerView="playerView" :playerinput="ceoCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="ceosChanged" />
     <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <template v-if="this.selectedCorporations.length === 1">
       <div><span v-i18n>Starting Megacredits:</span> <div class="megacredits">{{getStartingMegacredits()}}</div></div>
@@ -47,6 +48,7 @@ import {CardType} from '@/common/cards/CardType';
 import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {ColonyModel} from '@/common/models/ColonyModel';
+import * as titles from '@/common/inputs/SelectInitialCards';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -54,6 +56,8 @@ type Refs = {
 
 type SelectInitialCardsModel = {
   selectedCards: Array<CardName>,
+  // End result will be a single CEO, but the player may select multiple while deciding what to keep.
+  selectedCeos: Array<CardName>,
   // End result will be a single corporation, but the player may select multiple while deciding what to keep.
   selectedCorporations: Array<CardName>,
   selectedPreludes: Array<CardName>,
@@ -93,6 +97,7 @@ export default (Vue as WithRefs<Refs>).extend({
   data(): SelectInitialCardsModel {
     return {
       selectedCards: [],
+      selectedCeos: [],
       selectedCorporations: [],
       selectedPreludes: [],
       valid: false,
@@ -228,8 +233,13 @@ export default (Vue as WithRefs<Refs>).extend({
       });
       this.onsave(result);
     },
+
     cardsChanged(cards: Array<CardName>) {
       this.selectedCards = cards;
+      this.validate();
+    },
+    ceosChanged(cards: Array<CardName>) {
+      this.selectedCeos = cards;
       this.validate();
     },
     corporationChanged(cards: Array<CardName>) {
@@ -240,6 +250,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.selectedPreludes = cards;
       this.validate();
     },
+
     calcuateWarning(): boolean {
       // Start with warning being empty.
       this.warning = undefined;
@@ -258,6 +269,16 @@ export default (Vue as WithRefs<Refs>).extend({
         }
         if (this.selectedPreludes.length > 2) {
           this.warning = 'You selected too many preludes';
+          return false;
+        }
+      }
+      if (this.hasCeo) {
+        if (this.selectedCeos.length < 1) {
+          this.warning = 'Select 1 CEO';
+          return false;
+        }
+        if (this.selectedCeos.length > 1) {
+          this.warning = 'You selected too many CEOs';
           return false;
         }
       }
@@ -289,10 +310,13 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },
     hasPrelude() {
-      return this.playerinput.options?.length === 3;
+      return hasOption(this.playerinput.options, titles.SELECT_PRELUDE_TITLE);
+    },
+    hasCeo() {
+      return hasOption(this.playerinput.options, titles.SELECT_CEO_TITLE);
     },
     corpCardOption() {
-      const option = getOption(this.playerinput.options, 0);
+      const option = getOption(this.playerinput.options, titles.SELECT_CORPORATION_TITLE);
       if (getPreferences().experimental_ui) {
         option.min = 1;
         option.max = undefined;
@@ -300,15 +324,21 @@ export default (Vue as WithRefs<Refs>).extend({
       return option;
     },
     preludeCardOption() {
-      const option = getOption(this.playerinput.options, 1);
+      const option = getOption(this.playerinput.options, titles.SELECT_PRELUDE_TITLE);
+      if (getPreferences().experimental_ui) {
+        option.max = undefined;
+      }
+      return option;
+    },
+    ceoCardOption() {
+      const option = getOption(this.playerinput.options, titles.SELECT_CEO_TITLE);
       if (getPreferences().experimental_ui) {
         option.max = undefined;
       }
       return option;
     },
     projectCardOption() {
-      // Compiler won't accept this method using this.hasPrelude, despite documentation saying I can.
-      return getOption(this.playerinput.options, this.playerinput.options?.length === 3 ? 2 : 1);
+      return getOption(this.playerinput.options, titles.SELECT_PROJECTS_TITLE);
     },
   },
   mounted() {
@@ -316,11 +346,16 @@ export default (Vue as WithRefs<Refs>).extend({
   },
 });
 
-function getOption(options: Array<PlayerInputModel> | undefined, idx: number): PlayerInputModel {
-  const option = options?.[idx];
+function getOption(options: Array<PlayerInputModel> | undefined, title: string): PlayerInputModel {
+  const option = options?.find((option) => option.title === title);
   if (option === undefined) {
     throw new Error('invalid input, missing option');
   }
   return option;
+}
+
+function hasOption(options: Array<PlayerInputModel> | undefined, title: string): boolean {
+  const option = options?.find((option) => option.title === title);
+  return option !== undefined;
 }
 </script>

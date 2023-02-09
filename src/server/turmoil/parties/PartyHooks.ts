@@ -8,6 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {GREENS_POLICY_1} from './Greens';
 import {PoliticalAgendas} from '../PoliticalAgendas';
 import {Turmoil} from '../Turmoil';
+import {CardName} from '../../../common/cards/CardName';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
@@ -37,6 +38,9 @@ export class PartyHooks {
       if (policyId === undefined) {
         policyId = rulingParty.policies[0].id;
       }
+
+      // Hook for CEO Zan's effect (Skip all Reds Policy effects)
+      if (partyName === PartyName.REDS && player.cardIsInEffect(CardName.ZAN)) return false;
 
       const currentPolicyId: PolicyId = PoliticalAgendas.currentAgenda(turmoil).policyId;
 

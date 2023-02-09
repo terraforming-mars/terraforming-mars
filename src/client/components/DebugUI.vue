@@ -85,6 +85,13 @@
       </section>
       <br>
       <section class="debug-ui-cards-list">
+          <h2 v-i18n>CEOs</h2>
+          <div class="cardbox" v-for="card in getAllCeoCards()" :key="card">
+              <Card v-if="showCard(card)" :card="{'name': card}" />
+          </div>
+      </section>
+      <br>
+      <section class="debug-ui-cards-list">
         <h2 v-i18n>Standard Projects</h2>
         <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
             <Card v-if="showCard(card)" :card="{'name': card}" />
@@ -188,7 +195,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ares: 'a',
   moon: 'm',
   pathfinders: 'P',
-  leader: 'l',
+  ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
 };
 
 // TODO(kberg): make this  use suffixModules.
@@ -286,7 +293,7 @@ export default Vue.extend({
         moon: true,
         promo: true,
         pathfinders: true,
-        leader: true,
+        ceo: true,
       },
       types: {
         event: true,
@@ -301,7 +308,7 @@ export default Vue.extend({
         colonyTiles: true,
         milestones: true,
         awards: true,
-        leader: true,
+        ceo: true,
       },
       tags: {
         building: true,
@@ -423,6 +430,10 @@ export default Vue.extend({
       const names = getCards(byType(CardType.PRELUDE)).map(toName);
       return this.sort(names);
     },
+    getAllCeoCards() {
+      const names = getCards(byType(CardType.CEO)).map(toName);
+      return this.sort(names);
+    },
     getAllGlobalEvents() {
       return this.sort(Array.from(allGlobalEventNames()));
     },
@@ -471,7 +482,7 @@ export default Vue.extend({
       case 'community': return 'Community';
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
-      case 'leader': return 'CEOs';
+      case 'ceo': return 'CEOs';
       }
     },
     filterByTags(card: ClientCard): boolean {

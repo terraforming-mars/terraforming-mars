@@ -32,7 +32,7 @@
   "Charity Donation": "Darowizna Charytatywna",
   "Reveal cards from the deck equal to the player count plus 1.": "Dobierz z talii projektów o 1 kartę więcej niż jest graczy w grze.",
   "In player order starting with you, each player takes one card in hand. Discard the remaining card.": "W kolejności gry, zaczynając od Ciebie każdy gracz zatrzymuje 1 kartę i przekazuje pozostałe dalej. Odrzuć pozostałą kartę.",
-   
+
   "Communication Center": "Centrum Komunikacji",
   "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "Efekt trwały: Gdy którykolwiek z graczy zagrywa kartę wydarzenia, umieść na tej karcie 1 jednostkę danych.",
   "(Effect: Remove 3 data to draw a card automatically.)": "Każde 3 jednostki danych z tej karty są automatycznie wydawane, aby dobrać kartę.",
@@ -70,7 +70,7 @@
   "Dyson Screens": "Ekrany Dysona",
   "(Action: Pay 2 titanium to raise your heat and energy production 1 step each.)": "Akcja: Wydaj 2 jednostki tytanu aby podnieść produkcję energii i ciepła o 1 poziom.",
   "(Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.)": "Podnieś temperaturę o 1 poziom. Dobierz 1 kartę. Umieść obszar miasta na zarezerwowanym polu. Podnieś swoją produkcję energii i ciepła o 2 poziomy.",
-  
+
   "Early Expedition": "Wczesna Ekspedycja",
   "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "Temperatura wynosi co najwyżej 18°C. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 3 poziomy. Umieść 1 jednostkę danych na dowolnej karcie. Umieść obszar miasta na planszy na polu niesąsiadującym z żadnym innym obszarem.",
 
@@ -240,7 +240,7 @@
   "(Action: Add 1 floater to ANY Venus card)": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Wenus.",
   "1 VP per 2 Venus tags you have.": "Otrzymujesz 1 PZ za każde posiadane 2 symbole Wenus.",
   "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Jedność musi być partią rządzącą lub musisz posiadać co najmniej 2 delegatów w tej partii. Podnieś swoją produkcję M€ o 3 poziomy. Umieść obszar miasta na zarezerwowanym polu.",
-  
+
   "Wetlands": "Mokradła",
   "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "Na planszy muszą znajdować się co najmniej 2 obszary oceanów. Wydaj 4 jednostki roślinności. Umieść ten obszar specjalny na niezarezerwowanym polu sąsiadującym z co najmniej 2 obszarami oceanów. Podnieś poziom tlenu o 1 poziom. Podnieś swój WT o 1 poziom.",
   "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "Obszar mokradeł liczy się jako obszar zieleni i oceanu jednocześnie, jednak nie liczy się do limitu 9 oceanów i nie może zostać przykryty."

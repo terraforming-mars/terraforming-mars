@@ -49,5 +49,4 @@ describe('Quill', function() {
     addFloaters.cb([dirigibles]);
     expect(dirigibles.resourceCount).eq(4);
   });
-
 });

@@ -120,7 +120,7 @@ export const mainAppSettings = {
       return (this as unknown as MainAppData).componentsVisibility[targetVar] ? true : false;
     },
     update(path: typeof paths.PLAYER | typeof paths.SPECTATOR): void {
-      const currentPathname = getCurrentPath();
+      const currentPathname = getLastPathSegment();
       const xhr = new XMLHttpRequest();
       const app = this as unknown as MainAppData;
 
@@ -185,7 +185,7 @@ export const mainAppSettings = {
   mounted() {
     document.title = constants.APP_NAME;
     if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
-    const currentPathname = getCurrentPath();
+    const currentPathname = getLastPathSegment();
     const app = this as unknown as (MainAppData) & (typeof mainAppSettings.methods);
     if (currentPathname === paths.PLAYER) {
       app.updatePlayer();
@@ -240,7 +240,7 @@ export const mainAppSettings = {
   },
 };
 
-function getCurrentPath() {
+function getLastPathSegment() {
   // Leave only the last part of /path
   return window.location.pathname.replace(/.*\//g, '');
 }

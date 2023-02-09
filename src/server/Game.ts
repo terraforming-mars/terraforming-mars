@@ -1555,7 +1555,9 @@ export class Game implements Logger {
     const projectDeck = ProjectDeck.deserialize(d.projectDeck, rng);
     const corporationDeck = CorporationDeck.deserialize(d.corporationDeck, rng);
     const preludeDeck = PreludeDeck.deserialize(d.preludeDeck, rng);
-    const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
+
+    // TODO(dl): remove ?? {...} by 2023/03/20
+    const ceoDeck = CeoDeck.deserialize(d.ceoDeck ?? {drawPile: [], discardPile: []}, rng);
 
     const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck);
     game.resettable = true;

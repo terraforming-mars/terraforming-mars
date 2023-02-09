@@ -59,11 +59,11 @@ export class SelectInitialCards extends AndOptions {
       this.options.push(
         new SelectCard(
           titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards,
-          (leaderCards: Array<ICeoCard>) => {
-            if (leaderCards.length !== 1) {
+          (ceoCards: Array<ICeoCard>) => {
+            if (ceoCards.length !== 1) {
               throw new Error('Only select 1 CEO');
             }
-            player.ceoCardsInHand.push(leaderCards[0]);
+            player.ceoCardsInHand.push(ceoCards[0]);
             return undefined;
           }, {min: 1, max: 1},
         ),

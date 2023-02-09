@@ -13,14 +13,12 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 describe('Rogers', function() {
   let card: Rogers;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: Game;
 
   beforeEach(() => {
     card = new Rogers();
-    game = newTestGame(2);
+    game = newTestGame(1, {ceoExtension: true});
     player = getTestPlayer(game, 0);
-    player2 = getTestPlayer(game, 1);
     player.playedCards.push(card);
     player.megaCredits = 30;
   });

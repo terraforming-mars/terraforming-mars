@@ -124,7 +124,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="milestoneName in allMilestoneNames" :key="milestoneName">
               <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <milestone :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
+                <milestone v-if="showMA(milestoneName)" :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
               </div>
             </div>
           </div>
@@ -137,7 +137,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="awardName in allAwardNames" :key="awardName">
               <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <award :award="awardModel(awardName)" :showDescription="true"></award>
+                <award v-if="showMA(awardName)" :award="awardModel(awardName)" :showDescription="true"></award>
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@ import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
-import {getColony} from '@/client/colonies/ClientColonyManifest';
+import {allColonyNames, getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
 import {CardComponent} from '@/common/cards/render/CardComponent';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
@@ -182,6 +182,7 @@ import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
+import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -256,13 +257,26 @@ function buildSearchIndex(map: Map<string, Array<string>>) {
     map.set('card:' + card.name, [...entries]);
   }
 
-  for (const globalEventName of allGlobalEventNames()) {
-    const globalEvent = getGlobalEventOrThrow(globalEventName);
+  for (const colonyName of allColonyNames()) {
     entries = [];
+    add(colonyName);
+    map.set('colony:' + colonyName, [...entries]);
+  }
+
+  for (const globalEventName of allGlobalEventNames()) {
+    entries = [];
+    const globalEvent = getGlobalEventOrThrow(globalEventName);
     add(globalEvent.name);
     add(globalEvent.description);
     process(globalEvent.renderData);
     map.set('globalEvent:' + globalEvent.name, [...entries]);
+  }
+
+  for (const maName of allMaNames()) {
+    entries = [];
+    add(maName);
+    add(getMilestoneAwardDescription(maName));
+    map.set('ma:' + maName, [...entries]);
   }
 }
 
@@ -443,7 +457,7 @@ export default Vue.extend({
     getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
       return getGlobalEventModel(globalEventName);
     },
-    filter(name: string, type: 'card' | 'globalEvent' | 'colony') {
+    filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
       const filterText = this.$data.filterText.toLocaleUpperCase();
       if (filterText.length === 0) {
         return true;
@@ -517,6 +531,9 @@ export default Vue.extend({
       if (!this.filter(name, 'colony')) return false;
       const colony = getColony(name);
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
+    },
+    showMA(name: MilestoneName | AwardName): boolean {
+      return this.filter(name, 'ma');
     },
     getLanguageCssClass() {
       const language = getPreferences().lang;

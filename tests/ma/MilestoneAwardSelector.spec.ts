@@ -6,7 +6,7 @@ import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynerg
 import {IMilestone} from '../../src/server/milestones/IMilestone';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {testGameOptions} from '../TestingUtils';
-import {intersection} from '../utils/utils';
+import {intersection} from '../../src/common/utils/utils';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
   return list.map((e) => e.name);

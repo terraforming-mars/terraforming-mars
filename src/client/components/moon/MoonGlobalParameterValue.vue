@@ -4,7 +4,7 @@
     <div>
       <div v-if="isMax" class="global_params_value">
         <img
-          src="/assets/misc/checkmark.png"
+          src="assets/misc/checkmark.png"
           class="checkmark"
           :alt="$t('Completed!')"
           :title="$t('Completed!')"

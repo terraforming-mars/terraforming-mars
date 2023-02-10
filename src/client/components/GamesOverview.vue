@@ -48,7 +48,7 @@ export default Vue.extend({
     getGames() {
       const vueApp = this;
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', '/api/games?serverId='+this.serverId);
+      xhr.open('GET', 'api/games?serverId='+this.serverId);
       xhr.onerror = function() {
         alert('Error getting games data');
       };
@@ -78,7 +78,7 @@ export default Vue.extend({
       const entry = this.entries[idx];
       const gameId = entry.id;
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', '/api/game?id='+gameId);
+      xhr.open('GET', 'api/game?id='+gameId);
       xhr.onerror = () => {
         entry.status = 'error';
         this.getGame(idx + 1);

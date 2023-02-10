@@ -240,6 +240,8 @@ export const mainAppSettings = {
   },
 };
 
+// NOTE: this simplistic truncation to the last segment might cause issues if
+// this page starts supporting paths more than one level deep.
 function getLastPathSegment() {
   // Leave only the last part of /path
   return window.location.pathname.replace(/.*\//g, '');

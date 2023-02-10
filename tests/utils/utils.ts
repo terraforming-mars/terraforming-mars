@@ -1,5 +1,5 @@
 /**
- *  * Returns a new array consisting of elements only in both a and b.
+ * Returns a new array consisting of elements only in both a and b.
  *
  * @param {Array<T>} a: the first array
  * @param {Array<T>} b: the second array

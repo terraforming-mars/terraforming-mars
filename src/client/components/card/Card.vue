@@ -100,14 +100,10 @@ export default Vue.extend({
       return tags;
     },
     getCost(): number | undefined {
-      const cost = this.cardInstance.cost;
-      const type = this.getCardType();
-      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
+      return this.isProjectCard() ? this.cardInstance.cost : undefined;
     },
     getReducedCost(): number | undefined {
-      const cost = this.card.calculatedCost;
-      const type = this.getCardType();
-      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
+      return this.isProjectCard() ? this.card.calculatedCost : undefined;
     },
     getCardType(): CardType {
       return this.cardInstance.cardType;
@@ -139,6 +135,10 @@ export default Vue.extend({
     },
     isCorporationCard() : boolean {
       return this.getCardType() === CardType.CORPORATION;
+    },
+    isProjectCard(): boolean {
+      const type = this.getCardType();
+      return type !== CardType.PRELUDE && type !== CardType.CORPORATION && type !== CardType.CEO;
     },
     isStandardProject() : boolean {
       return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;

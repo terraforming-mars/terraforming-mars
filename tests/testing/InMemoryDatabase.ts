@@ -62,9 +62,6 @@ export class InMemoryDatabase implements IDatabase {
   saveGameResults(_gameId: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Score[]): void {
     throw new Error('Method not implemented.');
   }
-  restoreGame(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    return this.getGameVersion(gameId, saveId);
-  }
   loadCloneableGame(_gameId: GameId): Promise<SerializedGame> {
     throw new Error('Method not implemented.');
   }
